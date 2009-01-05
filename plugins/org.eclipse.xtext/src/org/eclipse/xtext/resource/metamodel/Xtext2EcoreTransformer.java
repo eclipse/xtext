@@ -471,25 +471,27 @@ public class Xtext2EcoreTransformer {
 		}
 	}
 
-	private void addSuperType(ParserRule rule, TypeRef subTypeRef, EClassifierInfo superType) throws TransformationException {
+	private void addSuperType(ParserRule rule, TypeRef subTypeRef, EClassifierInfo superTypeInfo) throws TransformationException {
 		final EClassifier subType = subTypeRef.getType();
-		final EClassifierInfo calledRuleReturnType = subType == null ?
+		final EClassifierInfo subTypeInfo = subType == null ?
 				findOrCreateEClassifierInfo(subTypeRef, null) :
 				eClassifierInfos.getInfoOrNull(subType);
-		if (calledRuleReturnType == null)
+		if (subTypeInfo == null)
 			throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable, 
-					"Type '" + superType.getEClassifier().getName() + "' is not available.", rule.getType());
-		if (calledRuleReturnType.getEClassifier() instanceof EDataType)
+					"Type '" + superTypeInfo.getEClassifier().getName() + "' is not available.", rule.getType());
+		if (superTypeInfo.isAssignableFrom(subTypeInfo))
+			return;
+		if (subTypeInfo.getEClassifier() instanceof EDataType)
 			throw new TransformationException(TransformationErrorCode.InvalidSupertype, 
 					"Cannot add supertype '"
-					+ superType.getEClassifier().getName() + "' to simple datatype '"
-					+ calledRuleReturnType.getEClassifier().getName() + "'.", rule.getType());
-		if (!calledRuleReturnType.isGenerated())
+					+ superTypeInfo.getEClassifier().getName() + "' to simple datatype '"
+					+ subTypeInfo.getEClassifier().getName() + "'.", rule.getType());
+		if (!subTypeInfo.isGenerated())
 			throw new TransformationException(TransformationErrorCode.CannotCreateTypeInSealedMetamodel,
 					"Cannot add supertype '"
-					+ superType.getEClassifier().getName() + "' to sealed type '"
-					+ calledRuleReturnType.getEClassifier().getName() + "'.", rule.getType());
-		calledRuleReturnType.addSupertype(superType);
+					+ superTypeInfo.getEClassifier().getName() + "' to sealed type '"
+					+ subTypeInfo.getEClassifier().getName() + "'.", rule.getType());
+		subTypeInfo.addSupertype(superTypeInfo);
 	}
 
 	private void collectEPackages() {

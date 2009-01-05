@@ -49,6 +49,10 @@ public abstract class EClassifierInfo {
 	public boolean isGenerated() {
 		return isGenerated;
 	}
+	
+	public boolean isAssignableFrom(EClassifierInfo subTypeInfo) {
+		return getEClassifier().equals(subTypeInfo.getEClassifier());
+	}
 
 	public abstract boolean addSupertype(EClassifierInfo superTypeInfo);
 
@@ -59,6 +63,13 @@ public abstract class EClassifierInfo {
 
 		public EClassInfo(EClassifier metaType, boolean isGenerated) {
 			super(metaType, isGenerated);
+		}
+		
+		@Override
+		public boolean isAssignableFrom(EClassifierInfo subTypeInfo) {
+			return super.isAssignableFrom(subTypeInfo) || 
+				(subTypeInfo instanceof EClassInfo) &&
+				getEClass().isSuperTypeOf((EClass) subTypeInfo.getEClassifier());
 		}
 
 		@Override
@@ -191,4 +202,5 @@ public abstract class EClassifierInfo {
 		}
 
 	}
+
 }

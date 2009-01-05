@@ -798,4 +798,15 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 			assertFalse(d instanceof ExceptionDiagnostic);
 		}
 	}
+	
+	public void testNoException_03() throws Exception {
+		String grammar = "language test import 'http://www.eclipse.org/emf/2002/Ecore' as ecore " +
+				"generate test 'http://test'\n" +
+				"CompositeModel: (type+=EClassifier)+;\n" +
+				"EClassifier returns ecore::EClassifier: EDataType | EClass;\n" +
+				"EClass returns ecore::EClass: 'class' name=ID;\n" +
+				"EDataType returns ecore::EDataType: 'dt' name=ID;";
+		XtextResource resource = getResourceFromString(grammar);
+		assertTrue(resource.getErrors().isEmpty());
+	}
 }
