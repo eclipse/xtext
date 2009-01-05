@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalFowlerDslTestLanguage.g 2008-12-19 13:25:19
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalFowlerDslTestLanguage.g 2009-01-04 17:07:32
 
 package org.eclipse.xtext.testlanguages.parser.internal; 
 
@@ -160,17 +160,17 @@ public class InternalFowlerDslTestLanguageParser extends AbstractAntlrParser {
             	    _fsp--;
 
 
-            	    	        currentNode = currentNode.getParent();
             	    	        if (current==null) {
             	    	            current = factory.create("Statemachine");
-            	    	            associateNodeWithAstElement(currentNode, current);
+            	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
             	    	        try {
-            	    	        	factory.add(current, "events", lv_events,"Event");
+            	    	        	factory.add(current, "events", lv_events, "Event", currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }
+            	    	        currentNode = currentNode.getParent();
             	    	    
 
             	    }
@@ -221,17 +221,17 @@ public class InternalFowlerDslTestLanguageParser extends AbstractAntlrParser {
             	    _fsp--;
 
 
-            	    	        currentNode = currentNode.getParent();
             	    	        if (current==null) {
             	    	            current = factory.create("Statemachine");
-            	    	            associateNodeWithAstElement(currentNode, current);
+            	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
             	    	        try {
-            	    	        	factory.add(current, "commands", lv_commands,"Command");
+            	    	        	factory.add(current, "commands", lv_commands, "Command", currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }
+            	    	        currentNode = currentNode.getParent();
             	    	    
 
             	    }
@@ -275,17 +275,17 @@ public class InternalFowlerDslTestLanguageParser extends AbstractAntlrParser {
             	    _fsp--;
 
 
-            	    	        currentNode = currentNode.getParent();
             	    	        if (current==null) {
             	    	            current = factory.create("Statemachine");
-            	    	            associateNodeWithAstElement(currentNode, current);
+            	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
             	    	        try {
-            	    	        	factory.add(current, "states", lv_states,"State");
+            	    	        	factory.add(current, "states", lv_states, "State", currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }
+            	    	        currentNode = currentNode.getParent();
             	    	    
 
             	    }
@@ -394,7 +394,7 @@ public class InternalFowlerDslTestLanguageParser extends AbstractAntlrParser {
                     	        }
                     	        
                     	        try {
-                    	        	factory.set(current, "resetting", true,"resetting");
+                    	        	factory.set(current, "resetting", true, "resetting", currentNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
@@ -420,7 +420,7 @@ public class InternalFowlerDslTestLanguageParser extends AbstractAntlrParser {
             	        }
             	        
             	        try {
-            	        	factory.set(current, "name", lv_name,"ID");
+            	        	factory.set(current, "name", lv_name, "ID", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -446,7 +446,7 @@ public class InternalFowlerDslTestLanguageParser extends AbstractAntlrParser {
             	        }
             	        
             	        try {
-            	        	factory.set(current, "code", lv_code,"ID");
+            	        	factory.set(current, "code", lv_code, "ID", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -540,7 +540,7 @@ public class InternalFowlerDslTestLanguageParser extends AbstractAntlrParser {
             	        }
             	        
             	        try {
-            	        	factory.set(current, "name", lv_name,"ID");
+            	        	factory.set(current, "name", lv_name, "ID", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -563,7 +563,7 @@ public class InternalFowlerDslTestLanguageParser extends AbstractAntlrParser {
             	        }
             	        
             	        try {
-            	        	factory.set(current, "code", lv_code,"ID");
+            	        	factory.set(current, "code", lv_code, "ID", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -671,7 +671,7 @@ public class InternalFowlerDslTestLanguageParser extends AbstractAntlrParser {
             	        }
             	        
             	        try {
-            	        	factory.set(current, "name", lv_name,"ID");
+            	        	factory.set(current, "name", lv_name, "ID", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -794,17 +794,17 @@ public class InternalFowlerDslTestLanguageParser extends AbstractAntlrParser {
             	    _fsp--;
 
 
-            	    	        currentNode = currentNode.getParent();
             	    	        if (current==null) {
             	    	            current = factory.create("State");
-            	    	            associateNodeWithAstElement(currentNode, current);
+            	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
             	    	        try {
-            	    	        	factory.add(current, "transitions", lv_transitions,"Transition");
+            	    	        	factory.add(current, "transitions", lv_transitions, "Transition", currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }
+            	    	        currentNode = currentNode.getParent();
             	    	    
 
             	    }

@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/ui/core/parser/internal/InternalTestLanguage.g 2008-12-19 10:42:07
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/ui/core/parser/internal/InternalTestLanguage.g 2009-01-04 17:09:09
 
 package org.eclipse.xtext.ui.core.parser.internal; 
 
@@ -134,17 +134,17 @@ public class InternalTestLanguageParser extends AbstractAntlrParser {
             	    _fsp--;
 
 
-            	    	        currentNode = currentNode.getParent();
             	    	        if (current==null) {
             	    	            current = factory.create("File");
-            	    	            associateNodeWithAstElement(currentNode, current);
+            	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
             	    	        try {
-            	    	        	factory.add(current, "stuff", lv_stuff,"Stuff");
+            	    	        	factory.add(current, "stuff", lv_stuff, "Stuff", currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }
+            	    	        currentNode = currentNode.getParent();
             	    	    
 
             	    }
@@ -241,7 +241,7 @@ public class InternalTestLanguageParser extends AbstractAntlrParser {
             	        }
             	        
             	        try {
-            	        	factory.set(current, "name", lv_name,"ID");
+            	        	factory.set(current, "name", lv_name, "ID", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }

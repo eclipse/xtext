@@ -31,7 +31,7 @@ public class JdtClasspathUriResolver implements IClasspathUriResolver {
 		}
 		javaElement = (IJavaElement) context;
 		try {
-			if (ClasspathUriUtil.isClassapthUri(classpathUri)) {
+			if (ClasspathUriUtil.isClasspathUri(classpathUri)) {
 				IJavaProject javaProject = javaElement.getJavaProject();
 				return findResourceInWorkspace(javaProject, classpathUri);
 			}

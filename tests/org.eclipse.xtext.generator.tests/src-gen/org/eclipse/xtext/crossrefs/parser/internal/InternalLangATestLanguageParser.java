@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/crossrefs/parser/internal/InternalLangATestLanguage.g 2008-12-19 13:25:07
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/crossrefs/parser/internal/InternalLangATestLanguage.g 2009-01-04 17:07:21
 
 package org.eclipse.xtext.crossrefs.parser.internal; 
 
@@ -139,17 +139,17 @@ public class InternalLangATestLanguageParser extends AbstractAntlrParser {
             	    _fsp--;
 
 
-            	    	        currentNode = currentNode.getParent();
             	    	        if (current==null) {
             	    	            current = factory.create("Main");
-            	    	            associateNodeWithAstElement(currentNode, current);
+            	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
             	    	        try {
-            	    	        	factory.add(current, "imports", lv_imports,"Import");
+            	    	        	factory.add(current, "imports", lv_imports, "Import", currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }
+            	    	        currentNode = currentNode.getParent();
             	    	    
 
             	    }
@@ -183,17 +183,17 @@ public class InternalLangATestLanguageParser extends AbstractAntlrParser {
             	    _fsp--;
 
 
-            	    	        currentNode = currentNode.getParent();
             	    	        if (current==null) {
             	    	            current = factory.create("Main");
-            	    	            associateNodeWithAstElement(currentNode, current);
+            	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
             	    	        try {
-            	    	        	factory.add(current, "types", lv_types,"Type");
+            	    	        	factory.add(current, "types", lv_types, "Type", currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }
+            	    	        currentNode = currentNode.getParent();
             	    	    
 
             	    }
@@ -293,7 +293,7 @@ public class InternalLangATestLanguageParser extends AbstractAntlrParser {
             	        }
             	        
             	        try {
-            	        	factory.set(current, "uri", lv_uri,"STRING");
+            	        	factory.set(current, "uri", lv_uri, "STRING", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -396,7 +396,7 @@ public class InternalLangATestLanguageParser extends AbstractAntlrParser {
             	        }
             	        
             	        try {
-            	        	factory.set(current, "name", lv_name,"ID");
+            	        	factory.set(current, "name", lv_name, "ID", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }

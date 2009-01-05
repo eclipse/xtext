@@ -23,7 +23,7 @@ public class AbstractTestLanguageMetamodelAccess extends BaseEPackageAccess impl
 
 	private EPackage[] referenced = new EPackage[] {
 		
-		BaseEPackageAccess.getEPackageFromRegistry("classpath:/org/eclipse/xtext/grammarinheritance/ametamodel.ecore")
+		BaseEPackageAccess.getEPackageFromRegistry("http://www.eclipse.org/xtext/tests/grammarinheritance")
 		,
 		BaseEPackageAccess.getEPackageFromRegistry("http://www.eclipse.org/emf/2002/Ecore")
 		
@@ -33,7 +33,7 @@ public class AbstractTestLanguageMetamodelAccess extends BaseEPackageAccess impl
 	}
 	
 	private EPackage[] all = new EPackage[] {
-	    BaseEPackageAccess.getEPackageFromRegistry("classpath:/org/eclipse/xtext/grammarinheritance/ametamodel.ecore"),BaseEPackageAccess.getEPackageFromRegistry("http://www.eclipse.org/emf/2002/Ecore")
+	    BaseEPackageAccess.getEPackageFromRegistry("http://www.eclipse.org/emf/2002/Ecore"),BaseEPackageAccess.getEPackageFromRegistry("http://www.eclipse.org/xtext/tests/grammarinheritance")
 		};
 	
 	public EPackage[] getAllEPackages() {

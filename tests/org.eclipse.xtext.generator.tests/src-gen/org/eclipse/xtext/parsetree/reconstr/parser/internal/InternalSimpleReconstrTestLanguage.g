@@ -86,7 +86,7 @@ ruleOp returns [EObject current=null]
 ((
     { 
         temp=factory.create("Op");
-        factory.add(temp, "values",$current);
+        factory.add(temp, "values", $current, null /*ParserRule*/, currentNode);
         $current = temp; 
         temp = null;
         CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
@@ -103,17 +103,17 @@ ruleOp returns [EObject current=null]
 	    }
 	    lv_values=ruleTerm 
 	    {
-	        currentNode = currentNode.getParent();
 	        if ($current==null) {
 	            $current = factory.create("Expression");
-	            associateNodeWithAstElement(currentNode, $current);
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
 	        try {
-	        	factory.add($current, "values", lv_values,"Term");
+	        	factory.add($current, "values", lv_values, "Term", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
+	        currentNode = currentNode.getParent();
 	    }
 	
 ))*);
@@ -235,7 +235,7 @@ ruleAtom returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "name", lv_name,"ID");
+	        	factory.set($current, "name", lv_name, "ID", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -290,7 +290,7 @@ ruleParens returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "em", input.LT(-1),"!");
+	        	factory.set($current, "em", input.LT(-1), "!", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -328,7 +328,7 @@ ruleTwoNumbers returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "num1", lv_num1,"INT");
+	        	factory.set($current, "num1", lv_num1, "INT", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -348,7 +348,7 @@ ruleTwoNumbers returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "num2", lv_num2,"INT");
+	        	factory.set($current, "num2", lv_num2, "INT", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -372,7 +372,7 @@ ruleTwoNumbers returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.add($current, "num3", lv_num3,"INT");
+	        	factory.add($current, "num3", lv_num3, "INT", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -414,7 +414,7 @@ ruleManyStrings returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.add($current, "str1", lv_str1,"STRING");
+	        	factory.add($current, "str1", lv_str1, "STRING", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -434,7 +434,7 @@ ruleManyStrings returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.add($current, "str2", lv_str2,"STRING");
+	        	factory.add($current, "str2", lv_str2, "STRING", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -476,7 +476,7 @@ ruleType returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "name", lv_name,"ID");
+	        	factory.set($current, "name", lv_name, "ID", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -547,7 +547,7 @@ ruleRef2 returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "ref2", input.LT(-1),null);
+	        	factory.set($current, "ref2", input.LT(-1), null, currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -589,7 +589,7 @@ ruleSpare returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.add($current, "id", lv_id,"ID");
+	        	factory.add($current, "id", lv_id, "ID", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -613,7 +613,7 @@ ruleSpare returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.add($current, "id", lv_id,"ID");
+	        	factory.add($current, "id", lv_id, "ID", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }

@@ -92,7 +92,7 @@ ruleSpielplatz returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "groesse", lv_groesse,"INT");
+	        	factory.set($current, "groesse", lv_groesse, "INT", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -112,7 +112,7 @@ ruleSpielplatz returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "beschreibung", lv_beschreibung,"STRING");
+	        	factory.set($current, "beschreibung", lv_beschreibung, "STRING", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -130,17 +130,17 @@ ruleSpielplatz returns [EObject current=null]
 	    }
 	    lv_kinder=ruleKind 
 	    {
-	        currentNode = currentNode.getParent();
 	        if ($current==null) {
 	            $current = factory.create("Spielplatz");
-	            associateNodeWithAstElement(currentNode, $current);
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
 	        try {
-	        	factory.add($current, "kinder", lv_kinder,"Kind");
+	        	factory.add($current, "kinder", lv_kinder, "Kind", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
+	        currentNode = currentNode.getParent();
 	    }
 	
 )
@@ -152,17 +152,17 @@ ruleSpielplatz returns [EObject current=null]
 	    }
 	    lv_erzieher=ruleErwachsener 
 	    {
-	        currentNode = currentNode.getParent();
 	        if ($current==null) {
 	            $current = factory.create("Spielplatz");
-	            associateNodeWithAstElement(currentNode, $current);
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
 	        try {
-	        	factory.add($current, "erzieher", lv_erzieher,"Erwachsener");
+	        	factory.add($current, "erzieher", lv_erzieher, "Erwachsener", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
+	        currentNode = currentNode.getParent();
 	    }
 	
 ))
@@ -174,17 +174,17 @@ ruleSpielplatz returns [EObject current=null]
 	    }
 	    lv_spielzeuge=ruleSpielzeug 
 	    {
-	        currentNode = currentNode.getParent();
 	        if ($current==null) {
 	            $current = factory.create("Spielplatz");
-	            associateNodeWithAstElement(currentNode, $current);
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
 	        try {
-	        	factory.add($current, "spielzeuge", lv_spielzeuge,"Spielzeug");
+	        	factory.add($current, "spielzeuge", lv_spielzeuge, "Spielzeug", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
+	        currentNode = currentNode.getParent();
 	    }
 	
 ))
@@ -196,17 +196,17 @@ ruleSpielplatz returns [EObject current=null]
 	    }
 	    lv_familie=ruleFamilie 
 	    {
-	        currentNode = currentNode.getParent();
 	        if ($current==null) {
 	            $current = factory.create("Spielplatz");
-	            associateNodeWithAstElement(currentNode, $current);
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
 	        try {
-	        	factory.add($current, "familie", lv_familie,"Familie");
+	        	factory.add($current, "familie", lv_familie, "Familie", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
+	        currentNode = currentNode.getParent();
 	    }
 	
 ))*)'}' 
@@ -255,7 +255,7 @@ ruleKind returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "name", lv_name,"ID");
+	        	factory.set($current, "name", lv_name, "ID", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -275,7 +275,7 @@ ruleKind returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "age", lv_age,"INT");
+	        	factory.set($current, "age", lv_age, "INT", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -325,7 +325,7 @@ ruleErwachsener returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "name", lv_name,"ID");
+	        	factory.set($current, "name", lv_name, "ID", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -345,7 +345,7 @@ ruleErwachsener returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "age", lv_age,"INT");
+	        	factory.set($current, "age", lv_age, "INT", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -395,7 +395,7 @@ ruleSpielzeug returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "name", lv_name,"ID");
+	        	factory.set($current, "name", lv_name, "ID", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -409,17 +409,17 @@ ruleSpielzeug returns [EObject current=null]
 	    }
 	    lv_farbe=ruleFarbe 
 	    {
-	        currentNode = currentNode.getParent();
 	        if ($current==null) {
 	            $current = factory.create("Spielzeug");
-	            associateNodeWithAstElement(currentNode, $current);
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
 	        try {
-	        	factory.set($current, "farbe", lv_farbe,"Farbe");
+	        	factory.set($current, "farbe", lv_farbe, "Farbe", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
+	        currentNode = currentNode.getParent();
 	    }
 	
 ))')' 
@@ -513,7 +513,7 @@ ruleFamilie returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "name", input.LT(-1),null);
+	        	factory.set($current, "name", input.LT(-1), null, currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }

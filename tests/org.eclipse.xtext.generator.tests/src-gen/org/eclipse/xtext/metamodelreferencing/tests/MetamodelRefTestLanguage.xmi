@@ -6,8 +6,12 @@
   <idElements>metamodelreferencing</idElements>
   <idElements>tests</idElements>
   <idElements>MetamodelRefTestLanguage</idElements>
-  <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="xtext" uri="http://www.eclipse.org/2008/Xtext"/>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="SimpleTest" nsURI="http://eclipse.org/xtext/tests/SimpleTest"/>
+  <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="xtext">
+    <ePackage href="http://www.eclipse.org/2008/Xtext#/"/>
+  </metamodelDeclarations>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="SimpleTest">
+    <ePackage href="http://eclipse.org/xtext/tests/SimpleTest#/"/>
+  </metamodelDeclarations>
   <rules xsi:type="xtext:ParserRule" name="Foo">
     <type metamodel="//@metamodelDeclarations.1">
       <type xsi:type="ecore:EClass" href="http://eclipse.org/xtext/tests/SimpleTest#//Foo"/>

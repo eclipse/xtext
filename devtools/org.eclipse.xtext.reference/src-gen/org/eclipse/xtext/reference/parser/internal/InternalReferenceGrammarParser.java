@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g 2008-12-19 10:41:37
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g 2009-01-04 17:10:21
 
 package org.eclipse.xtext.reference.parser.internal; 
 
@@ -163,7 +163,7 @@ public class InternalReferenceGrammarParser extends AbstractAntlrParser {
                     	        }
                     	        
                     	        try {
-                    	        	factory.set(current, "groesse", lv_groesse,"INT");
+                    	        	factory.set(current, "groesse", lv_groesse, "INT", currentNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
@@ -197,7 +197,7 @@ public class InternalReferenceGrammarParser extends AbstractAntlrParser {
                             	        }
                             	        
                             	        try {
-                            	        	factory.set(current, "beschreibung", lv_beschreibung,"STRING");
+                            	        	factory.set(current, "beschreibung", lv_beschreibung, "STRING", currentNode);
                             	        } catch (ValueConverterException vce) {
                             				handleValueConverterException(vce);
                             	        }
@@ -307,17 +307,17 @@ public class InternalReferenceGrammarParser extends AbstractAntlrParser {
                     	                            _fsp--;
 
 
-                    	                            	        currentNode = currentNode.getParent();
                     	                            	        if (current==null) {
                     	                            	            current = factory.create("Spielplatz");
-                    	                            	            associateNodeWithAstElement(currentNode, current);
+                    	                            	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	                            	        }
                     	                            	        
                     	                            	        try {
-                    	                            	        	factory.add(current, "kinder", lv_kinder,"Kind");
+                    	                            	        	factory.add(current, "kinder", lv_kinder, "Kind", currentNode);
                     	                            	        } catch (ValueConverterException vce) {
                     	                            				handleValueConverterException(vce);
                     	                            	        }
+                    	                            	        currentNode = currentNode.getParent();
                     	                            	    
 
                     	                            }
@@ -339,17 +339,17 @@ public class InternalReferenceGrammarParser extends AbstractAntlrParser {
                     	                            _fsp--;
 
 
-                    	                            	        currentNode = currentNode.getParent();
                     	                            	        if (current==null) {
                     	                            	            current = factory.create("Spielplatz");
-                    	                            	            associateNodeWithAstElement(currentNode, current);
+                    	                            	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	                            	        }
                     	                            	        
                     	                            	        try {
-                    	                            	        	factory.add(current, "erzieher", lv_erzieher,"Erwachsener");
+                    	                            	        	factory.add(current, "erzieher", lv_erzieher, "Erwachsener", currentNode);
                     	                            	        } catch (ValueConverterException vce) {
                     	                            				handleValueConverterException(vce);
                     	                            	        }
+                    	                            	        currentNode = currentNode.getParent();
                     	                            	    
 
                     	                            }
@@ -377,17 +377,17 @@ public class InternalReferenceGrammarParser extends AbstractAntlrParser {
                     	                    _fsp--;
 
 
-                    	                    	        currentNode = currentNode.getParent();
                     	                    	        if (current==null) {
                     	                    	            current = factory.create("Spielplatz");
-                    	                    	            associateNodeWithAstElement(currentNode, current);
+                    	                    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	                    	        }
                     	                    	        
                     	                    	        try {
-                    	                    	        	factory.add(current, "spielzeuge", lv_spielzeuge,"Spielzeug");
+                    	                    	        	factory.add(current, "spielzeuge", lv_spielzeuge, "Spielzeug", currentNode);
                     	                    	        } catch (ValueConverterException vce) {
                     	                    				handleValueConverterException(vce);
                     	                    	        }
+                    	                    	        currentNode = currentNode.getParent();
                     	                    	    
 
                     	                    }
@@ -415,17 +415,17 @@ public class InternalReferenceGrammarParser extends AbstractAntlrParser {
                     	            _fsp--;
 
 
-                    	            	        currentNode = currentNode.getParent();
                     	            	        if (current==null) {
                     	            	            current = factory.create("Spielplatz");
-                    	            	            associateNodeWithAstElement(currentNode, current);
+                    	            	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	            	        }
                     	            	        
                     	            	        try {
-                    	            	        	factory.add(current, "familie", lv_familie,"Familie");
+                    	            	        	factory.add(current, "familie", lv_familie, "Familie", currentNode);
                     	            	        } catch (ValueConverterException vce) {
                     	            				handleValueConverterException(vce);
                     	            	        }
+                    	            	        currentNode = currentNode.getParent();
                     	            	    
 
                     	            }
@@ -453,17 +453,17 @@ public class InternalReferenceGrammarParser extends AbstractAntlrParser {
                     	    _fsp--;
 
 
-                    	    	        currentNode = currentNode.getParent();
                     	    	        if (current==null) {
                     	    	            current = factory.create("Spielplatz");
-                    	    	            associateNodeWithAstElement(currentNode, current);
+                    	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
                     	    	        
                     	    	        try {
-                    	    	        	factory.add(current, "types", lv_types,"CustomTypeParserRule");
+                    	    	        	factory.add(current, "types", lv_types, "CustomTypeParserRule", currentNode);
                     	    	        } catch (ValueConverterException vce) {
                     	    				handleValueConverterException(vce);
                     	    	        }
+                    	    	        currentNode = currentNode.getParent();
                     	    	    
 
                     	    }
@@ -593,7 +593,7 @@ public class InternalReferenceGrammarParser extends AbstractAntlrParser {
             	        }
             	        
             	        try {
-            	        	factory.set(current, "name", lv_name,"ID");
+            	        	factory.set(current, "name", lv_name, "ID", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -619,7 +619,7 @@ public class InternalReferenceGrammarParser extends AbstractAntlrParser {
             	        }
             	        
             	        try {
-            	        	factory.set(current, "age", lv_age,"INT");
+            	        	factory.set(current, "age", lv_age, "INT", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -740,7 +740,7 @@ public class InternalReferenceGrammarParser extends AbstractAntlrParser {
             	        }
             	        
             	        try {
-            	        	factory.set(current, "name", lv_name,"ID");
+            	        	factory.set(current, "name", lv_name, "ID", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -766,7 +766,7 @@ public class InternalReferenceGrammarParser extends AbstractAntlrParser {
             	        }
             	        
             	        try {
-            	        	factory.set(current, "age", lv_age,"INT");
+            	        	factory.set(current, "age", lv_age, "INT", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -888,7 +888,7 @@ public class InternalReferenceGrammarParser extends AbstractAntlrParser {
             	        }
             	        
             	        try {
-            	        	factory.set(current, "name", lv_name,"ID");
+            	        	factory.set(current, "name", lv_name, "ID", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -910,17 +910,17 @@ public class InternalReferenceGrammarParser extends AbstractAntlrParser {
             _fsp--;
 
 
-            	        currentNode = currentNode.getParent();
             	        if (current==null) {
             	            current = factory.create("Spielzeug");
-            	            associateNodeWithAstElement(currentNode, current);
+            	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
             	        try {
-            	        	factory.set(current, "farbe", lv_farbe,"Farbe");
+            	        	factory.set(current, "farbe", lv_farbe, "Farbe", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
+            	        currentNode = currentNode.getParent();
             	    
 
             }
@@ -1117,7 +1117,7 @@ public class InternalReferenceGrammarParser extends AbstractAntlrParser {
             	        }
             	        
             	        try {
-            	        	factory.set(current, "name", input.LT(-1),null);
+            	        	factory.set(current, "name", input.LT(-1), null, currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -1449,7 +1449,7 @@ public class InternalReferenceGrammarParser extends AbstractAntlrParser {
             	        }
             	        
             	        try {
-            	        	factory.set(current, "wert", input.LT(-1),null);
+            	        	factory.set(current, "wert", input.LT(-1), null, currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -1543,7 +1543,7 @@ public class InternalReferenceGrammarParser extends AbstractAntlrParser {
             	        }
             	        
             	        try {
-            	        	factory.set(current, "name", lv_name,"ID");
+            	        	factory.set(current, "name", lv_name, "ID", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }

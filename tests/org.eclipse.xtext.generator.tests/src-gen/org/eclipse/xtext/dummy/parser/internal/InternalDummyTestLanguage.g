@@ -82,17 +82,17 @@ ruleModel returns [EObject current=null]
 	    }
 	    lv_elements=ruleElement 
 	    {
-	        currentNode = currentNode.getParent();
 	        if ($current==null) {
 	            $current = factory.create("Model");
-	            associateNodeWithAstElement(currentNode, $current);
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
 	        try {
-	        	factory.add($current, "elements", lv_elements,"Element");
+	        	factory.add($current, "elements", lv_elements, "Element", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
+	        currentNode = currentNode.getParent();
 	    }
 	
 )*;
@@ -127,7 +127,7 @@ ruleElement returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "optional", true,"optional");
+	        	factory.set($current, "optional", true, "optional", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -151,7 +151,7 @@ ruleElement returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "name", lv_name,"ID");
+	        	factory.set($current, "name", lv_name, "ID", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -171,7 +171,7 @@ ruleElement returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.add($current, "descriptions", lv_descriptions,"STRING");
+	        	factory.add($current, "descriptions", lv_descriptions, "STRING", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }

@@ -88,7 +88,7 @@ ruleStart returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.add($current, "featureA", lv_featureA,"ID");
+	        	factory.add($current, "featureA", lv_featureA, "ID", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }

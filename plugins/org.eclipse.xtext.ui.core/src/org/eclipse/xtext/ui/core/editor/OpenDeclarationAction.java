@@ -99,7 +99,7 @@ public class OpenDeclarationAction extends Action {
 
 				URI uri = referenceEObject.eResource().getURI();
 				
-				if (ClasspathUriUtil.isClassapthUri(uri)) {
+				if (ClasspathUriUtil.isClasspathUri(uri)) {
 					uri = resourceSet.getClasspathUriResolver().resolve(resourceSet.getClasspathURIContext(), uri);
 				}
 				

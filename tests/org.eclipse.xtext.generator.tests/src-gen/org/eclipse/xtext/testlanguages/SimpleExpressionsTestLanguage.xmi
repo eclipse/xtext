@@ -5,7 +5,9 @@
   <idElements>xtext</idElements>
   <idElements>testlanguages</idElements>
   <idElements>SimpleExpressionsTestLanguage</idElements>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="simpleExpressions" nsURI="http://www.eclipse.org/xtext/test/simpleExpressions"/>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="simpleExpressions">
+    <ePackage href="http://www.eclipse.org/xtext/test/simpleExpressions#/"/>
+  </metamodelDeclarations>
   <rules xsi:type="xtext:ParserRule" name="Sequence">
     <type metamodel="//@metamodelDeclarations.0">
       <type xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/test/simpleExpressions#//Sequence"/>

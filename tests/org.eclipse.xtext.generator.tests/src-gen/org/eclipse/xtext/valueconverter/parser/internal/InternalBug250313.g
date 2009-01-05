@@ -102,7 +102,7 @@ ruleRef2 returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "ref2", input.LT(-1),null);
+	        	factory.set($current, "ref2", input.LT(-1), null, currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }

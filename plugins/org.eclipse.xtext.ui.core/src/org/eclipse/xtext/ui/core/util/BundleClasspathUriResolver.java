@@ -24,7 +24,7 @@ public class BundleClasspathUriResolver implements IClasspathUriResolver {
         }
         Bundle bundle = (Bundle) context;
         try {
-            if (ClasspathUriUtil.isClassapthUri(classpathUri)) {
+            if (ClasspathUriUtil.isClasspathUri(classpathUri)) {
                 return findResourceInBundle(bundle, classpathUri);
             }
         } catch (Exception exc) {

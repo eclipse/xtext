@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/internal/InternalFormatterTestLanguage.g 2008-12-19 13:25:22
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/internal/InternalFormatterTestLanguage.g 2009-01-04 17:07:35
 
 package org.eclipse.xtext.parsetree.formatter.parser.internal; 
 
@@ -263,7 +263,7 @@ public class InternalFormatterTestLanguageParser extends AbstractAntlrParser {
             	        }
             	        
             	        try {
-            	        	factory.add(current, "type", lv_type,"ID");
+            	        	factory.add(current, "type", lv_type, "ID", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -286,7 +286,7 @@ public class InternalFormatterTestLanguageParser extends AbstractAntlrParser {
             	        }
             	        
             	        try {
-            	        	factory.add(current, "name", lv_name,"ID");
+            	        	factory.add(current, "name", lv_name, "ID", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -399,17 +399,17 @@ public class InternalFormatterTestLanguageParser extends AbstractAntlrParser {
             	    _fsp--;
 
 
-            	    	        currentNode = currentNode.getParent();
             	    	        if (current==null) {
             	    	            current = factory.create("TestLinewrap");
-            	    	            associateNodeWithAstElement(currentNode, current);
+            	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
             	    	        try {
-            	    	        	factory.add(current, "items", lv_items,"Line");
+            	    	        	factory.add(current, "items", lv_items, "Line", currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }
+            	    	        currentNode = currentNode.getParent();
             	    	    
 
             	    }
@@ -539,17 +539,17 @@ public class InternalFormatterTestLanguageParser extends AbstractAntlrParser {
             	    _fsp--;
 
 
-            	    	        currentNode = currentNode.getParent();
             	    	        if (current==null) {
             	    	            current = factory.create("TestIndentation");
-            	    	            associateNodeWithAstElement(currentNode, current);
+            	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
             	    	        try {
-            	    	        	factory.add(current, "sub", lv_sub,"TestIndentation");
+            	    	        	factory.add(current, "sub", lv_sub, "TestIndentation", currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }
+            	    	        currentNode = currentNode.getParent();
             	    	    
 
             	    }
@@ -571,17 +571,17 @@ public class InternalFormatterTestLanguageParser extends AbstractAntlrParser {
             	    _fsp--;
 
 
-            	    	        currentNode = currentNode.getParent();
             	    	        if (current==null) {
             	    	            current = factory.create("TestIndentation");
-            	    	            associateNodeWithAstElement(currentNode, current);
+            	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
             	    	        try {
-            	    	        	factory.add(current, "items", lv_items,"Line");
+            	    	        	factory.add(current, "items", lv_items, "Line", currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }
+            	    	        currentNode = currentNode.getParent();
             	    	    
 
             	    }

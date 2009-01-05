@@ -5,7 +5,9 @@
   <idElements>xtext</idElements>
   <idElements>crossrefs</idElements>
   <idElements>LangATestLanguage</idElements>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="langATestLanguage" nsURI="http://eclipse.org/xtext/langATestLanguage"/>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="langATestLanguage">
+    <ePackage href="http://eclipse.org/xtext/langATestLanguage#/"/>
+  </metamodelDeclarations>
   <rules xsi:type="xtext:ParserRule" name="Main">
     <type metamodel="//@metamodelDeclarations.0">
       <type xsi:type="ecore:EClass" href="http://eclipse.org/xtext/langATestLanguage#//Main"/>

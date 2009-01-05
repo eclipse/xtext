@@ -82,17 +82,17 @@ ruleModel returns [EObject current=null]
 	    }
 	    lv_child=ruleGreeting 
 	    {
-	        currentNode = currentNode.getParent();
 	        if ($current==null) {
 	            $current = factory.create("Model");
-	            associateNodeWithAstElement(currentNode, $current);
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
 	        try {
-	        	factory.set($current, "child", lv_child,"Greeting");
+	        	factory.set($current, "child", lv_child, "Greeting", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
+	        currentNode = currentNode.getParent();
 	    }
 	
 )?;
@@ -131,7 +131,7 @@ ruleGreeting returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "name", lv_name,"ID");
+	        	factory.set($current, "name", lv_name, "ID", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }

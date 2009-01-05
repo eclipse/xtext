@@ -82,17 +82,17 @@ ruleModel returns [EObject current=null]
 	    }
 	    lv_children=ruleNode 
 	    {
-	        currentNode = currentNode.getParent();
 	        if ($current==null) {
 	            $current = factory.create("Model");
-	            associateNodeWithAstElement(currentNode, $current);
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
 	        try {
-	        	factory.add($current, "children", lv_children,"Node");
+	        	factory.add($current, "children", lv_children, "Node", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
+	        currentNode = currentNode.getParent();
 	    }
 	
 )*;
@@ -127,7 +127,7 @@ ruleNode returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "name", lv_name,"ID");
+	        	factory.set($current, "name", lv_name, "ID", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -151,7 +151,7 @@ ruleNode returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "attrib", lv_attrib,"STRING");
+	        	factory.set($current, "attrib", lv_attrib, "STRING", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -173,17 +173,17 @@ ruleNode returns [EObject current=null]
 	    }
 	    lv_children=ruleNode 
 	    {
-	        currentNode = currentNode.getParent();
 	        if ($current==null) {
 	            $current = factory.create("Node");
-	            associateNodeWithAstElement(currentNode, $current);
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
 	        try {
-	        	factory.add($current, "children", lv_children,"Node");
+	        	factory.add($current, "children", lv_children, "Node", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
+	        currentNode = currentNode.getParent();
 	    }
 	
 )*)'};' 

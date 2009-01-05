@@ -6,7 +6,9 @@
   <idElements>parsetree</idElements>
   <idElements>transientvalues</idElements>
   <idElements>TransientValuesTest</idElements>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="transientvaluestest" nsURI="http://simple/transientvaluestest"/>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="transientvaluestest">
+    <ePackage href="http://simple/transientvaluestest#/"/>
+  </metamodelDeclarations>
   <rules xsi:type="xtext:ParserRule" name="Root">
     <type metamodel="//@metamodelDeclarations.0">
       <type xsi:type="ecore:EClass" href="http://simple/transientvaluestest#//Root"/>

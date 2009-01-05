@@ -82,17 +82,17 @@ ruleModel returns [EObject current=null]
 	    }
 	    lv_children=ruleElement 
 	    {
-	        currentNode = currentNode.getParent();
 	        if ($current==null) {
 	            $current = factory.create("Model");
-	            associateNodeWithAstElement(currentNode, $current);
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
 	        try {
-	        	factory.add($current, "children", lv_children,"Element");
+	        	factory.add($current, "children", lv_children, "Element", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
+	        currentNode = currentNode.getParent();
 	    }
 	
 )*;
@@ -125,7 +125,7 @@ ruleElement returns [EObject current=null]
 ((
     { 
         temp=factory.create("Item");
-        factory.add(temp, "items",$current);
+        factory.add(temp, "items", $current, null /*ParserRule*/, currentNode);
         $current = temp; 
         temp = null;
         CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
@@ -142,17 +142,17 @@ ruleElement returns [EObject current=null]
 	    }
 	    lv_items=ruleItem 
 	    {
-	        currentNode = currentNode.getParent();
 	        if ($current==null) {
 	            $current = factory.create("Type");
-	            associateNodeWithAstElement(currentNode, $current);
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
 	        try {
-	        	factory.add($current, "items", lv_items,"Item");
+	        	factory.add($current, "items", lv_items, "Item", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
+	        currentNode = currentNode.getParent();
 	    }
 	
 )));
@@ -176,7 +176,7 @@ ruleItem returns [EObject current=null]
 ((
     { 
         temp=factory.create("Thing");
-        factory.set(temp, "content",$current);
+        factory.set(temp, "content", $current, null /*ParserRule*/, currentNode);
         $current = temp; 
         temp = null;
         CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
@@ -199,7 +199,7 @@ ruleItem returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "name", lv_name,"ID");
+	        	factory.set($current, "name", lv_name, "ID", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }

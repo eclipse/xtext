@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/internal/InternalTransientValuesTest.g 2008-12-19 13:25:21
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/internal/InternalTransientValuesTest.g 2009-01-04 17:07:35
 
 package org.eclipse.xtext.parsetree.transientvalues.parser.internal; 
 
@@ -312,7 +312,7 @@ public class InternalTransientValuesTestParser extends AbstractAntlrParser {
             	        }
             	        
             	        try {
-            	        	factory.set(current, "required1", lv_required1,"INT");
+            	        	factory.set(current, "required1", lv_required1, "INT", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -338,7 +338,7 @@ public class InternalTransientValuesTestParser extends AbstractAntlrParser {
             	        }
             	        
             	        try {
-            	        	factory.set(current, "required2", lv_required2,"INT");
+            	        	factory.set(current, "required2", lv_required2, "INT", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -447,7 +447,7 @@ public class InternalTransientValuesTestParser extends AbstractAntlrParser {
                     	        }
                     	        
                     	        try {
-                    	        	factory.set(current, "opt1", lv_opt1,"INT");
+                    	        	factory.set(current, "opt1", lv_opt1, "INT", currentNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
@@ -491,7 +491,7 @@ public class InternalTransientValuesTestParser extends AbstractAntlrParser {
                     	        }
                     	        
                     	        try {
-                    	        	factory.set(current, "opt2", lv_opt2,"INT");
+                    	        	factory.set(current, "opt2", lv_opt2, "INT", currentNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
@@ -606,7 +606,7 @@ public class InternalTransientValuesTestParser extends AbstractAntlrParser {
             	    	        }
             	    	        
             	    	        try {
-            	    	        	factory.add(current, "item", lv_item,"INT");
+            	    	        	factory.add(current, "item", lv_item, "INT", currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }

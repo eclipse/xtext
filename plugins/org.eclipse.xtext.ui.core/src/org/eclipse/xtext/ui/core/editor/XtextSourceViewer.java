@@ -39,6 +39,13 @@ public class XtextSourceViewer extends ProjectionViewer implements IXtextSourceV
 
 	private CompositeNode rootNode;
 
+	// SZ: Why do we cache this? 
+	// Integer as keys are kind of problematic:
+	// on the one hand will nobody refer to any of these integers
+	// thus the cache will discard the entries nearly immediatly,
+	// on the other hand are all integers smaller than 127 singletons
+	// and therefore never discarded by the gc, so the corresponding entries
+	// will never be discarded by the cache
 	private SimpleCache<Integer, AbstractNode> referenceNodeCache;
 
 	private SimpleCache<Integer, AbstractNode> nodeCache;
@@ -61,6 +68,7 @@ public class XtextSourceViewer extends ProjectionViewer implements IXtextSourceV
 	public void setDocument(IDocument document, IAnnotationModel annotationModel) {
 		if (getDocument() != null)
 			((IXtextDocument) getDocument()).removeModelListener(this);
+		init();
 		super.setDocument(document, annotationModel);
 		if (document != null)
 			((IXtextDocument) getDocument()).addModelListener(this);
@@ -71,6 +79,7 @@ public class XtextSourceViewer extends ProjectionViewer implements IXtextSourceV
 			int modelRangeLength) {
 		if (getDocument() != null)
 			((IXtextDocument) getDocument()).removeModelListener(this);
+		init();
 		super.setDocument(document, annotationModel, modelRangeOffset, modelRangeLength);
 		if (document != null)
 			((IXtextDocument) getDocument()).addModelListener(this);
@@ -80,6 +89,7 @@ public class XtextSourceViewer extends ProjectionViewer implements IXtextSourceV
 	public void setDocument(IDocument document, int visibleRegionOffset, int visibleRegionLength) {
 		if (getDocument() != null)
 			((IXtextDocument) getDocument()).removeModelListener(this);
+		init();
 		super.setDocument(document, visibleRegionOffset, visibleRegionLength);
 		if (document != null)
 			((IXtextDocument) getDocument()).addModelListener(this);
@@ -146,21 +156,17 @@ public class XtextSourceViewer extends ProjectionViewer implements IXtextSourceV
 
 	private SimpleCache<Integer, AbstractNode> createReferenceNodeCache() {
 		return new SimpleCache<Integer, AbstractNode>(new Function<Integer, AbstractNode>() {
-
 			public AbstractNode exec(Integer offset) {
 				return ParseTreeUtil.getLastCompleteNodeByOffset(getRootNode(), offset);
 			}
-
 		});
 	}
 
 	private SimpleCache<Integer, AbstractNode> createNodeCache() {
 		return new SimpleCache<Integer, AbstractNode>(new Function<Integer, AbstractNode>() {
-
 			public AbstractNode exec(Integer offset) {
 				return ParseTreeUtil.getCurrentOrFollowingNodeByOffset(getRootNode(), offset);
 			}
-
 		});
 	}
 

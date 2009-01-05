@@ -24,8 +24,9 @@ import org.eclipse.xtext.ui.core.editor.reconciler.XtextReconciler;
 
 public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguration {
 
-	@Inject(optional = true)
-	private IContentAssistant contentAssistant;
+//	May not be injected, because it is stateful
+//	@Inject(optional = true)
+//	private IContentAssistant contentAssistant;
 	
 	@Inject(optional = true)
 	private IContentAssistProcessor contentAssistProcessor;
@@ -35,6 +36,7 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 
 	@Override
 	public IContentAssistant getContentAssistant(ISourceViewer sourceViewer) {
+		IContentAssistant contentAssistant = new ContentAssistant();
 		if (contentAssistant instanceof ISourceViewerAware)
 			((ISourceViewerAware) contentAssistant).setSourceViewer(sourceViewer);
 		if (contentAssistant instanceof ContentAssistant && contentAssistProcessor != null) {

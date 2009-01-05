@@ -82,17 +82,17 @@ ruleCompositeModel returns [EObject current=null]
 	    }
 	    lv_model=ruleModel 
 	    {
-	        currentNode = currentNode.getParent();
 	        if ($current==null) {
 	            $current = factory.create("CompositeModel");
-	            associateNodeWithAstElement(currentNode, $current);
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
 	        try {
-	        	factory.add($current, "model", lv_model,"Model");
+	        	factory.add($current, "model", lv_model, "Model", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
+	        currentNode = currentNode.getParent();
 	    }
 	
 )+;
@@ -121,17 +121,17 @@ ruleModel returns [EObject current=null]
 	    }
 	    lv_id=ruleNestedModelId 
 	    {
-	        currentNode = currentNode.getParent();
 	        if ($current==null) {
 	            $current = factory.create("Model");
-	            associateNodeWithAstElement(currentNode, $current);
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
 	        try {
-	        	factory.set($current, "id", lv_id,"NestedModelId");
+	        	factory.set($current, "id", lv_id, "NestedModelId", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
+	        currentNode = currentNode.getParent();
 	    }
 	
 )(':' 
@@ -146,17 +146,17 @@ ruleModel returns [EObject current=null]
 	    }
 	    lv_value=ruleFraction 
 	    {
-	        currentNode = currentNode.getParent();
 	        if ($current==null) {
 	            $current = factory.create("Model");
-	            associateNodeWithAstElement(currentNode, $current);
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
 	        try {
-	        	factory.set($current, "value", lv_value,"Fraction");
+	        	factory.set($current, "value", lv_value, "Fraction", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
+	        currentNode = currentNode.getParent();
 	    }
 	
 ))?)('#' 
@@ -171,17 +171,17 @@ ruleModel returns [EObject current=null]
 	    }
 	    lv_vector=ruleVector 
 	    {
-	        currentNode = currentNode.getParent();
 	        if ($current==null) {
 	            $current = factory.create("Model");
-	            associateNodeWithAstElement(currentNode, $current);
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
 	        try {
-	        	factory.set($current, "vector", lv_vector,"Vector");
+	        	factory.set($current, "vector", lv_vector, "Vector", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
+	        currentNode = currentNode.getParent();
 	    }
 	
 ))?)('+' 
@@ -196,17 +196,17 @@ ruleModel returns [EObject current=null]
 	    }
 	    lv_dots=ruleDots 
 	    {
-	        currentNode = currentNode.getParent();
 	        if ($current==null) {
 	            $current = factory.create("Model");
-	            associateNodeWithAstElement(currentNode, $current);
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
 	        try {
-	        	factory.set($current, "dots", lv_dots,"Dots");
+	        	factory.set($current, "dots", lv_dots, "Dots", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
+	        currentNode = currentNode.getParent();
 	    }
 	
 ))?)';' 

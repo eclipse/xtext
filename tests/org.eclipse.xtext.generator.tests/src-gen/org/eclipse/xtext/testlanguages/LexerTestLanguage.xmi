@@ -5,7 +5,9 @@
   <idElements>xtext</idElements>
   <idElements>testlanguages</idElements>
   <idElements>LexerTestLanguage</idElements>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="LexerLang" nsURI="http://www.eclipse.org/2008/xtext/LexerLang"/>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="LexerLang">
+    <ePackage href="http://www.eclipse.org/2008/xtext/LexerLang#/"/>
+  </metamodelDeclarations>
   <rules xsi:type="xtext:ParserRule" name="Model">
     <type metamodel="//@metamodelDeclarations.0">
       <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/LexerLang#//Model"/>

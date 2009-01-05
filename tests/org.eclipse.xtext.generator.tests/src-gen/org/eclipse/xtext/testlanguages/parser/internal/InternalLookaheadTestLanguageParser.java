@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadTestLanguage.g 2008-12-19 13:25:18
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadTestLanguage.g 2009-01-04 17:07:31
 
 package org.eclipse.xtext.testlanguages.parser.internal; 
 
@@ -134,17 +134,17 @@ public class InternalLookaheadTestLanguageParser extends AbstractAntlrParser {
             	    _fsp--;
 
 
-            	    	        currentNode = currentNode.getParent();
             	    	        if (current==null) {
             	    	            current = factory.create("Entry");
-            	    	            associateNodeWithAstElement(currentNode, current);
+            	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
             	    	        try {
-            	    	        	factory.add(current, "contents", lv_contents,"Alts");
+            	    	        	factory.add(current, "contents", lv_contents, "Alts", currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }
+            	    	        currentNode = currentNode.getParent();
             	    	    
 
             	    }
@@ -433,7 +433,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractAntlrParser {
             	        }
             	        
             	        try {
-            	        	factory.set(current, "x", input.LT(-1),"a");
+            	        	factory.set(current, "x", input.LT(-1), "a", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -534,17 +534,17 @@ public class InternalLookaheadTestLanguageParser extends AbstractAntlrParser {
             _fsp--;
 
 
-            	        currentNode = currentNode.getParent();
             	        if (current==null) {
             	            current = factory.create("LookAhead1");
-            	            associateNodeWithAstElement(currentNode, current);
+            	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
             	        try {
-            	        	factory.set(current, "y", lv_y,"LookAhead2");
+            	        	factory.set(current, "y", lv_y, "LookAhead2", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
+            	        currentNode = currentNode.getParent();
             	    
 
             }
@@ -567,7 +567,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractAntlrParser {
             	        }
             	        
             	        try {
-            	        	factory.set(current, "x", input.LT(-1),"b");
+            	        	factory.set(current, "x", input.LT(-1), "b", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -593,7 +593,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractAntlrParser {
             	        }
             	        
             	        try {
-            	        	factory.set(current, "x", input.LT(-1),"d");
+            	        	factory.set(current, "x", input.LT(-1), "d", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -706,7 +706,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractAntlrParser {
                     	        }
                     	        
                     	        try {
-                    	        	factory.set(current, "z", input.LT(-1),"foo");
+                    	        	factory.set(current, "z", input.LT(-1), "foo", currentNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
@@ -735,7 +735,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractAntlrParser {
                     	        }
                     	        
                     	        try {
-                    	        	factory.set(current, "z", input.LT(-1),"bar");
+                    	        	factory.set(current, "z", input.LT(-1), "bar", currentNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
@@ -857,7 +857,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractAntlrParser {
             	        }
             	        
             	        try {
-            	        	factory.set(current, "x", input.LT(-1),"b");
+            	        	factory.set(current, "x", input.LT(-1), "b", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -879,17 +879,17 @@ public class InternalLookaheadTestLanguageParser extends AbstractAntlrParser {
             _fsp--;
 
 
-            	        currentNode = currentNode.getParent();
             	        if (current==null) {
             	            current = factory.create("LookAhead3");
-            	            associateNodeWithAstElement(currentNode, current);
+            	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
             	        try {
-            	        	factory.set(current, "z", lv_z,"LookAhead4");
+            	        	factory.set(current, "z", lv_z, "LookAhead4", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
+            	        currentNode = currentNode.getParent();
             	    
 
             }
@@ -996,7 +996,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractAntlrParser {
                     	        }
                     	        
                     	        try {
-                    	        	factory.set(current, "x", input.LT(-1),"c");
+                    	        	factory.set(current, "x", input.LT(-1), "c", currentNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
@@ -1025,7 +1025,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractAntlrParser {
                     	        }
                     	        
                     	        try {
-                    	        	factory.set(current, "x", input.LT(-1),"d");
+                    	        	factory.set(current, "x", input.LT(-1), "d", currentNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }

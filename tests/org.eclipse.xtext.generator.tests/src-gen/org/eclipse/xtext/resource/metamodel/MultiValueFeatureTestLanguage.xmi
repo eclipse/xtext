@@ -6,7 +6,9 @@
   <idElements>resource</idElements>
   <idElements>metamodel</idElements>
   <idElements>MultiValueFeatureTestLanguage</idElements>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="MultiValueFeatureTestLanguage" nsURI="http://www.eclipse.org/2008/xtext/MultiValueFeatureTestLanguage"/>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="MultiValueFeatureTestLanguage">
+    <ePackage href="http://www.eclipse.org/2008/xtext/MultiValueFeatureTestLanguage#/"/>
+  </metamodelDeclarations>
   <rules xsi:type="xtext:ParserRule" name="Start">
     <type metamodel="//@metamodelDeclarations.0">
       <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/MultiValueFeatureTestLanguage#//Start"/>

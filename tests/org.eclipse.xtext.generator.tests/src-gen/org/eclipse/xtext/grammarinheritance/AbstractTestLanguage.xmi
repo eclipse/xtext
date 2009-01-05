@@ -5,8 +5,12 @@
   <idElements>xtext</idElements>
   <idElements>grammarinheritance</idElements>
   <idElements>AbstractTestLanguage</idElements>
-  <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="mm" uri="classpath:/org/eclipse/xtext/grammarinheritance/ametamodel.ecore"/>
-  <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="ecore" uri="http://www.eclipse.org/emf/2002/Ecore"/>
+  <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="mm">
+    <ePackage href="classpath:/org/eclipse/xtext/grammarinheritance/ametamodel.ecore#/"/>
+  </metamodelDeclarations>
+  <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="ecore">
+    <ePackage href="http://www.eclipse.org/emf/2002/Ecore#/"/>
+  </metamodelDeclarations>
   <rules xsi:type="xtext:ParserRule" name="InheritedParserRule">
     <type metamodel="//@metamodelDeclarations.0">
       <type xsi:type="ecore:EClass" href="classpath:/org/eclipse/xtext/grammarinheritance/ametamodel.ecore#//AType"/>

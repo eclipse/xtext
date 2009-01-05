@@ -6,8 +6,12 @@
   <idElements>parser</idElements>
   <idElements>datatyperules</idElements>
   <idElements>DatatypeRulesTestLanguage</idElements>
-  <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="ecore" uri="http://www.eclipse.org/emf/2002/Ecore"/>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="DatatypeRulesTestLanguage" nsURI="http://www.eclipse.org/2008/tmf/xtext/DatatypeRulesTest"/>
+  <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="ecore">
+    <ePackage href="http://www.eclipse.org/emf/2002/Ecore#/"/>
+  </metamodelDeclarations>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="DatatypeRulesTestLanguage">
+    <ePackage href="http://www.eclipse.org/2008/tmf/xtext/DatatypeRulesTest#/"/>
+  </metamodelDeclarations>
   <rules xsi:type="xtext:ParserRule" name="CompositeModel">
     <type metamodel="//@metamodelDeclarations.1">
       <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/tmf/xtext/DatatypeRulesTest#//CompositeModel"/>

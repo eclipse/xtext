@@ -82,17 +82,17 @@ ruleEntryRule returns [EObject current=null]
 	    }
 	    lv_multiFeature=ruleAbstractRule 
 	    {
-	        currentNode = currentNode.getParent();
 	        if ($current==null) {
 	            $current = factory.create("Model");
-	            associateNodeWithAstElement(currentNode, $current);
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
 	        try {
-	        	factory.add($current, "multiFeature", lv_multiFeature,"AbstractRule");
+	        	factory.add($current, "multiFeature", lv_multiFeature, "AbstractRule", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
+	        currentNode = currentNode.getParent();
 	    }
 	
 )*;
@@ -168,7 +168,7 @@ ruleChoiceRule returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "optionalKeyword", true,"optional");
+	        	factory.set($current, "optionalKeyword", true, "optional", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -188,7 +188,7 @@ ruleChoiceRule returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "name", lv_name,"ID");
+	        	factory.set($current, "name", lv_name, "ID", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -228,7 +228,7 @@ ruleReducibleRule returns [EObject current=null]
 )((
     { 
         temp=factory.create("ReducibleComposite");
-        factory.add(temp, "actionFeature",$current);
+        factory.add(temp, "actionFeature", $current, null /*ParserRule*/, currentNode);
         $current = temp; 
         temp = null;
         CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
@@ -245,17 +245,17 @@ ruleReducibleRule returns [EObject current=null]
 	    }
 	    lv_actionFeature=ruleTerminalRule 
 	    {
-	        currentNode = currentNode.getParent();
 	        if ($current==null) {
 	            $current = factory.create("ReducibleElement");
-	            associateNodeWithAstElement(currentNode, $current);
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
 	        try {
-	        	factory.add($current, "actionFeature", lv_actionFeature,"TerminalRule");
+	        	factory.add($current, "actionFeature", lv_actionFeature, "TerminalRule", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
+	        currentNode = currentNode.getParent();
 	    }
 	
 ))?);
@@ -290,7 +290,7 @@ ruleTerminalRule returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "stringFeature", lv_stringFeature,"STRING");
+	        	factory.set($current, "stringFeature", lv_stringFeature, "STRING", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
