@@ -79,8 +79,8 @@ abstract class DatatypeRuleUtil extends XtextSwitch<Boolean>{
 				return object.getAlternatives() != null && doSwitch(object.getAlternatives());
 			}
 			final TypeRef typeRef = object.getType();
-			if (typeRef.getType() == null) {
-				throw new IllegalStateException("checks are only allowed for linked grammars");
+			if (typeRef == null || typeRef.getType() == null) {
+				throw new IllegalStateException("checks are only allowed for linked grammars. Rule: " + object.getName());
 			}
 			return !visitedRules.add(object) || GrammarUtil.isDatatypeRule(object);
 		}

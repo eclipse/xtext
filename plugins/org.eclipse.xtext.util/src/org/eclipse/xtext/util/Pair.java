@@ -58,4 +58,9 @@ public class Pair<T,U> {
         this.secondElement = secondElement;
     }
     
+    @Override
+    public String toString() {
+    	return "<" + firstElement + ", " + secondElement + ">";
+    }
+    
 }

@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.xtext.GeneratedMetamodel;
@@ -42,7 +43,11 @@ public class TypeHierarchyHelperTests extends TestCase {
 		super.setUp();
 		errorAcceptorMock = createMock(ErrorAcceptor.class);
 		metamodel = XtextFactory.eINSTANCE.createGeneratedMetamodel();
-		metamodel.setNsURI("myURI");
+		EPackage pack = EcoreFactory.eINSTANCE.createEPackage();
+		pack.setNsURI("myURI");
+		pack.setName("myName");
+		pack.setNsPrefix("myPrefix");
+		metamodel.setEPackage(pack);
 	}
 	
 	private void liftUpFeatures() throws Exception {

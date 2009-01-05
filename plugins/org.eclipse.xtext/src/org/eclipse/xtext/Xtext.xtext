@@ -24,12 +24,12 @@ AbstractMetamodelDeclaration :
 // constraint: typeSelect(GeneratedMetamodel).size() == typeSelect(GeneratedMetamodel).alias.size()
 // generated metamodels have to have different aliases
 GeneratedMetamodel :
-	'generate' name=ID nsURI=STRING ('as' alias=ID)?;
+	'generate' name=ID ePackage=[ecore::EPackage|STRING] ('as' alias=ID)?;
 
 // referenced metamodels may share aliases with other referenced metamodels
 // and with generated metamodels
 ReferencedMetamodel :
-	'import' uri=STRING ('as' alias=ID)?;
+	'import' ePackage=[ecore::EPackage|STRING] ('as' alias=ID)?;
 
 LexerRule :
 	('native'|'lexer') name=ID ('returns' type=TypeRef)? ':' 

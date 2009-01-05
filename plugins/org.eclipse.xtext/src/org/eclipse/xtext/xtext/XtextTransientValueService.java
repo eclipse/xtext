@@ -12,6 +12,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
@@ -24,8 +25,6 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.parsetree.reconstr.impl.SimpleTransientValueService;
-import org.eclipse.xtext.resource.metamodel.DeclaredMetamodelAccessFactory;
-import org.eclipse.xtext.resource.metamodel.IDeclaredMetamodelAccess;
 import org.eclipse.xtext.util.Strings;
 
 /**
@@ -69,13 +68,15 @@ public class XtextTransientValueService extends SimpleTransientValueService {
 		for (AbstractMetamodelDeclaration decl : declarations) {
 			if (decl instanceof GeneratedMetamodel)
 				generatedMetamodelCount++;
-			IDeclaredMetamodelAccess access = DeclaredMetamodelAccessFactory.getAccessTo(decl);
-			EClassifier candidate = access.getEClassifier(shortTypeName);
-			if (candidate != null) {
-				if (resultMetaModel == null) {
-					resultMetaModel = decl;
-				} else {
-					return false;
+			EPackage pack = decl.getEPackage();
+			if (pack != null) {
+				EClassifier candidate = pack.getEClassifier(shortTypeName);
+				if (candidate != null) {
+					if (resultMetaModel == null) {
+						resultMetaModel = decl;
+					} else {
+						return false;
+					}
 				}
 			}
 		}

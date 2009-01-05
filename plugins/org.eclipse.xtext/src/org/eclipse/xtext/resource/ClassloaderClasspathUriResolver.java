@@ -40,7 +40,7 @@ public class ClassloaderClasspathUriResolver implements IClasspathUriResolver {
         }
         ClassLoader classLoader = (ClassLoader) context;
         try {
-            if (ClasspathUriUtil.isClassapthUri(classpathUri)) {
+            if (ClasspathUriUtil.isClasspathUri(classpathUri)) {
                 return findResourceOnClasspath(classLoader, classpathUri);
             }
         } catch (Exception exc) {

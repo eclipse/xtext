@@ -18,14 +18,13 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.crossref.IScope;
 import org.eclipse.xtext.crossref.IScopedElement;
-import org.eclipse.xtext.resource.metamodel.DeclaredMetamodelAccessFactory;
-import org.eclipse.xtext.resource.metamodel.IDeclaredMetamodelAccess;
 import org.eclipse.xtext.util.Filter;
 import org.eclipse.xtext.util.Function;
 import org.eclipse.xtext.util.Strings;
@@ -71,18 +70,20 @@ class XtextMetamodelReferenceHelper {
 		AbstractMetamodelDeclaration result = null;
 		for (AbstractMetamodelDeclaration metamodel : candidates) {
 			if (metamodel instanceof ReferencedMetamodel) {
-				IDeclaredMetamodelAccess metamodelAccess = DeclaredMetamodelAccessFactory.getAccessTo(metamodel);
-				final EClassifier classifier = metamodelAccess.getEClassifier(typeName);
-				if (classifier != null) {
-					if (result == null)
-						result = metamodel;
-					else
-						return Collections.emptyList();
+				EPackage pack = metamodel.getEPackage();
+				if (pack != null) {
+					final EClassifier classifier = pack.getEClassifier(typeName);
+					if (classifier != null) {
+						if (result == null)
+							result = metamodel;
+						else
+							return Collections.emptyList();
+					}
 				}
 			}
 		}
 		if (result != null)
-			return Collections.singletonList((EObject) result);
+			return Collections.<EObject>singletonList(result);
 		return null;
 	}
 
@@ -100,8 +101,7 @@ class XtextMetamodelReferenceHelper {
 	private static void filterMetamodelsInScope(final String alias, IScope scope,
 			final List<AbstractMetamodelDeclaration> generatedMetamodels,
 			final List<AbstractMetamodelDeclaration> importedMetamodels) {
-		switchContent(filter(map(scope
-				.getAllContents(), new Function<IScopedElement, AbstractMetamodelDeclaration>() {
+		switchContent(filter(map(scope.getAllContents(), new Function<IScopedElement, AbstractMetamodelDeclaration>() {
 			public AbstractMetamodelDeclaration exec(IScopedElement param) {
 				return (AbstractMetamodelDeclaration) param.element();
 			}

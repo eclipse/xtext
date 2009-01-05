@@ -63,6 +63,13 @@ public abstract class EClassifierInfo {
 
 		@Override
 		public boolean addSupertype(EClassifierInfo superTypeInfo) {
+			EClass eClass = getEClass();
+			EClass superEClass = (EClass) superTypeInfo.getEClassifier();
+			
+			if (superEClass.isSuperTypeOf(eClass)) {
+				return true;
+			}
+			
 			if (!isGenerated()) {
 				throw new IllegalStateException("Type " + this.getEClassifier().getName()
 						+ " is not generated and cannot be modified.");
@@ -70,8 +77,7 @@ public abstract class EClassifierInfo {
 			if (!(superTypeInfo instanceof EClassInfo)) {
 				throw new IllegalArgumentException("superTypeInfo must represent EClass");
 			}
-			EClass eClass = getEClass();
-			EClass superEClass = (EClass) superTypeInfo.getEClassifier();
+			
 			if (eClass.equals(superEClass))
 				// cannot add class as it's own superclass
 				// this usually happens due to a rule call
@@ -105,7 +111,7 @@ public abstract class EClassifierInfo {
 				boolean isContainment, EObject parserElement) throws TransformationException {
 			EStructuralFeature newFeature = createFeatureWith(featureName, featureClassifier, isMultivalue,
 					isContainment);
-
+			
 			switch (EcoreUtil2.containsSemanticallyEqualFeature(getEClass(), newFeature)) {
 				case FeatureDoesNotExist: 
 					if (!isGenerated())

@@ -18,7 +18,7 @@ import org.eclipse.xtext.conversion.IValueConverter;
  */
 public class TestValueConverter extends TestCase {
 
-	private IValueConverter valueConverter;
+	private IValueConverter<BigDecimal> valueConverter;
 
 	protected void setUp() throws Exception {
 		valueConverter = new DatatypeRulesTestLanguageValueConverters().Fraction();
@@ -26,14 +26,14 @@ public class TestValueConverter extends TestCase {
 	
 	public void testSimpleToObject() {
 		String s = "123";
-		BigDecimal bd = (BigDecimal) valueConverter.toValue(s);
+		BigDecimal bd = valueConverter.toValue(s, null);
 		BigDecimal expected = new BigDecimal("123");
 		assertEquals(expected, bd);
 	}
 	
 	public void testFractionObject() {
 		String s = "123/246";
-		BigDecimal bd = (BigDecimal) valueConverter.toValue(s);
+		BigDecimal bd = valueConverter.toValue(s, null);
 		BigDecimal expected = new BigDecimal("0.5");
 		assertEquals(expected, bd);
 	}
@@ -41,7 +41,7 @@ public class TestValueConverter extends TestCase {
 	public void testZeroDenominator() {
 		String s = "123/0";
 		try {
-			valueConverter.toValue(s);
+			valueConverter.toValue(s, null);
 			fail("expected ArithmeticException");
 		} catch(ArithmeticException ae) {
 			// expected

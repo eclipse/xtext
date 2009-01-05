@@ -19,4 +19,13 @@ public interface Function<Param, Result> {
 	 */
 	Result exec(Param param);
 	
+	public interface WithoutResult<Param> {
+
+		/**
+		 * @param param the input parameter
+		 */
+		void exec(Param param);
+
+	}
+	
 }

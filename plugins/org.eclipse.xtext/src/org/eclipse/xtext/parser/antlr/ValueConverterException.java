@@ -8,6 +8,7 @@
 package org.eclipse.xtext.parser.antlr;
 
 import org.antlr.runtime.RecognitionException;
+import org.eclipse.xtext.parsetree.AbstractNode;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -15,8 +16,15 @@ import org.antlr.runtime.RecognitionException;
 @SuppressWarnings("serial")
 public class ValueConverterException extends RecognitionException {
 
-	public ValueConverterException(Exception cause) {
+	private final AbstractNode node;
+	
+	public ValueConverterException(AbstractNode node, Exception cause) {
 		super();
+		this.node = node;
 		initCause(cause);
+	}
+
+	public AbstractNode getNode() {
+		return node;
 	}
 }

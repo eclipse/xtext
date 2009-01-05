@@ -7,35 +7,43 @@
  *******************************************************************************/
 package org.eclipse.xtext.crossref.impl;
 
+import static org.eclipse.xtext.util.CollectionUtils.filter;
+import static org.eclipse.xtext.util.CollectionUtils.join;
+import static org.eclipse.xtext.util.CollectionUtils.each;
+
 import java.util.HashSet;
 import java.util.Set;
 
 import org.eclipse.xtext.crossref.IScope;
 import org.eclipse.xtext.crossref.IScopedElement;
-import org.eclipse.xtext.util.CollectionUtils;
 import org.eclipse.xtext.util.Filter;
+import org.eclipse.xtext.util.Function;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- * 
  */
 public abstract class AbstractNestedScope implements IScope {
 
 	private IScope parent;
-
+	
+	private Iterable<IScopedElement> elements;
+	
 	public AbstractNestedScope(IScope parent) {
 		this.parent = parent;
 	}
 
+	protected AbstractNestedScope(IScope parent, Iterable<IScopedElement> elements) {
+		this(parent);
+		this.elements = elements;
+	}
+	
 	public final Iterable<IScopedElement> getAllContents() {
 		final Set<String> identifiers = new HashSet<String>();
-		return CollectionUtils.join(CollectionUtils.filter(getContents().iterator(),
-				new Filter<IScopedElement>() {
-					public boolean matches(IScopedElement param) {
-						identifiers.add(param.name());
-						return true;
-					}
-				}), CollectionUtils.filter(getParent().getAllContents().iterator(), new Filter<IScopedElement>() {
+		return join(each(getContents(), new Function.WithoutResult<IScopedElement>() {
+			public void exec(IScopedElement param) {
+				identifiers.add(param.name());
+			}
+		}), filter(getParent().getAllContents(), new Filter<IScopedElement>() {
 			public boolean matches(IScopedElement param) {
 				return !identifiers.contains(param.name());
 			}
@@ -48,13 +56,6 @@ public abstract class AbstractNestedScope implements IScope {
 	
 	protected void setParent(IScope parent) {
 		this.parent = parent;
-	}
-
-	private Iterable<IScopedElement> elements;
-
-	public AbstractNestedScope(IScope parent, Iterable<IScopedElement> elements) {
-		this(parent);
-		this.elements = elements;
 	}
 
 	public Iterable<IScopedElement> getContents() {

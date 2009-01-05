@@ -19,17 +19,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
-import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.IMetamodelAccess;
-import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.parser.antlr.DatatypeRuleToken;
 import org.eclipse.xtext.parser.antlr.ValueConverterException;
-import org.eclipse.xtext.resource.metamodel.DeclaredMetamodelAccessFactory;
-import org.eclipse.xtext.resource.metamodel.IDeclaredMetamodelAccess;
+import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.util.Strings;
 
@@ -57,26 +54,9 @@ public class GenericEcoreElementFactory implements IAstFactory {
 		return clazz.getEPackage().getEFactoryInstance().create(clazz);
 	}
 
-	@Deprecated
-	public void set(EObject _this, String feature, Object value) throws RecognitionException {
-		set(_this, feature, value, null);
-	}
-
-	public void set(EObject _this, String feature, Object value, String ruleName) throws RecognitionException {
+	public void set(EObject _this, String feature, Object value, String ruleName, AbstractNode node) throws RecognitionException {
 		try {
-			// TODO: provide AbstractNode as hint for conversion
-			try {
-				if (value instanceof DatatypeRuleToken) {
-					value = ((DatatypeRuleToken) value).getText();
-				} else if (value instanceof Token) {
-					value = ((Token) value).getText();
-				}
-				if (value instanceof String && ruleName != null) {
-					value = converterService.toValue((String) value, ruleName);
-				}
-			} catch(Exception e) {
-				throw new ValueConverterException(e);
-			}
+			value = getTokenValue(value, ruleName, node);
 			EObject eo = (EObject) _this;
 			EStructuralFeature structuralFeature = eo.eClass().getEStructuralFeature(feature);
 			eo.eSet(structuralFeature, value);
@@ -86,50 +66,52 @@ public class GenericEcoreElementFactory implements IAstFactory {
 			throw new RecognitionException();
 		}
 	}
-
-	@Deprecated
-	public void add(EObject _this, String feature, Object value) throws RecognitionException {
-		add(_this, feature, value, null);
+	
+	private Object getTokenValue(Object tokenOrValue, String ruleName, AbstractNode node) throws ValueConverterException {
+		try {
+			Object value = tokenOrValue;
+			if (tokenOrValue instanceof DatatypeRuleToken) {
+				value = ((DatatypeRuleToken) tokenOrValue).getText();
+			} else if (tokenOrValue instanceof Token) {
+				value = ((Token) tokenOrValue).getText();
+			}
+			if (value instanceof String && ruleName != null) {
+				value = converterService.toValue((String) value, ruleName, node);
+			}
+			return value;
+		} catch(Exception e) {
+			throw new ValueConverterException(node, e);
+		}	
 	}
-
+	
 	@SuppressWarnings("unchecked")
-	public void add(EObject _this, String feature, Object value, String ruleName) throws RecognitionException {
+	public void add(EObject _this, String feature, Object value, String ruleName, AbstractNode node) throws RecognitionException {
 		try {
 			if (value == null)
 				return;
-			if (value instanceof Token) {
-				value = ((Token) value).getText();
-				if (ruleName != null) {
-					value = converterService.toValue((String) value, ruleName);
-				}
-			}
+			value = getTokenValue(value, ruleName, node);
 			EObject eo = (EObject) _this;
 			EStructuralFeature structuralFeature = eo.eClass().getEStructuralFeature(feature);
 			((Collection) eo.eGet(structuralFeature)).add(value);
+		} catch (ValueConverterException vce) {
+			throw vce;
 		} catch (Exception exc) {
 			throw new RecognitionException();
 		}
 	}
 
-	protected EPackage getEPackagePreferableFromRegistry(AbstractMetamodelDeclaration metaModelDecl) {
+	protected EPackage getEPackage(AbstractMetamodelDeclaration metaModelDecl) {
 		if (metaModelDecl == null)
 			throw new NullPointerException();
-		String nsURI = getNsURI(metaModelDecl);
-		if (EPackage.Registry.INSTANCE.containsKey(nsURI))
-			return EPackage.Registry.INSTANCE.getEPackage(nsURI);
-		
-		if (!(metaModelDecl instanceof GeneratedMetamodel)) {
-			IDeclaredMetamodelAccess access = DeclaredMetamodelAccessFactory.getAccessTo(metaModelDecl);
-			return access.getPackage();		
-		}
-		throw new NullPointerException("Cannot find package for declared model '" + metaModelDecl.getAlias() + "'");
+		if (metaModelDecl.getEPackage() == null)
+			throw new NullPointerException("Cannot find package for declared model '" + metaModelDecl.getAlias() + "'");
+		return metaModelDecl.getEPackage();
 	}
 	
-	protected String getNsURI(AbstractMetamodelDeclaration metaModelDecl) {
-		if (metaModelDecl instanceof GeneratedMetamodel)
-			return ((GeneratedMetamodel) metaModelDecl).getNsURI();
-		else
-			return ((ReferencedMetamodel)metaModelDecl).getUri();
+	protected String getNsURI(AbstractMetamodelDeclaration metamodelDecl) {
+		if (metamodelDecl.getEPackage() != null)
+			return metamodelDecl.getEPackage().getNsURI();
+		return null;
 	}
 
 	public EClass getEClass(String fullTypeName) {
@@ -149,7 +131,7 @@ public class GenericEcoreElementFactory implements IAstFactory {
 		EClassifier result = null;
 		for (AbstractMetamodelDeclaration decl : declarations) {
 			if (Strings.isEmpty(alias) || GrammarUtil.isSameAlias(decl.getAlias(), alias)) {
-				EPackage pack = getEPackagePreferableFromRegistry(decl);
+				EPackage pack = getEPackage(decl);
 				if (pack != null) {
 					EClassifier candidate = pack.getEClassifier(type);
 					if (candidate != null) {

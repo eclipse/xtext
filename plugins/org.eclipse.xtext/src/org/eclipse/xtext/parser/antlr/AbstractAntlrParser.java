@@ -236,11 +236,15 @@ public abstract class AbstractAntlrParser extends Parser {
 			currentError = cause.getMessage();
 			if (currentError == null)
 				currentError = cause.getClass().getSimpleName();
-			List<AbstractNode> children = currentNode.getChildren();
-			if (children.isEmpty()) {
-				appendError(currentNode);
+			if (vce.getNode() == null) {
+				final List<AbstractNode> children = currentNode.getChildren();
+				if (children.isEmpty()) {
+					appendError(currentNode);
+				} else {
+					appendError(children.get(children.size() - 1));
+				}
 			} else {
-				appendError(children.get(children.size() - 1));
+				appendError(vce.getNode());
 			}
 		} else {
 			throw vce;

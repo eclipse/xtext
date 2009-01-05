@@ -71,11 +71,11 @@ public class CollectionUtils {
 		switchContent(candidates.iterator(), matches, refuses, filter);
 	}
 	
-	public static <T, R> Iterable<R> map(Iterator<T> input, Function<T, R> mapper) {
+	public static <T, R> Iterable<R> map(Iterator<? extends T> input, Function<T, R> mapper) {
 		return new MappingIterator<T, R>(input, mapper);
 	}
 	
-	public static <T, R> Iterable<R> map(Iterable<T> input, Function<T, R> mapper) {
+	public static <T, R> Iterable<R> map(Iterable<? extends T> input, Function<T, R> mapper) {
 		return map(input.iterator(), mapper);
 	}
 	
@@ -85,6 +85,19 @@ public class CollectionUtils {
 
 	public static <T> Iterable<T> filter(Iterable<? extends T> input, Filter<T> filter) {
 		return filter(input.iterator(), filter);
+	}
+	
+	public static <T> Iterable<T> each(Iterator<? extends T> input, final Function.WithoutResult<T> fun) {
+		return map(input, new Function<T, T>() {
+			public T exec(T param) {
+				fun.exec(param);
+				return param;
+			}
+		});
+	}
+
+	public static <T> Iterable<T> each(Iterable<? extends T> input, Function.WithoutResult<T> fun) {
+		return each(input.iterator(), fun);
 	}
 	
 	public static <T> boolean addAll(Collection<T> target, Iterator<T> source) {

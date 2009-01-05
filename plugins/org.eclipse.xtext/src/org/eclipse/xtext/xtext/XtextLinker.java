@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
@@ -62,8 +63,10 @@ public class XtextLinker extends Linker {
 			public void setTarget(EObject object, EStructuralFeature feature) {
 				super.setTarget(object, feature);
 				// we don't want to mark generated types as errors unless generation fails
-				filter = feature == XtextPackage.eINSTANCE.getTypeRef_Type() &&
-					((TypeRef) object).getMetamodel() instanceof GeneratedMetamodel;
+				filter = (feature == XtextPackage.eINSTANCE.getTypeRef_Type() &&
+					((TypeRef) object).getMetamodel() instanceof GeneratedMetamodel) ||
+					(feature == XtextPackage.eINSTANCE.getAbstractMetamodelDeclaration_EPackage() &&
+					(object instanceof GeneratedMetamodel));
 			}
 
 		};
@@ -119,6 +122,10 @@ public class XtextLinker extends Linker {
 	 */
 	@Override
 	protected void clearReference(EObject obj, EReference ref) {
+		if (obj instanceof GeneratedMetamodel && ref.equals(XtextPackage.Literals.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE) && obj.eIsSet(ref)) {
+			EPackage pack = ((AbstractMetamodelDeclaration) obj).getEPackage();
+			pack.eResource().getResourceSet().getResources().remove(pack.eResource());
+		}
 		super.clearReference(obj, ref);
 		if (obj.eIsSet(ref) && ref.getEType().equals(XtextPackage.Literals.TYPE_REF)) {
 			NodeAdapter adapter = NodeUtil.getNodeAdapter((EObject) obj.eGet(ref));
