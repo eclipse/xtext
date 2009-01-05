@@ -37,11 +37,13 @@ public class GrammarUtilTest extends AbstractGeneratorTest {
 		assertEquals(2, decls.size());
 		AbstractMetamodelDeclaration decl = decls.get(0);
 		assertTrue(decl instanceof ReferencedMetamodel);
-		assertEquals("http://www.eclipse.org/emf/2002/Ecore", ((ReferencedMetamodel)decl).getUri());
+		assertNotNull(decl.getEPackage());
+		assertEquals("http://www.eclipse.org/emf/2002/Ecore", decl.getEPackage().getNsURI());
 		assertEquals("ecore", decl.getAlias());
 		decl = decls.get(1);
 		assertEquals("ecore", decl.getAlias());
-		assertEquals("http://3", ((GeneratedMetamodel) decl).getNsURI());
+		assertNotNull(decl.getEPackage());
+		assertEquals("http://3", decl.getEPackage().getNsURI());
 	}
 	
 	public void testAllMetamodelDeclarations_02() throws Exception {
@@ -58,14 +60,17 @@ public class GrammarUtilTest extends AbstractGeneratorTest {
 		assertEquals(3, decls.size());
 		AbstractMetamodelDeclaration decl = decls.get(0);
 		assertTrue(decl instanceof ReferencedMetamodel);
-		assertEquals("http://www.eclipse.org/emf/2002/Ecore", ((ReferencedMetamodel)decl).getUri());
+		assertNotNull(decl.getEPackage());
+		assertEquals("http://www.eclipse.org/emf/2002/Ecore", decl.getEPackage().getNsURI());
 		assertEquals("bar", decl.getAlias());
 		decl = decls.get(1);
 		assertEquals("bar", decl.getAlias());
-		assertEquals("http://3", ((GeneratedMetamodel) decl).getNsURI());
+		assertNotNull(decl.getEPackage());
+		assertEquals("http://3", decl.getEPackage().getNsURI());
 		decl = decls.get(2);
 		assertTrue(decl instanceof ReferencedMetamodel);
-		assertEquals("http://www.eclipse.org/emf/2002/Ecore", ((ReferencedMetamodel)decl).getUri());
+		assertNotNull(decl.getEPackage());
+		assertEquals("http://www.eclipse.org/emf/2002/Ecore", decl.getEPackage().getNsURI());
 		assertEquals("ecore", decl.getAlias());
 	}
 	

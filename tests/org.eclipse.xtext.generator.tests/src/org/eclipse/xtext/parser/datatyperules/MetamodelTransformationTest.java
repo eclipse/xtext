@@ -12,7 +12,6 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.resource.metamodel.DeclaredMetamodelAccessFactory;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 /**
@@ -37,7 +36,7 @@ public class MetamodelTransformationTest extends AbstractGeneratorTest {
 				"CalledId: StartId '-' ID;\n" +
 				"Value: name=StartId;";
 		grammar = (Grammar) getModel(model);
-		pack = DeclaredMetamodelAccessFactory.getAccessTo(grammar.getMetamodelDeclarations().get(1)).getPackage();
+		pack = grammar.getMetamodelDeclarations().get(1).getEPackage();
 	}
 	
 	public void testSetUp() {

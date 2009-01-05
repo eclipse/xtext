@@ -54,14 +54,14 @@ public abstract class «grammar().standaloneSetupClass().toSimpleName()» {
 			«ENDIF»
 			// initialize EPackages
 			«FOREACH grammar().metamodelDeclarations.typeSelect(GeneratedMetamodel) AS mmd»
-				if (!EPackage.Registry.INSTANCE.containsKey("«mmd.nsURI»")) {
+				if (!EPackage.Registry.INSTANCE.containsKey("«mmd.ePackage.nsURI»")) {
 					EPackage «mmd.name» = EcoreUtil2.loadEPackage(
 							"«classPathURI(mmd)»",
 							«standaloneSetupClass(grammar()).toSimpleName()».class.getClassLoader());
 					if («mmd.name» == null)
 						throw new IllegalStateException(
 								"Couldn't load EPackage from '«classPathURI(mmd)»'");
-					EPackage.Registry.INSTANCE.put("«mmd.nsURI»", «mmd.name»);
+					EPackage.Registry.INSTANCE.put("«mmd.ePackage.nsURI»", «mmd.name»);
 				}
 			«ENDFOREACH»
 			isInitialized = true;

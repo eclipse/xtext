@@ -47,7 +47,7 @@ public class «genClassFQName.toSimpleName()» extends BaseEPackageAccess implemen
 
 	private EPackage[] referenced = new EPackage[] {
 		«FOREACH grammar().metamodelDeclarations.typeSelect(ReferencedMetamodel) AS rmm SEPARATOR ","»
-		BaseEPackageAccess.getEPackageFromRegistry("«rmm.uri»")
+		BaseEPackageAccess.getEPackageFromRegistry("«rmm.ePackage.nsURI»")
 		«ENDFOREACH»
 		};
 	public EPackage[] getReferencedEPackages() {
@@ -56,7 +56,7 @@ public class «genClassFQName.toSimpleName()» extends BaseEPackageAccess implemen
 	
 	private EPackage[] all = new EPackage[] {
 	    «grammar().metamodelDeclarations.typeSelect(GeneratedMetamodel).collect(gmm|'get'+gmm.name.toFirstUpper()+'EPackage()').
-	    union(grammar().metamodelDeclarations.typeSelect(ReferencedMetamodel).collect(rmm|'BaseEPackageAccess.getEPackageFromRegistry("'+rmm.uri+'")')).toString(',')»
+	    union(grammar().metamodelDeclarations.typeSelect(ReferencedMetamodel).collect(rmm|'BaseEPackageAccess.getEPackageFromRegistry("'+rmm.ePackage.nsURI+'")')).toString(',')»
 		};
 	
 	public EPackage[] getAllEPackages() {
@@ -64,7 +64,7 @@ public class «genClassFQName.toSimpleName()» extends BaseEPackageAccess implemen
 	}
 
 	«FOREACH grammar().metamodelDeclarations.typeSelect(GeneratedMetamodel) AS gmm»
-	protected static final String «gmm.name.toUpperCase()»_NS_URI = "«gmm.nsURI»";
+	protected static final String «gmm.name.toUpperCase()»_NS_URI = "«gmm.ePackage.nsURI»";
 	
 	protected EPackage get«gmm.name.toFirstUpper()»EPackage() {	
 		return EPackage.Registry.INSTANCE.getEPackage(«gmm.name.toUpperCase()»_NS_URI);
