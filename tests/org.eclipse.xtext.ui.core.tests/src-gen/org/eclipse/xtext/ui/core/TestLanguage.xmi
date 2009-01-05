@@ -6,7 +6,9 @@
   <idElements>ui</idElements>
   <idElements>core</idElements>
   <idElements>TestLanguage</idElements>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="foo" nsURI="http://foo"/>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="foo">
+    <ePackage href="http://foo#/"/>
+  </metamodelDeclarations>
   <rules xsi:type="xtext:ParserRule" name="File">
     <type metamodel="//@metamodelDeclarations.0">
       <type xsi:type="ecore:EClass" href="http://foo#//File"/>

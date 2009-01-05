@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractRuleImpl.java,v 1.13 2008/12/03 20:57:10 szarnekow Exp $
+ * $Id: AbstractRuleImpl.java,v 1.14 2009/01/05 10:44:00 szarnekow Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -26,8 +26,8 @@ import org.eclipse.xtext.XtextPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.impl.AbstractRuleImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.impl.AbstractRuleImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipse.xtext.impl.AbstractRuleImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -36,6 +36,16 @@ import org.eclipse.xtext.XtextPackage;
 public class AbstractRuleImpl extends EObjectImpl implements AbstractRule
 {
   /**
+	 * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @see #getType()
+	 * @generated
+	 * @ordered
+	 */
+  protected TypeRef type;
+
+		/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -54,16 +64,6 @@ public class AbstractRuleImpl extends EObjectImpl implements AbstractRule
 	 * @ordered
 	 */
   protected String name = NAME_EDEFAULT;
-
-		/**
-	 * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #getType()
-	 * @generated
-	 * @ordered
-	 */
-  protected TypeRef type;
 
   /**
 	 * <!-- begin-user-doc -->
@@ -179,10 +179,10 @@ public class AbstractRuleImpl extends EObjectImpl implements AbstractRule
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
 		switch (featureID) {
-			case XtextPackage.ABSTRACT_RULE__NAME:
-				return getName();
 			case XtextPackage.ABSTRACT_RULE__TYPE:
 				return getType();
+			case XtextPackage.ABSTRACT_RULE__NAME:
+				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -196,11 +196,11 @@ public class AbstractRuleImpl extends EObjectImpl implements AbstractRule
   public void eSet(int featureID, Object newValue)
   {
 		switch (featureID) {
-			case XtextPackage.ABSTRACT_RULE__NAME:
-				setName((String)newValue);
-				return;
 			case XtextPackage.ABSTRACT_RULE__TYPE:
 				setType((TypeRef)newValue);
+				return;
+			case XtextPackage.ABSTRACT_RULE__NAME:
+				setName((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -215,11 +215,11 @@ public class AbstractRuleImpl extends EObjectImpl implements AbstractRule
   public void eUnset(int featureID)
   {
 		switch (featureID) {
-			case XtextPackage.ABSTRACT_RULE__NAME:
-				setName(NAME_EDEFAULT);
-				return;
 			case XtextPackage.ABSTRACT_RULE__TYPE:
 				setType((TypeRef)null);
+				return;
+			case XtextPackage.ABSTRACT_RULE__NAME:
+				setName(NAME_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -234,10 +234,10 @@ public class AbstractRuleImpl extends EObjectImpl implements AbstractRule
   public boolean eIsSet(int featureID)
   {
 		switch (featureID) {
-			case XtextPackage.ABSTRACT_RULE__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case XtextPackage.ABSTRACT_RULE__TYPE:
 				return type != null;
+			case XtextPackage.ABSTRACT_RULE__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);
 	}

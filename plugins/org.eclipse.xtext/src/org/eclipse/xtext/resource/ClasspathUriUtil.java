@@ -21,7 +21,7 @@ public class ClasspathUriUtil {
 
     public static final String CLASSPATH_SCHEME = "classpath";
 
-    public static boolean isClassapthUri(URI uri) {
+    public static boolean isClasspathUri(URI uri) {
         String scheme = uri.scheme();
         return CLASSPATH_SCHEME.equals(scheme);
     }

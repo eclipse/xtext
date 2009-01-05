@@ -196,21 +196,23 @@ import org.eclipse.xtext.parser.antlr.ValueConverterException;
 	    «ENDIF-»
 	    «localVar()»=«EXPAND ebnf FOR terminal» 
 	    {
-	        «IF isParserRuleAssignment()»currentNode = currentNode.getParent();
-	        «ENDIF-»
 	        if ($current==null) {
 	            $current = factory.create("«containingParserRule().typeName()»");
-	            associateNodeWithAstElement(currentNode, $current);
+	            «IF isParserRuleAssignment()»associateNodeWithAstElement(currentNode.getParent(), $current);
+	            «ELSE»associateNodeWithAstElement(currentNode, $current);
+	            «ENDIF-»
 	        }
 	        «REM»the use of input.LT(-1) in the following line is a workaroudn for a bug of antlr, where assignements of alternative keywords are ignored when there are actions«ENDREM»
 	        try {
 	        	factory.«setOrAdd()»($current, "«feature»", «
 	        		IF isBoolean()»true«
 	        		ELSE»«eAllContents.typeSelect(Keyword).isEmpty ? localVar() : "input.LT(-1)"»«
-	        		ENDIF»,«terminal.toStringLiteral()»);
+	        		ENDIF», «terminal.toStringLiteral()», currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
+	        «IF isParserRuleAssignment()»currentNode = currentNode.getParent();
+	        «ENDIF-»
 	    }
 	«ENDIF»
 «ENDDEFINE»
@@ -225,7 +227,7 @@ import org.eclipse.xtext.parser.antlr.ValueConverterException;
 «DEFINE ebnf2 FOR Action»
     { 
         temp=factory.create("«this.typeName.getQualifiedName()»");
-        factory.«setOrAdd()»(temp, "«feature»",$current);
+        factory.«setOrAdd()»(temp, "«feature»", $current, null /*ParserRule*/, currentNode);
         $current = temp; 
         temp = null;
         «EXPAND insertCompositeNode» 

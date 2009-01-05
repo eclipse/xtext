@@ -10,7 +10,6 @@ package org.eclipse.xtext.util;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */

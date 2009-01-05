@@ -92,7 +92,7 @@ ruleConcreteParserRule returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "magicNumber", lv_magicNumber,"REAL");
+	        	factory.set($current, "magicNumber", lv_magicNumber, "REAL", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -110,17 +110,17 @@ ruleConcreteParserRule returns [EObject current=null]
 	    }
 	    lv_elements=ruleInheritedParserRule 
 	    {
-	        currentNode = currentNode.getParent();
 	        if ($current==null) {
 	            $current = factory.create("ConcreteParserRule");
-	            associateNodeWithAstElement(currentNode, $current);
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
 	        try {
-	        	factory.add($current, "elements", lv_elements,"InheritedParserRule");
+	        	factory.add($current, "elements", lv_elements, "InheritedParserRule", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
+	        currentNode = currentNode.getParent();
 	    }
 	
 )*);
@@ -159,7 +159,7 @@ ruleInheritedParserRule returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "name", lv_name,"ID");
+	        	factory.set($current, "name", lv_name, "ID", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }

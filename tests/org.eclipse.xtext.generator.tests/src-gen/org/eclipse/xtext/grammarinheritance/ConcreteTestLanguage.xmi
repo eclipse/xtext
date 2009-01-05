@@ -10,7 +10,9 @@
   <superGrammarIdElements>xtext</superGrammarIdElements>
   <superGrammarIdElements>grammarinheritance</superGrammarIdElements>
   <superGrammarIdElements>AbstractTestLanguage</superGrammarIdElements>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="foo" nsURI="http://holla"/>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="foo">
+    <ePackage href="http://holla#/"/>
+  </metamodelDeclarations>
   <rules xsi:type="xtext:ParserRule" name="ConcreteParserRule">
     <type metamodel="//@metamodelDeclarations.0">
       <type xsi:type="ecore:EClass" href="http://holla#//ConcreteParserRule"/>

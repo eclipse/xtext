@@ -23,8 +23,6 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.GeneratedMetamodel;
-import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.resource.metamodel.EClassifierInfo.EClassInfo;
 import org.eclipse.xtext.util.Pair;
@@ -61,11 +59,10 @@ public class EClassifierInfos {
 		return infoMap.put(getKey(alias, name), metatypeInfo) == null;
 	}
 
-	private Pair<String, String> getKey(AbstractMetamodelDeclaration alias, String name) {
-		if (alias == null || name == null)
-			throw new NullPointerException();
-		String uri = alias instanceof ReferencedMetamodel ? ((ReferencedMetamodel)alias).getUri() : ((GeneratedMetamodel) alias).getNsURI();
-		return new Pair<String, String>(uri, name);
+	private Pair<String, String> getKey(AbstractMetamodelDeclaration metamodelDecl, String name) {
+		if (metamodelDecl == null || name == null)
+			throw new NullPointerException("metamodelDecl: " + metamodelDecl + " / name: " + name);
+		return new Pair<String, String>(metamodelDecl.getEPackage().getNsURI(), name);
 	}
 
 	public EClassifierInfo getInfo(TypeRef typeRef) {
@@ -96,7 +93,7 @@ public class EClassifierInfos {
 			if (info.getEClassifier().equals(eClassifier))
 				return info;
 		}
-		return null;
+		return parent == null ? null : parent.getInfoOrNull(eClassifier);
 	}
 	
 	private EClassifierInfo getCompatibleType(EClassifierInfo infoA, EClassifierInfo infoB) {
@@ -110,7 +107,8 @@ public class EClassifierInfos {
 
 		EClassifier compatibleType = EcoreUtil2.getCompatibleType((EClass) infoA.getEClassifier(), (EClass) infoB
 				.getEClassifier());
-		return getInfo(compatibleType);
+		
+		return getInfoOrNull(compatibleType);
 	}
 
 	public EClassifierInfo getCompatibleTypeOf(Collection<EClassifierInfo> types) {
@@ -126,20 +124,15 @@ public class EClassifierInfos {
 	}
 
 	public EClassifier getCompatibleTypeNameOf(Collection<EClassifier> classifiers, boolean useParent) {
-		Collection<EClassifierInfo> types = new HashSet<EClassifierInfo>();
+		final Collection<EClassifierInfo> types = new HashSet<EClassifierInfo>();
 		for (EClassifier classifier : classifiers) {
-			EClassifierInfo info = getInfoOrNull(classifier);
-			EClassifierInfos lookUp = getParent();
-			while(info == null && lookUp != null) {
-				info = lookUp.getInfoOrNull(classifier);
-				lookUp = lookUp.getParent();
-			}
+			final EClassifierInfo info = getInfoOrNull(classifier);
 			if (info == null)
 				return null;
 			types.add(info);
 		}
 
-		EClassifierInfo compatibleType = getCompatibleTypeOf(types);
+		final EClassifierInfo compatibleType = getCompatibleTypeOf(types);
 		if (compatibleType != null)
 			return compatibleType.getEClassifier();
 		else

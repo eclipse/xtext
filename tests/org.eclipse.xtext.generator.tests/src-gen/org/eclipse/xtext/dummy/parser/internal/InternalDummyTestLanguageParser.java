@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyTestLanguage.g 2008-12-19 13:25:11
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyTestLanguage.g 2009-01-04 17:07:26
 
 package org.eclipse.xtext.dummy.parser.internal; 
 
@@ -134,17 +134,17 @@ public class InternalDummyTestLanguageParser extends AbstractAntlrParser {
             	    _fsp--;
 
 
-            	    	        currentNode = currentNode.getParent();
             	    	        if (current==null) {
             	    	            current = factory.create("Model");
-            	    	            associateNodeWithAstElement(currentNode, current);
+            	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
             	    	        try {
-            	    	        	factory.add(current, "elements", lv_elements,"Element");
+            	    	        	factory.add(current, "elements", lv_elements, "Element", currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }
+            	    	        currentNode = currentNode.getParent();
             	    	    
 
             	    }
@@ -256,7 +256,7 @@ public class InternalDummyTestLanguageParser extends AbstractAntlrParser {
                     	        }
                     	        
                     	        try {
-                    	        	factory.set(current, "optional", true,"optional");
+                    	        	factory.set(current, "optional", true, "optional", currentNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
@@ -289,7 +289,7 @@ public class InternalDummyTestLanguageParser extends AbstractAntlrParser {
             	        }
             	        
             	        try {
-            	        	factory.set(current, "name", lv_name,"ID");
+            	        	factory.set(current, "name", lv_name, "ID", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -327,7 +327,7 @@ public class InternalDummyTestLanguageParser extends AbstractAntlrParser {
             	    	        }
             	    	        
             	    	        try {
-            	    	        	factory.add(current, "descriptions", lv_descriptions,"STRING");
+            	    	        	factory.add(current, "descriptions", lv_descriptions, "STRING", currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }

@@ -13,6 +13,7 @@ import org.eclipse.xtext.builtin.conversion.XtextBuiltInConverters;
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverter;
 import org.eclipse.xtext.conversion.impl.AbstractNullSafeConverter;
+import org.eclipse.xtext.parsetree.AbstractNode;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -20,10 +21,10 @@ import org.eclipse.xtext.conversion.impl.AbstractNullSafeConverter;
 public class DatatypeRulesTestLanguageValueConverters extends XtextBuiltInConverters {
 	
 	@ValueConverter(rule = "Fraction")
-	public IValueConverter Fraction() {
-		return new AbstractNullSafeConverter(){
+	public IValueConverter<BigDecimal> Fraction() {
+		return new AbstractNullSafeConverter<BigDecimal>(){
 			@Override
-			protected Object internalToValue(String string) {
+			protected BigDecimal internalToValue(String string, AbstractNode node) {
 				String[] splitted = string.split("/");
 				if (splitted.length > 1) {
 					return new BigDecimal(splitted[0].trim()).divide(new BigDecimal(splitted[1].trim()));
@@ -33,7 +34,7 @@ public class DatatypeRulesTestLanguageValueConverters extends XtextBuiltInConver
 			}
 
 			@Override
-			protected String internalToString(Object value) {
+			protected String internalToString(BigDecimal value) {
 				BigDecimal bd = (BigDecimal) value;
 				int scale = bd.scale();
 				if (scale <= 0) {

@@ -86,7 +86,7 @@ ruleSequence returns [EObject current=null]
 ((
     { 
         temp=factory.create("Sequence");
-        factory.add(temp, "expressions",$current);
+        factory.add(temp, "expressions", $current, null /*ParserRule*/, currentNode);
         $current = temp; 
         temp = null;
         CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressionsTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
@@ -103,17 +103,17 @@ ruleSequence returns [EObject current=null]
 	    }
 	    lv_expressions=ruleAddition 
 	    {
-	        currentNode = currentNode.getParent();
 	        if ($current==null) {
 	            $current = factory.create("Sequence");
-	            associateNodeWithAstElement(currentNode, $current);
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
 	        try {
-	        	factory.add($current, "expressions", lv_expressions,"Addition");
+	        	factory.add($current, "expressions", lv_expressions, "Addition", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
+	        currentNode = currentNode.getParent();
 	    }
 	
 ))*);
@@ -146,7 +146,7 @@ ruleAddition returns [EObject current=null]
 (((
     { 
         temp=factory.create("Op");
-        factory.add(temp, "values",$current);
+        factory.add(temp, "values", $current, null /*ParserRule*/, currentNode);
         $current = temp; 
         temp = null;
         CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressionsTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
@@ -174,7 +174,7 @@ ruleAddition returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "operator", input.LT(-1),null);
+	        	factory.set($current, "operator", input.LT(-1), null, currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -188,17 +188,17 @@ ruleAddition returns [EObject current=null]
 	    }
 	    lv_values=ruleMultiplication 
 	    {
-	        currentNode = currentNode.getParent();
 	        if ($current==null) {
 	            $current = factory.create("Expression");
-	            associateNodeWithAstElement(currentNode, $current);
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
 	        try {
-	        	factory.add($current, "values", lv_values,"Multiplication");
+	        	factory.add($current, "values", lv_values, "Multiplication", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
+	        currentNode = currentNode.getParent();
 	    }
 	
 ))*);
@@ -231,7 +231,7 @@ ruleMultiplication returns [EObject current=null]
 (((
     { 
         temp=factory.create("Op");
-        factory.add(temp, "values",$current);
+        factory.add(temp, "values", $current, null /*ParserRule*/, currentNode);
         $current = temp; 
         temp = null;
         CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressionsTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
@@ -259,7 +259,7 @@ ruleMultiplication returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "operator", input.LT(-1),null);
+	        	factory.set($current, "operator", input.LT(-1), null, currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -273,17 +273,17 @@ ruleMultiplication returns [EObject current=null]
 	    }
 	    lv_values=ruleTerm 
 	    {
-	        currentNode = currentNode.getParent();
 	        if ($current==null) {
 	            $current = factory.create("Expression");
-	            associateNodeWithAstElement(currentNode, $current);
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
 	        try {
-	        	factory.add($current, "values", lv_values,"Term");
+	        	factory.add($current, "values", lv_values, "Term", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
+	        currentNode = currentNode.getParent();
 	    }
 	
 ))*);
@@ -355,7 +355,7 @@ ruleAtom returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "name", lv_name,"ID");
+	        	factory.set($current, "name", lv_name, "ID", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }

@@ -66,7 +66,7 @@ public class DefaultContentAssistCalculator extends XtextSwitch<List<AbstractEle
 		 * in case of a crossreference which isnt linked properly we evaluate or
 		 * propose it again
 		 */
-		if (referenceNode.getGrammarElement() instanceof CrossReference && !isLinked(referenceNode)) {
+		if (referenceNode != null && referenceNode.getGrammarElement() instanceof CrossReference && !isLinked(referenceNode)) {
 			nextValidElementSet.add(getAbstractElement(referenceNode));
 			nextValidElementSet.addAll(ParseTreeUtil.getElementSetValidFromOffset(contentAssistContext.getRootNode(),
 					referenceNode, contentAssistContext.getOffSet()));
@@ -91,7 +91,7 @@ public class DefaultContentAssistCalculator extends XtextSwitch<List<AbstractEle
 				nextValidElementSet.add(getAbstractElement(referenceNode));
 			}
 		}
-		else {
+		else if (referenceNode != null){
 			nextValidElementSet = ParseTreeUtil.getElementSetValidFromOffset(contentAssistContext.getRootNode(),
 					referenceNode, contentAssistContext.getOffSet());
 		}

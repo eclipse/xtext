@@ -1,14 +1,24 @@
+/*******************************************************************************
+ * Copyright (c) itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
 package org.eclipse.xtext.conversion;
 
-public interface IValueConverter {
-	IValueConverter NO_OP_CONVERTER = new IValueConverter() {
-		public String toString(Object value) {
-			return (String) value;
+import org.eclipse.xtext.parsetree.AbstractNode;
+
+public interface IValueConverter<Type> {
+	IValueConverter<? extends Object> NO_OP_CONVERTER = new IValueConverter<String>() {
+		public String toString(String value) {
+			return value;
 		}
-		public Object toValue(String string) {
+		public String toValue(String string, AbstractNode node) {
 			return string;
 		}
 	};
-	public Object toValue(String string);
-	public String toString(Object value);
+	public Type toValue(String string, AbstractNode node);
+	public String toString(Type value);
 }

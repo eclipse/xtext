@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractMetamodelDeclarationImpl.java,v 1.11 2008/12/02 20:42:07 szarnekow Exp $
+ * $Id: AbstractMetamodelDeclarationImpl.java,v 1.12 2009/01/05 10:44:00 szarnekow Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -10,6 +10,8 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
@@ -23,6 +25,7 @@ import org.eclipse.xtext.XtextPackage;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipse.xtext.impl.AbstractMetamodelDeclarationImpl#getEPackage <em>EPackage</em>}</li>
  *   <li>{@link org.eclipse.xtext.impl.AbstractMetamodelDeclarationImpl#getAlias <em>Alias</em>}</li>
  * </ul>
  * </p>
@@ -32,6 +35,16 @@ import org.eclipse.xtext.XtextPackage;
 public class AbstractMetamodelDeclarationImpl extends EObjectImpl implements AbstractMetamodelDeclaration
 {
   /**
+	 * The cached value of the '{@link #getEPackage() <em>EPackage</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEPackage()
+	 * @generated
+	 * @ordered
+	 */
+	protected EPackage ePackage;
+
+		/**
 	 * The default value of the '{@link #getAlias() <em>Alias</em>}' attribute.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -74,6 +87,44 @@ public class AbstractMetamodelDeclarationImpl extends EObjectImpl implements Abs
 
   /**
 	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EPackage getEPackage() {
+		if (ePackage != null && ePackage.eIsProxy()) {
+			InternalEObject oldEPackage = (InternalEObject)ePackage;
+			ePackage = (EPackage)eResolveProxy(oldEPackage);
+			if (ePackage != oldEPackage) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, XtextPackage.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE, oldEPackage, ePackage));
+			}
+		}
+		return ePackage;
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EPackage basicGetEPackage() {
+		return ePackage;
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setEPackage(EPackage newEPackage) {
+		EPackage oldEPackage = ePackage;
+		ePackage = newEPackage;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE, oldEPackage, ePackage));
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -104,6 +155,9 @@ public class AbstractMetamodelDeclarationImpl extends EObjectImpl implements Abs
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
 		switch (featureID) {
+			case XtextPackage.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE:
+				if (resolve) return getEPackage();
+				return basicGetEPackage();
 			case XtextPackage.ABSTRACT_METAMODEL_DECLARATION__ALIAS:
 				return getAlias();
 		}
@@ -119,6 +173,9 @@ public class AbstractMetamodelDeclarationImpl extends EObjectImpl implements Abs
   public void eSet(int featureID, Object newValue)
   {
 		switch (featureID) {
+			case XtextPackage.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE:
+				setEPackage((EPackage)newValue);
+				return;
 			case XtextPackage.ABSTRACT_METAMODEL_DECLARATION__ALIAS:
 				setAlias((String)newValue);
 				return;
@@ -135,6 +192,9 @@ public class AbstractMetamodelDeclarationImpl extends EObjectImpl implements Abs
   public void eUnset(int featureID)
   {
 		switch (featureID) {
+			case XtextPackage.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE:
+				setEPackage((EPackage)null);
+				return;
 			case XtextPackage.ABSTRACT_METAMODEL_DECLARATION__ALIAS:
 				setAlias(ALIAS_EDEFAULT);
 				return;
@@ -151,6 +211,8 @@ public class AbstractMetamodelDeclarationImpl extends EObjectImpl implements Abs
   public boolean eIsSet(int featureID)
   {
 		switch (featureID) {
+			case XtextPackage.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE:
+				return ePackage != null;
 			case XtextPackage.ABSTRACT_METAMODEL_DECLARATION__ALIAS:
 				return ALIAS_EDEFAULT == null ? alias != null : !ALIAS_EDEFAULT.equals(alias);
 		}

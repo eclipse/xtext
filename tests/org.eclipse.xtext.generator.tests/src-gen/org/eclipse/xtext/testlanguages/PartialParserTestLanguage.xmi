@@ -5,7 +5,9 @@
   <idElements>xtext</idElements>
   <idElements>testlanguages</idElements>
   <idElements>PartialParserTestLanguage</idElements>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="partialParserTestLanguage" nsURI="http://example.xtext.org/PartialParserTestLanguage"/>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="partialParserTestLanguage">
+    <ePackage href="http://example.xtext.org/PartialParserTestLanguage#/"/>
+  </metamodelDeclarations>
   <rules xsi:type="xtext:ParserRule" name="Container">
     <type metamodel="//@metamodelDeclarations.0">
       <type xsi:type="ecore:EClass" href="http://example.xtext.org/PartialParserTestLanguage#//Container"/>

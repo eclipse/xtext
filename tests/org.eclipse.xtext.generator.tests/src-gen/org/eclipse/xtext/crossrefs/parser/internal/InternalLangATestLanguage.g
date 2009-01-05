@@ -82,17 +82,17 @@ ruleMain returns [EObject current=null]
 	    }
 	    lv_imports=ruleImport 
 	    {
-	        currentNode = currentNode.getParent();
 	        if ($current==null) {
 	            $current = factory.create("Main");
-	            associateNodeWithAstElement(currentNode, $current);
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
 	        try {
-	        	factory.add($current, "imports", lv_imports,"Import");
+	        	factory.add($current, "imports", lv_imports, "Import", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
+	        currentNode = currentNode.getParent();
 	    }
 	
 )*(	
@@ -103,17 +103,17 @@ ruleMain returns [EObject current=null]
 	    }
 	    lv_types=ruleType 
 	    {
-	        currentNode = currentNode.getParent();
 	        if ($current==null) {
 	            $current = factory.create("Main");
-	            associateNodeWithAstElement(currentNode, $current);
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
 	        try {
-	        	factory.add($current, "types", lv_types,"Type");
+	        	factory.add($current, "types", lv_types, "Type", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
+	        currentNode = currentNode.getParent();
 	    }
 	
 )*);
@@ -152,7 +152,7 @@ ruleImport returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "uri", lv_uri,"STRING");
+	        	factory.set($current, "uri", lv_uri, "STRING", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -194,7 +194,7 @@ ruleType returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "name", lv_name,"ID");
+	        	factory.set($current, "name", lv_name, "ID", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }

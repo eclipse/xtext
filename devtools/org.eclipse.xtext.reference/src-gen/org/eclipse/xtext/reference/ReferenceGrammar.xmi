@@ -5,8 +5,12 @@
   <idElements>xtext</idElements>
   <idElements>reference</idElements>
   <idElements>ReferenceGrammar</idElements>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="ReferenceGrammar" nsURI="http://eclipse.org/xtext/reference/ReferenceGrammar"/>
-  <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="ReferenceModel" uri="http://eclipse.org/xtext/reference/ReferenceModel"/>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="ReferenceGrammar">
+    <ePackage href="http://eclipse.org/xtext/reference/ReferenceGrammar#/"/>
+  </metamodelDeclarations>
+  <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="ReferenceModel">
+    <ePackage href="http://eclipse.org/xtext/reference/ReferenceModel#/"/>
+  </metamodelDeclarations>
   <rules xsi:type="xtext:ParserRule" name="Spielplatz">
     <type metamodel="//@metamodelDeclarations.0">
       <type xsi:type="ecore:EClass" href="http://eclipse.org/xtext/reference/ReferenceGrammar#//Spielplatz"/>

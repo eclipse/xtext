@@ -14,6 +14,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
@@ -23,14 +24,14 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextPackage;
+import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.crossref.IScope;
 import org.eclipse.xtext.crossref.IScopedElement;
 import org.eclipse.xtext.crossref.impl.DefaultScopeProvider;
 import org.eclipse.xtext.crossref.impl.ScopedElement;
 import org.eclipse.xtext.crossref.impl.SimpleCachingScope;
 import org.eclipse.xtext.crossref.impl.SimpleScope;
-import org.eclipse.xtext.resource.metamodel.IDeclaredMetamodelAccess;
-import org.eclipse.xtext.resource.metamodel.DeclaredMetamodelAccessFactory;
+import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.util.CollectionUtils;
 import org.eclipse.xtext.util.Function;
 
@@ -41,6 +42,9 @@ public class XtextScopeProvider extends DefaultScopeProvider {
 
 	private static final Logger log = Logger.getLogger(XtextScopeProvider.class);
 	
+	@Inject
+	private IValueConverterService valueConverterService;
+	
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
 		if (reference == XtextPackage.eINSTANCE.getTypeRef_Type()) {
@@ -48,7 +52,9 @@ public class XtextScopeProvider extends DefaultScopeProvider {
 				final TypeRef typeRef = (TypeRef) context;
 				final AbstractMetamodelDeclaration metaModel = typeRef.getMetamodel();
 				if (metaModel != null) {
-					return createClassifierScope(DeclaredMetamodelAccessFactory.getAccessTo(metaModel).getEClassifiers());
+					EPackage pack = metaModel.getEPackage();
+					if (pack != null)
+						return createClassifierScope(pack.getEClassifiers());
 				} else if (metaModel == null) {
 					return createReferencedPackagesScope(GrammarUtil.getGrammar(context));
 				}
@@ -56,7 +62,9 @@ public class XtextScopeProvider extends DefaultScopeProvider {
 				return createReferencedPackagesScope(GrammarUtil.getGrammar(context));
 			} 
 			return IScope.NULLSCOPE;
-		} else 
+		} else if (reference == XtextPackage.eINSTANCE.getAbstractMetamodelDeclaration_EPackage()) {
+			return new StringScope(EPackage.Registry.INSTANCE.keySet(), valueConverterService);
+		} else
 			return super.getScope(context, reference);
 	}
 
@@ -72,8 +80,8 @@ public class XtextScopeProvider extends DefaultScopeProvider {
 	protected IScope createReferencedPackagesScope(Grammar g) {
 		final Collection<EClassifier> allClassifiers = new ArrayList<EClassifier>();
 		for(AbstractMetamodelDeclaration decl: g.getMetamodelDeclarations()) {
-			final IDeclaredMetamodelAccess access = DeclaredMetamodelAccessFactory.getAccessTo(decl);
-			CollectionUtils.addAll(allClassifiers, access.getEClassifiers());
+			if (decl.getEPackage() != null)
+				CollectionUtils.addAll(allClassifiers, decl.getEPackage().getEClassifiers());
 		}
 		return createClassifierScope(allClassifiers);
 	}

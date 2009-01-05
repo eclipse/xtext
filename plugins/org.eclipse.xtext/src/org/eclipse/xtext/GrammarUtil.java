@@ -33,6 +33,7 @@ import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.resource.ClasspathUriResolutionException;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Strings;
 
@@ -158,11 +159,17 @@ public class GrammarUtil {
 		ResourceSet resourceSet = _this.eResource().getResourceSet();
 		URI uri = getClasspathURIForLanguageId(id);
 		// uri = uri.appendFragment("");
-		Resource resource = resourceSet.getResource(uri, true);
+		Resource resource = null;
+		try {
+			resource = resourceSet.getResource(uri, true);
+		} catch(ClasspathUriResolutionException ex) {
+			throw new IllegalArgumentException("Couldn't find grammar for super language " + id, ex);
+		}
 		if (resource == null)
 			throw new IllegalArgumentException("Couldn't find grammar for super language " + id);
 		Grammar grammar = (Grammar) resource.getContents().get(0);
 		return grammar;
+		
 	}
 
 	public static String getSuperGrammarId(Grammar _this) {
@@ -225,7 +232,9 @@ public class GrammarUtil {
 		Grammar g = _this;
 		while(g != null) {
 			for(AbstractMetamodelDeclaration decl: g.getMetamodelDeclarations()) {
-				if (pairs.add(getURIAliasPair(decl))) {
+				if (decl.getEPackage() == null)
+					result.add(decl);
+				else if (pairs.add(getURIAliasPair(decl))) {
 					result.add(decl);
 				}
 			}
@@ -240,11 +249,7 @@ public class GrammarUtil {
 	}
 	
 	private static Pair<String, String> getURIAliasPair(AbstractMetamodelDeclaration decl) {
-		if (decl instanceof GeneratedMetamodel) {
-			return new Pair<String, String>(((GeneratedMetamodel) decl).getNsURI(), Strings.emptyIfNull(decl.getAlias()));
-		} else {
-			return new Pair<String, String>(((ReferencedMetamodel) decl).getUri(), Strings.emptyIfNull(decl.getAlias()));
-		}
+		return new Pair<String, String>(decl.getEPackage().getNsURI(), Strings.emptyIfNull(decl.getAlias()));
 	}
 	
 	public static boolean isAbstract(Grammar grammarModel) {
@@ -343,11 +348,11 @@ public class GrammarUtil {
 		return Strings.isEmpty(alias) ? Strings.isEmpty(alias2) : alias.equals(alias2);
 	}
 	
-	public static AbstractMetamodelDeclaration findDefaultMetaModel(Grammar grammar, boolean useInherited) {
-		return findMetaModel(grammar, "", useInherited);
+	public static AbstractMetamodelDeclaration findDefaultMetamodel(Grammar grammar, boolean useInherited) {
+		return findMetamodel(grammar, "", useInherited);
 	}
 	
-	public static AbstractMetamodelDeclaration findMetaModel(Grammar grammar, String alias, boolean useInherited) {
+	public static AbstractMetamodelDeclaration findMetamodel(Grammar grammar, String alias, boolean useInherited) {
 		final List<AbstractMetamodelDeclaration> declarations = 
 			useInherited ? allMetamodelDeclarations(grammar) : grammar.getMetamodelDeclarations();
 		if (declarations.size() == 1 && Strings.isEmpty(alias))

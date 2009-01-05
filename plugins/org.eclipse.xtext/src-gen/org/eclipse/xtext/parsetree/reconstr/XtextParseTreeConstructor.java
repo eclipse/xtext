@@ -737,12 +737,12 @@ protected class AbstractMetamodelDeclaration_1_RuleCall_ReferencedMetamodel exte
 
 /************ begin Rule GeneratedMetamodel ****************
  *
- * GeneratedMetamodel : 'generate' name = ID nsURI = STRING ( 'as' alias = ID ) ? ;
+ * GeneratedMetamodel : 'generate' name = ID ePackage = [ EPackage | STRING ] ( 'as' alias = ID ) ? ;
  *
  **/
 
 
-// 'generate' name = ID nsURI = STRING ( 'as' alias = ID ) ?
+// 'generate' name = ID ePackage = [ EPackage | STRING ] ( 'as' alias = ID ) ?
 protected class GeneratedMetamodel_Group extends GroupToken {
 	
 	public GeneratedMetamodel_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -770,7 +770,7 @@ protected class GeneratedMetamodel_Group extends GroupToken {
 	}
 }
 
-// 'generate' name = ID nsURI = STRING
+// 'generate' name = ID ePackage = [ EPackage | STRING ]
 protected class GeneratedMetamodel_0_Group extends GroupToken {
 	
 	public GeneratedMetamodel_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -782,7 +782,7 @@ protected class GeneratedMetamodel_0_Group extends GroupToken {
 	}
 		
 	protected Solution createSolution() {	
-		Solution s1 = new GeneratedMetamodel_0_1_Assignment_nsURI(current, this).firstSolution();
+		Solution s1 = new GeneratedMetamodel_0_1_Assignment_ePackage(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new GeneratedMetamodel_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
@@ -862,24 +862,27 @@ protected class GeneratedMetamodel_0_0_1_Assignment_name extends AssignmentToken
 }
 
 
-// nsURI = STRING
-protected class GeneratedMetamodel_0_1_Assignment_nsURI extends AssignmentToken  {
+// ePackage = [ EPackage | STRING ]
+protected class GeneratedMetamodel_0_1_Assignment_ePackage extends AssignmentToken  {
 	
-	public GeneratedMetamodel_0_1_Assignment_nsURI(IInstanceDescription curr, AbstractToken pred) {
+	public GeneratedMetamodel_0_1_Assignment_ePackage(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public Assignment getGrammarElement() {
-		return XtextGrammarAccess.INSTANCE.prGeneratedMetamodel().ele01AssignmentNsURI();
+		return XtextGrammarAccess.INSTANCE.prGeneratedMetamodel().ele01AssignmentEPackage();
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("nsURI",IS_REQUIRED)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("nsURI");
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
-			type = AssignmentType.LRC;
-			element = XtextGrammarAccess.INSTANCE.prGeneratedMetamodel().ele010LexerRuleCallSTRING();
-			return new Solution(obj);
+		if((value = current.getConsumable("ePackage",IS_REQUIRED)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("ePackage");
+		if(value instanceof EObject) { // xtext::CrossReference
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf("EPackage")) {
+				type = AssignmentType.CR;
+				element = XtextGrammarAccess.INSTANCE.prGeneratedMetamodel().ele010CrossReferenceEStringEPackage(); 
+				return new Solution(obj);
+			}
 		}
 		return null;
 	}
@@ -956,12 +959,12 @@ protected class GeneratedMetamodel_1_1_Assignment_alias extends AssignmentToken 
 
 /************ begin Rule ReferencedMetamodel ****************
  *
- * ReferencedMetamodel : 'import' uri = STRING ( 'as' alias = ID ) ? ;
+ * ReferencedMetamodel : 'import' ePackage = [ EPackage | STRING ] ( 'as' alias = ID ) ? ;
  *
  **/
 
 
-// 'import' uri = STRING ( 'as' alias = ID ) ?
+// 'import' ePackage = [ EPackage | STRING ] ( 'as' alias = ID ) ?
 protected class ReferencedMetamodel_Group extends GroupToken {
 	
 	public ReferencedMetamodel_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -989,7 +992,7 @@ protected class ReferencedMetamodel_Group extends GroupToken {
 	}
 }
 
-// 'import' uri = STRING
+// 'import' ePackage = [ EPackage | STRING ]
 protected class ReferencedMetamodel_0_Group extends GroupToken {
 	
 	public ReferencedMetamodel_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1001,7 +1004,7 @@ protected class ReferencedMetamodel_0_Group extends GroupToken {
 	}
 		
 	protected Solution createSolution() {	
-		Solution s1 = new ReferencedMetamodel_0_1_Assignment_uri(current, this).firstSolution();
+		Solution s1 = new ReferencedMetamodel_0_1_Assignment_ePackage(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new ReferencedMetamodel_0_0_Keyword_import(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
@@ -1029,24 +1032,27 @@ protected class ReferencedMetamodel_0_0_Keyword_import extends KeywordToken  {
 	}	
 }
 
-// uri = STRING
-protected class ReferencedMetamodel_0_1_Assignment_uri extends AssignmentToken  {
+// ePackage = [ EPackage | STRING ]
+protected class ReferencedMetamodel_0_1_Assignment_ePackage extends AssignmentToken  {
 	
-	public ReferencedMetamodel_0_1_Assignment_uri(IInstanceDescription curr, AbstractToken pred) {
+	public ReferencedMetamodel_0_1_Assignment_ePackage(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public Assignment getGrammarElement() {
-		return XtextGrammarAccess.INSTANCE.prReferencedMetamodel().ele01AssignmentUri();
+		return XtextGrammarAccess.INSTANCE.prReferencedMetamodel().ele01AssignmentEPackage();
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("uri",IS_REQUIRED)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("uri");
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
-			type = AssignmentType.LRC;
-			element = XtextGrammarAccess.INSTANCE.prReferencedMetamodel().ele010LexerRuleCallSTRING();
-			return new Solution(obj);
+		if((value = current.getConsumable("ePackage",IS_REQUIRED)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("ePackage");
+		if(value instanceof EObject) { // xtext::CrossReference
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf("EPackage")) {
+				type = AssignmentType.CR;
+				element = XtextGrammarAccess.INSTANCE.prReferencedMetamodel().ele010CrossReferenceEStringEPackage(); 
+				return new Solution(obj);
+			}
 		}
 		return null;
 	}

@@ -6,7 +6,9 @@
   <idElements>parsetree</idElements>
   <idElements>formatter</idElements>
   <idElements>FormatterTestLanguage</idElements>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="formattertestlanguage" nsURI="http://simple/formattertestlanguage"/>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="formattertestlanguage">
+    <ePackage href="http://simple/formattertestlanguage#/"/>
+  </metamodelDeclarations>
   <rules xsi:type="xtext:ParserRule" name="Root">
     <type metamodel="//@metamodelDeclarations.0">
       <type xsi:type="ecore:EClass" href="http://simple/formattertestlanguage#//Root"/>

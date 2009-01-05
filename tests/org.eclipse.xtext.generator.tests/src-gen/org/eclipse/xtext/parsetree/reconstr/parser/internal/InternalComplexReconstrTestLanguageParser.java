@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTestLanguage.g 2008-12-19 13:25:14
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTestLanguage.g 2009-01-04 17:07:28
 
 package org.eclipse.xtext.parsetree.reconstr.parser.internal; 
 
@@ -158,7 +158,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractAntlrPars
             	    {
             	     
             	            temp=factory.create("Add");
-            	            factory.add(temp, "addOperands",current);
+            	            factory.add(temp, "addOperands", current, null /*ParserRule*/, currentNode);
             	            current = temp; 
             	            temp = null;
             	            CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.1/@groups.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
@@ -188,17 +188,17 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractAntlrPars
             	    _fsp--;
 
 
-            	    	        currentNode = currentNode.getParent();
             	    	        if (current==null) {
             	    	            current = factory.create("Expression");
-            	    	            associateNodeWithAstElement(currentNode, current);
+            	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
             	    	        try {
-            	    	        	factory.add(current, "addOperands", lv_addOperands,"Term");
+            	    	        	factory.add(current, "addOperands", lv_addOperands, "Term", currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }
+            	    	        currentNode = currentNode.getParent();
             	    	    
 
             	    }
@@ -223,7 +223,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractAntlrPars
             	    {
             	     
             	            temp=factory.create("Minus");
-            	            factory.add(temp, "minusOperands",current);
+            	            factory.add(temp, "minusOperands", current, null /*ParserRule*/, currentNode);
             	            current = temp; 
             	            temp = null;
             	            CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.1/@groups.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
@@ -253,17 +253,17 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractAntlrPars
             	    _fsp--;
 
 
-            	    	        currentNode = currentNode.getParent();
             	    	        if (current==null) {
             	    	            current = factory.create("Expression");
-            	    	            associateNodeWithAstElement(currentNode, current);
+            	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
             	    	        try {
-            	    	        	factory.add(current, "minusOperands", lv_minusOperands,"Term");
+            	    	        	factory.add(current, "minusOperands", lv_minusOperands, "Term", currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }
+            	    	        currentNode = currentNode.getParent();
             	    	    
 
             	    }
@@ -483,7 +483,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractAntlrPars
             	        }
             	        
             	        try {
-            	        	factory.set(current, "name", lv_name,"ID");
+            	        	factory.set(current, "name", lv_name, "ID", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -614,7 +614,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractAntlrPars
                     	        }
                     	        
                     	        try {
-                    	        	factory.set(current, "em", input.LT(-1),"!");
+                    	        	factory.set(current, "em", input.LT(-1), "!", currentNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
@@ -707,7 +707,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractAntlrPars
             	        }
             	        
             	        try {
-            	        	factory.add(current, "name", lv_name,"ID");
+            	        	factory.add(current, "name", lv_name, "ID", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }

@@ -175,20 +175,20 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		private final Keyword c000KeywordGenerate = (Keyword)c00Group.eContents().get(0);
 		private final Assignment c001AssignmentName = (Assignment)c00Group.eContents().get(1);
 		private final RuleCall c0010LexerRuleCallID = (RuleCall)c001AssignmentName.eContents().get(0);
-		private final Assignment c01AssignmentNsURI = (Assignment)c0Group.eContents().get(1);
-		private final RuleCall c010LexerRuleCallSTRING = (RuleCall)c01AssignmentNsURI.eContents().get(0);
+		private final Assignment c01AssignmentEPackage = (Assignment)c0Group.eContents().get(1);
+		private final CrossReference c010CrossReferenceEStringEPackage = (CrossReference)c01AssignmentEPackage.eContents().get(0);
 		private final Group c1Group = (Group)cGroup.eContents().get(1);
 		private final Keyword c10KeywordAs = (Keyword)c1Group.eContents().get(0);
 		private final Assignment c11AssignmentAlias = (Assignment)c1Group.eContents().get(1);
 		private final RuleCall c110LexerRuleCallID = (RuleCall)c11AssignmentAlias.eContents().get(0);
 		
-		// GeneratedMetamodel : 'generate' name = ID nsURI = STRING ( 'as' alias = ID ) ? ;
+		// GeneratedMetamodel : 'generate' name = ID ePackage = [ EPackage | STRING ] ( 'as' alias = ID ) ? ;
 		public ParserRule getRule() { return rule; }
 
-		// 'generate' name = ID nsURI = STRING ( 'as' alias = ID ) ?
+		// 'generate' name = ID ePackage = [ EPackage | STRING ] ( 'as' alias = ID ) ?
 		public Group eleGroup() { return cGroup; }
 
-		// 'generate' name = ID nsURI = STRING
+		// 'generate' name = ID ePackage = [ EPackage | STRING ]
 		public Group ele0Group() { return c0Group; }
 
 		// 'generate' name = ID
@@ -203,11 +203,11 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		// ID
 		public RuleCall ele0010LexerRuleCallID() { return c0010LexerRuleCallID; }
 
-		// nsURI = STRING
-		public Assignment ele01AssignmentNsURI() { return c01AssignmentNsURI; }
+		// ePackage = [ EPackage | STRING ]
+		public Assignment ele01AssignmentEPackage() { return c01AssignmentEPackage; }
 
-		// STRING
-		public RuleCall ele010LexerRuleCallSTRING() { return c010LexerRuleCallSTRING; }
+		// [ EPackage | STRING ]
+		public CrossReference ele010CrossReferenceEStringEPackage() { return c010CrossReferenceEStringEPackage; }
 
 		// ( 'as' alias = ID ) ?
 		public Group ele1Group() { return c1Group; }
@@ -227,30 +227,30 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Keyword c00KeywordImport = (Keyword)c0Group.eContents().get(0);
-		private final Assignment c01AssignmentUri = (Assignment)c0Group.eContents().get(1);
-		private final RuleCall c010LexerRuleCallSTRING = (RuleCall)c01AssignmentUri.eContents().get(0);
+		private final Assignment c01AssignmentEPackage = (Assignment)c0Group.eContents().get(1);
+		private final CrossReference c010CrossReferenceEStringEPackage = (CrossReference)c01AssignmentEPackage.eContents().get(0);
 		private final Group c1Group = (Group)cGroup.eContents().get(1);
 		private final Keyword c10KeywordAs = (Keyword)c1Group.eContents().get(0);
 		private final Assignment c11AssignmentAlias = (Assignment)c1Group.eContents().get(1);
 		private final RuleCall c110LexerRuleCallID = (RuleCall)c11AssignmentAlias.eContents().get(0);
 		
-		// ReferencedMetamodel : 'import' uri = STRING ( 'as' alias = ID ) ? ;
+		// ReferencedMetamodel : 'import' ePackage = [ EPackage | STRING ] ( 'as' alias = ID ) ? ;
 		public ParserRule getRule() { return rule; }
 
-		// 'import' uri = STRING ( 'as' alias = ID ) ?
+		// 'import' ePackage = [ EPackage | STRING ] ( 'as' alias = ID ) ?
 		public Group eleGroup() { return cGroup; }
 
-		// 'import' uri = STRING
+		// 'import' ePackage = [ EPackage | STRING ]
 		public Group ele0Group() { return c0Group; }
 
 		// 'import'
 		public Keyword ele00KeywordImport() { return c00KeywordImport; }
 
-		// uri = STRING
-		public Assignment ele01AssignmentUri() { return c01AssignmentUri; }
+		// ePackage = [ EPackage | STRING ]
+		public Assignment ele01AssignmentEPackage() { return c01AssignmentEPackage; }
 
-		// STRING
-		public RuleCall ele010LexerRuleCallSTRING() { return c010LexerRuleCallSTRING; }
+		// [ EPackage | STRING ]
+		public CrossReference ele010CrossReferenceEStringEPackage() { return c010CrossReferenceEStringEPackage; }
 
 		// ( 'as' alias = ID ) ?
 		public Group ele1Group() { return c1Group; }
@@ -913,12 +913,12 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		return (pAbstractMetamodelDeclaration != null) ? pAbstractMetamodelDeclaration : (pAbstractMetamodelDeclaration = new AbstractMetamodelDeclarationElements());
 	} 
 
-	// GeneratedMetamodel : 'generate' name = ID nsURI = STRING ( 'as' alias = ID ) ? ;
+	// GeneratedMetamodel : 'generate' name = ID ePackage = [ EPackage | STRING ] ( 'as' alias = ID ) ? ;
 	public GeneratedMetamodelElements prGeneratedMetamodel() {
 		return (pGeneratedMetamodel != null) ? pGeneratedMetamodel : (pGeneratedMetamodel = new GeneratedMetamodelElements());
 	} 
 
-	// ReferencedMetamodel : 'import' uri = STRING ( 'as' alias = ID ) ? ;
+	// ReferencedMetamodel : 'import' ePackage = [ EPackage | STRING ] ( 'as' alias = ID ) ? ;
 	public ReferencedMetamodelElements prReferencedMetamodel() {
 		return (pReferencedMetamodel != null) ? pReferencedMetamodel : (pReferencedMetamodel = new ReferencedMetamodelElements());
 	} 

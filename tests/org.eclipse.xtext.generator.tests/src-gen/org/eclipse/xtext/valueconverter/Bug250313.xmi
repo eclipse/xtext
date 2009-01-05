@@ -5,7 +5,9 @@
   <idElements>xtext</idElements>
   <idElements>valueconverter</idElements>
   <idElements>Bug250313</idElements>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="bug250313" nsURI="http://org.eclipse.xtext.valueconverter.Bug250313"/>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="bug250313">
+    <ePackage href="http://org.eclipse.xtext.valueconverter.Bug250313#/"/>
+  </metamodelDeclarations>
   <rules xsi:type="xtext:ParserRule" name="Ref2">
     <type metamodel="//@metamodelDeclarations.0">
       <type xsi:type="ecore:EClass" href="http://org.eclipse.xtext.valueconverter.Bug250313#//Ref2"/>

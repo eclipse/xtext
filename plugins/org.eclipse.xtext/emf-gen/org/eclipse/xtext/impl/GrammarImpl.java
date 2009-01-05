@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: GrammarImpl.java,v 1.14 2008/12/02 20:42:07 szarnekow Exp $
+ * $Id: GrammarImpl.java,v 1.15 2009/01/05 10:44:00 szarnekow Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
+import org.eclipse.emf.ecore.util.EDataTypeEList;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -137,7 +138,7 @@ public class GrammarImpl extends EObjectImpl implements Grammar
 	 */
 	public EList<String> getSuperGrammarIdElements() {
 		if (superGrammarIdElements == null) {
-			superGrammarIdElements = new EDataTypeUniqueEList<String>(String.class, this, XtextPackage.GRAMMAR__SUPER_GRAMMAR_ID_ELEMENTS);
+			superGrammarIdElements = new EDataTypeEList<String>(String.class, this, XtextPackage.GRAMMAR__SUPER_GRAMMAR_ID_ELEMENTS);
 		}
 		return superGrammarIdElements;
 	}
@@ -150,7 +151,7 @@ public class GrammarImpl extends EObjectImpl implements Grammar
   public EList<String> getIdElements()
   {
 		if (idElements == null) {
-			idElements = new EDataTypeUniqueEList<String>(String.class, this, XtextPackage.GRAMMAR__ID_ELEMENTS);
+			idElements = new EDataTypeEList<String>(String.class, this, XtextPackage.GRAMMAR__ID_ELEMENTS);
 		}
 		return idElements;
 	}

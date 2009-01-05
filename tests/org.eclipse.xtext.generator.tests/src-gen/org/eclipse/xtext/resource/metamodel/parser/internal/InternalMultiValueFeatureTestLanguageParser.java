@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/resource/metamodel/parser/internal/InternalMultiValueFeatureTestLanguage.g 2008-12-19 13:25:23
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/resource/metamodel/parser/internal/InternalMultiValueFeatureTestLanguage.g 2009-01-04 17:07:36
 
 package org.eclipse.xtext.resource.metamodel.parser.internal; 
 
@@ -138,7 +138,7 @@ public class InternalMultiValueFeatureTestLanguageParser extends AbstractAntlrPa
             	    	        }
             	    	        
             	    	        try {
-            	    	        	factory.add(current, "featureA", lv_featureA,"ID");
+            	    	        	factory.add(current, "featureA", lv_featureA, "ID", currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }

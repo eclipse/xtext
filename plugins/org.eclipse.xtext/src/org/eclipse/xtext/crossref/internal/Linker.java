@@ -71,13 +71,13 @@ public class Linker implements ILinker {
 	}
 	
 	protected void clearReference(EObject obj, EReference ref) {
-		if (!ref.isContainment() && !ref.isContainer())
+		if (!ref.isContainment() && !ref.isContainer() && !ref.isDerived())
 			obj.eUnset(ref);
 	}
 	
 	private void setDefaultValues(EObject obj, Set<EReference> references, IDiagnosticProducer producer) {
 		for(EReference ref: obj.eClass().getEAllReferences())
-			if (!ref.isContainment() && !ref.isContainer() && !references.contains(ref) && !obj.eIsSet(ref)) {
+			if (!ref.isContainment() && !ref.isContainer() && !references.contains(ref) && !obj.eIsSet(ref) && !ref.isDerived()) {
 				producer.setTarget(obj, ref);
 				setDefaultValue(obj, ref, producer);
 			}

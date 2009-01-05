@@ -2,11 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractMetamodelDeclaration.java,v 1.11 2008/12/02 20:42:05 szarnekow Exp $
+ * $Id: AbstractMetamodelDeclaration.java,v 1.12 2009/01/05 10:44:01 szarnekow Exp $
  */
 package org.eclipse.xtext;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -16,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link org.eclipse.xtext.AbstractMetamodelDeclaration#getEPackage <em>EPackage</em>}</li>
  *   <li>{@link org.eclipse.xtext.AbstractMetamodelDeclaration#getAlias <em>Alias</em>}</li>
  * </ul>
  * </p>
@@ -27,6 +29,32 @@ import org.eclipse.emf.ecore.EObject;
 public interface AbstractMetamodelDeclaration extends EObject
 {
   /**
+	 * Returns the value of the '<em><b>EPackage</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>EPackage</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>EPackage</em>' reference.
+	 * @see #setEPackage(EPackage)
+	 * @see org.eclipse.xtext.XtextPackage#getAbstractMetamodelDeclaration_EPackage()
+	 * @model
+	 * @generated
+	 */
+	EPackage getEPackage();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.AbstractMetamodelDeclaration#getEPackage <em>EPackage</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>EPackage</em>' reference.
+	 * @see #getEPackage()
+	 * @generated
+	 */
+	void setEPackage(EPackage value);
+
+		/**
 	 * Returns the value of the '<em><b>Alias</b></em>' attribute.
 	 * <!-- begin-user-doc -->
    * <p>

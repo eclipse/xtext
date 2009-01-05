@@ -5,7 +5,9 @@
   <idElements>xtext</idElements>
   <idElements>testlanguages</idElements>
   <idElements>FowlerDslTestLanguage</idElements>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="fowlerdsl" nsURI="http://example.xtext.org/FowlerDslTestLanguage"/>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="fowlerdsl">
+    <ePackage href="http://example.xtext.org/FowlerDslTestLanguage#/"/>
+  </metamodelDeclarations>
   <rules xsi:type="xtext:ParserRule" name="Statemachine">
     <type metamodel="//@metamodelDeclarations.0">
       <type xsi:type="ecore:EClass" href="http://example.xtext.org/FowlerDslTestLanguage#//Statemachine"/>

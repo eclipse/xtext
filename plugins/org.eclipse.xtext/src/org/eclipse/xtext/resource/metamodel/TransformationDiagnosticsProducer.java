@@ -48,7 +48,7 @@ public class TransformationDiagnosticsProducer extends AbstractDiagnosticProduce
 			adapter = NodeUtil.getNodeAdapter(object);
 		}
 		if (adapter == null)
-			throw new IllegalStateException("Cannot find NodeAdapter for object: " + object.toString());
+			throw new IllegalStateException("Cannot find NodeAdapter for object: " + object);
 		setNode(adapter.getParserNode());
 	}
 

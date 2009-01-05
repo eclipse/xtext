@@ -14,10 +14,10 @@ import java.util.Iterator;
  */
 class MappingIterator<T, R> implements Iterator<R>, Iterable<R> {
 
-	private final Iterator<T> delegate;
+	private final Iterator<? extends T> delegate;
 	private final Function<T, R> mapper;
 
-	MappingIterator(Iterator<T> delegate, Function<T,R> mapper) {
+	MappingIterator(Iterator<? extends T> delegate, Function<T,R> mapper) {
 		if (delegate == null || mapper == null)
 			throw new NullPointerException("neither delegate nor mapper may be null. Delegate: " + delegate + "/ Mapper: " + mapper);
 		this.delegate = delegate;

@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalPartialParserTestLanguage.g 2008-12-19 13:25:20
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalPartialParserTestLanguage.g 2009-01-04 17:07:34
 
 package org.eclipse.xtext.testlanguages.parser.internal; 
 
@@ -145,7 +145,7 @@ public class InternalPartialParserTestLanguageParser extends AbstractAntlrParser
             	        }
             	        
             	        try {
-            	        	factory.set(current, "name", lv_name,"ID");
+            	        	factory.set(current, "name", lv_name, "ID", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -192,17 +192,17 @@ public class InternalPartialParserTestLanguageParser extends AbstractAntlrParser
             	    _fsp--;
 
 
-            	    	        currentNode = currentNode.getParent();
             	    	        if (current==null) {
             	    	            current = factory.create("Container");
-            	    	            associateNodeWithAstElement(currentNode, current);
+            	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
             	    	        try {
-            	    	        	factory.add(current, "nested", lv_nested,"Nested");
+            	    	        	factory.add(current, "nested", lv_nested, "Nested", currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }
+            	    	        currentNode = currentNode.getParent();
             	    	    
 
             	    }
@@ -224,17 +224,17 @@ public class InternalPartialParserTestLanguageParser extends AbstractAntlrParser
             	    _fsp--;
 
 
-            	    	        currentNode = currentNode.getParent();
             	    	        if (current==null) {
             	    	            current = factory.create("Container");
-            	    	            associateNodeWithAstElement(currentNode, current);
+            	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
             	    	        try {
-            	    	        	factory.add(current, "content", lv_content,"Content");
+            	    	        	factory.add(current, "content", lv_content, "Content", currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }
+            	    	        currentNode = currentNode.getParent();
             	    	    
 
             	    }
@@ -367,17 +367,17 @@ public class InternalPartialParserTestLanguageParser extends AbstractAntlrParser
             	    _fsp--;
 
 
-            	    	        currentNode = currentNode.getParent();
             	    	        if (current==null) {
             	    	            current = factory.create("Nested");
-            	    	            associateNodeWithAstElement(currentNode, current);
+            	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
             	    	        try {
-            	    	        	factory.add(current, "nested", lv_nested,"Container");
+            	    	        	factory.add(current, "nested", lv_nested, "Container", currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }
+            	    	        currentNode = currentNode.getParent();
             	    	    
 
             	    }
@@ -622,17 +622,17 @@ public class InternalPartialParserTestLanguageParser extends AbstractAntlrParser
             _fsp--;
 
 
-            	        currentNode = currentNode.getParent();
             	        if (current==null) {
             	            current = factory.create("Children");
-            	            associateNodeWithAstElement(currentNode, current);
+            	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
             	        try {
-            	        	factory.add(current, "children", lv_children,"Child");
+            	        	factory.add(current, "children", lv_children, "Child", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
+            	        currentNode = currentNode.getParent();
             	    
 
             }
@@ -670,17 +670,17 @@ public class InternalPartialParserTestLanguageParser extends AbstractAntlrParser
             	    _fsp--;
 
 
-            	    	        currentNode = currentNode.getParent();
             	    	        if (current==null) {
             	    	            current = factory.create("Children");
-            	    	            associateNodeWithAstElement(currentNode, current);
+            	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
             	    	        try {
-            	    	        	factory.add(current, "children", lv_children,"Child");
+            	    	        	factory.add(current, "children", lv_children, "Child", currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }
+            	    	        currentNode = currentNode.getParent();
             	    	    
 
             	    }
@@ -810,17 +810,17 @@ public class InternalPartialParserTestLanguageParser extends AbstractAntlrParser
             _fsp--;
 
 
-            	        currentNode = currentNode.getParent();
             	        if (current==null) {
             	            current = factory.create("Child");
-            	            associateNodeWithAstElement(currentNode, current);
+            	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
             	        try {
-            	        	factory.set(current, "value", lv_value,"Named");
+            	        	factory.set(current, "value", lv_value, "Named", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
+            	        currentNode = currentNode.getParent();
             	    
 
             }
@@ -944,17 +944,17 @@ public class InternalPartialParserTestLanguageParser extends AbstractAntlrParser
             	    _fsp--;
 
 
-            	    	        currentNode = currentNode.getParent();
             	    	        if (current==null) {
             	    	            current = factory.create("AbstractChildren");
-            	    	            associateNodeWithAstElement(currentNode, current);
+            	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
             	    	        try {
-            	    	        	factory.add(current, "abstractChildren", lv_abstractChildren,"AbstractChild");
+            	    	        	factory.add(current, "abstractChildren", lv_abstractChildren, "AbstractChild", currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }
+            	    	        currentNode = currentNode.getParent();
             	    	    
 
             	    }
@@ -1229,17 +1229,17 @@ public class InternalPartialParserTestLanguageParser extends AbstractAntlrParser
             _fsp--;
 
 
-            	        currentNode = currentNode.getParent();
             	        if (current==null) {
             	            current = factory.create("FirstConcrete");
-            	            associateNodeWithAstElement(currentNode, current);
+            	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
             	        try {
-            	        	factory.set(current, "value", lv_value,"Named");
+            	        	factory.set(current, "value", lv_value, "Named", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
+            	        currentNode = currentNode.getParent();
             	    
 
             }
@@ -1409,17 +1409,17 @@ public class InternalPartialParserTestLanguageParser extends AbstractAntlrParser
             _fsp--;
 
 
-            	        currentNode = currentNode.getParent();
             	        if (current==null) {
             	            current = factory.create("SecondConcrete");
-            	            associateNodeWithAstElement(currentNode, current);
+            	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
             	        try {
-            	        	factory.set(current, "value", lv_value,"Named");
+            	        	factory.set(current, "value", lv_value, "Named", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
+            	        currentNode = currentNode.getParent();
             	    
 
             }
@@ -1549,7 +1549,7 @@ public class InternalPartialParserTestLanguageParser extends AbstractAntlrParser
             	        }
             	        
             	        try {
-            	        	factory.set(current, "name", lv_name,"ID");
+            	        	factory.set(current, "name", lv_name, "ID", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }

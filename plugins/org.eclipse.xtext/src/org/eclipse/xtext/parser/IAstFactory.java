@@ -11,6 +11,7 @@ package org.eclipse.xtext.parser;
 import org.antlr.runtime.RecognitionException;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.service.ILanguageService;
 
 /**
@@ -36,9 +37,7 @@ public interface IAstFactory extends ILanguageService {
 	 * @param value
 	 * @throws RecognitionException 
 	 */
-	@Deprecated
-	public void set(EObject _this, String feature, Object value) throws RecognitionException;
-	public void set(EObject _this, String feature, Object value, String lexerRule) throws RecognitionException;
+	public void set(EObject _this, String feature, Object value, String lexerRule, AbstractNode node) throws RecognitionException;
 
 	/**
 	 * adds the value to the feature of _this element
@@ -47,9 +46,7 @@ public interface IAstFactory extends ILanguageService {
 	 * @param feature
 	 * @param value
 	 */
-	@Deprecated
-	public void add(EObject _this, String feature, Object value) throws RecognitionException;
-	public void add(EObject _this, String feature, Object value, String lexerRule) throws RecognitionException;
+	public void add(EObject _this, String feature, Object value, String lexerRule, AbstractNode node) throws RecognitionException;
 
 	public EClass getEClass(String fullTypeName);
 

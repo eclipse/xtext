@@ -143,7 +143,7 @@ ruleTestRequired returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "required1", lv_required1,"INT");
+	        	factory.set($current, "required1", lv_required1, "INT", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -163,7 +163,7 @@ ruleTestRequired returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "required2", lv_required2,"INT");
+	        	factory.set($current, "required2", lv_required2, "INT", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -205,7 +205,7 @@ ruleTestOptional returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "opt1", lv_opt1,"INT");
+	        	factory.set($current, "opt1", lv_opt1, "INT", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -229,7 +229,7 @@ ruleTestOptional returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "opt2", lv_opt2,"INT");
+	        	factory.set($current, "opt2", lv_opt2, "INT", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -271,7 +271,7 @@ ruleTestList returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.add($current, "item", lv_item,"INT");
+	        	factory.add($current, "item", lv_item, "INT", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }

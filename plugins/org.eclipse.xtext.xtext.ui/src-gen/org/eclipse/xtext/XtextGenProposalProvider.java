@@ -7,9 +7,12 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.ui.common.editor.contentassist.AbstractProposalProvider;
-import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
 import org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider;
+import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
 
 /**
  * Represents a generated, default implementation of interface {@link IProposalProvider}.
@@ -77,13 +80,13 @@ public class XtextGenProposalProvider  extends AbstractProposalProvider {
 		return Collections.singletonList(createCompletionProposal(assignment, "GeneratedMetamodelName", contentAssistContext));
 	}
 	
-	public List<? extends ICompletionProposal> completeGeneratedMetamodelNsURI(Assignment assignment, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeGeneratedMetamodelEPackage(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeGeneratedMetamodelNsURI feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeGeneratedMetamodelEPackage feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal(assignment, "\"GeneratedMetamodelNsURI\"", contentAssistContext));		
+		return lookupCrossReference(((CrossReference)assignment.getTerminal()), contentAssistContext);
 	}
 	
 	public List<? extends ICompletionProposal> completeGeneratedMetamodelAlias(Assignment assignment, IContentAssistContext contentAssistContext) {
@@ -95,13 +98,13 @@ public class XtextGenProposalProvider  extends AbstractProposalProvider {
 		return Collections.singletonList(createCompletionProposal(assignment, "GeneratedMetamodelAlias", contentAssistContext));
 	}
 	
-	public List<? extends ICompletionProposal> completeReferencedMetamodelUri(Assignment assignment, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeReferencedMetamodelEPackage(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeReferencedMetamodelUri feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeReferencedMetamodelEPackage feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal(assignment, "\"ReferencedMetamodelUri\"", contentAssistContext));		
+		return lookupCrossReference(((CrossReference)assignment.getTerminal()), contentAssistContext);
 	}
 	
 	public List<? extends ICompletionProposal> completeReferencedMetamodelAlias(Assignment assignment, IContentAssistContext contentAssistContext) {

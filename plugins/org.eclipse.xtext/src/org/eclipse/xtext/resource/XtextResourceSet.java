@@ -41,7 +41,7 @@ public class XtextResourceSet extends ResourceSetImpl {
             uriConverter = new ExtensibleURIConverterImpl() {
                 @Override
                 public URI normalize(URI uri) {
-                    if (ClasspathUriUtil.isClassapthUri(uri)) {
+                    if (ClasspathUriUtil.isClasspathUri(uri)) {
                         return XtextResourceSet.this.resolveClasspathURI(uri);
                     }
                     return super.normalize(uri);

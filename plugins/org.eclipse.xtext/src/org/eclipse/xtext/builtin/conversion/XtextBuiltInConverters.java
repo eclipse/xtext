@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtext.builtin.conversion;
 
 import org.eclipse.xtext.Grammar;
@@ -8,6 +15,7 @@ import org.eclipse.xtext.conversion.ValueConverter;
 import org.eclipse.xtext.conversion.impl.AbstractAnnotationBasedValueConverterService;
 import org.eclipse.xtext.conversion.impl.AbstractNullSafeConverter;
 import org.eclipse.xtext.conversion.impl.AbstractToStringConverter;
+import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.service.Inject;
 
 public class XtextBuiltInConverters extends AbstractAnnotationBasedValueConverterService {
@@ -20,15 +28,15 @@ public class XtextBuiltInConverters extends AbstractAnnotationBasedValueConverte
 	}
 	
 	@ValueConverter(rule = "ID")
-	public IValueConverter ID() {
-		return new AbstractNullSafeConverter() {
+	public IValueConverter<String> ID() {
+		return new AbstractNullSafeConverter<String>() {
 			@Override
-			protected Object internalToValue(String string) {
+			protected String internalToValue(String string, AbstractNode node) {
 				return string.startsWith("^") ? string.substring(1) : string;
 			}
 
 			@Override
-			protected String internalToString(Object value) {
+			protected String internalToString(String value) {
 				if (GrammarUtil.getAllKeywords(g).contains(value)) {
 					return "^"+value;
 				}
@@ -38,14 +46,14 @@ public class XtextBuiltInConverters extends AbstractAnnotationBasedValueConverte
 	}
 
 	@ValueConverter(rule = "STRING")
-	public IValueConverter STRING() {
-		return new AbstractNullSafeConverter() {
-			public Object internalToValue(String val) {
-				return val.substring(1, val.length() - 1);
+	public IValueConverter<String> STRING() {
+		return new AbstractNullSafeConverter<String>() {
+			protected String internalToValue(String string, AbstractNode node) {
+				return string.substring(1, string.length() - 1);
 			}
 
 			@Override
-			protected String internalToString(Object value) {
+			protected String internalToString(String value) {
 				String v = (String) value;
 				return v.indexOf('\'') == -1 ? "'" + value + "'": "\"" + value + "\"";
 			}
@@ -53,10 +61,10 @@ public class XtextBuiltInConverters extends AbstractAnnotationBasedValueConverte
 	}
 
 	@ValueConverter(rule = "INT")
-	public IValueConverter INT() {
-		return new AbstractToStringConverter() {
-			public Object internalToValue(String val) {
-				return Integer.valueOf(val);
+	public IValueConverter<Integer> INT() {
+		return new AbstractToStringConverter<Integer>() {
+			public Integer internalToValue(String string, AbstractNode node) {
+				return Integer.valueOf(string);
 			}
 		};
 	}

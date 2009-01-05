@@ -37,7 +37,8 @@ public class Xtext2ECoreInterpretationContext {
 	
 	private final Function<AbstractElement, EClassifier> classifierCalculator;
 
-	Set<EClassifierInfo> currentTypes = new HashSet<EClassifierInfo>();
+	private Set<EClassifierInfo> currentTypes = new HashSet<EClassifierInfo>();
+	
 	boolean isRuleCallAllowed = true;
 
 	private Xtext2ECoreInterpretationContext(EClassifierInfos classifierInfos) {
@@ -68,7 +69,7 @@ public class Xtext2ECoreInterpretationContext {
 	}
 
 	public void addFeature(Assignment assignment) throws TransformationException {
-		String featureName = assignment.getFeature();
+		final String featureName = assignment.getFeature();
 		boolean isMultivalue = GrammarUtil.isMultipleAssignment(assignment);
 		boolean isContainment = true;
 		EClassifierInfo featureTypeInfo;
@@ -86,7 +87,6 @@ public class Xtext2ECoreInterpretationContext {
 			isContainment = !(terminal instanceof CrossReference);
 			featureTypeInfo = getEClassifierInfoOrThrowException(type, assignment);
 		}
-
 		addFeature(featureName, featureTypeInfo, isMultivalue, isContainment, assignment);
 	}
 
@@ -98,11 +98,11 @@ public class Xtext2ECoreInterpretationContext {
 
 
 	private EClassifier getTerminalType(AbstractElement terminal) throws TransformationException {
-		EClassifier result = classifierCalculator.exec(terminal);
+		final EClassifier result = classifierCalculator.exec(terminal);
 		if (result == null) {
-			NodeAdapter adapter = NodeUtil.getNodeAdapter(terminal);
+			final NodeAdapter adapter = NodeUtil.getNodeAdapter(terminal);
 			if (adapter != null) {
-				AbstractNode node = adapter.getParserNode();
+				final AbstractNode node = adapter.getParserNode();
 				throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable, "Cannot find type for '" + node.serialize() + "'.", terminal);
 			} else
 				throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable, "Cannot find type for " + terminal.eClass().getName(), terminal);
@@ -112,12 +112,7 @@ public class Xtext2ECoreInterpretationContext {
 
 	private EClassifierInfo getEClassifierInfoOrThrowException(EClassifier type, AbstractElement parserElement)
 			throws TransformationException {
-		EClassifierInfo featureTypeInfo = eClassifierInfos.getInfoOrNull(type);
-		EClassifierInfos parent = eClassifierInfos.getParent();
-		while(featureTypeInfo == null && parent != null) {
-			featureTypeInfo = parent.getInfoOrNull(type);
-			parent = parent.getParent();
-		}
+		final EClassifierInfo featureTypeInfo = eClassifierInfos.getInfoOrNull(type);
 		if (featureTypeInfo == null) {
 			throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable, "Cannot resolve type " + type.getName(),
 					parserElement);

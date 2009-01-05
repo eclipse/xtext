@@ -129,7 +129,7 @@ ruleLine returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.add($current, "type", lv_type,"ID");
+	        	factory.add($current, "type", lv_type, "ID", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -149,7 +149,7 @@ ruleLine returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.add($current, "name", lv_name,"ID");
+	        	factory.add($current, "name", lv_name, "ID", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -189,17 +189,17 @@ ruleTestLinewrap returns [EObject current=null]
 	    }
 	    lv_items=ruleLine 
 	    {
-	        currentNode = currentNode.getParent();
 	        if ($current==null) {
 	            $current = factory.create("TestLinewrap");
-	            associateNodeWithAstElement(currentNode, $current);
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
 	        try {
-	        	factory.add($current, "items", lv_items,"Line");
+	        	factory.add($current, "items", lv_items, "Line", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
+	        currentNode = currentNode.getParent();
 	    }
 	
 )*);
@@ -236,17 +236,17 @@ ruleTestIndentation returns [EObject current=null]
 	    }
 	    lv_sub=ruleTestIndentation 
 	    {
-	        currentNode = currentNode.getParent();
 	        if ($current==null) {
 	            $current = factory.create("TestIndentation");
-	            associateNodeWithAstElement(currentNode, $current);
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
 	        try {
-	        	factory.add($current, "sub", lv_sub,"TestIndentation");
+	        	factory.add($current, "sub", lv_sub, "TestIndentation", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
+	        currentNode = currentNode.getParent();
 	    }
 	
 )
@@ -258,17 +258,17 @@ ruleTestIndentation returns [EObject current=null]
 	    }
 	    lv_items=ruleLine 
 	    {
-	        currentNode = currentNode.getParent();
 	        if ($current==null) {
 	            $current = factory.create("TestIndentation");
-	            associateNodeWithAstElement(currentNode, $current);
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
 	        try {
-	        	factory.add($current, "items", lv_items,"Line");
+	        	factory.add($current, "items", lv_items, "Line", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
+	        currentNode = currentNode.getParent();
 	    }
 	
 ))*)'}' 

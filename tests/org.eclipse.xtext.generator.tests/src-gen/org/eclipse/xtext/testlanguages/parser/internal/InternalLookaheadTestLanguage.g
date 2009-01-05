@@ -82,17 +82,17 @@ ruleEntry returns [EObject current=null]
 	    }
 	    lv_contents=ruleAlts 
 	    {
-	        currentNode = currentNode.getParent();
 	        if ($current==null) {
 	            $current = factory.create("Entry");
-	            associateNodeWithAstElement(currentNode, $current);
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
 	        try {
-	        	factory.add($current, "contents", lv_contents,"Alts");
+	        	factory.add($current, "contents", lv_contents, "Alts", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
+	        currentNode = currentNode.getParent();
 	    }
 	
 )*;
@@ -178,7 +178,7 @@ ruleLookAhead0 returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "x", input.LT(-1),"a");
+	        	factory.set($current, "x", input.LT(-1), "a", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -214,17 +214,17 @@ ruleLookAhead1 returns [EObject current=null]
 	    }
 	    lv_y=ruleLookAhead2 
 	    {
-	        currentNode = currentNode.getParent();
 	        if ($current==null) {
 	            $current = factory.create("LookAhead1");
-	            associateNodeWithAstElement(currentNode, $current);
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
 	        try {
-	        	factory.set($current, "y", lv_y,"LookAhead2");
+	        	factory.set($current, "y", lv_y, "LookAhead2", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
+	        currentNode = currentNode.getParent();
 	    }
 	
 ))(	
@@ -241,7 +241,7 @@ ruleLookAhead1 returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "x", input.LT(-1),"b");
+	        	factory.set($current, "x", input.LT(-1), "b", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -261,7 +261,7 @@ ruleLookAhead1 returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "x", input.LT(-1),"d");
+	        	factory.set($current, "x", input.LT(-1), "d", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -299,7 +299,7 @@ ruleLookAhead2 returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "z", input.LT(-1),"foo");
+	        	factory.set($current, "z", input.LT(-1), "foo", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -320,7 +320,7 @@ ruleLookAhead2 returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "z", input.LT(-1),"bar");
+	        	factory.set($current, "z", input.LT(-1), "bar", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -370,7 +370,7 @@ ruleLookAhead3 returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "x", input.LT(-1),"b");
+	        	factory.set($current, "x", input.LT(-1), "b", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -384,17 +384,17 @@ ruleLookAhead3 returns [EObject current=null]
 	    }
 	    lv_z=ruleLookAhead4 
 	    {
-	        currentNode = currentNode.getParent();
 	        if ($current==null) {
 	            $current = factory.create("LookAhead3");
-	            associateNodeWithAstElement(currentNode, $current);
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
 	        try {
-	        	factory.set($current, "z", lv_z,"LookAhead4");
+	        	factory.set($current, "z", lv_z, "LookAhead4", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
+	        currentNode = currentNode.getParent();
 	    }
 	
 ));
@@ -429,7 +429,7 @@ ruleLookAhead4 returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "x", input.LT(-1),"c");
+	        	factory.set($current, "x", input.LT(-1), "c", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -450,7 +450,7 @@ ruleLookAhead4 returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "x", input.LT(-1),"d");
+	        	factory.set($current, "x", input.LT(-1), "d", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }

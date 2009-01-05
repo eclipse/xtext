@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g 2008-12-19 13:25:18
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g 2009-01-04 17:07:32
 
 package org.eclipse.xtext.valueconverter.parser.internal; 
 
@@ -203,7 +203,7 @@ public class InternalBug250313Parser extends AbstractAntlrParser {
             	        }
             	        
             	        try {
-            	        	factory.set(current, "ref2", input.LT(-1),null);
+            	        	factory.set(current, "ref2", input.LT(-1), null, currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ReferencedMetamodel.java,v 1.10 2008/06/05 15:03:49 sefftinge Exp $
+ * $Id: ReferencedMetamodel.java,v 1.11 2009/01/05 10:44:01 szarnekow Exp $
  */
 package org.eclipse.xtext;
 
@@ -12,12 +12,6 @@ package org.eclipse.xtext;
  * A representation of the model object '<em><b>Referenced Metamodel</b></em>'.
  * <!-- end-user-doc -->
  *
- * <p>
- * The following features are supported:
- * <ul>
- *   <li>{@link org.eclipse.xtext.ReferencedMetamodel#getUri <em>Uri</em>}</li>
- * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.XtextPackage#getReferencedMetamodel()
  * @model
@@ -25,30 +19,5 @@ package org.eclipse.xtext;
  */
 public interface ReferencedMetamodel extends AbstractMetamodelDeclaration
 {
-  /**
-	 * Returns the value of the '<em><b>Uri</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Uri</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-	 * @return the value of the '<em>Uri</em>' attribute.
-	 * @see #setUri(String)
-	 * @see org.eclipse.xtext.XtextPackage#getReferencedMetamodel_Uri()
-	 * @model
-	 * @generated
-	 */
-  String getUri();
-
-  /**
-	 * Sets the value of the '{@link org.eclipse.xtext.ReferencedMetamodel#getUri <em>Uri</em>}' attribute.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Uri</em>' attribute.
-	 * @see #getUri()
-	 * @generated
-	 */
-  void setUri(String value);
 
 } // ReferencedMetamodel

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Grammar.java,v 1.14 2008/12/02 20:42:06 szarnekow Exp $
+ * $Id: Grammar.java,v 1.15 2009/01/05 10:44:01 szarnekow Exp $
  */
 package org.eclipse.xtext;
 
@@ -43,7 +43,7 @@ public interface Grammar extends EObject
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Super Grammar Id Elements</em>' attribute list.
 	 * @see org.eclipse.xtext.XtextPackage#getGrammar_SuperGrammarIdElements()
-	 * @model
+	 * @model unique="false"
 	 * @generated
 	 */
 	EList<String> getSuperGrammarIdElements();
@@ -59,7 +59,7 @@ public interface Grammar extends EObject
    * <!-- end-user-doc -->
 	 * @return the value of the '<em>Id Elements</em>' attribute list.
 	 * @see org.eclipse.xtext.XtextPackage#getGrammar_IdElements()
-	 * @model
+	 * @model unique="false"
 	 * @generated
 	 */
   EList<String> getIdElements();

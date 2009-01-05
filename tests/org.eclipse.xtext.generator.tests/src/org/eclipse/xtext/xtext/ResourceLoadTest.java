@@ -11,12 +11,19 @@ import java.io.IOException;
 
 import junit.framework.TestResult;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtext.GenerateAllTestGrammars;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
+import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
+import org.eclipse.xtext.util.CollectionUtils;
+import org.eclipse.xtext.util.Function;
+import org.eclipse.xtext.util.Pair;
 
 /**
  * Really long running smoke tests for the xtext grammar.
@@ -50,13 +57,6 @@ public class ResourceLoadTest extends AbstractGeneratorTest {
 			super.run(result);
 		}
 	}
-	
-//	@Override
-//	public void run(TestResult result) {
-//		this.clazz = GenerateAllTestGrammars.testclasses[4];
-//		initModel();
-//		super.run(result);
-//	}
 
 	@Override
 	protected void setUp() throws Exception {
@@ -96,18 +96,34 @@ public class ResourceLoadTest extends AbstractGeneratorTest {
 //			assertNoExceptionDiagnostic(r, model);
 //		}
 //	}
+//	
+//	public void testNoExceptionDiagnostics_04() throws Exception {
+//		XtextResource r = getResourceFromString(this.model);
+//		assertTrue(r.getErrors().isEmpty());
+//		CompositeNode node = r.getParseResult().getRootNode();
+//		Iterable<Pair<Integer, Integer>> nodeBounds = CollectionUtils.map(node.eAllContents(), new Function<EObject, Pair<Integer, Integer>>() {
+//			public Pair<Integer, Integer> exec(EObject param) {
+//				AbstractNode node = (AbstractNode) param;
+//				return new Pair<Integer, Integer>(node.getOffset(), node.getLength());
+//			}
+//		});
+//		for(Pair<Integer, Integer> bound: nodeBounds) {
+//			String model = this.model.substring(0, bound.getFirstElement()) + this.model.substring(bound.getFirstElement() + bound.getSecondElement());
+//			Resource res = getResourceFromString(model);
+//			assertNoExceptionDiagnostic(res, model);
+//		}
+//	}
+//	
+//	private void assertNoExceptionDiagnostic(Resource r, String model) throws Exception {
+//		for(Diagnostic d: r.getErrors()) {
+//			if (d instanceof ExceptionDiagnostic) {
+//				throw new Exception(model, ((ExceptionDiagnostic)d).getException());
+//			}
+//		}
+//	}
 	
 	public void testDummy() {
 		assertNotNull(clazz);
 	}
 	
-	private void assertNoExceptionDiagnostic(Resource r, String model) throws Exception {
-		for(Diagnostic d: r.getErrors()) {
-			if (d instanceof ExceptionDiagnostic) {
-				throw new Exception(model, ((ExceptionDiagnostic)d).getException());
-			}
-		}
-	}
-	
-
 }

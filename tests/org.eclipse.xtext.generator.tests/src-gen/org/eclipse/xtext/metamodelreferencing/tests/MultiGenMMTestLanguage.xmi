@@ -6,8 +6,12 @@
   <idElements>metamodelreferencing</idElements>
   <idElements>tests</idElements>
   <idElements>MultiGenMMTestLanguage</idElements>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="SimpleTest" nsURI="http://eclipse.org/xtext/tests/SimpleTest"/>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" alias="other" name="OtherTest" nsURI="http://eclipse.org/xtext/tests/OtherTest"/>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="SimpleTest">
+    <ePackage href="http://eclipse.org/xtext/tests/SimpleTest#/"/>
+  </metamodelDeclarations>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" alias="other" name="OtherTest">
+    <ePackage href="http://eclipse.org/xtext/tests/OtherTest#/"/>
+  </metamodelDeclarations>
   <rules xsi:type="xtext:ParserRule" name="Foo">
     <type metamodel="//@metamodelDeclarations.0">
       <type xsi:type="ecore:EClass" href="http://eclipse.org/xtext/tests/SimpleTest#//Foo"/>

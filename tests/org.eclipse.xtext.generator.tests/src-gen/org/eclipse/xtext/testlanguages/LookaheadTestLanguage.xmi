@@ -5,7 +5,9 @@
   <idElements>xtext</idElements>
   <idElements>testlanguages</idElements>
   <idElements>LookaheadTestLanguage</idElements>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="LookaheadLang" nsURI="http://www.eclipse.org/2008/xtext/LookaheadLang"/>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="LookaheadLang">
+    <ePackage href="http://www.eclipse.org/2008/xtext/LookaheadLang#/"/>
+  </metamodelDeclarations>
   <rules xsi:type="xtext:ParserRule" name="Entry">
     <type metamodel="//@metamodelDeclarations.0">
       <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/LookaheadLang#//Entry"/>

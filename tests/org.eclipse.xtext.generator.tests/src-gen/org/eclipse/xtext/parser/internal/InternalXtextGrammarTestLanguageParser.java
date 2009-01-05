@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g 2008-12-19 13:25:10
+// $ANTLR 3.0.1 ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g 2009-01-04 17:09:33
 
 package org.eclipse.xtext.parser.internal; 
 
@@ -40,7 +40,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
         
 
     public String[] getTokenNames() { return tokenNames; }
-    public String getGrammarFileName() { return "./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g"; }
+    public String getGrammarFileName() { return "../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g"; }
 
 
      
@@ -64,7 +64,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
     // $ANTLR start entryRuleGrammar
-    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:66:1: entryRuleGrammar returns [EObject current=null] : iv_ruleGrammar= ruleGrammar EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:66:1: entryRuleGrammar returns [EObject current=null] : iv_ruleGrammar= ruleGrammar EOF ;
     public final EObject entryRuleGrammar() throws RecognitionException {
         EObject current = null;
 
@@ -72,8 +72,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:66:49: (iv_ruleGrammar= ruleGrammar EOF )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:67:2: iv_ruleGrammar= ruleGrammar EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:66:49: (iv_ruleGrammar= ruleGrammar EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:67:2: iv_ruleGrammar= ruleGrammar EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleGrammar_in_entryRuleGrammar71);
@@ -99,7 +99,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
     // $ANTLR start ruleGrammar
-    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:74:1: ruleGrammar returns [EObject current=null] : ( ( ( ( ( ( (lv_abstract= 'abstract language' ) | 'language' ) (lv_idElements= RULE_ID ) ) ( '.' (lv_idElements= RULE_ID ) )* ) ( ( 'extends' (lv_superGrammarIdElements= RULE_ID ) ) ( '.' (lv_superGrammarIdElements= RULE_ID ) )* )? ) (lv_metamodelDeclarations= ruleAbstractMetamodelDeclaration )* ) (lv_rules= ruleAbstractRule )+ ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:74:1: ruleGrammar returns [EObject current=null] : ( ( ( ( ( ( (lv_abstract= 'abstract language' ) | 'language' ) (lv_idElements= RULE_ID ) ) ( '.' (lv_idElements= RULE_ID ) )* ) ( ( 'extends' (lv_superGrammarIdElements= RULE_ID ) ) ( '.' (lv_superGrammarIdElements= RULE_ID ) )* )? ) (lv_metamodelDeclarations= ruleAbstractMetamodelDeclaration )* ) (lv_rules= ruleAbstractRule )+ ) ;
     public final EObject ruleGrammar() throws RecognitionException {
         EObject current = null;
 
@@ -113,25 +113,25 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:76:33: ( ( ( ( ( ( ( (lv_abstract= 'abstract language' ) | 'language' ) (lv_idElements= RULE_ID ) ) ( '.' (lv_idElements= RULE_ID ) )* ) ( ( 'extends' (lv_superGrammarIdElements= RULE_ID ) ) ( '.' (lv_superGrammarIdElements= RULE_ID ) )* )? ) (lv_metamodelDeclarations= ruleAbstractMetamodelDeclaration )* ) (lv_rules= ruleAbstractRule )+ ) )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:77:1: ( ( ( ( ( ( (lv_abstract= 'abstract language' ) | 'language' ) (lv_idElements= RULE_ID ) ) ( '.' (lv_idElements= RULE_ID ) )* ) ( ( 'extends' (lv_superGrammarIdElements= RULE_ID ) ) ( '.' (lv_superGrammarIdElements= RULE_ID ) )* )? ) (lv_metamodelDeclarations= ruleAbstractMetamodelDeclaration )* ) (lv_rules= ruleAbstractRule )+ )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:76:33: ( ( ( ( ( ( ( (lv_abstract= 'abstract language' ) | 'language' ) (lv_idElements= RULE_ID ) ) ( '.' (lv_idElements= RULE_ID ) )* ) ( ( 'extends' (lv_superGrammarIdElements= RULE_ID ) ) ( '.' (lv_superGrammarIdElements= RULE_ID ) )* )? ) (lv_metamodelDeclarations= ruleAbstractMetamodelDeclaration )* ) (lv_rules= ruleAbstractRule )+ ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:77:1: ( ( ( ( ( ( (lv_abstract= 'abstract language' ) | 'language' ) (lv_idElements= RULE_ID ) ) ( '.' (lv_idElements= RULE_ID ) )* ) ( ( 'extends' (lv_superGrammarIdElements= RULE_ID ) ) ( '.' (lv_superGrammarIdElements= RULE_ID ) )* )? ) (lv_metamodelDeclarations= ruleAbstractMetamodelDeclaration )* ) (lv_rules= ruleAbstractRule )+ )
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:77:1: ( ( ( ( ( ( (lv_abstract= 'abstract language' ) | 'language' ) (lv_idElements= RULE_ID ) ) ( '.' (lv_idElements= RULE_ID ) )* ) ( ( 'extends' (lv_superGrammarIdElements= RULE_ID ) ) ( '.' (lv_superGrammarIdElements= RULE_ID ) )* )? ) (lv_metamodelDeclarations= ruleAbstractMetamodelDeclaration )* ) (lv_rules= ruleAbstractRule )+ )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:77:2: ( ( ( ( ( (lv_abstract= 'abstract language' ) | 'language' ) (lv_idElements= RULE_ID ) ) ( '.' (lv_idElements= RULE_ID ) )* ) ( ( 'extends' (lv_superGrammarIdElements= RULE_ID ) ) ( '.' (lv_superGrammarIdElements= RULE_ID ) )* )? ) (lv_metamodelDeclarations= ruleAbstractMetamodelDeclaration )* ) (lv_rules= ruleAbstractRule )+
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:77:1: ( ( ( ( ( ( (lv_abstract= 'abstract language' ) | 'language' ) (lv_idElements= RULE_ID ) ) ( '.' (lv_idElements= RULE_ID ) )* ) ( ( 'extends' (lv_superGrammarIdElements= RULE_ID ) ) ( '.' (lv_superGrammarIdElements= RULE_ID ) )* )? ) (lv_metamodelDeclarations= ruleAbstractMetamodelDeclaration )* ) (lv_rules= ruleAbstractRule )+ )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:77:2: ( ( ( ( ( (lv_abstract= 'abstract language' ) | 'language' ) (lv_idElements= RULE_ID ) ) ( '.' (lv_idElements= RULE_ID ) )* ) ( ( 'extends' (lv_superGrammarIdElements= RULE_ID ) ) ( '.' (lv_superGrammarIdElements= RULE_ID ) )* )? ) (lv_metamodelDeclarations= ruleAbstractMetamodelDeclaration )* ) (lv_rules= ruleAbstractRule )+
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:77:2: ( ( ( ( ( (lv_abstract= 'abstract language' ) | 'language' ) (lv_idElements= RULE_ID ) ) ( '.' (lv_idElements= RULE_ID ) )* ) ( ( 'extends' (lv_superGrammarIdElements= RULE_ID ) ) ( '.' (lv_superGrammarIdElements= RULE_ID ) )* )? ) (lv_metamodelDeclarations= ruleAbstractMetamodelDeclaration )* )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:77:3: ( ( ( ( (lv_abstract= 'abstract language' ) | 'language' ) (lv_idElements= RULE_ID ) ) ( '.' (lv_idElements= RULE_ID ) )* ) ( ( 'extends' (lv_superGrammarIdElements= RULE_ID ) ) ( '.' (lv_superGrammarIdElements= RULE_ID ) )* )? ) (lv_metamodelDeclarations= ruleAbstractMetamodelDeclaration )*
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:77:2: ( ( ( ( ( (lv_abstract= 'abstract language' ) | 'language' ) (lv_idElements= RULE_ID ) ) ( '.' (lv_idElements= RULE_ID ) )* ) ( ( 'extends' (lv_superGrammarIdElements= RULE_ID ) ) ( '.' (lv_superGrammarIdElements= RULE_ID ) )* )? ) (lv_metamodelDeclarations= ruleAbstractMetamodelDeclaration )* )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:77:3: ( ( ( ( (lv_abstract= 'abstract language' ) | 'language' ) (lv_idElements= RULE_ID ) ) ( '.' (lv_idElements= RULE_ID ) )* ) ( ( 'extends' (lv_superGrammarIdElements= RULE_ID ) ) ( '.' (lv_superGrammarIdElements= RULE_ID ) )* )? ) (lv_metamodelDeclarations= ruleAbstractMetamodelDeclaration )*
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:77:3: ( ( ( ( (lv_abstract= 'abstract language' ) | 'language' ) (lv_idElements= RULE_ID ) ) ( '.' (lv_idElements= RULE_ID ) )* ) ( ( 'extends' (lv_superGrammarIdElements= RULE_ID ) ) ( '.' (lv_superGrammarIdElements= RULE_ID ) )* )? )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:77:4: ( ( ( (lv_abstract= 'abstract language' ) | 'language' ) (lv_idElements= RULE_ID ) ) ( '.' (lv_idElements= RULE_ID ) )* ) ( ( 'extends' (lv_superGrammarIdElements= RULE_ID ) ) ( '.' (lv_superGrammarIdElements= RULE_ID ) )* )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:77:3: ( ( ( ( (lv_abstract= 'abstract language' ) | 'language' ) (lv_idElements= RULE_ID ) ) ( '.' (lv_idElements= RULE_ID ) )* ) ( ( 'extends' (lv_superGrammarIdElements= RULE_ID ) ) ( '.' (lv_superGrammarIdElements= RULE_ID ) )* )? )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:77:4: ( ( ( (lv_abstract= 'abstract language' ) | 'language' ) (lv_idElements= RULE_ID ) ) ( '.' (lv_idElements= RULE_ID ) )* ) ( ( 'extends' (lv_superGrammarIdElements= RULE_ID ) ) ( '.' (lv_superGrammarIdElements= RULE_ID ) )* )?
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:77:4: ( ( ( (lv_abstract= 'abstract language' ) | 'language' ) (lv_idElements= RULE_ID ) ) ( '.' (lv_idElements= RULE_ID ) )* )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:77:5: ( ( (lv_abstract= 'abstract language' ) | 'language' ) (lv_idElements= RULE_ID ) ) ( '.' (lv_idElements= RULE_ID ) )*
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:77:4: ( ( ( (lv_abstract= 'abstract language' ) | 'language' ) (lv_idElements= RULE_ID ) ) ( '.' (lv_idElements= RULE_ID ) )* )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:77:5: ( ( (lv_abstract= 'abstract language' ) | 'language' ) (lv_idElements= RULE_ID ) ) ( '.' (lv_idElements= RULE_ID ) )*
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:77:5: ( ( (lv_abstract= 'abstract language' ) | 'language' ) (lv_idElements= RULE_ID ) )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:77:6: ( (lv_abstract= 'abstract language' ) | 'language' ) (lv_idElements= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:77:5: ( ( (lv_abstract= 'abstract language' ) | 'language' ) (lv_idElements= RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:77:6: ( (lv_abstract= 'abstract language' ) | 'language' ) (lv_idElements= RULE_ID )
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:77:6: ( (lv_abstract= 'abstract language' ) | 'language' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:77:6: ( (lv_abstract= 'abstract language' ) | 'language' )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -149,10 +149,10 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
             }
             switch (alt1) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:77:7: (lv_abstract= 'abstract language' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:77:7: (lv_abstract= 'abstract language' )
                     {
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:77:7: (lv_abstract= 'abstract language' )
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:79:6: lv_abstract= 'abstract language'
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:77:7: (lv_abstract= 'abstract language' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:79:6: lv_abstract= 'abstract language'
                     {
                     lv_abstract=(Token)input.LT(1);
                     match(input,11,FOLLOW_11_in_ruleGrammar132); 
@@ -166,7 +166,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
                     	        }
                     	        
                     	        try {
-                    	        	factory.set(current, "abstract", true,"abstract language");
+                    	        	factory.set(current, "abstract", true, "abstract language", currentNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
@@ -178,7 +178,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
                     }
                     break;
                 case 2 :
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:98:6: 'language'
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:98:6: 'language'
                     {
                     match(input,12,FOLLOW_12_in_ruleGrammar159); 
 
@@ -190,8 +190,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
             }
 
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:102:2: (lv_idElements= RULE_ID )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:104:6: lv_idElements= RULE_ID
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:102:2: (lv_idElements= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:104:6: lv_idElements= RULE_ID
             {
             lv_idElements=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleGrammar181); 
@@ -205,7 +205,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
             	        }
             	        
             	        try {
-            	        	factory.add(current, "idElements", lv_idElements,"ID");
+            	        	factory.add(current, "idElements", lv_idElements, "ID", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -216,7 +216,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
             }
 
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:122:3: ( '.' (lv_idElements= RULE_ID ) )*
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:122:3: ( '.' (lv_idElements= RULE_ID ) )*
             loop2:
             do {
                 int alt2=2;
@@ -229,14 +229,14 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
                 switch (alt2) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:122:4: '.' (lv_idElements= RULE_ID )
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:122:4: '.' (lv_idElements= RULE_ID )
             	    {
             	    match(input,13,FOLLOW_13_in_ruleGrammar203); 
 
             	            createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
             	        
-            	    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:126:1: (lv_idElements= RULE_ID )
-            	    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:128:6: lv_idElements= RULE_ID
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:126:1: (lv_idElements= RULE_ID )
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:128:6: lv_idElements= RULE_ID
             	    {
             	    lv_idElements=(Token)input.LT(1);
             	    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleGrammar224); 
@@ -250,7 +250,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
             	    	        }
             	    	        
             	    	        try {
-            	    	        	factory.add(current, "idElements", lv_idElements,"ID");
+            	    	        	factory.add(current, "idElements", lv_idElements, "ID", currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }
@@ -270,7 +270,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
             }
 
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:146:5: ( ( 'extends' (lv_superGrammarIdElements= RULE_ID ) ) ( '.' (lv_superGrammarIdElements= RULE_ID ) )* )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:146:5: ( ( 'extends' (lv_superGrammarIdElements= RULE_ID ) ) ( '.' (lv_superGrammarIdElements= RULE_ID ) )* )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -279,17 +279,17 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
             }
             switch (alt4) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:146:6: ( 'extends' (lv_superGrammarIdElements= RULE_ID ) ) ( '.' (lv_superGrammarIdElements= RULE_ID ) )*
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:146:6: ( 'extends' (lv_superGrammarIdElements= RULE_ID ) ) ( '.' (lv_superGrammarIdElements= RULE_ID ) )*
                     {
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:146:6: ( 'extends' (lv_superGrammarIdElements= RULE_ID ) )
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:146:7: 'extends' (lv_superGrammarIdElements= RULE_ID )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:146:6: ( 'extends' (lv_superGrammarIdElements= RULE_ID ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:146:7: 'extends' (lv_superGrammarIdElements= RULE_ID )
                     {
                     match(input,14,FOLLOW_14_in_ruleGrammar249); 
 
                             createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:150:1: (lv_superGrammarIdElements= RULE_ID )
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:152:6: lv_superGrammarIdElements= RULE_ID
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:150:1: (lv_superGrammarIdElements= RULE_ID )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:152:6: lv_superGrammarIdElements= RULE_ID
                     {
                     lv_superGrammarIdElements=(Token)input.LT(1);
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleGrammar270); 
@@ -303,7 +303,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
                     	        }
                     	        
                     	        try {
-                    	        	factory.add(current, "superGrammarIdElements", lv_superGrammarIdElements,"ID");
+                    	        	factory.add(current, "superGrammarIdElements", lv_superGrammarIdElements, "ID", currentNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
@@ -314,7 +314,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
                     }
 
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:170:3: ( '.' (lv_superGrammarIdElements= RULE_ID ) )*
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:170:3: ( '.' (lv_superGrammarIdElements= RULE_ID ) )*
                     loop3:
                     do {
                         int alt3=2;
@@ -327,14 +327,14 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
                         switch (alt3) {
                     	case 1 :
-                    	    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:170:4: '.' (lv_superGrammarIdElements= RULE_ID )
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:170:4: '.' (lv_superGrammarIdElements= RULE_ID )
                     	    {
                     	    match(input,13,FOLLOW_13_in_ruleGrammar292); 
 
                     	            createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                     	        
-                    	    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:174:1: (lv_superGrammarIdElements= RULE_ID )
-                    	    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:176:6: lv_superGrammarIdElements= RULE_ID
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:174:1: (lv_superGrammarIdElements= RULE_ID )
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:176:6: lv_superGrammarIdElements= RULE_ID
                     	    {
                     	    lv_superGrammarIdElements=(Token)input.LT(1);
                     	    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleGrammar313); 
@@ -348,7 +348,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
                     	    	        }
                     	    	        
                     	    	        try {
-                    	    	        	factory.add(current, "superGrammarIdElements", lv_superGrammarIdElements,"ID");
+                    	    	        	factory.add(current, "superGrammarIdElements", lv_superGrammarIdElements, "ID", currentNode);
                     	    	        } catch (ValueConverterException vce) {
                     	    				handleValueConverterException(vce);
                     	    	        }
@@ -374,7 +374,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
             }
 
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:194:7: (lv_metamodelDeclarations= ruleAbstractMetamodelDeclaration )*
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:194:7: (lv_metamodelDeclarations= ruleAbstractMetamodelDeclaration )*
             loop5:
             do {
                 int alt5=2;
@@ -387,7 +387,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
                 switch (alt5) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:197:6: lv_metamodelDeclarations= ruleAbstractMetamodelDeclaration
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:197:6: lv_metamodelDeclarations= ruleAbstractMetamodelDeclaration
             	    {
             	     
             	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
@@ -397,17 +397,17 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
             	    _fsp--;
 
 
-            	    	        currentNode = currentNode.getParent();
             	    	        if (current==null) {
             	    	            current = factory.create("Grammar");
-            	    	            associateNodeWithAstElement(currentNode, current);
+            	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
             	    	        try {
-            	    	        	factory.add(current, "metamodelDeclarations", lv_metamodelDeclarations,"AbstractMetamodelDeclaration");
+            	    	        	factory.add(current, "metamodelDeclarations", lv_metamodelDeclarations, "AbstractMetamodelDeclaration", currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }
+            	    	        currentNode = currentNode.getParent();
             	    	    
 
             	    }
@@ -421,7 +421,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
             }
 
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:215:4: (lv_rules= ruleAbstractRule )+
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:215:4: (lv_rules= ruleAbstractRule )+
             int cnt6=0;
             loop6:
             do {
@@ -435,7 +435,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
                 switch (alt6) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:218:6: lv_rules= ruleAbstractRule
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:218:6: lv_rules= ruleAbstractRule
             	    {
             	     
             	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
@@ -445,17 +445,17 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
             	    _fsp--;
 
 
-            	    	        currentNode = currentNode.getParent();
             	    	        if (current==null) {
             	    	            current = factory.create("Grammar");
-            	    	            associateNodeWithAstElement(currentNode, current);
+            	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
             	    	        try {
-            	    	        	factory.add(current, "rules", lv_rules,"AbstractRule");
+            	    	        	factory.add(current, "rules", lv_rules, "AbstractRule", currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }
+            	    	        currentNode = currentNode.getParent();
             	    	    
 
             	    }
@@ -491,7 +491,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
     // $ANTLR start entryRuleAbstractRule
-    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:243:1: entryRuleAbstractRule returns [EObject current=null] : iv_ruleAbstractRule= ruleAbstractRule EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:243:1: entryRuleAbstractRule returns [EObject current=null] : iv_ruleAbstractRule= ruleAbstractRule EOF ;
     public final EObject entryRuleAbstractRule() throws RecognitionException {
         EObject current = null;
 
@@ -499,8 +499,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:243:54: (iv_ruleAbstractRule= ruleAbstractRule EOF )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:244:2: iv_ruleAbstractRule= ruleAbstractRule EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:243:54: (iv_ruleAbstractRule= ruleAbstractRule EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:244:2: iv_ruleAbstractRule= ruleAbstractRule EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.1" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleAbstractRule_in_entryRuleAbstractRule441);
@@ -526,7 +526,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
     // $ANTLR start ruleAbstractRule
-    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:251:1: ruleAbstractRule returns [EObject current=null] : (this_LexerRule= ruleLexerRule | this_ParserRule= ruleParserRule ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:251:1: ruleAbstractRule returns [EObject current=null] : (this_LexerRule= ruleLexerRule | this_ParserRule= ruleParserRule ) ;
     public final EObject ruleAbstractRule() throws RecognitionException {
         EObject current = null;
 
@@ -537,10 +537,10 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:253:33: ( (this_LexerRule= ruleLexerRule | this_ParserRule= ruleParserRule ) )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:254:1: (this_LexerRule= ruleLexerRule | this_ParserRule= ruleParserRule )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:253:33: ( (this_LexerRule= ruleLexerRule | this_ParserRule= ruleParserRule ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:254:1: (this_LexerRule= ruleLexerRule | this_ParserRule= ruleParserRule )
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:254:1: (this_LexerRule= ruleLexerRule | this_ParserRule= ruleParserRule )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:254:1: (this_LexerRule= ruleLexerRule | this_ParserRule= ruleParserRule )
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -558,7 +558,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
             }
             switch (alt7) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:255:5: this_LexerRule= ruleLexerRule
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:255:5: this_LexerRule= ruleLexerRule
                     {
                      
                             currentNode=createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.1/@alternatives/@groups.0" /* xtext::RuleCall */, currentNode); 
@@ -575,7 +575,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
                     }
                     break;
                 case 2 :
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:265:5: this_ParserRule= ruleParserRule
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:265:5: this_ParserRule= ruleParserRule
                     {
                      
                             currentNode=createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.1/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
@@ -612,7 +612,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
     // $ANTLR start entryRuleAbstractMetamodelDeclaration
-    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:280:1: entryRuleAbstractMetamodelDeclaration returns [EObject current=null] : iv_ruleAbstractMetamodelDeclaration= ruleAbstractMetamodelDeclaration EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:280:1: entryRuleAbstractMetamodelDeclaration returns [EObject current=null] : iv_ruleAbstractMetamodelDeclaration= ruleAbstractMetamodelDeclaration EOF ;
     public final EObject entryRuleAbstractMetamodelDeclaration() throws RecognitionException {
         EObject current = null;
 
@@ -620,8 +620,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:280:70: (iv_ruleAbstractMetamodelDeclaration= ruleAbstractMetamodelDeclaration EOF )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:281:2: iv_ruleAbstractMetamodelDeclaration= ruleAbstractMetamodelDeclaration EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:280:70: (iv_ruleAbstractMetamodelDeclaration= ruleAbstractMetamodelDeclaration EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:281:2: iv_ruleAbstractMetamodelDeclaration= ruleAbstractMetamodelDeclaration EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.2" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleAbstractMetamodelDeclaration_in_entryRuleAbstractMetamodelDeclaration557);
@@ -647,7 +647,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
     // $ANTLR start ruleAbstractMetamodelDeclaration
-    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:288:1: ruleAbstractMetamodelDeclaration returns [EObject current=null] : (this_GeneratedMetamodel= ruleGeneratedMetamodel | this_ReferencedMetamodel= ruleReferencedMetamodel ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:288:1: ruleAbstractMetamodelDeclaration returns [EObject current=null] : (this_GeneratedMetamodel= ruleGeneratedMetamodel | this_ReferencedMetamodel= ruleReferencedMetamodel ) ;
     public final EObject ruleAbstractMetamodelDeclaration() throws RecognitionException {
         EObject current = null;
 
@@ -658,10 +658,10 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:290:33: ( (this_GeneratedMetamodel= ruleGeneratedMetamodel | this_ReferencedMetamodel= ruleReferencedMetamodel ) )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:291:1: (this_GeneratedMetamodel= ruleGeneratedMetamodel | this_ReferencedMetamodel= ruleReferencedMetamodel )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:290:33: ( (this_GeneratedMetamodel= ruleGeneratedMetamodel | this_ReferencedMetamodel= ruleReferencedMetamodel ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:291:1: (this_GeneratedMetamodel= ruleGeneratedMetamodel | this_ReferencedMetamodel= ruleReferencedMetamodel )
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:291:1: (this_GeneratedMetamodel= ruleGeneratedMetamodel | this_ReferencedMetamodel= ruleReferencedMetamodel )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:291:1: (this_GeneratedMetamodel= ruleGeneratedMetamodel | this_ReferencedMetamodel= ruleReferencedMetamodel )
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -679,7 +679,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
             }
             switch (alt8) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:292:5: this_GeneratedMetamodel= ruleGeneratedMetamodel
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:292:5: this_GeneratedMetamodel= ruleGeneratedMetamodel
                     {
                      
                             currentNode=createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.2/@alternatives/@groups.0" /* xtext::RuleCall */, currentNode); 
@@ -696,7 +696,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
                     }
                     break;
                 case 2 :
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:302:5: this_ReferencedMetamodel= ruleReferencedMetamodel
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:302:5: this_ReferencedMetamodel= ruleReferencedMetamodel
                     {
                      
                             currentNode=createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.2/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
@@ -733,7 +733,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
     // $ANTLR start entryRuleGeneratedMetamodel
-    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:317:1: entryRuleGeneratedMetamodel returns [EObject current=null] : iv_ruleGeneratedMetamodel= ruleGeneratedMetamodel EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:317:1: entryRuleGeneratedMetamodel returns [EObject current=null] : iv_ruleGeneratedMetamodel= ruleGeneratedMetamodel EOF ;
     public final EObject entryRuleGeneratedMetamodel() throws RecognitionException {
         EObject current = null;
 
@@ -741,8 +741,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:317:60: (iv_ruleGeneratedMetamodel= ruleGeneratedMetamodel EOF )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:318:2: iv_ruleGeneratedMetamodel= ruleGeneratedMetamodel EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:317:60: (iv_ruleGeneratedMetamodel= ruleGeneratedMetamodel EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:318:2: iv_ruleGeneratedMetamodel= ruleGeneratedMetamodel EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.3" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleGeneratedMetamodel_in_entryRuleGeneratedMetamodel673);
@@ -768,7 +768,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
     // $ANTLR start ruleGeneratedMetamodel
-    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:325:1: ruleGeneratedMetamodel returns [EObject current=null] : ( ( ( 'generate' (lv_name= RULE_ID ) ) (lv_nsURI= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )? ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:325:1: ruleGeneratedMetamodel returns [EObject current=null] : ( ( ( 'generate' (lv_name= RULE_ID ) ) (lv_nsURI= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )? ) ;
     public final EObject ruleGeneratedMetamodel() throws RecognitionException {
         EObject current = null;
 
@@ -778,24 +778,24 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:327:33: ( ( ( ( 'generate' (lv_name= RULE_ID ) ) (lv_nsURI= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )? ) )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:328:1: ( ( ( 'generate' (lv_name= RULE_ID ) ) (lv_nsURI= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )? )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:327:33: ( ( ( ( 'generate' (lv_name= RULE_ID ) ) (lv_nsURI= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )? ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:328:1: ( ( ( 'generate' (lv_name= RULE_ID ) ) (lv_nsURI= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )? )
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:328:1: ( ( ( 'generate' (lv_name= RULE_ID ) ) (lv_nsURI= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )? )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:328:2: ( ( 'generate' (lv_name= RULE_ID ) ) (lv_nsURI= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:328:1: ( ( ( 'generate' (lv_name= RULE_ID ) ) (lv_nsURI= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )? )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:328:2: ( ( 'generate' (lv_name= RULE_ID ) ) (lv_nsURI= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )?
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:328:2: ( ( 'generate' (lv_name= RULE_ID ) ) (lv_nsURI= RULE_STRING ) )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:328:3: ( 'generate' (lv_name= RULE_ID ) ) (lv_nsURI= RULE_STRING )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:328:2: ( ( 'generate' (lv_name= RULE_ID ) ) (lv_nsURI= RULE_STRING ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:328:3: ( 'generate' (lv_name= RULE_ID ) ) (lv_nsURI= RULE_STRING )
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:328:3: ( 'generate' (lv_name= RULE_ID ) )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:328:4: 'generate' (lv_name= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:328:3: ( 'generate' (lv_name= RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:328:4: 'generate' (lv_name= RULE_ID )
             {
             match(input,15,FOLLOW_15_in_ruleGeneratedMetamodel719); 
 
                     createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:332:1: (lv_name= RULE_ID )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:334:6: lv_name= RULE_ID
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:332:1: (lv_name= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:334:6: lv_name= RULE_ID
             {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleGeneratedMetamodel740); 
@@ -809,7 +809,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
             	        }
             	        
             	        try {
-            	        	factory.set(current, "name", lv_name,"ID");
+            	        	factory.set(current, "name", lv_name, "ID", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -820,8 +820,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
             }
 
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:352:3: (lv_nsURI= RULE_STRING )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:354:6: lv_nsURI= RULE_STRING
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:352:3: (lv_nsURI= RULE_STRING )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:354:6: lv_nsURI= RULE_STRING
             {
             lv_nsURI=(Token)input.LT(1);
             match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleGeneratedMetamodel773); 
@@ -835,7 +835,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
             	        }
             	        
             	        try {
-            	        	factory.set(current, "nsURI", lv_nsURI,"STRING");
+            	        	factory.set(current, "nsURI", lv_nsURI, "STRING", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -846,7 +846,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
             }
 
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:372:3: ( 'as' (lv_alias= RULE_ID ) )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:372:3: ( 'as' (lv_alias= RULE_ID ) )?
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -855,14 +855,14 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
             }
             switch (alt9) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:372:4: 'as' (lv_alias= RULE_ID )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:372:4: 'as' (lv_alias= RULE_ID )
                     {
                     match(input,16,FOLLOW_16_in_ruleGeneratedMetamodel795); 
 
                             createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:376:1: (lv_alias= RULE_ID )
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:378:6: lv_alias= RULE_ID
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:376:1: (lv_alias= RULE_ID )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:378:6: lv_alias= RULE_ID
                     {
                     lv_alias=(Token)input.LT(1);
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleGeneratedMetamodel816); 
@@ -876,7 +876,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
                     	        }
                     	        
                     	        try {
-                    	        	factory.set(current, "alias", lv_alias,"ID");
+                    	        	factory.set(current, "alias", lv_alias, "ID", currentNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
@@ -911,7 +911,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
     // $ANTLR start entryRuleReferencedMetamodel
-    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:403:1: entryRuleReferencedMetamodel returns [EObject current=null] : iv_ruleReferencedMetamodel= ruleReferencedMetamodel EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:403:1: entryRuleReferencedMetamodel returns [EObject current=null] : iv_ruleReferencedMetamodel= ruleReferencedMetamodel EOF ;
     public final EObject entryRuleReferencedMetamodel() throws RecognitionException {
         EObject current = null;
 
@@ -919,8 +919,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:403:61: (iv_ruleReferencedMetamodel= ruleReferencedMetamodel EOF )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:404:2: iv_ruleReferencedMetamodel= ruleReferencedMetamodel EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:403:61: (iv_ruleReferencedMetamodel= ruleReferencedMetamodel EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:404:2: iv_ruleReferencedMetamodel= ruleReferencedMetamodel EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.4" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleReferencedMetamodel_in_entryRuleReferencedMetamodel862);
@@ -946,7 +946,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
     // $ANTLR start ruleReferencedMetamodel
-    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:411:1: ruleReferencedMetamodel returns [EObject current=null] : ( ( 'import' (lv_uri= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )? ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:411:1: ruleReferencedMetamodel returns [EObject current=null] : ( ( 'import' (lv_uri= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )? ) ;
     public final EObject ruleReferencedMetamodel() throws RecognitionException {
         EObject current = null;
 
@@ -955,21 +955,21 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:413:33: ( ( ( 'import' (lv_uri= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )? ) )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:414:1: ( ( 'import' (lv_uri= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )? )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:413:33: ( ( ( 'import' (lv_uri= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )? ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:414:1: ( ( 'import' (lv_uri= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )? )
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:414:1: ( ( 'import' (lv_uri= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )? )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:414:2: ( 'import' (lv_uri= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:414:1: ( ( 'import' (lv_uri= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )? )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:414:2: ( 'import' (lv_uri= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )?
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:414:2: ( 'import' (lv_uri= RULE_STRING ) )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:414:3: 'import' (lv_uri= RULE_STRING )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:414:2: ( 'import' (lv_uri= RULE_STRING ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:414:3: 'import' (lv_uri= RULE_STRING )
             {
             match(input,17,FOLLOW_17_in_ruleReferencedMetamodel907); 
 
                     createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:418:1: (lv_uri= RULE_STRING )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:420:6: lv_uri= RULE_STRING
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:418:1: (lv_uri= RULE_STRING )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:420:6: lv_uri= RULE_STRING
             {
             lv_uri=(Token)input.LT(1);
             match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleReferencedMetamodel928); 
@@ -983,7 +983,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
             	        }
             	        
             	        try {
-            	        	factory.set(current, "uri", lv_uri,"STRING");
+            	        	factory.set(current, "uri", lv_uri, "STRING", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -994,7 +994,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
             }
 
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:438:3: ( 'as' (lv_alias= RULE_ID ) )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:438:3: ( 'as' (lv_alias= RULE_ID ) )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -1003,14 +1003,14 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
             }
             switch (alt10) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:438:4: 'as' (lv_alias= RULE_ID )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:438:4: 'as' (lv_alias= RULE_ID )
                     {
                     match(input,16,FOLLOW_16_in_ruleReferencedMetamodel950); 
 
                             createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:442:1: (lv_alias= RULE_ID )
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:444:6: lv_alias= RULE_ID
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:442:1: (lv_alias= RULE_ID )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:444:6: lv_alias= RULE_ID
                     {
                     lv_alias=(Token)input.LT(1);
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleReferencedMetamodel971); 
@@ -1024,7 +1024,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
                     	        }
                     	        
                     	        try {
-                    	        	factory.set(current, "alias", lv_alias,"ID");
+                    	        	factory.set(current, "alias", lv_alias, "ID", currentNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
@@ -1059,7 +1059,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
     // $ANTLR start entryRuleLexerRule
-    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:469:1: entryRuleLexerRule returns [EObject current=null] : iv_ruleLexerRule= ruleLexerRule EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:469:1: entryRuleLexerRule returns [EObject current=null] : iv_ruleLexerRule= ruleLexerRule EOF ;
     public final EObject entryRuleLexerRule() throws RecognitionException {
         EObject current = null;
 
@@ -1067,8 +1067,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:469:51: (iv_ruleLexerRule= ruleLexerRule EOF )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:470:2: iv_ruleLexerRule= ruleLexerRule EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:469:51: (iv_ruleLexerRule= ruleLexerRule EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:470:2: iv_ruleLexerRule= ruleLexerRule EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.5" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleLexerRule_in_entryRuleLexerRule1017);
@@ -1094,7 +1094,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
     // $ANTLR start ruleLexerRule
-    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:477:1: ruleLexerRule returns [EObject current=null] : ( ( ( ( ( ( 'native' | 'lexer' ) (lv_name= RULE_ID ) ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_body= RULE_STRING ) ) ';' ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:477:1: ruleLexerRule returns [EObject current=null] : ( ( ( ( ( ( 'native' | 'lexer' ) (lv_name= RULE_ID ) ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_body= RULE_STRING ) ) ';' ) ;
     public final EObject ruleLexerRule() throws RecognitionException {
         EObject current = null;
 
@@ -1105,25 +1105,25 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:479:33: ( ( ( ( ( ( ( 'native' | 'lexer' ) (lv_name= RULE_ID ) ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_body= RULE_STRING ) ) ';' ) )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:480:1: ( ( ( ( ( ( 'native' | 'lexer' ) (lv_name= RULE_ID ) ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_body= RULE_STRING ) ) ';' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:479:33: ( ( ( ( ( ( ( 'native' | 'lexer' ) (lv_name= RULE_ID ) ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_body= RULE_STRING ) ) ';' ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:480:1: ( ( ( ( ( ( 'native' | 'lexer' ) (lv_name= RULE_ID ) ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_body= RULE_STRING ) ) ';' )
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:480:1: ( ( ( ( ( ( 'native' | 'lexer' ) (lv_name= RULE_ID ) ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_body= RULE_STRING ) ) ';' )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:480:2: ( ( ( ( ( 'native' | 'lexer' ) (lv_name= RULE_ID ) ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_body= RULE_STRING ) ) ';'
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:480:1: ( ( ( ( ( ( 'native' | 'lexer' ) (lv_name= RULE_ID ) ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_body= RULE_STRING ) ) ';' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:480:2: ( ( ( ( ( 'native' | 'lexer' ) (lv_name= RULE_ID ) ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_body= RULE_STRING ) ) ';'
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:480:2: ( ( ( ( ( 'native' | 'lexer' ) (lv_name= RULE_ID ) ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_body= RULE_STRING ) )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:480:3: ( ( ( ( 'native' | 'lexer' ) (lv_name= RULE_ID ) ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_body= RULE_STRING )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:480:2: ( ( ( ( ( 'native' | 'lexer' ) (lv_name= RULE_ID ) ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_body= RULE_STRING ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:480:3: ( ( ( ( 'native' | 'lexer' ) (lv_name= RULE_ID ) ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_body= RULE_STRING )
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:480:3: ( ( ( ( 'native' | 'lexer' ) (lv_name= RULE_ID ) ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:480:4: ( ( ( 'native' | 'lexer' ) (lv_name= RULE_ID ) ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':'
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:480:3: ( ( ( ( 'native' | 'lexer' ) (lv_name= RULE_ID ) ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:480:4: ( ( ( 'native' | 'lexer' ) (lv_name= RULE_ID ) ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':'
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:480:4: ( ( ( 'native' | 'lexer' ) (lv_name= RULE_ID ) ) ( 'returns' (lv_type= ruleTypeRef ) )? )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:480:5: ( ( 'native' | 'lexer' ) (lv_name= RULE_ID ) ) ( 'returns' (lv_type= ruleTypeRef ) )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:480:4: ( ( ( 'native' | 'lexer' ) (lv_name= RULE_ID ) ) ( 'returns' (lv_type= ruleTypeRef ) )? )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:480:5: ( ( 'native' | 'lexer' ) (lv_name= RULE_ID ) ) ( 'returns' (lv_type= ruleTypeRef ) )?
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:480:5: ( ( 'native' | 'lexer' ) (lv_name= RULE_ID ) )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:480:6: ( 'native' | 'lexer' ) (lv_name= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:480:5: ( ( 'native' | 'lexer' ) (lv_name= RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:480:6: ( 'native' | 'lexer' ) (lv_name= RULE_ID )
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:480:6: ( 'native' | 'lexer' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:480:6: ( 'native' | 'lexer' )
             int alt11=2;
             int LA11_0 = input.LA(1);
 
@@ -1141,7 +1141,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
             }
             switch (alt11) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:480:7: 'native'
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:480:7: 'native'
                     {
                     match(input,18,FOLLOW_18_in_ruleLexerRule1066); 
 
@@ -1151,7 +1151,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
                     }
                     break;
                 case 2 :
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:485:6: 'lexer'
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:485:6: 'lexer'
                     {
                     match(input,19,FOLLOW_19_in_ruleLexerRule1081); 
 
@@ -1163,8 +1163,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
             }
 
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:489:2: (lv_name= RULE_ID )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:491:6: lv_name= RULE_ID
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:489:2: (lv_name= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:491:6: lv_name= RULE_ID
             {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleLexerRule1103); 
@@ -1178,7 +1178,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
             	        }
             	        
             	        try {
-            	        	factory.set(current, "name", lv_name,"ID");
+            	        	factory.set(current, "name", lv_name, "ID", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -1189,7 +1189,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
             }
 
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:509:3: ( 'returns' (lv_type= ruleTypeRef ) )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:509:3: ( 'returns' (lv_type= ruleTypeRef ) )?
             int alt12=2;
             int LA12_0 = input.LA(1);
 
@@ -1198,14 +1198,14 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
             }
             switch (alt12) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:509:4: 'returns' (lv_type= ruleTypeRef )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:509:4: 'returns' (lv_type= ruleTypeRef )
                     {
                     match(input,20,FOLLOW_20_in_ruleLexerRule1125); 
 
                             createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:513:1: (lv_type= ruleTypeRef )
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:516:6: lv_type= ruleTypeRef
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:513:1: (lv_type= ruleTypeRef )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:516:6: lv_type= ruleTypeRef
                     {
                      
                     	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
@@ -1215,17 +1215,17 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
                     _fsp--;
 
 
-                    	        currentNode = currentNode.getParent();
                     	        if (current==null) {
                     	            current = factory.create("LexerRule");
-                    	            associateNodeWithAstElement(currentNode, current);
+                    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
                     	        try {
-                    	        	factory.set(current, "type", lv_type,"TypeRef");
+                    	        	factory.set(current, "type", lv_type, "TypeRef", currentNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
+                    	        currentNode = currentNode.getParent();
                     	    
 
                     }
@@ -1246,8 +1246,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
             }
 
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:538:2: (lv_body= RULE_STRING )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:540:6: lv_body= RULE_STRING
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:538:2: (lv_body= RULE_STRING )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:540:6: lv_body= RULE_STRING
             {
             lv_body=(Token)input.LT(1);
             match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleLexerRule1197); 
@@ -1261,7 +1261,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
             	        }
             	        
             	        try {
-            	        	factory.set(current, "body", lv_body,"STRING");
+            	        	factory.set(current, "body", lv_body, "STRING", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -1297,7 +1297,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
     // $ANTLR start entryRuleParserRule
-    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:569:1: entryRuleParserRule returns [EObject current=null] : iv_ruleParserRule= ruleParserRule EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:569:1: entryRuleParserRule returns [EObject current=null] : iv_ruleParserRule= ruleParserRule EOF ;
     public final EObject entryRuleParserRule() throws RecognitionException {
         EObject current = null;
 
@@ -1305,8 +1305,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:569:52: (iv_ruleParserRule= ruleParserRule EOF )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:570:2: iv_ruleParserRule= ruleParserRule EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:569:52: (iv_ruleParserRule= ruleParserRule EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:570:2: iv_ruleParserRule= ruleParserRule EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.6" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleParserRule_in_entryRuleParserRule1251);
@@ -1332,7 +1332,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
     // $ANTLR start ruleParserRule
-    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:577:1: ruleParserRule returns [EObject current=null] : ( ( ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_alternatives= ruleAlternatives ) ) ';' ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:577:1: ruleParserRule returns [EObject current=null] : ( ( ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_alternatives= ruleAlternatives ) ) ';' ) ;
     public final EObject ruleParserRule() throws RecognitionException {
         EObject current = null;
 
@@ -1344,23 +1344,23 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:579:33: ( ( ( ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_alternatives= ruleAlternatives ) ) ';' ) )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:580:1: ( ( ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_alternatives= ruleAlternatives ) ) ';' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:579:33: ( ( ( ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_alternatives= ruleAlternatives ) ) ';' ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:580:1: ( ( ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_alternatives= ruleAlternatives ) ) ';' )
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:580:1: ( ( ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_alternatives= ruleAlternatives ) ) ';' )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:580:2: ( ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_alternatives= ruleAlternatives ) ) ';'
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:580:1: ( ( ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_alternatives= ruleAlternatives ) ) ';' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:580:2: ( ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_alternatives= ruleAlternatives ) ) ';'
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:580:2: ( ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_alternatives= ruleAlternatives ) )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:580:3: ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_alternatives= ruleAlternatives )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:580:2: ( ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_alternatives= ruleAlternatives ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:580:3: ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_alternatives= ruleAlternatives )
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:580:3: ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:580:4: ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':'
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:580:3: ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:580:4: ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':'
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:580:4: ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:580:5: (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:580:4: ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:580:5: (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )?
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:580:5: (lv_name= RULE_ID )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:582:6: lv_name= RULE_ID
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:580:5: (lv_name= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:582:6: lv_name= RULE_ID
             {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleParserRule1310); 
@@ -1374,7 +1374,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
             	        }
             	        
             	        try {
-            	        	factory.set(current, "name", lv_name,"ID");
+            	        	factory.set(current, "name", lv_name, "ID", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -1382,7 +1382,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
             }
 
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:600:2: ( 'returns' (lv_type= ruleTypeRef ) )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:600:2: ( 'returns' (lv_type= ruleTypeRef ) )?
             int alt13=2;
             int LA13_0 = input.LA(1);
 
@@ -1391,14 +1391,14 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
             }
             switch (alt13) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:600:3: 'returns' (lv_type= ruleTypeRef )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:600:3: 'returns' (lv_type= ruleTypeRef )
                     {
                     match(input,20,FOLLOW_20_in_ruleParserRule1331); 
 
                             createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:604:1: (lv_type= ruleTypeRef )
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:607:6: lv_type= ruleTypeRef
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:604:1: (lv_type= ruleTypeRef )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:607:6: lv_type= ruleTypeRef
                     {
                      
                     	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
@@ -1408,17 +1408,17 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
                     _fsp--;
 
 
-                    	        currentNode = currentNode.getParent();
                     	        if (current==null) {
                     	            current = factory.create("ParserRule");
-                    	            associateNodeWithAstElement(currentNode, current);
+                    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
                     	        try {
-                    	        	factory.set(current, "type", lv_type,"TypeRef");
+                    	        	factory.set(current, "type", lv_type, "TypeRef", currentNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
+                    	        currentNode = currentNode.getParent();
                     	    
 
                     }
@@ -1439,8 +1439,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
             }
 
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:629:2: (lv_alternatives= ruleAlternatives )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:632:6: lv_alternatives= ruleAlternatives
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:629:2: (lv_alternatives= ruleAlternatives )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:632:6: lv_alternatives= ruleAlternatives
             {
              
             	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
@@ -1450,17 +1450,17 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
             _fsp--;
 
 
-            	        currentNode = currentNode.getParent();
             	        if (current==null) {
             	            current = factory.create("ParserRule");
-            	            associateNodeWithAstElement(currentNode, current);
+            	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
             	        try {
-            	        	factory.set(current, "alternatives", lv_alternatives,"Alternatives");
+            	        	factory.set(current, "alternatives", lv_alternatives, "Alternatives", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
+            	        currentNode = currentNode.getParent();
             	    
 
             }
@@ -1493,7 +1493,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
     // $ANTLR start entryRuleTypeRef
-    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:661:1: entryRuleTypeRef returns [EObject current=null] : iv_ruleTypeRef= ruleTypeRef EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:661:1: entryRuleTypeRef returns [EObject current=null] : iv_ruleTypeRef= ruleTypeRef EOF ;
     public final EObject entryRuleTypeRef() throws RecognitionException {
         EObject current = null;
 
@@ -1501,8 +1501,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:661:49: (iv_ruleTypeRef= ruleTypeRef EOF )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:662:2: iv_ruleTypeRef= ruleTypeRef EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:661:49: (iv_ruleTypeRef= ruleTypeRef EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:662:2: iv_ruleTypeRef= ruleTypeRef EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.7" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleTypeRef_in_entryRuleTypeRef1463);
@@ -1528,19 +1528,19 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
     // $ANTLR start ruleTypeRef
-    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:669:1: ruleTypeRef returns [EObject current=null] : ( ( ( ( RULE_ID ) ) '::' )? ( ( RULE_ID ) ) ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:669:1: ruleTypeRef returns [EObject current=null] : ( ( ( ( RULE_ID ) ) '::' )? ( ( RULE_ID ) ) ) ;
     public final EObject ruleTypeRef() throws RecognitionException {
         EObject current = null;
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:671:33: ( ( ( ( ( RULE_ID ) ) '::' )? ( ( RULE_ID ) ) ) )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:672:1: ( ( ( ( RULE_ID ) ) '::' )? ( ( RULE_ID ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:671:33: ( ( ( ( ( RULE_ID ) ) '::' )? ( ( RULE_ID ) ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:672:1: ( ( ( ( RULE_ID ) ) '::' )? ( ( RULE_ID ) ) )
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:672:1: ( ( ( ( RULE_ID ) ) '::' )? ( ( RULE_ID ) ) )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:672:2: ( ( ( RULE_ID ) ) '::' )? ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:672:1: ( ( ( ( RULE_ID ) ) '::' )? ( ( RULE_ID ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:672:2: ( ( ( RULE_ID ) ) '::' )? ( ( RULE_ID ) )
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:672:2: ( ( ( RULE_ID ) ) '::' )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:672:2: ( ( ( RULE_ID ) ) '::' )?
             int alt14=2;
             int LA14_0 = input.LA(1);
 
@@ -1553,10 +1553,10 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
             }
             switch (alt14) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:672:3: ( ( RULE_ID ) ) '::'
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:672:3: ( ( RULE_ID ) ) '::'
                     {
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:672:3: ( ( RULE_ID ) )
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:675:3: ( RULE_ID )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:672:3: ( ( RULE_ID ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:675:3: ( RULE_ID )
                     {
 
                     			if (current==null) {
@@ -1564,8 +1564,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:681:1: ( RULE_ID )
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:682:2: RULE_ID
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:681:1: ( RULE_ID )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:682:2: RULE_ID
                     {
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleTypeRef1523); 
                      
@@ -1587,8 +1587,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
             }
 
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:691:3: ( ( RULE_ID ) )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:694:3: ( RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:691:3: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:694:3: ( RULE_ID )
             {
 
             			if (current==null) {
@@ -1596,8 +1596,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:700:1: ( RULE_ID )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:701:2: RULE_ID
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:700:1: ( RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:701:2: RULE_ID
             {
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleTypeRef1562); 
              
@@ -1630,7 +1630,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
     // $ANTLR start entryRuleAlternatives
-    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:713:1: entryRuleAlternatives returns [EObject current=null] : iv_ruleAlternatives= ruleAlternatives EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:713:1: entryRuleAlternatives returns [EObject current=null] : iv_ruleAlternatives= ruleAlternatives EOF ;
     public final EObject entryRuleAlternatives() throws RecognitionException {
         EObject current = null;
 
@@ -1638,8 +1638,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:713:54: (iv_ruleAlternatives= ruleAlternatives EOF )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:714:2: iv_ruleAlternatives= ruleAlternatives EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:713:54: (iv_ruleAlternatives= ruleAlternatives EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:714:2: iv_ruleAlternatives= ruleAlternatives EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.8" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleAlternatives_in_entryRuleAlternatives1599);
@@ -1665,7 +1665,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
     // $ANTLR start ruleAlternatives
-    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:721:1: ruleAlternatives returns [EObject current=null] : (this_Group= ruleGroup ( ( () '|' ) (lv_groups= ruleGroup ) )* ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:721:1: ruleAlternatives returns [EObject current=null] : (this_Group= ruleGroup ( ( () '|' ) (lv_groups= ruleGroup ) )* ) ;
     public final EObject ruleAlternatives() throws RecognitionException {
         EObject current = null;
 
@@ -1676,11 +1676,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:723:33: ( (this_Group= ruleGroup ( ( () '|' ) (lv_groups= ruleGroup ) )* ) )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:724:1: (this_Group= ruleGroup ( ( () '|' ) (lv_groups= ruleGroup ) )* )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:723:33: ( (this_Group= ruleGroup ( ( () '|' ) (lv_groups= ruleGroup ) )* ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:724:1: (this_Group= ruleGroup ( ( () '|' ) (lv_groups= ruleGroup ) )* )
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:724:1: (this_Group= ruleGroup ( ( () '|' ) (lv_groups= ruleGroup ) )* )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:725:5: this_Group= ruleGroup ( ( () '|' ) (lv_groups= ruleGroup ) )*
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:724:1: (this_Group= ruleGroup ( ( () '|' ) (lv_groups= ruleGroup ) )* )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:725:5: this_Group= ruleGroup ( ( () '|' ) (lv_groups= ruleGroup ) )*
             {
              
                     currentNode=createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.8/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
@@ -1693,7 +1693,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
                     current = this_Group; 
                     currentNode = currentNode.getParent();
                 
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:733:1: ( ( () '|' ) (lv_groups= ruleGroup ) )*
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:733:1: ( ( () '|' ) (lv_groups= ruleGroup ) )*
             loop15:
             do {
                 int alt15=2;
@@ -1706,17 +1706,17 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
                 switch (alt15) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:733:2: ( () '|' ) (lv_groups= ruleGroup )
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:733:2: ( () '|' ) (lv_groups= ruleGroup )
             	    {
-            	    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:733:2: ( () '|' )
-            	    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:733:3: () '|'
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:733:2: ( () '|' )
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:733:3: () '|'
             	    {
-            	    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:733:3: ()
-            	    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:734:5: 
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:733:3: ()
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:734:5: 
             	    {
             	     
             	            temp=factory.create("Alternatives");
-            	            factory.add(temp, "groups",current);
+            	            factory.add(temp, "groups", current, null /*ParserRule*/, currentNode);
             	            current = temp; 
             	            temp = null;
             	            CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.8/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
@@ -1735,8 +1735,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
             	    }
 
-            	    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:749:2: (lv_groups= ruleGroup )
-            	    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:752:6: lv_groups= ruleGroup
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:749:2: (lv_groups= ruleGroup )
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:752:6: lv_groups= ruleGroup
             	    {
             	     
             	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.8/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
@@ -1746,17 +1746,17 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
             	    _fsp--;
 
 
-            	    	        currentNode = currentNode.getParent();
             	    	        if (current==null) {
             	    	            current = factory.create("AbstractElement");
-            	    	            associateNodeWithAstElement(currentNode, current);
+            	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
             	    	        try {
-            	    	        	factory.add(current, "groups", lv_groups,"Group");
+            	    	        	factory.add(current, "groups", lv_groups, "Group", currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }
+            	    	        currentNode = currentNode.getParent();
             	    	    
 
             	    }
@@ -1791,7 +1791,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
     // $ANTLR start entryRuleGroup
-    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:777:1: entryRuleGroup returns [EObject current=null] : iv_ruleGroup= ruleGroup EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:777:1: entryRuleGroup returns [EObject current=null] : iv_ruleGroup= ruleGroup EOF ;
     public final EObject entryRuleGroup() throws RecognitionException {
         EObject current = null;
 
@@ -1799,8 +1799,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:777:47: (iv_ruleGroup= ruleGroup EOF )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:778:2: iv_ruleGroup= ruleGroup EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:777:47: (iv_ruleGroup= ruleGroup EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:778:2: iv_ruleGroup= ruleGroup EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.9" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleGroup_in_entryRuleGroup1749);
@@ -1826,7 +1826,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
     // $ANTLR start ruleGroup
-    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:785:1: ruleGroup returns [EObject current=null] : (this_AbstractToken= ruleAbstractToken ( () (lv_abstractTokens= ruleAbstractToken ) )* ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:785:1: ruleGroup returns [EObject current=null] : (this_AbstractToken= ruleAbstractToken ( () (lv_abstractTokens= ruleAbstractToken ) )* ) ;
     public final EObject ruleGroup() throws RecognitionException {
         EObject current = null;
 
@@ -1837,11 +1837,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:787:33: ( (this_AbstractToken= ruleAbstractToken ( () (lv_abstractTokens= ruleAbstractToken ) )* ) )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:788:1: (this_AbstractToken= ruleAbstractToken ( () (lv_abstractTokens= ruleAbstractToken ) )* )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:787:33: ( (this_AbstractToken= ruleAbstractToken ( () (lv_abstractTokens= ruleAbstractToken ) )* ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:788:1: (this_AbstractToken= ruleAbstractToken ( () (lv_abstractTokens= ruleAbstractToken ) )* )
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:788:1: (this_AbstractToken= ruleAbstractToken ( () (lv_abstractTokens= ruleAbstractToken ) )* )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:789:5: this_AbstractToken= ruleAbstractToken ( () (lv_abstractTokens= ruleAbstractToken ) )*
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:788:1: (this_AbstractToken= ruleAbstractToken ( () (lv_abstractTokens= ruleAbstractToken ) )* )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:789:5: this_AbstractToken= ruleAbstractToken ( () (lv_abstractTokens= ruleAbstractToken ) )*
             {
              
                     currentNode=createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.9/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
@@ -1854,7 +1854,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
                     current = this_AbstractToken; 
                     currentNode = currentNode.getParent();
                 
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:797:1: ( () (lv_abstractTokens= ruleAbstractToken ) )*
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:797:1: ( () (lv_abstractTokens= ruleAbstractToken ) )*
             loop16:
             do {
                 int alt16=2;
@@ -1867,14 +1867,14 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
                 switch (alt16) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:797:2: () (lv_abstractTokens= ruleAbstractToken )
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:797:2: () (lv_abstractTokens= ruleAbstractToken )
             	    {
-            	    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:797:2: ()
-            	    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:798:5: 
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:797:2: ()
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:798:5: 
             	    {
             	     
             	            temp=factory.create("Group");
-            	            factory.add(temp, "abstractTokens",current);
+            	            factory.add(temp, "abstractTokens", current, null /*ParserRule*/, currentNode);
             	            current = temp; 
             	            temp = null;
             	            CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.9/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
@@ -1886,8 +1886,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
             	    }
 
-            	    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:809:2: (lv_abstractTokens= ruleAbstractToken )
-            	    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:812:6: lv_abstractTokens= ruleAbstractToken
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:809:2: (lv_abstractTokens= ruleAbstractToken )
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:812:6: lv_abstractTokens= ruleAbstractToken
             	    {
             	     
             	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.9/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
@@ -1897,17 +1897,17 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
             	    _fsp--;
 
 
-            	    	        currentNode = currentNode.getParent();
             	    	        if (current==null) {
             	    	            current = factory.create("AbstractElement");
-            	    	            associateNodeWithAstElement(currentNode, current);
+            	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
             	    	        try {
-            	    	        	factory.add(current, "abstractTokens", lv_abstractTokens,"AbstractToken");
+            	    	        	factory.add(current, "abstractTokens", lv_abstractTokens, "AbstractToken", currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }
+            	    	        currentNode = currentNode.getParent();
             	    	    
 
             	    }
@@ -1942,7 +1942,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
     // $ANTLR start entryRuleAbstractToken
-    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:837:1: entryRuleAbstractToken returns [EObject current=null] : iv_ruleAbstractToken= ruleAbstractToken EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:837:1: entryRuleAbstractToken returns [EObject current=null] : iv_ruleAbstractToken= ruleAbstractToken EOF ;
     public final EObject entryRuleAbstractToken() throws RecognitionException {
         EObject current = null;
 
@@ -1950,8 +1950,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:837:55: (iv_ruleAbstractToken= ruleAbstractToken EOF )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:838:2: iv_ruleAbstractToken= ruleAbstractToken EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:837:55: (iv_ruleAbstractToken= ruleAbstractToken EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:838:2: iv_ruleAbstractToken= ruleAbstractToken EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.10" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleAbstractToken_in_entryRuleAbstractToken1888);
@@ -1977,7 +1977,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
     // $ANTLR start ruleAbstractToken
-    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:845:1: ruleAbstractToken returns [EObject current=null] : ( ( (this_Assignment= ruleAssignment | this_Action= ruleAction ) | this_AbstractTerminal= ruleAbstractTerminal ) (lv_cardinality= ( ( '?' | '*' ) | '+' ) )? ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:845:1: ruleAbstractToken returns [EObject current=null] : ( ( (this_Assignment= ruleAssignment | this_Action= ruleAction ) | this_AbstractTerminal= ruleAbstractTerminal ) (lv_cardinality= ( ( '?' | '*' ) | '+' ) )? ) ;
     public final EObject ruleAbstractToken() throws RecognitionException {
         EObject current = null;
 
@@ -1991,13 +1991,13 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:847:33: ( ( ( (this_Assignment= ruleAssignment | this_Action= ruleAction ) | this_AbstractTerminal= ruleAbstractTerminal ) (lv_cardinality= ( ( '?' | '*' ) | '+' ) )? ) )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:848:1: ( ( (this_Assignment= ruleAssignment | this_Action= ruleAction ) | this_AbstractTerminal= ruleAbstractTerminal ) (lv_cardinality= ( ( '?' | '*' ) | '+' ) )? )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:847:33: ( ( ( (this_Assignment= ruleAssignment | this_Action= ruleAction ) | this_AbstractTerminal= ruleAbstractTerminal ) (lv_cardinality= ( ( '?' | '*' ) | '+' ) )? ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:848:1: ( ( (this_Assignment= ruleAssignment | this_Action= ruleAction ) | this_AbstractTerminal= ruleAbstractTerminal ) (lv_cardinality= ( ( '?' | '*' ) | '+' ) )? )
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:848:1: ( ( (this_Assignment= ruleAssignment | this_Action= ruleAction ) | this_AbstractTerminal= ruleAbstractTerminal ) (lv_cardinality= ( ( '?' | '*' ) | '+' ) )? )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:848:2: ( (this_Assignment= ruleAssignment | this_Action= ruleAction ) | this_AbstractTerminal= ruleAbstractTerminal ) (lv_cardinality= ( ( '?' | '*' ) | '+' ) )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:848:1: ( ( (this_Assignment= ruleAssignment | this_Action= ruleAction ) | this_AbstractTerminal= ruleAbstractTerminal ) (lv_cardinality= ( ( '?' | '*' ) | '+' ) )? )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:848:2: ( (this_Assignment= ruleAssignment | this_Action= ruleAction ) | this_AbstractTerminal= ruleAbstractTerminal ) (lv_cardinality= ( ( '?' | '*' ) | '+' ) )?
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:848:2: ( (this_Assignment= ruleAssignment | this_Action= ruleAction ) | this_AbstractTerminal= ruleAbstractTerminal )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:848:2: ( (this_Assignment= ruleAssignment | this_Action= ruleAction ) | this_AbstractTerminal= ruleAbstractTerminal )
             int alt18=2;
             switch ( input.LA(1) ) {
             case RULE_ID:
@@ -2039,9 +2039,9 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
             switch (alt18) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:848:3: (this_Assignment= ruleAssignment | this_Action= ruleAction )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:848:3: (this_Assignment= ruleAssignment | this_Action= ruleAction )
                     {
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:848:3: (this_Assignment= ruleAssignment | this_Action= ruleAction )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:848:3: (this_Assignment= ruleAssignment | this_Action= ruleAction )
                     int alt17=2;
                     int LA17_0 = input.LA(1);
 
@@ -2059,7 +2059,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
                     }
                     switch (alt17) {
                         case 1 :
-                            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:849:5: this_Assignment= ruleAssignment
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:849:5: this_Assignment= ruleAssignment
                             {
                              
                                     currentNode=createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.10/@alternatives/@abstractTokens.0/@groups.0/@groups.0" /* xtext::RuleCall */, currentNode); 
@@ -2076,7 +2076,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
                             }
                             break;
                         case 2 :
-                            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:859:5: this_Action= ruleAction
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:859:5: this_Action= ruleAction
                             {
                              
                                     currentNode=createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.10/@alternatives/@abstractTokens.0/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
@@ -2099,7 +2099,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
                     }
                     break;
                 case 2 :
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:869:5: this_AbstractTerminal= ruleAbstractTerminal
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:869:5: this_AbstractTerminal= ruleAbstractTerminal
                     {
                      
                             currentNode=createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.10/@alternatives/@abstractTokens.0/@groups.1" /* xtext::RuleCall */, currentNode); 
@@ -2118,7 +2118,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
             }
 
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:877:2: (lv_cardinality= ( ( '?' | '*' ) | '+' ) )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:877:2: (lv_cardinality= ( ( '?' | '*' ) | '+' ) )?
             int alt21=2;
             int LA21_0 = input.LA(1);
 
@@ -2127,9 +2127,9 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
             }
             switch (alt21) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:879:6: lv_cardinality= ( ( '?' | '*' ) | '+' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:879:6: lv_cardinality= ( ( '?' | '*' ) | '+' )
                     {
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:879:21: ( ( '?' | '*' ) | '+' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:879:21: ( ( '?' | '*' ) | '+' )
                     int alt20=2;
                     int LA20_0 = input.LA(1);
 
@@ -2147,9 +2147,9 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
                     }
                     switch (alt20) {
                         case 1 :
-                            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:879:22: ( '?' | '*' )
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:879:22: ( '?' | '*' )
                             {
-                            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:879:22: ( '?' | '*' )
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:879:22: ( '?' | '*' )
                             int alt19=2;
                             int LA19_0 = input.LA(1);
 
@@ -2167,7 +2167,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
                             }
                             switch (alt19) {
                                 case 1 :
-                                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:879:23: '?'
+                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:879:23: '?'
                                     {
                                     match(input,25,FOLLOW_25_in_ruleAbstractToken2025); 
 
@@ -2177,7 +2177,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
                                     }
                                     break;
                                 case 2 :
-                                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:884:6: '*'
+                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:884:6: '*'
                                     {
                                     match(input,26,FOLLOW_26_in_ruleAbstractToken2040); 
 
@@ -2193,7 +2193,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
                             }
                             break;
                         case 2 :
-                            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:889:6: '+'
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:889:6: '+'
                             {
                             match(input,27,FOLLOW_27_in_ruleAbstractToken2056); 
 
@@ -2212,7 +2212,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
                     	        }
                     	        
                     	        try {
-                    	        	factory.set(current, "cardinality", input.LT(-1),null);
+                    	        	factory.set(current, "cardinality", input.LT(-1), null, currentNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
@@ -2244,7 +2244,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
     // $ANTLR start entryRuleAssignment
-    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:914:1: entryRuleAssignment returns [EObject current=null] : iv_ruleAssignment= ruleAssignment EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:914:1: entryRuleAssignment returns [EObject current=null] : iv_ruleAssignment= ruleAssignment EOF ;
     public final EObject entryRuleAssignment() throws RecognitionException {
         EObject current = null;
 
@@ -2252,8 +2252,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:914:52: (iv_ruleAssignment= ruleAssignment EOF )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:915:2: iv_ruleAssignment= ruleAssignment EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:914:52: (iv_ruleAssignment= ruleAssignment EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:915:2: iv_ruleAssignment= ruleAssignment EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.11" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleAssignment_in_entryRuleAssignment2103);
@@ -2279,7 +2279,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
     // $ANTLR start ruleAssignment
-    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:922:1: ruleAssignment returns [EObject current=null] : ( ( (lv_feature= RULE_ID ) (lv_operator= ( ( '+=' | '=' ) | '?=' ) ) ) (lv_terminal= ruleAbstractTerminal ) ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:922:1: ruleAssignment returns [EObject current=null] : ( ( (lv_feature= RULE_ID ) (lv_operator= ( ( '+=' | '=' ) | '?=' ) ) ) (lv_terminal= ruleAbstractTerminal ) ) ;
     public final EObject ruleAssignment() throws RecognitionException {
         EObject current = null;
 
@@ -2290,17 +2290,17 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:924:33: ( ( ( (lv_feature= RULE_ID ) (lv_operator= ( ( '+=' | '=' ) | '?=' ) ) ) (lv_terminal= ruleAbstractTerminal ) ) )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:925:1: ( ( (lv_feature= RULE_ID ) (lv_operator= ( ( '+=' | '=' ) | '?=' ) ) ) (lv_terminal= ruleAbstractTerminal ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:924:33: ( ( ( (lv_feature= RULE_ID ) (lv_operator= ( ( '+=' | '=' ) | '?=' ) ) ) (lv_terminal= ruleAbstractTerminal ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:925:1: ( ( (lv_feature= RULE_ID ) (lv_operator= ( ( '+=' | '=' ) | '?=' ) ) ) (lv_terminal= ruleAbstractTerminal ) )
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:925:1: ( ( (lv_feature= RULE_ID ) (lv_operator= ( ( '+=' | '=' ) | '?=' ) ) ) (lv_terminal= ruleAbstractTerminal ) )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:925:2: ( (lv_feature= RULE_ID ) (lv_operator= ( ( '+=' | '=' ) | '?=' ) ) ) (lv_terminal= ruleAbstractTerminal )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:925:1: ( ( (lv_feature= RULE_ID ) (lv_operator= ( ( '+=' | '=' ) | '?=' ) ) ) (lv_terminal= ruleAbstractTerminal ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:925:2: ( (lv_feature= RULE_ID ) (lv_operator= ( ( '+=' | '=' ) | '?=' ) ) ) (lv_terminal= ruleAbstractTerminal )
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:925:2: ( (lv_feature= RULE_ID ) (lv_operator= ( ( '+=' | '=' ) | '?=' ) ) )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:925:3: (lv_feature= RULE_ID ) (lv_operator= ( ( '+=' | '=' ) | '?=' ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:925:2: ( (lv_feature= RULE_ID ) (lv_operator= ( ( '+=' | '=' ) | '?=' ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:925:3: (lv_feature= RULE_ID ) (lv_operator= ( ( '+=' | '=' ) | '?=' ) )
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:925:3: (lv_feature= RULE_ID )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:927:6: lv_feature= RULE_ID
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:925:3: (lv_feature= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:927:6: lv_feature= RULE_ID
             {
             lv_feature=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAssignment2160); 
@@ -2314,7 +2314,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
             	        }
             	        
             	        try {
-            	        	factory.set(current, "feature", lv_feature,"ID");
+            	        	factory.set(current, "feature", lv_feature, "ID", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -2322,10 +2322,10 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
             }
 
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:945:2: (lv_operator= ( ( '+=' | '=' ) | '?=' ) )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:947:6: lv_operator= ( ( '+=' | '=' ) | '?=' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:945:2: (lv_operator= ( ( '+=' | '=' ) | '?=' ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:947:6: lv_operator= ( ( '+=' | '=' ) | '?=' )
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:947:18: ( ( '+=' | '=' ) | '?=' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:947:18: ( ( '+=' | '=' ) | '?=' )
             int alt23=2;
             int LA23_0 = input.LA(1);
 
@@ -2343,9 +2343,9 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
             }
             switch (alt23) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:947:19: ( '+=' | '=' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:947:19: ( '+=' | '=' )
                     {
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:947:19: ( '+=' | '=' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:947:19: ( '+=' | '=' )
                     int alt22=2;
                     int LA22_0 = input.LA(1);
 
@@ -2363,7 +2363,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
                     }
                     switch (alt22) {
                         case 1 :
-                            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:947:20: '+='
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:947:20: '+='
                             {
                             match(input,28,FOLLOW_28_in_ruleAssignment2194); 
 
@@ -2373,7 +2373,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
                             }
                             break;
                         case 2 :
-                            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:952:6: '='
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:952:6: '='
                             {
                             match(input,29,FOLLOW_29_in_ruleAssignment2209); 
 
@@ -2389,7 +2389,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
                     }
                     break;
                 case 2 :
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:957:6: '?='
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:957:6: '?='
                     {
                     match(input,30,FOLLOW_30_in_ruleAssignment2225); 
 
@@ -2408,7 +2408,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
             	        }
             	        
             	        try {
-            	        	factory.set(current, "operator", input.LT(-1),null);
+            	        	factory.set(current, "operator", input.LT(-1), null, currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -2419,8 +2419,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
             }
 
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:975:3: (lv_terminal= ruleAbstractTerminal )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:978:6: lv_terminal= ruleAbstractTerminal
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:975:3: (lv_terminal= ruleAbstractTerminal )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:978:6: lv_terminal= ruleAbstractTerminal
             {
              
             	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.11/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
@@ -2430,17 +2430,17 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
             _fsp--;
 
 
-            	        currentNode = currentNode.getParent();
             	        if (current==null) {
             	            current = factory.create("Assignment");
-            	            associateNodeWithAstElement(currentNode, current);
+            	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
             	        try {
-            	        	factory.set(current, "terminal", lv_terminal,"AbstractTerminal");
+            	        	factory.set(current, "terminal", lv_terminal, "AbstractTerminal", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
+            	        currentNode = currentNode.getParent();
             	    
 
             }
@@ -2466,7 +2466,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
     // $ANTLR start entryRuleAction
-    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1003:1: entryRuleAction returns [EObject current=null] : iv_ruleAction= ruleAction EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1003:1: entryRuleAction returns [EObject current=null] : iv_ruleAction= ruleAction EOF ;
     public final EObject entryRuleAction() throws RecognitionException {
         EObject current = null;
 
@@ -2474,8 +2474,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1003:48: (iv_ruleAction= ruleAction EOF )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1004:2: iv_ruleAction= ruleAction EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1003:48: (iv_ruleAction= ruleAction EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1004:2: iv_ruleAction= ruleAction EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.12" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleAction_in_entryRuleAction2310);
@@ -2501,7 +2501,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
     // $ANTLR start ruleAction
-    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1011:1: ruleAction returns [EObject current=null] : ( ( ( ( ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' ) (lv_feature= RULE_ID ) ) (lv_operator= ( '=' | '+=' ) ) ) 'current' ) '}' ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1011:1: ruleAction returns [EObject current=null] : ( ( ( ( ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' ) (lv_feature= RULE_ID ) ) (lv_operator= ( '=' | '+=' ) ) ) 'current' ) '}' ) ;
     public final EObject ruleAction() throws RecognitionException {
         EObject current = null;
 
@@ -2512,35 +2512,35 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1013:33: ( ( ( ( ( ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' ) (lv_feature= RULE_ID ) ) (lv_operator= ( '=' | '+=' ) ) ) 'current' ) '}' ) )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1014:1: ( ( ( ( ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' ) (lv_feature= RULE_ID ) ) (lv_operator= ( '=' | '+=' ) ) ) 'current' ) '}' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1013:33: ( ( ( ( ( ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' ) (lv_feature= RULE_ID ) ) (lv_operator= ( '=' | '+=' ) ) ) 'current' ) '}' ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1014:1: ( ( ( ( ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' ) (lv_feature= RULE_ID ) ) (lv_operator= ( '=' | '+=' ) ) ) 'current' ) '}' )
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1014:1: ( ( ( ( ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' ) (lv_feature= RULE_ID ) ) (lv_operator= ( '=' | '+=' ) ) ) 'current' ) '}' )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1014:2: ( ( ( ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' ) (lv_feature= RULE_ID ) ) (lv_operator= ( '=' | '+=' ) ) ) 'current' ) '}'
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1014:1: ( ( ( ( ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' ) (lv_feature= RULE_ID ) ) (lv_operator= ( '=' | '+=' ) ) ) 'current' ) '}' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1014:2: ( ( ( ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' ) (lv_feature= RULE_ID ) ) (lv_operator= ( '=' | '+=' ) ) ) 'current' ) '}'
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1014:2: ( ( ( ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' ) (lv_feature= RULE_ID ) ) (lv_operator= ( '=' | '+=' ) ) ) 'current' )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1014:3: ( ( ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' ) (lv_feature= RULE_ID ) ) (lv_operator= ( '=' | '+=' ) ) ) 'current'
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1014:2: ( ( ( ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' ) (lv_feature= RULE_ID ) ) (lv_operator= ( '=' | '+=' ) ) ) 'current' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1014:3: ( ( ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' ) (lv_feature= RULE_ID ) ) (lv_operator= ( '=' | '+=' ) ) ) 'current'
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1014:3: ( ( ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' ) (lv_feature= RULE_ID ) ) (lv_operator= ( '=' | '+=' ) ) )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1014:4: ( ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' ) (lv_feature= RULE_ID ) ) (lv_operator= ( '=' | '+=' ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1014:3: ( ( ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' ) (lv_feature= RULE_ID ) ) (lv_operator= ( '=' | '+=' ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1014:4: ( ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' ) (lv_feature= RULE_ID ) ) (lv_operator= ( '=' | '+=' ) )
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1014:4: ( ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' ) (lv_feature= RULE_ID ) )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1014:5: ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' ) (lv_feature= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1014:4: ( ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' ) (lv_feature= RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1014:5: ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' ) (lv_feature= RULE_ID )
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1014:5: ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1014:6: ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.'
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1014:5: ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1014:6: ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.'
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1014:6: ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1014:7: ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1014:6: ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1014:7: ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef )
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1014:7: ( '{' ( 'current' '=' )? )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1014:8: '{' ( 'current' '=' )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1014:7: ( '{' ( 'current' '=' )? )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1014:8: '{' ( 'current' '=' )?
             {
             match(input,31,FOLLOW_31_in_ruleAction2360); 
 
                     createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1018:1: ( 'current' '=' )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1018:1: ( 'current' '=' )?
             int alt24=2;
             int LA24_0 = input.LA(1);
 
@@ -2549,7 +2549,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
             }
             switch (alt24) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1018:2: 'current' '='
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1018:2: 'current' '='
                     {
                     match(input,32,FOLLOW_32_in_ruleAction2370); 
 
@@ -2568,8 +2568,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
             }
 
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1026:4: (lv_typeName= ruleTypeRef )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1029:6: lv_typeName= ruleTypeRef
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1026:4: (lv_typeName= ruleTypeRef )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1029:6: lv_typeName= ruleTypeRef
             {
              
             	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
@@ -2579,17 +2579,17 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
             _fsp--;
 
 
-            	        currentNode = currentNode.getParent();
             	        if (current==null) {
             	            current = factory.create("Action");
-            	            associateNodeWithAstElement(currentNode, current);
+            	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
             	        try {
-            	        	factory.set(current, "typeName", lv_typeName,"TypeRef");
+            	        	factory.set(current, "typeName", lv_typeName, "TypeRef", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
+            	        currentNode = currentNode.getParent();
             	    
 
             }
@@ -2604,8 +2604,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
             }
 
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1051:2: (lv_feature= RULE_ID )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1053:6: lv_feature= RULE_ID
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1051:2: (lv_feature= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1053:6: lv_feature= RULE_ID
             {
             lv_feature=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAction2452); 
@@ -2619,7 +2619,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
             	        }
             	        
             	        try {
-            	        	factory.set(current, "feature", lv_feature,"ID");
+            	        	factory.set(current, "feature", lv_feature, "ID", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -2630,10 +2630,10 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
             }
 
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1071:3: (lv_operator= ( '=' | '+=' ) )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1073:6: lv_operator= ( '=' | '+=' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1071:3: (lv_operator= ( '=' | '+=' ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1073:6: lv_operator= ( '=' | '+=' )
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1073:18: ( '=' | '+=' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1073:18: ( '=' | '+=' )
             int alt25=2;
             int LA25_0 = input.LA(1);
 
@@ -2651,7 +2651,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
             }
             switch (alt25) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1073:19: '='
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1073:19: '='
                     {
                     match(input,29,FOLLOW_29_in_ruleAction2486); 
 
@@ -2661,7 +2661,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
                     }
                     break;
                 case 2 :
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1078:6: '+='
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1078:6: '+='
                     {
                     match(input,28,FOLLOW_28_in_ruleAction2501); 
 
@@ -2680,7 +2680,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
             	        }
             	        
             	        try {
-            	        	factory.set(current, "operator", input.LT(-1),null);
+            	        	factory.set(current, "operator", input.LT(-1), null, currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -2723,7 +2723,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
     // $ANTLR start entryRuleAbstractTerminal
-    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1111:1: entryRuleAbstractTerminal returns [EObject current=null] : iv_ruleAbstractTerminal= ruleAbstractTerminal EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1111:1: entryRuleAbstractTerminal returns [EObject current=null] : iv_ruleAbstractTerminal= ruleAbstractTerminal EOF ;
     public final EObject entryRuleAbstractTerminal() throws RecognitionException {
         EObject current = null;
 
@@ -2731,8 +2731,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1111:58: (iv_ruleAbstractTerminal= ruleAbstractTerminal EOF )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1112:2: iv_ruleAbstractTerminal= ruleAbstractTerminal EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1111:58: (iv_ruleAbstractTerminal= ruleAbstractTerminal EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1112:2: iv_ruleAbstractTerminal= ruleAbstractTerminal EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.13" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleAbstractTerminal_in_entryRuleAbstractTerminal2567);
@@ -2758,7 +2758,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
     // $ANTLR start ruleAbstractTerminal
-    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1119:1: ruleAbstractTerminal returns [EObject current=null] : ( ( (this_Keyword= ruleKeyword | this_RuleCall= ruleRuleCall ) | this_ParenthesizedElement= ruleParenthesizedElement ) | this_CrossReference= ruleCrossReference ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1119:1: ruleAbstractTerminal returns [EObject current=null] : ( ( (this_Keyword= ruleKeyword | this_RuleCall= ruleRuleCall ) | this_ParenthesizedElement= ruleParenthesizedElement ) | this_CrossReference= ruleCrossReference ) ;
     public final EObject ruleAbstractTerminal() throws RecognitionException {
         EObject current = null;
 
@@ -2773,10 +2773,10 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1121:33: ( ( ( (this_Keyword= ruleKeyword | this_RuleCall= ruleRuleCall ) | this_ParenthesizedElement= ruleParenthesizedElement ) | this_CrossReference= ruleCrossReference ) )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1122:1: ( ( (this_Keyword= ruleKeyword | this_RuleCall= ruleRuleCall ) | this_ParenthesizedElement= ruleParenthesizedElement ) | this_CrossReference= ruleCrossReference )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1121:33: ( ( ( (this_Keyword= ruleKeyword | this_RuleCall= ruleRuleCall ) | this_ParenthesizedElement= ruleParenthesizedElement ) | this_CrossReference= ruleCrossReference ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1122:1: ( ( (this_Keyword= ruleKeyword | this_RuleCall= ruleRuleCall ) | this_ParenthesizedElement= ruleParenthesizedElement ) | this_CrossReference= ruleCrossReference )
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1122:1: ( ( (this_Keyword= ruleKeyword | this_RuleCall= ruleRuleCall ) | this_ParenthesizedElement= ruleParenthesizedElement ) | this_CrossReference= ruleCrossReference )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1122:1: ( ( (this_Keyword= ruleKeyword | this_RuleCall= ruleRuleCall ) | this_ParenthesizedElement= ruleParenthesizedElement ) | this_CrossReference= ruleCrossReference )
             int alt28=2;
             int LA28_0 = input.LA(1);
 
@@ -2794,9 +2794,9 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
             }
             switch (alt28) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1122:2: ( (this_Keyword= ruleKeyword | this_RuleCall= ruleRuleCall ) | this_ParenthesizedElement= ruleParenthesizedElement )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1122:2: ( (this_Keyword= ruleKeyword | this_RuleCall= ruleRuleCall ) | this_ParenthesizedElement= ruleParenthesizedElement )
                     {
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1122:2: ( (this_Keyword= ruleKeyword | this_RuleCall= ruleRuleCall ) | this_ParenthesizedElement= ruleParenthesizedElement )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1122:2: ( (this_Keyword= ruleKeyword | this_RuleCall= ruleRuleCall ) | this_ParenthesizedElement= ruleParenthesizedElement )
                     int alt27=2;
                     int LA27_0 = input.LA(1);
 
@@ -2814,9 +2814,9 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
                     }
                     switch (alt27) {
                         case 1 :
-                            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1122:3: (this_Keyword= ruleKeyword | this_RuleCall= ruleRuleCall )
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1122:3: (this_Keyword= ruleKeyword | this_RuleCall= ruleRuleCall )
                             {
-                            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1122:3: (this_Keyword= ruleKeyword | this_RuleCall= ruleRuleCall )
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1122:3: (this_Keyword= ruleKeyword | this_RuleCall= ruleRuleCall )
                             int alt26=2;
                             int LA26_0 = input.LA(1);
 
@@ -2834,7 +2834,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
                             }
                             switch (alt26) {
                                 case 1 :
-                                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1123:5: this_Keyword= ruleKeyword
+                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1123:5: this_Keyword= ruleKeyword
                                     {
                                      
                                             currentNode=createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.13/@alternatives/@groups.0/@groups.0/@groups.0" /* xtext::RuleCall */, currentNode); 
@@ -2851,7 +2851,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
                                     }
                                     break;
                                 case 2 :
-                                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1133:5: this_RuleCall= ruleRuleCall
+                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1133:5: this_RuleCall= ruleRuleCall
                                     {
                                      
                                             currentNode=createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.13/@alternatives/@groups.0/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
@@ -2874,7 +2874,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
                             }
                             break;
                         case 2 :
-                            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1143:5: this_ParenthesizedElement= ruleParenthesizedElement
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1143:5: this_ParenthesizedElement= ruleParenthesizedElement
                             {
                              
                                     currentNode=createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.13/@alternatives/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
@@ -2897,7 +2897,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
                     }
                     break;
                 case 2 :
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1153:5: this_CrossReference= ruleCrossReference
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1153:5: this_CrossReference= ruleCrossReference
                     {
                      
                             currentNode=createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.13/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
@@ -2934,7 +2934,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
     // $ANTLR start entryRuleCrossReference
-    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1168:1: entryRuleCrossReference returns [EObject current=null] : iv_ruleCrossReference= ruleCrossReference EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1168:1: entryRuleCrossReference returns [EObject current=null] : iv_ruleCrossReference= ruleCrossReference EOF ;
     public final EObject entryRuleCrossReference() throws RecognitionException {
         EObject current = null;
 
@@ -2942,8 +2942,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1168:56: (iv_ruleCrossReference= ruleCrossReference EOF )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1169:2: iv_ruleCrossReference= ruleCrossReference EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1168:56: (iv_ruleCrossReference= ruleCrossReference EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1169:2: iv_ruleCrossReference= ruleCrossReference EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.14" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleCrossReference_in_entryRuleCrossReference2741);
@@ -2969,7 +2969,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
     // $ANTLR start ruleCrossReference
-    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1176:1: ruleCrossReference returns [EObject current=null] : ( ( ( '[' (lv_type= ruleTypeRef ) ) ( '|' ( ( RULE_ID ) ) )? ) ']' ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1176:1: ruleCrossReference returns [EObject current=null] : ( ( ( '[' (lv_type= ruleTypeRef ) ) ( '|' ( ( RULE_ID ) ) )? ) ']' ) ;
     public final EObject ruleCrossReference() throws RecognitionException {
         EObject current = null;
 
@@ -2978,24 +2978,24 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1178:33: ( ( ( ( '[' (lv_type= ruleTypeRef ) ) ( '|' ( ( RULE_ID ) ) )? ) ']' ) )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1179:1: ( ( ( '[' (lv_type= ruleTypeRef ) ) ( '|' ( ( RULE_ID ) ) )? ) ']' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1178:33: ( ( ( ( '[' (lv_type= ruleTypeRef ) ) ( '|' ( ( RULE_ID ) ) )? ) ']' ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1179:1: ( ( ( '[' (lv_type= ruleTypeRef ) ) ( '|' ( ( RULE_ID ) ) )? ) ']' )
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1179:1: ( ( ( '[' (lv_type= ruleTypeRef ) ) ( '|' ( ( RULE_ID ) ) )? ) ']' )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1179:2: ( ( '[' (lv_type= ruleTypeRef ) ) ( '|' ( ( RULE_ID ) ) )? ) ']'
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1179:1: ( ( ( '[' (lv_type= ruleTypeRef ) ) ( '|' ( ( RULE_ID ) ) )? ) ']' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1179:2: ( ( '[' (lv_type= ruleTypeRef ) ) ( '|' ( ( RULE_ID ) ) )? ) ']'
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1179:2: ( ( '[' (lv_type= ruleTypeRef ) ) ( '|' ( ( RULE_ID ) ) )? )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1179:3: ( '[' (lv_type= ruleTypeRef ) ) ( '|' ( ( RULE_ID ) ) )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1179:2: ( ( '[' (lv_type= ruleTypeRef ) ) ( '|' ( ( RULE_ID ) ) )? )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1179:3: ( '[' (lv_type= ruleTypeRef ) ) ( '|' ( ( RULE_ID ) ) )?
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1179:3: ( '[' (lv_type= ruleTypeRef ) )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1179:4: '[' (lv_type= ruleTypeRef )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1179:3: ( '[' (lv_type= ruleTypeRef ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1179:4: '[' (lv_type= ruleTypeRef )
             {
             match(input,34,FOLLOW_34_in_ruleCrossReference2787); 
 
                     createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.14/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1183:1: (lv_type= ruleTypeRef )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1186:6: lv_type= ruleTypeRef
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1183:1: (lv_type= ruleTypeRef )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1186:6: lv_type= ruleTypeRef
             {
              
             	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.14/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
@@ -3005,17 +3005,17 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
             _fsp--;
 
 
-            	        currentNode = currentNode.getParent();
             	        if (current==null) {
             	            current = factory.create("CrossReference");
-            	            associateNodeWithAstElement(currentNode, current);
+            	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
             	        try {
-            	        	factory.set(current, "type", lv_type,"TypeRef");
+            	        	factory.set(current, "type", lv_type, "TypeRef", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
+            	        currentNode = currentNode.getParent();
             	    
 
             }
@@ -3023,7 +3023,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
             }
 
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1204:3: ( '|' ( ( RULE_ID ) ) )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1204:3: ( '|' ( ( RULE_ID ) ) )?
             int alt29=2;
             int LA29_0 = input.LA(1);
 
@@ -3032,14 +3032,14 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
             }
             switch (alt29) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1204:4: '|' ( ( RULE_ID ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1204:4: '|' ( ( RULE_ID ) )
                     {
                     match(input,24,FOLLOW_24_in_ruleCrossReference2836); 
 
                             createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.14/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1208:1: ( ( RULE_ID ) )
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1211:3: ( RULE_ID )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1208:1: ( ( RULE_ID ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1211:3: ( RULE_ID )
                     {
 
                     			if (current==null) {
@@ -3047,8 +3047,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1217:1: ( RULE_ID )
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1218:2: RULE_ID
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1217:1: ( RULE_ID )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1218:2: RULE_ID
                     {
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleCrossReference2860); 
                      
@@ -3094,7 +3094,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
     // $ANTLR start entryRuleParenthesizedElement
-    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1234:1: entryRuleParenthesizedElement returns [EObject current=null] : iv_ruleParenthesizedElement= ruleParenthesizedElement EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1234:1: entryRuleParenthesizedElement returns [EObject current=null] : iv_ruleParenthesizedElement= ruleParenthesizedElement EOF ;
     public final EObject entryRuleParenthesizedElement() throws RecognitionException {
         EObject current = null;
 
@@ -3102,8 +3102,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1234:62: (iv_ruleParenthesizedElement= ruleParenthesizedElement EOF )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1235:2: iv_ruleParenthesizedElement= ruleParenthesizedElement EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1234:62: (iv_ruleParenthesizedElement= ruleParenthesizedElement EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1235:2: iv_ruleParenthesizedElement= ruleParenthesizedElement EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.15" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleParenthesizedElement_in_entryRuleParenthesizedElement2909);
@@ -3129,7 +3129,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
     // $ANTLR start ruleParenthesizedElement
-    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1242:1: ruleParenthesizedElement returns [EObject current=null] : ( ( '(' this_Alternatives= ruleAlternatives ) ')' ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1242:1: ruleParenthesizedElement returns [EObject current=null] : ( ( '(' this_Alternatives= ruleAlternatives ) ')' ) ;
     public final EObject ruleParenthesizedElement() throws RecognitionException {
         EObject current = null;
 
@@ -3138,14 +3138,14 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1244:33: ( ( ( '(' this_Alternatives= ruleAlternatives ) ')' ) )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1245:1: ( ( '(' this_Alternatives= ruleAlternatives ) ')' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1244:33: ( ( ( '(' this_Alternatives= ruleAlternatives ) ')' ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1245:1: ( ( '(' this_Alternatives= ruleAlternatives ) ')' )
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1245:1: ( ( '(' this_Alternatives= ruleAlternatives ) ')' )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1245:2: ( '(' this_Alternatives= ruleAlternatives ) ')'
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1245:1: ( ( '(' this_Alternatives= ruleAlternatives ) ')' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1245:2: ( '(' this_Alternatives= ruleAlternatives ) ')'
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1245:2: ( '(' this_Alternatives= ruleAlternatives )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1245:3: '(' this_Alternatives= ruleAlternatives
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1245:2: ( '(' this_Alternatives= ruleAlternatives )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1245:3: '(' this_Alternatives= ruleAlternatives
             {
             match(input,36,FOLLOW_36_in_ruleParenthesizedElement2954); 
 
@@ -3190,7 +3190,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
     // $ANTLR start entryRuleKeyword
-    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1269:1: entryRuleKeyword returns [EObject current=null] : iv_ruleKeyword= ruleKeyword EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1269:1: entryRuleKeyword returns [EObject current=null] : iv_ruleKeyword= ruleKeyword EOF ;
     public final EObject entryRuleKeyword() throws RecognitionException {
         EObject current = null;
 
@@ -3198,8 +3198,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1269:49: (iv_ruleKeyword= ruleKeyword EOF )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1270:2: iv_ruleKeyword= ruleKeyword EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1269:49: (iv_ruleKeyword= ruleKeyword EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1270:2: iv_ruleKeyword= ruleKeyword EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.16" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleKeyword_in_entryRuleKeyword3018);
@@ -3225,7 +3225,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
     // $ANTLR start ruleKeyword
-    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1277:1: ruleKeyword returns [EObject current=null] : (lv_value= RULE_STRING ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1277:1: ruleKeyword returns [EObject current=null] : (lv_value= RULE_STRING ) ;
     public final EObject ruleKeyword() throws RecognitionException {
         EObject current = null;
 
@@ -3233,11 +3233,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1279:33: ( (lv_value= RULE_STRING ) )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1280:1: (lv_value= RULE_STRING )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1279:33: ( (lv_value= RULE_STRING ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1280:1: (lv_value= RULE_STRING )
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1280:1: (lv_value= RULE_STRING )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1282:6: lv_value= RULE_STRING
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1280:1: (lv_value= RULE_STRING )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1282:6: lv_value= RULE_STRING
             {
             lv_value=(Token)input.LT(1);
             match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleKeyword3073); 
@@ -3251,7 +3251,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
             	        }
             	        
             	        try {
-            	        	factory.set(current, "value", lv_value,"STRING");
+            	        	factory.set(current, "value", lv_value, "STRING", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -3277,7 +3277,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
     // $ANTLR start entryRuleRuleCall
-    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1307:1: entryRuleRuleCall returns [EObject current=null] : iv_ruleRuleCall= ruleRuleCall EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1307:1: entryRuleRuleCall returns [EObject current=null] : iv_ruleRuleCall= ruleRuleCall EOF ;
     public final EObject entryRuleRuleCall() throws RecognitionException {
         EObject current = null;
 
@@ -3285,8 +3285,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1307:50: (iv_ruleRuleCall= ruleRuleCall EOF )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1308:2: iv_ruleRuleCall= ruleRuleCall EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1307:50: (iv_ruleRuleCall= ruleRuleCall EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1308:2: iv_ruleRuleCall= ruleRuleCall EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.17" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleRuleCall_in_entryRuleRuleCall3116);
@@ -3312,17 +3312,17 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
 
 
     // $ANTLR start ruleRuleCall
-    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1315:1: ruleRuleCall returns [EObject current=null] : ( ( RULE_ID ) ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1315:1: ruleRuleCall returns [EObject current=null] : ( ( RULE_ID ) ) ;
     public final EObject ruleRuleCall() throws RecognitionException {
         EObject current = null;
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1317:33: ( ( ( RULE_ID ) ) )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1318:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1317:33: ( ( ( RULE_ID ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1318:1: ( ( RULE_ID ) )
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1318:1: ( ( RULE_ID ) )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1321:3: ( RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1318:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1321:3: ( RULE_ID )
             {
 
             			if (current==null) {
@@ -3330,8 +3330,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractAntlrParser 
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1327:1: ( RULE_ID )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1328:2: RULE_ID
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1327:1: ( RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g:1328:2: RULE_ID
             {
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleRuleCall3174); 
              

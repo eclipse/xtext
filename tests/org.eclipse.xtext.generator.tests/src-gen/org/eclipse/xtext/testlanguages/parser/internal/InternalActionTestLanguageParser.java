@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g 2008-12-19 13:25:16
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g 2009-01-04 17:07:29
 
 package org.eclipse.xtext.testlanguages.parser.internal; 
 
@@ -134,17 +134,17 @@ public class InternalActionTestLanguageParser extends AbstractAntlrParser {
             	    _fsp--;
 
 
-            	    	        currentNode = currentNode.getParent();
             	    	        if (current==null) {
             	    	            current = factory.create("Model");
-            	    	            associateNodeWithAstElement(currentNode, current);
+            	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
             	    	        try {
-            	    	        	factory.add(current, "children", lv_children,"Element");
+            	    	        	factory.add(current, "children", lv_children, "Element", currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }
+            	    	        currentNode = currentNode.getParent();
             	    	    
 
             	    }
@@ -244,7 +244,7 @@ public class InternalActionTestLanguageParser extends AbstractAntlrParser {
             {
              
                     temp=factory.create("Item");
-                    factory.add(temp, "items",current);
+                    factory.add(temp, "items", current, null /*ParserRule*/, currentNode);
                     current = temp; 
                     temp = null;
                     CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
@@ -267,17 +267,17 @@ public class InternalActionTestLanguageParser extends AbstractAntlrParser {
             _fsp--;
 
 
-            	        currentNode = currentNode.getParent();
             	        if (current==null) {
             	            current = factory.create("Type");
-            	            associateNodeWithAstElement(currentNode, current);
+            	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
             	        try {
-            	        	factory.add(current, "items", lv_items,"Item");
+            	        	factory.add(current, "items", lv_items, "Item", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
+            	        currentNode = currentNode.getParent();
             	    
 
             }
@@ -360,7 +360,7 @@ public class InternalActionTestLanguageParser extends AbstractAntlrParser {
             {
              
                     temp=factory.create("Thing");
-                    factory.set(temp, "content",current);
+                    factory.set(temp, "content", current, null /*ParserRule*/, currentNode);
                     current = temp; 
                     temp = null;
                     CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
@@ -387,7 +387,7 @@ public class InternalActionTestLanguageParser extends AbstractAntlrParser {
             	        }
             	        
             	        try {
-            	        	factory.set(current, "name", lv_name,"ID");
+            	        	factory.set(current, "name", lv_name, "ID", currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }

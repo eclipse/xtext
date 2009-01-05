@@ -4,8 +4,12 @@
   <idElements>eclipse</idElements>
   <idElements>xtext</idElements>
   <idElements>XtextGrammarTestLanguage</idElements>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="XtextTest" nsURI="http://www.eclipse.org/2008/Test/XtextTest"/>
-  <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="ecore" uri="http://www.eclipse.org/emf/2002/Ecore"/>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="XtextTest">
+    <ePackage href="http://www.eclipse.org/2008/Test/XtextTest#/"/>
+  </metamodelDeclarations>
+  <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="ecore">
+    <ePackage href="http://www.eclipse.org/emf/2002/Ecore#/"/>
+  </metamodelDeclarations>
   <rules xsi:type="xtext:ParserRule" name="Grammar">
     <type metamodel="//@metamodelDeclarations.0">
       <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//Grammar"/>

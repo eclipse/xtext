@@ -4,8 +4,12 @@
   <idElements>eclipse</idElements>
   <idElements>xtext</idElements>
   <idElements>Xtext</idElements>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="xtext" nsURI="http://www.eclipse.org/2008/Xtext"/>
-  <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="ecore" uri="http://www.eclipse.org/emf/2002/Ecore"/>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="xtext">
+    <ePackage href="http://www.eclipse.org/2008/Xtext#/"/>
+  </metamodelDeclarations>
+  <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="ecore">
+    <ePackage href="http://www.eclipse.org/emf/2002/Ecore#/"/>
+  </metamodelDeclarations>
   <rules xsi:type="xtext:ParserRule" name="Grammar">
     <type metamodel="//@metamodelDeclarations.0">
       <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Xtext#//Grammar"/>
@@ -96,8 +100,11 @@
             </terminal>
           </abstractTokens>
         </abstractTokens>
-        <abstractTokens xsi:type="xtext:Assignment" feature="nsURI" operator="=">
-          <terminal xsi:type="xtext:RuleCall">
+        <abstractTokens xsi:type="xtext:Assignment" feature="ePackage" operator="=">
+          <terminal xsi:type="xtext:CrossReference">
+            <type metamodel="//@metamodelDeclarations.1">
+              <type xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+            </type>
             <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.2"/>
           </terminal>
         </abstractTokens>
@@ -119,8 +126,11 @@
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Group">
         <abstractTokens xsi:type="xtext:Keyword" value="import"/>
-        <abstractTokens xsi:type="xtext:Assignment" feature="uri" operator="=">
-          <terminal xsi:type="xtext:RuleCall">
+        <abstractTokens xsi:type="xtext:Assignment" feature="ePackage" operator="=">
+          <terminal xsi:type="xtext:CrossReference">
+            <type metamodel="//@metamodelDeclarations.1">
+              <type xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+            </type>
             <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.2"/>
           </terminal>
         </abstractTokens>

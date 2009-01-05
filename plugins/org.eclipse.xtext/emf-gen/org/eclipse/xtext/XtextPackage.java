@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextPackage.java,v 1.16 2008/12/10 11:49:38 szarnekow Exp $
+ * $Id: XtextPackage.java,v 1.17 2009/01/05 10:44:01 szarnekow Exp $
  */
 package org.eclipse.xtext;
 
@@ -215,22 +215,22 @@ public interface XtextPackage extends EPackage
   int GRAMMAR_FEATURE_COUNT = 5;
 
 		/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-  int ABSTRACT_RULE__NAME = 0;
-
-		/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int ABSTRACT_RULE__TYPE = 1;
+  int ABSTRACT_RULE__TYPE = 0;
+
+		/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int ABSTRACT_RULE__NAME = 1;
 
 		/**
 	 * The number of structural features of the '<em>Abstract Rule</em>' class.
@@ -242,13 +242,22 @@ public interface XtextPackage extends EPackage
   int ABSTRACT_RULE_FEATURE_COUNT = 2;
 
 		/**
+	 * The feature id for the '<em><b>EPackage</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_METAMODEL_DECLARATION__EPACKAGE = 0;
+
+		/**
 	 * The feature id for the '<em><b>Alias</b></em>' attribute.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int ABSTRACT_METAMODEL_DECLARATION__ALIAS = 0;
+  int ABSTRACT_METAMODEL_DECLARATION__ALIAS = 1;
 
 		/**
 	 * The number of structural features of the '<em>Abstract Metamodel Declaration</em>' class.
@@ -257,7 +266,16 @@ public interface XtextPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-  int ABSTRACT_METAMODEL_DECLARATION_FEATURE_COUNT = 1;
+  int ABSTRACT_METAMODEL_DECLARATION_FEATURE_COUNT = 2;
+
+		/**
+	 * The feature id for the '<em><b>EPackage</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERATED_METAMODEL__EPACKAGE = ABSTRACT_METAMODEL_DECLARATION__EPACKAGE;
 
 		/**
 	 * The feature id for the '<em><b>Alias</b></em>' attribute.
@@ -278,22 +296,22 @@ public interface XtextPackage extends EPackage
   int GENERATED_METAMODEL__NAME = ABSTRACT_METAMODEL_DECLARATION_FEATURE_COUNT + 0;
 
 		/**
-	 * The feature id for the '<em><b>Ns URI</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-  int GENERATED_METAMODEL__NS_URI = ABSTRACT_METAMODEL_DECLARATION_FEATURE_COUNT + 1;
-
-		/**
 	 * The number of structural features of the '<em>Generated Metamodel</em>' class.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int GENERATED_METAMODEL_FEATURE_COUNT = ABSTRACT_METAMODEL_DECLARATION_FEATURE_COUNT + 2;
+  int GENERATED_METAMODEL_FEATURE_COUNT = ABSTRACT_METAMODEL_DECLARATION_FEATURE_COUNT + 1;
+
+		/**
+	 * The feature id for the '<em><b>EPackage</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCED_METAMODEL__EPACKAGE = ABSTRACT_METAMODEL_DECLARATION__EPACKAGE;
 
 		/**
 	 * The feature id for the '<em><b>Alias</b></em>' attribute.
@@ -305,31 +323,13 @@ public interface XtextPackage extends EPackage
   int REFERENCED_METAMODEL__ALIAS = ABSTRACT_METAMODEL_DECLARATION__ALIAS;
 
 		/**
-	 * The feature id for the '<em><b>Uri</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-  int REFERENCED_METAMODEL__URI = ABSTRACT_METAMODEL_DECLARATION_FEATURE_COUNT + 0;
-
-		/**
 	 * The number of structural features of the '<em>Referenced Metamodel</em>' class.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int REFERENCED_METAMODEL_FEATURE_COUNT = ABSTRACT_METAMODEL_DECLARATION_FEATURE_COUNT + 1;
-
-		/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-  int LEXER_RULE__NAME = ABSTRACT_RULE__NAME;
+  int REFERENCED_METAMODEL_FEATURE_COUNT = ABSTRACT_METAMODEL_DECLARATION_FEATURE_COUNT + 0;
 
 		/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -339,6 +339,15 @@ public interface XtextPackage extends EPackage
 	 * @ordered
 	 */
   int LEXER_RULE__TYPE = ABSTRACT_RULE__TYPE;
+
+		/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int LEXER_RULE__NAME = ABSTRACT_RULE__NAME;
 
 		/**
 	 * The feature id for the '<em><b>Body</b></em>' attribute.
@@ -359,15 +368,6 @@ public interface XtextPackage extends EPackage
   int LEXER_RULE_FEATURE_COUNT = ABSTRACT_RULE_FEATURE_COUNT + 1;
 
 		/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-  int PARSER_RULE__NAME = ABSTRACT_RULE__NAME;
-
-		/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -375,6 +375,15 @@ public interface XtextPackage extends EPackage
 	 * @ordered
 	 */
   int PARSER_RULE__TYPE = ABSTRACT_RULE__TYPE;
+
+		/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int PARSER_RULE__NAME = ABSTRACT_RULE__NAME;
 
 		/**
 	 * The feature id for the '<em><b>Alternatives</b></em>' containment reference.
@@ -756,17 +765,6 @@ public interface XtextPackage extends EPackage
   EAttribute getGeneratedMetamodel_Name();
 
   /**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.GeneratedMetamodel#getNsURI <em>Ns URI</em>}'.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Ns URI</em>'.
-	 * @see org.eclipse.xtext.GeneratedMetamodel#getNsURI()
-	 * @see #getGeneratedMetamodel()
-	 * @generated
-	 */
-  EAttribute getGeneratedMetamodel_NsURI();
-
-  /**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.Grammar <em>Grammar</em>}'.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1129,17 +1127,6 @@ public interface XtextPackage extends EPackage
   EClass getReferencedMetamodel();
 
   /**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.ReferencedMetamodel#getUri <em>Uri</em>}'.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Uri</em>'.
-	 * @see org.eclipse.xtext.ReferencedMetamodel#getUri()
-	 * @see #getReferencedMetamodel()
-	 * @generated
-	 */
-  EAttribute getReferencedMetamodel_Uri();
-
-  /**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.LexerRule <em>Lexer Rule</em>}'.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1192,6 +1179,17 @@ public interface XtextPackage extends EPackage
   EClass getAbstractMetamodelDeclaration();
 
   /**
+	 * Returns the meta object for the reference '{@link org.eclipse.xtext.AbstractMetamodelDeclaration#getEPackage <em>EPackage</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>EPackage</em>'.
+	 * @see org.eclipse.xtext.AbstractMetamodelDeclaration#getEPackage()
+	 * @see #getAbstractMetamodelDeclaration()
+	 * @generated
+	 */
+	EReference getAbstractMetamodelDeclaration_EPackage();
+
+		/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.AbstractMetamodelDeclaration#getAlias <em>Alias</em>}'.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1242,14 +1240,6 @@ public interface XtextPackage extends EPackage
 		 * @generated
 		 */
     EAttribute GENERATED_METAMODEL__NAME = eINSTANCE.getGeneratedMetamodel_Name();
-
-    /**
-		 * The meta object literal for the '<em><b>Ns URI</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-		 * @generated
-		 */
-    EAttribute GENERATED_METAMODEL__NS_URI = eINSTANCE.getGeneratedMetamodel_NsURI();
 
     /**
 		 * The meta object literal for the '{@link org.eclipse.xtext.impl.GrammarImpl <em>Grammar</em>}' class.
@@ -1548,14 +1538,6 @@ public interface XtextPackage extends EPackage
     EClass REFERENCED_METAMODEL = eINSTANCE.getReferencedMetamodel();
 
     /**
-		 * The meta object literal for the '<em><b>Uri</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-		 * @generated
-		 */
-    EAttribute REFERENCED_METAMODEL__URI = eINSTANCE.getReferencedMetamodel_Uri();
-
-    /**
 		 * The meta object literal for the '{@link org.eclipse.xtext.impl.LexerRuleImpl <em>Lexer Rule</em>}' class.
 		 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1602,6 +1584,14 @@ public interface XtextPackage extends EPackage
     EClass ABSTRACT_METAMODEL_DECLARATION = eINSTANCE.getAbstractMetamodelDeclaration();
 
     /**
+		 * The meta object literal for the '<em><b>EPackage</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ABSTRACT_METAMODEL_DECLARATION__EPACKAGE = eINSTANCE.getAbstractMetamodelDeclaration_EPackage();
+
+				/**
 		 * The meta object literal for the '<em><b>Alias</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->

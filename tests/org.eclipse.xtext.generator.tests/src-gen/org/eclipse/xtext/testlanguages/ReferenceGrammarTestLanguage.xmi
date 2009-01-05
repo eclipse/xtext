@@ -5,7 +5,9 @@
   <idElements>xtext</idElements>
   <idElements>testlanguages</idElements>
   <idElements>ReferenceGrammarTestLanguage</idElements>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="ReferenceGrammar" nsURI="http://eclipse.org/xtext/reference/ReferenceGrammar"/>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="ReferenceGrammar">
+    <ePackage href="http://eclipse.org/xtext/reference/ReferenceGrammar#/"/>
+  </metamodelDeclarations>
   <rules xsi:type="xtext:ParserRule" name="Spielplatz">
     <type metamodel="//@metamodelDeclarations.0">
       <type xsi:type="ecore:EClass" href="http://eclipse.org/xtext/reference/ReferenceGrammar#//Spielplatz"/>

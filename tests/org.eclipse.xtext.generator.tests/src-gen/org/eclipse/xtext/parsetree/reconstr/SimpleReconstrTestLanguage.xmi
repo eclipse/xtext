@@ -6,7 +6,9 @@
   <idElements>parsetree</idElements>
   <idElements>reconstr</idElements>
   <idElements>SimpleReconstrTestLanguage</idElements>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="simplerewritetest" nsURI="http://simple/rewrite/test"/>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="simplerewritetest">
+    <ePackage href="http://simple/rewrite/test#/"/>
+  </metamodelDeclarations>
   <rules xsi:type="xtext:ParserRule" name="Op">
     <type metamodel="//@metamodelDeclarations.0">
       <type xsi:type="ecore:EClass" href="http://simple/rewrite/test#//Expression"/>
