@@ -574,15 +574,20 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 	}
 
 	public void testModifyingSealedModel() throws Exception {
-		final String grammar = "language test generate test 'http://test' import 'http://www.eclipse.org/emf/2002/Ecore' as ecore RuleA returns ecore::SomeNewTypeA: feature=ID;";
+		final String grammar = "language test " +
+				"generate test 'http://test' " +
+				"import 'http://www.eclipse.org/emf/2002/Ecore' as ecore " +
+				"RuleA returns ecore::SomeNewTypeA: feature=ID;";
 		errorAcceptorMock.acceptError(same(TransformationErrorCode.CannotCreateTypeInSealedMetamodel), (String) anyObject(), (EObject) anyObject());
 		EPackage result = getEPackageFromGrammar(grammar);
 		assertTrue(result.getEClassifiers().isEmpty());
 	}
 
 	public void testImportingUnknownModel() throws Exception {
-		final String grammar = "language test generate test 'http://test' import 'http://www.unknownModel' as unknownModel RuleA: feature=ID;";
-		errorAcceptorMock.acceptError(same(TransformationErrorCode.CannotLoadMetamodel), (String) anyObject(), (EObject) anyObject());
+		final String grammar = "language test " +
+				"generate test 'http://test' " +
+				"import 'http://www.unknownModel' as unknownModel " +
+				"RuleA: feature=ID;";
 		getEPackageFromGrammar(grammar);
 	}
 

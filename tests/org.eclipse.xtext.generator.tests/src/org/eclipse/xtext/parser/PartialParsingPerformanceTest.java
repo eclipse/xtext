@@ -107,7 +107,6 @@ public class PartialParsingPerformanceTest extends AbstractPartialParserTest {
 		String model = modelBuffer.toString();
 		XtextResource resource = getResourceFromString(model);
 		assertEquals(0, resource.getParseResult().getParseErrors().size());
-		
 	}
 	
 }

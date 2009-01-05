@@ -12,15 +12,17 @@ import org.eclipse.xtext.builtin.conversion.XtextBuiltInConverters;
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverter;
 import org.eclipse.xtext.conversion.impl.AbstractToStringConverter;
+import org.eclipse.xtext.parsetree.AbstractNode;
 
 public final class AbstractTestLanguageValueConverters extends XtextBuiltInConverters {
 	@ValueConverter(rule = "REAL")
-	public IValueConverter REAL() {
-		return new AbstractToStringConverter(){
+	public IValueConverter<Double> REAL() {
+		return new AbstractToStringConverter<Double>(){
 
 			@Override
-			protected Object internalToValue(String string) {
+			protected Double internalToValue(String string, AbstractNode node) {
 				return Double.valueOf(string);
-			}};
+			}
+		};
 	}
 }
