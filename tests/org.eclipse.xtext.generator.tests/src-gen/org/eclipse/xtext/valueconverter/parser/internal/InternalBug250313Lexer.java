@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g 2009-01-04 17:07:32
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g 2009-01-06 10:50:12
 
 package org.eclipse.xtext.valueconverter.parser.internal;
 

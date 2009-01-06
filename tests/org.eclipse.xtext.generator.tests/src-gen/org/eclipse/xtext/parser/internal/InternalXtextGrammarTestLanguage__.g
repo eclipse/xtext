@@ -35,25 +35,25 @@ T35 : ']' ;
 T36 : '(' ;
 T37 : ')' ;
 
-// $ANTLR src "../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g" 1339
+// $ANTLR src "./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g" 1339
 RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
-// $ANTLR src "../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g" 1341
+// $ANTLR src "./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g" 1341
 RULE_INT : ('0'..'9')+;
 
-// $ANTLR src "../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g" 1343
+// $ANTLR src "./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g" 1343
 RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' |                '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
 
-// $ANTLR src "../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g" 1345
+// $ANTLR src "./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g" 1345
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
-// $ANTLR src "../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g" 1347
+// $ANTLR src "./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g" 1347
 RULE_SL_COMMENT : '//' ~('\n'|'\r')* ('\r'? '\n')? {$channel=HIDDEN;};
 
-// $ANTLR src "../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g" 1349
+// $ANTLR src "./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g" 1349
 RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 
-// $ANTLR src "../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g" 1351
+// $ANTLR src "./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTestLanguage.g" 1351
 RULE_ANY_OTHER : .;
 
 

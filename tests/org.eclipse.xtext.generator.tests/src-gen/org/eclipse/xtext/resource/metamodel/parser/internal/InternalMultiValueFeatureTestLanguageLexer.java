@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/resource/metamodel/parser/internal/InternalMultiValueFeatureTestLanguage.g 2009-01-04 17:07:36
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/resource/metamodel/parser/internal/InternalMultiValueFeatureTestLanguage.g 2009-01-06 10:50:17
 
 package org.eclipse.xtext.resource.metamodel.parser.internal;
 
