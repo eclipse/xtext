@@ -1,0 +1,4 @@
+import domainmodel;
+
+Set[NamedElement] siblings (NamedElement this) :
+	eContainer.eContents.typeSelect(NamedElement).select(e|e!=this); 

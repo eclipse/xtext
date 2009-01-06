@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
+  <idElements>org</idElements>
+  <idElements>eclipse</idElements>
+  <idElements>xtext</idElements>
+  <idElements>example</idElements>
+  <idElements>Domainmodel</idElements>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="domainmodel">
+    <ePackage href="http://www.example.xtext/Domainmodel#/"/>
+  </metamodelDeclarations>
+  <rules xsi:type="xtext:ParserRule" name="File">
+    <type metamodel="//@metamodelDeclarations.0">
+      <type xsi:type="ecore:EClass" href="http://www.example.xtext/Domainmodel#//File"/>
+    </type>
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Assignment" cardinality="*" feature="imports" operator="+=">
+        <terminal xsi:type="xtext:RuleCall" rule="//@rules.1"/>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Assignment" cardinality="*" feature="namedElements" operator="+=">
+        <terminal xsi:type="xtext:RuleCall" rule="//@rules.2"/>
+      </abstractTokens>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="Import">
+    <type metamodel="//@metamodelDeclarations.0">
+      <type xsi:type="ecore:EClass" href="http://www.example.xtext/Domainmodel#//Import"/>
+    </type>
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Keyword" value="import"/>
+      <abstractTokens xsi:type="xtext:Assignment" feature="importURI" operator="=">
+        <terminal xsi:type="xtext:RuleCall">
+          <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.2"/>
+        </terminal>
+      </abstractTokens>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="NamedElement">
+    <type metamodel="//@metamodelDeclarations.0">
+      <type xsi:type="ecore:EClass" href="http://www.example.xtext/Domainmodel#//NamedElement"/>
+    </type>
+    <alternatives xsi:type="xtext:Alternatives">
+      <groups xsi:type="xtext:RuleCall" rule="//@rules.3"/>
+      <groups xsi:type="xtext:RuleCall" rule="//@rules.4"/>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="Package">
+    <type metamodel="//@metamodelDeclarations.0">
+      <type xsi:type="ecore:EClass" href="http://www.example.xtext/Domainmodel#//Package"/>
+    </type>
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Group">
+            <abstractTokens xsi:type="xtext:Keyword" value="package"/>
+            <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
+              <terminal xsi:type="xtext:RuleCall" rule="//@rules.15"/>
+            </abstractTokens>
+          </abstractTokens>
+          <abstractTokens xsi:type="xtext:Keyword" value="{"/>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Assignment" cardinality="*" feature="namedElements" operator="+=">
+          <terminal xsi:type="xtext:RuleCall" rule="//@rules.2"/>
+        </abstractTokens>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Keyword" value="}"/>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="Type">
+    <type metamodel="//@metamodelDeclarations.0">
+      <type xsi:type="ecore:EClass" href="http://www.example.xtext/Domainmodel#//Type"/>
+    </type>
+    <alternatives xsi:type="xtext:Alternatives">
+      <groups xsi:type="xtext:RuleCall" rule="//@rules.6"/>
+      <groups xsi:type="xtext:RuleCall" rule="//@rules.5"/>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="DataType">
+    <type metamodel="//@metamodelDeclarations.0">
+      <type xsi:type="ecore:EClass" href="http://www.example.xtext/Domainmodel#//DataType"/>
+    </type>
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Keyword" value="datatype"/>
+      <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
+        <terminal xsi:type="xtext:RuleCall" rule="//@rules.15"/>
+      </abstractTokens>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="Entity">
+    <type metamodel="//@metamodelDeclarations.0">
+      <type xsi:type="ecore:EClass" href="http://www.example.xtext/Domainmodel#//Entity"/>
+    </type>
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Group">
+            <abstractTokens xsi:type="xtext:Group">
+              <abstractTokens xsi:type="xtext:Keyword" value="entity"/>
+              <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
+                <terminal xsi:type="xtext:RuleCall" rule="//@rules.15"/>
+              </abstractTokens>
+            </abstractTokens>
+            <abstractTokens xsi:type="xtext:Group" cardinality="?">
+              <abstractTokens xsi:type="xtext:Keyword" value="extends"/>
+              <abstractTokens xsi:type="xtext:Assignment" feature="superType" operator="=">
+                <terminal xsi:type="xtext:CrossReference">
+                  <type metamodel="//@metamodelDeclarations.0">
+                    <type xsi:type="ecore:EClass" href="http://www.example.xtext/Domainmodel#//Entity"/>
+                  </type>
+                </terminal>
+              </abstractTokens>
+            </abstractTokens>
+          </abstractTokens>
+          <abstractTokens xsi:type="xtext:Keyword" value="{"/>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Assignment" cardinality="*" feature="features" operator="+=">
+          <terminal xsi:type="xtext:RuleCall" rule="//@rules.7"/>
+        </abstractTokens>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Keyword" value="}"/>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="Feature">
+    <type metamodel="//@metamodelDeclarations.0">
+      <type xsi:type="ecore:EClass" href="http://www.example.xtext/Domainmodel#//Feature"/>
+    </type>
+    <alternatives xsi:type="xtext:Alternatives">
+      <groups xsi:type="xtext:RuleCall" rule="//@rules.8"/>
+      <groups xsi:type="xtext:RuleCall" rule="//@rules.11"/>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="StructuralFeature">
+    <type metamodel="//@metamodelDeclarations.0">
+      <type xsi:type="ecore:EClass" href="http://www.example.xtext/Domainmodel#//StructuralFeature"/>
+    </type>
+    <alternatives xsi:type="xtext:Alternatives">
+      <groups xsi:type="xtext:RuleCall" rule="//@rules.9"/>
+      <groups xsi:type="xtext:RuleCall" rule="//@rules.10"/>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="Attribute">
+    <type metamodel="//@metamodelDeclarations.0">
+      <type xsi:type="ecore:EClass" href="http://www.example.xtext/Domainmodel#//Attribute"/>
+    </type>
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Keyword" value="attr"/>
+          <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="//@rules.15"/>
+          </abstractTokens>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Keyword" value=":"/>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Assignment" feature="type" operator="=">
+        <terminal xsi:type="xtext:RuleCall" rule="//@rules.14"/>
+      </abstractTokens>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="Reference">
+    <type metamodel="//@metamodelDeclarations.0">
+      <type xsi:type="ecore:EClass" href="http://www.example.xtext/Domainmodel#//Reference"/>
+    </type>
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Group">
+            <abstractTokens xsi:type="xtext:Keyword" value="ref"/>
+            <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
+              <terminal xsi:type="xtext:RuleCall" rule="//@rules.15"/>
+            </abstractTokens>
+          </abstractTokens>
+          <abstractTokens xsi:type="xtext:Keyword" value=":"/>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Assignment" feature="type" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="//@rules.14"/>
+        </abstractTokens>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Group" cardinality="?">
+        <abstractTokens xsi:type="xtext:Keyword" value="opposite"/>
+        <abstractTokens xsi:type="xtext:Assignment" feature="opposite" operator="=">
+          <terminal xsi:type="xtext:CrossReference">
+            <type metamodel="//@metamodelDeclarations.0">
+              <type xsi:type="ecore:EClass" href="http://www.example.xtext/Domainmodel#//Reference"/>
+            </type>
+          </terminal>
+        </abstractTokens>
+      </abstractTokens>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="Operation">
+    <type metamodel="//@metamodelDeclarations.0">
+      <type xsi:type="ecore:EClass" href="http://www.example.xtext/Domainmodel#//Operation"/>
+    </type>
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Group">
+            <abstractTokens xsi:type="xtext:Group">
+              <abstractTokens xsi:type="xtext:Group">
+                <abstractTokens xsi:type="xtext:Keyword" value="op"/>
+                <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
+                  <terminal xsi:type="xtext:RuleCall" rule="//@rules.15"/>
+                </abstractTokens>
+              </abstractTokens>
+              <abstractTokens xsi:type="xtext:Keyword" value="("/>
+            </abstractTokens>
+            <abstractTokens xsi:type="xtext:Group" cardinality="?">
+              <abstractTokens xsi:type="xtext:Assignment" feature="params" operator="+=">
+                <terminal xsi:type="xtext:RuleCall" rule="//@rules.12"/>
+              </abstractTokens>
+              <abstractTokens xsi:type="xtext:Group" cardinality="*">
+                <abstractTokens xsi:type="xtext:Keyword" value=","/>
+                <abstractTokens xsi:type="xtext:Assignment" feature="params" operator="+=">
+                  <terminal xsi:type="xtext:RuleCall" rule="//@rules.12"/>
+                </abstractTokens>
+              </abstractTokens>
+            </abstractTokens>
+          </abstractTokens>
+          <abstractTokens xsi:type="xtext:Keyword" value=")"/>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Keyword" value=":"/>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Assignment" feature="type" operator="=">
+        <terminal xsi:type="xtext:RuleCall" rule="//@rules.14"/>
+      </abstractTokens>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="Parameter">
+    <type metamodel="//@metamodelDeclarations.0">
+      <type xsi:type="ecore:EClass" href="http://www.example.xtext/Domainmodel#//Parameter"/>
+    </type>
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
+        <terminal xsi:type="xtext:RuleCall" rule="//@rules.15"/>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Assignment" feature="type" operator="=">
+        <terminal xsi:type="xtext:RuleCall" rule="//@rules.14"/>
+      </abstractTokens>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="TypedElement">
+    <type metamodel="//@metamodelDeclarations.0">
+      <type xsi:type="ecore:EClass" href="http://www.example.xtext/Domainmodel#//TypedElement"/>
+    </type>
+    <alternatives xsi:type="xtext:Alternatives">
+      <groups xsi:type="xtext:RuleCall" rule="//@rules.7"/>
+      <groups xsi:type="xtext:RuleCall" rule="//@rules.12"/>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="TypeRef">
+    <type metamodel="//@metamodelDeclarations.0">
+      <type xsi:type="ecore:EClass" href="http://www.example.xtext/Domainmodel#//TypeRef"/>
+    </type>
+    <alternatives xsi:type="xtext:Assignment" feature="referenced" operator="=">
+      <terminal xsi:type="xtext:CrossReference">
+        <type metamodel="//@metamodelDeclarations.0">
+          <type xsi:type="ecore:EClass" href="http://www.example.xtext/Domainmodel#//Type"/>
+        </type>
+      </terminal>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:LexerRule" name="ID" body="('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')* ('.' ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*)*">
+    <type>
+      <metamodel href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@metamodelDeclarations.0"/>
+      <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </type>
+  </rules>
+</xtext:Grammar>

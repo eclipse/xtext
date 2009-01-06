@@ -1,0 +1,23 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.eclipse.xtext.example.domainmodel
+Bundle-Vendor: itemis AG
+Bundle-Version: 1.0.0
+Bundle-SymbolicName: org.eclipse.xtext.example.domainmodel; singleton:=true
+Eclipse-RegisterBuddy: org.eclipse.xtext.log4j
+Bundle-ActivationPolicy: lazy
+Require-Bundle:  org.eclipse.xtext.log4j;bundle-version="1.2.15",
+ org.eclipse.xtext,
+ org.eclipse.xtext.generator,
+ org.antlr.gen,
+ org.eclipse.xtend,
+ org.eclipse.xtend.typesystem.emf,
+ org.eclipse.xpand,
+ org.apache.commons.logging,
+ org.eclipse.xtend.util.stdlib
+Export-Package: org.eclipse.xtext.example,
+ org.eclipse.xtext.example.parser,
+ org.eclipse.xtext.example.parser.internal,
+ org.eclipse.xtext.example.parsetree.reconstr,
+ org.eclipse.xtext.example.services,
+ xtext.example

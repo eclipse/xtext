@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.eclipse.xtext.example.domainmodel.ui
+Bundle-Vendor: itemis AG
+Bundle-Version: 1.0.0
+Bundle-SymbolicName: org.eclipse.xtext.example.domainmodel.ui; singleton:=true
+Eclipse-RegisterBuddy: org.eclipse.xtext.log4j
+Bundle-ActivationPolicy: lazy
+Require-Bundle:  org.eclipse.xtext.example.domainmodel,
+ org.eclipse.xtext.ui.core,
+ org.eclipse.xtext.ui.common,
+ org.eclipse.xtext.log4j;bundle-version="1.2.15",
+ org.eclipse.ui.editors;bundle-version="3.4.0"
