@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/crossrefs/parser/internal/InternalLangATestLanguage.g 2009-01-04 17:07:21
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/crossrefs/parser/internal/InternalLangATestLanguage.g 2009-01-06 10:50:01
 
 package org.eclipse.xtext.crossrefs.parser.internal;
 
