@@ -50,18 +50,16 @@ public class JdtClasspathUriResolver implements IClasspathUriResolver {
 			IPackageFragmentRoot[] allPackageFragmentRoots = javaProject.getAllPackageFragmentRoots();
 			for (IPackageFragmentRoot packageFragmentRoot : allPackageFragmentRoots) {
 				IResource correspondingResource = packageFragmentRoot.getCorrespondingResource();
-				if (correspondingResource != null && correspondingResource instanceof IFile) {
+				if ((correspondingResource != null && correspondingResource instanceof IFile)
+						|| packageFragmentRoot instanceof JarPackageFragmentRoot) {
 					// jar file
-					JarPackageFragmentRoot jarPackageFragmentRoot = (JarPackageFragmentRoot) JavaCore
-							.createJarPackageFragmentRootFrom((IFile) correspondingResource);
+					JarPackageFragmentRoot jarPackageFragmentRoot = (packageFragmentRoot instanceof JarPackageFragmentRoot) ? (JarPackageFragmentRoot) packageFragmentRoot
+							: (JarPackageFragmentRoot) JavaCore
+									.createJarPackageFragmentRootFrom((IFile) correspondingResource);
 					if (jarPackageFragmentRoot != null) {
-						ZipFile zipFile = jarPackageFragmentRoot.getJar();
-						if (zipFile != null) {
-							ZipEntry zipEntry = zipFile.getEntry(projectRelativePath.substring(1));
-							if (zipEntry != null) {
-								return URI.createURI("jar:" + "platform:/resource"
-										+ correspondingResource.getFullPath() + "!" + projectRelativePath, true);
-							}
+						URI resourceUri = findUriInJarFile(projectRelativePath, jarPackageFragmentRoot);
+						if(resourceUri != null) {
+							return resourceUri;
 						}
 					}
 				}
@@ -89,6 +87,19 @@ public class JdtClasspathUriResolver implements IClasspathUriResolver {
 			}
 		}
 		return classpathUri;
+	}
+
+	private static URI findUriInJarFile(String projectRelativePath, JarPackageFragmentRoot jarPackageFragmentRoot)
+			throws CoreException {
+		ZipFile zipFile = jarPackageFragmentRoot.getJar();
+		if (zipFile != null) {
+			ZipEntry zipEntry = zipFile.getEntry(projectRelativePath.substring(1));
+			if (zipEntry != null) {
+				return URI.createURI("jar:" + "platform:/resource" + jarPackageFragmentRoot.resource().getFullPath()
+						+ "!" + projectRelativePath, true);
+			}
+		}
+		return null;
 	}
 
 }
