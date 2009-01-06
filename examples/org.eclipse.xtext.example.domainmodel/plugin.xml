@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<plugin>
+    <extension
+         point="org.eclipse.xtend.typesystem.emf.checks">
+      
+      <metaModel
+            nsURI="http://www.example.xtext/Domainmodel">
+         <checkFile
+               path="org/eclipse/xtext/example/DomainmodelChecks.chk">
+         </checkFile>
+      </metaModel>
+      
+   </extension>
+    <extension
+       point="org.eclipse.xtext.service.ui.serviceRegistrationFactory">
+	    <serviceRegistrationFactory
+	          class="org.eclipse.xtext.example.DomainmodelRuntimeConfig"/>
+   </extension>
+   <extension
+         point="org.eclipse.emf.ecore.extension_parser">
+      <parser
+            class="org.eclipse.xtext.example.services.DomainmodelResourceFactory"
+            type="dmodel">
+      </parser>
+   </extension>
+</plugin>

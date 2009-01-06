@@ -1,0 +1,6 @@
+import domainmodel;
+
+extension org::eclipse::xtext::example::DomainModelExtensions;
+
+context NamedElement ERROR "Duplicate name "+name :
+	siblings().forAll(e|e.name!=name);

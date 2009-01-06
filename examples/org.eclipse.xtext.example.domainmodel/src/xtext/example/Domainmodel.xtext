@@ -1,0 +1,54 @@
+language org.eclipse.xtext.example.Domainmodel
+generate domainmodel "http://www.example.xtext/Domainmodel"
+
+File :
+  (imports+=Import)*
+  (namedElements+=NamedElement)*;
+  
+Import :
+  'import' importURI=STRING;
+  
+NamedElement :
+	Package | Type;
+	
+Package :
+  'package' name=ID '{'
+    (namedElements+=NamedElement)*
+  '}';
+	
+Type :
+  Entity | DataType;
+  
+DataType :
+  'datatype' name=ID;
+  
+Entity :
+  'entity' name=ID ('extends' superType=[Entity])? '{'
+    (features+=Feature)*	
+  '}';
+  
+Feature :
+  StructuralFeature | Operation;
+  
+StructuralFeature :
+  Attribute | Reference;
+  
+Attribute :
+  'attr' name=ID ':' type=TypeRef;
+  
+Reference :
+  'ref' name=ID ':' type=TypeRef ('opposite' opposite=[Reference])?;
+  
+Operation :
+  'op' name=ID'('(params+=Parameter (',' params+=Parameter)*)?')' ':' type=TypeRef;
+  
+Parameter :
+  name=ID type=TypeRef;
+  
+TypedElement :
+  Feature | Parameter;
+  
+TypeRef :
+	referenced=[Type];
+	
+lexer ID : "('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')* ('.' ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*)*";
