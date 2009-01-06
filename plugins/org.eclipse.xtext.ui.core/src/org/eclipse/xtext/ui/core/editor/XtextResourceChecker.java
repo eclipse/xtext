@@ -33,6 +33,7 @@ import org.eclipse.xtext.resource.XtextResource;
  */
 public class XtextResourceChecker {
 
+	private static final int MAX_ERRORS = 99;
 	private static final Logger log = Logger.getLogger(XtextResourceChecker.class);
 
 	private XtextResourceChecker() {
@@ -74,10 +75,14 @@ public class XtextResourceChecker {
 						if (!diagnostic.getChildren().isEmpty()) {
 							for (Diagnostic childDiagnostic : diagnostic.getChildren()) {
 								markers.add(markerFromEValidatorDiagnostic(childDiagnostic));
+								if (markers.size()>MAX_ERRORS)
+									return markers;
 							}
 						}
 						else {
 							markers.add(markerFromEValidatorDiagnostic(diagnostic));
+							if (markers.size()>MAX_ERRORS)
+								return markers;
 						}
 					}
 					logCheckStatus(resource, semanticDiagFail, "Semantic");
