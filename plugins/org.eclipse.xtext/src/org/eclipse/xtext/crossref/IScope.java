@@ -9,6 +9,8 @@ package org.eclipse.xtext.crossref;
 
 import java.util.Collections;
 
+import org.eclipse.emf.ecore.EObject;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
@@ -27,13 +29,36 @@ public interface IScope {
 		public IScope getParent() {
 			return (IScope) NULLSCOPE;
 		}
+
+		public IScopedElement getScopedElement(EObject element) {
+			return null;
+		}
     	
     };
     
+    /**
+     * @return the parent scope
+     */
     IScope getParent();
-    
+
+    /**
+     * @return an Iterable of IScopedElements contained in this scope only
+     */
     Iterable<IScopedElement> getContents();
     
+    /**
+     * 
+     * @return an Iterable of IScopedElements contained in this scope and it's parents
+     */
     Iterable<IScopedElement> getAllContents();
+    
+    /**
+     * returns the IScopedElement for a given EObject
+     * if this scope does not contain an IScopedElement the parent scope is asked.
+     * 
+     * @param element
+     * @return null if neither this scope or it's parents contain an IScopedElement corresponding to the passed EObject
+     */
+    IScopedElement getScopedElement(EObject element);
     
 }
