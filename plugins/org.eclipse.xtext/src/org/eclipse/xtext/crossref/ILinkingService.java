@@ -21,7 +21,8 @@ import org.eclipse.xtext.service.ILanguageService;
 public interface ILinkingService extends ILanguageService {
 
 	/**
-	 * Returns all EObjects referenced by the given link text in the given context.
+	 * Returns all {@link EObject}s referenced by the given link text in the given context.
+	 * But does not set the references or modifies the passed information somehow
 	 */
 	List<EObject> getLinkedObjects(EObject context, EReference reference, LeafNode text);
 

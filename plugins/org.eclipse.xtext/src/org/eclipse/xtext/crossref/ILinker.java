@@ -9,6 +9,8 @@ package org.eclipse.xtext.crossref;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
+import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.service.ILanguageService;
 
 /**
@@ -16,6 +18,13 @@ import org.eclipse.xtext.service.ILanguageService;
  */
 public interface ILinker extends ILanguageService{
 	
+	/**
+	 * sets cross references in the passed {@link EObject} and it's {@link EObject#eAllContents()}, 
+	 * using the information available (usually using the {@link AbstractNode} model associated via {@link NodeAdapter})
+	 * 
+	 * @param model
+	 * @param diagnosticsConsumer
+	 */
 	void linkModel(EObject model, IDiagnosticConsumer diagnosticsConsumer);
 	
 }

@@ -12,7 +12,6 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.service.ILanguageService;
 
 /**
- * @TODO Find a proper way to test these Services in the life cycle (reference parameter is not tested, currently) 
  * @author Heiko Behrens - Initial contribution and API
  */
 public interface IScopeProvider extends ILanguageService {

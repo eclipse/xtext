@@ -30,7 +30,7 @@ import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.crossref.impl.SimpleAttributeResolver;
-import org.eclipse.xtext.crossref.impl.XtextBuiltinLinkingService;
+import org.eclipse.xtext.crossref.impl.DefaultLinkingService;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
@@ -39,7 +39,7 @@ import org.eclipse.xtext.service.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class XtextLinkingService extends XtextBuiltinLinkingService {
+public class XtextLinkingService extends DefaultLinkingService {
 
 	private static Logger log = Logger.getLogger(XtextLinkingService.class);
 	
@@ -145,7 +145,7 @@ public class XtextLinkingService extends XtextBuiltinLinkingService {
 					return super.getLinkedObjects(context, ref, text);
 				if (!(leaf.getGrammarElement() instanceof Keyword) && !leaf.isHidden()) {
 					return XtextMetamodelReferenceHelper.findBestMetamodelForType(
-							context, text.getText(), leaf.getText(), getObjectsInScope(context, ref));
+							context, text.getText(), leaf.getText(), getScope(context, ref));
 				}
 			}				
 		}
