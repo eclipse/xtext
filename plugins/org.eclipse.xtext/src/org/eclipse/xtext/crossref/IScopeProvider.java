@@ -13,16 +13,16 @@ import org.eclipse.xtext.service.ILanguageService;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
+ * @author Sven Efftinge
  */
 public interface IScopeProvider extends ILanguageService {
 	
 	/**
 	 * Returns a scope for the given context.
 	 *
-	 *  
-	 * @param context meta model element that defines the scope 
-	 * @param reference reference to have fine grained access for visibility  
-	 * @return List of EObjects in the given scope
+	 * @param context - the element from which an element shall be referenced 
+	 * @param reference - the reference to be filled.  
+	 * @return {@link IScope} representing the inner most {@link IScope} for the passed context and reference
 	 */
 	public IScope getScope(EObject context, EReference reference);
 }
