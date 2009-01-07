@@ -25,24 +25,28 @@ import org.eclipse.xtext.service.Inject;
  * @author Heiko Behrens - Initial contribution and API
  * @author Michael Clay
  * @author Sebastian Zarnekow
+ * 
  */
-public class XtextBuiltinLinkingService implements ILinkingService {
+public class DefaultLinkingService implements ILinkingService {
 
 	@Inject
 	private IScopeProvider scopeProvider;
 
-	protected IScope getObjectsInScope(EObject context, EReference reference) {
+	protected IScope getScope(EObject context, EReference reference) {
 		if (scopeProvider == null)
 			throw new IllegalStateException("scopeProvider must not be null.");
 		return scopeProvider.getScope(context, reference);
 	}
 
+	/**
+	 * @return the first element returned from the injected {@link IScopeProvider} which matches the text of the passed {@link LeafNode}
+	 */
 	public List<EObject> getLinkedObjects(EObject context, EReference ref, LeafNode text) {
 		final EClass requiredType = ref.getEReferenceType();
 		if (requiredType == null)
 			return Collections.<EObject> emptyList();
 
-		final IScope scope = getObjectsInScope(context, ref);
+		final IScope scope = getScope(context, ref);
 		final Iterator<IScopedElement> iterator = scope.getAllContents().iterator();
 		final String s = text.getText();
 		while (iterator.hasNext()) {
@@ -53,12 +57,15 @@ public class XtextBuiltinLinkingService implements ILinkingService {
 		return Collections.emptyList();
 	}
 
+	/**
+	 * @return the name of the first {@link IScopedElement} returned from the injected {@link IScopeProvider} for the passed object {@link EObject}
+	 */
 	public String getLinkText(EObject object, EReference reference, EObject context) {
 		IScope scope = scopeProvider.getScope(context, reference);
-		if (scope==null)
+		if (scope == null)
 			return null;
 		IScopedElement scopedElement = scope.getScopedElement(object);
-		if (scopedElement==null)
+		if (scopedElement == null)
 			return null;
 		return scopedElement.name();
 	}

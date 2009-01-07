@@ -12,10 +12,17 @@ import java.util.Collections;
 import org.eclipse.emf.ecore.EObject;
 
 /**
+ * 
+ * A scope represents a hierarchical container containing
+ * {@link IScopedElement}s.
+ * 
  * @author Sven Efftinge - Initial contribution and API
  */
 public interface IScope {
 	
+    /**
+     * The <code>NULLSCOPE</code> to be returned by the most outer scope
+     */
     public final static IScope NULLSCOPE = new IScope(){
 
 		public Iterable<IScopedElement> getAllContents() {
@@ -37,27 +44,27 @@ public interface IScope {
     };
     
     /**
-     * @return the parent scope
+     * @return the parent scope, returns {@link IScope#NULLSCOPE} if this scope is the most outer scope.
      */
     IScope getParent();
 
     /**
-     * @return an Iterable of IScopedElements contained in this scope only
+     * @return an {@link Iterable} of {@link IScopedElement}s contained in this scope only
      */
     Iterable<IScopedElement> getContents();
     
     /**
      * 
-     * @return an Iterable of IScopedElements contained in this scope and it's parents
+     * @return an {@link Iterable} of {@link IScopedElement}s contained in this scope and it's parent (see {@link IScope#getParent()})
      */
     Iterable<IScopedElement> getAllContents();
     
     /**
-     * returns the IScopedElement for a given EObject
-     * if this scope does not contain an IScopedElement the parent scope is asked.
+     * returns the {@link IScopedElement} for a given {@link EObject} in the nearest {@link IScope}
+     * That is, if this scope does not contain a corresponding {@link IScopedElement} the parent scope is asked.
      * 
      * @param element
-     * @return null if neither this scope or it's parents contain an IScopedElement corresponding to the passed EObject
+     * @return the corresponding {@link IScopedElement} or <code>null</code> if neither this scope nor it's parents contain an {@link IScopedElement} corresponding to the passed {@link EObject}
      */
     IScopedElement getScopedElement(EObject element);
     

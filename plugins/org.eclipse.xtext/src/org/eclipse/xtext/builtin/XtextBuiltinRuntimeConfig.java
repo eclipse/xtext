@@ -13,16 +13,16 @@ import java.util.Set;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.builtin.conversion.XtextBuiltInConverters;
 import org.eclipse.xtext.conversion.IValueConverterService;
-import org.eclipse.xtext.crossref.IFragmentProvider;
 import org.eclipse.xtext.crossref.ILinker;
 import org.eclipse.xtext.crossref.ILinkingService;
 import org.eclipse.xtext.crossref.IScopeProvider;
 import org.eclipse.xtext.crossref.impl.DefaultScopeProvider;
-import org.eclipse.xtext.crossref.impl.XtextBuiltinFragmentProvider;
-import org.eclipse.xtext.crossref.impl.XtextBuiltinLinkingService;
+import org.eclipse.xtext.crossref.impl.DefaultLinkingService;
 import org.eclipse.xtext.crossref.internal.Linker;
 import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
 import org.eclipse.xtext.parsetree.reconstr.impl.DefaultCrossReferenceSerializer;
+import org.eclipse.xtext.resource.IFragmentProvider;
+import org.eclipse.xtext.resource.DefaultFragmentProvider;
 import org.eclipse.xtext.service.AbstractServiceRegistrationFactory;
 
 /**
@@ -48,7 +48,7 @@ public class XtextBuiltinRuntimeConfig extends AbstractServiceRegistrationFactor
 	}
 
 	protected Class<? extends IFragmentProvider> getIFragmentProvider() {
-		return XtextBuiltinFragmentProvider.class;
+		return DefaultFragmentProvider.class;
 	}
 
 	protected Class<? extends IScopeProvider> getIScopeProvider() {
@@ -56,7 +56,7 @@ public class XtextBuiltinRuntimeConfig extends AbstractServiceRegistrationFactor
 	}
 
 	protected Class<? extends ILinkingService> getILinkingService() {
-		return XtextBuiltinLinkingService.class;
+		return DefaultLinkingService.class;
 	}
 
 	protected Class<? extends ILinker> getILinker() {

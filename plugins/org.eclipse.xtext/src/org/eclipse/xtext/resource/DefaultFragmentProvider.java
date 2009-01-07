@@ -5,11 +5,10 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.crossref.impl;
+package org.eclipse.xtext.resource;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.crossref.IFragmentProvider;
 
 /**
  * TODO: think about an efficient way to compute fragments.
@@ -17,7 +16,7 @@ import org.eclipse.xtext.crossref.IFragmentProvider;
  * @author Peter Friese
  * @author Sebastian Zarnekow
  */
-public class XtextBuiltinFragmentProvider implements IFragmentProvider {
+public class DefaultFragmentProvider implements IFragmentProvider {
 	
 	public String getFragment(EObject obj) {
 		return null;

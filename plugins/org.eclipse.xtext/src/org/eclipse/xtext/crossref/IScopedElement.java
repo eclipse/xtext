@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.EObject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  *
- * represents an element of a scope
+ * represents an element of an {@link IScope}
  */
 public interface IScopedElement {
 	
@@ -29,7 +29,7 @@ public interface IScopedElement {
 	
 	
 	/**
-	 * @return can be used to pass additional information
+	 * @return can be used to associate additional information
 	 */
 	Object additionalInformation();
 }
