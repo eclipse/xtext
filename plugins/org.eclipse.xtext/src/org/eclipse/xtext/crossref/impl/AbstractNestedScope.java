@@ -14,6 +14,7 @@ import static org.eclipse.xtext.util.CollectionUtils.each;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.crossref.IScope;
 import org.eclipse.xtext.crossref.IScopedElement;
 import org.eclipse.xtext.util.Filter;
@@ -60,6 +61,15 @@ public abstract class AbstractNestedScope implements IScope {
 
 	public Iterable<IScopedElement> getContents() {
 		return elements;
+	}
+	
+	public IScopedElement getScopedElement(EObject element) {
+		Iterable<IScopedElement> allContents = getAllContents();
+		for (IScopedElement scopedElement : allContents) {
+			if (scopedElement.element().equals(element))
+				return scopedElement;
+		}
+		return null;
 	}
 
 }

@@ -11,13 +11,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.crossref.IScope;
 import org.eclipse.xtext.crossref.IScopedElement;
+import org.eclipse.xtext.crossref.impl.AbstractNestedScope;
 import org.eclipse.xtext.util.CollectionUtils;
 import org.eclipse.xtext.util.Function;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-class StringScope implements IScope {
+class StringScope extends AbstractNestedScope implements IScope {
 
 	private static class StringScopeElement implements IScopedElement {
 		
@@ -41,28 +42,14 @@ class StringScope implements IScope {
 		
 	}
 	
-	private Iterable<IScopedElement> content;
-	
 	public StringScope(Iterable<? extends Object> content, final IValueConverterService valueConverterService) {
-		this.content = CollectionUtils.map(content, new Function<Object, IScopedElement>() {
+		super(IScope.NULLSCOPE, CollectionUtils.map(content, new Function<Object, IScopedElement>() {
 			public IScopedElement exec(Object param) {
 				// TODO use value converter that produces double quotes
 //				return new StringScopeElement(valueConverterService.toString(param, "STRING"));
 				return new StringScopeElement('"' + param.toString() + '"');
 			}
-		});
-	}
-
-	public Iterable<IScopedElement> getAllContents() {
-		return content;
-	}
-
-	public Iterable<IScopedElement> getContents() {
-		return content;
-	}
-
-	public IScope getParent() {
-		return IScope.NULLSCOPE;
+		}));
 	}
 
 }
