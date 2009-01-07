@@ -9,7 +9,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.crossref.ILinkingService;
-import org.eclipse.xtext.crossref.impl.XtextBuiltinLinkingService;
+import org.eclipse.xtext.crossref.impl.DefaultLinkingService;
 import org.eclipse.xtext.crossrefs.services.LangATestLanguageGrammarAccess;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
@@ -19,13 +19,13 @@ import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 public class CrossRefTest extends AbstractGeneratorTest {
 	private static final Logger logger = Logger.getLogger(CrossRefTest.class);
-	private XtextBuiltinLinkingService linkingService;
+	private DefaultLinkingService linkingService;
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		with(LangATestLanguageStandaloneSetup.class);
-		linkingService = (XtextBuiltinLinkingService) ServiceRegistry.getService(ILangATestLanguage.SCOPE, ILinkingService.class);
+		linkingService = (DefaultLinkingService) ServiceRegistry.getService(ILangATestLanguage.SCOPE, ILinkingService.class);
 	}
 
 	public void testSimple() throws Exception {

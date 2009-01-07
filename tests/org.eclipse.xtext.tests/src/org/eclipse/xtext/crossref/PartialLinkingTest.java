@@ -13,7 +13,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.crossref.impl.DefaultScopeProvider;
-import org.eclipse.xtext.crossref.impl.XtextBuiltinLinkingService;
+import org.eclipse.xtext.crossref.impl.DefaultLinkingService;
 import org.eclipse.xtext.crossref.internal.Linker;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
@@ -111,7 +111,7 @@ public class PartialLinkingTest extends AbstractGeneratorTest implements IScopeP
 
 	protected void replaceLinker(XtextResource resource) {
 		Linker linker = new Linker();
-		XtextBuiltinLinkingService linkingService = new XtextBuiltinLinkingService();
+		DefaultLinkingService linkingService = new DefaultLinkingService();
 		linkingService.setScopeProvider(this);
 		linker.setLinkingService(linkingService);
 		resource.setLinker(linker);
