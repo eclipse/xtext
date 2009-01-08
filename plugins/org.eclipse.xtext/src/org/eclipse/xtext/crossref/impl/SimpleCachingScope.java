@@ -16,12 +16,12 @@ import org.eclipse.xtext.crossref.IScope;
  */
 public class SimpleCachingScope extends AbstractCachingScope {
 
-	public SimpleCachingScope(IScope parent, Resource resource, EClass type) {
-		this(parent, resource, type, true);
+	public SimpleCachingScope(IScope outer, Resource resource, EClass type) {
+		this(outer, resource, type, true);
 	}
 
-	public SimpleCachingScope(IScope parent, Resource resource, EClass type, boolean refuseDuplicates) {
-		super(parent, type, refuseDuplicates);
+	public SimpleCachingScope(IScope outer, Resource resource, EClass type, boolean refuseDuplicates) {
+		super(outer, type, refuseDuplicates);
 		initElements(resource);
 	}
 

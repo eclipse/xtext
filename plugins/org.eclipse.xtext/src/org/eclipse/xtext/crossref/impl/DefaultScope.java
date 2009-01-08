@@ -24,7 +24,7 @@ public class DefaultScope extends SimpleCachingScope {
 
 	public DefaultScope(Resource resource, EClass type) {
 		super(null, resource, type);
-		setParent(createParent(resource.getAllContents(), type));
+		setOuterScope(createParent(resource.getAllContents(), type));
 	}
 
 	private IScope createParent(Iterator<EObject> iter, EClass type) {

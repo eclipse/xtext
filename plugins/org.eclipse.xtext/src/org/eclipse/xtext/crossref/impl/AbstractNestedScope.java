@@ -25,16 +25,16 @@ import org.eclipse.xtext.util.Function;
  */
 public abstract class AbstractNestedScope implements IScope {
 
-	private IScope parent;
+	private IScope outer;
 	
 	private Iterable<IScopedElement> elements;
 	
-	public AbstractNestedScope(IScope parent) {
-		this.parent = parent;
+	public AbstractNestedScope(IScope outer) {
+		this.outer = outer;
 	}
 
-	protected AbstractNestedScope(IScope parent, Iterable<IScopedElement> elements) {
-		this(parent);
+	protected AbstractNestedScope(IScope outer, Iterable<IScopedElement> elements) {
+		this(outer);
 		this.elements = elements;
 	}
 	
@@ -44,19 +44,19 @@ public abstract class AbstractNestedScope implements IScope {
 			public void exec(IScopedElement param) {
 				identifiers.add(param.name());
 			}
-		}), filter(getParent().getAllContents(), new Filter<IScopedElement>() {
+		}), filter(getOuterScope().getAllContents(), new Filter<IScopedElement>() {
 			public boolean matches(IScopedElement param) {
 				return !identifiers.contains(param.name());
 			}
 		}));
 	}
 
-	public IScope getParent() {
-		return parent;
+	public IScope getOuterScope() {
+		return outer;
 	}
 	
-	protected void setParent(IScope parent) {
-		this.parent = parent;
+	protected void setOuterScope(IScope outer) {
+		this.outer = outer;
 	}
 
 	public Iterable<IScopedElement> getContents() {

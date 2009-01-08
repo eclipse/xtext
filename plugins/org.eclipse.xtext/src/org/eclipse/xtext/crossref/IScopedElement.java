@@ -27,7 +27,6 @@ public interface IScopedElement {
 	 */
 	EObject element();
 	
-	
 	/**
 	 * @return can be used to associate additional information
 	 */

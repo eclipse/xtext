@@ -33,7 +33,7 @@ public interface IScope {
 			return Collections.emptyList();
 		}
 
-		public IScope getParent() {
+		public IScope getOuterScope() {
 			return (IScope) NULLSCOPE;
 		}
 
@@ -44,9 +44,9 @@ public interface IScope {
     };
     
     /**
-     * @return the parent scope, returns {@link IScope#NULLSCOPE} if this scope is the most outer scope.
+     * @return the outer scope, returns {@link IScope#NULLSCOPE} if this scope is the most outer scope.
      */
-    IScope getParent();
+    IScope getOuterScope();
 
     /**
      * @return an {@link Iterable} of {@link IScopedElement}s contained in this scope only
@@ -55,13 +55,14 @@ public interface IScope {
     
     /**
      * 
-     * @return an {@link Iterable} of {@link IScopedElement}s contained in this scope and it's parent (see {@link IScope#getParent()})
+     * @return an {@link Iterable} of {@link IScopedElement}s contained in this scope and it's outer scope (see {@link IScope#getOuterScope()}), 
+     * where the elements from an outer scope follows the one from it's inner scope
      */
     Iterable<IScopedElement> getAllContents();
     
     /**
-     * returns the {@link IScopedElement} for a given {@link EObject} in the nearest {@link IScope}
-     * That is, if this scope does not contain a corresponding {@link IScopedElement} the parent scope is asked.
+     * returns the {@link IScopedElement} for a given {@link EObject} in the most inner {@link IScope}
+     * That is, if this scope does not contain a corresponding {@link IScopedElement} the outer scope is asked.
      * 
      * @param element
      * @return the corresponding {@link IScopedElement} or <code>null</code> if neither this scope nor it's parents contain an {@link IScopedElement} corresponding to the passed {@link EObject}
