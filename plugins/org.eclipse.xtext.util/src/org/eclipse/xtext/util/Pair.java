@@ -14,53 +14,40 @@ package org.eclipse.xtext.util;
  */
 public class Pair<T,U> {
 
-    private T firstElement;
+    private final T first;
     
-    private U secondElement;
+    private final U second;
     
-    public Pair(T firstElement, U secondElement) {
-        if(firstElement == null || secondElement == null) {
-            throw new IllegalArgumentException("Elements of Pair cannot be null");
-        }
-        this.firstElement = firstElement;
-        this.secondElement = secondElement;
+    Pair(final T firstElement, final U secondElement) {
+        this.first = firstElement;
+        this.second = secondElement;
     }
     
     
-    public T getFirstElement() {
-        return firstElement;
+    public T getFirst() {
+        return first;
     }
 
-    public U getSecondElement() {
-        return secondElement;
+    public U getSecond() {
+        return second;
     }
 
     public boolean equals(Object other) {
-        if(other instanceof Pair<?,?>) {
+        if(this.getClass().equals(other.getClass())) {
             Pair<?,?> otherPair = (Pair<?, ?>)other;
-            return firstElement.equals(otherPair.getFirstElement()) && secondElement.equals(otherPair.getSecondElement());
+            return first.equals(otherPair.getFirst()) && second.equals(otherPair.getSecond());
         }
         return false;
     }
     
     @Override
     public int hashCode() {
-        return firstElement.hashCode() + 17*secondElement.hashCode();
-    }
-
-
-    public void setFirstElement(T firstElement) {
-        this.firstElement = firstElement;
-    }
-
-
-    public void setSecondElement(U secondElement) {
-        this.secondElement = secondElement;
+        return first.hashCode() + 17*second.hashCode();
     }
     
     @Override
     public String toString() {
-    	return "<" + firstElement + ", " + secondElement + ">";
+    	return "Pair(" + first + ", " + second + ")";
     }
     
 }

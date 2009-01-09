@@ -36,6 +36,7 @@ import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.resource.ClasspathUriResolutionException;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.util.Tuples;
 
 /**
  * @author Jan Koehnlein
@@ -249,7 +250,7 @@ public class GrammarUtil {
 	}
 	
 	private static Pair<String, String> getURIAliasPair(AbstractMetamodelDeclaration decl) {
-		return new Pair<String, String>(decl.getEPackage().getNsURI(), Strings.emptyIfNull(decl.getAlias()));
+		return Tuples.create(decl.getEPackage().getNsURI(), Strings.emptyIfNull(decl.getAlias()));
 	}
 	
 	public static boolean isAbstract(Grammar grammarModel) {

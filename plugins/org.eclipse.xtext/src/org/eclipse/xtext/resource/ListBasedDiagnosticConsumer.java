@@ -16,6 +16,7 @@ import java.util.Set;
 import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.Tuples;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -35,7 +36,7 @@ public class ListBasedDiagnosticConsumer implements IDiagnosticConsumer {
 	}
 	
 	public void consume(Diagnostic diagnostic) {
-		final Pair<Integer, Integer> newRange = new Pair<Integer, Integer>(diagnostic.getOffset(), diagnostic.getLength());
+		final Pair<Integer, Integer> newRange = Tuples.create(diagnostic.getOffset(), diagnostic.getLength());
 		if (coveredNodes.add(newRange)) {
 			boolean changed = this.diagnostics.add(diagnostic);
 			diagnosticsConsumed |= changed;
