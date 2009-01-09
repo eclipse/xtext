@@ -21,6 +21,7 @@ import org.eclipse.xtext.crossref.IScopeProvider;
 import org.eclipse.xtext.util.Function;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.SimpleCache;
+import org.eclipse.xtext.util.Tuples;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -58,10 +59,10 @@ public class DefaultScopeProvider extends AbstractScopeProvider implements IScop
 			new Function<Pair<Resource, EClass>, IScope>() {
 
 				public IScope exec(Pair<Resource, EClass> param) {
-					EList<Adapter> adapters = param.getFirstElement().getResourceSet().eAdapters();
+					EList<Adapter> adapters = param.getFirst().getResourceSet().eAdapters();
 					if (!adapters.contains(adapter))
 						adapters.add(adapter);
-					return createScope(param.getFirstElement(), param.getSecondElement());
+					return createScope(param.getFirst(), param.getSecond());
 				}
 			});
 	
@@ -70,7 +71,7 @@ public class DefaultScopeProvider extends AbstractScopeProvider implements IScop
 	}
 
 	public IScope getScope(EObject context, EReference reference) {
-		return cache.get(new Pair<Resource, EClass>(context.eResource(), reference != null ? reference
+		return cache.get(Tuples.create(context.eResource(), reference != null ? reference
 				.getEReferenceType() : context.eClass().eClass()));
 	}
 

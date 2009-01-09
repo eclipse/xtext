@@ -26,6 +26,7 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.resource.metamodel.EClassifierInfo.EClassInfo;
 import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.Tuples;
 
 /**
  * A possible extension would be to normalize the type hierarchy and remove
@@ -62,7 +63,7 @@ public class EClassifierInfos {
 	private Pair<String, String> getKey(AbstractMetamodelDeclaration metamodelDecl, String name) {
 		if (metamodelDecl == null || name == null)
 			throw new NullPointerException("metamodelDecl: " + metamodelDecl + " / name: " + name);
-		return new Pair<String, String>(metamodelDecl.getEPackage().getNsURI(), name);
+		return Tuples.create(metamodelDecl.getEPackage().getNsURI(), name);
 	}
 
 	public EClassifierInfo getInfo(TypeRef typeRef) {
