@@ -1,5 +1,7 @@
 package org.eclipse.xtext.util;
 
+import java.util.HashSet;
+
 import junit.framework.TestCase;
 
 public class TuplesTest extends TestCase {
@@ -17,6 +19,11 @@ public class TuplesTest extends TestCase {
 		assertFalse(p1.equals(p4));
 		assertFalse(p1.equals(p5));
 		assertFalse(p1.equals(null));
+		
+		HashSet<Pair<String, String>> set = new HashSet<Pair<String,String>>();
+		set.add(Tuples.create("foo", (String) null));
+		assertFalse(set.add(Tuples.create("foo", (String) null)));
+		assertTrue(set.add(Tuples.create((String) null,(String) null)));
 	}
 	
 	public void testTriple() throws Exception {
@@ -37,5 +44,12 @@ public class TuplesTest extends TestCase {
 		assertFalse(p1.equals(p5));
 		assertFalse(p1.equals(p6));
 		assertFalse(p1.equals(null));
+		
+		HashSet<Triple<String, String,String>> set = new HashSet<Triple<String,String,String>>();
+		set.add(Tuples.create("foo", (String) null,"bar"));
+		assertFalse(set.add(Tuples.create("foo", (String) null,"bar")));
+		assertTrue(set.add(Tuples.create((String) null,(String) null,"bar")));
+		assertTrue(set.add(Tuples.create((String) null,(String) null, (String)null)));
+		assertFalse(set.add(Tuples.create((String) null,(String) null, (String)null)));
 	}
 }
