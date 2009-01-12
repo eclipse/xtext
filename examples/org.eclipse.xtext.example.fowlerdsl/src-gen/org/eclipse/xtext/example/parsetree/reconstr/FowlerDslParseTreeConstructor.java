@@ -14,32 +14,15 @@ import org.eclipse.xtext.example.services.FowlerDslGrammarAccess;
 
 
 public class FowlerDslParseTreeConstructor extends AbstractParseTreeConstructor {
-
-	public IAbstractToken serialize(EObject object) {
-		if(object == null) throw new IllegalArgumentException("The to-be-serialialized model is null");
-		Solution t = internalSerialize(object);
-		if(t == null) throw new XtextSerializationException(getDescr(object), "No rule found for serialization");
-		return t.getPredecessor();
-	}
-	
+		
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-
-		if(inst.isInstanceOf("Statemachine") && (s = new Statemachine_Group(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("Event") && (s = new Event_Group(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("Command") && (s = new Command_Group(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("State") && (s = new State_Group(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("Transition") && (s = new Transition_Group(inst, null).firstSolution()) != null) return s;
-
+		if(inst.isInstanceOf("Statemachine") && (s = new Statemachine_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("Event") && (s = new Event_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("Command") && (s = new Command_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("State") && (s = new State_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("Transition") && (s = new Transition_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
@@ -67,7 +50,7 @@ protected class Statemachine_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Statemachine_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -95,7 +78,7 @@ protected class Statemachine_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Statemachine_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -123,7 +106,7 @@ protected class Statemachine_0_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Statemachine_0_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -151,7 +134,7 @@ protected class Statemachine_0_0_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Statemachine_0_0_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -179,7 +162,7 @@ protected class Statemachine_0_0_0_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Statemachine_0_0_0_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -207,7 +190,7 @@ protected class Statemachine_0_0_0_0_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Statemachine_0_0_0_0_0_0_Keyword_events(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -250,6 +233,7 @@ protected class Statemachine_0_0_0_0_0_1_Assignment_events extends AssignmentTok
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Event")) {
 				Solution s = new Event_Group(param, this).firstSolution();
+				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
 					type = AssignmentType.PRC; 
 					return new Solution(obj,s.getPredecessor());
@@ -307,6 +291,7 @@ protected class Statemachine_0_0_1_Assignment_commands extends AssignmentToken  
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Command")) {
 				Solution s = new Command_Group(param, this).firstSolution();
+				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
 					type = AssignmentType.PRC; 
 					return new Solution(obj,s.getPredecessor());
@@ -351,6 +336,7 @@ protected class Statemachine_1_Assignment_states extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("State")) {
 				Solution s = new State_Group(param, this).firstSolution();
+				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
 					type = AssignmentType.PRC; 
 					return new Solution(obj,s.getPredecessor());
@@ -389,7 +375,7 @@ protected class Event_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Event_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -417,7 +403,7 @@ protected class Event_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Event_0_0_Assignment_resetting(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -526,7 +512,7 @@ protected class Command_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Command_0_Assignment_name(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -611,7 +597,7 @@ protected class State_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new State_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -639,7 +625,7 @@ protected class State_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new State_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -667,7 +653,7 @@ protected class State_0_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new State_0_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -695,7 +681,7 @@ protected class State_0_0_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new State_0_0_0_0_Keyword_state(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -759,7 +745,7 @@ protected class State_0_0_1_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new State_0_0_1_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -787,7 +773,7 @@ protected class State_0_0_1_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new State_0_0_1_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -815,7 +801,7 @@ protected class State_0_0_1_0_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new State_0_0_1_0_0_0_Keyword_actions(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -912,6 +898,7 @@ protected class State_0_1_Assignment_transitions extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Transition")) {
 				Solution s = new Transition_Group(param, this).firstSolution();
+				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
 					type = AssignmentType.PRC; 
 					return new Solution(obj,s.getPredecessor());
@@ -963,7 +950,7 @@ protected class Transition_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Transition_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -991,7 +978,7 @@ protected class Transition_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Transition_0_0_Assignment_event(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
