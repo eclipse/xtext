@@ -14,20 +14,11 @@ import org.eclipse.xtext.resource.metamodel.services.MultiValueFeatureTestLangua
 
 
 public class MultiValueFeatureTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
-
-	public IAbstractToken serialize(EObject object) {
-		if(object == null) throw new IllegalArgumentException("The to-be-serialialized model is null");
-		Solution t = internalSerialize(object);
-		if(t == null) throw new XtextSerializationException(getDescr(object), "No rule found for serialization");
-		return t.getPredecessor();
-	}
-	
+		
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-
-		if(inst.isInstanceOf("Start") && (s = new Start_Assignment_featureA(inst, null).firstSolution()) != null) return s;
-
+		if(inst.isInstanceOf("Start") && (s = new Start_Assignment_featureA(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	

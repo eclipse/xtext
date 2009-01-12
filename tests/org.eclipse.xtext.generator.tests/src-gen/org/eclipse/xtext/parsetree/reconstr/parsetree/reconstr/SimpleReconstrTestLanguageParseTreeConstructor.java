@@ -14,44 +14,19 @@ import org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestLanguageG
 
 
 public class SimpleReconstrTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
-
-	public IAbstractToken serialize(EObject object) {
-		if(object == null) throw new IllegalArgumentException("The to-be-serialialized model is null");
-		Solution t = internalSerialize(object);
-		if(t == null) throw new XtextSerializationException(getDescr(object), "No rule found for serialization");
-		return t.getPredecessor();
-	}
-	
+		
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-
-		if(inst.isInstanceOf("Expression") && (s = new Op_Group(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("Expression") && (s = new Term_Alternatives(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("Atom") && (s = new Atom_Assignment_name(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("Expression") && (s = new Parens_Group(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("TwoNumbers") && (s = new TwoNumbers_Group(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("ManyStrings") && (s = new ManyStrings_Group(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("Type") && (s = new Type_Group(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("Ref2") && (s = new Ref2_Group(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("Spare") && (s = new Spare_Group(inst, null).firstSolution()) != null) return s;
-
+		if(inst.isInstanceOf("Expression") && (s = new Op_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("Expression") && (s = new Term_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("Atom") && (s = new Atom_Assignment_name(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("Expression") && (s = new Parens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("TwoNumbers") && (s = new TwoNumbers_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("ManyStrings") && (s = new ManyStrings_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("Type") && (s = new Type_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("Ref2") && (s = new Ref2_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("Spare") && (s = new Spare_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
@@ -79,7 +54,7 @@ protected class Op_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Op_0_RuleCall_Term(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -125,7 +100,7 @@ protected class Op_1_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Op_1_0_Action_Op_values(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -176,6 +151,7 @@ protected class Op_1_1_Assignment_values extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Expression")) {
 				Solution s = new Term_Alternatives(param, this).firstSolution();
+				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
 					type = AssignmentType.PRC; 
 					return new Solution(obj,s.getPredecessor());
@@ -516,7 +492,7 @@ protected class Parens_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Parens_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -544,7 +520,7 @@ protected class Parens_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Parens_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -572,7 +548,7 @@ protected class Parens_0_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Parens_0_0_0_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -678,7 +654,7 @@ protected class TwoNumbers_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new TwoNumbers_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -706,7 +682,7 @@ protected class TwoNumbers_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new TwoNumbers_0_0_Assignment_num1(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -781,7 +757,7 @@ protected class TwoNumbers_1_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new TwoNumbers_1_0_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -856,7 +832,7 @@ protected class ManyStrings_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new ManyStrings_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -884,7 +860,7 @@ protected class ManyStrings_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new ManyStrings_0_0_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -982,7 +958,7 @@ protected class Type_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Type_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -1010,7 +986,7 @@ protected class Type_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Type_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -1038,7 +1014,7 @@ protected class Type_0_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Type_0_0_0_Keyword_type(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -1152,7 +1128,7 @@ protected class Ref2_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Ref2_0_Keyword_2(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -1236,7 +1212,7 @@ protected class Spare_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Spare_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -1264,7 +1240,7 @@ protected class Spare_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Spare_0_0_Keyword_3(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -1328,7 +1304,7 @@ protected class Spare_1_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Spare_1_0_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();

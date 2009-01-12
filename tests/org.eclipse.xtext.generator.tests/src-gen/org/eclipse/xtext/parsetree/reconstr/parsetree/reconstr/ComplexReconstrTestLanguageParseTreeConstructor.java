@@ -14,53 +14,96 @@ import org.eclipse.xtext.parsetree.reconstr.services.ComplexReconstrTestLanguage
 
 
 public class ComplexReconstrTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
-
-	public IAbstractToken serialize(EObject object) {
-		if(object == null) throw new IllegalArgumentException("The to-be-serialialized model is null");
-		Solution t = internalSerialize(object);
-		if(t == null) throw new XtextSerializationException(getDescr(object), "No rule found for serialization");
-		return t.getPredecessor();
-	}
-	
+		
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-
-		if(inst.isInstanceOf("Expression") && (s = new Op_Group(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("Expression") && (s = new Term_Alternatives(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("Atom") && (s = new Atom_Assignment_name(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("Expression") && (s = new Parens_Group(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("TypeA1") && (s = new TrickyA_Group(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("TypeD") && (s = new TrickyA1_Assignment_name(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("TrickyB") && (s = new TrickyB_Group(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("TrickyC") && (s = new TrickyC_Group(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("TrickyD") && (s = new TrickyD_Group(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("TrickyE") && (s = new TrickyE_Group(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("TrickyF") && (s = new TrickyF_Group(inst, null).firstSolution()) != null) return s;
-
+		if(inst.isInstanceOf("Root") && (s = new Root_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("Expression") && (s = new Op_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("Expression") && (s = new Term_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("Atom") && (s = new Atom_Assignment_name(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("Expression") && (s = new Parens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("TypeA1") && (s = new TrickyA_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("TypeD") && (s = new TrickyA1_Assignment_name(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("TrickyB") && (s = new TrickyB_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("TrickyC") && (s = new TrickyC_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("TrickyD") && (s = new TrickyD_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("TrickyE") && (s = new TrickyE_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("TrickyF") && (s = new TrickyF_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("TrickyG") && (s = new TrickyG_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("TrickyG1") && (s = new TrickyG1_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("TrickyG2") && (s = new TrickyG2_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
+
+/************ begin Rule Root ****************
+ *
+ * Root : Op | TrickyG ;
+ *
+ **/
+
+
+// Op | TrickyG
+protected class Root_Alternatives extends AlternativesToken {
+
+	public Root_Alternatives(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Alternatives getGrammarElement() {
+		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prRoot().eleAlternatives();
+	}
+	
+	protected Solution createSolution() {
+		AbstractToken t = (first) ? new Root_1_RuleCall_TrickyG(current, this) : new Root_0_RuleCall_Op(current, this);
+		Solution s = t.firstSolution();
+		if(s == null && activateNextSolution()) s = createSolution();
+		if(s == null) return null;
+		last = s.getPredecessor();
+		return s; 
+	}
+}
+
+// Op
+protected class Root_0_RuleCall_Op extends RuleCallToken {
+	
+	public Root_0_RuleCall_Op(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public RuleCall getGrammarElement() {
+		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prRoot().ele0ParserRuleCallOp();
+	}
+	
+	protected Solution createSolution() {
+		if(checkForRecursion(Op_Group.class, current)) return null;
+		if(!current.isInstanceOf("Expression")) return null;
+		return new Op_Group(current, this).firstSolution();
+	}
+}
+
+// TrickyG
+protected class Root_1_RuleCall_TrickyG extends RuleCallToken {
+	
+	public Root_1_RuleCall_TrickyG(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public RuleCall getGrammarElement() {
+		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prRoot().ele1ParserRuleCallTrickyG();
+	}
+	
+	protected Solution createSolution() {
+		if(checkForRecursion(TrickyG_Group.class, current)) return null;
+		if(!current.isInstanceOf("TrickyG")) return null;
+		return new TrickyG_Group(current, this).firstSolution();
+	}
+}
+
+
+/************ end Rule Root ****************/
+
 
 /************ begin Rule Op ****************
  *
@@ -85,7 +128,7 @@ protected class Op_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Op_0_RuleCall_Term(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -152,7 +195,7 @@ protected class Op_1_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Op_1_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -180,7 +223,7 @@ protected class Op_1_0_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Op_1_0_0_0_Action_Add_addOperands(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -244,6 +287,7 @@ protected class Op_1_0_1_Assignment_addOperands extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Expression")) {
 				Solution s = new Term_Alternatives(param, this).firstSolution();
+				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
 					type = AssignmentType.PRC; 
 					return new Solution(obj,s.getPredecessor());
@@ -272,7 +316,7 @@ protected class Op_1_1_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Op_1_1_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -300,7 +344,7 @@ protected class Op_1_1_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Op_1_1_0_0_Action_Minus_minusOperands(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -364,6 +408,7 @@ protected class Op_1_1_1_Assignment_minusOperands extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Expression")) {
 				Solution s = new Term_Alternatives(param, this).firstSolution();
+				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
 					type = AssignmentType.PRC; 
 					return new Solution(obj,s.getPredecessor());
@@ -505,7 +550,7 @@ protected class Parens_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Parens_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -533,7 +578,7 @@ protected class Parens_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Parens_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -561,7 +606,7 @@ protected class Parens_0_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Parens_0_0_0_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -667,7 +712,7 @@ protected class TrickyA_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new TrickyA_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -695,7 +740,7 @@ protected class TrickyA_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new TrickyA_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -723,7 +768,7 @@ protected class TrickyA_0_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new TrickyA_0_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -751,7 +796,7 @@ protected class TrickyA_0_0_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new TrickyA_0_0_0_0_Keyword_TA(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -855,7 +900,7 @@ protected class TrickyA_0_1_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new TrickyA_0_1_0_0_Action_TypeB_x(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -916,7 +961,7 @@ protected class TrickyA_0_1_1_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new TrickyA_0_1_1_0_Action_TypeC_x(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -1046,7 +1091,7 @@ protected class TrickyB_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new TrickyB_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -1074,7 +1119,7 @@ protected class TrickyB_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new TrickyB_0_0_Keyword_TB(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -1114,7 +1159,7 @@ protected class TrickyB_0_1_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new TrickyB_0_1_0_Assignment_name(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -1224,7 +1269,7 @@ protected class TrickyC_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new TrickyC_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -1252,7 +1297,7 @@ protected class TrickyC_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new TrickyC_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -1280,7 +1325,7 @@ protected class TrickyC_0_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new TrickyC_0_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -1308,7 +1353,7 @@ protected class TrickyC_0_0_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new TrickyC_0_0_0_0_Keyword_TC(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -1372,7 +1417,7 @@ protected class TrickyC_0_0_1_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new TrickyC_0_0_1_0_Action_C1_x(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -1434,7 +1479,7 @@ protected class TrickyC_0_1_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new TrickyC_0_1_0_Action_C2_y(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -1496,7 +1541,7 @@ protected class TrickyC_1_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new TrickyC_1_0_Action_C3_z(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -1568,7 +1613,7 @@ protected class TrickyD_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new TrickyD_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -1596,7 +1641,7 @@ protected class TrickyD_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new TrickyD_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -1624,7 +1669,7 @@ protected class TrickyD_0_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new TrickyD_0_0_0_Keyword_TD(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -1664,7 +1709,7 @@ protected class TrickyD_0_0_1_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new TrickyD_0_0_1_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -1692,7 +1737,7 @@ protected class TrickyD_0_0_1_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new TrickyD_0_0_1_0_0_Assignment_name(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -1792,7 +1837,7 @@ protected class TrickyD_0_1_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new TrickyD_0_1_0_Assignment_name(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -1902,7 +1947,7 @@ protected class TrickyE_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new TrickyE_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -1930,7 +1975,7 @@ protected class TrickyE_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new TrickyE_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -1958,7 +2003,7 @@ protected class TrickyE_0_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new TrickyE_0_0_0_Keyword_TE(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -1998,7 +2043,7 @@ protected class TrickyE_0_0_1_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new TrickyE_0_0_1_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -2026,7 +2071,7 @@ protected class TrickyE_0_0_1_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new TrickyE_0_0_1_0_0_Assignment_name(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -2139,7 +2184,7 @@ protected class TrickyE_1_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new TrickyE_1_0_Assignment_name(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -2225,7 +2270,7 @@ protected class TrickyF_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new TrickyF_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -2253,7 +2298,7 @@ protected class TrickyF_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new TrickyF_0_0_Keyword_TF(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -2293,7 +2338,7 @@ protected class TrickyF_0_1_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new TrickyF_0_1_0_Assignment_name(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -2423,5 +2468,384 @@ protected class TrickyF_1_1_Assignment_type extends AssignmentToken  {
 
 
 /************ end Rule TrickyF ****************/
+
+
+/************ begin Rule TrickyG ****************
+ *
+ * TrickyG : 'TG' tree = TrickyG1 ;
+ *
+ **/
+
+
+// 'TG' tree = TrickyG1
+protected class TrickyG_Group extends GroupToken {
+	
+	public TrickyG_Group(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Group getGrammarElement() {
+		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyG().eleGroup();
+	}
+		
+	protected Solution createSolution() {	
+		Solution s1 = new TrickyG_1_Assignment_tree(current, this).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new TrickyG_0_Keyword_TG(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 == null) {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
+				if(s1 == null) return null;
+			} else {
+				last = s2.getPredecessor();
+				return s2;
+			}
+		}
+		return null;
+		
+	}
+}
+
+// 'TG'
+protected class TrickyG_0_Keyword_TG extends KeywordToken  {
+	
+	public TrickyG_0_Keyword_TG(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Keyword getGrammarElement() {
+		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyG().ele0KeywordTG();
+	}	
+}
+
+// tree = TrickyG1
+protected class TrickyG_1_Assignment_tree extends AssignmentToken  {
+	
+	public TrickyG_1_Assignment_tree(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Assignment getGrammarElement() {
+		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyG().ele1AssignmentTree();
+	}
+	
+	protected Solution createSolution() {
+		if((value = current.getConsumable("tree",IS_REQUIRED)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("tree");
+
+		if(value instanceof EObject) { // xtext::RuleCall
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf("TrickyG1")) {
+				Solution s = new TrickyG1_Group(param, this).firstSolution();
+				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
+				if(s != null) {
+					type = AssignmentType.PRC; 
+					return new Solution(obj,s.getPredecessor());
+				} 
+			}
+		}
+
+		return null;
+	}
+}
+
+
+/************ end Rule TrickyG ****************/
+
+
+/************ begin Rule TrickyG1 ****************
+ *
+ * TrickyG1 : '[' ( vals += TrickyG2 ( ',' vals += TrickyG2 ) * ) ? ']' ;
+ *
+ **/
+
+
+// '[' ( vals += TrickyG2 ( ',' vals += TrickyG2 ) * ) ? ']'
+protected class TrickyG1_Group extends GroupToken {
+	
+	public TrickyG1_Group(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Group getGrammarElement() {
+		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyG1().eleGroup();
+	}
+		
+	protected Solution createSolution() {	
+		Solution s1 = new TrickyG1_1_Keyword(current, this).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new TrickyG1_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 == null) {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
+				if(s1 == null) return null;
+			} else {
+				last = s2.getPredecessor();
+				return s2;
+			}
+		}
+		return null;
+		
+	}
+}
+
+// '[' ( vals += TrickyG2 ( ',' vals += TrickyG2 ) * ) ?
+protected class TrickyG1_0_Group extends GroupToken {
+	
+	public TrickyG1_0_Group(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Group getGrammarElement() {
+		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyG1().ele0Group();
+	}
+		
+	protected Solution createSolution() {	
+		Solution s1 = new TrickyG1_0_1_Group(current, this).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new TrickyG1_0_0_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 == null) {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
+				if(s1 == null) return null;
+			} else {
+				last = s2.getPredecessor();
+				return s2;
+			}
+		}
+		return null;
+		
+	}
+}
+
+// '['
+protected class TrickyG1_0_0_Keyword extends KeywordToken  {
+	
+	public TrickyG1_0_0_Keyword(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Keyword getGrammarElement() {
+		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyG1().ele00KeywordLeftSquareBracket();
+	}	
+}
+
+// ( vals += TrickyG2 ( ',' vals += TrickyG2 ) * ) ?
+protected class TrickyG1_0_1_Group extends GroupToken {
+	
+	public TrickyG1_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, !IS_REQUIRED);
+	}
+	
+	public Group getGrammarElement() {
+		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyG1().ele01Group();
+	}
+		
+	protected Solution createSolution() {	
+		Solution s1 = new TrickyG1_0_1_1_Group(current, this).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new TrickyG1_0_1_0_Assignment_vals(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 == null) {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
+				if(s1 == null) return null;
+			} else {
+				last = s2.getPredecessor();
+				return s2;
+			}
+		}
+		return null;
+		
+	}
+}
+
+// vals += TrickyG2
+protected class TrickyG1_0_1_0_Assignment_vals extends AssignmentToken  {
+	
+	public TrickyG1_0_1_0_Assignment_vals(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Assignment getGrammarElement() {
+		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyG1().ele010AssignmentVals();
+	}
+	
+	protected Solution createSolution() {
+		if((value = current.getConsumable("vals",IS_REQUIRED)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("vals");
+
+		if(value instanceof EObject) { // xtext::RuleCall
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf("TrickyG2")) {
+				Solution s = new TrickyG2_Alternatives(param, this).firstSolution();
+				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
+				if(s != null) {
+					type = AssignmentType.PRC; 
+					return new Solution(obj,s.getPredecessor());
+				} 
+			}
+		}
+
+		return null;
+	}
+}
+
+// ( ',' vals += TrickyG2 ) *
+protected class TrickyG1_0_1_1_Group extends GroupToken {
+	
+	public TrickyG1_0_1_1_Group(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, IS_MANY, !IS_REQUIRED);
+	}
+	
+	public Group getGrammarElement() {
+		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyG1().ele011Group();
+	}
+		
+	protected Solution createSolution() {	
+		Solution s1 = new TrickyG1_0_1_1_1_Assignment_vals(current, this).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new TrickyG1_0_1_1_0_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 == null) {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
+				if(s1 == null) return null;
+			} else {
+				last = s2.getPredecessor();
+				return s2;
+			}
+		}
+		return null;
+		
+	}
+}
+
+// ','
+protected class TrickyG1_0_1_1_0_Keyword extends KeywordToken  {
+	
+	public TrickyG1_0_1_1_0_Keyword(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Keyword getGrammarElement() {
+		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyG1().ele0110KeywordComma();
+	}	
+}
+
+// vals += TrickyG2
+protected class TrickyG1_0_1_1_1_Assignment_vals extends AssignmentToken  {
+	
+	public TrickyG1_0_1_1_1_Assignment_vals(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Assignment getGrammarElement() {
+		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyG1().ele0111AssignmentVals();
+	}
+	
+	protected Solution createSolution() {
+		if((value = current.getConsumable("vals",!IS_REQUIRED)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("vals");
+
+		if(value instanceof EObject) { // xtext::RuleCall
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf("TrickyG2")) {
+				Solution s = new TrickyG2_Alternatives(param, this).firstSolution();
+				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
+				if(s != null) {
+					type = AssignmentType.PRC; 
+					return new Solution(obj,s.getPredecessor());
+				} 
+			}
+		}
+
+		return null;
+	}
+}
+
+
+
+
+// ']'
+protected class TrickyG1_1_Keyword extends KeywordToken  {
+	
+	public TrickyG1_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Keyword getGrammarElement() {
+		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyG1().ele1KeywordRightSquareBracket();
+	}	
+}
+
+
+/************ end Rule TrickyG1 ****************/
+
+
+/************ begin Rule TrickyG2 ****************
+ *
+ * TrickyG2 : TrickyG1 | val = INT ;
+ *
+ **/
+
+
+// TrickyG1 | val = INT
+protected class TrickyG2_Alternatives extends AlternativesToken {
+
+	public TrickyG2_Alternatives(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Alternatives getGrammarElement() {
+		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyG2().eleAlternatives();
+	}
+	
+	protected Solution createSolution() {
+		AbstractToken t = (first) ? new TrickyG2_1_Assignment_val(current, this) : new TrickyG2_0_RuleCall_TrickyG1(current, this);
+		Solution s = t.firstSolution();
+		if(s == null && activateNextSolution()) s = createSolution();
+		if(s == null) return null;
+		last = s.getPredecessor();
+		return s; 
+	}
+}
+
+// TrickyG1
+protected class TrickyG2_0_RuleCall_TrickyG1 extends RuleCallToken {
+	
+	public TrickyG2_0_RuleCall_TrickyG1(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public RuleCall getGrammarElement() {
+		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyG2().ele0ParserRuleCallTrickyG1();
+	}
+	
+	protected Solution createSolution() {
+		if(checkForRecursion(TrickyG1_Group.class, current)) return null;
+		if(!current.isInstanceOf("TrickyG1")) return null;
+		return new TrickyG1_Group(current, this).firstSolution();
+	}
+}
+
+// val = INT
+protected class TrickyG2_1_Assignment_val extends AssignmentToken  {
+	
+	public TrickyG2_1_Assignment_val(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Assignment getGrammarElement() {
+		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyG2().ele1AssignmentVal();
+	}
+	
+	protected Solution createSolution() {
+		if((value = current.getConsumable("val",IS_REQUIRED)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("val");
+		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyG2().ele10LexerRuleCallINT();
+			return new Solution(obj);
+		}
+		return null;
+	}
+}
+
+
+/************ end Rule TrickyG2 ****************/
 
 }

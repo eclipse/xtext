@@ -15,23 +15,12 @@ import org.eclipse.xtext.grammarinheritance.services.ConcreteTestLanguageGrammar
 
 
 public class ConcreteTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
-
-	public IAbstractToken serialize(EObject object) {
-		if(object == null) throw new IllegalArgumentException("The to-be-serialialized model is null");
-		Solution t = internalSerialize(object);
-		if(t == null) throw new XtextSerializationException(getDescr(object), "No rule found for serialization");
-		return t.getPredecessor();
-	}
-	
+		
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-
-		if(inst.isInstanceOf("ConcreteParserRule") && (s = new ConcreteParserRule_Group(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("AType") && (s = new InheritedParserRule_Group(inst, null).firstSolution()) != null) return s;
-
+		if(inst.isInstanceOf("ConcreteParserRule") && (s = new ConcreteParserRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("AType") && (s = new InheritedParserRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
@@ -59,7 +48,7 @@ protected class ConcreteParserRule_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new ConcreteParserRule_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -87,7 +76,7 @@ protected class ConcreteParserRule_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new ConcreteParserRule_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -115,7 +104,7 @@ protected class ConcreteParserRule_0_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new ConcreteParserRule_0_0_0_Keyword_model(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -195,6 +184,7 @@ protected class ConcreteParserRule_1_Assignment_elements extends AssignmentToken
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("AType")) {
 				Solution s = new InheritedParserRule_Group(param, this).firstSolution();
+				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
 					type = AssignmentType.PRC; 
 					return new Solution(obj,s.getPredecessor());
@@ -233,7 +223,7 @@ protected class InheritedParserRule_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new InheritedParserRule_0_Keyword_element(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();

@@ -14,35 +14,16 @@ import org.eclipse.xtext.testlanguages.services.SimpleExpressionsTestLanguageGra
 
 
 public class SimpleExpressionsTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
-
-	public IAbstractToken serialize(EObject object) {
-		if(object == null) throw new IllegalArgumentException("The to-be-serialialized model is null");
-		Solution t = internalSerialize(object);
-		if(t == null) throw new XtextSerializationException(getDescr(object), "No rule found for serialization");
-		return t.getPredecessor();
-	}
-	
+		
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-
-		if(inst.isInstanceOf("Sequence") && (s = new Sequence_Group(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("Expression") && (s = new Addition_Group(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("Expression") && (s = new Multiplication_Group(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("Expression") && (s = new Term_Alternatives(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("Atom") && (s = new Atom_Assignment_name(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("Expression") && (s = new Parens_Group(inst, null).firstSolution()) != null) return s;
-
+		if(inst.isInstanceOf("Sequence") && (s = new Sequence_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("Expression") && (s = new Addition_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("Expression") && (s = new Multiplication_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("Expression") && (s = new Term_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("Atom") && (s = new Atom_Assignment_name(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("Expression") && (s = new Parens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
@@ -70,7 +51,7 @@ protected class Sequence_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Sequence_0_RuleCall_Addition(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -116,7 +97,7 @@ protected class Sequence_1_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Sequence_1_0_Action_Sequence_expressions(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -167,6 +148,7 @@ protected class Sequence_1_1_Assignment_expressions extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Expression")) {
 				Solution s = new Addition_Group(param, this).firstSolution();
+				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
 					type = AssignmentType.PRC; 
 					return new Solution(obj,s.getPredecessor());
@@ -206,7 +188,7 @@ protected class Addition_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Addition_0_RuleCall_Multiplication(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -252,7 +234,7 @@ protected class Addition_1_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Addition_1_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -280,7 +262,7 @@ protected class Addition_1_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Addition_1_0_0_Action_Op_values(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -360,6 +342,7 @@ protected class Addition_1_1_Assignment_values extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Expression")) {
 				Solution s = new Multiplication_Group(param, this).firstSolution();
+				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
 					type = AssignmentType.PRC; 
 					return new Solution(obj,s.getPredecessor());
@@ -399,7 +382,7 @@ protected class Multiplication_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Multiplication_0_RuleCall_Term(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -445,7 +428,7 @@ protected class Multiplication_1_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Multiplication_1_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -473,7 +456,7 @@ protected class Multiplication_1_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Multiplication_1_0_0_Action_Op_values(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -553,6 +536,7 @@ protected class Multiplication_1_1_Assignment_values extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Expression")) {
 				Solution s = new Term_Alternatives(param, this).firstSolution();
+				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
 					type = AssignmentType.PRC; 
 					return new Solution(obj,s.getPredecessor());
@@ -693,7 +677,7 @@ protected class Parens_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Parens_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -721,7 +705,7 @@ protected class Parens_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Parens_0_0_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();

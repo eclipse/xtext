@@ -14,29 +14,14 @@ import org.eclipse.xtext.parsetree.transientvalues.services.TransientValuesTestG
 
 
 public class TransientValuesTestParseTreeConstructor extends AbstractParseTreeConstructor {
-
-	public IAbstractToken serialize(EObject object) {
-		if(object == null) throw new IllegalArgumentException("The to-be-serialialized model is null");
-		Solution t = internalSerialize(object);
-		if(t == null) throw new XtextSerializationException(getDescr(object), "No rule found for serialization");
-		return t.getPredecessor();
-	}
-	
+		
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-
-		if(inst.isInstanceOf("Root") && (s = new Root_Group(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("TestRequired") && (s = new TestRequired_Group(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("TestOptional") && (s = new TestOptional_Group(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("TestList") && (s = new TestList_Group(inst, null).firstSolution()) != null) return s;
-
+		if(inst.isInstanceOf("Root") && (s = new Root_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("TestRequired") && (s = new TestRequired_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("TestOptional") && (s = new TestOptional_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("TestList") && (s = new TestList_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
@@ -64,7 +49,7 @@ protected class Root_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Root_0_Keyword_test(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -213,7 +198,7 @@ protected class TestRequired_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new TestRequired_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -241,7 +226,7 @@ protected class TestRequired_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new TestRequired_0_0_Keyword_required(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -339,7 +324,7 @@ protected class TestOptional_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new TestOptional_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -367,7 +352,7 @@ protected class TestOptional_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new TestOptional_0_0_Keyword_optional(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -431,7 +416,7 @@ protected class TestOptional_1_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new TestOptional_1_0_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -506,7 +491,7 @@ protected class TestList_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new TestList_0_Keyword_list(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();

@@ -14,23 +14,12 @@ import org.eclipse.xtext.testlanguages.services.OptionalEmptyTestLanguageGrammar
 
 
 public class OptionalEmptyTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
-
-	public IAbstractToken serialize(EObject object) {
-		if(object == null) throw new IllegalArgumentException("The to-be-serialialized model is null");
-		Solution t = internalSerialize(object);
-		if(t == null) throw new XtextSerializationException(getDescr(object), "No rule found for serialization");
-		return t.getPredecessor();
-	}
-	
+		
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-
-		if(inst.isInstanceOf("Model") && (s = new Model_Assignment_child(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("Greeting") && (s = new Greeting_Group(inst, null).firstSolution()) != null) return s;
-
+		if(inst.isInstanceOf("Model") && (s = new Model_Assignment_child(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("Greeting") && (s = new Greeting_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
@@ -61,6 +50,7 @@ protected class Model_Assignment_child extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Greeting")) {
 				Solution s = new Greeting_Group(param, this).firstSolution();
+				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
 					type = AssignmentType.PRC; 
 					return new Solution(obj,s.getPredecessor());
@@ -98,7 +88,7 @@ protected class Greeting_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Greeting_0_Keyword_hallo(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
