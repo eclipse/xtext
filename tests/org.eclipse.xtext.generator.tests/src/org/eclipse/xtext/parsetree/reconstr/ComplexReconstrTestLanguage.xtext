@@ -10,6 +10,8 @@
 language org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTestLanguage
 generate complexrewritetest "http://complex/rewrite/test"
 
+Root: Op | TrickyG;
+
 Op returns Expression: 
 	Term ({Add.addOperands+=current} '+' addOperands+=Term | {Minus.minusOperands+=current} '-' minusOperands+=Term)*;
 	
@@ -42,6 +44,12 @@ TrickyE: 'TE' (name+=INT foo+=STRING type+=ID)* 'x' (name+=INT type+=ID)*;
 
 // 
 TrickyF: 'TF' (name+=ID type+=INT)* (name+=ID | type+=INT);
+
+TrickyG: 'TG' tree=TrickyG1; 
+TrickyG1: '[' (vals+=TrickyG2 (',' vals+=TrickyG2)*)? ']';
+TrickyG2: TrickyG1 | val=INT;
+
+//TrickyH: x+='a' TrickyH?; 
 
 
 // TrickyG: TrickyG1 | TrickyG2;
