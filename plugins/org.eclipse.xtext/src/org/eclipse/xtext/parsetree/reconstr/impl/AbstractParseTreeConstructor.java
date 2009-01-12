@@ -10,9 +10,15 @@ package org.eclipse.xtext.parsetree.reconstr.impl;
 import java.io.ByteArrayOutputStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map.Entry;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.GrammarUtil;
@@ -21,6 +27,8 @@ import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
 import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
+import org.eclipse.xtext.parsetree.reconstr.XtextSerializationException;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
 import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.service.ServiceRegistry;
 
@@ -29,6 +37,57 @@ import org.eclipse.xtext.service.ServiceRegistry;
  */
 public abstract class AbstractParseTreeConstructor implements
 		IParseTreeConstructor {
+
+	public static abstract class AbstractSerializationDiagnostic implements
+			Resource.Diagnostic, Comparable<AbstractSerializationDiagnostic> {
+
+		protected String msg;
+
+		private int prio = -1;
+
+		protected AbstractToken token;
+
+		protected boolean subsequentMessage = false;
+
+		public boolean isSubsequentMessage() {
+			return subsequentMessage;
+		}
+
+		public int compareTo(AbstractSerializationDiagnostic o) {
+			return (getPrio() > o.getPrio() ? -1
+					: (getPrio() == o.getPrio() ? 0 : 1));
+		}
+
+		public int getColumn() {
+			return 0;
+		}
+
+		public int getLine() {
+			return 0;
+		}
+
+		public String getLocation() {
+			return token == null ? "root" : token.getClass().getSimpleName();
+		}
+
+		public String getMessage() {
+			return msg;
+		}
+
+		public int getPrio() {
+			if (prio < 0) {
+				prio = 0;
+				for (AbstractToken t = token; t != null; t = t.predecessor)
+					prio++;
+			}
+			return prio;
+		}
+
+		public String toString() {
+			return getPrio() + ": in " + getLocation() + ": " + getMessage();
+		}
+
+	}
 
 	public abstract class AbstractToken implements IAbstractToken {
 
@@ -198,24 +257,36 @@ public abstract class AbstractParseTreeConstructor implements
 			}
 		}
 
-		public Solution nextSolution(AbstractToken limit) {
+		public Solution nextSolution(AbstractToken limit, Solution last) {
 			if (log.isDebugEnabled())
 				log.debug("--" + depth(limit)
 						+ limit.getClass().getSimpleName()
 						+ " -> nextSolution()");
 			AbstractToken t = this;
 			while (t != null && t != limit) {
-				Solution s = t.localNextSolution();
-				if (s != null) {
-					if (log.isDebugEnabled())
-						log.debug("--" + depth(this)
-								+ getClass().getSimpleName()
-								+ " -> nextSolution() -> "
-								+ t.getClass().getSimpleName() + " ("
-								+ s.getPredecessor().getClass().getSimpleName()
-								+ ")");
-					return s;
-				}
+				Solution s;
+				do {
+					s = t.localNextSolution();
+					if (s != null) {
+						boolean valid = last.getCurrent().getDelegate() == s
+								.getCurrent().getDelegate();
+						if (log.isDebugEnabled())
+							log
+									.debug("--"
+											+ depth(this)
+											+ getClass().getSimpleName()
+											+ " -> nextSolution() -> "
+											+ t.getClass().getSimpleName()
+											+ " ("
+											+ s.getPredecessor().getClass()
+													.getSimpleName()
+											+ ")"
+											+ (valid ? ""
+													: " -> delegates differ, discarding solution."));
+						if (valid)
+							return s;
+					}
+				} while (s != null);
 				t = t.predecessor;
 			}
 			if (log.isDebugEnabled())
@@ -267,9 +338,9 @@ public abstract class AbstractParseTreeConstructor implements
 
 		protected AbstractElement element;
 
-		protected Object value;
-
 		protected AssignmentType type;
+
+		protected Object value;
 
 		public AssignmentToken(IInstanceDescription curr, AbstractToken pred,
 				boolean many, boolean required) {
@@ -290,6 +361,30 @@ public abstract class AbstractParseTreeConstructor implements
 
 		public Object getValue() {
 			return value;
+		}
+
+	}
+
+	public class FeatureNotConsumedDiagnostic extends
+			AbstractSerializationDiagnostic {
+
+		public FeatureNotConsumedDiagnostic(AbstractToken token, Solution s) {
+			super();
+			this.token = token;
+			this.current = s.getCurrent();
+			ArrayList<String> unconsumed = new ArrayList<String>();
+			for (Entry<EStructuralFeature, Integer> e : s.getCurrent()
+					.getUnconsumed().entrySet())
+				unconsumed.add(e.getValue() + "x " + e.getKey().getName());
+			EObject o = s.getCurrent().getDelegate();
+			this.msg = "Unconsumed feature(s): " + unconsumed + " in "
+					+ o.eClass().getName() + ", path:" + getPath(o);
+		}
+
+		protected IInstanceDescription current;
+
+		public IInstanceDescription getCurrent() {
+			return current;
 		}
 
 	}
@@ -333,10 +428,14 @@ public abstract class AbstractParseTreeConstructor implements
 
 	}
 
-	protected Logger log = Logger.getLogger(AbstractParseTreeConstructor.class);
+	protected List<AbstractSerializationDiagnostic> diagnostic = new ArrayList<AbstractSerializationDiagnostic>();
 
 	@Inject
 	private IAstFactory factory;
+
+	protected Logger log = Logger.getLogger(AbstractParseTreeConstructor.class);
+
+	protected EObject rootObject;
 
 	@Inject
 	private ITransientValueService tvService;
@@ -353,8 +452,59 @@ public abstract class AbstractParseTreeConstructor implements
 		return factory;
 	}
 
+	protected String getPath(EObject obj) {
+		if (obj.eContainer() == null || obj == rootObject)
+			return "";
+		EObject c = obj.eContainer();
+		EReference r = obj.eContainmentFeature();
+		if (r.isMany()) {
+			int index = ((List<?>) c.eGet(r)).indexOf(obj);
+			return getPath(c) + "/" + r.getName() + "[" + index + "]";
+		} else
+			return getPath(c) + "/" + r.getName();
+	}
+
 	public ITransientValueService getTVService() {
 		return tvService;
+	}
+
+	protected abstract Solution internalSerialize(EObject obj);
+
+	protected boolean isConsumed(Solution s, AbstractToken token) {
+		if (s.getCurrent().isConsumed())
+			return true;
+		if (!isSubsequentNonconsumption(s.getCurrent().getDelegate()))
+			diagnostic.add(new FeatureNotConsumedDiagnostic(token, s));
+		return false;
+	}
+
+	protected boolean isSubsequentNonconsumption(EObject obj) {
+		for (AbstractSerializationDiagnostic d : diagnostic)
+			if (d instanceof FeatureNotConsumedDiagnostic) {
+				EObject del = ((FeatureNotConsumedDiagnostic) d).getCurrent()
+						.getDelegate().eContainer();
+				while (del != null) {
+					if (del == obj)
+						return true;
+					del = del.eContainer();
+				}
+			}
+		return false;
+	}
+
+	public IAbstractToken serialize(EObject object) {
+		diagnostic.clear();
+		rootObject = object;
+		if (object == null)
+			throw new IllegalArgumentException(
+					"The to-be-serialialized model is null");
+		Solution t = internalSerialize(object);
+		if (t == null)
+			throw new XtextSerializationException(
+					getDescr(object),
+					"Serialization of " + object.eClass().getName() + " failed.",
+					diagnostic);
+		return t.getPredecessor();
 	}
 
 }
