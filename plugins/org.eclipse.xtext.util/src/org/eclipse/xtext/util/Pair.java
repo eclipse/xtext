@@ -33,6 +33,8 @@ public class Pair<T,U> {
     }
 
     public boolean equals(Object other) {
+    	if (other==null)
+    		return false;
         if(this.getClass().equals(other.getClass())) {
             Pair<?,?> otherPair = (Pair<?, ?>)other;
             return first.equals(otherPair.getFirst()) && second.equals(otherPair.getSecond());
