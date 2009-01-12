@@ -16,6 +16,7 @@ public class TuplesTest extends TestCase {
 		assertFalse(p1.equals(p3));
 		assertFalse(p1.equals(p4));
 		assertFalse(p1.equals(p5));
+		assertFalse(p1.equals(null));
 	}
 	
 	public void testTriple() throws Exception {
@@ -35,5 +36,6 @@ public class TuplesTest extends TestCase {
 		assertFalse(p1.equals(p4));
 		assertFalse(p1.equals(p5));
 		assertFalse(p1.equals(p6));
+		assertFalse(p1.equals(null));
 	}
 }
