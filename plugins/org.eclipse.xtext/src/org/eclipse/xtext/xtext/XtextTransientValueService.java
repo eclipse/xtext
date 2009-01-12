@@ -50,7 +50,9 @@ public class XtextTransientValueService extends SimpleTransientValueService {
 			final AbstractRule rule = (AbstractRule) owner;
 			if (rule instanceof ParserRule) {
 				final TypeRef returnType = rule.getType();
-				if (returnType.getType() != null && rule.getName().equals(returnType.getType().getName())) {
+				if(returnType.getType() == null) 
+					return true;
+				else if (rule.getName().equals(returnType.getType().getName())) {
 					return isTransient(returnType, XtextPackage.eINSTANCE.getTypeRef_Metamodel(), -1);
 				}
 			} else if (rule instanceof LexerRule) {

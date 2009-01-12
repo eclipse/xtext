@@ -14,29 +14,14 @@ import org.eclipse.xtext.parsetree.formatter.services.FormatterTestLanguageGramm
 
 
 public class FormatterTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
-
-	public IAbstractToken serialize(EObject object) {
-		if(object == null) throw new IllegalArgumentException("The to-be-serialialized model is null");
-		Solution t = internalSerialize(object);
-		if(t == null) throw new XtextSerializationException(getDescr(object), "No rule found for serialization");
-		return t.getPredecessor();
-	}
-	
+		
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-
-		if(inst.isInstanceOf("Root") && (s = new Root_Group(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("Line") && (s = new Line_Group(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("TestLinewrap") && (s = new TestLinewrap_Group(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("TestIndentation") && (s = new TestIndentation_Group(inst, null).firstSolution()) != null) return s;
-
+		if(inst.isInstanceOf("Root") && (s = new Root_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("Line") && (s = new Line_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("TestLinewrap") && (s = new TestLinewrap_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("TestIndentation") && (s = new TestIndentation_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
@@ -64,7 +49,7 @@ protected class Root_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Root_0_Keyword_test(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -173,7 +158,7 @@ protected class Line_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Line_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -201,7 +186,7 @@ protected class Line_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Line_0_0_Assignment_type(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -299,7 +284,7 @@ protected class TestLinewrap_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new TestLinewrap_0_Keyword_linewrap(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -342,6 +327,7 @@ protected class TestLinewrap_1_Assignment_items extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Line")) {
 				Solution s = new Line_Group(param, this).firstSolution();
+				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
 					type = AssignmentType.PRC; 
 					return new Solution(obj,s.getPredecessor());
@@ -380,7 +366,7 @@ protected class TestIndentation_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new TestIndentation_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -408,7 +394,7 @@ protected class TestIndentation_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new TestIndentation_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -436,7 +422,7 @@ protected class TestIndentation_0_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new TestIndentation_0_0_0_Keyword_indentation(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -513,6 +499,7 @@ protected class TestIndentation_0_1_0_Assignment_sub extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("TestIndentation")) {
 				Solution s = new TestIndentation_Group(param, this).firstSolution();
+				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
 					type = AssignmentType.PRC; 
 					return new Solution(obj,s.getPredecessor());
@@ -543,6 +530,7 @@ protected class TestIndentation_0_1_1_Assignment_items extends AssignmentToken  
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Line")) {
 				Solution s = new Line_Group(param, this).firstSolution();
+				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
 					type = AssignmentType.PRC; 
 					return new Solution(obj,s.getPredecessor());

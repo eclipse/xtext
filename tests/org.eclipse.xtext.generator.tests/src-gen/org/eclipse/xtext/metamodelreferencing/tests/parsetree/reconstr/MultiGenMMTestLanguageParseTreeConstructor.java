@@ -14,23 +14,12 @@ import org.eclipse.xtext.metamodelreferencing.tests.services.MultiGenMMTestLangu
 
 
 public class MultiGenMMTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
-
-	public IAbstractToken serialize(EObject object) {
-		if(object == null) throw new IllegalArgumentException("The to-be-serialialized model is null");
-		Solution t = internalSerialize(object);
-		if(t == null) throw new XtextSerializationException(getDescr(object), "No rule found for serialization");
-		return t.getPredecessor();
-	}
-	
+		
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-
-		if(inst.isInstanceOf("Foo") && (s = new Foo_Group(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("FooBar") && (s = new NameRef_Assignment_name(inst, null).firstSolution()) != null) return s;
-
+		if(inst.isInstanceOf("Foo") && (s = new Foo_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("FooBar") && (s = new NameRef_Assignment_name(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
@@ -58,7 +47,7 @@ protected class Foo_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Foo_0_Assignment_name(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -112,6 +101,7 @@ protected class Foo_1_Assignment_nameRefs extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("FooBar")) {
 				Solution s = new NameRef_Assignment_name(param, this).firstSolution();
+				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
 					type = AssignmentType.PRC; 
 					return new Solution(obj,s.getPredecessor());

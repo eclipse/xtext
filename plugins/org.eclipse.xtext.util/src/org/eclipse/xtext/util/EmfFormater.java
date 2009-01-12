@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.resource.Resource;
 
 public class EmfFormater {
 	@SuppressWarnings("unchecked")
@@ -25,7 +25,8 @@ public class EmfFormater {
 			StringBuffer buf = new StringBuffer();
 			EObject eobj = (EObject) obj;
 			buf.append(eobj.eClass().getName() + " {\n");
-			for (EStructuralFeature f : eobj.eClass().getEAllStructuralFeatures()) {
+			for (EStructuralFeature f : eobj.eClass()
+					.getEAllStructuralFeatures()) {
 				if (!eobj.eIsSet(f))
 					continue;
 				String fType = "unknown";
@@ -35,13 +36,11 @@ public class EmfFormater {
 					if (r.isContainment()) {
 						val = objToStr(eobj.eGet(f), innerIdent);
 						fType = "cref";
-					}
-					else {
+					} else {
 						val = refToStr(eobj, r);
 						fType = "ref";
 					}
-				}
-				else if (f instanceof EAttribute) {
+				} else if (f instanceof EAttribute) {
 					fType = "attr";
 					// logger.debug(Msg.create("Path:").path(eobj));
 					Object at = eobj.eGet(f);
@@ -52,7 +51,8 @@ public class EmfFormater {
 				}
 				String vType = f.getEType().getName();
 				String name = f.getName();
-				buf.append(innerIdent + fType + " " + vType + " " + name + " " + val + "\n");
+				buf.append(innerIdent + fType + " " + vType + " " + name + " "
+						+ val + "\n");
 			}
 			buf.append(ident + "}");
 			return buf.toString();
@@ -79,14 +79,14 @@ public class EmfFormater {
 
 			if (eo instanceof ENamedElement)
 				buf.append("'" + ((ENamedElement) eo).getName() + "' ");
-			buf.append("ref:" + EcoreUtil.getURI(eo));
+			buf.append("ref:" + getURI(obj, eo));
 			return buf.toString();
 		}
 		if (o instanceof Collection) {
 			buf.append("[");
 			for (Iterator i = ((Collection) o).iterator(); i.hasNext();) {
 				Object item = (Object) i.next();
-				buf.append(EcoreUtil.getURI((EObject) item));
+				buf.append(getURI(obj, (EObject) item));
 				if (i.hasNext())
 					buf.append(", ");
 			}
@@ -94,5 +94,14 @@ public class EmfFormater {
 			return buf.toString();
 		}
 		return "?????";
+	}
+
+	private static String getURI(EObject parent, EObject target) {
+		Resource r = target.eResource();
+		if (r == null)
+			return "(resource null)";
+		if (parent.eResource() == r)
+			return r.getURIFragment(target);
+		return r.getURI() + r.getURIFragment(target);
 	}
 }

@@ -39,6 +39,6 @@ public class ComplexReconstrTestLanguageParser extends org.eclipse.xtext.parser.
 	
 	@Override 
 	protected String getDefaultRuleName() {
-		return "Op";
+		return "Root";
 	}
 }

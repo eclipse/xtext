@@ -1,6 +1,9 @@
 package org.eclipse.xtext.parsetree.reconstr;
 
+import java.util.Map;
+
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 
 /**
  * A wrapper for EObjects holding the information about what values have already
@@ -11,6 +14,21 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface IInstanceDescription {
 
+	public IInstanceDescription cloneAndConsume(String feature);
+
+	public Object getConsumable(String feature, boolean allowDefault);
+	
+	/**
+	 * @return the wrapped EObject
+	 */
+	public abstract EObject getDelegate();
+	
+	public Map<EStructuralFeature, Integer> getUnconsumed();
+	
+	public boolean isConsumed();
+	
+	public boolean isConsumedWithLastConsumtion(String feature);
+	
 	/**
 	 * @param the
 	 *            type name as it is used within the grammar of the given
@@ -18,15 +36,4 @@ public interface IInstanceDescription {
 	 * @return true if the delegate is a direct instance of the given type
 	 */
 	public abstract boolean isInstanceOf(String string);
-
-	/**
-	 * @return the wrapped EObject
-	 */
-	public abstract EObject getDelegate();
-	
-	public Object getConsumable(String feature, boolean allowDefault);
-	
-	public IInstanceDescription cloneAndConsume(String feature);
-	
-	public boolean isConsumedWithLastConsumtion(String feature);
 }

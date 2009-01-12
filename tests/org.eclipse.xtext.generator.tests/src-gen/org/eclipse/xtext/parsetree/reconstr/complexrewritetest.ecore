@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="complexrewritetest" nsURI="http://complex/rewrite/test" nsPrefix="complexrewritetest">
-  <eClassifiers xsi:type="ecore:EClass" name="Expression">
+  <eClassifiers xsi:type="ecore:EClass" name="Root"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Expression" eSuperTypes="//Root">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="em">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
@@ -56,6 +57,17 @@
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" unique="false" upperBound="-1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TrickyG" eSuperTypes="//Root">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tree" eType="//TrickyG1" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TrickyG1" eSuperTypes="//TrickyG2">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="vals" unique="false" upperBound="-1" eType="//TrickyG2" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TrickyG2">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     </eStructuralFeatures>
   </eClassifiers>

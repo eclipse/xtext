@@ -11,7 +11,10 @@ package org.eclipse.xtext.parsetree.reconstr.impl;
 import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -25,13 +28,13 @@ import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
  */
 public class InstanceDescription implements IInstanceDescription {
 
-	private int[] next;
+	private AbstractParseTreeConstructor astSer;
 
 	private EObject described;
 
-	private AbstractParseTreeConstructor astSer;
-
 	private BitSet multiFeatures;
+
+	private int[] next;
 
 	public InstanceDescription(AbstractParseTreeConstructor astSerializer,
 			EObject desc) {
@@ -51,23 +54,9 @@ public class InstanceDescription implements IInstanceDescription {
 				next[id] = firstID(f);
 			} else
 				next[id] = -1;
+			// System.out.println(id + ":" + f.getName() + " -> " + next[id]);
 		}
-	}
-
-	private int firstID(EStructuralFeature f) {
-		return nextID(f, f.isMany() ? ((List<?>) described.eGet(f)).size() : 1);
-	}
-
-	private int nextID(EStructuralFeature f, int lastID) {
-		if (f.isMany() && multiFeatures != null
-				&& multiFeatures.get(f.getFeatureID())) {
-			lastID--;
-			ITransientValueService ts = astSer.getTVService();
-			while (lastID >= 0 && ts.isTransient(described, f, lastID))
-				lastID--;
-			return lastID;
-		} else
-			return lastID - 1;
+		// System.out.println("x");
 	}
 
 	private InstanceDescription(
@@ -86,6 +75,10 @@ public class InstanceDescription implements IInstanceDescription {
 		System.arraycopy(next, 0, con, 0, next.length);
 		con[f.getFeatureID()] = nextID(f, con[f.getFeatureID()]);
 		return new InstanceDescription(astSer, described, con, multiFeatures);
+	}
+
+	private int firstID(EStructuralFeature f) {
+		return nextID(f, f.isMany() ? ((List<?>) described.eGet(f)).size() : 1);
 	}
 
 	public Object getConsumable(String feature, boolean allowDefault) {
@@ -109,9 +102,27 @@ public class InstanceDescription implements IInstanceDescription {
 		return described.eClass().getEStructuralFeature(feature);
 	}
 
+	public Map<EStructuralFeature, Integer> getUnconsumed() {
+		Map<EStructuralFeature, Integer> m = new HashMap<EStructuralFeature, Integer>();
+		EList<EStructuralFeature> features = described.eClass()
+				.getEAllStructuralFeatures();
+		for (int id = 0; id < features.size(); id++) {
+			if (next[id] > -1)
+				m.put(features.get(id), next[id] + 1);
+		}
+		return m;
+	}
+
 	public boolean isConsumable(EStructuralFeature f, boolean allowDefault) {
 		return next[f.getFeatureID()] > ((allowDefault && !f.isMany()) ? -2
 				: -1);
+	}
+
+	public boolean isConsumed() {
+		for (int i = 0; i < next.length; i++)
+			if (next[i] > -1)
+				return false;
+		return true;
 	}
 
 	public boolean isConsumedWithLastConsumtion(String feature) {
@@ -128,18 +139,31 @@ public class InstanceDescription implements IInstanceDescription {
 		return class1 != null && class1.isSuperTypeOf(getDelegate().eClass());
 	}
 
+	private int nextID(EStructuralFeature f, int lastID) {
+		if (f.isMany() && multiFeatures != null
+				&& multiFeatures.get(f.getFeatureID())) {
+			lastID--;
+			ITransientValueService ts = astSer.getTVService();
+			while (lastID >= 0 && ts.isTransient(described, f, lastID))
+				lastID--;
+			return lastID;
+		} else
+			return lastID - 1;
+	}
+
 	@Override
 	public String toString() {
 		List<String> l = new ArrayList<String>();
-		for (EStructuralFeature f : described.eClass()
-				.getEAllStructuralFeatures()) {
-			Object v = described.eGet(f);
-			@SuppressWarnings("unchecked")
-			int count = (v instanceof Collection) ? ((Collection) v).size() : 1;
-			l.add(f.getName() + ":" + next[f.getFeatureID()] + "/" + count);
+		for (Entry<EStructuralFeature, Integer> f : getUnconsumed().entrySet()) {
+			// Object v = described.eGet(f);
+			// @SuppressWarnings("unchecked")
+			// int count = (v instanceof Collection) ? ((Collection) v).size() :
+			// 1;
+			// l.add(f.getName() + ":" + next[f.getFeatureID()] + "/" + count);
+			l.add(f.getKey().getName() + ":" + f.getValue().intValue());
 		}
-		return hashCode() + "/" + described.eClass().getName() + ":"
-				+ described.hashCode() + ":" + l;
+		return /* hashCode() + "/" + */described.eClass().getName() + ":"
+				+ described.hashCode() + (l.size() > 0 ? (":" + l) : "");
 	}
 
 }
