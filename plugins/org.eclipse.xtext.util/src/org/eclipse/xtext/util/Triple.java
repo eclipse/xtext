@@ -24,14 +24,16 @@ public final class Triple<S1, S2, S3> extends Pair<S1, S2>{
 	public boolean equals(Object other) {
 		if (other instanceof Triple<?,?,?>) {
 			Triple<?,?,?> r = (Triple<?,?,?>) other;
-			return super.equals(other) && getThird().equals(r.getThird());
+			if (!super.equals(other))
+				return false;
+			return third==null?r.getThird()==null : third.equals(r.getThird());
 		}
 		return false;
 	}
 	
 	@Override
 	public int hashCode() {
-		return super.hashCode()+getThird().hashCode();
+		return super.hashCode()+ (third==null?0:getThird().hashCode());
 	}
 	
 	@Override
