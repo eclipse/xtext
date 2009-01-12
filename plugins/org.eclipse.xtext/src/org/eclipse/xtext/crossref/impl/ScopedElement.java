@@ -13,7 +13,6 @@ import org.eclipse.xtext.crossref.IScopedElement;
 /**
  * @author Sven Efftinge - Initial contribution and API
  *
- * @param 
  */
 public class ScopedElement implements IScopedElement{
 	
