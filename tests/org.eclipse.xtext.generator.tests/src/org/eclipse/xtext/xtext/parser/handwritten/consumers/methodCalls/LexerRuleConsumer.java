@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xtext.parser.handwritten.consumers;
+package org.eclipse.xtext.xtext.parser.handwritten.consumers.methodCalls;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
@@ -38,38 +38,49 @@ public class LexerRuleConsumer extends NonTerminalConsumer {
 
 	@Override
 	protected boolean doConsume() throws Exception {
-		SEQUENCE$0: {
-			ALTERNATIVE$1: {
-				if (consumeKeyword(getRule().ele000000KeywordNative(), null, false, false, HandwrittenDelimiters.idDelimiter()))
-					break ALTERNATIVE$1;
-				if (consumeKeyword(getRule().ele000001KeywordLexer(), null, false, false, HandwrittenDelimiters.idDelimiter()))
-					break ALTERNATIVE$1;
-				break SEQUENCE$0;
-			}
-			if (!consumeTerminal(idConsumer, "name", false, false, getRule().ele000010LexerRuleCallID(), HandwrittenDelimiters.allKeywords))
-				break SEQUENCE$0;
-			
-			OPTION$2: do {
-				SEQUENCE$3: {
-					IMarker marker$4 = mark();
-					if (!consumeKeyword(getRule().ele00010KeywordReturns(), null, false, false, null)) break SEQUENCE$3;
-					if (!consumeNonTerminal(typeRefConsumer, "type", false, false, getRule().ele000110ParserRuleCallTypeRef())) {
-						marker$4.rollback();
-						break SEQUENCE$3;
-					}
-					continue OPTION$2;
-				}
-				break OPTION$2;
-			} while(false);
-			
-			if (!consumeKeyword(getRule().ele001KeywordColon(), null, false, false, null))
-				break SEQUENCE$0;
-			if (!consumeTerminal(stringConsumer, "body", false, false, getRule().ele010LexerRuleCallSTRING(), HandwrittenDelimiters.allKeywords))
-				break SEQUENCE$0;
-			if (!consumeKeyword(getRule().ele1KeywordSemicolon(), null, false, false, null))
-				break SEQUENCE$0;
-			return true;
+		if (!parseAlternative())
+			return false;
+		if (!consumeTerminal(idConsumer, "name", false, false, getRule().ele000010LexerRuleCallID(),
+				HandwrittenDelimiters.allKeywords))
+			return false;
+		if (!parseReturns())
+			return false;
+		if (!consumeKeyword(getRule().ele001KeywordColon(), null, false, false, null))
+			return false;
+		if (!consumeTerminal(stringConsumer, "body", false, false, getRule().ele010LexerRuleCallSTRING(),
+				HandwrittenDelimiters.allKeywords))
+			return false;
+		if (!consumeKeyword(getRule().ele1KeywordSemicolon(), null, false, false, null))
+			return false;
+		return true;
+	}
+
+	private boolean parseReturns() throws Exception {
+		parseReturnsImpl();
+		return true;
+	}
+
+	private boolean parseReturnsImpl() throws Exception {
+		IMarker marker$4 = mark();
+		if (!consumeKeyword(getRule().ele00010KeywordReturns(), null, false, false, null)) {
+			marker$4.rollback();
+			return false;
 		}
+		if (!consumeNonTerminal(typeRefConsumer, "type", false, false, getRule().ele000110ParserRuleCallTypeRef())) {
+			marker$4.rollback();
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * @return
+	 */
+	private boolean parseAlternative() {
+		if (consumeKeyword(getRule().ele000000KeywordNative(), null, false, false, HandwrittenDelimiters.idDelimiter()))
+			return true;
+		if (consumeKeyword(getRule().ele000001KeywordLexer(), null, false, false, HandwrittenDelimiters.idDelimiter()))
+			return true;
 		return false;
 	}
 
@@ -98,5 +109,5 @@ public class LexerRuleConsumer extends NonTerminalConsumer {
 	public void setStringConsumer(ITerminalConsumer stringConsumer) {
 		this.stringConsumer = stringConsumer;
 	}
-	
+
 }

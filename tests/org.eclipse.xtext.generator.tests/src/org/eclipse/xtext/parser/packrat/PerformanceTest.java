@@ -7,12 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.packrat;
 
-import org.eclipse.xtext.XtextStandaloneSetup;
+import org.eclipse.xtext.XtextGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.packrat.ParseResultFactory;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xtext.parser.handwritten.HandwrittenParser;
+import org.eclipse.xtext.xtext.parser.handwritten.HandwrittenParserWithMethodCalls;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -21,6 +22,8 @@ public class PerformanceTest extends AbstractGeneratorTest {
 
 	private HandwrittenParser handwritten;
 	
+	private HandwrittenParserWithMethodCalls handwrittenWithMethodCalls;
+	
 	private XtextGrammarTestLanguagePackratParser generated;
 
 	private String model;
@@ -28,14 +31,20 @@ public class PerformanceTest extends AbstractGeneratorTest {
 	private static int metamodelCount = 100;
 	
 	private static int lexerRuleCount = metamodelCount;
+	
+	private long startTime;
 
 	@Override
 	protected void setUp() throws Exception {
-		with(XtextStandaloneSetup.class);
+		with(XtextGrammarTestLanguageStandaloneSetup.class);
 		this.handwritten = new HandwrittenParser();
 		ParseResultFactory factory = new ParseResultFactory();
 		factory.setFactory(getASTFactory());
 		this.handwritten.setParseResultFactory(factory);
+		this.handwrittenWithMethodCalls = new HandwrittenParserWithMethodCalls();
+		factory = new ParseResultFactory();
+		factory.setFactory(getASTFactory());
+		this.handwrittenWithMethodCalls.setParseResultFactory(factory);
 		this.generated = new XtextGrammarTestLanguagePackratParser();
 		factory = new ParseResultFactory();
 		factory.setFactory(getASTFactory());
@@ -54,51 +63,95 @@ public class PerformanceTest extends AbstractGeneratorTest {
 				modelBuilder.append("lexer native" + i + " returns type" + i + ": \"otherContent\";");
 		}
 		this.model = modelBuilder.toString();
+		System.gc();
+		System.out.println("===== " + getName() + " =====");
+		System.out.println("model.length(): " + model.length() + " chars (ca. " + (metamodelCount * 2)+ " lines)" );
+		System.out.println("usage before:   " + (java.lang.Runtime.getRuntime().totalMemory() - java.lang.Runtime.getRuntime().freeMemory()));
+		startTime = System.currentTimeMillis();
 	}
 	
 	protected void tearDown() throws Exception {
+		long endTime = System.currentTimeMillis();
+		System.out.println("usage after:    " + (java.lang.Runtime.getRuntime().totalMemory() - java.lang.Runtime.getRuntime().freeMemory()));
+		System.out.println("duration:       " + (endTime - startTime) + " ms");
 		this.handwritten = null;
+		this.handwrittenWithMethodCalls = null;
 		this.model = null;
 	}
 	
 	public void testFirstHandwrittenPackrat() {
-		System.out.println("usage before: " + (java.lang.Runtime.getRuntime().totalMemory() - java.lang.Runtime.getRuntime().freeMemory()));
 		IParseResult result = handwritten.parse(model);
 		assertNotNull(result);
 		assertNotNull(result.getRootASTElement());
 		assertNotNull(result.getRootNode());
-		System.out.println("usage after: " + (java.lang.Runtime.getRuntime().totalMemory() - java.lang.Runtime.getRuntime().freeMemory()));
 	}
 	
 	public void testSecondHandwrittenPackrat() {
-		System.out.println("usage before: " + (java.lang.Runtime.getRuntime().totalMemory() - java.lang.Runtime.getRuntime().freeMemory()));
 		IParseResult result = handwritten.parse(model);
 		assertNotNull(result);
 		assertNotNull(result.getRootASTElement());
 		assertNotNull(result.getRootNode());
-		System.out.println("usage after: " + (java.lang.Runtime.getRuntime().totalMemory() - java.lang.Runtime.getRuntime().freeMemory()));
+	}
+	
+	public void testHandwrittenPackratTwice() {
+		for (int i = 0; i < 2; i++) {
+			IParseResult result = handwritten.parse(model);
+			assertNotNull(result);
+			assertNotNull(result.getRootASTElement());
+			assertNotNull(result.getRootNode());
+			result = null;
+		}
+	}
+	
+	public void testFirstHandwrittenWithMethodCallsPackrat() {
+		IParseResult result = handwrittenWithMethodCalls.parse(model);
+		assertNotNull(result);
+		assertNotNull(result.getRootASTElement());
+		assertNotNull(result.getRootNode());
+	}
+	
+	public void testSecondHandwrittenWithMethodCallsPackrat() {
+		IParseResult result = handwrittenWithMethodCalls.parse(model);
+		assertNotNull(result);
+		assertNotNull(result.getRootASTElement());
+		assertNotNull(result.getRootNode());
+	}
+	
+	public void testHandwrittenWithMethodCallsPackratTwice() {
+		for (int i = 0; i < 2; i++) {
+			IParseResult result = handwrittenWithMethodCalls.parse(model);
+			assertNotNull(result);
+			assertNotNull(result.getRootASTElement());
+			assertNotNull(result.getRootNode());
+			result = null;
+		}
 	}
 	
 	public void testFirstGeneratedPackrat() {
-		System.out.println("usage before: " + (java.lang.Runtime.getRuntime().totalMemory() - java.lang.Runtime.getRuntime().freeMemory()));
-		IParseResult result = handwritten.parse(model);
+		IParseResult result = generated.parse(model);
 		assertNotNull(result);
 		assertNotNull(result.getRootASTElement());
 		assertNotNull(result.getRootNode());
-		System.out.println("usage after: " + (java.lang.Runtime.getRuntime().totalMemory() - java.lang.Runtime.getRuntime().freeMemory()));
 	}
 	
 	public void testSecondGeneratedPackrat() {
-		System.out.println("usage before: " + (java.lang.Runtime.getRuntime().totalMemory() - java.lang.Runtime.getRuntime().freeMemory()));
-		IParseResult result = handwritten.parse(model);
+		IParseResult result = generated.parse(model);
 		assertNotNull(result);
 		assertNotNull(result.getRootASTElement());
 		assertNotNull(result.getRootNode());
-		System.out.println("usage after: " + (java.lang.Runtime.getRuntime().totalMemory() - java.lang.Runtime.getRuntime().freeMemory()));
+	}
+	
+	public void testGeneratedPackratTwice() {
+		for (int i = 0; i < 2; i++) {
+			IParseResult result = generated.parse(model);
+			assertNotNull(result);
+			assertNotNull(result.getRootASTElement());
+			assertNotNull(result.getRootNode());
+			result = null;
+		}
 	}
 	
 	public void testFirstAntlr() {
-		System.out.println("usage before: " + (java.lang.Runtime.getRuntime().totalMemory() - java.lang.Runtime.getRuntime().freeMemory()));
 		IParseResult result = getParser().parse(new StringInputStream(model));
 		assertNotNull(result);
 		assertNotNull(result.getRootASTElement());
@@ -107,11 +160,19 @@ public class PerformanceTest extends AbstractGeneratorTest {
 	}
 	
 	public void testSecondAntlr() {
-		System.out.println("usage before: " + (java.lang.Runtime.getRuntime().totalMemory() - java.lang.Runtime.getRuntime().freeMemory()));
 		IParseResult result = getParser().parse(new StringInputStream(model));
 		assertNotNull(result);
 		assertNotNull(result.getRootASTElement());
 		assertNotNull(result.getRootNode());
-		System.out.println("usage after: " + (java.lang.Runtime.getRuntime().totalMemory() - java.lang.Runtime.getRuntime().freeMemory()));
+	}
+	
+	public void testAntlrTwice() {
+		for (int i = 0; i < 2; i++) {
+			IParseResult result = getParser().parse(new StringInputStream(model));
+			assertNotNull(result);
+			assertNotNull(result.getRootASTElement());
+			assertNotNull(result.getRootNode());
+			result = null;
+		}
 	}
 }

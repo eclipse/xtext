@@ -37,13 +37,17 @@ import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+
 import «this.grammar().grammarAccess()»;
 import «this.grammar().grammarAccess()».«name»Elements;
+
+import «this.grammar().getNamespace()».parser.packrat.«languageName()»Delimiters;
 
 «FOREACH containedRuleCalls().rule.union(eAllContents.typeSelect(CrossReference).rule).toSet() AS calledRule-»
 import «calledRule.grammar().getNamespace()».parser.packrat.consumers.«calledRule.consumerClassName()»;
 «ENDFOREACH-»
 
+@SuppressWarnings("unused")
 public final class «this.consumerClassName()» extends NonTerminalConsumer {
 
 «FOREACH containedRuleCalls().rule.union(eAllContents.typeSelect(CrossReference).rule).toSet() AS calledRule-»
@@ -56,10 +60,10 @@ public final class «this.consumerClassName()» extends NonTerminalConsumer {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 	}
 	
-	@SuppressWarnings("unused")
 	protected boolean doConsume() throws Exception {
-		«EXPAND doConsumeRoot("		") FOR alternatives-»
+		return «alternatives.consumeMethodName()»();
 	}
+«EXPAND defineConsume FOR alternatives-»
 
 	public «this.name»Elements getRule() {
 		return «grammar().grammarAccess().toSimpleName()».INSTANCE.pr«this.name»();
@@ -80,321 +84,201 @@ public final class «this.consumerClassName()» extends NonTerminalConsumer {
 	}
 	
 «ENDFOREACH-»
-
 }
 «ENDFILE»
 «ENDDEFINE»
 
-
-«DEFINE doConsumeRoot(String indent) FOR AbstractElement-»
-«EXPAND body(indent, null, null, true) FOR this-»
+«DEFINE defineConsume FOR AbstractElement-»
+«EXPAND defineConsumeDeclaration FOR this-»
 «ENDDEFINE»
 
-
-«DEFINE body(String indent, String marker, String parentBlock, boolean failOnError) FOR AbstractElement-»
-«EXPAND cardinalityBody(indent, marker, parentBlock, failOnError) FOR this-»
+«DEFINE defineConsume FOR Alternatives-»
+«EXPAND defineConsumeDeclaration FOR this-»
+«EXPAND defineConsume(this) FOREACH groups-»
 «ENDDEFINE»
 
-
-«DEFINE callBody(String indent, String marker, String parentBlock, boolean failOnError) FOR AbstractElement-»
-«ERROR "callBody for " + metaType.name-»
+«DEFINE defineConsume(Alternatives parent) FOR AbstractElement-»
+«EXPAND defineConsume FOR this-»
 «ENDDEFINE»
 
+«DEFINE defineConsume(Alternatives parent) FOR Alternatives-»
+«IF isOptional() || isMultipleCardinality()-»
+«EXPAND defineConsume FOR this-»
+«ELSE-»
+«EXPAND defineConsume(this) FOREACH groups-»
+«ENDIF-»
+«ENDDEFINE»
 
-«DEFINE callBody(String indent, String marker, String parentBlock, boolean failOnError) FOR Group-»
-«indent»IMarker m«this.blockLabel()» = mark();
-«FOREACH abstractTokens AS element-»
-«indent»«this.blockLabel()»FAILURE: {
-«EXPAND body(indent + "	", "m" + this.blockLabel(), blockLabel(), true) FOR element-»
-«indent»}
+«DEFINE defineConsume FOR Group-»
+«EXPAND defineConsumeDeclaration FOR this-»
+«EXPAND defineConsume(this) FOREACH abstractTokens-»
+«ENDDEFINE»
+
+«DEFINE defineConsume(Group parent) FOR AbstractElement-»
+«EXPAND defineConsume FOR this-»
+«ENDDEFINE»
+
+«DEFINE defineConsume(Group parent) FOR Group-»
+«IF isOptional() || isMultipleCardinality()-»
+«EXPAND defineConsume FOR this-»
+«ELSE-»
+«EXPAND defineConsume(this) FOREACH abstractTokens-»
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE defineConsumeDeclaration FOR AbstractElement-»
+
+	protected boolean «consumeMethodName()»() throws Exception {
+«IF isQuestionMark()-»
+		do«consumeMethodName().toFirstUpper()»();
+		return true;
+«ELSEIF isStar()-»
+		while(do«consumeMethodName().toFirstUpper()»()) {}
+		return true;
+«ELSEIF isPlus()-»
+		if (do«consumeMethodName().toFirstUpper()»()) {
+			while(do«consumeMethodName().toFirstUpper()»()) {}
+			return true;
+		}
+		return false;
+«ELSE-»
+«EXPAND defineConsumeBody FOR this-»
+«ENDIF-»
+	}
+«IF isQuestionMark() || isStar() || isPlus()-»
+
+	protected boolean do«consumeMethodName().toFirstUpper()»() throws Exception {
+«EXPAND defineConsumeBody FOR this-»
+	}
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE defineConsumeDeclaration FOR Action-»
+«IF isQuestionMark() || isStar() || isPlus()-»
+«ERROR "multiplicity is not supported for actions"»
+«ENDIF-»
+	protected boolean «consumeMethodName()»() {
+«EXPAND defineConsumeBody FOR this-»
+	}
+«ENDDEFINE»
+
+«DEFINE defineConsumeBody FOR AbstractElement-»
+«ERROR "defineConsumeBody for " + metaType-»
+«ENDDEFINE»
+
+«DEFINE defineConsumeBody FOR Action-»
+		consumeAction("«typeName.type.name»", "«feature»", «operator == "+="»);
+		return true;	
+«ENDDEFINE»
+
+«DEFINE defineConsumeBody FOR Alternatives-»
+«EXPAND defineConsumeBodyInternal FOR this-»
+		return false;
+«ENDDEFINE»
+
+«DEFINE defineConsumeBodyInternal FOR Alternatives-»
+«FOREACH groups AS g-»
+«IF g.metaType == Alternatives && !g.isOptional() && !g.isMultipleCardinality()-»
+«EXPAND defineConsumeBodyInternal FOR (Alternatives)g-»
+«ELSE-»
+		if («g.consumeMethodName()»())
+			return true;
+«ENDIF-»
 «ENDFOREACH-»
 «ENDDEFINE»
 
-
-«DEFINE callBody(String indent, String marker, String parentBlock, boolean failOnError) FOR Alternatives-»
-«indent»«blockLabel()»FAILURE: {
-«EXPAND body(indent + "	", null, blockLabel(), false) FOREACH groups-»
-«IF marker != null-»
-«indent»	«marker».rollback();
-«ENDIF-»
-«indent»	break «this.blockLabel()»SUCCESS;
-«indent»}
+«DEFINE defineConsumeBody FOR Group-»
+		final IMarker marker = mark();
+«EXPAND defineConsumeBodyInternal FOR this-»
+		return true;
 «ENDDEFINE»
 
-
-«DEFINE callBody(String indent, String marker, String parentBlock, boolean failOnError) FOR RuleCall-»
-«indent»if (!«EXPAND consumeCall FOR this.rule-», null, false, «IF 
-	rule.metaType.isAssignableFrom(LexerRule)-»false, «ENDIF-»«IF 
-	rule.metaType.isAssignableFrom(ParserRule)-»«((ParserRule)rule).isDatatypeRule()», «ENDIF
-	-» getRule().«gaElementAccessMethodeName()»()))
-«indent»	break «this.blockLabel()»SUCCESS;
-«ENDDEFINE»
-
-
-«DEFINE callBody(String indent, String marker, String parentBlock, boolean failOnError) FOR Keyword-»
-«indent»if (!«EXPAND consumeCall FOR this-», null, false, false))
-«indent»	break «this.blockLabel()»SUCCESS;
-«ENDDEFINE»
-
-
-«DEFINE callBody(String indent, String marker, String parentBlock, boolean failOnError) FOR Assignment-»
-«indent»«blockLabel()»FAILURE: {
-«EXPAND assignmentBody(indent + "	", this, marker, parentBlock, failOnError) FOR terminal-»
-«IF marker != null-»
-«indent»	«marker».rollback();
-«ENDIF-»
-«indent»	break «this.blockLabel()»SUCCESS;
-«indent»}
-«ENDDEFINE»
-
-
-«DEFINE callBody(String indent, String marker, String parentBlock, boolean failOnError) FOR Action-»
-«IF isOptional() || isMultipleCardinality()-»
-«ERROR "unsupported cardinality for action '" + cardinality + "'"»
-«ENDIF-»
-«indent»consumeAction("«typeName.type.name»", "«feature»", «operator == "+="»);
-«ENDDEFINE»
-
-
-«DEFINE returnStatement(String indent, String marker, String parentBlock, boolean failOnError) FOR AbstractElement-»
-«IF canFail()-»
-«IF marker != null-»
-«indent»«marker».rollback();
-«ENDIF-»
-«IF parentBlock != null-»
-«IF failOnError-»
-«indent»break «parentBlock»SUCCESS;
-«ENDIF-»
+«DEFINE defineConsumeBodyInternal FOR Group-»
+«FOREACH abstractTokens AS token-»
+«IF token.metaType == Group && !token.isOptional() && !token.isMultipleCardinality()-»
+«EXPAND defineConsumeBodyInternal FOR (Group)token-»
 «ELSE-»
-«indent»return false;
+		if (!«token.consumeMethodName()»()) {
+			marker.rollback();
+			return false;
+		}
 «ENDIF-»
-«ELSEIF parentBlock == null-»
-«indent»return true;
+«ENDFOREACH-»
+«ENDDEFINE»
+
+«DEFINE defineConsumeBody FOR Assignment-»
+«EXPAND defineConsumeAssignmentBody(this) FOR terminal-»
+		return false;
+«ENDDEFINE»
+
+«DEFINE defineConsumeBody FOR Keyword-»
+		return consumeKeyword(getRule().«gaElementAccessMethodeName()»(), null, false, false, «languageName()»Delimiters.«IF canBeFollowedByIdentifier()-»ANY_OTHER_DELIMITER«ELSE-»ID_DELIMITER«ENDIF-»);
+«ENDDEFINE»
+
+«DEFINE defineConsumeBody FOR RuleCall-»
+«EXPAND defineConsumeBody(this) FOR rule-»
+«ENDDEFINE»
+
+«DEFINE defineConsumeBody(RuleCall call) FOR AbstractRule-»
+«ERROR "defineConsumeBody for " + metaType.name-» 
+«ENDDEFINE»
+
+«DEFINE defineConsumeBody(RuleCall call) FOR LexerRule-»
+		return consumeTerminal(«consumerFieldName()», null, false, false, getRule().«call.gaElementAccessMethodeName()»(), «languageName()»Delimiters.ALL_KEYWORDS);
+«ENDDEFINE»
+
+«DEFINE defineConsumeBody(RuleCall call) FOR ParserRule-»
+		return consumeNonTerminal(«consumerFieldName()», null, false, «isDatatypeRule()», getRule().«call.gaElementAccessMethodeName()»());
+«ENDDEFINE»
+
+«DEFINE defineConsumeAssignmentBody(Assignment assignment) FOR AbstractElement-»
+«ERROR "defineConsumeAssignmentBody for " + metaType.name»
+«ENDDEFINE»
+
+«DEFINE defineConsumeAssignmentBody(Assignment assignment) FOR Keyword-»
+		if (consumeKeyword(getRule().«gaElementAccessMethodeName()»(), "«assignment.feature»", «assignment.isMultiple()», «assignment.isBoolean()», «languageName()»Delimiters.«IF canBeFollowedByIdentifier()-»ANY_OTHER_DELIMITER«ELSE-»ID_DELIMITER«ENDIF-»))
+			return true;
+«ENDDEFINE»
+
+«DEFINE defineConsumeAssignmentBody(Assignment assignment) FOR CrossReference-»
+«EXPAND defineConsumeCrossReferenceAssignmentBody(assignment, this) FOR rule-»
+«ENDDEFINE»
+
+«DEFINE defineConsumeCrossReferenceAssignmentBody(Assignment assignment, CrossReference reference) FOR AbstractRule-»
+«ERROR "defineConsumeAssignmentBody for " + metaType.name»
+«ENDDEFINE»
+
+«DEFINE defineConsumeCrossReferenceAssignmentBody(Assignment assignment, CrossReference reference) FOR LexerRule-»
+		if (consumeTerminal(«consumerFieldName()», null, «assignment.isMultiple()», «assignment.isBoolean()», getRule().«reference.gaElementAccessMethodeName()»(), «languageName()»Delimiters.ALL_KEYWORDS))
+			return true;
+«ENDDEFINE»
+
+«DEFINE defineConsumeCrossReferenceAssignmentBody(Assignment assignment, CrossReference reference) FOR ParserRule-»
+		if (consumeNonTerminal(«consumerFieldName()», null, «assignment.isMultiple()», «isDatatypeRule()», getRule().«reference.gaElementAccessMethodeName()»()))
+			return true;
+«ENDDEFINE»
+
+«DEFINE defineConsumeAssignmentBody(Assignment assignment) FOR RuleCall-»
+«EXPAND defineConsumeAssignmentBody(assignment, this) FOR rule-»
+«ENDDEFINE»
+
+«DEFINE defineConsumeAssignmentBody(Assignment assignment, RuleCall call) FOR AbstractRule-»
+«ERROR "defineConsumeAssignmentBody for " + metaType.name»
+«ENDDEFINE»
+
+«DEFINE defineConsumeAssignmentBody(Assignment assignment, RuleCall call) FOR LexerRule-»
+		if (consumeTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «assignment.isBoolean()», getRule().«call.gaElementAccessMethodeName()»(), «languageName()»Delimiters.ALL_KEYWORDS))
+			return true;
+«ENDDEFINE»
+
+«DEFINE defineConsumeAssignmentBody(Assignment assignment, RuleCall call) FOR ParserRule-»
+		if (consumeNonTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «isDatatypeRule()», getRule().«call.gaElementAccessMethodeName()»()))
+			return true;
+«ENDDEFINE»
+
+«DEFINE defineConsumeAssignmentBody(Assignment assignment) FOR Alternatives-»
+«IF isQuestionMark() || isStar() || isPlus()-»
+«ERROR "multiplicity is not supported for actions"»
 «ENDIF-»
+«EXPAND defineConsumeAssignmentBody(assignment) FOREACH groups-»
 «ENDDEFINE»
-
-
-«DEFINE callPlusBody(String indent, String marker, String parentBlock, boolean failOnError) FOR AbstractElement-»
-«ERROR "callPlusBody for type " + metaType.name-»
-«ENDDEFINE»
-
-
-«DEFINE callPlusBody(String indent, String marker, String parentBlock, boolean failOnError) FOR RuleCall-»
-«indent»«this.blockLabel()»SUCCESS: {
-«indent»	«this.blockLabel()»FAILURE: {
-«indent»		if (!«EXPAND consumeCall FOR this.rule-», null, false, «IF rule.metaType.isAssignableFrom(LexerRule)
-	-»false, «ENDIF-»«IF rule.metaType.isAssignableFrom(ParserRule)-»«((ParserRule)rule).isDatatypeRule()», «ENDIF
-	-» getRule().«gaElementAccessMethodeName()»()))
-«indent»			break «this.blockLabel()»SUCCESS;
-«indent»		while(«EXPAND consumeCall FOR this.rule-», null, false, «IF rule.metaType.isAssignableFrom(LexerRule)
-	-»false, «ENDIF-»«IF rule.metaType.isAssignableFrom(ParserRule)-»«((ParserRule)rule).isDatatypeRule()», «ENDIF
-	-»getRule().«gaElementAccessMethodeName()»()));
-«indent»	}
-«IF parentBlock != null-»
-«indent»	break «parentBlock»FAILURE;
-«ELSE-»
-«indent»	return true;
-«ENDIF-»
-«indent»}
-«ENDDEFINE»
-
-
-«DEFINE callPlusBody(String indent, String marker, String parentBlock, boolean failOnError) FOR Keyword-»
-«indent»«this.blockLabel()»SUCCESS: {
-«indent»	«this.blockLabel()»FAILURE: {
-«indent»		if (!«EXPAND consumeCall FOR this-», null, false, false))
-«indent»			break «this.blockLabel()»SUCCESS;
-«indent»		while(«EXPAND consumeCall FOR this-», null, false, false));
-«indent»	}
-«IF parentBlock != null-»
-«indent»	break «parentBlock»FAILURE;
-«ELSE-»
-«indent»	return true;
-«ENDIF-»
-«indent»}
-«ENDDEFINE»
-
-
-«DEFINE callPlusBody(String indent, String marker, String parentBlock, boolean failOnError) FOR Assignment-»
-«indent»«this.blockLabel()»SUCCESS: {
-«indent»	«this.blockLabel()»FAILURE: {
-«EXPAND assignmentPlusBody(indent + "		", this, marker, parentBlock, failOnError) FOR terminal-»
-«indent»	}
-«IF parentBlock != null-»
-«indent»	break «parentBlock»FAILURE;
-«ELSE-»
-«indent»	return true;
-«ENDIF-»
-«indent»}
-«ENDDEFINE»
-
-
-«DEFINE callPlusBody(String indent, String marker, String parentBlock, boolean failOnError) FOR Group-»
-«indent»«this.blockLabel()»SUCCESS: {
-«indent»	«this.blockLabel()»FIRST: {
-«EXPAND callBody(indent+"		", marker, parentBlock, true) FOR this-»
-«indent»	}
-«indent»	«this.blockLabel()»LOOP: while(true) {
-«EXPAND callBody(indent + "		", marker, parentBlock, false) FOR this-»
-«indent»		continue «this.blockLabel()»LOOP;
-«indent»	}
-«IF parentBlock != null-»
-«indent»	break «parentBlock»FAILURE;
-«ELSE-»
-«indent»	return true;
-«ENDIF-»
-«indent»}
-«ENDDEFINE»
-
-
-«DEFINE callPlusBody(String indent, String marker, String parentBlock, boolean failOnError) FOR Alternatives-»
-«indent»«this.blockLabel()»SUCCESS: {
-«indent»	«this.blockLabel()»FIRST: {
-«EXPAND callBody(indent+"		", marker, parentBlock, failOnError) FOR this-»
-«indent»	}
-«indent»	«this.blockLabel()»PLUSSUCCESS: while(true) {
-«EXPAND callBody(indent+"		", marker, parentBlock, failOnError) FOR this-»
-«indent»		continue «this.blockLabel()»PLUSSUCCESS;
-«indent»	}
-«IF parentBlock != null-»
-«indent»	break «parentBlock»FAILURE;
-«ELSE-»
-«indent»	return true;
-«ENDIF-»
-«indent»}
-«ENDDEFINE»
-
-
-«DEFINE cardinalityBody(String indent, String marker, String parentBlock, boolean failOnError) FOR AbstractElement-»
-«IF isQuestionMark()-»
-«indent»«this.blockLabel()»SUCCESS: {
-«EXPAND callBody(indent+"	", null, parentBlock, failOnError) FOR this-»
-«IF parentBlock != null-»
-«indent»	break «parentBlock»FAILURE;
-«ELSE-»
-«indent»	return true;
-«ENDIF-»
-«indent»}
-«EXPAND returnStatement(indent, marker, parentBlock, failOnError) FOR this-»
-«ELSEIF isStar()-»
-«indent»«this.blockLabel()»SUCCESS: while(true) {
-«EXPAND callBody(indent+"	", null, parentBlock, failOnError) FOR this-»
-«indent»	continue «this.blockLabel()»SUCCESS;
-«indent»}
-«EXPAND returnStatement(indent, marker, parentBlock, failOnError) FOR this-»
-«ELSEIF isPlus()-»
-«EXPAND callPlusBody(indent, marker, parentBlock, failOnError) FOR this-»
-«EXPAND returnStatement(indent, marker, parentBlock, failOnError) FOR this-»
-«ELSE-»
-«indent»«this.blockLabel()»SUCCESS: {
-«EXPAND callBody(indent+"	", marker, parentBlock, failOnError) FOR this-»
-«IF parentBlock != null-»
-«indent»	break «parentBlock»FAILURE;
-«ELSE-»
-«IF canFail()-»
-«indent»	return true;
-«ENDIF-»
-«ENDIF-»
-«indent»}
-«EXPAND returnStatement(indent, marker, parentBlock, failOnError) FOR this-»
-«ENDIF-»
-«ENDDEFINE»
-
-«REM»
-/*****************/
-/*  Assignments  */
-/*****************/
-«ENDREM»
-
-«DEFINE assignmentBody(String indent, Assignment assignment, String marker, String parentBlock, boolean failOnError) FOR AbstractElement-»
-«IF isOptional() || isMultipleCardinality()-»
-«ERROR "unsupported cardinality in assignment"»
-«ENDIF-»
-«indent»if («EXPAND assignmentCall(assignment.feature, assignment.isMultiple(), assignment.isBoolean()) FOR this-»))
-«indent»	break «assignment.blockLabel()»FAILURE;
-«ENDDEFINE»
-
-«DEFINE assignmentBody(String indent, Assignment assignment, String marker, String parentBlock, boolean failOnError) FOR Group-»
-«ERROR "unsupported type in assignment"»
-«ENDDEFINE»
-
-«DEFINE assignmentBody(String indent, Assignment assignment, String marker, String parentBlock, boolean failOnError) FOR Alternatives-»
-«IF isOptional() || isMultipleCardinality()-»
-«ERROR "unsupported cardinality in assignment"»
-«ENDIF-»
-«EXPAND assignmentBody(indent, assignment, marker, parentBlock, failOnError) FOREACH groups-»
-«ENDDEFINE»
-
-«DEFINE assignmentPlusBody(String indent, Assignment assignment, String marker, String parentBlock, boolean failOnError) FOR AbstractElement-»
-«IF isOptional() || isMultipleCardinality()-»
-«ERROR "unsupported cardinality in assignment"»
-«ENDIF-»
-«indent»if (!«EXPAND assignmentCall(assignment.feature, assignment.isMultiple(), assignment.isBoolean()) FOR this-»))
-«indent»	break «assignment.blockLabel()»SUCCESS;
-«indent»while(«EXPAND assignmentCall(assignment.feature, assignment.isMultiple(), assignment.isBoolean()) FOR this-»));
-«ENDDEFINE»
-
-«DEFINE assignmentPlusBody(String indent, Assignment assignment, String marker, String parentBlock, boolean failOnError) FOR Alternatives-»
-«IF isOptional() || isMultipleCardinality()-»
-«ERROR "unsupported cardinality in assignment"»
-«ENDIF-»
-«indent»«assignment.blockLabel()»ALTERNATIVES: {
-«EXPAND assignmentPlusAlternativesBody(indent+"	", assignment, marker, parentBlock, failOnError) FOREACH groups-»
-«indent»	break «assignment.blockLabel()»SUCCESS;
-«indent»}
-«indent»«assignment.blockLabel()»LOOP: while(true) {
-«indent»	«assignment.blockLabel()»ALTERNATIVES: {
-«EXPAND assignmentPlusAlternativesBody(indent+"		", assignment, marker, parentBlock, failOnError) FOREACH groups-»
-«indent»		break «assignment.blockLabel()»LOOP;
-«indent»	}
-«indent»}
-«ENDDEFINE»
-
-«DEFINE assignmentPlusAlternativesBody(String indent, Assignment assignment, String marker, String parentBlock, boolean failOnError) FOR AbstractElement-»
-«IF isOptional() || isMultipleCardinality()-»
-«ERROR "unsupported cardinality in assignment"»
-«ENDIF-»
-«indent»if («EXPAND assignmentCall(assignment.feature, assignment.isMultiple(), assignment.isBoolean()) FOR this-»))
-«indent»	break «assignment.blockLabel()»ALTERNATIVES;
-«ENDDEFINE»
-
-
-«REM»
-/***************/
-/*  Utilities  */
-/***************/
-«ENDREM»
-
-«DEFINE assignmentCall(String feature, boolean isMany, boolean isBoolean) FOR AbstractElement-»
-«ERROR "assignmentCall for " + metaType.name»
-«ENDDEFINE»
-
-«DEFINE assignmentCall(String feature, boolean isMany, boolean isBoolean) FOR RuleCall-»
-«EXPAND assignmentCall(feature, isMany, isBoolean) FOR this.rule-», getRule().«gaElementAccessMethodeName()»()«ENDDEFINE»
-
-«DEFINE assignmentCall(String feature, boolean isMany, boolean isBoolean) FOR AbstractRule-»
-«ERROR "assignmentCall for " + metaType.name»
-«ENDDEFINE»
-
-«DEFINE assignmentCall(String feature, boolean isMany, boolean isBoolean) FOR ParserRule-»
-«EXPAND consumeCall FOR this-», "«feature»", «isMany», «isDatatypeRule()» «ENDDEFINE»
-
-«DEFINE assignmentCall(String feature, boolean isMany, boolean isBoolean) FOR LexerRule-»
-«EXPAND consumeCall FOR this-», "«feature»", «isMany», «isBoolean»«ENDDEFINE»
-
-«DEFINE assignmentCall(String feature, boolean isMany, boolean isBoolean) FOR Keyword-»
-«EXPAND consumeCall FOR this-», "«feature»", «isMany», «isBoolean»«ENDDEFINE»
-
-«DEFINE assignmentCall(String feature, boolean isMany, boolean isBoolean) FOR CrossReference-»
-«EXPAND consumeCall FOR this.rule-», null, «isMany», «isBoolean», getRule().«gaElementAccessMethodeName()»()«ENDDEFINE»
-
-«DEFINE consumeCall FOR AbstractRule-»
-«ERROR "consumeCall for " + metaType.name»
-«ENDDEFINE»
-
-«DEFINE consumeCall FOR ParserRule-»consumeNonTerminal(«consumerFieldName()»«ENDDEFINE»
-
-«DEFINE consumeCall FOR LexerRule-»consumeTerminal(«consumerFieldName()»«ENDDEFINE»
-
-«DEFINE consumeCall FOR Keyword-»consumeKeyword(getRule().«gaElementAccessMethodeName()»()«ENDDEFINE»
-
