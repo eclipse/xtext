@@ -13,7 +13,7 @@ import junit.framework.TestCase;
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.CommonTokenStream;
-import org.eclipse.xtext.testlanguages.parser.internal.InternalSimpleExpressionsTestLanguageLexer;
+import org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalSimpleExpressionsTestLanguageLexer;
 
 /**
  * @author Dennis Hübner - Initial contribution and API

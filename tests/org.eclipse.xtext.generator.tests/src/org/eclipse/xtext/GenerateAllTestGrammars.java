@@ -75,7 +75,7 @@ public class GenerateAllTestGrammars {
 			FormatterTestLanguage.class,
 			DatatypeRulesTestLanguage.class,
 			MultiValueFeatureTestLanguage.class
-			};
+	};
 
 	public static void main(String[] args) throws Exception {
 		try {
