@@ -12,11 +12,15 @@ import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+
 import org.eclipse.xtext.testlanguages.services.OptionalEmptyTestLanguageGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.OptionalEmptyTestLanguageGrammarAccess.ModelElements;
 
+import org.eclipse.xtext.testlanguages.parser.packrat.OptionalEmptyTestLanguageDelimiters;
+
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.OptionalEmptyTestLanguageGreetingConsumer;
 
+@SuppressWarnings("unused")
 public final class OptionalEmptyTestLanguageModelConsumer extends NonTerminalConsumer {
 
 	private OptionalEmptyTestLanguageGreetingConsumer greetingConsumer;
@@ -27,17 +31,19 @@ public final class OptionalEmptyTestLanguageModelConsumer extends NonTerminalCon
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 	}
 	
-	@SuppressWarnings("unused")
 	protected boolean doConsume() throws Exception {
-		ASSIGNMENT$1SUCCESS: {
-			ASSIGNMENT$1FAILURE: {
-				if (consumeNonTerminal(greetingConsumer, "child", false, false , getRule().ele0ParserRuleCallGreeting()))
-					break ASSIGNMENT$1FAILURE;
-				break ASSIGNMENT$1SUCCESS;
-			}
-			return true;
-		}
+		return consumeAssignment$1();
+	}
+
+	protected boolean consumeAssignment$1() throws Exception {
+		doConsumeAssignment$1();
 		return true;
+	}
+
+	protected boolean doConsumeAssignment$1() throws Exception {
+		if (consumeNonTerminal(greetingConsumer, "child", false, false, getRule().ele0ParserRuleCallGreeting()))
+			return true;
+		return false;
 	}
 
 	public ModelElements getRule() {
@@ -57,5 +63,4 @@ public final class OptionalEmptyTestLanguageModelConsumer extends NonTerminalCon
 		this.greetingConsumer = greetingConsumer;
 	}
 	
-
 }

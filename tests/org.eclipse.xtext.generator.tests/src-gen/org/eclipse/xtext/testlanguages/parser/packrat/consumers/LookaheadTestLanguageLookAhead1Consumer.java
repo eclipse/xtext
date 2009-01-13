@@ -12,11 +12,15 @@ import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+
 import org.eclipse.xtext.testlanguages.services.LookaheadTestLanguageGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.LookaheadTestLanguageGrammarAccess.LookAhead1Elements;
 
+import org.eclipse.xtext.testlanguages.parser.packrat.LookaheadTestLanguageDelimiters;
+
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.LookaheadTestLanguageLookAhead2Consumer;
 
+@SuppressWarnings("unused")
 public final class LookaheadTestLanguageLookAhead1Consumer extends NonTerminalConsumer {
 
 	private LookaheadTestLanguageLookAhead2Consumer lookAhead2Consumer;
@@ -27,76 +31,50 @@ public final class LookaheadTestLanguageLookAhead1Consumer extends NonTerminalCo
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 	}
 	
-	@SuppressWarnings("unused")
 	protected boolean doConsume() throws Exception {
-		GROUP$1SUCCESS: {
-			IMarker mGROUP$1 = mark();
-			GROUP$1FAILURE: {
-				GROUP$2SUCCESS: {
-					IMarker mGROUP$2 = mark();
-					GROUP$2FAILURE: {
-						GROUP$3SUCCESS: {
-							IMarker mGROUP$3 = mark();
-							GROUP$3FAILURE: {
-								KEYWORD$4SUCCESS: {
-									if (!consumeKeyword(getRule().ele000KeywordFoo(), null, false, false))
-										break KEYWORD$4SUCCESS;
-									break GROUP$3FAILURE;
-								}
-								mGROUP$3.rollback();
-								break GROUP$3SUCCESS;
-							}
-							GROUP$3FAILURE: {
-								ASSIGNMENT$5SUCCESS: {
-									ASSIGNMENT$5FAILURE: {
-										if (consumeNonTerminal(lookAhead2Consumer, "y", false, false , getRule().ele0010ParserRuleCallLookAhead2()))
-											break ASSIGNMENT$5FAILURE;
-										mGROUP$3.rollback();
-										break ASSIGNMENT$5SUCCESS;
-									}
-									break GROUP$3FAILURE;
-								}
-								mGROUP$3.rollback();
-								break GROUP$3SUCCESS;
-							}
-							break GROUP$2FAILURE;
-						}
-						mGROUP$2.rollback();
-						break GROUP$2SUCCESS;
-					}
-					GROUP$2FAILURE: {
-						ASSIGNMENT$7SUCCESS: {
-							ASSIGNMENT$7FAILURE: {
-								if (consumeKeyword(getRule().ele010KeywordB(), "x", false, false))
-									break ASSIGNMENT$7FAILURE;
-								mGROUP$2.rollback();
-								break ASSIGNMENT$7SUCCESS;
-							}
-							break GROUP$2FAILURE;
-						}
-						mGROUP$2.rollback();
-						break GROUP$2SUCCESS;
-					}
-					break GROUP$1FAILURE;
-				}
-				mGROUP$1.rollback();
-				break GROUP$1SUCCESS;
-			}
-			GROUP$1FAILURE: {
-				ASSIGNMENT$9SUCCESS: {
-					ASSIGNMENT$9FAILURE: {
-						if (consumeKeyword(getRule().ele10KeywordD(), "x", false, false))
-							break ASSIGNMENT$9FAILURE;
-						mGROUP$1.rollback();
-						break ASSIGNMENT$9SUCCESS;
-					}
-					break GROUP$1FAILURE;
-				}
-				mGROUP$1.rollback();
-				break GROUP$1SUCCESS;
-			}
-			return true;
+		return consumeGroup$1();
+	}
+
+	protected boolean consumeGroup$1() throws Exception {
+		final IMarker marker = mark();
+		if (!consumeKeyword$4()) {
+			marker.rollback();
+			return false;
 		}
+		if (!consumeAssignment$5()) {
+			marker.rollback();
+			return false;
+		}
+		if (!consumeAssignment$7()) {
+			marker.rollback();
+			return false;
+		}
+		if (!consumeAssignment$9()) {
+			marker.rollback();
+			return false;
+		}
+		return true;
+	}
+
+	protected boolean consumeKeyword$4() throws Exception {
+		return consumeKeyword(getRule().ele000KeywordFoo(), null, false, false, LookaheadTestLanguageDelimiters.ID_DELIMITER);
+	}
+
+	protected boolean consumeAssignment$5() throws Exception {
+		if (consumeNonTerminal(lookAhead2Consumer, "y", false, false, getRule().ele0010ParserRuleCallLookAhead2()))
+			return true;
+		return false;
+	}
+
+	protected boolean consumeAssignment$7() throws Exception {
+		if (consumeKeyword(getRule().ele010KeywordB(), "x", false, false, LookaheadTestLanguageDelimiters.ID_DELIMITER))
+			return true;
+		return false;
+	}
+
+	protected boolean consumeAssignment$9() throws Exception {
+		if (consumeKeyword(getRule().ele10KeywordD(), "x", false, false, LookaheadTestLanguageDelimiters.ID_DELIMITER))
+			return true;
 		return false;
 	}
 
@@ -117,5 +95,4 @@ public final class LookaheadTestLanguageLookAhead1Consumer extends NonTerminalCo
 		this.lookAhead2Consumer = lookAhead2Consumer;
 	}
 	
-
 }

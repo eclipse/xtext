@@ -12,10 +12,14 @@ import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+
 import org.eclipse.xtext.reference.services.ReferenceGrammarGrammarAccess;
 import org.eclipse.xtext.reference.services.ReferenceGrammarGrammarAccess.FarbeElements;
 
+import org.eclipse.xtext.reference.parser.packrat.ReferenceGrammarDelimiters;
 
+
+@SuppressWarnings("unused")
 public final class ReferenceGrammarFarbeConsumer extends NonTerminalConsumer {
 
 
@@ -25,22 +29,19 @@ public final class ReferenceGrammarFarbeConsumer extends NonTerminalConsumer {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 	}
 	
-	@SuppressWarnings("unused")
 	protected boolean doConsume() throws Exception {
-		ASSIGNMENT$1SUCCESS: {
-			ASSIGNMENT$1FAILURE: {
-				if (consumeKeyword(getRule().ele0000KeywordROT(), "wert", false, false))
-					break ASSIGNMENT$1FAILURE;
-				if (consumeKeyword(getRule().ele0001KeywordBLAU(), "wert", false, false))
-					break ASSIGNMENT$1FAILURE;
-				if (consumeKeyword(getRule().ele001KeywordGELB(), "wert", false, false))
-					break ASSIGNMENT$1FAILURE;
-				if (consumeKeyword(getRule().ele01KeywordGRÜN(), "wert", false, false))
-					break ASSIGNMENT$1FAILURE;
-				break ASSIGNMENT$1SUCCESS;
-			}
+		return consumeAssignment$1();
+	}
+
+	protected boolean consumeAssignment$1() throws Exception {
+		if (consumeKeyword(getRule().ele0000KeywordROT(), "wert", false, false, ReferenceGrammarDelimiters.ID_DELIMITER))
 			return true;
-		}
+		if (consumeKeyword(getRule().ele0001KeywordBLAU(), "wert", false, false, ReferenceGrammarDelimiters.ID_DELIMITER))
+			return true;
+		if (consumeKeyword(getRule().ele001KeywordGELB(), "wert", false, false, ReferenceGrammarDelimiters.ID_DELIMITER))
+			return true;
+		if (consumeKeyword(getRule().ele01KeywordGRÜN(), "wert", false, false, ReferenceGrammarDelimiters.ID_DELIMITER))
+			return true;
 		return false;
 	}
 
@@ -57,5 +58,4 @@ public final class ReferenceGrammarFarbeConsumer extends NonTerminalConsumer {
 		return "Farbe";
 	}
 	
-
 }

@@ -12,11 +12,15 @@ import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+
 import org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestLanguageGrammarAccess;
 import org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestLanguageGrammarAccess.OpElements;
 
+import org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters;
+
 import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageTermConsumer;
 
+@SuppressWarnings("unused")
 public final class SimpleReconstrTestLanguageOpConsumer extends NonTerminalConsumer {
 
 	private SimpleReconstrTestLanguageTermConsumer termConsumer;
@@ -27,46 +31,52 @@ public final class SimpleReconstrTestLanguageOpConsumer extends NonTerminalConsu
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 	}
 	
-	@SuppressWarnings("unused")
 	protected boolean doConsume() throws Exception {
-		GROUP$1SUCCESS: {
-			IMarker mGROUP$1 = mark();
-			GROUP$1FAILURE: {
-				RULECALL$2SUCCESS: {
-					if (!consumeNonTerminal(termConsumer, null, false, false,  getRule().ele0ParserRuleCallTerm()))
-						break RULECALL$2SUCCESS;
-					break GROUP$1FAILURE;
-				}
-				mGROUP$1.rollback();
-				break GROUP$1SUCCESS;
-			}
-			GROUP$1FAILURE: {
-				GROUP$3SUCCESS: while(true) {
-					IMarker mGROUP$3 = mark();
-					GROUP$3FAILURE: {
-						ACTION$4SUCCESS: {
-							consumeAction("Op", "values", true);
-							break GROUP$3FAILURE;
-						}
-					}
-					GROUP$3FAILURE: {
-						ASSIGNMENT$6SUCCESS: {
-							ASSIGNMENT$6FAILURE: {
-								if (consumeNonTerminal(termConsumer, "values", true, false , getRule().ele110ParserRuleCallTerm()))
-									break ASSIGNMENT$6FAILURE;
-								mGROUP$3.rollback();
-								break ASSIGNMENT$6SUCCESS;
-							}
-							break GROUP$3FAILURE;
-						}
-						mGROUP$3.rollback();
-						break GROUP$3SUCCESS;
-					}
-					continue GROUP$3SUCCESS;
-				}
-			}
-			return true;
+		return consumeGroup$1();
+	}
+
+	protected boolean consumeGroup$1() throws Exception {
+		final IMarker marker = mark();
+		if (!consumeRuleCall$2()) {
+			marker.rollback();
+			return false;
 		}
+		if (!consumeGroup$3()) {
+			marker.rollback();
+			return false;
+		}
+		return true;
+	}
+
+	protected boolean consumeRuleCall$2() throws Exception {
+		return consumeNonTerminal(termConsumer, null, false, false, getRule().ele0ParserRuleCallTerm());
+	}
+
+	protected boolean consumeGroup$3() throws Exception {
+		while(doConsumeGroup$3()) {}
+		return true;
+	}
+
+	protected boolean doConsumeGroup$3() throws Exception {
+		final IMarker marker = mark();
+		if (!consumeAction$4()) {
+			marker.rollback();
+			return false;
+		}
+		if (!consumeAssignment$6()) {
+			marker.rollback();
+			return false;
+		}
+		return true;
+	}
+	protected boolean consumeAction$4() {
+		consumeAction("Op", "values", true);
+		return true;	
+	}
+
+	protected boolean consumeAssignment$6() throws Exception {
+		if (consumeNonTerminal(termConsumer, "values", true, false, getRule().ele110ParserRuleCallTerm()))
+			return true;
 		return false;
 	}
 
@@ -87,5 +97,4 @@ public final class SimpleReconstrTestLanguageOpConsumer extends NonTerminalConsu
 		this.termConsumer = termConsumer;
 	}
 	
-
 }

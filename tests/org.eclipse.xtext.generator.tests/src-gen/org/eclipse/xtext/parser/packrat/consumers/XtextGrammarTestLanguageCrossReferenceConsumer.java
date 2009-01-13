@@ -12,16 +12,20 @@ import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+
 import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess;
 import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess.CrossReferenceElements;
 
-import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageTypeRefConsumer;
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
+import org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters;
 
+import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageTypeRefConsumer;
+
+@SuppressWarnings("unused")
 public final class XtextGrammarTestLanguageCrossReferenceConsumer extends NonTerminalConsumer {
 
-	private XtextGrammarTestLanguageTypeRefConsumer typeRefConsumer;
 	private XtextBuiltinIDConsumer idConsumer;
+	private XtextGrammarTestLanguageTypeRefConsumer typeRefConsumer;
 
 	public XtextGrammarTestLanguageCrossReferenceConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
@@ -29,88 +33,71 @@ public final class XtextGrammarTestLanguageCrossReferenceConsumer extends NonTer
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 	}
 	
-	@SuppressWarnings("unused")
 	protected boolean doConsume() throws Exception {
-		GROUP$1SUCCESS: {
-			IMarker mGROUP$1 = mark();
-			GROUP$1FAILURE: {
-				GROUP$2SUCCESS: {
-					IMarker mGROUP$2 = mark();
-					GROUP$2FAILURE: {
-						GROUP$3SUCCESS: {
-							IMarker mGROUP$3 = mark();
-							GROUP$3FAILURE: {
-								KEYWORD$4SUCCESS: {
-									if (!consumeKeyword(getRule().ele000KeywordLeftSquareBracket(), null, false, false))
-										break KEYWORD$4SUCCESS;
-									break GROUP$3FAILURE;
-								}
-								mGROUP$3.rollback();
-								break GROUP$3SUCCESS;
-							}
-							GROUP$3FAILURE: {
-								ASSIGNMENT$5SUCCESS: {
-									ASSIGNMENT$5FAILURE: {
-										if (consumeNonTerminal(typeRefConsumer, "type", false, false , getRule().ele0010ParserRuleCallTypeRef()))
-											break ASSIGNMENT$5FAILURE;
-										mGROUP$3.rollback();
-										break ASSIGNMENT$5SUCCESS;
-									}
-									break GROUP$3FAILURE;
-								}
-								mGROUP$3.rollback();
-								break GROUP$3SUCCESS;
-							}
-							break GROUP$2FAILURE;
-						}
-						mGROUP$2.rollback();
-						break GROUP$2SUCCESS;
-					}
-					GROUP$2FAILURE: {
-						GROUP$7SUCCESS: {
-							IMarker mGROUP$7 = mark();
-							GROUP$7FAILURE: {
-								KEYWORD$8SUCCESS: {
-									if (!consumeKeyword(getRule().ele010KeywordVerticalLine(), null, false, false))
-										break KEYWORD$8SUCCESS;
-									break GROUP$7FAILURE;
-								}
-								mGROUP$7.rollback();
-								break GROUP$7SUCCESS;
-							}
-							GROUP$7FAILURE: {
-								ASSIGNMENT$9SUCCESS: {
-									ASSIGNMENT$9FAILURE: {
-										if (consumeTerminal(idConsumer, null, false, false, getRule().ele0110CrossReferenceEStringAbstractRule()))
-											break ASSIGNMENT$9FAILURE;
-										mGROUP$7.rollback();
-										break ASSIGNMENT$9SUCCESS;
-									}
-									break GROUP$7FAILURE;
-								}
-								mGROUP$7.rollback();
-								break GROUP$7SUCCESS;
-							}
-							break GROUP$2FAILURE;
-						}
-					}
-					break GROUP$1FAILURE;
-				}
-				mGROUP$1.rollback();
-				break GROUP$1SUCCESS;
-			}
-			GROUP$1FAILURE: {
-				KEYWORD$12SUCCESS: {
-					if (!consumeKeyword(getRule().ele1KeywordRightSquareBracket(), null, false, false))
-						break KEYWORD$12SUCCESS;
-					break GROUP$1FAILURE;
-				}
-				mGROUP$1.rollback();
-				break GROUP$1SUCCESS;
-			}
-			return true;
+		return consumeGroup$1();
+	}
+
+	protected boolean consumeGroup$1() throws Exception {
+		final IMarker marker = mark();
+		if (!consumeKeyword$4()) {
+			marker.rollback();
+			return false;
 		}
+		if (!consumeAssignment$5()) {
+			marker.rollback();
+			return false;
+		}
+		if (!consumeGroup$7()) {
+			marker.rollback();
+			return false;
+		}
+		if (!consumeKeyword$12()) {
+			marker.rollback();
+			return false;
+		}
+		return true;
+	}
+
+	protected boolean consumeKeyword$4() throws Exception {
+		return consumeKeyword(getRule().ele000KeywordLeftSquareBracket(), null, false, false, XtextGrammarTestLanguageDelimiters.ANY_OTHER_DELIMITER);
+	}
+
+	protected boolean consumeAssignment$5() throws Exception {
+		if (consumeNonTerminal(typeRefConsumer, "type", false, false, getRule().ele0010ParserRuleCallTypeRef()))
+			return true;
 		return false;
+	}
+
+	protected boolean consumeGroup$7() throws Exception {
+		doConsumeGroup$7();
+		return true;
+	}
+
+	protected boolean doConsumeGroup$7() throws Exception {
+		final IMarker marker = mark();
+		if (!consumeKeyword$8()) {
+			marker.rollback();
+			return false;
+		}
+		if (!consumeAssignment$9()) {
+			marker.rollback();
+			return false;
+		}
+		return true;
+	}
+
+	protected boolean consumeKeyword$8() throws Exception {
+		return consumeKeyword(getRule().ele010KeywordVerticalLine(), null, false, false, XtextGrammarTestLanguageDelimiters.ANY_OTHER_DELIMITER);
+	}
+
+	protected boolean consumeAssignment$9() throws Exception {
+		if (consumeTerminal(idConsumer, null, false, false, getRule().ele0110CrossReferenceEStringAbstractRule(), XtextGrammarTestLanguageDelimiters.ALL_KEYWORDS))
+			return true;
+		return false;
+	}
+
+	protected boolean consumeKeyword$12() throws Exception {
+		return consumeKeyword(getRule().ele1KeywordRightSquareBracket(), null, false, false, XtextGrammarTestLanguageDelimiters.ANY_OTHER_DELIMITER);
 	}
 
 	public CrossReferenceElements getRule() {
@@ -126,13 +113,12 @@ public final class XtextGrammarTestLanguageCrossReferenceConsumer extends NonTer
 		return "CrossReference";
 	}
 	
-	public void setTypeRefConsumer(XtextGrammarTestLanguageTypeRefConsumer typeRefConsumer) {
-		this.typeRefConsumer = typeRefConsumer;
-	}
-	
 	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
 		this.idConsumer = idConsumer;
 	}
 	
-
+	public void setTypeRefConsumer(XtextGrammarTestLanguageTypeRefConsumer typeRefConsumer) {
+		this.typeRefConsumer = typeRefConsumer;
+	}
+	
 }

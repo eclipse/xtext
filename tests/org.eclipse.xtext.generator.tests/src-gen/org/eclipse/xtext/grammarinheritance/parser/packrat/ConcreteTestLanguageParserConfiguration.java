@@ -79,51 +79,41 @@ public class ConcreteTestLanguageParserConfiguration extends AbstractParserConfi
     	return concreteParserRuleConsumer;
     }
 
-
     public AbstractTestLanguageInheritedParserRuleConsumer getInheritedParserRuleConsumer() {
     	return getAbstractTestLanguageConfiguration().getInheritedParserRuleConsumer();
     }
-
 
     public AbstractTestLanguageREALConsumer getRealConsumer() {
     	return getAbstractTestLanguageConfiguration().getRealConsumer();
     }
 
-
     public AbstractTestLanguageIDConsumer getIdConsumer() {
     	return getAbstractTestLanguageConfiguration().getIdConsumer();
     }
-
 
     public XtextBuiltinINTConsumer getIntConsumer() {
     	return getAbstractTestLanguageConfiguration().getIntConsumer();
     }
 
-
     public XtextBuiltinSTRINGConsumer getStringConsumer() {
     	return getAbstractTestLanguageConfiguration().getStringConsumer();
     }
-
 
     public XtextBuiltinML_COMMENTConsumer getMlCommentConsumer() {
     	return getAbstractTestLanguageConfiguration().getMlCommentConsumer();
     }
 
-
     public XtextBuiltinSL_COMMENTConsumer getSlCommentConsumer() {
     	return getAbstractTestLanguageConfiguration().getSlCommentConsumer();
     }
-
 
     public XtextBuiltinWSConsumer getWsConsumer() {
     	return getAbstractTestLanguageConfiguration().getWsConsumer();
     }
 
-
     public XtextBuiltinANY_OTHERConsumer getAnyOtherConsumer() {
     	return getAbstractTestLanguageConfiguration().getAnyOtherConsumer();
     }
-
 
 
 }

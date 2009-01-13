@@ -12,11 +12,15 @@ import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+
 import org.eclipse.xtext.testlanguages.services.LookaheadTestLanguageGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.LookaheadTestLanguageGrammarAccess.EntryElements;
 
+import org.eclipse.xtext.testlanguages.parser.packrat.LookaheadTestLanguageDelimiters;
+
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.LookaheadTestLanguageAltsConsumer;
 
+@SuppressWarnings("unused")
 public final class LookaheadTestLanguageEntryConsumer extends NonTerminalConsumer {
 
 	private LookaheadTestLanguageAltsConsumer altsConsumer;
@@ -27,17 +31,19 @@ public final class LookaheadTestLanguageEntryConsumer extends NonTerminalConsume
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 	}
 	
-	@SuppressWarnings("unused")
 	protected boolean doConsume() throws Exception {
-		ASSIGNMENT$1SUCCESS: while(true) {
-			ASSIGNMENT$1FAILURE: {
-				if (consumeNonTerminal(altsConsumer, "contents", true, false , getRule().ele0ParserRuleCallAlts()))
-					break ASSIGNMENT$1FAILURE;
-				break ASSIGNMENT$1SUCCESS;
-			}
-			continue ASSIGNMENT$1SUCCESS;
-		}
+		return consumeAssignment$1();
+	}
+
+	protected boolean consumeAssignment$1() throws Exception {
+		while(doConsumeAssignment$1()) {}
 		return true;
+	}
+
+	protected boolean doConsumeAssignment$1() throws Exception {
+		if (consumeNonTerminal(altsConsumer, "contents", true, false, getRule().ele0ParserRuleCallAlts()))
+			return true;
+		return false;
 	}
 
 	public EntryElements getRule() {
@@ -57,5 +63,4 @@ public final class LookaheadTestLanguageEntryConsumer extends NonTerminalConsume
 		this.altsConsumer = altsConsumer;
 	}
 	
-
 }

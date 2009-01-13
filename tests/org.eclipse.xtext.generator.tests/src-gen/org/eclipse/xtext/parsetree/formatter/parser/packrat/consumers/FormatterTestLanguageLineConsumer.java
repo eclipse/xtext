@@ -12,11 +12,15 @@ import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+
 import org.eclipse.xtext.parsetree.formatter.services.FormatterTestLanguageGrammarAccess;
 import org.eclipse.xtext.parsetree.formatter.services.FormatterTestLanguageGrammarAccess.LineElements;
 
+import org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters;
+
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 
+@SuppressWarnings("unused")
 public final class FormatterTestLanguageLineConsumer extends NonTerminalConsumer {
 
 	private XtextBuiltinIDConsumer idConsumer;
@@ -27,56 +31,41 @@ public final class FormatterTestLanguageLineConsumer extends NonTerminalConsumer
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 	}
 	
-	@SuppressWarnings("unused")
 	protected boolean doConsume() throws Exception {
-		GROUP$1SUCCESS: {
-			IMarker mGROUP$1 = mark();
-			GROUP$1FAILURE: {
-				GROUP$2SUCCESS: {
-					IMarker mGROUP$2 = mark();
-					GROUP$2FAILURE: {
-						ASSIGNMENT$3SUCCESS: {
-							ASSIGNMENT$3FAILURE: {
-								if (consumeTerminal(idConsumer, "type", true, false, getRule().ele000LexerRuleCallID()))
-									break ASSIGNMENT$3FAILURE;
-								mGROUP$2.rollback();
-								break ASSIGNMENT$3SUCCESS;
-							}
-							break GROUP$2FAILURE;
-						}
-						mGROUP$2.rollback();
-						break GROUP$2SUCCESS;
-					}
-					GROUP$2FAILURE: {
-						ASSIGNMENT$5SUCCESS: {
-							ASSIGNMENT$5FAILURE: {
-								if (consumeTerminal(idConsumer, "name", true, false, getRule().ele010LexerRuleCallID()))
-									break ASSIGNMENT$5FAILURE;
-								mGROUP$2.rollback();
-								break ASSIGNMENT$5SUCCESS;
-							}
-							break GROUP$2FAILURE;
-						}
-						mGROUP$2.rollback();
-						break GROUP$2SUCCESS;
-					}
-					break GROUP$1FAILURE;
-				}
-				mGROUP$1.rollback();
-				break GROUP$1SUCCESS;
-			}
-			GROUP$1FAILURE: {
-				KEYWORD$7SUCCESS: {
-					if (!consumeKeyword(getRule().ele1KeywordSemicolon(), null, false, false))
-						break KEYWORD$7SUCCESS;
-					break GROUP$1FAILURE;
-				}
-				mGROUP$1.rollback();
-				break GROUP$1SUCCESS;
-			}
-			return true;
+		return consumeGroup$1();
+	}
+
+	protected boolean consumeGroup$1() throws Exception {
+		final IMarker marker = mark();
+		if (!consumeAssignment$3()) {
+			marker.rollback();
+			return false;
 		}
+		if (!consumeAssignment$5()) {
+			marker.rollback();
+			return false;
+		}
+		if (!consumeKeyword$7()) {
+			marker.rollback();
+			return false;
+		}
+		return true;
+	}
+
+	protected boolean consumeAssignment$3() throws Exception {
+		if (consumeTerminal(idConsumer, "type", true, false, getRule().ele000LexerRuleCallID(), FormatterTestLanguageDelimiters.ALL_KEYWORDS))
+			return true;
 		return false;
+	}
+
+	protected boolean consumeAssignment$5() throws Exception {
+		if (consumeTerminal(idConsumer, "name", true, false, getRule().ele010LexerRuleCallID(), FormatterTestLanguageDelimiters.ALL_KEYWORDS))
+			return true;
+		return false;
+	}
+
+	protected boolean consumeKeyword$7() throws Exception {
+		return consumeKeyword(getRule().ele1KeywordSemicolon(), null, false, false, FormatterTestLanguageDelimiters.ANY_OTHER_DELIMITER);
 	}
 
 	public LineElements getRule() {
@@ -96,5 +85,4 @@ public final class FormatterTestLanguageLineConsumer extends NonTerminalConsumer
 		this.idConsumer = idConsumer;
 	}
 	
-
 }

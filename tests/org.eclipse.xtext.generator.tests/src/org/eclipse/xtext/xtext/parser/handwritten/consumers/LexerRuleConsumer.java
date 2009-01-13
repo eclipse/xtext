@@ -19,6 +19,7 @@ import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 import org.eclipse.xtext.services.XtextGrammarAccess;
 import org.eclipse.xtext.services.XtextGrammarAccess.LexerRuleElements;
+import org.eclipse.xtext.xtext.parser.handwritten.HandwrittenDelimiters;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -39,19 +40,19 @@ public class LexerRuleConsumer extends NonTerminalConsumer {
 	protected boolean doConsume() throws Exception {
 		SEQUENCE$0: {
 			ALTERNATIVE$1: {
-				if (consumeKeyword(getRule().ele000000KeywordNative(), null, false, false))
+				if (consumeKeyword(getRule().ele000000KeywordNative(), null, false, false, HandwrittenDelimiters.idDelimiter()))
 					break ALTERNATIVE$1;
-				if (consumeKeyword(getRule().ele000001KeywordLexer(), null, false, false))
+				if (consumeKeyword(getRule().ele000001KeywordLexer(), null, false, false, HandwrittenDelimiters.idDelimiter()))
 					break ALTERNATIVE$1;
 				break SEQUENCE$0;
 			}
-			if (!consumeTerminal(idConsumer, "name", false, false, getRule().ele000010LexerRuleCallID()))
+			if (!consumeTerminal(idConsumer, "name", false, false, getRule().ele000010LexerRuleCallID(), HandwrittenDelimiters.allKeywords))
 				break SEQUENCE$0;
 			
 			OPTION$2: do {
 				SEQUENCE$3: {
 					IMarker marker$4 = mark();
-					if (!consumeKeyword(getRule().ele00010KeywordReturns(), null, false, false)) break SEQUENCE$3;
+					if (!consumeKeyword(getRule().ele00010KeywordReturns(), null, false, false, null)) break SEQUENCE$3;
 					if (!consumeNonTerminal(typeRefConsumer, "type", false, false, getRule().ele000110ParserRuleCallTypeRef())) {
 						marker$4.rollback();
 						break SEQUENCE$3;
@@ -61,11 +62,11 @@ public class LexerRuleConsumer extends NonTerminalConsumer {
 				break OPTION$2;
 			} while(false);
 			
-			if (!consumeKeyword(getRule().ele001KeywordColon(), null, false, false))
+			if (!consumeKeyword(getRule().ele001KeywordColon(), null, false, false, null))
 				break SEQUENCE$0;
-			if (!consumeTerminal(stringConsumer, "body", false, false, getRule().ele010LexerRuleCallSTRING()))
+			if (!consumeTerminal(stringConsumer, "body", false, false, getRule().ele010LexerRuleCallSTRING(), HandwrittenDelimiters.allKeywords))
 				break SEQUENCE$0;
-			if (!consumeKeyword(getRule().ele1KeywordSemicolon(), null, false, false))
+			if (!consumeKeyword(getRule().ele1KeywordSemicolon(), null, false, false, null))
 				break SEQUENCE$0;
 			return true;
 		}

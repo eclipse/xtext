@@ -12,11 +12,15 @@ import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+
 import org.eclipse.xtext.testlanguages.services.ActionTestLanguageGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.ActionTestLanguageGrammarAccess.ItemElements;
 
+import org.eclipse.xtext.testlanguages.parser.packrat.ActionTestLanguageDelimiters;
+
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 
+@SuppressWarnings("unused")
 public final class ActionTestLanguageItemConsumer extends NonTerminalConsumer {
 
 	private XtextBuiltinIDConsumer idConsumer;
@@ -27,31 +31,30 @@ public final class ActionTestLanguageItemConsumer extends NonTerminalConsumer {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 	}
 	
-	@SuppressWarnings("unused")
 	protected boolean doConsume() throws Exception {
-		GROUP$1SUCCESS: {
-			IMarker mGROUP$1 = mark();
-			GROUP$1FAILURE: {
-				ACTION$2SUCCESS: {
-					consumeAction("Thing", "content", false);
-					break GROUP$1FAILURE;
-				}
-			}
-			GROUP$1FAILURE: {
-				ASSIGNMENT$4SUCCESS: {
-					ASSIGNMENT$4FAILURE: {
-						if (consumeTerminal(idConsumer, "name", false, false, getRule().ele10LexerRuleCallID()))
-							break ASSIGNMENT$4FAILURE;
-						mGROUP$1.rollback();
-						break ASSIGNMENT$4SUCCESS;
-					}
-					break GROUP$1FAILURE;
-				}
-				mGROUP$1.rollback();
-				break GROUP$1SUCCESS;
-			}
-			return true;
+		return consumeGroup$1();
+	}
+
+	protected boolean consumeGroup$1() throws Exception {
+		final IMarker marker = mark();
+		if (!consumeAction$2()) {
+			marker.rollback();
+			return false;
 		}
+		if (!consumeAssignment$4()) {
+			marker.rollback();
+			return false;
+		}
+		return true;
+	}
+	protected boolean consumeAction$2() {
+		consumeAction("Thing", "content", false);
+		return true;	
+	}
+
+	protected boolean consumeAssignment$4() throws Exception {
+		if (consumeTerminal(idConsumer, "name", false, false, getRule().ele10LexerRuleCallID(), ActionTestLanguageDelimiters.ALL_KEYWORDS))
+			return true;
 		return false;
 	}
 
@@ -72,5 +75,4 @@ public final class ActionTestLanguageItemConsumer extends NonTerminalConsumer {
 		this.idConsumer = idConsumer;
 	}
 	
-
 }

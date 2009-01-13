@@ -12,11 +12,15 @@ import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+
 import org.eclipse.xtext.testlanguages.services.PartialParserTestLanguageGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.PartialParserTestLanguageGrammarAccess.NamedElements;
 
+import org.eclipse.xtext.testlanguages.parser.packrat.PartialParserTestLanguageDelimiters;
+
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 
+@SuppressWarnings("unused")
 public final class PartialParserTestLanguageNamedConsumer extends NonTerminalConsumer {
 
 	private XtextBuiltinIDConsumer idConsumer;
@@ -27,16 +31,13 @@ public final class PartialParserTestLanguageNamedConsumer extends NonTerminalCon
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 	}
 	
-	@SuppressWarnings("unused")
 	protected boolean doConsume() throws Exception {
-		ASSIGNMENT$1SUCCESS: {
-			ASSIGNMENT$1FAILURE: {
-				if (consumeTerminal(idConsumer, "name", false, false, getRule().ele0LexerRuleCallID()))
-					break ASSIGNMENT$1FAILURE;
-				break ASSIGNMENT$1SUCCESS;
-			}
+		return consumeAssignment$1();
+	}
+
+	protected boolean consumeAssignment$1() throws Exception {
+		if (consumeTerminal(idConsumer, "name", false, false, getRule().ele0LexerRuleCallID(), PartialParserTestLanguageDelimiters.ALL_KEYWORDS))
 			return true;
-		}
 		return false;
 	}
 
@@ -57,5 +58,4 @@ public final class PartialParserTestLanguageNamedConsumer extends NonTerminalCon
 		this.idConsumer = idConsumer;
 	}
 	
-
 }

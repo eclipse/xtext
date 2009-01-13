@@ -12,11 +12,15 @@ import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+
 import org.eclipse.xtext.parsetree.reconstr.services.ComplexReconstrTestLanguageGrammarAccess;
 import org.eclipse.xtext.parsetree.reconstr.services.ComplexReconstrTestLanguageGrammarAccess.TrickyGElements;
 
+import org.eclipse.xtext.parsetree.reconstr.parser.packrat.ComplexReconstrTestLanguageDelimiters;
+
 import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.ComplexReconstrTestLanguageTrickyG1Consumer;
 
+@SuppressWarnings("unused")
 public final class ComplexReconstrTestLanguageTrickyGConsumer extends NonTerminalConsumer {
 
 	private ComplexReconstrTestLanguageTrickyG1Consumer trickyG1Consumer;
@@ -27,34 +31,30 @@ public final class ComplexReconstrTestLanguageTrickyGConsumer extends NonTermina
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 	}
 	
-	@SuppressWarnings("unused")
 	protected boolean doConsume() throws Exception {
-		GROUP$1SUCCESS: {
-			IMarker mGROUP$1 = mark();
-			GROUP$1FAILURE: {
-				KEYWORD$2SUCCESS: {
-					if (!consumeKeyword(getRule().ele0KeywordTG(), null, false, false))
-						break KEYWORD$2SUCCESS;
-					break GROUP$1FAILURE;
-				}
-				mGROUP$1.rollback();
-				break GROUP$1SUCCESS;
-			}
-			GROUP$1FAILURE: {
-				ASSIGNMENT$3SUCCESS: {
-					ASSIGNMENT$3FAILURE: {
-						if (consumeNonTerminal(trickyG1Consumer, "tree", false, false , getRule().ele10ParserRuleCallTrickyG1()))
-							break ASSIGNMENT$3FAILURE;
-						mGROUP$1.rollback();
-						break ASSIGNMENT$3SUCCESS;
-					}
-					break GROUP$1FAILURE;
-				}
-				mGROUP$1.rollback();
-				break GROUP$1SUCCESS;
-			}
-			return true;
+		return consumeGroup$1();
+	}
+
+	protected boolean consumeGroup$1() throws Exception {
+		final IMarker marker = mark();
+		if (!consumeKeyword$2()) {
+			marker.rollback();
+			return false;
 		}
+		if (!consumeAssignment$3()) {
+			marker.rollback();
+			return false;
+		}
+		return true;
+	}
+
+	protected boolean consumeKeyword$2() throws Exception {
+		return consumeKeyword(getRule().ele0KeywordTG(), null, false, false, ComplexReconstrTestLanguageDelimiters.ID_DELIMITER);
+	}
+
+	protected boolean consumeAssignment$3() throws Exception {
+		if (consumeNonTerminal(trickyG1Consumer, "tree", false, false, getRule().ele10ParserRuleCallTrickyG1()))
+			return true;
 		return false;
 	}
 
@@ -75,5 +75,4 @@ public final class ComplexReconstrTestLanguageTrickyGConsumer extends NonTermina
 		this.trickyG1Consumer = trickyG1Consumer;
 	}
 	
-
 }

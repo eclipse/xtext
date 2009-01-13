@@ -12,12 +12,16 @@ import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+
 import org.eclipse.xtext.metamodelreferencing.tests.services.MetamodelRefTestLanguageGrammarAccess;
 import org.eclipse.xtext.metamodelreferencing.tests.services.MetamodelRefTestLanguageGrammarAccess.FooElements;
+
+import org.eclipse.xtext.metamodelreferencing.tests.parser.packrat.MetamodelRefTestLanguageDelimiters;
 
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 import org.eclipse.xtext.metamodelreferencing.tests.parser.packrat.consumers.MetamodelRefTestLanguageNameRefConsumer;
 
+@SuppressWarnings("unused")
 public final class MetamodelRefTestLanguageFooConsumer extends NonTerminalConsumer {
 
 	private XtextBuiltinIDConsumer idConsumer;
@@ -29,35 +33,37 @@ public final class MetamodelRefTestLanguageFooConsumer extends NonTerminalConsum
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 	}
 	
-	@SuppressWarnings("unused")
 	protected boolean doConsume() throws Exception {
-		GROUP$1SUCCESS: {
-			IMarker mGROUP$1 = mark();
-			GROUP$1FAILURE: {
-				ASSIGNMENT$2SUCCESS: {
-					ASSIGNMENT$2FAILURE: {
-						if (consumeTerminal(idConsumer, "name", false, false, getRule().ele00LexerRuleCallID()))
-							break ASSIGNMENT$2FAILURE;
-						mGROUP$1.rollback();
-						break ASSIGNMENT$2SUCCESS;
-					}
-					break GROUP$1FAILURE;
-				}
-				mGROUP$1.rollback();
-				break GROUP$1SUCCESS;
-			}
-			GROUP$1FAILURE: {
-				ASSIGNMENT$4SUCCESS: while(true) {
-					ASSIGNMENT$4FAILURE: {
-						if (consumeNonTerminal(nameRefConsumer, "nameRefs", true, false , getRule().ele10ParserRuleCallNameRef()))
-							break ASSIGNMENT$4FAILURE;
-						break ASSIGNMENT$4SUCCESS;
-					}
-					continue ASSIGNMENT$4SUCCESS;
-				}
-			}
-			return true;
+		return consumeGroup$1();
+	}
+
+	protected boolean consumeGroup$1() throws Exception {
+		final IMarker marker = mark();
+		if (!consumeAssignment$2()) {
+			marker.rollback();
+			return false;
 		}
+		if (!consumeAssignment$4()) {
+			marker.rollback();
+			return false;
+		}
+		return true;
+	}
+
+	protected boolean consumeAssignment$2() throws Exception {
+		if (consumeTerminal(idConsumer, "name", false, false, getRule().ele00LexerRuleCallID(), MetamodelRefTestLanguageDelimiters.ALL_KEYWORDS))
+			return true;
+		return false;
+	}
+
+	protected boolean consumeAssignment$4() throws Exception {
+		while(doConsumeAssignment$4()) {}
+		return true;
+	}
+
+	protected boolean doConsumeAssignment$4() throws Exception {
+		if (consumeNonTerminal(nameRefConsumer, "nameRefs", true, false, getRule().ele10ParserRuleCallNameRef()))
+			return true;
 		return false;
 	}
 
@@ -82,5 +88,4 @@ public final class MetamodelRefTestLanguageFooConsumer extends NonTerminalConsum
 		this.nameRefConsumer = nameRefConsumer;
 	}
 	
-
 }

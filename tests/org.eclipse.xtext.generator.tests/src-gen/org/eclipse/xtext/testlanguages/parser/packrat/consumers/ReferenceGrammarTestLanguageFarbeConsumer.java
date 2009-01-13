@@ -12,10 +12,14 @@ import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+
 import org.eclipse.xtext.testlanguages.services.ReferenceGrammarTestLanguageGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.ReferenceGrammarTestLanguageGrammarAccess.FarbeElements;
 
+import org.eclipse.xtext.testlanguages.parser.packrat.ReferenceGrammarTestLanguageDelimiters;
 
+
+@SuppressWarnings("unused")
 public final class ReferenceGrammarTestLanguageFarbeConsumer extends NonTerminalConsumer {
 
 
@@ -25,47 +29,36 @@ public final class ReferenceGrammarTestLanguageFarbeConsumer extends NonTerminal
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 	}
 	
-	@SuppressWarnings("unused")
 	protected boolean doConsume() throws Exception {
-		ALTERNATIVES$1SUCCESS: {
-			ALTERNATIVES$1FAILURE: {
-				ALTERNATIVES$2SUCCESS: {
-					ALTERNATIVES$2FAILURE: {
-						ALTERNATIVES$3SUCCESS: {
-							ALTERNATIVES$3FAILURE: {
-								KEYWORD$4SUCCESS: {
-									if (!consumeKeyword(getRule().ele000KeywordROT(), null, false, false))
-										break KEYWORD$4SUCCESS;
-									break ALTERNATIVES$3FAILURE;
-								}
-								KEYWORD$5SUCCESS: {
-									if (!consumeKeyword(getRule().ele001KeywordBLAU(), null, false, false))
-										break KEYWORD$5SUCCESS;
-									break ALTERNATIVES$3FAILURE;
-								}
-								break ALTERNATIVES$3SUCCESS;
-							}
-							break ALTERNATIVES$2FAILURE;
-						}
-						KEYWORD$6SUCCESS: {
-							if (!consumeKeyword(getRule().ele01KeywordGELB(), null, false, false))
-								break KEYWORD$6SUCCESS;
-							break ALTERNATIVES$2FAILURE;
-						}
-						break ALTERNATIVES$2SUCCESS;
-					}
-					break ALTERNATIVES$1FAILURE;
-				}
-				KEYWORD$7SUCCESS: {
-					if (!consumeKeyword(getRule().ele1KeywordGRÜN(), null, false, false))
-						break KEYWORD$7SUCCESS;
-					break ALTERNATIVES$1FAILURE;
-				}
-				break ALTERNATIVES$1SUCCESS;
-			}
+		return consumeAlternatives$1();
+	}
+
+	protected boolean consumeAlternatives$1() throws Exception {
+		if (consumeKeyword$4())
 			return true;
-		}
+		if (consumeKeyword$5())
+			return true;
+		if (consumeKeyword$6())
+			return true;
+		if (consumeKeyword$7())
+			return true;
 		return false;
+	}
+
+	protected boolean consumeKeyword$4() throws Exception {
+		return consumeKeyword(getRule().ele000KeywordROT(), null, false, false, ReferenceGrammarTestLanguageDelimiters.ID_DELIMITER);
+	}
+
+	protected boolean consumeKeyword$5() throws Exception {
+		return consumeKeyword(getRule().ele001KeywordBLAU(), null, false, false, ReferenceGrammarTestLanguageDelimiters.ID_DELIMITER);
+	}
+
+	protected boolean consumeKeyword$6() throws Exception {
+		return consumeKeyword(getRule().ele01KeywordGELB(), null, false, false, ReferenceGrammarTestLanguageDelimiters.ID_DELIMITER);
+	}
+
+	protected boolean consumeKeyword$7() throws Exception {
+		return consumeKeyword(getRule().ele1KeywordGRÜN(), null, false, false, ReferenceGrammarTestLanguageDelimiters.ID_DELIMITER);
 	}
 
 	public FarbeElements getRule() {
@@ -81,5 +74,4 @@ public final class ReferenceGrammarTestLanguageFarbeConsumer extends NonTerminal
 		return "Farbe";
 	}
 	
-
 }

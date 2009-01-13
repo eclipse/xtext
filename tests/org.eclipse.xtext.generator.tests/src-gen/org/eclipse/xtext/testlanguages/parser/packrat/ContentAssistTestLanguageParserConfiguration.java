@@ -75,14 +75,14 @@ public class ContentAssistTestLanguageParserConfiguration extends AbstractParser
 	public void configureConsumers() {
 		getStartConsumer().setAbstractRuleConsumer(getAbstractRuleConsumer());
 
-		getAbstractRuleConsumer().setFirstAbstractRuleChildConsumer(getFirstAbstractRuleChildConsumer());
 		getAbstractRuleConsumer().setSecondAbstractRuleChildConsumer(getSecondAbstractRuleChildConsumer());
+		getAbstractRuleConsumer().setFirstAbstractRuleChildConsumer(getFirstAbstractRuleChildConsumer());
 
-		getFirstAbstractRuleChildConsumer().setAbstractRuleConsumer(getAbstractRuleConsumer());
 		getFirstAbstractRuleChildConsumer().setIdConsumer(getIdConsumer());
+		getFirstAbstractRuleChildConsumer().setAbstractRuleConsumer(getAbstractRuleConsumer());
 
-		getSecondAbstractRuleChildConsumer().setIdConsumer(getIdConsumer());
 		getSecondAbstractRuleChildConsumer().setAbstractRuleCallConsumer(getAbstractRuleCallConsumer());
+		getSecondAbstractRuleChildConsumer().setIdConsumer(getIdConsumer());
 
 		getAbstractRuleCallConsumer().setIdConsumer(getIdConsumer());
 
@@ -104,61 +104,49 @@ public class ContentAssistTestLanguageParserConfiguration extends AbstractParser
     	return startConsumer;
     }
 
-
     public ContentAssistTestLanguageAbstractRuleConsumer getAbstractRuleConsumer() {
     	return abstractRuleConsumer;
     }
-
 
     public ContentAssistTestLanguageFirstAbstractRuleChildConsumer getFirstAbstractRuleChildConsumer() {
     	return firstAbstractRuleChildConsumer;
     }
 
-
     public ContentAssistTestLanguageSecondAbstractRuleChildConsumer getSecondAbstractRuleChildConsumer() {
     	return secondAbstractRuleChildConsumer;
     }
-
 
     public ContentAssistTestLanguageAbstractRuleCallConsumer getAbstractRuleCallConsumer() {
     	return abstractRuleCallConsumer;
     }
 
-
     public XtextBuiltinIDConsumer getIdConsumer() {
     	return getXtextBuiltinConfiguration().getIdConsumer();
     }
-
 
     public XtextBuiltinINTConsumer getIntConsumer() {
     	return getXtextBuiltinConfiguration().getIntConsumer();
     }
 
-
     public XtextBuiltinSTRINGConsumer getStringConsumer() {
     	return getXtextBuiltinConfiguration().getStringConsumer();
     }
-
 
     public XtextBuiltinML_COMMENTConsumer getMlCommentConsumer() {
     	return getXtextBuiltinConfiguration().getMlCommentConsumer();
     }
 
-
     public XtextBuiltinSL_COMMENTConsumer getSlCommentConsumer() {
     	return getXtextBuiltinConfiguration().getSlCommentConsumer();
     }
-
 
     public XtextBuiltinWSConsumer getWsConsumer() {
     	return getXtextBuiltinConfiguration().getWsConsumer();
     }
 
-
     public XtextBuiltinANY_OTHERConsumer getAnyOtherConsumer() {
     	return getXtextBuiltinConfiguration().getAnyOtherConsumer();
     }
-
 
 
 }

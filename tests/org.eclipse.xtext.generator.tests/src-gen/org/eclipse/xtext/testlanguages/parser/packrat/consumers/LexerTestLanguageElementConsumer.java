@@ -12,16 +12,20 @@ import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+
 import org.eclipse.xtext.testlanguages.services.LexerTestLanguageGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.LexerTestLanguageGrammarAccess.ElementElements;
 
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
-import org.eclipse.xtext.testlanguages.parser.packrat.consumers.LexerTestLanguageSTRINGConsumer;
+import org.eclipse.xtext.testlanguages.parser.packrat.LexerTestLanguageDelimiters;
 
+import org.eclipse.xtext.testlanguages.parser.packrat.consumers.LexerTestLanguageSTRINGConsumer;
+import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
+
+@SuppressWarnings("unused")
 public final class LexerTestLanguageElementConsumer extends NonTerminalConsumer {
 
-	private XtextBuiltinIDConsumer idConsumer;
 	private LexerTestLanguageSTRINGConsumer stringConsumer;
+	private XtextBuiltinIDConsumer idConsumer;
 
 	public LexerTestLanguageElementConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
@@ -29,38 +33,32 @@ public final class LexerTestLanguageElementConsumer extends NonTerminalConsumer 
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 	}
 	
-	@SuppressWarnings("unused")
 	protected boolean doConsume() throws Exception {
-		GROUP$1SUCCESS: {
-			IMarker mGROUP$1 = mark();
-			GROUP$1FAILURE: {
-				ASSIGNMENT$2SUCCESS: {
-					ASSIGNMENT$2FAILURE: {
-						if (consumeTerminal(idConsumer, "name", false, false, getRule().ele00LexerRuleCallID()))
-							break ASSIGNMENT$2FAILURE;
-						mGROUP$1.rollback();
-						break ASSIGNMENT$2SUCCESS;
-					}
-					break GROUP$1FAILURE;
-				}
-				mGROUP$1.rollback();
-				break GROUP$1SUCCESS;
-			}
-			GROUP$1FAILURE: {
-				ASSIGNMENT$4SUCCESS: {
-					ASSIGNMENT$4FAILURE: {
-						if (consumeTerminal(stringConsumer, "h", false, false, getRule().ele10LexerRuleCallSTRING()))
-							break ASSIGNMENT$4FAILURE;
-						mGROUP$1.rollback();
-						break ASSIGNMENT$4SUCCESS;
-					}
-					break GROUP$1FAILURE;
-				}
-				mGROUP$1.rollback();
-				break GROUP$1SUCCESS;
-			}
-			return true;
+		return consumeGroup$1();
+	}
+
+	protected boolean consumeGroup$1() throws Exception {
+		final IMarker marker = mark();
+		if (!consumeAssignment$2()) {
+			marker.rollback();
+			return false;
 		}
+		if (!consumeAssignment$4()) {
+			marker.rollback();
+			return false;
+		}
+		return true;
+	}
+
+	protected boolean consumeAssignment$2() throws Exception {
+		if (consumeTerminal(idConsumer, "name", false, false, getRule().ele00LexerRuleCallID(), LexerTestLanguageDelimiters.ALL_KEYWORDS))
+			return true;
+		return false;
+	}
+
+	protected boolean consumeAssignment$4() throws Exception {
+		if (consumeTerminal(stringConsumer, "h", false, false, getRule().ele10LexerRuleCallSTRING(), LexerTestLanguageDelimiters.ALL_KEYWORDS))
+			return true;
 		return false;
 	}
 
@@ -77,13 +75,12 @@ public final class LexerTestLanguageElementConsumer extends NonTerminalConsumer 
 		return "Element";
 	}
 	
-	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
-		this.idConsumer = idConsumer;
-	}
-	
 	public void setStringConsumer(LexerTestLanguageSTRINGConsumer stringConsumer) {
 		this.stringConsumer = stringConsumer;
 	}
 	
-
+	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
+		this.idConsumer = idConsumer;
+	}
+	
 }

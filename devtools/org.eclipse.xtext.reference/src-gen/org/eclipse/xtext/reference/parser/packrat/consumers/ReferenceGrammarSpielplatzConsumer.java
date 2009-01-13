@@ -12,8 +12,11 @@ import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+
 import org.eclipse.xtext.reference.services.ReferenceGrammarGrammarAccess;
 import org.eclipse.xtext.reference.services.ReferenceGrammarGrammarAccess.SpielplatzElements;
+
+import org.eclipse.xtext.reference.parser.packrat.ReferenceGrammarDelimiters;
 
 import org.eclipse.xtext.reference.parser.packrat.consumers.ReferenceGrammarErwachsenerConsumer;
 import org.eclipse.xtext.reference.parser.packrat.consumers.ReferenceGrammarSpielzeugConsumer;
@@ -23,6 +26,7 @@ import org.eclipse.xtext.reference.parser.packrat.consumers.ReferenceGrammarFami
 import org.eclipse.xtext.reference.parser.packrat.consumers.ReferenceGrammarKindConsumer;
 import org.eclipse.xtext.reference.parser.packrat.consumers.ReferenceGrammarCustomTypeParserRuleConsumer;
 
+@SuppressWarnings("unused")
 public final class ReferenceGrammarSpielplatzConsumer extends NonTerminalConsumer {
 
 	private ReferenceGrammarErwachsenerConsumer erwachsenerConsumer;
@@ -39,161 +43,120 @@ public final class ReferenceGrammarSpielplatzConsumer extends NonTerminalConsume
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 	}
 	
-	@SuppressWarnings("unused")
 	protected boolean doConsume() throws Exception {
-		GROUP$1SUCCESS: {
-			IMarker mGROUP$1 = mark();
-			GROUP$1FAILURE: {
-				GROUP$2SUCCESS: {
-					IMarker mGROUP$2 = mark();
-					GROUP$2FAILURE: {
-						GROUP$3SUCCESS: {
-							IMarker mGROUP$3 = mark();
-							GROUP$3FAILURE: {
-								GROUP$4SUCCESS: {
-									IMarker mGROUP$4 = mark();
-									GROUP$4FAILURE: {
-										GROUP$5SUCCESS: {
-											IMarker mGROUP$5 = mark();
-											GROUP$5FAILURE: {
-												KEYWORD$6SUCCESS: {
-													if (!consumeKeyword(getRule().ele00000KeywordSpielplatz(), null, false, false))
-														break KEYWORD$6SUCCESS;
-													break GROUP$5FAILURE;
-												}
-												mGROUP$5.rollback();
-												break GROUP$5SUCCESS;
-											}
-											GROUP$5FAILURE: {
-												ASSIGNMENT$7SUCCESS: {
-													ASSIGNMENT$7FAILURE: {
-														if (consumeTerminal(intConsumer, "groesse", false, false, getRule().ele000010LexerRuleCallINT()))
-															break ASSIGNMENT$7FAILURE;
-														mGROUP$5.rollback();
-														break ASSIGNMENT$7SUCCESS;
-													}
-													break GROUP$5FAILURE;
-												}
-												mGROUP$5.rollback();
-												break GROUP$5SUCCESS;
-											}
-											break GROUP$4FAILURE;
-										}
-										mGROUP$4.rollback();
-										break GROUP$4SUCCESS;
-									}
-									GROUP$4FAILURE: {
-										ASSIGNMENT$9SUCCESS: {
-											ASSIGNMENT$9FAILURE: {
-												if (consumeTerminal(stringConsumer, "beschreibung", false, false, getRule().ele00010LexerRuleCallSTRING()))
-													break ASSIGNMENT$9FAILURE;
-												break ASSIGNMENT$9SUCCESS;
-											}
-											break GROUP$4FAILURE;
-										}
-									}
-									break GROUP$3FAILURE;
-								}
-								mGROUP$3.rollback();
-								break GROUP$3SUCCESS;
-							}
-							GROUP$3FAILURE: {
-								KEYWORD$11SUCCESS: {
-									if (!consumeKeyword(getRule().ele001KeywordLeftCurlyBracket(), null, false, false))
-										break KEYWORD$11SUCCESS;
-									break GROUP$3FAILURE;
-								}
-								mGROUP$3.rollback();
-								break GROUP$3SUCCESS;
-							}
-							break GROUP$2FAILURE;
-						}
-						mGROUP$2.rollback();
-						break GROUP$2SUCCESS;
-					}
-					GROUP$2FAILURE: {
-						ALTERNATIVES$12SUCCESS: while(true) {
-							ALTERNATIVES$12FAILURE: {
-								ALTERNATIVES$13SUCCESS: {
-									ALTERNATIVES$13FAILURE: {
-										ALTERNATIVES$14SUCCESS: {
-											ALTERNATIVES$14FAILURE: {
-												ALTERNATIVES$15SUCCESS: {
-													ALTERNATIVES$15FAILURE: {
-														ASSIGNMENT$16SUCCESS: {
-															ASSIGNMENT$16FAILURE: {
-																if (consumeNonTerminal(kindConsumer, "kinder", true, false , getRule().ele0100000ParserRuleCallKind()))
-																	break ASSIGNMENT$16FAILURE;
-																break ASSIGNMENT$16SUCCESS;
-															}
-															break ALTERNATIVES$15FAILURE;
-														}
-														ASSIGNMENT$18SUCCESS: {
-															ASSIGNMENT$18FAILURE: {
-																if (consumeNonTerminal(erwachsenerConsumer, "erzieher", true, false , getRule().ele0100010ParserRuleCallErwachsener()))
-																	break ASSIGNMENT$18FAILURE;
-																break ASSIGNMENT$18SUCCESS;
-															}
-															break ALTERNATIVES$15FAILURE;
-														}
-														break ALTERNATIVES$15SUCCESS;
-													}
-													break ALTERNATIVES$14FAILURE;
-												}
-												ASSIGNMENT$20SUCCESS: {
-													ASSIGNMENT$20FAILURE: {
-														if (consumeNonTerminal(spielzeugConsumer, "spielzeuge", true, false , getRule().ele010010ParserRuleCallSpielzeug()))
-															break ASSIGNMENT$20FAILURE;
-														break ASSIGNMENT$20SUCCESS;
-													}
-													break ALTERNATIVES$14FAILURE;
-												}
-												break ALTERNATIVES$14SUCCESS;
-											}
-											break ALTERNATIVES$13FAILURE;
-										}
-										ASSIGNMENT$22SUCCESS: {
-											ASSIGNMENT$22FAILURE: {
-												if (consumeNonTerminal(familieConsumer, "familie", true, false , getRule().ele01010ParserRuleCallFamilie()))
-													break ASSIGNMENT$22FAILURE;
-												break ASSIGNMENT$22SUCCESS;
-											}
-											break ALTERNATIVES$13FAILURE;
-										}
-										break ALTERNATIVES$13SUCCESS;
-									}
-									break ALTERNATIVES$12FAILURE;
-								}
-								ASSIGNMENT$24SUCCESS: {
-									ASSIGNMENT$24FAILURE: {
-										if (consumeNonTerminal(customTypeParserRuleConsumer, "types", true, false , getRule().ele0110ParserRuleCallCustomTypeParserRule()))
-											break ASSIGNMENT$24FAILURE;
-										break ASSIGNMENT$24SUCCESS;
-									}
-									break ALTERNATIVES$12FAILURE;
-								}
-								break ALTERNATIVES$12SUCCESS;
-							}
-							continue ALTERNATIVES$12SUCCESS;
-						}
-					}
-					break GROUP$1FAILURE;
-				}
-				mGROUP$1.rollback();
-				break GROUP$1SUCCESS;
-			}
-			GROUP$1FAILURE: {
-				KEYWORD$26SUCCESS: {
-					if (!consumeKeyword(getRule().ele1KeywordRightCurlyBracket(), null, false, false))
-						break KEYWORD$26SUCCESS;
-					break GROUP$1FAILURE;
-				}
-				mGROUP$1.rollback();
-				break GROUP$1SUCCESS;
-			}
-			return true;
+		return consumeGroup$1();
+	}
+
+	protected boolean consumeGroup$1() throws Exception {
+		doConsumeGroup$1();
+		return true;
+	}
+
+	protected boolean doConsumeGroup$1() throws Exception {
+		final IMarker marker = mark();
+		if (!consumeKeyword$6()) {
+			marker.rollback();
+			return false;
+		}
+		if (!consumeAssignment$7()) {
+			marker.rollback();
+			return false;
+		}
+		if (!consumeAssignment$9()) {
+			marker.rollback();
+			return false;
+		}
+		if (!consumeKeyword$11()) {
+			marker.rollback();
+			return false;
+		}
+		if (!consumeAlternatives$12()) {
+			marker.rollback();
+			return false;
+		}
+		if (!consumeKeyword$26()) {
+			marker.rollback();
+			return false;
 		}
 		return true;
+	}
+
+	protected boolean consumeKeyword$6() throws Exception {
+		return consumeKeyword(getRule().ele00000KeywordSpielplatz(), null, false, false, ReferenceGrammarDelimiters.ID_DELIMITER);
+	}
+
+	protected boolean consumeAssignment$7() throws Exception {
+		if (consumeTerminal(intConsumer, "groesse", false, false, getRule().ele000010LexerRuleCallINT(), ReferenceGrammarDelimiters.ALL_KEYWORDS))
+			return true;
+		return false;
+	}
+
+	protected boolean consumeAssignment$9() throws Exception {
+		doConsumeAssignment$9();
+		return true;
+	}
+
+	protected boolean doConsumeAssignment$9() throws Exception {
+		if (consumeTerminal(stringConsumer, "beschreibung", false, false, getRule().ele00010LexerRuleCallSTRING(), ReferenceGrammarDelimiters.ALL_KEYWORDS))
+			return true;
+		return false;
+	}
+
+	protected boolean consumeKeyword$11() throws Exception {
+		return consumeKeyword(getRule().ele001KeywordLeftCurlyBracket(), null, false, false, ReferenceGrammarDelimiters.ANY_OTHER_DELIMITER);
+	}
+
+	protected boolean consumeAlternatives$12() throws Exception {
+		while(doConsumeAlternatives$12()) {}
+		return true;
+	}
+
+	protected boolean doConsumeAlternatives$12() throws Exception {
+		if (consumeAssignment$16())
+			return true;
+		if (consumeAssignment$18())
+			return true;
+		if (consumeAssignment$20())
+			return true;
+		if (consumeAssignment$22())
+			return true;
+		if (consumeAssignment$24())
+			return true;
+		return false;
+	}
+
+	protected boolean consumeAssignment$16() throws Exception {
+		if (consumeNonTerminal(kindConsumer, "kinder", true, false, getRule().ele0100000ParserRuleCallKind()))
+			return true;
+		return false;
+	}
+
+	protected boolean consumeAssignment$18() throws Exception {
+		if (consumeNonTerminal(erwachsenerConsumer, "erzieher", true, false, getRule().ele0100010ParserRuleCallErwachsener()))
+			return true;
+		return false;
+	}
+
+	protected boolean consumeAssignment$20() throws Exception {
+		if (consumeNonTerminal(spielzeugConsumer, "spielzeuge", true, false, getRule().ele010010ParserRuleCallSpielzeug()))
+			return true;
+		return false;
+	}
+
+	protected boolean consumeAssignment$22() throws Exception {
+		if (consumeNonTerminal(familieConsumer, "familie", true, false, getRule().ele01010ParserRuleCallFamilie()))
+			return true;
+		return false;
+	}
+
+	protected boolean consumeAssignment$24() throws Exception {
+		if (consumeNonTerminal(customTypeParserRuleConsumer, "types", true, false, getRule().ele0110ParserRuleCallCustomTypeParserRule()))
+			return true;
+		return false;
+	}
+
+	protected boolean consumeKeyword$26() throws Exception {
+		return consumeKeyword(getRule().ele1KeywordRightCurlyBracket(), null, false, false, ReferenceGrammarDelimiters.ANY_OTHER_DELIMITER);
 	}
 
 	public SpielplatzElements getRule() {
@@ -237,5 +200,4 @@ public final class ReferenceGrammarSpielplatzConsumer extends NonTerminalConsume
 		this.customTypeParserRuleConsumer = customTypeParserRuleConsumer;
 	}
 	
-
 }

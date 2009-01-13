@@ -12,12 +12,16 @@ import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+
 import org.eclipse.xtext.valueconverter.services.Bug250313GrammarAccess;
 import org.eclipse.xtext.valueconverter.services.Bug250313GrammarAccess.Ref2Elements;
+
+import org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters;
 
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGConsumer;
 
+@SuppressWarnings("unused")
 public final class Bug250313Ref2Consumer extends NonTerminalConsumer {
 
 	private XtextBuiltinIDConsumer idConsumer;
@@ -29,38 +33,34 @@ public final class Bug250313Ref2Consumer extends NonTerminalConsumer {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 	}
 	
-	@SuppressWarnings("unused")
 	protected boolean doConsume() throws Exception {
-		GROUP$1SUCCESS: {
-			IMarker mGROUP$1 = mark();
-			GROUP$1FAILURE: {
-				KEYWORD$2SUCCESS: {
-					if (!consumeKeyword(getRule().ele0KeywordNumberSignDigitTwo(), null, false, false))
-						break KEYWORD$2SUCCESS;
-					break GROUP$1FAILURE;
-				}
-				mGROUP$1.rollback();
-				break GROUP$1SUCCESS;
-			}
-			GROUP$1FAILURE: {
-				ASSIGNMENT$3SUCCESS: {
-					ASSIGNMENT$3FAILURE: {
-						if (consumeKeyword(getRule().ele1000KeywordMykeyword1(), "ref2", false, false))
-							break ASSIGNMENT$3FAILURE;
-						if (consumeTerminal(stringConsumer, "ref2", false, false, getRule().ele1001LexerRuleCallSTRING()))
-							break ASSIGNMENT$3FAILURE;
-						if (consumeTerminal(idConsumer, "ref2", false, false, getRule().ele101LexerRuleCallID()))
-							break ASSIGNMENT$3FAILURE;
-						mGROUP$1.rollback();
-						break ASSIGNMENT$3SUCCESS;
-					}
-					break GROUP$1FAILURE;
-				}
-				mGROUP$1.rollback();
-				break GROUP$1SUCCESS;
-			}
-			return true;
+		return consumeGroup$1();
+	}
+
+	protected boolean consumeGroup$1() throws Exception {
+		final IMarker marker = mark();
+		if (!consumeKeyword$2()) {
+			marker.rollback();
+			return false;
 		}
+		if (!consumeAssignment$3()) {
+			marker.rollback();
+			return false;
+		}
+		return true;
+	}
+
+	protected boolean consumeKeyword$2() throws Exception {
+		return consumeKeyword(getRule().ele0KeywordNumberSignDigitTwo(), null, false, false, Bug250313Delimiters.ID_DELIMITER);
+	}
+
+	protected boolean consumeAssignment$3() throws Exception {
+		if (consumeKeyword(getRule().ele1000KeywordMykeyword1(), "ref2", false, false, Bug250313Delimiters.ID_DELIMITER))
+			return true;
+		if (consumeTerminal(stringConsumer, "ref2", false, false, getRule().ele1001LexerRuleCallSTRING(), Bug250313Delimiters.ALL_KEYWORDS))
+			return true;
+		if (consumeTerminal(idConsumer, "ref2", false, false, getRule().ele101LexerRuleCallID(), Bug250313Delimiters.ALL_KEYWORDS))
+			return true;
 		return false;
 	}
 
@@ -85,5 +85,4 @@ public final class Bug250313Ref2Consumer extends NonTerminalConsumer {
 		this.stringConsumer = stringConsumer;
 	}
 	
-
 }

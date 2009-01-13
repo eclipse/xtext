@@ -12,11 +12,15 @@ import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+
 import org.eclipse.xtext.testlanguages.services.SimpleExpressionsTestLanguageGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.SimpleExpressionsTestLanguageGrammarAccess.AdditionElements;
 
+import org.eclipse.xtext.testlanguages.parser.packrat.SimpleExpressionsTestLanguageDelimiters;
+
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.SimpleExpressionsTestLanguageMultiplicationConsumer;
 
+@SuppressWarnings("unused")
 public final class SimpleExpressionsTestLanguageAdditionConsumer extends NonTerminalConsumer {
 
 	private SimpleExpressionsTestLanguageMultiplicationConsumer multiplicationConsumer;
@@ -27,69 +31,64 @@ public final class SimpleExpressionsTestLanguageAdditionConsumer extends NonTerm
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 	}
 	
-	@SuppressWarnings("unused")
 	protected boolean doConsume() throws Exception {
-		GROUP$1SUCCESS: {
-			IMarker mGROUP$1 = mark();
-			GROUP$1FAILURE: {
-				RULECALL$2SUCCESS: {
-					if (!consumeNonTerminal(multiplicationConsumer, null, false, false,  getRule().ele0ParserRuleCallMultiplication()))
-						break RULECALL$2SUCCESS;
-					break GROUP$1FAILURE;
-				}
-				mGROUP$1.rollback();
-				break GROUP$1SUCCESS;
-			}
-			GROUP$1FAILURE: {
-				GROUP$3SUCCESS: while(true) {
-					IMarker mGROUP$3 = mark();
-					GROUP$3FAILURE: {
-						GROUP$4SUCCESS: {
-							IMarker mGROUP$4 = mark();
-							GROUP$4FAILURE: {
-								ACTION$5SUCCESS: {
-									consumeAction("Op", "values", true);
-									break GROUP$4FAILURE;
-								}
-							}
-							GROUP$4FAILURE: {
-								ASSIGNMENT$7SUCCESS: {
-									ASSIGNMENT$7FAILURE: {
-										if (consumeKeyword(getRule().ele10100KeywordPlusSign(), "operator", false, false))
-											break ASSIGNMENT$7FAILURE;
-										if (consumeKeyword(getRule().ele10101KeywordHyphenMinus(), "operator", false, false))
-											break ASSIGNMENT$7FAILURE;
-										mGROUP$4.rollback();
-										break ASSIGNMENT$7SUCCESS;
-									}
-									break GROUP$4FAILURE;
-								}
-								mGROUP$4.rollback();
-								break GROUP$4SUCCESS;
-							}
-							break GROUP$3FAILURE;
-						}
-						mGROUP$3.rollback();
-						break GROUP$3SUCCESS;
-					}
-					GROUP$3FAILURE: {
-						ASSIGNMENT$11SUCCESS: {
-							ASSIGNMENT$11FAILURE: {
-								if (consumeNonTerminal(multiplicationConsumer, "values", true, false , getRule().ele110ParserRuleCallMultiplication()))
-									break ASSIGNMENT$11FAILURE;
-								mGROUP$3.rollback();
-								break ASSIGNMENT$11SUCCESS;
-							}
-							break GROUP$3FAILURE;
-						}
-						mGROUP$3.rollback();
-						break GROUP$3SUCCESS;
-					}
-					continue GROUP$3SUCCESS;
-				}
-			}
-			return true;
+		return consumeGroup$1();
+	}
+
+	protected boolean consumeGroup$1() throws Exception {
+		final IMarker marker = mark();
+		if (!consumeRuleCall$2()) {
+			marker.rollback();
+			return false;
 		}
+		if (!consumeGroup$3()) {
+			marker.rollback();
+			return false;
+		}
+		return true;
+	}
+
+	protected boolean consumeRuleCall$2() throws Exception {
+		return consumeNonTerminal(multiplicationConsumer, null, false, false, getRule().ele0ParserRuleCallMultiplication());
+	}
+
+	protected boolean consumeGroup$3() throws Exception {
+		while(doConsumeGroup$3()) {}
+		return true;
+	}
+
+	protected boolean doConsumeGroup$3() throws Exception {
+		final IMarker marker = mark();
+		if (!consumeAction$5()) {
+			marker.rollback();
+			return false;
+		}
+		if (!consumeAssignment$7()) {
+			marker.rollback();
+			return false;
+		}
+		if (!consumeAssignment$11()) {
+			marker.rollback();
+			return false;
+		}
+		return true;
+	}
+	protected boolean consumeAction$5() {
+		consumeAction("Op", "values", true);
+		return true;	
+	}
+
+	protected boolean consumeAssignment$7() throws Exception {
+		if (consumeKeyword(getRule().ele10100KeywordPlusSign(), "operator", false, false, SimpleExpressionsTestLanguageDelimiters.ANY_OTHER_DELIMITER))
+			return true;
+		if (consumeKeyword(getRule().ele10101KeywordHyphenMinus(), "operator", false, false, SimpleExpressionsTestLanguageDelimiters.ANY_OTHER_DELIMITER))
+			return true;
+		return false;
+	}
+
+	protected boolean consumeAssignment$11() throws Exception {
+		if (consumeNonTerminal(multiplicationConsumer, "values", true, false, getRule().ele110ParserRuleCallMultiplication()))
+			return true;
 		return false;
 	}
 
@@ -110,5 +109,4 @@ public final class SimpleExpressionsTestLanguageAdditionConsumer extends NonTerm
 		this.multiplicationConsumer = multiplicationConsumer;
 	}
 	
-
 }

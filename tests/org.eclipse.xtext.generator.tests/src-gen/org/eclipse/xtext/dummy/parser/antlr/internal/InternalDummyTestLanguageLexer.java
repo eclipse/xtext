@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/dummy/parser/antlr/internal/InternalDummyTestLanguage.g 2009-01-13 09:48:25
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/dummy/parser/antlr/internal/InternalDummyTestLanguage.g 2009-01-13 18:38:32
 
 package org.eclipse.xtext.dummy.parser.antlr.internal;
 

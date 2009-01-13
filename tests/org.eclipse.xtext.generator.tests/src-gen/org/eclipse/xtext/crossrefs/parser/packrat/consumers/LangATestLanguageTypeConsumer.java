@@ -12,11 +12,15 @@ import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+
 import org.eclipse.xtext.crossrefs.services.LangATestLanguageGrammarAccess;
 import org.eclipse.xtext.crossrefs.services.LangATestLanguageGrammarAccess.TypeElements;
 
+import org.eclipse.xtext.crossrefs.parser.packrat.LangATestLanguageDelimiters;
+
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 
+@SuppressWarnings("unused")
 public final class LangATestLanguageTypeConsumer extends NonTerminalConsumer {
 
 	private XtextBuiltinIDConsumer idConsumer;
@@ -27,72 +31,48 @@ public final class LangATestLanguageTypeConsumer extends NonTerminalConsumer {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 	}
 	
-	@SuppressWarnings("unused")
 	protected boolean doConsume() throws Exception {
-		GROUP$1SUCCESS: {
-			IMarker mGROUP$1 = mark();
-			GROUP$1FAILURE: {
-				GROUP$2SUCCESS: {
-					IMarker mGROUP$2 = mark();
-					GROUP$2FAILURE: {
-						GROUP$3SUCCESS: {
-							IMarker mGROUP$3 = mark();
-							GROUP$3FAILURE: {
-								KEYWORD$4SUCCESS: {
-									if (!consumeKeyword(getRule().ele000KeywordType(), null, false, false))
-										break KEYWORD$4SUCCESS;
-									break GROUP$3FAILURE;
-								}
-								mGROUP$3.rollback();
-								break GROUP$3SUCCESS;
-							}
-							GROUP$3FAILURE: {
-								ASSIGNMENT$5SUCCESS: {
-									ASSIGNMENT$5FAILURE: {
-										if (consumeTerminal(idConsumer, "name", false, false, getRule().ele0010LexerRuleCallID()))
-											break ASSIGNMENT$5FAILURE;
-										mGROUP$3.rollback();
-										break ASSIGNMENT$5SUCCESS;
-									}
-									break GROUP$3FAILURE;
-								}
-								mGROUP$3.rollback();
-								break GROUP$3SUCCESS;
-							}
-							break GROUP$2FAILURE;
-						}
-						mGROUP$2.rollback();
-						break GROUP$2SUCCESS;
-					}
-					GROUP$2FAILURE: {
-						KEYWORD$7SUCCESS: {
-							if (!consumeKeyword(getRule().ele01KeywordExtends(), null, false, false))
-								break KEYWORD$7SUCCESS;
-							break GROUP$2FAILURE;
-						}
-						mGROUP$2.rollback();
-						break GROUP$2SUCCESS;
-					}
-					break GROUP$1FAILURE;
-				}
-				mGROUP$1.rollback();
-				break GROUP$1SUCCESS;
-			}
-			GROUP$1FAILURE: {
-				ASSIGNMENT$8SUCCESS: {
-					ASSIGNMENT$8FAILURE: {
-						if (consumeTerminal(idConsumer, null, false, false, getRule().ele10CrossReferenceEStringType()))
-							break ASSIGNMENT$8FAILURE;
-						mGROUP$1.rollback();
-						break ASSIGNMENT$8SUCCESS;
-					}
-					break GROUP$1FAILURE;
-				}
-				mGROUP$1.rollback();
-				break GROUP$1SUCCESS;
-			}
-			return true;
+		return consumeGroup$1();
+	}
+
+	protected boolean consumeGroup$1() throws Exception {
+		final IMarker marker = mark();
+		if (!consumeKeyword$4()) {
+			marker.rollback();
+			return false;
 		}
+		if (!consumeAssignment$5()) {
+			marker.rollback();
+			return false;
+		}
+		if (!consumeKeyword$7()) {
+			marker.rollback();
+			return false;
+		}
+		if (!consumeAssignment$8()) {
+			marker.rollback();
+			return false;
+		}
+		return true;
+	}
+
+	protected boolean consumeKeyword$4() throws Exception {
+		return consumeKeyword(getRule().ele000KeywordType(), null, false, false, LangATestLanguageDelimiters.ID_DELIMITER);
+	}
+
+	protected boolean consumeAssignment$5() throws Exception {
+		if (consumeTerminal(idConsumer, "name", false, false, getRule().ele0010LexerRuleCallID(), LangATestLanguageDelimiters.ALL_KEYWORDS))
+			return true;
+		return false;
+	}
+
+	protected boolean consumeKeyword$7() throws Exception {
+		return consumeKeyword(getRule().ele01KeywordExtends(), null, false, false, LangATestLanguageDelimiters.ID_DELIMITER);
+	}
+
+	protected boolean consumeAssignment$8() throws Exception {
+		if (consumeTerminal(idConsumer, null, false, false, getRule().ele10CrossReferenceEStringType(), LangATestLanguageDelimiters.ALL_KEYWORDS))
+			return true;
 		return false;
 	}
 
@@ -113,5 +93,4 @@ public final class LangATestLanguageTypeConsumer extends NonTerminalConsumer {
 		this.idConsumer = idConsumer;
 	}
 	
-
 }

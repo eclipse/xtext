@@ -12,16 +12,20 @@ import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+
 import org.eclipse.xtext.parsetree.formatter.services.FormatterTestLanguageGrammarAccess;
 import org.eclipse.xtext.parsetree.formatter.services.FormatterTestLanguageGrammarAccess.TestIndentationElements;
 
-import org.eclipse.xtext.parsetree.formatter.parser.packrat.consumers.FormatterTestLanguageLineConsumer;
-import org.eclipse.xtext.parsetree.formatter.parser.packrat.consumers.FormatterTestLanguageTestIndentationConsumer;
+import org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters;
 
+import org.eclipse.xtext.parsetree.formatter.parser.packrat.consumers.FormatterTestLanguageTestIndentationConsumer;
+import org.eclipse.xtext.parsetree.formatter.parser.packrat.consumers.FormatterTestLanguageLineConsumer;
+
+@SuppressWarnings("unused")
 public final class FormatterTestLanguageTestIndentationConsumer extends NonTerminalConsumer {
 
-	private FormatterTestLanguageLineConsumer lineConsumer;
 	private FormatterTestLanguageTestIndentationConsumer testIndentationConsumer;
+	private FormatterTestLanguageLineConsumer lineConsumer;
 
 	public FormatterTestLanguageTestIndentationConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
@@ -29,80 +33,66 @@ public final class FormatterTestLanguageTestIndentationConsumer extends NonTermi
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 	}
 	
-	@SuppressWarnings("unused")
 	protected boolean doConsume() throws Exception {
-		GROUP$1SUCCESS: {
-			IMarker mGROUP$1 = mark();
-			GROUP$1FAILURE: {
-				GROUP$2SUCCESS: {
-					IMarker mGROUP$2 = mark();
-					GROUP$2FAILURE: {
-						GROUP$3SUCCESS: {
-							IMarker mGROUP$3 = mark();
-							GROUP$3FAILURE: {
-								KEYWORD$4SUCCESS: {
-									if (!consumeKeyword(getRule().ele000KeywordIndentation(), null, false, false))
-										break KEYWORD$4SUCCESS;
-									break GROUP$3FAILURE;
-								}
-								mGROUP$3.rollback();
-								break GROUP$3SUCCESS;
-							}
-							GROUP$3FAILURE: {
-								KEYWORD$5SUCCESS: {
-									if (!consumeKeyword(getRule().ele001KeywordLeftCurlyBracket(), null, false, false))
-										break KEYWORD$5SUCCESS;
-									break GROUP$3FAILURE;
-								}
-								mGROUP$3.rollback();
-								break GROUP$3SUCCESS;
-							}
-							break GROUP$2FAILURE;
-						}
-						mGROUP$2.rollback();
-						break GROUP$2SUCCESS;
-					}
-					GROUP$2FAILURE: {
-						ALTERNATIVES$6SUCCESS: while(true) {
-							ALTERNATIVES$6FAILURE: {
-								ASSIGNMENT$7SUCCESS: {
-									ASSIGNMENT$7FAILURE: {
-										if (consumeNonTerminal(testIndentationConsumer, "sub", true, false , getRule().ele0100ParserRuleCallTestIndentation()))
-											break ASSIGNMENT$7FAILURE;
-										break ASSIGNMENT$7SUCCESS;
-									}
-									break ALTERNATIVES$6FAILURE;
-								}
-								ASSIGNMENT$9SUCCESS: {
-									ASSIGNMENT$9FAILURE: {
-										if (consumeNonTerminal(lineConsumer, "items", true, false , getRule().ele0110ParserRuleCallLine()))
-											break ASSIGNMENT$9FAILURE;
-										break ASSIGNMENT$9SUCCESS;
-									}
-									break ALTERNATIVES$6FAILURE;
-								}
-								break ALTERNATIVES$6SUCCESS;
-							}
-							continue ALTERNATIVES$6SUCCESS;
-						}
-					}
-					break GROUP$1FAILURE;
-				}
-				mGROUP$1.rollback();
-				break GROUP$1SUCCESS;
-			}
-			GROUP$1FAILURE: {
-				KEYWORD$11SUCCESS: {
-					if (!consumeKeyword(getRule().ele1KeywordRightCurlyBracket(), null, false, false))
-						break KEYWORD$11SUCCESS;
-					break GROUP$1FAILURE;
-				}
-				mGROUP$1.rollback();
-				break GROUP$1SUCCESS;
-			}
-			return true;
+		return consumeGroup$1();
+	}
+
+	protected boolean consumeGroup$1() throws Exception {
+		final IMarker marker = mark();
+		if (!consumeKeyword$4()) {
+			marker.rollback();
+			return false;
 		}
+		if (!consumeKeyword$5()) {
+			marker.rollback();
+			return false;
+		}
+		if (!consumeAlternatives$6()) {
+			marker.rollback();
+			return false;
+		}
+		if (!consumeKeyword$11()) {
+			marker.rollback();
+			return false;
+		}
+		return true;
+	}
+
+	protected boolean consumeKeyword$4() throws Exception {
+		return consumeKeyword(getRule().ele000KeywordIndentation(), null, false, false, FormatterTestLanguageDelimiters.ID_DELIMITER);
+	}
+
+	protected boolean consumeKeyword$5() throws Exception {
+		return consumeKeyword(getRule().ele001KeywordLeftCurlyBracket(), null, false, false, FormatterTestLanguageDelimiters.ANY_OTHER_DELIMITER);
+	}
+
+	protected boolean consumeAlternatives$6() throws Exception {
+		while(doConsumeAlternatives$6()) {}
+		return true;
+	}
+
+	protected boolean doConsumeAlternatives$6() throws Exception {
+		if (consumeAssignment$7())
+			return true;
+		if (consumeAssignment$9())
+			return true;
 		return false;
+	}
+
+	protected boolean consumeAssignment$7() throws Exception {
+		if (consumeNonTerminal(testIndentationConsumer, "sub", true, false, getRule().ele0100ParserRuleCallTestIndentation()))
+			return true;
+		return false;
+	}
+
+	protected boolean consumeAssignment$9() throws Exception {
+		if (consumeNonTerminal(lineConsumer, "items", true, false, getRule().ele0110ParserRuleCallLine()))
+			return true;
+		return false;
+	}
+
+	protected boolean consumeKeyword$11() throws Exception {
+		return consumeKeyword(getRule().ele1KeywordRightCurlyBracket(), null, false, false, FormatterTestLanguageDelimiters.ANY_OTHER_DELIMITER);
 	}
 
 	public TestIndentationElements getRule() {
@@ -118,13 +108,12 @@ public final class FormatterTestLanguageTestIndentationConsumer extends NonTermi
 		return "TestIndentation";
 	}
 	
-	public void setLineConsumer(FormatterTestLanguageLineConsumer lineConsumer) {
-		this.lineConsumer = lineConsumer;
-	}
-	
 	public void setTestIndentationConsumer(FormatterTestLanguageTestIndentationConsumer testIndentationConsumer) {
 		this.testIndentationConsumer = testIndentationConsumer;
 	}
 	
-
+	public void setLineConsumer(FormatterTestLanguageLineConsumer lineConsumer) {
+		this.lineConsumer = lineConsumer;
+	}
+	
 }
