@@ -28,7 +28,7 @@ List[AbstractElement] getNestedElementsFromAssignment(Assignment ass):
 	
 boolean isAssignmentRequired(Assignment ass):
 	JAVA org.eclipse.xtext.parsetree.reconstr.ParseTreeConstructorUtil.isAssignmentRequired(org.eclipse.xtext.Assignment);
-		
+
 boolean isRequired(String cardinality):
 	cardinality == null || cardinality == '' || cardinality == '+';
 	

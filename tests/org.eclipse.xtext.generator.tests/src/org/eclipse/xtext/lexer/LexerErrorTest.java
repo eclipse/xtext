@@ -5,7 +5,7 @@ import junit.framework.TestCase;
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.CommonTokenStream;
 import org.apache.log4j.Logger;
-import org.eclipse.xtext.testlanguages.parser.internal.InternalSimpleExpressionsTestLanguageLexer;
+import org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalSimpleExpressionsTestLanguageLexer;
 
 public class LexerErrorTest extends TestCase {
 

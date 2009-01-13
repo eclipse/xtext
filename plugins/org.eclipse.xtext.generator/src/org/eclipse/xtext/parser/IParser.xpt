@@ -34,7 +34,7 @@ import org.eclipse.xtext.service.Inject;
 import «internalPackage()».«internalLexerClassName()»;
 import «internalPackage()».«internalParserClassName()»;
 
-public class «genClassFQName.toSimpleName()» extends org.eclipse.xtext.parser.AbstractParser {
+public class «genClassFQName.toSimpleName()» extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
 	
 	@Inject 
     protected AntlrTokenDefProvider antlrTokenDefProvider;

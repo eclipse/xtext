@@ -1,3 +1,11 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
 package org.eclipse.xtext.parsetree.reconstr;
 
 import java.io.ByteArrayOutputStream;
@@ -34,17 +42,17 @@ public class ParseTreeConstructorUtil {
 		if (GrammarUtil.isOptionalCardinality(assignment))
 			return false;
 		if (assignment.eContainer() instanceof Group)
-			return !isOptionaGroup((Group) assignment.eContainer());
+			return !isOptionalGroup((Group) assignment.eContainer());
 		return true;
 	}
 
-	private static boolean isOptionaGroup(Group group) {
+	private static boolean isOptionalGroup(Group group) {
 		if (GrammarUtil.containedAssignments(group).size() != 1)
 			return false;
 		if (GrammarUtil.isOptionalCardinality(group))
 			return true;
 		if (group.eContainer() instanceof Group)
-			return isOptionaGroup((Group) group.eContainer());
+			return isOptionalGroup((Group) group.eContainer());
 		return false;
 	}
 

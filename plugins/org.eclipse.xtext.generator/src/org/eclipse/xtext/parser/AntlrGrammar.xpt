@@ -24,7 +24,7 @@
 grammar «internalAntlrGrammarName()»;
 
 options {
-	superClass=AbstractAntlrParser;
+	superClass=AbstractInternalAntlrParser;
 }
 
 @lexer::header {
@@ -45,10 +45,10 @@ import org.eclipse.xtext.parser.impl.*;
 import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
+import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
-import org.eclipse.xtext.parser.antlr.DatatypeRuleToken;
-import org.eclipse.xtext.parser.antlr.ValueConverterException;
+import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
+import org.eclipse.xtext.conversion.ValueConverterException;
 
 }
 
@@ -115,7 +115,7 @@ import org.eclipse.xtext.parser.antlr.ValueConverterException;
 ;
 
 // Rule «name»
-«ruleName()» returns [DatatypeRuleToken current=new DatatypeRuleToken()] 
+«ruleName()» returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
     @init { setCurrentLookahead(); resetLookahead(); }
     @after { resetLookahead(); }:
    «EXPAND dataTypeEbnf FOR this.alternatives»
@@ -227,7 +227,11 @@ import org.eclipse.xtext.parser.antlr.ValueConverterException;
 «DEFINE ebnf2 FOR Action»
     { 
         temp=factory.create("«this.typeName.getQualifiedName()»");
-        factory.«setOrAdd()»(temp, "«feature»", $current, null /*ParserRule*/, currentNode);
+        try {
+        	factory.«setOrAdd()»(temp, "«feature»", $current, null /*ParserRule*/, currentNode);
+        } catch(ValueConverterException vce) {
+        	handleValueConverterException(vce);
+        }
         $current = temp; 
         temp = null;
         «EXPAND insertCompositeNode» 
