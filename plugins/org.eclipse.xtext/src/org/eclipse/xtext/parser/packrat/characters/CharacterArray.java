@@ -5,26 +5,26 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.parser.antlr;
+package org.eclipse.xtext.parser.packrat.characters;
 
-import org.antlr.runtime.RecognitionException;
-import org.eclipse.xtext.parsetree.AbstractNode;
+import java.util.Arrays;
+
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("serial")
-public class ValueConverterException extends RecognitionException {
+public class CharacterArray implements ICharacterClass {
 
-	private final AbstractNode node;
+	private char[] characters;
+
+	public CharacterArray(char... characters) {
+		this.characters = characters.clone();
+		Arrays.sort(this.characters);
+	}
 	
-	public ValueConverterException(AbstractNode node, Exception cause) {
-		super();
-		this.node = node;
-		initCause(cause);
+	public boolean matches(char candidate) {
+		return candidate >= characters[0] && candidate <= characters[characters.length -1 ] &&
+			Arrays.binarySearch(characters, candidate) >= 0;
 	}
 
-	public AbstractNode getNode() {
-		return node;
-	}
 }

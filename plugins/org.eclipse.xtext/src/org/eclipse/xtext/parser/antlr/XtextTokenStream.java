@@ -24,8 +24,6 @@ public class XtextTokenStream extends CommonTokenStream {
 
 	private List<Token> lookaheadTokens = new ArrayList<Token>();
 
-//	private Map<Token, String> tokenErrorMap = new HashMap<Token, String>();
-
 	public XtextTokenStream() {
 		super();
 	}

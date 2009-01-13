@@ -11,8 +11,6 @@ package org.eclipse.xtext.parser;
 import java.util.Collection;
 import java.util.List;
 
-import org.antlr.runtime.RecognitionException;
-import org.antlr.runtime.Token;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
@@ -24,8 +22,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.conversion.IValueConverterService;
-import org.eclipse.xtext.parser.antlr.DatatypeRuleToken;
-import org.eclipse.xtext.parser.antlr.ValueConverterException;
+import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.util.Strings;
@@ -33,7 +30,7 @@ import org.eclipse.xtext.util.Strings;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class GenericEcoreElementFactory implements IAstFactory {
+public class DefaultEcoreElementFactory implements IAstFactory {
 
 	@Inject
 	protected IMetamodelAccess metamodelAccess;
@@ -54,50 +51,39 @@ public class GenericEcoreElementFactory implements IAstFactory {
 		return clazz.getEPackage().getEFactoryInstance().create(clazz);
 	}
 
-	public void set(EObject _this, String feature, Object value, String ruleName, AbstractNode node) throws RecognitionException {
-		try {
-			value = getTokenValue(value, ruleName, node);
-			EObject eo = (EObject) _this;
-			EStructuralFeature structuralFeature = eo.eClass().getEStructuralFeature(feature);
-			eo.eSet(structuralFeature, value);
-		} catch (ValueConverterException vce) {
-			throw vce;
-		} catch (Exception exc) {
-			throw new RecognitionException();
-		}
+	public void set(EObject _this, String feature, Object value, String ruleName, AbstractNode node) throws ValueConverterException {
+		value = getTokenValue(value, ruleName, node);
+		EObject eo = (EObject) _this;
+		EStructuralFeature structuralFeature = eo.eClass().getEStructuralFeature(feature);
+		eo.eSet(structuralFeature, value);
 	}
 	
 	private Object getTokenValue(Object tokenOrValue, String ruleName, AbstractNode node) throws ValueConverterException {
 		try {
-			Object value = tokenOrValue;
-			if (tokenOrValue instanceof DatatypeRuleToken) {
-				value = ((DatatypeRuleToken) tokenOrValue).getText();
-			} else if (tokenOrValue instanceof Token) {
-				value = ((Token) tokenOrValue).getText();
-			}
+			Object value = getTokenAsStringIfPossible(tokenOrValue);
 			if (value instanceof String && ruleName != null) {
 				value = converterService.toValue((String) value, ruleName, node);
 			}
 			return value;
+		} catch(ValueConverterException e) {
+			throw e;
 		} catch(Exception e) {
-			throw new ValueConverterException(node, e);
+			throw new ValueConverterException(null, node, e);
 		}	
+	}
+
+	protected Object getTokenAsStringIfPossible(Object tokenOrValue) {
+		return tokenOrValue;
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void add(EObject _this, String feature, Object value, String ruleName, AbstractNode node) throws RecognitionException {
-		try {
-			if (value == null)
-				return;
-			value = getTokenValue(value, ruleName, node);
-			EObject eo = (EObject) _this;
-			EStructuralFeature structuralFeature = eo.eClass().getEStructuralFeature(feature);
-			((Collection) eo.eGet(structuralFeature)).add(value);
-		} catch (ValueConverterException vce) {
-			throw vce;
-		} catch (Exception exc) {
-			throw new RecognitionException();
-		}
+	public void add(EObject _this, String feature, Object value, String ruleName, AbstractNode node) throws ValueConverterException {
+		if (value == null)
+			return;
+		value = getTokenValue(value, ruleName, node);
+		EObject eo = (EObject) _this;
+		EStructuralFeature structuralFeature = eo.eClass().getEStructuralFeature(feature);
+		((Collection) eo.eGet(structuralFeature)).add(value);
 	}
 
 	protected EPackage getEPackage(AbstractMetamodelDeclaration metaModelDecl) {

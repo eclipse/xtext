@@ -5,13 +5,11 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.parser.antlr;
-
-import org.antlr.runtime.Token;
+package org.eclipse.xtext.parser.impl;
 
 /**
  * <p>Return value of data type rules.</p><p>DatatypeRuleTokens can be merged with
- * other DatatypeRuleTokens or with {@link org.antlr.runtime.Token}s.
+ * other DatatypeRuleTokens.
  * We insert spaces on merge, if the merged token did not follow immediately, so
  * we don't mess some corner cases up, e.g.:
  * <code>
@@ -25,31 +23,24 @@ import org.antlr.runtime.Token;
  * </p>
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class DatatypeRuleToken {
+public abstract class DatatypeRuleToken {
 
 	public static final int INITIAL_OFFSET = -1;
+	protected final StringBuilder buffer;
+	protected int expectedOffset;
+	protected int startOffset;
 
-	private final StringBuilder buffer;
-	
-	private int expectedOffset;
-	
-	private int startOffset;
-	
-	public DatatypeRuleToken() {
+	protected DatatypeRuleToken() {
 		this.buffer = new StringBuilder();
 		expectedOffset = INITIAL_OFFSET;
 		startOffset = INITIAL_OFFSET;
 	}
-	
-	public void merge(Token token) {
-		internalMerge(token.getText(), TokenTool.getOffset(token));
-	}
-	
+
 	public void merge(DatatypeRuleToken token) {
 		internalMerge(token.getText(), token.startOffset);
 	}
-	
-	private void internalMerge(String text, int offset) {
+
+	protected void internalMerge(String text, int offset) {
 		if (startOffset == INITIAL_OFFSET) {
 			startOffset = offset;
 		}
@@ -59,17 +50,17 @@ public class DatatypeRuleToken {
 		buffer.append(text);
 		expectedOffset = offset + text.length();
 	}
-	
+
 	public String getText() {
 		if (buffer.length() > 0)
 			return buffer.toString();
 		return null;
 	}
-	
+
 	public void setText(String text) {
 		buffer.replace(0, buffer.length(), text);
 	}
-	
+
 	public int getExpectedOffset() {
 		return expectedOffset;
 	}
@@ -94,5 +85,5 @@ public class DatatypeRuleToken {
 		result.append("bufferValue: '").append(buffer.toString()).append("'\n}");
 		return result.toString();
 	}
-	
+
 }

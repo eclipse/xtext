@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -50,7 +51,7 @@ public class ParseResult implements IParseResult {
 
 	public List<SyntaxError> getParseErrors() {
 		//TODO performance?
-		return rootNode.allSyntaxErrors();
+		return rootNode != null ? rootNode.allSyntaxErrors() : Collections.<SyntaxError>emptyList();
 	}
     
 }

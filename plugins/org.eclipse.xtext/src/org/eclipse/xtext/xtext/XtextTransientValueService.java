@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
@@ -59,6 +60,11 @@ public class XtextTransientValueService extends SimpleTransientValueService {
 				final TypeRef returnType = rule.getType();
 				return returnType == null || EcorePackage.eINSTANCE.getEString().equals(rule.getType().getType());
 			}
+		}
+		else if (feature == XtextPackage.eINSTANCE.getCrossReference_Rule()) {
+			final CrossReference ref = (CrossReference) owner;
+			if (ref.getRule() != null && "ID".equals(ref.getRule().getName()))
+				return true;
 		}
 		return super.isTransient(owner, feature, index);
 	}

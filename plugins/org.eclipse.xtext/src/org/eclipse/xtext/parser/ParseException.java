@@ -8,10 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser;
 
-
 /**
  * @author Sven Efftinge - Initial contribution and API
- *
  */
 @SuppressWarnings("serial")
 public class ParseException extends RuntimeException {

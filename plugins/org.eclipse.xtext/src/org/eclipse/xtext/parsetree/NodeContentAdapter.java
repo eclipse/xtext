@@ -25,8 +25,10 @@ public class NodeContentAdapter extends EContentAdapter {
 	}
 	
 	public void addToNode(final CompositeNode node) {
-		node.eAdapters().add(this);
-		updateCompositeNode(node, -1, createWorkingNodeInfo());
+		if (node != null) {
+			node.eAdapters().add(this);
+			updateCompositeNode(node, -1, createWorkingNodeInfo());
+		}
 	}
 	
 	@Override

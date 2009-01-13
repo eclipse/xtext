@@ -6,7 +6,6 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-
 package org.eclipse.xtext.parser;
 
 import java.io.InputStream;
