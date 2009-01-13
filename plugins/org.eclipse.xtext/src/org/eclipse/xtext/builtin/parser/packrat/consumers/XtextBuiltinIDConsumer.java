@@ -11,8 +11,8 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory;
-import org.eclipse.xtext.parser.packrat.characters.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.consumers.LexerRuleAwareTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 import org.eclipse.xtext.services.XtextGrammarAccess;
 
@@ -22,13 +22,13 @@ import org.eclipse.xtext.services.XtextGrammarAccess;
 public final class XtextBuiltinIDConsumer extends LexerRuleAwareTerminalConsumer {
 	
 	// ('a'..'z'|'A'..'Z'|'_')
-	static final ICharacterClass IDConsumer$$1 = ICharacterClass.Factory.join(
+	public static final ICharacterClass IDConsumer$$1 = ICharacterClass.Factory.join(
 			ICharacterClass.Factory.createRange('a', 'z'),
 			ICharacterClass.Factory.createRange('A', 'Z'),
 			ICharacterClass.Factory.create('_')
 	);
 	// ('a'..'z'|'A'..'Z'|'_'|'0'..'9')
-	static final ICharacterClass IDConsumer$$2 = ICharacterClass.Factory.join(
+	public static final ICharacterClass IDConsumer$$2 = ICharacterClass.Factory.join(
 			ICharacterClass.Factory.createRange('a', 'z'),
 			ICharacterClass.Factory.createRange('A', 'Z'),
 			ICharacterClass.Factory.create('_'),

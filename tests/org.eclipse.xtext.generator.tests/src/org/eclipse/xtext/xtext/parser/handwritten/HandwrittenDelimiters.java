@@ -5,23 +5,27 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.parser.packrat.consumers;
+package org.eclipse.xtext.xtext.parser.handwritten;
 
-import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
+import org.eclipse.xtext.parser.packrat.matching.SetBasedKeywordMatcher;
+import org.eclipse.xtext.services.XtextGrammarAccess;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface IConsumerUtility {
+public final class HandwrittenDelimiters {
 
-	boolean consumeKeyword(Keyword keyword, String feature, boolean isMany, boolean isBoolean, ICharacterClass notFolledBy);
+	public static ICharacterClass idDelimiter() {
+		return XtextBuiltinIDConsumer.IDConsumer$$2;
+	}
 	
-	boolean consumeTerminal(ITerminalConsumer consumer, String feature, boolean isMany, boolean isBoolean, AbstractElement grammarElement, ISequenceMatcher notMatching);
+	public static ICharacterClass anyOtherDelimiter() {
+		return ICharacterClass.Factory.nullClass();
+	}
 	
-	boolean consumeNonTerminal(INonTerminalConsumer consumer, String feature, boolean isMany, boolean isDatatype, AbstractElement grammarElement) throws Exception;
+	public static ISequenceMatcher allKeywords = new SetBasedKeywordMatcher(XtextGrammarAccess.INSTANCE.getGrammar());
 	
-	void consumeAction(String typeName, String feature, boolean isMany);
 }

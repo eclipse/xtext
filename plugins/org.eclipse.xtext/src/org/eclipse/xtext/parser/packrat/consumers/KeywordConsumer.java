@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 /**
@@ -19,6 +20,8 @@ import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 public final class KeywordConsumer extends TerminalConsumer {
 
 	private Keyword keyword;
+
+	private ICharacterClass notFollowedBy;
 	
 	public KeywordConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor) {
@@ -26,13 +29,16 @@ public final class KeywordConsumer extends TerminalConsumer {
 		setHidden(false);
 	}
 
-	public void setKeyword(Keyword keyword) {
+	public void configure(Keyword keyword, ICharacterClass notFollowedBy) {
 		this.keyword = keyword;
+		this.notFollowedBy = notFollowedBy != null ? notFollowedBy : ICharacterClass.Factory.nullClass();
 	}
 	
 	@Override
 	protected boolean doConsume() {
-		return readString(keyword.getValue());
+		if (readString(keyword.getValue()))
+			return !peekChar(notFollowedBy);
+		return false;
 	}
 
 	@Override

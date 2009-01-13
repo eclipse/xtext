@@ -5,17 +5,22 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.parser.packrat.consumers;
+package org.eclipse.xtext.parser.packrat.matching;
 
-import org.eclipse.xtext.AbstractElement;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface INonTerminalConsumer {
+public class SingleCharacter implements ICharacterClass {
 
-	boolean consumeAsRoot(IRootConsumerListener listener) throws Exception;
+	private char c;
+
+	public SingleCharacter(char c) {
+		this.c = c;
+	}
 	
-	boolean consume(String feature, boolean isMany, boolean isDatatype, AbstractElement element) throws Exception;
+	public boolean matches(char candidate) {
+		return candidate == c;
+	}
 
 }

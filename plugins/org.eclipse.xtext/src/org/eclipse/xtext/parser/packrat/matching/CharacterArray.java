@@ -5,17 +5,26 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.parser.packrat.consumers;
+package org.eclipse.xtext.parser.packrat.matching;
 
-import org.eclipse.xtext.AbstractElement;
+import java.util.Arrays;
+
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface INonTerminalConsumer {
+public class CharacterArray implements ICharacterClass {
 
-	boolean consumeAsRoot(IRootConsumerListener listener) throws Exception;
+	private char[] characters;
+
+	public CharacterArray(char... characters) {
+		this.characters = characters.clone();
+		Arrays.sort(this.characters);
+	}
 	
-	boolean consume(String feature, boolean isMany, boolean isDatatype, AbstractElement element) throws Exception;
+	public boolean matches(char candidate) {
+		return candidate >= characters[0] && candidate <= characters[characters.length -1 ] &&
+			Arrays.binarySearch(characters, candidate) >= 0;
+	}
 
 }

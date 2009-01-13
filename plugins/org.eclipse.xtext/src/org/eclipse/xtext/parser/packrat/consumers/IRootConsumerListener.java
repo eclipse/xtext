@@ -7,15 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.packrat.consumers;
 
-import org.eclipse.xtext.AbstractElement;
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface INonTerminalConsumer {
+public interface IRootConsumerListener {
 
-	boolean consumeAsRoot(IRootConsumerListener listener) throws Exception;
-	
-	boolean consume(String feature, boolean isMany, boolean isDatatype, AbstractElement element) throws Exception;
+	boolean beforeNonTerminalEnd(INonTerminalConsumer nonTerminalConsumer);
 
 }
