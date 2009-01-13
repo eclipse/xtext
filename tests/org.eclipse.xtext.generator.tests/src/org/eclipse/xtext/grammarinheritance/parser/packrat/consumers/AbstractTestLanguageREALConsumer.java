@@ -37,9 +37,9 @@ public class AbstractTestLanguageREALConsumer extends LexerRuleAwareTerminalCons
 
 	@Override
 	protected boolean doConsume() {
-		if (!intConsumer.consume()) return false;
+		if (!intConsumer.consume(null)) return false;
 		if (!readChar('.')) return false;
-		if (!intConsumer.consume()) return false;
+		if (!intConsumer.consume(null)) return false;
 		return true;
 	}
 

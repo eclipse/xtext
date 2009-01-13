@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xtext.parser.handwritten.consumers;
+package org.eclipse.xtext.xtext.parser.handwritten.consumers.methodCalls;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
@@ -22,53 +22,50 @@ import org.eclipse.xtext.xtext.parser.handwritten.HandwrittenDelimiters;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public final class ReferencedMetamodelConsumer extends NonTerminalConsumer {
-
-	private ITerminalConsumer stringConsumer;
+public final class GeneratedMetamodelConsumer extends NonTerminalConsumer {
 	
 	private ITerminalConsumer idConsumer;
+	
+	private ITerminalConsumer stringConsumer;
 
-	/**
-	 * @param input
-	 * @param markerFactory
-	 * @param tokenAcceptor
-	 * @param hiddenTokenHandler
-	 * @param hiddenTokens
-	 */
-	public ReferencedMetamodelConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
+	public GeneratedMetamodelConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 	}
 
 	protected boolean doConsume() throws Exception {
-		SEQUENCE$0: {
-			if (!consumeKeyword(XtextGrammarAccess.INSTANCE.prReferencedMetamodel().ele00KeywordImport(), null, false,
-					false, HandwrittenDelimiters.idDelimiter()))
-				break SEQUENCE$0;
-			//				if (!consumeTerminal(STRINGConsumer, "ePackage", false, false)) break SEQUENCE$0;
-			if (!consumeTerminal(stringConsumer, null, false, false, XtextGrammarAccess.INSTANCE.prReferencedMetamodel().ele010CrossReferenceEStringEPackage(), HandwrittenDelimiters.allKeywords))
-				break SEQUENCE$0;
-			OPTION$1: {
-				SEQUENCE$2: {
-					IMarker marker$3 = mark();
-					if (!consumeKeyword(XtextGrammarAccess.INSTANCE.prReferencedMetamodel().ele10KeywordAs(), null,
-							false, false, HandwrittenDelimiters.idDelimiter()))
-						break SEQUENCE$2;
-					if (!consumeTerminal(idConsumer, "alias", false, false, XtextGrammarAccess.INSTANCE.prReferencedMetamodel().ele110LexerRuleCallID(), HandwrittenDelimiters.allKeywords)) {
-						marker$3.rollback();
-						break SEQUENCE$2;
-					}
-				}
-				break OPTION$1;
-			}
-			return true;
+		if (!consumeKeyword(XtextGrammarAccess.INSTANCE.prGeneratedMetamodel().ele000KeywordGenerate(), null,
+					false, false, HandwrittenDelimiters.idDelimiter()))
+			return false;
+		if (!consumeTerminal(idConsumer, "name", false, false, XtextGrammarAccess.INSTANCE.prGeneratedMetamodel().ele0010LexerRuleCallID(), HandwrittenDelimiters.allKeywords))
+			return false;
+		if (!consumeTerminal(stringConsumer, null, false, false, XtextGrammarAccess.INSTANCE.prGeneratedMetamodel().ele010CrossReferenceEStringEPackage(), HandwrittenDelimiters.allKeywords))
+			return false;
+		if (!parseOption())
+			return false;
+		return true;
+	}
+
+	private boolean parseOption() {
+		parseOptionImpl();
+		return true;
+	}
+
+	private boolean parseOptionImpl() {
+		IMarker marker$3 = mark();
+		if (!consumeKeyword(XtextGrammarAccess.INSTANCE.prGeneratedMetamodel().ele10KeywordAs(), null,
+				false, false, HandwrittenDelimiters.idDelimiter()))
+			return false;
+		if (!consumeTerminal(idConsumer, "alias", false, false, XtextGrammarAccess.INSTANCE.prGeneratedMetamodel().ele110LexerRuleCallID(), HandwrittenDelimiters.allKeywords)) {
+			marker$3.rollback();
+			return false;
 		}
-		return false;
+		return true;
 	}
 
 	protected EObject getGrammarElement() {
-		return XtextGrammarAccess.INSTANCE.prReferencedMetamodel().getRule();
+		return XtextGrammarAccess.INSTANCE.prGeneratedMetamodel().getRule();
 	}
 
 	@Override
@@ -76,12 +73,12 @@ public final class ReferencedMetamodelConsumer extends NonTerminalConsumer {
 		return "GeneratedMetamodel";
 	}
 
-	public void setStringConsumer(ITerminalConsumer stringConsumer) {
-		this.stringConsumer = stringConsumer;
-	}
-
 	public void setIdConsumer(ITerminalConsumer idConsumer) {
 		this.idConsumer = idConsumer;
+	}
+
+	public void setStringConsumer(ITerminalConsumer stringConsumer) {
+		this.stringConsumer = stringConsumer;
 	}
 	
 }

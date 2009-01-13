@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xtext.parser.handwritten.consumers;
+package org.eclipse.xtext.xtext.parser.handwritten.consumers.methodCalls;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
@@ -25,7 +25,7 @@ import org.eclipse.xtext.xtext.parser.handwritten.HandwrittenDelimiters;
 public final class ReferencedMetamodelConsumer extends NonTerminalConsumer {
 
 	private ITerminalConsumer stringConsumer;
-	
+
 	private ITerminalConsumer idConsumer;
 
 	/**
@@ -42,29 +42,39 @@ public final class ReferencedMetamodelConsumer extends NonTerminalConsumer {
 	}
 
 	protected boolean doConsume() throws Exception {
-		SEQUENCE$0: {
-			if (!consumeKeyword(XtextGrammarAccess.INSTANCE.prReferencedMetamodel().ele00KeywordImport(), null, false,
-					false, HandwrittenDelimiters.idDelimiter()))
-				break SEQUENCE$0;
-			//				if (!consumeTerminal(STRINGConsumer, "ePackage", false, false)) break SEQUENCE$0;
-			if (!consumeTerminal(stringConsumer, null, false, false, XtextGrammarAccess.INSTANCE.prReferencedMetamodel().ele010CrossReferenceEStringEPackage(), HandwrittenDelimiters.allKeywords))
-				break SEQUENCE$0;
-			OPTION$1: {
-				SEQUENCE$2: {
-					IMarker marker$3 = mark();
-					if (!consumeKeyword(XtextGrammarAccess.INSTANCE.prReferencedMetamodel().ele10KeywordAs(), null,
-							false, false, HandwrittenDelimiters.idDelimiter()))
-						break SEQUENCE$2;
-					if (!consumeTerminal(idConsumer, "alias", false, false, XtextGrammarAccess.INSTANCE.prReferencedMetamodel().ele110LexerRuleCallID(), HandwrittenDelimiters.allKeywords)) {
-						marker$3.rollback();
-						break SEQUENCE$2;
-					}
-				}
-				break OPTION$1;
-			}
-			return true;
+		if (!consumeKeyword(XtextGrammarAccess.INSTANCE.prReferencedMetamodel().ele00KeywordImport(), null, false,
+				false, HandwrittenDelimiters.idDelimiter()))
+			return false;
+		//				if (!consumeTerminal(STRINGConsumer, "ePackage", false, false)) break SEQUENCE$0;
+		if (!consumeTerminal(stringConsumer, null, false, false, XtextGrammarAccess.INSTANCE.prReferencedMetamodel()
+				.ele010CrossReferenceEStringEPackage(), HandwrittenDelimiters.allKeywords))
+			return false;
+		if (!parseOption())
+			return false;
+		return true;
+	}
+
+	/**
+	 * @return
+	 */
+	private boolean parseOption() {
+		doParseOption();
+		return true;
+	}
+
+	private boolean doParseOption() {
+		IMarker marker$3 = mark();
+		if (!consumeKeyword(XtextGrammarAccess.INSTANCE.prReferencedMetamodel().ele10KeywordAs(), null, false, false,
+				HandwrittenDelimiters.idDelimiter())) {
+			marker$3.rollback();
+			return false;
 		}
-		return false;
+		if (!consumeTerminal(idConsumer, "alias", false, false, XtextGrammarAccess.INSTANCE.prReferencedMetamodel()
+				.ele110LexerRuleCallID(), HandwrittenDelimiters.allKeywords)) {
+			marker$3.rollback();
+			return false;
+		}
+		return true;
 	}
 
 	protected EObject getGrammarElement() {
@@ -83,5 +93,5 @@ public final class ReferencedMetamodelConsumer extends NonTerminalConsumer {
 	public void setIdConsumer(ITerminalConsumer idConsumer) {
 		this.idConsumer = idConsumer;
 	}
-	
+
 }
