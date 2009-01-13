@@ -311,15 +311,15 @@ public class ReferenceGrammarGrammarAccess extends BaseEPackageAccess implements
 		private final RuleCall c000001001LexerRuleCallSTRING = (RuleCall)c00000100Alternatives.eContents().get(1);
 		private final RuleCall c00000101LexerRuleCallID = (RuleCall)c0000010Alternatives.eContents().get(1);
 		private final Assignment c00001AssignmentMutter = (Assignment)c0000Group.eContents().get(1);
-		private final CrossReference c000010CrossReferenceErwachsener = (CrossReference)c00001AssignmentMutter.eContents().get(0);
+		private final CrossReference c000010CrossReferenceEStringErwachsener = (CrossReference)c00001AssignmentMutter.eContents().get(0);
 		private final Assignment c0001AssignmentVater = (Assignment)c000Group.eContents().get(1);
-		private final CrossReference c00010CrossReferenceErwachsener = (CrossReference)c0001AssignmentVater.eContents().get(0);
+		private final CrossReference c00010CrossReferenceEStringErwachsener = (CrossReference)c0001AssignmentVater.eContents().get(0);
 		private final Assignment c001AssignmentKinder = (Assignment)c00Group.eContents().get(1);
-		private final CrossReference c0010CrossReferenceKind = (CrossReference)c001AssignmentKinder.eContents().get(0);
+		private final CrossReference c0010CrossReferenceEStringKind = (CrossReference)c001AssignmentKinder.eContents().get(0);
 		private final Group c01Group = (Group)c0Group.eContents().get(1);
 		private final Keyword c010KeywordComma = (Keyword)c01Group.eContents().get(0);
 		private final Assignment c011AssignmentKinder = (Assignment)c01Group.eContents().get(1);
-		private final CrossReference c0110CrossReferenceKind = (CrossReference)c011AssignmentKinder.eContents().get(0);
+		private final CrossReference c0110CrossReferenceEStringKind = (CrossReference)c011AssignmentKinder.eContents().get(0);
 		private final Keyword c1KeywordRightParenthesis = (Keyword)cGroup.eContents().get(1);
 		
 		// Familie : 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ Erwachsener ] vater = [ Erwachsener ] kinder += [ Kind ] ( ',' kinder += [ Kind ] ) * ')' ;
@@ -374,19 +374,19 @@ public class ReferenceGrammarGrammarAccess extends BaseEPackageAccess implements
 		public Assignment ele00001AssignmentMutter() { return c00001AssignmentMutter; }
 
 		// [ Erwachsener ]
-		public CrossReference ele000010CrossReferenceErwachsener() { return c000010CrossReferenceErwachsener; }
+		public CrossReference ele000010CrossReferenceEStringErwachsener() { return c000010CrossReferenceEStringErwachsener; }
 
 		// vater = [ Erwachsener ]
 		public Assignment ele0001AssignmentVater() { return c0001AssignmentVater; }
 
 		// [ Erwachsener ]
-		public CrossReference ele00010CrossReferenceErwachsener() { return c00010CrossReferenceErwachsener; }
+		public CrossReference ele00010CrossReferenceEStringErwachsener() { return c00010CrossReferenceEStringErwachsener; }
 
 		// kinder += [ Kind ]
 		public Assignment ele001AssignmentKinder() { return c001AssignmentKinder; }
 
 		// [ Kind ]
-		public CrossReference ele0010CrossReferenceKind() { return c0010CrossReferenceKind; }
+		public CrossReference ele0010CrossReferenceEStringKind() { return c0010CrossReferenceEStringKind; }
 
 		// ( ',' kinder += [ Kind ] ) *
 		public Group ele01Group() { return c01Group; }
@@ -398,7 +398,7 @@ public class ReferenceGrammarGrammarAccess extends BaseEPackageAccess implements
 		public Assignment ele011AssignmentKinder() { return c011AssignmentKinder; }
 
 		// [ Kind ]
-		public CrossReference ele0110CrossReferenceKind() { return c0110CrossReferenceKind; }
+		public CrossReference ele0110CrossReferenceEStringKind() { return c0110CrossReferenceEStringKind; }
 
 		// ')'
 		public Keyword ele1KeywordRightParenthesis() { return c1KeywordRightParenthesis; }

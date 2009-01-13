@@ -34,6 +34,8 @@ public class Pair<T, U> {
 	public boolean equals(Object other) {
 		if (other == null)
 			return false;
+		if (this == other)
+			return true;
 		if (this.getClass().equals(other.getClass())) {
 			Pair<?, ?> otherPair = (Pair<?, ?>) other;
 			boolean isEqual = (first == null) ? otherPair.getFirst() == null : first.equals(otherPair.getFirst());

@@ -16,6 +16,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverter;
+import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.parsetree.AbstractNode;
 
 public class AbstractAnnotationBasedValueConverterService implements IValueConverterService {
@@ -25,7 +26,7 @@ public class AbstractAnnotationBasedValueConverterService implements IValueConve
 	public final String toString(Object value, String lexerRule) {
 		return getConverter(lexerRule).toString(value);
 	}
-	public final Object toValue(String string, String lexerRule, AbstractNode node) {
+	public final Object toValue(String string, String lexerRule, AbstractNode node) throws ValueConverterException{
 		return getConverter(lexerRule).toValue(string, node);
 	}
 

@@ -157,6 +157,7 @@
             <type metamodel="//@metamodelDeclarations.0">
               <type xsi:type="ecore:EClass" href="http://example.xtext.org/PartialParserTestLanguage#//Container"/>
             </type>
+            <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
           </terminal>
         </abstractTokens>
       </abstractTokens>
@@ -189,6 +190,7 @@
             <type metamodel="//@metamodelDeclarations.0">
               <type xsi:type="ecore:EClass" href="http://example.xtext.org/PartialParserTestLanguage#//Child"/>
             </type>
+            <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
           </terminal>
         </abstractTokens>
       </abstractTokens>

@@ -1,0 +1,204 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT xtext»
+«IMPORT xtextgen»
+
+«EXTENSION org::eclipse::xtext::Extensions»
+«EXTENSION org::eclipse::xtext::Properties»
+«EXTENSION org::eclipse::xtext::parser::packrat::PackratParserGen»
+
+«DEFINE root FOR GenService»
+	«EXPAND NonTerminalConsumer::nonTerminalConsumers»
+	«EXPAND parser»
+	«EXPAND parserConfiguration»
+«ENDDEFINE»
+
+«DEFINE parser FOR GenService»
+«FILE genClassFQName.toJavaFilePath() SRC_GEN-»
+/*
+«fileHeader()»
+*/
+package «genClassFQName.toJavaPackage()»;
+
+import org.eclipse.xtext.parser.packrat.AbstractPackratParser;
+import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
+import org.eclipse.xtext.parser.packrat.IHiddenTokenHandler;
+import org.eclipse.xtext.parser.packrat.IMarkerFactory;
+import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
+import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+
+public class «genClassFQName.toSimpleName()» extends AbstractPackratParser {
+
+	@Override
+	protected «languageName()»ParserConfiguration createParserConfiguration(ICharSequenceWithOffset input,
+			IMarkerFactory markerFactory, IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler,
+			IConsumerUtility consumerUtil) {
+		return new «languageName()»ParserConfiguration(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil);
+	}
+
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE parserConfiguration FOR GenService»
+«FILE (genClassFQName.toJavaPackage() + "." + languageName() + "ParserConfiguration").toJavaFilePath() SRC_GEN-»
+/*
+«fileHeader()»
+*/
+package «genClassFQName.toJavaPackage()»;
+
+import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
+import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
+import org.eclipse.xtext.parser.packrat.IHiddenTokenHandler;
+import org.eclipse.xtext.parser.packrat.IMarkerFactory;
+import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+
+«LET grammar().getSuperGrammar() AS superGrammar-»
+«IF superGrammar != null-»
+import «superGrammar.getNamespace()».parser.packrat.«superGrammar.getName().replaceAll("\\s","_")»ParserConfiguration; 
+
+«ENDIF-»
+«ENDLET-»
+«FOREACH grammar().allRules() AS rule-»
+import «rule.grammar().getNamespace()».parser.packrat.consumers.«rule.consumerClassName()»;
+«ENDFOREACH-»
+
+public class «languageName().toFirstUpper()»ParserConfiguration extends AbstractParserConfiguration {
+
+«LET grammar().getSuperGrammar() AS superGrammar-»
+«IF superGrammar != null-»
+	private «superGrammar.getName().replaceAll("\\s","_").toFirstUpper()»ParserConfiguration «superGrammar.getName().replaceAll("\\s","_").toFirstLower()»Configuration; 
+
+«ENDIF-»
+«ENDLET-»
+«FOREACH grammar().rules AS rule-»
+    private «rule.consumerClassName()» «rule.consumerFieldName()»;
+«ENDFOREACH-»
+
+	public «languageName()»ParserConfiguration(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
+			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil) {
+		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil);
+«LET grammar().getSuperGrammar() AS superGrammar-»
+«IF superGrammar != null-»
+		this.«superGrammar.getName().replaceAll("\\s","_").toFirstLower()»Configuration = new «superGrammar.getName().replaceAll("\\s","_").toFirstUpper()»ParserConfiguration(
+			input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil);
+«ENDIF-»
+«ENDLET-»
+	}
+
+	public «grammar().allParserRules().first().consumerClassName()» getRootConsumer() {
+		return «grammar().allParserRules().first().consumerFieldName()»;
+	} 
+	
+	public void createNonTerminalConsumers() {
+«LET grammar().getSuperGrammar() AS superGrammar-»
+«IF superGrammar != null-»
+		get«superGrammar.getName().replaceAll("\\s","_").toFirstUpper()»Configuration().createNonTerminalConsumers();
+«ENDIF-»
+«ENDLET-»
+«FOREACH grammar().rules.typeSelect(ParserRule) AS rule-»
+«IF grammar().allParserRules().first()==rule-»
+		«rule.consumerFieldName()» = new «rule.consumerClassName()»(
+    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(),
+    		new ITerminalConsumer[]{ getWsConsumer(), getMlCommentConsumer(), getSlCommentConsumer() }
+    	);
+«ELSE-»
+		«rule.consumerFieldName()» = new «rule.consumerClassName()»(
+    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    	);
+«ENDIF-»
+«ENDFOREACH-»
+	}
+	
+	public void createTerminalConsumers() {
+«LET grammar().getSuperGrammar() AS superGrammar-»
+«IF superGrammar != null-»
+		get«superGrammar.getName().replaceAll("\\s","_").toFirstUpper()»Configuration().createTerminalConsumers();
+«ENDIF-»
+«ENDLET-»
+«FOREACH grammar().rules.typeSelect(LexerRule) AS rule-»
+		«rule.consumerFieldName()» = new «rule.consumerClassName()»(getInput(), getMarkerFactory(), getTokenAcceptor());
+«ENDFOREACH-»
+	}
+	
+	public void configureConsumers() {
+«FOREACH grammar().allParserRules() AS rule-»
+«LET rule.containedRuleCalls().rule.union(rule.eAllContents.typeSelect(CrossReference).rule).toSet() AS calledRules-»
+«IF !calledRules.isEmpty-»
+«FOREACH calledRules AS calledRule-»
+«IF rule.consumerGetterName() != "getRootConsumer"-»
+«IF calledRule.consumerGetterName() != "getRootConsumer"-»
+		«rule.consumerGetterName()»().«calledRule.consumerSetterName()»(«calledRule.consumerGetterName()»());
+«ELSE-»
+		«rule.consumerGetterName()»().«calledRule.consumerSetterName()»(getRootConsumer$());
+«ENDIF-»
+«ELSE-»
+«IF calledRule.consumerGetterName() != "getRootConsumer"-»
+		getRootConsumer$().«calledRule.consumerSetterName()»(«calledRule.consumerGetterName()»());
+«ELSE-»
+		getRootConsumer$().«calledRule.consumerSetterName()»(getRootConsumer$());
+«ENDIF-»
+«ENDIF-»
+«ENDFOREACH-»
+
+«ENDIF-»
+«ENDLET-»
+«ENDFOREACH-»
+«FOREACH grammar().allLexerRules() AS rule-»
+«IF rule.consumerGetterName() != "getRootConsumer"-»
+		«rule.consumerGetterName()»().initFields(this);
+«ELSE-»
+		getRootConsumer$().initFields(this);
+«ENDIF-»
+«ENDFOREACH-»
+	}
+	
+«LET grammar().getSuperGrammar() AS superGrammar-»
+«IF superGrammar != null-»
+	// TODO collect superGrammars transitive
+	public «superGrammar.getName().replaceAll("\\s","_").toFirstUpper()»ParserConfiguration get«superGrammar.getName().replaceAll("\\s","_").toFirstUpper()»Configuration() {
+		return «superGrammar.getName().replaceAll("\\s","_").toFirstLower()»Configuration;
+	} 
+	
+«ENDIF-»
+«FOREACH grammar().allRules() AS rule-»
+«IF rule.grammar() == grammar()-»
+«IF rule.consumerGetterName() != "getRootConsumer"-»
+    public «rule.consumerClassName()» «rule.consumerGetterName()»() {
+    	return «rule.consumerFieldName()»;
+    }
+«ELSE-»
+	public «rule.consumerClassName()» getRootConsumer$() {
+    	return «rule.consumerFieldName()»;
+    }
+«ENDIF-»
+«ELSE-»
+«IF rule.consumerGetterName() != "getRootConsumer"-»
+    public «rule.consumerClassName()» «rule.consumerGetterName()»() {
+    	return get«superGrammar.getName().replaceAll("\\s","_").toFirstUpper()»Configuration().«rule.consumerGetterName()»();
+    }
+«ELSE-»
+	public «rule.consumerClassName()» getRootConsumer$() {
+    	return get«superGrammar.getName().replaceAll("\\s","_").toFirstUpper()»Configuration().getRootConsumer$();
+    }
+«ENDIF-»
+«ENDIF»
+
+«ENDFOREACH-»
+«ENDLET-»
+
+}
+«ENDFILE»
+«ENDDEFINE»

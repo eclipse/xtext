@@ -308,7 +308,7 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 		private final Assignment c001AssignmentValue = (Assignment)c00Group.eContents().get(1);
 		private final RuleCall c0010ParserRuleCallNamed = (RuleCall)c001AssignmentValue.eContents().get(0);
 		private final Assignment c01AssignmentReferencedContainer = (Assignment)c0Group.eContents().get(1);
-		private final CrossReference c010CrossReferenceContainer = (CrossReference)c01AssignmentReferencedContainer.eContents().get(0);
+		private final CrossReference c010CrossReferenceEStringContainer = (CrossReference)c01AssignmentReferencedContainer.eContents().get(0);
 		private final Keyword c1KeywordRightParenthesis = (Keyword)cGroup.eContents().get(1);
 		
 		// FirstConcrete : '->' 'F' '(' value = Named ( referencedContainer = [ Container ] ) ? ')' ;
@@ -348,7 +348,7 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 		public Assignment ele01AssignmentReferencedContainer() { return c01AssignmentReferencedContainer; }
 
 		// [ Container ]
-		public CrossReference ele010CrossReferenceContainer() { return c010CrossReferenceContainer; }
+		public CrossReference ele010CrossReferenceEStringContainer() { return c010CrossReferenceEStringContainer; }
 
 		// ')'
 		public Keyword ele1KeywordRightParenthesis() { return c1KeywordRightParenthesis; }
@@ -369,7 +369,7 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 		private final Assignment c001AssignmentValue = (Assignment)c00Group.eContents().get(1);
 		private final RuleCall c0010ParserRuleCallNamed = (RuleCall)c001AssignmentValue.eContents().get(0);
 		private final Assignment c01AssignmentReferencedChildren = (Assignment)c0Group.eContents().get(1);
-		private final CrossReference c010CrossReferenceChild = (CrossReference)c01AssignmentReferencedChildren.eContents().get(0);
+		private final CrossReference c010CrossReferenceEStringChild = (CrossReference)c01AssignmentReferencedChildren.eContents().get(0);
 		private final Keyword c1KeywordRightParenthesis = (Keyword)cGroup.eContents().get(1);
 		
 		// SecondConcrete : '->' 'F' 'S' '(' value = Named ( referencedChildren += [ Child ] ) ? ')' ;
@@ -415,7 +415,7 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 		public Assignment ele01AssignmentReferencedChildren() { return c01AssignmentReferencedChildren; }
 
 		// [ Child ]
-		public CrossReference ele010CrossReferenceChild() { return c010CrossReferenceChild; }
+		public CrossReference ele010CrossReferenceEStringChild() { return c010CrossReferenceEStringChild; }
 
 		// ')'
 		public Keyword ele1KeywordRightParenthesis() { return c1KeywordRightParenthesis; }

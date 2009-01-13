@@ -412,10 +412,10 @@ public class XtextGrammarTestLanguageGrammarAccess extends BaseEPackageAccess im
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Assignment c00AssignmentMetamodel = (Assignment)c0Group.eContents().get(0);
-		private final CrossReference c000CrossReferenceAbstractMetamodelDeclaration = (CrossReference)c00AssignmentMetamodel.eContents().get(0);
+		private final CrossReference c000CrossReferenceEStringAbstractMetamodelDeclaration = (CrossReference)c00AssignmentMetamodel.eContents().get(0);
 		private final Keyword c01KeywordColonColon = (Keyword)c0Group.eContents().get(1);
 		private final Assignment c1AssignmentType = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference c10CrossReferenceEClassifier = (CrossReference)c1AssignmentType.eContents().get(0);
+		private final CrossReference c10CrossReferenceEStringEClassifier = (CrossReference)c1AssignmentType.eContents().get(0);
 		
 		// TypeRef : ( metamodel = [ AbstractMetamodelDeclaration ] '::' ) ? type = [ EClassifier ] ;
 		public ParserRule getRule() { return rule; }
@@ -430,7 +430,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends BaseEPackageAccess im
 		public Assignment ele00AssignmentMetamodel() { return c00AssignmentMetamodel; }
 
 		// [ AbstractMetamodelDeclaration ]
-		public CrossReference ele000CrossReferenceAbstractMetamodelDeclaration() { return c000CrossReferenceAbstractMetamodelDeclaration; }
+		public CrossReference ele000CrossReferenceEStringAbstractMetamodelDeclaration() { return c000CrossReferenceEStringAbstractMetamodelDeclaration; }
 
 		// '::'
 		public Keyword ele01KeywordColonColon() { return c01KeywordColonColon; }
@@ -439,7 +439,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends BaseEPackageAccess im
 		public Assignment ele1AssignmentType() { return c1AssignmentType; }
 
 		// [ EClassifier ]
-		public CrossReference ele10CrossReferenceEClassifier() { return c10CrossReferenceEClassifier; }
+		public CrossReference ele10CrossReferenceEStringEClassifier() { return c10CrossReferenceEStringEClassifier; }
 	}
 
 	public class AlternativesElements implements IParserRuleAccess {
@@ -763,7 +763,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends BaseEPackageAccess im
 		private final Group c01Group = (Group)c0Group.eContents().get(1);
 		private final Keyword c010KeywordVerticalLine = (Keyword)c01Group.eContents().get(0);
 		private final Assignment c011AssignmentRule = (Assignment)c01Group.eContents().get(1);
-		private final CrossReference c0110CrossReferenceAbstractRule = (CrossReference)c011AssignmentRule.eContents().get(0);
+		private final CrossReference c0110CrossReferenceEStringAbstractRule = (CrossReference)c011AssignmentRule.eContents().get(0);
 		private final Keyword c1KeywordRightSquareBracket = (Keyword)cGroup.eContents().get(1);
 		
 		// CrossReference : '[' type = TypeRef ( '|' rule = [ AbstractRule ] ) ? ']' ;
@@ -797,7 +797,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends BaseEPackageAccess im
 		public Assignment ele011AssignmentRule() { return c011AssignmentRule; }
 
 		// [ AbstractRule ]
-		public CrossReference ele0110CrossReferenceAbstractRule() { return c0110CrossReferenceAbstractRule; }
+		public CrossReference ele0110CrossReferenceEStringAbstractRule() { return c0110CrossReferenceEStringAbstractRule; }
 
 		// ']'
 		public Keyword ele1KeywordRightSquareBracket() { return c1KeywordRightSquareBracket; }
@@ -848,7 +848,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends BaseEPackageAccess im
 	public class RuleCallElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(19);
 		private final Assignment cAssignmentRule = (Assignment)rule.eContents().get(1);
-		private final CrossReference c0CrossReferenceAbstractRule = (CrossReference)cAssignmentRule.eContents().get(0);
+		private final CrossReference c0CrossReferenceEStringAbstractRule = (CrossReference)cAssignmentRule.eContents().get(0);
 		
 		// RuleCall : rule = [ AbstractRule ] ;
 		public ParserRule getRule() { return rule; }
@@ -857,7 +857,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends BaseEPackageAccess im
 		public Assignment eleAssignmentRule() { return cAssignmentRule; }
 
 		// [ AbstractRule ]
-		public CrossReference ele0CrossReferenceAbstractRule() { return c0CrossReferenceAbstractRule; }
+		public CrossReference ele0CrossReferenceEStringAbstractRule() { return c0CrossReferenceEStringAbstractRule; }
 	}
 	
 	public final static XtextGrammarTestLanguageGrammarAccess INSTANCE = new XtextGrammarTestLanguageGrammarAccess();

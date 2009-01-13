@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
+import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
@@ -82,6 +83,8 @@ public class XtextLinker extends Linker {
 				producer.addDiagnostic("Cannot find meta model for type '" + typeRefName + "'");
 			else
 				typeRef.setMetamodel((AbstractMetamodelDeclaration) metamodels.get(0));
+		} else if (XtextPackage.eINSTANCE.getCrossReference_Rule() == ref) {
+			((CrossReference)obj).setRule(GrammarUtil.findRuleForName(GrammarUtil.getGrammar(obj), "ID"));			
 		} else {
 			super.setDefaultValueImpl(obj, ref, producer);
 		}

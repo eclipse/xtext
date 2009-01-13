@@ -675,7 +675,7 @@ protected class AbstractRuleCall_Assignment_rule extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("AbstractRule")) {
 				type = AssignmentType.CR;
-				element = ContentAssistTestLanguageGrammarAccess.INSTANCE.prAbstractRuleCall().ele0CrossReferenceAbstractRule(); 
+				element = ContentAssistTestLanguageGrammarAccess.INSTANCE.prAbstractRuleCall().ele0CrossReferenceEStringAbstractRule(); 
 				return new Solution(obj);
 			}
 		}

@@ -11,7 +11,6 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtext.generator,
  org.eclipse.xtext.log4j;bundle-version="1.2.15"
 Export-Package: org.eclipse.xtext.example,
- org.eclipse.xtext.example.parser;uses:="org.eclipse.xtext.parser,org.eclipse.xtext.parser.antlr,org.antlr.runtime",
  org.eclipse.xtext.example.parsetree.reconstr;
   uses:="org.eclipse.xtext.parsetree.reconstr,
    org.eclipse.xtext,

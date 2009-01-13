@@ -19,6 +19,6 @@ public interface IValueConverter<Type> {
 			return string;
 		}
 	};
-	public Type toValue(String string, AbstractNode node);
+	public Type toValue(String string, AbstractNode node) throws ValueConverterException;
 	public String toString(Type value);
 }

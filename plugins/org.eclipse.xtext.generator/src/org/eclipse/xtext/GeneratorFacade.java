@@ -180,11 +180,17 @@ public class GeneratorFacade {
 		//grammarAccessService.setExtensionPointID("org.eclipse.xtext.ui.grammarAccess");
 		genModel.getServices().add(grammarAccessService);
 		
+		GenService packratParser = XtextgenFactory.eINSTANCE.createGenService();
+		packratParser.setServiceInterfaceFQName("org.eclipse.xtext.parser.packrat.IPackratParser");
+		packratParser.setGenClassFQName(namespace + ".parser.packrat." + languageName + "PackratParser");
+		packratParser.setTemplatePath("org::eclipse::xtext::parser::packrat::PackratParserGen::root");
+		genModel.getServices().add(packratParser);
+		
 		if (!GrammarUtil.isAbstract(grammarModel)) {
 
 			GenService elementFactoryService = XtextgenFactory.eINSTANCE.createGenService();
 			elementFactoryService.setServiceInterfaceFQName("org.eclipse.xtext.parser.IAstFactory");
-			elementFactoryService.setGenClassFQName("org.eclipse.xtext.parser.GenericEcoreElementFactory");
+			elementFactoryService.setGenClassFQName("org.eclipse.xtext.parser.antlr.AntlrEcoreElementFactory");
 			// no template, as service is generic. Nevertheless, we need the
 			// individual registration to avoid conflicts
 			elementFactoryService.setExtensionPointID("org.eclipse.xtext.ui.aSTFactory");
@@ -192,16 +198,14 @@ public class GeneratorFacade {
 
 			GenService parserService = XtextgenFactory.eINSTANCE.createGenService();
 			parserService.setServiceInterfaceFQName("org.eclipse.xtext.parser.IParser");
-			parserService.setGenClassFQName(namespace + ".parser." + languageName + "Parser");
+			parserService.setGenClassFQName(namespace + ".parser.antlr." + languageName + "Parser");
 			parserService.setTemplatePath("org::eclipse::xtext::parser::Parser::root");
 			parserService.setExtensionPointID("org.eclipse.xtext.ui.parser");
 			genModel.getServices().add(parserService);
 
 			GenService tokenFileProviderService = XtextgenFactory.eINSTANCE.createGenService();
-			tokenFileProviderService
-					.setServiceInterfaceFQName("org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider");
-			tokenFileProviderService
-					.setGenClassFQName(namespace + ".parser." + languageName + "AntlrTokenFileProvider");
+			tokenFileProviderService.setServiceInterfaceFQName("org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider");
+			tokenFileProviderService.setGenClassFQName(namespace + ".parser.antlr." + languageName + "AntlrTokenFileProvider");
 			tokenFileProviderService.setTemplatePath("org::eclipse::xtext::parser::AntlrTokenFileProvider::root");
 			// tokenFileProviderService.setExtensionPointID(
 			// "org.eclipse.xtext.ui.parser");
@@ -241,7 +245,7 @@ public class GeneratorFacade {
 
 			GenService tokenScannerService = XtextgenFactory.eINSTANCE.createGenService();
 			tokenScannerService.setServiceInterfaceFQName("org.eclipse.xtext.parser.antlr.Lexer");
-			tokenScannerService.setGenClassFQName(namespace + ".parser.internal.Internal" + languageName + "Lexer");
+			tokenScannerService.setGenClassFQName(namespace + ".parser.antlr.internal.Internal" + languageName + "Lexer");
 			genModel.getServices().add(tokenScannerService);
 			
 			GenService proposalProvider = XtextgenFactory.eINSTANCE.createGenService();

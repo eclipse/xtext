@@ -29,6 +29,7 @@ import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.crossref.impl.SimpleAttributeResolver;
 import org.eclipse.xtext.crossref.impl.DefaultLinkingService;
 import org.eclipse.xtext.parsetree.AbstractNode;
@@ -79,8 +80,13 @@ public class XtextLinkingService extends DefaultLinkingService {
 	}
 	
 	private String getMetamodelNsURI(LeafNode text) {
-		return (String) valueConverterService.toValue(text.getText(),
-				((CrossReference)text.getGrammarElement()).getRule().getName(), text);
+		try {
+			return (String) valueConverterService.toValue(text.getText(),
+					((CrossReference)text.getGrammarElement()).getRule().getName(), text);
+		} catch (ValueConverterException e) {
+			log.debug("Exception on leaf '" + text.getText() + "'", e);
+			return null;
+		}
 	}
 	
 	EPackage loadEPackage(String resourceOrNsURI, ResourceSet resourceSet) {

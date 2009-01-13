@@ -1786,7 +1786,7 @@ protected class TypeRef_0_0_Assignment_metamodel extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("AbstractMetamodelDeclaration")) {
 				type = AssignmentType.CR;
-				element = XtextGrammarAccess.INSTANCE.prTypeRef().ele000CrossReferenceAbstractMetamodelDeclaration(); 
+				element = XtextGrammarAccess.INSTANCE.prTypeRef().ele000CrossReferenceEStringAbstractMetamodelDeclaration(); 
 				return new Solution(obj);
 			}
 		}
@@ -1825,7 +1825,7 @@ protected class TypeRef_1_Assignment_type extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("EClassifier")) {
 				type = AssignmentType.CR;
-				element = XtextGrammarAccess.INSTANCE.prTypeRef().ele10CrossReferenceEClassifier(); 
+				element = XtextGrammarAccess.INSTANCE.prTypeRef().ele10CrossReferenceEStringEClassifier(); 
 				return new Solution(obj);
 			}
 		}
@@ -3214,7 +3214,7 @@ protected class CrossReference_0_1_1_Assignment_rule extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("AbstractRule")) {
 				type = AssignmentType.CR;
-				element = XtextGrammarAccess.INSTANCE.prCrossReference().ele0110CrossReferenceAbstractRule(); 
+				element = XtextGrammarAccess.INSTANCE.prCrossReference().ele0110CrossReferenceEStringAbstractRule(); 
 				return new Solution(obj);
 			}
 		}
@@ -3408,7 +3408,7 @@ protected class RuleCall_Assignment_rule extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("AbstractRule")) {
 				type = AssignmentType.CR;
-				element = XtextGrammarAccess.INSTANCE.prRuleCall().ele0CrossReferenceAbstractRule(); 
+				element = XtextGrammarAccess.INSTANCE.prRuleCall().ele0CrossReferenceEStringAbstractRule(); 
 				return new Solution(obj);
 			}
 		}

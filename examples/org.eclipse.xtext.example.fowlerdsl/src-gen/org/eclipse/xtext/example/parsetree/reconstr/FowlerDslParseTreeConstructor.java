@@ -856,7 +856,7 @@ protected class State_0_0_1_0_1_Assignment_actions extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Command")) {
 				type = AssignmentType.CR;
-				element = FowlerDslGrammarAccess.INSTANCE.prState().ele001010CrossReferenceCommand(); 
+				element = FowlerDslGrammarAccess.INSTANCE.prState().ele001010CrossReferenceEStringCommand(); 
 				return new Solution(obj);
 			}
 		}
@@ -1008,7 +1008,7 @@ protected class Transition_0_0_Assignment_event extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Event")) {
 				type = AssignmentType.CR;
-				element = FowlerDslGrammarAccess.INSTANCE.prTransition().ele000CrossReferenceEvent(); 
+				element = FowlerDslGrammarAccess.INSTANCE.prTransition().ele000CrossReferenceEStringEvent(); 
 				return new Solution(obj);
 			}
 		}
@@ -1047,7 +1047,7 @@ protected class Transition_1_Assignment_state extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("State")) {
 				type = AssignmentType.CR;
-				element = FowlerDslGrammarAccess.INSTANCE.prTransition().ele10CrossReferenceState(); 
+				element = FowlerDslGrammarAccess.INSTANCE.prTransition().ele10CrossReferenceEStringState(); 
 				return new Solution(obj);
 			}
 		}

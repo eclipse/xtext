@@ -1490,7 +1490,7 @@ protected class Familie_0_0_0_0_1_Assignment_mutter extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Erwachsener")) {
 				type = AssignmentType.CR;
-				element = ReferenceGrammarGrammarAccess.INSTANCE.prFamilie().ele000010CrossReferenceErwachsener(); 
+				element = ReferenceGrammarGrammarAccess.INSTANCE.prFamilie().ele000010CrossReferenceEStringErwachsener(); 
 				return new Solution(obj);
 			}
 		}
@@ -1517,7 +1517,7 @@ protected class Familie_0_0_0_1_Assignment_vater extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Erwachsener")) {
 				type = AssignmentType.CR;
-				element = ReferenceGrammarGrammarAccess.INSTANCE.prFamilie().ele00010CrossReferenceErwachsener(); 
+				element = ReferenceGrammarGrammarAccess.INSTANCE.prFamilie().ele00010CrossReferenceEStringErwachsener(); 
 				return new Solution(obj);
 			}
 		}
@@ -1544,7 +1544,7 @@ protected class Familie_0_0_1_Assignment_kinder extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Kind")) {
 				type = AssignmentType.CR;
-				element = ReferenceGrammarGrammarAccess.INSTANCE.prFamilie().ele0010CrossReferenceKind(); 
+				element = ReferenceGrammarGrammarAccess.INSTANCE.prFamilie().ele0010CrossReferenceEStringKind(); 
 				return new Solution(obj);
 			}
 		}
@@ -1611,7 +1611,7 @@ protected class Familie_0_1_1_Assignment_kinder extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Kind")) {
 				type = AssignmentType.CR;
-				element = ReferenceGrammarGrammarAccess.INSTANCE.prFamilie().ele0110CrossReferenceKind(); 
+				element = ReferenceGrammarGrammarAccess.INSTANCE.prFamilie().ele0110CrossReferenceEStringKind(); 
 				return new Solution(obj);
 			}
 		}

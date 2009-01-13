@@ -7,10 +7,8 @@ Bundle-Version: 0.7.0.qualifier
 Eclipse-RegisterBuddy: org.eclipse.xtext.log4j
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
-Export-Package: org.eclipse.xtext.reference,
- ReferenceModel,
- org.eclipse.xtext.reference.parser,
- org.eclipse.xtext.reference.parser.internal,
+Export-Package: ReferenceModel,
+ org.eclipse.xtext.reference,
  org.eclipse.xtext.reference.parsetree.reconstr,
  org.eclipse.xtext.reference.services
 Require-Bundle: org.eclipse.xtext.log4j;bundle-version="1.2.15",

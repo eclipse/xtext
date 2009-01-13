@@ -358,7 +358,7 @@ protected class Type_1_Assignment_extends extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Type")) {
 				type = AssignmentType.CR;
-				element = LangATestLanguageGrammarAccess.INSTANCE.prType().ele10CrossReferenceType(); 
+				element = LangATestLanguageGrammarAccess.INSTANCE.prType().ele10CrossReferenceEStringType(); 
 				return new Solution(obj);
 			}
 		}

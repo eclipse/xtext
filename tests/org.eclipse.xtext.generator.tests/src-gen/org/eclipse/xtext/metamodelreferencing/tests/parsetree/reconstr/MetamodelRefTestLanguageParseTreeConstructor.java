@@ -143,7 +143,7 @@ protected class NameRef_Assignment_rule extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("ParserRule")) {
 				type = AssignmentType.CR;
-				element = MetamodelRefTestLanguageGrammarAccess.INSTANCE.prNameRef().ele0CrossReferenceParserRule(); 
+				element = MetamodelRefTestLanguageGrammarAccess.INSTANCE.prNameRef().ele0CrossReferenceEStringParserRule(); 
 				return new Solution(obj);
 			}
 		}

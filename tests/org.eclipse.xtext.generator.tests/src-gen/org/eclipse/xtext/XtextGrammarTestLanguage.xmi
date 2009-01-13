@@ -216,6 +216,7 @@
             <type metamodel="//@metamodelDeclarations.0">
               <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractMetamodelDeclaration"/>
             </type>
+            <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
           </terminal>
         </abstractTokens>
         <abstractTokens xsi:type="xtext:Keyword" value="::"/>
@@ -225,6 +226,7 @@
           <type metamodel="//@metamodelDeclarations.1">
             <type xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EClassifier"/>
           </type>
+          <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
         </terminal>
       </abstractTokens>
     </alternatives>
@@ -392,6 +394,7 @@
               <type metamodel="//@metamodelDeclarations.0">
                 <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractRule"/>
               </type>
+              <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
             </terminal>
           </abstractTokens>
         </abstractTokens>
@@ -430,6 +433,7 @@
         <type metamodel="//@metamodelDeclarations.0">
           <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractRule"/>
         </type>
+        <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
       </terminal>
     </alternatives>
   </rules>

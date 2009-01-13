@@ -30,6 +30,10 @@ public final class Triple<S1, S2, S3> extends Pair<S1, S2>{
 	
 	@Override
 	public boolean equals(Object other) {
+		if (other == null)
+			return false;
+		if (other == this)
+			return true;
 		if (other instanceof Triple<?,?,?>) {
 			Triple<?,?,?> r = (Triple<?,?,?>) other;
 			if (!super.equals(other))
@@ -41,7 +45,7 @@ public final class Triple<S1, S2, S3> extends Pair<S1, S2>{
 	
 	@Override
 	public int hashCode() {
-		return super.hashCode()+ (third==null?0:getThird().hashCode());
+		return super.hashCode()+ 17*(third==null?0:getThird().hashCode());
 	}
 	
 	@Override

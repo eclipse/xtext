@@ -8,6 +8,7 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtext,
+ org.eclipse.xtext.parser.packrat,
  org.eclipse.xtext.xtextgen,
  org.eclipse.xtext.xtextgen.impl,
  org.eclipse.xtext.xtextgen.util

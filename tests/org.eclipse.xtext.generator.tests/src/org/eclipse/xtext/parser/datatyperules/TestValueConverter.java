@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 import junit.framework.TestCase;
 
 import org.eclipse.xtext.conversion.IValueConverter;
+import org.eclipse.xtext.conversion.ValueConverterException;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -24,21 +25,21 @@ public class TestValueConverter extends TestCase {
 		valueConverter = new DatatypeRulesTestLanguageValueConverters().Fraction();
 	}
 	
-	public void testSimpleToObject() {
+	public void testSimpleToObject() throws ValueConverterException {
 		String s = "123";
 		BigDecimal bd = valueConverter.toValue(s, null);
 		BigDecimal expected = new BigDecimal("123");
 		assertEquals(expected, bd);
 	}
 	
-	public void testFractionObject() {
+	public void testFractionObject() throws ValueConverterException {
 		String s = "123/246";
 		BigDecimal bd = valueConverter.toValue(s, null);
 		BigDecimal expected = new BigDecimal("0.5");
 		assertEquals(expected, bd);
 	}
 	
-	public void testZeroDenominator() {
+	public void testZeroDenominator() throws ValueConverterException {
 		String s = "123/0";
 		try {
 			valueConverter.toValue(s, null);
@@ -48,7 +49,7 @@ public class TestValueConverter extends TestCase {
 		}
 	}
 	
-	public void testSimpleToString() {
+	public void testSimpleToString() throws ValueConverterException {
 		String expected = "123";
 		BigDecimal bd = BigDecimal.valueOf(123);
 		assertEquals(expected, valueConverter.toString(bd));

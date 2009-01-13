@@ -88,6 +88,7 @@
         <type metamodel="//@metamodelDeclarations.0">
           <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/tests/ContentAssist#//AbstractRule"/>
         </type>
+        <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
       </terminal>
     </alternatives>
   </rules>

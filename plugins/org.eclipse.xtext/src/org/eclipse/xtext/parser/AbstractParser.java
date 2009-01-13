@@ -8,11 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser;
 
-import java.io.IOException;
 import java.io.InputStream;
 
-import org.antlr.runtime.ANTLRInputStream;
-import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.parser.impl.PartialParsingUtil;
 import org.eclipse.xtext.parsetree.CompositeNode;
@@ -30,14 +27,7 @@ public abstract class AbstractParser implements IParser {
     @Inject
     protected IGrammarAccess grammarAccess;
 
-    public IParseResult parse(String ruleName, InputStream in, IAstFactory factory) {
-        try {
-            IParseResult parseResult = (IParseResult) parse(ruleName, new ANTLRInputStream(in), factory);
-            return parseResult;
-        } catch (IOException e) {
-            throw new WrappedException(e);
-        }
-    }
+    public abstract IParseResult parse(String ruleName, InputStream in, IAstFactory factory);
 
     public IParseResult parse(InputStream in, IAstFactory factory) {
         return parse(getDefaultRuleName(), in, factory);
@@ -61,5 +51,4 @@ public abstract class AbstractParser implements IParser {
 
     protected abstract String getDefaultRuleName();
 
-    protected abstract IParseResult parse(String ruleName, ANTLRInputStream in, IAstFactory factory);
 }

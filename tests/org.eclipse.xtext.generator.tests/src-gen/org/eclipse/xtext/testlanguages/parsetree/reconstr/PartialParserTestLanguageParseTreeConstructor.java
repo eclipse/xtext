@@ -1470,7 +1470,7 @@ protected class FirstConcrete_0_1_Assignment_referencedContainer extends Assignm
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Container")) {
 				type = AssignmentType.CR;
-				element = PartialParserTestLanguageGrammarAccess.INSTANCE.prFirstConcrete().ele010CrossReferenceContainer(); 
+				element = PartialParserTestLanguageGrammarAccess.INSTANCE.prFirstConcrete().ele010CrossReferenceEStringContainer(); 
 				return new Solution(obj);
 			}
 		}
@@ -1771,7 +1771,7 @@ protected class SecondConcrete_0_1_Assignment_referencedChildren extends Assignm
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Child")) {
 				type = AssignmentType.CR;
-				element = PartialParserTestLanguageGrammarAccess.INSTANCE.prSecondConcrete().ele010CrossReferenceChild(); 
+				element = PartialParserTestLanguageGrammarAccess.INSTANCE.prSecondConcrete().ele010CrossReferenceEStringChild(); 
 				return new Solution(obj);
 			}
 		}

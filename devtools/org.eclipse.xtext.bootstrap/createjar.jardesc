@@ -18,12 +18,13 @@
 <javaElement handleIdentifier="=org.eclipse.xtext.generator/src&lt;org.eclipse.xtext.parser"/>
 <javaElement handleIdentifier="=org.eclipse.xtext.generator/src&lt;org.eclipse.xtext.ui.contentassist"/>
 <javaElement handleIdentifier="=org.eclipse.xtext.util/src"/>
+<javaElement handleIdentifier="=org.eclipse.xtext.generator/src&lt;org.eclipse.xtext.parser.packrat"/>
 <javaElement handleIdentifier="=org.eclipse.xtext/src-gen"/>
 <javaElement handleIdentifier="=org.eclipse.xtext.generator/src&lt;org.eclipse.xtext.ecore"/>
 <javaElement handleIdentifier="=org.eclipse.xtext.generator/model"/>
 <javaElement handleIdentifier="=org.eclipse.xtext/src"/>
-<javaElement handleIdentifier="=org.eclipse.xtext.generator/src&lt;org.eclipse.xtext.parsetree.reconstr"/>
 <javaElement handleIdentifier="=org.eclipse.xtext/model"/>
+<javaElement handleIdentifier="=org.eclipse.xtext.generator/src&lt;org.eclipse.xtext.parsetree.reconstr"/>
 <javaElement handleIdentifier="=org.eclipse.xtext.service/src"/>
 <javaElement handleIdentifier="=org.eclipse.xtext.generator/src&lt;org.eclipse.xtext.resourcefactory"/>
 <javaElement handleIdentifier="=org.eclipse.xtext.generator/src&lt;org.eclipse.xtext"/>

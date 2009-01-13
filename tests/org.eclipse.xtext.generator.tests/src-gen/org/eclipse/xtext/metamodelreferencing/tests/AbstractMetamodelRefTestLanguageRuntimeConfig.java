@@ -17,16 +17,20 @@ public abstract class AbstractMetamodelRefTestLanguageRuntimeConfig extends Abst
 		return org.eclipse.xtext.metamodelreferencing.tests.services.MetamodelRefTestLanguageGrammarAccess.class;
 	}
 		
+	protected Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> getIPackratParser() {
+		return org.eclipse.xtext.metamodelreferencing.tests.parser.packrat.MetamodelRefTestLanguagePackratParser.class;
+	}
+		
 	protected Class<? extends org.eclipse.xtext.parser.IAstFactory> getIAstFactory() {
-		return org.eclipse.xtext.parser.GenericEcoreElementFactory.class;
+		return org.eclipse.xtext.parser.antlr.AntlrEcoreElementFactory.class;
 	}
 		
 	protected Class<? extends org.eclipse.xtext.parser.IParser> getIParser() {
-		return org.eclipse.xtext.metamodelreferencing.tests.parser.MetamodelRefTestLanguageParser.class;
+		return org.eclipse.xtext.metamodelreferencing.tests.parser.antlr.MetamodelRefTestLanguageParser.class;
 	}
 		
 	protected Class<? extends org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider> getIAntlrTokenFileProvider() {
-		return org.eclipse.xtext.metamodelreferencing.tests.parser.MetamodelRefTestLanguageAntlrTokenFileProvider.class;
+		return org.eclipse.xtext.metamodelreferencing.tests.parser.antlr.MetamodelRefTestLanguageAntlrTokenFileProvider.class;
 	}
 		
 	protected Class<? extends org.eclipse.xtext.resource.IResourceFactory> getIResourceFactory() {
@@ -50,7 +54,7 @@ public abstract class AbstractMetamodelRefTestLanguageRuntimeConfig extends Abst
 	}
 		
 	protected Class<? extends org.eclipse.xtext.parser.antlr.Lexer> getLexer() {
-		return org.eclipse.xtext.metamodelreferencing.tests.parser.internal.InternalMetamodelRefTestLanguageLexer.class;
+		return org.eclipse.xtext.metamodelreferencing.tests.parser.antlr.internal.InternalMetamodelRefTestLanguageLexer.class;
 	}
 		
 	
@@ -58,6 +62,7 @@ public abstract class AbstractMetamodelRefTestLanguageRuntimeConfig extends Abst
 		return scope(org.eclipse.xtext.metamodelreferencing.tests.IMetamodelRefTestLanguage.SCOPE)
 		.with(org.eclipse.xtext.IMetamodelAccess.class, getIMetamodelAccess())
 		.with(org.eclipse.xtext.IGrammarAccess.class, getIGrammarAccess())
+		.with(org.eclipse.xtext.parser.packrat.IPackratParser.class, getIPackratParser())
 		.with(org.eclipse.xtext.parser.IAstFactory.class, getIAstFactory())
 		.with(org.eclipse.xtext.parser.IParser.class, getIParser())
 		.with(org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider.class, getIAntlrTokenFileProvider())
