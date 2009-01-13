@@ -17,16 +17,20 @@ public abstract class AbstractTreeTestLanguageRuntimeConfig extends AbstractServ
 		return org.eclipse.xtext.testlanguages.services.TreeTestLanguageGrammarAccess.class;
 	}
 		
+	protected Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> getIPackratParser() {
+		return org.eclipse.xtext.testlanguages.parser.packrat.TreeTestLanguagePackratParser.class;
+	}
+		
 	protected Class<? extends org.eclipse.xtext.parser.IAstFactory> getIAstFactory() {
-		return org.eclipse.xtext.parser.GenericEcoreElementFactory.class;
+		return org.eclipse.xtext.parser.antlr.AntlrEcoreElementFactory.class;
 	}
 		
 	protected Class<? extends org.eclipse.xtext.parser.IParser> getIParser() {
-		return org.eclipse.xtext.testlanguages.parser.TreeTestLanguageParser.class;
+		return org.eclipse.xtext.testlanguages.parser.antlr.TreeTestLanguageParser.class;
 	}
 		
 	protected Class<? extends org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider> getIAntlrTokenFileProvider() {
-		return org.eclipse.xtext.testlanguages.parser.TreeTestLanguageAntlrTokenFileProvider.class;
+		return org.eclipse.xtext.testlanguages.parser.antlr.TreeTestLanguageAntlrTokenFileProvider.class;
 	}
 		
 	protected Class<? extends org.eclipse.xtext.resource.IResourceFactory> getIResourceFactory() {
@@ -50,7 +54,7 @@ public abstract class AbstractTreeTestLanguageRuntimeConfig extends AbstractServ
 	}
 		
 	protected Class<? extends org.eclipse.xtext.parser.antlr.Lexer> getLexer() {
-		return org.eclipse.xtext.testlanguages.parser.internal.InternalTreeTestLanguageLexer.class;
+		return org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalTreeTestLanguageLexer.class;
 	}
 		
 	
@@ -58,6 +62,7 @@ public abstract class AbstractTreeTestLanguageRuntimeConfig extends AbstractServ
 		return scope(org.eclipse.xtext.testlanguages.ITreeTestLanguage.SCOPE)
 		.with(org.eclipse.xtext.IMetamodelAccess.class, getIMetamodelAccess())
 		.with(org.eclipse.xtext.IGrammarAccess.class, getIGrammarAccess())
+		.with(org.eclipse.xtext.parser.packrat.IPackratParser.class, getIPackratParser())
 		.with(org.eclipse.xtext.parser.IAstFactory.class, getIAstFactory())
 		.with(org.eclipse.xtext.parser.IParser.class, getIParser())
 		.with(org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider.class, getIAntlrTokenFileProvider())

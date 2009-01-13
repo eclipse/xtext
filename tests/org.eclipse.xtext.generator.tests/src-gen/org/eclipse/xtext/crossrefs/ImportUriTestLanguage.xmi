@@ -55,6 +55,7 @@
           <type metamodel="//@metamodelDeclarations.0">
             <type xsi:type="ecore:EClass" href="http://eclipse.org/xtext/importUriTestLanguage#//Type"/>
           </type>
+          <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
         </terminal>
       </abstractTokens>
     </alternatives>

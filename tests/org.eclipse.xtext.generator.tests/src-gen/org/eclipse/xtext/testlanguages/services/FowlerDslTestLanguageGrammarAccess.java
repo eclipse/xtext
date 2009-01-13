@@ -162,7 +162,7 @@ public class FowlerDslTestLanguageGrammarAccess extends BaseEPackageAccess imple
 		private final Keyword c001000KeywordActions = (Keyword)c00100Group.eContents().get(0);
 		private final Keyword c001001KeywordLeftCurlyBracket = (Keyword)c00100Group.eContents().get(1);
 		private final Assignment c00101AssignmentActions = (Assignment)c0010Group.eContents().get(1);
-		private final CrossReference c001010CrossReferenceCommand = (CrossReference)c00101AssignmentActions.eContents().get(0);
+		private final CrossReference c001010CrossReferenceEStringCommand = (CrossReference)c00101AssignmentActions.eContents().get(0);
 		private final Keyword c0011KeywordRightCurlyBracket = (Keyword)c001Group.eContents().get(1);
 		private final Assignment c01AssignmentTransitions = (Assignment)c0Group.eContents().get(1);
 		private final RuleCall c010ParserRuleCallTransition = (RuleCall)c01AssignmentTransitions.eContents().get(0);
@@ -211,7 +211,7 @@ public class FowlerDslTestLanguageGrammarAccess extends BaseEPackageAccess imple
 		public Assignment ele00101AssignmentActions() { return c00101AssignmentActions; }
 
 		// [ Command ]
-		public CrossReference ele001010CrossReferenceCommand() { return c001010CrossReferenceCommand; }
+		public CrossReference ele001010CrossReferenceEStringCommand() { return c001010CrossReferenceEStringCommand; }
 
 		// '}'
 		public Keyword ele0011KeywordRightCurlyBracket() { return c0011KeywordRightCurlyBracket; }
@@ -231,10 +231,10 @@ public class FowlerDslTestLanguageGrammarAccess extends BaseEPackageAccess imple
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Assignment c00AssignmentEvent = (Assignment)c0Group.eContents().get(0);
-		private final CrossReference c000CrossReferenceEvent = (CrossReference)c00AssignmentEvent.eContents().get(0);
+		private final CrossReference c000CrossReferenceEStringEvent = (CrossReference)c00AssignmentEvent.eContents().get(0);
 		private final Keyword c01KeywordEqualsSignGreaterThanSign = (Keyword)c0Group.eContents().get(1);
 		private final Assignment c1AssignmentState = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference c10CrossReferenceState = (CrossReference)c1AssignmentState.eContents().get(0);
+		private final CrossReference c10CrossReferenceEStringState = (CrossReference)c1AssignmentState.eContents().get(0);
 		
 		// Transition : event = [ Event ] '=>' state = [ State ] ;
 		public ParserRule getRule() { return rule; }
@@ -249,7 +249,7 @@ public class FowlerDslTestLanguageGrammarAccess extends BaseEPackageAccess imple
 		public Assignment ele00AssignmentEvent() { return c00AssignmentEvent; }
 
 		// [ Event ]
-		public CrossReference ele000CrossReferenceEvent() { return c000CrossReferenceEvent; }
+		public CrossReference ele000CrossReferenceEStringEvent() { return c000CrossReferenceEStringEvent; }
 
 		// '=>'
 		public Keyword ele01KeywordEqualsSignGreaterThanSign() { return c01KeywordEqualsSignGreaterThanSign; }
@@ -258,7 +258,7 @@ public class FowlerDslTestLanguageGrammarAccess extends BaseEPackageAccess imple
 		public Assignment ele1AssignmentState() { return c1AssignmentState; }
 
 		// [ State ]
-		public CrossReference ele10CrossReferenceState() { return c10CrossReferenceState; }
+		public CrossReference ele10CrossReferenceEStringState() { return c10CrossReferenceEStringState; }
 	}
 	
 	public final static FowlerDslTestLanguageGrammarAccess INSTANCE = new FowlerDslTestLanguageGrammarAccess();

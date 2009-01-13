@@ -180,6 +180,7 @@
                   <type metamodel="//@metamodelDeclarations.0">
                     <type xsi:type="ecore:EClass" href="http://eclipse.org/xtext/reference/ReferenceGrammar#//Erwachsener"/>
                   </type>
+                  <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
                 </terminal>
               </abstractTokens>
             </abstractTokens>
@@ -188,6 +189,7 @@
                 <type metamodel="//@metamodelDeclarations.0">
                   <type xsi:type="ecore:EClass" href="http://eclipse.org/xtext/reference/ReferenceGrammar#//Erwachsener"/>
                 </type>
+                <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
               </terminal>
             </abstractTokens>
           </abstractTokens>
@@ -196,6 +198,7 @@
               <type metamodel="//@metamodelDeclarations.0">
                 <type xsi:type="ecore:EClass" href="http://eclipse.org/xtext/reference/ReferenceGrammar#//Kind"/>
               </type>
+              <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
             </terminal>
           </abstractTokens>
         </abstractTokens>
@@ -206,6 +209,7 @@
               <type metamodel="//@metamodelDeclarations.0">
                 <type xsi:type="ecore:EClass" href="http://eclipse.org/xtext/reference/ReferenceGrammar#//Kind"/>
               </type>
+              <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
             </terminal>
           </abstractTokens>
         </abstractTokens>

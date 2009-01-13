@@ -246,7 +246,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends BaseEPackageAccess 
 		private final RuleCall c0010LexerRuleCallID = (RuleCall)c001AssignmentName.eContents().get(0);
 		private final Keyword c01KeywordExtends = (Keyword)c0Group.eContents().get(1);
 		private final Assignment c1AssignmentExtends = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference c10CrossReferenceType = (CrossReference)c1AssignmentExtends.eContents().get(0);
+		private final CrossReference c10CrossReferenceEStringType = (CrossReference)c1AssignmentExtends.eContents().get(0);
 		
 		// Type : 'type' name = ID 'extends' ^extends = [ Type ] ;
 		public ParserRule getRule() { return rule; }
@@ -276,7 +276,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends BaseEPackageAccess 
 		public Assignment ele1AssignmentExtends() { return c1AssignmentExtends; }
 
 		// [ Type ]
-		public CrossReference ele10CrossReferenceType() { return c10CrossReferenceType; }
+		public CrossReference ele10CrossReferenceEStringType() { return c10CrossReferenceEStringType; }
 	}
 
 	public class Ref2Elements implements IParserRuleAccess {

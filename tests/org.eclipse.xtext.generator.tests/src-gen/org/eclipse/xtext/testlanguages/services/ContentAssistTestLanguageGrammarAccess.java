@@ -165,7 +165,7 @@ public class ContentAssistTestLanguageGrammarAccess extends BaseEPackageAccess i
 	public class AbstractRuleCallElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(5);
 		private final Assignment cAssignmentRule = (Assignment)rule.eContents().get(1);
-		private final CrossReference c0CrossReferenceAbstractRule = (CrossReference)cAssignmentRule.eContents().get(0);
+		private final CrossReference c0CrossReferenceEStringAbstractRule = (CrossReference)cAssignmentRule.eContents().get(0);
 		
 		// AbstractRuleCall : rule = [ AbstractRule ] ;
 		public ParserRule getRule() { return rule; }
@@ -174,7 +174,7 @@ public class ContentAssistTestLanguageGrammarAccess extends BaseEPackageAccess i
 		public Assignment eleAssignmentRule() { return cAssignmentRule; }
 
 		// [ AbstractRule ]
-		public CrossReference ele0CrossReferenceAbstractRule() { return c0CrossReferenceAbstractRule; }
+		public CrossReference ele0CrossReferenceEStringAbstractRule() { return c0CrossReferenceEStringAbstractRule; }
 	}
 	
 	public final static ContentAssistTestLanguageGrammarAccess INSTANCE = new ContentAssistTestLanguageGrammarAccess();

@@ -103,6 +103,7 @@
                   <type metamodel="//@metamodelDeclarations.0">
                     <type xsi:type="ecore:EClass" href="http://example.xtext.org/FowlerDsl#//Command"/>
                   </type>
+                  <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
                 </terminal>
               </abstractTokens>
             </abstractTokens>
@@ -127,6 +128,7 @@
             <type metamodel="//@metamodelDeclarations.0">
               <type xsi:type="ecore:EClass" href="http://example.xtext.org/FowlerDsl#//Event"/>
             </type>
+            <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
           </terminal>
         </abstractTokens>
         <abstractTokens xsi:type="xtext:Keyword" value="=>"/>
@@ -136,6 +138,7 @@
           <type metamodel="//@metamodelDeclarations.0">
             <type xsi:type="ecore:EClass" href="http://example.xtext.org/FowlerDsl#//State"/>
           </type>
+          <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
         </terminal>
       </abstractTokens>
     </alternatives>

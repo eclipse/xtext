@@ -17,16 +17,20 @@ public abstract class AbstractFowlerDslRuntimeConfig extends AbstractServiceRegi
 		return org.eclipse.xtext.example.services.FowlerDslGrammarAccess.class;
 	}
 		
+	protected Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> getIPackratParser() {
+		return org.eclipse.xtext.example.parser.packrat.FowlerDslPackratParser.class;
+	}
+		
 	protected Class<? extends org.eclipse.xtext.parser.IAstFactory> getIAstFactory() {
-		return org.eclipse.xtext.parser.GenericEcoreElementFactory.class;
+		return org.eclipse.xtext.parser.antlr.AntlrEcoreElementFactory.class;
 	}
 		
 	protected Class<? extends org.eclipse.xtext.parser.IParser> getIParser() {
-		return org.eclipse.xtext.example.parser.FowlerDslParser.class;
+		return org.eclipse.xtext.example.parser.antlr.FowlerDslParser.class;
 	}
 		
 	protected Class<? extends org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider> getIAntlrTokenFileProvider() {
-		return org.eclipse.xtext.example.parser.FowlerDslAntlrTokenFileProvider.class;
+		return org.eclipse.xtext.example.parser.antlr.FowlerDslAntlrTokenFileProvider.class;
 	}
 		
 	protected Class<? extends org.eclipse.xtext.resource.IResourceFactory> getIResourceFactory() {
@@ -50,7 +54,7 @@ public abstract class AbstractFowlerDslRuntimeConfig extends AbstractServiceRegi
 	}
 		
 	protected Class<? extends org.eclipse.xtext.parser.antlr.Lexer> getLexer() {
-		return org.eclipse.xtext.example.parser.internal.InternalFowlerDslLexer.class;
+		return org.eclipse.xtext.example.parser.antlr.internal.InternalFowlerDslLexer.class;
 	}
 		
 	
@@ -58,6 +62,7 @@ public abstract class AbstractFowlerDslRuntimeConfig extends AbstractServiceRegi
 		return scope(org.eclipse.xtext.example.IFowlerDsl.SCOPE)
 		.with(org.eclipse.xtext.IMetamodelAccess.class, getIMetamodelAccess())
 		.with(org.eclipse.xtext.IGrammarAccess.class, getIGrammarAccess())
+		.with(org.eclipse.xtext.parser.packrat.IPackratParser.class, getIPackratParser())
 		.with(org.eclipse.xtext.parser.IAstFactory.class, getIAstFactory())
 		.with(org.eclipse.xtext.parser.IParser.class, getIParser())
 		.with(org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider.class, getIAntlrTokenFileProvider())

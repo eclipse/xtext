@@ -17,16 +17,20 @@ public abstract class AbstractTransientValuesTestRuntimeConfig extends AbstractS
 		return org.eclipse.xtext.parsetree.transientvalues.services.TransientValuesTestGrammarAccess.class;
 	}
 		
+	protected Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> getIPackratParser() {
+		return org.eclipse.xtext.parsetree.transientvalues.parser.packrat.TransientValuesTestPackratParser.class;
+	}
+		
 	protected Class<? extends org.eclipse.xtext.parser.IAstFactory> getIAstFactory() {
-		return org.eclipse.xtext.parser.GenericEcoreElementFactory.class;
+		return org.eclipse.xtext.parser.antlr.AntlrEcoreElementFactory.class;
 	}
 		
 	protected Class<? extends org.eclipse.xtext.parser.IParser> getIParser() {
-		return org.eclipse.xtext.parsetree.transientvalues.parser.TransientValuesTestParser.class;
+		return org.eclipse.xtext.parsetree.transientvalues.parser.antlr.TransientValuesTestParser.class;
 	}
 		
 	protected Class<? extends org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider> getIAntlrTokenFileProvider() {
-		return org.eclipse.xtext.parsetree.transientvalues.parser.TransientValuesTestAntlrTokenFileProvider.class;
+		return org.eclipse.xtext.parsetree.transientvalues.parser.antlr.TransientValuesTestAntlrTokenFileProvider.class;
 	}
 		
 	protected Class<? extends org.eclipse.xtext.resource.IResourceFactory> getIResourceFactory() {
@@ -50,7 +54,7 @@ public abstract class AbstractTransientValuesTestRuntimeConfig extends AbstractS
 	}
 		
 	protected Class<? extends org.eclipse.xtext.parser.antlr.Lexer> getLexer() {
-		return org.eclipse.xtext.parsetree.transientvalues.parser.internal.InternalTransientValuesTestLexer.class;
+		return org.eclipse.xtext.parsetree.transientvalues.parser.antlr.internal.InternalTransientValuesTestLexer.class;
 	}
 		
 	
@@ -58,6 +62,7 @@ public abstract class AbstractTransientValuesTestRuntimeConfig extends AbstractS
 		return scope(org.eclipse.xtext.parsetree.transientvalues.ITransientValuesTest.SCOPE)
 		.with(org.eclipse.xtext.IMetamodelAccess.class, getIMetamodelAccess())
 		.with(org.eclipse.xtext.IGrammarAccess.class, getIGrammarAccess())
+		.with(org.eclipse.xtext.parser.packrat.IPackratParser.class, getIPackratParser())
 		.with(org.eclipse.xtext.parser.IAstFactory.class, getIAstFactory())
 		.with(org.eclipse.xtext.parser.IParser.class, getIParser())
 		.with(org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider.class, getIAntlrTokenFileProvider())
