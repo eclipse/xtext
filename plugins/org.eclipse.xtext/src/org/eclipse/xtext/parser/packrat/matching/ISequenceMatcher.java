@@ -5,26 +5,23 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.parser.packrat.characters;
-
+package org.eclipse.xtext.parser.packrat.matching;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class CharacterAlternatives implements ICharacterClass {
+public interface ISequenceMatcher {
 
-	private final ICharacterClass[] classes;
-
-	public CharacterAlternatives(ICharacterClass... classes) {
-		this.classes = classes;
+	boolean matches(CharSequence input, int offset, int length);
+	
+	public static class Factory {
+		public static ISequenceMatcher nullMatcher() {
+			return new ISequenceMatcher() {
+				public boolean matches(CharSequence input, int offset, int length) {
+					return false;
+				}
+			};
+		}
 	}
 	
-	public boolean matches(char candidate) {
-		for (ICharacterClass characterClass: classes) {
-			if (characterClass.matches(candidate))
-				return true;
-		}
-		return false;
-	}
-
 }

@@ -12,11 +12,15 @@ import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+
 import org.eclipse.xtext.parsetree.transientvalues.services.TransientValuesTestGrammarAccess;
 import org.eclipse.xtext.parsetree.transientvalues.services.TransientValuesTestGrammarAccess.TestListElements;
 
+import org.eclipse.xtext.parsetree.transientvalues.parser.packrat.TransientValuesTestDelimiters;
+
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinINTConsumer;
 
+@SuppressWarnings("unused")
 public final class TransientValuesTestTestListConsumer extends NonTerminalConsumer {
 
 	private XtextBuiltinINTConsumer intConsumer;
@@ -27,31 +31,35 @@ public final class TransientValuesTestTestListConsumer extends NonTerminalConsum
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 	}
 	
-	@SuppressWarnings("unused")
 	protected boolean doConsume() throws Exception {
-		GROUP$1SUCCESS: {
-			IMarker mGROUP$1 = mark();
-			GROUP$1FAILURE: {
-				KEYWORD$2SUCCESS: {
-					if (!consumeKeyword(getRule().ele0KeywordList(), null, false, false))
-						break KEYWORD$2SUCCESS;
-					break GROUP$1FAILURE;
-				}
-				mGROUP$1.rollback();
-				break GROUP$1SUCCESS;
-			}
-			GROUP$1FAILURE: {
-				ASSIGNMENT$3SUCCESS: while(true) {
-					ASSIGNMENT$3FAILURE: {
-						if (consumeTerminal(intConsumer, "item", true, false, getRule().ele10LexerRuleCallINT()))
-							break ASSIGNMENT$3FAILURE;
-						break ASSIGNMENT$3SUCCESS;
-					}
-					continue ASSIGNMENT$3SUCCESS;
-				}
-			}
-			return true;
+		return consumeGroup$1();
+	}
+
+	protected boolean consumeGroup$1() throws Exception {
+		final IMarker marker = mark();
+		if (!consumeKeyword$2()) {
+			marker.rollback();
+			return false;
 		}
+		if (!consumeAssignment$3()) {
+			marker.rollback();
+			return false;
+		}
+		return true;
+	}
+
+	protected boolean consumeKeyword$2() throws Exception {
+		return consumeKeyword(getRule().ele0KeywordList(), null, false, false, TransientValuesTestDelimiters.ID_DELIMITER);
+	}
+
+	protected boolean consumeAssignment$3() throws Exception {
+		while(doConsumeAssignment$3()) {}
+		return true;
+	}
+
+	protected boolean doConsumeAssignment$3() throws Exception {
+		if (consumeTerminal(intConsumer, "item", true, false, getRule().ele10LexerRuleCallINT(), TransientValuesTestDelimiters.ALL_KEYWORDS))
+			return true;
 		return false;
 	}
 
@@ -72,5 +80,4 @@ public final class TransientValuesTestTestListConsumer extends NonTerminalConsum
 		this.intConsumer = intConsumer;
 	}
 	
-
 }

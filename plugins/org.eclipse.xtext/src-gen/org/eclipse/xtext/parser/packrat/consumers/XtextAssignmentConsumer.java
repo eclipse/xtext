@@ -12,12 +12,16 @@ import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+
 import org.eclipse.xtext.services.XtextGrammarAccess;
 import org.eclipse.xtext.services.XtextGrammarAccess.AssignmentElements;
+
+import org.eclipse.xtext.parser.packrat.XtextDelimiters;
 
 import org.eclipse.xtext.parser.packrat.consumers.XtextAbstractTerminalConsumer;
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 
+@SuppressWarnings("unused")
 public final class XtextAssignmentConsumer extends NonTerminalConsumer {
 
 	private XtextAbstractTerminalConsumer abstractTerminalConsumer;
@@ -29,63 +33,46 @@ public final class XtextAssignmentConsumer extends NonTerminalConsumer {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 	}
 	
-	@SuppressWarnings("unused")
 	protected boolean doConsume() throws Exception {
-		GROUP$1SUCCESS: {
-			IMarker mGROUP$1 = mark();
-			GROUP$1FAILURE: {
-				GROUP$2SUCCESS: {
-					IMarker mGROUP$2 = mark();
-					GROUP$2FAILURE: {
-						ASSIGNMENT$3SUCCESS: {
-							ASSIGNMENT$3FAILURE: {
-								if (consumeTerminal(idConsumer, "feature", false, false, getRule().ele000LexerRuleCallID()))
-									break ASSIGNMENT$3FAILURE;
-								mGROUP$2.rollback();
-								break ASSIGNMENT$3SUCCESS;
-							}
-							break GROUP$2FAILURE;
-						}
-						mGROUP$2.rollback();
-						break GROUP$2SUCCESS;
-					}
-					GROUP$2FAILURE: {
-						ASSIGNMENT$5SUCCESS: {
-							ASSIGNMENT$5FAILURE: {
-								if (consumeKeyword(getRule().ele01000KeywordPlusSignEqualsSign(), "operator", false, false))
-									break ASSIGNMENT$5FAILURE;
-								if (consumeKeyword(getRule().ele01001KeywordEqualsSign(), "operator", false, false))
-									break ASSIGNMENT$5FAILURE;
-								if (consumeKeyword(getRule().ele0101KeywordQuestionMarkEqualsSign(), "operator", false, false))
-									break ASSIGNMENT$5FAILURE;
-								mGROUP$2.rollback();
-								break ASSIGNMENT$5SUCCESS;
-							}
-							break GROUP$2FAILURE;
-						}
-						mGROUP$2.rollback();
-						break GROUP$2SUCCESS;
-					}
-					break GROUP$1FAILURE;
-				}
-				mGROUP$1.rollback();
-				break GROUP$1SUCCESS;
-			}
-			GROUP$1FAILURE: {
-				ASSIGNMENT$11SUCCESS: {
-					ASSIGNMENT$11FAILURE: {
-						if (consumeNonTerminal(abstractTerminalConsumer, "terminal", false, false , getRule().ele10ParserRuleCallAbstractTerminal()))
-							break ASSIGNMENT$11FAILURE;
-						mGROUP$1.rollback();
-						break ASSIGNMENT$11SUCCESS;
-					}
-					break GROUP$1FAILURE;
-				}
-				mGROUP$1.rollback();
-				break GROUP$1SUCCESS;
-			}
-			return true;
+		return consumeGroup$1();
+	}
+
+	protected boolean consumeGroup$1() throws Exception {
+		final IMarker marker = mark();
+		if (!consumeAssignment$3()) {
+			marker.rollback();
+			return false;
 		}
+		if (!consumeAssignment$5()) {
+			marker.rollback();
+			return false;
+		}
+		if (!consumeAssignment$11()) {
+			marker.rollback();
+			return false;
+		}
+		return true;
+	}
+
+	protected boolean consumeAssignment$3() throws Exception {
+		if (consumeTerminal(idConsumer, "feature", false, false, getRule().ele000LexerRuleCallID(), XtextDelimiters.ALL_KEYWORDS))
+			return true;
+		return false;
+	}
+
+	protected boolean consumeAssignment$5() throws Exception {
+		if (consumeKeyword(getRule().ele01000KeywordPlusSignEqualsSign(), "operator", false, false, XtextDelimiters.ANY_OTHER_DELIMITER))
+			return true;
+		if (consumeKeyword(getRule().ele01001KeywordEqualsSign(), "operator", false, false, XtextDelimiters.ANY_OTHER_DELIMITER))
+			return true;
+		if (consumeKeyword(getRule().ele0101KeywordQuestionMarkEqualsSign(), "operator", false, false, XtextDelimiters.ANY_OTHER_DELIMITER))
+			return true;
+		return false;
+	}
+
+	protected boolean consumeAssignment$11() throws Exception {
+		if (consumeNonTerminal(abstractTerminalConsumer, "terminal", false, false, getRule().ele10ParserRuleCallAbstractTerminal()))
+			return true;
 		return false;
 	}
 
@@ -110,5 +97,4 @@ public final class XtextAssignmentConsumer extends NonTerminalConsumer {
 		this.idConsumer = idConsumer;
 	}
 	
-
 }

@@ -12,11 +12,15 @@ import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+
 import org.eclipse.xtext.parser.datatyperules.services.DatatypeRulesTestLanguageGrammarAccess;
 import org.eclipse.xtext.parser.datatyperules.services.DatatypeRulesTestLanguageGrammarAccess.FractionElements;
 
+import org.eclipse.xtext.parser.datatyperules.parser.packrat.DatatypeRulesTestLanguageDelimiters;
+
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinINTConsumer;
 
+@SuppressWarnings("unused")
 public final class DatatypeRulesTestLanguageFractionConsumer extends NonTerminalConsumer {
 
 	private XtextBuiltinINTConsumer intConsumer;
@@ -27,46 +31,51 @@ public final class DatatypeRulesTestLanguageFractionConsumer extends NonTerminal
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 	}
 	
-	@SuppressWarnings("unused")
 	protected boolean doConsume() throws Exception {
-		GROUP$1SUCCESS: {
-			IMarker mGROUP$1 = mark();
-			GROUP$1FAILURE: {
-				RULECALL$2SUCCESS: {
-					if (!consumeTerminal(intConsumer, null, false, false,  getRule().ele0LexerRuleCallINT()))
-						break RULECALL$2SUCCESS;
-					break GROUP$1FAILURE;
-				}
-				mGROUP$1.rollback();
-				break GROUP$1SUCCESS;
-			}
-			GROUP$1FAILURE: {
-				GROUP$3SUCCESS: {
-					IMarker mGROUP$3 = mark();
-					GROUP$3FAILURE: {
-						KEYWORD$4SUCCESS: {
-							if (!consumeKeyword(getRule().ele10KeywordSolidus(), null, false, false))
-								break KEYWORD$4SUCCESS;
-							break GROUP$3FAILURE;
-						}
-						mGROUP$3.rollback();
-						break GROUP$3SUCCESS;
-					}
-					GROUP$3FAILURE: {
-						RULECALL$5SUCCESS: {
-							if (!consumeTerminal(intConsumer, null, false, false,  getRule().ele11LexerRuleCallINT()))
-								break RULECALL$5SUCCESS;
-							break GROUP$3FAILURE;
-						}
-						mGROUP$3.rollback();
-						break GROUP$3SUCCESS;
-					}
-					break GROUP$1FAILURE;
-				}
-			}
-			return true;
+		return consumeGroup$1();
+	}
+
+	protected boolean consumeGroup$1() throws Exception {
+		final IMarker marker = mark();
+		if (!consumeRuleCall$2()) {
+			marker.rollback();
+			return false;
 		}
-		return false;
+		if (!consumeGroup$3()) {
+			marker.rollback();
+			return false;
+		}
+		return true;
+	}
+
+	protected boolean consumeRuleCall$2() throws Exception {
+		return consumeTerminal(intConsumer, null, false, false, getRule().ele0LexerRuleCallINT(), DatatypeRulesTestLanguageDelimiters.ALL_KEYWORDS);
+	}
+
+	protected boolean consumeGroup$3() throws Exception {
+		doConsumeGroup$3();
+		return true;
+	}
+
+	protected boolean doConsumeGroup$3() throws Exception {
+		final IMarker marker = mark();
+		if (!consumeKeyword$4()) {
+			marker.rollback();
+			return false;
+		}
+		if (!consumeRuleCall$5()) {
+			marker.rollback();
+			return false;
+		}
+		return true;
+	}
+
+	protected boolean consumeKeyword$4() throws Exception {
+		return consumeKeyword(getRule().ele10KeywordSolidus(), null, false, false, DatatypeRulesTestLanguageDelimiters.ANY_OTHER_DELIMITER);
+	}
+
+	protected boolean consumeRuleCall$5() throws Exception {
+		return consumeTerminal(intConsumer, null, false, false, getRule().ele11LexerRuleCallINT(), DatatypeRulesTestLanguageDelimiters.ALL_KEYWORDS);
 	}
 
 	public FractionElements getRule() {
@@ -86,5 +95,4 @@ public final class DatatypeRulesTestLanguageFractionConsumer extends NonTerminal
 		this.intConsumer = intConsumer;
 	}
 	
-
 }

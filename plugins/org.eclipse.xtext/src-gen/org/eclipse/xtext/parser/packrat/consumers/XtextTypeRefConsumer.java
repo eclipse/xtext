@@ -12,11 +12,15 @@ import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+
 import org.eclipse.xtext.services.XtextGrammarAccess;
 import org.eclipse.xtext.services.XtextGrammarAccess.TypeRefElements;
 
+import org.eclipse.xtext.parser.packrat.XtextDelimiters;
+
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 
+@SuppressWarnings("unused")
 public final class XtextTypeRefConsumer extends NonTerminalConsumer {
 
 	private XtextBuiltinIDConsumer idConsumer;
@@ -27,53 +31,54 @@ public final class XtextTypeRefConsumer extends NonTerminalConsumer {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 	}
 	
-	@SuppressWarnings("unused")
 	protected boolean doConsume() throws Exception {
-		GROUP$1SUCCESS: {
-			IMarker mGROUP$1 = mark();
-			GROUP$1FAILURE: {
-				GROUP$2SUCCESS: {
-					IMarker mGROUP$2 = mark();
-					GROUP$2FAILURE: {
-						ASSIGNMENT$3SUCCESS: {
-							ASSIGNMENT$3FAILURE: {
-								if (consumeTerminal(idConsumer, null, false, false, getRule().ele000CrossReferenceEStringAbstractMetamodelDeclaration()))
-									break ASSIGNMENT$3FAILURE;
-								mGROUP$2.rollback();
-								break ASSIGNMENT$3SUCCESS;
-							}
-							break GROUP$2FAILURE;
-						}
-						mGROUP$2.rollback();
-						break GROUP$2SUCCESS;
-					}
-					GROUP$2FAILURE: {
-						KEYWORD$6SUCCESS: {
-							if (!consumeKeyword(getRule().ele01KeywordColonColon(), null, false, false))
-								break KEYWORD$6SUCCESS;
-							break GROUP$2FAILURE;
-						}
-						mGROUP$2.rollback();
-						break GROUP$2SUCCESS;
-					}
-					break GROUP$1FAILURE;
-				}
-			}
-			GROUP$1FAILURE: {
-				ASSIGNMENT$7SUCCESS: {
-					ASSIGNMENT$7FAILURE: {
-						if (consumeTerminal(idConsumer, null, false, false, getRule().ele10CrossReferenceEStringEClassifier()))
-							break ASSIGNMENT$7FAILURE;
-						mGROUP$1.rollback();
-						break ASSIGNMENT$7SUCCESS;
-					}
-					break GROUP$1FAILURE;
-				}
-				mGROUP$1.rollback();
-				break GROUP$1SUCCESS;
-			}
-			return true;
+		return consumeGroup$1();
+	}
+
+	protected boolean consumeGroup$1() throws Exception {
+		final IMarker marker = mark();
+		if (!consumeGroup$2()) {
+			marker.rollback();
+			return false;
 		}
+		if (!consumeAssignment$7()) {
+			marker.rollback();
+			return false;
+		}
+		return true;
+	}
+
+	protected boolean consumeGroup$2() throws Exception {
+		doConsumeGroup$2();
+		return true;
+	}
+
+	protected boolean doConsumeGroup$2() throws Exception {
+		final IMarker marker = mark();
+		if (!consumeAssignment$3()) {
+			marker.rollback();
+			return false;
+		}
+		if (!consumeKeyword$6()) {
+			marker.rollback();
+			return false;
+		}
+		return true;
+	}
+
+	protected boolean consumeAssignment$3() throws Exception {
+		if (consumeTerminal(idConsumer, null, false, false, getRule().ele000CrossReferenceEStringAbstractMetamodelDeclaration(), XtextDelimiters.ALL_KEYWORDS))
+			return true;
+		return false;
+	}
+
+	protected boolean consumeKeyword$6() throws Exception {
+		return consumeKeyword(getRule().ele01KeywordColonColon(), null, false, false, XtextDelimiters.ANY_OTHER_DELIMITER);
+	}
+
+	protected boolean consumeAssignment$7() throws Exception {
+		if (consumeTerminal(idConsumer, null, false, false, getRule().ele10CrossReferenceEStringEClassifier(), XtextDelimiters.ALL_KEYWORDS))
+			return true;
 		return false;
 	}
 
@@ -94,5 +99,4 @@ public final class XtextTypeRefConsumer extends NonTerminalConsumer {
 		this.idConsumer = idConsumer;
 	}
 	
-
 }

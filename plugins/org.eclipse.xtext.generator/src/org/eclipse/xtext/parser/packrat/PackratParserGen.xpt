@@ -20,6 +20,7 @@
 	«EXPAND NonTerminalConsumer::nonTerminalConsumers»
 	«EXPAND parser»
 	«EXPAND parserConfiguration»
+	«EXPAND delimiters»
 «ENDDEFINE»
 
 «DEFINE parser FOR GenService»
@@ -194,10 +195,36 @@ public class «languageName().toFirstUpper()»ParserConfiguration extends Abstract
     	return get«superGrammar.getName().replaceAll("\\s","_").toFirstUpper()»Configuration().getRootConsumer$();
     }
 «ENDIF-»
-«ENDIF»
+«ENDIF-»
 
 «ENDFOREACH-»
 «ENDLET-»
+
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE delimiters FOR GenService»
+«FILE (genClassFQName.toJavaPackage() + "." + languageName() + "Delimiters").toJavaFilePath() SRC_GEN-»
+/*
+«fileHeader()»
+*/
+package «genClassFQName.toJavaPackage()»;
+
+import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
+import org.eclipse.xtext.parser.packrat.matching.SetBasedKeywordMatcher;
+
+import «grammar().grammarAccess()»;
+
+public class «languageName()»Delimiters {
+
+	public static ICharacterClass ID_DELIMITER = XtextBuiltinIDConsumer.IDConsumer$$2;
+	
+	public static ICharacterClass ANY_OTHER_DELIMITER = ICharacterClass.Factory.nullClass();
+	
+	public static ISequenceMatcher ALL_KEYWORDS = new SetBasedKeywordMatcher(«grammar().grammarAccess().toSimpleName()».INSTANCE.getGrammar());
 
 }
 «ENDFILE»

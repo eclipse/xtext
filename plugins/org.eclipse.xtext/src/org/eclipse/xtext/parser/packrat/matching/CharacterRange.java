@@ -5,22 +5,25 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.parser.packrat.characters;
+package org.eclipse.xtext.parser.packrat.matching;
 
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class SingleCharacter implements ICharacterClass {
+public class CharacterRange implements ICharacterClass {
 
-	private char c;
-
-	public SingleCharacter(char c) {
-		this.c = c;
+	private final char min;
+	
+	private final char max;
+	
+	public CharacterRange(char min, char max) {
+		this.min = min;
+		this.max = max;
 	}
 	
 	public boolean matches(char candidate) {
-		return candidate == c;
+		return this.min <= candidate && this.max >= candidate;
 	}
 
 }

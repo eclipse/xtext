@@ -12,11 +12,15 @@ import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+
 import org.eclipse.xtext.resource.metamodel.services.MultiValueFeatureTestLanguageGrammarAccess;
 import org.eclipse.xtext.resource.metamodel.services.MultiValueFeatureTestLanguageGrammarAccess.StartElements;
 
+import org.eclipse.xtext.resource.metamodel.parser.packrat.MultiValueFeatureTestLanguageDelimiters;
+
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 
+@SuppressWarnings("unused")
 public final class MultiValueFeatureTestLanguageStartConsumer extends NonTerminalConsumer {
 
 	private XtextBuiltinIDConsumer idConsumer;
@@ -27,16 +31,21 @@ public final class MultiValueFeatureTestLanguageStartConsumer extends NonTermina
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 	}
 	
-	@SuppressWarnings("unused")
 	protected boolean doConsume() throws Exception {
-		ASSIGNMENT$1SUCCESS: {
-			ASSIGNMENT$1FAILURE: {
-				if (!consumeTerminal(idConsumer, "featureA", true, false, getRule().ele0LexerRuleCallID()))
-					break ASSIGNMENT$1SUCCESS;
-				while(consumeTerminal(idConsumer, "featureA", true, false, getRule().ele0LexerRuleCallID()));
-			}
+		return consumeAssignment$1();
+	}
+
+	protected boolean consumeAssignment$1() throws Exception {
+		if (doConsumeAssignment$1()) {
+			while(doConsumeAssignment$1()) {}
 			return true;
 		}
+		return false;
+	}
+
+	protected boolean doConsumeAssignment$1() throws Exception {
+		if (consumeTerminal(idConsumer, "featureA", true, false, getRule().ele0LexerRuleCallID(), MultiValueFeatureTestLanguageDelimiters.ALL_KEYWORDS))
+			return true;
 		return false;
 	}
 
@@ -57,5 +66,4 @@ public final class MultiValueFeatureTestLanguageStartConsumer extends NonTermina
 		this.idConsumer = idConsumer;
 	}
 	
-
 }

@@ -5,25 +5,26 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.parser.packrat.characters;
+package org.eclipse.xtext.parser.packrat.matching;
 
+import java.util.Set;
+
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class CharacterRange implements ICharacterClass {
+public class SetBasedKeywordMatcher implements ISequenceMatcher {
 
-	private final char min;
+	private final Set<String> keywords;
 	
-	private final char max;
-	
-	public CharacterRange(char min, char max) {
-		this.min = min;
-		this.max = max;
+	public SetBasedKeywordMatcher(Grammar grammar) {
+		keywords = GrammarUtil.getAllKeywords(grammar);
 	}
 	
-	public boolean matches(char candidate) {
-		return this.min <= candidate && this.max >= candidate;
+	public boolean matches(CharSequence input, int offset, int length) {
+		return keywords.contains(input.subSequence(offset, offset + length).toString());
 	}
 
 }

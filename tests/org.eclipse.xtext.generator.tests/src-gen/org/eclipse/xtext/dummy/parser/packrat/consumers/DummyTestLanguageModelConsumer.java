@@ -12,11 +12,15 @@ import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+
 import org.eclipse.xtext.dummy.services.DummyTestLanguageGrammarAccess;
 import org.eclipse.xtext.dummy.services.DummyTestLanguageGrammarAccess.ModelElements;
 
+import org.eclipse.xtext.dummy.parser.packrat.DummyTestLanguageDelimiters;
+
 import org.eclipse.xtext.dummy.parser.packrat.consumers.DummyTestLanguageElementConsumer;
 
+@SuppressWarnings("unused")
 public final class DummyTestLanguageModelConsumer extends NonTerminalConsumer {
 
 	private DummyTestLanguageElementConsumer elementConsumer;
@@ -27,17 +31,19 @@ public final class DummyTestLanguageModelConsumer extends NonTerminalConsumer {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 	}
 	
-	@SuppressWarnings("unused")
 	protected boolean doConsume() throws Exception {
-		ASSIGNMENT$1SUCCESS: while(true) {
-			ASSIGNMENT$1FAILURE: {
-				if (consumeNonTerminal(elementConsumer, "elements", true, false , getRule().ele0ParserRuleCallElement()))
-					break ASSIGNMENT$1FAILURE;
-				break ASSIGNMENT$1SUCCESS;
-			}
-			continue ASSIGNMENT$1SUCCESS;
-		}
+		return consumeAssignment$1();
+	}
+
+	protected boolean consumeAssignment$1() throws Exception {
+		while(doConsumeAssignment$1()) {}
 		return true;
+	}
+
+	protected boolean doConsumeAssignment$1() throws Exception {
+		if (consumeNonTerminal(elementConsumer, "elements", true, false, getRule().ele0ParserRuleCallElement()))
+			return true;
+		return false;
 	}
 
 	public ModelElements getRule() {
@@ -57,5 +63,4 @@ public final class DummyTestLanguageModelConsumer extends NonTerminalConsumer {
 		this.elementConsumer = elementConsumer;
 	}
 	
-
 }

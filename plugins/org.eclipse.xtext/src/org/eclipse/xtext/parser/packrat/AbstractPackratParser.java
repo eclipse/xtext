@@ -15,8 +15,11 @@ import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.ParseResult;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.IRootConsumerListener;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.KeywordConsumer;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.AbstractParsedToken;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedAction;
@@ -136,13 +139,22 @@ public abstract class AbstractPackratParser implements
 	
 	public final IParseResult parse(CharSequence input, INonTerminalConsumer consumer) {
 		this.input = input;
+		this.offset = 0;
 		this.tokenSequence.clear();
 		return parse(consumer);
 	}
 
+	private class RootConsumerListener implements IRootConsumerListener {
+		public boolean beforeNonTerminalEnd(INonTerminalConsumer nonTerminalConsumer) {
+			consumeHiddens();
+			return offset == input.length();
+		}
+	}
+	
 	protected final IParseResult parse(INonTerminalConsumer consumer) {
 		try {
-			if (consumer.consume(null, false, false, null)) {
+			IRootConsumerListener listener = new RootConsumerListener();
+			if (consumer.consumeAsRoot(listener)) {
 				return getParseResultFactory().createParseResult(tokenSequence);
 			}
 		} catch(Exception e) {
@@ -160,7 +172,7 @@ public abstract class AbstractPackratParser implements
 		while(anySuccess) {
 			anySuccess = false;
 			for (ITerminalConsumer consumer: hiddens) {
-				if (consumer.consume(null, false, false, null)) {
+				if (consumer.consume(null, false, false, null, ISequenceMatcher.Factory.nullMatcher())) {
 					anySuccess = true;
 					break;
 				}
@@ -176,15 +188,15 @@ public abstract class AbstractPackratParser implements
 		this.offset = position;
 	}
 	
-	public boolean consumeKeyword(Keyword keyword, String feature, boolean isMany, boolean isBoolean) {
-		keywordConsumer.setKeyword(keyword);
-		return consumeTerminal(keywordConsumer, feature, isMany, isBoolean, keyword);
+	public boolean consumeKeyword(Keyword keyword, String feature, boolean isMany, boolean isBoolean, ICharacterClass notFollowedBy) {
+		keywordConsumer.configure(keyword, notFollowedBy);
+		return consumeTerminal(keywordConsumer, feature, isMany, isBoolean, keyword, ISequenceMatcher.Factory.nullMatcher());
 	}
 	
-	public boolean consumeTerminal(ITerminalConsumer consumer, String feature, boolean isMany, boolean isBoolean, AbstractElement grammarElement) {
+	public boolean consumeTerminal(ITerminalConsumer consumer, String feature, boolean isMany, boolean isBoolean, AbstractElement grammarElement, ISequenceMatcher notMatching) {
 		IMarker marker = mark();
 		consumeHiddens();
-		if (consumer.consume(feature, isMany, isBoolean, grammarElement)) {
+		if (consumer.consume(feature, isMany, isBoolean, grammarElement, notMatching != null ? notMatching : ISequenceMatcher.Factory.nullMatcher())) {
 			return true;
 		} else marker.rollback();
 		return false;

@@ -12,13 +12,17 @@ import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+
 import org.eclipse.xtext.services.XtextGrammarAccess;
 import org.eclipse.xtext.services.XtextGrammarAccess.AbstractTokenElements;
+
+import org.eclipse.xtext.parser.packrat.XtextDelimiters;
 
 import org.eclipse.xtext.parser.packrat.consumers.XtextAbstractTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextAssignmentConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextActionConsumer;
 
+@SuppressWarnings("unused")
 public final class XtextAbstractTokenConsumer extends NonTerminalConsumer {
 
 	private XtextAbstractTerminalConsumer abstractTerminalConsumer;
@@ -31,58 +35,57 @@ public final class XtextAbstractTokenConsumer extends NonTerminalConsumer {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 	}
 	
-	@SuppressWarnings("unused")
 	protected boolean doConsume() throws Exception {
-		GROUP$1SUCCESS: {
-			IMarker mGROUP$1 = mark();
-			GROUP$1FAILURE: {
-				ALTERNATIVES$2SUCCESS: {
-					ALTERNATIVES$2FAILURE: {
-						ALTERNATIVES$3SUCCESS: {
-							ALTERNATIVES$3FAILURE: {
-								RULECALL$4SUCCESS: {
-									if (!consumeNonTerminal(assignmentConsumer, null, false, false,  getRule().ele000ParserRuleCallAssignment()))
-										break RULECALL$4SUCCESS;
-									break ALTERNATIVES$3FAILURE;
-								}
-								RULECALL$5SUCCESS: {
-									if (!consumeNonTerminal(actionConsumer, null, false, false,  getRule().ele001ParserRuleCallAction()))
-										break RULECALL$5SUCCESS;
-									break ALTERNATIVES$3FAILURE;
-								}
-								break ALTERNATIVES$3SUCCESS;
-							}
-							break ALTERNATIVES$2FAILURE;
-						}
-						RULECALL$6SUCCESS: {
-							if (!consumeNonTerminal(abstractTerminalConsumer, null, false, false,  getRule().ele01ParserRuleCallAbstractTerminal()))
-								break RULECALL$6SUCCESS;
-							break ALTERNATIVES$2FAILURE;
-						}
-						mGROUP$1.rollback();
-						break ALTERNATIVES$2SUCCESS;
-					}
-					break GROUP$1FAILURE;
-				}
-				mGROUP$1.rollback();
-				break GROUP$1SUCCESS;
-			}
-			GROUP$1FAILURE: {
-				ASSIGNMENT$7SUCCESS: {
-					ASSIGNMENT$7FAILURE: {
-						if (consumeKeyword(getRule().ele1000KeywordQuestionMark(), "cardinality", false, false))
-							break ASSIGNMENT$7FAILURE;
-						if (consumeKeyword(getRule().ele1001KeywordAsterisk(), "cardinality", false, false))
-							break ASSIGNMENT$7FAILURE;
-						if (consumeKeyword(getRule().ele101KeywordPlusSign(), "cardinality", false, false))
-							break ASSIGNMENT$7FAILURE;
-						break ASSIGNMENT$7SUCCESS;
-					}
-					break GROUP$1FAILURE;
-				}
-			}
-			return true;
+		return consumeGroup$1();
+	}
+
+	protected boolean consumeGroup$1() throws Exception {
+		final IMarker marker = mark();
+		if (!consumeAlternatives$2()) {
+			marker.rollback();
+			return false;
 		}
+		if (!consumeAssignment$7()) {
+			marker.rollback();
+			return false;
+		}
+		return true;
+	}
+
+	protected boolean consumeAlternatives$2() throws Exception {
+		if (consumeRuleCall$4())
+			return true;
+		if (consumeRuleCall$5())
+			return true;
+		if (consumeRuleCall$6())
+			return true;
+		return false;
+	}
+
+	protected boolean consumeRuleCall$4() throws Exception {
+		return consumeNonTerminal(assignmentConsumer, null, false, false, getRule().ele000ParserRuleCallAssignment());
+	}
+
+	protected boolean consumeRuleCall$5() throws Exception {
+		return consumeNonTerminal(actionConsumer, null, false, false, getRule().ele001ParserRuleCallAction());
+	}
+
+	protected boolean consumeRuleCall$6() throws Exception {
+		return consumeNonTerminal(abstractTerminalConsumer, null, false, false, getRule().ele01ParserRuleCallAbstractTerminal());
+	}
+
+	protected boolean consumeAssignment$7() throws Exception {
+		doConsumeAssignment$7();
+		return true;
+	}
+
+	protected boolean doConsumeAssignment$7() throws Exception {
+		if (consumeKeyword(getRule().ele1000KeywordQuestionMark(), "cardinality", false, false, XtextDelimiters.ANY_OTHER_DELIMITER))
+			return true;
+		if (consumeKeyword(getRule().ele1001KeywordAsterisk(), "cardinality", false, false, XtextDelimiters.ANY_OTHER_DELIMITER))
+			return true;
+		if (consumeKeyword(getRule().ele101KeywordPlusSign(), "cardinality", false, false, XtextDelimiters.ANY_OTHER_DELIMITER))
+			return true;
 		return false;
 	}
 
@@ -111,5 +114,4 @@ public final class XtextAbstractTokenConsumer extends NonTerminalConsumer {
 		this.actionConsumer = actionConsumer;
 	}
 	
-
 }

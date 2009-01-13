@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.parser.packrat.characters;
+package org.eclipse.xtext.parser.packrat.matching;
 
 
 /**
@@ -16,6 +16,14 @@ public interface ICharacterClass {
 	boolean matches(char candidate);
 	
 	public class Factory {
+		public static ICharacterClass nullClass() {
+			return new ICharacterClass() {
+				public boolean matches(char candidate) {
+					return false;
+				}
+			};
+		}
+		
 		public static ICharacterClass create(char... characters) {
 			if (characters.length == 1)
 				return new SingleCharacter(characters[0]);

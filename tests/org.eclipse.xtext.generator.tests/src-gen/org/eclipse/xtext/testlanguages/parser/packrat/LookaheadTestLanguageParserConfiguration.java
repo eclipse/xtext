@@ -85,9 +85,9 @@ public class LookaheadTestLanguageParserConfiguration extends AbstractParserConf
 	public void configureConsumers() {
 		getEntryConsumer().setAltsConsumer(getAltsConsumer());
 
-		getAltsConsumer().setLookAhead0Consumer(getLookAhead0Consumer());
-		getAltsConsumer().setLookAhead1Consumer(getLookAhead1Consumer());
 		getAltsConsumer().setLookAhead3Consumer(getLookAhead3Consumer());
+		getAltsConsumer().setLookAhead1Consumer(getLookAhead1Consumer());
+		getAltsConsumer().setLookAhead0Consumer(getLookAhead0Consumer());
 
 		getLookAhead1Consumer().setLookAhead2Consumer(getLookAhead2Consumer());
 
@@ -111,71 +111,57 @@ public class LookaheadTestLanguageParserConfiguration extends AbstractParserConf
     	return entryConsumer;
     }
 
-
     public LookaheadTestLanguageAltsConsumer getAltsConsumer() {
     	return altsConsumer;
     }
-
 
     public LookaheadTestLanguageLookAhead0Consumer getLookAhead0Consumer() {
     	return lookAhead0Consumer;
     }
 
-
     public LookaheadTestLanguageLookAhead1Consumer getLookAhead1Consumer() {
     	return lookAhead1Consumer;
     }
-
 
     public LookaheadTestLanguageLookAhead2Consumer getLookAhead2Consumer() {
     	return lookAhead2Consumer;
     }
 
-
     public LookaheadTestLanguageLookAhead3Consumer getLookAhead3Consumer() {
     	return lookAhead3Consumer;
     }
-
 
     public LookaheadTestLanguageLookAhead4Consumer getLookAhead4Consumer() {
     	return lookAhead4Consumer;
     }
 
-
     public XtextBuiltinIDConsumer getIdConsumer() {
     	return getXtextBuiltinConfiguration().getIdConsumer();
     }
-
 
     public XtextBuiltinINTConsumer getIntConsumer() {
     	return getXtextBuiltinConfiguration().getIntConsumer();
     }
 
-
     public XtextBuiltinSTRINGConsumer getStringConsumer() {
     	return getXtextBuiltinConfiguration().getStringConsumer();
     }
-
 
     public XtextBuiltinML_COMMENTConsumer getMlCommentConsumer() {
     	return getXtextBuiltinConfiguration().getMlCommentConsumer();
     }
 
-
     public XtextBuiltinSL_COMMENTConsumer getSlCommentConsumer() {
     	return getXtextBuiltinConfiguration().getSlCommentConsumer();
     }
-
 
     public XtextBuiltinWSConsumer getWsConsumer() {
     	return getXtextBuiltinConfiguration().getWsConsumer();
     }
 
-
     public XtextBuiltinANY_OTHERConsumer getAnyOtherConsumer() {
     	return getXtextBuiltinConfiguration().getAnyOtherConsumer();
     }
-
 
 
 }

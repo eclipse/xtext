@@ -9,12 +9,12 @@ package org.eclipse.xtext.parser.packrat.consumers;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory;
 import org.eclipse.xtext.parser.packrat.IParserConfiguration;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
-import org.eclipse.xtext.parser.packrat.characters.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedTerminal;
 import org.eclipse.xtext.util.Strings;
@@ -35,20 +35,19 @@ public abstract class TerminalConsumer implements ITerminalConsumer {
 		this.acceptor = tokenAcceptor;
 	}
 
-	public final boolean consume(String feature, boolean isMany, boolean isBoolean, AbstractElement element) {
+	public final boolean consume(String feature, boolean isMany, boolean isBoolean, AbstractElement element, ISequenceMatcher notMatching) {
 		int prevOffset = input.getOffset();
 		boolean result = doConsume();
+		if (notMatching.matches(input, prevOffset, input.getOffset()- prevOffset))
+			return false;
 		if (result) {
 			acceptor.accept(new ParsedTerminal(input, prevOffset, input.getOffset()-prevOffset, 
 					element != null ? element : getGrammarElement(), feature, isHidden(), isMany, isBoolean, getLexerRuleName()));
 		}
-//		else {
-//			input.setOffset(prevOffset);
-//		}
 		return result;
 	}
 	
-	public final boolean consume() {
+	public final boolean consume(ISequenceMatcher notMatching) {
 		int prevOffset = input.getOffset();
 		boolean result = doConsume();
 		if (!result) {
@@ -89,6 +88,11 @@ public abstract class TerminalConsumer implements ITerminalConsumer {
 			return true;
 		}
 		return false;
+	}
+	
+	protected boolean peekChar(ICharacterClass characterClass) {
+		if (eof()) return false;
+		return characterClass.matches(input.charAt(input.getOffset()));
 	}
 	
 	protected boolean readCharBetween(char min, char max) {

@@ -62,8 +62,8 @@ public class LexerTestLanguageParserConfiguration extends AbstractParserConfigur
 	public void configureConsumers() {
 		getModelConsumer().setElementConsumer(getElementConsumer());
 
-		getElementConsumer().setIdConsumer(getIdConsumer());
 		getElementConsumer().setStringConsumer(getStringConsumer());
+		getElementConsumer().setIdConsumer(getIdConsumer());
 
 		getStringConsumer().initFields(this);
 		getIdConsumer().initFields(this);
@@ -83,46 +83,37 @@ public class LexerTestLanguageParserConfiguration extends AbstractParserConfigur
     	return modelConsumer;
     }
 
-
     public LexerTestLanguageElementConsumer getElementConsumer() {
     	return elementConsumer;
     }
-
 
     public LexerTestLanguageSTRINGConsumer getStringConsumer() {
     	return stringConsumer;
     }
 
-
     public XtextBuiltinIDConsumer getIdConsumer() {
     	return getXtextBuiltinConfiguration().getIdConsumer();
     }
-
 
     public XtextBuiltinINTConsumer getIntConsumer() {
     	return getXtextBuiltinConfiguration().getIntConsumer();
     }
 
-
     public XtextBuiltinML_COMMENTConsumer getMlCommentConsumer() {
     	return getXtextBuiltinConfiguration().getMlCommentConsumer();
     }
-
 
     public XtextBuiltinSL_COMMENTConsumer getSlCommentConsumer() {
     	return getXtextBuiltinConfiguration().getSlCommentConsumer();
     }
 
-
     public XtextBuiltinWSConsumer getWsConsumer() {
     	return getXtextBuiltinConfiguration().getWsConsumer();
     }
 
-
     public XtextBuiltinANY_OTHERConsumer getAnyOtherConsumer() {
     	return getXtextBuiltinConfiguration().getAnyOtherConsumer();
     }
-
 
 
 }

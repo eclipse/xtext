@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g 2009-01-13 09:48:39
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g 2009-01-13 18:38:45
 
 package org.eclipse.xtext.parser.datatyperules.parser.antlr.internal; 
 

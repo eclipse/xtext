@@ -9,15 +9,17 @@ package org.eclipse.xtext.parser.packrat.consumers;
 
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public interface IConsumerUtility {
 
-	boolean consumeKeyword(Keyword keyword, String feature, boolean isMany, boolean isBoolean);
+	boolean consumeKeyword(Keyword keyword, String feature, boolean isMany, boolean isBoolean, ICharacterClass notFolledBy);
 	
-	boolean consumeTerminal(ITerminalConsumer consumer, String feature, boolean isMany, boolean isBoolean, AbstractElement grammarElement);
+	boolean consumeTerminal(ITerminalConsumer consumer, String feature, boolean isMany, boolean isBoolean, AbstractElement grammarElement, ISequenceMatcher notMatching);
 	
 	boolean consumeNonTerminal(INonTerminalConsumer consumer, String feature, boolean isMany, boolean isDatatype, AbstractElement grammarElement) throws Exception;
 	

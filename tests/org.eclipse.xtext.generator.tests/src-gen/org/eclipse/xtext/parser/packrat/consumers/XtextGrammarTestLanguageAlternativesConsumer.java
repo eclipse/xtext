@@ -12,11 +12,15 @@ import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+
 import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess;
 import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess.AlternativesElements;
 
+import org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters;
+
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageGroupConsumer;
 
+@SuppressWarnings("unused")
 public final class XtextGrammarTestLanguageAlternativesConsumer extends NonTerminalConsumer {
 
 	private XtextGrammarTestLanguageGroupConsumer groupConsumer;
@@ -27,63 +31,60 @@ public final class XtextGrammarTestLanguageAlternativesConsumer extends NonTermi
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 	}
 	
-	@SuppressWarnings("unused")
 	protected boolean doConsume() throws Exception {
-		GROUP$1SUCCESS: {
-			IMarker mGROUP$1 = mark();
-			GROUP$1FAILURE: {
-				RULECALL$2SUCCESS: {
-					if (!consumeNonTerminal(groupConsumer, null, false, false,  getRule().ele0ParserRuleCallGroup()))
-						break RULECALL$2SUCCESS;
-					break GROUP$1FAILURE;
-				}
-				mGROUP$1.rollback();
-				break GROUP$1SUCCESS;
-			}
-			GROUP$1FAILURE: {
-				GROUP$3SUCCESS: while(true) {
-					IMarker mGROUP$3 = mark();
-					GROUP$3FAILURE: {
-						GROUP$4SUCCESS: {
-							IMarker mGROUP$4 = mark();
-							GROUP$4FAILURE: {
-								ACTION$5SUCCESS: {
-									consumeAction("Alternatives", "groups", true);
-									break GROUP$4FAILURE;
-								}
-							}
-							GROUP$4FAILURE: {
-								KEYWORD$7SUCCESS: {
-									if (!consumeKeyword(getRule().ele101KeywordVerticalLine(), null, false, false))
-										break KEYWORD$7SUCCESS;
-									break GROUP$4FAILURE;
-								}
-								mGROUP$4.rollback();
-								break GROUP$4SUCCESS;
-							}
-							break GROUP$3FAILURE;
-						}
-						mGROUP$3.rollback();
-						break GROUP$3SUCCESS;
-					}
-					GROUP$3FAILURE: {
-						ASSIGNMENT$8SUCCESS: {
-							ASSIGNMENT$8FAILURE: {
-								if (consumeNonTerminal(groupConsumer, "groups", true, false , getRule().ele110ParserRuleCallGroup()))
-									break ASSIGNMENT$8FAILURE;
-								mGROUP$3.rollback();
-								break ASSIGNMENT$8SUCCESS;
-							}
-							break GROUP$3FAILURE;
-						}
-						mGROUP$3.rollback();
-						break GROUP$3SUCCESS;
-					}
-					continue GROUP$3SUCCESS;
-				}
-			}
-			return true;
+		return consumeGroup$1();
+	}
+
+	protected boolean consumeGroup$1() throws Exception {
+		final IMarker marker = mark();
+		if (!consumeRuleCall$2()) {
+			marker.rollback();
+			return false;
 		}
+		if (!consumeGroup$3()) {
+			marker.rollback();
+			return false;
+		}
+		return true;
+	}
+
+	protected boolean consumeRuleCall$2() throws Exception {
+		return consumeNonTerminal(groupConsumer, null, false, false, getRule().ele0ParserRuleCallGroup());
+	}
+
+	protected boolean consumeGroup$3() throws Exception {
+		while(doConsumeGroup$3()) {}
+		return true;
+	}
+
+	protected boolean doConsumeGroup$3() throws Exception {
+		final IMarker marker = mark();
+		if (!consumeAction$5()) {
+			marker.rollback();
+			return false;
+		}
+		if (!consumeKeyword$7()) {
+			marker.rollback();
+			return false;
+		}
+		if (!consumeAssignment$8()) {
+			marker.rollback();
+			return false;
+		}
+		return true;
+	}
+	protected boolean consumeAction$5() {
+		consumeAction("Alternatives", "groups", true);
+		return true;	
+	}
+
+	protected boolean consumeKeyword$7() throws Exception {
+		return consumeKeyword(getRule().ele101KeywordVerticalLine(), null, false, false, XtextGrammarTestLanguageDelimiters.ANY_OTHER_DELIMITER);
+	}
+
+	protected boolean consumeAssignment$8() throws Exception {
+		if (consumeNonTerminal(groupConsumer, "groups", true, false, getRule().ele110ParserRuleCallGroup()))
+			return true;
 		return false;
 	}
 
@@ -104,5 +105,4 @@ public final class XtextGrammarTestLanguageAlternativesConsumer extends NonTermi
 		this.groupConsumer = groupConsumer;
 	}
 	
-
 }

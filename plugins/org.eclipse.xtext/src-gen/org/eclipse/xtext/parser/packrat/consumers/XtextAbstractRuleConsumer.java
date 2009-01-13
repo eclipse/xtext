@@ -12,12 +12,16 @@ import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+
 import org.eclipse.xtext.services.XtextGrammarAccess;
 import org.eclipse.xtext.services.XtextGrammarAccess.AbstractRuleElements;
+
+import org.eclipse.xtext.parser.packrat.XtextDelimiters;
 
 import org.eclipse.xtext.parser.packrat.consumers.XtextLexerRuleConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextParserRuleConsumer;
 
+@SuppressWarnings("unused")
 public final class XtextAbstractRuleConsumer extends NonTerminalConsumer {
 
 	private XtextLexerRuleConsumer lexerRuleConsumer;
@@ -29,25 +33,24 @@ public final class XtextAbstractRuleConsumer extends NonTerminalConsumer {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 	}
 	
-	@SuppressWarnings("unused")
 	protected boolean doConsume() throws Exception {
-		ALTERNATIVES$1SUCCESS: {
-			ALTERNATIVES$1FAILURE: {
-				RULECALL$2SUCCESS: {
-					if (!consumeNonTerminal(lexerRuleConsumer, null, false, false,  getRule().ele0ParserRuleCallLexerRule()))
-						break RULECALL$2SUCCESS;
-					break ALTERNATIVES$1FAILURE;
-				}
-				RULECALL$3SUCCESS: {
-					if (!consumeNonTerminal(parserRuleConsumer, null, false, false,  getRule().ele1ParserRuleCallParserRule()))
-						break RULECALL$3SUCCESS;
-					break ALTERNATIVES$1FAILURE;
-				}
-				break ALTERNATIVES$1SUCCESS;
-			}
+		return consumeAlternatives$1();
+	}
+
+	protected boolean consumeAlternatives$1() throws Exception {
+		if (consumeRuleCall$2())
 			return true;
-		}
+		if (consumeRuleCall$3())
+			return true;
 		return false;
+	}
+
+	protected boolean consumeRuleCall$2() throws Exception {
+		return consumeNonTerminal(lexerRuleConsumer, null, false, false, getRule().ele0ParserRuleCallLexerRule());
+	}
+
+	protected boolean consumeRuleCall$3() throws Exception {
+		return consumeNonTerminal(parserRuleConsumer, null, false, false, getRule().ele1ParserRuleCallParserRule());
 	}
 
 	public AbstractRuleElements getRule() {
@@ -71,5 +74,4 @@ public final class XtextAbstractRuleConsumer extends NonTerminalConsumer {
 		this.parserRuleConsumer = parserRuleConsumer;
 	}
 	
-
 }

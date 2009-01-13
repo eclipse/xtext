@@ -12,11 +12,15 @@ import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+
 import org.eclipse.xtext.crossrefs.services.ImportUriTestLanguageGrammarAccess;
 import org.eclipse.xtext.crossrefs.services.ImportUriTestLanguageGrammarAccess.ImportElements;
 
+import org.eclipse.xtext.crossrefs.parser.packrat.ImportUriTestLanguageDelimiters;
+
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGConsumer;
 
+@SuppressWarnings("unused")
 public final class ImportUriTestLanguageImportConsumer extends NonTerminalConsumer {
 
 	private XtextBuiltinSTRINGConsumer stringConsumer;
@@ -27,34 +31,30 @@ public final class ImportUriTestLanguageImportConsumer extends NonTerminalConsum
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 	}
 	
-	@SuppressWarnings("unused")
 	protected boolean doConsume() throws Exception {
-		GROUP$1SUCCESS: {
-			IMarker mGROUP$1 = mark();
-			GROUP$1FAILURE: {
-				KEYWORD$2SUCCESS: {
-					if (!consumeKeyword(getRule().ele0KeywordImport(), null, false, false))
-						break KEYWORD$2SUCCESS;
-					break GROUP$1FAILURE;
-				}
-				mGROUP$1.rollback();
-				break GROUP$1SUCCESS;
-			}
-			GROUP$1FAILURE: {
-				ASSIGNMENT$3SUCCESS: {
-					ASSIGNMENT$3FAILURE: {
-						if (consumeTerminal(stringConsumer, "importURI", false, false, getRule().ele10LexerRuleCallSTRING()))
-							break ASSIGNMENT$3FAILURE;
-						mGROUP$1.rollback();
-						break ASSIGNMENT$3SUCCESS;
-					}
-					break GROUP$1FAILURE;
-				}
-				mGROUP$1.rollback();
-				break GROUP$1SUCCESS;
-			}
-			return true;
+		return consumeGroup$1();
+	}
+
+	protected boolean consumeGroup$1() throws Exception {
+		final IMarker marker = mark();
+		if (!consumeKeyword$2()) {
+			marker.rollback();
+			return false;
 		}
+		if (!consumeAssignment$3()) {
+			marker.rollback();
+			return false;
+		}
+		return true;
+	}
+
+	protected boolean consumeKeyword$2() throws Exception {
+		return consumeKeyword(getRule().ele0KeywordImport(), null, false, false, ImportUriTestLanguageDelimiters.ID_DELIMITER);
+	}
+
+	protected boolean consumeAssignment$3() throws Exception {
+		if (consumeTerminal(stringConsumer, "importURI", false, false, getRule().ele10LexerRuleCallSTRING(), ImportUriTestLanguageDelimiters.ALL_KEYWORDS))
+			return true;
 		return false;
 	}
 
@@ -75,5 +75,4 @@ public final class ImportUriTestLanguageImportConsumer extends NonTerminalConsum
 		this.stringConsumer = stringConsumer;
 	}
 	
-
 }

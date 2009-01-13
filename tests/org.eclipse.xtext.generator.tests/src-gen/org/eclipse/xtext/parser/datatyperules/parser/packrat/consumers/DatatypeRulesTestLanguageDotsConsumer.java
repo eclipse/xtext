@@ -12,10 +12,14 @@ import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+
 import org.eclipse.xtext.parser.datatyperules.services.DatatypeRulesTestLanguageGrammarAccess;
 import org.eclipse.xtext.parser.datatyperules.services.DatatypeRulesTestLanguageGrammarAccess.DotsElements;
 
+import org.eclipse.xtext.parser.datatyperules.parser.packrat.DatatypeRulesTestLanguageDelimiters;
 
+
+@SuppressWarnings("unused")
 public final class DatatypeRulesTestLanguageDotsConsumer extends NonTerminalConsumer {
 
 
@@ -25,42 +29,41 @@ public final class DatatypeRulesTestLanguageDotsConsumer extends NonTerminalCons
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 	}
 	
-	@SuppressWarnings("unused")
 	protected boolean doConsume() throws Exception {
-		ALTERNATIVES$1SUCCESS: {
-			ALTERNATIVES$1FAILURE: {
-				GROUP$2SUCCESS: {
-					IMarker mGROUP$2 = mark();
-					GROUP$2FAILURE: {
-						KEYWORD$3SUCCESS: {
-							if (!consumeKeyword(getRule().ele00KeywordFullStop(), null, false, false))
-								break KEYWORD$3SUCCESS;
-							break GROUP$2FAILURE;
-						}
-						mGROUP$2.rollback();
-						break GROUP$2SUCCESS;
-					}
-					GROUP$2FAILURE: {
-						KEYWORD$4SUCCESS: {
-							if (!consumeKeyword(getRule().ele01KeywordFullStop(), null, false, false))
-								break KEYWORD$4SUCCESS;
-							break GROUP$2FAILURE;
-						}
-						mGROUP$2.rollback();
-						break GROUP$2SUCCESS;
-					}
-					break ALTERNATIVES$1FAILURE;
-				}
-				KEYWORD$5SUCCESS: {
-					if (!consumeKeyword(getRule().ele1KeywordFullStopFullStop(), null, false, false))
-						break KEYWORD$5SUCCESS;
-					break ALTERNATIVES$1FAILURE;
-				}
-				break ALTERNATIVES$1SUCCESS;
-			}
+		return consumeAlternatives$1();
+	}
+
+	protected boolean consumeAlternatives$1() throws Exception {
+		if (consumeGroup$2())
 			return true;
-		}
+		if (consumeKeyword$5())
+			return true;
 		return false;
+	}
+
+	protected boolean consumeGroup$2() throws Exception {
+		final IMarker marker = mark();
+		if (!consumeKeyword$3()) {
+			marker.rollback();
+			return false;
+		}
+		if (!consumeKeyword$4()) {
+			marker.rollback();
+			return false;
+		}
+		return true;
+	}
+
+	protected boolean consumeKeyword$3() throws Exception {
+		return consumeKeyword(getRule().ele00KeywordFullStop(), null, false, false, DatatypeRulesTestLanguageDelimiters.ANY_OTHER_DELIMITER);
+	}
+
+	protected boolean consumeKeyword$4() throws Exception {
+		return consumeKeyword(getRule().ele01KeywordFullStop(), null, false, false, DatatypeRulesTestLanguageDelimiters.ANY_OTHER_DELIMITER);
+	}
+
+	protected boolean consumeKeyword$5() throws Exception {
+		return consumeKeyword(getRule().ele1KeywordFullStopFullStop(), null, false, false, DatatypeRulesTestLanguageDelimiters.ANY_OTHER_DELIMITER);
 	}
 
 	public DotsElements getRule() {
@@ -76,5 +79,4 @@ public final class DatatypeRulesTestLanguageDotsConsumer extends NonTerminalCons
 		return "EString";
 	}
 	
-
 }

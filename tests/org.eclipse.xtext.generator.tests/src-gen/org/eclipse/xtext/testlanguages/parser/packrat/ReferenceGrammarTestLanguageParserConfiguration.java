@@ -83,27 +83,27 @@ public class ReferenceGrammarTestLanguageParserConfiguration extends AbstractPar
 	}
 	
 	public void configureConsumers() {
-		getSpielplatzConsumer().setIntConsumer(getIntConsumer());
-		getSpielplatzConsumer().setStringConsumer(getStringConsumer());
 		getSpielplatzConsumer().setFamilieConsumer(getFamilieConsumer());
+		getSpielplatzConsumer().setKindConsumer(getKindConsumer());
 		getSpielplatzConsumer().setSpielzeugConsumer(getSpielzeugConsumer());
 		getSpielplatzConsumer().setErwachsenerConsumer(getErwachsenerConsumer());
-		getSpielplatzConsumer().setKindConsumer(getKindConsumer());
+		getSpielplatzConsumer().setStringConsumer(getStringConsumer());
+		getSpielplatzConsumer().setIntConsumer(getIntConsumer());
 
-		getPersonConsumer().setErwachsenerConsumer(getErwachsenerConsumer());
 		getPersonConsumer().setKindConsumer(getKindConsumer());
+		getPersonConsumer().setErwachsenerConsumer(getErwachsenerConsumer());
 
-		getKindConsumer().setIntConsumer(getIntConsumer());
 		getKindConsumer().setIdConsumer(getIdConsumer());
+		getKindConsumer().setIntConsumer(getIntConsumer());
 
-		getErwachsenerConsumer().setIntConsumer(getIntConsumer());
 		getErwachsenerConsumer().setIdConsumer(getIdConsumer());
+		getErwachsenerConsumer().setIntConsumer(getIntConsumer());
 
-		getSpielzeugConsumer().setFarbeConsumer(getFarbeConsumer());
 		getSpielzeugConsumer().setIdConsumer(getIdConsumer());
+		getSpielzeugConsumer().setFarbeConsumer(getFarbeConsumer());
 
-		getFamilieConsumer().setStringConsumer(getStringConsumer());
 		getFamilieConsumer().setIdConsumer(getIdConsumer());
+		getFamilieConsumer().setStringConsumer(getStringConsumer());
 
 		getIdConsumer().initFields(this);
 		getIntConsumer().initFields(this);
@@ -123,71 +123,57 @@ public class ReferenceGrammarTestLanguageParserConfiguration extends AbstractPar
     	return spielplatzConsumer;
     }
 
-
     public ReferenceGrammarTestLanguagePersonConsumer getPersonConsumer() {
     	return personConsumer;
     }
-
 
     public ReferenceGrammarTestLanguageKindConsumer getKindConsumer() {
     	return kindConsumer;
     }
 
-
     public ReferenceGrammarTestLanguageErwachsenerConsumer getErwachsenerConsumer() {
     	return erwachsenerConsumer;
     }
-
 
     public ReferenceGrammarTestLanguageSpielzeugConsumer getSpielzeugConsumer() {
     	return spielzeugConsumer;
     }
 
-
     public ReferenceGrammarTestLanguageFarbeConsumer getFarbeConsumer() {
     	return farbeConsumer;
     }
-
 
     public ReferenceGrammarTestLanguageFamilieConsumer getFamilieConsumer() {
     	return familieConsumer;
     }
 
-
     public XtextBuiltinIDConsumer getIdConsumer() {
     	return getXtextBuiltinConfiguration().getIdConsumer();
     }
-
 
     public XtextBuiltinINTConsumer getIntConsumer() {
     	return getXtextBuiltinConfiguration().getIntConsumer();
     }
 
-
     public XtextBuiltinSTRINGConsumer getStringConsumer() {
     	return getXtextBuiltinConfiguration().getStringConsumer();
     }
-
 
     public XtextBuiltinML_COMMENTConsumer getMlCommentConsumer() {
     	return getXtextBuiltinConfiguration().getMlCommentConsumer();
     }
 
-
     public XtextBuiltinSL_COMMENTConsumer getSlCommentConsumer() {
     	return getXtextBuiltinConfiguration().getSlCommentConsumer();
     }
-
 
     public XtextBuiltinWSConsumer getWsConsumer() {
     	return getXtextBuiltinConfiguration().getWsConsumer();
     }
 
-
     public XtextBuiltinANY_OTHERConsumer getAnyOtherConsumer() {
     	return getXtextBuiltinConfiguration().getAnyOtherConsumer();
     }
-
 
 
 }

@@ -17,9 +17,9 @@ extension org::eclipse::xtext::Extensions reexport;
 extension org::eclipse::xtext::GrammarUtil reexport;
 extension org::eclipse::xtend::util::stdlib::io;
 
-String blockLabel(AbstractElement this):
-	JAVA org.eclipse.xtext.parser.packrat.PackratParserGenUtil.getLabelName(org.eclipse.xtext.AbstractElement);
-
+String consumeMethodName(AbstractElement this):
+	JAVA org.eclipse.xtext.parser.packrat.PackratParserGenUtil.getConsumeMethodName(org.eclipse.xtext.AbstractElement);
+	
 String consumerClassName(AbstractRule this):
 	JAVA org.eclipse.xtext.parser.packrat.PackratParserGenUtil.getConsumerClassName(org.eclipse.xtext.AbstractRule);
 	
@@ -41,8 +41,8 @@ String fullConsumerClassName(AbstractRule this):
 String grammarAccess(Grammar this):
     JAVA org.eclipse.xtext.grammaraccess.GrammarAccessUtil.getGrammarAccessFQName(org.eclipse.xtext.Grammar);
    
-boolean canFail(AbstractElement this):
-	JAVA org.eclipse.xtext.parser.packrat.PackratParserGenUtil.canFail(org.eclipse.xtext.AbstractElement); 
+boolean canBeFollowedByIdentifier(Keyword this):
+	JAVA org.eclipse.xtext.parser.packrat.PackratParserGenUtil.canBeFollowedByIdentifier(org.eclipse.xtext.Keyword);
 
 boolean isPlus(AbstractElement this):
 	!isOptional() && isMultipleCardinality();

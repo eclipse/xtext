@@ -210,126 +210,101 @@ public class XtextParserConfiguration extends AbstractParserConfiguration {
     	return grammarConsumer;
     }
 
-
     public XtextAbstractRuleConsumer getAbstractRuleConsumer() {
     	return abstractRuleConsumer;
     }
-
 
     public XtextAbstractMetamodelDeclarationConsumer getAbstractMetamodelDeclarationConsumer() {
     	return abstractMetamodelDeclarationConsumer;
     }
 
-
     public XtextGeneratedMetamodelConsumer getGeneratedMetamodelConsumer() {
     	return generatedMetamodelConsumer;
     }
-
 
     public XtextReferencedMetamodelConsumer getReferencedMetamodelConsumer() {
     	return referencedMetamodelConsumer;
     }
 
-
     public XtextLexerRuleConsumer getLexerRuleConsumer() {
     	return lexerRuleConsumer;
     }
-
 
     public XtextParserRuleConsumer getParserRuleConsumer() {
     	return parserRuleConsumer;
     }
 
-
     public XtextTypeRefConsumer getTypeRefConsumer() {
     	return typeRefConsumer;
     }
-
 
     public XtextAlternativesConsumer getAlternativesConsumer() {
     	return alternativesConsumer;
     }
 
-
     public XtextGroupConsumer getGroupConsumer() {
     	return groupConsumer;
     }
-
 
     public XtextAbstractTokenConsumer getAbstractTokenConsumer() {
     	return abstractTokenConsumer;
     }
 
-
     public XtextAssignmentConsumer getAssignmentConsumer() {
     	return assignmentConsumer;
     }
-
 
     public XtextActionConsumer getActionConsumer() {
     	return actionConsumer;
     }
 
-
     public XtextAbstractTerminalConsumer getAbstractTerminalConsumer() {
     	return abstractTerminalConsumer;
     }
-
 
     public XtextCrossReferenceConsumer getCrossReferenceConsumer() {
     	return crossReferenceConsumer;
     }
 
-
     public XtextParenthesizedElementConsumer getParenthesizedElementConsumer() {
     	return parenthesizedElementConsumer;
     }
-
 
     public XtextKeywordConsumer getKeywordConsumer() {
     	return keywordConsumer;
     }
 
-
     public XtextRuleCallConsumer getRuleCallConsumer() {
     	return ruleCallConsumer;
     }
-
 
     public XtextBuiltinIDConsumer getIdConsumer() {
     	return getXtextBuiltinConfiguration().getIdConsumer();
     }
 
-
     public XtextBuiltinINTConsumer getIntConsumer() {
     	return getXtextBuiltinConfiguration().getIntConsumer();
     }
-
 
     public XtextBuiltinSTRINGConsumer getStringConsumer() {
     	return getXtextBuiltinConfiguration().getStringConsumer();
     }
 
-
     public XtextBuiltinML_COMMENTConsumer getMlCommentConsumer() {
     	return getXtextBuiltinConfiguration().getMlCommentConsumer();
     }
-
 
     public XtextBuiltinSL_COMMENTConsumer getSlCommentConsumer() {
     	return getXtextBuiltinConfiguration().getSlCommentConsumer();
     }
 
-
     public XtextBuiltinWSConsumer getWsConsumer() {
     	return getXtextBuiltinConfiguration().getWsConsumer();
     }
 
-
     public XtextBuiltinANY_OTHERConsumer getAnyOtherConsumer() {
     	return getXtextBuiltinConfiguration().getAnyOtherConsumer();
     }
-
 
 
 }

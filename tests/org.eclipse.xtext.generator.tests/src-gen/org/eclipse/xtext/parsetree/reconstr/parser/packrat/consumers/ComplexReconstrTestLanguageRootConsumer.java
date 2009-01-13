@@ -12,16 +12,20 @@ import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+
 import org.eclipse.xtext.parsetree.reconstr.services.ComplexReconstrTestLanguageGrammarAccess;
 import org.eclipse.xtext.parsetree.reconstr.services.ComplexReconstrTestLanguageGrammarAccess.RootElements;
 
-import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.ComplexReconstrTestLanguageOpConsumer;
-import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.ComplexReconstrTestLanguageTrickyGConsumer;
+import org.eclipse.xtext.parsetree.reconstr.parser.packrat.ComplexReconstrTestLanguageDelimiters;
 
+import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.ComplexReconstrTestLanguageTrickyGConsumer;
+import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.ComplexReconstrTestLanguageOpConsumer;
+
+@SuppressWarnings("unused")
 public final class ComplexReconstrTestLanguageRootConsumer extends NonTerminalConsumer {
 
-	private ComplexReconstrTestLanguageOpConsumer opConsumer;
 	private ComplexReconstrTestLanguageTrickyGConsumer trickyGConsumer;
+	private ComplexReconstrTestLanguageOpConsumer opConsumer;
 
 	public ComplexReconstrTestLanguageRootConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
@@ -29,25 +33,24 @@ public final class ComplexReconstrTestLanguageRootConsumer extends NonTerminalCo
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 	}
 	
-	@SuppressWarnings("unused")
 	protected boolean doConsume() throws Exception {
-		ALTERNATIVES$1SUCCESS: {
-			ALTERNATIVES$1FAILURE: {
-				RULECALL$2SUCCESS: {
-					if (!consumeNonTerminal(opConsumer, null, false, false,  getRule().ele0ParserRuleCallOp()))
-						break RULECALL$2SUCCESS;
-					break ALTERNATIVES$1FAILURE;
-				}
-				RULECALL$3SUCCESS: {
-					if (!consumeNonTerminal(trickyGConsumer, null, false, false,  getRule().ele1ParserRuleCallTrickyG()))
-						break RULECALL$3SUCCESS;
-					break ALTERNATIVES$1FAILURE;
-				}
-				break ALTERNATIVES$1SUCCESS;
-			}
+		return consumeAlternatives$1();
+	}
+
+	protected boolean consumeAlternatives$1() throws Exception {
+		if (consumeRuleCall$2())
 			return true;
-		}
+		if (consumeRuleCall$3())
+			return true;
 		return false;
+	}
+
+	protected boolean consumeRuleCall$2() throws Exception {
+		return consumeNonTerminal(opConsumer, null, false, false, getRule().ele0ParserRuleCallOp());
+	}
+
+	protected boolean consumeRuleCall$3() throws Exception {
+		return consumeNonTerminal(trickyGConsumer, null, false, false, getRule().ele1ParserRuleCallTrickyG());
 	}
 
 	public RootElements getRule() {
@@ -63,13 +66,12 @@ public final class ComplexReconstrTestLanguageRootConsumer extends NonTerminalCo
 		return "Root";
 	}
 	
-	public void setOpConsumer(ComplexReconstrTestLanguageOpConsumer opConsumer) {
-		this.opConsumer = opConsumer;
-	}
-	
 	public void setTrickyGConsumer(ComplexReconstrTestLanguageTrickyGConsumer trickyGConsumer) {
 		this.trickyGConsumer = trickyGConsumer;
 	}
 	
-
+	public void setOpConsumer(ComplexReconstrTestLanguageOpConsumer opConsumer) {
+		this.opConsumer = opConsumer;
+	}
+	
 }

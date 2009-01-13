@@ -85,9 +85,9 @@ public class DatatypeRulesTestLanguageParserConfiguration extends AbstractParser
 	public void configureConsumers() {
 		getCompositeModelConsumer().setModelConsumer(getModelConsumer());
 
-		getModelConsumer().setDotsConsumer(getDotsConsumer());
 		getModelConsumer().setVectorConsumer(getVectorConsumer());
 		getModelConsumer().setFractionConsumer(getFractionConsumer());
+		getModelConsumer().setDotsConsumer(getDotsConsumer());
 		getModelConsumer().setNestedModelIdConsumer(getNestedModelIdConsumer());
 
 		getModelIdConsumer().setIdConsumer(getIdConsumer());
@@ -116,71 +116,57 @@ public class DatatypeRulesTestLanguageParserConfiguration extends AbstractParser
     	return compositeModelConsumer;
     }
 
-
     public DatatypeRulesTestLanguageModelConsumer getModelConsumer() {
     	return modelConsumer;
     }
-
 
     public DatatypeRulesTestLanguageModelIdConsumer getModelIdConsumer() {
     	return modelIdConsumer;
     }
 
-
     public DatatypeRulesTestLanguageNestedModelIdConsumer getNestedModelIdConsumer() {
     	return nestedModelIdConsumer;
     }
-
 
     public DatatypeRulesTestLanguageFractionConsumer getFractionConsumer() {
     	return fractionConsumer;
     }
 
-
     public DatatypeRulesTestLanguageVectorConsumer getVectorConsumer() {
     	return vectorConsumer;
     }
-
 
     public DatatypeRulesTestLanguageDotsConsumer getDotsConsumer() {
     	return dotsConsumer;
     }
 
-
     public XtextBuiltinIDConsumer getIdConsumer() {
     	return getXtextBuiltinConfiguration().getIdConsumer();
     }
-
 
     public XtextBuiltinINTConsumer getIntConsumer() {
     	return getXtextBuiltinConfiguration().getIntConsumer();
     }
 
-
     public XtextBuiltinSTRINGConsumer getStringConsumer() {
     	return getXtextBuiltinConfiguration().getStringConsumer();
     }
-
 
     public XtextBuiltinML_COMMENTConsumer getMlCommentConsumer() {
     	return getXtextBuiltinConfiguration().getMlCommentConsumer();
     }
 
-
     public XtextBuiltinSL_COMMENTConsumer getSlCommentConsumer() {
     	return getXtextBuiltinConfiguration().getSlCommentConsumer();
     }
-
 
     public XtextBuiltinWSConsumer getWsConsumer() {
     	return getXtextBuiltinConfiguration().getWsConsumer();
     }
 
-
     public XtextBuiltinANY_OTHERConsumer getAnyOtherConsumer() {
     	return getXtextBuiltinConfiguration().getAnyOtherConsumer();
     }
-
 
 
 }

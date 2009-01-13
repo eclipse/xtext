@@ -12,14 +12,18 @@ import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+
 import org.eclipse.xtext.services.XtextGrammarAccess;
 import org.eclipse.xtext.services.XtextGrammarAccess.AbstractTerminalElements;
+
+import org.eclipse.xtext.parser.packrat.XtextDelimiters;
 
 import org.eclipse.xtext.parser.packrat.consumers.XtextKeywordConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextCrossReferenceConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextParenthesizedElementConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextRuleCallConsumer;
 
+@SuppressWarnings("unused")
 public final class XtextAbstractTerminalConsumer extends NonTerminalConsumer {
 
 	private XtextKeywordConsumer keywordConsumer;
@@ -33,47 +37,36 @@ public final class XtextAbstractTerminalConsumer extends NonTerminalConsumer {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 	}
 	
-	@SuppressWarnings("unused")
 	protected boolean doConsume() throws Exception {
-		ALTERNATIVES$1SUCCESS: {
-			ALTERNATIVES$1FAILURE: {
-				ALTERNATIVES$2SUCCESS: {
-					ALTERNATIVES$2FAILURE: {
-						ALTERNATIVES$3SUCCESS: {
-							ALTERNATIVES$3FAILURE: {
-								RULECALL$4SUCCESS: {
-									if (!consumeNonTerminal(keywordConsumer, null, false, false,  getRule().ele000ParserRuleCallKeyword()))
-										break RULECALL$4SUCCESS;
-									break ALTERNATIVES$3FAILURE;
-								}
-								RULECALL$5SUCCESS: {
-									if (!consumeNonTerminal(ruleCallConsumer, null, false, false,  getRule().ele001ParserRuleCallRuleCall()))
-										break RULECALL$5SUCCESS;
-									break ALTERNATIVES$3FAILURE;
-								}
-								break ALTERNATIVES$3SUCCESS;
-							}
-							break ALTERNATIVES$2FAILURE;
-						}
-						RULECALL$6SUCCESS: {
-							if (!consumeNonTerminal(parenthesizedElementConsumer, null, false, false,  getRule().ele01ParserRuleCallParenthesizedElement()))
-								break RULECALL$6SUCCESS;
-							break ALTERNATIVES$2FAILURE;
-						}
-						break ALTERNATIVES$2SUCCESS;
-					}
-					break ALTERNATIVES$1FAILURE;
-				}
-				RULECALL$7SUCCESS: {
-					if (!consumeNonTerminal(crossReferenceConsumer, null, false, false,  getRule().ele1ParserRuleCallCrossReference()))
-						break RULECALL$7SUCCESS;
-					break ALTERNATIVES$1FAILURE;
-				}
-				break ALTERNATIVES$1SUCCESS;
-			}
+		return consumeAlternatives$1();
+	}
+
+	protected boolean consumeAlternatives$1() throws Exception {
+		if (consumeRuleCall$4())
 			return true;
-		}
+		if (consumeRuleCall$5())
+			return true;
+		if (consumeRuleCall$6())
+			return true;
+		if (consumeRuleCall$7())
+			return true;
 		return false;
+	}
+
+	protected boolean consumeRuleCall$4() throws Exception {
+		return consumeNonTerminal(keywordConsumer, null, false, false, getRule().ele000ParserRuleCallKeyword());
+	}
+
+	protected boolean consumeRuleCall$5() throws Exception {
+		return consumeNonTerminal(ruleCallConsumer, null, false, false, getRule().ele001ParserRuleCallRuleCall());
+	}
+
+	protected boolean consumeRuleCall$6() throws Exception {
+		return consumeNonTerminal(parenthesizedElementConsumer, null, false, false, getRule().ele01ParserRuleCallParenthesizedElement());
+	}
+
+	protected boolean consumeRuleCall$7() throws Exception {
+		return consumeNonTerminal(crossReferenceConsumer, null, false, false, getRule().ele1ParserRuleCallCrossReference());
 	}
 
 	public AbstractTerminalElements getRule() {
@@ -105,5 +98,4 @@ public final class XtextAbstractTerminalConsumer extends NonTerminalConsumer {
 		this.ruleCallConsumer = ruleCallConsumer;
 	}
 	
-
 }

@@ -12,17 +12,21 @@ import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+
 import org.eclipse.xtext.parsetree.transientvalues.services.TransientValuesTestGrammarAccess;
 import org.eclipse.xtext.parsetree.transientvalues.services.TransientValuesTestGrammarAccess.RootElements;
 
-import org.eclipse.xtext.parsetree.transientvalues.parser.packrat.consumers.TransientValuesTestTestListConsumer;
+import org.eclipse.xtext.parsetree.transientvalues.parser.packrat.TransientValuesTestDelimiters;
+
 import org.eclipse.xtext.parsetree.transientvalues.parser.packrat.consumers.TransientValuesTestTestRequiredConsumer;
+import org.eclipse.xtext.parsetree.transientvalues.parser.packrat.consumers.TransientValuesTestTestListConsumer;
 import org.eclipse.xtext.parsetree.transientvalues.parser.packrat.consumers.TransientValuesTestTestOptionalConsumer;
 
+@SuppressWarnings("unused")
 public final class TransientValuesTestRootConsumer extends NonTerminalConsumer {
 
-	private TransientValuesTestTestListConsumer testListConsumer;
 	private TransientValuesTestTestRequiredConsumer testRequiredConsumer;
+	private TransientValuesTestTestListConsumer testListConsumer;
 	private TransientValuesTestTestOptionalConsumer testOptionalConsumer;
 
 	public TransientValuesTestRootConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
@@ -31,54 +35,47 @@ public final class TransientValuesTestRootConsumer extends NonTerminalConsumer {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 	}
 	
-	@SuppressWarnings("unused")
 	protected boolean doConsume() throws Exception {
-		GROUP$1SUCCESS: {
-			IMarker mGROUP$1 = mark();
-			GROUP$1FAILURE: {
-				KEYWORD$2SUCCESS: {
-					if (!consumeKeyword(getRule().ele0KeywordTest(), null, false, false))
-						break KEYWORD$2SUCCESS;
-					break GROUP$1FAILURE;
-				}
-				mGROUP$1.rollback();
-				break GROUP$1SUCCESS;
-			}
-			GROUP$1FAILURE: {
-				ALTERNATIVES$3SUCCESS: {
-					ALTERNATIVES$3FAILURE: {
-						ALTERNATIVES$4SUCCESS: {
-							ALTERNATIVES$4FAILURE: {
-								RULECALL$5SUCCESS: {
-									if (!consumeNonTerminal(testRequiredConsumer, null, false, false,  getRule().ele100ParserRuleCallTestRequired()))
-										break RULECALL$5SUCCESS;
-									break ALTERNATIVES$4FAILURE;
-								}
-								RULECALL$6SUCCESS: {
-									if (!consumeNonTerminal(testOptionalConsumer, null, false, false,  getRule().ele101ParserRuleCallTestOptional()))
-										break RULECALL$6SUCCESS;
-									break ALTERNATIVES$4FAILURE;
-								}
-								break ALTERNATIVES$4SUCCESS;
-							}
-							break ALTERNATIVES$3FAILURE;
-						}
-						RULECALL$7SUCCESS: {
-							if (!consumeNonTerminal(testListConsumer, null, false, false,  getRule().ele11ParserRuleCallTestList()))
-								break RULECALL$7SUCCESS;
-							break ALTERNATIVES$3FAILURE;
-						}
-						mGROUP$1.rollback();
-						break ALTERNATIVES$3SUCCESS;
-					}
-					break GROUP$1FAILURE;
-				}
-				mGROUP$1.rollback();
-				break GROUP$1SUCCESS;
-			}
-			return true;
+		return consumeGroup$1();
+	}
+
+	protected boolean consumeGroup$1() throws Exception {
+		final IMarker marker = mark();
+		if (!consumeKeyword$2()) {
+			marker.rollback();
+			return false;
 		}
+		if (!consumeAlternatives$3()) {
+			marker.rollback();
+			return false;
+		}
+		return true;
+	}
+
+	protected boolean consumeKeyword$2() throws Exception {
+		return consumeKeyword(getRule().ele0KeywordTest(), null, false, false, TransientValuesTestDelimiters.ID_DELIMITER);
+	}
+
+	protected boolean consumeAlternatives$3() throws Exception {
+		if (consumeRuleCall$5())
+			return true;
+		if (consumeRuleCall$6())
+			return true;
+		if (consumeRuleCall$7())
+			return true;
 		return false;
+	}
+
+	protected boolean consumeRuleCall$5() throws Exception {
+		return consumeNonTerminal(testRequiredConsumer, null, false, false, getRule().ele100ParserRuleCallTestRequired());
+	}
+
+	protected boolean consumeRuleCall$6() throws Exception {
+		return consumeNonTerminal(testOptionalConsumer, null, false, false, getRule().ele101ParserRuleCallTestOptional());
+	}
+
+	protected boolean consumeRuleCall$7() throws Exception {
+		return consumeNonTerminal(testListConsumer, null, false, false, getRule().ele11ParserRuleCallTestList());
 	}
 
 	public RootElements getRule() {
@@ -94,17 +91,16 @@ public final class TransientValuesTestRootConsumer extends NonTerminalConsumer {
 		return "Root";
 	}
 	
-	public void setTestListConsumer(TransientValuesTestTestListConsumer testListConsumer) {
-		this.testListConsumer = testListConsumer;
-	}
-	
 	public void setTestRequiredConsumer(TransientValuesTestTestRequiredConsumer testRequiredConsumer) {
 		this.testRequiredConsumer = testRequiredConsumer;
+	}
+	
+	public void setTestListConsumer(TransientValuesTestTestListConsumer testListConsumer) {
+		this.testListConsumer = testListConsumer;
 	}
 	
 	public void setTestOptionalConsumer(TransientValuesTestTestOptionalConsumer testOptionalConsumer) {
 		this.testOptionalConsumer = testOptionalConsumer;
 	}
 	
-
 }

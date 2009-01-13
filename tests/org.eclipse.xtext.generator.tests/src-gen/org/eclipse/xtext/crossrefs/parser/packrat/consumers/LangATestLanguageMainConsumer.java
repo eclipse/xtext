@@ -12,12 +12,16 @@ import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+
 import org.eclipse.xtext.crossrefs.services.LangATestLanguageGrammarAccess;
 import org.eclipse.xtext.crossrefs.services.LangATestLanguageGrammarAccess.MainElements;
+
+import org.eclipse.xtext.crossrefs.parser.packrat.LangATestLanguageDelimiters;
 
 import org.eclipse.xtext.crossrefs.parser.packrat.consumers.LangATestLanguageTypeConsumer;
 import org.eclipse.xtext.crossrefs.parser.packrat.consumers.LangATestLanguageImportConsumer;
 
+@SuppressWarnings("unused")
 public final class LangATestLanguageMainConsumer extends NonTerminalConsumer {
 
 	private LangATestLanguageTypeConsumer typeConsumer;
@@ -29,32 +33,43 @@ public final class LangATestLanguageMainConsumer extends NonTerminalConsumer {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 	}
 	
-	@SuppressWarnings("unused")
 	protected boolean doConsume() throws Exception {
-		GROUP$1SUCCESS: {
-			IMarker mGROUP$1 = mark();
-			GROUP$1FAILURE: {
-				ASSIGNMENT$2SUCCESS: while(true) {
-					ASSIGNMENT$2FAILURE: {
-						if (consumeNonTerminal(importConsumer, "imports", true, false , getRule().ele00ParserRuleCallImport()))
-							break ASSIGNMENT$2FAILURE;
-						break ASSIGNMENT$2SUCCESS;
-					}
-					continue ASSIGNMENT$2SUCCESS;
-				}
-			}
-			GROUP$1FAILURE: {
-				ASSIGNMENT$4SUCCESS: while(true) {
-					ASSIGNMENT$4FAILURE: {
-						if (consumeNonTerminal(typeConsumer, "types", true, false , getRule().ele10ParserRuleCallType()))
-							break ASSIGNMENT$4FAILURE;
-						break ASSIGNMENT$4SUCCESS;
-					}
-					continue ASSIGNMENT$4SUCCESS;
-				}
-			}
+		return consumeGroup$1();
+	}
+
+	protected boolean consumeGroup$1() throws Exception {
+		final IMarker marker = mark();
+		if (!consumeAssignment$2()) {
+			marker.rollback();
+			return false;
+		}
+		if (!consumeAssignment$4()) {
+			marker.rollback();
+			return false;
 		}
 		return true;
+	}
+
+	protected boolean consumeAssignment$2() throws Exception {
+		while(doConsumeAssignment$2()) {}
+		return true;
+	}
+
+	protected boolean doConsumeAssignment$2() throws Exception {
+		if (consumeNonTerminal(importConsumer, "imports", true, false, getRule().ele00ParserRuleCallImport()))
+			return true;
+		return false;
+	}
+
+	protected boolean consumeAssignment$4() throws Exception {
+		while(doConsumeAssignment$4()) {}
+		return true;
+	}
+
+	protected boolean doConsumeAssignment$4() throws Exception {
+		if (consumeNonTerminal(typeConsumer, "types", true, false, getRule().ele10ParserRuleCallType()))
+			return true;
+		return false;
 	}
 
 	public MainElements getRule() {
@@ -78,5 +93,4 @@ public final class LangATestLanguageMainConsumer extends NonTerminalConsumer {
 		this.importConsumer = importConsumer;
 	}
 	
-
 }

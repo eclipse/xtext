@@ -69,9 +69,9 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 		nonterminalStack.clear();
 		if (logger.isDebugEnabled() || DEBUG) {
 			IParsedTokenVisitor visitor = new CompoundParsedTokenVisitor(new ParsedTokenPrinter(), this);
-			tokens.accept(visitor);
+			tokens.acceptAndDrop(visitor);
 		} else {
-			tokens.accept(this);
+			tokens.acceptAndDrop(this);
 		}
 		return new ParseResult(currentStack.isEmpty() ? null : currentStack.getLast(), currentNode);
 	}
@@ -142,8 +142,10 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 	public void visitParsedNonTerminalEnd(ParsedNonTerminalEnd token) {
 		currentNode.setTotalLength(token.getOffset() - currentNode.getTotalOffset());
 		final ParsedNonTerminal nonTerminal = nonterminalStack.removeLast();
-		final EObject created = currentStack.removeLast();
+		EObject created = currentStack.removeLast();
 		if (!token.isDatatype()) {
+			if (created == null)
+				created = factory.create(nonTerminal.getTypeName());
 			if (token.getFeature() == null) {
 				if (currentStack.isEmpty())
 					currentStack.add(created);

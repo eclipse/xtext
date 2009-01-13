@@ -12,16 +12,20 @@ import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+
 import org.eclipse.xtext.testlanguages.services.ContentAssistTestLanguageGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.ContentAssistTestLanguageGrammarAccess.SecondAbstractRuleChildElements;
 
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
-import org.eclipse.xtext.testlanguages.parser.packrat.consumers.ContentAssistTestLanguageAbstractRuleCallConsumer;
+import org.eclipse.xtext.testlanguages.parser.packrat.ContentAssistTestLanguageDelimiters;
 
+import org.eclipse.xtext.testlanguages.parser.packrat.consumers.ContentAssistTestLanguageAbstractRuleCallConsumer;
+import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
+
+@SuppressWarnings("unused")
 public final class ContentAssistTestLanguageSecondAbstractRuleChildConsumer extends NonTerminalConsumer {
 
-	private XtextBuiltinIDConsumer idConsumer;
 	private ContentAssistTestLanguageAbstractRuleCallConsumer abstractRuleCallConsumer;
+	private XtextBuiltinIDConsumer idConsumer;
 
 	public ContentAssistTestLanguageSecondAbstractRuleChildConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
@@ -29,90 +33,57 @@ public final class ContentAssistTestLanguageSecondAbstractRuleChildConsumer exte
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 	}
 	
-	@SuppressWarnings("unused")
 	protected boolean doConsume() throws Exception {
-		GROUP$1SUCCESS: {
-			IMarker mGROUP$1 = mark();
-			GROUP$1FAILURE: {
-				GROUP$2SUCCESS: {
-					IMarker mGROUP$2 = mark();
-					GROUP$2FAILURE: {
-						GROUP$3SUCCESS: {
-							IMarker mGROUP$3 = mark();
-							GROUP$3FAILURE: {
-								GROUP$4SUCCESS: {
-									IMarker mGROUP$4 = mark();
-									GROUP$4FAILURE: {
-										ASSIGNMENT$5SUCCESS: {
-											ASSIGNMENT$5FAILURE: {
-												if (consumeTerminal(idConsumer, "name", false, false, getRule().ele00000LexerRuleCallID()))
-													break ASSIGNMENT$5FAILURE;
-												mGROUP$4.rollback();
-												break ASSIGNMENT$5SUCCESS;
-											}
-											break GROUP$4FAILURE;
-										}
-										mGROUP$4.rollback();
-										break GROUP$4SUCCESS;
-									}
-									GROUP$4FAILURE: {
-										KEYWORD$7SUCCESS: {
-											if (!consumeKeyword(getRule().ele0001KeywordRule(), null, false, false))
-												break KEYWORD$7SUCCESS;
-											break GROUP$4FAILURE;
-										}
-										mGROUP$4.rollback();
-										break GROUP$4SUCCESS;
-									}
-									break GROUP$3FAILURE;
-								}
-								mGROUP$3.rollback();
-								break GROUP$3SUCCESS;
-							}
-							GROUP$3FAILURE: {
-								KEYWORD$8SUCCESS: {
-									if (!consumeKeyword(getRule().ele001KeywordColon(), null, false, false))
-										break KEYWORD$8SUCCESS;
-									break GROUP$3FAILURE;
-								}
-								mGROUP$3.rollback();
-								break GROUP$3SUCCESS;
-							}
-							break GROUP$2FAILURE;
-						}
-						mGROUP$2.rollback();
-						break GROUP$2SUCCESS;
-					}
-					GROUP$2FAILURE: {
-						ASSIGNMENT$9SUCCESS: {
-							ASSIGNMENT$9FAILURE: {
-								if (consumeNonTerminal(abstractRuleCallConsumer, "rule", false, false , getRule().ele010ParserRuleCallAbstractRuleCall()))
-									break ASSIGNMENT$9FAILURE;
-								mGROUP$2.rollback();
-								break ASSIGNMENT$9SUCCESS;
-							}
-							break GROUP$2FAILURE;
-						}
-						mGROUP$2.rollback();
-						break GROUP$2SUCCESS;
-					}
-					break GROUP$1FAILURE;
-				}
-				mGROUP$1.rollback();
-				break GROUP$1SUCCESS;
-			}
-			GROUP$1FAILURE: {
-				KEYWORD$11SUCCESS: {
-					if (!consumeKeyword(getRule().ele1KeywordSemicolon(), null, false, false))
-						break KEYWORD$11SUCCESS;
-					break GROUP$1FAILURE;
-				}
-				mGROUP$1.rollback();
-				break GROUP$1SUCCESS;
-			}
-			return true;
+		return consumeGroup$1();
+	}
+
+	protected boolean consumeGroup$1() throws Exception {
+		final IMarker marker = mark();
+		if (!consumeAssignment$5()) {
+			marker.rollback();
+			return false;
 		}
+		if (!consumeKeyword$7()) {
+			marker.rollback();
+			return false;
+		}
+		if (!consumeKeyword$8()) {
+			marker.rollback();
+			return false;
+		}
+		if (!consumeAssignment$9()) {
+			marker.rollback();
+			return false;
+		}
+		if (!consumeKeyword$11()) {
+			marker.rollback();
+			return false;
+		}
+		return true;
+	}
+
+	protected boolean consumeAssignment$5() throws Exception {
+		if (consumeTerminal(idConsumer, "name", false, false, getRule().ele00000LexerRuleCallID(), ContentAssistTestLanguageDelimiters.ALL_KEYWORDS))
+			return true;
 		return false;
+	}
+
+	protected boolean consumeKeyword$7() throws Exception {
+		return consumeKeyword(getRule().ele0001KeywordRule(), null, false, false, ContentAssistTestLanguageDelimiters.ID_DELIMITER);
+	}
+
+	protected boolean consumeKeyword$8() throws Exception {
+		return consumeKeyword(getRule().ele001KeywordColon(), null, false, false, ContentAssistTestLanguageDelimiters.ANY_OTHER_DELIMITER);
+	}
+
+	protected boolean consumeAssignment$9() throws Exception {
+		if (consumeNonTerminal(abstractRuleCallConsumer, "rule", false, false, getRule().ele010ParserRuleCallAbstractRuleCall()))
+			return true;
+		return false;
+	}
+
+	protected boolean consumeKeyword$11() throws Exception {
+		return consumeKeyword(getRule().ele1KeywordSemicolon(), null, false, false, ContentAssistTestLanguageDelimiters.ANY_OTHER_DELIMITER);
 	}
 
 	public SecondAbstractRuleChildElements getRule() {
@@ -128,13 +99,12 @@ public final class ContentAssistTestLanguageSecondAbstractRuleChildConsumer exte
 		return "SecondAbstractRuleChild";
 	}
 	
-	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
-		this.idConsumer = idConsumer;
-	}
-	
 	public void setAbstractRuleCallConsumer(ContentAssistTestLanguageAbstractRuleCallConsumer abstractRuleCallConsumer) {
 		this.abstractRuleCallConsumer = abstractRuleCallConsumer;
 	}
 	
-
+	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
+		this.idConsumer = idConsumer;
+	}
+	
 }

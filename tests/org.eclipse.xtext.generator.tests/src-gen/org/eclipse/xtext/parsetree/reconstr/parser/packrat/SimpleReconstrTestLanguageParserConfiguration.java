@@ -95,13 +95,13 @@ public class SimpleReconstrTestLanguageParserConfiguration extends AbstractParse
 	public void configureConsumers() {
 		getOpConsumer().setTermConsumer(getTermConsumer());
 
-		getTermConsumer().setRef2Consumer(getRef2Consumer());
-		getTermConsumer().setTypeConsumer(getTypeConsumer());
-		getTermConsumer().setSpareConsumer(getSpareConsumer());
-		getTermConsumer().setAtomConsumer(getAtomConsumer());
 		getTermConsumer().setManyStringsConsumer(getManyStringsConsumer());
 		getTermConsumer().setTwoNumbersConsumer(getTwoNumbersConsumer());
+		getTermConsumer().setTypeConsumer(getTypeConsumer());
 		getTermConsumer().setParensConsumer(getParensConsumer());
+		getTermConsumer().setSpareConsumer(getSpareConsumer());
+		getTermConsumer().setRef2Consumer(getRef2Consumer());
+		getTermConsumer().setAtomConsumer(getAtomConsumer());
 
 		getAtomConsumer().setIdConsumer(getIdConsumer());
 
@@ -135,81 +135,65 @@ public class SimpleReconstrTestLanguageParserConfiguration extends AbstractParse
     	return opConsumer;
     }
 
-
     public SimpleReconstrTestLanguageTermConsumer getTermConsumer() {
     	return termConsumer;
     }
-
 
     public SimpleReconstrTestLanguageAtomConsumer getAtomConsumer() {
     	return atomConsumer;
     }
 
-
     public SimpleReconstrTestLanguageParensConsumer getParensConsumer() {
     	return parensConsumer;
     }
-
 
     public SimpleReconstrTestLanguageTwoNumbersConsumer getTwoNumbersConsumer() {
     	return twoNumbersConsumer;
     }
 
-
     public SimpleReconstrTestLanguageManyStringsConsumer getManyStringsConsumer() {
     	return manyStringsConsumer;
     }
-
 
     public SimpleReconstrTestLanguageTypeConsumer getTypeConsumer() {
     	return typeConsumer;
     }
 
-
     public SimpleReconstrTestLanguageRef2Consumer getRef2Consumer() {
     	return ref2Consumer;
     }
-
 
     public SimpleReconstrTestLanguageSpareConsumer getSpareConsumer() {
     	return spareConsumer;
     }
 
-
     public XtextBuiltinIDConsumer getIdConsumer() {
     	return getXtextBuiltinConfiguration().getIdConsumer();
     }
-
 
     public XtextBuiltinINTConsumer getIntConsumer() {
     	return getXtextBuiltinConfiguration().getIntConsumer();
     }
 
-
     public XtextBuiltinSTRINGConsumer getStringConsumer() {
     	return getXtextBuiltinConfiguration().getStringConsumer();
     }
-
 
     public XtextBuiltinML_COMMENTConsumer getMlCommentConsumer() {
     	return getXtextBuiltinConfiguration().getMlCommentConsumer();
     }
 
-
     public XtextBuiltinSL_COMMENTConsumer getSlCommentConsumer() {
     	return getXtextBuiltinConfiguration().getSlCommentConsumer();
     }
-
 
     public XtextBuiltinWSConsumer getWsConsumer() {
     	return getXtextBuiltinConfiguration().getWsConsumer();
     }
 
-
     public XtextBuiltinANY_OTHERConsumer getAnyOtherConsumer() {
     	return getXtextBuiltinConfiguration().getAnyOtherConsumer();
     }
-
 
 
 }

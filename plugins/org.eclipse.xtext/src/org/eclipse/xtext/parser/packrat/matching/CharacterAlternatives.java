@@ -5,26 +5,26 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.parser.packrat.characters;
-
-import java.util.Arrays;
+package org.eclipse.xtext.parser.packrat.matching;
 
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class CharacterArray implements ICharacterClass {
+public class CharacterAlternatives implements ICharacterClass {
 
-	private char[] characters;
+	private final ICharacterClass[] classes;
 
-	public CharacterArray(char... characters) {
-		this.characters = characters.clone();
-		Arrays.sort(this.characters);
+	public CharacterAlternatives(ICharacterClass... classes) {
+		this.classes = classes;
 	}
 	
 	public boolean matches(char candidate) {
-		return candidate >= characters[0] && candidate <= characters[characters.length -1 ] &&
-			Arrays.binarySearch(characters, candidate) >= 0;
+		for (ICharacterClass characterClass: classes) {
+			if (characterClass.matches(candidate))
+				return true;
+		}
+		return false;
 	}
 
 }

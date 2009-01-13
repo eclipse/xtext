@@ -139,14 +139,14 @@ public class XtextGrammarTestLanguageParserConfiguration extends AbstractParserC
 	
 	public void configureConsumers() {
 		getGrammarConsumer().setAbstractRuleConsumer(getAbstractRuleConsumer());
-		getGrammarConsumer().setAbstractMetamodelDeclarationConsumer(getAbstractMetamodelDeclarationConsumer());
 		getGrammarConsumer().setIdConsumer(getIdConsumer());
+		getGrammarConsumer().setAbstractMetamodelDeclarationConsumer(getAbstractMetamodelDeclarationConsumer());
 
 		getAbstractRuleConsumer().setParserRuleConsumer(getParserRuleConsumer());
 		getAbstractRuleConsumer().setLexerRuleConsumer(getLexerRuleConsumer());
 
-		getAbstractMetamodelDeclarationConsumer().setGeneratedMetamodelConsumer(getGeneratedMetamodelConsumer());
 		getAbstractMetamodelDeclarationConsumer().setReferencedMetamodelConsumer(getReferencedMetamodelConsumer());
+		getAbstractMetamodelDeclarationConsumer().setGeneratedMetamodelConsumer(getGeneratedMetamodelConsumer());
 
 		getGeneratedMetamodelConsumer().setStringConsumer(getStringConsumer());
 		getGeneratedMetamodelConsumer().setIdConsumer(getIdConsumer());
@@ -155,12 +155,12 @@ public class XtextGrammarTestLanguageParserConfiguration extends AbstractParserC
 		getReferencedMetamodelConsumer().setIdConsumer(getIdConsumer());
 
 		getLexerRuleConsumer().setStringConsumer(getStringConsumer());
-		getLexerRuleConsumer().setTypeRefConsumer(getTypeRefConsumer());
 		getLexerRuleConsumer().setIdConsumer(getIdConsumer());
+		getLexerRuleConsumer().setTypeRefConsumer(getTypeRefConsumer());
 
+		getParserRuleConsumer().setIdConsumer(getIdConsumer());
 		getParserRuleConsumer().setAlternativesConsumer(getAlternativesConsumer());
 		getParserRuleConsumer().setTypeRefConsumer(getTypeRefConsumer());
-		getParserRuleConsumer().setIdConsumer(getIdConsumer());
 
 		getTypeRefConsumer().setIdConsumer(getIdConsumer());
 
@@ -169,22 +169,22 @@ public class XtextGrammarTestLanguageParserConfiguration extends AbstractParserC
 		getGroupConsumer().setAbstractTokenConsumer(getAbstractTokenConsumer());
 
 		getAbstractTokenConsumer().setAssignmentConsumer(getAssignmentConsumer());
-		getAbstractTokenConsumer().setActionConsumer(getActionConsumer());
 		getAbstractTokenConsumer().setAbstractTerminalConsumer(getAbstractTerminalConsumer());
+		getAbstractTokenConsumer().setActionConsumer(getActionConsumer());
 
-		getAssignmentConsumer().setAbstractTerminalConsumer(getAbstractTerminalConsumer());
 		getAssignmentConsumer().setIdConsumer(getIdConsumer());
+		getAssignmentConsumer().setAbstractTerminalConsumer(getAbstractTerminalConsumer());
 
-		getActionConsumer().setTypeRefConsumer(getTypeRefConsumer());
 		getActionConsumer().setIdConsumer(getIdConsumer());
+		getActionConsumer().setTypeRefConsumer(getTypeRefConsumer());
 
 		getAbstractTerminalConsumer().setParenthesizedElementConsumer(getParenthesizedElementConsumer());
-		getAbstractTerminalConsumer().setKeywordConsumer(getKeywordConsumer());
 		getAbstractTerminalConsumer().setCrossReferenceConsumer(getCrossReferenceConsumer());
+		getAbstractTerminalConsumer().setKeywordConsumer(getKeywordConsumer());
 		getAbstractTerminalConsumer().setRuleCallConsumer(getRuleCallConsumer());
 
-		getCrossReferenceConsumer().setTypeRefConsumer(getTypeRefConsumer());
 		getCrossReferenceConsumer().setIdConsumer(getIdConsumer());
+		getCrossReferenceConsumer().setTypeRefConsumer(getTypeRefConsumer());
 
 		getParenthesizedElementConsumer().setAlternativesConsumer(getAlternativesConsumer());
 
@@ -210,126 +210,101 @@ public class XtextGrammarTestLanguageParserConfiguration extends AbstractParserC
     	return grammarConsumer;
     }
 
-
     public XtextGrammarTestLanguageAbstractRuleConsumer getAbstractRuleConsumer() {
     	return abstractRuleConsumer;
     }
-
 
     public XtextGrammarTestLanguageAbstractMetamodelDeclarationConsumer getAbstractMetamodelDeclarationConsumer() {
     	return abstractMetamodelDeclarationConsumer;
     }
 
-
     public XtextGrammarTestLanguageGeneratedMetamodelConsumer getGeneratedMetamodelConsumer() {
     	return generatedMetamodelConsumer;
     }
-
 
     public XtextGrammarTestLanguageReferencedMetamodelConsumer getReferencedMetamodelConsumer() {
     	return referencedMetamodelConsumer;
     }
 
-
     public XtextGrammarTestLanguageLexerRuleConsumer getLexerRuleConsumer() {
     	return lexerRuleConsumer;
     }
-
 
     public XtextGrammarTestLanguageParserRuleConsumer getParserRuleConsumer() {
     	return parserRuleConsumer;
     }
 
-
     public XtextGrammarTestLanguageTypeRefConsumer getTypeRefConsumer() {
     	return typeRefConsumer;
     }
-
 
     public XtextGrammarTestLanguageAlternativesConsumer getAlternativesConsumer() {
     	return alternativesConsumer;
     }
 
-
     public XtextGrammarTestLanguageGroupConsumer getGroupConsumer() {
     	return groupConsumer;
     }
-
 
     public XtextGrammarTestLanguageAbstractTokenConsumer getAbstractTokenConsumer() {
     	return abstractTokenConsumer;
     }
 
-
     public XtextGrammarTestLanguageAssignmentConsumer getAssignmentConsumer() {
     	return assignmentConsumer;
     }
-
 
     public XtextGrammarTestLanguageActionConsumer getActionConsumer() {
     	return actionConsumer;
     }
 
-
     public XtextGrammarTestLanguageAbstractTerminalConsumer getAbstractTerminalConsumer() {
     	return abstractTerminalConsumer;
     }
-
 
     public XtextGrammarTestLanguageCrossReferenceConsumer getCrossReferenceConsumer() {
     	return crossReferenceConsumer;
     }
 
-
     public XtextGrammarTestLanguageParenthesizedElementConsumer getParenthesizedElementConsumer() {
     	return parenthesizedElementConsumer;
     }
-
 
     public XtextGrammarTestLanguageKeywordConsumer getKeywordConsumer() {
     	return keywordConsumer;
     }
 
-
     public XtextGrammarTestLanguageRuleCallConsumer getRuleCallConsumer() {
     	return ruleCallConsumer;
     }
-
 
     public XtextBuiltinIDConsumer getIdConsumer() {
     	return getXtextBuiltinConfiguration().getIdConsumer();
     }
 
-
     public XtextBuiltinINTConsumer getIntConsumer() {
     	return getXtextBuiltinConfiguration().getIntConsumer();
     }
-
 
     public XtextBuiltinSTRINGConsumer getStringConsumer() {
     	return getXtextBuiltinConfiguration().getStringConsumer();
     }
 
-
     public XtextBuiltinML_COMMENTConsumer getMlCommentConsumer() {
     	return getXtextBuiltinConfiguration().getMlCommentConsumer();
     }
-
 
     public XtextBuiltinSL_COMMENTConsumer getSlCommentConsumer() {
     	return getXtextBuiltinConfiguration().getSlCommentConsumer();
     }
 
-
     public XtextBuiltinWSConsumer getWsConsumer() {
     	return getXtextBuiltinConfiguration().getWsConsumer();
     }
 
-
     public XtextBuiltinANY_OTHERConsumer getAnyOtherConsumer() {
     	return getXtextBuiltinConfiguration().getAnyOtherConsumer();
     }
-
 
 
 }

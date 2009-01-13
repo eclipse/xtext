@@ -68,8 +68,8 @@ public class TransientValuesTestParserConfiguration extends AbstractParserConfig
 	}
 	
 	public void configureConsumers() {
-		getRootConsumer$().setTestListConsumer(getTestListConsumer());
 		getRootConsumer$().setTestRequiredConsumer(getTestRequiredConsumer());
+		getRootConsumer$().setTestListConsumer(getTestListConsumer());
 		getRootConsumer$().setTestOptionalConsumer(getTestOptionalConsumer());
 
 		getTestRequiredConsumer().setIntConsumer(getIntConsumer());
@@ -96,56 +96,45 @@ public class TransientValuesTestParserConfiguration extends AbstractParserConfig
     	return rootConsumer;
     }
 
-
     public TransientValuesTestTestRequiredConsumer getTestRequiredConsumer() {
     	return testRequiredConsumer;
     }
-
 
     public TransientValuesTestTestOptionalConsumer getTestOptionalConsumer() {
     	return testOptionalConsumer;
     }
 
-
     public TransientValuesTestTestListConsumer getTestListConsumer() {
     	return testListConsumer;
     }
-
 
     public XtextBuiltinIDConsumer getIdConsumer() {
     	return getXtextBuiltinConfiguration().getIdConsumer();
     }
 
-
     public XtextBuiltinINTConsumer getIntConsumer() {
     	return getXtextBuiltinConfiguration().getIntConsumer();
     }
-
 
     public XtextBuiltinSTRINGConsumer getStringConsumer() {
     	return getXtextBuiltinConfiguration().getStringConsumer();
     }
 
-
     public XtextBuiltinML_COMMENTConsumer getMlCommentConsumer() {
     	return getXtextBuiltinConfiguration().getMlCommentConsumer();
     }
-
 
     public XtextBuiltinSL_COMMENTConsumer getSlCommentConsumer() {
     	return getXtextBuiltinConfiguration().getSlCommentConsumer();
     }
 
-
     public XtextBuiltinWSConsumer getWsConsumer() {
     	return getXtextBuiltinConfiguration().getWsConsumer();
     }
 
-
     public XtextBuiltinANY_OTHERConsumer getAnyOtherConsumer() {
     	return getXtextBuiltinConfiguration().getAnyOtherConsumer();
     }
-
 
 
 }

@@ -84,8 +84,8 @@ public class SimpleExpressionsTestLanguageParserConfiguration extends AbstractPa
 
 		getMultiplicationConsumer().setTermConsumer(getTermConsumer());
 
-		getTermConsumer().setAtomConsumer(getAtomConsumer());
 		getTermConsumer().setParensConsumer(getParensConsumer());
+		getTermConsumer().setAtomConsumer(getAtomConsumer());
 
 		getAtomConsumer().setIdConsumer(getIdConsumer());
 
@@ -109,66 +109,53 @@ public class SimpleExpressionsTestLanguageParserConfiguration extends AbstractPa
     	return sequenceConsumer;
     }
 
-
     public SimpleExpressionsTestLanguageAdditionConsumer getAdditionConsumer() {
     	return additionConsumer;
     }
-
 
     public SimpleExpressionsTestLanguageMultiplicationConsumer getMultiplicationConsumer() {
     	return multiplicationConsumer;
     }
 
-
     public SimpleExpressionsTestLanguageTermConsumer getTermConsumer() {
     	return termConsumer;
     }
-
 
     public SimpleExpressionsTestLanguageAtomConsumer getAtomConsumer() {
     	return atomConsumer;
     }
 
-
     public SimpleExpressionsTestLanguageParensConsumer getParensConsumer() {
     	return parensConsumer;
     }
-
 
     public XtextBuiltinIDConsumer getIdConsumer() {
     	return getXtextBuiltinConfiguration().getIdConsumer();
     }
 
-
     public XtextBuiltinINTConsumer getIntConsumer() {
     	return getXtextBuiltinConfiguration().getIntConsumer();
     }
-
 
     public XtextBuiltinSTRINGConsumer getStringConsumer() {
     	return getXtextBuiltinConfiguration().getStringConsumer();
     }
 
-
     public XtextBuiltinML_COMMENTConsumer getMlCommentConsumer() {
     	return getXtextBuiltinConfiguration().getMlCommentConsumer();
     }
-
 
     public XtextBuiltinSL_COMMENTConsumer getSlCommentConsumer() {
     	return getXtextBuiltinConfiguration().getSlCommentConsumer();
     }
 
-
     public XtextBuiltinWSConsumer getWsConsumer() {
     	return getXtextBuiltinConfiguration().getWsConsumer();
     }
 
-
     public XtextBuiltinANY_OTHERConsumer getAnyOtherConsumer() {
     	return getXtextBuiltinConfiguration().getAnyOtherConsumer();
     }
-
 
 
 }

@@ -55,6 +55,8 @@ public class DefaultEcoreElementFactory implements IAstFactory {
 		value = getTokenValue(value, ruleName, node);
 		EObject eo = (EObject) _this;
 		EStructuralFeature structuralFeature = eo.eClass().getEStructuralFeature(feature);
+		if (structuralFeature == null)
+			throw new IllegalArgumentException(feature);
 		eo.eSet(structuralFeature, value);
 	}
 	

@@ -15,6 +15,8 @@ import org.eclipse.xtext.parser.packrat.IHiddenTokenHandler;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory;
 import org.eclipse.xtext.parser.packrat.IHiddenTokenHandler.IHiddenTokenState;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedNonTerminal;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedNonTerminalEnd;
@@ -63,16 +65,30 @@ public abstract class NonTerminalConsumer implements INonTerminalConsumer {
 		return result;
 	}
 	
+	public boolean consumeAsRoot(IRootConsumerListener listener) throws Exception {
+		IHiddenTokenState prevState = hiddenTokenHandler.replaceHiddenTokens(hiddenTokens);
+		IMarker marker = mark();
+		parser.accept(new ParsedNonTerminal(input, input.getOffset(), getGrammarElement(), getDefaultTypeName()));
+		boolean result = doConsume();
+		if (result)
+			result = listener.beforeNonTerminalEnd(this);
+		if (result) {
+			parser.accept(new ParsedNonTerminalEnd(input, input.getOffset(), null, false, false));
+		} else marker.rollback();
+		prevState.restore();
+		return result;
+	}
+	
 	protected final IMarker mark() {
 		return markerFactory.mark();
 	}
 	
-	protected final boolean consumeKeyword(Keyword keyword, String feature, boolean isMany, boolean isBoolean) {
-		return consumerUtil.consumeKeyword(keyword, feature, isMany, isBoolean);
+	protected final boolean consumeKeyword(Keyword keyword, String feature, boolean isMany, boolean isBoolean, ICharacterClass notFollowedBy) {
+		return consumerUtil.consumeKeyword(keyword, feature, isMany, isBoolean, notFollowedBy);
 	}
 	
-	protected final boolean consumeTerminal(ITerminalConsumer consumer, String feature, boolean isMany, boolean isBoolean, AbstractElement grammarElement) {
-		return consumerUtil.consumeTerminal(consumer, feature, isMany, isBoolean, grammarElement);
+	protected final boolean consumeTerminal(ITerminalConsumer consumer, String feature, boolean isMany, boolean isBoolean, AbstractElement grammarElement, ISequenceMatcher notMatching) {
+		return consumerUtil.consumeTerminal(consumer, feature, isMany, isBoolean, grammarElement, notMatching);
 	}
 	
 	protected final boolean consumeNonTerminal(INonTerminalConsumer consumer, String feature, boolean isMany, boolean isDatatype, AbstractElement grammarElement) throws Exception {

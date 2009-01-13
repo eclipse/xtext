@@ -18,6 +18,7 @@ import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 import org.eclipse.xtext.services.XtextGrammarAccess;
 import org.eclipse.xtext.services.XtextGrammarAccess.TypeRefElements;
+import org.eclipse.xtext.xtext.parser.handwritten.HandwrittenDelimiters;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -38,8 +39,8 @@ public class TypeRefConsumer extends NonTerminalConsumer {
 			OPTION$1: do {
 				SEQUENCE$2: {
 					IMarker marker$4 = mark();
-					if (!consumeTerminal(idConsumer, null, false, false, getRule().ele000CrossReferenceEStringAbstractMetamodelDeclaration())) break SEQUENCE$2;
-					if (!consumeKeyword(getRule().ele01KeywordColonColon(), null, false, false)) {
+					if (!consumeTerminal(idConsumer, null, false, false, getRule().ele000CrossReferenceEStringAbstractMetamodelDeclaration(), HandwrittenDelimiters.allKeywords)) break SEQUENCE$2;
+					if (!consumeKeyword(getRule().ele01KeywordColonColon(), null, false, false, null)) {
 						marker$4.rollback();
 						break SEQUENCE$2;
 					}
@@ -48,7 +49,7 @@ public class TypeRefConsumer extends NonTerminalConsumer {
 				break OPTION$1;
 			} while(false);
 			
-			if (!consumeTerminal(idConsumer, null, false, false, getRule().ele10CrossReferenceEStringEClassifier()))
+			if (!consumeTerminal(idConsumer, null, false, false, getRule().ele10CrossReferenceEStringEClassifier(), HandwrittenDelimiters.allKeywords))
 				break SEQUENCE$0;
 			return true;
 		}

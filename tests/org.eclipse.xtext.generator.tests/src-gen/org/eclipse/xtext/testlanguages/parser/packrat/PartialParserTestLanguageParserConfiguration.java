@@ -99,13 +99,13 @@ public class PartialParserTestLanguageParserConfiguration extends AbstractParser
 	
 	public void configureConsumers() {
 		getContainerConsumer().setContentConsumer(getContentConsumer());
-		getContainerConsumer().setIdConsumer(getIdConsumer());
 		getContainerConsumer().setNestedConsumer(getNestedConsumer());
+		getContainerConsumer().setIdConsumer(getIdConsumer());
 
 		getNestedConsumer().setContainerConsumer(getContainerConsumer());
 
-		getContentConsumer().setChildrenConsumer(getChildrenConsumer());
 		getContentConsumer().setAbstractChildrenConsumer(getAbstractChildrenConsumer());
+		getContentConsumer().setChildrenConsumer(getChildrenConsumer());
 
 		getChildrenConsumer().setChildConsumer(getChildConsumer());
 
@@ -142,86 +142,69 @@ public class PartialParserTestLanguageParserConfiguration extends AbstractParser
     	return containerConsumer;
     }
 
-
     public PartialParserTestLanguageNestedConsumer getNestedConsumer() {
     	return nestedConsumer;
     }
-
 
     public PartialParserTestLanguageContentConsumer getContentConsumer() {
     	return contentConsumer;
     }
 
-
     public PartialParserTestLanguageChildrenConsumer getChildrenConsumer() {
     	return childrenConsumer;
     }
-
 
     public PartialParserTestLanguageChildConsumer getChildConsumer() {
     	return childConsumer;
     }
 
-
     public PartialParserTestLanguageAbstractChildrenConsumer getAbstractChildrenConsumer() {
     	return abstractChildrenConsumer;
     }
-
 
     public PartialParserTestLanguageAbstractChildConsumer getAbstractChildConsumer() {
     	return abstractChildConsumer;
     }
 
-
     public PartialParserTestLanguageFirstConcreteConsumer getFirstConcreteConsumer() {
     	return firstConcreteConsumer;
     }
-
 
     public PartialParserTestLanguageSecondConcreteConsumer getSecondConcreteConsumer() {
     	return secondConcreteConsumer;
     }
 
-
     public PartialParserTestLanguageNamedConsumer getNamedConsumer() {
     	return namedConsumer;
     }
-
 
     public XtextBuiltinIDConsumer getIdConsumer() {
     	return getXtextBuiltinConfiguration().getIdConsumer();
     }
 
-
     public XtextBuiltinINTConsumer getIntConsumer() {
     	return getXtextBuiltinConfiguration().getIntConsumer();
     }
-
 
     public XtextBuiltinSTRINGConsumer getStringConsumer() {
     	return getXtextBuiltinConfiguration().getStringConsumer();
     }
 
-
     public XtextBuiltinML_COMMENTConsumer getMlCommentConsumer() {
     	return getXtextBuiltinConfiguration().getMlCommentConsumer();
     }
-
 
     public XtextBuiltinSL_COMMENTConsumer getSlCommentConsumer() {
     	return getXtextBuiltinConfiguration().getSlCommentConsumer();
     }
 
-
     public XtextBuiltinWSConsumer getWsConsumer() {
     	return getXtextBuiltinConfiguration().getWsConsumer();
     }
 
-
     public XtextBuiltinANY_OTHERConsumer getAnyOtherConsumer() {
     	return getXtextBuiltinConfiguration().getAnyOtherConsumer();
     }
-
 
 
 }

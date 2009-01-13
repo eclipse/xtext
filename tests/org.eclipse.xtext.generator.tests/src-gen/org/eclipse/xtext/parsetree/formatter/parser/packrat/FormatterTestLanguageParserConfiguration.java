@@ -68,15 +68,15 @@ public class FormatterTestLanguageParserConfiguration extends AbstractParserConf
 	}
 	
 	public void configureConsumers() {
-		getRootConsumer$().setTestLinewrapConsumer(getTestLinewrapConsumer());
 		getRootConsumer$().setTestIndentationConsumer(getTestIndentationConsumer());
+		getRootConsumer$().setTestLinewrapConsumer(getTestLinewrapConsumer());
 
 		getLineConsumer().setIdConsumer(getIdConsumer());
 
 		getTestLinewrapConsumer().setLineConsumer(getLineConsumer());
 
-		getTestIndentationConsumer().setLineConsumer(getLineConsumer());
 		getTestIndentationConsumer().setTestIndentationConsumer(getTestIndentationConsumer());
+		getTestIndentationConsumer().setLineConsumer(getLineConsumer());
 
 		getIdConsumer().initFields(this);
 		getIntConsumer().initFields(this);
@@ -96,56 +96,45 @@ public class FormatterTestLanguageParserConfiguration extends AbstractParserConf
     	return rootConsumer;
     }
 
-
     public FormatterTestLanguageLineConsumer getLineConsumer() {
     	return lineConsumer;
     }
-
 
     public FormatterTestLanguageTestLinewrapConsumer getTestLinewrapConsumer() {
     	return testLinewrapConsumer;
     }
 
-
     public FormatterTestLanguageTestIndentationConsumer getTestIndentationConsumer() {
     	return testIndentationConsumer;
     }
-
 
     public XtextBuiltinIDConsumer getIdConsumer() {
     	return getXtextBuiltinConfiguration().getIdConsumer();
     }
 
-
     public XtextBuiltinINTConsumer getIntConsumer() {
     	return getXtextBuiltinConfiguration().getIntConsumer();
     }
-
 
     public XtextBuiltinSTRINGConsumer getStringConsumer() {
     	return getXtextBuiltinConfiguration().getStringConsumer();
     }
 
-
     public XtextBuiltinML_COMMENTConsumer getMlCommentConsumer() {
     	return getXtextBuiltinConfiguration().getMlCommentConsumer();
     }
-
 
     public XtextBuiltinSL_COMMENTConsumer getSlCommentConsumer() {
     	return getXtextBuiltinConfiguration().getSlCommentConsumer();
     }
 
-
     public XtextBuiltinWSConsumer getWsConsumer() {
     	return getXtextBuiltinConfiguration().getWsConsumer();
     }
 
-
     public XtextBuiltinANY_OTHERConsumer getAnyOtherConsumer() {
     	return getXtextBuiltinConfiguration().getAnyOtherConsumer();
     }
-
 
 
 }

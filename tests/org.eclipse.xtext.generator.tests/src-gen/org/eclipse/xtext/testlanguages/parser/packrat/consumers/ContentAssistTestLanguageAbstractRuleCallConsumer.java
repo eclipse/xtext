@@ -12,11 +12,15 @@ import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+
 import org.eclipse.xtext.testlanguages.services.ContentAssistTestLanguageGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.ContentAssistTestLanguageGrammarAccess.AbstractRuleCallElements;
 
+import org.eclipse.xtext.testlanguages.parser.packrat.ContentAssistTestLanguageDelimiters;
+
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 
+@SuppressWarnings("unused")
 public final class ContentAssistTestLanguageAbstractRuleCallConsumer extends NonTerminalConsumer {
 
 	private XtextBuiltinIDConsumer idConsumer;
@@ -27,16 +31,13 @@ public final class ContentAssistTestLanguageAbstractRuleCallConsumer extends Non
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 	}
 	
-	@SuppressWarnings("unused")
 	protected boolean doConsume() throws Exception {
-		ASSIGNMENT$1SUCCESS: {
-			ASSIGNMENT$1FAILURE: {
-				if (consumeTerminal(idConsumer, null, false, false, getRule().ele0CrossReferenceEStringAbstractRule()))
-					break ASSIGNMENT$1FAILURE;
-				break ASSIGNMENT$1SUCCESS;
-			}
+		return consumeAssignment$1();
+	}
+
+	protected boolean consumeAssignment$1() throws Exception {
+		if (consumeTerminal(idConsumer, null, false, false, getRule().ele0CrossReferenceEStringAbstractRule(), ContentAssistTestLanguageDelimiters.ALL_KEYWORDS))
 			return true;
-		}
 		return false;
 	}
 
@@ -57,5 +58,4 @@ public final class ContentAssistTestLanguageAbstractRuleCallConsumer extends Non
 		this.idConsumer = idConsumer;
 	}
 	
-
 }

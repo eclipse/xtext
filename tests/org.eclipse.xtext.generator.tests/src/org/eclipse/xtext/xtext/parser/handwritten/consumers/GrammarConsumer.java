@@ -19,6 +19,7 @@ import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 import org.eclipse.xtext.services.XtextGrammarAccess;
 import org.eclipse.xtext.services.XtextGrammarAccess.GrammarElements;
+import org.eclipse.xtext.xtext.parser.handwritten.HandwrittenDelimiters;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -44,24 +45,24 @@ public final class GrammarConsumer extends NonTerminalConsumer {
 		SEQUENCE$0: {
 			ALTERNATIVE$1: {
 				if (consumeKeyword(getRule().ele0000000KeywordAbstractLanguage(),
-						"abstract", false, true))
+						"abstract", false, true, HandwrittenDelimiters.idDelimiter()))
 					break ALTERNATIVE$1;
 				if (consumeKeyword(getRule().ele000001KeywordLanguage(), null, false,
-						false))
+						false, null))
 					break ALTERNATIVE$1;
 				break SEQUENCE$0;
 			}
-			if (!consumeTerminal(idConsumer, "idElements", true, false, getRule().ele000010LexerRuleCallID()))
+			if (!consumeTerminal(idConsumer, "idElements", true, false, getRule().ele000010LexerRuleCallID(), HandwrittenDelimiters.allKeywords))
 				break SEQUENCE$0;
 			LOOP$2: while (true) { // * cardinality - while(true)
 				SEQUENCE$3: {
 					IMarker marker$4 = mark(); // first part of alternative is sequence, so mark the position before the sequence
 					// '.'
 					if (!consumeKeyword(getRule().ele00010KeywordFullStop(), null, false,
-							false))
+							false, null))
 						break SEQUENCE$3;
 					// idElements+=ID
-					if (!consumeTerminal(idConsumer, "idElements", true, false, getRule().ele000110LexerRuleCallID())) {
+					if (!consumeTerminal(idConsumer, "idElements", true, false, getRule().ele000110LexerRuleCallID(), HandwrittenDelimiters.allKeywords)) {
 						marker$4.rollback();
 						break SEQUENCE$3; // jump back into previous alternative, because we were optional
 					}
@@ -74,9 +75,9 @@ public final class GrammarConsumer extends NonTerminalConsumer {
 				SEQUENCE$5: {
 					IMarker marker$5 = mark();
 					if (!consumeKeyword(getRule().ele00100KeywordExtends(), null, false,
-							false))
+							false, HandwrittenDelimiters.idDelimiter()))
 						break SEQUENCE$5;
-					if (!consumeTerminal(idConsumer, "superGrammarIdElements", true, false, getRule().ele001010LexerRuleCallID())) {
+					if (!consumeTerminal(idConsumer, "superGrammarIdElements", true, false, getRule().ele001010LexerRuleCallID(), HandwrittenDelimiters.allKeywords)) {
 						marker$5.rollback();
 						break SEQUENCE$5;
 					}
@@ -85,9 +86,9 @@ public final class GrammarConsumer extends NonTerminalConsumer {
 							IMarker marker$8 = mark(); // first part of alternative is sequence, so mark the position before the sequence
 							// '\\\\'
 							if (!consumeKeyword(getRule().ele00010KeywordFullStop(),
-									null, false, false))
+									null, false, false, null))
 								break SEQUENCE$7;
-							if (!consumeTerminal(idConsumer, "superGrammarIdElements", true, false, getRule().ele001010LexerRuleCallID())) {
+							if (!consumeTerminal(idConsumer, "superGrammarIdElements", true, false, getRule().ele001010LexerRuleCallID(), HandwrittenDelimiters.allKeywords)) {
 								marker$8.rollback();
 								break SEQUENCE$7;
 							}

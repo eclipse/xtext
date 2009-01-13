@@ -12,16 +12,20 @@ import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+
 import org.eclipse.xtext.testlanguages.services.ReferenceGrammarTestLanguageGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.ReferenceGrammarTestLanguageGrammarAccess.PersonElements;
 
-import org.eclipse.xtext.testlanguages.parser.packrat.consumers.ReferenceGrammarTestLanguageErwachsenerConsumer;
-import org.eclipse.xtext.testlanguages.parser.packrat.consumers.ReferenceGrammarTestLanguageKindConsumer;
+import org.eclipse.xtext.testlanguages.parser.packrat.ReferenceGrammarTestLanguageDelimiters;
 
+import org.eclipse.xtext.testlanguages.parser.packrat.consumers.ReferenceGrammarTestLanguageKindConsumer;
+import org.eclipse.xtext.testlanguages.parser.packrat.consumers.ReferenceGrammarTestLanguageErwachsenerConsumer;
+
+@SuppressWarnings("unused")
 public final class ReferenceGrammarTestLanguagePersonConsumer extends NonTerminalConsumer {
 
-	private ReferenceGrammarTestLanguageErwachsenerConsumer erwachsenerConsumer;
 	private ReferenceGrammarTestLanguageKindConsumer kindConsumer;
+	private ReferenceGrammarTestLanguageErwachsenerConsumer erwachsenerConsumer;
 
 	public ReferenceGrammarTestLanguagePersonConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
@@ -29,25 +33,24 @@ public final class ReferenceGrammarTestLanguagePersonConsumer extends NonTermina
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 	}
 	
-	@SuppressWarnings("unused")
 	protected boolean doConsume() throws Exception {
-		ALTERNATIVES$1SUCCESS: {
-			ALTERNATIVES$1FAILURE: {
-				RULECALL$2SUCCESS: {
-					if (!consumeNonTerminal(kindConsumer, null, false, false,  getRule().ele0ParserRuleCallKind()))
-						break RULECALL$2SUCCESS;
-					break ALTERNATIVES$1FAILURE;
-				}
-				RULECALL$3SUCCESS: {
-					if (!consumeNonTerminal(erwachsenerConsumer, null, false, false,  getRule().ele1ParserRuleCallErwachsener()))
-						break RULECALL$3SUCCESS;
-					break ALTERNATIVES$1FAILURE;
-				}
-				break ALTERNATIVES$1SUCCESS;
-			}
+		return consumeAlternatives$1();
+	}
+
+	protected boolean consumeAlternatives$1() throws Exception {
+		if (consumeRuleCall$2())
 			return true;
-		}
+		if (consumeRuleCall$3())
+			return true;
 		return false;
+	}
+
+	protected boolean consumeRuleCall$2() throws Exception {
+		return consumeNonTerminal(kindConsumer, null, false, false, getRule().ele0ParserRuleCallKind());
+	}
+
+	protected boolean consumeRuleCall$3() throws Exception {
+		return consumeNonTerminal(erwachsenerConsumer, null, false, false, getRule().ele1ParserRuleCallErwachsener());
 	}
 
 	public PersonElements getRule() {
@@ -63,13 +66,12 @@ public final class ReferenceGrammarTestLanguagePersonConsumer extends NonTermina
 		return "Person";
 	}
 	
-	public void setErwachsenerConsumer(ReferenceGrammarTestLanguageErwachsenerConsumer erwachsenerConsumer) {
-		this.erwachsenerConsumer = erwachsenerConsumer;
-	}
-	
 	public void setKindConsumer(ReferenceGrammarTestLanguageKindConsumer kindConsumer) {
 		this.kindConsumer = kindConsumer;
 	}
 	
-
+	public void setErwachsenerConsumer(ReferenceGrammarTestLanguageErwachsenerConsumer erwachsenerConsumer) {
+		this.erwachsenerConsumer = erwachsenerConsumer;
+	}
+	
 }

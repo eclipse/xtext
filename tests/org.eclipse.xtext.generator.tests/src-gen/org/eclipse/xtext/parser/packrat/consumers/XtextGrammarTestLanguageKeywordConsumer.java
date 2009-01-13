@@ -12,11 +12,15 @@ import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+
 import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess;
 import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess.KeywordElements;
 
+import org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters;
+
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGConsumer;
 
+@SuppressWarnings("unused")
 public final class XtextGrammarTestLanguageKeywordConsumer extends NonTerminalConsumer {
 
 	private XtextBuiltinSTRINGConsumer stringConsumer;
@@ -27,16 +31,13 @@ public final class XtextGrammarTestLanguageKeywordConsumer extends NonTerminalCo
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 	}
 	
-	@SuppressWarnings("unused")
 	protected boolean doConsume() throws Exception {
-		ASSIGNMENT$1SUCCESS: {
-			ASSIGNMENT$1FAILURE: {
-				if (consumeTerminal(stringConsumer, "value", false, false, getRule().ele0LexerRuleCallSTRING()))
-					break ASSIGNMENT$1FAILURE;
-				break ASSIGNMENT$1SUCCESS;
-			}
+		return consumeAssignment$1();
+	}
+
+	protected boolean consumeAssignment$1() throws Exception {
+		if (consumeTerminal(stringConsumer, "value", false, false, getRule().ele0LexerRuleCallSTRING(), XtextGrammarTestLanguageDelimiters.ALL_KEYWORDS))
 			return true;
-		}
 		return false;
 	}
 
@@ -57,5 +58,4 @@ public final class XtextGrammarTestLanguageKeywordConsumer extends NonTerminalCo
 		this.stringConsumer = stringConsumer;
 	}
 	
-
 }

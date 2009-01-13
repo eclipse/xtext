@@ -7,19 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.packrat;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
-import org.eclipse.xtext.Action;
-import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.LexerRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 import org.eclipse.xtext.util.Strings;
-import org.eclipse.xtext.util.XtextSwitch;
 
 /**
  * Various utilities for the parser generator.
@@ -139,41 +140,25 @@ public final class PackratParserGenUtil {
 		return result.toString() + "Consumer";
 	}
 	
-	public static String getLabelName(AbstractElement element) {
+	public static String getConsumeMethodName(AbstractElement element) {
 		AbstractRule rule = EcoreUtil2.getContainerOfType(element, AbstractRule.class);
 		List<EObject> allContents = EcoreUtil2.eAllContentsAsList(rule);
-		return element.eClass().getName().toUpperCase() + '$' + Integer.toString(allContents.indexOf(element));
+		return "consume" + element.eClass().getName()+ '$' + Integer.toString(allContents.indexOf(element));
 	}
 	
-	public static boolean canFail(AbstractElement element) {
-		return !GrammarUtil.isOptionalCardinality(element) && new XtextSwitch<Boolean>() {
-
-			@Override
-			public Boolean caseAction(Action object) {
-				return false;
-			}
-
-			@Override
-			public Boolean caseAlternatives(Alternatives object) {
-				for(AbstractElement group: object.getGroups()) {
-					if (!canFail(group)) return false;
-				}
-				return true;
-			}
-
-			@Override
-			public Boolean caseAbstractElement(AbstractElement object) {
-				return true;
-			}
-
-			@Override
-			public Boolean caseGroup(Group object) {
-				for(AbstractElement token: object.getAbstractTokens()) {
-					if (canFail(token)) return true;
-				}
-				return false;
-			}
-			
-		}.doSwitch(element);
+	public static boolean canBeFollowedByIdentifier(Keyword keyword) {
+		String value = keyword.getValue();
+		return !XtextBuiltinIDConsumer.IDConsumer$$2.matches(value.charAt(value.length() - 1));
 	}
+	
+	public static List<AbstractElement> getFollowElements(AbstractElement element) {
+		final List<AbstractElement> result = new ArrayList<AbstractElement>();
+		if (!(element instanceof Keyword) && !((element instanceof RuleCall) && (((RuleCall) element).getRule() instanceof LexerRule)))
+			throw new IllegalArgumentException("element: " + element);
+		if (GrammarUtil.isMultipleCardinality(element))
+			result.add(element);
+		
+		return result;
+	}
+
 }

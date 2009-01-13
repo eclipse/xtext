@@ -12,12 +12,16 @@ import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+
 import org.eclipse.xtext.parsetree.reconstr.services.ComplexReconstrTestLanguageGrammarAccess;
 import org.eclipse.xtext.parsetree.reconstr.services.ComplexReconstrTestLanguageGrammarAccess.TermElements;
+
+import org.eclipse.xtext.parsetree.reconstr.parser.packrat.ComplexReconstrTestLanguageDelimiters;
 
 import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.ComplexReconstrTestLanguageParensConsumer;
 import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.ComplexReconstrTestLanguageAtomConsumer;
 
+@SuppressWarnings("unused")
 public final class ComplexReconstrTestLanguageTermConsumer extends NonTerminalConsumer {
 
 	private ComplexReconstrTestLanguageParensConsumer parensConsumer;
@@ -29,25 +33,24 @@ public final class ComplexReconstrTestLanguageTermConsumer extends NonTerminalCo
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 	}
 	
-	@SuppressWarnings("unused")
 	protected boolean doConsume() throws Exception {
-		ALTERNATIVES$1SUCCESS: {
-			ALTERNATIVES$1FAILURE: {
-				RULECALL$2SUCCESS: {
-					if (!consumeNonTerminal(atomConsumer, null, false, false,  getRule().ele0ParserRuleCallAtom()))
-						break RULECALL$2SUCCESS;
-					break ALTERNATIVES$1FAILURE;
-				}
-				RULECALL$3SUCCESS: {
-					if (!consumeNonTerminal(parensConsumer, null, false, false,  getRule().ele1ParserRuleCallParens()))
-						break RULECALL$3SUCCESS;
-					break ALTERNATIVES$1FAILURE;
-				}
-				break ALTERNATIVES$1SUCCESS;
-			}
+		return consumeAlternatives$1();
+	}
+
+	protected boolean consumeAlternatives$1() throws Exception {
+		if (consumeRuleCall$2())
 			return true;
-		}
+		if (consumeRuleCall$3())
+			return true;
 		return false;
+	}
+
+	protected boolean consumeRuleCall$2() throws Exception {
+		return consumeNonTerminal(atomConsumer, null, false, false, getRule().ele0ParserRuleCallAtom());
+	}
+
+	protected boolean consumeRuleCall$3() throws Exception {
+		return consumeNonTerminal(parensConsumer, null, false, false, getRule().ele1ParserRuleCallParens());
 	}
 
 	public TermElements getRule() {
@@ -71,5 +74,4 @@ public final class ComplexReconstrTestLanguageTermConsumer extends NonTerminalCo
 		this.atomConsumer = atomConsumer;
 	}
 	
-
 }

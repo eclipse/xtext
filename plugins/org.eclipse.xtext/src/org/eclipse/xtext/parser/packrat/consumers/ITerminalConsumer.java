@@ -8,15 +8,16 @@
 package org.eclipse.xtext.parser.packrat.consumers;
 
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public interface ITerminalConsumer {
 	
-	boolean consume(String feature, boolean isMany, boolean isBoolean, AbstractElement element);
+	boolean consume(String feature, boolean isMany, boolean isBoolean, AbstractElement element, ISequenceMatcher notMatching);
 	
-	boolean consume();
+	boolean consume(ISequenceMatcher notMatching);
 	
 	void setHidden(boolean hidden);
 	

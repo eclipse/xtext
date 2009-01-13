@@ -123,8 +123,8 @@ public class ComplexReconstrTestLanguageParserConfiguration extends AbstractPars
 	}
 	
 	public void configureConsumers() {
-		getRootConsumer$().setOpConsumer(getOpConsumer());
 		getRootConsumer$().setTrickyGConsumer(getTrickyGConsumer());
+		getRootConsumer$().setOpConsumer(getOpConsumer());
 
 		getOpConsumer().setTermConsumer(getTermConsumer());
 
@@ -135,9 +135,9 @@ public class ComplexReconstrTestLanguageParserConfiguration extends AbstractPars
 
 		getParensConsumer().setOpConsumer(getOpConsumer());
 
+		getTrickyAConsumer().setIdConsumer(getIdConsumer());
 		getTrickyAConsumer().setStringConsumer(getStringConsumer());
 		getTrickyAConsumer().setTrickyA1Consumer(getTrickyA1Consumer());
-		getTrickyAConsumer().setIdConsumer(getIdConsumer());
 
 		getTrickyA1Consumer().setIdConsumer(getIdConsumer());
 
@@ -146,13 +146,13 @@ public class ComplexReconstrTestLanguageParserConfiguration extends AbstractPars
 
 		getTrickyCConsumer().setIdConsumer(getIdConsumer());
 
-		getTrickyDConsumer().setStringConsumer(getStringConsumer());
 		getTrickyDConsumer().setIntConsumer(getIntConsumer());
 		getTrickyDConsumer().setIdConsumer(getIdConsumer());
+		getTrickyDConsumer().setStringConsumer(getStringConsumer());
 
-		getTrickyEConsumer().setStringConsumer(getStringConsumer());
 		getTrickyEConsumer().setIntConsumer(getIntConsumer());
 		getTrickyEConsumer().setIdConsumer(getIdConsumer());
+		getTrickyEConsumer().setStringConsumer(getStringConsumer());
 
 		getTrickyFConsumer().setIntConsumer(getIntConsumer());
 		getTrickyFConsumer().setIdConsumer(getIdConsumer());
@@ -182,111 +182,89 @@ public class ComplexReconstrTestLanguageParserConfiguration extends AbstractPars
     	return rootConsumer;
     }
 
-
     public ComplexReconstrTestLanguageOpConsumer getOpConsumer() {
     	return opConsumer;
     }
-
 
     public ComplexReconstrTestLanguageTermConsumer getTermConsumer() {
     	return termConsumer;
     }
 
-
     public ComplexReconstrTestLanguageAtomConsumer getAtomConsumer() {
     	return atomConsumer;
     }
-
 
     public ComplexReconstrTestLanguageParensConsumer getParensConsumer() {
     	return parensConsumer;
     }
 
-
     public ComplexReconstrTestLanguageTrickyAConsumer getTrickyAConsumer() {
     	return trickyAConsumer;
     }
-
 
     public ComplexReconstrTestLanguageTrickyA1Consumer getTrickyA1Consumer() {
     	return trickyA1Consumer;
     }
 
-
     public ComplexReconstrTestLanguageTrickyBConsumer getTrickyBConsumer() {
     	return trickyBConsumer;
     }
-
 
     public ComplexReconstrTestLanguageTrickyCConsumer getTrickyCConsumer() {
     	return trickyCConsumer;
     }
 
-
     public ComplexReconstrTestLanguageTrickyDConsumer getTrickyDConsumer() {
     	return trickyDConsumer;
     }
-
 
     public ComplexReconstrTestLanguageTrickyEConsumer getTrickyEConsumer() {
     	return trickyEConsumer;
     }
 
-
     public ComplexReconstrTestLanguageTrickyFConsumer getTrickyFConsumer() {
     	return trickyFConsumer;
     }
-
 
     public ComplexReconstrTestLanguageTrickyGConsumer getTrickyGConsumer() {
     	return trickyGConsumer;
     }
 
-
     public ComplexReconstrTestLanguageTrickyG1Consumer getTrickyG1Consumer() {
     	return trickyG1Consumer;
     }
-
 
     public ComplexReconstrTestLanguageTrickyG2Consumer getTrickyG2Consumer() {
     	return trickyG2Consumer;
     }
 
-
     public XtextBuiltinIDConsumer getIdConsumer() {
     	return getXtextBuiltinConfiguration().getIdConsumer();
     }
-
 
     public XtextBuiltinINTConsumer getIntConsumer() {
     	return getXtextBuiltinConfiguration().getIntConsumer();
     }
 
-
     public XtextBuiltinSTRINGConsumer getStringConsumer() {
     	return getXtextBuiltinConfiguration().getStringConsumer();
     }
-
 
     public XtextBuiltinML_COMMENTConsumer getMlCommentConsumer() {
     	return getXtextBuiltinConfiguration().getMlCommentConsumer();
     }
 
-
     public XtextBuiltinSL_COMMENTConsumer getSlCommentConsumer() {
     	return getXtextBuiltinConfiguration().getSlCommentConsumer();
     }
-
 
     public XtextBuiltinWSConsumer getWsConsumer() {
     	return getXtextBuiltinConfiguration().getWsConsumer();
     }
 
-
     public XtextBuiltinANY_OTHERConsumer getAnyOtherConsumer() {
     	return getXtextBuiltinConfiguration().getAnyOtherConsumer();
     }
-
 
 
 }

@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 import org.eclipse.xtext.services.XtextGrammarAccess;
+import org.eclipse.xtext.xtext.parser.handwritten.HandwrittenDelimiters;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -43,18 +44,18 @@ public final class ReferencedMetamodelConsumer extends NonTerminalConsumer {
 	protected boolean doConsume() throws Exception {
 		SEQUENCE$0: {
 			if (!consumeKeyword(XtextGrammarAccess.INSTANCE.prReferencedMetamodel().ele00KeywordImport(), null, false,
-					false))
+					false, HandwrittenDelimiters.idDelimiter()))
 				break SEQUENCE$0;
 			//				if (!consumeTerminal(STRINGConsumer, "ePackage", false, false)) break SEQUENCE$0;
-			if (!consumeTerminal(stringConsumer, null, false, false, XtextGrammarAccess.INSTANCE.prReferencedMetamodel().ele010CrossReferenceEStringEPackage()))
+			if (!consumeTerminal(stringConsumer, null, false, false, XtextGrammarAccess.INSTANCE.prReferencedMetamodel().ele010CrossReferenceEStringEPackage(), HandwrittenDelimiters.allKeywords))
 				break SEQUENCE$0;
 			OPTION$1: {
 				SEQUENCE$2: {
 					IMarker marker$3 = mark();
 					if (!consumeKeyword(XtextGrammarAccess.INSTANCE.prReferencedMetamodel().ele10KeywordAs(), null,
-							false, false))
+							false, false, HandwrittenDelimiters.idDelimiter()))
 						break SEQUENCE$2;
-					if (!consumeTerminal(idConsumer, "alias", false, false, XtextGrammarAccess.INSTANCE.prReferencedMetamodel().ele110LexerRuleCallID())) {
+					if (!consumeTerminal(idConsumer, "alias", false, false, XtextGrammarAccess.INSTANCE.prReferencedMetamodel().ele110LexerRuleCallID(), HandwrittenDelimiters.allKeywords)) {
 						marker$3.rollback();
 						break SEQUENCE$2;
 					}

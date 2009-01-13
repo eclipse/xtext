@@ -12,11 +12,15 @@ import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+
 import org.eclipse.xtext.testlanguages.services.TestLanguageGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.TestLanguageGrammarAccess.EntryRuleElements;
 
+import org.eclipse.xtext.testlanguages.parser.packrat.TestLanguageDelimiters;
+
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.TestLanguageAbstractRuleConsumer;
 
+@SuppressWarnings("unused")
 public final class TestLanguageEntryRuleConsumer extends NonTerminalConsumer {
 
 	private TestLanguageAbstractRuleConsumer abstractRuleConsumer;
@@ -27,17 +31,19 @@ public final class TestLanguageEntryRuleConsumer extends NonTerminalConsumer {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 	}
 	
-	@SuppressWarnings("unused")
 	protected boolean doConsume() throws Exception {
-		ASSIGNMENT$1SUCCESS: while(true) {
-			ASSIGNMENT$1FAILURE: {
-				if (consumeNonTerminal(abstractRuleConsumer, "multiFeature", true, false , getRule().ele0ParserRuleCallAbstractRule()))
-					break ASSIGNMENT$1FAILURE;
-				break ASSIGNMENT$1SUCCESS;
-			}
-			continue ASSIGNMENT$1SUCCESS;
-		}
+		return consumeAssignment$1();
+	}
+
+	protected boolean consumeAssignment$1() throws Exception {
+		while(doConsumeAssignment$1()) {}
 		return true;
+	}
+
+	protected boolean doConsumeAssignment$1() throws Exception {
+		if (consumeNonTerminal(abstractRuleConsumer, "multiFeature", true, false, getRule().ele0ParserRuleCallAbstractRule()))
+			return true;
+		return false;
 	}
 
 	public EntryRuleElements getRule() {
@@ -57,5 +63,4 @@ public final class TestLanguageEntryRuleConsumer extends NonTerminalConsumer {
 		this.abstractRuleConsumer = abstractRuleConsumer;
 	}
 	
-
 }

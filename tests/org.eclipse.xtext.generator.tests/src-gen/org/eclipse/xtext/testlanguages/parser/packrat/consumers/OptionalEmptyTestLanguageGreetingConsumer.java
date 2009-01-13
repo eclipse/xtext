@@ -12,11 +12,15 @@ import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+
 import org.eclipse.xtext.testlanguages.services.OptionalEmptyTestLanguageGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.OptionalEmptyTestLanguageGrammarAccess.GreetingElements;
 
+import org.eclipse.xtext.testlanguages.parser.packrat.OptionalEmptyTestLanguageDelimiters;
+
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 
+@SuppressWarnings("unused")
 public final class OptionalEmptyTestLanguageGreetingConsumer extends NonTerminalConsumer {
 
 	private XtextBuiltinIDConsumer idConsumer;
@@ -27,34 +31,30 @@ public final class OptionalEmptyTestLanguageGreetingConsumer extends NonTerminal
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 	}
 	
-	@SuppressWarnings("unused")
 	protected boolean doConsume() throws Exception {
-		GROUP$1SUCCESS: {
-			IMarker mGROUP$1 = mark();
-			GROUP$1FAILURE: {
-				KEYWORD$2SUCCESS: {
-					if (!consumeKeyword(getRule().ele0KeywordHallo(), null, false, false))
-						break KEYWORD$2SUCCESS;
-					break GROUP$1FAILURE;
-				}
-				mGROUP$1.rollback();
-				break GROUP$1SUCCESS;
-			}
-			GROUP$1FAILURE: {
-				ASSIGNMENT$3SUCCESS: {
-					ASSIGNMENT$3FAILURE: {
-						if (consumeTerminal(idConsumer, "name", false, false, getRule().ele10LexerRuleCallID()))
-							break ASSIGNMENT$3FAILURE;
-						mGROUP$1.rollback();
-						break ASSIGNMENT$3SUCCESS;
-					}
-					break GROUP$1FAILURE;
-				}
-				mGROUP$1.rollback();
-				break GROUP$1SUCCESS;
-			}
-			return true;
+		return consumeGroup$1();
+	}
+
+	protected boolean consumeGroup$1() throws Exception {
+		final IMarker marker = mark();
+		if (!consumeKeyword$2()) {
+			marker.rollback();
+			return false;
 		}
+		if (!consumeAssignment$3()) {
+			marker.rollback();
+			return false;
+		}
+		return true;
+	}
+
+	protected boolean consumeKeyword$2() throws Exception {
+		return consumeKeyword(getRule().ele0KeywordHallo(), null, false, false, OptionalEmptyTestLanguageDelimiters.ID_DELIMITER);
+	}
+
+	protected boolean consumeAssignment$3() throws Exception {
+		if (consumeTerminal(idConsumer, "name", false, false, getRule().ele10LexerRuleCallID(), OptionalEmptyTestLanguageDelimiters.ALL_KEYWORDS))
+			return true;
 		return false;
 	}
 
@@ -75,5 +75,4 @@ public final class OptionalEmptyTestLanguageGreetingConsumer extends NonTerminal
 		this.idConsumer = idConsumer;
 	}
 	
-
 }

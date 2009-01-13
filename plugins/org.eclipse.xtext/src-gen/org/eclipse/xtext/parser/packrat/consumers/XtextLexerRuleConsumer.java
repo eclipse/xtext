@@ -12,13 +12,17 @@ import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+
 import org.eclipse.xtext.services.XtextGrammarAccess;
 import org.eclipse.xtext.services.XtextGrammarAccess.LexerRuleElements;
+
+import org.eclipse.xtext.parser.packrat.XtextDelimiters;
 
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextTypeRefConsumer;
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGConsumer;
 
+@SuppressWarnings("unused")
 public final class XtextLexerRuleConsumer extends NonTerminalConsumer {
 
 	private XtextBuiltinIDConsumer idConsumer;
@@ -31,138 +35,101 @@ public final class XtextLexerRuleConsumer extends NonTerminalConsumer {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 	}
 	
-	@SuppressWarnings("unused")
 	protected boolean doConsume() throws Exception {
-		GROUP$1SUCCESS: {
-			IMarker mGROUP$1 = mark();
-			GROUP$1FAILURE: {
-				GROUP$2SUCCESS: {
-					IMarker mGROUP$2 = mark();
-					GROUP$2FAILURE: {
-						GROUP$3SUCCESS: {
-							IMarker mGROUP$3 = mark();
-							GROUP$3FAILURE: {
-								GROUP$4SUCCESS: {
-									IMarker mGROUP$4 = mark();
-									GROUP$4FAILURE: {
-										GROUP$5SUCCESS: {
-											IMarker mGROUP$5 = mark();
-											GROUP$5FAILURE: {
-												ALTERNATIVES$6SUCCESS: {
-													ALTERNATIVES$6FAILURE: {
-														KEYWORD$7SUCCESS: {
-															if (!consumeKeyword(getRule().ele000000KeywordNative(), null, false, false))
-																break KEYWORD$7SUCCESS;
-															break ALTERNATIVES$6FAILURE;
-														}
-														KEYWORD$8SUCCESS: {
-															if (!consumeKeyword(getRule().ele000001KeywordLexer(), null, false, false))
-																break KEYWORD$8SUCCESS;
-															break ALTERNATIVES$6FAILURE;
-														}
-														mGROUP$5.rollback();
-														break ALTERNATIVES$6SUCCESS;
-													}
-													break GROUP$5FAILURE;
-												}
-												mGROUP$5.rollback();
-												break GROUP$5SUCCESS;
-											}
-											GROUP$5FAILURE: {
-												ASSIGNMENT$9SUCCESS: {
-													ASSIGNMENT$9FAILURE: {
-														if (consumeTerminal(idConsumer, "name", false, false, getRule().ele000010LexerRuleCallID()))
-															break ASSIGNMENT$9FAILURE;
-														mGROUP$5.rollback();
-														break ASSIGNMENT$9SUCCESS;
-													}
-													break GROUP$5FAILURE;
-												}
-												mGROUP$5.rollback();
-												break GROUP$5SUCCESS;
-											}
-											break GROUP$4FAILURE;
-										}
-										mGROUP$4.rollback();
-										break GROUP$4SUCCESS;
-									}
-									GROUP$4FAILURE: {
-										GROUP$11SUCCESS: {
-											IMarker mGROUP$11 = mark();
-											GROUP$11FAILURE: {
-												KEYWORD$12SUCCESS: {
-													if (!consumeKeyword(getRule().ele00010KeywordReturns(), null, false, false))
-														break KEYWORD$12SUCCESS;
-													break GROUP$11FAILURE;
-												}
-												mGROUP$11.rollback();
-												break GROUP$11SUCCESS;
-											}
-											GROUP$11FAILURE: {
-												ASSIGNMENT$13SUCCESS: {
-													ASSIGNMENT$13FAILURE: {
-														if (consumeNonTerminal(typeRefConsumer, "type", false, false , getRule().ele000110ParserRuleCallTypeRef()))
-															break ASSIGNMENT$13FAILURE;
-														mGROUP$11.rollback();
-														break ASSIGNMENT$13SUCCESS;
-													}
-													break GROUP$11FAILURE;
-												}
-												mGROUP$11.rollback();
-												break GROUP$11SUCCESS;
-											}
-											break GROUP$4FAILURE;
-										}
-									}
-									break GROUP$3FAILURE;
-								}
-								mGROUP$3.rollback();
-								break GROUP$3SUCCESS;
-							}
-							GROUP$3FAILURE: {
-								KEYWORD$15SUCCESS: {
-									if (!consumeKeyword(getRule().ele001KeywordColon(), null, false, false))
-										break KEYWORD$15SUCCESS;
-									break GROUP$3FAILURE;
-								}
-								mGROUP$3.rollback();
-								break GROUP$3SUCCESS;
-							}
-							break GROUP$2FAILURE;
-						}
-						mGROUP$2.rollback();
-						break GROUP$2SUCCESS;
-					}
-					GROUP$2FAILURE: {
-						ASSIGNMENT$16SUCCESS: {
-							ASSIGNMENT$16FAILURE: {
-								if (consumeTerminal(stringConsumer, "body", false, false, getRule().ele010LexerRuleCallSTRING()))
-									break ASSIGNMENT$16FAILURE;
-								mGROUP$2.rollback();
-								break ASSIGNMENT$16SUCCESS;
-							}
-							break GROUP$2FAILURE;
-						}
-						mGROUP$2.rollback();
-						break GROUP$2SUCCESS;
-					}
-					break GROUP$1FAILURE;
-				}
-				mGROUP$1.rollback();
-				break GROUP$1SUCCESS;
-			}
-			GROUP$1FAILURE: {
-				KEYWORD$18SUCCESS: {
-					if (!consumeKeyword(getRule().ele1KeywordSemicolon(), null, false, false))
-						break KEYWORD$18SUCCESS;
-					break GROUP$1FAILURE;
-				}
-				mGROUP$1.rollback();
-				break GROUP$1SUCCESS;
-			}
-			return true;
+		return consumeGroup$1();
+	}
+
+	protected boolean consumeGroup$1() throws Exception {
+		final IMarker marker = mark();
+		if (!consumeAlternatives$6()) {
+			marker.rollback();
+			return false;
 		}
+		if (!consumeAssignment$9()) {
+			marker.rollback();
+			return false;
+		}
+		if (!consumeGroup$11()) {
+			marker.rollback();
+			return false;
+		}
+		if (!consumeKeyword$15()) {
+			marker.rollback();
+			return false;
+		}
+		if (!consumeAssignment$16()) {
+			marker.rollback();
+			return false;
+		}
+		if (!consumeKeyword$18()) {
+			marker.rollback();
+			return false;
+		}
+		return true;
+	}
+
+	protected boolean consumeAlternatives$6() throws Exception {
+		if (consumeKeyword$7())
+			return true;
+		if (consumeKeyword$8())
+			return true;
 		return false;
+	}
+
+	protected boolean consumeKeyword$7() throws Exception {
+		return consumeKeyword(getRule().ele000000KeywordNative(), null, false, false, XtextDelimiters.ID_DELIMITER);
+	}
+
+	protected boolean consumeKeyword$8() throws Exception {
+		return consumeKeyword(getRule().ele000001KeywordLexer(), null, false, false, XtextDelimiters.ID_DELIMITER);
+	}
+
+	protected boolean consumeAssignment$9() throws Exception {
+		if (consumeTerminal(idConsumer, "name", false, false, getRule().ele000010LexerRuleCallID(), XtextDelimiters.ALL_KEYWORDS))
+			return true;
+		return false;
+	}
+
+	protected boolean consumeGroup$11() throws Exception {
+		doConsumeGroup$11();
+		return true;
+	}
+
+	protected boolean doConsumeGroup$11() throws Exception {
+		final IMarker marker = mark();
+		if (!consumeKeyword$12()) {
+			marker.rollback();
+			return false;
+		}
+		if (!consumeAssignment$13()) {
+			marker.rollback();
+			return false;
+		}
+		return true;
+	}
+
+	protected boolean consumeKeyword$12() throws Exception {
+		return consumeKeyword(getRule().ele00010KeywordReturns(), null, false, false, XtextDelimiters.ID_DELIMITER);
+	}
+
+	protected boolean consumeAssignment$13() throws Exception {
+		if (consumeNonTerminal(typeRefConsumer, "type", false, false, getRule().ele000110ParserRuleCallTypeRef()))
+			return true;
+		return false;
+	}
+
+	protected boolean consumeKeyword$15() throws Exception {
+		return consumeKeyword(getRule().ele001KeywordColon(), null, false, false, XtextDelimiters.ANY_OTHER_DELIMITER);
+	}
+
+	protected boolean consumeAssignment$16() throws Exception {
+		if (consumeTerminal(stringConsumer, "body", false, false, getRule().ele010LexerRuleCallSTRING(), XtextDelimiters.ALL_KEYWORDS))
+			return true;
+		return false;
+	}
+
+	protected boolean consumeKeyword$18() throws Exception {
+		return consumeKeyword(getRule().ele1KeywordSemicolon(), null, false, false, XtextDelimiters.ANY_OTHER_DELIMITER);
 	}
 
 	public LexerRuleElements getRule() {
@@ -190,5 +157,4 @@ public final class XtextLexerRuleConsumer extends NonTerminalConsumer {
 		this.stringConsumer = stringConsumer;
 	}
 	
-
 }
