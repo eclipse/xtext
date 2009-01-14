@@ -11,21 +11,21 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.example.services.DomainmodelGrammarAccess;
 import org.eclipse.xtext.example.services.DomainmodelGrammarAccess.StructuralFeatureElements;
 
-import org.eclipse.xtext.example.parser.packrat.DomainmodelDelimiters;
-
-import org.eclipse.xtext.example.parser.packrat.consumers.DomainmodelReferenceConsumer;
 import org.eclipse.xtext.example.parser.packrat.consumers.DomainmodelAttributeConsumer;
+import org.eclipse.xtext.example.parser.packrat.consumers.DomainmodelReferenceConsumer;
 
 @SuppressWarnings("unused")
 public final class DomainmodelStructuralFeatureConsumer extends NonTerminalConsumer {
 
-	private DomainmodelReferenceConsumer referenceConsumer;
 	private DomainmodelAttributeConsumer attributeConsumer;
+	private DomainmodelReferenceConsumer referenceConsumer;
 
 	public DomainmodelStructuralFeatureConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
@@ -66,12 +66,12 @@ public final class DomainmodelStructuralFeatureConsumer extends NonTerminalConsu
 		return "StructuralFeature";
 	}
 	
-	public void setReferenceConsumer(DomainmodelReferenceConsumer referenceConsumer) {
-		this.referenceConsumer = referenceConsumer;
-	}
-	
 	public void setAttributeConsumer(DomainmodelAttributeConsumer attributeConsumer) {
 		this.attributeConsumer = attributeConsumer;
+	}
+	
+	public void setReferenceConsumer(DomainmodelReferenceConsumer referenceConsumer) {
+		this.referenceConsumer = referenceConsumer;
 	}
 	
 }

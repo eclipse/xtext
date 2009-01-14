@@ -11,21 +11,21 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.example.services.DomainmodelGrammarAccess;
 import org.eclipse.xtext.example.services.DomainmodelGrammarAccess.TypedElementElements;
 
-import org.eclipse.xtext.example.parser.packrat.DomainmodelDelimiters;
-
-import org.eclipse.xtext.example.parser.packrat.consumers.DomainmodelParameterConsumer;
 import org.eclipse.xtext.example.parser.packrat.consumers.DomainmodelFeatureConsumer;
+import org.eclipse.xtext.example.parser.packrat.consumers.DomainmodelParameterConsumer;
 
 @SuppressWarnings("unused")
 public final class DomainmodelTypedElementConsumer extends NonTerminalConsumer {
 
-	private DomainmodelParameterConsumer parameterConsumer;
 	private DomainmodelFeatureConsumer featureConsumer;
+	private DomainmodelParameterConsumer parameterConsumer;
 
 	public DomainmodelTypedElementConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
@@ -66,12 +66,12 @@ public final class DomainmodelTypedElementConsumer extends NonTerminalConsumer {
 		return "TypedElement";
 	}
 	
-	public void setParameterConsumer(DomainmodelParameterConsumer parameterConsumer) {
-		this.parameterConsumer = parameterConsumer;
-	}
-	
 	public void setFeatureConsumer(DomainmodelFeatureConsumer featureConsumer) {
 		this.featureConsumer = featureConsumer;
+	}
+	
+	public void setParameterConsumer(DomainmodelParameterConsumer parameterConsumer) {
+		this.parameterConsumer = parameterConsumer;
 	}
 	
 }

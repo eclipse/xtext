@@ -11,21 +11,21 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.example.services.DomainmodelGrammarAccess;
 import org.eclipse.xtext.example.services.DomainmodelGrammarAccess.FeatureElements;
 
-import org.eclipse.xtext.example.parser.packrat.DomainmodelDelimiters;
-
-import org.eclipse.xtext.example.parser.packrat.consumers.DomainmodelStructuralFeatureConsumer;
 import org.eclipse.xtext.example.parser.packrat.consumers.DomainmodelOperationConsumer;
+import org.eclipse.xtext.example.parser.packrat.consumers.DomainmodelStructuralFeatureConsumer;
 
 @SuppressWarnings("unused")
 public final class DomainmodelFeatureConsumer extends NonTerminalConsumer {
 
-	private DomainmodelStructuralFeatureConsumer structuralFeatureConsumer;
 	private DomainmodelOperationConsumer operationConsumer;
+	private DomainmodelStructuralFeatureConsumer structuralFeatureConsumer;
 
 	public DomainmodelFeatureConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
@@ -66,12 +66,12 @@ public final class DomainmodelFeatureConsumer extends NonTerminalConsumer {
 		return "Feature";
 	}
 	
-	public void setStructuralFeatureConsumer(DomainmodelStructuralFeatureConsumer structuralFeatureConsumer) {
-		this.structuralFeatureConsumer = structuralFeatureConsumer;
-	}
-	
 	public void setOperationConsumer(DomainmodelOperationConsumer operationConsumer) {
 		this.operationConsumer = operationConsumer;
+	}
+	
+	public void setStructuralFeatureConsumer(DomainmodelStructuralFeatureConsumer structuralFeatureConsumer) {
+		this.structuralFeatureConsumer = structuralFeatureConsumer;
 	}
 	
 }

@@ -36,7 +36,7 @@ public class DomainmodelMetamodelAccess extends BaseEPackageAccess implements IM
 	}
 	
 	private EPackage[] all = new EPackage[] {
-	    BaseEPackageAccess.getEPackageFromRegistry("http://www.eclipse.org/emf/2002/Ecore"),getDomainmodelEPackage()
+	    getDomainmodelEPackage(),BaseEPackageAccess.getEPackageFromRegistry("http://www.eclipse.org/emf/2002/Ecore")
 		};
 	
 	public EPackage[] getAllEPackages() {
