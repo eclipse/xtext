@@ -56,7 +56,15 @@ public class ParseTreeUtilTest extends AbstractGeneratorTest {
 		assertTrue("expect leafnode as last complete element", lastCompleteNodeByOffset instanceof LeafNode);
 		assertEquals("expect leafnode with text '{'", ((LeafNode) lastCompleteNodeByOffset).getText(), "{");
 	}
-
+	
+	public void testGetLastCompleteNodeByOffset2() throws Exception {
+		String text = "spielplatz 1 \"junit\" {";
+		CompositeNode rootNode = getRootNode(text);
+		AbstractNode lastCompleteNodeByOffset = ParseTreeUtil.getLastCompleteNodeByOffset(rootNode, text.length());
+		assertTrue("expect leafnode as last complete element", lastCompleteNodeByOffset instanceof LeafNode);
+		assertEquals("expect leafnode with text '{'", ((LeafNode) lastCompleteNodeByOffset).getText(), "{");
+	}
+	
 	public void testGetCurrentOrFollowingNodeByOffset() throws Exception {
 		String text = "spielplatz 1 \"junit\" { kin  ";
 		CompositeNode rootNode = getRootNode(text);
