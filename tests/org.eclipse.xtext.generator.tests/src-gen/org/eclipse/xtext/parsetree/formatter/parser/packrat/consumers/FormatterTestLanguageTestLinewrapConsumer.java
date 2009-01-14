@@ -11,12 +11,12 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.parsetree.formatter.services.FormatterTestLanguageGrammarAccess;
 import org.eclipse.xtext.parsetree.formatter.services.FormatterTestLanguageGrammarAccess.TestLinewrapElements;
-
-import org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters;
 
 import org.eclipse.xtext.parsetree.formatter.parser.packrat.consumers.FormatterTestLanguageLineConsumer;
 
@@ -25,10 +25,13 @@ public final class FormatterTestLanguageTestLinewrapConsumer extends NonTerminal
 
 	private FormatterTestLanguageLineConsumer lineConsumer;
 
+	private ICharacterClass keyword$2$Delimiter;
+	
 	public FormatterTestLanguageTestLinewrapConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
+		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -49,7 +52,7 @@ public final class FormatterTestLanguageTestLinewrapConsumer extends NonTerminal
 	}
 
 	protected boolean consumeKeyword$2() throws Exception {
-		return consumeKeyword(getRule().ele0KeywordLinewrap(), null, false, false, FormatterTestLanguageDelimiters.ID_DELIMITER);
+		return consumeKeyword(getRule().ele0KeywordLinewrap(), null, false, false, getKeyword$2$Delimiter());
 	}
 
 	protected boolean consumeAssignment$3() throws Exception {
@@ -78,6 +81,14 @@ public final class FormatterTestLanguageTestLinewrapConsumer extends NonTerminal
 	
 	public void setLineConsumer(FormatterTestLanguageLineConsumer lineConsumer) {
 		this.lineConsumer = lineConsumer;
+	}
+	
+	public ICharacterClass getKeyword$2$Delimiter() {
+		return keyword$2$Delimiter;
+	}
+	
+	public void setKeyword$2$Delimiter(ICharacterClass characterClass) {
+		keyword$2$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

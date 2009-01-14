@@ -11,12 +11,12 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.parser.datatyperules.services.DatatypeRulesTestLanguageGrammarAccess;
 import org.eclipse.xtext.parser.datatyperules.services.DatatypeRulesTestLanguageGrammarAccess.ModelElements;
-
-import org.eclipse.xtext.parser.datatyperules.parser.packrat.DatatypeRulesTestLanguageDelimiters;
 
 import org.eclipse.xtext.parser.datatyperules.parser.packrat.consumers.DatatypeRulesTestLanguageDotsConsumer;
 import org.eclipse.xtext.parser.datatyperules.parser.packrat.consumers.DatatypeRulesTestLanguageFractionConsumer;
@@ -31,10 +31,22 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 	private DatatypeRulesTestLanguageNestedModelIdConsumer nestedModelIdConsumer;
 	private DatatypeRulesTestLanguageVectorConsumer vectorConsumer;
 
+	private ICharacterClass keyword$12$Delimiter;
+	
+	private ICharacterClass keyword$19$Delimiter;
+	
+	private ICharacterClass keyword$16$Delimiter;
+	
+	private ICharacterClass keyword$8$Delimiter;
+	
 	public DatatypeRulesTestLanguageModelConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
+		keyword$12$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$19$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$16$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -91,7 +103,7 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 	}
 
 	protected boolean consumeKeyword$8() throws Exception {
-		return consumeKeyword(getRule().ele00010KeywordColon(), null, false, false, DatatypeRulesTestLanguageDelimiters.ANY_OTHER_DELIMITER);
+		return consumeKeyword(getRule().ele00010KeywordColon(), null, false, false, getKeyword$8$Delimiter());
 	}
 
 	protected boolean consumeAssignment$9() throws Exception {
@@ -119,7 +131,7 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 	}
 
 	protected boolean consumeKeyword$12() throws Exception {
-		return consumeKeyword(getRule().ele0010KeywordNumberSign(), null, false, false, DatatypeRulesTestLanguageDelimiters.ANY_OTHER_DELIMITER);
+		return consumeKeyword(getRule().ele0010KeywordNumberSign(), null, false, false, getKeyword$12$Delimiter());
 	}
 
 	protected boolean consumeAssignment$13() throws Exception {
@@ -147,7 +159,7 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 	}
 
 	protected boolean consumeKeyword$16() throws Exception {
-		return consumeKeyword(getRule().ele010KeywordPlusSign(), null, false, false, DatatypeRulesTestLanguageDelimiters.ANY_OTHER_DELIMITER);
+		return consumeKeyword(getRule().ele010KeywordPlusSign(), null, false, false, getKeyword$16$Delimiter());
 	}
 
 	protected boolean consumeAssignment$17() throws Exception {
@@ -157,7 +169,7 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 	}
 
 	protected boolean consumeKeyword$19() throws Exception {
-		return consumeKeyword(getRule().ele1KeywordSemicolon(), null, false, false, DatatypeRulesTestLanguageDelimiters.ANY_OTHER_DELIMITER);
+		return consumeKeyword(getRule().ele1KeywordSemicolon(), null, false, false, getKeyword$19$Delimiter());
 	}
 
 	public ModelElements getRule() {
@@ -187,6 +199,38 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 	
 	public void setVectorConsumer(DatatypeRulesTestLanguageVectorConsumer vectorConsumer) {
 		this.vectorConsumer = vectorConsumer;
+	}
+	
+	public ICharacterClass getKeyword$12$Delimiter() {
+		return keyword$12$Delimiter;
+	}
+	
+	public void setKeyword$12$Delimiter(ICharacterClass characterClass) {
+		keyword$12$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$19$Delimiter() {
+		return keyword$19$Delimiter;
+	}
+	
+	public void setKeyword$19$Delimiter(ICharacterClass characterClass) {
+		keyword$19$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$16$Delimiter() {
+		return keyword$16$Delimiter;
+	}
+	
+	public void setKeyword$16$Delimiter(ICharacterClass characterClass) {
+		keyword$16$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$8$Delimiter() {
+		return keyword$8$Delimiter;
+	}
+	
+	public void setKeyword$8$Delimiter(ICharacterClass characterClass) {
+		keyword$8$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

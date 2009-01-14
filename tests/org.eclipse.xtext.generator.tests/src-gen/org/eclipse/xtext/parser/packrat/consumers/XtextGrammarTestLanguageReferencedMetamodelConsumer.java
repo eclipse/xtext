@@ -11,26 +11,38 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess;
 import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess.ReferencedMetamodelElements;
 
-import org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters;
-
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGConsumer;
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
+import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGConsumer;
 
 @SuppressWarnings("unused")
 public final class XtextGrammarTestLanguageReferencedMetamodelConsumer extends NonTerminalConsumer {
 
-	private XtextBuiltinSTRINGConsumer stringConsumer;
 	private XtextBuiltinIDConsumer idConsumer;
+	private XtextBuiltinSTRINGConsumer stringConsumer;
 
+	private ISequenceMatcher ruleCall$5$Delimiter;
+	
+	private ISequenceMatcher ruleCall$9$Delimiter;
+	
+	private ICharacterClass keyword$7$Delimiter;
+	
+	private ICharacterClass keyword$3$Delimiter;
+	
 	public XtextGrammarTestLanguageReferencedMetamodelConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
+		ruleCall$5$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		ruleCall$9$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$3$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -55,11 +67,11 @@ public final class XtextGrammarTestLanguageReferencedMetamodelConsumer extends N
 	}
 
 	protected boolean consumeKeyword$3() throws Exception {
-		return consumeKeyword(getRule().ele00KeywordImport(), null, false, false, XtextGrammarTestLanguageDelimiters.ID_DELIMITER);
+		return consumeKeyword(getRule().ele00KeywordImport(), null, false, false, getKeyword$3$Delimiter());
 	}
 
 	protected boolean consumeAssignment$4() throws Exception {
-		if (consumeTerminal(stringConsumer, "uri", false, false, getRule().ele010LexerRuleCallSTRING(), XtextGrammarTestLanguageDelimiters.ALL_KEYWORDS))
+		if (consumeTerminal(stringConsumer, "uri", false, false, getRule().ele010LexerRuleCallSTRING(), getRuleCall$5$Delimiter()))
 			return true;
 		return false;
 	}
@@ -83,11 +95,11 @@ public final class XtextGrammarTestLanguageReferencedMetamodelConsumer extends N
 	}
 
 	protected boolean consumeKeyword$7() throws Exception {
-		return consumeKeyword(getRule().ele10KeywordAs(), null, false, false, XtextGrammarTestLanguageDelimiters.ID_DELIMITER);
+		return consumeKeyword(getRule().ele10KeywordAs(), null, false, false, getKeyword$7$Delimiter());
 	}
 
 	protected boolean consumeAssignment$8() throws Exception {
-		if (consumeTerminal(idConsumer, "alias", false, false, getRule().ele110LexerRuleCallID(), XtextGrammarTestLanguageDelimiters.ALL_KEYWORDS))
+		if (consumeTerminal(idConsumer, "alias", false, false, getRule().ele110LexerRuleCallID(), getRuleCall$9$Delimiter()))
 			return true;
 		return false;
 	}
@@ -105,12 +117,44 @@ public final class XtextGrammarTestLanguageReferencedMetamodelConsumer extends N
 		return "ReferencedMetamodel";
 	}
 	
+	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
+		this.idConsumer = idConsumer;
+	}
+	
 	public void setStringConsumer(XtextBuiltinSTRINGConsumer stringConsumer) {
 		this.stringConsumer = stringConsumer;
 	}
 	
-	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
-		this.idConsumer = idConsumer;
+	public ISequenceMatcher getRuleCall$5$Delimiter() {
+		return ruleCall$5$Delimiter;
+	}
+	
+	public void setRuleCall$5$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$5$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	}
+	
+	public ISequenceMatcher getRuleCall$9$Delimiter() {
+		return ruleCall$9$Delimiter;
+	}
+	
+	public void setRuleCall$9$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$9$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	}
+	
+	public ICharacterClass getKeyword$7$Delimiter() {
+		return keyword$7$Delimiter;
+	}
+	
+	public void setKeyword$7$Delimiter(ICharacterClass characterClass) {
+		keyword$7$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$3$Delimiter() {
+		return keyword$3$Delimiter;
+	}
+	
+	public void setKeyword$3$Delimiter(ICharacterClass characterClass) {
+		keyword$3$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

@@ -138,29 +138,29 @@ public class XtextGrammarTestLanguageParserConfiguration extends AbstractParserC
 	}
 	
 	public void configureConsumers() {
-		getGrammarConsumer().setAbstractRuleConsumer(getAbstractRuleConsumer());
 		getGrammarConsumer().setAbstractMetamodelDeclarationConsumer(getAbstractMetamodelDeclarationConsumer());
+		getGrammarConsumer().setAbstractRuleConsumer(getAbstractRuleConsumer());
 		getGrammarConsumer().setIdConsumer(getIdConsumer());
 
-		getAbstractRuleConsumer().setParserRuleConsumer(getParserRuleConsumer());
 		getAbstractRuleConsumer().setLexerRuleConsumer(getLexerRuleConsumer());
+		getAbstractRuleConsumer().setParserRuleConsumer(getParserRuleConsumer());
 
 		getAbstractMetamodelDeclarationConsumer().setGeneratedMetamodelConsumer(getGeneratedMetamodelConsumer());
 		getAbstractMetamodelDeclarationConsumer().setReferencedMetamodelConsumer(getReferencedMetamodelConsumer());
 
-		getGeneratedMetamodelConsumer().setStringConsumer(getStringConsumer());
 		getGeneratedMetamodelConsumer().setIdConsumer(getIdConsumer());
+		getGeneratedMetamodelConsumer().setStringConsumer(getStringConsumer());
 
-		getReferencedMetamodelConsumer().setStringConsumer(getStringConsumer());
 		getReferencedMetamodelConsumer().setIdConsumer(getIdConsumer());
+		getReferencedMetamodelConsumer().setStringConsumer(getStringConsumer());
 
+		getLexerRuleConsumer().setIdConsumer(getIdConsumer());
 		getLexerRuleConsumer().setStringConsumer(getStringConsumer());
 		getLexerRuleConsumer().setTypeRefConsumer(getTypeRefConsumer());
-		getLexerRuleConsumer().setIdConsumer(getIdConsumer());
 
 		getParserRuleConsumer().setAlternativesConsumer(getAlternativesConsumer());
-		getParserRuleConsumer().setTypeRefConsumer(getTypeRefConsumer());
 		getParserRuleConsumer().setIdConsumer(getIdConsumer());
+		getParserRuleConsumer().setTypeRefConsumer(getTypeRefConsumer());
 
 		getTypeRefConsumer().setIdConsumer(getIdConsumer());
 
@@ -168,23 +168,23 @@ public class XtextGrammarTestLanguageParserConfiguration extends AbstractParserC
 
 		getGroupConsumer().setAbstractTokenConsumer(getAbstractTokenConsumer());
 
-		getAbstractTokenConsumer().setActionConsumer(getActionConsumer());
 		getAbstractTokenConsumer().setAbstractTerminalConsumer(getAbstractTerminalConsumer());
+		getAbstractTokenConsumer().setActionConsumer(getActionConsumer());
 		getAbstractTokenConsumer().setAssignmentConsumer(getAssignmentConsumer());
 
 		getAssignmentConsumer().setAbstractTerminalConsumer(getAbstractTerminalConsumer());
 		getAssignmentConsumer().setIdConsumer(getIdConsumer());
 
-		getActionConsumer().setTypeRefConsumer(getTypeRefConsumer());
 		getActionConsumer().setIdConsumer(getIdConsumer());
+		getActionConsumer().setTypeRefConsumer(getTypeRefConsumer());
 
-		getAbstractTerminalConsumer().setKeywordConsumer(getKeywordConsumer());
 		getAbstractTerminalConsumer().setCrossReferenceConsumer(getCrossReferenceConsumer());
+		getAbstractTerminalConsumer().setKeywordConsumer(getKeywordConsumer());
 		getAbstractTerminalConsumer().setParenthesizedElementConsumer(getParenthesizedElementConsumer());
 		getAbstractTerminalConsumer().setRuleCallConsumer(getRuleCallConsumer());
 
-		getCrossReferenceConsumer().setTypeRefConsumer(getTypeRefConsumer());
 		getCrossReferenceConsumer().setIdConsumer(getIdConsumer());
+		getCrossReferenceConsumer().setTypeRefConsumer(getTypeRefConsumer());
 
 		getParenthesizedElementConsumer().setAlternativesConsumer(getAlternativesConsumer());
 
@@ -192,12 +192,76 @@ public class XtextGrammarTestLanguageParserConfiguration extends AbstractParserC
 
 		getRuleCallConsumer().setIdConsumer(getIdConsumer());
 
+		getGrammarConsumer().setRuleCall$15$Delimiter(XtextGrammarTestLanguageDelimiters.ruleCall$14$Delimiter);
+		getGrammarConsumer().setKeyword$9$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$11$Delimiter);
+		getGrammarConsumer().setRuleCall$24$Delimiter(XtextGrammarTestLanguageDelimiters.ruleCall$14$Delimiter);
+		getGrammarConsumer().setKeyword$8$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$11$Delimiter);
+		getGrammarConsumer().setKeyword$22$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$16$Delimiter);
+		getGrammarConsumer().setKeyword$18$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$11$Delimiter);
+		getGrammarConsumer().setRuleCall$11$Delimiter(XtextGrammarTestLanguageDelimiters.ruleCall$14$Delimiter);
+		getGrammarConsumer().setRuleCall$20$Delimiter(XtextGrammarTestLanguageDelimiters.ruleCall$14$Delimiter);
+		getGrammarConsumer().setKeyword$13$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$16$Delimiter);
+		getGeneratedMetamodelConsumer().setRuleCall$8$Delimiter(XtextGrammarTestLanguageDelimiters.ruleCall$51$Delimiter);
+		getGeneratedMetamodelConsumer().setRuleCall$12$Delimiter(XtextGrammarTestLanguageDelimiters.ruleCall$14$Delimiter);
+		getGeneratedMetamodelConsumer().setKeyword$10$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$11$Delimiter);
+		getGeneratedMetamodelConsumer().setRuleCall$6$Delimiter(XtextGrammarTestLanguageDelimiters.ruleCall$14$Delimiter);
+		getGeneratedMetamodelConsumer().setKeyword$4$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$11$Delimiter);
+		getReferencedMetamodelConsumer().setRuleCall$5$Delimiter(XtextGrammarTestLanguageDelimiters.ruleCall$51$Delimiter);
+		getReferencedMetamodelConsumer().setRuleCall$9$Delimiter(XtextGrammarTestLanguageDelimiters.ruleCall$14$Delimiter);
+		getReferencedMetamodelConsumer().setKeyword$7$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$11$Delimiter);
+		getReferencedMetamodelConsumer().setKeyword$3$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$11$Delimiter);
+		getLexerRuleConsumer().setRuleCall$10$Delimiter(XtextGrammarTestLanguageDelimiters.ruleCall$14$Delimiter);
+		getLexerRuleConsumer().setKeyword$7$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$11$Delimiter);
+		getLexerRuleConsumer().setKeyword$8$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$11$Delimiter);
+		getLexerRuleConsumer().setKeyword$18$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$16$Delimiter);
+		getLexerRuleConsumer().setKeyword$15$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$16$Delimiter);
+		getLexerRuleConsumer().setRuleCall$17$Delimiter(XtextGrammarTestLanguageDelimiters.ruleCall$51$Delimiter);
+		getLexerRuleConsumer().setKeyword$12$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$11$Delimiter);
+		getParserRuleConsumer().setKeyword$8$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$11$Delimiter);
+		getParserRuleConsumer().setRuleCall$6$Delimiter(XtextGrammarTestLanguageDelimiters.ruleCall$14$Delimiter);
+		getParserRuleConsumer().setKeyword$11$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$16$Delimiter);
+		getParserRuleConsumer().setKeyword$14$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$16$Delimiter);
+		getTypeRefConsumer().setCrossReference$4$Delimiter(XtextGrammarTestLanguageDelimiters.ruleCall$14$Delimiter);
+		getTypeRefConsumer().setCrossReference$8$Delimiter(XtextGrammarTestLanguageDelimiters.ruleCall$14$Delimiter);
+		getTypeRefConsumer().setKeyword$6$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$16$Delimiter);
+		getAlternativesConsumer().setKeyword$7$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$16$Delimiter);
+		getAbstractTokenConsumer().setKeyword$10$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$16$Delimiter);
+		getAbstractTokenConsumer().setKeyword$11$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$16$Delimiter);
+		getAbstractTokenConsumer().setKeyword$12$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$16$Delimiter);
+		getAssignmentConsumer().setRuleCall$4$Delimiter(XtextGrammarTestLanguageDelimiters.ruleCall$14$Delimiter);
+		getAssignmentConsumer().setKeyword$9$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$16$Delimiter);
+		getAssignmentConsumer().setKeyword$8$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$16$Delimiter);
+		getAssignmentConsumer().setKeyword$10$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$16$Delimiter);
+		getActionConsumer().setKeyword$8$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$16$Delimiter);
+		getActionConsumer().setKeyword$22$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$16$Delimiter);
+		getActionConsumer().setKeyword$14$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$16$Delimiter);
+		getActionConsumer().setKeyword$19$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$16$Delimiter);
+		getActionConsumer().setKeyword$20$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$16$Delimiter);
+		getActionConsumer().setKeyword$10$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$11$Delimiter);
+		getActionConsumer().setRuleCall$16$Delimiter(XtextGrammarTestLanguageDelimiters.ruleCall$14$Delimiter);
+		getActionConsumer().setKeyword$21$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$11$Delimiter);
+		getActionConsumer().setKeyword$11$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$16$Delimiter);
+		getCrossReferenceConsumer().setCrossReference$10$Delimiter(XtextGrammarTestLanguageDelimiters.ruleCall$14$Delimiter);
+		getCrossReferenceConsumer().setKeyword$8$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$16$Delimiter);
+		getCrossReferenceConsumer().setKeyword$12$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$16$Delimiter);
+		getCrossReferenceConsumer().setKeyword$4$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$16$Delimiter);
+		getParenthesizedElementConsumer().setKeyword$3$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$16$Delimiter);
+		getParenthesizedElementConsumer().setKeyword$5$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$16$Delimiter);
+		getKeywordConsumer().setRuleCall$2$Delimiter(XtextGrammarTestLanguageDelimiters.ruleCall$51$Delimiter);
+		getRuleCallConsumer().setCrossReference$2$Delimiter(XtextGrammarTestLanguageDelimiters.ruleCall$14$Delimiter);
+		// TODO remove workaround
 		getIdConsumer().initFields(this);
+		// TODO remove workaround
 		getIntConsumer().initFields(this);
+		// TODO remove workaround
 		getStringConsumer().initFields(this);
+		// TODO remove workaround
 		getMlCommentConsumer().initFields(this);
+		// TODO remove workaround
 		getSlCommentConsumer().initFields(this);
+		// TODO remove workaround
 		getWsConsumer().initFields(this);
+		// TODO remove workaround
 		getAnyOtherConsumer().initFields(this);
 	}
 	

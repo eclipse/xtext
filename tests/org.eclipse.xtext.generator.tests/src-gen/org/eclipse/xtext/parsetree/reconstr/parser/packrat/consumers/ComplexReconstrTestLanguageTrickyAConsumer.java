@@ -11,12 +11,12 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.parsetree.reconstr.services.ComplexReconstrTestLanguageGrammarAccess;
 import org.eclipse.xtext.parsetree.reconstr.services.ComplexReconstrTestLanguageGrammarAccess.TrickyAElements;
-
-import org.eclipse.xtext.parsetree.reconstr.parser.packrat.ComplexReconstrTestLanguageDelimiters;
 
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGConsumer;
@@ -29,10 +29,25 @@ public final class ComplexReconstrTestLanguageTrickyAConsumer extends NonTermina
 	private XtextBuiltinSTRINGConsumer stringConsumer;
 	private ComplexReconstrTestLanguageTrickyA1Consumer trickyA1Consumer;
 
+	private ISequenceMatcher ruleCall$8$Delimiter;
+	
+	private ICharacterClass keyword$13$Delimiter;
+	
+	private ISequenceMatcher ruleCall$19$Delimiter;
+	
+	private ICharacterClass keyword$17$Delimiter;
+	
+	private ICharacterClass keyword$5$Delimiter;
+	
 	public ComplexReconstrTestLanguageTrickyAConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
+		ruleCall$8$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		keyword$13$Delimiter = ICharacterClass.Factory.nullClass();
+		ruleCall$19$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		keyword$17$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$5$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -65,7 +80,7 @@ public final class ComplexReconstrTestLanguageTrickyAConsumer extends NonTermina
 	}
 
 	protected boolean consumeKeyword$5() throws Exception {
-		return consumeKeyword(getRule().ele0000KeywordTA(), null, false, false, ComplexReconstrTestLanguageDelimiters.ID_DELIMITER);
+		return consumeKeyword(getRule().ele0000KeywordTA(), null, false, false, getKeyword$5$Delimiter());
 	}
 
 	protected boolean consumeRuleCall$6() throws Exception {
@@ -78,7 +93,7 @@ public final class ComplexReconstrTestLanguageTrickyAConsumer extends NonTermina
 	}
 
 	protected boolean doConsumeAssignment$7() throws Exception {
-		if (consumeTerminal(idConsumer, "name", true, false, getRule().ele0010LexerRuleCallID(), ComplexReconstrTestLanguageDelimiters.ALL_KEYWORDS))
+		if (consumeTerminal(idConsumer, "name", true, false, getRule().ele0010LexerRuleCallID(), getRuleCall$8$Delimiter()))
 			return true;
 		return false;
 	}
@@ -114,7 +129,7 @@ public final class ComplexReconstrTestLanguageTrickyAConsumer extends NonTermina
 	}
 
 	protected boolean consumeKeyword$13() throws Exception {
-		return consumeKeyword(getRule().ele0101KeywordX(), null, false, false, ComplexReconstrTestLanguageDelimiters.ID_DELIMITER);
+		return consumeKeyword(getRule().ele0101KeywordX(), null, false, false, getKeyword$13$Delimiter());
 	}
 
 	protected boolean consumeGroup$14() throws Exception {
@@ -135,11 +150,11 @@ public final class ComplexReconstrTestLanguageTrickyAConsumer extends NonTermina
 	}
 
 	protected boolean consumeKeyword$17() throws Exception {
-		return consumeKeyword(getRule().ele0111KeywordY(), null, false, false, ComplexReconstrTestLanguageDelimiters.ID_DELIMITER);
+		return consumeKeyword(getRule().ele0111KeywordY(), null, false, false, getKeyword$17$Delimiter());
 	}
 
 	protected boolean consumeAssignment$18() throws Exception {
-		if (consumeTerminal(stringConsumer, "name", true, false, getRule().ele10LexerRuleCallSTRING(), ComplexReconstrTestLanguageDelimiters.ALL_KEYWORDS))
+		if (consumeTerminal(stringConsumer, "name", true, false, getRule().ele10LexerRuleCallSTRING(), getRuleCall$19$Delimiter()))
 			return true;
 		return false;
 	}
@@ -167,6 +182,46 @@ public final class ComplexReconstrTestLanguageTrickyAConsumer extends NonTermina
 	
 	public void setTrickyA1Consumer(ComplexReconstrTestLanguageTrickyA1Consumer trickyA1Consumer) {
 		this.trickyA1Consumer = trickyA1Consumer;
+	}
+	
+	public ISequenceMatcher getRuleCall$8$Delimiter() {
+		return ruleCall$8$Delimiter;
+	}
+	
+	public void setRuleCall$8$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$8$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	}
+	
+	public ICharacterClass getKeyword$13$Delimiter() {
+		return keyword$13$Delimiter;
+	}
+	
+	public void setKeyword$13$Delimiter(ICharacterClass characterClass) {
+		keyword$13$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ISequenceMatcher getRuleCall$19$Delimiter() {
+		return ruleCall$19$Delimiter;
+	}
+	
+	public void setRuleCall$19$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$19$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	}
+	
+	public ICharacterClass getKeyword$17$Delimiter() {
+		return keyword$17$Delimiter;
+	}
+	
+	public void setKeyword$17$Delimiter(ICharacterClass characterClass) {
+		keyword$17$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$5$Delimiter() {
+		return keyword$5$Delimiter;
+	}
+	
+	public void setKeyword$5$Delimiter(ICharacterClass characterClass) {
+		keyword$5$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

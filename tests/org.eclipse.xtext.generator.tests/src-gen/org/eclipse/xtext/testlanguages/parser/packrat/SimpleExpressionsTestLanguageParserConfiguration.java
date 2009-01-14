@@ -84,19 +84,33 @@ public class SimpleExpressionsTestLanguageParserConfiguration extends AbstractPa
 
 		getMultiplicationConsumer().setTermConsumer(getTermConsumer());
 
-		getTermConsumer().setParensConsumer(getParensConsumer());
 		getTermConsumer().setAtomConsumer(getAtomConsumer());
+		getTermConsumer().setParensConsumer(getParensConsumer());
 
 		getAtomConsumer().setIdConsumer(getIdConsumer());
 
 		getParensConsumer().setAdditionConsumer(getAdditionConsumer());
 
+		getAdditionConsumer().setKeyword$9$Delimiter(SimpleExpressionsTestLanguageDelimiters.keyword$20$Delimiter);
+		getAdditionConsumer().setKeyword$10$Delimiter(SimpleExpressionsTestLanguageDelimiters.keyword$20$Delimiter);
+		getMultiplicationConsumer().setKeyword$9$Delimiter(SimpleExpressionsTestLanguageDelimiters.keyword$20$Delimiter);
+		getMultiplicationConsumer().setKeyword$10$Delimiter(SimpleExpressionsTestLanguageDelimiters.keyword$20$Delimiter);
+		getAtomConsumer().setRuleCall$2$Delimiter(SimpleExpressionsTestLanguageDelimiters.ruleCall$46$Delimiter);
+		getParensConsumer().setKeyword$5$Delimiter(SimpleExpressionsTestLanguageDelimiters.keyword$20$Delimiter);
+		getParensConsumer().setKeyword$3$Delimiter(SimpleExpressionsTestLanguageDelimiters.keyword$20$Delimiter);
+		// TODO remove workaround
 		getIdConsumer().initFields(this);
+		// TODO remove workaround
 		getIntConsumer().initFields(this);
+		// TODO remove workaround
 		getStringConsumer().initFields(this);
+		// TODO remove workaround
 		getMlCommentConsumer().initFields(this);
+		// TODO remove workaround
 		getSlCommentConsumer().initFields(this);
+		// TODO remove workaround
 		getWsConsumer().initFields(this);
+		// TODO remove workaround
 		getAnyOtherConsumer().initFields(this);
 	}
 	

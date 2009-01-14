@@ -11,12 +11,12 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.testlanguages.services.OptionalEmptyTestLanguageGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.OptionalEmptyTestLanguageGrammarAccess.GreetingElements;
-
-import org.eclipse.xtext.testlanguages.parser.packrat.OptionalEmptyTestLanguageDelimiters;
 
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 
@@ -25,10 +25,16 @@ public final class OptionalEmptyTestLanguageGreetingConsumer extends NonTerminal
 
 	private XtextBuiltinIDConsumer idConsumer;
 
+	private ICharacterClass keyword$2$Delimiter;
+	
+	private ISequenceMatcher ruleCall$4$Delimiter;
+	
 	public OptionalEmptyTestLanguageGreetingConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
+		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
+		ruleCall$4$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -49,11 +55,11 @@ public final class OptionalEmptyTestLanguageGreetingConsumer extends NonTerminal
 	}
 
 	protected boolean consumeKeyword$2() throws Exception {
-		return consumeKeyword(getRule().ele0KeywordHallo(), null, false, false, OptionalEmptyTestLanguageDelimiters.ID_DELIMITER);
+		return consumeKeyword(getRule().ele0KeywordHallo(), null, false, false, getKeyword$2$Delimiter());
 	}
 
 	protected boolean consumeAssignment$3() throws Exception {
-		if (consumeTerminal(idConsumer, "name", false, false, getRule().ele10LexerRuleCallID(), OptionalEmptyTestLanguageDelimiters.ALL_KEYWORDS))
+		if (consumeTerminal(idConsumer, "name", false, false, getRule().ele10LexerRuleCallID(), getRuleCall$4$Delimiter()))
 			return true;
 		return false;
 	}
@@ -73,6 +79,22 @@ public final class OptionalEmptyTestLanguageGreetingConsumer extends NonTerminal
 	
 	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
 		this.idConsumer = idConsumer;
+	}
+	
+	public ICharacterClass getKeyword$2$Delimiter() {
+		return keyword$2$Delimiter;
+	}
+	
+	public void setKeyword$2$Delimiter(ICharacterClass characterClass) {
+		keyword$2$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ISequenceMatcher getRuleCall$4$Delimiter() {
+		return ruleCall$4$Delimiter;
+	}
+	
+	public void setRuleCall$4$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$4$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 }

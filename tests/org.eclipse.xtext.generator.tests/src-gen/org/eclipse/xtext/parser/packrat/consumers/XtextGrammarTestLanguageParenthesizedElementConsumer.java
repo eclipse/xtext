@@ -11,12 +11,12 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess;
 import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess.ParenthesizedElementElements;
-
-import org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters;
 
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageAlternativesConsumer;
 
@@ -25,10 +25,16 @@ public final class XtextGrammarTestLanguageParenthesizedElementConsumer extends 
 
 	private XtextGrammarTestLanguageAlternativesConsumer alternativesConsumer;
 
+	private ICharacterClass keyword$3$Delimiter;
+	
+	private ICharacterClass keyword$5$Delimiter;
+	
 	public XtextGrammarTestLanguageParenthesizedElementConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
+		keyword$3$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$5$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -53,7 +59,7 @@ public final class XtextGrammarTestLanguageParenthesizedElementConsumer extends 
 	}
 
 	protected boolean consumeKeyword$3() throws Exception {
-		return consumeKeyword(getRule().ele00KeywordLeftParenthesis(), null, false, false, XtextGrammarTestLanguageDelimiters.ANY_OTHER_DELIMITER);
+		return consumeKeyword(getRule().ele00KeywordLeftParenthesis(), null, false, false, getKeyword$3$Delimiter());
 	}
 
 	protected boolean consumeRuleCall$4() throws Exception {
@@ -61,7 +67,7 @@ public final class XtextGrammarTestLanguageParenthesizedElementConsumer extends 
 	}
 
 	protected boolean consumeKeyword$5() throws Exception {
-		return consumeKeyword(getRule().ele1KeywordRightParenthesis(), null, false, false, XtextGrammarTestLanguageDelimiters.ANY_OTHER_DELIMITER);
+		return consumeKeyword(getRule().ele1KeywordRightParenthesis(), null, false, false, getKeyword$5$Delimiter());
 	}
 
 	public ParenthesizedElementElements getRule() {
@@ -79,6 +85,22 @@ public final class XtextGrammarTestLanguageParenthesizedElementConsumer extends 
 	
 	public void setAlternativesConsumer(XtextGrammarTestLanguageAlternativesConsumer alternativesConsumer) {
 		this.alternativesConsumer = alternativesConsumer;
+	}
+	
+	public ICharacterClass getKeyword$3$Delimiter() {
+		return keyword$3$Delimiter;
+	}
+	
+	public void setKeyword$3$Delimiter(ICharacterClass characterClass) {
+		keyword$3$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$5$Delimiter() {
+		return keyword$5$Delimiter;
+	}
+	
+	public void setKeyword$5$Delimiter(ICharacterClass characterClass) {
+		keyword$5$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

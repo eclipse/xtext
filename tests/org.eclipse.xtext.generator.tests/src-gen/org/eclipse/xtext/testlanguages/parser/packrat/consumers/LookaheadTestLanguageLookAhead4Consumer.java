@@ -11,22 +11,28 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.testlanguages.services.LookaheadTestLanguageGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.LookaheadTestLanguageGrammarAccess.LookAhead4Elements;
-
-import org.eclipse.xtext.testlanguages.parser.packrat.LookaheadTestLanguageDelimiters;
 
 
 @SuppressWarnings("unused")
 public final class LookaheadTestLanguageLookAhead4Consumer extends NonTerminalConsumer {
 
 
+	private ICharacterClass keyword$3$Delimiter;
+	
+	private ICharacterClass keyword$5$Delimiter;
+	
 	public LookaheadTestLanguageLookAhead4Consumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
+		keyword$3$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$5$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -42,13 +48,13 @@ public final class LookaheadTestLanguageLookAhead4Consumer extends NonTerminalCo
 	}
 
 	protected boolean consumeAssignment$2() throws Exception {
-		if (consumeKeyword(getRule().ele00KeywordC(), "x", false, false, LookaheadTestLanguageDelimiters.ID_DELIMITER))
+		if (consumeKeyword(getRule().ele00KeywordC(), "x", false, false, getKeyword$3$Delimiter()))
 			return true;
 		return false;
 	}
 
 	protected boolean consumeAssignment$4() throws Exception {
-		if (consumeKeyword(getRule().ele10KeywordD(), "x", false, false, LookaheadTestLanguageDelimiters.ID_DELIMITER))
+		if (consumeKeyword(getRule().ele10KeywordD(), "x", false, false, getKeyword$5$Delimiter()))
 			return true;
 		return false;
 	}
@@ -64,6 +70,22 @@ public final class LookaheadTestLanguageLookAhead4Consumer extends NonTerminalCo
 	@Override
 	protected String getDefaultTypeName() {
 		return "LookAhead4";
+	}
+	
+	public ICharacterClass getKeyword$3$Delimiter() {
+		return keyword$3$Delimiter;
+	}
+	
+	public void setKeyword$3$Delimiter(ICharacterClass characterClass) {
+		keyword$3$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$5$Delimiter() {
+		return keyword$5$Delimiter;
+	}
+	
+	public void setKeyword$5$Delimiter(ICharacterClass characterClass) {
+		keyword$5$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

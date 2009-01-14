@@ -11,21 +11,21 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.testlanguages.services.ReferenceGrammarTestLanguageGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.ReferenceGrammarTestLanguageGrammarAccess.PersonElements;
 
-import org.eclipse.xtext.testlanguages.parser.packrat.ReferenceGrammarTestLanguageDelimiters;
-
-import org.eclipse.xtext.testlanguages.parser.packrat.consumers.ReferenceGrammarTestLanguageKindConsumer;
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.ReferenceGrammarTestLanguageErwachsenerConsumer;
+import org.eclipse.xtext.testlanguages.parser.packrat.consumers.ReferenceGrammarTestLanguageKindConsumer;
 
 @SuppressWarnings("unused")
 public final class ReferenceGrammarTestLanguagePersonConsumer extends NonTerminalConsumer {
 
-	private ReferenceGrammarTestLanguageKindConsumer kindConsumer;
 	private ReferenceGrammarTestLanguageErwachsenerConsumer erwachsenerConsumer;
+	private ReferenceGrammarTestLanguageKindConsumer kindConsumer;
 
 	public ReferenceGrammarTestLanguagePersonConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
@@ -66,12 +66,12 @@ public final class ReferenceGrammarTestLanguagePersonConsumer extends NonTermina
 		return "Person";
 	}
 	
-	public void setKindConsumer(ReferenceGrammarTestLanguageKindConsumer kindConsumer) {
-		this.kindConsumer = kindConsumer;
-	}
-	
 	public void setErwachsenerConsumer(ReferenceGrammarTestLanguageErwachsenerConsumer erwachsenerConsumer) {
 		this.erwachsenerConsumer = erwachsenerConsumer;
+	}
+	
+	public void setKindConsumer(ReferenceGrammarTestLanguageKindConsumer kindConsumer) {
+		this.kindConsumer = kindConsumer;
 	}
 	
 }

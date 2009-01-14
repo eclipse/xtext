@@ -11,12 +11,12 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.metamodelreferencing.tests.services.MetamodelRefTestLanguageGrammarAccess;
 import org.eclipse.xtext.metamodelreferencing.tests.services.MetamodelRefTestLanguageGrammarAccess.FooElements;
-
-import org.eclipse.xtext.metamodelreferencing.tests.parser.packrat.MetamodelRefTestLanguageDelimiters;
 
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 import org.eclipse.xtext.metamodelreferencing.tests.parser.packrat.consumers.MetamodelRefTestLanguageNameRefConsumer;
@@ -27,10 +27,13 @@ public final class MetamodelRefTestLanguageFooConsumer extends NonTerminalConsum
 	private XtextBuiltinIDConsumer idConsumer;
 	private MetamodelRefTestLanguageNameRefConsumer nameRefConsumer;
 
+	private ISequenceMatcher ruleCall$3$Delimiter;
+	
 	public MetamodelRefTestLanguageFooConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
+		ruleCall$3$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -51,7 +54,7 @@ public final class MetamodelRefTestLanguageFooConsumer extends NonTerminalConsum
 	}
 
 	protected boolean consumeAssignment$2() throws Exception {
-		if (consumeTerminal(idConsumer, "name", false, false, getRule().ele00LexerRuleCallID(), MetamodelRefTestLanguageDelimiters.ALL_KEYWORDS))
+		if (consumeTerminal(idConsumer, "name", false, false, getRule().ele00LexerRuleCallID(), getRuleCall$3$Delimiter()))
 			return true;
 		return false;
 	}
@@ -86,6 +89,14 @@ public final class MetamodelRefTestLanguageFooConsumer extends NonTerminalConsum
 	
 	public void setNameRefConsumer(MetamodelRefTestLanguageNameRefConsumer nameRefConsumer) {
 		this.nameRefConsumer = nameRefConsumer;
+	}
+	
+	public ISequenceMatcher getRuleCall$3$Delimiter() {
+		return ruleCall$3$Delimiter;
+	}
+	
+	public void setRuleCall$3$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$3$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 }

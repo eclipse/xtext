@@ -11,12 +11,12 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.testlanguages.services.PartialParserTestLanguageGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.PartialParserTestLanguageGrammarAccess.NamedElements;
-
-import org.eclipse.xtext.testlanguages.parser.packrat.PartialParserTestLanguageDelimiters;
 
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 
@@ -25,10 +25,13 @@ public final class PartialParserTestLanguageNamedConsumer extends NonTerminalCon
 
 	private XtextBuiltinIDConsumer idConsumer;
 
+	private ISequenceMatcher ruleCall$2$Delimiter;
+	
 	public PartialParserTestLanguageNamedConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
+		ruleCall$2$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -36,7 +39,7 @@ public final class PartialParserTestLanguageNamedConsumer extends NonTerminalCon
 	}
 
 	protected boolean consumeAssignment$1() throws Exception {
-		if (consumeTerminal(idConsumer, "name", false, false, getRule().ele0LexerRuleCallID(), PartialParserTestLanguageDelimiters.ALL_KEYWORDS))
+		if (consumeTerminal(idConsumer, "name", false, false, getRule().ele0LexerRuleCallID(), getRuleCall$2$Delimiter()))
 			return true;
 		return false;
 	}
@@ -56,6 +59,14 @@ public final class PartialParserTestLanguageNamedConsumer extends NonTerminalCon
 	
 	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
 		this.idConsumer = idConsumer;
+	}
+	
+	public ISequenceMatcher getRuleCall$2$Delimiter() {
+		return ruleCall$2$Delimiter;
+	}
+	
+	public void setRuleCall$2$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$2$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 }

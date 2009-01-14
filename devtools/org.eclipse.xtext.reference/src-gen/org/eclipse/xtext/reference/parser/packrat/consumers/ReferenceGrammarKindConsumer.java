@@ -11,12 +11,12 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.reference.services.ReferenceGrammarGrammarAccess;
 import org.eclipse.xtext.reference.services.ReferenceGrammarGrammarAccess.KindElements;
-
-import org.eclipse.xtext.reference.parser.packrat.ReferenceGrammarDelimiters;
 
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinINTConsumer;
@@ -27,10 +27,25 @@ public final class ReferenceGrammarKindConsumer extends NonTerminalConsumer {
 	private XtextBuiltinIDConsumer idConsumer;
 	private XtextBuiltinINTConsumer intConsumer;
 
+	private ISequenceMatcher ruleCall$8$Delimiter;
+	
+	private ICharacterClass keyword$5$Delimiter;
+	
+	private ICharacterClass keyword$11$Delimiter;
+	
+	private ICharacterClass keyword$6$Delimiter;
+	
+	private ISequenceMatcher ruleCall$10$Delimiter;
+	
 	public ReferenceGrammarKindConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
+		ruleCall$8$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		keyword$5$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$11$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$6$Delimiter = ICharacterClass.Factory.nullClass();
+		ruleCall$10$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -63,27 +78,27 @@ public final class ReferenceGrammarKindConsumer extends NonTerminalConsumer {
 	}
 
 	protected boolean consumeKeyword$5() throws Exception {
-		return consumeKeyword(getRule().ele0000KeywordKind(), null, false, false, ReferenceGrammarDelimiters.ID_DELIMITER);
+		return consumeKeyword(getRule().ele0000KeywordKind(), null, false, false, getKeyword$5$Delimiter());
 	}
 
 	protected boolean consumeKeyword$6() throws Exception {
-		return consumeKeyword(getRule().ele0001KeywordLeftParenthesis(), null, false, false, ReferenceGrammarDelimiters.ANY_OTHER_DELIMITER);
+		return consumeKeyword(getRule().ele0001KeywordLeftParenthesis(), null, false, false, getKeyword$6$Delimiter());
 	}
 
 	protected boolean consumeAssignment$7() throws Exception {
-		if (consumeTerminal(idConsumer, "name", false, false, getRule().ele0010LexerRuleCallID(), ReferenceGrammarDelimiters.ALL_KEYWORDS))
+		if (consumeTerminal(idConsumer, "name", false, false, getRule().ele0010LexerRuleCallID(), getRuleCall$8$Delimiter()))
 			return true;
 		return false;
 	}
 
 	protected boolean consumeAssignment$9() throws Exception {
-		if (consumeTerminal(intConsumer, "age", false, false, getRule().ele010LexerRuleCallINT(), ReferenceGrammarDelimiters.ALL_KEYWORDS))
+		if (consumeTerminal(intConsumer, "age", false, false, getRule().ele010LexerRuleCallINT(), getRuleCall$10$Delimiter()))
 			return true;
 		return false;
 	}
 
 	protected boolean consumeKeyword$11() throws Exception {
-		return consumeKeyword(getRule().ele1KeywordRightParenthesis(), null, false, false, ReferenceGrammarDelimiters.ANY_OTHER_DELIMITER);
+		return consumeKeyword(getRule().ele1KeywordRightParenthesis(), null, false, false, getKeyword$11$Delimiter());
 	}
 
 	public KindElements getRule() {
@@ -105,6 +120,46 @@ public final class ReferenceGrammarKindConsumer extends NonTerminalConsumer {
 	
 	public void setIntConsumer(XtextBuiltinINTConsumer intConsumer) {
 		this.intConsumer = intConsumer;
+	}
+	
+	public ISequenceMatcher getRuleCall$8$Delimiter() {
+		return ruleCall$8$Delimiter;
+	}
+	
+	public void setRuleCall$8$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$8$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	}
+	
+	public ICharacterClass getKeyword$5$Delimiter() {
+		return keyword$5$Delimiter;
+	}
+	
+	public void setKeyword$5$Delimiter(ICharacterClass characterClass) {
+		keyword$5$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$11$Delimiter() {
+		return keyword$11$Delimiter;
+	}
+	
+	public void setKeyword$11$Delimiter(ICharacterClass characterClass) {
+		keyword$11$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$6$Delimiter() {
+		return keyword$6$Delimiter;
+	}
+	
+	public void setKeyword$6$Delimiter(ICharacterClass characterClass) {
+		keyword$6$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ISequenceMatcher getRuleCall$10$Delimiter() {
+		return ruleCall$10$Delimiter;
+	}
+	
+	public void setRuleCall$10$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$10$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 }

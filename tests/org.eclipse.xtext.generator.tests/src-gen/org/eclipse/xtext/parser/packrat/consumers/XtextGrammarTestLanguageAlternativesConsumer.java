@@ -11,12 +11,12 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess;
 import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess.AlternativesElements;
-
-import org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters;
 
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageGroupConsumer;
 
@@ -25,10 +25,13 @@ public final class XtextGrammarTestLanguageAlternativesConsumer extends NonTermi
 
 	private XtextGrammarTestLanguageGroupConsumer groupConsumer;
 
+	private ICharacterClass keyword$7$Delimiter;
+	
 	public XtextGrammarTestLanguageAlternativesConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
+		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -79,7 +82,7 @@ public final class XtextGrammarTestLanguageAlternativesConsumer extends NonTermi
 	}
 
 	protected boolean consumeKeyword$7() throws Exception {
-		return consumeKeyword(getRule().ele101KeywordVerticalLine(), null, false, false, XtextGrammarTestLanguageDelimiters.ANY_OTHER_DELIMITER);
+		return consumeKeyword(getRule().ele101KeywordVerticalLine(), null, false, false, getKeyword$7$Delimiter());
 	}
 
 	protected boolean consumeAssignment$8() throws Exception {
@@ -103,6 +106,14 @@ public final class XtextGrammarTestLanguageAlternativesConsumer extends NonTermi
 	
 	public void setGroupConsumer(XtextGrammarTestLanguageGroupConsumer groupConsumer) {
 		this.groupConsumer = groupConsumer;
+	}
+	
+	public ICharacterClass getKeyword$7$Delimiter() {
+		return keyword$7$Delimiter;
+	}
+	
+	public void setKeyword$7$Delimiter(ICharacterClass characterClass) {
+		keyword$7$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

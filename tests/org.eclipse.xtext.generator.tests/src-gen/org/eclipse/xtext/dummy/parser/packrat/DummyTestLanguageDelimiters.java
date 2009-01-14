@@ -8,14 +8,20 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.matching.SetBasedKeywordMatcher;
 
-import org.eclipse.xtext.dummy.services.DummyTestLanguageGrammarAccess;
+public final class DummyTestLanguageDelimiters {
 
-public class DummyTestLanguageDelimiters {
-
-	public static ICharacterClass ID_DELIMITER = XtextBuiltinIDConsumer.IDConsumer$$2;
+	private DummyTestLanguageDelimiters() {
+		throw new UnsupportedOperationException("Utility classes may not be initialized");
+	}
 	
-	public static ICharacterClass ANY_OTHER_DELIMITER = ICharacterClass.Factory.nullClass();
+	public static ICharacterClass keyword$18$Delimiter = ICharacterClass.Factory.nullClass();
 	
-	public static ISequenceMatcher ALL_KEYWORDS = new SetBasedKeywordMatcher(DummyTestLanguageGrammarAccess.INSTANCE.getGrammar());
-
+	// TODO do not use IDConsumer internals
+	public static ICharacterClass keyword$12$Delimiter = XtextBuiltinIDConsumer.IDConsumer$$2;
+	
+	public static ISequenceMatcher ruleCall$15$Delimiter = new SetBasedKeywordMatcher(
+		"optional", "element");
+		
+	public static ISequenceMatcher ruleCall$17$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+	
 }

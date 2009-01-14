@@ -70,12 +70,22 @@ public class MetamodelRefTestLanguageParserConfiguration extends AbstractParserC
 
 		getMyRuleConsumer().setIdConsumer(getIdConsumer());
 
+		getFooConsumer().setRuleCall$3$Delimiter(MetamodelRefTestLanguageDelimiters.ruleCall$6$Delimiter);
+		getNameRefConsumer().setCrossReference$2$Delimiter(MetamodelRefTestLanguageDelimiters.ruleCall$6$Delimiter);
+		getMyRuleConsumer().setRuleCall$2$Delimiter(MetamodelRefTestLanguageDelimiters.ruleCall$6$Delimiter);
+		// TODO remove workaround
 		getIdConsumer().initFields(this);
+		// TODO remove workaround
 		getIntConsumer().initFields(this);
+		// TODO remove workaround
 		getStringConsumer().initFields(this);
+		// TODO remove workaround
 		getMlCommentConsumer().initFields(this);
+		// TODO remove workaround
 		getSlCommentConsumer().initFields(this);
+		// TODO remove workaround
 		getWsConsumer().initFields(this);
+		// TODO remove workaround
 		getAnyOtherConsumer().initFields(this);
 	}
 	

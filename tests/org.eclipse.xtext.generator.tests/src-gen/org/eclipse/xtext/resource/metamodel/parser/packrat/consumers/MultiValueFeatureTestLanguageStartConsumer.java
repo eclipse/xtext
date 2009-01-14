@@ -11,12 +11,12 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.resource.metamodel.services.MultiValueFeatureTestLanguageGrammarAccess;
 import org.eclipse.xtext.resource.metamodel.services.MultiValueFeatureTestLanguageGrammarAccess.StartElements;
-
-import org.eclipse.xtext.resource.metamodel.parser.packrat.MultiValueFeatureTestLanguageDelimiters;
 
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 
@@ -25,10 +25,13 @@ public final class MultiValueFeatureTestLanguageStartConsumer extends NonTermina
 
 	private XtextBuiltinIDConsumer idConsumer;
 
+	private ISequenceMatcher ruleCall$2$Delimiter;
+	
 	public MultiValueFeatureTestLanguageStartConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
+		ruleCall$2$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -44,7 +47,7 @@ public final class MultiValueFeatureTestLanguageStartConsumer extends NonTermina
 	}
 
 	protected boolean doConsumeAssignment$1() throws Exception {
-		if (consumeTerminal(idConsumer, "featureA", true, false, getRule().ele0LexerRuleCallID(), MultiValueFeatureTestLanguageDelimiters.ALL_KEYWORDS))
+		if (consumeTerminal(idConsumer, "featureA", true, false, getRule().ele0LexerRuleCallID(), getRuleCall$2$Delimiter()))
 			return true;
 		return false;
 	}
@@ -64,6 +67,14 @@ public final class MultiValueFeatureTestLanguageStartConsumer extends NonTermina
 	
 	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
 		this.idConsumer = idConsumer;
+	}
+	
+	public ISequenceMatcher getRuleCall$2$Delimiter() {
+		return ruleCall$2$Delimiter;
+	}
+	
+	public void setRuleCall$2$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$2$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 }
