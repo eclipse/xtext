@@ -136,7 +136,7 @@ public class «languageName().toFirstUpper()»ParserConfiguration extends Abstract
 	
 	public void configureConsumers() {
 «FOREACH grammar().allParserRules() AS rule-»
-«LET rule.containedRuleCalls().rule.union(rule.eAllContents.typeSelect(CrossReference).rule).toSet() AS calledRules-»
+«LET rule.containedRuleCalls().rule.union(rule.eAllContents.typeSelect(CrossReference).rule).toSet().sortBy(e|e.name) AS calledRules-»
 «IF !calledRules.isEmpty-»
 «FOREACH calledRules AS calledRule-»
 «IF rule.consumerGetterName() != "getRootConsumer"-»
@@ -157,7 +157,9 @@ public class «languageName().toFirstUpper()»ParserConfiguration extends Abstract
 «ENDIF-»
 «ENDLET-»
 «ENDFOREACH-»
+«EXPAND setDelimiters(grammar()) FOREACH grammar().allParserRules()-»
 «FOREACH grammar().allLexerRules() AS rule-»
+		// TODO remove workaround
 «IF rule.consumerGetterName() != "getRootConsumer"-»
 		«rule.consumerGetterName()»().initFields(this);
 «ELSE-»
@@ -204,6 +206,14 @@ public class «languageName().toFirstUpper()»ParserConfiguration extends Abstract
 «ENDFILE»
 «ENDDEFINE»
 
+«DEFINE setDelimiters(Grammar grammar) FOR ParserRule-»
+«EXPAND setDelimiters(this, grammar) FOREACH allDelimited()-»
+«ENDDEFINE»
+
+«DEFINE setDelimiters(ParserRule rule, Grammar grammar) FOR AbstractElement-»
+		«rule.consumerGetterName()»().set«delimiterFieldName().toFirstUpper()»(«languageName()»Delimiters.«sameConflicts(grammar).globalDelimiterFieldName()»);
+«ENDDEFINE»
+
 «DEFINE delimiters FOR GenService»
 «FILE (genClassFQName.toJavaPackage() + "." + languageName() + "Delimiters").toJavaFilePath() SRC_GEN-»
 /*
@@ -216,16 +226,59 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.matching.SetBasedKeywordMatcher;
 
-import «grammar().grammarAccess()»;
+public final class «languageName()»Delimiters {
 
-public class «languageName()»Delimiters {
-
-	public static ICharacterClass ID_DELIMITER = XtextBuiltinIDConsumer.IDConsumer$$2;
+	private «languageName()»Delimiters() {
+		throw new UnsupportedOperationException("Utility classes may not be initialized");
+	}
 	
-	public static ICharacterClass ANY_OTHER_DELIMITER = ICharacterClass.Factory.nullClass();
-	
-	public static ISequenceMatcher ALL_KEYWORDS = new SetBasedKeywordMatcher(«grammar().grammarAccess().toSimpleName()».INSTANCE.getGrammar());
-
+«EXPAND delimiters FOREACH grammar().allParserRules().allDelimited()-»
 }
 «ENDFILE»
+«ENDDEFINE»
+
+«DEFINE delimiters FOR AbstractElement-»
+«ERROR "delimiters for " + this.metaType.name»
+«ENDDEFINE»
+
+«DEFINE delimiters FOR RuleCall-»
+«EXPAND delimitersImpl FOR this-»
+«ENDDEFINE»
+
+«DEFINE delimitersImpl FOR AbstractElement-»
+«LET conflictingKeywords(grammar()) AS conflicting-»
+«LET sameConflicts(grammar()) AS first-»
+«IF first == this-»
+«IF !conflicting.isEmpty-»
+	public static ISequenceMatcher «globalDelimiterFieldName()» = new SetBasedKeywordMatcher(
+		«FOREACH conflicting AS s SEPARATOR ", "»"«s»"«ENDFOREACH-»);
+		
+«ELSE-»
+	public static ISequenceMatcher «globalDelimiterFieldName()» = ISequenceMatcher.Factory.nullMatcher();
+	
+«ENDIF-»
+«ENDIF-»
+«ENDLET-»
+«ENDLET-»
+«ENDDEFINE» 
+
+«DEFINE delimiters FOR CrossReference-»
+«EXPAND delimitersImpl FOR this-»
+«ENDDEFINE»
+
+«DEFINE delimiters FOR Keyword-»
+«LET conflictingLexerRules(grammar()).first() AS conflicting-»
+«LET sameConflicts(grammar()) AS first-»
+«IF first == this-»
+«IF conflicting != null-»
+	// TODO do not use IDConsumer internals
+	public static ICharacterClass «globalDelimiterFieldName()» = XtextBuiltinIDConsumer.IDConsumer$$2;
+	
+«ELSE-»
+	public static ICharacterClass «globalDelimiterFieldName()» = ICharacterClass.Factory.nullClass();
+	
+«ENDIF-»
+«ENDIF-»
+«ENDLET-»
+«ENDLET-»
 «ENDDEFINE»

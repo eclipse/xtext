@@ -28,7 +28,7 @@ public class PerformanceTest extends AbstractGeneratorTest {
 
 	private String model;
 	
-	private static int metamodelCount = 100;
+	private static int metamodelCount = 200;
 	
 	private static int lexerRuleCount = metamodelCount;
 	

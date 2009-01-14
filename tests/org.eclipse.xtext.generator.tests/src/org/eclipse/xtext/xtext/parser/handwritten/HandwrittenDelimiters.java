@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.parser.handwritten;
 
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
@@ -26,6 +27,6 @@ public final class HandwrittenDelimiters {
 		return ICharacterClass.Factory.nullClass();
 	}
 	
-	public static ISequenceMatcher allKeywords = new SetBasedKeywordMatcher(XtextGrammarAccess.INSTANCE.getGrammar());
+	public static ISequenceMatcher allKeywords = new SetBasedKeywordMatcher(GrammarUtil.getAllKeywords(XtextGrammarAccess.INSTANCE.getGrammar()).toArray(new String[0]));
 	
 }
