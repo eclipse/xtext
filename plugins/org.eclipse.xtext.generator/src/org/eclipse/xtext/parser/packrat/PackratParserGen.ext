@@ -19,7 +19,13 @@ extension org::eclipse::xtend::util::stdlib::io;
 
 String consumeMethodName(AbstractElement this):
 	JAVA org.eclipse.xtext.parser.packrat.PackratParserGenUtil.getConsumeMethodName(org.eclipse.xtext.AbstractElement);
-	
+
+String delimiterFieldName(AbstractElement this):
+	JAVA org.eclipse.xtext.parser.packrat.PackratParserGenUtil.getDelimiterFieldName(org.eclipse.xtext.AbstractElement);
+
+String globalDelimiterFieldName(AbstractElement this):
+	JAVA org.eclipse.xtext.parser.packrat.PackratParserGenUtil.getGlobalDelimiterFieldName(org.eclipse.xtext.AbstractElement);
+			
 String consumerClassName(AbstractRule this):
 	JAVA org.eclipse.xtext.parser.packrat.PackratParserGenUtil.getConsumerClassName(org.eclipse.xtext.AbstractRule);
 	
@@ -41,9 +47,21 @@ String fullConsumerClassName(AbstractRule this):
 String grammarAccess(Grammar this):
     JAVA org.eclipse.xtext.grammaraccess.GrammarAccessUtil.getGrammarAccessFQName(org.eclipse.xtext.Grammar);
    
-boolean canBeFollowedByIdentifier(Keyword this):
-	JAVA org.eclipse.xtext.parser.packrat.PackratParserGenUtil.canBeFollowedByIdentifier(org.eclipse.xtext.Keyword);
+/* boolean canBeFollowedByIdentifier(Keyword this):
+	JAVA org.eclipse.xtext.parser.packrat.PackratParserGenUtil.canBeFollowedByIdentifier(org.eclipse.xtext.Keyword); */
 
+List[Keyword] conflictingKeywords(AbstractElement this, Grammar grammar):
+	JAVA org.eclipse.xtext.parser.packrat.PackratParserGenUtil.getConflictingKeywords(org.eclipse.xtext.AbstractElement, org.eclipse.xtext.Grammar);
+
+List[LexerRule] conflictingLexerRules(Keyword this, Grammar grammar):
+	JAVA org.eclipse.xtext.parser.packrat.PackratParserGenUtil.getConflictingLexerRules(org.eclipse.xtext.Keyword, org.eclipse.xtext.Grammar);
+
+AbstractElement sameConflicts(AbstractElement this, Grammar grammar):
+	JAVA org.eclipse.xtext.parser.packrat.PackratParserGenUtil.findFirstWithSameConflicts(org.eclipse.xtext.AbstractElement, org.eclipse.xtext.Grammar);
+
+Keyword sameConflicts(Keyword this, Grammar grammar):
+	JAVA org.eclipse.xtext.parser.packrat.PackratParserGenUtil.findFirstKeywordWithSameConflicts(org.eclipse.xtext.Keyword, org.eclipse.xtext.Grammar);
+		
 boolean isPlus(AbstractElement this):
 	!isOptional() && isMultipleCardinality();
 
@@ -52,4 +70,10 @@ boolean isStar(AbstractElement this):
 	
 boolean isQuestionMark(AbstractElement this):
 	isOptional() && !isMultipleCardinality();
+	
+List[AbstractElement] allDelimited(AbstractRule this):
+	containedRuleCalls().select(e|e.rule.metaType==LexerRule).
+		union(eAllContents.typeSelect(Keyword)).
+		union(eAllContents.typeSelect(CrossReference).select(e|e.rule.metaType==LexerRule))
+	.toSet();
 	

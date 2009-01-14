@@ -8,14 +8,12 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.matching.SetBasedKeywordMatcher;
 
-import org.eclipse.xtext.testlanguages.services.LexerTestLanguageGrammarAccess;
+public final class LexerTestLanguageDelimiters {
 
-public class LexerTestLanguageDelimiters {
-
-	public static ICharacterClass ID_DELIMITER = XtextBuiltinIDConsumer.IDConsumer$$2;
+	private LexerTestLanguageDelimiters() {
+		throw new UnsupportedOperationException("Utility classes may not be initialized");
+	}
 	
-	public static ICharacterClass ANY_OTHER_DELIMITER = ICharacterClass.Factory.nullClass();
+	public static ISequenceMatcher ruleCall$9$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	
-	public static ISequenceMatcher ALL_KEYWORDS = new SetBasedKeywordMatcher(LexerTestLanguageGrammarAccess.INSTANCE.getGrammar());
-
 }

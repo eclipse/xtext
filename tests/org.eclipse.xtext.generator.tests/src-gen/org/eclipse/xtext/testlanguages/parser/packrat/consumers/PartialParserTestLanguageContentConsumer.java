@@ -11,21 +11,21 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.testlanguages.services.PartialParserTestLanguageGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.PartialParserTestLanguageGrammarAccess.ContentElements;
 
-import org.eclipse.xtext.testlanguages.parser.packrat.PartialParserTestLanguageDelimiters;
-
-import org.eclipse.xtext.testlanguages.parser.packrat.consumers.PartialParserTestLanguageChildrenConsumer;
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.PartialParserTestLanguageAbstractChildrenConsumer;
+import org.eclipse.xtext.testlanguages.parser.packrat.consumers.PartialParserTestLanguageChildrenConsumer;
 
 @SuppressWarnings("unused")
 public final class PartialParserTestLanguageContentConsumer extends NonTerminalConsumer {
 
-	private PartialParserTestLanguageChildrenConsumer childrenConsumer;
 	private PartialParserTestLanguageAbstractChildrenConsumer abstractChildrenConsumer;
+	private PartialParserTestLanguageChildrenConsumer childrenConsumer;
 
 	public PartialParserTestLanguageContentConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
@@ -66,12 +66,12 @@ public final class PartialParserTestLanguageContentConsumer extends NonTerminalC
 		return "Content";
 	}
 	
-	public void setChildrenConsumer(PartialParserTestLanguageChildrenConsumer childrenConsumer) {
-		this.childrenConsumer = childrenConsumer;
-	}
-	
 	public void setAbstractChildrenConsumer(PartialParserTestLanguageAbstractChildrenConsumer abstractChildrenConsumer) {
 		this.abstractChildrenConsumer = abstractChildrenConsumer;
+	}
+	
+	public void setChildrenConsumer(PartialParserTestLanguageChildrenConsumer childrenConsumer) {
+		this.childrenConsumer = childrenConsumer;
 	}
 	
 }

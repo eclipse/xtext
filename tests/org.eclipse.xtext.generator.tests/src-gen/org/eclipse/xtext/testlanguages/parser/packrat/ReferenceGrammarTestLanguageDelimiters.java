@@ -8,14 +8,20 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.matching.SetBasedKeywordMatcher;
 
-import org.eclipse.xtext.testlanguages.services.ReferenceGrammarTestLanguageGrammarAccess;
+public final class ReferenceGrammarTestLanguageDelimiters {
 
-public class ReferenceGrammarTestLanguageDelimiters {
-
-	public static ICharacterClass ID_DELIMITER = XtextBuiltinIDConsumer.IDConsumer$$2;
+	private ReferenceGrammarTestLanguageDelimiters() {
+		throw new UnsupportedOperationException("Utility classes may not be initialized");
+	}
 	
-	public static ICharacterClass ANY_OTHER_DELIMITER = ICharacterClass.Factory.nullClass();
+	public static ISequenceMatcher ruleCall$10$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	
-	public static ISequenceMatcher ALL_KEYWORDS = new SetBasedKeywordMatcher(ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.getGrammar());
-
+	// TODO do not use IDConsumer internals
+	public static ICharacterClass keyword$8$Delimiter = XtextBuiltinIDConsumer.IDConsumer$$2;
+	
+	public static ICharacterClass keyword$13$Delimiter = ICharacterClass.Factory.nullClass();
+	
+	public static ISequenceMatcher ruleCall$40$Delimiter = new SetBasedKeywordMatcher(
+		"spielplatz", "kind", "erwachsener", "spielzeug", "ROT", "BLAU", "GELB", "GRÜN", "familie", "keyword");
+		
 }

@@ -11,12 +11,12 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.parsetree.formatter.services.FormatterTestLanguageGrammarAccess;
 import org.eclipse.xtext.parsetree.formatter.services.FormatterTestLanguageGrammarAccess.TestIndentationElements;
-
-import org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters;
 
 import org.eclipse.xtext.parsetree.formatter.parser.packrat.consumers.FormatterTestLanguageLineConsumer;
 import org.eclipse.xtext.parsetree.formatter.parser.packrat.consumers.FormatterTestLanguageTestIndentationConsumer;
@@ -27,10 +27,19 @@ public final class FormatterTestLanguageTestIndentationConsumer extends NonTermi
 	private FormatterTestLanguageLineConsumer lineConsumer;
 	private FormatterTestLanguageTestIndentationConsumer testIndentationConsumer;
 
+	private ICharacterClass keyword$11$Delimiter;
+	
+	private ICharacterClass keyword$4$Delimiter;
+	
+	private ICharacterClass keyword$5$Delimiter;
+	
 	public FormatterTestLanguageTestIndentationConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
+		keyword$11$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$4$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$5$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -59,11 +68,11 @@ public final class FormatterTestLanguageTestIndentationConsumer extends NonTermi
 	}
 
 	protected boolean consumeKeyword$4() throws Exception {
-		return consumeKeyword(getRule().ele000KeywordIndentation(), null, false, false, FormatterTestLanguageDelimiters.ID_DELIMITER);
+		return consumeKeyword(getRule().ele000KeywordIndentation(), null, false, false, getKeyword$4$Delimiter());
 	}
 
 	protected boolean consumeKeyword$5() throws Exception {
-		return consumeKeyword(getRule().ele001KeywordLeftCurlyBracket(), null, false, false, FormatterTestLanguageDelimiters.ANY_OTHER_DELIMITER);
+		return consumeKeyword(getRule().ele001KeywordLeftCurlyBracket(), null, false, false, getKeyword$5$Delimiter());
 	}
 
 	protected boolean consumeAlternatives$6() throws Exception {
@@ -92,7 +101,7 @@ public final class FormatterTestLanguageTestIndentationConsumer extends NonTermi
 	}
 
 	protected boolean consumeKeyword$11() throws Exception {
-		return consumeKeyword(getRule().ele1KeywordRightCurlyBracket(), null, false, false, FormatterTestLanguageDelimiters.ANY_OTHER_DELIMITER);
+		return consumeKeyword(getRule().ele1KeywordRightCurlyBracket(), null, false, false, getKeyword$11$Delimiter());
 	}
 
 	public TestIndentationElements getRule() {
@@ -114,6 +123,30 @@ public final class FormatterTestLanguageTestIndentationConsumer extends NonTermi
 	
 	public void setTestIndentationConsumer(FormatterTestLanguageTestIndentationConsumer testIndentationConsumer) {
 		this.testIndentationConsumer = testIndentationConsumer;
+	}
+	
+	public ICharacterClass getKeyword$11$Delimiter() {
+		return keyword$11$Delimiter;
+	}
+	
+	public void setKeyword$11$Delimiter(ICharacterClass characterClass) {
+		keyword$11$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$4$Delimiter() {
+		return keyword$4$Delimiter;
+	}
+	
+	public void setKeyword$4$Delimiter(ICharacterClass characterClass) {
+		keyword$4$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$5$Delimiter() {
+		return keyword$5$Delimiter;
+	}
+	
+	public void setKeyword$5$Delimiter(ICharacterClass characterClass) {
+		keyword$5$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

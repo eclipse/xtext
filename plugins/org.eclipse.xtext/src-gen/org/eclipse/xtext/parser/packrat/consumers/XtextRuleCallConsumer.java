@@ -11,12 +11,12 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.services.XtextGrammarAccess;
 import org.eclipse.xtext.services.XtextGrammarAccess.RuleCallElements;
-
-import org.eclipse.xtext.parser.packrat.XtextDelimiters;
 
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 
@@ -25,10 +25,13 @@ public final class XtextRuleCallConsumer extends NonTerminalConsumer {
 
 	private XtextBuiltinIDConsumer idConsumer;
 
+	private ISequenceMatcher crossReference$2$Delimiter;
+	
 	public XtextRuleCallConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
+		crossReference$2$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -36,7 +39,7 @@ public final class XtextRuleCallConsumer extends NonTerminalConsumer {
 	}
 
 	protected boolean consumeAssignment$1() throws Exception {
-		if (consumeTerminal(idConsumer, null, false, false, getRule().ele0CrossReferenceEStringAbstractRule(), XtextDelimiters.ALL_KEYWORDS))
+		if (consumeTerminal(idConsumer, null, false, false, getRule().ele0CrossReferenceEStringAbstractRule(), getCrossReference$2$Delimiter()))
 			return true;
 		return false;
 	}
@@ -56,6 +59,14 @@ public final class XtextRuleCallConsumer extends NonTerminalConsumer {
 	
 	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
 		this.idConsumer = idConsumer;
+	}
+	
+	public ISequenceMatcher getCrossReference$2$Delimiter() {
+		return crossReference$2$Delimiter;
+	}
+	
+	public void setCrossReference$2$Delimiter(ISequenceMatcher matcher) {
+		crossReference$2$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 }

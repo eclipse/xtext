@@ -11,21 +11,21 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.testlanguages.services.SimpleExpressionsTestLanguageGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.SimpleExpressionsTestLanguageGrammarAccess.TermElements;
 
-import org.eclipse.xtext.testlanguages.parser.packrat.SimpleExpressionsTestLanguageDelimiters;
-
-import org.eclipse.xtext.testlanguages.parser.packrat.consumers.SimpleExpressionsTestLanguageParensConsumer;
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.SimpleExpressionsTestLanguageAtomConsumer;
+import org.eclipse.xtext.testlanguages.parser.packrat.consumers.SimpleExpressionsTestLanguageParensConsumer;
 
 @SuppressWarnings("unused")
 public final class SimpleExpressionsTestLanguageTermConsumer extends NonTerminalConsumer {
 
-	private SimpleExpressionsTestLanguageParensConsumer parensConsumer;
 	private SimpleExpressionsTestLanguageAtomConsumer atomConsumer;
+	private SimpleExpressionsTestLanguageParensConsumer parensConsumer;
 
 	public SimpleExpressionsTestLanguageTermConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
@@ -66,12 +66,12 @@ public final class SimpleExpressionsTestLanguageTermConsumer extends NonTerminal
 		return "Expression";
 	}
 	
-	public void setParensConsumer(SimpleExpressionsTestLanguageParensConsumer parensConsumer) {
-		this.parensConsumer = parensConsumer;
-	}
-	
 	public void setAtomConsumer(SimpleExpressionsTestLanguageAtomConsumer atomConsumer) {
 		this.atomConsumer = atomConsumer;
+	}
+	
+	public void setParensConsumer(SimpleExpressionsTestLanguageParensConsumer parensConsumer) {
+		this.parensConsumer = parensConsumer;
 	}
 	
 }

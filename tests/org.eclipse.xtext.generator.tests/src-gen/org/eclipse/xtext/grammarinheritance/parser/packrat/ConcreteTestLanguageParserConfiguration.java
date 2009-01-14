@@ -55,18 +55,31 @@ public class ConcreteTestLanguageParserConfiguration extends AbstractParserConfi
 	}
 	
 	public void configureConsumers() {
-		getConcreteParserRuleConsumer().setRealConsumer(getRealConsumer());
 		getConcreteParserRuleConsumer().setInheritedParserRuleConsumer(getInheritedParserRuleConsumer());
+		getConcreteParserRuleConsumer().setRealConsumer(getRealConsumer());
 
 		getInheritedParserRuleConsumer().setIdConsumer(getIdConsumer());
 
+		getConcreteParserRuleConsumer().setKeyword$4$Delimiter(ConcreteTestLanguageDelimiters.keyword$6$Delimiter);
+		getConcreteParserRuleConsumer().setRuleCall$6$Delimiter(ConcreteTestLanguageDelimiters.ruleCall$8$Delimiter);
+		getConcreteParserRuleConsumer().setKeyword$7$Delimiter(ConcreteTestLanguageDelimiters.keyword$9$Delimiter);
+		getInheritedParserRuleConsumer().setRuleCall$4$Delimiter(ConcreteTestLanguageDelimiters.ruleCall$7$Delimiter);
+		getInheritedParserRuleConsumer().setKeyword$2$Delimiter(ConcreteTestLanguageDelimiters.keyword$6$Delimiter);
+		// TODO remove workaround
 		getRealConsumer().initFields(this);
+		// TODO remove workaround
 		getIdConsumer().initFields(this);
+		// TODO remove workaround
 		getIntConsumer().initFields(this);
+		// TODO remove workaround
 		getStringConsumer().initFields(this);
+		// TODO remove workaround
 		getMlCommentConsumer().initFields(this);
+		// TODO remove workaround
 		getSlCommentConsumer().initFields(this);
+		// TODO remove workaround
 		getWsConsumer().initFields(this);
+		// TODO remove workaround
 		getAnyOtherConsumer().initFields(this);
 	}
 	

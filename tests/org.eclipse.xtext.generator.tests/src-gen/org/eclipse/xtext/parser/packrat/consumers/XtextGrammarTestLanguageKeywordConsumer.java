@@ -11,12 +11,12 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess;
 import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess.KeywordElements;
-
-import org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters;
 
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGConsumer;
 
@@ -25,10 +25,13 @@ public final class XtextGrammarTestLanguageKeywordConsumer extends NonTerminalCo
 
 	private XtextBuiltinSTRINGConsumer stringConsumer;
 
+	private ISequenceMatcher ruleCall$2$Delimiter;
+	
 	public XtextGrammarTestLanguageKeywordConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
+		ruleCall$2$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -36,7 +39,7 @@ public final class XtextGrammarTestLanguageKeywordConsumer extends NonTerminalCo
 	}
 
 	protected boolean consumeAssignment$1() throws Exception {
-		if (consumeTerminal(stringConsumer, "value", false, false, getRule().ele0LexerRuleCallSTRING(), XtextGrammarTestLanguageDelimiters.ALL_KEYWORDS))
+		if (consumeTerminal(stringConsumer, "value", false, false, getRule().ele0LexerRuleCallSTRING(), getRuleCall$2$Delimiter()))
 			return true;
 		return false;
 	}
@@ -56,6 +59,14 @@ public final class XtextGrammarTestLanguageKeywordConsumer extends NonTerminalCo
 	
 	public void setStringConsumer(XtextBuiltinSTRINGConsumer stringConsumer) {
 		this.stringConsumer = stringConsumer;
+	}
+	
+	public ISequenceMatcher getRuleCall$2$Delimiter() {
+		return ruleCall$2$Delimiter;
+	}
+	
+	public void setRuleCall$2$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$2$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 }

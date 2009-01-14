@@ -11,12 +11,12 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.services.XtextGrammarAccess;
 import org.eclipse.xtext.services.XtextGrammarAccess.AlternativesElements;
-
-import org.eclipse.xtext.parser.packrat.XtextDelimiters;
 
 import org.eclipse.xtext.parser.packrat.consumers.XtextGroupConsumer;
 
@@ -25,10 +25,13 @@ public final class XtextAlternativesConsumer extends NonTerminalConsumer {
 
 	private XtextGroupConsumer groupConsumer;
 
+	private ICharacterClass keyword$7$Delimiter;
+	
 	public XtextAlternativesConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
+		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -79,7 +82,7 @@ public final class XtextAlternativesConsumer extends NonTerminalConsumer {
 	}
 
 	protected boolean consumeKeyword$7() throws Exception {
-		return consumeKeyword(getRule().ele101KeywordVerticalLine(), null, false, false, XtextDelimiters.ANY_OTHER_DELIMITER);
+		return consumeKeyword(getRule().ele101KeywordVerticalLine(), null, false, false, getKeyword$7$Delimiter());
 	}
 
 	protected boolean consumeAssignment$8() throws Exception {
@@ -103,6 +106,14 @@ public final class XtextAlternativesConsumer extends NonTerminalConsumer {
 	
 	public void setGroupConsumer(XtextGroupConsumer groupConsumer) {
 		this.groupConsumer = groupConsumer;
+	}
+	
+	public ICharacterClass getKeyword$7$Delimiter() {
+		return keyword$7$Delimiter;
+	}
+	
+	public void setKeyword$7$Delimiter(ICharacterClass characterClass) {
+		keyword$7$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

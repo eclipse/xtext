@@ -11,26 +11,29 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.parsetree.formatter.services.FormatterTestLanguageGrammarAccess;
 import org.eclipse.xtext.parsetree.formatter.services.FormatterTestLanguageGrammarAccess.RootElements;
 
-import org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters;
-
-import org.eclipse.xtext.parsetree.formatter.parser.packrat.consumers.FormatterTestLanguageTestLinewrapConsumer;
 import org.eclipse.xtext.parsetree.formatter.parser.packrat.consumers.FormatterTestLanguageTestIndentationConsumer;
+import org.eclipse.xtext.parsetree.formatter.parser.packrat.consumers.FormatterTestLanguageTestLinewrapConsumer;
 
 @SuppressWarnings("unused")
 public final class FormatterTestLanguageRootConsumer extends NonTerminalConsumer {
 
-	private FormatterTestLanguageTestLinewrapConsumer testLinewrapConsumer;
 	private FormatterTestLanguageTestIndentationConsumer testIndentationConsumer;
+	private FormatterTestLanguageTestLinewrapConsumer testLinewrapConsumer;
 
+	private ICharacterClass keyword$2$Delimiter;
+	
 	public FormatterTestLanguageRootConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
+		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -51,7 +54,7 @@ public final class FormatterTestLanguageRootConsumer extends NonTerminalConsumer
 	}
 
 	protected boolean consumeKeyword$2() throws Exception {
-		return consumeKeyword(getRule().ele0KeywordTest(), null, false, false, FormatterTestLanguageDelimiters.ID_DELIMITER);
+		return consumeKeyword(getRule().ele0KeywordTest(), null, false, false, getKeyword$2$Delimiter());
 	}
 
 	protected boolean consumeAlternatives$3() throws Exception {
@@ -83,12 +86,20 @@ public final class FormatterTestLanguageRootConsumer extends NonTerminalConsumer
 		return "Root";
 	}
 	
+	public void setTestIndentationConsumer(FormatterTestLanguageTestIndentationConsumer testIndentationConsumer) {
+		this.testIndentationConsumer = testIndentationConsumer;
+	}
+	
 	public void setTestLinewrapConsumer(FormatterTestLanguageTestLinewrapConsumer testLinewrapConsumer) {
 		this.testLinewrapConsumer = testLinewrapConsumer;
 	}
 	
-	public void setTestIndentationConsumer(FormatterTestLanguageTestIndentationConsumer testIndentationConsumer) {
-		this.testIndentationConsumer = testIndentationConsumer;
+	public ICharacterClass getKeyword$2$Delimiter() {
+		return keyword$2$Delimiter;
+	}
+	
+	public void setKeyword$2$Delimiter(ICharacterClass characterClass) {
+		keyword$2$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

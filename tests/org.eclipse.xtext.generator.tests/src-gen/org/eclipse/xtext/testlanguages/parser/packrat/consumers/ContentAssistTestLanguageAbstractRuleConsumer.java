@@ -11,21 +11,21 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.testlanguages.services.ContentAssistTestLanguageGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.ContentAssistTestLanguageGrammarAccess.AbstractRuleElements;
 
-import org.eclipse.xtext.testlanguages.parser.packrat.ContentAssistTestLanguageDelimiters;
-
-import org.eclipse.xtext.testlanguages.parser.packrat.consumers.ContentAssistTestLanguageSecondAbstractRuleChildConsumer;
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.ContentAssistTestLanguageFirstAbstractRuleChildConsumer;
+import org.eclipse.xtext.testlanguages.parser.packrat.consumers.ContentAssistTestLanguageSecondAbstractRuleChildConsumer;
 
 @SuppressWarnings("unused")
 public final class ContentAssistTestLanguageAbstractRuleConsumer extends NonTerminalConsumer {
 
-	private ContentAssistTestLanguageSecondAbstractRuleChildConsumer secondAbstractRuleChildConsumer;
 	private ContentAssistTestLanguageFirstAbstractRuleChildConsumer firstAbstractRuleChildConsumer;
+	private ContentAssistTestLanguageSecondAbstractRuleChildConsumer secondAbstractRuleChildConsumer;
 
 	public ContentAssistTestLanguageAbstractRuleConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
@@ -66,12 +66,12 @@ public final class ContentAssistTestLanguageAbstractRuleConsumer extends NonTerm
 		return "AbstractRule";
 	}
 	
-	public void setSecondAbstractRuleChildConsumer(ContentAssistTestLanguageSecondAbstractRuleChildConsumer secondAbstractRuleChildConsumer) {
-		this.secondAbstractRuleChildConsumer = secondAbstractRuleChildConsumer;
-	}
-	
 	public void setFirstAbstractRuleChildConsumer(ContentAssistTestLanguageFirstAbstractRuleChildConsumer firstAbstractRuleChildConsumer) {
 		this.firstAbstractRuleChildConsumer = firstAbstractRuleChildConsumer;
+	}
+	
+	public void setSecondAbstractRuleChildConsumer(ContentAssistTestLanguageSecondAbstractRuleChildConsumer secondAbstractRuleChildConsumer) {
+		this.secondAbstractRuleChildConsumer = secondAbstractRuleChildConsumer;
 	}
 	
 }

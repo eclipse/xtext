@@ -11,12 +11,12 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.crossrefs.services.LangATestLanguageGrammarAccess;
 import org.eclipse.xtext.crossrefs.services.LangATestLanguageGrammarAccess.TypeElements;
-
-import org.eclipse.xtext.crossrefs.parser.packrat.LangATestLanguageDelimiters;
 
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 
@@ -25,10 +25,22 @@ public final class LangATestLanguageTypeConsumer extends NonTerminalConsumer {
 
 	private XtextBuiltinIDConsumer idConsumer;
 
+	private ICharacterClass keyword$4$Delimiter;
+	
+	private ICharacterClass keyword$7$Delimiter;
+	
+	private ISequenceMatcher ruleCall$6$Delimiter;
+	
+	private ISequenceMatcher crossReference$9$Delimiter;
+	
 	public LangATestLanguageTypeConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
+		keyword$4$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
+		ruleCall$6$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		crossReference$9$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -57,21 +69,21 @@ public final class LangATestLanguageTypeConsumer extends NonTerminalConsumer {
 	}
 
 	protected boolean consumeKeyword$4() throws Exception {
-		return consumeKeyword(getRule().ele000KeywordType(), null, false, false, LangATestLanguageDelimiters.ID_DELIMITER);
+		return consumeKeyword(getRule().ele000KeywordType(), null, false, false, getKeyword$4$Delimiter());
 	}
 
 	protected boolean consumeAssignment$5() throws Exception {
-		if (consumeTerminal(idConsumer, "name", false, false, getRule().ele0010LexerRuleCallID(), LangATestLanguageDelimiters.ALL_KEYWORDS))
+		if (consumeTerminal(idConsumer, "name", false, false, getRule().ele0010LexerRuleCallID(), getRuleCall$6$Delimiter()))
 			return true;
 		return false;
 	}
 
 	protected boolean consumeKeyword$7() throws Exception {
-		return consumeKeyword(getRule().ele01KeywordExtends(), null, false, false, LangATestLanguageDelimiters.ID_DELIMITER);
+		return consumeKeyword(getRule().ele01KeywordExtends(), null, false, false, getKeyword$7$Delimiter());
 	}
 
 	protected boolean consumeAssignment$8() throws Exception {
-		if (consumeTerminal(idConsumer, null, false, false, getRule().ele10CrossReferenceEStringType(), LangATestLanguageDelimiters.ALL_KEYWORDS))
+		if (consumeTerminal(idConsumer, null, false, false, getRule().ele10CrossReferenceEStringType(), getCrossReference$9$Delimiter()))
 			return true;
 		return false;
 	}
@@ -91,6 +103,38 @@ public final class LangATestLanguageTypeConsumer extends NonTerminalConsumer {
 	
 	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
 		this.idConsumer = idConsumer;
+	}
+	
+	public ICharacterClass getKeyword$4$Delimiter() {
+		return keyword$4$Delimiter;
+	}
+	
+	public void setKeyword$4$Delimiter(ICharacterClass characterClass) {
+		keyword$4$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$7$Delimiter() {
+		return keyword$7$Delimiter;
+	}
+	
+	public void setKeyword$7$Delimiter(ICharacterClass characterClass) {
+		keyword$7$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ISequenceMatcher getRuleCall$6$Delimiter() {
+		return ruleCall$6$Delimiter;
+	}
+	
+	public void setRuleCall$6$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$6$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	}
+	
+	public ISequenceMatcher getCrossReference$9$Delimiter() {
+		return crossReference$9$Delimiter;
+	}
+	
+	public void setCrossReference$9$Delimiter(ISequenceMatcher matcher) {
+		crossReference$9$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 }

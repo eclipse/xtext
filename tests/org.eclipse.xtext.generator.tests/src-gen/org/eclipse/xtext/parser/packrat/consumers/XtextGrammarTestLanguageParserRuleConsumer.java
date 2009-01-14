@@ -11,28 +11,40 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess;
 import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess.ParserRuleElements;
 
-import org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters;
-
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageAlternativesConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageTypeRefConsumer;
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageTypeRefConsumer;
 
 @SuppressWarnings("unused")
 public final class XtextGrammarTestLanguageParserRuleConsumer extends NonTerminalConsumer {
 
 	private XtextGrammarTestLanguageAlternativesConsumer alternativesConsumer;
-	private XtextGrammarTestLanguageTypeRefConsumer typeRefConsumer;
 	private XtextBuiltinIDConsumer idConsumer;
+	private XtextGrammarTestLanguageTypeRefConsumer typeRefConsumer;
 
+	private ICharacterClass keyword$8$Delimiter;
+	
+	private ISequenceMatcher ruleCall$6$Delimiter;
+	
+	private ICharacterClass keyword$11$Delimiter;
+	
+	private ICharacterClass keyword$14$Delimiter;
+	
 	public XtextGrammarTestLanguageParserRuleConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
+		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
+		ruleCall$6$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		keyword$11$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$14$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -65,7 +77,7 @@ public final class XtextGrammarTestLanguageParserRuleConsumer extends NonTermina
 	}
 
 	protected boolean consumeAssignment$5() throws Exception {
-		if (consumeTerminal(idConsumer, "name", false, false, getRule().ele00000LexerRuleCallID(), XtextGrammarTestLanguageDelimiters.ALL_KEYWORDS))
+		if (consumeTerminal(idConsumer, "name", false, false, getRule().ele00000LexerRuleCallID(), getRuleCall$6$Delimiter()))
 			return true;
 		return false;
 	}
@@ -89,7 +101,7 @@ public final class XtextGrammarTestLanguageParserRuleConsumer extends NonTermina
 	}
 
 	protected boolean consumeKeyword$8() throws Exception {
-		return consumeKeyword(getRule().ele00010KeywordReturns(), null, false, false, XtextGrammarTestLanguageDelimiters.ID_DELIMITER);
+		return consumeKeyword(getRule().ele00010KeywordReturns(), null, false, false, getKeyword$8$Delimiter());
 	}
 
 	protected boolean consumeAssignment$9() throws Exception {
@@ -99,7 +111,7 @@ public final class XtextGrammarTestLanguageParserRuleConsumer extends NonTermina
 	}
 
 	protected boolean consumeKeyword$11() throws Exception {
-		return consumeKeyword(getRule().ele001KeywordColon(), null, false, false, XtextGrammarTestLanguageDelimiters.ANY_OTHER_DELIMITER);
+		return consumeKeyword(getRule().ele001KeywordColon(), null, false, false, getKeyword$11$Delimiter());
 	}
 
 	protected boolean consumeAssignment$12() throws Exception {
@@ -109,7 +121,7 @@ public final class XtextGrammarTestLanguageParserRuleConsumer extends NonTermina
 	}
 
 	protected boolean consumeKeyword$14() throws Exception {
-		return consumeKeyword(getRule().ele1KeywordSemicolon(), null, false, false, XtextGrammarTestLanguageDelimiters.ANY_OTHER_DELIMITER);
+		return consumeKeyword(getRule().ele1KeywordSemicolon(), null, false, false, getKeyword$14$Delimiter());
 	}
 
 	public ParserRuleElements getRule() {
@@ -129,12 +141,44 @@ public final class XtextGrammarTestLanguageParserRuleConsumer extends NonTermina
 		this.alternativesConsumer = alternativesConsumer;
 	}
 	
+	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
+		this.idConsumer = idConsumer;
+	}
+	
 	public void setTypeRefConsumer(XtextGrammarTestLanguageTypeRefConsumer typeRefConsumer) {
 		this.typeRefConsumer = typeRefConsumer;
 	}
 	
-	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
-		this.idConsumer = idConsumer;
+	public ICharacterClass getKeyword$8$Delimiter() {
+		return keyword$8$Delimiter;
+	}
+	
+	public void setKeyword$8$Delimiter(ICharacterClass characterClass) {
+		keyword$8$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ISequenceMatcher getRuleCall$6$Delimiter() {
+		return ruleCall$6$Delimiter;
+	}
+	
+	public void setRuleCall$6$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$6$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	}
+	
+	public ICharacterClass getKeyword$11$Delimiter() {
+		return keyword$11$Delimiter;
+	}
+	
+	public void setKeyword$11$Delimiter(ICharacterClass characterClass) {
+		keyword$11$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$14$Delimiter() {
+		return keyword$14$Delimiter;
+	}
+	
+	public void setKeyword$14$Delimiter(ICharacterClass characterClass) {
+		keyword$14$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

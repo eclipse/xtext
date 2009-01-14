@@ -8,14 +8,20 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.matching.SetBasedKeywordMatcher;
 
-import org.eclipse.xtext.parsetree.reconstr.services.ComplexReconstrTestLanguageGrammarAccess;
+public final class ComplexReconstrTestLanguageDelimiters {
 
-public class ComplexReconstrTestLanguageDelimiters {
-
-	public static ICharacterClass ID_DELIMITER = XtextBuiltinIDConsumer.IDConsumer$$2;
+	private ComplexReconstrTestLanguageDelimiters() {
+		throw new UnsupportedOperationException("Utility classes may not be initialized");
+	}
 	
-	public static ICharacterClass ANY_OTHER_DELIMITER = ICharacterClass.Factory.nullClass();
+	public static ICharacterClass keyword$15$Delimiter = ICharacterClass.Factory.nullClass();
 	
-	public static ISequenceMatcher ALL_KEYWORDS = new SetBasedKeywordMatcher(ComplexReconstrTestLanguageGrammarAccess.INSTANCE.getGrammar());
-
+	public static ISequenceMatcher ruleCall$33$Delimiter = new SetBasedKeywordMatcher(
+		"TA", "x", "y", "TB", "TC", "z", "TD", "TE", "TF", "TG");
+		
+	public static ISequenceMatcher ruleCall$64$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+	
+	// TODO do not use IDConsumer internals
+	public static ICharacterClass keyword$50$Delimiter = XtextBuiltinIDConsumer.IDConsumer$$2;
+	
 }

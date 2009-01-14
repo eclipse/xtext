@@ -11,12 +11,12 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.ui.core.services.TestLanguageGrammarAccess;
 import org.eclipse.xtext.ui.core.services.TestLanguageGrammarAccess.FileElements;
-
-import org.eclipse.xtext.ui.core.parser.packrat.TestLanguageDelimiters;
 
 import org.eclipse.xtext.ui.core.parser.packrat.consumers.TestLanguageStuffConsumer;
 

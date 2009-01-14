@@ -11,12 +11,12 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.testlanguages.services.SimpleExpressionsTestLanguageGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.SimpleExpressionsTestLanguageGrammarAccess.AdditionElements;
-
-import org.eclipse.xtext.testlanguages.parser.packrat.SimpleExpressionsTestLanguageDelimiters;
 
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.SimpleExpressionsTestLanguageMultiplicationConsumer;
 
@@ -25,10 +25,16 @@ public final class SimpleExpressionsTestLanguageAdditionConsumer extends NonTerm
 
 	private SimpleExpressionsTestLanguageMultiplicationConsumer multiplicationConsumer;
 
+	private ICharacterClass keyword$9$Delimiter;
+	
+	private ICharacterClass keyword$10$Delimiter;
+	
 	public SimpleExpressionsTestLanguageAdditionConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
+		keyword$9$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$10$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -79,9 +85,9 @@ public final class SimpleExpressionsTestLanguageAdditionConsumer extends NonTerm
 	}
 
 	protected boolean consumeAssignment$7() throws Exception {
-		if (consumeKeyword(getRule().ele10100KeywordPlusSign(), "operator", false, false, SimpleExpressionsTestLanguageDelimiters.ANY_OTHER_DELIMITER))
+		if (consumeKeyword(getRule().ele10100KeywordPlusSign(), "operator", false, false, getKeyword$9$Delimiter()))
 			return true;
-		if (consumeKeyword(getRule().ele10101KeywordHyphenMinus(), "operator", false, false, SimpleExpressionsTestLanguageDelimiters.ANY_OTHER_DELIMITER))
+		if (consumeKeyword(getRule().ele10101KeywordHyphenMinus(), "operator", false, false, getKeyword$10$Delimiter()))
 			return true;
 		return false;
 	}
@@ -107,6 +113,22 @@ public final class SimpleExpressionsTestLanguageAdditionConsumer extends NonTerm
 	
 	public void setMultiplicationConsumer(SimpleExpressionsTestLanguageMultiplicationConsumer multiplicationConsumer) {
 		this.multiplicationConsumer = multiplicationConsumer;
+	}
+	
+	public ICharacterClass getKeyword$9$Delimiter() {
+		return keyword$9$Delimiter;
+	}
+	
+	public void setKeyword$9$Delimiter(ICharacterClass characterClass) {
+		keyword$9$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$10$Delimiter() {
+		return keyword$10$Delimiter;
+	}
+	
+	public void setKeyword$10$Delimiter(ICharacterClass characterClass) {
+		keyword$10$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

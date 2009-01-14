@@ -62,15 +62,24 @@ public class LexerTestLanguageParserConfiguration extends AbstractParserConfigur
 	public void configureConsumers() {
 		getModelConsumer().setElementConsumer(getElementConsumer());
 
-		getElementConsumer().setStringConsumer(getStringConsumer());
 		getElementConsumer().setIdConsumer(getIdConsumer());
+		getElementConsumer().setStringConsumer(getStringConsumer());
 
+		getElementConsumer().setRuleCall$5$Delimiter(LexerTestLanguageDelimiters.ruleCall$9$Delimiter);
+		getElementConsumer().setRuleCall$3$Delimiter(LexerTestLanguageDelimiters.ruleCall$9$Delimiter);
+		// TODO remove workaround
 		getStringConsumer().initFields(this);
+		// TODO remove workaround
 		getIdConsumer().initFields(this);
+		// TODO remove workaround
 		getIntConsumer().initFields(this);
+		// TODO remove workaround
 		getMlCommentConsumer().initFields(this);
+		// TODO remove workaround
 		getSlCommentConsumer().initFields(this);
+		// TODO remove workaround
 		getWsConsumer().initFields(this);
+		// TODO remove workaround
 		getAnyOtherConsumer().initFields(this);
 	}
 	

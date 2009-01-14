@@ -85,20 +85,40 @@ public class LookaheadTestLanguageParserConfiguration extends AbstractParserConf
 	public void configureConsumers() {
 		getEntryConsumer().setAltsConsumer(getAltsConsumer());
 
-		getAltsConsumer().setLookAhead3Consumer(getLookAhead3Consumer());
 		getAltsConsumer().setLookAhead0Consumer(getLookAhead0Consumer());
 		getAltsConsumer().setLookAhead1Consumer(getLookAhead1Consumer());
+		getAltsConsumer().setLookAhead3Consumer(getLookAhead3Consumer());
 
 		getLookAhead1Consumer().setLookAhead2Consumer(getLookAhead2Consumer());
 
 		getLookAhead3Consumer().setLookAhead4Consumer(getLookAhead4Consumer());
 
+		getLookAhead0Consumer().setKeyword$4$Delimiter(LookaheadTestLanguageDelimiters.keyword$15$Delimiter);
+		getLookAhead0Consumer().setKeyword$2$Delimiter(LookaheadTestLanguageDelimiters.keyword$15$Delimiter);
+		getLookAhead1Consumer().setKeyword$10$Delimiter(LookaheadTestLanguageDelimiters.keyword$15$Delimiter);
+		getLookAhead1Consumer().setKeyword$4$Delimiter(LookaheadTestLanguageDelimiters.keyword$15$Delimiter);
+		getLookAhead1Consumer().setKeyword$8$Delimiter(LookaheadTestLanguageDelimiters.keyword$15$Delimiter);
+		getLookAhead2Consumer().setKeyword$6$Delimiter(LookaheadTestLanguageDelimiters.keyword$15$Delimiter);
+		getLookAhead2Consumer().setKeyword$4$Delimiter(LookaheadTestLanguageDelimiters.keyword$15$Delimiter);
+		getLookAhead2Consumer().setKeyword$7$Delimiter(LookaheadTestLanguageDelimiters.keyword$15$Delimiter);
+		getLookAhead3Consumer().setKeyword$5$Delimiter(LookaheadTestLanguageDelimiters.keyword$15$Delimiter);
+		getLookAhead3Consumer().setKeyword$7$Delimiter(LookaheadTestLanguageDelimiters.keyword$15$Delimiter);
+		getLookAhead3Consumer().setKeyword$4$Delimiter(LookaheadTestLanguageDelimiters.keyword$15$Delimiter);
+		getLookAhead4Consumer().setKeyword$3$Delimiter(LookaheadTestLanguageDelimiters.keyword$15$Delimiter);
+		getLookAhead4Consumer().setKeyword$5$Delimiter(LookaheadTestLanguageDelimiters.keyword$15$Delimiter);
+		// TODO remove workaround
 		getIdConsumer().initFields(this);
+		// TODO remove workaround
 		getIntConsumer().initFields(this);
+		// TODO remove workaround
 		getStringConsumer().initFields(this);
+		// TODO remove workaround
 		getMlCommentConsumer().initFields(this);
+		// TODO remove workaround
 		getSlCommentConsumer().initFields(this);
+		// TODO remove workaround
 		getWsConsumer().initFields(this);
+		// TODO remove workaround
 		getAnyOtherConsumer().initFields(this);
 	}
 	

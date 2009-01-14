@@ -75,23 +75,41 @@ public class ContentAssistTestLanguageParserConfiguration extends AbstractParser
 	public void configureConsumers() {
 		getStartConsumer().setAbstractRuleConsumer(getAbstractRuleConsumer());
 
-		getAbstractRuleConsumer().setSecondAbstractRuleChildConsumer(getSecondAbstractRuleChildConsumer());
 		getAbstractRuleConsumer().setFirstAbstractRuleChildConsumer(getFirstAbstractRuleChildConsumer());
+		getAbstractRuleConsumer().setSecondAbstractRuleChildConsumer(getSecondAbstractRuleChildConsumer());
 
-		getFirstAbstractRuleChildConsumer().setIdConsumer(getIdConsumer());
 		getFirstAbstractRuleChildConsumer().setAbstractRuleConsumer(getAbstractRuleConsumer());
+		getFirstAbstractRuleChildConsumer().setIdConsumer(getIdConsumer());
 
-		getSecondAbstractRuleChildConsumer().setIdConsumer(getIdConsumer());
 		getSecondAbstractRuleChildConsumer().setAbstractRuleCallConsumer(getAbstractRuleCallConsumer());
+		getSecondAbstractRuleChildConsumer().setIdConsumer(getIdConsumer());
 
 		getAbstractRuleCallConsumer().setIdConsumer(getIdConsumer());
 
+		getStartConsumer().setKeyword$3$Delimiter(ContentAssistTestLanguageDelimiters.keyword$5$Delimiter);
+		getStartConsumer().setKeyword$6$Delimiter(ContentAssistTestLanguageDelimiters.keyword$5$Delimiter);
+		getFirstAbstractRuleChildConsumer().setKeyword$7$Delimiter(ContentAssistTestLanguageDelimiters.keyword$22$Delimiter);
+		getFirstAbstractRuleChildConsumer().setRuleCall$6$Delimiter(ContentAssistTestLanguageDelimiters.ruleCall$21$Delimiter);
+		getFirstAbstractRuleChildConsumer().setKeyword$11$Delimiter(ContentAssistTestLanguageDelimiters.keyword$22$Delimiter);
+		getFirstAbstractRuleChildConsumer().setKeyword$10$Delimiter(ContentAssistTestLanguageDelimiters.keyword$22$Delimiter);
+		getSecondAbstractRuleChildConsumer().setKeyword$11$Delimiter(ContentAssistTestLanguageDelimiters.keyword$22$Delimiter);
+		getSecondAbstractRuleChildConsumer().setKeyword$7$Delimiter(ContentAssistTestLanguageDelimiters.keyword$5$Delimiter);
+		getSecondAbstractRuleChildConsumer().setKeyword$8$Delimiter(ContentAssistTestLanguageDelimiters.keyword$22$Delimiter);
+		getSecondAbstractRuleChildConsumer().setRuleCall$6$Delimiter(ContentAssistTestLanguageDelimiters.ruleCall$21$Delimiter);
+		getAbstractRuleCallConsumer().setCrossReference$2$Delimiter(ContentAssistTestLanguageDelimiters.ruleCall$21$Delimiter);
+		// TODO remove workaround
 		getIdConsumer().initFields(this);
+		// TODO remove workaround
 		getIntConsumer().initFields(this);
+		// TODO remove workaround
 		getStringConsumer().initFields(this);
+		// TODO remove workaround
 		getMlCommentConsumer().initFields(this);
+		// TODO remove workaround
 		getSlCommentConsumer().initFields(this);
+		// TODO remove workaround
 		getWsConsumer().initFields(this);
+		// TODO remove workaround
 		getAnyOtherConsumer().initFields(this);
 	}
 	

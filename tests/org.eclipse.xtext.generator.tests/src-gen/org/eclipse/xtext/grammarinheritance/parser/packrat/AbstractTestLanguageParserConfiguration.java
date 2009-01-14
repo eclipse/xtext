@@ -60,13 +60,23 @@ public class AbstractTestLanguageParserConfiguration extends AbstractParserConfi
 	public void configureConsumers() {
 		getInheritedParserRuleConsumer().setIdConsumer(getIdConsumer());
 
+		getInheritedParserRuleConsumer().setRuleCall$4$Delimiter(AbstractTestLanguageDelimiters.ruleCall$7$Delimiter);
+		getInheritedParserRuleConsumer().setKeyword$2$Delimiter(AbstractTestLanguageDelimiters.keyword$5$Delimiter);
+		// TODO remove workaround
 		getRealConsumer().initFields(this);
+		// TODO remove workaround
 		getIdConsumer().initFields(this);
+		// TODO remove workaround
 		getIntConsumer().initFields(this);
+		// TODO remove workaround
 		getStringConsumer().initFields(this);
+		// TODO remove workaround
 		getMlCommentConsumer().initFields(this);
+		// TODO remove workaround
 		getSlCommentConsumer().initFields(this);
+		// TODO remove workaround
 		getWsConsumer().initFields(this);
+		// TODO remove workaround
 		getAnyOtherConsumer().initFields(this);
 	}
 	

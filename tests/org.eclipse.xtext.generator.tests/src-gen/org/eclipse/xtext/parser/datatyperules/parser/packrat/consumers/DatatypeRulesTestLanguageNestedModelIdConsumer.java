@@ -11,12 +11,12 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.parser.datatyperules.services.DatatypeRulesTestLanguageGrammarAccess;
 import org.eclipse.xtext.parser.datatyperules.services.DatatypeRulesTestLanguageGrammarAccess.NestedModelIdElements;
-
-import org.eclipse.xtext.parser.datatyperules.parser.packrat.DatatypeRulesTestLanguageDelimiters;
 
 import org.eclipse.xtext.parser.datatyperules.parser.packrat.consumers.DatatypeRulesTestLanguageModelIdConsumer;
 
@@ -25,10 +25,13 @@ public final class DatatypeRulesTestLanguageNestedModelIdConsumer extends NonTer
 
 	private DatatypeRulesTestLanguageModelIdConsumer modelIdConsumer;
 
+	private ICharacterClass keyword$4$Delimiter;
+	
 	public DatatypeRulesTestLanguageNestedModelIdConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
+		keyword$4$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -57,7 +60,7 @@ public final class DatatypeRulesTestLanguageNestedModelIdConsumer extends NonTer
 	}
 
 	protected boolean consumeKeyword$4() throws Exception {
-		return consumeKeyword(getRule().ele01KeywordFullStop(), null, false, false, DatatypeRulesTestLanguageDelimiters.ANY_OTHER_DELIMITER);
+		return consumeKeyword(getRule().ele01KeywordFullStop(), null, false, false, getKeyword$4$Delimiter());
 	}
 
 	protected boolean consumeRuleCall$5() throws Exception {
@@ -79,6 +82,14 @@ public final class DatatypeRulesTestLanguageNestedModelIdConsumer extends NonTer
 	
 	public void setModelIdConsumer(DatatypeRulesTestLanguageModelIdConsumer modelIdConsumer) {
 		this.modelIdConsumer = modelIdConsumer;
+	}
+	
+	public ICharacterClass getKeyword$4$Delimiter() {
+		return keyword$4$Delimiter;
+	}
+	
+	public void setKeyword$4$Delimiter(ICharacterClass characterClass) {
+		keyword$4$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

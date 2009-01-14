@@ -11,12 +11,12 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.testlanguages.services.ActionTestLanguageGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.ActionTestLanguageGrammarAccess.ItemElements;
-
-import org.eclipse.xtext.testlanguages.parser.packrat.ActionTestLanguageDelimiters;
 
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 
@@ -25,10 +25,13 @@ public final class ActionTestLanguageItemConsumer extends NonTerminalConsumer {
 
 	private XtextBuiltinIDConsumer idConsumer;
 
+	private ISequenceMatcher ruleCall$5$Delimiter;
+	
 	public ActionTestLanguageItemConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
+		ruleCall$5$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -53,7 +56,7 @@ public final class ActionTestLanguageItemConsumer extends NonTerminalConsumer {
 	}
 
 	protected boolean consumeAssignment$4() throws Exception {
-		if (consumeTerminal(idConsumer, "name", false, false, getRule().ele10LexerRuleCallID(), ActionTestLanguageDelimiters.ALL_KEYWORDS))
+		if (consumeTerminal(idConsumer, "name", false, false, getRule().ele10LexerRuleCallID(), getRuleCall$5$Delimiter()))
 			return true;
 		return false;
 	}
@@ -73,6 +76,14 @@ public final class ActionTestLanguageItemConsumer extends NonTerminalConsumer {
 	
 	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
 		this.idConsumer = idConsumer;
+	}
+	
+	public ISequenceMatcher getRuleCall$5$Delimiter() {
+		return ruleCall$5$Delimiter;
+	}
+	
+	public void setRuleCall$5$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$5$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 }

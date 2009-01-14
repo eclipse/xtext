@@ -9,7 +9,11 @@ package org.eclipse.xtext.util;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Set;
 
 /**
  * Various utilities for iterables and iterators.
@@ -87,6 +91,18 @@ public class CollectionUtils {
 		return filter(input.iterator(), filter);
 	}
 	
+	public static <T, R extends T> Iterable<R> typeFilter(Iterator<T> input, final Class<R> type) {
+		return map(filter(input, Filter.Util.<T>instanceOf(type)), new Function<T, R>() {
+			public R exec(T param) {
+				return type.cast(param);
+			}
+		});
+	}
+	
+	public static <T, R extends T> Iterable<R> typeFilter(Iterable<T> input, final Class<R> type) {
+		return typeFilter(input, type);
+	}
+	
 	public static <T> Iterable<T> each(Iterator<? extends T> input, final Function.WithoutResult<T> fun) {
 		return map(input, new Function<T, T>() {
 			public T exec(T param) {
@@ -110,5 +126,101 @@ public class CollectionUtils {
 	
 	public static <T> boolean addAll(Collection<T> target, Iterable<T> source) {
 		return addAll(target, source.iterator());
+	}
+	
+	public static <T, R> Iterable<T> unique(Iterator<? extends T> input, final Function<T, R> mapper) {
+		return filter(input, new Filter<T>() {
+			private Set<R> values = new HashSet<R>();
+			public boolean matches(T param) {
+				return values.add(mapper.exec(param));
+			}
+		});
+	}
+
+	public static <T, R> Iterable<T> unique(Iterable<? extends T> input, Function<T, R> mapper) {
+		return unique(input.iterator(), mapper);
+	}
+	
+	public static <T> Iterable<T> unique(Iterator<? extends T> input) {
+		return unique(input, new Function<T, T>() {
+			public T exec(T param) {
+				return param;
+			}
+		});
+	}
+
+	public static <T> Iterable<T> unique(Iterable<? extends T> input) {
+		return unique(input.iterator());
+	}
+	
+	public static <T> void clear(Iterator<T> iterator) {
+		while(iterator.hasNext()) {
+			iterator.next();
+			iterator.remove();
+		}
+	}
+
+	public static <T> void clear(Iterable<T> iterable) {
+		clear(iterable.iterator());
+	}
+	
+	public static void loop(Iterator<?> iterator) {
+		while(iterator.hasNext())
+			iterator.next();
+	}
+	
+	public static void loop(Iterable<?> iterable) {
+		loop(iterable.iterator());
+	}
+	
+	public static <T> T next(Iterator<T> iterator) {
+		if (iterator.hasNext())
+			return iterator.next();
+		throw new NoSuchElementException();
+	}
+	
+	public static <T> T next(Iterable<T> iterable) {
+		return next(iterable.iterator());
+	}
+	
+	public static <T> T nextOrNull(Iterator<T> iterator) {
+		if (iterator.hasNext())
+			return iterator.next();
+		return null;
+	}
+	
+	public static <T> T nextOrNull(Iterable<T> iterable) {
+		return nextOrNull(iterable.iterator());
+	}
+	
+	public static <T> Iterable<Integer> indexes(Iterator<? extends T> input, final Filter<T> filter) {
+		return map(filter(map(input, new Function<T, Pair<T, Integer>>() {
+			private int index = 0;
+			public Pair<T, Integer> exec(T param) {
+				return Tuples.create(param, index++);
+			}
+		}), new Filter<Pair<T, Integer>>() {
+			public boolean matches(Pair<T, Integer> param) {
+				return filter.matches(param.getFirst());
+			}
+		}), new Function<Pair<T, Integer>, Integer>() {
+			public Integer exec(Pair<T, Integer> param) {
+				return param.getSecond();
+			}
+		});
+	}
+	
+	public static <T> Iterable<Integer> indexes(Iterable<? extends T> input, Filter<T> filter) {
+		return indexes(input.iterator(), filter);
+	}
+	
+	public static <T> List<T> list(Iterator<T> iterator) {
+		final List<T> result = new ArrayList<T>();
+		addAll(result, iterator);
+		return result;
+	}
+	
+	public static <T> List<T> list(Iterable<T> iterable) {
+		return list(iterable.iterator());
 	}
 }

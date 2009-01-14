@@ -11,12 +11,12 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.services.XtextGrammarAccess;
 import org.eclipse.xtext.services.XtextGrammarAccess.AssignmentElements;
-
-import org.eclipse.xtext.parser.packrat.XtextDelimiters;
 
 import org.eclipse.xtext.parser.packrat.consumers.XtextAbstractTerminalConsumer;
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
@@ -27,10 +27,22 @@ public final class XtextAssignmentConsumer extends NonTerminalConsumer {
 	private XtextAbstractTerminalConsumer abstractTerminalConsumer;
 	private XtextBuiltinIDConsumer idConsumer;
 
+	private ISequenceMatcher ruleCall$4$Delimiter;
+	
+	private ICharacterClass keyword$8$Delimiter;
+	
+	private ICharacterClass keyword$10$Delimiter;
+	
+	private ICharacterClass keyword$9$Delimiter;
+	
 	public XtextAssignmentConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
+		ruleCall$4$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$10$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$9$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -55,17 +67,17 @@ public final class XtextAssignmentConsumer extends NonTerminalConsumer {
 	}
 
 	protected boolean consumeAssignment$3() throws Exception {
-		if (consumeTerminal(idConsumer, "feature", false, false, getRule().ele000LexerRuleCallID(), XtextDelimiters.ALL_KEYWORDS))
+		if (consumeTerminal(idConsumer, "feature", false, false, getRule().ele000LexerRuleCallID(), getRuleCall$4$Delimiter()))
 			return true;
 		return false;
 	}
 
 	protected boolean consumeAssignment$5() throws Exception {
-		if (consumeKeyword(getRule().ele01000KeywordPlusSignEqualsSign(), "operator", false, false, XtextDelimiters.ANY_OTHER_DELIMITER))
+		if (consumeKeyword(getRule().ele01000KeywordPlusSignEqualsSign(), "operator", false, false, getKeyword$8$Delimiter()))
 			return true;
-		if (consumeKeyword(getRule().ele01001KeywordEqualsSign(), "operator", false, false, XtextDelimiters.ANY_OTHER_DELIMITER))
+		if (consumeKeyword(getRule().ele01001KeywordEqualsSign(), "operator", false, false, getKeyword$9$Delimiter()))
 			return true;
-		if (consumeKeyword(getRule().ele0101KeywordQuestionMarkEqualsSign(), "operator", false, false, XtextDelimiters.ANY_OTHER_DELIMITER))
+		if (consumeKeyword(getRule().ele0101KeywordQuestionMarkEqualsSign(), "operator", false, false, getKeyword$10$Delimiter()))
 			return true;
 		return false;
 	}
@@ -95,6 +107,38 @@ public final class XtextAssignmentConsumer extends NonTerminalConsumer {
 	
 	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
 		this.idConsumer = idConsumer;
+	}
+	
+	public ISequenceMatcher getRuleCall$4$Delimiter() {
+		return ruleCall$4$Delimiter;
+	}
+	
+	public void setRuleCall$4$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$4$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	}
+	
+	public ICharacterClass getKeyword$8$Delimiter() {
+		return keyword$8$Delimiter;
+	}
+	
+	public void setKeyword$8$Delimiter(ICharacterClass characterClass) {
+		keyword$8$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$10$Delimiter() {
+		return keyword$10$Delimiter;
+	}
+	
+	public void setKeyword$10$Delimiter(ICharacterClass characterClass) {
+		keyword$10$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$9$Delimiter() {
+		return keyword$9$Delimiter;
+	}
+	
+	public void setKeyword$9$Delimiter(ICharacterClass characterClass) {
+		keyword$9$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

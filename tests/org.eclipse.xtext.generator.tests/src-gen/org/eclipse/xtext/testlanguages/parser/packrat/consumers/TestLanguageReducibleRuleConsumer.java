@@ -11,12 +11,12 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.testlanguages.services.TestLanguageGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.TestLanguageGrammarAccess.ReducibleRuleElements;
-
-import org.eclipse.xtext.testlanguages.parser.packrat.TestLanguageDelimiters;
 
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.TestLanguageTerminalRuleConsumer;
 
@@ -25,10 +25,13 @@ public final class TestLanguageReducibleRuleConsumer extends NonTerminalConsumer
 
 	private TestLanguageTerminalRuleConsumer terminalRuleConsumer;
 
+	private ICharacterClass keyword$3$Delimiter;
+	
 	public TestLanguageReducibleRuleConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
+		keyword$3$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -53,7 +56,7 @@ public final class TestLanguageReducibleRuleConsumer extends NonTerminalConsumer
 	}
 
 	protected boolean consumeKeyword$3() throws Exception {
-		return consumeKeyword(getRule().ele00KeywordReducible(), null, false, false, TestLanguageDelimiters.ID_DELIMITER);
+		return consumeKeyword(getRule().ele00KeywordReducible(), null, false, false, getKeyword$3$Delimiter());
 	}
 
 	protected boolean consumeRuleCall$4() throws Exception {
@@ -103,6 +106,14 @@ public final class TestLanguageReducibleRuleConsumer extends NonTerminalConsumer
 	
 	public void setTerminalRuleConsumer(TestLanguageTerminalRuleConsumer terminalRuleConsumer) {
 		this.terminalRuleConsumer = terminalRuleConsumer;
+	}
+	
+	public ICharacterClass getKeyword$3$Delimiter() {
+		return keyword$3$Delimiter;
+	}
+	
+	public void setKeyword$3$Delimiter(ICharacterClass characterClass) {
+		keyword$3$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

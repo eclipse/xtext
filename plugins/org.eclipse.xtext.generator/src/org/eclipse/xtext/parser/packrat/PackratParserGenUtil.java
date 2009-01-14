@@ -7,12 +7,23 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.packrat;
 
-import java.util.ArrayList;
+import static org.eclipse.xtext.util.CollectionUtils.filter;
+import static org.eclipse.xtext.util.CollectionUtils.indexes;
+import static org.eclipse.xtext.util.CollectionUtils.list;
+import static org.eclipse.xtext.util.CollectionUtils.map;
+import static org.eclipse.xtext.util.CollectionUtils.next;
+import static org.eclipse.xtext.util.CollectionUtils.nextOrNull;
+import static org.eclipse.xtext.util.CollectionUtils.typeFilter;
+import static org.eclipse.xtext.util.CollectionUtils.unique;
+
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
@@ -20,6 +31,11 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
+import org.eclipse.xtext.parser.packrat.matching.StringWithOffset;
+import org.eclipse.xtext.util.CollectionUtils;
+import org.eclipse.xtext.util.Filter;
+import org.eclipse.xtext.util.Function;
 import org.eclipse.xtext.util.Strings;
 
 /**
@@ -79,11 +95,25 @@ public final class PackratParserGenUtil {
 	 * @return
 	 */
 	public static String getConsumerFieldName(AbstractRule rule) {
-		String name = Strings.emptyIfNull(rule.getName());
+		return getFieldName(rule.getName(), "consumer");
+	}
+
+	private static String getFieldName(String name, String suffix) {
+		String result = getAsFieldName(name);
+		if (result.length() == 0) // name is a single underscore or empty
+			if (Strings.isEmpty(name))
+				return suffix;
+			else 
+				return "_" + Strings.toFirstUpper(suffix);
+		return result.toString() + Strings.toFirstUpper(suffix);
+	}
+
+	private static String getAsFieldName(String name) {
+		name = Strings.emptyIfNull(name);
+		StringBuilder result = new StringBuilder(name.length());
 		boolean wasUnderscore = false;
 		boolean wasUppercase = true;
 		boolean wasDigit = false;
-		StringBuilder result = new StringBuilder(name.length());
 		for(int i=0; i<name.length(); i++) {
 			char c = name.charAt(i);
 			if (c == '_') {
@@ -132,32 +162,106 @@ public final class PackratParserGenUtil {
 				wasUnderscore = false;
 			}
 		}
-		if (result.length() == 0) // name is a single underscore or empty
-			if (Strings.isEmpty(name))
-				return "consumer";
-			else 
-				return "_Consumer";
-		return result.toString() + "Consumer";
+		return result.toString();
 	}
 	
 	public static String getConsumeMethodName(AbstractElement element) {
-		AbstractRule rule = EcoreUtil2.getContainerOfType(element, AbstractRule.class);
-		List<EObject> allContents = EcoreUtil2.eAllContentsAsList(rule);
-		return "consume" + element.eClass().getName()+ '$' + Integer.toString(allContents.indexOf(element));
+		return "consume" + element.eClass().getName()+ getElementIndex(element);
+	}
+
+	private static String getElementIndex(AbstractElement element) {
+		final AbstractRule rule = EcoreUtil2.getContainerOfType(element, AbstractRule.class);
+		return getElementIndex(element, rule);
 	}
 	
-	public static boolean canBeFollowedByIdentifier(Keyword keyword) {
-		String value = keyword.getValue();
-		return !XtextBuiltinIDConsumer.IDConsumer$$2.matches(value.charAt(value.length() - 1));
+	private static String getElementIndex(AbstractElement element, EObject parent) {
+		return '$' + Integer.toString(next(indexes(EcoreUtil.getAllContents(parent, true), Filter.Util.<Object>same(element))));
 	}
 	
-	public static List<AbstractElement> getFollowElements(AbstractElement element) {
-		final List<AbstractElement> result = new ArrayList<AbstractElement>();
-		if (!(element instanceof Keyword) && !((element instanceof RuleCall) && (((RuleCall) element).getRule() instanceof LexerRule)))
-			throw new IllegalArgumentException("element: " + element);
-		if (GrammarUtil.isMultipleCardinality(element))
-			result.add(element);
-		
+	public static String getDelimiterFieldName(AbstractElement element) {
+		return getFieldName(element.eClass().getName(), getElementIndex(element) + "$Delimiter");
+	}
+	
+	public static String getGlobalDelimiterFieldName(AbstractElement element) {
+		// TODO make upperCase -> UPPER_CASE$1$DELIMITER
+		return getFieldName(element.eClass().getName(), getElementIndex(element, GrammarUtil.getGrammar(element)) + "$Delimiter");
+	}
+	
+	public static Iterable<Keyword> getConflictingKeywords(final LexerRule rule, final Iterable<Keyword> allKeywords) {
+		return CollectionUtils.filter(allKeywords, new Filter<Keyword>() {
+			public boolean matches(Keyword param) {
+				// TODO use interpreter for lexer model
+				if (rule.getName().equals("ID")) {
+					final StringWithOffset input = new StringWithOffset(param.getValue());
+					return new XtextBuiltinIDConsumer(input, input, null).consume(ISequenceMatcher.Factory.nullMatcher());
+				}
+				return false;
+			}
+		});
+	}
+	
+	// TODO replace return value with ICharacterClass or similar
+	public static List<LexerRule> getConflictingLexerRules(final Keyword keyword, final Grammar grammar) {
+		LexerRule rule = (LexerRule) GrammarUtil.findRuleForName(grammar, "ID");
+		if (rule != null) {
+			final StringWithOffset input = new StringWithOffset(keyword.getValue());
+			if (new XtextBuiltinIDConsumer(input, input, null).consume(ISequenceMatcher.Factory.nullMatcher())) {
+				return Collections.singletonList(rule);
+			}
+		}
+		return Collections.emptyList();
+	}
+	
+	public static List<String> getConflictingKeywords(final AbstractElement element, final Grammar grammar) {
+		if (element instanceof RuleCall) {
+			if (((RuleCall) element).getRule() instanceof LexerRule) {
+				LexerRule rule = (LexerRule) ((RuleCall) element).getRule();
+				return getConflictingKeywordsImpl(grammar, rule);
+			}
+		} else if (element instanceof CrossReference) {
+			if (((CrossReference) element).getRule() instanceof LexerRule) {
+				LexerRule rule = (LexerRule) ((CrossReference) element).getRule();
+				return getConflictingKeywordsImpl(grammar, rule);
+			}
+		}
+		return null;
+	}
+
+	private static List<String> getConflictingKeywordsImpl(final Grammar grammar, LexerRule rule) {
+		final Iterable<Keyword> conflictingKeywords = getConflictingKeywords(rule, typeFilter(
+				EcoreUtil.getAllContents(grammar, true), Keyword.class));
+		return list(unique(map(conflictingKeywords, new Function<Keyword, String>() {
+			public String exec(Keyword param) {
+				return param.getValue();
+			}
+		})));
+	}
+	
+	// TODO think about super grammar
+	public static AbstractElement findFirstWithSameConflicts(final AbstractElement element, final Grammar grammar) {
+		final List<String> conflicting = getConflictingKeywords(element, grammar);
+		AbstractElement result = nextOrNull(filter(typeFilter(EcoreUtil.getAllContents(grammar, true), AbstractElement.class), new Filter<AbstractElement>() {
+			public boolean matches(AbstractElement param) {
+				final List<String> otherConflicting = getConflictingKeywords(param, grammar);
+				return otherConflicting != null && otherConflicting.equals(conflicting);
+			}
+		}));
+		if (result == null)
+			return element;
+		return result;
+	}
+
+	// TODO think about super grammar
+	public static Keyword findFirstKeywordWithSameConflicts(final Keyword element, final Grammar grammar) {
+		final List<LexerRule> conflicting = getConflictingLexerRules(element, grammar);
+		Keyword result = nextOrNull(filter(typeFilter(EcoreUtil.getAllContents(grammar, true), Keyword.class), new Filter<Keyword>() {
+			public boolean matches(Keyword param) {
+				final List<LexerRule> otherConflicting = getConflictingLexerRules(param, grammar);
+				return otherConflicting != null && otherConflicting.equals(conflicting);
+			}
+		}));
+		if (result == null)
+			return element;
 		return result;
 	}
 

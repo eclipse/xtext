@@ -8,14 +8,17 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.matching.SetBasedKeywordMatcher;
 
-import org.eclipse.xtext.parsetree.transientvalues.services.TransientValuesTestGrammarAccess;
+public final class TransientValuesTestDelimiters {
 
-public class TransientValuesTestDelimiters {
-
-	public static ICharacterClass ID_DELIMITER = XtextBuiltinIDConsumer.IDConsumer$$2;
+	private TransientValuesTestDelimiters() {
+		throw new UnsupportedOperationException("Utility classes may not be initialized");
+	}
 	
-	public static ICharacterClass ANY_OTHER_DELIMITER = ICharacterClass.Factory.nullClass();
+	// TODO do not use IDConsumer internals
+	public static ICharacterClass keyword$4$Delimiter = XtextBuiltinIDConsumer.IDConsumer$$2;
 	
-	public static ISequenceMatcher ALL_KEYWORDS = new SetBasedKeywordMatcher(TransientValuesTestGrammarAccess.INSTANCE.getGrammar());
-
+	public static ISequenceMatcher ruleCall$16$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+	
+	public static ICharacterClass keyword$27$Delimiter = ICharacterClass.Factory.nullClass();
+	
 }

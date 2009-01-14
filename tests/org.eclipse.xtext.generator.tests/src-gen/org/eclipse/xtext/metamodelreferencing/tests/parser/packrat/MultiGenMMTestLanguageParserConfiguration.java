@@ -58,17 +58,26 @@ public class MultiGenMMTestLanguageParserConfiguration extends AbstractParserCon
 	}
 	
 	public void configureConsumers() {
-		getFooConsumer().setNameRefConsumer(getNameRefConsumer());
 		getFooConsumer().setIdConsumer(getIdConsumer());
+		getFooConsumer().setNameRefConsumer(getNameRefConsumer());
 
 		getNameRefConsumer().setStringConsumer(getStringConsumer());
 
+		getFooConsumer().setRuleCall$3$Delimiter(MultiGenMMTestLanguageDelimiters.ruleCall$6$Delimiter);
+		getNameRefConsumer().setRuleCall$2$Delimiter(MultiGenMMTestLanguageDelimiters.ruleCall$6$Delimiter);
+		// TODO remove workaround
 		getIdConsumer().initFields(this);
+		// TODO remove workaround
 		getIntConsumer().initFields(this);
+		// TODO remove workaround
 		getStringConsumer().initFields(this);
+		// TODO remove workaround
 		getMlCommentConsumer().initFields(this);
+		// TODO remove workaround
 		getSlCommentConsumer().initFields(this);
+		// TODO remove workaround
 		getWsConsumer().initFields(this);
+		// TODO remove workaround
 		getAnyOtherConsumer().initFields(this);
 	}
 	

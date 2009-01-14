@@ -8,14 +8,18 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.matching.SetBasedKeywordMatcher;
 
-import org.eclipse.xtext.example.services.FowlerDslGrammarAccess;
+public final class FowlerDslDelimiters {
 
-public class FowlerDslDelimiters {
-
-	public static ICharacterClass ID_DELIMITER = XtextBuiltinIDConsumer.IDConsumer$$2;
+	private FowlerDslDelimiters() {
+		throw new UnsupportedOperationException("Utility classes may not be initialized");
+	}
 	
-	public static ICharacterClass ANY_OTHER_DELIMITER = ICharacterClass.Factory.nullClass();
+	// TODO do not use IDConsumer internals
+	public static ICharacterClass keyword$9$Delimiter = XtextBuiltinIDConsumer.IDConsumer$$2;
 	
-	public static ISequenceMatcher ALL_KEYWORDS = new SetBasedKeywordMatcher(FowlerDslGrammarAccess.INSTANCE.getGrammar());
-
+	public static ISequenceMatcher ruleCall$26$Delimiter = new SetBasedKeywordMatcher(
+		"events", "end", "commands", "resetting", "state", "actions");
+		
+	public static ICharacterClass keyword$49$Delimiter = ICharacterClass.Factory.nullClass();
+	
 }

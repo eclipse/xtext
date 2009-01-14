@@ -11,31 +11,31 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestLanguageGrammarAccess;
 import org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestLanguageGrammarAccess.TermElements;
 
-import org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters;
-
-import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageTypeConsumer;
 import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageAtomConsumer;
-import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageTwoNumbersConsumer;
-import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageParensConsumer;
 import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageManyStringsConsumer;
-import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageSpareConsumer;
+import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageParensConsumer;
 import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageRef2Consumer;
+import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageSpareConsumer;
+import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageTwoNumbersConsumer;
+import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageTypeConsumer;
 
 @SuppressWarnings("unused")
 public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalConsumer {
 
-	private SimpleReconstrTestLanguageTypeConsumer typeConsumer;
 	private SimpleReconstrTestLanguageAtomConsumer atomConsumer;
-	private SimpleReconstrTestLanguageTwoNumbersConsumer twoNumbersConsumer;
-	private SimpleReconstrTestLanguageParensConsumer parensConsumer;
 	private SimpleReconstrTestLanguageManyStringsConsumer manyStringsConsumer;
-	private SimpleReconstrTestLanguageSpareConsumer spareConsumer;
+	private SimpleReconstrTestLanguageParensConsumer parensConsumer;
 	private SimpleReconstrTestLanguageRef2Consumer ref2Consumer;
+	private SimpleReconstrTestLanguageSpareConsumer spareConsumer;
+	private SimpleReconstrTestLanguageTwoNumbersConsumer twoNumbersConsumer;
+	private SimpleReconstrTestLanguageTypeConsumer typeConsumer;
 
 	public SimpleReconstrTestLanguageTermConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
@@ -106,32 +106,32 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 		return "Expression";
 	}
 	
-	public void setTypeConsumer(SimpleReconstrTestLanguageTypeConsumer typeConsumer) {
-		this.typeConsumer = typeConsumer;
-	}
-	
 	public void setAtomConsumer(SimpleReconstrTestLanguageAtomConsumer atomConsumer) {
 		this.atomConsumer = atomConsumer;
-	}
-	
-	public void setTwoNumbersConsumer(SimpleReconstrTestLanguageTwoNumbersConsumer twoNumbersConsumer) {
-		this.twoNumbersConsumer = twoNumbersConsumer;
-	}
-	
-	public void setParensConsumer(SimpleReconstrTestLanguageParensConsumer parensConsumer) {
-		this.parensConsumer = parensConsumer;
 	}
 	
 	public void setManyStringsConsumer(SimpleReconstrTestLanguageManyStringsConsumer manyStringsConsumer) {
 		this.manyStringsConsumer = manyStringsConsumer;
 	}
 	
-	public void setSpareConsumer(SimpleReconstrTestLanguageSpareConsumer spareConsumer) {
-		this.spareConsumer = spareConsumer;
+	public void setParensConsumer(SimpleReconstrTestLanguageParensConsumer parensConsumer) {
+		this.parensConsumer = parensConsumer;
 	}
 	
 	public void setRef2Consumer(SimpleReconstrTestLanguageRef2Consumer ref2Consumer) {
 		this.ref2Consumer = ref2Consumer;
+	}
+	
+	public void setSpareConsumer(SimpleReconstrTestLanguageSpareConsumer spareConsumer) {
+		this.spareConsumer = spareConsumer;
+	}
+	
+	public void setTwoNumbersConsumer(SimpleReconstrTestLanguageTwoNumbersConsumer twoNumbersConsumer) {
+		this.twoNumbersConsumer = twoNumbersConsumer;
+	}
+	
+	public void setTypeConsumer(SimpleReconstrTestLanguageTypeConsumer typeConsumer) {
+		this.typeConsumer = typeConsumer;
 	}
 	
 }

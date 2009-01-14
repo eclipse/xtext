@@ -11,23 +11,23 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.services.XtextGrammarAccess;
 import org.eclipse.xtext.services.XtextGrammarAccess.AbstractTerminalElements;
 
-import org.eclipse.xtext.parser.packrat.XtextDelimiters;
-
-import org.eclipse.xtext.parser.packrat.consumers.XtextKeywordConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextCrossReferenceConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.XtextKeywordConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextParenthesizedElementConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextRuleCallConsumer;
 
 @SuppressWarnings("unused")
 public final class XtextAbstractTerminalConsumer extends NonTerminalConsumer {
 
-	private XtextKeywordConsumer keywordConsumer;
 	private XtextCrossReferenceConsumer crossReferenceConsumer;
+	private XtextKeywordConsumer keywordConsumer;
 	private XtextParenthesizedElementConsumer parenthesizedElementConsumer;
 	private XtextRuleCallConsumer ruleCallConsumer;
 
@@ -82,12 +82,12 @@ public final class XtextAbstractTerminalConsumer extends NonTerminalConsumer {
 		return "AbstractElement";
 	}
 	
-	public void setKeywordConsumer(XtextKeywordConsumer keywordConsumer) {
-		this.keywordConsumer = keywordConsumer;
-	}
-	
 	public void setCrossReferenceConsumer(XtextCrossReferenceConsumer crossReferenceConsumer) {
 		this.crossReferenceConsumer = crossReferenceConsumer;
+	}
+	
+	public void setKeywordConsumer(XtextKeywordConsumer keywordConsumer) {
+		this.keywordConsumer = keywordConsumer;
 	}
 	
 	public void setParenthesizedElementConsumer(XtextParenthesizedElementConsumer parenthesizedElementConsumer) {

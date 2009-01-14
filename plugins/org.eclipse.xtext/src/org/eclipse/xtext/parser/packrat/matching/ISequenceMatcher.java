@@ -15,12 +15,15 @@ public interface ISequenceMatcher {
 	boolean matches(CharSequence input, int offset, int length);
 	
 	public static class Factory {
+		private static class NullSequenceMatcher implements ISequenceMatcher {
+			private static ISequenceMatcher INSTANCE = new NullSequenceMatcher();
+			public boolean matches(CharSequence input, int offset, int length) {
+				return false;
+			}
+		}
+
 		public static ISequenceMatcher nullMatcher() {
-			return new ISequenceMatcher() {
-				public boolean matches(CharSequence input, int offset, int length) {
-					return false;
-				}
-			};
+			return NullSequenceMatcher.INSTANCE;
 		}
 	}
 	

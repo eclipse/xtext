@@ -11,21 +11,21 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess;
 import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess.AbstractRuleElements;
 
-import org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters;
-
-import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageParserRuleConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageLexerRuleConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageParserRuleConsumer;
 
 @SuppressWarnings("unused")
 public final class XtextGrammarTestLanguageAbstractRuleConsumer extends NonTerminalConsumer {
 
-	private XtextGrammarTestLanguageParserRuleConsumer parserRuleConsumer;
 	private XtextGrammarTestLanguageLexerRuleConsumer lexerRuleConsumer;
+	private XtextGrammarTestLanguageParserRuleConsumer parserRuleConsumer;
 
 	public XtextGrammarTestLanguageAbstractRuleConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
@@ -66,12 +66,12 @@ public final class XtextGrammarTestLanguageAbstractRuleConsumer extends NonTermi
 		return "AbstractRule";
 	}
 	
-	public void setParserRuleConsumer(XtextGrammarTestLanguageParserRuleConsumer parserRuleConsumer) {
-		this.parserRuleConsumer = parserRuleConsumer;
-	}
-	
 	public void setLexerRuleConsumer(XtextGrammarTestLanguageLexerRuleConsumer lexerRuleConsumer) {
 		this.lexerRuleConsumer = lexerRuleConsumer;
+	}
+	
+	public void setParserRuleConsumer(XtextGrammarTestLanguageParserRuleConsumer parserRuleConsumer) {
+		this.parserRuleConsumer = parserRuleConsumer;
 	}
 	
 }

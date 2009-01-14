@@ -68,8 +68,8 @@ public class FormatterTestLanguageParserConfiguration extends AbstractParserConf
 	}
 	
 	public void configureConsumers() {
-		getRootConsumer$().setTestLinewrapConsumer(getTestLinewrapConsumer());
 		getRootConsumer$().setTestIndentationConsumer(getTestIndentationConsumer());
+		getRootConsumer$().setTestLinewrapConsumer(getTestLinewrapConsumer());
 
 		getLineConsumer().setIdConsumer(getIdConsumer());
 
@@ -78,12 +78,27 @@ public class FormatterTestLanguageParserConfiguration extends AbstractParserConf
 		getTestIndentationConsumer().setLineConsumer(getLineConsumer());
 		getTestIndentationConsumer().setTestIndentationConsumer(getTestIndentationConsumer());
 
+		getRootConsumer().setKeyword$2$Delimiter(FormatterTestLanguageDelimiters.keyword$4$Delimiter);
+		getLineConsumer().setRuleCall$4$Delimiter(FormatterTestLanguageDelimiters.ruleCall$13$Delimiter);
+		getLineConsumer().setKeyword$7$Delimiter(FormatterTestLanguageDelimiters.keyword$16$Delimiter);
+		getLineConsumer().setRuleCall$6$Delimiter(FormatterTestLanguageDelimiters.ruleCall$13$Delimiter);
+		getTestLinewrapConsumer().setKeyword$2$Delimiter(FormatterTestLanguageDelimiters.keyword$4$Delimiter);
+		getTestIndentationConsumer().setKeyword$11$Delimiter(FormatterTestLanguageDelimiters.keyword$16$Delimiter);
+		getTestIndentationConsumer().setKeyword$4$Delimiter(FormatterTestLanguageDelimiters.keyword$4$Delimiter);
+		getTestIndentationConsumer().setKeyword$5$Delimiter(FormatterTestLanguageDelimiters.keyword$16$Delimiter);
+		// TODO remove workaround
 		getIdConsumer().initFields(this);
+		// TODO remove workaround
 		getIntConsumer().initFields(this);
+		// TODO remove workaround
 		getStringConsumer().initFields(this);
+		// TODO remove workaround
 		getMlCommentConsumer().initFields(this);
+		// TODO remove workaround
 		getSlCommentConsumer().initFields(this);
+		// TODO remove workaround
 		getWsConsumer().initFields(this);
+		// TODO remove workaround
 		getAnyOtherConsumer().initFields(this);
 	}
 	

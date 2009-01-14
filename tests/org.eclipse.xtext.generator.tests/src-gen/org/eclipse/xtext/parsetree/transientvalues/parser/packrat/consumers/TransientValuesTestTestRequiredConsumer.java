@@ -11,12 +11,12 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.parsetree.transientvalues.services.TransientValuesTestGrammarAccess;
 import org.eclipse.xtext.parsetree.transientvalues.services.TransientValuesTestGrammarAccess.TestRequiredElements;
-
-import org.eclipse.xtext.parsetree.transientvalues.parser.packrat.TransientValuesTestDelimiters;
 
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinINTConsumer;
 
@@ -25,10 +25,19 @@ public final class TransientValuesTestTestRequiredConsumer extends NonTerminalCo
 
 	private XtextBuiltinINTConsumer intConsumer;
 
+	private ISequenceMatcher ruleCall$7$Delimiter;
+	
+	private ICharacterClass keyword$3$Delimiter;
+	
+	private ISequenceMatcher ruleCall$5$Delimiter;
+	
 	public TransientValuesTestTestRequiredConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
+		ruleCall$7$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		keyword$3$Delimiter = ICharacterClass.Factory.nullClass();
+		ruleCall$5$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -53,17 +62,17 @@ public final class TransientValuesTestTestRequiredConsumer extends NonTerminalCo
 	}
 
 	protected boolean consumeKeyword$3() throws Exception {
-		return consumeKeyword(getRule().ele00KeywordRequired(), null, false, false, TransientValuesTestDelimiters.ID_DELIMITER);
+		return consumeKeyword(getRule().ele00KeywordRequired(), null, false, false, getKeyword$3$Delimiter());
 	}
 
 	protected boolean consumeAssignment$4() throws Exception {
-		if (consumeTerminal(intConsumer, "required1", false, false, getRule().ele010LexerRuleCallINT(), TransientValuesTestDelimiters.ALL_KEYWORDS))
+		if (consumeTerminal(intConsumer, "required1", false, false, getRule().ele010LexerRuleCallINT(), getRuleCall$5$Delimiter()))
 			return true;
 		return false;
 	}
 
 	protected boolean consumeAssignment$6() throws Exception {
-		if (consumeTerminal(intConsumer, "required2", false, false, getRule().ele10LexerRuleCallINT(), TransientValuesTestDelimiters.ALL_KEYWORDS))
+		if (consumeTerminal(intConsumer, "required2", false, false, getRule().ele10LexerRuleCallINT(), getRuleCall$7$Delimiter()))
 			return true;
 		return false;
 	}
@@ -83,6 +92,30 @@ public final class TransientValuesTestTestRequiredConsumer extends NonTerminalCo
 	
 	public void setIntConsumer(XtextBuiltinINTConsumer intConsumer) {
 		this.intConsumer = intConsumer;
+	}
+	
+	public ISequenceMatcher getRuleCall$7$Delimiter() {
+		return ruleCall$7$Delimiter;
+	}
+	
+	public void setRuleCall$7$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$7$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	}
+	
+	public ICharacterClass getKeyword$3$Delimiter() {
+		return keyword$3$Delimiter;
+	}
+	
+	public void setKeyword$3$Delimiter(ICharacterClass characterClass) {
+		keyword$3$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ISequenceMatcher getRuleCall$5$Delimiter() {
+		return ruleCall$5$Delimiter;
+	}
+	
+	public void setRuleCall$5$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$5$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 }
