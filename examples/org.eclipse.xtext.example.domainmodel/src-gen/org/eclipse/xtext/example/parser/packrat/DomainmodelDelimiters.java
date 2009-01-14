@@ -8,14 +8,20 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.matching.SetBasedKeywordMatcher;
 
-import org.eclipse.xtext.example.services.DomainmodelGrammarAccess;
+public final class DomainmodelDelimiters {
 
-public class DomainmodelDelimiters {
-
-	public static ICharacterClass ID_DELIMITER = XtextBuiltinIDConsumer.IDConsumer$$2;
+	private DomainmodelDelimiters() {
+		throw new UnsupportedOperationException("Utility classes may not be initialized");
+	}
 	
-	public static ICharacterClass ANY_OTHER_DELIMITER = ICharacterClass.Factory.nullClass();
+	// TODO do not use IDConsumer internals
+	public static ICharacterClass keyword$12$Delimiter = XtextBuiltinIDConsumer.IDConsumer$$2;
 	
-	public static ISequenceMatcher ALL_KEYWORDS = new SetBasedKeywordMatcher(DomainmodelGrammarAccess.INSTANCE.getGrammar());
-
+	public static ISequenceMatcher ruleCall$14$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+	
+	public static ICharacterClass keyword$29$Delimiter = ICharacterClass.Factory.nullClass();
+	
+	public static ISequenceMatcher ruleCall$43$Delimiter = new SetBasedKeywordMatcher(
+		"import", "package", "datatype", "entity", "extends", "attr", "ref", "opposite", "op");
+		
 }

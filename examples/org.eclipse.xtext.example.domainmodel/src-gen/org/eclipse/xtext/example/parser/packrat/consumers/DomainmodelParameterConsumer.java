@@ -11,12 +11,12 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.example.services.DomainmodelGrammarAccess;
 import org.eclipse.xtext.example.services.DomainmodelGrammarAccess.ParameterElements;
-
-import org.eclipse.xtext.example.parser.packrat.DomainmodelDelimiters;
 
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 import org.eclipse.xtext.example.parser.packrat.consumers.DomainmodelTypeRefConsumer;
@@ -27,10 +27,13 @@ public final class DomainmodelParameterConsumer extends NonTerminalConsumer {
 	private XtextBuiltinIDConsumer idConsumer;
 	private DomainmodelTypeRefConsumer typeRefConsumer;
 
+	private ISequenceMatcher ruleCall$3$Delimiter;
+	
 	public DomainmodelParameterConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
+		ruleCall$3$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -51,7 +54,7 @@ public final class DomainmodelParameterConsumer extends NonTerminalConsumer {
 	}
 
 	protected boolean consumeAssignment$2() throws Exception {
-		if (consumeTerminal(idConsumer, "name", false, false, getRule().ele00LexerRuleCallID(), DomainmodelDelimiters.ALL_KEYWORDS))
+		if (consumeTerminal(idConsumer, "name", false, false, getRule().ele00LexerRuleCallID(), getRuleCall$3$Delimiter()))
 			return true;
 		return false;
 	}
@@ -81,6 +84,14 @@ public final class DomainmodelParameterConsumer extends NonTerminalConsumer {
 	
 	public void setTypeRefConsumer(DomainmodelTypeRefConsumer typeRefConsumer) {
 		this.typeRefConsumer = typeRefConsumer;
+	}
+	
+	public ISequenceMatcher getRuleCall$3$Delimiter() {
+		return ruleCall$3$Delimiter;
+	}
+	
+	public void setRuleCall$3$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$3$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 }

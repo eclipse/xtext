@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g 2009-01-14 11:41:32
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g 2009-01-14 17:57:10
 
 package org.eclipse.xtext.example.parser.antlr.internal;
 
@@ -13,30 +13,30 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class InternalDomainmodelLexer extends Lexer {
-    public static final int RULE_ID=5;
-    public static final int RULE_ANY_OTHER=10;
-    public static final int T26=26;
-    public static final int T25=25;
-    public static final int Tokens=27;
-    public static final int T24=24;
-    public static final int EOF=-1;
-    public static final int RULE_SL_COMMENT=8;
-    public static final int T23=23;
-    public static final int T22=22;
     public static final int T21=21;
-    public static final int T20=20;
     public static final int RULE_ML_COMMENT=7;
-    public static final int RULE_STRING=4;
-    public static final int RULE_INT=6;
-    public static final int T11=11;
-    public static final int T12=12;
-    public static final int T13=13;
     public static final int T14=14;
-    public static final int RULE_WS=9;
-    public static final int T15=15;
-    public static final int T16=16;
-    public static final int T17=17;
+    public static final int RULE_ID=5;
+    public static final int T22=22;
+    public static final int T11=11;
+    public static final int RULE_STRING=4;
+    public static final int T12=12;
+    public static final int T23=23;
+    public static final int T13=13;
+    public static final int T20=20;
+    public static final int T25=25;
     public static final int T18=18;
+    public static final int RULE_WS=9;
+    public static final int T26=26;
+    public static final int T15=15;
+    public static final int RULE_INT=6;
+    public static final int EOF=-1;
+    public static final int T17=17;
+    public static final int Tokens=27;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int T16=16;
+    public static final int RULE_SL_COMMENT=8;
+    public static final int T24=24;
     public static final int T19=19;
     public InternalDomainmodelLexer() {;} 
     public InternalDomainmodelLexer(CharStream input) {
@@ -1290,14 +1290,14 @@ public class InternalDomainmodelLexer extends Lexer {
         }
         else if ( (LA12_0=='/') ) {
             switch ( input.LA(2) ) {
-            case '/':
-                {
-                alt12=21;
-                }
-                break;
             case '*':
                 {
                 alt12=20;
+                }
+                break;
+            case '/':
+                {
+                alt12=21;
                 }
                 break;
             default:
