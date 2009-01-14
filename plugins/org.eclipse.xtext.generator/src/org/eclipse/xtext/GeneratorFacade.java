@@ -254,24 +254,12 @@ public class GeneratorFacade {
 			proposalProvider.setUiService(true);
 			genModel.getServices().add(proposalProvider);
 			
-			GenService contentAssist = XtextgenFactory.eINSTANCE.createGenService();
-			contentAssist.setServiceInterfaceFQName("org.eclipse.jface.text.contentassist.IContentAssistant");
-			contentAssist.setGenClassFQName("org.eclipse.jface.text.contentassist.ContentAssistant");
-			contentAssist.setUiService(true);
-			genModel.getServices().add(contentAssist);
-			
 			GenService contentAssistProcessor = XtextgenFactory.eINSTANCE.createGenService();
 			contentAssistProcessor.setServiceInterfaceFQName("org.eclipse.jface.text.contentassist.IContentAssistProcessor");
 			contentAssistProcessor.setGenClassFQName("org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultContentAssistProcessor");
 			contentAssistProcessor.setUiService(true);
 			genModel.getServices().add(contentAssistProcessor);
 			
-			GenService linkingCandidatesService = XtextgenFactory.eINSTANCE.createGenService();
-			linkingCandidatesService.setServiceInterfaceFQName("org.eclipse.xtext.ui.common.editor.contentassist.ILinkingCandidatesService");
-			linkingCandidatesService.setGenClassFQName("org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultLinkingCandidatesService");
-			linkingCandidatesService.setUiService(true);
-			genModel.getServices().add(linkingCandidatesService);
-
 		}
 
 		return genModel;
