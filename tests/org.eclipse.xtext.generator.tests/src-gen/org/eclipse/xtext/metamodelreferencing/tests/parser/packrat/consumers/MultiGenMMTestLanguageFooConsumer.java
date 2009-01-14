@@ -18,14 +18,14 @@ import org.eclipse.xtext.metamodelreferencing.tests.services.MultiGenMMTestLangu
 
 import org.eclipse.xtext.metamodelreferencing.tests.parser.packrat.MultiGenMMTestLanguageDelimiters;
 
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 import org.eclipse.xtext.metamodelreferencing.tests.parser.packrat.consumers.MultiGenMMTestLanguageNameRefConsumer;
+import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 
 @SuppressWarnings("unused")
 public final class MultiGenMMTestLanguageFooConsumer extends NonTerminalConsumer {
 
-	private XtextBuiltinIDConsumer idConsumer;
 	private MultiGenMMTestLanguageNameRefConsumer nameRefConsumer;
+	private XtextBuiltinIDConsumer idConsumer;
 
 	public MultiGenMMTestLanguageFooConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
@@ -80,12 +80,12 @@ public final class MultiGenMMTestLanguageFooConsumer extends NonTerminalConsumer
 		return "Foo";
 	}
 	
-	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
-		this.idConsumer = idConsumer;
-	}
-	
 	public void setNameRefConsumer(MultiGenMMTestLanguageNameRefConsumer nameRefConsumer) {
 		this.nameRefConsumer = nameRefConsumer;
+	}
+	
+	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
+		this.idConsumer = idConsumer;
 	}
 	
 }

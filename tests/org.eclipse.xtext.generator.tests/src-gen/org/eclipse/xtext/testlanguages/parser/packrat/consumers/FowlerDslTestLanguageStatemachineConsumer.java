@@ -18,16 +18,16 @@ import org.eclipse.xtext.testlanguages.services.FowlerDslTestLanguageGrammarAcce
 
 import org.eclipse.xtext.testlanguages.parser.packrat.FowlerDslTestLanguageDelimiters;
 
+import org.eclipse.xtext.testlanguages.parser.packrat.consumers.FowlerDslTestLanguageEventConsumer;
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.FowlerDslTestLanguageStateConsumer;
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.FowlerDslTestLanguageCommandConsumer;
-import org.eclipse.xtext.testlanguages.parser.packrat.consumers.FowlerDslTestLanguageEventConsumer;
 
 @SuppressWarnings("unused")
 public final class FowlerDslTestLanguageStatemachineConsumer extends NonTerminalConsumer {
 
+	private FowlerDslTestLanguageEventConsumer eventConsumer;
 	private FowlerDslTestLanguageStateConsumer stateConsumer;
 	private FowlerDslTestLanguageCommandConsumer commandConsumer;
-	private FowlerDslTestLanguageEventConsumer eventConsumer;
 
 	public FowlerDslTestLanguageStatemachineConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
@@ -134,16 +134,16 @@ public final class FowlerDslTestLanguageStatemachineConsumer extends NonTerminal
 		return "Statemachine";
 	}
 	
+	public void setEventConsumer(FowlerDslTestLanguageEventConsumer eventConsumer) {
+		this.eventConsumer = eventConsumer;
+	}
+	
 	public void setStateConsumer(FowlerDslTestLanguageStateConsumer stateConsumer) {
 		this.stateConsumer = stateConsumer;
 	}
 	
 	public void setCommandConsumer(FowlerDslTestLanguageCommandConsumer commandConsumer) {
 		this.commandConsumer = commandConsumer;
-	}
-	
-	public void setEventConsumer(FowlerDslTestLanguageEventConsumer eventConsumer) {
-		this.eventConsumer = eventConsumer;
 	}
 	
 }

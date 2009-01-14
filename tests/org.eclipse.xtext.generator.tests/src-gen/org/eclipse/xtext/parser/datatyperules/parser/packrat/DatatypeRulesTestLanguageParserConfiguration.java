@@ -85,10 +85,10 @@ public class DatatypeRulesTestLanguageParserConfiguration extends AbstractParser
 	public void configureConsumers() {
 		getCompositeModelConsumer().setModelConsumer(getModelConsumer());
 
-		getModelConsumer().setVectorConsumer(getVectorConsumer());
-		getModelConsumer().setFractionConsumer(getFractionConsumer());
 		getModelConsumer().setDotsConsumer(getDotsConsumer());
+		getModelConsumer().setFractionConsumer(getFractionConsumer());
 		getModelConsumer().setNestedModelIdConsumer(getNestedModelIdConsumer());
+		getModelConsumer().setVectorConsumer(getVectorConsumer());
 
 		getModelIdConsumer().setIdConsumer(getIdConsumer());
 

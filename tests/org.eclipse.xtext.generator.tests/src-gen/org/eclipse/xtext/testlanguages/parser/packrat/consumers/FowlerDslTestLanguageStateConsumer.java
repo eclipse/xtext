@@ -18,14 +18,14 @@ import org.eclipse.xtext.testlanguages.services.FowlerDslTestLanguageGrammarAcce
 
 import org.eclipse.xtext.testlanguages.parser.packrat.FowlerDslTestLanguageDelimiters;
 
-import org.eclipse.xtext.testlanguages.parser.packrat.consumers.FowlerDslTestLanguageTransitionConsumer;
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
+import org.eclipse.xtext.testlanguages.parser.packrat.consumers.FowlerDslTestLanguageTransitionConsumer;
 
 @SuppressWarnings("unused")
 public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsumer {
 
-	private FowlerDslTestLanguageTransitionConsumer transitionConsumer;
 	private XtextBuiltinIDConsumer idConsumer;
+	private FowlerDslTestLanguageTransitionConsumer transitionConsumer;
 
 	public FowlerDslTestLanguageStateConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
@@ -152,12 +152,12 @@ public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsume
 		return "State";
 	}
 	
-	public void setTransitionConsumer(FowlerDslTestLanguageTransitionConsumer transitionConsumer) {
-		this.transitionConsumer = transitionConsumer;
-	}
-	
 	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
 		this.idConsumer = idConsumer;
+	}
+	
+	public void setTransitionConsumer(FowlerDslTestLanguageTransitionConsumer transitionConsumer) {
+		this.transitionConsumer = transitionConsumer;
 	}
 	
 }

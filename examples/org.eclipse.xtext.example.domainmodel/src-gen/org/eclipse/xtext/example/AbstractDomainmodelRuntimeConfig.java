@@ -17,16 +17,20 @@ public abstract class AbstractDomainmodelRuntimeConfig extends AbstractServiceRe
 		return org.eclipse.xtext.example.services.DomainmodelGrammarAccess.class;
 	}
 		
+	protected Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> getIPackratParser() {
+		return org.eclipse.xtext.example.parser.packrat.DomainmodelPackratParser.class;
+	}
+		
 	protected Class<? extends org.eclipse.xtext.parser.IAstFactory> getIAstFactory() {
-		return org.eclipse.xtext.parser.GenericEcoreElementFactory.class;
+		return org.eclipse.xtext.parser.antlr.AntlrEcoreElementFactory.class;
 	}
 		
 	protected Class<? extends org.eclipse.xtext.parser.IParser> getIParser() {
-		return org.eclipse.xtext.example.parser.DomainmodelParser.class;
+		return org.eclipse.xtext.example.parser.antlr.DomainmodelParser.class;
 	}
 		
 	protected Class<? extends org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider> getIAntlrTokenFileProvider() {
-		return org.eclipse.xtext.example.parser.DomainmodelAntlrTokenFileProvider.class;
+		return org.eclipse.xtext.example.parser.antlr.DomainmodelAntlrTokenFileProvider.class;
 	}
 		
 	protected Class<? extends org.eclipse.xtext.resource.IResourceFactory> getIResourceFactory() {
@@ -50,7 +54,7 @@ public abstract class AbstractDomainmodelRuntimeConfig extends AbstractServiceRe
 	}
 		
 	protected Class<? extends org.eclipse.xtext.parser.antlr.Lexer> getLexer() {
-		return org.eclipse.xtext.example.parser.internal.InternalDomainmodelLexer.class;
+		return org.eclipse.xtext.example.parser.antlr.internal.InternalDomainmodelLexer.class;
 	}
 		
 	
@@ -58,6 +62,7 @@ public abstract class AbstractDomainmodelRuntimeConfig extends AbstractServiceRe
 		return scope(org.eclipse.xtext.example.IDomainmodel.SCOPE)
 		.with(org.eclipse.xtext.IMetamodelAccess.class, getIMetamodelAccess())
 		.with(org.eclipse.xtext.IGrammarAccess.class, getIGrammarAccess())
+		.with(org.eclipse.xtext.parser.packrat.IPackratParser.class, getIPackratParser())
 		.with(org.eclipse.xtext.parser.IAstFactory.class, getIAstFactory())
 		.with(org.eclipse.xtext.parser.IParser.class, getIParser())
 		.with(org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider.class, getIAntlrTokenFileProvider())

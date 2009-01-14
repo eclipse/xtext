@@ -18,16 +18,16 @@ import org.eclipse.xtext.parsetree.transientvalues.services.TransientValuesTestG
 
 import org.eclipse.xtext.parsetree.transientvalues.parser.packrat.TransientValuesTestDelimiters;
 
-import org.eclipse.xtext.parsetree.transientvalues.parser.packrat.consumers.TransientValuesTestTestRequiredConsumer;
-import org.eclipse.xtext.parsetree.transientvalues.parser.packrat.consumers.TransientValuesTestTestListConsumer;
 import org.eclipse.xtext.parsetree.transientvalues.parser.packrat.consumers.TransientValuesTestTestOptionalConsumer;
+import org.eclipse.xtext.parsetree.transientvalues.parser.packrat.consumers.TransientValuesTestTestListConsumer;
+import org.eclipse.xtext.parsetree.transientvalues.parser.packrat.consumers.TransientValuesTestTestRequiredConsumer;
 
 @SuppressWarnings("unused")
 public final class TransientValuesTestRootConsumer extends NonTerminalConsumer {
 
-	private TransientValuesTestTestRequiredConsumer testRequiredConsumer;
-	private TransientValuesTestTestListConsumer testListConsumer;
 	private TransientValuesTestTestOptionalConsumer testOptionalConsumer;
+	private TransientValuesTestTestListConsumer testListConsumer;
+	private TransientValuesTestTestRequiredConsumer testRequiredConsumer;
 
 	public TransientValuesTestRootConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
@@ -91,16 +91,16 @@ public final class TransientValuesTestRootConsumer extends NonTerminalConsumer {
 		return "Root";
 	}
 	
-	public void setTestRequiredConsumer(TransientValuesTestTestRequiredConsumer testRequiredConsumer) {
-		this.testRequiredConsumer = testRequiredConsumer;
+	public void setTestOptionalConsumer(TransientValuesTestTestOptionalConsumer testOptionalConsumer) {
+		this.testOptionalConsumer = testOptionalConsumer;
 	}
 	
 	public void setTestListConsumer(TransientValuesTestTestListConsumer testListConsumer) {
 		this.testListConsumer = testListConsumer;
 	}
 	
-	public void setTestOptionalConsumer(TransientValuesTestTestOptionalConsumer testOptionalConsumer) {
-		this.testOptionalConsumer = testOptionalConsumer;
+	public void setTestRequiredConsumer(TransientValuesTestTestRequiredConsumer testRequiredConsumer) {
+		this.testRequiredConsumer = testRequiredConsumer;
 	}
 	
 }

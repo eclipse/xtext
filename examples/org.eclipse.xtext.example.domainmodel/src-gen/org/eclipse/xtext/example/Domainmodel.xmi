@@ -8,6 +8,9 @@
   <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="domainmodel">
     <ePackage href="http://www.example.xtext/Domainmodel#/"/>
   </metamodelDeclarations>
+  <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="ecore">
+    <ePackage href="http://www.eclipse.org/emf/2002/Ecore#/"/>
+  </metamodelDeclarations>
   <rules xsi:type="xtext:ParserRule" name="File">
     <type metamodel="//@metamodelDeclarations.0">
       <type xsi:type="ecore:EClass" href="http://www.example.xtext/Domainmodel#//File"/>
@@ -81,7 +84,9 @@
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Keyword" value="datatype"/>
       <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
-        <terminal xsi:type="xtext:RuleCall" rule="//@rules.15"/>
+        <terminal xsi:type="xtext:RuleCall">
+          <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+        </terminal>
       </abstractTokens>
     </alternatives>
   </rules>
@@ -96,7 +101,9 @@
             <abstractTokens xsi:type="xtext:Group">
               <abstractTokens xsi:type="xtext:Keyword" value="entity"/>
               <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
-                <terminal xsi:type="xtext:RuleCall" rule="//@rules.15"/>
+                <terminal xsi:type="xtext:RuleCall">
+                  <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+                </terminal>
               </abstractTokens>
             </abstractTokens>
             <abstractTokens xsi:type="xtext:Group" cardinality="?">
@@ -106,6 +113,7 @@
                   <type metamodel="//@metamodelDeclarations.0">
                     <type xsi:type="ecore:EClass" href="http://www.example.xtext/Domainmodel#//Entity"/>
                   </type>
+                  <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
                 </terminal>
               </abstractTokens>
             </abstractTokens>
@@ -146,7 +154,9 @@
         <abstractTokens xsi:type="xtext:Group">
           <abstractTokens xsi:type="xtext:Keyword" value="attr"/>
           <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
-            <terminal xsi:type="xtext:RuleCall" rule="//@rules.15"/>
+            <terminal xsi:type="xtext:RuleCall">
+              <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+            </terminal>
           </abstractTokens>
         </abstractTokens>
         <abstractTokens xsi:type="xtext:Keyword" value=":"/>
@@ -166,7 +176,9 @@
           <abstractTokens xsi:type="xtext:Group">
             <abstractTokens xsi:type="xtext:Keyword" value="ref"/>
             <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
-              <terminal xsi:type="xtext:RuleCall" rule="//@rules.15"/>
+              <terminal xsi:type="xtext:RuleCall">
+                <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+              </terminal>
             </abstractTokens>
           </abstractTokens>
           <abstractTokens xsi:type="xtext:Keyword" value=":"/>
@@ -182,6 +194,7 @@
             <type metamodel="//@metamodelDeclarations.0">
               <type xsi:type="ecore:EClass" href="http://www.example.xtext/Domainmodel#//Reference"/>
             </type>
+            <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
           </terminal>
         </abstractTokens>
       </abstractTokens>
@@ -199,7 +212,9 @@
               <abstractTokens xsi:type="xtext:Group">
                 <abstractTokens xsi:type="xtext:Keyword" value="op"/>
                 <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
-                  <terminal xsi:type="xtext:RuleCall" rule="//@rules.15"/>
+                  <terminal xsi:type="xtext:RuleCall">
+                    <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+                  </terminal>
                 </abstractTokens>
               </abstractTokens>
               <abstractTokens xsi:type="xtext:Keyword" value="("/>
@@ -231,7 +246,9 @@
     </type>
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
-        <terminal xsi:type="xtext:RuleCall" rule="//@rules.15"/>
+        <terminal xsi:type="xtext:RuleCall">
+          <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+        </terminal>
       </abstractTokens>
       <abstractTokens xsi:type="xtext:Assignment" feature="type" operator="=">
         <terminal xsi:type="xtext:RuleCall" rule="//@rules.14"/>
@@ -256,13 +273,24 @@
         <type metamodel="//@metamodelDeclarations.0">
           <type xsi:type="ecore:EClass" href="http://www.example.xtext/Domainmodel#//Type"/>
         </type>
+        <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
       </terminal>
     </alternatives>
   </rules>
-  <rules xsi:type="xtext:LexerRule" name="ID" body="('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')* ('.' ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*)*">
-    <type>
-      <metamodel href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@metamodelDeclarations.0"/>
+  <rules xsi:type="xtext:ParserRule" name="QualifiedName">
+    <type metamodel="//@metamodelDeclarations.1">
       <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </type>
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:RuleCall">
+        <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Group" cardinality="*">
+        <abstractTokens xsi:type="xtext:Keyword" value="."/>
+        <abstractTokens xsi:type="xtext:RuleCall">
+          <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+        </abstractTokens>
+      </abstractTokens>
+    </alternatives>
   </rules>
 </xtext:Grammar>

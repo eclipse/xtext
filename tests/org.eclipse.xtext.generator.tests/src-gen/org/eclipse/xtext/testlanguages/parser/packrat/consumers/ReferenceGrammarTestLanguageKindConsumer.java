@@ -18,14 +18,14 @@ import org.eclipse.xtext.testlanguages.services.ReferenceGrammarTestLanguageGram
 
 import org.eclipse.xtext.testlanguages.parser.packrat.ReferenceGrammarTestLanguageDelimiters;
 
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinINTConsumer;
+import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 
 @SuppressWarnings("unused")
 public final class ReferenceGrammarTestLanguageKindConsumer extends NonTerminalConsumer {
 
-	private XtextBuiltinIDConsumer idConsumer;
 	private XtextBuiltinINTConsumer intConsumer;
+	private XtextBuiltinIDConsumer idConsumer;
 
 	public ReferenceGrammarTestLanguageKindConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
@@ -99,12 +99,12 @@ public final class ReferenceGrammarTestLanguageKindConsumer extends NonTerminalC
 		return "Kind";
 	}
 	
-	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
-		this.idConsumer = idConsumer;
-	}
-	
 	public void setIntConsumer(XtextBuiltinINTConsumer intConsumer) {
 		this.intConsumer = intConsumer;
+	}
+	
+	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
+		this.idConsumer = idConsumer;
 	}
 	
 }

@@ -18,24 +18,24 @@ import org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestLanguageG
 
 import org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters;
 
-import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageManyStringsConsumer;
-import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageTwoNumbersConsumer;
 import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageTypeConsumer;
+import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageAtomConsumer;
+import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageTwoNumbersConsumer;
 import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageParensConsumer;
+import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageManyStringsConsumer;
 import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageSpareConsumer;
 import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageRef2Consumer;
-import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageAtomConsumer;
 
 @SuppressWarnings("unused")
 public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalConsumer {
 
-	private SimpleReconstrTestLanguageManyStringsConsumer manyStringsConsumer;
-	private SimpleReconstrTestLanguageTwoNumbersConsumer twoNumbersConsumer;
 	private SimpleReconstrTestLanguageTypeConsumer typeConsumer;
+	private SimpleReconstrTestLanguageAtomConsumer atomConsumer;
+	private SimpleReconstrTestLanguageTwoNumbersConsumer twoNumbersConsumer;
 	private SimpleReconstrTestLanguageParensConsumer parensConsumer;
+	private SimpleReconstrTestLanguageManyStringsConsumer manyStringsConsumer;
 	private SimpleReconstrTestLanguageSpareConsumer spareConsumer;
 	private SimpleReconstrTestLanguageRef2Consumer ref2Consumer;
-	private SimpleReconstrTestLanguageAtomConsumer atomConsumer;
 
 	public SimpleReconstrTestLanguageTermConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
@@ -106,20 +106,24 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 		return "Expression";
 	}
 	
-	public void setManyStringsConsumer(SimpleReconstrTestLanguageManyStringsConsumer manyStringsConsumer) {
-		this.manyStringsConsumer = manyStringsConsumer;
+	public void setTypeConsumer(SimpleReconstrTestLanguageTypeConsumer typeConsumer) {
+		this.typeConsumer = typeConsumer;
+	}
+	
+	public void setAtomConsumer(SimpleReconstrTestLanguageAtomConsumer atomConsumer) {
+		this.atomConsumer = atomConsumer;
 	}
 	
 	public void setTwoNumbersConsumer(SimpleReconstrTestLanguageTwoNumbersConsumer twoNumbersConsumer) {
 		this.twoNumbersConsumer = twoNumbersConsumer;
 	}
 	
-	public void setTypeConsumer(SimpleReconstrTestLanguageTypeConsumer typeConsumer) {
-		this.typeConsumer = typeConsumer;
-	}
-	
 	public void setParensConsumer(SimpleReconstrTestLanguageParensConsumer parensConsumer) {
 		this.parensConsumer = parensConsumer;
+	}
+	
+	public void setManyStringsConsumer(SimpleReconstrTestLanguageManyStringsConsumer manyStringsConsumer) {
+		this.manyStringsConsumer = manyStringsConsumer;
 	}
 	
 	public void setSpareConsumer(SimpleReconstrTestLanguageSpareConsumer spareConsumer) {
@@ -128,10 +132,6 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 	
 	public void setRef2Consumer(SimpleReconstrTestLanguageRef2Consumer ref2Consumer) {
 		this.ref2Consumer = ref2Consumer;
-	}
-	
-	public void setAtomConsumer(SimpleReconstrTestLanguageAtomConsumer atomConsumer) {
-		this.atomConsumer = atomConsumer;
 	}
 	
 }

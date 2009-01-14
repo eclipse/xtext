@@ -18,14 +18,14 @@ import org.eclipse.xtext.parsetree.reconstr.services.ComplexReconstrTestLanguage
 
 import org.eclipse.xtext.parsetree.reconstr.parser.packrat.ComplexReconstrTestLanguageDelimiters;
 
-import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.ComplexReconstrTestLanguageParensConsumer;
 import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.ComplexReconstrTestLanguageAtomConsumer;
+import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.ComplexReconstrTestLanguageParensConsumer;
 
 @SuppressWarnings("unused")
 public final class ComplexReconstrTestLanguageTermConsumer extends NonTerminalConsumer {
 
-	private ComplexReconstrTestLanguageParensConsumer parensConsumer;
 	private ComplexReconstrTestLanguageAtomConsumer atomConsumer;
+	private ComplexReconstrTestLanguageParensConsumer parensConsumer;
 
 	public ComplexReconstrTestLanguageTermConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
@@ -66,12 +66,12 @@ public final class ComplexReconstrTestLanguageTermConsumer extends NonTerminalCo
 		return "Expression";
 	}
 	
-	public void setParensConsumer(ComplexReconstrTestLanguageParensConsumer parensConsumer) {
-		this.parensConsumer = parensConsumer;
-	}
-	
 	public void setAtomConsumer(ComplexReconstrTestLanguageAtomConsumer atomConsumer) {
 		this.atomConsumer = atomConsumer;
+	}
+	
+	public void setParensConsumer(ComplexReconstrTestLanguageParensConsumer parensConsumer) {
+		this.parensConsumer = parensConsumer;
 	}
 	
 }

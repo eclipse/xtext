@@ -18,14 +18,14 @@ import org.eclipse.xtext.testlanguages.services.ContentAssistTestLanguageGrammar
 
 import org.eclipse.xtext.testlanguages.parser.packrat.ContentAssistTestLanguageDelimiters;
 
-import org.eclipse.xtext.testlanguages.parser.packrat.consumers.ContentAssistTestLanguageAbstractRuleCallConsumer;
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
+import org.eclipse.xtext.testlanguages.parser.packrat.consumers.ContentAssistTestLanguageAbstractRuleCallConsumer;
 
 @SuppressWarnings("unused")
 public final class ContentAssistTestLanguageSecondAbstractRuleChildConsumer extends NonTerminalConsumer {
 
-	private ContentAssistTestLanguageAbstractRuleCallConsumer abstractRuleCallConsumer;
 	private XtextBuiltinIDConsumer idConsumer;
+	private ContentAssistTestLanguageAbstractRuleCallConsumer abstractRuleCallConsumer;
 
 	public ContentAssistTestLanguageSecondAbstractRuleChildConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
@@ -99,12 +99,12 @@ public final class ContentAssistTestLanguageSecondAbstractRuleChildConsumer exte
 		return "SecondAbstractRuleChild";
 	}
 	
-	public void setAbstractRuleCallConsumer(ContentAssistTestLanguageAbstractRuleCallConsumer abstractRuleCallConsumer) {
-		this.abstractRuleCallConsumer = abstractRuleCallConsumer;
-	}
-	
 	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
 		this.idConsumer = idConsumer;
+	}
+	
+	public void setAbstractRuleCallConsumer(ContentAssistTestLanguageAbstractRuleCallConsumer abstractRuleCallConsumer) {
+		this.abstractRuleCallConsumer = abstractRuleCallConsumer;
 	}
 	
 }

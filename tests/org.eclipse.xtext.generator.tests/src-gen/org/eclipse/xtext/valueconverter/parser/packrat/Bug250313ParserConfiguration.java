@@ -53,8 +53,8 @@ public class Bug250313ParserConfiguration extends AbstractParserConfiguration {
 	}
 	
 	public void configureConsumers() {
-		getRef2Consumer().setIdConsumer(getIdConsumer());
 		getRef2Consumer().setStringConsumer(getStringConsumer());
+		getRef2Consumer().setIdConsumer(getIdConsumer());
 
 		getIdConsumer().initFields(this);
 		getIntConsumer().initFields(this);

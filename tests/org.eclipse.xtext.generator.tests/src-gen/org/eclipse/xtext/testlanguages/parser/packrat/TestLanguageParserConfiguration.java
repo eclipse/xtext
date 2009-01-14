@@ -75,8 +75,8 @@ public class TestLanguageParserConfiguration extends AbstractParserConfiguration
 	public void configureConsumers() {
 		getEntryRuleConsumer().setAbstractRuleConsumer(getAbstractRuleConsumer());
 
-		getAbstractRuleConsumer().setReducibleRuleConsumer(getReducibleRuleConsumer());
 		getAbstractRuleConsumer().setChoiceRuleConsumer(getChoiceRuleConsumer());
+		getAbstractRuleConsumer().setReducibleRuleConsumer(getReducibleRuleConsumer());
 
 		getChoiceRuleConsumer().setIdConsumer(getIdConsumer());
 

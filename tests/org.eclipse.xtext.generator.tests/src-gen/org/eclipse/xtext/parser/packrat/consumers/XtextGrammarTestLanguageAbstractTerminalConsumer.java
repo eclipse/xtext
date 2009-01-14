@@ -18,17 +18,17 @@ import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess.Abstract
 
 import org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters;
 
-import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageParenthesizedElementConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageCrossReferenceConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageKeywordConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageCrossReferenceConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageParenthesizedElementConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageRuleCallConsumer;
 
 @SuppressWarnings("unused")
 public final class XtextGrammarTestLanguageAbstractTerminalConsumer extends NonTerminalConsumer {
 
-	private XtextGrammarTestLanguageParenthesizedElementConsumer parenthesizedElementConsumer;
-	private XtextGrammarTestLanguageCrossReferenceConsumer crossReferenceConsumer;
 	private XtextGrammarTestLanguageKeywordConsumer keywordConsumer;
+	private XtextGrammarTestLanguageCrossReferenceConsumer crossReferenceConsumer;
+	private XtextGrammarTestLanguageParenthesizedElementConsumer parenthesizedElementConsumer;
 	private XtextGrammarTestLanguageRuleCallConsumer ruleCallConsumer;
 
 	public XtextGrammarTestLanguageAbstractTerminalConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
@@ -82,16 +82,16 @@ public final class XtextGrammarTestLanguageAbstractTerminalConsumer extends NonT
 		return "AbstractElement";
 	}
 	
-	public void setParenthesizedElementConsumer(XtextGrammarTestLanguageParenthesizedElementConsumer parenthesizedElementConsumer) {
-		this.parenthesizedElementConsumer = parenthesizedElementConsumer;
+	public void setKeywordConsumer(XtextGrammarTestLanguageKeywordConsumer keywordConsumer) {
+		this.keywordConsumer = keywordConsumer;
 	}
 	
 	public void setCrossReferenceConsumer(XtextGrammarTestLanguageCrossReferenceConsumer crossReferenceConsumer) {
 		this.crossReferenceConsumer = crossReferenceConsumer;
 	}
 	
-	public void setKeywordConsumer(XtextGrammarTestLanguageKeywordConsumer keywordConsumer) {
-		this.keywordConsumer = keywordConsumer;
+	public void setParenthesizedElementConsumer(XtextGrammarTestLanguageParenthesizedElementConsumer parenthesizedElementConsumer) {
+		this.parenthesizedElementConsumer = parenthesizedElementConsumer;
 	}
 	
 	public void setRuleCallConsumer(XtextGrammarTestLanguageRuleCallConsumer ruleCallConsumer) {

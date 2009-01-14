@@ -18,14 +18,14 @@ import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess.Abstract
 
 import org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters;
 
-import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageReferencedMetamodelConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageGeneratedMetamodelConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageReferencedMetamodelConsumer;
 
 @SuppressWarnings("unused")
 public final class XtextGrammarTestLanguageAbstractMetamodelDeclarationConsumer extends NonTerminalConsumer {
 
-	private XtextGrammarTestLanguageReferencedMetamodelConsumer referencedMetamodelConsumer;
 	private XtextGrammarTestLanguageGeneratedMetamodelConsumer generatedMetamodelConsumer;
+	private XtextGrammarTestLanguageReferencedMetamodelConsumer referencedMetamodelConsumer;
 
 	public XtextGrammarTestLanguageAbstractMetamodelDeclarationConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
@@ -66,12 +66,12 @@ public final class XtextGrammarTestLanguageAbstractMetamodelDeclarationConsumer 
 		return "AbstractMetamodelDeclaration";
 	}
 	
-	public void setReferencedMetamodelConsumer(XtextGrammarTestLanguageReferencedMetamodelConsumer referencedMetamodelConsumer) {
-		this.referencedMetamodelConsumer = referencedMetamodelConsumer;
-	}
-	
 	public void setGeneratedMetamodelConsumer(XtextGrammarTestLanguageGeneratedMetamodelConsumer generatedMetamodelConsumer) {
 		this.generatedMetamodelConsumer = generatedMetamodelConsumer;
+	}
+	
+	public void setReferencedMetamodelConsumer(XtextGrammarTestLanguageReferencedMetamodelConsumer referencedMetamodelConsumer) {
+		this.referencedMetamodelConsumer = referencedMetamodelConsumer;
 	}
 	
 }

@@ -19,15 +19,15 @@ import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess.LexerRul
 import org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters;
 
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGConsumer;
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageTypeRefConsumer;
+import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 
 @SuppressWarnings("unused")
 public final class XtextGrammarTestLanguageLexerRuleConsumer extends NonTerminalConsumer {
 
 	private XtextBuiltinSTRINGConsumer stringConsumer;
-	private XtextBuiltinIDConsumer idConsumer;
 	private XtextGrammarTestLanguageTypeRefConsumer typeRefConsumer;
+	private XtextBuiltinIDConsumer idConsumer;
 
 	public XtextGrammarTestLanguageLexerRuleConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
@@ -149,12 +149,12 @@ public final class XtextGrammarTestLanguageLexerRuleConsumer extends NonTerminal
 		this.stringConsumer = stringConsumer;
 	}
 	
-	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
-		this.idConsumer = idConsumer;
-	}
-	
 	public void setTypeRefConsumer(XtextGrammarTestLanguageTypeRefConsumer typeRefConsumer) {
 		this.typeRefConsumer = typeRefConsumer;
+	}
+	
+	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
+		this.idConsumer = idConsumer;
 	}
 	
 }

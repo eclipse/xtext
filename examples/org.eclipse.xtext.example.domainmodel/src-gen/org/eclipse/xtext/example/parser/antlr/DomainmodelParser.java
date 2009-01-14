@@ -1,7 +1,7 @@
 /*
 Generated with Xtext
 */
-package org.eclipse.xtext.example.parser;
+package org.eclipse.xtext.example.parser.antlr;
 
 import org.antlr.runtime.ANTLRInputStream;
 import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
@@ -11,10 +11,10 @@ import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.service.Inject;
 
-import org.eclipse.xtext.example.parser.internal.InternalDomainmodelLexer;
-import org.eclipse.xtext.example.parser.internal.InternalDomainmodelParser;
+import org.eclipse.xtext.example.parser.antlr.internal.InternalDomainmodelLexer;
+import org.eclipse.xtext.example.parser.antlr.internal.InternalDomainmodelParser;
 
-public class DomainmodelParser extends org.eclipse.xtext.parser.AbstractParser {
+public class DomainmodelParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
 	
 	@Inject 
     protected AntlrTokenDefProvider antlrTokenDefProvider;

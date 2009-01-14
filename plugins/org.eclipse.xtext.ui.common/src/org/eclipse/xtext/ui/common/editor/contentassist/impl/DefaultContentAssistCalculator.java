@@ -63,7 +63,7 @@ public class DefaultContentAssistCalculator extends XtextSwitch<List<AbstractEle
 		
 		AbstractNode referenceNode=contentAssistContext.getReferenceNode();
 		/**
-		 * in case of a crossreference which isnt linked properly we evaluate or
+		 * in case of a cross reference which isn't linked properly we evaluate or
 		 * propose it again
 		 */
 		if (referenceNode != null && referenceNode.getGrammarElement() instanceof CrossReference && !isLinked(referenceNode)) {

@@ -13,7 +13,7 @@ import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
 /**
- * Run this class in order to generate the domainmodel grammar.
+ * Run this class in order to generate the domain model grammar.
  */
 public class  GenerateGrammar {
 	private Logger log = Logger.getLogger( GenerateGrammar.class);

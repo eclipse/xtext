@@ -58,8 +58,8 @@ public class MultiGenMMTestLanguageParserConfiguration extends AbstractParserCon
 	}
 	
 	public void configureConsumers() {
-		getFooConsumer().setIdConsumer(getIdConsumer());
 		getFooConsumer().setNameRefConsumer(getNameRefConsumer());
+		getFooConsumer().setIdConsumer(getIdConsumer());
 
 		getNameRefConsumer().setStringConsumer(getStringConsumer());
 

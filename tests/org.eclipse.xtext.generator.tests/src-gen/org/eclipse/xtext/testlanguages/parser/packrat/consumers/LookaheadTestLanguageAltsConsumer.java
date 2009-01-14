@@ -19,15 +19,15 @@ import org.eclipse.xtext.testlanguages.services.LookaheadTestLanguageGrammarAcce
 import org.eclipse.xtext.testlanguages.parser.packrat.LookaheadTestLanguageDelimiters;
 
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.LookaheadTestLanguageLookAhead3Consumer;
-import org.eclipse.xtext.testlanguages.parser.packrat.consumers.LookaheadTestLanguageLookAhead1Consumer;
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.LookaheadTestLanguageLookAhead0Consumer;
+import org.eclipse.xtext.testlanguages.parser.packrat.consumers.LookaheadTestLanguageLookAhead1Consumer;
 
 @SuppressWarnings("unused")
 public final class LookaheadTestLanguageAltsConsumer extends NonTerminalConsumer {
 
 	private LookaheadTestLanguageLookAhead3Consumer lookAhead3Consumer;
-	private LookaheadTestLanguageLookAhead1Consumer lookAhead1Consumer;
 	private LookaheadTestLanguageLookAhead0Consumer lookAhead0Consumer;
+	private LookaheadTestLanguageLookAhead1Consumer lookAhead1Consumer;
 
 	public LookaheadTestLanguageAltsConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
@@ -78,12 +78,12 @@ public final class LookaheadTestLanguageAltsConsumer extends NonTerminalConsumer
 		this.lookAhead3Consumer = lookAhead3Consumer;
 	}
 	
-	public void setLookAhead1Consumer(LookaheadTestLanguageLookAhead1Consumer lookAhead1Consumer) {
-		this.lookAhead1Consumer = lookAhead1Consumer;
-	}
-	
 	public void setLookAhead0Consumer(LookaheadTestLanguageLookAhead0Consumer lookAhead0Consumer) {
 		this.lookAhead0Consumer = lookAhead0Consumer;
+	}
+	
+	public void setLookAhead1Consumer(LookaheadTestLanguageLookAhead1Consumer lookAhead1Consumer) {
+		this.lookAhead1Consumer = lookAhead1Consumer;
 	}
 	
 }

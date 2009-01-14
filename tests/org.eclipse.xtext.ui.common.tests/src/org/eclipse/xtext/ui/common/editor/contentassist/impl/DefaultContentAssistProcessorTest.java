@@ -44,8 +44,8 @@ public class DefaultContentAssistProcessorTest extends AbstractUiTest
 	
 	public void testComputeCompletionProposalsCount() throws Exception {
 		contentAssistProcessorTestBuilder.assertCount(1)
-			.append("spielplatz ").assertCount(2)
-			.append("1 ").assertCount(3)
+			.append("spielplatz ").assertCount(1)
+			.append("1 ").assertCount(2)
 			.append("\"JUNIT\" ").assertCount(1)
 			.append("{ ").assertCount(5)
 			.append("kind ").assertCount(1)
@@ -56,20 +56,20 @@ public class DefaultContentAssistProcessorTest extends AbstractUiTest
 	
 	public void testComputeCompletionProposalsText() throws Exception {
 		contentAssistProcessorTestBuilder.assertText("spielplatz")
-			.applyText().assertText("0","1")
-			.applyText().assertText("\"SpielplatzBeschreibungSTRING\"","\"SpielplatzBeschreibung\"","{")
+			.applyText().assertText("1")
+			.applyText().assertText("\"SpielplatzBeschreibung\"","{")
 			.applyText().assertText("{")
 			.applyText().assertText("erwachsener", "familie", "spielzeug", "kind", "}")
 			.append("erwachsener ").assertText("(")
-			.applyText().assertText("ErwachsenerNameID","ErwachsenerName")
-			.append("e1 ").assertText("0","1")
+			.applyText().assertText("ErwachsenerName")
+			.append("e1 ").assertText("1")
 			.applyText().assertText(")")
 			.applyText().append("erwachsener (e2 0) kind ").assertText("(")
-			.applyText().assertText("KindNameID","KindName")
-			.append("k1 ").assertText("0","1")
+			.applyText().assertText("KindName")
+			.append("k1 ").assertText("1")
 			.applyText().assertText(")")
 			.applyText().append("kind (k2 0) familie ").assertText("(")
-			.applyText().assertText("keyword","\"FamilieNameSTRING\"","FamilieNameID")
+			.applyText().assertText("keyword")
 			.append("keyword ").assertText("e1","e2")
 			.applyText().assertText("e1","e2")
 			.append("e2 ").assertText("k1","k2")
@@ -82,19 +82,18 @@ public class DefaultContentAssistProcessorTest extends AbstractUiTest
 	}
 	
 	public void testComputeCompletionProposalsIgnoreCase() throws Exception {
-		contentAssistProcessorTestBuilder.set("spielplatz 1 \"SpielplatzBeschreibung\" { kind(k1 0) kind(k2 0) erwachsener(e1 0) erwachsener(e2 0) ")
-			.append(" KI").assertText("kind").delete(3)
-			.append(" ER").assertText("erwachsener").delete(3)
-			.append(" SP").assertText("spielzeug").delete(3)
-			.append(" FA").assertText("familie").delete(3)
-			.append(" familie ( KEY").assertText("keyword").delete(13)
-			.append(" familie ( \"").assertText("\"FamilieNameSTRING\"").delete(12)
-			.append(" familie ( K").assertText("keyword").delete(11)
-			.append(" familie ( keyword E").assertText("e1","e2").delete(19)
-			.append(" familie ( keyword e1 E").assertText("e1","e2").delete(22)
-			.append(" familie ( keyword e1 e2 K").assertText("k1","k2",",",")").delete(25)
-			.append(" familie ( keyword e1 e2 k1,K").assertText("k1","k2",",",")").delete(28)
-			.append(" familie ( keyword e1 e2 k1,k2").assertText("k2",",",")")
+		ContentAssistProcessorTestBuilder builder = contentAssistProcessorTestBuilder.append("spielplatz 1 \"SpielplatzBeschreibung\" { kind(k1 0) kind(k2 0) erwachsener(e1 0) erwachsener(e2 0) ");
+		builder.append(" KI").assertText("kind");
+		builder.append(" ER").assertText("erwachsener");
+		builder.append(" SP").assertText("spielzeug");
+		builder.append(" FA").assertText("familie");
+		builder.append(" familie ( KEY").assertText("keyword");
+		builder.append(" familie ( K").assertText("keyword");
+		builder.append(" familie ( keyword E").assertText("e1", "e2");
+		builder.append(" familie ( keyword e1 E").assertText("e1", "e2");
+		builder.append(" familie ( keyword e1 e2 K").assertText("k1", "k2", ",", ")");
+		builder.append(" familie ( keyword e1 e2 k1,K").assertText("k1", "k2", ",", ")");
+		builder.append(" familie ( keyword e1 e2 k1,k2").assertText("k2", ",", ")");
 		;
 	}
 	
@@ -108,7 +107,6 @@ public class DefaultContentAssistProcessorTest extends AbstractUiTest
 					"R1", 
 					"R2",
 					"R3",
-					"\"KeywordValueSTRING\"", 
 					"\"KeywordValue\"", 
 					"(", 
 					"[", 
@@ -130,13 +128,27 @@ public class DefaultContentAssistProcessorTest extends AbstractUiTest
 	
 	public void testDefaultRule() throws Exception {
 		contentAssistProcessorTestBuilder.assertText("spielplatz");
-		contentAssistProcessorTestBuilder.set(" spielplatz 1 \"SpielplatzBeschreibung\" { } ")
-			.assertTextAtCursorPosition(1, "spielplatz");;
+		contentAssistProcessorTestBuilder.append(" spielplatz 1 \"SpielplatzBeschreibung\" { } ")
+			.assertTextAtCursorPosition(1, "spielplatz");
 	}
 	
 	private ContentAssistProcessorTestBuilder newBuilder(Class<?> standAloneSetup, Class<?> uiConfig) throws Exception {
 		withUi(standAloneSetup, uiConfig);
 		return new ContentAssistProcessorTestBuilder(getCurrentServiceScope(), new DefaultContentAssistProcessor());
+	}
+	
+	
+	public void testComputePrefix() throws Exception {
+		assertEquals("", prefix("foo fvdf dfv("));
+		assertEquals("dfv", prefix("foo fvdf dfv"));
+		assertEquals("dfv_", prefix("foo fvdf dfv_"));
+		assertEquals("", prefix("foo fvdf dfv_ "));
+		assertEquals("", prefix(""));
+		assertEquals("", prefix(null));
+	}
+
+	private String prefix(String s) {
+		return DefaultContentAssistProcessor.computePrefix(s);
 	}
 	
 }

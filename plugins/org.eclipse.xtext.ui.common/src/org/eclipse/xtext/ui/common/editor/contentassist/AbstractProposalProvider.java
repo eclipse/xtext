@@ -25,13 +25,13 @@ import org.eclipse.jface.text.templates.Template;
 import org.eclipse.jface.text.templates.TemplateContextType;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
-import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.crossref.IScopeProvider;
 import org.eclipse.xtext.crossref.IScopedElement;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.LeafNode;
@@ -49,16 +49,16 @@ import org.eclipse.xtext.util.Strings;
  */
 public abstract class AbstractProposalProvider implements IProposalProvider {
 	// constants
-	protected static final String LEXER_RULE_ID = "ID";
+//	protected static final String LEXER_RULE_ID = "ID";
 	protected static final String LEXER_RULE_INT = "INT";
 	protected static final String LEXER_RULE_STRING = "STRING";
 	
-	protected static final Comparator<ICompletionProposal> PROPOSAL_COMPARATOR= new ProposalComparator();
+	protected static final Comparator<ICompletionProposal> PROPOSAL_COMPARATOR = new ProposalComparator();
 	// logger available to subclasses
 	protected final Logger logger = Logger.getLogger(getClass());
 
 	@Inject
-	protected ILinkingCandidatesService linkingCandidatesService;
+	protected IScopeProvider scopeProvider;
 
 	/*
 	 * (non-Javadoc)
@@ -115,21 +115,12 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 		return new Template[]{};
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#sortAndFilter(java.util.List, org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext)
-	 */
-	public List<? extends ICompletionProposal> sortAndFilter(
-			List<? extends ICompletionProposal> completionProposalList, IContentAssistContext contentAssistContext) {
-		return doSortAndFilter(completionProposalList,contentAssistContext);
-	}
-
 	/**
-	 * Concrete subclasses can override this to provide a more meaningful and sophisticated behaviour whenever a list of
+	 * Concrete subclasses can override this to provide a more meaningful and sophisticated behavior whenever a list of
 	 * ICompletionProposal's should be computed for simple <code>LexerRule</code> call's.
 	 * 
 	 * This implementation returns one <code>ICompletionProposal</code> with a displayString composed of the name of the
-	 * containing rule plus the featurename of an optional assignment and at the end the name of the given LexerRule
+	 * containing rule plus the feature name of an optional assignment and at the end the name of the given LexerRule
 	 * (e.i. ParserRuleName+AssignmentFeatureName+LexerRuleName) or {@link #getDefaultIntegerValue()} if its <i>INT</i>
 	 * based LexerRule.
 	 * 
@@ -140,29 +131,32 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 	 */
 	protected List<? extends ICompletionProposal> doCompleteLexerRuleRuleCall(LexerRule lexerRule, RuleCall ruleCall,
 			IContentAssistContext contentAssistContext) {
-		ParserRule containingParserRule = GrammarUtil.containingParserRule(ruleCall);
-		Assignment containingAssignment = GrammarUtil.containingAssignment(ruleCall);
-
-		String defaultDisplayString = containingParserRule.getName()
-				+ (null != containingAssignment ? firstLetterCapitalized(containingAssignment.getFeature()) : "")
-				+ lexerRule.getName();
-
-		if (LEXER_RULE_INT.equalsIgnoreCase(lexerRule.getName())) {
-			defaultDisplayString = String.valueOf(getDefaultIntegerValue());
-		}
-		else if (LEXER_RULE_STRING.equalsIgnoreCase(lexerRule.getName())) {
-			defaultDisplayString = "\"" + defaultDisplayString + "\"";
-		}
-
-		return Collections.singletonList(createCompletionProposal(containingAssignment, defaultDisplayString, contentAssistContext));
+		//TODO this code does not produce any useful proposals, we shouldn't return any proposals by default.
+//		
+//		ParserRule containingParserRule = GrammarUtil.containingParserRule(ruleCall);
+//		Assignment containingAssignment = GrammarUtil.containingAssignment(ruleCall);
+//
+//		String defaultDisplayString = containingParserRule.getName()
+//				+ (null != containingAssignment ? firstLetterCapitalized(containingAssignment.getFeature()) : "")
+//				+ lexerRule.getName();
+//
+//		if (LEXER_RULE_INT.equalsIgnoreCase(lexerRule.getName())) {
+//			defaultDisplayString = String.valueOf(getDefaultIntegerValue());
+//		}
+//		else if (LEXER_RULE_STRING.equalsIgnoreCase(lexerRule.getName())) {
+//			defaultDisplayString = "\"" + defaultDisplayString + "\"";
+//		}
+//
+//		return Collections.singletonList(createCompletionProposal(containingAssignment, defaultDisplayString, contentAssistContext));
+		return Collections.emptyList();
 	}
 
-	/**
-	 * @return the default integer value for ecore::EInt <code>RuleCall<></code>
-	 */
-	protected int getDefaultIntegerValue() {
-		return 0;
-	}
+//	/**
+//	 * @return the default integer value for ecore::EInt <code>RuleCall<></code>
+//	 */
+//	protected int getDefaultIntegerValue() {
+//		return 0;
+//	}
 
 	/**
 	 * 
@@ -182,7 +176,7 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 	protected abstract String getDefaultImageFilePath();
 
 	/**
-	 * Concrete subclasses can override this to provide custom lookup behaviour for <code>CrossReference</code>. This
+	 * Concrete subclasses can override this to provide custom lookup behavior for <code>CrossReference</code>. This
 	 * implementation delegates to the injected LinkingService
 	 * 
 	 * @return a list of <code>ICompletionProposal</code> matching the given assignment
@@ -191,13 +185,13 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 
 		List<ICompletionProposal> completionProposalList = new ArrayList<ICompletionProposal>();
 
-		if (linkingCandidatesService != null) {
+		if (scopeProvider != null) {
 			ParserRule containingParserRule = GrammarUtil.containingParserRule(crossReference);
 			if (!GrammarUtil.isDatatypeRule(containingParserRule)) {
 				final EClass eClass = (EClass) containingParserRule.getType().getType();
 				final EReference ref = GrammarUtil.getReference(crossReference, eClass);
 				final String trimmedPrefix = contentAssistContext.getMatchString().trim();
-				final Iterable<IScopedElement> candidates = linkingCandidatesService.getLinkingCandidates(contentAssistContext.getModel(), ref);
+				final Iterable<IScopedElement> candidates = scopeProvider.getScope(contentAssistContext.getModel(), ref).getAllContents();
 				for (IScopedElement candidate : candidates) {
 					if (candidate.name() != null && isCandidateMatchingPrefix(contentAssistContext.getModel(), ref, candidate, trimmedPrefix)) {
 						completionProposalList.add(
@@ -227,12 +221,12 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 	 * Concrete subclasses can override this for custom sort and filter behavior. Called right after all completion
 	 * proposals have been collected.
 	 * 
-	 * The default behavior of this implementation is to sort duplicates and to trim matching
+	 * The default behavior of this implementation is to filter duplicates and to trim matching
 	 * <code>ICompletionProposal#displayString</code> with matching prefix values.
 	 * 
 	 * @see #sortAndFilter(List, EObject, String, IDocument, int, AbstractNode, LeafNode)
 	 */
-	protected List<? extends ICompletionProposal> doSortAndFilter(
+	public List<? extends ICompletionProposal> sortAndFilter(
 			List<? extends ICompletionProposal> completionProposalList, IContentAssistContext contentAssistContext) {
 
 		Map<String, ICompletionProposal> displayString2ICompletionProposalMap = new HashMap<String, ICompletionProposal>();
@@ -268,7 +262,7 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 	}
 
 	/**
-	 * The default behaviour of this method delegates to {@link XtextCompletionProposal#matches(String)} to 
+	 * The default behavior of this method delegates to {@link XtextCompletionProposal#matches(String)} to 
 	 * test if the given prefix string matches or not.
 	 * 
 	 * @param completionProposal contains information used to present the proposed completion to the user

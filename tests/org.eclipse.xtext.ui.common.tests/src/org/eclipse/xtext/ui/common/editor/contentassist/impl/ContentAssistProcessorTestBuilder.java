@@ -13,14 +13,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.contentassist.impl;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertTrue;
-import static org.easymock.EasyMock.anyObject;
-import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.replay;
+import static junit.framework.Assert.*;
 
 import java.io.InputStream;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -28,13 +26,8 @@ import java.util.List;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jface.text.IDocument;
-import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.StyledText;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -50,103 +43,80 @@ import org.eclipse.xtext.util.Strings;
  * Represents a builder for <code>IContentAssistProcessor</code> tests.
  * 
  * @author Michael Clay - Initial contribution and API
+ * @author Sven Efftinge
  */
 public class ContentAssistProcessorTestBuilder {
 
 	private IContentAssistProcessor contentAssistProcessor;
-	private ITextViewer textViewerMock;
-	private IXtextDocument xtextDocumentMock;
 	private IServiceScope serviceScope;
-	private StringBuilder modelBuilder = new StringBuilder("");
+	private String model;
 	private int cursorPosition;
 
 	public ContentAssistProcessorTestBuilder(IServiceScope serviceScope, IContentAssistProcessor contentAssistProcessor) {
 		this.contentAssistProcessor = contentAssistProcessor;
-		this.textViewerMock = createMock(ITextViewer.class);
-		this.xtextDocumentMock = createMock(IXtextDocument.class);
 		this.serviceScope = serviceScope;
 		ServiceRegistry.injectServices(serviceScope, this.contentAssistProcessor);
 	}
-
-	public ContentAssistProcessorTestBuilder set(String model) {
-		this.modelBuilder = new StringBuilder(model);
-		this.cursorPosition = model.length();
-		return this;
-	}
-
-	public ContentAssistProcessorTestBuilder clear(String model) {
-		this.modelBuilder = new StringBuilder("");
-		this.cursorPosition = 0;
-		return this;
+	
+	private ContentAssistProcessorTestBuilder clone(String model, int offset) {
+		ContentAssistProcessorTestBuilder builder = new ContentAssistProcessorTestBuilder(this.serviceScope, this.contentAssistProcessor);
+		builder.model = model;
+		builder.cursorPosition = offset;
+		return builder;
 	}
 
 	public ContentAssistProcessorTestBuilder append(String model) {
-		this.modelBuilder.append(model);
-		this.cursorPosition += model.length();
-		return this;
+		return clone(getModel()+model, cursorPosition+model.length());
 	}
-	
+
 	public ContentAssistProcessorTestBuilder appendNl(String model) {
 		return append(model).append(Strings.newLine());
 	}
 
 	public ContentAssistProcessorTestBuilder insert(String model, int cursorPosition) {
-		this.modelBuilder.insert(cursorPosition, model);
-		this.cursorPosition = cursorPosition + model.length();
-		return this;
-	}
-
-	public ContentAssistProcessorTestBuilder delete(int times) {
-		this.modelBuilder.delete(this.cursorPosition - times, this.cursorPosition);
-		this.cursorPosition = this.modelBuilder.length();
-		return this;
+		StringBuilder builder = new StringBuilder(getModel()).insert(cursorPosition, model);
+		return clone(builder.toString(), cursorPosition + model.length());
 	}
 
 	public ContentAssistProcessorTestBuilder cursorBack(int times) {
-		this.cursorPosition -= times;
-		return this;
+		return clone(model,this.cursorPosition -= times);
 	}
 
 	public ContentAssistProcessorTestBuilder applyText() throws Exception {
-		applyText(0, true);
-		return this;
+		return applyText(0, true);
 	}
 
 	public ContentAssistProcessorTestBuilder applyText(boolean appendSpace) throws Exception {
-		applyText(0, appendSpace);
-		return this;
+		return applyText(0, appendSpace);
 	}
 
 	public ContentAssistProcessorTestBuilder applyText(int index, boolean appendSpace) throws Exception {
-		append(computeCompletionProposals(this.modelBuilder.toString(), this.cursorPosition)[index].getDisplayString());
+		ContentAssistProcessorTestBuilder ret = append(computeCompletionProposals(getModel(), this.cursorPosition)[index].getDisplayString());
 		if (appendSpace) {
-			append(" ");
+			return ret.append(" ");
 		}
-		return this;
+		return ret;
 	}
 
 	public ContentAssistProcessorTestBuilder assertCount(int completionProposalCount) throws Exception {
-		assertCountAtCursorPosition(completionProposalCount, this.cursorPosition);
-		return this;
+		return assertCountAtCursorPosition(completionProposalCount, this.cursorPosition);
 	}
 
 	public ContentAssistProcessorTestBuilder assertText(String... expectedText) throws Exception {
-		assertTextAtCursorPosition(this.cursorPosition, expectedText);
-		return this;
+		return assertTextAtCursorPosition(this.cursorPosition, expectedText);
 	}
 
 	public ContentAssistProcessorTestBuilder assertTextAtCursorPosition(int cursorPosition, String... expectedText)
 			throws Exception {
 
-		String currentModelToParse = this.modelBuilder.toString();
+		String currentModelToParse = getModel();
 
 		ICompletionProposal[] computeCompletionProposals = computeCompletionProposals(currentModelToParse,
 				cursorPosition);
 
 		assertEquals("expect only " + expectedText.length + " CompletionProposal item for model '"
-				+ currentModelToParse + "': expectation was:\n" + 
-				Strings.concat(", ", Arrays.asList(expectedText)) + 
-				"\nbut actual was:\n" + Strings.concat(", ", toString(computeCompletionProposals)),
+				+ currentModelToParse + "': expectation was:\n" + Strings.concat(", ", Arrays.asList(expectedText))
+				+ "\nbut actual was:\n" + Strings.concat(", ", toString(computeCompletionProposals)),
 				expectedText.length, computeCompletionProposals.length);
 
 		for (int i = 0; i < computeCompletionProposals.length; i++) {
@@ -157,10 +127,14 @@ public class ContentAssistProcessorTestBuilder {
 
 		return this;
 	}
-	
+
+	private String getModel() {
+		return this.model == null ? "":model;
+	}
+
 	private List<String> toString(ICompletionProposal[] proposals) {
 		List<String> res = new ArrayList<String>(proposals.length);
-		for(ICompletionProposal proposal: proposals) {
+		for (ICompletionProposal proposal : proposals) {
 			res.add(proposal.getDisplayString());
 		}
 		return res;
@@ -169,7 +143,7 @@ public class ContentAssistProcessorTestBuilder {
 	public ContentAssistProcessorTestBuilder assertCountAtCursorPosition(int completionProposalCount, int cursorPosition)
 			throws Exception {
 
-		String currentModelToParse = this.modelBuilder.toString();
+		String currentModelToParse = getModel();
 
 		ICompletionProposal[] computeCompletionProposals = computeCompletionProposals(currentModelToParse,
 				cursorPosition);
@@ -182,45 +156,35 @@ public class ContentAssistProcessorTestBuilder {
 
 	public ICompletionProposal[] computeCompletionProposals(final String currentModelToParse, int cursorPosition)
 			throws Exception {
-		CompositeNode rootNode = getRootNode(currentModelToParse);
+		final XtextResource resource = getResource(new StringInputStream(currentModelToParse));
+		final IXtextDocument doc = (IXtextDocument) Proxy.newProxyInstance(getClass().getClassLoader(),
+				new Class[] { IXtextDocument.class }, new InvocationHandler() {
 
-		org.easymock.EasyMock.reset(textViewerMock, xtextDocumentMock, textViewerMock);
-
-		//expect(textViewerMock.getDocument()).andReturn(xtextDocumentMock);
-		expect(xtextDocumentMock.readOnly((UnitOfWork<CompositeNode>) anyObject())).andReturn(rootNode);
-		//expect(textViewerMock.getTextWidget()).andReturn(newStyledTextWidgetMock(currentModelToParse));
-
-		replay(xtextDocumentMock);
+					@SuppressWarnings("unchecked")
+					public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+						if (args[0] instanceof UnitOfWork)
+							return ((UnitOfWork<XtextResource>) args[0]).exec(resource);
+						if (method.getName().equals("get"))
+							return model;
+						throw new UnsupportedOperationException("The test mock IXtextDocument does not support the operation "+method);
+					}
+				});
 
 		ICompletionProposal[] computeCompletionProposals = this.contentAssistProcessor.computeCompletionProposals(
-				new XtextSourceViewer(null,null,null,false,0) {
+				new XtextSourceViewer(null, null, null, false, 0) {
 					@Override
 					public IDocument getDocument() {
-						return xtextDocumentMock;
+						return doc;
 					}
-					
-					@Override
-					public StyledText getTextWidget() {
-						return newStyledTextWidgetMock(currentModelToParse);
-					}
-					
+
 				}, cursorPosition);
 		return computeCompletionProposals;
 	}
 
 	@Override
 	public String toString() {
-		return this.modelBuilder.toString() + "\n length: " + this.modelBuilder.toString().length() + "\n cursor at: "
+		return getModel() + "\n length: " + getModel().length() + "\n cursor at: "
 				+ this.cursorPosition;
-	}
-
-	private CompositeNode getRootNode(String model) throws Exception {
-		return getRootNode(new StringInputStream(model));
-	}
-
-	private CompositeNode getRootNode(InputStream model) throws Exception {
-		XtextResource resource = getResource(model);
-		return getRootNode(resource);
 	}
 
 	private XtextResource getResource(InputStream in) throws Exception {
@@ -233,24 +197,6 @@ public class ContentAssistProcessorTestBuilder {
 
 	private IResourceFactory getResourceFactory() {
 		return ServiceRegistry.getService(this.serviceScope, IResourceFactory.class);
-	}
-
-	private CompositeNode getRootNode(XtextResource resource) {
-		return resource.getParseResult().getRootNode();
-	}
-
-	private StyledText newStyledTextWidgetMock(final String testDslModel) {
-		return new StyledText(new Shell(), SWT.NONE) {
-			@Override
-			public int getCharCount() {
-				return testDslModel.length();
-			}
-
-			@Override
-			public String getText(int start, int end) {
-				return testDslModel.substring(start, end + 1);
-			}
-		};
 	}
 
 }

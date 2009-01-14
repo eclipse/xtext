@@ -60,8 +60,8 @@ public class TreeTestLanguageParserConfiguration extends AbstractParserConfigura
 	public void configureConsumers() {
 		getModelConsumer().setNodeConsumer(getNodeConsumer());
 
-		getNodeConsumer().setStringConsumer(getStringConsumer());
 		getNodeConsumer().setIdConsumer(getIdConsumer());
+		getNodeConsumer().setStringConsumer(getStringConsumer());
 		getNodeConsumer().setNodeConsumer(getNodeConsumer());
 
 		getIdConsumer().initFields(this);

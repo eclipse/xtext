@@ -18,22 +18,22 @@ import org.eclipse.xtext.testlanguages.services.ReferenceGrammarTestLanguageGram
 
 import org.eclipse.xtext.testlanguages.parser.packrat.ReferenceGrammarTestLanguageDelimiters;
 
-import org.eclipse.xtext.testlanguages.parser.packrat.consumers.ReferenceGrammarTestLanguageFamilieConsumer;
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.ReferenceGrammarTestLanguageKindConsumer;
+import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinINTConsumer;
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.ReferenceGrammarTestLanguageSpielzeugConsumer;
+import org.eclipse.xtext.testlanguages.parser.packrat.consumers.ReferenceGrammarTestLanguageFamilieConsumer;
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.ReferenceGrammarTestLanguageErwachsenerConsumer;
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGConsumer;
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinINTConsumer;
 
 @SuppressWarnings("unused")
 public final class ReferenceGrammarTestLanguageSpielplatzConsumer extends NonTerminalConsumer {
 
-	private ReferenceGrammarTestLanguageFamilieConsumer familieConsumer;
 	private ReferenceGrammarTestLanguageKindConsumer kindConsumer;
+	private XtextBuiltinINTConsumer intConsumer;
 	private ReferenceGrammarTestLanguageSpielzeugConsumer spielzeugConsumer;
+	private ReferenceGrammarTestLanguageFamilieConsumer familieConsumer;
 	private ReferenceGrammarTestLanguageErwachsenerConsumer erwachsenerConsumer;
 	private XtextBuiltinSTRINGConsumer stringConsumer;
-	private XtextBuiltinINTConsumer intConsumer;
 
 	public ReferenceGrammarTestLanguageSpielplatzConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
@@ -162,16 +162,20 @@ public final class ReferenceGrammarTestLanguageSpielplatzConsumer extends NonTer
 		return "Spielplatz";
 	}
 	
-	public void setFamilieConsumer(ReferenceGrammarTestLanguageFamilieConsumer familieConsumer) {
-		this.familieConsumer = familieConsumer;
-	}
-	
 	public void setKindConsumer(ReferenceGrammarTestLanguageKindConsumer kindConsumer) {
 		this.kindConsumer = kindConsumer;
 	}
 	
+	public void setIntConsumer(XtextBuiltinINTConsumer intConsumer) {
+		this.intConsumer = intConsumer;
+	}
+	
 	public void setSpielzeugConsumer(ReferenceGrammarTestLanguageSpielzeugConsumer spielzeugConsumer) {
 		this.spielzeugConsumer = spielzeugConsumer;
+	}
+	
+	public void setFamilieConsumer(ReferenceGrammarTestLanguageFamilieConsumer familieConsumer) {
+		this.familieConsumer = familieConsumer;
 	}
 	
 	public void setErwachsenerConsumer(ReferenceGrammarTestLanguageErwachsenerConsumer erwachsenerConsumer) {
@@ -180,10 +184,6 @@ public final class ReferenceGrammarTestLanguageSpielplatzConsumer extends NonTer
 	
 	public void setStringConsumer(XtextBuiltinSTRINGConsumer stringConsumer) {
 		this.stringConsumer = stringConsumer;
-	}
-	
-	public void setIntConsumer(XtextBuiltinINTConsumer intConsumer) {
-		this.intConsumer = intConsumer;
 	}
 	
 }

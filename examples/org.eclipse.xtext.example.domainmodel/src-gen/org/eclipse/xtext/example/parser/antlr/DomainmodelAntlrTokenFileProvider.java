@@ -1,7 +1,7 @@
 /*
 Generated with Xtext
 */
-package org.eclipse.xtext.example.parser;
+package org.eclipse.xtext.example.parser.antlr;
 
 import java.io.InputStream;
 import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
@@ -10,6 +10,6 @@ public class DomainmodelAntlrTokenFileProvider implements IAntlrTokenFileProvide
 	
 	public InputStream getAntlrTokenFile() {
 		ClassLoader classLoader = DomainmodelAntlrTokenFileProvider.class.getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/example/parser/internal/InternalDomainmodel.tokens");
+    	return classLoader.getResourceAsStream("org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.tokens");
 	}
 }

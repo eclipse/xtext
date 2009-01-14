@@ -128,8 +128,8 @@ public class ComplexReconstrTestLanguageParserConfiguration extends AbstractPars
 
 		getOpConsumer().setTermConsumer(getTermConsumer());
 
-		getTermConsumer().setParensConsumer(getParensConsumer());
 		getTermConsumer().setAtomConsumer(getAtomConsumer());
+		getTermConsumer().setParensConsumer(getParensConsumer());
 
 		getAtomConsumer().setIdConsumer(getIdConsumer());
 
@@ -141,28 +141,28 @@ public class ComplexReconstrTestLanguageParserConfiguration extends AbstractPars
 
 		getTrickyA1Consumer().setIdConsumer(getIdConsumer());
 
-		getTrickyBConsumer().setIntConsumer(getIntConsumer());
 		getTrickyBConsumer().setIdConsumer(getIdConsumer());
+		getTrickyBConsumer().setIntConsumer(getIntConsumer());
 
 		getTrickyCConsumer().setIdConsumer(getIdConsumer());
 
-		getTrickyDConsumer().setIntConsumer(getIntConsumer());
 		getTrickyDConsumer().setIdConsumer(getIdConsumer());
 		getTrickyDConsumer().setStringConsumer(getStringConsumer());
+		getTrickyDConsumer().setIntConsumer(getIntConsumer());
 
-		getTrickyEConsumer().setIntConsumer(getIntConsumer());
 		getTrickyEConsumer().setIdConsumer(getIdConsumer());
 		getTrickyEConsumer().setStringConsumer(getStringConsumer());
+		getTrickyEConsumer().setIntConsumer(getIntConsumer());
 
-		getTrickyFConsumer().setIntConsumer(getIntConsumer());
 		getTrickyFConsumer().setIdConsumer(getIdConsumer());
+		getTrickyFConsumer().setIntConsumer(getIntConsumer());
 
 		getTrickyGConsumer().setTrickyG1Consumer(getTrickyG1Consumer());
 
 		getTrickyG1Consumer().setTrickyG2Consumer(getTrickyG2Consumer());
 
-		getTrickyG2Consumer().setIntConsumer(getIntConsumer());
 		getTrickyG2Consumer().setTrickyG1Consumer(getTrickyG1Consumer());
+		getTrickyG2Consumer().setIntConsumer(getIntConsumer());
 
 		getIdConsumer().initFields(this);
 		getIntConsumer().initFields(this);

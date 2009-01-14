@@ -18,16 +18,16 @@ import org.eclipse.xtext.parsetree.reconstr.services.ComplexReconstrTestLanguage
 
 import org.eclipse.xtext.parsetree.reconstr.parser.packrat.ComplexReconstrTestLanguageDelimiters;
 
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinINTConsumer;
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGConsumer;
+import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinINTConsumer;
 
 @SuppressWarnings("unused")
 public final class ComplexReconstrTestLanguageTrickyEConsumer extends NonTerminalConsumer {
 
-	private XtextBuiltinINTConsumer intConsumer;
 	private XtextBuiltinIDConsumer idConsumer;
 	private XtextBuiltinSTRINGConsumer stringConsumer;
+	private XtextBuiltinINTConsumer intConsumer;
 
 	public ComplexReconstrTestLanguageTrickyEConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
@@ -151,16 +151,16 @@ public final class ComplexReconstrTestLanguageTrickyEConsumer extends NonTermina
 		return "TrickyE";
 	}
 	
-	public void setIntConsumer(XtextBuiltinINTConsumer intConsumer) {
-		this.intConsumer = intConsumer;
-	}
-	
 	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
 		this.idConsumer = idConsumer;
 	}
 	
 	public void setStringConsumer(XtextBuiltinSTRINGConsumer stringConsumer) {
 		this.stringConsumer = stringConsumer;
+	}
+	
+	public void setIntConsumer(XtextBuiltinINTConsumer intConsumer) {
+		this.intConsumer = intConsumer;
 	}
 	
 }

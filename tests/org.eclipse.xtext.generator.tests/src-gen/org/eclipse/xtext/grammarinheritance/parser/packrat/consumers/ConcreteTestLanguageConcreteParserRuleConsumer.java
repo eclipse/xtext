@@ -18,14 +18,14 @@ import org.eclipse.xtext.grammarinheritance.services.ConcreteTestLanguageGrammar
 
 import org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters;
 
-import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.AbstractTestLanguageInheritedParserRuleConsumer;
 import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.AbstractTestLanguageREALConsumer;
+import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.AbstractTestLanguageInheritedParserRuleConsumer;
 
 @SuppressWarnings("unused")
 public final class ConcreteTestLanguageConcreteParserRuleConsumer extends NonTerminalConsumer {
 
-	private AbstractTestLanguageInheritedParserRuleConsumer inheritedParserRuleConsumer;
 	private AbstractTestLanguageREALConsumer realConsumer;
+	private AbstractTestLanguageInheritedParserRuleConsumer inheritedParserRuleConsumer;
 
 	public ConcreteTestLanguageConcreteParserRuleConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
@@ -96,12 +96,12 @@ public final class ConcreteTestLanguageConcreteParserRuleConsumer extends NonTer
 		return "ConcreteParserRule";
 	}
 	
-	public void setInheritedParserRuleConsumer(AbstractTestLanguageInheritedParserRuleConsumer inheritedParserRuleConsumer) {
-		this.inheritedParserRuleConsumer = inheritedParserRuleConsumer;
-	}
-	
 	public void setRealConsumer(AbstractTestLanguageREALConsumer realConsumer) {
 		this.realConsumer = realConsumer;
+	}
+	
+	public void setInheritedParserRuleConsumer(AbstractTestLanguageInheritedParserRuleConsumer inheritedParserRuleConsumer) {
+		this.inheritedParserRuleConsumer = inheritedParserRuleConsumer;
 	}
 	
 }

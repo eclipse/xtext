@@ -19,6 +19,7 @@ import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.text.contentassist.IContextInformationValidator;
 import org.eclipse.jface.text.templates.TemplateContextType;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.service.ServiceRegistry;
@@ -26,6 +27,8 @@ import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistCalculator
 import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
 import org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider;
 import org.eclipse.xtext.ui.common.editor.contentassist.ITemplateContentAssistProcessor;
+import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
 
 /**
  * The default implementation of interface {@link IContentAssistProcessor} provided with Xtext.
@@ -54,35 +57,50 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 	 * Computes the possible grammar elements following the one at the given offset and calls the respective methods on
 	 * the proposal provider.
 	 */
-	public ICompletionProposal[] computeCompletionProposals(ITextViewer viewer, final int offset) {
+	public ICompletionProposal[] computeCompletionProposals(final ITextViewer viewer, final int offset) {
 
-		ICompletionProposal[] completionProposals = null;
+		IXtextDocument document = (IXtextDocument) viewer.getDocument();
+		return document.readOnly(new UnitOfWork<ICompletionProposal[]>(){
 
-		IContentAssistContext contentAssistContext = getContentAssistContext(viewer, offset);
-
-		List<AbstractElement> computeProposalElements = getContentAssistCalculator().computeProposalElements(
-				contentAssistContext);
-
-		ProposalProviderInvokerSwitch proposalProviderInvokerSwitch = new ProposalProviderInvokerSwitch(
-				contentAssistContext, proposalProvider);
-
-		List<ICompletionProposal> completionProposalList = proposalProviderInvokerSwitch
+			public ICompletionProposal[] exec(XtextResource resource) throws Exception {
+				ICompletionProposal[] completionProposals = null;
+				IContentAssistContext contentAssistContext = ContentAssistContextFactory.create(resource,offset,computePrefix(viewer.getDocument().get(0, offset)));
+				
+				List<AbstractElement> computeProposalElements = getContentAssistCalculator().computeProposalElements(
+						contentAssistContext);
+				
+				ProposalProviderInvokerSwitch proposalProviderInvokerSwitch = new ProposalProviderInvokerSwitch(
+						contentAssistContext, proposalProvider);
+				
+				List<ICompletionProposal> completionProposalList = proposalProviderInvokerSwitch
 				.collectCompletionProposalList(computeProposalElements);
-
-		for (TemplateContextType templateContextType : proposalProviderInvokerSwitch.getTemplateContextTypeList()) {
-			addTemplates(viewer, offset, contentAssistContext, templateContextType, completionProposalList);
-		}
-
-		List<? extends ICompletionProposal> processedCompletionProposalList = proposalProvider.sortAndFilter(
-				completionProposalList, contentAssistContext);
-
-		completionProposals = processedCompletionProposalList
+				
+				for (TemplateContextType templateContextType : proposalProviderInvokerSwitch.getTemplateContextTypeList()) {
+					addTemplates(viewer, offset, contentAssistContext, templateContextType, completionProposalList);
+				}
+				
+				List<? extends ICompletionProposal> processedCompletionProposalList = proposalProvider.sortAndFilter(
+						completionProposalList, contentAssistContext);
+				
+				completionProposals = processedCompletionProposalList
 				.toArray(new ICompletionProposal[processedCompletionProposalList.size()]);
+				
+				return completionProposals;
+			}
 
-		return completionProposals;
+			});
 	}
 
-	
+	public static String computePrefix(String string) {
+		if (string==null)
+			return "";
+		for (int i = string.length()-1;i>=0;i--) {
+			if (!Character.isJavaIdentifierPart(string.charAt(i))) {
+				return string.substring(i+1);
+			}
+		}
+		return "";
+	}
 	
 	/*
 	 * (non-Javadoc)
@@ -141,16 +159,6 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 			completionProposalList.addAll(Arrays.asList(getTemplateContentAssistProcessor().computeCompletionProposals(
 					viewer, offset)));
 		}
-	}
-	
-	/**
-	 * @param viewer the viewer whose document is used to compute the proposals
-	 * @param offset an offset within the document for which completions should be computed
-	 * @return an implementation of <code>IContentAssistContext</code>
-	 */
-	protected IContentAssistContext getContentAssistContext(ITextViewer textViewer,int offset) {
-		return new DefaultContentAssistContext(textViewer,offset);
-		
 	}
 	
 	/**

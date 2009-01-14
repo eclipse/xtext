@@ -18,14 +18,14 @@ import org.eclipse.xtext.testlanguages.services.PartialParserTestLanguageGrammar
 
 import org.eclipse.xtext.testlanguages.parser.packrat.PartialParserTestLanguageDelimiters;
 
-import org.eclipse.xtext.testlanguages.parser.packrat.consumers.PartialParserTestLanguageNamedConsumer;
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
+import org.eclipse.xtext.testlanguages.parser.packrat.consumers.PartialParserTestLanguageNamedConsumer;
 
 @SuppressWarnings("unused")
 public final class PartialParserTestLanguageFirstConcreteConsumer extends NonTerminalConsumer {
 
-	private PartialParserTestLanguageNamedConsumer namedConsumer;
 	private XtextBuiltinIDConsumer idConsumer;
+	private PartialParserTestLanguageNamedConsumer namedConsumer;
 
 	public PartialParserTestLanguageFirstConcreteConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
@@ -112,12 +112,12 @@ public final class PartialParserTestLanguageFirstConcreteConsumer extends NonTer
 		return "FirstConcrete";
 	}
 	
-	public void setNamedConsumer(PartialParserTestLanguageNamedConsumer namedConsumer) {
-		this.namedConsumer = namedConsumer;
-	}
-	
 	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
 		this.idConsumer = idConsumer;
+	}
+	
+	public void setNamedConsumer(PartialParserTestLanguageNamedConsumer namedConsumer) {
+		this.namedConsumer = namedConsumer;
 	}
 	
 }

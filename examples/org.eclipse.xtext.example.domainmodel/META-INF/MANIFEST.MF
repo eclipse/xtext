@@ -16,8 +16,6 @@ Require-Bundle:  org.eclipse.xtext.log4j;bundle-version="1.2.15",
  org.apache.commons.logging,
  org.eclipse.xtend.util.stdlib
 Export-Package: org.eclipse.xtext.example,
- org.eclipse.xtext.example.parser,
- org.eclipse.xtext.example.parser.internal,
  org.eclipse.xtext.example.parsetree.reconstr,
  org.eclipse.xtext.example.services,
  xtext.example

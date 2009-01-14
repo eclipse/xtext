@@ -139,14 +139,14 @@ public class XtextGrammarTestLanguageParserConfiguration extends AbstractParserC
 	
 	public void configureConsumers() {
 		getGrammarConsumer().setAbstractRuleConsumer(getAbstractRuleConsumer());
-		getGrammarConsumer().setIdConsumer(getIdConsumer());
 		getGrammarConsumer().setAbstractMetamodelDeclarationConsumer(getAbstractMetamodelDeclarationConsumer());
+		getGrammarConsumer().setIdConsumer(getIdConsumer());
 
 		getAbstractRuleConsumer().setParserRuleConsumer(getParserRuleConsumer());
 		getAbstractRuleConsumer().setLexerRuleConsumer(getLexerRuleConsumer());
 
-		getAbstractMetamodelDeclarationConsumer().setReferencedMetamodelConsumer(getReferencedMetamodelConsumer());
 		getAbstractMetamodelDeclarationConsumer().setGeneratedMetamodelConsumer(getGeneratedMetamodelConsumer());
+		getAbstractMetamodelDeclarationConsumer().setReferencedMetamodelConsumer(getReferencedMetamodelConsumer());
 
 		getGeneratedMetamodelConsumer().setStringConsumer(getStringConsumer());
 		getGeneratedMetamodelConsumer().setIdConsumer(getIdConsumer());
@@ -155,12 +155,12 @@ public class XtextGrammarTestLanguageParserConfiguration extends AbstractParserC
 		getReferencedMetamodelConsumer().setIdConsumer(getIdConsumer());
 
 		getLexerRuleConsumer().setStringConsumer(getStringConsumer());
-		getLexerRuleConsumer().setIdConsumer(getIdConsumer());
 		getLexerRuleConsumer().setTypeRefConsumer(getTypeRefConsumer());
+		getLexerRuleConsumer().setIdConsumer(getIdConsumer());
 
-		getParserRuleConsumer().setIdConsumer(getIdConsumer());
 		getParserRuleConsumer().setAlternativesConsumer(getAlternativesConsumer());
 		getParserRuleConsumer().setTypeRefConsumer(getTypeRefConsumer());
+		getParserRuleConsumer().setIdConsumer(getIdConsumer());
 
 		getTypeRefConsumer().setIdConsumer(getIdConsumer());
 
@@ -168,23 +168,23 @@ public class XtextGrammarTestLanguageParserConfiguration extends AbstractParserC
 
 		getGroupConsumer().setAbstractTokenConsumer(getAbstractTokenConsumer());
 
-		getAbstractTokenConsumer().setAssignmentConsumer(getAssignmentConsumer());
-		getAbstractTokenConsumer().setAbstractTerminalConsumer(getAbstractTerminalConsumer());
 		getAbstractTokenConsumer().setActionConsumer(getActionConsumer());
+		getAbstractTokenConsumer().setAbstractTerminalConsumer(getAbstractTerminalConsumer());
+		getAbstractTokenConsumer().setAssignmentConsumer(getAssignmentConsumer());
 
-		getAssignmentConsumer().setIdConsumer(getIdConsumer());
 		getAssignmentConsumer().setAbstractTerminalConsumer(getAbstractTerminalConsumer());
+		getAssignmentConsumer().setIdConsumer(getIdConsumer());
 
-		getActionConsumer().setIdConsumer(getIdConsumer());
 		getActionConsumer().setTypeRefConsumer(getTypeRefConsumer());
+		getActionConsumer().setIdConsumer(getIdConsumer());
 
-		getAbstractTerminalConsumer().setParenthesizedElementConsumer(getParenthesizedElementConsumer());
-		getAbstractTerminalConsumer().setCrossReferenceConsumer(getCrossReferenceConsumer());
 		getAbstractTerminalConsumer().setKeywordConsumer(getKeywordConsumer());
+		getAbstractTerminalConsumer().setCrossReferenceConsumer(getCrossReferenceConsumer());
+		getAbstractTerminalConsumer().setParenthesizedElementConsumer(getParenthesizedElementConsumer());
 		getAbstractTerminalConsumer().setRuleCallConsumer(getRuleCallConsumer());
 
-		getCrossReferenceConsumer().setIdConsumer(getIdConsumer());
 		getCrossReferenceConsumer().setTypeRefConsumer(getTypeRefConsumer());
+		getCrossReferenceConsumer().setIdConsumer(getIdConsumer());
 
 		getParenthesizedElementConsumer().setAlternativesConsumer(getAlternativesConsumer());
 

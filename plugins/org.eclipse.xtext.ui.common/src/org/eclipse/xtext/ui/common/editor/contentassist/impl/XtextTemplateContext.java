@@ -12,8 +12,8 @@ import org.eclipse.jface.text.Position;
 import org.eclipse.jface.text.templates.DocumentTemplateContext;
 import org.eclipse.jface.text.templates.TemplateContextType;
 import org.eclipse.xtext.IMetamodelAccess;
+import org.eclipse.xtext.crossref.IScopeProvider;
 import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
-import org.eclipse.xtext.ui.common.editor.contentassist.ILinkingCandidatesService;
 
 /**
  * Represents an extended version of class {@link DocumentTemplateContext} to provide additional Xtext related 
@@ -25,16 +25,16 @@ public class XtextTemplateContext extends DocumentTemplateContext {
 
 	private IContentAssistContext contentAssistContext;
 
-	private ILinkingCandidatesService linkingCandidatesService;
+	private IScopeProvider scopeProvider;
 
 	private IMetamodelAccess metamodelAccess;
 
 	public XtextTemplateContext(TemplateContextType type, IDocument document, Position position,
-			IContentAssistContext contentAssistContext, ILinkingCandidatesService linkingCandidatesService,
+			IContentAssistContext contentAssistContext, IScopeProvider scopeProvider,
 			IMetamodelAccess metamodelAccess) {
 		super(type, document, position);
 		this.contentAssistContext = contentAssistContext;
-		this.linkingCandidatesService = linkingCandidatesService;
+		this.scopeProvider = scopeProvider;
 		this.metamodelAccess = metamodelAccess;
 	}
 
@@ -48,8 +48,8 @@ public class XtextTemplateContext extends DocumentTemplateContext {
 	/**
 	 * @return the linkingCandidatesService
 	 */
-	public ILinkingCandidatesService getLinkingCandidatesService() {
-		return linkingCandidatesService;
+	public IScopeProvider getScopeProvider() {
+		return scopeProvider;
 	}
 
 	/**

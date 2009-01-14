@@ -86,8 +86,8 @@ public class LookaheadTestLanguageParserConfiguration extends AbstractParserConf
 		getEntryConsumer().setAltsConsumer(getAltsConsumer());
 
 		getAltsConsumer().setLookAhead3Consumer(getLookAhead3Consumer());
-		getAltsConsumer().setLookAhead1Consumer(getLookAhead1Consumer());
 		getAltsConsumer().setLookAhead0Consumer(getLookAhead0Consumer());
+		getAltsConsumer().setLookAhead1Consumer(getLookAhead1Consumer());
 
 		getLookAhead1Consumer().setLookAhead2Consumer(getLookAhead2Consumer());
 
