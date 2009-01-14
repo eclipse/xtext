@@ -73,4 +73,12 @@ public class Strings {
 		return System.getProperty("line.separator");
 	}
 
+	public static String toFirstLower(String s) {
+		if (s == null || s.length() == 0)
+			return s;
+		if (s.length() == 1)
+			return s.toLowerCase();
+		return s.substring(0, 1).toLowerCase() + s.substring(1);
+	}
+
 }

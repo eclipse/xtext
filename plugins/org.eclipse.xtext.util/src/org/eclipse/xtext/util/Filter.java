@@ -41,6 +41,22 @@ public interface Filter<P> {
 			};
 		}
 		
+		public static <T> Filter<T> equal(final T instance) {
+			return new Filter<T>() {
+				public boolean matches(T param) {
+					return param.equals(instance);
+				}
+			};
+		}
+		
+		public static <T> Filter<T> same(final T instance) {
+			return new Filter<T>() {
+				public boolean matches(T param) {
+					return param == instance;
+				}
+			};
+		}
+		
 		public static <T> Filter<T> not(final Filter<T> input) {
 			return new Filter<T>() {
 				public boolean matches(T param) {

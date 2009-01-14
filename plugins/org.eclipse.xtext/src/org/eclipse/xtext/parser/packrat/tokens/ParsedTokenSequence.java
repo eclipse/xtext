@@ -7,7 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.packrat.tokens;
 
-import java.util.Iterator;
+import static org.eclipse.xtext.util.CollectionUtils.each;
+import static org.eclipse.xtext.util.CollectionUtils.loop;
+
 import java.util.LinkedList;
 
 import org.eclipse.xtext.parser.packrat.IParsedTokenVisitor;
@@ -51,17 +53,11 @@ public class ParsedTokenSequence {
 	}
 	
 	public void accept(IParsedTokenVisitor visitor) {
-		Iterator<AbstractParsedToken> iter = CollectionUtils.each(content, visitor).iterator();
-		while(iter.hasNext())
-			iter.next();
+		loop(each(content, visitor));
 	}
 	
 	public void acceptAndDrop(IParsedTokenVisitor visitor) {
-		Iterator<AbstractParsedToken> iter = CollectionUtils.each(content, visitor).iterator();
-		while(iter.hasNext()) {
-			iter.next();
-			iter.remove();
-		}
+		CollectionUtils.clear(each(content, visitor));
 	}
 	
 	public void clear() {

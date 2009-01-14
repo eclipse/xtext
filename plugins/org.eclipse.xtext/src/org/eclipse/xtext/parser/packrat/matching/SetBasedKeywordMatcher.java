@@ -7,10 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.packrat.matching;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
-
-import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.GrammarUtil;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -19,8 +18,8 @@ public class SetBasedKeywordMatcher implements ISequenceMatcher {
 
 	private final Set<String> keywords;
 	
-	public SetBasedKeywordMatcher(Grammar grammar) {
-		keywords = GrammarUtil.getAllKeywords(grammar);
+	public SetBasedKeywordMatcher(String... keywords) {
+		this.keywords = new HashSet<String>(Arrays.asList(keywords));
 	}
 	
 	public boolean matches(CharSequence input, int offset, int length) {

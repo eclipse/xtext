@@ -16,12 +16,15 @@ public interface ICharacterClass {
 	boolean matches(char candidate);
 	
 	public class Factory {
+		private static class NullCharacterClass implements ICharacterClass {
+			private static ICharacterClass INSTANCE = new NullCharacterClass();
+			public boolean matches(char candidate) {
+				return false;
+			}
+		}
+		
 		public static ICharacterClass nullClass() {
-			return new ICharacterClass() {
-				public boolean matches(char candidate) {
-					return false;
-				}
-			};
+			return NullCharacterClass.INSTANCE;
 		}
 		
 		public static ICharacterClass create(char... characters) {
