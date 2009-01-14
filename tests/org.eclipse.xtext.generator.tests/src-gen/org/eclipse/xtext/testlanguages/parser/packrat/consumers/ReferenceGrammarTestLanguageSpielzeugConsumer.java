@@ -18,14 +18,14 @@ import org.eclipse.xtext.testlanguages.services.ReferenceGrammarTestLanguageGram
 
 import org.eclipse.xtext.testlanguages.parser.packrat.ReferenceGrammarTestLanguageDelimiters;
 
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.ReferenceGrammarTestLanguageFarbeConsumer;
+import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 
 @SuppressWarnings("unused")
 public final class ReferenceGrammarTestLanguageSpielzeugConsumer extends NonTerminalConsumer {
 
-	private XtextBuiltinIDConsumer idConsumer;
 	private ReferenceGrammarTestLanguageFarbeConsumer farbeConsumer;
+	private XtextBuiltinIDConsumer idConsumer;
 
 	public ReferenceGrammarTestLanguageSpielzeugConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
@@ -99,12 +99,12 @@ public final class ReferenceGrammarTestLanguageSpielzeugConsumer extends NonTerm
 		return "Spielzeug";
 	}
 	
-	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
-		this.idConsumer = idConsumer;
-	}
-	
 	public void setFarbeConsumer(ReferenceGrammarTestLanguageFarbeConsumer farbeConsumer) {
 		this.farbeConsumer = farbeConsumer;
+	}
+	
+	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
+		this.idConsumer = idConsumer;
 	}
 	
 }

@@ -55,8 +55,8 @@ public class ConcreteTestLanguageParserConfiguration extends AbstractParserConfi
 	}
 	
 	public void configureConsumers() {
-		getConcreteParserRuleConsumer().setInheritedParserRuleConsumer(getInheritedParserRuleConsumer());
 		getConcreteParserRuleConsumer().setRealConsumer(getRealConsumer());
+		getConcreteParserRuleConsumer().setInheritedParserRuleConsumer(getInheritedParserRuleConsumer());
 
 		getInheritedParserRuleConsumer().setIdConsumer(getIdConsumer());
 

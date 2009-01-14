@@ -57,7 +57,7 @@ public class DomainmodelGenProposalProvider  extends AbstractProposalProvider {
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal(assignment, "PackageName", contentAssistContext));
+		return Collections.emptyList();
 	}
 	
 	public List<? extends ICompletionProposal> completePackageNamedElements(Assignment assignment, IContentAssistContext contentAssistContext) {
@@ -227,6 +227,14 @@ public class DomainmodelGenProposalProvider  extends AbstractProposalProvider {
     
     
     
+    
+	public List<? extends ICompletionProposal> completeEcoreEString(RuleCall ruleCall, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeEcoreEString '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
+					+ "' for model '" + contentAssistContext.getModel() + "' and prefix '" + contentAssistContext.getMatchString() + "'");
+		}
+		return Collections.emptyList();
+	}
     @Override
 	protected String getDefaultImageFilePath() {
 		return "icons/editor.gif";

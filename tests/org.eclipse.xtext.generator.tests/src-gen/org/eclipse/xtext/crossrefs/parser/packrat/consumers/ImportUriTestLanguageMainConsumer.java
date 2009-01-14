@@ -18,14 +18,14 @@ import org.eclipse.xtext.crossrefs.services.ImportUriTestLanguageGrammarAccess.M
 
 import org.eclipse.xtext.crossrefs.parser.packrat.ImportUriTestLanguageDelimiters;
 
-import org.eclipse.xtext.crossrefs.parser.packrat.consumers.ImportUriTestLanguageTypeConsumer;
 import org.eclipse.xtext.crossrefs.parser.packrat.consumers.ImportUriTestLanguageImportConsumer;
+import org.eclipse.xtext.crossrefs.parser.packrat.consumers.ImportUriTestLanguageTypeConsumer;
 
 @SuppressWarnings("unused")
 public final class ImportUriTestLanguageMainConsumer extends NonTerminalConsumer {
 
-	private ImportUriTestLanguageTypeConsumer typeConsumer;
 	private ImportUriTestLanguageImportConsumer importConsumer;
+	private ImportUriTestLanguageTypeConsumer typeConsumer;
 
 	public ImportUriTestLanguageMainConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
@@ -85,12 +85,12 @@ public final class ImportUriTestLanguageMainConsumer extends NonTerminalConsumer
 		return "Main";
 	}
 	
-	public void setTypeConsumer(ImportUriTestLanguageTypeConsumer typeConsumer) {
-		this.typeConsumer = typeConsumer;
-	}
-	
 	public void setImportConsumer(ImportUriTestLanguageImportConsumer importConsumer) {
 		this.importConsumer = importConsumer;
+	}
+	
+	public void setTypeConsumer(ImportUriTestLanguageTypeConsumer typeConsumer) {
+		this.typeConsumer = typeConsumer;
 	}
 	
 }

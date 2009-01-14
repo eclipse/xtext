@@ -20,6 +20,7 @@ public class SerializerUtil {
 
 	public static void serialize(IServiceScope scope, EObject obj, OutputStream out)
 			throws IOException {
+		//TODO god kills a kitten every time you use ServiceRegistry directly! 
 		IParseTreeConstructor astSer = ServiceRegistry.getService(scope,
 				IParseTreeConstructor.class);
 		ITokenSerializer tSer = ServiceRegistry.getService(scope,

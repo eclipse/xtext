@@ -83,24 +83,24 @@ public class ReferenceGrammarTestLanguageParserConfiguration extends AbstractPar
 	}
 	
 	public void configureConsumers() {
-		getSpielplatzConsumer().setFamilieConsumer(getFamilieConsumer());
 		getSpielplatzConsumer().setKindConsumer(getKindConsumer());
+		getSpielplatzConsumer().setIntConsumer(getIntConsumer());
 		getSpielplatzConsumer().setSpielzeugConsumer(getSpielzeugConsumer());
+		getSpielplatzConsumer().setFamilieConsumer(getFamilieConsumer());
 		getSpielplatzConsumer().setErwachsenerConsumer(getErwachsenerConsumer());
 		getSpielplatzConsumer().setStringConsumer(getStringConsumer());
-		getSpielplatzConsumer().setIntConsumer(getIntConsumer());
 
 		getPersonConsumer().setKindConsumer(getKindConsumer());
 		getPersonConsumer().setErwachsenerConsumer(getErwachsenerConsumer());
 
-		getKindConsumer().setIdConsumer(getIdConsumer());
 		getKindConsumer().setIntConsumer(getIntConsumer());
+		getKindConsumer().setIdConsumer(getIdConsumer());
 
-		getErwachsenerConsumer().setIdConsumer(getIdConsumer());
 		getErwachsenerConsumer().setIntConsumer(getIntConsumer());
+		getErwachsenerConsumer().setIdConsumer(getIdConsumer());
 
-		getSpielzeugConsumer().setIdConsumer(getIdConsumer());
 		getSpielzeugConsumer().setFarbeConsumer(getFarbeConsumer());
+		getSpielzeugConsumer().setIdConsumer(getIdConsumer());
 
 		getFamilieConsumer().setIdConsumer(getIdConsumer());
 		getFamilieConsumer().setStringConsumer(getStringConsumer());

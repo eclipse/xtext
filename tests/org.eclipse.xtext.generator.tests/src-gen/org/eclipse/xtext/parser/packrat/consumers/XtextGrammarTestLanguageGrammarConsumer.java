@@ -19,15 +19,15 @@ import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess.GrammarE
 import org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters;
 
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageAbstractRuleConsumer;
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageAbstractMetamodelDeclarationConsumer;
+import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 
 @SuppressWarnings("unused")
 public final class XtextGrammarTestLanguageGrammarConsumer extends NonTerminalConsumer {
 
 	private XtextGrammarTestLanguageAbstractRuleConsumer abstractRuleConsumer;
-	private XtextBuiltinIDConsumer idConsumer;
 	private XtextGrammarTestLanguageAbstractMetamodelDeclarationConsumer abstractMetamodelDeclarationConsumer;
+	private XtextBuiltinIDConsumer idConsumer;
 
 	public XtextGrammarTestLanguageGrammarConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
@@ -222,12 +222,12 @@ public final class XtextGrammarTestLanguageGrammarConsumer extends NonTerminalCo
 		this.abstractRuleConsumer = abstractRuleConsumer;
 	}
 	
-	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
-		this.idConsumer = idConsumer;
-	}
-	
 	public void setAbstractMetamodelDeclarationConsumer(XtextGrammarTestLanguageAbstractMetamodelDeclarationConsumer abstractMetamodelDeclarationConsumer) {
 		this.abstractMetamodelDeclarationConsumer = abstractMetamodelDeclarationConsumer;
+	}
+	
+	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
+		this.idConsumer = idConsumer;
 	}
 	
 }

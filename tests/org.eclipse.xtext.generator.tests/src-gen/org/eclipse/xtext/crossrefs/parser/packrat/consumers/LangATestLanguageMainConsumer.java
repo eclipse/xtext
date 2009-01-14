@@ -18,14 +18,14 @@ import org.eclipse.xtext.crossrefs.services.LangATestLanguageGrammarAccess.MainE
 
 import org.eclipse.xtext.crossrefs.parser.packrat.LangATestLanguageDelimiters;
 
-import org.eclipse.xtext.crossrefs.parser.packrat.consumers.LangATestLanguageTypeConsumer;
 import org.eclipse.xtext.crossrefs.parser.packrat.consumers.LangATestLanguageImportConsumer;
+import org.eclipse.xtext.crossrefs.parser.packrat.consumers.LangATestLanguageTypeConsumer;
 
 @SuppressWarnings("unused")
 public final class LangATestLanguageMainConsumer extends NonTerminalConsumer {
 
-	private LangATestLanguageTypeConsumer typeConsumer;
 	private LangATestLanguageImportConsumer importConsumer;
+	private LangATestLanguageTypeConsumer typeConsumer;
 
 	public LangATestLanguageMainConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
@@ -85,12 +85,12 @@ public final class LangATestLanguageMainConsumer extends NonTerminalConsumer {
 		return "Main";
 	}
 	
-	public void setTypeConsumer(LangATestLanguageTypeConsumer typeConsumer) {
-		this.typeConsumer = typeConsumer;
-	}
-	
 	public void setImportConsumer(LangATestLanguageImportConsumer importConsumer) {
 		this.importConsumer = importConsumer;
+	}
+	
+	public void setTypeConsumer(LangATestLanguageTypeConsumer typeConsumer) {
+		this.typeConsumer = typeConsumer;
 	}
 	
 }

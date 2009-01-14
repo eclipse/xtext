@@ -11,7 +11,7 @@ import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
 public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGrammarAccess {
 	
 	public class FileElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(1);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(2);
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment c0AssignmentImports = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall c00ParserRuleCallImport = (RuleCall)c0AssignmentImports.eContents().get(0);
@@ -38,7 +38,7 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 	}
 
 	public class ImportElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(2);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(3);
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword c0KeywordImport = (Keyword)cGroup.eContents().get(0);
 		private final Assignment c1AssignmentImportURI = (Assignment)cGroup.eContents().get(1);
@@ -61,7 +61,7 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 	}
 
 	public class NamedElementElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(3);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(4);
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall c0ParserRuleCallPackage = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall c1ParserRuleCallType = (RuleCall)cAlternatives.eContents().get(1);
@@ -80,42 +80,42 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 	}
 
 	public class PackageElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(4);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(5);
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
 		private final Group c000Group = (Group)c00Group.eContents().get(0);
 		private final Keyword c0000KeywordPackage = (Keyword)c000Group.eContents().get(0);
 		private final Assignment c0001AssignmentName = (Assignment)c000Group.eContents().get(1);
-		private final RuleCall c00010LexerRuleCallID = (RuleCall)c0001AssignmentName.eContents().get(0);
+		private final RuleCall c00010ParserRuleCallQualifiedName = (RuleCall)c0001AssignmentName.eContents().get(0);
 		private final Keyword c001KeywordLeftCurlyBracket = (Keyword)c00Group.eContents().get(1);
 		private final Assignment c01AssignmentNamedElements = (Assignment)c0Group.eContents().get(1);
 		private final RuleCall c010ParserRuleCallNamedElement = (RuleCall)c01AssignmentNamedElements.eContents().get(0);
 		private final Keyword c1KeywordRightCurlyBracket = (Keyword)cGroup.eContents().get(1);
 		
-		// Package : 'package' name = ID '{' ( namedElements += NamedElement ) * '}' ;
+		// Package : 'package' name = QualifiedName '{' ( namedElements += NamedElement ) * '}' ;
 		public ParserRule getRule() { return rule; }
 
-		// 'package' name = ID '{' ( namedElements += NamedElement ) * '}'
+		// 'package' name = QualifiedName '{' ( namedElements += NamedElement ) * '}'
 		public Group eleGroup() { return cGroup; }
 
-		// 'package' name = ID '{' ( namedElements += NamedElement ) *
+		// 'package' name = QualifiedName '{' ( namedElements += NamedElement ) *
 		public Group ele0Group() { return c0Group; }
 
-		// 'package' name = ID '{'
+		// 'package' name = QualifiedName '{'
 		public Group ele00Group() { return c00Group; }
 
-		// 'package' name = ID
+		// 'package' name = QualifiedName
 		public Group ele000Group() { return c000Group; }
 
 		// 'package'
 		public Keyword ele0000KeywordPackage() { return c0000KeywordPackage; }
 
-		// name = ID
+		// name = QualifiedName
 		public Assignment ele0001AssignmentName() { return c0001AssignmentName; }
 
-		// ID
-		public RuleCall ele00010LexerRuleCallID() { return c00010LexerRuleCallID; }
+		// QualifiedName
+		public RuleCall ele00010ParserRuleCallQualifiedName() { return c00010ParserRuleCallQualifiedName; }
 
 		// '{'
 		public Keyword ele001KeywordLeftCurlyBracket() { return c001KeywordLeftCurlyBracket; }
@@ -131,7 +131,7 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 	}
 
 	public class TypeElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(5);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(6);
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall c0ParserRuleCallEntity = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall c1ParserRuleCallDataType = (RuleCall)cAlternatives.eContents().get(1);
@@ -150,7 +150,7 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 	}
 
 	public class DataTypeElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(6);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(7);
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword c0KeywordDatatype = (Keyword)cGroup.eContents().get(0);
 		private final Assignment c1AssignmentName = (Assignment)cGroup.eContents().get(1);
@@ -173,7 +173,7 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 	}
 
 	public class EntityElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(7);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(8);
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
@@ -185,7 +185,7 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 		private final Group c0001Group = (Group)c000Group.eContents().get(1);
 		private final Keyword c00010KeywordExtends = (Keyword)c0001Group.eContents().get(0);
 		private final Assignment c00011AssignmentSuperType = (Assignment)c0001Group.eContents().get(1);
-		private final CrossReference c000110CrossReferenceEntity = (CrossReference)c00011AssignmentSuperType.eContents().get(0);
+		private final CrossReference c000110CrossReferenceEStringEntity = (CrossReference)c00011AssignmentSuperType.eContents().get(0);
 		private final Keyword c001KeywordLeftCurlyBracket = (Keyword)c00Group.eContents().get(1);
 		private final Assignment c01AssignmentFeatures = (Assignment)c0Group.eContents().get(1);
 		private final RuleCall c010ParserRuleCallFeature = (RuleCall)c01AssignmentFeatures.eContents().get(0);
@@ -228,7 +228,7 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 		public Assignment ele00011AssignmentSuperType() { return c00011AssignmentSuperType; }
 
 		// [ Entity ]
-		public CrossReference ele000110CrossReferenceEntity() { return c000110CrossReferenceEntity; }
+		public CrossReference ele000110CrossReferenceEStringEntity() { return c000110CrossReferenceEStringEntity; }
 
 		// '{'
 		public Keyword ele001KeywordLeftCurlyBracket() { return c001KeywordLeftCurlyBracket; }
@@ -244,7 +244,7 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 	}
 
 	public class FeatureElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(8);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(9);
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall c0ParserRuleCallStructuralFeature = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall c1ParserRuleCallOperation = (RuleCall)cAlternatives.eContents().get(1);
@@ -263,7 +263,7 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 	}
 
 	public class StructuralFeatureElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(9);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(10);
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall c0ParserRuleCallAttribute = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall c1ParserRuleCallReference = (RuleCall)cAlternatives.eContents().get(1);
@@ -282,7 +282,7 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 	}
 
 	public class AttributeElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(10);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(11);
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
@@ -325,7 +325,7 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 	}
 
 	public class ReferenceElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(11);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(12);
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
@@ -339,7 +339,7 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 		private final Group c1Group = (Group)cGroup.eContents().get(1);
 		private final Keyword c10KeywordOpposite = (Keyword)c1Group.eContents().get(0);
 		private final Assignment c11AssignmentOpposite = (Assignment)c1Group.eContents().get(1);
-		private final CrossReference c110CrossReferenceReference = (CrossReference)c11AssignmentOpposite.eContents().get(0);
+		private final CrossReference c110CrossReferenceEStringReference = (CrossReference)c11AssignmentOpposite.eContents().get(0);
 		
 		// Reference : 'ref' name = ID ':' type = TypeRef ( 'opposite' opposite = [ Reference ] ) ? ;
 		public ParserRule getRule() { return rule; }
@@ -384,11 +384,11 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 		public Assignment ele11AssignmentOpposite() { return c11AssignmentOpposite; }
 
 		// [ Reference ]
-		public CrossReference ele110CrossReferenceReference() { return c110CrossReferenceReference; }
+		public CrossReference ele110CrossReferenceEStringReference() { return c110CrossReferenceEStringReference; }
 	}
 
 	public class OperationElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(12);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(13);
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
@@ -479,7 +479,7 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 	}
 
 	public class ParameterElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(13);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(14);
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment c0AssignmentName = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall c00LexerRuleCallID = (RuleCall)c0AssignmentName.eContents().get(0);
@@ -506,7 +506,7 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 	}
 
 	public class TypedElementElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(14);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(15);
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall c0ParserRuleCallFeature = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall c1ParserRuleCallParameter = (RuleCall)cAlternatives.eContents().get(1);
@@ -525,9 +525,9 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 	}
 
 	public class TypeRefElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(15);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(16);
 		private final Assignment cAssignmentReferenced = (Assignment)rule.eContents().get(1);
-		private final CrossReference c0CrossReferenceType = (CrossReference)cAssignmentReferenced.eContents().get(0);
+		private final CrossReference c0CrossReferenceEStringType = (CrossReference)cAssignmentReferenced.eContents().get(0);
 		
 		// TypeRef : referenced = [ Type ] ;
 		public ParserRule getRule() { return rule; }
@@ -536,7 +536,34 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 		public Assignment eleAssignmentReferenced() { return cAssignmentReferenced; }
 
 		// [ Type ]
-		public CrossReference ele0CrossReferenceType() { return c0CrossReferenceType; }
+		public CrossReference ele0CrossReferenceEStringType() { return c0CrossReferenceEStringType; }
+	}
+
+	public class QualifiedNameElements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(17);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall c0LexerRuleCallID = (RuleCall)cGroup.eContents().get(0);
+		private final Group c1Group = (Group)cGroup.eContents().get(1);
+		private final Keyword c10KeywordFullStop = (Keyword)c1Group.eContents().get(0);
+		private final RuleCall c11LexerRuleCallID = (RuleCall)c1Group.eContents().get(1);
+		
+		// QualifiedName returns EString : ID ( '.' ID ) * ;
+		public ParserRule getRule() { return rule; }
+
+		// ID ( '.' ID ) *
+		public Group eleGroup() { return cGroup; }
+
+		// ID
+		public RuleCall ele0LexerRuleCallID() { return c0LexerRuleCallID; }
+
+		// ( '.' ID ) *
+		public Group ele1Group() { return c1Group; }
+
+		// '.'
+		public Keyword ele10KeywordFullStop() { return c10KeywordFullStop; }
+
+		// ID
+		public RuleCall ele11LexerRuleCallID() { return c11LexerRuleCallID; }
 	}
 	
 	public final static DomainmodelGrammarAccess INSTANCE = new DomainmodelGrammarAccess();
@@ -558,7 +585,7 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 	private static ParameterElements pParameter;
 	private static TypedElementElements pTypedElement;
 	private static TypeRefElements pTypeRef;
-	private static LexerRule lID;
+	private static QualifiedNameElements pQualifiedName;
 
 	@SuppressWarnings("unused")
 	public synchronized Grammar getGrammar() {	
@@ -590,7 +617,7 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 		return (pNamedElement != null) ? pNamedElement : (pNamedElement = new NamedElementElements());
 	} 
 
-	// Package : 'package' name = ID '{' ( namedElements += NamedElement ) * '}' ;
+	// Package : 'package' name = QualifiedName '{' ( namedElements += NamedElement ) * '}' ;
 	public PackageElements prPackage() {
 		return (pPackage != null) ? pPackage : (pPackage = new PackageElements());
 	} 
@@ -650,8 +677,8 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 		return (pTypeRef != null) ? pTypeRef : (pTypeRef = new TypeRefElements());
 	} 
 
-	// lexer ID : "('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')* ('.' ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*)*" ;
-	public LexerRule lrID() {
-		return (lID != null) ? lID : (lID = (LexerRule) getGrammar().eContents().get(16));
+	// QualifiedName returns EString : ID ( '.' ID ) * ;
+	public QualifiedNameElements prQualifiedName() {
+		return (pQualifiedName != null) ? pQualifiedName : (pQualifiedName = new QualifiedNameElements());
 	} 
 }

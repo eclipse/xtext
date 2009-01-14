@@ -95,13 +95,13 @@ public class SimpleReconstrTestLanguageParserConfiguration extends AbstractParse
 	public void configureConsumers() {
 		getOpConsumer().setTermConsumer(getTermConsumer());
 
-		getTermConsumer().setManyStringsConsumer(getManyStringsConsumer());
-		getTermConsumer().setTwoNumbersConsumer(getTwoNumbersConsumer());
 		getTermConsumer().setTypeConsumer(getTypeConsumer());
+		getTermConsumer().setAtomConsumer(getAtomConsumer());
+		getTermConsumer().setTwoNumbersConsumer(getTwoNumbersConsumer());
 		getTermConsumer().setParensConsumer(getParensConsumer());
+		getTermConsumer().setManyStringsConsumer(getManyStringsConsumer());
 		getTermConsumer().setSpareConsumer(getSpareConsumer());
 		getTermConsumer().setRef2Consumer(getRef2Consumer());
-		getTermConsumer().setAtomConsumer(getAtomConsumer());
 
 		getAtomConsumer().setIdConsumer(getIdConsumer());
 

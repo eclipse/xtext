@@ -18,16 +18,16 @@ import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess.Abstract
 
 import org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters;
 
-import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageAssignmentConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageAbstractTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageActionConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageAbstractTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageAssignmentConsumer;
 
 @SuppressWarnings("unused")
 public final class XtextGrammarTestLanguageAbstractTokenConsumer extends NonTerminalConsumer {
 
-	private XtextGrammarTestLanguageAssignmentConsumer assignmentConsumer;
-	private XtextGrammarTestLanguageAbstractTerminalConsumer abstractTerminalConsumer;
 	private XtextGrammarTestLanguageActionConsumer actionConsumer;
+	private XtextGrammarTestLanguageAbstractTerminalConsumer abstractTerminalConsumer;
+	private XtextGrammarTestLanguageAssignmentConsumer assignmentConsumer;
 
 	public XtextGrammarTestLanguageAbstractTokenConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
@@ -102,16 +102,16 @@ public final class XtextGrammarTestLanguageAbstractTokenConsumer extends NonTerm
 		return "AbstractElement";
 	}
 	
-	public void setAssignmentConsumer(XtextGrammarTestLanguageAssignmentConsumer assignmentConsumer) {
-		this.assignmentConsumer = assignmentConsumer;
+	public void setActionConsumer(XtextGrammarTestLanguageActionConsumer actionConsumer) {
+		this.actionConsumer = actionConsumer;
 	}
 	
 	public void setAbstractTerminalConsumer(XtextGrammarTestLanguageAbstractTerminalConsumer abstractTerminalConsumer) {
 		this.abstractTerminalConsumer = abstractTerminalConsumer;
 	}
 	
-	public void setActionConsumer(XtextGrammarTestLanguageActionConsumer actionConsumer) {
-		this.actionConsumer = actionConsumer;
+	public void setAssignmentConsumer(XtextGrammarTestLanguageAssignmentConsumer assignmentConsumer) {
+		this.assignmentConsumer = assignmentConsumer;
 	}
 	
 }

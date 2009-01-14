@@ -14,62 +14,25 @@ import org.eclipse.xtext.example.services.DomainmodelGrammarAccess;
 
 
 public class DomainmodelParseTreeConstructor extends AbstractParseTreeConstructor {
-
-	public IAbstractToken serialize(EObject object) {
-		if(object == null) throw new IllegalArgumentException("The to-be-serialialized model is null");
-		Solution t = internalSerialize(object);
-		if(t == null) throw new XtextSerializationException(getDescr(object), "No rule found for serialization");
-		return t.getPredecessor();
-	}
-	
+		
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-
-		if(inst.isInstanceOf("File") && (s = new File_Group(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("Import") && (s = new Import_Group(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("NamedElement") && (s = new NamedElement_Alternatives(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("Package") && (s = new Package_Group(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("Type") && (s = new Type_Alternatives(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("DataType") && (s = new DataType_Group(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("Entity") && (s = new Entity_Group(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("Feature") && (s = new Feature_Alternatives(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("StructuralFeature") && (s = new StructuralFeature_Alternatives(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("Attribute") && (s = new Attribute_Group(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("Reference") && (s = new Reference_Group(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("Operation") && (s = new Operation_Group(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("Parameter") && (s = new Parameter_Group(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("TypedElement") && (s = new TypedElement_Alternatives(inst, null).firstSolution()) != null) return s;
-
-
-		if(inst.isInstanceOf("TypeRef") && (s = new TypeRef_Assignment_referenced(inst, null).firstSolution()) != null) return s;
-
+		if(inst.isInstanceOf("File") && (s = new File_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("Import") && (s = new Import_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("NamedElement") && (s = new NamedElement_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("Package") && (s = new Package_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("Type") && (s = new Type_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("DataType") && (s = new DataType_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("Entity") && (s = new Entity_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("Feature") && (s = new Feature_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("StructuralFeature") && (s = new StructuralFeature_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("Attribute") && (s = new Attribute_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("Reference") && (s = new Reference_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("Operation") && (s = new Operation_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("Parameter") && (s = new Parameter_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("TypedElement") && (s = new TypedElement_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("TypeRef") && (s = new TypeRef_Assignment_referenced(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
@@ -97,7 +60,7 @@ protected class File_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new File_0_Assignment_imports(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -128,6 +91,7 @@ protected class File_0_Assignment_imports extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Import")) {
 				Solution s = new Import_Group(param, this).firstSolution();
+				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
 					type = AssignmentType.PRC; 
 					return new Solution(obj,s.getPredecessor());
@@ -158,6 +122,7 @@ protected class File_1_Assignment_namedElements extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("NamedElement")) {
 				Solution s = new NamedElement_Alternatives(param, this).firstSolution();
+				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
 					type = AssignmentType.PRC; 
 					return new Solution(obj,s.getPredecessor());
@@ -196,7 +161,7 @@ protected class Import_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Import_0_Keyword_import(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -317,12 +282,12 @@ protected class NamedElement_1_RuleCall_Type extends RuleCallToken {
 
 /************ begin Rule Package ****************
  *
- * Package : 'package' name = ID '{' ( namedElements += NamedElement ) * '}' ;
+ * Package : 'package' name = QualifiedName '{' ( namedElements += NamedElement ) * '}' ;
  *
  **/
 
 
-// 'package' name = ID '{' ( namedElements += NamedElement ) * '}'
+// 'package' name = QualifiedName '{' ( namedElements += NamedElement ) * '}'
 protected class Package_Group extends GroupToken {
 	
 	public Package_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -338,7 +303,7 @@ protected class Package_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Package_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -350,7 +315,7 @@ protected class Package_Group extends GroupToken {
 	}
 }
 
-// 'package' name = ID '{' ( namedElements += NamedElement ) *
+// 'package' name = QualifiedName '{' ( namedElements += NamedElement ) *
 protected class Package_0_Group extends GroupToken {
 	
 	public Package_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -366,7 +331,7 @@ protected class Package_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Package_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -378,7 +343,7 @@ protected class Package_0_Group extends GroupToken {
 	}
 }
 
-// 'package' name = ID '{'
+// 'package' name = QualifiedName '{'
 protected class Package_0_0_Group extends GroupToken {
 	
 	public Package_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -394,7 +359,7 @@ protected class Package_0_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Package_0_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -406,7 +371,7 @@ protected class Package_0_0_Group extends GroupToken {
 	}
 }
 
-// 'package' name = ID
+// 'package' name = QualifiedName
 protected class Package_0_0_0_Group extends GroupToken {
 	
 	public Package_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -422,7 +387,7 @@ protected class Package_0_0_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Package_0_0_0_0_Keyword_package(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -446,7 +411,7 @@ protected class Package_0_0_0_0_Keyword_package extends KeywordToken  {
 	}	
 }
 
-// name = ID
+// name = QualifiedName
 protected class Package_0_0_0_1_Assignment_name extends AssignmentToken  {
 	
 	public Package_0_0_0_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -460,11 +425,13 @@ protected class Package_0_0_0_1_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
-			type = AssignmentType.LRC;
-			element = DomainmodelGrammarAccess.INSTANCE.prPackage().ele00010LexerRuleCallID();
+
+		if(true) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
+			type = AssignmentType.PRC;
+			element = DomainmodelGrammarAccess.INSTANCE.prPackage().ele00010ParserRuleCallQualifiedName();
 			return new Solution(obj);
 		}
+
 		return null;
 	}
 }
@@ -502,6 +469,7 @@ protected class Package_0_1_Assignment_namedElements extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("NamedElement")) {
 				Solution s = new NamedElement_Alternatives(param, this).firstSolution();
+				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
 					type = AssignmentType.PRC; 
 					return new Solution(obj,s.getPredecessor());
@@ -621,7 +589,7 @@ protected class DataType_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new DataType_0_Keyword_datatype(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -695,7 +663,7 @@ protected class Entity_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Entity_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -723,7 +691,7 @@ protected class Entity_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Entity_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -751,7 +719,7 @@ protected class Entity_0_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Entity_0_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -779,7 +747,7 @@ protected class Entity_0_0_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Entity_0_0_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -807,7 +775,7 @@ protected class Entity_0_0_0_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Entity_0_0_0_0_0_Keyword_entity(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -871,7 +839,7 @@ protected class Entity_0_0_0_1_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Entity_0_0_0_1_0_Keyword_extends(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -913,7 +881,7 @@ protected class Entity_0_0_0_1_1_Assignment_superType extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Entity")) {
 				type = AssignmentType.CR;
-				element = DomainmodelGrammarAccess.INSTANCE.prEntity().ele000110CrossReferenceEntity(); 
+				element = DomainmodelGrammarAccess.INSTANCE.prEntity().ele000110CrossReferenceEStringEntity(); 
 				return new Solution(obj);
 			}
 		}
@@ -955,6 +923,7 @@ protected class Entity_0_1_Assignment_features extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Feature")) {
 				Solution s = new Feature_Alternatives(param, this).firstSolution();
+				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
 					type = AssignmentType.PRC; 
 					return new Solution(obj,s.getPredecessor());
@@ -1142,7 +1111,7 @@ protected class Attribute_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Attribute_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -1170,7 +1139,7 @@ protected class Attribute_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Attribute_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -1198,7 +1167,7 @@ protected class Attribute_0_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Attribute_0_0_0_Keyword_attr(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -1278,6 +1247,7 @@ protected class Attribute_1_Assignment_type extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("TypeRef")) {
 				Solution s = new TypeRef_Assignment_referenced(param, this).firstSolution();
+				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
 					type = AssignmentType.PRC; 
 					return new Solution(obj,s.getPredecessor());
@@ -1316,7 +1286,7 @@ protected class Reference_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Reference_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -1344,7 +1314,7 @@ protected class Reference_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Reference_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -1372,7 +1342,7 @@ protected class Reference_0_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Reference_0_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -1400,7 +1370,7 @@ protected class Reference_0_0_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Reference_0_0_0_0_Keyword_ref(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -1480,6 +1450,7 @@ protected class Reference_0_1_Assignment_type extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("TypeRef")) {
 				Solution s = new TypeRef_Assignment_referenced(param, this).firstSolution();
+				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
 					type = AssignmentType.PRC; 
 					return new Solution(obj,s.getPredecessor());
@@ -1508,7 +1479,7 @@ protected class Reference_1_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Reference_1_0_Keyword_opposite(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -1550,7 +1521,7 @@ protected class Reference_1_1_Assignment_opposite extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Reference")) {
 				type = AssignmentType.CR;
-				element = DomainmodelGrammarAccess.INSTANCE.prReference().ele110CrossReferenceReference(); 
+				element = DomainmodelGrammarAccess.INSTANCE.prReference().ele110CrossReferenceEStringReference(); 
 				return new Solution(obj);
 			}
 		}
@@ -1586,7 +1557,7 @@ protected class Operation_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Operation_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -1614,7 +1585,7 @@ protected class Operation_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Operation_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -1642,7 +1613,7 @@ protected class Operation_0_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Operation_0_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -1670,7 +1641,7 @@ protected class Operation_0_0_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Operation_0_0_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -1698,7 +1669,7 @@ protected class Operation_0_0_0_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Operation_0_0_0_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -1726,7 +1697,7 @@ protected class Operation_0_0_0_0_0_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Operation_0_0_0_0_0_0_Keyword_op(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -1803,7 +1774,7 @@ protected class Operation_0_0_0_1_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Operation_0_0_0_1_0_Assignment_params(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -1834,6 +1805,7 @@ protected class Operation_0_0_0_1_0_Assignment_params extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Parameter")) {
 				Solution s = new Parameter_Group(param, this).firstSolution();
+				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
 					type = AssignmentType.PRC; 
 					return new Solution(obj,s.getPredecessor());
@@ -1861,7 +1833,7 @@ protected class Operation_0_0_0_1_1_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Operation_0_0_0_1_1_0_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -1904,6 +1876,7 @@ protected class Operation_0_0_0_1_1_1_Assignment_params extends AssignmentToken 
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Parameter")) {
 				Solution s = new Parameter_Group(param, this).firstSolution();
+				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
 					type = AssignmentType.PRC; 
 					return new Solution(obj,s.getPredecessor());
@@ -1963,6 +1936,7 @@ protected class Operation_1_Assignment_type extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("TypeRef")) {
 				Solution s = new TypeRef_Assignment_referenced(param, this).firstSolution();
+				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
 					type = AssignmentType.PRC; 
 					return new Solution(obj,s.getPredecessor());
@@ -2001,7 +1975,7 @@ protected class Parameter_Group extends GroupToken {
 		while(s1 != null) {
 			Solution s2 = new Parameter_0_Assignment_name(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this);
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
 			} else {
 				last = s2.getPredecessor();
@@ -2055,6 +2029,7 @@ protected class Parameter_1_Assignment_type extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("TypeRef")) {
 				Solution s = new TypeRef_Assignment_referenced(param, this).firstSolution();
+				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
 					type = AssignmentType.PRC; 
 					return new Solution(obj,s.getPredecessor());
@@ -2163,7 +2138,7 @@ protected class TypeRef_Assignment_referenced extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Type")) {
 				type = AssignmentType.CR;
-				element = DomainmodelGrammarAccess.INSTANCE.prTypeRef().ele0CrossReferenceType(); 
+				element = DomainmodelGrammarAccess.INSTANCE.prTypeRef().ele0CrossReferenceEStringType(); 
 				return new Solution(obj);
 			}
 		}
@@ -2172,5 +2147,6 @@ protected class TypeRef_Assignment_referenced extends AssignmentToken  {
 }
 
 /************ end Rule TypeRef ****************/
+
 
 }

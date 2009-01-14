@@ -18,14 +18,14 @@ import org.eclipse.xtext.testlanguages.services.PartialParserTestLanguageGrammar
 
 import org.eclipse.xtext.testlanguages.parser.packrat.PartialParserTestLanguageDelimiters;
 
-import org.eclipse.xtext.testlanguages.parser.packrat.consumers.PartialParserTestLanguageSecondConcreteConsumer;
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.PartialParserTestLanguageFirstConcreteConsumer;
+import org.eclipse.xtext.testlanguages.parser.packrat.consumers.PartialParserTestLanguageSecondConcreteConsumer;
 
 @SuppressWarnings("unused")
 public final class PartialParserTestLanguageAbstractChildConsumer extends NonTerminalConsumer {
 
-	private PartialParserTestLanguageSecondConcreteConsumer secondConcreteConsumer;
 	private PartialParserTestLanguageFirstConcreteConsumer firstConcreteConsumer;
+	private PartialParserTestLanguageSecondConcreteConsumer secondConcreteConsumer;
 
 	public PartialParserTestLanguageAbstractChildConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
@@ -66,12 +66,12 @@ public final class PartialParserTestLanguageAbstractChildConsumer extends NonTer
 		return "AbstractChild";
 	}
 	
-	public void setSecondConcreteConsumer(PartialParserTestLanguageSecondConcreteConsumer secondConcreteConsumer) {
-		this.secondConcreteConsumer = secondConcreteConsumer;
-	}
-	
 	public void setFirstConcreteConsumer(PartialParserTestLanguageFirstConcreteConsumer firstConcreteConsumer) {
 		this.firstConcreteConsumer = firstConcreteConsumer;
+	}
+	
+	public void setSecondConcreteConsumer(PartialParserTestLanguageSecondConcreteConsumer secondConcreteConsumer) {
+		this.secondConcreteConsumer = secondConcreteConsumer;
 	}
 	
 }

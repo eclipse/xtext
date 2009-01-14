@@ -68,9 +68,9 @@ public class TransientValuesTestParserConfiguration extends AbstractParserConfig
 	}
 	
 	public void configureConsumers() {
-		getRootConsumer$().setTestRequiredConsumer(getTestRequiredConsumer());
-		getRootConsumer$().setTestListConsumer(getTestListConsumer());
 		getRootConsumer$().setTestOptionalConsumer(getTestOptionalConsumer());
+		getRootConsumer$().setTestListConsumer(getTestListConsumer());
+		getRootConsumer$().setTestRequiredConsumer(getTestRequiredConsumer());
 
 		getTestRequiredConsumer().setIntConsumer(getIntConsumer());
 

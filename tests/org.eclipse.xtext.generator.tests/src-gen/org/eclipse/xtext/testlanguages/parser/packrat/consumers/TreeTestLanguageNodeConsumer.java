@@ -18,15 +18,15 @@ import org.eclipse.xtext.testlanguages.services.TreeTestLanguageGrammarAccess.No
 
 import org.eclipse.xtext.testlanguages.parser.packrat.TreeTestLanguageDelimiters;
 
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGConsumer;
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
+import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGConsumer;
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.TreeTestLanguageNodeConsumer;
 
 @SuppressWarnings("unused")
 public final class TreeTestLanguageNodeConsumer extends NonTerminalConsumer {
 
-	private XtextBuiltinSTRINGConsumer stringConsumer;
 	private XtextBuiltinIDConsumer idConsumer;
+	private XtextBuiltinSTRINGConsumer stringConsumer;
 	private TreeTestLanguageNodeConsumer nodeConsumer;
 
 	public TreeTestLanguageNodeConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
@@ -124,12 +124,12 @@ public final class TreeTestLanguageNodeConsumer extends NonTerminalConsumer {
 		return "Node";
 	}
 	
-	public void setStringConsumer(XtextBuiltinSTRINGConsumer stringConsumer) {
-		this.stringConsumer = stringConsumer;
-	}
-	
 	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
 		this.idConsumer = idConsumer;
+	}
+	
+	public void setStringConsumer(XtextBuiltinSTRINGConsumer stringConsumer) {
+		this.stringConsumer = stringConsumer;
 	}
 	
 	public void setNodeConsumer(TreeTestLanguageNodeConsumer nodeConsumer) {

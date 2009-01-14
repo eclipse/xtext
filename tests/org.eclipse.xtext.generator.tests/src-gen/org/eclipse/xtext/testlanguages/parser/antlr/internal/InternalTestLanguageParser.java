@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTestLanguage.g 2009-01-13 18:38:33
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTestLanguage.g 2009-01-14 11:48:54
 
 package org.eclipse.xtext.testlanguages.parser.antlr.internal; 
 

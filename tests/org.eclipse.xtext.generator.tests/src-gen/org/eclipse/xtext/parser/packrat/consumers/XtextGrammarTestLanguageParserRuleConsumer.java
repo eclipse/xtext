@@ -18,16 +18,16 @@ import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess.ParserRu
 
 import org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters;
 
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageAlternativesConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageTypeRefConsumer;
+import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 
 @SuppressWarnings("unused")
 public final class XtextGrammarTestLanguageParserRuleConsumer extends NonTerminalConsumer {
 
-	private XtextBuiltinIDConsumer idConsumer;
 	private XtextGrammarTestLanguageAlternativesConsumer alternativesConsumer;
 	private XtextGrammarTestLanguageTypeRefConsumer typeRefConsumer;
+	private XtextBuiltinIDConsumer idConsumer;
 
 	public XtextGrammarTestLanguageParserRuleConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
@@ -125,16 +125,16 @@ public final class XtextGrammarTestLanguageParserRuleConsumer extends NonTermina
 		return "ParserRule";
 	}
 	
-	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
-		this.idConsumer = idConsumer;
-	}
-	
 	public void setAlternativesConsumer(XtextGrammarTestLanguageAlternativesConsumer alternativesConsumer) {
 		this.alternativesConsumer = alternativesConsumer;
 	}
 	
 	public void setTypeRefConsumer(XtextGrammarTestLanguageTypeRefConsumer typeRefConsumer) {
 		this.typeRefConsumer = typeRefConsumer;
+	}
+	
+	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
+		this.idConsumer = idConsumer;
 	}
 	
 }

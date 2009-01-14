@@ -63,8 +63,8 @@ public class ImportUriTestLanguageParserConfiguration extends AbstractParserConf
 	}
 	
 	public void configureConsumers() {
-		getMainConsumer().setTypeConsumer(getTypeConsumer());
 		getMainConsumer().setImportConsumer(getImportConsumer());
+		getMainConsumer().setTypeConsumer(getTypeConsumer());
 
 		getImportConsumer().setStringConsumer(getStringConsumer());
 

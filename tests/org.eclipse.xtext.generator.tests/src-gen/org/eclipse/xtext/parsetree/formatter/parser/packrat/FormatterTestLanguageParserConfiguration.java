@@ -68,15 +68,15 @@ public class FormatterTestLanguageParserConfiguration extends AbstractParserConf
 	}
 	
 	public void configureConsumers() {
-		getRootConsumer$().setTestIndentationConsumer(getTestIndentationConsumer());
 		getRootConsumer$().setTestLinewrapConsumer(getTestLinewrapConsumer());
+		getRootConsumer$().setTestIndentationConsumer(getTestIndentationConsumer());
 
 		getLineConsumer().setIdConsumer(getIdConsumer());
 
 		getTestLinewrapConsumer().setLineConsumer(getLineConsumer());
 
-		getTestIndentationConsumer().setTestIndentationConsumer(getTestIndentationConsumer());
 		getTestIndentationConsumer().setLineConsumer(getLineConsumer());
+		getTestIndentationConsumer().setTestIndentationConsumer(getTestIndentationConsumer());
 
 		getIdConsumer().initFields(this);
 		getIntConsumer().initFields(this);

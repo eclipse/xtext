@@ -81,8 +81,8 @@ public class ContentAssistTestLanguageParserConfiguration extends AbstractParser
 		getFirstAbstractRuleChildConsumer().setIdConsumer(getIdConsumer());
 		getFirstAbstractRuleChildConsumer().setAbstractRuleConsumer(getAbstractRuleConsumer());
 
-		getSecondAbstractRuleChildConsumer().setAbstractRuleCallConsumer(getAbstractRuleCallConsumer());
 		getSecondAbstractRuleChildConsumer().setIdConsumer(getIdConsumer());
+		getSecondAbstractRuleChildConsumer().setAbstractRuleCallConsumer(getAbstractRuleCallConsumer());
 
 		getAbstractRuleCallConsumer().setIdConsumer(getIdConsumer());
 

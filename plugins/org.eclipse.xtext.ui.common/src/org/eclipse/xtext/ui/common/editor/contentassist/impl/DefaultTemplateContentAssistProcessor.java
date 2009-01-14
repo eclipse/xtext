@@ -18,9 +18,9 @@ import org.eclipse.jface.text.templates.TemplateContext;
 import org.eclipse.jface.text.templates.TemplateContextType;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.IMetamodelAccess;
+import org.eclipse.xtext.crossref.IScopeProvider;
 import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
-import org.eclipse.xtext.ui.common.editor.contentassist.ILinkingCandidatesService;
 import org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider;
 import org.eclipse.xtext.ui.common.editor.contentassist.ITemplateContentAssistProcessor;
 
@@ -35,7 +35,7 @@ public class DefaultTemplateContentAssistProcessor extends TemplateCompletionPro
 	private IProposalProvider proposalProvider;
 
 	@Inject 
-	private ILinkingCandidatesService linkingCandidatesService;
+	private IScopeProvider scopeProvider;
 	
 	@Inject 
 	private IMetamodelAccess metamodelAccess;
@@ -74,7 +74,7 @@ public class DefaultTemplateContentAssistProcessor extends TemplateCompletionPro
 			return new XtextTemplateContext(contextType, viewer.getDocument(), 
 					new Position(region.getOffset(), region.getLength()), 
 					this.contentAssistContext,
-					this.linkingCandidatesService,
+					this.scopeProvider,
 					this.metamodelAccess);
 		}
 		return null;

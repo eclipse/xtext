@@ -4,11 +4,11 @@ Generated with Xtext
 grammar InternalDomainmodel;
 
 options {
-	superClass=AbstractAntlrParser;
+	superClass=AbstractInternalAntlrParser;
 }
 
 @lexer::header {
-package org.eclipse.xtext.example.parser.internal;
+package org.eclipse.xtext.example.parser.antlr.internal;
 
 // Hack: Use our own Lexer superclass by means of import. 
 // Currently there is no other way to specify the superclass for the lexer.
@@ -16,7 +16,7 @@ import org.eclipse.xtext.parser.antlr.Lexer;
 }
 
 @parser::header {
-package org.eclipse.xtext.example.parser.internal; 
+package org.eclipse.xtext.example.parser.antlr.internal; 
 
 import java.io.InputStream;
 import org.eclipse.xtext.*;
@@ -25,10 +25,10 @@ import org.eclipse.xtext.parser.impl.*;
 import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
+import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
-import org.eclipse.xtext.parser.antlr.DatatypeRuleToken;
-import org.eclipse.xtext.parser.antlr.ValueConverterException;
+import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
+import org.eclipse.xtext.conversion.ValueConverterException;
 
 }
 
@@ -43,7 +43,7 @@ import org.eclipse.xtext.parser.antlr.ValueConverterException;
     @Override
     protected InputStream getTokenFile() {
     	ClassLoader classLoader = InternalDomainmodelParser.class.getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/example/parser/internal/InternalDomainmodel.tokens");
+    	return classLoader.getResourceAsStream("org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.tokens");
     }
     
     @Override
@@ -219,22 +219,23 @@ rulePackage returns [EObject current=null]
     }
 (	
 	
-	    lv_name=RULE_ID
-    { 
-    createLeafNode("classpath:/org/eclipse/xtext/example/Domainmodel.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
-    }
- 
+	    
+	    { 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/Domainmodel.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	    }
+	    lv_name=ruleQualifiedName 
 	    {
 	        if ($current==null) {
 	            $current = factory.create("Package");
-	            associateNodeWithAstElement(currentNode, $current);
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
 	        try {
-	        	factory.set($current, "name", lv_name, "ID", currentNode);
+	        	factory.set($current, "name", lv_name, "QualifiedName", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
+	        currentNode = currentNode.getParent();
 	    }
 	
 ))'{' 
@@ -883,7 +884,46 @@ ruleTypeRef returns [EObject current=null]
 
 
 
-RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')* ('.' ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*)*;
+// Entry rule entryRuleQualifiedName
+entryRuleQualifiedName returns [String current=null] :
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/Domainmodel.xmi#//@rules.15" /* xtext::ParserRule */, currentNode); } 
+	 iv_ruleQualifiedName=ruleQualifiedName 
+	 { $current=$iv_ruleQualifiedName.current.getText(); }  
+	 EOF 
+;
+
+// Rule QualifiedName
+ruleQualifiedName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
+    @init { setCurrentLookahead(); resetLookahead(); }
+    @after { resetLookahead(); }:
+(    this_ID=RULE_ID    {
+		$current.merge(this_ID);
+    }
+
+    { 
+    createLeafNode("classpath:/org/eclipse/xtext/example/Domainmodel.xmi#//@rules.15/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, null); 
+    }
+(
+	kw='.' 
+    {
+        $current.merge(kw);
+        createLeafNode("classpath:/org/eclipse/xtext/example/Domainmodel.xmi#//@rules.15/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+    }
+    this_ID=RULE_ID    {
+		$current.merge(this_ID);
+    }
+
+    { 
+    createLeafNode("classpath:/org/eclipse/xtext/example/Domainmodel.xmi#//@rules.15/@alternatives/@abstractTokens.1/@abstractTokens.1" /* xtext::RuleCall */, null); 
+    }
+)*)
+    ;
+
+
+
+
+
+RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_INT : ('0'..'9')+;
 

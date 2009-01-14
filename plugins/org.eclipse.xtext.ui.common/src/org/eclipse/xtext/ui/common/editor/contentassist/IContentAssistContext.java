@@ -10,7 +10,6 @@ package org.eclipse.xtext.ui.common.editor.contentassist;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 
 /**
  * Abstraction of a commonly used set of attributes related to the current content assist request.
@@ -43,11 +42,6 @@ public interface IContentAssistContext {
 	 */
 	EObject getModel();
 	
-	/**
-	 * @return the <code>XtextDocument</code> used to compute the proposals
-	 */
-	IXtextDocument getDocument();
-
 	/**
 	 * @return the position in the document described by this context.
 	 */

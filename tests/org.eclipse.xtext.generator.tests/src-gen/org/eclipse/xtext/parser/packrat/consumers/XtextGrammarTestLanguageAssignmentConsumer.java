@@ -18,14 +18,14 @@ import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess.Assignme
 
 import org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters;
 
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageAbstractTerminalConsumer;
+import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 
 @SuppressWarnings("unused")
 public final class XtextGrammarTestLanguageAssignmentConsumer extends NonTerminalConsumer {
 
-	private XtextBuiltinIDConsumer idConsumer;
 	private XtextGrammarTestLanguageAbstractTerminalConsumer abstractTerminalConsumer;
+	private XtextBuiltinIDConsumer idConsumer;
 
 	public XtextGrammarTestLanguageAssignmentConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
@@ -89,12 +89,12 @@ public final class XtextGrammarTestLanguageAssignmentConsumer extends NonTermina
 		return "Assignment";
 	}
 	
-	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
-		this.idConsumer = idConsumer;
-	}
-	
 	public void setAbstractTerminalConsumer(XtextGrammarTestLanguageAbstractTerminalConsumer abstractTerminalConsumer) {
 		this.abstractTerminalConsumer = abstractTerminalConsumer;
+	}
+	
+	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
+		this.idConsumer = idConsumer;
 	}
 	
 }

@@ -17,7 +17,6 @@ public class GenFowlerDslUiConfig extends AbstractServiceRegistrationFactory {
 			.with(org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider.class, org.eclipse.xtext.example.FowlerDslGenProposalProvider.class)
 			.with(org.eclipse.jface.text.contentassist.IContentAssistant.class, org.eclipse.jface.text.contentassist.ContentAssistant.class)
 			.with(org.eclipse.jface.text.contentassist.IContentAssistProcessor.class, org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultContentAssistProcessor.class)
-			.with(org.eclipse.xtext.ui.common.editor.contentassist.ILinkingCandidatesService.class, org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultLinkingCandidatesService.class)
 			.registrations();
 	}
 

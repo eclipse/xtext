@@ -63,8 +63,8 @@ public class LangATestLanguageParserConfiguration extends AbstractParserConfigur
 	}
 	
 	public void configureConsumers() {
-		getMainConsumer().setTypeConsumer(getTypeConsumer());
 		getMainConsumer().setImportConsumer(getImportConsumer());
+		getMainConsumer().setTypeConsumer(getTypeConsumer());
 
 		getImportConsumer().setStringConsumer(getStringConsumer());
 

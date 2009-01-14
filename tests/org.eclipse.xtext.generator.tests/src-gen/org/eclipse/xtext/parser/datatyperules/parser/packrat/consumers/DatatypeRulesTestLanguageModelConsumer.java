@@ -18,18 +18,18 @@ import org.eclipse.xtext.parser.datatyperules.services.DatatypeRulesTestLanguage
 
 import org.eclipse.xtext.parser.datatyperules.parser.packrat.DatatypeRulesTestLanguageDelimiters;
 
-import org.eclipse.xtext.parser.datatyperules.parser.packrat.consumers.DatatypeRulesTestLanguageVectorConsumer;
-import org.eclipse.xtext.parser.datatyperules.parser.packrat.consumers.DatatypeRulesTestLanguageFractionConsumer;
 import org.eclipse.xtext.parser.datatyperules.parser.packrat.consumers.DatatypeRulesTestLanguageDotsConsumer;
+import org.eclipse.xtext.parser.datatyperules.parser.packrat.consumers.DatatypeRulesTestLanguageFractionConsumer;
 import org.eclipse.xtext.parser.datatyperules.parser.packrat.consumers.DatatypeRulesTestLanguageNestedModelIdConsumer;
+import org.eclipse.xtext.parser.datatyperules.parser.packrat.consumers.DatatypeRulesTestLanguageVectorConsumer;
 
 @SuppressWarnings("unused")
 public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalConsumer {
 
-	private DatatypeRulesTestLanguageVectorConsumer vectorConsumer;
-	private DatatypeRulesTestLanguageFractionConsumer fractionConsumer;
 	private DatatypeRulesTestLanguageDotsConsumer dotsConsumer;
+	private DatatypeRulesTestLanguageFractionConsumer fractionConsumer;
 	private DatatypeRulesTestLanguageNestedModelIdConsumer nestedModelIdConsumer;
+	private DatatypeRulesTestLanguageVectorConsumer vectorConsumer;
 
 	public DatatypeRulesTestLanguageModelConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
@@ -173,20 +173,20 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 		return "Model";
 	}
 	
-	public void setVectorConsumer(DatatypeRulesTestLanguageVectorConsumer vectorConsumer) {
-		this.vectorConsumer = vectorConsumer;
+	public void setDotsConsumer(DatatypeRulesTestLanguageDotsConsumer dotsConsumer) {
+		this.dotsConsumer = dotsConsumer;
 	}
 	
 	public void setFractionConsumer(DatatypeRulesTestLanguageFractionConsumer fractionConsumer) {
 		this.fractionConsumer = fractionConsumer;
 	}
 	
-	public void setDotsConsumer(DatatypeRulesTestLanguageDotsConsumer dotsConsumer) {
-		this.dotsConsumer = dotsConsumer;
-	}
-	
 	public void setNestedModelIdConsumer(DatatypeRulesTestLanguageNestedModelIdConsumer nestedModelIdConsumer) {
 		this.nestedModelIdConsumer = nestedModelIdConsumer;
+	}
+	
+	public void setVectorConsumer(DatatypeRulesTestLanguageVectorConsumer vectorConsumer) {
+		this.vectorConsumer = vectorConsumer;
 	}
 	
 }

@@ -18,14 +18,14 @@ import org.eclipse.xtext.testlanguages.services.PartialParserTestLanguageGrammar
 
 import org.eclipse.xtext.testlanguages.parser.packrat.PartialParserTestLanguageDelimiters;
 
-import org.eclipse.xtext.testlanguages.parser.packrat.consumers.PartialParserTestLanguageAbstractChildrenConsumer;
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.PartialParserTestLanguageChildrenConsumer;
+import org.eclipse.xtext.testlanguages.parser.packrat.consumers.PartialParserTestLanguageAbstractChildrenConsumer;
 
 @SuppressWarnings("unused")
 public final class PartialParserTestLanguageContentConsumer extends NonTerminalConsumer {
 
-	private PartialParserTestLanguageAbstractChildrenConsumer abstractChildrenConsumer;
 	private PartialParserTestLanguageChildrenConsumer childrenConsumer;
+	private PartialParserTestLanguageAbstractChildrenConsumer abstractChildrenConsumer;
 
 	public PartialParserTestLanguageContentConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
@@ -66,12 +66,12 @@ public final class PartialParserTestLanguageContentConsumer extends NonTerminalC
 		return "Content";
 	}
 	
-	public void setAbstractChildrenConsumer(PartialParserTestLanguageAbstractChildrenConsumer abstractChildrenConsumer) {
-		this.abstractChildrenConsumer = abstractChildrenConsumer;
-	}
-	
 	public void setChildrenConsumer(PartialParserTestLanguageChildrenConsumer childrenConsumer) {
 		this.childrenConsumer = childrenConsumer;
+	}
+	
+	public void setAbstractChildrenConsumer(PartialParserTestLanguageAbstractChildrenConsumer abstractChildrenConsumer) {
+		this.abstractChildrenConsumer = abstractChildrenConsumer;
 	}
 	
 }

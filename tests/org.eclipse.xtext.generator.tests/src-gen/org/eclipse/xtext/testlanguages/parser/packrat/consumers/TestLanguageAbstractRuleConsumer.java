@@ -18,14 +18,14 @@ import org.eclipse.xtext.testlanguages.services.TestLanguageGrammarAccess.Abstra
 
 import org.eclipse.xtext.testlanguages.parser.packrat.TestLanguageDelimiters;
 
-import org.eclipse.xtext.testlanguages.parser.packrat.consumers.TestLanguageReducibleRuleConsumer;
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.TestLanguageChoiceRuleConsumer;
+import org.eclipse.xtext.testlanguages.parser.packrat.consumers.TestLanguageReducibleRuleConsumer;
 
 @SuppressWarnings("unused")
 public final class TestLanguageAbstractRuleConsumer extends NonTerminalConsumer {
 
-	private TestLanguageReducibleRuleConsumer reducibleRuleConsumer;
 	private TestLanguageChoiceRuleConsumer choiceRuleConsumer;
+	private TestLanguageReducibleRuleConsumer reducibleRuleConsumer;
 
 	public TestLanguageAbstractRuleConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
@@ -66,12 +66,12 @@ public final class TestLanguageAbstractRuleConsumer extends NonTerminalConsumer 
 		return "AbstractElement";
 	}
 	
-	public void setReducibleRuleConsumer(TestLanguageReducibleRuleConsumer reducibleRuleConsumer) {
-		this.reducibleRuleConsumer = reducibleRuleConsumer;
-	}
-	
 	public void setChoiceRuleConsumer(TestLanguageChoiceRuleConsumer choiceRuleConsumer) {
 		this.choiceRuleConsumer = choiceRuleConsumer;
+	}
+	
+	public void setReducibleRuleConsumer(TestLanguageReducibleRuleConsumer reducibleRuleConsumer) {
+		this.reducibleRuleConsumer = reducibleRuleConsumer;
 	}
 	
 }

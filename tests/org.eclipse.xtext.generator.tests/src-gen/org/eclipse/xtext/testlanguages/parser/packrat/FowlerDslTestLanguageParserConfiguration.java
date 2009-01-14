@@ -73,16 +73,16 @@ public class FowlerDslTestLanguageParserConfiguration extends AbstractParserConf
 	}
 	
 	public void configureConsumers() {
+		getStatemachineConsumer().setEventConsumer(getEventConsumer());
 		getStatemachineConsumer().setStateConsumer(getStateConsumer());
 		getStatemachineConsumer().setCommandConsumer(getCommandConsumer());
-		getStatemachineConsumer().setEventConsumer(getEventConsumer());
 
 		getEventConsumer().setIdConsumer(getIdConsumer());
 
 		getCommandConsumer().setIdConsumer(getIdConsumer());
 
-		getStateConsumer().setTransitionConsumer(getTransitionConsumer());
 		getStateConsumer().setIdConsumer(getIdConsumer());
+		getStateConsumer().setTransitionConsumer(getTransitionConsumer());
 
 		getTransitionConsumer().setIdConsumer(getIdConsumer());
 

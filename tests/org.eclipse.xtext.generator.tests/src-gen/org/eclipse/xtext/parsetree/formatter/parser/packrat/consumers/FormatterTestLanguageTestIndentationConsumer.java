@@ -18,14 +18,14 @@ import org.eclipse.xtext.parsetree.formatter.services.FormatterTestLanguageGramm
 
 import org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters;
 
-import org.eclipse.xtext.parsetree.formatter.parser.packrat.consumers.FormatterTestLanguageTestIndentationConsumer;
 import org.eclipse.xtext.parsetree.formatter.parser.packrat.consumers.FormatterTestLanguageLineConsumer;
+import org.eclipse.xtext.parsetree.formatter.parser.packrat.consumers.FormatterTestLanguageTestIndentationConsumer;
 
 @SuppressWarnings("unused")
 public final class FormatterTestLanguageTestIndentationConsumer extends NonTerminalConsumer {
 
-	private FormatterTestLanguageTestIndentationConsumer testIndentationConsumer;
 	private FormatterTestLanguageLineConsumer lineConsumer;
+	private FormatterTestLanguageTestIndentationConsumer testIndentationConsumer;
 
 	public FormatterTestLanguageTestIndentationConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
@@ -108,12 +108,12 @@ public final class FormatterTestLanguageTestIndentationConsumer extends NonTermi
 		return "TestIndentation";
 	}
 	
-	public void setTestIndentationConsumer(FormatterTestLanguageTestIndentationConsumer testIndentationConsumer) {
-		this.testIndentationConsumer = testIndentationConsumer;
-	}
-	
 	public void setLineConsumer(FormatterTestLanguageLineConsumer lineConsumer) {
 		this.lineConsumer = lineConsumer;
+	}
+	
+	public void setTestIndentationConsumer(FormatterTestLanguageTestIndentationConsumer testIndentationConsumer) {
+		this.testIndentationConsumer = testIndentationConsumer;
 	}
 	
 }

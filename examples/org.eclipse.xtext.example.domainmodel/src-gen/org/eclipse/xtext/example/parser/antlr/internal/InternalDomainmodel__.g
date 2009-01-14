@@ -1,6 +1,6 @@
 lexer grammar InternalDomainmodel;
 @header {
-package org.eclipse.xtext.example.parser.internal;
+package org.eclipse.xtext.example.parser.antlr.internal;
 
 // Hack: Use our own Lexer superclass by means of import. 
 // Currently there is no other way to specify the superclass for the lexer.
@@ -22,26 +22,27 @@ T22 : 'op' ;
 T23 : '(' ;
 T24 : ',' ;
 T25 : ')' ;
+T26 : '.' ;
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/example/parser/internal/InternalDomainmodel.g" 886
-RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')* ('.' ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*)*;
+// $ANTLR src "./src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g" 926
+RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/example/parser/internal/InternalDomainmodel.g" 888
+// $ANTLR src "./src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g" 928
 RULE_INT : ('0'..'9')+;
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/example/parser/internal/InternalDomainmodel.g" 890
+// $ANTLR src "./src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g" 930
 RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' |                '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/example/parser/internal/InternalDomainmodel.g" 892
+// $ANTLR src "./src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g" 932
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/example/parser/internal/InternalDomainmodel.g" 894
+// $ANTLR src "./src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g" 934
 RULE_SL_COMMENT : '//' ~('\n'|'\r')* ('\r'? '\n')? {$channel=HIDDEN;};
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/example/parser/internal/InternalDomainmodel.g" 896
+// $ANTLR src "./src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g" 936
 RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/example/parser/internal/InternalDomainmodel.g" 898
+// $ANTLR src "./src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g" 938
 RULE_ANY_OTHER : .;
 
 

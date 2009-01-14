@@ -1,5 +1,6 @@
 language org.eclipse.xtext.example.Domainmodel
 generate domainmodel "http://www.example.xtext/Domainmodel"
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 File :
   (imports+=Import)*
@@ -12,7 +13,7 @@ NamedElement :
 	Package | Type;
 	
 Package :
-  'package' name=ID '{'
+  'package' name=QualifiedName '{'
     (namedElements+=NamedElement)*
   '}';
 	
@@ -51,4 +52,4 @@ TypedElement :
 TypeRef :
 	referenced=[Type];
 	
-lexer ID : "('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')* ('.' ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*)*";
+QualifiedName returns ecore::EString : ID ('.' ID)*;

@@ -10,8 +10,6 @@ import org.eclipse.xtext.RuleCall;
 
 /**
  * 
- * This is just a marker interface.
- * 
  * In addition to the declared methods, the framework tries to call grammar dependent methods for assignments using reflection.
  * The signature of such methods invoked reflectively follows the following pattern:
  * 

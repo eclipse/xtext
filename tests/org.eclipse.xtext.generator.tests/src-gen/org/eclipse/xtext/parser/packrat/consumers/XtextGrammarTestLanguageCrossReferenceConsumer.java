@@ -18,14 +18,14 @@ import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess.CrossRef
 
 import org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters;
 
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageTypeRefConsumer;
+import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 
 @SuppressWarnings("unused")
 public final class XtextGrammarTestLanguageCrossReferenceConsumer extends NonTerminalConsumer {
 
-	private XtextBuiltinIDConsumer idConsumer;
 	private XtextGrammarTestLanguageTypeRefConsumer typeRefConsumer;
+	private XtextBuiltinIDConsumer idConsumer;
 
 	public XtextGrammarTestLanguageCrossReferenceConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
@@ -113,12 +113,12 @@ public final class XtextGrammarTestLanguageCrossReferenceConsumer extends NonTer
 		return "CrossReference";
 	}
 	
-	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
-		this.idConsumer = idConsumer;
-	}
-	
 	public void setTypeRefConsumer(XtextGrammarTestLanguageTypeRefConsumer typeRefConsumer) {
 		this.typeRefConsumer = typeRefConsumer;
+	}
+	
+	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
+		this.idConsumer = idConsumer;
 	}
 	
 }

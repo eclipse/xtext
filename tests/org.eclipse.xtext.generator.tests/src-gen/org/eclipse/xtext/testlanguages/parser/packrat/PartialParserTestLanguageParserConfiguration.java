@@ -104,8 +104,8 @@ public class PartialParserTestLanguageParserConfiguration extends AbstractParser
 
 		getNestedConsumer().setContainerConsumer(getContainerConsumer());
 
-		getContentConsumer().setAbstractChildrenConsumer(getAbstractChildrenConsumer());
 		getContentConsumer().setChildrenConsumer(getChildrenConsumer());
+		getContentConsumer().setAbstractChildrenConsumer(getAbstractChildrenConsumer());
 
 		getChildrenConsumer().setChildConsumer(getChildConsumer());
 
@@ -113,14 +113,14 @@ public class PartialParserTestLanguageParserConfiguration extends AbstractParser
 
 		getAbstractChildrenConsumer().setAbstractChildConsumer(getAbstractChildConsumer());
 
-		getAbstractChildConsumer().setSecondConcreteConsumer(getSecondConcreteConsumer());
 		getAbstractChildConsumer().setFirstConcreteConsumer(getFirstConcreteConsumer());
+		getAbstractChildConsumer().setSecondConcreteConsumer(getSecondConcreteConsumer());
 
-		getFirstConcreteConsumer().setNamedConsumer(getNamedConsumer());
 		getFirstConcreteConsumer().setIdConsumer(getIdConsumer());
+		getFirstConcreteConsumer().setNamedConsumer(getNamedConsumer());
 
-		getSecondConcreteConsumer().setNamedConsumer(getNamedConsumer());
 		getSecondConcreteConsumer().setIdConsumer(getIdConsumer());
+		getSecondConcreteConsumer().setNamedConsumer(getNamedConsumer());
 
 		getNamedConsumer().setIdConsumer(getIdConsumer());
 
