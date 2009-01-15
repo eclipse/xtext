@@ -46,14 +46,16 @@ public final class OutlineSelectionChangedListener extends AbstractSelectionChan
 					public Object exec(XtextResource resource) throws Exception {
 						EObject astNode = resource.getResourceSet().getEObject(uri, true);
 						NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(astNode);
-						CompositeNode parserNode = nodeAdapter.getParserNode();
-
-						AbstractNode selectionNode = findSelectionNode(parserNode);
-						int offset = selectionNode.getTotalOffset();
-						int length = selectionNode.getTotalLength();
-
-						getSourceViewer().revealRange(offset, length);
-						getSourceViewer().setSelectedRange(offset, length);
+						if (nodeAdapter != null) {
+							CompositeNode parserNode = nodeAdapter.getParserNode();
+	
+							AbstractNode selectionNode = findSelectionNode(parserNode);
+							int offset = selectionNode.getOffset();
+							int length = selectionNode.getLength();
+	
+							getSourceViewer().revealRange(offset, length);
+							getSourceViewer().setSelectedRange(offset, length);
+						}
 
 						return null;
 					}
