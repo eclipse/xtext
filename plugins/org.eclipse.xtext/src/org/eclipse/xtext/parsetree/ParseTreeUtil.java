@@ -457,29 +457,27 @@ public final class ParseTreeUtil {
 	private static final void doDumpNode(AbstractNode abstractNode, String indentString) {
 		if (logger.isDebugEnabled()) {
 			if (abstractNode instanceof CompositeNode) {
-	
 				// CompositeNode compositeNode = (CompositeNode) abstractNode;
-	
-				logger.debug(indentString + "line '" + abstractNode.getTotalLine() + "' offset '" + abstractNode.getTotalOffset()
+				logger.debug(indentString + "line '" + abstractNode.getTotalLine() + "' offset '"
+						+ abstractNode.getTotalOffset()
 						+ "'  length '" + abstractNode.getTotalLength() + "' grammar-hierarchy  ("
-						+ dumpParentHierarchy(abstractNode) + ")");
-	
+						+ dumpParentHierarchy(abstractNode) + ")"
+						+ " {CompositeNode}");
 			}
 			else if (abstractNode instanceof LeafNode) {
-	
 				LeafNode leafNode = (LeafNode) abstractNode;
 				// ommit hidden channel
 				if (!leafNode.isHidden()) {
-	
-					logger.debug(indentString + "'" + "line '" + leafNode.getTotalLine() + "' offset '" + leafNode.getTotalOffset()
-							+ " length '" + leafNode.getTotalLength() + "' "
-							+ (leafNode.getFeature() != null ? leafNode.getFeature() + " = " : "") + " text '"
-							+ leafNode.getText() + "' grammar-hierarchy (" + dumpParentHierarchy(leafNode) + ")");
-	
+					logger.debug(indentString + "line '" + leafNode.getTotalLine() + "' offset '"
+							+ leafNode.getTotalOffset()
+							+ "' length '" + leafNode.getTotalLength() + "' "
+							+ (leafNode.getFeature() != null ? leafNode.getFeature() + " = " : "")
+							+ "text '"	+ leafNode.getText()
+							+ "' grammar-hierarchy (" + dumpParentHierarchy(leafNode) + ")"
+							+ " {LeafNode}");
 				}
-	
 			}
-	
+
 			for (AbstractNode childNode : abstractNode.getLeafNodes()) {
 				doDumpNode(childNode, indentString + indentString);
 			}
