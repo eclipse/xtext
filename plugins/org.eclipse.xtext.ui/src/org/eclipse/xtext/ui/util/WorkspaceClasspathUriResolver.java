@@ -23,7 +23,7 @@ public class WorkspaceClasspathUriResolver extends JdtClasspathUriResolver {
         }
         IResource resource = (IResource) context;
         try {
-            if (ClasspathUriUtil.isClassapthUri(classpathUri)) {
+            if (ClasspathUriUtil.isClasspathUri(classpathUri)) {
                 IProject project = resource.getProject();
                 IJavaProject javaProject = JavaCore.create(project);
                 return findResourceInWorkspace(javaProject, classpathUri);
