@@ -12,9 +12,26 @@ import org.eclipse.jface.text.IDocumentListener;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * 
  */
 public interface IXtextDocumentContentObserver extends IDocumentListener {
 
-	void performNecessaryUpdates(UnitOfWork.Processor processor);
+	/**
+	 * 
+	 *
+	 */
+	public interface Processor {
+		<T> T process(UnitOfWork<T> transaction);
+	}
+
+	/**
+	 * is called before some other code requests access to an IXtextDocument's state via
+	 * {@link IXtextDocument#readOnly(UnitOfWork)} or {@link IXtextDocument#modify(UnitOfWork)}
+	 * 
+	 * Implementers get the chance to do any work using the passed {@link Processor}
+	 * 
+	 * @param processor
+	 */
+	void performNecessaryUpdates(Processor processor);
 	
 }

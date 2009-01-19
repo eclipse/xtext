@@ -17,7 +17,6 @@ import org.eclipse.jface.text.hyperlink.IHyperlink;
 import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.parser.IParseResult;
-import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.ParseTreeUtil;
 import org.eclipse.xtext.resource.XtextResource;
@@ -42,42 +41,39 @@ public class XtextHyperlinkDetector implements IHyperlinkDetector {
 	 * (non-Javadoc)
 	 * @see org.eclipse.jface.text.hyperlink.IHyperlinkDetector#detectHyperlinks(org.eclipse.jface.text.ITextViewer, org.eclipse.jface.text.IRegion, boolean)
 	 */
-	public IHyperlink[] detectHyperlinks(ITextViewer textViewer, IRegion region, boolean canShowMultipleHyperlinks) {
+	public IHyperlink[] detectHyperlinks(ITextViewer textViewer, final IRegion region, boolean canShowMultipleHyperlinks) {
 
-		// TODO: should all of this be part of the read transaction?
-		CompositeNode rootNode = ((IXtextDocument) textViewer.getDocument()).readOnly(new UnitOfWork<CompositeNode>() {
-			public CompositeNode exec(XtextResource resource) throws Exception {
+		return ((IXtextDocument)textViewer.getDocument()).readOnly(new UnitOfWork<IHyperlink[]>() {
+			public IHyperlink[] exec(XtextResource resource) throws Exception {
 				IParseResult parseResult = resource.getParseResult();
 				Assert.isNotNull(parseResult);
-				return parseResult.getRootNode();
+				final LeafNode currentNode = 
+					(LeafNode) ParseTreeUtil.getCurrentOrFollowingNodeByOffset(parseResult.getRootNode(), region.getOffset());
+
+				if (currentNode.getGrammarElement() instanceof CrossReference) {
+					 return new IHyperlink[] { new IHyperlink() {
+
+						public IRegion getHyperlinkRegion() {
+							return new Region(currentNode.getTotalOffset(), currentNode.getTotalLength());
+						}
+
+						public String getHyperlinkText() {
+							return currentNode.getText();
+						}
+
+						public String getTypeLabel() {
+							return null;
+						}
+
+						public void open() {
+							new OpenDeclarationAction(currentNode).run();
+						}
+					} };
+				}
+
+				return null;
 			}
 		});
-		
-		final LeafNode currentNode = 
-			(LeafNode) ParseTreeUtil.getCurrentOrFollowingNodeByOffset(rootNode, region.getOffset());
-
-		if (currentNode.getGrammarElement() instanceof CrossReference) {
-			 return new IHyperlink[] { new IHyperlink() {
-
-				public IRegion getHyperlinkRegion() {
-					return new Region(currentNode.getTotalOffset(), currentNode.getTotalLength());
-				}
-
-				public String getHyperlinkText() {
-					return currentNode.getText();
-				}
-
-				public String getTypeLabel() {
-					return null;
-				}
-
-				public void open() {
-					new OpenDeclarationAction(currentNode).run();
-				}
-			} };
-		}
-
-		return null;
 	}
 
 }
