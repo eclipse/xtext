@@ -43,8 +43,7 @@ public class Bug250313ParserConfiguration extends AbstractParserConfiguration {
 	public void createNonTerminalConsumers() {
 		getXtextBuiltinConfiguration().createNonTerminalConsumers();
 		ref2Consumer = new Bug250313Ref2Consumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(),
-    		new ITerminalConsumer[]{ getWsConsumer(), getMlCommentConsumer(), getSlCommentConsumer() }
+    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
     	);
 	}
 	
@@ -56,24 +55,10 @@ public class Bug250313ParserConfiguration extends AbstractParserConfiguration {
 		getRef2Consumer().setIdConsumer(getIdConsumer());
 		getRef2Consumer().setStringConsumer(getStringConsumer());
 
-		getRef2Consumer().setKeyword$6$Delimiter(Bug250313Delimiters.keyword$8$Delimiter);
 		getRef2Consumer().setKeyword$2$Delimiter(Bug250313Delimiters.keyword$4$Delimiter);
-		getRef2Consumer().setRuleCall$7$Delimiter(Bug250313Delimiters.ruleCall$9$Delimiter);
 		getRef2Consumer().setRuleCall$8$Delimiter(Bug250313Delimiters.ruleCall$10$Delimiter);
-		// TODO remove workaround
-		getIdConsumer().initFields(this);
-		// TODO remove workaround
-		getIntConsumer().initFields(this);
-		// TODO remove workaround
-		getStringConsumer().initFields(this);
-		// TODO remove workaround
-		getMlCommentConsumer().initFields(this);
-		// TODO remove workaround
-		getSlCommentConsumer().initFields(this);
-		// TODO remove workaround
-		getWsConsumer().initFields(this);
-		// TODO remove workaround
-		getAnyOtherConsumer().initFields(this);
+		getRef2Consumer().setRuleCall$7$Delimiter(Bug250313Delimiters.ruleCall$9$Delimiter);
+		getRef2Consumer().setKeyword$6$Delimiter(Bug250313Delimiters.keyword$8$Delimiter);
 	}
 	
 	// TODO collect superGrammars transitive

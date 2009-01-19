@@ -15,7 +15,7 @@ public final class DatatypeRulesTestLanguageDelimiters {
 	}
 	
 	public static ICharacterClass keyword$15$Delimiter = ICharacterClass.Factory.nullClass();
-	
+
 	public static ISequenceMatcher ruleCall$31$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-	
+
 }

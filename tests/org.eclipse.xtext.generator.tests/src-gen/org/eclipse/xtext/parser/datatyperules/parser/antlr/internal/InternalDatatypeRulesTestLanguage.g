@@ -62,6 +62,7 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 
 
 
+
 // Entry rule entryRuleCompositeModel
 entryRuleCompositeModel returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); }
@@ -96,6 +97,8 @@ ruleCompositeModel returns [EObject current=null]
 	    }
 	
 )+;
+
+
 
 
 
@@ -219,6 +222,8 @@ ruleModel returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleModelId
 entryRuleModelId returns [String current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.2" /* xtext::ParserRule */, currentNode); } 
@@ -253,6 +258,8 @@ ruleModelId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()
     }
 )
     ;
+
+
 
 
 
@@ -305,6 +312,8 @@ ruleNestedModelId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleT
 
 
 
+
+
 // Entry rule entryRuleFraction
 entryRuleFraction returns [String current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.4" /* xtext::ParserRule */, currentNode); } 
@@ -339,6 +348,8 @@ ruleFraction returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken(
     }
 )?)
     ;
+
+
 
 
 
@@ -389,6 +400,8 @@ ruleVector returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 
 
 
+
+
 // Entry rule entryRuleDots
 entryRuleDots returns [String current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.6" /* xtext::ParserRule */, currentNode); } 
@@ -422,6 +435,22 @@ ruleDots returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
     }
 )
     ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

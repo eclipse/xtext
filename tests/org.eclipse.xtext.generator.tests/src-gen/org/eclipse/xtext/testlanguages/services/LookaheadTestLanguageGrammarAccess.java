@@ -250,7 +250,7 @@ public class LookaheadTestLanguageGrammarAccess extends BaseEPackageAccess imple
 	}
 	
 	public XtextBuiltinGrammarAccess getSuperGrammar() {
-		return XtextBuiltinGrammarAccess.INSTANCE;		
+		return XtextBuiltinGrammarAccess.INSTANCE;
 	}
 
 	

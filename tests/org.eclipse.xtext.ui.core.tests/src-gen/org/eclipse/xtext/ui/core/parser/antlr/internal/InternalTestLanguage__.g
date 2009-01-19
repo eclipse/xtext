@@ -9,25 +9,25 @@ import org.eclipse.xtext.parser.antlr.Lexer;
 
 T11 : 'stuff' ;
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/ui/core/parser/antlr/internal/InternalTestLanguage.g" 146
+// $ANTLR src "./src-gen/org/eclipse/xtext/ui/core/parser/antlr/internal/InternalTestLanguage.g" 155
 RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/ui/core/parser/antlr/internal/InternalTestLanguage.g" 148
+// $ANTLR src "./src-gen/org/eclipse/xtext/ui/core/parser/antlr/internal/InternalTestLanguage.g" 157
 RULE_INT : ('0'..'9')+;
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/ui/core/parser/antlr/internal/InternalTestLanguage.g" 150
+// $ANTLR src "./src-gen/org/eclipse/xtext/ui/core/parser/antlr/internal/InternalTestLanguage.g" 159
 RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' |                '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/ui/core/parser/antlr/internal/InternalTestLanguage.g" 152
+// $ANTLR src "./src-gen/org/eclipse/xtext/ui/core/parser/antlr/internal/InternalTestLanguage.g" 161
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/ui/core/parser/antlr/internal/InternalTestLanguage.g" 154
+// $ANTLR src "./src-gen/org/eclipse/xtext/ui/core/parser/antlr/internal/InternalTestLanguage.g" 163
 RULE_SL_COMMENT : '//' ~('\n'|'\r')* ('\r'? '\n')? {$channel=HIDDEN;};
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/ui/core/parser/antlr/internal/InternalTestLanguage.g" 156
+// $ANTLR src "./src-gen/org/eclipse/xtext/ui/core/parser/antlr/internal/InternalTestLanguage.g" 165
 RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/ui/core/parser/antlr/internal/InternalTestLanguage.g" 158
+// $ANTLR src "./src-gen/org/eclipse/xtext/ui/core/parser/antlr/internal/InternalTestLanguage.g" 167
 RULE_ANY_OTHER : .;
 
 

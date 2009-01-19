@@ -166,7 +166,7 @@ public class TransientValuesTestGrammarAccess extends BaseEPackageAccess impleme
 	}
 	
 	public XtextBuiltinGrammarAccess getSuperGrammar() {
-		return XtextBuiltinGrammarAccess.INSTANCE;		
+		return XtextBuiltinGrammarAccess.INSTANCE;
 	}
 
 	

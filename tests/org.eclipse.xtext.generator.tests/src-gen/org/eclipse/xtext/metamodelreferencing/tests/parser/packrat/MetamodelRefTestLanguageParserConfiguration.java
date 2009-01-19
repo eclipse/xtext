@@ -47,8 +47,7 @@ public class MetamodelRefTestLanguageParserConfiguration extends AbstractParserC
 	public void createNonTerminalConsumers() {
 		getXtextBuiltinConfiguration().createNonTerminalConsumers();
 		fooConsumer = new MetamodelRefTestLanguageFooConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(),
-    		new ITerminalConsumer[]{ getWsConsumer(), getMlCommentConsumer(), getSlCommentConsumer() }
+    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
     	);
 		nameRefConsumer = new MetamodelRefTestLanguageNameRefConsumer(
     		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
@@ -73,20 +72,6 @@ public class MetamodelRefTestLanguageParserConfiguration extends AbstractParserC
 		getFooConsumer().setRuleCall$3$Delimiter(MetamodelRefTestLanguageDelimiters.ruleCall$6$Delimiter);
 		getNameRefConsumer().setCrossReference$2$Delimiter(MetamodelRefTestLanguageDelimiters.ruleCall$6$Delimiter);
 		getMyRuleConsumer().setRuleCall$2$Delimiter(MetamodelRefTestLanguageDelimiters.ruleCall$6$Delimiter);
-		// TODO remove workaround
-		getIdConsumer().initFields(this);
-		// TODO remove workaround
-		getIntConsumer().initFields(this);
-		// TODO remove workaround
-		getStringConsumer().initFields(this);
-		// TODO remove workaround
-		getMlCommentConsumer().initFields(this);
-		// TODO remove workaround
-		getSlCommentConsumer().initFields(this);
-		// TODO remove workaround
-		getWsConsumer().initFields(this);
-		// TODO remove workaround
-		getAnyOtherConsumer().initFields(this);
 	}
 	
 	// TODO collect superGrammars transitive

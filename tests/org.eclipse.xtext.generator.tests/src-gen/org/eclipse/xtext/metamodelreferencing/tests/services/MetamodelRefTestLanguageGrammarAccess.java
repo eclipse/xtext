@@ -86,7 +86,7 @@ public class MetamodelRefTestLanguageGrammarAccess extends BaseEPackageAccess im
 	}
 	
 	public XtextBuiltinGrammarAccess getSuperGrammar() {
-		return XtextBuiltinGrammarAccess.INSTANCE;		
+		return XtextBuiltinGrammarAccess.INSTANCE;
 	}
 
 	

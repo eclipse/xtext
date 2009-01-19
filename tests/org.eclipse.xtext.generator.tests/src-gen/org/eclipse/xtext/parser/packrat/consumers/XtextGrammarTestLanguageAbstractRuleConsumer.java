@@ -20,12 +20,14 @@ import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess.Abstract
 
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageLexerRuleConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageParserRuleConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageTerminalRuleConsumer;
 
 @SuppressWarnings("unused")
 public final class XtextGrammarTestLanguageAbstractRuleConsumer extends NonTerminalConsumer {
 
 	private XtextGrammarTestLanguageLexerRuleConsumer lexerRuleConsumer;
 	private XtextGrammarTestLanguageParserRuleConsumer parserRuleConsumer;
+	private XtextGrammarTestLanguageTerminalRuleConsumer terminalRuleConsumer;
 
 	public XtextGrammarTestLanguageAbstractRuleConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
@@ -38,19 +40,25 @@ public final class XtextGrammarTestLanguageAbstractRuleConsumer extends NonTermi
 	}
 
 	protected boolean consumeAlternatives$1() throws Exception {
-		if (consumeRuleCall$2())
-			return true;
 		if (consumeRuleCall$3())
+			return true;
+		if (consumeRuleCall$4())
+			return true;
+		if (consumeRuleCall$5())
 			return true;
 		return false;
 	}
 
-	protected boolean consumeRuleCall$2() throws Exception {
-		return consumeNonTerminal(lexerRuleConsumer, null, false, false, getRule().ele0ParserRuleCallLexerRule());
+	protected boolean consumeRuleCall$3() throws Exception {
+		return consumeNonTerminal(lexerRuleConsumer, null, false, false, getRule().ele00ParserRuleCallLexerRule());
 	}
 
-	protected boolean consumeRuleCall$3() throws Exception {
-		return consumeNonTerminal(parserRuleConsumer, null, false, false, getRule().ele1ParserRuleCallParserRule());
+	protected boolean consumeRuleCall$4() throws Exception {
+		return consumeNonTerminal(parserRuleConsumer, null, false, false, getRule().ele01ParserRuleCallParserRule());
+	}
+
+	protected boolean consumeRuleCall$5() throws Exception {
+		return consumeNonTerminal(terminalRuleConsumer, null, false, false, getRule().ele1ParserRuleCallTerminalRule());
 	}
 
 	public AbstractRuleElements getRule() {
@@ -72,6 +80,10 @@ public final class XtextGrammarTestLanguageAbstractRuleConsumer extends NonTermi
 	
 	public void setParserRuleConsumer(XtextGrammarTestLanguageParserRuleConsumer parserRuleConsumer) {
 		this.parserRuleConsumer = parserRuleConsumer;
+	}
+	
+	public void setTerminalRuleConsumer(XtextGrammarTestLanguageTerminalRuleConsumer terminalRuleConsumer) {
+		this.terminalRuleConsumer = terminalRuleConsumer;
 	}
 	
 }

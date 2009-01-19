@@ -62,6 +62,7 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 
 
 
+
 // Entry rule entryRuleOp
 entryRuleOp returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); }
@@ -121,6 +122,8 @@ ruleOp returns [EObject current=null]
 	    }
 	
 ))*);
+
+
 
 
 
@@ -223,6 +226,8 @@ ruleTerm returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleAtom
 entryRuleAtom returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#//@rules.2" /* xtext::ParserRule */, currentNode); }
@@ -256,6 +261,8 @@ ruleAtom returns [EObject current=null]
 	    }
 	
 );
+
+
 
 
 
@@ -311,6 +318,8 @@ ruleParens returns [EObject current=null]
 	    }
 	
 )?);
+
+
 
 
 
@@ -398,6 +407,8 @@ ruleTwoNumbers returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleManyStrings
 entryRuleManyStrings returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#//@rules.5" /* xtext::ParserRule */, currentNode); }
@@ -455,6 +466,8 @@ ruleManyStrings returns [EObject current=null]
 	    }
 	
 ));
+
+
 
 
 
@@ -521,6 +534,8 @@ ruleType returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleRef2
 entryRuleRef2 returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#//@rules.7" /* xtext::ParserRule */, currentNode); }
@@ -568,6 +583,8 @@ ruleRef2 returns [EObject current=null]
 	    }
 	
 ));
+
+
 
 
 
@@ -639,6 +656,8 @@ ruleSpare returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleBoolean
 entryRuleBoolean returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#//@rules.9" /* xtext::ParserRule */, currentNode); }
@@ -700,6 +719,28 @@ ruleBoolean returns [EObject current=null]
 	    }
 	
 ));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

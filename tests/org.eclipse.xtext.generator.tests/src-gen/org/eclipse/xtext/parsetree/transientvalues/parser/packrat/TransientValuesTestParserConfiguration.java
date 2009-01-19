@@ -49,8 +49,7 @@ public class TransientValuesTestParserConfiguration extends AbstractParserConfig
 	public void createNonTerminalConsumers() {
 		getXtextBuiltinConfiguration().createNonTerminalConsumers();
 		rootConsumer = new TransientValuesTestRootConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(),
-    		new ITerminalConsumer[]{ getWsConsumer(), getMlCommentConsumer(), getSlCommentConsumer() }
+    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
     	);
 		testRequiredConsumer = new TransientValuesTestTestRequiredConsumer(
     		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
@@ -79,29 +78,15 @@ public class TransientValuesTestParserConfiguration extends AbstractParserConfig
 		getTestListConsumer().setIntConsumer(getIntConsumer());
 
 		getRootConsumer().setKeyword$2$Delimiter(TransientValuesTestDelimiters.keyword$4$Delimiter);
-		getTestRequiredConsumer().setKeyword$3$Delimiter(TransientValuesTestDelimiters.keyword$4$Delimiter);
 		getTestRequiredConsumer().setRuleCall$5$Delimiter(TransientValuesTestDelimiters.ruleCall$16$Delimiter);
 		getTestRequiredConsumer().setRuleCall$7$Delimiter(TransientValuesTestDelimiters.ruleCall$16$Delimiter);
+		getTestRequiredConsumer().setKeyword$3$Delimiter(TransientValuesTestDelimiters.keyword$4$Delimiter);
 		getTestOptionalConsumer().setKeyword$7$Delimiter(TransientValuesTestDelimiters.keyword$27$Delimiter);
-		getTestOptionalConsumer().setKeyword$3$Delimiter(TransientValuesTestDelimiters.keyword$4$Delimiter);
-		getTestOptionalConsumer().setRuleCall$5$Delimiter(TransientValuesTestDelimiters.ruleCall$16$Delimiter);
 		getTestOptionalConsumer().setRuleCall$9$Delimiter(TransientValuesTestDelimiters.ruleCall$16$Delimiter);
-		getTestListConsumer().setKeyword$2$Delimiter(TransientValuesTestDelimiters.keyword$4$Delimiter);
+		getTestOptionalConsumer().setRuleCall$5$Delimiter(TransientValuesTestDelimiters.ruleCall$16$Delimiter);
+		getTestOptionalConsumer().setKeyword$3$Delimiter(TransientValuesTestDelimiters.keyword$4$Delimiter);
 		getTestListConsumer().setRuleCall$4$Delimiter(TransientValuesTestDelimiters.ruleCall$16$Delimiter);
-		// TODO remove workaround
-		getIdConsumer().initFields(this);
-		// TODO remove workaround
-		getIntConsumer().initFields(this);
-		// TODO remove workaround
-		getStringConsumer().initFields(this);
-		// TODO remove workaround
-		getMlCommentConsumer().initFields(this);
-		// TODO remove workaround
-		getSlCommentConsumer().initFields(this);
-		// TODO remove workaround
-		getWsConsumer().initFields(this);
-		// TODO remove workaround
-		getAnyOtherConsumer().initFields(this);
+		getTestListConsumer().setKeyword$2$Delimiter(TransientValuesTestDelimiters.keyword$4$Delimiter);
 	}
 	
 	// TODO collect superGrammars transitive

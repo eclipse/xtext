@@ -62,6 +62,7 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 
 
 
+
 // Entry rule entryRuleSequence
 entryRuleSequence returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressionsTestLanguage.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); }
@@ -121,6 +122,8 @@ ruleSequence returns [EObject current=null]
 	    }
 	
 ))*);
+
+
 
 
 
@@ -215,6 +218,8 @@ ruleAddition returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleMultiplication
 entryRuleMultiplication returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressionsTestLanguage.xmi#//@rules.2" /* xtext::ParserRule */, currentNode); }
@@ -304,6 +309,8 @@ ruleMultiplication returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleTerm
 entryRuleTerm returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressionsTestLanguage.xmi#//@rules.3" /* xtext::ParserRule */, currentNode); }
@@ -336,6 +343,8 @@ ruleTerm returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 );
+
+
 
 
 
@@ -379,6 +388,8 @@ ruleAtom returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleParens
 entryRuleParens returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressionsTestLanguage.xmi#//@rules.5" /* xtext::ParserRule */, currentNode); }
@@ -409,6 +420,20 @@ ruleParens returns [EObject current=null]
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressionsTestLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

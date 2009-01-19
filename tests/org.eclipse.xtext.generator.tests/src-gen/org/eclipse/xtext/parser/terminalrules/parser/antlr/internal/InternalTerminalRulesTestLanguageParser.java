@@ -1,0 +1,508 @@
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g 2009-01-19 15:14:09
+
+package org.eclipse.xtext.parser.terminalrules.parser.antlr.internal; 
+
+import java.io.InputStream;
+import org.eclipse.xtext.*;
+import org.eclipse.xtext.parser.*;
+import org.eclipse.xtext.parser.impl.*;
+import org.eclipse.xtext.parsetree.*;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
+import org.eclipse.xtext.conversion.ValueConverterException;
+
+
+
+import org.antlr.runtime.*;
+import java.util.Stack;
+import java.util.List;
+import java.util.ArrayList;
+
+public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAntlrParser {
+    public static final String[] tokenNames = new String[] {
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER"
+    };
+    public static final int RULE_ML_COMMENT=7;
+    public static final int RULE_ID=4;
+    public static final int RULE_WS=9;
+    public static final int EOF=-1;
+    public static final int RULE_INT=5;
+    public static final int RULE_STRING=6;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int RULE_SL_COMMENT=8;
+
+        public InternalTerminalRulesTestLanguageParser(TokenStream input) {
+            super(input);
+        }
+        
+
+    public String[] getTokenNames() { return tokenNames; }
+    public String getGrammarFileName() { return "./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g"; }
+
+
+     
+        public InternalTerminalRulesTestLanguageParser(TokenStream input, IAstFactory factory, Grammar g) {
+            this(input);
+            this.factory = factory;
+    		grammar = g;
+        }
+        
+        @Override
+        protected InputStream getTokenFile() {
+        	ClassLoader classLoader = InternalTerminalRulesTestLanguageParser.class.getClassLoader();
+        	return classLoader.getResourceAsStream("org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.tokens");
+        }
+        
+        @Override
+        protected String getFirstRuleName() {
+        	return "Model";	
+       	} 
+
+
+
+    // $ANTLR start entryRuleModel
+    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:67:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    public final EObject entryRuleModel() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleModel = null;
+
+
+        try {
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:67:47: (iv_ruleModel= ruleModel EOF )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:68:2: iv_ruleModel= ruleModel EOF
+            {
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); 
+            pushFollow(FOLLOW_ruleModel_in_entryRuleModel72);
+            iv_ruleModel=ruleModel();
+            _fsp--;
+
+             current =iv_ruleModel; 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleModel82); 
+
+            }
+
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end entryRuleModel
+
+
+    // $ANTLR start ruleModel
+    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:75:1: ruleModel returns [EObject current=null] : ( ( ( ( ( ( (lv_idValue= RULE_ID ) | (lv_intValue= RULE_INT ) ) | (lv_stringValue= RULE_STRING ) ) | (lv_mlCommentValue= RULE_ML_COMMENT ) ) | (lv_slCommentValue= RULE_SL_COMMENT ) ) | (lv_wsValue= RULE_WS ) ) | (lv_anyValue= RULE_ANY_OTHER ) ) ;
+    public final EObject ruleModel() throws RecognitionException {
+        EObject current = null;
+
+        Token lv_idValue=null;
+        Token lv_intValue=null;
+        Token lv_stringValue=null;
+        Token lv_mlCommentValue=null;
+        Token lv_slCommentValue=null;
+        Token lv_wsValue=null;
+        Token lv_anyValue=null;
+
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+        try {
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:77:33: ( ( ( ( ( ( ( (lv_idValue= RULE_ID ) | (lv_intValue= RULE_INT ) ) | (lv_stringValue= RULE_STRING ) ) | (lv_mlCommentValue= RULE_ML_COMMENT ) ) | (lv_slCommentValue= RULE_SL_COMMENT ) ) | (lv_wsValue= RULE_WS ) ) | (lv_anyValue= RULE_ANY_OTHER ) ) )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:78:1: ( ( ( ( ( ( (lv_idValue= RULE_ID ) | (lv_intValue= RULE_INT ) ) | (lv_stringValue= RULE_STRING ) ) | (lv_mlCommentValue= RULE_ML_COMMENT ) ) | (lv_slCommentValue= RULE_SL_COMMENT ) ) | (lv_wsValue= RULE_WS ) ) | (lv_anyValue= RULE_ANY_OTHER ) )
+            {
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:78:1: ( ( ( ( ( ( (lv_idValue= RULE_ID ) | (lv_intValue= RULE_INT ) ) | (lv_stringValue= RULE_STRING ) ) | (lv_mlCommentValue= RULE_ML_COMMENT ) ) | (lv_slCommentValue= RULE_SL_COMMENT ) ) | (lv_wsValue= RULE_WS ) ) | (lv_anyValue= RULE_ANY_OTHER ) )
+            int alt6=2;
+            int LA6_0 = input.LA(1);
+
+            if ( ((LA6_0>=RULE_ID && LA6_0<=RULE_WS)) ) {
+                alt6=1;
+            }
+            else if ( (LA6_0==RULE_ANY_OTHER) ) {
+                alt6=2;
+            }
+            else {
+                NoViableAltException nvae =
+                    new NoViableAltException("78:1: ( ( ( ( ( ( (lv_idValue= RULE_ID ) | (lv_intValue= RULE_INT ) ) | (lv_stringValue= RULE_STRING ) ) | (lv_mlCommentValue= RULE_ML_COMMENT ) ) | (lv_slCommentValue= RULE_SL_COMMENT ) ) | (lv_wsValue= RULE_WS ) ) | (lv_anyValue= RULE_ANY_OTHER ) )", 6, 0, input);
+
+                throw nvae;
+            }
+            switch (alt6) {
+                case 1 :
+                    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:78:2: ( ( ( ( ( (lv_idValue= RULE_ID ) | (lv_intValue= RULE_INT ) ) | (lv_stringValue= RULE_STRING ) ) | (lv_mlCommentValue= RULE_ML_COMMENT ) ) | (lv_slCommentValue= RULE_SL_COMMENT ) ) | (lv_wsValue= RULE_WS ) )
+                    {
+                    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:78:2: ( ( ( ( ( (lv_idValue= RULE_ID ) | (lv_intValue= RULE_INT ) ) | (lv_stringValue= RULE_STRING ) ) | (lv_mlCommentValue= RULE_ML_COMMENT ) ) | (lv_slCommentValue= RULE_SL_COMMENT ) ) | (lv_wsValue= RULE_WS ) )
+                    int alt5=2;
+                    int LA5_0 = input.LA(1);
+
+                    if ( ((LA5_0>=RULE_ID && LA5_0<=RULE_SL_COMMENT)) ) {
+                        alt5=1;
+                    }
+                    else if ( (LA5_0==RULE_WS) ) {
+                        alt5=2;
+                    }
+                    else {
+                        NoViableAltException nvae =
+                            new NoViableAltException("78:2: ( ( ( ( ( (lv_idValue= RULE_ID ) | (lv_intValue= RULE_INT ) ) | (lv_stringValue= RULE_STRING ) ) | (lv_mlCommentValue= RULE_ML_COMMENT ) ) | (lv_slCommentValue= RULE_SL_COMMENT ) ) | (lv_wsValue= RULE_WS ) )", 5, 0, input);
+
+                        throw nvae;
+                    }
+                    switch (alt5) {
+                        case 1 :
+                            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:78:3: ( ( ( ( (lv_idValue= RULE_ID ) | (lv_intValue= RULE_INT ) ) | (lv_stringValue= RULE_STRING ) ) | (lv_mlCommentValue= RULE_ML_COMMENT ) ) | (lv_slCommentValue= RULE_SL_COMMENT ) )
+                            {
+                            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:78:3: ( ( ( ( (lv_idValue= RULE_ID ) | (lv_intValue= RULE_INT ) ) | (lv_stringValue= RULE_STRING ) ) | (lv_mlCommentValue= RULE_ML_COMMENT ) ) | (lv_slCommentValue= RULE_SL_COMMENT ) )
+                            int alt4=2;
+                            int LA4_0 = input.LA(1);
+
+                            if ( ((LA4_0>=RULE_ID && LA4_0<=RULE_ML_COMMENT)) ) {
+                                alt4=1;
+                            }
+                            else if ( (LA4_0==RULE_SL_COMMENT) ) {
+                                alt4=2;
+                            }
+                            else {
+                                NoViableAltException nvae =
+                                    new NoViableAltException("78:3: ( ( ( ( (lv_idValue= RULE_ID ) | (lv_intValue= RULE_INT ) ) | (lv_stringValue= RULE_STRING ) ) | (lv_mlCommentValue= RULE_ML_COMMENT ) ) | (lv_slCommentValue= RULE_SL_COMMENT ) )", 4, 0, input);
+
+                                throw nvae;
+                            }
+                            switch (alt4) {
+                                case 1 :
+                                    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:78:4: ( ( ( (lv_idValue= RULE_ID ) | (lv_intValue= RULE_INT ) ) | (lv_stringValue= RULE_STRING ) ) | (lv_mlCommentValue= RULE_ML_COMMENT ) )
+                                    {
+                                    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:78:4: ( ( ( (lv_idValue= RULE_ID ) | (lv_intValue= RULE_INT ) ) | (lv_stringValue= RULE_STRING ) ) | (lv_mlCommentValue= RULE_ML_COMMENT ) )
+                                    int alt3=2;
+                                    int LA3_0 = input.LA(1);
+
+                                    if ( ((LA3_0>=RULE_ID && LA3_0<=RULE_STRING)) ) {
+                                        alt3=1;
+                                    }
+                                    else if ( (LA3_0==RULE_ML_COMMENT) ) {
+                                        alt3=2;
+                                    }
+                                    else {
+                                        NoViableAltException nvae =
+                                            new NoViableAltException("78:4: ( ( ( (lv_idValue= RULE_ID ) | (lv_intValue= RULE_INT ) ) | (lv_stringValue= RULE_STRING ) ) | (lv_mlCommentValue= RULE_ML_COMMENT ) )", 3, 0, input);
+
+                                        throw nvae;
+                                    }
+                                    switch (alt3) {
+                                        case 1 :
+                                            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:78:5: ( ( (lv_idValue= RULE_ID ) | (lv_intValue= RULE_INT ) ) | (lv_stringValue= RULE_STRING ) )
+                                            {
+                                            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:78:5: ( ( (lv_idValue= RULE_ID ) | (lv_intValue= RULE_INT ) ) | (lv_stringValue= RULE_STRING ) )
+                                            int alt2=2;
+                                            int LA2_0 = input.LA(1);
+
+                                            if ( ((LA2_0>=RULE_ID && LA2_0<=RULE_INT)) ) {
+                                                alt2=1;
+                                            }
+                                            else if ( (LA2_0==RULE_STRING) ) {
+                                                alt2=2;
+                                            }
+                                            else {
+                                                NoViableAltException nvae =
+                                                    new NoViableAltException("78:5: ( ( (lv_idValue= RULE_ID ) | (lv_intValue= RULE_INT ) ) | (lv_stringValue= RULE_STRING ) )", 2, 0, input);
+
+                                                throw nvae;
+                                            }
+                                            switch (alt2) {
+                                                case 1 :
+                                                    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:78:6: ( (lv_idValue= RULE_ID ) | (lv_intValue= RULE_INT ) )
+                                                    {
+                                                    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:78:6: ( (lv_idValue= RULE_ID ) | (lv_intValue= RULE_INT ) )
+                                                    int alt1=2;
+                                                    int LA1_0 = input.LA(1);
+
+                                                    if ( (LA1_0==RULE_ID) ) {
+                                                        alt1=1;
+                                                    }
+                                                    else if ( (LA1_0==RULE_INT) ) {
+                                                        alt1=2;
+                                                    }
+                                                    else {
+                                                        NoViableAltException nvae =
+                                                            new NoViableAltException("78:6: ( (lv_idValue= RULE_ID ) | (lv_intValue= RULE_INT ) )", 1, 0, input);
+
+                                                        throw nvae;
+                                                    }
+                                                    switch (alt1) {
+                                                        case 1 :
+                                                            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:78:7: (lv_idValue= RULE_ID )
+                                                            {
+                                                            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:78:7: (lv_idValue= RULE_ID )
+                                                            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:81:6: lv_idValue= RULE_ID
+                                                            {
+                                                             
+                                                            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.xmi#//@rules.0/@alternatives/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@terminal" /* xtext::RuleCall */, currentNode); 
+                                                            	    
+                                                            lv_idValue=(Token)input.LT(1);
+                                                            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleModel146); 
+
+                                                            	        if (current==null) {
+                                                            	            current = factory.create("Model");
+                                                            	            associateNodeWithAstElement(currentNode.getParent(), current);
+                                                            	        }
+                                                            	        
+                                                            	        try {
+                                                            	        	factory.set(current, "idValue", lv_idValue, "ID", currentNode);
+                                                            	        } catch (ValueConverterException vce) {
+                                                            				handleValueConverterException(vce);
+                                                            	        }
+                                                            	        currentNode = currentNode.getParent();
+                                                            	    
+
+                                                            }
+
+
+                                                            }
+                                                            break;
+                                                        case 2 :
+                                                            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:100:6: (lv_intValue= RULE_INT )
+                                                            {
+                                                            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:100:6: (lv_intValue= RULE_INT )
+                                                            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:103:6: lv_intValue= RULE_INT
+                                                            {
+                                                             
+                                                            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.xmi#//@rules.0/@alternatives/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                                                            	    
+                                                            lv_intValue=(Token)input.LT(1);
+                                                            match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleModel190); 
+
+                                                            	        if (current==null) {
+                                                            	            current = factory.create("Model");
+                                                            	            associateNodeWithAstElement(currentNode.getParent(), current);
+                                                            	        }
+                                                            	        
+                                                            	        try {
+                                                            	        	factory.set(current, "intValue", lv_intValue, "INT", currentNode);
+                                                            	        } catch (ValueConverterException vce) {
+                                                            				handleValueConverterException(vce);
+                                                            	        }
+                                                            	        currentNode = currentNode.getParent();
+                                                            	    
+
+                                                            }
+
+
+                                                            }
+                                                            break;
+
+                                                    }
+
+
+                                                    }
+                                                    break;
+                                                case 2 :
+                                                    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:122:6: (lv_stringValue= RULE_STRING )
+                                                    {
+                                                    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:122:6: (lv_stringValue= RULE_STRING )
+                                                    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:125:6: lv_stringValue= RULE_STRING
+                                                    {
+                                                     
+                                                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.xmi#//@rules.0/@alternatives/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                                                    	    
+                                                    lv_stringValue=(Token)input.LT(1);
+                                                    match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleModel235); 
+
+                                                    	        if (current==null) {
+                                                    	            current = factory.create("Model");
+                                                    	            associateNodeWithAstElement(currentNode.getParent(), current);
+                                                    	        }
+                                                    	        
+                                                    	        try {
+                                                    	        	factory.set(current, "stringValue", lv_stringValue, "STRING", currentNode);
+                                                    	        } catch (ValueConverterException vce) {
+                                                    				handleValueConverterException(vce);
+                                                    	        }
+                                                    	        currentNode = currentNode.getParent();
+                                                    	    
+
+                                                    }
+
+
+                                                    }
+                                                    break;
+
+                                            }
+
+
+                                            }
+                                            break;
+                                        case 2 :
+                                            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:144:6: (lv_mlCommentValue= RULE_ML_COMMENT )
+                                            {
+                                            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:144:6: (lv_mlCommentValue= RULE_ML_COMMENT )
+                                            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:147:6: lv_mlCommentValue= RULE_ML_COMMENT
+                                            {
+                                             
+                                            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.xmi#//@rules.0/@alternatives/@groups.0/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                                            	    
+                                            lv_mlCommentValue=(Token)input.LT(1);
+                                            match(input,RULE_ML_COMMENT,FOLLOW_RULE_ML_COMMENT_in_ruleModel280); 
+
+                                            	        if (current==null) {
+                                            	            current = factory.create("Model");
+                                            	            associateNodeWithAstElement(currentNode.getParent(), current);
+                                            	        }
+                                            	        
+                                            	        try {
+                                            	        	factory.set(current, "mlCommentValue", lv_mlCommentValue, "ML_COMMENT", currentNode);
+                                            	        } catch (ValueConverterException vce) {
+                                            				handleValueConverterException(vce);
+                                            	        }
+                                            	        currentNode = currentNode.getParent();
+                                            	    
+
+                                            }
+
+
+                                            }
+                                            break;
+
+                                    }
+
+
+                                    }
+                                    break;
+                                case 2 :
+                                    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:166:6: (lv_slCommentValue= RULE_SL_COMMENT )
+                                    {
+                                    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:166:6: (lv_slCommentValue= RULE_SL_COMMENT )
+                                    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:169:6: lv_slCommentValue= RULE_SL_COMMENT
+                                    {
+                                     
+                                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.xmi#//@rules.0/@alternatives/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                                    	    
+                                    lv_slCommentValue=(Token)input.LT(1);
+                                    match(input,RULE_SL_COMMENT,FOLLOW_RULE_SL_COMMENT_in_ruleModel325); 
+
+                                    	        if (current==null) {
+                                    	            current = factory.create("Model");
+                                    	            associateNodeWithAstElement(currentNode.getParent(), current);
+                                    	        }
+                                    	        
+                                    	        try {
+                                    	        	factory.set(current, "slCommentValue", lv_slCommentValue, "SL_COMMENT", currentNode);
+                                    	        } catch (ValueConverterException vce) {
+                                    				handleValueConverterException(vce);
+                                    	        }
+                                    	        currentNode = currentNode.getParent();
+                                    	    
+
+                                    }
+
+
+                                    }
+                                    break;
+
+                            }
+
+
+                            }
+                            break;
+                        case 2 :
+                            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:188:6: (lv_wsValue= RULE_WS )
+                            {
+                            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:188:6: (lv_wsValue= RULE_WS )
+                            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:191:6: lv_wsValue= RULE_WS
+                            {
+                             
+                            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.xmi#//@rules.0/@alternatives/@groups.0/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                            	    
+                            lv_wsValue=(Token)input.LT(1);
+                            match(input,RULE_WS,FOLLOW_RULE_WS_in_ruleModel370); 
+
+                            	        if (current==null) {
+                            	            current = factory.create("Model");
+                            	            associateNodeWithAstElement(currentNode.getParent(), current);
+                            	        }
+                            	        
+                            	        try {
+                            	        	factory.set(current, "wsValue", lv_wsValue, "WS", currentNode);
+                            	        } catch (ValueConverterException vce) {
+                            				handleValueConverterException(vce);
+                            	        }
+                            	        currentNode = currentNode.getParent();
+                            	    
+
+                            }
+
+
+                            }
+                            break;
+
+                    }
+
+
+                    }
+                    break;
+                case 2 :
+                    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:210:6: (lv_anyValue= RULE_ANY_OTHER )
+                    {
+                    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:210:6: (lv_anyValue= RULE_ANY_OTHER )
+                    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:213:6: lv_anyValue= RULE_ANY_OTHER
+                    {
+                     
+                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.xmi#//@rules.0/@alternatives/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                    	    
+                    lv_anyValue=(Token)input.LT(1);
+                    match(input,RULE_ANY_OTHER,FOLLOW_RULE_ANY_OTHER_in_ruleModel415); 
+
+                    	        if (current==null) {
+                    	            current = factory.create("Model");
+                    	            associateNodeWithAstElement(currentNode.getParent(), current);
+                    	        }
+                    	        
+                    	        try {
+                    	        	factory.set(current, "anyValue", lv_anyValue, "ANY_OTHER", currentNode);
+                    	        } catch (ValueConverterException vce) {
+                    				handleValueConverterException(vce);
+                    	        }
+                    	        currentNode = currentNode.getParent();
+                    	    
+
+                    }
+
+
+                    }
+                    break;
+
+            }
+
+
+            }
+
+             resetLookahead(); 
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end ruleModel
+
+
+ 
+
+    public static final BitSet FOLLOW_ruleModel_in_entryRuleModel72 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleModel82 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleModel146 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleModel190 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleModel235 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ML_COMMENT_in_ruleModel280 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_SL_COMMENT_in_ruleModel325 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_WS_in_ruleModel370 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ANY_OTHER_in_ruleModel415 = new BitSet(new long[]{0x0000000000000002L});
+
+}

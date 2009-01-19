@@ -23,16 +23,16 @@ import org.eclipse.xtext.testlanguages.services.LookaheadTestLanguageGrammarAcce
 public final class LookaheadTestLanguageLookAhead0Consumer extends NonTerminalConsumer {
 
 
-	private ICharacterClass keyword$2$Delimiter;
-	
 	private ICharacterClass keyword$4$Delimiter;
+	
+	private ICharacterClass keyword$2$Delimiter;
 	
 	public LookaheadTestLanguageLookAhead0Consumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
-		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$4$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -75,20 +75,20 @@ public final class LookaheadTestLanguageLookAhead0Consumer extends NonTerminalCo
 		return "LookAhead0";
 	}
 	
-	public ICharacterClass getKeyword$2$Delimiter() {
-		return keyword$2$Delimiter;
-	}
-	
-	public void setKeyword$2$Delimiter(ICharacterClass characterClass) {
-		keyword$2$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
 	public ICharacterClass getKeyword$4$Delimiter() {
 		return keyword$4$Delimiter;
 	}
 	
 	public void setKeyword$4$Delimiter(ICharacterClass characterClass) {
 		keyword$4$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$2$Delimiter() {
+		return keyword$2$Delimiter;
+	}
+	
+	public void setKeyword$2$Delimiter(ICharacterClass characterClass) {
+		keyword$2$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

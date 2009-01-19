@@ -98,7 +98,7 @@ public class DummyTestLanguageGrammarAccess extends BaseEPackageAccess implement
 	}
 	
 	public XtextBuiltinGrammarAccess getSuperGrammar() {
-		return XtextBuiltinGrammarAccess.INSTANCE;		
+		return XtextBuiltinGrammarAccess.INSTANCE;
 	}
 
 	

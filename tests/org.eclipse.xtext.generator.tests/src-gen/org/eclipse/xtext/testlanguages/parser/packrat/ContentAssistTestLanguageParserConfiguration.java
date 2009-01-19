@@ -51,8 +51,7 @@ public class ContentAssistTestLanguageParserConfiguration extends AbstractParser
 	public void createNonTerminalConsumers() {
 		getXtextBuiltinConfiguration().createNonTerminalConsumers();
 		startConsumer = new ContentAssistTestLanguageStartConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(),
-    		new ITerminalConsumer[]{ getWsConsumer(), getMlCommentConsumer(), getSlCommentConsumer() }
+    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
     	);
 		abstractRuleConsumer = new ContentAssistTestLanguageAbstractRuleConsumer(
     		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
@@ -88,29 +87,15 @@ public class ContentAssistTestLanguageParserConfiguration extends AbstractParser
 
 		getStartConsumer().setKeyword$3$Delimiter(ContentAssistTestLanguageDelimiters.keyword$5$Delimiter);
 		getStartConsumer().setKeyword$6$Delimiter(ContentAssistTestLanguageDelimiters.keyword$5$Delimiter);
-		getFirstAbstractRuleChildConsumer().setKeyword$11$Delimiter(ContentAssistTestLanguageDelimiters.keyword$22$Delimiter);
 		getFirstAbstractRuleChildConsumer().setKeyword$7$Delimiter(ContentAssistTestLanguageDelimiters.keyword$22$Delimiter);
 		getFirstAbstractRuleChildConsumer().setKeyword$10$Delimiter(ContentAssistTestLanguageDelimiters.keyword$22$Delimiter);
+		getFirstAbstractRuleChildConsumer().setKeyword$11$Delimiter(ContentAssistTestLanguageDelimiters.keyword$22$Delimiter);
 		getFirstAbstractRuleChildConsumer().setRuleCall$6$Delimiter(ContentAssistTestLanguageDelimiters.ruleCall$21$Delimiter);
 		getSecondAbstractRuleChildConsumer().setKeyword$8$Delimiter(ContentAssistTestLanguageDelimiters.keyword$22$Delimiter);
-		getSecondAbstractRuleChildConsumer().setKeyword$7$Delimiter(ContentAssistTestLanguageDelimiters.keyword$5$Delimiter);
 		getSecondAbstractRuleChildConsumer().setKeyword$11$Delimiter(ContentAssistTestLanguageDelimiters.keyword$22$Delimiter);
 		getSecondAbstractRuleChildConsumer().setRuleCall$6$Delimiter(ContentAssistTestLanguageDelimiters.ruleCall$21$Delimiter);
+		getSecondAbstractRuleChildConsumer().setKeyword$7$Delimiter(ContentAssistTestLanguageDelimiters.keyword$5$Delimiter);
 		getAbstractRuleCallConsumer().setCrossReference$2$Delimiter(ContentAssistTestLanguageDelimiters.ruleCall$21$Delimiter);
-		// TODO remove workaround
-		getIdConsumer().initFields(this);
-		// TODO remove workaround
-		getIntConsumer().initFields(this);
-		// TODO remove workaround
-		getStringConsumer().initFields(this);
-		// TODO remove workaround
-		getMlCommentConsumer().initFields(this);
-		// TODO remove workaround
-		getSlCommentConsumer().initFields(this);
-		// TODO remove workaround
-		getWsConsumer().initFields(this);
-		// TODO remove workaround
-		getAnyOtherConsumer().initFields(this);
 	}
 	
 	// TODO collect superGrammars transitive

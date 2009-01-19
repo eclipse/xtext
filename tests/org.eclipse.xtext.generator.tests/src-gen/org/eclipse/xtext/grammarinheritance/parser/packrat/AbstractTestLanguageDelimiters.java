@@ -16,8 +16,7 @@ public final class AbstractTestLanguageDelimiters {
 	
 	public static ISequenceMatcher ruleCall$7$Delimiter = new SetBasedKeywordMatcher(
 		"element");
-		
-	// TODO do not use IDConsumer internals
+
 	public static ICharacterClass keyword$5$Delimiter = XtextBuiltinIDConsumer.IDConsumer$$2;
-	
+
 }

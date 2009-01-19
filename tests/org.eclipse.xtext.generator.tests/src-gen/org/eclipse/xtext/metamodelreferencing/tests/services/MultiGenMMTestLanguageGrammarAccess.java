@@ -70,7 +70,7 @@ public class MultiGenMMTestLanguageGrammarAccess extends BaseEPackageAccess impl
 	}
 	
 	public XtextBuiltinGrammarAccess getSuperGrammar() {
-		return XtextBuiltinGrammarAccess.INSTANCE;		
+		return XtextBuiltinGrammarAccess.INSTANCE;
 	}
 
 	

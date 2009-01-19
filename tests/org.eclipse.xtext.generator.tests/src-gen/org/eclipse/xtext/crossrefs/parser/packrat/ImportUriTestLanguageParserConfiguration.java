@@ -47,8 +47,7 @@ public class ImportUriTestLanguageParserConfiguration extends AbstractParserConf
 	public void createNonTerminalConsumers() {
 		getXtextBuiltinConfiguration().createNonTerminalConsumers();
 		mainConsumer = new ImportUriTestLanguageMainConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(),
-    		new ITerminalConsumer[]{ getWsConsumer(), getMlCommentConsumer(), getSlCommentConsumer() }
+    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
     	);
 		importConsumer = new ImportUriTestLanguageImportConsumer(
     		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
@@ -72,24 +71,10 @@ public class ImportUriTestLanguageParserConfiguration extends AbstractParserConf
 
 		getImportConsumer().setRuleCall$4$Delimiter(ImportUriTestLanguageDelimiters.ruleCall$13$Delimiter);
 		getImportConsumer().setKeyword$2$Delimiter(ImportUriTestLanguageDelimiters.keyword$11$Delimiter);
-		getTypeConsumer().setRuleCall$6$Delimiter(ImportUriTestLanguageDelimiters.ruleCall$21$Delimiter);
-		getTypeConsumer().setKeyword$4$Delimiter(ImportUriTestLanguageDelimiters.keyword$11$Delimiter);
 		getTypeConsumer().setCrossReference$9$Delimiter(ImportUriTestLanguageDelimiters.ruleCall$21$Delimiter);
+		getTypeConsumer().setRuleCall$6$Delimiter(ImportUriTestLanguageDelimiters.ruleCall$21$Delimiter);
 		getTypeConsumer().setKeyword$7$Delimiter(ImportUriTestLanguageDelimiters.keyword$11$Delimiter);
-		// TODO remove workaround
-		getIdConsumer().initFields(this);
-		// TODO remove workaround
-		getIntConsumer().initFields(this);
-		// TODO remove workaround
-		getStringConsumer().initFields(this);
-		// TODO remove workaround
-		getMlCommentConsumer().initFields(this);
-		// TODO remove workaround
-		getSlCommentConsumer().initFields(this);
-		// TODO remove workaround
-		getWsConsumer().initFields(this);
-		// TODO remove workaround
-		getAnyOtherConsumer().initFields(this);
+		getTypeConsumer().setKeyword$4$Delimiter(ImportUriTestLanguageDelimiters.keyword$11$Delimiter);
 	}
 	
 	// TODO collect superGrammars transitive

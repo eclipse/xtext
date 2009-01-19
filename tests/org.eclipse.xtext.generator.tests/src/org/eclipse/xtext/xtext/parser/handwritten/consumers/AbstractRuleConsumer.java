@@ -35,9 +35,11 @@ public class AbstractRuleConsumer extends NonTerminalConsumer {
 
 	protected boolean doConsume() throws Exception {
 		ALTERNATIVE$0: {
-			if (consumeNonTerminal(lexerRuleConsumer, null, false, false, XtextGrammarAccess.INSTANCE.prAbstractRule().ele0ParserRuleCallLexerRule()))
+			if (consumeNonTerminal(lexerRuleConsumer, null, false, false, XtextGrammarAccess.INSTANCE.prAbstractRule().ele00ParserRuleCallLexerRule()))
 				break ALTERNATIVE$0;
-			if (consumeNonTerminal(parserRuleConsumer, null, false, false, XtextGrammarAccess.INSTANCE.prAbstractRule().ele1ParserRuleCallParserRule()))
+			if (consumeNonTerminal(parserRuleConsumer, null, false, false, XtextGrammarAccess.INSTANCE.prAbstractRule().ele01ParserRuleCallParserRule()))
+				break ALTERNATIVE$0;
+			if (consumeNonTerminal(parserRuleConsumer, null, false, false, XtextGrammarAccess.INSTANCE.prAbstractRule().ele1ParserRuleCallTerminalRule()))
 				break ALTERNATIVE$0;
 			return false;
 		}

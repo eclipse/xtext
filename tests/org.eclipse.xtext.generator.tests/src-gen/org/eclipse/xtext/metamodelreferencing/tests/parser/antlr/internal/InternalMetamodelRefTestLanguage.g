@@ -62,6 +62,7 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 
 
 
+
 // Entry rule entryRuleFoo
 entryRuleFoo returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTestLanguage.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); }
@@ -121,6 +122,8 @@ ruleFoo returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleNameRef
 entryRuleNameRef returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTestLanguage.xmi#//@rules.1" /* xtext::ParserRule */, currentNode); }
@@ -149,6 +152,14 @@ ruleNameRef returns [EObject current=null]
 ) 
 	
 );
+
+
+
+
+
+
+
+
 
 
 

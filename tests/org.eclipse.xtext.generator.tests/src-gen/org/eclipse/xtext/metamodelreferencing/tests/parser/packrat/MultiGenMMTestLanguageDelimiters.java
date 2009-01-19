@@ -15,5 +15,5 @@ public final class MultiGenMMTestLanguageDelimiters {
 	}
 	
 	public static ISequenceMatcher ruleCall$6$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-	
+
 }

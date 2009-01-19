@@ -27,25 +27,25 @@ public final class XtextGrammarTestLanguageGeneratedMetamodelConsumer extends No
 	private XtextBuiltinIDConsumer idConsumer;
 	private XtextBuiltinSTRINGConsumer stringConsumer;
 
-	private ICharacterClass keyword$4$Delimiter;
-	
-	private ICharacterClass keyword$10$Delimiter;
+	private ISequenceMatcher ruleCall$13$Delimiter;
 	
 	private ISequenceMatcher ruleCall$6$Delimiter;
 	
-	private ISequenceMatcher ruleCall$12$Delimiter;
+	private ISequenceMatcher crossReference$8$Delimiter;
 	
-	private ISequenceMatcher ruleCall$8$Delimiter;
+	private ICharacterClass keyword$11$Delimiter;
+	
+	private ICharacterClass keyword$4$Delimiter;
 	
 	public XtextGrammarTestLanguageGeneratedMetamodelConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
-		keyword$4$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$10$Delimiter = ICharacterClass.Factory.nullClass();
+		ruleCall$13$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		ruleCall$6$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-		ruleCall$12$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-		ruleCall$8$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		crossReference$8$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		keyword$11$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$4$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -66,7 +66,7 @@ public final class XtextGrammarTestLanguageGeneratedMetamodelConsumer extends No
 			marker.rollback();
 			return false;
 		}
-		if (!consumeGroup$9()) {
+		if (!consumeGroup$10()) {
 			marker.rollback();
 			return false;
 		}
@@ -84,35 +84,35 @@ public final class XtextGrammarTestLanguageGeneratedMetamodelConsumer extends No
 	}
 
 	protected boolean consumeAssignment$7() throws Exception {
-		if (consumeTerminal(stringConsumer, "nsURI", false, false, getRule().ele010LexerRuleCallSTRING(), getRuleCall$8$Delimiter()))
+		if (consumeTerminal(stringConsumer, null, false, false, getRule().ele010CrossReferenceEStringEPackage(), getCrossReference$8$Delimiter()))
 			return true;
 		return false;
 	}
 
-	protected boolean consumeGroup$9() throws Exception {
-		doConsumeGroup$9();
+	protected boolean consumeGroup$10() throws Exception {
+		doConsumeGroup$10();
 		return true;
 	}
 
-	protected boolean doConsumeGroup$9() throws Exception {
+	protected boolean doConsumeGroup$10() throws Exception {
 		final IMarker marker = mark();
-		if (!consumeKeyword$10()) {
+		if (!consumeKeyword$11()) {
 			marker.rollback();
 			return false;
 		}
-		if (!consumeAssignment$11()) {
+		if (!consumeAssignment$12()) {
 			marker.rollback();
 			return false;
 		}
 		return true;
 	}
 
-	protected boolean consumeKeyword$10() throws Exception {
-		return consumeKeyword(getRule().ele10KeywordAs(), null, false, false, getKeyword$10$Delimiter());
+	protected boolean consumeKeyword$11() throws Exception {
+		return consumeKeyword(getRule().ele10KeywordAs(), null, false, false, getKeyword$11$Delimiter());
 	}
 
-	protected boolean consumeAssignment$11() throws Exception {
-		if (consumeTerminal(idConsumer, "alias", false, false, getRule().ele110LexerRuleCallID(), getRuleCall$12$Delimiter()))
+	protected boolean consumeAssignment$12() throws Exception {
+		if (consumeTerminal(idConsumer, "alias", false, false, getRule().ele110LexerRuleCallID(), getRuleCall$13$Delimiter()))
 			return true;
 		return false;
 	}
@@ -138,20 +138,12 @@ public final class XtextGrammarTestLanguageGeneratedMetamodelConsumer extends No
 		this.stringConsumer = stringConsumer;
 	}
 	
-	public ICharacterClass getKeyword$4$Delimiter() {
-		return keyword$4$Delimiter;
+	public ISequenceMatcher getRuleCall$13$Delimiter() {
+		return ruleCall$13$Delimiter;
 	}
 	
-	public void setKeyword$4$Delimiter(ICharacterClass characterClass) {
-		keyword$4$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
-	public ICharacterClass getKeyword$10$Delimiter() {
-		return keyword$10$Delimiter;
-	}
-	
-	public void setKeyword$10$Delimiter(ICharacterClass characterClass) {
-		keyword$10$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setRuleCall$13$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$13$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	public ISequenceMatcher getRuleCall$6$Delimiter() {
@@ -162,20 +154,28 @@ public final class XtextGrammarTestLanguageGeneratedMetamodelConsumer extends No
 		ruleCall$6$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
-	public ISequenceMatcher getRuleCall$12$Delimiter() {
-		return ruleCall$12$Delimiter;
+	public ISequenceMatcher getCrossReference$8$Delimiter() {
+		return crossReference$8$Delimiter;
 	}
 	
-	public void setRuleCall$12$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$12$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	public void setCrossReference$8$Delimiter(ISequenceMatcher matcher) {
+		crossReference$8$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
-	public ISequenceMatcher getRuleCall$8$Delimiter() {
-		return ruleCall$8$Delimiter;
+	public ICharacterClass getKeyword$11$Delimiter() {
+		return keyword$11$Delimiter;
 	}
 	
-	public void setRuleCall$8$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$8$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	public void setKeyword$11$Delimiter(ICharacterClass characterClass) {
+		keyword$11$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$4$Delimiter() {
+		return keyword$4$Delimiter;
+	}
+	
+	public void setKeyword$4$Delimiter(ICharacterClass characterClass) {
+		keyword$4$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

@@ -25,9 +25,9 @@ public final class FowlerDslTransitionConsumer extends NonTerminalConsumer {
 
 	private XtextBuiltinIDConsumer idConsumer;
 
-	private ISequenceMatcher crossReference$8$Delimiter;
-	
 	private ICharacterClass keyword$6$Delimiter;
+	
+	private ISequenceMatcher crossReference$8$Delimiter;
 	
 	private ISequenceMatcher crossReference$4$Delimiter;
 	
@@ -35,8 +35,8 @@ public final class FowlerDslTransitionConsumer extends NonTerminalConsumer {
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
-		crossReference$8$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		keyword$6$Delimiter = ICharacterClass.Factory.nullClass();
+		crossReference$8$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		crossReference$4$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
@@ -94,20 +94,20 @@ public final class FowlerDslTransitionConsumer extends NonTerminalConsumer {
 		this.idConsumer = idConsumer;
 	}
 	
-	public ISequenceMatcher getCrossReference$8$Delimiter() {
-		return crossReference$8$Delimiter;
-	}
-	
-	public void setCrossReference$8$Delimiter(ISequenceMatcher matcher) {
-		crossReference$8$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
-	}
-	
 	public ICharacterClass getKeyword$6$Delimiter() {
 		return keyword$6$Delimiter;
 	}
 	
 	public void setKeyword$6$Delimiter(ICharacterClass characterClass) {
 		keyword$6$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ISequenceMatcher getCrossReference$8$Delimiter() {
+		return crossReference$8$Delimiter;
+	}
+	
+	public void setCrossReference$8$Delimiter(ISequenceMatcher matcher) {
+		crossReference$8$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	public ISequenceMatcher getCrossReference$4$Delimiter() {

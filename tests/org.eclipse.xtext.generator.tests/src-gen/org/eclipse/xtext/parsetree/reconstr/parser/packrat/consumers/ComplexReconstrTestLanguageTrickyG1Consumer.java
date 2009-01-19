@@ -25,19 +25,19 @@ public final class ComplexReconstrTestLanguageTrickyG1Consumer extends NonTermin
 
 	private ComplexReconstrTestLanguageTrickyG2Consumer trickyG2Consumer;
 
-	private ICharacterClass keyword$11$Delimiter;
-	
 	private ICharacterClass keyword$8$Delimiter;
 	
 	private ICharacterClass keyword$3$Delimiter;
+	
+	private ICharacterClass keyword$11$Delimiter;
 	
 	public ComplexReconstrTestLanguageTrickyG1Consumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
-		keyword$11$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$3$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$11$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -138,14 +138,6 @@ public final class ComplexReconstrTestLanguageTrickyG1Consumer extends NonTermin
 		this.trickyG2Consumer = trickyG2Consumer;
 	}
 	
-	public ICharacterClass getKeyword$11$Delimiter() {
-		return keyword$11$Delimiter;
-	}
-	
-	public void setKeyword$11$Delimiter(ICharacterClass characterClass) {
-		keyword$11$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
 	public ICharacterClass getKeyword$8$Delimiter() {
 		return keyword$8$Delimiter;
 	}
@@ -160,6 +152,14 @@ public final class ComplexReconstrTestLanguageTrickyG1Consumer extends NonTermin
 	
 	public void setKeyword$3$Delimiter(ICharacterClass characterClass) {
 		keyword$3$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$11$Delimiter() {
+		return keyword$11$Delimiter;
+	}
+	
+	public void setKeyword$11$Delimiter(ICharacterClass characterClass) {
+		keyword$11$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

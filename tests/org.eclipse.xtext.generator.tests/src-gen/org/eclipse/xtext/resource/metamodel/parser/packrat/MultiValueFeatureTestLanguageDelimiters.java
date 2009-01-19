@@ -15,5 +15,5 @@ public final class MultiValueFeatureTestLanguageDelimiters {
 	}
 	
 	public static ISequenceMatcher ruleCall$4$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-	
+
 }

@@ -16,8 +16,7 @@ public final class OptionalEmptyTestLanguageDelimiters {
 	
 	public static ISequenceMatcher ruleCall$10$Delimiter = new SetBasedKeywordMatcher(
 		"hallo");
-		
-	// TODO do not use IDConsumer internals
+
 	public static ICharacterClass keyword$8$Delimiter = XtextBuiltinIDConsumer.IDConsumer$$2;
-	
+
 }

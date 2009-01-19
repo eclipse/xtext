@@ -25,9 +25,9 @@ public final class LookaheadTestLanguageLookAhead1Consumer extends NonTerminalCo
 
 	private LookaheadTestLanguageLookAhead2Consumer lookAhead2Consumer;
 
-	private ICharacterClass keyword$10$Delimiter;
-	
 	private ICharacterClass keyword$8$Delimiter;
+	
+	private ICharacterClass keyword$10$Delimiter;
 	
 	private ICharacterClass keyword$4$Delimiter;
 	
@@ -35,8 +35,8 @@ public final class LookaheadTestLanguageLookAhead1Consumer extends NonTerminalCo
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
-		keyword$10$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$10$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$4$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
@@ -104,20 +104,20 @@ public final class LookaheadTestLanguageLookAhead1Consumer extends NonTerminalCo
 		this.lookAhead2Consumer = lookAhead2Consumer;
 	}
 	
-	public ICharacterClass getKeyword$10$Delimiter() {
-		return keyword$10$Delimiter;
-	}
-	
-	public void setKeyword$10$Delimiter(ICharacterClass characterClass) {
-		keyword$10$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
 	public ICharacterClass getKeyword$8$Delimiter() {
 		return keyword$8$Delimiter;
 	}
 	
 	public void setKeyword$8$Delimiter(ICharacterClass characterClass) {
 		keyword$8$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$10$Delimiter() {
+		return keyword$10$Delimiter;
+	}
+	
+	public void setKeyword$10$Delimiter(ICharacterClass characterClass) {
+		keyword$10$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ICharacterClass getKeyword$4$Delimiter() {

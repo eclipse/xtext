@@ -62,6 +62,7 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 
 
 
+
 // Entry rule entryRuleRoot
 entryRuleRoot returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); }
@@ -94,6 +95,8 @@ ruleRoot returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 );
+
+
 
 
 
@@ -209,6 +212,8 @@ ruleOp returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleTerm
 entryRuleTerm returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.xmi#//@rules.2" /* xtext::ParserRule */, currentNode); }
@@ -241,6 +246,8 @@ ruleTerm returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 );
+
+
 
 
 
@@ -279,6 +286,8 @@ ruleAtom returns [EObject current=null]
 	    }
 	
 );
+
+
 
 
 
@@ -341,6 +350,8 @@ ruleParens returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleTrickyA1
 entryRuleTrickyA1 returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.xmi#//@rules.6" /* xtext::ParserRule */, currentNode); }
@@ -374,6 +385,8 @@ ruleTrickyA1 returns [EObject current=null]
 	    }
 	
 );
+
+
 
 
 
@@ -427,6 +440,8 @@ ruleTrickyG returns [EObject current=null]
 	    }
 	
 ));
+
+
 
 
 
@@ -504,6 +519,8 @@ ruleTrickyG1 returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleTrickyG2
 entryRuleTrickyG2 returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.xmi#//@rules.14" /* xtext::ParserRule */, currentNode); }
@@ -547,6 +564,38 @@ ruleTrickyG2 returns [EObject current=null]
 	    }
 	
 ));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -45,8 +45,7 @@ public class DummyTestLanguageParserConfiguration extends AbstractParserConfigur
 	public void createNonTerminalConsumers() {
 		getXtextBuiltinConfiguration().createNonTerminalConsumers();
 		modelConsumer = new DummyTestLanguageModelConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(),
-    		new ITerminalConsumer[]{ getWsConsumer(), getMlCommentConsumer(), getSlCommentConsumer() }
+    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
     	);
 		elementConsumer = new DummyTestLanguageElementConsumer(
     		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
@@ -63,25 +62,11 @@ public class DummyTestLanguageParserConfiguration extends AbstractParserConfigur
 		getElementConsumer().setIdConsumer(getIdConsumer());
 		getElementConsumer().setStringConsumer(getStringConsumer());
 
-		getElementConsumer().setRuleCall$9$Delimiter(DummyTestLanguageDelimiters.ruleCall$15$Delimiter);
-		getElementConsumer().setKeyword$6$Delimiter(DummyTestLanguageDelimiters.keyword$12$Delimiter);
 		getElementConsumer().setKeyword$12$Delimiter(DummyTestLanguageDelimiters.keyword$18$Delimiter);
+		getElementConsumer().setRuleCall$9$Delimiter(DummyTestLanguageDelimiters.ruleCall$15$Delimiter);
 		getElementConsumer().setRuleCall$11$Delimiter(DummyTestLanguageDelimiters.ruleCall$17$Delimiter);
 		getElementConsumer().setKeyword$7$Delimiter(DummyTestLanguageDelimiters.keyword$12$Delimiter);
-		// TODO remove workaround
-		getIdConsumer().initFields(this);
-		// TODO remove workaround
-		getIntConsumer().initFields(this);
-		// TODO remove workaround
-		getStringConsumer().initFields(this);
-		// TODO remove workaround
-		getMlCommentConsumer().initFields(this);
-		// TODO remove workaround
-		getSlCommentConsumer().initFields(this);
-		// TODO remove workaround
-		getWsConsumer().initFields(this);
-		// TODO remove workaround
-		getAnyOtherConsumer().initFields(this);
+		getElementConsumer().setKeyword$6$Delimiter(DummyTestLanguageDelimiters.keyword$12$Delimiter);
 	}
 	
 	// TODO collect superGrammars transitive

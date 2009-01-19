@@ -45,8 +45,7 @@ public class MultiGenMMTestLanguageParserConfiguration extends AbstractParserCon
 	public void createNonTerminalConsumers() {
 		getXtextBuiltinConfiguration().createNonTerminalConsumers();
 		fooConsumer = new MultiGenMMTestLanguageFooConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(),
-    		new ITerminalConsumer[]{ getWsConsumer(), getMlCommentConsumer(), getSlCommentConsumer() }
+    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
     	);
 		nameRefConsumer = new MultiGenMMTestLanguageNameRefConsumer(
     		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
@@ -65,20 +64,6 @@ public class MultiGenMMTestLanguageParserConfiguration extends AbstractParserCon
 
 		getFooConsumer().setRuleCall$3$Delimiter(MultiGenMMTestLanguageDelimiters.ruleCall$6$Delimiter);
 		getNameRefConsumer().setRuleCall$2$Delimiter(MultiGenMMTestLanguageDelimiters.ruleCall$6$Delimiter);
-		// TODO remove workaround
-		getIdConsumer().initFields(this);
-		// TODO remove workaround
-		getIntConsumer().initFields(this);
-		// TODO remove workaround
-		getStringConsumer().initFields(this);
-		// TODO remove workaround
-		getMlCommentConsumer().initFields(this);
-		// TODO remove workaround
-		getSlCommentConsumer().initFields(this);
-		// TODO remove workaround
-		getWsConsumer().initFields(this);
-		// TODO remove workaround
-		getAnyOtherConsumer().initFields(this);
 	}
 	
 	// TODO collect superGrammars transitive

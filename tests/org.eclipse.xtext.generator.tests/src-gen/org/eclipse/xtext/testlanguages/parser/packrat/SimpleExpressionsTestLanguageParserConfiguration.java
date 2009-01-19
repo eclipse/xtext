@@ -53,8 +53,7 @@ public class SimpleExpressionsTestLanguageParserConfiguration extends AbstractPa
 	public void createNonTerminalConsumers() {
 		getXtextBuiltinConfiguration().createNonTerminalConsumers();
 		sequenceConsumer = new SimpleExpressionsTestLanguageSequenceConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(),
-    		new ITerminalConsumer[]{ getWsConsumer(), getMlCommentConsumer(), getSlCommentConsumer() }
+    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
     	);
 		additionConsumer = new SimpleExpressionsTestLanguageAdditionConsumer(
     		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
@@ -96,22 +95,8 @@ public class SimpleExpressionsTestLanguageParserConfiguration extends AbstractPa
 		getMultiplicationConsumer().setKeyword$9$Delimiter(SimpleExpressionsTestLanguageDelimiters.keyword$20$Delimiter);
 		getMultiplicationConsumer().setKeyword$10$Delimiter(SimpleExpressionsTestLanguageDelimiters.keyword$20$Delimiter);
 		getAtomConsumer().setRuleCall$2$Delimiter(SimpleExpressionsTestLanguageDelimiters.ruleCall$46$Delimiter);
-		getParensConsumer().setKeyword$5$Delimiter(SimpleExpressionsTestLanguageDelimiters.keyword$20$Delimiter);
 		getParensConsumer().setKeyword$3$Delimiter(SimpleExpressionsTestLanguageDelimiters.keyword$20$Delimiter);
-		// TODO remove workaround
-		getIdConsumer().initFields(this);
-		// TODO remove workaround
-		getIntConsumer().initFields(this);
-		// TODO remove workaround
-		getStringConsumer().initFields(this);
-		// TODO remove workaround
-		getMlCommentConsumer().initFields(this);
-		// TODO remove workaround
-		getSlCommentConsumer().initFields(this);
-		// TODO remove workaround
-		getWsConsumer().initFields(this);
-		// TODO remove workaround
-		getAnyOtherConsumer().initFields(this);
+		getParensConsumer().setKeyword$5$Delimiter(SimpleExpressionsTestLanguageDelimiters.keyword$20$Delimiter);
 	}
 	
 	// TODO collect superGrammars transitive

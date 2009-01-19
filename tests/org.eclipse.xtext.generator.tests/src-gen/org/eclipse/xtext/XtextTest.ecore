@@ -23,27 +23,30 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="alias">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ePackage">
+      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="GeneratedMetamodel" eSuperTypes="//AbstractMetamodelDeclaration">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nsURI">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ReferencedMetamodel" eSuperTypes="//AbstractMetamodelDeclaration">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eStructuralFeatures>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ReferencedMetamodel" eSuperTypes="//AbstractMetamodelDeclaration"/>
   <eClassifiers xsi:type="ecore:EClass" name="LexerRule" eSuperTypes="//AbstractRule">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="body">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ParserRule" eSuperTypes="//AbstractRule">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="definesHiddenTokens">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hiddenTokens" unique="false" upperBound="-1" eType="//AbstractRule"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="alternatives" eType="//AbstractElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="terminal">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TypeRef">
     <eStructuralFeatures xsi:type="ecore:EReference" name="metamodel" eType="//AbstractMetamodelDeclaration"/>
@@ -74,6 +77,16 @@
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractNegatedToken" eSuperTypes="//AbstractElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="terminal" eType="//AbstractElement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NegatedToken" eSuperTypes="//AbstractNegatedToken"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UpToToken" eSuperTypes="//AbstractNegatedToken"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Wildcard" eSuperTypes="//AbstractElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isWildcard">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CrossReference" eSuperTypes="//AbstractElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="//TypeRef" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="rule" eType="//AbstractRule"/>
@@ -91,5 +104,9 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Group" eSuperTypes="//AbstractElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="abstractTokens" unique="false" upperBound="-1" eType="//AbstractElement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CharacterRange" eSuperTypes="//AbstractElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="//Keyword" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="//Keyword" containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

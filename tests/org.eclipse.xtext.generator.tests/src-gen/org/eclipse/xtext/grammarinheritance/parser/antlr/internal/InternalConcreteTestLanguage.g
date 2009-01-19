@@ -62,6 +62,7 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 
 
 
+
 // Entry rule entryRuleConcreteParserRule
 entryRuleConcreteParserRule returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); }
@@ -129,6 +130,8 @@ ruleConcreteParserRule returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleInheritedParserRule
 entryRuleInheritedParserRule returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); }
@@ -166,6 +169,12 @@ ruleInheritedParserRule returns [EObject current=null]
 	    }
 	
 ));
+
+
+
+
+
+
 
 
 

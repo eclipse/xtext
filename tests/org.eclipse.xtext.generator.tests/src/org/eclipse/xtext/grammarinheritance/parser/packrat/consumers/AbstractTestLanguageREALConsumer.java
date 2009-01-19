@@ -15,13 +15,13 @@ import org.eclipse.xtext.grammarinheritance.services.AbstractTestLanguageGrammar
 import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory;
 import org.eclipse.xtext.parser.packrat.IParserConfiguration;
-import org.eclipse.xtext.parser.packrat.consumers.LexerRuleAwareTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class AbstractTestLanguageREALConsumer extends LexerRuleAwareTerminalConsumer {
+public class AbstractTestLanguageREALConsumer extends AbstractRuleAwareTerminalConsumer {
 
 	private XtextBuiltinINTConsumer intConsumer;
 	
@@ -31,15 +31,15 @@ public class AbstractTestLanguageREALConsumer extends LexerRuleAwareTerminalCons
 	}
 
 	@Override
-	protected LexerRule doGetLexerRule() {
+	protected LexerRule doGetRule() {
 		return AbstractTestLanguageGrammarAccess.INSTANCE.lrREAL();
 	}
 
 	@Override
 	protected boolean doConsume() {
-		if (!intConsumer.consume(null)) return false;
+		if (!intConsumer.consume()) return false;
 		if (!readChar('.')) return false;
-		if (!intConsumer.consume(null)) return false;
+		if (!intConsumer.consume()) return false;
 		return true;
 	}
 

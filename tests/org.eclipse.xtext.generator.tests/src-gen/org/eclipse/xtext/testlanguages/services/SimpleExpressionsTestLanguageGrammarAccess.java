@@ -226,7 +226,7 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends BaseEPackageAcce
 	}
 	
 	public XtextBuiltinGrammarAccess getSuperGrammar() {
-		return XtextBuiltinGrammarAccess.INSTANCE;		
+		return XtextBuiltinGrammarAccess.INSTANCE;
 	}
 
 	

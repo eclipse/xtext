@@ -490,7 +490,7 @@ public class ReferenceGrammarGrammarAccess extends BaseEPackageAccess implements
 	}
 	
 	public XtextBuiltinGrammarAccess getSuperGrammar() {
-		return XtextBuiltinGrammarAccess.INSTANCE;		
+		return XtextBuiltinGrammarAccess.INSTANCE;
 	}
 
 	

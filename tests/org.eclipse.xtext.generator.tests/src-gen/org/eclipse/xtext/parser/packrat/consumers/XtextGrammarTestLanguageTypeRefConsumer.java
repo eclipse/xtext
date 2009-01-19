@@ -27,17 +27,17 @@ public final class XtextGrammarTestLanguageTypeRefConsumer extends NonTerminalCo
 
 	private ICharacterClass keyword$6$Delimiter;
 	
-	private ISequenceMatcher crossReference$4$Delimiter;
-	
 	private ISequenceMatcher crossReference$8$Delimiter;
+	
+	private ISequenceMatcher crossReference$4$Delimiter;
 	
 	public XtextGrammarTestLanguageTypeRefConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 		keyword$6$Delimiter = ICharacterClass.Factory.nullClass();
-		crossReference$4$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		crossReference$8$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		crossReference$4$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -116,20 +116,20 @@ public final class XtextGrammarTestLanguageTypeRefConsumer extends NonTerminalCo
 		keyword$6$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
-	public ISequenceMatcher getCrossReference$4$Delimiter() {
-		return crossReference$4$Delimiter;
-	}
-	
-	public void setCrossReference$4$Delimiter(ISequenceMatcher matcher) {
-		crossReference$4$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
-	}
-	
 	public ISequenceMatcher getCrossReference$8$Delimiter() {
 		return crossReference$8$Delimiter;
 	}
 	
 	public void setCrossReference$8$Delimiter(ISequenceMatcher matcher) {
 		crossReference$8$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	}
+	
+	public ISequenceMatcher getCrossReference$4$Delimiter() {
+		return crossReference$4$Delimiter;
+	}
+	
+	public void setCrossReference$4$Delimiter(ISequenceMatcher matcher) {
+		crossReference$4$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 }

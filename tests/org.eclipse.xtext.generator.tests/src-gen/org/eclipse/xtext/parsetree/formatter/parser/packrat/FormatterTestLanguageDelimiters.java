@@ -14,12 +14,11 @@ public final class FormatterTestLanguageDelimiters {
 		throw new UnsupportedOperationException("Utility classes may not be initialized");
 	}
 	
-	// TODO do not use IDConsumer internals
 	public static ICharacterClass keyword$4$Delimiter = XtextBuiltinIDConsumer.IDConsumer$$2;
-	
+
+	public static ICharacterClass keyword$16$Delimiter = ICharacterClass.Factory.nullClass();
+
 	public static ISequenceMatcher ruleCall$13$Delimiter = new SetBasedKeywordMatcher(
 		"test", "linewrap", "indentation");
-		
-	public static ICharacterClass keyword$16$Delimiter = ICharacterClass.Factory.nullClass();
-	
+
 }

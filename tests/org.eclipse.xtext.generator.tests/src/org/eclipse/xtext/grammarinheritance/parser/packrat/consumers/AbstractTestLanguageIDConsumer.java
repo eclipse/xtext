@@ -11,14 +11,14 @@ import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.grammarinheritance.services.AbstractTestLanguageGrammarAccess;
 import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory;
-import org.eclipse.xtext.parser.packrat.consumers.LexerRuleAwareTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class AbstractTestLanguageIDConsumer extends LexerRuleAwareTerminalConsumer {
+public class AbstractTestLanguageIDConsumer extends AbstractRuleAwareTerminalConsumer {
 
 	// ('a'..'z'|'A'..'Z'|'_')
 	static final ICharacterClass IDConsumer$$1 = ICharacterClass.Factory.join(
@@ -53,7 +53,7 @@ public class AbstractTestLanguageIDConsumer extends LexerRuleAwareTerminalConsum
 	}
 
 	@Override
-	protected LexerRule doGetLexerRule() {
+	protected LexerRule doGetRule() {
 		return AbstractTestLanguageGrammarAccess.INSTANCE.lrID();
 	}
 

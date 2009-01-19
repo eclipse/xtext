@@ -70,7 +70,7 @@ public class ConcreteTestLanguageGrammarAccess extends BaseEPackageAccess implem
 	}
 	
 	public AbstractTestLanguageGrammarAccess getSuperGrammar() {
-		return AbstractTestLanguageGrammarAccess.INSTANCE;		
+		return AbstractTestLanguageGrammarAccess.INSTANCE;
 	}
 
 	

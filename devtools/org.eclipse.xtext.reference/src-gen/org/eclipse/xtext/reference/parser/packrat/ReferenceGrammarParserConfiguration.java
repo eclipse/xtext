@@ -57,8 +57,7 @@ public class ReferenceGrammarParserConfiguration extends AbstractParserConfigura
 	public void createNonTerminalConsumers() {
 		getXtextBuiltinConfiguration().createNonTerminalConsumers();
 		spielplatzConsumer = new ReferenceGrammarSpielplatzConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(),
-    		new ITerminalConsumer[]{ getWsConsumer(), getMlCommentConsumer(), getSlCommentConsumer() }
+    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
     	);
 		personConsumer = new ReferenceGrammarPersonConsumer(
     		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
@@ -88,13 +87,13 @@ public class ReferenceGrammarParserConfiguration extends AbstractParserConfigura
 	}
 	
 	public void configureConsumers() {
-		getSpielplatzConsumer().setErwachsenerConsumer(getErwachsenerConsumer());
-		getSpielplatzConsumer().setSpielzeugConsumer(getSpielzeugConsumer());
-		getSpielplatzConsumer().setIntConsumer(getIntConsumer());
-		getSpielplatzConsumer().setStringConsumer(getStringConsumer());
-		getSpielplatzConsumer().setFamilieConsumer(getFamilieConsumer());
-		getSpielplatzConsumer().setKindConsumer(getKindConsumer());
 		getSpielplatzConsumer().setCustomTypeParserRuleConsumer(getCustomTypeParserRuleConsumer());
+		getSpielplatzConsumer().setErwachsenerConsumer(getErwachsenerConsumer());
+		getSpielplatzConsumer().setFamilieConsumer(getFamilieConsumer());
+		getSpielplatzConsumer().setIntConsumer(getIntConsumer());
+		getSpielplatzConsumer().setKindConsumer(getKindConsumer());
+		getSpielplatzConsumer().setStringConsumer(getStringConsumer());
+		getSpielplatzConsumer().setSpielzeugConsumer(getSpielzeugConsumer());
 
 		getPersonConsumer().setErwachsenerConsumer(getErwachsenerConsumer());
 		getPersonConsumer().setKindConsumer(getKindConsumer());
@@ -105,64 +104,50 @@ public class ReferenceGrammarParserConfiguration extends AbstractParserConfigura
 		getErwachsenerConsumer().setIdConsumer(getIdConsumer());
 		getErwachsenerConsumer().setIntConsumer(getIntConsumer());
 
-		getSpielzeugConsumer().setIdConsumer(getIdConsumer());
 		getSpielzeugConsumer().setFarbeConsumer(getFarbeConsumer());
+		getSpielzeugConsumer().setIdConsumer(getIdConsumer());
 
 		getFamilieConsumer().setIdConsumer(getIdConsumer());
 		getFamilieConsumer().setStringConsumer(getStringConsumer());
 
 		getCustomTypeParserRuleConsumer().setIdConsumer(getIdConsumer());
 
-		getSpielplatzConsumer().setKeyword$11$Delimiter(ReferenceGrammarDelimiters.keyword$14$Delimiter);
-		getSpielplatzConsumer().setRuleCall$10$Delimiter(ReferenceGrammarDelimiters.ruleCall$11$Delimiter);
-		getSpielplatzConsumer().setKeyword$26$Delimiter(ReferenceGrammarDelimiters.keyword$14$Delimiter);
-		getSpielplatzConsumer().setKeyword$6$Delimiter(ReferenceGrammarDelimiters.keyword$9$Delimiter);
 		getSpielplatzConsumer().setRuleCall$8$Delimiter(ReferenceGrammarDelimiters.ruleCall$11$Delimiter);
-		getKindConsumer().setRuleCall$8$Delimiter(ReferenceGrammarDelimiters.ruleCall$44$Delimiter);
-		getKindConsumer().setKeyword$5$Delimiter(ReferenceGrammarDelimiters.keyword$9$Delimiter);
-		getKindConsumer().setKeyword$11$Delimiter(ReferenceGrammarDelimiters.keyword$14$Delimiter);
+		getSpielplatzConsumer().setRuleCall$10$Delimiter(ReferenceGrammarDelimiters.ruleCall$11$Delimiter);
+		getSpielplatzConsumer().setKeyword$6$Delimiter(ReferenceGrammarDelimiters.keyword$9$Delimiter);
+		getSpielplatzConsumer().setKeyword$11$Delimiter(ReferenceGrammarDelimiters.keyword$14$Delimiter);
+		getSpielplatzConsumer().setKeyword$26$Delimiter(ReferenceGrammarDelimiters.keyword$14$Delimiter);
 		getKindConsumer().setKeyword$6$Delimiter(ReferenceGrammarDelimiters.keyword$14$Delimiter);
+		getKindConsumer().setKeyword$11$Delimiter(ReferenceGrammarDelimiters.keyword$14$Delimiter);
+		getKindConsumer().setRuleCall$8$Delimiter(ReferenceGrammarDelimiters.ruleCall$44$Delimiter);
 		getKindConsumer().setRuleCall$10$Delimiter(ReferenceGrammarDelimiters.ruleCall$11$Delimiter);
-		getErwachsenerConsumer().setKeyword$5$Delimiter(ReferenceGrammarDelimiters.keyword$9$Delimiter);
-		getErwachsenerConsumer().setRuleCall$10$Delimiter(ReferenceGrammarDelimiters.ruleCall$11$Delimiter);
+		getKindConsumer().setKeyword$5$Delimiter(ReferenceGrammarDelimiters.keyword$9$Delimiter);
+		getErwachsenerConsumer().setKeyword$6$Delimiter(ReferenceGrammarDelimiters.keyword$14$Delimiter);
 		getErwachsenerConsumer().setKeyword$11$Delimiter(ReferenceGrammarDelimiters.keyword$14$Delimiter);
 		getErwachsenerConsumer().setRuleCall$8$Delimiter(ReferenceGrammarDelimiters.ruleCall$44$Delimiter);
-		getErwachsenerConsumer().setKeyword$6$Delimiter(ReferenceGrammarDelimiters.keyword$14$Delimiter);
-		getSpielzeugConsumer().setKeyword$5$Delimiter(ReferenceGrammarDelimiters.keyword$9$Delimiter);
-		getSpielzeugConsumer().setRuleCall$8$Delimiter(ReferenceGrammarDelimiters.ruleCall$44$Delimiter);
+		getErwachsenerConsumer().setRuleCall$10$Delimiter(ReferenceGrammarDelimiters.ruleCall$11$Delimiter);
+		getErwachsenerConsumer().setKeyword$5$Delimiter(ReferenceGrammarDelimiters.keyword$9$Delimiter);
 		getSpielzeugConsumer().setKeyword$6$Delimiter(ReferenceGrammarDelimiters.keyword$14$Delimiter);
 		getSpielzeugConsumer().setKeyword$11$Delimiter(ReferenceGrammarDelimiters.keyword$14$Delimiter);
-		getFamilieConsumer().setCrossReference$28$Delimiter(ReferenceGrammarDelimiters.ruleCall$44$Delimiter);
+		getSpielzeugConsumer().setRuleCall$8$Delimiter(ReferenceGrammarDelimiters.ruleCall$44$Delimiter);
+		getSpielzeugConsumer().setKeyword$5$Delimiter(ReferenceGrammarDelimiters.keyword$9$Delimiter);
 		getFamilieConsumer().setKeyword$9$Delimiter(ReferenceGrammarDelimiters.keyword$14$Delimiter);
-		getFamilieConsumer().setCrossReference$23$Delimiter(ReferenceGrammarDelimiters.ruleCall$44$Delimiter);
-		getFamilieConsumer().setRuleCall$15$Delimiter(ReferenceGrammarDelimiters.ruleCall$44$Delimiter);
-		getFamilieConsumer().setKeyword$26$Delimiter(ReferenceGrammarDelimiters.keyword$14$Delimiter);
-		getFamilieConsumer().setCrossReference$20$Delimiter(ReferenceGrammarDelimiters.ruleCall$44$Delimiter);
 		getFamilieConsumer().setKeyword$30$Delimiter(ReferenceGrammarDelimiters.keyword$14$Delimiter);
+		getFamilieConsumer().setKeyword$26$Delimiter(ReferenceGrammarDelimiters.keyword$14$Delimiter);
 		getFamilieConsumer().setCrossReference$17$Delimiter(ReferenceGrammarDelimiters.ruleCall$44$Delimiter);
+		getFamilieConsumer().setCrossReference$20$Delimiter(ReferenceGrammarDelimiters.ruleCall$44$Delimiter);
+		getFamilieConsumer().setRuleCall$15$Delimiter(ReferenceGrammarDelimiters.ruleCall$44$Delimiter);
+		getFamilieConsumer().setCrossReference$28$Delimiter(ReferenceGrammarDelimiters.ruleCall$44$Delimiter);
+		getFamilieConsumer().setCrossReference$23$Delimiter(ReferenceGrammarDelimiters.ruleCall$44$Delimiter);
 		getFamilieConsumer().setRuleCall$14$Delimiter(ReferenceGrammarDelimiters.ruleCall$11$Delimiter);
 		getFamilieConsumer().setKeyword$8$Delimiter(ReferenceGrammarDelimiters.keyword$9$Delimiter);
 		getFamilieConsumer().setKeyword$13$Delimiter(ReferenceGrammarDelimiters.keyword$9$Delimiter);
-		getFarbeConsumer().setKeyword$5$Delimiter(ReferenceGrammarDelimiters.keyword$9$Delimiter);
 		getFarbeConsumer().setKeyword$6$Delimiter(ReferenceGrammarDelimiters.keyword$9$Delimiter);
 		getFarbeConsumer().setKeyword$7$Delimiter(ReferenceGrammarDelimiters.keyword$9$Delimiter);
 		getFarbeConsumer().setKeyword$8$Delimiter(ReferenceGrammarDelimiters.keyword$9$Delimiter);
+		getFarbeConsumer().setKeyword$5$Delimiter(ReferenceGrammarDelimiters.keyword$9$Delimiter);
 		getCustomTypeParserRuleConsumer().setRuleCall$4$Delimiter(ReferenceGrammarDelimiters.ruleCall$44$Delimiter);
 		getCustomTypeParserRuleConsumer().setKeyword$2$Delimiter(ReferenceGrammarDelimiters.keyword$9$Delimiter);
-		// TODO remove workaround
-		getIdConsumer().initFields(this);
-		// TODO remove workaround
-		getIntConsumer().initFields(this);
-		// TODO remove workaround
-		getStringConsumer().initFields(this);
-		// TODO remove workaround
-		getMlCommentConsumer().initFields(this);
-		// TODO remove workaround
-		getSlCommentConsumer().initFields(this);
-		// TODO remove workaround
-		getWsConsumer().initFields(this);
-		// TODO remove workaround
-		getAnyOtherConsumer().initFields(this);
 	}
 	
 	// TODO collect superGrammars transitive

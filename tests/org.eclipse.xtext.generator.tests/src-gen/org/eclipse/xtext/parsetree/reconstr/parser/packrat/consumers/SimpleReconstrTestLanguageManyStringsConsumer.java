@@ -27,17 +27,17 @@ public final class SimpleReconstrTestLanguageManyStringsConsumer extends NonTerm
 
 	private ICharacterClass keyword$3$Delimiter;
 	
-	private ISequenceMatcher ruleCall$7$Delimiter;
-	
 	private ISequenceMatcher ruleCall$5$Delimiter;
+	
+	private ISequenceMatcher ruleCall$7$Delimiter;
 	
 	public SimpleReconstrTestLanguageManyStringsConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 		keyword$3$Delimiter = ICharacterClass.Factory.nullClass();
-		ruleCall$7$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		ruleCall$5$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		ruleCall$7$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -107,20 +107,20 @@ public final class SimpleReconstrTestLanguageManyStringsConsumer extends NonTerm
 		keyword$3$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
-	public ISequenceMatcher getRuleCall$7$Delimiter() {
-		return ruleCall$7$Delimiter;
-	}
-	
-	public void setRuleCall$7$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$7$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
-	}
-	
 	public ISequenceMatcher getRuleCall$5$Delimiter() {
 		return ruleCall$5$Delimiter;
 	}
 	
 	public void setRuleCall$5$Delimiter(ISequenceMatcher matcher) {
 		ruleCall$5$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	}
+	
+	public ISequenceMatcher getRuleCall$7$Delimiter() {
+		return ruleCall$7$Delimiter;
+	}
+	
+	public void setRuleCall$7$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$7$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 }

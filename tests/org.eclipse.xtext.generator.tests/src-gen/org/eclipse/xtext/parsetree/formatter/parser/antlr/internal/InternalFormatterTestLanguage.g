@@ -62,6 +62,7 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 
 
 
+
 // Entry rule entryRuleRoot
 entryRuleRoot returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); }
@@ -98,6 +99,8 @@ ruleRoot returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 ));
+
+
 
 
 
@@ -165,6 +168,8 @@ ruleLine returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleTestLinewrap
 entryRuleTestLinewrap returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.xmi#//@rules.2" /* xtext::ParserRule */, currentNode); }
@@ -203,6 +208,8 @@ ruleTestLinewrap returns [EObject current=null]
 	    }
 	
 )*);
+
+
 
 
 
@@ -276,6 +283,16 @@ ruleTestIndentation returns [EObject current=null]
         createLeafNode("classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 );
+
+
+
+
+
+
+
+
+
+
 
 
 

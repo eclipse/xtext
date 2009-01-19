@@ -62,6 +62,7 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 
 
 
+
 // Entry rule entryRuleStart
 entryRuleStart returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/resource/metamodel/MultiValueFeatureTestLanguage.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); }
@@ -95,6 +96,10 @@ ruleStart returns [EObject current=null]
 	    }
 	
 )+;
+
+
+
+
 
 
 

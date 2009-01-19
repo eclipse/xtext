@@ -14,7 +14,6 @@ public final class LookaheadTestLanguageDelimiters {
 		throw new UnsupportedOperationException("Utility classes may not be initialized");
 	}
 	
-	// TODO do not use IDConsumer internals
 	public static ICharacterClass keyword$15$Delimiter = XtextBuiltinIDConsumer.IDConsumer$$2;
-	
+
 }
