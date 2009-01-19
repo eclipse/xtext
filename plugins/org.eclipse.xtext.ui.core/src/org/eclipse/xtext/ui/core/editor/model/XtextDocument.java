@@ -24,15 +24,19 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jface.text.Document;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.ide.ResourceUtil;
+import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.core.editor.XtextResourceChecker;
+import org.eclipse.xtext.ui.core.editor.model.IXtextDocumentContentObserver.Processor;
 import org.eclipse.xtext.ui.core.internal.XtextMarkerManager;
 import org.eclipse.xtext.ui.core.util.JdtClasspathUriResolver;
 import org.eclipse.xtext.util.StringInputStream;
@@ -67,8 +71,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 			try {
 				String string = get();
 				resource.load(new StringInputStream(string), null);
-			}
-			catch (IOException e) {
+			} catch (IOException e) {
 				throw new WrappedException(e);
 			}
 		}
@@ -90,15 +93,14 @@ public class XtextDocument extends Document implements IXtextDocument {
 		readLock.lock();
 		try {
 			updateContentBeforeRead();
-			return work.exec(resource);
-		}
-		catch (RuntimeException e) {
+			T exec = work.exec(resource);
+			ensureThatStateIsNotReturned((Object) exec,work);
+			return exec;
+		} catch (RuntimeException e) {
 			throw e;
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			throw new WrappedException(e);
-		}
-		finally {
+		} finally {
 			readLock.unlock();
 		}
 	}
@@ -107,20 +109,29 @@ public class XtextDocument extends Document implements IXtextDocument {
 		writeLock.lock();
 		try {
 			T exec = work.exec(resource);
+			ensureThatStateIsNotReturned((Object) exec,work);
 			checkAndUpdateMarkers(resource);
 			notifyModelListeners(resource);
 			// TODO track modifications and serialize back to the text buffer
 			return exec;
-		}
-		catch (RuntimeException e) {
+		} catch (RuntimeException e) {
 			throw e;
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			throw new WrappedException(e);
-		}
-		finally {
+		} finally {
 			writeLock.unlock();
 		}
+	}
+
+	private void ensureThatStateIsNotReturned(Object exec, UnitOfWork<?> uow) {
+		//TODO activate
+//		if (exec instanceof EObject) {
+//			if (((EObject) exec).eResource() == resource
+//					|| ((exec instanceof AbstractNode) && NodeUtil.getNearestSemanticObject((AbstractNode) exec)
+//							.eResource() == resource))
+//				throw new IllegalStateException(
+//						"The unit of work returned state from the resource. This is causing race condition problems and therefore not allowed! "+uow.getClass().getName());
+//		}
 	}
 
 	ListenerList modelListeners = new ListenerList(ListenerList.IDENTITY);
@@ -156,13 +167,13 @@ public class XtextDocument extends Document implements IXtextDocument {
 
 	private <T> void updateContentBeforeRead() {
 		Object[] listeners = xtextDocumentObservers.getListeners();
-		UnitOfWork.Processor processor = new LockAwareProcessor();
+		Processor processor = new LockAwareProcessor();
 		for (int i = 0; i < listeners.length; i++) {
 			((IXtextDocumentContentObserver) listeners[i]).performNecessaryUpdates(processor);
 		}
 	}
 
-	class LockAwareProcessor implements UnitOfWork.Processor {
+	class LockAwareProcessor implements Processor {
 
 		public <T> T process(UnitOfWork<T> transaction) {
 			if (transaction != null) {
@@ -170,13 +181,11 @@ public class XtextDocument extends Document implements IXtextDocument {
 				writeLock.lock();
 				try {
 					return modify(transaction);
-				}
-				finally {
+				} finally {
 					readLock.lock();
 					writeLock.unlock();
 				}
-			}
-			else
+			} else
 				return null;
 		}
 
@@ -201,8 +210,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 		URI uri = resource.getURI();
 		if ((adapterType == IFile.class || adapterType == IResource.class) && uri.isPlatformResource()) {
 			return (T) ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(uri.toPlatformString(true)));
-		}
-		else {
+		} else {
 			return null;
 		}
 	}

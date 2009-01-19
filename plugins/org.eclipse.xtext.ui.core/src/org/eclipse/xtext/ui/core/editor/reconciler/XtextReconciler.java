@@ -24,7 +24,6 @@ import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocumentContentObserver;
 import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocumentUtil;
-import org.eclipse.xtext.ui.core.editor.model.UnitOfWork.Processor;
 
 /**
  * Standard JFace Reconcilers, e.g. the MonoReconciler, convert an replace event
