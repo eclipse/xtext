@@ -27,15 +27,15 @@ public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsume
 	private XtextBuiltinIDConsumer idConsumer;
 	private FowlerDslTestLanguageTransitionConsumer transitionConsumer;
 
-	private ISequenceMatcher crossReference$14$Delimiter;
+	private ISequenceMatcher ruleCall$7$Delimiter;
 	
 	private ICharacterClass keyword$5$Delimiter;
 	
-	private ICharacterClass keyword$16$Delimiter;
+	private ISequenceMatcher crossReference$14$Delimiter;
 	
 	private ICharacterClass keyword$12$Delimiter;
 	
-	private ISequenceMatcher ruleCall$7$Delimiter;
+	private ICharacterClass keyword$16$Delimiter;
 	
 	private ICharacterClass keyword$11$Delimiter;
 	
@@ -45,11 +45,11 @@ public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsume
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
-		crossReference$14$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-		keyword$5$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$16$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$12$Delimiter = ICharacterClass.Factory.nullClass();
 		ruleCall$7$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		keyword$5$Delimiter = ICharacterClass.Factory.nullClass();
+		crossReference$14$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		keyword$12$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$16$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$11$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$19$Delimiter = ICharacterClass.Factory.nullClass();
 	}
@@ -181,12 +181,12 @@ public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsume
 		this.transitionConsumer = transitionConsumer;
 	}
 	
-	public ISequenceMatcher getCrossReference$14$Delimiter() {
-		return crossReference$14$Delimiter;
+	public ISequenceMatcher getRuleCall$7$Delimiter() {
+		return ruleCall$7$Delimiter;
 	}
 	
-	public void setCrossReference$14$Delimiter(ISequenceMatcher matcher) {
-		crossReference$14$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	public void setRuleCall$7$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$7$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	public ICharacterClass getKeyword$5$Delimiter() {
@@ -197,12 +197,12 @@ public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsume
 		keyword$5$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
-	public ICharacterClass getKeyword$16$Delimiter() {
-		return keyword$16$Delimiter;
+	public ISequenceMatcher getCrossReference$14$Delimiter() {
+		return crossReference$14$Delimiter;
 	}
 	
-	public void setKeyword$16$Delimiter(ICharacterClass characterClass) {
-		keyword$16$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setCrossReference$14$Delimiter(ISequenceMatcher matcher) {
+		crossReference$14$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	public ICharacterClass getKeyword$12$Delimiter() {
@@ -213,12 +213,12 @@ public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsume
 		keyword$12$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
-	public ISequenceMatcher getRuleCall$7$Delimiter() {
-		return ruleCall$7$Delimiter;
+	public ICharacterClass getKeyword$16$Delimiter() {
+		return keyword$16$Delimiter;
 	}
 	
-	public void setRuleCall$7$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$7$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	public void setKeyword$16$Delimiter(ICharacterClass characterClass) {
+		keyword$16$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ICharacterClass getKeyword$11$Delimiter() {

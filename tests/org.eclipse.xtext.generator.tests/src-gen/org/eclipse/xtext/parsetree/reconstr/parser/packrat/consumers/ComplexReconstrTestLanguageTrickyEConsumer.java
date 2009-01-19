@@ -31,15 +31,15 @@ public final class ComplexReconstrTestLanguageTrickyEConsumer extends NonTermina
 
 	private ISequenceMatcher ruleCall$8$Delimiter;
 	
-	private ISequenceMatcher ruleCall$12$Delimiter;
-	
 	private ICharacterClass keyword$4$Delimiter;
 	
-	private ICharacterClass keyword$13$Delimiter;
+	private ISequenceMatcher ruleCall$10$Delimiter;
+	
+	private ISequenceMatcher ruleCall$12$Delimiter;
 	
 	private ISequenceMatcher ruleCall$18$Delimiter;
 	
-	private ISequenceMatcher ruleCall$10$Delimiter;
+	private ICharacterClass keyword$13$Delimiter;
 	
 	private ISequenceMatcher ruleCall$16$Delimiter;
 	
@@ -48,11 +48,11 @@ public final class ComplexReconstrTestLanguageTrickyEConsumer extends NonTermina
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 		ruleCall$8$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-		ruleCall$12$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		keyword$4$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$13$Delimiter = ICharacterClass.Factory.nullClass();
-		ruleCall$18$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		ruleCall$10$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		ruleCall$12$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		ruleCall$18$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		keyword$13$Delimiter = ICharacterClass.Factory.nullClass();
 		ruleCall$16$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
@@ -192,14 +192,6 @@ public final class ComplexReconstrTestLanguageTrickyEConsumer extends NonTermina
 		ruleCall$8$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
-	public ISequenceMatcher getRuleCall$12$Delimiter() {
-		return ruleCall$12$Delimiter;
-	}
-	
-	public void setRuleCall$12$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$12$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
-	}
-	
 	public ICharacterClass getKeyword$4$Delimiter() {
 		return keyword$4$Delimiter;
 	}
@@ -208,12 +200,20 @@ public final class ComplexReconstrTestLanguageTrickyEConsumer extends NonTermina
 		keyword$4$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
-	public ICharacterClass getKeyword$13$Delimiter() {
-		return keyword$13$Delimiter;
+	public ISequenceMatcher getRuleCall$10$Delimiter() {
+		return ruleCall$10$Delimiter;
 	}
 	
-	public void setKeyword$13$Delimiter(ICharacterClass characterClass) {
-		keyword$13$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setRuleCall$10$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$10$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	}
+	
+	public ISequenceMatcher getRuleCall$12$Delimiter() {
+		return ruleCall$12$Delimiter;
+	}
+	
+	public void setRuleCall$12$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$12$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	public ISequenceMatcher getRuleCall$18$Delimiter() {
@@ -224,12 +224,12 @@ public final class ComplexReconstrTestLanguageTrickyEConsumer extends NonTermina
 		ruleCall$18$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
-	public ISequenceMatcher getRuleCall$10$Delimiter() {
-		return ruleCall$10$Delimiter;
+	public ICharacterClass getKeyword$13$Delimiter() {
+		return keyword$13$Delimiter;
 	}
 	
-	public void setRuleCall$10$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$10$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	public void setKeyword$13$Delimiter(ICharacterClass characterClass) {
+		keyword$13$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ISequenceMatcher getRuleCall$16$Delimiter() {

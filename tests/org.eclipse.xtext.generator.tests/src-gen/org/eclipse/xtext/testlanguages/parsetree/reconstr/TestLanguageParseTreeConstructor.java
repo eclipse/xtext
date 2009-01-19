@@ -225,11 +225,13 @@ protected class ChoiceRule_0_1_Assignment_optionalKeyword extends AssignmentToke
 	protected Solution createSolution() {
 		if((value = current.getConsumable("optionalKeyword",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("optionalKeyword");
-		if("optional".equals(value)) { // xtext::Keyword
+
+		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
 			element = TestLanguageGrammarAccess.INSTANCE.prChoiceRule().ele010KeywordOptional();
 			return new Solution(obj);
 		}
+
 		return null;
 	}
 }

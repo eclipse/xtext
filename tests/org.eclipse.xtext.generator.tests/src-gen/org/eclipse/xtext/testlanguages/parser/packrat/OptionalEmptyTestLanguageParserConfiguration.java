@@ -62,8 +62,8 @@ public class OptionalEmptyTestLanguageParserConfiguration extends AbstractParser
 
 		getGreetingConsumer().setIdConsumer(getIdConsumer());
 
-		getGreetingConsumer().setKeyword$2$Delimiter(OptionalEmptyTestLanguageDelimiters.keyword$8$Delimiter);
 		getGreetingConsumer().setRuleCall$4$Delimiter(OptionalEmptyTestLanguageDelimiters.ruleCall$10$Delimiter);
+		getGreetingConsumer().setKeyword$2$Delimiter(OptionalEmptyTestLanguageDelimiters.keyword$8$Delimiter);
 		// TODO remove workaround
 		getIdConsumer().initFields(this);
 		// TODO remove workaround

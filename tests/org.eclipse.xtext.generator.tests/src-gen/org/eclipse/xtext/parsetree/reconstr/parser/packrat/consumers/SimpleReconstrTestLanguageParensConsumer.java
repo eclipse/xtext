@@ -25,9 +25,9 @@ public final class SimpleReconstrTestLanguageParensConsumer extends NonTerminalC
 
 	private SimpleReconstrTestLanguageOpConsumer opConsumer;
 
-	private ICharacterClass keyword$8$Delimiter;
-	
 	private ICharacterClass keyword$6$Delimiter;
+	
+	private ICharacterClass keyword$8$Delimiter;
 	
 	private ICharacterClass keyword$4$Delimiter;
 	
@@ -35,8 +35,8 @@ public final class SimpleReconstrTestLanguageParensConsumer extends NonTerminalC
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
-		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$6$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$4$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
@@ -105,20 +105,20 @@ public final class SimpleReconstrTestLanguageParensConsumer extends NonTerminalC
 		this.opConsumer = opConsumer;
 	}
 	
-	public ICharacterClass getKeyword$8$Delimiter() {
-		return keyword$8$Delimiter;
-	}
-	
-	public void setKeyword$8$Delimiter(ICharacterClass characterClass) {
-		keyword$8$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
 	public ICharacterClass getKeyword$6$Delimiter() {
 		return keyword$6$Delimiter;
 	}
 	
 	public void setKeyword$6$Delimiter(ICharacterClass characterClass) {
 		keyword$6$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$8$Delimiter() {
+		return keyword$8$Delimiter;
+	}
+	
+	public void setKeyword$8$Delimiter(ICharacterClass characterClass) {
+		keyword$8$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ICharacterClass getKeyword$4$Delimiter() {

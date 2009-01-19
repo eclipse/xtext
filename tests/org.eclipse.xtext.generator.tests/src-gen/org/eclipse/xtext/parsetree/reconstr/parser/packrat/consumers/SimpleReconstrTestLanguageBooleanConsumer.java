@@ -1,7 +1,7 @@
 /*
 Generated with Xtext
 */
-package org.eclipse.xtext.crossrefs.parser.packrat.consumers;
+package org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
@@ -15,31 +15,31 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
-import org.eclipse.xtext.crossrefs.services.ImportUriTestLanguageGrammarAccess;
-import org.eclipse.xtext.crossrefs.services.ImportUriTestLanguageGrammarAccess.TypeElements;
+import org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestLanguageGrammarAccess;
+import org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestLanguageGrammarAccess.BooleanElements;
 
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 
 @SuppressWarnings("unused")
-public final class ImportUriTestLanguageTypeConsumer extends NonTerminalConsumer {
+public final class SimpleReconstrTestLanguageBooleanConsumer extends NonTerminalConsumer {
 
 	private XtextBuiltinIDConsumer idConsumer;
 
-	private ISequenceMatcher ruleCall$6$Delimiter;
+	private ICharacterClass keyword$6$Delimiter;
 	
 	private ICharacterClass keyword$4$Delimiter;
 	
-	private ISequenceMatcher crossReference$9$Delimiter;
+	private ISequenceMatcher ruleCall$9$Delimiter;
 	
 	private ICharacterClass keyword$7$Delimiter;
 	
-	public ImportUriTestLanguageTypeConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
+	public SimpleReconstrTestLanguageBooleanConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
-		ruleCall$6$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		keyword$6$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$4$Delimiter = ICharacterClass.Factory.nullClass();
-		crossReference$9$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		ruleCall$9$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
@@ -69,27 +69,32 @@ public final class ImportUriTestLanguageTypeConsumer extends NonTerminalConsumer
 	}
 
 	protected boolean consumeKeyword$4() throws Exception {
-		return consumeKeyword(getRule().ele000KeywordType(), null, false, false, getKeyword$4$Delimiter());
+		return consumeKeyword(getRule().ele000KeywordNumberSignDigitFour(), null, false, false, getKeyword$4$Delimiter());
 	}
 
 	protected boolean consumeAssignment$5() throws Exception {
-		if (consumeTerminal(idConsumer, "name", false, false, getRule().ele0010LexerRuleCallID(), getRuleCall$6$Delimiter()))
+		doConsumeAssignment$5();
+		return true;
+	}
+
+	protected boolean doConsumeAssignment$5() throws Exception {
+		if (consumeKeyword(getRule().ele0010KeywordMyoption(), "bool", false, true, getKeyword$6$Delimiter()))
 			return true;
 		return false;
 	}
 
 	protected boolean consumeKeyword$7() throws Exception {
-		return consumeKeyword(getRule().ele01KeywordExtends(), null, false, false, getKeyword$7$Delimiter());
+		return consumeKeyword(getRule().ele01KeywordKw(), null, false, false, getKeyword$7$Delimiter());
 	}
 
 	protected boolean consumeAssignment$8() throws Exception {
-		if (consumeTerminal(idConsumer, null, false, false, getRule().ele10CrossReferenceEStringType(), getCrossReference$9$Delimiter()))
+		if (consumeTerminal(idConsumer, "value", false, false, getRule().ele10LexerRuleCallID(), getRuleCall$9$Delimiter()))
 			return true;
 		return false;
 	}
 
-	public TypeElements getRule() {
-		return ImportUriTestLanguageGrammarAccess.INSTANCE.prType();
+	public BooleanElements getRule() {
+		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prBoolean();
 	}
 	
 	protected EObject getGrammarElement() {
@@ -98,19 +103,19 @@ public final class ImportUriTestLanguageTypeConsumer extends NonTerminalConsumer
 
 	@Override
 	protected String getDefaultTypeName() {
-		return "Type";
+		return "Boolean";
 	}
 	
 	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
 		this.idConsumer = idConsumer;
 	}
 	
-	public ISequenceMatcher getRuleCall$6$Delimiter() {
-		return ruleCall$6$Delimiter;
+	public ICharacterClass getKeyword$6$Delimiter() {
+		return keyword$6$Delimiter;
 	}
 	
-	public void setRuleCall$6$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$6$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	public void setKeyword$6$Delimiter(ICharacterClass characterClass) {
+		keyword$6$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ICharacterClass getKeyword$4$Delimiter() {
@@ -121,12 +126,12 @@ public final class ImportUriTestLanguageTypeConsumer extends NonTerminalConsumer
 		keyword$4$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
-	public ISequenceMatcher getCrossReference$9$Delimiter() {
-		return crossReference$9$Delimiter;
+	public ISequenceMatcher getRuleCall$9$Delimiter() {
+		return ruleCall$9$Delimiter;
 	}
 	
-	public void setCrossReference$9$Delimiter(ISequenceMatcher matcher) {
-		crossReference$9$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	public void setRuleCall$9$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$9$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	public ICharacterClass getKeyword$7$Delimiter() {

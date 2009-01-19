@@ -84,11 +84,13 @@ protected class Ref2_1_Assignment_ref2 extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("ref2",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("ref2");
+
 		if("mykeyword1".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
 			element = Bug250313GrammarAccess.INSTANCE.prRef2().ele1000KeywordMykeyword1();
 			return new Solution(obj);
 		}
+
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = Bug250313GrammarAccess.INSTANCE.prRef2().ele1001LexerRuleCallSTRING();

@@ -27,22 +27,22 @@ public final class ContentAssistTestLanguageFirstAbstractRuleChildConsumer exten
 	private ContentAssistTestLanguageAbstractRuleConsumer abstractRuleConsumer;
 	private XtextBuiltinIDConsumer idConsumer;
 
-	private ICharacterClass keyword$7$Delimiter;
-	
-	private ISequenceMatcher ruleCall$6$Delimiter;
-	
 	private ICharacterClass keyword$11$Delimiter;
 	
+	private ICharacterClass keyword$7$Delimiter;
+	
 	private ICharacterClass keyword$10$Delimiter;
+	
+	private ISequenceMatcher ruleCall$6$Delimiter;
 	
 	public ContentAssistTestLanguageFirstAbstractRuleChildConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
-		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
-		ruleCall$6$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		keyword$11$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$10$Delimiter = ICharacterClass.Factory.nullClass();
+		ruleCall$6$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -127,22 +127,6 @@ public final class ContentAssistTestLanguageFirstAbstractRuleChildConsumer exten
 		this.idConsumer = idConsumer;
 	}
 	
-	public ICharacterClass getKeyword$7$Delimiter() {
-		return keyword$7$Delimiter;
-	}
-	
-	public void setKeyword$7$Delimiter(ICharacterClass characterClass) {
-		keyword$7$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
-	public ISequenceMatcher getRuleCall$6$Delimiter() {
-		return ruleCall$6$Delimiter;
-	}
-	
-	public void setRuleCall$6$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$6$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
-	}
-	
 	public ICharacterClass getKeyword$11$Delimiter() {
 		return keyword$11$Delimiter;
 	}
@@ -151,12 +135,28 @@ public final class ContentAssistTestLanguageFirstAbstractRuleChildConsumer exten
 		keyword$11$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
+	public ICharacterClass getKeyword$7$Delimiter() {
+		return keyword$7$Delimiter;
+	}
+	
+	public void setKeyword$7$Delimiter(ICharacterClass characterClass) {
+		keyword$7$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
 	public ICharacterClass getKeyword$10$Delimiter() {
 		return keyword$10$Delimiter;
 	}
 	
 	public void setKeyword$10$Delimiter(ICharacterClass characterClass) {
 		keyword$10$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ISequenceMatcher getRuleCall$6$Delimiter() {
+		return ruleCall$6$Delimiter;
+	}
+	
+	public void setRuleCall$6$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$6$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 }

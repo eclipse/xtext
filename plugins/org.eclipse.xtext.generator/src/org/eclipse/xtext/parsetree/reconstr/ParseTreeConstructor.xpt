@@ -167,11 +167,19 @@ protected class «elementMethodName()» extends RuleCallToken {
 «ENDDEFINE»
 
 «DEFINE assignmentCreate FOR Keyword-»
+«IF containingAssignment().operator == '?='»
+		if(Boolean.TRUE.equals(value)) { // «metaType.name»
+			type = AssignmentType.KW;
+			element = «gaFullAccessor()»;
+			return new Solution(obj);
+		}
+«ELSE»
 		if("«value.replaceAll("\\\\","\\\\\\\\").replaceAll("\\\"","\\\\\\\"")»".equals(value)) { // «metaType.name»
 			type = AssignmentType.KW;
 			element = «gaFullAccessor()»;
 			return new Solution(obj);
 		}
+«ENDIF»
 «ENDDEFINE»
 
 «DEFINE assignmentCreate FOR CrossReference-»

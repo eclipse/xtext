@@ -86,20 +86,20 @@ public class FowlerDslTestLanguageParserConfiguration extends AbstractParserConf
 
 		getTransitionConsumer().setIdConsumer(getIdConsumer());
 
-		getStatemachineConsumer().setKeyword$11$Delimiter(FowlerDslTestLanguageDelimiters.keyword$9$Delimiter);
 		getStatemachineConsumer().setKeyword$7$Delimiter(FowlerDslTestLanguageDelimiters.keyword$9$Delimiter);
-		getStatemachineConsumer().setKeyword$10$Delimiter(FowlerDslTestLanguageDelimiters.keyword$9$Delimiter);
 		getStatemachineConsumer().setKeyword$14$Delimiter(FowlerDslTestLanguageDelimiters.keyword$9$Delimiter);
+		getStatemachineConsumer().setKeyword$10$Delimiter(FowlerDslTestLanguageDelimiters.keyword$9$Delimiter);
+		getStatemachineConsumer().setKeyword$11$Delimiter(FowlerDslTestLanguageDelimiters.keyword$9$Delimiter);
 		getEventConsumer().setRuleCall$6$Delimiter(FowlerDslTestLanguageDelimiters.ruleCall$26$Delimiter);
 		getEventConsumer().setRuleCall$8$Delimiter(FowlerDslTestLanguageDelimiters.ruleCall$26$Delimiter);
 		getEventConsumer().setKeyword$4$Delimiter(FowlerDslTestLanguageDelimiters.keyword$9$Delimiter);
 		getCommandConsumer().setRuleCall$5$Delimiter(FowlerDslTestLanguageDelimiters.ruleCall$26$Delimiter);
 		getCommandConsumer().setRuleCall$3$Delimiter(FowlerDslTestLanguageDelimiters.ruleCall$26$Delimiter);
-		getStateConsumer().setCrossReference$14$Delimiter(FowlerDslTestLanguageDelimiters.ruleCall$26$Delimiter);
-		getStateConsumer().setKeyword$5$Delimiter(FowlerDslTestLanguageDelimiters.keyword$9$Delimiter);
-		getStateConsumer().setKeyword$16$Delimiter(FowlerDslTestLanguageDelimiters.keyword$49$Delimiter);
-		getStateConsumer().setKeyword$12$Delimiter(FowlerDslTestLanguageDelimiters.keyword$49$Delimiter);
 		getStateConsumer().setRuleCall$7$Delimiter(FowlerDslTestLanguageDelimiters.ruleCall$26$Delimiter);
+		getStateConsumer().setKeyword$5$Delimiter(FowlerDslTestLanguageDelimiters.keyword$9$Delimiter);
+		getStateConsumer().setCrossReference$14$Delimiter(FowlerDslTestLanguageDelimiters.ruleCall$26$Delimiter);
+		getStateConsumer().setKeyword$12$Delimiter(FowlerDslTestLanguageDelimiters.keyword$49$Delimiter);
+		getStateConsumer().setKeyword$16$Delimiter(FowlerDslTestLanguageDelimiters.keyword$49$Delimiter);
 		getStateConsumer().setKeyword$11$Delimiter(FowlerDslTestLanguageDelimiters.keyword$9$Delimiter);
 		getStateConsumer().setKeyword$19$Delimiter(FowlerDslTestLanguageDelimiters.keyword$9$Delimiter);
 		getTransitionConsumer().setCrossReference$8$Delimiter(FowlerDslTestLanguageDelimiters.ruleCall$26$Delimiter);

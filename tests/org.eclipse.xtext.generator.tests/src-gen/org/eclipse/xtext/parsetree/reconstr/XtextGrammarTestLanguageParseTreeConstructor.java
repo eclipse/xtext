@@ -222,11 +222,13 @@ protected class Grammar_0_0_0_0_0_0_Assignment_abstract extends AssignmentToken 
 	protected Solution createSolution() {
 		if((value = current.getConsumable("abstract",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("abstract");
-		if("abstract language".equals(value)) { // xtext::Keyword
+
+		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
 			element = XtextGrammarTestLanguageGrammarAccess.INSTANCE.prGrammar().ele0000000KeywordAbstractLanguage();
 			return new Solution(obj);
 		}
+
 		return null;
 	}
 }
@@ -2293,21 +2295,27 @@ protected class AbstractToken_1_Assignment_cardinality extends AssignmentToken  
 	protected Solution createSolution() {
 		if((value = current.getConsumable("cardinality",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("cardinality");
+
 		if("?".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
 			element = XtextGrammarTestLanguageGrammarAccess.INSTANCE.prAbstractToken().ele1000KeywordQuestionMark();
 			return new Solution(obj);
 		}
+
+
 		if("*".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
 			element = XtextGrammarTestLanguageGrammarAccess.INSTANCE.prAbstractToken().ele1001KeywordAsterisk();
 			return new Solution(obj);
 		}
+
+
 		if("+".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
 			element = XtextGrammarTestLanguageGrammarAccess.INSTANCE.prAbstractToken().ele101KeywordPlusSign();
 			return new Solution(obj);
 		}
+
 		return null;
 	}
 }
@@ -2416,21 +2424,27 @@ protected class Assignment_0_1_Assignment_operator extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("operator",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("operator");
+
 		if("+=".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
 			element = XtextGrammarTestLanguageGrammarAccess.INSTANCE.prAssignment().ele01000KeywordPlusSignEqualsSign();
 			return new Solution(obj);
 		}
+
+
 		if("=".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
 			element = XtextGrammarTestLanguageGrammarAccess.INSTANCE.prAssignment().ele01001KeywordEqualsSign();
 			return new Solution(obj);
 		}
+
+
 		if("?=".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
 			element = XtextGrammarTestLanguageGrammarAccess.INSTANCE.prAssignment().ele0101KeywordQuestionMarkEqualsSign();
 			return new Solution(obj);
 		}
+
 		return null;
 	}
 }
@@ -2823,16 +2837,20 @@ protected class Action_0_0_1_Assignment_operator extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("operator",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("operator");
+
 		if("=".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
 			element = XtextGrammarTestLanguageGrammarAccess.INSTANCE.prAction().ele00100KeywordEqualsSign();
 			return new Solution(obj);
 		}
+
+
 		if("+=".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
 			element = XtextGrammarTestLanguageGrammarAccess.INSTANCE.prAction().ele00101KeywordPlusSignEqualsSign();
 			return new Solution(obj);
 		}
+
 		return null;
 	}
 }

@@ -95,6 +95,16 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 		assertEquals(model, parseAndSerialize(model));
 	}
 
+	public void testSimpleAlternativeBoolTrue() throws Exception {
+		String model = "#4 myoption kw blupp";
+		assertEquals(model, parseAndSerialize(model));
+	}
+
+	public void testSimpleAlternativeBoolFalse() throws Exception {
+		String model = "#4 kw blupp";
+		assertEquals(model, parseAndSerialize(model));
+	}
+
 	// FIXME: this depends on
 	// https://bugs.eclipse.org/bugs/show_bug.cgi?id=250313
 	// public void testSimpleAlternativeAssignment2() throws Exception {
@@ -106,7 +116,7 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 		String model = "type A extends B type B extends A";
 		assertEquals(model, parseAndSerialize(model));
 	}
-	
+
 	public void testSpare() throws Exception {
 		String model = "#3 id1";
 		assertEquals(model, parseAndSerialize(model));

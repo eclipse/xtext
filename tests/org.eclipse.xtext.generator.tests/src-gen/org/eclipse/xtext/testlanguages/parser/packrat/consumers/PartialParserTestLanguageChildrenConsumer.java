@@ -25,11 +25,11 @@ public final class PartialParserTestLanguageChildrenConsumer extends NonTerminal
 
 	private PartialParserTestLanguageChildConsumer childConsumer;
 
-	private ICharacterClass keyword$6$Delimiter;
-	
 	private ICharacterClass keyword$13$Delimiter;
 	
 	private ICharacterClass keyword$10$Delimiter;
+	
+	private ICharacterClass keyword$6$Delimiter;
 	
 	private ICharacterClass keyword$5$Delimiter;
 	
@@ -37,9 +37,9 @@ public final class PartialParserTestLanguageChildrenConsumer extends NonTerminal
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
-		keyword$6$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$13$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$10$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$6$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$5$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
@@ -135,14 +135,6 @@ public final class PartialParserTestLanguageChildrenConsumer extends NonTerminal
 		this.childConsumer = childConsumer;
 	}
 	
-	public ICharacterClass getKeyword$6$Delimiter() {
-		return keyword$6$Delimiter;
-	}
-	
-	public void setKeyword$6$Delimiter(ICharacterClass characterClass) {
-		keyword$6$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
 	public ICharacterClass getKeyword$13$Delimiter() {
 		return keyword$13$Delimiter;
 	}
@@ -157,6 +149,14 @@ public final class PartialParserTestLanguageChildrenConsumer extends NonTerminal
 	
 	public void setKeyword$10$Delimiter(ICharacterClass characterClass) {
 		keyword$10$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$6$Delimiter() {
+		return keyword$6$Delimiter;
+	}
+	
+	public void setKeyword$6$Delimiter(ICharacterClass characterClass) {
+		keyword$6$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ICharacterClass getKeyword$5$Delimiter() {

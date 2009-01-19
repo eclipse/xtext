@@ -14,12 +14,12 @@ public final class TestLanguageDelimiters {
 		throw new UnsupportedOperationException("Utility classes may not be initialized");
 	}
 	
-	// TODO do not use IDConsumer internals
-	public static ICharacterClass keyword$14$Delimiter = XtextBuiltinIDConsumer.IDConsumer$$2;
-	
 	public static ISequenceMatcher ruleCall$18$Delimiter = new SetBasedKeywordMatcher(
 		"choice", "optional", "reducible");
 		
+	// TODO do not use IDConsumer internals
+	public static ICharacterClass keyword$14$Delimiter = XtextBuiltinIDConsumer.IDConsumer$$2;
+	
 	public static ISequenceMatcher ruleCall$33$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	
 }

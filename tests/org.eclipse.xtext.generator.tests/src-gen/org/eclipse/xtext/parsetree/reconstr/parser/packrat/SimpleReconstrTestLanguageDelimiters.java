@@ -14,14 +14,14 @@ public final class SimpleReconstrTestLanguageDelimiters {
 		throw new UnsupportedOperationException("Utility classes may not be initialized");
 	}
 	
-	public static ISequenceMatcher ruleCall$28$Delimiter = new SetBasedKeywordMatcher(
-		"type", "extends", "mykeyword1", "mykeyword2");
+	public static ISequenceMatcher ruleCall$30$Delimiter = new SetBasedKeywordMatcher(
+		"type", "extends", "mykeyword1", "mykeyword2", "myoption", "kw");
 		
-	public static ICharacterClass keyword$34$Delimiter = ICharacterClass.Factory.nullClass();
+	public static ICharacterClass keyword$36$Delimiter = ICharacterClass.Factory.nullClass();
 	
-	public static ISequenceMatcher ruleCall$44$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+	public static ISequenceMatcher ruleCall$46$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	
 	// TODO do not use IDConsumer internals
-	public static ICharacterClass keyword$65$Delimiter = XtextBuiltinIDConsumer.IDConsumer$$2;
+	public static ICharacterClass keyword$67$Delimiter = XtextBuiltinIDConsumer.IDConsumer$$2;
 	
 }

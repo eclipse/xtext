@@ -25,19 +25,19 @@ public final class TransientValuesTestTestRequiredConsumer extends NonTerminalCo
 
 	private XtextBuiltinINTConsumer intConsumer;
 
-	private ISequenceMatcher ruleCall$7$Delimiter;
-	
 	private ICharacterClass keyword$3$Delimiter;
 	
 	private ISequenceMatcher ruleCall$5$Delimiter;
+	
+	private ISequenceMatcher ruleCall$7$Delimiter;
 	
 	public TransientValuesTestTestRequiredConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
-		ruleCall$7$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		keyword$3$Delimiter = ICharacterClass.Factory.nullClass();
 		ruleCall$5$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		ruleCall$7$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -94,14 +94,6 @@ public final class TransientValuesTestTestRequiredConsumer extends NonTerminalCo
 		this.intConsumer = intConsumer;
 	}
 	
-	public ISequenceMatcher getRuleCall$7$Delimiter() {
-		return ruleCall$7$Delimiter;
-	}
-	
-	public void setRuleCall$7$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$7$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
-	}
-	
 	public ICharacterClass getKeyword$3$Delimiter() {
 		return keyword$3$Delimiter;
 	}
@@ -116,6 +108,14 @@ public final class TransientValuesTestTestRequiredConsumer extends NonTerminalCo
 	
 	public void setRuleCall$5$Delimiter(ISequenceMatcher matcher) {
 		ruleCall$5$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	}
+	
+	public ISequenceMatcher getRuleCall$7$Delimiter() {
+		return ruleCall$7$Delimiter;
+	}
+	
+	public void setRuleCall$7$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$7$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 }

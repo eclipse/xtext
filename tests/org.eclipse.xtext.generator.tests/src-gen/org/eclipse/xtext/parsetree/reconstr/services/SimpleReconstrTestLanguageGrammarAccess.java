@@ -49,55 +49,63 @@ public class SimpleReconstrTestLanguageGrammarAccess extends BaseEPackageAccess 
 		private final Alternatives c000Alternatives = (Alternatives)c00Alternatives.eContents().get(0);
 		private final Alternatives c0000Alternatives = (Alternatives)c000Alternatives.eContents().get(0);
 		private final Alternatives c00000Alternatives = (Alternatives)c0000Alternatives.eContents().get(0);
-		private final RuleCall c000000ParserRuleCallAtom = (RuleCall)c00000Alternatives.eContents().get(0);
-		private final RuleCall c000001ParserRuleCallTwoNumbers = (RuleCall)c00000Alternatives.eContents().get(1);
-		private final RuleCall c00001ParserRuleCallManyStrings = (RuleCall)c0000Alternatives.eContents().get(1);
-		private final RuleCall c0001ParserRuleCallParens = (RuleCall)c000Alternatives.eContents().get(1);
-		private final RuleCall c001ParserRuleCallType = (RuleCall)c00Alternatives.eContents().get(1);
-		private final RuleCall c01ParserRuleCallRef2 = (RuleCall)c0Alternatives.eContents().get(1);
-		private final RuleCall c1ParserRuleCallSpare = (RuleCall)cAlternatives.eContents().get(1);
+		private final Alternatives c000000Alternatives = (Alternatives)c00000Alternatives.eContents().get(0);
+		private final RuleCall c0000000ParserRuleCallAtom = (RuleCall)c000000Alternatives.eContents().get(0);
+		private final RuleCall c0000001ParserRuleCallTwoNumbers = (RuleCall)c000000Alternatives.eContents().get(1);
+		private final RuleCall c000001ParserRuleCallManyStrings = (RuleCall)c00000Alternatives.eContents().get(1);
+		private final RuleCall c00001ParserRuleCallParens = (RuleCall)c0000Alternatives.eContents().get(1);
+		private final RuleCall c0001ParserRuleCallType = (RuleCall)c000Alternatives.eContents().get(1);
+		private final RuleCall c001ParserRuleCallRef2 = (RuleCall)c00Alternatives.eContents().get(1);
+		private final RuleCall c01ParserRuleCallSpare = (RuleCall)c0Alternatives.eContents().get(1);
+		private final RuleCall c1ParserRuleCallBoolean = (RuleCall)cAlternatives.eContents().get(1);
 		
-		// Term returns Expression : Atom | TwoNumbers | ManyStrings | Parens | Type | Ref2 | Spare ;
+		// Term returns Expression : Atom | TwoNumbers | ManyStrings | Parens | Type | Ref2 | Spare | Boolean ;
 		public ParserRule getRule() { return rule; }
 
-		// Atom | TwoNumbers | ManyStrings | Parens | Type | Ref2 | Spare
+		// Atom | TwoNumbers | ManyStrings | Parens | Type | Ref2 | Spare | Boolean
 		public Alternatives eleAlternatives() { return cAlternatives; }
 
-		// Atom | TwoNumbers | ManyStrings | Parens | Type | Ref2
+		// Atom | TwoNumbers | ManyStrings | Parens | Type | Ref2 | Spare
 		public Alternatives ele0Alternatives() { return c0Alternatives; }
 
-		// Atom | TwoNumbers | ManyStrings | Parens | Type
+		// Atom | TwoNumbers | ManyStrings | Parens | Type | Ref2
 		public Alternatives ele00Alternatives() { return c00Alternatives; }
 
-		// Atom | TwoNumbers | ManyStrings | Parens
+		// Atom | TwoNumbers | ManyStrings | Parens | Type
 		public Alternatives ele000Alternatives() { return c000Alternatives; }
 
-		// Atom | TwoNumbers | ManyStrings
+		// Atom | TwoNumbers | ManyStrings | Parens
 		public Alternatives ele0000Alternatives() { return c0000Alternatives; }
 
-		// Atom | TwoNumbers
+		// Atom | TwoNumbers | ManyStrings
 		public Alternatives ele00000Alternatives() { return c00000Alternatives; }
 
+		// Atom | TwoNumbers
+		public Alternatives ele000000Alternatives() { return c000000Alternatives; }
+
 		// Atom
-		public RuleCall ele000000ParserRuleCallAtom() { return c000000ParserRuleCallAtom; }
+		public RuleCall ele0000000ParserRuleCallAtom() { return c0000000ParserRuleCallAtom; }
 
 		// TwoNumbers
-		public RuleCall ele000001ParserRuleCallTwoNumbers() { return c000001ParserRuleCallTwoNumbers; }
+		public RuleCall ele0000001ParserRuleCallTwoNumbers() { return c0000001ParserRuleCallTwoNumbers; }
 
 		// ManyStrings
-		public RuleCall ele00001ParserRuleCallManyStrings() { return c00001ParserRuleCallManyStrings; }
+		public RuleCall ele000001ParserRuleCallManyStrings() { return c000001ParserRuleCallManyStrings; }
 
 		// Parens
-		public RuleCall ele0001ParserRuleCallParens() { return c0001ParserRuleCallParens; }
+		public RuleCall ele00001ParserRuleCallParens() { return c00001ParserRuleCallParens; }
 
 		// Type
-		public RuleCall ele001ParserRuleCallType() { return c001ParserRuleCallType; }
+		public RuleCall ele0001ParserRuleCallType() { return c0001ParserRuleCallType; }
 
 		// Ref2
-		public RuleCall ele01ParserRuleCallRef2() { return c01ParserRuleCallRef2; }
+		public RuleCall ele001ParserRuleCallRef2() { return c001ParserRuleCallRef2; }
 
 		// Spare
-		public RuleCall ele1ParserRuleCallSpare() { return c1ParserRuleCallSpare; }
+		public RuleCall ele01ParserRuleCallSpare() { return c01ParserRuleCallSpare; }
+
+		// Boolean
+		public RuleCall ele1ParserRuleCallBoolean() { return c1ParserRuleCallBoolean; }
 	}
 
 	public class AtomElements implements IParserRuleAccess {
@@ -360,6 +368,49 @@ public class SimpleReconstrTestLanguageGrammarAccess extends BaseEPackageAccess 
 		// ID
 		public RuleCall ele110LexerRuleCallID() { return c110LexerRuleCallID; }
 	}
+
+	public class BooleanElements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(10);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Group c0Group = (Group)cGroup.eContents().get(0);
+		private final Group c00Group = (Group)c0Group.eContents().get(0);
+		private final Keyword c000KeywordNumberSignDigitFour = (Keyword)c00Group.eContents().get(0);
+		private final Assignment c001AssignmentBool = (Assignment)c00Group.eContents().get(1);
+		private final Keyword c0010KeywordMyoption = (Keyword)c001AssignmentBool.eContents().get(0);
+		private final Keyword c01KeywordKw = (Keyword)c0Group.eContents().get(1);
+		private final Assignment c1AssignmentValue = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall c10LexerRuleCallID = (RuleCall)c1AssignmentValue.eContents().get(0);
+		
+		// Boolean : '#4' ( bool ?= 'myoption' ) ? 'kw' value = ID ;
+		public ParserRule getRule() { return rule; }
+
+		// '#4' ( bool ?= 'myoption' ) ? 'kw' value = ID
+		public Group eleGroup() { return cGroup; }
+
+		// '#4' ( bool ?= 'myoption' ) ? 'kw'
+		public Group ele0Group() { return c0Group; }
+
+		// '#4' ( bool ?= 'myoption' ) ?
+		public Group ele00Group() { return c00Group; }
+
+		// '#4'
+		public Keyword ele000KeywordNumberSignDigitFour() { return c000KeywordNumberSignDigitFour; }
+
+		// ( bool ?= 'myoption' ) ?
+		public Assignment ele001AssignmentBool() { return c001AssignmentBool; }
+
+		// 'myoption'
+		public Keyword ele0010KeywordMyoption() { return c0010KeywordMyoption; }
+
+		// 'kw'
+		public Keyword ele01KeywordKw() { return c01KeywordKw; }
+
+		// value = ID
+		public Assignment ele1AssignmentValue() { return c1AssignmentValue; }
+
+		// ID
+		public RuleCall ele10LexerRuleCallID() { return c10LexerRuleCallID; }
+	}
 	
 	public final static SimpleReconstrTestLanguageGrammarAccess INSTANCE = new SimpleReconstrTestLanguageGrammarAccess();
 
@@ -374,6 +425,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends BaseEPackageAccess 
 	private static TypeElements pType;
 	private static Ref2Elements pRef2;
 	private static SpareElements pSpare;
+	private static BooleanElements pBoolean;
 
 	@SuppressWarnings("unused")
 	public synchronized Grammar getGrammar() {	
@@ -395,7 +447,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends BaseEPackageAccess 
 		return (pOp != null) ? pOp : (pOp = new OpElements());
 	} 
 
-	// Term returns Expression : Atom | TwoNumbers | ManyStrings | Parens | Type | Ref2 | Spare ;
+	// Term returns Expression : Atom | TwoNumbers | ManyStrings | Parens | Type | Ref2 | Spare | Boolean ;
 	public TermElements prTerm() {
 		return (pTerm != null) ? pTerm : (pTerm = new TermElements());
 	} 
@@ -433,5 +485,10 @@ public class SimpleReconstrTestLanguageGrammarAccess extends BaseEPackageAccess 
 	// Spare : '#3' id += ID ( '.' id += ID ) * ;
 	public SpareElements prSpare() {
 		return (pSpare != null) ? pSpare : (pSpare = new SpareElements());
+	} 
+
+	// Boolean : '#4' ( bool ?= 'myoption' ) ? 'kw' value = ID ;
+	public BooleanElements prBoolean() {
+		return (pBoolean != null) ? pBoolean : (pBoolean = new BooleanElements());
 	} 
 }
