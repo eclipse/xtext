@@ -5,54 +5,29 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.parser.datatyperules;
+package org.eclipse.xtext.parser.terminalrules;
 
 import java.io.InputStream;
 
 import org.eclipse.xtext.parser.ParserTestHelper;
-import org.eclipse.xtext.parser.datatyperules.parser.packrat.DatatypeRulesTestLanguagePackratParser;
 import org.eclipse.xtext.parser.packrat.ParseResultFactory;
+import org.eclipse.xtext.parser.terminalrules.parser.packrat.TerminalRulesTestLanguagePackratParser;
 import org.eclipse.xtext.resource.XtextResource;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class PackratParserTest extends ParserTest {
-
-	private DatatypeRulesTestLanguagePackratParser parser;
+public class PackratParserTest extends ParserTest  {
+	
+	private TerminalRulesTestLanguagePackratParser parser;
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		this.parser = new DatatypeRulesTestLanguagePackratParser();
+		this.parser = new TerminalRulesTestLanguagePackratParser();
 		ParseResultFactory factory = new ParseResultFactory();
 		factory.setFactory(getASTFactory());
 		this.parser.setParseResultFactory(factory);
-	}
-	
-	@Override
-	public void testParseWithFractionErrorAndSyntaxError() {
-		assertTrue("TODO SZ", true);
-	}
-	
-	@Override
-	public void testParseErrors_01() throws Exception {
-		assertTrue("TODO SZ", true);
-	}
-
-	@Override
-	public void testParseErrors_02() throws Exception {
-		assertTrue("TODO SZ", true);
-	}
-
-	@Override
-	public void testParseErrors_03() throws Exception {
-		assertTrue("TODO SZ", true);
-	}
-
-	@Override
-	public void testParseErrors_04() throws Exception {
-		assertTrue("TODO SZ", true);
 	}
 
 	@Override

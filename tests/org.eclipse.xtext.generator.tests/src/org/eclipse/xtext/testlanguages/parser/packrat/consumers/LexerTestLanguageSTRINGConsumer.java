@@ -11,14 +11,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory;
-import org.eclipse.xtext.parser.packrat.consumers.LexerRuleAwareTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 import org.eclipse.xtext.testlanguages.services.LexerTestLanguageGrammarAccess;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class LexerTestLanguageSTRINGConsumer extends LexerRuleAwareTerminalConsumer {
+public class LexerTestLanguageSTRINGConsumer extends AbstractRuleAwareTerminalConsumer {
 
 	public LexerTestLanguageSTRINGConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor) {
@@ -34,7 +34,7 @@ public class LexerTestLanguageSTRINGConsumer extends LexerRuleAwareTerminalConsu
 	}
 
 	@Override
-	protected LexerRule doGetLexerRule() {
+	protected LexerRule doGetRule() {
 		return LexerTestLanguageGrammarAccess.INSTANCE.lrSTRING();
 	}
 
