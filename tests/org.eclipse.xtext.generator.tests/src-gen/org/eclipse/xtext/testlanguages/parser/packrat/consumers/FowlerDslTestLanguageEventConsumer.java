@@ -25,9 +25,9 @@ public final class FowlerDslTestLanguageEventConsumer extends NonTerminalConsume
 
 	private XtextBuiltinIDConsumer idConsumer;
 
-	private ISequenceMatcher ruleCall$6$Delimiter;
-	
 	private ISequenceMatcher ruleCall$8$Delimiter;
+	
+	private ISequenceMatcher ruleCall$6$Delimiter;
 	
 	private ICharacterClass keyword$4$Delimiter;
 	
@@ -35,8 +35,8 @@ public final class FowlerDslTestLanguageEventConsumer extends NonTerminalConsume
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
-		ruleCall$6$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		ruleCall$8$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		ruleCall$6$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		keyword$4$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
@@ -101,20 +101,20 @@ public final class FowlerDslTestLanguageEventConsumer extends NonTerminalConsume
 		this.idConsumer = idConsumer;
 	}
 	
-	public ISequenceMatcher getRuleCall$6$Delimiter() {
-		return ruleCall$6$Delimiter;
-	}
-	
-	public void setRuleCall$6$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$6$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
-	}
-	
 	public ISequenceMatcher getRuleCall$8$Delimiter() {
 		return ruleCall$8$Delimiter;
 	}
 	
 	public void setRuleCall$8$Delimiter(ISequenceMatcher matcher) {
 		ruleCall$8$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	}
+	
+	public ISequenceMatcher getRuleCall$6$Delimiter() {
+		return ruleCall$6$Delimiter;
+	}
+	
+	public void setRuleCall$6$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$6$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	public ICharacterClass getKeyword$4$Delimiter() {

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractRuleImpl.java,v 1.14 2009/01/05 10:44:00 szarnekow Exp $
+ * $Id: AbstractRuleImpl.java,v 1.15 2009/01/19 14:39:51 szarnekow Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -26,106 +26,99 @@ import org.eclipse.xtext.XtextPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.impl.AbstractRuleImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.impl.AbstractRuleImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.impl.AbstractRuleImpl#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class AbstractRuleImpl extends EObjectImpl implements AbstractRule
-{
-  /**
+public class AbstractRuleImpl extends EObjectImpl implements AbstractRule {
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
+	/**
 	 * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getType()
 	 * @generated
 	 * @ordered
 	 */
-  protected TypeRef type;
+	protected TypeRef type;
 
-		/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-  protected static final String NAME_EDEFAULT = null;
-
-		/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-  protected String name = NAME_EDEFAULT;
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  protected AbstractRuleImpl()
-  {
+	protected AbstractRuleImpl() {
 		super();
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  protected EClass eStaticClass()
-  {
+	@Override
+	protected EClass eStaticClass() {
 		return XtextPackage.Literals.ABSTRACT_RULE;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public String getName()
-  {
+	public String getName() {
 		return name;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setName(String newName)
-  {
+	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.ABSTRACT_RULE__NAME, oldName, name));
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public TypeRef getType()
-  {
+	public TypeRef getType() {
 		return type;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public NotificationChain basicSetType(TypeRef newType, NotificationChain msgs)
-  {
+	public NotificationChain basicSetType(TypeRef newType, NotificationChain msgs) {
 		TypeRef oldType = type;
 		type = newType;
 		if (eNotificationRequired()) {
@@ -135,13 +128,12 @@ public class AbstractRuleImpl extends EObjectImpl implements AbstractRule
 		return msgs;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setType(TypeRef newType)
-  {
+	public void setType(TypeRef newType) {
 		if (newType != type) {
 			NotificationChain msgs = null;
 			if (type != null)
@@ -155,14 +147,13 @@ public class AbstractRuleImpl extends EObjectImpl implements AbstractRule
 			eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.ABSTRACT_RULE__TYPE, newType, newType));
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-  {
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case XtextPackage.ABSTRACT_RULE__TYPE:
 				return basicSetType(null, msgs);
@@ -170,86 +161,81 @@ public class AbstractRuleImpl extends EObjectImpl implements AbstractRule
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public Object eGet(int featureID, boolean resolve, boolean coreType)
-  {
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case XtextPackage.ABSTRACT_RULE__TYPE:
-				return getType();
 			case XtextPackage.ABSTRACT_RULE__NAME:
 				return getName();
+			case XtextPackage.ABSTRACT_RULE__TYPE:
+				return getType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public void eSet(int featureID, Object newValue)
-  {
+	@Override
+	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case XtextPackage.ABSTRACT_RULE__TYPE:
-				setType((TypeRef)newValue);
-				return;
 			case XtextPackage.ABSTRACT_RULE__NAME:
 				setName((String)newValue);
+				return;
+			case XtextPackage.ABSTRACT_RULE__TYPE:
+				setType((TypeRef)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public void eUnset(int featureID)
-  {
+	@Override
+	public void eUnset(int featureID) {
 		switch (featureID) {
-			case XtextPackage.ABSTRACT_RULE__TYPE:
-				setType((TypeRef)null);
-				return;
 			case XtextPackage.ABSTRACT_RULE__NAME:
 				setName(NAME_EDEFAULT);
+				return;
+			case XtextPackage.ABSTRACT_RULE__TYPE:
+				setType((TypeRef)null);
 				return;
 		}
 		super.eUnset(featureID);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public boolean eIsSet(int featureID)
-  {
+	@Override
+	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case XtextPackage.ABSTRACT_RULE__TYPE:
-				return type != null;
 			case XtextPackage.ABSTRACT_RULE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case XtextPackage.ABSTRACT_RULE__TYPE:
+				return type != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public String toString()
-  {
+	@Override
+	public String toString() {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());

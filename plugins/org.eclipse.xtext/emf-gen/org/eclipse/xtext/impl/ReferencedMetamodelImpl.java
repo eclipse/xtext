@@ -2,15 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ReferencedMetamodelImpl.java,v 1.11 2009/01/05 10:44:00 szarnekow Exp $
+ * $Id: ReferencedMetamodelImpl.java,v 1.12 2009/01/19 14:39:51 szarnekow Exp $
  */
 package org.eclipse.xtext.impl;
 
-import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.XtextPackage;
@@ -24,26 +20,23 @@ import org.eclipse.xtext.XtextPackage;
  *
  * @generated
  */
-public class ReferencedMetamodelImpl extends AbstractMetamodelDeclarationImpl implements ReferencedMetamodel
-{
-  /**
+public class ReferencedMetamodelImpl extends AbstractMetamodelDeclarationImpl implements ReferencedMetamodel {
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  protected ReferencedMetamodelImpl()
-  {
+	protected ReferencedMetamodelImpl() {
 		super();
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  protected EClass eStaticClass()
-  {
+	@Override
+	protected EClass eStaticClass() {
 		return XtextPackage.Literals.REFERENCED_METAMODEL;
 	}
 

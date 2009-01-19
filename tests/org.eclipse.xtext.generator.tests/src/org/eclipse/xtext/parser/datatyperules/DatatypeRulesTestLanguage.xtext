@@ -11,7 +11,7 @@ language org.eclipse.xtext.parser.datatyperules.DatatypeRulesTestLanguage
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 generate DatatypeRulesTestLanguage "http://www.eclipse.org/2008/tmf/xtext/DatatypeRulesTest"
  
-CompositeModel:
+CompositeModel hidden(WS, ML_COMMENT, SL_COMMENT):
   (model+=Model)+; 
 
 Model: 

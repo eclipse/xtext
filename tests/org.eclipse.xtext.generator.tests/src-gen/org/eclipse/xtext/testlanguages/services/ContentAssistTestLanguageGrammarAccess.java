@@ -198,7 +198,7 @@ public class ContentAssistTestLanguageGrammarAccess extends BaseEPackageAccess i
 	}
 	
 	public XtextBuiltinGrammarAccess getSuperGrammar() {
-		return XtextBuiltinGrammarAccess.INSTANCE;		
+		return XtextBuiltinGrammarAccess.INSTANCE;
 	}
 
 	

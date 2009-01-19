@@ -14,10 +14,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="rules" unique="false" upperBound="-1" eType="//AbstractRule" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractRule">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="//TypeRef" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="//TypeRef" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractMetamodelDeclaration">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="alias">
@@ -39,7 +39,14 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ParserRule" eSuperTypes="//AbstractRule">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="definesHiddenTokens">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hiddenTokens" unique="false" upperBound="-1" eType="//AbstractRule"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="alternatives" eType="//AbstractElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="terminal">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TypeRef">
     <eStructuralFeatures xsi:type="ecore:EReference" name="metamodel" eType="//AbstractMetamodelDeclaration"/>
@@ -70,6 +77,16 @@
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractNegatedToken" eSuperTypes="//AbstractElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="terminal" eType="//AbstractElement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NegatedToken" eSuperTypes="//AbstractNegatedToken"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UpToToken" eSuperTypes="//AbstractNegatedToken"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Wildcard" eSuperTypes="//AbstractElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isWildcard">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CrossReference" eSuperTypes="//AbstractElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="//TypeRef" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="rule" eType="//AbstractRule"/>
@@ -87,5 +104,9 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Group" eSuperTypes="//AbstractElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="abstractTokens" unique="false" upperBound="-1" eType="//AbstractElement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CharacterRange" eSuperTypes="//AbstractElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="//Keyword" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="//Keyword" containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

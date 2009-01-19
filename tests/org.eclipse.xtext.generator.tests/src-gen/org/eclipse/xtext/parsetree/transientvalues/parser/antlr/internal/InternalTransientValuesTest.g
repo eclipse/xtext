@@ -62,6 +62,7 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 
 
 
+
 // Entry rule entryRuleRoot
 entryRuleRoot returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); }
@@ -108,6 +109,8 @@ ruleRoot returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 ));
+
+
 
 
 
@@ -170,6 +173,8 @@ ruleTestRequired returns [EObject current=null]
 	    }
 	
 ));
+
+
 
 
 
@@ -241,6 +246,8 @@ ruleTestOptional returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleTestList
 entryRuleTestList returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#//@rules.3" /* xtext::ParserRule */, currentNode); }
@@ -278,6 +285,16 @@ ruleTestList returns [EObject current=null]
 	    }
 	
 )*);
+
+
+
+
+
+
+
+
+
+
 
 
 

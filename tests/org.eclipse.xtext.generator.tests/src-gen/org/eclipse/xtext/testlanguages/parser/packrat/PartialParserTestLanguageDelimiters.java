@@ -14,12 +14,11 @@ public final class PartialParserTestLanguageDelimiters {
 		throw new UnsupportedOperationException("Utility classes may not be initialized");
 	}
 	
-	public static ICharacterClass keyword$10$Delimiter = ICharacterClass.Factory.nullClass();
-	
 	public static ISequenceMatcher ruleCall$9$Delimiter = new SetBasedKeywordMatcher(
 		"container", "nested", "children", "C", "abstract children", "F", "S");
-		
-	// TODO do not use IDConsumer internals
+
 	public static ICharacterClass keyword$7$Delimiter = XtextBuiltinIDConsumer.IDConsumer$$2;
-	
+
+	public static ICharacterClass keyword$10$Delimiter = ICharacterClass.Factory.nullClass();
+
 }

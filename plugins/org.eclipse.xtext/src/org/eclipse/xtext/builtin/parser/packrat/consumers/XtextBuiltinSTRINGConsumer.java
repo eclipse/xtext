@@ -12,7 +12,7 @@ import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
-import org.eclipse.xtext.parser.packrat.consumers.LexerRuleAwareTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 import org.eclipse.xtext.services.XtextGrammarAccess;
@@ -20,7 +20,7 @@ import org.eclipse.xtext.services.XtextGrammarAccess;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public final class XtextBuiltinSTRINGConsumer extends LexerRuleAwareTerminalConsumer {
+public final class XtextBuiltinSTRINGConsumer extends AbstractRuleAwareTerminalConsumer {
 	
 	// ~('\\\\'|'\"')
 	static final ICharacterClass STRINGConsumer$$1 = ICharacterClass.Factory.invert(ICharacterClass.Factory.create('\\', '"'));
@@ -122,7 +122,7 @@ public final class XtextBuiltinSTRINGConsumer extends LexerRuleAwareTerminalCons
 	}
 
 	@Override
-	protected LexerRule doGetLexerRule() {
+	protected LexerRule doGetRule() {
 		return (LexerRule) GrammarUtil.findRuleForName(XtextGrammarAccess.INSTANCE.getGrammar(), "STRING");
 	}
 }

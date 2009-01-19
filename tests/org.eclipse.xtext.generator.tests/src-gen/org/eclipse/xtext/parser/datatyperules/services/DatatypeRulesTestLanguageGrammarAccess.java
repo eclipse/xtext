@@ -15,7 +15,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends BaseEPackageAccess i
 		private final Assignment cAssignmentModel = (Assignment)rule.eContents().get(1);
 		private final RuleCall c0ParserRuleCallModel = (RuleCall)cAssignmentModel.eContents().get(0);
 		
-		// CompositeModel : ( model += Model ) + ;
+		// CompositeModel hidden ( WS , ML_COMMENT , SL_COMMENT ) : ( model += Model ) + ;
 		public ParserRule getRule() { return rule; }
 
 		// ( model += Model ) +
@@ -274,11 +274,11 @@ public class DatatypeRulesTestLanguageGrammarAccess extends BaseEPackageAccess i
 	}
 	
 	public XtextBuiltinGrammarAccess getSuperGrammar() {
-		return XtextBuiltinGrammarAccess.INSTANCE;		
+		return XtextBuiltinGrammarAccess.INSTANCE;
 	}
 
 	
-	// CompositeModel : ( model += Model ) + ;
+	// CompositeModel hidden ( WS , ML_COMMENT , SL_COMMENT ) : ( model += Model ) + ;
 	public CompositeModelElements prCompositeModel() {
 		return (pCompositeModel != null) ? pCompositeModel : (pCompositeModel = new CompositeModelElements());
 	} 

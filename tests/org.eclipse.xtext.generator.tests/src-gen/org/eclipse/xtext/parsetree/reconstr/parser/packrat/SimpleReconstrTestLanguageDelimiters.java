@@ -16,12 +16,11 @@ public final class SimpleReconstrTestLanguageDelimiters {
 	
 	public static ISequenceMatcher ruleCall$30$Delimiter = new SetBasedKeywordMatcher(
 		"type", "extends", "mykeyword1", "mykeyword2", "myoption", "kw");
-		
+
 	public static ICharacterClass keyword$36$Delimiter = ICharacterClass.Factory.nullClass();
-	
+
 	public static ISequenceMatcher ruleCall$46$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-	
-	// TODO do not use IDConsumer internals
+
 	public static ICharacterClass keyword$67$Delimiter = XtextBuiltinIDConsumer.IDConsumer$$2;
-	
+
 }

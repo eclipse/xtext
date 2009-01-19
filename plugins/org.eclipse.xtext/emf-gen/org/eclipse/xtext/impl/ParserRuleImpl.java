@@ -2,19 +2,23 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParserRuleImpl.java,v 1.12 2008/12/03 20:57:10 szarnekow Exp $
+ * $Id: ParserRuleImpl.java,v 1.13 2009/01/19 14:39:51 szarnekow Exp $
  */
 package org.eclipse.xtext.impl;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.XtextPackage;
 
@@ -25,15 +29,47 @@ import org.eclipse.xtext.XtextPackage;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipse.xtext.impl.ParserRuleImpl#isDefinesHiddenTokens <em>Defines Hidden Tokens</em>}</li>
+ *   <li>{@link org.eclipse.xtext.impl.ParserRuleImpl#getHiddenTokens <em>Hidden Tokens</em>}</li>
  *   <li>{@link org.eclipse.xtext.impl.ParserRuleImpl#getAlternatives <em>Alternatives</em>}</li>
+ *   <li>{@link org.eclipse.xtext.impl.ParserRuleImpl#isTerminal <em>Terminal</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
-{
-  /**
+public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule {
+	/**
+	 * The default value of the '{@link #isDefinesHiddenTokens() <em>Defines Hidden Tokens</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isDefinesHiddenTokens()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean DEFINES_HIDDEN_TOKENS_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isDefinesHiddenTokens() <em>Defines Hidden Tokens</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isDefinesHiddenTokens()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean definesHiddenTokens = DEFINES_HIDDEN_TOKENS_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getHiddenTokens() <em>Hidden Tokens</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getHiddenTokens()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<AbstractRule> hiddenTokens;
+
+	/**
 	 * The cached value of the '{@link #getAlternatives() <em>Alternatives</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -43,28 +79,79 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
 	 */
 	protected AbstractElement alternatives;
 
-		/**
+	/**
+	 * The default value of the '{@link #isTerminal() <em>Terminal</em>}' attribute.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isTerminal()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean TERMINAL_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isTerminal() <em>Terminal</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isTerminal()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean terminal = TERMINAL_EDEFAULT;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  protected ParserRuleImpl()
-  {
+	protected ParserRuleImpl() {
 		super();
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  protected EClass eStaticClass()
-  {
+	@Override
+	protected EClass eStaticClass() {
 		return XtextPackage.Literals.PARSER_RULE;
 	}
 
-		/**
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isDefinesHiddenTokens() {
+		return definesHiddenTokens;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDefinesHiddenTokens(boolean newDefinesHiddenTokens) {
+		boolean oldDefinesHiddenTokens = definesHiddenTokens;
+		definesHiddenTokens = newDefinesHiddenTokens;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.PARSER_RULE__DEFINES_HIDDEN_TOKENS, oldDefinesHiddenTokens, definesHiddenTokens));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<AbstractRule> getHiddenTokens() {
+		if (hiddenTokens == null) {
+			hiddenTokens = new EObjectResolvingEList<AbstractRule>(AbstractRule.class, this, XtextPackage.PARSER_RULE__HIDDEN_TOKENS);
+		}
+		return hiddenTokens;
+	}
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -73,7 +160,7 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
 		return alternatives;
 	}
 
-		/**
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -88,7 +175,7 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
 		return msgs;
 	}
 
-		/**
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -107,7 +194,28 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
 			eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.PARSER_RULE__ALTERNATIVES, newAlternatives, newAlternatives));
 	}
 
-		/**
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isTerminal() {
+		return terminal;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTerminal(boolean newTerminal) {
+		boolean oldTerminal = terminal;
+		terminal = newTerminal;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.PARSER_RULE__TERMINAL, oldTerminal, terminal));
+	}
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -121,7 +229,7 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
-		/**
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -129,28 +237,45 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case XtextPackage.PARSER_RULE__DEFINES_HIDDEN_TOKENS:
+				return isDefinesHiddenTokens() ? Boolean.TRUE : Boolean.FALSE;
+			case XtextPackage.PARSER_RULE__HIDDEN_TOKENS:
+				return getHiddenTokens();
 			case XtextPackage.PARSER_RULE__ALTERNATIVES:
 				return getAlternatives();
+			case XtextPackage.PARSER_RULE__TERMINAL:
+				return isTerminal() ? Boolean.TRUE : Boolean.FALSE;
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
-		/**
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case XtextPackage.PARSER_RULE__DEFINES_HIDDEN_TOKENS:
+				setDefinesHiddenTokens(((Boolean)newValue).booleanValue());
+				return;
+			case XtextPackage.PARSER_RULE__HIDDEN_TOKENS:
+				getHiddenTokens().clear();
+				getHiddenTokens().addAll((Collection<? extends AbstractRule>)newValue);
+				return;
 			case XtextPackage.PARSER_RULE__ALTERNATIVES:
 				setAlternatives((AbstractElement)newValue);
+				return;
+			case XtextPackage.PARSER_RULE__TERMINAL:
+				setTerminal(((Boolean)newValue).booleanValue());
 				return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
-		/**
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -158,14 +283,23 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case XtextPackage.PARSER_RULE__DEFINES_HIDDEN_TOKENS:
+				setDefinesHiddenTokens(DEFINES_HIDDEN_TOKENS_EDEFAULT);
+				return;
+			case XtextPackage.PARSER_RULE__HIDDEN_TOKENS:
+				getHiddenTokens().clear();
+				return;
 			case XtextPackage.PARSER_RULE__ALTERNATIVES:
 				setAlternatives((AbstractElement)null);
+				return;
+			case XtextPackage.PARSER_RULE__TERMINAL:
+				setTerminal(TERMINAL_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
 	}
 
-		/**
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -173,10 +307,34 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case XtextPackage.PARSER_RULE__DEFINES_HIDDEN_TOKENS:
+				return definesHiddenTokens != DEFINES_HIDDEN_TOKENS_EDEFAULT;
+			case XtextPackage.PARSER_RULE__HIDDEN_TOKENS:
+				return hiddenTokens != null && !hiddenTokens.isEmpty();
 			case XtextPackage.PARSER_RULE__ALTERNATIVES:
 				return alternatives != null;
+			case XtextPackage.PARSER_RULE__TERMINAL:
+				return terminal != TERMINAL_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (definesHiddenTokens: ");
+		result.append(definesHiddenTokens);
+		result.append(", terminal: ");
+		result.append(terminal);
+		result.append(')');
+		return result.toString();
 	}
 
 } //ParserRuleImpl

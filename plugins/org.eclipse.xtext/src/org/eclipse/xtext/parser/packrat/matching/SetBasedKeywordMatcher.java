@@ -25,5 +25,10 @@ public class SetBasedKeywordMatcher implements ISequenceMatcher {
 	public boolean matches(CharSequence input, int offset, int length) {
 		return keywords.contains(input.subSequence(offset, offset + length).toString());
 	}
+	
+	@Override
+	public String toString() {
+		return "KeywordMatcher for: " + keywords;
+	}
 
 }

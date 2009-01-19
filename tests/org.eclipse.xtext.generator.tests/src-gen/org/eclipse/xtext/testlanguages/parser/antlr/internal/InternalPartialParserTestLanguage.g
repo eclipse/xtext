@@ -62,6 +62,7 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 
 
 
+
 // Entry rule entryRuleContainer
 entryRuleContainer returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); }
@@ -155,6 +156,8 @@ ruleContainer returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleNested
 entryRuleNested returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.1" /* xtext::ParserRule */, currentNode); }
@@ -206,6 +209,8 @@ ruleNested returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleContent
 entryRuleContent returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.2" /* xtext::ParserRule */, currentNode); }
@@ -238,6 +243,8 @@ ruleContent returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 );
+
+
 
 
 
@@ -319,6 +326,8 @@ ruleChildren returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleChild
 entryRuleChild returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.4" /* xtext::ParserRule */, currentNode); }
@@ -369,6 +378,8 @@ ruleChild returns [EObject current=null]
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 );
+
+
 
 
 
@@ -425,6 +436,8 @@ ruleAbstractChildren returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleAbstractChild
 entryRuleAbstractChild returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.6" /* xtext::ParserRule */, currentNode); }
@@ -457,6 +470,8 @@ ruleAbstractChild returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 );
+
+
 
 
 
@@ -527,6 +542,8 @@ ruleFirstConcrete returns [EObject current=null]
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.7/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 );
+
+
 
 
 
@@ -606,6 +623,8 @@ ruleSecondConcrete returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleNamed
 entryRuleNamed returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.9" /* xtext::ParserRule */, currentNode); }
@@ -639,6 +658,28 @@ ruleNamed returns [EObject current=null]
 	    }
 	
 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

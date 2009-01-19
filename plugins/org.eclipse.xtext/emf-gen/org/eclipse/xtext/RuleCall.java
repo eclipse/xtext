@@ -2,11 +2,9 @@
  * <copyright>
  * </copyright>
  *
- * $Id: RuleCall.java,v 1.12 2008/12/03 20:57:09 szarnekow Exp $
+ * $Id: RuleCall.java,v 1.13 2009/01/19 14:39:52 szarnekow Exp $
  */
 package org.eclipse.xtext;
-
-import org.eclipse.emf.ecore.EObject;
 
 
 /**
@@ -25,9 +23,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface RuleCall extends AbstractElement
-{
-
+public interface RuleCall extends AbstractElement {
 	/**
 	 * Returns the value of the '<em><b>Rule</b></em>' reference.
 	 * <!-- begin-user-doc -->

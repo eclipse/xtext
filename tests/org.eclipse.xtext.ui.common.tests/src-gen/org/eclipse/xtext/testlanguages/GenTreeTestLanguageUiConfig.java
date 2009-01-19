@@ -15,7 +15,6 @@ public class GenTreeTestLanguageUiConfig extends AbstractServiceRegistrationFact
 	public Set<IServiceRegistration> registrations() {
 		return scope(org.eclipse.xtext.testlanguages.ITreeTestLanguage.SCOPE)
 			.with(org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider.class, org.eclipse.xtext.testlanguages.TreeTestLanguageGenProposalProvider.class)
-			.with(org.eclipse.jface.text.contentassist.IContentAssistant.class, org.eclipse.jface.text.contentassist.ContentAssistant.class)
 			.with(org.eclipse.jface.text.contentassist.IContentAssistProcessor.class, org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultContentAssistProcessor.class)
 			.registrations();
 	}

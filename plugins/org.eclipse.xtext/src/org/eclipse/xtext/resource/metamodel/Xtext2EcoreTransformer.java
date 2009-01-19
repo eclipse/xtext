@@ -385,7 +385,7 @@ public class Xtext2EcoreTransformer {
 	EClassifier getClassifierFor(AbstractRule rule) {
 		if (rule.getType() != null && rule.getType().getType() != null)
 			return rule.getType().getType();
-		if (rule instanceof LexerRule || DatatypeRuleUtil.isDatatypeRule((ParserRule) rule)) {
+		if (rule instanceof LexerRule || DatatypeRuleUtil.isDatatypeRule((ParserRule) rule) || ((ParserRule)rule).isTerminal()) {
 			return EcorePackage.Literals.ESTRING;
 		}
 		return null;

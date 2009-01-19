@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.packrat.consumers;
 
-import org.eclipse.xtext.LexerRule;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
@@ -15,29 +15,28 @@ import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class LexerRuleAwareTerminalConsumer extends TerminalConsumer {
+public abstract class AbstractRuleAwareTerminalConsumer extends TerminalConsumer {
 	
-	protected LexerRuleAwareTerminalConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
+	private AbstractRule rule;
+	
+	protected AbstractRuleAwareTerminalConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor) {
 		super(input, markerFactory, tokenAcceptor);
-		// TODO Auto-generated constructor stub
 	}
-
-	private LexerRule rule;
 	
-	public final LexerRule getGrammarElement() {
+	public final AbstractRule getGrammarElement() {
 		if (rule == null) {
-			rule = doGetLexerRule();
+			rule = doGetRule();
 		}
 		return rule;
 	}
 	
 	@Override
-	protected String getLexerRuleName() {
+	protected String getRuleName() {
 		return getGrammarElement().getName();
 	}
 	
-	protected abstract LexerRule doGetLexerRule();
+	protected abstract AbstractRule doGetRule();
 	
 	@Override
 	public String toString() {

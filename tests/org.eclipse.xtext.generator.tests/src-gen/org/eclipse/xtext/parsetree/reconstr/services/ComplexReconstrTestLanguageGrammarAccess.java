@@ -726,7 +726,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends BaseEPackageAccess
 	}
 	
 	public XtextBuiltinGrammarAccess getSuperGrammar() {
-		return XtextBuiltinGrammarAccess.INSTANCE;		
+		return XtextBuiltinGrammarAccess.INSTANCE;
 	}
 
 	

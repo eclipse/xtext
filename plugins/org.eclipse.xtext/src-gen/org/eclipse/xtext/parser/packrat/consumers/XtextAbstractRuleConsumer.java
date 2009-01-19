@@ -20,12 +20,14 @@ import org.eclipse.xtext.services.XtextGrammarAccess.AbstractRuleElements;
 
 import org.eclipse.xtext.parser.packrat.consumers.XtextLexerRuleConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextParserRuleConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.XtextTerminalRuleConsumer;
 
 @SuppressWarnings("unused")
 public final class XtextAbstractRuleConsumer extends NonTerminalConsumer {
 
 	private XtextLexerRuleConsumer lexerRuleConsumer;
 	private XtextParserRuleConsumer parserRuleConsumer;
+	private XtextTerminalRuleConsumer terminalRuleConsumer;
 
 	public XtextAbstractRuleConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
@@ -38,19 +40,25 @@ public final class XtextAbstractRuleConsumer extends NonTerminalConsumer {
 	}
 
 	protected boolean consumeAlternatives$1() throws Exception {
-		if (consumeRuleCall$2())
-			return true;
 		if (consumeRuleCall$3())
+			return true;
+		if (consumeRuleCall$4())
+			return true;
+		if (consumeRuleCall$5())
 			return true;
 		return false;
 	}
 
-	protected boolean consumeRuleCall$2() throws Exception {
-		return consumeNonTerminal(lexerRuleConsumer, null, false, false, getRule().ele0ParserRuleCallLexerRule());
+	protected boolean consumeRuleCall$3() throws Exception {
+		return consumeNonTerminal(lexerRuleConsumer, null, false, false, getRule().ele00ParserRuleCallLexerRule());
 	}
 
-	protected boolean consumeRuleCall$3() throws Exception {
-		return consumeNonTerminal(parserRuleConsumer, null, false, false, getRule().ele1ParserRuleCallParserRule());
+	protected boolean consumeRuleCall$4() throws Exception {
+		return consumeNonTerminal(parserRuleConsumer, null, false, false, getRule().ele01ParserRuleCallParserRule());
+	}
+
+	protected boolean consumeRuleCall$5() throws Exception {
+		return consumeNonTerminal(terminalRuleConsumer, null, false, false, getRule().ele1ParserRuleCallTerminalRule());
 	}
 
 	public AbstractRuleElements getRule() {
@@ -72,6 +80,10 @@ public final class XtextAbstractRuleConsumer extends NonTerminalConsumer {
 	
 	public void setParserRuleConsumer(XtextParserRuleConsumer parserRuleConsumer) {
 		this.parserRuleConsumer = parserRuleConsumer;
+	}
+	
+	public void setTerminalRuleConsumer(XtextTerminalRuleConsumer terminalRuleConsumer) {
+		this.terminalRuleConsumer = terminalRuleConsumer;
 	}
 	
 }

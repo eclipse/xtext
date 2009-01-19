@@ -66,7 +66,7 @@ public class Bug250313GrammarAccess extends BaseEPackageAccess implements IGramm
 	}
 	
 	public XtextBuiltinGrammarAccess getSuperGrammar() {
-		return XtextBuiltinGrammarAccess.INSTANCE;		
+		return XtextBuiltinGrammarAccess.INSTANCE;
 	}
 
 	

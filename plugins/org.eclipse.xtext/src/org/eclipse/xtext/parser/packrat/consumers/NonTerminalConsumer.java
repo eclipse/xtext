@@ -104,5 +104,10 @@ public abstract class NonTerminalConsumer implements INonTerminalConsumer {
 	protected abstract String getDefaultTypeName(); // TODO: replace by getDefaultType: EClassifier
 	
 	protected abstract EObject getGrammarElement();
+
+	@Override
+	public String toString() {
+		return "NonTerminalConsumer " + getClass().getSimpleName() + " for type '" + getDefaultTypeName()  + "'";
+	}
 	
 }

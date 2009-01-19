@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextAdapterFactory.java,v 1.16 2008/12/10 11:49:38 szarnekow Exp $
+ * $Id: XtextAdapterFactory.java,v 1.17 2009/01/19 14:39:53 szarnekow Exp $
  */
 package org.eclipse.xtext.util;
 
@@ -119,6 +119,22 @@ public class XtextAdapterFactory extends AdapterFactoryImpl
 				return createActionAdapter();
 			}
 			@Override
+			public Adapter caseAbstractNegatedToken(AbstractNegatedToken object) {
+				return createAbstractNegatedTokenAdapter();
+			}
+			@Override
+			public Adapter caseNegatedToken(NegatedToken object) {
+				return createNegatedTokenAdapter();
+			}
+			@Override
+			public Adapter caseUpToToken(UpToToken object) {
+				return createUpToTokenAdapter();
+			}
+			@Override
+			public Adapter caseWildcard(Wildcard object) {
+				return createWildcardAdapter();
+			}
+			@Override
 			public Adapter caseCrossReference(CrossReference object) {
 				return createCrossReferenceAdapter();
 			}
@@ -137,6 +153,10 @@ public class XtextAdapterFactory extends AdapterFactoryImpl
 			@Override
 			public Adapter caseGroup(Group object) {
 				return createGroupAdapter();
+			}
+			@Override
+			public Adapter caseCharacterRange(CharacterRange object) {
+				return createCharacterRangeAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -262,6 +282,20 @@ public class XtextAdapterFactory extends AdapterFactoryImpl
 	}
 
 		/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.CharacterRange <em>Character Range</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.CharacterRange
+	 * @generated
+	 */
+	public Adapter createCharacterRangeAdapter() {
+		return null;
+	}
+
+		/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.Assignment <em>Assignment</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -286,6 +320,62 @@ public class XtextAdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	public Adapter createActionAdapter() {
+		return null;
+	}
+
+		/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.AbstractNegatedToken <em>Abstract Negated Token</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.AbstractNegatedToken
+	 * @generated
+	 */
+	public Adapter createAbstractNegatedTokenAdapter() {
+		return null;
+	}
+
+		/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.NegatedToken <em>Negated Token</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.NegatedToken
+	 * @generated
+	 */
+	public Adapter createNegatedTokenAdapter() {
+		return null;
+	}
+
+		/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.UpToToken <em>Up To Token</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.UpToToken
+	 * @generated
+	 */
+	public Adapter createUpToTokenAdapter() {
+		return null;
+	}
+
+		/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.Wildcard <em>Wildcard</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.Wildcard
+	 * @generated
+	 */
+	public Adapter createWildcardAdapter() {
 		return null;
 	}
 

@@ -38,8 +38,10 @@ public abstract class «grammar().standaloneSetupClass().toSimpleName()» {
 
 	public synchronized static void doSetup() {
 		if(!isInitialized) {
+«IF grammar().getSuperGrammar()!= null-»
 			// setup super language first
 			«standaloneSetupClass(grammar().getSuperGrammar())».doSetup();
+«ENDIF-»
 			
 			for (IServiceRegistration reg :  new «runtimeConfigClass(grammar())»().registrations()) {
 				ServiceRegistry.registerFactory(reg.scope(), reg.serviceFactory(), reg.priority());

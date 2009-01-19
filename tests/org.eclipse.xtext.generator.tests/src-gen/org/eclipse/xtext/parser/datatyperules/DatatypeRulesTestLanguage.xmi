@@ -12,10 +12,13 @@
   <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="DatatypeRulesTestLanguage">
     <ePackage href="http://www.eclipse.org/2008/tmf/xtext/DatatypeRulesTest#/"/>
   </metamodelDeclarations>
-  <rules xsi:type="xtext:ParserRule" name="CompositeModel">
+  <rules xsi:type="xtext:ParserRule" name="CompositeModel" definesHiddenTokens="true">
     <type metamodel="//@metamodelDeclarations.1">
       <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/tmf/xtext/DatatypeRulesTest#//CompositeModel"/>
     </type>
+    <hiddenTokens href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.5"/>
+    <hiddenTokens href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.3"/>
+    <hiddenTokens href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.4"/>
     <alternatives xsi:type="xtext:Assignment" cardinality="+" feature="model" operator="+=">
       <terminal xsi:type="xtext:RuleCall" rule="//@rules.1"/>
     </alternatives>

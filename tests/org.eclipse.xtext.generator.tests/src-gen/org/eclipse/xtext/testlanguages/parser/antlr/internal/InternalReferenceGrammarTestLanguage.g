@@ -62,6 +62,7 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 
 
 
+
 // Entry rule entryRuleSpielplatz
 entryRuleSpielplatz returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); }
@@ -221,6 +222,8 @@ ruleSpielplatz returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleKind
 entryRuleKind returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.2" /* xtext::ParserRule */, currentNode); }
@@ -291,6 +294,8 @@ ruleKind returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleErwachsener
 entryRuleErwachsener returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.3" /* xtext::ParserRule */, currentNode); }
@@ -356,6 +361,8 @@ ruleErwachsener returns [EObject current=null]
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 );
+
+
 
 
 
@@ -432,6 +439,8 @@ ruleSpielzeug returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleFarbe
 entryRuleFarbe returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.5" /* xtext::ParserRule */, currentNode); }
@@ -464,6 +473,8 @@ ruleFarbe returns [EObject current=null]
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.5/@alternatives/@groups.1" /* xtext::Keyword */, null); 
     }
 );
+
+
 
 
 
@@ -588,6 +599,22 @@ ruleFamilie returns [EObject current=null]
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.6/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

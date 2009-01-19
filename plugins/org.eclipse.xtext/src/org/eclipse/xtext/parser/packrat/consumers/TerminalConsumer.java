@@ -19,6 +19,9 @@ import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedTerminal;
 import org.eclipse.xtext.util.Strings;
 
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
 public abstract class TerminalConsumer implements ITerminalConsumer {
 	
 	private final ICharSequenceWithOffset input;
@@ -42,18 +45,22 @@ public abstract class TerminalConsumer implements ITerminalConsumer {
 			return false;
 		if (result) {
 			acceptor.accept(new ParsedTerminal(input, prevOffset, input.getOffset()-prevOffset, 
-					element != null ? element : getGrammarElement(), feature, isHidden(), isMany, isBoolean, getLexerRuleName()));
+					element != null ? element : getGrammarElement(), feature, isHidden(), isMany, isBoolean, getRuleName()));
 		}
 		return result;
 	}
 	
-	public final boolean consume(ISequenceMatcher notMatching) {
+	public final boolean consume() {
 		int prevOffset = input.getOffset();
 		boolean result = doConsume();
 		if (!result) {
 			input.setOffset(prevOffset);
 		}
 		return result;
+	}
+	
+	protected void incOffset() {
+		input.incOffset();
 	}
 	
 	protected boolean readAnyChar(char... candidates) {
@@ -127,18 +134,23 @@ public abstract class TerminalConsumer implements ITerminalConsumer {
 	
 	protected boolean readString(CharSequence seq) {
 		if (input.getOffset() + seq.length() - 1 >= input.length()) return false;
-		if (input.subSequence(input.getOffset(), input.getOffset() + seq.length()).equals(seq)) {
-			input.incOffset(seq.length());
-			return true;
+		final int offset = input.getOffset();
+		for (int i = 0; i < seq.length(); i++) {
+			if (input.charAt(offset + i) != seq.charAt(i))
+				return false;
 		}
-		return false;
+		input.incOffset(seq.length());
+		return true;
 	}
 	
 	protected boolean readUntil(CharSequence seq) {
 		char first = seq.charAt(0);
-		for(int i = input.getOffset(); i <= input.length() - seq.length(); i++) {
-			char next = input.charAt(i);
-			if (next == first && input.subSequence(i, i + seq.length()).equals(seq)) {
+		OUTER: for(int i = input.getOffset(); i <= input.length() - seq.length(); i++) {
+			if (input.charAt(i) == first) {
+				for(int j = 1; j < seq.length(); j++) {
+					if (input.charAt(i + j) != seq.charAt(j))
+						continue OUTER;
+				}
 				input.setOffset(i + seq.length());
 				return true;
 			}
@@ -150,12 +162,12 @@ public abstract class TerminalConsumer implements ITerminalConsumer {
 	
 	public abstract EObject getGrammarElement();
 	
-	protected abstract String getLexerRuleName();
+	protected abstract String getRuleName();
 	
 	@Override
 	public String toString() {
 		String result = this.getClass().getSimpleName(); 
-		return Strings.isEmpty(result) ? this.getClass().getName() : result;
+		return "TerminalConsumer " + (Strings.isEmpty(result) ? this.getClass().getName() : result) + " for rule '" + getRuleName() + "'";
 	}
 
 	public void setHidden(boolean hidden) {

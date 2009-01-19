@@ -15,5 +15,5 @@ public final class LexerTestLanguageDelimiters {
 	}
 	
 	public static ISequenceMatcher ruleCall$9$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-	
+
 }

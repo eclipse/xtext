@@ -29,19 +29,19 @@ public final class XtextAbstractTokenConsumer extends NonTerminalConsumer {
 	private XtextActionConsumer actionConsumer;
 	private XtextAssignmentConsumer assignmentConsumer;
 
+	private ICharacterClass keyword$11$Delimiter;
+	
 	private ICharacterClass keyword$12$Delimiter;
 	
 	private ICharacterClass keyword$10$Delimiter;
-	
-	private ICharacterClass keyword$11$Delimiter;
 	
 	public XtextAbstractTokenConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
+		keyword$11$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$12$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$10$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$11$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -123,6 +123,14 @@ public final class XtextAbstractTokenConsumer extends NonTerminalConsumer {
 		this.assignmentConsumer = assignmentConsumer;
 	}
 	
+	public ICharacterClass getKeyword$11$Delimiter() {
+		return keyword$11$Delimiter;
+	}
+	
+	public void setKeyword$11$Delimiter(ICharacterClass characterClass) {
+		keyword$11$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
 	public ICharacterClass getKeyword$12$Delimiter() {
 		return keyword$12$Delimiter;
 	}
@@ -137,14 +145,6 @@ public final class XtextAbstractTokenConsumer extends NonTerminalConsumer {
 	
 	public void setKeyword$10$Delimiter(ICharacterClass characterClass) {
 		keyword$10$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
-	public ICharacterClass getKeyword$11$Delimiter() {
-		return keyword$11$Delimiter;
-	}
-	
-	public void setKeyword$11$Delimiter(ICharacterClass characterClass) {
-		keyword$11$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

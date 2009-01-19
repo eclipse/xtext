@@ -15,7 +15,7 @@ public final class SimpleExpressionsTestLanguageDelimiters {
 	}
 	
 	public static ICharacterClass keyword$20$Delimiter = ICharacterClass.Factory.nullClass();
-	
+
 	public static ISequenceMatcher ruleCall$46$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-	
+
 }

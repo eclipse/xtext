@@ -15,5 +15,5 @@ public final class ActionTestLanguageDelimiters {
 	}
 	
 	public static ISequenceMatcher ruleCall$20$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-	
+
 }

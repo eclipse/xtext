@@ -98,38 +98,24 @@ public class DatatypeRulesTestLanguageParserConfiguration extends AbstractParser
 
 		getVectorConsumer().setIntConsumer(getIntConsumer());
 
+		getModelConsumer().setKeyword$12$Delimiter(DatatypeRulesTestLanguageDelimiters.keyword$15$Delimiter);
 		getModelConsumer().setKeyword$16$Delimiter(DatatypeRulesTestLanguageDelimiters.keyword$15$Delimiter);
 		getModelConsumer().setKeyword$8$Delimiter(DatatypeRulesTestLanguageDelimiters.keyword$15$Delimiter);
-		getModelConsumer().setKeyword$12$Delimiter(DatatypeRulesTestLanguageDelimiters.keyword$15$Delimiter);
 		getModelConsumer().setKeyword$19$Delimiter(DatatypeRulesTestLanguageDelimiters.keyword$15$Delimiter);
-		getModelIdConsumer().setRuleCall$5$Delimiter(DatatypeRulesTestLanguageDelimiters.ruleCall$31$Delimiter);
-		getModelIdConsumer().setRuleCall$3$Delimiter(DatatypeRulesTestLanguageDelimiters.ruleCall$31$Delimiter);
 		getModelIdConsumer().setKeyword$4$Delimiter(DatatypeRulesTestLanguageDelimiters.keyword$15$Delimiter);
+		getModelIdConsumer().setRuleCall$3$Delimiter(DatatypeRulesTestLanguageDelimiters.ruleCall$31$Delimiter);
+		getModelIdConsumer().setRuleCall$5$Delimiter(DatatypeRulesTestLanguageDelimiters.ruleCall$31$Delimiter);
 		getNestedModelIdConsumer().setKeyword$4$Delimiter(DatatypeRulesTestLanguageDelimiters.keyword$15$Delimiter);
+		getFractionConsumer().setKeyword$4$Delimiter(DatatypeRulesTestLanguageDelimiters.keyword$15$Delimiter);
 		getFractionConsumer().setRuleCall$2$Delimiter(DatatypeRulesTestLanguageDelimiters.ruleCall$31$Delimiter);
 		getFractionConsumer().setRuleCall$5$Delimiter(DatatypeRulesTestLanguageDelimiters.ruleCall$31$Delimiter);
-		getFractionConsumer().setKeyword$4$Delimiter(DatatypeRulesTestLanguageDelimiters.keyword$15$Delimiter);
-		getVectorConsumer().setRuleCall$5$Delimiter(DatatypeRulesTestLanguageDelimiters.ruleCall$31$Delimiter);
-		getVectorConsumer().setRuleCall$6$Delimiter(DatatypeRulesTestLanguageDelimiters.ruleCall$31$Delimiter);
-		getVectorConsumer().setKeyword$7$Delimiter(DatatypeRulesTestLanguageDelimiters.keyword$15$Delimiter);
 		getVectorConsumer().setKeyword$4$Delimiter(DatatypeRulesTestLanguageDelimiters.keyword$15$Delimiter);
-		getDotsConsumer().setKeyword$5$Delimiter(DatatypeRulesTestLanguageDelimiters.keyword$15$Delimiter);
-		getDotsConsumer().setKeyword$4$Delimiter(DatatypeRulesTestLanguageDelimiters.keyword$15$Delimiter);
+		getVectorConsumer().setKeyword$7$Delimiter(DatatypeRulesTestLanguageDelimiters.keyword$15$Delimiter);
+		getVectorConsumer().setRuleCall$6$Delimiter(DatatypeRulesTestLanguageDelimiters.ruleCall$31$Delimiter);
+		getVectorConsumer().setRuleCall$5$Delimiter(DatatypeRulesTestLanguageDelimiters.ruleCall$31$Delimiter);
 		getDotsConsumer().setKeyword$3$Delimiter(DatatypeRulesTestLanguageDelimiters.keyword$15$Delimiter);
-		// TODO remove workaround
-		getIdConsumer().initFields(this);
-		// TODO remove workaround
-		getIntConsumer().initFields(this);
-		// TODO remove workaround
-		getStringConsumer().initFields(this);
-		// TODO remove workaround
-		getMlCommentConsumer().initFields(this);
-		// TODO remove workaround
-		getSlCommentConsumer().initFields(this);
-		// TODO remove workaround
-		getWsConsumer().initFields(this);
-		// TODO remove workaround
-		getAnyOtherConsumer().initFields(this);
+		getDotsConsumer().setKeyword$4$Delimiter(DatatypeRulesTestLanguageDelimiters.keyword$15$Delimiter);
+		getDotsConsumer().setKeyword$5$Delimiter(DatatypeRulesTestLanguageDelimiters.keyword$15$Delimiter);
 	}
 	
 	// TODO collect superGrammars transitive

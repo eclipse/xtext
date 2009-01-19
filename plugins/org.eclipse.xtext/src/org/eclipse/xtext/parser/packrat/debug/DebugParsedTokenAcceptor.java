@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.packrat.debug;
 
+import org.apache.log4j.Logger;
 import org.eclipse.xtext.parser.packrat.tokens.AbstractParsedToken;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
@@ -15,6 +16,8 @@ import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
  */
 public class DebugParsedTokenAcceptor implements IParsedTokenAcceptor {
 
+	private static final Logger log = Logger.getLogger(DebugParsedTokenAcceptor.class);
+	
 	private final IParsedTokenAcceptor delegate;
 	
 	public DebugParsedTokenAcceptor(IParsedTokenAcceptor delegate) {
@@ -22,6 +25,9 @@ public class DebugParsedTokenAcceptor implements IParsedTokenAcceptor {
 	}
 	
 	public void accept(AbstractParsedToken token) {
+		if (log.isDebugEnabled()) {
+			log.debug("accept(" + token + ")");
+		}
 		delegate.accept(token);
 	}
 

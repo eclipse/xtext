@@ -282,7 +282,7 @@ public class FowlerDslTestLanguageGrammarAccess extends BaseEPackageAccess imple
 	}
 	
 	public XtextBuiltinGrammarAccess getSuperGrammar() {
-		return XtextBuiltinGrammarAccess.INSTANCE;		
+		return XtextBuiltinGrammarAccess.INSTANCE;
 	}
 
 	

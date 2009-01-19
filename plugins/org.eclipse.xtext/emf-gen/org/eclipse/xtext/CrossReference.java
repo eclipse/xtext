@@ -2,11 +2,9 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CrossReference.java,v 1.5 2008/12/10 11:49:38 szarnekow Exp $
+ * $Id: CrossReference.java,v 1.6 2009/01/19 14:39:52 szarnekow Exp $
  */
 package org.eclipse.xtext;
-
-import org.eclipse.emf.ecore.EObject;
 
 
 /**
@@ -57,7 +55,7 @@ public interface CrossReference extends AbstractElement {
 	 * Returns the value of the '<em><b>Rule</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Rule</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Rule</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextFactoryImpl.java,v 1.16 2008/12/10 11:49:37 szarnekow Exp $
+ * $Id: XtextFactoryImpl.java,v 1.17 2009/01/19 14:39:51 szarnekow Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -22,16 +22,14 @@ import org.eclipse.xtext.*;
  * <!-- end-user-doc -->
  * @generated
  */
-public class XtextFactoryImpl extends EFactoryImpl implements XtextFactory
-{
-  /**
+public class XtextFactoryImpl extends EFactoryImpl implements XtextFactory {
+	/**
 	 * Creates the default factory implementation.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public static XtextFactory init()
-  {
+	public static XtextFactory init() {
 		try {
 			XtextFactory theXtextFactory = (XtextFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2008/Xtext"); 
 			if (theXtextFactory != null) {
@@ -44,25 +42,23 @@ public class XtextFactoryImpl extends EFactoryImpl implements XtextFactory
 		return new XtextFactoryImpl();
 	}
 
-  /**
+	/**
 	 * Creates an instance of the factory.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public XtextFactoryImpl()
-  {
+	public XtextFactoryImpl() {
 		super();
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public EObject create(EClass eClass)
-  {
+	@Override
+	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case XtextPackage.GRAMMAR: return createGrammar();
 			case XtextPackage.ABSTRACT_RULE: return createAbstractRule();
@@ -75,39 +71,32 @@ public class XtextFactoryImpl extends EFactoryImpl implements XtextFactory
 			case XtextPackage.ABSTRACT_ELEMENT: return createAbstractElement();
 			case XtextPackage.ASSIGNMENT: return createAssignment();
 			case XtextPackage.ACTION: return createAction();
+			case XtextPackage.ABSTRACT_NEGATED_TOKEN: return createAbstractNegatedToken();
+			case XtextPackage.NEGATED_TOKEN: return createNegatedToken();
+			case XtextPackage.UP_TO_TOKEN: return createUpToToken();
+			case XtextPackage.WILDCARD: return createWildcard();
 			case XtextPackage.CROSS_REFERENCE: return createCrossReference();
 			case XtextPackage.KEYWORD: return createKeyword();
 			case XtextPackage.RULE_CALL: return createRuleCall();
 			case XtextPackage.ALTERNATIVES: return createAlternatives();
 			case XtextPackage.GROUP: return createGroup();
+			case XtextPackage.CHARACTER_RANGE: return createCharacterRange();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public GeneratedMetamodel createGeneratedMetamodel()
-  {
-		GeneratedMetamodelImpl generatedMetamodel = new GeneratedMetamodelImpl();
-		return generatedMetamodel;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public Grammar createGrammar()
-  {
+	public Grammar createGrammar() {
 		GrammarImpl grammar = new GrammarImpl();
 		return grammar;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -117,18 +106,7 @@ public class XtextFactoryImpl extends EFactoryImpl implements XtextFactory
 		return abstractRule;
 	}
 
-		/**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public ParserRule createParserRule()
-  {
-		ParserRuleImpl parserRule = new ParserRuleImpl();
-		return parserRule;
-	}
-
-  /**
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -138,18 +116,57 @@ public class XtextFactoryImpl extends EFactoryImpl implements XtextFactory
 		return abstractMetamodelDeclaration;
 	}
 
-		/**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public TypeRef createTypeRef()
-  {
+	public GeneratedMetamodel createGeneratedMetamodel() {
+		GeneratedMetamodelImpl generatedMetamodel = new GeneratedMetamodelImpl();
+		return generatedMetamodel;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ReferencedMetamodel createReferencedMetamodel() {
+		ReferencedMetamodelImpl referencedMetamodel = new ReferencedMetamodelImpl();
+		return referencedMetamodel;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public LexerRule createLexerRule() {
+		LexerRuleImpl lexerRule = new LexerRuleImpl();
+		return lexerRule;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ParserRule createParserRule() {
+		ParserRuleImpl parserRule = new ParserRuleImpl();
+		return parserRule;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypeRef createTypeRef() {
 		TypeRefImpl typeRef = new TypeRefImpl();
 		return typeRef;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -159,27 +176,7 @@ public class XtextFactoryImpl extends EFactoryImpl implements XtextFactory
 		return abstractElement;
 	}
 
-		/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Alternatives createAlternatives() {
-		AlternativesImpl alternatives = new AlternativesImpl();
-		return alternatives;
-	}
-
-		/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Group createGroup() {
-		GroupImpl group = new GroupImpl();
-		return group;
-	}
-
-		/**
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -189,7 +186,7 @@ public class XtextFactoryImpl extends EFactoryImpl implements XtextFactory
 		return assignment;
 	}
 
-		/**
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -199,18 +196,47 @@ public class XtextFactoryImpl extends EFactoryImpl implements XtextFactory
 		return action;
 	}
 
-		/**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public RuleCall createRuleCall()
-  {
-		RuleCallImpl ruleCall = new RuleCallImpl();
-		return ruleCall;
+	public AbstractNegatedToken createAbstractNegatedToken() {
+		AbstractNegatedTokenImpl abstractNegatedToken = new AbstractNegatedTokenImpl();
+		return abstractNegatedToken;
 	}
 
-  /**
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NegatedToken createNegatedToken() {
+		NegatedTokenImpl negatedToken = new NegatedTokenImpl();
+		return negatedToken;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public UpToToken createUpToToken() {
+		UpToTokenImpl upToToken = new UpToTokenImpl();
+		return upToToken;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Wildcard createWildcard() {
+		WildcardImpl wildcard = new WildcardImpl();
+		return wildcard;
+	}
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -220,58 +246,73 @@ public class XtextFactoryImpl extends EFactoryImpl implements XtextFactory
 		return crossReference;
 	}
 
-		/**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public ReferencedMetamodel createReferencedMetamodel()
-  {
-		ReferencedMetamodelImpl referencedMetamodel = new ReferencedMetamodelImpl();
-		return referencedMetamodel;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public LexerRule createLexerRule()
-  {
-		LexerRuleImpl lexerRule = new LexerRuleImpl();
-		return lexerRule;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public Keyword createKeyword()
-  {
+	public Keyword createKeyword() {
 		KeywordImpl keyword = new KeywordImpl();
 		return keyword;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public XtextPackage getXtextPackage()
-  {
+	public RuleCall createRuleCall() {
+		RuleCallImpl ruleCall = new RuleCallImpl();
+		return ruleCall;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Alternatives createAlternatives() {
+		AlternativesImpl alternatives = new AlternativesImpl();
+		return alternatives;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Group createGroup() {
+		GroupImpl group = new GroupImpl();
+		return group;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CharacterRange createCharacterRange() {
+		CharacterRangeImpl characterRange = new CharacterRangeImpl();
+		return characterRange;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public XtextPackage getXtextPackage() {
 		return (XtextPackage)getEPackage();
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @deprecated
 	 * @generated
 	 */
-  @Deprecated
-  public static XtextPackage getPackage()
-  {
+	@Deprecated
+	public static XtextPackage getPackage() {
 		return XtextPackage.eINSTANCE;
 	}
 

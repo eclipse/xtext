@@ -37,7 +37,11 @@ public interface «languageInterfaceFQName.toSimpleName()» {
 	public static final String NAME = "«grammar().getName()»";
 	public static final String NAMESPACE = "«grammar().getNamespace()»";
 	public static final String[] FILE_EXTENSIONS = new String[]{«modelFileExtensions().collect(e|'"'+e+'"').toString(",")»};
+«IF grammar().getSuperGrammar() != null-»
 	public static final IServiceScope SCOPE = ServiceScopeFactory.createScope(ID, «languageInterface(grammar().getSuperGrammar())».SCOPE);
+«ELSE-»
+	public static final IServiceScope SCOPE = ServiceScopeFactory.createScope(ID, null);
+«ENDIF-»
 	
 }
 «ENDFILE»

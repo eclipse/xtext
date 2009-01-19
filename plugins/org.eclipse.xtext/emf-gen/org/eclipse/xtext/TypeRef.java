@@ -2,13 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeRef.java,v 1.13 2008/12/10 11:49:38 szarnekow Exp $
+ * $Id: TypeRef.java,v 1.14 2009/01/19 14:39:52 szarnekow Exp $
  */
 package org.eclipse.xtext;
 
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -28,9 +26,8 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface TypeRef extends EObject
-{
-  /**
+public interface TypeRef extends EObject {
+	/**
 	 * Returns the value of the '<em><b>Metamodel</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>

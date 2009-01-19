@@ -62,6 +62,7 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 
 
 
+
 // Entry rule entryRuleEntryRule
 entryRuleEntryRule returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); }
@@ -101,6 +102,8 @@ ruleEntryRule returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleAbstractRule
 entryRuleAbstractRule returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.1" /* xtext::ParserRule */, currentNode); }
@@ -133,6 +136,8 @@ ruleAbstractRule returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 );
+
+
 
 
 
@@ -195,6 +200,8 @@ ruleChoiceRule returns [EObject current=null]
 	    }
 	
 ));
+
+
 
 
 
@@ -268,6 +275,8 @@ ruleReducibleRule returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleTerminalRule
 entryRuleTerminalRule returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.4" /* xtext::ParserRule */, currentNode); }
@@ -301,6 +310,18 @@ ruleTerminalRule returns [EObject current=null]
 	    }
 	
 );
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

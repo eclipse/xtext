@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.packrat;
 
+import java.util.Arrays;
+
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.IGrammarAccess;
@@ -18,6 +20,12 @@ import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.IRootConsumerListener;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.KeywordConsumer;
+import org.eclipse.xtext.parser.packrat.debug.DebugCharSequenceWithOffset;
+import org.eclipse.xtext.parser.packrat.debug.DebugConsumerUtility;
+import org.eclipse.xtext.parser.packrat.debug.DebugHiddenTokenHandler;
+import org.eclipse.xtext.parser.packrat.debug.DebugMarkerFactory;
+import org.eclipse.xtext.parser.packrat.debug.DebugParsedTokenAcceptor;
+import org.eclipse.xtext.parser.packrat.debug.DebugUtil;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.AbstractParsedToken;
@@ -43,10 +51,6 @@ public abstract class AbstractPackratParser implements
 		
 		private int offset;
 		
-		/**
-		 * @param mark
-		 * @param offset2
-		 */
 		public Marker(ParsedTokenSequence.Marker marker, int offset) {
 			this.marker = marker;
 			this.offset = offset;
@@ -56,6 +60,12 @@ public abstract class AbstractPackratParser implements
 			marker.rollback();
 			AbstractPackratParser.this.offset = offset;
 		}
+
+		@Override
+		public String toString() {
+			return marker.toString() + "@Offset '" + offset + "'";
+		}
+		
 	}
 	
 	private class HiddenTokenState implements IHiddenTokenHandler.IHiddenTokenState {
@@ -68,6 +78,11 @@ public abstract class AbstractPackratParser implements
 		
 		public void restore() {
 			setHiddens(this.hiddens);
+		}
+
+		@Override
+		public String toString() {
+			return "HiddenTokenState holding " + Arrays.toString(hiddens);
 		}
 		
 	}
@@ -97,13 +112,17 @@ public abstract class AbstractPackratParser implements
 	
 	protected AbstractPackratParser() {
 		tokenSequence = createTokenSequence();
-		keywordConsumer = createKeywordConsumer();
 		parserConfiguration = createParserConfiguration();
+		keywordConsumer = createKeywordConsumer();
 	}
 	
 	private IParserConfiguration createParserConfiguration() {
-		// TODO use debug wrappers if configured
-		IParserConfiguration result = createParserConfiguration(this, this, this, this, this);
+		ICharSequenceWithOffset localInput = DebugUtil.INPUT_DEBUG ? new DebugCharSequenceWithOffset(this) : this;
+		IMarkerFactory localMarkerFactory = DebugUtil.MARKER_FACTORY_DEBUG ? new DebugMarkerFactory(this) : this;
+		IParsedTokenAcceptor localTokenAcceptor = DebugUtil.TOKEN_ACCEPTOR_DEBUG ? new DebugParsedTokenAcceptor(this) : this;
+		IHiddenTokenHandler localHiddenTokenHandler = DebugUtil.HIDDEN_TOKEN_HANDLER_DEBUG ? new DebugHiddenTokenHandler(this) : this;
+		IConsumerUtility localConsumerUtil = DebugUtil.CONSUMER_UTIL_DEBUG ? new DebugConsumerUtility(this) : this;
+		IParserConfiguration result = createParserConfiguration(localInput, localMarkerFactory, localTokenAcceptor, localHiddenTokenHandler, localConsumerUtil);
 		result.createTerminalConsumers();
 		result.createNonTerminalConsumers();
 		result.configureConsumers();
@@ -114,7 +133,7 @@ public abstract class AbstractPackratParser implements
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil);
 
 	protected KeywordConsumer createKeywordConsumer() {
-		return new KeywordConsumer(this, this, this);
+		return new KeywordConsumer(parserConfiguration.getInput(), parserConfiguration.getMarkerFactory(), parserConfiguration.getTokenAcceptor());
 	}
 
 	protected ParsedTokenSequence createTokenSequence() {

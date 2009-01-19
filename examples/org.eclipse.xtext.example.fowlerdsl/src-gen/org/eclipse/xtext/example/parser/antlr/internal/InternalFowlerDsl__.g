@@ -17,25 +17,25 @@ T17 : '{' ;
 T18 : '}' ;
 T19 : '=>' ;
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g" 444
+// $ANTLR src "./src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g" 465
 RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g" 446
+// $ANTLR src "./src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g" 467
 RULE_INT : ('0'..'9')+;
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g" 448
+// $ANTLR src "./src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g" 469
 RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' |                '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g" 450
+// $ANTLR src "./src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g" 471
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g" 452
+// $ANTLR src "./src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g" 473
 RULE_SL_COMMENT : '//' ~('\n'|'\r')* ('\r'? '\n')? {$channel=HIDDEN;};
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g" 454
+// $ANTLR src "./src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g" 475
 RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g" 456
+// $ANTLR src "./src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g" 477
 RULE_ANY_OTHER : .;
 
 

@@ -2,23 +2,18 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractElementImpl.java,v 1.12 2008/12/03 20:57:10 szarnekow Exp $
+ * $Id: AbstractElementImpl.java,v 1.13 2009/01/19 14:39:51 szarnekow Exp $
  */
 package org.eclipse.xtext.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 
-import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.AbstractRule;
-import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextPackage;
 
 /**
@@ -34,80 +29,74 @@ import org.eclipse.xtext.XtextPackage;
  *
  * @generated
  */
-public class AbstractElementImpl extends EObjectImpl implements AbstractElement
-{
-  /**
+public class AbstractElementImpl extends EObjectImpl implements AbstractElement {
+	/**
 	 * The default value of the '{@link #getCardinality() <em>Cardinality</em>}' attribute.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getCardinality()
 	 * @generated
 	 * @ordered
 	 */
-  protected static final String CARDINALITY_EDEFAULT = null;
+	protected static final String CARDINALITY_EDEFAULT = null;
 
-  /**
+	/**
 	 * The cached value of the '{@link #getCardinality() <em>Cardinality</em>}' attribute.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getCardinality()
 	 * @generated
 	 * @ordered
 	 */
-  protected String cardinality = CARDINALITY_EDEFAULT;
+	protected String cardinality = CARDINALITY_EDEFAULT;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  protected AbstractElementImpl()
-  {
+	protected AbstractElementImpl() {
 		super();
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  protected EClass eStaticClass()
-  {
+	@Override
+	protected EClass eStaticClass() {
 		return XtextPackage.Literals.ABSTRACT_ELEMENT;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public String getCardinality()
-  {
+	public String getCardinality() {
 		return cardinality;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setCardinality(String newCardinality)
-  {
+	public void setCardinality(String newCardinality) {
 		String oldCardinality = cardinality;
 		cardinality = newCardinality;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.ABSTRACT_ELEMENT__CARDINALITY, oldCardinality, cardinality));
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public Object eGet(int featureID, boolean resolve, boolean coreType)
-  {
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case XtextPackage.ABSTRACT_ELEMENT__CARDINALITY:
 				return getCardinality();
@@ -115,14 +104,13 @@ public class AbstractElementImpl extends EObjectImpl implements AbstractElement
 		return super.eGet(featureID, resolve, coreType);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public void eSet(int featureID, Object newValue)
-  {
+	@Override
+	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case XtextPackage.ABSTRACT_ELEMENT__CARDINALITY:
 				setCardinality((String)newValue);
@@ -131,14 +119,13 @@ public class AbstractElementImpl extends EObjectImpl implements AbstractElement
 		super.eSet(featureID, newValue);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public void eUnset(int featureID)
-  {
+	@Override
+	public void eUnset(int featureID) {
 		switch (featureID) {
 			case XtextPackage.ABSTRACT_ELEMENT__CARDINALITY:
 				setCardinality(CARDINALITY_EDEFAULT);
@@ -147,14 +134,13 @@ public class AbstractElementImpl extends EObjectImpl implements AbstractElement
 		super.eUnset(featureID);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public boolean eIsSet(int featureID)
-  {
+	@Override
+	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case XtextPackage.ABSTRACT_ELEMENT__CARDINALITY:
 				return CARDINALITY_EDEFAULT == null ? cardinality != null : !CARDINALITY_EDEFAULT.equals(cardinality);
@@ -162,14 +148,13 @@ public class AbstractElementImpl extends EObjectImpl implements AbstractElement
 		return super.eIsSet(featureID);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public String toString()
-  {
+	@Override
+	public String toString() {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());

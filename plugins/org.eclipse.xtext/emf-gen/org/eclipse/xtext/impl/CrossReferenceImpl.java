@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CrossReferenceImpl.java,v 1.5 2008/12/10 11:49:38 szarnekow Exp $
+ * $Id: CrossReferenceImpl.java,v 1.6 2009/01/19 14:39:51 szarnekow Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -15,10 +15,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.xtext.AbstractRule;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.xtext.CrossReference;
-import org.eclipse.xtext.LexerRule;
-import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextPackage;
 

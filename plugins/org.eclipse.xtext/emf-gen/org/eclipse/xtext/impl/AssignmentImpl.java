@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AssignmentImpl.java,v 1.13 2008/12/02 20:42:07 szarnekow Exp $
+ * $Id: AssignmentImpl.java,v 1.14 2009/01/19 14:39:51 szarnekow Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -33,119 +33,133 @@ import org.eclipse.xtext.XtextPackage;
  *
  * @generated
  */
-public class AssignmentImpl extends AbstractElementImpl implements Assignment
-{
-  /**
+public class AssignmentImpl extends AbstractElementImpl implements Assignment {
+	/**
 	 * The default value of the '{@link #getFeature() <em>Feature</em>}' attribute.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getFeature()
 	 * @generated
 	 * @ordered
 	 */
-  protected static final String FEATURE_EDEFAULT = null;
+	protected static final String FEATURE_EDEFAULT = null;
 
-		/**
+	/**
 	 * The cached value of the '{@link #getFeature() <em>Feature</em>}' attribute.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getFeature()
 	 * @generated
 	 * @ordered
 	 */
-  protected String feature = FEATURE_EDEFAULT;
+	protected String feature = FEATURE_EDEFAULT;
 
-		/**
+	/**
 	 * The default value of the '{@link #getOperator() <em>Operator</em>}' attribute.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getOperator()
 	 * @generated
 	 * @ordered
 	 */
-  protected static final String OPERATOR_EDEFAULT = null;
+	protected static final String OPERATOR_EDEFAULT = null;
 
-		/**
+	/**
 	 * The cached value of the '{@link #getOperator() <em>Operator</em>}' attribute.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getOperator()
 	 * @generated
 	 * @ordered
 	 */
-  protected String operator = OPERATOR_EDEFAULT;
+	protected String operator = OPERATOR_EDEFAULT;
 
-		/**
+	/**
 	 * The cached value of the '{@link #getTerminal() <em>Terminal</em>}' containment reference.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getTerminal()
 	 * @generated
 	 * @ordered
 	 */
-  protected AbstractElement terminal;
+	protected AbstractElement terminal;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  protected AssignmentImpl()
-  {
+	protected AssignmentImpl() {
 		super();
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  protected EClass eStaticClass()
-  {
+	@Override
+	protected EClass eStaticClass() {
 		return XtextPackage.Literals.ASSIGNMENT;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public String getFeature()
-  {
+	public String getFeature() {
 		return feature;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setFeature(String newFeature)
-  {
+	public void setFeature(String newFeature) {
 		String oldFeature = feature;
 		feature = newFeature;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.ASSIGNMENT__FEATURE, oldFeature, feature));
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public AbstractElement getTerminal()
-  {
+	public String getOperator() {
+		return operator;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOperator(String newOperator) {
+		String oldOperator = operator;
+		operator = newOperator;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.ASSIGNMENT__OPERATOR, oldOperator, operator));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AbstractElement getTerminal() {
 		return terminal;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public NotificationChain basicSetTerminal(AbstractElement newTerminal, NotificationChain msgs)
-  {
+	public NotificationChain basicSetTerminal(AbstractElement newTerminal, NotificationChain msgs) {
 		AbstractElement oldTerminal = terminal;
 		terminal = newTerminal;
 		if (eNotificationRequired()) {
@@ -155,13 +169,12 @@ public class AssignmentImpl extends AbstractElementImpl implements Assignment
 		return msgs;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setTerminal(AbstractElement newTerminal)
-  {
+	public void setTerminal(AbstractElement newTerminal) {
 		if (newTerminal != terminal) {
 			NotificationChain msgs = null;
 			if (terminal != null)
@@ -175,37 +188,13 @@ public class AssignmentImpl extends AbstractElementImpl implements Assignment
 			eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.ASSIGNMENT__TERMINAL, newTerminal, newTerminal));
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public String getOperator()
-  {
-		return operator;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public void setOperator(String newOperator)
-  {
-		String oldOperator = operator;
-		operator = newOperator;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.ASSIGNMENT__OPERATOR, oldOperator, operator));
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-  {
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case XtextPackage.ASSIGNMENT__TERMINAL:
 				return basicSetTerminal(null, msgs);
@@ -213,14 +202,13 @@ public class AssignmentImpl extends AbstractElementImpl implements Assignment
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public Object eGet(int featureID, boolean resolve, boolean coreType)
-  {
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case XtextPackage.ASSIGNMENT__FEATURE:
 				return getFeature();
@@ -232,14 +220,13 @@ public class AssignmentImpl extends AbstractElementImpl implements Assignment
 		return super.eGet(featureID, resolve, coreType);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public void eSet(int featureID, Object newValue)
-  {
+	@Override
+	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case XtextPackage.ASSIGNMENT__FEATURE:
 				setFeature((String)newValue);
@@ -254,14 +241,13 @@ public class AssignmentImpl extends AbstractElementImpl implements Assignment
 		super.eSet(featureID, newValue);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public void eUnset(int featureID)
-  {
+	@Override
+	public void eUnset(int featureID) {
 		switch (featureID) {
 			case XtextPackage.ASSIGNMENT__FEATURE:
 				setFeature(FEATURE_EDEFAULT);
@@ -276,14 +262,13 @@ public class AssignmentImpl extends AbstractElementImpl implements Assignment
 		super.eUnset(featureID);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public boolean eIsSet(int featureID)
-  {
+	@Override
+	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case XtextPackage.ASSIGNMENT__FEATURE:
 				return FEATURE_EDEFAULT == null ? feature != null : !FEATURE_EDEFAULT.equals(feature);
@@ -295,14 +280,13 @@ public class AssignmentImpl extends AbstractElementImpl implements Assignment
 		return super.eIsSet(featureID);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public String toString()
-  {
+	@Override
+	public String toString() {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());

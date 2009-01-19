@@ -8,8 +8,10 @@
 package org.eclipse.xtext.parser.packrat;
 
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 /**
+ * This interface is not intendet to be implemented by clients.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public interface IParserConfiguration {
@@ -21,5 +23,11 @@ public interface IParserConfiguration {
 	void createTerminalConsumers();
 	
 	void configureConsumers();
+	
+	ICharSequenceWithOffset getInput();
 
+	IMarkerFactory getMarkerFactory();
+
+	IParsedTokenAcceptor getTokenAcceptor();
+	
 }

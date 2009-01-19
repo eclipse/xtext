@@ -25,19 +25,19 @@ public final class PartialParserTestLanguageNestedConsumer extends NonTerminalCo
 
 	private PartialParserTestLanguageContainerConsumer containerConsumer;
 
-	private ICharacterClass keyword$8$Delimiter;
-	
 	private ICharacterClass keyword$4$Delimiter;
 	
 	private ICharacterClass keyword$5$Delimiter;
+	
+	private ICharacterClass keyword$8$Delimiter;
 	
 	public PartialParserTestLanguageNestedConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
-		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$4$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$5$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -108,14 +108,6 @@ public final class PartialParserTestLanguageNestedConsumer extends NonTerminalCo
 		this.containerConsumer = containerConsumer;
 	}
 	
-	public ICharacterClass getKeyword$8$Delimiter() {
-		return keyword$8$Delimiter;
-	}
-	
-	public void setKeyword$8$Delimiter(ICharacterClass characterClass) {
-		keyword$8$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
 	public ICharacterClass getKeyword$4$Delimiter() {
 		return keyword$4$Delimiter;
 	}
@@ -130,6 +122,14 @@ public final class PartialParserTestLanguageNestedConsumer extends NonTerminalCo
 	
 	public void setKeyword$5$Delimiter(ICharacterClass characterClass) {
 		keyword$5$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$8$Delimiter() {
+		return keyword$8$Delimiter;
+	}
+	
+	public void setKeyword$8$Delimiter(ICharacterClass characterClass) {
+		keyword$8$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

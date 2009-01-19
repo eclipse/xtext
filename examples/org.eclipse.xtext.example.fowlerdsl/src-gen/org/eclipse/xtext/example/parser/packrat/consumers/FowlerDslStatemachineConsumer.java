@@ -18,33 +18,33 @@ import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 import org.eclipse.xtext.example.services.FowlerDslGrammarAccess;
 import org.eclipse.xtext.example.services.FowlerDslGrammarAccess.StatemachineElements;
 
-import org.eclipse.xtext.example.parser.packrat.consumers.FowlerDslStateConsumer;
-import org.eclipse.xtext.example.parser.packrat.consumers.FowlerDslEventConsumer;
 import org.eclipse.xtext.example.parser.packrat.consumers.FowlerDslCommandConsumer;
+import org.eclipse.xtext.example.parser.packrat.consumers.FowlerDslEventConsumer;
+import org.eclipse.xtext.example.parser.packrat.consumers.FowlerDslStateConsumer;
 
 @SuppressWarnings("unused")
 public final class FowlerDslStatemachineConsumer extends NonTerminalConsumer {
 
-	private FowlerDslStateConsumer stateConsumer;
-	private FowlerDslEventConsumer eventConsumer;
 	private FowlerDslCommandConsumer commandConsumer;
+	private FowlerDslEventConsumer eventConsumer;
+	private FowlerDslStateConsumer stateConsumer;
 
-	private ICharacterClass keyword$14$Delimiter;
-	
-	private ICharacterClass keyword$7$Delimiter;
-	
 	private ICharacterClass keyword$11$Delimiter;
 	
+	private ICharacterClass keyword$14$Delimiter;
+	
 	private ICharacterClass keyword$10$Delimiter;
+	
+	private ICharacterClass keyword$7$Delimiter;
 	
 	public FowlerDslStatemachineConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
-		keyword$14$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$11$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$14$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$10$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -146,32 +146,16 @@ public final class FowlerDslStatemachineConsumer extends NonTerminalConsumer {
 		return "Statemachine";
 	}
 	
-	public void setStateConsumer(FowlerDslStateConsumer stateConsumer) {
-		this.stateConsumer = stateConsumer;
+	public void setCommandConsumer(FowlerDslCommandConsumer commandConsumer) {
+		this.commandConsumer = commandConsumer;
 	}
 	
 	public void setEventConsumer(FowlerDslEventConsumer eventConsumer) {
 		this.eventConsumer = eventConsumer;
 	}
 	
-	public void setCommandConsumer(FowlerDslCommandConsumer commandConsumer) {
-		this.commandConsumer = commandConsumer;
-	}
-	
-	public ICharacterClass getKeyword$14$Delimiter() {
-		return keyword$14$Delimiter;
-	}
-	
-	public void setKeyword$14$Delimiter(ICharacterClass characterClass) {
-		keyword$14$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
-	public ICharacterClass getKeyword$7$Delimiter() {
-		return keyword$7$Delimiter;
-	}
-	
-	public void setKeyword$7$Delimiter(ICharacterClass characterClass) {
-		keyword$7$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setStateConsumer(FowlerDslStateConsumer stateConsumer) {
+		this.stateConsumer = stateConsumer;
 	}
 	
 	public ICharacterClass getKeyword$11$Delimiter() {
@@ -182,12 +166,28 @@ public final class FowlerDslStatemachineConsumer extends NonTerminalConsumer {
 		keyword$11$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
+	public ICharacterClass getKeyword$14$Delimiter() {
+		return keyword$14$Delimiter;
+	}
+	
+	public void setKeyword$14$Delimiter(ICharacterClass characterClass) {
+		keyword$14$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
 	public ICharacterClass getKeyword$10$Delimiter() {
 		return keyword$10$Delimiter;
 	}
 	
 	public void setKeyword$10$Delimiter(ICharacterClass characterClass) {
 		keyword$10$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$7$Delimiter() {
+		return keyword$7$Delimiter;
+	}
+	
+	public void setKeyword$7$Delimiter(ICharacterClass characterClass) {
+		keyword$7$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

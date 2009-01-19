@@ -114,7 +114,7 @@ public class TreeTestLanguageGrammarAccess extends BaseEPackageAccess implements
 	}
 	
 	public XtextBuiltinGrammarAccess getSuperGrammar() {
-		return XtextBuiltinGrammarAccess.INSTANCE;		
+		return XtextBuiltinGrammarAccess.INSTANCE;
 	}
 
 	

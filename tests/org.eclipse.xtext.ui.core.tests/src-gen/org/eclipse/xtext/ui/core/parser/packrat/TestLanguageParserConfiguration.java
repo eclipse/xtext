@@ -45,8 +45,7 @@ public class TestLanguageParserConfiguration extends AbstractParserConfiguration
 	public void createNonTerminalConsumers() {
 		getXtextBuiltinConfiguration().createNonTerminalConsumers();
 		fileConsumer = new TestLanguageFileConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(),
-    		new ITerminalConsumer[]{ getWsConsumer(), getMlCommentConsumer(), getSlCommentConsumer() }
+    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
     	);
 		stuffConsumer = new TestLanguageStuffConsumer(
     		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
@@ -62,22 +61,8 @@ public class TestLanguageParserConfiguration extends AbstractParserConfiguration
 
 		getStuffConsumer().setIdConsumer(getIdConsumer());
 
-		getStuffConsumer().setKeyword$2$Delimiter(TestLanguageDelimiters.keyword$8$Delimiter);
 		getStuffConsumer().setRuleCall$4$Delimiter(TestLanguageDelimiters.ruleCall$10$Delimiter);
-		// TODO remove workaround
-		getIdConsumer().initFields(this);
-		// TODO remove workaround
-		getIntConsumer().initFields(this);
-		// TODO remove workaround
-		getStringConsumer().initFields(this);
-		// TODO remove workaround
-		getMlCommentConsumer().initFields(this);
-		// TODO remove workaround
-		getSlCommentConsumer().initFields(this);
-		// TODO remove workaround
-		getWsConsumer().initFields(this);
-		// TODO remove workaround
-		getAnyOtherConsumer().initFields(this);
+		getStuffConsumer().setKeyword$2$Delimiter(TestLanguageDelimiters.keyword$8$Delimiter);
 	}
 	
 	// TODO collect superGrammars transitive

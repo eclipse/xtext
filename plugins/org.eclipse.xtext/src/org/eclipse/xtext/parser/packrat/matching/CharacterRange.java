@@ -26,4 +26,9 @@ public class CharacterRange implements ICharacterClass {
 		return this.min <= candidate && this.max >= candidate;
 	}
 
+	@Override
+	public String toString() {
+		return "'" + min + "'..'" + max + "'";
+	}
+	
 }

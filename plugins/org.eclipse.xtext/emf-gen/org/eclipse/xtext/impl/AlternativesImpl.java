@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AlternativesImpl.java,v 1.10 2008/06/05 15:03:51 sefftinge Exp $
+ * $Id: AlternativesImpl.java,v 1.11 2009/01/19 14:39:51 szarnekow Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -35,60 +35,55 @@ import org.eclipse.xtext.XtextPackage;
  *
  * @generated
  */
-public class AlternativesImpl extends AbstractElementImpl implements Alternatives
-{
-  /**
+public class AlternativesImpl extends AbstractElementImpl implements Alternatives {
+	/**
 	 * The cached value of the '{@link #getGroups() <em>Groups</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getGroups()
 	 * @generated
 	 * @ordered
 	 */
-  protected EList<AbstractElement> groups;
+	protected EList<AbstractElement> groups;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  protected AlternativesImpl()
-  {
+	protected AlternativesImpl() {
 		super();
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  protected EClass eStaticClass()
-  {
+	@Override
+	protected EClass eStaticClass() {
 		return XtextPackage.Literals.ALTERNATIVES;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EList<AbstractElement> getGroups()
-  {
+	public EList<AbstractElement> getGroups() {
 		if (groups == null) {
 			groups = new EObjectContainmentEList<AbstractElement>(AbstractElement.class, this, XtextPackage.ALTERNATIVES__GROUPS);
 		}
 		return groups;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-  {
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case XtextPackage.ALTERNATIVES__GROUPS:
 				return ((InternalEList<?>)getGroups()).basicRemove(otherEnd, msgs);
@@ -96,14 +91,13 @@ public class AlternativesImpl extends AbstractElementImpl implements Alternative
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public Object eGet(int featureID, boolean resolve, boolean coreType)
-  {
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case XtextPackage.ALTERNATIVES__GROUPS:
 				return getGroups();
@@ -111,15 +105,14 @@ public class AlternativesImpl extends AbstractElementImpl implements Alternative
 		return super.eGet(featureID, resolve, coreType);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @SuppressWarnings("unchecked")
-  @Override
-  public void eSet(int featureID, Object newValue)
-  {
+	@SuppressWarnings("unchecked")
+	@Override
+	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case XtextPackage.ALTERNATIVES__GROUPS:
 				getGroups().clear();
@@ -129,14 +122,13 @@ public class AlternativesImpl extends AbstractElementImpl implements Alternative
 		super.eSet(featureID, newValue);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public void eUnset(int featureID)
-  {
+	@Override
+	public void eUnset(int featureID) {
 		switch (featureID) {
 			case XtextPackage.ALTERNATIVES__GROUPS:
 				getGroups().clear();
@@ -145,14 +137,13 @@ public class AlternativesImpl extends AbstractElementImpl implements Alternative
 		super.eUnset(featureID);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public boolean eIsSet(int featureID)
-  {
+	@Override
+	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case XtextPackage.ALTERNATIVES__GROUPS:
 				return groups != null && !groups.isEmpty();

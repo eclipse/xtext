@@ -29,20 +29,20 @@ public final class ContentAssistTestLanguageSecondAbstractRuleChildConsumer exte
 
 	private ICharacterClass keyword$8$Delimiter;
 	
-	private ICharacterClass keyword$7$Delimiter;
-	
 	private ICharacterClass keyword$11$Delimiter;
 	
 	private ISequenceMatcher ruleCall$6$Delimiter;
+	
+	private ICharacterClass keyword$7$Delimiter;
 	
 	public ContentAssistTestLanguageSecondAbstractRuleChildConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$11$Delimiter = ICharacterClass.Factory.nullClass();
 		ruleCall$6$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -127,14 +127,6 @@ public final class ContentAssistTestLanguageSecondAbstractRuleChildConsumer exte
 		keyword$8$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
-	public ICharacterClass getKeyword$7$Delimiter() {
-		return keyword$7$Delimiter;
-	}
-	
-	public void setKeyword$7$Delimiter(ICharacterClass characterClass) {
-		keyword$7$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
 	public ICharacterClass getKeyword$11$Delimiter() {
 		return keyword$11$Delimiter;
 	}
@@ -149,6 +141,14 @@ public final class ContentAssistTestLanguageSecondAbstractRuleChildConsumer exte
 	
 	public void setRuleCall$6$Delimiter(ISequenceMatcher matcher) {
 		ruleCall$6$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	}
+	
+	public ICharacterClass getKeyword$7$Delimiter() {
+		return keyword$7$Delimiter;
+	}
+	
+	public void setKeyword$7$Delimiter(ICharacterClass characterClass) {
+		keyword$7$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

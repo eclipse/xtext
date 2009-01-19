@@ -62,6 +62,7 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 
 
 
+
 // Entry rule entryRuleStart
 entryRuleStart returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); }
@@ -109,6 +110,8 @@ ruleStart returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleAbstractRule
 entryRuleAbstractRule returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#//@rules.1" /* xtext::ParserRule */, currentNode); }
@@ -141,6 +144,8 @@ ruleAbstractRule returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 );
+
+
 
 
 
@@ -217,6 +222,8 @@ ruleFirstAbstractRuleChild returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleSecondAbstractRuleChild
 entryRuleSecondAbstractRuleChild returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#//@rules.3" /* xtext::ParserRule */, currentNode); }
@@ -288,6 +295,8 @@ ruleSecondAbstractRuleChild returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleAbstractRuleCall
 entryRuleAbstractRuleCall returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#//@rules.4" /* xtext::ParserRule */, currentNode); }
@@ -316,6 +325,18 @@ ruleAbstractRuleCall returns [EObject current=null]
 ) 
 	
 );
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

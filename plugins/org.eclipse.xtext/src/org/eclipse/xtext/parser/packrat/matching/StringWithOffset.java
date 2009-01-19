@@ -67,6 +67,11 @@ public class StringWithOffset implements ICharSequenceWithOffset, IMarkerFactory
 		public void rollback() {
 			StringWithOffset.this.setOffset(offset);
 		}
+
+		@Override
+		public String toString() {
+			return "Marker@" + offset;
+		}
 		
 	}
 }

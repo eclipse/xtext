@@ -62,6 +62,7 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 
 
 
+
 // Entry rule entryRuleModel
 entryRuleModel returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); }
@@ -96,6 +97,8 @@ ruleModel returns [EObject current=null]
 	    }
 	
 )*;
+
+
 
 
 
@@ -165,6 +168,8 @@ ruleElement returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleItem
 entryRuleItem returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@rules.2" /* xtext::ParserRule */, currentNode); }
@@ -214,6 +219,14 @@ ruleItem returns [EObject current=null]
 	    }
 	
 ));
+
+
+
+
+
+
+
+
 
 
 

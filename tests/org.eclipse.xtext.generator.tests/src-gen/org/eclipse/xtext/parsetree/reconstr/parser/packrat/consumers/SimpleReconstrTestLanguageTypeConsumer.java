@@ -25,22 +25,22 @@ public final class SimpleReconstrTestLanguageTypeConsumer extends NonTerminalCon
 
 	private XtextBuiltinIDConsumer idConsumer;
 
+	private ISequenceMatcher crossReference$9$Delimiter;
+	
 	private ISequenceMatcher ruleCall$6$Delimiter;
 	
 	private ICharacterClass keyword$7$Delimiter;
 	
 	private ICharacterClass keyword$4$Delimiter;
 	
-	private ISequenceMatcher crossReference$9$Delimiter;
-	
 	public SimpleReconstrTestLanguageTypeConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
+		crossReference$9$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		ruleCall$6$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$4$Delimiter = ICharacterClass.Factory.nullClass();
-		crossReference$9$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -105,6 +105,14 @@ public final class SimpleReconstrTestLanguageTypeConsumer extends NonTerminalCon
 		this.idConsumer = idConsumer;
 	}
 	
+	public ISequenceMatcher getCrossReference$9$Delimiter() {
+		return crossReference$9$Delimiter;
+	}
+	
+	public void setCrossReference$9$Delimiter(ISequenceMatcher matcher) {
+		crossReference$9$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	}
+	
 	public ISequenceMatcher getRuleCall$6$Delimiter() {
 		return ruleCall$6$Delimiter;
 	}
@@ -127,14 +135,6 @@ public final class SimpleReconstrTestLanguageTypeConsumer extends NonTerminalCon
 	
 	public void setKeyword$4$Delimiter(ICharacterClass characterClass) {
 		keyword$4$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
-	public ISequenceMatcher getCrossReference$9$Delimiter() {
-		return crossReference$9$Delimiter;
-	}
-	
-	public void setCrossReference$9$Delimiter(ISequenceMatcher matcher) {
-		crossReference$9$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 }

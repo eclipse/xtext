@@ -188,20 +188,4 @@ public class PackratParserGenUtilTest extends TestCase {
 		assertEquals("a1234IElementConsumer", PackratParserGenUtil.getConsumerFieldName(rule));
 	}
 	
-//	public void testLabels() throws Exception {
-//		with(XtextStandaloneSetup.class);
-//		Grammar g = XtextGrammarAccess.INSTANCE.getGrammar();
-//		for(AbstractRule rule: g.getRules()) {
-//			if (rule instanceof ParserRule) {
-//				ParserRule pr = (ParserRule) rule;
-//				System.out.println(pr.getName() + "  ==========================");
-//				Iterator<EObject> iter = pr.getAlternatives().eAllContents();
-//				while(iter.hasNext()) {
-//					EObject elem = iter.next();
-//					if (elem instanceof AbstractElement)
-//					System.out.println(elem.eClass().getName() + " => \n\t" + PackratParserGenUtil.getLabelName((AbstractElement) elem) + " => \n\t\t" + PackratParserGenUtil.getParentLabelName((AbstractElement) elem));
-//				}
-//			}
-//		}
-//	}
 }

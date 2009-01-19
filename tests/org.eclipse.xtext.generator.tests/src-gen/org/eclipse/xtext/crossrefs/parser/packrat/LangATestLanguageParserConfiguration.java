@@ -47,8 +47,7 @@ public class LangATestLanguageParserConfiguration extends AbstractParserConfigur
 	public void createNonTerminalConsumers() {
 		getXtextBuiltinConfiguration().createNonTerminalConsumers();
 		mainConsumer = new LangATestLanguageMainConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(),
-    		new ITerminalConsumer[]{ getWsConsumer(), getMlCommentConsumer(), getSlCommentConsumer() }
+    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
     	);
 		importConsumer = new LangATestLanguageImportConsumer(
     		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
@@ -72,24 +71,10 @@ public class LangATestLanguageParserConfiguration extends AbstractParserConfigur
 
 		getImportConsumer().setRuleCall$4$Delimiter(LangATestLanguageDelimiters.ruleCall$13$Delimiter);
 		getImportConsumer().setKeyword$2$Delimiter(LangATestLanguageDelimiters.keyword$11$Delimiter);
-		getTypeConsumer().setKeyword$7$Delimiter(LangATestLanguageDelimiters.keyword$11$Delimiter);
 		getTypeConsumer().setCrossReference$9$Delimiter(LangATestLanguageDelimiters.ruleCall$21$Delimiter);
 		getTypeConsumer().setRuleCall$6$Delimiter(LangATestLanguageDelimiters.ruleCall$21$Delimiter);
+		getTypeConsumer().setKeyword$7$Delimiter(LangATestLanguageDelimiters.keyword$11$Delimiter);
 		getTypeConsumer().setKeyword$4$Delimiter(LangATestLanguageDelimiters.keyword$11$Delimiter);
-		// TODO remove workaround
-		getIdConsumer().initFields(this);
-		// TODO remove workaround
-		getIntConsumer().initFields(this);
-		// TODO remove workaround
-		getStringConsumer().initFields(this);
-		// TODO remove workaround
-		getMlCommentConsumer().initFields(this);
-		// TODO remove workaround
-		getSlCommentConsumer().initFields(this);
-		// TODO remove workaround
-		getWsConsumer().initFields(this);
-		// TODO remove workaround
-		getAnyOtherConsumer().initFields(this);
 	}
 	
 	// TODO collect superGrammars transitive

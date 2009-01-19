@@ -1,0 +1,39 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+package org.eclipse.xtext.parser.terminalrules;
+
+import java.io.InputStream;
+
+import org.eclipse.xtext.parser.ParserTestHelper;
+import org.eclipse.xtext.parser.packrat.ParseResultFactory;
+import org.eclipse.xtext.parser.terminalrules.parser.packrat.TerminalRulesTestLanguagePackratParser;
+import org.eclipse.xtext.resource.XtextResource;
+
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
+public class PackratParserTest extends ParserTest  {
+	
+	private TerminalRulesTestLanguagePackratParser parser;
+
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		this.parser = new TerminalRulesTestLanguagePackratParser();
+		ParseResultFactory factory = new ParseResultFactory();
+		factory.setFactory(getASTFactory());
+		this.parser.setParseResultFactory(factory);
+	}
+
+	@Override
+	protected XtextResource getResource(InputStream in) throws Exception {
+		ParserTestHelper helper = new ParserTestHelper(getResourceFactory(), parser);
+		return helper.getResourceFromStream(in);
+	}
+
+}

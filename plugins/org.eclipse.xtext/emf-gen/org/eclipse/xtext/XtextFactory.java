@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextFactory.java,v 1.13 2008/12/03 20:57:09 szarnekow Exp $
+ * $Id: XtextFactory.java,v 1.14 2009/01/19 14:39:52 szarnekow Exp $
  */
 package org.eclipse.xtext;
 
@@ -16,35 +16,25 @@ import org.eclipse.emf.ecore.EFactory;
  * @see org.eclipse.xtext.XtextPackage
  * @generated
  */
-public interface XtextFactory extends EFactory
-{
-  /**
+public interface XtextFactory extends EFactory {
+	/**
 	 * The singleton instance of the factory.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  XtextFactory eINSTANCE = org.eclipse.xtext.impl.XtextFactoryImpl.init();
+	XtextFactory eINSTANCE = org.eclipse.xtext.impl.XtextFactoryImpl.init();
 
-  /**
-	 * Returns a new object of class '<em>Generated Metamodel</em>'.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Generated Metamodel</em>'.
-	 * @generated
-	 */
-  GeneratedMetamodel createGeneratedMetamodel();
-
-  /**
+	/**
 	 * Returns a new object of class '<em>Grammar</em>'.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Grammar</em>'.
 	 * @generated
 	 */
-  Grammar createGrammar();
+	Grammar createGrammar();
 
-  /**
+	/**
 	 * Returns a new object of class '<em>Abstract Rule</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -53,16 +43,7 @@ public interface XtextFactory extends EFactory
 	 */
 	AbstractRule createAbstractRule();
 
-		/**
-	 * Returns a new object of class '<em>Parser Rule</em>'.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Parser Rule</em>'.
-	 * @generated
-	 */
-  ParserRule createParserRule();
-
-  /**
+	/**
 	 * Returns a new object of class '<em>Abstract Metamodel Declaration</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -71,16 +52,52 @@ public interface XtextFactory extends EFactory
 	 */
 	AbstractMetamodelDeclaration createAbstractMetamodelDeclaration();
 
-		/**
+	/**
+	 * Returns a new object of class '<em>Generated Metamodel</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Generated Metamodel</em>'.
+	 * @generated
+	 */
+	GeneratedMetamodel createGeneratedMetamodel();
+
+	/**
+	 * Returns a new object of class '<em>Referenced Metamodel</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Referenced Metamodel</em>'.
+	 * @generated
+	 */
+	ReferencedMetamodel createReferencedMetamodel();
+
+	/**
+	 * Returns a new object of class '<em>Lexer Rule</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Lexer Rule</em>'.
+	 * @generated
+	 */
+	LexerRule createLexerRule();
+
+	/**
+	 * Returns a new object of class '<em>Parser Rule</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Parser Rule</em>'.
+	 * @generated
+	 */
+	ParserRule createParserRule();
+
+	/**
 	 * Returns a new object of class '<em>Type Ref</em>'.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Type Ref</em>'.
 	 * @generated
 	 */
-  TypeRef createTypeRef();
+	TypeRef createTypeRef();
 
-  /**
+	/**
 	 * Returns a new object of class '<em>Abstract Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -89,25 +106,7 @@ public interface XtextFactory extends EFactory
 	 */
 	AbstractElement createAbstractElement();
 
-		/**
-	 * Returns a new object of class '<em>Alternatives</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Alternatives</em>'.
-	 * @generated
-	 */
-	Alternatives createAlternatives();
-
-		/**
-	 * Returns a new object of class '<em>Group</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Group</em>'.
-	 * @generated
-	 */
-	Group createGroup();
-
-		/**
+	/**
 	 * Returns a new object of class '<em>Assignment</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -116,7 +115,7 @@ public interface XtextFactory extends EFactory
 	 */
 	Assignment createAssignment();
 
-		/**
+	/**
 	 * Returns a new object of class '<em>Action</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -125,16 +124,43 @@ public interface XtextFactory extends EFactory
 	 */
 	Action createAction();
 
-		/**
-	 * Returns a new object of class '<em>Rule Call</em>'.
+	/**
+	 * Returns a new object of class '<em>Abstract Negated Token</em>'.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Rule Call</em>'.
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Abstract Negated Token</em>'.
 	 * @generated
 	 */
-  RuleCall createRuleCall();
+	AbstractNegatedToken createAbstractNegatedToken();
 
-  /**
+	/**
+	 * Returns a new object of class '<em>Negated Token</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Negated Token</em>'.
+	 * @generated
+	 */
+	NegatedToken createNegatedToken();
+
+	/**
+	 * Returns a new object of class '<em>Up To Token</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Up To Token</em>'.
+	 * @generated
+	 */
+	UpToToken createUpToToken();
+
+	/**
+	 * Returns a new object of class '<em>Wildcard</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Wildcard</em>'.
+	 * @generated
+	 */
+	Wildcard createWildcard();
+
+	/**
 	 * Returns a new object of class '<em>Cross Reference</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -143,40 +169,58 @@ public interface XtextFactory extends EFactory
 	 */
 	CrossReference createCrossReference();
 
-		/**
-	 * Returns a new object of class '<em>Referenced Metamodel</em>'.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Referenced Metamodel</em>'.
-	 * @generated
-	 */
-  ReferencedMetamodel createReferencedMetamodel();
-
-  /**
-	 * Returns a new object of class '<em>Lexer Rule</em>'.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Lexer Rule</em>'.
-	 * @generated
-	 */
-  LexerRule createLexerRule();
-
-  /**
+	/**
 	 * Returns a new object of class '<em>Keyword</em>'.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Keyword</em>'.
 	 * @generated
 	 */
-  Keyword createKeyword();
+	Keyword createKeyword();
 
-  /**
+	/**
+	 * Returns a new object of class '<em>Rule Call</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Rule Call</em>'.
+	 * @generated
+	 */
+	RuleCall createRuleCall();
+
+	/**
+	 * Returns a new object of class '<em>Alternatives</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Alternatives</em>'.
+	 * @generated
+	 */
+	Alternatives createAlternatives();
+
+	/**
+	 * Returns a new object of class '<em>Group</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Group</em>'.
+	 * @generated
+	 */
+	Group createGroup();
+
+	/**
+	 * Returns a new object of class '<em>Character Range</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Character Range</em>'.
+	 * @generated
+	 */
+	CharacterRange createCharacterRange();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the package supported by this factory.
 	 * @generated
 	 */
-  XtextPackage getXtextPackage();
+	XtextPackage getXtextPackage();
 
 } //XtextFactory

@@ -17,7 +17,7 @@ public interface ITerminalConsumer {
 	
 	boolean consume(String feature, boolean isMany, boolean isBoolean, AbstractElement element, ISequenceMatcher notMatching);
 	
-	boolean consume(ISequenceMatcher notMatching);
+	boolean consume();
 	
 	void setHidden(boolean hidden);
 	

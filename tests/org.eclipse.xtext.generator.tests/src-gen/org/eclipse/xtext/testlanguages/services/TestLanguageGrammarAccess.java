@@ -154,7 +154,7 @@ public class TestLanguageGrammarAccess extends BaseEPackageAccess implements IGr
 	}
 	
 	public XtextBuiltinGrammarAccess getSuperGrammar() {
-		return XtextBuiltinGrammarAccess.INSTANCE;		
+		return XtextBuiltinGrammarAccess.INSTANCE;
 	}
 
 	

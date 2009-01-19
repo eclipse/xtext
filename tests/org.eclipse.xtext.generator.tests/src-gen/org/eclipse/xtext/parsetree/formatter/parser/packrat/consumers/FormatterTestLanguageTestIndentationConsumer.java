@@ -27,9 +27,9 @@ public final class FormatterTestLanguageTestIndentationConsumer extends NonTermi
 	private FormatterTestLanguageLineConsumer lineConsumer;
 	private FormatterTestLanguageTestIndentationConsumer testIndentationConsumer;
 
-	private ICharacterClass keyword$5$Delimiter;
-	
 	private ICharacterClass keyword$4$Delimiter;
+	
+	private ICharacterClass keyword$5$Delimiter;
 	
 	private ICharacterClass keyword$11$Delimiter;
 	
@@ -37,8 +37,8 @@ public final class FormatterTestLanguageTestIndentationConsumer extends NonTermi
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
-		keyword$5$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$4$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$5$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$11$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
@@ -125,20 +125,20 @@ public final class FormatterTestLanguageTestIndentationConsumer extends NonTermi
 		this.testIndentationConsumer = testIndentationConsumer;
 	}
 	
-	public ICharacterClass getKeyword$5$Delimiter() {
-		return keyword$5$Delimiter;
-	}
-	
-	public void setKeyword$5$Delimiter(ICharacterClass characterClass) {
-		keyword$5$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
 	public ICharacterClass getKeyword$4$Delimiter() {
 		return keyword$4$Delimiter;
 	}
 	
 	public void setKeyword$4$Delimiter(ICharacterClass characterClass) {
 		keyword$4$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$5$Delimiter() {
+		return keyword$5$Delimiter;
+	}
+	
+	public void setKeyword$5$Delimiter(ICharacterClass characterClass) {
+		keyword$5$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ICharacterClass getKeyword$11$Delimiter() {

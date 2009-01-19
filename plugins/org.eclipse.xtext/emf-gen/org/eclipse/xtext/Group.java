@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Group.java,v 1.10 2008/06/05 15:03:50 sefftinge Exp $
+ * $Id: Group.java,v 1.11 2009/01/19 14:39:52 szarnekow Exp $
  */
 package org.eclipse.xtext;
 
@@ -24,22 +24,21 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Group extends AbstractElement
-{
-  /**
+public interface Group extends AbstractElement {
+	/**
 	 * Returns the value of the '<em><b>Abstract Tokens</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.xtext.AbstractElement}.
 	 * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Abstract Tokens</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Abstract Tokens</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Abstract Tokens</em>' containment reference list.
 	 * @see org.eclipse.xtext.XtextPackage#getGroup_AbstractTokens()
 	 * @model containment="true"
 	 * @generated
 	 */
-  EList<AbstractElement> getAbstractTokens();
+	EList<AbstractElement> getAbstractTokens();
 
 } // Group

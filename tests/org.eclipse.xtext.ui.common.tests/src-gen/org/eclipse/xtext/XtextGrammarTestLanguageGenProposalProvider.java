@@ -80,13 +80,13 @@ public class XtextGrammarTestLanguageGenProposalProvider  extends AbstractPropos
 		return Collections.singletonList(createCompletionProposal(assignment, "GeneratedMetamodelName", contentAssistContext));
 	}
 	
-	public List<? extends ICompletionProposal> completeGeneratedMetamodelNsURI(Assignment assignment, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeGeneratedMetamodelEPackage(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeGeneratedMetamodelNsURI feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeGeneratedMetamodelEPackage feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal(assignment, "\"GeneratedMetamodelNsURI\"", contentAssistContext));		
+		return lookupCrossReference(((CrossReference)assignment.getTerminal()), contentAssistContext);
 	}
 	
 	public List<? extends ICompletionProposal> completeGeneratedMetamodelAlias(Assignment assignment, IContentAssistContext contentAssistContext) {
@@ -98,13 +98,13 @@ public class XtextGrammarTestLanguageGenProposalProvider  extends AbstractPropos
 		return Collections.singletonList(createCompletionProposal(assignment, "GeneratedMetamodelAlias", contentAssistContext));
 	}
 	
-	public List<? extends ICompletionProposal> completeReferencedMetamodelUri(Assignment assignment, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeReferencedMetamodelEPackage(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeReferencedMetamodelUri feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeReferencedMetamodelEPackage feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal(assignment, "\"ReferencedMetamodelUri\"", contentAssistContext));		
+		return lookupCrossReference(((CrossReference)assignment.getTerminal()), contentAssistContext);
 	}
 	
 	public List<? extends ICompletionProposal> completeReferencedMetamodelAlias(Assignment assignment, IContentAssistContext contentAssistContext) {
@@ -161,9 +161,64 @@ public class XtextGrammarTestLanguageGenProposalProvider  extends AbstractPropos
 		return Collections.emptyList();
 	}
 	
+	public List<? extends ICompletionProposal> completeParserRuleDefinesHiddenTokens(Assignment assignment, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeParserRuleDefinesHiddenTokens feature '" + assignment.getFeature() + "' terminal '"
+					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
+					+ contentAssistContext.getMatchString().trim() + "'");
+		}
+		return Collections.emptyList();
+	}
+	
+	public List<? extends ICompletionProposal> completeParserRuleHiddenTokens(Assignment assignment, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeParserRuleHiddenTokens feature '" + assignment.getFeature() + "' terminal '"
+					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
+					+ contentAssistContext.getMatchString().trim() + "'");
+		}
+		return lookupCrossReference(((CrossReference)assignment.getTerminal()), contentAssistContext);
+	}
+	
+	
 	public List<? extends ICompletionProposal> completeParserRuleAlternatives(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeParserRuleAlternatives feature '" + assignment.getFeature() + "' terminal '"
+					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
+					+ contentAssistContext.getMatchString().trim() + "'");
+		}
+		return Collections.emptyList();
+	}
+	
+	public List<? extends ICompletionProposal> completeTerminalRuleTerminal(Assignment assignment, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeTerminalRuleTerminal feature '" + assignment.getFeature() + "' terminal '"
+					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
+					+ contentAssistContext.getMatchString().trim() + "'");
+		}
+		return Collections.emptyList();
+	}
+	
+	public List<? extends ICompletionProposal> completeTerminalRuleName(Assignment assignment, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeTerminalRuleName feature '" + assignment.getFeature() + "' terminal '"
+					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
+					+ contentAssistContext.getMatchString().trim() + "'");
+		}
+		return Collections.singletonList(createCompletionProposal(assignment, "TerminalRuleName", contentAssistContext));
+	}
+	
+	public List<? extends ICompletionProposal> completeTerminalRuleType(Assignment assignment, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeTerminalRuleType feature '" + assignment.getFeature() + "' terminal '"
+					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
+					+ contentAssistContext.getMatchString().trim() + "'");
+		}
+		return Collections.emptyList();
+	}
+	
+	public List<? extends ICompletionProposal> completeTerminalRuleAlternatives(Assignment assignment, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeTerminalRuleAlternatives feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
@@ -197,6 +252,15 @@ public class XtextGrammarTestLanguageGenProposalProvider  extends AbstractPropos
 		return Collections.emptyList();
 	}
 	
+	public List<? extends ICompletionProposal> completeTerminalAlternativesGroups(Assignment assignment, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeTerminalAlternativesGroups feature '" + assignment.getFeature() + "' terminal '"
+					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
+					+ contentAssistContext.getMatchString().trim() + "'");
+		}
+		return Collections.emptyList();
+	}
+	
 	public List<? extends ICompletionProposal> completeGroupAbstractTokens(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeGroupAbstractTokens feature '" + assignment.getFeature() + "' terminal '"
@@ -206,9 +270,27 @@ public class XtextGrammarTestLanguageGenProposalProvider  extends AbstractPropos
 		return Collections.emptyList();
 	}
 	
+	public List<? extends ICompletionProposal> completeTerminalGroupAbstractTokens(Assignment assignment, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeTerminalGroupAbstractTokens feature '" + assignment.getFeature() + "' terminal '"
+					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
+					+ contentAssistContext.getMatchString().trim() + "'");
+		}
+		return Collections.emptyList();
+	}
+	
 	public List<? extends ICompletionProposal> completeAbstractTokenCardinality(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeAbstractTokenCardinality feature '" + assignment.getFeature() + "' terminal '"
+					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
+					+ contentAssistContext.getMatchString().trim() + "'");
+		}
+		return Collections.emptyList();
+	}
+	
+	public List<? extends ICompletionProposal> completeTerminalTokenCardinality(Assignment assignment, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeTerminalTokenCardinality feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
@@ -269,6 +351,42 @@ public class XtextGrammarTestLanguageGenProposalProvider  extends AbstractPropos
 		return Collections.emptyList();
 	}
 	
+	public List<? extends ICompletionProposal> completeNegatedTokenTerminal(Assignment assignment, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeNegatedTokenTerminal feature '" + assignment.getFeature() + "' terminal '"
+					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
+					+ contentAssistContext.getMatchString().trim() + "'");
+		}
+		return Collections.emptyList();
+	}
+	
+	public List<? extends ICompletionProposal> completeUpToTokenTerminal(Assignment assignment, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeUpToTokenTerminal feature '" + assignment.getFeature() + "' terminal '"
+					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
+					+ contentAssistContext.getMatchString().trim() + "'");
+		}
+		return Collections.emptyList();
+	}
+	
+	public List<? extends ICompletionProposal> completeWildcardIsWildcard(Assignment assignment, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeWildcardIsWildcard feature '" + assignment.getFeature() + "' terminal '"
+					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
+					+ contentAssistContext.getMatchString().trim() + "'");
+		}
+		return Collections.emptyList();
+	}
+	
+	public List<? extends ICompletionProposal> completeCharacterRangeRight(Assignment assignment, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeCharacterRangeRight feature '" + assignment.getFeature() + "' terminal '"
+					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
+					+ contentAssistContext.getMatchString().trim() + "'");
+		}
+		return Collections.emptyList();
+	}
+	
 	public List<? extends ICompletionProposal> completeCrossReferenceType(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeCrossReferenceType feature '" + assignment.getFeature() + "' terminal '"
@@ -304,6 +422,17 @@ public class XtextGrammarTestLanguageGenProposalProvider  extends AbstractPropos
 		}
 		return lookupCrossReference(((CrossReference)assignment.getTerminal()), contentAssistContext);
 	}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     

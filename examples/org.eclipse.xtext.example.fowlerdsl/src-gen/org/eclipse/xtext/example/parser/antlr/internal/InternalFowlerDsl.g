@@ -62,6 +62,7 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 
 
 
+
 // Entry rule entryRuleStatemachine
 entryRuleStatemachine returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); }
@@ -159,6 +160,8 @@ ruleStatemachine returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleEvent
 entryRuleEvent returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#//@rules.1" /* xtext::ParserRule */, currentNode); }
@@ -237,6 +240,8 @@ ruleEvent returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleCommand
 entryRuleCommand returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#//@rules.2" /* xtext::ParserRule */, currentNode); }
@@ -290,6 +295,8 @@ ruleCommand returns [EObject current=null]
 	    }
 	
 ));
+
+
 
 
 
@@ -389,6 +396,8 @@ ruleState returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleTransition
 entryRuleTransition returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#//@rules.4" /* xtext::ParserRule */, currentNode); }
@@ -436,6 +445,18 @@ ruleTransition returns [EObject current=null]
 ) 
 	
 ));
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

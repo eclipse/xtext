@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextSwitch.java,v 1.16 2008/12/10 11:49:38 szarnekow Exp $
+ * $Id: XtextSwitch.java,v 1.17 2009/01/19 14:39:53 szarnekow Exp $
  */
 package org.eclipse.xtext.util;
 
@@ -164,6 +164,36 @@ public class XtextSwitch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case XtextPackage.ABSTRACT_NEGATED_TOKEN: {
+				AbstractNegatedToken abstractNegatedToken = (AbstractNegatedToken)theEObject;
+				T result = caseAbstractNegatedToken(abstractNegatedToken);
+				if (result == null) result = caseAbstractElement(abstractNegatedToken);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case XtextPackage.NEGATED_TOKEN: {
+				NegatedToken negatedToken = (NegatedToken)theEObject;
+				T result = caseNegatedToken(negatedToken);
+				if (result == null) result = caseAbstractNegatedToken(negatedToken);
+				if (result == null) result = caseAbstractElement(negatedToken);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case XtextPackage.UP_TO_TOKEN: {
+				UpToToken upToToken = (UpToToken)theEObject;
+				T result = caseUpToToken(upToToken);
+				if (result == null) result = caseAbstractNegatedToken(upToToken);
+				if (result == null) result = caseAbstractElement(upToToken);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case XtextPackage.WILDCARD: {
+				Wildcard wildcard = (Wildcard)theEObject;
+				T result = caseWildcard(wildcard);
+				if (result == null) result = caseAbstractElement(wildcard);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case XtextPackage.CROSS_REFERENCE: {
 				CrossReference crossReference = (CrossReference)theEObject;
 				T result = caseCrossReference(crossReference);
@@ -196,6 +226,13 @@ public class XtextSwitch<T>
 				Group group = (Group)theEObject;
 				T result = caseGroup(group);
 				if (result == null) result = caseAbstractElement(group);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case XtextPackage.CHARACTER_RANGE: {
+				CharacterRange characterRange = (CharacterRange)theEObject;
+				T result = caseCharacterRange(characterRange);
+				if (result == null) result = caseAbstractElement(characterRange);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -313,6 +350,21 @@ public class XtextSwitch<T>
 	}
 
 		/**
+	 * Returns the result of interpreting the object as an instance of '<em>Character Range</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Character Range</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCharacterRange(CharacterRange object) {
+		return null;
+	}
+
+		/**
 	 * Returns the result of interpreting the object as an instance of '<em>Assignment</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -339,6 +391,66 @@ public class XtextSwitch<T>
 	 * @generated
 	 */
 	public T caseAction(Action object) {
+		return null;
+	}
+
+		/**
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract Negated Token</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract Negated Token</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAbstractNegatedToken(AbstractNegatedToken object) {
+		return null;
+	}
+
+		/**
+	 * Returns the result of interpreting the object as an instance of '<em>Negated Token</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Negated Token</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNegatedToken(NegatedToken object) {
+		return null;
+	}
+
+		/**
+	 * Returns the result of interpreting the object as an instance of '<em>Up To Token</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Up To Token</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseUpToToken(UpToToken object) {
+		return null;
+	}
+
+		/**
+	 * Returns the result of interpreting the object as an instance of '<em>Wildcard</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Wildcard</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseWildcard(Wildcard object) {
 		return null;
 	}
 

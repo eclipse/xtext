@@ -15,13 +15,12 @@ public final class XtextGrammarTestLanguageDelimiters {
 	}
 	
 	public static ICharacterClass keyword$16$Delimiter = ICharacterClass.Factory.nullClass();
-	
-	// TODO do not use IDConsumer internals
-	public static ICharacterClass keyword$11$Delimiter = XtextBuiltinIDConsumer.IDConsumer$$2;
-	
+
 	public static ISequenceMatcher ruleCall$14$Delimiter = new SetBasedKeywordMatcher(
-		"abstract language", "language", "extends", "generate", "as", "import", "native", "lexer", "returns", "current");
-		
-	public static ISequenceMatcher ruleCall$51$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-	
+		"abstract language", "language", "extends", "generate", "as", "import", "native", "lexer", "returns", "hidden", "terminal", "current");
+
+	public static ICharacterClass keyword$11$Delimiter = XtextBuiltinIDConsumer.IDConsumer$$2;
+
+	public static ISequenceMatcher crossReference$53$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+
 }

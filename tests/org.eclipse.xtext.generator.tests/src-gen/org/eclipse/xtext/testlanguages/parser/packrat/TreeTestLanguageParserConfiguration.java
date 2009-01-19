@@ -45,8 +45,7 @@ public class TreeTestLanguageParserConfiguration extends AbstractParserConfigura
 	public void createNonTerminalConsumers() {
 		getXtextBuiltinConfiguration().createNonTerminalConsumers();
 		modelConsumer = new TreeTestLanguageModelConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(),
-    		new ITerminalConsumer[]{ getWsConsumer(), getMlCommentConsumer(), getSlCommentConsumer() }
+    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
     	);
 		nodeConsumer = new TreeTestLanguageNodeConsumer(
     		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
@@ -64,26 +63,12 @@ public class TreeTestLanguageParserConfiguration extends AbstractParserConfigura
 		getNodeConsumer().setNodeConsumer(getNodeConsumer());
 		getNodeConsumer().setStringConsumer(getStringConsumer());
 
-		getNodeConsumer().setKeyword$16$Delimiter(TreeTestLanguageDelimiters.keyword$15$Delimiter);
-		getNodeConsumer().setRuleCall$11$Delimiter(TreeTestLanguageDelimiters.ruleCall$14$Delimiter);
-		getNodeConsumer().setRuleCall$8$Delimiter(TreeTestLanguageDelimiters.ruleCall$14$Delimiter);
 		getNodeConsumer().setKeyword$9$Delimiter(TreeTestLanguageDelimiters.keyword$15$Delimiter);
-		getNodeConsumer().setKeyword$13$Delimiter(TreeTestLanguageDelimiters.keyword$15$Delimiter);
 		getNodeConsumer().setKeyword$12$Delimiter(TreeTestLanguageDelimiters.keyword$15$Delimiter);
-		// TODO remove workaround
-		getIdConsumer().initFields(this);
-		// TODO remove workaround
-		getIntConsumer().initFields(this);
-		// TODO remove workaround
-		getStringConsumer().initFields(this);
-		// TODO remove workaround
-		getMlCommentConsumer().initFields(this);
-		// TODO remove workaround
-		getSlCommentConsumer().initFields(this);
-		// TODO remove workaround
-		getWsConsumer().initFields(this);
-		// TODO remove workaround
-		getAnyOtherConsumer().initFields(this);
+		getNodeConsumer().setRuleCall$8$Delimiter(TreeTestLanguageDelimiters.ruleCall$14$Delimiter);
+		getNodeConsumer().setRuleCall$11$Delimiter(TreeTestLanguageDelimiters.ruleCall$14$Delimiter);
+		getNodeConsumer().setKeyword$13$Delimiter(TreeTestLanguageDelimiters.keyword$15$Delimiter);
+		getNodeConsumer().setKeyword$16$Delimiter(TreeTestLanguageDelimiters.keyword$15$Delimiter);
 	}
 	
 	// TODO collect superGrammars transitive

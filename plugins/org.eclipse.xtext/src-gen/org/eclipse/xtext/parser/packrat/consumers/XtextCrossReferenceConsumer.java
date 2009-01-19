@@ -27,22 +27,22 @@ public final class XtextCrossReferenceConsumer extends NonTerminalConsumer {
 	private XtextBuiltinIDConsumer idConsumer;
 	private XtextTypeRefConsumer typeRefConsumer;
 
-	private ICharacterClass keyword$4$Delimiter;
-	
 	private ISequenceMatcher crossReference$10$Delimiter;
 	
-	private ICharacterClass keyword$8$Delimiter;
+	private ICharacterClass keyword$4$Delimiter;
 	
 	private ICharacterClass keyword$12$Delimiter;
+	
+	private ICharacterClass keyword$8$Delimiter;
 	
 	public XtextCrossReferenceConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
-		keyword$4$Delimiter = ICharacterClass.Factory.nullClass();
 		crossReference$10$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$4$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$12$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -133,14 +133,6 @@ public final class XtextCrossReferenceConsumer extends NonTerminalConsumer {
 		this.typeRefConsumer = typeRefConsumer;
 	}
 	
-	public ICharacterClass getKeyword$4$Delimiter() {
-		return keyword$4$Delimiter;
-	}
-	
-	public void setKeyword$4$Delimiter(ICharacterClass characterClass) {
-		keyword$4$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
 	public ISequenceMatcher getCrossReference$10$Delimiter() {
 		return crossReference$10$Delimiter;
 	}
@@ -149,12 +141,12 @@ public final class XtextCrossReferenceConsumer extends NonTerminalConsumer {
 		crossReference$10$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
-	public ICharacterClass getKeyword$8$Delimiter() {
-		return keyword$8$Delimiter;
+	public ICharacterClass getKeyword$4$Delimiter() {
+		return keyword$4$Delimiter;
 	}
 	
-	public void setKeyword$8$Delimiter(ICharacterClass characterClass) {
-		keyword$8$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setKeyword$4$Delimiter(ICharacterClass characterClass) {
+		keyword$4$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ICharacterClass getKeyword$12$Delimiter() {
@@ -163,6 +155,14 @@ public final class XtextCrossReferenceConsumer extends NonTerminalConsumer {
 	
 	public void setKeyword$12$Delimiter(ICharacterClass characterClass) {
 		keyword$12$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$8$Delimiter() {
+		return keyword$8$Delimiter;
+	}
+	
+	public void setKeyword$8$Delimiter(ICharacterClass characterClass) {
+		keyword$8$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

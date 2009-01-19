@@ -1452,11 +1452,13 @@ protected class Familie_0_0_0_0_0_1_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
+
 		if("keyword".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
 			element = ReferenceGrammarGrammarAccess.INSTANCE.prFamilie().ele000001000KeywordKeyword();
 			return new Solution(obj);
 		}
+
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = ReferenceGrammarGrammarAccess.INSTANCE.prFamilie().ele000001001LexerRuleCallSTRING();
@@ -1658,26 +1660,34 @@ protected class Farbe_Assignment_wert extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("wert",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("wert");
+
 		if("ROT".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
 			element = ReferenceGrammarGrammarAccess.INSTANCE.prFarbe().ele0000KeywordROT();
 			return new Solution(obj);
 		}
+
+
 		if("BLAU".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
 			element = ReferenceGrammarGrammarAccess.INSTANCE.prFarbe().ele0001KeywordBLAU();
 			return new Solution(obj);
 		}
+
+
 		if("GELB".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
 			element = ReferenceGrammarGrammarAccess.INSTANCE.prFarbe().ele001KeywordGELB();
 			return new Solution(obj);
 		}
+
+
 		if("GRÜN".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
 			element = ReferenceGrammarGrammarAccess.INSTANCE.prFarbe().ele01KeywordGRÜN();
 			return new Solution(obj);
 		}
+
 		return null;
 	}
 }

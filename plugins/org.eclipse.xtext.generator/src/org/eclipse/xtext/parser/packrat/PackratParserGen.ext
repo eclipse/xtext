@@ -53,7 +53,7 @@ String grammarAccess(Grammar this):
 List[Keyword] conflictingKeywords(AbstractElement this, Grammar grammar):
 	JAVA org.eclipse.xtext.parser.packrat.PackratParserGenUtil.getConflictingKeywords(org.eclipse.xtext.AbstractElement, org.eclipse.xtext.Grammar);
 
-List[LexerRule] conflictingLexerRules(Keyword this, Grammar grammar):
+List[AbstractRule] conflictingLexerRules(Keyword this, Grammar grammar):
 	JAVA org.eclipse.xtext.parser.packrat.PackratParserGenUtil.getConflictingLexerRules(org.eclipse.xtext.Keyword, org.eclipse.xtext.Grammar);
 
 AbstractElement sameConflicts(AbstractElement this, Grammar grammar):
@@ -71,9 +71,26 @@ boolean isStar(AbstractElement this):
 boolean isQuestionMark(AbstractElement this):
 	isOptional() && !isMultipleCardinality();
 	
-List[AbstractElement] allDelimited(AbstractRule this):
-	containedRuleCalls().select(e|e.rule.metaType==LexerRule).
-		union(eAllContents.typeSelect(Keyword)).
-		union(eAllContents.typeSelect(CrossReference).select(e|e.rule.metaType==LexerRule))
-	.toSet();
+String sortCriteria(AbstractElement this):
+	error();
+
+String sortCriteria(RuleCall this):
+	rule.sortCriteria();
+
+String sortCriteria(CrossReference this):
+	rule.sortCriteria();
+		
+String sortCriteria(AbstractRule this):
+	name + "-" + metaType.name;
 	
+String sortCriteria(Keyword this):
+	value + "-" + metaType.name;
+	
+List[AbstractElement] allDelimited(AbstractRule this):
+	containedRuleCalls().select(e|e.rule.metaType==LexerRule || (e.rule.metaType == ParserRule && ((ParserRule)e.rule).terminal)).
+		union(eAllContents.typeSelect(Keyword)).
+		union(eAllContents.typeSelect(CrossReference).select(e|e.rule.metaType==LexerRule || (e.rule.metaType == ParserRule && ((ParserRule)e.rule).terminal)))
+	.toSet().sortBy(e|e.sortCriteria());
+	
+List[AbstractRule] allCalledRules(AbstractRule this):
+	containedRuleCalls().rule.union(eAllContents.typeSelect(CrossReference).rule).toSet().sortBy(e|e.name);

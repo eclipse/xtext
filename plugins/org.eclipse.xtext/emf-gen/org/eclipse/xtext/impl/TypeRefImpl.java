@@ -2,22 +2,19 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeRefImpl.java,v 1.14 2008/12/10 11:49:37 szarnekow Exp $
+ * $Id: TypeRefImpl.java,v 1.15 2009/01/19 14:39:51 szarnekow Exp $
  */
 package org.eclipse.xtext.impl;
 
-import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextPackage;
@@ -36,9 +33,8 @@ import org.eclipse.xtext.XtextPackage;
  *
  * @generated
  */
-public class TypeRefImpl extends EObjectImpl implements TypeRef
-{
-  /**
+public class TypeRefImpl extends EObjectImpl implements TypeRef {
+	/**
 	 * The cached value of the '{@link #getMetamodel() <em>Metamodel</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -48,7 +44,7 @@ public class TypeRefImpl extends EObjectImpl implements TypeRef
 	 */
 	protected AbstractMetamodelDeclaration metamodel;
 
-		/**
+	/**
 	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -58,28 +54,26 @@ public class TypeRefImpl extends EObjectImpl implements TypeRef
 	 */
 	protected EClassifier type;
 
-		/**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  protected TypeRefImpl()
-  {
+	protected TypeRefImpl() {
 		super();
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  protected EClass eStaticClass()
-  {
+	@Override
+	protected EClass eStaticClass() {
 		return XtextPackage.Literals.TYPE_REF;
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -96,7 +90,7 @@ public class TypeRefImpl extends EObjectImpl implements TypeRef
 		return metamodel;
 	}
 
-		/**
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -105,7 +99,7 @@ public class TypeRefImpl extends EObjectImpl implements TypeRef
 		return metamodel;
 	}
 
-		/**
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -117,7 +111,7 @@ public class TypeRefImpl extends EObjectImpl implements TypeRef
 			eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.TYPE_REF__METAMODEL, oldMetamodel, metamodel));
 	}
 
-		/**
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -134,7 +128,7 @@ public class TypeRefImpl extends EObjectImpl implements TypeRef
 		return type;
 	}
 
-		/**
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -143,7 +137,7 @@ public class TypeRefImpl extends EObjectImpl implements TypeRef
 		return type;
 	}
 
-		/**
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -155,14 +149,13 @@ public class TypeRefImpl extends EObjectImpl implements TypeRef
 			eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.TYPE_REF__TYPE, oldType, type));
 	}
 
-		/**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public Object eGet(int featureID, boolean resolve, boolean coreType)
-  {
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case XtextPackage.TYPE_REF__METAMODEL:
 				if (resolve) return getMetamodel();
@@ -174,15 +167,13 @@ public class TypeRefImpl extends EObjectImpl implements TypeRef
 		return super.eGet(featureID, resolve, coreType);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @SuppressWarnings("unchecked")
-		@Override
-  public void eSet(int featureID, Object newValue)
-  {
+	@Override
+	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case XtextPackage.TYPE_REF__METAMODEL:
 				setMetamodel((AbstractMetamodelDeclaration)newValue);
@@ -194,14 +185,13 @@ public class TypeRefImpl extends EObjectImpl implements TypeRef
 		super.eSet(featureID, newValue);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public void eUnset(int featureID)
-  {
+	@Override
+	public void eUnset(int featureID) {
 		switch (featureID) {
 			case XtextPackage.TYPE_REF__METAMODEL:
 				setMetamodel((AbstractMetamodelDeclaration)null);
@@ -213,14 +203,13 @@ public class TypeRefImpl extends EObjectImpl implements TypeRef
 		super.eUnset(featureID);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public boolean eIsSet(int featureID)
-  {
+	@Override
+	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case XtextPackage.TYPE_REF__METAMODEL:
 				return metamodel != null;

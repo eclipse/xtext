@@ -29,22 +29,40 @@ public final class XtextParserRuleConsumer extends NonTerminalConsumer {
 	private XtextBuiltinIDConsumer idConsumer;
 	private XtextTypeRefConsumer typeRefConsumer;
 
-	private ISequenceMatcher ruleCall$6$Delimiter;
+	private ICharacterClass keyword$18$Delimiter;
 	
-	private ICharacterClass keyword$11$Delimiter;
+	private ICharacterClass keyword$27$Delimiter;
 	
-	private ICharacterClass keyword$8$Delimiter;
+	private ICharacterClass keyword$23$Delimiter;
 	
-	private ICharacterClass keyword$14$Delimiter;
+	private ICharacterClass keyword$28$Delimiter;
+	
+	private ICharacterClass keyword$31$Delimiter;
+	
+	private ISequenceMatcher crossReference$25$Delimiter;
+	
+	private ISequenceMatcher crossReference$20$Delimiter;
+	
+	private ISequenceMatcher ruleCall$7$Delimiter;
+	
+	private ICharacterClass keyword$17$Delimiter;
+	
+	private ICharacterClass keyword$9$Delimiter;
 	
 	public XtextParserRuleConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
-		ruleCall$6$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-		keyword$11$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$14$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$18$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$27$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$23$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$28$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$31$Delimiter = ICharacterClass.Factory.nullClass();
+		crossReference$25$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		crossReference$20$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		ruleCall$7$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		keyword$17$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$9$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -53,75 +71,157 @@ public final class XtextParserRuleConsumer extends NonTerminalConsumer {
 
 	protected boolean consumeGroup$1() throws Exception {
 		final IMarker marker = mark();
-		if (!consumeAssignment$5()) {
+		if (!consumeAssignment$6()) {
 			marker.rollback();
 			return false;
 		}
-		if (!consumeGroup$7()) {
+		if (!consumeGroup$8()) {
 			marker.rollback();
 			return false;
 		}
-		if (!consumeKeyword$11()) {
+		if (!consumeGroup$12()) {
 			marker.rollback();
 			return false;
 		}
-		if (!consumeAssignment$12()) {
+		if (!consumeKeyword$28()) {
 			marker.rollback();
 			return false;
 		}
-		if (!consumeKeyword$14()) {
+		if (!consumeAssignment$29()) {
+			marker.rollback();
+			return false;
+		}
+		if (!consumeKeyword$31()) {
 			marker.rollback();
 			return false;
 		}
 		return true;
 	}
 
-	protected boolean consumeAssignment$5() throws Exception {
-		if (consumeTerminal(idConsumer, "name", false, false, getRule().ele00000LexerRuleCallID(), getRuleCall$6$Delimiter()))
+	protected boolean consumeAssignment$6() throws Exception {
+		if (consumeTerminal(idConsumer, "name", false, false, getRule().ele000000LexerRuleCallID(), getRuleCall$7$Delimiter()))
 			return true;
 		return false;
 	}
 
-	protected boolean consumeGroup$7() throws Exception {
-		doConsumeGroup$7();
+	protected boolean consumeGroup$8() throws Exception {
+		doConsumeGroup$8();
 		return true;
 	}
 
-	protected boolean doConsumeGroup$7() throws Exception {
+	protected boolean doConsumeGroup$8() throws Exception {
 		final IMarker marker = mark();
-		if (!consumeKeyword$8()) {
+		if (!consumeKeyword$9()) {
 			marker.rollback();
 			return false;
 		}
-		if (!consumeAssignment$9()) {
+		if (!consumeAssignment$10()) {
 			marker.rollback();
 			return false;
 		}
 		return true;
 	}
 
-	protected boolean consumeKeyword$8() throws Exception {
-		return consumeKeyword(getRule().ele00010KeywordReturns(), null, false, false, getKeyword$8$Delimiter());
+	protected boolean consumeKeyword$9() throws Exception {
+		return consumeKeyword(getRule().ele000010KeywordReturns(), null, false, false, getKeyword$9$Delimiter());
 	}
 
-	protected boolean consumeAssignment$9() throws Exception {
-		if (consumeNonTerminal(typeRefConsumer, "type", false, false, getRule().ele000110ParserRuleCallTypeRef()))
+	protected boolean consumeAssignment$10() throws Exception {
+		if (consumeNonTerminal(typeRefConsumer, "type", false, false, getRule().ele0000110ParserRuleCallTypeRef()))
 			return true;
 		return false;
 	}
 
-	protected boolean consumeKeyword$11() throws Exception {
-		return consumeKeyword(getRule().ele001KeywordColon(), null, false, false, getKeyword$11$Delimiter());
+	protected boolean consumeGroup$12() throws Exception {
+		doConsumeGroup$12();
+		return true;
 	}
 
-	protected boolean consumeAssignment$12() throws Exception {
+	protected boolean doConsumeGroup$12() throws Exception {
+		final IMarker marker = mark();
+		if (!consumeAssignment$16()) {
+			marker.rollback();
+			return false;
+		}
+		if (!consumeKeyword$18()) {
+			marker.rollback();
+			return false;
+		}
+		if (!consumeAssignment$19()) {
+			marker.rollback();
+			return false;
+		}
+		if (!consumeGroup$22()) {
+			marker.rollback();
+			return false;
+		}
+		if (!consumeKeyword$27()) {
+			marker.rollback();
+			return false;
+		}
+		return true;
+	}
+
+	protected boolean consumeAssignment$16() throws Exception {
+		if (consumeKeyword(getRule().ele000100000KeywordHidden(), "definesHiddenTokens", false, true, getKeyword$17$Delimiter()))
+			return true;
+		return false;
+	}
+
+	protected boolean consumeKeyword$18() throws Exception {
+		return consumeKeyword(getRule().ele00010001KeywordLeftParenthesis(), null, false, false, getKeyword$18$Delimiter());
+	}
+
+	protected boolean consumeAssignment$19() throws Exception {
+		if (consumeTerminal(idConsumer, null, true, false, getRule().ele00010010CrossReferenceEStringAbstractRule(), getCrossReference$20$Delimiter()))
+			return true;
+		return false;
+	}
+
+	protected boolean consumeGroup$22() throws Exception {
+		while(doConsumeGroup$22()) {}
+		return true;
+	}
+
+	protected boolean doConsumeGroup$22() throws Exception {
+		final IMarker marker = mark();
+		if (!consumeKeyword$23()) {
+			marker.rollback();
+			return false;
+		}
+		if (!consumeAssignment$24()) {
+			marker.rollback();
+			return false;
+		}
+		return true;
+	}
+
+	protected boolean consumeKeyword$23() throws Exception {
+		return consumeKeyword(getRule().ele0001010KeywordComma(), null, false, false, getKeyword$23$Delimiter());
+	}
+
+	protected boolean consumeAssignment$24() throws Exception {
+		if (consumeTerminal(idConsumer, null, true, false, getRule().ele00010110CrossReferenceEStringAbstractRule(), getCrossReference$25$Delimiter()))
+			return true;
+		return false;
+	}
+
+	protected boolean consumeKeyword$27() throws Exception {
+		return consumeKeyword(getRule().ele00011KeywordRightParenthesis(), null, false, false, getKeyword$27$Delimiter());
+	}
+
+	protected boolean consumeKeyword$28() throws Exception {
+		return consumeKeyword(getRule().ele001KeywordColon(), null, false, false, getKeyword$28$Delimiter());
+	}
+
+	protected boolean consumeAssignment$29() throws Exception {
 		if (consumeNonTerminal(alternativesConsumer, "alternatives", false, false, getRule().ele010ParserRuleCallAlternatives()))
 			return true;
 		return false;
 	}
 
-	protected boolean consumeKeyword$14() throws Exception {
-		return consumeKeyword(getRule().ele1KeywordSemicolon(), null, false, false, getKeyword$14$Delimiter());
+	protected boolean consumeKeyword$31() throws Exception {
+		return consumeKeyword(getRule().ele1KeywordSemicolon(), null, false, false, getKeyword$31$Delimiter());
 	}
 
 	public ParserRuleElements getRule() {
@@ -149,36 +249,84 @@ public final class XtextParserRuleConsumer extends NonTerminalConsumer {
 		this.typeRefConsumer = typeRefConsumer;
 	}
 	
-	public ISequenceMatcher getRuleCall$6$Delimiter() {
-		return ruleCall$6$Delimiter;
+	public ICharacterClass getKeyword$18$Delimiter() {
+		return keyword$18$Delimiter;
 	}
 	
-	public void setRuleCall$6$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$6$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	public void setKeyword$18$Delimiter(ICharacterClass characterClass) {
+		keyword$18$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
-	public ICharacterClass getKeyword$11$Delimiter() {
-		return keyword$11$Delimiter;
+	public ICharacterClass getKeyword$27$Delimiter() {
+		return keyword$27$Delimiter;
 	}
 	
-	public void setKeyword$11$Delimiter(ICharacterClass characterClass) {
-		keyword$11$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setKeyword$27$Delimiter(ICharacterClass characterClass) {
+		keyword$27$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
-	public ICharacterClass getKeyword$8$Delimiter() {
-		return keyword$8$Delimiter;
+	public ICharacterClass getKeyword$23$Delimiter() {
+		return keyword$23$Delimiter;
 	}
 	
-	public void setKeyword$8$Delimiter(ICharacterClass characterClass) {
-		keyword$8$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setKeyword$23$Delimiter(ICharacterClass characterClass) {
+		keyword$23$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
-	public ICharacterClass getKeyword$14$Delimiter() {
-		return keyword$14$Delimiter;
+	public ICharacterClass getKeyword$28$Delimiter() {
+		return keyword$28$Delimiter;
 	}
 	
-	public void setKeyword$14$Delimiter(ICharacterClass characterClass) {
-		keyword$14$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setKeyword$28$Delimiter(ICharacterClass characterClass) {
+		keyword$28$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$31$Delimiter() {
+		return keyword$31$Delimiter;
+	}
+	
+	public void setKeyword$31$Delimiter(ICharacterClass characterClass) {
+		keyword$31$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ISequenceMatcher getCrossReference$25$Delimiter() {
+		return crossReference$25$Delimiter;
+	}
+	
+	public void setCrossReference$25$Delimiter(ISequenceMatcher matcher) {
+		crossReference$25$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	}
+	
+	public ISequenceMatcher getCrossReference$20$Delimiter() {
+		return crossReference$20$Delimiter;
+	}
+	
+	public void setCrossReference$20$Delimiter(ISequenceMatcher matcher) {
+		crossReference$20$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	}
+	
+	public ISequenceMatcher getRuleCall$7$Delimiter() {
+		return ruleCall$7$Delimiter;
+	}
+	
+	public void setRuleCall$7$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$7$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	}
+	
+	public ICharacterClass getKeyword$17$Delimiter() {
+		return keyword$17$Delimiter;
+	}
+	
+	public void setKeyword$17$Delimiter(ICharacterClass characterClass) {
+		keyword$17$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$9$Delimiter() {
+		return keyword$9$Delimiter;
+	}
+	
+	public void setKeyword$9$Delimiter(ICharacterClass characterClass) {
+		keyword$9$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

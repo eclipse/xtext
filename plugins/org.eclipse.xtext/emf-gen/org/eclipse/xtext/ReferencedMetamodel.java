@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ReferencedMetamodel.java,v 1.11 2009/01/05 10:44:01 szarnekow Exp $
+ * $Id: ReferencedMetamodel.java,v 1.12 2009/01/19 14:39:52 szarnekow Exp $
  */
 package org.eclipse.xtext;
 
@@ -17,7 +17,5 @@ package org.eclipse.xtext;
  * @model
  * @generated
  */
-public interface ReferencedMetamodel extends AbstractMetamodelDeclaration
-{
-
+public interface ReferencedMetamodel extends AbstractMetamodelDeclaration {
 } // ReferencedMetamodel

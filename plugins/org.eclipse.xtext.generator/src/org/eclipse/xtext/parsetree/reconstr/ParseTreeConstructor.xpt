@@ -43,7 +43,7 @@ public class «genClassFQName.toSimpleName()» extends AbstractParseTreeConstructo
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
 «FOREACH grammar().allParserRules() AS pr-»
-«IF !pr.isDatatypeRule()-»
+«IF !pr.isDatatypeRule() && !pr.terminal-»
 		if(inst.isInstanceOf("«pr.type.type.name»") && (s = new «pr.alternatives.elementMethodName()»(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 «ENDIF-»
 «ENDFOREACH-»		
@@ -56,7 +56,7 @@ public class «genClassFQName.toSimpleName()» extends AbstractParseTreeConstructo
 «ENDDEFINE»
 
 «DEFINE rule FOR ParserRule-»
-«IF !isDatatypeRule()»
+«IF !isDatatypeRule() && !terminal»
 /************ begin Rule «name» ****************
  *
  * «grammarFragmentToStr()»
@@ -80,7 +80,8 @@ public class «genClassFQName.toSimpleName()» extends AbstractParseTreeConstructo
 «ENDDEFINE»
 
 «DEFINE element FOR AbstractElement»
-// FIXME: unhandled element «metaType.name» in «elementMethodName()» 
+// FIXME: unhandled element «metaType.name» in «elementMethodName()»
+«ERROR "unhandled element " + metaType.name + " in " + elementMethodName()» 
 «ENDDEFINE»
 
 
@@ -195,7 +196,7 @@ protected class «elementMethodName()» extends RuleCallToken {
 
 «DEFINE assignmentCreate FOR RuleCall-»
 «IF calledParserRule()!=null-»
-«IF !isDatatypeRule(calledParserRule())»
+«IF !isDatatypeRule(calledParserRule()) && !calledParserRule().terminal»
 		if(value instanceof EObject) { // «metaType.name»
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("«calledParserRule().type.type.name»")) {

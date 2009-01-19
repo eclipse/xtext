@@ -15,7 +15,6 @@ public class GenContentAssistTestLanguageUiConfig extends AbstractServiceRegistr
 	public Set<IServiceRegistration> registrations() {
 		return scope(org.eclipse.xtext.testlanguages.IContentAssistTestLanguage.SCOPE)
 			.with(org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider.class, org.eclipse.xtext.testlanguages.ContentAssistTestLanguageGenProposalProvider.class)
-			.with(org.eclipse.jface.text.contentassist.IContentAssistant.class, org.eclipse.jface.text.contentassist.ContentAssistant.class)
 			.with(org.eclipse.jface.text.contentassist.IContentAssistProcessor.class, org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultContentAssistProcessor.class)
 			.registrations();
 	}

@@ -15,13 +15,12 @@ public final class ComplexReconstrTestLanguageDelimiters {
 	}
 	
 	public static ICharacterClass keyword$15$Delimiter = ICharacterClass.Factory.nullClass();
-	
+
 	public static ISequenceMatcher ruleCall$33$Delimiter = new SetBasedKeywordMatcher(
 		"TA", "x", "y", "TB", "TC", "z", "TD", "TE", "TF", "TG");
-		
-	// TODO do not use IDConsumer internals
-	public static ICharacterClass keyword$50$Delimiter = XtextBuiltinIDConsumer.IDConsumer$$2;
-	
+
 	public static ISequenceMatcher ruleCall$64$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-	
+
+	public static ICharacterClass keyword$50$Delimiter = XtextBuiltinIDConsumer.IDConsumer$$2;
+
 }

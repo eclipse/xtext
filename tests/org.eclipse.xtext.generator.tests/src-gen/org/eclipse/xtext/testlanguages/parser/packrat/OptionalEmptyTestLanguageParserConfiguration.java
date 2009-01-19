@@ -45,8 +45,7 @@ public class OptionalEmptyTestLanguageParserConfiguration extends AbstractParser
 	public void createNonTerminalConsumers() {
 		getXtextBuiltinConfiguration().createNonTerminalConsumers();
 		modelConsumer = new OptionalEmptyTestLanguageModelConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(),
-    		new ITerminalConsumer[]{ getWsConsumer(), getMlCommentConsumer(), getSlCommentConsumer() }
+    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
     	);
 		greetingConsumer = new OptionalEmptyTestLanguageGreetingConsumer(
     		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
@@ -64,20 +63,6 @@ public class OptionalEmptyTestLanguageParserConfiguration extends AbstractParser
 
 		getGreetingConsumer().setRuleCall$4$Delimiter(OptionalEmptyTestLanguageDelimiters.ruleCall$10$Delimiter);
 		getGreetingConsumer().setKeyword$2$Delimiter(OptionalEmptyTestLanguageDelimiters.keyword$8$Delimiter);
-		// TODO remove workaround
-		getIdConsumer().initFields(this);
-		// TODO remove workaround
-		getIntConsumer().initFields(this);
-		// TODO remove workaround
-		getStringConsumer().initFields(this);
-		// TODO remove workaround
-		getMlCommentConsumer().initFields(this);
-		// TODO remove workaround
-		getSlCommentConsumer().initFields(this);
-		// TODO remove workaround
-		getWsConsumer().initFields(this);
-		// TODO remove workaround
-		getAnyOtherConsumer().initFields(this);
 	}
 	
 	// TODO collect superGrammars transitive

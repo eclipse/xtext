@@ -25,16 +25,16 @@ public final class ComplexReconstrTestLanguageOpConsumer extends NonTerminalCons
 
 	private ComplexReconstrTestLanguageTermConsumer termConsumer;
 
-	private ICharacterClass keyword$15$Delimiter;
-	
 	private ICharacterClass keyword$8$Delimiter;
+	
+	private ICharacterClass keyword$15$Delimiter;
 	
 	public ComplexReconstrTestLanguageOpConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
-		keyword$15$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$15$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -150,20 +150,20 @@ public final class ComplexReconstrTestLanguageOpConsumer extends NonTerminalCons
 		this.termConsumer = termConsumer;
 	}
 	
-	public ICharacterClass getKeyword$15$Delimiter() {
-		return keyword$15$Delimiter;
-	}
-	
-	public void setKeyword$15$Delimiter(ICharacterClass characterClass) {
-		keyword$15$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
 	public ICharacterClass getKeyword$8$Delimiter() {
 		return keyword$8$Delimiter;
 	}
 	
 	public void setKeyword$8$Delimiter(ICharacterClass characterClass) {
 		keyword$8$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$15$Delimiter() {
+		return keyword$15$Delimiter;
+	}
+	
+	public void setKeyword$15$Delimiter(ICharacterClass characterClass) {
+		keyword$15$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

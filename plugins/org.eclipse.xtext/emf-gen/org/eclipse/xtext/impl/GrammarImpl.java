@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: GrammarImpl.java,v 1.15 2009/01/05 10:44:00 szarnekow Exp $
+ * $Id: GrammarImpl.java,v 1.16 2009/01/19 14:39:51 szarnekow Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -20,15 +20,12 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import org.eclipse.emf.ecore.util.EDataTypeEList;
-import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.LexerRule;
-import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.XtextPackage;
 
 /**
@@ -48,39 +45,38 @@ import org.eclipse.xtext.XtextPackage;
  *
  * @generated
  */
-public class GrammarImpl extends EObjectImpl implements Grammar
-{
-  /**
+public class GrammarImpl extends EObjectImpl implements Grammar {
+	/**
 	 * The default value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #isAbstract()
 	 * @generated
 	 * @ordered
 	 */
-  protected static final boolean ABSTRACT_EDEFAULT = false;
+	protected static final boolean ABSTRACT_EDEFAULT = false;
 
-		/**
+	/**
 	 * The cached value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #isAbstract()
 	 * @generated
 	 * @ordered
 	 */
-  protected boolean abstract_ = ABSTRACT_EDEFAULT;
+	protected boolean abstract_ = ABSTRACT_EDEFAULT;
 
-		/**
+	/**
 	 * The cached value of the '{@link #getIdElements() <em>Id Elements</em>}' attribute list.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getIdElements()
 	 * @generated
 	 * @ordered
 	 */
-  protected EList<String> idElements;
+	protected EList<String> idElements;
 
-		/**
+	/**
 	 * The cached value of the '{@link #getSuperGrammarIdElements() <em>Super Grammar Id Elements</em>}' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -90,17 +86,17 @@ public class GrammarImpl extends EObjectImpl implements Grammar
 	 */
 	protected EList<String> superGrammarIdElements;
 
-		/**
+	/**
 	 * The cached value of the '{@link #getMetamodelDeclarations() <em>Metamodel Declarations</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getMetamodelDeclarations()
 	 * @generated
 	 * @ordered
 	 */
-  protected EList<AbstractMetamodelDeclaration> metamodelDeclarations;
+	protected EList<AbstractMetamodelDeclaration> metamodelDeclarations;
 
-		/**
+	/**
 	 * The cached value of the '{@link #getRules() <em>Rules</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -110,28 +106,59 @@ public class GrammarImpl extends EObjectImpl implements Grammar
 	 */
 	protected EList<AbstractRule> rules;
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  protected GrammarImpl()
-  {
+	protected GrammarImpl() {
 		super();
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  protected EClass eStaticClass()
-  {
+	@Override
+	protected EClass eStaticClass() {
 		return XtextPackage.Literals.GRAMMAR;
 	}
 
-  /**
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isAbstract() {
+		return abstract_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAbstract(boolean newAbstract) {
+		boolean oldAbstract = abstract_;
+		abstract_ = newAbstract;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.GRAMMAR__ABSTRACT, oldAbstract, abstract_));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<String> getIdElements() {
+		if (idElements == null) {
+			idElements = new EDataTypeEList<String>(String.class, this, XtextPackage.GRAMMAR__ID_ELEMENTS);
+		}
+		return idElements;
+	}
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -143,56 +170,19 @@ public class GrammarImpl extends EObjectImpl implements Grammar
 		return superGrammarIdElements;
 	}
 
-		/**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EList<String> getIdElements()
-  {
-		if (idElements == null) {
-			idElements = new EDataTypeEList<String>(String.class, this, XtextPackage.GRAMMAR__ID_ELEMENTS);
-		}
-		return idElements;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public EList<AbstractMetamodelDeclaration> getMetamodelDeclarations()
-  {
+	public EList<AbstractMetamodelDeclaration> getMetamodelDeclarations() {
 		if (metamodelDeclarations == null) {
 			metamodelDeclarations = new EObjectContainmentEList<AbstractMetamodelDeclaration>(AbstractMetamodelDeclaration.class, this, XtextPackage.GRAMMAR__METAMODEL_DECLARATIONS);
 		}
 		return metamodelDeclarations;
 	}
 
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public boolean isAbstract()
-  {
-		return abstract_;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public void setAbstract(boolean newAbstract)
-  {
-		boolean oldAbstract = abstract_;
-		abstract_ = newAbstract;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.GRAMMAR__ABSTRACT, oldAbstract, abstract_));
-	}
-
-  /**
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -204,14 +194,13 @@ public class GrammarImpl extends EObjectImpl implements Grammar
 		return rules;
 	}
 
-		/**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-  {
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case XtextPackage.GRAMMAR__METAMODEL_DECLARATIONS:
 				return ((InternalEList<?>)getMetamodelDeclarations()).basicRemove(otherEnd, msgs);
@@ -221,14 +210,13 @@ public class GrammarImpl extends EObjectImpl implements Grammar
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public Object eGet(int featureID, boolean resolve, boolean coreType)
-  {
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case XtextPackage.GRAMMAR__ABSTRACT:
 				return isAbstract() ? Boolean.TRUE : Boolean.FALSE;
@@ -244,15 +232,14 @@ public class GrammarImpl extends EObjectImpl implements Grammar
 		return super.eGet(featureID, resolve, coreType);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @SuppressWarnings("unchecked")
-  @Override
-  public void eSet(int featureID, Object newValue)
-  {
+	@SuppressWarnings("unchecked")
+	@Override
+	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case XtextPackage.GRAMMAR__ABSTRACT:
 				setAbstract(((Boolean)newValue).booleanValue());
@@ -277,14 +264,13 @@ public class GrammarImpl extends EObjectImpl implements Grammar
 		super.eSet(featureID, newValue);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public void eUnset(int featureID)
-  {
+	@Override
+	public void eUnset(int featureID) {
 		switch (featureID) {
 			case XtextPackage.GRAMMAR__ABSTRACT:
 				setAbstract(ABSTRACT_EDEFAULT);
@@ -305,14 +291,13 @@ public class GrammarImpl extends EObjectImpl implements Grammar
 		super.eUnset(featureID);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public boolean eIsSet(int featureID)
-  {
+	@Override
+	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case XtextPackage.GRAMMAR__ABSTRACT:
 				return abstract_ != ABSTRACT_EDEFAULT;
@@ -328,14 +313,13 @@ public class GrammarImpl extends EObjectImpl implements Grammar
 		return super.eIsSet(featureID);
 	}
 
-  /**
+	/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public String toString()
-  {
+	@Override
+	public String toString() {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());

@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.packrat.matching;
 
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -27,4 +26,16 @@ public class CharacterAlternatives implements ICharacterClass {
 		return false;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder result = new StringBuilder();
+		for (int i = 0; i < classes.length; i++) {
+			if (i != 0) {
+				result.append(" | ");
+			}
+			result.append(classes[i]);
+		}
+		return result.toString();
+	}
+	
 }

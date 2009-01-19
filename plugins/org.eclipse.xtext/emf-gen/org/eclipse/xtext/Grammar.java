@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Grammar.java,v 1.15 2009/01/05 10:44:01 szarnekow Exp $
+ * $Id: Grammar.java,v 1.16 2009/01/19 14:39:52 szarnekow Exp $
  */
 package org.eclipse.xtext;
 
@@ -30,9 +30,50 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface Grammar extends EObject
-{
-  /**
+public interface Grammar extends EObject {
+	/**
+	 * Returns the value of the '<em><b>Abstract</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Abstract</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Abstract</em>' attribute.
+	 * @see #setAbstract(boolean)
+	 * @see org.eclipse.xtext.XtextPackage#getGrammar_Abstract()
+	 * @model
+	 * @generated
+	 */
+	boolean isAbstract();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.Grammar#isAbstract <em>Abstract</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Abstract</em>' attribute.
+	 * @see #isAbstract()
+	 * @generated
+	 */
+	void setAbstract(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Id Elements</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Id Elements</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Id Elements</em>' attribute list.
+	 * @see org.eclipse.xtext.XtextPackage#getGrammar_IdElements()
+	 * @model unique="false"
+	 * @generated
+	 */
+	EList<String> getIdElements();
+
+	/**
 	 * Returns the value of the '<em><b>Super Grammar Id Elements</b></em>' attribute list.
 	 * The list contents are of type {@link java.lang.String}.
 	 * <!-- begin-user-doc -->
@@ -48,65 +89,23 @@ public interface Grammar extends EObject
 	 */
 	EList<String> getSuperGrammarIdElements();
 
-		/**
-	 * Returns the value of the '<em><b>Id Elements</b></em>' attribute list.
-	 * The list contents are of type {@link java.lang.String}.
-	 * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Id Elements</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-	 * @return the value of the '<em>Id Elements</em>' attribute list.
-	 * @see org.eclipse.xtext.XtextPackage#getGrammar_IdElements()
-	 * @model unique="false"
-	 * @generated
-	 */
-  EList<String> getIdElements();
-
-  /**
+	/**
 	 * Returns the value of the '<em><b>Metamodel Declarations</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.xtext.AbstractMetamodelDeclaration}.
 	 * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Metamodel Declarations</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Metamodel Declarations</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Metamodel Declarations</em>' containment reference list.
 	 * @see org.eclipse.xtext.XtextPackage#getGrammar_MetamodelDeclarations()
 	 * @model containment="true"
 	 * @generated
 	 */
-  EList<AbstractMetamodelDeclaration> getMetamodelDeclarations();
+	EList<AbstractMetamodelDeclaration> getMetamodelDeclarations();
 
-  /**
-	 * Returns the value of the '<em><b>Abstract</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Abstract</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-	 * @return the value of the '<em>Abstract</em>' attribute.
-	 * @see #setAbstract(boolean)
-	 * @see org.eclipse.xtext.XtextPackage#getGrammar_Abstract()
-	 * @model
-	 * @generated
-	 */
-  boolean isAbstract();
-
-  /**
-	 * Sets the value of the '{@link org.eclipse.xtext.Grammar#isAbstract <em>Abstract</em>}' attribute.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Abstract</em>' attribute.
-	 * @see #isAbstract()
-	 * @generated
-	 */
-  void setAbstract(boolean value);
-
-		/**
+	/**
 	 * Returns the value of the '<em><b>Rules</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.xtext.AbstractRule}.
 	 * <!-- begin-user-doc -->

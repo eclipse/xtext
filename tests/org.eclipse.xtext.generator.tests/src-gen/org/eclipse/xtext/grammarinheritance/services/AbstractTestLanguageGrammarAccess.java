@@ -52,7 +52,7 @@ public class AbstractTestLanguageGrammarAccess extends BaseEPackageAccess implem
 	}
 	
 	public XtextBuiltinGrammarAccess getSuperGrammar() {
-		return XtextBuiltinGrammarAccess.INSTANCE;		
+		return XtextBuiltinGrammarAccess.INSTANCE;
 	}
 
 	

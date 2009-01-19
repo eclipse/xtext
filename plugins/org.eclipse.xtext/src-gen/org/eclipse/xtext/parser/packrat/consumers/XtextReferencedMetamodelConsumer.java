@@ -27,9 +27,9 @@ public final class XtextReferencedMetamodelConsumer extends NonTerminalConsumer 
 	private XtextBuiltinIDConsumer idConsumer;
 	private XtextBuiltinSTRINGConsumer stringConsumer;
 
-	private ISequenceMatcher crossReference$5$Delimiter;
-	
 	private ISequenceMatcher ruleCall$10$Delimiter;
+	
+	private ISequenceMatcher crossReference$5$Delimiter;
 	
 	private ICharacterClass keyword$8$Delimiter;
 	
@@ -39,8 +39,8 @@ public final class XtextReferencedMetamodelConsumer extends NonTerminalConsumer 
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
-		crossReference$5$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		ruleCall$10$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		crossReference$5$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$3$Delimiter = ICharacterClass.Factory.nullClass();
 	}
@@ -125,20 +125,20 @@ public final class XtextReferencedMetamodelConsumer extends NonTerminalConsumer 
 		this.stringConsumer = stringConsumer;
 	}
 	
-	public ISequenceMatcher getCrossReference$5$Delimiter() {
-		return crossReference$5$Delimiter;
-	}
-	
-	public void setCrossReference$5$Delimiter(ISequenceMatcher matcher) {
-		crossReference$5$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
-	}
-	
 	public ISequenceMatcher getRuleCall$10$Delimiter() {
 		return ruleCall$10$Delimiter;
 	}
 	
 	public void setRuleCall$10$Delimiter(ISequenceMatcher matcher) {
 		ruleCall$10$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	}
+	
+	public ISequenceMatcher getCrossReference$5$Delimiter() {
+		return crossReference$5$Delimiter;
+	}
+	
+	public void setCrossReference$5$Delimiter(ISequenceMatcher matcher) {
+		crossReference$5$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	public ICharacterClass getKeyword$8$Delimiter() {

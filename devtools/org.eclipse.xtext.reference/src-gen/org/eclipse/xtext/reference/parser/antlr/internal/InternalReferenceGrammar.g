@@ -62,6 +62,7 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 
 
 
+
 // Entry rule entryRuleSpielplatz
 entryRuleSpielplatz returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); }
@@ -243,6 +244,8 @@ ruleSpielplatz returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleKind
 entryRuleKind returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.2" /* xtext::ParserRule */, currentNode); }
@@ -308,6 +311,8 @@ ruleKind returns [EObject current=null]
         createLeafNode("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.2/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 );
+
+
 
 
 
@@ -383,6 +388,8 @@ ruleErwachsener returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleSpielzeug
 entryRuleSpielzeug returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.4" /* xtext::ParserRule */, currentNode); }
@@ -449,6 +456,8 @@ ruleSpielzeug returns [EObject current=null]
         createLeafNode("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.4/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 );
+
+
 
 
 
@@ -578,6 +587,8 @@ ruleFamilie returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleFarbe
 entryRuleFarbe returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.6" /* xtext::ParserRule */, currentNode); }
@@ -631,6 +642,8 @@ ruleFarbe returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleCustomTypeParserRule
 entryRuleCustomTypeParserRule returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.7" /* xtext::ParserRule */, currentNode); }
@@ -668,6 +681,24 @@ ruleCustomTypeParserRule returns [EObject current=null]
 	    }
 	
 ));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

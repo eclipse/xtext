@@ -62,6 +62,7 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 
 
 
+
 // Entry rule entryRuleEntry
 entryRuleEntry returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); }
@@ -96,6 +97,8 @@ ruleEntry returns [EObject current=null]
 	    }
 	
 )*;
+
+
 
 
 
@@ -148,6 +151,8 @@ ruleAlts returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleLookAhead0
 entryRuleLookAhead0 returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#//@rules.2" /* xtext::ParserRule */, currentNode); }
@@ -185,6 +190,8 @@ ruleLookAhead0 returns [EObject current=null]
 	    }
 	
 ));
+
+
 
 
 
@@ -273,6 +280,8 @@ ruleLookAhead1 returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleLookAhead2
 entryRuleLookAhead2 returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#//@rules.4" /* xtext::ParserRule */, currentNode); }
@@ -331,6 +340,8 @@ ruleLookAhead2 returns [EObject current=null]
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 );
+
+
 
 
 
@@ -403,6 +414,8 @@ ruleLookAhead3 returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleLookAhead4
 entryRuleLookAhead4 returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#//@rules.6" /* xtext::ParserRule */, currentNode); }
@@ -457,6 +470,22 @@ ruleLookAhead4 returns [EObject current=null]
 	    }
 	
 ));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

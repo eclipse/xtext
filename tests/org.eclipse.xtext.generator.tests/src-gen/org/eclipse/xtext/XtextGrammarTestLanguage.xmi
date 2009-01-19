@@ -10,10 +10,13 @@
   <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="ecore">
     <ePackage href="http://www.eclipse.org/emf/2002/Ecore#/"/>
   </metamodelDeclarations>
-  <rules xsi:type="xtext:ParserRule" name="Grammar">
+  <rules xsi:type="xtext:ParserRule" name="Grammar" definesHiddenTokens="true">
     <type metamodel="//@metamodelDeclarations.0">
       <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//Grammar"/>
     </type>
+    <hiddenTokens href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.5"/>
+    <hiddenTokens href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.3"/>
+    <hiddenTokens href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.4"/>
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Group">
         <abstractTokens xsi:type="xtext:Group">
@@ -73,8 +76,11 @@
       <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractRule"/>
     </type>
     <alternatives xsi:type="xtext:Alternatives">
-      <groups xsi:type="xtext:RuleCall" rule="//@rules.5"/>
-      <groups xsi:type="xtext:RuleCall" rule="//@rules.6"/>
+      <groups xsi:type="xtext:Alternatives">
+        <groups xsi:type="xtext:RuleCall" rule="//@rules.5"/>
+        <groups xsi:type="xtext:RuleCall" rule="//@rules.6"/>
+      </groups>
+      <groups xsi:type="xtext:RuleCall" rule="//@rules.7"/>
     </alternatives>
   </rules>
   <rules xsi:type="xtext:ParserRule" name="AbstractMetamodelDeclaration">
@@ -100,8 +106,11 @@
             </terminal>
           </abstractTokens>
         </abstractTokens>
-        <abstractTokens xsi:type="xtext:Assignment" feature="nsURI" operator="=">
-          <terminal xsi:type="xtext:RuleCall">
+        <abstractTokens xsi:type="xtext:Assignment" feature="ePackage" operator="=">
+          <terminal xsi:type="xtext:CrossReference">
+            <type metamodel="//@metamodelDeclarations.1">
+              <type xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+            </type>
             <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.2"/>
           </terminal>
         </abstractTokens>
@@ -123,8 +132,11 @@
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Group">
         <abstractTokens xsi:type="xtext:Keyword" value="import"/>
-        <abstractTokens xsi:type="xtext:Assignment" feature="uri" operator="=">
-          <terminal xsi:type="xtext:RuleCall">
+        <abstractTokens xsi:type="xtext:Assignment" feature="ePackage" operator="=">
+          <terminal xsi:type="xtext:CrossReference">
+            <type metamodel="//@metamodelDeclarations.1">
+              <type xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+            </type>
             <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.2"/>
           </terminal>
         </abstractTokens>
@@ -161,7 +173,7 @@
             <abstractTokens xsi:type="xtext:Group" cardinality="?">
               <abstractTokens xsi:type="xtext:Keyword" value="returns"/>
               <abstractTokens xsi:type="xtext:Assignment" feature="type" operator="=">
-                <terminal xsi:type="xtext:RuleCall" rule="//@rules.7"/>
+                <terminal xsi:type="xtext:RuleCall" rule="//@rules.8"/>
               </abstractTokens>
             </abstractTokens>
           </abstractTokens>
@@ -184,22 +196,90 @@
       <abstractTokens xsi:type="xtext:Group">
         <abstractTokens xsi:type="xtext:Group">
           <abstractTokens xsi:type="xtext:Group">
-            <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
-              <terminal xsi:type="xtext:RuleCall">
-                <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
-              </terminal>
+            <abstractTokens xsi:type="xtext:Group">
+              <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
+                <terminal xsi:type="xtext:RuleCall">
+                  <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+                </terminal>
+              </abstractTokens>
+              <abstractTokens xsi:type="xtext:Group" cardinality="?">
+                <abstractTokens xsi:type="xtext:Keyword" value="returns"/>
+                <abstractTokens xsi:type="xtext:Assignment" feature="type" operator="=">
+                  <terminal xsi:type="xtext:RuleCall" rule="//@rules.8"/>
+                </abstractTokens>
+              </abstractTokens>
+            </abstractTokens>
+            <abstractTokens xsi:type="xtext:Group" cardinality="?">
+              <abstractTokens xsi:type="xtext:Group">
+                <abstractTokens xsi:type="xtext:Group">
+                  <abstractTokens xsi:type="xtext:Group">
+                    <abstractTokens xsi:type="xtext:Assignment" feature="definesHiddenTokens" operator="?=">
+                      <terminal xsi:type="xtext:Keyword" value="hidden"/>
+                    </abstractTokens>
+                    <abstractTokens xsi:type="xtext:Keyword" value="("/>
+                  </abstractTokens>
+                  <abstractTokens xsi:type="xtext:Assignment" feature="hiddenTokens" operator="+=">
+                    <terminal xsi:type="xtext:CrossReference">
+                      <type metamodel="//@metamodelDeclarations.0">
+                        <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractRule"/>
+                      </type>
+                      <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+                    </terminal>
+                  </abstractTokens>
+                </abstractTokens>
+                <abstractTokens xsi:type="xtext:Group">
+                  <abstractTokens xsi:type="xtext:Keyword" value=","/>
+                  <abstractTokens xsi:type="xtext:Assignment" feature="hiddenTokens" operator="+=">
+                    <terminal xsi:type="xtext:CrossReference">
+                      <type metamodel="//@metamodelDeclarations.0">
+                        <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractRule"/>
+                      </type>
+                      <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+                    </terminal>
+                  </abstractTokens>
+                </abstractTokens>
+              </abstractTokens>
+              <abstractTokens xsi:type="xtext:Keyword" value=")"/>
+            </abstractTokens>
+          </abstractTokens>
+          <abstractTokens xsi:type="xtext:Keyword" value=":"/>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Assignment" feature="alternatives" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="//@rules.9"/>
+        </abstractTokens>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Keyword" value=";"/>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="TerminalRule">
+    <type metamodel="//@metamodelDeclarations.0">
+      <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//ParserRule"/>
+    </type>
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Group">
+            <abstractTokens xsi:type="xtext:Group">
+              <abstractTokens xsi:type="xtext:Assignment" feature="terminal" operator="?=">
+                <terminal xsi:type="xtext:Keyword" value="terminal"/>
+              </abstractTokens>
+              <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
+                <terminal xsi:type="xtext:RuleCall">
+                  <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+                </terminal>
+              </abstractTokens>
             </abstractTokens>
             <abstractTokens xsi:type="xtext:Group" cardinality="?">
               <abstractTokens xsi:type="xtext:Keyword" value="returns"/>
               <abstractTokens xsi:type="xtext:Assignment" feature="type" operator="=">
-                <terminal xsi:type="xtext:RuleCall" rule="//@rules.7"/>
+                <terminal xsi:type="xtext:RuleCall" rule="//@rules.8"/>
               </abstractTokens>
             </abstractTokens>
           </abstractTokens>
           <abstractTokens xsi:type="xtext:Keyword" value=":"/>
         </abstractTokens>
         <abstractTokens xsi:type="xtext:Assignment" feature="alternatives" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="//@rules.8"/>
+          <terminal xsi:type="xtext:RuleCall" rule="//@rules.10"/>
         </abstractTokens>
       </abstractTokens>
       <abstractTokens xsi:type="xtext:Keyword" value=";"/>
@@ -236,7 +316,7 @@
       <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractElement"/>
     </type>
     <alternatives xsi:type="xtext:Group">
-      <abstractTokens xsi:type="xtext:RuleCall" rule="//@rules.9"/>
+      <abstractTokens xsi:type="xtext:RuleCall" rule="//@rules.11"/>
       <abstractTokens xsi:type="xtext:Group" cardinality="*">
         <abstractTokens xsi:type="xtext:Group">
           <abstractTokens xsi:type="xtext:Action" feature="groups" operator="+=">
@@ -247,7 +327,28 @@
           <abstractTokens xsi:type="xtext:Keyword" value="|"/>
         </abstractTokens>
         <abstractTokens xsi:type="xtext:Assignment" feature="groups" operator="+=">
-          <terminal xsi:type="xtext:RuleCall" rule="//@rules.9"/>
+          <terminal xsi:type="xtext:RuleCall" rule="//@rules.11"/>
+        </abstractTokens>
+      </abstractTokens>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="TerminalAlternatives">
+    <type metamodel="//@metamodelDeclarations.0">
+      <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractElement"/>
+    </type>
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:RuleCall" rule="//@rules.12"/>
+      <abstractTokens xsi:type="xtext:Group" cardinality="*">
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Action" feature="groups" operator="+=">
+            <typeName metamodel="//@metamodelDeclarations.0">
+              <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//Alternatives"/>
+            </typeName>
+          </abstractTokens>
+          <abstractTokens xsi:type="xtext:Keyword" value="|"/>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Assignment" feature="groups" operator="+=">
+          <terminal xsi:type="xtext:RuleCall" rule="//@rules.12"/>
         </abstractTokens>
       </abstractTokens>
     </alternatives>
@@ -257,7 +358,7 @@
       <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractElement"/>
     </type>
     <alternatives xsi:type="xtext:Group">
-      <abstractTokens xsi:type="xtext:RuleCall" rule="//@rules.10"/>
+      <abstractTokens xsi:type="xtext:RuleCall" rule="//@rules.13"/>
       <abstractTokens xsi:type="xtext:Group" cardinality="*">
         <abstractTokens xsi:type="xtext:Action" feature="abstractTokens" operator="+=">
           <typeName metamodel="//@metamodelDeclarations.0">
@@ -265,7 +366,25 @@
           </typeName>
         </abstractTokens>
         <abstractTokens xsi:type="xtext:Assignment" feature="abstractTokens" operator="+=">
-          <terminal xsi:type="xtext:RuleCall" rule="//@rules.10"/>
+          <terminal xsi:type="xtext:RuleCall" rule="//@rules.13"/>
+        </abstractTokens>
+      </abstractTokens>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="TerminalGroup">
+    <type metamodel="//@metamodelDeclarations.0">
+      <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractElement"/>
+    </type>
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:RuleCall" rule="//@rules.14"/>
+      <abstractTokens xsi:type="xtext:Group" cardinality="*">
+        <abstractTokens xsi:type="xtext:Action" feature="abstractTokens" operator="+=">
+          <typeName metamodel="//@metamodelDeclarations.0">
+            <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//Group"/>
+          </typeName>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Assignment" feature="abstractTokens" operator="+=">
+          <terminal xsi:type="xtext:RuleCall" rule="//@rules.14"/>
         </abstractTokens>
       </abstractTokens>
     </alternatives>
@@ -277,11 +396,28 @@
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Alternatives">
         <groups xsi:type="xtext:Alternatives">
-          <groups xsi:type="xtext:RuleCall" rule="//@rules.11"/>
-          <groups xsi:type="xtext:RuleCall" rule="//@rules.12"/>
+          <groups xsi:type="xtext:RuleCall" rule="//@rules.15"/>
+          <groups xsi:type="xtext:RuleCall" rule="//@rules.16"/>
         </groups>
-        <groups xsi:type="xtext:RuleCall" rule="//@rules.13"/>
+        <groups xsi:type="xtext:RuleCall" rule="//@rules.17"/>
       </abstractTokens>
+      <abstractTokens xsi:type="xtext:Assignment" cardinality="?" feature="cardinality" operator="=">
+        <terminal xsi:type="xtext:Alternatives">
+          <groups xsi:type="xtext:Alternatives">
+            <groups xsi:type="xtext:Keyword" value="?"/>
+            <groups xsi:type="xtext:Keyword" value="*"/>
+          </groups>
+          <groups xsi:type="xtext:Keyword" value="+"/>
+        </terminal>
+      </abstractTokens>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="TerminalToken">
+    <type metamodel="//@metamodelDeclarations.0">
+      <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractElement"/>
+    </type>
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:RuleCall" rule="//@rules.18"/>
       <abstractTokens xsi:type="xtext:Assignment" cardinality="?" feature="cardinality" operator="=">
         <terminal xsi:type="xtext:Alternatives">
           <groups xsi:type="xtext:Alternatives">
@@ -315,7 +451,7 @@
         </abstractTokens>
       </abstractTokens>
       <abstractTokens xsi:type="xtext:Assignment" feature="terminal" operator="=">
-        <terminal xsi:type="xtext:RuleCall" rule="//@rules.13"/>
+        <terminal xsi:type="xtext:RuleCall" rule="//@rules.17"/>
       </abstractTokens>
     </alternatives>
   </rules>
@@ -337,7 +473,7 @@
                   </abstractTokens>
                 </abstractTokens>
                 <abstractTokens xsi:type="xtext:Assignment" feature="typeName" operator="=">
-                  <terminal xsi:type="xtext:RuleCall" rule="//@rules.7"/>
+                  <terminal xsi:type="xtext:RuleCall" rule="//@rules.8"/>
                 </abstractTokens>
               </abstractTokens>
               <abstractTokens xsi:type="xtext:Keyword" value="."/>
@@ -367,12 +503,90 @@
     <alternatives xsi:type="xtext:Alternatives">
       <groups xsi:type="xtext:Alternatives">
         <groups xsi:type="xtext:Alternatives">
-          <groups xsi:type="xtext:RuleCall" rule="//@rules.16"/>
-          <groups xsi:type="xtext:RuleCall" rule="//@rules.17"/>
+          <groups xsi:type="xtext:RuleCall" rule="//@rules.27"/>
+          <groups xsi:type="xtext:RuleCall" rule="//@rules.28"/>
         </groups>
-        <groups xsi:type="xtext:RuleCall" rule="//@rules.15"/>
+        <groups xsi:type="xtext:RuleCall" rule="//@rules.25"/>
       </groups>
-      <groups xsi:type="xtext:RuleCall" rule="//@rules.14"/>
+      <groups xsi:type="xtext:RuleCall" rule="//@rules.24"/>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="TerminalTokenElement">
+    <type metamodel="//@metamodelDeclarations.0">
+      <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractElement"/>
+    </type>
+    <alternatives xsi:type="xtext:Alternatives">
+      <groups xsi:type="xtext:Alternatives">
+        <groups xsi:type="xtext:Alternatives">
+          <groups xsi:type="xtext:Alternatives">
+            <groups xsi:type="xtext:RuleCall" rule="//@rules.23"/>
+            <groups xsi:type="xtext:RuleCall" rule="//@rules.28"/>
+          </groups>
+          <groups xsi:type="xtext:RuleCall" rule="//@rules.26"/>
+        </groups>
+        <groups xsi:type="xtext:RuleCall" rule="//@rules.19"/>
+      </groups>
+      <groups xsi:type="xtext:RuleCall" rule="//@rules.22"/>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="AbstractNegatedToken">
+    <type metamodel="//@metamodelDeclarations.0">
+      <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractNegatedToken"/>
+    </type>
+    <alternatives xsi:type="xtext:Alternatives">
+      <groups xsi:type="xtext:RuleCall" rule="//@rules.20"/>
+      <groups xsi:type="xtext:RuleCall" rule="//@rules.21"/>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="NegatedToken">
+    <type metamodel="//@metamodelDeclarations.0">
+      <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//NegatedToken"/>
+    </type>
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Keyword" value="!"/>
+      <abstractTokens xsi:type="xtext:Assignment" feature="terminal" operator="=">
+        <terminal xsi:type="xtext:RuleCall" rule="//@rules.18"/>
+      </abstractTokens>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="UpToToken">
+    <type metamodel="//@metamodelDeclarations.0">
+      <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//UpToToken"/>
+    </type>
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Keyword" value="->"/>
+      <abstractTokens xsi:type="xtext:Assignment" feature="terminal" operator="=">
+        <terminal xsi:type="xtext:RuleCall" rule="//@rules.18"/>
+      </abstractTokens>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="Wildcard">
+    <type metamodel="//@metamodelDeclarations.0">
+      <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//Wildcard"/>
+    </type>
+    <alternatives xsi:type="xtext:Assignment" feature="isWildcard" operator="?=">
+      <terminal xsi:type="xtext:Keyword" value="."/>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="CharacterRange">
+    <type metamodel="//@metamodelDeclarations.0">
+      <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractElement"/>
+    </type>
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:RuleCall" rule="//@rules.27"/>
+      <abstractTokens xsi:type="xtext:Group" cardinality="?">
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Action" feature="left" operator="=">
+            <typeName metamodel="//@metamodelDeclarations.0">
+              <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//CharacterRange"/>
+            </typeName>
+          </abstractTokens>
+          <abstractTokens xsi:type="xtext:Keyword" value=".."/>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Assignment" feature="right" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="//@rules.27"/>
+        </abstractTokens>
+      </abstractTokens>
     </alternatives>
   </rules>
   <rules xsi:type="xtext:ParserRule" name="CrossReference">
@@ -384,7 +598,7 @@
         <abstractTokens xsi:type="xtext:Group">
           <abstractTokens xsi:type="xtext:Keyword" value="["/>
           <abstractTokens xsi:type="xtext:Assignment" feature="type" operator="=">
-            <terminal xsi:type="xtext:RuleCall" rule="//@rules.7"/>
+            <terminal xsi:type="xtext:RuleCall" rule="//@rules.8"/>
           </abstractTokens>
         </abstractTokens>
         <abstractTokens xsi:type="xtext:Group" cardinality="?">
@@ -409,7 +623,19 @@
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Group">
         <abstractTokens xsi:type="xtext:Keyword" value="("/>
-        <abstractTokens xsi:type="xtext:RuleCall" rule="//@rules.8"/>
+        <abstractTokens xsi:type="xtext:RuleCall" rule="//@rules.9"/>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Keyword" value=")"/>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="ParenthesizedTerminalElement">
+    <type metamodel="//@metamodelDeclarations.0">
+      <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractElement"/>
+    </type>
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Keyword" value="("/>
+        <abstractTokens xsi:type="xtext:RuleCall" rule="//@rules.10"/>
       </abstractTokens>
       <abstractTokens xsi:type="xtext:Keyword" value=")"/>
     </alternatives>

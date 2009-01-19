@@ -51,8 +51,7 @@ public class TestLanguageParserConfiguration extends AbstractParserConfiguration
 	public void createNonTerminalConsumers() {
 		getXtextBuiltinConfiguration().createNonTerminalConsumers();
 		entryRuleConsumer = new TestLanguageEntryRuleConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(),
-    		new ITerminalConsumer[]{ getWsConsumer(), getMlCommentConsumer(), getSlCommentConsumer() }
+    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
     	);
 		abstractRuleConsumer = new TestLanguageAbstractRuleConsumer(
     		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
@@ -85,24 +84,10 @@ public class TestLanguageParserConfiguration extends AbstractParserConfiguration
 		getTerminalRuleConsumer().setStringConsumer(getStringConsumer());
 
 		getChoiceRuleConsumer().setRuleCall$7$Delimiter(TestLanguageDelimiters.ruleCall$18$Delimiter);
-		getChoiceRuleConsumer().setKeyword$5$Delimiter(TestLanguageDelimiters.keyword$14$Delimiter);
 		getChoiceRuleConsumer().setKeyword$3$Delimiter(TestLanguageDelimiters.keyword$14$Delimiter);
+		getChoiceRuleConsumer().setKeyword$5$Delimiter(TestLanguageDelimiters.keyword$14$Delimiter);
 		getReducibleRuleConsumer().setKeyword$3$Delimiter(TestLanguageDelimiters.keyword$14$Delimiter);
 		getTerminalRuleConsumer().setRuleCall$2$Delimiter(TestLanguageDelimiters.ruleCall$33$Delimiter);
-		// TODO remove workaround
-		getIdConsumer().initFields(this);
-		// TODO remove workaround
-		getIntConsumer().initFields(this);
-		// TODO remove workaround
-		getStringConsumer().initFields(this);
-		// TODO remove workaround
-		getMlCommentConsumer().initFields(this);
-		// TODO remove workaround
-		getSlCommentConsumer().initFields(this);
-		// TODO remove workaround
-		getWsConsumer().initFields(this);
-		// TODO remove workaround
-		getAnyOtherConsumer().initFields(this);
 	}
 	
 	// TODO collect superGrammars transitive

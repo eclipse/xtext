@@ -15,11 +15,10 @@ public final class LangATestLanguageDelimiters {
 	}
 	
 	public static ISequenceMatcher ruleCall$13$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-	
-	// TODO do not use IDConsumer internals
+
 	public static ICharacterClass keyword$11$Delimiter = XtextBuiltinIDConsumer.IDConsumer$$2;
-	
+
 	public static ISequenceMatcher ruleCall$21$Delimiter = new SetBasedKeywordMatcher(
 		"import", "type", "extends");
-		
+
 }
