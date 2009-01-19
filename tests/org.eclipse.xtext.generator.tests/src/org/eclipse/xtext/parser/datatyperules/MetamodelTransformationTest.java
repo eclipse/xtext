@@ -28,7 +28,7 @@ public class MetamodelTransformationTest extends AbstractGeneratorTest {
 		with(XtextStandaloneSetup.class);
 		model = "language datatypetests\n" +
 				"import 'http://www.eclipse.org/emf/2002/Ecore' as ecore\n" +
-				"generate metamodel 'http://foo'\n" +
+				"generate metamodel 'http://fooo'\n" +
 				"Start:\n" +
 				"  id=StartId id2=RecursiveId id3=CalledId value=Value;\n" +
 				"StartId returns EInt: ID '.' (ID|INT);\n" +

@@ -24,6 +24,7 @@ import org.eclipse.xtend.XtendFacade;
 import org.eclipse.xtend.expression.ExecutionContextImpl;
 import org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel;
 import org.eclipse.xtext.GenerateAllTestGrammars;
+import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.conversion.IValueConverterService;
@@ -100,6 +101,10 @@ public abstract class AbstractGeneratorTest extends TestCase {
 
 	protected IAstFactory getASTFactory() {
 		return ServiceRegistry.getService(currentScope, IAstFactory.class);
+	}
+	
+	protected IGrammarAccess getGrammarAccess() {
+		return ServiceRegistry.getService(currentScope, IGrammarAccess.class);
 	}
 
 	protected IParseTreeConstructor getParseTreeConstructor() {

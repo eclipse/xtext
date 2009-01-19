@@ -10,6 +10,7 @@ package org.eclipse.xtext.parser.packrat;
 import org.eclipse.xtext.XtextGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.packrat.ParseResultFactory;
+import org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguagePackratParser;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xtext.parser.handwritten.HandwrittenParser;
@@ -25,6 +26,8 @@ public class PerformanceTest extends AbstractGeneratorTest {
 	private HandwrittenParserWithMethodCalls handwrittenWithMethodCalls;
 	
 	private XtextGrammarTestLanguagePackratParser generated;
+	
+	private XtextTerminalsTestLanguagePackratParser generatedWithTerminals;
 
 	private String model;
 	
@@ -38,17 +41,13 @@ public class PerformanceTest extends AbstractGeneratorTest {
 	protected void setUp() throws Exception {
 		with(XtextGrammarTestLanguageStandaloneSetup.class);
 		this.handwritten = new HandwrittenParser();
-		ParseResultFactory factory = new ParseResultFactory();
-		factory.setFactory(getASTFactory());
-		this.handwritten.setParseResultFactory(factory);
+		setAstFactory(handwritten);
 		this.handwrittenWithMethodCalls = new HandwrittenParserWithMethodCalls();
-		factory = new ParseResultFactory();
-		factory.setFactory(getASTFactory());
-		this.handwrittenWithMethodCalls.setParseResultFactory(factory);
+		setAstFactory(handwrittenWithMethodCalls);
 		this.generated = new XtextGrammarTestLanguagePackratParser();
-		factory = new ParseResultFactory();
-		factory.setFactory(getASTFactory());
-		this.generated.setParseResultFactory(factory);
+		setAstFactory(generated);
+		this.generatedWithTerminals = new XtextTerminalsTestLanguagePackratParser();
+		setAstFactory(generatedWithTerminals);
 		StringBuilder modelBuilder = new StringBuilder("language a.bc.def.ghi extends e.fh.ijk\n");
 		for(int i = 0; i < metamodelCount; i++) {
 			if (i % 2 == 0)
@@ -64,90 +63,92 @@ public class PerformanceTest extends AbstractGeneratorTest {
 		}
 		this.model = modelBuilder.toString();
 		System.gc();
+		if (metamodelCount >= 1000)
+			Thread.sleep(2000); // increase chance for the gc to collect unused objects
 		System.out.println("===== " + getName() + " =====");
 		System.out.println("model.length(): " + model.length() + " chars (ca. " + (metamodelCount * 2)+ " lines)" );
 		System.out.println("usage before:   " + (java.lang.Runtime.getRuntime().totalMemory() - java.lang.Runtime.getRuntime().freeMemory()));
 		startTime = System.currentTimeMillis();
 	}
+
+	private void setAstFactory(AbstractPackratParser parser) {
+		ParseResultFactory factory = new ParseResultFactory();
+		PackratEcoreElementFactory astFactory = new PackratEcoreElementFactory();
+		astFactory.setConverterService(getValueConverterService());
+		astFactory.setGrammarAccess(getGrammarAccess());
+		factory.setFactory(astFactory);
+		parser.setParseResultFactory(factory);
+	}
 	
 	protected void tearDown() throws Exception {
 		long endTime = System.currentTimeMillis();
 		System.out.println("usage after:    " + (java.lang.Runtime.getRuntime().totalMemory() - java.lang.Runtime.getRuntime().freeMemory()));
-		System.out.println("duration:       " + (endTime - startTime) + " ms");
+		System.out.println("duration:               " + (endTime - startTime) + " ms");
 		this.handwritten = null;
 		this.handwrittenWithMethodCalls = null;
 		this.model = null;
 	}
-	
-	public void testFirstHandwrittenPackrat() {
-		IParseResult result = handwritten.parse(model);
+
+	private void doTest(AbstractPackratParser parser) {
+		IParseResult result = parser.parse(model);
 		assertNotNull(result);
 		assertNotNull(result.getRootASTElement());
 		assertNotNull(result.getRootNode());
 	}
 	
+	public void testFirstHandwrittenPackrat() {
+		doTest(handwritten);
+	}
+
 	public void testSecondHandwrittenPackrat() {
-		IParseResult result = handwritten.parse(model);
-		assertNotNull(result);
-		assertNotNull(result.getRootASTElement());
-		assertNotNull(result.getRootNode());
+		doTest(handwritten);
 	}
 	
 	public void testHandwrittenPackratTwice() {
 		for (int i = 0; i < 2; i++) {
-			IParseResult result = handwritten.parse(model);
-			assertNotNull(result);
-			assertNotNull(result.getRootASTElement());
-			assertNotNull(result.getRootNode());
-			result = null;
+			doTest(handwritten);
 		}
 	}
 	
-	public void testFirstHandwrittenWithMethodCallsPackrat() {
-		IParseResult result = handwrittenWithMethodCalls.parse(model);
-		assertNotNull(result);
-		assertNotNull(result.getRootASTElement());
-		assertNotNull(result.getRootNode());
+	public void testFirstGeneratedWithTerminalsPackrat() {
+		doTest(generatedWithTerminals);
 	}
 	
-	public void testSecondHandwrittenWithMethodCallsPackrat() {
-		IParseResult result = handwrittenWithMethodCalls.parse(model);
-		assertNotNull(result);
-		assertNotNull(result.getRootASTElement());
-		assertNotNull(result.getRootNode());
+	public void testSecondGeneratedWithTerminalsPackrat() {
+		doTest(generatedWithTerminals);
 	}
 	
-	public void testHandwrittenWithMethodCallsPackratTwice() {
+	public void testGeneratedWithTerminalsPackratTwice() {
 		for (int i = 0; i < 2; i++) {
-			IParseResult result = handwrittenWithMethodCalls.parse(model);
-			assertNotNull(result);
-			assertNotNull(result.getRootASTElement());
-			assertNotNull(result.getRootNode());
-			result = null;
+			doTest(generatedWithTerminals);
 		}
 	}
 	
 	public void testFirstGeneratedPackrat() {
-		IParseResult result = generated.parse(model);
-		assertNotNull(result);
-		assertNotNull(result.getRootASTElement());
-		assertNotNull(result.getRootNode());
+		doTest(generated);
 	}
 	
 	public void testSecondGeneratedPackrat() {
-		IParseResult result = generated.parse(model);
-		assertNotNull(result);
-		assertNotNull(result.getRootASTElement());
-		assertNotNull(result.getRootNode());
+		doTest(generated);
 	}
 	
 	public void testGeneratedPackratTwice() {
 		for (int i = 0; i < 2; i++) {
-			IParseResult result = generated.parse(model);
-			assertNotNull(result);
-			assertNotNull(result.getRootASTElement());
-			assertNotNull(result.getRootNode());
-			result = null;
+			doTest(generated);
+		}
+	}
+	
+	public void testFirstHandwrittenWithMethodCallsPackrat() {
+		doTest(handwrittenWithMethodCalls);
+	}
+	
+	public void testSecondHandwrittenWithMethodCallsPackrat() {
+		doTest(handwrittenWithMethodCalls);
+	}
+	
+	public void testHandwrittenWithMethodCallsPackratTwice() {
+		for (int i = 0; i < 2; i++) {
+			doTest(handwrittenWithMethodCalls);
 		}
 	}
 	
@@ -156,7 +157,6 @@ public class PerformanceTest extends AbstractGeneratorTest {
 		assertNotNull(result);
 		assertNotNull(result.getRootASTElement());
 		assertNotNull(result.getRootNode());
-		System.out.println("usage after: " + (java.lang.Runtime.getRuntime().totalMemory() - java.lang.Runtime.getRuntime().freeMemory()));
 	}
 	
 	public void testSecondAntlr() {

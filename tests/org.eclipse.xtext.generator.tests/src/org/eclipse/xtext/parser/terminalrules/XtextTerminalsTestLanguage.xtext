@@ -5,9 +5,9 @@
 * which accompanies this distribution, and is available at
 * http://www.eclipse.org/legal/epl-v10.html
 *******************************************************************************/
-language org.eclipse.xtext.Xtext
+language org.eclipse.xtext.parser.terminalrules.XtextTerminalsTestLanguage extends NULL
 
-generate xtext "http://www.eclipse.org/2008/Xtext"
+generate XtextTerminalsTestLanguage "http://www.eclipse.org/2008/tmf/xtext/XtextTerminalsTestLanguage"
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 Grammar hidden(WS, ML_COMMENT, SL_COMMENT):
@@ -37,7 +37,7 @@ LexerRule :
 ;
 
 ParserRule :
-    name=ID ('returns' type=TypeRef)? (definesHiddenTokens?='hidden' '(' hiddenTokens+=[AbstractRule] (',' hiddenTokens+=[AbstractRule])* ')')?':' 
+    name=ID ('returns' type=TypeRef)? (definesHiddenTokens?='hidden' '(' hiddenTokens+=[AbstractRule] (',' hiddenTokens+=[AbstractRule]) ')')?':' 
     	alternatives=Alternatives   
     ';'
 ;
@@ -131,4 +131,16 @@ Keyword :
 RuleCall :
    rule=[AbstractRule]
 ;
-   
+ 
+terminal ID  		: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+terminal INT 		: ('0'..'9')+;
+terminal STRING	: 
+			'"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'"'|"'"|'\\') | !('\\'|'"') )* '"' |
+			"'" ( '\\' ('b'|'t'|'n'|'f'|'r'|'"'|"'"|'\\') | !('\\'|"'") )* "'"
+		; 
+terminal ML_COMMENT	: '/*' -> '*/';
+terminal SL_COMMENT 	: '//' !('\n'|'\r')* ('\r'? '\n')?;
+
+terminal WS			: (' '|'\t'|'\r'|'\n')+;
+
+terminal ANY_OTHER: .;

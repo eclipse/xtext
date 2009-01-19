@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.packrat.matching;
 
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */

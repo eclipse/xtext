@@ -7,50 +7,50 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.packrat.debug;
 
+import org.apache.log4j.Logger;
 import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class DebugCharSequenceWithOffset implements ICharSequenceWithOffset {
+public class DebugCharSequenceWithOffset extends DebugCharSequence implements ICharSequenceWithOffset {
+	
+	static final Logger log = Logger.getLogger(DebugCharSequenceWithOffset.class); 
 	
 	private final ICharSequenceWithOffset delegate;
 	
 	public DebugCharSequenceWithOffset(ICharSequenceWithOffset delegate) {
+		super(delegate);
 		this.delegate = delegate;
 	}
 
-	public char charAt(int index) {
-		return delegate.charAt(index);
-	}
-
 	public int getOffset() {
-		return delegate.getOffset();
+		int result = delegate.getOffset();
+		if (log.isTraceEnabled()) {
+			log.trace("getOffset() = " + result);
+		}
+		return result;
 	}
 
 	public void incOffset() {
+		if (log.isTraceEnabled()) {
+			log.trace("incOffset()");
+		}
 		delegate.incOffset();
 	}
 
 	public void incOffset(int amount) {
+		if (log.isTraceEnabled()) {
+			log.trace("incOffset(" + amount + ")");
+		}
 		delegate.incOffset(amount);
 	}
 
-	public int length() {
-		return delegate.length();
-	}
-
 	public void setOffset(int offset) {
+		if (log.isTraceEnabled()) {
+			log.trace("setOffset(" + offset + ")");
+		}
 		delegate.setOffset(offset);
 	}
-
-	public CharSequence subSequence(int start, int end) {
-		return delegate.subSequence(start, end);
-	}
-
-	public String toString() {
-		return delegate.toString();
-	}
-
 	
 }

@@ -32,14 +32,32 @@ import org.eclipse.xtext.util.Strings;
  */
 public class DefaultEcoreElementFactory implements IAstFactory {
 
+	// required due to static initializer in template for metamodelAccess
+	@SuppressWarnings("unused")
 	@Inject
-	protected IMetamodelAccess metamodelAccess;
+	private IMetamodelAccess metamodelAccess;
+	
+	@Inject
+	private IValueConverterService converterService;
 
 	@Inject
-	protected IValueConverterService converterService;
+	private IGrammarAccess grammarAccess;
+	
+	public IValueConverterService getConverterService() {
+		return converterService;
+	}
 
-	@Inject
-	protected IGrammarAccess grammarAccess;
+	public void setConverterService(IValueConverterService converterService) {
+		this.converterService = converterService;
+	}
+
+	public IGrammarAccess getGrammarAccess() {
+		return grammarAccess;
+	}
+
+	public void setGrammarAccess(IGrammarAccess grammarAccess) {
+		this.grammarAccess = grammarAccess;
+	}
 
 	public EObject create(String fullTypeName) {
 		EClass clazz = getEClass(fullTypeName);
@@ -63,8 +81,8 @@ public class DefaultEcoreElementFactory implements IAstFactory {
 	private Object getTokenValue(Object tokenOrValue, String ruleName, AbstractNode node) throws ValueConverterException {
 		try {
 			Object value = getTokenAsStringIfPossible(tokenOrValue);
-			if (value instanceof String && ruleName != null) {
-				value = converterService.toValue((String) value, ruleName, node);
+			if (value instanceof CharSequence && ruleName != null) {
+				value = converterService.toValue(value.toString(), ruleName, node);
 			}
 			return value;
 		} catch(ValueConverterException e) {

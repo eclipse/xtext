@@ -40,7 +40,7 @@ public class MetamodelTransformationErrorTest extends AbstractGeneratorTest {
 		with(XtextStandaloneSetup.class);
 		model = "language datatypetests\n" +
 				"import 'http://www.eclipse.org/emf/2002/Ecore' as ecore\n" +
-				"generate metamodel 'http://foo'\n" +
+				"generate metamodel 'http://fooo'\n" +
 				"Start:\n" +
 				"  id=ValidId id2=ValidId2 failure1=FailureId failure2=Failure2;\n" +
 				"ValidId returns ecore::EString: ID '.' ID;\n" +

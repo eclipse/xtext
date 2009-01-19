@@ -48,6 +48,10 @@ abstract class DatatypeRuleUtil extends XtextSwitch<Boolean>{
 		
 		@Override
 		public Boolean caseParserRule(ParserRule object) {
+			if (object.isTerminal()) {
+				indicatorFound = true;
+				return true;
+			}
 			final TypeRef typeRef = object.getType();
 			if (typeRef != null) {
 				if (typeRef.getType() != null) {
@@ -74,6 +78,10 @@ abstract class DatatypeRuleUtil extends XtextSwitch<Boolean>{
 		
 		@Override
 		public Boolean caseParserRule(ParserRule object) {
+			if (object.isTerminal()) {
+				visitedRules.add(object);
+				return Boolean.TRUE;
+			}
 			if (visitedRules.isEmpty()) {
 				visitedRules.add(object);
 				return object.getAlternatives() != null && doSwitch(object.getAlternatives());

@@ -27,4 +27,9 @@ public class CharacterArray implements ICharacterClass {
 			Arrays.binarySearch(characters, candidate) >= 0;
 	}
 
+	@Override
+	public String toString() {
+		return Arrays.toString(characters);
+	}
+
 }

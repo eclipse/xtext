@@ -185,6 +185,9 @@ public class GrammarUtil {
 			if ((i + 1) < x)
 				buff.append(".");
 		}
+		// TODO SZ: remove workaround
+		if ("NULL".equals(buff.toString()))
+			return null;
 		return buff.toString();
 	}
 

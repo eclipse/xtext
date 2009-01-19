@@ -21,14 +21,19 @@ import org.eclipse.xtext.util.CollectionUtils;
 public class ParsedTokenSequence {
 
 	public class Marker {
-		private final AbstractParsedToken token;
+		private final int size;
 
-		public Marker(AbstractParsedToken token) {
-			this.token = token;
+		public Marker(int size) {
+			this.size = size;
 		}
 		
 		public void rollback() {
-			removeExclusive(token);
+			while(content.size() > size)
+				content.removeLast();
+		}
+
+		public String toString() {
+			return "Marker for Token[" + size + "]"; 
 		}
 	}
 	
@@ -42,21 +47,11 @@ public class ParsedTokenSequence {
 		content.add(token);
 	}
 	
-	public void removeLast() {
-		if (!content.isEmpty())
-			content.removeLast();
-	}
-	
-	private void removeExclusive(AbstractParsedToken token) {
-		while(!content.isEmpty() && content.getLast() != token)
-			removeLast();
-	}
-	
 	public void accept(IParsedTokenVisitor visitor) {
 		loop(each(content, visitor));
 	}
 	
-	public void acceptAndDrop(IParsedTokenVisitor visitor) {
+	public void acceptAndClear(IParsedTokenVisitor visitor) {
 		CollectionUtils.clear(each(content, visitor));
 	}
 	
@@ -65,8 +60,7 @@ public class ParsedTokenSequence {
 	}
 
 	public Marker mark() {
-		return new Marker(content.isEmpty() ? null : content.getLast());
+		return new Marker(content.size());
 	}
-	
 	
 }

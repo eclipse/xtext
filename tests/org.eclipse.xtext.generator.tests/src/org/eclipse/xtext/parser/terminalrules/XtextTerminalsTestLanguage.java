@@ -5,30 +5,11 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.parser.packrat.matching;
-
+package org.eclipse.xtext.parser.terminalrules;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class CharacterRange implements ICharacterClass {
+public class XtextTerminalsTestLanguage {
 
-	private final char min;
-	
-	private final char max;
-	
-	public CharacterRange(char min, char max) {
-		this.min = min;
-		this.max = max;
-	}
-	
-	public boolean matches(char candidate) {
-		return this.min <= candidate && this.max >= candidate;
-	}
-
-	@Override
-	public String toString() {
-		return "'" + min + "'..'" + max + "'";
-	}
-	
 }

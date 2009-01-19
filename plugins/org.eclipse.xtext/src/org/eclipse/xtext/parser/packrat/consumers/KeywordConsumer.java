@@ -47,7 +47,7 @@ public final class KeywordConsumer extends TerminalConsumer {
 	}
 
 	@Override
-	protected String getLexerRuleName() {
+	protected String getRuleName() {
 		return keyword.getValue();
 	}
 }

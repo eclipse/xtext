@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.packrat.debug;
 
+import org.apache.log4j.Logger;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory;
 
 /**
@@ -14,6 +15,8 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory;
  */
 public class DebugMarkerFactory implements IMarkerFactory {
 
+	private static final Logger log = Logger.getLogger(DebugMarkerFactory.class);
+	
 	private final IMarkerFactory delegate;
 	
 	public DebugMarkerFactory(IMarkerFactory delegate) {
@@ -21,7 +24,14 @@ public class DebugMarkerFactory implements IMarkerFactory {
 	}
 	
 	public IMarker mark() {
-		return new DebuggingMarker(delegate.mark());
+		if (log.isDebugEnabled()) {
+			log.debug("mark()");
+		}
+		IMarker result = delegate.mark();
+		if (log.isDebugEnabled()) {
+			log.debug("mark() = " + result);
+		}
+		return new DebuggingMarker(result);
 	}
 	
 	private static class DebuggingMarker implements IMarker {
@@ -33,6 +43,9 @@ public class DebugMarkerFactory implements IMarkerFactory {
 		}
 
 		public void rollback() {
+			if (log.isDebugEnabled()) {
+				log.debug("rollback(" + delegate + ")");
+			}
 			delegate.rollback();
 		}
 		

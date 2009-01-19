@@ -9,7 +9,6 @@ package org.eclipse.xtext.parser.packrat;
 
 import java.util.LinkedList;
 
-import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.RuleCall;
@@ -17,6 +16,7 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.ParseResult;
+import org.eclipse.xtext.parser.packrat.debug.DebugUtil;
 import org.eclipse.xtext.parser.packrat.debug.ParsedTokenPrinter;
 import org.eclipse.xtext.parser.packrat.tokens.AbstractParsedToken;
 import org.eclipse.xtext.parser.packrat.tokens.AbstractParsedTokenVisitor;
@@ -45,10 +45,6 @@ import org.eclipse.xtext.service.StatefulService;
 @StatefulService
 public class ParseResultFactory extends AbstractParsedTokenVisitor implements IParseResultFactory {
 
-	private static boolean DEBUG = false;
-	
-	private static final Logger logger = Logger.getLogger(AbstractPackratParser.class);
-
 	private CompositeNode currentNode;
 	
 	private final LinkedList<EObject> currentStack;
@@ -67,11 +63,11 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 		currentNode = null;
 		currentStack.clear();
 		nonterminalStack.clear();
-		if (logger.isDebugEnabled() || DEBUG) {
+		if (DebugUtil.PARSE_RESULT_FACTORY_DEBUG) {
 			IParsedTokenVisitor visitor = new CompoundParsedTokenVisitor(new ParsedTokenPrinter(), this);
-			tokens.acceptAndDrop(visitor);
+			tokens.acceptAndClear(visitor);
 		} else {
-			tokens.acceptAndDrop(this);
+			tokens.acceptAndClear(this);
 		}
 		return new ParseResult(currentStack.isEmpty() ? null : currentStack.getLast(), currentNode);
 	}

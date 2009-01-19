@@ -11,14 +11,14 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory;
-import org.eclipse.xtext.parser.packrat.consumers.LexerRuleAwareTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 import org.eclipse.xtext.services.XtextGrammarAccess;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public final class XtextBuiltinML_COMMENTConsumer extends LexerRuleAwareTerminalConsumer {
+public final class XtextBuiltinML_COMMENTConsumer extends AbstractRuleAwareTerminalConsumer {
 	/**
 	 * @param input
 	 * @param markerFactory
@@ -40,7 +40,7 @@ public final class XtextBuiltinML_COMMENTConsumer extends LexerRuleAwareTerminal
 	}
 
 	@Override
-	protected LexerRule doGetLexerRule() {
+	protected LexerRule doGetRule() {
 		return (LexerRule) GrammarUtil.findRuleForName(XtextGrammarAccess.INSTANCE.getGrammar(), "ML_COMMENT");
 	}
 }
