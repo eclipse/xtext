@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.emf.mwe.core.issues.IssuesImpl;
+import org.eclipse.internal.xtend.util.StringHelper;
 import org.eclipse.xpand2.XpandExecutionContextImpl;
 import org.eclipse.xpand2.XpandFacade;
 import org.eclipse.xpand2.output.Outlet;
@@ -34,7 +35,9 @@ import org.eclipse.xtend.check.CheckFacade;
 import org.eclipse.xtend.expression.ExecutionContextImpl;
 import org.eclipse.xtend.expression.Variable;
 import org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel;
+import org.eclipse.xtext.ecore.GenerateJavaFromEcore;
 import org.eclipse.xtext.grammaraccess.GrammarAccessUtil;
+import org.eclipse.xtext.resource.metamodel.Xtext2EcoreTransformer;
 import org.eclipse.xtext.xtextgen.GenModel;
 import org.eclipse.xtext.xtextgen.GenService;
 import org.eclipse.xtext.xtextgen.XtextgenFactory;
@@ -49,6 +52,7 @@ public class GeneratorFacade {
 	private static Logger log = Logger.getLogger(GeneratorFacade.class);
 
 	public static void generate(Grammar grammarModel, String runtimeProjectPath, String uiProjectPath,
+			
 			String... modelFileExtensions) throws IOException {
 		if (!grammarModel.eResource().getErrors().isEmpty()) {
 			log.error(grammarModel.eResource().getErrors());
@@ -116,6 +120,13 @@ public class GeneratorFacade {
 		Resource resource = setImpl.createResource(URI.createURI(GenExtensions.outletPath(genModel,"SRC_GEN") + "/" + xmiPath));
 		resource.getContents().add(genModel.getGrammar());
 		resource.save(null);
+		
+		
+// We need to know the gen models of all referenced EPackages in order to do a proper generation.
+//		
+//		//generate ecore java classes
+//		String basePackageName = GrammarUtil.getNamespace(genModel.getGrammar())+"."+StringHelper.firstLower(GrammarUtil.getName(genModel.getGrammar()));
+//		GenerateJavaFromEcore.generateEcoreJavaClasses(Xtext2EcoreTransformer.doGetGeneratedPackages(genModel.getGrammar()), basePackageName,URI.createURI(GenExtensions.outletPath(genModel,"SRC_GEN")).toString());
 
 		// generate services
 		XpandFacade facade = XpandFacade.create(execCtx);
