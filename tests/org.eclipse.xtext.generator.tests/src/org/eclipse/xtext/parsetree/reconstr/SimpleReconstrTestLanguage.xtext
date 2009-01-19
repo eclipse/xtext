@@ -13,7 +13,7 @@ Op returns Expression:
 	Term ({Op.values+=current} values+=Term)*;
 	
 Term returns Expression:
-	Atom | TwoNumbers | ManyStrings | Parens | Type | Ref2 | Spare;
+	Atom | TwoNumbers | ManyStrings | Parens | Type | Ref2 | Spare | Boolean;
 	
 Atom: 
 	name=ID;
@@ -35,5 +35,8 @@ Ref2:
 	
 Spare:
 	'#3' id+=ID ('.' id+=ID)*;
+	
+Boolean:
+	'#4' bool?='myoption'? 'kw' value=ID; 
 
 
