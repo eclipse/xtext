@@ -108,7 +108,8 @@ public class ParseTreeConstructorUtil {
 					.serialize(AST_SERIALIZER, TOKEN_SERIALIZER, obj, out);
 			return out.toString();
 		} catch (Throwable e) {
-			log.warn("Error serializing grammar fragment.", e);
+			log.warn(e.getMessage());
+			log.debug("Error serializing grammar fragment.", e);
 			return "(error)";
 		}
 	}

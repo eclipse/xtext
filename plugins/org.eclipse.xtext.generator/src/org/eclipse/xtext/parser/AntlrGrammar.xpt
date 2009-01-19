@@ -85,12 +85,14 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 «DEFINE antlrRules FOR Grammar»
 «EXPAND rule FOREACH allParserRules()»
 
+«EXPAND terminalRule FOREACH allParserRules()»
 «EXPAND rule FOREACH allLexerRules()»
 «ENDDEFINE»
 
 
 «DEFINE rule FOR ParserRule»
 «IF isCalled()»
+«IF !terminal»
 «IF !isDatatypeRule()»
 // Entry rule «entryRuleName()»
 «entryRuleName()» returns [EObject current=null] :
@@ -121,6 +123,13 @@ import org.eclipse.xtext.conversion.ValueConverterException;
    «EXPAND dataTypeEbnf FOR this.alternatives»
     ;
 «ENDIF»
+«ENDIF»
+«ENDIF»
+«ENDDEFINE»
+
+«DEFINE terminalRule FOR ParserRule»
+«IF terminal»
+«ruleName()» : «toLexerBody()»;
 «ENDIF»
 «ENDDEFINE»
 

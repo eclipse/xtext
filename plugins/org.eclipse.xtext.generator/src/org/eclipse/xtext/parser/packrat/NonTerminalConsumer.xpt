@@ -17,11 +17,11 @@
 «EXTENSION org::eclipse::xtext::grammaraccess::GrammarAccess»
 «EXTENSION org::eclipse::xtend::util::stdlib::io»
 
-«DEFINE nonTerminalConsumers FOR GenService»
-«EXPAND consumer FOREACH grammar().rules.typeSelect(ParserRule)»
+«DEFINE root FOR GenService»
+«EXPAND nonTerminalConsumer FOREACH grammar().rules.typeSelect(ParserRule).select(e|!e.terminal)»
 «ENDDEFINE»
 
-«DEFINE consumer FOR ParserRule»
+«DEFINE nonTerminalConsumer FOR ParserRule»
 «FILE this.fullConsumerClassName().toJavaFilePath() SRC_GEN-»
 /*
 «fileHeader()»
@@ -43,14 +43,14 @@ import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 import «this.grammar().grammarAccess()»;
 import «this.grammar().grammarAccess()».«name»Elements;
 
-«FOREACH containedRuleCalls().rule.union(eAllContents.typeSelect(CrossReference).rule).toSet().sortBy(e|e.name) AS calledRule-»
+«FOREACH allCalledRules() AS calledRule-»
 import «calledRule.grammar().getNamespace()».parser.packrat.consumers.«calledRule.consumerClassName()»;
 «ENDFOREACH-»
 
 @SuppressWarnings("unused")
 public final class «this.consumerClassName()» extends NonTerminalConsumer {
 
-«FOREACH containedRuleCalls().rule.union(eAllContents.typeSelect(CrossReference).rule).toSet().sortBy(e|e.name) AS calledRule-»
+«FOREACH allCalledRules() AS calledRule-»
 	private «calledRule.consumerClassName()» «calledRule.consumerFieldName()»;
 «ENDFOREACH-»
 
@@ -80,7 +80,7 @@ public final class «this.consumerClassName()» extends NonTerminalConsumer {
 		return "«this.type.type.name»";
 	}
 	
-«FOREACH containedRuleCalls().rule.union(eAllContents.typeSelect(CrossReference).rule).toSet().sortBy(e|e.name) AS calledRule-»
+«FOREACH allCalledRules() AS calledRule-»
 	public void «calledRule.consumerSetterName()»(«calledRule.consumerClassName()» «calledRule.consumerFieldName()») {
 		this.«calledRule.consumerFieldName()» = «calledRule.consumerFieldName()»;
 	}
@@ -303,7 +303,11 @@ public final class «this.consumerClassName()» extends NonTerminalConsumer {
 «ENDDEFINE»
 
 «DEFINE defineConsumeBody(RuleCall call) FOR ParserRule-»
+«IF !terminal-»
 		return consumeNonTerminal(«consumerFieldName()», null, false, «isDatatypeRule()», getRule().«call.gaElementAccessMethodeName()»());
+«ELSE-»
+		return consumeTerminal(«consumerFieldName()», null, false, false, getRule().«call.gaElementAccessMethodeName()»(), get«call.delimiterFieldName().toFirstUpper()»());
+«ENDIF-»
 «ENDDEFINE»
 
 «DEFINE defineConsumeAssignmentBody(Assignment assignment) FOR AbstractElement-»
@@ -329,8 +333,13 @@ public final class «this.consumerClassName()» extends NonTerminalConsumer {
 «ENDDEFINE»
 
 «DEFINE defineConsumeCrossReferenceAssignmentBody(Assignment assignment, CrossReference reference) FOR ParserRule-»
+«IF !terminal-»
 		if (consumeNonTerminal(«consumerFieldName()», null, «assignment.isMultiple()», «isDatatypeRule()», getRule().«reference.gaElementAccessMethodeName()»()))
 			return true;
+«ELSE-»
+		if (consumeTerminal(«consumerFieldName()», null, «assignment.isMultiple()», «assignment.isBoolean()», getRule().«reference.gaElementAccessMethodeName()»(), get«reference.delimiterFieldName().toFirstUpper()»()))
+			return true;
+«ENDIF-»
 «ENDDEFINE»
 
 «DEFINE defineConsumeAssignmentBody(Assignment assignment) FOR RuleCall-»
@@ -347,8 +356,13 @@ public final class «this.consumerClassName()» extends NonTerminalConsumer {
 «ENDDEFINE»
 
 «DEFINE defineConsumeAssignmentBody(Assignment assignment, RuleCall call) FOR ParserRule-»
+«IF !terminal-»
 		if (consumeNonTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «isDatatypeRule()», getRule().«call.gaElementAccessMethodeName()»()))
 			return true;
+«ELSE-»
+		if (consumeTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «assignment.isBoolean()», getRule().«call.gaElementAccessMethodeName()»(), get«call.delimiterFieldName().toFirstUpper()»()))
+			return true;
+«ENDIF-»
 «ENDDEFINE»
 
 «DEFINE defineConsumeAssignmentBody(Assignment assignment) FOR Alternatives-»

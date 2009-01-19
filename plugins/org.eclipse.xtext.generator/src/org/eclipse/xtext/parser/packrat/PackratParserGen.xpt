@@ -17,7 +17,8 @@
 «EXTENSION org::eclipse::xtext::parser::packrat::PackratParserGen»
 
 «DEFINE root FOR GenService»
-	«EXPAND NonTerminalConsumer::nonTerminalConsumers»
+	«EXPAND NonTerminalConsumer::root»
+	«EXPAND TerminalConsumer::root»
 	«EXPAND parser»
 	«EXPAND parserConfiguration»
 	«EXPAND delimiters»
@@ -109,17 +110,15 @@ public class «languageName().toFirstUpper()»ParserConfiguration extends Abstract
 		get«superGrammar.getName().replaceAll("\\s","_").toFirstUpper()»Configuration().createNonTerminalConsumers();
 «ENDIF-»
 «ENDLET-»
-«FOREACH grammar().rules.typeSelect(ParserRule) AS rule-»
-«IF grammar().allParserRules().first()==rule-»
+«FOREACH grammar().rules.typeSelect(ParserRule).select(e|!e.terminal) AS rule-»
 		«rule.consumerFieldName()» = new «rule.consumerClassName()»(
+«IF rule.definesHiddenTokens-»
     		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(),
-    		new ITerminalConsumer[]{ getWsConsumer(), getMlCommentConsumer(), getSlCommentConsumer() }
-    	);
+    		new ITerminalConsumer[]{ «FOREACH rule.hiddenTokens AS hidden SEPARATOR ", "»«hidden.consumerGetterName()»()«ENDFOREACH-» }
 «ELSE-»
-		«rule.consumerFieldName()» = new «rule.consumerClassName()»(
     		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
-    	);
 «ENDIF-»
+    	);
 «ENDFOREACH-»
 	}
 	
@@ -129,6 +128,9 @@ public class «languageName().toFirstUpper()»ParserConfiguration extends Abstract
 		get«superGrammar.getName().replaceAll("\\s","_").toFirstUpper()»Configuration().createTerminalConsumers();
 «ENDIF-»
 «ENDLET-»
+«FOREACH grammar().rules.typeSelect(ParserRule).select(e|e.terminal) AS rule-»
+		«rule.consumerFieldName()» = new «rule.consumerClassName()»(getInput(), getMarkerFactory(), getTokenAcceptor());
+«ENDFOREACH-»
 «FOREACH grammar().rules.typeSelect(LexerRule) AS rule-»
 		«rule.consumerFieldName()» = new «rule.consumerClassName()»(getInput(), getMarkerFactory(), getTokenAcceptor());
 «ENDFOREACH-»
@@ -136,7 +138,7 @@ public class «languageName().toFirstUpper()»ParserConfiguration extends Abstract
 	
 	public void configureConsumers() {
 «FOREACH grammar().allParserRules() AS rule-»
-«LET rule.containedRuleCalls().rule.union(rule.eAllContents.typeSelect(CrossReference).rule).toSet().sortBy(e|e.name) AS calledRules-»
+«LET rule.allCalledRules() AS calledRules-»
 «IF !calledRules.isEmpty-»
 «FOREACH calledRules AS calledRule-»
 «IF rule.consumerGetterName() != "getRootConsumer"-»
@@ -157,15 +159,7 @@ public class «languageName().toFirstUpper()»ParserConfiguration extends Abstract
 «ENDIF-»
 «ENDLET-»
 «ENDFOREACH-»
-«EXPAND setDelimiters(grammar()) FOREACH grammar().allParserRules()-»
-«FOREACH grammar().allLexerRules() AS rule-»
-		// TODO remove workaround
-«IF rule.consumerGetterName() != "getRootConsumer"-»
-		«rule.consumerGetterName()»().initFields(this);
-«ELSE-»
-		getRootConsumer$().initFields(this);
-«ENDIF-»
-«ENDFOREACH-»
+«EXPAND setDelimiters(grammar()) FOREACH grammar().allParserRules().select(e|!e.terminal)-»
 	}
 	
 «LET grammar().getSuperGrammar() AS superGrammar-»
@@ -232,53 +226,50 @@ public final class «languageName()»Delimiters {
 		throw new UnsupportedOperationException("Utility classes may not be initialized");
 	}
 	
-«EXPAND delimiters FOREACH grammar().allParserRules().allDelimited()-»
+«EXPAND createDelimiters(grammar()) FOREACH grammar().allParserRules().select(e|!e.terminal).allDelimited()-»
 }
 «ENDFILE»
 «ENDDEFINE»
 
-«DEFINE delimiters FOR AbstractElement-»
-«ERROR "delimiters for " + this.metaType.name»
+«DEFINE createDelimiters(Grammar grammar) FOR AbstractElement-»
+«ERROR "createDelimiters for " + metaType.name»
 «ENDDEFINE»
 
-«DEFINE delimiters FOR RuleCall-»
-«EXPAND delimitersImpl FOR this-»
-«ENDDEFINE»
-
-«DEFINE delimitersImpl FOR AbstractElement-»
-«LET conflictingKeywords(grammar()) AS conflicting-»
-«LET sameConflicts(grammar()) AS first-»
+«DEFINE createDelimitersImpl(Grammar grammar, AbstractRule rule) FOR AbstractElement-»
+«LET sameConflicts(grammar) AS first-»
 «IF first == this-»
+«LET conflictingKeywords(grammar) AS conflicting-»
 «IF !conflicting.isEmpty-»
 	public static ISequenceMatcher «globalDelimiterFieldName()» = new SetBasedKeywordMatcher(
-		«FOREACH conflicting AS s SEPARATOR ", "»"«s»"«ENDFOREACH-»);
-		
+		«FOREACH conflicting AS c SEPARATOR ", "»"«c»"«ENDFOREACH»);
 «ELSE-»
 	public static ISequenceMatcher «globalDelimiterFieldName()» = ISequenceMatcher.Factory.nullMatcher();
-	
 «ENDIF-»
-«ENDIF-»
-«ENDLET-»
-«ENDLET-»
-«ENDDEFINE» 
 
-«DEFINE delimiters FOR CrossReference-»
-«EXPAND delimitersImpl FOR this-»
+«ENDLET-»
+«ENDIF-»
+«ENDLET-»
 «ENDDEFINE»
 
-«DEFINE delimiters FOR Keyword-»
-«LET conflictingLexerRules(grammar()).first() AS conflicting-»
-«LET sameConflicts(grammar()) AS first-»
+«DEFINE createDelimiters(Grammar grammar) FOR CrossReference-»
+«EXPAND createDelimitersImpl(grammar, rule) FOR this-»
+«ENDDEFINE»
+
+«DEFINE createDelimiters(Grammar grammar) FOR RuleCall-»
+«EXPAND createDelimitersImpl(grammar, rule) FOR this-»
+«ENDDEFINE»
+
+«DEFINE createDelimiters(Grammar grammar) FOR Keyword-»
+«LET sameConflicts(grammar) AS first-»
 «IF first == this-»
-«IF conflicting != null-»
-	// TODO do not use IDConsumer internals
+«LET conflictingLexerRules(grammar) AS conflicting-»
+«IF !conflicting.isEmpty-»
 	public static ICharacterClass «globalDelimiterFieldName()» = XtextBuiltinIDConsumer.IDConsumer$$2;
-	
 «ELSE-»
 	public static ICharacterClass «globalDelimiterFieldName()» = ICharacterClass.Factory.nullClass();
-	
 «ENDIF-»
-«ENDIF-»
+
 «ENDLET-»
+«ENDIF-»
 «ENDLET-»
 «ENDDEFINE»

@@ -29,9 +29,9 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.LexerRule;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
-import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.matching.StringWithOffset;
 import org.eclipse.xtext.util.CollectionUtils;
 import org.eclipse.xtext.util.Filter;
@@ -187,25 +187,29 @@ public final class PackratParserGenUtil {
 		return getFieldName(element.eClass().getName(), getElementIndex(element, GrammarUtil.getGrammar(element)) + "$Delimiter");
 	}
 	
-	public static Iterable<Keyword> getConflictingKeywords(final LexerRule rule, final Iterable<Keyword> allKeywords) {
+	public static Iterable<Keyword> getConflictingKeywords(final AbstractRule rule, final Iterable<Keyword> allKeywords) {
 		return CollectionUtils.filter(allKeywords, new Filter<Keyword>() {
 			public boolean matches(Keyword param) {
 				// TODO use interpreter for lexer model
+				final ParserRule containerRule = EcoreUtil2.getContainerOfType(param, ParserRule.class);
+				if (containerRule != null && containerRule.isTerminal())
+					return false;
 				if (rule.getName().equals("ID")) {
 					final StringWithOffset input = new StringWithOffset(param.getValue());
-					return new XtextBuiltinIDConsumer(input, input, null).consume(ISequenceMatcher.Factory.nullMatcher());
+					return new XtextBuiltinIDConsumer(input, input, null).consume();
 				}
 				return false;
 			}
 		});
 	}
 	
-	// TODO replace return value with ICharacterClass or similar
-	public static List<LexerRule> getConflictingLexerRules(final Keyword keyword, final Grammar grammar) {
-		LexerRule rule = (LexerRule) GrammarUtil.findRuleForName(grammar, "ID");
+	// TODO SZ: replace return value with ICharacterClass or similar
+	public static List<AbstractRule> getConflictingLexerRules(final Keyword keyword, final Grammar grammar) {
+		AbstractRule rule = (AbstractRule) GrammarUtil.findRuleForName(grammar, "ID");
 		if (rule != null) {
+			// TODO SZ: use interpreter
 			final StringWithOffset input = new StringWithOffset(keyword.getValue());
-			if (new XtextBuiltinIDConsumer(input, input, null).consume(ISequenceMatcher.Factory.nullMatcher())) {
+			if (new XtextBuiltinIDConsumer(input, input, null).consume()) {
 				return Collections.singletonList(rule);
 			}
 		}
@@ -214,20 +218,22 @@ public final class PackratParserGenUtil {
 	
 	public static List<String> getConflictingKeywords(final AbstractElement element, final Grammar grammar) {
 		if (element instanceof RuleCall) {
-			if (((RuleCall) element).getRule() instanceof LexerRule) {
-				LexerRule rule = (LexerRule) ((RuleCall) element).getRule();
-				return getConflictingKeywordsImpl(grammar, rule);
+			if (((RuleCall) element).getRule() instanceof AbstractRule) {
+				AbstractRule rule = (AbstractRule) ((RuleCall) element).getRule();
+				if (rule instanceof LexerRule || ((ParserRule) rule).isTerminal())
+					return getConflictingKeywordsImpl(grammar, rule);
 			}
 		} else if (element instanceof CrossReference) {
-			if (((CrossReference) element).getRule() instanceof LexerRule) {
-				LexerRule rule = (LexerRule) ((CrossReference) element).getRule();
-				return getConflictingKeywordsImpl(grammar, rule);
+			if (((CrossReference) element).getRule() instanceof AbstractRule) {
+				AbstractRule rule = (AbstractRule) ((CrossReference) element).getRule();
+				if (rule instanceof LexerRule || ((ParserRule) rule).isTerminal())
+					return getConflictingKeywordsImpl(grammar, rule);
 			}
 		}
 		return null;
 	}
 
-	private static List<String> getConflictingKeywordsImpl(final Grammar grammar, LexerRule rule) {
+	private static List<String> getConflictingKeywordsImpl(final Grammar grammar, AbstractRule rule) {
 		final Iterable<Keyword> conflictingKeywords = getConflictingKeywords(rule, typeFilter(
 				EcoreUtil.getAllContents(grammar, true), Keyword.class));
 		return list(unique(map(conflictingKeywords, new Function<Keyword, String>() {
@@ -253,10 +259,10 @@ public final class PackratParserGenUtil {
 
 	// TODO think about super grammar
 	public static Keyword findFirstKeywordWithSameConflicts(final Keyword element, final Grammar grammar) {
-		final List<LexerRule> conflicting = getConflictingLexerRules(element, grammar);
+		final List<AbstractRule> conflicting = getConflictingLexerRules(element, grammar);
 		Keyword result = nextOrNull(filter(typeFilter(EcoreUtil.getAllContents(grammar, true), Keyword.class), new Filter<Keyword>() {
 			public boolean matches(Keyword param) {
-				final List<LexerRule> otherConflicting = getConflictingLexerRules(param, grammar);
+				final List<AbstractRule> otherConflicting = getConflictingLexerRules(param, grammar);
 				return otherConflicting != null && otherConflicting.equals(conflicting);
 			}
 		}));

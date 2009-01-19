@@ -34,7 +34,9 @@ package «grammar().gaFQName().toJavaPackage()»;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.BaseEPackageAccess;
+«IF grammar().getSuperGrammar() != null-»
 import «grammar().getSuperGrammar().gaFQName()»;
+«ENDIF-»
 
 public class «grammar().gaSimpleName()» extends BaseEPackageAccess implements IGrammarAccess {
 	«EXPAND parseRuleClasses FOREACH grammar().rules.typeSelect(ParserRule)-»
@@ -55,8 +57,13 @@ public class «grammar().gaSimpleName()» extends BaseEPackageAccess implements IG
 		return GRAMMAR;
 	}
 	
+«IF grammar().getSuperGrammar() != null-»
 	public «grammar().getSuperGrammar().gaSimpleName()» getSuperGrammar() {
-		return «grammar().getSuperGrammar().gaSimpleName()».INSTANCE;		
+		return «grammar().getSuperGrammar().gaSimpleName()».INSTANCE;
+«ELSE-»
+	public IGrammarAccess getSuperGrammar() {
+		return null;		
+«ENDIF-»
 	}
 
 	«EXPAND getter FOREACH grammar().rules-»
