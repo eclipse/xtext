@@ -79,13 +79,13 @@ public class TransientValuesTestParserConfiguration extends AbstractParserConfig
 		getTestListConsumer().setIntConsumer(getIntConsumer());
 
 		getRootConsumer().setKeyword$2$Delimiter(TransientValuesTestDelimiters.keyword$4$Delimiter);
-		getTestRequiredConsumer().setRuleCall$7$Delimiter(TransientValuesTestDelimiters.ruleCall$16$Delimiter);
 		getTestRequiredConsumer().setKeyword$3$Delimiter(TransientValuesTestDelimiters.keyword$4$Delimiter);
 		getTestRequiredConsumer().setRuleCall$5$Delimiter(TransientValuesTestDelimiters.ruleCall$16$Delimiter);
-		getTestOptionalConsumer().setKeyword$3$Delimiter(TransientValuesTestDelimiters.keyword$4$Delimiter);
-		getTestOptionalConsumer().setRuleCall$9$Delimiter(TransientValuesTestDelimiters.ruleCall$16$Delimiter);
-		getTestOptionalConsumer().setRuleCall$5$Delimiter(TransientValuesTestDelimiters.ruleCall$16$Delimiter);
+		getTestRequiredConsumer().setRuleCall$7$Delimiter(TransientValuesTestDelimiters.ruleCall$16$Delimiter);
 		getTestOptionalConsumer().setKeyword$7$Delimiter(TransientValuesTestDelimiters.keyword$27$Delimiter);
+		getTestOptionalConsumer().setKeyword$3$Delimiter(TransientValuesTestDelimiters.keyword$4$Delimiter);
+		getTestOptionalConsumer().setRuleCall$5$Delimiter(TransientValuesTestDelimiters.ruleCall$16$Delimiter);
+		getTestOptionalConsumer().setRuleCall$9$Delimiter(TransientValuesTestDelimiters.ruleCall$16$Delimiter);
 		getTestListConsumer().setKeyword$2$Delimiter(TransientValuesTestDelimiters.keyword$4$Delimiter);
 		getTestListConsumer().setRuleCall$4$Delimiter(TransientValuesTestDelimiters.ruleCall$16$Delimiter);
 		// TODO remove workaround

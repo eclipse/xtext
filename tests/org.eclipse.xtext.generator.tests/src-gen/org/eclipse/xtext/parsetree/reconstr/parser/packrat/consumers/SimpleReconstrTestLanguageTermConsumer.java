@@ -19,6 +19,7 @@ import org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestLanguageG
 import org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestLanguageGrammarAccess.TermElements;
 
 import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageAtomConsumer;
+import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageBooleanConsumer;
 import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageManyStringsConsumer;
 import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageParensConsumer;
 import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageRef2Consumer;
@@ -30,6 +31,7 @@ import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleRecon
 public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalConsumer {
 
 	private SimpleReconstrTestLanguageAtomConsumer atomConsumer;
+	private SimpleReconstrTestLanguageBooleanConsumer booleanConsumer;
 	private SimpleReconstrTestLanguageManyStringsConsumer manyStringsConsumer;
 	private SimpleReconstrTestLanguageParensConsumer parensConsumer;
 	private SimpleReconstrTestLanguageRef2Consumer ref2Consumer;
@@ -48,8 +50,6 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 	}
 
 	protected boolean consumeAlternatives$1() throws Exception {
-		if (consumeRuleCall$7())
-			return true;
 		if (consumeRuleCall$8())
 			return true;
 		if (consumeRuleCall$9())
@@ -62,35 +62,43 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 			return true;
 		if (consumeRuleCall$13())
 			return true;
+		if (consumeRuleCall$14())
+			return true;
+		if (consumeRuleCall$15())
+			return true;
 		return false;
 	}
 
-	protected boolean consumeRuleCall$7() throws Exception {
-		return consumeNonTerminal(atomConsumer, null, false, false, getRule().ele000000ParserRuleCallAtom());
-	}
-
 	protected boolean consumeRuleCall$8() throws Exception {
-		return consumeNonTerminal(twoNumbersConsumer, null, false, false, getRule().ele000001ParserRuleCallTwoNumbers());
+		return consumeNonTerminal(atomConsumer, null, false, false, getRule().ele0000000ParserRuleCallAtom());
 	}
 
 	protected boolean consumeRuleCall$9() throws Exception {
-		return consumeNonTerminal(manyStringsConsumer, null, false, false, getRule().ele00001ParserRuleCallManyStrings());
+		return consumeNonTerminal(twoNumbersConsumer, null, false, false, getRule().ele0000001ParserRuleCallTwoNumbers());
 	}
 
 	protected boolean consumeRuleCall$10() throws Exception {
-		return consumeNonTerminal(parensConsumer, null, false, false, getRule().ele0001ParserRuleCallParens());
+		return consumeNonTerminal(manyStringsConsumer, null, false, false, getRule().ele000001ParserRuleCallManyStrings());
 	}
 
 	protected boolean consumeRuleCall$11() throws Exception {
-		return consumeNonTerminal(typeConsumer, null, false, false, getRule().ele001ParserRuleCallType());
+		return consumeNonTerminal(parensConsumer, null, false, false, getRule().ele00001ParserRuleCallParens());
 	}
 
 	protected boolean consumeRuleCall$12() throws Exception {
-		return consumeNonTerminal(ref2Consumer, null, false, false, getRule().ele01ParserRuleCallRef2());
+		return consumeNonTerminal(typeConsumer, null, false, false, getRule().ele0001ParserRuleCallType());
 	}
 
 	protected boolean consumeRuleCall$13() throws Exception {
-		return consumeNonTerminal(spareConsumer, null, false, false, getRule().ele1ParserRuleCallSpare());
+		return consumeNonTerminal(ref2Consumer, null, false, false, getRule().ele001ParserRuleCallRef2());
+	}
+
+	protected boolean consumeRuleCall$14() throws Exception {
+		return consumeNonTerminal(spareConsumer, null, false, false, getRule().ele01ParserRuleCallSpare());
+	}
+
+	protected boolean consumeRuleCall$15() throws Exception {
+		return consumeNonTerminal(booleanConsumer, null, false, false, getRule().ele1ParserRuleCallBoolean());
 	}
 
 	public TermElements getRule() {
@@ -108,6 +116,10 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 	
 	public void setAtomConsumer(SimpleReconstrTestLanguageAtomConsumer atomConsumer) {
 		this.atomConsumer = atomConsumer;
+	}
+	
+	public void setBooleanConsumer(SimpleReconstrTestLanguageBooleanConsumer booleanConsumer) {
+		this.booleanConsumer = booleanConsumer;
 	}
 	
 	public void setManyStringsConsumer(SimpleReconstrTestLanguageManyStringsConsumer manyStringsConsumer) {

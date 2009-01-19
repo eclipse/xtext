@@ -37,18 +37,21 @@
           <groups xsi:type="xtext:Alternatives">
             <groups xsi:type="xtext:Alternatives">
               <groups xsi:type="xtext:Alternatives">
-                <groups xsi:type="xtext:RuleCall" rule="//@rules.2"/>
-                <groups xsi:type="xtext:RuleCall" rule="//@rules.4"/>
+                <groups xsi:type="xtext:Alternatives">
+                  <groups xsi:type="xtext:RuleCall" rule="//@rules.2"/>
+                  <groups xsi:type="xtext:RuleCall" rule="//@rules.4"/>
+                </groups>
+                <groups xsi:type="xtext:RuleCall" rule="//@rules.5"/>
               </groups>
-              <groups xsi:type="xtext:RuleCall" rule="//@rules.5"/>
+              <groups xsi:type="xtext:RuleCall" rule="//@rules.3"/>
             </groups>
-            <groups xsi:type="xtext:RuleCall" rule="//@rules.3"/>
+            <groups xsi:type="xtext:RuleCall" rule="//@rules.6"/>
           </groups>
-          <groups xsi:type="xtext:RuleCall" rule="//@rules.6"/>
+          <groups xsi:type="xtext:RuleCall" rule="//@rules.7"/>
         </groups>
-        <groups xsi:type="xtext:RuleCall" rule="//@rules.7"/>
+        <groups xsi:type="xtext:RuleCall" rule="//@rules.8"/>
       </groups>
-      <groups xsi:type="xtext:RuleCall" rule="//@rules.8"/>
+      <groups xsi:type="xtext:RuleCall" rule="//@rules.9"/>
     </alternatives>
   </rules>
   <rules xsi:type="xtext:ParserRule" name="Atom">
@@ -190,6 +193,27 @@
             <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
           </terminal>
         </abstractTokens>
+      </abstractTokens>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="Boolean">
+    <type metamodel="//@metamodelDeclarations.0">
+      <type xsi:type="ecore:EClass" href="http://simple/rewrite/test#//Boolean"/>
+    </type>
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Keyword" value="#4"/>
+          <abstractTokens xsi:type="xtext:Assignment" cardinality="?" feature="bool" operator="?=">
+            <terminal xsi:type="xtext:Keyword" value="myoption"/>
+          </abstractTokens>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Keyword" value="kw"/>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Assignment" feature="value" operator="=">
+        <terminal xsi:type="xtext:RuleCall">
+          <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+        </terminal>
       </abstractTokens>
     </alternatives>
   </rules>

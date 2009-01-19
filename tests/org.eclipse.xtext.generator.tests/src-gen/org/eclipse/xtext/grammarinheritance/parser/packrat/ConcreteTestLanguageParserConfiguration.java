@@ -60,9 +60,9 @@ public class ConcreteTestLanguageParserConfiguration extends AbstractParserConfi
 
 		getInheritedParserRuleConsumer().setIdConsumer(getIdConsumer());
 
+		getConcreteParserRuleConsumer().setKeyword$7$Delimiter(ConcreteTestLanguageDelimiters.keyword$9$Delimiter);
 		getConcreteParserRuleConsumer().setKeyword$4$Delimiter(ConcreteTestLanguageDelimiters.keyword$6$Delimiter);
 		getConcreteParserRuleConsumer().setRuleCall$6$Delimiter(ConcreteTestLanguageDelimiters.ruleCall$8$Delimiter);
-		getConcreteParserRuleConsumer().setKeyword$7$Delimiter(ConcreteTestLanguageDelimiters.keyword$9$Delimiter);
 		getInheritedParserRuleConsumer().setRuleCall$4$Delimiter(ConcreteTestLanguageDelimiters.ruleCall$7$Delimiter);
 		getInheritedParserRuleConsumer().setKeyword$2$Delimiter(ConcreteTestLanguageDelimiters.keyword$6$Delimiter);
 		// TODO remove workaround

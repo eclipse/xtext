@@ -65,8 +65,8 @@ public class LexerTestLanguageParserConfiguration extends AbstractParserConfigur
 		getElementConsumer().setIdConsumer(getIdConsumer());
 		getElementConsumer().setStringConsumer(getStringConsumer());
 
-		getElementConsumer().setRuleCall$5$Delimiter(LexerTestLanguageDelimiters.ruleCall$9$Delimiter);
 		getElementConsumer().setRuleCall$3$Delimiter(LexerTestLanguageDelimiters.ruleCall$9$Delimiter);
+		getElementConsumer().setRuleCall$5$Delimiter(LexerTestLanguageDelimiters.ruleCall$9$Delimiter);
 		// TODO remove workaround
 		getStringConsumer().initFields(this);
 		// TODO remove workaround

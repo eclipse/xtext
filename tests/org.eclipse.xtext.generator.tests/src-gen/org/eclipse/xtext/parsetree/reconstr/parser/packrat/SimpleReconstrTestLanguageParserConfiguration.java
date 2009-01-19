@@ -23,6 +23,7 @@ import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleRecon
 import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageTypeConsumer;
 import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageRef2Consumer;
 import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageSpareConsumer;
+import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageBooleanConsumer;
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinINTConsumer;
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGConsumer;
@@ -44,6 +45,7 @@ public class SimpleReconstrTestLanguageParserConfiguration extends AbstractParse
     private SimpleReconstrTestLanguageTypeConsumer typeConsumer;
     private SimpleReconstrTestLanguageRef2Consumer ref2Consumer;
     private SimpleReconstrTestLanguageSpareConsumer spareConsumer;
+    private SimpleReconstrTestLanguageBooleanConsumer booleanConsumer;
 
 	public SimpleReconstrTestLanguageParserConfiguration(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil) {
@@ -86,6 +88,9 @@ public class SimpleReconstrTestLanguageParserConfiguration extends AbstractParse
 		spareConsumer = new SimpleReconstrTestLanguageSpareConsumer(
     		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
     	);
+		booleanConsumer = new SimpleReconstrTestLanguageBooleanConsumer(
+    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    	);
 	}
 	
 	public void createTerminalConsumers() {
@@ -96,6 +101,7 @@ public class SimpleReconstrTestLanguageParserConfiguration extends AbstractParse
 		getOpConsumer().setTermConsumer(getTermConsumer());
 
 		getTermConsumer().setAtomConsumer(getAtomConsumer());
+		getTermConsumer().setBooleanConsumer(getBooleanConsumer());
 		getTermConsumer().setManyStringsConsumer(getManyStringsConsumer());
 		getTermConsumer().setParensConsumer(getParensConsumer());
 		getTermConsumer().setRef2Consumer(getRef2Consumer());
@@ -117,29 +123,35 @@ public class SimpleReconstrTestLanguageParserConfiguration extends AbstractParse
 
 		getSpareConsumer().setIdConsumer(getIdConsumer());
 
-		getAtomConsumer().setRuleCall$2$Delimiter(SimpleReconstrTestLanguageDelimiters.ruleCall$28$Delimiter);
-		getParensConsumer().setKeyword$8$Delimiter(SimpleReconstrTestLanguageDelimiters.keyword$34$Delimiter);
-		getParensConsumer().setKeyword$6$Delimiter(SimpleReconstrTestLanguageDelimiters.keyword$34$Delimiter);
-		getParensConsumer().setKeyword$4$Delimiter(SimpleReconstrTestLanguageDelimiters.keyword$34$Delimiter);
-		getTwoNumbersConsumer().setRuleCall$6$Delimiter(SimpleReconstrTestLanguageDelimiters.ruleCall$44$Delimiter);
-		getTwoNumbersConsumer().setRuleCall$10$Delimiter(SimpleReconstrTestLanguageDelimiters.ruleCall$44$Delimiter);
-		getTwoNumbersConsumer().setRuleCall$4$Delimiter(SimpleReconstrTestLanguageDelimiters.ruleCall$44$Delimiter);
-		getTwoNumbersConsumer().setKeyword$8$Delimiter(SimpleReconstrTestLanguageDelimiters.keyword$34$Delimiter);
-		getManyStringsConsumer().setRuleCall$7$Delimiter(SimpleReconstrTestLanguageDelimiters.ruleCall$44$Delimiter);
-		getManyStringsConsumer().setKeyword$3$Delimiter(SimpleReconstrTestLanguageDelimiters.keyword$34$Delimiter);
-		getManyStringsConsumer().setRuleCall$5$Delimiter(SimpleReconstrTestLanguageDelimiters.ruleCall$44$Delimiter);
-		getTypeConsumer().setCrossReference$9$Delimiter(SimpleReconstrTestLanguageDelimiters.ruleCall$28$Delimiter);
-		getTypeConsumer().setKeyword$7$Delimiter(SimpleReconstrTestLanguageDelimiters.keyword$65$Delimiter);
-		getTypeConsumer().setKeyword$4$Delimiter(SimpleReconstrTestLanguageDelimiters.keyword$65$Delimiter);
-		getTypeConsumer().setRuleCall$6$Delimiter(SimpleReconstrTestLanguageDelimiters.ruleCall$28$Delimiter);
-		getRef2Consumer().setKeyword$8$Delimiter(SimpleReconstrTestLanguageDelimiters.keyword$65$Delimiter);
-		getRef2Consumer().setRuleCall$7$Delimiter(SimpleReconstrTestLanguageDelimiters.ruleCall$44$Delimiter);
-		getRef2Consumer().setKeyword$6$Delimiter(SimpleReconstrTestLanguageDelimiters.keyword$65$Delimiter);
-		getRef2Consumer().setKeyword$2$Delimiter(SimpleReconstrTestLanguageDelimiters.keyword$34$Delimiter);
-		getSpareConsumer().setKeyword$3$Delimiter(SimpleReconstrTestLanguageDelimiters.keyword$34$Delimiter);
-		getSpareConsumer().setRuleCall$5$Delimiter(SimpleReconstrTestLanguageDelimiters.ruleCall$28$Delimiter);
-		getSpareConsumer().setKeyword$7$Delimiter(SimpleReconstrTestLanguageDelimiters.keyword$34$Delimiter);
-		getSpareConsumer().setRuleCall$9$Delimiter(SimpleReconstrTestLanguageDelimiters.ruleCall$28$Delimiter);
+		getBooleanConsumer().setIdConsumer(getIdConsumer());
+
+		getAtomConsumer().setRuleCall$2$Delimiter(SimpleReconstrTestLanguageDelimiters.ruleCall$30$Delimiter);
+		getParensConsumer().setKeyword$6$Delimiter(SimpleReconstrTestLanguageDelimiters.keyword$36$Delimiter);
+		getParensConsumer().setKeyword$8$Delimiter(SimpleReconstrTestLanguageDelimiters.keyword$36$Delimiter);
+		getParensConsumer().setKeyword$4$Delimiter(SimpleReconstrTestLanguageDelimiters.keyword$36$Delimiter);
+		getTwoNumbersConsumer().setKeyword$8$Delimiter(SimpleReconstrTestLanguageDelimiters.keyword$36$Delimiter);
+		getTwoNumbersConsumer().setRuleCall$4$Delimiter(SimpleReconstrTestLanguageDelimiters.ruleCall$46$Delimiter);
+		getTwoNumbersConsumer().setRuleCall$6$Delimiter(SimpleReconstrTestLanguageDelimiters.ruleCall$46$Delimiter);
+		getTwoNumbersConsumer().setRuleCall$10$Delimiter(SimpleReconstrTestLanguageDelimiters.ruleCall$46$Delimiter);
+		getManyStringsConsumer().setKeyword$3$Delimiter(SimpleReconstrTestLanguageDelimiters.keyword$36$Delimiter);
+		getManyStringsConsumer().setRuleCall$7$Delimiter(SimpleReconstrTestLanguageDelimiters.ruleCall$46$Delimiter);
+		getManyStringsConsumer().setRuleCall$5$Delimiter(SimpleReconstrTestLanguageDelimiters.ruleCall$46$Delimiter);
+		getTypeConsumer().setRuleCall$6$Delimiter(SimpleReconstrTestLanguageDelimiters.ruleCall$30$Delimiter);
+		getTypeConsumer().setKeyword$7$Delimiter(SimpleReconstrTestLanguageDelimiters.keyword$67$Delimiter);
+		getTypeConsumer().setKeyword$4$Delimiter(SimpleReconstrTestLanguageDelimiters.keyword$67$Delimiter);
+		getTypeConsumer().setCrossReference$9$Delimiter(SimpleReconstrTestLanguageDelimiters.ruleCall$30$Delimiter);
+		getRef2Consumer().setKeyword$6$Delimiter(SimpleReconstrTestLanguageDelimiters.keyword$67$Delimiter);
+		getRef2Consumer().setKeyword$8$Delimiter(SimpleReconstrTestLanguageDelimiters.keyword$67$Delimiter);
+		getRef2Consumer().setKeyword$2$Delimiter(SimpleReconstrTestLanguageDelimiters.keyword$36$Delimiter);
+		getRef2Consumer().setRuleCall$7$Delimiter(SimpleReconstrTestLanguageDelimiters.ruleCall$46$Delimiter);
+		getSpareConsumer().setRuleCall$5$Delimiter(SimpleReconstrTestLanguageDelimiters.ruleCall$30$Delimiter);
+		getSpareConsumer().setKeyword$3$Delimiter(SimpleReconstrTestLanguageDelimiters.keyword$36$Delimiter);
+		getSpareConsumer().setKeyword$7$Delimiter(SimpleReconstrTestLanguageDelimiters.keyword$36$Delimiter);
+		getSpareConsumer().setRuleCall$9$Delimiter(SimpleReconstrTestLanguageDelimiters.ruleCall$30$Delimiter);
+		getBooleanConsumer().setKeyword$6$Delimiter(SimpleReconstrTestLanguageDelimiters.keyword$67$Delimiter);
+		getBooleanConsumer().setKeyword$4$Delimiter(SimpleReconstrTestLanguageDelimiters.keyword$36$Delimiter);
+		getBooleanConsumer().setRuleCall$9$Delimiter(SimpleReconstrTestLanguageDelimiters.ruleCall$30$Delimiter);
+		getBooleanConsumer().setKeyword$7$Delimiter(SimpleReconstrTestLanguageDelimiters.keyword$67$Delimiter);
 		// TODO remove workaround
 		getIdConsumer().initFields(this);
 		// TODO remove workaround
@@ -195,6 +207,10 @@ public class SimpleReconstrTestLanguageParserConfiguration extends AbstractParse
 
     public SimpleReconstrTestLanguageSpareConsumer getSpareConsumer() {
     	return spareConsumer;
+    }
+
+    public SimpleReconstrTestLanguageBooleanConsumer getBooleanConsumer() {
+    	return booleanConsumer;
     }
 
     public XtextBuiltinIDConsumer getIdConsumer() {

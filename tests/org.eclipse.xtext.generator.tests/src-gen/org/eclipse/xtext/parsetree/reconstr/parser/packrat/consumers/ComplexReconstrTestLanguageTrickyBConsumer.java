@@ -27,22 +27,22 @@ public final class ComplexReconstrTestLanguageTrickyBConsumer extends NonTermina
 	private XtextBuiltinIDConsumer idConsumer;
 	private XtextBuiltinINTConsumer intConsumer;
 
-	private ICharacterClass keyword$3$Delimiter;
-	
 	private ISequenceMatcher ruleCall$6$Delimiter;
 	
 	private ISequenceMatcher ruleCall$8$Delimiter;
 	
 	private ISequenceMatcher ruleCall$10$Delimiter;
 	
+	private ICharacterClass keyword$3$Delimiter;
+	
 	public ComplexReconstrTestLanguageTrickyBConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
-		keyword$3$Delimiter = ICharacterClass.Factory.nullClass();
 		ruleCall$6$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		ruleCall$8$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		ruleCall$10$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		keyword$3$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -132,14 +132,6 @@ public final class ComplexReconstrTestLanguageTrickyBConsumer extends NonTermina
 		this.intConsumer = intConsumer;
 	}
 	
-	public ICharacterClass getKeyword$3$Delimiter() {
-		return keyword$3$Delimiter;
-	}
-	
-	public void setKeyword$3$Delimiter(ICharacterClass characterClass) {
-		keyword$3$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
 	public ISequenceMatcher getRuleCall$6$Delimiter() {
 		return ruleCall$6$Delimiter;
 	}
@@ -162,6 +154,14 @@ public final class ComplexReconstrTestLanguageTrickyBConsumer extends NonTermina
 	
 	public void setRuleCall$10$Delimiter(ISequenceMatcher matcher) {
 		ruleCall$10$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	}
+	
+	public ICharacterClass getKeyword$3$Delimiter() {
+		return keyword$3$Delimiter;
+	}
+	
+	public void setKeyword$3$Delimiter(ICharacterClass characterClass) {
+		keyword$3$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

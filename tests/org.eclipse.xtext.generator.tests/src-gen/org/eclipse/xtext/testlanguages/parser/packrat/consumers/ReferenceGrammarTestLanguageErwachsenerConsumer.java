@@ -27,25 +27,25 @@ public final class ReferenceGrammarTestLanguageErwachsenerConsumer extends NonTe
 	private XtextBuiltinIDConsumer idConsumer;
 	private XtextBuiltinINTConsumer intConsumer;
 
+	private ICharacterClass keyword$6$Delimiter;
+	
 	private ICharacterClass keyword$5$Delimiter;
 	
-	private ICharacterClass keyword$6$Delimiter;
+	private ISequenceMatcher ruleCall$8$Delimiter;
 	
 	private ICharacterClass keyword$11$Delimiter;
 	
 	private ISequenceMatcher ruleCall$10$Delimiter;
 	
-	private ISequenceMatcher ruleCall$8$Delimiter;
-	
 	public ReferenceGrammarTestLanguageErwachsenerConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
-		keyword$5$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$6$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$5$Delimiter = ICharacterClass.Factory.nullClass();
+		ruleCall$8$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		keyword$11$Delimiter = ICharacterClass.Factory.nullClass();
 		ruleCall$10$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-		ruleCall$8$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -122,6 +122,14 @@ public final class ReferenceGrammarTestLanguageErwachsenerConsumer extends NonTe
 		this.intConsumer = intConsumer;
 	}
 	
+	public ICharacterClass getKeyword$6$Delimiter() {
+		return keyword$6$Delimiter;
+	}
+	
+	public void setKeyword$6$Delimiter(ICharacterClass characterClass) {
+		keyword$6$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
 	public ICharacterClass getKeyword$5$Delimiter() {
 		return keyword$5$Delimiter;
 	}
@@ -130,12 +138,12 @@ public final class ReferenceGrammarTestLanguageErwachsenerConsumer extends NonTe
 		keyword$5$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
-	public ICharacterClass getKeyword$6$Delimiter() {
-		return keyword$6$Delimiter;
+	public ISequenceMatcher getRuleCall$8$Delimiter() {
+		return ruleCall$8$Delimiter;
 	}
 	
-	public void setKeyword$6$Delimiter(ICharacterClass characterClass) {
-		keyword$6$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setRuleCall$8$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$8$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	public ICharacterClass getKeyword$11$Delimiter() {
@@ -152,14 +160,6 @@ public final class ReferenceGrammarTestLanguageErwachsenerConsumer extends NonTe
 	
 	public void setRuleCall$10$Delimiter(ISequenceMatcher matcher) {
 		ruleCall$10$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
-	}
-	
-	public ISequenceMatcher getRuleCall$8$Delimiter() {
-		return ruleCall$8$Delimiter;
-	}
-	
-	public void setRuleCall$8$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$8$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 }

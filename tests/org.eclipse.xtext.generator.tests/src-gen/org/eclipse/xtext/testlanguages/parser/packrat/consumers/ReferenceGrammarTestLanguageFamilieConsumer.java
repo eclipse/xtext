@@ -27,43 +27,43 @@ public final class ReferenceGrammarTestLanguageFamilieConsumer extends NonTermin
 	private XtextBuiltinIDConsumer idConsumer;
 	private XtextBuiltinSTRINGConsumer stringConsumer;
 
-	private ISequenceMatcher crossReference$23$Delimiter;
-	
-	private ICharacterClass keyword$8$Delimiter;
-	
-	private ISequenceMatcher crossReference$17$Delimiter;
-	
-	private ISequenceMatcher crossReference$20$Delimiter;
-	
-	private ICharacterClass keyword$9$Delimiter;
+	private ISequenceMatcher crossReference$28$Delimiter;
 	
 	private ISequenceMatcher ruleCall$14$Delimiter;
 	
-	private ICharacterClass keyword$26$Delimiter;
+	private ISequenceMatcher crossReference$23$Delimiter;
 	
-	private ICharacterClass keyword$13$Delimiter;
+	private ISequenceMatcher crossReference$20$Delimiter;
+	
+	private ISequenceMatcher crossReference$17$Delimiter;
 	
 	private ISequenceMatcher ruleCall$15$Delimiter;
 	
+	private ICharacterClass keyword$8$Delimiter;
+	
 	private ICharacterClass keyword$30$Delimiter;
 	
-	private ISequenceMatcher crossReference$28$Delimiter;
+	private ICharacterClass keyword$9$Delimiter;
+	
+	private ICharacterClass keyword$13$Delimiter;
+	
+	private ICharacterClass keyword$26$Delimiter;
 	
 	public ReferenceGrammarTestLanguageFamilieConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
-		crossReference$23$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
-		crossReference$17$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-		crossReference$20$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-		keyword$9$Delimiter = ICharacterClass.Factory.nullClass();
-		ruleCall$14$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-		keyword$26$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$13$Delimiter = ICharacterClass.Factory.nullClass();
-		ruleCall$15$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-		keyword$30$Delimiter = ICharacterClass.Factory.nullClass();
 		crossReference$28$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		ruleCall$14$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		crossReference$23$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		crossReference$20$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		crossReference$17$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		ruleCall$15$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$30$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$9$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$13$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$26$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -196,44 +196,12 @@ public final class ReferenceGrammarTestLanguageFamilieConsumer extends NonTermin
 		this.stringConsumer = stringConsumer;
 	}
 	
-	public ISequenceMatcher getCrossReference$23$Delimiter() {
-		return crossReference$23$Delimiter;
+	public ISequenceMatcher getCrossReference$28$Delimiter() {
+		return crossReference$28$Delimiter;
 	}
 	
-	public void setCrossReference$23$Delimiter(ISequenceMatcher matcher) {
-		crossReference$23$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
-	}
-	
-	public ICharacterClass getKeyword$8$Delimiter() {
-		return keyword$8$Delimiter;
-	}
-	
-	public void setKeyword$8$Delimiter(ICharacterClass characterClass) {
-		keyword$8$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
-	public ISequenceMatcher getCrossReference$17$Delimiter() {
-		return crossReference$17$Delimiter;
-	}
-	
-	public void setCrossReference$17$Delimiter(ISequenceMatcher matcher) {
-		crossReference$17$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
-	}
-	
-	public ISequenceMatcher getCrossReference$20$Delimiter() {
-		return crossReference$20$Delimiter;
-	}
-	
-	public void setCrossReference$20$Delimiter(ISequenceMatcher matcher) {
-		crossReference$20$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
-	}
-	
-	public ICharacterClass getKeyword$9$Delimiter() {
-		return keyword$9$Delimiter;
-	}
-	
-	public void setKeyword$9$Delimiter(ICharacterClass characterClass) {
-		keyword$9$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setCrossReference$28$Delimiter(ISequenceMatcher matcher) {
+		crossReference$28$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	public ISequenceMatcher getRuleCall$14$Delimiter() {
@@ -244,20 +212,28 @@ public final class ReferenceGrammarTestLanguageFamilieConsumer extends NonTermin
 		ruleCall$14$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
-	public ICharacterClass getKeyword$26$Delimiter() {
-		return keyword$26$Delimiter;
+	public ISequenceMatcher getCrossReference$23$Delimiter() {
+		return crossReference$23$Delimiter;
 	}
 	
-	public void setKeyword$26$Delimiter(ICharacterClass characterClass) {
-		keyword$26$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setCrossReference$23$Delimiter(ISequenceMatcher matcher) {
+		crossReference$23$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
-	public ICharacterClass getKeyword$13$Delimiter() {
-		return keyword$13$Delimiter;
+	public ISequenceMatcher getCrossReference$20$Delimiter() {
+		return crossReference$20$Delimiter;
 	}
 	
-	public void setKeyword$13$Delimiter(ICharacterClass characterClass) {
-		keyword$13$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setCrossReference$20$Delimiter(ISequenceMatcher matcher) {
+		crossReference$20$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	}
+	
+	public ISequenceMatcher getCrossReference$17$Delimiter() {
+		return crossReference$17$Delimiter;
+	}
+	
+	public void setCrossReference$17$Delimiter(ISequenceMatcher matcher) {
+		crossReference$17$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	public ISequenceMatcher getRuleCall$15$Delimiter() {
@@ -268,6 +244,14 @@ public final class ReferenceGrammarTestLanguageFamilieConsumer extends NonTermin
 		ruleCall$15$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
+	public ICharacterClass getKeyword$8$Delimiter() {
+		return keyword$8$Delimiter;
+	}
+	
+	public void setKeyword$8$Delimiter(ICharacterClass characterClass) {
+		keyword$8$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
 	public ICharacterClass getKeyword$30$Delimiter() {
 		return keyword$30$Delimiter;
 	}
@@ -276,12 +260,28 @@ public final class ReferenceGrammarTestLanguageFamilieConsumer extends NonTermin
 		keyword$30$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
-	public ISequenceMatcher getCrossReference$28$Delimiter() {
-		return crossReference$28$Delimiter;
+	public ICharacterClass getKeyword$9$Delimiter() {
+		return keyword$9$Delimiter;
 	}
 	
-	public void setCrossReference$28$Delimiter(ISequenceMatcher matcher) {
-		crossReference$28$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	public void setKeyword$9$Delimiter(ICharacterClass characterClass) {
+		keyword$9$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$13$Delimiter() {
+		return keyword$13$Delimiter;
+	}
+	
+	public void setKeyword$13$Delimiter(ICharacterClass characterClass) {
+		keyword$13$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$26$Delimiter() {
+		return keyword$26$Delimiter;
+	}
+	
+	public void setKeyword$26$Delimiter(ICharacterClass characterClass) {
+		keyword$26$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

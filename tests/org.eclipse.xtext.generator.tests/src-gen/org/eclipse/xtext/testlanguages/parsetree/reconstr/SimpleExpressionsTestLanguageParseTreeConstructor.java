@@ -308,16 +308,20 @@ protected class Addition_1_0_1_Assignment_operator extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("operator",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("operator");
+
 		if("+".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
 			element = SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prAddition().ele10100KeywordPlusSign();
 			return new Solution(obj);
 		}
+
+
 		if("-".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
 			element = SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prAddition().ele10101KeywordHyphenMinus();
 			return new Solution(obj);
 		}
+
 		return null;
 	}
 }
@@ -502,16 +506,20 @@ protected class Multiplication_1_0_1_Assignment_operator extends AssignmentToken
 	protected Solution createSolution() {
 		if((value = current.getConsumable("operator",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("operator");
+
 		if("*".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
 			element = SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prMultiplication().ele10100KeywordAsterisk();
 			return new Solution(obj);
 		}
+
+
 		if("/".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
 			element = SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prMultiplication().ele10101KeywordSolidus();
 			return new Solution(obj);
 		}
+
 		return null;
 	}
 }

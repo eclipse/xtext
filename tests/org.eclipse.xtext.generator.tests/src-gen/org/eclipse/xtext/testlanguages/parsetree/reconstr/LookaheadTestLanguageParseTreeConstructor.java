@@ -239,11 +239,13 @@ protected class LookAhead0_1_Assignment_x extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("x",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("x");
+
 		if("a".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
 			element = LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead0().ele10KeywordA();
 			return new Solution(obj);
 		}
+
 		return null;
 	}
 }
@@ -401,11 +403,13 @@ protected class LookAhead1_0_1_Assignment_x extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("x",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("x");
+
 		if("b".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
 			element = LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead1().ele010KeywordB();
 			return new Solution(obj);
 		}
+
 		return null;
 	}
 }
@@ -425,11 +429,13 @@ protected class LookAhead1_1_Assignment_x extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("x",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("x");
+
 		if("d".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
 			element = LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead1().ele10KeywordD();
 			return new Solution(obj);
 		}
+
 		return null;
 	}
 }
@@ -508,11 +514,13 @@ protected class LookAhead2_0_0_Assignment_z extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("z",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("z");
+
 		if("foo".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
 			element = LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead2().ele000KeywordFoo();
 			return new Solution(obj);
 		}
+
 		return null;
 	}
 }
@@ -531,11 +539,13 @@ protected class LookAhead2_0_1_Assignment_z extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("z",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("z");
+
 		if("bar".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
 			element = LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead2().ele010KeywordBar();
 			return new Solution(obj);
 		}
+
 		return null;
 	}
 }
@@ -687,11 +697,13 @@ protected class LookAhead3_0_1_Assignment_x extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("x",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("x");
+
 		if("b".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
 			element = LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead3().ele010KeywordB();
 			return new Solution(obj);
 		}
+
 		return null;
 	}
 }
@@ -774,11 +786,13 @@ protected class LookAhead4_0_Assignment_x extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("x",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("x");
+
 		if("c".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
 			element = LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead4().ele00KeywordC();
 			return new Solution(obj);
 		}
+
 		return null;
 	}
 }
@@ -797,11 +811,13 @@ protected class LookAhead4_1_Assignment_x extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("x",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("x");
+
 		if("d".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
 			element = LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead4().ele10KeywordD();
 			return new Solution(obj);
 		}
+
 		return null;
 	}
 }

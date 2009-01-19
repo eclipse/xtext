@@ -93,19 +93,19 @@ public class LookaheadTestLanguageParserConfiguration extends AbstractParserConf
 
 		getLookAhead3Consumer().setLookAhead4Consumer(getLookAhead4Consumer());
 
-		getLookAhead0Consumer().setKeyword$4$Delimiter(LookaheadTestLanguageDelimiters.keyword$15$Delimiter);
 		getLookAhead0Consumer().setKeyword$2$Delimiter(LookaheadTestLanguageDelimiters.keyword$15$Delimiter);
+		getLookAhead0Consumer().setKeyword$4$Delimiter(LookaheadTestLanguageDelimiters.keyword$15$Delimiter);
 		getLookAhead1Consumer().setKeyword$10$Delimiter(LookaheadTestLanguageDelimiters.keyword$15$Delimiter);
-		getLookAhead1Consumer().setKeyword$4$Delimiter(LookaheadTestLanguageDelimiters.keyword$15$Delimiter);
 		getLookAhead1Consumer().setKeyword$8$Delimiter(LookaheadTestLanguageDelimiters.keyword$15$Delimiter);
-		getLookAhead2Consumer().setKeyword$6$Delimiter(LookaheadTestLanguageDelimiters.keyword$15$Delimiter);
-		getLookAhead2Consumer().setKeyword$4$Delimiter(LookaheadTestLanguageDelimiters.keyword$15$Delimiter);
+		getLookAhead1Consumer().setKeyword$4$Delimiter(LookaheadTestLanguageDelimiters.keyword$15$Delimiter);
 		getLookAhead2Consumer().setKeyword$7$Delimiter(LookaheadTestLanguageDelimiters.keyword$15$Delimiter);
-		getLookAhead3Consumer().setKeyword$5$Delimiter(LookaheadTestLanguageDelimiters.keyword$15$Delimiter);
+		getLookAhead2Consumer().setKeyword$4$Delimiter(LookaheadTestLanguageDelimiters.keyword$15$Delimiter);
+		getLookAhead2Consumer().setKeyword$6$Delimiter(LookaheadTestLanguageDelimiters.keyword$15$Delimiter);
 		getLookAhead3Consumer().setKeyword$7$Delimiter(LookaheadTestLanguageDelimiters.keyword$15$Delimiter);
+		getLookAhead3Consumer().setKeyword$5$Delimiter(LookaheadTestLanguageDelimiters.keyword$15$Delimiter);
 		getLookAhead3Consumer().setKeyword$4$Delimiter(LookaheadTestLanguageDelimiters.keyword$15$Delimiter);
-		getLookAhead4Consumer().setKeyword$3$Delimiter(LookaheadTestLanguageDelimiters.keyword$15$Delimiter);
 		getLookAhead4Consumer().setKeyword$5$Delimiter(LookaheadTestLanguageDelimiters.keyword$15$Delimiter);
+		getLookAhead4Consumer().setKeyword$3$Delimiter(LookaheadTestLanguageDelimiters.keyword$15$Delimiter);
 		// TODO remove workaround
 		getIdConsumer().initFields(this);
 		// TODO remove workaround

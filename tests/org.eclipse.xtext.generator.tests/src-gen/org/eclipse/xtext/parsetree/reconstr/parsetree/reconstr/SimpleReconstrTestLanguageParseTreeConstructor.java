@@ -27,6 +27,7 @@ public class SimpleReconstrTestLanguageParseTreeConstructor extends AbstractPars
 		if(inst.isInstanceOf("Type") && (s = new Type_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		if(inst.isInstanceOf("Ref2") && (s = new Ref2_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		if(inst.isInstanceOf("Spare") && (s = new Spare_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("Boolean") && (s = new Boolean_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
@@ -170,12 +171,12 @@ protected class Op_1_1_Assignment_values extends AssignmentToken  {
 
 /************ begin Rule Term ****************
  *
- * Term returns Expression : Atom | TwoNumbers | ManyStrings | Parens | Type | Ref2 | Spare ;
+ * Term returns Expression : Atom | TwoNumbers | ManyStrings | Parens | Type | Ref2 | Spare | Boolean ;
  *
  **/
 
 
-// Atom | TwoNumbers | ManyStrings | Parens | Type | Ref2 | Spare
+// Atom | TwoNumbers | ManyStrings | Parens | Type | Ref2 | Spare | Boolean
 protected class Term_Alternatives extends AlternativesToken {
 
 	public Term_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -187,7 +188,7 @@ protected class Term_Alternatives extends AlternativesToken {
 	}
 	
 	protected Solution createSolution() {
-		AbstractToken t = (first) ? new Term_1_RuleCall_Spare(current, this) : new Term_0_Alternatives(current, this);
+		AbstractToken t = (first) ? new Term_1_RuleCall_Boolean(current, this) : new Term_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
 		if(s == null && activateNextSolution()) s = createSolution();
 		if(s == null) return null;
@@ -196,7 +197,7 @@ protected class Term_Alternatives extends AlternativesToken {
 	}
 }
 
-// Atom | TwoNumbers | ManyStrings | Parens | Type | Ref2
+// Atom | TwoNumbers | ManyStrings | Parens | Type | Ref2 | Spare
 protected class Term_0_Alternatives extends AlternativesToken {
 
 	public Term_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -208,7 +209,7 @@ protected class Term_0_Alternatives extends AlternativesToken {
 	}
 	
 	protected Solution createSolution() {
-		AbstractToken t = (first) ? new Term_0_1_RuleCall_Ref2(current, this) : new Term_0_0_Alternatives(current, this);
+		AbstractToken t = (first) ? new Term_0_1_RuleCall_Spare(current, this) : new Term_0_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
 		if(s == null && activateNextSolution()) s = createSolution();
 		if(s == null) return null;
@@ -217,7 +218,7 @@ protected class Term_0_Alternatives extends AlternativesToken {
 	}
 }
 
-// Atom | TwoNumbers | ManyStrings | Parens | Type
+// Atom | TwoNumbers | ManyStrings | Parens | Type | Ref2
 protected class Term_0_0_Alternatives extends AlternativesToken {
 
 	public Term_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -229,7 +230,7 @@ protected class Term_0_0_Alternatives extends AlternativesToken {
 	}
 	
 	protected Solution createSolution() {
-		AbstractToken t = (first) ? new Term_0_0_1_RuleCall_Type(current, this) : new Term_0_0_0_Alternatives(current, this);
+		AbstractToken t = (first) ? new Term_0_0_1_RuleCall_Ref2(current, this) : new Term_0_0_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
 		if(s == null && activateNextSolution()) s = createSolution();
 		if(s == null) return null;
@@ -238,7 +239,7 @@ protected class Term_0_0_Alternatives extends AlternativesToken {
 	}
 }
 
-// Atom | TwoNumbers | ManyStrings | Parens
+// Atom | TwoNumbers | ManyStrings | Parens | Type
 protected class Term_0_0_0_Alternatives extends AlternativesToken {
 
 	public Term_0_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -250,7 +251,7 @@ protected class Term_0_0_0_Alternatives extends AlternativesToken {
 	}
 	
 	protected Solution createSolution() {
-		AbstractToken t = (first) ? new Term_0_0_0_1_RuleCall_Parens(current, this) : new Term_0_0_0_0_Alternatives(current, this);
+		AbstractToken t = (first) ? new Term_0_0_0_1_RuleCall_Type(current, this) : new Term_0_0_0_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
 		if(s == null && activateNextSolution()) s = createSolution();
 		if(s == null) return null;
@@ -259,7 +260,7 @@ protected class Term_0_0_0_Alternatives extends AlternativesToken {
 	}
 }
 
-// Atom | TwoNumbers | ManyStrings
+// Atom | TwoNumbers | ManyStrings | Parens
 protected class Term_0_0_0_0_Alternatives extends AlternativesToken {
 
 	public Term_0_0_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -271,7 +272,7 @@ protected class Term_0_0_0_0_Alternatives extends AlternativesToken {
 	}
 	
 	protected Solution createSolution() {
-		AbstractToken t = (first) ? new Term_0_0_0_0_1_RuleCall_ManyStrings(current, this) : new Term_0_0_0_0_0_Alternatives(current, this);
+		AbstractToken t = (first) ? new Term_0_0_0_0_1_RuleCall_Parens(current, this) : new Term_0_0_0_0_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
 		if(s == null && activateNextSolution()) s = createSolution();
 		if(s == null) return null;
@@ -280,7 +281,7 @@ protected class Term_0_0_0_0_Alternatives extends AlternativesToken {
 	}
 }
 
-// Atom | TwoNumbers
+// Atom | TwoNumbers | ManyStrings
 protected class Term_0_0_0_0_0_Alternatives extends AlternativesToken {
 
 	public Term_0_0_0_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -292,7 +293,28 @@ protected class Term_0_0_0_0_0_Alternatives extends AlternativesToken {
 	}
 	
 	protected Solution createSolution() {
-		AbstractToken t = (first) ? new Term_0_0_0_0_0_1_RuleCall_TwoNumbers(current, this) : new Term_0_0_0_0_0_0_RuleCall_Atom(current, this);
+		AbstractToken t = (first) ? new Term_0_0_0_0_0_1_RuleCall_ManyStrings(current, this) : new Term_0_0_0_0_0_0_Alternatives(current, this);
+		Solution s = t.firstSolution();
+		if(s == null && activateNextSolution()) s = createSolution();
+		if(s == null) return null;
+		last = s.getPredecessor();
+		return s; 
+	}
+}
+
+// Atom | TwoNumbers
+protected class Term_0_0_0_0_0_0_Alternatives extends AlternativesToken {
+
+	public Term_0_0_0_0_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Alternatives getGrammarElement() {
+		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prTerm().ele000000Alternatives();
+	}
+	
+	protected Solution createSolution() {
+		AbstractToken t = (first) ? new Term_0_0_0_0_0_0_1_RuleCall_TwoNumbers(current, this) : new Term_0_0_0_0_0_0_0_RuleCall_Atom(current, this);
 		Solution s = t.firstSolution();
 		if(s == null && activateNextSolution()) s = createSolution();
 		if(s == null) return null;
@@ -302,14 +324,14 @@ protected class Term_0_0_0_0_0_Alternatives extends AlternativesToken {
 }
 
 // Atom
-protected class Term_0_0_0_0_0_0_RuleCall_Atom extends RuleCallToken {
+protected class Term_0_0_0_0_0_0_0_RuleCall_Atom extends RuleCallToken {
 	
-	public Term_0_0_0_0_0_0_RuleCall_Atom(IInstanceDescription curr, AbstractToken pred) {
+	public Term_0_0_0_0_0_0_0_RuleCall_Atom(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public RuleCall getGrammarElement() {
-		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prTerm().ele000000ParserRuleCallAtom();
+		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prTerm().ele0000000ParserRuleCallAtom();
 	}
 	
 	protected Solution createSolution() {
@@ -320,14 +342,14 @@ protected class Term_0_0_0_0_0_0_RuleCall_Atom extends RuleCallToken {
 }
 
 // TwoNumbers
-protected class Term_0_0_0_0_0_1_RuleCall_TwoNumbers extends RuleCallToken {
+protected class Term_0_0_0_0_0_0_1_RuleCall_TwoNumbers extends RuleCallToken {
 	
-	public Term_0_0_0_0_0_1_RuleCall_TwoNumbers(IInstanceDescription curr, AbstractToken pred) {
+	public Term_0_0_0_0_0_0_1_RuleCall_TwoNumbers(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public RuleCall getGrammarElement() {
-		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prTerm().ele000001ParserRuleCallTwoNumbers();
+		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prTerm().ele0000001ParserRuleCallTwoNumbers();
 	}
 	
 	protected Solution createSolution() {
@@ -339,14 +361,14 @@ protected class Term_0_0_0_0_0_1_RuleCall_TwoNumbers extends RuleCallToken {
 
 
 // ManyStrings
-protected class Term_0_0_0_0_1_RuleCall_ManyStrings extends RuleCallToken {
+protected class Term_0_0_0_0_0_1_RuleCall_ManyStrings extends RuleCallToken {
 	
-	public Term_0_0_0_0_1_RuleCall_ManyStrings(IInstanceDescription curr, AbstractToken pred) {
+	public Term_0_0_0_0_0_1_RuleCall_ManyStrings(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public RuleCall getGrammarElement() {
-		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prTerm().ele00001ParserRuleCallManyStrings();
+		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prTerm().ele000001ParserRuleCallManyStrings();
 	}
 	
 	protected Solution createSolution() {
@@ -358,14 +380,14 @@ protected class Term_0_0_0_0_1_RuleCall_ManyStrings extends RuleCallToken {
 
 
 // Parens
-protected class Term_0_0_0_1_RuleCall_Parens extends RuleCallToken {
+protected class Term_0_0_0_0_1_RuleCall_Parens extends RuleCallToken {
 	
-	public Term_0_0_0_1_RuleCall_Parens(IInstanceDescription curr, AbstractToken pred) {
+	public Term_0_0_0_0_1_RuleCall_Parens(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public RuleCall getGrammarElement() {
-		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prTerm().ele0001ParserRuleCallParens();
+		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prTerm().ele00001ParserRuleCallParens();
 	}
 	
 	protected Solution createSolution() {
@@ -377,14 +399,14 @@ protected class Term_0_0_0_1_RuleCall_Parens extends RuleCallToken {
 
 
 // Type
-protected class Term_0_0_1_RuleCall_Type extends RuleCallToken {
+protected class Term_0_0_0_1_RuleCall_Type extends RuleCallToken {
 	
-	public Term_0_0_1_RuleCall_Type(IInstanceDescription curr, AbstractToken pred) {
+	public Term_0_0_0_1_RuleCall_Type(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public RuleCall getGrammarElement() {
-		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prTerm().ele001ParserRuleCallType();
+		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prTerm().ele0001ParserRuleCallType();
 	}
 	
 	protected Solution createSolution() {
@@ -396,14 +418,14 @@ protected class Term_0_0_1_RuleCall_Type extends RuleCallToken {
 
 
 // Ref2
-protected class Term_0_1_RuleCall_Ref2 extends RuleCallToken {
+protected class Term_0_0_1_RuleCall_Ref2 extends RuleCallToken {
 	
-	public Term_0_1_RuleCall_Ref2(IInstanceDescription curr, AbstractToken pred) {
+	public Term_0_0_1_RuleCall_Ref2(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public RuleCall getGrammarElement() {
-		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prTerm().ele01ParserRuleCallRef2();
+		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prTerm().ele001ParserRuleCallRef2();
 	}
 	
 	protected Solution createSolution() {
@@ -415,20 +437,39 @@ protected class Term_0_1_RuleCall_Ref2 extends RuleCallToken {
 
 
 // Spare
-protected class Term_1_RuleCall_Spare extends RuleCallToken {
+protected class Term_0_1_RuleCall_Spare extends RuleCallToken {
 	
-	public Term_1_RuleCall_Spare(IInstanceDescription curr, AbstractToken pred) {
+	public Term_0_1_RuleCall_Spare(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public RuleCall getGrammarElement() {
-		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prTerm().ele1ParserRuleCallSpare();
+		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prTerm().ele01ParserRuleCallSpare();
 	}
 	
 	protected Solution createSolution() {
 		if(checkForRecursion(Spare_Group.class, current)) return null;
 		if(!current.isInstanceOf("Spare")) return null;
 		return new Spare_Group(current, this).firstSolution();
+	}
+}
+
+
+// Boolean
+protected class Term_1_RuleCall_Boolean extends RuleCallToken {
+	
+	public Term_1_RuleCall_Boolean(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public RuleCall getGrammarElement() {
+		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prTerm().ele1ParserRuleCallBoolean();
+	}
+	
+	protected Solution createSolution() {
+		if(checkForRecursion(Boolean_Group.class, current)) return null;
+		if(!current.isInstanceOf("Boolean")) return null;
+		return new Boolean_Group(current, this).firstSolution();
 	}
 }
 
@@ -618,11 +659,13 @@ protected class Parens_1_Assignment_em extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("em",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("em");
+
 		if("!".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
 			element = SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prParens().ele10KeywordExclamationMark();
 			return new Solution(obj);
 		}
+
 		return null;
 	}
 }
@@ -1166,16 +1209,20 @@ protected class Ref2_1_Assignment_ref2 extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("ref2",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("ref2");
+
 		if("mykeyword1".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
 			element = SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prRef2().ele1000KeywordMykeyword1();
 			return new Solution(obj);
 		}
+
+
 		if("mykeyword2".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
 			element = SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prRef2().ele101KeywordMykeyword2();
 			return new Solution(obj);
 		}
+
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prRef2().ele1001LexerRuleCallSTRING();
@@ -1354,5 +1401,174 @@ protected class Spare_1_1_Assignment_id extends AssignmentToken  {
 
 
 /************ end Rule Spare ****************/
+
+
+/************ begin Rule Boolean ****************
+ *
+ * Boolean : '#4' ( bool ?= 'myoption' ) ? 'kw' value = ID ;
+ *
+ **/
+
+
+// '#4' ( bool ?= 'myoption' ) ? 'kw' value = ID
+protected class Boolean_Group extends GroupToken {
+	
+	public Boolean_Group(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Group getGrammarElement() {
+		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prBoolean().eleGroup();
+	}
+		
+	protected Solution createSolution() {	
+		Solution s1 = new Boolean_1_Assignment_value(current, this).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new Boolean_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 == null) {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
+				if(s1 == null) return null;
+			} else {
+				last = s2.getPredecessor();
+				return s2;
+			}
+		}
+		return null;
+		
+	}
+}
+
+// '#4' ( bool ?= 'myoption' ) ? 'kw'
+protected class Boolean_0_Group extends GroupToken {
+	
+	public Boolean_0_Group(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Group getGrammarElement() {
+		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prBoolean().ele0Group();
+	}
+		
+	protected Solution createSolution() {	
+		Solution s1 = new Boolean_0_1_Keyword_kw(current, this).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new Boolean_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 == null) {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
+				if(s1 == null) return null;
+			} else {
+				last = s2.getPredecessor();
+				return s2;
+			}
+		}
+		return null;
+		
+	}
+}
+
+// '#4' ( bool ?= 'myoption' ) ?
+protected class Boolean_0_0_Group extends GroupToken {
+	
+	public Boolean_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Group getGrammarElement() {
+		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prBoolean().ele00Group();
+	}
+		
+	protected Solution createSolution() {	
+		Solution s1 = new Boolean_0_0_1_Assignment_bool(current, this).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new Boolean_0_0_0_Keyword_4(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 == null) {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
+				if(s1 == null) return null;
+			} else {
+				last = s2.getPredecessor();
+				return s2;
+			}
+		}
+		return null;
+		
+	}
+}
+
+// '#4'
+protected class Boolean_0_0_0_Keyword_4 extends KeywordToken  {
+	
+	public Boolean_0_0_0_Keyword_4(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Keyword getGrammarElement() {
+		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prBoolean().ele000KeywordNumberSignDigitFour();
+	}	
+}
+
+// ( bool ?= 'myoption' ) ?
+protected class Boolean_0_0_1_Assignment_bool extends AssignmentToken  {
+	
+	public Boolean_0_0_1_Assignment_bool(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, !IS_REQUIRED);
+	}
+	
+	public Assignment getGrammarElement() {
+		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prBoolean().ele001AssignmentBool();
+	}
+	
+	protected Solution createSolution() {
+		if((value = current.getConsumable("bool",!IS_REQUIRED)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("bool");
+
+		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
+			type = AssignmentType.KW;
+			element = SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prBoolean().ele0010KeywordMyoption();
+			return new Solution(obj);
+		}
+
+		return null;
+	}
+}
+
+
+// 'kw'
+protected class Boolean_0_1_Keyword_kw extends KeywordToken  {
+	
+	public Boolean_0_1_Keyword_kw(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Keyword getGrammarElement() {
+		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prBoolean().ele01KeywordKw();
+	}	
+}
+
+
+// value = ID
+protected class Boolean_1_Assignment_value extends AssignmentToken  {
+	
+	public Boolean_1_Assignment_value(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Assignment getGrammarElement() {
+		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prBoolean().ele1AssignmentValue();
+	}
+	
+	protected Solution createSolution() {
+		if((value = current.getConsumable("value",IS_REQUIRED)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("value");
+		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prBoolean().ele10LexerRuleCallID();
+			return new Solution(obj);
+		}
+		return null;
+	}
+}
+
+
+/************ end Rule Boolean ****************/
 
 }

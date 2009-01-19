@@ -25,19 +25,19 @@ public final class DatatypeRulesTestLanguageModelIdConsumer extends NonTerminalC
 
 	private XtextBuiltinIDConsumer idConsumer;
 
+	private ISequenceMatcher ruleCall$5$Delimiter;
+	
 	private ISequenceMatcher ruleCall$3$Delimiter;
 	
 	private ICharacterClass keyword$4$Delimiter;
-	
-	private ISequenceMatcher ruleCall$5$Delimiter;
 	
 	public DatatypeRulesTestLanguageModelIdConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
+		ruleCall$5$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		ruleCall$3$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		keyword$4$Delimiter = ICharacterClass.Factory.nullClass();
-		ruleCall$5$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -90,6 +90,14 @@ public final class DatatypeRulesTestLanguageModelIdConsumer extends NonTerminalC
 		this.idConsumer = idConsumer;
 	}
 	
+	public ISequenceMatcher getRuleCall$5$Delimiter() {
+		return ruleCall$5$Delimiter;
+	}
+	
+	public void setRuleCall$5$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$5$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	}
+	
 	public ISequenceMatcher getRuleCall$3$Delimiter() {
 		return ruleCall$3$Delimiter;
 	}
@@ -104,14 +112,6 @@ public final class DatatypeRulesTestLanguageModelIdConsumer extends NonTerminalC
 	
 	public void setKeyword$4$Delimiter(ICharacterClass characterClass) {
 		keyword$4$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
-	public ISequenceMatcher getRuleCall$5$Delimiter() {
-		return ruleCall$5$Delimiter;
-	}
-	
-	public void setRuleCall$5$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$5$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 }

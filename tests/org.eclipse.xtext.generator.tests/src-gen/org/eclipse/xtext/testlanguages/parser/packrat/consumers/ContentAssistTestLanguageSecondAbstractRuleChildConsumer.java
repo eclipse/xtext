@@ -27,11 +27,11 @@ public final class ContentAssistTestLanguageSecondAbstractRuleChildConsumer exte
 	private ContentAssistTestLanguageAbstractRuleCallConsumer abstractRuleCallConsumer;
 	private XtextBuiltinIDConsumer idConsumer;
 
-	private ICharacterClass keyword$11$Delimiter;
+	private ICharacterClass keyword$8$Delimiter;
 	
 	private ICharacterClass keyword$7$Delimiter;
 	
-	private ICharacterClass keyword$8$Delimiter;
+	private ICharacterClass keyword$11$Delimiter;
 	
 	private ISequenceMatcher ruleCall$6$Delimiter;
 	
@@ -39,9 +39,9 @@ public final class ContentAssistTestLanguageSecondAbstractRuleChildConsumer exte
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
-		keyword$11$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$11$Delimiter = ICharacterClass.Factory.nullClass();
 		ruleCall$6$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
@@ -119,12 +119,12 @@ public final class ContentAssistTestLanguageSecondAbstractRuleChildConsumer exte
 		this.idConsumer = idConsumer;
 	}
 	
-	public ICharacterClass getKeyword$11$Delimiter() {
-		return keyword$11$Delimiter;
+	public ICharacterClass getKeyword$8$Delimiter() {
+		return keyword$8$Delimiter;
 	}
 	
-	public void setKeyword$11$Delimiter(ICharacterClass characterClass) {
-		keyword$11$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setKeyword$8$Delimiter(ICharacterClass characterClass) {
+		keyword$8$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ICharacterClass getKeyword$7$Delimiter() {
@@ -135,12 +135,12 @@ public final class ContentAssistTestLanguageSecondAbstractRuleChildConsumer exte
 		keyword$7$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
-	public ICharacterClass getKeyword$8$Delimiter() {
-		return keyword$8$Delimiter;
+	public ICharacterClass getKeyword$11$Delimiter() {
+		return keyword$11$Delimiter;
 	}
 	
-	public void setKeyword$8$Delimiter(ICharacterClass characterClass) {
-		keyword$8$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setKeyword$11$Delimiter(ICharacterClass characterClass) {
+		keyword$11$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ISequenceMatcher getRuleCall$6$Delimiter() {

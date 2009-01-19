@@ -198,11 +198,13 @@ protected class Element_0_0_0_0_Assignment_optional extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("optional",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("optional");
-		if("optional".equals(value)) { // xtext::Keyword
+
+		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
 			element = DummyTestLanguageGrammarAccess.INSTANCE.prElement().ele00000KeywordOptional();
 			return new Solution(obj);
 		}
+
 		return null;
 	}
 }

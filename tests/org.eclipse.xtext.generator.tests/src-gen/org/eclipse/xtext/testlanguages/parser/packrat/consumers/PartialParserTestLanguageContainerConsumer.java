@@ -31,9 +31,9 @@ public final class PartialParserTestLanguageContainerConsumer extends NonTermina
 
 	private ICharacterClass keyword$8$Delimiter;
 	
-	private ICharacterClass keyword$14$Delimiter;
-	
 	private ISequenceMatcher ruleCall$7$Delimiter;
+	
+	private ICharacterClass keyword$14$Delimiter;
 	
 	private ICharacterClass keyword$5$Delimiter;
 	
@@ -42,8 +42,8 @@ public final class PartialParserTestLanguageContainerConsumer extends NonTermina
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$14$Delimiter = ICharacterClass.Factory.nullClass();
 		ruleCall$7$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		keyword$14$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$5$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
@@ -152,20 +152,20 @@ public final class PartialParserTestLanguageContainerConsumer extends NonTermina
 		keyword$8$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
-	public ICharacterClass getKeyword$14$Delimiter() {
-		return keyword$14$Delimiter;
-	}
-	
-	public void setKeyword$14$Delimiter(ICharacterClass characterClass) {
-		keyword$14$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
 	public ISequenceMatcher getRuleCall$7$Delimiter() {
 		return ruleCall$7$Delimiter;
 	}
 	
 	public void setRuleCall$7$Delimiter(ISequenceMatcher matcher) {
 		ruleCall$7$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	}
+	
+	public ICharacterClass getKeyword$14$Delimiter() {
+		return keyword$14$Delimiter;
+	}
+	
+	public void setKeyword$14$Delimiter(ICharacterClass characterClass) {
+		keyword$14$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ICharacterClass getKeyword$5$Delimiter() {

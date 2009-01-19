@@ -83,9 +83,9 @@ public class FormatterTestLanguageParserConfiguration extends AbstractParserConf
 		getLineConsumer().setKeyword$7$Delimiter(FormatterTestLanguageDelimiters.keyword$16$Delimiter);
 		getLineConsumer().setRuleCall$6$Delimiter(FormatterTestLanguageDelimiters.ruleCall$13$Delimiter);
 		getTestLinewrapConsumer().setKeyword$2$Delimiter(FormatterTestLanguageDelimiters.keyword$4$Delimiter);
-		getTestIndentationConsumer().setKeyword$11$Delimiter(FormatterTestLanguageDelimiters.keyword$16$Delimiter);
-		getTestIndentationConsumer().setKeyword$4$Delimiter(FormatterTestLanguageDelimiters.keyword$4$Delimiter);
 		getTestIndentationConsumer().setKeyword$5$Delimiter(FormatterTestLanguageDelimiters.keyword$16$Delimiter);
+		getTestIndentationConsumer().setKeyword$4$Delimiter(FormatterTestLanguageDelimiters.keyword$4$Delimiter);
+		getTestIndentationConsumer().setKeyword$11$Delimiter(FormatterTestLanguageDelimiters.keyword$16$Delimiter);
 		// TODO remove workaround
 		getIdConsumer().initFields(this);
 		// TODO remove workaround

@@ -72,10 +72,10 @@ public class ImportUriTestLanguageParserConfiguration extends AbstractParserConf
 
 		getImportConsumer().setRuleCall$4$Delimiter(ImportUriTestLanguageDelimiters.ruleCall$13$Delimiter);
 		getImportConsumer().setKeyword$2$Delimiter(ImportUriTestLanguageDelimiters.keyword$11$Delimiter);
-		getTypeConsumer().setKeyword$7$Delimiter(ImportUriTestLanguageDelimiters.keyword$11$Delimiter);
-		getTypeConsumer().setCrossReference$9$Delimiter(ImportUriTestLanguageDelimiters.ruleCall$21$Delimiter);
-		getTypeConsumer().setKeyword$4$Delimiter(ImportUriTestLanguageDelimiters.keyword$11$Delimiter);
 		getTypeConsumer().setRuleCall$6$Delimiter(ImportUriTestLanguageDelimiters.ruleCall$21$Delimiter);
+		getTypeConsumer().setKeyword$4$Delimiter(ImportUriTestLanguageDelimiters.keyword$11$Delimiter);
+		getTypeConsumer().setCrossReference$9$Delimiter(ImportUriTestLanguageDelimiters.ruleCall$21$Delimiter);
+		getTypeConsumer().setKeyword$7$Delimiter(ImportUriTestLanguageDelimiters.keyword$11$Delimiter);
 		// TODO remove workaround
 		getIdConsumer().initFields(this);
 		// TODO remove workaround

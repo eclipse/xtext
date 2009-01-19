@@ -25,22 +25,22 @@ public final class SimpleReconstrTestLanguageTwoNumbersConsumer extends NonTermi
 
 	private XtextBuiltinINTConsumer intConsumer;
 
-	private ISequenceMatcher ruleCall$6$Delimiter;
-	
-	private ISequenceMatcher ruleCall$10$Delimiter;
+	private ICharacterClass keyword$8$Delimiter;
 	
 	private ISequenceMatcher ruleCall$4$Delimiter;
 	
-	private ICharacterClass keyword$8$Delimiter;
+	private ISequenceMatcher ruleCall$6$Delimiter;
+	
+	private ISequenceMatcher ruleCall$10$Delimiter;
 	
 	public SimpleReconstrTestLanguageTwoNumbersConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
+		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
+		ruleCall$4$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		ruleCall$6$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		ruleCall$10$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-		ruleCall$4$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -121,6 +121,22 @@ public final class SimpleReconstrTestLanguageTwoNumbersConsumer extends NonTermi
 		this.intConsumer = intConsumer;
 	}
 	
+	public ICharacterClass getKeyword$8$Delimiter() {
+		return keyword$8$Delimiter;
+	}
+	
+	public void setKeyword$8$Delimiter(ICharacterClass characterClass) {
+		keyword$8$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ISequenceMatcher getRuleCall$4$Delimiter() {
+		return ruleCall$4$Delimiter;
+	}
+	
+	public void setRuleCall$4$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$4$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	}
+	
 	public ISequenceMatcher getRuleCall$6$Delimiter() {
 		return ruleCall$6$Delimiter;
 	}
@@ -135,22 +151,6 @@ public final class SimpleReconstrTestLanguageTwoNumbersConsumer extends NonTermi
 	
 	public void setRuleCall$10$Delimiter(ISequenceMatcher matcher) {
 		ruleCall$10$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
-	}
-	
-	public ISequenceMatcher getRuleCall$4$Delimiter() {
-		return ruleCall$4$Delimiter;
-	}
-	
-	public void setRuleCall$4$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$4$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
-	}
-	
-	public ICharacterClass getKeyword$8$Delimiter() {
-		return keyword$8$Delimiter;
-	}
-	
-	public void setKeyword$8$Delimiter(ICharacterClass characterClass) {
-		keyword$8$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

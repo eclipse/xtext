@@ -676,11 +676,13 @@ protected class Parens_1_Assignment_em extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("em",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("em");
+
 		if("!".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
 			element = ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prParens().ele10KeywordExclamationMark();
 			return new Solution(obj);
 		}
+
 		return null;
 	}
 }

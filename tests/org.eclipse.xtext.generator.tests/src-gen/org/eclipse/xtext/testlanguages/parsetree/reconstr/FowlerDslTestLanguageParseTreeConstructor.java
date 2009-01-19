@@ -429,11 +429,13 @@ protected class Event_0_0_Assignment_resetting extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("resetting",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("resetting");
-		if("resetting".equals(value)) { // xtext::Keyword
+
+		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
 			element = FowlerDslTestLanguageGrammarAccess.INSTANCE.prEvent().ele000KeywordResetting();
 			return new Solution(obj);
 		}
+
 		return null;
 	}
 }
