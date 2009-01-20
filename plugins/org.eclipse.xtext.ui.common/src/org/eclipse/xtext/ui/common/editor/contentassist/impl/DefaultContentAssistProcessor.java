@@ -7,6 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.contentassist.impl;
 
+import static org.eclipse.xtext.util.CollectionUtils.addAllIfNotNull;
+import static org.eclipse.xtext.util.CollectionUtils.addIfNotNull;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,10 +23,13 @@ import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.text.contentassist.IContextInformationValidator;
 import org.eclipse.jface.text.templates.TemplateContextType;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.Inject;
-import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistCalculator;
 import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
 import org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider;
@@ -35,20 +42,21 @@ import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
  * 
  * @author Michael Clay - Initial contribution and API
  * @author Heiko Behrens
+ * @author Jan K&ouml;hnlein
  */
 public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 
 	// logger available to subclasses
 	protected final Logger logger = Logger.getLogger(getClass());
 	
-	@Inject (optional=true)
-	private ITemplateContentAssistProcessor templateContentAssistProcessor;
+	@Inject
+	protected ITemplateContentAssistProcessor templateContentAssistProcessor;
 
-	@Inject (optional=true)
-	private IContentAssistCalculator contentAssistCalculator;
+	@Inject
+	protected IContentAssistCalculator contentAssistCalculator;
 	
 	@Inject
-	private IProposalProvider proposalProvider;
+	protected IProposalProvider proposalProvider;
 	
 	@Inject
 	protected IServiceScope serviceScope;
@@ -66,16 +74,12 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 				ICompletionProposal[] completionProposals = null;
 				IContentAssistContext contentAssistContext = ContentAssistContextFactory.create(resource,offset,computePrefix(viewer.getDocument().get(0, offset)));
 				
-				List<AbstractElement> computeProposalElements = getContentAssistCalculator().computeProposalElements(
+				List<AbstractElement> computeProposalElements = contentAssistCalculator.computeProposalElements(
 						contentAssistContext);
 				
-				ProposalProviderInvokerSwitch proposalProviderInvokerSwitch = new ProposalProviderInvokerSwitch(
-						contentAssistContext, proposalProvider);
+				List<ICompletionProposal> completionProposalList = collectCompletionProposals(computeProposalElements, contentAssistContext);
 				
-				List<ICompletionProposal> completionProposalList = proposalProviderInvokerSwitch
-				.collectCompletionProposalList(computeProposalElements);
-				
-				for (TemplateContextType templateContextType : proposalProviderInvokerSwitch.getTemplateContextTypeList()) {
+				for (TemplateContextType templateContextType : collectTemplateContextTypes(computeProposalElements, contentAssistContext)) {
 					addTemplates(viewer, offset, contentAssistContext, templateContextType, completionProposalList);
 				}
 				
@@ -91,6 +95,52 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 			});
 	}
 
+	protected List<ICompletionProposal> collectCompletionProposals(List<AbstractElement> computeProposalElements, IContentAssistContext contentAssistContext) {
+		List<ICompletionProposal> completionProposalList = new ArrayList<ICompletionProposal>();
+		for (AbstractElement computeProposalElement : computeProposalElements) {
+			List<? extends ICompletionProposal> proposals;
+			switch(computeProposalElement.eClass().getClassifierID()) {
+				case XtextPackage.KEYWORD:
+					proposals = proposalProvider.completeKeyword((Keyword) computeProposalElement, contentAssistContext);
+					addAllIfNotNull(completionProposalList,proposals);
+					break;
+				case XtextPackage.RULE_CALL:
+					proposals = proposalProvider.completeRuleCall((RuleCall) computeProposalElement, contentAssistContext);
+					addAllIfNotNull(completionProposalList,proposals);
+					break;
+				case XtextPackage.ASSIGNMENT:
+					proposals = proposalProvider.completeAssignment((Assignment) computeProposalElement, contentAssistContext);
+					addAllIfNotNull(completionProposalList,proposals);
+					break;
+			}
+		}
+		return completionProposalList;
+	}
+	
+	protected List<TemplateContextType> collectTemplateContextTypes(List<AbstractElement> computeProposalElements, IContentAssistContext contentAssistContext) {
+		List<TemplateContextType> templateContextTypes = new ArrayList<TemplateContextType>();
+		for (AbstractElement computeProposalElement : computeProposalElements) {
+			TemplateContextType templateContextType;
+			switch(computeProposalElement.eClass().getClassifierID()) {
+				case XtextPackage.KEYWORD:
+					templateContextType = proposalProvider.getTemplateContextType((Keyword) computeProposalElement, contentAssistContext);
+					addIfNotNull(templateContextTypes, templateContextType);
+					break;
+				case XtextPackage.RULE_CALL:
+					templateContextType = proposalProvider.getTemplateContextType((RuleCall) computeProposalElement, contentAssistContext);
+					addIfNotNull(templateContextTypes, templateContextType);
+					break;
+				case XtextPackage.ASSIGNMENT:
+					// TODO: change interface
+					//templateContextType = proposalProvider.getTemplateContextType((Assignment) computeProposalElement, contentAssistContext);
+					//addIfNotNull(templateContextTypes, templateContextType);
+					break;
+			}
+		}
+		return templateContextTypes;
+	}
+	
+	
 	public static String computePrefix(String string) {
 		if (string==null)
 			return "";
@@ -153,34 +203,12 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 	 */
 	protected void addTemplates(ITextViewer viewer, int offset, IContentAssistContext contentAssistContext,
 			TemplateContextType templateContextType, List<ICompletionProposal> completionProposalList) {
-		if (getTemplateContentAssistProcessor() != null) {
-			getTemplateContentAssistProcessor().setContentAssistContext(contentAssistContext);
-			getTemplateContentAssistProcessor().setContextType(templateContextType);
-			completionProposalList.addAll(Arrays.asList(getTemplateContentAssistProcessor().computeCompletionProposals(
+		if (templateContentAssistProcessor != null) {
+			templateContentAssistProcessor.setContentAssistContext(contentAssistContext);
+			templateContentAssistProcessor.setContextType(templateContextType);
+			completionProposalList.addAll(Arrays.asList(templateContentAssistProcessor.computeCompletionProposals(
 					viewer, offset)));
 		}
-	}
-	
-	/**
-	 * @return an implementation of <code>ITemplateContentAssistProcessor</code>
-	 */
-	protected ITemplateContentAssistProcessor getTemplateContentAssistProcessor() {
-		if (templateContentAssistProcessor == null) {
-			templateContentAssistProcessor = new DefaultTemplateContentAssistProcessor();
-			ServiceRegistry.injectServices(this.serviceScope, templateContentAssistProcessor);
-		}
-		return templateContentAssistProcessor;
-	}
-	
-	/**
-	 * @return an implementation of <code>IContentAssistCalculator</code>
-	 */
-	protected IContentAssistCalculator getContentAssistCalculator() {
-		if (this.contentAssistCalculator == null) {
-			contentAssistCalculator = new DefaultContentAssistCalculator();
-			ServiceRegistry.injectServices(this.serviceScope, contentAssistCalculator);
-		}
-		return contentAssistCalculator;
 	}
 	
 
