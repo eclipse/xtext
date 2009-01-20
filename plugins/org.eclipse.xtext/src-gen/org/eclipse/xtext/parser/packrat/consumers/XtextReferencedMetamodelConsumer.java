@@ -27,22 +27,22 @@ public final class XtextReferencedMetamodelConsumer extends NonTerminalConsumer 
 	private XtextBuiltinIDConsumer idConsumer;
 	private XtextBuiltinSTRINGConsumer stringConsumer;
 
-	private ISequenceMatcher ruleCall$10$Delimiter;
-	
 	private ISequenceMatcher crossReference$5$Delimiter;
+	
+	private ICharacterClass keyword$3$Delimiter;
 	
 	private ICharacterClass keyword$8$Delimiter;
 	
-	private ICharacterClass keyword$3$Delimiter;
+	private ISequenceMatcher ruleCall$10$Delimiter;
 	
 	public XtextReferencedMetamodelConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
-		ruleCall$10$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		crossReference$5$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$3$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
+		ruleCall$10$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -125,20 +125,20 @@ public final class XtextReferencedMetamodelConsumer extends NonTerminalConsumer 
 		this.stringConsumer = stringConsumer;
 	}
 	
-	public ISequenceMatcher getRuleCall$10$Delimiter() {
-		return ruleCall$10$Delimiter;
-	}
-	
-	public void setRuleCall$10$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$10$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
-	}
-	
 	public ISequenceMatcher getCrossReference$5$Delimiter() {
 		return crossReference$5$Delimiter;
 	}
 	
 	public void setCrossReference$5$Delimiter(ISequenceMatcher matcher) {
 		crossReference$5$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	}
+	
+	public ICharacterClass getKeyword$3$Delimiter() {
+		return keyword$3$Delimiter;
+	}
+	
+	public void setKeyword$3$Delimiter(ICharacterClass characterClass) {
+		keyword$3$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ICharacterClass getKeyword$8$Delimiter() {
@@ -149,12 +149,12 @@ public final class XtextReferencedMetamodelConsumer extends NonTerminalConsumer 
 		keyword$8$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
-	public ICharacterClass getKeyword$3$Delimiter() {
-		return keyword$3$Delimiter;
+	public ISequenceMatcher getRuleCall$10$Delimiter() {
+		return ruleCall$10$Delimiter;
 	}
 	
-	public void setKeyword$3$Delimiter(ICharacterClass characterClass) {
-		keyword$3$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setRuleCall$10$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$10$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 }

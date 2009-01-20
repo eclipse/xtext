@@ -27,6 +27,10 @@ public final class PartialParserTestLanguageSecondConcreteConsumer extends NonTe
 	private XtextBuiltinIDConsumer idConsumer;
 	private PartialParserTestLanguageNamedConsumer namedConsumer;
 
+	private ISequenceMatcher crossReference$14$Delimiter;
+	
+	private ICharacterClass keyword$9$Delimiter;
+	
 	private ICharacterClass keyword$10$Delimiter;
 	
 	private ICharacterClass keyword$16$Delimiter;
@@ -35,20 +39,16 @@ public final class PartialParserTestLanguageSecondConcreteConsumer extends NonTe
 	
 	private ICharacterClass keyword$8$Delimiter;
 	
-	private ISequenceMatcher crossReference$14$Delimiter;
-	
-	private ICharacterClass keyword$9$Delimiter;
-	
 	public PartialParserTestLanguageSecondConcreteConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
+		crossReference$14$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		keyword$9$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$10$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$16$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
-		crossReference$14$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-		keyword$9$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -146,6 +146,22 @@ public final class PartialParserTestLanguageSecondConcreteConsumer extends NonTe
 		this.namedConsumer = namedConsumer;
 	}
 	
+	public ISequenceMatcher getCrossReference$14$Delimiter() {
+		return crossReference$14$Delimiter;
+	}
+	
+	public void setCrossReference$14$Delimiter(ISequenceMatcher matcher) {
+		crossReference$14$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	}
+	
+	public ICharacterClass getKeyword$9$Delimiter() {
+		return keyword$9$Delimiter;
+	}
+	
+	public void setKeyword$9$Delimiter(ICharacterClass characterClass) {
+		keyword$9$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
 	public ICharacterClass getKeyword$10$Delimiter() {
 		return keyword$10$Delimiter;
 	}
@@ -176,22 +192,6 @@ public final class PartialParserTestLanguageSecondConcreteConsumer extends NonTe
 	
 	public void setKeyword$8$Delimiter(ICharacterClass characterClass) {
 		keyword$8$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
-	public ISequenceMatcher getCrossReference$14$Delimiter() {
-		return crossReference$14$Delimiter;
-	}
-	
-	public void setCrossReference$14$Delimiter(ISequenceMatcher matcher) {
-		crossReference$14$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
-	}
-	
-	public ICharacterClass getKeyword$9$Delimiter() {
-		return keyword$9$Delimiter;
-	}
-	
-	public void setKeyword$9$Delimiter(ICharacterClass characterClass) {
-		keyword$9$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

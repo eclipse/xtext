@@ -22,7 +22,7 @@ public class DummyTestLanguageParser extends org.eclipse.xtext.parser.antlr.Abst
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in, IAstFactory factory) {
 		InternalDummyTestLanguageLexer lexer = new InternalDummyTestLanguageLexer(in);
-		XtextTokenStream stream = new XtextTokenStream(lexer);
+		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		InternalDummyTestLanguageParser parser = new InternalDummyTestLanguageParser(
 				stream, factory, grammarAccess.getGrammar());
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());

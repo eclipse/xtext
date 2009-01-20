@@ -27,20 +27,20 @@ public final class SimpleReconstrTestLanguageRef2Consumer extends NonTerminalCon
 
 	private ICharacterClass keyword$2$Delimiter;
 	
-	private ISequenceMatcher ruleCall$7$Delimiter;
-	
 	private ICharacterClass keyword$6$Delimiter;
 	
 	private ICharacterClass keyword$8$Delimiter;
+	
+	private ISequenceMatcher ruleCall$7$Delimiter;
 	
 	public SimpleReconstrTestLanguageRef2Consumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
-		ruleCall$7$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		keyword$6$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
+		ruleCall$7$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -99,14 +99,6 @@ public final class SimpleReconstrTestLanguageRef2Consumer extends NonTerminalCon
 		keyword$2$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
-	public ISequenceMatcher getRuleCall$7$Delimiter() {
-		return ruleCall$7$Delimiter;
-	}
-	
-	public void setRuleCall$7$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$7$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
-	}
-	
 	public ICharacterClass getKeyword$6$Delimiter() {
 		return keyword$6$Delimiter;
 	}
@@ -121,6 +113,14 @@ public final class SimpleReconstrTestLanguageRef2Consumer extends NonTerminalCon
 	
 	public void setKeyword$8$Delimiter(ICharacterClass characterClass) {
 		keyword$8$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ISequenceMatcher getRuleCall$7$Delimiter() {
+		return ruleCall$7$Delimiter;
+	}
+	
+	public void setRuleCall$7$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$7$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 }

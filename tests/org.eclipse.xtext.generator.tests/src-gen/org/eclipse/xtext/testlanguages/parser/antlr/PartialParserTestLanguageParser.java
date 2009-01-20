@@ -22,7 +22,7 @@ public class PartialParserTestLanguageParser extends org.eclipse.xtext.parser.an
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in, IAstFactory factory) {
 		InternalPartialParserTestLanguageLexer lexer = new InternalPartialParserTestLanguageLexer(in);
-		XtextTokenStream stream = new XtextTokenStream(lexer);
+		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		InternalPartialParserTestLanguageParser parser = new InternalPartialParserTestLanguageParser(
 				stream, factory, grammarAccess.getGrammar());
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());

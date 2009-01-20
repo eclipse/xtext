@@ -22,7 +22,7 @@ public class OptionalEmptyTestLanguageParser extends org.eclipse.xtext.parser.an
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in, IAstFactory factory) {
 		InternalOptionalEmptyTestLanguageLexer lexer = new InternalOptionalEmptyTestLanguageLexer(in);
-		XtextTokenStream stream = new XtextTokenStream(lexer);
+		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		InternalOptionalEmptyTestLanguageParser parser = new InternalOptionalEmptyTestLanguageParser(
 				stream, factory, grammarAccess.getGrammar());
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());

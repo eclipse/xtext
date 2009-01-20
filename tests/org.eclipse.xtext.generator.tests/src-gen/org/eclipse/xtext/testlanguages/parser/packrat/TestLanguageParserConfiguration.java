@@ -83,9 +83,9 @@ public class TestLanguageParserConfiguration extends AbstractParserConfiguration
 
 		getTerminalRuleConsumer().setStringConsumer(getStringConsumer());
 
-		getChoiceRuleConsumer().setRuleCall$7$Delimiter(TestLanguageDelimiters.ruleCall$18$Delimiter);
 		getChoiceRuleConsumer().setKeyword$3$Delimiter(TestLanguageDelimiters.keyword$14$Delimiter);
 		getChoiceRuleConsumer().setKeyword$5$Delimiter(TestLanguageDelimiters.keyword$14$Delimiter);
+		getChoiceRuleConsumer().setRuleCall$7$Delimiter(TestLanguageDelimiters.ruleCall$18$Delimiter);
 		getReducibleRuleConsumer().setKeyword$3$Delimiter(TestLanguageDelimiters.keyword$14$Delimiter);
 		getTerminalRuleConsumer().setRuleCall$2$Delimiter(TestLanguageDelimiters.ruleCall$33$Delimiter);
 	}

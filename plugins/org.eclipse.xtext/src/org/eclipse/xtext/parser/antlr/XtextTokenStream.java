@@ -9,7 +9,10 @@
 package org.eclipse.xtext.parser.antlr;
 
 import java.util.ArrayList;
+import java.util.BitSet;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.Token;
@@ -23,19 +26,72 @@ import org.antlr.runtime.TokenSource;
 public class XtextTokenStream extends CommonTokenStream {
 
 	private List<Token> lookaheadTokens = new ArrayList<Token>();
+	
+	private Map<String, Integer> rulenameToTokenType;
+	
+	private BitSet hiddenTokens;
 
 	public XtextTokenStream() {
 		super();
+		tokens = new TokenList(500);
 	}
 
 	public XtextTokenStream(TokenSource tokenSource, int channel) {
 		super(tokenSource, channel);
+		tokens = new TokenList(500);
 	}
 
-	public XtextTokenStream(TokenSource tokenSource) {
+	public XtextTokenStream(TokenSource tokenSource, AntlrTokenDefProvider tokenDefProvider) {
 		super(tokenSource);
+		tokens = new TokenList(500);
+		rulenameToTokenType = new HashMap<String, Integer>(tokenDefProvider.getTokenDefMap().size());
+		for(Map.Entry<Integer, String> entry: tokenDefProvider.getTokenDefMap().entrySet()) {
+			rulenameToTokenType.put(entry.getValue(), entry.getKey());
+		}
+	}
+	
+	@SuppressWarnings({ "serial", "unchecked" })
+	private final class TokenList extends ArrayList {
+		private TokenList(int initialCapacity) {
+			super(initialCapacity);
+		}
+
+		public Object get(int index) {
+			Token tok = (Token) super.get(index);
+			if (hiddenTokens != null && tok.getType() >= Token.MIN_TOKEN_TYPE)
+				tok.setChannel(hiddenTokens.get(tok.getType()) ? Token.HIDDEN_CHANNEL : Token.DEFAULT_CHANNEL);
+			return tok;
+		}
 	}
 
+	public interface HiddenTokens {
+		void restore();
+	}
+	
+	public HiddenTokens setHiddenTokens(String... lexerRules) {
+		HiddenTokens result = new MyHiddenTokens(hiddenTokens);
+		BitSet newHiddens = new BitSet();
+		for(String lexerRule: lexerRules) {
+			int idx = rulenameToTokenType.get(lexerRule);
+			newHiddens.set(idx);
+		}
+		hiddenTokens = newHiddens;
+		return result;
+	}
+
+	private class MyHiddenTokens implements HiddenTokens {
+
+		private final BitSet prev;
+		
+		private MyHiddenTokens(BitSet prev) {
+			this. prev = prev;
+		}
+		public void restore() {
+			XtextTokenStream.this.hiddenTokens = prev;
+		}
+		
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 

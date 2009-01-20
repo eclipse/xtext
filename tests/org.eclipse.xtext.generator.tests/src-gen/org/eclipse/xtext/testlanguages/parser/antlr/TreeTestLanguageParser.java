@@ -22,7 +22,7 @@ public class TreeTestLanguageParser extends org.eclipse.xtext.parser.antlr.Abstr
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in, IAstFactory factory) {
 		InternalTreeTestLanguageLexer lexer = new InternalTreeTestLanguageLexer(in);
-		XtextTokenStream stream = new XtextTokenStream(lexer);
+		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		InternalTreeTestLanguageParser parser = new InternalTreeTestLanguageParser(
 				stream, factory, grammarAccess.getGrammar());
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());

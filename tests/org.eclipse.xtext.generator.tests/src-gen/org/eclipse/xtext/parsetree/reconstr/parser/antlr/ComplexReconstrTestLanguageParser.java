@@ -22,7 +22,7 @@ public class ComplexReconstrTestLanguageParser extends org.eclipse.xtext.parser.
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in, IAstFactory factory) {
 		InternalComplexReconstrTestLanguageLexer lexer = new InternalComplexReconstrTestLanguageLexer(in);
-		XtextTokenStream stream = new XtextTokenStream(lexer);
+		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		InternalComplexReconstrTestLanguageParser parser = new InternalComplexReconstrTestLanguageParser(
 				stream, factory, grammarAccess.getGrammar());
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());

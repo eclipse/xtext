@@ -14,11 +14,11 @@ public final class ConcreteTestLanguageDelimiters {
 		throw new UnsupportedOperationException("Utility classes may not be initialized");
 	}
 	
+	public static ICharacterClass keyword$6$Delimiter = XtextBuiltinIDConsumer.IDConsumer$$2;
+
 	public static ICharacterClass keyword$9$Delimiter = ICharacterClass.Factory.nullClass();
 
 	public static ISequenceMatcher ruleCall$8$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-
-	public static ICharacterClass keyword$6$Delimiter = XtextBuiltinIDConsumer.IDConsumer$$2;
 
 	public static ISequenceMatcher ruleCall$7$Delimiter = new SetBasedKeywordMatcher(
 		"model");

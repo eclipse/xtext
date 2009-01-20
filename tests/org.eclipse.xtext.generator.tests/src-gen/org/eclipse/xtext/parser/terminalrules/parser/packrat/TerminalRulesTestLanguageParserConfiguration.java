@@ -66,13 +66,13 @@ public class TerminalRulesTestLanguageParserConfiguration extends AbstractParser
 		getModelConsumer().setStringConsumer(getStringConsumer());
 		getModelConsumer().setWsConsumer(getWsConsumer());
 
-		getModelConsumer().setRuleCall$20$Delimiter(TerminalRulesTestLanguageDelimiters.ruleCall$11$Delimiter);
 		getModelConsumer().setRuleCall$8$Delimiter(TerminalRulesTestLanguageDelimiters.ruleCall$11$Delimiter);
 		getModelConsumer().setRuleCall$10$Delimiter(TerminalRulesTestLanguageDelimiters.ruleCall$11$Delimiter);
+		getModelConsumer().setRuleCall$12$Delimiter(TerminalRulesTestLanguageDelimiters.ruleCall$11$Delimiter);
 		getModelConsumer().setRuleCall$14$Delimiter(TerminalRulesTestLanguageDelimiters.ruleCall$11$Delimiter);
 		getModelConsumer().setRuleCall$16$Delimiter(TerminalRulesTestLanguageDelimiters.ruleCall$11$Delimiter);
-		getModelConsumer().setRuleCall$12$Delimiter(TerminalRulesTestLanguageDelimiters.ruleCall$11$Delimiter);
 		getModelConsumer().setRuleCall$18$Delimiter(TerminalRulesTestLanguageDelimiters.ruleCall$11$Delimiter);
+		getModelConsumer().setRuleCall$20$Delimiter(TerminalRulesTestLanguageDelimiters.ruleCall$11$Delimiter);
 	}
 	
     public TerminalRulesTestLanguageModelConsumer getModelConsumer() {

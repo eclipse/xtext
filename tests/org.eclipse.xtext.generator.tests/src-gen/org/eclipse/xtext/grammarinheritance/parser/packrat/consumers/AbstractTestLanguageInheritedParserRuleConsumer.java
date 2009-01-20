@@ -25,16 +25,16 @@ public final class AbstractTestLanguageInheritedParserRuleConsumer extends NonTe
 
 	private AbstractTestLanguageIDConsumer idConsumer;
 
-	private ISequenceMatcher ruleCall$4$Delimiter;
-	
 	private ICharacterClass keyword$2$Delimiter;
+	
+	private ISequenceMatcher ruleCall$4$Delimiter;
 	
 	public AbstractTestLanguageInheritedParserRuleConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
-		ruleCall$4$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
+		ruleCall$4$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -81,20 +81,20 @@ public final class AbstractTestLanguageInheritedParserRuleConsumer extends NonTe
 		this.idConsumer = idConsumer;
 	}
 	
-	public ISequenceMatcher getRuleCall$4$Delimiter() {
-		return ruleCall$4$Delimiter;
-	}
-	
-	public void setRuleCall$4$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$4$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
-	}
-	
 	public ICharacterClass getKeyword$2$Delimiter() {
 		return keyword$2$Delimiter;
 	}
 	
 	public void setKeyword$2$Delimiter(ICharacterClass characterClass) {
 		keyword$2$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ISequenceMatcher getRuleCall$4$Delimiter() {
+		return ruleCall$4$Delimiter;
+	}
+	
+	public void setRuleCall$4$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$4$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 }

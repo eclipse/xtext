@@ -85,25 +85,25 @@ public class FowlerDslParserConfiguration extends AbstractParserConfiguration {
 
 		getTransitionConsumer().setIdConsumer(getIdConsumer());
 
+		getStatemachineConsumer().setKeyword$10$Delimiter(FowlerDslDelimiters.keyword$9$Delimiter);
 		getStatemachineConsumer().setKeyword$11$Delimiter(FowlerDslDelimiters.keyword$9$Delimiter);
 		getStatemachineConsumer().setKeyword$14$Delimiter(FowlerDslDelimiters.keyword$9$Delimiter);
-		getStatemachineConsumer().setKeyword$10$Delimiter(FowlerDslDelimiters.keyword$9$Delimiter);
 		getStatemachineConsumer().setKeyword$7$Delimiter(FowlerDslDelimiters.keyword$9$Delimiter);
-		getEventConsumer().setRuleCall$8$Delimiter(FowlerDslDelimiters.ruleCall$26$Delimiter);
-		getEventConsumer().setRuleCall$6$Delimiter(FowlerDslDelimiters.ruleCall$26$Delimiter);
 		getEventConsumer().setKeyword$4$Delimiter(FowlerDslDelimiters.keyword$9$Delimiter);
+		getEventConsumer().setRuleCall$6$Delimiter(FowlerDslDelimiters.ruleCall$26$Delimiter);
+		getEventConsumer().setRuleCall$8$Delimiter(FowlerDslDelimiters.ruleCall$26$Delimiter);
 		getCommandConsumer().setRuleCall$3$Delimiter(FowlerDslDelimiters.ruleCall$26$Delimiter);
 		getCommandConsumer().setRuleCall$5$Delimiter(FowlerDslDelimiters.ruleCall$26$Delimiter);
 		getStateConsumer().setCrossReference$14$Delimiter(FowlerDslDelimiters.ruleCall$26$Delimiter);
-		getStateConsumer().setRuleCall$7$Delimiter(FowlerDslDelimiters.ruleCall$26$Delimiter);
-		getStateConsumer().setKeyword$11$Delimiter(FowlerDslDelimiters.keyword$9$Delimiter);
-		getStateConsumer().setKeyword$19$Delimiter(FowlerDslDelimiters.keyword$9$Delimiter);
 		getStateConsumer().setKeyword$5$Delimiter(FowlerDslDelimiters.keyword$9$Delimiter);
+		getStateConsumer().setKeyword$11$Delimiter(FowlerDslDelimiters.keyword$9$Delimiter);
 		getStateConsumer().setKeyword$12$Delimiter(FowlerDslDelimiters.keyword$49$Delimiter);
 		getStateConsumer().setKeyword$16$Delimiter(FowlerDslDelimiters.keyword$49$Delimiter);
-		getTransitionConsumer().setKeyword$6$Delimiter(FowlerDslDelimiters.keyword$49$Delimiter);
-		getTransitionConsumer().setCrossReference$8$Delimiter(FowlerDslDelimiters.ruleCall$26$Delimiter);
+		getStateConsumer().setKeyword$19$Delimiter(FowlerDslDelimiters.keyword$9$Delimiter);
+		getStateConsumer().setRuleCall$7$Delimiter(FowlerDslDelimiters.ruleCall$26$Delimiter);
 		getTransitionConsumer().setCrossReference$4$Delimiter(FowlerDslDelimiters.ruleCall$26$Delimiter);
+		getTransitionConsumer().setCrossReference$8$Delimiter(FowlerDslDelimiters.ruleCall$26$Delimiter);
+		getTransitionConsumer().setKeyword$6$Delimiter(FowlerDslDelimiters.keyword$49$Delimiter);
 	}
 	
 	// TODO collect superGrammars transitive

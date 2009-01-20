@@ -22,7 +22,7 @@ public class ContentAssistTestLanguageParser extends org.eclipse.xtext.parser.an
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in, IAstFactory factory) {
 		InternalContentAssistTestLanguageLexer lexer = new InternalContentAssistTestLanguageLexer(in);
-		XtextTokenStream stream = new XtextTokenStream(lexer);
+		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		InternalContentAssistTestLanguageParser parser = new InternalContentAssistTestLanguageParser(
 				stream, factory, grammarAccess.getGrammar());
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());

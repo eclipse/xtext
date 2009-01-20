@@ -27,25 +27,25 @@ public final class DummyTestLanguageElementConsumer extends NonTerminalConsumer 
 	private XtextBuiltinIDConsumer idConsumer;
 	private XtextBuiltinSTRINGConsumer stringConsumer;
 
+	private ICharacterClass keyword$6$Delimiter;
+	
+	private ICharacterClass keyword$7$Delimiter;
+	
 	private ICharacterClass keyword$12$Delimiter;
 	
 	private ISequenceMatcher ruleCall$9$Delimiter;
 	
 	private ISequenceMatcher ruleCall$11$Delimiter;
 	
-	private ICharacterClass keyword$7$Delimiter;
-	
-	private ICharacterClass keyword$6$Delimiter;
-	
 	public DummyTestLanguageElementConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
+		keyword$6$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$12$Delimiter = ICharacterClass.Factory.nullClass();
 		ruleCall$9$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		ruleCall$11$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$6$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -134,6 +134,22 @@ public final class DummyTestLanguageElementConsumer extends NonTerminalConsumer 
 		this.stringConsumer = stringConsumer;
 	}
 	
+	public ICharacterClass getKeyword$6$Delimiter() {
+		return keyword$6$Delimiter;
+	}
+	
+	public void setKeyword$6$Delimiter(ICharacterClass characterClass) {
+		keyword$6$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$7$Delimiter() {
+		return keyword$7$Delimiter;
+	}
+	
+	public void setKeyword$7$Delimiter(ICharacterClass characterClass) {
+		keyword$7$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
 	public ICharacterClass getKeyword$12$Delimiter() {
 		return keyword$12$Delimiter;
 	}
@@ -156,22 +172,6 @@ public final class DummyTestLanguageElementConsumer extends NonTerminalConsumer 
 	
 	public void setRuleCall$11$Delimiter(ISequenceMatcher matcher) {
 		ruleCall$11$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
-	}
-	
-	public ICharacterClass getKeyword$7$Delimiter() {
-		return keyword$7$Delimiter;
-	}
-	
-	public void setKeyword$7$Delimiter(ICharacterClass characterClass) {
-		keyword$7$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
-	public ICharacterClass getKeyword$6$Delimiter() {
-		return keyword$6$Delimiter;
-	}
-	
-	public void setKeyword$6$Delimiter(ICharacterClass characterClass) {
-		keyword$6$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

@@ -137,9 +137,7 @@ public class TerminalRuleToLexerBody extends XtextSwitch<String>{
 
 	@Override
 	public String caseUpToToken(UpToToken object) {
-		result.append("~(");
-		doSwitch(object.getTerminal());
-		result.append(")*");
+		result.append("( options {greedy=false;} : . )*");
 		doSwitch(object.getTerminal());
 		return "";
 	}

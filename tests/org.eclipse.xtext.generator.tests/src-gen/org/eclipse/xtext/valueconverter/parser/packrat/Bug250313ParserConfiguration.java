@@ -56,9 +56,9 @@ public class Bug250313ParserConfiguration extends AbstractParserConfiguration {
 		getRef2Consumer().setStringConsumer(getStringConsumer());
 
 		getRef2Consumer().setKeyword$2$Delimiter(Bug250313Delimiters.keyword$4$Delimiter);
+		getRef2Consumer().setKeyword$6$Delimiter(Bug250313Delimiters.keyword$8$Delimiter);
 		getRef2Consumer().setRuleCall$8$Delimiter(Bug250313Delimiters.ruleCall$10$Delimiter);
 		getRef2Consumer().setRuleCall$7$Delimiter(Bug250313Delimiters.ruleCall$9$Delimiter);
-		getRef2Consumer().setKeyword$6$Delimiter(Bug250313Delimiters.keyword$8$Delimiter);
 	}
 	
 	// TODO collect superGrammars transitive

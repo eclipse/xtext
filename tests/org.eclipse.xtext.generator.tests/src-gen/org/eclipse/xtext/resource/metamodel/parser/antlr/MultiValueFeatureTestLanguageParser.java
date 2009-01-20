@@ -22,7 +22,7 @@ public class MultiValueFeatureTestLanguageParser extends org.eclipse.xtext.parse
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in, IAstFactory factory) {
 		InternalMultiValueFeatureTestLanguageLexer lexer = new InternalMultiValueFeatureTestLanguageLexer(in);
-		XtextTokenStream stream = new XtextTokenStream(lexer);
+		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		InternalMultiValueFeatureTestLanguageParser parser = new InternalMultiValueFeatureTestLanguageParser(
 				stream, factory, grammarAccess.getGrammar());
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());

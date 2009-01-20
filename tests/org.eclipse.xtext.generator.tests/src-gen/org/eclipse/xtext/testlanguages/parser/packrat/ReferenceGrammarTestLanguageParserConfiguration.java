@@ -86,8 +86,8 @@ public class ReferenceGrammarTestLanguageParserConfiguration extends AbstractPar
 		getSpielplatzConsumer().setFamilieConsumer(getFamilieConsumer());
 		getSpielplatzConsumer().setIntConsumer(getIntConsumer());
 		getSpielplatzConsumer().setKindConsumer(getKindConsumer());
-		getSpielplatzConsumer().setStringConsumer(getStringConsumer());
 		getSpielplatzConsumer().setSpielzeugConsumer(getSpielzeugConsumer());
+		getSpielplatzConsumer().setStringConsumer(getStringConsumer());
 
 		getPersonConsumer().setErwachsenerConsumer(getErwachsenerConsumer());
 		getPersonConsumer().setKindConsumer(getKindConsumer());
@@ -104,40 +104,40 @@ public class ReferenceGrammarTestLanguageParserConfiguration extends AbstractPar
 		getFamilieConsumer().setIdConsumer(getIdConsumer());
 		getFamilieConsumer().setStringConsumer(getStringConsumer());
 
-		getSpielplatzConsumer().setRuleCall$8$Delimiter(ReferenceGrammarTestLanguageDelimiters.ruleCall$10$Delimiter);
-		getSpielplatzConsumer().setRuleCall$10$Delimiter(ReferenceGrammarTestLanguageDelimiters.ruleCall$10$Delimiter);
-		getSpielplatzConsumer().setKeyword$6$Delimiter(ReferenceGrammarTestLanguageDelimiters.keyword$8$Delimiter);
 		getSpielplatzConsumer().setKeyword$11$Delimiter(ReferenceGrammarTestLanguageDelimiters.keyword$13$Delimiter);
 		getSpielplatzConsumer().setKeyword$23$Delimiter(ReferenceGrammarTestLanguageDelimiters.keyword$13$Delimiter);
+		getSpielplatzConsumer().setKeyword$6$Delimiter(ReferenceGrammarTestLanguageDelimiters.keyword$8$Delimiter);
+		getSpielplatzConsumer().setRuleCall$8$Delimiter(ReferenceGrammarTestLanguageDelimiters.ruleCall$10$Delimiter);
+		getSpielplatzConsumer().setRuleCall$10$Delimiter(ReferenceGrammarTestLanguageDelimiters.ruleCall$10$Delimiter);
+		getKindConsumer().setKeyword$5$Delimiter(ReferenceGrammarTestLanguageDelimiters.keyword$8$Delimiter);
 		getKindConsumer().setKeyword$6$Delimiter(ReferenceGrammarTestLanguageDelimiters.keyword$13$Delimiter);
 		getKindConsumer().setKeyword$11$Delimiter(ReferenceGrammarTestLanguageDelimiters.keyword$13$Delimiter);
 		getKindConsumer().setRuleCall$8$Delimiter(ReferenceGrammarTestLanguageDelimiters.ruleCall$40$Delimiter);
 		getKindConsumer().setRuleCall$10$Delimiter(ReferenceGrammarTestLanguageDelimiters.ruleCall$10$Delimiter);
-		getKindConsumer().setKeyword$5$Delimiter(ReferenceGrammarTestLanguageDelimiters.keyword$8$Delimiter);
+		getErwachsenerConsumer().setKeyword$5$Delimiter(ReferenceGrammarTestLanguageDelimiters.keyword$8$Delimiter);
 		getErwachsenerConsumer().setKeyword$6$Delimiter(ReferenceGrammarTestLanguageDelimiters.keyword$13$Delimiter);
 		getErwachsenerConsumer().setKeyword$11$Delimiter(ReferenceGrammarTestLanguageDelimiters.keyword$13$Delimiter);
 		getErwachsenerConsumer().setRuleCall$8$Delimiter(ReferenceGrammarTestLanguageDelimiters.ruleCall$40$Delimiter);
 		getErwachsenerConsumer().setRuleCall$10$Delimiter(ReferenceGrammarTestLanguageDelimiters.ruleCall$10$Delimiter);
-		getErwachsenerConsumer().setKeyword$5$Delimiter(ReferenceGrammarTestLanguageDelimiters.keyword$8$Delimiter);
+		getSpielzeugConsumer().setKeyword$5$Delimiter(ReferenceGrammarTestLanguageDelimiters.keyword$8$Delimiter);
 		getSpielzeugConsumer().setKeyword$6$Delimiter(ReferenceGrammarTestLanguageDelimiters.keyword$13$Delimiter);
 		getSpielzeugConsumer().setKeyword$11$Delimiter(ReferenceGrammarTestLanguageDelimiters.keyword$13$Delimiter);
 		getSpielzeugConsumer().setRuleCall$8$Delimiter(ReferenceGrammarTestLanguageDelimiters.ruleCall$40$Delimiter);
-		getSpielzeugConsumer().setKeyword$5$Delimiter(ReferenceGrammarTestLanguageDelimiters.keyword$8$Delimiter);
+		getFarbeConsumer().setKeyword$4$Delimiter(ReferenceGrammarTestLanguageDelimiters.keyword$8$Delimiter);
 		getFarbeConsumer().setKeyword$5$Delimiter(ReferenceGrammarTestLanguageDelimiters.keyword$8$Delimiter);
 		getFarbeConsumer().setKeyword$6$Delimiter(ReferenceGrammarTestLanguageDelimiters.keyword$8$Delimiter);
 		getFarbeConsumer().setKeyword$7$Delimiter(ReferenceGrammarTestLanguageDelimiters.keyword$8$Delimiter);
-		getFarbeConsumer().setKeyword$4$Delimiter(ReferenceGrammarTestLanguageDelimiters.keyword$8$Delimiter);
-		getFamilieConsumer().setKeyword$9$Delimiter(ReferenceGrammarTestLanguageDelimiters.keyword$13$Delimiter);
-		getFamilieConsumer().setKeyword$30$Delimiter(ReferenceGrammarTestLanguageDelimiters.keyword$13$Delimiter);
-		getFamilieConsumer().setKeyword$26$Delimiter(ReferenceGrammarTestLanguageDelimiters.keyword$13$Delimiter);
-		getFamilieConsumer().setCrossReference$28$Delimiter(ReferenceGrammarTestLanguageDelimiters.ruleCall$40$Delimiter);
 		getFamilieConsumer().setCrossReference$20$Delimiter(ReferenceGrammarTestLanguageDelimiters.ruleCall$40$Delimiter);
 		getFamilieConsumer().setCrossReference$23$Delimiter(ReferenceGrammarTestLanguageDelimiters.ruleCall$40$Delimiter);
+		getFamilieConsumer().setCrossReference$28$Delimiter(ReferenceGrammarTestLanguageDelimiters.ruleCall$40$Delimiter);
 		getFamilieConsumer().setCrossReference$17$Delimiter(ReferenceGrammarTestLanguageDelimiters.ruleCall$40$Delimiter);
-		getFamilieConsumer().setRuleCall$15$Delimiter(ReferenceGrammarTestLanguageDelimiters.ruleCall$40$Delimiter);
-		getFamilieConsumer().setRuleCall$14$Delimiter(ReferenceGrammarTestLanguageDelimiters.ruleCall$10$Delimiter);
+		getFamilieConsumer().setKeyword$26$Delimiter(ReferenceGrammarTestLanguageDelimiters.keyword$13$Delimiter);
+		getFamilieConsumer().setKeyword$30$Delimiter(ReferenceGrammarTestLanguageDelimiters.keyword$13$Delimiter);
 		getFamilieConsumer().setKeyword$8$Delimiter(ReferenceGrammarTestLanguageDelimiters.keyword$8$Delimiter);
+		getFamilieConsumer().setKeyword$9$Delimiter(ReferenceGrammarTestLanguageDelimiters.keyword$13$Delimiter);
 		getFamilieConsumer().setKeyword$13$Delimiter(ReferenceGrammarTestLanguageDelimiters.keyword$8$Delimiter);
+		getFamilieConsumer().setRuleCall$14$Delimiter(ReferenceGrammarTestLanguageDelimiters.ruleCall$10$Delimiter);
+		getFamilieConsumer().setRuleCall$15$Delimiter(ReferenceGrammarTestLanguageDelimiters.ruleCall$40$Delimiter);
 	}
 	
 	// TODO collect superGrammars transitive

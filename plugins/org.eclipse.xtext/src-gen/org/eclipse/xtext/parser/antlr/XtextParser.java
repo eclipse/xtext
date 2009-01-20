@@ -22,7 +22,7 @@ public class XtextParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrPar
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in, IAstFactory factory) {
 		InternalXtextLexer lexer = new InternalXtextLexer(in);
-		XtextTokenStream stream = new XtextTokenStream(lexer);
+		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		InternalXtextParser parser = new InternalXtextParser(
 				stream, factory, grammarAccess.getGrammar());
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());

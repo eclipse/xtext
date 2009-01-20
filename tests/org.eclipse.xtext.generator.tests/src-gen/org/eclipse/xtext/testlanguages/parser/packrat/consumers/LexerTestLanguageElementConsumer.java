@@ -27,16 +27,16 @@ public final class LexerTestLanguageElementConsumer extends NonTerminalConsumer 
 	private XtextBuiltinIDConsumer idConsumer;
 	private LexerTestLanguageSTRINGConsumer stringConsumer;
 
-	private ISequenceMatcher ruleCall$3$Delimiter;
-	
 	private ISequenceMatcher ruleCall$5$Delimiter;
+	
+	private ISequenceMatcher ruleCall$3$Delimiter;
 	
 	public LexerTestLanguageElementConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
-		ruleCall$3$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		ruleCall$5$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		ruleCall$3$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -89,20 +89,20 @@ public final class LexerTestLanguageElementConsumer extends NonTerminalConsumer 
 		this.stringConsumer = stringConsumer;
 	}
 	
-	public ISequenceMatcher getRuleCall$3$Delimiter() {
-		return ruleCall$3$Delimiter;
-	}
-	
-	public void setRuleCall$3$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$3$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
-	}
-	
 	public ISequenceMatcher getRuleCall$5$Delimiter() {
 		return ruleCall$5$Delimiter;
 	}
 	
 	public void setRuleCall$5$Delimiter(ISequenceMatcher matcher) {
 		ruleCall$5$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	}
+	
+	public ISequenceMatcher getRuleCall$3$Delimiter() {
+		return ruleCall$3$Delimiter;
+	}
+	
+	public void setRuleCall$3$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$3$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 }

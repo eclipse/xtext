@@ -41,37 +41,37 @@ T41 : '..' ;
 T42 : '[' ;
 T43 : ']' ;
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalXtextTerminalsTestLanguage.g" 2190
+// $ANTLR src "./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalXtextTerminalsTestLanguage.g" 2237
 RULE_ID : '^'? (('a'..'z'|'A'..'Z')|'_') ((('a'..'z'|'A'..'Z')|'_')|'0'..'9')*;
 
 
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalXtextTerminalsTestLanguage.g" 2194
+// $ANTLR src "./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalXtextTerminalsTestLanguage.g" 2241
 RULE_INT : ('0'..'9')+;
 
 
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalXtextTerminalsTestLanguage.g" 2198
+// $ANTLR src "./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalXtextTerminalsTestLanguage.g" 2245
 RULE_STRING : ('"' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'"')|'\'')|'\\')|~(('\\'|'"')))* '"'|'\'' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'"')|'\'')|'\\')|~(('\\'|'\'')))* '\'');
 
 
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalXtextTerminalsTestLanguage.g" 2202
-RULE_ML_COMMENT : '/*' ~('*/')*'*/';
+// $ANTLR src "./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalXtextTerminalsTestLanguage.g" 2249
+RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
 
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalXtextTerminalsTestLanguage.g" 2206
+// $ANTLR src "./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalXtextTerminalsTestLanguage.g" 2253
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
 
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalXtextTerminalsTestLanguage.g" 2210
+// $ANTLR src "./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalXtextTerminalsTestLanguage.g" 2257
 RULE_WS : (((' '|'\t')|'\r')|'\n')+;
 
 
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalXtextTerminalsTestLanguage.g" 2214
+// $ANTLR src "./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalXtextTerminalsTestLanguage.g" 2261
 RULE_ANY_OTHER : .;
 
 

@@ -98,9 +98,9 @@ public class DatatypeRulesTestLanguageParserConfiguration extends AbstractParser
 
 		getVectorConsumer().setIntConsumer(getIntConsumer());
 
+		getModelConsumer().setKeyword$8$Delimiter(DatatypeRulesTestLanguageDelimiters.keyword$15$Delimiter);
 		getModelConsumer().setKeyword$12$Delimiter(DatatypeRulesTestLanguageDelimiters.keyword$15$Delimiter);
 		getModelConsumer().setKeyword$16$Delimiter(DatatypeRulesTestLanguageDelimiters.keyword$15$Delimiter);
-		getModelConsumer().setKeyword$8$Delimiter(DatatypeRulesTestLanguageDelimiters.keyword$15$Delimiter);
 		getModelConsumer().setKeyword$19$Delimiter(DatatypeRulesTestLanguageDelimiters.keyword$15$Delimiter);
 		getModelIdConsumer().setKeyword$4$Delimiter(DatatypeRulesTestLanguageDelimiters.keyword$15$Delimiter);
 		getModelIdConsumer().setRuleCall$3$Delimiter(DatatypeRulesTestLanguageDelimiters.ruleCall$31$Delimiter);
@@ -111,8 +111,8 @@ public class DatatypeRulesTestLanguageParserConfiguration extends AbstractParser
 		getFractionConsumer().setRuleCall$5$Delimiter(DatatypeRulesTestLanguageDelimiters.ruleCall$31$Delimiter);
 		getVectorConsumer().setKeyword$4$Delimiter(DatatypeRulesTestLanguageDelimiters.keyword$15$Delimiter);
 		getVectorConsumer().setKeyword$7$Delimiter(DatatypeRulesTestLanguageDelimiters.keyword$15$Delimiter);
-		getVectorConsumer().setRuleCall$6$Delimiter(DatatypeRulesTestLanguageDelimiters.ruleCall$31$Delimiter);
 		getVectorConsumer().setRuleCall$5$Delimiter(DatatypeRulesTestLanguageDelimiters.ruleCall$31$Delimiter);
+		getVectorConsumer().setRuleCall$6$Delimiter(DatatypeRulesTestLanguageDelimiters.ruleCall$31$Delimiter);
 		getDotsConsumer().setKeyword$3$Delimiter(DatatypeRulesTestLanguageDelimiters.keyword$15$Delimiter);
 		getDotsConsumer().setKeyword$4$Delimiter(DatatypeRulesTestLanguageDelimiters.keyword$15$Delimiter);
 		getDotsConsumer().setKeyword$5$Delimiter(DatatypeRulesTestLanguageDelimiters.keyword$15$Delimiter);

@@ -17,7 +17,7 @@ extension org::eclipse::xtext::GrammarUtil reexport;
 	 
 ParserRule calledParserRule(RuleCall this) :
 	if ParserRule.isInstance(rule) then rule;
-	
+
 boolean isKeywordAssignment(Assignment a) :
 	Keyword.isInstance(a.terminal) || 
 	a.eAllContents.forAll(e | !(RuleCall.isInstance(e)));
@@ -26,7 +26,7 @@ boolean isRuleAssignment(Assignment a) :
 	RuleCall.isInstance(a.terminal);
 
 boolean isParserRuleAssignment(Assignment a) :
-	a.isRuleAssignment() && ((RuleCall) a.terminal).calledParserRule() != null ;
+	a.isRuleAssignment() && ((RuleCall) a.terminal).calledParserRule() != null && !((RuleCall) a.terminal).calledParserRule().terminal;
 	
 isMultipleCardinality(AbstractElement this) :
 	{'*','+'}.contains(this.cardinality);

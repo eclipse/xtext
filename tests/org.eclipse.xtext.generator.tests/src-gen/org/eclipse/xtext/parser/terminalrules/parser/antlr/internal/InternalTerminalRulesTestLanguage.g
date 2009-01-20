@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
 import org.eclipse.xtext.conversion.ValueConverterException;
 
@@ -73,19 +74,21 @@ entryRuleModel returns [EObject current=null] :
 
 // Rule Model
 ruleModel returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    }:
 (((((((	
 	
-	    
-	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.xmi#//@rules.0/@alternatives/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@terminal" /* xtext::RuleCall */, currentNode); 
-	    }
-	    lv_idValue=RULE_ID 
+	    lv_idValue=RULE_ID
+    { 
+    createLeafNode("classpath:/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.xmi#//@rules.0/@alternatives/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@terminal" /* xtext::RuleCall */, "idValue"); 
+    }
+ 
 	    {
 	        if ($current==null) {
 	            $current = factory.create("Model");
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
 	        try {
@@ -93,21 +96,20 @@ ruleModel returns [EObject current=null]
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
-	        currentNode = currentNode.getParent();
 	    }
 	
 )
     |(	
 	
-	    
-	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.xmi#//@rules.0/@alternatives/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
-	    }
-	    lv_intValue=RULE_INT 
+	    lv_intValue=RULE_INT
+    { 
+    createLeafNode("classpath:/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.xmi#//@rules.0/@alternatives/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::RuleCall */, "intValue"); 
+    }
+ 
 	    {
 	        if ($current==null) {
 	            $current = factory.create("Model");
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
 	        try {
@@ -115,21 +117,20 @@ ruleModel returns [EObject current=null]
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
-	        currentNode = currentNode.getParent();
 	    }
 	
 ))
     |(	
 	
-	    
-	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.xmi#//@rules.0/@alternatives/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
-	    }
-	    lv_stringValue=RULE_STRING 
+	    lv_stringValue=RULE_STRING
+    { 
+    createLeafNode("classpath:/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.xmi#//@rules.0/@alternatives/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::RuleCall */, "stringValue"); 
+    }
+ 
 	    {
 	        if ($current==null) {
 	            $current = factory.create("Model");
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
 	        try {
@@ -137,21 +138,20 @@ ruleModel returns [EObject current=null]
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
-	        currentNode = currentNode.getParent();
 	    }
 	
 ))
     |(	
 	
-	    
-	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.xmi#//@rules.0/@alternatives/@groups.0/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
-	    }
-	    lv_mlCommentValue=RULE_ML_COMMENT 
+	    lv_mlCommentValue=RULE_ML_COMMENT
+    { 
+    createLeafNode("classpath:/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.xmi#//@rules.0/@alternatives/@groups.0/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::RuleCall */, "mlCommentValue"); 
+    }
+ 
 	    {
 	        if ($current==null) {
 	            $current = factory.create("Model");
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
 	        try {
@@ -159,21 +159,20 @@ ruleModel returns [EObject current=null]
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
-	        currentNode = currentNode.getParent();
 	    }
 	
 ))
     |(	
 	
-	    
-	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.xmi#//@rules.0/@alternatives/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
-	    }
-	    lv_slCommentValue=RULE_SL_COMMENT 
+	    lv_slCommentValue=RULE_SL_COMMENT
+    { 
+    createLeafNode("classpath:/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.xmi#//@rules.0/@alternatives/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::RuleCall */, "slCommentValue"); 
+    }
+ 
 	    {
 	        if ($current==null) {
 	            $current = factory.create("Model");
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
 	        try {
@@ -181,21 +180,20 @@ ruleModel returns [EObject current=null]
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
-	        currentNode = currentNode.getParent();
 	    }
 	
 ))
     |(	
 	
-	    
-	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.xmi#//@rules.0/@alternatives/@groups.0/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
-	    }
-	    lv_wsValue=RULE_WS 
+	    lv_wsValue=RULE_WS
+    { 
+    createLeafNode("classpath:/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.xmi#//@rules.0/@alternatives/@groups.0/@groups.1/@terminal" /* xtext::RuleCall */, "wsValue"); 
+    }
+ 
 	    {
 	        if ($current==null) {
 	            $current = factory.create("Model");
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
 	        try {
@@ -203,21 +201,20 @@ ruleModel returns [EObject current=null]
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
-	        currentNode = currentNode.getParent();
 	    }
 	
 ))
     |(	
 	
-	    
-	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.xmi#//@rules.0/@alternatives/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
-	    }
-	    lv_anyValue=RULE_ANY_OTHER 
+	    lv_anyValue=RULE_ANY_OTHER
+    { 
+    createLeafNode("classpath:/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.xmi#//@rules.0/@alternatives/@groups.1/@terminal" /* xtext::RuleCall */, "anyValue"); 
+    }
+ 
 	    {
 	        if ($current==null) {
 	            $current = factory.create("Model");
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
 	        try {
@@ -225,7 +222,6 @@ ruleModel returns [EObject current=null]
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
-	        currentNode = currentNode.getParent();
 	    }
 	
 ));
@@ -278,7 +274,7 @@ RULE_STRING : ('"' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'"')|'\'')|'\\')|~(('\\'
 
 
 
-RULE_ML_COMMENT : '/*' ~('*/')*'*/';
+RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
 
 

@@ -22,7 +22,7 @@ public class LookaheadTestLanguageParser extends org.eclipse.xtext.parser.antlr.
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in, IAstFactory factory) {
 		InternalLookaheadTestLanguageLexer lexer = new InternalLookaheadTestLanguageLexer(in);
-		XtextTokenStream stream = new XtextTokenStream(lexer);
+		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		InternalLookaheadTestLanguageParser parser = new InternalLookaheadTestLanguageParser(
 				stream, factory, grammarAccess.getGrammar());
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());
