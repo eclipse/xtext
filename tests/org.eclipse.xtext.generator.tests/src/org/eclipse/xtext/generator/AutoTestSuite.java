@@ -46,8 +46,6 @@ public class AutoTestSuite {
 		suite.addTestSuite(org.eclipse.xtext.resource.metamodel.TypeHierarchyHelperTests.class);
 		suite.addTestSuite(org.eclipse.xtext.crossrefs.CrossRefTest.class);
 		suite.addTestSuite(org.eclipse.xtext.crossrefs.LinkingErrorTest.class);
-		suite.addTestSuite(org.eclipse.xtext.util.SimpleCacheTest.class);
-		suite.addTestSuite(org.eclipse.xtext.util.FilteringIteratorTest.class);
 		suite.addTestSuite(org.eclipse.xtext.parser.XtextParserBugsTest.class);
 		suite.addTestSuite(org.eclipse.xtext.parsetree.transientvalues.TransientValuesTest.class );
 		suite.addTestSuite(org.eclipse.xtext.parsetree.formatter.FormatterTest.class );

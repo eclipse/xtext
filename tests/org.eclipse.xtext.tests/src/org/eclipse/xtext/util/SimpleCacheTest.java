@@ -7,6 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.util;
 
+import org.eclipse.xtext.util.Function;
+import org.eclipse.xtext.util.SimpleCache;
+
 import junit.framework.TestCase;
 
 /**
