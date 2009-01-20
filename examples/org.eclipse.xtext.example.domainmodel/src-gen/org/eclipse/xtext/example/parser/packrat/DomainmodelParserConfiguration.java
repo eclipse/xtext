@@ -73,8 +73,7 @@ public class DomainmodelParserConfiguration extends AbstractParserConfiguration 
 	public void createNonTerminalConsumers() {
 		getXtextBuiltinConfiguration().createNonTerminalConsumers();
 		fileConsumer = new DomainmodelFileConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(),
-    		new ITerminalConsumer[]{ getWsConsumer(), getMlCommentConsumer(), getSlCommentConsumer() }
+    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
     	);
 		importConsumer = new DomainmodelImportConsumer(
     		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
@@ -175,50 +174,36 @@ public class DomainmodelParserConfiguration extends AbstractParserConfiguration 
 
 		getImportConsumer().setKeyword$2$Delimiter(DomainmodelDelimiters.keyword$12$Delimiter);
 		getImportConsumer().setRuleCall$4$Delimiter(DomainmodelDelimiters.ruleCall$14$Delimiter);
+		getPackageConsumer().setKeyword$5$Delimiter(DomainmodelDelimiters.keyword$12$Delimiter);
 		getPackageConsumer().setKeyword$8$Delimiter(DomainmodelDelimiters.keyword$29$Delimiter);
 		getPackageConsumer().setKeyword$11$Delimiter(DomainmodelDelimiters.keyword$29$Delimiter);
-		getPackageConsumer().setKeyword$5$Delimiter(DomainmodelDelimiters.keyword$12$Delimiter);
 		getDataTypeConsumer().setKeyword$2$Delimiter(DomainmodelDelimiters.keyword$12$Delimiter);
 		getDataTypeConsumer().setRuleCall$4$Delimiter(DomainmodelDelimiters.ruleCall$43$Delimiter);
-		getEntityConsumer().setRuleCall$8$Delimiter(DomainmodelDelimiters.ruleCall$43$Delimiter);
-		getEntityConsumer().setKeyword$17$Delimiter(DomainmodelDelimiters.keyword$29$Delimiter);
 		getEntityConsumer().setCrossReference$12$Delimiter(DomainmodelDelimiters.ruleCall$43$Delimiter);
-		getEntityConsumer().setKeyword$14$Delimiter(DomainmodelDelimiters.keyword$29$Delimiter);
-		getEntityConsumer().setKeyword$10$Delimiter(DomainmodelDelimiters.keyword$12$Delimiter);
 		getEntityConsumer().setKeyword$6$Delimiter(DomainmodelDelimiters.keyword$12$Delimiter);
-		getAttributeConsumer().setRuleCall$6$Delimiter(DomainmodelDelimiters.ruleCall$43$Delimiter);
-		getAttributeConsumer().setKeyword$7$Delimiter(DomainmodelDelimiters.keyword$29$Delimiter);
+		getEntityConsumer().setKeyword$10$Delimiter(DomainmodelDelimiters.keyword$12$Delimiter);
+		getEntityConsumer().setKeyword$14$Delimiter(DomainmodelDelimiters.keyword$29$Delimiter);
+		getEntityConsumer().setKeyword$17$Delimiter(DomainmodelDelimiters.keyword$29$Delimiter);
+		getEntityConsumer().setRuleCall$8$Delimiter(DomainmodelDelimiters.ruleCall$43$Delimiter);
 		getAttributeConsumer().setKeyword$4$Delimiter(DomainmodelDelimiters.keyword$12$Delimiter);
-		getReferenceConsumer().setKeyword$12$Delimiter(DomainmodelDelimiters.keyword$12$Delimiter);
-		getReferenceConsumer().setRuleCall$7$Delimiter(DomainmodelDelimiters.ruleCall$43$Delimiter);
-		getReferenceConsumer().setKeyword$8$Delimiter(DomainmodelDelimiters.keyword$29$Delimiter);
+		getAttributeConsumer().setKeyword$7$Delimiter(DomainmodelDelimiters.keyword$29$Delimiter);
+		getAttributeConsumer().setRuleCall$6$Delimiter(DomainmodelDelimiters.ruleCall$43$Delimiter);
 		getReferenceConsumer().setCrossReference$14$Delimiter(DomainmodelDelimiters.ruleCall$43$Delimiter);
 		getReferenceConsumer().setKeyword$5$Delimiter(DomainmodelDelimiters.keyword$12$Delimiter);
-		getOperationConsumer().setRuleCall$9$Delimiter(DomainmodelDelimiters.ruleCall$43$Delimiter);
-		getOperationConsumer().setKeyword$18$Delimiter(DomainmodelDelimiters.keyword$29$Delimiter);
+		getReferenceConsumer().setKeyword$8$Delimiter(DomainmodelDelimiters.keyword$29$Delimiter);
+		getReferenceConsumer().setKeyword$12$Delimiter(DomainmodelDelimiters.keyword$12$Delimiter);
+		getReferenceConsumer().setRuleCall$7$Delimiter(DomainmodelDelimiters.ruleCall$43$Delimiter);
+		getOperationConsumer().setKeyword$7$Delimiter(DomainmodelDelimiters.keyword$12$Delimiter);
 		getOperationConsumer().setKeyword$10$Delimiter(DomainmodelDelimiters.keyword$29$Delimiter);
 		getOperationConsumer().setKeyword$15$Delimiter(DomainmodelDelimiters.keyword$29$Delimiter);
-		getOperationConsumer().setKeyword$7$Delimiter(DomainmodelDelimiters.keyword$12$Delimiter);
+		getOperationConsumer().setKeyword$18$Delimiter(DomainmodelDelimiters.keyword$29$Delimiter);
 		getOperationConsumer().setKeyword$19$Delimiter(DomainmodelDelimiters.keyword$29$Delimiter);
+		getOperationConsumer().setRuleCall$9$Delimiter(DomainmodelDelimiters.ruleCall$43$Delimiter);
 		getParameterConsumer().setRuleCall$3$Delimiter(DomainmodelDelimiters.ruleCall$43$Delimiter);
 		getTypeRefConsumer().setCrossReference$2$Delimiter(DomainmodelDelimiters.ruleCall$43$Delimiter);
 		getQualifiedNameConsumer().setKeyword$4$Delimiter(DomainmodelDelimiters.keyword$29$Delimiter);
-		getQualifiedNameConsumer().setRuleCall$5$Delimiter(DomainmodelDelimiters.ruleCall$43$Delimiter);
 		getQualifiedNameConsumer().setRuleCall$2$Delimiter(DomainmodelDelimiters.ruleCall$43$Delimiter);
-		// TODO remove workaround
-		getIdConsumer().initFields(this);
-		// TODO remove workaround
-		getIntConsumer().initFields(this);
-		// TODO remove workaround
-		getStringConsumer().initFields(this);
-		// TODO remove workaround
-		getMlCommentConsumer().initFields(this);
-		// TODO remove workaround
-		getSlCommentConsumer().initFields(this);
-		// TODO remove workaround
-		getWsConsumer().initFields(this);
-		// TODO remove workaround
-		getAnyOtherConsumer().initFields(this);
+		getQualifiedNameConsumer().setRuleCall$5$Delimiter(DomainmodelDelimiters.ruleCall$43$Delimiter);
 	}
 	
 	// TODO collect superGrammars transitive

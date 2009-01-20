@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
 import org.eclipse.xtext.conversion.ValueConverterException;
 
@@ -62,6 +63,7 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 
 
 
+
 // Entry rule entryRuleFile
 entryRuleFile returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/Domainmodel.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); }
@@ -72,8 +74,10 @@ entryRuleFile returns [EObject current=null] :
 
 // Rule File
 ruleFile returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    }:
 ((	
 	
 	    
@@ -122,6 +126,8 @@ ruleFile returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleImport
 entryRuleImport returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/Domainmodel.xmi#//@rules.1" /* xtext::ParserRule */, currentNode); }
@@ -132,8 +138,10 @@ entryRuleImport returns [EObject current=null] :
 
 // Rule Import
 ruleImport returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    }:
 ('import' 
     {
         createLeafNode("classpath:/org/eclipse/xtext/example/Domainmodel.xmi#//@rules.1/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
@@ -164,6 +172,8 @@ ruleImport returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleNamedElement
 entryRuleNamedElement returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/Domainmodel.xmi#//@rules.2" /* xtext::ParserRule */, currentNode); }
@@ -174,8 +184,10 @@ entryRuleNamedElement returns [EObject current=null] :
 
 // Rule NamedElement
 ruleNamedElement returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    }:
 (
     { 
         currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/Domainmodel.xmi#//@rules.2/@alternatives/@groups.0" /* xtext::RuleCall */, currentNode); 
@@ -201,6 +213,8 @@ ruleNamedElement returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRulePackage
 entryRulePackage returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/Domainmodel.xmi#//@rules.3" /* xtext::ParserRule */, currentNode); }
@@ -211,8 +225,10 @@ entryRulePackage returns [EObject current=null] :
 
 // Rule Package
 rulePackage returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    }:
 (((('package' 
     {
         createLeafNode("classpath:/org/eclipse/xtext/example/Domainmodel.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
@@ -273,6 +289,8 @@ rulePackage returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleType
 entryRuleType returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/Domainmodel.xmi#//@rules.4" /* xtext::ParserRule */, currentNode); }
@@ -283,8 +301,10 @@ entryRuleType returns [EObject current=null] :
 
 // Rule Type
 ruleType returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    }:
 (
     { 
         currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/Domainmodel.xmi#//@rules.4/@alternatives/@groups.0" /* xtext::RuleCall */, currentNode); 
@@ -310,6 +330,8 @@ ruleType returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleDataType
 entryRuleDataType returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/Domainmodel.xmi#//@rules.5" /* xtext::ParserRule */, currentNode); }
@@ -320,8 +342,10 @@ entryRuleDataType returns [EObject current=null] :
 
 // Rule DataType
 ruleDataType returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    }:
 ('datatype' 
     {
         createLeafNode("classpath:/org/eclipse/xtext/example/Domainmodel.xmi#//@rules.5/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
@@ -352,6 +376,8 @@ ruleDataType returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleEntity
 entryRuleEntity returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/Domainmodel.xmi#//@rules.6" /* xtext::ParserRule */, currentNode); }
@@ -362,8 +388,10 @@ entryRuleEntity returns [EObject current=null] :
 
 // Rule Entity
 ruleEntity returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    }:
 ((((('entity' 
     {
         createLeafNode("classpath:/org/eclipse/xtext/example/Domainmodel.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
@@ -442,6 +470,8 @@ ruleEntity returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleFeature
 entryRuleFeature returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/Domainmodel.xmi#//@rules.7" /* xtext::ParserRule */, currentNode); }
@@ -452,8 +482,10 @@ entryRuleFeature returns [EObject current=null] :
 
 // Rule Feature
 ruleFeature returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    }:
 (
     { 
         currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/Domainmodel.xmi#//@rules.7/@alternatives/@groups.0" /* xtext::RuleCall */, currentNode); 
@@ -479,6 +511,8 @@ ruleFeature returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleStructuralFeature
 entryRuleStructuralFeature returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/Domainmodel.xmi#//@rules.8" /* xtext::ParserRule */, currentNode); }
@@ -489,8 +523,10 @@ entryRuleStructuralFeature returns [EObject current=null] :
 
 // Rule StructuralFeature
 ruleStructuralFeature returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    }:
 (
     { 
         currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/Domainmodel.xmi#//@rules.8/@alternatives/@groups.0" /* xtext::RuleCall */, currentNode); 
@@ -516,6 +552,8 @@ ruleStructuralFeature returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleAttribute
 entryRuleAttribute returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/Domainmodel.xmi#//@rules.9" /* xtext::ParserRule */, currentNode); }
@@ -526,8 +564,10 @@ entryRuleAttribute returns [EObject current=null] :
 
 // Rule Attribute
 ruleAttribute returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    }:
 ((('attr' 
     {
         createLeafNode("classpath:/org/eclipse/xtext/example/Domainmodel.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
@@ -583,6 +623,8 @@ ruleAttribute returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleReference
 entryRuleReference returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/Domainmodel.xmi#//@rules.10" /* xtext::ParserRule */, currentNode); }
@@ -593,8 +635,10 @@ entryRuleReference returns [EObject current=null] :
 
 // Rule Reference
 ruleReference returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    }:
 (((('ref' 
     {
         createLeafNode("classpath:/org/eclipse/xtext/example/Domainmodel.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
@@ -669,6 +713,8 @@ ruleReference returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleOperation
 entryRuleOperation returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/Domainmodel.xmi#//@rules.11" /* xtext::ParserRule */, currentNode); }
@@ -679,8 +725,10 @@ entryRuleOperation returns [EObject current=null] :
 
 // Rule Operation
 ruleOperation returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    }:
 (((((('op' 
     {
         createLeafNode("classpath:/org/eclipse/xtext/example/Domainmodel.xmi#//@rules.11/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
@@ -790,6 +838,8 @@ ruleOperation returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleParameter
 entryRuleParameter returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/Domainmodel.xmi#//@rules.12" /* xtext::ParserRule */, currentNode); }
@@ -800,8 +850,10 @@ entryRuleParameter returns [EObject current=null] :
 
 // Rule Parameter
 ruleParameter returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    }:
 ((	
 	
 	    lv_name=RULE_ID
@@ -851,6 +903,8 @@ ruleParameter returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleTypeRef
 entryRuleTypeRef returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/Domainmodel.xmi#//@rules.14" /* xtext::ParserRule */, currentNode); }
@@ -861,8 +915,10 @@ entryRuleTypeRef returns [EObject current=null] :
 
 // Rule TypeRef
 ruleTypeRef returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    }:
 (	
 	
 		
@@ -884,6 +940,8 @@ ruleTypeRef returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleQualifiedName
 entryRuleQualifiedName returns [String current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/Domainmodel.xmi#//@rules.15" /* xtext::ParserRule */, currentNode); } 
@@ -894,8 +952,10 @@ entryRuleQualifiedName returns [String current=null] :
 
 // Rule QualifiedName
 ruleQualifiedName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
-    @init { setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); }:
+    @init { setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    }:
 (    this_ID=RULE_ID    {
 		$current.merge(this_ID);
     }
@@ -918,6 +978,40 @@ ruleQualifiedName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleT
     }
 )*)
     ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

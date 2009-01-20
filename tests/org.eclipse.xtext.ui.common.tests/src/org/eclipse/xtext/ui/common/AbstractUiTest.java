@@ -16,6 +16,7 @@ package org.eclipse.xtext.ui.common;
 import java.lang.reflect.Method;
 import java.util.Set;
 
+import org.eclipse.xtext.example.DomainmodelStandaloneSetup;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.service.IServiceRegistrationFactory.IServiceRegistration;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
@@ -24,6 +25,22 @@ import org.eclipse.xtext.tests.AbstractGeneratorTest;
  * @author Michael Clay - Initial contribution and API
  */
 public abstract class AbstractUiTest extends AbstractGeneratorTest {
+	
+	public final static Class<?>[] ADDITIONAL_UI_TEST_CLASSES = new Class[] { 
+		DomainmodelStandaloneSetup.class,
+	};
+	
+	static {
+		for (Class<?> testClass : ADDITIONAL_UI_TEST_CLASSES) {
+			try {
+				Method doSetupMethod = testClass.getMethod("doSetup");
+				doSetupMethod.invoke(null);
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
+		}
+	}
 
 	/**
 	 * used to populate the serviceRegistry

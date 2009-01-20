@@ -15,6 +15,8 @@ package org.eclipse.xtext.ui.common.editor.contentassist.impl;
 
 import org.eclipse.xtext.XtextGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.XtextGrammarTestLanguageUiConfig;
+import org.eclipse.xtext.example.DomainmodelStandaloneSetup;
+import org.eclipse.xtext.example.DomainmodelUiConfig;
 import org.eclipse.xtext.testlanguages.ContentAssistTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.ContentAssistTestLanguageUiConfig;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
@@ -36,10 +38,20 @@ public class DefaultContentAssistProcessorTest extends AbstractUiTest
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
+		withUi(DomainmodelStandaloneSetup.class,DomainmodelUiConfig.class);
 		withUi(XtextGrammarTestLanguageStandaloneSetup.class, XtextGrammarTestLanguageUiConfig.class);
 		withUi(ContentAssistTestLanguageStandaloneSetup.class, ContentAssistTestLanguageUiConfig.class);
 		withUi(ReferenceGrammarTestLanguageStandaloneSetup.class,ReferenceGrammarTestLanguageUiConfig.class);
 		contentAssistProcessorTestBuilder = new ContentAssistProcessorTestBuilder(getCurrentServiceScope(),new DefaultContentAssistProcessor());
+	}
+	
+	public void testComputePrefix() throws Exception {
+		contentAssistProcessorTestBuilder
+		.append("foo fvdf dfv(").assertMatchString("(").reset()
+		.append("foo fvdf dfv").assertMatchString("dfv").reset()
+		.append("foo fvdf dfv_").assertMatchString("dfv_").reset()
+		.append("foo fvdf dfv_ ").assertMatchString("").reset()
+		.append("").assertMatchString("");
 	}
 	
 	public void testComputeCompletionProposalsCount() throws Exception {
@@ -97,6 +109,40 @@ public class DefaultContentAssistProcessorTest extends AbstractUiTest
 		;
 	}
 	
+	/**
+	 * 
+	 * <p>
+	 * Tests proposals sample domain language.
+	 * </p>
+	 * 
+	 * <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=260688">Bug 260688 </a>
+	 * 
+	 */
+	public void testDomainLanguage() throws Exception {
+		newBuilder(DomainmodelStandaloneSetup.class, DomainmodelUiConfig.class)
+		.assertCount(4)
+		.append("d").assertCount(1)
+		.append("a").assertCount(1)
+		.append("t").assertCount(1)
+		.append("a").assertCount(1)
+		.reset().assertCount(4)
+		.append("e").assertCount(1)
+		.append("n").assertCount(1)
+		.append("t").assertCount(1)
+		.append("i").assertCount(1)
+		.reset().assertCount(4)
+		.append("i").assertCount(1)
+		.append("m").assertCount(1)
+		.append("p").assertCount(1)
+		.append("o").assertCount(1)
+		.reset().assertCount(4)
+		.append("p").assertCount(1)
+		.append("a").assertCount(1)
+		.append("c").assertCount(1)
+		.append("k").assertCount(1);
+	}
+	
+	
 	public void testCompleteRuleCall() throws Exception {
 		newBuilder(XtextGrammarTestLanguageStandaloneSetup.class, XtextGrammarTestLanguageUiConfig.class)
 			.appendNl("language foo")
@@ -125,30 +171,16 @@ public class DefaultContentAssistProcessorTest extends AbstractUiTest
 			);
 	}
 	
-	
 	public void testDefaultRule() throws Exception {
 		contentAssistProcessorTestBuilder.assertText("spielplatz");
 		contentAssistProcessorTestBuilder.append(" spielplatz 1 \"SpielplatzBeschreibung\" { } ")
 			.assertTextAtCursorPosition(1, "spielplatz");
 	}
 	
+	
 	private ContentAssistProcessorTestBuilder newBuilder(Class<?> standAloneSetup, Class<?> uiConfig) throws Exception {
 		withUi(standAloneSetup, uiConfig);
 		return new ContentAssistProcessorTestBuilder(getCurrentServiceScope(), new DefaultContentAssistProcessor());
-	}
-	
-	
-	public void testComputePrefix() throws Exception {
-		assertEquals("", prefix("foo fvdf dfv("));
-		assertEquals("dfv", prefix("foo fvdf dfv"));
-		assertEquals("dfv_", prefix("foo fvdf dfv_"));
-		assertEquals("", prefix("foo fvdf dfv_ "));
-		assertEquals("", prefix(""));
-		assertEquals("", prefix(null));
-	}
-
-	private String prefix(String s) {
-		return DefaultContentAssistProcessor.computePrefix(s);
 	}
 	
 }

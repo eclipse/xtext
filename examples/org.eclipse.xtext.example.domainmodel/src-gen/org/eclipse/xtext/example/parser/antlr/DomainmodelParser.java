@@ -22,7 +22,7 @@ public class DomainmodelParser extends org.eclipse.xtext.parser.antlr.AbstractAn
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in, IAstFactory factory) {
 		InternalDomainmodelLexer lexer = new InternalDomainmodelLexer(in);
-		XtextTokenStream stream = new XtextTokenStream(lexer);
+		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		InternalDomainmodelParser parser = new InternalDomainmodelParser(
 				stream, factory, grammarAccess.getGrammar());
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());
