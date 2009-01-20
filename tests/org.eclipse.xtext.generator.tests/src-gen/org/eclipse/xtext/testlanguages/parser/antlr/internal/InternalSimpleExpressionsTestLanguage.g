@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
 import org.eclipse.xtext.conversion.ValueConverterException;
 
@@ -73,8 +74,10 @@ entryRuleSequence returns [EObject current=null] :
 
 // Rule Sequence
 ruleSequence returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    }:
 (
     { 
         currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressionsTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
@@ -139,8 +142,10 @@ entryRuleAddition returns [EObject current=null] :
 
 // Rule Addition
 ruleAddition returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    }:
 (
     { 
         currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressionsTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
@@ -230,8 +235,10 @@ entryRuleMultiplication returns [EObject current=null] :
 
 // Rule Multiplication
 ruleMultiplication returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    }:
 (
     { 
         currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressionsTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
@@ -321,8 +328,10 @@ entryRuleTerm returns [EObject current=null] :
 
 // Rule Term
 ruleTerm returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    }:
 (
     { 
         currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressionsTestLanguage.xmi#//@rules.3/@alternatives/@groups.0" /* xtext::RuleCall */, currentNode); 
@@ -360,8 +369,10 @@ entryRuleAtom returns [EObject current=null] :
 
 // Rule Atom
 ruleAtom returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    }:
 (	
 	
 	    lv_name=RULE_ID
@@ -400,8 +411,10 @@ entryRuleParens returns [EObject current=null] :
 
 // Rule Parens
 ruleParens returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    }:
 (('(' 
     {
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressionsTestLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 

@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g 2009-01-19 15:14:07
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g 2009-01-20 10:37:00
 
 package org.eclipse.xtext.parsetree.formatter.parser.antlr.internal; 
 
@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
 import org.eclipse.xtext.conversion.ValueConverterException;
 
@@ -64,7 +65,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start entryRuleRoot
-    // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:67:1: entryRuleRoot returns [EObject current=null] : iv_ruleRoot= ruleRoot EOF ;
+    // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:68:1: entryRuleRoot returns [EObject current=null] : iv_ruleRoot= ruleRoot EOF ;
     public final EObject entryRuleRoot() throws RecognitionException {
         EObject current = null;
 
@@ -72,8 +73,8 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:67:46: (iv_ruleRoot= ruleRoot EOF )
-            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:68:2: iv_ruleRoot= ruleRoot EOF
+            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:68:46: (iv_ruleRoot= ruleRoot EOF )
+            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:69:2: iv_ruleRoot= ruleRoot EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleRoot_in_entryRuleRoot72);
@@ -99,7 +100,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start ruleRoot
-    // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:75:1: ruleRoot returns [EObject current=null] : ( 'test' (this_TestLinewrap= ruleTestLinewrap | this_TestIndentation= ruleTestIndentation ) ) ;
+    // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:76:1: ruleRoot returns [EObject current=null] : ( 'test' (this_TestLinewrap= ruleTestLinewrap | this_TestIndentation= ruleTestIndentation ) ) ;
     public final EObject ruleRoot() throws RecognitionException {
         EObject current = null;
 
@@ -109,18 +110,19 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+            
         try {
-            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:77:33: ( ( 'test' (this_TestLinewrap= ruleTestLinewrap | this_TestIndentation= ruleTestIndentation ) ) )
-            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:78:1: ( 'test' (this_TestLinewrap= ruleTestLinewrap | this_TestIndentation= ruleTestIndentation ) )
+            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:80:6: ( ( 'test' (this_TestLinewrap= ruleTestLinewrap | this_TestIndentation= ruleTestIndentation ) ) )
+            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:81:1: ( 'test' (this_TestLinewrap= ruleTestLinewrap | this_TestIndentation= ruleTestIndentation ) )
             {
-            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:78:1: ( 'test' (this_TestLinewrap= ruleTestLinewrap | this_TestIndentation= ruleTestIndentation ) )
-            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:78:2: 'test' (this_TestLinewrap= ruleTestLinewrap | this_TestIndentation= ruleTestIndentation )
+            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:81:1: ( 'test' (this_TestLinewrap= ruleTestLinewrap | this_TestIndentation= ruleTestIndentation ) )
+            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:81:2: 'test' (this_TestLinewrap= ruleTestLinewrap | this_TestIndentation= ruleTestIndentation )
             {
             match(input,11,FOLLOW_11_in_ruleRoot116); 
 
                     createLeafNode("classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
-            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:82:1: (this_TestLinewrap= ruleTestLinewrap | this_TestIndentation= ruleTestIndentation )
+            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:85:1: (this_TestLinewrap= ruleTestLinewrap | this_TestIndentation= ruleTestIndentation )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -132,13 +134,13 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("82:1: (this_TestLinewrap= ruleTestLinewrap | this_TestIndentation= ruleTestIndentation )", 1, 0, input);
+                    new NoViableAltException("85:1: (this_TestLinewrap= ruleTestLinewrap | this_TestIndentation= ruleTestIndentation )", 1, 0, input);
 
                 throw nvae;
             }
             switch (alt1) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:83:5: this_TestLinewrap= ruleTestLinewrap
+                    // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:86:5: this_TestLinewrap= ruleTestLinewrap
                     {
                      
                             currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.1/@groups.0" /* xtext::RuleCall */, currentNode); 
@@ -155,7 +157,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 2 :
-                    // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:93:5: this_TestIndentation= ruleTestIndentation
+                    // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:96:5: this_TestIndentation= ruleTestIndentation
                     {
                      
                             currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.1/@groups.1" /* xtext::RuleCall */, currentNode); 
@@ -181,6 +183,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             }
 
              resetLookahead(); 
+                
         }
          
             catch (RecognitionException re) { 
@@ -195,7 +198,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start entryRuleLine
-    // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:110:1: entryRuleLine returns [EObject current=null] : iv_ruleLine= ruleLine EOF ;
+    // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:113:1: entryRuleLine returns [EObject current=null] : iv_ruleLine= ruleLine EOF ;
     public final EObject entryRuleLine() throws RecognitionException {
         EObject current = null;
 
@@ -203,8 +206,8 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:110:46: (iv_ruleLine= ruleLine EOF )
-            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:111:2: iv_ruleLine= ruleLine EOF
+            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:113:46: (iv_ruleLine= ruleLine EOF )
+            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:114:2: iv_ruleLine= ruleLine EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.xmi#//@rules.1" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleLine_in_entryRuleLine201);
@@ -230,7 +233,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start ruleLine
-    // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:118:1: ruleLine returns [EObject current=null] : ( ( (lv_type= RULE_ID ) (lv_name= RULE_ID ) ) ';' ) ;
+    // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:121:1: ruleLine returns [EObject current=null] : ( ( (lv_type= RULE_ID ) (lv_name= RULE_ID ) ) ';' ) ;
     public final EObject ruleLine() throws RecognitionException {
         EObject current = null;
 
@@ -238,18 +241,19 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
         Token lv_name=null;
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+            
         try {
-            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:120:33: ( ( ( (lv_type= RULE_ID ) (lv_name= RULE_ID ) ) ';' ) )
-            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:121:1: ( ( (lv_type= RULE_ID ) (lv_name= RULE_ID ) ) ';' )
+            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:125:6: ( ( ( (lv_type= RULE_ID ) (lv_name= RULE_ID ) ) ';' ) )
+            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:126:1: ( ( (lv_type= RULE_ID ) (lv_name= RULE_ID ) ) ';' )
             {
-            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:121:1: ( ( (lv_type= RULE_ID ) (lv_name= RULE_ID ) ) ';' )
-            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:121:2: ( (lv_type= RULE_ID ) (lv_name= RULE_ID ) ) ';'
+            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:126:1: ( ( (lv_type= RULE_ID ) (lv_name= RULE_ID ) ) ';' )
+            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:126:2: ( (lv_type= RULE_ID ) (lv_name= RULE_ID ) ) ';'
             {
-            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:121:2: ( (lv_type= RULE_ID ) (lv_name= RULE_ID ) )
-            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:121:3: (lv_type= RULE_ID ) (lv_name= RULE_ID )
+            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:126:2: ( (lv_type= RULE_ID ) (lv_name= RULE_ID ) )
+            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:126:3: (lv_type= RULE_ID ) (lv_name= RULE_ID )
             {
-            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:121:3: (lv_type= RULE_ID )
-            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:123:6: lv_type= RULE_ID
+            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:126:3: (lv_type= RULE_ID )
+            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:128:6: lv_type= RULE_ID
             {
             lv_type=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleLine258); 
@@ -271,8 +275,8 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:141:2: (lv_name= RULE_ID )
-            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:143:6: lv_name= RULE_ID
+            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:146:2: (lv_name= RULE_ID )
+            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:148:6: lv_name= RULE_ID
             {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleLine290); 
@@ -308,6 +312,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             }
 
              resetLookahead(); 
+                
         }
          
             catch (RecognitionException re) { 
@@ -322,7 +327,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start entryRuleTestLinewrap
-    // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:174:1: entryRuleTestLinewrap returns [EObject current=null] : iv_ruleTestLinewrap= ruleTestLinewrap EOF ;
+    // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:179:1: entryRuleTestLinewrap returns [EObject current=null] : iv_ruleTestLinewrap= ruleTestLinewrap EOF ;
     public final EObject entryRuleTestLinewrap() throws RecognitionException {
         EObject current = null;
 
@@ -330,8 +335,8 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:174:54: (iv_ruleTestLinewrap= ruleTestLinewrap EOF )
-            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:175:2: iv_ruleTestLinewrap= ruleTestLinewrap EOF
+            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:179:54: (iv_ruleTestLinewrap= ruleTestLinewrap EOF )
+            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:180:2: iv_ruleTestLinewrap= ruleTestLinewrap EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.xmi#//@rules.2" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleTestLinewrap_in_entryRuleTestLinewrap346);
@@ -357,7 +362,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start ruleTestLinewrap
-    // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:182:1: ruleTestLinewrap returns [EObject current=null] : ( 'linewrap' (lv_items= ruleLine )* ) ;
+    // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:187:1: ruleTestLinewrap returns [EObject current=null] : ( 'linewrap' (lv_items= ruleLine )* ) ;
     public final EObject ruleTestLinewrap() throws RecognitionException {
         EObject current = null;
 
@@ -365,18 +370,19 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+            
         try {
-            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:184:33: ( ( 'linewrap' (lv_items= ruleLine )* ) )
-            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:185:1: ( 'linewrap' (lv_items= ruleLine )* )
+            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:191:6: ( ( 'linewrap' (lv_items= ruleLine )* ) )
+            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:192:1: ( 'linewrap' (lv_items= ruleLine )* )
             {
-            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:185:1: ( 'linewrap' (lv_items= ruleLine )* )
-            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:185:2: 'linewrap' (lv_items= ruleLine )*
+            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:192:1: ( 'linewrap' (lv_items= ruleLine )* )
+            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:192:2: 'linewrap' (lv_items= ruleLine )*
             {
             match(input,13,FOLLOW_13_in_ruleTestLinewrap390); 
 
                     createLeafNode("classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
-            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:189:1: (lv_items= ruleLine )*
+            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:196:1: (lv_items= ruleLine )*
             loop2:
             do {
                 int alt2=2;
@@ -389,7 +395,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
                 switch (alt2) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:192:6: lv_items= ruleLine
+            	    // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:199:6: lv_items= ruleLine
             	    {
             	     
             	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
@@ -427,6 +433,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             }
 
              resetLookahead(); 
+                
         }
          
             catch (RecognitionException re) { 
@@ -441,7 +448,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start entryRuleTestIndentation
-    // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:219:1: entryRuleTestIndentation returns [EObject current=null] : iv_ruleTestIndentation= ruleTestIndentation EOF ;
+    // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:226:1: entryRuleTestIndentation returns [EObject current=null] : iv_ruleTestIndentation= ruleTestIndentation EOF ;
     public final EObject entryRuleTestIndentation() throws RecognitionException {
         EObject current = null;
 
@@ -449,8 +456,8 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:219:57: (iv_ruleTestIndentation= ruleTestIndentation EOF )
-            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:220:2: iv_ruleTestIndentation= ruleTestIndentation EOF
+            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:226:57: (iv_ruleTestIndentation= ruleTestIndentation EOF )
+            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:227:2: iv_ruleTestIndentation= ruleTestIndentation EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.xmi#//@rules.3" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleTestIndentation_in_entryRuleTestIndentation464);
@@ -476,7 +483,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start ruleTestIndentation
-    // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:227:1: ruleTestIndentation returns [EObject current=null] : ( ( ( 'indentation' '{' ) ( (lv_sub= ruleTestIndentation ) | (lv_items= ruleLine ) )* ) '}' ) ;
+    // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:234:1: ruleTestIndentation returns [EObject current=null] : ( ( ( 'indentation' '{' ) ( (lv_sub= ruleTestIndentation ) | (lv_items= ruleLine ) )* ) '}' ) ;
     public final EObject ruleTestIndentation() throws RecognitionException {
         EObject current = null;
 
@@ -486,18 +493,19 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+            
         try {
-            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:229:33: ( ( ( ( 'indentation' '{' ) ( (lv_sub= ruleTestIndentation ) | (lv_items= ruleLine ) )* ) '}' ) )
-            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:230:1: ( ( ( 'indentation' '{' ) ( (lv_sub= ruleTestIndentation ) | (lv_items= ruleLine ) )* ) '}' )
+            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:238:6: ( ( ( ( 'indentation' '{' ) ( (lv_sub= ruleTestIndentation ) | (lv_items= ruleLine ) )* ) '}' ) )
+            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:239:1: ( ( ( 'indentation' '{' ) ( (lv_sub= ruleTestIndentation ) | (lv_items= ruleLine ) )* ) '}' )
             {
-            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:230:1: ( ( ( 'indentation' '{' ) ( (lv_sub= ruleTestIndentation ) | (lv_items= ruleLine ) )* ) '}' )
-            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:230:2: ( ( 'indentation' '{' ) ( (lv_sub= ruleTestIndentation ) | (lv_items= ruleLine ) )* ) '}'
+            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:239:1: ( ( ( 'indentation' '{' ) ( (lv_sub= ruleTestIndentation ) | (lv_items= ruleLine ) )* ) '}' )
+            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:239:2: ( ( 'indentation' '{' ) ( (lv_sub= ruleTestIndentation ) | (lv_items= ruleLine ) )* ) '}'
             {
-            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:230:2: ( ( 'indentation' '{' ) ( (lv_sub= ruleTestIndentation ) | (lv_items= ruleLine ) )* )
-            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:230:3: ( 'indentation' '{' ) ( (lv_sub= ruleTestIndentation ) | (lv_items= ruleLine ) )*
+            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:239:2: ( ( 'indentation' '{' ) ( (lv_sub= ruleTestIndentation ) | (lv_items= ruleLine ) )* )
+            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:239:3: ( 'indentation' '{' ) ( (lv_sub= ruleTestIndentation ) | (lv_items= ruleLine ) )*
             {
-            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:230:3: ( 'indentation' '{' )
-            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:230:4: 'indentation' '{'
+            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:239:3: ( 'indentation' '{' )
+            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:239:4: 'indentation' '{'
             {
             match(input,14,FOLLOW_14_in_ruleTestIndentation510); 
 
@@ -510,7 +518,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:238:2: ( (lv_sub= ruleTestIndentation ) | (lv_items= ruleLine ) )*
+            // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:247:2: ( (lv_sub= ruleTestIndentation ) | (lv_items= ruleLine ) )*
             loop3:
             do {
                 int alt3=3;
@@ -526,10 +534,10 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
                 switch (alt3) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:238:3: (lv_sub= ruleTestIndentation )
+            	    // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:247:3: (lv_sub= ruleTestIndentation )
             	    {
-            	    // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:238:3: (lv_sub= ruleTestIndentation )
-            	    // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:241:6: lv_sub= ruleTestIndentation
+            	    // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:247:3: (lv_sub= ruleTestIndentation )
+            	    // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:250:6: lv_sub= ruleTestIndentation
             	    {
             	     
             	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@terminal" /* xtext::RuleCall */, currentNode); 
@@ -558,10 +566,10 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             	    }
             	    break;
             	case 2 :
-            	    // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:260:6: (lv_items= ruleLine )
+            	    // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:269:6: (lv_items= ruleLine )
             	    {
-            	    // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:260:6: (lv_items= ruleLine )
-            	    // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:263:6: lv_items= ruleLine
+            	    // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:269:6: (lv_items= ruleLine )
+            	    // ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:272:6: lv_items= ruleLine
             	    {
             	     
             	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
@@ -609,6 +617,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             }
 
              resetLookahead(); 
+                
         }
          
             catch (RecognitionException re) { 

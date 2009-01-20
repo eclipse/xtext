@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
 import org.eclipse.xtext.conversion.ValueConverterException;
 
@@ -73,8 +74,10 @@ entryRuleConcreteParserRule returns [EObject current=null] :
 
 // Rule ConcreteParserRule
 ruleConcreteParserRule returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    }:
 ((('model' 
     {
         createLeafNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
@@ -142,8 +145,10 @@ entryRuleInheritedParserRule returns [EObject current=null] :
 
 // Rule InheritedParserRule
 ruleInheritedParserRule returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    }:
 ('element' 
     {
         createLeafNode("classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 

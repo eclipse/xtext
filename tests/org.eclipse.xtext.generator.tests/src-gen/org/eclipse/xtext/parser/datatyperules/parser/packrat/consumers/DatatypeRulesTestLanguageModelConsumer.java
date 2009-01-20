@@ -31,11 +31,11 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 	private DatatypeRulesTestLanguageNestedModelIdConsumer nestedModelIdConsumer;
 	private DatatypeRulesTestLanguageVectorConsumer vectorConsumer;
 
+	private ICharacterClass keyword$8$Delimiter;
+	
 	private ICharacterClass keyword$12$Delimiter;
 	
 	private ICharacterClass keyword$16$Delimiter;
-	
-	private ICharacterClass keyword$8$Delimiter;
 	
 	private ICharacterClass keyword$19$Delimiter;
 	
@@ -43,9 +43,9 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
+		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$12$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$16$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$19$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
@@ -201,6 +201,14 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 		this.vectorConsumer = vectorConsumer;
 	}
 	
+	public ICharacterClass getKeyword$8$Delimiter() {
+		return keyword$8$Delimiter;
+	}
+	
+	public void setKeyword$8$Delimiter(ICharacterClass characterClass) {
+		keyword$8$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
 	public ICharacterClass getKeyword$12$Delimiter() {
 		return keyword$12$Delimiter;
 	}
@@ -215,14 +223,6 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 	
 	public void setKeyword$16$Delimiter(ICharacterClass characterClass) {
 		keyword$16$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
-	public ICharacterClass getKeyword$8$Delimiter() {
-		return keyword$8$Delimiter;
-	}
-	
-	public void setKeyword$8$Delimiter(ICharacterClass characterClass) {
-		keyword$8$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ICharacterClass getKeyword$19$Delimiter() {

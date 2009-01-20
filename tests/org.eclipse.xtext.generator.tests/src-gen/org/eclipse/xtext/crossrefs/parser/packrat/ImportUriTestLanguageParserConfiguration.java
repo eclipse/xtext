@@ -69,12 +69,12 @@ public class ImportUriTestLanguageParserConfiguration extends AbstractParserConf
 
 		getTypeConsumer().setIdConsumer(getIdConsumer());
 
-		getImportConsumer().setRuleCall$4$Delimiter(ImportUriTestLanguageDelimiters.ruleCall$13$Delimiter);
 		getImportConsumer().setKeyword$2$Delimiter(ImportUriTestLanguageDelimiters.keyword$11$Delimiter);
+		getImportConsumer().setRuleCall$4$Delimiter(ImportUriTestLanguageDelimiters.ruleCall$13$Delimiter);
 		getTypeConsumer().setCrossReference$9$Delimiter(ImportUriTestLanguageDelimiters.ruleCall$21$Delimiter);
-		getTypeConsumer().setRuleCall$6$Delimiter(ImportUriTestLanguageDelimiters.ruleCall$21$Delimiter);
-		getTypeConsumer().setKeyword$7$Delimiter(ImportUriTestLanguageDelimiters.keyword$11$Delimiter);
 		getTypeConsumer().setKeyword$4$Delimiter(ImportUriTestLanguageDelimiters.keyword$11$Delimiter);
+		getTypeConsumer().setKeyword$7$Delimiter(ImportUriTestLanguageDelimiters.keyword$11$Delimiter);
+		getTypeConsumer().setRuleCall$6$Delimiter(ImportUriTestLanguageDelimiters.ruleCall$21$Delimiter);
 	}
 	
 	// TODO collect superGrammars transitive

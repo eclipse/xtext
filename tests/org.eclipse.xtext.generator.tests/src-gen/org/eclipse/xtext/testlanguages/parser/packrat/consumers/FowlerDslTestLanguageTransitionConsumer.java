@@ -25,19 +25,19 @@ public final class FowlerDslTestLanguageTransitionConsumer extends NonTerminalCo
 
 	private XtextBuiltinIDConsumer idConsumer;
 
-	private ICharacterClass keyword$6$Delimiter;
-	
 	private ISequenceMatcher crossReference$4$Delimiter;
 	
 	private ISequenceMatcher crossReference$8$Delimiter;
+	
+	private ICharacterClass keyword$6$Delimiter;
 	
 	public FowlerDslTestLanguageTransitionConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
-		keyword$6$Delimiter = ICharacterClass.Factory.nullClass();
 		crossReference$4$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		crossReference$8$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		keyword$6$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -94,14 +94,6 @@ public final class FowlerDslTestLanguageTransitionConsumer extends NonTerminalCo
 		this.idConsumer = idConsumer;
 	}
 	
-	public ICharacterClass getKeyword$6$Delimiter() {
-		return keyword$6$Delimiter;
-	}
-	
-	public void setKeyword$6$Delimiter(ICharacterClass characterClass) {
-		keyword$6$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
 	public ISequenceMatcher getCrossReference$4$Delimiter() {
 		return crossReference$4$Delimiter;
 	}
@@ -116,6 +108,14 @@ public final class FowlerDslTestLanguageTransitionConsumer extends NonTerminalCo
 	
 	public void setCrossReference$8$Delimiter(ISequenceMatcher matcher) {
 		crossReference$8$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	}
+	
+	public ICharacterClass getKeyword$6$Delimiter() {
+		return keyword$6$Delimiter;
+	}
+	
+	public void setKeyword$6$Delimiter(ICharacterClass characterClass) {
+		keyword$6$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

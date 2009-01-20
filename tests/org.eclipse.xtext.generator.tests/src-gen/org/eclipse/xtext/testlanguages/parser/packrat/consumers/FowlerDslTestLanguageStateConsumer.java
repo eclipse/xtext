@@ -29,29 +29,29 @@ public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsume
 
 	private ISequenceMatcher crossReference$14$Delimiter;
 	
-	private ISequenceMatcher ruleCall$7$Delimiter;
+	private ICharacterClass keyword$5$Delimiter;
 	
 	private ICharacterClass keyword$11$Delimiter;
-	
-	private ICharacterClass keyword$19$Delimiter;
-	
-	private ICharacterClass keyword$5$Delimiter;
 	
 	private ICharacterClass keyword$12$Delimiter;
 	
 	private ICharacterClass keyword$16$Delimiter;
+	
+	private ICharacterClass keyword$19$Delimiter;
+	
+	private ISequenceMatcher ruleCall$7$Delimiter;
 	
 	public FowlerDslTestLanguageStateConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 		crossReference$14$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-		ruleCall$7$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-		keyword$11$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$19$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$5$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$11$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$12$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$16$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$19$Delimiter = ICharacterClass.Factory.nullClass();
+		ruleCall$7$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -189,12 +189,12 @@ public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsume
 		crossReference$14$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
-	public ISequenceMatcher getRuleCall$7$Delimiter() {
-		return ruleCall$7$Delimiter;
+	public ICharacterClass getKeyword$5$Delimiter() {
+		return keyword$5$Delimiter;
 	}
 	
-	public void setRuleCall$7$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$7$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	public void setKeyword$5$Delimiter(ICharacterClass characterClass) {
+		keyword$5$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ICharacterClass getKeyword$11$Delimiter() {
@@ -203,22 +203,6 @@ public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsume
 	
 	public void setKeyword$11$Delimiter(ICharacterClass characterClass) {
 		keyword$11$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
-	public ICharacterClass getKeyword$19$Delimiter() {
-		return keyword$19$Delimiter;
-	}
-	
-	public void setKeyword$19$Delimiter(ICharacterClass characterClass) {
-		keyword$19$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
-	public ICharacterClass getKeyword$5$Delimiter() {
-		return keyword$5$Delimiter;
-	}
-	
-	public void setKeyword$5$Delimiter(ICharacterClass characterClass) {
-		keyword$5$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ICharacterClass getKeyword$12$Delimiter() {
@@ -235,6 +219,22 @@ public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsume
 	
 	public void setKeyword$16$Delimiter(ICharacterClass characterClass) {
 		keyword$16$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$19$Delimiter() {
+		return keyword$19$Delimiter;
+	}
+	
+	public void setKeyword$19$Delimiter(ICharacterClass characterClass) {
+		keyword$19$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ISequenceMatcher getRuleCall$7$Delimiter() {
+		return ruleCall$7$Delimiter;
+	}
+	
+	public void setRuleCall$7$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$7$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 }

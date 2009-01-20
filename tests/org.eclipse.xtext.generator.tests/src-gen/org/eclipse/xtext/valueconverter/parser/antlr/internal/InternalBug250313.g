@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
 import org.eclipse.xtext.conversion.ValueConverterException;
 
@@ -73,8 +74,10 @@ entryRuleRef2 returns [EObject current=null] :
 
 // Rule Ref2
 ruleRef2 returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    }:
 ('#2' 
     {
         createLeafNode("classpath:/org/eclipse/xtext/valueconverter/Bug250313.xmi#//@rules.0/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 

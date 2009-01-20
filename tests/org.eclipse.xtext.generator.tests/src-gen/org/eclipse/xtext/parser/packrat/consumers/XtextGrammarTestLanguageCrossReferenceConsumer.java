@@ -31,9 +31,9 @@ public final class XtextGrammarTestLanguageCrossReferenceConsumer extends NonTer
 	
 	private ICharacterClass keyword$4$Delimiter;
 	
-	private ICharacterClass keyword$12$Delimiter;
-	
 	private ICharacterClass keyword$8$Delimiter;
+	
+	private ICharacterClass keyword$12$Delimiter;
 	
 	public XtextGrammarTestLanguageCrossReferenceConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
@@ -41,8 +41,8 @@ public final class XtextGrammarTestLanguageCrossReferenceConsumer extends NonTer
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 		crossReference$10$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		keyword$4$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$12$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$12$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -149,20 +149,20 @@ public final class XtextGrammarTestLanguageCrossReferenceConsumer extends NonTer
 		keyword$4$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
-	public ICharacterClass getKeyword$12$Delimiter() {
-		return keyword$12$Delimiter;
-	}
-	
-	public void setKeyword$12$Delimiter(ICharacterClass characterClass) {
-		keyword$12$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
 	public ICharacterClass getKeyword$8$Delimiter() {
 		return keyword$8$Delimiter;
 	}
 	
 	public void setKeyword$8$Delimiter(ICharacterClass characterClass) {
 		keyword$8$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$12$Delimiter() {
+		return keyword$12$Delimiter;
+	}
+	
+	public void setKeyword$12$Delimiter(ICharacterClass characterClass) {
+		keyword$12$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

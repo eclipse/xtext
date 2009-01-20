@@ -22,7 +22,7 @@ public class Bug250313Parser extends org.eclipse.xtext.parser.antlr.AbstractAntl
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in, IAstFactory factory) {
 		InternalBug250313Lexer lexer = new InternalBug250313Lexer(in);
-		XtextTokenStream stream = new XtextTokenStream(lexer);
+		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		InternalBug250313Parser parser = new InternalBug250313Parser(
 				stream, factory, grammarAccess.getGrammar());
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());

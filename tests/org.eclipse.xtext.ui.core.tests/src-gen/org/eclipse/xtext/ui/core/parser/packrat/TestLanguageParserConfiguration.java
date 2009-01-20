@@ -61,8 +61,8 @@ public class TestLanguageParserConfiguration extends AbstractParserConfiguration
 
 		getStuffConsumer().setIdConsumer(getIdConsumer());
 
-		getStuffConsumer().setRuleCall$4$Delimiter(TestLanguageDelimiters.ruleCall$10$Delimiter);
 		getStuffConsumer().setKeyword$2$Delimiter(TestLanguageDelimiters.keyword$8$Delimiter);
+		getStuffConsumer().setRuleCall$4$Delimiter(TestLanguageDelimiters.ruleCall$10$Delimiter);
 	}
 	
 	// TODO collect superGrammars transitive

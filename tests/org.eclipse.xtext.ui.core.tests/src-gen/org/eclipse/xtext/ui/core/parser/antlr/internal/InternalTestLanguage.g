@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
 import org.eclipse.xtext.conversion.ValueConverterException;
 
@@ -73,8 +74,10 @@ entryRuleFile returns [EObject current=null] :
 
 // Rule File
 ruleFile returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    }:
 (	
 	
 	    
@@ -114,8 +117,10 @@ entryRuleStuff returns [EObject current=null] :
 
 // Rule Stuff
 ruleStuff returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    }:
 ('stuff' 
     {
         createLeafNode("classpath:/org/eclipse/xtext/ui/core/TestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 

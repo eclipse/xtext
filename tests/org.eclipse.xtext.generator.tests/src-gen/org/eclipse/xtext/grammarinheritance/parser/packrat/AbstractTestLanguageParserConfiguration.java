@@ -59,8 +59,8 @@ public class AbstractTestLanguageParserConfiguration extends AbstractParserConfi
 	public void configureConsumers() {
 		getInheritedParserRuleConsumer().setIdConsumer(getIdConsumer());
 
-		getInheritedParserRuleConsumer().setRuleCall$4$Delimiter(AbstractTestLanguageDelimiters.ruleCall$7$Delimiter);
 		getInheritedParserRuleConsumer().setKeyword$2$Delimiter(AbstractTestLanguageDelimiters.keyword$5$Delimiter);
+		getInheritedParserRuleConsumer().setRuleCall$4$Delimiter(AbstractTestLanguageDelimiters.ruleCall$7$Delimiter);
 	}
 	
 	// TODO collect superGrammars transitive

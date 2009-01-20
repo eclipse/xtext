@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
 import org.eclipse.xtext.conversion.ValueConverterException;
 
@@ -73,8 +74,10 @@ entryRuleRoot returns [EObject current=null] :
 
 // Rule Root
 ruleRoot returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    }:
 ('test' 
     {
         createLeafNode("classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
@@ -116,8 +119,10 @@ entryRuleLine returns [EObject current=null] :
 
 // Rule Line
 ruleLine returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    }:
 (((	
 	
 	    lv_type=RULE_ID
@@ -180,8 +185,10 @@ entryRuleTestLinewrap returns [EObject current=null] :
 
 // Rule TestLinewrap
 ruleTestLinewrap returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    }:
 ('linewrap' 
     {
         createLeafNode("classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
@@ -225,8 +232,10 @@ entryRuleTestIndentation returns [EObject current=null] :
 
 // Rule TestIndentation
 ruleTestIndentation returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    }:
 ((('indentation' 
     {
         createLeafNode("classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 

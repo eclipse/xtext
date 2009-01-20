@@ -22,7 +22,7 @@ public class DatatypeRulesTestLanguageParser extends org.eclipse.xtext.parser.an
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in, IAstFactory factory) {
 		InternalDatatypeRulesTestLanguageLexer lexer = new InternalDatatypeRulesTestLanguageLexer(in);
-		XtextTokenStream stream = new XtextTokenStream(lexer);
+		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		InternalDatatypeRulesTestLanguageParser parser = new InternalDatatypeRulesTestLanguageParser(
 				stream, factory, grammarAccess.getGrammar());
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());

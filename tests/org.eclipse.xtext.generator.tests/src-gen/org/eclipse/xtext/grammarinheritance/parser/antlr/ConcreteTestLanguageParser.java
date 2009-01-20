@@ -22,7 +22,7 @@ public class ConcreteTestLanguageParser extends org.eclipse.xtext.parser.antlr.A
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in, IAstFactory factory) {
 		InternalConcreteTestLanguageLexer lexer = new InternalConcreteTestLanguageLexer(in);
-		XtextTokenStream stream = new XtextTokenStream(lexer);
+		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		InternalConcreteTestLanguageParser parser = new InternalConcreteTestLanguageParser(
 				stream, factory, grammarAccess.getGrammar());
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());

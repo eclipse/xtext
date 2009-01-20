@@ -14,9 +14,9 @@ public final class OptionalEmptyTestLanguageDelimiters {
 		throw new UnsupportedOperationException("Utility classes may not be initialized");
 	}
 	
+	public static ICharacterClass keyword$8$Delimiter = XtextBuiltinIDConsumer.IDConsumer$$2;
+
 	public static ISequenceMatcher ruleCall$10$Delimiter = new SetBasedKeywordMatcher(
 		"hallo");
-
-	public static ICharacterClass keyword$8$Delimiter = XtextBuiltinIDConsumer.IDConsumer$$2;
 
 }

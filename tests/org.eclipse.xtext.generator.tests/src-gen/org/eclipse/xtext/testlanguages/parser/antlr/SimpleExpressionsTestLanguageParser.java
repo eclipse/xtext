@@ -22,7 +22,7 @@ public class SimpleExpressionsTestLanguageParser extends org.eclipse.xtext.parse
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in, IAstFactory factory) {
 		InternalSimpleExpressionsTestLanguageLexer lexer = new InternalSimpleExpressionsTestLanguageLexer(in);
-		XtextTokenStream stream = new XtextTokenStream(lexer);
+		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		InternalSimpleExpressionsTestLanguageParser parser = new InternalSimpleExpressionsTestLanguageParser(
 				stream, factory, grammarAccess.getGrammar());
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());

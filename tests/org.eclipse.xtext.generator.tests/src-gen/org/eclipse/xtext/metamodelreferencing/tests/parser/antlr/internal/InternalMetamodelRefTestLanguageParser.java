@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g 2009-01-19 15:13:51
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g 2009-01-20 10:36:45
 
 package org.eclipse.xtext.metamodelreferencing.tests.parser.antlr.internal; 
 
@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
 import org.eclipse.xtext.conversion.ValueConverterException;
 
@@ -64,7 +65,7 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start entryRuleFoo
-    // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:67:1: entryRuleFoo returns [EObject current=null] : iv_ruleFoo= ruleFoo EOF ;
+    // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:68:1: entryRuleFoo returns [EObject current=null] : iv_ruleFoo= ruleFoo EOF ;
     public final EObject entryRuleFoo() throws RecognitionException {
         EObject current = null;
 
@@ -72,8 +73,8 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:67:45: (iv_ruleFoo= ruleFoo EOF )
-            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:68:2: iv_ruleFoo= ruleFoo EOF
+            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:68:45: (iv_ruleFoo= ruleFoo EOF )
+            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:69:2: iv_ruleFoo= ruleFoo EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTestLanguage.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleFoo_in_entryRuleFoo72);
@@ -99,7 +100,7 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start ruleFoo
-    // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:75:1: ruleFoo returns [EObject current=null] : ( (lv_name= RULE_ID ) (lv_nameRefs= ruleNameRef )* ) ;
+    // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:76:1: ruleFoo returns [EObject current=null] : ( (lv_name= RULE_ID ) (lv_nameRefs= ruleNameRef )* ) ;
     public final EObject ruleFoo() throws RecognitionException {
         EObject current = null;
 
@@ -108,15 +109,16 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+            
         try {
-            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:77:33: ( ( (lv_name= RULE_ID ) (lv_nameRefs= ruleNameRef )* ) )
-            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:78:1: ( (lv_name= RULE_ID ) (lv_nameRefs= ruleNameRef )* )
+            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:80:6: ( ( (lv_name= RULE_ID ) (lv_nameRefs= ruleNameRef )* ) )
+            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:81:1: ( (lv_name= RULE_ID ) (lv_nameRefs= ruleNameRef )* )
             {
-            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:78:1: ( (lv_name= RULE_ID ) (lv_nameRefs= ruleNameRef )* )
-            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:78:2: (lv_name= RULE_ID ) (lv_nameRefs= ruleNameRef )*
+            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:81:1: ( (lv_name= RULE_ID ) (lv_nameRefs= ruleNameRef )* )
+            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:81:2: (lv_name= RULE_ID ) (lv_nameRefs= ruleNameRef )*
             {
-            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:78:2: (lv_name= RULE_ID )
-            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:80:6: lv_name= RULE_ID
+            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:81:2: (lv_name= RULE_ID )
+            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:83:6: lv_name= RULE_ID
             {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFoo128); 
@@ -138,7 +140,7 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
 
             }
 
-            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:98:2: (lv_nameRefs= ruleNameRef )*
+            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:101:2: (lv_nameRefs= ruleNameRef )*
             loop1:
             do {
                 int alt1=2;
@@ -151,7 +153,7 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
 
                 switch (alt1) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:101:6: lv_nameRefs= ruleNameRef
+            	    // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:104:6: lv_nameRefs= ruleNameRef
             	    {
             	     
             	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
@@ -189,6 +191,7 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
             }
 
              resetLookahead(); 
+                
         }
          
             catch (RecognitionException re) { 
@@ -203,7 +206,7 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start entryRuleNameRef
-    // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:128:1: entryRuleNameRef returns [EObject current=null] : iv_ruleNameRef= ruleNameRef EOF ;
+    // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:131:1: entryRuleNameRef returns [EObject current=null] : iv_ruleNameRef= ruleNameRef EOF ;
     public final EObject entryRuleNameRef() throws RecognitionException {
         EObject current = null;
 
@@ -211,8 +214,8 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:128:49: (iv_ruleNameRef= ruleNameRef EOF )
-            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:129:2: iv_ruleNameRef= ruleNameRef EOF
+            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:131:49: (iv_ruleNameRef= ruleNameRef EOF )
+            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:132:2: iv_ruleNameRef= ruleNameRef EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTestLanguage.xmi#//@rules.1" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleNameRef_in_entryRuleNameRef213);
@@ -238,17 +241,18 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start ruleNameRef
-    // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:136:1: ruleNameRef returns [EObject current=null] : ( ( RULE_ID ) ) ;
+    // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:139:1: ruleNameRef returns [EObject current=null] : ( ( RULE_ID ) ) ;
     public final EObject ruleNameRef() throws RecognitionException {
         EObject current = null;
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+            
         try {
-            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:138:33: ( ( ( RULE_ID ) ) )
-            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:139:1: ( ( RULE_ID ) )
+            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:143:6: ( ( ( RULE_ID ) ) )
+            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:144:1: ( ( RULE_ID ) )
             {
-            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:139:1: ( ( RULE_ID ) )
-            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:142:3: ( RULE_ID )
+            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:144:1: ( ( RULE_ID ) )
+            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:147:3: ( RULE_ID )
             {
 
             			if (current==null) {
@@ -256,8 +260,8 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
-            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:148:1: ( RULE_ID )
-            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:149:2: RULE_ID
+            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:153:1: ( RULE_ID )
+            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:154:2: RULE_ID
             {
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleNameRef271); 
              
@@ -273,6 +277,7 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
             }
 
              resetLookahead(); 
+                
         }
          
             catch (RecognitionException re) { 

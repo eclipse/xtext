@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
 import org.eclipse.xtext.conversion.ValueConverterException;
 
@@ -73,8 +74,10 @@ entryRuleEntry returns [EObject current=null] :
 
 // Rule Entry
 ruleEntry returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    }:
 (	
 	
 	    
@@ -114,8 +117,10 @@ entryRuleAlts returns [EObject current=null] :
 
 // Rule Alts
 ruleAlts returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    }:
 ((
     { 
         currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#//@rules.1/@alternatives/@groups.0/@groups.0" /* xtext::RuleCall */, currentNode); 
@@ -163,8 +168,10 @@ entryRuleLookAhead0 returns [EObject current=null] :
 
 // Rule LookAhead0
 ruleLookAhead0 returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    }:
 ('bar' 
     {
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
@@ -207,8 +214,10 @@ entryRuleLookAhead1 returns [EObject current=null] :
 
 // Rule LookAhead1
 ruleLookAhead1 returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    }:
 ((('foo' 
     {
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
@@ -292,8 +301,10 @@ entryRuleLookAhead2 returns [EObject current=null] :
 
 // Rule LookAhead2
 ruleLookAhead2 returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    }:
 (((	
 	
 	    lv_z='foo' 
@@ -357,8 +368,10 @@ entryRuleLookAhead3 returns [EObject current=null] :
 
 // Rule LookAhead3
 ruleLookAhead3 returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    }:
 ((('foo' 
     {
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
@@ -426,8 +439,10 @@ entryRuleLookAhead4 returns [EObject current=null] :
 
 // Rule LookAhead4
 ruleLookAhead4 returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    }:
 ((	
 	
 	    lv_x='c' 

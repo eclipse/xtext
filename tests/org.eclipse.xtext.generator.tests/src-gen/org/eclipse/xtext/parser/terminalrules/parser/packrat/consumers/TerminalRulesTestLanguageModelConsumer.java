@@ -37,31 +37,31 @@ public final class TerminalRulesTestLanguageModelConsumer extends NonTerminalCon
 	private TerminalRulesTestLanguageSTRINGConsumer stringConsumer;
 	private TerminalRulesTestLanguageWSConsumer wsConsumer;
 
-	private ISequenceMatcher ruleCall$20$Delimiter;
-	
 	private ISequenceMatcher ruleCall$8$Delimiter;
 	
 	private ISequenceMatcher ruleCall$10$Delimiter;
+	
+	private ISequenceMatcher ruleCall$12$Delimiter;
 	
 	private ISequenceMatcher ruleCall$14$Delimiter;
 	
 	private ISequenceMatcher ruleCall$16$Delimiter;
 	
-	private ISequenceMatcher ruleCall$12$Delimiter;
-	
 	private ISequenceMatcher ruleCall$18$Delimiter;
+	
+	private ISequenceMatcher ruleCall$20$Delimiter;
 	
 	public TerminalRulesTestLanguageModelConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
-		ruleCall$20$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		ruleCall$8$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		ruleCall$10$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		ruleCall$12$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		ruleCall$14$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		ruleCall$16$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-		ruleCall$12$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		ruleCall$18$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		ruleCall$20$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -169,14 +169,6 @@ public final class TerminalRulesTestLanguageModelConsumer extends NonTerminalCon
 		this.wsConsumer = wsConsumer;
 	}
 	
-	public ISequenceMatcher getRuleCall$20$Delimiter() {
-		return ruleCall$20$Delimiter;
-	}
-	
-	public void setRuleCall$20$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$20$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
-	}
-	
 	public ISequenceMatcher getRuleCall$8$Delimiter() {
 		return ruleCall$8$Delimiter;
 	}
@@ -191,6 +183,14 @@ public final class TerminalRulesTestLanguageModelConsumer extends NonTerminalCon
 	
 	public void setRuleCall$10$Delimiter(ISequenceMatcher matcher) {
 		ruleCall$10$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	}
+	
+	public ISequenceMatcher getRuleCall$12$Delimiter() {
+		return ruleCall$12$Delimiter;
+	}
+	
+	public void setRuleCall$12$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$12$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	public ISequenceMatcher getRuleCall$14$Delimiter() {
@@ -209,20 +209,20 @@ public final class TerminalRulesTestLanguageModelConsumer extends NonTerminalCon
 		ruleCall$16$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
-	public ISequenceMatcher getRuleCall$12$Delimiter() {
-		return ruleCall$12$Delimiter;
-	}
-	
-	public void setRuleCall$12$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$12$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
-	}
-	
 	public ISequenceMatcher getRuleCall$18$Delimiter() {
 		return ruleCall$18$Delimiter;
 	}
 	
 	public void setRuleCall$18$Delimiter(ISequenceMatcher matcher) {
 		ruleCall$18$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	}
+	
+	public ISequenceMatcher getRuleCall$20$Delimiter() {
+		return ruleCall$20$Delimiter;
+	}
+	
+	public void setRuleCall$20$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$20$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 }

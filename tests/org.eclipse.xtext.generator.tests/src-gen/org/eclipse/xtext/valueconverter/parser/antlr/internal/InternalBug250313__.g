@@ -10,25 +10,25 @@ import org.eclipse.xtext.parser.antlr.Lexer;
 T11 : '#2' ;
 T12 : 'mykeyword1' ;
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g" 122
+// $ANTLR src "./src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g" 125
 RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g" 124
+// $ANTLR src "./src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g" 127
 RULE_INT : ('0'..'9')+;
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g" 126
+// $ANTLR src "./src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g" 129
 RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' |                '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g" 128
+// $ANTLR src "./src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g" 131
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g" 130
+// $ANTLR src "./src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g" 133
 RULE_SL_COMMENT : '//' ~('\n'|'\r')* ('\r'? '\n')? {$channel=HIDDEN;};
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g" 132
+// $ANTLR src "./src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g" 135
 RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g" 134
+// $ANTLR src "./src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g" 137
 RULE_ANY_OTHER : .;
 
 

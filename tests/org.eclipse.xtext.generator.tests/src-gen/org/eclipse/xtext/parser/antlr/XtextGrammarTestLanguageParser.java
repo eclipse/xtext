@@ -22,7 +22,7 @@ public class XtextGrammarTestLanguageParser extends org.eclipse.xtext.parser.ant
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in, IAstFactory factory) {
 		InternalXtextGrammarTestLanguageLexer lexer = new InternalXtextGrammarTestLanguageLexer(in);
-		XtextTokenStream stream = new XtextTokenStream(lexer);
+		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		InternalXtextGrammarTestLanguageParser parser = new InternalXtextGrammarTestLanguageParser(
 				stream, factory, grammarAccess.getGrammar());
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());

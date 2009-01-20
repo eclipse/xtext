@@ -29,9 +29,9 @@ public final class FowlerDslTestLanguageStatemachineConsumer extends NonTerminal
 	private FowlerDslTestLanguageEventConsumer eventConsumer;
 	private FowlerDslTestLanguageStateConsumer stateConsumer;
 
-	private ICharacterClass keyword$11$Delimiter;
-	
 	private ICharacterClass keyword$10$Delimiter;
+	
+	private ICharacterClass keyword$11$Delimiter;
 	
 	private ICharacterClass keyword$14$Delimiter;
 	
@@ -41,8 +41,8 @@ public final class FowlerDslTestLanguageStatemachineConsumer extends NonTerminal
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
-		keyword$11$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$10$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$11$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$14$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
 	}
@@ -158,20 +158,20 @@ public final class FowlerDslTestLanguageStatemachineConsumer extends NonTerminal
 		this.stateConsumer = stateConsumer;
 	}
 	
-	public ICharacterClass getKeyword$11$Delimiter() {
-		return keyword$11$Delimiter;
-	}
-	
-	public void setKeyword$11$Delimiter(ICharacterClass characterClass) {
-		keyword$11$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
 	public ICharacterClass getKeyword$10$Delimiter() {
 		return keyword$10$Delimiter;
 	}
 	
 	public void setKeyword$10$Delimiter(ICharacterClass characterClass) {
 		keyword$10$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$11$Delimiter() {
+		return keyword$11$Delimiter;
+	}
+	
+	public void setKeyword$11$Delimiter(ICharacterClass characterClass) {
+		keyword$11$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ICharacterClass getKeyword$14$Delimiter() {

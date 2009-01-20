@@ -22,7 +22,7 @@ public class MetamodelRefTestLanguageParser extends org.eclipse.xtext.parser.ant
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in, IAstFactory factory) {
 		InternalMetamodelRefTestLanguageLexer lexer = new InternalMetamodelRefTestLanguageLexer(in);
-		XtextTokenStream stream = new XtextTokenStream(lexer);
+		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		InternalMetamodelRefTestLanguageParser parser = new InternalMetamodelRefTestLanguageParser(
 				stream, factory, grammarAccess.getGrammar());
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());

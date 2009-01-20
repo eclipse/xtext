@@ -29,25 +29,25 @@ public final class XtextGrammarTestLanguageTerminalRuleConsumer extends NonTermi
 	private XtextGrammarTestLanguageTerminalAlternativesConsumer terminalAlternativesConsumer;
 	private XtextGrammarTestLanguageTypeRefConsumer typeRefConsumer;
 
+	private ICharacterClass keyword$7$Delimiter;
+	
+	private ICharacterClass keyword$11$Delimiter;
+	
 	private ICharacterClass keyword$14$Delimiter;
 	
 	private ICharacterClass keyword$17$Delimiter;
 	
 	private ISequenceMatcher ruleCall$9$Delimiter;
 	
-	private ICharacterClass keyword$11$Delimiter;
-	
-	private ICharacterClass keyword$7$Delimiter;
-	
 	public XtextGrammarTestLanguageTerminalRuleConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
+		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$11$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$14$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$17$Delimiter = ICharacterClass.Factory.nullClass();
 		ruleCall$9$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-		keyword$11$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -162,6 +162,22 @@ public final class XtextGrammarTestLanguageTerminalRuleConsumer extends NonTermi
 		this.typeRefConsumer = typeRefConsumer;
 	}
 	
+	public ICharacterClass getKeyword$7$Delimiter() {
+		return keyword$7$Delimiter;
+	}
+	
+	public void setKeyword$7$Delimiter(ICharacterClass characterClass) {
+		keyword$7$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$11$Delimiter() {
+		return keyword$11$Delimiter;
+	}
+	
+	public void setKeyword$11$Delimiter(ICharacterClass characterClass) {
+		keyword$11$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
 	public ICharacterClass getKeyword$14$Delimiter() {
 		return keyword$14$Delimiter;
 	}
@@ -184,22 +200,6 @@ public final class XtextGrammarTestLanguageTerminalRuleConsumer extends NonTermi
 	
 	public void setRuleCall$9$Delimiter(ISequenceMatcher matcher) {
 		ruleCall$9$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
-	}
-	
-	public ICharacterClass getKeyword$11$Delimiter() {
-		return keyword$11$Delimiter;
-	}
-	
-	public void setKeyword$11$Delimiter(ICharacterClass characterClass) {
-		keyword$11$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
-	public ICharacterClass getKeyword$7$Delimiter() {
-		return keyword$7$Delimiter;
-	}
-	
-	public void setKeyword$7$Delimiter(ICharacterClass characterClass) {
-		keyword$7$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

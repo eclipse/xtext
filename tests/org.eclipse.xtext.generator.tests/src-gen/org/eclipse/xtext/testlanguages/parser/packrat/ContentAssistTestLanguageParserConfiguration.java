@@ -91,10 +91,10 @@ public class ContentAssistTestLanguageParserConfiguration extends AbstractParser
 		getFirstAbstractRuleChildConsumer().setKeyword$10$Delimiter(ContentAssistTestLanguageDelimiters.keyword$22$Delimiter);
 		getFirstAbstractRuleChildConsumer().setKeyword$11$Delimiter(ContentAssistTestLanguageDelimiters.keyword$22$Delimiter);
 		getFirstAbstractRuleChildConsumer().setRuleCall$6$Delimiter(ContentAssistTestLanguageDelimiters.ruleCall$21$Delimiter);
+		getSecondAbstractRuleChildConsumer().setKeyword$7$Delimiter(ContentAssistTestLanguageDelimiters.keyword$5$Delimiter);
 		getSecondAbstractRuleChildConsumer().setKeyword$8$Delimiter(ContentAssistTestLanguageDelimiters.keyword$22$Delimiter);
 		getSecondAbstractRuleChildConsumer().setKeyword$11$Delimiter(ContentAssistTestLanguageDelimiters.keyword$22$Delimiter);
 		getSecondAbstractRuleChildConsumer().setRuleCall$6$Delimiter(ContentAssistTestLanguageDelimiters.ruleCall$21$Delimiter);
-		getSecondAbstractRuleChildConsumer().setKeyword$7$Delimiter(ContentAssistTestLanguageDelimiters.keyword$5$Delimiter);
 		getAbstractRuleCallConsumer().setCrossReference$2$Delimiter(ContentAssistTestLanguageDelimiters.ruleCall$21$Delimiter);
 	}
 	

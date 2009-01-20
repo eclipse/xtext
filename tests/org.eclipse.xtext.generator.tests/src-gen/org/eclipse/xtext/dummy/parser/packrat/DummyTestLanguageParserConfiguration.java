@@ -62,11 +62,11 @@ public class DummyTestLanguageParserConfiguration extends AbstractParserConfigur
 		getElementConsumer().setIdConsumer(getIdConsumer());
 		getElementConsumer().setStringConsumer(getStringConsumer());
 
+		getElementConsumer().setKeyword$6$Delimiter(DummyTestLanguageDelimiters.keyword$12$Delimiter);
+		getElementConsumer().setKeyword$7$Delimiter(DummyTestLanguageDelimiters.keyword$12$Delimiter);
 		getElementConsumer().setKeyword$12$Delimiter(DummyTestLanguageDelimiters.keyword$18$Delimiter);
 		getElementConsumer().setRuleCall$9$Delimiter(DummyTestLanguageDelimiters.ruleCall$15$Delimiter);
 		getElementConsumer().setRuleCall$11$Delimiter(DummyTestLanguageDelimiters.ruleCall$17$Delimiter);
-		getElementConsumer().setKeyword$7$Delimiter(DummyTestLanguageDelimiters.keyword$12$Delimiter);
-		getElementConsumer().setKeyword$6$Delimiter(DummyTestLanguageDelimiters.keyword$12$Delimiter);
 	}
 	
 	// TODO collect superGrammars transitive

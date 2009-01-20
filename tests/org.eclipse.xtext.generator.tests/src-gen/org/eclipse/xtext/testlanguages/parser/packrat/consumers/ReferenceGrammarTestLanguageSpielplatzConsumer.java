@@ -22,8 +22,8 @@ import org.eclipse.xtext.testlanguages.parser.packrat.consumers.ReferenceGrammar
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.ReferenceGrammarTestLanguageFamilieConsumer;
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinINTConsumer;
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.ReferenceGrammarTestLanguageKindConsumer;
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGConsumer;
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.ReferenceGrammarTestLanguageSpielzeugConsumer;
+import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGConsumer;
 
 @SuppressWarnings("unused")
 public final class ReferenceGrammarTestLanguageSpielplatzConsumer extends NonTerminalConsumer {
@@ -32,28 +32,28 @@ public final class ReferenceGrammarTestLanguageSpielplatzConsumer extends NonTer
 	private ReferenceGrammarTestLanguageFamilieConsumer familieConsumer;
 	private XtextBuiltinINTConsumer intConsumer;
 	private ReferenceGrammarTestLanguageKindConsumer kindConsumer;
-	private XtextBuiltinSTRINGConsumer stringConsumer;
 	private ReferenceGrammarTestLanguageSpielzeugConsumer spielzeugConsumer;
+	private XtextBuiltinSTRINGConsumer stringConsumer;
 
-	private ISequenceMatcher ruleCall$8$Delimiter;
-	
-	private ISequenceMatcher ruleCall$10$Delimiter;
-	
-	private ICharacterClass keyword$6$Delimiter;
-	
 	private ICharacterClass keyword$11$Delimiter;
 	
 	private ICharacterClass keyword$23$Delimiter;
+	
+	private ICharacterClass keyword$6$Delimiter;
+	
+	private ISequenceMatcher ruleCall$8$Delimiter;
+	
+	private ISequenceMatcher ruleCall$10$Delimiter;
 	
 	public ReferenceGrammarTestLanguageSpielplatzConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
-		ruleCall$8$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-		ruleCall$10$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-		keyword$6$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$11$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$23$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$6$Delimiter = ICharacterClass.Factory.nullClass();
+		ruleCall$8$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		ruleCall$10$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -193,36 +193,12 @@ public final class ReferenceGrammarTestLanguageSpielplatzConsumer extends NonTer
 		this.kindConsumer = kindConsumer;
 	}
 	
-	public void setStringConsumer(XtextBuiltinSTRINGConsumer stringConsumer) {
-		this.stringConsumer = stringConsumer;
-	}
-	
 	public void setSpielzeugConsumer(ReferenceGrammarTestLanguageSpielzeugConsumer spielzeugConsumer) {
 		this.spielzeugConsumer = spielzeugConsumer;
 	}
 	
-	public ISequenceMatcher getRuleCall$8$Delimiter() {
-		return ruleCall$8$Delimiter;
-	}
-	
-	public void setRuleCall$8$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$8$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
-	}
-	
-	public ISequenceMatcher getRuleCall$10$Delimiter() {
-		return ruleCall$10$Delimiter;
-	}
-	
-	public void setRuleCall$10$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$10$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
-	}
-	
-	public ICharacterClass getKeyword$6$Delimiter() {
-		return keyword$6$Delimiter;
-	}
-	
-	public void setKeyword$6$Delimiter(ICharacterClass characterClass) {
-		keyword$6$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setStringConsumer(XtextBuiltinSTRINGConsumer stringConsumer) {
+		this.stringConsumer = stringConsumer;
 	}
 	
 	public ICharacterClass getKeyword$11$Delimiter() {
@@ -239,6 +215,30 @@ public final class ReferenceGrammarTestLanguageSpielplatzConsumer extends NonTer
 	
 	public void setKeyword$23$Delimiter(ICharacterClass characterClass) {
 		keyword$23$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$6$Delimiter() {
+		return keyword$6$Delimiter;
+	}
+	
+	public void setKeyword$6$Delimiter(ICharacterClass characterClass) {
+		keyword$6$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ISequenceMatcher getRuleCall$8$Delimiter() {
+		return ruleCall$8$Delimiter;
+	}
+	
+	public void setRuleCall$8$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$8$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	}
+	
+	public ISequenceMatcher getRuleCall$10$Delimiter() {
+		return ruleCall$10$Delimiter;
+	}
+	
+	public void setRuleCall$10$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$10$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 }

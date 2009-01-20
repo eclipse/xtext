@@ -27,20 +27,20 @@ public final class SimpleReconstrTestLanguageBooleanConsumer extends NonTerminal
 
 	private ICharacterClass keyword$4$Delimiter;
 	
-	private ISequenceMatcher ruleCall$9$Delimiter;
+	private ICharacterClass keyword$6$Delimiter;
 	
 	private ICharacterClass keyword$7$Delimiter;
 	
-	private ICharacterClass keyword$6$Delimiter;
+	private ISequenceMatcher ruleCall$9$Delimiter;
 	
 	public SimpleReconstrTestLanguageBooleanConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 		keyword$4$Delimiter = ICharacterClass.Factory.nullClass();
-		ruleCall$9$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$6$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
+		ruleCall$9$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -118,12 +118,12 @@ public final class SimpleReconstrTestLanguageBooleanConsumer extends NonTerminal
 		keyword$4$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
-	public ISequenceMatcher getRuleCall$9$Delimiter() {
-		return ruleCall$9$Delimiter;
+	public ICharacterClass getKeyword$6$Delimiter() {
+		return keyword$6$Delimiter;
 	}
 	
-	public void setRuleCall$9$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$9$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	public void setKeyword$6$Delimiter(ICharacterClass characterClass) {
+		keyword$6$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ICharacterClass getKeyword$7$Delimiter() {
@@ -134,12 +134,12 @@ public final class SimpleReconstrTestLanguageBooleanConsumer extends NonTerminal
 		keyword$7$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
-	public ICharacterClass getKeyword$6$Delimiter() {
-		return keyword$6$Delimiter;
+	public ISequenceMatcher getRuleCall$9$Delimiter() {
+		return ruleCall$9$Delimiter;
 	}
 	
-	public void setKeyword$6$Delimiter(ICharacterClass characterClass) {
-		keyword$6$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setRuleCall$9$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$9$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 }

@@ -7,9 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.packrat;
 
-import org.eclipse.xtext.XtextGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.parser.IParseResult;
-import org.eclipse.xtext.parser.packrat.ParseResultFactory;
+import org.eclipse.xtext.parser.terminalrules.XtextTerminalsTestLanguageStandaloneSetup;
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguagePackratParser;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.util.StringInputStream;
@@ -39,7 +38,7 @@ public class PerformanceTest extends AbstractGeneratorTest {
 
 	@Override
 	protected void setUp() throws Exception {
-		with(XtextGrammarTestLanguageStandaloneSetup.class);
+		with(XtextTerminalsTestLanguageStandaloneSetup.class);
 		this.handwritten = new HandwrittenParser();
 		setAstFactory(handwritten);
 		this.handwrittenWithMethodCalls = new HandwrittenParserWithMethodCalls();
@@ -69,15 +68,6 @@ public class PerformanceTest extends AbstractGeneratorTest {
 		System.out.println("model.length(): " + model.length() + " chars (ca. " + (metamodelCount * 2)+ " lines)" );
 		System.out.println("usage before:   " + (java.lang.Runtime.getRuntime().totalMemory() - java.lang.Runtime.getRuntime().freeMemory()));
 		startTime = System.currentTimeMillis();
-	}
-
-	private void setAstFactory(AbstractPackratParser parser) {
-		ParseResultFactory factory = new ParseResultFactory();
-		PackratEcoreElementFactory astFactory = new PackratEcoreElementFactory();
-		astFactory.setConverterService(getValueConverterService());
-		astFactory.setGrammarAccess(getGrammarAccess());
-		factory.setFactory(astFactory);
-		parser.setParseResultFactory(factory);
 	}
 	
 	protected void tearDown() throws Exception {

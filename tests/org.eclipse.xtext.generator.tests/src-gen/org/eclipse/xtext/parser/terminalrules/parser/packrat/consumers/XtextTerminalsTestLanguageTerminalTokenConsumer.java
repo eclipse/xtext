@@ -25,19 +25,19 @@ public final class XtextTerminalsTestLanguageTerminalTokenConsumer extends NonTe
 
 	private XtextTerminalsTestLanguageTerminalTokenElementConsumer terminalTokenElementConsumer;
 
+	private ICharacterClass keyword$6$Delimiter;
+	
 	private ICharacterClass keyword$7$Delimiter;
 	
 	private ICharacterClass keyword$8$Delimiter;
-	
-	private ICharacterClass keyword$6$Delimiter;
 	
 	public XtextTerminalsTestLanguageTerminalTokenConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
+		keyword$6$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$6$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -93,6 +93,14 @@ public final class XtextTerminalsTestLanguageTerminalTokenConsumer extends NonTe
 		this.terminalTokenElementConsumer = terminalTokenElementConsumer;
 	}
 	
+	public ICharacterClass getKeyword$6$Delimiter() {
+		return keyword$6$Delimiter;
+	}
+	
+	public void setKeyword$6$Delimiter(ICharacterClass characterClass) {
+		keyword$6$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
 	public ICharacterClass getKeyword$7$Delimiter() {
 		return keyword$7$Delimiter;
 	}
@@ -107,14 +115,6 @@ public final class XtextTerminalsTestLanguageTerminalTokenConsumer extends NonTe
 	
 	public void setKeyword$8$Delimiter(ICharacterClass characterClass) {
 		keyword$8$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
-	public ICharacterClass getKeyword$6$Delimiter() {
-		return keyword$6$Delimiter;
-	}
-	
-	public void setKeyword$6$Delimiter(ICharacterClass characterClass) {
-		keyword$6$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

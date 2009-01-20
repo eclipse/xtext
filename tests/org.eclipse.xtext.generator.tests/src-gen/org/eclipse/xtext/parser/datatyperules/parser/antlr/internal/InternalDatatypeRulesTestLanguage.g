@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
 import org.eclipse.xtext.conversion.ValueConverterException;
 
@@ -73,8 +74,12 @@ entryRuleCompositeModel returns [EObject current=null] :
 
 // Rule CompositeModel
 ruleCompositeModel returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
+    }
+    @after { resetLookahead(); 
+		myHiddenTokenState.restore();
+    }:
 (	
 	
 	    
@@ -114,8 +119,10 @@ entryRuleModel returns [EObject current=null] :
 
 // Rule Model
 ruleModel returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    }:
 (((((	
 	
 	    
@@ -234,8 +241,10 @@ entryRuleModelId returns [String current=null] :
 
 // Rule ModelId
 ruleModelId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
-    @init { setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); }:
+    @init { setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    }:
 ((    this_ID=RULE_ID    {
 		$current.merge(this_ID);
     }
@@ -275,8 +284,10 @@ entryRuleNestedModelId returns [String current=null] :
 
 // Rule NestedModelId
 ruleNestedModelId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
-    @init { setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); }:
+    @init { setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    }:
 ((
     { 
         currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
@@ -324,8 +335,10 @@ entryRuleFraction returns [String current=null] :
 
 // Rule Fraction
 ruleFraction returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
-    @init { setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); }:
+    @init { setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    }:
 (    this_INT=RULE_INT    {
 		$current.merge(this_INT);
     }
@@ -365,8 +378,10 @@ entryRuleVector returns [String current=null] :
 
 // Rule Vector
 ruleVector returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
-    @init { setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); }:
+    @init { setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    }:
 (((
 	kw='(' 
     {
@@ -412,8 +427,10 @@ entryRuleDots returns [String current=null] :
 
 // Rule Dots
 ruleDots returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
-    @init { setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); }:
+    @init { setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    }:
 ((
 	kw='.' 
     {

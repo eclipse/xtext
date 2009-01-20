@@ -14,9 +14,9 @@ public final class LangATestLanguageDelimiters {
 		throw new UnsupportedOperationException("Utility classes may not be initialized");
 	}
 	
-	public static ISequenceMatcher ruleCall$13$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-
 	public static ICharacterClass keyword$11$Delimiter = XtextBuiltinIDConsumer.IDConsumer$$2;
+
+	public static ISequenceMatcher ruleCall$13$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 
 	public static ISequenceMatcher ruleCall$21$Delimiter = new SetBasedKeywordMatcher(
 		"import", "type", "extends");

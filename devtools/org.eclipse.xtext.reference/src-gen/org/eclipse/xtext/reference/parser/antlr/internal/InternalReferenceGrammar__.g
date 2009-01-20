@@ -24,25 +24,25 @@ T24 : 'GELB' ;
 T25 : 'GRÜN' ;
 T26 : 'type' ;
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g" 707
+// $ANTLR src "./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g" 722
 RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g" 709
+// $ANTLR src "./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g" 724
 RULE_INT : ('0'..'9')+;
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g" 711
+// $ANTLR src "./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g" 726
 RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' |                '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g" 713
+// $ANTLR src "./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g" 728
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g" 715
+// $ANTLR src "./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g" 730
 RULE_SL_COMMENT : '//' ~('\n'|'\r')* ('\r'? '\n')? {$channel=HIDDEN;};
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g" 717
+// $ANTLR src "./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g" 732
 RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g" 719
+// $ANTLR src "./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g" 734
 RULE_ANY_OTHER : .;
 
 
