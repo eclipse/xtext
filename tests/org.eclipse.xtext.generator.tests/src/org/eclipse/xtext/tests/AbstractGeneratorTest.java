@@ -30,6 +30,9 @@ import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParser;
+import org.eclipse.xtext.parser.packrat.AbstractPackratParser;
+import org.eclipse.xtext.parser.packrat.PackratEcoreElementFactory;
+import org.eclipse.xtext.parser.packrat.ParseResultFactory;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
@@ -232,6 +235,15 @@ public abstract class AbstractGeneratorTest extends TestCase {
 		} while (bytesRead != -1);
 		String model = b.toString();
 		return model;
+	}
+	
+	protected void setAstFactory(AbstractPackratParser parser) {
+		ParseResultFactory factory = new ParseResultFactory();
+		PackratEcoreElementFactory astFactory = new PackratEcoreElementFactory();
+		astFactory.setConverterService(getValueConverterService());
+		astFactory.setGrammarAccess(getGrammarAccess());
+		factory.setFactory(astFactory);
+		parser.setParseResultFactory(factory);
 	}
 
 }
