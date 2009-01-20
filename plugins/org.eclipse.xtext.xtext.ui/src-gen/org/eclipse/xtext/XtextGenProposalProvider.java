@@ -7,19 +7,16 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
-import org.eclipse.xtext.Assignment;
-import org.eclipse.xtext.CrossReference;
-import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.ui.common.editor.contentassist.AbstractProposalProvider;
-import org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider;
 import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
+import org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider;
+import org.eclipse.xtext.ui.common.editor.contentassist.impl.AbstractProposalProvider;
 
 /**
  * Represents a generated, default implementation of interface {@link IProposalProvider}.
  * 
  * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider
  */
-public class XtextGenProposalProvider  extends AbstractProposalProvider {
+public class XtextGenProposalProvider extends AbstractProposalProvider {
 	// constants
 	private static final String UI_PLUGIN_ID  = "org.eclipse.xtext.xtext.ui";
 

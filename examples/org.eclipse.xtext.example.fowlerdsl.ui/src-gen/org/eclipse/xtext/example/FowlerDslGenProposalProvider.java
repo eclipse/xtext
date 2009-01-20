@@ -10,7 +10,7 @@ import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.ui.common.editor.contentassist.AbstractProposalProvider;
+import org.eclipse.xtext.ui.common.editor.contentassist.impl.AbstractProposalProvider;
 import org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider;
 import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
 
@@ -142,13 +142,6 @@ public class FowlerDslGenProposalProvider  extends AbstractProposalProvider {
 	}
     
     
-	public List<? extends ICompletionProposal> complete(RuleCall ruleCall, IContentAssistContext contentAssistContext) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("complete '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
-					+ "' for model '" + contentAssistContext.getModel() + "' and prefix '" + contentAssistContext.getMatchString() + "'");
-		}
-		return Collections.emptyList();
-	}
     
     
     

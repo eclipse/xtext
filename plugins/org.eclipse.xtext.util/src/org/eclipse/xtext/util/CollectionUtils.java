@@ -223,4 +223,18 @@ public class CollectionUtils {
 	public static <T> List<T> list(Iterable<T> iterable) {
 		return list(iterable.iterator());
 	}
+	
+	public static <T> boolean addAllIfNotNull(Collection<T> target, Collection<? extends T> toBeAdded) {
+		if(toBeAdded != null && !toBeAdded.isEmpty()) {
+			return target.addAll(toBeAdded);
+		}
+		return false;
+	}
+
+	public static <T> boolean addIfNotNull(Collection<T> target, T toBeAdded) {
+		if(toBeAdded != null) {
+			return target.add(toBeAdded);
+		}
+		return false;
+	}
 }
