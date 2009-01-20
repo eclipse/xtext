@@ -29,28 +29,28 @@ public final class DomainmodelOperationConsumer extends NonTerminalConsumer {
 	private DomainmodelParameterConsumer parameterConsumer;
 	private DomainmodelTypeRefConsumer typeRefConsumer;
 
-	private ISequenceMatcher ruleCall$9$Delimiter;
-	
-	private ICharacterClass keyword$18$Delimiter;
+	private ICharacterClass keyword$7$Delimiter;
 	
 	private ICharacterClass keyword$10$Delimiter;
 	
 	private ICharacterClass keyword$15$Delimiter;
 	
-	private ICharacterClass keyword$7$Delimiter;
+	private ICharacterClass keyword$18$Delimiter;
 	
 	private ICharacterClass keyword$19$Delimiter;
+	
+	private ISequenceMatcher ruleCall$9$Delimiter;
 	
 	public DomainmodelOperationConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil,
 			ITerminalConsumer[] hiddenTokens) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
-		ruleCall$9$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-		keyword$18$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$10$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$15$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$18$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$19$Delimiter = ICharacterClass.Factory.nullClass();
+		ruleCall$9$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	protected boolean doConsume() throws Exception {
@@ -195,20 +195,12 @@ public final class DomainmodelOperationConsumer extends NonTerminalConsumer {
 		this.typeRefConsumer = typeRefConsumer;
 	}
 	
-	public ISequenceMatcher getRuleCall$9$Delimiter() {
-		return ruleCall$9$Delimiter;
+	public ICharacterClass getKeyword$7$Delimiter() {
+		return keyword$7$Delimiter;
 	}
 	
-	public void setRuleCall$9$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$9$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
-	}
-	
-	public ICharacterClass getKeyword$18$Delimiter() {
-		return keyword$18$Delimiter;
-	}
-	
-	public void setKeyword$18$Delimiter(ICharacterClass characterClass) {
-		keyword$18$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setKeyword$7$Delimiter(ICharacterClass characterClass) {
+		keyword$7$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ICharacterClass getKeyword$10$Delimiter() {
@@ -227,12 +219,12 @@ public final class DomainmodelOperationConsumer extends NonTerminalConsumer {
 		keyword$15$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
-	public ICharacterClass getKeyword$7$Delimiter() {
-		return keyword$7$Delimiter;
+	public ICharacterClass getKeyword$18$Delimiter() {
+		return keyword$18$Delimiter;
 	}
 	
-	public void setKeyword$7$Delimiter(ICharacterClass characterClass) {
-		keyword$7$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setKeyword$18$Delimiter(ICharacterClass characterClass) {
+		keyword$18$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ICharacterClass getKeyword$19$Delimiter() {
@@ -241,6 +233,14 @@ public final class DomainmodelOperationConsumer extends NonTerminalConsumer {
 	
 	public void setKeyword$19$Delimiter(ICharacterClass characterClass) {
 		keyword$19$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ISequenceMatcher getRuleCall$9$Delimiter() {
+		return ruleCall$9$Delimiter;
+	}
+	
+	public void setRuleCall$9$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$9$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 }

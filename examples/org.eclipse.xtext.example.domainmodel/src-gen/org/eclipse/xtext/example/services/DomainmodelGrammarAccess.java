@@ -598,7 +598,7 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 	}
 	
 	public XtextBuiltinGrammarAccess getSuperGrammar() {
-		return XtextBuiltinGrammarAccess.INSTANCE;		
+		return XtextBuiltinGrammarAccess.INSTANCE;
 	}
 
 	
