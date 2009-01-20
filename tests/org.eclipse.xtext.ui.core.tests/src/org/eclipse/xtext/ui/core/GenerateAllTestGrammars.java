@@ -22,20 +22,20 @@ import org.eclipse.xtext.resource.XtextResourceSet;
  * 
  */
 public class GenerateAllTestGrammars {
-	private static String path = "./src-gen";
+	private static String path = ".";
 
 	private static Logger log = Logger.getLogger(GenerateAllTestGrammars.class);
 
 	public final static Class<?>[] testclasses = new Class[] { TestLanguage.class };
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String... args) throws Exception {
 		try {
 			log.info(Thread.currentThread().getContextClassLoader());
 			XtextStandaloneSetup.doSetup();
 			if (args.length > 0) {
 				path = args[0] + "/" + path;
 			}
-			GeneratorFacade.cleanFolder(path);
+			GeneratorFacade.cleanFolder(path + "/src-gen");
 			for (Class<?> c : testclasses) {
 				String filename = "classpath:/" + c.getName().replace('.', '/') + ".xtext";
 				log.info("loading " + filename);
@@ -44,7 +44,7 @@ public class GenerateAllTestGrammars {
 				Resource resource = rs.createResource(uri);
 				resource.load(null);
 				Grammar grammarModel = (Grammar) resource.getContents().iterator().next();
-				GeneratorFacade.generate(grammarModel, ".", null, c.getSimpleName().toLowerCase());
+				GeneratorFacade.generate(grammarModel, path, null, c.getSimpleName().toLowerCase());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

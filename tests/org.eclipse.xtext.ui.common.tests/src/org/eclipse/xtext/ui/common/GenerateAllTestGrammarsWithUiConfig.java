@@ -53,10 +53,13 @@ public class GenerateAllTestGrammarsWithUiConfig {
 		return testClasses;
 	}
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String... args) throws Exception {
 		try {
+			String uiPath = (args.length >0) ? args[0]: UI_PATH;
+			String runtimePath = ((args.length >0) ? args[0] + "/": "") + RUNTIME_PATH;
+
 			XtextStandaloneSetup.doSetup();
-			GeneratorFacade.cleanFolder(UI_PATH + "/src-gen");
+			GeneratorFacade.cleanFolder(uiPath + "/src-gen");
 			for (Class<?> clazz : testClasses) {
 				String filename = "classpath:/" + clazz.getName().replace('.', '/')
 						+ ".xtext";
@@ -67,7 +70,7 @@ public class GenerateAllTestGrammarsWithUiConfig {
 				resource.load(null);
 				Grammar grammarModel = (Grammar) resource.getContents()
 						.iterator().next();
-				GeneratorFacade.generate(grammarModel, RUNTIME_PATH, UI_PATH, clazz
+				GeneratorFacade.generate(grammarModel, runtimePath, uiPath, clazz
 						.getSimpleName().toLowerCase());
 			}
 		} catch (Exception e) {

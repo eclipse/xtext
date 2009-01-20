@@ -1,5 +1,3 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g 2009-01-20 10:41:26
-
 package org.eclipse.xtext.reference.parser.antlr.internal;
 
 // Hack: Use our own Lexer superclass by means of import. 
@@ -42,14 +40,14 @@ public class InternalReferenceGrammarLexer extends Lexer {
     public InternalReferenceGrammarLexer(CharStream input) {
         super(input);
     }
-    public String getGrammarFileName() { return "./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g"; }
+    public String getGrammarFileName() { return "../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g"; }
 
     // $ANTLR start T11
     public final void mT11() throws RecognitionException {
         try {
             int _type = T11;
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:10:5: ( 'spielplatz' )
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:10:7: 'spielplatz'
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:10:5: ( 'spielplatz' )
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:10:7: 'spielplatz'
             {
             match("spielplatz"); 
 
@@ -67,8 +65,8 @@ public class InternalReferenceGrammarLexer extends Lexer {
     public final void mT12() throws RecognitionException {
         try {
             int _type = T12;
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:11:5: ( '{' )
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:11:7: '{'
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:11:5: ( '{' )
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:11:7: '{'
             {
             match('{'); 
 
@@ -85,8 +83,8 @@ public class InternalReferenceGrammarLexer extends Lexer {
     public final void mT13() throws RecognitionException {
         try {
             int _type = T13;
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:12:5: ( '}' )
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:12:7: '}'
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:12:5: ( '}' )
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:12:7: '}'
             {
             match('}'); 
 
@@ -103,8 +101,8 @@ public class InternalReferenceGrammarLexer extends Lexer {
     public final void mT14() throws RecognitionException {
         try {
             int _type = T14;
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:13:5: ( 'kind' )
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:13:7: 'kind'
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:13:5: ( 'kind' )
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:13:7: 'kind'
             {
             match("kind"); 
 
@@ -122,8 +120,8 @@ public class InternalReferenceGrammarLexer extends Lexer {
     public final void mT15() throws RecognitionException {
         try {
             int _type = T15;
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:14:5: ( '(' )
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:14:7: '('
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:14:5: ( '(' )
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:14:7: '('
             {
             match('('); 
 
@@ -140,8 +138,8 @@ public class InternalReferenceGrammarLexer extends Lexer {
     public final void mT16() throws RecognitionException {
         try {
             int _type = T16;
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:15:5: ( ')' )
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:15:7: ')'
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:15:5: ( ')' )
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:15:7: ')'
             {
             match(')'); 
 
@@ -158,8 +156,8 @@ public class InternalReferenceGrammarLexer extends Lexer {
     public final void mT17() throws RecognitionException {
         try {
             int _type = T17;
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:16:5: ( 'erwachsener' )
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:16:7: 'erwachsener'
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:16:5: ( 'erwachsener' )
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:16:7: 'erwachsener'
             {
             match("erwachsener"); 
 
@@ -177,8 +175,8 @@ public class InternalReferenceGrammarLexer extends Lexer {
     public final void mT18() throws RecognitionException {
         try {
             int _type = T18;
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:17:5: ( 'spielzeug' )
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:17:7: 'spielzeug'
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:17:5: ( 'spielzeug' )
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:17:7: 'spielzeug'
             {
             match("spielzeug"); 
 
@@ -196,8 +194,8 @@ public class InternalReferenceGrammarLexer extends Lexer {
     public final void mT19() throws RecognitionException {
         try {
             int _type = T19;
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:18:5: ( 'familie' )
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:18:7: 'familie'
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:18:5: ( 'familie' )
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:18:7: 'familie'
             {
             match("familie"); 
 
@@ -215,8 +213,8 @@ public class InternalReferenceGrammarLexer extends Lexer {
     public final void mT20() throws RecognitionException {
         try {
             int _type = T20;
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:19:5: ( 'keyword' )
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:19:7: 'keyword'
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:19:5: ( 'keyword' )
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:19:7: 'keyword'
             {
             match("keyword"); 
 
@@ -234,8 +232,8 @@ public class InternalReferenceGrammarLexer extends Lexer {
     public final void mT21() throws RecognitionException {
         try {
             int _type = T21;
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:20:5: ( ',' )
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:20:7: ','
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:20:5: ( ',' )
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:20:7: ','
             {
             match(','); 
 
@@ -252,8 +250,8 @@ public class InternalReferenceGrammarLexer extends Lexer {
     public final void mT22() throws RecognitionException {
         try {
             int _type = T22;
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:21:5: ( 'ROT' )
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:21:7: 'ROT'
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:21:5: ( 'ROT' )
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:21:7: 'ROT'
             {
             match("ROT"); 
 
@@ -271,8 +269,8 @@ public class InternalReferenceGrammarLexer extends Lexer {
     public final void mT23() throws RecognitionException {
         try {
             int _type = T23;
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:22:5: ( 'BLAU' )
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:22:7: 'BLAU'
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:22:5: ( 'BLAU' )
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:22:7: 'BLAU'
             {
             match("BLAU"); 
 
@@ -290,8 +288,8 @@ public class InternalReferenceGrammarLexer extends Lexer {
     public final void mT24() throws RecognitionException {
         try {
             int _type = T24;
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:23:5: ( 'GELB' )
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:23:7: 'GELB'
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:23:5: ( 'GELB' )
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:23:7: 'GELB'
             {
             match("GELB"); 
 
@@ -309,8 +307,8 @@ public class InternalReferenceGrammarLexer extends Lexer {
     public final void mT25() throws RecognitionException {
         try {
             int _type = T25;
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:24:5: ( 'GRÜN' )
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:24:7: 'GRÜN'
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:24:5: ( 'GRÜN' )
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:24:7: 'GRÜN'
             {
             match("GRÜN"); 
 
@@ -328,8 +326,8 @@ public class InternalReferenceGrammarLexer extends Lexer {
     public final void mT26() throws RecognitionException {
         try {
             int _type = T26;
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:25:5: ( 'type' )
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:25:7: 'type'
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:25:5: ( 'type' )
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:25:7: 'type'
             {
             match("type"); 
 
@@ -347,10 +345,10 @@ public class InternalReferenceGrammarLexer extends Lexer {
     public final void mRULE_ID() throws RecognitionException {
         try {
             int _type = RULE_ID;
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:722:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:722:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:722:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:722:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:722:11: ( '^' )?
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:722:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -359,7 +357,7 @@ public class InternalReferenceGrammarLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:722:12: '^'
+                    // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:722:12: '^'
                     {
                     match('^'); 
 
@@ -378,7 +376,7 @@ public class InternalReferenceGrammarLexer extends Lexer {
                 recover(mse);    throw mse;
             }
 
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:722:41: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:722:41: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -391,7 +389,7 @@ public class InternalReferenceGrammarLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:
+            	    // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:
             	    {
             	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
             	        input.consume();
@@ -426,10 +424,10 @@ public class InternalReferenceGrammarLexer extends Lexer {
     public final void mRULE_INT() throws RecognitionException {
         try {
             int _type = RULE_INT;
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:724:10: ( ( '0' .. '9' )+ )
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:724:12: ( '0' .. '9' )+
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:724:10: ( ( '0' .. '9' )+ )
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:724:12: ( '0' .. '9' )+
             {
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:724:12: ( '0' .. '9' )+
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:724:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -443,7 +441,7 @@ public class InternalReferenceGrammarLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:724:13: '0' .. '9'
+            	    // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:724:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -473,7 +471,7 @@ public class InternalReferenceGrammarLexer extends Lexer {
     public final void mRULE_STRING() throws RecognitionException {
         try {
             int _type = RULE_STRING;
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:726:13: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\'' )
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:726:13: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -491,10 +489,10 @@ public class InternalReferenceGrammarLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:726:15: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"'
+                    // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:726:15: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"'
                     {
                     match('\"'); 
-                    // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:726:19: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )*
+                    // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:726:19: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -510,7 +508,7 @@ public class InternalReferenceGrammarLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:726:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:726:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
@@ -527,7 +525,7 @@ public class InternalReferenceGrammarLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:726:65: ~ ( '\\\\' | '\"' )
+                    	    // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:726:65: ~ ( '\\\\' | '\"' )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFE') ) {
                     	        input.consume();
@@ -553,10 +551,10 @@ public class InternalReferenceGrammarLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:726:101: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\''
+                    // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:726:101: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\''
                     {
                     match('\''); 
-                    // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:726:106: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )*
+                    // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:726:106: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -572,7 +570,7 @@ public class InternalReferenceGrammarLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:726:108: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:726:108: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
@@ -589,7 +587,7 @@ public class InternalReferenceGrammarLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:726:152: ~ ( '\\\\' | '\\'' )
+                    	    // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:726:152: ~ ( '\\\\' | '\\'' )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFE') ) {
                     	        input.consume();
@@ -627,12 +625,12 @@ public class InternalReferenceGrammarLexer extends Lexer {
     public final void mRULE_ML_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_ML_COMMENT;
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:728:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:728:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:728:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:728:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:728:24: ( options {greedy=false; } : . )*
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:728:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -657,7 +655,7 @@ public class InternalReferenceGrammarLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:728:52: .
+            	    // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:728:52: .
             	    {
             	    matchAny(); 
 
@@ -686,12 +684,12 @@ public class InternalReferenceGrammarLexer extends Lexer {
     public final void mRULE_SL_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_SL_COMMENT;
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:730:17: ( '//' (~ ( '\\n' | '\\r' ) )* ( ( '\\r' )? '\\n' )? )
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:730:19: '//' (~ ( '\\n' | '\\r' ) )* ( ( '\\r' )? '\\n' )?
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:730:17: ( '//' (~ ( '\\n' | '\\r' ) )* ( ( '\\r' )? '\\n' )? )
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:730:19: '//' (~ ( '\\n' | '\\r' ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:730:24: (~ ( '\\n' | '\\r' ) )*
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:730:24: (~ ( '\\n' | '\\r' ) )*
             loop8:
             do {
                 int alt8=2;
@@ -704,7 +702,7 @@ public class InternalReferenceGrammarLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:730:24: ~ ( '\\n' | '\\r' )
+            	    // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:730:24: ~ ( '\\n' | '\\r' )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFE') ) {
             	        input.consume();
@@ -725,7 +723,7 @@ public class InternalReferenceGrammarLexer extends Lexer {
                 }
             } while (true);
 
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:730:38: ( ( '\\r' )? '\\n' )?
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:730:38: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -734,9 +732,9 @@ public class InternalReferenceGrammarLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:730:39: ( '\\r' )? '\\n'
+                    // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:730:39: ( '\\r' )? '\\n'
                     {
-                    // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:730:39: ( '\\r' )?
+                    // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:730:39: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -745,7 +743,7 @@ public class InternalReferenceGrammarLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:730:39: '\\r'
+                            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:730:39: '\\r'
                             {
                             match('\r'); 
 
@@ -776,10 +774,10 @@ public class InternalReferenceGrammarLexer extends Lexer {
     public final void mRULE_WS() throws RecognitionException {
         try {
             int _type = RULE_WS;
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:732:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:732:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:732:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:732:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:732:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:732:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -793,7 +791,7 @@ public class InternalReferenceGrammarLexer extends Lexer {
 
                 switch (alt11) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:
+            	    // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:
             	    {
             	    if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
             	        input.consume();
@@ -833,8 +831,8 @@ public class InternalReferenceGrammarLexer extends Lexer {
     public final void mRULE_ANY_OTHER() throws RecognitionException {
         try {
             int _type = RULE_ANY_OTHER;
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:734:16: ( . )
-            // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:734:18: .
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:734:16: ( . )
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:734:18: .
             {
             matchAny(); 
 
@@ -848,7 +846,7 @@ public class InternalReferenceGrammarLexer extends Lexer {
     // $ANTLR end RULE_ANY_OTHER
 
     public void mTokens() throws RecognitionException {
-        // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:1:8: ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | T22 | T23 | T24 | T25 | T26 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:1:8: ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | T22 | T23 | T24 | T25 | T26 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
         int alt12=23;
         int LA12_0 = input.LA(1);
 
@@ -1323,161 +1321,161 @@ public class InternalReferenceGrammarLexer extends Lexer {
         }
         switch (alt12) {
             case 1 :
-                // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:1:10: T11
+                // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:1:10: T11
                 {
                 mT11(); 
 
                 }
                 break;
             case 2 :
-                // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:1:14: T12
+                // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:1:14: T12
                 {
                 mT12(); 
 
                 }
                 break;
             case 3 :
-                // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:1:18: T13
+                // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:1:18: T13
                 {
                 mT13(); 
 
                 }
                 break;
             case 4 :
-                // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:1:22: T14
+                // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:1:22: T14
                 {
                 mT14(); 
 
                 }
                 break;
             case 5 :
-                // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:1:26: T15
+                // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:1:26: T15
                 {
                 mT15(); 
 
                 }
                 break;
             case 6 :
-                // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:1:30: T16
+                // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:1:30: T16
                 {
                 mT16(); 
 
                 }
                 break;
             case 7 :
-                // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:1:34: T17
+                // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:1:34: T17
                 {
                 mT17(); 
 
                 }
                 break;
             case 8 :
-                // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:1:38: T18
+                // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:1:38: T18
                 {
                 mT18(); 
 
                 }
                 break;
             case 9 :
-                // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:1:42: T19
+                // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:1:42: T19
                 {
                 mT19(); 
 
                 }
                 break;
             case 10 :
-                // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:1:46: T20
+                // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:1:46: T20
                 {
                 mT20(); 
 
                 }
                 break;
             case 11 :
-                // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:1:50: T21
+                // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:1:50: T21
                 {
                 mT21(); 
 
                 }
                 break;
             case 12 :
-                // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:1:54: T22
+                // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:1:54: T22
                 {
                 mT22(); 
 
                 }
                 break;
             case 13 :
-                // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:1:58: T23
+                // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:1:58: T23
                 {
                 mT23(); 
 
                 }
                 break;
             case 14 :
-                // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:1:62: T24
+                // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:1:62: T24
                 {
                 mT24(); 
 
                 }
                 break;
             case 15 :
-                // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:1:66: T25
+                // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:1:66: T25
                 {
                 mT25(); 
 
                 }
                 break;
             case 16 :
-                // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:1:70: T26
+                // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:1:70: T26
                 {
                 mT26(); 
 
                 }
                 break;
             case 17 :
-                // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:1:74: RULE_ID
+                // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:1:74: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
             case 18 :
-                // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:1:82: RULE_INT
+                // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:1:82: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
             case 19 :
-                // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:1:91: RULE_STRING
+                // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:1:91: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
             case 20 :
-                // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:1:103: RULE_ML_COMMENT
+                // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:1:103: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
             case 21 :
-                // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:1:119: RULE_SL_COMMENT
+                // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:1:119: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
             case 22 :
-                // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:1:135: RULE_WS
+                // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:1:135: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
             case 23 :
-                // ./src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:1:143: RULE_ANY_OTHER
+                // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:1:143: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 

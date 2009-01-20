@@ -26,11 +26,21 @@ public class ReferenceGrammar {
 	private static final String RUNTIME_PATH = ".";
 	private static final String UI_PATH = "../org.eclipse.xtext.reference.ui";
 
+	private String uiPath = UI_PATH;
+	private String runtimePath = RUNTIME_PATH;
+
+	private ReferenceGrammar(String... args) {
+		if (args.length > 0) {
+			runtimePath = args[0];
+			uiPath = args[0] + "/" + UI_PATH;
+		}
+	}
+	
 	public void generate() throws IOException {
 		XtextStandaloneSetup.doSetup();
 		ReferenceModelPackage.eINSTANCE.getCustomType(); // initialize
 
-		GeneratorFacade.cleanFolder(RUNTIME_PATH + "/src-gen");
+		GeneratorFacade.cleanFolder(runtimePath + "/src-gen");
 
 		String classpathUri = "classpath:/" + getClass().getName().replace('.', '/') + ".xtext";
 		log.info("loading " + classpathUri);
@@ -40,13 +50,13 @@ public class ReferenceGrammar {
 		resource.load(null);
 		Grammar grammarModel = (Grammar) resource.getContents().get(0);
 
-		GeneratorFacade.generate(grammarModel, RUNTIME_PATH, UI_PATH, "xtest", "tst");
+		GeneratorFacade.generate(grammarModel, runtimePath, uiPath, "xtest", "tst");
 		log.info("Done.");
 	}
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String... args) throws IOException {
 		try {
-			ReferenceGrammar generator = new ReferenceGrammar();
+			ReferenceGrammar generator = new ReferenceGrammar(args);
 			generator.generate();
 		} catch (Exception e) {
 			e.printStackTrace();
