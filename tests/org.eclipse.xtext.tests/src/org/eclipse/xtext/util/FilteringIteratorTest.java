@@ -12,6 +12,9 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.xtext.util.Filter;
+import org.eclipse.xtext.util.FilteringIterator;
+
 import junit.framework.TestCase;
 
 /**

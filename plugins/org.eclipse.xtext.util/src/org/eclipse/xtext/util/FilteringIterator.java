@@ -13,7 +13,7 @@ import java.util.NoSuchElementException;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-final class FilteringIterator<T> implements Iterator<T>, Iterable<T> {
+public final class FilteringIterator<T> implements Iterator<T>, Iterable<T> {
 
 	private final Filter<T> matcher;
 
@@ -21,11 +21,11 @@ final class FilteringIterator<T> implements Iterator<T>, Iterable<T> {
 
 	private T next;
 	
-	FilteringIterator(final Iterable<? extends T> origin, final Filter<T> matcher) {
+	public FilteringIterator(final Iterable<? extends T> origin, final Filter<T> matcher) {
 		this(origin.iterator(), matcher);
 	}
 
-	FilteringIterator(final Iterator<? extends T> iterator, final Filter<T> matcher) {
+	public FilteringIterator(final Iterator<? extends T> iterator, final Filter<T> matcher) {
 		this.base = iterator;
 		this.matcher = matcher;
 	}

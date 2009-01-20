@@ -14,7 +14,7 @@ import java.util.Iterator;
  *
  * @param <T>
  */
-class ChainedIterator<T> implements Iterator<T>, Iterable<T> {
+public final class ChainedIterator<T> implements Iterator<T>, Iterable<T> {
 	private Iterator<? extends T> thisIterator;
 	private Iterator<? extends T> nextIterator;
 	

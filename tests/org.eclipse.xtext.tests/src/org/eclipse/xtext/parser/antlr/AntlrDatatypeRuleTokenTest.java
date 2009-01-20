@@ -15,7 +15,7 @@ import junit.framework.TestCase;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class DatatypeRuleTokenTest extends TestCase {
+public class AntlrDatatypeRuleTokenTest extends TestCase {
 	
 	private static final int TOKEN_TYPE = Integer.MIN_VALUE;
 	

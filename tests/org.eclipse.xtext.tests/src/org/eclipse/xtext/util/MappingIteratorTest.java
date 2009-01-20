@@ -10,6 +10,9 @@ package org.eclipse.xtext.util;
 import java.util.Arrays;
 import java.util.Iterator;
 
+import org.eclipse.xtext.util.Function;
+import org.eclipse.xtext.util.MappingIterator;
+
 import junit.framework.TestCase;
 
 /**
