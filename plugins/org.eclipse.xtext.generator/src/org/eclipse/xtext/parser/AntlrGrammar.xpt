@@ -47,6 +47,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
 import org.eclipse.xtext.conversion.ValueConverterException;
 
@@ -104,8 +105,16 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 
 // Rule «name»
 «ruleName()» returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+«IF definesHiddenTokens-»
+		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens(«FOREACH hiddenTokens AS hidden SEPARATOR ", "»"«hidden.ruleName()»"«ENDFOREACH-»);
+«ENDIF-»    
+    }
+    @after { resetLookahead(); 
+«IF definesHiddenTokens-»
+		myHiddenTokenState.restore();
+«ENDIF-»
+    }:
     «EXPAND ebnf FOR this.alternatives»;
 «ELSE»
 // Entry rule «entryRuleName()»
@@ -118,8 +127,16 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 
 // Rule «name»
 «ruleName()» returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
-    @init { setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); }:
+    @init { setCurrentLookahead(); resetLookahead(); 
+«IF definesHiddenTokens-»
+		HiddenTokens myHiddenTokenState = input.setHiddenTokens(«FOREACH hiddenTokens AS hidden SEPARATOR ", "»"«hidden.ruleName()»"«ENDFOREACH-»);
+«ENDIF-» 
+    }
+    @after { resetLookahead(); 
+«IF definesHiddenTokens-»
+		myHiddenTokenState.restore();
+«ENDIF-» 
+    }:
    «EXPAND dataTypeEbnf FOR this.alternatives»
     ;
 «ENDIF»
@@ -267,7 +284,7 @@ import org.eclipse.xtext.conversion.ValueConverterException;
         currentNode = currentNode.getParent();
     }
 «ENDIF-»
-«IF LexerRule.isInstance(rule)»
+«IF LexerRule.isInstance(rule) || (ParserRule.isInstance(rule) && ((ParserRule)rule).terminal)»
     { 
     «EXPAND createLeafNode» 
     }

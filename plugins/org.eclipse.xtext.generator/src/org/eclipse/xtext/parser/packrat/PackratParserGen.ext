@@ -17,19 +17,19 @@ extension org::eclipse::xtext::Extensions reexport;
 extension org::eclipse::xtext::GrammarUtil reexport;
 extension org::eclipse::xtend::util::stdlib::io;
 
-String consumeMethodName(AbstractElement this):
+cached String consumeMethodName(AbstractElement this):
 	JAVA org.eclipse.xtext.parser.packrat.PackratParserGenUtil.getConsumeMethodName(org.eclipse.xtext.AbstractElement);
 
-String delimiterFieldName(AbstractElement this):
+cached String delimiterFieldName(AbstractElement this):
 	JAVA org.eclipse.xtext.parser.packrat.PackratParserGenUtil.getDelimiterFieldName(org.eclipse.xtext.AbstractElement);
 
-String globalDelimiterFieldName(AbstractElement this):
+cached String globalDelimiterFieldName(AbstractElement this):
 	JAVA org.eclipse.xtext.parser.packrat.PackratParserGenUtil.getGlobalDelimiterFieldName(org.eclipse.xtext.AbstractElement);
 			
-String consumerClassName(AbstractRule this):
+cached String consumerClassName(AbstractRule this):
 	JAVA org.eclipse.xtext.parser.packrat.PackratParserGenUtil.getConsumerClassName(org.eclipse.xtext.AbstractRule);
 	
-String consumerFieldName(AbstractRule this):
+cached String consumerFieldName(AbstractRule this):
 	JAVA org.eclipse.xtext.parser.packrat.PackratParserGenUtil.getConsumerFieldName(org.eclipse.xtext.AbstractRule);
 
 String consumerSetterName(AbstractRule this):
@@ -50,16 +50,16 @@ String grammarAccess(Grammar this):
 /* boolean canBeFollowedByIdentifier(Keyword this):
 	JAVA org.eclipse.xtext.parser.packrat.PackratParserGenUtil.canBeFollowedByIdentifier(org.eclipse.xtext.Keyword); */
 
-List[Keyword] conflictingKeywords(AbstractElement this, Grammar grammar):
+cached List[Keyword] conflictingKeywords(AbstractElement this, Grammar grammar):
 	JAVA org.eclipse.xtext.parser.packrat.PackratParserGenUtil.getConflictingKeywords(org.eclipse.xtext.AbstractElement, org.eclipse.xtext.Grammar);
 
-List[AbstractRule] conflictingLexerRules(Keyword this, Grammar grammar):
+cached List[AbstractRule] conflictingLexerRules(Keyword this, Grammar grammar):
 	JAVA org.eclipse.xtext.parser.packrat.PackratParserGenUtil.getConflictingLexerRules(org.eclipse.xtext.Keyword, org.eclipse.xtext.Grammar);
 
-AbstractElement sameConflicts(AbstractElement this, Grammar grammar):
+cached AbstractElement sameConflicts(AbstractElement this, Grammar grammar):
 	JAVA org.eclipse.xtext.parser.packrat.PackratParserGenUtil.findFirstWithSameConflicts(org.eclipse.xtext.AbstractElement, org.eclipse.xtext.Grammar);
 
-Keyword sameConflicts(Keyword this, Grammar grammar):
+cached Keyword sameConflicts(Keyword this, Grammar grammar):
 	JAVA org.eclipse.xtext.parser.packrat.PackratParserGenUtil.findFirstKeywordWithSameConflicts(org.eclipse.xtext.Keyword, org.eclipse.xtext.Grammar);
 		
 boolean isPlus(AbstractElement this):
@@ -71,26 +71,11 @@ boolean isStar(AbstractElement this):
 boolean isQuestionMark(AbstractElement this):
 	isOptional() && !isMultipleCardinality();
 	
-String sortCriteria(AbstractElement this):
-	error();
-
-String sortCriteria(RuleCall this):
-	rule.sortCriteria();
-
-String sortCriteria(CrossReference this):
-	rule.sortCriteria();
-		
-String sortCriteria(AbstractRule this):
-	name + "-" + metaType.name;
-	
-String sortCriteria(Keyword this):
-	value + "-" + metaType.name;
-	
-List[AbstractElement] allDelimited(AbstractRule this):
+cached List[AbstractElement] allDelimited(AbstractRule this):
 	containedRuleCalls().select(e|e.rule.metaType==LexerRule || (e.rule.metaType == ParserRule && ((ParserRule)e.rule).terminal)).
 		union(eAllContents.typeSelect(Keyword)).
 		union(eAllContents.typeSelect(CrossReference).select(e|e.rule.metaType==LexerRule || (e.rule.metaType == ParserRule && ((ParserRule)e.rule).terminal)))
-	.toSet().sortBy(e|e.sortCriteria());
+	.toSet().sortBy(e|e.globalDelimiterFieldName());
 	
-List[AbstractRule] allCalledRules(AbstractRule this):
-	containedRuleCalls().rule.union(eAllContents.typeSelect(CrossReference).rule).toSet().sortBy(e|e.name);
+cached List[AbstractRule] allCalledRules(AbstractRule this):
+	containedRuleCalls().rule.union(eAllContents.typeSelect(CrossReference).rule).toSet().sortBy(e|e.consumerFieldName());
