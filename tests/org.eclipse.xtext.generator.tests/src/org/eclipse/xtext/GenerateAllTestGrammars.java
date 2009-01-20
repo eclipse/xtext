@@ -81,7 +81,7 @@ public class GenerateAllTestGrammars {
 			XtextTerminalsTestLanguage.class
 	};
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String... args) throws Exception {
 		try {
 			XtextStandaloneSetup.doSetup();
 			if (args.length > 0) {
