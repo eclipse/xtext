@@ -26,7 +26,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.emf.mwe.core.issues.IssuesImpl;
-import org.eclipse.internal.xtend.util.StringHelper;
 import org.eclipse.xpand2.XpandExecutionContextImpl;
 import org.eclipse.xpand2.XpandFacade;
 import org.eclipse.xpand2.output.Outlet;
@@ -35,9 +34,7 @@ import org.eclipse.xtend.check.CheckFacade;
 import org.eclipse.xtend.expression.ExecutionContextImpl;
 import org.eclipse.xtend.expression.Variable;
 import org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel;
-import org.eclipse.xtext.ecore.GenerateJavaFromEcore;
 import org.eclipse.xtext.grammaraccess.GrammarAccessUtil;
-import org.eclipse.xtext.resource.metamodel.Xtext2EcoreTransformer;
 import org.eclipse.xtext.xtextgen.GenModel;
 import org.eclipse.xtext.xtextgen.GenService;
 import org.eclipse.xtext.xtextgen.XtextgenFactory;
@@ -271,6 +268,23 @@ public class GeneratorFacade {
 			contentAssistProcessor.setUiService(true);
 			genModel.getServices().add(contentAssistProcessor);
 			
+			GenService contentAssistInvocationHandler = XtextgenFactory.eINSTANCE.createGenService();
+			contentAssistInvocationHandler.setServiceInterfaceFQName("org.eclipse.xtext.ui.common.editor.contentassist.impl.IContentAssistInvocationHandler");
+			contentAssistInvocationHandler.setGenClassFQName("org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultContentAssistMethodInvoker");
+			contentAssistInvocationHandler.setUiService(true);
+			genModel.getServices().add(contentAssistInvocationHandler);
+
+			GenService templateContentAssistProcessor = XtextgenFactory.eINSTANCE.createGenService();
+			templateContentAssistProcessor.setServiceInterfaceFQName("org.eclipse.xtext.ui.common.editor.contentassist.ITemplateContentAssistProcessor");
+			templateContentAssistProcessor.setGenClassFQName("org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultTemplateContentAssistProcessor");
+			templateContentAssistProcessor.setUiService(true);
+			genModel.getServices().add(templateContentAssistProcessor);
+
+			GenService contentAssistCalculator = XtextgenFactory.eINSTANCE.createGenService();
+			contentAssistCalculator.setServiceInterfaceFQName("org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistCalculator");
+			contentAssistCalculator.setGenClassFQName("org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultContentAssistCalculator");
+			contentAssistCalculator.setUiService(true);
+			genModel.getServices().add(contentAssistCalculator);
 		}
 
 		return genModel;
