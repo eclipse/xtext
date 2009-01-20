@@ -179,7 +179,7 @@ public class ServiceRegistry {
 				}
 				else {
 					if (e.priority == currPriority) {
-						logger.error("Mutliple service factories for type " + serviceInterface.getName() + " in scope "
+						logger.error("Multiple service factories for type " + serviceInterface.getName() + " in scope "
 								+ realLanguageDescriptor.getId());
 					}
 					return service;
