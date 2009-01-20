@@ -11,6 +11,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 
+import org.eclipse.xtext.util.ChainedIterator;
+
 import junit.framework.TestCase;
 
 public class ChainedIteratorTest extends TestCase {

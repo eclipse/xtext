@@ -12,12 +12,12 @@ import java.util.Iterator;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-class MappingIterator<T, R> implements Iterator<R>, Iterable<R> {
+public final class MappingIterator<T, R> implements Iterator<R>, Iterable<R> {
 
 	private final Iterator<? extends T> delegate;
 	private final Function<T, R> mapper;
 
-	MappingIterator(Iterator<? extends T> delegate, Function<T,R> mapper) {
+	public MappingIterator(Iterator<? extends T> delegate, Function<T,R> mapper) {
 		if (delegate == null || mapper == null)
 			throw new NullPointerException("neither delegate nor mapper may be null. Delegate: " + delegate + "/ Mapper: " + mapper);
 		this.delegate = delegate;

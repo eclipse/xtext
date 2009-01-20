@@ -45,11 +45,11 @@ public class SimpleCache<Key, Value> {
 	
 	// for testing purpose
 	
-	boolean hasCachedValue(Key key) {
+	public boolean hasCachedValue(Key key) {
 		return content.containsKey(key);
 	}
 	
-	int getSize() {
+	public int getSize() {
 		return content.size();
 	}
 
