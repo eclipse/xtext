@@ -9,16 +9,37 @@
 package org.eclipse.xtext.ui.common.editor.outline;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.Assert;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.source.ISourceViewer;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.IActionBars;
+import org.eclipse.ui.part.IPageSite;
+import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.parsetree.ParseTreeUtil;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.service.StatefulService;
+import org.eclipse.xtext.ui.common.editor.outline.impl.EditorSelectionChangedListener;
+import org.eclipse.xtext.ui.common.editor.outline.impl.LazyVirtualContentOutlinePage;
+import org.eclipse.xtext.ui.common.editor.outline.impl.LinkingHelper;
+import org.eclipse.xtext.ui.common.editor.outline.impl.OutlineSelectionChangedListener;
+import org.eclipse.xtext.ui.common.editor.outline.impl.ToggleLinkWithEditorAction;
 import org.eclipse.xtext.ui.core.editor.ISourceViewerAware;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.model.IXtextModelListener;
+import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocumentUtil;
 
 /**
@@ -30,6 +51,8 @@ public class XtextContentOutlinePage extends LazyVirtualContentOutlinePage imple
 	static final Logger logger = Logger.getLogger(XtextContentOutlinePage.class);
 
 	private ISourceViewer sourceViewer;
+	private OutlineSelectionChangedListener outlineSelectionChangedListener;
+	private EditorSelectionChangedListener editorSelectionChangedListener;
 
 	@Override
 	public void createControl(Composite parent) {
@@ -38,15 +61,40 @@ public class XtextContentOutlinePage extends LazyVirtualContentOutlinePage imple
 		configureProviders();
 		configureDocument();
 	}
+	
+	@Override
+	public void init(IPageSite pageSite) {
+		super.init(pageSite);
+		registerToolbarActions(getSite().getActionBars());
+	}
+	
+	@Override
+	public void dispose() {
+		outlineSelectionChangedListener.uninstall(this);
+		outlineSelectionChangedListener = null;
+		editorSelectionChangedListener.uninstall(sourceViewer.getSelectionProvider());
+		editorSelectionChangedListener = null;
+		super.dispose();
+	}
+
+	private void registerToolbarActions(IActionBars actionBars) {
+		IToolBarManager toolBarManager = actionBars.getToolBarManager();
+		if (toolBarManager != null) {
+			 toolBarManager.add(new ToggleLinkWithEditorAction(this));
+		}
+	}
 
 	private void configureViewer() {
 		TreeViewer viewer = getTreeViewer();
 		viewer.setAutoExpandLevel(2);
 	}
-
+	
+	@Inject
+	private ILazyTreeProvider provider;
+	
 	private void configureProviders() {
-		getTreeViewer().setContentProvider(new LazyTransformingTreeProvider());
-		getTreeViewer().setLabelProvider(new LazyTransformingTreeProvider());
+		getTreeViewer().setContentProvider(provider);
+		getTreeViewer().setLabelProvider(provider);
 	}
 
 	private void configureDocument() {
@@ -96,6 +144,78 @@ public class XtextContentOutlinePage extends LazyVirtualContentOutlinePage imple
 
 	public void setSourceViewer(ISourceViewer sourceViewer) {
 		this.sourceViewer = sourceViewer;
+		getOutlineSelectionListener().install(this);
+		getEditorSelectionChangedListener().install(sourceViewer.getSelectionProvider());
+	}
+	
+	public ISourceViewer getSourceViewer() {
+		return sourceViewer;
+	}
+	
+	private OutlineSelectionChangedListener getOutlineSelectionListener() {
+		if (outlineSelectionChangedListener == null) {
+			outlineSelectionChangedListener = new OutlineSelectionChangedListener(this);
+		}
+		return outlineSelectionChangedListener;
+	}
+	
+	private EditorSelectionChangedListener getEditorSelectionChangedListener() {
+		if (editorSelectionChangedListener == null) {
+			editorSelectionChangedListener = new EditorSelectionChangedListener(this);
+		}
+		return editorSelectionChangedListener;
 	}
 
+	public boolean isLinkingEnabled() {
+		return LinkingHelper.isLinkingEnabled();
+	}
+	
+	public void setLinkingEnabled(boolean enabled) {
+		LinkingHelper.setLinkingEnabled(enabled);
+	}
+	
+	public IXtextDocument getDocument() {
+		return XtextDocumentUtil.get(getSourceViewer());
+	}
+
+	public void synchronizeOutlinePage() {
+		getDocument().readOnly(new UnitOfWork<Object>() {
+			public Object exec(XtextResource resource) throws Exception {
+				int caretOffset = getSourceViewer().getTextWidget().getCaretOffset();
+
+				IParseResult parseResult = resource.getParseResult();
+				Assert.isNotNull(parseResult);
+				CompositeNode rootNode = parseResult.getRootNode();
+				AbstractNode currentNode = ParseTreeUtil.getLastCompleteNodeByOffset(rootNode, caretOffset);
+				synchronizeOutlinePage(currentNode);
+				return null;
+			}
+		});
+	}
+	
+	private boolean shouldSynchronizeOutlinePage() {
+		return isLinkingEnabled();
+	}
+	
+	public void synchronizeOutlinePage(AbstractNode node) {
+		ISelection selection = StructuredSelection.EMPTY;
+
+		if (shouldSynchronizeOutlinePage()) {
+			if (node != null) {
+				CompositeNode compositeNode = node instanceof CompositeNode? (CompositeNode) node : node.getParent();
+				EObject astElement = NodeUtil.getASTElementForRootNode(compositeNode);
+				if (astElement != null) {
+					selection = new StructuredSelection(astElement);
+				}
+			}
+			outlineSelectionChangedListener.uninstall(this);
+			this.setSelection(selection, true);
+			outlineSelectionChangedListener.install(this);
+		}
+	}
+	
+	public void setSelection(ISelection selection, boolean reveal) {
+		getTreeViewer().setSelection(selection, reveal);
+	}
+	
 }
