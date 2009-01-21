@@ -22,19 +22,19 @@ public class ConcreteTestLanguageGrammarAccess extends BaseEPackageAccess implem
 		private final Assignment c1AssignmentElements = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall c10ParserRuleCallInheritedParserRule = (RuleCall)c1AssignmentElements.eContents().get(0);
 		
-		// ConcreteParserRule : 'model' magicNumber = REAL ':' ( elements += InheritedParserRule ) * ;
+		// ConcreteParserRule : "model" magicNumber = REAL ":" ( elements += InheritedParserRule ) * ;
 		public ParserRule getRule() { return rule; }
 
-		// 'model' magicNumber = REAL ':' ( elements += InheritedParserRule ) *
+		// "model" magicNumber = REAL ":" ( elements += InheritedParserRule ) *
 		public Group eleGroup() { return cGroup; }
 
-		// 'model' magicNumber = REAL ':'
+		// "model" magicNumber = REAL ":"
 		public Group ele0Group() { return c0Group; }
 
-		// 'model' magicNumber = REAL
+		// "model" magicNumber = REAL
 		public Group ele00Group() { return c00Group; }
 
-		// 'model'
+		// "model"
 		public Keyword ele000KeywordModel() { return c000KeywordModel; }
 
 		// magicNumber = REAL
@@ -43,7 +43,7 @@ public class ConcreteTestLanguageGrammarAccess extends BaseEPackageAccess implem
 		// REAL
 		public RuleCall ele0010LexerRuleCallREAL() { return c0010LexerRuleCallREAL; }
 
-		// ':'
+		// ":"
 		public Keyword ele01KeywordColon() { return c01KeywordColon; }
 
 		// ( elements += InheritedParserRule ) *
@@ -74,7 +74,7 @@ public class ConcreteTestLanguageGrammarAccess extends BaseEPackageAccess implem
 	}
 
 	
-	// ConcreteParserRule : 'model' magicNumber = REAL ':' ( elements += InheritedParserRule ) * ;
+	// ConcreteParserRule : "model" magicNumber = REAL ":" ( elements += InheritedParserRule ) * ;
 	public ConcreteParserRuleElements prConcreteParserRule() {
 		return (pConcreteParserRule != null) ? pConcreteParserRule : (pConcreteParserRule = new ConcreteParserRuleElements());
 	} 

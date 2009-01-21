@@ -31,7 +31,6 @@ package «this.consumerPackageName()»;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory;
-import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
@@ -189,28 +188,28 @@ public final class «this.consumerClassName()» extends AbstractRuleAwareTerminalC
 «IF terminal.metaType == NegatedToken && !terminal.isOptional() && !terminal.isMultipleCardinality()-»
 «EXPAND defineConsumeBodyInternal FOR (NegatedToken)terminal-»
 «ELSE-»
-		final IMarker marker = mark();
+		final int marker = mark();
 		if (!eof() && !«terminal.consumeMethodName()»()) {
 			incOffset();
 			return true;
 		}
-		marker.rollback();
+		rollbackTo(marker);
 «ENDIF-»
 «ENDDEFINE»
 
 «DEFINE defineConsumeBody FOR UpToToken-»
-		final IMarker marker = mark();
+		final int marker = mark();
 		while(!eof()) {
 			if(«terminal.consumeMethodName()»())
 				return true;
 			incOffset();
 		}
-		marker.rollback();
+		rollbackTo(marker);
 		return false;
 «ENDDEFINE»
 
 «DEFINE defineConsumeBody FOR Group-»
-		final IMarker marker = mark();
+		final int marker = mark();
 «EXPAND defineConsumeBodyInternal FOR this-»
 		return true;
 «ENDDEFINE»
@@ -221,7 +220,7 @@ public final class «this.consumerClassName()» extends AbstractRuleAwareTerminalC
 «EXPAND defineConsumeBodyInternal FOR (Group)token-»
 «ELSE-»
 		if (!«token.consumeMethodName()»()) {
-			marker.rollback();
+			rollbackTo(marker);
 			return false;
 		}
 «ENDIF-»
@@ -230,9 +229,9 @@ public final class «this.consumerClassName()» extends AbstractRuleAwareTerminalC
 
 «DEFINE defineConsumeBody FOR Keyword-»
 «IF value.length == 1-»
-		return readChar('«value.replaceAll("'", "\\\\'")»');
+		return readChar('«value.toJavaString()»');
 «ELSE-»
-		return readString("«value»");
+		return readString("«value.toJavaString()»");
 «ENDIF-»
 «ENDDEFINE»
 
@@ -241,7 +240,7 @@ public final class «this.consumerClassName()» extends AbstractRuleAwareTerminalC
 «ENDDEFINE»
 
 «DEFINE defineConsumeBody FOR CharacterRange-»
-		return readCharBetween('«left.value.replaceAll("'", "\\\\'")»', '«right.value.replaceAll("'", "\\\\'")»');
+		return readCharBetween('«left.value.toJavaString()»', '«right.value.toJavaString()»');
 «ENDDEFINE»
 
 «DEFINE defineConsumeBody FOR RuleCall-»

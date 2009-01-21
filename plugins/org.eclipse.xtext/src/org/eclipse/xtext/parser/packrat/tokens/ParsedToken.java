@@ -17,8 +17,8 @@ public class ParsedToken extends AbstractParsedToken {
 
 	private EObject grammarElement;
 	
-	public ParsedToken(CharSequence input, int offset, int length, EObject grammarElement) {
-		super(input, offset, length);
+	public ParsedToken(int offset, int length, EObject grammarElement) {
+		super(offset, length);
 		this.grammarElement = grammarElement;
 	}
 	

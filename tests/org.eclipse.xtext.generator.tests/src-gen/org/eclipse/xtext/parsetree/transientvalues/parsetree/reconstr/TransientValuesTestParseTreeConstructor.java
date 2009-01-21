@@ -28,12 +28,12 @@ public class TransientValuesTestParseTreeConstructor extends AbstractParseTreeCo
 
 /************ begin Rule Root ****************
  *
- * Root : 'test' ( TestRequired | TestOptional | TestList ) ;
+ * Root : "test" ( TestRequired | TestOptional | TestList ) ;
  *
  **/
 
 
-// 'test' ( TestRequired | TestOptional | TestList )
+// "test" ( TestRequired | TestOptional | TestList )
 protected class Root_Group extends GroupToken {
 	
 	public Root_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -61,7 +61,7 @@ protected class Root_Group extends GroupToken {
 	}
 }
 
-// 'test'
+// "test"
 protected class Root_0_Keyword_test extends KeywordToken  {
 	
 	public Root_0_Keyword_test(IInstanceDescription curr, AbstractToken pred) {
@@ -177,12 +177,12 @@ protected class Root_1_1_RuleCall_TestList extends RuleCallToken {
 
 /************ begin Rule TestRequired ****************
  *
- * TestRequired : 'required' required1 = INT required2 = INT ;
+ * TestRequired : "required" required1 = INT required2 = INT ;
  *
  **/
 
 
-// 'required' required1 = INT required2 = INT
+// "required" required1 = INT required2 = INT
 protected class TestRequired_Group extends GroupToken {
 	
 	public TestRequired_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -210,7 +210,7 @@ protected class TestRequired_Group extends GroupToken {
 	}
 }
 
-// 'required' required1 = INT
+// "required" required1 = INT
 protected class TestRequired_0_Group extends GroupToken {
 	
 	public TestRequired_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -238,7 +238,7 @@ protected class TestRequired_0_Group extends GroupToken {
 	}
 }
 
-// 'required'
+// "required"
 protected class TestRequired_0_0_Keyword_required extends KeywordToken  {
 	
 	public TestRequired_0_0_Keyword_required(IInstanceDescription curr, AbstractToken pred) {
@@ -303,12 +303,12 @@ protected class TestRequired_1_Assignment_required2 extends AssignmentToken  {
 
 /************ begin Rule TestOptional ****************
  *
- * TestOptional : 'optional' ( opt1 = INT ) ? ( ':' opt2 = INT ) ? ;
+ * TestOptional : "optional" ( opt1 = INT ) ? ( ":" opt2 = INT ) ? ;
  *
  **/
 
 
-// 'optional' ( opt1 = INT ) ? ( ':' opt2 = INT ) ?
+// "optional" ( opt1 = INT ) ? ( ":" opt2 = INT ) ?
 protected class TestOptional_Group extends GroupToken {
 	
 	public TestOptional_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -336,7 +336,7 @@ protected class TestOptional_Group extends GroupToken {
 	}
 }
 
-// 'optional' ( opt1 = INT ) ?
+// "optional" ( opt1 = INT ) ?
 protected class TestOptional_0_Group extends GroupToken {
 	
 	public TestOptional_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -364,7 +364,7 @@ protected class TestOptional_0_Group extends GroupToken {
 	}
 }
 
-// 'optional'
+// "optional"
 protected class TestOptional_0_0_Keyword_optional extends KeywordToken  {
 	
 	public TestOptional_0_0_Keyword_optional(IInstanceDescription curr, AbstractToken pred) {
@@ -400,7 +400,7 @@ protected class TestOptional_0_1_Assignment_opt1 extends AssignmentToken  {
 }
 
 
-// ( ':' opt2 = INT ) ?
+// ( ":" opt2 = INT ) ?
 protected class TestOptional_1_Group extends GroupToken {
 	
 	public TestOptional_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -428,7 +428,7 @@ protected class TestOptional_1_Group extends GroupToken {
 	}
 }
 
-// ':'
+// ":"
 protected class TestOptional_1_0_Keyword extends KeywordToken  {
 	
 	public TestOptional_1_0_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -470,12 +470,12 @@ protected class TestOptional_1_1_Assignment_opt2 extends AssignmentToken  {
 
 /************ begin Rule TestList ****************
  *
- * TestList : 'list' ( item += INT ) * ;
+ * TestList : "list" ( item += INT ) * ;
  *
  **/
 
 
-// 'list' ( item += INT ) *
+// "list" ( item += INT ) *
 protected class TestList_Group extends GroupToken {
 	
 	public TestList_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -503,7 +503,7 @@ protected class TestList_Group extends GroupToken {
 	}
 }
 
-// 'list'
+// "list"
 protected class TestList_0_Keyword_list extends KeywordToken  {
 	
 	public TestList_0_Keyword_list(IInstanceDescription curr, AbstractToken pred) {

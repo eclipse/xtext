@@ -56,20 +56,25 @@ public final class XtextGeneratedMetamodelConsumer extends NonTerminalConsumer {
 		final IMarker marker = mark();
 		if (!consumeKeyword$4()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeAssignment$5()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeAssignment$7()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeGroup$10()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 
@@ -98,12 +103,15 @@ public final class XtextGeneratedMetamodelConsumer extends NonTerminalConsumer {
 		final IMarker marker = mark();
 		if (!consumeKeyword$11()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeAssignment$12()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 

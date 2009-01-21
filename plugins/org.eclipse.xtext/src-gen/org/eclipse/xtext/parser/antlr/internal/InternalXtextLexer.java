@@ -1,5 +1,3 @@
-// $ANTLR 3.0.1 ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g 2009-01-20 10:40:38
-
 package org.eclipse.xtext.parser.antlr.internal;
 
 // Hack: Use our own Lexer superclass by means of import. 

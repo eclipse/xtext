@@ -56,11 +56,12 @@ public abstract class NonTerminalConsumer implements INonTerminalConsumer {
 	public boolean consume(String feature, boolean isMany, boolean isDatatype, AbstractElement grammarElement) throws Exception {
 		IHiddenTokenState prevState = hiddenTokenHandler.replaceHiddenTokens(hiddenTokens);
 		IMarker marker = mark();
-		parser.accept(new ParsedNonTerminal(input, input.getOffset(), grammarElement != null ? grammarElement : getGrammarElement(), getDefaultTypeName()));
+		parser.accept(new ParsedNonTerminal(input.getOffset(), grammarElement != null ? grammarElement : getGrammarElement(), getDefaultTypeName()));
 		boolean result = doConsume();
 		if (result) {
-			parser.accept(new ParsedNonTerminalEnd(input, input.getOffset(), feature, isMany, isDatatype));
+			parser.accept(new ParsedNonTerminalEnd(input.getOffset(), feature, isMany, isDatatype));
 		} else marker.rollback();
+		marker.release();
 		prevState.restore();
 		return result;
 	}
@@ -68,13 +69,14 @@ public abstract class NonTerminalConsumer implements INonTerminalConsumer {
 	public boolean consumeAsRoot(IRootConsumerListener listener) throws Exception {
 		IHiddenTokenState prevState = hiddenTokenHandler.replaceHiddenTokens(hiddenTokens);
 		IMarker marker = mark();
-		parser.accept(new ParsedNonTerminal(input, input.getOffset(), getGrammarElement(), getDefaultTypeName()));
+		parser.accept(new ParsedNonTerminal(input.getOffset(), getGrammarElement(), getDefaultTypeName()));
 		boolean result = doConsume();
 		if (result)
 			result = listener.beforeNonTerminalEnd(this);
 		if (result) {
-			parser.accept(new ParsedNonTerminalEnd(input, input.getOffset(), null, false, false));
+			parser.accept(new ParsedNonTerminalEnd(input.getOffset(), null, false, false));
 		} else marker.rollback();
+		marker.release();
 		prevState.restore();
 		return result;
 	}

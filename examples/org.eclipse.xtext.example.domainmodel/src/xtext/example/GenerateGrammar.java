@@ -18,14 +18,24 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 public class  GenerateGrammar {
 	private Logger log = Logger.getLogger( GenerateGrammar.class);
 
-	private static final String PATH = ".";
+	private static final String RUNTIME_PATH = ".";
 	private static final String UI_PATH = "../org.eclipse.xtext.example.domainmodel.ui";
+	private String uiPath = UI_PATH;
+	
+	private String runtimePath = RUNTIME_PATH;
+
+	private GenerateGrammar(String... args) {
+		if (args.length > 0) {
+			runtimePath = args[0];
+			uiPath = args[0] + "/" + UI_PATH;
+		}
+	}
 
 	public void generate() throws IOException {
 		XtextStandaloneSetup.doSetup();
 
-		GeneratorFacade.cleanFolder(PATH + "/src-gen");
-		GeneratorFacade.cleanFolder(UI_PATH + "/src-gen");
+		GeneratorFacade.cleanFolder(runtimePath + "/src-gen");
+		GeneratorFacade.cleanFolder(uiPath + "/src-gen");
 
 		String classpathUri = "classpath:/xtext/example/Domainmodel.xtext";
 		log.info("loading " + classpathUri);
@@ -36,13 +46,13 @@ public class  GenerateGrammar {
 		resource.load(null);
 		Grammar grammarModel = (Grammar) resource.getContents().get(0);
 
-		GeneratorFacade.generate(grammarModel, PATH, UI_PATH, "dmodel");
+		GeneratorFacade.generate(grammarModel, runtimePath, uiPath, "dmodel");
 		log.info("Done.");
 	}
 
-	public static void main(String[] args) throws IOException {
-		 GenerateGrammar generator = new GenerateGrammar();
-		generator.generate();
+	public static void main(String... args) throws IOException {
+		 GenerateGrammar generator = new GenerateGrammar(args);
+		 generator.generate();
 	}
 
 }

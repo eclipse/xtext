@@ -44,13 +44,13 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 		private final Assignment c1AssignmentImportURI = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall c10LexerRuleCallSTRING = (RuleCall)c1AssignmentImportURI.eContents().get(0);
 		
-		// Import : 'import' importURI = STRING ;
+		// Import : "import" importURI = STRING ;
 		public ParserRule getRule() { return rule; }
 
-		// 'import' importURI = STRING
+		// "import" importURI = STRING
 		public Group eleGroup() { return cGroup; }
 
-		// 'import'
+		// "import"
 		public Keyword ele0KeywordImport() { return c0KeywordImport; }
 
 		// importURI = STRING
@@ -93,22 +93,22 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 		private final RuleCall c010ParserRuleCallNamedElement = (RuleCall)c01AssignmentNamedElements.eContents().get(0);
 		private final Keyword c1KeywordRightCurlyBracket = (Keyword)cGroup.eContents().get(1);
 		
-		// Package : 'package' name = QualifiedName '{' ( namedElements += NamedElement ) * '}' ;
+		// Package : "package" name = QualifiedName "{" ( namedElements += NamedElement ) * "}" ;
 		public ParserRule getRule() { return rule; }
 
-		// 'package' name = QualifiedName '{' ( namedElements += NamedElement ) * '}'
+		// "package" name = QualifiedName "{" ( namedElements += NamedElement ) * "}"
 		public Group eleGroup() { return cGroup; }
 
-		// 'package' name = QualifiedName '{' ( namedElements += NamedElement ) *
+		// "package" name = QualifiedName "{" ( namedElements += NamedElement ) *
 		public Group ele0Group() { return c0Group; }
 
-		// 'package' name = QualifiedName '{'
+		// "package" name = QualifiedName "{"
 		public Group ele00Group() { return c00Group; }
 
-		// 'package' name = QualifiedName
+		// "package" name = QualifiedName
 		public Group ele000Group() { return c000Group; }
 
-		// 'package'
+		// "package"
 		public Keyword ele0000KeywordPackage() { return c0000KeywordPackage; }
 
 		// name = QualifiedName
@@ -117,7 +117,7 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 		// QualifiedName
 		public RuleCall ele00010ParserRuleCallQualifiedName() { return c00010ParserRuleCallQualifiedName; }
 
-		// '{'
+		// "{"
 		public Keyword ele001KeywordLeftCurlyBracket() { return c001KeywordLeftCurlyBracket; }
 
 		// ( namedElements += NamedElement ) *
@@ -126,7 +126,7 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 		// NamedElement
 		public RuleCall ele010ParserRuleCallNamedElement() { return c010ParserRuleCallNamedElement; }
 
-		// '}'
+		// "}"
 		public Keyword ele1KeywordRightCurlyBracket() { return c1KeywordRightCurlyBracket; }
 	}
 
@@ -156,13 +156,13 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 		private final Assignment c1AssignmentName = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall c10LexerRuleCallID = (RuleCall)c1AssignmentName.eContents().get(0);
 		
-		// DataType : 'datatype' name = ID ;
+		// DataType : "datatype" name = ID ;
 		public ParserRule getRule() { return rule; }
 
-		// 'datatype' name = ID
+		// "datatype" name = ID
 		public Group eleGroup() { return cGroup; }
 
-		// 'datatype'
+		// "datatype"
 		public Keyword ele0KeywordDatatype() { return c0KeywordDatatype; }
 
 		// name = ID
@@ -191,25 +191,25 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 		private final RuleCall c010ParserRuleCallFeature = (RuleCall)c01AssignmentFeatures.eContents().get(0);
 		private final Keyword c1KeywordRightCurlyBracket = (Keyword)cGroup.eContents().get(1);
 		
-		// Entity : 'entity' name = ID ( 'extends' superType = [ Entity ] ) ? '{' ( features += Feature ) * '}' ;
+		// Entity : "entity" name = ID ( "extends" superType = [ Entity ] ) ? "{" ( features += Feature ) * "}" ;
 		public ParserRule getRule() { return rule; }
 
-		// 'entity' name = ID ( 'extends' superType = [ Entity ] ) ? '{' ( features += Feature ) * '}'
+		// "entity" name = ID ( "extends" superType = [ Entity ] ) ? "{" ( features += Feature ) * "}"
 		public Group eleGroup() { return cGroup; }
 
-		// 'entity' name = ID ( 'extends' superType = [ Entity ] ) ? '{' ( features += Feature ) *
+		// "entity" name = ID ( "extends" superType = [ Entity ] ) ? "{" ( features += Feature ) *
 		public Group ele0Group() { return c0Group; }
 
-		// 'entity' name = ID ( 'extends' superType = [ Entity ] ) ? '{'
+		// "entity" name = ID ( "extends" superType = [ Entity ] ) ? "{"
 		public Group ele00Group() { return c00Group; }
 
-		// 'entity' name = ID ( 'extends' superType = [ Entity ] ) ?
+		// "entity" name = ID ( "extends" superType = [ Entity ] ) ?
 		public Group ele000Group() { return c000Group; }
 
-		// 'entity' name = ID
+		// "entity" name = ID
 		public Group ele0000Group() { return c0000Group; }
 
-		// 'entity'
+		// "entity"
 		public Keyword ele00000KeywordEntity() { return c00000KeywordEntity; }
 
 		// name = ID
@@ -218,10 +218,10 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 		// ID
 		public RuleCall ele000010LexerRuleCallID() { return c000010LexerRuleCallID; }
 
-		// ( 'extends' superType = [ Entity ] ) ?
+		// ( "extends" superType = [ Entity ] ) ?
 		public Group ele0001Group() { return c0001Group; }
 
-		// 'extends'
+		// "extends"
 		public Keyword ele00010KeywordExtends() { return c00010KeywordExtends; }
 
 		// superType = [ Entity ]
@@ -230,7 +230,7 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 		// [ Entity ]
 		public CrossReference ele000110CrossReferenceEStringEntity() { return c000110CrossReferenceEStringEntity; }
 
-		// '{'
+		// "{"
 		public Keyword ele001KeywordLeftCurlyBracket() { return c001KeywordLeftCurlyBracket; }
 
 		// ( features += Feature ) *
@@ -239,7 +239,7 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 		// Feature
 		public RuleCall ele010ParserRuleCallFeature() { return c010ParserRuleCallFeature; }
 
-		// '}'
+		// "}"
 		public Keyword ele1KeywordRightCurlyBracket() { return c1KeywordRightCurlyBracket; }
 	}
 
@@ -293,19 +293,19 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 		private final Assignment c1AssignmentType = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall c10ParserRuleCallTypeRef = (RuleCall)c1AssignmentType.eContents().get(0);
 		
-		// Attribute : 'attr' name = ID ':' type = TypeRef ;
+		// Attribute : "attr" name = ID ":" type = TypeRef ;
 		public ParserRule getRule() { return rule; }
 
-		// 'attr' name = ID ':' type = TypeRef
+		// "attr" name = ID ":" type = TypeRef
 		public Group eleGroup() { return cGroup; }
 
-		// 'attr' name = ID ':'
+		// "attr" name = ID ":"
 		public Group ele0Group() { return c0Group; }
 
-		// 'attr' name = ID
+		// "attr" name = ID
 		public Group ele00Group() { return c00Group; }
 
-		// 'attr'
+		// "attr"
 		public Keyword ele000KeywordAttr() { return c000KeywordAttr; }
 
 		// name = ID
@@ -314,7 +314,7 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 		// ID
 		public RuleCall ele0010LexerRuleCallID() { return c0010LexerRuleCallID; }
 
-		// ':'
+		// ":"
 		public Keyword ele01KeywordColon() { return c01KeywordColon; }
 
 		// type = TypeRef
@@ -341,22 +341,22 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 		private final Assignment c11AssignmentOpposite = (Assignment)c1Group.eContents().get(1);
 		private final CrossReference c110CrossReferenceEStringReference = (CrossReference)c11AssignmentOpposite.eContents().get(0);
 		
-		// Reference : 'ref' name = ID ':' type = TypeRef ( 'opposite' opposite = [ Reference ] ) ? ;
+		// Reference : "ref" name = ID ":" type = TypeRef ( "opposite" opposite = [ Reference ] ) ? ;
 		public ParserRule getRule() { return rule; }
 
-		// 'ref' name = ID ':' type = TypeRef ( 'opposite' opposite = [ Reference ] ) ?
+		// "ref" name = ID ":" type = TypeRef ( "opposite" opposite = [ Reference ] ) ?
 		public Group eleGroup() { return cGroup; }
 
-		// 'ref' name = ID ':' type = TypeRef
+		// "ref" name = ID ":" type = TypeRef
 		public Group ele0Group() { return c0Group; }
 
-		// 'ref' name = ID ':'
+		// "ref" name = ID ":"
 		public Group ele00Group() { return c00Group; }
 
-		// 'ref' name = ID
+		// "ref" name = ID
 		public Group ele000Group() { return c000Group; }
 
-		// 'ref'
+		// "ref"
 		public Keyword ele0000KeywordRef() { return c0000KeywordRef; }
 
 		// name = ID
@@ -365,7 +365,7 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 		// ID
 		public RuleCall ele00010LexerRuleCallID() { return c00010LexerRuleCallID; }
 
-		// ':'
+		// ":"
 		public Keyword ele001KeywordColon() { return c001KeywordColon; }
 
 		// type = TypeRef
@@ -374,10 +374,10 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 		// TypeRef
 		public RuleCall ele010ParserRuleCallTypeRef() { return c010ParserRuleCallTypeRef; }
 
-		// ( 'opposite' opposite = [ Reference ] ) ?
+		// ( "opposite" opposite = [ Reference ] ) ?
 		public Group ele1Group() { return c1Group; }
 
-		// 'opposite'
+		// "opposite"
 		public Keyword ele10KeywordOpposite() { return c10KeywordOpposite; }
 
 		// opposite = [ Reference ]
@@ -411,28 +411,28 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 		private final Assignment c1AssignmentType = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall c10ParserRuleCallTypeRef = (RuleCall)c1AssignmentType.eContents().get(0);
 		
-		// Operation : 'op' name = ID '(' ( params += Parameter ( ',' params += Parameter ) * ) ? ')' ':' type = TypeRef ;
+		// Operation : "op" name = ID "(" ( params += Parameter ( "," params += Parameter ) * ) ? ")" ":" type = TypeRef ;
 		public ParserRule getRule() { return rule; }
 
-		// 'op' name = ID '(' ( params += Parameter ( ',' params += Parameter ) * ) ? ')' ':' type = TypeRef
+		// "op" name = ID "(" ( params += Parameter ( "," params += Parameter ) * ) ? ")" ":" type = TypeRef
 		public Group eleGroup() { return cGroup; }
 
-		// 'op' name = ID '(' ( params += Parameter ( ',' params += Parameter ) * ) ? ')' ':'
+		// "op" name = ID "(" ( params += Parameter ( "," params += Parameter ) * ) ? ")" ":"
 		public Group ele0Group() { return c0Group; }
 
-		// 'op' name = ID '(' ( params += Parameter ( ',' params += Parameter ) * ) ? ')'
+		// "op" name = ID "(" ( params += Parameter ( "," params += Parameter ) * ) ? ")"
 		public Group ele00Group() { return c00Group; }
 
-		// 'op' name = ID '(' ( params += Parameter ( ',' params += Parameter ) * ) ?
+		// "op" name = ID "(" ( params += Parameter ( "," params += Parameter ) * ) ?
 		public Group ele000Group() { return c000Group; }
 
-		// 'op' name = ID '('
+		// "op" name = ID "("
 		public Group ele0000Group() { return c0000Group; }
 
-		// 'op' name = ID
+		// "op" name = ID
 		public Group ele00000Group() { return c00000Group; }
 
-		// 'op'
+		// "op"
 		public Keyword ele000000KeywordOp() { return c000000KeywordOp; }
 
 		// name = ID
@@ -441,10 +441,10 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 		// ID
 		public RuleCall ele0000010LexerRuleCallID() { return c0000010LexerRuleCallID; }
 
-		// '('
+		// "("
 		public Keyword ele00001KeywordLeftParenthesis() { return c00001KeywordLeftParenthesis; }
 
-		// ( params += Parameter ( ',' params += Parameter ) * ) ?
+		// ( params += Parameter ( "," params += Parameter ) * ) ?
 		public Group ele0001Group() { return c0001Group; }
 
 		// params += Parameter
@@ -453,10 +453,10 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 		// Parameter
 		public RuleCall ele000100ParserRuleCallParameter() { return c000100ParserRuleCallParameter; }
 
-		// ( ',' params += Parameter ) *
+		// ( "," params += Parameter ) *
 		public Group ele00011Group() { return c00011Group; }
 
-		// ','
+		// ","
 		public Keyword ele000110KeywordComma() { return c000110KeywordComma; }
 
 		// params += Parameter
@@ -465,10 +465,10 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 		// Parameter
 		public RuleCall ele0001110ParserRuleCallParameter() { return c0001110ParserRuleCallParameter; }
 
-		// ')'
+		// ")"
 		public Keyword ele001KeywordRightParenthesis() { return c001KeywordRightParenthesis; }
 
-		// ':'
+		// ":"
 		public Keyword ele01KeywordColon() { return c01KeywordColon; }
 
 		// type = TypeRef
@@ -547,19 +547,19 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 		private final Keyword c10KeywordFullStop = (Keyword)c1Group.eContents().get(0);
 		private final RuleCall c11LexerRuleCallID = (RuleCall)c1Group.eContents().get(1);
 		
-		// QualifiedName returns EString : ID ( '.' ID ) * ;
+		// QualifiedName returns EString : ID ( "." ID ) * ;
 		public ParserRule getRule() { return rule; }
 
-		// ID ( '.' ID ) *
+		// ID ( "." ID ) *
 		public Group eleGroup() { return cGroup; }
 
 		// ID
 		public RuleCall ele0LexerRuleCallID() { return c0LexerRuleCallID; }
 
-		// ( '.' ID ) *
+		// ( "." ID ) *
 		public Group ele1Group() { return c1Group; }
 
-		// '.'
+		// "."
 		public Keyword ele10KeywordFullStop() { return c10KeywordFullStop; }
 
 		// ID
@@ -607,7 +607,7 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 		return (pFile != null) ? pFile : (pFile = new FileElements());
 	} 
 
-	// Import : 'import' importURI = STRING ;
+	// Import : "import" importURI = STRING ;
 	public ImportElements prImport() {
 		return (pImport != null) ? pImport : (pImport = new ImportElements());
 	} 
@@ -617,7 +617,7 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 		return (pNamedElement != null) ? pNamedElement : (pNamedElement = new NamedElementElements());
 	} 
 
-	// Package : 'package' name = QualifiedName '{' ( namedElements += NamedElement ) * '}' ;
+	// Package : "package" name = QualifiedName "{" ( namedElements += NamedElement ) * "}" ;
 	public PackageElements prPackage() {
 		return (pPackage != null) ? pPackage : (pPackage = new PackageElements());
 	} 
@@ -627,12 +627,12 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 		return (pType != null) ? pType : (pType = new TypeElements());
 	} 
 
-	// DataType : 'datatype' name = ID ;
+	// DataType : "datatype" name = ID ;
 	public DataTypeElements prDataType() {
 		return (pDataType != null) ? pDataType : (pDataType = new DataTypeElements());
 	} 
 
-	// Entity : 'entity' name = ID ( 'extends' superType = [ Entity ] ) ? '{' ( features += Feature ) * '}' ;
+	// Entity : "entity" name = ID ( "extends" superType = [ Entity ] ) ? "{" ( features += Feature ) * "}" ;
 	public EntityElements prEntity() {
 		return (pEntity != null) ? pEntity : (pEntity = new EntityElements());
 	} 
@@ -647,17 +647,17 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 		return (pStructuralFeature != null) ? pStructuralFeature : (pStructuralFeature = new StructuralFeatureElements());
 	} 
 
-	// Attribute : 'attr' name = ID ':' type = TypeRef ;
+	// Attribute : "attr" name = ID ":" type = TypeRef ;
 	public AttributeElements prAttribute() {
 		return (pAttribute != null) ? pAttribute : (pAttribute = new AttributeElements());
 	} 
 
-	// Reference : 'ref' name = ID ':' type = TypeRef ( 'opposite' opposite = [ Reference ] ) ? ;
+	// Reference : "ref" name = ID ":" type = TypeRef ( "opposite" opposite = [ Reference ] ) ? ;
 	public ReferenceElements prReference() {
 		return (pReference != null) ? pReference : (pReference = new ReferenceElements());
 	} 
 
-	// Operation : 'op' name = ID '(' ( params += Parameter ( ',' params += Parameter ) * ) ? ')' ':' type = TypeRef ;
+	// Operation : "op" name = ID "(" ( params += Parameter ( "," params += Parameter ) * ) ? ")" ":" type = TypeRef ;
 	public OperationElements prOperation() {
 		return (pOperation != null) ? pOperation : (pOperation = new OperationElements());
 	} 
@@ -677,7 +677,7 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 		return (pTypeRef != null) ? pTypeRef : (pTypeRef = new TypeRefElements());
 	} 
 
-	// QualifiedName returns EString : ID ( '.' ID ) * ;
+	// QualifiedName returns EString : ID ( "." ID ) * ;
 	public QualifiedNameElements prQualifiedName() {
 		return (pQualifiedName != null) ? pQualifiedName : (pQualifiedName = new QualifiedNameElements());
 	} 

@@ -51,20 +51,25 @@ public final class DatatypeRulesTestLanguageVectorConsumer extends NonTerminalCo
 		final IMarker marker = mark();
 		if (!consumeKeyword$4()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeRuleCall$5()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeRuleCall$6()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeKeyword$7()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 

@@ -67,12 +67,12 @@ protected class File_Assignment_stuff extends AssignmentToken  {
 
 /************ begin Rule Stuff ****************
  *
- * Stuff : 'stuff' name = ID ;
+ * Stuff : "stuff" name = ID ;
  *
  **/
 
 
-// 'stuff' name = ID
+// "stuff" name = ID
 protected class Stuff_Group extends GroupToken {
 	
 	public Stuff_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -100,7 +100,7 @@ protected class Stuff_Group extends GroupToken {
 	}
 }
 
-// 'stuff'
+// "stuff"
 protected class Stuff_0_Keyword_stuff extends KeywordToken  {
 	
 	public Stuff_0_Keyword_stuff(IInstanceDescription curr, AbstractToken pred) {

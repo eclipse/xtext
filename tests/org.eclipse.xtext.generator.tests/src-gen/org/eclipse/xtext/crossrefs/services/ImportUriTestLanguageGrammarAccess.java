@@ -44,13 +44,13 @@ public class ImportUriTestLanguageGrammarAccess extends BaseEPackageAccess imple
 		private final Assignment c1AssignmentImportURI = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall c10LexerRuleCallSTRING = (RuleCall)c1AssignmentImportURI.eContents().get(0);
 		
-		// Import : 'import' importURI = STRING ;
+		// Import : "import" importURI = STRING ;
 		public ParserRule getRule() { return rule; }
 
-		// 'import' importURI = STRING
+		// "import" importURI = STRING
 		public Group eleGroup() { return cGroup; }
 
-		// 'import'
+		// "import"
 		public Keyword ele0KeywordImport() { return c0KeywordImport; }
 
 		// importURI = STRING
@@ -72,19 +72,19 @@ public class ImportUriTestLanguageGrammarAccess extends BaseEPackageAccess imple
 		private final Assignment c1AssignmentExtends = (Assignment)cGroup.eContents().get(1);
 		private final CrossReference c10CrossReferenceEStringType = (CrossReference)c1AssignmentExtends.eContents().get(0);
 		
-		// Type : 'type' name = ID 'extends' ^extends = [ Type ] ;
+		// Type : "type" name = ID "extends" ^extends = [ Type ] ;
 		public ParserRule getRule() { return rule; }
 
-		// 'type' name = ID 'extends' ^extends = [ Type ]
+		// "type" name = ID "extends" ^extends = [ Type ]
 		public Group eleGroup() { return cGroup; }
 
-		// 'type' name = ID 'extends'
+		// "type" name = ID "extends"
 		public Group ele0Group() { return c0Group; }
 
-		// 'type' name = ID
+		// "type" name = ID
 		public Group ele00Group() { return c00Group; }
 
-		// 'type'
+		// "type"
 		public Keyword ele000KeywordType() { return c000KeywordType; }
 
 		// name = ID
@@ -93,7 +93,7 @@ public class ImportUriTestLanguageGrammarAccess extends BaseEPackageAccess imple
 		// ID
 		public RuleCall ele0010LexerRuleCallID() { return c0010LexerRuleCallID; }
 
-		// 'extends'
+		// "extends"
 		public Keyword ele01KeywordExtends() { return c01KeywordExtends; }
 
 		// ^extends = [ Type ]
@@ -131,12 +131,12 @@ public class ImportUriTestLanguageGrammarAccess extends BaseEPackageAccess imple
 		return (pMain != null) ? pMain : (pMain = new MainElements());
 	} 
 
-	// Import : 'import' importURI = STRING ;
+	// Import : "import" importURI = STRING ;
 	public ImportElements prImport() {
 		return (pImport != null) ? pImport : (pImport = new ImportElements());
 	} 
 
-	// Type : 'type' name = ID 'extends' ^extends = [ Type ] ;
+	// Type : "type" name = ID "extends" ^extends = [ Type ] ;
 	public TypeElements prType() {
 		return (pType != null) ? pType : (pType = new TypeElements());
 	} 

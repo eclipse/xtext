@@ -48,12 +48,15 @@ public final class XtextTerminalsTestLanguageTypeRefConsumer extends NonTerminal
 		final IMarker marker = mark();
 		if (!consumeGroup$2()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeAssignment$7()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 
@@ -66,12 +69,15 @@ public final class XtextTerminalsTestLanguageTypeRefConsumer extends NonTerminal
 		final IMarker marker = mark();
 		if (!consumeAssignment$3()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeKeyword$6()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 

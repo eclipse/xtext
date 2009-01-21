@@ -45,12 +45,15 @@ public final class ComplexReconstrTestLanguageOpConsumer extends NonTerminalCons
 		final IMarker marker = mark();
 		if (!consumeRuleCall$2()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeAlternatives$3()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 
@@ -75,16 +78,20 @@ public final class ComplexReconstrTestLanguageOpConsumer extends NonTerminalCons
 		final IMarker marker = mark();
 		if (!consumeAction$6()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeKeyword$8()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeAssignment$9()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 	protected boolean consumeAction$6() {
@@ -106,16 +113,20 @@ public final class ComplexReconstrTestLanguageOpConsumer extends NonTerminalCons
 		final IMarker marker = mark();
 		if (!consumeAction$13()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeKeyword$15()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeAssignment$16()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 	protected boolean consumeAction$13() {

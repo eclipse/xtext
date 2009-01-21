@@ -7,13 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.packrat.tokens;
 
-import static org.eclipse.xtext.util.CollectionUtils.each;
-import static org.eclipse.xtext.util.CollectionUtils.loop;
-
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.eclipse.xtext.parser.packrat.IParsedTokenVisitor;
-import org.eclipse.xtext.util.CollectionUtils;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -21,15 +18,15 @@ import org.eclipse.xtext.util.CollectionUtils;
 public class ParsedTokenSequence {
 
 	public class Marker {
-		private final int size;
+		private int size;
 
-		public Marker(int size) {
-			this.size = size;
+		public void rollback() {
+			ParsedTokenSequence.this.size = size;
 		}
 		
-		public void rollback() {
-			while(content.size() > size)
-				content.removeLast();
+		public void release() {
+			if (bufferSize < markerBuffer.length)
+				markerBuffer[bufferSize++] = this;
 		}
 
 		public String toString() {
@@ -37,30 +34,49 @@ public class ParsedTokenSequence {
 		}
 	}
 	
-	private LinkedList<AbstractParsedToken> content;
+	private Marker[] markerBuffer;
+	private int bufferSize;
+	
+	private ArrayList<AbstractParsedToken> content;
+	private int size;
+	
 
 	public ParsedTokenSequence() {
-		this.content = new LinkedList<AbstractParsedToken>();
+		this.content = new ArrayList<AbstractParsedToken>(128);
+		this.size = 0;
+		this.markerBuffer = new Marker[10];
 	}
 	
 	public void append(AbstractParsedToken token) {
-		content.add(token);
+		if (size == content.size())
+			content.add(token);
+		else
+			content.set(size, token);
+		size++;
 	}
 	
 	public void accept(IParsedTokenVisitor visitor) {
-		loop(each(content, visitor));
+		for(int i = 0; i < size; i++) {
+			content.get(i).accept(visitor);
+		}
 	}
 	
 	public void acceptAndClear(IParsedTokenVisitor visitor) {
-		CollectionUtils.clear(each(content, visitor));
+		accept(visitor);
+		clear();
 	}
 	
 	public void clear() {
 		content.clear();
+		size = 0;
+		Arrays.fill(markerBuffer, null);
+		bufferSize = 0;
 	}
 
 	public Marker mark() {
-		return new Marker(content.size());
+		final Marker result = bufferSize > 0 ? markerBuffer[--bufferSize] : new Marker();
+		result.size = size;
+		return result;
 	}
 	
 }

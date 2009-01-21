@@ -17,8 +17,8 @@ public class ParsedNonTerminal extends ParsedToken {
 
 	private final String typeName;
 
-	public ParsedNonTerminal(CharSequence input, int offset, EObject grammarElement, String typeName) {
-		super(input, offset, 0, grammarElement);
+	public ParsedNonTerminal(int offset, EObject grammarElement, String typeName) {
+		super(offset, 0, grammarElement);
 		this.typeName = typeName;
 	}
 

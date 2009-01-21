@@ -56,16 +56,20 @@ public final class ComplexReconstrTestLanguageTrickyFConsumer extends NonTermina
 		final IMarker marker = mark();
 		if (!consumeKeyword$3()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeGroup$4()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeAlternatives$9()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 
@@ -82,12 +86,15 @@ public final class ComplexReconstrTestLanguageTrickyFConsumer extends NonTermina
 		final IMarker marker = mark();
 		if (!consumeAssignment$5()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeAssignment$7()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 

@@ -67,12 +67,12 @@ protected class CompositeModel_Assignment_model extends AssignmentToken  {
 
 /************ begin Rule Model ****************
  *
- * Model : id = NestedModelId ( ':' value = Fraction ) ? ( '#' vector = Vector ) ? ( '+' dots = Dots ) ? ';' ;
+ * Model : id = NestedModelId ( ":" value = Fraction ) ? ( "#" vector = Vector ) ? ( "+" dots = Dots ) ? ";" ;
  *
  **/
 
 
-// id = NestedModelId ( ':' value = Fraction ) ? ( '#' vector = Vector ) ? ( '+' dots = Dots ) ? ';'
+// id = NestedModelId ( ":" value = Fraction ) ? ( "#" vector = Vector ) ? ( "+" dots = Dots ) ? ";"
 protected class Model_Group extends GroupToken {
 	
 	public Model_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -100,7 +100,7 @@ protected class Model_Group extends GroupToken {
 	}
 }
 
-// id = NestedModelId ( ':' value = Fraction ) ? ( '#' vector = Vector ) ? ( '+' dots = Dots ) ?
+// id = NestedModelId ( ":" value = Fraction ) ? ( "#" vector = Vector ) ? ( "+" dots = Dots ) ?
 protected class Model_0_Group extends GroupToken {
 	
 	public Model_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -128,7 +128,7 @@ protected class Model_0_Group extends GroupToken {
 	}
 }
 
-// id = NestedModelId ( ':' value = Fraction ) ? ( '#' vector = Vector ) ?
+// id = NestedModelId ( ":" value = Fraction ) ? ( "#" vector = Vector ) ?
 protected class Model_0_0_Group extends GroupToken {
 	
 	public Model_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -156,7 +156,7 @@ protected class Model_0_0_Group extends GroupToken {
 	}
 }
 
-// id = NestedModelId ( ':' value = Fraction ) ?
+// id = NestedModelId ( ":" value = Fraction ) ?
 protected class Model_0_0_0_Group extends GroupToken {
 	
 	public Model_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -209,7 +209,7 @@ protected class Model_0_0_0_0_Assignment_id extends AssignmentToken  {
 	}
 }
 
-// ( ':' value = Fraction ) ?
+// ( ":" value = Fraction ) ?
 protected class Model_0_0_0_1_Group extends GroupToken {
 	
 	public Model_0_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -237,7 +237,7 @@ protected class Model_0_0_0_1_Group extends GroupToken {
 	}
 }
 
-// ':'
+// ":"
 protected class Model_0_0_0_1_0_Keyword extends KeywordToken  {
 	
 	public Model_0_0_0_1_0_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -276,7 +276,7 @@ protected class Model_0_0_0_1_1_Assignment_value extends AssignmentToken  {
 
 
 
-// ( '#' vector = Vector ) ?
+// ( "#" vector = Vector ) ?
 protected class Model_0_0_1_Group extends GroupToken {
 	
 	public Model_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -304,7 +304,7 @@ protected class Model_0_0_1_Group extends GroupToken {
 	}
 }
 
-// '#'
+// "#"
 protected class Model_0_0_1_0_Keyword extends KeywordToken  {
 	
 	public Model_0_0_1_0_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -343,7 +343,7 @@ protected class Model_0_0_1_1_Assignment_vector extends AssignmentToken  {
 
 
 
-// ( '+' dots = Dots ) ?
+// ( "+" dots = Dots ) ?
 protected class Model_0_1_Group extends GroupToken {
 	
 	public Model_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -371,7 +371,7 @@ protected class Model_0_1_Group extends GroupToken {
 	}
 }
 
-// '+'
+// "+"
 protected class Model_0_1_0_Keyword extends KeywordToken  {
 	
 	public Model_0_1_0_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -410,7 +410,7 @@ protected class Model_0_1_1_Assignment_dots extends AssignmentToken  {
 
 
 
-// ';'
+// ";"
 protected class Model_1_Keyword extends KeywordToken  {
 	
 	public Model_1_Keyword(IInstanceDescription curr, AbstractToken pred) {

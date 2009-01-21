@@ -6,7 +6,6 @@ package org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory;
-import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
@@ -36,24 +35,24 @@ public final class TerminalRulesTestLanguageSTRINGConsumer extends AbstractRuleA
 	}
 
 	protected boolean consumeGroup$2() {
-		final IMarker marker = mark();
+		final int marker = mark();
 		if (!consumeKeyword$4()) {
-			marker.rollback();
+			rollbackTo(marker);
 			return false;
 		}
 		if (!consumeAlternatives$5()) {
-			marker.rollback();
+			rollbackTo(marker);
 			return false;
 		}
 		if (!consumeKeyword$27()) {
-			marker.rollback();
+			rollbackTo(marker);
 			return false;
 		}
 		return true;
 	}
 
 	protected boolean consumeKeyword$4() {
-		return readChar('"');
+		return readChar('\"');
 	}
 
 	protected boolean consumeAlternatives$5() {
@@ -70,20 +69,20 @@ public final class TerminalRulesTestLanguageSTRINGConsumer extends AbstractRuleA
 	}
 
 	protected boolean consumeGroup$6() {
-		final IMarker marker = mark();
+		final int marker = mark();
 		if (!consumeKeyword$7()) {
-			marker.rollback();
+			rollbackTo(marker);
 			return false;
 		}
 		if (!consumeAlternatives$8()) {
-			marker.rollback();
+			rollbackTo(marker);
 			return false;
 		}
 		return true;
 	}
 
 	protected boolean consumeKeyword$7() {
-		return readString("\\");
+		return readChar('\\');
 	}
 
 	protected boolean consumeAlternatives$8() {
@@ -127,7 +126,7 @@ public final class TerminalRulesTestLanguageSTRINGConsumer extends AbstractRuleA
 	}
 
 	protected boolean consumeKeyword$20() {
-		return readChar('"');
+		return readChar('\"');
 	}
 
 	protected boolean consumeKeyword$21() {
@@ -135,16 +134,16 @@ public final class TerminalRulesTestLanguageSTRINGConsumer extends AbstractRuleA
 	}
 
 	protected boolean consumeKeyword$22() {
-		return readString("\\");
+		return readChar('\\');
 	}
 
 	protected boolean consumeNegatedToken$23() {
-		final IMarker marker = mark();
+		final int marker = mark();
 		if (!eof() && !consumeAlternatives$24()) {
 			incOffset();
 			return true;
 		}
-		marker.rollback();
+		rollbackTo(marker);
 		return false;
 	}
 
@@ -157,29 +156,29 @@ public final class TerminalRulesTestLanguageSTRINGConsumer extends AbstractRuleA
 	}
 
 	protected boolean consumeKeyword$25() {
-		return readString("\\");
+		return readChar('\\');
 	}
 
 	protected boolean consumeKeyword$26() {
-		return readChar('"');
+		return readChar('\"');
 	}
 
 	protected boolean consumeKeyword$27() {
-		return readChar('"');
+		return readChar('\"');
 	}
 
 	protected boolean consumeGroup$28() {
-		final IMarker marker = mark();
+		final int marker = mark();
 		if (!consumeKeyword$30()) {
-			marker.rollback();
+			rollbackTo(marker);
 			return false;
 		}
 		if (!consumeAlternatives$31()) {
-			marker.rollback();
+			rollbackTo(marker);
 			return false;
 		}
 		if (!consumeKeyword$53()) {
-			marker.rollback();
+			rollbackTo(marker);
 			return false;
 		}
 		return true;
@@ -203,20 +202,20 @@ public final class TerminalRulesTestLanguageSTRINGConsumer extends AbstractRuleA
 	}
 
 	protected boolean consumeGroup$32() {
-		final IMarker marker = mark();
+		final int marker = mark();
 		if (!consumeKeyword$33()) {
-			marker.rollback();
+			rollbackTo(marker);
 			return false;
 		}
 		if (!consumeAlternatives$34()) {
-			marker.rollback();
+			rollbackTo(marker);
 			return false;
 		}
 		return true;
 	}
 
 	protected boolean consumeKeyword$33() {
-		return readString("\\");
+		return readChar('\\');
 	}
 
 	protected boolean consumeAlternatives$34() {
@@ -260,7 +259,7 @@ public final class TerminalRulesTestLanguageSTRINGConsumer extends AbstractRuleA
 	}
 
 	protected boolean consumeKeyword$46() {
-		return readChar('"');
+		return readChar('\"');
 	}
 
 	protected boolean consumeKeyword$47() {
@@ -268,16 +267,16 @@ public final class TerminalRulesTestLanguageSTRINGConsumer extends AbstractRuleA
 	}
 
 	protected boolean consumeKeyword$48() {
-		return readString("\\");
+		return readChar('\\');
 	}
 
 	protected boolean consumeNegatedToken$49() {
-		final IMarker marker = mark();
+		final int marker = mark();
 		if (!eof() && !consumeAlternatives$50()) {
 			incOffset();
 			return true;
 		}
-		marker.rollback();
+		rollbackTo(marker);
 		return false;
 	}
 
@@ -290,7 +289,7 @@ public final class TerminalRulesTestLanguageSTRINGConsumer extends AbstractRuleA
 	}
 
 	protected boolean consumeKeyword$51() {
-		return readString("\\");
+		return readChar('\\');
 	}
 
 	protected boolean consumeKeyword$52() {

@@ -52,12 +52,15 @@ public final class XtextAbstractTokenConsumer extends NonTerminalConsumer {
 		final IMarker marker = mark();
 		if (!consumeAlternatives$2()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeAssignment$7()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 

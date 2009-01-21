@@ -45,7 +45,7 @@ public final class XtextBuiltinSTRINGConsumer extends AbstractRuleAwareTerminalC
 		// '\"' ( '\\\\' ('b'|'t'|'n'|'f'|'r'|'\\\"'|'\\''|'\\\\') | ~('\\\\'|'\"') )* '\"'
 		ALTERNATIVE$0: {
 			SEQUENCE$1: {
-				IMarker marker = mark(); // mark position before sequence in alternatives
+				int marker = mark(); // mark position before sequence in alternatives
 				// '\"' ( '\\\\' ('b'|'t'|'n'|'f'|'r'|'\\\"'|'\\''|'\\\\') | ~('\\\\'|'\"') )* '\"'
 				// sequence
 				// '\"'
@@ -57,11 +57,11 @@ public final class XtextBuiltinSTRINGConsumer extends AbstractRuleAwareTerminalC
 					ALTERNATIVE$3: {
 						// '\\\\' ('b'|'t'|'n'|'f'|'r'|'\\\"'|'\\''|'\\\\')
 						// sequence
-						IMarker marker$1 = mark(); // first part of alternative is sequence, so mark the position before the sequence
+						int marker$1 = mark(); // first part of alternative is sequence, so mark the position before the sequence
 						// '\\\\'
 						if (!readChar('\\')) break ALTERNATIVE$3;
 						if (!readAnyChar('b', 't', 'n', 'f', 'r', '"', '\'', '\\')) { 
-							marker$1.rollback();
+							rollbackTo(marker$1);
 							break ALTERNATIVE$3;
 						}
 						continue ALTERNATIVE$2;
@@ -76,7 +76,7 @@ public final class XtextBuiltinSTRINGConsumer extends AbstractRuleAwareTerminalC
 				}
 				// '\"'
 				if (!readChar('"')) {
-					marker.rollback();
+					rollbackTo(marker);
 					break SEQUENCE$1;
 				} 
 				break ALTERNATIVE$0;
@@ -86,7 +86,7 @@ public final class XtextBuiltinSTRINGConsumer extends AbstractRuleAwareTerminalC
 			{
 				// '\\'' ( '\\\\' ('b'|'t'|'n'|'f'|'r'|'\\\"'|'\\''|'\\\\') | ~('\\\\'|'\\'') )* '\\''
 				// sequence
-				IMarker marker = mark(); // mark position before sequence in alternatives
+				int marker = mark(); // mark position before sequence in alternatives
 				// '\\''
 				result = readChar('\'');
 				if (result) {
@@ -96,26 +96,26 @@ public final class XtextBuiltinSTRINGConsumer extends AbstractRuleAwareTerminalC
 						// alternative 1.1:
 						// '\\\\' ('b'|'t'|'n'|'f'|'r'|'\\\"'|'\\''|'\\\\')
 						{
-							IMarker marker$$1 = mark(); // first part of alternative is sequence, so mark the position before the sequence
+							int marker$$1 = mark(); // first part of alternative is sequence, so mark the position before the sequence
 							// '\\\\' ('b'|'t'|'n'|'f'|'r'|'\\\"'|'\\''|'\\\\')
 							// sequence
 							// '\\\\'
 							result$1 = readChar('\\');
 							if (result$1) {
 								result$1 = readAnyChar('b', 't', 'n', 'f', 'r', '"', '\'', '\\');
-								if (!result$1) marker$$1.rollback();
-							} else marker$$1.rollback();
+								if (!result$1) rollbackTo(marker$$1);
+							} else rollbackTo(marker$$1);
 						}
 						if (!result$1) {
-							IMarker marker$$1 = mark();
+							int marker$$1 = mark();
 							result$1 = readChar(STRINGConsumer$$2);
-							if (!result$1) marker$$1.rollback();
+							if (!result$1) rollbackTo(marker$$1);
 						}
 					} 
 					// '\''
 					result = readChar('\'');
-					if (!result) marker.rollback();
-				} else marker.rollback();
+					if (!result) rollbackTo(marker);
+				} else rollbackTo(marker);
 			}
 		}
 		return result;

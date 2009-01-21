@@ -167,12 +167,12 @@ protected class Sequence_1_1_Assignment_expressions extends AssignmentToken  {
 
 /************ begin Rule Addition ****************
  *
- * Addition returns Expression : Multiplication ( { current = Op . values += current } operator = ( '+' | '-' ) values += Multiplication ) * ;
+ * Addition returns Expression : Multiplication ( { current = Op . values += current } operator = ( "+" | "-" ) values += Multiplication ) * ;
  *
  **/
 
 
-// Multiplication ( { current = Op . values += current } operator = ( '+' | '-' ) values += Multiplication ) *
+// Multiplication ( { current = Op . values += current } operator = ( "+" | "-" ) values += Multiplication ) *
 protected class Addition_Group extends GroupToken {
 	
 	public Addition_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -218,7 +218,7 @@ protected class Addition_0_RuleCall_Multiplication extends RuleCallToken {
 	}
 }
 
-// ( { current = Op . values += current } operator = ( '+' | '-' ) values += Multiplication ) *
+// ( { current = Op . values += current } operator = ( "+" | "-" ) values += Multiplication ) *
 protected class Addition_1_Group extends GroupToken {
 	
 	public Addition_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -246,7 +246,7 @@ protected class Addition_1_Group extends GroupToken {
 	}
 }
 
-// { current = Op . values += current } operator = ( '+' | '-' )
+// { current = Op . values += current } operator = ( "+" | "-" )
 protected class Addition_1_0_Group extends GroupToken {
 	
 	public Addition_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -294,7 +294,7 @@ protected class Addition_1_0_0_Action_Op_values extends ActionToken  {
 	}
 }
 
-// operator = ( '+' | '-' )
+// operator = ( "+" | "-" )
 protected class Addition_1_0_1_Assignment_operator extends AssignmentToken  {
 	
 	public Addition_1_0_1_Assignment_operator(IInstanceDescription curr, AbstractToken pred) {
@@ -365,12 +365,12 @@ protected class Addition_1_1_Assignment_values extends AssignmentToken  {
 
 /************ begin Rule Multiplication ****************
  *
- * Multiplication returns Expression : Term ( { current = Op . values += current } operator = ( '*' | '/' ) values += Term ) * ;
+ * Multiplication returns Expression : Term ( { current = Op . values += current } operator = ( "*" | "/" ) values += Term ) * ;
  *
  **/
 
 
-// Term ( { current = Op . values += current } operator = ( '*' | '/' ) values += Term ) *
+// Term ( { current = Op . values += current } operator = ( "*" | "/" ) values += Term ) *
 protected class Multiplication_Group extends GroupToken {
 	
 	public Multiplication_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -416,7 +416,7 @@ protected class Multiplication_0_RuleCall_Term extends RuleCallToken {
 	}
 }
 
-// ( { current = Op . values += current } operator = ( '*' | '/' ) values += Term ) *
+// ( { current = Op . values += current } operator = ( "*" | "/" ) values += Term ) *
 protected class Multiplication_1_Group extends GroupToken {
 	
 	public Multiplication_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -444,7 +444,7 @@ protected class Multiplication_1_Group extends GroupToken {
 	}
 }
 
-// { current = Op . values += current } operator = ( '*' | '/' )
+// { current = Op . values += current } operator = ( "*" | "/" )
 protected class Multiplication_1_0_Group extends GroupToken {
 	
 	public Multiplication_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -492,7 +492,7 @@ protected class Multiplication_1_0_0_Action_Op_values extends ActionToken  {
 	}
 }
 
-// operator = ( '*' | '/' )
+// operator = ( "*" | "/" )
 protected class Multiplication_1_0_1_Assignment_operator extends AssignmentToken  {
 	
 	public Multiplication_1_0_1_Assignment_operator(IInstanceDescription curr, AbstractToken pred) {
@@ -664,12 +664,12 @@ protected class Atom_Assignment_name extends AssignmentToken  {
 
 /************ begin Rule Parens ****************
  *
- * Parens returns Expression : '(' Addition ')' ;
+ * Parens returns Expression : "(" Addition ")" ;
  *
  **/
 
 
-// '(' Addition ')'
+// "(" Addition ")"
 protected class Parens_Group extends GroupToken {
 	
 	public Parens_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -697,7 +697,7 @@ protected class Parens_Group extends GroupToken {
 	}
 }
 
-// '(' Addition
+// "(" Addition
 protected class Parens_0_Group extends GroupToken {
 	
 	public Parens_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -725,7 +725,7 @@ protected class Parens_0_Group extends GroupToken {
 	}
 }
 
-// '('
+// "("
 protected class Parens_0_0_Keyword extends KeywordToken  {
 	
 	public Parens_0_0_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -756,7 +756,7 @@ protected class Parens_0_1_RuleCall_Addition extends RuleCallToken {
 }
 
 
-// ')'
+// ")"
 protected class Parens_1_Keyword extends KeywordToken  {
 	
 	public Parens_1_Keyword(IInstanceDescription curr, AbstractToken pred) {

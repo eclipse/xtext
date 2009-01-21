@@ -41,10 +41,10 @@ import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 public class «genClassFQName.toSimpleName()» extends AbstractPackratParser {
 
 	@Override
-	protected «languageName()»ParserConfiguration createParserConfiguration(ICharSequenceWithOffset input,
+	protected «languageName().toFirstUpper()»ParserConfiguration createParserConfiguration(ICharSequenceWithOffset input,
 			IMarkerFactory markerFactory, IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler,
 			IConsumerUtility consumerUtil) {
-		return new «languageName()»ParserConfiguration(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil);
+		return new «languageName().toFirstUpper()»ParserConfiguration(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil);
 	}
 
 }
@@ -69,7 +69,7 @@ import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 «LET grammar().getSuperGrammar() AS superGrammar-»
 «IF superGrammar != null-»
-import «superGrammar.getNamespace()».parser.packrat.«superGrammar.getName().replaceAll("\\s","_")»ParserConfiguration; 
+import «superGrammar.getNamespace()».parser.packrat.«superGrammar.getName().toFirstUpper().replaceAll("\\s","_")»ParserConfiguration; 
 
 «ENDIF-»
 «ENDLET-»
@@ -89,7 +89,7 @@ public class «languageName().toFirstUpper()»ParserConfiguration extends Abstract
     private «rule.consumerClassName()» «rule.consumerFieldName()»;
 «ENDFOREACH-»
 
-	public «languageName()»ParserConfiguration(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
+	public «languageName().toFirstUpper()»ParserConfiguration(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
 			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil) {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil);
 «LET grammar().getSuperGrammar() AS superGrammar-»

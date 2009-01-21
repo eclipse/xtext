@@ -49,7 +49,8 @@ public class TerminalRuleInterpreter extends XtextSwitch<Boolean>{
 	}
 	
 	private boolean eof() {
-		return input.getOffset() >= input.length();
+		boolean result = input.getOffset() >= input.length(); 
+		return result;
 	}
 	
 	public TerminalRuleInterpreter(ICharSequenceWithOffset input, IMarkerFactory markerFactory) {
@@ -61,7 +62,7 @@ public class TerminalRuleInterpreter extends XtextSwitch<Boolean>{
 	@Override
 	public Boolean caseAlternatives(Alternatives object) {
 		boolean result = false;
-		OUTER: while(GrammarUtil.isMultipleCardinality(object)) {
+		OUTER: do {
 			for (AbstractElement element: object.getGroups()) {
 				if (doSwitch(element)) {
 					result = true;
@@ -69,7 +70,7 @@ public class TerminalRuleInterpreter extends XtextSwitch<Boolean>{
 				}
 			}
 			break OUTER;
-		}
+		} while(GrammarUtil.isMultipleCardinality(object));
 		return result || GrammarUtil.isOptionalCardinality(object);
 	}
 
@@ -78,7 +79,7 @@ public class TerminalRuleInterpreter extends XtextSwitch<Boolean>{
 		boolean result = false;
 		if (object.getLeft().getValue().length() != 1 || object.getRight().getValue().length() != 1)
 			throw new IllegalStateException("ranges cannot use strings as left or right, that are longer then 1 character.");
-		OUTER: while(GrammarUtil.isMultipleCardinality(object)) {
+		OUTER: do {
 			if (eof())
 				break OUTER;
 			char left = object.getLeft().getValue().charAt(0);
@@ -90,7 +91,7 @@ public class TerminalRuleInterpreter extends XtextSwitch<Boolean>{
 				continue OUTER;
 			}
 			break OUTER;
-		}
+		} while(GrammarUtil.isMultipleCardinality(object));
 		return result || GrammarUtil.isOptionalCardinality(object);
 	}
 	
@@ -102,7 +103,7 @@ public class TerminalRuleInterpreter extends XtextSwitch<Boolean>{
 	@Override
 	public Boolean caseGroup(Group object) {
 		boolean result = false;
-		OUTER: while(GrammarUtil.isMultipleCardinality(object)) {
+		OUTER: do {
 			IMarker marker = markerFactory.mark();
 			for(AbstractElement element: object.getAbstractTokens()) {
 				if (!doSwitch(element)) {
@@ -112,7 +113,7 @@ public class TerminalRuleInterpreter extends XtextSwitch<Boolean>{
 			}
 			result = true;
 			continue OUTER;
-		}
+		} while(GrammarUtil.isMultipleCardinality(object));
 		return result || GrammarUtil.isOptionalCardinality(object);
 	}
 
@@ -120,8 +121,8 @@ public class TerminalRuleInterpreter extends XtextSwitch<Boolean>{
 	public Boolean caseKeyword(Keyword object) {
 		boolean result = false;
 		String value = object.getValue();
-		OUTER: while(GrammarUtil.isMultipleCardinality(object)) {
-			if (input.getOffset() + value.length() >= input.length())
+		OUTER: do {
+			if (input.getOffset() + value.length() > input.length())
 				break OUTER;
 			if (value.equals(input.subSequence(input.getOffset(), input.getOffset() +  value.length()).toString())) {
 				input.incOffset(value.length());
@@ -129,20 +130,20 @@ public class TerminalRuleInterpreter extends XtextSwitch<Boolean>{
 				continue OUTER;
 			}
 			break OUTER;
-		}
+		} while(GrammarUtil.isMultipleCardinality(object));
 		return result || GrammarUtil.isOptionalCardinality(object);
 	}
 	
 	@Override
 	public Boolean caseWildcard(Wildcard object) {
 		boolean result = false;
-		OUTER: while(GrammarUtil.isMultipleCardinality(object)) {
+		OUTER: do {
 			if (eof())
 				break OUTER;
 			input.incOffset();
 			result = true;
 			continue OUTER;
-		}
+		} while(GrammarUtil.isMultipleCardinality(object));
 		return result || GrammarUtil.isOptionalCardinality(object);
 	}
 
@@ -155,54 +156,53 @@ public class TerminalRuleInterpreter extends XtextSwitch<Boolean>{
 	public Boolean caseParserRule(ParserRule object) {
 		if (!object.isTerminal())
 			throw new IllegalStateException("Cannot call parser rules that are not terminal rules.");
-		return doSwitch(object.getAlternatives());
+		boolean result = doSwitch(object.getAlternatives());
+		return result;
 	}
 
 	@Override
 	public Boolean caseRuleCall(RuleCall object) {
 		boolean result = false;
-		OUTER: while(GrammarUtil.isMultipleCardinality(object)) {
+		OUTER: do {
 			if (doSwitch(object.getRule())) {
 				result = true;
 				continue OUTER;
 			}
 			break OUTER;
-		}
+		} while(GrammarUtil.isMultipleCardinality(object));
 		return result || GrammarUtil.isOptionalCardinality(object);
 	}
 	
-	
-
 	@Override
 	public Boolean caseUpToToken(UpToToken object) {
-		if (eof())
-			return true;
 		if (GrammarUtil.isOptionalCardinality(object) || GrammarUtil.isMultipleCardinality(object))
 			throw new IllegalStateException("cardinality has to be default for until tokens");
-		while (true) {
+		IMarker marker = markerFactory.mark();
+		while (!eof()) {
 			if (doSwitch(object.getTerminal())) {
 				return true;
 			}
-			if (eof())
-				return true;
 			input.incOffset();
 		}
+		marker.rollback();
+		return false;
 	}
 
 	@Override
 	public Boolean caseNegatedToken(NegatedToken object) {
-		if (eof())
-			return true;
 		boolean result = false;
-		OUTER: while(GrammarUtil.isMultipleCardinality(object)) {
+		OUTER: do {
+			if (eof())
+				break OUTER;			
 			IMarker marker = markerFactory.mark();
 			if (!doSwitch(object.getTerminal())) {
 				result = true;
+				input.incOffset();
 				continue OUTER;
 			}
 			marker.rollback();
 			break OUTER;
-		}
+		} while(GrammarUtil.isMultipleCardinality(object));
 		return result || GrammarUtil.isOptionalCardinality(object);
 	}
 }

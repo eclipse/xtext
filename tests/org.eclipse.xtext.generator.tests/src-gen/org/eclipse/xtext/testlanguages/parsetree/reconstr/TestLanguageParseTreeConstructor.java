@@ -138,12 +138,12 @@ protected class AbstractRule_1_RuleCall_ReducibleRule extends RuleCallToken {
 
 /************ begin Rule ChoiceRule ****************
  *
- * ChoiceRule returns ChoiceElement : 'choice' ( optionalKeyword ?= 'optional' ) ? name = ID ;
+ * ChoiceRule returns ChoiceElement : "choice" ( optionalKeyword ?= "optional" ) ? name = ID ;
  *
  **/
 
 
-// 'choice' ( optionalKeyword ?= 'optional' ) ? name = ID
+// "choice" ( optionalKeyword ?= "optional" ) ? name = ID
 protected class ChoiceRule_Group extends GroupToken {
 	
 	public ChoiceRule_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -171,7 +171,7 @@ protected class ChoiceRule_Group extends GroupToken {
 	}
 }
 
-// 'choice' ( optionalKeyword ?= 'optional' ) ?
+// "choice" ( optionalKeyword ?= "optional" ) ?
 protected class ChoiceRule_0_Group extends GroupToken {
 	
 	public ChoiceRule_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -199,7 +199,7 @@ protected class ChoiceRule_0_Group extends GroupToken {
 	}
 }
 
-// 'choice'
+// "choice"
 protected class ChoiceRule_0_0_Keyword_choice extends KeywordToken  {
 	
 	public ChoiceRule_0_0_Keyword_choice(IInstanceDescription curr, AbstractToken pred) {
@@ -211,7 +211,7 @@ protected class ChoiceRule_0_0_Keyword_choice extends KeywordToken  {
 	}	
 }
 
-// ( optionalKeyword ?= 'optional' ) ?
+// ( optionalKeyword ?= "optional" ) ?
 protected class ChoiceRule_0_1_Assignment_optionalKeyword extends AssignmentToken  {
 	
 	public ChoiceRule_0_1_Assignment_optionalKeyword(IInstanceDescription curr, AbstractToken pred) {
@@ -266,12 +266,12 @@ protected class ChoiceRule_1_Assignment_name extends AssignmentToken  {
 
 /************ begin Rule ReducibleRule ****************
  *
- * ReducibleRule returns ReducibleElement : 'reducible' TerminalRule ( { current = ReducibleComposite . actionFeature += current } actionFeature += TerminalRule ) ? ;
+ * ReducibleRule returns ReducibleElement : "reducible" TerminalRule ( { current = ReducibleComposite . actionFeature += current } actionFeature += TerminalRule ) ? ;
  *
  **/
 
 
-// 'reducible' TerminalRule ( { current = ReducibleComposite . actionFeature += current } actionFeature += TerminalRule ) ?
+// "reducible" TerminalRule ( { current = ReducibleComposite . actionFeature += current } actionFeature += TerminalRule ) ?
 protected class ReducibleRule_Group extends GroupToken {
 	
 	public ReducibleRule_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -299,7 +299,7 @@ protected class ReducibleRule_Group extends GroupToken {
 	}
 }
 
-// 'reducible' TerminalRule
+// "reducible" TerminalRule
 protected class ReducibleRule_0_Group extends GroupToken {
 	
 	public ReducibleRule_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -327,7 +327,7 @@ protected class ReducibleRule_0_Group extends GroupToken {
 	}
 }
 
-// 'reducible'
+// "reducible"
 protected class ReducibleRule_0_0_Keyword_reducible extends KeywordToken  {
 	
 	public ReducibleRule_0_0_Keyword_reducible(IInstanceDescription curr, AbstractToken pred) {

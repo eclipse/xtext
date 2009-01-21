@@ -41,12 +41,15 @@ public final class LangATestLanguageMainConsumer extends NonTerminalConsumer {
 		final IMarker marker = mark();
 		if (!consumeAssignment$2()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeAssignment$4()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 

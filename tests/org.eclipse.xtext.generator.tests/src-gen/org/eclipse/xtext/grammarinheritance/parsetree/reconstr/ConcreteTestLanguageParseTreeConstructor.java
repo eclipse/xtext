@@ -27,12 +27,12 @@ public class ConcreteTestLanguageParseTreeConstructor extends AbstractParseTreeC
 
 /************ begin Rule ConcreteParserRule ****************
  *
- * ConcreteParserRule : 'model' magicNumber = REAL ':' ( elements += InheritedParserRule ) * ;
+ * ConcreteParserRule : "model" magicNumber = REAL ":" ( elements += InheritedParserRule ) * ;
  *
  **/
 
 
-// 'model' magicNumber = REAL ':' ( elements += InheritedParserRule ) *
+// "model" magicNumber = REAL ":" ( elements += InheritedParserRule ) *
 protected class ConcreteParserRule_Group extends GroupToken {
 	
 	public ConcreteParserRule_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -60,7 +60,7 @@ protected class ConcreteParserRule_Group extends GroupToken {
 	}
 }
 
-// 'model' magicNumber = REAL ':'
+// "model" magicNumber = REAL ":"
 protected class ConcreteParserRule_0_Group extends GroupToken {
 	
 	public ConcreteParserRule_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -88,7 +88,7 @@ protected class ConcreteParserRule_0_Group extends GroupToken {
 	}
 }
 
-// 'model' magicNumber = REAL
+// "model" magicNumber = REAL
 protected class ConcreteParserRule_0_0_Group extends GroupToken {
 	
 	public ConcreteParserRule_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -116,7 +116,7 @@ protected class ConcreteParserRule_0_0_Group extends GroupToken {
 	}
 }
 
-// 'model'
+// "model"
 protected class ConcreteParserRule_0_0_0_Keyword_model extends KeywordToken  {
 	
 	public ConcreteParserRule_0_0_0_Keyword_model(IInstanceDescription curr, AbstractToken pred) {
@@ -152,7 +152,7 @@ protected class ConcreteParserRule_0_0_1_Assignment_magicNumber extends Assignme
 }
 
 
-// ':'
+// ":"
 protected class ConcreteParserRule_0_1_Keyword extends KeywordToken  {
 	
 	public ConcreteParserRule_0_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -202,12 +202,12 @@ protected class ConcreteParserRule_1_Assignment_elements extends AssignmentToken
 
 /************ begin Rule InheritedParserRule ****************
  *
- * InheritedParserRule returns AType : 'element' name = ID ;
+ * InheritedParserRule returns AType : "element" name = ID ;
  *
  **/
 
 
-// 'element' name = ID
+// "element" name = ID
 protected class InheritedParserRule_Group extends GroupToken {
 	
 	public InheritedParserRule_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -235,7 +235,7 @@ protected class InheritedParserRule_Group extends GroupToken {
 	}
 }
 
-// 'element'
+// "element"
 protected class InheritedParserRule_0_Keyword_element extends KeywordToken  {
 	
 	public InheritedParserRule_0_Keyword_element(IInstanceDescription curr, AbstractToken pred) {

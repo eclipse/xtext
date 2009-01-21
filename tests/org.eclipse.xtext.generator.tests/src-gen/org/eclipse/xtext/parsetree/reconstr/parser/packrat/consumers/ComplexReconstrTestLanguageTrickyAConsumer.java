@@ -58,24 +58,30 @@ public final class ComplexReconstrTestLanguageTrickyAConsumer extends NonTermina
 		final IMarker marker = mark();
 		if (!consumeKeyword$5()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeRuleCall$6()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeAssignment$7()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeAlternatives$9()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeAssignment$18()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 
@@ -115,12 +121,15 @@ public final class ComplexReconstrTestLanguageTrickyAConsumer extends NonTermina
 		final IMarker marker = mark();
 		if (!consumeAction$11()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeKeyword$13()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 	protected boolean consumeAction$11() {
@@ -136,12 +145,15 @@ public final class ComplexReconstrTestLanguageTrickyAConsumer extends NonTermina
 		final IMarker marker = mark();
 		if (!consumeAction$15()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeKeyword$17()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 	protected boolean consumeAction$15() {

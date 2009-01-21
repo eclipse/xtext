@@ -512,12 +512,12 @@ protected class Atom_Assignment_name extends AssignmentToken  {
 
 /************ begin Rule Parens ****************
  *
- * Parens returns Expression : '(' Op ')' ( em = '!' ) ? ;
+ * Parens returns Expression : "(" Op ")" ( em = "!" ) ? ;
  *
  **/
 
 
-// '(' Op ')' ( em = '!' ) ?
+// "(" Op ")" ( em = "!" ) ?
 protected class Parens_Group extends GroupToken {
 	
 	public Parens_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -545,7 +545,7 @@ protected class Parens_Group extends GroupToken {
 	}
 }
 
-// '(' Op ')'
+// "(" Op ")"
 protected class Parens_0_Group extends GroupToken {
 	
 	public Parens_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -573,7 +573,7 @@ protected class Parens_0_Group extends GroupToken {
 	}
 }
 
-// '(' Op
+// "(" Op
 protected class Parens_0_0_Group extends GroupToken {
 	
 	public Parens_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -601,7 +601,7 @@ protected class Parens_0_0_Group extends GroupToken {
 	}
 }
 
-// '('
+// "("
 protected class Parens_0_0_0_Keyword extends KeywordToken  {
 	
 	public Parens_0_0_0_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -632,7 +632,7 @@ protected class Parens_0_0_1_RuleCall_Op extends RuleCallToken {
 }
 
 
-// ')'
+// ")"
 protected class Parens_0_1_Keyword extends KeywordToken  {
 	
 	public Parens_0_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -645,7 +645,7 @@ protected class Parens_0_1_Keyword extends KeywordToken  {
 }
 
 
-// ( em = '!' ) ?
+// ( em = "!" ) ?
 protected class Parens_1_Assignment_em extends AssignmentToken  {
 	
 	public Parens_1_Assignment_em(IInstanceDescription curr, AbstractToken pred) {
@@ -676,12 +676,12 @@ protected class Parens_1_Assignment_em extends AssignmentToken  {
 
 /************ begin Rule TwoNumbers ****************
  *
- * TwoNumbers : num1 = INT num2 = INT ( '#' num3 += INT ) * ;
+ * TwoNumbers : num1 = INT num2 = INT ( "#" num3 += INT ) * ;
  *
  **/
 
 
-// num1 = INT num2 = INT ( '#' num3 += INT ) *
+// num1 = INT num2 = INT ( "#" num3 += INT ) *
 protected class TwoNumbers_Group extends GroupToken {
 	
 	public TwoNumbers_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -784,7 +784,7 @@ protected class TwoNumbers_0_1_Assignment_num2 extends AssignmentToken  {
 }
 
 
-// ( '#' num3 += INT ) *
+// ( "#" num3 += INT ) *
 protected class TwoNumbers_1_Group extends GroupToken {
 	
 	public TwoNumbers_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -812,7 +812,7 @@ protected class TwoNumbers_1_Group extends GroupToken {
 	}
 }
 
-// '#'
+// "#"
 protected class TwoNumbers_1_0_Keyword extends KeywordToken  {
 	
 	public TwoNumbers_1_0_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -854,12 +854,12 @@ protected class TwoNumbers_1_1_Assignment_num3 extends AssignmentToken  {
 
 /************ begin Rule ManyStrings ****************
  *
- * ManyStrings : '=' ( str1 += STRING ) * str2 += STRING ;
+ * ManyStrings : "=" ( str1 += STRING ) * str2 += STRING ;
  *
  **/
 
 
-// '=' ( str1 += STRING ) * str2 += STRING
+// "=" ( str1 += STRING ) * str2 += STRING
 protected class ManyStrings_Group extends GroupToken {
 	
 	public ManyStrings_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -887,7 +887,7 @@ protected class ManyStrings_Group extends GroupToken {
 	}
 }
 
-// '=' ( str1 += STRING ) *
+// "=" ( str1 += STRING ) *
 protected class ManyStrings_0_Group extends GroupToken {
 	
 	public ManyStrings_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -915,7 +915,7 @@ protected class ManyStrings_0_Group extends GroupToken {
 	}
 }
 
-// '='
+// "="
 protected class ManyStrings_0_0_Keyword extends KeywordToken  {
 	
 	public ManyStrings_0_0_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -980,12 +980,12 @@ protected class ManyStrings_1_Assignment_str2 extends AssignmentToken  {
 
 /************ begin Rule Type ****************
  *
- * Type : 'type' name = ID 'extends' ^extends = [ Type ] ;
+ * Type : "type" name = ID "extends" ^extends = [ Type ] ;
  *
  **/
 
 
-// 'type' name = ID 'extends' ^extends = [ Type ]
+// "type" name = ID "extends" ^extends = [ Type ]
 protected class Type_Group extends GroupToken {
 	
 	public Type_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1013,7 +1013,7 @@ protected class Type_Group extends GroupToken {
 	}
 }
 
-// 'type' name = ID 'extends'
+// "type" name = ID "extends"
 protected class Type_0_Group extends GroupToken {
 	
 	public Type_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1041,7 +1041,7 @@ protected class Type_0_Group extends GroupToken {
 	}
 }
 
-// 'type' name = ID
+// "type" name = ID
 protected class Type_0_0_Group extends GroupToken {
 	
 	public Type_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1069,7 +1069,7 @@ protected class Type_0_0_Group extends GroupToken {
 	}
 }
 
-// 'type'
+// "type"
 protected class Type_0_0_0_Keyword_type extends KeywordToken  {
 	
 	public Type_0_0_0_Keyword_type(IInstanceDescription curr, AbstractToken pred) {
@@ -1105,7 +1105,7 @@ protected class Type_0_0_1_Assignment_name extends AssignmentToken  {
 }
 
 
-// 'extends'
+// "extends"
 protected class Type_0_1_Keyword_extends extends KeywordToken  {
 	
 	public Type_0_1_Keyword_extends(IInstanceDescription curr, AbstractToken pred) {
@@ -1150,12 +1150,12 @@ protected class Type_1_Assignment_extends extends AssignmentToken  {
 
 /************ begin Rule Ref2 ****************
  *
- * Ref2 : '#2' ref2 = ( 'mykeyword1' | STRING | 'mykeyword2' ) ;
+ * Ref2 : "#2" ref2 = ( "mykeyword1" | STRING | "mykeyword2" ) ;
  *
  **/
 
 
-// '#2' ref2 = ( 'mykeyword1' | STRING | 'mykeyword2' )
+// "#2" ref2 = ( "mykeyword1" | STRING | "mykeyword2" )
 protected class Ref2_Group extends GroupToken {
 	
 	public Ref2_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1183,7 +1183,7 @@ protected class Ref2_Group extends GroupToken {
 	}
 }
 
-// '#2'
+// "#2"
 protected class Ref2_0_Keyword_2 extends KeywordToken  {
 	
 	public Ref2_0_Keyword_2(IInstanceDescription curr, AbstractToken pred) {
@@ -1195,7 +1195,7 @@ protected class Ref2_0_Keyword_2 extends KeywordToken  {
 	}	
 }
 
-// ref2 = ( 'mykeyword1' | STRING | 'mykeyword2' )
+// ref2 = ( "mykeyword1" | STRING | "mykeyword2" )
 protected class Ref2_1_Assignment_ref2 extends AssignmentToken  {
 	
 	public Ref2_1_Assignment_ref2(IInstanceDescription curr, AbstractToken pred) {
@@ -1238,12 +1238,12 @@ protected class Ref2_1_Assignment_ref2 extends AssignmentToken  {
 
 /************ begin Rule Spare ****************
  *
- * Spare : '#3' id += ID ( '.' id += ID ) * ;
+ * Spare : "#3" id += ID ( "." id += ID ) * ;
  *
  **/
 
 
-// '#3' id += ID ( '.' id += ID ) *
+// "#3" id += ID ( "." id += ID ) *
 protected class Spare_Group extends GroupToken {
 	
 	public Spare_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1271,7 +1271,7 @@ protected class Spare_Group extends GroupToken {
 	}
 }
 
-// '#3' id += ID
+// "#3" id += ID
 protected class Spare_0_Group extends GroupToken {
 	
 	public Spare_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1299,7 +1299,7 @@ protected class Spare_0_Group extends GroupToken {
 	}
 }
 
-// '#3'
+// "#3"
 protected class Spare_0_0_Keyword_3 extends KeywordToken  {
 	
 	public Spare_0_0_Keyword_3(IInstanceDescription curr, AbstractToken pred) {
@@ -1335,7 +1335,7 @@ protected class Spare_0_1_Assignment_id extends AssignmentToken  {
 }
 
 
-// ( '.' id += ID ) *
+// ( "." id += ID ) *
 protected class Spare_1_Group extends GroupToken {
 	
 	public Spare_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1363,7 +1363,7 @@ protected class Spare_1_Group extends GroupToken {
 	}
 }
 
-// '.'
+// "."
 protected class Spare_1_0_Keyword extends KeywordToken  {
 	
 	public Spare_1_0_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -1405,12 +1405,12 @@ protected class Spare_1_1_Assignment_id extends AssignmentToken  {
 
 /************ begin Rule Boolean ****************
  *
- * Boolean : '#4' ( bool ?= 'myoption' ) ? 'kw' value = ID ;
+ * Boolean : "#4" ( bool ?= "myoption" ) ? "kw" value = ID ;
  *
  **/
 
 
-// '#4' ( bool ?= 'myoption' ) ? 'kw' value = ID
+// "#4" ( bool ?= "myoption" ) ? "kw" value = ID
 protected class Boolean_Group extends GroupToken {
 	
 	public Boolean_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1438,7 +1438,7 @@ protected class Boolean_Group extends GroupToken {
 	}
 }
 
-// '#4' ( bool ?= 'myoption' ) ? 'kw'
+// "#4" ( bool ?= "myoption" ) ? "kw"
 protected class Boolean_0_Group extends GroupToken {
 	
 	public Boolean_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1466,7 +1466,7 @@ protected class Boolean_0_Group extends GroupToken {
 	}
 }
 
-// '#4' ( bool ?= 'myoption' ) ?
+// "#4" ( bool ?= "myoption" ) ?
 protected class Boolean_0_0_Group extends GroupToken {
 	
 	public Boolean_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1494,7 +1494,7 @@ protected class Boolean_0_0_Group extends GroupToken {
 	}
 }
 
-// '#4'
+// "#4"
 protected class Boolean_0_0_0_Keyword_4 extends KeywordToken  {
 	
 	public Boolean_0_0_0_Keyword_4(IInstanceDescription curr, AbstractToken pred) {
@@ -1506,7 +1506,7 @@ protected class Boolean_0_0_0_Keyword_4 extends KeywordToken  {
 	}	
 }
 
-// ( bool ?= 'myoption' ) ?
+// ( bool ?= "myoption" ) ?
 protected class Boolean_0_0_1_Assignment_bool extends AssignmentToken  {
 	
 	public Boolean_0_0_1_Assignment_bool(IInstanceDescription curr, AbstractToken pred) {
@@ -1532,7 +1532,7 @@ protected class Boolean_0_0_1_Assignment_bool extends AssignmentToken  {
 }
 
 
-// 'kw'
+// "kw"
 protected class Boolean_0_1_Keyword_kw extends KeywordToken  {
 	
 	public Boolean_0_1_Keyword_kw(IInstanceDescription curr, AbstractToken pred) {

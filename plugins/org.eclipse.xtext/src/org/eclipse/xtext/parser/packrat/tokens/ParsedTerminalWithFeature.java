@@ -7,27 +7,31 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.packrat.tokens;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IParsedTokenVisitor;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ParsedNonTerminalEnd extends AbstractParsedToken {
-
+public class ParsedTerminalWithFeature extends ParsedTerminal {
+	
 	private final String feature;
 	private final boolean isMany;
-	private final boolean isDatatype;
+	private final boolean isBoolean;
+	private final String lexerRule;
 
-	public ParsedNonTerminalEnd(int offset, String feature, boolean isMany, boolean isDatatype) {
-		super(offset, 0);
+	public ParsedTerminalWithFeature(int offset, int length, EObject grammarElement, 
+			boolean hidden, String feature, boolean isMany, boolean isBoolean, String lexerRule) {
+		super(offset, length, grammarElement, hidden);
 		this.feature = feature;
 		this.isMany = isMany;
-		this.isDatatype = isDatatype;
+		this.isBoolean = isBoolean;
+		this.lexerRule = lexerRule;
 	}
 
 	@Override
 	public void accept(IParsedTokenVisitor visitor) {
-		visitor.visitParsedNonTerminalEnd(this);
+		visitor.visitParsedTerminalWithFeature(this);
 	}
 
 	public String getFeature() {
@@ -38,8 +42,12 @@ public class ParsedNonTerminalEnd extends AbstractParsedToken {
 		return isMany;
 	}
 
-	public boolean isDatatype() {
-		return isDatatype;
+	public boolean isBoolean() {
+		return isBoolean;
 	}
-	
+
+	public String getLexerRule() {
+		return lexerRule;
+	}
+
 }

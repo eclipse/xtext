@@ -20,8 +20,8 @@ public class ParsedAction extends AbstractParsedToken {
 
 	private final boolean isMany;
 
-	public ParsedAction(CharSequence input, int offset, String typeName, String feature, boolean isMany) {
-		super(input, offset, 0);
+	public ParsedAction(int offset, String typeName, String feature, boolean isMany) {
+		super(offset, 0);
 		this.typeName = typeName;
 		this.feature = feature;
 		this.isMany = isMany;

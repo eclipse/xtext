@@ -20,6 +20,9 @@ public interface ISequenceMatcher {
 			public boolean matches(CharSequence input, int offset, int length) {
 				return false;
 			}
+			public boolean matches(CharSequence input, int fromOffset) {
+				return false;
+			}
 		}
 
 		public static ISequenceMatcher nullMatcher() {

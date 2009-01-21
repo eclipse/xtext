@@ -46,6 +46,9 @@ String fullConsumerClassName(AbstractRule this):
     
 String grammarAccess(Grammar this):
     JAVA org.eclipse.xtext.grammaraccess.GrammarAccessUtil.getGrammarAccessFQName(org.eclipse.xtext.Grammar);
+    
+String toJavaString(String this):
+	JAVA org.eclipse.xtext.util.Strings.convertToJavaString(java.lang.String);
    
 /* boolean canBeFollowedByIdentifier(Keyword this):
 	JAVA org.eclipse.xtext.parser.packrat.PackratParserGenUtil.canBeFollowedByIdentifier(org.eclipse.xtext.Keyword); */

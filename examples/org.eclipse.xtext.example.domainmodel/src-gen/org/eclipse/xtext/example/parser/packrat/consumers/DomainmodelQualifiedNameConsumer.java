@@ -48,12 +48,15 @@ public final class DomainmodelQualifiedNameConsumer extends NonTerminalConsumer 
 		final IMarker marker = mark();
 		if (!consumeRuleCall$2()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeGroup$3()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 
@@ -70,12 +73,15 @@ public final class DomainmodelQualifiedNameConsumer extends NonTerminalConsumer 
 		final IMarker marker = mark();
 		if (!consumeKeyword$4()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeRuleCall$5()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 

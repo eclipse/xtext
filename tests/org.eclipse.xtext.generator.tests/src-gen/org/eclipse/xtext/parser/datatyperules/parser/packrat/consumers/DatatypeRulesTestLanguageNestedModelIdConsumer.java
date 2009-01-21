@@ -42,16 +42,20 @@ public final class DatatypeRulesTestLanguageNestedModelIdConsumer extends NonTer
 		final IMarker marker = mark();
 		if (!consumeRuleCall$3()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeKeyword$4()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeRuleCall$5()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 

@@ -54,24 +54,30 @@ public final class ComplexReconstrTestLanguageTrickyCConsumer extends NonTermina
 		final IMarker marker = mark();
 		if (!consumeKeyword$5()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeAssignment$6()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeGroup$8()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeGroup$12()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeGroup$16()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 
@@ -94,12 +100,15 @@ public final class ComplexReconstrTestLanguageTrickyCConsumer extends NonTermina
 		final IMarker marker = mark();
 		if (!consumeAction$9()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeKeyword$11()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 	protected boolean consumeAction$9() {
@@ -120,12 +129,15 @@ public final class ComplexReconstrTestLanguageTrickyCConsumer extends NonTermina
 		final IMarker marker = mark();
 		if (!consumeAction$13()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeKeyword$15()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 	protected boolean consumeAction$13() {
@@ -146,12 +158,15 @@ public final class ComplexReconstrTestLanguageTrickyCConsumer extends NonTermina
 		final IMarker marker = mark();
 		if (!consumeAction$17()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeKeyword$19()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 	protected boolean consumeAction$17() {

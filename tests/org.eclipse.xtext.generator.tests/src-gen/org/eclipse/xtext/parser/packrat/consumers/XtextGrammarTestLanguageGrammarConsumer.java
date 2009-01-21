@@ -70,28 +70,35 @@ public final class XtextGrammarTestLanguageGrammarConsumer extends NonTerminalCo
 		final IMarker marker = mark();
 		if (!consumeAlternatives$6()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeAssignment$10()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeGroup$12()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeGroup$16()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeAssignment$25()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeAssignment$27()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 
@@ -128,12 +135,15 @@ public final class XtextGrammarTestLanguageGrammarConsumer extends NonTerminalCo
 		final IMarker marker = mark();
 		if (!consumeKeyword$13()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeAssignment$14()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 
@@ -156,16 +166,20 @@ public final class XtextGrammarTestLanguageGrammarConsumer extends NonTerminalCo
 		final IMarker marker = mark();
 		if (!consumeKeyword$18()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeAssignment$19()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeGroup$21()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 
@@ -188,12 +202,15 @@ public final class XtextGrammarTestLanguageGrammarConsumer extends NonTerminalCo
 		final IMarker marker = mark();
 		if (!consumeKeyword$22()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeAssignment$23()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 

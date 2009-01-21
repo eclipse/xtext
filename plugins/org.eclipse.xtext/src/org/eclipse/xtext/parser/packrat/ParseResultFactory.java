@@ -9,6 +9,7 @@ package org.eclipse.xtext.parser.packrat;
 
 import java.util.LinkedList;
 
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.RuleCall;
@@ -27,6 +28,7 @@ import org.eclipse.xtext.parser.packrat.tokens.ParsedAction;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedNonTerminal;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedNonTerminalEnd;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedTerminal;
+import org.eclipse.xtext.parser.packrat.tokens.ParsedTerminalWithFeature;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedToken;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedTokenSequence;
 import org.eclipse.xtext.parsetree.AbstractNode;
@@ -53,30 +55,34 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 	private IAstFactory factory;
 	
 	private final LinkedList<ParsedNonTerminal> nonterminalStack;
+
+	private CharSequence input;
 	
 	public ParseResultFactory() {
 		this.currentStack = new LinkedList<EObject>();
 		this.nonterminalStack = new LinkedList<ParsedNonTerminal>();
 	}
 	
-	public IParseResult createParseResult(ParsedTokenSequence tokens) {
+	public IParseResult createParseResult(ParsedTokenSequence tokens, CharSequence input) {
 		currentNode = null;
 		currentStack.clear();
 		nonterminalStack.clear();
+		this.input = input;
 		if (DebugUtil.PARSE_RESULT_FACTORY_DEBUG) {
 			IParsedTokenVisitor visitor = new CompoundParsedTokenVisitor(new ParsedTokenPrinter(), this);
 			tokens.acceptAndClear(visitor);
 		} else {
 			tokens.acceptAndClear(this);
 		}
+		this.input = null;
 		return new ParseResult(currentStack.isEmpty() ? null : currentStack.getLast(), currentNode);
 	}
 	
 	private LeafNode createLeafNode(AbstractParsedToken parsedToken) {
 		LeafNode result = ParsetreeFactory.eINSTANCE.createLeafNode();
 		enhanceNode(parsedToken, result);
-		result.setText(parsedToken.getText().toString());
-		currentNode.getChildren().add(result);
+		result.setText(parsedToken.getText(input).toString());
+		((BasicEList<AbstractNode>)currentNode.getChildren()).addUnique(result);
 		return result;
 	}
 
@@ -130,7 +136,7 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 		CompositeNode node = createCompositeNode(token);
 		node.setGrammarElement(token.getGrammarElement());
 		if (currentNode != null)
-			currentNode.getChildren().add(node);
+			((BasicEList<AbstractNode>)currentNode.getChildren()).addUnique(node);
 		currentNode = node;
 	}
 
@@ -232,37 +238,42 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 		} else
 			throw new RuntimeException(ex);
 	}
-
+	
 	@Override
 	public void visitParsedTerminal(ParsedTerminal token) {
+		LeafNode node = createLeafNode(token);
+		node.setGrammarElement(token.getGrammarElement());
+		node.setHidden(token.isHidden());
+	}
+
+	@Override
+	public void visitParsedTerminalWithFeature(ParsedTerminalWithFeature token) {
 		LeafNode node = createLeafNode(token);
 		node.setGrammarElement(token.getGrammarElement());
 		node.setFeature(token.getFeature());
 		node.setHidden(token.isHidden());
 		
-		if (token.getFeature() != null) {
-			EObject current = null;
-			if (currentStack.isEmpty()) {
-				throw new RuntimeException("Unexpected empty stack");
-			} else if (currentStack.getLast() == null) {
-				current = factory.create(nonterminalStack.getLast().getTypeName());
-				currentStack.set(currentStack.size() - 1, current);
+		EObject current = null;
+		if (currentStack.isEmpty()) {
+			throw new RuntimeException("Unexpected empty stack");
+		} else if (currentStack.getLast() == null) {
+			current = factory.create(nonterminalStack.getLast().getTypeName());
+			currentStack.set(currentStack.size() - 1, current);
+		} else {
+			current = currentStack.getLast();
+		}
+		try {
+			if (token.isMany()) {
+				factory.add(current, token.getFeature(), token.isBoolean() ? true : token.getText(input), 
+						token.getLexerRule(), currentNode);
 			} else {
-				current = currentStack.getLast();
+				factory.set(current, token.getFeature(), token.isBoolean() ? true : token.getText(input), 
+						token.getLexerRule(), currentNode);
 			}
-			try {
-				if (token.isMany()) {
-					factory.add(current, token.getFeature(), token.isBoolean() ? true : token.getText(), 
-							token.getLexerRule(), currentNode);
-				} else {
-					factory.set(current, token.getFeature(), token.isBoolean() ? true : token.getText(), 
-							token.getLexerRule(), currentNode);
-				}
-			} catch(ValueConverterException ex) {
-				handleValueConverterException(ex);
-			} catch(Exception ex) {
-				throw new RuntimeException(ex);
-			}
+		} catch(ValueConverterException ex) {
+			handleValueConverterException(ex);
+		} catch(Exception ex) {
+			throw new RuntimeException(ex);
 		}
 	}
 	

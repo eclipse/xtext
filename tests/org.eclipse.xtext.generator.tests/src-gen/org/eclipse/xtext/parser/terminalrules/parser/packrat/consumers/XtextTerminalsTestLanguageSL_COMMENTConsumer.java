@@ -6,7 +6,6 @@ package org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory;
-import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
@@ -28,17 +27,17 @@ public final class XtextTerminalsTestLanguageSL_COMMENTConsumer extends Abstract
 	}
 
 	protected boolean consumeGroup$1() {
-		final IMarker marker = mark();
+		final int marker = mark();
 		if (!consumeKeyword$3()) {
-			marker.rollback();
+			rollbackTo(marker);
 			return false;
 		}
 		if (!consumeNegatedToken$4()) {
-			marker.rollback();
+			rollbackTo(marker);
 			return false;
 		}
 		if (!consumeGroup$8()) {
-			marker.rollback();
+			rollbackTo(marker);
 			return false;
 		}
 		return true;
@@ -54,12 +53,12 @@ public final class XtextTerminalsTestLanguageSL_COMMENTConsumer extends Abstract
 	}
 
 	protected boolean doConsumeNegatedToken$4() {
-		final IMarker marker = mark();
+		final int marker = mark();
 		if (!eof() && !consumeAlternatives$5()) {
 			incOffset();
 			return true;
 		}
-		marker.rollback();
+		rollbackTo(marker);
 		return false;
 	}
 
@@ -72,11 +71,11 @@ public final class XtextTerminalsTestLanguageSL_COMMENTConsumer extends Abstract
 	}
 
 	protected boolean consumeKeyword$6() {
-		return readString("\n");
+		return readChar('\n');
 	}
 
 	protected boolean consumeKeyword$7() {
-		return readString("\r");
+		return readChar('\r');
 	}
 
 	protected boolean consumeGroup$8() {
@@ -85,13 +84,13 @@ public final class XtextTerminalsTestLanguageSL_COMMENTConsumer extends Abstract
 	}
 
 	protected boolean doConsumeGroup$8() {
-		final IMarker marker = mark();
+		final int marker = mark();
 		if (!consumeKeyword$9()) {
-			marker.rollback();
+			rollbackTo(marker);
 			return false;
 		}
 		if (!consumeKeyword$10()) {
-			marker.rollback();
+			rollbackTo(marker);
 			return false;
 		}
 		return true;
@@ -103,11 +102,11 @@ public final class XtextTerminalsTestLanguageSL_COMMENTConsumer extends Abstract
 	}
 
 	protected boolean doConsumeKeyword$9() {
-		return readString("\r");
+		return readChar('\r');
 	}
 
 	protected boolean consumeKeyword$10() {
-		return readString("\n");
+		return readChar('\n');
 	}
 
 	public AbstractRule doGetRule() {

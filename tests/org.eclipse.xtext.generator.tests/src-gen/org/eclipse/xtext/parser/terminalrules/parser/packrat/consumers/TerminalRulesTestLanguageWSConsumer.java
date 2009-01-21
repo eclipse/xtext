@@ -6,7 +6,6 @@ package org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory;
-import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
@@ -52,15 +51,15 @@ public final class TerminalRulesTestLanguageWSConsumer extends AbstractRuleAware
 	}
 
 	protected boolean consumeKeyword$5() {
-		return readString("\t");
+		return readChar('\t');
 	}
 
 	protected boolean consumeKeyword$6() {
-		return readString("\r");
+		return readChar('\r');
 	}
 
 	protected boolean consumeKeyword$7() {
-		return readString("\n");
+		return readChar('\n');
 	}
 
 	public AbstractRule doGetRule() {

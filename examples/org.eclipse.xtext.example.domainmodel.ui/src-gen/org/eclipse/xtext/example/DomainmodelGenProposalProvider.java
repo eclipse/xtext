@@ -24,14 +24,6 @@ public class DomainmodelGenProposalProvider  extends AbstractProposalProvider {
 	private static final String UI_PLUGIN_ID  = "org.eclipse.xtext.example.domainmodel.ui";
 
 	
-	public List<? extends ICompletionProposal> completeFileImports(Assignment assignment, IContentAssistContext contentAssistContext) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("completeFileImports feature '" + assignment.getFeature() + "' terminal '"
-					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
-					+ contentAssistContext.getMatchString().trim() + "'");
-		}
-		return Collections.emptyList();
-	}
 	
 	public List<? extends ICompletionProposal> completeFileNamedElements(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
@@ -206,13 +198,6 @@ public class DomainmodelGenProposalProvider  extends AbstractProposalProvider {
 	}
     
     
-	public List<? extends ICompletionProposal> complete(RuleCall ruleCall, IContentAssistContext contentAssistContext) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("complete '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
-					+ "' for model '" + contentAssistContext.getModel() + "' and prefix '" + contentAssistContext.getMatchString() + "'");
-		}
-		return Collections.emptyList();
-	}
     
     
     

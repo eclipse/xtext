@@ -16,6 +16,7 @@ public interface IMarkerFactory {
 	
 	public interface IMarker {
 		void rollback();
+		void release();
 	}
 	
 }

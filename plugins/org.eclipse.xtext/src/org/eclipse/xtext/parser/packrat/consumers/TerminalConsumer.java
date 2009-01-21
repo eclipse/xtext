@@ -11,12 +11,11 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory;
-import org.eclipse.xtext.parser.packrat.IParserConfiguration;
-import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedTerminal;
+import org.eclipse.xtext.parser.packrat.tokens.ParsedTerminalWithFeature;
 import org.eclipse.xtext.util.Strings;
 
 /**
@@ -26,26 +25,26 @@ public abstract class TerminalConsumer implements ITerminalConsumer {
 	
 	private final ICharSequenceWithOffset input;
 	
-	private final IMarkerFactory markerFactory;
-	
 	private final IParsedTokenAcceptor acceptor;
 
 	private boolean hidden;
 	
 	protected TerminalConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory, IParsedTokenAcceptor tokenAcceptor) {
 		this.input = input;
-		this.markerFactory = markerFactory;
 		this.acceptor = tokenAcceptor;
 	}
 
 	public final boolean consume(String feature, boolean isMany, boolean isBoolean, AbstractElement element, ISequenceMatcher notMatching) {
-		int prevOffset = input.getOffset();
+		int marker = mark();
 		boolean result = doConsume();
-		if (notMatching.matches(input, prevOffset, input.getOffset()- prevOffset))
+		if (notMatching.matches(input, marker, input.getOffset()- marker))
 			return false;
 		if (result) {
-			acceptor.accept(new ParsedTerminal(input, prevOffset, input.getOffset()-prevOffset, 
-					element != null ? element : getGrammarElement(), feature, isHidden(), isMany, isBoolean, getRuleName()));
+			if (feature != null)
+				acceptor.accept(new ParsedTerminalWithFeature(marker, input.getOffset()-marker, 
+						element != null ? element : getGrammarElement(), isHidden(), feature, isMany, isBoolean, getRuleName()));
+			else
+				acceptor.accept(new ParsedTerminal(marker, input.getOffset()-marker, element != null ? element : getGrammarElement(), isHidden()));
 		}
 		return result;
 	}
@@ -95,6 +94,10 @@ public abstract class TerminalConsumer implements ITerminalConsumer {
 			return true;
 		}
 		return false;
+	}
+	
+	protected char getChar() {
+		return input.charAt(input.getOffset());
 	}
 	
 	protected boolean peekChar(ICharacterClass characterClass) {
@@ -182,13 +185,12 @@ public abstract class TerminalConsumer implements ITerminalConsumer {
 		return input.getOffset() >= input.length();
 	}
 
-	protected IMarker mark() {
-		return markerFactory.mark();
+	protected int mark() {
+		return input.getOffset();
 	}
 	
-	// TODO temporary HACK so AbstractREALConsumer can do whatever it wants to ...
-	public void initFields(IParserConfiguration configuration) {
-		// nothing to do
+	protected void rollbackTo(int marker) {
+		input.setOffset(marker);
 	}
 
 }

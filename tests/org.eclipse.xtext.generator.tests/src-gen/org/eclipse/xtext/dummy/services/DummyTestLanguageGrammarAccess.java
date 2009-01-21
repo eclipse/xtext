@@ -40,28 +40,28 @@ public class DummyTestLanguageGrammarAccess extends BaseEPackageAccess implement
 		private final RuleCall c010LexerRuleCallSTRING = (RuleCall)c01AssignmentDescriptions.eContents().get(0);
 		private final Keyword c1KeywordSemicolon = (Keyword)cGroup.eContents().get(1);
 		
-		// Element : ( optional ?= 'optional' ) ? 'element' name = ID ( descriptions += STRING ) * ';' ;
+		// Element : ( optional ?= "optional" ) ? "element" name = ID ( descriptions += STRING ) * ";" ;
 		public ParserRule getRule() { return rule; }
 
-		// ( optional ?= 'optional' ) ? 'element' name = ID ( descriptions += STRING ) * ';'
+		// ( optional ?= "optional" ) ? "element" name = ID ( descriptions += STRING ) * ";"
 		public Group eleGroup() { return cGroup; }
 
-		// ( optional ?= 'optional' ) ? 'element' name = ID ( descriptions += STRING ) *
+		// ( optional ?= "optional" ) ? "element" name = ID ( descriptions += STRING ) *
 		public Group ele0Group() { return c0Group; }
 
-		// ( optional ?= 'optional' ) ? 'element' name = ID
+		// ( optional ?= "optional" ) ? "element" name = ID
 		public Group ele00Group() { return c00Group; }
 
-		// ( optional ?= 'optional' ) ? 'element'
+		// ( optional ?= "optional" ) ? "element"
 		public Group ele000Group() { return c000Group; }
 
-		// ( optional ?= 'optional' ) ?
+		// ( optional ?= "optional" ) ?
 		public Assignment ele0000AssignmentOptional() { return c0000AssignmentOptional; }
 
-		// 'optional'
+		// "optional"
 		public Keyword ele00000KeywordOptional() { return c00000KeywordOptional; }
 
-		// 'element'
+		// "element"
 		public Keyword ele0001KeywordElement() { return c0001KeywordElement; }
 
 		// name = ID
@@ -76,7 +76,7 @@ public class DummyTestLanguageGrammarAccess extends BaseEPackageAccess implement
 		// STRING
 		public RuleCall ele010LexerRuleCallSTRING() { return c010LexerRuleCallSTRING; }
 
-		// ';'
+		// ";"
 		public Keyword ele1KeywordSemicolon() { return c1KeywordSemicolon; }
 	}
 	
@@ -107,7 +107,7 @@ public class DummyTestLanguageGrammarAccess extends BaseEPackageAccess implement
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	} 
 
-	// Element : ( optional ?= 'optional' ) ? 'element' name = ID ( descriptions += STRING ) * ';' ;
+	// Element : ( optional ?= "optional" ) ? "element" name = ID ( descriptions += STRING ) * ";" ;
 	public ElementElements prElement() {
 		return (pElement != null) ? pElement : (pElement = new ElementElements());
 	} 

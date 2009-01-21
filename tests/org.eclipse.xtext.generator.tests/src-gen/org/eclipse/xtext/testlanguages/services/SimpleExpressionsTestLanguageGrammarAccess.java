@@ -55,34 +55,34 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends BaseEPackageAcce
 		private final Assignment c11AssignmentValues = (Assignment)c1Group.eContents().get(1);
 		private final RuleCall c110ParserRuleCallMultiplication = (RuleCall)c11AssignmentValues.eContents().get(0);
 		
-		// Addition returns Expression : Multiplication ( { current = Op . values += current } operator = ( '+' | '-' ) values += Multiplication ) * ;
+		// Addition returns Expression : Multiplication ( { current = Op . values += current } operator = ( "+" | "-" ) values += Multiplication ) * ;
 		public ParserRule getRule() { return rule; }
 
-		// Multiplication ( { current = Op . values += current } operator = ( '+' | '-' ) values += Multiplication ) *
+		// Multiplication ( { current = Op . values += current } operator = ( "+" | "-" ) values += Multiplication ) *
 		public Group eleGroup() { return cGroup; }
 
 		// Multiplication
 		public RuleCall ele0ParserRuleCallMultiplication() { return c0ParserRuleCallMultiplication; }
 
-		// ( { current = Op . values += current } operator = ( '+' | '-' ) values += Multiplication ) *
+		// ( { current = Op . values += current } operator = ( "+" | "-" ) values += Multiplication ) *
 		public Group ele1Group() { return c1Group; }
 
-		// { current = Op . values += current } operator = ( '+' | '-' )
+		// { current = Op . values += current } operator = ( "+" | "-" )
 		public Group ele10Group() { return c10Group; }
 
 		// { current = Op . values += current }
 		public Action ele100ActionOpvalues() { return c100ActionOpvalues; }
 
-		// operator = ( '+' | '-' )
+		// operator = ( "+" | "-" )
 		public Assignment ele101AssignmentOperator() { return c101AssignmentOperator; }
 
-		// '+' | '-'
+		// "+" | "-"
 		public Alternatives ele1010Alternatives() { return c1010Alternatives; }
 
-		// '+'
+		// "+"
 		public Keyword ele10100KeywordPlusSign() { return c10100KeywordPlusSign; }
 
-		// '-'
+		// "-"
 		public Keyword ele10101KeywordHyphenMinus() { return c10101KeywordHyphenMinus; }
 
 		// values += Multiplication
@@ -106,34 +106,34 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends BaseEPackageAcce
 		private final Assignment c11AssignmentValues = (Assignment)c1Group.eContents().get(1);
 		private final RuleCall c110ParserRuleCallTerm = (RuleCall)c11AssignmentValues.eContents().get(0);
 		
-		// Multiplication returns Expression : Term ( { current = Op . values += current } operator = ( '*' | '/' ) values += Term ) * ;
+		// Multiplication returns Expression : Term ( { current = Op . values += current } operator = ( "*" | "/" ) values += Term ) * ;
 		public ParserRule getRule() { return rule; }
 
-		// Term ( { current = Op . values += current } operator = ( '*' | '/' ) values += Term ) *
+		// Term ( { current = Op . values += current } operator = ( "*" | "/" ) values += Term ) *
 		public Group eleGroup() { return cGroup; }
 
 		// Term
 		public RuleCall ele0ParserRuleCallTerm() { return c0ParserRuleCallTerm; }
 
-		// ( { current = Op . values += current } operator = ( '*' | '/' ) values += Term ) *
+		// ( { current = Op . values += current } operator = ( "*" | "/" ) values += Term ) *
 		public Group ele1Group() { return c1Group; }
 
-		// { current = Op . values += current } operator = ( '*' | '/' )
+		// { current = Op . values += current } operator = ( "*" | "/" )
 		public Group ele10Group() { return c10Group; }
 
 		// { current = Op . values += current }
 		public Action ele100ActionOpvalues() { return c100ActionOpvalues; }
 
-		// operator = ( '*' | '/' )
+		// operator = ( "*" | "/" )
 		public Assignment ele101AssignmentOperator() { return c101AssignmentOperator; }
 
-		// '*' | '/'
+		// "*" | "/"
 		public Alternatives ele1010Alternatives() { return c1010Alternatives; }
 
-		// '*'
+		// "*"
 		public Keyword ele10100KeywordAsterisk() { return c10100KeywordAsterisk; }
 
-		// '/'
+		// "/"
 		public Keyword ele10101KeywordSolidus() { return c10101KeywordSolidus; }
 
 		// values += Term
@@ -185,22 +185,22 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends BaseEPackageAcce
 		private final RuleCall c01ParserRuleCallAddition = (RuleCall)c0Group.eContents().get(1);
 		private final Keyword c1KeywordRightParenthesis = (Keyword)cGroup.eContents().get(1);
 		
-		// Parens returns Expression : '(' Addition ')' ;
+		// Parens returns Expression : "(" Addition ")" ;
 		public ParserRule getRule() { return rule; }
 
-		// '(' Addition ')'
+		// "(" Addition ")"
 		public Group eleGroup() { return cGroup; }
 
-		// '(' Addition
+		// "(" Addition
 		public Group ele0Group() { return c0Group; }
 
-		// '('
+		// "("
 		public Keyword ele00KeywordLeftParenthesis() { return c00KeywordLeftParenthesis; }
 
 		// Addition
 		public RuleCall ele01ParserRuleCallAddition() { return c01ParserRuleCallAddition; }
 
-		// ')'
+		// ")"
 		public Keyword ele1KeywordRightParenthesis() { return c1KeywordRightParenthesis; }
 	}
 	
@@ -235,12 +235,12 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends BaseEPackageAcce
 		return (pSequence != null) ? pSequence : (pSequence = new SequenceElements());
 	} 
 
-	// Addition returns Expression : Multiplication ( { current = Op . values += current } operator = ( '+' | '-' ) values += Multiplication ) * ;
+	// Addition returns Expression : Multiplication ( { current = Op . values += current } operator = ( "+" | "-" ) values += Multiplication ) * ;
 	public AdditionElements prAddition() {
 		return (pAddition != null) ? pAddition : (pAddition = new AdditionElements());
 	} 
 
-	// Multiplication returns Expression : Term ( { current = Op . values += current } operator = ( '*' | '/' ) values += Term ) * ;
+	// Multiplication returns Expression : Term ( { current = Op . values += current } operator = ( "*" | "/" ) values += Term ) * ;
 	public MultiplicationElements prMultiplication() {
 		return (pMultiplication != null) ? pMultiplication : (pMultiplication = new MultiplicationElements());
 	} 
@@ -255,7 +255,7 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends BaseEPackageAcce
 		return (pAtom != null) ? pAtom : (pAtom = new AtomElements());
 	} 
 
-	// Parens returns Expression : '(' Addition ')' ;
+	// Parens returns Expression : "(" Addition ")" ;
 	public ParensElements prParens() {
 		return (pParens != null) ? pParens : (pParens = new ParensElements());
 	} 

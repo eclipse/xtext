@@ -16,19 +16,10 @@ import org.eclipse.xtext.parser.packrat.IParsedTokenVisitor;
 public class ParsedTerminal extends ParsedToken {
 
 	private final boolean hidden;
-	private final String feature;
-	private final boolean isMany;
-	private final boolean isBoolean;
-	private final String lexerRule;
 
-	public ParsedTerminal(CharSequence input, int offset, int length, EObject grammarElement, 
-			String feature, boolean hidden, boolean isMany, boolean isBoolean, String lexerRule) {
-		super(input, offset, length, grammarElement);
-		this.feature = feature;
+	public ParsedTerminal(int offset, int length, EObject grammarElement, boolean hidden) {
+		super(offset, length, grammarElement);
 		this.hidden = hidden;
-		this.isMany = isMany;
-		this.isBoolean = isBoolean;
-		this.lexerRule = lexerRule;
 	}
 
 	public boolean isHidden() {
@@ -38,22 +29,6 @@ public class ParsedTerminal extends ParsedToken {
 	@Override
 	public void accept(IParsedTokenVisitor visitor) {
 		visitor.visitParsedTerminal(this);
-	}
-
-	public String getFeature() {
-		return feature;
-	}
-
-	public boolean isMany() {
-		return isMany;
-	}
-
-	public boolean isBoolean() {
-		return isBoolean;
-	}
-
-	public String getLexerRule() {
-		return lexerRule;
 	}
 
 }

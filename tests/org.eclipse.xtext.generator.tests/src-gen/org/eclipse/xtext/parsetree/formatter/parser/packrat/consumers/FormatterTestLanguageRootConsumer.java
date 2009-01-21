@@ -44,12 +44,15 @@ public final class FormatterTestLanguageRootConsumer extends NonTerminalConsumer
 		final IMarker marker = mark();
 		if (!consumeKeyword$2()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeAlternatives$3()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 
