@@ -13,14 +13,11 @@ package org.eclipse.xtext.parser.packrat.matching;
 public interface ISequenceMatcher {
 
 	boolean matches(CharSequence input, int offset, int length);
-	
+
 	public static class Factory {
 		private static class NullSequenceMatcher implements ISequenceMatcher {
 			private static ISequenceMatcher INSTANCE = new NullSequenceMatcher();
 			public boolean matches(CharSequence input, int offset, int length) {
-				return false;
-			}
-			public boolean matches(CharSequence input, int fromOffset) {
 				return false;
 			}
 		}
