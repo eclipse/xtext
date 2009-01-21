@@ -190,13 +190,20 @@ public final class PackratParserGenUtil {
 	public static Iterable<Keyword> getConflictingKeywords(final AbstractRule rule, final Iterable<Keyword> allKeywords) {
 		return CollectionUtils.filter(allKeywords, new Filter<Keyword>() {
 			public boolean matches(Keyword param) {
-				// TODO use interpreter for lexer model
 				final ParserRule containerRule = EcoreUtil2.getContainerOfType(param, ParserRule.class);
 				if (containerRule != null && containerRule.isTerminal())
 					return false;
-				if (rule.getName().equals("ID")) {
-					final StringWithOffset input = new StringWithOffset(param.getValue());
-					return new XtextBuiltinIDConsumer(input, input, null).consume();
+				if (rule instanceof LexerRule) {
+					if (rule.getName().equals("ID")) {
+						final StringWithOffset input = new StringWithOffset(param.getValue());
+						return new XtextBuiltinIDConsumer(input, input, null).consume();
+					}
+				} else {
+					ParserRule parserRule = (ParserRule) rule;
+					if (!parserRule.isTerminal())
+						throw new IllegalArgumentException(rule + " is not a terminal rule.");
+					TerminalRuleInterpreter interpreter = new TerminalRuleInterpreter(param);
+					return interpreter.matches(parserRule);
 				}
 				return false;
 			}

@@ -215,7 +215,6 @@ public class «languageName().toFirstUpper()»ParserConfiguration extends Abstract
 */
 package «genClassFQName.toJavaPackage()»;
 
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.matching.SetBasedKeywordMatcher;
@@ -264,7 +263,13 @@ public final class «languageName()»Delimiters {
 «IF first == this-»
 «LET conflictingLexerRules(grammar) AS conflicting-»
 «IF !conflicting.isEmpty-»
-	public static ICharacterClass «globalDelimiterFieldName()» = XtextBuiltinIDConsumer.IDConsumer$$2;
+    // TODO: remove hardcoded character class from template
+	public static ICharacterClass «globalDelimiterFieldName()» = ICharacterClass.Factory.join(
+			ICharacterClass.Factory.createRange('a', 'z'),
+			ICharacterClass.Factory.createRange('A', 'Z'),
+			ICharacterClass.Factory.create('_'),
+			ICharacterClass.Factory.createRange('0', '9')
+	);
 «ELSE-»
 	public static ICharacterClass «globalDelimiterFieldName()» = ICharacterClass.Factory.nullClass();
 «ENDIF-»
