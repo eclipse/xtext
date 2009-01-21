@@ -19,11 +19,12 @@ import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
  * 
  * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider
  */
-public class TreeTestLanguageGenProposalProvider  extends AbstractProposalProvider {
+public class GenTreeTestLanguageProposalProvider  extends AbstractProposalProvider {
 	// constants
 	private static final String UI_PLUGIN_ID  = "";
-
 	
+	
+			
 	public List<? extends ICompletionProposal> completeModelChildren(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeModelChildren feature '" + assignment.getFeature() + "' terminal '"
@@ -32,7 +33,7 @@ public class TreeTestLanguageGenProposalProvider  extends AbstractProposalProvid
 		}
 		return Collections.emptyList();
 	}
-	
+			
 	public List<? extends ICompletionProposal> completeNodeName(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeNodeName feature '" + assignment.getFeature() + "' terminal '"
@@ -41,7 +42,7 @@ public class TreeTestLanguageGenProposalProvider  extends AbstractProposalProvid
 		}
 		return Collections.singletonList(createCompletionProposal(assignment, "NodeName", contentAssistContext));
 	}
-	
+			
 	public List<? extends ICompletionProposal> completeNodeAttrib(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeNodeAttrib feature '" + assignment.getFeature() + "' terminal '"
@@ -50,7 +51,7 @@ public class TreeTestLanguageGenProposalProvider  extends AbstractProposalProvid
 		}
 		return Collections.singletonList(createCompletionProposal(assignment, "\"NodeAttrib\"", contentAssistContext));		
 	}
-	
+			
 	public List<? extends ICompletionProposal> completeNodeChildren(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeNodeChildren feature '" + assignment.getFeature() + "' terminal '"
@@ -60,7 +61,15 @@ public class TreeTestLanguageGenProposalProvider  extends AbstractProposalProvid
 		return Collections.emptyList();
 	}
     
-    
+			
+	public List<? extends ICompletionProposal> complete(RuleCall ruleCall, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("complete '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
+					+ "' for model '" + contentAssistContext.getModel() + "' and prefix '" + contentAssistContext.getMatchString() + "'");
+		}
+		return Collections.emptyList();
+	}
+			
     
     @Override
 	protected String getDefaultImageFilePath() {

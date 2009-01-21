@@ -1,0 +1,20 @@
+/*
+Generated with Xtext
+*/
+
+import xtext;
+
+import org::eclipse::jface::text::contentassist;
+import org::eclipse::xtext::crossref;
+import org::eclipse::xtext::ui::common::editor::contentassist;
+import org::eclipse::xtext::ui::common::xtend::contentassist;
+
+import fowlerdsl;
+
+extension org::eclipse::xtext::ui::common::xtend::contentassist::ContentAssist;
+extenison org::eclipse::xtext::example::FowlerDslGenProposalProvider;
+
+/**
+ * Customize functions defined in org/eclipse/xtext/example/FowlerDslGenProposalProvider.ext here.
+ */
+

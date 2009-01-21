@@ -6,7 +6,7 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
 
-public class FowlerDslProposalProvider extends FowlerDslGenProposalProvider {
+public class FowlerDslProposalProvider extends GenFowlerDslProposalProvider {
 
 	@Override
 	public Template[] getTemplates(String contextTypeId) {

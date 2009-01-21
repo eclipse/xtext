@@ -1,0 +1,20 @@
+/*
+Generated with Xtext
+*/
+
+import xtext;
+
+import org::eclipse::jface::text::contentassist;
+import org::eclipse::xtext::crossref;
+import org::eclipse::xtext::ui::common::editor::contentassist;
+import org::eclipse::xtext::ui::common::xtend::contentassist;
+
+import TreeTestLanguage;
+
+extension org::eclipse::xtext::ui::common::xtend::contentassist::ContentAssist;
+extension org::eclipse::xtext::testlanguages::GenTreeTestLanguageProposalProvider;
+
+/**
+ * Customize functions defined in org/eclipse/xtext/testlanguages/GenTreeTestLanguageProposalProvider.ext here.
+ */
+

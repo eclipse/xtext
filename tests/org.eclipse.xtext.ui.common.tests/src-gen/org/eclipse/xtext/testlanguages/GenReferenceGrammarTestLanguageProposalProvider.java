@@ -1,7 +1,7 @@
 /*
 Generated with Xtext
 */
-package org.eclipse.xtext.reference;
+package org.eclipse.xtext.testlanguages;
 
 import java.util.Collections;
 import java.util.List;
@@ -19,9 +19,9 @@ import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
  * 
  * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider
  */
-public class ReferenceGrammarGenProposalProvider  extends AbstractProposalProvider {
+public class GenReferenceGrammarTestLanguageProposalProvider  extends AbstractProposalProvider {
 	// constants
-	private static final String UI_PLUGIN_ID  = "org.eclipse.xtext.reference.ui";
+	private static final String UI_PLUGIN_ID  = "";
 	
 	
 			
@@ -73,15 +73,6 @@ public class ReferenceGrammarGenProposalProvider  extends AbstractProposalProvid
 	public List<? extends ICompletionProposal> completeSpielplatzFamilie(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeSpielplatzFamilie feature '" + assignment.getFeature() + "' terminal '"
-					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
-					+ contentAssistContext.getMatchString().trim() + "'");
-		}
-		return Collections.emptyList();
-	}
-			
-	public List<? extends ICompletionProposal> completeSpielplatzTypes(Assignment assignment, IContentAssistContext contentAssistContext) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("completeSpielplatzTypes feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
@@ -178,24 +169,6 @@ public class ReferenceGrammarGenProposalProvider  extends AbstractProposalProvid
 		return lookupCrossReference(((CrossReference)assignment.getTerminal()), contentAssistContext);
 	}
 			
-			
-	public List<? extends ICompletionProposal> completeFarbeWert(Assignment assignment, IContentAssistContext contentAssistContext) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("completeFarbeWert feature '" + assignment.getFeature() + "' terminal '"
-					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
-					+ contentAssistContext.getMatchString().trim() + "'");
-		}
-		return Collections.emptyList();
-	}
-			
-	public List<? extends ICompletionProposal> completeCustomTypeParserRuleName(Assignment assignment, IContentAssistContext contentAssistContext) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("completeCustomTypeParserRuleName feature '" + assignment.getFeature() + "' terminal '"
-					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
-					+ contentAssistContext.getMatchString().trim() + "'");
-		}
-		return Collections.singletonList(createCompletionProposal(assignment, "CustomTypeParserRuleName", contentAssistContext));
-	}
     
 			
 	public List<? extends ICompletionProposal> complete(RuleCall ruleCall, IContentAssistContext contentAssistContext) {
@@ -211,14 +184,6 @@ public class ReferenceGrammarGenProposalProvider  extends AbstractProposalProvid
 			
 			
 			
-			
-	public List<? extends ICompletionProposal> completeReferenceModelCustomType(RuleCall ruleCall, IContentAssistContext contentAssistContext) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("completeReferenceModelCustomType '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
-					+ "' for model '" + contentAssistContext.getModel() + "' and prefix '" + contentAssistContext.getMatchString() + "'");
-		}
-		return Collections.emptyList();
-	}
     
     @Override
 	protected String getDefaultImageFilePath() {
