@@ -285,6 +285,21 @@ public class GeneratorFacade {
 			contentAssistCalculator.setGenClassFQName("org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultContentAssistCalculator");
 			contentAssistCalculator.setUiService(true);
 			genModel.getServices().add(contentAssistCalculator);
+			
+			// Outline: Semantic Model to Outline Model Transformer
+			GenService semanticModelTransformer = XtextgenFactory.eINSTANCE.createGenService();
+			semanticModelTransformer.setServiceInterfaceFQName("org.eclipse.xtext.ui.common.editor.outline.ISemanticModelTransformer");
+			semanticModelTransformer.setGenClassFQName("org.eclipse.xtext.ui.common.editor.outline.impl.DefaultSemanticModelTransformer");
+			semanticModelTransformer.setUiService(true);
+			genModel.getServices().add(semanticModelTransformer);
+
+			// Outline: Lazy Tree Provider
+			GenService lazyTreeProvider = XtextgenFactory.eINSTANCE.createGenService();
+			lazyTreeProvider.setServiceInterfaceFQName("org.eclipse.xtext.ui.common.editor.outline.ILazyTreeProvider");
+			lazyTreeProvider.setGenClassFQName("org.eclipse.xtext.ui.common.editor.outline.impl.LazyTransformingTreeProvider");
+			lazyTreeProvider.setUiService(true);
+			genModel.getServices().add(lazyTreeProvider);
+
 		}
 
 		return genModel;
