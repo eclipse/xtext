@@ -12,10 +12,10 @@
 «IMPORT xtext»
 «IMPORT xtextgen»
 
-«EXTENSION org::eclipse::xtend::util::stdlib::globalvar»
 «EXTENSION org::eclipse::xtext::Extensions»
 «EXTENSION org::eclipse::xtext::Properties»
 «EXTENSION org::eclipse::xtext::ui::UIProperties»
+«EXTENSION org::eclipse::xtext::ui::contentassist::ContentAssist»
 
 «DEFINE root FOR GenModel»
 «FILE uiGenProposalProviderClass().toJavaFilePath() UI_SRC_GEN -»
@@ -43,37 +43,38 @@ import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
 public class «uiGenProposalProviderClass().toSimpleName()»  extends AbstractProposalProvider {
 	// constants
 	private static final String UI_PLUGIN_ID  = "«uiPluginBundleID»";
-
-	«FOREACH grammar().containedAssignments() AS assignment-»
-	«LET assignment.containingParserRule().name.toFirstUpper()+assignment.feature.toFirstUpper() AS fqnFeatureName»
-	«IF null==getGlobalVar(fqnFeatureName)-»
-	«storeGlobalVar(fqnFeatureName,"")-»	 
+	
+	«LET {} AS processedFqnFeatureNames»
+		«FOREACH grammar().containedAssignments() AS assignment-»
+			«LET getFqFeatureName(assignment) AS fqnFeatureName»
+				«IF !processedFqnFeatureNames.contains(fqnFeatureName)-»
+					«processedFqnFeatureNames.add(fqnFeatureName)->""-»	 
 	public List<? extends ICompletionProposal> complete«fqnFeatureName»(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("complete«fqnFeatureName» feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
-		«IF CrossReference.isInstance(assignment.terminal)-»
+					«IF CrossReference.isInstance(assignment.terminal)-»
 		return lookupCrossReference(((CrossReference)assignment.getTerminal()), contentAssistContext);
-		«ELSEIF RuleCall.isInstance(assignment.terminal) && ((RuleCall)assignment.terminal).rule.name=="ID" -»
+					«ELSEIF RuleCall.isInstance(assignment.terminal) && ((RuleCall)assignment.terminal).rule.name=="ID" -»
 		return Collections.singletonList(createCompletionProposal(assignment, "«fqnFeatureName»", contentAssistContext));
-		«ELSEIF RuleCall.isInstance(assignment.terminal) && ((RuleCall)assignment.terminal).rule.name=="INT" -»
+					«ELSEIF RuleCall.isInstance(assignment.terminal) && ((RuleCall)assignment.terminal).rule.name=="INT" -»
 		return Collections.singletonList(createCompletionProposal(assignment, "1", contentAssistContext));		
-		«ELSEIF RuleCall.isInstance(assignment.terminal) && ((RuleCall)assignment.terminal).rule.name=="STRING" -»
+					«ELSEIF RuleCall.isInstance(assignment.terminal) && ((RuleCall)assignment.terminal).rule.name=="STRING" -»
 		return Collections.singletonList(createCompletionProposal(assignment, "\"«fqnFeatureName»\"", contentAssistContext));		
-		«ELSE-»
+					«ELSE-»
 		return Collections.emptyList();
-		«ENDIF-»
+					«ENDIF-»
 	}
-	«ENDIF-»
-	«ENDLET-»
-    «ENDFOREACH-»
+				«ENDIF-»
+			«ENDLET-»
+  	  «ENDFOREACH-»
     
-    «FOREACH grammar().allParserRules().select(parserRule|parserRule.type!=null) AS parserRule-»
-    «LET parserRule.type.metamodel.alias.toFirstUpper()+parserRule.type.type.name.toFirstUpper() AS fqnFeatureName»
-	«IF null==getGlobalVar(fqnFeatureName)-»
-	«storeGlobalVar(fqnFeatureName,"")-»	 
+  	  «FOREACH getParserRulesWithType() AS parserRule-»
+			«LET getFqFeatureName(parserRule) AS fqnFeatureName»
+				«IF !processedFqnFeatureNames.contains(fqnFeatureName)-»
+					«processedFqnFeatureNames.add(fqnFeatureName)->""-»	 	 
 	public List<? extends ICompletionProposal> complete«fqnFeatureName»(RuleCall ruleCall, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("complete«fqnFeatureName» '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
@@ -81,9 +82,11 @@ public class «uiGenProposalProviderClass().toSimpleName()»  extends AbstractProp
 		}
 		return Collections.emptyList();
 	}
-	«ENDIF-»
+				«ENDIF-»
+			«ENDLET-»
+    	«ENDFOREACH-»
 	«ENDLET-»
-    «ENDFOREACH-»
+    
     @Override
 	protected String getDefaultImageFilePath() {
 		return "icons/editor.gif";

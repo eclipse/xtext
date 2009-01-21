@@ -50,6 +50,12 @@ toPath(String fqName) :
 toJavaFilePath(String fqClassName) :
 	toPath(fqClassName) + ".java";
 	
+toXtendFilePath(String fqClassName) :
+	toPath(fqClassName) + ".ext";
+	
+toXtendFqName(String fqName) :
+	fqName.replaceAll("\\.", "::");
+	
 toJavaPackage(String fqName) :
 	skipLastToken(fqName, '.');
 	
@@ -69,8 +75,14 @@ generatedUiConfigClass() :
 	grammar().getNamespace()+".Gen"+grammar().getName() + "UiConfig";
 	
 uiGenProposalProviderClass() :
-	grammar().getId() + "GenProposalProvider";
+	grammar().getNamespace()+".Gen"+grammar().getName() + "ProposalProvider";
 
+uiProposalProviderClass() :
+	grammar().getId() + "ProposalProvider";
+
+uiContentAssistXtendInvokerClass() :
+	grammar().getId() + "XtendContentAssistInvoker";
+	
 tokenScannerClass() :
 	grammar().getId() + "TokenScanner";
 	
@@ -100,4 +112,7 @@ GenService resourceFactoryService() :
 		? findService("org.eclipse.xtext.resource.IResourceFactory")
 		: null;
 		
+boolean useXtend(GenModel model) :
+	// TODO decide on a better basis
+	true;
 
