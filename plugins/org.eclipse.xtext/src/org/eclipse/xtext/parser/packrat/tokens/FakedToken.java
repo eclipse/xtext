@@ -17,8 +17,8 @@ public class FakedToken extends ParsedToken {
 
 	private final ParsedToken fake;
 
-	public FakedToken(CharSequence input, int offset, int length, EObject grammarElement, ParsedToken fake) {
-		super(input, offset, length, grammarElement);
+	public FakedToken(int offset, int length, EObject grammarElement, ParsedToken fake) {
+		super(offset, length, grammarElement);
 		this.fake = fake;
 	}
 

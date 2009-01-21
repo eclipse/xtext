@@ -8,6 +8,7 @@
 package org.eclipse.xtext.parser.packrat;
 
 import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.parser.ParseResult;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedTokenSequence;
 
 /**
@@ -15,6 +16,16 @@ import org.eclipse.xtext.parser.packrat.tokens.ParsedTokenSequence;
  */
 public interface IParseResultFactory {
 
-	IParseResult createParseResult(ParsedTokenSequence tokens);
+	IParseResult createParseResult(ParsedTokenSequence tokens, CharSequence input);
+	
+	public class NullParseResultFactory implements IParseResultFactory {
+
+		public static IParseResultFactory INSTANCE = new NullParseResultFactory();
+		
+		public IParseResult createParseResult(ParsedTokenSequence tokens, CharSequence input) {
+			return new ParseResult();
+		}
+		
+	}
 	
 }

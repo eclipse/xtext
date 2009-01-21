@@ -48,6 +48,13 @@ public class DebugMarkerFactory implements IMarkerFactory {
 			}
 			delegate.rollback();
 		}
+
+		public void release() {
+			if (log.isDebugEnabled()) {
+				log.debug("release(" + delegate + ")");
+			}
+			delegate.release();
+		}
 		
 	}
 

@@ -17,8 +17,8 @@ public class ErrorToken extends ParsedToken {
 	
 	private final String errorMessage;
 	
-	public ErrorToken(CharSequence input, int offset, int length, AbstractElement grammarElement, String errorMessage) {
-		super(input, offset, length, grammarElement);
+	public ErrorToken(int offset, int length, AbstractElement grammarElement, String errorMessage) {
+		super(offset, length, grammarElement);
 		this.errorMessage = errorMessage;
 	}
 

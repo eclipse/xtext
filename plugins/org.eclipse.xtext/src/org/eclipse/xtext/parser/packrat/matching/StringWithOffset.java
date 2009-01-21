@@ -72,6 +72,9 @@ public class StringWithOffset implements ICharSequenceWithOffset, IMarkerFactory
 		public String toString() {
 			return "Marker@" + offset;
 		}
+
+		public void release() {
+		}
 		
 	}
 }

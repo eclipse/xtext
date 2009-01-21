@@ -14,6 +14,7 @@ import org.eclipse.xtext.parser.packrat.tokens.ParsedAction;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedNonTerminal;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedNonTerminalEnd;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedTerminal;
+import org.eclipse.xtext.parser.packrat.tokens.ParsedTerminalWithFeature;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedToken;
 import org.eclipse.xtext.util.Function;
 
@@ -36,8 +37,10 @@ public interface IParsedTokenVisitor extends Function.WithoutResult<AbstractPars
 
 	void visitParsedNonTerminalEnd(ParsedNonTerminalEnd token);
 
-	void visitFakedToken(FakedToken fakedToken);
+	void visitFakedToken(FakedToken token);
 
-	void visitParsedAction(ParsedAction parsedAction);
+	void visitParsedAction(ParsedAction action);
+
+	void visitParsedTerminalWithFeature(ParsedTerminalWithFeature token);
 
 }

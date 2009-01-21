@@ -51,21 +51,22 @@ public abstract class AbstractPackratParser implements
 		
 		private int offset;
 		
-		public Marker(ParsedTokenSequence.Marker marker, int offset) {
-			this.marker = marker;
-			this.offset = offset;
-		}
-
 		public void rollback() {
 			marker.rollback();
 			AbstractPackratParser.this.offset = offset;
+		}
+
+		public void release() {
+			marker.release();
+			if (bufferSize < markerBuffer.length)
+				markerBuffer[bufferSize++] = this;
 		}
 
 		@Override
 		public String toString() {
 			return marker.toString() + "@Offset '" + offset + "'";
 		}
-		
+
 	}
 	
 	private class HiddenTokenState implements IHiddenTokenHandler.IHiddenTokenState {
@@ -110,10 +111,15 @@ public abstract class AbstractPackratParser implements
 	
 	private final IParserConfiguration parserConfiguration;
 	
+	private Marker[] markerBuffer;
+	
+	private int bufferSize;
+	
 	protected AbstractPackratParser() {
 		tokenSequence = createTokenSequence();
 		parserConfiguration = createParserConfiguration();
 		keywordConsumer = createKeywordConsumer();
+		markerBuffer = new Marker[10];
 	}
 	
 	private IParserConfiguration createParserConfiguration() {
@@ -160,6 +166,8 @@ public abstract class AbstractPackratParser implements
 		this.input = input;
 		this.offset = 0;
 		this.tokenSequence.clear();
+		Arrays.fill(markerBuffer, null);
+		this.bufferSize = 0;
 		return parse(consumer);
 	}
 
@@ -174,7 +182,7 @@ public abstract class AbstractPackratParser implements
 		try {
 			IRootConsumerListener listener = new RootConsumerListener();
 			if (consumer.consumeAsRoot(listener)) {
-				return getParseResultFactory().createParseResult(tokenSequence);
+				return getParseResultFactory().createParseResult(tokenSequence, input);
 			}
 		} catch(Exception e) {
 			throw new WrappedException(e);
@@ -200,7 +208,10 @@ public abstract class AbstractPackratParser implements
 	}
 	
 	public IMarker mark() {
-		return new Marker(tokenSequence.mark(), offset);
+		final Marker result = bufferSize > 0 ? markerBuffer[--bufferSize] : new Marker();
+		result.offset = offset;
+		result.marker = tokenSequence.mark();
+		return result;
 	}
 	
 	protected void rollback(int position) {
@@ -216,8 +227,11 @@ public abstract class AbstractPackratParser implements
 		IMarker marker = mark();
 		consumeHiddens();
 		if (consumer.consume(feature, isMany, isBoolean, grammarElement, notMatching != null ? notMatching : ISequenceMatcher.Factory.nullMatcher())) {
+			marker.release();
 			return true;
-		} else marker.rollback();
+		}
+		marker.rollback();
+		marker.release();
 		return false;
 	}
 	
@@ -226,7 +240,7 @@ public abstract class AbstractPackratParser implements
 	}
 	
 	public void consumeAction(String typeName, String feature, boolean isMany) {
-		accept(new ParsedAction(input, offset, typeName, feature, isMany));
+		accept(new ParsedAction(offset, typeName, feature, isMany));
 	}
 	
 	public void setParseResultFactory(IParseResultFactory parseResultFactory) {

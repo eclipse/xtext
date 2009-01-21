@@ -100,6 +100,12 @@ public class PerformanceTest extends AbstractGeneratorTest {
 		}
 	}
 	
+//	public void testProfile() {
+//		testFirstGeneratedWithTerminalsPackrat();
+//		for (int i = 0; i < 10; i++)
+//			testGeneratedWithTerminalsPackratTwice();
+//	}
+	
 	public void testFirstGeneratedWithTerminalsPackrat() {
 		doTest(generatedWithTerminals);
 	}
