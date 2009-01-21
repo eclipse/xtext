@@ -28,10 +28,10 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.parser.DefaultEcoreElementFactory;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.packrat.AbstractPackratParser;
-import org.eclipse.xtext.parser.packrat.PackratEcoreElementFactory;
 import org.eclipse.xtext.parser.packrat.ParseResultFactory;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
@@ -239,11 +239,12 @@ public abstract class AbstractGeneratorTest extends TestCase {
 	
 	protected void setAstFactory(AbstractPackratParser parser) {
 		ParseResultFactory factory = new ParseResultFactory();
-		PackratEcoreElementFactory astFactory = new PackratEcoreElementFactory();
+		DefaultEcoreElementFactory astFactory = new DefaultEcoreElementFactory();
 		astFactory.setConverterService(getValueConverterService());
 		astFactory.setGrammarAccess(getGrammarAccess());
 		factory.setFactory(astFactory);
 		parser.setParseResultFactory(factory);
+//		parser.setParseResultFactory(IParseResultFactory.NullParseResultFactory.INSTANCE);
 	}
 
 }

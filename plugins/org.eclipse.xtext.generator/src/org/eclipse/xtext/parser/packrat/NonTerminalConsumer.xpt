@@ -265,6 +265,7 @@ public final class «this.consumerClassName()» extends NonTerminalConsumer {
 «DEFINE defineConsumeBody FOR Group-»
 		final IMarker marker = mark();
 «EXPAND defineConsumeBodyInternal FOR this-»
+		marker.release();
 		return true;
 «ENDDEFINE»
 
@@ -275,6 +276,7 @@ public final class «this.consumerClassName()» extends NonTerminalConsumer {
 «ELSE-»
 		if (!«token.consumeMethodName()»()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 «ENDIF-»

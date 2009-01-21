@@ -43,13 +43,4 @@ public class AbstractTestLanguageREALConsumer extends AbstractRuleAwareTerminalC
 		return true;
 	}
 
-	@Override
-	public void initFields(IParserConfiguration configuration) {
-		super.initFields(configuration);
-		if (configuration instanceof AbstractTestLanguageParserConfiguration)
-			intConsumer = ((AbstractTestLanguageParserConfiguration)configuration).getIntConsumer();
-		else if (configuration instanceof ConcreteTestLanguageParserConfiguration)
-			intConsumer = ((ConcreteTestLanguageParserConfiguration)configuration).getIntConsumer();
-	}
-
 }
