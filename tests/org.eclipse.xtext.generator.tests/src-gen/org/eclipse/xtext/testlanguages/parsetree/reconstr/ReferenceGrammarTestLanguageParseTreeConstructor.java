@@ -31,12 +31,12 @@ public class ReferenceGrammarTestLanguageParseTreeConstructor extends AbstractPa
 
 /************ begin Rule Spielplatz ****************
  *
- * Spielplatz : ( 'spielplatz' groesse = INT ( beschreibung = STRING ) ? '{' ( kinder += Kind | erzieher += Erwachsener | spielzeuge += Spielzeug | familie += Familie ) * '}' ) ? ;
+ * Spielplatz : ( "spielplatz" groesse = INT ( beschreibung = STRING ) ? "{" ( kinder += Kind | erzieher += Erwachsener | spielzeuge += Spielzeug | familie += Familie ) * "}" ) ? ;
  *
  **/
 
 
-// ( 'spielplatz' groesse = INT ( beschreibung = STRING ) ? '{' ( kinder += Kind | erzieher += Erwachsener | spielzeuge += Spielzeug | familie += Familie ) * '}' ) ?
+// ( "spielplatz" groesse = INT ( beschreibung = STRING ) ? "{" ( kinder += Kind | erzieher += Erwachsener | spielzeuge += Spielzeug | familie += Familie ) * "}" ) ?
 protected class Spielplatz_Group extends GroupToken {
 	
 	public Spielplatz_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -64,7 +64,7 @@ protected class Spielplatz_Group extends GroupToken {
 	}
 }
 
-// 'spielplatz' groesse = INT ( beschreibung = STRING ) ? '{' ( kinder += Kind | erzieher += Erwachsener | spielzeuge += Spielzeug | familie += Familie ) *
+// "spielplatz" groesse = INT ( beschreibung = STRING ) ? "{" ( kinder += Kind | erzieher += Erwachsener | spielzeuge += Spielzeug | familie += Familie ) *
 protected class Spielplatz_0_Group extends GroupToken {
 	
 	public Spielplatz_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -92,7 +92,7 @@ protected class Spielplatz_0_Group extends GroupToken {
 	}
 }
 
-// 'spielplatz' groesse = INT ( beschreibung = STRING ) ? '{'
+// "spielplatz" groesse = INT ( beschreibung = STRING ) ? "{"
 protected class Spielplatz_0_0_Group extends GroupToken {
 	
 	public Spielplatz_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -120,7 +120,7 @@ protected class Spielplatz_0_0_Group extends GroupToken {
 	}
 }
 
-// 'spielplatz' groesse = INT ( beschreibung = STRING ) ?
+// "spielplatz" groesse = INT ( beschreibung = STRING ) ?
 protected class Spielplatz_0_0_0_Group extends GroupToken {
 	
 	public Spielplatz_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -148,7 +148,7 @@ protected class Spielplatz_0_0_0_Group extends GroupToken {
 	}
 }
 
-// 'spielplatz' groesse = INT
+// "spielplatz" groesse = INT
 protected class Spielplatz_0_0_0_0_Group extends GroupToken {
 	
 	public Spielplatz_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -176,7 +176,7 @@ protected class Spielplatz_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// 'spielplatz'
+// "spielplatz"
 protected class Spielplatz_0_0_0_0_0_Keyword_spielplatz extends KeywordToken  {
 	
 	public Spielplatz_0_0_0_0_0_Keyword_spielplatz(IInstanceDescription curr, AbstractToken pred) {
@@ -236,7 +236,7 @@ protected class Spielplatz_0_0_0_1_Assignment_beschreibung extends AssignmentTok
 }
 
 
-// '{'
+// "{"
 protected class Spielplatz_0_0_1_Keyword extends KeywordToken  {
 	
 	public Spielplatz_0_0_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -440,7 +440,7 @@ protected class Spielplatz_0_1_1_Assignment_familie extends AssignmentToken  {
 
 
 
-// '}'
+// "}"
 protected class Spielplatz_1_Keyword extends KeywordToken  {
 	
 	public Spielplatz_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -526,12 +526,12 @@ protected class Person_1_RuleCall_Erwachsener extends RuleCallToken {
 
 /************ begin Rule Kind ****************
  *
- * Kind : 'kind' '(' name = ID age = INT ')' ;
+ * Kind : "kind" "(" name = ID age = INT ")" ;
  *
  **/
 
 
-// 'kind' '(' name = ID age = INT ')'
+// "kind" "(" name = ID age = INT ")"
 protected class Kind_Group extends GroupToken {
 	
 	public Kind_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -559,7 +559,7 @@ protected class Kind_Group extends GroupToken {
 	}
 }
 
-// 'kind' '(' name = ID age = INT
+// "kind" "(" name = ID age = INT
 protected class Kind_0_Group extends GroupToken {
 	
 	public Kind_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -587,7 +587,7 @@ protected class Kind_0_Group extends GroupToken {
 	}
 }
 
-// 'kind' '(' name = ID
+// "kind" "(" name = ID
 protected class Kind_0_0_Group extends GroupToken {
 	
 	public Kind_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -615,7 +615,7 @@ protected class Kind_0_0_Group extends GroupToken {
 	}
 }
 
-// 'kind' '('
+// "kind" "("
 protected class Kind_0_0_0_Group extends GroupToken {
 	
 	public Kind_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -643,7 +643,7 @@ protected class Kind_0_0_0_Group extends GroupToken {
 	}
 }
 
-// 'kind'
+// "kind"
 protected class Kind_0_0_0_0_Keyword_kind extends KeywordToken  {
 	
 	public Kind_0_0_0_0_Keyword_kind(IInstanceDescription curr, AbstractToken pred) {
@@ -655,7 +655,7 @@ protected class Kind_0_0_0_0_Keyword_kind extends KeywordToken  {
 	}	
 }
 
-// '('
+// "("
 protected class Kind_0_0_0_1_Keyword extends KeywordToken  {
 	
 	public Kind_0_0_0_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -716,7 +716,7 @@ protected class Kind_0_1_Assignment_age extends AssignmentToken  {
 }
 
 
-// ')'
+// ")"
 protected class Kind_1_Keyword extends KeywordToken  {
 	
 	public Kind_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -734,12 +734,12 @@ protected class Kind_1_Keyword extends KeywordToken  {
 
 /************ begin Rule Erwachsener ****************
  *
- * Erwachsener : 'erwachsener' '(' name = ID age = INT ')' ;
+ * Erwachsener : "erwachsener" "(" name = ID age = INT ")" ;
  *
  **/
 
 
-// 'erwachsener' '(' name = ID age = INT ')'
+// "erwachsener" "(" name = ID age = INT ")"
 protected class Erwachsener_Group extends GroupToken {
 	
 	public Erwachsener_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -767,7 +767,7 @@ protected class Erwachsener_Group extends GroupToken {
 	}
 }
 
-// 'erwachsener' '(' name = ID age = INT
+// "erwachsener" "(" name = ID age = INT
 protected class Erwachsener_0_Group extends GroupToken {
 	
 	public Erwachsener_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -795,7 +795,7 @@ protected class Erwachsener_0_Group extends GroupToken {
 	}
 }
 
-// 'erwachsener' '(' name = ID
+// "erwachsener" "(" name = ID
 protected class Erwachsener_0_0_Group extends GroupToken {
 	
 	public Erwachsener_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -823,7 +823,7 @@ protected class Erwachsener_0_0_Group extends GroupToken {
 	}
 }
 
-// 'erwachsener' '('
+// "erwachsener" "("
 protected class Erwachsener_0_0_0_Group extends GroupToken {
 	
 	public Erwachsener_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -851,7 +851,7 @@ protected class Erwachsener_0_0_0_Group extends GroupToken {
 	}
 }
 
-// 'erwachsener'
+// "erwachsener"
 protected class Erwachsener_0_0_0_0_Keyword_erwachsener extends KeywordToken  {
 	
 	public Erwachsener_0_0_0_0_Keyword_erwachsener(IInstanceDescription curr, AbstractToken pred) {
@@ -863,7 +863,7 @@ protected class Erwachsener_0_0_0_0_Keyword_erwachsener extends KeywordToken  {
 	}	
 }
 
-// '('
+// "("
 protected class Erwachsener_0_0_0_1_Keyword extends KeywordToken  {
 	
 	public Erwachsener_0_0_0_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -924,7 +924,7 @@ protected class Erwachsener_0_1_Assignment_age extends AssignmentToken  {
 }
 
 
-// ')'
+// ")"
 protected class Erwachsener_1_Keyword extends KeywordToken  {
 	
 	public Erwachsener_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -942,12 +942,12 @@ protected class Erwachsener_1_Keyword extends KeywordToken  {
 
 /************ begin Rule Spielzeug ****************
  *
- * Spielzeug : 'spielzeug' '(' name = ID farbe = Farbe ')' ;
+ * Spielzeug : "spielzeug" "(" name = ID farbe = Farbe ")" ;
  *
  **/
 
 
-// 'spielzeug' '(' name = ID farbe = Farbe ')'
+// "spielzeug" "(" name = ID farbe = Farbe ")"
 protected class Spielzeug_Group extends GroupToken {
 	
 	public Spielzeug_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -975,7 +975,7 @@ protected class Spielzeug_Group extends GroupToken {
 	}
 }
 
-// 'spielzeug' '(' name = ID farbe = Farbe
+// "spielzeug" "(" name = ID farbe = Farbe
 protected class Spielzeug_0_Group extends GroupToken {
 	
 	public Spielzeug_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1003,7 +1003,7 @@ protected class Spielzeug_0_Group extends GroupToken {
 	}
 }
 
-// 'spielzeug' '(' name = ID
+// "spielzeug" "(" name = ID
 protected class Spielzeug_0_0_Group extends GroupToken {
 	
 	public Spielzeug_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1031,7 +1031,7 @@ protected class Spielzeug_0_0_Group extends GroupToken {
 	}
 }
 
-// 'spielzeug' '('
+// "spielzeug" "("
 protected class Spielzeug_0_0_0_Group extends GroupToken {
 	
 	public Spielzeug_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1059,7 +1059,7 @@ protected class Spielzeug_0_0_0_Group extends GroupToken {
 	}
 }
 
-// 'spielzeug'
+// "spielzeug"
 protected class Spielzeug_0_0_0_0_Keyword_spielzeug extends KeywordToken  {
 	
 	public Spielzeug_0_0_0_0_Keyword_spielzeug(IInstanceDescription curr, AbstractToken pred) {
@@ -1071,7 +1071,7 @@ protected class Spielzeug_0_0_0_0_Keyword_spielzeug extends KeywordToken  {
 	}	
 }
 
-// '('
+// "("
 protected class Spielzeug_0_0_0_1_Keyword extends KeywordToken  {
 	
 	public Spielzeug_0_0_0_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -1140,7 +1140,7 @@ protected class Spielzeug_0_1_Assignment_farbe extends AssignmentToken  {
 }
 
 
-// ')'
+// ")"
 protected class Spielzeug_1_Keyword extends KeywordToken  {
 	
 	public Spielzeug_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -1158,12 +1158,12 @@ protected class Spielzeug_1_Keyword extends KeywordToken  {
 
 /************ begin Rule Farbe ****************
  *
- * Farbe : 'ROT' | 'BLAU' | 'GELB' | 'GRÜN' ;
+ * Farbe : "ROT" | "BLAU" | "GELB" | "GR\u00DCN" ;
  *
  **/
 
 
-// 'ROT' | 'BLAU' | 'GELB' | 'GRÜN'
+// "ROT" | "BLAU" | "GELB" | "GR\u00DCN"
 protected class Farbe_Alternatives extends AlternativesToken {
 
 	public Farbe_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -1184,7 +1184,7 @@ protected class Farbe_Alternatives extends AlternativesToken {
 	}
 }
 
-// 'ROT' | 'BLAU' | 'GELB'
+// "ROT" | "BLAU" | "GELB"
 protected class Farbe_0_Alternatives extends AlternativesToken {
 
 	public Farbe_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -1205,7 +1205,7 @@ protected class Farbe_0_Alternatives extends AlternativesToken {
 	}
 }
 
-// 'ROT' | 'BLAU'
+// "ROT" | "BLAU"
 protected class Farbe_0_0_Alternatives extends AlternativesToken {
 
 	public Farbe_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -1226,7 +1226,7 @@ protected class Farbe_0_0_Alternatives extends AlternativesToken {
 	}
 }
 
-// 'ROT'
+// "ROT"
 protected class Farbe_0_0_0_Keyword_ROT extends KeywordToken  {
 	
 	public Farbe_0_0_0_Keyword_ROT(IInstanceDescription curr, AbstractToken pred) {
@@ -1238,7 +1238,7 @@ protected class Farbe_0_0_0_Keyword_ROT extends KeywordToken  {
 	}	
 }
 
-// 'BLAU'
+// "BLAU"
 protected class Farbe_0_0_1_Keyword_BLAU extends KeywordToken  {
 	
 	public Farbe_0_0_1_Keyword_BLAU(IInstanceDescription curr, AbstractToken pred) {
@@ -1251,7 +1251,7 @@ protected class Farbe_0_0_1_Keyword_BLAU extends KeywordToken  {
 }
 
 
-// 'GELB'
+// "GELB"
 protected class Farbe_0_1_Keyword_GELB extends KeywordToken  {
 	
 	public Farbe_0_1_Keyword_GELB(IInstanceDescription curr, AbstractToken pred) {
@@ -1264,7 +1264,7 @@ protected class Farbe_0_1_Keyword_GELB extends KeywordToken  {
 }
 
 
-// 'GRÜN'
+// "GR\u00DCN"
 protected class Farbe_1_Keyword_GRN extends KeywordToken  {
 	
 	public Farbe_1_Keyword_GRN(IInstanceDescription curr, AbstractToken pred) {
@@ -1282,12 +1282,12 @@ protected class Farbe_1_Keyword_GRN extends KeywordToken  {
 
 /************ begin Rule Familie ****************
  *
- * Familie : 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ Erwachsener ] vater = [ Erwachsener ] kinder += [ Kind ] ( ',' kinder += [ Kind ] ) * ')' ;
+ * Familie : "familie" "(" name = ( "keyword" | STRING | ID ) mutter = [ Erwachsener ] vater = [ Erwachsener ] kinder += [ Kind ] ( "," kinder += [ Kind ] ) * ")" ;
  *
  **/
 
 
-// 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ Erwachsener ] vater = [ Erwachsener ] kinder += [ Kind ] ( ',' kinder += [ Kind ] ) * ')'
+// "familie" "(" name = ( "keyword" | STRING | ID ) mutter = [ Erwachsener ] vater = [ Erwachsener ] kinder += [ Kind ] ( "," kinder += [ Kind ] ) * ")"
 protected class Familie_Group extends GroupToken {
 	
 	public Familie_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1315,7 +1315,7 @@ protected class Familie_Group extends GroupToken {
 	}
 }
 
-// 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ Erwachsener ] vater = [ Erwachsener ] kinder += [ Kind ] ( ',' kinder += [ Kind ] ) *
+// "familie" "(" name = ( "keyword" | STRING | ID ) mutter = [ Erwachsener ] vater = [ Erwachsener ] kinder += [ Kind ] ( "," kinder += [ Kind ] ) *
 protected class Familie_0_Group extends GroupToken {
 	
 	public Familie_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1343,7 +1343,7 @@ protected class Familie_0_Group extends GroupToken {
 	}
 }
 
-// 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ Erwachsener ] vater = [ Erwachsener ] kinder += [ Kind ]
+// "familie" "(" name = ( "keyword" | STRING | ID ) mutter = [ Erwachsener ] vater = [ Erwachsener ] kinder += [ Kind ]
 protected class Familie_0_0_Group extends GroupToken {
 	
 	public Familie_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1371,7 +1371,7 @@ protected class Familie_0_0_Group extends GroupToken {
 	}
 }
 
-// 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ Erwachsener ] vater = [ Erwachsener ]
+// "familie" "(" name = ( "keyword" | STRING | ID ) mutter = [ Erwachsener ] vater = [ Erwachsener ]
 protected class Familie_0_0_0_Group extends GroupToken {
 	
 	public Familie_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1399,7 +1399,7 @@ protected class Familie_0_0_0_Group extends GroupToken {
 	}
 }
 
-// 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ Erwachsener ]
+// "familie" "(" name = ( "keyword" | STRING | ID ) mutter = [ Erwachsener ]
 protected class Familie_0_0_0_0_Group extends GroupToken {
 	
 	public Familie_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1427,7 +1427,7 @@ protected class Familie_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// 'familie' '(' name = ( 'keyword' | STRING | ID )
+// "familie" "(" name = ( "keyword" | STRING | ID )
 protected class Familie_0_0_0_0_0_Group extends GroupToken {
 	
 	public Familie_0_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1455,7 +1455,7 @@ protected class Familie_0_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// 'familie' '('
+// "familie" "("
 protected class Familie_0_0_0_0_0_0_Group extends GroupToken {
 	
 	public Familie_0_0_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1483,7 +1483,7 @@ protected class Familie_0_0_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// 'familie'
+// "familie"
 protected class Familie_0_0_0_0_0_0_0_Keyword_familie extends KeywordToken  {
 	
 	public Familie_0_0_0_0_0_0_0_Keyword_familie(IInstanceDescription curr, AbstractToken pred) {
@@ -1495,7 +1495,7 @@ protected class Familie_0_0_0_0_0_0_0_Keyword_familie extends KeywordToken  {
 	}	
 }
 
-// '('
+// "("
 protected class Familie_0_0_0_0_0_0_1_Keyword extends KeywordToken  {
 	
 	public Familie_0_0_0_0_0_0_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -1508,7 +1508,7 @@ protected class Familie_0_0_0_0_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-// name = ( 'keyword' | STRING | ID )
+// name = ( "keyword" | STRING | ID )
 protected class Familie_0_0_0_0_0_1_Assignment_name extends AssignmentToken  {
 	
 	public Familie_0_0_0_0_0_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -1625,7 +1625,7 @@ protected class Familie_0_0_1_Assignment_kinder extends AssignmentToken  {
 }
 
 
-// ( ',' kinder += [ Kind ] ) *
+// ( "," kinder += [ Kind ] ) *
 protected class Familie_0_1_Group extends GroupToken {
 	
 	public Familie_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1653,7 +1653,7 @@ protected class Familie_0_1_Group extends GroupToken {
 	}
 }
 
-// ','
+// ","
 protected class Familie_0_1_0_Keyword extends KeywordToken  {
 	
 	public Familie_0_1_0_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -1693,7 +1693,7 @@ protected class Familie_0_1_1_Assignment_kinder extends AssignmentToken  {
 
 
 
-// ')'
+// ")"
 protected class Familie_1_Keyword extends KeywordToken  {
 	
 	public Familie_1_Keyword(IInstanceDescription curr, AbstractToken pred) {

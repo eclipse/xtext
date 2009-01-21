@@ -53,16 +53,20 @@ public final class XtextGrammarTestLanguageReferencedMetamodelConsumer extends N
 		final IMarker marker = mark();
 		if (!consumeKeyword$3()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeAssignment$4()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeGroup$7()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 
@@ -85,12 +89,15 @@ public final class XtextGrammarTestLanguageReferencedMetamodelConsumer extends N
 		final IMarker marker = mark();
 		if (!consumeKeyword$8()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeAssignment$9()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 

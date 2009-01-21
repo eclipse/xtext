@@ -64,28 +64,35 @@ public final class XtextGrammarTestLanguageLexerRuleConsumer extends NonTerminal
 		final IMarker marker = mark();
 		if (!consumeAlternatives$6()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeAssignment$9()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeGroup$11()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeKeyword$15()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeAssignment$16()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeKeyword$18()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 
@@ -120,12 +127,15 @@ public final class XtextGrammarTestLanguageLexerRuleConsumer extends NonTerminal
 		final IMarker marker = mark();
 		if (!consumeKeyword$12()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeAssignment$13()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 

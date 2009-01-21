@@ -56,24 +56,30 @@ public final class DomainmodelReferenceConsumer extends NonTerminalConsumer {
 		final IMarker marker = mark();
 		if (!consumeKeyword$5()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeAssignment$6()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeKeyword$8()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeAssignment$9()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeGroup$11()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 
@@ -106,12 +112,15 @@ public final class DomainmodelReferenceConsumer extends NonTerminalConsumer {
 		final IMarker marker = mark();
 		if (!consumeKeyword$12()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeAssignment$13()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 

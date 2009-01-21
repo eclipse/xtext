@@ -134,31 +134,31 @@ public class SimpleReconstrTestLanguageGrammarAccess extends BaseEPackageAccess 
 		private final Assignment c1AssignmentEm = (Assignment)cGroup.eContents().get(1);
 		private final Keyword c10KeywordExclamationMark = (Keyword)c1AssignmentEm.eContents().get(0);
 		
-		// Parens returns Expression : '(' Op ')' ( em = '!' ) ? ;
+		// Parens returns Expression : "(" Op ")" ( em = "!" ) ? ;
 		public ParserRule getRule() { return rule; }
 
-		// '(' Op ')' ( em = '!' ) ?
+		// "(" Op ")" ( em = "!" ) ?
 		public Group eleGroup() { return cGroup; }
 
-		// '(' Op ')'
+		// "(" Op ")"
 		public Group ele0Group() { return c0Group; }
 
-		// '(' Op
+		// "(" Op
 		public Group ele00Group() { return c00Group; }
 
-		// '('
+		// "("
 		public Keyword ele000KeywordLeftParenthesis() { return c000KeywordLeftParenthesis; }
 
 		// Op
 		public RuleCall ele001ParserRuleCallOp() { return c001ParserRuleCallOp; }
 
-		// ')'
+		// ")"
 		public Keyword ele01KeywordRightParenthesis() { return c01KeywordRightParenthesis; }
 
-		// ( em = '!' ) ?
+		// ( em = "!" ) ?
 		public Assignment ele1AssignmentEm() { return c1AssignmentEm; }
 
-		// '!'
+		// "!"
 		public Keyword ele10KeywordExclamationMark() { return c10KeywordExclamationMark; }
 	}
 
@@ -175,10 +175,10 @@ public class SimpleReconstrTestLanguageGrammarAccess extends BaseEPackageAccess 
 		private final Assignment c11AssignmentNum3 = (Assignment)c1Group.eContents().get(1);
 		private final RuleCall c110LexerRuleCallINT = (RuleCall)c11AssignmentNum3.eContents().get(0);
 		
-		// TwoNumbers : num1 = INT num2 = INT ( '#' num3 += INT ) * ;
+		// TwoNumbers : num1 = INT num2 = INT ( "#" num3 += INT ) * ;
 		public ParserRule getRule() { return rule; }
 
-		// num1 = INT num2 = INT ( '#' num3 += INT ) *
+		// num1 = INT num2 = INT ( "#" num3 += INT ) *
 		public Group eleGroup() { return cGroup; }
 
 		// num1 = INT num2 = INT
@@ -196,10 +196,10 @@ public class SimpleReconstrTestLanguageGrammarAccess extends BaseEPackageAccess 
 		// INT
 		public RuleCall ele010LexerRuleCallINT() { return c010LexerRuleCallINT; }
 
-		// ( '#' num3 += INT ) *
+		// ( "#" num3 += INT ) *
 		public Group ele1Group() { return c1Group; }
 
-		// '#'
+		// "#"
 		public Keyword ele10KeywordNumberSign() { return c10KeywordNumberSign; }
 
 		// num3 += INT
@@ -219,16 +219,16 @@ public class SimpleReconstrTestLanguageGrammarAccess extends BaseEPackageAccess 
 		private final Assignment c1AssignmentStr2 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall c10LexerRuleCallSTRING = (RuleCall)c1AssignmentStr2.eContents().get(0);
 		
-		// ManyStrings : '=' ( str1 += STRING ) * str2 += STRING ;
+		// ManyStrings : "=" ( str1 += STRING ) * str2 += STRING ;
 		public ParserRule getRule() { return rule; }
 
-		// '=' ( str1 += STRING ) * str2 += STRING
+		// "=" ( str1 += STRING ) * str2 += STRING
 		public Group eleGroup() { return cGroup; }
 
-		// '=' ( str1 += STRING ) *
+		// "=" ( str1 += STRING ) *
 		public Group ele0Group() { return c0Group; }
 
-		// '='
+		// "="
 		public Keyword ele00KeywordEqualsSign() { return c00KeywordEqualsSign; }
 
 		// ( str1 += STRING ) *
@@ -256,19 +256,19 @@ public class SimpleReconstrTestLanguageGrammarAccess extends BaseEPackageAccess 
 		private final Assignment c1AssignmentExtends = (Assignment)cGroup.eContents().get(1);
 		private final CrossReference c10CrossReferenceEStringType = (CrossReference)c1AssignmentExtends.eContents().get(0);
 		
-		// Type : 'type' name = ID 'extends' ^extends = [ Type ] ;
+		// Type : "type" name = ID "extends" ^extends = [ Type ] ;
 		public ParserRule getRule() { return rule; }
 
-		// 'type' name = ID 'extends' ^extends = [ Type ]
+		// "type" name = ID "extends" ^extends = [ Type ]
 		public Group eleGroup() { return cGroup; }
 
-		// 'type' name = ID 'extends'
+		// "type" name = ID "extends"
 		public Group ele0Group() { return c0Group; }
 
-		// 'type' name = ID
+		// "type" name = ID
 		public Group ele00Group() { return c00Group; }
 
-		// 'type'
+		// "type"
 		public Keyword ele000KeywordType() { return c000KeywordType; }
 
 		// name = ID
@@ -277,7 +277,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends BaseEPackageAccess 
 		// ID
 		public RuleCall ele0010LexerRuleCallID() { return c0010LexerRuleCallID; }
 
-		// 'extends'
+		// "extends"
 		public Keyword ele01KeywordExtends() { return c01KeywordExtends; }
 
 		// ^extends = [ Type ]
@@ -298,31 +298,31 @@ public class SimpleReconstrTestLanguageGrammarAccess extends BaseEPackageAccess 
 		private final RuleCall c1001LexerRuleCallSTRING = (RuleCall)c100Alternatives.eContents().get(1);
 		private final Keyword c101KeywordMykeyword2 = (Keyword)c10Alternatives.eContents().get(1);
 		
-		// Ref2 : '#2' ref2 = ( 'mykeyword1' | STRING | 'mykeyword2' ) ;
+		// Ref2 : "#2" ref2 = ( "mykeyword1" | STRING | "mykeyword2" ) ;
 		public ParserRule getRule() { return rule; }
 
-		// '#2' ref2 = ( 'mykeyword1' | STRING | 'mykeyword2' )
+		// "#2" ref2 = ( "mykeyword1" | STRING | "mykeyword2" )
 		public Group eleGroup() { return cGroup; }
 
-		// '#2'
+		// "#2"
 		public Keyword ele0KeywordNumberSignDigitTwo() { return c0KeywordNumberSignDigitTwo; }
 
-		// ref2 = ( 'mykeyword1' | STRING | 'mykeyword2' )
+		// ref2 = ( "mykeyword1" | STRING | "mykeyword2" )
 		public Assignment ele1AssignmentRef2() { return c1AssignmentRef2; }
 
-		// 'mykeyword1' | STRING | 'mykeyword2'
+		// "mykeyword1" | STRING | "mykeyword2"
 		public Alternatives ele10Alternatives() { return c10Alternatives; }
 
-		// 'mykeyword1' | STRING
+		// "mykeyword1" | STRING
 		public Alternatives ele100Alternatives() { return c100Alternatives; }
 
-		// 'mykeyword1'
+		// "mykeyword1"
 		public Keyword ele1000KeywordMykeyword1() { return c1000KeywordMykeyword1; }
 
 		// STRING
 		public RuleCall ele1001LexerRuleCallSTRING() { return c1001LexerRuleCallSTRING; }
 
-		// 'mykeyword2'
+		// "mykeyword2"
 		public Keyword ele101KeywordMykeyword2() { return c101KeywordMykeyword2; }
 	}
 
@@ -338,16 +338,16 @@ public class SimpleReconstrTestLanguageGrammarAccess extends BaseEPackageAccess 
 		private final Assignment c11AssignmentId = (Assignment)c1Group.eContents().get(1);
 		private final RuleCall c110LexerRuleCallID = (RuleCall)c11AssignmentId.eContents().get(0);
 		
-		// Spare : '#3' id += ID ( '.' id += ID ) * ;
+		// Spare : "#3" id += ID ( "." id += ID ) * ;
 		public ParserRule getRule() { return rule; }
 
-		// '#3' id += ID ( '.' id += ID ) *
+		// "#3" id += ID ( "." id += ID ) *
 		public Group eleGroup() { return cGroup; }
 
-		// '#3' id += ID
+		// "#3" id += ID
 		public Group ele0Group() { return c0Group; }
 
-		// '#3'
+		// "#3"
 		public Keyword ele00KeywordNumberSignDigitThree() { return c00KeywordNumberSignDigitThree; }
 
 		// id += ID
@@ -356,10 +356,10 @@ public class SimpleReconstrTestLanguageGrammarAccess extends BaseEPackageAccess 
 		// ID
 		public RuleCall ele010LexerRuleCallID() { return c010LexerRuleCallID; }
 
-		// ( '.' id += ID ) *
+		// ( "." id += ID ) *
 		public Group ele1Group() { return c1Group; }
 
-		// '.'
+		// "."
 		public Keyword ele10KeywordFullStop() { return c10KeywordFullStop; }
 
 		// id += ID
@@ -381,28 +381,28 @@ public class SimpleReconstrTestLanguageGrammarAccess extends BaseEPackageAccess 
 		private final Assignment c1AssignmentValue = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall c10LexerRuleCallID = (RuleCall)c1AssignmentValue.eContents().get(0);
 		
-		// Boolean : '#4' ( bool ?= 'myoption' ) ? 'kw' value = ID ;
+		// Boolean : "#4" ( bool ?= "myoption" ) ? "kw" value = ID ;
 		public ParserRule getRule() { return rule; }
 
-		// '#4' ( bool ?= 'myoption' ) ? 'kw' value = ID
+		// "#4" ( bool ?= "myoption" ) ? "kw" value = ID
 		public Group eleGroup() { return cGroup; }
 
-		// '#4' ( bool ?= 'myoption' ) ? 'kw'
+		// "#4" ( bool ?= "myoption" ) ? "kw"
 		public Group ele0Group() { return c0Group; }
 
-		// '#4' ( bool ?= 'myoption' ) ?
+		// "#4" ( bool ?= "myoption" ) ?
 		public Group ele00Group() { return c00Group; }
 
-		// '#4'
+		// "#4"
 		public Keyword ele000KeywordNumberSignDigitFour() { return c000KeywordNumberSignDigitFour; }
 
-		// ( bool ?= 'myoption' ) ?
+		// ( bool ?= "myoption" ) ?
 		public Assignment ele001AssignmentBool() { return c001AssignmentBool; }
 
-		// 'myoption'
+		// "myoption"
 		public Keyword ele0010KeywordMyoption() { return c0010KeywordMyoption; }
 
-		// 'kw'
+		// "kw"
 		public Keyword ele01KeywordKw() { return c01KeywordKw; }
 
 		// value = ID
@@ -457,37 +457,37 @@ public class SimpleReconstrTestLanguageGrammarAccess extends BaseEPackageAccess 
 		return (pAtom != null) ? pAtom : (pAtom = new AtomElements());
 	} 
 
-	// Parens returns Expression : '(' Op ')' ( em = '!' ) ? ;
+	// Parens returns Expression : "(" Op ")" ( em = "!" ) ? ;
 	public ParensElements prParens() {
 		return (pParens != null) ? pParens : (pParens = new ParensElements());
 	} 
 
-	// TwoNumbers : num1 = INT num2 = INT ( '#' num3 += INT ) * ;
+	// TwoNumbers : num1 = INT num2 = INT ( "#" num3 += INT ) * ;
 	public TwoNumbersElements prTwoNumbers() {
 		return (pTwoNumbers != null) ? pTwoNumbers : (pTwoNumbers = new TwoNumbersElements());
 	} 
 
-	// ManyStrings : '=' ( str1 += STRING ) * str2 += STRING ;
+	// ManyStrings : "=" ( str1 += STRING ) * str2 += STRING ;
 	public ManyStringsElements prManyStrings() {
 		return (pManyStrings != null) ? pManyStrings : (pManyStrings = new ManyStringsElements());
 	} 
 
-	// Type : 'type' name = ID 'extends' ^extends = [ Type ] ;
+	// Type : "type" name = ID "extends" ^extends = [ Type ] ;
 	public TypeElements prType() {
 		return (pType != null) ? pType : (pType = new TypeElements());
 	} 
 
-	// Ref2 : '#2' ref2 = ( 'mykeyword1' | STRING | 'mykeyword2' ) ;
+	// Ref2 : "#2" ref2 = ( "mykeyword1" | STRING | "mykeyword2" ) ;
 	public Ref2Elements prRef2() {
 		return (pRef2 != null) ? pRef2 : (pRef2 = new Ref2Elements());
 	} 
 
-	// Spare : '#3' id += ID ( '.' id += ID ) * ;
+	// Spare : "#3" id += ID ( "." id += ID ) * ;
 	public SpareElements prSpare() {
 		return (pSpare != null) ? pSpare : (pSpare = new SpareElements());
 	} 
 
-	// Boolean : '#4' ( bool ?= 'myoption' ) ? 'kw' value = ID ;
+	// Boolean : "#4" ( bool ?= "myoption" ) ? "kw" value = ID ;
 	public BooleanElements prBoolean() {
 		return (pBoolean != null) ? pBoolean : (pBoolean = new BooleanElements());
 	} 

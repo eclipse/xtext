@@ -32,13 +32,13 @@ public class TestLanguageGrammarAccess extends BaseEPackageAccess implements IGr
 		private final Assignment c1AssignmentName = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall c10LexerRuleCallID = (RuleCall)c1AssignmentName.eContents().get(0);
 		
-		// Stuff : 'stuff' name = ID ;
+		// Stuff : "stuff" name = ID ;
 		public ParserRule getRule() { return rule; }
 
-		// 'stuff' name = ID
+		// "stuff" name = ID
 		public Group eleGroup() { return cGroup; }
 
-		// 'stuff'
+		// "stuff"
 		public Keyword ele0KeywordStuff() { return c0KeywordStuff; }
 
 		// name = ID
@@ -75,7 +75,7 @@ public class TestLanguageGrammarAccess extends BaseEPackageAccess implements IGr
 		return (pFile != null) ? pFile : (pFile = new FileElements());
 	} 
 
-	// Stuff : 'stuff' name = ID ;
+	// Stuff : "stuff" name = ID ;
 	public StuffElements prStuff() {
 		return (pStuff != null) ? pStuff : (pStuff = new StuffElements());
 	} 

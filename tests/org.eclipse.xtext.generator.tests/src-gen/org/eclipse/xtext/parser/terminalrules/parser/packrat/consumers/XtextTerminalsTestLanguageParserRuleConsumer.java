@@ -73,28 +73,35 @@ public final class XtextTerminalsTestLanguageParserRuleConsumer extends NonTermi
 		final IMarker marker = mark();
 		if (!consumeAssignment$6()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeGroup$8()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeGroup$12()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeKeyword$28()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeAssignment$29()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeKeyword$31()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 
@@ -113,12 +120,15 @@ public final class XtextTerminalsTestLanguageParserRuleConsumer extends NonTermi
 		final IMarker marker = mark();
 		if (!consumeKeyword$9()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeAssignment$10()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 
@@ -141,28 +151,30 @@ public final class XtextTerminalsTestLanguageParserRuleConsumer extends NonTermi
 		final IMarker marker = mark();
 		if (!consumeAssignment$16()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeKeyword$18()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeAssignment$19()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
-		if (!consumeKeyword$23()) {
+		if (!consumeGroup$22()) {
 			marker.rollback();
-			return false;
-		}
-		if (!consumeAssignment$24()) {
-			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeKeyword$27()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 
@@ -180,6 +192,27 @@ public final class XtextTerminalsTestLanguageParserRuleConsumer extends NonTermi
 		if (consumeTerminal(idConsumer, null, true, false, getRule().ele00010010CrossReferenceEStringAbstractRule(), getCrossReference$20$Delimiter()))
 			return true;
 		return false;
+	}
+
+	protected boolean consumeGroup$22() throws Exception {
+		while(doConsumeGroup$22()) {}
+		return true;
+	}
+
+	protected boolean doConsumeGroup$22() throws Exception {
+		final IMarker marker = mark();
+		if (!consumeKeyword$23()) {
+			marker.rollback();
+			marker.release();
+			return false;
+		}
+		if (!consumeAssignment$24()) {
+			marker.rollback();
+			marker.release();
+			return false;
+		}
+		marker.release();
+		return true;
 	}
 
 	protected boolean consumeKeyword$23() throws Exception {

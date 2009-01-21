@@ -54,12 +54,15 @@ public final class DatatypeRulesTestLanguageDotsConsumer extends NonTerminalCons
 		final IMarker marker = mark();
 		if (!consumeKeyword$3()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeKeyword$4()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 

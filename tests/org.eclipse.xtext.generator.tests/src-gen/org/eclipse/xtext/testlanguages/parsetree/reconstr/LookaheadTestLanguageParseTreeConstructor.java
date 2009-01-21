@@ -180,12 +180,12 @@ protected class Alts_1_RuleCall_LookAhead3 extends RuleCallToken {
 
 /************ begin Rule LookAhead0 ****************
  *
- * LookAhead0 : 'bar' x = 'a' ;
+ * LookAhead0 : "bar" x = "a" ;
  *
  **/
 
 
-// 'bar' x = 'a'
+// "bar" x = "a"
 protected class LookAhead0_Group extends GroupToken {
 	
 	public LookAhead0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -213,7 +213,7 @@ protected class LookAhead0_Group extends GroupToken {
 	}
 }
 
-// 'bar'
+// "bar"
 protected class LookAhead0_0_Keyword_bar extends KeywordToken  {
 	
 	public LookAhead0_0_Keyword_bar(IInstanceDescription curr, AbstractToken pred) {
@@ -225,7 +225,7 @@ protected class LookAhead0_0_Keyword_bar extends KeywordToken  {
 	}	
 }
 
-// x = 'a'
+// x = "a"
 protected class LookAhead0_1_Assignment_x extends AssignmentToken  {
 	
 	public LookAhead0_1_Assignment_x(IInstanceDescription curr, AbstractToken pred) {
@@ -256,12 +256,12 @@ protected class LookAhead0_1_Assignment_x extends AssignmentToken  {
 
 /************ begin Rule LookAhead1 ****************
  *
- * LookAhead1 : 'foo' y = LookAhead2 x = 'b' x = 'd' ;
+ * LookAhead1 : "foo" y = LookAhead2 x = "b" x = "d" ;
  *
  **/
 
 
-// 'foo' y = LookAhead2 x = 'b' x = 'd'
+// "foo" y = LookAhead2 x = "b" x = "d"
 protected class LookAhead1_Group extends GroupToken {
 	
 	public LookAhead1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -289,7 +289,7 @@ protected class LookAhead1_Group extends GroupToken {
 	}
 }
 
-// 'foo' y = LookAhead2 x = 'b'
+// "foo" y = LookAhead2 x = "b"
 protected class LookAhead1_0_Group extends GroupToken {
 	
 	public LookAhead1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -317,7 +317,7 @@ protected class LookAhead1_0_Group extends GroupToken {
 	}
 }
 
-// 'foo' y = LookAhead2
+// "foo" y = LookAhead2
 protected class LookAhead1_0_0_Group extends GroupToken {
 	
 	public LookAhead1_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -345,7 +345,7 @@ protected class LookAhead1_0_0_Group extends GroupToken {
 	}
 }
 
-// 'foo'
+// "foo"
 protected class LookAhead1_0_0_0_Keyword_foo extends KeywordToken  {
 	
 	public LookAhead1_0_0_0_Keyword_foo(IInstanceDescription curr, AbstractToken pred) {
@@ -389,7 +389,7 @@ protected class LookAhead1_0_0_1_Assignment_y extends AssignmentToken  {
 }
 
 
-// x = 'b'
+// x = "b"
 protected class LookAhead1_0_1_Assignment_x extends AssignmentToken  {
 	
 	public LookAhead1_0_1_Assignment_x(IInstanceDescription curr, AbstractToken pred) {
@@ -415,7 +415,7 @@ protected class LookAhead1_0_1_Assignment_x extends AssignmentToken  {
 }
 
 
-// x = 'd'
+// x = "d"
 protected class LookAhead1_1_Assignment_x extends AssignmentToken  {
 	
 	public LookAhead1_1_Assignment_x(IInstanceDescription curr, AbstractToken pred) {
@@ -446,12 +446,12 @@ protected class LookAhead1_1_Assignment_x extends AssignmentToken  {
 
 /************ begin Rule LookAhead2 ****************
  *
- * LookAhead2 : ( z = 'foo' | z = 'bar' ) 'c' ;
+ * LookAhead2 : ( z = "foo" | z = "bar" ) "c" ;
  *
  **/
 
 
-// ( z = 'foo' | z = 'bar' ) 'c'
+// ( z = "foo" | z = "bar" ) "c"
 protected class LookAhead2_Group extends GroupToken {
 	
 	public LookAhead2_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -479,7 +479,7 @@ protected class LookAhead2_Group extends GroupToken {
 	}
 }
 
-// z = 'foo' | z = 'bar'
+// z = "foo" | z = "bar"
 protected class LookAhead2_0_Alternatives extends AlternativesToken {
 
 	public LookAhead2_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -500,7 +500,7 @@ protected class LookAhead2_0_Alternatives extends AlternativesToken {
 	}
 }
 
-// z = 'foo'
+// z = "foo"
 protected class LookAhead2_0_0_Assignment_z extends AssignmentToken  {
 	
 	public LookAhead2_0_0_Assignment_z(IInstanceDescription curr, AbstractToken pred) {
@@ -525,7 +525,7 @@ protected class LookAhead2_0_0_Assignment_z extends AssignmentToken  {
 	}
 }
 
-// z = 'bar'
+// z = "bar"
 protected class LookAhead2_0_1_Assignment_z extends AssignmentToken  {
 	
 	public LookAhead2_0_1_Assignment_z(IInstanceDescription curr, AbstractToken pred) {
@@ -551,7 +551,7 @@ protected class LookAhead2_0_1_Assignment_z extends AssignmentToken  {
 }
 
 
-// 'c'
+// "c"
 protected class LookAhead2_1_Keyword_c extends KeywordToken  {
 	
 	public LookAhead2_1_Keyword_c(IInstanceDescription curr, AbstractToken pred) {
@@ -569,12 +569,12 @@ protected class LookAhead2_1_Keyword_c extends KeywordToken  {
 
 /************ begin Rule LookAhead3 ****************
  *
- * LookAhead3 : 'foo' 'bar' x = 'b' z = LookAhead4 ;
+ * LookAhead3 : "foo" "bar" x = "b" z = LookAhead4 ;
  *
  **/
 
 
-// 'foo' 'bar' x = 'b' z = LookAhead4
+// "foo" "bar" x = "b" z = LookAhead4
 protected class LookAhead3_Group extends GroupToken {
 	
 	public LookAhead3_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -602,7 +602,7 @@ protected class LookAhead3_Group extends GroupToken {
 	}
 }
 
-// 'foo' 'bar' x = 'b'
+// "foo" "bar" x = "b"
 protected class LookAhead3_0_Group extends GroupToken {
 	
 	public LookAhead3_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -630,7 +630,7 @@ protected class LookAhead3_0_Group extends GroupToken {
 	}
 }
 
-// 'foo' 'bar'
+// "foo" "bar"
 protected class LookAhead3_0_0_Group extends GroupToken {
 	
 	public LookAhead3_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -658,7 +658,7 @@ protected class LookAhead3_0_0_Group extends GroupToken {
 	}
 }
 
-// 'foo'
+// "foo"
 protected class LookAhead3_0_0_0_Keyword_foo extends KeywordToken  {
 	
 	public LookAhead3_0_0_0_Keyword_foo(IInstanceDescription curr, AbstractToken pred) {
@@ -670,7 +670,7 @@ protected class LookAhead3_0_0_0_Keyword_foo extends KeywordToken  {
 	}	
 }
 
-// 'bar'
+// "bar"
 protected class LookAhead3_0_0_1_Keyword_bar extends KeywordToken  {
 	
 	public LookAhead3_0_0_1_Keyword_bar(IInstanceDescription curr, AbstractToken pred) {
@@ -683,7 +683,7 @@ protected class LookAhead3_0_0_1_Keyword_bar extends KeywordToken  {
 }
 
 
-// x = 'b'
+// x = "b"
 protected class LookAhead3_0_1_Assignment_x extends AssignmentToken  {
 	
 	public LookAhead3_0_1_Assignment_x(IInstanceDescription curr, AbstractToken pred) {
@@ -746,12 +746,12 @@ protected class LookAhead3_1_Assignment_z extends AssignmentToken  {
 
 /************ begin Rule LookAhead4 ****************
  *
- * LookAhead4 : x = 'c' | x = 'd' ;
+ * LookAhead4 : x = "c" | x = "d" ;
  *
  **/
 
 
-// x = 'c' | x = 'd'
+// x = "c" | x = "d"
 protected class LookAhead4_Alternatives extends AlternativesToken {
 
 	public LookAhead4_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -772,7 +772,7 @@ protected class LookAhead4_Alternatives extends AlternativesToken {
 	}
 }
 
-// x = 'c'
+// x = "c"
 protected class LookAhead4_0_Assignment_x extends AssignmentToken  {
 	
 	public LookAhead4_0_Assignment_x(IInstanceDescription curr, AbstractToken pred) {
@@ -797,7 +797,7 @@ protected class LookAhead4_0_Assignment_x extends AssignmentToken  {
 	}
 }
 
-// x = 'd'
+// x = "d"
 protected class LookAhead4_1_Assignment_x extends AssignmentToken  {
 	
 	public LookAhead4_1_Assignment_x(IInstanceDescription curr, AbstractToken pred) {

@@ -6,7 +6,6 @@ package org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory;
-import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
@@ -28,17 +27,17 @@ public final class XtextTerminalsTestLanguageIDConsumer extends AbstractRuleAwar
 	}
 
 	protected boolean consumeGroup$1() {
-		final IMarker marker = mark();
+		final int marker = mark();
 		if (!consumeKeyword$3()) {
-			marker.rollback();
+			rollbackTo(marker);
 			return false;
 		}
 		if (!consumeAlternatives$4()) {
-			marker.rollback();
+			rollbackTo(marker);
 			return false;
 		}
 		if (!consumeAlternatives$13()) {
-			marker.rollback();
+			rollbackTo(marker);
 			return false;
 		}
 		return true;

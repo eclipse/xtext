@@ -18,7 +18,7 @@ RULE_INT : ('0'..'9')+;
 
 
 // $ANTLR src "../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g" 273
-RULE_STRING : ('"' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'"')|'\'')|'\\')|~(('\\'|'"')))* '"'|'\'' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'"')|'\'')|'\\')|~(('\\'|'\'')))* '\'');
+RULE_STRING : ('\"' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\'')))* '\'');
 
 
 

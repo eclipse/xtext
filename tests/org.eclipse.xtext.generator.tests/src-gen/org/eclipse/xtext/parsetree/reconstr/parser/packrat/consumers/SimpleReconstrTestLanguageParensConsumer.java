@@ -48,20 +48,25 @@ public final class SimpleReconstrTestLanguageParensConsumer extends NonTerminalC
 		final IMarker marker = mark();
 		if (!consumeKeyword$4()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeRuleCall$5()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeKeyword$6()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeAssignment$7()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 

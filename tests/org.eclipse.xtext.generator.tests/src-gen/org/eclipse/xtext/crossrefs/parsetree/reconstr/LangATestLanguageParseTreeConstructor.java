@@ -128,12 +128,12 @@ protected class Main_1_Assignment_types extends AssignmentToken  {
 
 /************ begin Rule Import ****************
  *
- * Import : 'import' uri = STRING ;
+ * Import : "import" uri = STRING ;
  *
  **/
 
 
-// 'import' uri = STRING
+// "import" uri = STRING
 protected class Import_Group extends GroupToken {
 	
 	public Import_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -161,7 +161,7 @@ protected class Import_Group extends GroupToken {
 	}
 }
 
-// 'import'
+// "import"
 protected class Import_0_Keyword_import extends KeywordToken  {
 	
 	public Import_0_Keyword_import(IInstanceDescription curr, AbstractToken pred) {
@@ -202,12 +202,12 @@ protected class Import_1_Assignment_uri extends AssignmentToken  {
 
 /************ begin Rule Type ****************
  *
- * Type : 'type' name = ID 'extends' ^extends = [ Type ] ;
+ * Type : "type" name = ID "extends" ^extends = [ Type ] ;
  *
  **/
 
 
-// 'type' name = ID 'extends' ^extends = [ Type ]
+// "type" name = ID "extends" ^extends = [ Type ]
 protected class Type_Group extends GroupToken {
 	
 	public Type_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -235,7 +235,7 @@ protected class Type_Group extends GroupToken {
 	}
 }
 
-// 'type' name = ID 'extends'
+// "type" name = ID "extends"
 protected class Type_0_Group extends GroupToken {
 	
 	public Type_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -263,7 +263,7 @@ protected class Type_0_Group extends GroupToken {
 	}
 }
 
-// 'type' name = ID
+// "type" name = ID
 protected class Type_0_0_Group extends GroupToken {
 	
 	public Type_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -291,7 +291,7 @@ protected class Type_0_0_Group extends GroupToken {
 	}
 }
 
-// 'type'
+// "type"
 protected class Type_0_0_0_Keyword_type extends KeywordToken  {
 	
 	public Type_0_0_0_Keyword_type(IInstanceDescription curr, AbstractToken pred) {
@@ -327,7 +327,7 @@ protected class Type_0_0_1_Assignment_name extends AssignmentToken  {
 }
 
 
-// 'extends'
+// "extends"
 protected class Type_0_1_Keyword_extends extends KeywordToken  {
 	
 	public Type_0_1_Keyword_extends(IInstanceDescription curr, AbstractToken pred) {

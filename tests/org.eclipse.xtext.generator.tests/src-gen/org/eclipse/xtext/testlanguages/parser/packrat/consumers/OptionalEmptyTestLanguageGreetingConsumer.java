@@ -45,12 +45,15 @@ public final class OptionalEmptyTestLanguageGreetingConsumer extends NonTerminal
 		final IMarker marker = mark();
 		if (!consumeKeyword$2()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeAssignment$3()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 

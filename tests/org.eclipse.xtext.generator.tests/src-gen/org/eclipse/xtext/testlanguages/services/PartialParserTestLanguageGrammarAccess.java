@@ -27,22 +27,22 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 		private final RuleCall c0110ParserRuleCallContent = (RuleCall)c011AssignmentContent.eContents().get(0);
 		private final Keyword c1KeywordRightCurlyBracket = (Keyword)cGroup.eContents().get(1);
 		
-		// Container : 'container' name = ID '{' ( nested += Nested | content += Content ) * '}' ;
+		// Container : "container" name = ID "{" ( nested += Nested | content += Content ) * "}" ;
 		public ParserRule getRule() { return rule; }
 
-		// 'container' name = ID '{' ( nested += Nested | content += Content ) * '}'
+		// "container" name = ID "{" ( nested += Nested | content += Content ) * "}"
 		public Group eleGroup() { return cGroup; }
 
-		// 'container' name = ID '{' ( nested += Nested | content += Content ) *
+		// "container" name = ID "{" ( nested += Nested | content += Content ) *
 		public Group ele0Group() { return c0Group; }
 
-		// 'container' name = ID '{'
+		// "container" name = ID "{"
 		public Group ele00Group() { return c00Group; }
 
-		// 'container' name = ID
+		// "container" name = ID
 		public Group ele000Group() { return c000Group; }
 
-		// 'container'
+		// "container"
 		public Keyword ele0000KeywordContainer() { return c0000KeywordContainer; }
 
 		// name = ID
@@ -51,7 +51,7 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 		// ID
 		public RuleCall ele00010LexerRuleCallID() { return c00010LexerRuleCallID; }
 
-		// '{'
+		// "{"
 		public Keyword ele001KeywordLeftCurlyBracket() { return c001KeywordLeftCurlyBracket; }
 
 		// ( nested += Nested | content += Content ) *
@@ -69,7 +69,7 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 		// Content
 		public RuleCall ele0110ParserRuleCallContent() { return c0110ParserRuleCallContent; }
 
-		// '}'
+		// "}"
 		public Keyword ele1KeywordRightCurlyBracket() { return c1KeywordRightCurlyBracket; }
 	}
 
@@ -84,22 +84,22 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 		private final RuleCall c010ParserRuleCallContainer = (RuleCall)c01AssignmentNested.eContents().get(0);
 		private final Keyword c1KeywordRightCurlyBracket = (Keyword)cGroup.eContents().get(1);
 		
-		// Nested : 'nested' '{' ( nested += Container ) + '}' ;
+		// Nested : "nested" "{" ( nested += Container ) + "}" ;
 		public ParserRule getRule() { return rule; }
 
-		// 'nested' '{' ( nested += Container ) + '}'
+		// "nested" "{" ( nested += Container ) + "}"
 		public Group eleGroup() { return cGroup; }
 
-		// 'nested' '{' ( nested += Container ) +
+		// "nested" "{" ( nested += Container ) +
 		public Group ele0Group() { return c0Group; }
 
-		// 'nested' '{'
+		// "nested" "{"
 		public Group ele00Group() { return c00Group; }
 
-		// 'nested'
+		// "nested"
 		public Keyword ele000KeywordNested() { return c000KeywordNested; }
 
-		// '{'
+		// "{"
 		public Keyword ele001KeywordLeftCurlyBracket() { return c001KeywordLeftCurlyBracket; }
 
 		// ( nested += Container ) +
@@ -108,7 +108,7 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 		// Container
 		public RuleCall ele010ParserRuleCallContainer() { return c010ParserRuleCallContainer; }
 
-		// '}'
+		// "}"
 		public Keyword ele1KeywordRightCurlyBracket() { return c1KeywordRightCurlyBracket; }
 	}
 
@@ -147,25 +147,25 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 		private final RuleCall c0110ParserRuleCallChild = (RuleCall)c011AssignmentChildren.eContents().get(0);
 		private final Keyword c1KeywordRightCurlyBracket = (Keyword)cGroup.eContents().get(1);
 		
-		// Children : 'children' '{' children += Child ( ',' children += Child ) * '}' ;
+		// Children : "children" "{" children += Child ( "," children += Child ) * "}" ;
 		public ParserRule getRule() { return rule; }
 
-		// 'children' '{' children += Child ( ',' children += Child ) * '}'
+		// "children" "{" children += Child ( "," children += Child ) * "}"
 		public Group eleGroup() { return cGroup; }
 
-		// 'children' '{' children += Child ( ',' children += Child ) *
+		// "children" "{" children += Child ( "," children += Child ) *
 		public Group ele0Group() { return c0Group; }
 
-		// 'children' '{' children += Child
+		// "children" "{" children += Child
 		public Group ele00Group() { return c00Group; }
 
-		// 'children' '{'
+		// "children" "{"
 		public Group ele000Group() { return c000Group; }
 
-		// 'children'
+		// "children"
 		public Keyword ele0000KeywordChildren() { return c0000KeywordChildren; }
 
-		// '{'
+		// "{"
 		public Keyword ele0001KeywordLeftCurlyBracket() { return c0001KeywordLeftCurlyBracket; }
 
 		// children += Child
@@ -174,10 +174,10 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 		// Child
 		public RuleCall ele0010ParserRuleCallChild() { return c0010ParserRuleCallChild; }
 
-		// ( ',' children += Child ) *
+		// ( "," children += Child ) *
 		public Group ele01Group() { return c01Group; }
 
-		// ','
+		// ","
 		public Keyword ele010KeywordComma() { return c010KeywordComma; }
 
 		// children += Child
@@ -186,7 +186,7 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 		// Child
 		public RuleCall ele0110ParserRuleCallChild() { return c0110ParserRuleCallChild; }
 
-		// '}'
+		// "}"
 		public Keyword ele1KeywordRightCurlyBracket() { return c1KeywordRightCurlyBracket; }
 	}
 
@@ -203,28 +203,28 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 		private final RuleCall c010ParserRuleCallNamed = (RuleCall)c01AssignmentValue.eContents().get(0);
 		private final Keyword c1KeywordRightParenthesis = (Keyword)cGroup.eContents().get(1);
 		
-		// Child : '->' 'C' '(' value = Named ')' ;
+		// Child : "->" "C" "(" value = Named ")" ;
 		public ParserRule getRule() { return rule; }
 
-		// '->' 'C' '(' value = Named ')'
+		// "->" "C" "(" value = Named ")"
 		public Group eleGroup() { return cGroup; }
 
-		// '->' 'C' '(' value = Named
+		// "->" "C" "(" value = Named
 		public Group ele0Group() { return c0Group; }
 
-		// '->' 'C' '('
+		// "->" "C" "("
 		public Group ele00Group() { return c00Group; }
 
-		// '->' 'C'
+		// "->" "C"
 		public Group ele000Group() { return c000Group; }
 
-		// '->'
+		// "->"
 		public Keyword ele0000KeywordHyphenMinusGreaterThanSign() { return c0000KeywordHyphenMinusGreaterThanSign; }
 
-		// 'C'
+		// "C"
 		public Keyword ele0001KeywordC() { return c0001KeywordC; }
 
-		// '('
+		// "("
 		public Keyword ele001KeywordLeftParenthesis() { return c001KeywordLeftParenthesis; }
 
 		// value = Named
@@ -233,7 +233,7 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 		// Named
 		public RuleCall ele010ParserRuleCallNamed() { return c010ParserRuleCallNamed; }
 
-		// ')'
+		// ")"
 		public Keyword ele1KeywordRightParenthesis() { return c1KeywordRightParenthesis; }
 	}
 
@@ -248,22 +248,22 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 		private final RuleCall c010ParserRuleCallAbstractChild = (RuleCall)c01AssignmentAbstractChildren.eContents().get(0);
 		private final Keyword c1KeywordRightCurlyBracket = (Keyword)cGroup.eContents().get(1);
 		
-		// AbstractChildren : 'abstract children' '{' ( abstractChildren += AbstractChild ) + '}' ;
+		// AbstractChildren : "abstract children" "{" ( abstractChildren += AbstractChild ) + "}" ;
 		public ParserRule getRule() { return rule; }
 
-		// 'abstract children' '{' ( abstractChildren += AbstractChild ) + '}'
+		// "abstract children" "{" ( abstractChildren += AbstractChild ) + "}"
 		public Group eleGroup() { return cGroup; }
 
-		// 'abstract children' '{' ( abstractChildren += AbstractChild ) +
+		// "abstract children" "{" ( abstractChildren += AbstractChild ) +
 		public Group ele0Group() { return c0Group; }
 
-		// 'abstract children' '{'
+		// "abstract children" "{"
 		public Group ele00Group() { return c00Group; }
 
-		// 'abstract children'
+		// "abstract children"
 		public Keyword ele000KeywordAbstractChildren() { return c000KeywordAbstractChildren; }
 
-		// '{'
+		// "{"
 		public Keyword ele001KeywordLeftCurlyBracket() { return c001KeywordLeftCurlyBracket; }
 
 		// ( abstractChildren += AbstractChild ) +
@@ -272,7 +272,7 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 		// AbstractChild
 		public RuleCall ele010ParserRuleCallAbstractChild() { return c010ParserRuleCallAbstractChild; }
 
-		// '}'
+		// "}"
 		public Keyword ele1KeywordRightCurlyBracket() { return c1KeywordRightCurlyBracket; }
 	}
 
@@ -311,31 +311,31 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 		private final CrossReference c010CrossReferenceEStringContainer = (CrossReference)c01AssignmentReferencedContainer.eContents().get(0);
 		private final Keyword c1KeywordRightParenthesis = (Keyword)cGroup.eContents().get(1);
 		
-		// FirstConcrete : '->' 'F' '(' value = Named ( referencedContainer = [ Container ] ) ? ')' ;
+		// FirstConcrete : "->" "F" "(" value = Named ( referencedContainer = [ Container ] ) ? ")" ;
 		public ParserRule getRule() { return rule; }
 
-		// '->' 'F' '(' value = Named ( referencedContainer = [ Container ] ) ? ')'
+		// "->" "F" "(" value = Named ( referencedContainer = [ Container ] ) ? ")"
 		public Group eleGroup() { return cGroup; }
 
-		// '->' 'F' '(' value = Named ( referencedContainer = [ Container ] ) ?
+		// "->" "F" "(" value = Named ( referencedContainer = [ Container ] ) ?
 		public Group ele0Group() { return c0Group; }
 
-		// '->' 'F' '(' value = Named
+		// "->" "F" "(" value = Named
 		public Group ele00Group() { return c00Group; }
 
-		// '->' 'F' '('
+		// "->" "F" "("
 		public Group ele000Group() { return c000Group; }
 
-		// '->' 'F'
+		// "->" "F"
 		public Group ele0000Group() { return c0000Group; }
 
-		// '->'
+		// "->"
 		public Keyword ele00000KeywordHyphenMinusGreaterThanSign() { return c00000KeywordHyphenMinusGreaterThanSign; }
 
-		// 'F'
+		// "F"
 		public Keyword ele00001KeywordF() { return c00001KeywordF; }
 
-		// '('
+		// "("
 		public Keyword ele0001KeywordLeftParenthesis() { return c0001KeywordLeftParenthesis; }
 
 		// value = Named
@@ -350,7 +350,7 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 		// [ Container ]
 		public CrossReference ele010CrossReferenceEStringContainer() { return c010CrossReferenceEStringContainer; }
 
-		// ')'
+		// ")"
 		public Keyword ele1KeywordRightParenthesis() { return c1KeywordRightParenthesis; }
 	}
 
@@ -372,37 +372,37 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 		private final CrossReference c010CrossReferenceEStringChild = (CrossReference)c01AssignmentReferencedChildren.eContents().get(0);
 		private final Keyword c1KeywordRightParenthesis = (Keyword)cGroup.eContents().get(1);
 		
-		// SecondConcrete : '->' 'F' 'S' '(' value = Named ( referencedChildren += [ Child ] ) ? ')' ;
+		// SecondConcrete : "->" "F" "S" "(" value = Named ( referencedChildren += [ Child ] ) ? ")" ;
 		public ParserRule getRule() { return rule; }
 
-		// '->' 'F' 'S' '(' value = Named ( referencedChildren += [ Child ] ) ? ')'
+		// "->" "F" "S" "(" value = Named ( referencedChildren += [ Child ] ) ? ")"
 		public Group eleGroup() { return cGroup; }
 
-		// '->' 'F' 'S' '(' value = Named ( referencedChildren += [ Child ] ) ?
+		// "->" "F" "S" "(" value = Named ( referencedChildren += [ Child ] ) ?
 		public Group ele0Group() { return c0Group; }
 
-		// '->' 'F' 'S' '(' value = Named
+		// "->" "F" "S" "(" value = Named
 		public Group ele00Group() { return c00Group; }
 
-		// '->' 'F' 'S' '('
+		// "->" "F" "S" "("
 		public Group ele000Group() { return c000Group; }
 
-		// '->' 'F' 'S'
+		// "->" "F" "S"
 		public Group ele0000Group() { return c0000Group; }
 
-		// '->' 'F'
+		// "->" "F"
 		public Group ele00000Group() { return c00000Group; }
 
-		// '->'
+		// "->"
 		public Keyword ele000000KeywordHyphenMinusGreaterThanSign() { return c000000KeywordHyphenMinusGreaterThanSign; }
 
-		// 'F'
+		// "F"
 		public Keyword ele000001KeywordF() { return c000001KeywordF; }
 
-		// 'S'
+		// "S"
 		public Keyword ele00001KeywordS() { return c00001KeywordS; }
 
-		// '('
+		// "("
 		public Keyword ele0001KeywordLeftParenthesis() { return c0001KeywordLeftParenthesis; }
 
 		// value = Named
@@ -417,7 +417,7 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 		// [ Child ]
 		public CrossReference ele010CrossReferenceEStringChild() { return c010CrossReferenceEStringChild; }
 
-		// ')'
+		// ")"
 		public Keyword ele1KeywordRightParenthesis() { return c1KeywordRightParenthesis; }
 	}
 
@@ -466,12 +466,12 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 	}
 
 	
-	// Container : 'container' name = ID '{' ( nested += Nested | content += Content ) * '}' ;
+	// Container : "container" name = ID "{" ( nested += Nested | content += Content ) * "}" ;
 	public ContainerElements prContainer() {
 		return (pContainer != null) ? pContainer : (pContainer = new ContainerElements());
 	} 
 
-	// Nested : 'nested' '{' ( nested += Container ) + '}' ;
+	// Nested : "nested" "{" ( nested += Container ) + "}" ;
 	public NestedElements prNested() {
 		return (pNested != null) ? pNested : (pNested = new NestedElements());
 	} 
@@ -481,17 +481,17 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 		return (pContent != null) ? pContent : (pContent = new ContentElements());
 	} 
 
-	// Children : 'children' '{' children += Child ( ',' children += Child ) * '}' ;
+	// Children : "children" "{" children += Child ( "," children += Child ) * "}" ;
 	public ChildrenElements prChildren() {
 		return (pChildren != null) ? pChildren : (pChildren = new ChildrenElements());
 	} 
 
-	// Child : '->' 'C' '(' value = Named ')' ;
+	// Child : "->" "C" "(" value = Named ")" ;
 	public ChildElements prChild() {
 		return (pChild != null) ? pChild : (pChild = new ChildElements());
 	} 
 
-	// AbstractChildren : 'abstract children' '{' ( abstractChildren += AbstractChild ) + '}' ;
+	// AbstractChildren : "abstract children" "{" ( abstractChildren += AbstractChild ) + "}" ;
 	public AbstractChildrenElements prAbstractChildren() {
 		return (pAbstractChildren != null) ? pAbstractChildren : (pAbstractChildren = new AbstractChildrenElements());
 	} 
@@ -501,12 +501,12 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 		return (pAbstractChild != null) ? pAbstractChild : (pAbstractChild = new AbstractChildElements());
 	} 
 
-	// FirstConcrete : '->' 'F' '(' value = Named ( referencedContainer = [ Container ] ) ? ')' ;
+	// FirstConcrete : "->" "F" "(" value = Named ( referencedContainer = [ Container ] ) ? ")" ;
 	public FirstConcreteElements prFirstConcrete() {
 		return (pFirstConcrete != null) ? pFirstConcrete : (pFirstConcrete = new FirstConcreteElements());
 	} 
 
-	// SecondConcrete : '->' 'F' 'S' '(' value = Named ( referencedChildren += [ Child ] ) ? ')' ;
+	// SecondConcrete : "->" "F" "S" "(" value = Named ( referencedChildren += [ Child ] ) ? ")" ;
 	public SecondConcreteElements prSecondConcrete() {
 		return (pSecondConcrete != null) ? pSecondConcrete : (pSecondConcrete = new SecondConcreteElements());
 	} 

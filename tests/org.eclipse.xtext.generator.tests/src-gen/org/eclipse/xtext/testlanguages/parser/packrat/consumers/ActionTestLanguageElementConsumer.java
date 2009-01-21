@@ -39,16 +39,20 @@ public final class ActionTestLanguageElementConsumer extends NonTerminalConsumer
 		final IMarker marker = mark();
 		if (!consumeRuleCall$2()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeAction$4()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeAssignment$6()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 

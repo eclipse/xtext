@@ -45,16 +45,20 @@ public final class SimpleExpressionsTestLanguageParensConsumer extends NonTermin
 		final IMarker marker = mark();
 		if (!consumeKeyword$3()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeRuleCall$4()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeKeyword$5()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 

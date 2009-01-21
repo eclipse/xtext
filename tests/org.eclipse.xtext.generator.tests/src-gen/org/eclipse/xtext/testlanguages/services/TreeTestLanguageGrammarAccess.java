@@ -44,25 +44,25 @@ public class TreeTestLanguageGrammarAccess extends BaseEPackageAccess implements
 		private final RuleCall c010ParserRuleCallNode = (RuleCall)c01AssignmentChildren.eContents().get(0);
 		private final Keyword c1KeywordRightCurlyBracketSemicolon = (Keyword)cGroup.eContents().get(1);
 		
-		// Node : name = ID '(' attrib = STRING ')' '{' ( children += Node ) * '};' ;
+		// Node : name = ID "(" attrib = STRING ")" "{" ( children += Node ) * "};" ;
 		public ParserRule getRule() { return rule; }
 
-		// name = ID '(' attrib = STRING ')' '{' ( children += Node ) * '};'
+		// name = ID "(" attrib = STRING ")" "{" ( children += Node ) * "};"
 		public Group eleGroup() { return cGroup; }
 
-		// name = ID '(' attrib = STRING ')' '{' ( children += Node ) *
+		// name = ID "(" attrib = STRING ")" "{" ( children += Node ) *
 		public Group ele0Group() { return c0Group; }
 
-		// name = ID '(' attrib = STRING ')' '{'
+		// name = ID "(" attrib = STRING ")" "{"
 		public Group ele00Group() { return c00Group; }
 
-		// name = ID '(' attrib = STRING ')'
+		// name = ID "(" attrib = STRING ")"
 		public Group ele000Group() { return c000Group; }
 
-		// name = ID '(' attrib = STRING
+		// name = ID "(" attrib = STRING
 		public Group ele0000Group() { return c0000Group; }
 
-		// name = ID '('
+		// name = ID "("
 		public Group ele00000Group() { return c00000Group; }
 
 		// name = ID
@@ -71,7 +71,7 @@ public class TreeTestLanguageGrammarAccess extends BaseEPackageAccess implements
 		// ID
 		public RuleCall ele0000000LexerRuleCallID() { return c0000000LexerRuleCallID; }
 
-		// '('
+		// "("
 		public Keyword ele000001KeywordLeftParenthesis() { return c000001KeywordLeftParenthesis; }
 
 		// attrib = STRING
@@ -80,10 +80,10 @@ public class TreeTestLanguageGrammarAccess extends BaseEPackageAccess implements
 		// STRING
 		public RuleCall ele000010LexerRuleCallSTRING() { return c000010LexerRuleCallSTRING; }
 
-		// ')'
+		// ")"
 		public Keyword ele0001KeywordRightParenthesis() { return c0001KeywordRightParenthesis; }
 
-		// '{'
+		// "{"
 		public Keyword ele001KeywordLeftCurlyBracket() { return c001KeywordLeftCurlyBracket; }
 
 		// ( children += Node ) *
@@ -92,7 +92,7 @@ public class TreeTestLanguageGrammarAccess extends BaseEPackageAccess implements
 		// Node
 		public RuleCall ele010ParserRuleCallNode() { return c010ParserRuleCallNode; }
 
-		// '};'
+		// "};"
 		public Keyword ele1KeywordRightCurlyBracketSemicolon() { return c1KeywordRightCurlyBracketSemicolon; }
 	}
 	
@@ -123,7 +123,7 @@ public class TreeTestLanguageGrammarAccess extends BaseEPackageAccess implements
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	} 
 
-	// Node : name = ID '(' attrib = STRING ')' '{' ( children += Node ) * '};' ;
+	// Node : name = ID "(" attrib = STRING ")" "{" ( children += Node ) * "};" ;
 	public NodeElements prNode() {
 		return (pNode != null) ? pNode : (pNode = new NodeElements());
 	} 

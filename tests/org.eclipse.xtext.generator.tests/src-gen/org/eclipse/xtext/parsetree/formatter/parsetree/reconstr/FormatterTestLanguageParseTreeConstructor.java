@@ -28,12 +28,12 @@ public class FormatterTestLanguageParseTreeConstructor extends AbstractParseTree
 
 /************ begin Rule Root ****************
  *
- * Root : 'test' ( TestLinewrap | TestIndentation ) ;
+ * Root : "test" ( TestLinewrap | TestIndentation ) ;
  *
  **/
 
 
-// 'test' ( TestLinewrap | TestIndentation )
+// "test" ( TestLinewrap | TestIndentation )
 protected class Root_Group extends GroupToken {
 	
 	public Root_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -61,7 +61,7 @@ protected class Root_Group extends GroupToken {
 	}
 }
 
-// 'test'
+// "test"
 protected class Root_0_Keyword_test extends KeywordToken  {
 	
 	public Root_0_Keyword_test(IInstanceDescription curr, AbstractToken pred) {
@@ -137,12 +137,12 @@ protected class Root_1_1_RuleCall_TestIndentation extends RuleCallToken {
 
 /************ begin Rule Line ****************
  *
- * Line : type += ID name += ID ';' ;
+ * Line : type += ID name += ID ";" ;
  *
  **/
 
 
-// type += ID name += ID ';'
+// type += ID name += ID ";"
 protected class Line_Group extends GroupToken {
 	
 	public Line_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -245,7 +245,7 @@ protected class Line_0_1_Assignment_name extends AssignmentToken  {
 }
 
 
-// ';'
+// ";"
 protected class Line_1_Keyword extends KeywordToken  {
 	
 	public Line_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -263,12 +263,12 @@ protected class Line_1_Keyword extends KeywordToken  {
 
 /************ begin Rule TestLinewrap ****************
  *
- * TestLinewrap : 'linewrap' ( items += Line ) * ;
+ * TestLinewrap : "linewrap" ( items += Line ) * ;
  *
  **/
 
 
-// 'linewrap' ( items += Line ) *
+// "linewrap" ( items += Line ) *
 protected class TestLinewrap_Group extends GroupToken {
 	
 	public TestLinewrap_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -296,7 +296,7 @@ protected class TestLinewrap_Group extends GroupToken {
 	}
 }
 
-// 'linewrap'
+// "linewrap"
 protected class TestLinewrap_0_Keyword_linewrap extends KeywordToken  {
 	
 	public TestLinewrap_0_Keyword_linewrap(IInstanceDescription curr, AbstractToken pred) {
@@ -345,12 +345,12 @@ protected class TestLinewrap_1_Assignment_items extends AssignmentToken  {
 
 /************ begin Rule TestIndentation ****************
  *
- * TestIndentation : 'indentation' '{' ( sub += TestIndentation | items += Line ) * '}' ;
+ * TestIndentation : "indentation" "{" ( sub += TestIndentation | items += Line ) * "}" ;
  *
  **/
 
 
-// 'indentation' '{' ( sub += TestIndentation | items += Line ) * '}'
+// "indentation" "{" ( sub += TestIndentation | items += Line ) * "}"
 protected class TestIndentation_Group extends GroupToken {
 	
 	public TestIndentation_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -378,7 +378,7 @@ protected class TestIndentation_Group extends GroupToken {
 	}
 }
 
-// 'indentation' '{' ( sub += TestIndentation | items += Line ) *
+// "indentation" "{" ( sub += TestIndentation | items += Line ) *
 protected class TestIndentation_0_Group extends GroupToken {
 	
 	public TestIndentation_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -406,7 +406,7 @@ protected class TestIndentation_0_Group extends GroupToken {
 	}
 }
 
-// 'indentation' '{'
+// "indentation" "{"
 protected class TestIndentation_0_0_Group extends GroupToken {
 	
 	public TestIndentation_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -434,7 +434,7 @@ protected class TestIndentation_0_0_Group extends GroupToken {
 	}
 }
 
-// 'indentation'
+// "indentation"
 protected class TestIndentation_0_0_0_Keyword_indentation extends KeywordToken  {
 	
 	public TestIndentation_0_0_0_Keyword_indentation(IInstanceDescription curr, AbstractToken pred) {
@@ -446,7 +446,7 @@ protected class TestIndentation_0_0_0_Keyword_indentation extends KeywordToken  
 	}	
 }
 
-// '{'
+// "{"
 protected class TestIndentation_0_0_1_Keyword extends KeywordToken  {
 	
 	public TestIndentation_0_0_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -544,7 +544,7 @@ protected class TestIndentation_0_1_1_Assignment_items extends AssignmentToken  
 
 
 
-// '}'
+// "}"
 protected class TestIndentation_1_Keyword extends KeywordToken  {
 	
 	public TestIndentation_1_Keyword(IInstanceDescription curr, AbstractToken pred) {

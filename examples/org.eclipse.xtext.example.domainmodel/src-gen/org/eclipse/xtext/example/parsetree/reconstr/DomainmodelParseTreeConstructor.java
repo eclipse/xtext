@@ -140,12 +140,12 @@ protected class File_1_Assignment_namedElements extends AssignmentToken  {
 
 /************ begin Rule Import ****************
  *
- * Import : 'import' importURI = STRING ;
+ * Import : "import" importURI = STRING ;
  *
  **/
 
 
-// 'import' importURI = STRING
+// "import" importURI = STRING
 protected class Import_Group extends GroupToken {
 	
 	public Import_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -173,7 +173,7 @@ protected class Import_Group extends GroupToken {
 	}
 }
 
-// 'import'
+// "import"
 protected class Import_0_Keyword_import extends KeywordToken  {
 	
 	public Import_0_Keyword_import(IInstanceDescription curr, AbstractToken pred) {
@@ -282,12 +282,12 @@ protected class NamedElement_1_RuleCall_Type extends RuleCallToken {
 
 /************ begin Rule Package ****************
  *
- * Package : 'package' name = QualifiedName '{' ( namedElements += NamedElement ) * '}' ;
+ * Package : "package" name = QualifiedName "{" ( namedElements += NamedElement ) * "}" ;
  *
  **/
 
 
-// 'package' name = QualifiedName '{' ( namedElements += NamedElement ) * '}'
+// "package" name = QualifiedName "{" ( namedElements += NamedElement ) * "}"
 protected class Package_Group extends GroupToken {
 	
 	public Package_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -315,7 +315,7 @@ protected class Package_Group extends GroupToken {
 	}
 }
 
-// 'package' name = QualifiedName '{' ( namedElements += NamedElement ) *
+// "package" name = QualifiedName "{" ( namedElements += NamedElement ) *
 protected class Package_0_Group extends GroupToken {
 	
 	public Package_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -343,7 +343,7 @@ protected class Package_0_Group extends GroupToken {
 	}
 }
 
-// 'package' name = QualifiedName '{'
+// "package" name = QualifiedName "{"
 protected class Package_0_0_Group extends GroupToken {
 	
 	public Package_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -371,7 +371,7 @@ protected class Package_0_0_Group extends GroupToken {
 	}
 }
 
-// 'package' name = QualifiedName
+// "package" name = QualifiedName
 protected class Package_0_0_0_Group extends GroupToken {
 	
 	public Package_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -399,7 +399,7 @@ protected class Package_0_0_0_Group extends GroupToken {
 	}
 }
 
-// 'package'
+// "package"
 protected class Package_0_0_0_0_Keyword_package extends KeywordToken  {
 	
 	public Package_0_0_0_0_Keyword_package(IInstanceDescription curr, AbstractToken pred) {
@@ -437,7 +437,7 @@ protected class Package_0_0_0_1_Assignment_name extends AssignmentToken  {
 }
 
 
-// '{'
+// "{"
 protected class Package_0_0_1_Keyword extends KeywordToken  {
 	
 	public Package_0_0_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -482,7 +482,7 @@ protected class Package_0_1_Assignment_namedElements extends AssignmentToken  {
 }
 
 
-// '}'
+// "}"
 protected class Package_1_Keyword extends KeywordToken  {
 	
 	public Package_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -568,12 +568,12 @@ protected class Type_1_RuleCall_DataType extends RuleCallToken {
 
 /************ begin Rule DataType ****************
  *
- * DataType : 'datatype' name = ID ;
+ * DataType : "datatype" name = ID ;
  *
  **/
 
 
-// 'datatype' name = ID
+// "datatype" name = ID
 protected class DataType_Group extends GroupToken {
 	
 	public DataType_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -601,7 +601,7 @@ protected class DataType_Group extends GroupToken {
 	}
 }
 
-// 'datatype'
+// "datatype"
 protected class DataType_0_Keyword_datatype extends KeywordToken  {
 	
 	public DataType_0_Keyword_datatype(IInstanceDescription curr, AbstractToken pred) {
@@ -642,12 +642,12 @@ protected class DataType_1_Assignment_name extends AssignmentToken  {
 
 /************ begin Rule Entity ****************
  *
- * Entity : 'entity' name = ID ( 'extends' superType = [ Entity ] ) ? '{' ( features += Feature ) * '}' ;
+ * Entity : "entity" name = ID ( "extends" superType = [ Entity ] ) ? "{" ( features += Feature ) * "}" ;
  *
  **/
 
 
-// 'entity' name = ID ( 'extends' superType = [ Entity ] ) ? '{' ( features += Feature ) * '}'
+// "entity" name = ID ( "extends" superType = [ Entity ] ) ? "{" ( features += Feature ) * "}"
 protected class Entity_Group extends GroupToken {
 	
 	public Entity_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -675,7 +675,7 @@ protected class Entity_Group extends GroupToken {
 	}
 }
 
-// 'entity' name = ID ( 'extends' superType = [ Entity ] ) ? '{' ( features += Feature ) *
+// "entity" name = ID ( "extends" superType = [ Entity ] ) ? "{" ( features += Feature ) *
 protected class Entity_0_Group extends GroupToken {
 	
 	public Entity_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -703,7 +703,7 @@ protected class Entity_0_Group extends GroupToken {
 	}
 }
 
-// 'entity' name = ID ( 'extends' superType = [ Entity ] ) ? '{'
+// "entity" name = ID ( "extends" superType = [ Entity ] ) ? "{"
 protected class Entity_0_0_Group extends GroupToken {
 	
 	public Entity_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -731,7 +731,7 @@ protected class Entity_0_0_Group extends GroupToken {
 	}
 }
 
-// 'entity' name = ID ( 'extends' superType = [ Entity ] ) ?
+// "entity" name = ID ( "extends" superType = [ Entity ] ) ?
 protected class Entity_0_0_0_Group extends GroupToken {
 	
 	public Entity_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -759,7 +759,7 @@ protected class Entity_0_0_0_Group extends GroupToken {
 	}
 }
 
-// 'entity' name = ID
+// "entity" name = ID
 protected class Entity_0_0_0_0_Group extends GroupToken {
 	
 	public Entity_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -787,7 +787,7 @@ protected class Entity_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// 'entity'
+// "entity"
 protected class Entity_0_0_0_0_0_Keyword_entity extends KeywordToken  {
 	
 	public Entity_0_0_0_0_0_Keyword_entity(IInstanceDescription curr, AbstractToken pred) {
@@ -823,7 +823,7 @@ protected class Entity_0_0_0_0_1_Assignment_name extends AssignmentToken  {
 }
 
 
-// ( 'extends' superType = [ Entity ] ) ?
+// ( "extends" superType = [ Entity ] ) ?
 protected class Entity_0_0_0_1_Group extends GroupToken {
 	
 	public Entity_0_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -851,7 +851,7 @@ protected class Entity_0_0_0_1_Group extends GroupToken {
 	}
 }
 
-// 'extends'
+// "extends"
 protected class Entity_0_0_0_1_0_Keyword_extends extends KeywordToken  {
 	
 	public Entity_0_0_0_1_0_Keyword_extends(IInstanceDescription curr, AbstractToken pred) {
@@ -891,7 +891,7 @@ protected class Entity_0_0_0_1_1_Assignment_superType extends AssignmentToken  {
 
 
 
-// '{'
+// "{"
 protected class Entity_0_0_1_Keyword extends KeywordToken  {
 	
 	public Entity_0_0_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -936,7 +936,7 @@ protected class Entity_0_1_Assignment_features extends AssignmentToken  {
 }
 
 
-// '}'
+// "}"
 protected class Entity_1_Keyword extends KeywordToken  {
 	
 	public Entity_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -1090,12 +1090,12 @@ protected class StructuralFeature_1_RuleCall_Reference extends RuleCallToken {
 
 /************ begin Rule Attribute ****************
  *
- * Attribute : 'attr' name = ID ':' type = TypeRef ;
+ * Attribute : "attr" name = ID ":" type = TypeRef ;
  *
  **/
 
 
-// 'attr' name = ID ':' type = TypeRef
+// "attr" name = ID ":" type = TypeRef
 protected class Attribute_Group extends GroupToken {
 	
 	public Attribute_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1123,7 +1123,7 @@ protected class Attribute_Group extends GroupToken {
 	}
 }
 
-// 'attr' name = ID ':'
+// "attr" name = ID ":"
 protected class Attribute_0_Group extends GroupToken {
 	
 	public Attribute_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1151,7 +1151,7 @@ protected class Attribute_0_Group extends GroupToken {
 	}
 }
 
-// 'attr' name = ID
+// "attr" name = ID
 protected class Attribute_0_0_Group extends GroupToken {
 	
 	public Attribute_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1179,7 +1179,7 @@ protected class Attribute_0_0_Group extends GroupToken {
 	}
 }
 
-// 'attr'
+// "attr"
 protected class Attribute_0_0_0_Keyword_attr extends KeywordToken  {
 	
 	public Attribute_0_0_0_Keyword_attr(IInstanceDescription curr, AbstractToken pred) {
@@ -1215,7 +1215,7 @@ protected class Attribute_0_0_1_Assignment_name extends AssignmentToken  {
 }
 
 
-// ':'
+// ":"
 protected class Attribute_0_1_Keyword extends KeywordToken  {
 	
 	public Attribute_0_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -1265,12 +1265,12 @@ protected class Attribute_1_Assignment_type extends AssignmentToken  {
 
 /************ begin Rule Reference ****************
  *
- * Reference : 'ref' name = ID ':' type = TypeRef ( 'opposite' opposite = [ Reference ] ) ? ;
+ * Reference : "ref" name = ID ":" type = TypeRef ( "opposite" opposite = [ Reference ] ) ? ;
  *
  **/
 
 
-// 'ref' name = ID ':' type = TypeRef ( 'opposite' opposite = [ Reference ] ) ?
+// "ref" name = ID ":" type = TypeRef ( "opposite" opposite = [ Reference ] ) ?
 protected class Reference_Group extends GroupToken {
 	
 	public Reference_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1298,7 +1298,7 @@ protected class Reference_Group extends GroupToken {
 	}
 }
 
-// 'ref' name = ID ':' type = TypeRef
+// "ref" name = ID ":" type = TypeRef
 protected class Reference_0_Group extends GroupToken {
 	
 	public Reference_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1326,7 +1326,7 @@ protected class Reference_0_Group extends GroupToken {
 	}
 }
 
-// 'ref' name = ID ':'
+// "ref" name = ID ":"
 protected class Reference_0_0_Group extends GroupToken {
 	
 	public Reference_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1354,7 +1354,7 @@ protected class Reference_0_0_Group extends GroupToken {
 	}
 }
 
-// 'ref' name = ID
+// "ref" name = ID
 protected class Reference_0_0_0_Group extends GroupToken {
 	
 	public Reference_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1382,7 +1382,7 @@ protected class Reference_0_0_0_Group extends GroupToken {
 	}
 }
 
-// 'ref'
+// "ref"
 protected class Reference_0_0_0_0_Keyword_ref extends KeywordToken  {
 	
 	public Reference_0_0_0_0_Keyword_ref(IInstanceDescription curr, AbstractToken pred) {
@@ -1418,7 +1418,7 @@ protected class Reference_0_0_0_1_Assignment_name extends AssignmentToken  {
 }
 
 
-// ':'
+// ":"
 protected class Reference_0_0_1_Keyword extends KeywordToken  {
 	
 	public Reference_0_0_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -1463,7 +1463,7 @@ protected class Reference_0_1_Assignment_type extends AssignmentToken  {
 }
 
 
-// ( 'opposite' opposite = [ Reference ] ) ?
+// ( "opposite" opposite = [ Reference ] ) ?
 protected class Reference_1_Group extends GroupToken {
 	
 	public Reference_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1491,7 +1491,7 @@ protected class Reference_1_Group extends GroupToken {
 	}
 }
 
-// 'opposite'
+// "opposite"
 protected class Reference_1_0_Keyword_opposite extends KeywordToken  {
 	
 	public Reference_1_0_Keyword_opposite(IInstanceDescription curr, AbstractToken pred) {
@@ -1536,12 +1536,12 @@ protected class Reference_1_1_Assignment_opposite extends AssignmentToken  {
 
 /************ begin Rule Operation ****************
  *
- * Operation : 'op' name = ID '(' ( params += Parameter ( ',' params += Parameter ) * ) ? ')' ':' type = TypeRef ;
+ * Operation : "op" name = ID "(" ( params += Parameter ( "," params += Parameter ) * ) ? ")" ":" type = TypeRef ;
  *
  **/
 
 
-// 'op' name = ID '(' ( params += Parameter ( ',' params += Parameter ) * ) ? ')' ':' type = TypeRef
+// "op" name = ID "(" ( params += Parameter ( "," params += Parameter ) * ) ? ")" ":" type = TypeRef
 protected class Operation_Group extends GroupToken {
 	
 	public Operation_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1569,7 +1569,7 @@ protected class Operation_Group extends GroupToken {
 	}
 }
 
-// 'op' name = ID '(' ( params += Parameter ( ',' params += Parameter ) * ) ? ')' ':'
+// "op" name = ID "(" ( params += Parameter ( "," params += Parameter ) * ) ? ")" ":"
 protected class Operation_0_Group extends GroupToken {
 	
 	public Operation_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1597,7 +1597,7 @@ protected class Operation_0_Group extends GroupToken {
 	}
 }
 
-// 'op' name = ID '(' ( params += Parameter ( ',' params += Parameter ) * ) ? ')'
+// "op" name = ID "(" ( params += Parameter ( "," params += Parameter ) * ) ? ")"
 protected class Operation_0_0_Group extends GroupToken {
 	
 	public Operation_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1625,7 +1625,7 @@ protected class Operation_0_0_Group extends GroupToken {
 	}
 }
 
-// 'op' name = ID '(' ( params += Parameter ( ',' params += Parameter ) * ) ?
+// "op" name = ID "(" ( params += Parameter ( "," params += Parameter ) * ) ?
 protected class Operation_0_0_0_Group extends GroupToken {
 	
 	public Operation_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1653,7 +1653,7 @@ protected class Operation_0_0_0_Group extends GroupToken {
 	}
 }
 
-// 'op' name = ID '('
+// "op" name = ID "("
 protected class Operation_0_0_0_0_Group extends GroupToken {
 	
 	public Operation_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1681,7 +1681,7 @@ protected class Operation_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// 'op' name = ID
+// "op" name = ID
 protected class Operation_0_0_0_0_0_Group extends GroupToken {
 	
 	public Operation_0_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1709,7 +1709,7 @@ protected class Operation_0_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// 'op'
+// "op"
 protected class Operation_0_0_0_0_0_0_Keyword_op extends KeywordToken  {
 	
 	public Operation_0_0_0_0_0_0_Keyword_op(IInstanceDescription curr, AbstractToken pred) {
@@ -1745,7 +1745,7 @@ protected class Operation_0_0_0_0_0_1_Assignment_name extends AssignmentToken  {
 }
 
 
-// '('
+// "("
 protected class Operation_0_0_0_0_1_Keyword extends KeywordToken  {
 	
 	public Operation_0_0_0_0_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -1758,7 +1758,7 @@ protected class Operation_0_0_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-// ( params += Parameter ( ',' params += Parameter ) * ) ?
+// ( params += Parameter ( "," params += Parameter ) * ) ?
 protected class Operation_0_0_0_1_Group extends GroupToken {
 	
 	public Operation_0_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1817,7 +1817,7 @@ protected class Operation_0_0_0_1_0_Assignment_params extends AssignmentToken  {
 	}
 }
 
-// ( ',' params += Parameter ) *
+// ( "," params += Parameter ) *
 protected class Operation_0_0_0_1_1_Group extends GroupToken {
 	
 	public Operation_0_0_0_1_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1845,7 +1845,7 @@ protected class Operation_0_0_0_1_1_Group extends GroupToken {
 	}
 }
 
-// ','
+// ","
 protected class Operation_0_0_0_1_1_0_Keyword extends KeywordToken  {
 	
 	public Operation_0_0_0_1_1_0_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -1891,7 +1891,7 @@ protected class Operation_0_0_0_1_1_1_Assignment_params extends AssignmentToken 
 
 
 
-// ')'
+// ")"
 protected class Operation_0_0_1_Keyword extends KeywordToken  {
 	
 	public Operation_0_0_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -1904,7 +1904,7 @@ protected class Operation_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-// ':'
+// ":"
 protected class Operation_0_1_Keyword extends KeywordToken  {
 	
 	public Operation_0_1_Keyword(IInstanceDescription curr, AbstractToken pred) {

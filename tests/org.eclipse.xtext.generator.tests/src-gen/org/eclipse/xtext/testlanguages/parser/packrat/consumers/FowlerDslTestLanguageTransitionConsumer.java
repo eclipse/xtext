@@ -48,16 +48,20 @@ public final class FowlerDslTestLanguageTransitionConsumer extends NonTerminalCo
 		final IMarker marker = mark();
 		if (!consumeAssignment$3()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeKeyword$6()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeAssignment$7()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 

@@ -67,12 +67,12 @@ protected class Model_Assignment_child extends AssignmentToken  {
 
 /************ begin Rule Greeting ****************
  *
- * Greeting : 'hallo' name = ID ;
+ * Greeting : "hallo" name = ID ;
  *
  **/
 
 
-// 'hallo' name = ID
+// "hallo" name = ID
 protected class Greeting_Group extends GroupToken {
 	
 	public Greeting_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -100,7 +100,7 @@ protected class Greeting_Group extends GroupToken {
 	}
 }
 
-// 'hallo'
+// "hallo"
 protected class Greeting_0_Keyword_hallo extends KeywordToken  {
 	
 	public Greeting_0_Keyword_hallo(IInstanceDescription curr, AbstractToken pred) {

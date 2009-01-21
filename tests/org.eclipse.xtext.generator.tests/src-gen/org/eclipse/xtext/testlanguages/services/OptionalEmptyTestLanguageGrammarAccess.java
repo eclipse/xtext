@@ -32,13 +32,13 @@ public class OptionalEmptyTestLanguageGrammarAccess extends BaseEPackageAccess i
 		private final Assignment c1AssignmentName = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall c10LexerRuleCallID = (RuleCall)c1AssignmentName.eContents().get(0);
 		
-		// Greeting : 'hallo' name = ID ;
+		// Greeting : "hallo" name = ID ;
 		public ParserRule getRule() { return rule; }
 
-		// 'hallo' name = ID
+		// "hallo" name = ID
 		public Group eleGroup() { return cGroup; }
 
-		// 'hallo'
+		// "hallo"
 		public Keyword ele0KeywordHallo() { return c0KeywordHallo; }
 
 		// name = ID
@@ -75,7 +75,7 @@ public class OptionalEmptyTestLanguageGrammarAccess extends BaseEPackageAccess i
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	} 
 
-	// Greeting : 'hallo' name = ID ;
+	// Greeting : "hallo" name = ID ;
 	public GreetingElements prGreeting() {
 		return (pGreeting != null) ? pGreeting : (pGreeting = new GreetingElements());
 	} 

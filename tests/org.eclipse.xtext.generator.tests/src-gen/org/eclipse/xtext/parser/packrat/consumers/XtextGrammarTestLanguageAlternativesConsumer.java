@@ -42,12 +42,15 @@ public final class XtextGrammarTestLanguageAlternativesConsumer extends NonTermi
 		final IMarker marker = mark();
 		if (!consumeRuleCall$2()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeGroup$3()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 
@@ -64,16 +67,20 @@ public final class XtextGrammarTestLanguageAlternativesConsumer extends NonTermi
 		final IMarker marker = mark();
 		if (!consumeAction$5()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeKeyword$7()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeAssignment$8()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 	protected boolean consumeAction$5() {

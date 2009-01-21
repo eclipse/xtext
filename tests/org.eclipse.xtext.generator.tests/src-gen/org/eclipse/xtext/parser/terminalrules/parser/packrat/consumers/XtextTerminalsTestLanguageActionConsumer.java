@@ -68,36 +68,45 @@ public final class XtextTerminalsTestLanguageActionConsumer extends NonTerminalC
 		final IMarker marker = mark();
 		if (!consumeKeyword$8()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeGroup$9()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeAssignment$12()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeKeyword$14()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeAssignment$15()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeAssignment$17()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeKeyword$21()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeKeyword$22()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 
@@ -114,12 +123,15 @@ public final class XtextTerminalsTestLanguageActionConsumer extends NonTerminalC
 		final IMarker marker = mark();
 		if (!consumeKeyword$10()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeKeyword$11()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 

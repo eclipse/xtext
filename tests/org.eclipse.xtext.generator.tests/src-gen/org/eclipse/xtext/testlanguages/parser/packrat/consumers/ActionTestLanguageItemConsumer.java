@@ -42,12 +42,15 @@ public final class ActionTestLanguageItemConsumer extends NonTerminalConsumer {
 		final IMarker marker = mark();
 		if (!consumeAction$2()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeAssignment$4()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 	protected boolean consumeAction$2() {

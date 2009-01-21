@@ -21,25 +21,25 @@ public class Bug250313GrammarAccess extends BaseEPackageAccess implements IGramm
 		private final RuleCall c1001LexerRuleCallSTRING = (RuleCall)c100Alternatives.eContents().get(1);
 		private final RuleCall c101LexerRuleCallID = (RuleCall)c10Alternatives.eContents().get(1);
 		
-		// Ref2 : '#2' ref2 = ( 'mykeyword1' | STRING | ID ) ;
+		// Ref2 : "#2" ref2 = ( "mykeyword1" | STRING | ID ) ;
 		public ParserRule getRule() { return rule; }
 
-		// '#2' ref2 = ( 'mykeyword1' | STRING | ID )
+		// "#2" ref2 = ( "mykeyword1" | STRING | ID )
 		public Group eleGroup() { return cGroup; }
 
-		// '#2'
+		// "#2"
 		public Keyword ele0KeywordNumberSignDigitTwo() { return c0KeywordNumberSignDigitTwo; }
 
-		// ref2 = ( 'mykeyword1' | STRING | ID )
+		// ref2 = ( "mykeyword1" | STRING | ID )
 		public Assignment ele1AssignmentRef2() { return c1AssignmentRef2; }
 
-		// 'mykeyword1' | STRING | ID
+		// "mykeyword1" | STRING | ID
 		public Alternatives ele10Alternatives() { return c10Alternatives; }
 
-		// 'mykeyword1' | STRING
+		// "mykeyword1" | STRING
 		public Alternatives ele100Alternatives() { return c100Alternatives; }
 
-		// 'mykeyword1'
+		// "mykeyword1"
 		public Keyword ele1000KeywordMykeyword1() { return c1000KeywordMykeyword1; }
 
 		// STRING
@@ -70,7 +70,7 @@ public class Bug250313GrammarAccess extends BaseEPackageAccess implements IGramm
 	}
 
 	
-	// Ref2 : '#2' ref2 = ( 'mykeyword1' | STRING | ID ) ;
+	// Ref2 : "#2" ref2 = ( "mykeyword1" | STRING | ID ) ;
 	public Ref2Elements prRef2() {
 		return (pRef2 != null) ? pRef2 : (pRef2 = new Ref2Elements());
 	} 

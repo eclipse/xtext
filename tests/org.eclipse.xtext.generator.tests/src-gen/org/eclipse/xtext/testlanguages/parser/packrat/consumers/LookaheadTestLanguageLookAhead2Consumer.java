@@ -46,12 +46,15 @@ public final class LookaheadTestLanguageLookAhead2Consumer extends NonTerminalCo
 		final IMarker marker = mark();
 		if (!consumeAlternatives$2()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeKeyword$7()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 

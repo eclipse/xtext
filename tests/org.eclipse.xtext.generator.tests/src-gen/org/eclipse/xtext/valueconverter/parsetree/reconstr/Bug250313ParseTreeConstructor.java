@@ -25,12 +25,12 @@ public class Bug250313ParseTreeConstructor extends AbstractParseTreeConstructor 
 
 /************ begin Rule Ref2 ****************
  *
- * Ref2 : '#2' ref2 = ( 'mykeyword1' | STRING | ID ) ;
+ * Ref2 : "#2" ref2 = ( "mykeyword1" | STRING | ID ) ;
  *
  **/
 
 
-// '#2' ref2 = ( 'mykeyword1' | STRING | ID )
+// "#2" ref2 = ( "mykeyword1" | STRING | ID )
 protected class Ref2_Group extends GroupToken {
 	
 	public Ref2_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -58,7 +58,7 @@ protected class Ref2_Group extends GroupToken {
 	}
 }
 
-// '#2'
+// "#2"
 protected class Ref2_0_Keyword_2 extends KeywordToken  {
 	
 	public Ref2_0_Keyword_2(IInstanceDescription curr, AbstractToken pred) {
@@ -70,7 +70,7 @@ protected class Ref2_0_Keyword_2 extends KeywordToken  {
 	}	
 }
 
-// ref2 = ( 'mykeyword1' | STRING | ID )
+// ref2 = ( "mykeyword1" | STRING | ID )
 protected class Ref2_1_Assignment_ref2 extends AssignmentToken  {
 	
 	public Ref2_1_Assignment_ref2(IInstanceDescription curr, AbstractToken pred) {

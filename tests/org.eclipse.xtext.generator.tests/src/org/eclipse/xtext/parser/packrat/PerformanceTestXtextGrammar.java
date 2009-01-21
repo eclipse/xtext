@@ -7,8 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.packrat;
 
-import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.parser.terminalrules.XtextTerminalsTestLanguageStandaloneSetup;
+import org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguagePackratParser;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.tests.EcoreModelComparator;
 import org.eclipse.xtext.util.StringInputStream;
@@ -18,19 +19,19 @@ import org.eclipse.xtext.util.StringInputStream;
  */
 public class PerformanceTestXtextGrammar extends AbstractGeneratorTest {
 
-	private int iterations = 10;
+	private int iterations = 20;
 	
 	private String model;
 
 	private StringInputStream modelAsStream;
 	
-	private XtextPackratParser packratParser;
+	private XtextTerminalsTestLanguagePackratParser packratParser;
 	
 	protected void setUp() throws Exception {
-		with(XtextStandaloneSetup.class);
+		with(XtextTerminalsTestLanguageStandaloneSetup.class);
 		model = readFileIntoString("org/eclipse/xtext/Xtext.xtext");
 		modelAsStream = new StringInputStream(model);
-		packratParser = new XtextPackratParser();
+		packratParser = new XtextTerminalsTestLanguagePackratParser();
 		setAstFactory(packratParser);
 	}
 	

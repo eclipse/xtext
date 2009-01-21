@@ -58,28 +58,35 @@ public final class XtextTerminalsTestLanguageTerminalRuleConsumer extends NonTer
 		final IMarker marker = mark();
 		if (!consumeAssignment$6()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeAssignment$8()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeGroup$10()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeKeyword$14()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeAssignment$15()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeKeyword$17()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 
@@ -104,12 +111,15 @@ public final class XtextTerminalsTestLanguageTerminalRuleConsumer extends NonTer
 		final IMarker marker = mark();
 		if (!consumeKeyword$11()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeAssignment$12()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 

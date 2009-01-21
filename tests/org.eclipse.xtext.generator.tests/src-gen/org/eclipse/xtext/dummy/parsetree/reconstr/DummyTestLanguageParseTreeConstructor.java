@@ -67,12 +67,12 @@ protected class Model_Assignment_elements extends AssignmentToken  {
 
 /************ begin Rule Element ****************
  *
- * Element : ( optional ?= 'optional' ) ? 'element' name = ID ( descriptions += STRING ) * ';' ;
+ * Element : ( optional ?= "optional" ) ? "element" name = ID ( descriptions += STRING ) * ";" ;
  *
  **/
 
 
-// ( optional ?= 'optional' ) ? 'element' name = ID ( descriptions += STRING ) * ';'
+// ( optional ?= "optional" ) ? "element" name = ID ( descriptions += STRING ) * ";"
 protected class Element_Group extends GroupToken {
 	
 	public Element_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -100,7 +100,7 @@ protected class Element_Group extends GroupToken {
 	}
 }
 
-// ( optional ?= 'optional' ) ? 'element' name = ID ( descriptions += STRING ) *
+// ( optional ?= "optional" ) ? "element" name = ID ( descriptions += STRING ) *
 protected class Element_0_Group extends GroupToken {
 	
 	public Element_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -128,7 +128,7 @@ protected class Element_0_Group extends GroupToken {
 	}
 }
 
-// ( optional ?= 'optional' ) ? 'element' name = ID
+// ( optional ?= "optional" ) ? "element" name = ID
 protected class Element_0_0_Group extends GroupToken {
 	
 	public Element_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -156,7 +156,7 @@ protected class Element_0_0_Group extends GroupToken {
 	}
 }
 
-// ( optional ?= 'optional' ) ? 'element'
+// ( optional ?= "optional" ) ? "element"
 protected class Element_0_0_0_Group extends GroupToken {
 	
 	public Element_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -184,7 +184,7 @@ protected class Element_0_0_0_Group extends GroupToken {
 	}
 }
 
-// ( optional ?= 'optional' ) ?
+// ( optional ?= "optional" ) ?
 protected class Element_0_0_0_0_Assignment_optional extends AssignmentToken  {
 	
 	public Element_0_0_0_0_Assignment_optional(IInstanceDescription curr, AbstractToken pred) {
@@ -209,7 +209,7 @@ protected class Element_0_0_0_0_Assignment_optional extends AssignmentToken  {
 	}
 }
 
-// 'element'
+// "element"
 protected class Element_0_0_0_1_Keyword_element extends KeywordToken  {
 	
 	public Element_0_0_0_1_Keyword_element(IInstanceDescription curr, AbstractToken pred) {
@@ -270,7 +270,7 @@ protected class Element_0_1_Assignment_descriptions extends AssignmentToken  {
 }
 
 
-// ';'
+// ";"
 protected class Element_1_Keyword extends KeywordToken  {
 	
 	public Element_1_Keyword(IInstanceDescription curr, AbstractToken pred) {

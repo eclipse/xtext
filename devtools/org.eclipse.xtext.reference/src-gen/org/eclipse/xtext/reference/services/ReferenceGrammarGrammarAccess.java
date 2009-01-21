@@ -39,25 +39,25 @@ public class ReferenceGrammarGrammarAccess extends BaseEPackageAccess implements
 		private final RuleCall c0110ParserRuleCallCustomTypeParserRule = (RuleCall)c011AssignmentTypes.eContents().get(0);
 		private final Keyword c1KeywordRightCurlyBracket = (Keyword)cGroup.eContents().get(1);
 		
-		// Spielplatz : ( 'spielplatz' groesse = INT ( beschreibung = STRING ) ? '{' ( kinder += Kind | erzieher += Erwachsener | spielzeuge += Spielzeug | familie += Familie | types += CustomTypeParserRule ) * '}' ) ? ;
+		// Spielplatz : ( "spielplatz" groesse = INT ( beschreibung = STRING ) ? "{" ( kinder += Kind | erzieher += Erwachsener | spielzeuge += Spielzeug | familie += Familie | types += CustomTypeParserRule ) * "}" ) ? ;
 		public ParserRule getRule() { return rule; }
 
-		// ( 'spielplatz' groesse = INT ( beschreibung = STRING ) ? '{' ( kinder += Kind | erzieher += Erwachsener | spielzeuge += Spielzeug | familie += Familie | types += CustomTypeParserRule ) * '}' ) ?
+		// ( "spielplatz" groesse = INT ( beschreibung = STRING ) ? "{" ( kinder += Kind | erzieher += Erwachsener | spielzeuge += Spielzeug | familie += Familie | types += CustomTypeParserRule ) * "}" ) ?
 		public Group eleGroup() { return cGroup; }
 
-		// 'spielplatz' groesse = INT ( beschreibung = STRING ) ? '{' ( kinder += Kind | erzieher += Erwachsener | spielzeuge += Spielzeug | familie += Familie | types += CustomTypeParserRule ) *
+		// "spielplatz" groesse = INT ( beschreibung = STRING ) ? "{" ( kinder += Kind | erzieher += Erwachsener | spielzeuge += Spielzeug | familie += Familie | types += CustomTypeParserRule ) *
 		public Group ele0Group() { return c0Group; }
 
-		// 'spielplatz' groesse = INT ( beschreibung = STRING ) ? '{'
+		// "spielplatz" groesse = INT ( beschreibung = STRING ) ? "{"
 		public Group ele00Group() { return c00Group; }
 
-		// 'spielplatz' groesse = INT ( beschreibung = STRING ) ?
+		// "spielplatz" groesse = INT ( beschreibung = STRING ) ?
 		public Group ele000Group() { return c000Group; }
 
-		// 'spielplatz' groesse = INT
+		// "spielplatz" groesse = INT
 		public Group ele0000Group() { return c0000Group; }
 
-		// 'spielplatz'
+		// "spielplatz"
 		public Keyword ele00000KeywordSpielplatz() { return c00000KeywordSpielplatz; }
 
 		// groesse = INT
@@ -72,7 +72,7 @@ public class ReferenceGrammarGrammarAccess extends BaseEPackageAccess implements
 		// STRING
 		public RuleCall ele00010LexerRuleCallSTRING() { return c00010LexerRuleCallSTRING; }
 
-		// '{'
+		// "{"
 		public Keyword ele001KeywordLeftCurlyBracket() { return c001KeywordLeftCurlyBracket; }
 
 		// ( kinder += Kind | erzieher += Erwachsener | spielzeuge += Spielzeug | familie += Familie | types += CustomTypeParserRule ) *
@@ -117,7 +117,7 @@ public class ReferenceGrammarGrammarAccess extends BaseEPackageAccess implements
 		// CustomTypeParserRule
 		public RuleCall ele0110ParserRuleCallCustomTypeParserRule() { return c0110ParserRuleCallCustomTypeParserRule; }
 
-		// '}'
+		// "}"
 		public Keyword ele1KeywordRightCurlyBracket() { return c1KeywordRightCurlyBracket; }
 	}
 
@@ -154,25 +154,25 @@ public class ReferenceGrammarGrammarAccess extends BaseEPackageAccess implements
 		private final RuleCall c010LexerRuleCallINT = (RuleCall)c01AssignmentAge.eContents().get(0);
 		private final Keyword c1KeywordRightParenthesis = (Keyword)cGroup.eContents().get(1);
 		
-		// Kind : 'kind' '(' name = ID age = INT ')' ;
+		// Kind : "kind" "(" name = ID age = INT ")" ;
 		public ParserRule getRule() { return rule; }
 
-		// 'kind' '(' name = ID age = INT ')'
+		// "kind" "(" name = ID age = INT ")"
 		public Group eleGroup() { return cGroup; }
 
-		// 'kind' '(' name = ID age = INT
+		// "kind" "(" name = ID age = INT
 		public Group ele0Group() { return c0Group; }
 
-		// 'kind' '(' name = ID
+		// "kind" "(" name = ID
 		public Group ele00Group() { return c00Group; }
 
-		// 'kind' '('
+		// "kind" "("
 		public Group ele000Group() { return c000Group; }
 
-		// 'kind'
+		// "kind"
 		public Keyword ele0000KeywordKind() { return c0000KeywordKind; }
 
-		// '('
+		// "("
 		public Keyword ele0001KeywordLeftParenthesis() { return c0001KeywordLeftParenthesis; }
 
 		// name = ID
@@ -187,7 +187,7 @@ public class ReferenceGrammarGrammarAccess extends BaseEPackageAccess implements
 		// INT
 		public RuleCall ele010LexerRuleCallINT() { return c010LexerRuleCallINT; }
 
-		// ')'
+		// ")"
 		public Keyword ele1KeywordRightParenthesis() { return c1KeywordRightParenthesis; }
 	}
 
@@ -205,25 +205,25 @@ public class ReferenceGrammarGrammarAccess extends BaseEPackageAccess implements
 		private final RuleCall c010LexerRuleCallINT = (RuleCall)c01AssignmentAge.eContents().get(0);
 		private final Keyword c1KeywordRightParenthesis = (Keyword)cGroup.eContents().get(1);
 		
-		// Erwachsener : 'erwachsener' '(' name = ID age = INT ')' ;
+		// Erwachsener : "erwachsener" "(" name = ID age = INT ")" ;
 		public ParserRule getRule() { return rule; }
 
-		// 'erwachsener' '(' name = ID age = INT ')'
+		// "erwachsener" "(" name = ID age = INT ")"
 		public Group eleGroup() { return cGroup; }
 
-		// 'erwachsener' '(' name = ID age = INT
+		// "erwachsener" "(" name = ID age = INT
 		public Group ele0Group() { return c0Group; }
 
-		// 'erwachsener' '(' name = ID
+		// "erwachsener" "(" name = ID
 		public Group ele00Group() { return c00Group; }
 
-		// 'erwachsener' '('
+		// "erwachsener" "("
 		public Group ele000Group() { return c000Group; }
 
-		// 'erwachsener'
+		// "erwachsener"
 		public Keyword ele0000KeywordErwachsener() { return c0000KeywordErwachsener; }
 
-		// '('
+		// "("
 		public Keyword ele0001KeywordLeftParenthesis() { return c0001KeywordLeftParenthesis; }
 
 		// name = ID
@@ -238,7 +238,7 @@ public class ReferenceGrammarGrammarAccess extends BaseEPackageAccess implements
 		// INT
 		public RuleCall ele010LexerRuleCallINT() { return c010LexerRuleCallINT; }
 
-		// ')'
+		// ")"
 		public Keyword ele1KeywordRightParenthesis() { return c1KeywordRightParenthesis; }
 	}
 
@@ -256,25 +256,25 @@ public class ReferenceGrammarGrammarAccess extends BaseEPackageAccess implements
 		private final RuleCall c010ParserRuleCallFarbe = (RuleCall)c01AssignmentFarbe.eContents().get(0);
 		private final Keyword c1KeywordRightParenthesis = (Keyword)cGroup.eContents().get(1);
 		
-		// Spielzeug : 'spielzeug' '(' name = ID farbe = Farbe ')' ;
+		// Spielzeug : "spielzeug" "(" name = ID farbe = Farbe ")" ;
 		public ParserRule getRule() { return rule; }
 
-		// 'spielzeug' '(' name = ID farbe = Farbe ')'
+		// "spielzeug" "(" name = ID farbe = Farbe ")"
 		public Group eleGroup() { return cGroup; }
 
-		// 'spielzeug' '(' name = ID farbe = Farbe
+		// "spielzeug" "(" name = ID farbe = Farbe
 		public Group ele0Group() { return c0Group; }
 
-		// 'spielzeug' '(' name = ID
+		// "spielzeug" "(" name = ID
 		public Group ele00Group() { return c00Group; }
 
-		// 'spielzeug' '('
+		// "spielzeug" "("
 		public Group ele000Group() { return c000Group; }
 
-		// 'spielzeug'
+		// "spielzeug"
 		public Keyword ele0000KeywordSpielzeug() { return c0000KeywordSpielzeug; }
 
-		// '('
+		// "("
 		public Keyword ele0001KeywordLeftParenthesis() { return c0001KeywordLeftParenthesis; }
 
 		// name = ID
@@ -289,7 +289,7 @@ public class ReferenceGrammarGrammarAccess extends BaseEPackageAccess implements
 		// Farbe
 		public RuleCall ele010ParserRuleCallFarbe() { return c010ParserRuleCallFarbe; }
 
-		// ')'
+		// ")"
 		public Keyword ele1KeywordRightParenthesis() { return c1KeywordRightParenthesis; }
 	}
 
@@ -322,46 +322,46 @@ public class ReferenceGrammarGrammarAccess extends BaseEPackageAccess implements
 		private final CrossReference c0110CrossReferenceEStringKind = (CrossReference)c011AssignmentKinder.eContents().get(0);
 		private final Keyword c1KeywordRightParenthesis = (Keyword)cGroup.eContents().get(1);
 		
-		// Familie : 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ Erwachsener ] vater = [ Erwachsener ] kinder += [ Kind ] ( ',' kinder += [ Kind ] ) * ')' ;
+		// Familie : "familie" "(" name = ( "keyword" | STRING | ID ) mutter = [ Erwachsener ] vater = [ Erwachsener ] kinder += [ Kind ] ( "," kinder += [ Kind ] ) * ")" ;
 		public ParserRule getRule() { return rule; }
 
-		// 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ Erwachsener ] vater = [ Erwachsener ] kinder += [ Kind ] ( ',' kinder += [ Kind ] ) * ')'
+		// "familie" "(" name = ( "keyword" | STRING | ID ) mutter = [ Erwachsener ] vater = [ Erwachsener ] kinder += [ Kind ] ( "," kinder += [ Kind ] ) * ")"
 		public Group eleGroup() { return cGroup; }
 
-		// 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ Erwachsener ] vater = [ Erwachsener ] kinder += [ Kind ] ( ',' kinder += [ Kind ] ) *
+		// "familie" "(" name = ( "keyword" | STRING | ID ) mutter = [ Erwachsener ] vater = [ Erwachsener ] kinder += [ Kind ] ( "," kinder += [ Kind ] ) *
 		public Group ele0Group() { return c0Group; }
 
-		// 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ Erwachsener ] vater = [ Erwachsener ] kinder += [ Kind ]
+		// "familie" "(" name = ( "keyword" | STRING | ID ) mutter = [ Erwachsener ] vater = [ Erwachsener ] kinder += [ Kind ]
 		public Group ele00Group() { return c00Group; }
 
-		// 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ Erwachsener ] vater = [ Erwachsener ]
+		// "familie" "(" name = ( "keyword" | STRING | ID ) mutter = [ Erwachsener ] vater = [ Erwachsener ]
 		public Group ele000Group() { return c000Group; }
 
-		// 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ Erwachsener ]
+		// "familie" "(" name = ( "keyword" | STRING | ID ) mutter = [ Erwachsener ]
 		public Group ele0000Group() { return c0000Group; }
 
-		// 'familie' '(' name = ( 'keyword' | STRING | ID )
+		// "familie" "(" name = ( "keyword" | STRING | ID )
 		public Group ele00000Group() { return c00000Group; }
 
-		// 'familie' '('
+		// "familie" "("
 		public Group ele000000Group() { return c000000Group; }
 
-		// 'familie'
+		// "familie"
 		public Keyword ele0000000KeywordFamilie() { return c0000000KeywordFamilie; }
 
-		// '('
+		// "("
 		public Keyword ele0000001KeywordLeftParenthesis() { return c0000001KeywordLeftParenthesis; }
 
-		// name = ( 'keyword' | STRING | ID )
+		// name = ( "keyword" | STRING | ID )
 		public Assignment ele000001AssignmentName() { return c000001AssignmentName; }
 
-		// 'keyword' | STRING | ID
+		// "keyword" | STRING | ID
 		public Alternatives ele0000010Alternatives() { return c0000010Alternatives; }
 
-		// 'keyword' | STRING
+		// "keyword" | STRING
 		public Alternatives ele00000100Alternatives() { return c00000100Alternatives; }
 
-		// 'keyword'
+		// "keyword"
 		public Keyword ele000001000KeywordKeyword() { return c000001000KeywordKeyword; }
 
 		// STRING
@@ -388,10 +388,10 @@ public class ReferenceGrammarGrammarAccess extends BaseEPackageAccess implements
 		// [ Kind ]
 		public CrossReference ele0010CrossReferenceEStringKind() { return c0010CrossReferenceEStringKind; }
 
-		// ( ',' kinder += [ Kind ] ) *
+		// ( "," kinder += [ Kind ] ) *
 		public Group ele01Group() { return c01Group; }
 
-		// ','
+		// ","
 		public Keyword ele010KeywordComma() { return c010KeywordComma; }
 
 		// kinder += [ Kind ]
@@ -400,7 +400,7 @@ public class ReferenceGrammarGrammarAccess extends BaseEPackageAccess implements
 		// [ Kind ]
 		public CrossReference ele0110CrossReferenceEStringKind() { return c0110CrossReferenceEStringKind; }
 
-		// ')'
+		// ")"
 		public Keyword ele1KeywordRightParenthesis() { return c1KeywordRightParenthesis; }
 	}
 
@@ -415,31 +415,31 @@ public class ReferenceGrammarGrammarAccess extends BaseEPackageAccess implements
 		private final Keyword c001KeywordGELB = (Keyword)c00Alternatives.eContents().get(1);
 		private final Keyword c01KeywordGRÜN = (Keyword)c0Alternatives.eContents().get(1);
 		
-		// Farbe : wert = ( 'ROT' | 'BLAU' | 'GELB' | 'GRÜN' ) ;
+		// Farbe : wert = ( "ROT" | "BLAU" | "GELB" | "GR\u00DCN" ) ;
 		public ParserRule getRule() { return rule; }
 
-		// wert = ( 'ROT' | 'BLAU' | 'GELB' | 'GRÜN' )
+		// wert = ( "ROT" | "BLAU" | "GELB" | "GR\u00DCN" )
 		public Assignment eleAssignmentWert() { return cAssignmentWert; }
 
-		// 'ROT' | 'BLAU' | 'GELB' | 'GRÜN'
+		// "ROT" | "BLAU" | "GELB" | "GR\u00DCN"
 		public Alternatives ele0Alternatives() { return c0Alternatives; }
 
-		// 'ROT' | 'BLAU' | 'GELB'
+		// "ROT" | "BLAU" | "GELB"
 		public Alternatives ele00Alternatives() { return c00Alternatives; }
 
-		// 'ROT' | 'BLAU'
+		// "ROT" | "BLAU"
 		public Alternatives ele000Alternatives() { return c000Alternatives; }
 
-		// 'ROT'
+		// "ROT"
 		public Keyword ele0000KeywordROT() { return c0000KeywordROT; }
 
-		// 'BLAU'
+		// "BLAU"
 		public Keyword ele0001KeywordBLAU() { return c0001KeywordBLAU; }
 
-		// 'GELB'
+		// "GELB"
 		public Keyword ele001KeywordGELB() { return c001KeywordGELB; }
 
-		// 'GRÜN'
+		// "GR\u00DCN"
 		public Keyword ele01KeywordGRÜN() { return c01KeywordGRÜN; }
 	}
 
@@ -450,13 +450,13 @@ public class ReferenceGrammarGrammarAccess extends BaseEPackageAccess implements
 		private final Assignment c1AssignmentName = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall c10LexerRuleCallID = (RuleCall)c1AssignmentName.eContents().get(0);
 		
-		// CustomTypeParserRule returns CustomType : 'type' name = ID ;
+		// CustomTypeParserRule returns CustomType : "type" name = ID ;
 		public ParserRule getRule() { return rule; }
 
-		// 'type' name = ID
+		// "type" name = ID
 		public Group eleGroup() { return cGroup; }
 
-		// 'type'
+		// "type"
 		public Keyword ele0KeywordType() { return c0KeywordType; }
 
 		// name = ID
@@ -494,7 +494,7 @@ public class ReferenceGrammarGrammarAccess extends BaseEPackageAccess implements
 	}
 
 	
-	// Spielplatz : ( 'spielplatz' groesse = INT ( beschreibung = STRING ) ? '{' ( kinder += Kind | erzieher += Erwachsener | spielzeuge += Spielzeug | familie += Familie | types += CustomTypeParserRule ) * '}' ) ? ;
+	// Spielplatz : ( "spielplatz" groesse = INT ( beschreibung = STRING ) ? "{" ( kinder += Kind | erzieher += Erwachsener | spielzeuge += Spielzeug | familie += Familie | types += CustomTypeParserRule ) * "}" ) ? ;
 	public SpielplatzElements prSpielplatz() {
 		return (pSpielplatz != null) ? pSpielplatz : (pSpielplatz = new SpielplatzElements());
 	} 
@@ -504,32 +504,32 @@ public class ReferenceGrammarGrammarAccess extends BaseEPackageAccess implements
 		return (pPerson != null) ? pPerson : (pPerson = new PersonElements());
 	} 
 
-	// Kind : 'kind' '(' name = ID age = INT ')' ;
+	// Kind : "kind" "(" name = ID age = INT ")" ;
 	public KindElements prKind() {
 		return (pKind != null) ? pKind : (pKind = new KindElements());
 	} 
 
-	// Erwachsener : 'erwachsener' '(' name = ID age = INT ')' ;
+	// Erwachsener : "erwachsener" "(" name = ID age = INT ")" ;
 	public ErwachsenerElements prErwachsener() {
 		return (pErwachsener != null) ? pErwachsener : (pErwachsener = new ErwachsenerElements());
 	} 
 
-	// Spielzeug : 'spielzeug' '(' name = ID farbe = Farbe ')' ;
+	// Spielzeug : "spielzeug" "(" name = ID farbe = Farbe ")" ;
 	public SpielzeugElements prSpielzeug() {
 		return (pSpielzeug != null) ? pSpielzeug : (pSpielzeug = new SpielzeugElements());
 	} 
 
-	// Familie : 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ Erwachsener ] vater = [ Erwachsener ] kinder += [ Kind ] ( ',' kinder += [ Kind ] ) * ')' ;
+	// Familie : "familie" "(" name = ( "keyword" | STRING | ID ) mutter = [ Erwachsener ] vater = [ Erwachsener ] kinder += [ Kind ] ( "," kinder += [ Kind ] ) * ")" ;
 	public FamilieElements prFamilie() {
 		return (pFamilie != null) ? pFamilie : (pFamilie = new FamilieElements());
 	} 
 
-	// Farbe : wert = ( 'ROT' | 'BLAU' | 'GELB' | 'GRÜN' ) ;
+	// Farbe : wert = ( "ROT" | "BLAU" | "GELB" | "GR\u00DCN" ) ;
 	public FarbeElements prFarbe() {
 		return (pFarbe != null) ? pFarbe : (pFarbe = new FarbeElements());
 	} 
 
-	// CustomTypeParserRule returns CustomType : 'type' name = ID ;
+	// CustomTypeParserRule returns CustomType : "type" name = ID ;
 	public CustomTypeParserRuleElements prCustomTypeParserRule() {
 		return (pCustomTypeParserRule != null) ? pCustomTypeParserRule : (pCustomTypeParserRule = new CustomTypeParserRuleElements());
 	} 

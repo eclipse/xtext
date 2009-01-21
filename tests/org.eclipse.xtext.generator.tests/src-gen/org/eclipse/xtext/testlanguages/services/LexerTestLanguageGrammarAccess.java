@@ -85,7 +85,7 @@ public class LexerTestLanguageGrammarAccess extends BaseEPackageAccess implement
 		return (pElement != null) ? pElement : (pElement = new ElementElements());
 	} 
 
-	// lexer STRING : " '#' ('B')+ " ;
+	// lexer STRING : " \'#\' (\'B\')+ " ;
 	public LexerRule lrSTRING() {
 		return (lSTRING != null) ? lSTRING : (lSTRING = (LexerRule) getGrammar().eContents().get(3));
 	} 

@@ -50,20 +50,25 @@ public final class FormatterTestLanguageTestIndentationConsumer extends NonTermi
 		final IMarker marker = mark();
 		if (!consumeKeyword$4()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeKeyword$5()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeAlternatives$6()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
 		if (!consumeKeyword$11()) {
 			marker.rollback();
+			marker.release();
 			return false;
 		}
+		marker.release();
 		return true;
 	}
 
