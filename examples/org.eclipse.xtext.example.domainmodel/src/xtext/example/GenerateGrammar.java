@@ -20,8 +20,9 @@ public class  GenerateGrammar {
 
 	private static final String RUNTIME_PATH = ".";
 	private static final String UI_PATH = "../org.eclipse.xtext.example.domainmodel.ui";
+
+
 	private String uiPath = UI_PATH;
-	
 	private String runtimePath = RUNTIME_PATH;
 
 	private GenerateGrammar(String... args) {
@@ -30,7 +31,7 @@ public class  GenerateGrammar {
 			uiPath = args[0] + "/" + UI_PATH;
 		}
 	}
-
+	
 	public void generate() throws IOException {
 		XtextStandaloneSetup.doSetup();
 
@@ -51,8 +52,8 @@ public class  GenerateGrammar {
 	}
 
 	public static void main(String... args) throws IOException {
-		 GenerateGrammar generator = new GenerateGrammar(args);
-		 generator.generate();
+		GenerateGrammar generator = new GenerateGrammar(args);
+		generator.generate();
 	}
 
 }

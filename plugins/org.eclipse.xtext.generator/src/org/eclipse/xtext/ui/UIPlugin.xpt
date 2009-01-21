@@ -21,6 +21,8 @@
     «EXPAND ServiceConfig::root»
     «EXPAND Manifest::manifest_mf»
     «EXPAND contentassist::GenProposalProvider::root»
+    «EXPAND contentassist::XtendProposals::root»
+    «EXPAND Settings::root»
     «copyFiles("org/eclipse/xtext/ui", outletPath("UI") + "/icons/", { "editor.gif" })»  
 «ENDDEFINE»
 

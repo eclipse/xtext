@@ -258,7 +258,7 @@ public class GeneratorFacade {
 			
 			GenService proposalProvider = XtextgenFactory.eINSTANCE.createGenService();
 			proposalProvider.setServiceInterfaceFQName("org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider");
-			proposalProvider.setGenClassFQName(namespace +"."+ languageName+"GenProposalProvider");
+			proposalProvider.setGenClassFQName(namespace +".Gen"+ languageName+"ProposalProvider");
 			proposalProvider.setUiService(true);
 			genModel.getServices().add(proposalProvider);
 			

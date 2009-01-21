@@ -5,7 +5,8 @@ Bundle-SymbolicName: org.eclipse.xtext.reference.ui;singleton:=true
 Bundle-Version: 0.7.0.qualifier
 Require-Bundle: org.eclipse.xtext.reference,
  org.eclipse.xtext.ui.core,
- org.eclipse.xtext.ui.common
+ org.eclipse.xtext.ui.common,
+ org.eclipse.xtext.ui.common.xtend;bundle-version="0.7.0";resolution:=optional
 Bundle-Vendor: Eclipse.org
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy

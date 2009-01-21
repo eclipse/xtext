@@ -1,0 +1,117 @@
+/*
+Generated with Xtext
+*/
+
+import xtext;
+
+import org::eclipse::emf::ecore;
+import org::eclipse::jface::text::contentassist;
+import org::eclipse::xtext::crossref;
+import org::eclipse::xtext::ui::common::editor::contentassist;
+import org::eclipse::xtext::ui::common::xtend::contentassist;
+
+import fowlerdsl;
+
+extension org::eclipse::xtext::ui::common::xtend::contentassist::ContentAssist reexport;
+extension org::eclipse::xtend::util::stdlib::io;
+
+/**
+ * Represents a generated, default implementation of interface {@link IProposalProvider}.
+ * 
+ * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider
+ */
+
+	 
+List[ICompletionProposal] completeStatemachineEvents(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeStatemachineEvents feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	{};
+	 
+List[ICompletionProposal] completeStatemachineCommands(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeStatemachineCommands feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	{};
+	 
+List[ICompletionProposal] completeStatemachineStates(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeStatemachineStates feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	{};
+	 
+List[ICompletionProposal] completeEventResetting(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeEventResetting feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	{};
+	 
+List[ICompletionProposal] completeEventName(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeEventName feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+    { newProposal(assignment, "EventName", contentAssistContext) };
+	 
+List[ICompletionProposal] completeEventCode(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeEventCode feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+    { newProposal(assignment, "EventCode", contentAssistContext) };
+	 
+List[ICompletionProposal] completeCommandName(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeCommandName feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+    { newProposal(assignment, "CommandName", contentAssistContext) };
+	 
+List[ICompletionProposal] completeCommandCode(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeCommandCode feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+    { newProposal(assignment, "CommandCode", contentAssistContext) };
+	 
+List[ICompletionProposal] completeStateName(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeStateName feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+    { newProposal(assignment, "StateName", contentAssistContext) };
+	 
+List[ICompletionProposal] completeStateActions(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeStateActions feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	lookupCrossReference(((CrossReference)assignment.terminal), contentAssistContext);
+	 
+List[ICompletionProposal] completeStateTransitions(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeStateTransitions feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	{};
+	 
+List[ICompletionProposal] completeTransitionEvent(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeTransitionEvent feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	lookupCrossReference(((CrossReference)assignment.terminal), contentAssistContext);
+	 
+List[ICompletionProposal] completeTransitionState(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeTransitionState feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	lookupCrossReference(((CrossReference)assignment.terminal), contentAssistContext);
+	 	  
+List[ICompletionProposal] complete(RuleCall ruleCall, IContentAssistContext contentAssistContext) :
+	{};
+
+/*
+	// TODO 
+    @Override
+	protected String getDefaultImageFilePath() {
+		return "icons/editor.gif";
+	}
+
+	@Override
+	protected String getPluginId() {
+		return UI_PLUGIN_ID;
+	}
+*/

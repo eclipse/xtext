@@ -25,7 +25,8 @@ Bundle-Version: 0.7.0.qualifier
 Require-Bundle: «nonUIPluginBundleID»,
  org.eclipse.xtext.ui.core,
  org.eclipse.xtext.ui.common,
- org.eclipse.xtext.ui.builtin,
+ org.eclipse.xtext.ui.builtin,«IF useXtend()»
+ org.eclipse.xtext.ui.common.xtend,«ENDIF»
  org.eclipse.ui.editors;bundle-version="3.4.0",
  org.eclipse.ui
 Bundle-Vendor: eclipse.org

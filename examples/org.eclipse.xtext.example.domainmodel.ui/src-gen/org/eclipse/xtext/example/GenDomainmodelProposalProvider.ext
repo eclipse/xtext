@@ -1,0 +1,164 @@
+/*
+Generated with Xtext
+*/
+
+import xtext;
+
+import org::eclipse::emf::ecore;
+import org::eclipse::jface::text::contentassist;
+import org::eclipse::xtext::crossref;
+import org::eclipse::xtext::ui::common::editor::contentassist;
+import org::eclipse::xtext::ui::common::xtend::contentassist;
+
+import domainmodel;
+import ecore;
+
+extension org::eclipse::xtext::ui::common::xtend::contentassist::ContentAssist reexport;
+extension org::eclipse::xtend::util::stdlib::io;
+
+/**
+ * Represents a generated, default implementation of interface {@link IProposalProvider}.
+ * 
+ * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider
+ */
+
+	 
+List[ICompletionProposal] completeFileImports(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeFileImports feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	{};
+	 
+List[ICompletionProposal] completeFileNamedElements(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeFileNamedElements feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	{};
+	 
+List[ICompletionProposal] completeImportImportURI(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeImportImportURI feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	{ newProposal(assignment, "\"ImportImportURI\"", contentAssistContext) };
+	 
+List[ICompletionProposal] completePackageName(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completePackageName feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	{};
+	 
+List[ICompletionProposal] completePackageNamedElements(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completePackageNamedElements feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	{};
+	 
+List[ICompletionProposal] completeDataTypeName(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeDataTypeName feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+    { newProposal(assignment, "DataTypeName", contentAssistContext) };
+	 
+List[ICompletionProposal] completeEntityName(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeEntityName feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+    { newProposal(assignment, "EntityName", contentAssistContext) };
+	 
+List[ICompletionProposal] completeEntitySuperType(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeEntitySuperType feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	lookupCrossReference(((CrossReference)assignment.terminal), contentAssistContext);
+	 
+List[ICompletionProposal] completeEntityFeatures(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeEntityFeatures feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	{};
+	 
+List[ICompletionProposal] completeAttributeName(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeAttributeName feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+    { newProposal(assignment, "AttributeName", contentAssistContext) };
+	 
+List[ICompletionProposal] completeAttributeType(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeAttributeType feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	{};
+	 
+List[ICompletionProposal] completeReferenceName(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeReferenceName feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+    { newProposal(assignment, "ReferenceName", contentAssistContext) };
+	 
+List[ICompletionProposal] completeReferenceType(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeReferenceType feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	{};
+	 
+List[ICompletionProposal] completeReferenceOpposite(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeReferenceOpposite feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	lookupCrossReference(((CrossReference)assignment.terminal), contentAssistContext);
+	 
+List[ICompletionProposal] completeOperationName(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeOperationName feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+    { newProposal(assignment, "OperationName", contentAssistContext) };
+	 
+List[ICompletionProposal] completeOperationParams(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeOperationParams feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	{};
+
+	 
+List[ICompletionProposal] completeOperationType(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeOperationType feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	{};
+	 
+List[ICompletionProposal] completeParameterName(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeParameterName feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+    { newProposal(assignment, "ParameterName", contentAssistContext) };
+	 
+List[ICompletionProposal] completeParameterType(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeParameterType feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	{};
+	 
+List[ICompletionProposal] completeTypeRefReferenced(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeTypeRefReferenced feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	lookupCrossReference(((CrossReference)assignment.terminal), contentAssistContext);
+	 	  
+List[ICompletionProposal] complete(RuleCall ruleCall, IContentAssistContext contentAssistContext) :
+	{};
+	 	  
+List[ICompletionProposal] completeEcoreEString(RuleCall ruleCall, IContentAssistContext contentAssistContext) :
+	{};
+
+/*
+	// TODO 
+    @Override
+	protected String getDefaultImageFilePath() {
+		return "icons/editor.gif";
+	}
+
+	@Override
+	protected String getPluginId() {
+		return UI_PLUGIN_ID;
+	}
+*/

@@ -19,11 +19,12 @@ import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
  * 
  * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider
  */
-public class ContentAssistTestLanguageGenProposalProvider  extends AbstractProposalProvider {
+public class GenContentAssistTestLanguageProposalProvider  extends AbstractProposalProvider {
 	// constants
 	private static final String UI_PLUGIN_ID  = "";
-
 	
+	
+			
 	public List<? extends ICompletionProposal> completeStartRules(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeStartRules feature '" + assignment.getFeature() + "' terminal '"
@@ -32,7 +33,7 @@ public class ContentAssistTestLanguageGenProposalProvider  extends AbstractPropo
 		}
 		return Collections.emptyList();
 	}
-	
+			
 	public List<? extends ICompletionProposal> completeFirstAbstractRuleChildName(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeFirstAbstractRuleChildName feature '" + assignment.getFeature() + "' terminal '"
@@ -41,7 +42,7 @@ public class ContentAssistTestLanguageGenProposalProvider  extends AbstractPropo
 		}
 		return Collections.singletonList(createCompletionProposal(assignment, "FirstAbstractRuleChildName", contentAssistContext));
 	}
-	
+			
 	public List<? extends ICompletionProposal> completeFirstAbstractRuleChildElements(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeFirstAbstractRuleChildElements feature '" + assignment.getFeature() + "' terminal '"
@@ -50,7 +51,7 @@ public class ContentAssistTestLanguageGenProposalProvider  extends AbstractPropo
 		}
 		return Collections.emptyList();
 	}
-	
+			
 	public List<? extends ICompletionProposal> completeSecondAbstractRuleChildName(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeSecondAbstractRuleChildName feature '" + assignment.getFeature() + "' terminal '"
@@ -59,7 +60,7 @@ public class ContentAssistTestLanguageGenProposalProvider  extends AbstractPropo
 		}
 		return Collections.singletonList(createCompletionProposal(assignment, "SecondAbstractRuleChildName", contentAssistContext));
 	}
-	
+			
 	public List<? extends ICompletionProposal> completeSecondAbstractRuleChildRule(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeSecondAbstractRuleChildRule feature '" + assignment.getFeature() + "' terminal '"
@@ -68,7 +69,7 @@ public class ContentAssistTestLanguageGenProposalProvider  extends AbstractPropo
 		}
 		return Collections.emptyList();
 	}
-	
+			
 	public List<? extends ICompletionProposal> completeAbstractRuleCallRule(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeAbstractRuleCallRule feature '" + assignment.getFeature() + "' terminal '"
@@ -78,10 +79,18 @@ public class ContentAssistTestLanguageGenProposalProvider  extends AbstractPropo
 		return lookupCrossReference(((CrossReference)assignment.getTerminal()), contentAssistContext);
 	}
     
-    
-    
-    
-    
+			
+	public List<? extends ICompletionProposal> complete(RuleCall ruleCall, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("complete '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
+					+ "' for model '" + contentAssistContext.getModel() + "' and prefix '" + contentAssistContext.getMatchString() + "'");
+		}
+		return Collections.emptyList();
+	}
+			
+			
+			
+			
     
     @Override
 	protected String getDefaultImageFilePath() {

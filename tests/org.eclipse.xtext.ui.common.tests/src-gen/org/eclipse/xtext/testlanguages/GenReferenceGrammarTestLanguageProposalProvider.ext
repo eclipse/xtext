@@ -1,0 +1,136 @@
+/*
+Generated with Xtext
+*/
+
+import xtext;
+
+import org::eclipse::emf::ecore;
+import org::eclipse::jface::text::contentassist;
+import org::eclipse::xtext::crossref;
+import org::eclipse::xtext::ui::common::editor::contentassist;
+import org::eclipse::xtext::ui::common::xtend::contentassist;
+
+import ReferenceGrammar;
+
+extension org::eclipse::xtext::ui::common::xtend::contentassist::ContentAssist reexport;
+extension org::eclipse::xtend::util::stdlib::io;
+
+/**
+ * Represents a generated, default implementation of interface {@link IProposalProvider}.
+ * 
+ * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider
+ */
+
+	 
+List[ICompletionProposal] completeSpielplatzGroesse(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeSpielplatzGroesse feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	{ newProposal(assignment, "1", contentAssistContext) };
+	 
+List[ICompletionProposal] completeSpielplatzBeschreibung(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeSpielplatzBeschreibung feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	{ newProposal(assignment, "\"SpielplatzBeschreibung\"", contentAssistContext) };
+	 
+List[ICompletionProposal] completeSpielplatzKinder(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeSpielplatzKinder feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	{};
+	 
+List[ICompletionProposal] completeSpielplatzErzieher(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeSpielplatzErzieher feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	{};
+	 
+List[ICompletionProposal] completeSpielplatzSpielzeuge(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeSpielplatzSpielzeuge feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	{};
+	 
+List[ICompletionProposal] completeSpielplatzFamilie(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeSpielplatzFamilie feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	{};
+	 
+List[ICompletionProposal] completeKindName(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeKindName feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+    { newProposal(assignment, "KindName", contentAssistContext) };
+	 
+List[ICompletionProposal] completeKindAge(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeKindAge feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	{ newProposal(assignment, "1", contentAssistContext) };
+	 
+List[ICompletionProposal] completeErwachsenerName(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeErwachsenerName feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+    { newProposal(assignment, "ErwachsenerName", contentAssistContext) };
+	 
+List[ICompletionProposal] completeErwachsenerAge(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeErwachsenerAge feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	{ newProposal(assignment, "1", contentAssistContext) };
+	 
+List[ICompletionProposal] completeSpielzeugName(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeSpielzeugName feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+    { newProposal(assignment, "SpielzeugName", contentAssistContext) };
+	 
+List[ICompletionProposal] completeSpielzeugFarbe(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeSpielzeugFarbe feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	{};
+	 
+List[ICompletionProposal] completeFamilieName(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeFamilieName feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	{};
+	 
+List[ICompletionProposal] completeFamilieMutter(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeFamilieMutter feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	lookupCrossReference(((CrossReference)assignment.terminal), contentAssistContext);
+	 
+List[ICompletionProposal] completeFamilieVater(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeFamilieVater feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	lookupCrossReference(((CrossReference)assignment.terminal), contentAssistContext);
+	 
+List[ICompletionProposal] completeFamilieKinder(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeFamilieKinder feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	lookupCrossReference(((CrossReference)assignment.terminal), contentAssistContext);
+
+	 	  
+List[ICompletionProposal] complete(RuleCall ruleCall, IContentAssistContext contentAssistContext) :
+	{};
+
+/*
+	// TODO 
+    @Override
+	protected String getDefaultImageFilePath() {
+		return "icons/editor.gif";
+	}
+
+	@Override
+	protected String getPluginId() {
+		return UI_PLUGIN_ID;
+	}
+*/

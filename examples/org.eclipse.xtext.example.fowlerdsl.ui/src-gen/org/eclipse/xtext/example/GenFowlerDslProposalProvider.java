@@ -19,11 +19,12 @@ import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
  * 
  * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider
  */
-public class FowlerDslGenProposalProvider  extends AbstractProposalProvider {
+public class GenFowlerDslProposalProvider  extends AbstractProposalProvider {
 	// constants
 	private static final String UI_PLUGIN_ID  = "org.eclipse.xtext.example.fowlerdsl.ui";
-
 	
+	
+			
 	public List<? extends ICompletionProposal> completeStatemachineEvents(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeStatemachineEvents feature '" + assignment.getFeature() + "' terminal '"
@@ -32,7 +33,7 @@ public class FowlerDslGenProposalProvider  extends AbstractProposalProvider {
 		}
 		return Collections.emptyList();
 	}
-	
+			
 	public List<? extends ICompletionProposal> completeStatemachineCommands(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeStatemachineCommands feature '" + assignment.getFeature() + "' terminal '"
@@ -41,7 +42,7 @@ public class FowlerDslGenProposalProvider  extends AbstractProposalProvider {
 		}
 		return Collections.emptyList();
 	}
-	
+			
 	public List<? extends ICompletionProposal> completeStatemachineStates(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeStatemachineStates feature '" + assignment.getFeature() + "' terminal '"
@@ -50,7 +51,7 @@ public class FowlerDslGenProposalProvider  extends AbstractProposalProvider {
 		}
 		return Collections.emptyList();
 	}
-	
+			
 	public List<? extends ICompletionProposal> completeEventResetting(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeEventResetting feature '" + assignment.getFeature() + "' terminal '"
@@ -59,7 +60,7 @@ public class FowlerDslGenProposalProvider  extends AbstractProposalProvider {
 		}
 		return Collections.emptyList();
 	}
-	
+			
 	public List<? extends ICompletionProposal> completeEventName(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeEventName feature '" + assignment.getFeature() + "' terminal '"
@@ -68,7 +69,7 @@ public class FowlerDslGenProposalProvider  extends AbstractProposalProvider {
 		}
 		return Collections.singletonList(createCompletionProposal(assignment, "EventName", contentAssistContext));
 	}
-	
+			
 	public List<? extends ICompletionProposal> completeEventCode(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeEventCode feature '" + assignment.getFeature() + "' terminal '"
@@ -77,7 +78,7 @@ public class FowlerDslGenProposalProvider  extends AbstractProposalProvider {
 		}
 		return Collections.singletonList(createCompletionProposal(assignment, "EventCode", contentAssistContext));
 	}
-	
+			
 	public List<? extends ICompletionProposal> completeCommandName(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeCommandName feature '" + assignment.getFeature() + "' terminal '"
@@ -86,7 +87,7 @@ public class FowlerDslGenProposalProvider  extends AbstractProposalProvider {
 		}
 		return Collections.singletonList(createCompletionProposal(assignment, "CommandName", contentAssistContext));
 	}
-	
+			
 	public List<? extends ICompletionProposal> completeCommandCode(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeCommandCode feature '" + assignment.getFeature() + "' terminal '"
@@ -95,7 +96,7 @@ public class FowlerDslGenProposalProvider  extends AbstractProposalProvider {
 		}
 		return Collections.singletonList(createCompletionProposal(assignment, "CommandCode", contentAssistContext));
 	}
-	
+			
 	public List<? extends ICompletionProposal> completeStateName(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeStateName feature '" + assignment.getFeature() + "' terminal '"
@@ -104,7 +105,7 @@ public class FowlerDslGenProposalProvider  extends AbstractProposalProvider {
 		}
 		return Collections.singletonList(createCompletionProposal(assignment, "StateName", contentAssistContext));
 	}
-	
+			
 	public List<? extends ICompletionProposal> completeStateActions(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeStateActions feature '" + assignment.getFeature() + "' terminal '"
@@ -113,7 +114,7 @@ public class FowlerDslGenProposalProvider  extends AbstractProposalProvider {
 		}
 		return lookupCrossReference(((CrossReference)assignment.getTerminal()), contentAssistContext);
 	}
-	
+			
 	public List<? extends ICompletionProposal> completeStateTransitions(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeStateTransitions feature '" + assignment.getFeature() + "' terminal '"
@@ -122,7 +123,7 @@ public class FowlerDslGenProposalProvider  extends AbstractProposalProvider {
 		}
 		return Collections.emptyList();
 	}
-	
+			
 	public List<? extends ICompletionProposal> completeTransitionEvent(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeTransitionEvent feature '" + assignment.getFeature() + "' terminal '"
@@ -131,7 +132,7 @@ public class FowlerDslGenProposalProvider  extends AbstractProposalProvider {
 		}
 		return lookupCrossReference(((CrossReference)assignment.getTerminal()), contentAssistContext);
 	}
-	
+			
 	public List<? extends ICompletionProposal> completeTransitionState(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeTransitionState feature '" + assignment.getFeature() + "' terminal '"
@@ -141,10 +142,18 @@ public class FowlerDslGenProposalProvider  extends AbstractProposalProvider {
 		return lookupCrossReference(((CrossReference)assignment.getTerminal()), contentAssistContext);
 	}
     
-    
-    
-    
-    
+			
+	public List<? extends ICompletionProposal> complete(RuleCall ruleCall, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("complete '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
+					+ "' for model '" + contentAssistContext.getModel() + "' and prefix '" + contentAssistContext.getMatchString() + "'");
+		}
+		return Collections.emptyList();
+	}
+			
+			
+			
+			
     
     @Override
 	protected String getDefaultImageFilePath() {
