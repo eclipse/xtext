@@ -14,6 +14,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -78,18 +79,17 @@ public class ServiceRegistry {
 		isFrozen = true;
 		try {
 			injectDependencies(languageDescriptor, patient);
-		}
-		catch (VirtualMachineError e) {
-			// TODO : should be checked in advance or while resolving dependencies
-			if(e instanceof StackOverflowError || e instanceof OutOfMemoryError)
-				throw new IllegalStateException(e.getMessage() + " - might be caused by cyclic dependencies of stateful services.");
+		} catch (VirtualMachineError e) {
+			// TODO : should be checked in advance or while resolving
+			// dependencies
+			if (e instanceof StackOverflowError || e instanceof OutOfMemoryError)
+				throw new IllegalStateException(e.getMessage()
+						+ " - might be caused by cyclic dependencies of stateful services.");
 			else
 				throw e;
-		}
-		catch (RuntimeException e) {
+		} catch (RuntimeException e) {
 			throw e;
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			throw new IllegalStateException(e);
 		}
 	}
@@ -163,21 +163,18 @@ public class ServiceRegistry {
 					currPriority = e.priority;
 					if (currentScope == realLanguageDescriptor && e.cachedService != null) {
 						service = (T) e.cachedService;
-					}
-					else {
+					} else {
 						service = (T) e.factory.createService();
 						if (service == null)
 							return null;
 						if (currentScope == realLanguageDescriptor && isServiceStateless(service)) {
 							e.cachedService = service;
-						}
-						else {
+						} else {
 							addEntry(realLanguageDescriptor, e, service);
 						}
 						injectServices(realLanguageDescriptor, service);
 					}
-				}
-				else {
+				} else {
 					if (e.priority == currPriority) {
 						logger.error("Multiple service factories for type " + serviceInterface.getName() + " in scope "
 								+ realLanguageDescriptor.getId());
@@ -198,7 +195,7 @@ public class ServiceRegistry {
 		Entry newe = new Entry();
 		newe.priority = e.priority;
 		newe.factory = e.factory;
-		if(isServiceStateless(service))
+		if (isServiceStateless(service))
 			newe.cachedService = service;
 		List<Entry> entryList = getEntryList(realLanguageDescriptor);
 		entryList.add(newe);
@@ -240,6 +237,18 @@ public class ServiceRegistry {
 			entries = new ArrayList<Entry>();
 			entryMap.put(languageDescriptor, entries);
 		}
+		Collections.sort(entries, new Comparator<Entry>(){
+
+			public int compare(Entry o1, Entry o2) {
+				if (o1.factory.getServiceInterface().equals(o2.factory.getServiceInterface())) {
+					return ((Integer)o1.priority).compareTo(o2.priority);
+				}
+				if (o1.factory.getServiceInterface().isAssignableFrom(o2.factory.getServiceInterface())) {
+					return 1;
+				} else {
+					return -1;
+				}
+			}});
 		return entries;
 	}
 
@@ -352,8 +361,7 @@ public class ServiceRegistry {
 		for (ServiceDependency serviceDependency : dependencies) {
 			if (IServiceScope.class.equals(serviceDependency.getServiceType())) {
 				serviceDependency.inject(patient, languageDescriptor);
-			}
-			else {
+			} else {
 				Object alreadyRegisteredService = internalGetService(languageDescriptor, serviceDependency
 						.getServiceType());
 				if (alreadyRegisteredService == null && !serviceDependency.isOptional())
