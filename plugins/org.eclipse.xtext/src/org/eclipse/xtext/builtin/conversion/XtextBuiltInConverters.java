@@ -17,6 +17,7 @@ import org.eclipse.xtext.conversion.impl.AbstractNullSafeConverter;
 import org.eclipse.xtext.conversion.impl.AbstractToStringConverter;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.service.Inject;
+import org.eclipse.xtext.util.Strings;
 
 public class XtextBuiltInConverters extends AbstractAnnotationBasedValueConverterService {
 
@@ -49,13 +50,12 @@ public class XtextBuiltInConverters extends AbstractAnnotationBasedValueConverte
 	public IValueConverter<String> STRING() {
 		return new AbstractNullSafeConverter<String>() {
 			protected String internalToValue(String string, AbstractNode node) {
-				return string.substring(1, string.length() - 1);
+				return Strings.convertFromJavaString(string.substring(1, string.length() - 1));
 			}
 
 			@Override
 			protected String internalToString(String value) {
-				String v = (String) value;
-				return v.indexOf('\'') == -1 ? "'" + value + "'": "\"" + value + "\"";
+				return '"' + Strings.convertToJavaString(value) + '"';
 			}
 		};
 	}
