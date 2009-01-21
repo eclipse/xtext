@@ -49,8 +49,7 @@ public class TerminalRuleInterpreter extends XtextSwitch<Boolean>{
 	}
 	
 	private boolean eof() {
-		boolean result = input.getOffset() >= input.length(); 
-		return result;
+		return input.getOffset() >= input.length();
 	}
 	
 	public TerminalRuleInterpreter(ICharSequenceWithOffset input, IMarkerFactory markerFactory) {
@@ -156,8 +155,7 @@ public class TerminalRuleInterpreter extends XtextSwitch<Boolean>{
 	public Boolean caseParserRule(ParserRule object) {
 		if (!object.isTerminal())
 			throw new IllegalStateException("Cannot call parser rules that are not terminal rules.");
-		boolean result = doSwitch(object.getAlternatives());
-		return result;
+		return doSwitch(object.getAlternatives());
 	}
 
 	@Override
