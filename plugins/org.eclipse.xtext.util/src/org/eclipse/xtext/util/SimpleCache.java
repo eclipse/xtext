@@ -53,4 +53,8 @@ public class SimpleCache<Key, Value> {
 		return content.size();
 	}
 
+	public boolean isEmpty() {
+		return content.isEmpty();
+	}
+
 }
