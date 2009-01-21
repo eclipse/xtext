@@ -19,6 +19,7 @@ public class GenerateAllLanguages {
 			org.eclipse.xtext.ui.common.GenerateAllTestGrammarsWithUiConfig.main("../org.eclipse.xtext.ui.common.tests/");
 			org.eclipse.xtext.ui.core.GenerateAllTestGrammars.main("../org.eclipse.xtext.ui.core.tests");
 			org.eclipse.emf.mwe.di.mwe.main("../org.eclipse.emf.mwe.di");
+			xtext.example.GenerateGrammar.main("../org.eclipse.xtext.example.domainmodel");
 			org.eclipse.xtext.example.FowlerDsl.main("../org.eclipse.xtext.example.fowlerdsl");
 			org.eclipse.xtext.reference.ReferenceGrammar.main("../org.eclipse.xtext.reference");
 		}
