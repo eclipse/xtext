@@ -93,8 +93,7 @@ public class TerminalRuleToLexerBody extends XtextSwitch<String>{
 	@Override
 	public String caseKeyword(Keyword object) {
 		result.append("'");
-		String value = object.getValue();
-		value = value.replace("'", "\\'");
+		String value = Strings.convertToJavaString(object.getValue());
 		result.append(value).append("'");
 		result.append(Strings.emptyIfNull(object.getCardinality()));
 		return "";

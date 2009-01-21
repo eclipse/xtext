@@ -81,12 +81,12 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 	}
 
 	public void testSimpleManyStrings1() throws Exception {
-		String model = "= 'xxx' 'yyy'";
+		String model = "= \"xxx\" \"yyy\"";
 		assertEquals(model, parseAndSerialize(model));
 	}
 
 	public void testSimpleManyStrings2() throws Exception {
-		String model = "= 'xxx' 'yyy' 'zzzz'";
+		String model = "= \"xxx\" \"yyy\" \"zzzz\"";
 		assertEquals(model, parseAndSerialize(model));
 	}
 
