@@ -1,4 +1,4 @@
-package org.eclipse.xtext.ui.common.editor.outline;
+package org.eclipse.xtext.ui.common.editor.outline.impl;
 
 import org.eclipse.core.runtime.ListenerList;
 import org.eclipse.core.runtime.SafeRunner;

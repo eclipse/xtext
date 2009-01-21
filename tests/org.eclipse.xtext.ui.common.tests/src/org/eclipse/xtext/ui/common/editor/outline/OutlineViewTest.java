@@ -33,6 +33,7 @@ import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.ParseTreeUtil;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.common.editor.outline.impl.LinkingHelper;
 import org.eclipse.xtext.ui.core.editor.AbstractEditorTest;
 import org.eclipse.xtext.ui.core.editor.XtextEditor;
 import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
