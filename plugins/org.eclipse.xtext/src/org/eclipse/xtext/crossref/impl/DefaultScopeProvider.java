@@ -34,7 +34,7 @@ public class DefaultScopeProvider extends AbstractScopeProvider implements IScop
 	private final EContentAdapter adapter = new EContentAdapter() {
 
 		public void notifyChanged(Notification notification) {
-			if (!notification.isTouch()) {
+			if (!notification.isTouch() && !cache.isEmpty()) {
 				Object notifier = notification.getNotifier();
 				if (logger.isTraceEnabled()) {
 					logger.trace("received notification " + notification.getEventType());

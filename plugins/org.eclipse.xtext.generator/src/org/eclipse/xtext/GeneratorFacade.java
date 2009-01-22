@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.emf.mwe.core.issues.IssuesImpl;
+import org.eclipse.internal.xtend.util.StringHelper;
 import org.eclipse.xpand2.XpandExecutionContextImpl;
 import org.eclipse.xpand2.XpandFacade;
 import org.eclipse.xpand2.output.Outlet;
@@ -34,7 +35,9 @@ import org.eclipse.xtend.check.CheckFacade;
 import org.eclipse.xtend.expression.ExecutionContextImpl;
 import org.eclipse.xtend.expression.Variable;
 import org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel;
+import org.eclipse.xtext.ecore.GenerateJavaFromEcore;
 import org.eclipse.xtext.grammaraccess.GrammarAccessUtil;
+import org.eclipse.xtext.resource.metamodel.Xtext2EcoreTransformer;
 import org.eclipse.xtext.xtextgen.GenModel;
 import org.eclipse.xtext.xtextgen.GenService;
 import org.eclipse.xtext.xtextgen.XtextgenFactory;
@@ -49,8 +52,12 @@ public class GeneratorFacade {
 	private static Logger log = Logger.getLogger(GeneratorFacade.class);
 
 	public static void generate(Grammar grammarModel, String runtimeProjectPath, String uiProjectPath,
-			
 			String... modelFileExtensions) throws IOException {
+		generate(grammarModel, runtimeProjectPath, uiProjectPath, modelFileExtensions, false);
+	}
+
+	public static void generate(Grammar grammarModel, String runtimeProjectPath, String uiProjectPath,
+			String[] modelFileExtensions, boolean generateEcore) throws IOException {
 		if (!grammarModel.eResource().getErrors().isEmpty()) {
 			log.error(grammarModel.eResource().getErrors());
 			return;
@@ -58,7 +65,7 @@ public class GeneratorFacade {
 		if (!grammarModel.eResource().getWarnings().isEmpty()) {
 			log.warn(grammarModel.eResource().getWarnings());
 		}
-			
+
 		List<EObject> list = EcoreUtil2.eAllContentsAsList(grammarModel);
 		Issues issues = new IssuesImpl();
 		ExecutionContextImpl ctx = new ExecutionContextImpl();
@@ -70,19 +77,19 @@ public class GeneratorFacade {
 			return;
 		}
 
-//		CompositeNode rootNode = NodeUtil.getRootNode(grammarModel);
-//		EList<SyntaxError> allSyntaxErrors = rootNode.allSyntaxErrors();
-//		for (SyntaxError syntaxError : allSyntaxErrors) {
-//			log.error(syntaxError.getMessage() + ":" + syntaxError.getNode().getTotalLine());
-//		}
-//		if (!allSyntaxErrors.isEmpty())
-//			throw new IllegalStateException("The grammar has syntax errors.");
-		GenModel genModel = assembleGeneratorModel(grammarModel, runtimeProjectPath, uiProjectPath,
-				modelFileExtensions);
-		generate(genModel);
+		// CompositeNode rootNode = NodeUtil.getRootNode(grammarModel);
+		// EList<SyntaxError> allSyntaxErrors = rootNode.allSyntaxErrors();
+		// for (SyntaxError syntaxError : allSyntaxErrors) {
+		// log.error(syntaxError.getMessage() + ":" +
+		// syntaxError.getNode().getTotalLine());
+		// }
+		// if (!allSyntaxErrors.isEmpty())
+		// throw new IllegalStateException("The grammar has syntax errors.");
+		GenModel genModel = assembleGeneratorModel(grammarModel, runtimeProjectPath, uiProjectPath, modelFileExtensions);
+		generate(genModel, generateEcore);
 	}
 
-	private static void generate(GenModel genModel) throws IOException {
+	private static void generate(GenModel genModel, boolean generateEcore) throws IOException {
 
 		EPackage.Registry.INSTANCE.put(EcorePackage.eNS_URI, EcorePackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(XtextPackage.eNS_URI, XtextPackage.eINSTANCE);
@@ -114,17 +121,19 @@ public class GeneratorFacade {
 		// save grammar model
 		ResourceSet setImpl = genModel.getGrammar().eResource().getResourceSet();
 		String xmiPath = GrammarUtil.getClasspathRelativePathToXmi(genModel.getGrammar());
-		Resource resource = setImpl.createResource(URI.createURI(GenExtensions.outletPath(genModel,"SRC_GEN") + "/" + xmiPath));
+		Resource resource = setImpl.createResource(URI.createURI(GenExtensions.outletPath(genModel, "SRC_GEN") + "/"
+				+ xmiPath));
 		resource.getContents().add(genModel.getGrammar());
 		resource.save(null);
-		
-		
-// We need to know the gen models of all referenced EPackages in order to do a proper generation.
-//		
-//		//generate ecore java classes
-//		String basePackageName = GrammarUtil.getNamespace(genModel.getGrammar())+"."+StringHelper.firstLower(GrammarUtil.getName(genModel.getGrammar()));
-//		GenerateJavaFromEcore.generateEcoreJavaClasses(Xtext2EcoreTransformer.doGetGeneratedPackages(genModel.getGrammar()), basePackageName,URI.createURI(GenExtensions.outletPath(genModel,"SRC_GEN")).toString());
 
+		// generate ecore java classes
+		if (generateEcore) {
+			String basePackageName = GrammarUtil.getNamespace(genModel.getGrammar()) + "."
+					+ StringHelper.firstLower(GrammarUtil.getName(genModel.getGrammar()));
+			GenerateJavaFromEcore.generateEcoreJavaClasses(Xtext2EcoreTransformer.doGetGeneratedPackages(genModel
+					.getGrammar()), basePackageName, URI.createURI(GenExtensions.outletPath(genModel, "SRC_GEN"))
+					.toString());
+		}
 		// generate services
 		XpandFacade facade = XpandFacade.create(execCtx);
 		EList<GenService> services = genModel.getServices();
@@ -155,8 +164,8 @@ public class GeneratorFacade {
 		genModel.setLanguageInterfaceFQName(namespace + ".I" + languageName);
 
 		genModel.getOutlets().add(outlet("RUNTIME", runtimeProjectPath, false));
-		genModel.getOutlets().add(outlet("SRC", runtimeProjectPath+"/src", false));
-		genModel.getOutlets().add(outlet("SRC_GEN", runtimeProjectPath+"/src-gen", true));
+		genModel.getOutlets().add(outlet("SRC", runtimeProjectPath + "/src", false));
+		genModel.getOutlets().add(outlet("SRC_GEN", runtimeProjectPath + "/src-gen", true));
 
 		if (uiProjectPath != null) {
 			String uiPluginID = uiProjectPath.substring(uiProjectPath.lastIndexOf('/') + 1);
@@ -164,11 +173,12 @@ public class GeneratorFacade {
 			genModel.setUiPluginBundleID(uiPluginID);
 
 			genModel.getOutlets().add(outlet("UI", uiProjectPath, false));
-			genModel.getOutlets().add(outlet("UI_SRC", uiProjectPath+"/src", false));
+			genModel.getOutlets().add(outlet("UI_SRC", uiProjectPath + "/src", false));
 			genModel.getOutlets().add(outlet("UI_SRC_GEN", uiProjectPath + "/src-gen", true));
-//			genModel.getOutlets().add(outlet("UI_TEMPLATES", uiProjectPath + "/templates", true));
+			// genModel.getOutlets().add(outlet("UI_TEMPLATES", uiProjectPath +
+			// "/templates", true));
 		}
-		
+
 		GenService metamodelAccessService = XtextgenFactory.eINSTANCE.createGenService();
 		metamodelAccessService.setServiceInterfaceFQName("org.eclipse.xtext.IMetamodelAccess");
 		metamodelAccessService.setGenClassFQName(namespace + ".services." + languageName + "MetamodelAccess");
@@ -176,24 +186,28 @@ public class GeneratorFacade {
 		metamodelAccessService.setExtensionPointID("org.eclipse.xtext.ui.metamodelAccess");
 		genModel.getServices().add(metamodelAccessService);
 
-		// Moritz: I've refactored the determination of the GrammarAccessFQName to GrammarAccessUtil,
-		// since there are other services (e.g. Serialization, eventually Parsing) that have hard
-		// dependencies on the GrammarAccess specific to their language. By hard dependency I mean that
-		// they are not satisfied with some implementation of the interface, but need exactly the 
-		// implementation for their language. 
+		// Moritz: I've refactored the determination of the GrammarAccessFQName
+		// to GrammarAccessUtil,
+		// since there are other services (e.g. Serialization, eventually
+		// Parsing) that have hard
+		// dependencies on the GrammarAccess specific to their language. By hard
+		// dependency I mean that
+		// they are not satisfied with some implementation of the interface, but
+		// need exactly the
+		// implementation for their language.
 		GenService grammarAccessService = XtextgenFactory.eINSTANCE.createGenService();
 		grammarAccessService.setServiceInterfaceFQName("org.eclipse.xtext.IGrammarAccess");
 		grammarAccessService.setGenClassFQName(GrammarAccessUtil.getGrammarAccessFQName(grammarModel));
 		grammarAccessService.setTemplatePath("org::eclipse::xtext::grammaraccess::GrammarAccess::root");
-		//grammarAccessService.setExtensionPointID("org.eclipse.xtext.ui.grammarAccess");
+		// grammarAccessService.setExtensionPointID("org.eclipse.xtext.ui.grammarAccess");
 		genModel.getServices().add(grammarAccessService);
-		
+
 		GenService packratParser = XtextgenFactory.eINSTANCE.createGenService();
 		packratParser.setServiceInterfaceFQName("org.eclipse.xtext.parser.packrat.IPackratParser");
 		packratParser.setGenClassFQName(namespace + ".parser.packrat." + languageName + "PackratParser");
 		packratParser.setTemplatePath("org::eclipse::xtext::parser::packrat::PackratParserGen::root");
 		genModel.getServices().add(packratParser);
-		
+
 		if (!GrammarUtil.isAbstract(grammarModel)) {
 
 			GenService elementFactoryService = XtextgenFactory.eINSTANCE.createGenService();
@@ -212,8 +226,10 @@ public class GeneratorFacade {
 			genModel.getServices().add(parserService);
 
 			GenService tokenFileProviderService = XtextgenFactory.eINSTANCE.createGenService();
-			tokenFileProviderService.setServiceInterfaceFQName("org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider");
-			tokenFileProviderService.setGenClassFQName(namespace + ".parser.antlr." + languageName + "AntlrTokenFileProvider");
+			tokenFileProviderService
+					.setServiceInterfaceFQName("org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider");
+			tokenFileProviderService.setGenClassFQName(namespace + ".parser.antlr." + languageName
+					+ "AntlrTokenFileProvider");
 			tokenFileProviderService.setTemplatePath("org::eclipse::xtext::parser::AntlrTokenFileProvider::root");
 			// tokenFileProviderService.setExtensionPointID(
 			// "org.eclipse.xtext.ui.parser");
@@ -238,51 +254,68 @@ public class GeneratorFacade {
 
 			GenService serializationStrategy = XtextgenFactory.eINSTANCE.createGenService();
 			serializationStrategy.setServiceInterfaceFQName("org.eclipse.xtext.parsetree.reconstr.ITokenSerializer");
-			serializationStrategy.setGenClassFQName("org.eclipse.xtext.parsetree.reconstr.impl.WhitespacePreservingTokenSerializer");
+			serializationStrategy
+					.setGenClassFQName("org.eclipse.xtext.parsetree.reconstr.impl.WhitespacePreservingTokenSerializer");
 			genModel.getServices().add(serializationStrategy);
 
 			GenService crossRefSerializer = XtextgenFactory.eINSTANCE.createGenService();
-			crossRefSerializer.setServiceInterfaceFQName("org.eclipse.xtext.parsetree.reconstr.ICrossReferenceSerializer");
-			crossRefSerializer.setGenClassFQName("org.eclipse.xtext.parsetree.reconstr.impl.SimpleCrossReferenceSerializer");
+			crossRefSerializer
+					.setServiceInterfaceFQName("org.eclipse.xtext.parsetree.reconstr.ICrossReferenceSerializer");
+			crossRefSerializer
+					.setGenClassFQName("org.eclipse.xtext.parsetree.reconstr.impl.SimpleCrossReferenceSerializer");
 			genModel.getServices().add(crossRefSerializer);
 
 			GenService transientValueService = XtextgenFactory.eINSTANCE.createGenService();
-			transientValueService.setServiceInterfaceFQName("org.eclipse.xtext.parsetree.reconstr.ITransientValueService");
-			transientValueService.setGenClassFQName("org.eclipse.xtext.parsetree.reconstr.impl.SimpleTransientValueService");
+			transientValueService
+					.setServiceInterfaceFQName("org.eclipse.xtext.parsetree.reconstr.ITransientValueService");
+			transientValueService
+					.setGenClassFQName("org.eclipse.xtext.parsetree.reconstr.impl.SimpleTransientValueService");
 			genModel.getServices().add(transientValueService);
 
 			GenService tokenScannerService = XtextgenFactory.eINSTANCE.createGenService();
 			tokenScannerService.setServiceInterfaceFQName("org.eclipse.xtext.parser.antlr.Lexer");
-			tokenScannerService.setGenClassFQName(namespace + ".parser.antlr.internal.Internal" + languageName + "Lexer");
+			tokenScannerService.setGenClassFQName(namespace + ".parser.antlr.internal.Internal" + languageName
+					+ "Lexer");
 			genModel.getServices().add(tokenScannerService);
-			
+
 			GenService proposalProvider = XtextgenFactory.eINSTANCE.createGenService();
+			proposalProvider
+					.setServiceInterfaceFQName("org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider");
+			proposalProvider.setGenClassFQName(namespace + "." + languageName + "GenProposalProvider");
 			proposalProvider.setServiceInterfaceFQName("org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider");
 			proposalProvider.setGenClassFQName(namespace +".Gen"+ languageName+"ProposalProvider");
 			proposalProvider.setUiService(true);
 			genModel.getServices().add(proposalProvider);
-			
+
 			GenService contentAssistProcessor = XtextgenFactory.eINSTANCE.createGenService();
-			contentAssistProcessor.setServiceInterfaceFQName("org.eclipse.jface.text.contentassist.IContentAssistProcessor");
-			contentAssistProcessor.setGenClassFQName("org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultContentAssistProcessor");
+			contentAssistProcessor
+					.setServiceInterfaceFQName("org.eclipse.jface.text.contentassist.IContentAssistProcessor");
+			contentAssistProcessor
+					.setGenClassFQName("org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultContentAssistProcessor");
 			contentAssistProcessor.setUiService(true);
 			genModel.getServices().add(contentAssistProcessor);
-			
+
 			GenService contentAssistInvocationHandler = XtextgenFactory.eINSTANCE.createGenService();
-			contentAssistInvocationHandler.setServiceInterfaceFQName("org.eclipse.xtext.ui.common.editor.contentassist.impl.IContentAssistInvocationHandler");
-			contentAssistInvocationHandler.setGenClassFQName("org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultContentAssistMethodInvoker");
+			contentAssistInvocationHandler
+					.setServiceInterfaceFQName("org.eclipse.xtext.ui.common.editor.contentassist.impl.IContentAssistInvocationHandler");
+			contentAssistInvocationHandler
+					.setGenClassFQName("org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultContentAssistMethodInvoker");
 			contentAssistInvocationHandler.setUiService(true);
 			genModel.getServices().add(contentAssistInvocationHandler);
 
 			GenService templateContentAssistProcessor = XtextgenFactory.eINSTANCE.createGenService();
-			templateContentAssistProcessor.setServiceInterfaceFQName("org.eclipse.xtext.ui.common.editor.contentassist.ITemplateContentAssistProcessor");
-			templateContentAssistProcessor.setGenClassFQName("org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultTemplateContentAssistProcessor");
+			templateContentAssistProcessor
+					.setServiceInterfaceFQName("org.eclipse.xtext.ui.common.editor.contentassist.ITemplateContentAssistProcessor");
+			templateContentAssistProcessor
+					.setGenClassFQName("org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultTemplateContentAssistProcessor");
 			templateContentAssistProcessor.setUiService(true);
 			genModel.getServices().add(templateContentAssistProcessor);
 
 			GenService contentAssistCalculator = XtextgenFactory.eINSTANCE.createGenService();
-			contentAssistCalculator.setServiceInterfaceFQName("org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistCalculator");
-			contentAssistCalculator.setGenClassFQName("org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultContentAssistCalculator");
+			contentAssistCalculator
+					.setServiceInterfaceFQName("org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistCalculator");
+			contentAssistCalculator
+					.setGenClassFQName("org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultContentAssistCalculator");
 			contentAssistCalculator.setUiService(true);
 			genModel.getServices().add(contentAssistCalculator);
 			
