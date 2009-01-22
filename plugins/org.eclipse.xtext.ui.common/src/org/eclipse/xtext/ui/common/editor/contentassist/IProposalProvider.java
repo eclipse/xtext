@@ -10,30 +10,6 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 
 /**
- * TODO: Rewrite these JavaDocs !
- * 
- * COMMMENT JavaDocs refer to default implementation rather than the interface
- * 
- * In addition to the declared methods, the framework tries to call grammar
- * dependent methods for assignments using reflection. The signature of such
- * methods invoked reflectively follows the following pattern:
- * 
- * public List<ICompletionProposal> complete[Typename][featureName](Assignment
- * ele, EObject model, String prefix)
- * 
- * <b>Example</b> Given the following grammar : <code>
- *  RuleA returns MyType :
- *  	"myType" name=ID;
- *  </code>
- * 
- * One could provide the following method in an implementation of this
- * interface: <code>
- * 	public List<ICompletionProposal> completeMyTypeName(Assignment ele, EObject model, String prefix, IDocument doc) {...}
- *  </code> Note that if you have generated Java classes for your
- * domain model (meta model) you can alternatively declare the second parameter
- * using a specific type: <code>
- * 	public List<ICompletionProposal> completeMyTypeName(Assignment ele, MyType model, String prefix, IDocument doc) {...}
- *  </code>
  * 
  * @author Sven Efftinge - Initial contribution and API
  * @author Michael Clay
