@@ -9,35 +9,42 @@
 package org.eclipse.xtext.ui.core.editor.model;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Assert;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.ListenerList;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jface.text.Document;
 import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.ide.ResourceUtil;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.core.editor.XtextResourceChecker;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocumentContentObserver.Processor;
-import org.eclipse.xtext.ui.core.internal.XtextMarkerManager;
 import org.eclipse.xtext.ui.core.util.JdtClasspathUriResolver;
 import org.eclipse.xtext.util.StringInputStream;
 
@@ -46,9 +53,10 @@ public class XtextDocument extends Document implements IXtextDocument {
 	private XtextResourceSet resourceSet = null;
 	private XtextResource resource = null;
 	private IEditorInput editorInput;
+	private IFile file;
 
 	public void setInput(IEditorInput editorInput) {
-		IFile file = ResourceUtil.getFile(editorInput);
+		file = ResourceUtil.getFile(editorInput);
 		Assert.isTrue(file != null && this.editorInput == null || this.editorInput.equals(editorInput));
 		if (this.editorInput != null)
 			return;
@@ -75,26 +83,40 @@ public class XtextDocument extends Document implements IXtextDocument {
 				throw new WrappedException(e);
 			}
 		}
-
+	}
+	
+	public boolean isReferenced(IResource anIResource) {
+		if (!(anIResource instanceof IFile))
+			return false;
+		EList<Resource> resources = resource.getResourceSet().getResources();
+		final Map<String, Resource> uriToRes = new HashMap<String, Resource>();
+		for (Resource res : resources) {
+			if (res != resource) {
+				URI uri = res.getURI();
+				uriToRes.put(uri.lastSegment(), res);
+			}
+		}
+		
+		return uriToRes.containsKey(anIResource.getFullPath().lastSegment());
 	}
 
 	private IJavaProject getIJavaProject(IFile file) {
 		IJavaProject create = JavaCore.create(file.getProject());
-		if (create.exists() && create.isOpen())
+		if (create.exists())
 			return create;
 		return null;
 	}
 
 	private ReentrantReadWriteLock rwLock = new ReentrantReadWriteLock();
-	private Lock readLock = rwLock.readLock();
 	private Lock writeLock = rwLock.writeLock();
+	private Lock readLock = rwLock.readLock();
 
 	public <T> T readOnly(UnitOfWork<T> work) {
 		readLock.lock();
 		try {
 			updateContentBeforeRead();
 			T exec = work.exec(resource);
-			ensureThatStateIsNotReturned((Object) exec,work);
+			ensureThatStateIsNotReturned((Object) exec, work);
 			return exec;
 		} catch (RuntimeException e) {
 			throw e;
@@ -109,8 +131,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 		writeLock.lock();
 		try {
 			T exec = work.exec(resource);
-			ensureThatStateIsNotReturned((Object) exec,work);
-			checkAndUpdateMarkers(resource);
+			ensureThatStateIsNotReturned((Object) exec, work);
 			notifyModelListeners(resource);
 			// TODO track modifications and serialize back to the text buffer
 			return exec;
@@ -120,18 +141,20 @@ public class XtextDocument extends Document implements IXtextDocument {
 			throw new WrappedException(e);
 		} finally {
 			writeLock.unlock();
+			checkAndUpdateMarkers();
 		}
 	}
 
 	private void ensureThatStateIsNotReturned(Object exec, UnitOfWork<?> uow) {
-		//TODO activate
-//		if (exec instanceof EObject) {
-//			if (((EObject) exec).eResource() == resource
-//					|| ((exec instanceof AbstractNode) && NodeUtil.getNearestSemanticObject((AbstractNode) exec)
-//							.eResource() == resource))
-//				throw new IllegalStateException(
-//						"The unit of work returned state from the resource. This is causing race condition problems and therefore not allowed! "+uow.getClass().getName());
-//		}
+		// TODO activate
+		// if (exec instanceof EObject) {
+		// if (((EObject) exec).eResource() == resource
+		// || ((exec instanceof AbstractNode) &&
+		// NodeUtil.getNearestSemanticObject((AbstractNode) exec)
+		// .eResource() == resource))
+		// throw new IllegalStateException(
+		// "The unit of work returned state from the resource. This is causing race condition problems and therefore not allowed! "+uow.getClass().getName());
+		// }
 	}
 
 	ListenerList modelListeners = new ListenerList(ListenerList.IDENTITY);
@@ -173,6 +196,54 @@ public class XtextDocument extends Document implements IXtextDocument {
 		}
 	}
 
+	private final class UpdateMarkerJob extends Job {
+		private UpdateMarkerJob(String name) {
+			super(name);
+		}
+
+		@Override
+		protected IStatus run(IProgressMonitor monitor) {
+			final List<Map<String, Object>> issues = readOnly(new UnitOfWork<List<Map<String, Object>>>() {
+				public List<Map<String, Object>> exec(XtextResource resource) throws Exception {
+					return XtextResourceChecker.check(resource);
+				}
+			});
+
+			if (file == null)
+				throw new IllegalStateException("Couldn't find IFile for Document");
+
+			// cleanup
+			try {
+				new WorkspaceModifyOperation(ResourcesPlugin.getWorkspace().getRuleFactory().markerRule(file)) {
+					@Override
+					protected void execute(final IProgressMonitor monitor) throws CoreException,
+							InvocationTargetException, InterruptedException {
+						file.deleteMarkers(MARKER_ID, true, IResource.DEPTH_INFINITE);
+						if (!issues.isEmpty()) {
+							// update
+							for (Map<String, Object> map : issues) {
+								IMarker marker = file.createMarker(MARKER_ID);
+								Object lNr = map.get(IMarker.LINE_NUMBER);
+								String lineNR = "";
+								if (lNr != null) {
+									lineNR = "line: " + lNr + " ";
+								}
+								map.put(IMarker.LOCATION, lineNR + file.getFullPath().toString());
+								marker.setAttributes(map);
+							}
+						}
+					}
+				}.run(monitor);
+			} catch (InvocationTargetException e) {
+				log.error("Could not create marker.", e);
+			} catch (InterruptedException e) {
+				log.error("Could not create marker.", e);
+			}
+
+			return Status.OK_STATUS;
+		}
+	}
+
 	class LockAwareProcessor implements Processor {
 
 		public <T> T process(UnitOfWork<T> transaction) {
@@ -191,18 +262,13 @@ public class XtextDocument extends Document implements IXtextDocument {
 
 	}
 
-	private void checkAndUpdateMarkers(XtextResource xtextResource) {
-		// check
-		List<Map<String, Object>> issues = XtextResourceChecker.check(xtextResource);
-		IFile file = getAdapter(IFile.class);
-		if (file == null)
-			throw new IllegalStateException("Couldn't find IFile for Document");
-		// cleanup
-		XtextMarkerManager.clearMarkers(file, null);
-		if (!issues.isEmpty()) {
-			// update
-			XtextMarkerManager.createMarker(file, issues, new NullProgressMonitor());
-		}
+	private static final Logger log = Logger.getLogger(XtextDocument.class);
+	private static final String MARKER_ID = Diagnostician.MARKER;
+//	private static final String XTEXT_PARSEERROR_MARKER_TYPE = Activator.PLUGIN_ID + ".problemmarker";
+	private UpdateMarkerJob updateMarkerJob = new UpdateMarkerJob("updateMarkers");
+
+	private void checkAndUpdateMarkers() {
+		updateMarkerJob.schedule();
 	}
 
 	@SuppressWarnings("unchecked")
