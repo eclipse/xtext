@@ -12,18 +12,12 @@ import org.eclipse.xtext.parser.terminalrules.XtextTerminalsTestLanguageStandalo
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguagePackratParser;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.util.StringInputStream;
-import org.eclipse.xtext.xtext.parser.handwritten.HandwrittenParser;
-import org.eclipse.xtext.xtext.parser.handwritten.HandwrittenParserWithMethodCalls;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class PerformanceTest extends AbstractGeneratorTest {
 
-	private HandwrittenParser handwritten;
-	
-	private HandwrittenParserWithMethodCalls handwrittenWithMethodCalls;
-	
 	private XtextGrammarTestLanguagePackratParser generated;
 	
 	private XtextTerminalsTestLanguagePackratParser generatedWithTerminals;
@@ -39,10 +33,6 @@ public class PerformanceTest extends AbstractGeneratorTest {
 	@Override
 	protected void setUp() throws Exception {
 		with(XtextTerminalsTestLanguageStandaloneSetup.class);
-		this.handwritten = new HandwrittenParser();
-		setAstFactory(handwritten);
-		this.handwrittenWithMethodCalls = new HandwrittenParserWithMethodCalls();
-		setAstFactory(handwrittenWithMethodCalls);
 		this.generated = new XtextGrammarTestLanguagePackratParser();
 		setAstFactory(generated);
 		this.generatedWithTerminals = new XtextTerminalsTestLanguagePackratParser();
@@ -74,8 +64,6 @@ public class PerformanceTest extends AbstractGeneratorTest {
 		long endTime = System.currentTimeMillis();
 		System.out.println("usage after:    " + (java.lang.Runtime.getRuntime().totalMemory() - java.lang.Runtime.getRuntime().freeMemory()));
 		System.out.println("duration:               " + (endTime - startTime) + " ms");
-		this.handwritten = null;
-		this.handwrittenWithMethodCalls = null;
 		this.model = null;
 	}
 
@@ -84,20 +72,6 @@ public class PerformanceTest extends AbstractGeneratorTest {
 		assertNotNull(result);
 		assertNotNull(result.getRootASTElement());
 		assertNotNull(result.getRootNode());
-	}
-	
-	public void testFirstHandwrittenPackrat() {
-		doTest(handwritten);
-	}
-
-	public void testSecondHandwrittenPackrat() {
-		doTest(handwritten);
-	}
-	
-	public void testHandwrittenPackratTwice() {
-		for (int i = 0; i < 2; i++) {
-			doTest(handwritten);
-		}
 	}
 	
 //	public void testProfile() {
@@ -131,20 +105,6 @@ public class PerformanceTest extends AbstractGeneratorTest {
 	public void testGeneratedPackratTwice() {
 		for (int i = 0; i < 2; i++) {
 			doTest(generated);
-		}
-	}
-	
-	public void testFirstHandwrittenWithMethodCallsPackrat() {
-		doTest(handwrittenWithMethodCalls);
-	}
-	
-	public void testSecondHandwrittenWithMethodCallsPackrat() {
-		doTest(handwrittenWithMethodCalls);
-	}
-	
-	public void testHandwrittenWithMethodCallsPackratTwice() {
-		for (int i = 0; i < 2; i++) {
-			doTest(handwrittenWithMethodCalls);
 		}
 	}
 	

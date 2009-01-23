@@ -12,6 +12,7 @@ import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory;
 import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 import org.eclipse.xtext.testlanguages.services.LexerTestLanguageGrammarAccess;
 
@@ -26,11 +27,11 @@ public class LexerTestLanguageSTRINGConsumer extends AbstractRuleAwareTerminalCo
 	}
 
 	@Override
-	protected boolean doConsume() {
-		if (!readChar('#')) return false;
-		if (!readChar('B')) return false;
+	protected int doConsume() {
+		if (!readChar('#')) return ConsumeResult.EMPTY_MATCH;
+		if (!readChar('B')) return ConsumeResult.EMPTY_MATCH;
 		readChars('B');
- 		return true;
+ 		return ConsumeResult.SUCCESS;
 	}
 
 	@Override
