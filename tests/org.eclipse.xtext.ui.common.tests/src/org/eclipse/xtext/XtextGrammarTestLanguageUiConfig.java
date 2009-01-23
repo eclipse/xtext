@@ -5,7 +5,6 @@ package org.eclipse.xtext;
 
 import java.util.Set;
 
-import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.testlanguages.UseXtendSwitch;
 import org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider;
 
@@ -19,7 +18,7 @@ public class XtextGrammarTestLanguageUiConfig extends org.eclipse.xtext.GenXtext
 		registrations.addAll(scope(XtextGrammarTestLanguageStandaloneSetup.getServiceScope()).with(
 				IProposalProvider.class,
 				(UseXtendSwitch.useXtend) ? XtendXtextGrammarTestLanguageProposalProvider.class
-						: GenXtextGrammarTestLanguageProposalProvider.class, ServiceRegistry.PRIORITY_MAX)
+						: GenXtextGrammarTestLanguageProposalProvider.class, UseXtendSwitch.higherPriority++)
 				.registrations());
 		return registrations;
 	}

@@ -5,7 +5,6 @@ package org.eclipse.xtext.testlanguages;
 
 import java.util.Set;
 
-import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider;
 
 /**
@@ -19,7 +18,7 @@ public class ContentAssistTestLanguageUiConfig extends
 		registrations.addAll(scope(ContentAssistTestLanguageStandaloneSetup.getServiceScope()).with(
 				IProposalProvider.class,
 				(UseXtendSwitch.useXtend) ? XtendContentAssistTestLanguageProposalProvider.class
-						: GenContentAssistTestLanguageProposalProvider.class, ServiceRegistry.PRIORITY_MAX)
+						: GenContentAssistTestLanguageProposalProvider.class, UseXtendSwitch.higherPriority++)
 				.registrations());
 		return registrations;
 	}

@@ -15,7 +15,3 @@ Require-Bundle: org.eclipse.xtext.ui.core;bundle-version="0.7.0",
 Bundle-Activator: org.eclipse.xtext.ui.core.internal.XtextUICoreTestsPlugin
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: Eclipse.org
-Export-Package: org.eclipse.xtext.ui.core,
- org.eclipse.xtext.ui.core.editor,
- org.eclipse.xtext.ui.core.util,
- org.eclipse.xtext.ui.core.workbench

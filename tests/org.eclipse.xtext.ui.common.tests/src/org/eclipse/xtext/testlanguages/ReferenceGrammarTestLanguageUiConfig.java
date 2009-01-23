@@ -5,7 +5,6 @@ package org.eclipse.xtext.testlanguages;
 
 import java.util.Set;
 
-import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider;
 
 /**
@@ -19,7 +18,7 @@ public class ReferenceGrammarTestLanguageUiConfig extends
 		registrations.addAll(scope(ReferenceGrammarTestLanguageStandaloneSetup.getServiceScope()).with(
 				IProposalProvider.class,
 				(UseXtendSwitch.useXtend) ? XtendReferenceGrammarTestLanguageProposalProvider.class
-						: GenReferenceGrammarTestLanguageProposalProvider.class, ServiceRegistry.PRIORITY_MAX)
+						: GenReferenceGrammarTestLanguageProposalProvider.class,  UseXtendSwitch.higherPriority++)
 				.registrations());
 		return registrations;
 	}

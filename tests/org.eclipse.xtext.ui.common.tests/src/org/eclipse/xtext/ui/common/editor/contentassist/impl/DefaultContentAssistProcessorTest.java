@@ -13,6 +13,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.contentassist.impl;
 
+
 import org.eclipse.xtext.XtextGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.XtextGrammarTestLanguageUiConfig;
 import org.eclipse.xtext.example.DomainmodelStandaloneSetup;
