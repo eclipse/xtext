@@ -53,6 +53,8 @@
       </parser>
    </extension>
    «ENDFOREACH-»
+   
+   «IF generateMergedPluginXml()»«EXPAND org::eclipse::xtext::ui::Plugin::body»«ENDIF»
 </plugin>
 «ENDFILE»
 «ENDIF»
