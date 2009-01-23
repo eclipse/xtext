@@ -17,12 +17,12 @@
 «EXTENSION org::eclipse::xtext::ui::UIProperties»
 «EXTENSION org::eclipse::xtext::ui::contentassist::ContentAssist»
 
-«DEFINE root FOR GenModel»
-«FILE uiGenProposalProviderClass().toJavaFilePath() UI_SRC_GEN -»
+«DEFINE root FOR GenService»
+«FILE genClassFQName.toJavaFilePath() UI_SRC_GEN -»
 /*
 «fileHeader()»
 */
-package «uiGenProposalProviderClass().toJavaPackage()»;
+package «genClassFQName.toJavaPackage()»;
 
 import java.util.Collections;
 import java.util.List;
@@ -31,7 +31,7 @@ import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.ui.common.editor.contentassist.impl.AbstractProposalProvider;
+import org.eclipse.xtext.ui.common.editor.contentassist.impl.AbstractJavaProposalProvider;
 import org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider;
 import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
 
@@ -40,9 +40,9 @@ import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
  * 
  * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider
  */
-public class «uiGenProposalProviderClass().toSimpleName()»  extends AbstractProposalProvider {
+public class «genClassFQName.toSimpleName()» extends AbstractJavaProposalProvider {
 	// constants
-	private static final String UI_PLUGIN_ID  = "«uiPluginBundleID»";
+	private static final String UI_PLUGIN_ID  = "«genModel().uiPluginBundleID»";
 	
 	«LET {} AS processedFqnFeatureNames»
 		«FOREACH grammar().containedAssignments() AS assignment-»

@@ -16,11 +16,9 @@
 «EXTENSION org::eclipse::xtext::ui::UIProperties»
 
 «DEFINE root FOR GenModel»
-«IF useXtend()»
 «FILE ".settings/org.openarchitectureware.base.prefs" UI-»
 eclipse.preferences.version=1
 metamodelContributor=org.openarchitectureware.EmfMetamodelContributor,org.openarchitectureware.core.metamodel.jdt.javabean.JavaBeanMetamodelContributor
 project.specific.metamodel=true
 «ENDFILE»
-«ENDIF»
 «ENDDEFINE»

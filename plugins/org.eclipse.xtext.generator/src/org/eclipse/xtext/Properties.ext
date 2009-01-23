@@ -74,15 +74,6 @@ uiConfigClass() :
 generatedUiConfigClass() :
 	grammar().getNamespace()+".Gen"+grammar().getName() + "UiConfig";
 	
-uiGenProposalProviderClass() :
-	grammar().getNamespace()+".Gen"+grammar().getName() + "ProposalProvider";
-
-uiProposalProviderClass() :
-	grammar().getId() + "ProposalProvider";
-
-uiContentAssistXtendInvokerClass() :
-	grammar().getId() + "XtendContentAssistInvoker";
-	
 tokenScannerClass() :
 	grammar().getId() + "TokenScanner";
 	
@@ -112,7 +103,12 @@ GenService resourceFactoryService() :
 		? findService("org.eclipse.xtext.resource.IResourceFactory")
 		: null;
 		
-boolean useXtend(GenModel model) :
-	// TODO decide on a better basis
-	true;
+List[PluginDependency] pluginDependencies(GenModel this, boolean isUI) :
+	services.select(s|s.uiService == isUI && !s.pluginDependencies.isEmpty).pluginDependencies;
+	
+String manifestEntry(PluginDependency this) :
+	bundleID 
+		+ ((version != null && version != "") ? ";bundle-version=" + version : "")
+		+ ((^reexport) ? ";visibility:=reexport" : "")
+		+ ((optional) ? ";resolution:=optional" : ""); 
 
