@@ -41,6 +41,7 @@ public class ReferenceGrammar {
 		ReferenceModelPackage.eINSTANCE.getCustomType(); // initialize
 
 		GeneratorFacade.cleanFolder(runtimePath + "/src-gen");
+		GeneratorFacade.cleanFolder(uiPath + "/src-gen");
 
 		String classpathUri = "classpath:/" + getClass().getName().replace('.', '/') + ".xtext";
 		log.info("loading " + classpathUri);

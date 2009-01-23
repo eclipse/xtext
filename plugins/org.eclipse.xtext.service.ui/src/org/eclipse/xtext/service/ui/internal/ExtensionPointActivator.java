@@ -70,6 +70,11 @@ public class ExtensionPointActivator {
 		}
 	}
 
+	/**
+	 * TODO: This seems to be obsolete now as scopes are created explicitly (not
+	 * by means of an ExtensionPoint). If so, delete it, the tests referring to
+	 * it and the ScopeUtil.
+	 */
 	private static void registerScopes() {
 		IExtensionPoint extensionPoint = Platform.getExtensionRegistry().getExtensionPoint(
 				Activator.getDefault().getBundle().getSymbolicName(), SCOPE);

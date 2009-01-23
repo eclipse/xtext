@@ -13,4 +13,5 @@ package org.eclipse.xtext.testlanguages;
 public class UseXtendSwitch {
 
 	public static boolean useXtend = false;
+
 }

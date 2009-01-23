@@ -10,7 +10,7 @@ import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.ui.common.editor.contentassist.impl.AbstractProposalProvider;
+import org.eclipse.xtext.ui.common.editor.contentassist.impl.AbstractJavaProposalProvider;
 import org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider;
 import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
 
@@ -19,9 +19,9 @@ import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
  * 
  * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider
  */
-public class GenContentAssistTestLanguageProposalProvider  extends AbstractProposalProvider {
+public class GenContentAssistTestLanguageProposalProvider extends AbstractJavaProposalProvider {
 	// constants
-	private static final String UI_PLUGIN_ID  = "";
+	private static final String UI_PLUGIN_ID  = ".";
 	
 	
 			

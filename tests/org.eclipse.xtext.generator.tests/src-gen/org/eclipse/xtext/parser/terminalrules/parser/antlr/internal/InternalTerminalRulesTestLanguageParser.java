@@ -39,7 +39,7 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
         
 
     public String[] getTokenNames() { return tokenNames; }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g"; }
+    public String getGrammarFileName() { return "./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g"; }
 
 
      
@@ -63,7 +63,7 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start entryRuleModel
-    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:68:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:68:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -71,8 +71,8 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:68:47: (iv_ruleModel= ruleModel EOF )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:69:2: iv_ruleModel= ruleModel EOF
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:68:47: (iv_ruleModel= ruleModel EOF )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:69:2: iv_ruleModel= ruleModel EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleModel_in_entryRuleModel72);
@@ -98,7 +98,7 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start ruleModel
-    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( ( ( ( ( ( (lv_idValue= RULE_ID ) | (lv_intValue= RULE_INT ) ) | (lv_stringValue= RULE_STRING ) ) | (lv_mlCommentValue= RULE_ML_COMMENT ) ) | (lv_slCommentValue= RULE_SL_COMMENT ) ) | (lv_wsValue= RULE_WS ) ) | (lv_anyValue= RULE_ANY_OTHER ) ) ;
+    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( ( ( ( ( ( (lv_idValue= RULE_ID ) | (lv_intValue= RULE_INT ) ) | (lv_stringValue= RULE_STRING ) ) | (lv_mlCommentValue= RULE_ML_COMMENT ) ) | (lv_slCommentValue= RULE_SL_COMMENT ) ) | (lv_wsValue= RULE_WS ) ) | (lv_anyValue= RULE_ANY_OTHER ) ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -113,10 +113,10 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:80:6: ( ( ( ( ( ( ( (lv_idValue= RULE_ID ) | (lv_intValue= RULE_INT ) ) | (lv_stringValue= RULE_STRING ) ) | (lv_mlCommentValue= RULE_ML_COMMENT ) ) | (lv_slCommentValue= RULE_SL_COMMENT ) ) | (lv_wsValue= RULE_WS ) ) | (lv_anyValue= RULE_ANY_OTHER ) ) )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:81:1: ( ( ( ( ( ( (lv_idValue= RULE_ID ) | (lv_intValue= RULE_INT ) ) | (lv_stringValue= RULE_STRING ) ) | (lv_mlCommentValue= RULE_ML_COMMENT ) ) | (lv_slCommentValue= RULE_SL_COMMENT ) ) | (lv_wsValue= RULE_WS ) ) | (lv_anyValue= RULE_ANY_OTHER ) )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:80:6: ( ( ( ( ( ( ( (lv_idValue= RULE_ID ) | (lv_intValue= RULE_INT ) ) | (lv_stringValue= RULE_STRING ) ) | (lv_mlCommentValue= RULE_ML_COMMENT ) ) | (lv_slCommentValue= RULE_SL_COMMENT ) ) | (lv_wsValue= RULE_WS ) ) | (lv_anyValue= RULE_ANY_OTHER ) ) )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:81:1: ( ( ( ( ( ( (lv_idValue= RULE_ID ) | (lv_intValue= RULE_INT ) ) | (lv_stringValue= RULE_STRING ) ) | (lv_mlCommentValue= RULE_ML_COMMENT ) ) | (lv_slCommentValue= RULE_SL_COMMENT ) ) | (lv_wsValue= RULE_WS ) ) | (lv_anyValue= RULE_ANY_OTHER ) )
             {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:81:1: ( ( ( ( ( ( (lv_idValue= RULE_ID ) | (lv_intValue= RULE_INT ) ) | (lv_stringValue= RULE_STRING ) ) | (lv_mlCommentValue= RULE_ML_COMMENT ) ) | (lv_slCommentValue= RULE_SL_COMMENT ) ) | (lv_wsValue= RULE_WS ) ) | (lv_anyValue= RULE_ANY_OTHER ) )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:81:1: ( ( ( ( ( ( (lv_idValue= RULE_ID ) | (lv_intValue= RULE_INT ) ) | (lv_stringValue= RULE_STRING ) ) | (lv_mlCommentValue= RULE_ML_COMMENT ) ) | (lv_slCommentValue= RULE_SL_COMMENT ) ) | (lv_wsValue= RULE_WS ) ) | (lv_anyValue= RULE_ANY_OTHER ) )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -134,9 +134,9 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:81:2: ( ( ( ( ( (lv_idValue= RULE_ID ) | (lv_intValue= RULE_INT ) ) | (lv_stringValue= RULE_STRING ) ) | (lv_mlCommentValue= RULE_ML_COMMENT ) ) | (lv_slCommentValue= RULE_SL_COMMENT ) ) | (lv_wsValue= RULE_WS ) )
+                    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:81:2: ( ( ( ( ( (lv_idValue= RULE_ID ) | (lv_intValue= RULE_INT ) ) | (lv_stringValue= RULE_STRING ) ) | (lv_mlCommentValue= RULE_ML_COMMENT ) ) | (lv_slCommentValue= RULE_SL_COMMENT ) ) | (lv_wsValue= RULE_WS ) )
                     {
-                    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:81:2: ( ( ( ( ( (lv_idValue= RULE_ID ) | (lv_intValue= RULE_INT ) ) | (lv_stringValue= RULE_STRING ) ) | (lv_mlCommentValue= RULE_ML_COMMENT ) ) | (lv_slCommentValue= RULE_SL_COMMENT ) ) | (lv_wsValue= RULE_WS ) )
+                    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:81:2: ( ( ( ( ( (lv_idValue= RULE_ID ) | (lv_intValue= RULE_INT ) ) | (lv_stringValue= RULE_STRING ) ) | (lv_mlCommentValue= RULE_ML_COMMENT ) ) | (lv_slCommentValue= RULE_SL_COMMENT ) ) | (lv_wsValue= RULE_WS ) )
                     int alt5=2;
                     int LA5_0 = input.LA(1);
 
@@ -154,9 +154,9 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
                     }
                     switch (alt5) {
                         case 1 :
-                            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:81:3: ( ( ( ( (lv_idValue= RULE_ID ) | (lv_intValue= RULE_INT ) ) | (lv_stringValue= RULE_STRING ) ) | (lv_mlCommentValue= RULE_ML_COMMENT ) ) | (lv_slCommentValue= RULE_SL_COMMENT ) )
+                            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:81:3: ( ( ( ( (lv_idValue= RULE_ID ) | (lv_intValue= RULE_INT ) ) | (lv_stringValue= RULE_STRING ) ) | (lv_mlCommentValue= RULE_ML_COMMENT ) ) | (lv_slCommentValue= RULE_SL_COMMENT ) )
                             {
-                            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:81:3: ( ( ( ( (lv_idValue= RULE_ID ) | (lv_intValue= RULE_INT ) ) | (lv_stringValue= RULE_STRING ) ) | (lv_mlCommentValue= RULE_ML_COMMENT ) ) | (lv_slCommentValue= RULE_SL_COMMENT ) )
+                            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:81:3: ( ( ( ( (lv_idValue= RULE_ID ) | (lv_intValue= RULE_INT ) ) | (lv_stringValue= RULE_STRING ) ) | (lv_mlCommentValue= RULE_ML_COMMENT ) ) | (lv_slCommentValue= RULE_SL_COMMENT ) )
                             int alt4=2;
                             int LA4_0 = input.LA(1);
 
@@ -174,9 +174,9 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
                             }
                             switch (alt4) {
                                 case 1 :
-                                    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:81:4: ( ( ( (lv_idValue= RULE_ID ) | (lv_intValue= RULE_INT ) ) | (lv_stringValue= RULE_STRING ) ) | (lv_mlCommentValue= RULE_ML_COMMENT ) )
+                                    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:81:4: ( ( ( (lv_idValue= RULE_ID ) | (lv_intValue= RULE_INT ) ) | (lv_stringValue= RULE_STRING ) ) | (lv_mlCommentValue= RULE_ML_COMMENT ) )
                                     {
-                                    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:81:4: ( ( ( (lv_idValue= RULE_ID ) | (lv_intValue= RULE_INT ) ) | (lv_stringValue= RULE_STRING ) ) | (lv_mlCommentValue= RULE_ML_COMMENT ) )
+                                    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:81:4: ( ( ( (lv_idValue= RULE_ID ) | (lv_intValue= RULE_INT ) ) | (lv_stringValue= RULE_STRING ) ) | (lv_mlCommentValue= RULE_ML_COMMENT ) )
                                     int alt3=2;
                                     int LA3_0 = input.LA(1);
 
@@ -194,9 +194,9 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
                                     }
                                     switch (alt3) {
                                         case 1 :
-                                            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:81:5: ( ( (lv_idValue= RULE_ID ) | (lv_intValue= RULE_INT ) ) | (lv_stringValue= RULE_STRING ) )
+                                            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:81:5: ( ( (lv_idValue= RULE_ID ) | (lv_intValue= RULE_INT ) ) | (lv_stringValue= RULE_STRING ) )
                                             {
-                                            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:81:5: ( ( (lv_idValue= RULE_ID ) | (lv_intValue= RULE_INT ) ) | (lv_stringValue= RULE_STRING ) )
+                                            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:81:5: ( ( (lv_idValue= RULE_ID ) | (lv_intValue= RULE_INT ) ) | (lv_stringValue= RULE_STRING ) )
                                             int alt2=2;
                                             int LA2_0 = input.LA(1);
 
@@ -214,9 +214,9 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
                                             }
                                             switch (alt2) {
                                                 case 1 :
-                                                    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:81:6: ( (lv_idValue= RULE_ID ) | (lv_intValue= RULE_INT ) )
+                                                    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:81:6: ( (lv_idValue= RULE_ID ) | (lv_intValue= RULE_INT ) )
                                                     {
-                                                    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:81:6: ( (lv_idValue= RULE_ID ) | (lv_intValue= RULE_INT ) )
+                                                    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:81:6: ( (lv_idValue= RULE_ID ) | (lv_intValue= RULE_INT ) )
                                                     int alt1=2;
                                                     int LA1_0 = input.LA(1);
 
@@ -234,10 +234,10 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
                                                     }
                                                     switch (alt1) {
                                                         case 1 :
-                                                            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:81:7: (lv_idValue= RULE_ID )
+                                                            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:81:7: (lv_idValue= RULE_ID )
                                                             {
-                                                            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:81:7: (lv_idValue= RULE_ID )
-                                                            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:83:6: lv_idValue= RULE_ID
+                                                            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:81:7: (lv_idValue= RULE_ID )
+                                                            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:83:6: lv_idValue= RULE_ID
                                                             {
                                                             lv_idValue=(Token)input.LT(1);
                                                             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleModel133); 
@@ -263,10 +263,10 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
                                                             }
                                                             break;
                                                         case 2 :
-                                                            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:102:6: (lv_intValue= RULE_INT )
+                                                            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:102:6: (lv_intValue= RULE_INT )
                                                             {
-                                                            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:102:6: (lv_intValue= RULE_INT )
-                                                            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:104:6: lv_intValue= RULE_INT
+                                                            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:102:6: (lv_intValue= RULE_INT )
+                                                            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:104:6: lv_intValue= RULE_INT
                                                             {
                                                             lv_intValue=(Token)input.LT(1);
                                                             match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleModel171); 
@@ -298,10 +298,10 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
                                                     }
                                                     break;
                                                 case 2 :
-                                                    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:123:6: (lv_stringValue= RULE_STRING )
+                                                    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:123:6: (lv_stringValue= RULE_STRING )
                                                     {
-                                                    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:123:6: (lv_stringValue= RULE_STRING )
-                                                    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:125:6: lv_stringValue= RULE_STRING
+                                                    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:123:6: (lv_stringValue= RULE_STRING )
+                                                    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:125:6: lv_stringValue= RULE_STRING
                                                     {
                                                     lv_stringValue=(Token)input.LT(1);
                                                     match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleModel210); 
@@ -333,10 +333,10 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
                                             }
                                             break;
                                         case 2 :
-                                            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:144:6: (lv_mlCommentValue= RULE_ML_COMMENT )
+                                            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:144:6: (lv_mlCommentValue= RULE_ML_COMMENT )
                                             {
-                                            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:144:6: (lv_mlCommentValue= RULE_ML_COMMENT )
-                                            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:146:6: lv_mlCommentValue= RULE_ML_COMMENT
+                                            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:144:6: (lv_mlCommentValue= RULE_ML_COMMENT )
+                                            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:146:6: lv_mlCommentValue= RULE_ML_COMMENT
                                             {
                                             lv_mlCommentValue=(Token)input.LT(1);
                                             match(input,RULE_ML_COMMENT,FOLLOW_RULE_ML_COMMENT_in_ruleModel249); 
@@ -368,10 +368,10 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
                                     }
                                     break;
                                 case 2 :
-                                    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:165:6: (lv_slCommentValue= RULE_SL_COMMENT )
+                                    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:165:6: (lv_slCommentValue= RULE_SL_COMMENT )
                                     {
-                                    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:165:6: (lv_slCommentValue= RULE_SL_COMMENT )
-                                    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:167:6: lv_slCommentValue= RULE_SL_COMMENT
+                                    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:165:6: (lv_slCommentValue= RULE_SL_COMMENT )
+                                    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:167:6: lv_slCommentValue= RULE_SL_COMMENT
                                     {
                                     lv_slCommentValue=(Token)input.LT(1);
                                     match(input,RULE_SL_COMMENT,FOLLOW_RULE_SL_COMMENT_in_ruleModel288); 
@@ -403,10 +403,10 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
                             }
                             break;
                         case 2 :
-                            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:186:6: (lv_wsValue= RULE_WS )
+                            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:186:6: (lv_wsValue= RULE_WS )
                             {
-                            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:186:6: (lv_wsValue= RULE_WS )
-                            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:188:6: lv_wsValue= RULE_WS
+                            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:186:6: (lv_wsValue= RULE_WS )
+                            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:188:6: lv_wsValue= RULE_WS
                             {
                             lv_wsValue=(Token)input.LT(1);
                             match(input,RULE_WS,FOLLOW_RULE_WS_in_ruleModel327); 
@@ -438,10 +438,10 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:207:6: (lv_anyValue= RULE_ANY_OTHER )
+                    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:207:6: (lv_anyValue= RULE_ANY_OTHER )
                     {
-                    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:207:6: (lv_anyValue= RULE_ANY_OTHER )
-                    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:209:6: lv_anyValue= RULE_ANY_OTHER
+                    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:207:6: (lv_anyValue= RULE_ANY_OTHER )
+                    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:209:6: lv_anyValue= RULE_ANY_OTHER
                     {
                     lv_anyValue=(Token)input.LT(1);
                     match(input,RULE_ANY_OTHER,FOLLOW_RULE_ANY_OTHER_in_ruleModel366); 

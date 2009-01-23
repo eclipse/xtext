@@ -11,10 +11,10 @@ import org::eclipse::xtext::ui::common::xtend::contentassist;
 
 import contentAssistTestLanguage;
 
-extension org::eclipse::xtext::ui::common::xtend::contentassist::ContentAssist;
-extension org::eclipse::xtext::testlanguages::GenContentAssistTestLanguageProposalProvider;
+extension org::eclipse::xtext::ui::common::xtend::contentassist::ContentAssist reexport;
+extension org::eclipse::xtext::testlanguages::GenContentAssistTestLanguageProposals reexport;
 
 /**
- * Customize functions defined in org/eclipse/xtext/testlanguages/GenContentAssistTestLanguageProposalProvider.ext here.
+ * Customize functions defined in org/eclipse/xtext/testlanguages/GenContentAssistTestLanguageProposals.ext here.
  */
 

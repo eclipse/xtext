@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.common.editor.contentassist.impl;
 
 import org.eclipse.xtext.testlanguages.UseXtendSwitch;
 
+
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
