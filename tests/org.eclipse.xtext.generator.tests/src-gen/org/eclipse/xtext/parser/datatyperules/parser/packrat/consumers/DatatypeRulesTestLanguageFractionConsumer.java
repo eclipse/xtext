@@ -11,6 +11,7 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
@@ -40,56 +41,66 @@ public final class DatatypeRulesTestLanguageFractionConsumer extends NonTerminal
 		ruleCall$5$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
-	protected boolean doConsume() throws Exception {
+	protected int doConsume() throws Exception {
 		return consumeGroup$1();
 	}
 
-	protected boolean consumeGroup$1() throws Exception {
+	protected int consumeGroup$1() throws Exception {
 		final IMarker marker = mark();
-		if (!consumeRuleCall$2()) {
-			marker.rollback();
+		int result;
+		result = consumeRuleCall$2(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele0LexerRuleCallINT());
 			marker.release();
-			return false;
+			return result;
 		}
-		if (!consumeGroup$3()) {
-			marker.rollback();
+		result = consumeGroup$3(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele1Group());
 			marker.release();
-			return false;
+			return result;
 		}
 		marker.release();
-		return true;
+		return result;
 	}
 
-	protected boolean consumeRuleCall$2() throws Exception {
+	protected int consumeRuleCall$2() throws Exception {
 		return consumeTerminal(intConsumer, null, false, false, getRule().ele0LexerRuleCallINT(), getRuleCall$2$Delimiter());
 	}
 
-	protected boolean consumeGroup$3() throws Exception {
-		doConsumeGroup$3();
-		return true;
+	protected int consumeGroup$3() throws Exception {
+		IMarker marker = mark();
+		int result = doConsumeGroup$3();
+		if (result != ConsumeResult.SUCCESS)
+			marker.rollback();
+		marker.release();
+		return ConsumeResult.SUCCESS;
 	}
 
-	protected boolean doConsumeGroup$3() throws Exception {
+	protected int doConsumeGroup$3() throws Exception {
 		final IMarker marker = mark();
-		if (!consumeKeyword$4()) {
-			marker.rollback();
+		int result;
+		result = consumeKeyword$4(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele10KeywordSolidus());
 			marker.release();
-			return false;
+			return result;
 		}
-		if (!consumeRuleCall$5()) {
-			marker.rollback();
+		result = consumeRuleCall$5(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele11LexerRuleCallINT());
 			marker.release();
-			return false;
+			return result;
 		}
 		marker.release();
-		return true;
+		return result;
 	}
 
-	protected boolean consumeKeyword$4() throws Exception {
+	protected int consumeKeyword$4() throws Exception {
 		return consumeKeyword(getRule().ele10KeywordSolidus(), null, false, false, getKeyword$4$Delimiter());
 	}
 
-	protected boolean consumeRuleCall$5() throws Exception {
+	protected int consumeRuleCall$5() throws Exception {
 		return consumeTerminal(intConsumer, null, false, false, getRule().ele11LexerRuleCallINT(), getRuleCall$5$Delimiter());
 	}
 

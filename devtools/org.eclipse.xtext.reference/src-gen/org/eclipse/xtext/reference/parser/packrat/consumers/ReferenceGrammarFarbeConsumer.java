@@ -11,6 +11,7 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
@@ -41,20 +42,30 @@ public final class ReferenceGrammarFarbeConsumer extends NonTerminalConsumer {
 		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
-	protected boolean doConsume() throws Exception {
+	protected int doConsume() throws Exception {
 		return consumeAssignment$1();
 	}
 
-	protected boolean consumeAssignment$1() throws Exception {
-		if (consumeKeyword(getRule().ele0000KeywordROT(), "wert", false, false, getKeyword$5$Delimiter()))
-			return true;
-		if (consumeKeyword(getRule().ele0001KeywordBLAU(), "wert", false, false, getKeyword$6$Delimiter()))
-			return true;
-		if (consumeKeyword(getRule().ele001KeywordGELB(), "wert", false, false, getKeyword$7$Delimiter()))
-			return true;
-		if (consumeKeyword(getRule().ele01KeywordGRÜN(), "wert", false, false, getKeyword$8$Delimiter()))
-			return true;
-		return false;
+	protected int consumeAssignment$1() throws Exception {
+		int result = Integer.MIN_VALUE;
+		int tempResult;
+		tempResult = consumeKeyword(getRule().ele0000KeywordROT(), "wert", false, false, getKeyword$5$Delimiter()); 
+		if (tempResult == ConsumeResult.SUCCESS)
+			return tempResult;
+		result = tempResult >= result ? tempResult : result; 
+		tempResult = consumeKeyword(getRule().ele0001KeywordBLAU(), "wert", false, false, getKeyword$6$Delimiter()); 
+		if (tempResult == ConsumeResult.SUCCESS)
+			return tempResult;
+		result = tempResult >= result ? tempResult : result; 
+		tempResult = consumeKeyword(getRule().ele001KeywordGELB(), "wert", false, false, getKeyword$7$Delimiter()); 
+		if (tempResult == ConsumeResult.SUCCESS)
+			return tempResult;
+		result = tempResult >= result ? tempResult : result; 
+		tempResult = consumeKeyword(getRule().ele01KeywordGRÜN(), "wert", false, false, getKeyword$8$Delimiter()); 
+		if (tempResult == ConsumeResult.SUCCESS)
+			return tempResult;
+		result = tempResult >= result ? tempResult : result; 
+		return result;
 	}
 
 	public FarbeElements getRule() {

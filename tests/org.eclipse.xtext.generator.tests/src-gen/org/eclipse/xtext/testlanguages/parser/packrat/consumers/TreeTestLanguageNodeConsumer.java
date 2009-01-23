@@ -11,6 +11,7 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
@@ -53,87 +54,113 @@ public final class TreeTestLanguageNodeConsumer extends NonTerminalConsumer {
 		ruleCall$11$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
-	protected boolean doConsume() throws Exception {
+	protected int doConsume() throws Exception {
 		return consumeGroup$1();
 	}
 
-	protected boolean consumeGroup$1() throws Exception {
+	protected int consumeGroup$1() throws Exception {
 		final IMarker marker = mark();
-		if (!consumeAssignment$7()) {
-			marker.rollback();
+		int result;
+		result = consumeAssignment$7(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele000000AssignmentName());
 			marker.release();
-			return false;
+			return result;
 		}
-		if (!consumeKeyword$9()) {
-			marker.rollback();
+		result = consumeKeyword$9(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele000001KeywordLeftParenthesis());
 			marker.release();
-			return false;
+			return result;
 		}
-		if (!consumeAssignment$10()) {
-			marker.rollback();
+		result = consumeAssignment$10(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele00001AssignmentAttrib());
 			marker.release();
-			return false;
+			return result;
 		}
-		if (!consumeKeyword$12()) {
-			marker.rollback();
+		result = consumeKeyword$12(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele0001KeywordRightParenthesis());
 			marker.release();
-			return false;
+			return result;
 		}
-		if (!consumeKeyword$13()) {
-			marker.rollback();
+		result = consumeKeyword$13(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele001KeywordLeftCurlyBracket());
 			marker.release();
-			return false;
+			return result;
 		}
-		if (!consumeAssignment$14()) {
-			marker.rollback();
+		result = consumeAssignment$14(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele01AssignmentChildren());
 			marker.release();
-			return false;
+			return result;
 		}
-		if (!consumeKeyword$16()) {
-			marker.rollback();
+		result = consumeKeyword$16(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele1KeywordRightCurlyBracketSemicolon());
 			marker.release();
-			return false;
+			return result;
 		}
 		marker.release();
-		return true;
+		return result;
 	}
 
-	protected boolean consumeAssignment$7() throws Exception {
-		if (consumeTerminal(idConsumer, "name", false, false, getRule().ele0000000LexerRuleCallID(), getRuleCall$8$Delimiter()))
-			return true;
-		return false;
+	protected int consumeAssignment$7() throws Exception {
+		int result = Integer.MIN_VALUE;
+		int tempResult;
+		tempResult = consumeTerminal(idConsumer, "name", false, false, getRule().ele0000000LexerRuleCallID(), getRuleCall$8$Delimiter());
+		if (tempResult == ConsumeResult.SUCCESS)
+			return tempResult;
+		result = tempResult >= result ? tempResult : result; 
+		return result;
 	}
 
-	protected boolean consumeKeyword$9() throws Exception {
+	protected int consumeKeyword$9() throws Exception {
 		return consumeKeyword(getRule().ele000001KeywordLeftParenthesis(), null, false, false, getKeyword$9$Delimiter());
 	}
 
-	protected boolean consumeAssignment$10() throws Exception {
-		if (consumeTerminal(stringConsumer, "attrib", false, false, getRule().ele000010LexerRuleCallSTRING(), getRuleCall$11$Delimiter()))
-			return true;
-		return false;
+	protected int consumeAssignment$10() throws Exception {
+		int result = Integer.MIN_VALUE;
+		int tempResult;
+		tempResult = consumeTerminal(stringConsumer, "attrib", false, false, getRule().ele000010LexerRuleCallSTRING(), getRuleCall$11$Delimiter());
+		if (tempResult == ConsumeResult.SUCCESS)
+			return tempResult;
+		result = tempResult >= result ? tempResult : result; 
+		return result;
 	}
 
-	protected boolean consumeKeyword$12() throws Exception {
+	protected int consumeKeyword$12() throws Exception {
 		return consumeKeyword(getRule().ele0001KeywordRightParenthesis(), null, false, false, getKeyword$12$Delimiter());
 	}
 
-	protected boolean consumeKeyword$13() throws Exception {
+	protected int consumeKeyword$13() throws Exception {
 		return consumeKeyword(getRule().ele001KeywordLeftCurlyBracket(), null, false, false, getKeyword$13$Delimiter());
 	}
 
-	protected boolean consumeAssignment$14() throws Exception {
-		while(doConsumeAssignment$14()) {}
-		return true;
+	protected int consumeAssignment$14() throws Exception {
+		IMarker marker = mark();
+		while(doConsumeAssignment$14() == ConsumeResult.SUCCESS) {
+			marker.release();
+			marker = mark();
+		}
+		marker.rollback();
+		marker.release();
+		return ConsumeResult.SUCCESS;
 	}
 
-	protected boolean doConsumeAssignment$14() throws Exception {
-		if (consumeNonTerminal(nodeConsumer, "children", true, false, getRule().ele010ParserRuleCallNode()))
-			return true;
-		return false;
+	protected int doConsumeAssignment$14() throws Exception {
+		int result = Integer.MIN_VALUE;
+		int tempResult;
+		tempResult = consumeNonTerminal(nodeConsumer, "children", true, false, getRule().ele010ParserRuleCallNode());
+		if (tempResult == ConsumeResult.SUCCESS)
+			return tempResult;
+		result = tempResult >= result ? tempResult : result; 
+		return result;
 	}
 
-	protected boolean consumeKeyword$16() throws Exception {
+	protected int consumeKeyword$16() throws Exception {
 		return consumeKeyword(getRule().ele1KeywordRightCurlyBracketSemicolon(), null, false, false, getKeyword$16$Delimiter());
 	}
 

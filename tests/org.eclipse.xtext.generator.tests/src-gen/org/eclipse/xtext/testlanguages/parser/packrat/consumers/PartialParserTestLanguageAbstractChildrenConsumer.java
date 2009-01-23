@@ -11,6 +11,7 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
@@ -40,59 +41,80 @@ public final class PartialParserTestLanguageAbstractChildrenConsumer extends Non
 		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
-	protected boolean doConsume() throws Exception {
+	protected int doConsume() throws Exception {
 		return consumeGroup$1();
 	}
 
-	protected boolean consumeGroup$1() throws Exception {
+	protected int consumeGroup$1() throws Exception {
 		final IMarker marker = mark();
-		if (!consumeKeyword$4()) {
-			marker.rollback();
+		int result;
+		result = consumeKeyword$4(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele000KeywordAbstractChildren());
 			marker.release();
-			return false;
+			return result;
 		}
-		if (!consumeKeyword$5()) {
-			marker.rollback();
+		result = consumeKeyword$5(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele001KeywordLeftCurlyBracket());
 			marker.release();
-			return false;
+			return result;
 		}
-		if (!consumeAssignment$6()) {
-			marker.rollback();
+		result = consumeAssignment$6(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele01AssignmentAbstractChildren());
 			marker.release();
-			return false;
+			return result;
 		}
-		if (!consumeKeyword$8()) {
-			marker.rollback();
+		result = consumeKeyword$8(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele1KeywordRightCurlyBracket());
 			marker.release();
-			return false;
+			return result;
 		}
 		marker.release();
-		return true;
+		return result;
 	}
 
-	protected boolean consumeKeyword$4() throws Exception {
+	protected int consumeKeyword$4() throws Exception {
 		return consumeKeyword(getRule().ele000KeywordAbstractChildren(), null, false, false, getKeyword$4$Delimiter());
 	}
 
-	protected boolean consumeKeyword$5() throws Exception {
+	protected int consumeKeyword$5() throws Exception {
 		return consumeKeyword(getRule().ele001KeywordLeftCurlyBracket(), null, false, false, getKeyword$5$Delimiter());
 	}
 
-	protected boolean consumeAssignment$6() throws Exception {
-		if (doConsumeAssignment$6()) {
-			while(doConsumeAssignment$6()) {}
-			return true;
+	protected int consumeAssignment$6() throws Exception {
+		IMarker marker = mark();
+		int result = doConsumeAssignment$6();
+		if (result == ConsumeResult.SUCCESS) {
+			marker.release();
+			marker = mark();
+			while(doConsumeAssignment$6()==ConsumeResult.SUCCESS) {
+				marker.release();
+				marker = mark();
+			}
+			marker.rollback();
+			marker.release();
+			return ConsumeResult.SUCCESS;
+		} else {
+			error("Could not find token.", getRule().ele01AssignmentAbstractChildren());
 		}
-		return false;
+		marker.release();
+		return result;
 	}
 
-	protected boolean doConsumeAssignment$6() throws Exception {
-		if (consumeNonTerminal(abstractChildConsumer, "abstractChildren", true, false, getRule().ele010ParserRuleCallAbstractChild()))
-			return true;
-		return false;
+	protected int doConsumeAssignment$6() throws Exception {
+		int result = Integer.MIN_VALUE;
+		int tempResult;
+		tempResult = consumeNonTerminal(abstractChildConsumer, "abstractChildren", true, false, getRule().ele010ParserRuleCallAbstractChild());
+		if (tempResult == ConsumeResult.SUCCESS)
+			return tempResult;
+		result = tempResult >= result ? tempResult : result; 
+		return result;
 	}
 
-	protected boolean consumeKeyword$8() throws Exception {
+	protected int consumeKeyword$8() throws Exception {
 		return consumeKeyword(getRule().ele1KeywordRightCurlyBracket(), null, false, false, getKeyword$8$Delimiter());
 	}
 
