@@ -55,6 +55,27 @@ public class DebugMarkerFactory implements IMarkerFactory {
 			}
 			delegate.release();
 		}
+
+		public IMarker copy() {
+			if (log.isDebugEnabled()) {
+				log.debug("copy(" + delegate + ")");
+			}
+			return new DebuggingMarker(delegate.copy());
+		}
+
+		public void discard() {
+			if (log.isDebugEnabled()) {
+				log.debug("discard(" + delegate + ")");
+			}
+			delegate.discard();
+		}
+
+		public void activate() {
+			if (log.isDebugEnabled()) {
+				log.debug("activate(" + delegate + ")");
+			}
+			delegate.activate();
+		}
 		
 	}
 

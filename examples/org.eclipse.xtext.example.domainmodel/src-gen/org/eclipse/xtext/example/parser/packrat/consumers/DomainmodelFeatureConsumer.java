@@ -11,6 +11,7 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
@@ -33,23 +34,60 @@ public final class DomainmodelFeatureConsumer extends NonTerminalConsumer {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 	}
 	
-	protected boolean doConsume() throws Exception {
+	protected int doConsume() throws Exception {
 		return consumeAlternatives$1();
 	}
 
-	protected boolean consumeAlternatives$1() throws Exception {
-		if (consumeRuleCall$2())
-			return true;
-		if (consumeRuleCall$3())
-			return true;
-		return false;
+	protected int consumeAlternatives$1() throws Exception {
+		int result = ConsumeResult.SUCCESS;
+		IMarker bestMarker = mark();
+		IMarker currentMarker;
+		int tempResult;
+		currentMarker = bestMarker.copy();
+		tempResult = consumeRuleCall$2(); 
+		if (tempResult == ConsumeResult.SUCCESS) {
+			if (bestMarker != currentMarker) {
+				bestMarker.discard();
+			}
+			currentMarker.release();
+			return tempResult;
+		}
+		if (tempResult > result) {
+			bestMarker.discard();
+			bestMarker = currentMarker;			
+			result = tempResult;
+		} else {
+			currentMarker.discard();
+		}
+		currentMarker = null;
+		bestMarker.activate();
+		currentMarker = bestMarker.copy();
+		tempResult = consumeRuleCall$3(); 
+		if (tempResult == ConsumeResult.SUCCESS) {
+			if (bestMarker != currentMarker) {
+				bestMarker.discard();
+			}
+			currentMarker.release();
+			return tempResult;
+		}
+		if (tempResult > result) {
+			bestMarker.discard();
+			bestMarker = currentMarker;			
+			result = tempResult;
+		} else {
+			currentMarker.discard();
+		}
+		currentMarker = null;
+		bestMarker.activate();
+		bestMarker.release();
+		return result;
 	}
 
-	protected boolean consumeRuleCall$2() throws Exception {
+	protected int consumeRuleCall$2() throws Exception {
 		return consumeNonTerminal(structuralFeatureConsumer, null, false, false, getRule().ele0ParserRuleCallStructuralFeature());
 	}
 
-	protected boolean consumeRuleCall$3() throws Exception {
+	protected int consumeRuleCall$3() throws Exception {
 		return consumeNonTerminal(operationConsumer, null, false, false, getRule().ele1ParserRuleCallOperation());
 	}
 

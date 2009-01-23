@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.IHiddenTokenHandler.IHiddenTokenState;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
+import org.eclipse.xtext.parser.packrat.tokens.ErrorToken;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedNonTerminal;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedNonTerminalEnd;
@@ -26,7 +27,7 @@ import org.eclipse.xtext.parser.packrat.tokens.ParsedNonTerminalEnd;
  */
 public abstract class NonTerminalConsumer implements INonTerminalConsumer {
 	
-	private final IParsedTokenAcceptor parser;
+	private final IParsedTokenAcceptor acceptor;
 	
 	private final IHiddenTokenHandler hiddenTokenHandler;
 	
@@ -47,35 +48,41 @@ public abstract class NonTerminalConsumer implements INonTerminalConsumer {
 			IConsumerUtility consumerUtil, ITerminalConsumer[] hiddenTokens) {
 		this.input = input;
 		this.markerFactory = markerFactory;
-		this.parser = tokenAcceptor;
+		this.acceptor = tokenAcceptor;
 		this.hiddenTokenHandler = hiddenTokenHandler;
 		this.consumerUtil = consumerUtil;
 		this.hiddenTokens = hiddenTokens;
 	}
 
-	public boolean consume(String feature, boolean isMany, boolean isDatatype, AbstractElement grammarElement) throws Exception {
+	public int consume(String feature, boolean isMany, boolean isDatatype, AbstractElement grammarElement) throws Exception {
 		IHiddenTokenState prevState = hiddenTokenHandler.replaceHiddenTokens(hiddenTokens);
 		IMarker marker = mark();
-		parser.accept(new ParsedNonTerminal(input.getOffset(), grammarElement != null ? grammarElement : getGrammarElement(), getDefaultTypeName()));
-		boolean result = doConsume();
-		if (result) {
-			parser.accept(new ParsedNonTerminalEnd(input.getOffset(), feature, isMany, isDatatype));
-		} else marker.rollback();
+		int prevOffset = getOffset();
+		acceptor.accept(new ParsedNonTerminal(input.getOffset(), grammarElement != null ? grammarElement : getGrammarElement(), getDefaultTypeName()));
+		int result = doConsume();
+		if (result != ConsumeResult.SUCCESS) {
+			acceptor.accept(new ErrorToken(prevOffset, 0, null, "Expected " + getDefaultTypeName() + ", but could not find."));
+		}
+		acceptor.accept(new ParsedNonTerminalEnd(input.getOffset(), feature, isMany, isDatatype));
 		marker.release();
 		prevState.restore();
 		return result;
 	}
 	
-	public boolean consumeAsRoot(IRootConsumerListener listener) throws Exception {
+	public int consumeAsRoot(IRootConsumerListener listener) throws Exception {
 		IHiddenTokenState prevState = hiddenTokenHandler.replaceHiddenTokens(hiddenTokens);
 		IMarker marker = mark();
-		parser.accept(new ParsedNonTerminal(input.getOffset(), getGrammarElement(), getDefaultTypeName()));
-		boolean result = doConsume();
-		if (result)
+		acceptor.accept(new ParsedNonTerminal(input.getOffset(), getGrammarElement(), getDefaultTypeName()));
+		int prevOffset = getOffset();
+		int result = doConsume();
+		if (result == ConsumeResult.SUCCESS) {
 			result = listener.beforeNonTerminalEnd(this);
-		if (result) {
-			parser.accept(new ParsedNonTerminalEnd(input.getOffset(), null, false, false));
-		} else marker.rollback();
+			if (result != ConsumeResult.SUCCESS)
+				acceptor.accept(new ErrorToken(getOffset(), 0, null, "Expected <EOF>."));
+			acceptor.accept(new ParsedNonTerminalEnd(input.getOffset(), null, false, false));
+		} else {
+			acceptor.accept(new ErrorToken(prevOffset, 0, null, "Expected " + getDefaultTypeName() + ", but could not find."));
+		}
 		marker.release();
 		prevState.restore();
 		return result;
@@ -85,15 +92,23 @@ public abstract class NonTerminalConsumer implements INonTerminalConsumer {
 		return markerFactory.mark();
 	}
 	
-	protected final boolean consumeKeyword(Keyword keyword, String feature, boolean isMany, boolean isBoolean, ICharacterClass notFollowedBy) {
+	protected final void error(String message, AbstractElement grammarElement) {
+		acceptor.accept(new ErrorToken(getOffset(), 0, grammarElement, message));
+	}
+	
+	protected final int getOffset() {
+		return input.getOffset();
+	}
+	
+	protected final int consumeKeyword(Keyword keyword, String feature, boolean isMany, boolean isBoolean, ICharacterClass notFollowedBy) {
 		return consumerUtil.consumeKeyword(keyword, feature, isMany, isBoolean, notFollowedBy);
 	}
 	
-	protected final boolean consumeTerminal(ITerminalConsumer consumer, String feature, boolean isMany, boolean isBoolean, AbstractElement grammarElement, ISequenceMatcher notMatching) {
+	protected final int consumeTerminal(ITerminalConsumer consumer, String feature, boolean isMany, boolean isBoolean, AbstractElement grammarElement, ISequenceMatcher notMatching) {
 		return consumerUtil.consumeTerminal(consumer, feature, isMany, isBoolean, grammarElement, notMatching);
 	}
 	
-	protected final boolean consumeNonTerminal(INonTerminalConsumer consumer, String feature, boolean isMany, boolean isDatatype, AbstractElement grammarElement) throws Exception {
+	protected final int consumeNonTerminal(INonTerminalConsumer consumer, String feature, boolean isMany, boolean isDatatype, AbstractElement grammarElement) throws Exception {
 		return consumerUtil.consumeNonTerminal(consumer, feature, isMany, isDatatype, grammarElement);
 	}
 	
@@ -101,7 +116,7 @@ public abstract class NonTerminalConsumer implements INonTerminalConsumer {
 		consumerUtil.consumeAction(typeName, feature, isMany);
 	}
 	
-	protected abstract boolean doConsume() throws Exception;
+	protected abstract int doConsume() throws Exception;
 	
 	protected abstract String getDefaultTypeName(); // TODO: replace by getDefaultType: EClassifier
 	

@@ -35,10 +35,10 @@ public final class KeywordConsumer extends TerminalConsumer {
 	}
 	
 	@Override
-	protected boolean doConsume() {
+	protected int doConsume() {
 		if (readString(keyword.getValue()))
-			return !peekChar(notFollowedBy);
-		return false;
+			return !peekChar(notFollowedBy) ? ConsumeResult.SUCCESS : ConsumeResult.EMPTY_MATCH;
+		return ConsumeResult.EMPTY_MATCH;
 	}
 
 	@Override

@@ -12,6 +12,7 @@ import org.eclipse.xtext.grammarinheritance.services.AbstractTestLanguageGrammar
 import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory;
 import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
@@ -40,7 +41,7 @@ public class AbstractTestLanguageIDConsumer extends AbstractRuleAwareTerminalCon
 		super(input, markerFactory, tokenAcceptor);
 	}
 
-	public boolean doConsume() {
+	public int doConsume() {
 		boolean result = true;
 		readChar('^');
 		if (result) {
@@ -49,7 +50,7 @@ public class AbstractTestLanguageIDConsumer extends AbstractRuleAwareTerminalCon
 				readChars(IDConsumer$$2);
 			}
 		}
-		return result;
+		return result ? ConsumeResult.SUCCESS : ConsumeResult.EMPTY_MATCH;
 	}
 
 	@Override

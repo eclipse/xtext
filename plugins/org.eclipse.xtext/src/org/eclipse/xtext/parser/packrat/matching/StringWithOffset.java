@@ -75,6 +75,16 @@ public class StringWithOffset implements ICharSequenceWithOffset, IMarkerFactory
 
 		public void release() {
 		}
+
+		public IMarker copy() {
+			return this;
+		}
+
+		public void discard() {
+		}
+
+		public void activate() {
+		}
 		
 	}
 }

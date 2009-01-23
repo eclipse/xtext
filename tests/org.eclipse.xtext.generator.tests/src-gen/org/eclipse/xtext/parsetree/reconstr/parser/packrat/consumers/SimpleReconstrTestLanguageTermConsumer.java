@@ -11,6 +11,7 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
@@ -45,59 +46,192 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 	}
 	
-	protected boolean doConsume() throws Exception {
+	protected int doConsume() throws Exception {
 		return consumeAlternatives$1();
 	}
 
-	protected boolean consumeAlternatives$1() throws Exception {
-		if (consumeRuleCall$8())
-			return true;
-		if (consumeRuleCall$9())
-			return true;
-		if (consumeRuleCall$10())
-			return true;
-		if (consumeRuleCall$11())
-			return true;
-		if (consumeRuleCall$12())
-			return true;
-		if (consumeRuleCall$13())
-			return true;
-		if (consumeRuleCall$14())
-			return true;
-		if (consumeRuleCall$15())
-			return true;
-		return false;
+	protected int consumeAlternatives$1() throws Exception {
+		int result = ConsumeResult.SUCCESS;
+		IMarker bestMarker = mark();
+		IMarker currentMarker;
+		int tempResult;
+		currentMarker = bestMarker.copy();
+		tempResult = consumeRuleCall$8(); 
+		if (tempResult == ConsumeResult.SUCCESS) {
+			if (bestMarker != currentMarker) {
+				bestMarker.discard();
+			}
+			currentMarker.release();
+			return tempResult;
+		}
+		if (tempResult > result) {
+			bestMarker.discard();
+			bestMarker = currentMarker;			
+			result = tempResult;
+		} else {
+			currentMarker.discard();
+		}
+		currentMarker = null;
+		bestMarker.activate();
+		currentMarker = bestMarker.copy();
+		tempResult = consumeRuleCall$9(); 
+		if (tempResult == ConsumeResult.SUCCESS) {
+			if (bestMarker != currentMarker) {
+				bestMarker.discard();
+			}
+			currentMarker.release();
+			return tempResult;
+		}
+		if (tempResult > result) {
+			bestMarker.discard();
+			bestMarker = currentMarker;			
+			result = tempResult;
+		} else {
+			currentMarker.discard();
+		}
+		currentMarker = null;
+		bestMarker.activate();
+		currentMarker = bestMarker.copy();
+		tempResult = consumeRuleCall$10(); 
+		if (tempResult == ConsumeResult.SUCCESS) {
+			if (bestMarker != currentMarker) {
+				bestMarker.discard();
+			}
+			currentMarker.release();
+			return tempResult;
+		}
+		if (tempResult > result) {
+			bestMarker.discard();
+			bestMarker = currentMarker;			
+			result = tempResult;
+		} else {
+			currentMarker.discard();
+		}
+		currentMarker = null;
+		bestMarker.activate();
+		currentMarker = bestMarker.copy();
+		tempResult = consumeRuleCall$11(); 
+		if (tempResult == ConsumeResult.SUCCESS) {
+			if (bestMarker != currentMarker) {
+				bestMarker.discard();
+			}
+			currentMarker.release();
+			return tempResult;
+		}
+		if (tempResult > result) {
+			bestMarker.discard();
+			bestMarker = currentMarker;			
+			result = tempResult;
+		} else {
+			currentMarker.discard();
+		}
+		currentMarker = null;
+		bestMarker.activate();
+		currentMarker = bestMarker.copy();
+		tempResult = consumeRuleCall$12(); 
+		if (tempResult == ConsumeResult.SUCCESS) {
+			if (bestMarker != currentMarker) {
+				bestMarker.discard();
+			}
+			currentMarker.release();
+			return tempResult;
+		}
+		if (tempResult > result) {
+			bestMarker.discard();
+			bestMarker = currentMarker;			
+			result = tempResult;
+		} else {
+			currentMarker.discard();
+		}
+		currentMarker = null;
+		bestMarker.activate();
+		currentMarker = bestMarker.copy();
+		tempResult = consumeRuleCall$13(); 
+		if (tempResult == ConsumeResult.SUCCESS) {
+			if (bestMarker != currentMarker) {
+				bestMarker.discard();
+			}
+			currentMarker.release();
+			return tempResult;
+		}
+		if (tempResult > result) {
+			bestMarker.discard();
+			bestMarker = currentMarker;			
+			result = tempResult;
+		} else {
+			currentMarker.discard();
+		}
+		currentMarker = null;
+		bestMarker.activate();
+		currentMarker = bestMarker.copy();
+		tempResult = consumeRuleCall$14(); 
+		if (tempResult == ConsumeResult.SUCCESS) {
+			if (bestMarker != currentMarker) {
+				bestMarker.discard();
+			}
+			currentMarker.release();
+			return tempResult;
+		}
+		if (tempResult > result) {
+			bestMarker.discard();
+			bestMarker = currentMarker;			
+			result = tempResult;
+		} else {
+			currentMarker.discard();
+		}
+		currentMarker = null;
+		bestMarker.activate();
+		currentMarker = bestMarker.copy();
+		tempResult = consumeRuleCall$15(); 
+		if (tempResult == ConsumeResult.SUCCESS) {
+			if (bestMarker != currentMarker) {
+				bestMarker.discard();
+			}
+			currentMarker.release();
+			return tempResult;
+		}
+		if (tempResult > result) {
+			bestMarker.discard();
+			bestMarker = currentMarker;			
+			result = tempResult;
+		} else {
+			currentMarker.discard();
+		}
+		currentMarker = null;
+		bestMarker.activate();
+		bestMarker.release();
+		return result;
 	}
 
-	protected boolean consumeRuleCall$8() throws Exception {
+	protected int consumeRuleCall$8() throws Exception {
 		return consumeNonTerminal(atomConsumer, null, false, false, getRule().ele0000000ParserRuleCallAtom());
 	}
 
-	protected boolean consumeRuleCall$9() throws Exception {
+	protected int consumeRuleCall$9() throws Exception {
 		return consumeNonTerminal(twoNumbersConsumer, null, false, false, getRule().ele0000001ParserRuleCallTwoNumbers());
 	}
 
-	protected boolean consumeRuleCall$10() throws Exception {
+	protected int consumeRuleCall$10() throws Exception {
 		return consumeNonTerminal(manyStringsConsumer, null, false, false, getRule().ele000001ParserRuleCallManyStrings());
 	}
 
-	protected boolean consumeRuleCall$11() throws Exception {
+	protected int consumeRuleCall$11() throws Exception {
 		return consumeNonTerminal(parensConsumer, null, false, false, getRule().ele00001ParserRuleCallParens());
 	}
 
-	protected boolean consumeRuleCall$12() throws Exception {
+	protected int consumeRuleCall$12() throws Exception {
 		return consumeNonTerminal(typeConsumer, null, false, false, getRule().ele0001ParserRuleCallType());
 	}
 
-	protected boolean consumeRuleCall$13() throws Exception {
+	protected int consumeRuleCall$13() throws Exception {
 		return consumeNonTerminal(ref2Consumer, null, false, false, getRule().ele001ParserRuleCallRef2());
 	}
 
-	protected boolean consumeRuleCall$14() throws Exception {
+	protected int consumeRuleCall$14() throws Exception {
 		return consumeNonTerminal(spareConsumer, null, false, false, getRule().ele01ParserRuleCallSpare());
 	}
 
-	protected boolean consumeRuleCall$15() throws Exception {
+	protected int consumeRuleCall$15() throws Exception {
 		return consumeNonTerminal(booleanConsumer, null, false, false, getRule().ele1ParserRuleCallBoolean());
 	}
 

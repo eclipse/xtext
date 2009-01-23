@@ -11,6 +11,7 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
@@ -40,56 +41,73 @@ public final class LookaheadTestLanguageLookAhead1Consumer extends NonTerminalCo
 		keyword$10$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
-	protected boolean doConsume() throws Exception {
+	protected int doConsume() throws Exception {
 		return consumeGroup$1();
 	}
 
-	protected boolean consumeGroup$1() throws Exception {
+	protected int consumeGroup$1() throws Exception {
 		final IMarker marker = mark();
-		if (!consumeKeyword$4()) {
-			marker.rollback();
+		int result;
+		result = consumeKeyword$4(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele000KeywordFoo());
 			marker.release();
-			return false;
+			return result;
 		}
-		if (!consumeAssignment$5()) {
-			marker.rollback();
+		result = consumeAssignment$5(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele001AssignmentY());
 			marker.release();
-			return false;
+			return result;
 		}
-		if (!consumeAssignment$7()) {
-			marker.rollback();
+		result = consumeAssignment$7(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele01AssignmentX());
 			marker.release();
-			return false;
+			return result;
 		}
-		if (!consumeAssignment$9()) {
-			marker.rollback();
+		result = consumeAssignment$9(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele1AssignmentX());
 			marker.release();
-			return false;
+			return result;
 		}
 		marker.release();
-		return true;
+		return result;
 	}
 
-	protected boolean consumeKeyword$4() throws Exception {
+	protected int consumeKeyword$4() throws Exception {
 		return consumeKeyword(getRule().ele000KeywordFoo(), null, false, false, getKeyword$4$Delimiter());
 	}
 
-	protected boolean consumeAssignment$5() throws Exception {
-		if (consumeNonTerminal(lookAhead2Consumer, "y", false, false, getRule().ele0010ParserRuleCallLookAhead2()))
-			return true;
-		return false;
+	protected int consumeAssignment$5() throws Exception {
+		int result = Integer.MIN_VALUE;
+		int tempResult;
+		tempResult = consumeNonTerminal(lookAhead2Consumer, "y", false, false, getRule().ele0010ParserRuleCallLookAhead2());
+		if (tempResult == ConsumeResult.SUCCESS)
+			return tempResult;
+		result = tempResult >= result ? tempResult : result; 
+		return result;
 	}
 
-	protected boolean consumeAssignment$7() throws Exception {
-		if (consumeKeyword(getRule().ele010KeywordB(), "x", false, false, getKeyword$8$Delimiter()))
-			return true;
-		return false;
+	protected int consumeAssignment$7() throws Exception {
+		int result = Integer.MIN_VALUE;
+		int tempResult;
+		tempResult = consumeKeyword(getRule().ele010KeywordB(), "x", false, false, getKeyword$8$Delimiter()); 
+		if (tempResult == ConsumeResult.SUCCESS)
+			return tempResult;
+		result = tempResult >= result ? tempResult : result; 
+		return result;
 	}
 
-	protected boolean consumeAssignment$9() throws Exception {
-		if (consumeKeyword(getRule().ele10KeywordD(), "x", false, false, getKeyword$10$Delimiter()))
-			return true;
-		return false;
+	protected int consumeAssignment$9() throws Exception {
+		int result = Integer.MIN_VALUE;
+		int tempResult;
+		tempResult = consumeKeyword(getRule().ele10KeywordD(), "x", false, false, getKeyword$10$Delimiter()); 
+		if (tempResult == ConsumeResult.SUCCESS)
+			return tempResult;
+		result = tempResult >= result ? tempResult : result; 
+		return result;
 	}
 
 	public LookAhead1Elements getRule() {

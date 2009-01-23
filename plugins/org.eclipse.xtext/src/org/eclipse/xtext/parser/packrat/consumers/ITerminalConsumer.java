@@ -15,9 +15,9 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
  */
 public interface ITerminalConsumer {
 	
-	boolean consume(String feature, boolean isMany, boolean isBoolean, AbstractElement element, ISequenceMatcher notMatching);
+	int consume(String feature, boolean isMany, boolean isBoolean, AbstractElement element, ISequenceMatcher notMatching);
 	
-	boolean consume();
+	int consume();
 	
 	void setHidden(boolean hidden);
 	

@@ -11,6 +11,7 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
@@ -34,40 +35,44 @@ public final class DatatypeRulesTestLanguageNestedModelIdConsumer extends NonTer
 		keyword$4$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
-	protected boolean doConsume() throws Exception {
+	protected int doConsume() throws Exception {
 		return consumeGroup$1();
 	}
 
-	protected boolean consumeGroup$1() throws Exception {
+	protected int consumeGroup$1() throws Exception {
 		final IMarker marker = mark();
-		if (!consumeRuleCall$3()) {
-			marker.rollback();
+		int result;
+		result = consumeRuleCall$3(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele00ParserRuleCallModelId());
 			marker.release();
-			return false;
+			return result;
 		}
-		if (!consumeKeyword$4()) {
-			marker.rollback();
+		result = consumeKeyword$4(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele01KeywordFullStop());
 			marker.release();
-			return false;
+			return result;
 		}
-		if (!consumeRuleCall$5()) {
-			marker.rollback();
+		result = consumeRuleCall$5(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele1ParserRuleCallModelId());
 			marker.release();
-			return false;
+			return result;
 		}
 		marker.release();
-		return true;
+		return result;
 	}
 
-	protected boolean consumeRuleCall$3() throws Exception {
+	protected int consumeRuleCall$3() throws Exception {
 		return consumeNonTerminal(modelIdConsumer, null, false, true, getRule().ele00ParserRuleCallModelId());
 	}
 
-	protected boolean consumeKeyword$4() throws Exception {
+	protected int consumeKeyword$4() throws Exception {
 		return consumeKeyword(getRule().ele01KeywordFullStop(), null, false, false, getKeyword$4$Delimiter());
 	}
 
-	protected boolean consumeRuleCall$5() throws Exception {
+	protected int consumeRuleCall$5() throws Exception {
 		return consumeNonTerminal(modelIdConsumer, null, false, true, getRule().ele1ParserRuleCallModelId());
 	}
 

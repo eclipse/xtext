@@ -11,6 +11,7 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
@@ -32,14 +33,18 @@ public final class XtextGrammarTestLanguageWildcardConsumer extends NonTerminalC
 		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
-	protected boolean doConsume() throws Exception {
+	protected int doConsume() throws Exception {
 		return consumeAssignment$1();
 	}
 
-	protected boolean consumeAssignment$1() throws Exception {
-		if (consumeKeyword(getRule().ele0KeywordFullStop(), "isWildcard", false, true, getKeyword$2$Delimiter()))
-			return true;
-		return false;
+	protected int consumeAssignment$1() throws Exception {
+		int result = Integer.MIN_VALUE;
+		int tempResult;
+		tempResult = consumeKeyword(getRule().ele0KeywordFullStop(), "isWildcard", false, true, getKeyword$2$Delimiter()); 
+		if (tempResult == ConsumeResult.SUCCESS)
+			return tempResult;
+		result = tempResult >= result ? tempResult : result; 
+		return result;
 	}
 
 	public WildcardElements getRule() {

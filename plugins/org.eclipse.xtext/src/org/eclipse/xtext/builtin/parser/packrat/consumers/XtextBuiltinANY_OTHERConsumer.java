@@ -12,6 +12,7 @@ import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory;
 import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 import org.eclipse.xtext.services.XtextGrammarAccess;
 
@@ -29,8 +30,8 @@ public final class XtextBuiltinANY_OTHERConsumer extends AbstractRuleAwareTermin
 		super(input, markerFactory, tokenAcceptor);
 	}
 
-	public boolean doConsume() {
-		return readAnyChar();
+	public int doConsume() {
+		return readAnyChar() ? ConsumeResult.SUCCESS : ConsumeResult.EMPTY_MATCH;
 	}
 
 	@Override

@@ -34,12 +34,12 @@ public abstract class TerminalConsumer implements ITerminalConsumer {
 		this.acceptor = tokenAcceptor;
 	}
 
-	public final boolean consume(String feature, boolean isMany, boolean isBoolean, AbstractElement element, ISequenceMatcher notMatching) {
+	public final int consume(String feature, boolean isMany, boolean isBoolean, AbstractElement element, ISequenceMatcher notMatching) {
 		int marker = mark();
-		boolean result = doConsume();
-		if (notMatching.matches(input, marker, input.getOffset()- marker))
-			return false;
-		if (result) {
+		final int result = doConsume();
+		if (result == ConsumeResult.SUCCESS && notMatching.matches(input, marker, input.getOffset()- marker))
+			return ConsumeResult.EMPTY_MATCH;
+		if (result == ConsumeResult.SUCCESS) {
 			if (feature != null)
 				acceptor.accept(new ParsedTerminalWithFeature(marker, input.getOffset()-marker, 
 						element != null ? element : getGrammarElement(), isHidden(), feature, isMany, isBoolean, getRuleName()));
@@ -49,10 +49,10 @@ public abstract class TerminalConsumer implements ITerminalConsumer {
 		return result;
 	}
 	
-	public final boolean consume() {
+	public final int consume() {
 		int prevOffset = input.getOffset();
-		boolean result = doConsume();
-		if (!result) {
+		final int result = doConsume();
+		if (result != ConsumeResult.SUCCESS) {
 			input.setOffset(prevOffset);
 		}
 		return result;
@@ -161,7 +161,7 @@ public abstract class TerminalConsumer implements ITerminalConsumer {
 		return false;
 	}
 	
-	protected abstract boolean doConsume();
+	protected abstract int doConsume();
 	
 	public abstract EObject getGrammarElement();
 	
@@ -186,6 +186,10 @@ public abstract class TerminalConsumer implements ITerminalConsumer {
 	}
 
 	protected int mark() {
+		return input.getOffset();
+	}
+
+	protected int getOffset() {
 		return input.getOffset();
 	}
 	

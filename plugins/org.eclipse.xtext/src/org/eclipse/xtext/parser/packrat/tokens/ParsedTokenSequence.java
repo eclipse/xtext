@@ -9,28 +9,56 @@ package org.eclipse.xtext.parser.packrat.tokens;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.eclipse.xtext.parser.packrat.IParsedTokenVisitor;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ParsedTokenSequence {
+public class ParsedTokenSequence implements IParsedTokenAcceptor {
 
-	public class Marker {
-		private int size;
+	public class Marker implements IParsedTokenAcceptor {
+//		private int prevSize;
+		
+		private List<AbstractParsedToken> tokens;
 
+		private IParsedTokenAcceptor parent;
+		
+		public Marker() {
+			this.tokens = new ArrayList<AbstractParsedToken>(50);
+		}
+		
 		public void rollback() {
-			ParsedTokenSequence.this.size = size;
+			tokens.clear();
+//			ParsedTokenSequence.this.size = prevSize;
 		}
 		
 		public void release() {
+			if (tokens.size() != 0) {
+				for(int i = 0; i < tokens.size(); i++) {
+					parent.accept(tokens.get(i));
+				}
+				tokens.clear();
+			}
 			if (bufferSize < markerBuffer.length)
 				markerBuffer[bufferSize++] = this;
 		}
+		
+		public void setParentAcceptor(IParsedTokenAcceptor parent) {
+			this.parent = parent;
+		}
+		
+		public IParsedTokenAcceptor getParentAcceptor() {
+			return this.parent;
+		}
 
 		public String toString() {
-			return "Marker for Token[" + size + "]"; 
+			return "Marker for Token[" + "" /* prevSize */ + "]"; 
+		}
+
+		public void accept(AbstractParsedToken token) {
+			this.tokens.add(token);
 		}
 	}
 	
@@ -42,9 +70,9 @@ public class ParsedTokenSequence {
 	
 
 	public ParsedTokenSequence() {
-		this.content = new ArrayList<AbstractParsedToken>(128);
+		this.content = new ArrayList<AbstractParsedToken>(1500);
 		this.size = 0;
-		this.markerBuffer = new Marker[10];
+		this.markerBuffer = new Marker[30];
 	}
 	
 	public void append(AbstractParsedToken token) {
@@ -75,8 +103,12 @@ public class ParsedTokenSequence {
 
 	public Marker mark() {
 		final Marker result = bufferSize > 0 ? markerBuffer[--bufferSize] : new Marker();
-		result.size = size;
+//		result.prevSize = size;
 		return result;
+	}
+
+	public void accept(AbstractParsedToken token) {
+		append(token);
 	}
 	
 }

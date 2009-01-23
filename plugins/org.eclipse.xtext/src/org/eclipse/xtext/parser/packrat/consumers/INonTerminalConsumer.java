@@ -14,8 +14,8 @@ import org.eclipse.xtext.AbstractElement;
  */
 public interface INonTerminalConsumer {
 
-	boolean consumeAsRoot(IRootConsumerListener listener) throws Exception;
+	int consumeAsRoot(IRootConsumerListener listener) throws Exception;
 	
-	boolean consume(String feature, boolean isMany, boolean isDatatype, AbstractElement element) throws Exception;
+	int consume(String feature, boolean isMany, boolean isDatatype, AbstractElement element) throws Exception;
 
 }

@@ -12,6 +12,7 @@ import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory;
 import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 import org.eclipse.xtext.services.XtextGrammarAccess;
 
@@ -29,7 +30,7 @@ public final class XtextBuiltinINTConsumer extends AbstractRuleAwareTerminalCons
 		super(input, markerFactory, tokenAcceptor);
 	}
 
-	public boolean doConsume() {
+	public int doConsume() {
 		//			Marker marker = mark(); // not needed because we have no alternatives
 		boolean result = true;
 		// ('0'..'9')+
@@ -37,7 +38,7 @@ public final class XtextBuiltinINTConsumer extends AbstractRuleAwareTerminalCons
 		if (result) {
 			readCharsBetween('0', '9'); // cardinality * does not affect result
 		} // else marker.rollback();
-		return result;
+		return result ? ConsumeResult.SUCCESS : ConsumeResult.EMPTY_MATCH;
 	}
 
 	@Override

@@ -1,0 +1,3 @@
+eclipse.preferences.version=1
+metamodelContributor=org.openarchitectureware.EmfMetamodelContributor,org.openarchitectureware.core.metamodel.jdt.javabean.JavaBeanMetamodelContributor
+project.specific.metamodel=true

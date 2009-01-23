@@ -7,6 +7,7 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory;
 import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
@@ -22,8 +23,8 @@ public final class XtextTerminalsTestLanguageSTRINGConsumer extends AbstractRule
 		super(input, markerFactory, tokenAcceptor);
 	}
 	
-	protected boolean doConsume() {
-		return consumeAlternatives$1();
+	protected int doConsume() {
+		return consumeAlternatives$1() ? ConsumeResult.SUCCESS : ConsumeResult.EMPTY_MATCH;
 	}
 
 	protected boolean consumeAlternatives$1() {

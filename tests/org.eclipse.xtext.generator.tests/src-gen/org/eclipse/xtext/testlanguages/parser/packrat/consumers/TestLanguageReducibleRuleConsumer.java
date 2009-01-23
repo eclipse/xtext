@@ -11,6 +11,7 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
@@ -34,68 +35,83 @@ public final class TestLanguageReducibleRuleConsumer extends NonTerminalConsumer
 		keyword$3$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
-	protected boolean doConsume() throws Exception {
+	protected int doConsume() throws Exception {
 		return consumeGroup$1();
 	}
 
-	protected boolean consumeGroup$1() throws Exception {
+	protected int consumeGroup$1() throws Exception {
 		final IMarker marker = mark();
-		if (!consumeKeyword$3()) {
-			marker.rollback();
+		int result;
+		result = consumeKeyword$3(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele00KeywordReducible());
 			marker.release();
-			return false;
+			return result;
 		}
-		if (!consumeRuleCall$4()) {
-			marker.rollback();
+		result = consumeRuleCall$4(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele01ParserRuleCallTerminalRule());
 			marker.release();
-			return false;
+			return result;
 		}
-		if (!consumeGroup$5()) {
-			marker.rollback();
+		result = consumeGroup$5(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele1Group());
 			marker.release();
-			return false;
+			return result;
 		}
 		marker.release();
-		return true;
+		return result;
 	}
 
-	protected boolean consumeKeyword$3() throws Exception {
+	protected int consumeKeyword$3() throws Exception {
 		return consumeKeyword(getRule().ele00KeywordReducible(), null, false, false, getKeyword$3$Delimiter());
 	}
 
-	protected boolean consumeRuleCall$4() throws Exception {
+	protected int consumeRuleCall$4() throws Exception {
 		return consumeNonTerminal(terminalRuleConsumer, null, false, false, getRule().ele01ParserRuleCallTerminalRule());
 	}
 
-	protected boolean consumeGroup$5() throws Exception {
-		doConsumeGroup$5();
-		return true;
+	protected int consumeGroup$5() throws Exception {
+		IMarker marker = mark();
+		int result = doConsumeGroup$5();
+		if (result != ConsumeResult.SUCCESS)
+			marker.rollback();
+		marker.release();
+		return ConsumeResult.SUCCESS;
 	}
 
-	protected boolean doConsumeGroup$5() throws Exception {
+	protected int doConsumeGroup$5() throws Exception {
 		final IMarker marker = mark();
-		if (!consumeAction$6()) {
-			marker.rollback();
+		int result;
+		result = consumeAction$6(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele10ActionReducibleCompositeactionFeature());
 			marker.release();
-			return false;
+			return result;
 		}
-		if (!consumeAssignment$8()) {
-			marker.rollback();
+		result = consumeAssignment$8(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele11AssignmentActionFeature());
 			marker.release();
-			return false;
+			return result;
 		}
 		marker.release();
-		return true;
+		return result;
 	}
-	protected boolean consumeAction$6() {
+	protected int consumeAction$6() {
 		consumeAction("ReducibleComposite", "actionFeature", true);
-		return true;	
+		return ConsumeResult.SUCCESS;	
 	}
 
-	protected boolean consumeAssignment$8() throws Exception {
-		if (consumeNonTerminal(terminalRuleConsumer, "actionFeature", true, false, getRule().ele110ParserRuleCallTerminalRule()))
-			return true;
-		return false;
+	protected int consumeAssignment$8() throws Exception {
+		int result = Integer.MIN_VALUE;
+		int tempResult;
+		tempResult = consumeNonTerminal(terminalRuleConsumer, "actionFeature", true, false, getRule().ele110ParserRuleCallTerminalRule());
+		if (tempResult == ConsumeResult.SUCCESS)
+			return tempResult;
+		result = tempResult >= result ? tempResult : result; 
+		return result;
 	}
 
 	public ReducibleRuleElements getRule() {

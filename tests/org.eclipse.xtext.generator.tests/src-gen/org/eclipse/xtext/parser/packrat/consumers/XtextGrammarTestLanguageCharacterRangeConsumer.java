@@ -11,6 +11,7 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
@@ -34,68 +35,83 @@ public final class XtextGrammarTestLanguageCharacterRangeConsumer extends NonTer
 		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
-	protected boolean doConsume() throws Exception {
+	protected int doConsume() throws Exception {
 		return consumeGroup$1();
 	}
 
-	protected boolean consumeGroup$1() throws Exception {
+	protected int consumeGroup$1() throws Exception {
 		final IMarker marker = mark();
-		if (!consumeRuleCall$2()) {
-			marker.rollback();
+		int result;
+		result = consumeRuleCall$2(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele0ParserRuleCallKeyword());
 			marker.release();
-			return false;
+			return result;
 		}
-		if (!consumeGroup$3()) {
-			marker.rollback();
+		result = consumeGroup$3(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele1Group());
 			marker.release();
-			return false;
+			return result;
 		}
 		marker.release();
-		return true;
+		return result;
 	}
 
-	protected boolean consumeRuleCall$2() throws Exception {
+	protected int consumeRuleCall$2() throws Exception {
 		return consumeNonTerminal(keywordConsumer, null, false, false, getRule().ele0ParserRuleCallKeyword());
 	}
 
-	protected boolean consumeGroup$3() throws Exception {
-		doConsumeGroup$3();
-		return true;
+	protected int consumeGroup$3() throws Exception {
+		IMarker marker = mark();
+		int result = doConsumeGroup$3();
+		if (result != ConsumeResult.SUCCESS)
+			marker.rollback();
+		marker.release();
+		return ConsumeResult.SUCCESS;
 	}
 
-	protected boolean doConsumeGroup$3() throws Exception {
+	protected int doConsumeGroup$3() throws Exception {
 		final IMarker marker = mark();
-		if (!consumeAction$5()) {
-			marker.rollback();
+		int result;
+		result = consumeAction$5(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele100ActionCharacterRangeleft());
 			marker.release();
-			return false;
+			return result;
 		}
-		if (!consumeKeyword$7()) {
-			marker.rollback();
+		result = consumeKeyword$7(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele101KeywordFullStopFullStop());
 			marker.release();
-			return false;
+			return result;
 		}
-		if (!consumeAssignment$8()) {
-			marker.rollback();
+		result = consumeAssignment$8(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele11AssignmentRight());
 			marker.release();
-			return false;
+			return result;
 		}
 		marker.release();
-		return true;
+		return result;
 	}
-	protected boolean consumeAction$5() {
+	protected int consumeAction$5() {
 		consumeAction("CharacterRange", "left", false);
-		return true;	
+		return ConsumeResult.SUCCESS;	
 	}
 
-	protected boolean consumeKeyword$7() throws Exception {
+	protected int consumeKeyword$7() throws Exception {
 		return consumeKeyword(getRule().ele101KeywordFullStopFullStop(), null, false, false, getKeyword$7$Delimiter());
 	}
 
-	protected boolean consumeAssignment$8() throws Exception {
-		if (consumeNonTerminal(keywordConsumer, "right", false, false, getRule().ele110ParserRuleCallKeyword()))
-			return true;
-		return false;
+	protected int consumeAssignment$8() throws Exception {
+		int result = Integer.MIN_VALUE;
+		int tempResult;
+		tempResult = consumeNonTerminal(keywordConsumer, "right", false, false, getRule().ele110ParserRuleCallKeyword());
+		if (tempResult == ConsumeResult.SUCCESS)
+			return tempResult;
+		result = tempResult >= result ? tempResult : result; 
+		return result;
 	}
 
 	public CharacterRangeElements getRule() {

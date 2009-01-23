@@ -11,6 +11,7 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
@@ -31,59 +32,75 @@ public final class XtextTerminalsTestLanguageGroupConsumer extends NonTerminalCo
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 	}
 	
-	protected boolean doConsume() throws Exception {
+	protected int doConsume() throws Exception {
 		return consumeGroup$1();
 	}
 
-	protected boolean consumeGroup$1() throws Exception {
+	protected int consumeGroup$1() throws Exception {
 		final IMarker marker = mark();
-		if (!consumeRuleCall$2()) {
-			marker.rollback();
+		int result;
+		result = consumeRuleCall$2(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele0ParserRuleCallAbstractToken());
 			marker.release();
-			return false;
+			return result;
 		}
-		if (!consumeGroup$3()) {
-			marker.rollback();
+		result = consumeGroup$3(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele1Group());
 			marker.release();
-			return false;
+			return result;
 		}
 		marker.release();
-		return true;
+		return result;
 	}
 
-	protected boolean consumeRuleCall$2() throws Exception {
+	protected int consumeRuleCall$2() throws Exception {
 		return consumeNonTerminal(abstractTokenConsumer, null, false, false, getRule().ele0ParserRuleCallAbstractToken());
 	}
 
-	protected boolean consumeGroup$3() throws Exception {
-		while(doConsumeGroup$3()) {}
-		return true;
+	protected int consumeGroup$3() throws Exception {
+		IMarker marker = mark();
+		while(doConsumeGroup$3() == ConsumeResult.SUCCESS) {
+			marker.release();
+			marker = mark();
+		}
+		marker.rollback();
+		marker.release();
+		return ConsumeResult.SUCCESS;
 	}
 
-	protected boolean doConsumeGroup$3() throws Exception {
+	protected int doConsumeGroup$3() throws Exception {
 		final IMarker marker = mark();
-		if (!consumeAction$4()) {
-			marker.rollback();
+		int result;
+		result = consumeAction$4(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele10ActionGroupabstractTokens());
 			marker.release();
-			return false;
+			return result;
 		}
-		if (!consumeAssignment$6()) {
-			marker.rollback();
+		result = consumeAssignment$6(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele11AssignmentAbstractTokens());
 			marker.release();
-			return false;
+			return result;
 		}
 		marker.release();
-		return true;
+		return result;
 	}
-	protected boolean consumeAction$4() {
+	protected int consumeAction$4() {
 		consumeAction("Group", "abstractTokens", true);
-		return true;	
+		return ConsumeResult.SUCCESS;	
 	}
 
-	protected boolean consumeAssignment$6() throws Exception {
-		if (consumeNonTerminal(abstractTokenConsumer, "abstractTokens", true, false, getRule().ele110ParserRuleCallAbstractToken()))
-			return true;
-		return false;
+	protected int consumeAssignment$6() throws Exception {
+		int result = Integer.MIN_VALUE;
+		int tempResult;
+		tempResult = consumeNonTerminal(abstractTokenConsumer, "abstractTokens", true, false, getRule().ele110ParserRuleCallAbstractToken());
+		if (tempResult == ConsumeResult.SUCCESS)
+			return tempResult;
+		result = tempResult >= result ? tempResult : result; 
+		return result;
 	}
 
 	public GroupElements getRule() {

@@ -17,7 +17,7 @@ public abstract class AbstractParsedToken {
 	private final int offset;
 	
 	private final int length;
-	
+
 	/**
 	 * @param input
 	 * @param offset

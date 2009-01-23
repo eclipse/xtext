@@ -36,7 +36,7 @@ public class DebugConsumerUtility implements IConsumerUtility {
 		delegate.consumeAction(typeName, feature, isMany);
 	}
 
-	public boolean consumeKeyword(Keyword keyword, String feature, boolean isMany, boolean isBoolean,
+	public int consumeKeyword(Keyword keyword, String feature, boolean isMany, boolean isBoolean,
 			ICharacterClass notFollowedBy) {
 		if (log.isDebugEnabled()) {
 			log.debug("consumeKeyword(keyword = '" + keyword.getValue() + "', " +
@@ -45,14 +45,14 @@ public class DebugConsumerUtility implements IConsumerUtility {
 					"isBoolean = " + isBoolean + ", " +
 					"notFollowedBy = " + notFollowedBy + ")"); 
 		}
-		boolean result = delegate.consumeKeyword(keyword, feature, isMany, isBoolean, notFollowedBy);
+		int result = delegate.consumeKeyword(keyword, feature, isMany, isBoolean, notFollowedBy);
 		if (log.isDebugEnabled()) {
 			log.debug("consumeKeyword('" + keyword.getValue() + "') = " + result); 
 		}
 		return result;
 	}
 
-	public boolean consumeNonTerminal(INonTerminalConsumer consumer, String feature, boolean isMany,
+	public int consumeNonTerminal(INonTerminalConsumer consumer, String feature, boolean isMany,
 			boolean isDatatype, AbstractElement grammarElement) throws Exception {
 		if (log.isDebugEnabled()) {
 			log.debug("consumeNonTerminal(consumer = '" + consumer + "', " +
@@ -61,14 +61,14 @@ public class DebugConsumerUtility implements IConsumerUtility {
 					"isDatatype = " + isDatatype + ", " +
 					"grammarElement = " + grammarElement.eClass().getName() + ")"); 
 		}
-		boolean result = delegate.consumeNonTerminal(consumer, feature, isMany, isDatatype, grammarElement);
+		int result = delegate.consumeNonTerminal(consumer, feature, isMany, isDatatype, grammarElement);
 		if (log.isDebugEnabled()) {
 			log.debug("consumeNonTerminal(" + consumer + ") = " + result); 
 		}
 		return result;
 	}
 
-	public boolean consumeTerminal(ITerminalConsumer consumer, String feature, boolean isMany, boolean isBoolean,
+	public int consumeTerminal(ITerminalConsumer consumer, String feature, boolean isMany, boolean isBoolean,
 			AbstractElement grammarElement, ISequenceMatcher notMatching) {
 		if (log.isDebugEnabled()) {
 			log.debug("consumeTerminal(consumer = '" + consumer + "', " +
@@ -78,7 +78,7 @@ public class DebugConsumerUtility implements IConsumerUtility {
 					"grammarElement = " + grammarElement.eClass().getName() + ", " +
 					"notMatching = " + notMatching + ")"); 
 		}
-		boolean result = delegate.consumeTerminal(consumer, feature, isMany, isBoolean, grammarElement, notMatching);
+		int result = delegate.consumeTerminal(consumer, feature, isMany, isBoolean, grammarElement, notMatching);
 		if (log.isDebugEnabled()) {
 			log.debug("consumeTerminal(" + consumer + ") = " + result); 
 		}

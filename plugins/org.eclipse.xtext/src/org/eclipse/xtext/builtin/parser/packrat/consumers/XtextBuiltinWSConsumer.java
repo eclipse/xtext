@@ -12,6 +12,7 @@ import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory;
 import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 import org.eclipse.xtext.services.XtextGrammarAccess;
 
@@ -29,14 +30,14 @@ public final class XtextBuiltinWSConsumer extends AbstractRuleAwareTerminalConsu
 		super(input, markerFactory, tokenAcceptor);
 	}
 
-	public boolean doConsume() {
+	public int doConsume() {
 		boolean result = true;
 		// (' '|'\\t'|'\\r'|'\\n')+
 		result = readAnyChar(' ', '\t', '\r', '\n'); // cardinality + is splitted into readAnyChar and readAnyChars
 		if (result) {
 			readAnyChars(' ', '\t', '\r', '\n');
 		}
-		return result;
+		return result ? ConsumeResult.SUCCESS : ConsumeResult.EMPTY_MATCH;
 	}
 
 	@Override

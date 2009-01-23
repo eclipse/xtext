@@ -11,6 +11,7 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
@@ -42,70 +43,126 @@ public final class FormatterTestLanguageTestIndentationConsumer extends NonTermi
 		keyword$11$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
-	protected boolean doConsume() throws Exception {
+	protected int doConsume() throws Exception {
 		return consumeGroup$1();
 	}
 
-	protected boolean consumeGroup$1() throws Exception {
+	protected int consumeGroup$1() throws Exception {
 		final IMarker marker = mark();
-		if (!consumeKeyword$4()) {
-			marker.rollback();
+		int result;
+		result = consumeKeyword$4(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele000KeywordIndentation());
 			marker.release();
-			return false;
+			return result;
 		}
-		if (!consumeKeyword$5()) {
-			marker.rollback();
+		result = consumeKeyword$5(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele001KeywordLeftCurlyBracket());
 			marker.release();
-			return false;
+			return result;
 		}
-		if (!consumeAlternatives$6()) {
-			marker.rollback();
+		result = consumeAlternatives$6(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele01Alternatives());
 			marker.release();
-			return false;
+			return result;
 		}
-		if (!consumeKeyword$11()) {
-			marker.rollback();
+		result = consumeKeyword$11(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele1KeywordRightCurlyBracket());
 			marker.release();
-			return false;
+			return result;
 		}
 		marker.release();
-		return true;
+		return result;
 	}
 
-	protected boolean consumeKeyword$4() throws Exception {
+	protected int consumeKeyword$4() throws Exception {
 		return consumeKeyword(getRule().ele000KeywordIndentation(), null, false, false, getKeyword$4$Delimiter());
 	}
 
-	protected boolean consumeKeyword$5() throws Exception {
+	protected int consumeKeyword$5() throws Exception {
 		return consumeKeyword(getRule().ele001KeywordLeftCurlyBracket(), null, false, false, getKeyword$5$Delimiter());
 	}
 
-	protected boolean consumeAlternatives$6() throws Exception {
-		while(doConsumeAlternatives$6()) {}
-		return true;
+	protected int consumeAlternatives$6() throws Exception {
+		IMarker marker = mark();
+		while(doConsumeAlternatives$6() == ConsumeResult.SUCCESS) {
+			marker.release();
+			marker = mark();
+		}
+		marker.rollback();
+		marker.release();
+		return ConsumeResult.SUCCESS;
 	}
 
-	protected boolean doConsumeAlternatives$6() throws Exception {
-		if (consumeAssignment$7())
-			return true;
-		if (consumeAssignment$9())
-			return true;
-		return false;
+	protected int doConsumeAlternatives$6() throws Exception {
+		int result = ConsumeResult.SUCCESS;
+		IMarker bestMarker = mark();
+		IMarker currentMarker;
+		int tempResult;
+		currentMarker = bestMarker.copy();
+		tempResult = consumeAssignment$7(); 
+		if (tempResult == ConsumeResult.SUCCESS) {
+			if (bestMarker != currentMarker) {
+				bestMarker.discard();
+			}
+			currentMarker.release();
+			return tempResult;
+		}
+		if (tempResult > result) {
+			bestMarker.discard();
+			bestMarker = currentMarker;			
+			result = tempResult;
+		} else {
+			currentMarker.discard();
+		}
+		currentMarker = null;
+		bestMarker.activate();
+		currentMarker = bestMarker.copy();
+		tempResult = consumeAssignment$9(); 
+		if (tempResult == ConsumeResult.SUCCESS) {
+			if (bestMarker != currentMarker) {
+				bestMarker.discard();
+			}
+			currentMarker.release();
+			return tempResult;
+		}
+		if (tempResult > result) {
+			bestMarker.discard();
+			bestMarker = currentMarker;			
+			result = tempResult;
+		} else {
+			currentMarker.discard();
+		}
+		currentMarker = null;
+		bestMarker.activate();
+		bestMarker.release();
+		return result;
 	}
 
-	protected boolean consumeAssignment$7() throws Exception {
-		if (consumeNonTerminal(testIndentationConsumer, "sub", true, false, getRule().ele0100ParserRuleCallTestIndentation()))
-			return true;
-		return false;
+	protected int consumeAssignment$7() throws Exception {
+		int result = Integer.MIN_VALUE;
+		int tempResult;
+		tempResult = consumeNonTerminal(testIndentationConsumer, "sub", true, false, getRule().ele0100ParserRuleCallTestIndentation());
+		if (tempResult == ConsumeResult.SUCCESS)
+			return tempResult;
+		result = tempResult >= result ? tempResult : result; 
+		return result;
 	}
 
-	protected boolean consumeAssignment$9() throws Exception {
-		if (consumeNonTerminal(lineConsumer, "items", true, false, getRule().ele0110ParserRuleCallLine()))
-			return true;
-		return false;
+	protected int consumeAssignment$9() throws Exception {
+		int result = Integer.MIN_VALUE;
+		int tempResult;
+		tempResult = consumeNonTerminal(lineConsumer, "items", true, false, getRule().ele0110ParserRuleCallLine());
+		if (tempResult == ConsumeResult.SUCCESS)
+			return tempResult;
+		result = tempResult >= result ? tempResult : result; 
+		return result;
 	}
 
-	protected boolean consumeKeyword$11() throws Exception {
+	protected int consumeKeyword$11() throws Exception {
 		return consumeKeyword(getRule().ele1KeywordRightCurlyBracket(), null, false, false, getKeyword$11$Delimiter());
 	}
 

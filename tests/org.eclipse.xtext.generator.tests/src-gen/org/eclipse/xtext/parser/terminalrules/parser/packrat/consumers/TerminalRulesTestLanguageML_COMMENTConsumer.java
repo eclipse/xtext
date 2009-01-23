@@ -7,6 +7,7 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory;
 import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
@@ -22,8 +23,8 @@ public final class TerminalRulesTestLanguageML_COMMENTConsumer extends AbstractR
 		super(input, markerFactory, tokenAcceptor);
 	}
 	
-	protected boolean doConsume() {
-		return consumeGroup$1();
+	protected int doConsume() {
+		return consumeGroup$1() ? ConsumeResult.SUCCESS : ConsumeResult.EMPTY_MATCH;
 	}
 
 	protected boolean consumeGroup$1() {

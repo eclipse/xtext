@@ -11,6 +11,7 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
@@ -40,61 +41,79 @@ public final class XtextTerminalsTestLanguageTypeRefConsumer extends NonTerminal
 		keyword$6$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
-	protected boolean doConsume() throws Exception {
+	protected int doConsume() throws Exception {
 		return consumeGroup$1();
 	}
 
-	protected boolean consumeGroup$1() throws Exception {
+	protected int consumeGroup$1() throws Exception {
 		final IMarker marker = mark();
-		if (!consumeGroup$2()) {
-			marker.rollback();
+		int result;
+		result = consumeGroup$2(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele0Group());
 			marker.release();
-			return false;
+			return result;
 		}
-		if (!consumeAssignment$7()) {
-			marker.rollback();
+		result = consumeAssignment$7(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele1AssignmentType());
 			marker.release();
-			return false;
+			return result;
 		}
 		marker.release();
-		return true;
+		return result;
 	}
 
-	protected boolean consumeGroup$2() throws Exception {
-		doConsumeGroup$2();
-		return true;
+	protected int consumeGroup$2() throws Exception {
+		IMarker marker = mark();
+		int result = doConsumeGroup$2();
+		if (result != ConsumeResult.SUCCESS)
+			marker.rollback();
+		marker.release();
+		return ConsumeResult.SUCCESS;
 	}
 
-	protected boolean doConsumeGroup$2() throws Exception {
+	protected int doConsumeGroup$2() throws Exception {
 		final IMarker marker = mark();
-		if (!consumeAssignment$3()) {
-			marker.rollback();
+		int result;
+		result = consumeAssignment$3(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele00AssignmentMetamodel());
 			marker.release();
-			return false;
+			return result;
 		}
-		if (!consumeKeyword$6()) {
-			marker.rollback();
+		result = consumeKeyword$6(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele01KeywordColonColon());
 			marker.release();
-			return false;
+			return result;
 		}
 		marker.release();
-		return true;
+		return result;
 	}
 
-	protected boolean consumeAssignment$3() throws Exception {
-		if (consumeTerminal(idConsumer, null, false, false, getRule().ele000CrossReferenceEStringAbstractMetamodelDeclaration(), getCrossReference$4$Delimiter()))
-			return true;
-		return false;
+	protected int consumeAssignment$3() throws Exception {
+		int result = Integer.MIN_VALUE;
+		int tempResult;
+		tempResult = consumeTerminal(idConsumer, null, false, false, getRule().ele000CrossReferenceEStringAbstractMetamodelDeclaration(), getCrossReference$4$Delimiter());
+		if (tempResult == ConsumeResult.SUCCESS)
+			return tempResult;
+		result = tempResult >= result ? tempResult : result; 
+		return result;
 	}
 
-	protected boolean consumeKeyword$6() throws Exception {
+	protected int consumeKeyword$6() throws Exception {
 		return consumeKeyword(getRule().ele01KeywordColonColon(), null, false, false, getKeyword$6$Delimiter());
 	}
 
-	protected boolean consumeAssignment$7() throws Exception {
-		if (consumeTerminal(idConsumer, null, false, false, getRule().ele10CrossReferenceEStringEClassifier(), getCrossReference$8$Delimiter()))
-			return true;
-		return false;
+	protected int consumeAssignment$7() throws Exception {
+		int result = Integer.MIN_VALUE;
+		int tempResult;
+		tempResult = consumeTerminal(idConsumer, null, false, false, getRule().ele10CrossReferenceEStringEClassifier(), getCrossReference$8$Delimiter());
+		if (tempResult == ConsumeResult.SUCCESS)
+			return tempResult;
+		result = tempResult >= result ? tempResult : result; 
+		return result;
 	}
 
 	public TypeRefElements getRule() {

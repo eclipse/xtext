@@ -36,6 +36,7 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
@@ -62,7 +63,7 @@ public final class «this.consumerClassName()» extends NonTerminalConsumer {
 «EXPAND delimiterFieldInit FOREACH allDelimited()-»
 	}
 	
-	protected boolean doConsume() throws Exception {
+	protected int doConsume() throws Exception {
 		return «alternatives.consumeMethodName()»();
 	}
 «EXPAND defineConsume FOR alternatives-»
@@ -203,26 +204,48 @@ public final class «this.consumerClassName()» extends NonTerminalConsumer {
 
 «DEFINE defineConsumeDeclaration FOR AbstractElement-»
 
-	protected boolean «consumeMethodName()»() throws Exception {
+	protected int «consumeMethodName()»() throws Exception {
 «IF isQuestionMark()-»
-		do«consumeMethodName().toFirstUpper()»();
-		return true;
+		IMarker marker = mark();
+		int result = do«consumeMethodName().toFirstUpper()»();
+		if (result != ConsumeResult.SUCCESS)
+			marker.rollback();
+		marker.release();
+		return ConsumeResult.SUCCESS;
 «ELSEIF isStar()-»
-		while(do«consumeMethodName().toFirstUpper()»()) {}
-		return true;
-«ELSEIF isPlus()-»
-		if (do«consumeMethodName().toFirstUpper()»()) {
-			while(do«consumeMethodName().toFirstUpper()»()) {}
-			return true;
+		IMarker marker = mark();
+		while(do«consumeMethodName().toFirstUpper()»() == ConsumeResult.SUCCESS) {
+			marker.release();
+			marker = mark();
 		}
-		return false;
+		marker.rollback();
+		marker.release();
+		return ConsumeResult.SUCCESS;
+«ELSEIF isPlus()-»
+		IMarker marker = mark();
+		int result = do«consumeMethodName().toFirstUpper()»();
+		if (result == ConsumeResult.SUCCESS) {
+			marker.release();
+			marker = mark();
+			while(do«consumeMethodName().toFirstUpper()»()==ConsumeResult.SUCCESS) {
+				marker.release();
+				marker = mark();
+			}
+			marker.rollback();
+			marker.release();
+			return ConsumeResult.SUCCESS;
+		} else {
+			error("Could not find token.", getRule().«gaElementAccessMethodeName()»());
+		}
+		marker.release();
+		return result;
 «ELSE-»
 «EXPAND defineConsumeBody FOR this-»
 «ENDIF-»
 	}
 «IF isQuestionMark() || isStar() || isPlus()-»
 
-	protected boolean do«consumeMethodName().toFirstUpper()»() throws Exception {
+	protected int do«consumeMethodName().toFirstUpper()»() throws Exception {
 «EXPAND defineConsumeBody FOR this-»
 	}
 «ENDIF-»
@@ -232,7 +255,7 @@ public final class «this.consumerClassName()» extends NonTerminalConsumer {
 «IF isQuestionMark() || isStar() || isPlus()-»
 «ERROR "multiplicity is not supported for actions"»
 «ENDIF-»
-	protected boolean «consumeMethodName()»() {
+	protected int «consumeMethodName()»() {
 «EXPAND defineConsumeBody FOR this-»
 	}
 «ENDDEFINE»
@@ -243,12 +266,17 @@ public final class «this.consumerClassName()» extends NonTerminalConsumer {
 
 «DEFINE defineConsumeBody FOR Action-»
 		consumeAction("«typeName.type.name»", "«feature»", «operator == "+="»);
-		return true;	
+		return ConsumeResult.SUCCESS;	
 «ENDDEFINE»
 
 «DEFINE defineConsumeBody FOR Alternatives-»
+		int result = ConsumeResult.SUCCESS;
+		IMarker bestMarker = mark();
+		IMarker currentMarker;
+		int tempResult;
 «EXPAND defineConsumeBodyInternal FOR this-»
-		return false;
+		bestMarker.release();
+		return result;
 «ENDDEFINE»
 
 «DEFINE defineConsumeBodyInternal FOR Alternatives-»
@@ -256,17 +284,34 @@ public final class «this.consumerClassName()» extends NonTerminalConsumer {
 «IF g.metaType == Alternatives && !g.isOptional() && !g.isMultipleCardinality()-»
 «EXPAND defineConsumeBodyInternal FOR (Alternatives)g-»
 «ELSE-»
-		if («g.consumeMethodName()»())
-			return true;
+		currentMarker = bestMarker.copy();
+		tempResult = «g.consumeMethodName()»(); 
+		if (tempResult == ConsumeResult.SUCCESS) {
+			if (bestMarker != currentMarker) {
+				bestMarker.discard();
+			}
+			currentMarker.release();
+			return tempResult;
+		}
+		if (tempResult > result) {
+			bestMarker.discard();
+			bestMarker = currentMarker;			
+			result = tempResult;
+		} else {
+			currentMarker.discard();
+		}
+		currentMarker = null;
+		bestMarker.activate();
 «ENDIF-»
 «ENDFOREACH-»
 «ENDDEFINE»
 
 «DEFINE defineConsumeBody FOR Group-»
 		final IMarker marker = mark();
+		int result;
 «EXPAND defineConsumeBodyInternal FOR this-»
 		marker.release();
-		return true;
+		return result;
 «ENDDEFINE»
 
 «DEFINE defineConsumeBodyInternal FOR Group-»
@@ -274,18 +319,21 @@ public final class «this.consumerClassName()» extends NonTerminalConsumer {
 «IF token.metaType == Group && !token.isOptional() && !token.isMultipleCardinality()-»
 «EXPAND defineConsumeBodyInternal FOR (Group)token-»
 «ELSE-»
-		if (!«token.consumeMethodName()»()) {
-			marker.rollback();
+		result = «token.consumeMethodName()»(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().«token.gaElementAccessMethodeName()»());
 			marker.release();
-			return false;
+			return result;
 		}
 «ENDIF-»
 «ENDFOREACH-»
 «ENDDEFINE»
 
 «DEFINE defineConsumeBody FOR Assignment-»
+		int result = Integer.MIN_VALUE;
+		int tempResult;
 «EXPAND defineConsumeAssignmentBody(this) FOR terminal-»
-		return false;
+		return result;
 «ENDDEFINE»
 
 «DEFINE defineConsumeBody FOR Keyword-»
@@ -317,8 +365,10 @@ public final class «this.consumerClassName()» extends NonTerminalConsumer {
 «ENDDEFINE»
 
 «DEFINE defineConsumeAssignmentBody(Assignment assignment) FOR Keyword-»
-		if (consumeKeyword(getRule().«gaElementAccessMethodeName()»(), "«assignment.feature»", «assignment.isMultiple()», «assignment.isBoolean()», get«delimiterFieldName().toFirstUpper()»()))
-			return true;
+		tempResult = consumeKeyword(getRule().«gaElementAccessMethodeName()»(), "«assignment.feature»", «assignment.isMultiple()», «assignment.isBoolean()», get«delimiterFieldName().toFirstUpper()»()); 
+		if (tempResult == ConsumeResult.SUCCESS)
+			return tempResult;
+		result = tempResult >= result ? tempResult : result; 
 «ENDDEFINE»
 
 «DEFINE defineConsumeAssignmentBody(Assignment assignment) FOR CrossReference-»
@@ -330,17 +380,23 @@ public final class «this.consumerClassName()» extends NonTerminalConsumer {
 «ENDDEFINE»
 
 «DEFINE defineConsumeCrossReferenceAssignmentBody(Assignment assignment, CrossReference reference) FOR LexerRule-»
-		if (consumeTerminal(«consumerFieldName()», null, «assignment.isMultiple()», «assignment.isBoolean()», getRule().«reference.gaElementAccessMethodeName()»(), get«reference.delimiterFieldName().toFirstUpper()»()))
-			return true;
+		tempResult = consumeTerminal(«consumerFieldName()», null, «assignment.isMultiple()», «assignment.isBoolean()», getRule().«reference.gaElementAccessMethodeName()»(), get«reference.delimiterFieldName().toFirstUpper()»());
+		if (tempResult == ConsumeResult.SUCCESS)
+			return tempResult;
+		result = tempResult >= result ? tempResult : result; 
 «ENDDEFINE»
 
 «DEFINE defineConsumeCrossReferenceAssignmentBody(Assignment assignment, CrossReference reference) FOR ParserRule-»
 «IF !terminal-»
-		if (consumeNonTerminal(«consumerFieldName()», null, «assignment.isMultiple()», «isDatatypeRule()», getRule().«reference.gaElementAccessMethodeName()»()))
-			return true;
+		tempResult = consumeNonTerminal(«consumerFieldName()», null, «assignment.isMultiple()», «isDatatypeRule()», getRule().«reference.gaElementAccessMethodeName()»());
+		if (tempResult == ConsumeResult.SUCCESS)
+			return tempResult;
+		result = tempResult >= result ? tempResult : result; 
 «ELSE-»
-		if (consumeTerminal(«consumerFieldName()», null, «assignment.isMultiple()», «assignment.isBoolean()», getRule().«reference.gaElementAccessMethodeName()»(), get«reference.delimiterFieldName().toFirstUpper()»()))
-			return true;
+		tempResult = consumeTerminal(«consumerFieldName()», null, «assignment.isMultiple()», «assignment.isBoolean()», getRule().«reference.gaElementAccessMethodeName()»(), get«reference.delimiterFieldName().toFirstUpper()»());
+		if (tempResult == ConsumeResult.SUCCESS)
+			return tempResult;
+		result = tempResult >= result ? tempResult : result; 
 «ENDIF-»
 «ENDDEFINE»
 
@@ -353,17 +409,23 @@ public final class «this.consumerClassName()» extends NonTerminalConsumer {
 «ENDDEFINE»
 
 «DEFINE defineConsumeAssignmentBody(Assignment assignment, RuleCall call) FOR LexerRule-»
-		if (consumeTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «assignment.isBoolean()», getRule().«call.gaElementAccessMethodeName()»(), get«call.delimiterFieldName().toFirstUpper()»()))
-			return true;
+		tempResult = consumeTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «assignment.isBoolean()», getRule().«call.gaElementAccessMethodeName()»(), get«call.delimiterFieldName().toFirstUpper()»());
+		if (tempResult == ConsumeResult.SUCCESS)
+			return tempResult;
+		result = tempResult >= result ? tempResult : result; 
 «ENDDEFINE»
 
 «DEFINE defineConsumeAssignmentBody(Assignment assignment, RuleCall call) FOR ParserRule-»
 «IF !terminal-»
-		if (consumeNonTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «isDatatypeRule()», getRule().«call.gaElementAccessMethodeName()»()))
-			return true;
+		tempResult = consumeNonTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «isDatatypeRule()», getRule().«call.gaElementAccessMethodeName()»());
+		if (tempResult == ConsumeResult.SUCCESS)
+			return tempResult;
+		result = tempResult >= result ? tempResult : result; 
 «ELSE-»
-		if (consumeTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «assignment.isBoolean()», getRule().«call.gaElementAccessMethodeName()»(), get«call.delimiterFieldName().toFirstUpper()»()))
-			return true;
+		tempResult = consumeTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «assignment.isBoolean()», getRule().«call.gaElementAccessMethodeName()»(), get«call.delimiterFieldName().toFirstUpper()»());
+		if (tempResult == ConsumeResult.SUCCESS)
+			return tempResult;
+		result = tempResult >= result ? tempResult : result; 
 «ENDIF-»
 «ENDDEFINE»
 

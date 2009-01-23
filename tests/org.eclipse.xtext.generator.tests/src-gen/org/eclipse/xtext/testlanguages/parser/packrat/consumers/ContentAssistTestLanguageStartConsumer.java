@@ -11,6 +11,7 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
@@ -37,50 +38,70 @@ public final class ContentAssistTestLanguageStartConsumer extends NonTerminalCon
 		keyword$6$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
-	protected boolean doConsume() throws Exception {
+	protected int doConsume() throws Exception {
 		return consumeGroup$1();
 	}
 
-	protected boolean consumeGroup$1() throws Exception {
+	protected int consumeGroup$1() throws Exception {
 		final IMarker marker = mark();
-		if (!consumeKeyword$3()) {
-			marker.rollback();
+		int result;
+		result = consumeKeyword$3(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele00KeywordAbstractRules());
 			marker.release();
-			return false;
+			return result;
 		}
-		if (!consumeAssignment$4()) {
-			marker.rollback();
+		result = consumeAssignment$4(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele01AssignmentRules());
 			marker.release();
-			return false;
+			return result;
 		}
-		if (!consumeKeyword$6()) {
-			marker.rollback();
+		result = consumeKeyword$6(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele1KeywordEnd());
 			marker.release();
-			return false;
+			return result;
 		}
 		marker.release();
-		return true;
+		return result;
 	}
 
-	protected boolean consumeKeyword$3() throws Exception {
+	protected int consumeKeyword$3() throws Exception {
 		return consumeKeyword(getRule().ele00KeywordAbstractRules(), null, false, false, getKeyword$3$Delimiter());
 	}
 
-	protected boolean consumeAssignment$4() throws Exception {
-		if (doConsumeAssignment$4()) {
-			while(doConsumeAssignment$4()) {}
-			return true;
+	protected int consumeAssignment$4() throws Exception {
+		IMarker marker = mark();
+		int result = doConsumeAssignment$4();
+		if (result == ConsumeResult.SUCCESS) {
+			marker.release();
+			marker = mark();
+			while(doConsumeAssignment$4()==ConsumeResult.SUCCESS) {
+				marker.release();
+				marker = mark();
+			}
+			marker.rollback();
+			marker.release();
+			return ConsumeResult.SUCCESS;
+		} else {
+			error("Could not find token.", getRule().ele01AssignmentRules());
 		}
-		return false;
+		marker.release();
+		return result;
 	}
 
-	protected boolean doConsumeAssignment$4() throws Exception {
-		if (consumeNonTerminal(abstractRuleConsumer, "rules", true, false, getRule().ele010ParserRuleCallAbstractRule()))
-			return true;
-		return false;
+	protected int doConsumeAssignment$4() throws Exception {
+		int result = Integer.MIN_VALUE;
+		int tempResult;
+		tempResult = consumeNonTerminal(abstractRuleConsumer, "rules", true, false, getRule().ele010ParserRuleCallAbstractRule());
+		if (tempResult == ConsumeResult.SUCCESS)
+			return tempResult;
+		result = tempResult >= result ? tempResult : result; 
+		return result;
 	}
 
-	protected boolean consumeKeyword$6() throws Exception {
+	protected int consumeKeyword$6() throws Exception {
 		return consumeKeyword(getRule().ele1KeywordEnd(), null, false, false, getKeyword$6$Delimiter());
 	}
 

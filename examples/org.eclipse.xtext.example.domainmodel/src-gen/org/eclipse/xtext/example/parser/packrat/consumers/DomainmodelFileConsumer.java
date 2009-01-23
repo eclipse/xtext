@@ -11,6 +11,7 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
@@ -33,46 +34,69 @@ public final class DomainmodelFileConsumer extends NonTerminalConsumer {
 		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil, hiddenTokens);
 	}
 	
-	protected boolean doConsume() throws Exception {
+	protected int doConsume() throws Exception {
 		return consumeGroup$1();
 	}
 
-	protected boolean consumeGroup$1() throws Exception {
+	protected int consumeGroup$1() throws Exception {
 		final IMarker marker = mark();
-		if (!consumeAssignment$2()) {
-			marker.rollback();
+		int result;
+		result = consumeAssignment$2(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele0AssignmentImports());
 			marker.release();
-			return false;
+			return result;
 		}
-		if (!consumeAssignment$4()) {
-			marker.rollback();
+		result = consumeAssignment$4(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele1AssignmentNamedElements());
 			marker.release();
-			return false;
+			return result;
 		}
 		marker.release();
-		return true;
+		return result;
 	}
 
-	protected boolean consumeAssignment$2() throws Exception {
-		while(doConsumeAssignment$2()) {}
-		return true;
+	protected int consumeAssignment$2() throws Exception {
+		IMarker marker = mark();
+		while(doConsumeAssignment$2() == ConsumeResult.SUCCESS) {
+			marker.release();
+			marker = mark();
+		}
+		marker.rollback();
+		marker.release();
+		return ConsumeResult.SUCCESS;
 	}
 
-	protected boolean doConsumeAssignment$2() throws Exception {
-		if (consumeNonTerminal(importConsumer, "imports", true, false, getRule().ele00ParserRuleCallImport()))
-			return true;
-		return false;
+	protected int doConsumeAssignment$2() throws Exception {
+		int result = Integer.MIN_VALUE;
+		int tempResult;
+		tempResult = consumeNonTerminal(importConsumer, "imports", true, false, getRule().ele00ParserRuleCallImport());
+		if (tempResult == ConsumeResult.SUCCESS)
+			return tempResult;
+		result = tempResult >= result ? tempResult : result; 
+		return result;
 	}
 
-	protected boolean consumeAssignment$4() throws Exception {
-		while(doConsumeAssignment$4()) {}
-		return true;
+	protected int consumeAssignment$4() throws Exception {
+		IMarker marker = mark();
+		while(doConsumeAssignment$4() == ConsumeResult.SUCCESS) {
+			marker.release();
+			marker = mark();
+		}
+		marker.rollback();
+		marker.release();
+		return ConsumeResult.SUCCESS;
 	}
 
-	protected boolean doConsumeAssignment$4() throws Exception {
-		if (consumeNonTerminal(namedElementConsumer, "namedElements", true, false, getRule().ele10ParserRuleCallNamedElement()))
-			return true;
-		return false;
+	protected int doConsumeAssignment$4() throws Exception {
+		int result = Integer.MIN_VALUE;
+		int tempResult;
+		tempResult = consumeNonTerminal(namedElementConsumer, "namedElements", true, false, getRule().ele10ParserRuleCallNamedElement());
+		if (tempResult == ConsumeResult.SUCCESS)
+			return tempResult;
+		result = tempResult >= result ? tempResult : result; 
+		return result;
 	}
 
 	public FileElements getRule() {

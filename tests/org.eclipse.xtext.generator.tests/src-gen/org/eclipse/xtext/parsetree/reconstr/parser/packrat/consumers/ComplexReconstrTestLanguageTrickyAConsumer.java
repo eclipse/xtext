@@ -11,6 +11,7 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
@@ -50,125 +51,192 @@ public final class ComplexReconstrTestLanguageTrickyAConsumer extends NonTermina
 		ruleCall$19$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
-	protected boolean doConsume() throws Exception {
+	protected int doConsume() throws Exception {
 		return consumeGroup$1();
 	}
 
-	protected boolean consumeGroup$1() throws Exception {
+	protected int consumeGroup$1() throws Exception {
 		final IMarker marker = mark();
-		if (!consumeKeyword$5()) {
-			marker.rollback();
+		int result;
+		result = consumeKeyword$5(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele0000KeywordTA());
 			marker.release();
-			return false;
+			return result;
 		}
-		if (!consumeRuleCall$6()) {
-			marker.rollback();
+		result = consumeRuleCall$6(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele0001ParserRuleCallTrickyA1());
 			marker.release();
-			return false;
+			return result;
 		}
-		if (!consumeAssignment$7()) {
-			marker.rollback();
+		result = consumeAssignment$7(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele001AssignmentName());
 			marker.release();
-			return false;
+			return result;
 		}
-		if (!consumeAlternatives$9()) {
-			marker.rollback();
+		result = consumeAlternatives$9(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele01Alternatives());
 			marker.release();
-			return false;
+			return result;
 		}
-		if (!consumeAssignment$18()) {
-			marker.rollback();
+		result = consumeAssignment$18(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele1AssignmentName());
 			marker.release();
-			return false;
+			return result;
 		}
 		marker.release();
-		return true;
+		return result;
 	}
 
-	protected boolean consumeKeyword$5() throws Exception {
+	protected int consumeKeyword$5() throws Exception {
 		return consumeKeyword(getRule().ele0000KeywordTA(), null, false, false, getKeyword$5$Delimiter());
 	}
 
-	protected boolean consumeRuleCall$6() throws Exception {
+	protected int consumeRuleCall$6() throws Exception {
 		return consumeNonTerminal(trickyA1Consumer, null, false, false, getRule().ele0001ParserRuleCallTrickyA1());
 	}
 
-	protected boolean consumeAssignment$7() throws Exception {
-		while(doConsumeAssignment$7()) {}
-		return true;
-	}
-
-	protected boolean doConsumeAssignment$7() throws Exception {
-		if (consumeTerminal(idConsumer, "name", true, false, getRule().ele0010LexerRuleCallID(), getRuleCall$8$Delimiter()))
-			return true;
-		return false;
-	}
-
-	protected boolean consumeAlternatives$9() throws Exception {
-		doConsumeAlternatives$9();
-		return true;
-	}
-
-	protected boolean doConsumeAlternatives$9() throws Exception {
-		if (consumeGroup$10())
-			return true;
-		if (consumeGroup$14())
-			return true;
-		return false;
-	}
-
-	protected boolean consumeGroup$10() throws Exception {
-		final IMarker marker = mark();
-		if (!consumeAction$11()) {
-			marker.rollback();
+	protected int consumeAssignment$7() throws Exception {
+		IMarker marker = mark();
+		while(doConsumeAssignment$7() == ConsumeResult.SUCCESS) {
 			marker.release();
-			return false;
+			marker = mark();
 		}
-		if (!consumeKeyword$13()) {
+		marker.rollback();
+		marker.release();
+		return ConsumeResult.SUCCESS;
+	}
+
+	protected int doConsumeAssignment$7() throws Exception {
+		int result = Integer.MIN_VALUE;
+		int tempResult;
+		tempResult = consumeTerminal(idConsumer, "name", true, false, getRule().ele0010LexerRuleCallID(), getRuleCall$8$Delimiter());
+		if (tempResult == ConsumeResult.SUCCESS)
+			return tempResult;
+		result = tempResult >= result ? tempResult : result; 
+		return result;
+	}
+
+	protected int consumeAlternatives$9() throws Exception {
+		IMarker marker = mark();
+		int result = doConsumeAlternatives$9();
+		if (result != ConsumeResult.SUCCESS)
 			marker.rollback();
+		marker.release();
+		return ConsumeResult.SUCCESS;
+	}
+
+	protected int doConsumeAlternatives$9() throws Exception {
+		int result = ConsumeResult.SUCCESS;
+		IMarker bestMarker = mark();
+		IMarker currentMarker;
+		int tempResult;
+		currentMarker = bestMarker.copy();
+		tempResult = consumeGroup$10(); 
+		if (tempResult == ConsumeResult.SUCCESS) {
+			if (bestMarker != currentMarker) {
+				bestMarker.discard();
+			}
+			currentMarker.release();
+			return tempResult;
+		}
+		if (tempResult > result) {
+			bestMarker.discard();
+			bestMarker = currentMarker;			
+			result = tempResult;
+		} else {
+			currentMarker.discard();
+		}
+		currentMarker = null;
+		bestMarker.activate();
+		currentMarker = bestMarker.copy();
+		tempResult = consumeGroup$14(); 
+		if (tempResult == ConsumeResult.SUCCESS) {
+			if (bestMarker != currentMarker) {
+				bestMarker.discard();
+			}
+			currentMarker.release();
+			return tempResult;
+		}
+		if (tempResult > result) {
+			bestMarker.discard();
+			bestMarker = currentMarker;			
+			result = tempResult;
+		} else {
+			currentMarker.discard();
+		}
+		currentMarker = null;
+		bestMarker.activate();
+		bestMarker.release();
+		return result;
+	}
+
+	protected int consumeGroup$10() throws Exception {
+		final IMarker marker = mark();
+		int result;
+		result = consumeAction$11(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele0100ActionTypeBx());
 			marker.release();
-			return false;
+			return result;
+		}
+		result = consumeKeyword$13(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele0101KeywordX());
+			marker.release();
+			return result;
 		}
 		marker.release();
-		return true;
+		return result;
 	}
-	protected boolean consumeAction$11() {
+	protected int consumeAction$11() {
 		consumeAction("TypeB", "x", false);
-		return true;	
+		return ConsumeResult.SUCCESS;	
 	}
 
-	protected boolean consumeKeyword$13() throws Exception {
+	protected int consumeKeyword$13() throws Exception {
 		return consumeKeyword(getRule().ele0101KeywordX(), null, false, false, getKeyword$13$Delimiter());
 	}
 
-	protected boolean consumeGroup$14() throws Exception {
+	protected int consumeGroup$14() throws Exception {
 		final IMarker marker = mark();
-		if (!consumeAction$15()) {
-			marker.rollback();
+		int result;
+		result = consumeAction$15(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele0110ActionTypeCx());
 			marker.release();
-			return false;
+			return result;
 		}
-		if (!consumeKeyword$17()) {
-			marker.rollback();
+		result = consumeKeyword$17(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele0111KeywordY());
 			marker.release();
-			return false;
+			return result;
 		}
 		marker.release();
-		return true;
+		return result;
 	}
-	protected boolean consumeAction$15() {
+	protected int consumeAction$15() {
 		consumeAction("TypeC", "x", false);
-		return true;	
+		return ConsumeResult.SUCCESS;	
 	}
 
-	protected boolean consumeKeyword$17() throws Exception {
+	protected int consumeKeyword$17() throws Exception {
 		return consumeKeyword(getRule().ele0111KeywordY(), null, false, false, getKeyword$17$Delimiter());
 	}
 
-	protected boolean consumeAssignment$18() throws Exception {
-		if (consumeTerminal(stringConsumer, "name", true, false, getRule().ele10LexerRuleCallSTRING(), getRuleCall$19$Delimiter()))
-			return true;
-		return false;
+	protected int consumeAssignment$18() throws Exception {
+		int result = Integer.MIN_VALUE;
+		int tempResult;
+		tempResult = consumeTerminal(stringConsumer, "name", true, false, getRule().ele10LexerRuleCallSTRING(), getRuleCall$19$Delimiter());
+		if (tempResult == ConsumeResult.SUCCESS)
+			return tempResult;
+		result = tempResult >= result ? tempResult : result; 
+		return result;
 	}
 
 	public TrickyAElements getRule() {
