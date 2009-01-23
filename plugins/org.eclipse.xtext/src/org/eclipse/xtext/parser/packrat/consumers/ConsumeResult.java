@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -10,8 +10,10 @@ package org.eclipse.xtext.parser.packrat.consumers;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface IRootConsumerListener {
+public abstract class ConsumeResult {
 
-	int beforeNonTerminalEnd(INonTerminalConsumer nonTerminalConsumer);
-
+	public static final int SUCCESS = -2;
+	public static final int EMPTY_MATCH = -1;
+	
+	// error offset otherwise
 }

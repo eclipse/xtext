@@ -15,6 +15,7 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.ParseResult;
+import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.IRootConsumerListener;
@@ -51,13 +52,17 @@ public abstract class AbstractPackratParser implements
 		
 		private int offset;
 		
+		private int storedOffset;
+		
 		public void rollback() {
 			marker.rollback();
 			AbstractPackratParser.this.offset = offset;
 		}
 
 		public void release() {
+			AbstractPackratParser.this.acceptor = marker.getParentAcceptor();
 			marker.release();
+			this.marker = null;
 			if (bufferSize < markerBuffer.length)
 				markerBuffer[bufferSize++] = this;
 		}
@@ -65,6 +70,24 @@ public abstract class AbstractPackratParser implements
 		@Override
 		public String toString() {
 			return marker.toString() + "@Offset '" + offset + "'";
+		}
+
+		public IMarker copy() {
+			storedOffset = AbstractPackratParser.this.offset;
+			AbstractPackratParser.this.offset = offset;
+			return mark(this.offset, this.marker.getParentAcceptor());
+		}
+
+		public void activate() {
+			AbstractPackratParser.this.offset = storedOffset;
+			AbstractPackratParser.this.acceptor = this.marker;
+		}
+		
+		public void discard() {
+			this.marker.rollback(); // forget tokens
+			this.marker = null;
+			if (bufferSize < markerBuffer.length)
+				markerBuffer[bufferSize++] = this;
 		}
 
 	}
@@ -109,6 +132,8 @@ public abstract class AbstractPackratParser implements
 	
 	private final ParsedTokenSequence tokenSequence;
 	
+	private IParsedTokenAcceptor acceptor;
+	
 	private final IParserConfiguration parserConfiguration;
 	
 	private Marker[] markerBuffer;
@@ -117,6 +142,7 @@ public abstract class AbstractPackratParser implements
 	
 	protected AbstractPackratParser() {
 		tokenSequence = createTokenSequence();
+		acceptor = tokenSequence;
 		parserConfiguration = createParserConfiguration();
 		keywordConsumer = createKeywordConsumer();
 		markerBuffer = new Marker[10];
@@ -172,22 +198,20 @@ public abstract class AbstractPackratParser implements
 	}
 
 	private class RootConsumerListener implements IRootConsumerListener {
-		public boolean beforeNonTerminalEnd(INonTerminalConsumer nonTerminalConsumer) {
+		public int beforeNonTerminalEnd(INonTerminalConsumer nonTerminalConsumer) {
 			consumeHiddens();
-			return offset == input.length();
+			return offset == input.length() ? ConsumeResult.SUCCESS : getOffset();
 		}
 	}
 	
 	protected final IParseResult parse(INonTerminalConsumer consumer) {
 		try {
 			IRootConsumerListener listener = new RootConsumerListener();
-			if (consumer.consumeAsRoot(listener)) {
-				return getParseResultFactory().createParseResult(tokenSequence, input);
-			}
+			consumer.consumeAsRoot(listener);
+			return getParseResultFactory().createParseResult(tokenSequence, input);
 		} catch(Exception e) {
 			throw new WrappedException(e);
 		}
-		return new ParseResult();
 	}
 	
 	protected INonTerminalConsumer getRootConsumer() {
@@ -199,7 +223,7 @@ public abstract class AbstractPackratParser implements
 		while(anySuccess) {
 			anySuccess = false;
 			for (ITerminalConsumer consumer: hiddens) {
-				if (consumer.consume(null, false, false, null, ISequenceMatcher.Factory.nullMatcher())) {
+				if (consumer.consume(null, false, false, null, ISequenceMatcher.Factory.nullMatcher()) == ConsumeResult.SUCCESS) {
 					anySuccess = true;
 					break;
 				}
@@ -208,9 +232,16 @@ public abstract class AbstractPackratParser implements
 	}
 	
 	public IMarker mark() {
+		return mark(offset, this.acceptor);
+	}
+	
+	private IMarker mark(int offset, IParsedTokenAcceptor parent) {
 		final Marker result = bufferSize > 0 ? markerBuffer[--bufferSize] : new Marker();
+		final ParsedTokenSequence.Marker tokenMarker = tokenSequence.mark();
+		tokenMarker.setParentAcceptor(parent);
+		this.acceptor = tokenMarker;
+		result.marker = tokenMarker;
 		result.offset = offset;
-		result.marker = tokenSequence.mark();
 		return result;
 	}
 	
@@ -218,24 +249,25 @@ public abstract class AbstractPackratParser implements
 		this.offset = position;
 	}
 	
-	public boolean consumeKeyword(Keyword keyword, String feature, boolean isMany, boolean isBoolean, ICharacterClass notFollowedBy) {
+	public int consumeKeyword(Keyword keyword, String feature, boolean isMany, boolean isBoolean, ICharacterClass notFollowedBy) {
 		keywordConsumer.configure(keyword, notFollowedBy);
 		return consumeTerminal(keywordConsumer, feature, isMany, isBoolean, keyword, ISequenceMatcher.Factory.nullMatcher());
 	}
 	
-	public boolean consumeTerminal(ITerminalConsumer consumer, String feature, boolean isMany, boolean isBoolean, AbstractElement grammarElement, ISequenceMatcher notMatching) {
+	public int consumeTerminal(ITerminalConsumer consumer, String feature, boolean isMany, boolean isBoolean, AbstractElement grammarElement, ISequenceMatcher notMatching) {
 		IMarker marker = mark();
 		consumeHiddens();
-		if (consumer.consume(feature, isMany, isBoolean, grammarElement, notMatching != null ? notMatching : ISequenceMatcher.Factory.nullMatcher())) {
+		int result = consumer.consume(feature, isMany, isBoolean, grammarElement, notMatching != null ? notMatching : ISequenceMatcher.Factory.nullMatcher());
+		if (result == ConsumeResult.SUCCESS) {
 			marker.release();
-			return true;
-		}
+			return result;
+		} 
 		marker.rollback();
 		marker.release();
-		return false;
+		return result;
 	}
 	
-	public boolean consumeNonTerminal(INonTerminalConsumer consumer, String feature, boolean isMany, boolean isDatatype, AbstractElement grammarElement) throws Exception {
+	public int consumeNonTerminal(INonTerminalConsumer consumer, String feature, boolean isMany, boolean isDatatype, AbstractElement grammarElement) throws Exception {
 		return consumer.consume(feature, isMany, isDatatype, grammarElement);
 	}
 	
@@ -276,7 +308,7 @@ public abstract class AbstractPackratParser implements
 	}
 
 	public void accept(AbstractParsedToken token) {
-		tokenSequence.append(token);
+		acceptor.accept(token);
 	}
 
 	public void setOffset(int offset) {

@@ -12,6 +12,7 @@ import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory;
 import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 import org.eclipse.xtext.services.XtextGrammarAccess;
@@ -45,7 +46,7 @@ public final class XtextBuiltinIDConsumer extends AbstractRuleAwareTerminalConsu
 		super(input, markerFactory, tokenAcceptor);
 	}
 
-	public boolean doConsume() {
+	public int doConsume() {
 		//			Marker marker = mark(); // not needed because we have no alternatives
 		boolean result = true;
 		// ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*
@@ -60,7 +61,7 @@ public final class XtextBuiltinIDConsumer extends AbstractRuleAwareTerminalConsu
 				readChars(IDConsumer$$2); // cardinality * does not affect result
 			}
 		}
-		return result;
+		return result ? ConsumeResult.SUCCESS : ConsumeResult.EMPTY_MATCH;
 	}
 
 	@Override

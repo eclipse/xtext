@@ -15,8 +15,11 @@ public interface IMarkerFactory {
 	IMarker mark();
 	
 	public interface IMarker {
+		void activate();
 		void rollback();
+		void discard();
 		void release();
+		IMarker copy();
 	}
 	
 }

@@ -12,6 +12,7 @@ import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory;
 import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 import org.eclipse.xtext.services.XtextGrammarAccess;
@@ -33,7 +34,7 @@ public final class XtextBuiltinSL_COMMENTConsumer extends AbstractRuleAwareTermi
 		super(input, markerFactory, tokenAcceptor);
 	}
 
-	public boolean doConsume() {
+	public int doConsume() {
 		boolean result = true;
 		// '//'
 		result = readString("//"); 
@@ -42,7 +43,7 @@ public final class XtextBuiltinSL_COMMENTConsumer extends AbstractRuleAwareTermi
 			readChar('\r');
 			result = readChar('\n');
 		}
-		return result;
+		return result ? ConsumeResult.SUCCESS : ConsumeResult.EMPTY_MATCH;
 	}
 
 	@Override

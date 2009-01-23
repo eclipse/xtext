@@ -13,6 +13,7 @@ import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 import org.eclipse.xtext.services.XtextGrammarAccess;
@@ -37,7 +38,7 @@ public final class XtextBuiltinSTRINGConsumer extends AbstractRuleAwareTerminalC
 		super(input, markerFactory, tokenAcceptor);
 	}
 
-	public boolean doConsume() {
+	public int doConsume() {
 		boolean result = true;
 		// '\"' ( '\\\\' ('b'|'t'|'n'|'f'|'r'|'\\\"'|'\\''|'\\\\') | ~('\\\\'|'\"') )* '\"' | 
 		// '\\'' ( '\\\\' ('b'|'t'|'n'|'f'|'r'|'\\\"'|'\\''|'\\\\') | ~('\\\\'|'\\'') )* '\\''
@@ -118,7 +119,7 @@ public final class XtextBuiltinSTRINGConsumer extends AbstractRuleAwareTerminalC
 				} else rollbackTo(marker);
 			}
 		}
-		return result;
+		return result ? ConsumeResult.SUCCESS : ConsumeResult.EMPTY_MATCH;
 	}
 
 	@Override
