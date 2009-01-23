@@ -37,7 +37,6 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 			contentAssistant.setContentAssistProcessor(contentAssistProcessor,
 					IDocument.DEFAULT_CONTENT_TYPE);
 		}
-		System.out.println(contentAssistProcessor);
 		return contentAssistant;
 	}
 

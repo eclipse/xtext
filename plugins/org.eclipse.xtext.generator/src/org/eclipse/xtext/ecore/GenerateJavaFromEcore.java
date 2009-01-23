@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Collection;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.codegen.ecore.generator.Generator;
 import org.eclipse.emf.codegen.ecore.generator.GeneratorAdapterFactory;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
@@ -22,6 +23,8 @@ import org.eclipse.emf.mwe.core.ConfigurationException;
 import org.eclipse.xtext.util.EmfFormater;
 
 public class GenerateJavaFromEcore {
+	
+	private static Logger log = Logger.getLogger(GenerateJavaFromEcore.class);
 	
 	public static void generateEcoreJavaClasses( Collection<? extends EPackage> packs, String basePackage, final String uri) throws IOException, ConfigurationException {
 		
@@ -98,7 +101,7 @@ public class GenerateJavaFromEcore {
 				.generate(genModel,
 						GenModelGeneratorAdapter.MODEL_PROJECT_TYPE,
 						new BasicMonitor());
-		System.out.println(EmfFormater.objToStr(diagnostic, ""));
-
+		if (log.isInfoEnabled())
+			log.info(EmfFormater.objToStr(diagnostic, ""));
 	}
 }

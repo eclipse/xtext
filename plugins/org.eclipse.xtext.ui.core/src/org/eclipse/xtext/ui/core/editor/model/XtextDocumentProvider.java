@@ -163,7 +163,6 @@ public class XtextDocumentProvider extends FileDocumentProvider implements IDocu
 	protected void disconnected() {
 		super.disconnected();
 		ResourcesPlugin.getWorkspace().removeResourceChangeListener(resourceChangeListener);
-		System.out.println("Disconnected! " + this.hashCode());
 	}
 
 }
