@@ -12,7 +12,6 @@ public class AutoTestSuite {
 
 	public static Test suite() {
 		TestSuite suite = new TestSuite("org.eclipse.xtext.service.ui.tests");
-		suite.addTestSuite(org.eclipse.xtext.service.ui.internal.LanguageDescriptorRegistrationTest.class);
 		return suite;
 	}
 }

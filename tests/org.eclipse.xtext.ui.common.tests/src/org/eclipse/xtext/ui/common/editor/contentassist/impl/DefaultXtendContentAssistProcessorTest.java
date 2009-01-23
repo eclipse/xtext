@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.contentassist.impl;
 
+import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.testlanguages.UseXtendSwitch;
-
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -22,8 +22,8 @@ public class DefaultXtendContentAssistProcessorTest extends DefaultContentAssist
 	 */
 	@Override
 	protected void setUp() throws Exception {
-		UseXtendSwitch.useXtend =true;
 		super.setUp();
+		UseXtendSwitch.useXtend =true;
 	}
 
 }

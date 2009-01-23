@@ -16,12 +16,20 @@
 «EXTENSION org::eclipse::xtext::ui::UIProperties»
 
 «DEFINE plugin_xml FOR GenModel»
+«IF !generateMergedPluginXml()-»
 «FILE "plugin.xml" UI-»
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
 
 <plugin>
-	<extension
+	
+</plugin>
+«ENDFILE»
+«ENDIF»
+«ENDDEFINE»
+
+«DEFINE body FOR GenModel»
+<extension
          point="org.eclipse.ui.editors">
       <editor
             class="org.eclipse.xtext.ui.core.editor.XtextEditor"
@@ -68,8 +76,4 @@
             label="Task Tags">
         </keyword>
 	</extension>
-</plugin>
-«ENDFILE»
 «ENDDEFINE»
-
-

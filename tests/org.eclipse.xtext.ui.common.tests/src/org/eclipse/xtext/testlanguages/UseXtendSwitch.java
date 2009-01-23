@@ -7,11 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.testlanguages;
 
+import org.eclipse.xtext.service.ServiceRegistry;
+
+
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
 public class UseXtendSwitch {
 
 	public static boolean useXtend = false;
+	public static int higherPriority = ServiceRegistry.PRIORITY_NORMAL + 1;
 
 }

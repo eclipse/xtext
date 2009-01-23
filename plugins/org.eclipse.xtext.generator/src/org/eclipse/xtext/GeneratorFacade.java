@@ -89,10 +89,10 @@ public class GeneratorFacade {
 		// throw new IllegalStateException("The grammar has syntax errors.");
 		GenModel genModel = assembleGeneratorModel(grammarModel, runtimeProjectPath, uiProjectPath,
 				isGenerateXtendServices, isGenerateJavaServices, modelFileExtensions);
-		generate(genModel, isGenerateEcore);
+		generate(genModel, isGenerateEcore, runtimeProjectPath.equals(uiProjectPath));
 	}
 
-	private static void generate(GenModel genModel, boolean generateEcore) throws IOException {
+	private static void generate(GenModel genModel, boolean generateEcore, boolean generateMergedPluginXml) throws IOException {
 
 		EPackage.Registry.INSTANCE.put(EcorePackage.eNS_URI, EcorePackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(XtextPackage.eNS_URI, XtextPackage.eINSTANCE);
@@ -112,6 +112,8 @@ public class GeneratorFacade {
 		Map<String, Variable> globalVarsMap = new HashMap<String, Variable>();
 		Variable genModelVariable = new Variable("genModel", genModel);
 		globalVarsMap.put("genModel", genModelVariable);
+		Variable generateMergedPluginXmlVariable = new Variable("generateMergedPluginXml", generateMergedPluginXml); 
+		globalVarsMap.put("generateMergedPluginXml", generateMergedPluginXmlVariable);
 		XpandExecutionContextImpl execCtx = new XpandExecutionContextImpl(output, null, globalVarsMap, null, null);
 		EmfRegistryMetaModel metamodel = new EmfRegistryMetaModel() {
 			@Override

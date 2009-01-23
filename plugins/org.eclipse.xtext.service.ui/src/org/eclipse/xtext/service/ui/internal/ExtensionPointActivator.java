@@ -1,7 +1,5 @@
 package org.eclipse.xtext.service.ui.internal;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -12,7 +10,6 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.xtext.service.IServiceRegistrationFactory;
 import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.ServiceRegistry;
-import org.eclipse.xtext.service.ServiceScopeFactory;
 import org.eclipse.xtext.service.IServiceRegistrationFactory.IServiceRegistration;
 import org.eclipse.xtext.service.ui.Activator;
 
@@ -29,7 +26,6 @@ public class ExtensionPointActivator {
 
 	public static void activateServices() {
 		try {
-			registerScopes();
 			registerServiceRegistrations();
 		}
 		catch (Exception e) {
@@ -64,39 +60,6 @@ public class ExtensionPointActivator {
 					}
 				}
 				catch (Throwable e) {
-					log.error(e);
-				}
-			}
-		}
-	}
-
-	/**
-	 * TODO: This seems to be obsolete now as scopes are created explicitly (not
-	 * by means of an ExtensionPoint). If so, delete it, the tests referring to
-	 * it and the ScopeUtil.
-	 */
-	private static void registerScopes() {
-		IExtensionPoint extensionPoint = Platform.getExtensionRegistry().getExtensionPoint(
-				Activator.getDefault().getBundle().getSymbolicName(), SCOPE);
-		Assert.isNotNull(extensionPoint, "Extension point " + SCOPE + " not defined!");
-		IConfigurationElement[] elements = extensionPoint.getConfigurationElements();
-		if (elements != null) {
-			List<ScopeDescriptor> scopes = new ArrayList<ScopeDescriptor>();
-			for (IConfigurationElement element : elements) {
-				ScopeDescriptor scopeDD = new ScopeDescriptor();
-				scopeDD.id = element.getAttribute(ID);
-				scopeDD.parentScope = element.getAttribute(PARENT_SCOPE);
-				scopes.add(scopeDD);
-			}
-			ScopeUtil.validateAndCleanUpDescriptors(scopes);
-			scopes = ScopeUtil.sortScopeDescriptors(scopes);
-			for (ScopeDescriptor scopeDesc : scopes) {
-				try {
-					IServiceScope parentScope = ServiceScopeFactory.get(scopeDesc.parentScope);
-					// ServiceScopeFactory.createScope(scopeDesc.id,
-					// parentScope);
-				}
-				catch (Exception e) {
 					log.error(e);
 				}
 			}
