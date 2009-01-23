@@ -32,6 +32,7 @@ import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.StringWithOffset;
 import org.eclipse.xtext.util.CollectionUtils;
 import org.eclipse.xtext.util.Filter;
@@ -196,7 +197,7 @@ public final class PackratParserGenUtil {
 				if (rule instanceof LexerRule) {
 					if (rule.getName().equals("ID")) {
 						final StringWithOffset input = new StringWithOffset(param.getValue());
-						return new XtextBuiltinIDConsumer(input, input, null).consume();
+						return new XtextBuiltinIDConsumer(input, input, null).consume() == ConsumeResult.SUCCESS;
 					}
 				} else {
 					ParserRule parserRule = (ParserRule) rule;
@@ -216,7 +217,7 @@ public final class PackratParserGenUtil {
 		if (rule != null) {
 			// TODO SZ: use interpreter
 			final StringWithOffset input = new StringWithOffset(keyword.getValue());
-			if (new XtextBuiltinIDConsumer(input, input, null).consume()) {
+			if (new XtextBuiltinIDConsumer(input, input, null).consume() == ConsumeResult.SUCCESS) {
 				return Collections.singletonList(rule);
 			}
 		}

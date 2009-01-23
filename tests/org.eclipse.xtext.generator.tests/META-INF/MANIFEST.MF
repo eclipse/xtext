@@ -22,5 +22,4 @@ Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.testlanguages.parser.antlr.internal,
  org.eclipse.xtext.testlanguages.parsetree.reconstr,
  org.eclipse.xtext.testlanguages.services,
- org.eclipse.xtext.tests,
- org.eclipse.xtext.xtext.parser.handwritten
+ org.eclipse.xtext.tests

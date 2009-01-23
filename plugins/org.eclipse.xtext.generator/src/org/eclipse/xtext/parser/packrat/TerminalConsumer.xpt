@@ -32,6 +32,7 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory;
 import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
@@ -53,8 +54,8 @@ public final class «this.consumerClassName()» extends AbstractRuleAwareTerminalC
 		super(input, markerFactory, tokenAcceptor);
 	}
 	
-	protected boolean doConsume() {
-		return «alternatives.consumeMethodName()»();
+	protected int doConsume() {
+		return «alternatives.consumeMethodName()»() ? ConsumeResult.SUCCESS : ConsumeResult.EMPTY_MATCH;
 	}
 «EXPAND defineConsume FOR alternatives-»
 

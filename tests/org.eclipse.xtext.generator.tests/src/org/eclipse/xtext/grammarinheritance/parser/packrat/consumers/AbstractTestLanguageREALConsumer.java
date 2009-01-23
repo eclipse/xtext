@@ -16,6 +16,7 @@ import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory;
 import org.eclipse.xtext.parser.packrat.IParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 /**
@@ -36,11 +37,11 @@ public class AbstractTestLanguageREALConsumer extends AbstractRuleAwareTerminalC
 	}
 
 	@Override
-	protected boolean doConsume() {
-		if (!intConsumer.consume()) return false;
-		if (!readChar('.')) return false;
-		if (!intConsumer.consume()) return false;
-		return true;
+	protected int doConsume() {
+		if (intConsumer.consume()!=ConsumeResult.SUCCESS) return ConsumeResult.EMPTY_MATCH;
+		if (!readChar('.')) return ConsumeResult.EMPTY_MATCH;
+		if (intConsumer.consume()!=ConsumeResult.SUCCESS) return ConsumeResult.EMPTY_MATCH;
+		return ConsumeResult.SUCCESS;
 	}
 
 }
