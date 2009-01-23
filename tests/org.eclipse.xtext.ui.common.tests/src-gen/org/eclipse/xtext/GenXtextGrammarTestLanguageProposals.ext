@@ -288,6 +288,7 @@ List[ICompletionProposal] completeRuleCallRule(Assignment assignment, IContentAs
 	debug("completeRuleCallRule feature '" + assignment.feature + "' terminal '"
 					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
 					+ contentAssistContext.matchString.trim() + "'") ->
+					info("")->
 	lookupCrossReference(((CrossReference)assignment.terminal), contentAssistContext);
 	 	  
 List[ICompletionProposal] complete(RuleCall ruleCall, IContentAssistContext contentAssistContext) :

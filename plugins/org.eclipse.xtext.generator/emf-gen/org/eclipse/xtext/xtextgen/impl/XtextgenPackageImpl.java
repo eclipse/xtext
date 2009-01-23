@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextgenPackageImpl.java,v 1.6 2008/10/22 14:02:04 jkohnlein Exp $
+ * $Id: XtextgenPackageImpl.java,v 1.7 2009/01/23 14:12:00 jkohnlein Exp $
  */
 package org.eclipse.xtext.xtextgen.impl;
 
@@ -16,6 +16,7 @@ import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.xtextgen.GenModel;
 import org.eclipse.xtext.xtextgen.GenService;
 import org.eclipse.xtext.xtextgen.Outlet;
+import org.eclipse.xtext.xtextgen.PluginDependency;
 import org.eclipse.xtext.xtextgen.XtextgenFactory;
 import org.eclipse.xtext.xtextgen.XtextgenPackage;
 
@@ -46,6 +47,13 @@ public class XtextgenPackageImpl extends EPackageImpl implements XtextgenPackage
 	 * @generated
 	 */
 	private EClass outletEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass pluginDependencyEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -170,6 +178,15 @@ public class XtextgenPackageImpl extends EPackageImpl implements XtextgenPackage
 	 */
 	public EAttribute getGenService_GenParameters() {
 		return (EAttribute)genServiceEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getGenService_PluginDependencies() {
+		return (EReference)genServiceEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -303,6 +320,51 @@ public class XtextgenPackageImpl extends EPackageImpl implements XtextgenPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getPluginDependency() {
+		return pluginDependencyEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPluginDependency_BundleID() {
+		return (EAttribute)pluginDependencyEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPluginDependency_Version() {
+		return (EAttribute)pluginDependencyEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPluginDependency_Reexport() {
+		return (EAttribute)pluginDependencyEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPluginDependency_Optional() {
+		return (EAttribute)pluginDependencyEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public XtextgenFactory getXtextgenFactory() {
 		return (XtextgenFactory)getEFactoryInstance();
 	}
@@ -333,6 +395,7 @@ public class XtextgenPackageImpl extends EPackageImpl implements XtextgenPackage
 		createEAttribute(genServiceEClass, GEN_SERVICE__TEMPLATE_PATH);
 		createEAttribute(genServiceEClass, GEN_SERVICE__UI_SERVICE);
 		createEAttribute(genServiceEClass, GEN_SERVICE__GEN_PARAMETERS);
+		createEReference(genServiceEClass, GEN_SERVICE__PLUGIN_DEPENDENCIES);
 
 		genModelEClass = createEClass(GEN_MODEL);
 		createEAttribute(genModelEClass, GEN_MODEL__MODEL_FILE_EXTENSIONS);
@@ -348,6 +411,12 @@ public class XtextgenPackageImpl extends EPackageImpl implements XtextgenPackage
 		createEAttribute(outletEClass, OUTLET__NAME);
 		createEAttribute(outletEClass, OUTLET__TARGET_FOLDER);
 		createEAttribute(outletEClass, OUTLET__OVERWRITE);
+
+		pluginDependencyEClass = createEClass(PLUGIN_DEPENDENCY);
+		createEAttribute(pluginDependencyEClass, PLUGIN_DEPENDENCY__BUNDLE_ID);
+		createEAttribute(pluginDependencyEClass, PLUGIN_DEPENDENCY__VERSION);
+		createEAttribute(pluginDependencyEClass, PLUGIN_DEPENDENCY__REEXPORT);
+		createEAttribute(pluginDependencyEClass, PLUGIN_DEPENDENCY__OPTIONAL);
 	}
 
 	/**
@@ -395,6 +464,7 @@ public class XtextgenPackageImpl extends EPackageImpl implements XtextgenPackage
 		g2 = createEGenericType(ecorePackage.getEString());
 		g1.getETypeArguments().add(g2);
 		initEAttribute(getGenService_GenParameters(), g1, "genParameters", null, 0, 1, GenService.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getGenService_PluginDependencies(), this.getPluginDependency(), null, "pluginDependencies", null, 0, -1, GenService.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(genModelEClass, GenModel.class, "GenModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getGenModel_ModelFileExtensions(), ecorePackage.getEString(), "modelFileExtensions", null, 0, -1, GenModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -410,6 +480,12 @@ public class XtextgenPackageImpl extends EPackageImpl implements XtextgenPackage
 		initEAttribute(getOutlet_Name(), ecorePackage.getEString(), "name", null, 0, 1, Outlet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getOutlet_TargetFolder(), ecorePackage.getEString(), "targetFolder", null, 0, 1, Outlet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getOutlet_Overwrite(), ecorePackage.getEBoolean(), "Overwrite", null, 0, 1, Outlet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(pluginDependencyEClass, PluginDependency.class, "PluginDependency", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getPluginDependency_BundleID(), ecorePackage.getEString(), "bundleID", null, 0, 1, PluginDependency.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPluginDependency_Version(), ecorePackage.getEString(), "version", null, 0, 1, PluginDependency.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPluginDependency_Reexport(), ecorePackage.getEBoolean(), "reexport", null, 0, 1, PluginDependency.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPluginDependency_Optional(), ecorePackage.getEBoolean(), "optional", null, 0, 1, PluginDependency.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

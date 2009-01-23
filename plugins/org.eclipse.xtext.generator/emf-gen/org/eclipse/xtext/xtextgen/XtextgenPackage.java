@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextgenPackage.java,v 1.6 2008/10/22 14:02:05 jkohnlein Exp $
+ * $Id: XtextgenPackage.java,v 1.7 2009/01/23 14:12:00 jkohnlein Exp $
  */
 package org.eclipse.xtext.xtextgen;
 
@@ -124,13 +124,22 @@ public interface XtextgenPackage extends EPackage {
 	int GEN_SERVICE__GEN_PARAMETERS = 5;
 
 	/**
+	 * The feature id for the '<em><b>Plugin Dependencies</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GEN_SERVICE__PLUGIN_DEPENDENCIES = 6;
+
+	/**
 	 * The number of structural features of the '<em>Gen Service</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GEN_SERVICE_FEATURE_COUNT = 6;
+	int GEN_SERVICE_FEATURE_COUNT = 7;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xtextgen.impl.GenModelImpl <em>Gen Model</em>}' class.
@@ -270,6 +279,61 @@ public interface XtextgenPackage extends EPackage {
 	int OUTLET_FEATURE_COUNT = 3;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xtextgen.impl.PluginDependencyImpl <em>Plugin Dependency</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xtextgen.impl.PluginDependencyImpl
+	 * @see org.eclipse.xtext.xtextgen.impl.XtextgenPackageImpl#getPluginDependency()
+	 * @generated
+	 */
+	int PLUGIN_DEPENDENCY = 3;
+
+	/**
+	 * The feature id for the '<em><b>Bundle ID</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PLUGIN_DEPENDENCY__BUNDLE_ID = 0;
+
+	/**
+	 * The feature id for the '<em><b>Version</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PLUGIN_DEPENDENCY__VERSION = 1;
+
+	/**
+	 * The feature id for the '<em><b>Reexport</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PLUGIN_DEPENDENCY__REEXPORT = 2;
+
+	/**
+	 * The feature id for the '<em><b>Optional</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PLUGIN_DEPENDENCY__OPTIONAL = 3;
+
+	/**
+	 * The number of structural features of the '<em>Plugin Dependency</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PLUGIN_DEPENDENCY_FEATURE_COUNT = 4;
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xtextgen.GenService <em>Gen Service</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -333,6 +397,17 @@ public interface XtextgenPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getGenService_GenParameters();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xtextgen.GenService#getPluginDependencies <em>Plugin Dependencies</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Plugin Dependencies</em>'.
+	 * @see org.eclipse.xtext.xtextgen.GenService#getPluginDependencies()
+	 * @see #getGenService()
+	 * @generated
+	 */
+	EReference getGenService_PluginDependencies();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtextgen.GenService#isUiService <em>Ui Service</em>}'.
@@ -487,6 +562,60 @@ public interface XtextgenPackage extends EPackage {
 	EAttribute getOutlet_Overwrite();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xtextgen.PluginDependency <em>Plugin Dependency</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Plugin Dependency</em>'.
+	 * @see org.eclipse.xtext.xtextgen.PluginDependency
+	 * @generated
+	 */
+	EClass getPluginDependency();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtextgen.PluginDependency#getBundleID <em>Bundle ID</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Bundle ID</em>'.
+	 * @see org.eclipse.xtext.xtextgen.PluginDependency#getBundleID()
+	 * @see #getPluginDependency()
+	 * @generated
+	 */
+	EAttribute getPluginDependency_BundleID();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtextgen.PluginDependency#getVersion <em>Version</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Version</em>'.
+	 * @see org.eclipse.xtext.xtextgen.PluginDependency#getVersion()
+	 * @see #getPluginDependency()
+	 * @generated
+	 */
+	EAttribute getPluginDependency_Version();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtextgen.PluginDependency#isReexport <em>Reexport</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Reexport</em>'.
+	 * @see org.eclipse.xtext.xtextgen.PluginDependency#isReexport()
+	 * @see #getPluginDependency()
+	 * @generated
+	 */
+	EAttribute getPluginDependency_Reexport();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtextgen.PluginDependency#isOptional <em>Optional</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Optional</em>'.
+	 * @see org.eclipse.xtext.xtextgen.PluginDependency#isOptional()
+	 * @see #getPluginDependency()
+	 * @generated
+	 */
+	EAttribute getPluginDependency_Optional();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -557,6 +686,14 @@ public interface XtextgenPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute GEN_SERVICE__GEN_PARAMETERS = eINSTANCE.getGenService_GenParameters();
+
+		/**
+		 * The meta object literal for the '<em><b>Plugin Dependencies</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference GEN_SERVICE__PLUGIN_DEPENDENCIES = eINSTANCE.getGenService_PluginDependencies();
 
 		/**
 		 * The meta object literal for the '<em><b>Ui Service</b></em>' attribute feature.
@@ -673,6 +810,48 @@ public interface XtextgenPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute OUTLET__OVERWRITE = eINSTANCE.getOutlet_Overwrite();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xtextgen.impl.PluginDependencyImpl <em>Plugin Dependency</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xtextgen.impl.PluginDependencyImpl
+		 * @see org.eclipse.xtext.xtextgen.impl.XtextgenPackageImpl#getPluginDependency()
+		 * @generated
+		 */
+		EClass PLUGIN_DEPENDENCY = eINSTANCE.getPluginDependency();
+
+		/**
+		 * The meta object literal for the '<em><b>Bundle ID</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PLUGIN_DEPENDENCY__BUNDLE_ID = eINSTANCE.getPluginDependency_BundleID();
+
+		/**
+		 * The meta object literal for the '<em><b>Version</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PLUGIN_DEPENDENCY__VERSION = eINSTANCE.getPluginDependency_Version();
+
+		/**
+		 * The meta object literal for the '<em><b>Reexport</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PLUGIN_DEPENDENCY__REEXPORT = eINSTANCE.getPluginDependency_Reexport();
+
+		/**
+		 * The meta object literal for the '<em><b>Optional</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PLUGIN_DEPENDENCY__OPTIONAL = eINSTANCE.getPluginDependency_Optional();
 
 	}
 

@@ -15,32 +15,31 @@ import java.util.Map;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
-import org.eclipse.xtext.service.Inject;
-import org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider;
 
 /**
- * Default implementation of the {@link IContentAssistInvocationHandler}
- *  reflectively calling Java methods on the {@link AbstractProposalProvider} to
- * perform content assist for assignments.
+ * Calls methods on a target object reflectively. Caches resolved methods in a
+ * map.
  * 
- * @author Jan Köhnlein - Initial contribution and API
+ * @author Jan K&ouml;hnlein - Initial contribution and API
+ * 
  */
-public class DefaultContentAssistMethodInvoker implements IContentAssistInvocationHandler {
+public class JavaReflectiveMethodInvoker {
 
 	private static final Map<String, Method> methodLookupMap = new HashMap<String, Method>();
 
-	@Inject
-	private IProposalProvider proposalProvider;
+	private Object target;
 
-	public List<? extends ICompletionProposal> invoke(String methodName, java.util.List<Class<?>> parameterTypes,
-			java.util.List<?> parameterValues) {
-		Method method = findMethod(proposalProvider.getClass(), methodName, parameterTypes.toArray(new Class[] {}));
+	public JavaReflectiveMethodInvoker(Object target) {
+		this.target = target;
+	}
+
+	public Object invoke(String methodName, java.util.List<Class<?>> parameterTypes, java.util.List<?> parameterValues) {
+		Method method = findMethod(target.getClass(), methodName, parameterTypes.toArray(new Class[] {}));
 		if (method == null) {
 			return null;
 		}
-		List<? extends ICompletionProposal> assignmentProposalList = invokeMethod(method, proposalProvider,
-				parameterValues.toArray(new Object[] {}));
-		return assignmentProposalList;
+		Object result = invokeMethod(method, target, parameterValues.toArray(new Object[] {}));
+		return result;
 	}
 
 	private final Method findMethod(Class<?> clazz, String name, Class<?>... paramTypes) {
@@ -114,17 +113,13 @@ public class DefaultContentAssistMethodInvoker implements IContentAssistInvocati
 		if (a == a2) {
 			return true;
 		}
-
 		if (a == null || a2 == null) {
 			return false;
 		}
-
 		int length = a.length;
-
 		if (a2.length != length) {
 			return false;
 		}
-
 		for (int i = 0; i < length; i++) {
 			Class<?> o1 = a[i];
 			Class<?> o2 = a2[i];
@@ -135,5 +130,4 @@ public class DefaultContentAssistMethodInvoker implements IContentAssistInvocati
 		}
 		return true;
 	}
-
 }

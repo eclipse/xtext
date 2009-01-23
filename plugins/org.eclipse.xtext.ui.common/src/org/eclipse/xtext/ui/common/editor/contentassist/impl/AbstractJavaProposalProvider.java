@@ -10,11 +10,7 @@ package org.eclipse.xtext.ui.common.editor.contentassist.impl;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
@@ -44,51 +40,26 @@ import org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider;
 import org.eclipse.xtext.util.Strings;
 
 /**
- * Super class for <code>IProposalProvider</code> implementations.
- * 
- * Delegates calls to {@link #completeRuleCall(RuleCall, IContentAssistContext)}
- * and {@link #completeAssignment(Assignment, IContentAssistContext)} to grammar
- * specific methods for assignments using reflection. The signature of such
- * methods invoked reflectively follows the following pattern:
- * 
- * public List<ICompletionProposal> complete[Typename][featureName](Assignment
- * ele, EObject model, String prefix)
- * 
- * <b>Example</b> Given the following grammar : <code>
- *  RuleA returns MyType :
- *  	"myType" name=ID;
- *  </code>
- * 
- * One could provide the following method in an implementation of this
- * interface: <code>
- * 	public List<ICompletionProposal> completeMyTypeName(Assignment ele, EObject model, String prefix, IDocument doc) {...}
- *  </code> Note that if you have generated Java classes for your
- * domain model (meta model) you can alternatively declare the second parameter
- * using a specific type: <code>
- * 	public List<ICompletionProposal> completeMyTypeName(Assignment ele, MyType model, String prefix, IDocument doc) {...}
- *  </code>
- * 
- * @author Michael Clay - Initial contribution and API
- * @author Heiko Behrens
- * @author Jan K&ouml;hnlein
- * 
- * @see IProposalProvider
+ * @author Jan Köhnlein - Initial contribution and API
  */
-public abstract class AbstractProposalProvider implements IProposalProvider {
+public abstract class AbstractJavaProposalProvider implements IProposalProvider {
+
 	// constants
 	// protected static final String LEXER_RULE_ID = "ID";
 	protected static final String LEXER_RULE_INT = "INT";
 	protected static final String LEXER_RULE_STRING = "STRING";
 
-	protected static final Comparator<ICompletionProposal> PROPOSAL_COMPARATOR = new ProposalComparator();
 	// logger available to subclasses
-	protected final Logger logger = Logger.getLogger(getClass());
+	protected final static Logger logger = Logger.getLogger(IProposalProvider.class);
 
 	@Inject
 	protected IScopeProvider scopeProvider;
 
-	@Inject
-	protected IContentAssistInvocationHandler invocationHandler;
+	protected JavaReflectiveMethodInvoker invoker;
+
+	protected AbstractJavaProposalProvider() {
+		invoker = new JavaReflectiveMethodInvoker(this);
+	}
 
 	public List<? extends ICompletionProposal> completeKeyword(Keyword keyword,
 			IContentAssistContext contentAssistContext) {
@@ -116,8 +87,8 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 
 			TypeRef typeRef = calledRule.getType();
 
-			return invokeMethod("complete" + firstLetterCapitalized(typeRef.getMetamodel().getAlias())
-					+ firstLetterCapitalized(typeRef.getType().getName()), Arrays.<Class<?>> asList(RuleCall.class,
+			return invokeMethod("complete" + Strings.toFirstUpper(typeRef.getMetamodel().getAlias())
+					+ Strings.toFirstUpper(typeRef.getType().getName()), Arrays.<Class<?>> asList(RuleCall.class,
 					contentAssistContext.getModel() == null ? EObject.class : contentAssistContext.getModel()
 							.getClass(), IContentAssistContext.class), Arrays.asList(ruleCall, contentAssistContext
 					.getModel(), contentAssistContext));
@@ -129,44 +100,34 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 			IContentAssistContext contentAssistContext) {
 		ParserRule parserRule = GrammarUtil.containingParserRule(assignment);
 		// TODO : Better call completeRuleCall ?
-		return invokeMethod("complete" + firstLetterCapitalized(parserRule.getName())
-				+ firstLetterCapitalized(assignment.getFeature()), Arrays.<Class<?>> asList(Assignment.class,
+		return invokeMethod("complete" + Strings.toFirstUpper(parserRule.getName())
+				+ Strings.toFirstUpper(assignment.getFeature()), Arrays.<Class<?>> asList(Assignment.class,
 				IContentAssistContext.class), Arrays.asList(assignment, contentAssistContext));
 	}
 
-	protected List<? extends ICompletionProposal> invokeMethod(String methodName, List<Class<?>> parameterTypes,
-			List<?> parameterValues) {
-		return invocationHandler.invoke(methodName, parameterTypes, parameterValues);
+	/**
+	 * @return a new <code>XtextCompletionProposal</code> for the given text and
+	 *         offset.
+	 */
+	protected ICompletionProposal createCompletionProposal(AbstractElement abstractElement, String displayString,
+			IContentAssistContext contentAssistContext) {
+		return new XtextCompletionProposal(abstractElement, displayString, contentAssistContext);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @seeorg.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#
-	 * getTemplateContextType(org.eclipse.xtext.Keyword,
-	 * org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext)
-	 */
+	@SuppressWarnings("unchecked")
+	protected List<? extends ICompletionProposal> invokeMethod(String methodName, List<Class<?>> parameterTypes,
+			List<?> parameterValues) {
+		return (List<? extends ICompletionProposal>) invoker.invoke(methodName, parameterTypes, parameterValues);
+	}
+
 	public TemplateContextType getTemplateContextType(Keyword keyword, IContentAssistContext contentAssistContext) {
 		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @seeorg.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#
-	 * getTemplateContextType(org.eclipse.xtext.RuleCall,
-	 * org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext)
-	 */
 	public TemplateContextType getTemplateContextType(RuleCall ruleCall, IContentAssistContext contentAssistContext) {
 		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @seeorg.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#
-	 * getTemplates(java.lang.String)
-	 */
 	public Template[] getTemplates(String contextTypeId) {
 		return new Template[] {};
 	}
@@ -212,6 +173,23 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 	protected abstract String getDefaultImageFilePath();
 
 	/**
+	 * Concrete subclasses can override this for custom sort and filter
+	 * behavior. Called right after all completion proposals have been
+	 * collected.
+	 * 
+	 * The default behavior of this implementation is to filter duplicates and
+	 * to trim matching <code>ICompletionProposal#displayString</code> with
+	 * matching prefix values.
+	 * 
+	 * @see #sortAndFilter(List, EObject, String, IDocument, int, AbstractNode,
+	 *      LeafNode)
+	 */
+	public List<? extends ICompletionProposal> sortAndFilter(
+			List<? extends ICompletionProposal> completionProposalList, IContentAssistContext contentAssistContext) {
+		return ProposalFilterSorterUtil.sortAndFilter(completionProposalList, contentAssistContext);
+	}
+
+	/**
 	 * Concrete subclasses can override this to provide custom lookup behavior
 	 * for <code>CrossReference</code>. This implementation delegates to the
 	 * injected LinkingService
@@ -250,92 +228,4 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 			throw new IllegalArgumentException("unnamed candidates may not be proposed");
 		return candidate.name().regionMatches(true, 0, prefix, 0, prefix.length());
 	}
-
-	/**
-	 * @return a new <code>XtextCompletionProposal</code> for the given text and
-	 *         offset.
-	 */
-	protected ICompletionProposal createCompletionProposal(AbstractElement abstractElement, String displayString,
-			IContentAssistContext contentAssistContext) {
-		return new XtextCompletionProposal(abstractElement, displayString, contentAssistContext);
-	}
-
-	/**
-	 * Concrete subclasses can override this for custom sort and filter
-	 * behavior. Called right after all completion proposals have been
-	 * collected.
-	 * 
-	 * The default behavior of this implementation is to filter duplicates and
-	 * to trim matching <code>ICompletionProposal#displayString</code> with
-	 * matching prefix values.
-	 * 
-	 * @see #sortAndFilter(List, EObject, String, IDocument, int, AbstractNode,
-	 *      LeafNode)
-	 */
-	public List<? extends ICompletionProposal> sortAndFilter(
-			List<? extends ICompletionProposal> completionProposalList, IContentAssistContext contentAssistContext) {
-		Map<String, ICompletionProposal> displayString2ICompletionProposalMap = new HashMap<String, ICompletionProposal>();
-		for (Iterator<? extends ICompletionProposal> iterator = completionProposalList.iterator(); iterator.hasNext();) {
-			ICompletionProposal completionProposal = iterator.next();
-			// filter duplicate
-			if (!displayString2ICompletionProposalMap.containsKey(completionProposal.getDisplayString())) {
-				displayString2ICompletionProposalMap.put(completionProposal.getDisplayString(), completionProposal);
-				// filter by prefix
-				if (isFiltered(completionProposal)) {
-					if (logger.isDebugEnabled()) {
-						logger.debug("filter completionProposal '" + completionProposal + "'");
-					}
-					iterator.remove();
-				}
-			}
-			else {
-				if (logger.isDebugEnabled()) {
-					logger.debug("filter duplicate completionProposal '" + completionProposal + "'");
-				}
-				iterator.remove();
-			}
-		}
-		Collections.sort(completionProposalList, PROPOSAL_COMPARATOR);
-		return completionProposalList;
-	}
-
-	/**
-	 * The default behavior of this method delegates to
-	 * {@link XtextCompletionProposal#matches(String)} to test if the given
-	 * prefix string matches or not.
-	 * 
-	 * @param completionProposal
-	 *            contains information used to present the proposed completion
-	 *            to the user
-	 * @return true or false whether the given prefix matches the text of this
-	 *         completion proposal
-	 */
-	protected boolean isFiltered(ICompletionProposal completionProposal) {
-		if (completionProposal instanceof XtextCompletionProposal) {
-			XtextCompletionProposal xtextCompletionProposal = (XtextCompletionProposal) completionProposal;
-			return !xtextCompletionProposal.matches();
-		}
-		return false;
-	}
-
-	/**
-	 * @param text
-	 *            to apply
-	 * @return the provided string with the first letter capitalized
-	 */
-	protected final String firstLetterCapitalized(String text) {
-		return Strings.toFirstUpper(text);
-	}
-
-	/**
-	 * Simple {@link Comparator} implementation to compare
-	 * <code>ICompletionProposal</code> by display strings'.
-	 * 
-	 */
-	private static final class ProposalComparator implements Comparator<ICompletionProposal> {
-		public int compare(ICompletionProposal o1, ICompletionProposal o2) {
-			return o1.getDisplayString().compareTo(o2.getDisplayString());
-		}
-	}
-
 }

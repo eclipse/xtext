@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextgenFactory.java,v 1.4 2008/07/14 08:15:32 sefftinge Exp $
+ * $Id: XtextgenFactory.java,v 1.5 2009/01/23 14:12:00 jkohnlein Exp $
  */
 package org.eclipse.xtext.xtextgen;
 
@@ -51,6 +51,15 @@ public interface XtextgenFactory extends EFactory {
 	 * @generated
 	 */
 	Outlet createOutlet();
+
+	/**
+	 * Returns a new object of class '<em>Plugin Dependency</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Plugin Dependency</em>'.
+	 * @generated
+	 */
+	PluginDependency createPluginDependency();
 
 	/**
 	 * Returns the package supported by this factory.

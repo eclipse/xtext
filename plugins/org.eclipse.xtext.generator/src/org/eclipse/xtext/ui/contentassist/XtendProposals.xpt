@@ -18,16 +18,15 @@
 «EXTENSION org::eclipse::xtext::ui::UIProperties»
 «EXTENSION org::eclipse::xtext::ui::contentassist::ContentAssist»
 
-«DEFINE root FOR GenModel»
-«IF useXtend()»
-	«EXPAND GenXtendProposals»
-	«EXPAND XtendProposals»
-	«EXPAND ContentAssistExtensionInvoker»
-«ENDIF»
+«DEFINE root FOR GenService»
+	«EXPAND XtendProposalProvider»
+	«EXPAND GenXtendProposals FOR genModel()»
+	«EXPAND XtendProposals FOR genModel()»
+	«EXPAND Settings::root FOR genModel()»
 «ENDDEFINE»
 
 «DEFINE GenXtendProposals FOR GenModel»
-«FILE uiGenProposalProviderClass().toXtendFilePath() UI_SRC_GEN-»
+«FILE xtendGenProposalProvider().toXtendFilePath() UI_SRC_GEN-»
 /*
 «fileHeader()»
 */
@@ -102,7 +101,7 @@ ENDLET»
 «ENDDEFINE»
 
 «DEFINE XtendProposals FOR GenModel»
-«FILE uiProposalProviderClass().toXtendFilePath() UI_SRC-»
+«FILE xtendProposalProvider().toXtendFilePath() UI_SRC-»
 /*
 «fileHeader()»
 */
@@ -119,69 +118,45 @@ import «mm.ePackage.name»;
 «ENDFOREACH-»
 
 extension org::eclipse::xtext::ui::common::xtend::contentassist::ContentAssist;
-extension «uiGenProposalProviderClass().toXtendFqName()»;
+extension «xtendGenProposalProvider().toXtendFqName()» reexport;
 
 /**
- * Customize functions defined in «uiGenProposalProviderClass().toXtendFilePath()» here.
+ * Customize functions defined in «xtendGenProposalProvider().toXtendFilePath()» here.
  */
 
 «ENDFILE»
 «ENDDEFINE»
 
-«DEFINE ContentAssistExtensionInvoker FOR GenModel»
-«FILE uiContentAssistXtendInvokerClass().toJavaFilePath() UI_SRC_GEN-»
+«DEFINE XtendProposalProvider FOR GenService»
+«FILE genClassFQName.toJavaFilePath() UI_SRC_GEN-»
 /*
 «fileHeader()»
 */
 
-package «uiContentAssistXtendInvokerClass().toJavaPackage()»;
+package «genClassFQName.toJavaPackage()»;
 
-import java.util.List;
-
-import org.apache.log4j.Logger;
-import org.eclipse.jface.text.contentassist.ICompletionProposal;
-import org.eclipse.xtext.ui.common.editor.contentassist.impl.IContentAssistInvocationHandler;
-import org.eclipse.xtext.ui.common.xtend.AbstractXtendService;
-import org.eclipse.xtext.ui.common.xtend.NoSuchExtensionException;
+import org.eclipse.xtext.ui.common.xtend.contentassist.AbstractXtendProposalProvider;
 
 /**
- * A {@link IContentAssistInvocationHandler} that calls Xtend extensions.
- * 
- * @author Jan Köhnlein - Initial contribution and API
+ * A {@link IProposalProvider} that calls Xtend extensions.
  */
-public class «uiContentAssistXtendInvokerClass().toSimpleName()» extends AbstractXtendService implements IContentAssistInvocationHandler {
+public class «genClassFQName.toSimpleName()» extends AbstractXtendProposalProvider {
 
-	private static final Logger log = Logger.getLogger(«uiContentAssistXtendInvokerClass().toSimpleName()».class);
-
+	private static final String UI_PLUGIN_ID = "«genModel().uiPluginBundleID»";
+		
 	@Override
 	protected ClassLoader getClassLoader() {
 		return this.getClass().getClassLoader();
 	}
-	
+
 	@Override
 	protected String getMasterXtendFileName() {
-		// TODO fix in template: use once generated xtend file 
-		return "«uiProposalProviderClass().toXtendFqName()»";
+		return "«xtendProposalProvider().toXtendFqName()»";	
 	}
 	
-	@SuppressWarnings("unchecked")
-	public List<? extends ICompletionProposal> invoke(String functionName, List<Class<?>> parameterTypes,
-			List<?> parameterValues) {
-		try {
-			Object result = invokeExtension(functionName, parameterValues);
-			List<ICompletionProposal> proposals = (List<ICompletionProposal>) result;
-			return proposals;
-		}
-		catch(NoSuchExtensionException nsee) {
-			return null;
-		}
-		catch(ClassCastException cce) {
-			log.error("Extension " + functionName + " must return a Collection of ICompletionProposals.", cce);
-		}
-		catch(Throwable e) {
-			log.error("Error invoking extension " + functionName, e);
-		}
-		return null;
+	@Override
+	protected String getPluginId() {
+		return UI_PLUGIN_ID;
 	}
 }
 «ENDFILE»

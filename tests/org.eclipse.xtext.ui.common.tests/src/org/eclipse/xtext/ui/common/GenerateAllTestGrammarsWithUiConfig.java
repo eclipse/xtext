@@ -70,7 +70,7 @@ public class GenerateAllTestGrammarsWithUiConfig {
 				resource.load(null);
 				Grammar grammarModel = (Grammar) resource.getContents()
 						.iterator().next();
-				GeneratorFacade.generate(grammarModel, runtimePath, uiPath, clazz
+				GeneratorFacade.generate(grammarModel, runtimePath, uiPath, true, true, false, clazz
 						.getSimpleName().toLowerCase());
 			}
 		} catch (Exception e) {

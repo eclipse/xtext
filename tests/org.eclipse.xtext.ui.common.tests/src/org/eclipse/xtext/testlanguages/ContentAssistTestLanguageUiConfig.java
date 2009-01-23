@@ -6,7 +6,7 @@ package org.eclipse.xtext.testlanguages;
 import java.util.Set;
 
 import org.eclipse.xtext.service.ServiceRegistry;
-import org.eclipse.xtext.ui.common.editor.contentassist.impl.IContentAssistInvocationHandler;
+import org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider;
 
 /**
  * used to register components to be used within the IDE.
@@ -16,11 +16,11 @@ public class ContentAssistTestLanguageUiConfig extends
 
 	public Set<IServiceRegistration> registrations() {
 		Set<IServiceRegistration> registrations = super.registrations();
-		if (UseXtendSwitch.useXtend) {
-			registrations.addAll(scope(org.eclipse.xtext.testlanguages.IContentAssistTestLanguage.SCOPE).with(
-					IContentAssistInvocationHandler.class, ContentAssistTestLanguageXtendContentAssistInvoker.class,
-					ServiceRegistry.PRIORITY_MAX).registrations());
-		}
+		registrations.addAll(scope(ContentAssistTestLanguageStandaloneSetup.getServiceScope()).with(
+				IProposalProvider.class,
+				(UseXtendSwitch.useXtend) ? XtendContentAssistTestLanguageProposalProvider.class
+						: GenContentAssistTestLanguageProposalProvider.class, ServiceRegistry.PRIORITY_MAX)
+				.registrations());
 		return registrations;
 	}
 

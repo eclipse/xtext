@@ -2,12 +2,13 @@
  * <copyright>
  * </copyright>
  *
- * $Id: GenService.java,v 1.5 2008/07/14 08:15:32 sefftinge Exp $
+ * $Id: GenService.java,v 1.6 2009/01/23 14:12:00 jkohnlein Exp $
  */
 package org.eclipse.xtext.xtextgen;
 
 import java.util.Map;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -24,6 +25,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.xtextgen.GenService#getTemplatePath <em>Template Path</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtextgen.GenService#isUiService <em>Ui Service</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtextgen.GenService#getGenParameters <em>Gen Parameters</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtextgen.GenService#getPluginDependencies <em>Plugin Dependencies</em>}</li>
  * </ul>
  * </p>
  *
@@ -188,6 +190,22 @@ public interface GenService extends EObject {
 	 * @generated
 	 */
 	void setGenParameters(Map<String, String> value);
+
+	/**
+	 * Returns the value of the '<em><b>Plugin Dependencies</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.xtext.xtextgen.PluginDependency}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Plugin Dependencies</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Plugin Dependencies</em>' containment reference list.
+	 * @see org.eclipse.xtext.xtextgen.XtextgenPackage#getGenService_PluginDependencies()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<PluginDependency> getPluginDependencies();
 
 	/**
 	 * Returns the value of the '<em><b>Ui Service</b></em>' attribute.

@@ -69,14 +69,12 @@ public abstract class AbstractXtendService {
 	}
 
 	/**
-	 * Subclasses should override this to return the right classloader that is
+	 * Subclasses must  override this to return the right classloader that is
 	 * able to locate the Xtend files.
 	 * 
-	 * @return the classloader of the grammarAccess.
+	 * @return the classloader 
 	 */
-	protected ClassLoader getClassLoader() {
-		return grammarAccess.getClass().getClassLoader();
-	}
+	protected abstract ClassLoader getClassLoader();
 
 	/**
 	 * Returns the fully qualified name of the xtend file containing the

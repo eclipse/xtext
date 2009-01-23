@@ -12,10 +12,10 @@ import org::eclipse::xtext::ui::common::xtend::contentassist;
 import XtextTest;
 import ecore;
 
-extension org::eclipse::xtext::ui::common::xtend::contentassist::ContentAssist;
-extension org::eclipse::xtext::GenXtextGrammarTestLanguageProposalProvider;
+extension org::eclipse::xtext::ui::common::xtend::contentassist::ContentAssist reexport;
+extension org::eclipse::xtext::GenXtextGrammarTestLanguageProposals reexport;
 
 /**
- * Customize functions defined in org/eclipse/xtext/GenXtextGrammarTestLanguageProposalProvider.ext here.
+ * Customize functions defined in org/eclipse/xtext/GenXtextGrammarTestLanguageProposals.ext here.
  */
 

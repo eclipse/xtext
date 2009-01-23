@@ -99,6 +99,11 @@ public abstract class AbstractServiceRegistrationFactory implements IServiceRegi
 			return prio + scope.hashCode()
 					+ factory.getServiceInterface().hashCode();
 		}
+		
+		@Override
+		public String toString() {
+			return scope.getId() + " " + factory.getServiceInterface().getSimpleName();
+		}
 
 	}
 

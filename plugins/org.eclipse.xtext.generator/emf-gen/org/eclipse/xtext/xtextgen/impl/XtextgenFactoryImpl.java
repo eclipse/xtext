@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextgenFactoryImpl.java,v 1.4 2008/07/14 08:15:32 sefftinge Exp $
+ * $Id: XtextgenFactoryImpl.java,v 1.5 2009/01/23 14:12:00 jkohnlein Exp $
  */
 package org.eclipse.xtext.xtextgen.impl;
 
@@ -63,6 +63,7 @@ public class XtextgenFactoryImpl extends EFactoryImpl implements XtextgenFactory
 			case XtextgenPackage.GEN_SERVICE: return createGenService();
 			case XtextgenPackage.GEN_MODEL: return createGenModel();
 			case XtextgenPackage.OUTLET: return createOutlet();
+			case XtextgenPackage.PLUGIN_DEPENDENCY: return createPluginDependency();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -96,6 +97,16 @@ public class XtextgenFactoryImpl extends EFactoryImpl implements XtextgenFactory
 	public Outlet createOutlet() {
 		OutletImpl outlet = new OutletImpl();
 		return outlet;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PluginDependency createPluginDependency() {
+		PluginDependencyImpl pluginDependency = new PluginDependencyImpl();
+		return pluginDependency;
 	}
 
 	/**

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: GenServiceImpl.java,v 1.5 2008/07/14 08:15:32 sefftinge Exp $
+ * $Id: GenServiceImpl.java,v 1.6 2009/01/23 14:12:00 jkohnlein Exp $
  */
 package org.eclipse.xtext.xtextgen.impl;
 
@@ -13,14 +13,20 @@ import java.util.Map.Entry;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 import org.eclipse.xtext.xtextgen.GenService;
+import org.eclipse.xtext.xtextgen.PluginDependency;
 import org.eclipse.xtext.xtextgen.XtextgenPackage;
 
 /**
@@ -36,6 +42,7 @@ import org.eclipse.xtext.xtextgen.XtextgenPackage;
  *   <li>{@link org.eclipse.xtext.xtextgen.impl.GenServiceImpl#getTemplatePath <em>Template Path</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtextgen.impl.GenServiceImpl#isUiService <em>Ui Service</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtextgen.impl.GenServiceImpl#getGenParameters <em>Gen Parameters</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtextgen.impl.GenServiceImpl#getPluginDependencies <em>Plugin Dependencies</em>}</li>
  * </ul>
  * </p>
  *
@@ -160,6 +167,16 @@ public class GenServiceImpl extends EObjectImpl implements GenService {
 	 * @ordered
 	 */
 	protected Map<String, String> genParameters;
+
+	/**
+	 * The cached value of the '{@link #getPluginDependencies() <em>Plugin Dependencies</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPluginDependencies()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<PluginDependency> pluginDependencies;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -315,6 +332,32 @@ public class GenServiceImpl extends EObjectImpl implements GenService {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<PluginDependency> getPluginDependencies() {
+		if (pluginDependencies == null) {
+			pluginDependencies = new EObjectContainmentEList<PluginDependency>(PluginDependency.class, this, XtextgenPackage.GEN_SERVICE__PLUGIN_DEPENDENCIES);
+		}
+		return pluginDependencies;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case XtextgenPackage.GEN_SERVICE__PLUGIN_DEPENDENCIES:
+				return ((InternalEList<?>)getPluginDependencies()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public boolean isUiService() {
 		return uiService;
 	}
@@ -351,6 +394,8 @@ public class GenServiceImpl extends EObjectImpl implements GenService {
 				return isUiService() ? Boolean.TRUE : Boolean.FALSE;
 			case XtextgenPackage.GEN_SERVICE__GEN_PARAMETERS:
 				return getGenParameters();
+			case XtextgenPackage.GEN_SERVICE__PLUGIN_DEPENDENCIES:
+				return getPluginDependencies();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -382,6 +427,10 @@ public class GenServiceImpl extends EObjectImpl implements GenService {
 			case XtextgenPackage.GEN_SERVICE__GEN_PARAMETERS:
 				setGenParameters((Map<String, String>)newValue);
 				return;
+			case XtextgenPackage.GEN_SERVICE__PLUGIN_DEPENDENCIES:
+				getPluginDependencies().clear();
+				getPluginDependencies().addAll((Collection<? extends PluginDependency>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -412,6 +461,9 @@ public class GenServiceImpl extends EObjectImpl implements GenService {
 			case XtextgenPackage.GEN_SERVICE__GEN_PARAMETERS:
 				setGenParameters((Map<String, String>)null);
 				return;
+			case XtextgenPackage.GEN_SERVICE__PLUGIN_DEPENDENCIES:
+				getPluginDependencies().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -436,6 +488,8 @@ public class GenServiceImpl extends EObjectImpl implements GenService {
 				return uiService != UI_SERVICE_EDEFAULT;
 			case XtextgenPackage.GEN_SERVICE__GEN_PARAMETERS:
 				return genParameters != null;
+			case XtextgenPackage.GEN_SERVICE__PLUGIN_DEPENDENCIES:
+				return pluginDependencies != null && !pluginDependencies.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextgenAdapterFactory.java,v 1.4 2008/07/14 08:15:32 sefftinge Exp $
+ * $Id: XtextgenAdapterFactory.java,v 1.5 2009/01/23 14:12:00 jkohnlein Exp $
  */
 package org.eclipse.xtext.xtextgen.util;
 
@@ -84,6 +84,10 @@ public class XtextgenAdapterFactory extends AdapterFactoryImpl {
 				return createOutletAdapter();
 			}
 			@Override
+			public Adapter casePluginDependency(PluginDependency object) {
+				return createPluginDependencyAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -142,6 +146,20 @@ public class XtextgenAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createOutletAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtextgen.PluginDependency <em>Plugin Dependency</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.xtextgen.PluginDependency
+	 * @generated
+	 */
+	public Adapter createPluginDependencyAdapter() {
 		return null;
 	}
 
