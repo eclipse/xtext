@@ -210,34 +210,30 @@ public final class «this.consumerClassName()» extends NonTerminalConsumer {
 		int result = do«consumeMethodName().toFirstUpper()»();
 		if (result != ConsumeResult.SUCCESS)
 			marker.rollback();
-		marker.release();
+		else
+			marker.commit();
 		return ConsumeResult.SUCCESS;
 «ELSEIF isStar()-»
 		IMarker marker = mark();
 		while(do«consumeMethodName().toFirstUpper()»() == ConsumeResult.SUCCESS) {
-			marker.release();
-			marker = mark();
+			marker.flush();
 		}
 		marker.rollback();
-		marker.release();
 		return ConsumeResult.SUCCESS;
 «ELSEIF isPlus()-»
 		IMarker marker = mark();
 		int result = do«consumeMethodName().toFirstUpper()»();
 		if (result == ConsumeResult.SUCCESS) {
-			marker.release();
-			marker = mark();
+			marker.flush();
 			while(do«consumeMethodName().toFirstUpper()»()==ConsumeResult.SUCCESS) {
-				marker.release();
-				marker = mark();
+				marker.flush();
 			}
 			marker.rollback();
-			marker.release();
 			return ConsumeResult.SUCCESS;
 		} else {
 			error("Could not find token.", getRule().«gaElementAccessMethodeName()»());
 		}
-		marker.release();
+		marker.commit();
 		return result;
 «ELSE-»
 «EXPAND defineConsumeBody FOR this-»
@@ -275,7 +271,7 @@ public final class «this.consumerClassName()» extends NonTerminalConsumer {
 		IMarker currentMarker;
 		int tempResult;
 «EXPAND defineConsumeBodyInternal FOR this-»
-		bestMarker.release();
+		bestMarker.commit();
 		return result;
 «ENDDEFINE»
 
@@ -284,24 +280,20 @@ public final class «this.consumerClassName()» extends NonTerminalConsumer {
 «IF g.metaType == Alternatives && !g.isOptional() && !g.isMultipleCardinality()-»
 «EXPAND defineConsumeBodyInternal FOR (Alternatives)g-»
 «ELSE-»
-		currentMarker = bestMarker.copy();
+		currentMarker = bestMarker.fork();
 		tempResult = «g.consumeMethodName()»(); 
 		if (tempResult == ConsumeResult.SUCCESS) {
-			if (bestMarker != currentMarker) {
-				bestMarker.discard();
-			}
-			currentMarker.release();
+			bestMarker = currentMarker.join(bestMarker);
+			bestMarker.commit();
 			return tempResult;
 		}
 		if (tempResult > result) {
-			bestMarker.discard();
-			bestMarker = currentMarker;			
+			bestMarker = currentMarker.join(bestMarker);
 			result = tempResult;
 		} else {
-			currentMarker.discard();
+			bestMarker = bestMarker.join(currentMarker);
 		}
 		currentMarker = null;
-		bestMarker.activate();
 «ENDIF-»
 «ENDFOREACH-»
 «ENDDEFINE»
@@ -310,7 +302,7 @@ public final class «this.consumerClassName()» extends NonTerminalConsumer {
 		final IMarker marker = mark();
 		int result;
 «EXPAND defineConsumeBodyInternal FOR this-»
-		marker.release();
+		marker.commit();
 		return result;
 «ENDDEFINE»
 
@@ -322,7 +314,7 @@ public final class «this.consumerClassName()» extends NonTerminalConsumer {
 		result = «token.consumeMethodName()»(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().«token.gaElementAccessMethodeName()»());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 «ENDIF-»
