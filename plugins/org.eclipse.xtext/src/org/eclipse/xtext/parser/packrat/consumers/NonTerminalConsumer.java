@@ -64,7 +64,7 @@ public abstract class NonTerminalConsumer implements INonTerminalConsumer {
 			acceptor.accept(new ErrorToken(prevOffset, 0, null, "Expected " + getDefaultTypeName() + ", but could not find."));
 		}
 		acceptor.accept(new ParsedNonTerminalEnd(input.getOffset(), feature, isMany, isDatatype));
-		marker.release();
+		marker.commit();
 		prevState.restore();
 		return result;
 	}
@@ -83,7 +83,7 @@ public abstract class NonTerminalConsumer implements INonTerminalConsumer {
 		} else {
 			acceptor.accept(new ErrorToken(prevOffset, 0, null, "Expected " + getDefaultTypeName() + ", but could not find."));
 		}
-		marker.release();
+		marker.commit();
 		prevState.restore();
 		return result;
 	}
@@ -118,7 +118,8 @@ public abstract class NonTerminalConsumer implements INonTerminalConsumer {
 	
 	protected abstract int doConsume() throws Exception;
 	
-	protected abstract String getDefaultTypeName(); // TODO: replace by getDefaultType: EClassifier
+	// TODO: replace by getDefaultType: EClassifier
+	protected abstract String getDefaultTypeName(); 
 	
 	protected abstract EObject getGrammarElement();
 

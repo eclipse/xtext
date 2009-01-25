@@ -49,34 +49,51 @@ public class DebugMarkerFactory implements IMarkerFactory {
 			delegate.rollback();
 		}
 
-		public void release() {
+		public void commit() {
 			if (log.isDebugEnabled()) {
-				log.debug("release(" + delegate + ")");
+				log.debug("commit(" + delegate + ")");
 			}
-			delegate.release();
+			delegate.commit();
 		}
 
-		public IMarker copy() {
+		public void flush() {
 			if (log.isDebugEnabled()) {
-				log.debug("copy(" + delegate + ")");
+				log.debug("flush(" + delegate + ")");
 			}
-			return new DebuggingMarker(delegate.copy());
-		}
-
-		public void discard() {
-			if (log.isDebugEnabled()) {
-				log.debug("discard(" + delegate + ")");
-			}
-			delegate.discard();
-		}
-
-		public void activate() {
-			if (log.isDebugEnabled()) {
-				log.debug("activate(" + delegate + ")");
-			}
-			delegate.activate();
+			delegate.flush();
 		}
 		
-	}
+		public IMarker fork() {
+			if (log.isDebugEnabled()) {
+				log.debug("fork(" + delegate + ")");
+			}
+			return new DebuggingMarker(delegate.fork());
+		}
 
+		public IMarker join(IMarker forkedMarker) {
+			IMarker join = forkedMarker instanceof DebuggingMarker ? ((DebuggingMarker)forkedMarker).delegate : forkedMarker;
+			if (log.isDebugEnabled()) {
+				log.debug("join(" + join + ")");
+			}
+			IMarker result = delegate.join(forkedMarker);
+			if (delegate != result)
+				return new DebuggingMarker(result);
+			return this;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			return obj == this || obj != null && (obj instanceof DebuggingMarker) && delegate.equals(((DebuggingMarker)obj).delegate);
+		}
+
+		@Override
+		public int hashCode() {
+			return delegate.hashCode() * 37;
+		}
+
+		@Override
+		public String toString() {
+			return getClass().getSimpleName() + " with delegate: " + delegate;
+		}
+	}
 }

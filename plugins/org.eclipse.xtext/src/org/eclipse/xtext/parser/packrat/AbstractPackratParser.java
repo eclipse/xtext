@@ -14,7 +14,7 @@ import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.parser.IParseResult;
-import org.eclipse.xtext.parser.ParseResult;
+import org.eclipse.xtext.parser.packrat.Marker.IMarkerClient;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
@@ -32,7 +32,6 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.AbstractParsedToken;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedAction;
-import org.eclipse.xtext.parser.packrat.tokens.ParsedTokenSequence;
 import org.eclipse.xtext.service.Inject;
 
 /**
@@ -41,59 +40,13 @@ import org.eclipse.xtext.service.Inject;
 public abstract class AbstractPackratParser implements
 	IPackratParser,
 	IMarkerFactory, 
+	IMarkerClient,
 	ICharSequenceWithOffset, 
 	IParsedTokenAcceptor,
 	IHiddenTokenHandler, 
 	IConsumerUtility {
 	
-	private class Marker implements IMarkerFactory.IMarker {
-		
-		private ParsedTokenSequence.Marker marker;
-		
-		private int offset;
-		
-		private int storedOffset;
-		
-		public void rollback() {
-			marker.rollback();
-			AbstractPackratParser.this.offset = offset;
-		}
-
-		public void release() {
-			AbstractPackratParser.this.acceptor = marker.getParentAcceptor();
-			marker.release();
-			this.marker = null;
-			if (bufferSize < markerBuffer.length)
-				markerBuffer[bufferSize++] = this;
-		}
-
-		@Override
-		public String toString() {
-			return marker.toString() + "@Offset '" + offset + "'";
-		}
-
-		public IMarker copy() {
-			storedOffset = AbstractPackratParser.this.offset;
-			AbstractPackratParser.this.offset = offset;
-			return mark(this.offset, this.marker.getParentAcceptor());
-		}
-
-		public void activate() {
-			AbstractPackratParser.this.offset = storedOffset;
-			AbstractPackratParser.this.acceptor = this.marker;
-		}
-		
-		public void discard() {
-			this.marker.rollback(); // forget tokens
-			this.marker = null;
-			if (bufferSize < markerBuffer.length)
-				markerBuffer[bufferSize++] = this;
-		}
-
-	}
-	
 	private class HiddenTokenState implements IHiddenTokenHandler.IHiddenTokenState {
-
 		private ITerminalConsumer[] hiddens;
 		
 		public HiddenTokenState(ITerminalConsumer[] previousHiddens) {
@@ -108,7 +61,6 @@ public abstract class AbstractPackratParser implements
 		public String toString() {
 			return "HiddenTokenState holding " + Arrays.toString(hiddens);
 		}
-		
 	}
 	
 	private static final IHiddenTokenState NULL_HIDDEN_TOKEN_STATE = new IHiddenTokenState() {
@@ -130,22 +82,20 @@ public abstract class AbstractPackratParser implements
 	
 	private final KeywordConsumer keywordConsumer;
 	
-	private final ParsedTokenSequence tokenSequence;
-	
-	private IParsedTokenAcceptor acceptor;
-	
 	private final IParserConfiguration parserConfiguration;
 	
-	private Marker[] markerBuffer;
+	private static final int MARKER_BUFFER_SIZE = 100;
 	
-	private int bufferSize;
+	private final Marker[] markerBuffer;
+	
+	private int markerBufferSize;
+	
+	private Marker activeMarker;
 	
 	protected AbstractPackratParser() {
-		tokenSequence = createTokenSequence();
-		acceptor = tokenSequence;
 		parserConfiguration = createParserConfiguration();
 		keywordConsumer = createKeywordConsumer();
-		markerBuffer = new Marker[10];
+		markerBuffer = new Marker[MARKER_BUFFER_SIZE];
 	}
 	
 	private IParserConfiguration createParserConfiguration() {
@@ -154,6 +104,7 @@ public abstract class AbstractPackratParser implements
 		IParsedTokenAcceptor localTokenAcceptor = DebugUtil.TOKEN_ACCEPTOR_DEBUG ? new DebugParsedTokenAcceptor(this) : this;
 		IHiddenTokenHandler localHiddenTokenHandler = DebugUtil.HIDDEN_TOKEN_HANDLER_DEBUG ? new DebugHiddenTokenHandler(this) : this;
 		IConsumerUtility localConsumerUtil = DebugUtil.CONSUMER_UTIL_DEBUG ? new DebugConsumerUtility(this) : this;
+		
 		IParserConfiguration result = createParserConfiguration(localInput, localMarkerFactory, localTokenAcceptor, localHiddenTokenHandler, localConsumerUtil);
 		result.createTerminalConsumers();
 		result.createNonTerminalConsumers();
@@ -166,10 +117,6 @@ public abstract class AbstractPackratParser implements
 
 	protected KeywordConsumer createKeywordConsumer() {
 		return new KeywordConsumer(parserConfiguration.getInput(), parserConfiguration.getMarkerFactory(), parserConfiguration.getTokenAcceptor());
-	}
-
-	protected ParsedTokenSequence createTokenSequence() {
-		return new ParsedTokenSequence();
 	}
 
 	public IGrammarAccess getGrammarAccess() {
@@ -191,9 +138,8 @@ public abstract class AbstractPackratParser implements
 	public final IParseResult parse(CharSequence input, INonTerminalConsumer consumer) {
 		this.input = input;
 		this.offset = 0;
-		this.tokenSequence.clear();
 		Arrays.fill(markerBuffer, null);
-		this.bufferSize = 0;
+		this.markerBufferSize = 0;
 		return parse(consumer);
 	}
 
@@ -205,13 +151,20 @@ public abstract class AbstractPackratParser implements
 	}
 	
 	protected final IParseResult parse(INonTerminalConsumer consumer) {
+		if (activeMarker != null)
+			throw new IllegalStateException("cannot parse now. Active marker is already assigned.");
+		IMarker rootMarker = mark();
+		IRootConsumerListener listener = new RootConsumerListener();
 		try {
-			IRootConsumerListener listener = new RootConsumerListener();
 			consumer.consumeAsRoot(listener);
-			return getParseResultFactory().createParseResult(tokenSequence, input);
+			IParseResult result = getParseResultFactory().createParseResult(activeMarker, input);
+			rootMarker.commit();
+			if (activeMarker != null)
+				throw new IllegalStateException("cannot finish parse: active marker is still present.");
+			return result;
 		} catch(Exception e) {
 			throw new WrappedException(e);
-		}
+		} 
 	}
 	
 	protected INonTerminalConsumer getRootConsumer() {
@@ -232,23 +185,28 @@ public abstract class AbstractPackratParser implements
 	}
 	
 	public IMarker mark() {
-		return mark(offset, this.acceptor);
+		return getNextMarker(activeMarker, offset);
 	}
 	
-	private IMarker mark(int offset, IParsedTokenAcceptor parent) {
-		final Marker result = bufferSize > 0 ? markerBuffer[--bufferSize] : new Marker();
-		final ParsedTokenSequence.Marker tokenMarker = tokenSequence.mark();
-		tokenMarker.setParentAcceptor(parent);
-		this.acceptor = tokenMarker;
-		result.marker = tokenMarker;
-		result.offset = offset;
-		return result;
+	public Marker getActiveMarker() {
+		return activeMarker;
+	}
+
+	public Marker getNextMarker(Marker parent, int offset) {
+		return markerBufferSize > 0 ? 
+				markerBuffer[--markerBufferSize].reInit(offset, parent, this, this) : 
+				new Marker(parent, offset, this, this);
+	}
+
+	public void setActiveMarker(Marker marker) {
+		this.activeMarker = marker;
 	}
 	
-	protected void rollback(int position) {
-		this.offset = position;
+	public void releaseMarker(Marker marker) {
+		if (markerBufferSize < MARKER_BUFFER_SIZE)
+			markerBuffer[markerBufferSize++] = marker;
 	}
-	
+
 	public int consumeKeyword(Keyword keyword, String feature, boolean isMany, boolean isBoolean, ICharacterClass notFollowedBy) {
 		keywordConsumer.configure(keyword, notFollowedBy);
 		return consumeTerminal(keywordConsumer, feature, isMany, isBoolean, keyword, ISequenceMatcher.Factory.nullMatcher());
@@ -259,11 +217,10 @@ public abstract class AbstractPackratParser implements
 		consumeHiddens();
 		int result = consumer.consume(feature, isMany, isBoolean, grammarElement, notMatching != null ? notMatching : ISequenceMatcher.Factory.nullMatcher());
 		if (result == ConsumeResult.SUCCESS) {
-			marker.release();
+			marker.commit();
 			return result;
 		} 
 		marker.rollback();
-		marker.release();
 		return result;
 	}
 	
@@ -308,7 +265,7 @@ public abstract class AbstractPackratParser implements
 	}
 
 	public void accept(AbstractParsedToken token) {
-		acceptor.accept(token);
+		activeMarker.accept(token);
 	}
 
 	public void setOffset(int offset) {

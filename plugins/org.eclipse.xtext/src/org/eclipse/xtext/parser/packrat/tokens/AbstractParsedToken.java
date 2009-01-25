@@ -14,9 +14,9 @@ import org.eclipse.xtext.parser.packrat.IParsedTokenVisitor;
  */
 public abstract class AbstractParsedToken {
 
-	private final int offset;
+	private int offset;
 	
-	private final int length;
+	private int length;
 
 	/**
 	 * @param input
@@ -25,8 +25,8 @@ public abstract class AbstractParsedToken {
 	 */
 	public AbstractParsedToken(int offset, int length) {
 		super();
-		this.length = length;
-		this.offset = offset;
+		this.setLength(length);
+		this.setOffset(offset);
 	}
 
 	public void accept(IParsedTokenVisitor visitor) {
@@ -36,18 +36,26 @@ public abstract class AbstractParsedToken {
 	public int getLength() {
 		return length;
 	}
-	
-	@Override
-	public String toString() {
-		return this.getClass().getSimpleName() + ": @" + getOffset() + ":" + getLength();
-	}
 
+	public void setLength(int length) {
+		this.length = length;
+	}
+	
 	public int getOffset() {
 		return offset;
+	}
+	
+	public void setOffset(int offset) {
+		this.offset = offset;
 	}
 
 	public CharSequence getText(CharSequence input) {
 		return input.subSequence(offset, offset + length);
 	}
 	
+	@Override
+	public String toString() {
+		return this.getClass().getSimpleName() + ": @" + getOffset() + ":" + getLength();
+	}
+
 }

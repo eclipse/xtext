@@ -26,6 +26,10 @@ public class ParsedToken extends AbstractParsedToken {
 		return grammarElement;
 	}
 
+	public void setGrammarElement(EObject grammarElement) {
+		this.grammarElement = grammarElement;
+	}
+	
 	@Override
 	public void accept(IParsedTokenVisitor visitor) {
 		visitor.visitParsedToken(this);

@@ -61,7 +61,11 @@ public class StringWithOffset implements ICharSequenceWithOffset, IMarkerFactory
 		private int offset;
 		
 		public Marker() {
-			this.offset = StringWithOffset.this.offset;
+			this(StringWithOffset.this.offset);
+		}
+		
+		private Marker(int offset) {
+			this.offset = offset;
 		}
 		
 		public void rollback() {
@@ -73,18 +77,18 @@ public class StringWithOffset implements ICharSequenceWithOffset, IMarkerFactory
 			return "Marker@" + offset;
 		}
 
-		public void release() {
+		public void commit() {
 		}
 
-		public IMarker copy() {
+		public IMarker fork() {
+			return new Marker(offset);
+		}
+
+		public IMarker join(IMarker forkedMarker) {
 			return this;
 		}
 
-		public void discard() {
+		public void flush() {
 		}
-
-		public void activate() {
-		}
-		
 	}
 }
