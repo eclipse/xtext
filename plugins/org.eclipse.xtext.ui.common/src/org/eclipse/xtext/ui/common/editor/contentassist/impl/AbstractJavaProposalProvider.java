@@ -40,6 +40,7 @@ import org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider;
 import org.eclipse.xtext.util.Strings;
 
 /**
+ * @author Michael Clay - Initial contribution and API
  * @author Jan Köhnlein - Initial contribution and API
  */
 public abstract class AbstractJavaProposalProvider implements IProposalProvider {
@@ -61,6 +62,9 @@ public abstract class AbstractJavaProposalProvider implements IProposalProvider 
 		invoker = new JavaReflectiveMethodInvoker(this);
 	}
 
+	/**
+	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#completeKeyword(Keyword, IContentAssistContext)
+	 */
 	public List<? extends ICompletionProposal> completeKeyword(Keyword keyword,
 			IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
@@ -70,6 +74,9 @@ public abstract class AbstractJavaProposalProvider implements IProposalProvider 
 		return Collections.singletonList(createCompletionProposal(keyword, keyword.getValue(), contentAssistContext));
 	}
 
+	/**
+	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#completeRuleCall(RuleCall, IContentAssistContext)
+	 */
 	public List<? extends ICompletionProposal> completeRuleCall(RuleCall ruleCall,
 			IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
@@ -87,7 +94,7 @@ public abstract class AbstractJavaProposalProvider implements IProposalProvider 
 
 			TypeRef typeRef = calledRule.getType();
 
-			return invokeMethod("complete" + Strings.toFirstUpper(typeRef.getMetamodel().getAlias())
+			return invokeMethod("complete" + Strings.toFirstUpper(typeRef.getMetamodel().getAlias()) + "_"
 					+ Strings.toFirstUpper(typeRef.getType().getName()), Arrays.<Class<?>> asList(RuleCall.class,
 					contentAssistContext.getModel() == null ? EObject.class : contentAssistContext.getModel()
 							.getClass(), IContentAssistContext.class), Arrays.asList(ruleCall, contentAssistContext
@@ -96,11 +103,14 @@ public abstract class AbstractJavaProposalProvider implements IProposalProvider 
 		return Collections.emptyList();
 	}
 
+	/**
+	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#completeAssignment(Assignment, IContentAssistContext)
+	 */
 	public List<? extends ICompletionProposal> completeAssignment(Assignment assignment,
 			IContentAssistContext contentAssistContext) {
 		ParserRule parserRule = GrammarUtil.containingParserRule(assignment);
 		// TODO : Better call completeRuleCall ?
-		return invokeMethod("complete" + Strings.toFirstUpper(parserRule.getName())
+		return invokeMethod("complete" + Strings.toFirstUpper(parserRule.getName()) + "_"
 				+ Strings.toFirstUpper(assignment.getFeature()), Arrays.<Class<?>> asList(Assignment.class,
 				IContentAssistContext.class), Arrays.asList(assignment, contentAssistContext));
 	}
@@ -120,14 +130,23 @@ public abstract class AbstractJavaProposalProvider implements IProposalProvider 
 		return (List<? extends ICompletionProposal>) invoker.invoke(methodName, parameterTypes, parameterValues);
 	}
 
+	/**
+	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#getTemplateContextType(Keyword, IContentAssistContext)
+	 */
 	public TemplateContextType getTemplateContextType(Keyword keyword, IContentAssistContext contentAssistContext) {
 		return null;
 	}
 
+	/**
+	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#getTemplateContextType(RuleCall, IContentAssistContext)
+	 */
 	public TemplateContextType getTemplateContextType(RuleCall ruleCall, IContentAssistContext contentAssistContext) {
 		return null;
 	}
 
+	/**
+	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#getTemplates(String)
+	 */
 	public Template[] getTemplates(String contextTypeId) {
 		return new Template[] {};
 	}

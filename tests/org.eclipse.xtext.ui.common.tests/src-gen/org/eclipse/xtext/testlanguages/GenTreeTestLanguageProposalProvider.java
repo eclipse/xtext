@@ -21,40 +21,40 @@ import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
  */
 public class GenTreeTestLanguageProposalProvider extends AbstractJavaProposalProvider {
 	// constants
-	private static final String UI_PLUGIN_ID  = "";
+	private static final String UI_PLUGIN_ID  = ".";
 	
 	
 			
-	public List<? extends ICompletionProposal> completeModelChildren(Assignment assignment, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeModel_Children(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeModelChildren feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeModel_Children feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
 		return Collections.emptyList();
 	}
 			
-	public List<? extends ICompletionProposal> completeNodeName(Assignment assignment, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeNode_Name(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeNodeName feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeNode_Name feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal(assignment, "NodeName", contentAssistContext));
+		return Collections.singletonList(createCompletionProposal(assignment, "Node_Name", contentAssistContext));
 	}
 			
-	public List<? extends ICompletionProposal> completeNodeAttrib(Assignment assignment, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeNode_Attrib(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeNodeAttrib feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeNode_Attrib feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal(assignment, "\"NodeAttrib\"", contentAssistContext));		
+		return Collections.singletonList(createCompletionProposal(assignment, "\"Node_Attrib\"", contentAssistContext));		
 	}
 			
-	public List<? extends ICompletionProposal> completeNodeChildren(Assignment assignment, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeNode_Children(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeNodeChildren feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeNode_Children feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}

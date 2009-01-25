@@ -17,25 +17,25 @@ T17 : '{' ;
 T18 : '}' ;
 T19 : '=>' ;
 
-// $ANTLR src "../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g" 476
+// $ANTLR src "./src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g" 476
 RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
-// $ANTLR src "../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g" 478
+// $ANTLR src "./src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g" 478
 RULE_INT : ('0'..'9')+;
 
-// $ANTLR src "../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g" 480
+// $ANTLR src "./src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g" 480
 RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' |                '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
 
-// $ANTLR src "../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g" 482
+// $ANTLR src "./src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g" 482
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
-// $ANTLR src "../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g" 484
+// $ANTLR src "./src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g" 484
 RULE_SL_COMMENT : '//' ~('\n'|'\r')* ('\r'? '\n')? {$channel=HIDDEN;};
 
-// $ANTLR src "../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g" 486
+// $ANTLR src "./src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g" 486
 RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 
-// $ANTLR src "../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g" 488
+// $ANTLR src "./src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g" 488
 RULE_ANY_OTHER : .;
 
 

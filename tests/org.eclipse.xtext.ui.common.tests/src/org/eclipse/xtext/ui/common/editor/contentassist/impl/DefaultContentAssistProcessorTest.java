@@ -70,15 +70,15 @@ public class DefaultContentAssistProcessorTest extends AbstractUiTest
 	public void testComputeCompletionProposalsText() throws Exception {
 		contentAssistProcessorTestBuilder.assertText("spielplatz")
 			.applyText().assertText("1")
-			.applyText().assertText("\"SpielplatzBeschreibung\"","{")
+			.applyText().assertText("\"Spielplatz_Beschreibung\"","{")
 			.applyText().assertText("{")
 			.applyText().assertText("erwachsener", "familie", "spielzeug", "kind", "}")
 			.append("erwachsener ").assertText("(")
-			.applyText().assertText("ErwachsenerName")
+			.applyText().assertText("Erwachsener_Name")
 			.append("e1 ").assertText("1")
 			.applyText().assertText(")")
 			.applyText().append("erwachsener (e2 0) kind ").assertText("(")
-			.applyText().assertText("KindName")
+			.applyText().assertText("Kind_Name")
 			.append("k1 ").assertText("1")
 			.applyText().assertText(")")
 			.applyText().append("kind (k2 0) familie ").assertText("(")
@@ -154,7 +154,7 @@ public class DefaultContentAssistProcessorTest extends AbstractUiTest
 					"R1", 
 					"R2",
 					"R3",
-					"\"KeywordValue\"", 
+					"\"Keyword_Value\"", 
 					"(", 
 					"[", 
 					"+=" // TODO: Why does this proposal come up?

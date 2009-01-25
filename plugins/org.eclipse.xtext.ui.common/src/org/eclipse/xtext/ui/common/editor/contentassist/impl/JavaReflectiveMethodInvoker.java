@@ -21,6 +21,7 @@ import org.eclipse.jface.text.contentassist.ICompletionProposal;
  * map.
  * 
  * @author Jan K&ouml;hnlein - Initial contribution and API
+ * @author Michael Clay
  * 
  */
 public class JavaReflectiveMethodInvoker {

@@ -54,6 +54,7 @@ import org.eclipse.xtext.util.Strings;
  *  </code>
  * 
  * @author Jan K&ouml;hnlein
+ * @author Michael Clay
  * 
  * @see IProposalProvider
  * @see AbstractJavaProposalProvider
@@ -62,6 +63,9 @@ public abstract class AbstractXtendProposalProvider extends AbstractXtendService
 
 	protected final Logger logger = Logger.getLogger(IProposalProvider.class);
 
+	/**
+	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#completeKeyword(Keyword, IContentAssistContext)
+	 */
 	public List<? extends ICompletionProposal> completeKeyword(Keyword keyword,
 			IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
@@ -72,6 +76,9 @@ public abstract class AbstractXtendProposalProvider extends AbstractXtendService
 				.singletonList(new XtextCompletionProposal(keyword, keyword.getValue(), contentAssistContext));
 	}
 
+	/**
+	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#completeRuleCall(RuleCall, IContentAssistContext)
+	 */
 	public List<? extends ICompletionProposal> completeRuleCall(RuleCall ruleCall,
 			IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
@@ -85,17 +92,20 @@ public abstract class AbstractXtendProposalProvider extends AbstractXtendService
 		}
 		else if (calledRule.getType() != null) {
 			TypeRef typeRef = calledRule.getType();
-			return invokeExtension("complete" + Strings.toFirstUpper(typeRef.getMetamodel().getAlias())
+			return invokeExtension("complete" + Strings.toFirstUpper(typeRef.getMetamodel().getAlias()) + "_"
 					+ Strings.toFirstUpper(typeRef.getType().getName()), Arrays.asList(ruleCall, contentAssistContext
 					.getModel(), contentAssistContext));
 		}
 		return Collections.emptyList();
 	}
 
+	/**
+	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#completeAssignment(Assignment, IContentAssistContext)
+	 */
 	public List<? extends ICompletionProposal> completeAssignment(Assignment assignment,
 			IContentAssistContext contentAssistContext) {
 		ParserRule parserRule = GrammarUtil.containingParserRule(assignment);
-		return invokeExtension("complete" + Strings.toFirstUpper(parserRule.getName())
+		return invokeExtension("complete" + Strings.toFirstUpper(parserRule.getName()) + "_"
 				+ Strings.toFirstUpper(assignment.getFeature()), Arrays.asList(assignment, contentAssistContext));
 	}
 
@@ -118,14 +128,23 @@ public abstract class AbstractXtendProposalProvider extends AbstractXtendService
 		return null;
 	}
 
+	/**
+	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#getTemplateContextType(Keyword, IContentAssistContext)
+	 */
 	public TemplateContextType getTemplateContextType(Keyword keyword, IContentAssistContext contentAssistContext) {
 		return null;
 	}
 
+	/**
+	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#getTemplateContextType(RuleCall, IContentAssistContext)
+	 */
 	public TemplateContextType getTemplateContextType(RuleCall ruleCall, IContentAssistContext contentAssistContext) {
 		return null;
 	}
 
+	/**
+	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#getTemplates(String)
+	 */
 	public Template[] getTemplates(String contextTypeId) {
 		return new Template[] {};
 	}
