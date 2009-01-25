@@ -51,22 +51,22 @@ public final class ComplexReconstrTestLanguageTrickyG1Consumer extends NonTermin
 		result = consumeKeyword$3(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele00KeywordLeftSquareBracket());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeGroup$4(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele01Group());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$11(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele1KeywordRightSquareBracket());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 
@@ -79,7 +79,8 @@ public final class ComplexReconstrTestLanguageTrickyG1Consumer extends NonTermin
 		int result = doConsumeGroup$4();
 		if (result != ConsumeResult.SUCCESS)
 			marker.rollback();
-		marker.release();
+		else
+			marker.commit();
 		return ConsumeResult.SUCCESS;
 	}
 
@@ -89,16 +90,16 @@ public final class ComplexReconstrTestLanguageTrickyG1Consumer extends NonTermin
 		result = consumeAssignment$5(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele010AssignmentVals());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeGroup$7(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele011Group());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 
@@ -115,11 +116,9 @@ public final class ComplexReconstrTestLanguageTrickyG1Consumer extends NonTermin
 	protected int consumeGroup$7() throws Exception {
 		IMarker marker = mark();
 		while(doConsumeGroup$7() == ConsumeResult.SUCCESS) {
-			marker.release();
-			marker = mark();
+			marker.flush();
 		}
 		marker.rollback();
-		marker.release();
 		return ConsumeResult.SUCCESS;
 	}
 
@@ -129,16 +128,16 @@ public final class ComplexReconstrTestLanguageTrickyG1Consumer extends NonTermin
 		result = consumeKeyword$8(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0110KeywordComma());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$9(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0111AssignmentVals());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 

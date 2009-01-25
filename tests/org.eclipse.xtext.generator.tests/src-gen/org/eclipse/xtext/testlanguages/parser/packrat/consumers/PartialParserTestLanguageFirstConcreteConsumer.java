@@ -59,40 +59,40 @@ public final class PartialParserTestLanguageFirstConcreteConsumer extends NonTer
 		result = consumeKeyword$6(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele00000KeywordHyphenMinusGreaterThanSign());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$7(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele00001KeywordF());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$8(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0001KeywordLeftParenthesis());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$9(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele001AssignmentValue());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$11(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele01AssignmentReferencedContainer());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$14(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele1KeywordRightParenthesis());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 
@@ -123,7 +123,8 @@ public final class PartialParserTestLanguageFirstConcreteConsumer extends NonTer
 		int result = doConsumeAssignment$11();
 		if (result != ConsumeResult.SUCCESS)
 			marker.rollback();
-		marker.release();
+		else
+			marker.commit();
 		return ConsumeResult.SUCCESS;
 	}
 

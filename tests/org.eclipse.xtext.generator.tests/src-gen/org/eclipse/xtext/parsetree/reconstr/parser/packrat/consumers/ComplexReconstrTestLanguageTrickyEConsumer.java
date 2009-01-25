@@ -67,28 +67,28 @@ public final class ComplexReconstrTestLanguageTrickyEConsumer extends NonTermina
 		result = consumeKeyword$4(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele000KeywordTE());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeGroup$5(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele001Group());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$13(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele01KeywordX());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeGroup$14(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele1Group());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 
@@ -99,11 +99,9 @@ public final class ComplexReconstrTestLanguageTrickyEConsumer extends NonTermina
 	protected int consumeGroup$5() throws Exception {
 		IMarker marker = mark();
 		while(doConsumeGroup$5() == ConsumeResult.SUCCESS) {
-			marker.release();
-			marker = mark();
+			marker.flush();
 		}
 		marker.rollback();
-		marker.release();
 		return ConsumeResult.SUCCESS;
 	}
 
@@ -113,22 +111,22 @@ public final class ComplexReconstrTestLanguageTrickyEConsumer extends NonTermina
 		result = consumeAssignment$7(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele00100AssignmentName());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$9(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele00101AssignmentFoo());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$11(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0011AssignmentType());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 
@@ -169,11 +167,9 @@ public final class ComplexReconstrTestLanguageTrickyEConsumer extends NonTermina
 	protected int consumeGroup$14() throws Exception {
 		IMarker marker = mark();
 		while(doConsumeGroup$14() == ConsumeResult.SUCCESS) {
-			marker.release();
-			marker = mark();
+			marker.flush();
 		}
 		marker.rollback();
-		marker.release();
 		return ConsumeResult.SUCCESS;
 	}
 
@@ -183,16 +179,16 @@ public final class ComplexReconstrTestLanguageTrickyEConsumer extends NonTermina
 		result = consumeAssignment$15(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele10AssignmentName());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$17(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele11AssignmentType());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 

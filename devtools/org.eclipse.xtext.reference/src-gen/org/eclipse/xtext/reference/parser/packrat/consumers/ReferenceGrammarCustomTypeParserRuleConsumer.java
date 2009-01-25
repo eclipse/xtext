@@ -48,16 +48,16 @@ public final class ReferenceGrammarCustomTypeParserRuleConsumer extends NonTermi
 		result = consumeKeyword$2(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0KeywordType());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$3(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele1AssignmentName());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 

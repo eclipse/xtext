@@ -64,46 +64,46 @@ public final class TreeTestLanguageNodeConsumer extends NonTerminalConsumer {
 		result = consumeAssignment$7(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele000000AssignmentName());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$9(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele000001KeywordLeftParenthesis());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$10(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele00001AssignmentAttrib());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$12(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0001KeywordRightParenthesis());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$13(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele001KeywordLeftCurlyBracket());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$14(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele01AssignmentChildren());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$16(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele1KeywordRightCurlyBracketSemicolon());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 
@@ -142,11 +142,9 @@ public final class TreeTestLanguageNodeConsumer extends NonTerminalConsumer {
 	protected int consumeAssignment$14() throws Exception {
 		IMarker marker = mark();
 		while(doConsumeAssignment$14() == ConsumeResult.SUCCESS) {
-			marker.release();
-			marker = mark();
+			marker.flush();
 		}
 		marker.rollback();
-		marker.release();
 		return ConsumeResult.SUCCESS;
 	}
 

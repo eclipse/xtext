@@ -40,19 +40,16 @@ public final class DatatypeRulesTestLanguageCompositeModelConsumer extends NonTe
 		IMarker marker = mark();
 		int result = doConsumeAssignment$1();
 		if (result == ConsumeResult.SUCCESS) {
-			marker.release();
-			marker = mark();
+			marker.flush();
 			while(doConsumeAssignment$1()==ConsumeResult.SUCCESS) {
-				marker.release();
-				marker = mark();
+				marker.flush();
 			}
 			marker.rollback();
-			marker.release();
 			return ConsumeResult.SUCCESS;
 		} else {
 			error("Could not find token.", getRule().eleAssignmentModel());
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 

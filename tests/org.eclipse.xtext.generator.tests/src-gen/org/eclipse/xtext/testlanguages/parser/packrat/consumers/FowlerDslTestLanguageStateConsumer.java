@@ -65,34 +65,34 @@ public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsume
 		result = consumeKeyword$5(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0000KeywordState());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$6(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0001AssignmentName());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeGroup$8(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele001Group());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$17(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele01AssignmentTransitions());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$19(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele1KeywordEnd());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 
@@ -115,7 +115,8 @@ public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsume
 		int result = doConsumeGroup$8();
 		if (result != ConsumeResult.SUCCESS)
 			marker.rollback();
-		marker.release();
+		else
+			marker.commit();
 		return ConsumeResult.SUCCESS;
 	}
 
@@ -125,28 +126,28 @@ public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsume
 		result = consumeKeyword$11(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele001000KeywordActions());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$12(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele001001KeywordLeftCurlyBracket());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$13(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele00101AssignmentActions());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$16(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0011KeywordRightCurlyBracket());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 
@@ -162,19 +163,16 @@ public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsume
 		IMarker marker = mark();
 		int result = doConsumeAssignment$13();
 		if (result == ConsumeResult.SUCCESS) {
-			marker.release();
-			marker = mark();
+			marker.flush();
 			while(doConsumeAssignment$13()==ConsumeResult.SUCCESS) {
-				marker.release();
-				marker = mark();
+				marker.flush();
 			}
 			marker.rollback();
-			marker.release();
 			return ConsumeResult.SUCCESS;
 		} else {
 			error("Could not find token.", getRule().ele00101AssignmentActions());
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 
@@ -195,11 +193,9 @@ public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsume
 	protected int consumeAssignment$17() throws Exception {
 		IMarker marker = mark();
 		while(doConsumeAssignment$17() == ConsumeResult.SUCCESS) {
-			marker.release();
-			marker = mark();
+			marker.flush();
 		}
 		marker.rollback();
-		marker.release();
 		return ConsumeResult.SUCCESS;
 	}
 

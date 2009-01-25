@@ -51,16 +51,16 @@ public final class DomainmodelQualifiedNameConsumer extends NonTerminalConsumer 
 		result = consumeRuleCall$2(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0LexerRuleCallID());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeGroup$3(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele1Group());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 
@@ -71,11 +71,9 @@ public final class DomainmodelQualifiedNameConsumer extends NonTerminalConsumer 
 	protected int consumeGroup$3() throws Exception {
 		IMarker marker = mark();
 		while(doConsumeGroup$3() == ConsumeResult.SUCCESS) {
-			marker.release();
-			marker = mark();
+			marker.flush();
 		}
 		marker.rollback();
-		marker.release();
 		return ConsumeResult.SUCCESS;
 	}
 
@@ -85,16 +83,16 @@ public final class DomainmodelQualifiedNameConsumer extends NonTerminalConsumer 
 		result = consumeKeyword$4(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele10KeywordFullStop());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeRuleCall$5(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele11LexerRuleCallID());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 

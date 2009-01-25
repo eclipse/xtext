@@ -60,34 +60,34 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 		result = consumeAssignment$5(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0000AssignmentId());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeGroup$7(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0001Group());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeGroup$11(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele001Group());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeGroup$15(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele01Group());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$19(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele1KeywordSemicolon());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 
@@ -106,7 +106,8 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 		int result = doConsumeGroup$7();
 		if (result != ConsumeResult.SUCCESS)
 			marker.rollback();
-		marker.release();
+		else
+			marker.commit();
 		return ConsumeResult.SUCCESS;
 	}
 
@@ -116,16 +117,16 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 		result = consumeKeyword$8(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele00010KeywordColon());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$9(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele00011AssignmentValue());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 
@@ -148,7 +149,8 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 		int result = doConsumeGroup$11();
 		if (result != ConsumeResult.SUCCESS)
 			marker.rollback();
-		marker.release();
+		else
+			marker.commit();
 		return ConsumeResult.SUCCESS;
 	}
 
@@ -158,16 +160,16 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 		result = consumeKeyword$12(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0010KeywordNumberSign());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$13(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0011AssignmentVector());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 
@@ -190,7 +192,8 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 		int result = doConsumeGroup$15();
 		if (result != ConsumeResult.SUCCESS)
 			marker.rollback();
-		marker.release();
+		else
+			marker.commit();
 		return ConsumeResult.SUCCESS;
 	}
 
@@ -200,16 +203,16 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 		result = consumeKeyword$16(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele010KeywordPlusSign());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$17(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele011AssignmentDots());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 

@@ -58,46 +58,46 @@ public final class FowlerDslTestLanguageStatemachineConsumer extends NonTerminal
 		result = consumeKeyword$7(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele000000KeywordEvents());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$8(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele000001AssignmentEvents());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$10(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele00001KeywordEnd());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$11(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0001KeywordCommands());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$12(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele001AssignmentCommands());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$14(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele01KeywordEnd());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$15(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele1AssignmentStates());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 
@@ -108,11 +108,9 @@ public final class FowlerDslTestLanguageStatemachineConsumer extends NonTerminal
 	protected int consumeAssignment$8() throws Exception {
 		IMarker marker = mark();
 		while(doConsumeAssignment$8() == ConsumeResult.SUCCESS) {
-			marker.release();
-			marker = mark();
+			marker.flush();
 		}
 		marker.rollback();
-		marker.release();
 		return ConsumeResult.SUCCESS;
 	}
 
@@ -137,11 +135,9 @@ public final class FowlerDslTestLanguageStatemachineConsumer extends NonTerminal
 	protected int consumeAssignment$12() throws Exception {
 		IMarker marker = mark();
 		while(doConsumeAssignment$12() == ConsumeResult.SUCCESS) {
-			marker.release();
-			marker = mark();
+			marker.flush();
 		}
 		marker.rollback();
-		marker.release();
 		return ConsumeResult.SUCCESS;
 	}
 
@@ -162,11 +158,9 @@ public final class FowlerDslTestLanguageStatemachineConsumer extends NonTerminal
 	protected int consumeAssignment$15() throws Exception {
 		IMarker marker = mark();
 		while(doConsumeAssignment$15() == ConsumeResult.SUCCESS) {
-			marker.release();
-			marker = mark();
+			marker.flush();
 		}
 		marker.rollback();
-		marker.release();
 		return ConsumeResult.SUCCESS;
 	}
 

@@ -41,7 +41,8 @@ public final class OptionalEmptyTestLanguageModelConsumer extends NonTerminalCon
 		int result = doConsumeAssignment$1();
 		if (result != ConsumeResult.SUCCESS)
 			marker.rollback();
-		marker.release();
+		else
+			marker.commit();
 		return ConsumeResult.SUCCESS;
 	}
 

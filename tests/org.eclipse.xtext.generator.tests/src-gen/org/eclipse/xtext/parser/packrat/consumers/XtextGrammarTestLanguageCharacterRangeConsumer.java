@@ -45,16 +45,16 @@ public final class XtextGrammarTestLanguageCharacterRangeConsumer extends NonTer
 		result = consumeRuleCall$2(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0ParserRuleCallKeyword());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeGroup$3(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele1Group());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 
@@ -67,7 +67,8 @@ public final class XtextGrammarTestLanguageCharacterRangeConsumer extends NonTer
 		int result = doConsumeGroup$3();
 		if (result != ConsumeResult.SUCCESS)
 			marker.rollback();
-		marker.release();
+		else
+			marker.commit();
 		return ConsumeResult.SUCCESS;
 	}
 
@@ -77,22 +78,22 @@ public final class XtextGrammarTestLanguageCharacterRangeConsumer extends NonTer
 		result = consumeAction$5(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele100ActionCharacterRangeleft());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$7(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele101KeywordFullStopFullStop());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$8(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele11AssignmentRight());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 	protected int consumeAction$5() {

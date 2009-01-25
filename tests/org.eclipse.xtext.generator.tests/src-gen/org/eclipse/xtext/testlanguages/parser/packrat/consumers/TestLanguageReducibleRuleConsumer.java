@@ -45,22 +45,22 @@ public final class TestLanguageReducibleRuleConsumer extends NonTerminalConsumer
 		result = consumeKeyword$3(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele00KeywordReducible());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeRuleCall$4(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele01ParserRuleCallTerminalRule());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeGroup$5(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele1Group());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 
@@ -77,7 +77,8 @@ public final class TestLanguageReducibleRuleConsumer extends NonTerminalConsumer
 		int result = doConsumeGroup$5();
 		if (result != ConsumeResult.SUCCESS)
 			marker.rollback();
-		marker.release();
+		else
+			marker.commit();
 		return ConsumeResult.SUCCESS;
 	}
 
@@ -87,16 +88,16 @@ public final class TestLanguageReducibleRuleConsumer extends NonTerminalConsumer
 		result = consumeAction$6(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele10ActionReducibleCompositeactionFeature());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$8(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele11AssignmentActionFeature());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 	protected int consumeAction$6() {

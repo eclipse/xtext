@@ -57,34 +57,34 @@ public final class ComplexReconstrTestLanguageTrickyCConsumer extends NonTermina
 		result = consumeKeyword$5(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0000KeywordTC());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$6(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0001AssignmentName());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeGroup$8(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele001Group());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeGroup$12(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele01Group());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeGroup$16(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele1Group());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 
@@ -107,7 +107,8 @@ public final class ComplexReconstrTestLanguageTrickyCConsumer extends NonTermina
 		int result = doConsumeGroup$8();
 		if (result != ConsumeResult.SUCCESS)
 			marker.rollback();
-		marker.release();
+		else
+			marker.commit();
 		return ConsumeResult.SUCCESS;
 	}
 
@@ -117,16 +118,16 @@ public final class ComplexReconstrTestLanguageTrickyCConsumer extends NonTermina
 		result = consumeAction$9(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0010ActionC1x());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$11(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0011KeywordX());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 	protected int consumeAction$9() {
@@ -143,7 +144,8 @@ public final class ComplexReconstrTestLanguageTrickyCConsumer extends NonTermina
 		int result = doConsumeGroup$12();
 		if (result != ConsumeResult.SUCCESS)
 			marker.rollback();
-		marker.release();
+		else
+			marker.commit();
 		return ConsumeResult.SUCCESS;
 	}
 
@@ -153,16 +155,16 @@ public final class ComplexReconstrTestLanguageTrickyCConsumer extends NonTermina
 		result = consumeAction$13(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele010ActionC2y());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$15(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele011KeywordY());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 	protected int consumeAction$13() {
@@ -179,7 +181,8 @@ public final class ComplexReconstrTestLanguageTrickyCConsumer extends NonTermina
 		int result = doConsumeGroup$16();
 		if (result != ConsumeResult.SUCCESS)
 			marker.rollback();
-		marker.release();
+		else
+			marker.commit();
 		return ConsumeResult.SUCCESS;
 	}
 
@@ -189,16 +192,16 @@ public final class ComplexReconstrTestLanguageTrickyCConsumer extends NonTermina
 		result = consumeAction$17(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele10ActionC3z());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$19(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele11KeywordZ());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 	protected int consumeAction$17() {

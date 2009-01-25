@@ -47,16 +47,16 @@ public final class MultiGenMMTestLanguageFooConsumer extends NonTerminalConsumer
 		result = consumeAssignment$2(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0AssignmentName());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$4(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele1AssignmentNameRefs());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 
@@ -73,11 +73,9 @@ public final class MultiGenMMTestLanguageFooConsumer extends NonTerminalConsumer
 	protected int consumeAssignment$4() throws Exception {
 		IMarker marker = mark();
 		while(doConsumeAssignment$4() == ConsumeResult.SUCCESS) {
-			marker.release();
-			marker = mark();
+			marker.flush();
 		}
 		marker.rollback();
-		marker.release();
 		return ConsumeResult.SUCCESS;
 	}
 

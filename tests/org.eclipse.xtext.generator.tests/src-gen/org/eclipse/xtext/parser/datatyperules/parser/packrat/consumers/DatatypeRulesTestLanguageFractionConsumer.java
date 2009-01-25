@@ -51,16 +51,16 @@ public final class DatatypeRulesTestLanguageFractionConsumer extends NonTerminal
 		result = consumeRuleCall$2(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0LexerRuleCallINT());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeGroup$3(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele1Group());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 
@@ -73,7 +73,8 @@ public final class DatatypeRulesTestLanguageFractionConsumer extends NonTerminal
 		int result = doConsumeGroup$3();
 		if (result != ConsumeResult.SUCCESS)
 			marker.rollback();
-		marker.release();
+		else
+			marker.commit();
 		return ConsumeResult.SUCCESS;
 	}
 
@@ -83,16 +84,16 @@ public final class DatatypeRulesTestLanguageFractionConsumer extends NonTerminal
 		result = consumeKeyword$4(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele10KeywordSolidus());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeRuleCall$5(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele11LexerRuleCallINT());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 
