@@ -11,7 +11,7 @@ import org.eclipse.xtext.ui.common.xtend.contentassist.AbstractXtendProposalProv
  */
 public class XtendContentAssistTestLanguageProposalProvider extends AbstractXtendProposalProvider {
 
-	private static final String UI_PLUGIN_ID = "";
+	private static final String UI_PLUGIN_ID = ".";
 		
 	@Override
 	protected ClassLoader getClassLoader() {

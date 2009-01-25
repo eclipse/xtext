@@ -22,38 +22,38 @@ extension org::eclipse::xtend::util::stdlib::io;
  */
 
 	 
-List[ICompletionProposal] completeStartRules(Assignment assignment, IContentAssistContext contentAssistContext) :
-	debug("completeStartRules feature '" + assignment.feature + "' terminal '"
+List[ICompletionProposal] completeStart_Rules(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeStart_Rules feature '" + assignment.feature + "' terminal '"
 					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
 					+ contentAssistContext.matchString.trim() + "'") ->
 	{};
 	 
-List[ICompletionProposal] completeFirstAbstractRuleChildName(Assignment assignment, IContentAssistContext contentAssistContext) :
-	debug("completeFirstAbstractRuleChildName feature '" + assignment.feature + "' terminal '"
+List[ICompletionProposal] completeFirstAbstractRuleChild_Name(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeFirstAbstractRuleChild_Name feature '" + assignment.feature + "' terminal '"
 					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
 					+ contentAssistContext.matchString.trim() + "'") ->
-    { newProposal(assignment, "FirstAbstractRuleChildName", contentAssistContext) };
+    { newProposal(assignment, "FirstAbstractRuleChild_Name", contentAssistContext) };
 	 
-List[ICompletionProposal] completeFirstAbstractRuleChildElements(Assignment assignment, IContentAssistContext contentAssistContext) :
-	debug("completeFirstAbstractRuleChildElements feature '" + assignment.feature + "' terminal '"
-					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
-					+ contentAssistContext.matchString.trim() + "'") ->
-	{};
-	 
-List[ICompletionProposal] completeSecondAbstractRuleChildName(Assignment assignment, IContentAssistContext contentAssistContext) :
-	debug("completeSecondAbstractRuleChildName feature '" + assignment.feature + "' terminal '"
-					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
-					+ contentAssistContext.matchString.trim() + "'") ->
-    { newProposal(assignment, "SecondAbstractRuleChildName", contentAssistContext) };
-	 
-List[ICompletionProposal] completeSecondAbstractRuleChildRule(Assignment assignment, IContentAssistContext contentAssistContext) :
-	debug("completeSecondAbstractRuleChildRule feature '" + assignment.feature + "' terminal '"
+List[ICompletionProposal] completeFirstAbstractRuleChild_Elements(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeFirstAbstractRuleChild_Elements feature '" + assignment.feature + "' terminal '"
 					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
 					+ contentAssistContext.matchString.trim() + "'") ->
 	{};
 	 
-List[ICompletionProposal] completeAbstractRuleCallRule(Assignment assignment, IContentAssistContext contentAssistContext) :
-	debug("completeAbstractRuleCallRule feature '" + assignment.feature + "' terminal '"
+List[ICompletionProposal] completeSecondAbstractRuleChild_Name(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeSecondAbstractRuleChild_Name feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+    { newProposal(assignment, "SecondAbstractRuleChild_Name", contentAssistContext) };
+	 
+List[ICompletionProposal] completeSecondAbstractRuleChild_Rule(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeSecondAbstractRuleChild_Rule feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	{};
+	 
+List[ICompletionProposal] completeAbstractRuleCall_Rule(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeAbstractRuleCall_Rule feature '" + assignment.feature + "' terminal '"
 					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
 					+ contentAssistContext.matchString.trim() + "'") ->
 	lookupCrossReference(((CrossReference)assignment.terminal), contentAssistContext);

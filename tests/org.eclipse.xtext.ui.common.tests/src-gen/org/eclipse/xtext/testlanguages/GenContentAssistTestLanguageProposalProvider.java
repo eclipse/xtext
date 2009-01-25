@@ -21,58 +21,58 @@ import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
  */
 public class GenContentAssistTestLanguageProposalProvider extends AbstractJavaProposalProvider {
 	// constants
-	private static final String UI_PLUGIN_ID  = "";
+	private static final String UI_PLUGIN_ID  = ".";
 	
 	
 			
-	public List<? extends ICompletionProposal> completeStartRules(Assignment assignment, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeStart_Rules(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeStartRules feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeStart_Rules feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
 		return Collections.emptyList();
 	}
 			
-	public List<? extends ICompletionProposal> completeFirstAbstractRuleChildName(Assignment assignment, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeFirstAbstractRuleChild_Name(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeFirstAbstractRuleChildName feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeFirstAbstractRuleChild_Name feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal(assignment, "FirstAbstractRuleChildName", contentAssistContext));
+		return Collections.singletonList(createCompletionProposal(assignment, "FirstAbstractRuleChild_Name", contentAssistContext));
 	}
 			
-	public List<? extends ICompletionProposal> completeFirstAbstractRuleChildElements(Assignment assignment, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeFirstAbstractRuleChild_Elements(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeFirstAbstractRuleChildElements feature '" + assignment.getFeature() + "' terminal '"
-					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
-					+ contentAssistContext.getMatchString().trim() + "'");
-		}
-		return Collections.emptyList();
-	}
-			
-	public List<? extends ICompletionProposal> completeSecondAbstractRuleChildName(Assignment assignment, IContentAssistContext contentAssistContext) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("completeSecondAbstractRuleChildName feature '" + assignment.getFeature() + "' terminal '"
-					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
-					+ contentAssistContext.getMatchString().trim() + "'");
-		}
-		return Collections.singletonList(createCompletionProposal(assignment, "SecondAbstractRuleChildName", contentAssistContext));
-	}
-			
-	public List<? extends ICompletionProposal> completeSecondAbstractRuleChildRule(Assignment assignment, IContentAssistContext contentAssistContext) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("completeSecondAbstractRuleChildRule feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeFirstAbstractRuleChild_Elements feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
 		return Collections.emptyList();
 	}
 			
-	public List<? extends ICompletionProposal> completeAbstractRuleCallRule(Assignment assignment, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeSecondAbstractRuleChild_Name(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeAbstractRuleCallRule feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeSecondAbstractRuleChild_Name feature '" + assignment.getFeature() + "' terminal '"
+					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
+					+ contentAssistContext.getMatchString().trim() + "'");
+		}
+		return Collections.singletonList(createCompletionProposal(assignment, "SecondAbstractRuleChild_Name", contentAssistContext));
+	}
+			
+	public List<? extends ICompletionProposal> completeSecondAbstractRuleChild_Rule(Assignment assignment, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeSecondAbstractRuleChild_Rule feature '" + assignment.getFeature() + "' terminal '"
+					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
+					+ contentAssistContext.getMatchString().trim() + "'");
+		}
+		return Collections.emptyList();
+	}
+			
+	public List<? extends ICompletionProposal> completeAbstractRuleCall_Rule(Assignment assignment, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeAbstractRuleCall_Rule feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
