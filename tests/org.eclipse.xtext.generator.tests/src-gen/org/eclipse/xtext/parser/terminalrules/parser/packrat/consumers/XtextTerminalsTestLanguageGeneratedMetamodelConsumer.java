@@ -59,28 +59,28 @@ public final class XtextTerminalsTestLanguageGeneratedMetamodelConsumer extends 
 		result = consumeKeyword$4(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele000KeywordGenerate());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$5(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele001AssignmentName());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$7(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele01AssignmentEPackage());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeGroup$10(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele1Group());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 
@@ -113,7 +113,8 @@ public final class XtextTerminalsTestLanguageGeneratedMetamodelConsumer extends 
 		int result = doConsumeGroup$10();
 		if (result != ConsumeResult.SUCCESS)
 			marker.rollback();
-		marker.release();
+		else
+			marker.commit();
 		return ConsumeResult.SUCCESS;
 	}
 
@@ -123,16 +124,16 @@ public final class XtextTerminalsTestLanguageGeneratedMetamodelConsumer extends 
 		result = consumeKeyword$11(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele10KeywordAs());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$12(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele11AssignmentAlias());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 

@@ -45,16 +45,16 @@ public final class FormatterTestLanguageTestLinewrapConsumer extends NonTerminal
 		result = consumeKeyword$2(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0KeywordLinewrap());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$3(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele1AssignmentItems());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 
@@ -65,11 +65,9 @@ public final class FormatterTestLanguageTestLinewrapConsumer extends NonTerminal
 	protected int consumeAssignment$3() throws Exception {
 		IMarker marker = mark();
 		while(doConsumeAssignment$3() == ConsumeResult.SUCCESS) {
-			marker.release();
-			marker = mark();
+			marker.flush();
 		}
 		marker.rollback();
-		marker.release();
 		return ConsumeResult.SUCCESS;
 	}
 

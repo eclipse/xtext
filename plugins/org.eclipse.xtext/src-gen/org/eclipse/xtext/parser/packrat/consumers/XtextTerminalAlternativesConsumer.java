@@ -45,16 +45,16 @@ public final class XtextTerminalAlternativesConsumer extends NonTerminalConsumer
 		result = consumeRuleCall$2(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0ParserRuleCallTerminalGroup());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeGroup$3(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele1Group());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 
@@ -65,11 +65,9 @@ public final class XtextTerminalAlternativesConsumer extends NonTerminalConsumer
 	protected int consumeGroup$3() throws Exception {
 		IMarker marker = mark();
 		while(doConsumeGroup$3() == ConsumeResult.SUCCESS) {
-			marker.release();
-			marker = mark();
+			marker.flush();
 		}
 		marker.rollback();
-		marker.release();
 		return ConsumeResult.SUCCESS;
 	}
 
@@ -79,22 +77,22 @@ public final class XtextTerminalAlternativesConsumer extends NonTerminalConsumer
 		result = consumeAction$5(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele100ActionAlternativesgroups());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$7(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele101KeywordVerticalLine());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$8(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele11AssignmentGroups());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 	protected int consumeAction$5() {

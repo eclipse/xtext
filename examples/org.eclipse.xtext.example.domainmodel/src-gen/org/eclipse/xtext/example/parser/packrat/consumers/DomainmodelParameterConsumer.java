@@ -47,16 +47,16 @@ public final class DomainmodelParameterConsumer extends NonTerminalConsumer {
 		result = consumeAssignment$2(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0AssignmentName());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$4(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele1AssignmentType());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 

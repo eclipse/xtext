@@ -51,22 +51,22 @@ public final class FowlerDslEventConsumer extends NonTerminalConsumer {
 		result = consumeAssignment$3(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele00AssignmentResetting());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$5(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele01AssignmentName());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$7(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele1AssignmentCode());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 
@@ -75,7 +75,8 @@ public final class FowlerDslEventConsumer extends NonTerminalConsumer {
 		int result = doConsumeAssignment$3();
 		if (result != ConsumeResult.SUCCESS)
 			marker.rollback();
-		marker.release();
+		else
+			marker.commit();
 		return ConsumeResult.SUCCESS;
 	}
 

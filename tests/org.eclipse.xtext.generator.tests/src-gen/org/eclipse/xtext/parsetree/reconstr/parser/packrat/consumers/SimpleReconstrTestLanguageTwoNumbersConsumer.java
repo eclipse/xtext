@@ -54,22 +54,22 @@ public final class SimpleReconstrTestLanguageTwoNumbersConsumer extends NonTermi
 		result = consumeAssignment$3(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele00AssignmentNum1());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$5(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele01AssignmentNum2());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeGroup$7(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele1Group());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 
@@ -96,11 +96,9 @@ public final class SimpleReconstrTestLanguageTwoNumbersConsumer extends NonTermi
 	protected int consumeGroup$7() throws Exception {
 		IMarker marker = mark();
 		while(doConsumeGroup$7() == ConsumeResult.SUCCESS) {
-			marker.release();
-			marker = mark();
+			marker.flush();
 		}
 		marker.rollback();
-		marker.release();
 		return ConsumeResult.SUCCESS;
 	}
 
@@ -110,16 +108,16 @@ public final class SimpleReconstrTestLanguageTwoNumbersConsumer extends NonTermi
 		result = consumeKeyword$8(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele10KeywordNumberSign());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$9(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele11AssignmentNum3());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 

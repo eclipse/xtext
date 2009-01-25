@@ -61,40 +61,40 @@ public final class XtextTerminalsTestLanguageTerminalRuleConsumer extends NonTer
 		result = consumeAssignment$6(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele00000AssignmentTerminal());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$8(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele00001AssignmentName());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeGroup$10(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0001Group());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$14(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele001KeywordColon());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$15(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele01AssignmentAlternatives());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$17(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele1KeywordSemicolon());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 
@@ -123,7 +123,8 @@ public final class XtextTerminalsTestLanguageTerminalRuleConsumer extends NonTer
 		int result = doConsumeGroup$10();
 		if (result != ConsumeResult.SUCCESS)
 			marker.rollback();
-		marker.release();
+		else
+			marker.commit();
 		return ConsumeResult.SUCCESS;
 	}
 
@@ -133,16 +134,16 @@ public final class XtextTerminalsTestLanguageTerminalRuleConsumer extends NonTer
 		result = consumeKeyword$11(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele00010KeywordReturns());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$12(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele00011AssignmentType());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 

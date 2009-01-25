@@ -51,28 +51,28 @@ public final class ComplexReconstrTestLanguageParensConsumer extends NonTerminal
 		result = consumeKeyword$4(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele000KeywordLeftParenthesis());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeRuleCall$5(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele001ParserRuleCallOp());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$6(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele01KeywordRightParenthesis());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$7(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele1AssignmentEm());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 
@@ -93,7 +93,8 @@ public final class ComplexReconstrTestLanguageParensConsumer extends NonTerminal
 		int result = doConsumeAssignment$7();
 		if (result != ConsumeResult.SUCCESS)
 			marker.rollback();
-		marker.release();
+		else
+			marker.commit();
 		return ConsumeResult.SUCCESS;
 	}
 

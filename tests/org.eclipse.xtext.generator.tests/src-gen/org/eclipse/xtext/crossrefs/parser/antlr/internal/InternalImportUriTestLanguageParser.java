@@ -39,7 +39,7 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
         
 
     public String[] getTokenNames() { return tokenNames; }
-    public String getGrammarFileName() { return "./src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g"; }
+    public String getGrammarFileName() { return "../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g"; }
 
 
      
@@ -63,7 +63,7 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start entryRuleMain
-    // ./src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:68:1: entryRuleMain returns [EObject current=null] : iv_ruleMain= ruleMain EOF ;
+    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:68:1: entryRuleMain returns [EObject current=null] : iv_ruleMain= ruleMain EOF ;
     public final EObject entryRuleMain() throws RecognitionException {
         EObject current = null;
 
@@ -71,8 +71,8 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:68:46: (iv_ruleMain= ruleMain EOF )
-            // ./src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:69:2: iv_ruleMain= ruleMain EOF
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:68:46: (iv_ruleMain= ruleMain EOF )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:69:2: iv_ruleMain= ruleMain EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/crossrefs/ImportUriTestLanguage.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleMain_in_entryRuleMain72);
@@ -98,7 +98,7 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start ruleMain
-    // ./src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:76:1: ruleMain returns [EObject current=null] : ( (lv_imports= ruleImport )* (lv_types= ruleType )* ) ;
+    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:76:1: ruleMain returns [EObject current=null] : ( (lv_imports= ruleImport )* (lv_types= ruleType )* ) ;
     public final EObject ruleMain() throws RecognitionException {
         EObject current = null;
 
@@ -110,13 +110,13 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ./src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:80:6: ( ( (lv_imports= ruleImport )* (lv_types= ruleType )* ) )
-            // ./src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:81:1: ( (lv_imports= ruleImport )* (lv_types= ruleType )* )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:80:6: ( ( (lv_imports= ruleImport )* (lv_types= ruleType )* ) )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:81:1: ( (lv_imports= ruleImport )* (lv_types= ruleType )* )
             {
-            // ./src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:81:1: ( (lv_imports= ruleImport )* (lv_types= ruleType )* )
-            // ./src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:81:2: (lv_imports= ruleImport )* (lv_types= ruleType )*
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:81:1: ( (lv_imports= ruleImport )* (lv_types= ruleType )* )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:81:2: (lv_imports= ruleImport )* (lv_types= ruleType )*
             {
-            // ./src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:81:2: (lv_imports= ruleImport )*
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:81:2: (lv_imports= ruleImport )*
             loop1:
             do {
                 int alt1=2;
@@ -129,7 +129,7 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
 
                 switch (alt1) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:84:6: lv_imports= ruleImport
+            	    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:84:6: lv_imports= ruleImport
             	    {
             	     
             	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/crossrefs/ImportUriTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
@@ -160,7 +160,7 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
                 }
             } while (true);
 
-            // ./src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:102:3: (lv_types= ruleType )*
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:102:3: (lv_types= ruleType )*
             loop2:
             do {
                 int alt2=2;
@@ -173,7 +173,7 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
 
                 switch (alt2) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:105:6: lv_types= ruleType
+            	    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:105:6: lv_types= ruleType
             	    {
             	     
             	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/crossrefs/ImportUriTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
@@ -226,7 +226,7 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start entryRuleImport
-    // ./src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:132:1: entryRuleImport returns [EObject current=null] : iv_ruleImport= ruleImport EOF ;
+    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:132:1: entryRuleImport returns [EObject current=null] : iv_ruleImport= ruleImport EOF ;
     public final EObject entryRuleImport() throws RecognitionException {
         EObject current = null;
 
@@ -234,8 +234,8 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:132:48: (iv_ruleImport= ruleImport EOF )
-            // ./src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:133:2: iv_ruleImport= ruleImport EOF
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:132:48: (iv_ruleImport= ruleImport EOF )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:133:2: iv_ruleImport= ruleImport EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/crossrefs/ImportUriTestLanguage.xmi#//@rules.1" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleImport_in_entryRuleImport220);
@@ -261,7 +261,7 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start ruleImport
-    // ./src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:140:1: ruleImport returns [EObject current=null] : ( 'import' (lv_importURI= RULE_STRING ) ) ;
+    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:140:1: ruleImport returns [EObject current=null] : ( 'import' (lv_importURI= RULE_STRING ) ) ;
     public final EObject ruleImport() throws RecognitionException {
         EObject current = null;
 
@@ -270,18 +270,18 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ./src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:144:6: ( ( 'import' (lv_importURI= RULE_STRING ) ) )
-            // ./src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:145:1: ( 'import' (lv_importURI= RULE_STRING ) )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:144:6: ( ( 'import' (lv_importURI= RULE_STRING ) ) )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:145:1: ( 'import' (lv_importURI= RULE_STRING ) )
             {
-            // ./src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:145:1: ( 'import' (lv_importURI= RULE_STRING ) )
-            // ./src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:145:2: 'import' (lv_importURI= RULE_STRING )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:145:1: ( 'import' (lv_importURI= RULE_STRING ) )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:145:2: 'import' (lv_importURI= RULE_STRING )
             {
             match(input,11,FOLLOW_11_in_ruleImport264); 
 
                     createLeafNode("classpath:/org/eclipse/xtext/crossrefs/ImportUriTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
-            // ./src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:149:1: (lv_importURI= RULE_STRING )
-            // ./src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:151:6: lv_importURI= RULE_STRING
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:149:1: (lv_importURI= RULE_STRING )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:151:6: lv_importURI= RULE_STRING
             {
             lv_importURI=(Token)input.LT(1);
             match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleImport285); 
@@ -325,7 +325,7 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start entryRuleType
-    // ./src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:178:1: entryRuleType returns [EObject current=null] : iv_ruleType= ruleType EOF ;
+    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:178:1: entryRuleType returns [EObject current=null] : iv_ruleType= ruleType EOF ;
     public final EObject entryRuleType() throws RecognitionException {
         EObject current = null;
 
@@ -333,8 +333,8 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:178:46: (iv_ruleType= ruleType EOF )
-            // ./src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:179:2: iv_ruleType= ruleType EOF
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:178:46: (iv_ruleType= ruleType EOF )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:179:2: iv_ruleType= ruleType EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/crossrefs/ImportUriTestLanguage.xmi#//@rules.2" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleType_in_entryRuleType331);
@@ -360,7 +360,7 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start ruleType
-    // ./src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:186:1: ruleType returns [EObject current=null] : ( ( ( 'type' (lv_name= RULE_ID ) ) 'extends' ) ( ( RULE_ID ) ) ) ;
+    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:186:1: ruleType returns [EObject current=null] : ( ( ( 'type' (lv_name= RULE_ID ) ) 'extends' ) ( ( RULE_ID ) ) ) ;
     public final EObject ruleType() throws RecognitionException {
         EObject current = null;
 
@@ -369,24 +369,24 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ./src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:190:6: ( ( ( ( 'type' (lv_name= RULE_ID ) ) 'extends' ) ( ( RULE_ID ) ) ) )
-            // ./src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:191:1: ( ( ( 'type' (lv_name= RULE_ID ) ) 'extends' ) ( ( RULE_ID ) ) )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:190:6: ( ( ( ( 'type' (lv_name= RULE_ID ) ) 'extends' ) ( ( RULE_ID ) ) ) )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:191:1: ( ( ( 'type' (lv_name= RULE_ID ) ) 'extends' ) ( ( RULE_ID ) ) )
             {
-            // ./src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:191:1: ( ( ( 'type' (lv_name= RULE_ID ) ) 'extends' ) ( ( RULE_ID ) ) )
-            // ./src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:191:2: ( ( 'type' (lv_name= RULE_ID ) ) 'extends' ) ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:191:1: ( ( ( 'type' (lv_name= RULE_ID ) ) 'extends' ) ( ( RULE_ID ) ) )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:191:2: ( ( 'type' (lv_name= RULE_ID ) ) 'extends' ) ( ( RULE_ID ) )
             {
-            // ./src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:191:2: ( ( 'type' (lv_name= RULE_ID ) ) 'extends' )
-            // ./src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:191:3: ( 'type' (lv_name= RULE_ID ) ) 'extends'
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:191:2: ( ( 'type' (lv_name= RULE_ID ) ) 'extends' )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:191:3: ( 'type' (lv_name= RULE_ID ) ) 'extends'
             {
-            // ./src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:191:3: ( 'type' (lv_name= RULE_ID ) )
-            // ./src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:191:4: 'type' (lv_name= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:191:3: ( 'type' (lv_name= RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:191:4: 'type' (lv_name= RULE_ID )
             {
             match(input,12,FOLLOW_12_in_ruleType377); 
 
                     createLeafNode("classpath:/org/eclipse/xtext/crossrefs/ImportUriTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
-            // ./src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:195:1: (lv_name= RULE_ID )
-            // ./src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:197:6: lv_name= RULE_ID
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:195:1: (lv_name= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:197:6: lv_name= RULE_ID
             {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleType398); 
@@ -418,8 +418,8 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            // ./src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:219:2: ( ( RULE_ID ) )
-            // ./src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:222:3: ( RULE_ID )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:219:2: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:222:3: ( RULE_ID )
             {
 
             			if (current==null) {
@@ -427,8 +427,8 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
-            // ./src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:228:1: ( RULE_ID )
-            // ./src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:229:2: RULE_ID
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:228:1: ( RULE_ID )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:229:2: RULE_ID
             {
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleType444); 
              

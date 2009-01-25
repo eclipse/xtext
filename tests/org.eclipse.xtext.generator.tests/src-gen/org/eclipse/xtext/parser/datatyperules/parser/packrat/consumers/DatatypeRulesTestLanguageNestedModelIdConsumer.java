@@ -45,22 +45,22 @@ public final class DatatypeRulesTestLanguageNestedModelIdConsumer extends NonTer
 		result = consumeRuleCall$3(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele00ParserRuleCallModelId());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$4(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele01KeywordFullStop());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeRuleCall$5(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele1ParserRuleCallModelId());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 

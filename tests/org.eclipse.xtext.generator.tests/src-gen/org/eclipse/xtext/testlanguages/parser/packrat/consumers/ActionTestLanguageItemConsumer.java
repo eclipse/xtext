@@ -45,16 +45,16 @@ public final class ActionTestLanguageItemConsumer extends NonTerminalConsumer {
 		result = consumeAction$2(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0ActionThingcontent());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$4(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele1AssignmentName());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 	protected int consumeAction$2() {

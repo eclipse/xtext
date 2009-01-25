@@ -44,27 +44,25 @@ public final class LangATestLanguageMainConsumer extends NonTerminalConsumer {
 		result = consumeAssignment$2(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0AssignmentImports());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$4(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele1AssignmentTypes());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 
 	protected int consumeAssignment$2() throws Exception {
 		IMarker marker = mark();
 		while(doConsumeAssignment$2() == ConsumeResult.SUCCESS) {
-			marker.release();
-			marker = mark();
+			marker.flush();
 		}
 		marker.rollback();
-		marker.release();
 		return ConsumeResult.SUCCESS;
 	}
 
@@ -81,11 +79,9 @@ public final class LangATestLanguageMainConsumer extends NonTerminalConsumer {
 	protected int consumeAssignment$4() throws Exception {
 		IMarker marker = mark();
 		while(doConsumeAssignment$4() == ConsumeResult.SUCCESS) {
-			marker.release();
-			marker = mark();
+			marker.flush();
 		}
 		marker.rollback();
-		marker.release();
 		return ConsumeResult.SUCCESS;
 	}
 

@@ -48,22 +48,22 @@ public final class XtextParenthesizedElementConsumer extends NonTerminalConsumer
 		result = consumeKeyword$3(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele00KeywordLeftParenthesis());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeRuleCall$4(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele01ParserRuleCallAlternatives());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$5(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele1KeywordRightParenthesis());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 

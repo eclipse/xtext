@@ -51,22 +51,22 @@ public final class TransientValuesTestTestRequiredConsumer extends NonTerminalCo
 		result = consumeKeyword$3(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele00KeywordRequired());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$4(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele01AssignmentRequired1());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$6(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele1AssignmentRequired2());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 

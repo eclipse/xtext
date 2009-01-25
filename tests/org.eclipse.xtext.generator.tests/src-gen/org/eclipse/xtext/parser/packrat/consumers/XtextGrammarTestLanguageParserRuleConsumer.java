@@ -76,40 +76,40 @@ public final class XtextGrammarTestLanguageParserRuleConsumer extends NonTermina
 		result = consumeAssignment$6(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele00000AssignmentName());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeGroup$8(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele00001Group());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeGroup$12(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0001Group());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$28(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele001KeywordColon());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$29(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele01AssignmentAlternatives());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$31(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele1KeywordSemicolon());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 
@@ -128,7 +128,8 @@ public final class XtextGrammarTestLanguageParserRuleConsumer extends NonTermina
 		int result = doConsumeGroup$8();
 		if (result != ConsumeResult.SUCCESS)
 			marker.rollback();
-		marker.release();
+		else
+			marker.commit();
 		return ConsumeResult.SUCCESS;
 	}
 
@@ -138,16 +139,16 @@ public final class XtextGrammarTestLanguageParserRuleConsumer extends NonTermina
 		result = consumeKeyword$9(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele000010KeywordReturns());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$10(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele000011AssignmentType());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 
@@ -170,7 +171,8 @@ public final class XtextGrammarTestLanguageParserRuleConsumer extends NonTermina
 		int result = doConsumeGroup$12();
 		if (result != ConsumeResult.SUCCESS)
 			marker.rollback();
-		marker.release();
+		else
+			marker.commit();
 		return ConsumeResult.SUCCESS;
 	}
 
@@ -180,40 +182,40 @@ public final class XtextGrammarTestLanguageParserRuleConsumer extends NonTermina
 		result = consumeAssignment$16(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele00010000AssignmentDefinesHiddenTokens());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$18(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele00010001KeywordLeftParenthesis());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$19(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0001001AssignmentHiddenTokens());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$23(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0001010KeywordComma());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$24(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0001011AssignmentHiddenTokens());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$27(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele00011KeywordRightParenthesis());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 

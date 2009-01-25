@@ -53,28 +53,28 @@ public final class FormatterTestLanguageTestIndentationConsumer extends NonTermi
 		result = consumeKeyword$4(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele000KeywordIndentation());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$5(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele001KeywordLeftCurlyBracket());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAlternatives$6(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele01Alternatives());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$11(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele1KeywordRightCurlyBracket());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 
@@ -89,11 +89,9 @@ public final class FormatterTestLanguageTestIndentationConsumer extends NonTermi
 	protected int consumeAlternatives$6() throws Exception {
 		IMarker marker = mark();
 		while(doConsumeAlternatives$6() == ConsumeResult.SUCCESS) {
-			marker.release();
-			marker = mark();
+			marker.flush();
 		}
 		marker.rollback();
-		marker.release();
 		return ConsumeResult.SUCCESS;
 	}
 
@@ -102,43 +100,35 @@ public final class FormatterTestLanguageTestIndentationConsumer extends NonTermi
 		IMarker bestMarker = mark();
 		IMarker currentMarker;
 		int tempResult;
-		currentMarker = bestMarker.copy();
+		currentMarker = bestMarker.fork();
 		tempResult = consumeAssignment$7(); 
 		if (tempResult == ConsumeResult.SUCCESS) {
-			if (bestMarker != currentMarker) {
-				bestMarker.discard();
-			}
-			currentMarker.release();
+			bestMarker = currentMarker.join(bestMarker);
+			bestMarker.commit();
 			return tempResult;
 		}
 		if (tempResult > result) {
-			bestMarker.discard();
-			bestMarker = currentMarker;			
+			bestMarker = currentMarker.join(bestMarker);
 			result = tempResult;
 		} else {
-			currentMarker.discard();
+			bestMarker = bestMarker.join(currentMarker);
 		}
 		currentMarker = null;
-		bestMarker.activate();
-		currentMarker = bestMarker.copy();
+		currentMarker = bestMarker.fork();
 		tempResult = consumeAssignment$9(); 
 		if (tempResult == ConsumeResult.SUCCESS) {
-			if (bestMarker != currentMarker) {
-				bestMarker.discard();
-			}
-			currentMarker.release();
+			bestMarker = currentMarker.join(bestMarker);
+			bestMarker.commit();
 			return tempResult;
 		}
 		if (tempResult > result) {
-			bestMarker.discard();
-			bestMarker = currentMarker;			
+			bestMarker = currentMarker.join(bestMarker);
 			result = tempResult;
 		} else {
-			currentMarker.discard();
+			bestMarker = bestMarker.join(currentMarker);
 		}
 		currentMarker = null;
-		bestMarker.activate();
-		bestMarker.release();
+		bestMarker.commit();
 		return result;
 	}
 

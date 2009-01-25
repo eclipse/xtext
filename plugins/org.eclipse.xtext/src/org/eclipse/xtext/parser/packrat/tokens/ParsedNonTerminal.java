@@ -15,6 +15,9 @@ import org.eclipse.xtext.parser.packrat.IParsedTokenVisitor;
  */
 public class ParsedNonTerminal extends ParsedToken {
 
+	/**
+	 * TODO: use EClass instead
+	 */
 	private final String typeName;
 
 	public ParsedNonTerminal(int offset, EObject grammarElement, String typeName) {
@@ -26,7 +29,7 @@ public class ParsedNonTerminal extends ParsedToken {
 	public void accept(IParsedTokenVisitor visitor) {
 		visitor.visitParsedNonTerminal(this);
 	}
-
+	
 	public String getTypeName() {
 		return typeName;
 	}

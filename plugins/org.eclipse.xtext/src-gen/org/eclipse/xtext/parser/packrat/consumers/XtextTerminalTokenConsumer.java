@@ -51,16 +51,16 @@ public final class XtextTerminalTokenConsumer extends NonTerminalConsumer {
 		result = consumeRuleCall$2(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0ParserRuleCallTerminalTokenElement());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$3(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele1AssignmentCardinality());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 
@@ -73,7 +73,8 @@ public final class XtextTerminalTokenConsumer extends NonTerminalConsumer {
 		int result = doConsumeAssignment$3();
 		if (result != ConsumeResult.SUCCESS)
 			marker.rollback();
-		marker.release();
+		else
+			marker.commit();
 		return ConsumeResult.SUCCESS;
 	}
 

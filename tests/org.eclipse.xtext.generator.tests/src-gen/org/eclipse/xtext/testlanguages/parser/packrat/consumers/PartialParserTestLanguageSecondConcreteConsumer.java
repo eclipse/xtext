@@ -62,46 +62,46 @@ public final class PartialParserTestLanguageSecondConcreteConsumer extends NonTe
 		result = consumeKeyword$7(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele000000KeywordHyphenMinusGreaterThanSign());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$8(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele000001KeywordF());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$9(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele00001KeywordS());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$10(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0001KeywordLeftParenthesis());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$11(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele001AssignmentValue());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$13(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele01AssignmentReferencedChildren());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$16(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele1KeywordRightParenthesis());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 
@@ -136,7 +136,8 @@ public final class PartialParserTestLanguageSecondConcreteConsumer extends NonTe
 		int result = doConsumeAssignment$13();
 		if (result != ConsumeResult.SUCCESS)
 			marker.rollback();
-		marker.release();
+		else
+			marker.commit();
 		return ConsumeResult.SUCCESS;
 	}
 

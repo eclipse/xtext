@@ -56,22 +56,22 @@ public final class ComplexReconstrTestLanguageTrickyBConsumer extends NonTermina
 		result = consumeKeyword$3(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele00KeywordTB());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeGroup$4(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele01Group());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$9(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele1AssignmentType());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 
@@ -84,7 +84,8 @@ public final class ComplexReconstrTestLanguageTrickyBConsumer extends NonTermina
 		int result = doConsumeGroup$4();
 		if (result != ConsumeResult.SUCCESS)
 			marker.rollback();
-		marker.release();
+		else
+			marker.commit();
 		return ConsumeResult.SUCCESS;
 	}
 
@@ -94,16 +95,16 @@ public final class ComplexReconstrTestLanguageTrickyBConsumer extends NonTermina
 		result = consumeAssignment$5(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele010AssignmentName());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$7(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele011AssignmentType());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 
@@ -130,11 +131,9 @@ public final class ComplexReconstrTestLanguageTrickyBConsumer extends NonTermina
 	protected int consumeAssignment$9() throws Exception {
 		IMarker marker = mark();
 		while(doConsumeAssignment$9() == ConsumeResult.SUCCESS) {
-			marker.release();
-			marker = mark();
+			marker.flush();
 		}
 		marker.rollback();
-		marker.release();
 		return ConsumeResult.SUCCESS;
 	}
 

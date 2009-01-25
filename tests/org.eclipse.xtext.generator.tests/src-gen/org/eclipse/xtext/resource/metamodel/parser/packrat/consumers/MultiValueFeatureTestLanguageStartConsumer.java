@@ -43,19 +43,16 @@ public final class MultiValueFeatureTestLanguageStartConsumer extends NonTermina
 		IMarker marker = mark();
 		int result = doConsumeAssignment$1();
 		if (result == ConsumeResult.SUCCESS) {
-			marker.release();
-			marker = mark();
+			marker.flush();
 			while(doConsumeAssignment$1()==ConsumeResult.SUCCESS) {
-				marker.release();
-				marker = mark();
+				marker.flush();
 			}
 			marker.rollback();
-			marker.release();
 			return ConsumeResult.SUCCESS;
 		} else {
 			error("Could not find token.", getRule().eleAssignmentFeatureA());
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 

@@ -71,52 +71,52 @@ public final class XtextTerminalsTestLanguageActionConsumer extends NonTerminalC
 		result = consumeKeyword$8(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0000000KeywordLeftCurlyBracket());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeGroup$9(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0000001Group());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$12(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele000001AssignmentTypeName());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$14(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele00001KeywordFullStop());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$15(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0001AssignmentFeature());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$17(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele001AssignmentOperator());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$21(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele01KeywordCurrent());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$22(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele1KeywordRightCurlyBracket());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 
@@ -129,7 +129,8 @@ public final class XtextTerminalsTestLanguageActionConsumer extends NonTerminalC
 		int result = doConsumeGroup$9();
 		if (result != ConsumeResult.SUCCESS)
 			marker.rollback();
-		marker.release();
+		else
+			marker.commit();
 		return ConsumeResult.SUCCESS;
 	}
 
@@ -139,16 +140,16 @@ public final class XtextTerminalsTestLanguageActionConsumer extends NonTerminalC
 		result = consumeKeyword$10(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele00000010KeywordCurrent());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$11(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele00000011KeywordEqualsSign());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 

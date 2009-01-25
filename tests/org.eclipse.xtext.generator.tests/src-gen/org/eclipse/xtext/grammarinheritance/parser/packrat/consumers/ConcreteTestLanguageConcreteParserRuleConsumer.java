@@ -53,28 +53,28 @@ public final class ConcreteTestLanguageConcreteParserRuleConsumer extends NonTer
 		result = consumeKeyword$4(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele000KeywordModel());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$5(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele001AssignmentMagicNumber());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$7(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele01KeywordColon());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$8(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele1AssignmentElements());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 
@@ -99,11 +99,9 @@ public final class ConcreteTestLanguageConcreteParserRuleConsumer extends NonTer
 	protected int consumeAssignment$8() throws Exception {
 		IMarker marker = mark();
 		while(doConsumeAssignment$8() == ConsumeResult.SUCCESS) {
-			marker.release();
-			marker = mark();
+			marker.flush();
 		}
 		marker.rollback();
-		marker.release();
 		return ConsumeResult.SUCCESS;
 	}
 

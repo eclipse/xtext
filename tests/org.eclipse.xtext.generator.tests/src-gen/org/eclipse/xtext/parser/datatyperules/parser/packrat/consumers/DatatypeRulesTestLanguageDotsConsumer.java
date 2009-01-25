@@ -48,43 +48,35 @@ public final class DatatypeRulesTestLanguageDotsConsumer extends NonTerminalCons
 		IMarker bestMarker = mark();
 		IMarker currentMarker;
 		int tempResult;
-		currentMarker = bestMarker.copy();
+		currentMarker = bestMarker.fork();
 		tempResult = consumeGroup$2(); 
 		if (tempResult == ConsumeResult.SUCCESS) {
-			if (bestMarker != currentMarker) {
-				bestMarker.discard();
-			}
-			currentMarker.release();
+			bestMarker = currentMarker.join(bestMarker);
+			bestMarker.commit();
 			return tempResult;
 		}
 		if (tempResult > result) {
-			bestMarker.discard();
-			bestMarker = currentMarker;			
+			bestMarker = currentMarker.join(bestMarker);
 			result = tempResult;
 		} else {
-			currentMarker.discard();
+			bestMarker = bestMarker.join(currentMarker);
 		}
 		currentMarker = null;
-		bestMarker.activate();
-		currentMarker = bestMarker.copy();
+		currentMarker = bestMarker.fork();
 		tempResult = consumeKeyword$5(); 
 		if (tempResult == ConsumeResult.SUCCESS) {
-			if (bestMarker != currentMarker) {
-				bestMarker.discard();
-			}
-			currentMarker.release();
+			bestMarker = currentMarker.join(bestMarker);
+			bestMarker.commit();
 			return tempResult;
 		}
 		if (tempResult > result) {
-			bestMarker.discard();
-			bestMarker = currentMarker;			
+			bestMarker = currentMarker.join(bestMarker);
 			result = tempResult;
 		} else {
-			currentMarker.discard();
+			bestMarker = bestMarker.join(currentMarker);
 		}
 		currentMarker = null;
-		bestMarker.activate();
-		bestMarker.release();
+		bestMarker.commit();
 		return result;
 	}
 
@@ -94,16 +86,16 @@ public final class DatatypeRulesTestLanguageDotsConsumer extends NonTerminalCons
 		result = consumeKeyword$3(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele00KeywordFullStop());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$4(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele01KeywordFullStop());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 

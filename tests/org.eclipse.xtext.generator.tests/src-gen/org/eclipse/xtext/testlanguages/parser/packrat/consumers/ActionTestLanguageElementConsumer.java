@@ -42,22 +42,22 @@ public final class ActionTestLanguageElementConsumer extends NonTerminalConsumer
 		result = consumeRuleCall$2(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0ParserRuleCallItem());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAction$4(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele10ActionItemitems());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$6(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele11AssignmentItems());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 

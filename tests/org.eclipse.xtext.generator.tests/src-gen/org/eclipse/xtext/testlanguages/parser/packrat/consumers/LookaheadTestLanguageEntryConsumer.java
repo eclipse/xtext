@@ -39,11 +39,9 @@ public final class LookaheadTestLanguageEntryConsumer extends NonTerminalConsume
 	protected int consumeAssignment$1() throws Exception {
 		IMarker marker = mark();
 		while(doConsumeAssignment$1() == ConsumeResult.SUCCESS) {
-			marker.release();
-			marker = mark();
+			marker.flush();
 		}
 		marker.rollback();
-		marker.release();
 		return ConsumeResult.SUCCESS;
 	}
 

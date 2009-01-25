@@ -46,16 +46,16 @@ public final class LookaheadTestLanguageLookAhead0Consumer extends NonTerminalCo
 		result = consumeKeyword$2(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0KeywordBar());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$3(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele1AssignmentX());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 

@@ -73,40 +73,40 @@ public final class XtextTerminalsTestLanguageGrammarConsumer extends NonTerminal
 		result = consumeAlternatives$6(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele00000Alternatives());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$10(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele00001AssignmentIdElements());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeGroup$12(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0001Group());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeGroup$16(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele001Group());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$25(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele01AssignmentMetamodelDeclarations());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$27(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele1AssignmentRules());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 
@@ -115,43 +115,35 @@ public final class XtextTerminalsTestLanguageGrammarConsumer extends NonTerminal
 		IMarker bestMarker = mark();
 		IMarker currentMarker;
 		int tempResult;
-		currentMarker = bestMarker.copy();
+		currentMarker = bestMarker.fork();
 		tempResult = consumeAssignment$7(); 
 		if (tempResult == ConsumeResult.SUCCESS) {
-			if (bestMarker != currentMarker) {
-				bestMarker.discard();
-			}
-			currentMarker.release();
+			bestMarker = currentMarker.join(bestMarker);
+			bestMarker.commit();
 			return tempResult;
 		}
 		if (tempResult > result) {
-			bestMarker.discard();
-			bestMarker = currentMarker;			
+			bestMarker = currentMarker.join(bestMarker);
 			result = tempResult;
 		} else {
-			currentMarker.discard();
+			bestMarker = bestMarker.join(currentMarker);
 		}
 		currentMarker = null;
-		bestMarker.activate();
-		currentMarker = bestMarker.copy();
+		currentMarker = bestMarker.fork();
 		tempResult = consumeKeyword$9(); 
 		if (tempResult == ConsumeResult.SUCCESS) {
-			if (bestMarker != currentMarker) {
-				bestMarker.discard();
-			}
-			currentMarker.release();
+			bestMarker = currentMarker.join(bestMarker);
+			bestMarker.commit();
 			return tempResult;
 		}
 		if (tempResult > result) {
-			bestMarker.discard();
-			bestMarker = currentMarker;			
+			bestMarker = currentMarker.join(bestMarker);
 			result = tempResult;
 		} else {
-			currentMarker.discard();
+			bestMarker = bestMarker.join(currentMarker);
 		}
 		currentMarker = null;
-		bestMarker.activate();
-		bestMarker.release();
+		bestMarker.commit();
 		return result;
 	}
 
@@ -182,11 +174,9 @@ public final class XtextTerminalsTestLanguageGrammarConsumer extends NonTerminal
 	protected int consumeGroup$12() throws Exception {
 		IMarker marker = mark();
 		while(doConsumeGroup$12() == ConsumeResult.SUCCESS) {
-			marker.release();
-			marker = mark();
+			marker.flush();
 		}
 		marker.rollback();
-		marker.release();
 		return ConsumeResult.SUCCESS;
 	}
 
@@ -196,16 +186,16 @@ public final class XtextTerminalsTestLanguageGrammarConsumer extends NonTerminal
 		result = consumeKeyword$13(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele00010KeywordFullStop());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$14(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele00011AssignmentIdElements());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 
@@ -228,7 +218,8 @@ public final class XtextTerminalsTestLanguageGrammarConsumer extends NonTerminal
 		int result = doConsumeGroup$16();
 		if (result != ConsumeResult.SUCCESS)
 			marker.rollback();
-		marker.release();
+		else
+			marker.commit();
 		return ConsumeResult.SUCCESS;
 	}
 
@@ -238,22 +229,22 @@ public final class XtextTerminalsTestLanguageGrammarConsumer extends NonTerminal
 		result = consumeKeyword$18(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele00100KeywordExtends());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$19(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele00101AssignmentSuperGrammarIdElements());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeGroup$21(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0011Group());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 
@@ -274,11 +265,9 @@ public final class XtextTerminalsTestLanguageGrammarConsumer extends NonTerminal
 	protected int consumeGroup$21() throws Exception {
 		IMarker marker = mark();
 		while(doConsumeGroup$21() == ConsumeResult.SUCCESS) {
-			marker.release();
-			marker = mark();
+			marker.flush();
 		}
 		marker.rollback();
-		marker.release();
 		return ConsumeResult.SUCCESS;
 	}
 
@@ -288,16 +277,16 @@ public final class XtextTerminalsTestLanguageGrammarConsumer extends NonTerminal
 		result = consumeKeyword$22(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele00110KeywordFullStop());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$23(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele00111AssignmentSuperGrammarIdElements());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 
@@ -318,11 +307,9 @@ public final class XtextTerminalsTestLanguageGrammarConsumer extends NonTerminal
 	protected int consumeAssignment$25() throws Exception {
 		IMarker marker = mark();
 		while(doConsumeAssignment$25() == ConsumeResult.SUCCESS) {
-			marker.release();
-			marker = mark();
+			marker.flush();
 		}
 		marker.rollback();
-		marker.release();
 		return ConsumeResult.SUCCESS;
 	}
 
@@ -340,19 +327,16 @@ public final class XtextTerminalsTestLanguageGrammarConsumer extends NonTerminal
 		IMarker marker = mark();
 		int result = doConsumeAssignment$27();
 		if (result == ConsumeResult.SUCCESS) {
-			marker.release();
-			marker = mark();
+			marker.flush();
 			while(doConsumeAssignment$27()==ConsumeResult.SUCCESS) {
-				marker.release();
-				marker = mark();
+				marker.flush();
 			}
 			marker.rollback();
-			marker.release();
 			return ConsumeResult.SUCCESS;
 		} else {
 			error("Could not find token.", getRule().ele1AssignmentRules());
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 

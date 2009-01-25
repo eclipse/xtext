@@ -54,28 +54,28 @@ public final class ImportUriTestLanguageTypeConsumer extends NonTerminalConsumer
 		result = consumeKeyword$4(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele000KeywordType());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$5(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele001AssignmentName());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$7(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele01KeywordExtends());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$8(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele1AssignmentExtends());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 

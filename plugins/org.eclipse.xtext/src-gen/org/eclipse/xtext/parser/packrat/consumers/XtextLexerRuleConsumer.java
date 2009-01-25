@@ -67,40 +67,40 @@ public final class XtextLexerRuleConsumer extends NonTerminalConsumer {
 		result = consumeAlternatives$6(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele00000Alternatives());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$9(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele00001AssignmentName());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeGroup$11(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0001Group());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$15(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele001KeywordColon());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$16(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele01AssignmentBody());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$18(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele1KeywordSemicolon());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 
@@ -109,43 +109,35 @@ public final class XtextLexerRuleConsumer extends NonTerminalConsumer {
 		IMarker bestMarker = mark();
 		IMarker currentMarker;
 		int tempResult;
-		currentMarker = bestMarker.copy();
+		currentMarker = bestMarker.fork();
 		tempResult = consumeKeyword$7(); 
 		if (tempResult == ConsumeResult.SUCCESS) {
-			if (bestMarker != currentMarker) {
-				bestMarker.discard();
-			}
-			currentMarker.release();
+			bestMarker = currentMarker.join(bestMarker);
+			bestMarker.commit();
 			return tempResult;
 		}
 		if (tempResult > result) {
-			bestMarker.discard();
-			bestMarker = currentMarker;			
+			bestMarker = currentMarker.join(bestMarker);
 			result = tempResult;
 		} else {
-			currentMarker.discard();
+			bestMarker = bestMarker.join(currentMarker);
 		}
 		currentMarker = null;
-		bestMarker.activate();
-		currentMarker = bestMarker.copy();
+		currentMarker = bestMarker.fork();
 		tempResult = consumeKeyword$8(); 
 		if (tempResult == ConsumeResult.SUCCESS) {
-			if (bestMarker != currentMarker) {
-				bestMarker.discard();
-			}
-			currentMarker.release();
+			bestMarker = currentMarker.join(bestMarker);
+			bestMarker.commit();
 			return tempResult;
 		}
 		if (tempResult > result) {
-			bestMarker.discard();
-			bestMarker = currentMarker;			
+			bestMarker = currentMarker.join(bestMarker);
 			result = tempResult;
 		} else {
-			currentMarker.discard();
+			bestMarker = bestMarker.join(currentMarker);
 		}
 		currentMarker = null;
-		bestMarker.activate();
-		bestMarker.release();
+		bestMarker.commit();
 		return result;
 	}
 
@@ -172,7 +164,8 @@ public final class XtextLexerRuleConsumer extends NonTerminalConsumer {
 		int result = doConsumeGroup$11();
 		if (result != ConsumeResult.SUCCESS)
 			marker.rollback();
-		marker.release();
+		else
+			marker.commit();
 		return ConsumeResult.SUCCESS;
 	}
 
@@ -182,16 +175,16 @@ public final class XtextLexerRuleConsumer extends NonTerminalConsumer {
 		result = consumeKeyword$12(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele00010KeywordReturns());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$13(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele00011AssignmentType());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 

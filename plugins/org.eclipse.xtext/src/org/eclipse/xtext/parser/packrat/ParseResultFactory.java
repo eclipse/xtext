@@ -30,7 +30,6 @@ import org.eclipse.xtext.parser.packrat.tokens.ParsedNonTerminalEnd;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedTerminal;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedTerminalWithFeature;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedToken;
-import org.eclipse.xtext.parser.packrat.tokens.ParsedTokenSequence;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
@@ -63,16 +62,16 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 		this.nonterminalStack = new LinkedList<ParsedNonTerminal>();
 	}
 	
-	public IParseResult createParseResult(ParsedTokenSequence tokens, CharSequence input) {
+	public IParseResult createParseResult(AbstractParsedToken token, CharSequence input) {
 		currentNode = null;
 		currentStack.clear();
 		nonterminalStack.clear();
 		this.input = input;
 		if (DebugUtil.PARSE_RESULT_FACTORY_DEBUG) {
 			IParsedTokenVisitor visitor = new CompoundParsedTokenVisitor(new ParsedTokenPrinter(), this);
-			tokens.acceptAndClear(visitor);
+			token.accept(visitor);
 		} else {
-			tokens.acceptAndClear(this);
+			token.accept(this);
 		}
 		this.input = null;
 		return new ParseResult(currentStack.isEmpty() ? null : currentStack.getLast(), currentNode);
@@ -118,7 +117,7 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 		LeafNode errorNode = createLeafNode(token);
 		errorNode.setGrammarElement(token.getGrammarElement());
 		SyntaxError syntaxError = ParsetreeFactory.eINSTANCE.createSyntaxError();
-		syntaxError.setMessage(token.getErrorMessage());
+		syntaxError.setMessage(token.getErrorMessage() + "@" + token.getOffset());
 		errorNode.setSyntaxError(syntaxError);
 	}
 
@@ -265,10 +264,10 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 		try {
 			if (token.isMany()) {
 				factory.add(current, token.getFeature(), token.isBoolean() ? true : token.getText(input), 
-						token.getLexerRule(), currentNode);
+						token.getRuleName(), currentNode);
 			} else {
 				factory.set(current, token.getFeature(), token.isBoolean() ? true : token.getText(input), 
-						token.getLexerRule(), currentNode);
+						token.getRuleName(), currentNode);
 			}
 		} catch(ValueConverterException ex) {
 			handleValueConverterException(ex);

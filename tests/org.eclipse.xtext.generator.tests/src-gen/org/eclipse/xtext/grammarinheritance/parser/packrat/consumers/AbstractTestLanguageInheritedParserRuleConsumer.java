@@ -48,16 +48,16 @@ public final class AbstractTestLanguageInheritedParserRuleConsumer extends NonTe
 		result = consumeKeyword$2(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0KeywordElement());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$3(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele1AssignmentName());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 

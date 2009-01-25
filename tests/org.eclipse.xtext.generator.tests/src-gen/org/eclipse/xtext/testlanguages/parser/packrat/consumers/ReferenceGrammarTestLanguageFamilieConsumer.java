@@ -77,52 +77,52 @@ public final class ReferenceGrammarTestLanguageFamilieConsumer extends NonTermin
 		result = consumeKeyword$8(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0000000KeywordFamilie());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$9(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0000001KeywordLeftParenthesis());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$10(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele000001AssignmentName());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$16(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele00001AssignmentMutter());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$19(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0001AssignmentVater());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$22(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele001AssignmentKinder());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeGroup$25(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele01Group());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$30(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele1KeywordRightParenthesis());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 
@@ -185,11 +185,9 @@ public final class ReferenceGrammarTestLanguageFamilieConsumer extends NonTermin
 	protected int consumeGroup$25() throws Exception {
 		IMarker marker = mark();
 		while(doConsumeGroup$25() == ConsumeResult.SUCCESS) {
-			marker.release();
-			marker = mark();
+			marker.flush();
 		}
 		marker.rollback();
-		marker.release();
 		return ConsumeResult.SUCCESS;
 	}
 
@@ -199,16 +197,16 @@ public final class ReferenceGrammarTestLanguageFamilieConsumer extends NonTermin
 		result = consumeKeyword$26(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele010KeywordComma());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$27(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele011AssignmentKinder());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 

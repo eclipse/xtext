@@ -56,34 +56,34 @@ public final class ContentAssistTestLanguageFirstAbstractRuleChildConsumer exten
 		result = consumeAssignment$5(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0000AssignmentName());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$7(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0001KeywordLeftParenthesis());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$8(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele001AssignmentElements());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$10(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele01KeywordRightParenthesis());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$11(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele1KeywordSemicolon());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 
@@ -105,19 +105,16 @@ public final class ContentAssistTestLanguageFirstAbstractRuleChildConsumer exten
 		IMarker marker = mark();
 		int result = doConsumeAssignment$8();
 		if (result == ConsumeResult.SUCCESS) {
-			marker.release();
-			marker = mark();
+			marker.flush();
 			while(doConsumeAssignment$8()==ConsumeResult.SUCCESS) {
-				marker.release();
-				marker = mark();
+				marker.flush();
 			}
 			marker.rollback();
-			marker.release();
 			return ConsumeResult.SUCCESS;
 		} else {
 			error("Could not find token.", getRule().ele001AssignmentElements());
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 

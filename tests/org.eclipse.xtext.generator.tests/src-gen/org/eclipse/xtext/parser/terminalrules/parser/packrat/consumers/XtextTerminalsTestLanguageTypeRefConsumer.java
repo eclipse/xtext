@@ -51,16 +51,16 @@ public final class XtextTerminalsTestLanguageTypeRefConsumer extends NonTerminal
 		result = consumeGroup$2(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele0Group());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$7(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele1AssignmentType());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 
@@ -69,7 +69,8 @@ public final class XtextTerminalsTestLanguageTypeRefConsumer extends NonTerminal
 		int result = doConsumeGroup$2();
 		if (result != ConsumeResult.SUCCESS)
 			marker.rollback();
-		marker.release();
+		else
+			marker.commit();
 		return ConsumeResult.SUCCESS;
 	}
 
@@ -79,16 +80,16 @@ public final class XtextTerminalsTestLanguageTypeRefConsumer extends NonTerminal
 		result = consumeAssignment$3(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele00AssignmentMetamodel());
-			marker.release();
+			marker.commit();
 			return result;
 		}
 		result = consumeKeyword$6(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele01KeywordColonColon());
-			marker.release();
+			marker.commit();
 			return result;
 		}
-		marker.release();
+		marker.commit();
 		return result;
 	}
 
