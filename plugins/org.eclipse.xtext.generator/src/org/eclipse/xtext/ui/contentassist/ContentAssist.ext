@@ -13,10 +13,10 @@ extension org::eclipse::xtext::Extensions;
 extension org::eclipse::xtext::Properties reexport;
 
 String getFqFeatureName(Assignment this):
-	containingParserRule().name.toFirstUpper()+feature.toFirstUpper();
+	containingParserRule().name.toFirstUpper()+"_"+feature.toFirstUpper();
 	
 String getFqFeatureName(ParserRule this):
-	type.metamodel.alias.toFirstUpper()+type.type.name.toFirstUpper();
+	type.metamodel.alias.toFirstUpper()+"_"+type.type.name.toFirstUpper();
 	
 List[ParserRule] getParserRulesWithType() :
 	grammar().allParserRules().select(parserRule|parserRule.type!=null);
