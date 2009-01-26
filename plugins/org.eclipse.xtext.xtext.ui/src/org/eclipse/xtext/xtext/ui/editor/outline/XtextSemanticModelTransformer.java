@@ -20,6 +20,25 @@ import org.eclipse.xtext.util.XtextSwitch;
 public class XtextSemanticModelTransformer extends DefaultSemanticModelTransformer {
 
 	@Override
+	public boolean consumeSemanticNode(EObject semanticNode) {
+		if (semanticNode != null) {
+			return new XtextSwitch<Boolean>() {
+				@Override
+				public Boolean caseTypeRef(org.eclipse.xtext.TypeRef object) {
+					return false;
+				};
+
+				@Override
+				public Boolean defaultCase(EObject object) {
+					return true;
+				};
+			}.doSwitch(semanticNode);
+		} else {
+			return false;
+		}
+	}
+
+	@Override
 	public boolean consumeSemanticChildNodes(EObject semanticNode) {
 		if (semanticNode != null) {
 			return new XtextSwitch<Boolean>() {
@@ -30,17 +49,22 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 
 				@Override
 				public Boolean caseParserRule(org.eclipse.xtext.ParserRule object) {
-					return false;
+					return true;
 				};
 
+				@Override
+				public Boolean caseAlternatives(org.eclipse.xtext.Alternatives object) {
+					return true;
+				};
+
+				@Override
 				public Boolean defaultCase(EObject object) {
-					return false;
+					return true;
 				};
 			}.doSwitch(semanticNode);
 		} else {
 			return true;
 		}
-
 	}
 
 	@Override
@@ -51,19 +75,29 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 			return new XtextSwitch<ContentOutlineNode>() {
 				@Override
 				public ContentOutlineNode caseGrammar(Grammar object) {
-					outlineNode.setLabel("Grammar " + object.getIdElements());
+					// create fully qualified ID string
+					Object[] idElements = object.getIdElements().toArray();
+					int size = idElements.length;
+					StringBuffer stringBuffer = new StringBuffer();
+					for (int i = 0; i < size;) {
+						stringBuffer.append(String.valueOf(idElements[i]));
+						if (++i < size) {
+							stringBuffer.append(".");
+						}
+					}
+					outlineNode.setLabel("language " + stringBuffer.toString());
 					return outlineNode;
 				}
 
 				@Override
 				public ContentOutlineNode caseGeneratedMetamodel(org.eclipse.xtext.GeneratedMetamodel object) {
-					outlineNode.setLabel("GeneratedMM: " + object.getName());
+					outlineNode.setLabel("generate " + object.getName());
 					return outlineNode;
 				};
 
 				@Override
 				public ContentOutlineNode caseReferencedMetamodel(org.eclipse.xtext.ReferencedMetamodel object) {
-					outlineNode.setLabel("ReferencedMM " + object.getAlias());
+					outlineNode.setLabel("import " + object.getAlias());
 					return outlineNode;
 				};
 
@@ -72,6 +106,18 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 					outlineNode.setLabel(object.getName());
 					return outlineNode;
 				};
+
+				@Override
+				public ContentOutlineNode caseAlternatives(org.eclipse.xtext.Alternatives object) {
+					outlineNode.setLabel("|");
+					return outlineNode;
+				};
+
+				@Override
+				public ContentOutlineNode defaultCase(EObject object) {
+					return outlineNode;
+				};
+
 			}.doSwitch(semanticNode);
 		} else {
 			return outlineNode;
