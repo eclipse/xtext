@@ -12,9 +12,9 @@
 «IMPORT xtext»
 «IMPORT xtextgen»
 
-«EXTENSION org::eclipse::xtext::parser::AntlrGrammar»
+«EXTENSION org::eclipse::xtext::parser::antlr::AntlrGrammar»
 «EXTENSION org::eclipse::xtext::Extensions»
-«EXTENSION org::eclipse::xtext::parser::Parser»
+«EXTENSION org::eclipse::xtext::parser::antlr::Parser»
 
 «DEFINE grammar FOR GenService»
 «FILE internalAntlrGrammarFullPath() SRC_GEN-»

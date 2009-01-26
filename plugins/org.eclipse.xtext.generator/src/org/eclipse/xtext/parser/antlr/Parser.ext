@@ -34,4 +34,4 @@ internalAntlrGrammarName() :
 	 'Internal' + languageName();
 	 
 Void runAntlrTool(String grammarFullPath) :
-	JAVA org.eclipse.xtext.parser.AntlrToolRunner.run(java.lang.String);
+	JAVA org.eclipse.xtext.parser.antlr.AntlrToolRunner.run(java.lang.String);

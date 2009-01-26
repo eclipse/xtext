@@ -37,6 +37,7 @@ import org.eclipse.xtend.expression.Variable;
 import org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel;
 import org.eclipse.xtext.ecore.GenerateJavaFromEcore;
 import org.eclipse.xtext.grammaraccess.GrammarAccessUtil;
+import org.eclipse.xtext.parser.antlr.AntlrConnector;
 import org.eclipse.xtext.resource.metamodel.Xtext2EcoreTransformer;
 import org.eclipse.xtext.xtextgen.GenModel;
 import org.eclipse.xtext.xtextgen.GenService;
@@ -217,31 +218,6 @@ public class GeneratorFacade {
 
 		if (!GrammarUtil.isAbstract(grammarModel)) {
 
-			GenService elementFactoryService = XtextgenFactory.eINSTANCE.createGenService();
-			elementFactoryService.setServiceInterfaceFQName("org.eclipse.xtext.parser.IAstFactory");
-			elementFactoryService.setGenClassFQName("org.eclipse.xtext.parser.antlr.AntlrEcoreElementFactory");
-			// no template, as service is generic. Nevertheless, we need the
-			// individual registration to avoid conflicts
-			elementFactoryService.setExtensionPointID("org.eclipse.xtext.ui.aSTFactory");
-			genModel.getServices().add(elementFactoryService);
-
-			GenService parserService = XtextgenFactory.eINSTANCE.createGenService();
-			parserService.setServiceInterfaceFQName("org.eclipse.xtext.parser.IParser");
-			parserService.setGenClassFQName(namespace + ".parser.antlr." + languageName + "Parser");
-			parserService.setTemplatePath("org::eclipse::xtext::parser::Parser::root");
-			parserService.setExtensionPointID("org.eclipse.xtext.ui.parser");
-			genModel.getServices().add(parserService);
-
-			GenService tokenFileProviderService = XtextgenFactory.eINSTANCE.createGenService();
-			tokenFileProviderService
-					.setServiceInterfaceFQName("org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider");
-			tokenFileProviderService.setGenClassFQName(namespace + ".parser.antlr." + languageName
-					+ "AntlrTokenFileProvider");
-			tokenFileProviderService.setTemplatePath("org::eclipse::xtext::parser::AntlrTokenFileProvider::root");
-			// tokenFileProviderService.setExtensionPointID(
-			// "org.eclipse.xtext.ui.parser");
-			genModel.getServices().add(tokenFileProviderService);
-
 			GenService resourceFactoryService = XtextgenFactory.eINSTANCE.createGenService();
 			resourceFactoryService.setServiceInterfaceFQName("org.eclipse.xtext.resource.IResourceFactory");
 			resourceFactoryService.setGenClassFQName(namespace + ".services." + languageName + "ResourceFactory");
@@ -278,12 +254,6 @@ public class GeneratorFacade {
 			transientValueService
 					.setGenClassFQName("org.eclipse.xtext.parsetree.reconstr.impl.SimpleTransientValueService");
 			genModel.getServices().add(transientValueService);
-
-			GenService tokenScannerService = XtextgenFactory.eINSTANCE.createGenService();
-			tokenScannerService.setServiceInterfaceFQName("org.eclipse.xtext.parser.antlr.Lexer");
-			tokenScannerService.setGenClassFQName(namespace + ".parser.antlr.internal.Internal" + languageName
-					+ "Lexer");
-			genModel.getServices().add(tokenScannerService);
 
 			if (uiProjectPath != null) {
 				if (isGenerateXtendServices) {
@@ -353,6 +323,8 @@ public class GeneratorFacade {
 				genModel.getServices().add(lazyTreeProvider);
 			}
 		}
+		
+		new AntlrConnector().assemble(genModel);
 
 		return genModel;
 	}

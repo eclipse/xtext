@@ -46,7 +46,7 @@ toStringLiteral(Keyword this) :
 	'"'+this.value+'"';
 	
 String toLexerBody(ParserRule this):
-	JAVA org.eclipse.xtext.parser.TerminalRuleToLexerBody.toLexerBody(org.eclipse.xtext.ParserRule);
+	JAVA org.eclipse.xtext.parser.antlr.TerminalRuleToLexerBody.toLexerBody(org.eclipse.xtext.ParserRule);
 
 
 mustBeParenthesized(AbstractElement this) : true;
