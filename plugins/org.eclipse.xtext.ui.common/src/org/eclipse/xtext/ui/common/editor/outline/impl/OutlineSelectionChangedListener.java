@@ -8,8 +8,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.outline.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -26,8 +28,8 @@ import org.eclipse.xtext.ui.common.editor.outline.XtextContentOutlinePage;
 import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
 
 /**
- * This listener listens to selections in the outline and will update the
- * editor selection accordingly.
+ * This listener listens to selections in the outline and will update the editor
+ * selection accordingly.
  * 
  * @author Peter Friese - Initial contribution and API
  */
@@ -50,11 +52,11 @@ public final class OutlineSelectionChangedListener extends AbstractSelectionChan
 						NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(semanticNode);
 						if (nodeAdapter != null) {
 							CompositeNode parserNode = nodeAdapter.getParserNode();
-	
-							AbstractNode selectionNode = findSelectionNode(parserNode);
-							int offset = selectionNode.getOffset();
-							int length = selectionNode.getLength();
-	
+
+							SelectionCoordinates selectionNodeCoordinates = getSelectionNodeCoordinates(parserNode);
+							int offset = selectionNodeCoordinates.getOffset();
+							int length = selectionNodeCoordinates.getLength();
+
 							getSourceViewer().revealRange(offset, length);
 							getSourceViewer().setSelectedRange(offset, length);
 						}
@@ -67,17 +69,47 @@ public final class OutlineSelectionChangedListener extends AbstractSelectionChan
 		}
 	}
 
-	private AbstractNode findSelectionNode(CompositeNode startNode) {
+	private class SelectionCoordinates {
+		private int offset;
+		private int length;
+
+		public SelectionCoordinates(int offset, int length) {
+			this.setOffset(offset);
+			this.setLength(length);
+		}
+
+		public void setLength(int length) {
+			this.length = length;
+		}
+
+		public int getLength() {
+			return length;
+		}
+
+		public void setOffset(int offset) {
+			this.offset = offset;
+		}
+
+		public int getOffset() {
+			return offset;
+		}
+	}
+
+	private SelectionCoordinates getSelectionNodeCoordinates(CompositeNode startNode) {
 		EList<AbstractNode> leafNodes = startNode.getChildren();
 		AbstractNode keywordNode = null;
-		AbstractNode idNode = null;
+		List<AbstractNode> idNodes = null;
 		for (AbstractNode leafNode : leafNodes) {
 			EObject grammarElement = leafNode.getGrammarElement();
 			if (grammarElement instanceof RuleCall) {
 				RuleCall ruleCall = (RuleCall) grammarElement;
 				String ruleName = ruleCall.getRule().getName();
-				if (idNode == null && ruleName.equals("ID")) {
-					idNode = leafNode;
+
+				if (ruleName.equals("ID")) {
+					if (idNodes == null) {
+						idNodes = new ArrayList<AbstractNode>();
+					}
+					idNodes.add(leafNode);
 				}
 			}
 			else if (grammarElement instanceof Keyword) {
@@ -87,14 +119,18 @@ public final class OutlineSelectionChangedListener extends AbstractSelectionChan
 			}
 		}
 
-		if (idNode != null) {
-			return idNode;
+		if (idNodes != null) {
+			// if we've got more than one ID elements, we want to select them all
+			AbstractNode firstIdNode = idNodes.get(0);
+			AbstractNode lastIdNode = idNodes.get(idNodes.size() - 1);
+			int length = (lastIdNode.getOffset() - firstIdNode.getOffset()) + lastIdNode.getLength();
+			return new SelectionCoordinates(firstIdNode.getOffset(), length);
 		}
 		else if (keywordNode != null) {
-			return keywordNode;
+			return new SelectionCoordinates(keywordNode.getOffset(), keywordNode.getLength());
 		}
 		else {
-			return startNode;
+			return new SelectionCoordinates(startNode.getOffset(), startNode.getLength());
 		}
 	}
 }

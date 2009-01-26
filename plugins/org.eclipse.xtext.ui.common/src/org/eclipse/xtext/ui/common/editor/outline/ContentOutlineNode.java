@@ -21,6 +21,8 @@ public class ContentOutlineNode {
 	private String label;
 	private String image;
 	private EObject semanticNode;
+	private int selectionOffset;
+	private int selectionLength;
 	private List<ContentOutlineNode> children;
 	private ContentOutlineNode parent;
 
@@ -65,6 +67,22 @@ public class ContentOutlineNode {
 	
 	public ContentOutlineNode getParent() {
 		return parent;
+	}
+
+	public void setSelectionOffset(int selectionOffset) {
+		this.selectionOffset = selectionOffset;
+	}
+
+	public int getSelectionOffset() {
+		return selectionOffset;
+	}
+
+	public void setSelectionLength(int selectionLength) {
+		this.selectionLength = selectionLength;
+	}
+
+	public int getSelectionLength() {
+		return selectionLength;
 	}
 
 }

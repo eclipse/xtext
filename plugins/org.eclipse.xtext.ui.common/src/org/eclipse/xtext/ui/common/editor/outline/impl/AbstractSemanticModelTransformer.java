@@ -78,6 +78,7 @@ public abstract class AbstractSemanticModelTransformer implements ISemanticModel
 					return value.toString();
 				}
 			}
+			return (object.getClass().getName());
 		}
 		return "<unknown>";
 	}
