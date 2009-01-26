@@ -25,181 +25,181 @@ public class GenDomainmodelProposalProvider extends AbstractJavaProposalProvider
 	
 	
 			
-	public List<? extends ICompletionProposal> completeFileImports(Assignment assignment, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeFile_Imports(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeFileImports feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeFile_Imports feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
 		return Collections.emptyList();
 	}
 			
-	public List<? extends ICompletionProposal> completeFileNamedElements(Assignment assignment, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeFile_NamedElements(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeFileNamedElements feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeFile_NamedElements feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
 		return Collections.emptyList();
 	}
 			
-	public List<? extends ICompletionProposal> completeImportImportURI(Assignment assignment, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeImport_ImportURI(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeImportImportURI feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeImport_ImportURI feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal(assignment, "\"ImportImportURI\"", contentAssistContext));		
+		return Collections.singletonList(createCompletionProposal(assignment, "\"Import_ImportURI\"", contentAssistContext));		
 	}
 			
-	public List<? extends ICompletionProposal> completePackageName(Assignment assignment, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completePackage_Name(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completePackageName feature '" + assignment.getFeature() + "' terminal '"
-					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
-					+ contentAssistContext.getMatchString().trim() + "'");
-		}
-		return Collections.emptyList();
-	}
-			
-	public List<? extends ICompletionProposal> completePackageNamedElements(Assignment assignment, IContentAssistContext contentAssistContext) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("completePackageNamedElements feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completePackage_Name feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
 		return Collections.emptyList();
 	}
 			
-	public List<? extends ICompletionProposal> completeDataTypeName(Assignment assignment, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completePackage_NamedElements(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeDataTypeName feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completePackage_NamedElements feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal(assignment, "DataTypeName", contentAssistContext));
+		return Collections.emptyList();
 	}
 			
-	public List<? extends ICompletionProposal> completeEntityName(Assignment assignment, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeDataType_Name(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeEntityName feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeDataType_Name feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal(assignment, "EntityName", contentAssistContext));
+		return Collections.singletonList(createCompletionProposal(assignment, "DataType_Name", contentAssistContext));
 	}
 			
-	public List<? extends ICompletionProposal> completeEntitySuperType(Assignment assignment, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeEntity_Name(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeEntitySuperType feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeEntity_Name feature '" + assignment.getFeature() + "' terminal '"
+					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
+					+ contentAssistContext.getMatchString().trim() + "'");
+		}
+		return Collections.singletonList(createCompletionProposal(assignment, "Entity_Name", contentAssistContext));
+	}
+			
+	public List<? extends ICompletionProposal> completeEntity_SuperType(Assignment assignment, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeEntity_SuperType feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
 		return lookupCrossReference(((CrossReference)assignment.getTerminal()), contentAssistContext);
 	}
 			
-	public List<? extends ICompletionProposal> completeEntityFeatures(Assignment assignment, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeEntity_Features(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeEntityFeatures feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeEntity_Features feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
 		return Collections.emptyList();
 	}
 			
-	public List<? extends ICompletionProposal> completeAttributeName(Assignment assignment, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeAttribute_Name(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeAttributeName feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeAttribute_Name feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal(assignment, "AttributeName", contentAssistContext));
+		return Collections.singletonList(createCompletionProposal(assignment, "Attribute_Name", contentAssistContext));
 	}
 			
-	public List<? extends ICompletionProposal> completeAttributeType(Assignment assignment, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeAttribute_Type(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeAttributeType feature '" + assignment.getFeature() + "' terminal '"
-					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
-					+ contentAssistContext.getMatchString().trim() + "'");
-		}
-		return Collections.emptyList();
-	}
-			
-	public List<? extends ICompletionProposal> completeReferenceName(Assignment assignment, IContentAssistContext contentAssistContext) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("completeReferenceName feature '" + assignment.getFeature() + "' terminal '"
-					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
-					+ contentAssistContext.getMatchString().trim() + "'");
-		}
-		return Collections.singletonList(createCompletionProposal(assignment, "ReferenceName", contentAssistContext));
-	}
-			
-	public List<? extends ICompletionProposal> completeReferenceType(Assignment assignment, IContentAssistContext contentAssistContext) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("completeReferenceType feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeAttribute_Type feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
 		return Collections.emptyList();
 	}
 			
-	public List<? extends ICompletionProposal> completeReferenceOpposite(Assignment assignment, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeReference_Name(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeReferenceOpposite feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeReference_Name feature '" + assignment.getFeature() + "' terminal '"
+					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
+					+ contentAssistContext.getMatchString().trim() + "'");
+		}
+		return Collections.singletonList(createCompletionProposal(assignment, "Reference_Name", contentAssistContext));
+	}
+			
+	public List<? extends ICompletionProposal> completeReference_Type(Assignment assignment, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeReference_Type feature '" + assignment.getFeature() + "' terminal '"
+					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
+					+ contentAssistContext.getMatchString().trim() + "'");
+		}
+		return Collections.emptyList();
+	}
+			
+	public List<? extends ICompletionProposal> completeReference_Opposite(Assignment assignment, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeReference_Opposite feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
 		return lookupCrossReference(((CrossReference)assignment.getTerminal()), contentAssistContext);
 	}
 			
-	public List<? extends ICompletionProposal> completeOperationName(Assignment assignment, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeOperation_Name(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeOperationName feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeOperation_Name feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal(assignment, "OperationName", contentAssistContext));
+		return Collections.singletonList(createCompletionProposal(assignment, "Operation_Name", contentAssistContext));
 	}
 			
-	public List<? extends ICompletionProposal> completeOperationParams(Assignment assignment, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeOperation_Params(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeOperationParams feature '" + assignment.getFeature() + "' terminal '"
-					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
-					+ contentAssistContext.getMatchString().trim() + "'");
-		}
-		return Collections.emptyList();
-	}
-			
-			
-	public List<? extends ICompletionProposal> completeOperationType(Assignment assignment, IContentAssistContext contentAssistContext) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("completeOperationType feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeOperation_Params feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
 		return Collections.emptyList();
 	}
 			
-	public List<? extends ICompletionProposal> completeParameterName(Assignment assignment, IContentAssistContext contentAssistContext) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("completeParameterName feature '" + assignment.getFeature() + "' terminal '"
-					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
-					+ contentAssistContext.getMatchString().trim() + "'");
-		}
-		return Collections.singletonList(createCompletionProposal(assignment, "ParameterName", contentAssistContext));
-	}
 			
-	public List<? extends ICompletionProposal> completeParameterType(Assignment assignment, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeOperation_Type(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeParameterType feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeOperation_Type feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
 		return Collections.emptyList();
 	}
 			
-	public List<? extends ICompletionProposal> completeTypeRefReferenced(Assignment assignment, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeParameter_Name(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeTypeRefReferenced feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeParameter_Name feature '" + assignment.getFeature() + "' terminal '"
+					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
+					+ contentAssistContext.getMatchString().trim() + "'");
+		}
+		return Collections.singletonList(createCompletionProposal(assignment, "Parameter_Name", contentAssistContext));
+	}
+			
+	public List<? extends ICompletionProposal> completeParameter_Type(Assignment assignment, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeParameter_Type feature '" + assignment.getFeature() + "' terminal '"
+					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
+					+ contentAssistContext.getMatchString().trim() + "'");
+		}
+		return Collections.emptyList();
+	}
+			
+	public List<? extends ICompletionProposal> completeTypeRef_Referenced(Assignment assignment, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeTypeRef_Referenced feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
@@ -229,9 +229,9 @@ public class GenDomainmodelProposalProvider extends AbstractJavaProposalProvider
 			
 			
 			
-	public List<? extends ICompletionProposal> completeEcoreEString(RuleCall ruleCall, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeEcore_EString(RuleCall ruleCall, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeEcoreEString '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
+			logger.debug("completeEcore_EString '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
 					+ "' for model '" + contentAssistContext.getModel() + "' and prefix '" + contentAssistContext.getMatchString() + "'");
 		}
 		return Collections.emptyList();

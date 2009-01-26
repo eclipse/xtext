@@ -25,22 +25,22 @@ public class GenTestLanguageProposalProvider extends AbstractJavaProposalProvide
 	
 	
 			
-	public List<? extends ICompletionProposal> completeFileStuff(Assignment assignment, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeFile_Stuff(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeFileStuff feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeFile_Stuff feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
 		return Collections.emptyList();
 	}
 			
-	public List<? extends ICompletionProposal> completeStuffName(Assignment assignment, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeStuff_Name(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeStuffName feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeStuff_Name feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal(assignment, "StuffName", contentAssistContext));
+		return Collections.singletonList(createCompletionProposal(assignment, "Stuff_Name", contentAssistContext));
 	}
     
 			
