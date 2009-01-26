@@ -15,21 +15,29 @@ import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
  * @author Peter Friese - Initial contribution and API
  */
 public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransformer {
-	
+
 	public boolean consumeSemanticNode(EObject semanticNode) {
-		String name = semanticNode.eClass().getName();
-		if (LazyTransformingTreeProvider.logger.isDebugEnabled()) {
-			LazyTransformingTreeProvider.logger.debug("Consume semantic node type [" + name + "]?");
+		if (semanticNode != null) {
+			String name = semanticNode.eClass().getName();
+			if (LazyTransformingTreeProvider.logger.isDebugEnabled()) {
+				LazyTransformingTreeProvider.logger.debug("Consume semantic node type [" + name + "]?");
+			}
+			return true;
+		} else {
+			return false;
 		}
-		return true;
 	}
 
 	public boolean consumeSemanticChildNodes(EObject semanticNode) {
-		String name = semanticNode.eClass().getName();
-		if (LazyTransformingTreeProvider.logger.isDebugEnabled()) {
-			LazyTransformingTreeProvider.logger.debug("Consume semantic chidlren of node type [" + name + "]?");
+		if (semanticNode != null) {
+			String name = semanticNode.eClass().getName();
+			if (LazyTransformingTreeProvider.logger.isDebugEnabled()) {
+				LazyTransformingTreeProvider.logger.debug("Consume semantic chidlren of node type [" + name + "]?");
+			}
+			return true;
+		} else {
+			return false;
 		}
-		return true;
 	}
 
 	@Override
