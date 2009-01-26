@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.parser;
+package org.eclipse.xtext.parser.antlr;
 
 import java.io.IOException;
 import java.io.Writer;

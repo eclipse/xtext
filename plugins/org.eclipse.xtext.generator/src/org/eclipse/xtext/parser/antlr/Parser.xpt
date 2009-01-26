@@ -11,7 +11,7 @@
 
 «IMPORT xtext»
 «IMPORT xtextgen»
-«EXTENSION org::eclipse::xtext::parser::Parser»
+«EXTENSION org::eclipse::xtext::parser::antlr::Parser»
 «EXTENSION org::eclipse::xtext::Properties»
 
 «DEFINE root FOR GenService»
