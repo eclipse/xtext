@@ -1,0 +1,43 @@
+package org.eclipse.xtext.ui.common.editor.outline.impl;
+
+import junit.framework.TestCase;
+
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+
+public class DefaultSemanticModelTransformerTest extends TestCase {
+
+	private EObject root;
+	private EObject a1;
+	private EObject a2;
+
+	protected void setUp() throws Exception {
+		ResourceSet resourceSet = new ResourceSetImpl();
+		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
+		Resource resource = resourceSet.createResource(URI.createURI("src/org/eclipse/xtext/ui/common/editor/outline/impl/simplestructure.xmi"));
+		resource.load(null);
+		root = resource.getContents().get(0);
+		a1 = root.eContents().get(0);
+		a2 = root.eContents().get(1);
+	}
+	
+	public void testNullSafety() {
+		DefaultSemanticModelTransformer transformer = new DefaultSemanticModelTransformer();
+		assertFalse(transformer.consumeSemanticChildNodes(null));
+		assertFalse(transformer.consumeSemanticNode(null));
+		assertEquals("<unknown>", transformer.getText(null));
+	}
+	
+	public void testGetText() {
+		DefaultSemanticModelTransformer transformer = new DefaultSemanticModelTransformer();
+		String a1Text = transformer.getText(a1);
+		assertEquals("A1", a1Text);
+		String a2Text = transformer.getText(a2);
+		assertEquals("A2", a2Text);
+	}
+
+}
