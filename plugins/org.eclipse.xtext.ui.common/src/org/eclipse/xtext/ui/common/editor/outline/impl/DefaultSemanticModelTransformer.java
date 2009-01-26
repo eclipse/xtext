@@ -47,8 +47,10 @@ public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransf
 		outlineNode.setLabel(getText(semanticNode));
 		outlineNode.setImage("DefaultOutlineNode");
 		outlineNode.setSemanticNode(semanticNode);
-		outlineParentNode.getChildren().add(outlineNode);
-		outlineNode.setParent(outlineParentNode);
+		if (outlineParentNode != null) {
+			outlineParentNode.getChildren().add(outlineNode);
+			outlineNode.setParent(outlineParentNode);
+		}
 
 		return outlineNode;
 	}
