@@ -20,7 +20,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.xtext.crossref.ILinker;
-import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.ParseResult;
@@ -43,9 +42,6 @@ import org.eclipse.xtext.util.StringInputStream;
 public class XtextResource extends ResourceImpl {
 	@Inject
 	private IParser parser;
-
-	@Inject
-	private IAstFactory elementFactory;
 
 	@Inject
 	private ILinker linker;
@@ -98,7 +94,6 @@ public class XtextResource extends ResourceImpl {
 		try {
 			isLoading = true;
 			CompositeNode rootNode = parseResult.getRootNode();
-
 			parseResult = parser.reparse(rootNode, offset, replacedTextLength, newText);
 			clearOutput();
 			if (parseResult != null) {
@@ -139,7 +134,7 @@ public class XtextResource extends ResourceImpl {
 
 	@Override
 	protected void doLoad(InputStream inputStream, Map<?, ?> options) throws IOException {
-		parseResult = parser.parse(inputStream, elementFactory);
+		parseResult = parser.parse(inputStream);
 		if (parseResult != null) {
 			getErrors().addAll(createDiagnostics(parseResult));
 			EObject rootElement = parseResult.getRootASTElement();
@@ -201,14 +196,6 @@ public class XtextResource extends ResourceImpl {
 
 	public void setParser(IParser parser) {
 		this.parser = parser;
-	}
-
-	public IAstFactory getElementFactory() {
-		return elementFactory;
-	}
-
-	public void setElementFactory(IAstFactory elementFactory) {
-		this.elementFactory = elementFactory;
 	}
 
 	public ILinker getLinker() {

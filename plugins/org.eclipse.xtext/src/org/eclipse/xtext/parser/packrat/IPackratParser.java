@@ -8,12 +8,13 @@
 package org.eclipse.xtext.parser.packrat;
 
 import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface IPackratParser {
+public interface IPackratParser extends IParser {
 
 	IParseResult parse(CharSequence input);
 	

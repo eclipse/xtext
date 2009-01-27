@@ -5,7 +5,6 @@ package org.eclipse.xtext.parsetree.formatter.parser.antlr;
 
 import org.antlr.runtime.ANTLRInputStream;
 import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
-import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
@@ -20,11 +19,11 @@ public class FormatterTestLanguageParser extends org.eclipse.xtext.parser.antlr.
     protected AntlrTokenDefProvider antlrTokenDefProvider;
 	
 	@Override
-	protected IParseResult parse(String ruleName, ANTLRInputStream in, IAstFactory factory) {
+	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
 		InternalFormatterTestLanguageLexer lexer = new InternalFormatterTestLanguageLexer(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		InternalFormatterTestLanguageParser parser = new InternalFormatterTestLanguageParser(
-				stream, factory, grammarAccess.getGrammar());
+				stream, getElementFactory(), grammarAccess.getGrammar());
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());
 		try {
 			if(ruleName != null) {

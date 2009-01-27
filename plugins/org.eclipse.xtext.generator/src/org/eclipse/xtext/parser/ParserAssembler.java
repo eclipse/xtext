@@ -10,7 +10,9 @@ package org.eclipse.xtext.parser;
 import org.apache.log4j.Logger;
 import org.eclipse.xtext.parser.packrat.PackratParserAssembler;
 import org.eclipse.xtext.xtextgen.GenModel;
+import org.eclipse.xtext.xtextgen.GenService;
 import org.eclipse.xtext.xtextgen.IGenModelAssembler;
+import org.eclipse.xtext.xtextgen.XtextgenFactory;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -38,6 +40,11 @@ public class ParserAssembler implements IGenModelAssembler {
 			log.trace("Using default parser assembler '" + PackratParserAssembler.class.getName() + "'");
 		IGenModelAssembler defaultAssembler = new PackratParserAssembler();
 		defaultAssembler.assemble(model);
+		
+		GenService parserSelector = XtextgenFactory.eINSTANCE.createGenService();
+		parserSelector.setServiceInterfaceFQName(IParser.class.getName());
+		parserSelector.setGenClassFQName(SwitchingParser.class.getName());
+		model.getServices().add(parserSelector);
 	}
 	
 	private IGenModelAssembler findAssemblerByName(String className) {

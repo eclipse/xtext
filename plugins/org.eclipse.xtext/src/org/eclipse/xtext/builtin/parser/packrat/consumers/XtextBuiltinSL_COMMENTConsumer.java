@@ -41,7 +41,7 @@ public final class XtextBuiltinSL_COMMENTConsumer extends AbstractRuleAwareTermi
 		if (result) {
 			readChars(SL_COMMENTConsumer$$$1);
 			readChar('\r');
-			result = readChar('\n');
+			readChar('\n');
 		}
 		return result ? ConsumeResult.SUCCESS : ConsumeResult.EMPTY_MATCH;
 	}

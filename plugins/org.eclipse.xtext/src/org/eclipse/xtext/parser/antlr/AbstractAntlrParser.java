@@ -12,23 +12,77 @@ import java.io.InputStream;
 
 import org.antlr.runtime.ANTLRInputStream;
 import org.eclipse.emf.common.util.WrappedException;
+import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.parser.AbstractParser;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.parser.impl.PartialParsingUtil;
+import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.service.Inject;
+import org.eclipse.xtext.util.StringInputStream;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractAntlrParser extends AbstractParser {
+public abstract class AbstractAntlrParser extends AbstractParser<InputStream> implements IAntlrParser {
 
-	public IParseResult parse(String ruleName, InputStream in, IAstFactory factory) {
+	@Inject
+	private IAstFactory elementFactory;
+
+	@Inject
+	protected IGrammarAccess grammarAccess;
+
+	public IParseResult doParse(InputStream in) {
+		return parse(getDefaultRuleName(), in);
+	}
+
+	public IAstFactory getElementFactory() {
+		return elementFactory;
+	}
+	
+	public void setGrammarAccess(IGrammarAccess grammarAccess) {
+		this.grammarAccess = grammarAccess;
+	}
+
+	public IGrammarAccess getGrammarAccess() {
+		return grammarAccess;
+	}
+
+	public void setElementFactory(IAstFactory elementFactory) {
+		this.elementFactory = elementFactory;
+	}	
+
+	protected abstract String getDefaultRuleName();
+
+	protected abstract IParseResult parse(String ruleName, ANTLRInputStream in);
+	
+	public IParseResult parse(String ruleName, InputStream in) {
         try {
-            IParseResult parseResult = (IParseResult) parse(ruleName, new ANTLRInputStream(in), factory);
+            IParseResult parseResult = (IParseResult) parse(ruleName, new ANTLRInputStream(in));
             return parseResult;
         } catch (IOException e) {
             throw new WrappedException(e);
         }
     }
+
+	@Override
+	protected IParseResult doReparse(CompositeNode originalRootNode, int offset, int length, String change) {
+		return PartialParsingUtil.reparse(this, originalRootNode, offset, length, change);
+	}
+
+	@Override
+	protected InputStream createParseable(CharSequence s) {
+		return new StringInputStream(s.toString());
+	}
+
+	@Override
+	protected InputStream createParseable(InputStream in) {
+		return in;
+	}
+
+	@Override
+	protected boolean isReparseSupported() {
+		return true;
+	}
 	
-	protected abstract IParseResult parse(String ruleName, ANTLRInputStream in, IAstFactory factory);
 }

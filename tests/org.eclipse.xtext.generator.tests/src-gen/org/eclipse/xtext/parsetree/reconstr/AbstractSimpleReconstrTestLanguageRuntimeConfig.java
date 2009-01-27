@@ -41,7 +41,7 @@ public abstract class AbstractSimpleReconstrTestLanguageRuntimeConfig extends Ab
 		return org.eclipse.xtext.parser.antlr.AntlrEcoreElementFactory.class;
 	}
 		
-	protected Class<? extends org.eclipse.xtext.parser.IParser> getIParser() {
+	protected Class<? extends org.eclipse.xtext.parser.antlr.IAntlrParser> getIAntlrParser() {
 		return org.eclipse.xtext.parsetree.reconstr.parser.antlr.SimpleReconstrTestLanguageParser.class;
 	}
 		
@@ -57,6 +57,14 @@ public abstract class AbstractSimpleReconstrTestLanguageRuntimeConfig extends Ab
 		return org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguagePackratParser.class;
 	}
 		
+	protected Class<? extends org.eclipse.xtext.parser.packrat.IParseResultFactory> getIParseResultFactory() {
+		return org.eclipse.xtext.parser.packrat.ParseResultFactory.class;
+	}
+		
+	protected Class<? extends org.eclipse.xtext.parser.IParser> getIParser() {
+		return org.eclipse.xtext.parser.SwitchingParser.class;
+	}
+		
 	
 	public Set<IServiceRegistration> registrations() {
 		return scope(org.eclipse.xtext.parsetree.reconstr.ISimpleReconstrTestLanguage.SCOPE)
@@ -68,10 +76,12 @@ public abstract class AbstractSimpleReconstrTestLanguageRuntimeConfig extends Ab
 		.with(org.eclipse.xtext.parsetree.reconstr.ICrossReferenceSerializer.class, getICrossReferenceSerializer())
 		.with(org.eclipse.xtext.parsetree.reconstr.ITransientValueService.class, getITransientValueService())
 		.with(org.eclipse.xtext.parser.IAstFactory.class, getIAstFactory())
-		.with(org.eclipse.xtext.parser.IParser.class, getIParser())
+		.with(org.eclipse.xtext.parser.antlr.IAntlrParser.class, getIAntlrParser())
 		.with(org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider.class, getIAntlrTokenFileProvider())
 		.with(org.eclipse.xtext.parser.antlr.Lexer.class, getLexer())
 		.with(org.eclipse.xtext.parser.packrat.IPackratParser.class, getIPackratParser())
+		.with(org.eclipse.xtext.parser.packrat.IParseResultFactory.class, getIParseResultFactory())
+		.with(org.eclipse.xtext.parser.IParser.class, getIParser())
 		
 			.registrations();
 	}

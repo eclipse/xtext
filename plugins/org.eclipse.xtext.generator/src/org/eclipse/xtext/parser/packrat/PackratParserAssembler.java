@@ -28,6 +28,11 @@ public class PackratParserAssembler implements IGenModelAssembler {
 		packratParser.setGenClassFQName(namespace + ".parser.packrat." + languageName + "PackratParser");
 		packratParser.setTemplatePath("org::eclipse::xtext::parser::packrat::PackratParserGen::root");
 		model.getServices().add(packratParser);
+		
+		GenService parseResultFactory = XtextgenFactory.eINSTANCE.createGenService();
+		parseResultFactory.setServiceInterfaceFQName(IParseResultFactory.class.getName());
+		parseResultFactory.setGenClassFQName(ParseResultFactory.class.getName());
+		model.getServices().add(parseResultFactory);
 	}
 
 }

@@ -18,11 +18,11 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.xtext.parser.AbstractParser;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parser.ParseResult;
+import org.eclipse.xtext.parser.antlr.IAntlrParser;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
@@ -39,7 +39,7 @@ public class PartialParsingUtil {
 	private static final Logger log = Logger.getLogger(PartialParsingUtil.class);
 
 	@SuppressWarnings("unchecked")
-	public static IParseResult reparse(IParser parser, CompositeNode rootNode, int offset, int replacedTextLength,
+	public static IParseResult reparse(IAntlrParser parser, CompositeNode rootNode, int offset, int replacedTextLength,
 			String newText) {
 		if (offset + replacedTextLength > rootNode.getTotalLength()) {
 			log.error("Invalid replace region offset=" + offset + " length=" + replacedTextLength + " originalLength="
@@ -66,7 +66,7 @@ public class PartialParsingUtil {
 		String entryRuleName = parsingPointers.findEntryRuleName(replaceNode);
 		ParseResult parseResult = null;
 		try {
-			parseResult = (ParseResult) ((AbstractParser) parser).parse(entryRuleName, new StringInputStream(
+			parseResult = (ParseResult) parser.parse(entryRuleName, new StringInputStream(
 					reparseRegion));
 		}
 		catch (ParseException exc) {
