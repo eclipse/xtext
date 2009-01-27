@@ -9,9 +9,7 @@
 package org.eclipse.xtext.service;
 
 /**
- * 
  * @author Sven Efftinge - Initial contribution and API
- *
  */
 public class GenericServiceFactory implements IServiceFactory {
 	
@@ -31,7 +29,7 @@ public class GenericServiceFactory implements IServiceFactory {
 	    try {
 	        return serviceClass.newInstance();
 	    } catch(Exception exc) {
-	        throw new RuntimeException(exc);
+	        throw new RuntimeException(serviceClass.getSimpleName() + ": " + exc);
 	    }
 	}
 

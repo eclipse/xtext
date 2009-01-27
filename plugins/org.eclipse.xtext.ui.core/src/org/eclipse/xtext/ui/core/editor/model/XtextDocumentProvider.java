@@ -162,7 +162,8 @@ public class XtextDocumentProvider extends FileDocumentProvider implements IDocu
 	@Override
 	protected void disconnected() {
 		super.disconnected();
-		ResourcesPlugin.getWorkspace().removeResourceChangeListener(resourceChangeListener);
+		if (resourceChangeListener != null)
+			ResourcesPlugin.getWorkspace().removeResourceChangeListener(resourceChangeListener);
 	}
 
 }

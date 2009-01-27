@@ -17,10 +17,6 @@ public abstract class AbstractDummyTestLanguageRuntimeConfig extends AbstractSer
 		return org.eclipse.xtext.dummy.services.DummyTestLanguageGrammarAccess.class;
 	}
 		
-	protected Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> getIPackratParser() {
-		return org.eclipse.xtext.dummy.parser.packrat.DummyTestLanguagePackratParser.class;
-	}
-		
 	protected Class<? extends org.eclipse.xtext.resource.IResourceFactory> getIResourceFactory() {
 		return org.eclipse.xtext.dummy.services.DummyTestLanguageResourceFactory.class;
 	}
@@ -57,12 +53,15 @@ public abstract class AbstractDummyTestLanguageRuntimeConfig extends AbstractSer
 		return org.eclipse.xtext.dummy.parser.antlr.internal.InternalDummyTestLanguageLexer.class;
 	}
 		
+	protected Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> getIPackratParser() {
+		return org.eclipse.xtext.dummy.parser.packrat.DummyTestLanguagePackratParser.class;
+	}
+		
 	
 	public Set<IServiceRegistration> registrations() {
 		return scope(org.eclipse.xtext.dummy.IDummyTestLanguage.SCOPE)
 		.with(org.eclipse.xtext.IMetamodelAccess.class, getIMetamodelAccess())
 		.with(org.eclipse.xtext.IGrammarAccess.class, getIGrammarAccess())
-		.with(org.eclipse.xtext.parser.packrat.IPackratParser.class, getIPackratParser())
 		.with(org.eclipse.xtext.resource.IResourceFactory.class, getIResourceFactory())
 		.with(org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.class, getIParseTreeConstructor())
 		.with(org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.class, getITokenSerializer())
@@ -72,6 +71,7 @@ public abstract class AbstractDummyTestLanguageRuntimeConfig extends AbstractSer
 		.with(org.eclipse.xtext.parser.IParser.class, getIParser())
 		.with(org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider.class, getIAntlrTokenFileProvider())
 		.with(org.eclipse.xtext.parser.antlr.Lexer.class, getLexer())
+		.with(org.eclipse.xtext.parser.packrat.IPackratParser.class, getIPackratParser())
 		
 			.registrations();
 	}

@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.common.editor.syntaxcoloring;
+package org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,6 +13,7 @@ import java.util.Map.Entry;
 
 import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
 import org.eclipse.xtext.service.Inject;
+import org.eclipse.xtext.ui.common.editor.syntaxcoloring.ITokenStyle;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -23,17 +24,17 @@ public abstract class AbstractAntlrTokenColorer implements ITokenColorer {
 	@Inject
 	protected AntlrTokenDefProvider tokenDefProvider;
 
-	private Map<Integer, ITokenStyle> tokenStyleMap;
+	private Map<String, ITokenStyle> tokenStyleMap;
 
-	protected Map<Integer, ITokenStyle> getTokenStyleMap() {
+	protected Map<String, ITokenStyle> getTokenStyleMap() {
 		if (tokenStyleMap == null) {
-			tokenStyleMap = new HashMap<Integer, ITokenStyle>();
+			tokenStyleMap = new HashMap<String, ITokenStyle>();
 			Map<Integer, String> tokenDefMap = tokenDefProvider.getTokenDefMap();
 			//Using entrySet iterator is more efficient as keySet+get(key)
 			for (Entry<Integer, String> antlrTokenEntry : tokenDefMap.entrySet()) {
 				String antlrTokenDef = antlrTokenEntry.getValue();
 				ITokenStyle tokenStyle = deriveTokenStyle(antlrTokenDef);
-				tokenStyleMap.put(antlrTokenEntry.getKey(), tokenStyle);
+				tokenStyleMap.put(Integer.toString(antlrTokenEntry.getKey()), tokenStyle);
 			}
 		}
 		return tokenStyleMap;
@@ -41,14 +42,7 @@ public abstract class AbstractAntlrTokenColorer implements ITokenColorer {
 
 	protected abstract ITokenStyle deriveTokenStyle(String antlrTokenDef);
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.xtext.ui.common.editor.syntaxcoloring.tokentype.ITokenColorer
-	 * #getTokenStyle(org.antlr.runtime.Token)
-	 */
-	public ITokenStyle getTokenStyle(int tokenTypeID) {
+	public ITokenStyle getTokenStyle(String tokenTypeID) {
 		ITokenStyle tokenStyle = getTokenStyleMap().get(tokenTypeID);
 		return tokenStyle;
 	}

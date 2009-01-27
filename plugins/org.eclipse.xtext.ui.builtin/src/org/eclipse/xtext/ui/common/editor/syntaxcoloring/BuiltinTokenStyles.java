@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.common.editor.syntaxcoloring.tokens;
+package org.eclipse.xtext.ui.common.editor.syntaxcoloring;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.RGB;
