@@ -48,7 +48,8 @@ public abstract class AbstractParserComparingTest extends AbstractGeneratorTest 
 			XtextResource secondResult = secondHelper.getResourceFromStream(new StringInputStream(model));
 			checkResource(pair.getFirst() + " - " + getFirstParserName(), firstResult);
 			checkResource(pair.getFirst() + " - " + getSecondParserName(), secondResult);
-			comparator.assertSameStructure(firstResult.getParseResult().getRootASTElement(), firstResult.getParseResult().getRootASTElement());
+			comparator.assertSameStructure(firstResult.getParseResult().getRootASTElement(), secondResult.getParseResult().getRootASTElement());
+//			comparator.assertSameStructure(firstResult.getParseResult().getRootElement(), firstResult.getParseResult().getRootASTElement());
 		}
 	}
 	
