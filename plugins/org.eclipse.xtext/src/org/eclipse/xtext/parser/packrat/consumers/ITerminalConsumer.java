@@ -15,9 +15,23 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
  */
 public interface ITerminalConsumer {
 	
+	/**
+	 * Scan the configured input source for a consumable terminal at the current offset.
+	 * If it can be found, create a configured parsed token and increase the offset of the input.
+	 */
 	int consume(String feature, boolean isMany, boolean isBoolean, AbstractElement element, ISequenceMatcher notMatching);
 	
+	/**
+	 * Scan the configured input source for a consumable terminal at the current offset.
+	 * If it can be found, do nothing but increase the offset of the input.
+	 */
 	int consume();
+	
+	/**
+	 * Scan the configured input source for a consumable terminal at the current offset.
+	 * If it can be found, do nothing but increase the offset of the input.
+	 */
+	int consume(ISequenceMatcher notMatching);
 	
 	void setHidden(boolean hidden);
 	

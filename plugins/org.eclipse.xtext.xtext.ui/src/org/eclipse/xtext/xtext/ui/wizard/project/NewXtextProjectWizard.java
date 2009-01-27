@@ -192,10 +192,17 @@ public class NewXtextProjectWizard extends Wizard implements INewWizard {
 					+ ".parser.internal", basePackage + ".parsetree.reconstr", basePackage + ".services");
 			final IProject dslProject = EclipseResourceUtil.createProject(xtextProjectInfo.getProjectName(),
 					SRC_FOLDER_LIST, Collections.<IProject> emptyList(), new LinkedHashSet<String>(Arrays.asList(
-							"org.eclipse.xtext.log4j;bundle-version=\"1.2.15\"", "org.eclipse.xtext",
-							"org.eclipse.xtext.generator", "org.antlr.gen", "org.eclipse.xtend",
-							"org.eclipse.xtend.typesystem.emf", "org.eclipse.xpand", "org.apache.log4j",
-							"org.eclipse.xtend.util.stdlib")), exportedPackages, null, monitor,
+							"org.eclipse.xtext.log4j;bundle-version=\"1.2.15\"", 
+							"org.eclipse.xtext",
+							"org.eclipse.xtext.generator", 
+							"org.eclipse.xtend",
+							"org.eclipse.xtend.typesystem.emf", 
+							"org.eclipse.xpand",
+							"org.antlr",
+							"org.apache.log4j",
+							"de.itemis.xtext.antlr;resolution:=optional",
+							"org.eclipse.xtend.util.stdlib")), exportedPackages,
+							null, null, monitor,
 					NewXtextProjectWizard.this.getShell());
 
 			if (dslProject == null) {
@@ -211,7 +218,7 @@ public class NewXtextProjectWizard extends Wizard implements INewWizard {
 							xtextProjectInfo.getProjectName().toLowerCase() + ";visibility:=reexport",
 							"org.eclipse.xtext.ui.core", "org.eclipse.xtext.ui.common",
 							"org.eclipse.xtext.log4j;bundle-version=\"1.2.15\"",
-							"org.eclipse.ui.editors;bundle-version=\"3.4.0\"")), null, null, monitor,
+							"org.eclipse.ui.editors;bundle-version=\"3.4.0\"")), null, null, null, monitor,
 					NewXtextProjectWizard.this.getShell());
 
 			if (dslUIProject == null) {
@@ -226,7 +233,7 @@ public class NewXtextProjectWizard extends Wizard implements INewWizard {
 						+ ".generator", SRC_FOLDER_LIST, Collections.<IProject> emptyList(), new LinkedHashSet<String>(
 						Arrays.asList(xtextProjectInfo.getProjectName().toLowerCase(), "org.eclipse.xtext",
 								"org.eclipse.xtext.generator", "org.eclipse.xpand", "org.eclipse.xtend",
-								"org.eclipse.xtend.typesystem.emf")), Collections.<String> emptyList(), null, monitor,
+								"org.eclipse.xtend.typesystem.emf")), Collections.<String> emptyList(), null, null, monitor,
 						NewXtextProjectWizard.this.getShell());
 
 				if (dslGeneratorProject == null) {

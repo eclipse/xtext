@@ -35,16 +35,20 @@ public abstract class TerminalConsumer implements ITerminalConsumer {
 	}
 
 	public final int consume(String feature, boolean isMany, boolean isBoolean, AbstractElement element, ISequenceMatcher notMatching) {
-		int marker = mark();
+		int prevMarker = mark();
 		final int result = doConsume();
-		if (result == ConsumeResult.SUCCESS && notMatching.matches(input, marker, input.getOffset()- marker))
+		if (result == ConsumeResult.SUCCESS && notMatching.matches(input, prevMarker, input.getOffset()- prevMarker)) {
+			input.setOffset(prevMarker);
 			return ConsumeResult.EMPTY_MATCH;
+		}
 		if (result == ConsumeResult.SUCCESS) {
 			if (feature != null)
-				acceptor.accept(new ParsedTerminalWithFeature(marker, input.getOffset()-marker, 
+				acceptor.accept(new ParsedTerminalWithFeature(prevMarker, input.getOffset()-prevMarker, 
 						element != null ? element : getGrammarElement(), isHidden(), feature, isMany, isBoolean, getRuleName()));
 			else
-				acceptor.accept(new ParsedTerminal(marker, input.getOffset()-marker, element != null ? element : getGrammarElement(), isHidden()));
+				acceptor.accept(new ParsedTerminal(prevMarker, input.getOffset()-prevMarker, element != null ? element : getGrammarElement(), isHidden()));
+		} else {
+			input.setOffset(prevMarker);
 		}
 		return result;
 	}
@@ -55,6 +59,19 @@ public abstract class TerminalConsumer implements ITerminalConsumer {
 		if (result != ConsumeResult.SUCCESS) {
 			input.setOffset(prevOffset);
 		}
+		return result;
+	}
+	
+	public final int consume(ISequenceMatcher notMatching) {
+		int prevOffset = input.getOffset();
+		final int result = doConsume();
+		if (result == ConsumeResult.SUCCESS && notMatching.matches(input, prevOffset, input.getOffset() - prevOffset)) {
+			input.setOffset(prevOffset);
+			return ConsumeResult.EMPTY_MATCH;
+		}
+		if (result != ConsumeResult.SUCCESS) {
+			input.setOffset(prevOffset);
+		} 
 		return result;
 	}
 	

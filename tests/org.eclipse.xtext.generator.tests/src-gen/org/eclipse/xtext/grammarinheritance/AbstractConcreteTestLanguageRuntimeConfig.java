@@ -17,10 +17,6 @@ public abstract class AbstractConcreteTestLanguageRuntimeConfig extends Abstract
 		return org.eclipse.xtext.grammarinheritance.services.ConcreteTestLanguageGrammarAccess.class;
 	}
 		
-	protected Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> getIPackratParser() {
-		return org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguagePackratParser.class;
-	}
-		
 	protected Class<? extends org.eclipse.xtext.resource.IResourceFactory> getIResourceFactory() {
 		return org.eclipse.xtext.grammarinheritance.services.ConcreteTestLanguageResourceFactory.class;
 	}
@@ -57,12 +53,15 @@ public abstract class AbstractConcreteTestLanguageRuntimeConfig extends Abstract
 		return org.eclipse.xtext.grammarinheritance.parser.antlr.internal.InternalConcreteTestLanguageLexer.class;
 	}
 		
+	protected Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> getIPackratParser() {
+		return org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguagePackratParser.class;
+	}
+		
 	
 	public Set<IServiceRegistration> registrations() {
 		return scope(org.eclipse.xtext.grammarinheritance.IConcreteTestLanguage.SCOPE)
 		.with(org.eclipse.xtext.IMetamodelAccess.class, getIMetamodelAccess())
 		.with(org.eclipse.xtext.IGrammarAccess.class, getIGrammarAccess())
-		.with(org.eclipse.xtext.parser.packrat.IPackratParser.class, getIPackratParser())
 		.with(org.eclipse.xtext.resource.IResourceFactory.class, getIResourceFactory())
 		.with(org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.class, getIParseTreeConstructor())
 		.with(org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.class, getITokenSerializer())
@@ -72,6 +71,7 @@ public abstract class AbstractConcreteTestLanguageRuntimeConfig extends Abstract
 		.with(org.eclipse.xtext.parser.IParser.class, getIParser())
 		.with(org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider.class, getIAntlrTokenFileProvider())
 		.with(org.eclipse.xtext.parser.antlr.Lexer.class, getLexer())
+		.with(org.eclipse.xtext.parser.packrat.IPackratParser.class, getIPackratParser())
 		
 			.registrations();
 	}

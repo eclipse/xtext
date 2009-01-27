@@ -5,40 +5,38 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.common.editor.syntaxcoloring.tokens;
+package org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr;
 
 import java.util.regex.Pattern;
 
-import org.eclipse.xtext.ui.common.editor.syntaxcoloring.AbstractAntlrTokenColorer;
+import org.eclipse.xtext.ui.common.editor.syntaxcoloring.BuiltinTokenStyles;
 import org.eclipse.xtext.ui.common.editor.syntaxcoloring.ITokenStyle;
+import org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr.AbstractAntlrTokenColorer;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
-public class BuiltinTokenColorer extends AbstractAntlrTokenColorer {
+public class BuiltinAntlrTokenColorer extends AbstractAntlrTokenColorer {
 
 	private static final Pattern QUOTED = Pattern.compile("(?:^'([^']*)'$)|(?:^\"([^\"]*)\")$", Pattern.MULTILINE);
 	
 	private static final Pattern PUNCTUATION = Pattern.compile("\\p{Punct}*");
 	
-	/* (non-Javadoc)
-	 * @see org.eclipse.xtext.ui.common.editor.syntaxcoloring.tokentype.AbstractTokenTypeResolver#deriveTokenType(java.lang.String)
-	 */
 	@Override
-	protected ITokenStyle deriveTokenStyle(String antlrTokenDef) {
-		if(PUNCTUATION.matcher(antlrTokenDef).matches()) {
+	protected ITokenStyle deriveTokenStyle(String antlrTokenId) {
+		if(PUNCTUATION.matcher(antlrTokenId).matches()) {
 			return BuiltinTokenStyles.PUNCTUATION;
 		} 
-		if(QUOTED.matcher(antlrTokenDef).matches()) {
+		if(QUOTED.matcher(antlrTokenId).matches()) {
 			return BuiltinTokenStyles.KEYWORD;
 		}
-		if("RULE_STRING".equals(antlrTokenDef)) {
+		if("RULE_STRING".equals(antlrTokenId)) {
 			return BuiltinTokenStyles.STRING;
 		} 
-		if("RULE_INT".equals(antlrTokenDef)) {
+		if("RULE_INT".equals(antlrTokenId)) {
 			return BuiltinTokenStyles.NUMBER;
 		}
-		if("RULE_ML_COMMENT".equals(antlrTokenDef) | "RULE_SL_COMMENT".equals(antlrTokenDef)) {
+		if("RULE_ML_COMMENT".equals(antlrTokenId) | "RULE_SL_COMMENT".equals(antlrTokenId)) {
 			return BuiltinTokenStyles.COMMENT;
 		}
 		return BuiltinTokenStyles.DEFAULT;

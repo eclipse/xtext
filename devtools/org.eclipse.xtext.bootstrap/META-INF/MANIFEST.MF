@@ -13,6 +13,6 @@ Require-Bundle: org.eclipse.xtext.log4j;bundle-version="1.2.15",
  org.eclipse.xtend.typesystem.emf,
  org.eclipse.xtend.util.stdlib,
  org.eclipse.emf.ecore;bundle-version="2.4.0",
- org.antlr.gen;resolution:=optional,
- org.antlr.runtime;bundle-version="3.0.0"
+ org.antlr.runtime;bundle-version="3.0.0",
+ de.itemis.xtext.antlr;bundle-version="1.0.0";resolution:=optional
 Bundle-Vendor: %providerName

@@ -5,14 +5,15 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.common.editor.syntaxcoloring;
+package org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr;
 
+import org.eclipse.xtext.ui.common.editor.syntaxcoloring.ITokenStyle;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
 public interface ITokenColorer {
 
-	public abstract ITokenStyle getTokenStyle(int tokenTypeID);
+	ITokenStyle getTokenStyle(String antlrTokenType);
 
 }

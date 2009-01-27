@@ -17,10 +17,6 @@ public abstract class AbstractMultiValueFeatureTestLanguageRuntimeConfig extends
 		return org.eclipse.xtext.resource.metamodel.services.MultiValueFeatureTestLanguageGrammarAccess.class;
 	}
 		
-	protected Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> getIPackratParser() {
-		return org.eclipse.xtext.resource.metamodel.parser.packrat.MultiValueFeatureTestLanguagePackratParser.class;
-	}
-		
 	protected Class<? extends org.eclipse.xtext.resource.IResourceFactory> getIResourceFactory() {
 		return org.eclipse.xtext.resource.metamodel.services.MultiValueFeatureTestLanguageResourceFactory.class;
 	}
@@ -57,12 +53,15 @@ public abstract class AbstractMultiValueFeatureTestLanguageRuntimeConfig extends
 		return org.eclipse.xtext.resource.metamodel.parser.antlr.internal.InternalMultiValueFeatureTestLanguageLexer.class;
 	}
 		
+	protected Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> getIPackratParser() {
+		return org.eclipse.xtext.resource.metamodel.parser.packrat.MultiValueFeatureTestLanguagePackratParser.class;
+	}
+		
 	
 	public Set<IServiceRegistration> registrations() {
 		return scope(org.eclipse.xtext.resource.metamodel.IMultiValueFeatureTestLanguage.SCOPE)
 		.with(org.eclipse.xtext.IMetamodelAccess.class, getIMetamodelAccess())
 		.with(org.eclipse.xtext.IGrammarAccess.class, getIGrammarAccess())
-		.with(org.eclipse.xtext.parser.packrat.IPackratParser.class, getIPackratParser())
 		.with(org.eclipse.xtext.resource.IResourceFactory.class, getIResourceFactory())
 		.with(org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.class, getIParseTreeConstructor())
 		.with(org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.class, getITokenSerializer())
@@ -72,6 +71,7 @@ public abstract class AbstractMultiValueFeatureTestLanguageRuntimeConfig extends
 		.with(org.eclipse.xtext.parser.IParser.class, getIParser())
 		.with(org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider.class, getIAntlrTokenFileProvider())
 		.with(org.eclipse.xtext.parser.antlr.Lexer.class, getLexer())
+		.with(org.eclipse.xtext.parser.packrat.IPackratParser.class, getIPackratParser())
 		
 			.registrations();
 	}

@@ -8,10 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.syntaxcoloring;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
 import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.ui.common.editor.preferencepage.CommonPreferenceConstants;
 import org.eclipse.xtext.ui.core.editor.preferences.AbstractPreferencePage;
@@ -19,15 +18,12 @@ import org.eclipse.xtext.ui.core.editor.utils.TextStyle;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
- * 
+ * @author Sebastian Zarnekow
  */
 public class SyntaxColoringPreferencePage extends AbstractPreferencePage {
 
 	@Inject
-	private AntlrTokenDefProvider tokenDefProvider;
-
-	@Inject
-	private ITokenColorer tc;
+	private ITokenStyleProvider tokenStyleProvider;
 
 	@Override
 	protected String qualifiedName() {
@@ -36,26 +32,19 @@ public class SyntaxColoringPreferencePage extends AbstractPreferencePage {
 
 	@Override
 	protected void createFieldEditors() {
-		List<ITokenStyle> allTokenTypes = new ArrayList<ITokenStyle>();
-		for (Integer id : tokenDefProvider.getTokenDefMap().keySet()) {
-			ITokenStyle tokenStyle = tc.getTokenStyle(id);
-			if (!allTokenTypes.contains(tokenStyle)) {
-				allTokenTypes.add(tokenStyle);
-			}
-		}
-		refreshTokenStyles(allTokenTypes);
+		final List<ITokenStyle> allTokenStyles = Arrays.asList(tokenStyleProvider.getTokenStyles());
+		refreshTokenStyles(allTokenStyles);
 		addField(new TokenTypeDefMasterDetailFieldEditor(CommonPreferenceConstants.TOKEN_STYLES_PREFERENCE_TAG,
-				"Token Styles", getFieldEditorParent(), getPreferenceStore(), allTokenTypes));
+				"Token Styles", getFieldEditorParent(), getPreferenceStore(), allTokenStyles));
 	}
 
 	/**
-	 * @param allTokenTypes
+	 * @param allTokenStyles
 	 */
-	private void refreshTokenStyles(List<ITokenStyle> allTokenTypes) {
+	private void refreshTokenStyles(List<ITokenStyle> allTokenStyles) {
 		PreferenceStoreAccessor preferenceStoreAccessor = new PreferenceStoreAccessor(getServiceScope());
-		for (ITokenStyle tokenTypeDef : allTokenTypes) {
-			preferenceStoreAccessor.populateTextStyle(tokenTypeDef.getID(), new TextStyle(), tokenTypeDef
-					.getDefaultTextStyle());
+		for (ITokenStyle tokenTypeDef : allTokenStyles) {
+			preferenceStoreAccessor.populateTextStyle(tokenTypeDef.getID(), new TextStyle(), tokenTypeDef.getDefaultTextStyle());
 		}
 	}
 

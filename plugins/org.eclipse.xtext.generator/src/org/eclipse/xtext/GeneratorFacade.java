@@ -37,7 +37,7 @@ import org.eclipse.xtend.expression.Variable;
 import org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel;
 import org.eclipse.xtext.ecore.GenerateJavaFromEcore;
 import org.eclipse.xtext.grammaraccess.GrammarAccessUtil;
-import org.eclipse.xtext.parser.antlr.AntlrConnector;
+import org.eclipse.xtext.parser.ParserAssembler;
 import org.eclipse.xtext.resource.metamodel.Xtext2EcoreTransformer;
 import org.eclipse.xtext.xtextgen.GenModel;
 import org.eclipse.xtext.xtextgen.GenService;
@@ -210,11 +210,7 @@ public class GeneratorFacade {
 		// "org.eclipse.xtext.ui.grammarAccess");
 		genModel.getServices().add(grammarAccessService);
 
-		GenService packratParser = XtextgenFactory.eINSTANCE.createGenService();
-		packratParser.setServiceInterfaceFQName("org.eclipse.xtext.parser.packrat.IPackratParser");
-		packratParser.setGenClassFQName(namespace + ".parser.packrat." + languageName + "PackratParser");
-		packratParser.setTemplatePath("org::eclipse::xtext::parser::packrat::PackratParserGen::root");
-		genModel.getServices().add(packratParser);
+		
 
 		if (!GrammarUtil.isAbstract(grammarModel)) {
 
@@ -324,7 +320,7 @@ public class GeneratorFacade {
 			}
 		}
 		
-		new AntlrConnector().assemble(genModel);
+		new ParserAssembler().assemble(genModel);
 
 		return genModel;
 	}

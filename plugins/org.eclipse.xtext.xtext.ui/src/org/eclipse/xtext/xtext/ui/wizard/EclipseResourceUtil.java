@@ -57,8 +57,9 @@ public class EclipseResourceUtil {
 
 	public static IProject createProject(final String projectName, final List<String> srcFolders,
 			final List<IProject> referencedProjects, final Set<String> requiredBundles,
-			final List<String> exportedPackages, String activatorClassName, final IProgressMonitor progressMonitor,
-			final Shell theShell) {
+			final List<String> exportedPackages, final List<String> importedPackages, 
+			final String activatorClassName, 
+			final IProgressMonitor progressMonitor,	final Shell theShell) {
 		IProject project = null;
 		try {
 			progressMonitor.beginTask("", 10);
@@ -132,7 +133,7 @@ public class EclipseResourceUtil {
 
 			javaProject.setOutputLocation(new Path("/" + projectName + "/bin"), new SubProgressMonitor(progressMonitor,
 					1));
-			createManifest(projectName, requiredBundles, exportedPackages, activatorClassName, progressMonitor, project);
+			createManifest(projectName, requiredBundles, exportedPackages, importedPackages, activatorClassName, progressMonitor, project);
 			createBuildProps(progressMonitor, project, srcFolders);
 		}
 		catch (final Exception exception) {
@@ -193,8 +194,9 @@ public class EclipseResourceUtil {
 	}
 
 	private static void createManifest(final String projectName, final Set<String> requiredBundles,
-			final List<String> exportedPackages, String activatorClassName, final IProgressMonitor progressMonitor,
-			final IProject project) throws CoreException {
+			final List<String> exportedPackages, final List<String> importedPackages,
+			final String activatorClassName, 
+			final IProgressMonitor progressMonitor,	final IProject project) throws CoreException {
 		final StringBuilder mainContent = new StringBuilder("Manifest-Version: 1.0\n");
 		mainContent.append("Bundle-ManifestVersion: 2\n");
 		mainContent.append("Bundle-Name: " + projectName + "\n");
@@ -224,6 +226,14 @@ public class EclipseResourceUtil {
 			mainContent.append("Export-Package: " + exportedPackages.get(0));
 			for (int i = 1, x = exportedPackages.size(); i < x; i++) {
 				mainContent.append(",\n " + exportedPackages.get(i));
+			}
+			mainContent.append("\n");
+		}
+		
+		if (importedPackages != null && !importedPackages.isEmpty()) {
+			mainContent.append("Import-Package: " + importedPackages.get(0));
+			for (int i = 1, x = importedPackages.size(); i < x; i++) {
+				mainContent.append(",\n " + importedPackages.get(i));
 			}
 			mainContent.append("\n");
 		}

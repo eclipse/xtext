@@ -187,12 +187,12 @@ public abstract class AbstractParseTreeConstructor implements
 		}
 
 		public Solution firstSolution() {
-			if (log.isDebugEnabled())
-				log.debug("->" + depth(this) + getClass().getSimpleName()
+			if (log.isTraceEnabled())
+				log.trace("->" + depth(this) + getClass().getSimpleName()
 						+ "\t " + current + " -> " + dsl(this));
 			Solution t1 = createSolution();
-			if (log.isDebugEnabled())
-				log.debug("< "
+			if (log.isTraceEnabled())
+				log.trace("< "
 						+ depth(this)
 						+ getClass().getSimpleName()
 						+ " -> "
@@ -258,8 +258,8 @@ public abstract class AbstractParseTreeConstructor implements
 		}
 
 		public Solution nextSolution(AbstractToken limit, Solution last) {
-			if (log.isDebugEnabled())
-				log.debug("--" + depth(limit)
+			if (log.isTraceEnabled())
+				log.trace("--" + depth(limit)
 						+ limit.getClass().getSimpleName()
 						+ " -> nextSolution()");
 			AbstractToken t = this;
@@ -270,9 +270,9 @@ public abstract class AbstractParseTreeConstructor implements
 					if (s != null) {
 						boolean valid = last.getCurrent().getDelegate() == s
 								.getCurrent().getDelegate();
-						if (log.isDebugEnabled())
+						if (log.isTraceEnabled())
 							log
-									.debug("--"
+									.trace("--"
 											+ depth(this)
 											+ getClass().getSimpleName()
 											+ " -> nextSolution() -> "
@@ -289,8 +289,8 @@ public abstract class AbstractParseTreeConstructor implements
 				} while (s != null);
 				t = t.predecessor;
 			}
-			if (log.isDebugEnabled())
-				log.debug("-- " + depth(this) + getClass().getSimpleName()
+			if (log.isTraceEnabled())
+				log.trace("-- " + depth(this) + getClass().getSimpleName()
 						+ " -> nextSolution() -> not found");
 			if (t == null)
 				throw new IllegalStateException("Bug found");

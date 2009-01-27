@@ -1,21 +1,19 @@
-«REM»
 /*******************************************************************************
- * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
  *******************************************************************************/
-«ENDREM»
+package org.eclipse.xtext.ui.common.editor.syntaxcoloring;
 
-«IMPORT xtext»
-«IMPORT xtextgen»
-«EXTENSION org::eclipse::xtext::parser::antlr::Parser»
-«EXTENSION org::eclipse::xtext::Properties»
+import org.eclipse.xtext.service.ILanguageService;
 
-«DEFINE root FOR GenService»
-	«EXPAND IParser::parser»
-	«EXPAND AntlrGrammar::grammar»
-	«runAntlrTool(outletPath("SRC_GEN") + "/" +internalAntlrGrammarFullPath())»
-«ENDDEFINE»
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
+public interface ITokenStyleProvider extends ILanguageService {
+
+	ITokenStyle[] getTokenStyles();
+	
+}
