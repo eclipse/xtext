@@ -9,14 +9,10 @@ package org.eclipse.xtext.parser;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
-import org.eclipse.xtext.parser.packrat.IPackratParser;
-import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -24,12 +20,12 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ParserTestHelper implements IParser, IResourceFactory {
+public class ParserTestHelper {
 
 	private final IResourceFactory factory;
-	private final IPackratParser parser;
+	private final IParser parser;
 
-	public ParserTestHelper(IResourceFactory factory, IPackratParser parser) {
+	public ParserTestHelper(IResourceFactory factory, IParser parser) {
 		this.factory = factory;
 		this.parser = parser;
 	}
@@ -50,37 +46,9 @@ public class ParserTestHelper implements IParser, IResourceFactory {
 		return resource;
 	}
 
-	public IParseResult parse(InputStream in, IAstFactory factory) {
-		final Reader reader = new InputStreamReader(in);
-		final StringBuilder builder = new StringBuilder();
-		final char[] buffer = new char[256];
-		int read = 0;
-		try {
-			while ((read = reader.read(buffer)) != -1) {
-				builder.append(buffer, 0, read);
-			}
-		}
-		catch (IOException ex) {
-			throw new RuntimeException(ex);
-		}
-		return parser.parse(builder.toString());
-	}
-
-	public IParseResult parse(InputStream in) {
-		throw new UnsupportedOperationException();
-	}
-
-	public IParseResult reparse(CompositeNode originalRootNode, int offset, int length, String change) {
-		throw new UnsupportedOperationException();
-	}
-
-	public String[] getModelFileExtensions() {
-		return null;
-	}
-
 	public XtextResource createResource(URI uri) {
 		XtextResource result = (XtextResource) factory.createResource(uri);
-		result.setParser(this);
+		result.setParser(parser);
 		return result;
 	}
 }
