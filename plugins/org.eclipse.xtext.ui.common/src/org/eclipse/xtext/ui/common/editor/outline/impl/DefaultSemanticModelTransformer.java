@@ -32,7 +32,7 @@ public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransf
 		if (semanticNode != null) {
 			String name = semanticNode.eClass().getName();
 			if (LazyTransformingTreeProvider.logger.isDebugEnabled()) {
-				LazyTransformingTreeProvider.logger.debug("Consume semantic chidlren of node type [" + name + "]?");
+				LazyTransformingTreeProvider.logger.debug("Consume semantic children of node type [" + name + "]?");
 			}
 			return true;
 		} else {
@@ -47,10 +47,20 @@ public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransf
 		outlineNode.setLabel(getText(semanticNode));
 		outlineNode.setImage("DefaultOutlineNode");
 		outlineNode.setSemanticNode(semanticNode);
+		
+		// link with parent
 		if (outlineParentNode != null) {
 			outlineParentNode.getChildren().add(outlineNode);
 			outlineNode.setParent(outlineParentNode);
 		}
+		
+		/* This adapter will be added to the semantic node in order to later be able to get the corresponding 
+		 * ContentOutlineNode. This is needed e.g. when we want to synch the outline with the currently selected
+		 * editor position. 
+		 */
+		ContentOutlineNodeAdapter adapter = (ContentOutlineNodeAdapter) ContentOutlineNodeAdapterFactory.INSTANCE
+				.adapt(semanticNode, ContentOutlineNodeAdapter.class);
+		adapter.setContentOutlineNode(outlineNode);
 
 		return outlineNode;
 	}

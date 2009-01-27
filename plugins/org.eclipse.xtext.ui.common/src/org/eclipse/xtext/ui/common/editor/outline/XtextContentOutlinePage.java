@@ -10,9 +10,8 @@ package org.eclipse.xtext.ui.common.editor.outline;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Assert;
-import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.source.ISourceViewer;
@@ -31,6 +30,8 @@ import org.eclipse.xtext.parsetree.ParseTreeUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.service.StatefulService;
+import org.eclipse.xtext.ui.common.editor.outline.impl.ContentOutlineNodeAdapter;
+import org.eclipse.xtext.ui.common.editor.outline.impl.ContentOutlineNodeAdapterFactory;
 import org.eclipse.xtext.ui.common.editor.outline.impl.EditorSelectionChangedListener;
 import org.eclipse.xtext.ui.common.editor.outline.impl.LazyVirtualContentOutlinePage;
 import org.eclipse.xtext.ui.common.editor.outline.impl.LinkingHelper;
@@ -61,13 +62,13 @@ public class XtextContentOutlinePage extends LazyVirtualContentOutlinePage imple
 		configureProviders();
 		configureDocument();
 	}
-	
+
 	@Override
 	public void init(IPageSite pageSite) {
 		super.init(pageSite);
 		registerToolbarActions(getSite().getActionBars());
 	}
-	
+
 	@Override
 	public void dispose() {
 		outlineSelectionChangedListener.uninstall(this);
@@ -80,7 +81,7 @@ public class XtextContentOutlinePage extends LazyVirtualContentOutlinePage imple
 	private void registerToolbarActions(IActionBars actionBars) {
 		IToolBarManager toolBarManager = actionBars.getToolBarManager();
 		if (toolBarManager != null) {
-			 toolBarManager.add(new ToggleLinkWithEditorAction(this));
+			toolBarManager.add(new ToggleLinkWithEditorAction(this));
 		}
 	}
 
@@ -88,10 +89,10 @@ public class XtextContentOutlinePage extends LazyVirtualContentOutlinePage imple
 		TreeViewer viewer = getTreeViewer();
 		viewer.setAutoExpandLevel(2);
 	}
-	
+
 	@Inject
 	private ILazyTreeProvider provider;
-	
+
 	private void configureProviders() {
 		getTreeViewer().setContentProvider(provider);
 		getTreeViewer().setLabelProvider(provider);
@@ -147,18 +148,18 @@ public class XtextContentOutlinePage extends LazyVirtualContentOutlinePage imple
 		getOutlineSelectionListener().install(this);
 		getEditorSelectionChangedListener().install(sourceViewer.getSelectionProvider());
 	}
-	
+
 	public ISourceViewer getSourceViewer() {
 		return sourceViewer;
 	}
-	
+
 	private OutlineSelectionChangedListener getOutlineSelectionListener() {
 		if (outlineSelectionChangedListener == null) {
 			outlineSelectionChangedListener = new OutlineSelectionChangedListener(this);
 		}
 		return outlineSelectionChangedListener;
 	}
-	
+
 	private EditorSelectionChangedListener getEditorSelectionChangedListener() {
 		if (editorSelectionChangedListener == null) {
 			editorSelectionChangedListener = new EditorSelectionChangedListener(this);
@@ -169,11 +170,11 @@ public class XtextContentOutlinePage extends LazyVirtualContentOutlinePage imple
 	public boolean isLinkingEnabled() {
 		return LinkingHelper.isLinkingEnabled();
 	}
-	
+
 	public void setLinkingEnabled(boolean enabled) {
 		LinkingHelper.setLinkingEnabled(enabled);
 	}
-	
+
 	public IXtextDocument getDocument() {
 		return XtextDocumentUtil.get(getSourceViewer());
 	}
@@ -192,20 +193,29 @@ public class XtextContentOutlinePage extends LazyVirtualContentOutlinePage imple
 			}
 		});
 	}
-	
+
 	private boolean shouldSynchronizeOutlinePage() {
 		return isLinkingEnabled();
 	}
-	
+
 	public void synchronizeOutlinePage(AbstractNode node) {
 		ISelection selection = StructuredSelection.EMPTY;
 
 		if (shouldSynchronizeOutlinePage()) {
 			if (node != null) {
-				CompositeNode compositeNode = node instanceof CompositeNode? (CompositeNode) node : node.getParent();
+				EObject nearestSemanticObject = NodeUtil.getNearestSemanticObject(node);
+
+				CompositeNode compositeNode = node instanceof CompositeNode ? (CompositeNode) node : node.getParent();
 				EObject astElement = NodeUtil.getASTElementForRootNode(compositeNode);
 				if (astElement != null) {
-					selection = new StructuredSelection(astElement);
+					ContentOutlineNodeAdapter adapter = (ContentOutlineNodeAdapter) ContentOutlineNodeAdapterFactory.INSTANCE
+							.adapt(astElement, ContentOutlineNode.class);
+					if (adapter != null) {
+						ContentOutlineNode contentOutlineNode = adapter.getContentOutlineNode();
+						if (contentOutlineNode != null) {
+							selection = new StructuredSelection(contentOutlineNode);
+						}
+					}
 				}
 			}
 			outlineSelectionChangedListener.uninstall(this);
@@ -213,9 +223,9 @@ public class XtextContentOutlinePage extends LazyVirtualContentOutlinePage imple
 			outlineSelectionChangedListener.install(this);
 		}
 	}
-	
+
 	public void setSelection(ISelection selection, boolean reveal) {
 		getTreeViewer().setSelection(selection, reveal);
 	}
-	
+
 }
