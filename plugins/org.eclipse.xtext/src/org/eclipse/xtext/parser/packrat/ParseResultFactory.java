@@ -145,8 +145,10 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 		final ParsedNonTerminal nonTerminal = nonterminalStack.removeLast();
 		EObject created = currentStack.removeLast();
 		if (!token.isDatatype()) {
-			if (created == null)
+			if (created == null) {
 				created = factory.create(nonTerminal.getTypeName());
+				associateNodeWithAstElement(currentNode, created);
+			}
 			if (token.getFeature() == null) {
 				if (currentStack.isEmpty())
 					currentStack.add(created);
@@ -161,8 +163,6 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 						((RuleCall)nonTerminal.getGrammarElement()).getRule();
 				setFeatureValue(token, created, rule);
 			}
-			if (created != null)
-				associateNodeWithAstElement(currentNode, created);
 		} else {
 			if (token.getFeature() != null) {
 				final StringBuilder builder = new StringBuilder(token.getLength());
@@ -174,8 +174,9 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 				setFeatureValue(token, builder.toString(), rule);
 			}
 		}
-		if (currentNode.getParent() != null)
+		if (currentNode.getParent() != null) {
 			currentNode = currentNode.getParent();
+		}
 	}
 
 	private void setFeatureValue(ParsedNonTerminalEnd token, Object created, AbstractRule rule) {
@@ -184,7 +185,7 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 			throw new RuntimeException("Unexpected empty stack");
 		} else if (currentStack.getLast() == null) {
 			current = factory.create(nonterminalStack.getLast().getTypeName());
-			
+			associateNodeWithAstElement(currentNode.getParent(), current);
 			currentStack.set(currentStack.size() - 1, current);
 		} else {
 			current = currentStack.getLast();
@@ -257,6 +258,7 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 			throw new RuntimeException("Unexpected empty stack");
 		} else if (currentStack.getLast() == null) {
 			current = factory.create(nonterminalStack.getLast().getTypeName());
+			associateNodeWithAstElement(currentNode, current);
 			currentStack.set(currentStack.size() - 1, current);
 		} else {
 			current = currentStack.getLast();

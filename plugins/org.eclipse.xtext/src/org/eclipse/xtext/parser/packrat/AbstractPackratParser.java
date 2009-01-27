@@ -7,12 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.packrat;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.parser.AbstractParser;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.packrat.Marker.IMarkerClient;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -33,11 +38,13 @@ import org.eclipse.xtext.parser.packrat.tokens.AbstractParsedToken;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedAction;
 import org.eclipse.xtext.service.Inject;
+import org.eclipse.xtext.service.StatefulService;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractPackratParser implements
+@StatefulService
+public abstract class AbstractPackratParser extends AbstractParser<CharSequence> implements
 	IPackratParser,
 	IMarkerFactory, 
 	IMarkerClient,
@@ -286,6 +293,33 @@ public abstract class AbstractPackratParser implements
 		this.hiddens = hiddenConsumers;
 		for(ITerminalConsumer hidden: this.hiddens)
 			hidden.setHidden(true);
+	}
+
+	@Override
+	protected CharSequence createParseable(CharSequence sequence) {
+		return sequence;
+	}
+
+	@Override
+	protected CharSequence createParseable(InputStream stream) {
+		try {
+			char[] buff = new char[1024];
+			BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
+			CharArrayWriterAsSequence result = new CharArrayWriterAsSequence(stream.available());
+			int chars = 0;
+			while((chars = reader.read(buff)) != -1) {
+				result.write(buff, 0, chars);
+			}
+			reader.close();
+			return result;
+		} catch(IOException ex) {
+			throw new WrappedException(ex);
+		}
+	}
+
+	@Override
+	protected IParseResult doParse(CharSequence sequence) {
+		return parse(sequence);
 	}
 	
 }

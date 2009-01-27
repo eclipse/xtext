@@ -9,46 +9,53 @@
 package org.eclipse.xtext.parser;
 
 import java.io.InputStream;
+import java.util.List;
 
-import org.eclipse.xtext.IGrammarAccess;
-import org.eclipse.xtext.parser.impl.PartialParsingUtil;
 import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.service.Inject;
+import org.eclipse.xtext.parsetree.LeafNode;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- * 
  */
-public abstract class AbstractParser implements IParser {
+public abstract class AbstractParser<Parseable> implements IParser {
 
-    @Inject
-    private IAstFactory astElementFactory;
+	protected boolean isReparseSupported() {
+		return false;
+	}
 
-    @Inject
-    protected IGrammarAccess grammarAccess;
+	public final IParseResult parse(InputStream in) {
+		return doParse(createParseable(in));
+	}
 
-    public abstract IParseResult parse(String ruleName, InputStream in, IAstFactory factory);
+	protected abstract IParseResult doParse(Parseable parseable);
 
-    public IParseResult parse(InputStream in, IAstFactory factory) {
-        return parse(getDefaultRuleName(), in, factory);
-    }
-
-    public IParseResult parse(InputStream in) {
-        return parse(getDefaultRuleName(), in, getDefaultASTFactory());
-    }
-
-    public IParseResult reparse(CompositeNode originalRootNode, int offset, int length, String change) {
-    	return PartialParsingUtil.reparse(this, originalRootNode, offset, length, change);
-    }
-
-    public IParseResult parse(String ruleName, InputStream in) {
-        return parse(ruleName, in, getDefaultASTFactory());
-    }
-    
-    protected IAstFactory getDefaultASTFactory() {
-        return astElementFactory;
-    }
-
-    protected abstract String getDefaultRuleName();
+	public final IParseResult reparse(CompositeNode originalRootNode, int offset, int length, String change) {
+		if (!isReparseSupported()) {
+			final List<LeafNode> leafNodes = originalRootNode.getLeafNodes();
+			final StringBuilder builder = new StringBuilder(originalRootNode.getTotalLength());
+			for (LeafNode leaf: leafNodes) {
+				if ((leaf.getTotalOffset() + leaf.getTotalLength() <= offset) || (leaf.getTotalOffset() > offset + length))
+					builder.append(leaf.getText());
+				else {
+					if (leaf.getTotalOffset() < offset) {
+						builder.append(leaf.getText().subSequence(0, offset - leaf.getTotalOffset()));
+						builder.append(change);
+					} else if (leaf.getTotalOffset() + leaf.getTotalLength() > offset + length) {
+						builder.append(leaf.getText().substring(offset + length - leaf.getTotalOffset()));
+					}
+				}
+			}
+			return doParse(createParseable(builder));
+		}
+		return doReparse(originalRootNode, offset, length, change);
+	}
+	
+	protected IParseResult doReparse(CompositeNode originalRootNode, int offset, int length, String change) {
+		throw new UnsupportedOperationException();
+	}
+	
+	protected abstract Parseable createParseable(CharSequence sequence);
+	
+	protected abstract Parseable createParseable(InputStream stream);
 
 }

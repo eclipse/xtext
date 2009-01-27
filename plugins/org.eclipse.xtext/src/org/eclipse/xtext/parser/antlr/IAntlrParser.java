@@ -1,25 +1,22 @@
 /*******************************************************************************
- * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
  *******************************************************************************/
-package org.eclipse.xtext.parser;
+package org.eclipse.xtext.parser.antlr;
 
 import java.io.InputStream;
 
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.service.ILanguageService;
+import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.parser.IParser;
 
 /**
- * @author Sven Efftinge - Initial contribution and API
+ * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface IParser extends ILanguageService {
+public interface IAntlrParser extends IParser {
 	
-	IParseResult parse(InputStream in);
+	IParseResult parse(String ruleName, InputStream in);
 	
-    IParseResult reparse(CompositeNode originalRootNode, int offset, int length, String change);
-    
 }
