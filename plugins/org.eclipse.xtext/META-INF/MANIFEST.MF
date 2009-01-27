@@ -42,4 +42,3 @@ Require-Bundle: org.eclipse.xtext.log4j;bundle-version="1.2.15",
  org.eclipse.xtext.util,
  org.junit;resolution:=optional,
  org.antlr.runtime;bundle-version="3.0.0";visibility:=reexport
-Import-Package: org.eclipse.xtext.parser.antlr
