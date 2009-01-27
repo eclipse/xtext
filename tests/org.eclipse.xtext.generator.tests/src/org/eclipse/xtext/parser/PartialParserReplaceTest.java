@@ -58,7 +58,7 @@ public class PartialParserReplaceTest extends AbstractPartialParserTest {
 		String reparseRegion = PartialParsingUtil.insertChangeIntoReplaceRegion(parsingPointers
 				.getDefaultReplaceRootNode(), offset, length, change);
 		assertEquals(expectedReparseRegion, reparseRegion);
-		IParseResult partiallyReparse = PartialParsingUtil.reparse(getParser(), rootNode, offset, length, change);
+		IParseResult partiallyReparse = PartialParsingUtil.reparse(getAntlrParser(), rootNode, offset, length, change);
 		EList<SyntaxError> errors = partiallyReparse.getRootNode().allSyntaxErrors();
 		for (SyntaxError syntaxError : errors) {
 			logger.debug(model + offset + length + change + ":" + syntaxError.getMessage());
@@ -67,4 +67,5 @@ public class PartialParserReplaceTest extends AbstractPartialParserTest {
 		String expectedReparseModel = model.substring(0, offset) + change + model.substring(offset + length);
 		assertEquals(expectedReparseModel, partiallyReparse.getRootNode().serialize());
 	}
+	
 }

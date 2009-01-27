@@ -9,6 +9,7 @@
 package org.eclipse.xtext.parser;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.parser.antlr.IAntlrParser;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.util.EmfStructureComparator;
@@ -31,6 +32,11 @@ public abstract class AbstractPartialParserTest extends AbstractGeneratorTest {
 				return !(child instanceof LeafNode) || !((LeafNode)child).isHidden(); 
 			}
 		};
+	}
+	
+	protected IAntlrParser getAntlrParser() {
+		SwitchingParser switchingParser = (SwitchingParser) getParser();
+		return switchingParser.getAntlrParser();
 	}
 
 }

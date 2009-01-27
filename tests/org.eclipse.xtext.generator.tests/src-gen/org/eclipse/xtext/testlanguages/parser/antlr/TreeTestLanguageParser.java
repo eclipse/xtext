@@ -5,7 +5,6 @@ package org.eclipse.xtext.testlanguages.parser.antlr;
 
 import org.antlr.runtime.ANTLRInputStream;
 import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
-import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
@@ -20,11 +19,11 @@ public class TreeTestLanguageParser extends org.eclipse.xtext.parser.antlr.Abstr
     protected AntlrTokenDefProvider antlrTokenDefProvider;
 	
 	@Override
-	protected IParseResult parse(String ruleName, ANTLRInputStream in, IAstFactory factory) {
+	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
 		InternalTreeTestLanguageLexer lexer = new InternalTreeTestLanguageLexer(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		InternalTreeTestLanguageParser parser = new InternalTreeTestLanguageParser(
-				stream, factory, grammarAccess.getGrammar());
+				stream, getElementFactory(), grammarAccess.getGrammar());
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());
 		try {
 			if(ruleName != null) {

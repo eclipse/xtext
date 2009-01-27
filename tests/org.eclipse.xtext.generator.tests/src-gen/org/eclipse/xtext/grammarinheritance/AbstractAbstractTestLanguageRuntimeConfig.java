@@ -21,12 +21,22 @@ public abstract class AbstractAbstractTestLanguageRuntimeConfig extends Abstract
 		return org.eclipse.xtext.grammarinheritance.parser.packrat.AbstractTestLanguagePackratParser.class;
 	}
 		
+	protected Class<? extends org.eclipse.xtext.parser.packrat.IParseResultFactory> getIParseResultFactory() {
+		return org.eclipse.xtext.parser.packrat.ParseResultFactory.class;
+	}
+		
+	protected Class<? extends org.eclipse.xtext.parser.IParser> getIParser() {
+		return org.eclipse.xtext.parser.SwitchingParser.class;
+	}
+		
 	
 	public Set<IServiceRegistration> registrations() {
 		return scope(org.eclipse.xtext.grammarinheritance.IAbstractTestLanguage.SCOPE)
 		.with(org.eclipse.xtext.IMetamodelAccess.class, getIMetamodelAccess())
 		.with(org.eclipse.xtext.IGrammarAccess.class, getIGrammarAccess())
 		.with(org.eclipse.xtext.parser.packrat.IPackratParser.class, getIPackratParser())
+		.with(org.eclipse.xtext.parser.packrat.IParseResultFactory.class, getIParseResultFactory())
+		.with(org.eclipse.xtext.parser.IParser.class, getIParser())
 		
 			.registrations();
 	}

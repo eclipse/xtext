@@ -5,7 +5,6 @@ package org.eclipse.xtext.dummy.parser.antlr;
 
 import org.antlr.runtime.ANTLRInputStream;
 import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
-import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
@@ -20,11 +19,11 @@ public class DummyTestLanguageParser extends org.eclipse.xtext.parser.antlr.Abst
     protected AntlrTokenDefProvider antlrTokenDefProvider;
 	
 	@Override
-	protected IParseResult parse(String ruleName, ANTLRInputStream in, IAstFactory factory) {
+	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
 		InternalDummyTestLanguageLexer lexer = new InternalDummyTestLanguageLexer(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		InternalDummyTestLanguageParser parser = new InternalDummyTestLanguageParser(
-				stream, factory, grammarAccess.getGrammar());
+				stream, getElementFactory(), grammarAccess.getGrammar());
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());
 		try {
 			if(ruleName != null) {

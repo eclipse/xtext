@@ -68,7 +68,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		assertTrue(leaf.getSyntaxError() != null);
 		// resource.update(23, 0, ")");
 		// assertTrue(resource.getParseResult().getParseErrors().isEmpty());
-		IParseResult reparse = PartialParsingUtil.reparse(getParser(), rootNode, 23, 0, ")");
+		IParseResult reparse = PartialParsingUtil.reparse(getAntlrParser(), rootNode, 23, 0, ")");
 		rootNode = reparse.getRootNode();
 		String expectedFixedModel = "spielplatz 1 {kind (k 1)}";
 		String fixedModel = rootNode.serialize();
@@ -84,7 +84,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		XtextResource resource = getResourceFromString(model);
 		CompositeNode rootNode = resource.getParseResult().getRootNode();
 		checkGrammarAssigned(rootNode);
-		IParseResult reparse = PartialParsingUtil.reparse(getParser(), rootNode, model.length() - 2, 0, "\n");
+		IParseResult reparse = PartialParsingUtil.reparse(getAntlrParser(), rootNode, model.length() - 2, 0, "\n");
 		rootNode = reparse.getRootNode();
 		checkGrammarAssigned(rootNode);
 	}
@@ -197,7 +197,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 			assertEquals(node.getParent() == null, grammarElement instanceof ParserRule);
 		}
 	}
-
+	
 	@SuppressWarnings("unchecked")
 	public void testNodeState() throws Exception {
 		with(SimpleExpressionsTestLanguageStandaloneSetup.class);
@@ -214,7 +214,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 			}
 		}
 		assertTrue("node c found", found);
-		IParseResult reparse = PartialParsingUtil.reparse(getParser(), rootNode, model.indexOf('c'), 1, "xy");
+		IParseResult reparse = PartialParsingUtil.reparse(getAntlrParser(), rootNode, model.indexOf('c'), 1, "xy");
 		assertTrue(reparse.getParseErrors() == null || reparse.getParseErrors().isEmpty());
 		iter = rootNode.getLeafNodes().iterator();
 		found = false;
@@ -233,10 +233,11 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		PartialParsingPointers parsingPointers = PartialParsingUtil.calculatePartialParsingPointers(rootNode, offset,
 				length);
 		String entryRuleName = parsingPointers.findEntryRuleName();
-		IParseResult parseResult = ((AbstractParser) getParser()).parse(entryRuleName, new StringInputStream(
-				parsingPointers.findReparseRegion()), getASTFactory());
+		IParseResult parseResult = getAntlrParser().parse(entryRuleName, new StringInputStream(
+				parsingPointers.findReparseRegion()));
 		comparator.assertSameStructure(parsingPointers.getDefaultReplaceRootNode(), parseResult.getRootNode());
 		comparator.assertSameStructure(parsingPointers.findASTReplaceElement(), parseResult.getRootASTElement());
 		assertEquals(parsingPointers.getDefaultReplaceRootNode().serialize(), parseResult.getRootNode().serialize());
 	}
+	
 }

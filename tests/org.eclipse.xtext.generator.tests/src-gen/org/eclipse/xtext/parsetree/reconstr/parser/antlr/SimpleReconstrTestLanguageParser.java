@@ -5,7 +5,6 @@ package org.eclipse.xtext.parsetree.reconstr.parser.antlr;
 
 import org.antlr.runtime.ANTLRInputStream;
 import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
-import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
@@ -20,11 +19,11 @@ public class SimpleReconstrTestLanguageParser extends org.eclipse.xtext.parser.a
     protected AntlrTokenDefProvider antlrTokenDefProvider;
 	
 	@Override
-	protected IParseResult parse(String ruleName, ANTLRInputStream in, IAstFactory factory) {
+	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
 		InternalSimpleReconstrTestLanguageLexer lexer = new InternalSimpleReconstrTestLanguageLexer(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		InternalSimpleReconstrTestLanguageParser parser = new InternalSimpleReconstrTestLanguageParser(
-				stream, factory, grammarAccess.getGrammar());
+				stream, getElementFactory(), grammarAccess.getGrammar());
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());
 		try {
 			if(ruleName != null) {
