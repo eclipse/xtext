@@ -11,8 +11,13 @@ import org.eclipse.xtext.crossref.impl.DefaultLinkingService;
 import org.eclipse.xtext.crossref.impl.DefaultScopeProvider;
 import org.eclipse.xtext.crossref.internal.Linker;
 import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
+import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
 import org.eclipse.xtext.resource.DefaultFragmentProvider;
 import org.eclipse.xtext.resource.IFragmentProvider;
+import org.eclipse.xtext.xtext.XtextLinker;
+import org.eclipse.xtext.xtext.XtextLinkingService;
+import org.eclipse.xtext.xtext.XtextScopeProvider;
+import org.eclipse.xtext.xtext.XtextTransientValueService;
 
 /**
  * used to register components to be used at runtime.
@@ -25,11 +30,12 @@ public class XtextTerminalsTestLanguageRuntimeConfig extends AbstractXtextTermin
 			scope(XtextTerminalsTestLanguageStandaloneSetup.getServiceScope())
 				.with(IGrammarAccess.class, getIGrammarAccess())
 				.with(IValueConverterService.class, getIValueConverterService())
-				.with(ILinker.class, getILinker())
-				.with(ILinkingService.class, getILinkingService())
-				.with(IScopeProvider.class, getIScopeProvider())
 				.with(IFragmentProvider.class, getIFragmentProvider())
 				.with(AntlrTokenDefProvider.class)
+				.with(IScopeProvider.class, XtextScopeProvider.class)
+				.with(ILinker.class, XtextLinker.class)
+				.with(ILinkingService.class, XtextLinkingService.class)
+				.with(ITransientValueService.class, XtextTransientValueService.class)
 				.registrations());
 		return generated;
 	}
