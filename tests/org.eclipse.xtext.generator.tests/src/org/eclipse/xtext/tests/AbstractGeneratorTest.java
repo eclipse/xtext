@@ -31,6 +31,7 @@ import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.parser.DefaultEcoreElementFactory;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParser;
+import org.eclipse.xtext.parser.ISwitchingParser;
 import org.eclipse.xtext.parser.packrat.AbstractPackratParser;
 import org.eclipse.xtext.parser.packrat.ParseResultFactory;
 import org.eclipse.xtext.parsetree.CompositeNode;
@@ -99,7 +100,7 @@ public abstract class AbstractGeneratorTest extends TestCase {
 	}
 
 	protected IParser getParser() {
-		return ServiceRegistry.getService(currentScope, IParser.class);
+		return ServiceRegistry.getService(currentScope, ISwitchingParser.class);
 	}
 
 	protected IAstFactory getASTFactory() {
