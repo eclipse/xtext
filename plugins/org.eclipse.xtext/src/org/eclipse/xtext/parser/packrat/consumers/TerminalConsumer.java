@@ -9,6 +9,7 @@ package org.eclipse.xtext.parser.packrat.consumers;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
@@ -16,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedTerminal;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedTerminalWithFeature;
+import org.eclipse.xtext.parser.packrat.tokens.ParsedTerminalWithFeatureInfo;
 import org.eclipse.xtext.util.Strings;
 
 /**
@@ -42,10 +44,14 @@ public abstract class TerminalConsumer implements ITerminalConsumer {
 			return ConsumeResult.EMPTY_MATCH;
 		}
 		if (result == ConsumeResult.SUCCESS) {
-			if (feature != null)
-				acceptor.accept(new ParsedTerminalWithFeature(prevMarker, input.getOffset()-prevMarker, 
-						element != null ? element : getGrammarElement(), isHidden(), feature, isMany, isBoolean, getRuleName()));
-			else
+			if (feature != null) {
+				if (element instanceof CrossReference)
+					acceptor.accept(new ParsedTerminalWithFeatureInfo(prevMarker, input.getOffset()-prevMarker, 
+							element != null ? element : getGrammarElement(), isHidden(), feature));
+				else
+					acceptor.accept(new ParsedTerminalWithFeature(prevMarker, input.getOffset()-prevMarker, 
+							element != null ? element : getGrammarElement(), isHidden(), feature, isMany, isBoolean, getRuleName()));
+			} else
 				acceptor.accept(new ParsedTerminal(prevMarker, input.getOffset()-prevMarker, element != null ? element : getGrammarElement(), isHidden()));
 		} else {
 			input.setOffset(prevMarker);

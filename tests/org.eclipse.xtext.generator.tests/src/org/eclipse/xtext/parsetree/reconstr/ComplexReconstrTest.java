@@ -38,7 +38,7 @@ public class ComplexReconstrTest extends AbstractGeneratorTest {
 			if (x instanceof ParserRule) {
 				ParserRule pr = (ParserRule) x;
 				if (pr.getName().toLowerCase().contains("tricky")) {
-					logger.debug(EmfFormater.objToStr(pr, ""));
+					logger.debug(EmfFormater.objToStr(pr));
 				}
 			}
 	}
@@ -56,7 +56,7 @@ public class ComplexReconstrTest extends AbstractGeneratorTest {
 	private String parseAndSerialize(String model) throws Exception {
 		EObject result = (EObject) getModel(model);
 		if (logger.isDebugEnabled())
-			logger.debug(EmfFormater.objToStr(result, ""));
+			logger.debug(EmfFormater.objToStr(result));
 		return serialize(result);
 	}
 

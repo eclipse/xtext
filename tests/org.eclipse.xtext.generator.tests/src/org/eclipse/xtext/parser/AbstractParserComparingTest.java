@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser;
 
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.parsetree.ParsetreePackage;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.util.EmfFormater;
@@ -58,10 +60,14 @@ public abstract class AbstractParserComparingTest extends AbstractGeneratorTest 
 			checkResource(pair.getFirst() + " - " + getSecondParserName(), secondResult);
 			comparator.assertSameStructure(firstResult.getParseResult().getRootASTElement(), secondResult.getParseResult().getRootASTElement());
 			comparator.assertSameStructure(firstResult.getParseResult().getRootNode(), secondResult.getParseResult().getRootNode());
-//			String firstResultAsString = EmfFormater.objToStr(firstResult.getParseResult().getRootNode(), "    ");
-//			String secondResultAsString = EmfFormater.objToStr(secondResult.getParseResult().getRootNode(), "    ");
-//			assertEquals(firstResultAsString, secondResultAsString);
+			String firstResultAsString = EmfFormater.objToStr(firstResult.getParseResult().getRootNode(), getIgnoredFeatures());
+			String secondResultAsString = EmfFormater.objToStr(secondResult.getParseResult().getRootNode(), getIgnoredFeatures());
+			assertEquals(firstResultAsString, secondResultAsString);
 		}
+	}
+
+	protected EStructuralFeature[] getIgnoredFeatures() {
+		return new EStructuralFeature[]{ ParsetreePackage.eINSTANCE.getCompositeNode_LookaheadLeafNodes() };
 	}
 	
 	protected String getFirstParserName() {

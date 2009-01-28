@@ -41,10 +41,10 @@ public class XtextPackratParserTest extends AbstractGeneratorTest {
 		assertNotNull(parseResult);
 		assertNotNull(parseResult.getRootNode());
 		assertNotNull(parseResult.getRootASTElement());
-		String rootNode = EmfFormater.objToStr(parseResult.getRootASTElement(), "  ");
+		String rootNode = EmfFormater.objToStr(parseResult.getRootASTElement());
 //		printParseResult(parseResult);
 		IParseResult orig = getParser().parse(new StringInputStream(model));
-		String origRootNode = EmfFormater.objToStr(orig.getRootASTElement(), "  ");
+		String origRootNode = EmfFormater.objToStr(orig.getRootASTElement());
 		assertEquals("Model: '" + model + "'", origRootNode, rootNode);
 	}
 

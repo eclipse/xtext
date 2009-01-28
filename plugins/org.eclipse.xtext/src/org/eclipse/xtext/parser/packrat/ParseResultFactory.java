@@ -29,6 +29,7 @@ import org.eclipse.xtext.parser.packrat.tokens.ParsedNonTerminal;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedNonTerminalEnd;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedTerminal;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedTerminalWithFeature;
+import org.eclipse.xtext.parser.packrat.tokens.ParsedTerminalWithFeatureInfo;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedToken;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
@@ -244,6 +245,14 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 		LeafNode node = createLeafNode(token);
 		node.setGrammarElement(token.getGrammarElement());
 		node.setHidden(token.isHidden());
+	}
+	
+	@Override
+	public void visitParsedTerminalWithFeatureInfo(ParsedTerminalWithFeatureInfo token) {
+		LeafNode node = createLeafNode(token);
+		node.setGrammarElement(token.getGrammarElement());
+		node.setHidden(token.isHidden());
+		node.setFeature(token.getFeature());
 	}
 
 	@Override
