@@ -60,8 +60,13 @@ public abstract class AbstractParserComparingTest extends AbstractGeneratorTest 
 			checkResource(pair.getFirst() + " - " + getSecondParserName(), secondResult);
 			comparator.assertSameStructure(firstResult.getParseResult().getRootASTElement(), secondResult.getParseResult().getRootASTElement());
 			comparator.assertSameStructure(firstResult.getParseResult().getRootNode(), secondResult.getParseResult().getRootNode());
-			String firstResultAsString = EmfFormater.objToStr(firstResult.getParseResult().getRootNode(), getIgnoredFeatures());
-			String secondResultAsString = EmfFormater.objToStr(secondResult.getParseResult().getRootNode(), getIgnoredFeatures());
+			
+			String firstNodeResultAsString = EmfFormater.objToStr(firstResult.getParseResult().getRootNode(), getIgnoredFeatures());
+			String secondNodeResultAsString = EmfFormater.objToStr(secondResult.getParseResult().getRootNode(), getIgnoredFeatures());
+			assertEquals(firstNodeResultAsString, secondNodeResultAsString);
+			
+			String firstResultAsString = EmfFormater.objToStr(firstResult.getParseResult().getRootASTElement());
+			String secondResultAsString = EmfFormater.objToStr(secondResult.getParseResult().getRootASTElement());
 			assertEquals(firstResultAsString, secondResultAsString);
 		}
 	}

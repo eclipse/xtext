@@ -210,10 +210,16 @@ public class GeneratorFacade {
 		// "org.eclipse.xtext.ui.grammarAccess");
 		genModel.getServices().add(grammarAccessService);
 
-		
-
 		if (!GrammarUtil.isAbstract(grammarModel)) {
 
+			GenService elementFactoryService = XtextgenFactory.eINSTANCE.createGenService();
+			elementFactoryService.setServiceInterfaceFQName("org.eclipse.xtext.parser.IAstFactory");
+			elementFactoryService.setGenClassFQName("org.eclipse.xtext.parser.DefaultEcoreElementFactory");
+			// no template, as service is generic. Nevertheless, we need the
+			// individual registration to avoid conflicts
+			elementFactoryService.setExtensionPointID("org.eclipse.xtext.ui.aSTFactory");
+			genModel.getServices().add(elementFactoryService);
+			
 			GenService resourceFactoryService = XtextgenFactory.eINSTANCE.createGenService();
 			resourceFactoryService.setServiceInterfaceFQName("org.eclipse.xtext.resource.IResourceFactory");
 			resourceFactoryService.setGenClassFQName(namespace + ".services." + languageName + "ResourceFactory");
