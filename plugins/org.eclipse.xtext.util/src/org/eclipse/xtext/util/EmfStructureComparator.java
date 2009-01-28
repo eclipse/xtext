@@ -14,6 +14,7 @@ import java.util.List;
 
 import junit.framework.Assert;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
@@ -23,12 +24,15 @@ import org.eclipse.emf.ecore.EObject;
  */
 public class EmfStructureComparator {
 
+	private static final Logger log = Logger.getLogger(EmfStructureComparator.class);
+	
 	private int counter;
-	private String errorMessage;
+	private StringBuilder errorMessage = new StringBuilder(512);
 	
 	public void assertSameStructure(EObject left, EObject right) {
 		if(!isSameStructure(left, right)) {
-			Assert.fail(errorMessage);
+			log.error(errorMessage.toString());
+			Assert.fail(errorMessage.toString());
 		}
 		//logger.debug("" + counter + " elements compared");
 	}
@@ -41,18 +45,18 @@ public class EmfStructureComparator {
 	public boolean internalIsSameStructure(EObject left, EObject right) {
 		++counter;
 		if (!isSameClass(left.eClass(), right.eClass())) {
-			errorMessage = "Classes are not equal: " + left + " != " + right;
+			errorMessage.append("Classes are not equal: " + left + " != " + right).append('\n');
 			return false;
 		}
 		List<EObject> leftChildren = getRelevantChildren(left);
 		List<EObject> rightChildren = getRelevantChildren(right);
 		if(leftChildren.size() != rightChildren.size()) {
-			errorMessage = "Number of children differs " + left + " " + right;
+			errorMessage.append("Number of children differs " + left + " " + right + " " + leftChildren.size() + " <> " + rightChildren.size()).append('\n');
 			return false;
 		}
 		for (int i = 0; i < leftChildren.size(); ++i) {
 			if(!internalIsSameStructure(leftChildren.get(i), rightChildren.get(i))) {
-				errorMessage = "Children differ " + left + " " + right;
+				errorMessage.append("Children differ " + left + " " + right + " with children " + leftChildren.get(i) + " " + rightChildren.get(i)).append('\n');
 				return false;
 			}
 		}

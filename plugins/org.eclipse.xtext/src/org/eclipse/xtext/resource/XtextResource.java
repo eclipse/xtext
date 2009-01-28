@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.xtext.crossref.ILinker;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
+import org.eclipse.xtext.parser.ISwitchingParser;
 import org.eclipse.xtext.parser.ParseResult;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeContentAdapter;
@@ -40,7 +41,7 @@ import org.eclipse.xtext.util.StringInputStream;
  * @author Dennis Hübner
  */
 public class XtextResource extends ResourceImpl {
-	@Inject
+
 	private IParser parser;
 
 	@Inject
@@ -57,6 +58,11 @@ public class XtextResource extends ResourceImpl {
 
 	private IParseResult parseResult;
 
+	@Inject
+	protected void setInjectedParser(ISwitchingParser parser) {
+		this.parser = parser;
+	}
+	
 	public XtextResource(URI uri) {
 		super(uri);
 	}

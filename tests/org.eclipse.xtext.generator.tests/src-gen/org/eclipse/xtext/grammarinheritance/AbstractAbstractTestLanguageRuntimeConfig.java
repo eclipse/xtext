@@ -25,7 +25,7 @@ public abstract class AbstractAbstractTestLanguageRuntimeConfig extends Abstract
 		return org.eclipse.xtext.parser.packrat.ParseResultFactory.class;
 	}
 		
-	protected Class<? extends org.eclipse.xtext.parser.IParser> getIParser() {
+	protected Class<? extends org.eclipse.xtext.parser.ISwitchingParser> getISwitchingParser() {
 		return org.eclipse.xtext.parser.SwitchingParser.class;
 	}
 		
@@ -36,7 +36,7 @@ public abstract class AbstractAbstractTestLanguageRuntimeConfig extends Abstract
 		.with(org.eclipse.xtext.IGrammarAccess.class, getIGrammarAccess())
 		.with(org.eclipse.xtext.parser.packrat.IPackratParser.class, getIPackratParser())
 		.with(org.eclipse.xtext.parser.packrat.IParseResultFactory.class, getIParseResultFactory())
-		.with(org.eclipse.xtext.parser.IParser.class, getIParser())
+		.with(org.eclipse.xtext.parser.ISwitchingParser.class, getISwitchingParser())
 		
 			.registrations();
 	}

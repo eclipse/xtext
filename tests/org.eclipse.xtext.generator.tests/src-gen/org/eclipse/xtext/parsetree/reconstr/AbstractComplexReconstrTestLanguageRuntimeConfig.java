@@ -61,7 +61,7 @@ public abstract class AbstractComplexReconstrTestLanguageRuntimeConfig extends A
 		return org.eclipse.xtext.parser.packrat.ParseResultFactory.class;
 	}
 		
-	protected Class<? extends org.eclipse.xtext.parser.IParser> getIParser() {
+	protected Class<? extends org.eclipse.xtext.parser.ISwitchingParser> getISwitchingParser() {
 		return org.eclipse.xtext.parser.SwitchingParser.class;
 	}
 		
@@ -81,7 +81,7 @@ public abstract class AbstractComplexReconstrTestLanguageRuntimeConfig extends A
 		.with(org.eclipse.xtext.parser.antlr.Lexer.class, getLexer())
 		.with(org.eclipse.xtext.parser.packrat.IPackratParser.class, getIPackratParser())
 		.with(org.eclipse.xtext.parser.packrat.IParseResultFactory.class, getIParseResultFactory())
-		.with(org.eclipse.xtext.parser.IParser.class, getIParser())
+		.with(org.eclipse.xtext.parser.ISwitchingParser.class, getISwitchingParser())
 		
 			.registrations();
 	}

@@ -52,7 +52,7 @@ public class PartialLinkingTest extends AbstractGeneratorTest implements IScopeP
 			"  familie( Familienname Bob Joe Bommel2 )\n" +
 			"}";
 		resource = getResourceFromString(modelAsText);
-		assertTrue(resource.getErrors().isEmpty());
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
 		model = resource.getParseResult().getRootASTElement();
 		final Iterator<EObject> iter = model.eAllContents();
 		while (iter.hasNext() && context == null) {

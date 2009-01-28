@@ -17,7 +17,7 @@ import org.eclipse.xtext.service.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class SwitchingParser implements IParser {
+public class SwitchingParser implements ISwitchingParser {
 
 	private static boolean usePackrat;
 	
