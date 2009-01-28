@@ -87,7 +87,7 @@ public final class SimpleExpressionsTestLanguageSequenceConsumer extends NonTerm
 		return result;
 	}
 	protected int consumeAction$4() {
-		consumeAction("Sequence", "expressions", true);
+		consumeAction(getRule().ele10ActionSequenceexpressions(), "Sequence", true);
 		return ConsumeResult.SUCCESS;	
 	}
 

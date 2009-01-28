@@ -87,7 +87,7 @@ public final class XtextTerminalsTestLanguageGroupConsumer extends NonTerminalCo
 		return result;
 	}
 	protected int consumeAction$4() {
-		consumeAction("Group", "abstractTokens", true);
+		consumeAction(getRule().ele10ActionGroupabstractTokens(), "Group", true);
 		return ConsumeResult.SUCCESS;	
 	}
 

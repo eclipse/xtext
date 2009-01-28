@@ -99,7 +99,7 @@ public final class SimpleExpressionsTestLanguageMultiplicationConsumer extends N
 		return result;
 	}
 	protected int consumeAction$5() {
-		consumeAction("Op", "values", true);
+		consumeAction(getRule().ele100ActionOpvalues(), "Op", true);
 		return ConsumeResult.SUCCESS;	
 	}
 

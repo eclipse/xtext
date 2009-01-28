@@ -65,7 +65,7 @@ public final class ActionTestLanguageElementConsumer extends NonTerminalConsumer
 		return consumeNonTerminal(itemConsumer, null, false, false, getRule().ele0ParserRuleCallItem());
 	}
 	protected int consumeAction$4() {
-		consumeAction("Item", "items", true);
+		consumeAction(getRule().ele10ActionItemitems(), "Item", true);
 		return ConsumeResult.SUCCESS;	
 	}
 

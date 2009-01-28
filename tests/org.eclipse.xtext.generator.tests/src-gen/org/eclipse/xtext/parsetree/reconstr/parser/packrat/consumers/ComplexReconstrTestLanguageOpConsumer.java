@@ -136,7 +136,7 @@ public final class ComplexReconstrTestLanguageOpConsumer extends NonTerminalCons
 		return result;
 	}
 	protected int consumeAction$6() {
-		consumeAction("Add", "addOperands", true);
+		consumeAction(getRule().ele1000ActionAddaddOperands(), "Add", true);
 		return ConsumeResult.SUCCESS;	
 	}
 
@@ -179,7 +179,7 @@ public final class ComplexReconstrTestLanguageOpConsumer extends NonTerminalCons
 		return result;
 	}
 	protected int consumeAction$13() {
-		consumeAction("Minus", "minusOperands", true);
+		consumeAction(getRule().ele1100ActionMinusminusOperands(), "Minus", true);
 		return ConsumeResult.SUCCESS;	
 	}
 
