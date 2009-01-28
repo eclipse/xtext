@@ -42,7 +42,7 @@ public class ParserAssembler implements IGenModelAssembler {
 		defaultAssembler.assemble(model);
 		
 		GenService parserSelector = XtextgenFactory.eINSTANCE.createGenService();
-		parserSelector.setServiceInterfaceFQName(IParser.class.getName());
+		parserSelector.setServiceInterfaceFQName(ISwitchingParser.class.getName());
 		parserSelector.setGenClassFQName(SwitchingParser.class.getName());
 		model.getServices().add(parserSelector);
 	}
