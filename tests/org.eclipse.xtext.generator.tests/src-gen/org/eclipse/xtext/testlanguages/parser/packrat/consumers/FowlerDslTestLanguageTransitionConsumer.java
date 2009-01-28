@@ -73,7 +73,7 @@ public final class FowlerDslTestLanguageTransitionConsumer extends NonTerminalCo
 	protected int consumeAssignment$3() throws Exception {
 		int result = Integer.MIN_VALUE;
 		int tempResult;
-		tempResult = consumeTerminal(idConsumer, null, false, false, getRule().ele000CrossReferenceEStringEvent(), getCrossReference$4$Delimiter());
+		tempResult = consumeTerminal(idConsumer, "event", false, false, getRule().ele000CrossReferenceEStringEvent(), getCrossReference$4$Delimiter());
 		if (tempResult == ConsumeResult.SUCCESS)
 			return tempResult;
 		result = tempResult >= result ? tempResult : result; 
@@ -87,7 +87,7 @@ public final class FowlerDslTestLanguageTransitionConsumer extends NonTerminalCo
 	protected int consumeAssignment$7() throws Exception {
 		int result = Integer.MIN_VALUE;
 		int tempResult;
-		tempResult = consumeTerminal(idConsumer, null, false, false, getRule().ele10CrossReferenceEStringState(), getCrossReference$8$Delimiter());
+		tempResult = consumeTerminal(idConsumer, "state", false, false, getRule().ele10CrossReferenceEStringState(), getCrossReference$8$Delimiter());
 		if (tempResult == ConsumeResult.SUCCESS)
 			return tempResult;
 		result = tempResult >= result ? tempResult : result; 

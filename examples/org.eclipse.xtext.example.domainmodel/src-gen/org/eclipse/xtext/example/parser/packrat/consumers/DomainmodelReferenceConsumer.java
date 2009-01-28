@@ -154,7 +154,7 @@ public final class DomainmodelReferenceConsumer extends NonTerminalConsumer {
 	protected int consumeAssignment$13() throws Exception {
 		int result = Integer.MIN_VALUE;
 		int tempResult;
-		tempResult = consumeTerminal(idConsumer, null, false, false, getRule().ele110CrossReferenceEStringReference(), getCrossReference$14$Delimiter());
+		tempResult = consumeTerminal(idConsumer, "opposite", false, false, getRule().ele110CrossReferenceEStringReference(), getCrossReference$14$Delimiter());
 		if (tempResult == ConsumeResult.SUCCESS)
 			return tempResult;
 		result = tempResult >= result ? tempResult : result; 

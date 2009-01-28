@@ -179,7 +179,7 @@ public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsume
 	protected int doConsumeAssignment$13() throws Exception {
 		int result = Integer.MIN_VALUE;
 		int tempResult;
-		tempResult = consumeTerminal(idConsumer, null, true, false, getRule().ele001010CrossReferenceEStringCommand(), getCrossReference$14$Delimiter());
+		tempResult = consumeTerminal(idConsumer, "actions", true, false, getRule().ele001010CrossReferenceEStringCommand(), getCrossReference$14$Delimiter());
 		if (tempResult == ConsumeResult.SUCCESS)
 			return tempResult;
 		result = tempResult >= result ? tempResult : result; 

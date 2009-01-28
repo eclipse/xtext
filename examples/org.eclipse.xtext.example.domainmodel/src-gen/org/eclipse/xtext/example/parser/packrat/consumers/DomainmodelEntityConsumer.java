@@ -149,7 +149,7 @@ public final class DomainmodelEntityConsumer extends NonTerminalConsumer {
 	protected int consumeAssignment$11() throws Exception {
 		int result = Integer.MIN_VALUE;
 		int tempResult;
-		tempResult = consumeTerminal(idConsumer, null, false, false, getRule().ele000110CrossReferenceEStringEntity(), getCrossReference$12$Delimiter());
+		tempResult = consumeTerminal(idConsumer, "superType", false, false, getRule().ele000110CrossReferenceEStringEntity(), getCrossReference$12$Delimiter());
 		if (tempResult == ConsumeResult.SUCCESS)
 			return tempResult;
 		result = tempResult >= result ? tempResult : result; 

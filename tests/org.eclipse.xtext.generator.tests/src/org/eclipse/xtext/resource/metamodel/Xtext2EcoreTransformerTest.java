@@ -756,7 +756,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 				"Number : value=INT;";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
 		EClass classifier = (EClass) ePackage.getEClassifier("Ex");
-		logger.debug(EmfFormater.objToStr(ePackage, ""));
+		logger.debug(EmfFormater.objToStr(ePackage));
 		assertEquals(0,classifier.getEStructuralFeatures().size());
 	}
 	
