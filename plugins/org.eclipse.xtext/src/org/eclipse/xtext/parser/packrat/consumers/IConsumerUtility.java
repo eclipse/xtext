@@ -8,6 +8,7 @@
 package org.eclipse.xtext.parser.packrat.consumers;
 
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
@@ -23,5 +24,5 @@ public interface IConsumerUtility {
 	
 	int consumeNonTerminal(INonTerminalConsumer consumer, String feature, boolean isMany, boolean isDatatype, AbstractElement grammarElement) throws Exception;
 	
-	void consumeAction(String typeName, String feature, boolean isMany);
+	void consumeAction(Action action, String typeName, boolean isMany);
 }

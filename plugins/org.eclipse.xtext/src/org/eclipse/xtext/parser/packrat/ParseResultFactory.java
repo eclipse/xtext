@@ -283,6 +283,7 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 		EObject newCurrent = factory.create(token.getTypeName());
 		EObject prevCurrent = currentStack.removeLast();
 		currentStack.add(newCurrent);
+		
 		try {
 			if (token.isMany())
 				factory.add(newCurrent, token.getFeature(), prevCurrent, null, null);
@@ -293,6 +294,15 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 		} catch(Exception ex) {
 			throw new RuntimeException(ex);
 		}
+		
+		CompositeNode prevCurrentNode = currentNode;
+        currentNode = prevCurrentNode.getParent();
+        CompositeNode newCurrentNode = createCompositeNode(token);
+        prevCurrentNode.setParent(newCurrentNode);
+        ((BasicEList<AbstractNode>)currentNode.getChildren()).addUnique(newCurrentNode);
+        newCurrentNode.setGrammarElement(token.getGrammarElement());
+        associateNodeWithAstElement(newCurrentNode, newCurrent);
+        currentNode = newCurrentNode;
 	}
 
 	@Override

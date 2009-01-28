@@ -24,17 +24,21 @@ import org.eclipse.emf.ecore.EObject;
  */
 public class EmfStructureComparator {
 
-	private static final Logger log = Logger.getLogger(EmfStructureComparator.class);
+	protected static final Logger log = Logger.getLogger(EmfStructureComparator.class);
 	
 	private int counter;
 	private StringBuilder errorMessage = new StringBuilder(512);
 	
 	public void assertSameStructure(EObject left, EObject right) {
 		if(!isSameStructure(left, right)) {
-			log.error(errorMessage.toString());
-			Assert.fail(errorMessage.toString());
+			log.error(getErrorMessage());
+			Assert.fail(getErrorMessage());
 		}
 		//logger.debug("" + counter + " elements compared");
+	}
+	
+	protected String getErrorMessage() {
+		return errorMessage.toString();
 	}
 	
 	public boolean isSameStructure(EObject left, EObject right) {

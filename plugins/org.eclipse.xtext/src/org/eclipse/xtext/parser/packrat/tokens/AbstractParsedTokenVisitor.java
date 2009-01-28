@@ -47,7 +47,7 @@ public abstract class AbstractParsedTokenVisitor implements IParsedTokenVisitor 
 	}
 
 	public void visitParsedAction(ParsedAction token) {
-		visitAbstractParsedToken(token);
+		visitParsedToken(token);
 	}
 	
 	public void exec(AbstractParsedToken param) {
