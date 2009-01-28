@@ -58,7 +58,7 @@ public final class ActionTestLanguageItemConsumer extends NonTerminalConsumer {
 		return result;
 	}
 	protected int consumeAction$2() {
-		consumeAction("Thing", "content", false);
+		consumeAction(getRule().ele0ActionThingcontent(), "Thing", false);
 		return ConsumeResult.SUCCESS;	
 	}
 

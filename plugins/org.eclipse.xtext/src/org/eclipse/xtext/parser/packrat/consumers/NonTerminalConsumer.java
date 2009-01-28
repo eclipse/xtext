@@ -9,6 +9,7 @@ package org.eclipse.xtext.parser.packrat.consumers;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
 import org.eclipse.xtext.parser.packrat.IHiddenTokenHandler;
@@ -112,8 +113,8 @@ public abstract class NonTerminalConsumer implements INonTerminalConsumer {
 		return consumerUtil.consumeNonTerminal(consumer, feature, isMany, isDatatype, grammarElement);
 	}
 	
-	protected final void consumeAction(String typeName, String feature, boolean isMany) {
-		consumerUtil.consumeAction(typeName, feature, isMany);
+	protected final void consumeAction(Action action, String typeName, boolean isMany) {
+		consumerUtil.consumeAction(action, typeName, isMany);
 	}
 	
 	protected abstract int doConsume() throws Exception;

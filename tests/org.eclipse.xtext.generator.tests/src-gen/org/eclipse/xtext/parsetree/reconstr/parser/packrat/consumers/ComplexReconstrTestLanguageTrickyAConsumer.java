@@ -185,7 +185,7 @@ public final class ComplexReconstrTestLanguageTrickyAConsumer extends NonTermina
 		return result;
 	}
 	protected int consumeAction$11() {
-		consumeAction("TypeB", "x", false);
+		consumeAction(getRule().ele0100ActionTypeBx(), "TypeB", false);
 		return ConsumeResult.SUCCESS;	
 	}
 
@@ -212,7 +212,7 @@ public final class ComplexReconstrTestLanguageTrickyAConsumer extends NonTermina
 		return result;
 	}
 	protected int consumeAction$15() {
-		consumeAction("TypeC", "x", false);
+		consumeAction(getRule().ele0110ActionTypeCx(), "TypeC", false);
 		return ConsumeResult.SUCCESS;	
 	}
 

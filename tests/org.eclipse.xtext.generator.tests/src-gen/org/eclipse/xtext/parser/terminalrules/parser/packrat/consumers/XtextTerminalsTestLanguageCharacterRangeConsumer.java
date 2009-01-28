@@ -97,7 +97,7 @@ public final class XtextTerminalsTestLanguageCharacterRangeConsumer extends NonT
 		return result;
 	}
 	protected int consumeAction$5() {
-		consumeAction("CharacterRange", "left", false);
+		consumeAction(getRule().ele100ActionCharacterRangeleft(), "CharacterRange", false);
 		return ConsumeResult.SUCCESS;	
 	}
 

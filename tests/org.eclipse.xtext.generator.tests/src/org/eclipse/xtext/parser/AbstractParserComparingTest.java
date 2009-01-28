@@ -7,12 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser;
 
-import org.eclipse.xtext.GenerateAllTestGrammars;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
+import org.eclipse.xtext.util.EmfFormater;
 import org.eclipse.xtext.util.EmfStructureComparator;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.StringInputStream;
+import org.eclipse.xtext.util.Wrapper;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -41,15 +42,25 @@ public abstract class AbstractParserComparingTest extends AbstractGeneratorTest 
 	protected abstract Iterable<Pair<String, String>> getAllModels();
 	
 	public void testCompareAllModels() throws Exception {
-		EmfStructureComparator comparator = new EmfStructureComparator();
+		final Wrapper<String> modelName = Wrapper.forType(String.class); 
+		EmfStructureComparator comparator = new EmfStructureComparator() {
+			@Override
+			protected String getErrorMessage() {
+				return modelName.get() + " - " + super.getErrorMessage();
+			}
+		};
 		for(Pair<String, String> pair: getAllModels()) {
 			String model = pair.getSecond();
+			modelName.set(pair.getFirst() + "(" + getFirstParserName() + " / " + getSecondParserName() + ")");
 			XtextResource firstResult = firstHelper.getResourceFromStream(new StringInputStream(model));
 			XtextResource secondResult = secondHelper.getResourceFromStream(new StringInputStream(model));
 			checkResource(pair.getFirst() + " - " + getFirstParserName(), firstResult);
 			checkResource(pair.getFirst() + " - " + getSecondParserName(), secondResult);
 			comparator.assertSameStructure(firstResult.getParseResult().getRootASTElement(), secondResult.getParseResult().getRootASTElement());
-//			comparator.assertSameStructure(firstResult.getParseResult().getRootNode(), secondResult.getParseResult().getRootNode());
+			comparator.assertSameStructure(firstResult.getParseResult().getRootNode(), secondResult.getParseResult().getRootNode());
+//			String firstResultAsString = EmfFormater.objToStr(firstResult.getParseResult().getRootNode(), "    ");
+//			String secondResultAsString = EmfFormater.objToStr(secondResult.getParseResult().getRootNode(), "    ");
+//			assertEquals(firstResultAsString, secondResultAsString);
 		}
 	}
 	

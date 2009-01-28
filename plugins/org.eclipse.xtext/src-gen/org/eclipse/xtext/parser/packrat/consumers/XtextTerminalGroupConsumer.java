@@ -87,7 +87,7 @@ public final class XtextTerminalGroupConsumer extends NonTerminalConsumer {
 		return result;
 	}
 	protected int consumeAction$4() {
-		consumeAction("Group", "abstractTokens", true);
+		consumeAction(getRule().ele10ActionGroupabstractTokens(), "Group", true);
 		return ConsumeResult.SUCCESS;	
 	}
 

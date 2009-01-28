@@ -7,23 +7,21 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.packrat.tokens;
 
+import org.eclipse.xtext.Action;
 import org.eclipse.xtext.parser.packrat.IParsedTokenVisitor;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ParsedAction extends AbstractParsedToken {
-
-	private final String typeName;
-
-	private final String feature;
+public class ParsedAction extends ParsedToken {
 
 	private final boolean isMany;
+	
+	private final String typeName;
 
-	public ParsedAction(int offset, String typeName, String feature, boolean isMany) {
-		super(offset, 0);
+	public ParsedAction(int offset, Action action, String typeName, boolean isMany) {
+		super(offset, 0, action);
 		this.typeName = typeName;
-		this.feature = feature;
 		this.isMany = isMany;
 	}
 
@@ -32,12 +30,17 @@ public class ParsedAction extends AbstractParsedToken {
 		visitor.visitParsedAction(this);
 	}
 	
+	@Override
+	public Action getGrammarElement() {
+		return (Action) super.getGrammarElement();
+	}
+	
 	public String getTypeName() {
 		return typeName;
 	}
 
 	public String getFeature() {
-		return feature;
+		return getGrammarElement().getFeature();
 	}
 
 	public boolean isMany() {

@@ -101,7 +101,7 @@ public final class TestLanguageReducibleRuleConsumer extends NonTerminalConsumer
 		return result;
 	}
 	protected int consumeAction$6() {
-		consumeAction("ReducibleComposite", "actionFeature", true);
+		consumeAction(getRule().ele10ActionReducibleCompositeactionFeature(), "ReducibleComposite", true);
 		return ConsumeResult.SUCCESS;	
 	}
 

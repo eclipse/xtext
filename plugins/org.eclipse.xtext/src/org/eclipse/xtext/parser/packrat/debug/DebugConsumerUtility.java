@@ -9,6 +9,7 @@ package org.eclipse.xtext.parser.packrat.debug;
 
 import org.apache.log4j.Logger;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
@@ -29,11 +30,11 @@ public class DebugConsumerUtility implements IConsumerUtility {
 		this.delegate = delegate;
 	}
 	
-	public void consumeAction(String typeName, String feature, boolean isMany) {
+	public void consumeAction(Action action, String typeName, boolean isMany) {
 		if (log.isDebugEnabled()) {
-			log.debug("consumeAction(typeName = " + typeName + ", feature = " + feature + ", isMany = " + isMany + ")"); 
+			log.debug("consumeAction(typeName = " + typeName + ", feature = " + action.getFeature() + ", isMany = " + isMany + ")"); 
 		}
-		delegate.consumeAction(typeName, feature, isMany);
+		delegate.consumeAction(action, typeName, isMany);
 	}
 
 	public int consumeKeyword(Keyword keyword, String feature, boolean isMany, boolean isBoolean,

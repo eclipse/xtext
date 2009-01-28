@@ -96,7 +96,7 @@ public final class XtextTerminalAlternativesConsumer extends NonTerminalConsumer
 		return result;
 	}
 	protected int consumeAction$5() {
-		consumeAction("Alternatives", "groups", true);
+		consumeAction(getRule().ele100ActionAlternativesgroups(), "Alternatives", true);
 		return ConsumeResult.SUCCESS;	
 	}
 

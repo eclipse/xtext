@@ -15,6 +15,7 @@ import java.util.Arrays;
 
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.Action;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.parser.AbstractParser;
@@ -235,8 +236,8 @@ public abstract class AbstractPackratParser extends AbstractParser<CharSequence>
 		return consumer.consume(feature, isMany, isDatatype, grammarElement);
 	}
 	
-	public void consumeAction(String typeName, String feature, boolean isMany) {
-		accept(new ParsedAction(offset, typeName, feature, isMany));
+	public void consumeAction(Action action, String typeName, boolean isMany) {
+		accept(new ParsedAction(offset, action, typeName, isMany));
 	}
 	
 	public void setParseResultFactory(IParseResultFactory parseResultFactory) {

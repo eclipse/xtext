@@ -87,7 +87,7 @@ public final class SimpleReconstrTestLanguageOpConsumer extends NonTerminalConsu
 		return result;
 	}
 	protected int consumeAction$4() {
-		consumeAction("Op", "values", true);
+		consumeAction(getRule().ele10ActionOpvalues(), "Op", true);
 		return ConsumeResult.SUCCESS;	
 	}
 
