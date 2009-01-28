@@ -261,7 +261,7 @@ public final class «this.consumerClassName()» extends NonTerminalConsumer {
 «ENDDEFINE»
 
 «DEFINE defineConsumeBody FOR Action-»
-		consumeAction("«typeName.type.name»", "«feature»", «operator == "+="»);
+		consumeAction(getRule().«gaElementAccessMethodeName()»(), "«typeName.type.name»", «operator == "+="»);
 		return ConsumeResult.SUCCESS;	
 «ENDDEFINE»
 

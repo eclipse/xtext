@@ -14,7 +14,7 @@ public abstract class AbstractPackratAntlrComparingTest extends AbstractParserCo
 
 	@Override
 	protected IParser createFirstParser() {
-		return getParser();
+		return ((SwitchingParser)getParser()).getAntlrParser();
 	}
 
 	@Override
