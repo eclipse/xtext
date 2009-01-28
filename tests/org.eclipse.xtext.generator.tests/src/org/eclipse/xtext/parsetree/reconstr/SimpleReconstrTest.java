@@ -43,12 +43,11 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 	private String parseAndSerialize(String model) throws Exception {
 		EObject result = (EObject) getModel(model);
 		if (logger.isDebugEnabled()) {
-			logger.debug(EmfFormater.objToStr(result, ""));
+			logger.debug(EmfFormater.objToStr(result));
 			logger
-					.debug(EmfFormater.objToStr(NodeUtil.getRootNode(result),
-							""));
+					.debug(EmfFormater.objToStr(NodeUtil.getRootNode(result)));
 			logger.debug(EmfFormater.objToStr(NodeUtil.getRootNode(result)
-					.getLeafNodes(), ""));
+					.getLeafNodes()));
 		}
 		return serialize(result);
 	}
