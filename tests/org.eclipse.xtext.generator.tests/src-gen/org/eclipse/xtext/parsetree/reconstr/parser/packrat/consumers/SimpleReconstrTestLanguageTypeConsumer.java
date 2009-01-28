@@ -100,7 +100,7 @@ public final class SimpleReconstrTestLanguageTypeConsumer extends NonTerminalCon
 	protected int consumeAssignment$8() throws Exception {
 		int result = Integer.MIN_VALUE;
 		int tempResult;
-		tempResult = consumeTerminal(idConsumer, null, false, false, getRule().ele10CrossReferenceEStringType(), getCrossReference$9$Delimiter());
+		tempResult = consumeTerminal(idConsumer, "extends", false, false, getRule().ele10CrossReferenceEStringType(), getCrossReference$9$Delimiter());
 		if (tempResult == ConsumeResult.SUCCESS)
 			return tempResult;
 		result = tempResult >= result ? tempResult : result; 

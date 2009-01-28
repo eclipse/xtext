@@ -102,6 +102,6 @@ public class GenerateJavaFromEcore {
 						GenModelGeneratorAdapter.MODEL_PROJECT_TYPE,
 						new BasicMonitor());
 		if (log.isInfoEnabled())
-			log.info(EmfFormater.objToStr(diagnostic, ""));
+			log.info(EmfFormater.objToStr(diagnostic));
 	}
 }

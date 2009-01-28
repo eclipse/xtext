@@ -32,7 +32,7 @@ public class XtextGrammarReconcilationTest extends AbstractGeneratorTest {
 		// modify first rule
 		object.getRules().get(0).setName("HONOLULU");
 
-		System.out.println(EmfFormater.objToStr(object, ""));
+		System.out.println(EmfFormater.objToStr(object));
 
 		// save
 		ByteArrayOutputStream out = new ByteArrayOutputStream();

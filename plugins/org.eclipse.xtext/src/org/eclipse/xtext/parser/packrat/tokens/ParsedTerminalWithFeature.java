@@ -13,17 +13,15 @@ import org.eclipse.xtext.parser.packrat.IParsedTokenVisitor;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ParsedTerminalWithFeature extends ParsedTerminal {
+public class ParsedTerminalWithFeature extends ParsedTerminalWithFeatureInfo {
 	
-	private final String feature;
 	private final boolean isMany;
 	private final boolean isBoolean;
 	private final String ruleName;
 
 	public ParsedTerminalWithFeature(int offset, int length, EObject grammarElement, 
 			boolean hidden, String feature, boolean isMany, boolean isBoolean, String ruleName) {
-		super(offset, length, grammarElement, hidden);
-		this.feature = feature;
+		super(offset, length, grammarElement, hidden, feature);
 		this.isMany = isMany;
 		this.isBoolean = isBoolean;
 		this.ruleName = ruleName;
@@ -32,10 +30,6 @@ public class ParsedTerminalWithFeature extends ParsedTerminal {
 	@Override
 	public void accept(IParsedTokenVisitor visitor) {
 		visitor.visitParsedTerminalWithFeature(this);
-	}
-
-	public String getFeature() {
-		return feature;
 	}
 
 	public boolean isMany() {

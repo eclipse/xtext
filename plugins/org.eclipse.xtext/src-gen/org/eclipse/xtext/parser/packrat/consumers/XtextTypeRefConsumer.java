@@ -96,7 +96,7 @@ public final class XtextTypeRefConsumer extends NonTerminalConsumer {
 	protected int consumeAssignment$3() throws Exception {
 		int result = Integer.MIN_VALUE;
 		int tempResult;
-		tempResult = consumeTerminal(idConsumer, null, false, false, getRule().ele000CrossReferenceEStringAbstractMetamodelDeclaration(), getCrossReference$4$Delimiter());
+		tempResult = consumeTerminal(idConsumer, "metamodel", false, false, getRule().ele000CrossReferenceEStringAbstractMetamodelDeclaration(), getCrossReference$4$Delimiter());
 		if (tempResult == ConsumeResult.SUCCESS)
 			return tempResult;
 		result = tempResult >= result ? tempResult : result; 
@@ -110,7 +110,7 @@ public final class XtextTypeRefConsumer extends NonTerminalConsumer {
 	protected int consumeAssignment$7() throws Exception {
 		int result = Integer.MIN_VALUE;
 		int tempResult;
-		tempResult = consumeTerminal(idConsumer, null, false, false, getRule().ele10CrossReferenceEStringEClassifier(), getCrossReference$8$Delimiter());
+		tempResult = consumeTerminal(idConsumer, "type", false, false, getRule().ele10CrossReferenceEStringEClassifier(), getCrossReference$8$Delimiter());
 		if (tempResult == ConsumeResult.SUCCESS)
 			return tempResult;
 		result = tempResult >= result ? tempResult : result; 

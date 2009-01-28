@@ -38,8 +38,12 @@ public abstract class AbstractParsedTokenVisitor implements IParsedTokenVisitor 
 		visitParsedToken(token);
 	}
 	
-	public void visitParsedTerminalWithFeature(ParsedTerminalWithFeature token) {
+	public void visitParsedTerminalWithFeatureInfo(ParsedTerminalWithFeatureInfo token) {
 		visitParsedTerminal(token);
+	}
+	
+	public void visitParsedTerminalWithFeature(ParsedTerminalWithFeature token) {
+		visitParsedTerminalWithFeatureInfo(token);
 	}
 
 	public void visitParsedToken(ParsedToken token) {

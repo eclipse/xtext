@@ -155,7 +155,7 @@ public final class ReferenceGrammarFamilieConsumer extends NonTerminalConsumer {
 	protected int consumeAssignment$16() throws Exception {
 		int result = Integer.MIN_VALUE;
 		int tempResult;
-		tempResult = consumeTerminal(idConsumer, null, false, false, getRule().ele000010CrossReferenceEStringErwachsener(), getCrossReference$17$Delimiter());
+		tempResult = consumeTerminal(idConsumer, "mutter", false, false, getRule().ele000010CrossReferenceEStringErwachsener(), getCrossReference$17$Delimiter());
 		if (tempResult == ConsumeResult.SUCCESS)
 			return tempResult;
 		result = tempResult >= result ? tempResult : result; 
@@ -165,7 +165,7 @@ public final class ReferenceGrammarFamilieConsumer extends NonTerminalConsumer {
 	protected int consumeAssignment$19() throws Exception {
 		int result = Integer.MIN_VALUE;
 		int tempResult;
-		tempResult = consumeTerminal(idConsumer, null, false, false, getRule().ele00010CrossReferenceEStringErwachsener(), getCrossReference$20$Delimiter());
+		tempResult = consumeTerminal(idConsumer, "vater", false, false, getRule().ele00010CrossReferenceEStringErwachsener(), getCrossReference$20$Delimiter());
 		if (tempResult == ConsumeResult.SUCCESS)
 			return tempResult;
 		result = tempResult >= result ? tempResult : result; 
@@ -175,7 +175,7 @@ public final class ReferenceGrammarFamilieConsumer extends NonTerminalConsumer {
 	protected int consumeAssignment$22() throws Exception {
 		int result = Integer.MIN_VALUE;
 		int tempResult;
-		tempResult = consumeTerminal(idConsumer, null, true, false, getRule().ele0010CrossReferenceEStringKind(), getCrossReference$23$Delimiter());
+		tempResult = consumeTerminal(idConsumer, "kinder", true, false, getRule().ele0010CrossReferenceEStringKind(), getCrossReference$23$Delimiter());
 		if (tempResult == ConsumeResult.SUCCESS)
 			return tempResult;
 		result = tempResult >= result ? tempResult : result; 
@@ -217,7 +217,7 @@ public final class ReferenceGrammarFamilieConsumer extends NonTerminalConsumer {
 	protected int consumeAssignment$27() throws Exception {
 		int result = Integer.MIN_VALUE;
 		int tempResult;
-		tempResult = consumeTerminal(idConsumer, null, true, false, getRule().ele0110CrossReferenceEStringKind(), getCrossReference$28$Delimiter());
+		tempResult = consumeTerminal(idConsumer, "kinder", true, false, getRule().ele0110CrossReferenceEStringKind(), getCrossReference$28$Delimiter());
 		if (tempResult == ConsumeResult.SUCCESS)
 			return tempResult;
 		result = tempResult >= result ? tempResult : result; 

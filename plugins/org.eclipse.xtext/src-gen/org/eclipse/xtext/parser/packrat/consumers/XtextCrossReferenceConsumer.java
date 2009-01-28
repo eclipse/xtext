@@ -131,7 +131,7 @@ public final class XtextCrossReferenceConsumer extends NonTerminalConsumer {
 	protected int consumeAssignment$9() throws Exception {
 		int result = Integer.MIN_VALUE;
 		int tempResult;
-		tempResult = consumeTerminal(idConsumer, null, false, false, getRule().ele0110CrossReferenceEStringAbstractRule(), getCrossReference$10$Delimiter());
+		tempResult = consumeTerminal(idConsumer, "rule", false, false, getRule().ele0110CrossReferenceEStringAbstractRule(), getCrossReference$10$Delimiter());
 		if (tempResult == ConsumeResult.SUCCESS)
 			return tempResult;
 		result = tempResult >= result ? tempResult : result; 

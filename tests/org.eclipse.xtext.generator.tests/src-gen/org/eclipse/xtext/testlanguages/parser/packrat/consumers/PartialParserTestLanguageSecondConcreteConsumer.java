@@ -144,7 +144,7 @@ public final class PartialParserTestLanguageSecondConcreteConsumer extends NonTe
 	protected int doConsumeAssignment$13() throws Exception {
 		int result = Integer.MIN_VALUE;
 		int tempResult;
-		tempResult = consumeTerminal(idConsumer, null, true, false, getRule().ele010CrossReferenceEStringChild(), getCrossReference$14$Delimiter());
+		tempResult = consumeTerminal(idConsumer, "referencedChildren", true, false, getRule().ele010CrossReferenceEStringChild(), getCrossReference$14$Delimiter());
 		if (tempResult == ConsumeResult.SUCCESS)
 			return tempResult;
 		result = tempResult >= result ? tempResult : result; 

@@ -230,7 +230,7 @@ public final class XtextParserRuleConsumer extends NonTerminalConsumer {
 	protected int consumeAssignment$19() throws Exception {
 		int result = Integer.MIN_VALUE;
 		int tempResult;
-		tempResult = consumeTerminal(idConsumer, null, true, false, getRule().ele00010010CrossReferenceEStringAbstractRule(), getCrossReference$20$Delimiter());
+		tempResult = consumeTerminal(idConsumer, "hiddenTokens", true, false, getRule().ele00010010CrossReferenceEStringAbstractRule(), getCrossReference$20$Delimiter());
 		if (tempResult == ConsumeResult.SUCCESS)
 			return tempResult;
 		result = tempResult >= result ? tempResult : result; 
@@ -272,7 +272,7 @@ public final class XtextParserRuleConsumer extends NonTerminalConsumer {
 	protected int consumeAssignment$24() throws Exception {
 		int result = Integer.MIN_VALUE;
 		int tempResult;
-		tempResult = consumeTerminal(idConsumer, null, true, false, getRule().ele00010110CrossReferenceEStringAbstractRule(), getCrossReference$25$Delimiter());
+		tempResult = consumeTerminal(idConsumer, "hiddenTokens", true, false, getRule().ele00010110CrossReferenceEStringAbstractRule(), getCrossReference$25$Delimiter());
 		if (tempResult == ConsumeResult.SUCCESS)
 			return tempResult;
 		result = tempResult >= result ? tempResult : result; 
