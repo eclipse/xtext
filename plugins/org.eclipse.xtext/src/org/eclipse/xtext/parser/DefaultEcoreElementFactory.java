@@ -43,6 +43,9 @@ public class DefaultEcoreElementFactory implements IAstFactory {
 	@Inject
 	private IGrammarAccess grammarAccess;
 	
+	@Inject(optional=true)
+	private ITokenToStringConverter tokenConverter;
+	
 	public IValueConverterService getConverterService() {
 		return converterService;
 	}
@@ -93,6 +96,8 @@ public class DefaultEcoreElementFactory implements IAstFactory {
 	}
 
 	protected Object getTokenAsStringIfPossible(Object tokenOrValue) {
+		if (tokenConverter != null)
+			return tokenConverter.getTokenAsStringIfPossible(tokenOrValue);
 		return tokenOrValue;
 	}
 	
