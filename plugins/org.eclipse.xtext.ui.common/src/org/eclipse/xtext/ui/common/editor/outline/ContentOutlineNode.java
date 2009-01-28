@@ -11,8 +11,6 @@ package org.eclipse.xtext.ui.common.editor.outline;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * @author Peter Friese - Initial contribution and API
  */
@@ -20,7 +18,6 @@ public class ContentOutlineNode {
 
 	private String label;
 	private String image;
-	private EObject semanticNode;
 	private int selectionOffset;
 	private int selectionLength;
 	private List<ContentOutlineNode> children;
@@ -42,14 +39,6 @@ public class ContentOutlineNode {
 		return image;
 	}
 
-	public void setSemanticNode(EObject semanticNode) {
-		this.semanticNode = semanticNode;
-	}
-
-	public EObject getSemanticNode() {
-		return semanticNode;
-	}
-
 	public void setChildren(List<ContentOutlineNode> children) {
 		this.children = children;
 	}
@@ -64,7 +53,7 @@ public class ContentOutlineNode {
 	public void setParent(ContentOutlineNode outlineParentNode) {
 		this.parent = outlineParentNode;
 	}
-	
+
 	public ContentOutlineNode getParent() {
 		return parent;
 	}
