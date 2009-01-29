@@ -1,0 +1,34 @@
+epatch EXTRACT_AND_REFERENCE_AUTHOR_JAVA {
+  import ecore ns "http://www.eclipse.org/emf/2002/Ecore"
+  import java de.itemis.emf.^epatch.tests.evolution.book.BookChanges_EXTRACT_AND_REFERENCE_AUTHOR
+  resource res0 {
+  left uri "book.ecore";
+  right uri "book1.ecore";
+  }
+
+  object res0#/ {
+    eClassifiers = [ | 1:new ecore#//EClass Author {
+      eStructuralFeatures = [ name ];
+      name = "Author";
+    } ];
+  }
+
+  object res0#//Book {
+    eStructuralFeatures = [ 1:name | 2:new ecore#//EReference {
+      containment = "true";
+      eType = Author;
+      name = "authors";
+      upperBound = "-1";
+      migrate java getSrcObject();
+    } ];
+  }
+
+  object name left res0#//Book/authorName right res0#//Author/name {
+    name = "authorName" | "name";
+  }
+
+  object left res0#//Book/bookName right res0#//Book/name {
+    name = "bookName" | "name";
+  }
+
+}
