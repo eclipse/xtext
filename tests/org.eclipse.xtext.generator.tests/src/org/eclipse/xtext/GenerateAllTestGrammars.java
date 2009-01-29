@@ -20,6 +20,7 @@ import org.eclipse.xtext.grammarinheritance.ConcreteTestLanguage;
 import org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTestLanguage;
 import org.eclipse.xtext.metamodelreferencing.tests.MultiGenMMTestLanguage;
 import org.eclipse.xtext.parser.datatyperules.DatatypeRulesTestLanguage;
+import org.eclipse.xtext.parser.epatch.EpatchTestLanguage;
 import org.eclipse.xtext.parser.terminalrules.HiddenTerminalsTestLanguage;
 import org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage;
 import org.eclipse.xtext.parser.terminalrules.XtextTerminalsTestLanguage;
@@ -80,8 +81,8 @@ public class GenerateAllTestGrammars {
 			MultiValueFeatureTestLanguage.class,
 			TerminalRulesTestLanguage.class,
 			XtextTerminalsTestLanguage.class,
-			HiddenTerminalsTestLanguage.class //,
-//			EpatchTestLanguage.class
+			HiddenTerminalsTestLanguage.class,
+			EpatchTestLanguage.class
 	};
 
 	public static void main(String... args) throws Exception {
