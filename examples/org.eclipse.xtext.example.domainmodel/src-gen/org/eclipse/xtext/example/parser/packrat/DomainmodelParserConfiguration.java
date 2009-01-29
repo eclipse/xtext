@@ -4,13 +4,7 @@ Generated with Xtext
 package org.eclipse.xtext.example.parser.packrat;
 
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
-import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
-import org.eclipse.xtext.parser.packrat.IHiddenTokenHandler;
-import org.eclipse.xtext.parser.packrat.IMarkerFactory;
-import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
-import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
-import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 
@@ -38,6 +32,7 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSL_COMMENT
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinWSConsumer;
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinANY_OTHERConsumer;
 
+@SuppressWarnings("unused")
 public class DomainmodelParserConfiguration extends AbstractParserConfiguration {
 
 	private XtextBuiltinParserConfiguration xtextBuiltinConfiguration; 
@@ -59,11 +54,9 @@ public class DomainmodelParserConfiguration extends AbstractParserConfiguration 
     private DomainmodelTypeRefConsumer typeRefConsumer;
     private DomainmodelQualifiedNameConsumer qualifiedNameConsumer;
 
-	public DomainmodelParserConfiguration(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
-			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil) {
-		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil);
-		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(
-			input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil);
+	public DomainmodelParserConfiguration(IInternalParserConfiguration configuration) {
+		super(configuration);
+		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration);
 	}
 
 	public DomainmodelFileConsumer getRootConsumer() {
@@ -73,52 +66,52 @@ public class DomainmodelParserConfiguration extends AbstractParserConfiguration 
 	public void createNonTerminalConsumers() {
 		getXtextBuiltinConfiguration().createNonTerminalConsumers();
 		fileConsumer = new DomainmodelFileConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		importConsumer = new DomainmodelImportConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		namedElementConsumer = new DomainmodelNamedElementConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		packageConsumer = new DomainmodelPackageConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		typeConsumer = new DomainmodelTypeConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		dataTypeConsumer = new DomainmodelDataTypeConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		entityConsumer = new DomainmodelEntityConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		featureConsumer = new DomainmodelFeatureConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		structuralFeatureConsumer = new DomainmodelStructuralFeatureConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		attributeConsumer = new DomainmodelAttributeConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		referenceConsumer = new DomainmodelReferenceConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		operationConsumer = new DomainmodelOperationConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		parameterConsumer = new DomainmodelParameterConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		typedElementConsumer = new DomainmodelTypedElementConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		typeRefConsumer = new DomainmodelTypeRefConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		qualifiedNameConsumer = new DomainmodelQualifiedNameConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 	}
 	

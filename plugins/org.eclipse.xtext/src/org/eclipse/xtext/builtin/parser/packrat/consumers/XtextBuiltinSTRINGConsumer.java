@@ -9,13 +9,10 @@ package org.eclipse.xtext.builtin.parser.packrat.consumers;
 
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.LexerRule;
-import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
-import org.eclipse.xtext.parser.packrat.IMarkerFactory;
-import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
+import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
-import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 import org.eclipse.xtext.services.XtextGrammarAccess;
 
 /**
@@ -28,14 +25,8 @@ public final class XtextBuiltinSTRINGConsumer extends AbstractRuleAwareTerminalC
 	// ~('\\\\'|'\\'')
 	static final ICharacterClass STRINGConsumer$$2 = ICharacterClass.Factory.invert(ICharacterClass.Factory.create('\\', '\''));
 	
-	/**
-	 * @param input
-	 * @param markerFactory
-	 * @param tokenAcceptor
-	 */
-	public XtextBuiltinSTRINGConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
-			IParsedTokenAcceptor tokenAcceptor) {
-		super(input, markerFactory, tokenAcceptor);
+	public XtextBuiltinSTRINGConsumer(ITerminalConsumerConfiguration configuration) {
+		super(configuration);
 	}
 
 	public int doConsume() {

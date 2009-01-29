@@ -33,7 +33,10 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
+import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumerConfiguration;
+import org.eclipse.xtext.parser.packrat.consumers.RecoveryStateHolder;
 import org.eclipse.xtext.parser.packrat.matching.StringWithOffset;
+import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 import org.eclipse.xtext.util.CollectionUtils;
 import org.eclipse.xtext.util.Filter;
 import org.eclipse.xtext.util.Function;
@@ -44,6 +47,29 @@ import org.eclipse.xtext.util.Strings;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public final class PackratParserGenUtil {
+
+	/**
+	 * @author Sebastian Zarnekow - Initial contribution and API
+	 */
+	private static final class MyTerminalConsumerConfiguration implements ITerminalConsumerConfiguration {
+		private final StringWithOffset input;
+
+		private MyTerminalConsumerConfiguration(StringWithOffset input) {
+			this.input = input;
+		}
+
+		public ICharSequenceWithOffset getInput() {
+			return input;
+		}
+
+		public RecoveryStateHolder getRecoveryStateHolder() {
+			return null;
+		}
+
+		public IParsedTokenAcceptor getTokenAcceptor() {
+			return null;
+		}
+	}
 
 	private PackratParserGenUtil() {
 		throw new UnsupportedOperationException(getClass().getName() + " may not be initialized.");
@@ -197,7 +223,7 @@ public final class PackratParserGenUtil {
 				if (rule instanceof LexerRule) {
 					if (rule.getName().equals("ID")) {
 						final StringWithOffset input = new StringWithOffset(param.getValue());
-						return new XtextBuiltinIDConsumer(input, input, null).consume() == ConsumeResult.SUCCESS;
+						return new XtextBuiltinIDConsumer(new MyTerminalConsumerConfiguration(input)).consume() == ConsumeResult.SUCCESS;
 					}
 				} else {
 					ParserRule parserRule = (ParserRule) rule;
@@ -217,7 +243,7 @@ public final class PackratParserGenUtil {
 		if (rule != null) {
 			// TODO SZ: use interpreter
 			final StringWithOffset input = new StringWithOffset(keyword.getValue());
-			if (new XtextBuiltinIDConsumer(input, input, null).consume() == ConsumeResult.SUCCESS) {
+			if (new XtextBuiltinIDConsumer(new MyTerminalConsumerConfiguration(input)).consume() == ConsumeResult.SUCCESS) {
 				return Collections.singletonList(rule);
 			}
 		}

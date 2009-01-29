@@ -9,10 +9,7 @@ package org.eclipse.xtext.parser.packrat.consumers;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
-import org.eclipse.xtext.parser.packrat.IMarkerFactory;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
-import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -23,9 +20,8 @@ public final class KeywordConsumer extends TerminalConsumer {
 
 	private ICharacterClass notFollowedBy;
 	
-	public KeywordConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
-			IParsedTokenAcceptor tokenAcceptor) {
-		super(input, markerFactory, tokenAcceptor);
+	public KeywordConsumer(ITerminalConsumerConfiguration configuration) {
+		super(configuration);
 		setHidden(false);
 	}
 

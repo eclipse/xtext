@@ -4,13 +4,7 @@ Generated with Xtext
 package org.eclipse.xtext.metamodelreferencing.tests.parser.packrat;
 
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
-import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
-import org.eclipse.xtext.parser.packrat.IHiddenTokenHandler;
-import org.eclipse.xtext.parser.packrat.IMarkerFactory;
-import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
-import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
-import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 
@@ -24,6 +18,7 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSL_COMMENT
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinWSConsumer;
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinANY_OTHERConsumer;
 
+@SuppressWarnings("unused")
 public class MultiGenMMTestLanguageParserConfiguration extends AbstractParserConfiguration {
 
 	private XtextBuiltinParserConfiguration xtextBuiltinConfiguration; 
@@ -31,11 +26,9 @@ public class MultiGenMMTestLanguageParserConfiguration extends AbstractParserCon
     private MultiGenMMTestLanguageFooConsumer fooConsumer;
     private MultiGenMMTestLanguageNameRefConsumer nameRefConsumer;
 
-	public MultiGenMMTestLanguageParserConfiguration(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
-			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil) {
-		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil);
-		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(
-			input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil);
+	public MultiGenMMTestLanguageParserConfiguration(IInternalParserConfiguration configuration) {
+		super(configuration);
+		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration);
 	}
 
 	public MultiGenMMTestLanguageFooConsumer getRootConsumer() {
@@ -45,10 +38,10 @@ public class MultiGenMMTestLanguageParserConfiguration extends AbstractParserCon
 	public void createNonTerminalConsumers() {
 		getXtextBuiltinConfiguration().createNonTerminalConsumers();
 		fooConsumer = new MultiGenMMTestLanguageFooConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		nameRefConsumer = new MultiGenMMTestLanguageNameRefConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 	}
 	

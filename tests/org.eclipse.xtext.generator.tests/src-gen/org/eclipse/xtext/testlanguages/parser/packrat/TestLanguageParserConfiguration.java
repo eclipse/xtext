@@ -4,13 +4,7 @@ Generated with Xtext
 package org.eclipse.xtext.testlanguages.parser.packrat;
 
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
-import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
-import org.eclipse.xtext.parser.packrat.IHiddenTokenHandler;
-import org.eclipse.xtext.parser.packrat.IMarkerFactory;
-import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
-import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
-import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 
@@ -27,6 +21,7 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSL_COMMENT
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinWSConsumer;
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinANY_OTHERConsumer;
 
+@SuppressWarnings("unused")
 public class TestLanguageParserConfiguration extends AbstractParserConfiguration {
 
 	private XtextBuiltinParserConfiguration xtextBuiltinConfiguration; 
@@ -37,11 +32,9 @@ public class TestLanguageParserConfiguration extends AbstractParserConfiguration
     private TestLanguageReducibleRuleConsumer reducibleRuleConsumer;
     private TestLanguageTerminalRuleConsumer terminalRuleConsumer;
 
-	public TestLanguageParserConfiguration(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
-			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil) {
-		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil);
-		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(
-			input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil);
+	public TestLanguageParserConfiguration(IInternalParserConfiguration configuration) {
+		super(configuration);
+		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration);
 	}
 
 	public TestLanguageEntryRuleConsumer getRootConsumer() {
@@ -51,19 +44,19 @@ public class TestLanguageParserConfiguration extends AbstractParserConfiguration
 	public void createNonTerminalConsumers() {
 		getXtextBuiltinConfiguration().createNonTerminalConsumers();
 		entryRuleConsumer = new TestLanguageEntryRuleConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		abstractRuleConsumer = new TestLanguageAbstractRuleConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		choiceRuleConsumer = new TestLanguageChoiceRuleConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		reducibleRuleConsumer = new TestLanguageReducibleRuleConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		terminalRuleConsumer = new TestLanguageTerminalRuleConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 	}
 	

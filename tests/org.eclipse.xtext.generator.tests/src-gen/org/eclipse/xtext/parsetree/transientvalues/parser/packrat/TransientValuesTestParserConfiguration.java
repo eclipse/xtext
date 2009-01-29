@@ -4,13 +4,7 @@ Generated with Xtext
 package org.eclipse.xtext.parsetree.transientvalues.parser.packrat;
 
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
-import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
-import org.eclipse.xtext.parser.packrat.IHiddenTokenHandler;
-import org.eclipse.xtext.parser.packrat.IMarkerFactory;
-import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
-import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
-import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 
@@ -26,6 +20,7 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSL_COMMENT
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinWSConsumer;
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinANY_OTHERConsumer;
 
+@SuppressWarnings("unused")
 public class TransientValuesTestParserConfiguration extends AbstractParserConfiguration {
 
 	private XtextBuiltinParserConfiguration xtextBuiltinConfiguration; 
@@ -35,11 +30,9 @@ public class TransientValuesTestParserConfiguration extends AbstractParserConfig
     private TransientValuesTestTestOptionalConsumer testOptionalConsumer;
     private TransientValuesTestTestListConsumer testListConsumer;
 
-	public TransientValuesTestParserConfiguration(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
-			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil) {
-		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil);
-		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(
-			input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil);
+	public TransientValuesTestParserConfiguration(IInternalParserConfiguration configuration) {
+		super(configuration);
+		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration);
 	}
 
 	public TransientValuesTestRootConsumer getRootConsumer() {
@@ -49,16 +42,16 @@ public class TransientValuesTestParserConfiguration extends AbstractParserConfig
 	public void createNonTerminalConsumers() {
 		getXtextBuiltinConfiguration().createNonTerminalConsumers();
 		rootConsumer = new TransientValuesTestRootConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		testRequiredConsumer = new TransientValuesTestTestRequiredConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		testOptionalConsumer = new TransientValuesTestTestOptionalConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		testListConsumer = new TransientValuesTestTestListConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 	}
 	

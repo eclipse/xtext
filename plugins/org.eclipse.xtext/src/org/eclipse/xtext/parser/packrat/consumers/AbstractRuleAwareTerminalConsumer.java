@@ -8,9 +8,6 @@
 package org.eclipse.xtext.parser.packrat.consumers;
 
 import org.eclipse.xtext.AbstractRule;
-import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
-import org.eclipse.xtext.parser.packrat.IMarkerFactory;
-import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -19,9 +16,8 @@ public abstract class AbstractRuleAwareTerminalConsumer extends TerminalConsumer
 	
 	private AbstractRule rule;
 	
-	protected AbstractRuleAwareTerminalConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
-			IParsedTokenAcceptor tokenAcceptor) {
-		super(input, markerFactory, tokenAcceptor);
+	protected AbstractRuleAwareTerminalConsumer(ITerminalConsumerConfiguration configuration) {
+		super(configuration);
 	}
 	
 	public final AbstractRule getGrammarElement() {

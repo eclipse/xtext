@@ -9,25 +9,18 @@ package org.eclipse.xtext.builtin.parser.packrat.consumers;
 
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.LexerRule;
-import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
-import org.eclipse.xtext.parser.packrat.IMarkerFactory;
 import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
-import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumerConfiguration;
 import org.eclipse.xtext.services.XtextGrammarAccess;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public final class XtextBuiltinANY_OTHERConsumer extends AbstractRuleAwareTerminalConsumer {
-	/**
-	 * @param input
-	 * @param markerFactory
-	 * @param tokenAcceptor
-	 */
-	public XtextBuiltinANY_OTHERConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
-			IParsedTokenAcceptor tokenAcceptor) {
-		super(input, markerFactory, tokenAcceptor);
+
+	public XtextBuiltinANY_OTHERConsumer(ITerminalConsumerConfiguration configuration) {
+		super(configuration);
 	}
 
 	public int doConsume() {

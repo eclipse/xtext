@@ -10,11 +10,8 @@ package org.eclipse.xtext.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.CrossReference;
-import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
-import org.eclipse.xtext.parser.packrat.IMarkerFactory;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
-import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedTerminal;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedTerminalWithFeature;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedTerminalWithFeatureInfo;
@@ -23,17 +20,12 @@ import org.eclipse.xtext.util.Strings;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class TerminalConsumer implements ITerminalConsumer {
+public abstract class TerminalConsumer extends AbstractConsumer implements ITerminalConsumer {
 	
-	private final ICharSequenceWithOffset input;
-	
-	private final IParsedTokenAcceptor acceptor;
-
 	private boolean hidden;
 	
-	protected TerminalConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory, IParsedTokenAcceptor tokenAcceptor) {
-		this.input = input;
-		this.acceptor = tokenAcceptor;
+	protected TerminalConsumer(ITerminalConsumerConfiguration configuration) {
+		super(configuration.getInput(), configuration.getTokenAcceptor(), configuration.getRecoveryStateHolder());
 	}
 
 	public final int consume(String feature, boolean isMany, boolean isBoolean, AbstractElement element, ISequenceMatcher notMatching) {
@@ -190,12 +182,6 @@ public abstract class TerminalConsumer implements ITerminalConsumer {
 	
 	protected abstract String getRuleName();
 	
-	@Override
-	public String toString() {
-		String result = this.getClass().getSimpleName(); 
-		return "TerminalConsumer " + (Strings.isEmpty(result) ? this.getClass().getName() : result) + " for rule '" + getRuleName() + "'";
-	}
-
 	public void setHidden(boolean hidden) {
 		this.hidden = hidden;
 	}
@@ -212,12 +198,14 @@ public abstract class TerminalConsumer implements ITerminalConsumer {
 		return input.getOffset();
 	}
 
-	protected int getOffset() {
-		return input.getOffset();
-	}
-	
 	protected void rollbackTo(int marker) {
 		input.setOffset(marker);
+	}
+	
+	@Override
+	public String toString() {
+		String result = this.getClass().getSimpleName(); 
+		return "TerminalConsumer " + (Strings.isEmpty(result) ? this.getClass().getName() : result) + " for rule '" + getRuleName() + "'";
 	}
 
 }

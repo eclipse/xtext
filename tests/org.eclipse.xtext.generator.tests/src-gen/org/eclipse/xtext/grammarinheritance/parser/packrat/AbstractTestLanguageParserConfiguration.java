@@ -4,13 +4,7 @@ Generated with Xtext
 package org.eclipse.xtext.grammarinheritance.parser.packrat;
 
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
-import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
-import org.eclipse.xtext.parser.packrat.IHiddenTokenHandler;
-import org.eclipse.xtext.parser.packrat.IMarkerFactory;
-import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
-import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
-import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 
@@ -24,6 +18,7 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSL_COMMENT
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinWSConsumer;
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinANY_OTHERConsumer;
 
+@SuppressWarnings("unused")
 public class AbstractTestLanguageParserConfiguration extends AbstractParserConfiguration {
 
 	private XtextBuiltinParserConfiguration xtextBuiltinConfiguration; 
@@ -32,11 +27,9 @@ public class AbstractTestLanguageParserConfiguration extends AbstractParserConfi
     private AbstractTestLanguageREALConsumer realConsumer;
     private AbstractTestLanguageIDConsumer idConsumer;
 
-	public AbstractTestLanguageParserConfiguration(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
-			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil) {
-		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil);
-		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(
-			input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil);
+	public AbstractTestLanguageParserConfiguration(IInternalParserConfiguration configuration) {
+		super(configuration);
+		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration);
 	}
 
 	public AbstractTestLanguageInheritedParserRuleConsumer getRootConsumer() {
@@ -46,14 +39,14 @@ public class AbstractTestLanguageParserConfiguration extends AbstractParserConfi
 	public void createNonTerminalConsumers() {
 		getXtextBuiltinConfiguration().createNonTerminalConsumers();
 		inheritedParserRuleConsumer = new AbstractTestLanguageInheritedParserRuleConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 	}
 	
 	public void createTerminalConsumers() {
 		getXtextBuiltinConfiguration().createTerminalConsumers();
-		realConsumer = new AbstractTestLanguageREALConsumer(getInput(), getMarkerFactory(), getTokenAcceptor());
-		idConsumer = new AbstractTestLanguageIDConsumer(getInput(), getMarkerFactory(), getTokenAcceptor());
+		realConsumer = new AbstractTestLanguageREALConsumer(this);
+		idConsumer = new AbstractTestLanguageIDConsumer(this);
 	}
 	
 	public void configureConsumers() {

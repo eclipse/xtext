@@ -32,19 +32,13 @@
 package «genClassFQName.toJavaPackage()»;
 
 import org.eclipse.xtext.parser.packrat.AbstractPackratParser;
-import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
-import org.eclipse.xtext.parser.packrat.IHiddenTokenHandler;
-import org.eclipse.xtext.parser.packrat.IMarkerFactory;
-import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
-import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration.IInternalParserConfiguration;
 
 public class «genClassFQName.toSimpleName()» extends AbstractPackratParser {
 
 	@Override
-	protected «languageName().toFirstUpper()»ParserConfiguration createParserConfiguration(ICharSequenceWithOffset input,
-			IMarkerFactory markerFactory, IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler,
-			IConsumerUtility consumerUtil) {
-		return new «languageName().toFirstUpper()»ParserConfiguration(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil);
+	protected «languageName().toFirstUpper()»ParserConfiguration createParserConfiguration(IInternalParserConfiguration configuration) {
+		return new «languageName().toFirstUpper()»ParserConfiguration(configuration);
 	}
 
 }
@@ -59,13 +53,7 @@ public class «genClassFQName.toSimpleName()» extends AbstractPackratParser {
 package «genClassFQName.toJavaPackage()»;
 
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
-import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
-import org.eclipse.xtext.parser.packrat.IHiddenTokenHandler;
-import org.eclipse.xtext.parser.packrat.IMarkerFactory;
-import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
-import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
-import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 «LET grammar().getSuperGrammar() AS superGrammar-»
 «IF superGrammar != null-»
@@ -77,6 +65,7 @@ import «superGrammar.getNamespace()».parser.packrat.«superGrammar.getName().toFi
 import «rule.grammar().getNamespace()».parser.packrat.consumers.«rule.consumerClassName()»;
 «ENDFOREACH-»
 
+@SuppressWarnings("unused")
 public class «languageName().toFirstUpper()»ParserConfiguration extends AbstractParserConfiguration {
 
 «LET grammar().getSuperGrammar() AS superGrammar-»
@@ -89,13 +78,11 @@ public class «languageName().toFirstUpper()»ParserConfiguration extends Abstract
     private «rule.consumerClassName()» «rule.consumerFieldName()»;
 «ENDFOREACH-»
 
-	public «languageName().toFirstUpper()»ParserConfiguration(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
-			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil) {
-		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil);
+	public «languageName().toFirstUpper()»ParserConfiguration(IInternalParserConfiguration configuration) {
+		super(configuration);
 «LET grammar().getSuperGrammar() AS superGrammar-»
 «IF superGrammar != null-»
-		this.«superGrammar.getName().replaceAll("\\s","_").toFirstLower()»Configuration = new «superGrammar.getName().replaceAll("\\s","_").toFirstUpper()»ParserConfiguration(
-			input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil);
+		this.«superGrammar.getName().replaceAll("\\s","_").toFirstLower()»Configuration = new «superGrammar.getName().replaceAll("\\s","_").toFirstUpper()»ParserConfiguration(configuration);
 «ENDIF-»
 «ENDLET-»
 	}
@@ -113,10 +100,9 @@ public class «languageName().toFirstUpper()»ParserConfiguration extends Abstract
 «FOREACH grammar().rules.typeSelect(ParserRule).select(e|!e.terminal) AS rule-»
 		«rule.consumerFieldName()» = new «rule.consumerClassName()»(
 «IF rule.definesHiddenTokens-»
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(),
-    		new ITerminalConsumer[]{ «FOREACH rule.hiddenTokens AS hidden SEPARATOR ", "»«hidden.consumerGetterName()»()«ENDFOREACH-» }
+    		this, new ITerminalConsumer[]{ «FOREACH rule.hiddenTokens AS hidden SEPARATOR ", "»«hidden.consumerGetterName()»()«ENDFOREACH-» }
 «ELSE-»
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
 «ENDIF-»
     	);
 «ENDFOREACH-»
@@ -129,10 +115,10 @@ public class «languageName().toFirstUpper()»ParserConfiguration extends Abstract
 «ENDIF-»
 «ENDLET-»
 «FOREACH grammar().rules.typeSelect(ParserRule).select(e|e.terminal) AS rule-»
-		«rule.consumerFieldName()» = new «rule.consumerClassName()»(getInput(), getMarkerFactory(), getTokenAcceptor());
+		«rule.consumerFieldName()» = new «rule.consumerClassName()»(this);
 «ENDFOREACH-»
 «FOREACH grammar().rules.typeSelect(LexerRule) AS rule-»
-		«rule.consumerFieldName()» = new «rule.consumerClassName()»(getInput(), getMarkerFactory(), getTokenAcceptor());
+		«rule.consumerFieldName()» = new «rule.consumerClassName()»(this);
 «ENDFOREACH-»
 	}
 	
