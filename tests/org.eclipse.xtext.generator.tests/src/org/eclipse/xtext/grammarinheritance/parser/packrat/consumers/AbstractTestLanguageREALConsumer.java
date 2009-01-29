@@ -9,15 +9,10 @@ package org.eclipse.xtext.grammarinheritance.parser.packrat.consumers;
 
 import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinINTConsumer;
-import org.eclipse.xtext.grammarinheritance.parser.packrat.AbstractTestLanguageParserConfiguration;
-import org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageParserConfiguration;
 import org.eclipse.xtext.grammarinheritance.services.AbstractTestLanguageGrammarAccess;
-import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
-import org.eclipse.xtext.parser.packrat.IMarkerFactory;
-import org.eclipse.xtext.parser.packrat.IParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
-import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumerConfiguration;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -26,9 +21,8 @@ public class AbstractTestLanguageREALConsumer extends AbstractRuleAwareTerminalC
 
 	private XtextBuiltinINTConsumer intConsumer;
 	
-	public AbstractTestLanguageREALConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
-			IParsedTokenAcceptor tokenAcceptor) {
-		super(input, markerFactory, tokenAcceptor);
+	public AbstractTestLanguageREALConsumer(ITerminalConsumerConfiguration configuration) {
+		super(configuration);
 	}
 
 	@Override

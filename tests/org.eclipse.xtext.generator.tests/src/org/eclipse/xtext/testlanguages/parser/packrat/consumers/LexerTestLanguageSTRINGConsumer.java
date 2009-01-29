@@ -7,13 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.testlanguages.parser.packrat.consumers;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.LexerRule;
-import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
-import org.eclipse.xtext.parser.packrat.IMarkerFactory;
 import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
-import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumerConfiguration;
 import org.eclipse.xtext.testlanguages.services.LexerTestLanguageGrammarAccess;
 
 /**
@@ -21,9 +18,8 @@ import org.eclipse.xtext.testlanguages.services.LexerTestLanguageGrammarAccess;
  */
 public class LexerTestLanguageSTRINGConsumer extends AbstractRuleAwareTerminalConsumer {
 
-	public LexerTestLanguageSTRINGConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
-			IParsedTokenAcceptor tokenAcceptor) {
-		super(input, markerFactory, tokenAcceptor);
+	public LexerTestLanguageSTRINGConsumer(ITerminalConsumerConfiguration configuration) {
+		super(configuration);
 	}
 
 	@Override

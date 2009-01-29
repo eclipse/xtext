@@ -29,12 +29,10 @@
 package «this.consumerPackageName()»;
 
 import org.eclipse.xtext.AbstractRule;
-import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
-import org.eclipse.xtext.parser.packrat.IMarkerFactory;
+import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
-import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import «this.grammar().grammarAccess()»;
 
@@ -49,9 +47,8 @@ public final class «this.consumerClassName()» extends AbstractRuleAwareTerminalC
 	private «calledRule.consumerClassName()» «calledRule.consumerFieldName()»;
 «ENDFOREACH-»
 
-	public «this.consumerClassName()»(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
-			IParsedTokenAcceptor tokenAcceptor) {
-		super(input, markerFactory, tokenAcceptor);
+	public «this.consumerClassName()»(ITerminalConsumerConfiguration configuration) {
+		super(configuration);
 	}
 	
 	protected int doConsume() {
