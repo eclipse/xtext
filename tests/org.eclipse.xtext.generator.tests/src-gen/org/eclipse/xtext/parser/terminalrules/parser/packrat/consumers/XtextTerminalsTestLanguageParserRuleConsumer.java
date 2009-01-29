@@ -36,9 +36,9 @@ public final class XtextTerminalsTestLanguageParserRuleConsumer extends NonTermi
 	
 	private ICharacterClass keyword$9$Delimiter;
 	
-	private ICharacterClass keyword$17$Delimiter;
+	private ICharacterClass keyword$16$Delimiter;
 	
-	private ICharacterClass keyword$18$Delimiter;
+	private ICharacterClass keyword$17$Delimiter;
 	
 	private ICharacterClass keyword$23$Delimiter;
 	
@@ -57,8 +57,8 @@ public final class XtextTerminalsTestLanguageParserRuleConsumer extends NonTermi
 		crossReference$20$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		crossReference$25$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		keyword$9$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$16$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$17$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$18$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$23$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$27$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$28$Delimiter = ICharacterClass.Factory.nullClass();
@@ -179,25 +179,19 @@ public final class XtextTerminalsTestLanguageParserRuleConsumer extends NonTermi
 	protected int doConsumeGroup$12() throws Exception {
 		final IMarker marker = mark();
 		int result;
-		result = consumeAssignment$16(); 
+		result = consumeAssignment$15(); 
 		if (result!=ConsumeResult.SUCCESS) {
-			error("Another token expected.", getRule().ele00010000AssignmentDefinesHiddenTokens());
+			error("Another token expected.", getRule().ele0001000AssignmentDefinesHiddenTokens());
 			marker.commit();
 			return result;
 		}
-		result = consumeKeyword$18(); 
+		result = consumeKeyword$17(); 
 		if (result!=ConsumeResult.SUCCESS) {
-			error("Another token expected.", getRule().ele00010001KeywordLeftParenthesis());
+			error("Another token expected.", getRule().ele0001001KeywordLeftParenthesis());
 			marker.commit();
 			return result;
 		}
-		result = consumeAssignment$19(); 
-		if (result!=ConsumeResult.SUCCESS) {
-			error("Another token expected.", getRule().ele0001001AssignmentHiddenTokens());
-			marker.commit();
-			return result;
-		}
-		result = consumeGroup$22(); 
+		result = consumeGroup$18(); 
 		if (result!=ConsumeResult.SUCCESS) {
 			error("Another token expected.", getRule().ele000101Group());
 			marker.commit();
@@ -213,24 +207,53 @@ public final class XtextTerminalsTestLanguageParserRuleConsumer extends NonTermi
 		return result;
 	}
 
-	protected int consumeAssignment$16() throws Exception {
+	protected int consumeAssignment$15() throws Exception {
 		int result = Integer.MIN_VALUE;
 		int tempResult;
-		tempResult = consumeKeyword(getRule().ele000100000KeywordHidden(), "definesHiddenTokens", false, true, getKeyword$17$Delimiter()); 
+		tempResult = consumeKeyword(getRule().ele00010000KeywordHidden(), "definesHiddenTokens", false, true, getKeyword$16$Delimiter()); 
 		if (tempResult == ConsumeResult.SUCCESS)
 			return tempResult;
 		result = tempResult >= result ? tempResult : result; 
 		return result;
 	}
 
-	protected int consumeKeyword$18() throws Exception {
-		return consumeKeyword(getRule().ele00010001KeywordLeftParenthesis(), null, false, false, getKeyword$18$Delimiter());
+	protected int consumeKeyword$17() throws Exception {
+		return consumeKeyword(getRule().ele0001001KeywordLeftParenthesis(), null, false, false, getKeyword$17$Delimiter());
+	}
+
+	protected int consumeGroup$18() throws Exception {
+		IMarker marker = mark();
+		int result = doConsumeGroup$18();
+		if (result != ConsumeResult.SUCCESS)
+			marker.rollback();
+		else
+			marker.commit();
+		return ConsumeResult.SUCCESS;
+	}
+
+	protected int doConsumeGroup$18() throws Exception {
+		final IMarker marker = mark();
+		int result;
+		result = consumeAssignment$19(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele0001010AssignmentHiddenTokens());
+			marker.commit();
+			return result;
+		}
+		result = consumeGroup$22(); 
+		if (result!=ConsumeResult.SUCCESS) {
+			error("Another token expected.", getRule().ele0001011Group());
+			marker.commit();
+			return result;
+		}
+		marker.commit();
+		return result;
 	}
 
 	protected int consumeAssignment$19() throws Exception {
 		int result = Integer.MIN_VALUE;
 		int tempResult;
-		tempResult = consumeTerminal(idConsumer, "hiddenTokens", true, false, getRule().ele00010010CrossReferenceEStringAbstractRule(), getCrossReference$20$Delimiter());
+		tempResult = consumeTerminal(idConsumer, "hiddenTokens", true, false, getRule().ele00010100CrossReferenceEStringAbstractRule(), getCrossReference$20$Delimiter());
 		if (tempResult == ConsumeResult.SUCCESS)
 			return tempResult;
 		result = tempResult >= result ? tempResult : result; 
@@ -251,13 +274,13 @@ public final class XtextTerminalsTestLanguageParserRuleConsumer extends NonTermi
 		int result;
 		result = consumeKeyword$23(); 
 		if (result!=ConsumeResult.SUCCESS) {
-			error("Another token expected.", getRule().ele0001010KeywordComma());
+			error("Another token expected.", getRule().ele00010110KeywordComma());
 			marker.commit();
 			return result;
 		}
 		result = consumeAssignment$24(); 
 		if (result!=ConsumeResult.SUCCESS) {
-			error("Another token expected.", getRule().ele0001011AssignmentHiddenTokens());
+			error("Another token expected.", getRule().ele00010111AssignmentHiddenTokens());
 			marker.commit();
 			return result;
 		}
@@ -266,13 +289,13 @@ public final class XtextTerminalsTestLanguageParserRuleConsumer extends NonTermi
 	}
 
 	protected int consumeKeyword$23() throws Exception {
-		return consumeKeyword(getRule().ele0001010KeywordComma(), null, false, false, getKeyword$23$Delimiter());
+		return consumeKeyword(getRule().ele00010110KeywordComma(), null, false, false, getKeyword$23$Delimiter());
 	}
 
 	protected int consumeAssignment$24() throws Exception {
 		int result = Integer.MIN_VALUE;
 		int tempResult;
-		tempResult = consumeTerminal(idConsumer, "hiddenTokens", true, false, getRule().ele00010110CrossReferenceEStringAbstractRule(), getCrossReference$25$Delimiter());
+		tempResult = consumeTerminal(idConsumer, "hiddenTokens", true, false, getRule().ele000101110CrossReferenceEStringAbstractRule(), getCrossReference$25$Delimiter());
 		if (tempResult == ConsumeResult.SUCCESS)
 			return tempResult;
 		result = tempResult >= result ? tempResult : result; 
@@ -350,20 +373,20 @@ public final class XtextTerminalsTestLanguageParserRuleConsumer extends NonTermi
 		keyword$9$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
+	public ICharacterClass getKeyword$16$Delimiter() {
+		return keyword$16$Delimiter;
+	}
+	
+	public void setKeyword$16$Delimiter(ICharacterClass characterClass) {
+		keyword$16$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
 	public ICharacterClass getKeyword$17$Delimiter() {
 		return keyword$17$Delimiter;
 	}
 	
 	public void setKeyword$17$Delimiter(ICharacterClass characterClass) {
 		keyword$17$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
-	public ICharacterClass getKeyword$18$Delimiter() {
-		return keyword$18$Delimiter;
-	}
-	
-	public void setKeyword$18$Delimiter(ICharacterClass characterClass) {
-		keyword$18$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ICharacterClass getKeyword$23$Delimiter() {

@@ -37,7 +37,7 @@ LexerRule :
 ;
 
 ParserRule :
-    name=ID ('returns' type=TypeRef)? (definesHiddenTokens?='hidden' '(' hiddenTokens+=[AbstractRule] (',' hiddenTokens+=[AbstractRule])* ')')?':' 
+    name=ID ('returns' type=TypeRef)? (definesHiddenTokens?='hidden' '(' (hiddenTokens+=[AbstractRule] (',' hiddenTokens+=[AbstractRule])*)? ')')?':' 
     	alternatives=Alternatives   
     ';'
 ;

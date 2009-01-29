@@ -190,28 +190,28 @@
             <abstractTokens xsi:type="xtext:Group" cardinality="?">
               <abstractTokens xsi:type="xtext:Group">
                 <abstractTokens xsi:type="xtext:Group">
-                  <abstractTokens xsi:type="xtext:Group">
-                    <abstractTokens xsi:type="xtext:Assignment" feature="definesHiddenTokens" operator="?=">
-                      <terminal xsi:type="xtext:Keyword" value="hidden"/>
-                    </abstractTokens>
-                    <abstractTokens xsi:type="xtext:Keyword" value="("/>
+                  <abstractTokens xsi:type="xtext:Assignment" feature="definesHiddenTokens" operator="?=">
+                    <terminal xsi:type="xtext:Keyword" value="hidden"/>
                   </abstractTokens>
-                  <abstractTokens xsi:type="xtext:Assignment" feature="hiddenTokens" operator="+=">
-                    <terminal xsi:type="xtext:CrossReference" rule="//@rules.29">
-                      <type metamodel="//@metamodelDeclarations.0">
-                        <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/tmf/xtext/XtextTerminalsTestLanguage#//AbstractRule"/>
-                      </type>
-                    </terminal>
-                  </abstractTokens>
+                  <abstractTokens xsi:type="xtext:Keyword" value="("/>
                 </abstractTokens>
-                <abstractTokens xsi:type="xtext:Group" cardinality="*">
-                  <abstractTokens xsi:type="xtext:Keyword" value=","/>
+                <abstractTokens xsi:type="xtext:Group" cardinality="?">
                   <abstractTokens xsi:type="xtext:Assignment" feature="hiddenTokens" operator="+=">
                     <terminal xsi:type="xtext:CrossReference" rule="//@rules.29">
                       <type metamodel="//@metamodelDeclarations.0">
                         <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/tmf/xtext/XtextTerminalsTestLanguage#//AbstractRule"/>
                       </type>
                     </terminal>
+                  </abstractTokens>
+                  <abstractTokens xsi:type="xtext:Group" cardinality="*">
+                    <abstractTokens xsi:type="xtext:Keyword" value=","/>
+                    <abstractTokens xsi:type="xtext:Assignment" feature="hiddenTokens" operator="+=">
+                      <terminal xsi:type="xtext:CrossReference" rule="//@rules.29">
+                        <type metamodel="//@metamodelDeclarations.0">
+                          <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/tmf/xtext/XtextTerminalsTestLanguage#//AbstractRule"/>
+                        </type>
+                      </terminal>
+                    </abstractTokens>
                   </abstractTokens>
                 </abstractTokens>
               </abstractTokens>

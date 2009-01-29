@@ -303,8 +303,8 @@ public class XtextParserConfiguration extends AbstractParserConfiguration {
 		getParserRuleConsumer().setCrossReference$20$Delimiter(XtextDelimiters.ruleCall$14$Delimiter);
 		getParserRuleConsumer().setCrossReference$25$Delimiter(XtextDelimiters.ruleCall$14$Delimiter);
 		getParserRuleConsumer().setKeyword$9$Delimiter(XtextDelimiters.keyword$11$Delimiter);
-		getParserRuleConsumer().setKeyword$17$Delimiter(XtextDelimiters.keyword$11$Delimiter);
-		getParserRuleConsumer().setKeyword$18$Delimiter(XtextDelimiters.keyword$16$Delimiter);
+		getParserRuleConsumer().setKeyword$16$Delimiter(XtextDelimiters.keyword$11$Delimiter);
+		getParserRuleConsumer().setKeyword$17$Delimiter(XtextDelimiters.keyword$16$Delimiter);
 		getParserRuleConsumer().setKeyword$23$Delimiter(XtextDelimiters.keyword$16$Delimiter);
 		getParserRuleConsumer().setKeyword$27$Delimiter(XtextDelimiters.keyword$16$Delimiter);
 		getParserRuleConsumer().setKeyword$28$Delimiter(XtextDelimiters.keyword$16$Delimiter);

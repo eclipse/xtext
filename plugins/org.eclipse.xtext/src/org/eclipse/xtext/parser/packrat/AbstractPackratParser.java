@@ -233,7 +233,39 @@ public abstract class AbstractPackratParser extends AbstractParser<CharSequence>
 	}
 	
 	public int consumeNonTerminal(INonTerminalConsumer consumer, String feature, boolean isMany, boolean isDatatype, AbstractElement grammarElement) throws Exception {
-		return consumer.consume(feature, isMany, isDatatype, grammarElement);
+		if (!consumer.isDefiningHiddens())
+			return consumer.consume(feature, isMany, isDatatype, grammarElement);
+		
+		// either consume hiddens and have success or leave them and try again
+		// TODO: rollback hidden tokens step by step
+		IMarker marker = mark();
+		IMarker currentMarker = marker.fork();
+		int result = consumer.consume(feature, isMany, isDatatype, grammarElement);
+		if (result == ConsumeResult.SUCCESS) {
+			marker = currentMarker.join(marker);
+			marker.commit();
+			return result;
+		}
+		// no success, read hidden tokens and try again
+		marker = marker.join(currentMarker);
+		currentMarker = marker.fork();
+		consumeHiddens();
+		int nextResult = consumer.consume(feature, isMany, isDatatype, grammarElement);
+		if (nextResult == ConsumeResult.SUCCESS) {
+			marker = currentMarker.join(marker);
+			marker.commit();
+			return nextResult;
+		} 
+		// keep better result
+		if (nextResult > result) {
+			marker = currentMarker.join(marker);
+			result = nextResult;
+		} else {
+			marker = marker.join(currentMarker);
+		}
+		// commit latest error
+		marker.commit();
+		return result;
 	}
 	
 	public void consumeAction(Action action, String typeName, boolean isMany) {

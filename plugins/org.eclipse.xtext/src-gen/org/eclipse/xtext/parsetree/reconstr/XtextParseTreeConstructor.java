@@ -1484,12 +1484,12 @@ protected class LexerRule_1_Keyword extends KeywordToken  {
 
 /************ begin Rule ParserRule ****************
  *
- * ParserRule : name = ID ( "returns" type = TypeRef ) ? ( definesHiddenTokens ?= "hidden" "(" hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ")" ) ? ":" alternatives = Alternatives ";" ;
+ * ParserRule : name = ID ( "returns" type = TypeRef ) ? ( definesHiddenTokens ?= "hidden" "(" ( hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ) ? ")" ) ? ":" alternatives = Alternatives ";" ;
  *
  **/
 
 
-// name = ID ( "returns" type = TypeRef ) ? ( definesHiddenTokens ?= "hidden" "(" hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ")" ) ? ":" alternatives = Alternatives ";"
+// name = ID ( "returns" type = TypeRef ) ? ( definesHiddenTokens ?= "hidden" "(" ( hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ) ? ")" ) ? ":" alternatives = Alternatives ";"
 protected class ParserRule_Group extends GroupToken {
 	
 	public ParserRule_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1517,7 +1517,7 @@ protected class ParserRule_Group extends GroupToken {
 	}
 }
 
-// name = ID ( "returns" type = TypeRef ) ? ( definesHiddenTokens ?= "hidden" "(" hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ")" ) ? ":" alternatives = Alternatives
+// name = ID ( "returns" type = TypeRef ) ? ( definesHiddenTokens ?= "hidden" "(" ( hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ) ? ")" ) ? ":" alternatives = Alternatives
 protected class ParserRule_0_Group extends GroupToken {
 	
 	public ParserRule_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1545,7 +1545,7 @@ protected class ParserRule_0_Group extends GroupToken {
 	}
 }
 
-// name = ID ( "returns" type = TypeRef ) ? ( definesHiddenTokens ?= "hidden" "(" hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ")" ) ? ":"
+// name = ID ( "returns" type = TypeRef ) ? ( definesHiddenTokens ?= "hidden" "(" ( hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ) ? ")" ) ? ":"
 protected class ParserRule_0_0_Group extends GroupToken {
 	
 	public ParserRule_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1573,7 +1573,7 @@ protected class ParserRule_0_0_Group extends GroupToken {
 	}
 }
 
-// name = ID ( "returns" type = TypeRef ) ? ( definesHiddenTokens ?= "hidden" "(" hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ")" ) ?
+// name = ID ( "returns" type = TypeRef ) ? ( definesHiddenTokens ?= "hidden" "(" ( hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ) ? ")" ) ?
 protected class ParserRule_0_0_0_Group extends GroupToken {
 	
 	public ParserRule_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1725,7 +1725,7 @@ protected class ParserRule_0_0_0_0_1_1_Assignment_type extends AssignmentToken  
 
 
 
-// ( definesHiddenTokens ?= "hidden" "(" hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ")" ) ?
+// ( definesHiddenTokens ?= "hidden" "(" ( hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ) ? ")" ) ?
 protected class ParserRule_0_0_0_1_Group extends GroupToken {
 	
 	public ParserRule_0_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1753,7 +1753,7 @@ protected class ParserRule_0_0_0_1_Group extends GroupToken {
 	}
 }
 
-// definesHiddenTokens ?= "hidden" "(" hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) *
+// definesHiddenTokens ?= "hidden" "(" ( hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ) ?
 protected class ParserRule_0_0_0_1_0_Group extends GroupToken {
 	
 	public ParserRule_0_0_0_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1781,7 +1781,7 @@ protected class ParserRule_0_0_0_1_0_Group extends GroupToken {
 	}
 }
 
-// definesHiddenTokens ?= "hidden" "(" hiddenTokens += [ AbstractRule ]
+// definesHiddenTokens ?= "hidden" "("
 protected class ParserRule_0_0_0_1_0_0_Group extends GroupToken {
 	
 	public ParserRule_0_0_0_1_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1793,37 +1793,9 @@ protected class ParserRule_0_0_0_1_0_0_Group extends GroupToken {
 	}
 		
 	protected Solution createSolution() {	
-		Solution s1 = new ParserRule_0_0_0_1_0_0_1_Assignment_hiddenTokens(current, this).firstSolution();
+		Solution s1 = new ParserRule_0_0_0_1_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
-			Solution s2 = new ParserRule_0_0_0_1_0_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
-				last = s2.getPredecessor();
-				return s2;
-			}
-		}
-		return null;
-		
-	}
-}
-
-// definesHiddenTokens ?= "hidden" "("
-protected class ParserRule_0_0_0_1_0_0_0_Group extends GroupToken {
-	
-	public ParserRule_0_0_0_1_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
-	}
-	
-	public Group getGrammarElement() {
-		return XtextGrammarAccess.INSTANCE.prParserRule().ele0001000Group();
-	}
-		
-	protected Solution createSolution() {	
-		Solution s1 = new ParserRule_0_0_0_1_0_0_0_1_Keyword(current, this).firstSolution();
-		while(s1 != null) {
-			Solution s2 = new ParserRule_0_0_0_1_0_0_0_0_Assignment_definesHiddenTokens(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			Solution s2 = new ParserRule_0_0_0_1_0_0_0_Assignment_definesHiddenTokens(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
 				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
@@ -1838,14 +1810,14 @@ protected class ParserRule_0_0_0_1_0_0_0_Group extends GroupToken {
 }
 
 // definesHiddenTokens ?= "hidden"
-protected class ParserRule_0_0_0_1_0_0_0_0_Assignment_definesHiddenTokens extends AssignmentToken  {
+protected class ParserRule_0_0_0_1_0_0_0_Assignment_definesHiddenTokens extends AssignmentToken  {
 	
-	public ParserRule_0_0_0_1_0_0_0_0_Assignment_definesHiddenTokens(IInstanceDescription curr, AbstractToken pred) {
+	public ParserRule_0_0_0_1_0_0_0_Assignment_definesHiddenTokens(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public Assignment getGrammarElement() {
-		return XtextGrammarAccess.INSTANCE.prParserRule().ele00010000AssignmentDefinesHiddenTokens();
+		return XtextGrammarAccess.INSTANCE.prParserRule().ele0001000AssignmentDefinesHiddenTokens();
 	}
 	
 	protected Solution createSolution() {
@@ -1854,7 +1826,7 @@ protected class ParserRule_0_0_0_1_0_0_0_0_Assignment_definesHiddenTokens extend
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = XtextGrammarAccess.INSTANCE.prParserRule().ele000100000KeywordHidden();
+			element = XtextGrammarAccess.INSTANCE.prParserRule().ele00010000KeywordHidden();
 			return new Solution(obj);
 		}
 
@@ -1863,27 +1835,55 @@ protected class ParserRule_0_0_0_1_0_0_0_0_Assignment_definesHiddenTokens extend
 }
 
 // "("
-protected class ParserRule_0_0_0_1_0_0_0_1_Keyword extends KeywordToken  {
+protected class ParserRule_0_0_0_1_0_0_1_Keyword extends KeywordToken  {
 	
-	public ParserRule_0_0_0_1_0_0_0_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
+	public ParserRule_0_0_0_1_0_0_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public Keyword getGrammarElement() {
-		return XtextGrammarAccess.INSTANCE.prParserRule().ele00010001KeywordLeftParenthesis();
+		return XtextGrammarAccess.INSTANCE.prParserRule().ele0001001KeywordLeftParenthesis();
 	}	
 }
 
 
-// hiddenTokens += [ AbstractRule ]
-protected class ParserRule_0_0_0_1_0_0_1_Assignment_hiddenTokens extends AssignmentToken  {
+// ( hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ) ?
+protected class ParserRule_0_0_0_1_0_1_Group extends GroupToken {
 	
-	public ParserRule_0_0_0_1_0_0_1_Assignment_hiddenTokens(IInstanceDescription curr, AbstractToken pred) {
+	public ParserRule_0_0_0_1_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, !IS_REQUIRED);
+	}
+	
+	public Group getGrammarElement() {
+		return XtextGrammarAccess.INSTANCE.prParserRule().ele000101Group();
+	}
+		
+	protected Solution createSolution() {	
+		Solution s1 = new ParserRule_0_0_0_1_0_1_1_Group(current, this).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new ParserRule_0_0_0_1_0_1_0_Assignment_hiddenTokens(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 == null) {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
+				if(s1 == null) return null;
+			} else {
+				last = s2.getPredecessor();
+				return s2;
+			}
+		}
+		return null;
+		
+	}
+}
+
+// hiddenTokens += [ AbstractRule ]
+protected class ParserRule_0_0_0_1_0_1_0_Assignment_hiddenTokens extends AssignmentToken  {
+	
+	public ParserRule_0_0_0_1_0_1_0_Assignment_hiddenTokens(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public Assignment getGrammarElement() {
-		return XtextGrammarAccess.INSTANCE.prParserRule().ele0001001AssignmentHiddenTokens();
+		return XtextGrammarAccess.INSTANCE.prParserRule().ele0001010AssignmentHiddenTokens();
 	}
 	
 	protected Solution createSolution() {
@@ -1893,7 +1893,7 @@ protected class ParserRule_0_0_0_1_0_0_1_Assignment_hiddenTokens extends Assignm
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("AbstractRule")) {
 				type = AssignmentType.CR;
-				element = XtextGrammarAccess.INSTANCE.prParserRule().ele00010010CrossReferenceEStringAbstractRule(); 
+				element = XtextGrammarAccess.INSTANCE.prParserRule().ele00010100CrossReferenceEStringAbstractRule(); 
 				return new Solution(obj);
 			}
 		}
@@ -1901,22 +1901,21 @@ protected class ParserRule_0_0_0_1_0_0_1_Assignment_hiddenTokens extends Assignm
 	}
 }
 
-
 // ( "," hiddenTokens += [ AbstractRule ] ) *
-protected class ParserRule_0_0_0_1_0_1_Group extends GroupToken {
+protected class ParserRule_0_0_0_1_0_1_1_Group extends GroupToken {
 	
-	public ParserRule_0_0_0_1_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
+	public ParserRule_0_0_0_1_0_1_1_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 	
 	public Group getGrammarElement() {
-		return XtextGrammarAccess.INSTANCE.prParserRule().ele000101Group();
+		return XtextGrammarAccess.INSTANCE.prParserRule().ele0001011Group();
 	}
 		
 	protected Solution createSolution() {	
-		Solution s1 = new ParserRule_0_0_0_1_0_1_1_Assignment_hiddenTokens(current, this).firstSolution();
+		Solution s1 = new ParserRule_0_0_0_1_0_1_1_1_Assignment_hiddenTokens(current, this).firstSolution();
 		while(s1 != null) {
-			Solution s2 = new ParserRule_0_0_0_1_0_1_0_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			Solution s2 = new ParserRule_0_0_0_1_0_1_1_0_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
 				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
@@ -1931,26 +1930,26 @@ protected class ParserRule_0_0_0_1_0_1_Group extends GroupToken {
 }
 
 // ","
-protected class ParserRule_0_0_0_1_0_1_0_Keyword extends KeywordToken  {
+protected class ParserRule_0_0_0_1_0_1_1_0_Keyword extends KeywordToken  {
 	
-	public ParserRule_0_0_0_1_0_1_0_Keyword(IInstanceDescription curr, AbstractToken pred) {
+	public ParserRule_0_0_0_1_0_1_1_0_Keyword(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public Keyword getGrammarElement() {
-		return XtextGrammarAccess.INSTANCE.prParserRule().ele0001010KeywordComma();
+		return XtextGrammarAccess.INSTANCE.prParserRule().ele00010110KeywordComma();
 	}	
 }
 
 // hiddenTokens += [ AbstractRule ]
-protected class ParserRule_0_0_0_1_0_1_1_Assignment_hiddenTokens extends AssignmentToken  {
+protected class ParserRule_0_0_0_1_0_1_1_1_Assignment_hiddenTokens extends AssignmentToken  {
 	
-	public ParserRule_0_0_0_1_0_1_1_Assignment_hiddenTokens(IInstanceDescription curr, AbstractToken pred) {
+	public ParserRule_0_0_0_1_0_1_1_1_Assignment_hiddenTokens(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public Assignment getGrammarElement() {
-		return XtextGrammarAccess.INSTANCE.prParserRule().ele0001011AssignmentHiddenTokens();
+		return XtextGrammarAccess.INSTANCE.prParserRule().ele00010111AssignmentHiddenTokens();
 	}
 	
 	protected Solution createSolution() {
@@ -1960,13 +1959,14 @@ protected class ParserRule_0_0_0_1_0_1_1_Assignment_hiddenTokens extends Assignm
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("AbstractRule")) {
 				type = AssignmentType.CR;
-				element = XtextGrammarAccess.INSTANCE.prParserRule().ele00010110CrossReferenceEStringAbstractRule(); 
+				element = XtextGrammarAccess.INSTANCE.prParserRule().ele000101110CrossReferenceEStringAbstractRule(); 
 				return new Solution(obj);
 			}
 		}
 		return null;
 	}
 }
+
 
 
 

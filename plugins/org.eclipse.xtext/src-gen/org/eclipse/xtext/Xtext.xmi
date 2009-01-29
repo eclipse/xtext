@@ -212,23 +212,12 @@
             <abstractTokens xsi:type="xtext:Group" cardinality="?">
               <abstractTokens xsi:type="xtext:Group">
                 <abstractTokens xsi:type="xtext:Group">
-                  <abstractTokens xsi:type="xtext:Group">
-                    <abstractTokens xsi:type="xtext:Assignment" feature="definesHiddenTokens" operator="?=">
-                      <terminal xsi:type="xtext:Keyword" value="hidden"/>
-                    </abstractTokens>
-                    <abstractTokens xsi:type="xtext:Keyword" value="("/>
+                  <abstractTokens xsi:type="xtext:Assignment" feature="definesHiddenTokens" operator="?=">
+                    <terminal xsi:type="xtext:Keyword" value="hidden"/>
                   </abstractTokens>
-                  <abstractTokens xsi:type="xtext:Assignment" feature="hiddenTokens" operator="+=">
-                    <terminal xsi:type="xtext:CrossReference">
-                      <type metamodel="//@metamodelDeclarations.0">
-                        <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Xtext#//AbstractRule"/>
-                      </type>
-                      <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
-                    </terminal>
-                  </abstractTokens>
+                  <abstractTokens xsi:type="xtext:Keyword" value="("/>
                 </abstractTokens>
-                <abstractTokens xsi:type="xtext:Group" cardinality="*">
-                  <abstractTokens xsi:type="xtext:Keyword" value=","/>
+                <abstractTokens xsi:type="xtext:Group" cardinality="?">
                   <abstractTokens xsi:type="xtext:Assignment" feature="hiddenTokens" operator="+=">
                     <terminal xsi:type="xtext:CrossReference">
                       <type metamodel="//@metamodelDeclarations.0">
@@ -236,6 +225,17 @@
                       </type>
                       <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
                     </terminal>
+                  </abstractTokens>
+                  <abstractTokens xsi:type="xtext:Group" cardinality="*">
+                    <abstractTokens xsi:type="xtext:Keyword" value=","/>
+                    <abstractTokens xsi:type="xtext:Assignment" feature="hiddenTokens" operator="+=">
+                      <terminal xsi:type="xtext:CrossReference">
+                        <type metamodel="//@metamodelDeclarations.0">
+                          <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Xtext#//AbstractRule"/>
+                        </type>
+                        <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+                      </terminal>
+                    </abstractTokens>
                   </abstractTokens>
                 </abstractTokens>
               </abstractTokens>
