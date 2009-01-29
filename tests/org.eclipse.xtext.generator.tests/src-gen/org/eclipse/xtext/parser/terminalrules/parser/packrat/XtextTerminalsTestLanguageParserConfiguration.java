@@ -309,8 +309,8 @@ public class XtextTerminalsTestLanguageParserConfiguration extends AbstractParse
 		getParserRuleConsumer().setCrossReference$20$Delimiter(XtextTerminalsTestLanguageDelimiters.ruleCall$14$Delimiter);
 		getParserRuleConsumer().setCrossReference$25$Delimiter(XtextTerminalsTestLanguageDelimiters.ruleCall$14$Delimiter);
 		getParserRuleConsumer().setKeyword$9$Delimiter(XtextTerminalsTestLanguageDelimiters.keyword$11$Delimiter);
-		getParserRuleConsumer().setKeyword$17$Delimiter(XtextTerminalsTestLanguageDelimiters.keyword$11$Delimiter);
-		getParserRuleConsumer().setKeyword$18$Delimiter(XtextTerminalsTestLanguageDelimiters.keyword$16$Delimiter);
+		getParserRuleConsumer().setKeyword$16$Delimiter(XtextTerminalsTestLanguageDelimiters.keyword$11$Delimiter);
+		getParserRuleConsumer().setKeyword$17$Delimiter(XtextTerminalsTestLanguageDelimiters.keyword$16$Delimiter);
 		getParserRuleConsumer().setKeyword$23$Delimiter(XtextTerminalsTestLanguageDelimiters.keyword$16$Delimiter);
 		getParserRuleConsumer().setKeyword$27$Delimiter(XtextTerminalsTestLanguageDelimiters.keyword$16$Delimiter);
 		getParserRuleConsumer().setKeyword$28$Delimiter(XtextTerminalsTestLanguageDelimiters.keyword$16$Delimiter);
