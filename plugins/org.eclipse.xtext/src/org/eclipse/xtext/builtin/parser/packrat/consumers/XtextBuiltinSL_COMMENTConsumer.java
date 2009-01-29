@@ -9,12 +9,10 @@ package org.eclipse.xtext.builtin.parser.packrat.consumers;
 
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.LexerRule;
-import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
-import org.eclipse.xtext.parser.packrat.IMarkerFactory;
 import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
+import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
-import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 import org.eclipse.xtext.services.XtextGrammarAccess;
 
 /**
@@ -24,14 +22,8 @@ public final class XtextBuiltinSL_COMMENTConsumer extends AbstractRuleAwareTermi
 	
 	static final ICharacterClass SL_COMMENTConsumer$$$1 = ICharacterClass.Factory.invert(ICharacterClass.Factory.create('\n', '\r'));
 	
-	/**
-	 * @param input
-	 * @param markerFactory
-	 * @param tokenAcceptor
-	 */
-	public XtextBuiltinSL_COMMENTConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
-			IParsedTokenAcceptor tokenAcceptor) {
-		super(input, markerFactory, tokenAcceptor);
+	public XtextBuiltinSL_COMMENTConsumer(ITerminalConsumerConfiguration configuration) {
+		super(configuration);
 	}
 
 	public int doConsume() {

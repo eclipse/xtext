@@ -9,12 +9,10 @@ package org.eclipse.xtext.builtin.parser.packrat.consumers;
 
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.LexerRule;
-import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
-import org.eclipse.xtext.parser.packrat.IMarkerFactory;
 import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
+import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
-import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 import org.eclipse.xtext.services.XtextGrammarAccess;
 
 /**
@@ -36,14 +34,8 @@ public final class XtextBuiltinIDConsumer extends AbstractRuleAwareTerminalConsu
 			ICharacterClass.Factory.createRange('0', '9')
 	);
 	
-	/**
-	 * @param input
-	 * @param markerFactory
-	 * @param tokenAcceptor
-	 */
-	public XtextBuiltinIDConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
-			IParsedTokenAcceptor tokenAcceptor) {
-		super(input, markerFactory, tokenAcceptor);
+	public XtextBuiltinIDConsumer(ITerminalConsumerConfiguration configuration) {
+		super(configuration);
 	}
 
 	public int doConsume() {

@@ -20,6 +20,7 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.parser.AbstractParser;
 import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration.IInternalParserConfiguration;
 import org.eclipse.xtext.parser.packrat.Marker.IMarkerClient;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
@@ -27,6 +28,7 @@ import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.IRootConsumerListener;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.KeywordConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.RecoveryStateHolder;
 import org.eclipse.xtext.parser.packrat.debug.DebugCharSequenceWithOffset;
 import org.eclipse.xtext.parser.packrat.debug.DebugConsumerUtility;
 import org.eclipse.xtext.parser.packrat.debug.DebugHiddenTokenHandler;
@@ -100,31 +102,52 @@ public abstract class AbstractPackratParser extends AbstractParser<CharSequence>
 	
 	private Marker activeMarker;
 	
+	private final RecoveryStateHolder recoveryStateHolder;
+	
 	protected AbstractPackratParser() {
 		parserConfiguration = createParserConfiguration();
 		keywordConsumer = createKeywordConsumer();
 		markerBuffer = new Marker[MARKER_BUFFER_SIZE];
+		recoveryStateHolder = new RecoveryStateHolder();
 	}
 	
 	private IParserConfiguration createParserConfiguration() {
-		ICharSequenceWithOffset localInput = DebugUtil.INPUT_DEBUG ? new DebugCharSequenceWithOffset(this) : this;
-		IMarkerFactory localMarkerFactory = DebugUtil.MARKER_FACTORY_DEBUG ? new DebugMarkerFactory(this) : this;
-		IParsedTokenAcceptor localTokenAcceptor = DebugUtil.TOKEN_ACCEPTOR_DEBUG ? new DebugParsedTokenAcceptor(this) : this;
-		IHiddenTokenHandler localHiddenTokenHandler = DebugUtil.HIDDEN_TOKEN_HANDLER_DEBUG ? new DebugHiddenTokenHandler(this) : this;
-		IConsumerUtility localConsumerUtil = DebugUtil.CONSUMER_UTIL_DEBUG ? new DebugConsumerUtility(this) : this;
+		final ICharSequenceWithOffset localInput = DebugUtil.INPUT_DEBUG ? new DebugCharSequenceWithOffset(this) : this;
+		final IMarkerFactory localMarkerFactory = DebugUtil.MARKER_FACTORY_DEBUG ? new DebugMarkerFactory(this) : this;
+		final IParsedTokenAcceptor localTokenAcceptor = DebugUtil.TOKEN_ACCEPTOR_DEBUG ? new DebugParsedTokenAcceptor(this) : this;
+		final IHiddenTokenHandler localHiddenTokenHandler = DebugUtil.HIDDEN_TOKEN_HANDLER_DEBUG ? new DebugHiddenTokenHandler(this) : this;
+		final IConsumerUtility localConsumerUtil = DebugUtil.CONSUMER_UTIL_DEBUG ? new DebugConsumerUtility(this) : this;
 		
-		IParserConfiguration result = createParserConfiguration(localInput, localMarkerFactory, localTokenAcceptor, localHiddenTokenHandler, localConsumerUtil);
+		IParserConfiguration result = createParserConfiguration(new IInternalParserConfiguration() {
+			public IConsumerUtility getConsumerUtil() {
+				return localConsumerUtil;
+			}
+			public IHiddenTokenHandler getHiddenTokenHandler() {
+				return localHiddenTokenHandler;
+			}
+			public ICharSequenceWithOffset getInput() {
+				return localInput;
+			}
+			public IMarkerFactory getMarkerFactory() {
+				return localMarkerFactory;
+			}
+			public RecoveryStateHolder getRecoveryStateHolder() {
+				return recoveryStateHolder;
+			}
+			public IParsedTokenAcceptor getTokenAcceptor() {
+				return localTokenAcceptor;
+			}
+		});
 		result.createTerminalConsumers();
 		result.createNonTerminalConsumers();
 		result.configureConsumers();
 		return result;
 	}
 
-	protected abstract IParserConfiguration createParserConfiguration(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
-			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil);
+	protected abstract IParserConfiguration createParserConfiguration(IInternalParserConfiguration configuration);
 
 	protected KeywordConsumer createKeywordConsumer() {
-		return new KeywordConsumer(parserConfiguration.getInput(), parserConfiguration.getMarkerFactory(), parserConfiguration.getTokenAcceptor());
+		return parserConfiguration.createKeywordConsumer();
 	}
 
 	public IGrammarAccess getGrammarAccess() {

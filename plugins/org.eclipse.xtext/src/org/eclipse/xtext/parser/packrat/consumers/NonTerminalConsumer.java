@@ -11,7 +11,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
 import org.eclipse.xtext.parser.packrat.IHiddenTokenHandler;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory;
 import org.eclipse.xtext.parser.packrat.IHiddenTokenHandler.IHiddenTokenState;
@@ -19,39 +18,27 @@ import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.ErrorToken;
-import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedNonTerminal;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedNonTerminalEnd;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class NonTerminalConsumer implements INonTerminalConsumer {
-	
-	private final IParsedTokenAcceptor acceptor;
+public abstract class NonTerminalConsumer extends AbstractConsumer implements INonTerminalConsumer {
 	
 	private final IHiddenTokenHandler hiddenTokenHandler;
 	
 	private final IMarkerFactory markerFactory;
 	
-	private final ICharSequenceWithOffset input;
-
 	private final ITerminalConsumer[] hiddenTokens;
 	
 	private final IConsumerUtility consumerUtil;
 
-	/**
-	 * @param consumerUtil TODO
-	 * @param abstractPackratParser
-	 */
-	protected NonTerminalConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory, 
-			IParsedTokenAcceptor tokenAcceptor,	IHiddenTokenHandler hiddenTokenHandler,
-			IConsumerUtility consumerUtil, ITerminalConsumer[] hiddenTokens) {
-		this.input = input;
-		this.markerFactory = markerFactory;
-		this.acceptor = tokenAcceptor;
-		this.hiddenTokenHandler = hiddenTokenHandler;
-		this.consumerUtil = consumerUtil;
+	protected NonTerminalConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
+		super(configuration.getInput(), configuration.getTokenAcceptor(), configuration.getRecoveryStateHolder());
+		this.markerFactory = configuration.getMarkerFactory();
+		this.hiddenTokenHandler = configuration.getHiddenTokenHandler();
+		this.consumerUtil = configuration.getConsumerUtil();
 		this.hiddenTokens = hiddenTokens;
 	}
 
@@ -99,10 +86,6 @@ public abstract class NonTerminalConsumer implements INonTerminalConsumer {
 	
 	protected final void error(String message, AbstractElement grammarElement) {
 		acceptor.accept(new ErrorToken(getOffset(), 0, grammarElement, message));
-	}
-	
-	protected final int getOffset() {
-		return input.getOffset();
 	}
 	
 	protected final int consumeKeyword(Keyword keyword, String feature, boolean isMany, boolean isBoolean, ICharacterClass notFollowedBy) {

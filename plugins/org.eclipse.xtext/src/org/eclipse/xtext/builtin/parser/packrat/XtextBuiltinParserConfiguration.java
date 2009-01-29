@@ -18,8 +18,10 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
 import org.eclipse.xtext.parser.packrat.IHiddenTokenHandler;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory;
+import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration.IInternalParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.RecoveryStateHolder;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 /**
@@ -35,9 +37,8 @@ public class XtextBuiltinParserConfiguration extends AbstractParserConfiguration
 	private XtextBuiltinWSConsumer wsConsumer;
 	private XtextBuiltinANY_OTHERConsumer anyOtherConsumer;
 
-	public XtextBuiltinParserConfiguration(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
-			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil) {
-		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil);
+	public XtextBuiltinParserConfiguration(IInternalParserConfiguration configuration) {
+		super(configuration);
 	}
 
 	public void configureConsumers() {
@@ -47,13 +48,13 @@ public class XtextBuiltinParserConfiguration extends AbstractParserConfiguration
 	}
 
 	public void createTerminalConsumers() {
-		idConsumer = new XtextBuiltinIDConsumer(getInput(), getMarkerFactory(), getTokenAcceptor());
-		intConsumer = new XtextBuiltinINTConsumer(getInput(), getMarkerFactory(), getTokenAcceptor());
-		stringConsumer = new XtextBuiltinSTRINGConsumer(getInput(), getMarkerFactory(), getTokenAcceptor());
-		mlCommentConsumer = new XtextBuiltinML_COMMENTConsumer(getInput(), getMarkerFactory(), getTokenAcceptor());
-		slCommentConsumer = new XtextBuiltinSL_COMMENTConsumer(getInput(), getMarkerFactory(), getTokenAcceptor());
-		wsConsumer = new XtextBuiltinWSConsumer(getInput(), getMarkerFactory(), getTokenAcceptor());
-		anyOtherConsumer = new XtextBuiltinANY_OTHERConsumer(getInput(), getMarkerFactory(), getTokenAcceptor());
+		idConsumer = new XtextBuiltinIDConsumer(this);
+		intConsumer = new XtextBuiltinINTConsumer(this);
+		stringConsumer = new XtextBuiltinSTRINGConsumer(this);
+		mlCommentConsumer = new XtextBuiltinML_COMMENTConsumer(this);
+		slCommentConsumer = new XtextBuiltinSL_COMMENTConsumer(this);
+		wsConsumer = new XtextBuiltinWSConsumer(this);
+		anyOtherConsumer = new XtextBuiltinANY_OTHERConsumer(this);
 	}
 
 	public INonTerminalConsumer getRootConsumer() {
