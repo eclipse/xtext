@@ -1,0 +1,25 @@
+epatch UNSET_OBJECT_COMPOSITE {
+  import mm ns "http://www.itemis.de/emf/epatch/testmm1"
+  resource res0 {
+  left uri "SimpleMM1Instance1.xmi";
+  right uri "SimpleMM1Instance11.xmi";
+  }
+
+  object res0#/ {
+    reflist = [ 1:Child11 | ];
+  }
+
+  object res0#//@tree {
+    children = [ 0:new mm#//CompositeNode CompositeNode1 {
+      children = [ new mm#//ChildNode Child11 {
+        name = "Child11";
+      } ];
+      name = "CompositeNode1";
+    } | ];
+  }
+
+  object left res0#//@tree/@children.1 right res0#//@tree/@children.0 {
+    friend = CompositeNode1 | null;
+  }
+
+}
