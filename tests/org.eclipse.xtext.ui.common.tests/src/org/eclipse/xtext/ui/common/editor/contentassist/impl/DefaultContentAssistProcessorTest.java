@@ -177,7 +177,35 @@ public class DefaultContentAssistProcessorTest extends AbstractUiTest
 		contentAssistProcessorTestBuilder.append(" spielplatz 1 \"SpielplatzBeschreibung\" { } ")
 			.assertTextAtCursorPosition(1, "spielplatz");
 	}
-	
+	/**
+     * regression test for:
+     *
+     * https://bugs.eclipse.org/bugs/show_bug.cgi?id=260825
+     */
+    public void testCompleteParserRule() throws Exception {
+            newBuilder(XtextGrammarTestLanguageStandaloneSetup.class, XtextGrammarTestLanguageUiConfig.class)
+                    .appendNl("language foo")
+                    .appendNl("generate foo \"foo\"")
+                    .appendNl("MyRule : 'foo' name=ID; ").assertText(
+                                    "ParserRule_Name", "lexer", "native", "terminal"
+                    );
+
+    }
+    /**
+     * regression test for:
+     *
+     * https://bugs.eclipse.org/bugs/show_bug.cgi?id=260825
+     * https://bugs.eclipse.org/bugs/show_bug.cgi?id=262313
+     */
+    public void testCompleteAssignmentWithBacktracking() throws Exception {
+            newBuilder(XtextGrammarTestLanguageStandaloneSetup.class, XtextGrammarTestLanguageUiConfig.class)
+                    .appendNl("language foo")
+                    .appendNl("generate foo \"foo\"")
+                    .append("MyRule : 'foo' name").assertText(
+                                    "*", "+", "+=", ";", "=", "?", "?="
+                    );
+
+    }
 	
 	private ContentAssistProcessorTestBuilder newBuilder(Class<?> standAloneSetup, Class<?> uiConfig) throws Exception {
 		withUi(standAloneSetup, uiConfig);

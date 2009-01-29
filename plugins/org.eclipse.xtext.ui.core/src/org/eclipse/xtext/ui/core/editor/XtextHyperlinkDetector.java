@@ -17,6 +17,7 @@ import org.eclipse.jface.text.hyperlink.IHyperlink;
 import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.ParseTreeUtil;
 import org.eclipse.xtext.resource.XtextResource;
@@ -42,35 +43,34 @@ public class XtextHyperlinkDetector implements IHyperlinkDetector {
 	 * @see org.eclipse.jface.text.hyperlink.IHyperlinkDetector#detectHyperlinks(org.eclipse.jface.text.ITextViewer, org.eclipse.jface.text.IRegion, boolean)
 	 */
 	public IHyperlink[] detectHyperlinks(ITextViewer textViewer, final IRegion region, boolean canShowMultipleHyperlinks) {
-
 		return ((IXtextDocument)textViewer.getDocument()).readOnly(new UnitOfWork<IHyperlink[]>() {
 			public IHyperlink[] exec(XtextResource resource) throws Exception {
 				IParseResult parseResult = resource.getParseResult();
 				Assert.isNotNull(parseResult);
-				final LeafNode currentNode = 
-					(LeafNode) ParseTreeUtil.getCurrentOrFollowingNodeByOffset(parseResult.getRootNode(), region.getOffset());
-
-				if (currentNode.getGrammarElement() instanceof CrossReference) {
-					 return new IHyperlink[] { new IHyperlink() {
-
-						public IRegion getHyperlinkRegion() {
-							return new Region(currentNode.getTotalOffset(), currentNode.getTotalLength());
-						}
-
-						public String getHyperlinkText() {
-							return currentNode.getText();
-						}
-
-						public String getTypeLabel() {
-							return null;
-						}
-
-						public void open() {
-							new OpenDeclarationAction(currentNode).run();
-						}
-					} };
+				AbstractNode abstractNode = ParseTreeUtil.getCurrentOrFollowingNodeByOffset(parseResult.getRootNode(),
+						region.getOffset());
+				if (abstractNode instanceof LeafNode) {
+					final LeafNode currentNode = (LeafNode) abstractNode;
+					if (currentNode.getGrammarElement() instanceof CrossReference) {
+						
+						 return new IHyperlink[] { new IHyperlink() {
+							 
+							public IRegion getHyperlinkRegion() {
+								return new Region(currentNode.getTotalOffset(), currentNode.getTotalLength());
+							}
+							public String getHyperlinkText() {
+								return currentNode.getText();
+							}
+							public String getTypeLabel() {
+								return null;
+							}
+							public void open() {
+								new OpenDeclarationAction(currentNode).run();
+							}
+							
+						} };
+					}	
 				}
-
 				return null;
 			}
 		});

@@ -8,14 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree;
 
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.Set;
 
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.Alternatives;
-import org.eclipse.xtext.Assignment;
-import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
@@ -216,7 +211,6 @@ public class ParseTreeUtilTest extends AbstractGeneratorTest {
 		Set<AbstractElement> elementSetValidFromOffset = ParseTreeUtil.getElementSetValidFromOffset(rootNode, text
 				.length());
 		assertEquals("expect only 1 item", 1, elementSetValidFromOffset.size());
-		assertEqualsClass(elementSetValidFromOffset, Group.class);
 	}
 
 	public void testGetElementSetValidFromOffset() throws Exception {
@@ -225,60 +219,42 @@ public class ParseTreeUtilTest extends AbstractGeneratorTest {
 		Set<AbstractElement> elementSetValidFromOffset = ParseTreeUtil.getElementSetValidFromOffset(rootNode, text
 				.length());
 		assertEquals("expect only 1 item", 1, elementSetValidFromOffset.size());
-		assertEqualsClass(elementSetValidFromOffset, Assignment.class);
 
 		// Keyword Assignment [Assignment|Keyword]
 		text = "spielplatz 1 ";
 		rootNode = getRootNode(text);
 		elementSetValidFromOffset = ParseTreeUtil.getElementSetValidFromOffset(rootNode, text.length());
 		assertEquals("expect only 2 items", 2, elementSetValidFromOffset.size());
-		assertEqualsClass(elementSetValidFromOffset, Assignment.class, Keyword.class);
 
 		// Keyword Assignment Assignment [Keyword]
 		text = "spielplatz 1 \"junit\" ";
 		rootNode = getRootNode(text);
 		elementSetValidFromOffset = ParseTreeUtil.getElementSetValidFromOffset(rootNode, text.length());
 		assertEquals("expect only 1 item", 1, elementSetValidFromOffset.size());
-		assertEqualsClass(elementSetValidFromOffset, Keyword.class);
 
 		// Keyword Assignment Assignment Keyword [Alternatives|Keyword]
 		text = "spielplatz 1 \"junit\" { ";
 		rootNode = getRootNode(text);
 		elementSetValidFromOffset = ParseTreeUtil.getElementSetValidFromOffset(rootNode, text.length());
 		assertEquals("expect only 2 items", 2, elementSetValidFromOffset.size());
-		assertEqualsClass(elementSetValidFromOffset, Alternatives.class, Keyword.class);
 
 		// Keyword Assignment Assignment Keyword [Keyword]
 		text = "spielplatz 1 \"junit\" { kind ";
 		rootNode = getRootNode(text);
 		elementSetValidFromOffset = ParseTreeUtil.getElementSetValidFromOffset(rootNode, text.length());
 		assertEquals("expect only 1 item", 1, elementSetValidFromOffset.size());
-		assertEqualsClass(elementSetValidFromOffset, Keyword.class);
 
 		// Keyword Assignment Assignment Keyword Keyword [Assignment]
 		text = "spielplatz 1 \"junit\" { kind ( ";
 		rootNode = getRootNode(text);
 		elementSetValidFromOffset = ParseTreeUtil.getElementSetValidFromOffset(rootNode, text.length());
 		assertEquals("expect only 1 item", 1, elementSetValidFromOffset.size());
-		assertEqualsClass(elementSetValidFromOffset, Assignment.class);
 
 		// Keyword Assignment Assignment Keyword
 		text = "spielplatz 1 \"junit\" { kind (kind1 0) kind (kind2 0) erwachsener (e1 1)  erwachsener (e2 2) familie ( asd ";
 		rootNode = getRootNode(text);
 		elementSetValidFromOffset = ParseTreeUtil.getElementSetValidFromOffset(rootNode, text.length());
 		assertEquals("expect only 1 item", 1, elementSetValidFromOffset.size());
-		assertEqualsClass(elementSetValidFromOffset, Assignment.class);
-	}
-
-	private void assertEqualsClass(Set<AbstractElement> set, Class<?>... expectedClass) {
-		assertEquals("size of abstract element set must equal class array", set.size(), expectedClass.length);
-		Iterator<Class<?>> classIterator = Arrays.asList(expectedClass).iterator();
-		for (Iterator<AbstractElement> iterator = set.iterator(); iterator.hasNext();) {
-			AbstractElement abstractElement = iterator.next();
-			Class<?> nextClass = classIterator.next();
-			assertTrue("class '" + nextClass + "' must be assignable from '" + abstractElement.getClass() + "'",
-					nextClass.isAssignableFrom(abstractElement.getClass()));
-		}
 	}
 
 }
