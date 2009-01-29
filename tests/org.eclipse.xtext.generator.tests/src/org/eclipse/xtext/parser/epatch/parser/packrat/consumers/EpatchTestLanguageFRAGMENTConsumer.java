@@ -9,12 +9,10 @@ package org.eclipse.xtext.parser.epatch.parser.packrat.consumers;
 
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.parser.epatch.services.EpatchTestLanguageGrammarAccess;
-import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
-import org.eclipse.xtext.parser.packrat.IMarkerFactory;
 import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
+import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
-import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -27,9 +25,8 @@ public class EpatchTestLanguageFRAGMENTConsumer extends AbstractRuleAwareTermina
 			ICharacterClass.Factory.createRange('0', '9'),
 			ICharacterClass.Factory.create('_', '/', '[', ']', '{', '}', '.', '@')	
 	);
-	public EpatchTestLanguageFRAGMENTConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
-			IParsedTokenAcceptor tokenAcceptor) {
-		super(input, markerFactory, tokenAcceptor);
+	public EpatchTestLanguageFRAGMENTConsumer(ITerminalConsumerConfiguration configuration) {
+		super(configuration);
 	}
 
 	@Override
