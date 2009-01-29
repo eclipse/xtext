@@ -9,12 +9,10 @@ package org.eclipse.xtext.grammarinheritance.parser.packrat.consumers;
 
 import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.grammarinheritance.services.AbstractTestLanguageGrammarAccess;
-import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
-import org.eclipse.xtext.parser.packrat.IMarkerFactory;
 import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
+import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
-import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -36,9 +34,8 @@ public class AbstractTestLanguageIDConsumer extends AbstractRuleAwareTerminalCon
 			ICharacterClass.Factory.createRange('0', '9')
 	);
 	
-	public AbstractTestLanguageIDConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
-			IParsedTokenAcceptor tokenAcceptor) {
-		super(input, markerFactory, tokenAcceptor);
+	public AbstractTestLanguageIDConsumer(ITerminalConsumerConfiguration configuration) {
+		super(configuration);
 	}
 
 	public int doConsume() {

@@ -66,7 +66,7 @@ public abstract class AbstractSemanticModelTransformer implements ISemanticModel
 
 	protected abstract boolean consumeSemanticNode(EObject semanticNode);
 
-	protected String getText(Object object) {
+	public String getText(Object object) {
 		if (object != null) {
 			EObject eObject = (EObject) object;
 			EClass eClass = eObject.eClass();

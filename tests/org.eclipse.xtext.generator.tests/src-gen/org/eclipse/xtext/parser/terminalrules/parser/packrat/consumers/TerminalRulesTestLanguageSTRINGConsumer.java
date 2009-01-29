@@ -4,12 +4,10 @@ Generated with Xtext
 package org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers;
 
 import org.eclipse.xtext.AbstractRule;
-import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
-import org.eclipse.xtext.parser.packrat.IMarkerFactory;
+import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
-import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.parser.terminalrules.services.TerminalRulesTestLanguageGrammarAccess;
 
@@ -18,9 +16,8 @@ import org.eclipse.xtext.parser.terminalrules.services.TerminalRulesTestLanguage
 public final class TerminalRulesTestLanguageSTRINGConsumer extends AbstractRuleAwareTerminalConsumer {
 
 
-	public TerminalRulesTestLanguageSTRINGConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
-			IParsedTokenAcceptor tokenAcceptor) {
-		super(input, markerFactory, tokenAcceptor);
+	public TerminalRulesTestLanguageSTRINGConsumer(ITerminalConsumerConfiguration configuration) {
+		super(configuration);
 	}
 	
 	protected int doConsume() {

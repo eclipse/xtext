@@ -4,13 +4,7 @@ Generated with Xtext
 package org.eclipse.xtext.parser.terminalrules.parser.packrat;
 
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
-import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
-import org.eclipse.xtext.parser.packrat.IHiddenTokenHandler;
-import org.eclipse.xtext.parser.packrat.IMarkerFactory;
-import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
-import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
-import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.TerminalRulesTestLanguageModelConsumer;
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.TerminalRulesTestLanguageIDConsumer;
@@ -21,6 +15,7 @@ import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.TerminalR
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.TerminalRulesTestLanguageWSConsumer;
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.TerminalRulesTestLanguageANY_OTHERConsumer;
 
+@SuppressWarnings("unused")
 public class TerminalRulesTestLanguageParserConfiguration extends AbstractParserConfiguration {
 
     private TerminalRulesTestLanguageModelConsumer modelConsumer;
@@ -32,9 +27,8 @@ public class TerminalRulesTestLanguageParserConfiguration extends AbstractParser
     private TerminalRulesTestLanguageWSConsumer wsConsumer;
     private TerminalRulesTestLanguageANY_OTHERConsumer anyOtherConsumer;
 
-	public TerminalRulesTestLanguageParserConfiguration(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
-			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil) {
-		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil);
+	public TerminalRulesTestLanguageParserConfiguration(IInternalParserConfiguration configuration) {
+		super(configuration);
 	}
 
 	public TerminalRulesTestLanguageModelConsumer getRootConsumer() {
@@ -43,18 +37,18 @@ public class TerminalRulesTestLanguageParserConfiguration extends AbstractParser
 	
 	public void createNonTerminalConsumers() {
 		modelConsumer = new TerminalRulesTestLanguageModelConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 	}
 	
 	public void createTerminalConsumers() {
-		idConsumer = new TerminalRulesTestLanguageIDConsumer(getInput(), getMarkerFactory(), getTokenAcceptor());
-		intConsumer = new TerminalRulesTestLanguageINTConsumer(getInput(), getMarkerFactory(), getTokenAcceptor());
-		stringConsumer = new TerminalRulesTestLanguageSTRINGConsumer(getInput(), getMarkerFactory(), getTokenAcceptor());
-		mlCommentConsumer = new TerminalRulesTestLanguageML_COMMENTConsumer(getInput(), getMarkerFactory(), getTokenAcceptor());
-		slCommentConsumer = new TerminalRulesTestLanguageSL_COMMENTConsumer(getInput(), getMarkerFactory(), getTokenAcceptor());
-		wsConsumer = new TerminalRulesTestLanguageWSConsumer(getInput(), getMarkerFactory(), getTokenAcceptor());
-		anyOtherConsumer = new TerminalRulesTestLanguageANY_OTHERConsumer(getInput(), getMarkerFactory(), getTokenAcceptor());
+		idConsumer = new TerminalRulesTestLanguageIDConsumer(this);
+		intConsumer = new TerminalRulesTestLanguageINTConsumer(this);
+		stringConsumer = new TerminalRulesTestLanguageSTRINGConsumer(this);
+		mlCommentConsumer = new TerminalRulesTestLanguageML_COMMENTConsumer(this);
+		slCommentConsumer = new TerminalRulesTestLanguageSL_COMMENTConsumer(this);
+		wsConsumer = new TerminalRulesTestLanguageWSConsumer(this);
+		anyOtherConsumer = new TerminalRulesTestLanguageANY_OTHERConsumer(this);
 	}
 	
 	public void configureConsumers() {

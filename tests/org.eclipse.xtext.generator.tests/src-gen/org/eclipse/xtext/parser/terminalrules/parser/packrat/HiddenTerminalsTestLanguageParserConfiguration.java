@@ -4,13 +4,7 @@ Generated with Xtext
 package org.eclipse.xtext.parser.terminalrules.parser.packrat;
 
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
-import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
-import org.eclipse.xtext.parser.packrat.IHiddenTokenHandler;
-import org.eclipse.xtext.parser.packrat.IMarkerFactory;
-import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
-import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
-import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.HiddenTerminalsTestLanguageModelConsumer;
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.HiddenTerminalsTestLanguageWithoutHiddensConsumer;
@@ -25,6 +19,7 @@ import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.HiddenTer
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.HiddenTerminalsTestLanguageWSConsumer;
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.HiddenTerminalsTestLanguageANY_OTHERConsumer;
 
+@SuppressWarnings("unused")
 public class HiddenTerminalsTestLanguageParserConfiguration extends AbstractParserConfiguration {
 
     private HiddenTerminalsTestLanguageModelConsumer modelConsumer;
@@ -40,9 +35,8 @@ public class HiddenTerminalsTestLanguageParserConfiguration extends AbstractPars
     private HiddenTerminalsTestLanguageWSConsumer wsConsumer;
     private HiddenTerminalsTestLanguageANY_OTHERConsumer anyOtherConsumer;
 
-	public HiddenTerminalsTestLanguageParserConfiguration(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
-			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil) {
-		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil);
+	public HiddenTerminalsTestLanguageParserConfiguration(IInternalParserConfiguration configuration) {
+		super(configuration);
 	}
 
 	public HiddenTerminalsTestLanguageModelConsumer getRootConsumer() {
@@ -51,41 +45,36 @@ public class HiddenTerminalsTestLanguageParserConfiguration extends AbstractPars
 	
 	public void createNonTerminalConsumers() {
 		modelConsumer = new HiddenTerminalsTestLanguageModelConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		withoutHiddensConsumer = new HiddenTerminalsTestLanguageWithoutHiddensConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		withHiddensConsumer = new HiddenTerminalsTestLanguageWithHiddensConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(),
-    		new ITerminalConsumer[]{ getWsConsumer(), getMlCommentConsumer(), getSlCommentConsumer() }
+    		this, new ITerminalConsumer[]{ getWsConsumer(), getMlCommentConsumer(), getSlCommentConsumer() }
     	);
 		overridingHiddensConsumer = new HiddenTerminalsTestLanguageOverridingHiddensConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(),
-    		new ITerminalConsumer[]{ getWsConsumer(), getMlCommentConsumer(), getSlCommentConsumer() }
+    		this, new ITerminalConsumer[]{ getWsConsumer(), getMlCommentConsumer(), getSlCommentConsumer() }
     	);
 		overridingHiddensCallConsumer = new HiddenTerminalsTestLanguageOverridingHiddensCallConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(),
-    		new ITerminalConsumer[]{  }
+    		this, new ITerminalConsumer[]{  }
     	);
 		inheritingHiddensConsumer = new HiddenTerminalsTestLanguageInheritingHiddensConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(),
-    		new ITerminalConsumer[]{ getWsConsumer(), getMlCommentConsumer(), getSlCommentConsumer() }
+    		this, new ITerminalConsumer[]{ getWsConsumer(), getMlCommentConsumer(), getSlCommentConsumer() }
     	);
 		hidingHiddensConsumer = new HiddenTerminalsTestLanguageHidingHiddensConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(),
-    		new ITerminalConsumer[]{  }
+    		this, new ITerminalConsumer[]{  }
     	);
 		inheritingHiddensCallConsumer = new HiddenTerminalsTestLanguageInheritingHiddensCallConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 	}
 	
 	public void createTerminalConsumers() {
-		mlCommentConsumer = new HiddenTerminalsTestLanguageML_COMMENTConsumer(getInput(), getMarkerFactory(), getTokenAcceptor());
-		slCommentConsumer = new HiddenTerminalsTestLanguageSL_COMMENTConsumer(getInput(), getMarkerFactory(), getTokenAcceptor());
-		wsConsumer = new HiddenTerminalsTestLanguageWSConsumer(getInput(), getMarkerFactory(), getTokenAcceptor());
-		anyOtherConsumer = new HiddenTerminalsTestLanguageANY_OTHERConsumer(getInput(), getMarkerFactory(), getTokenAcceptor());
+		mlCommentConsumer = new HiddenTerminalsTestLanguageML_COMMENTConsumer(this);
+		slCommentConsumer = new HiddenTerminalsTestLanguageSL_COMMENTConsumer(this);
+		wsConsumer = new HiddenTerminalsTestLanguageWSConsumer(this);
+		anyOtherConsumer = new HiddenTerminalsTestLanguageANY_OTHERConsumer(this);
 	}
 	
 	public void configureConsumers() {

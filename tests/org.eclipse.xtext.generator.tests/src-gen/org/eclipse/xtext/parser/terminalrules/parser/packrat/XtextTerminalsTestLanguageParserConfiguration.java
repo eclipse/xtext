@@ -4,13 +4,7 @@ Generated with Xtext
 package org.eclipse.xtext.parser.terminalrules.parser.packrat;
 
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
-import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
-import org.eclipse.xtext.parser.packrat.IHiddenTokenHandler;
-import org.eclipse.xtext.parser.packrat.IMarkerFactory;
-import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
-import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
-import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerminalsTestLanguageGrammarConsumer;
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerminalsTestLanguageAbstractRuleConsumer;
@@ -49,6 +43,7 @@ import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerm
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerminalsTestLanguageWSConsumer;
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerminalsTestLanguageANY_OTHERConsumer;
 
+@SuppressWarnings("unused")
 public class XtextTerminalsTestLanguageParserConfiguration extends AbstractParserConfiguration {
 
     private XtextTerminalsTestLanguageGrammarConsumer grammarConsumer;
@@ -88,9 +83,8 @@ public class XtextTerminalsTestLanguageParserConfiguration extends AbstractParse
     private XtextTerminalsTestLanguageWSConsumer wsConsumer;
     private XtextTerminalsTestLanguageANY_OTHERConsumer anyOtherConsumer;
 
-	public XtextTerminalsTestLanguageParserConfiguration(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
-			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil) {
-		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil);
+	public XtextTerminalsTestLanguageParserConfiguration(IInternalParserConfiguration configuration) {
+		super(configuration);
 	}
 
 	public XtextTerminalsTestLanguageGrammarConsumer getRootConsumer() {
@@ -99,103 +93,102 @@ public class XtextTerminalsTestLanguageParserConfiguration extends AbstractParse
 	
 	public void createNonTerminalConsumers() {
 		grammarConsumer = new XtextTerminalsTestLanguageGrammarConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(),
-    		new ITerminalConsumer[]{ getWsConsumer(), getMlCommentConsumer(), getSlCommentConsumer() }
+    		this, new ITerminalConsumer[]{ getWsConsumer(), getMlCommentConsumer(), getSlCommentConsumer() }
     	);
 		abstractRuleConsumer = new XtextTerminalsTestLanguageAbstractRuleConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		abstractMetamodelDeclarationConsumer = new XtextTerminalsTestLanguageAbstractMetamodelDeclarationConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		generatedMetamodelConsumer = new XtextTerminalsTestLanguageGeneratedMetamodelConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		referencedMetamodelConsumer = new XtextTerminalsTestLanguageReferencedMetamodelConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		lexerRuleConsumer = new XtextTerminalsTestLanguageLexerRuleConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		parserRuleConsumer = new XtextTerminalsTestLanguageParserRuleConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		terminalRuleConsumer = new XtextTerminalsTestLanguageTerminalRuleConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		typeRefConsumer = new XtextTerminalsTestLanguageTypeRefConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		alternativesConsumer = new XtextTerminalsTestLanguageAlternativesConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		terminalAlternativesConsumer = new XtextTerminalsTestLanguageTerminalAlternativesConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		groupConsumer = new XtextTerminalsTestLanguageGroupConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		terminalGroupConsumer = new XtextTerminalsTestLanguageTerminalGroupConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		abstractTokenConsumer = new XtextTerminalsTestLanguageAbstractTokenConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		terminalTokenConsumer = new XtextTerminalsTestLanguageTerminalTokenConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		assignmentConsumer = new XtextTerminalsTestLanguageAssignmentConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		actionConsumer = new XtextTerminalsTestLanguageActionConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		abstractTerminalConsumer = new XtextTerminalsTestLanguageAbstractTerminalConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		terminalTokenElementConsumer = new XtextTerminalsTestLanguageTerminalTokenElementConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		abstractNegatedTokenConsumer = new XtextTerminalsTestLanguageAbstractNegatedTokenConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		negatedTokenConsumer = new XtextTerminalsTestLanguageNegatedTokenConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		upToTokenConsumer = new XtextTerminalsTestLanguageUpToTokenConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		wildcardConsumer = new XtextTerminalsTestLanguageWildcardConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		characterRangeConsumer = new XtextTerminalsTestLanguageCharacterRangeConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		crossReferenceConsumer = new XtextTerminalsTestLanguageCrossReferenceConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		parenthesizedElementConsumer = new XtextTerminalsTestLanguageParenthesizedElementConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		parenthesizedTerminalElementConsumer = new XtextTerminalsTestLanguageParenthesizedTerminalElementConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		keywordConsumer = new XtextTerminalsTestLanguageKeywordConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 		ruleCallConsumer = new XtextTerminalsTestLanguageRuleCallConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 	}
 	
 	public void createTerminalConsumers() {
-		idConsumer = new XtextTerminalsTestLanguageIDConsumer(getInput(), getMarkerFactory(), getTokenAcceptor());
-		intConsumer = new XtextTerminalsTestLanguageINTConsumer(getInput(), getMarkerFactory(), getTokenAcceptor());
-		stringConsumer = new XtextTerminalsTestLanguageSTRINGConsumer(getInput(), getMarkerFactory(), getTokenAcceptor());
-		mlCommentConsumer = new XtextTerminalsTestLanguageML_COMMENTConsumer(getInput(), getMarkerFactory(), getTokenAcceptor());
-		slCommentConsumer = new XtextTerminalsTestLanguageSL_COMMENTConsumer(getInput(), getMarkerFactory(), getTokenAcceptor());
-		wsConsumer = new XtextTerminalsTestLanguageWSConsumer(getInput(), getMarkerFactory(), getTokenAcceptor());
-		anyOtherConsumer = new XtextTerminalsTestLanguageANY_OTHERConsumer(getInput(), getMarkerFactory(), getTokenAcceptor());
+		idConsumer = new XtextTerminalsTestLanguageIDConsumer(this);
+		intConsumer = new XtextTerminalsTestLanguageINTConsumer(this);
+		stringConsumer = new XtextTerminalsTestLanguageSTRINGConsumer(this);
+		mlCommentConsumer = new XtextTerminalsTestLanguageML_COMMENTConsumer(this);
+		slCommentConsumer = new XtextTerminalsTestLanguageSL_COMMENTConsumer(this);
+		wsConsumer = new XtextTerminalsTestLanguageWSConsumer(this);
+		anyOtherConsumer = new XtextTerminalsTestLanguageANY_OTHERConsumer(this);
 	}
 	
 	public void configureConsumers() {

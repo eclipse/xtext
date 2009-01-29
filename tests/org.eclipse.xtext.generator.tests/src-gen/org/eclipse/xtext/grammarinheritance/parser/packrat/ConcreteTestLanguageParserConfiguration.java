@@ -4,13 +4,7 @@ Generated with Xtext
 package org.eclipse.xtext.grammarinheritance.parser.packrat;
 
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
-import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
-import org.eclipse.xtext.parser.packrat.IHiddenTokenHandler;
-import org.eclipse.xtext.parser.packrat.IMarkerFactory;
-import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
-import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
-import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.grammarinheritance.parser.packrat.AbstractTestLanguageParserConfiguration; 
 
@@ -25,17 +19,16 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSL_COMMENT
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinWSConsumer;
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinANY_OTHERConsumer;
 
+@SuppressWarnings("unused")
 public class ConcreteTestLanguageParserConfiguration extends AbstractParserConfiguration {
 
 	private AbstractTestLanguageParserConfiguration abstractTestLanguageConfiguration; 
 
     private ConcreteTestLanguageConcreteParserRuleConsumer concreteParserRuleConsumer;
 
-	public ConcreteTestLanguageParserConfiguration(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
-			IParsedTokenAcceptor tokenAcceptor, IHiddenTokenHandler hiddenTokenHandler, IConsumerUtility consumerUtil) {
-		super(input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil);
-		this.abstractTestLanguageConfiguration = new AbstractTestLanguageParserConfiguration(
-			input, markerFactory, tokenAcceptor, hiddenTokenHandler, consumerUtil);
+	public ConcreteTestLanguageParserConfiguration(IInternalParserConfiguration configuration) {
+		super(configuration);
+		this.abstractTestLanguageConfiguration = new AbstractTestLanguageParserConfiguration(configuration);
 	}
 
 	public ConcreteTestLanguageConcreteParserRuleConsumer getRootConsumer() {
@@ -45,7 +38,7 @@ public class ConcreteTestLanguageParserConfiguration extends AbstractParserConfi
 	public void createNonTerminalConsumers() {
 		getAbstractTestLanguageConfiguration().createNonTerminalConsumers();
 		concreteParserRuleConsumer = new ConcreteTestLanguageConcreteParserRuleConsumer(
-    		getInput(), getMarkerFactory(), getTokenAcceptor(), getHiddenTokenHandler(), getConsumerUtil(), null
+    		this, null
     	);
 	}
 	

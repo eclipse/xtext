@@ -4,12 +4,10 @@ Generated with Xtext
 package org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers;
 
 import org.eclipse.xtext.AbstractRule;
-import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
-import org.eclipse.xtext.parser.packrat.IMarkerFactory;
+import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
-import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.parser.terminalrules.services.HiddenTerminalsTestLanguageGrammarAccess;
 
@@ -18,9 +16,8 @@ import org.eclipse.xtext.parser.terminalrules.services.HiddenTerminalsTestLangua
 public final class HiddenTerminalsTestLanguageANY_OTHERConsumer extends AbstractRuleAwareTerminalConsumer {
 
 
-	public HiddenTerminalsTestLanguageANY_OTHERConsumer(ICharSequenceWithOffset input, IMarkerFactory markerFactory,
-			IParsedTokenAcceptor tokenAcceptor) {
-		super(input, markerFactory, tokenAcceptor);
+	public HiddenTerminalsTestLanguageANY_OTHERConsumer(ITerminalConsumerConfiguration configuration) {
+		super(configuration);
 	}
 	
 	protected int doConsume() {
