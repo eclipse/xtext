@@ -58,7 +58,9 @@ public class XtextTokenStream extends CommonTokenStream {
 
 		public Object get(int index) {
 			Token tok = (Token) super.get(index);
-			if (hiddenTokens != null && tok.getType() >= Token.MIN_TOKEN_TYPE)
+			// adjust only tokens in the 'future', as we wont change the channel of previously parsed
+			// tokens
+			if (hiddenTokens != null && tok.getType() >= Token.MIN_TOKEN_TYPE && index >= p)
 				tok.setChannel(hiddenTokens.get(tok.getType()) ? Token.HIDDEN_CHANNEL : Token.DEFAULT_CHANNEL);
 			return tok;
 		}
@@ -103,7 +105,41 @@ public class XtextTokenStream extends CommonTokenStream {
 		if (!lookaheadTokens.contains(lookaheadToken)) {
 			lookaheadTokens.add(lookaheadToken);
 		}
-		return super.LA(i);
+		// return super.LA(i); // inlined 
+		return lookaheadToken.getType();
+	}
+
+	/**
+	 * Same as {@link CommonTokenStream#LT(int)} except that we skip
+	 * hidden tokens even for <code>k == 1<code>.
+	 */
+	@Override
+	public Token LT(int k) {
+		Token result = super.LT(k);
+        if (k == 1 && result.getChannel()!=channel) {
+        	// copied from super.LT(k) except from the last assignment to p
+        	int k_ = k + 1;
+        	if ( (p+k_-1) >= tokens.size() ) {
+    			return Token.EOF_TOKEN;
+    		}
+    		int i = p;
+    		int n = 1;
+    		// find k good tokens
+    		while ( n<k_ ) {
+    			// skip off-channel tokens
+    			i = skipOffTokenChannels(i+1); // leave p to a valid pointer
+    										   // SZ: prev. comment from superclass
+    										   // is irritating because p is not set
+    										   // in skipOffTokenChannels(...)
+    			n++;
+    		}
+    		if ( i>=tokens.size() ) {
+    			return Token.EOF_TOKEN;
+    		}
+    		p = i; // adjust p to the valid pointer
+            result = (Token)tokens.get(i);
+        }
+        return result;
 	}
 
 	/**

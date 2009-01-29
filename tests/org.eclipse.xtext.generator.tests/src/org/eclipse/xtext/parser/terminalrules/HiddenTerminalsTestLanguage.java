@@ -1,23 +1,15 @@
 /*******************************************************************************
- * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.parser.packrat.consumers;
-
-import org.eclipse.xtext.AbstractElement;
+package org.eclipse.xtext.parser.terminalrules;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface INonTerminalConsumer {
-
-	int consumeAsRoot(IRootConsumerListener listener) throws Exception;
-	
-	int consume(String feature, boolean isMany, boolean isDatatype, AbstractElement element) throws Exception;
-	
-	boolean isDefiningHiddens();
+public class HiddenTerminalsTestLanguage {
 
 }

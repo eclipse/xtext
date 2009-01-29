@@ -1,0 +1,170 @@
+/*******************************************************************************
+ * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+package org.eclipse.xtext.parser.terminalrules;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.tests.AbstractGeneratorTest;
+
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
+public class HiddensTest extends AbstractGeneratorTest {
+
+	private EClass withoutHiddens;
+	private EClass withHiddens;
+	private EClass overridingHiddens;
+	private EClass inheritingHiddens;
+	private EClass model;
+	private EStructuralFeature spacesWithoutHiddens;
+	private EStructuralFeature valid;
+	private EClass overridingHiddensCall;
+	private EClass inheritingHiddensCall;
+	private EStructuralFeature overridingCall;
+	private EStructuralFeature inheritingCall;
+	private EStructuralFeature overridingValid;
+	private EStructuralFeature inheritingValid;
+	
+	@Override
+	protected void setUp() throws Exception {
+		with(HiddenTerminalsTestLanguageStandaloneSetup.class);
+		EPackage pack = getMetamodelAccess().getGeneratedEPackages()[0];
+		withoutHiddens = (EClass) pack.getEClassifier("WithoutHiddens");
+		withHiddens = (EClass) pack.getEClassifier("WithHiddens");
+		overridingHiddens = (EClass) pack.getEClassifier("OverridingHiddens");
+		overridingHiddensCall = (EClass) pack.getEClassifier("OverridingHiddensCall");
+		inheritingHiddens = (EClass) pack.getEClassifier("InheritingHiddens");
+		inheritingHiddensCall = (EClass) pack.getEClassifier("InheritingHiddensCall");
+		model = (EClass) pack.getEClassifier("Model");
+		spacesWithoutHiddens = withoutHiddens.getEStructuralFeature("spaces");
+		valid = model.getEStructuralFeature("valid");
+		overridingValid = overridingHiddensCall.getEStructuralFeature("valid");
+		inheritingValid = inheritingHiddensCall.getEStructuralFeature("valid");
+		inheritingCall = inheritingHiddens.getEStructuralFeature("called");
+		overridingCall = overridingHiddens.getEStructuralFeature("called");
+	}
+	
+	public void testSetup() {
+		assertNotNull(withoutHiddens);
+		assertNotNull(withHiddens);
+		assertNotNull(overridingHiddens);
+		assertNotNull(inheritingHiddens);
+		assertNotNull(overridingHiddensCall);
+		assertNotNull(inheritingHiddensCall);
+		assertNotNull(model);
+		assertNotNull(spacesWithoutHiddens);
+		assertNotNull(valid);
+		assertNotNull(overridingValid);
+		assertNotNull(inheritingValid);
+		assertNotNull(overridingCall);
+		assertNotNull(inheritingCall);
+	}
+	
+	public void testWithoutHiddens_01() throws Exception {
+		String model = "without hiddens ;";
+		Resource res = getResourceFromString(model);
+		assertTrue(res.getErrors().isEmpty());
+		EObject root = res.getContents().get(0);
+		assertNotNull(root);
+		assertEquals(withoutHiddens, root.eClass());
+		assertTrue((Boolean) root.eGet(valid));
+	}
+	
+	public void testWithoutHiddens_02() throws Exception {
+		String model = "without hiddens;";
+		Resource res = getResourceFromString(model);
+		assertTrue(res.getErrors().isEmpty());
+		EObject root = res.getContents().get(0);
+		assertNotNull(root);
+		assertEquals(withoutHiddens, root.eClass());
+		assertTrue((Boolean) root.eGet(valid));
+	}
+	
+	public void testWithHiddens_01() throws Exception {
+		String model = "with hiddens ;";
+		Resource res = getResourceFromString(model);
+		assertTrue(res.getErrors().isEmpty());
+		EObject root = res.getContents().get(0);
+		assertNotNull(root);
+		assertEquals(withHiddens, root.eClass());
+		assertTrue((Boolean) root.eGet(valid));
+	}
+	
+	public void testWithHiddens_02() throws Exception {
+		String model = "with/* comment */hiddens;";
+		Resource res = getResourceFromString(model);
+		assertTrue(res.getErrors().isEmpty());
+		EObject root = res.getContents().get(0);
+		assertNotNull(root);
+		assertEquals(withHiddens, root.eClass());
+		assertTrue((Boolean) root.eGet(valid));
+	}
+	
+	public void testOverridingHiddens_01() throws Exception {
+		String model = "overriding hiddens (call;);";
+		Resource res = getResourceFromString(model);
+		assertTrue(res.getErrors().isEmpty());
+		EObject root = res.getContents().get(0);
+		assertNotNull(root);
+		assertEquals(overridingHiddens, root.eClass());
+		assertTrue((Boolean) root.eGet(valid));
+	}
+	
+	public void testOverridingHiddens_02() throws Exception {
+		String model = "overriding hiddens ( call ; ) ;";
+		Resource res = getResourceFromString(model);
+		assertTrue(res.getErrors().isEmpty());
+		EObject root = res.getContents().get(0);
+		assertNotNull(root);
+		assertEquals(overridingHiddens, root.eClass());
+		assertTrue((Boolean) root.eGet(valid));
+	}
+	
+	public void testInheritingHiddens_01() throws Exception {
+		String model = "inheriting hiddens (call;);";
+		Resource res = getResourceFromString(model);
+		assertTrue(res.getErrors().isEmpty());
+		EObject root = res.getContents().get(0);
+		assertNotNull(root);
+		assertEquals(inheritingHiddens, root.eClass());
+		assertTrue((Boolean) root.eGet(valid));
+	}
+	
+	public void testInheritingHiddens_02() throws Exception {
+		String model = "inheriting hiddens ( call /*comment */ ; ) ;";
+		Resource res = getResourceFromString(model);
+		assertTrue(res.getErrors().isEmpty());
+		EObject root = res.getContents().get(0);
+		assertNotNull(root);
+		assertEquals(inheritingHiddens, root.eClass());
+		assertTrue((Boolean) root.eGet(valid));
+	}
+	
+	public void testInheritingHiddens_03() throws Exception {
+		String model = "inheriting hiddens ( hiding call; ) ;";
+		Resource res = getResourceFromString(model);
+		assertTrue(res.getErrors().isEmpty());
+		EObject root = res.getContents().get(0);
+		assertNotNull(root);
+		assertEquals(inheritingHiddens, root.eClass());
+		assertTrue((Boolean) root.eGet(valid));
+	}
+	
+	public void testInheritingHiddens_04() throws Exception {
+		String model = "inheriting hiddens (/*comment*/hiding call;/*comment*/) ;";
+		Resource res = getResourceFromString(model);
+		assertTrue(res.getErrors().isEmpty());
+		EObject root = res.getContents().get(0);
+		assertNotNull(root);
+		assertEquals(inheritingHiddens, root.eClass());
+		assertTrue((Boolean) root.eGet(valid));
+	}
+}

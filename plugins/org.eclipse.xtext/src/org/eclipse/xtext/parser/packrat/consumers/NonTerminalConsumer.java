@@ -70,6 +70,10 @@ public abstract class NonTerminalConsumer implements INonTerminalConsumer {
 		return result;
 	}
 	
+	public boolean isDefiningHiddens() {
+		return hiddenTokens != null;
+	}
+
 	public int consumeAsRoot(IRootConsumerListener listener) throws Exception {
 		IHiddenTokenState prevState = hiddenTokenHandler.replaceHiddenTokens(hiddenTokens);
 		IMarker marker = mark();
