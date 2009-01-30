@@ -6,11 +6,6 @@ package org.eclipse.xtext;
 import org.eclipse.xtext.crossref.ILinker;
 import org.eclipse.xtext.crossref.ILinkingService;
 import org.eclipse.xtext.crossref.IScopeProvider;
-import org.eclipse.xtext.parser.ISwitchingParser;
-import org.eclipse.xtext.parser.ITokenToStringConverter;
-import org.eclipse.xtext.parser.antlr.IAntlrParser;
-import org.eclipse.xtext.parser.packrat.IPackratParser;
-import org.eclipse.xtext.parser.packrat.IParseResultFactory;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
 import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
 import org.eclipse.xtext.xtext.XtextFormattingTokenSerializer;
@@ -32,30 +27,30 @@ public class XtextRuntimeModule extends AbstractXtextRuntimeModule {
 	}
 
 	@Override
-	protected Class<? extends ILinkingService> getILinkingService() {
+	public Class<? extends ILinkingService> bindILinkingService() {
 		return XtextLinkingService.class;
 	}
 	
 	@Override
-	protected Class<? extends IScopeProvider> getIScopeProvider() {
+	public Class<? extends IScopeProvider> bindIScopeProvider() {
 		return XtextScopeProvider.class;
 	}
 	
 	@Override
-	protected Class<? extends ILinker> getILinker() {
+	public Class<? extends ILinker> bindILinker() {
 		return org.eclipse.xtext.xtext.XtextLinker.class;
 	}
 
 	@Override
-	protected Class<? extends ITransientValueService> getITransientValueService() {
+	public Class<? extends ITransientValueService> bindITransientValueService() {
 		return XtextTransientValueService.class;
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipse.xtext.AbstractXtextRuntimeModule#getITokenSerializer()
+	 * @see org.eclipse.xtext.AbstractXtextRuntimeModule#bindITokenSerializer()
 	 */
 	@Override
-	protected Class<? extends ITokenSerializer> getITokenSerializer() {
+	public Class<? extends ITokenSerializer> bindITokenSerializer() {
 		return XtextFormattingTokenSerializer.class;
 	}
 

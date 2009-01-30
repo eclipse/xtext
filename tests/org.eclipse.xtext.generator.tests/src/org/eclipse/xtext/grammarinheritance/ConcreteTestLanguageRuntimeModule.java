@@ -13,7 +13,7 @@ import com.google.inject.Binder;
 public class ConcreteTestLanguageRuntimeModule extends AbstractConcreteTestLanguageRuntimeModule {
 
 	@Override
-	protected Class<? extends IValueConverterService> getIValueConverterService() {
+	public Class<? extends IValueConverterService> bindIValueConverterService() {
 		return AbstractTestLanguageValueConverters.class;
 	}
 	
