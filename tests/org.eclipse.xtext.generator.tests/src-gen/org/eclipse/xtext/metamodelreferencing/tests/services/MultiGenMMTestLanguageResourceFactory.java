@@ -8,7 +8,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.service.ServiceRegistry;
-import org.eclipse.xtext.service.ServiceScopeFactory;
 
 public class MultiGenMMTestLanguageResourceFactory implements IResourceFactory {
 
@@ -21,7 +20,7 @@ public class MultiGenMMTestLanguageResourceFactory implements IResourceFactory {
      */
     public Resource createResource(URI uri) {
         XtextResource resource = new XtextResource(uri);
-        ServiceRegistry.injectServices(ServiceScopeFactory.get("org.eclipse.xtext.metamodelreferencing.tests.MultiGenMMTestLanguage"), resource);
+        ServiceRegistry.getInjector(org.eclipse.xtext.metamodelreferencing.tests.IMultiGenMMTestLanguage.SCOPE).injectMembers(resource);
         return resource;
     }
     

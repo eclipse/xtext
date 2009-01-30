@@ -17,13 +17,14 @@ import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
 import org.eclipse.xtext.ui.common.editor.outline.ILazyTreeProvider;
 import org.eclipse.xtext.ui.common.editor.outline.ISemanticModelTransformer;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocument;
+
+import com.google.inject.Inject;
 
 /**
  * @author Peter Friese - Initial contribution and API

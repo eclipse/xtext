@@ -22,15 +22,16 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.XtextStandaloneSetup;
+import org.eclipse.xtext.IXtext;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
 import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
 import org.eclipse.xtext.parsetree.reconstr.XtextSerializationException;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
-import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.service.ServiceRegistry;
+
+import com.google.inject.Inject;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -176,8 +177,7 @@ public abstract class AbstractParseTreeConstructor implements
 			ByteArrayOutputStream out = new ByteArrayOutputStream();
 			try {
 				SimpleTokenSerializer sts = new SimpleTokenSerializer();
-				ServiceRegistry.injectServices(XtextStandaloneSetup
-						.getServiceScope(), sts);
+				ServiceRegistry.getInjector(IXtext.SCOPE).injectMembers(sts);
 				sts.serialize(ele, out);
 			} catch (Throwable e) {
 				e.printStackTrace();

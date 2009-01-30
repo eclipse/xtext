@@ -37,14 +37,14 @@ import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.ParseTreeUtil;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.service.IServiceScope;
-import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistCalculator;
 import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
 import org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider;
 import org.eclipse.xtext.ui.common.editor.contentassist.ITemplateContentAssistProcessor;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
+
+import com.google.inject.Inject;
 
 /**
  * The default implementation of interface {@link IContentAssistProcessor} provided with Xtext.
@@ -67,9 +67,6 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 	@Inject
 	protected IProposalProvider proposalProvider;
 	
-	@Inject
-	protected IServiceScope serviceScope;
-
 	/**
 	 * Computes the possible grammar elements following the one at the given offset and calls the respective methods on
 	 * the proposal provider.

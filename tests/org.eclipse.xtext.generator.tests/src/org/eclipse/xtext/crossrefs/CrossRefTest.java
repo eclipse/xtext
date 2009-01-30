@@ -25,7 +25,7 @@ public class CrossRefTest extends AbstractGeneratorTest {
 	protected void setUp() throws Exception {
 		super.setUp();
 		with(LangATestLanguageStandaloneSetup.class);
-		linkingService = (DefaultLinkingService) ServiceRegistry.getService(ILangATestLanguage.SCOPE, ILinkingService.class);
+		linkingService = (DefaultLinkingService) ServiceRegistry.getInjector(ILangATestLanguage.SCOPE).getInstance(ILinkingService.class);
 	}
 
 	public void testSimple() throws Exception {

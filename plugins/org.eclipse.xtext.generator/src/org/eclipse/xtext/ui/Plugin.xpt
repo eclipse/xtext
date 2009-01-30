@@ -32,7 +32,7 @@
 <extension
          point="org.eclipse.ui.editors">
       <editor
-            class="org.eclipse.xtext.ui.core.editor.XtextEditor"
+            class="«editorClassFQN()»"
             contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
             default="true"
             extensions="«modelFileExtensions.toString(",")»"
@@ -41,14 +41,9 @@
       </editor>
    </extension>
  <extension
-       point="org.eclipse.xtext.service.ui.serviceRegistrationFactory">
-    <serviceRegistrationFactory
-          class="«uiConfigClass()»"/>
- </extension>
- <extension
          point="org.eclipse.ui.preferencePages">
 		<page
-			class="org.eclipse.xtext.service.ui.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage/«languageId()»"
+			class="org.eclipse.xtext.ui.core.util.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage/«languageId()»"
 			id="«languageId()»"
 			name="«languageName()»">
 			<keywordReference
@@ -57,7 +52,7 @@
 		</page>
 		<page
 		    category="«languageId()»"
-		    class="org.eclipse.xtext.service.ui.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.EditorPreferencePage/«languageId()»"
+		    class="org.eclipse.xtext.ui.core.util.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.EditorPreferencePage/«languageId()»"
 		    id="«languageId()».editor"
 		    name="Editor">
 		    	<keywordReference 

@@ -9,7 +9,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.ServiceRegistry;
-import org.eclipse.xtext.service.IServiceRegistrationFactory.IServiceRegistration;
+
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 
 import org.eclipse.xtext.parsetree.reconstr.IComplexReconstrTestLanguage;
 
@@ -19,12 +21,14 @@ public abstract class ComplexReconstrTestLanguageStandaloneSetup {
 
 	public synchronized static void doSetup() {
 		if(!isInitialized) {
-			// setup super language first
+		    
+		    Injector injector = Guice.createInjector(new org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTestLanguageRuntimeModule());
+			ServiceRegistry.registerInjector(org.eclipse.xtext.parsetree.reconstr.IComplexReconstrTestLanguage.SCOPE, injector);
+			
+			
+			
 			org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
 			
-			for (IServiceRegistration reg :  new org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTestLanguageRuntimeConfig().registrations()) {
-				ServiceRegistry.registerFactory(reg.scope(), reg.serviceFactory(), reg.priority());
-			}
 			
 			// register resource factory to EMF
 			IResourceFactory resourceFactory = new org.eclipse.xtext.parsetree.reconstr.services.ComplexReconstrTestLanguageResourceFactory();
@@ -48,6 +52,8 @@ public abstract class ComplexReconstrTestLanguageStandaloneSetup {
 	}
 	
 	public static IServiceScope getServiceScope() {
-		return org.eclipse.xtext.parsetree.reconstr.IComplexReconstrTestLanguage.SCOPE;
+	   doSetup();
+	   return org.eclipse.xtext.parsetree.reconstr.IComplexReconstrTestLanguage.SCOPE;
 	}
+	
 }

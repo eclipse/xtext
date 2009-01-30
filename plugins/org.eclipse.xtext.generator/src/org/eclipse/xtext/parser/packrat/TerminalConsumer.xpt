@@ -34,10 +34,10 @@ import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsu
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
-import «this.grammar().grammarAccess()»;
+import «this.containingGrammar().grammarAccess()»;
 
 «FOREACH allCalledRules() AS calledRule-»
-import «calledRule.grammar().getNamespace()».parser.packrat.consumers.«calledRule.consumerClassName()»;
+import «calledRule.containingGrammar().getNamespace()».parser.packrat.consumers.«calledRule.consumerClassName()»;
 «ENDFOREACH-»
 
 @SuppressWarnings("unused")

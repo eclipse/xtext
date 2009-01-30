@@ -15,8 +15,9 @@ import org.eclipse.xtext.conversion.ValueConverter;
 import org.eclipse.xtext.conversion.impl.AbstractAnnotationBasedValueConverterService;
 import org.eclipse.xtext.conversion.impl.AbstractNullSafeConverter;
 import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.util.Strings;
+
+import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

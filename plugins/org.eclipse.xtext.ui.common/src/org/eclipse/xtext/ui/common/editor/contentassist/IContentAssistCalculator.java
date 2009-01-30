@@ -10,6 +10,9 @@ package org.eclipse.xtext.ui.common.editor.contentassist;
 import java.util.List;
 
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultContentAssistCalculator;
+
+import com.google.inject.ImplementedBy;
 
 /**
  * Strategy interface for calculating a list of <code>AbstractElement</code> elements which are applicable for 
@@ -17,6 +20,7 @@ import org.eclipse.xtext.AbstractElement;
  * 
  * @author Michael Clay - Initial contribution and API
  */
+@ImplementedBy(DefaultContentAssistCalculator.class)
 public interface IContentAssistCalculator {
 	
 	/**

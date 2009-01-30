@@ -151,7 +151,7 @@ String gaRuleElementAccessor(AbstractElement ele):
  * @return The java statement
  */	
 String gaFullAccessor(AbstractElement ele):
-	ele.grammar().gaSimpleName() + ".INSTANCE." + ele.gaRuleElementAccessor();
+	ele.containingGrammar().gaSimpleName() + ".INSTANCE." + ele.gaRuleElementAccessor();
 	
 
 

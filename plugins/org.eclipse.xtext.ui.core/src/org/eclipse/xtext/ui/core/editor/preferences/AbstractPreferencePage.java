@@ -43,9 +43,10 @@ import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.service.IServiceScope;
-import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.ui.core.internal.Activator;
+
+import com.google.inject.Inject;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
@@ -198,7 +199,7 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 
 	protected String getLanguageName() {
 		if (this.languageName == null) {
-			this.languageName = GrammarUtil.getName(ServiceRegistry.getService(getServiceScope(), IGrammarAccess.class)
+			this.languageName = GrammarUtil.getName(ServiceRegistry.getInjector(getServiceScope()).getInstance(IGrammarAccess.class)
 					.getGrammar());
 		}
 		return this.languageName;

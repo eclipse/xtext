@@ -1,9 +1,0 @@
-Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-Name: Xtext Service UI Tests (Incubation)
-Bundle-SymbolicName: org.eclipse.xtext.service.ui.tests
-Bundle-Version: 0.7.0.qualifier
-Bundle-Vendor: Eclipse.org
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: org.eclipse.xtext.service.ui,
- org.junit;bundle-version="3.8.2"

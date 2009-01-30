@@ -15,7 +15,6 @@ import org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.service.IServiceScope;
-import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.util.StringInputStream;
 
@@ -29,14 +28,14 @@ public abstract class AbstractXtextTests extends TestCase {
 		super(name);
 	}
 	
-	@Inject
+	@com.google.inject.Inject
 	private IParser parser;
 	public IParser getParser() {
 		return parser;
 	}
 	
 	protected void setCurrentLanguage(IServiceScope desc) {
-		ServiceRegistry.injectServices(desc, this);
+		ServiceRegistry.getInjector(desc).injectMembers(this);
 	}
 	
 	public EObject loadModel(URI uri, String model) throws Exception {

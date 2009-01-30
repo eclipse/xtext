@@ -8,7 +8,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.service.ServiceRegistry;
-import org.eclipse.xtext.service.ServiceScopeFactory;
 
 public class OptionalEmptyTestLanguageResourceFactory implements IResourceFactory {
 
@@ -21,7 +20,7 @@ public class OptionalEmptyTestLanguageResourceFactory implements IResourceFactor
      */
     public Resource createResource(URI uri) {
         XtextResource resource = new XtextResource(uri);
-        ServiceRegistry.injectServices(ServiceScopeFactory.get("org.eclipse.xtext.testlanguages.OptionalEmptyTestLanguage"), resource);
+        ServiceRegistry.getInjector(org.eclipse.xtext.testlanguages.IOptionalEmptyTestLanguage.SCOPE).injectMembers(resource);
         return resource;
     }
     

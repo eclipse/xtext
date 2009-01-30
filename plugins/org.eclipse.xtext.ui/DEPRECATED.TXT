@@ -1,4 +1,0 @@
-THIS PROJECT IS DEPRECATED!
-
-It's only sti8ll there, because we might want to reuse (ie.e. copy) some code from it.
-Won't be updated or maintained.

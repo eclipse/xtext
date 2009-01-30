@@ -21,23 +21,22 @@ import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
+import org.eclipse.xtext.IXtext;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.parsetree.reconstr.impl.SimpleTokenSerializer;
 import org.eclipse.xtext.service.ServiceRegistry;
 
 public class ParseTreeConstructorUtil {
 
-	private static Logger log = Logger
-			.getLogger(ParseTreeConstructorUtil.class);
+	private static Logger log = Logger.getLogger(ParseTreeConstructorUtil.class);
 
 	private static String toIDString(String val) {
 		if (val == null)
 			return "";
 		return val.replaceAll("[^a-zA-Z0-9_]", "");
 	}
-	
+
 	public static boolean isAssignmentRequired(Assignment assignment) {
 		if (GrammarUtil.isOptionalCardinality(assignment))
 			return false;
@@ -78,8 +77,7 @@ public class ParseTreeConstructorUtil {
 		else
 			r = ele.eClass().getName() + "_" + r;
 
-		while ((!(obj.eContainer() instanceof AbstractRule))
-				&& obj.eContainer() != null) {
+		while ((!(obj.eContainer() instanceof AbstractRule)) && obj.eContainer() != null) {
 			EObject tmp = obj.eContainer();
 			r = tmp.eContents().indexOf(obj) + "_" + r;
 			obj = tmp;
@@ -89,37 +87,33 @@ public class ParseTreeConstructorUtil {
 		return "UnknownRule_" + r;
 	}
 
-	private static IParseTreeConstructor AST_SERIALIZER = ServiceRegistry
-			.getService(XtextStandaloneSetup.getServiceScope(),
-					IParseTreeConstructor.class);
+	private static IParseTreeConstructor AST_SERIALIZER = ServiceRegistry.getInjector(IXtext.SCOPE).getInstance(
+			IParseTreeConstructor.class);
 	private static ITokenSerializer TOKEN_SERIALIZER = createTokenSerializer();
 
 	private static ITokenSerializer createTokenSerializer() {
 		ITokenSerializer ts = new SimpleTokenSerializer();
-		ServiceRegistry.injectServices(XtextStandaloneSetup.getServiceScope(),
-				ts);
+		ServiceRegistry.getInjector(IXtext.SCOPE).injectMembers(ts);
 		return ts;
 	}
 
 	public static String grammarFragmentToStr(EObject obj) {
 		try {
 			ByteArrayOutputStream out = new ByteArrayOutputStream();
-			SerializerUtil
-					.serialize(AST_SERIALIZER, TOKEN_SERIALIZER, obj, out);
+			SerializerUtil.serialize(AST_SERIALIZER, TOKEN_SERIALIZER, obj, out);
 			return out.toString();
-		} catch (Throwable e) {
+		}
+		catch (Throwable e) {
 			log.warn(e.getMessage());
 			log.debug("Error serializing grammar fragment.", e);
 			return "(error)";
 		}
 	}
 
-	public static List<AbstractElement> getNestedElementsFromAssignment(
-			Assignment assignment) {
+	public static List<AbstractElement> getNestedElementsFromAssignment(Assignment assignment) {
 		AbstractElement t = assignment.getTerminal();
 		ArrayList<AbstractElement> r = new ArrayList<AbstractElement>();
-		if (t instanceof Keyword || t instanceof RuleCall
-				|| t instanceof CrossReference)
+		if (t instanceof Keyword || t instanceof RuleCall || t instanceof CrossReference)
 			r.add(t);
 		else {
 			r.addAll(GrammarUtil.containedKeywords(t));

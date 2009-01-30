@@ -29,7 +29,6 @@ import org.eclipse.ui.texteditor.SelectMarkerRulerAction;
 import org.eclipse.ui.texteditor.TextOperationAction;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.service.IServiceScope;
-import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.service.ServiceScopeFactory;
 import org.eclipse.xtext.ui.core.XtextUIMessages;
@@ -37,6 +36,8 @@ import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocumentProvider;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.ui.core.internal.Activator;
+
+import com.google.inject.Inject;
 
 /**
  * @author Dennis Huebner - Initial contribution and API
@@ -71,7 +72,7 @@ public class XtextEditor extends TextEditor implements IExecutableExtension {
 		if (scope == null) {
 			throw new IllegalStateException("scope " + data + " has not been registered.");
 		}
-		ServiceRegistry.injectServices(scope, this);
+		ServiceRegistry.getInjector(scope).injectMembers(this);
 	}
 
 	public IServiceScope getScope() {

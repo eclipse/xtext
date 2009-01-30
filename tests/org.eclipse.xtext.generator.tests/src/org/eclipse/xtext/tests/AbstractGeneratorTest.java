@@ -100,35 +100,35 @@ public abstract class AbstractGeneratorTest extends TestCase {
 	}
 
 	protected IParser getParser() {
-		return ServiceRegistry.getService(currentScope, ISwitchingParser.class);
+		return ServiceRegistry.getInjector(currentScope).getInstance(ISwitchingParser.class);
 	}
 
 	protected IAstFactory getASTFactory() {
-		return ServiceRegistry.getService(currentScope, IAstFactory.class);
+		return ServiceRegistry.getInjector(currentScope).getInstance(IAstFactory.class);
 	}
 	
 	protected IGrammarAccess getGrammarAccess() {
-		return ServiceRegistry.getService(currentScope, IGrammarAccess.class);
+		return ServiceRegistry.getInjector(currentScope).getInstance(IGrammarAccess.class);
 	}
 
 	protected IParseTreeConstructor getParseTreeConstructor() {
-		return ServiceRegistry.getService(currentScope, IParseTreeConstructor.class);
+		return ServiceRegistry.getInjector(currentScope).getInstance(IParseTreeConstructor.class);
 	}
 	
 	protected IResourceFactory getResourceFactory()  {
-		return ServiceRegistry.getService(currentScope, IResourceFactory.class);
+		return ServiceRegistry.getInjector(currentScope).getInstance(IResourceFactory.class);
 	}
 	
 	protected IValueConverterService getValueConverterService() {
-		return ServiceRegistry.getService(currentScope, IValueConverterService.class);
+		return ServiceRegistry.getInjector(currentScope).getInstance(IValueConverterService.class);
 	}
 	
 	protected IMetamodelAccess getMetamodelAccess() {
-		return ServiceRegistry.getService(currentScope, IMetamodelAccess.class);
+		return ServiceRegistry.getInjector(currentScope).getInstance(IMetamodelAccess.class);
 	}
 	
 	protected ITokenSerializer getTokenSerializer() {
-		return ServiceRegistry.getService(currentScope, ITokenSerializer.class);
+		return ServiceRegistry.getInjector(currentScope).getInstance(ITokenSerializer.class);
 	}
 
 	// parse methods

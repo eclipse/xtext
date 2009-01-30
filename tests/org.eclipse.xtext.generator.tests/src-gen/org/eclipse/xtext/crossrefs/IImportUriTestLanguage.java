@@ -5,8 +5,9 @@ package org.eclipse.xtext.crossrefs;
 
 import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.ServiceScopeFactory;
+import org.eclipse.xtext.ILanguage;
 
-public interface IImportUriTestLanguage {
+public interface IImportUriTestLanguage extends ILanguage {
 
 	/**
 	 * the unique identifier of this language. 
@@ -18,6 +19,6 @@ public interface IImportUriTestLanguage {
 	public static final String NAME = "ImportUriTestLanguage";
 	public static final String NAMESPACE = "org.eclipse.xtext.crossrefs";
 	public static final String[] FILE_EXTENSIONS = new String[]{"importuritestlanguage"};
-	public static final IServiceScope SCOPE = ServiceScopeFactory.createScope(ID, org.eclipse.xtext.builtin.IXtextBuiltin.SCOPE);
+	public static final IServiceScope SCOPE = ServiceScopeFactory.createScope(ID);
 	
 }

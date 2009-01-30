@@ -5,16 +5,10 @@
  <copyright>
  </copyright>
 
- $Id: plugin.xml,v 1.6 2008/10/30 14:31:25 sefftinge Exp $
+ $Id: plugin.xml,v 1.7 2009/01/30 14:12:47 sefftinge Exp $
 -->
 
 <plugin>
-
- <extension
-       point="org.eclipse.xtext.service.ui.serviceRegistrationFactory">
-    <serviceRegistrationFactory
-          class="org.eclipse.xtext.XtextRuntimeConfig"/>
- </extension>
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 

@@ -43,13 +43,12 @@ import org.eclipse.xtext.parser.packrat.tokens.AbstractParsedToken;
 import org.eclipse.xtext.parser.packrat.tokens.ErrorToken;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedAction;
-import org.eclipse.xtext.service.Inject;
-import org.eclipse.xtext.service.StatefulService;
+
+import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@StatefulService
 public abstract class AbstractPackratParser extends AbstractParser<CharSequence> implements
 	IPackratParser,
 	IMarkerFactory, 

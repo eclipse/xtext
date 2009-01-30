@@ -7,9 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser;
 
+import org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter;
+
+import com.google.inject.ImplementedBy;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@ImplementedBy(AntlrTokenToStringConverter.class)
 public interface ITokenToStringConverter {
 
 	Object getTokenAsStringIfPossible(Object tokenOrValue);

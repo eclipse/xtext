@@ -5,7 +5,7 @@
 	<extension
          point="org.eclipse.ui.editors">
       <editor
-            class="org.eclipse.xtext.ui.core.editor.XtextEditor"
+            class="org.eclipse.xtext.example.ui.editor.FowlerDslEditor"
             contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
             default="true"
             extensions="fowlerdsl"
@@ -14,14 +14,9 @@
       </editor>
    </extension>
  <extension
-       point="org.eclipse.xtext.service.ui.serviceRegistrationFactory">
-    <serviceRegistrationFactory
-          class="org.eclipse.xtext.example.FowlerDslUiConfig"/>
- </extension>
- <extension
          point="org.eclipse.ui.preferencePages">
 		<page
-			class="org.eclipse.xtext.service.ui.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage/org.eclipse.xtext.example.FowlerDsl"
+			class="org.eclipse.xtext.ui.core.util.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage/org.eclipse.xtext.example.FowlerDsl"
 			id="org.eclipse.xtext.example.FowlerDsl"
 			name="FowlerDsl">
 			<keywordReference
@@ -30,7 +25,7 @@
 		</page>
 		<page
 		    category="org.eclipse.xtext.example.FowlerDsl"
-		    class="org.eclipse.xtext.service.ui.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.EditorPreferencePage/org.eclipse.xtext.example.FowlerDsl"
+		    class="org.eclipse.xtext.ui.core.util.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.EditorPreferencePage/org.eclipse.xtext.example.FowlerDsl"
 		    id="org.eclipse.xtext.example.FowlerDsl.editor"
 		    name="Editor">
 		    	<keywordReference 

@@ -20,7 +20,8 @@
    <requires>
       <import feature="org.eclipse.xtext.runtime"/>
    </requires>
- <plugin
+
+   <plugin
          id="org.eclipse.xtext.reference"
          download-size="0"
          install-size="0"
@@ -33,6 +34,7 @@
          install-size="0"
          version="0.0.0"
          unpack="false"/>
+
    <plugin
          id="org.eclipse.xtext.example.fowlerdsl"
          download-size="0"
@@ -42,6 +44,20 @@
 
    <plugin
          id="org.eclipse.xtext.example.fowlerdsl.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xtext.example.domainmodel"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xtext.example.domainmodel.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"

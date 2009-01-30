@@ -64,7 +64,7 @@ public class ContentAssistProcessorTestBuilder {
 		this.contentAssistProcessor = contentAssistProcessor;
 		this.serviceScope = serviceScope;
 		this.textViewerMock = EasyMock.createMock(ITextViewer.class);
-		ServiceRegistry.injectServices(serviceScope, this.contentAssistProcessor);
+		ServiceRegistry.getInjector(serviceScope).injectMembers(this.contentAssistProcessor);
 	}
 	
 	public ContentAssistProcessorTestBuilder reset() {
@@ -225,7 +225,7 @@ public class ContentAssistProcessorTestBuilder {
 	}
 	
 	private IResourceFactory getResourceFactory() {
-		return ServiceRegistry.getService(this.serviceScope, IResourceFactory.class);
+		return ServiceRegistry.getInjector(serviceScope).getInstance(IResourceFactory.class);
 	}
 	
 	private ITextViewer resetTextViewerMock(final String currentModelToParse, final IXtextDocument xtextDocument) {

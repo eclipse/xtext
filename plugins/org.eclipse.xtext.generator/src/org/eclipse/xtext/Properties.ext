@@ -30,7 +30,7 @@ grammar() :
 	genModel().grammar;
 	
 objectURI(emf::EObject object) :
-	object.grammar().grammarResourceURI()+'#'+getFragment(object);
+	object.containingGrammar().grammarResourceURI()+'#'+getFragment(object);
 
 grammarResourceURI(Grammar this) :
 	'classpath:/'+getClasspathRelativePathToXmi(this);
@@ -67,16 +67,28 @@ toSimpleName(String fqName) :
 	
 standaloneSetupClass(Grammar this) :
 	getId() + "StandaloneSetup";
-
-runtimeConfigClass(Grammar this) :
-	getId() + "RuntimeConfig";
-
-uiConfigClass() :
-	grammar().getId() + "UiConfig";
-
-generatedUiConfigClass() :
-	grammar().getNamespace()+".Gen"+grammar().getName() + "UiConfig";
 	
+uiSetupClass(Grammar this) :
+	getId() + "UiSetup";
+
+// module classes start
+runtimeModuleClass() :
+	grammar().getId() + "RuntimeModule";
+
+generatedRuntimeModuleClass() :
+	grammar().getNamespace()+".Abstract"+grammar().getName() + "RuntimeModule";	
+	
+uiModuleClass() :
+	grammar().getId() + "UIModule";
+	
+generatedUiModuleClass() :
+	grammar().getNamespace()+".Abstract"+grammar().getName() + "UiModule";	
+
+// module classes end
+
+uiGenProposalProviderClass() :
+	grammar().getId() + "GenProposalProvider";
+
 tokenScannerClass() :
 	grammar().getId() + "TokenScanner";
 	

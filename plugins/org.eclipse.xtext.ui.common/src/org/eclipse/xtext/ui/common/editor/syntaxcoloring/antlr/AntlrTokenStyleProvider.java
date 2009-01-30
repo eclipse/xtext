@@ -11,9 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
-import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.ui.common.editor.syntaxcoloring.ITokenStyle;
 import org.eclipse.xtext.ui.common.editor.syntaxcoloring.ITokenStyleProvider;
+
+import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

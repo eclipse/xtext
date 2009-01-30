@@ -8,7 +8,6 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
-import org.eclipse.xtext.util.EmfFormater;
 import org.eclipse.xtext.util.StringInputStream;
 
 public class XtextGrammarReconcilationTest extends AbstractGeneratorTest {
@@ -31,8 +30,6 @@ public class XtextGrammarReconcilationTest extends AbstractGeneratorTest {
 
 		// modify first rule
 		object.getRules().get(0).setName("HONOLULU");
-
-		System.out.println(EmfFormater.objToStr(object));
 
 		// save
 		ByteArrayOutputStream out = new ByteArrayOutputStream();

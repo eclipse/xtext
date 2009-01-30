@@ -24,8 +24,9 @@ import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.util.Strings;
+
+import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API

@@ -38,20 +38,17 @@ import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeAdapterFactory;
 import org.eclipse.xtext.parsetree.ParsetreeFactory;
 import org.eclipse.xtext.parsetree.SyntaxError;
-import org.eclipse.xtext.service.Inject;
-import org.eclipse.xtext.service.StatefulService;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@StatefulService
 public class ParseResultFactory extends AbstractParsedTokenVisitor implements IParseResultFactory {
 
 	private CompositeNode currentNode;
 	
 	private final LinkedList<EObject> currentStack;
 	
-	@Inject
+	@com.google.inject.Inject
 	private IAstFactory factory;
 	
 	private final LinkedList<ParsedNonTerminal> nonterminalStack;

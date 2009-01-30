@@ -5,8 +5,9 @@ package org.eclipse.xtext.ui.integration;
 
 import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.ServiceScopeFactory;
+import org.eclipse.xtext.ILanguage;
 
-public interface ITestLanguage {
+public interface ITestLanguage extends ILanguage {
 
 	/**
 	 * the unique identifier of this language. 
@@ -18,6 +19,6 @@ public interface ITestLanguage {
 	public static final String NAME = "TestLanguage";
 	public static final String NAMESPACE = "org.eclipse.xtext.ui.integration";
 	public static final String[] FILE_EXTENSIONS = new String[]{"xtext_integration"};
-	public static final IServiceScope SCOPE = ServiceScopeFactory.createScope(ID, org.eclipse.xtext.builtin.IXtextBuiltin.SCOPE);
+	public static final IServiceScope SCOPE = ServiceScopeFactory.createScope(ID);
 	
 }

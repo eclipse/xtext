@@ -13,11 +13,6 @@
       </metaModel>
       
    </extension>
-    <extension
-       point="org.eclipse.xtext.service.ui.serviceRegistrationFactory">
-	    <serviceRegistrationFactory
-	          class="org.eclipse.xtext.ui.integration.TestLanguageRuntimeConfig"/>
-   </extension>
    <extension
          point="org.eclipse.emf.ecore.extension_parser">
       <parser
@@ -30,7 +25,7 @@
 <extension
          point="org.eclipse.ui.editors">
       <editor
-            class="org.eclipse.xtext.ui.core.editor.XtextEditor"
+            class="org.eclipse.xtext.ui.integration.ui.editor.TestLanguageEditor"
             contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
             default="true"
             extensions="xtext_integration"
@@ -39,14 +34,9 @@
       </editor>
    </extension>
  <extension
-       point="org.eclipse.xtext.service.ui.serviceRegistrationFactory">
-    <serviceRegistrationFactory
-          class="org.eclipse.xtext.ui.integration.TestLanguageUiConfig"/>
- </extension>
- <extension
          point="org.eclipse.ui.preferencePages">
 		<page
-			class="org.eclipse.xtext.service.ui.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage/org.eclipse.xtext.ui.integration.TestLanguage"
+			class="org.eclipse.xtext.ui.core.util.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage/org.eclipse.xtext.ui.integration.TestLanguage"
 			id="org.eclipse.xtext.ui.integration.TestLanguage"
 			name="TestLanguage">
 			<keywordReference
@@ -55,7 +45,7 @@
 		</page>
 		<page
 		    category="org.eclipse.xtext.ui.integration.TestLanguage"
-		    class="org.eclipse.xtext.service.ui.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.EditorPreferencePage/org.eclipse.xtext.ui.integration.TestLanguage"
+		    class="org.eclipse.xtext.ui.core.util.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.EditorPreferencePage/org.eclipse.xtext.ui.integration.TestLanguage"
 		    id="org.eclipse.xtext.ui.integration.TestLanguage.editor"
 		    name="Editor">
 		    	<keywordReference 

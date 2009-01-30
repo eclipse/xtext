@@ -5,8 +5,9 @@ package org.eclipse.xtext.parser.epatch;
 
 import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.ServiceScopeFactory;
+import org.eclipse.xtext.ILanguage;
 
-public interface IEpatchTestLanguage {
+public interface IEpatchTestLanguage extends ILanguage {
 
 	/**
 	 * the unique identifier of this language. 
@@ -18,6 +19,6 @@ public interface IEpatchTestLanguage {
 	public static final String NAME = "EpatchTestLanguage";
 	public static final String NAMESPACE = "org.eclipse.xtext.parser.epatch";
 	public static final String[] FILE_EXTENSIONS = new String[]{"epatchtestlanguage"};
-	public static final IServiceScope SCOPE = ServiceScopeFactory.createScope(ID, org.eclipse.xtext.builtin.IXtextBuiltin.SCOPE);
+	public static final IServiceScope SCOPE = ServiceScopeFactory.createScope(ID);
 	
 }

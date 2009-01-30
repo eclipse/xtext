@@ -10,7 +10,6 @@ package org.eclipse.xtext.ui.common.editor.outline;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Assert;
-import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.text.IDocument;
@@ -28,8 +27,6 @@ import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.ParseTreeUtil;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.service.Inject;
-import org.eclipse.xtext.service.StatefulService;
 import org.eclipse.xtext.ui.common.editor.outline.impl.ContentOutlineNodeAdapter;
 import org.eclipse.xtext.ui.common.editor.outline.impl.ContentOutlineNodeAdapterFactory;
 import org.eclipse.xtext.ui.common.editor.outline.impl.EditorSelectionChangedListener;
@@ -43,10 +40,11 @@ import org.eclipse.xtext.ui.core.editor.model.IXtextModelListener;
 import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocumentUtil;
 
+import com.google.inject.Inject;
+
 /**
  * @author Peter Friese - Initial contribution and API
  */
-@StatefulService
 public class XtextContentOutlinePage extends LazyVirtualContentOutlinePage implements ISourceViewerAware {
 
 	static final Logger logger = Logger.getLogger(XtextContentOutlinePage.class);

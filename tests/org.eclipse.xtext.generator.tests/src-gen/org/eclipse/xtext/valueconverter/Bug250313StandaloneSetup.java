@@ -9,7 +9,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.ServiceRegistry;
-import org.eclipse.xtext.service.IServiceRegistrationFactory.IServiceRegistration;
+
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 
 import org.eclipse.xtext.valueconverter.IBug250313;
 
@@ -19,12 +21,14 @@ public abstract class Bug250313StandaloneSetup {
 
 	public synchronized static void doSetup() {
 		if(!isInitialized) {
-			// setup super language first
+		    
+		    Injector injector = Guice.createInjector(new org.eclipse.xtext.valueconverter.Bug250313RuntimeModule());
+			ServiceRegistry.registerInjector(org.eclipse.xtext.valueconverter.IBug250313.SCOPE, injector);
+			
+			
+			
 			org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
 			
-			for (IServiceRegistration reg :  new org.eclipse.xtext.valueconverter.Bug250313RuntimeConfig().registrations()) {
-				ServiceRegistry.registerFactory(reg.scope(), reg.serviceFactory(), reg.priority());
-			}
 			
 			// register resource factory to EMF
 			IResourceFactory resourceFactory = new org.eclipse.xtext.valueconverter.services.Bug250313ResourceFactory();
@@ -48,6 +52,8 @@ public abstract class Bug250313StandaloneSetup {
 	}
 	
 	public static IServiceScope getServiceScope() {
-		return org.eclipse.xtext.valueconverter.IBug250313.SCOPE;
+	   doSetup();
+	   return org.eclipse.xtext.valueconverter.IBug250313.SCOPE;
 	}
+	
 }

@@ -24,7 +24,10 @@ import org.eclipse.xtext.ui.integration.workbench.AbstractWorkbenchTest;
 public abstract class AbstractEditorTest extends AbstractWorkbenchTest {
 
 	static final long STEP_DELAY = 0;
-	static final String EDITOR_ID = ITestLanguage.ID;
+	
+	protected String getEditorId() {
+		return ITestLanguage.ID;
+	}
 
 	public AbstractEditorTest() {
 		super();
@@ -36,7 +39,7 @@ public abstract class AbstractEditorTest extends AbstractWorkbenchTest {
 
 	@SuppressWarnings("restriction")
 	protected XtextEditor openEditor(IFile file) throws Exception {
-		IEditorPart openEditor = openEditor(file, EDITOR_ID);
+		IEditorPart openEditor = openEditor(file, getEditorId());
 		if (openEditor instanceof XtextEditor) {
 			waitForJobCompletion();
 			sleep(STEP_DELAY);
@@ -47,7 +50,7 @@ public abstract class AbstractEditorTest extends AbstractWorkbenchTest {
 			fail("Could not open XtextEditor. Editor produced errors during initialization.");
 		}
 		else {
-			fail("Opened Editor with id:" + EDITOR_ID + ", is not a BaseXtextEditor");
+			fail("Opened Editor with id:" + getEditorId() + ", is not a BaseXtextEditor");
 		}
 		return null;
 	}

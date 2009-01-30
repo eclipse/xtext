@@ -7,9 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser;
 
+import com.google.inject.ImplementedBy;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@ImplementedBy(SwitchingParser.class)
 public interface ISwitchingParser extends IParser {
 
 }

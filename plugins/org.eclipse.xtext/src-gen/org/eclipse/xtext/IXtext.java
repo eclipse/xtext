@@ -5,8 +5,9 @@ package org.eclipse.xtext;
 
 import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.ServiceScopeFactory;
+import org.eclipse.xtext.ILanguage;
 
-public interface IXtext {
+public interface IXtext extends ILanguage {
 
 	/**
 	 * the unique identifier of this language. 
@@ -18,6 +19,6 @@ public interface IXtext {
 	public static final String NAME = "Xtext";
 	public static final String NAMESPACE = "org.eclipse.xtext";
 	public static final String[] FILE_EXTENSIONS = new String[]{"xtext","xtext2"};
-	public static final IServiceScope SCOPE = ServiceScopeFactory.createScope(ID, org.eclipse.xtext.builtin.IXtextBuiltin.SCOPE);
+	public static final IServiceScope SCOPE = ServiceScopeFactory.createScope(ID);
 	
 }

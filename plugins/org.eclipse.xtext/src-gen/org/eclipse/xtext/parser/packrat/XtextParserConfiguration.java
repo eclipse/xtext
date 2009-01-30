@@ -4,14 +4,7 @@ Generated with Xtext
 package org.eclipse.xtext.parser.packrat;
 
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
-import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
-import org.eclipse.xtext.parser.packrat.IHiddenTokenHandler;
-import org.eclipse.xtext.parser.packrat.IMarkerFactory;
-import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration.IInternalParserConfiguration;
-import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.RecoveryStateHolder;
-import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 

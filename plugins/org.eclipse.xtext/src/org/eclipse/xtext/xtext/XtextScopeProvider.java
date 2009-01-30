@@ -31,9 +31,10 @@ import org.eclipse.xtext.crossref.impl.DefaultScopeProvider;
 import org.eclipse.xtext.crossref.impl.ScopedElement;
 import org.eclipse.xtext.crossref.impl.SimpleCachingScope;
 import org.eclipse.xtext.crossref.impl.SimpleScope;
-import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.util.CollectionUtils;
 import org.eclipse.xtext.util.Function;
+
+import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

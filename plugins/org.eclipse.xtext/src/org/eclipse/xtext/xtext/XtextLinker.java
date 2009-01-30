@@ -31,7 +31,8 @@ import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.resource.metamodel.TransformationDiagnosticsProducer;
 import org.eclipse.xtext.resource.metamodel.Xtext2EcoreTransformer;
-import org.eclipse.xtext.service.Inject;
+
+import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

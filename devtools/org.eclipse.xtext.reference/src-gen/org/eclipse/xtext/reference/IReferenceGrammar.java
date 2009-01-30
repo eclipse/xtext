@@ -5,8 +5,9 @@ package org.eclipse.xtext.reference;
 
 import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.ServiceScopeFactory;
+import org.eclipse.xtext.ILanguage;
 
-public interface IReferenceGrammar {
+public interface IReferenceGrammar extends ILanguage {
 
 	/**
 	 * the unique identifier of this language. 
@@ -18,6 +19,6 @@ public interface IReferenceGrammar {
 	public static final String NAME = "ReferenceGrammar";
 	public static final String NAMESPACE = "org.eclipse.xtext.reference";
 	public static final String[] FILE_EXTENSIONS = new String[]{"xtest","tst"};
-	public static final IServiceScope SCOPE = ServiceScopeFactory.createScope(ID, org.eclipse.xtext.builtin.IXtextBuiltin.SCOPE);
+	public static final IServiceScope SCOPE = ServiceScopeFactory.createScope(ID);
 	
 }

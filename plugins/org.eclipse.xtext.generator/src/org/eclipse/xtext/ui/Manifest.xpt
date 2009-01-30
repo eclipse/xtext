@@ -21,16 +21,16 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: «languageName()» UI Plug-in
 Bundle-SymbolicName: «uiPluginBundleID»;singleton:=true
-Bundle-Version: 0.7.0.qualifier
+Bundle-Version: 0.0.1
 Require-Bundle: «nonUIPluginBundleID»,
  org.eclipse.xtext.ui.core,
  org.eclipse.xtext.ui.common,
- org.eclipse.xtext.ui.builtin,
  org.eclipse.ui.editors;bundle-version="3.4.0",
  org.eclipse.ui«EXPAND dependencies»
-Bundle-Vendor: eclipse.org
+Bundle-Vendor: mycompany.com
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
+Bundle-Activator: «activatorClassFQN()»
 «ENDFILE-»
 «ENDDEFINE»
 

@@ -14,14 +14,9 @@
       </editor>
    </extension>
  <extension
-       point="org.eclipse.xtext.service.ui.serviceRegistrationFactory">
-    <serviceRegistrationFactory
-          class="org.eclipse.xtext.testlanguages.TreeTestLanguageUiConfig"/>
- </extension>
- <extension
          point="org.eclipse.ui.preferencePages">
 		<page
-			class="org.eclipse.xtext.service.ui.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage/org.eclipse.xtext.testlanguages.TreeTestLanguage"
+			class="org.eclipse.xtext.ui.core.util.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage/org.eclipse.xtext.testlanguages.TreeTestLanguage"
 			id="org.eclipse.xtext.testlanguages.TreeTestLanguage"
 			name="TreeTestLanguage">
 			<keywordReference
@@ -30,7 +25,7 @@
 		</page>
 		<page
 		    category="org.eclipse.xtext.testlanguages.TreeTestLanguage"
-		    class="org.eclipse.xtext.service.ui.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.EditorPreferencePage/org.eclipse.xtext.testlanguages.TreeTestLanguage"
+		    class="org.eclipse.xtext.ui.core.util.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.EditorPreferencePage/org.eclipse.xtext.testlanguages.TreeTestLanguage"
 		    id="org.eclipse.xtext.testlanguages.TreeTestLanguage.editor"
 		    name="Editor">
 		    	<keywordReference 

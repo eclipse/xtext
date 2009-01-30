@@ -13,7 +13,8 @@ import org.apache.log4j.Logger;
 import org.eclipse.xtext.parser.antlr.IAntlrParser;
 import org.eclipse.xtext.parser.packrat.IPackratParser;
 import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.service.Inject;
+
+import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

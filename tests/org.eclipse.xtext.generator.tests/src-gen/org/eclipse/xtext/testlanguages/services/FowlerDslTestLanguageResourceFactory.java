@@ -8,7 +8,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.service.ServiceRegistry;
-import org.eclipse.xtext.service.ServiceScopeFactory;
 
 public class FowlerDslTestLanguageResourceFactory implements IResourceFactory {
 
@@ -21,7 +20,7 @@ public class FowlerDslTestLanguageResourceFactory implements IResourceFactory {
      */
     public Resource createResource(URI uri) {
         XtextResource resource = new XtextResource(uri);
-        ServiceRegistry.injectServices(ServiceScopeFactory.get("org.eclipse.xtext.testlanguages.FowlerDslTestLanguage"), resource);
+        ServiceRegistry.getInjector(org.eclipse.xtext.testlanguages.IFowlerDslTestLanguage.SCOPE).injectMembers(resource);
         return resource;
     }
     

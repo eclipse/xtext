@@ -1,9 +1,9 @@
 package org.eclipse.xtext.ui.integration;
 
-import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.ui.integration.ui.internal.TestLanguageActivator;
 import org.osgi.framework.BundleContext;
 
-public class XtextUIIntegrationTestsPlugin extends AbstractUIPlugin {
+public class XtextUIIntegrationTestsPlugin extends TestLanguageActivator {
 
 	// The plug-in ID
 	public static final String PLUGIN_ID = "org.eclipse.xtext.ui.integration.tests";
