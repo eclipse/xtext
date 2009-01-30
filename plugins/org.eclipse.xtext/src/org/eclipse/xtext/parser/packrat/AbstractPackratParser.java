@@ -25,9 +25,11 @@ import org.eclipse.xtext.parser.packrat.Marker.IMarkerClient;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.IRootConsumerListener;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.KeywordConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.RecoveryStateHolder;
 import org.eclipse.xtext.parser.packrat.debug.DebugCharSequenceWithOffset;
 import org.eclipse.xtext.parser.packrat.debug.DebugConsumerUtility;
@@ -38,6 +40,7 @@ import org.eclipse.xtext.parser.packrat.debug.DebugUtil;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.AbstractParsedToken;
+import org.eclipse.xtext.parser.packrat.tokens.ErrorToken;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedAction;
 import org.eclipse.xtext.service.Inject;
@@ -175,9 +178,22 @@ public abstract class AbstractPackratParser extends AbstractParser<CharSequence>
 	}
 
 	private class RootConsumerListener implements IRootConsumerListener {
-		public int beforeNonTerminalEnd(INonTerminalConsumer nonTerminalConsumer) {
+		public void beforeNonTerminalEnd(INonTerminalConsumer nonTerminalConsumer, int result, INonTerminalConsumerConfiguration configuration) {
+			if (result == ConsumeResult.SUCCESS && offset != length())
+				consumeHiddens();
+			if (offset != length()) {
+				configuration.getTokenAcceptor().accept(new ErrorToken(offset, length() - offset, null, "<EOF> expected."));
+				offset = length();
+			}
+		}
+
+		public void afterNonTerminalBegin(INonTerminalConsumer nonTerminalConsumer, INonTerminalConsumerConfiguration configuration) {
 			consumeHiddens();
-			return offset == input.length() ? ConsumeResult.SUCCESS : getOffset();
+		}
+
+		public void handleException(NonTerminalConsumer nonTerminalConsumer, Exception e, INonTerminalConsumerConfiguration configuration) {
+			configuration.getTokenAcceptor().accept(new ErrorToken(offset, length() - offset, null, e.getMessage()));
+			offset = length();
 		}
 	}
 	

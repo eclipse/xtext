@@ -36,10 +36,8 @@ public class SwitchingParser implements ISwitchingParser {
 	
 	private boolean displayed = false;
 	
-	private static boolean usePackratSet = false;
-	
 	private void displayPackratInfo() {
-		if (!displayed && !usePackratSet)
+		if (!displayed && !usePackrat)
 			log.info("Using packrat parser.\n" +
 				"If this is not desired, regenerate your language and ensure project 'de.itemis.xtext.antlr' is on your classpath.");
 		displayed = true;
@@ -67,7 +65,6 @@ public class SwitchingParser implements ISwitchingParser {
 
 	public static void setUsePackrat(boolean usePackrat) {
 		SwitchingParser.usePackrat = usePackrat;
-		SwitchingParser.usePackratSet = usePackrat;
 	}
 
 	public IAntlrParser getAntlrParser() {

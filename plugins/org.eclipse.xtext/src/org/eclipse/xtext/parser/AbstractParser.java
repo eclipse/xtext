@@ -33,14 +33,19 @@ public abstract class AbstractParser<Parseable> implements IParser {
 		if (!isReparseSupported()) {
 			final List<LeafNode> leafNodes = originalRootNode.getLeafNodes();
 			final StringBuilder builder = new StringBuilder(originalRootNode.getTotalLength());
+			boolean changeAppended = false;
 			for (LeafNode leaf: leafNodes) {
 				if ((leaf.getTotalOffset() + leaf.getTotalLength() <= offset) || (leaf.getTotalOffset() > offset + length))
 					builder.append(leaf.getText());
 				else {
 					if (leaf.getTotalOffset() < offset) {
 						builder.append(leaf.getText().subSequence(0, offset - leaf.getTotalOffset()));
+					}
+					if (!changeAppended) {
 						builder.append(change);
-					} else if (leaf.getTotalOffset() + leaf.getTotalLength() > offset + length) {
+						changeAppended = true;
+					}
+					if (leaf.getTotalOffset() + leaf.getTotalLength() > offset + length) {
 						builder.append(leaf.getText().substring(offset + length - leaf.getTotalOffset()));
 					}
 				}

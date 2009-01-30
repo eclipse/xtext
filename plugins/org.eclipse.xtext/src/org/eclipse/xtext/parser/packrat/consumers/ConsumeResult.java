@@ -12,6 +12,7 @@ package org.eclipse.xtext.parser.packrat.consumers;
  */
 public abstract class ConsumeResult {
 
+	public static final int EXCEPTION = Integer.MIN_VALUE;
 	public static final int SUCCESS = -2;
 	public static final int EMPTY_MATCH = -1;
 	
