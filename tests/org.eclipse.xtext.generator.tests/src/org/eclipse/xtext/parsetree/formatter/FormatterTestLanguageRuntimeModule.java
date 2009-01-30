@@ -13,15 +13,7 @@ import com.google.inject.Binder;
 public class FormatterTestLanguageRuntimeModule extends AbstractFormatterTestLanguageRuntimeModule {
 
 	@Override
-	public void configure(Binder binder) {
-		super.configure(binder);
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.eclipse.xtext.parsetree.formatter.AbstractFormatterTestLanguageRuntimeModule#getITokenSerializer()
-	 */
-	@Override
-	protected Class<? extends ITokenSerializer> getITokenSerializer() {
+	public Class<? extends ITokenSerializer> bindITokenSerializer() {
 		return FormattingTokenSerializerTestImpl.class;
 	}
 	
