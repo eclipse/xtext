@@ -29,17 +29,21 @@ public final class XtextGrammarTestLanguageRuleCallConsumer extends NonTerminalC
 		crossReference$2$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
-	protected int doConsume() throws Exception {
-		return consumeAssignment$1();
+	protected int doConsume(int entryPoint) throws Exception {
+		return consumeAssignment$1(entryPoint);
 	}
 
-	protected int consumeAssignment$1() throws Exception {
-		int result = Integer.MIN_VALUE;
+	protected int consumeAssignment$1(int entryPoint) throws Exception {
+		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
+		announceNextLevel();
 		tempResult = consumeTerminal(idConsumer, "rule", false, false, getRule().ele0CrossReferenceEStringAbstractRule(), getCrossReference$2$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS)
+		if (tempResult == ConsumeResult.SUCCESS) {
+			announceLevelFinished();
 			return tempResult;
+		}
 		result = tempResult >= result ? tempResult : result; 
+		announceLevelFinished();
 		return result;
 	}
 

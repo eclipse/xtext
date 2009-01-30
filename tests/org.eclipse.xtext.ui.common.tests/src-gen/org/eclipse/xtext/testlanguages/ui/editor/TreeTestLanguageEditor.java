@@ -1,8 +1,6 @@
 package org.eclipse.xtext.testlanguages.ui.editor;
 
-import org.eclipse.xtext.ui.core.editor.XtextEditor;
-
-public class TreeTestLanguageEditor extends XtextEditor {
+public class TreeTestLanguageEditor extends org.eclipse.xtext.ui.core.editor.XtextEditor {
 
 }
  

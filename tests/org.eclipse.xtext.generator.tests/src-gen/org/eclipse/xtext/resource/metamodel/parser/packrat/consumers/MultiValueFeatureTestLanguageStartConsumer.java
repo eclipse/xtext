@@ -29,34 +29,50 @@ public final class MultiValueFeatureTestLanguageStartConsumer extends NonTermina
 		ruleCall$2$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
-	protected int doConsume() throws Exception {
-		return consumeAssignment$1();
+	protected int doConsume(int entryPoint) throws Exception {
+		return consumeAssignment$1(entryPoint);
 	}
 
-	protected int consumeAssignment$1() throws Exception {
+	protected int consumeAssignment$1(int entryPoint) throws Exception {
 		IMarker marker = mark();
-		int result = doConsumeAssignment$1();
-		if (result == ConsumeResult.SUCCESS) {
-			marker.flush();
-			while(doConsumeAssignment$1()==ConsumeResult.SUCCESS) {
-				marker.flush();
-			}
-			marker.rollback();
-			return ConsumeResult.SUCCESS;
-		} else {
-			error("Could not find token.", getRule().eleAssignmentFeatureA());
+		int result = ConsumeResult.SUCCESS;
+		announceNextLevel();
+		switch(entryPoint) {
+			case -1:
+				result = ConsumeResult.EMPTY_MATCH;
+			case 0:
+				announceNextStep();
+				result = doConsumeAssignment$1(nextEntryPoint());
+			case 1:
+				announceNextStep();
+				if (result == ConsumeResult.SUCCESS) {
+					marker.flush();
+					while(doConsumeAssignment$1(nextEntryPoint())==ConsumeResult.SUCCESS) {
+						marker.flush();
+					}
+					marker.rollback();
+					announceLevelFinished();
+					return ConsumeResult.SUCCESS;
+				} else {
+					error("Could not find token.", getRule().eleAssignmentFeatureA());
+				}
 		}
+		announceLevelFinished();
 		marker.commit();
 		return result;
 	}
 
-	protected int doConsumeAssignment$1() throws Exception {
-		int result = Integer.MIN_VALUE;
+	protected int doConsumeAssignment$1(int entryPoint) throws Exception {
+		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
+		announceNextLevel();
 		tempResult = consumeTerminal(idConsumer, "featureA", true, false, getRule().ele0LexerRuleCallID(), getRuleCall$2$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS)
+		if (tempResult == ConsumeResult.SUCCESS) {
+			announceLevelFinished();
 			return tempResult;
+		}
 		result = tempResult >= result ? tempResult : result; 
+		announceLevelFinished();
 		return result;
 	}
 

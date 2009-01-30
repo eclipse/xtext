@@ -36,29 +36,54 @@ public final class ReferenceGrammarFarbeConsumer extends NonTerminalConsumer {
 		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
-	protected int doConsume() throws Exception {
-		return consumeAssignment$1();
+	protected int doConsume(int entryPoint) throws Exception {
+		return consumeAssignment$1(entryPoint);
 	}
 
-	protected int consumeAssignment$1() throws Exception {
-		int result = Integer.MIN_VALUE;
+	protected int consumeAssignment$1(int entryPoint) throws Exception {
+		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
+		announceNextLevel();
+		// TODO use markers in assignments of alternatives to recover
+		announceNextPath();
+		// TODO use markers in assignments of alternatives to recover
+		announceNextPath();
+		// TODO use markers in assignments of alternatives to recover
+		announceNextPath();
 		tempResult = consumeKeyword(getRule().ele0000KeywordROT(), "wert", false, false, getKeyword$5$Delimiter()); 
-		if (tempResult == ConsumeResult.SUCCESS)
+		if (tempResult == ConsumeResult.SUCCESS) {
+			announceLevelFinished();
 			return tempResult;
+		}
 		result = tempResult >= result ? tempResult : result; 
+
+		announceNextPath();
 		tempResult = consumeKeyword(getRule().ele0001KeywordBLAU(), "wert", false, false, getKeyword$6$Delimiter()); 
-		if (tempResult == ConsumeResult.SUCCESS)
+		if (tempResult == ConsumeResult.SUCCESS) {
+			announceLevelFinished();
 			return tempResult;
+		}
 		result = tempResult >= result ? tempResult : result; 
+
+
+		announceNextPath();
 		tempResult = consumeKeyword(getRule().ele001KeywordGELB(), "wert", false, false, getKeyword$7$Delimiter()); 
-		if (tempResult == ConsumeResult.SUCCESS)
+		if (tempResult == ConsumeResult.SUCCESS) {
+			announceLevelFinished();
 			return tempResult;
+		}
 		result = tempResult >= result ? tempResult : result; 
+
+
+		announceNextPath();
 		tempResult = consumeKeyword(getRule().ele01KeywordGRÜN(), "wert", false, false, getKeyword$8$Delimiter()); 
-		if (tempResult == ConsumeResult.SUCCESS)
+		if (tempResult == ConsumeResult.SUCCESS) {
+			announceLevelFinished();
 			return tempResult;
+		}
 		result = tempResult >= result ? tempResult : result; 
+
+		announceLevelFinished();
 		return result;
 	}
 

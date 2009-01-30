@@ -26,13 +26,13 @@ public final class OptionalEmptyTestLanguageModelConsumer extends NonTerminalCon
 		super(configuration, hiddenTokens);
 	}
 	
-	protected int doConsume() throws Exception {
-		return consumeAssignment$1();
+	protected int doConsume(int entryPoint) throws Exception {
+		return consumeAssignment$1(entryPoint);
 	}
 
-	protected int consumeAssignment$1() throws Exception {
+	protected int consumeAssignment$1(int entryPoint) throws Exception {
 		IMarker marker = mark();
-		int result = doConsumeAssignment$1();
+		int result = doConsumeAssignment$1(entryPoint);
 		if (result != ConsumeResult.SUCCESS)
 			marker.rollback();
 		else
@@ -40,13 +40,17 @@ public final class OptionalEmptyTestLanguageModelConsumer extends NonTerminalCon
 		return ConsumeResult.SUCCESS;
 	}
 
-	protected int doConsumeAssignment$1() throws Exception {
-		int result = Integer.MIN_VALUE;
+	protected int doConsumeAssignment$1(int entryPoint) throws Exception {
+		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
+		announceNextLevel();
 		tempResult = consumeNonTerminal(greetingConsumer, "child", false, false, getRule().ele0ParserRuleCallGreeting());
-		if (tempResult == ConsumeResult.SUCCESS)
+		if (tempResult == ConsumeResult.SUCCESS) {
+			announceLevelFinished();
 			return tempResult;
+		}
 		result = tempResult >= result ? tempResult : result; 
+		announceLevelFinished();
 		return result;
 	}
 
