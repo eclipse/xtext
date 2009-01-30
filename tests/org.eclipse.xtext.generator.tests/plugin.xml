@@ -11,11 +11,6 @@
       
    </extension>
    <extension
-       point="org.eclipse.xtext.service.ui.serviceRegistrationFactory">
-	    <serviceRegistrationFactory
-	          class="org.eclipse.xtext.testlanguages.TreeTestLanguageRuntimeConfig"/>
-   </extension>
-   <extension
          point="org.eclipse.emf.ecore.extension_parser">
       <parser
             class="org.eclipse.xtext.testlanguages.services.TreeTestLanguageResourceFactory"
