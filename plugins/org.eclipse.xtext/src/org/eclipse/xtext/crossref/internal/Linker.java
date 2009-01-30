@@ -37,6 +37,7 @@ import org.eclipse.xtext.service.Inject;
  */
 public class Linker implements ILinker {
 
+	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(Linker.class);
 	
 	@Inject
@@ -104,21 +105,21 @@ public class Linker implements ILinker {
 		beforeEnsureIsLinked(obj, eRef, producer);
 		producer.setTarget(obj, eRef);
 		final List<EObject> links = linkingService.getLinkedObjects(obj, eRef, (LeafNode) node);
-
 		if (links == null || links.isEmpty()) {
-			producer.addDiagnostic("Cannot resolve reference " + node.getText());
+			producer.addDiagnostic("Cannot resolve reference to '" + node.getText() + "'");
 			return;
 		}
-		
+		// SZ: can this actually happen - I thing the linking service will fail, if no eRef was found?
 		if (eRef == null) {
 			producer.addDiagnostic("Cannot find reference " + ref);
 			return;
 		}
 
 		if (eRef.getUpperBound() >= 0 && links.size() > eRef.getUpperBound()) {
-			producer.addDiagnostic("Too many matches (" + links.size() + ") for "
-					+ node.getText() + ". Feature " + eRef.getName() + " can only hold " + eRef.getUpperBound()
-					+ " reference(s).");
+			producer.addDiagnostic("Too many matches for reference to '"
+					+ node.getText() + "'. Feature " + eRef.getName() + " can only hold " + eRef.getUpperBound()
+					+ " reference" + (eRef.getUpperBound() != 1 ? "s" : "") + " but found " + links.size() + " candidates" + 
+					(links.size()!=1 ? "s" : ""));
 			return;
 		}
 
@@ -135,12 +136,11 @@ public class Linker implements ILinker {
 				for (int i = 0; i < list.size(); i++)
 					addUs.remove(list.get(i));
 				if (!((BasicEList) list).addAllUnique(addUs))
-					producer.addDiagnostic("Cannot refer '" + node.getText() + "' more than once.");
+					producer.addDiagnostic("Cannot refer to '" + node.getText() + "' more than once.");
 			}
 			else
 				if (!list.addAll(links))
 					producer.addDiagnostic("Cannot refer to '" + node.getText() + "' more than once.");
-			log.trace("list.size() == " + list.size());
 		}
 	}
 
