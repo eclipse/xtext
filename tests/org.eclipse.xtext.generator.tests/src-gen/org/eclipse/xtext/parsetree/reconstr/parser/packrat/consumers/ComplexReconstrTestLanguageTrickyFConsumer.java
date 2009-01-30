@@ -43,141 +43,196 @@ public final class ComplexReconstrTestLanguageTrickyFConsumer extends NonTermina
 		ruleCall$13$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
-	protected int doConsume() throws Exception {
-		return consumeGroup$1();
+	protected int doConsume(int entryPoint) throws Exception {
+		return consumeGroup$1(entryPoint);
 	}
 
-	protected int consumeGroup$1() throws Exception {
+	protected int consumeGroup$1(int entryPoint) throws Exception {
+		announceNextLevel();
 		final IMarker marker = mark();
-		int result;
-		result = consumeKeyword$3(); 
-		if (result!=ConsumeResult.SUCCESS) {
-			error("Another token expected.", getRule().ele00KeywordTF());
-			marker.commit();
-			return result;
-		}
-		result = consumeGroup$4(); 
-		if (result!=ConsumeResult.SUCCESS) {
-			error("Another token expected.", getRule().ele01Group());
-			marker.commit();
-			return result;
-		}
-		result = consumeAlternatives$9(); 
-		if (result!=ConsumeResult.SUCCESS) {
-			error("Another token expected.", getRule().ele1Alternatives());
-			marker.commit();
-			return result;
+		int result = ConsumeResult.SUCCESS;
+		switch(entryPoint) {
+			case -1: // use fallthrough semantics of switch case
+				result = ConsumeResult.EMPTY_MATCH;
+			case 0:
+				announceNextStep();
+				result = consumeKeyword$3(nextEntryPoint());
+				if (result!=ConsumeResult.SUCCESS) {
+					error("Another token expected.", getRule().ele00KeywordTF());
+					marker.commit();
+					announceLevelFinished();
+					return result;
+				}
+			case 1:
+				announceNextStep();
+				result = consumeGroup$4(nextEntryPoint());
+				if (result!=ConsumeResult.SUCCESS) {
+					error("Another token expected.", getRule().ele01Group());
+					marker.commit();
+					announceLevelFinished();
+					return result;
+				}
+			case 2:
+				announceNextStep();
+				result = consumeAlternatives$9(nextEntryPoint());
+				if (result!=ConsumeResult.SUCCESS) {
+					error("Another token expected.", getRule().ele1Alternatives());
+					marker.commit();
+					announceLevelFinished();
+					return result;
+				}
 		}
 		marker.commit();
+		announceLevelFinished();
 		return result;
 	}
 
-	protected int consumeKeyword$3() throws Exception {
+	protected int consumeKeyword$3(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele00KeywordTF(), null, false, false, getKeyword$3$Delimiter());
 	}
 
-	protected int consumeGroup$4() throws Exception {
+	protected int consumeGroup$4(int entryPoint) throws Exception {
 		IMarker marker = mark();
-		while(doConsumeGroup$4() == ConsumeResult.SUCCESS) {
+		while(doConsumeGroup$4(entryPoint) == ConsumeResult.SUCCESS) {
 			marker.flush();
 		}
 		marker.rollback();
 		return ConsumeResult.SUCCESS;
 	}
 
-	protected int doConsumeGroup$4() throws Exception {
+	protected int doConsumeGroup$4(int entryPoint) throws Exception {
+		announceNextLevel();
 		final IMarker marker = mark();
-		int result;
-		result = consumeAssignment$5(); 
-		if (result!=ConsumeResult.SUCCESS) {
-			error("Another token expected.", getRule().ele010AssignmentName());
-			marker.commit();
-			return result;
-		}
-		result = consumeAssignment$7(); 
-		if (result!=ConsumeResult.SUCCESS) {
-			error("Another token expected.", getRule().ele011AssignmentType());
-			marker.commit();
-			return result;
+		int result = ConsumeResult.SUCCESS;
+		switch(entryPoint) {
+			case -1: // use fallthrough semantics of switch case
+				result = ConsumeResult.EMPTY_MATCH;
+			case 0:
+				announceNextStep();
+				result = consumeAssignment$5(nextEntryPoint());
+				if (result!=ConsumeResult.SUCCESS) {
+					error("Another token expected.", getRule().ele010AssignmentName());
+					marker.commit();
+					announceLevelFinished();
+					return result;
+				}
+			case 1:
+				announceNextStep();
+				result = consumeAssignment$7(nextEntryPoint());
+				if (result!=ConsumeResult.SUCCESS) {
+					error("Another token expected.", getRule().ele011AssignmentType());
+					marker.commit();
+					announceLevelFinished();
+					return result;
+				}
 		}
 		marker.commit();
+		announceLevelFinished();
 		return result;
 	}
 
-	protected int consumeAssignment$5() throws Exception {
-		int result = Integer.MIN_VALUE;
+	protected int consumeAssignment$5(int entryPoint) throws Exception {
+		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
+		announceNextLevel();
 		tempResult = consumeTerminal(idConsumer, "name", true, false, getRule().ele0100LexerRuleCallID(), getRuleCall$6$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS)
+		if (tempResult == ConsumeResult.SUCCESS) {
+			announceLevelFinished();
 			return tempResult;
+		}
 		result = tempResult >= result ? tempResult : result; 
+		announceLevelFinished();
 		return result;
 	}
 
-	protected int consumeAssignment$7() throws Exception {
-		int result = Integer.MIN_VALUE;
+	protected int consumeAssignment$7(int entryPoint) throws Exception {
+		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
+		announceNextLevel();
 		tempResult = consumeTerminal(intConsumer, "type", true, false, getRule().ele0110LexerRuleCallINT(), getRuleCall$8$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS)
+		if (tempResult == ConsumeResult.SUCCESS) {
+			announceLevelFinished();
 			return tempResult;
+		}
 		result = tempResult >= result ? tempResult : result; 
+		announceLevelFinished();
 		return result;
 	}
 
-	protected int consumeAlternatives$9() throws Exception {
+	protected int consumeAlternatives$9(int entryPoint) throws Exception {
+		announceNextLevel();
 		int result = ConsumeResult.SUCCESS;
 		IMarker bestMarker = mark();
 		IMarker currentMarker;
 		int tempResult;
-		currentMarker = bestMarker.fork();
-		tempResult = consumeAssignment$10(); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			bestMarker = currentMarker.join(bestMarker);
-			bestMarker.commit();
-			return tempResult;
+		switch(entryPoint) {
+			case -1: // use fallthrough semantics of switch case
+				result = ConsumeResult.EMPTY_MATCH;
+			case 0:
+				announceNextPath();
+				currentMarker = bestMarker.fork();
+				tempResult = consumeAssignment$10(nextEntryPoint()); 
+				if (tempResult == ConsumeResult.SUCCESS) {
+					bestMarker = currentMarker.join(bestMarker);
+					bestMarker.commit();
+					announceLevelFinished();
+					return tempResult;
+				}
+				if (tempResult > result) {
+					bestMarker = currentMarker.join(bestMarker);
+					result = tempResult;
+				} else {
+					bestMarker = bestMarker.join(currentMarker);
+				}
+				currentMarker = null;
+			case 1:
+				announceNextPath();
+				currentMarker = bestMarker.fork();
+				tempResult = consumeAssignment$12(nextEntryPoint()); 
+				if (tempResult == ConsumeResult.SUCCESS) {
+					bestMarker = currentMarker.join(bestMarker);
+					bestMarker.commit();
+					announceLevelFinished();
+					return tempResult;
+				}
+				if (tempResult > result) {
+					bestMarker = currentMarker.join(bestMarker);
+					result = tempResult;
+				} else {
+					bestMarker = bestMarker.join(currentMarker);
+				}
+				currentMarker = null;
 		}
-		if (tempResult > result) {
-			bestMarker = currentMarker.join(bestMarker);
-			result = tempResult;
-		} else {
-			bestMarker = bestMarker.join(currentMarker);
-		}
-		currentMarker = null;
-		currentMarker = bestMarker.fork();
-		tempResult = consumeAssignment$12(); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			bestMarker = currentMarker.join(bestMarker);
-			bestMarker.commit();
-			return tempResult;
-		}
-		if (tempResult > result) {
-			bestMarker = currentMarker.join(bestMarker);
-			result = tempResult;
-		} else {
-			bestMarker = bestMarker.join(currentMarker);
-		}
-		currentMarker = null;
 		bestMarker.commit();
+		announceLevelFinished();
 		return result;
 	}
 
-	protected int consumeAssignment$10() throws Exception {
-		int result = Integer.MIN_VALUE;
+	protected int consumeAssignment$10(int entryPoint) throws Exception {
+		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
+		announceNextLevel();
 		tempResult = consumeTerminal(idConsumer, "name", true, false, getRule().ele100LexerRuleCallID(), getRuleCall$11$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS)
+		if (tempResult == ConsumeResult.SUCCESS) {
+			announceLevelFinished();
 			return tempResult;
+		}
 		result = tempResult >= result ? tempResult : result; 
+		announceLevelFinished();
 		return result;
 	}
 
-	protected int consumeAssignment$12() throws Exception {
-		int result = Integer.MIN_VALUE;
+	protected int consumeAssignment$12(int entryPoint) throws Exception {
+		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
+		announceNextLevel();
 		tempResult = consumeTerminal(intConsumer, "type", true, false, getRule().ele110LexerRuleCallINT(), getRuleCall$13$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS)
+		if (tempResult == ConsumeResult.SUCCESS) {
+			announceLevelFinished();
 			return tempResult;
+		}
 		result = tempResult >= result ? tempResult : result; 
+		announceLevelFinished();
 		return result;
 	}
 

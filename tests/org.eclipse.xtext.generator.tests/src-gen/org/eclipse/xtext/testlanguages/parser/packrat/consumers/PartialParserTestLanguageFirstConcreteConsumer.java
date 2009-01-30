@@ -43,78 +43,106 @@ public final class PartialParserTestLanguageFirstConcreteConsumer extends NonTer
 		keyword$14$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
-	protected int doConsume() throws Exception {
-		return consumeGroup$1();
+	protected int doConsume(int entryPoint) throws Exception {
+		return consumeGroup$1(entryPoint);
 	}
 
-	protected int consumeGroup$1() throws Exception {
+	protected int consumeGroup$1(int entryPoint) throws Exception {
+		announceNextLevel();
 		final IMarker marker = mark();
-		int result;
-		result = consumeKeyword$6(); 
-		if (result!=ConsumeResult.SUCCESS) {
-			error("Another token expected.", getRule().ele00000KeywordHyphenMinusGreaterThanSign());
-			marker.commit();
-			return result;
-		}
-		result = consumeKeyword$7(); 
-		if (result!=ConsumeResult.SUCCESS) {
-			error("Another token expected.", getRule().ele00001KeywordF());
-			marker.commit();
-			return result;
-		}
-		result = consumeKeyword$8(); 
-		if (result!=ConsumeResult.SUCCESS) {
-			error("Another token expected.", getRule().ele0001KeywordLeftParenthesis());
-			marker.commit();
-			return result;
-		}
-		result = consumeAssignment$9(); 
-		if (result!=ConsumeResult.SUCCESS) {
-			error("Another token expected.", getRule().ele001AssignmentValue());
-			marker.commit();
-			return result;
-		}
-		result = consumeAssignment$11(); 
-		if (result!=ConsumeResult.SUCCESS) {
-			error("Another token expected.", getRule().ele01AssignmentReferencedContainer());
-			marker.commit();
-			return result;
-		}
-		result = consumeKeyword$14(); 
-		if (result!=ConsumeResult.SUCCESS) {
-			error("Another token expected.", getRule().ele1KeywordRightParenthesis());
-			marker.commit();
-			return result;
+		int result = ConsumeResult.SUCCESS;
+		switch(entryPoint) {
+			case -1: // use fallthrough semantics of switch case
+				result = ConsumeResult.EMPTY_MATCH;
+			case 0:
+				announceNextStep();
+				result = consumeKeyword$6(nextEntryPoint());
+				if (result!=ConsumeResult.SUCCESS) {
+					error("Another token expected.", getRule().ele00000KeywordHyphenMinusGreaterThanSign());
+					marker.commit();
+					announceLevelFinished();
+					return result;
+				}
+			case 1:
+				announceNextStep();
+				result = consumeKeyword$7(nextEntryPoint());
+				if (result!=ConsumeResult.SUCCESS) {
+					error("Another token expected.", getRule().ele00001KeywordF());
+					marker.commit();
+					announceLevelFinished();
+					return result;
+				}
+			case 2:
+				announceNextStep();
+				result = consumeKeyword$8(nextEntryPoint());
+				if (result!=ConsumeResult.SUCCESS) {
+					error("Another token expected.", getRule().ele0001KeywordLeftParenthesis());
+					marker.commit();
+					announceLevelFinished();
+					return result;
+				}
+			case 3:
+				announceNextStep();
+				result = consumeAssignment$9(nextEntryPoint());
+				if (result!=ConsumeResult.SUCCESS) {
+					error("Another token expected.", getRule().ele001AssignmentValue());
+					marker.commit();
+					announceLevelFinished();
+					return result;
+				}
+			case 4:
+				announceNextStep();
+				result = consumeAssignment$11(nextEntryPoint());
+				if (result!=ConsumeResult.SUCCESS) {
+					error("Another token expected.", getRule().ele01AssignmentReferencedContainer());
+					marker.commit();
+					announceLevelFinished();
+					return result;
+				}
+			case 5:
+				announceNextStep();
+				result = consumeKeyword$14(nextEntryPoint());
+				if (result!=ConsumeResult.SUCCESS) {
+					error("Another token expected.", getRule().ele1KeywordRightParenthesis());
+					marker.commit();
+					announceLevelFinished();
+					return result;
+				}
 		}
 		marker.commit();
+		announceLevelFinished();
 		return result;
 	}
 
-	protected int consumeKeyword$6() throws Exception {
+	protected int consumeKeyword$6(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele00000KeywordHyphenMinusGreaterThanSign(), null, false, false, getKeyword$6$Delimiter());
 	}
 
-	protected int consumeKeyword$7() throws Exception {
+	protected int consumeKeyword$7(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele00001KeywordF(), null, false, false, getKeyword$7$Delimiter());
 	}
 
-	protected int consumeKeyword$8() throws Exception {
+	protected int consumeKeyword$8(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele0001KeywordLeftParenthesis(), null, false, false, getKeyword$8$Delimiter());
 	}
 
-	protected int consumeAssignment$9() throws Exception {
-		int result = Integer.MIN_VALUE;
+	protected int consumeAssignment$9(int entryPoint) throws Exception {
+		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
+		announceNextLevel();
 		tempResult = consumeNonTerminal(namedConsumer, "value", false, false, getRule().ele0010ParserRuleCallNamed());
-		if (tempResult == ConsumeResult.SUCCESS)
+		if (tempResult == ConsumeResult.SUCCESS) {
+			announceLevelFinished();
 			return tempResult;
+		}
 		result = tempResult >= result ? tempResult : result; 
+		announceLevelFinished();
 		return result;
 	}
 
-	protected int consumeAssignment$11() throws Exception {
+	protected int consumeAssignment$11(int entryPoint) throws Exception {
 		IMarker marker = mark();
-		int result = doConsumeAssignment$11();
+		int result = doConsumeAssignment$11(entryPoint);
 		if (result != ConsumeResult.SUCCESS)
 			marker.rollback();
 		else
@@ -122,17 +150,21 @@ public final class PartialParserTestLanguageFirstConcreteConsumer extends NonTer
 		return ConsumeResult.SUCCESS;
 	}
 
-	protected int doConsumeAssignment$11() throws Exception {
-		int result = Integer.MIN_VALUE;
+	protected int doConsumeAssignment$11(int entryPoint) throws Exception {
+		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
+		announceNextLevel();
 		tempResult = consumeTerminal(idConsumer, "referencedContainer", false, false, getRule().ele010CrossReferenceEStringContainer(), getCrossReference$12$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS)
+		if (tempResult == ConsumeResult.SUCCESS) {
+			announceLevelFinished();
 			return tempResult;
+		}
 		result = tempResult >= result ? tempResult : result; 
+		announceLevelFinished();
 		return result;
 	}
 
-	protected int consumeKeyword$14() throws Exception {
+	protected int consumeKeyword$14(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele1KeywordRightParenthesis(), null, false, false, getKeyword$14$Delimiter());
 	}
 

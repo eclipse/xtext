@@ -47,7 +47,7 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 		IMarker marker = mark();
 		int prevOffset = getOffset();
 		acceptor.accept(new ParsedNonTerminal(input.getOffset(), grammarElement != null ? grammarElement : getGrammarElement(), getDefaultTypeName()));
-		int result = doConsume();
+		int result = doConsume(-1);
 		if (result != ConsumeResult.SUCCESS) {
 			acceptor.accept(new ErrorToken(prevOffset, 0, null, "Expected " + getDefaultTypeName() + ", but could not find."));
 		}
@@ -68,7 +68,7 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 		listener.afterNonTerminalBegin(this, this);
 		int result;
 		try {
-			result = doConsume();
+			result = doConsume(-1);
 		} catch(Exception e) {
 			result = ConsumeResult.EXCEPTION;
 			listener.handleException(this, e, this);
@@ -103,7 +103,7 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 		consumerUtil.consumeAction(action, typeName, isMany);
 	}
 	
-	protected abstract int doConsume() throws Exception;
+	protected abstract int doConsume(int entryPoint) throws Exception;
 	
 	// TODO: replace by getDefaultType: EClassifier
 	protected abstract String getDefaultTypeName(); 

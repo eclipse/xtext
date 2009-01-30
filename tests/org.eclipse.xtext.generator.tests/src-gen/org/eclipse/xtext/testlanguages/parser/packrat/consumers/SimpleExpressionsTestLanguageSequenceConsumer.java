@@ -26,72 +26,100 @@ public final class SimpleExpressionsTestLanguageSequenceConsumer extends NonTerm
 		super(configuration, hiddenTokens);
 	}
 	
-	protected int doConsume() throws Exception {
-		return consumeGroup$1();
+	protected int doConsume(int entryPoint) throws Exception {
+		return consumeGroup$1(entryPoint);
 	}
 
-	protected int consumeGroup$1() throws Exception {
+	protected int consumeGroup$1(int entryPoint) throws Exception {
+		announceNextLevel();
 		final IMarker marker = mark();
-		int result;
-		result = consumeRuleCall$2(); 
-		if (result!=ConsumeResult.SUCCESS) {
-			error("Another token expected.", getRule().ele0ParserRuleCallAddition());
-			marker.commit();
-			return result;
-		}
-		result = consumeGroup$3(); 
-		if (result!=ConsumeResult.SUCCESS) {
-			error("Another token expected.", getRule().ele1Group());
-			marker.commit();
-			return result;
+		int result = ConsumeResult.SUCCESS;
+		switch(entryPoint) {
+			case -1: // use fallthrough semantics of switch case
+				result = ConsumeResult.EMPTY_MATCH;
+			case 0:
+				announceNextStep();
+				result = consumeRuleCall$2(nextEntryPoint());
+				if (result!=ConsumeResult.SUCCESS) {
+					error("Another token expected.", getRule().ele0ParserRuleCallAddition());
+					marker.commit();
+					announceLevelFinished();
+					return result;
+				}
+			case 1:
+				announceNextStep();
+				result = consumeGroup$3(nextEntryPoint());
+				if (result!=ConsumeResult.SUCCESS) {
+					error("Another token expected.", getRule().ele1Group());
+					marker.commit();
+					announceLevelFinished();
+					return result;
+				}
 		}
 		marker.commit();
+		announceLevelFinished();
 		return result;
 	}
 
-	protected int consumeRuleCall$2() throws Exception {
+	protected int consumeRuleCall$2(int entryPoint) throws Exception {
 		return consumeNonTerminal(additionConsumer, null, false, false, getRule().ele0ParserRuleCallAddition());
 	}
 
-	protected int consumeGroup$3() throws Exception {
+	protected int consumeGroup$3(int entryPoint) throws Exception {
 		IMarker marker = mark();
-		while(doConsumeGroup$3() == ConsumeResult.SUCCESS) {
+		while(doConsumeGroup$3(entryPoint) == ConsumeResult.SUCCESS) {
 			marker.flush();
 		}
 		marker.rollback();
 		return ConsumeResult.SUCCESS;
 	}
 
-	protected int doConsumeGroup$3() throws Exception {
+	protected int doConsumeGroup$3(int entryPoint) throws Exception {
+		announceNextLevel();
 		final IMarker marker = mark();
-		int result;
-		result = consumeAction$4(); 
-		if (result!=ConsumeResult.SUCCESS) {
-			error("Another token expected.", getRule().ele10ActionSequenceexpressions());
-			marker.commit();
-			return result;
-		}
-		result = consumeAssignment$6(); 
-		if (result!=ConsumeResult.SUCCESS) {
-			error("Another token expected.", getRule().ele11AssignmentExpressions());
-			marker.commit();
-			return result;
+		int result = ConsumeResult.SUCCESS;
+		switch(entryPoint) {
+			case -1: // use fallthrough semantics of switch case
+				result = ConsumeResult.EMPTY_MATCH;
+			case 0:
+				announceNextStep();
+				result = consumeAction$4(nextEntryPoint());
+				if (result!=ConsumeResult.SUCCESS) {
+					error("Another token expected.", getRule().ele10ActionSequenceexpressions());
+					marker.commit();
+					announceLevelFinished();
+					return result;
+				}
+			case 1:
+				announceNextStep();
+				result = consumeAssignment$6(nextEntryPoint());
+				if (result!=ConsumeResult.SUCCESS) {
+					error("Another token expected.", getRule().ele11AssignmentExpressions());
+					marker.commit();
+					announceLevelFinished();
+					return result;
+				}
 		}
 		marker.commit();
+		announceLevelFinished();
 		return result;
 	}
-	protected int consumeAction$4() {
+	protected int consumeAction$4(int entryPoint) {
 		consumeAction(getRule().ele10ActionSequenceexpressions(), "Sequence", true);
 		return ConsumeResult.SUCCESS;	
 	}
 
-	protected int consumeAssignment$6() throws Exception {
-		int result = Integer.MIN_VALUE;
+	protected int consumeAssignment$6(int entryPoint) throws Exception {
+		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
+		announceNextLevel();
 		tempResult = consumeNonTerminal(additionConsumer, "expressions", true, false, getRule().ele110ParserRuleCallAddition());
-		if (tempResult == ConsumeResult.SUCCESS)
+		if (tempResult == ConsumeResult.SUCCESS) {
+			announceLevelFinished();
 			return tempResult;
+		}
 		result = tempResult >= result ? tempResult : result; 
+		announceLevelFinished();
 		return result;
 	}
 

@@ -27,17 +27,21 @@ public final class XtextWildcardConsumer extends NonTerminalConsumer {
 		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
-	protected int doConsume() throws Exception {
-		return consumeAssignment$1();
+	protected int doConsume(int entryPoint) throws Exception {
+		return consumeAssignment$1(entryPoint);
 	}
 
-	protected int consumeAssignment$1() throws Exception {
-		int result = Integer.MIN_VALUE;
+	protected int consumeAssignment$1(int entryPoint) throws Exception {
+		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
+		announceNextLevel();
 		tempResult = consumeKeyword(getRule().ele0KeywordFullStop(), "isWildcard", false, true, getKeyword$2$Delimiter()); 
-		if (tempResult == ConsumeResult.SUCCESS)
+		if (tempResult == ConsumeResult.SUCCESS) {
+			announceLevelFinished();
 			return tempResult;
+		}
 		result = tempResult >= result ? tempResult : result; 
+		announceLevelFinished();
 		return result;
 	}
 

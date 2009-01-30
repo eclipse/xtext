@@ -38,54 +38,72 @@ public final class DatatypeRulesTestLanguageVectorConsumer extends NonTerminalCo
 		ruleCall$6$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
-	protected int doConsume() throws Exception {
-		return consumeGroup$1();
+	protected int doConsume(int entryPoint) throws Exception {
+		return consumeGroup$1(entryPoint);
 	}
 
-	protected int consumeGroup$1() throws Exception {
+	protected int consumeGroup$1(int entryPoint) throws Exception {
+		announceNextLevel();
 		final IMarker marker = mark();
-		int result;
-		result = consumeKeyword$4(); 
-		if (result!=ConsumeResult.SUCCESS) {
-			error("Another token expected.", getRule().ele000KeywordLeftParenthesis());
-			marker.commit();
-			return result;
-		}
-		result = consumeRuleCall$5(); 
-		if (result!=ConsumeResult.SUCCESS) {
-			error("Another token expected.", getRule().ele001LexerRuleCallINT());
-			marker.commit();
-			return result;
-		}
-		result = consumeRuleCall$6(); 
-		if (result!=ConsumeResult.SUCCESS) {
-			error("Another token expected.", getRule().ele01LexerRuleCallINT());
-			marker.commit();
-			return result;
-		}
-		result = consumeKeyword$7(); 
-		if (result!=ConsumeResult.SUCCESS) {
-			error("Another token expected.", getRule().ele1KeywordRightParenthesis());
-			marker.commit();
-			return result;
+		int result = ConsumeResult.SUCCESS;
+		switch(entryPoint) {
+			case -1: // use fallthrough semantics of switch case
+				result = ConsumeResult.EMPTY_MATCH;
+			case 0:
+				announceNextStep();
+				result = consumeKeyword$4(nextEntryPoint());
+				if (result!=ConsumeResult.SUCCESS) {
+					error("Another token expected.", getRule().ele000KeywordLeftParenthesis());
+					marker.commit();
+					announceLevelFinished();
+					return result;
+				}
+			case 1:
+				announceNextStep();
+				result = consumeRuleCall$5(nextEntryPoint());
+				if (result!=ConsumeResult.SUCCESS) {
+					error("Another token expected.", getRule().ele001LexerRuleCallINT());
+					marker.commit();
+					announceLevelFinished();
+					return result;
+				}
+			case 2:
+				announceNextStep();
+				result = consumeRuleCall$6(nextEntryPoint());
+				if (result!=ConsumeResult.SUCCESS) {
+					error("Another token expected.", getRule().ele01LexerRuleCallINT());
+					marker.commit();
+					announceLevelFinished();
+					return result;
+				}
+			case 3:
+				announceNextStep();
+				result = consumeKeyword$7(nextEntryPoint());
+				if (result!=ConsumeResult.SUCCESS) {
+					error("Another token expected.", getRule().ele1KeywordRightParenthesis());
+					marker.commit();
+					announceLevelFinished();
+					return result;
+				}
 		}
 		marker.commit();
+		announceLevelFinished();
 		return result;
 	}
 
-	protected int consumeKeyword$4() throws Exception {
+	protected int consumeKeyword$4(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele000KeywordLeftParenthesis(), null, false, false, getKeyword$4$Delimiter());
 	}
 
-	protected int consumeRuleCall$5() throws Exception {
+	protected int consumeRuleCall$5(int entryPoint) throws Exception {
 		return consumeTerminal(intConsumer, null, false, false, getRule().ele001LexerRuleCallINT(), getRuleCall$5$Delimiter());
 	}
 
-	protected int consumeRuleCall$6() throws Exception {
+	protected int consumeRuleCall$6(int entryPoint) throws Exception {
 		return consumeTerminal(intConsumer, null, false, false, getRule().ele01LexerRuleCallINT(), getRuleCall$6$Delimiter());
 	}
 
-	protected int consumeKeyword$7() throws Exception {
+	protected int consumeKeyword$7(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele1KeywordRightParenthesis(), null, false, false, getKeyword$7$Delimiter());
 	}
 

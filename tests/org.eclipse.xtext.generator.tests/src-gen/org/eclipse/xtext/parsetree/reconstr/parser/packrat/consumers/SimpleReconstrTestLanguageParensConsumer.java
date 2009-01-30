@@ -35,56 +35,74 @@ public final class SimpleReconstrTestLanguageParensConsumer extends NonTerminalC
 		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
-	protected int doConsume() throws Exception {
-		return consumeGroup$1();
+	protected int doConsume(int entryPoint) throws Exception {
+		return consumeGroup$1(entryPoint);
 	}
 
-	protected int consumeGroup$1() throws Exception {
+	protected int consumeGroup$1(int entryPoint) throws Exception {
+		announceNextLevel();
 		final IMarker marker = mark();
-		int result;
-		result = consumeKeyword$4(); 
-		if (result!=ConsumeResult.SUCCESS) {
-			error("Another token expected.", getRule().ele000KeywordLeftParenthesis());
-			marker.commit();
-			return result;
-		}
-		result = consumeRuleCall$5(); 
-		if (result!=ConsumeResult.SUCCESS) {
-			error("Another token expected.", getRule().ele001ParserRuleCallOp());
-			marker.commit();
-			return result;
-		}
-		result = consumeKeyword$6(); 
-		if (result!=ConsumeResult.SUCCESS) {
-			error("Another token expected.", getRule().ele01KeywordRightParenthesis());
-			marker.commit();
-			return result;
-		}
-		result = consumeAssignment$7(); 
-		if (result!=ConsumeResult.SUCCESS) {
-			error("Another token expected.", getRule().ele1AssignmentEm());
-			marker.commit();
-			return result;
+		int result = ConsumeResult.SUCCESS;
+		switch(entryPoint) {
+			case -1: // use fallthrough semantics of switch case
+				result = ConsumeResult.EMPTY_MATCH;
+			case 0:
+				announceNextStep();
+				result = consumeKeyword$4(nextEntryPoint());
+				if (result!=ConsumeResult.SUCCESS) {
+					error("Another token expected.", getRule().ele000KeywordLeftParenthesis());
+					marker.commit();
+					announceLevelFinished();
+					return result;
+				}
+			case 1:
+				announceNextStep();
+				result = consumeRuleCall$5(nextEntryPoint());
+				if (result!=ConsumeResult.SUCCESS) {
+					error("Another token expected.", getRule().ele001ParserRuleCallOp());
+					marker.commit();
+					announceLevelFinished();
+					return result;
+				}
+			case 2:
+				announceNextStep();
+				result = consumeKeyword$6(nextEntryPoint());
+				if (result!=ConsumeResult.SUCCESS) {
+					error("Another token expected.", getRule().ele01KeywordRightParenthesis());
+					marker.commit();
+					announceLevelFinished();
+					return result;
+				}
+			case 3:
+				announceNextStep();
+				result = consumeAssignment$7(nextEntryPoint());
+				if (result!=ConsumeResult.SUCCESS) {
+					error("Another token expected.", getRule().ele1AssignmentEm());
+					marker.commit();
+					announceLevelFinished();
+					return result;
+				}
 		}
 		marker.commit();
+		announceLevelFinished();
 		return result;
 	}
 
-	protected int consumeKeyword$4() throws Exception {
+	protected int consumeKeyword$4(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele000KeywordLeftParenthesis(), null, false, false, getKeyword$4$Delimiter());
 	}
 
-	protected int consumeRuleCall$5() throws Exception {
+	protected int consumeRuleCall$5(int entryPoint) throws Exception {
 		return consumeNonTerminal(opConsumer, null, false, false, getRule().ele001ParserRuleCallOp());
 	}
 
-	protected int consumeKeyword$6() throws Exception {
+	protected int consumeKeyword$6(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele01KeywordRightParenthesis(), null, false, false, getKeyword$6$Delimiter());
 	}
 
-	protected int consumeAssignment$7() throws Exception {
+	protected int consumeAssignment$7(int entryPoint) throws Exception {
 		IMarker marker = mark();
-		int result = doConsumeAssignment$7();
+		int result = doConsumeAssignment$7(entryPoint);
 		if (result != ConsumeResult.SUCCESS)
 			marker.rollback();
 		else
@@ -92,13 +110,17 @@ public final class SimpleReconstrTestLanguageParensConsumer extends NonTerminalC
 		return ConsumeResult.SUCCESS;
 	}
 
-	protected int doConsumeAssignment$7() throws Exception {
-		int result = Integer.MIN_VALUE;
+	protected int doConsumeAssignment$7(int entryPoint) throws Exception {
+		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
+		announceNextLevel();
 		tempResult = consumeKeyword(getRule().ele10KeywordExclamationMark(), "em", false, false, getKeyword$8$Delimiter()); 
-		if (tempResult == ConsumeResult.SUCCESS)
+		if (tempResult == ConsumeResult.SUCCESS) {
+			announceLevelFinished();
 			return tempResult;
+		}
 		result = tempResult >= result ? tempResult : result; 
+		announceLevelFinished();
 		return result;
 	}
 

@@ -59,184 +59,239 @@ public final class TerminalRulesTestLanguageModelConsumer extends NonTerminalCon
 		ruleCall$20$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
-	protected int doConsume() throws Exception {
-		return consumeAlternatives$1();
+	protected int doConsume(int entryPoint) throws Exception {
+		return consumeAlternatives$1(entryPoint);
 	}
 
-	protected int consumeAlternatives$1() throws Exception {
+	protected int consumeAlternatives$1(int entryPoint) throws Exception {
+		announceNextLevel();
 		int result = ConsumeResult.SUCCESS;
 		IMarker bestMarker = mark();
 		IMarker currentMarker;
 		int tempResult;
-		currentMarker = bestMarker.fork();
-		tempResult = consumeAssignment$7(); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			bestMarker = currentMarker.join(bestMarker);
-			bestMarker.commit();
-			return tempResult;
+		switch(entryPoint) {
+			case -1: // use fallthrough semantics of switch case
+				result = ConsumeResult.EMPTY_MATCH;
+			case 0:
+				announceNextPath();
+				currentMarker = bestMarker.fork();
+				tempResult = consumeAssignment$7(nextEntryPoint()); 
+				if (tempResult == ConsumeResult.SUCCESS) {
+					bestMarker = currentMarker.join(bestMarker);
+					bestMarker.commit();
+					announceLevelFinished();
+					return tempResult;
+				}
+				if (tempResult > result) {
+					bestMarker = currentMarker.join(bestMarker);
+					result = tempResult;
+				} else {
+					bestMarker = bestMarker.join(currentMarker);
+				}
+				currentMarker = null;
+			case 1:
+				announceNextPath();
+				currentMarker = bestMarker.fork();
+				tempResult = consumeAssignment$9(nextEntryPoint()); 
+				if (tempResult == ConsumeResult.SUCCESS) {
+					bestMarker = currentMarker.join(bestMarker);
+					bestMarker.commit();
+					announceLevelFinished();
+					return tempResult;
+				}
+				if (tempResult > result) {
+					bestMarker = currentMarker.join(bestMarker);
+					result = tempResult;
+				} else {
+					bestMarker = bestMarker.join(currentMarker);
+				}
+				currentMarker = null;
+			case 2:
+				announceNextPath();
+				currentMarker = bestMarker.fork();
+				tempResult = consumeAssignment$11(nextEntryPoint()); 
+				if (tempResult == ConsumeResult.SUCCESS) {
+					bestMarker = currentMarker.join(bestMarker);
+					bestMarker.commit();
+					announceLevelFinished();
+					return tempResult;
+				}
+				if (tempResult > result) {
+					bestMarker = currentMarker.join(bestMarker);
+					result = tempResult;
+				} else {
+					bestMarker = bestMarker.join(currentMarker);
+				}
+				currentMarker = null;
+			case 3:
+				announceNextPath();
+				currentMarker = bestMarker.fork();
+				tempResult = consumeAssignment$13(nextEntryPoint()); 
+				if (tempResult == ConsumeResult.SUCCESS) {
+					bestMarker = currentMarker.join(bestMarker);
+					bestMarker.commit();
+					announceLevelFinished();
+					return tempResult;
+				}
+				if (tempResult > result) {
+					bestMarker = currentMarker.join(bestMarker);
+					result = tempResult;
+				} else {
+					bestMarker = bestMarker.join(currentMarker);
+				}
+				currentMarker = null;
+			case 4:
+				announceNextPath();
+				currentMarker = bestMarker.fork();
+				tempResult = consumeAssignment$15(nextEntryPoint()); 
+				if (tempResult == ConsumeResult.SUCCESS) {
+					bestMarker = currentMarker.join(bestMarker);
+					bestMarker.commit();
+					announceLevelFinished();
+					return tempResult;
+				}
+				if (tempResult > result) {
+					bestMarker = currentMarker.join(bestMarker);
+					result = tempResult;
+				} else {
+					bestMarker = bestMarker.join(currentMarker);
+				}
+				currentMarker = null;
+			case 5:
+				announceNextPath();
+				currentMarker = bestMarker.fork();
+				tempResult = consumeAssignment$17(nextEntryPoint()); 
+				if (tempResult == ConsumeResult.SUCCESS) {
+					bestMarker = currentMarker.join(bestMarker);
+					bestMarker.commit();
+					announceLevelFinished();
+					return tempResult;
+				}
+				if (tempResult > result) {
+					bestMarker = currentMarker.join(bestMarker);
+					result = tempResult;
+				} else {
+					bestMarker = bestMarker.join(currentMarker);
+				}
+				currentMarker = null;
+			case 6:
+				announceNextPath();
+				currentMarker = bestMarker.fork();
+				tempResult = consumeAssignment$19(nextEntryPoint()); 
+				if (tempResult == ConsumeResult.SUCCESS) {
+					bestMarker = currentMarker.join(bestMarker);
+					bestMarker.commit();
+					announceLevelFinished();
+					return tempResult;
+				}
+				if (tempResult > result) {
+					bestMarker = currentMarker.join(bestMarker);
+					result = tempResult;
+				} else {
+					bestMarker = bestMarker.join(currentMarker);
+				}
+				currentMarker = null;
 		}
-		if (tempResult > result) {
-			bestMarker = currentMarker.join(bestMarker);
-			result = tempResult;
-		} else {
-			bestMarker = bestMarker.join(currentMarker);
-		}
-		currentMarker = null;
-		currentMarker = bestMarker.fork();
-		tempResult = consumeAssignment$9(); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			bestMarker = currentMarker.join(bestMarker);
-			bestMarker.commit();
-			return tempResult;
-		}
-		if (tempResult > result) {
-			bestMarker = currentMarker.join(bestMarker);
-			result = tempResult;
-		} else {
-			bestMarker = bestMarker.join(currentMarker);
-		}
-		currentMarker = null;
-		currentMarker = bestMarker.fork();
-		tempResult = consumeAssignment$11(); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			bestMarker = currentMarker.join(bestMarker);
-			bestMarker.commit();
-			return tempResult;
-		}
-		if (tempResult > result) {
-			bestMarker = currentMarker.join(bestMarker);
-			result = tempResult;
-		} else {
-			bestMarker = bestMarker.join(currentMarker);
-		}
-		currentMarker = null;
-		currentMarker = bestMarker.fork();
-		tempResult = consumeAssignment$13(); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			bestMarker = currentMarker.join(bestMarker);
-			bestMarker.commit();
-			return tempResult;
-		}
-		if (tempResult > result) {
-			bestMarker = currentMarker.join(bestMarker);
-			result = tempResult;
-		} else {
-			bestMarker = bestMarker.join(currentMarker);
-		}
-		currentMarker = null;
-		currentMarker = bestMarker.fork();
-		tempResult = consumeAssignment$15(); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			bestMarker = currentMarker.join(bestMarker);
-			bestMarker.commit();
-			return tempResult;
-		}
-		if (tempResult > result) {
-			bestMarker = currentMarker.join(bestMarker);
-			result = tempResult;
-		} else {
-			bestMarker = bestMarker.join(currentMarker);
-		}
-		currentMarker = null;
-		currentMarker = bestMarker.fork();
-		tempResult = consumeAssignment$17(); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			bestMarker = currentMarker.join(bestMarker);
-			bestMarker.commit();
-			return tempResult;
-		}
-		if (tempResult > result) {
-			bestMarker = currentMarker.join(bestMarker);
-			result = tempResult;
-		} else {
-			bestMarker = bestMarker.join(currentMarker);
-		}
-		currentMarker = null;
-		currentMarker = bestMarker.fork();
-		tempResult = consumeAssignment$19(); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			bestMarker = currentMarker.join(bestMarker);
-			bestMarker.commit();
-			return tempResult;
-		}
-		if (tempResult > result) {
-			bestMarker = currentMarker.join(bestMarker);
-			result = tempResult;
-		} else {
-			bestMarker = bestMarker.join(currentMarker);
-		}
-		currentMarker = null;
 		bestMarker.commit();
+		announceLevelFinished();
 		return result;
 	}
 
-	protected int consumeAssignment$7() throws Exception {
-		int result = Integer.MIN_VALUE;
+	protected int consumeAssignment$7(int entryPoint) throws Exception {
+		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
+		announceNextLevel();
 		tempResult = consumeTerminal(idConsumer, "idValue", false, false, getRule().ele0000000ParserRuleCallID(), getRuleCall$8$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS)
+		if (tempResult == ConsumeResult.SUCCESS) {
+			announceLevelFinished();
 			return tempResult;
+		}
 		result = tempResult >= result ? tempResult : result; 
+		announceLevelFinished();
 		return result;
 	}
 
-	protected int consumeAssignment$9() throws Exception {
-		int result = Integer.MIN_VALUE;
+	protected int consumeAssignment$9(int entryPoint) throws Exception {
+		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
+		announceNextLevel();
 		tempResult = consumeTerminal(intConsumer, "intValue", false, false, getRule().ele0000010ParserRuleCallINT(), getRuleCall$10$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS)
+		if (tempResult == ConsumeResult.SUCCESS) {
+			announceLevelFinished();
 			return tempResult;
+		}
 		result = tempResult >= result ? tempResult : result; 
+		announceLevelFinished();
 		return result;
 	}
 
-	protected int consumeAssignment$11() throws Exception {
-		int result = Integer.MIN_VALUE;
+	protected int consumeAssignment$11(int entryPoint) throws Exception {
+		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
+		announceNextLevel();
 		tempResult = consumeTerminal(stringConsumer, "stringValue", false, false, getRule().ele000010ParserRuleCallSTRING(), getRuleCall$12$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS)
+		if (tempResult == ConsumeResult.SUCCESS) {
+			announceLevelFinished();
 			return tempResult;
+		}
 		result = tempResult >= result ? tempResult : result; 
+		announceLevelFinished();
 		return result;
 	}
 
-	protected int consumeAssignment$13() throws Exception {
-		int result = Integer.MIN_VALUE;
+	protected int consumeAssignment$13(int entryPoint) throws Exception {
+		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
+		announceNextLevel();
 		tempResult = consumeTerminal(mlCommentConsumer, "mlCommentValue", false, false, getRule().ele00010ParserRuleCallML_COMMENT(), getRuleCall$14$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS)
+		if (tempResult == ConsumeResult.SUCCESS) {
+			announceLevelFinished();
 			return tempResult;
+		}
 		result = tempResult >= result ? tempResult : result; 
+		announceLevelFinished();
 		return result;
 	}
 
-	protected int consumeAssignment$15() throws Exception {
-		int result = Integer.MIN_VALUE;
+	protected int consumeAssignment$15(int entryPoint) throws Exception {
+		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
+		announceNextLevel();
 		tempResult = consumeTerminal(slCommentConsumer, "slCommentValue", false, false, getRule().ele0010ParserRuleCallSL_COMMENT(), getRuleCall$16$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS)
+		if (tempResult == ConsumeResult.SUCCESS) {
+			announceLevelFinished();
 			return tempResult;
+		}
 		result = tempResult >= result ? tempResult : result; 
+		announceLevelFinished();
 		return result;
 	}
 
-	protected int consumeAssignment$17() throws Exception {
-		int result = Integer.MIN_VALUE;
+	protected int consumeAssignment$17(int entryPoint) throws Exception {
+		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
+		announceNextLevel();
 		tempResult = consumeTerminal(wsConsumer, "wsValue", false, false, getRule().ele010ParserRuleCallWS(), getRuleCall$18$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS)
+		if (tempResult == ConsumeResult.SUCCESS) {
+			announceLevelFinished();
 			return tempResult;
+		}
 		result = tempResult >= result ? tempResult : result; 
+		announceLevelFinished();
 		return result;
 	}
 
-	protected int consumeAssignment$19() throws Exception {
-		int result = Integer.MIN_VALUE;
+	protected int consumeAssignment$19(int entryPoint) throws Exception {
+		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
+		announceNextLevel();
 		tempResult = consumeTerminal(anyOtherConsumer, "anyValue", false, false, getRule().ele10ParserRuleCallANY_OTHER(), getRuleCall$20$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS)
+		if (tempResult == ConsumeResult.SUCCESS) {
+			announceLevelFinished();
 			return tempResult;
+		}
 		result = tempResult >= result ? tempResult : result; 
+		announceLevelFinished();
 		return result;
 	}
 

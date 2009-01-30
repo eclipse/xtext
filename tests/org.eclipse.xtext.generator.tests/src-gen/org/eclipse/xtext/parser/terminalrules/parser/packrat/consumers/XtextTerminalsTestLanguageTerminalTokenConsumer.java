@@ -35,36 +35,48 @@ public final class XtextTerminalsTestLanguageTerminalTokenConsumer extends NonTe
 		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
-	protected int doConsume() throws Exception {
-		return consumeGroup$1();
+	protected int doConsume(int entryPoint) throws Exception {
+		return consumeGroup$1(entryPoint);
 	}
 
-	protected int consumeGroup$1() throws Exception {
+	protected int consumeGroup$1(int entryPoint) throws Exception {
+		announceNextLevel();
 		final IMarker marker = mark();
-		int result;
-		result = consumeRuleCall$2(); 
-		if (result!=ConsumeResult.SUCCESS) {
-			error("Another token expected.", getRule().ele0ParserRuleCallTerminalTokenElement());
-			marker.commit();
-			return result;
-		}
-		result = consumeAssignment$3(); 
-		if (result!=ConsumeResult.SUCCESS) {
-			error("Another token expected.", getRule().ele1AssignmentCardinality());
-			marker.commit();
-			return result;
+		int result = ConsumeResult.SUCCESS;
+		switch(entryPoint) {
+			case -1: // use fallthrough semantics of switch case
+				result = ConsumeResult.EMPTY_MATCH;
+			case 0:
+				announceNextStep();
+				result = consumeRuleCall$2(nextEntryPoint());
+				if (result!=ConsumeResult.SUCCESS) {
+					error("Another token expected.", getRule().ele0ParserRuleCallTerminalTokenElement());
+					marker.commit();
+					announceLevelFinished();
+					return result;
+				}
+			case 1:
+				announceNextStep();
+				result = consumeAssignment$3(nextEntryPoint());
+				if (result!=ConsumeResult.SUCCESS) {
+					error("Another token expected.", getRule().ele1AssignmentCardinality());
+					marker.commit();
+					announceLevelFinished();
+					return result;
+				}
 		}
 		marker.commit();
+		announceLevelFinished();
 		return result;
 	}
 
-	protected int consumeRuleCall$2() throws Exception {
+	protected int consumeRuleCall$2(int entryPoint) throws Exception {
 		return consumeNonTerminal(terminalTokenElementConsumer, null, false, false, getRule().ele0ParserRuleCallTerminalTokenElement());
 	}
 
-	protected int consumeAssignment$3() throws Exception {
+	protected int consumeAssignment$3(int entryPoint) throws Exception {
 		IMarker marker = mark();
-		int result = doConsumeAssignment$3();
+		int result = doConsumeAssignment$3(entryPoint);
 		if (result != ConsumeResult.SUCCESS)
 			marker.rollback();
 		else
@@ -72,21 +84,39 @@ public final class XtextTerminalsTestLanguageTerminalTokenConsumer extends NonTe
 		return ConsumeResult.SUCCESS;
 	}
 
-	protected int doConsumeAssignment$3() throws Exception {
-		int result = Integer.MIN_VALUE;
+	protected int doConsumeAssignment$3(int entryPoint) throws Exception {
+		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
+		announceNextLevel();
+		// TODO use markers in assignments of alternatives to recover
+		announceNextPath();
+		// TODO use markers in assignments of alternatives to recover
+		announceNextPath();
 		tempResult = consumeKeyword(getRule().ele1000KeywordQuestionMark(), "cardinality", false, false, getKeyword$6$Delimiter()); 
-		if (tempResult == ConsumeResult.SUCCESS)
+		if (tempResult == ConsumeResult.SUCCESS) {
+			announceLevelFinished();
 			return tempResult;
+		}
 		result = tempResult >= result ? tempResult : result; 
+
+		announceNextPath();
 		tempResult = consumeKeyword(getRule().ele1001KeywordAsterisk(), "cardinality", false, false, getKeyword$7$Delimiter()); 
-		if (tempResult == ConsumeResult.SUCCESS)
+		if (tempResult == ConsumeResult.SUCCESS) {
+			announceLevelFinished();
 			return tempResult;
+		}
 		result = tempResult >= result ? tempResult : result; 
+
+
+		announceNextPath();
 		tempResult = consumeKeyword(getRule().ele101KeywordPlusSign(), "cardinality", false, false, getKeyword$8$Delimiter()); 
-		if (tempResult == ConsumeResult.SUCCESS)
+		if (tempResult == ConsumeResult.SUCCESS) {
+			announceLevelFinished();
 			return tempResult;
+		}
 		result = tempResult >= result ? tempResult : result; 
+
+		announceLevelFinished();
 		return result;
 	}
 

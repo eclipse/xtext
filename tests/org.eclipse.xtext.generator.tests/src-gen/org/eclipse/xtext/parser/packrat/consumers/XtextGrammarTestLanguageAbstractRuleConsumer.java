@@ -30,70 +30,85 @@ public final class XtextGrammarTestLanguageAbstractRuleConsumer extends NonTermi
 		super(configuration, hiddenTokens);
 	}
 	
-	protected int doConsume() throws Exception {
-		return consumeAlternatives$1();
+	protected int doConsume(int entryPoint) throws Exception {
+		return consumeAlternatives$1(entryPoint);
 	}
 
-	protected int consumeAlternatives$1() throws Exception {
+	protected int consumeAlternatives$1(int entryPoint) throws Exception {
+		announceNextLevel();
 		int result = ConsumeResult.SUCCESS;
 		IMarker bestMarker = mark();
 		IMarker currentMarker;
 		int tempResult;
-		currentMarker = bestMarker.fork();
-		tempResult = consumeRuleCall$3(); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			bestMarker = currentMarker.join(bestMarker);
-			bestMarker.commit();
-			return tempResult;
+		switch(entryPoint) {
+			case -1: // use fallthrough semantics of switch case
+				result = ConsumeResult.EMPTY_MATCH;
+			case 0:
+				announceNextPath();
+				currentMarker = bestMarker.fork();
+				tempResult = consumeRuleCall$3(nextEntryPoint()); 
+				if (tempResult == ConsumeResult.SUCCESS) {
+					bestMarker = currentMarker.join(bestMarker);
+					bestMarker.commit();
+					announceLevelFinished();
+					return tempResult;
+				}
+				if (tempResult > result) {
+					bestMarker = currentMarker.join(bestMarker);
+					result = tempResult;
+				} else {
+					bestMarker = bestMarker.join(currentMarker);
+				}
+				currentMarker = null;
+			case 1:
+				announceNextPath();
+				currentMarker = bestMarker.fork();
+				tempResult = consumeRuleCall$4(nextEntryPoint()); 
+				if (tempResult == ConsumeResult.SUCCESS) {
+					bestMarker = currentMarker.join(bestMarker);
+					bestMarker.commit();
+					announceLevelFinished();
+					return tempResult;
+				}
+				if (tempResult > result) {
+					bestMarker = currentMarker.join(bestMarker);
+					result = tempResult;
+				} else {
+					bestMarker = bestMarker.join(currentMarker);
+				}
+				currentMarker = null;
+			case 2:
+				announceNextPath();
+				currentMarker = bestMarker.fork();
+				tempResult = consumeRuleCall$5(nextEntryPoint()); 
+				if (tempResult == ConsumeResult.SUCCESS) {
+					bestMarker = currentMarker.join(bestMarker);
+					bestMarker.commit();
+					announceLevelFinished();
+					return tempResult;
+				}
+				if (tempResult > result) {
+					bestMarker = currentMarker.join(bestMarker);
+					result = tempResult;
+				} else {
+					bestMarker = bestMarker.join(currentMarker);
+				}
+				currentMarker = null;
 		}
-		if (tempResult > result) {
-			bestMarker = currentMarker.join(bestMarker);
-			result = tempResult;
-		} else {
-			bestMarker = bestMarker.join(currentMarker);
-		}
-		currentMarker = null;
-		currentMarker = bestMarker.fork();
-		tempResult = consumeRuleCall$4(); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			bestMarker = currentMarker.join(bestMarker);
-			bestMarker.commit();
-			return tempResult;
-		}
-		if (tempResult > result) {
-			bestMarker = currentMarker.join(bestMarker);
-			result = tempResult;
-		} else {
-			bestMarker = bestMarker.join(currentMarker);
-		}
-		currentMarker = null;
-		currentMarker = bestMarker.fork();
-		tempResult = consumeRuleCall$5(); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			bestMarker = currentMarker.join(bestMarker);
-			bestMarker.commit();
-			return tempResult;
-		}
-		if (tempResult > result) {
-			bestMarker = currentMarker.join(bestMarker);
-			result = tempResult;
-		} else {
-			bestMarker = bestMarker.join(currentMarker);
-		}
-		currentMarker = null;
 		bestMarker.commit();
+		announceLevelFinished();
 		return result;
 	}
 
-	protected int consumeRuleCall$3() throws Exception {
+	protected int consumeRuleCall$3(int entryPoint) throws Exception {
 		return consumeNonTerminal(lexerRuleConsumer, null, false, false, getRule().ele00ParserRuleCallLexerRule());
 	}
 
-	protected int consumeRuleCall$4() throws Exception {
+	protected int consumeRuleCall$4(int entryPoint) throws Exception {
 		return consumeNonTerminal(parserRuleConsumer, null, false, false, getRule().ele01ParserRuleCallParserRule());
 	}
 
-	protected int consumeRuleCall$5() throws Exception {
+	protected int consumeRuleCall$5(int entryPoint) throws Exception {
 		return consumeNonTerminal(terminalRuleConsumer, null, false, false, getRule().ele1ParserRuleCallTerminalRule());
 	}
 

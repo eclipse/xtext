@@ -54,17 +54,6 @@ public abstract class AbstractParserConfiguration implements
 		this.recoveryStateHolder = configuration.getRecoveryStateHolder();
 	}
 	
-	protected AbstractParserConfiguration(ICharSequenceWithOffset input, IMarkerFactory markerFactory, 
-			IParsedTokenAcceptor tokenAcceptor,	IHiddenTokenHandler hiddenTokenHandler,
-			IConsumerUtility consumerUtil, RecoveryStateHolder recoveryStateHandler) {
-		this.input = input;
-		this.markerFactory = markerFactory;
-		this.tokenAcceptor = tokenAcceptor;
-		this.hiddenTokenHandler = hiddenTokenHandler;
-		this.consumerUtil = consumerUtil;
-		this.recoveryStateHolder = recoveryStateHandler;
-	}
-	
 	public ICharSequenceWithOffset getInput() {
 		return input;
 	}

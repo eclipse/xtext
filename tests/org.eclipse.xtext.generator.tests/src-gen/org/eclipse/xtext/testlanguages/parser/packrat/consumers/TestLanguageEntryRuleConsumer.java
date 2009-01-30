@@ -26,26 +26,30 @@ public final class TestLanguageEntryRuleConsumer extends NonTerminalConsumer {
 		super(configuration, hiddenTokens);
 	}
 	
-	protected int doConsume() throws Exception {
-		return consumeAssignment$1();
+	protected int doConsume(int entryPoint) throws Exception {
+		return consumeAssignment$1(entryPoint);
 	}
 
-	protected int consumeAssignment$1() throws Exception {
+	protected int consumeAssignment$1(int entryPoint) throws Exception {
 		IMarker marker = mark();
-		while(doConsumeAssignment$1() == ConsumeResult.SUCCESS) {
+		while(doConsumeAssignment$1(entryPoint) == ConsumeResult.SUCCESS) {
 			marker.flush();
 		}
 		marker.rollback();
 		return ConsumeResult.SUCCESS;
 	}
 
-	protected int doConsumeAssignment$1() throws Exception {
-		int result = Integer.MIN_VALUE;
+	protected int doConsumeAssignment$1(int entryPoint) throws Exception {
+		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
+		announceNextLevel();
 		tempResult = consumeNonTerminal(abstractRuleConsumer, "multiFeature", true, false, getRule().ele0ParserRuleCallAbstractRule());
-		if (tempResult == ConsumeResult.SUCCESS)
+		if (tempResult == ConsumeResult.SUCCESS) {
+			announceLevelFinished();
 			return tempResult;
+		}
 		result = tempResult >= result ? tempResult : result; 
+		announceLevelFinished();
 		return result;
 	}
 

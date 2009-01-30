@@ -12,13 +12,13 @@ package org.eclipse.xtext.parser.packrat.consumers;
  */
 public class RecoveryStateHolder {
 
-	private RecoveryState state;
+	private IRecoveryState state;
 	
-	public void setState(RecoveryState state) {
+	public void setState(IRecoveryState state) {
 		this.state = state;
 	}
 
-	public RecoveryState getState() {
+	public IRecoveryState getState() {
 		return state;
 	}
 	
