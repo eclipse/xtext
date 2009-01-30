@@ -12,6 +12,8 @@ package org.eclipse.xtext.parser.packrat.consumers;
  */
 public interface IRootConsumerListener {
 
-	int beforeNonTerminalEnd(INonTerminalConsumer nonTerminalConsumer);
+	void afterNonTerminalBegin(INonTerminalConsumer nonTerminalConsumer, INonTerminalConsumerConfiguration configuration);
+	void beforeNonTerminalEnd(INonTerminalConsumer nonTerminalConsumer, int result, INonTerminalConsumerConfiguration configuration);
+	void handleException(NonTerminalConsumer nonTerminalConsumer, Exception e, INonTerminalConsumerConfiguration configuration);
 
 }

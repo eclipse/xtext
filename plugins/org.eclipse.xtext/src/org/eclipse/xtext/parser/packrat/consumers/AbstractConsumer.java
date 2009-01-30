@@ -45,5 +45,17 @@ public abstract class AbstractConsumer {
 	public void announceNextStep() {
 		recoveryStateHolder.announceNextStep();
 	}
+	
+	public IParsedTokenAcceptor getTokenAcceptor() {
+		return acceptor;
+	}
+	
+	public ICharSequenceWithOffset getInput() {
+		return input;
+	}
+	
+	public RecoveryStateHolder getRecoveryStateHolder() {
+		return recoveryStateHolder;
+	}
 
 }

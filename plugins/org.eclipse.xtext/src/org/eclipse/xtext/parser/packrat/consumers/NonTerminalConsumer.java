@@ -24,7 +24,7 @@ import org.eclipse.xtext.parser.packrat.tokens.ParsedNonTerminalEnd;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class NonTerminalConsumer extends AbstractConsumer implements INonTerminalConsumer {
+public abstract class NonTerminalConsumer extends AbstractConsumer implements INonTerminalConsumer, INonTerminalConsumerConfiguration {
 	
 	private final IHiddenTokenHandler hiddenTokenHandler;
 	
@@ -61,23 +61,22 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 		return hiddenTokens != null;
 	}
 
-	public int consumeAsRoot(IRootConsumerListener listener) throws Exception {
+	public void consumeAsRoot(IRootConsumerListener listener) {
 		IHiddenTokenState prevState = hiddenTokenHandler.replaceHiddenTokens(hiddenTokens);
 		IMarker marker = mark();
 		acceptor.accept(new ParsedNonTerminal(input.getOffset(), getGrammarElement(), getDefaultTypeName()));
-		int prevOffset = getOffset();
-		int result = doConsume();
-		if (result == ConsumeResult.SUCCESS) {
-			result = listener.beforeNonTerminalEnd(this);
-			if (result != ConsumeResult.SUCCESS)
-				acceptor.accept(new ErrorToken(getOffset(), 0, null, "Expected <EOF>."));
-			acceptor.accept(new ParsedNonTerminalEnd(input.getOffset(), null, false, false));
-		} else {
-			acceptor.accept(new ErrorToken(prevOffset, 0, null, "Expected " + getDefaultTypeName() + ", but could not find."));
+		listener.afterNonTerminalBegin(this, this);
+		int result;
+		try {
+			result = doConsume();
+		} catch(Exception e) {
+			result = ConsumeResult.EXCEPTION;
+			listener.handleException(this, e, this);
 		}
+		listener.beforeNonTerminalEnd(this, result, this);
+		acceptor.accept(new ParsedNonTerminalEnd(input.getOffset(), null, false, false));
 		marker.commit();
 		prevState.restore();
-		return result;
 	}
 	
 	protected final IMarker mark() {
@@ -111,9 +110,20 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 	
 	protected abstract EObject getGrammarElement();
 
+	public IConsumerUtility getConsumerUtil() {
+		return consumerUtil;
+	}
+
+	public IHiddenTokenHandler getHiddenTokenHandler() {
+		return hiddenTokenHandler;
+	}
+
+	public IMarkerFactory getMarkerFactory() {
+		return markerFactory;
+	}
+
 	@Override
 	public String toString() {
 		return "NonTerminalConsumer " + getClass().getSimpleName() + " for type '" + getDefaultTypeName()  + "'";
 	}
-	
 }
