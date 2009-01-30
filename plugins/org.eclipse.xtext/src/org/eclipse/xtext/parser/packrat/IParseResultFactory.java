@@ -11,9 +11,12 @@ import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.ParseResult;
 import org.eclipse.xtext.parser.packrat.tokens.AbstractParsedToken;
 
+import com.google.inject.ImplementedBy;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@ImplementedBy(ParseResultFactory.class)
 public interface IParseResultFactory {
 
 	IParseResult createParseResult(AbstractParsedToken token, CharSequence input);

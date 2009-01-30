@@ -30,8 +30,9 @@ import org.eclipse.xtext.parsetree.SyntaxError;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.IAbstractToken;
-import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.util.StringInputStream;
+
+import com.google.inject.Inject;
 
 /**
  * An EMF resource that reads and writes models of an Xtext DSL.

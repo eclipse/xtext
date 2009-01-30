@@ -18,7 +18,6 @@ import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.WrappedException;
-import org.eclipse.xtext.service.Inject;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -27,7 +26,7 @@ public class AntlrTokenDefProvider {
 	
 	private static final Logger log = Logger.getLogger(AntlrTokenDefProvider.class);
 	
-	@Inject 
+	@com.google.inject.Inject
 	protected IAntlrTokenFileProvider antlrTokenFileProvider;
 	
 	protected Map<Integer, String> tokenDefMap;

@@ -19,7 +19,6 @@ import org.eclipse.xtext.crossref.IScope;
 import org.eclipse.xtext.crossref.IScopeProvider;
 import org.eclipse.xtext.crossref.IScopedElement;
 import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.service.Inject;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
@@ -29,7 +28,7 @@ import org.eclipse.xtext.service.Inject;
  */
 public class DefaultLinkingService implements ILinkingService {
 
-	@Inject
+	@com.google.inject.Inject
 	private IScopeProvider scopeProvider;
 
 	protected IScope getScope(EObject context, EReference reference) {

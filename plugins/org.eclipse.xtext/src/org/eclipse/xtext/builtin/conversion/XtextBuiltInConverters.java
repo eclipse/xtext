@@ -16,14 +16,13 @@ import org.eclipse.xtext.conversion.impl.AbstractAnnotationBasedValueConverterSe
 import org.eclipse.xtext.conversion.impl.AbstractNullSafeConverter;
 import org.eclipse.xtext.conversion.impl.AbstractToStringConverter;
 import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.util.Strings;
 
 public class XtextBuiltInConverters extends AbstractAnnotationBasedValueConverterService {
 
 	private Grammar g;
 	
-	@Inject
+	@com.google.inject.Inject
 	public void setGrammar(IGrammarAccess ga) {
 		this.g = ga.getGrammar();
 	}

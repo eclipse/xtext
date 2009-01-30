@@ -17,10 +17,10 @@ extension org::eclipse::xtext::GrammarUtil;
 context GeneratedMetamodel ERROR "Only one generated metamodel can have default alias" :
 	alias != null
 	|| alias != ""
-	|| grammar().metamodelDeclarations.typeSelect(GeneratedMetamodel).select(gmm|gmm.alias == null || gmm.alias =="").size == 1;
+	|| containingGrammar().metamodelDeclarations.typeSelect(GeneratedMetamodel).select(gmm|gmm.alias == null || gmm.alias =="").size == 1;
 
 context GeneratedMetamodel ERROR "Duplicate aliases are only allowed for referenced metamodels" :
-	grammar().metamodelDeclarations.typeSelect(GeneratedMetamodel).select(gmm|gmm.alias == alias).size == 1;
+	containingGrammar().metamodelDeclarations.typeSelect(GeneratedMetamodel).select(gmm|gmm.alias == alias).size == 1;
 
 context AbstractRule ERROR "Name must be unique" :
-	grammar().rules.select(p | p.name == name).size==1;
+	containingGrammar().rules.select(p | p.name == name).size==1;

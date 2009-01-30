@@ -23,14 +23,13 @@ import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.crossref.ILinker;
 import org.eclipse.xtext.crossref.ILinkingService;
-import org.eclipse.xtext.diagnostics.IDiagnosticProducer;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
+import org.eclipse.xtext.diagnostics.IDiagnosticProducer;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
-import org.eclipse.xtext.service.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -40,7 +39,7 @@ public class Linker implements ILinker {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(Linker.class);
 	
-	@Inject
+	@com.google.inject.Inject
 	private ILinkingService linkingService;
 
 	public void ensureLinked(EObject obj, IDiagnosticProducer producer) {

@@ -10,7 +10,7 @@
 import ecore;
 import xtext;
 
-isAbstract(Grammar this) :
+Boolean isAbstract(Grammar this) :
 	JAVA org.eclipse.xtext.GrammarUtil.isAbstract(org.eclipse.xtext.Grammar);
 
 String getFragment(emf::EObject object) :
@@ -31,7 +31,7 @@ String getClasspathRelativePathToXmi(Grammar g) :
 // ***********************************************************************************
 // Containers
 
-Grammar grammar(emf::EObject e) :
+Grammar containingGrammar(emf::EObject e) :
 	JAVA org.eclipse.xtext.GrammarUtil.getGrammar(org.eclipse.emf.ecore.EObject); 
 
 ParserRule containingParserRule(emf::EObject e) :
@@ -68,9 +68,6 @@ List[AbstractElement] containedAbstractElements(emf::EObject o) :
 // ***********************************************************************************
 // Shortcuts
 	
-Assignment containingAssignment(emf::EObject this) :
-	JAVA org.eclipse.xtext.GrammarUtil.containingAssignment(org.eclipse.emf.ecore.EObject);
-
 Boolean isAssigned(emf::EObject this) : 
 	JAVA org.eclipse.xtext.GrammarUtil.isAssigned(org.eclipse.emf.ecore.EObject);
 	

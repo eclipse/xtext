@@ -24,7 +24,8 @@ import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.IAbstractToken;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.IAssignmentToken;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.IKeywordToken;
-import org.eclipse.xtext.service.Inject;
+
+import com.google.inject.Inject;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API

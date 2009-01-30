@@ -30,12 +30,13 @@ import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverterException;
-import org.eclipse.xtext.crossref.impl.SimpleAttributeResolver;
 import org.eclipse.xtext.crossref.impl.DefaultLinkingService;
+import org.eclipse.xtext.crossref.impl.SimpleAttributeResolver;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.service.Inject;
+
+import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

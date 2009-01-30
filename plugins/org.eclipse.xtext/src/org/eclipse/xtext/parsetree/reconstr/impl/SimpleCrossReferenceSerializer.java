@@ -14,7 +14,8 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.crossref.ILinkingService;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.XtextSerializationException;
-import org.eclipse.xtext.service.Inject;
+
+import com.google.inject.Inject;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
