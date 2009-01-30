@@ -10,31 +10,20 @@ package org.eclipse.xtext.parser.packrat.consumers;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class RecoveryStateHolder {
+public interface IRecoveryState {
 
-	private IRecoveryState state;
-	
-	public void setState(IRecoveryState state) {
-		this.state = state;
-	}
+	void announceNextPath();
 
-	public IRecoveryState getState() {
-		return state;
-	}
-	
-	public void announceNextPath() {
-		state.announceNextPath();
-	}
-	
-	public void announceNextStep() {
-		state.announceNextStep();
-	}
-	
-	public void announceNextLevel() {
-		state.announceNextLevel();
-	}
-	
-	public void announceLevelFinished() {
-		state.announceLevelFinished();
-	}
+	void announceNextStep();
+
+	void announceNextLevel();
+
+	void announceLevelFinished();
+
+	void replay(INonTerminalConsumer consumer);
+
+	IRecoveryState copy();
+
+	void assertLevelIsReset();
+
 }

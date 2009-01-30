@@ -46,6 +46,10 @@ public abstract class AbstractConsumer {
 		recoveryStateHolder.announceNextStep();
 	}
 	
+	public int nextEntryPoint() {
+		return -1;
+	}
+	
 	public IParsedTokenAcceptor getTokenAcceptor() {
 		return acceptor;
 	}
