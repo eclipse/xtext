@@ -11,8 +11,7 @@ import org.eclipse.xtext.ui.common.service.DefaultUIModule;
 public abstract class AbstractDomainmodelUiModule extends DefaultUIModule {
 	
 	
-	@Override
-	protected Class<? extends org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider> getIProposalProvider() {
+	public Class<? extends org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider> bindIProposalProvider() {
 		return org.eclipse.xtext.example.GenDomainmodelProposalProvider.class;
 	}
 	

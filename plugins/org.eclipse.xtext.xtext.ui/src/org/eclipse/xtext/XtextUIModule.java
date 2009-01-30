@@ -16,7 +16,7 @@ public class XtextUIModule extends AbstractXtextUiModule {
 	 * @see org.eclipse.xtext.ui.common.service.DefaultUIModule#getISemanticModelTransformer()
 	 */
 	@Override
-	protected Class<? extends ISemanticModelTransformer> getISemanticModelTransformer() {
+	public Class<? extends ISemanticModelTransformer> bindISemanticModelTransformer() {
 		return XtextSemanticModelTransformer.class;
 	}
 

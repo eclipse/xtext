@@ -5,7 +5,7 @@
 	<extension
          point="org.eclipse.ui.editors">
       <editor
-            class="org.eclipse.xtext.example.editor.DomainModelEditor"
+            class="org.eclipse.xtext.example.ui.editor.DomainmodelEditor"
             contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
             default="true"
             extensions="dmodel"

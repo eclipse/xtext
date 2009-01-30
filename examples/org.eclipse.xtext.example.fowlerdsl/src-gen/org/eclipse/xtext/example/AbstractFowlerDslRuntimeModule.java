@@ -19,64 +19,49 @@ public abstract class AbstractFowlerDslRuntimeModule extends DefaultRuntimeModul
 		binder.bind(IServiceScope.class).toInstance(org.eclipse.xtext.example.IFowlerDsl.SCOPE);
 	}
 	
-	@Override
-	protected Class<? extends org.eclipse.xtext.IMetamodelAccess> getIMetamodelAccess() {
+	public Class<? extends org.eclipse.xtext.IMetamodelAccess> bindIMetamodelAccess() {
 		return org.eclipse.xtext.example.services.FowlerDslMetamodelAccess.class;
 	}
-	@Override
-	protected Class<? extends org.eclipse.xtext.IGrammarAccess> getIGrammarAccess() {
+	public Class<? extends org.eclipse.xtext.IGrammarAccess> bindIGrammarAccess() {
 		return org.eclipse.xtext.example.services.FowlerDslGrammarAccess.class;
 	}
-	@Override
-	protected Class<? extends org.eclipse.xtext.parser.IAstFactory> getIAstFactory() {
+	public Class<? extends org.eclipse.xtext.parser.IAstFactory> bindIAstFactory() {
 		return org.eclipse.xtext.parser.DefaultEcoreElementFactory.class;
 	}
-	@Override
-	protected Class<? extends org.eclipse.xtext.resource.IResourceFactory> getIResourceFactory() {
+	public Class<? extends org.eclipse.xtext.resource.IResourceFactory> bindIResourceFactory() {
 		return org.eclipse.xtext.example.services.FowlerDslResourceFactory.class;
 	}
-	@Override
-	protected Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> getIParseTreeConstructor() {
+	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
 		return org.eclipse.xtext.example.parsetree.reconstr.FowlerDslParseTreeConstructor.class;
 	}
-	@Override
-	protected Class<? extends org.eclipse.xtext.parsetree.reconstr.ITokenSerializer> getITokenSerializer() {
+	public Class<? extends org.eclipse.xtext.parsetree.reconstr.ITokenSerializer> bindITokenSerializer() {
 		return org.eclipse.xtext.parsetree.reconstr.impl.WhitespacePreservingTokenSerializer.class;
 	}
-	@Override
-	protected Class<? extends org.eclipse.xtext.parsetree.reconstr.ICrossReferenceSerializer> getICrossReferenceSerializer() {
+	public Class<? extends org.eclipse.xtext.parsetree.reconstr.ICrossReferenceSerializer> bindICrossReferenceSerializer() {
 		return org.eclipse.xtext.parsetree.reconstr.impl.SimpleCrossReferenceSerializer.class;
 	}
-	@Override
-	protected Class<? extends org.eclipse.xtext.parsetree.reconstr.ITransientValueService> getITransientValueService() {
+	public Class<? extends org.eclipse.xtext.parsetree.reconstr.ITransientValueService> bindITransientValueService() {
 		return org.eclipse.xtext.parsetree.reconstr.impl.SimpleTransientValueService.class;
 	}
-	@Override
-	protected Class<? extends org.eclipse.xtext.parser.antlr.IAntlrParser> getIAntlrParser() {
+	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrParser> bindIAntlrParser() {
 		return org.eclipse.xtext.example.parser.antlr.FowlerDslParser.class;
 	}
-	@Override
-	protected Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> getITokenToStringConverter() {
+	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
 	}
-	@Override
-	protected Class<? extends org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider> getIAntlrTokenFileProvider() {
+	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider> bindIAntlrTokenFileProvider() {
 		return org.eclipse.xtext.example.parser.antlr.FowlerDslAntlrTokenFileProvider.class;
 	}
-	@Override
-	protected Class<? extends org.eclipse.xtext.parser.antlr.Lexer> getLexer() {
+	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
 		return org.eclipse.xtext.example.parser.antlr.internal.InternalFowlerDslLexer.class;
 	}
-	@Override
-	protected Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> getIPackratParser() {
+	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
 		return org.eclipse.xtext.example.parser.packrat.FowlerDslPackratParser.class;
 	}
-	@Override
-	protected Class<? extends org.eclipse.xtext.parser.packrat.IParseResultFactory> getIParseResultFactory() {
+	public Class<? extends org.eclipse.xtext.parser.packrat.IParseResultFactory> bindIParseResultFactory() {
 		return org.eclipse.xtext.parser.packrat.ParseResultFactory.class;
 	}
-	@Override
-	protected Class<? extends org.eclipse.xtext.parser.ISwitchingParser> getISwitchingParser() {
+	public Class<? extends org.eclipse.xtext.parser.ISwitchingParser> bindISwitchingParser() {
 		return org.eclipse.xtext.parser.SwitchingParser.class;
 	}
 	

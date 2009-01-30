@@ -40,8 +40,7 @@ public abstract class «generatedRuntimeModuleClass().toSimpleName()» extends Def
 	}
 	
 	«FOREACH services.select(e|!e.uiService) AS s-»
-	@Override
-	protected Class<? extends «s.serviceInterfaceFQName»> get«s.serviceInterfaceFQName.toSimpleName()»() {
+	public Class<? extends «s.serviceInterfaceFQName»> bind«s.serviceInterfaceFQName.toSimpleName()»() {
 		return «s.genClassFQName».class;
 	}
 	«ENDFOREACH»

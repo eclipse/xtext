@@ -19,64 +19,49 @@ public abstract class AbstractMultiValueFeatureTestLanguageRuntimeModule extends
 		binder.bind(IServiceScope.class).toInstance(org.eclipse.xtext.resource.metamodel.IMultiValueFeatureTestLanguage.SCOPE);
 	}
 	
-	@Override
-	protected Class<? extends org.eclipse.xtext.IMetamodelAccess> getIMetamodelAccess() {
+	public Class<? extends org.eclipse.xtext.IMetamodelAccess> bindIMetamodelAccess() {
 		return org.eclipse.xtext.resource.metamodel.services.MultiValueFeatureTestLanguageMetamodelAccess.class;
 	}
-	@Override
-	protected Class<? extends org.eclipse.xtext.IGrammarAccess> getIGrammarAccess() {
+	public Class<? extends org.eclipse.xtext.IGrammarAccess> bindIGrammarAccess() {
 		return org.eclipse.xtext.resource.metamodel.services.MultiValueFeatureTestLanguageGrammarAccess.class;
 	}
-	@Override
-	protected Class<? extends org.eclipse.xtext.parser.IAstFactory> getIAstFactory() {
+	public Class<? extends org.eclipse.xtext.parser.IAstFactory> bindIAstFactory() {
 		return org.eclipse.xtext.parser.DefaultEcoreElementFactory.class;
 	}
-	@Override
-	protected Class<? extends org.eclipse.xtext.resource.IResourceFactory> getIResourceFactory() {
+	public Class<? extends org.eclipse.xtext.resource.IResourceFactory> bindIResourceFactory() {
 		return org.eclipse.xtext.resource.metamodel.services.MultiValueFeatureTestLanguageResourceFactory.class;
 	}
-	@Override
-	protected Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> getIParseTreeConstructor() {
+	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
 		return org.eclipse.xtext.resource.metamodel.parsetree.reconstr.MultiValueFeatureTestLanguageParseTreeConstructor.class;
 	}
-	@Override
-	protected Class<? extends org.eclipse.xtext.parsetree.reconstr.ITokenSerializer> getITokenSerializer() {
+	public Class<? extends org.eclipse.xtext.parsetree.reconstr.ITokenSerializer> bindITokenSerializer() {
 		return org.eclipse.xtext.parsetree.reconstr.impl.WhitespacePreservingTokenSerializer.class;
 	}
-	@Override
-	protected Class<? extends org.eclipse.xtext.parsetree.reconstr.ICrossReferenceSerializer> getICrossReferenceSerializer() {
+	public Class<? extends org.eclipse.xtext.parsetree.reconstr.ICrossReferenceSerializer> bindICrossReferenceSerializer() {
 		return org.eclipse.xtext.parsetree.reconstr.impl.SimpleCrossReferenceSerializer.class;
 	}
-	@Override
-	protected Class<? extends org.eclipse.xtext.parsetree.reconstr.ITransientValueService> getITransientValueService() {
+	public Class<? extends org.eclipse.xtext.parsetree.reconstr.ITransientValueService> bindITransientValueService() {
 		return org.eclipse.xtext.parsetree.reconstr.impl.SimpleTransientValueService.class;
 	}
-	@Override
-	protected Class<? extends org.eclipse.xtext.parser.antlr.IAntlrParser> getIAntlrParser() {
+	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrParser> bindIAntlrParser() {
 		return org.eclipse.xtext.resource.metamodel.parser.antlr.MultiValueFeatureTestLanguageParser.class;
 	}
-	@Override
-	protected Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> getITokenToStringConverter() {
+	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
 	}
-	@Override
-	protected Class<? extends org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider> getIAntlrTokenFileProvider() {
+	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider> bindIAntlrTokenFileProvider() {
 		return org.eclipse.xtext.resource.metamodel.parser.antlr.MultiValueFeatureTestLanguageAntlrTokenFileProvider.class;
 	}
-	@Override
-	protected Class<? extends org.eclipse.xtext.parser.antlr.Lexer> getLexer() {
+	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
 		return org.eclipse.xtext.resource.metamodel.parser.antlr.internal.InternalMultiValueFeatureTestLanguageLexer.class;
 	}
-	@Override
-	protected Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> getIPackratParser() {
+	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
 		return org.eclipse.xtext.resource.metamodel.parser.packrat.MultiValueFeatureTestLanguagePackratParser.class;
 	}
-	@Override
-	protected Class<? extends org.eclipse.xtext.parser.packrat.IParseResultFactory> getIParseResultFactory() {
+	public Class<? extends org.eclipse.xtext.parser.packrat.IParseResultFactory> bindIParseResultFactory() {
 		return org.eclipse.xtext.parser.packrat.ParseResultFactory.class;
 	}
-	@Override
-	protected Class<? extends org.eclipse.xtext.parser.ISwitchingParser> getISwitchingParser() {
+	public Class<? extends org.eclipse.xtext.parser.ISwitchingParser> bindISwitchingParser() {
 		return org.eclipse.xtext.parser.SwitchingParser.class;
 	}
 	

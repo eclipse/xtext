@@ -31,8 +31,7 @@ public abstract class «generatedUiModuleClass().toSimpleName()» extends DefaultU
 	
 	
 	«FOREACH genModel().services.select(e|e.uiService) AS s-»
-	@Override
-	protected Class<? extends «s.serviceInterfaceFQName»> get«s.serviceInterfaceFQName.toSimpleName()»() {
+	public Class<? extends «s.serviceInterfaceFQName»> bind«s.serviceInterfaceFQName.toSimpleName()»() {
 		return «s.genClassFQName».class;
 	}
 	

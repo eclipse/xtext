@@ -4,13 +4,24 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
+ *
  *******************************************************************************/
 package org.eclipse.xtext.service;
 
-import com.google.inject.Module;
+import java.lang.reflect.Type;
 
-/**
- * @author Heiko Behrens - Initial contribution and API
- */
-public abstract class AbstractRuntimeModule implements Module {
+import junit.framework.TestCase;
+
+class TestModule extends AbstractXtextModule {
+	public Class<? extends CharSequence> bindString() {
+		return String.class;
+	}
+
+	public Class<? extends Type> bindType() {
+		return Class.class;
+	}
+
+	public Class<? extends TestCase> bindTestCase() {
+		return AbstractRuntimeModuleTest.class;
+	}
 }
