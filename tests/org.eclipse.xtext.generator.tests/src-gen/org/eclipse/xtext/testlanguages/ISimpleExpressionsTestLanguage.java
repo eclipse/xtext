@@ -5,8 +5,9 @@ package org.eclipse.xtext.testlanguages;
 
 import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.ServiceScopeFactory;
+import org.eclipse.xtext.ILanguage;
 
-public interface ISimpleExpressionsTestLanguage {
+public interface ISimpleExpressionsTestLanguage extends ILanguage {
 
 	/**
 	 * the unique identifier of this language. 
@@ -18,6 +19,6 @@ public interface ISimpleExpressionsTestLanguage {
 	public static final String NAME = "SimpleExpressionsTestLanguage";
 	public static final String NAMESPACE = "org.eclipse.xtext.testlanguages";
 	public static final String[] FILE_EXTENSIONS = new String[]{"simpleexpressionstestlanguage"};
-	public static final IServiceScope SCOPE = ServiceScopeFactory.createScope(ID, org.eclipse.xtext.builtin.IXtextBuiltin.SCOPE);
+	public static final IServiceScope SCOPE = ServiceScopeFactory.createScope(ID);
 	
 }

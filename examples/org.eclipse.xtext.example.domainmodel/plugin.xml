@@ -13,11 +13,6 @@
       </metaModel>
       
    </extension>
-    <extension
-       point="org.eclipse.xtext.service.ui.serviceRegistrationFactory">
-	    <serviceRegistrationFactory
-	          class="org.eclipse.xtext.example.DomainmodelRuntimeConfig"/>
-   </extension>
    <extension
          point="org.eclipse.emf.ecore.extension_parser">
       <parser

@@ -5,8 +5,9 @@ package org.eclipse.xtext.metamodelreferencing.tests;
 
 import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.ServiceScopeFactory;
+import org.eclipse.xtext.ILanguage;
 
-public interface IMetamodelRefTestLanguage {
+public interface IMetamodelRefTestLanguage extends ILanguage {
 
 	/**
 	 * the unique identifier of this language. 
@@ -18,6 +19,6 @@ public interface IMetamodelRefTestLanguage {
 	public static final String NAME = "MetamodelRefTestLanguage";
 	public static final String NAMESPACE = "org.eclipse.xtext.metamodelreferencing.tests";
 	public static final String[] FILE_EXTENSIONS = new String[]{"metamodelreftestlanguage"};
-	public static final IServiceScope SCOPE = ServiceScopeFactory.createScope(ID, org.eclipse.xtext.builtin.IXtextBuiltin.SCOPE);
+	public static final IServiceScope SCOPE = ServiceScopeFactory.createScope(ID);
 	
 }

@@ -81,7 +81,7 @@ public class OpenDeclarationAction extends Action {
 
 		if (currentNode != null && currentNode.getGrammarElement() instanceof CrossReference) {
 
-			ILinkingService linkingService = ServiceRegistry.getService(this.xtextEditor.getScope(),
+			ILinkingService linkingService = ServiceRegistry.getInjector(this.xtextEditor.getScope()).getInstance(
 					ILinkingService.class);
 
 			EObject semanticModel = NodeUtil.getNearestSemanticObject(currentNode);

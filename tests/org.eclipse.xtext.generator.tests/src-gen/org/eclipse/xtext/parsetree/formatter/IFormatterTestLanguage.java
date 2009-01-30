@@ -5,8 +5,9 @@ package org.eclipse.xtext.parsetree.formatter;
 
 import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.ServiceScopeFactory;
+import org.eclipse.xtext.ILanguage;
 
-public interface IFormatterTestLanguage {
+public interface IFormatterTestLanguage extends ILanguage {
 
 	/**
 	 * the unique identifier of this language. 
@@ -18,6 +19,6 @@ public interface IFormatterTestLanguage {
 	public static final String NAME = "FormatterTestLanguage";
 	public static final String NAMESPACE = "org.eclipse.xtext.parsetree.formatter";
 	public static final String[] FILE_EXTENSIONS = new String[]{"formattertestlanguage"};
-	public static final IServiceScope SCOPE = ServiceScopeFactory.createScope(ID, org.eclipse.xtext.builtin.IXtextBuiltin.SCOPE);
+	public static final IServiceScope SCOPE = ServiceScopeFactory.createScope(ID);
 	
 }

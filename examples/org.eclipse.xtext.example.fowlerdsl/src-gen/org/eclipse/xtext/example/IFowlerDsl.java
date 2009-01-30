@@ -5,8 +5,9 @@ package org.eclipse.xtext.example;
 
 import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.ServiceScopeFactory;
+import org.eclipse.xtext.ILanguage;
 
-public interface IFowlerDsl {
+public interface IFowlerDsl extends ILanguage {
 
 	/**
 	 * the unique identifier of this language. 
@@ -18,6 +19,6 @@ public interface IFowlerDsl {
 	public static final String NAME = "FowlerDsl";
 	public static final String NAMESPACE = "org.eclipse.xtext.example";
 	public static final String[] FILE_EXTENSIONS = new String[]{"fowlerdsl"};
-	public static final IServiceScope SCOPE = ServiceScopeFactory.createScope(ID, org.eclipse.xtext.builtin.IXtextBuiltin.SCOPE);
+	public static final IServiceScope SCOPE = ServiceScopeFactory.createScope(ID);
 	
 }

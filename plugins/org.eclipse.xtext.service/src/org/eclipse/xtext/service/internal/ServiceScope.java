@@ -12,41 +12,30 @@ import org.eclipse.xtext.service.IServiceScope;
 
 /**
  * @author Peter Friese - Initial contribution and API
- * @author svenefftinge
+ * @author Sven Efftinge
  */
 public class ServiceScope implements IServiceScope {
 	private String id;
-	private IServiceScope parentScope;
 
-    public ServiceScope(String id, IServiceScope parentScope) {
-        super();
-        this.id = id;
-        this.parentScope = parentScope;
-    }
-
-    /* (non-Javadoc)
-     * @see org.eclipse.xtext.service.IServiceScope#getId()
-     */
-	public String getId() {
-		return id;
+	public ServiceScope(String id) {
+		super();
+		this.id = id;
 	}
 
-
-	/* (non-Javadoc)
-	 * @see org.eclipse.xtext.service.IServiceScope#getParentScope()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.xtext.service.IServiceScope#getId()
 	 */
-	public IServiceScope getParentScope() {
-		return parentScope;
+	public String getId() {
+		return id;
 	}
 
 	@Override
 	public String toString() {
 		StringBuffer buff = new StringBuffer("Scope ");
 		buff.append(id);
-		if (parentScope!=null) {
-			buff.append (" extends ");
-			buff.append (parentScope.toString());
-		}
-	    return buff.toString(); 
+		return buff.toString();
 	}
+
 }

@@ -5,8 +5,9 @@ package org.eclipse.xtext;
 
 import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.ServiceScopeFactory;
+import org.eclipse.xtext.ILanguage;
 
-public interface IXtextGrammarTestLanguage {
+public interface IXtextGrammarTestLanguage extends ILanguage {
 
 	/**
 	 * the unique identifier of this language. 
@@ -18,6 +19,6 @@ public interface IXtextGrammarTestLanguage {
 	public static final String NAME = "XtextGrammarTestLanguage";
 	public static final String NAMESPACE = "org.eclipse.xtext";
 	public static final String[] FILE_EXTENSIONS = new String[]{"xtextgrammartestlanguage"};
-	public static final IServiceScope SCOPE = ServiceScopeFactory.createScope(ID, org.eclipse.xtext.builtin.IXtextBuiltin.SCOPE);
+	public static final IServiceScope SCOPE = ServiceScopeFactory.createScope(ID);
 	
 }

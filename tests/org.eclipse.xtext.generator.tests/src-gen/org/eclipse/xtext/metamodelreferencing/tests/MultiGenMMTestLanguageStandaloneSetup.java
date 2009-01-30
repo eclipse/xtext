@@ -9,7 +9,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.ServiceRegistry;
-import org.eclipse.xtext.service.IServiceRegistrationFactory.IServiceRegistration;
+
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 
 import org.eclipse.xtext.metamodelreferencing.tests.IMultiGenMMTestLanguage;
 
@@ -19,12 +21,14 @@ public abstract class MultiGenMMTestLanguageStandaloneSetup {
 
 	public synchronized static void doSetup() {
 		if(!isInitialized) {
-			// setup super language first
+		    
+		    Injector injector = Guice.createInjector(new org.eclipse.xtext.metamodelreferencing.tests.MultiGenMMTestLanguageRuntimeModule());
+			ServiceRegistry.registerInjector(org.eclipse.xtext.metamodelreferencing.tests.IMultiGenMMTestLanguage.SCOPE, injector);
+			
+			
+			
 			org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
 			
-			for (IServiceRegistration reg :  new org.eclipse.xtext.metamodelreferencing.tests.MultiGenMMTestLanguageRuntimeConfig().registrations()) {
-				ServiceRegistry.registerFactory(reg.scope(), reg.serviceFactory(), reg.priority());
-			}
 			
 			// register resource factory to EMF
 			IResourceFactory resourceFactory = new org.eclipse.xtext.metamodelreferencing.tests.services.MultiGenMMTestLanguageResourceFactory();
@@ -58,6 +62,8 @@ public abstract class MultiGenMMTestLanguageStandaloneSetup {
 	}
 	
 	public static IServiceScope getServiceScope() {
-		return org.eclipse.xtext.metamodelreferencing.tests.IMultiGenMMTestLanguage.SCOPE;
+	   doSetup();
+	   return org.eclipse.xtext.metamodelreferencing.tests.IMultiGenMMTestLanguage.SCOPE;
 	}
+	
 }

@@ -5,7 +5,7 @@
 	<extension
          point="org.eclipse.ui.editors">
       <editor
-            class="org.eclipse.xtext.ui.core.editor.XtextEditor"
+            class="org.eclipse.xtext.reference.ui.editor.ReferenceGrammarEditor"
             contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
             default="true"
             extensions="xtest,tst"
@@ -14,14 +14,9 @@
       </editor>
    </extension>
  <extension
-       point="org.eclipse.xtext.service.ui.serviceRegistrationFactory">
-    <serviceRegistrationFactory
-          class="org.eclipse.xtext.reference.ReferenceGrammarUiConfig"/>
- </extension>
- <extension
          point="org.eclipse.ui.preferencePages">
 		<page
-			class="org.eclipse.xtext.service.ui.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage/org.eclipse.xtext.reference.ReferenceGrammar"
+			class="org.eclipse.xtext.ui.core.util.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage/org.eclipse.xtext.reference.ReferenceGrammar"
 			id="org.eclipse.xtext.reference.ReferenceGrammar"
 			name="ReferenceGrammar">
 			<keywordReference
@@ -30,7 +25,7 @@
 		</page>
 		<page
 		    category="org.eclipse.xtext.reference.ReferenceGrammar"
-		    class="org.eclipse.xtext.service.ui.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.EditorPreferencePage/org.eclipse.xtext.reference.ReferenceGrammar"
+		    class="org.eclipse.xtext.ui.core.util.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.EditorPreferencePage/org.eclipse.xtext.reference.ReferenceGrammar"
 		    id="org.eclipse.xtext.reference.ReferenceGrammar.editor"
 		    name="Editor">
 		    	<keywordReference 
@@ -49,4 +44,19 @@
             label="Task Tags">
         </keyword>
 	</extension>
+	
+   <extension
+     point="org.eclipse.emf.ecore.extension_parser">
+      <parser
+            class="org.eclipse.xtext.reference.services.ReferenceGrammarResourceFactory"
+            type="xtest">
+      </parser>
+   </extension>
+   <extension
+         point="org.eclipse.emf.ecore.extension_parser">
+      <parser
+            class="org.eclipse.xtext.reference.services.ReferenceGrammarResourceFactory"
+            type="tst">
+      </parser>
+   </extension>
 </plugin>

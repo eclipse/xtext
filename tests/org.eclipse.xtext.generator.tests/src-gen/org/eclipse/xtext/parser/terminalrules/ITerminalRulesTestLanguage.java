@@ -5,8 +5,9 @@ package org.eclipse.xtext.parser.terminalrules;
 
 import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.ServiceScopeFactory;
+import org.eclipse.xtext.ILanguage;
 
-public interface ITerminalRulesTestLanguage {
+public interface ITerminalRulesTestLanguage extends ILanguage {
 
 	/**
 	 * the unique identifier of this language. 
@@ -18,6 +19,6 @@ public interface ITerminalRulesTestLanguage {
 	public static final String NAME = "TerminalRulesTestLanguage";
 	public static final String NAMESPACE = "org.eclipse.xtext.parser.terminalrules";
 	public static final String[] FILE_EXTENSIONS = new String[]{"terminalrulestestlanguage"};
-	public static final IServiceScope SCOPE = ServiceScopeFactory.createScope(ID, null);
+	public static final IServiceScope SCOPE = ServiceScopeFactory.createScope(ID);
 	
 }

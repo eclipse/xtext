@@ -14,16 +14,15 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.Token;
 import org.eclipse.xtext.parser.antlr.Lexer;
-import org.eclipse.xtext.service.Inject;
-import org.eclipse.xtext.service.StatefulService;
 import org.eclipse.xtext.ui.common.editor.syntaxcoloring.AbstractTokenScanner;
+
+import com.google.inject.Inject;
 
 /**
  * Default implementation for the ITokenScanner. Uses an AntLR based
  * {@link Lexer} and am {@link ITokenColorer} to perform syntax coloring.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@StatefulService
 public class AntlrTokenScanner extends AbstractTokenScanner {
 
 	@Inject

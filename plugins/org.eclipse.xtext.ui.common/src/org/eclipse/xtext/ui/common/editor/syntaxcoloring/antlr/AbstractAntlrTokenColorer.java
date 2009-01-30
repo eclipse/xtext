@@ -12,8 +12,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
-import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.ui.common.editor.syntaxcoloring.ITokenStyle;
+
+import com.google.inject.Inject;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API

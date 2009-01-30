@@ -5,8 +5,9 @@ package org.eclipse.xtext.grammarinheritance;
 
 import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.ServiceScopeFactory;
+import org.eclipse.xtext.ILanguage;
 
-public interface IAbstractTestLanguage {
+public interface IAbstractTestLanguage extends ILanguage {
 
 	/**
 	 * the unique identifier of this language. 
@@ -18,6 +19,6 @@ public interface IAbstractTestLanguage {
 	public static final String NAME = "AbstractTestLanguage";
 	public static final String NAMESPACE = "org.eclipse.xtext.grammarinheritance";
 	public static final String[] FILE_EXTENSIONS = new String[]{"abstracttestlanguage"};
-	public static final IServiceScope SCOPE = ServiceScopeFactory.createScope(ID, org.eclipse.xtext.builtin.IXtextBuiltin.SCOPE);
+	public static final IServiceScope SCOPE = ServiceScopeFactory.createScope(ID);
 	
 }

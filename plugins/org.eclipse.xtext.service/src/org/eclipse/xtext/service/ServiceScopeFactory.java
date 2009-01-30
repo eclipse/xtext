@@ -28,13 +28,13 @@ public class ServiceScopeFactory {
 		return languageDescriptor;
 	}
 
-	public static IServiceScope createScope(String scopeId, IServiceScope parentScope) {
+	public static IServiceScope createScope(String scopeId) {
 		synchronized (id2descriptorMap) {
 			IServiceScope existingScope = id2descriptorMap.get(scopeId);
 			if (existingScope != null) {
 				throw new IllegalArgumentException("Service scope " + scopeId + " already registered.");
 			}
-			ServiceScope scope = new ServiceScope(scopeId, parentScope);
+			ServiceScope scope = new ServiceScope(scopeId);
 			id2descriptorMap.put(scopeId, scope);
 			return scope;
 		}

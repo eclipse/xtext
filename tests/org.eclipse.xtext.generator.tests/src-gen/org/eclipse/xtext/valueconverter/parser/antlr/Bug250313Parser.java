@@ -8,7 +8,8 @@ import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
-import org.eclipse.xtext.service.Inject;
+
+import com.google.inject.Inject;
 
 import org.eclipse.xtext.valueconverter.parser.antlr.internal.InternalBug250313Lexer;
 import org.eclipse.xtext.valueconverter.parser.antlr.internal.InternalBug250313Parser;

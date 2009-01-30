@@ -5,8 +5,9 @@ package org.eclipse.xtext.testlanguages;
 
 import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.ServiceScopeFactory;
+import org.eclipse.xtext.ILanguage;
 
-public interface IOptionalEmptyTestLanguage {
+public interface IOptionalEmptyTestLanguage extends ILanguage {
 
 	/**
 	 * the unique identifier of this language. 
@@ -18,6 +19,6 @@ public interface IOptionalEmptyTestLanguage {
 	public static final String NAME = "OptionalEmptyTestLanguage";
 	public static final String NAMESPACE = "org.eclipse.xtext.testlanguages";
 	public static final String[] FILE_EXTENSIONS = new String[]{"optionalemptytestlanguage"};
-	public static final IServiceScope SCOPE = ServiceScopeFactory.createScope(ID, org.eclipse.xtext.builtin.IXtextBuiltin.SCOPE);
+	public static final IServiceScope SCOPE = ServiceScopeFactory.createScope(ID);
 	
 }

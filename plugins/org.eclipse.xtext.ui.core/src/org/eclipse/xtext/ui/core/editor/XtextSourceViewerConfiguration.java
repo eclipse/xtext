@@ -18,9 +18,10 @@ import org.eclipse.jface.text.rules.DefaultDamagerRepairer;
 import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.ui.editors.text.TextSourceViewerConfiguration;
-import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.ui.core.editor.reconciler.XtextDocumentReconcileStrategy;
 import org.eclipse.xtext.ui.core.editor.reconciler.XtextReconciler;
+
+import com.google.inject.Inject;
 
 public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguration {
 

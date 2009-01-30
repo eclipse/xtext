@@ -5,8 +5,9 @@ package org.eclipse.xtext.example;
 
 import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.ServiceScopeFactory;
+import org.eclipse.xtext.ILanguage;
 
-public interface IDomainmodel {
+public interface IDomainmodel extends ILanguage {
 
 	/**
 	 * the unique identifier of this language. 
@@ -18,6 +19,6 @@ public interface IDomainmodel {
 	public static final String NAME = "Domainmodel";
 	public static final String NAMESPACE = "org.eclipse.xtext.example";
 	public static final String[] FILE_EXTENSIONS = new String[]{"dmodel"};
-	public static final IServiceScope SCOPE = ServiceScopeFactory.createScope(ID, org.eclipse.xtext.builtin.IXtextBuiltin.SCOPE);
+	public static final IServiceScope SCOPE = ServiceScopeFactory.createScope(ID);
 	
 }

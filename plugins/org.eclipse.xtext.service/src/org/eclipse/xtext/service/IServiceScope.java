@@ -16,6 +16,4 @@ public interface IServiceScope {
 
     String getId();
 
-    IServiceScope getParentScope();
-
 }

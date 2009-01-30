@@ -5,8 +5,9 @@ package org.eclipse.xtext.parser.datatyperules;
 
 import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.ServiceScopeFactory;
+import org.eclipse.xtext.ILanguage;
 
-public interface IDatatypeRulesTestLanguage {
+public interface IDatatypeRulesTestLanguage extends ILanguage {
 
 	/**
 	 * the unique identifier of this language. 
@@ -18,6 +19,6 @@ public interface IDatatypeRulesTestLanguage {
 	public static final String NAME = "DatatypeRulesTestLanguage";
 	public static final String NAMESPACE = "org.eclipse.xtext.parser.datatyperules";
 	public static final String[] FILE_EXTENSIONS = new String[]{"datatyperulestestlanguage"};
-	public static final IServiceScope SCOPE = ServiceScopeFactory.createScope(ID, org.eclipse.xtext.builtin.IXtextBuiltin.SCOPE);
+	public static final IServiceScope SCOPE = ServiceScopeFactory.createScope(ID);
 	
 }

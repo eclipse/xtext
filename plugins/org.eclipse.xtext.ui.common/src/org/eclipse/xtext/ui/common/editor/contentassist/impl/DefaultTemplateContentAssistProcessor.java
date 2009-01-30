@@ -19,10 +19,11 @@ import org.eclipse.jface.text.templates.TemplateContextType;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.crossref.IScopeProvider;
-import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
 import org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider;
 import org.eclipse.xtext.ui.common.editor.contentassist.ITemplateContentAssistProcessor;
+
+import com.google.inject.Inject;
 
 /**
  * Provides a default implementation of interface {@link ITemplateContentAssistProcessor}.

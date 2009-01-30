@@ -5,8 +5,9 @@ package org.eclipse.xtext.parser.terminalrules;
 
 import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.ServiceScopeFactory;
+import org.eclipse.xtext.ILanguage;
 
-public interface IHiddenTerminalsTestLanguage {
+public interface IHiddenTerminalsTestLanguage extends ILanguage {
 
 	/**
 	 * the unique identifier of this language. 
@@ -18,6 +19,6 @@ public interface IHiddenTerminalsTestLanguage {
 	public static final String NAME = "HiddenTerminalsTestLanguage";
 	public static final String NAMESPACE = "org.eclipse.xtext.parser.terminalrules";
 	public static final String[] FILE_EXTENSIONS = new String[]{"hiddenterminalstestlanguage"};
-	public static final IServiceScope SCOPE = ServiceScopeFactory.createScope(ID, null);
+	public static final IServiceScope SCOPE = ServiceScopeFactory.createScope(ID);
 	
 }

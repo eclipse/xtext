@@ -34,10 +34,11 @@ import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.ParseTreeUtil;
-import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistCalculator;
 import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
 import org.eclipse.xtext.util.XtextSwitch;
+
+import com.google.inject.Inject;
 
 /**
  * Provides a default implementation of interface {@link IContentAssistContext} designed as <b>Switch</b> over the 

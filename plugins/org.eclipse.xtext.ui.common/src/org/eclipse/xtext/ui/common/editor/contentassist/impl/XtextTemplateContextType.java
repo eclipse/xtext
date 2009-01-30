@@ -21,7 +21,6 @@ import org.eclipse.jface.text.templates.TemplateVariable;
 import org.eclipse.jface.text.templates.TemplateVariableResolver;
 import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.crossref.IScopedElement;
-import org.eclipse.xtext.ui.common.editor.contentassist.impl.XtextTemplateContext;
 
 /**
  * Provides a convenience base type for <code>TemplateContextType's</code> preconfigured with several handy 

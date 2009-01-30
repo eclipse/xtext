@@ -34,10 +34,11 @@ import org.eclipse.xtext.crossref.IScopeProvider;
 import org.eclipse.xtext.crossref.IScopedElement;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
 import org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider;
 import org.eclipse.xtext.util.Strings;
+
+import com.google.inject.Inject;
 
 /**
  * @author Michael Clay - Initial contribution and API

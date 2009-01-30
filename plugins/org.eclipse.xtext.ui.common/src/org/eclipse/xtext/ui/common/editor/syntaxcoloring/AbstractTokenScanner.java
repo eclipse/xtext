@@ -14,10 +14,11 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtext.service.IServiceScope;
-import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.ui.common.editor.preferencepage.CommonPreferenceConstants;
 import org.eclipse.xtext.ui.core.editor.utils.TextStyle;
+
+import com.google.inject.Inject;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -43,7 +44,7 @@ public abstract class AbstractTokenScanner implements ITokenScanner {
 				public void createPage() {
 					SyntaxColoringPreferencePage page = new SyntaxColoringPreferencePage();
 					page.setTitle(getLabelText());
-					ServiceRegistry.injectServices(scope, page);
+					ServiceRegistry.getInjector(scope).injectMembers(page);
 					setPage(page);
 				}
 			};

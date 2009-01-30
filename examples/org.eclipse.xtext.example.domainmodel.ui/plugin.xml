@@ -5,7 +5,7 @@
 	<extension
          point="org.eclipse.ui.editors">
       <editor
-            class="org.eclipse.xtext.ui.core.editor.XtextEditor"
+            class="org.eclipse.xtext.example.editor.DomainModelEditor"
             contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
             default="true"
             extensions="dmodel"
@@ -14,14 +14,9 @@
       </editor>
    </extension>
  <extension
-       point="org.eclipse.xtext.service.ui.serviceRegistrationFactory">
-    <serviceRegistrationFactory
-          class="org.eclipse.xtext.example.DomainmodelUiConfig"/>
- </extension>
- <extension
          point="org.eclipse.ui.preferencePages">
 		<page
-			class="org.eclipse.xtext.service.ui.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage/org.eclipse.xtext.example.Domainmodel"
+			class="org.eclipse.xtext.ui.core.util.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage/org.eclipse.xtext.example.Domainmodel"
 			id="org.eclipse.xtext.example.Domainmodel"
 			name="Domainmodel">
 			<keywordReference
@@ -30,7 +25,7 @@
 		</page>
 		<page
 		    category="org.eclipse.xtext.example.Domainmodel"
-		    class="org.eclipse.xtext.service.ui.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.EditorPreferencePage/org.eclipse.xtext.example.Domainmodel"
+		    class="org.eclipse.xtext.ui.core.util.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.EditorPreferencePage/org.eclipse.xtext.example.Domainmodel"
 		    id="org.eclipse.xtext.example.Domainmodel.editor"
 		    name="Editor">
 		    	<keywordReference 
