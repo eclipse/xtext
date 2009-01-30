@@ -37,11 +37,11 @@ import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
-import «this.grammar().grammarAccess()»;
-import «this.grammar().grammarAccess()».«name»Elements;
+import «this.containingGrammar().grammarAccess()»;
+import «this.containingGrammar().grammarAccess()».«name»Elements;
 
 «FOREACH allCalledRules() AS calledRule-»
-import «calledRule.grammar().getNamespace()».parser.packrat.consumers.«calledRule.consumerClassName()»;
+import «calledRule.containingGrammar().getNamespace()».parser.packrat.consumers.«calledRule.consumerClassName()»;
 «ENDFOREACH-»
 
 @SuppressWarnings("unused")

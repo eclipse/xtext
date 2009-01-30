@@ -18,19 +18,22 @@ projectName(GenModel this):
     uiPluginBundleID;
 
 packageName(GenModel this):
-    uiPluginBundleID;
+    grammar.getNamespace();
     
-foo(GenModel this) :
-	this.packageName();
+//foo(GenModel this) :
+//	this.packageName();
     
+editorClassFQN(GenModel this):
+    packageName() + ".ui.editor." + this.grammar.getName()+"Editor";
+
 activatorClassFQN(GenModel this):
-    packageName() + ".internal." + "Activator";
+    packageName() + ".ui.internal." + this.grammar.getName()+"Activator";
     
-editorPackage(GenModel this):
-    packageName() + ".ui.editor";
+//editorPackage(GenModel this):
+//    packageName() + ".ui.editor";
     
-editorClassFQN(GenModel this):    
-    editorPackage() + "." + languageName() + "XtextEditor";
+//editorClassFQN(GenModel this):    
+//    editorPackage() + "." + languageName() + "XtextEditor";
     
 editorExtensionId(GenModel this):
     editorClassFQN();

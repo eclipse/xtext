@@ -28,7 +28,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.ServiceRegistry;
-import org.eclipse.xtext.service.IServiceRegistrationFactory.IServiceRegistration;
+
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 
 import «languageInterfaceFQName»;
 
@@ -38,14 +40,14 @@ public abstract class «grammar().standaloneSetupClass().toSimpleName()» {
 
 	public synchronized static void doSetup() {
 		if(!isInitialized) {
-«IF grammar().getSuperGrammar()!= null-»
-			// setup super language first
-			«standaloneSetupClass(grammar().getSuperGrammar())».doSetup();
-«ENDIF-»
+		    «IF !grammar.isAbstract()»
+		    Injector injector = Guice.createInjector(new «runtimeModuleClass()»());
+			ServiceRegistry.registerInjector(«languageInterfaceFQName».SCOPE, injector);
+			«ENDIF»
 			
-			for (IServiceRegistration reg :  new «runtimeConfigClass(grammar())»().registrations()) {
-				ServiceRegistry.registerFactory(reg.scope(), reg.serviceFactory(), reg.priority());
-			}
+			«IF grammar.getSuperGrammar()!=null»
+			«grammar.getSuperGrammar().standaloneSetupClass()».doSetup();
+			«ENDIF»
 			
 			«IF resourceFactoryService() != null-»
 			// register resource factory to EMF
@@ -71,59 +73,11 @@ public abstract class «grammar().standaloneSetupClass().toSimpleName()» {
 	}
 	
 	public static IServiceScope getServiceScope() {
-		return «languageInterface(grammar())».SCOPE;
+	   doSetup();
+	   return «languageInterfaceFQName».SCOPE;
 	}
+	
 }
 «ENDFILE»
 
-«FILE runtimeConfigClass(grammar()).toJavaPackage().toPath()+"/Abstract"+runtimeConfigClass(grammar()).toSimpleName()+".java" SRC_GEN-»
-package «runtimeConfigClass(grammar()).toJavaPackage()»;
-
-import java.util.Set;
-
-import org.eclipse.xtext.service.AbstractServiceRegistrationFactory;
-
-/**
- * used to register components to be used at runtime.
- */
-public abstract class Abstract«runtimeConfigClass(grammar()).toSimpleName()» extends AbstractServiceRegistrationFactory {
-
-	«FOREACH genModel().nonUiServices() AS s-»
-	protected Class<? extends «s.serviceInterfaceFQName»> get«s.serviceInterfaceFQName.toSimpleName()»() {
-		return «s.genClassFQName».class;
-	}
-		
-	«ENDFOREACH»
-	public Set<IServiceRegistration> registrations() {
-		return scope(«languageInterface(grammar())».SCOPE)
-		«FOREACH genModel().nonUiServices() AS s-»
-		.with(«s.serviceInterfaceFQName».class, get«s.serviceInterfaceFQName.toSimpleName()»())
-		«ENDFOREACH»
-			.registrations();
-	}
-
-}
-			
-«ENDFILE»
-«FILE runtimeConfigClass(grammar()).toJavaFilePath() SRC-»
-package «runtimeConfigClass(grammar()).toJavaPackage()»;
-
-import java.util.Set;
-
-import org.eclipse.xtext.service.AbstractServiceRegistrationFactory;
-
-/**
- * used to register components to be used at runtime.
- */
-public class «runtimeConfigClass(grammar()).toSimpleName()» extends Abstract«runtimeConfigClass(grammar()).toSimpleName()» {
-
-	public Set<IServiceRegistration> registrations() {
-		Set<IServiceRegistration> generated = super.registrations();
-		// do stuff 
-		return generated;
-	}
-
-}
-			
-«ENDFILE»
 «ENDDEFINE»

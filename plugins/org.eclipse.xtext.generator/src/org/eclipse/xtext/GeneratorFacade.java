@@ -38,6 +38,11 @@ import org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel;
 import org.eclipse.xtext.ecore.GenerateJavaFromEcore;
 import org.eclipse.xtext.grammaraccess.GrammarAccessUtil;
 import org.eclipse.xtext.parser.ParserAssembler;
+import org.eclipse.xtext.parsetree.reconstr.ICrossReferenceSerializer;
+import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
+import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
+import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
+import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.metamodel.Xtext2EcoreTransformer;
 import org.eclipse.xtext.xtextgen.GenModel;
 import org.eclipse.xtext.xtextgen.GenService;
@@ -187,7 +192,7 @@ public class GeneratorFacade {
 		}
 
 		GenService metamodelAccessService = XtextgenFactory.eINSTANCE.createGenService();
-		metamodelAccessService.setServiceInterfaceFQName("org.eclipse.xtext.IMetamodelAccess");
+		metamodelAccessService.setServiceInterfaceFQName(IMetamodelAccess.class.getName());
 		metamodelAccessService.setGenClassFQName(namespace + ".services." + languageName + "MetamodelAccess");
 		metamodelAccessService.setTemplatePath("org::eclipse::xtext::ecore::Ecore::root");
 		metamodelAccessService.setExtensionPointID("org.eclipse.xtext.ui.metamodelAccess");
@@ -203,7 +208,7 @@ public class GeneratorFacade {
 		// need exactly the
 		// implementation for their language.
 		GenService grammarAccessService = XtextgenFactory.eINSTANCE.createGenService();
-		grammarAccessService.setServiceInterfaceFQName("org.eclipse.xtext.IGrammarAccess");
+		grammarAccessService.setServiceInterfaceFQName(IGrammarAccess.class.getName());
 		grammarAccessService.setGenClassFQName(GrammarAccessUtil.getGrammarAccessFQName(grammarModel));
 		grammarAccessService.setTemplatePath("org::eclipse::xtext::grammaraccess::GrammarAccess::root");
 		// grammarAccessService.setExtensionPointID(
@@ -213,7 +218,7 @@ public class GeneratorFacade {
 		if (!GrammarUtil.isAbstract(grammarModel)) {
 
 			GenService elementFactoryService = XtextgenFactory.eINSTANCE.createGenService();
-			elementFactoryService.setServiceInterfaceFQName("org.eclipse.xtext.parser.IAstFactory");
+			elementFactoryService.setServiceInterfaceFQName(org.eclipse.xtext.parser.IAstFactory.class.getName());
 			elementFactoryService.setGenClassFQName("org.eclipse.xtext.parser.DefaultEcoreElementFactory");
 			// no template, as service is generic. Nevertheless, we need the
 			// individual registration to avoid conflicts
@@ -221,7 +226,7 @@ public class GeneratorFacade {
 			genModel.getServices().add(elementFactoryService);
 			
 			GenService resourceFactoryService = XtextgenFactory.eINSTANCE.createGenService();
-			resourceFactoryService.setServiceInterfaceFQName("org.eclipse.xtext.resource.IResourceFactory");
+			resourceFactoryService.setServiceInterfaceFQName(IResourceFactory.class.getName());
 			resourceFactoryService.setGenClassFQName(namespace + ".services." + languageName + "ResourceFactory");
 			resourceFactoryService.setTemplatePath("org::eclipse::xtext::resourcefactory::ResourceFactory::root");
 			resourceFactoryService.setExtensionPointID("org.eclipse.xtext.ui.resourceFactory");
@@ -229,7 +234,7 @@ public class GeneratorFacade {
 
 			GenService parsetreeReconstructorService = XtextgenFactory.eINSTANCE.createGenService();
 			parsetreeReconstructorService
-					.setServiceInterfaceFQName("org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor");
+					.setServiceInterfaceFQName(IParseTreeConstructor.class.getName());
 			parsetreeReconstructorService.setGenClassFQName(namespace + ".parsetree.reconstr." + languageName
 					+ "ParseTreeConstructor");
 			parsetreeReconstructorService
@@ -238,21 +243,21 @@ public class GeneratorFacade {
 			genModel.getServices().add(parsetreeReconstructorService);
 
 			GenService serializationStrategy = XtextgenFactory.eINSTANCE.createGenService();
-			serializationStrategy.setServiceInterfaceFQName("org.eclipse.xtext.parsetree.reconstr.ITokenSerializer");
+			serializationStrategy.setServiceInterfaceFQName(ITokenSerializer.class.getName());
 			serializationStrategy
 					.setGenClassFQName("org.eclipse.xtext.parsetree.reconstr.impl.WhitespacePreservingTokenSerializer");
 			genModel.getServices().add(serializationStrategy);
 
 			GenService crossRefSerializer = XtextgenFactory.eINSTANCE.createGenService();
 			crossRefSerializer
-					.setServiceInterfaceFQName("org.eclipse.xtext.parsetree.reconstr.ICrossReferenceSerializer");
+					.setServiceInterfaceFQName(ICrossReferenceSerializer.class.getName());
 			crossRefSerializer
 					.setGenClassFQName("org.eclipse.xtext.parsetree.reconstr.impl.SimpleCrossReferenceSerializer");
 			genModel.getServices().add(crossRefSerializer);
 
 			GenService transientValueService = XtextgenFactory.eINSTANCE.createGenService();
 			transientValueService
-					.setServiceInterfaceFQName("org.eclipse.xtext.parsetree.reconstr.ITransientValueService");
+					.setServiceInterfaceFQName(ITransientValueService.class.getName());
 			transientValueService
 					.setGenClassFQName("org.eclipse.xtext.parsetree.reconstr.impl.SimpleTransientValueService");
 			genModel.getServices().add(transientValueService);
@@ -281,48 +286,6 @@ public class GeneratorFacade {
 							.setTemplatePath("org::eclipse::xtext::ui::contentassist::GenProposalProvider::root");
 					genModel.getServices().add(proposalProvider);
 				}
-
-				GenService contentAssistProcessor = XtextgenFactory.eINSTANCE.createGenService();
-				contentAssistProcessor
-						.setServiceInterfaceFQName("org.eclipse.jface.text.contentassist.IContentAssistProcessor");
-				contentAssistProcessor
-						.setGenClassFQName("org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultContentAssistProcessor");
-				contentAssistProcessor.setUiService(true);
-				genModel.getServices().add(contentAssistProcessor);
-
-				GenService templateContentAssistProcessor = XtextgenFactory.eINSTANCE.createGenService();
-				templateContentAssistProcessor
-						.setServiceInterfaceFQName("org.eclipse.xtext.ui.common.editor.contentassist.ITemplateContentAssistProcessor");
-				templateContentAssistProcessor
-						.setGenClassFQName("org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultTemplateContentAssistProcessor");
-				templateContentAssistProcessor.setUiService(true);
-				genModel.getServices().add(templateContentAssistProcessor);
-
-				GenService contentAssistCalculator = XtextgenFactory.eINSTANCE.createGenService();
-				contentAssistCalculator
-						.setServiceInterfaceFQName("org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistCalculator");
-				contentAssistCalculator
-						.setGenClassFQName("org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultContentAssistCalculator");
-				contentAssistCalculator.setUiService(true);
-				genModel.getServices().add(contentAssistCalculator);
-
-				// Outline: Semantic Model to Outline Model Transformer
-				GenService semanticModelTransformer = XtextgenFactory.eINSTANCE.createGenService();
-				semanticModelTransformer
-						.setServiceInterfaceFQName("org.eclipse.xtext.ui.common.editor.outline.ISemanticModelTransformer");
-				semanticModelTransformer
-						.setGenClassFQName("org.eclipse.xtext.ui.common.editor.outline.impl.DefaultSemanticModelTransformer");
-				semanticModelTransformer.setUiService(true);
-				genModel.getServices().add(semanticModelTransformer);
-
-				// Outline: Lazy Tree Provider
-				GenService lazyTreeProvider = XtextgenFactory.eINSTANCE.createGenService();
-				lazyTreeProvider
-						.setServiceInterfaceFQName("org.eclipse.xtext.ui.common.editor.outline.ILazyTreeProvider");
-				lazyTreeProvider
-						.setGenClassFQName("org.eclipse.xtext.ui.common.editor.outline.impl.LazyTransformingTreeProvider");
-				lazyTreeProvider.setUiService(true);
-				genModel.getServices().add(lazyTreeProvider);
 			}
 		}
 		

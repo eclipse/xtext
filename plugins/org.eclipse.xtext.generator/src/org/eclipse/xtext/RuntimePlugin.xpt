@@ -18,6 +18,7 @@
 «DEFINE root FOR GenModel»
 «EXPAND ILanguage::root»
 «EXPAND StandaloneSetup::root»
+«EXPAND ServiceConfig::root»
 «EXPAND pluginxml»
 «ENDDEFINE»
 
@@ -38,11 +39,6 @@
          </checkFile>
       </metaModel>
       «ENDFOREACH»
-   </extension>
-    <extension
-       point="org.eclipse.xtext.service.ui.serviceRegistrationFactory">
-	    <serviceRegistrationFactory
-	          class="«grammar().runtimeConfigClass()»"/>
    </extension>
    «FOREACH modelFileExtensions() AS modelFileExtension-»
    <extension

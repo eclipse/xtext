@@ -62,7 +62,7 @@ import «superGrammar.getNamespace()».parser.packrat.«superGrammar.getName().toFi
 «ENDIF-»
 «ENDLET-»
 «FOREACH grammar().allRules() AS rule-»
-import «rule.grammar().getNamespace()».parser.packrat.consumers.«rule.consumerClassName()»;
+import «rule.containingGrammar().getNamespace()».parser.packrat.consumers.«rule.consumerClassName()»;
 «ENDFOREACH-»
 
 @SuppressWarnings("unused")
@@ -157,7 +157,7 @@ public class «languageName().toFirstUpper()»ParserConfiguration extends Abstract
 	
 «ENDIF-»
 «FOREACH grammar().allRules() AS rule-»
-«IF rule.grammar() == grammar()-»
+«IF rule.containingGrammar() == grammar()-»
 «IF rule.consumerGetterName() != "getRootConsumer"-»
     public «rule.consumerClassName()» «rule.consumerGetterName()»() {
     	return «rule.consumerFieldName()»;

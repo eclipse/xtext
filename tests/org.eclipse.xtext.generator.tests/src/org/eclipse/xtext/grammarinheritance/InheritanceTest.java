@@ -9,15 +9,9 @@
 package org.eclipse.xtext.grammarinheritance;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.conversion.IValueConverterService;
-import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 public class InheritanceTest extends AbstractGeneratorTest {
-	static {
-		ServiceRegistry.registerService(IAbstractTestLanguage.SCOPE,
-				IValueConverterService.class, AbstractTestLanguageValueConverters.class);
-	}
 
 	@Override
 	protected void setUp() throws Exception {

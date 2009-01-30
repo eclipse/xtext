@@ -19,7 +19,39 @@
 «DEFINE root FOR GenModel»
     «EXPAND Plugin::plugin_xml»
     «EXPAND ServiceConfig::root»
+    «EXPAND Setup::root»
     «EXPAND Manifest::manifest_mf»
+    «EXPAND activator»
+    «EXPAND editor»
     «copyFiles("org/eclipse/xtext/ui", outletPath("UI") + "/icons/", { "editor.gif" })»  
 «ENDDEFINE»
 
+ «DEFINE activator FOR GenModel»
+ «FILE activatorClassFQN().toJavaFilePath() UI_SRC_GEN-»
+package «activatorClassFQN().toJavaPackage()»;
+
+import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.osgi.framework.BundleContext;
+
+public class «activatorClassFQN().toSimpleName()» extends AbstractUIPlugin {
+
+	@Override
+	public void start(BundleContext context) throws Exception {
+		super.start(context);
+		«uiSetupClass(grammar)».doSetup();
+	}
+	
+}
+ «ENDFILE»
+ «ENDDEFINE»
+ 
+«DEFINE editor FOR GenModel»
+ «FILE editorClassFQN().toJavaFilePath() UI_SRC_GEN-»
+package «editorClassFQN().toJavaPackage()»;
+
+public class «editorClassFQN().toSimpleName()» extends org.eclipse.xtext.ui.core.editor.XtextEditor {
+
+}
+ «ENDFILE»
+ 
+ «ENDDEFINE»
