@@ -84,7 +84,11 @@ public class XtextLinker extends Linker {
 			else
 				typeRef.setMetamodel((AbstractMetamodelDeclaration) metamodels.get(0));
 		} else if (XtextPackage.eINSTANCE.getCrossReference_Rule() == ref) {
-			((CrossReference)obj).setRule(GrammarUtil.findRuleForName(GrammarUtil.getGrammar(obj), "ID"));			
+			try {
+				((CrossReference)obj).setRule(GrammarUtil.findRuleForName(GrammarUtil.getGrammar(obj), "ID"));
+			} catch(IllegalArgumentException ex) {
+				producer.addDiagnostic("Cannot resolve implicit reference to rule 'ID'");
+			}
 		} else {
 			super.setDefaultValueImpl(obj, ref, producer);
 		}
