@@ -33,13 +33,9 @@
 <project reference="1.0,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/features/org.eclipse.xtext.runtime.feature,org.eclipse.xtext.runtime.feature"/>
 <project reference="1.0,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/features/org.eclipse.xtext.sdk.feature,org.eclipse.xtext.sdk.feature"/>
 <project reference="1.0,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.service,org.eclipse.xtext.service"/>
-<project reference="1.0,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/tests/org.eclipse.xtext.service.tests,org.eclipse.xtext.service.tests"/>
-<project reference="1.0,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.service.ui,org.eclipse.xtext.service.ui"/>
-<project reference="1.0,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/tests/org.eclipse.xtext.service.ui.tests,org.eclipse.xtext.service.ui.tests"/>
 <project reference="1.0,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/tests/org.eclipse.xtext.tests,org.eclipse.xtext.tests"/>
 <project reference="1.0,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/features/org.eclipse.xtext.tests.feature,org.eclipse.xtext.tests.feature"/>
 <project reference="1.0,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui,org.eclipse.xtext.ui"/>
-<project reference="1.0,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.builtin,org.eclipse.xtext.ui.builtin"/>
 <project reference="1.0,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common,org.eclipse.xtext.ui.common"/>
 <project reference="1.0,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.core,org.eclipse.xtext.ui.core"/>
 <project reference="1.0,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/tests/org.eclipse.xtext.ui.core.tests,org.eclipse.xtext.ui.core.tests"/>
@@ -50,8 +46,10 @@
 <project reference="1.0,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/examples/org.eclipse.xtext.example.fowlerdsl.ui,org.eclipse.xtext.example.fowlerdsl.ui"/>
 <project reference="1.0,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/examples/org.eclipse.xtext.example.domainmodel,org.eclipse.xtext.example.domainmodel"/>
 <project reference="1.0,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/examples/org.eclipse.xtext.example.domainmodel.ui,org.eclipse.xtext.example.domainmodel.ui"/>
-<project reference="1.0,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common.xtend,org.eclipse.xtext.ui.common.xtend"/>
-<project reference="1.0,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.integration.tests,org.eclipse.xtext.ui.integration.tests"/>
+<project reference="1.0,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.xtend,org.eclipse.xtext.xtend"/>
+<project reference="1.0,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/tests/org.eclipse.xtext.xtend.tests,org.eclipse.xtext.xtend.tests"/>
+<project reference="1.0,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/tests/org.eclipse.xtext.ui.integration.tests,org.eclipse.xtext.ui.integration.tests"/>
+<project reference="1.0,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/plugins/com.google.guice,com.google.guice"/>
 </provider>
 <workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" label="MWE" name="MWE">
 <item elementID="=org.eclipse.emf.mwe.core" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
@@ -71,6 +69,7 @@
 </workingSets>
 <workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" label="Xtext 3rdParty" name="Xtext 3rdParty">
 <item elementID="=org.easymock" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=com.google.guice" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.xtext.log4j" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.antlr.runtime" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.antlr" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
@@ -79,7 +78,6 @@
 <workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" label="Xtext Core" name="Xtext Core">
 <item elementID="=org.eclipse.xtext.generator" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.xtext" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=org.eclipse.xtext.service.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.xtext.junit" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.xtext.generator.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.xtext.service" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
@@ -115,11 +113,9 @@
 <item elementID="=org.eclipse.xtext.ui.core.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.xtext.ui.common.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.xtext.ui.core" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=org.eclipse.xtext.ui.builtin" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=org.eclipse.xtext.service.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.xtext.ui.common" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=org.eclipse.xtext.ui.common.xtend" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=org.eclipse.xtext.service.ui.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.xtend" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.xtend.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.xtext.ui.integration.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 </workingSets>
 <workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" label="Deprecated" name="Deprecated">
