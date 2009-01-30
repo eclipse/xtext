@@ -42,13 +42,6 @@
          unpack="false"/>
 
    <plugin
-         id="org.eclipse.xtext.service.tests"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="org.easymock"
          download-size="0"
          install-size="0"
@@ -69,13 +62,6 @@
          fragment="true"/>
 
    <plugin
-         id="org.eclipse.xtext.service.ui.tests"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="org.eclipse.xtext.junit"
          download-size="0"
          install-size="0"
@@ -91,6 +77,20 @@
 
    <plugin
          id="org.eclipse.xtext.ui.integration.tests"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xtext.ui.common.tests"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xtext.xtend.tests"
          download-size="0"
          install-size="0"
          version="0.0.0"

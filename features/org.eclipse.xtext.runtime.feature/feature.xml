@@ -60,13 +60,6 @@
          unpack="false"/>
 
    <plugin
-         id="org.eclipse.xtext.service.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="org.eclipse.xtext.log4j"
          download-size="0"
          install-size="0"
@@ -82,13 +75,6 @@
 
    <plugin
          id="org.antlr.runtime"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.xtext.ui.builtin"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -116,10 +102,16 @@
          unpack="false"/>
 
    <plugin
-         id="org.eclipse.xtext.ui.common.xtend"
+         id="org.eclipse.xtext.xtend"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
+
+   <plugin
+         id="com.google.guice"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
 
 </feature>

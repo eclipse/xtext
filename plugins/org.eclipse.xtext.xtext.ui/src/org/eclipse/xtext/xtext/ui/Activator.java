@@ -9,14 +9,14 @@
 package org.eclipse.xtext.xtext.ui;
 
 import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.ui.internal.XtextActivator;
 import org.osgi.framework.BundleContext;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public class Activator extends AbstractUIPlugin {
+public class Activator extends XtextActivator {
 	// The plug-in ID
 	public static final String PLUGIN_ID = "org.eclipse.xtext.xtext.ui";
 
