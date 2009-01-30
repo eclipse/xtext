@@ -14,8 +14,6 @@
 package org.eclipse.xtext.ui.common.editor.contentassist.impl;
 
 
-import org.eclipse.emf.mwe.core.resources.ResourceLoaderFactory;
-import org.eclipse.emf.mwe.core.resources.ResourceLoaderImpl;
 import org.eclipse.xtext.XtextGrammarTestLanguageUiSetup;
 import org.eclipse.xtext.testlanguages.ContentAssistTestLanguageUiSetup;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageUiSetup;
