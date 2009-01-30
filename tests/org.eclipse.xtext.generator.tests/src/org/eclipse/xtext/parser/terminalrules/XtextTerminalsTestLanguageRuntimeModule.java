@@ -7,14 +7,11 @@ import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.crossref.ILinker;
 import org.eclipse.xtext.crossref.ILinkingService;
 import org.eclipse.xtext.crossref.IScopeProvider;
-import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
 import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
 import org.eclipse.xtext.xtext.XtextLinker;
 import org.eclipse.xtext.xtext.XtextLinkingService;
 import org.eclipse.xtext.xtext.XtextScopeProvider;
 import org.eclipse.xtext.xtext.XtextTransientValueService;
-
-import com.google.inject.Binder;
 
 /**
  * used to register components to be used within the IDE.
@@ -22,44 +19,39 @@ import com.google.inject.Binder;
 public class XtextTerminalsTestLanguageRuntimeModule extends AbstractXtextTerminalsTestLanguageRuntimeModule {
 
 	@Override
-	public void configure(Binder binder) {
-		super.configure(binder);
-	}
-	
-	@Override
-	protected Class<? extends IValueConverterService> getIValueConverterService() {
+	public Class<? extends IValueConverterService> bindIValueConverterService() {
 		return TerminalRuleTestLanguageConverters.class;
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipse.xtext.service.DefaultRuntimeModule#getIScopeProvider()
+	 * @see org.eclipse.xtext.service.DefaultRuntimeModule#bindIScopeProvider()
 	 */
 	@Override
-	protected Class<? extends IScopeProvider> getIScopeProvider() {
+	public Class<? extends IScopeProvider> bindIScopeProvider() {
 		return XtextScopeProvider.class;
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipse.xtext.service.DefaultRuntimeModule#getILinker()
+	 * @see org.eclipse.xtext.service.DefaultRuntimeModule#bindILinker()
 	 */
 	@Override
-	protected Class<? extends ILinker> getILinker() {
+	public Class<? extends ILinker> bindILinker() {
 		return XtextLinker.class;
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipse.xtext.service.DefaultRuntimeModule#getILinkingService()
+	 * @see org.eclipse.xtext.service.DefaultRuntimeModule#bindILinkingService()
 	 */
 	@Override
-	protected Class<? extends ILinkingService> getILinkingService() {
+	public Class<? extends ILinkingService> bindILinkingService() {
 		return XtextLinkingService.class;
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipse.xtext.parser.terminalrules.AbstractXtextTerminalsTestLanguageRuntimeModule#getITransientValueService()
+	 * @see org.eclipse.xtext.parser.terminalrules.AbstractXtextTerminalsTestLanguageRuntimeModule#bindITransientValueService()
 	 */
 	@Override
-	protected Class<? extends ITransientValueService> getITransientValueService() {
+	public Class<? extends ITransientValueService> bindITransientValueService() {
 		return XtextTransientValueService.class;
 	}
 	
