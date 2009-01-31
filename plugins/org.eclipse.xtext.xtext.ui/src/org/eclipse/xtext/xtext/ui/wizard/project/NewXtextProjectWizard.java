@@ -188,8 +188,7 @@ public class NewXtextProjectWizard extends Wizard implements INewWizard {
 
 			String basePackage = xtextProjectInfo.getBasePackage();
 			// DSL Project
-			List<String> exportedPackages = Arrays.asList(basePackage, basePackage + ".parser", basePackage
-					+ ".parser.internal", basePackage + ".parsetree.reconstr", basePackage + ".services");
+			List<String> exportedPackages = Arrays.asList(basePackage, basePackage + ".parsetree.reconstr", basePackage + ".services");
 			final IProject dslProject = EclipseResourceUtil.createProject(xtextProjectInfo.getProjectName(),
 					SRC_FOLDER_LIST, Collections.<IProject> emptyList(), new LinkedHashSet<String>(Arrays.asList(
 							"org.eclipse.xtext.log4j;bundle-version=\"1.2.15\"", 
