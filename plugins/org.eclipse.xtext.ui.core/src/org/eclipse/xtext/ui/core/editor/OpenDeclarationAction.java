@@ -1,5 +1,6 @@
 package org.eclipse.xtext.ui.core.editor;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -25,6 +26,7 @@ import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.crossref.ILinkingService;
 import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
@@ -51,93 +53,95 @@ public class OpenDeclarationAction extends Action {
 
 	private XtextEditor xtextEditor;
 
-	private LeafNode currentNode;
+	private LeafNode leafNode;
 
 	public OpenDeclarationAction(XtextEditor xtextEditor) {
 		this.xtextEditor = xtextEditor;
 	}
 
-	public OpenDeclarationAction(LeafNode currentNode) {
-		this.currentNode = currentNode;
+	public OpenDeclarationAction(LeafNode leafNode) {
+		this.leafNode = leafNode;
 		this.xtextEditor = (XtextEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
 				.getActiveEditor();
 	}
 
 	@Override
 	public void run() {
-
-		if (currentNode == null) {
-
-			StyledText styledText = (StyledText) this.xtextEditor.getAdapter(Control.class);
-
-			int caretOffset = styledText.getCaretOffset();
-
-			IXtextDocument document = this.xtextEditor.getDocument();
-
-			CompositeNode rootNode = getRootNode(document);
-
-			this.currentNode = (LeafNode) ParseTreeUtil.getCurrentOrFollowingNodeByOffset(rootNode, caretOffset);
+		LeafNode selectedNode = getSelectedNode();
+		if (selectedNode != null) {
+			List<EObject> linkedObjects = getLinkedObjects(selectedNode);
+			if (!linkedObjects.isEmpty()) {
+				EObject referenceEObject = linkedObjects.iterator().next();
+				IFile targetFile = getContainingResourceSetFile(referenceEObject);
+				openAndSelectDeclaration(referenceEObject, targetFile);
+			}
 		}
-
-		if (currentNode != null && currentNode.getGrammarElement() instanceof CrossReference) {
-
+	}
+	
+	private LeafNode getSelectedNode() {
+		LeafNode nodeToSelect = leafNode;
+		if (leafNode == null) {
+			nodeToSelect = getLeafNodeAtCaretOffset();
+		} 
+		return nodeToSelect;
+	}
+	
+	private LeafNode getLeafNodeAtCaretOffset() {
+		StyledText styledText = (StyledText) this.xtextEditor.getAdapter(Control.class);
+		CompositeNode rootNode = getRootNode(this.xtextEditor.getDocument());
+		AbstractNode currentOrFollowingNodeByOffset = ParseTreeUtil.getCurrentOrFollowingNodeByOffset(rootNode, styledText.getCaretOffset());
+		return (LeafNode) (currentOrFollowingNodeByOffset instanceof LeafNode ? currentOrFollowingNodeByOffset :null);
+	}
+	
+	private List<EObject> getLinkedObjects(LeafNode leafNode) {
+		List<EObject> linkedObjects = Collections.emptyList();
+		if (leafNode.getGrammarElement() instanceof CrossReference) {
 			ILinkingService linkingService = ServiceRegistry.getInjector(this.xtextEditor.getScope()).getInstance(
 					ILinkingService.class);
+			EObject semanticModel = NodeUtil.getNearestSemanticObject(leafNode);
+			EReference eReference = GrammarUtil.getReference((CrossReference) leafNode.getGrammarElement(),
+					semanticModel.eClass());	
+			linkedObjects = linkingService.getLinkedObjects(semanticModel, eReference, leafNode);
+		}
+		return linkedObjects;
+	}
+	
+	private IFile getContainingResourceSetFile(EObject referenceEObject) {
+		XtextResourceSet resourceSet = (XtextResourceSet) referenceEObject.eResource().getResourceSet();
+		URI uri = referenceEObject.eResource().getURI();
+		if (ClasspathUriUtil.isClasspathUri(uri)) {
+			uri = resourceSet.getClasspathUriResolver().resolve(resourceSet.getClasspathURIContext(), uri);
+		}
+		IFile targetFile = uri.isPlatformResource() ? 
+				ResourcesPlugin.getWorkspace().getRoot().getFile(
+						new Path(uri.toPlatformString(true)))
+				: ResourcesPlugin.getWorkspace().getRoot().getFileForLocation(
+						new Path(uri.toFileString()));
+		return targetFile;
+	}
+	
+	private void openAndSelectDeclaration(EObject referenceEObject, IFile targetFile) {
+		if (targetFile != null) {
+			IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+			try {
+				IEditorPart openEditor = IDE.openEditor(page, targetFile);
+				if (openEditor instanceof ITextEditor) {
 
-			EObject semanticModel = NodeUtil.getNearestSemanticObject(currentNode);
-
-			EReference eReference = GrammarUtil.getReference((CrossReference) currentNode.getGrammarElement(),
-					semanticModel.eClass());
-
-			List<EObject> linkedObjects = linkingService.getLinkedObjects(semanticModel, eReference, currentNode);
-
-			if (!linkedObjects.isEmpty()) {
-
-				EObject referenceEObject = linkedObjects.iterator().next();
-		
-				XtextResourceSet resourceSet = (XtextResourceSet) referenceEObject.eResource().getResourceSet();
-
-				URI uri = referenceEObject.eResource().getURI();
-				
-				if (ClasspathUriUtil.isClasspathUri(uri)) {
-					uri = resourceSet.getClasspathUriResolver().resolve(resourceSet.getClasspathURIContext(), uri);
-				}
-				
-				IFile targetFile = uri.isPlatformResource() ? 
-						ResourcesPlugin.getWorkspace().getRoot().getFile(
-								new Path(uri.toPlatformString(true)))
-						: ResourcesPlugin.getWorkspace().getRoot().getFileForLocation(
-								new Path(uri.toFileString()));
-
-				if (targetFile != null) {
-
-					IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-
-					try {
-						IEditorPart openEditor = IDE.openEditor(page, targetFile);
-
-						if (openEditor instanceof ITextEditor) {
-
-							NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(referenceEObject);
-							((ITextEditor) openEditor).selectAndReveal(nodeAdapter.getParserNode().getOffset(),
-									nodeAdapter.getParserNode().getLength());
-						} else if (openEditor instanceof ISelectionProvider) {
-							//TODO: use ISelectionProvider instead of ITextEditor
-						}
-					}
-					catch (PartInitException partInitException) {
-						logger.error("Error while opening editor part from workbench with file '" + targetFile + "'",
-								partInitException);
-					}
+					NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(referenceEObject);
+					((ITextEditor) openEditor).selectAndReveal(nodeAdapter.getParserNode().getOffset(),
+							nodeAdapter.getParserNode().getLength());
+				} else if (openEditor instanceof ISelectionProvider) {
+					//TODO: use ISelectionProvider instead of ITextEditor
 				}
 			}
-
+			catch (PartInitException partInitException) {
+				logger.error("Error while opening editor part from workbench with file '" + targetFile + "'",
+						partInitException);
+			}
 		}
-
 	}
 
 	private CompositeNode getRootNode(IDocument document) {
-
 		CompositeNode rootNode = ((IXtextDocument) document).readOnly(new UnitOfWork<CompositeNode>() {
 			public CompositeNode exec(XtextResource resource) throws Exception {
 				IParseResult parseResult = resource.getParseResult();
@@ -145,7 +149,6 @@ public class OpenDeclarationAction extends Action {
 				return parseResult.getRootNode();
 			}
 		});
-
 		return rootNode;
 	}
 }
