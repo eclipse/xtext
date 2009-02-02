@@ -11,6 +11,7 @@ package org.eclipse.xtext.ui.common.editor.outline.impl;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
+import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
 
 /**
  * @author Peter Friese - Initial contribution and API
@@ -29,6 +30,6 @@ public class ContentOutlineNodeAdapterFactory extends AdapterFactoryImpl {
 	
 	@Override
 	public boolean isFactoryForType(Object type) {
-		return type == ContentOutlineNodeAdapter.class;
+		return type == ContentOutlineNode.class;
 	}
 }

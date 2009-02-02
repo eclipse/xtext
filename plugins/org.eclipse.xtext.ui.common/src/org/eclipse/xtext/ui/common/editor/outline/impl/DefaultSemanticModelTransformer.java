@@ -11,6 +11,7 @@ package org.eclipse.xtext.ui.common.editor.outline.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Keyword;
@@ -25,12 +26,14 @@ import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
  * @author Peter Friese - Initial contribution and API
  */
 public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransformer {
+	
+	final static Logger logger = Logger.getLogger(AbstractSemanticModelTransformer.class);
 
 	public boolean consumeSemanticNode(EObject semanticNode) {
 		if (semanticNode != null) {
 			String name = semanticNode.eClass().getName();
-			if (LazyTransformingTreeProvider.logger.isDebugEnabled()) {
-				LazyTransformingTreeProvider.logger.debug("Consume semantic node type [" + name + "]?");
+			if (logger.isDebugEnabled()) {
+				logger.debug("Consume semantic node type [" + name + "]?");
 			}
 			return true;
 		}
@@ -42,8 +45,8 @@ public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransf
 	public boolean consumeSemanticChildNodes(EObject semanticNode) {
 		if (semanticNode != null) {
 			String name = semanticNode.eClass().getName();
-			if (LazyTransformingTreeProvider.logger.isDebugEnabled()) {
-				LazyTransformingTreeProvider.logger.debug("Consume semantic children of node type [" + name + "]?");
+			if (logger.isDebugEnabled()) {
+				logger.debug("Consume semantic children of node type [" + name + "]?");
 			}
 			return true;
 		}
@@ -59,15 +62,13 @@ public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransf
 		outlineNode.setLabel(getText(semanticNode));
 		outlineNode.setImage("DefaultOutlineNode");
 
-		NodeAdapter nodeAdapter = (NodeAdapter) NodeAdapterFactory.INSTANCE.adapt(semanticNode, NodeAdapter.class);
+		NodeAdapter nodeAdapter = (NodeAdapter) NodeAdapterFactory.INSTANCE.adapt(semanticNode, AbstractNode.class);
 		CompositeNode parserNode = nodeAdapter.getParserNode();
 		if (parserNode != null) {
 			SelectionCoordinates selectionNodeCoordinates = getSelectionNodeCoordinates(parserNode);
 			outlineNode.setSelectionOffset(selectionNodeCoordinates.getOffset());
 			outlineNode.setSelectionLength(selectionNodeCoordinates.getLength());
 		}
-
-		// outlineNode.setSemanticNode(semanticNode);
 
 		// link with parent
 		if (outlineParentNode != null) {
@@ -82,7 +83,7 @@ public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransf
 		 * position.
 		 */
 		ContentOutlineNodeAdapter outlineAdapter = (ContentOutlineNodeAdapter) ContentOutlineNodeAdapterFactory.INSTANCE
-				.adapt(semanticNode, ContentOutlineNodeAdapter.class);
+				.adapt(semanticNode, ContentOutlineNode.class);
 		outlineAdapter.setContentOutlineNode(outlineNode);
 
 		return outlineNode;

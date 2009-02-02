@@ -11,8 +11,6 @@ package org.eclipse.xtext.ui.integration.editor.outline;
 import static org.eclipse.xtext.ui.integration.util.ResourceUtil.createFile;
 import static org.eclipse.xtext.ui.integration.util.ResourceUtil.createProject;
 
-import java.util.List;
-
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.Assert;
@@ -25,14 +23,15 @@ import org.eclipse.ui.IPageLayout;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.views.contentoutline.ContentOutline;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.ParseTreeUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
+import org.eclipse.xtext.ui.common.editor.outline.impl.ContentOutlineNodeAdapter;
+import org.eclipse.xtext.ui.common.editor.outline.impl.ContentOutlineNodeAdapterFactory;
 import org.eclipse.xtext.ui.common.editor.outline.impl.LinkingHelper;
 import org.eclipse.xtext.ui.core.editor.XtextEditor;
 import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
@@ -46,10 +45,7 @@ public class OutlineViewTest extends AbstractEditorTest {
 
 	private XtextEditor editor;
 	private IProject project;
-	
-	/* (non-Javadoc)
-	 * @see org.eclipse.xtext.ui.integration.editor.AbstractEditorTest#getEditorId()
-	 */
+
 	@Override
 	protected String getEditorId() {
 		return "org.eclipse.xtext.reference.ReferenceGrammar";
@@ -85,6 +81,7 @@ public class OutlineViewTest extends AbstractEditorTest {
 		Display.getDefault().readAndDispatch();
 		editor.doSave(null);
 		editor.close(true);
+		editor = null;
 		project.delete(true, new NullProgressMonitor());
 		sleep(500);
 		super.tearDown();
@@ -109,7 +106,7 @@ public class OutlineViewTest extends AbstractEditorTest {
 	 */
 	public void testUnlinkedEditorNavigation() throws Exception {
 		// place cursor within "spielplatz"
-		assertSynchronized(editor, 0, 1, 0);
+		assertSynchronized(editor, 1, 0);
 
 		// turn OFF linking with editor!
 		LinkingHelper.setLinkingEnabled(false);
@@ -117,7 +114,7 @@ public class OutlineViewTest extends AbstractEditorTest {
 
 		// get currently selected element in outline
 		IStructuredSelection selection1 = (IStructuredSelection) getOutline().getSelection();
-	    ContentOutlineNode n1 =	(ContentOutlineNode) selection1.getFirstElement();
+		ContentOutlineNode n1 = (ContentOutlineNode) selection1.getFirstElement();
 
 		// go to a different place.
 		editor.selectAndReveal(20, 1);
@@ -125,66 +122,66 @@ public class OutlineViewTest extends AbstractEditorTest {
 
 		// obtain selected model element in editor
 		IStructuredSelection selection2 = (IStructuredSelection) getOutline().getSelection();
-		ContentOutlineNode n2 =	(ContentOutlineNode) selection2.getFirstElement();
+		ContentOutlineNode n2 = (ContentOutlineNode) selection2.getFirstElement();
 
 		// they must be equal
-		assertEquals(n1,n2);
+		assertEquals(n1, n2);
 	}
 
 	public void testSelectWholeTokenSyncEditorToOutline() throws Exception {
 		// select "spielplatz"
-		assertSynchronized(editor, 0, 0, "spielplatz".length());
+		assertSynchronized(editor, 0, "spielplatz".length());
 
 		// select "kind"
-		assertSynchronized(editor, 1, 19, "kind".length());
+		assertSynchronized(editor, 19, "kind".length());
 		// select whole node
-		assertSynchronized(editor, 1, 19, "kind (lennart 5)".length());
+		assertSynchronized(editor, 19, "kind (lennart 5)".length());
 
 		// select "kind"
-		assertSynchronized(editor, 2, 38, "kind".length());
+		assertSynchronized(editor, 38, "kind".length());
 		// select whole node
-		assertSynchronized(editor, 2, 38, "kind (soeren 8)".length());
+		assertSynchronized(editor, 38, "kind (soeren 8)".length());
 	}
 
 	public void testLeftBoundariesSyncEditorToOutline() throws Exception {
 		// left of "spielplatz"
-		assertSynchronized(editor, 0, 0, 0);
+		assertSynchronized(editor, 0, 0);
 
 		// left of "kind" 1
-		assertSynchronized(editor, 1, 19, 0);
+		assertSynchronized(editor, 19, 0);
 
 		// left of "kind" 2
-		assertSynchronized(editor, 2, 38, 0);
+		assertSynchronized(editor, 38, 0);
 	}
 
 	public void testRightBoundariesSyncEditorToOutline() throws Exception {
 		// left of "spielplatz"
-		assertSynchronized(editor, 0, "spielplatz".length(), 0);
+		assertSynchronized(editor, "spielplatz".length(), 0);
 
 		// left of "kind" 1
-		assertSynchronized(editor, 1, 19 + "kind (lennart 5)".length(), 0);
+		assertSynchronized(editor, 19 + "kind (lennart 5)".length(), 0);
 
 		// left of "kind" 2
-		assertSynchronized(editor, 2, 38 + "kind (soeren 8)".length(), 0);
+		assertSynchronized(editor, 38 + "kind (soeren 8)".length(), 0);
 	}
 
 	public void testCursorWithinTokenSyncEditorToOutline() throws Exception {
 		// place cursor within "spielplatz"
-		assertSynchronized(editor, 0, 1, 0);
-		assertSynchronized(editor, 0, 2, 0);
-		assertSynchronized(editor, 0, 1, 1);
+		assertSynchronized(editor, 1, 0);
+		assertSynchronized(editor, 2, 0);
+		assertSynchronized(editor, 1, 1);
 
 		// place within "kind" 1
-		assertSynchronized(editor, 1, 20, 0);
-		assertSynchronized(editor, 1, 21, 0);
-		assertSynchronized(editor, 1, 20, 1);
+		assertSynchronized(editor, 20, 0);
+		assertSynchronized(editor, 21, 0);
+		assertSynchronized(editor, 20, 1);
 
 		// place with "kind" 2
-		assertSynchronized(editor, 2, 39, 0);
-		assertSynchronized(editor, 2, 40, 0);
-		assertSynchronized(editor, 2, 39, 1);
+		assertSynchronized(editor, 39, 0);
+		assertSynchronized(editor, 40, 0);
+		assertSynchronized(editor, 39, 1);
 
-		assertSynchronized(editor, 2, 45, 0);
+		assertSynchronized(editor, 45, 0);
 	}
 
 	protected AbstractNode getCurrentEditorNode() {
@@ -205,13 +202,13 @@ public class OutlineViewTest extends AbstractEditorTest {
 		});
 		Assert.isNotNull(rootNode);
 
-		return  ParseTreeUtil.getCurrentOrPrecedingNodeByOffset(rootNode, offset);
+		return ParseTreeUtil.getCurrentOrPrecedingNodeByOffset(rootNode, offset);
 	}
 
-	protected void assertSynchronized(XtextEditor editor, int elementIndex, int offset, int length) {
+	protected void assertSynchronized(XtextEditor editor, int offset, int length) {
 		XtextDocument document = (XtextDocument) editor.getDocument();
 		IContentOutlinePage outlinePage = getOutline();
-		assertTrue(document.readOnly(new SyncEditorToOutlineAndCheckSelection(editor, elementIndex, outlinePage,
+		assertTrue(document.readOnly(new SyncEditorToOutlineAndCheckSelection(editor, outlinePage,
 				offset, length)));
 	}
 
@@ -225,12 +222,10 @@ public class OutlineViewTest extends AbstractEditorTest {
 		private final XtextEditor editor;
 		private final int length;
 		private final int offset;
-		private int elementIndex;
 
-		public SyncEditorToOutlineAndCheckSelection(XtextEditor editor, int elementIndex,
-				IContentOutlinePage outlinePage, int offset, int length) {
+		public SyncEditorToOutlineAndCheckSelection(XtextEditor editor, IContentOutlinePage outlinePage, int offset,
+				int length) {
 			this.editor = editor;
-			this.elementIndex = elementIndex;
 			this.outlinePage = outlinePage;
 			this.offset = offset;
 			this.length = length;
@@ -241,26 +236,26 @@ public class OutlineViewTest extends AbstractEditorTest {
 			editor.selectAndReveal(offset, length);
 			sleep(1000);
 
-			// obtain selected model element in editor
+			IParseResult parseResult = resource.getParseResult();
+			Assert.isNotNull(parseResult);
+			CompositeNode rootNode = parseResult.getRootNode();
+
+			// Get the current element from the offset
+			AbstractNode node = ParseTreeUtil.getCurrentOrPrecedingNodeByOffset(rootNode, offset);
+			EObject element = NodeUtil.getNearestSemanticObject(node);
+
+			// get the associated content outline node
+			ContentOutlineNodeAdapter adapter = (ContentOutlineNodeAdapter) ContentOutlineNodeAdapterFactory.INSTANCE
+					.adapt(element, ContentOutlineNode.class);
+			ContentOutlineNode outlineNodeInEditor = adapter.getContentOutlineNode();
+
+			// get selected element in outline
 			IStructuredSelection selection = (IStructuredSelection) outlinePage.getSelection();
 			Object firstElement = selection.getFirstElement();
-			ContentOutlineNode ele = (ContentOutlineNode) firstElement;
-			List<EObject> contents = EcoreUtil2.eAllContentsAsList(resource);
-			EObject objInEditor = contents.get(elementIndex);
-
-			// just debugging purposes
-			AbstractNode currentEditorNode = getCurrentEditorNode();
-			if (currentEditorNode instanceof LeafNode) {
-				System.out.println("Selection [" + offset + ";" + length + "] yields node text ["
-						+ ((LeafNode)currentEditorNode).getText() + "]");
-			}
-
-			//TODO don't know how to obtain the EObject for a given ContentOutlineNode
-//			// obtain selected model element in outline
-//			EObject objInOutline = resource.getEObject(uri.fragment());
+			ContentOutlineNode outlineNodeInOutline = (ContentOutlineNode) firstElement;
 
 			// they must be equal
-			return true;//Boolean.valueOf(objInEditor.equals(objInOutline));
+			return Boolean.valueOf(outlineNodeInEditor.equals(outlineNodeInOutline));
 		}
 	}
 
