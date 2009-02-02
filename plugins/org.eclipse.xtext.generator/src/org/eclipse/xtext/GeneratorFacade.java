@@ -13,8 +13,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
@@ -58,14 +60,20 @@ public class GeneratorFacade {
 
 	private static Logger log = Logger.getLogger(GeneratorFacade.class);
 
-	public static void generate(Grammar grammarModel, String runtimeProjectPath, String uiProjectPath, String... modelFileExtensions)
-			throws IOException {
+	private static Set<String> excludes = new HashSet<String>();
+
+	private static String[] defaultExcludes = new String[] { ".CVS", ".svn" };
+
+	private static boolean useDefaultExcludes = true;
+
+	public static void generate(Grammar grammarModel, String runtimeProjectPath, String uiProjectPath,
+			String... modelFileExtensions) throws IOException {
 		generate(grammarModel, runtimeProjectPath, uiProjectPath, false, true, false, modelFileExtensions);
 	}
-	
+
 	public static void generate(Grammar grammarModel, String runtimeProjectPath, String uiProjectPath,
-				boolean isGenerateXtendServices, boolean isGenerateJavaServices, boolean isGenerateEcore, String... modelFileExtensions)
-				throws IOException {
+			boolean isGenerateXtendServices, boolean isGenerateJavaServices, boolean isGenerateEcore,
+			String... modelFileExtensions) throws IOException {
 		if (!grammarModel.eResource().getErrors().isEmpty()) {
 			log.error(grammarModel.eResource().getErrors());
 			return;
@@ -98,7 +106,8 @@ public class GeneratorFacade {
 		generate(genModel, isGenerateEcore, runtimeProjectPath.equals(uiProjectPath));
 	}
 
-	private static void generate(GenModel genModel, boolean generateEcore, boolean generateMergedPluginXml) throws IOException {
+	private static void generate(GenModel genModel, boolean generateEcore, boolean generateMergedPluginXml)
+			throws IOException {
 
 		EPackage.Registry.INSTANCE.put(EcorePackage.eNS_URI, EcorePackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(XtextPackage.eNS_URI, XtextPackage.eINSTANCE);
@@ -108,8 +117,9 @@ public class GeneratorFacade {
 		EList<org.eclipse.xtext.xtextgen.Outlet> outletMap = genModel.getOutlets();
 		for (org.eclipse.xtext.xtextgen.Outlet o : outletMap) {
 			Outlet outlet = new Outlet(o.getTargetFolder());
-			if (o.getName().length() > 0)
+			if (o.getName().length() > 0) {
 				outlet.setName(o.getName());
+			}
 			outlet.setOverwrite(o.isOverwrite());
 			output.addOutlet(outlet);
 		}
@@ -118,7 +128,7 @@ public class GeneratorFacade {
 		Map<String, Variable> globalVarsMap = new HashMap<String, Variable>();
 		Variable genModelVariable = new Variable("genModel", genModel);
 		globalVarsMap.put("genModel", genModelVariable);
-		Variable generateMergedPluginXmlVariable = new Variable("generateMergedPluginXml", generateMergedPluginXml); 
+		Variable generateMergedPluginXmlVariable = new Variable("generateMergedPluginXml", generateMergedPluginXml);
 		globalVarsMap.put("generateMergedPluginXml", generateMergedPluginXmlVariable);
 		XpandExecutionContextImpl execCtx = new XpandExecutionContextImpl(output, null, globalVarsMap, null, null);
 		EmfRegistryMetaModel metamodel = new EmfRegistryMetaModel() {
@@ -224,7 +234,7 @@ public class GeneratorFacade {
 			// individual registration to avoid conflicts
 			elementFactoryService.setExtensionPointID("org.eclipse.xtext.ui.aSTFactory");
 			genModel.getServices().add(elementFactoryService);
-			
+
 			GenService resourceFactoryService = XtextgenFactory.eINSTANCE.createGenService();
 			resourceFactoryService.setServiceInterfaceFQName(IResourceFactory.class.getName());
 			resourceFactoryService.setGenClassFQName(namespace + ".services." + languageName + "ResourceFactory");
@@ -233,8 +243,7 @@ public class GeneratorFacade {
 			genModel.getServices().add(resourceFactoryService);
 
 			GenService parsetreeReconstructorService = XtextgenFactory.eINSTANCE.createGenService();
-			parsetreeReconstructorService
-					.setServiceInterfaceFQName(IParseTreeConstructor.class.getName());
+			parsetreeReconstructorService.setServiceInterfaceFQName(IParseTreeConstructor.class.getName());
 			parsetreeReconstructorService.setGenClassFQName(namespace + ".parsetree.reconstr." + languageName
 					+ "ParseTreeConstructor");
 			parsetreeReconstructorService
@@ -249,15 +258,13 @@ public class GeneratorFacade {
 			genModel.getServices().add(serializationStrategy);
 
 			GenService crossRefSerializer = XtextgenFactory.eINSTANCE.createGenService();
-			crossRefSerializer
-					.setServiceInterfaceFQName(ICrossReferenceSerializer.class.getName());
+			crossRefSerializer.setServiceInterfaceFQName(ICrossReferenceSerializer.class.getName());
 			crossRefSerializer
 					.setGenClassFQName("org.eclipse.xtext.parsetree.reconstr.impl.SimpleCrossReferenceSerializer");
 			genModel.getServices().add(crossRefSerializer);
 
 			GenService transientValueService = XtextgenFactory.eINSTANCE.createGenService();
-			transientValueService
-					.setServiceInterfaceFQName(ITransientValueService.class.getName());
+			transientValueService.setServiceInterfaceFQName(ITransientValueService.class.getName());
 			transientValueService
 					.setGenClassFQName("org.eclipse.xtext.parsetree.reconstr.impl.SimpleTransientValueService");
 			genModel.getServices().add(transientValueService);
@@ -288,7 +295,7 @@ public class GeneratorFacade {
 				}
 			}
 		}
-		
+
 		new ParserAssembler().assemble(genModel);
 
 		return genModel;
@@ -304,38 +311,89 @@ public class GeneratorFacade {
 
 	public static void cleanFolder(String srcGenPath) throws FileNotFoundException {
 		File f = new File(srcGenPath);
-		if (!f.exists()) {
+		if (!f.exists())
 			throw new FileNotFoundException(srcGenPath + " " + f.getAbsolutePath());
-		}
 		log.info("Cleaning folder " + srcGenPath);
 		final File[] contents = f.listFiles();
 		for (int j = 0; j < contents.length; j++) {
 			final File file = contents[j];
-			if (file.isDirectory()) {
-				cleanFolder(file.getAbsolutePath());
-			}
-			else {
-				if (!isCVSFile(file)) {
-					if (!file.delete()) {
-						log.error("Couldn't delete " + file.getAbsolutePath());
-					}
-				}
+			if (!delete(file)) {
+				log.warn(file.getAbsolutePath() + " has not been deleted");
 			}
 		}
 	}
 
-	private static boolean isCVSFile(File file) {
-		if (".cvsignore".equals(file.getName()))
+	/**
+	 * Deletes all files and subdirectories under dir. Returns true if all
+	 * deletions were successful. If a deletion fails, the method stops
+	 * attempting to delete and returns false.
+	 */
+	public static boolean delete(final File file) {
+		if (file.isDirectory()) {
+			final String[] children = file.list();
+			for (int i = 0; i < children.length; i++) {
+				if (isExcluded(file)) {
+					continue;
+				}
+
+				boolean success = delete(new File(file, children[i]));
+				if (!success)
+					return false;
+			}
+		}
+
+		// only delete directories if they are empty
+		if (isExcluded(file) || (file.isDirectory() && file.list().length > 0))
 			return true;
-		if ("CVS".equals(file.getName()))
-			return true;
-		if ("Entries".equals(file.getName()))
-			return true;
-		if ("Repository".equals(file.getName()))
-			return true;
-		if ("Root".equals(file.getName()))
-			return true;
-		return false;
+		else
+			return file.delete();
 	}
 
+	/**
+	 * Returns if the default excludes are used.
+	 * 
+	 * @return <code>true</code>, if the default excludes are used, otherwise
+	 *         <code>false</code>.
+	 */
+	public static boolean isUseDefaultExcludes() {
+		return useDefaultExcludes;
+	}
+
+	/**
+	 * Sets if the default excludes are used.
+	 * 
+	 * @param useDefaultExcludes
+	 *            If <code>true</code>, the default excludes are used, if
+	 *            <code>false</code>, the default excludes are ignored.
+	 */
+	public static void setUseDefaultExcludes(final boolean useDefaultExcludes) {
+		GeneratorFacade.useDefaultExcludes = useDefaultExcludes;
+	}
+
+	/**
+	 * Adds an exclude.
+	 * 
+	 * @param exclude
+	 *            the exclude
+	 */
+	public static void addExclude(final String exclude) {
+		excludes.add(exclude);
+	}
+
+	private static boolean isExcluded(final File file) {
+		if (file == null)
+			throw new IllegalArgumentException();
+
+		String name = file.getName();
+		if (useDefaultExcludes) {
+			for (final String excl : defaultExcludes)
+				if (name.equals(excl))
+					return true;
+		}
+
+		if (excludes.contains(name))
+			return true;
+
+		return false;
+	}
 }
