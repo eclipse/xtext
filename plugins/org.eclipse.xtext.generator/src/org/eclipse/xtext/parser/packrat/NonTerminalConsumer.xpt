@@ -272,19 +272,13 @@ public final class «this.consumerClassName()» extends NonTerminalConsumer {
 «ENDDEFINE»
 
 «DEFINE defineConsumeBody FOR Alternatives-»
-		announceNextLevel();
-		int result = ConsumeResult.SUCCESS;
-		IMarker bestMarker = mark();
-		IMarker currentMarker;
-		int tempResult;
+		AlternativesResult result = createAlternativesResult();
 		switch(entryPoint) {
-			case -1: // use fallthrough semantics of switch case
-				result = ConsumeResult.EMPTY_MATCH;
+			case -1: // use fall through semantics of switch case
+				result.reset();
 «EXPAND defineConsumeBodyInternal(this) FOR this-»
 		}
-		bestMarker.commit();
-		announceLevelFinished();
-		return result;
+		return result.getResult();
 «ENDDEFINE»
 
 «DEFINE defineConsumeBodyInternal(Alternatives start) FOR Alternatives-»
@@ -293,22 +287,10 @@ public final class «this.consumerClassName()» extends NonTerminalConsumer {
 «EXPAND defineConsumeBodyInternal(start) FOR (Alternatives)g-»
 «ELSE-»
 			case «g.indexInAlternatives(start)»:
-				announceNextPath();
-				currentMarker = bestMarker.fork();
-				tempResult = «g.consumeMethodName()»(nextEntryPoint()); 
-				if (tempResult == ConsumeResult.SUCCESS) {
-					bestMarker = currentMarker.join(bestMarker);
-					bestMarker.commit();
-					announceLevelFinished();
-					return tempResult;
+				result.nextAlternative();
+				if (result.isAlternativeDone(«g.consumeMethodName()»(nextEntryPoint()))) { 
+					return result.getResult(); 
 				}
-				if (tempResult > result) {
-					bestMarker = currentMarker.join(bestMarker);
-					result = tempResult;
-				} else {
-					bestMarker = bestMarker.join(currentMarker);
-				}
-				currentMarker = null;
 «ENDIF-»
 «ENDFOREACH-»
 «ENDDEFINE»
@@ -318,7 +300,7 @@ public final class «this.consumerClassName()» extends NonTerminalConsumer {
 		final IMarker marker = mark();
 		int result = ConsumeResult.SUCCESS;
 		switch(entryPoint) {
-			case -1: // use fallthrough semantics of switch case
+			case -1: // use fall through semantics of switch case
 				result = ConsumeResult.EMPTY_MATCH;
 «EXPAND defineConsumeBodyInternal(this) FOR this-»
 		}
