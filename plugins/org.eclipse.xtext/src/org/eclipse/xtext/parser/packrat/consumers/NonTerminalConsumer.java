@@ -33,6 +33,43 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 	private final ITerminalConsumer[] hiddenTokens;
 	
 	private final IConsumerUtility consumerUtil;
+	
+	protected class AlternativesResult {
+		private int bestResult;
+		private IMarker bestMarker;
+		private IMarker currentMarker;
+		
+		protected AlternativesResult() {
+			bestResult = ConsumeResult.SUCCESS;
+			bestMarker = mark();
+		}
+		
+		public void nextAlternative() {
+			announceNextPath();
+			currentMarker = bestMarker.fork();
+		}
+		
+		public void reset() {
+			bestResult = ConsumeResult.EMPTY_MATCH;
+		}
+		
+		public int getResult() {
+			bestMarker.commit();
+			announceLevelFinished();
+			return bestResult;
+		}
+
+		public boolean isAlternativeDone(int result) {
+			if (result == ConsumeResult.SUCCESS || result > bestResult) {
+				bestMarker = currentMarker.join(bestMarker);
+				bestResult = result;
+			} else {
+				bestMarker = bestMarker.join(currentMarker);
+			}
+			currentMarker = null;
+			return result == ConsumeResult.SUCCESS;
+		}
+	}
 
 	protected NonTerminalConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration.getInput(), configuration.getTokenAcceptor(), configuration.getRecoveryStateHolder());
@@ -55,6 +92,11 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 		marker.commit();
 		prevState.restore();
 		return result;
+	}
+	
+	public AlternativesResult createAlternativesResult() {
+		announceNextLevel();
+		return new AlternativesResult();
 	}
 	
 	public boolean isDefiningHiddens() {
