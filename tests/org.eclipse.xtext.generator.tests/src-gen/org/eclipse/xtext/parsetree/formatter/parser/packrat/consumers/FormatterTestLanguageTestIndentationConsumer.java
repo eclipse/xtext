@@ -46,7 +46,7 @@ public final class FormatterTestLanguageTestIndentationConsumer extends NonTermi
 		final IMarker marker = mark();
 		int result = ConsumeResult.SUCCESS;
 		switch(entryPoint) {
-			case -1: // use fallthrough semantics of switch case
+			case -1: // use fall through semantics of switch case
 				result = ConsumeResult.EMPTY_MATCH;
 			case 0:
 				announceNextStep();
@@ -108,52 +108,22 @@ public final class FormatterTestLanguageTestIndentationConsumer extends NonTermi
 	}
 
 	protected int doConsumeAlternatives$6(int entryPoint) throws Exception {
-		announceNextLevel();
-		int result = ConsumeResult.SUCCESS;
-		IMarker bestMarker = mark();
-		IMarker currentMarker;
-		int tempResult;
+		AlternativesResult result = createAlternativesResult();
 		switch(entryPoint) {
-			case -1: // use fallthrough semantics of switch case
-				result = ConsumeResult.EMPTY_MATCH;
+			case -1: // use fall through semantics of switch case
+				result.reset();
 			case 0:
-				announceNextPath();
-				currentMarker = bestMarker.fork();
-				tempResult = consumeAssignment$7(nextEntryPoint()); 
-				if (tempResult == ConsumeResult.SUCCESS) {
-					bestMarker = currentMarker.join(bestMarker);
-					bestMarker.commit();
-					announceLevelFinished();
-					return tempResult;
+				result.nextAlternative();
+				if (result.isAlternativeDone(consumeAssignment$7(nextEntryPoint()))) { 
+					return result.getResult(); 
 				}
-				if (tempResult > result) {
-					bestMarker = currentMarker.join(bestMarker);
-					result = tempResult;
-				} else {
-					bestMarker = bestMarker.join(currentMarker);
-				}
-				currentMarker = null;
 			case 1:
-				announceNextPath();
-				currentMarker = bestMarker.fork();
-				tempResult = consumeAssignment$9(nextEntryPoint()); 
-				if (tempResult == ConsumeResult.SUCCESS) {
-					bestMarker = currentMarker.join(bestMarker);
-					bestMarker.commit();
-					announceLevelFinished();
-					return tempResult;
+				result.nextAlternative();
+				if (result.isAlternativeDone(consumeAssignment$9(nextEntryPoint()))) { 
+					return result.getResult(); 
 				}
-				if (tempResult > result) {
-					bestMarker = currentMarker.join(bestMarker);
-					result = tempResult;
-				} else {
-					bestMarker = bestMarker.join(currentMarker);
-				}
-				currentMarker = null;
 		}
-		bestMarker.commit();
-		announceLevelFinished();
-		return result;
+		return result.getResult();
 	}
 
 	protected int consumeAssignment$7(int entryPoint) throws Exception {

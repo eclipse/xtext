@@ -58,7 +58,7 @@ public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsume
 		final IMarker marker = mark();
 		int result = ConsumeResult.SUCCESS;
 		switch(entryPoint) {
-			case -1: // use fallthrough semantics of switch case
+			case -1: // use fall through semantics of switch case
 				result = ConsumeResult.EMPTY_MATCH;
 			case 0:
 				announceNextStep();
@@ -144,7 +144,7 @@ public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsume
 		final IMarker marker = mark();
 		int result = ConsumeResult.SUCCESS;
 		switch(entryPoint) {
-			case -1: // use fallthrough semantics of switch case
+			case -1: // use fall through semantics of switch case
 				result = ConsumeResult.EMPTY_MATCH;
 			case 0:
 				announceNextStep();
