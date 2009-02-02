@@ -75,7 +75,7 @@ public final class EpatchTestLanguageNamedResourceConsumer extends NonTerminalCo
 		final IMarker marker = mark();
 		int result = ConsumeResult.SUCCESS;
 		switch(entryPoint) {
-			case -1: // use fallthrough semantics of switch case
+			case -1: // use fall through semantics of switch case
 				result = ConsumeResult.EMPTY_MATCH;
 			case 0:
 				announceNextStep();
@@ -200,52 +200,22 @@ public final class EpatchTestLanguageNamedResourceConsumer extends NonTerminalCo
 	}
 
 	protected int consumeAlternatives$15(int entryPoint) throws Exception {
-		announceNextLevel();
-		int result = ConsumeResult.SUCCESS;
-		IMarker bestMarker = mark();
-		IMarker currentMarker;
-		int tempResult;
+		AlternativesResult result = createAlternativesResult();
 		switch(entryPoint) {
-			case -1: // use fallthrough semantics of switch case
-				result = ConsumeResult.EMPTY_MATCH;
+			case -1: // use fall through semantics of switch case
+				result.reset();
 			case 0:
-				announceNextPath();
-				currentMarker = bestMarker.fork();
-				tempResult = consumeGroup$16(nextEntryPoint()); 
-				if (tempResult == ConsumeResult.SUCCESS) {
-					bestMarker = currentMarker.join(bestMarker);
-					bestMarker.commit();
-					announceLevelFinished();
-					return tempResult;
+				result.nextAlternative();
+				if (result.isAlternativeDone(consumeGroup$16(nextEntryPoint()))) { 
+					return result.getResult(); 
 				}
-				if (tempResult > result) {
-					bestMarker = currentMarker.join(bestMarker);
-					result = tempResult;
-				} else {
-					bestMarker = bestMarker.join(currentMarker);
-				}
-				currentMarker = null;
 			case 1:
-				announceNextPath();
-				currentMarker = bestMarker.fork();
-				tempResult = consumeAssignment$20(nextEntryPoint()); 
-				if (tempResult == ConsumeResult.SUCCESS) {
-					bestMarker = currentMarker.join(bestMarker);
-					bestMarker.commit();
-					announceLevelFinished();
-					return tempResult;
+				result.nextAlternative();
+				if (result.isAlternativeDone(consumeAssignment$20(nextEntryPoint()))) { 
+					return result.getResult(); 
 				}
-				if (tempResult > result) {
-					bestMarker = currentMarker.join(bestMarker);
-					result = tempResult;
-				} else {
-					bestMarker = bestMarker.join(currentMarker);
-				}
-				currentMarker = null;
 		}
-		bestMarker.commit();
-		announceLevelFinished();
-		return result;
+		return result.getResult();
 	}
 
 	protected int consumeGroup$16(int entryPoint) throws Exception {
@@ -253,7 +223,7 @@ public final class EpatchTestLanguageNamedResourceConsumer extends NonTerminalCo
 		final IMarker marker = mark();
 		int result = ConsumeResult.SUCCESS;
 		switch(entryPoint) {
-			case -1: // use fallthrough semantics of switch case
+			case -1: // use fall through semantics of switch case
 				result = ConsumeResult.EMPTY_MATCH;
 			case 0:
 				announceNextStep();
@@ -320,52 +290,22 @@ public final class EpatchTestLanguageNamedResourceConsumer extends NonTerminalCo
 	}
 
 	protected int consumeAlternatives$24(int entryPoint) throws Exception {
-		announceNextLevel();
-		int result = ConsumeResult.SUCCESS;
-		IMarker bestMarker = mark();
-		IMarker currentMarker;
-		int tempResult;
+		AlternativesResult result = createAlternativesResult();
 		switch(entryPoint) {
-			case -1: // use fallthrough semantics of switch case
-				result = ConsumeResult.EMPTY_MATCH;
+			case -1: // use fall through semantics of switch case
+				result.reset();
 			case 0:
-				announceNextPath();
-				currentMarker = bestMarker.fork();
-				tempResult = consumeGroup$25(nextEntryPoint()); 
-				if (tempResult == ConsumeResult.SUCCESS) {
-					bestMarker = currentMarker.join(bestMarker);
-					bestMarker.commit();
-					announceLevelFinished();
-					return tempResult;
+				result.nextAlternative();
+				if (result.isAlternativeDone(consumeGroup$25(nextEntryPoint()))) { 
+					return result.getResult(); 
 				}
-				if (tempResult > result) {
-					bestMarker = currentMarker.join(bestMarker);
-					result = tempResult;
-				} else {
-					bestMarker = bestMarker.join(currentMarker);
-				}
-				currentMarker = null;
 			case 1:
-				announceNextPath();
-				currentMarker = bestMarker.fork();
-				tempResult = consumeAssignment$29(nextEntryPoint()); 
-				if (tempResult == ConsumeResult.SUCCESS) {
-					bestMarker = currentMarker.join(bestMarker);
-					bestMarker.commit();
-					announceLevelFinished();
-					return tempResult;
+				result.nextAlternative();
+				if (result.isAlternativeDone(consumeAssignment$29(nextEntryPoint()))) { 
+					return result.getResult(); 
 				}
-				if (tempResult > result) {
-					bestMarker = currentMarker.join(bestMarker);
-					result = tempResult;
-				} else {
-					bestMarker = bestMarker.join(currentMarker);
-				}
-				currentMarker = null;
 		}
-		bestMarker.commit();
-		announceLevelFinished();
-		return result;
+		return result.getResult();
 	}
 
 	protected int consumeGroup$25(int entryPoint) throws Exception {
@@ -373,7 +313,7 @@ public final class EpatchTestLanguageNamedResourceConsumer extends NonTerminalCo
 		final IMarker marker = mark();
 		int result = ConsumeResult.SUCCESS;
 		switch(entryPoint) {
-			case -1: // use fallthrough semantics of switch case
+			case -1: // use fall through semantics of switch case
 				result = ConsumeResult.EMPTY_MATCH;
 			case 0:
 				announceNextStep();
