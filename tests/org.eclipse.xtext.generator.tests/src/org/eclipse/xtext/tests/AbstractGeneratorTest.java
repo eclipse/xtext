@@ -18,7 +18,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtend.XtendFacade;
 import org.eclipse.xtend.expression.ExecutionContextImpl;
@@ -151,7 +150,8 @@ public abstract class AbstractGeneratorTest extends TestCase {
 	}
 
 	protected XtextResource getResource(InputStream in) throws Exception {
-		ResourceSet rs = new XtextResourceSet();
+		XtextResourceSet rs = new XtextResourceSet();
+		rs.setClasspathURIContext(getClass());
 		XtextResource resource = (XtextResource) rs.createResource(URI.createURI("mytestmodel."+getResourceFactory().getModelFileExtensions()[0]));
 		resource.load(in, null);
 		
