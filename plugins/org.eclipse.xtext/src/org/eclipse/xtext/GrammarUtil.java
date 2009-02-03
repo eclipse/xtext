@@ -166,7 +166,7 @@ public class GrammarUtil {
 		} catch(ClasspathUriResolutionException ex) {
 			throw new IllegalArgumentException("Couldn't find grammar for super language " + id, ex);
 		}
-		if (resource == null)
+		if (resource == null || resource.getContents().isEmpty())
 			throw new IllegalArgumentException("Couldn't find grammar for super language " + id);
 		Grammar grammar = (Grammar) resource.getContents().get(0);
 		return grammar;
