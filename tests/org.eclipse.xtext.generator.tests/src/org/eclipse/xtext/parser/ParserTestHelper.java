@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResource;
@@ -31,7 +30,8 @@ public class ParserTestHelper {
 	}
 	
 	public XtextResource getResourceFromStream(InputStream in) throws IOException {
-		ResourceSet rs = new XtextResourceSet();
+		XtextResourceSet rs = new XtextResourceSet();
+		rs.setClasspathURIContext(getClass());
 		URI uri = URI.createURI("mytestmodel." + factory.getModelFileExtensions()[0]);
 		XtextResource resource = createResource(uri);
 		rs.getResources().add(resource);
