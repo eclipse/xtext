@@ -49,6 +49,9 @@ public class JdtClasspathUriResolver implements IClasspathUriResolver {
 		if (javaProject.exists()) {
 			IPackageFragmentRoot[] allPackageFragmentRoots = javaProject.getAllPackageFragmentRoots();
 			for (IPackageFragmentRoot packageFragmentRoot : allPackageFragmentRoots) {
+				// prevents MalFormedURIException after executing the NewXtextProjectWizard
+				if (!packageFragmentRoot.isOpen())
+					packageFragmentRoot.open(null);
 				IResource correspondingResource = packageFragmentRoot.getCorrespondingResource();
 				if ((correspondingResource != null && correspondingResource instanceof IFile)
 						|| packageFragmentRoot instanceof JarPackageFragmentRoot) {
