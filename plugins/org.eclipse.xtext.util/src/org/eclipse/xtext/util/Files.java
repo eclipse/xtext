@@ -9,6 +9,7 @@
 package org.eclipse.xtext.util;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -58,22 +59,37 @@ public class Files {
 		}
 	}
 
-	public static void cleanFolder(File f) throws FileNotFoundException {
-		if (!f.exists()) {
-			throw new FileNotFoundException(f.getAbsolutePath());
+	public static boolean cleanFolder(File parentFolder, FileFilter filter, boolean continueOnError, boolean deleteParentFolder) throws FileNotFoundException {
+		if (!parentFolder.exists()) {
+			throw new FileNotFoundException(parentFolder.getAbsolutePath());
 		}
-		log.info("Cleaning folder " + f.toString());
-		final File[] contents = f.listFiles();
+		if (filter == null)
+			filter = new FileFilter() {
+				public boolean accept(File pathname) {
+					return true;
+				}
+			};
+		log.debug("Cleaning folder " + parentFolder.toString());
+		final File[] contents = parentFolder.listFiles(filter);
 		for (int j = 0; j < contents.length; j++) {
 			final File file = contents[j];
 			if (file.isDirectory()) {
-				cleanFolder(file);
+				if (!cleanFolder(file, filter, continueOnError, false) && !continueOnError)
+					return false;
 			} else {
 				if (!file.delete()) {
 					log.error("Couldn't delete " + file.getAbsolutePath());
+					if (!continueOnError)
+						return false;
 				}
 			}
 		}
-		f.delete();
+		if (deleteParentFolder) {
+			if (!parentFolder.delete()) {
+				log.error("Couldn't delete " + parentFolder.getAbsolutePath());
+				return false;
+			}
+		}
+		return true;
 	}
 }
