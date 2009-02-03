@@ -59,7 +59,7 @@ public abstract class EClassifierInfo {
 	public abstract boolean addFeature(String featureName, EClassifierInfo featureType, boolean isMultivalue,
 			boolean isContainment, EObject parserElement) throws TransformationException;
 
-	static class EClassInfo extends EClassifierInfo {
+	public static class EClassInfo extends EClassifierInfo {
 
 		public EClassInfo(EClassifier metaType, boolean isGenerated) {
 			super(metaType, isGenerated);
@@ -181,7 +181,7 @@ public abstract class EClassifierInfo {
 		}
 	}
 
-	static class EDataTypeInfo extends EClassifierInfo {
+	public static class EDataTypeInfo extends EClassifierInfo {
 
 		public EDataTypeInfo(EClassifier metaType, boolean isGenerated) {
 			super(metaType, isGenerated);

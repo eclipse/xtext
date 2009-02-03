@@ -74,7 +74,7 @@ public class EClassifierInfos {
 		return getInfo(typeRef.getMetamodel(), typeRef.getType().getName());
 	}
 	
-	EClassifierInfo getInfo(AbstractMetamodelDeclaration alias, String name) {
+	public EClassifierInfo getInfo(AbstractMetamodelDeclaration alias, String name) {
 		return getInfo(getKey(alias, name));
 	}
 
