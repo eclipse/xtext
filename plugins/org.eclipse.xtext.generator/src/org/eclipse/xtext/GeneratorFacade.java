@@ -9,9 +9,11 @@
 package org.eclipse.xtext;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -46,6 +48,7 @@ import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
 import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.metamodel.Xtext2EcoreTransformer;
+import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.xtextgen.GenModel;
 import org.eclipse.xtext.xtextgen.GenService;
 import org.eclipse.xtext.xtextgen.PluginDependency;
@@ -313,42 +316,14 @@ public class GeneratorFacade {
 		File f = new File(srcGenPath);
 		if (!f.exists())
 			throw new FileNotFoundException(srcGenPath + " " + f.getAbsolutePath());
-		log.info("Cleaning folder " + srcGenPath);
-		final File[] contents = f.listFiles();
-		for (int j = 0; j < contents.length; j++) {
-			final File file = contents[j];
-			if (!delete(file)) {
-				log.warn(file.getAbsolutePath() + " has not been deleted");
+		log.info("Cleaning folder " + f.getPath());
+		Files.cleanFolder(f, new FileFilter() {
+			private final Collection<String> excludes = new HashSet<String>(
+					useDefaultExcludes ? Arrays.asList(defaultExcludes) : GeneratorFacade.excludes); 
+			public boolean accept(File pathname) {
+				return !excludes.contains(pathname.getName());
 			}
-		}
-	}
-
-	/**
-	 * Deletes all files and subdirectories under dir. Returns true if all
-	 * deletions were successful. If a deletion fails, the method stops
-	 * attempting to delete and returns false.
-	 */
-	public static boolean delete(final File file) {
-		if (file.isDirectory()) {
-			if (isExcluded(file))
-				return true;
-			final String[] children = file.list();
-			for (int i = 0; i < children.length; i++) {
-				if (isExcluded(file)) {
-					continue;
-				}
-
-				boolean success = delete(new File(file, children[i]));
-				if (!success)
-					return false;
-			}
-		}
-
-		// only delete directories if they are empty
-		if (isExcluded(file) || (file.isDirectory() && file.list().length > 0))
-			return true;
-		else
-			return file.delete();
+		}, false, false);
 	}
 
 	/**
@@ -382,20 +357,4 @@ public class GeneratorFacade {
 		excludes.add(exclude);
 	}
 
-	private static boolean isExcluded(final File file) {
-		if (file == null)
-			throw new IllegalArgumentException();
-
-		String name = file.getName();
-		if (useDefaultExcludes) {
-			for (final String excl : defaultExcludes)
-				if (name.equals(excl))
-					return true;
-		}
-
-		if (excludes.contains(name))
-			return true;
-
-		return false;
-	}
 }
