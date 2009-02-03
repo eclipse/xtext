@@ -26,7 +26,7 @@ import org.eclipse.xtext.parsetree.SyntaxError;
  */
 public class ParsetreeUtil {
 	
-	private static final char[] separator = System.getProperty( "line.separator" ).toCharArray();
+	private static final char[] separator = System.getProperty("line.separator").toCharArray();
 
 	private static void checkArgument(AbstractNodeImpl abstractParserNode) {
 		int classifierID = abstractParserNode.eClass().getClassifierID();
@@ -56,6 +56,10 @@ public class ParsetreeUtil {
 	}
 
 	public static int countLines(String text) {
+		return countLines(text, separator);
+	}
+	
+	public static int countLines(String text, char[] separator) {
 		int line = 0;
 		char[] charArray = text.toCharArray();
 		if ( separator.length == 1) {
@@ -66,7 +70,10 @@ public class ParsetreeUtil {
 			}
 		} else if(separator.length==2){
 			for (int i = 0; i<charArray.length; i++) {
-				if (charArray[i] == separator[0] && charArray.length>=i+1 && charArray[i+1]==separator[1]) {
+				if (charArray[i] == separator[0] && charArray.length>i+1 && charArray[i+1]==separator[1]) {
+					line++;
+					i++;
+				} else if (charArray[i] == separator[1]) {
 					line++;
 				}
 			}
