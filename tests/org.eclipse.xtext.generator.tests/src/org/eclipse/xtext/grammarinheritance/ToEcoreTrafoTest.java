@@ -11,6 +11,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
+import org.eclipse.xtext.AbstractMetamodelDeclaration;
+import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.LexerRule;
@@ -19,6 +21,8 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.metamodel.Xtext2EcoreTransformer;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
+import org.eclipse.xtext.util.CollectionUtils;
+import org.eclipse.xtext.util.Filter;
 
 public class ToEcoreTrafoTest extends AbstractGeneratorTest {
 	private static final Logger logger = Logger.getLogger(ToEcoreTrafoTest.class);
@@ -70,11 +74,12 @@ public class ToEcoreTrafoTest extends AbstractGeneratorTest {
 		assertNotNull(feature.getEType());
 	}
 
-	@SuppressWarnings("unchecked")
 	public void testConcreteLanguageToMetamodel1() throws Exception {
 		XtextResource r = getResource("classpath:/" + ConcreteTestLanguage.class.getName().replace('.', '/') + ".xtext");
 		EObject element = r.getParseResult().getRootASTElement();
-		List<EPackage> mms = (List<EPackage>) invokeWithXtend("getGeneratedEPackages(this)", element);
+		Grammar g = (Grammar) element;
+		List<AbstractMetamodelDeclaration> mms = CollectionUtils.list(
+				CollectionUtils.filter(g.getMetamodelDeclarations(), Filter.Util.<AbstractMetamodelDeclaration>instanceOf(GeneratedMetamodel.class)));
 		assertNotNull(mms);
 		assertEquals(1, mms.size());
 	}

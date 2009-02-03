@@ -22,7 +22,7 @@
 <?eclipse version="3.0"?>
 
 <plugin>
-	
+«EXPAND body FOR this»
 </plugin>
 «ENDFILE»
 «ENDIF»
