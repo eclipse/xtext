@@ -8,6 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource;
 
+import org.eclipse.emf.common.util.URI;
+
 /**
  * @author Jan Köhnlein
  */
@@ -17,6 +19,10 @@ public class ClasspathUriResolutionException extends RuntimeException {
 
 	public ClasspathUriResolutionException(Exception exc) {
 		super(exc);
+	}
+	
+	public ClasspathUriResolutionException(URI unresolvedURI) {
+		super(unresolvedURI.toString());
 	}
 
 }

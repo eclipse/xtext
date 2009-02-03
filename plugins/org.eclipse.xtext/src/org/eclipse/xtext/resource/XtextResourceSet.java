@@ -42,7 +42,10 @@ public class XtextResourceSet extends ResourceSetImpl {
                 @Override
                 public URI normalize(URI uri) {
                     if (ClasspathUriUtil.isClasspathUri(uri)) {
-                        return XtextResourceSet.this.resolveClasspathURI(uri);
+                        URI result = XtextResourceSet.this.resolveClasspathURI(uri);
+                        if (ClasspathUriUtil.isClasspathUri(result))
+                        	throw new ClasspathUriResolutionException(result);
+                        return result;
                     }
                     return super.normalize(uri);
                 }
