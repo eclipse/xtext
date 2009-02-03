@@ -11,7 +11,6 @@ package org.eclipse.xtext.parsetree.reconstr;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
@@ -30,9 +29,9 @@ public class ComplexReconstrTest extends AbstractGeneratorTest {
 	}
 
 	public void testPrintGrammar() {
-		ResourceSet rs = new XtextResourceSet();
-		URI u = URI
-				.createURI("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.xmi");
+		XtextResourceSet rs = new XtextResourceSet();
+		rs.setClasspathURIContext(getClass());
+		URI u = URI.createURI("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.xmi");
 		EObject o = rs.getResource(u, true).getContents().get(0);
 		for (Object x : o.eContents())
 			if (x instanceof ParserRule) {
