@@ -62,7 +62,7 @@ public class GeneratorFacade {
 
 	private static Set<String> excludes = new HashSet<String>();
 
-	private static String[] defaultExcludes = new String[] { ".CVS", ".svn" };
+	private static String[] defaultExcludes = new String[] { "CVS", ".cvsignore", ".svn" };
 
 	private static boolean useDefaultExcludes = true;
 
@@ -330,6 +330,8 @@ public class GeneratorFacade {
 	 */
 	public static boolean delete(final File file) {
 		if (file.isDirectory()) {
+			if (isExcluded(file))
+				return true;
 			final String[] children = file.list();
 			for (int i = 0; i < children.length; i++) {
 				if (isExcluded(file)) {
