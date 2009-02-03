@@ -34,7 +34,7 @@ Bundle-Activator: «activatorClassFQN()»
 «ENDFILE-»
 «ENDDEFINE»
 
-«DEFINE dependencies FOR GenModel»
+«DEFINE dependencies FOR GenModel-»
 «FOREACH pluginDependencies(true).manifestEntry().toSet() AS entry»,
  «entry»«ENDFOREACH-»
 «ENDDEFINE»
