@@ -9,7 +9,7 @@
  *******************************************************************************/
 «ENDREM»
 «DEFINE root FOR XtextProjectInfo»
-«FILE this.languageNameAbbreviation+"Grammar.java" GRAMMAR_GENERATOR_OUTLET -»
+«FILE this.languageNameAbbreviation+"Generator.java" GRAMMAR_GENERATOR_OUTLET -»
 
 /*******************************************************************************
  * generated with "/org.eclipse.xtext.xtext.ui/src/org/eclipse/xtext/xtext/ui/wizard/project/GrammarGenerator.xpt"
@@ -29,10 +29,10 @@ import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
 /**
- * Run this class in order to generate the  «this.languageNameAbbreviation» grammar.
+ * Run this class in order to generate the language '«this.languageNameAbbreviation»'.
  */
-public class  «this.languageNameAbbreviation»Grammar {
-	private Logger log = Logger.getLogger( «this.languageNameAbbreviation»Grammar.class);
+public class  «this.languageNameAbbreviation»Generator {
+	private Logger log = Logger.getLogger( «this.languageNameAbbreviation»Generator.class);
 
 	private static final String PATH = ".";
 	private static final String UI_PATH = "../«this.projectName».ui";
@@ -46,18 +46,16 @@ public class  «this.languageNameAbbreviation»Grammar {
 		String classpathUri = "classpath:/«this.basePackagePath»/«this.languageNameAbbreviation».xtext";
 		log.info("loading " + classpathUri);
 		ResourceSet rs = new XtextResourceSet();
-		Resource resource = rs
-				.createResource(new ClassloaderClasspathUriResolver().resolve(
-						null, URI.createURI(classpathUri)));
+		Resource resource = rs.createResource(
+		  new ClassloaderClasspathUriResolver().resolve(null, URI.createURI(classpathUri)));
 		resource.load(null);
 		Grammar grammarModel = (Grammar) resource.getContents().get(0);
-
 		GeneratorFacade.generate(grammarModel, PATH, UI_PATH, "«this.fileExtension»");
 		log.info("Done.");
 	}
 
 	public static void main(String[] args) throws IOException {
-		 «this.languageNameAbbreviation»Grammar generator = new «this.languageNameAbbreviation»Grammar();
+		 «this.languageNameAbbreviation»Generator generator = new «this.languageNameAbbreviation»Generator();
 		generator.generate();
 	}
 
