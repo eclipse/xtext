@@ -13,7 +13,7 @@
 <project name="testsuite" default="run" basedir=".">
 	<!-- The property ${eclipse-home} should be passed into this script -->
 	<!-- Set a meaningful default value for when it is not. -->
-	<property name="eclipse-home" value="${basedir}\..\.." />
+	<property name="eclipse-home" value="${basedir}/../.." />
 
 	<!-- sets the properties plugin-name, and library-file -->
 	<property name="plugin-name" value="org.eclipse.xtext.tests" />
@@ -23,7 +23,7 @@
 	<!-- all tests that are to be run. Initialization for individual tests -->
 	<!-- should be done within the body of the suite target. -->
 	<target name="init">
-		<property name="classname" value="org.eclipse.xtext.AutoTestSuite" />
+		<property name="classname" value="org.eclipse.xtext.ui.integration.PluginTestSuite" />
 		<tstamp />
 		<delete>
 			<fileset dir="${eclipse-home}" includes="org*.xml" />
