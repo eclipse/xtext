@@ -10,12 +10,10 @@ Export-Package: org.apache.log4j,
  org.apache.log4j.jdbc,
  org.apache.log4j.jmx,
  org.apache.log4j.lf5,
- org.apache.log4j.lf5.config,
  org.apache.log4j.lf5.util,
  org.apache.log4j.lf5.viewer,
  org.apache.log4j.lf5.viewer.categoryexplorer,
  org.apache.log4j.lf5.viewer.configure,
- org.apache.log4j.lf5.viewer.images,
  org.apache.log4j.net,
  org.apache.log4j.nt,
  org.apache.log4j.or,
@@ -26,3 +24,4 @@ Export-Package: org.apache.log4j,
  org.apache.log4j.xml
 Eclipse-BuddyPolicy: registered
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ClassPath: log4j-1.2.15.jar
