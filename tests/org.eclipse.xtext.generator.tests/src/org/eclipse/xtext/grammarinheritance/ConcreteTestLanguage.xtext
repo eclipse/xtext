@@ -2,6 +2,45 @@ language org.eclipse.xtext.grammarinheritance.ConcreteTestLanguage extends org.e
 
 generate foo "http://holla"
 
+//import "classpath:/org/eclipse/xtext/grammarinheritance/ametamodel.ecore" as mm
+
+
+RootRule:
+//	ConcreteParserRule | CallOverridenParserRule | CallExtendedParserRule;
+	ConcreteParserRule;
+
+// call InheritedParserRule
 ConcreteParserRule :
 	'model' magicNumber=REAL ':' (elements+=InheritedParserRule)*;
 	
+
+
+// override OverridableParserRule and call it
+
+/* TODO: make me work!
+OverridableParserRule returns mm::AType:
+	'overriddenelement' name=ID;
+	
+CallOverridenParserRule:
+	call=AbstractCallOverridenParserRule;
+*/
+
+	
+// override and extend ExtendableParserRule and call it
+
+/* TODO: make me work!
+ExtendableParserRule returns mm::AType:
+	Subrule1 | Subrule2 | Subrule3;
+	
+Subrule1:
+	'subrule1' name=ID sub1=ID;
+
+Subrule2:
+	'subrule3' name=ID sub2=STRING;
+
+Subrule3:
+	'subrule3' name=ID sub1=INT;
+	
+CallExtendedParserRule:
+	call=AbstractCallExtendedParserRule;
+*/
