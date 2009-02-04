@@ -22,8 +22,6 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.internal.xtend.type.impl.java.JavaMetaModel;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -36,7 +34,6 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWizard;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
-import org.eclipse.ui.progress.UIJob;
 import org.eclipse.ui.wizards.newresource.BasicNewResourceWizard;
 import org.eclipse.xpand2.XpandExecutionContextImpl;
 import org.eclipse.xpand2.XpandFacade;
@@ -137,24 +134,17 @@ public class NewXtextProjectWizard extends Wizard implements INewWizard {
 	 */
 
 	private void doFinish(final XtextProjectInfo xtextProjectInfo, final IProgressMonitor monitor) {
-		new UIJob("creating Xtext projects...") {
-
-			@Override
-			public IStatus runInUIThread(final IProgressMonitor monitor) {
-				try {
-					new XtextProjectCreator(xtextProjectInfo).run(monitor);
-				}
-				catch (final InvocationTargetException e) {
-					logger.error(e);
-				}
-				catch (final InterruptedException e) {
-					logger.error(e);
-				}
-				return Status.OK_STATUS;
-			}
-
-		}.schedule();
-		
+		try {
+			XtextProjectCreator creator = new XtextProjectCreator(xtextProjectInfo);
+			creator.run(monitor);
+			EclipseResourceUtil.openFileToEdit(getShell(), creator.result);
+		}
+		catch (final InvocationTargetException e) {
+			logger.error(e);
+		}
+		catch (final InterruptedException e) {
+			logger.error(e);
+		}
 	}
 
 	/**
@@ -176,6 +166,7 @@ public class NewXtextProjectWizard extends Wizard implements INewWizard {
 				.unmodifiableList(Arrays.asList(SRC_ROOT, SRC_GEN_ROOT));
 
 		private final XtextProjectInfo xtextProjectInfo;
+		private IFile result;
 
 		public XtextProjectCreator(final XtextProjectInfo xtextProjectInfo) {
 			this.xtextProjectInfo = xtextProjectInfo;
@@ -285,7 +276,7 @@ public class NewXtextProjectWizard extends Wizard implements INewWizard {
 			IFile dslGrammarFile = getDslGrammarFile(basePackageFolder);
 			BasicNewResourceWizard
 					.selectAndReveal(dslGrammarFile, PlatformUI.getWorkbench().getActiveWorkbenchWindow());
-			EclipseResourceUtil.openFileToEdit(getShell(), dslGrammarFile);
+			this.result = dslGrammarFile;
 
 		}
 

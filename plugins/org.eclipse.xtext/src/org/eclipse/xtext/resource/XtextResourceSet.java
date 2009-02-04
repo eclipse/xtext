@@ -45,6 +45,7 @@ public class XtextResourceSet extends ResourceSetImpl {
                         URI result = XtextResourceSet.this.resolveClasspathURI(uri);
                         if (ClasspathUriUtil.isClasspathUri(result))
                         	throw new ClasspathUriResolutionException(result);
+                        result = super.normalize(result);
                         return result;
                     }
                     return super.normalize(uri);
