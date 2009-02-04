@@ -59,6 +59,8 @@ public class LazyTransformingTreeProvider extends LabelProvider implements ILazy
 	@Inject
 	private ISemanticModelTransformer semanticModelTransformer;
 
+	private boolean sorted;
+
 	private ContentOutlineNode transformSemanticModelToOutlineModel(EObject semanticModel) {
 		return semanticModelTransformer.transformSemanticModel(semanticModel);
 	}
@@ -122,6 +124,11 @@ public class LazyTransformingTreeProvider extends LabelProvider implements ILazy
 			return resourceManager.createImage(imageDescriptor);
 		}
 		return super.getImage(element);
+	}
+	
+	public void setSorted(boolean on) {
+		this.sorted = on;
+		semanticModelTransformer.setSorted(on);
 	}
 
 }
