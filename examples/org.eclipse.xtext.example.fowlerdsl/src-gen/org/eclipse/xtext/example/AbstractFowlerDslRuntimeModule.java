@@ -55,6 +55,9 @@ public abstract class AbstractFowlerDslRuntimeModule extends DefaultRuntimeModul
 	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
 		return org.eclipse.xtext.example.parser.antlr.internal.InternalFowlerDslLexer.class;
 	}
+	public Class<? extends org.eclipse.xtext.parser.antlr.ITokenDefProvider> bindITokenDefProvider() {
+		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
+	}
 	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
 		return org.eclipse.xtext.example.parser.packrat.FowlerDslPackratParser.class;
 	}

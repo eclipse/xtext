@@ -55,6 +55,9 @@ public abstract class AbstractTransientValuesTestRuntimeModule extends DefaultRu
 	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
 		return org.eclipse.xtext.parsetree.transientvalues.parser.antlr.internal.InternalTransientValuesTestLexer.class;
 	}
+	public Class<? extends org.eclipse.xtext.parser.antlr.ITokenDefProvider> bindITokenDefProvider() {
+		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
+	}
 	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
 		return org.eclipse.xtext.parsetree.transientvalues.parser.packrat.TransientValuesTestPackratParser.class;
 	}

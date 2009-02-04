@@ -55,6 +55,9 @@ public abstract class AbstractFormatterTestLanguageRuntimeModule extends Default
 	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
 		return org.eclipse.xtext.parsetree.formatter.parser.antlr.internal.InternalFormatterTestLanguageLexer.class;
 	}
+	public Class<? extends org.eclipse.xtext.parser.antlr.ITokenDefProvider> bindITokenDefProvider() {
+		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
+	}
 	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
 		return org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguagePackratParser.class;
 	}

@@ -55,6 +55,9 @@ public abstract class AbstractReferenceGrammarRuntimeModule extends DefaultRunti
 	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
 		return org.eclipse.xtext.reference.parser.antlr.internal.InternalReferenceGrammarLexer.class;
 	}
+	public Class<? extends org.eclipse.xtext.parser.antlr.ITokenDefProvider> bindITokenDefProvider() {
+		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
+	}
 	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
 		return org.eclipse.xtext.reference.parser.packrat.ReferenceGrammarPackratParser.class;
 	}

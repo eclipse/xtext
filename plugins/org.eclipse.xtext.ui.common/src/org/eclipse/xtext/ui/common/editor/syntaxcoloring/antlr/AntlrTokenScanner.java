@@ -58,7 +58,6 @@ public class AntlrTokenScanner extends AbstractTokenScanner {
 			lexer.setCharStream(new ANTLRStringStream(dirtyRegion));
 		}
 		catch (BadLocationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

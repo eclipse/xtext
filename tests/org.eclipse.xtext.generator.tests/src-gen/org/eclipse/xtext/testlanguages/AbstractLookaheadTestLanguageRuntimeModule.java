@@ -55,6 +55,9 @@ public abstract class AbstractLookaheadTestLanguageRuntimeModule extends Default
 	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
 		return org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalLookaheadTestLanguageLexer.class;
 	}
+	public Class<? extends org.eclipse.xtext.parser.antlr.ITokenDefProvider> bindITokenDefProvider() {
+		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
+	}
 	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
 		return org.eclipse.xtext.testlanguages.parser.packrat.LookaheadTestLanguagePackratParser.class;
 	}

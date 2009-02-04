@@ -15,6 +15,14 @@ public abstract class AbstractContentAssistTestLanguageUiModule extends DefaultU
 		return org.eclipse.xtext.testlanguages.GenContentAssistTestLanguageProposalProvider.class;
 	}
 	
+	public Class<? extends org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr.ITokenColorer> bindITokenColorer() {
+		return org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr.BuiltinAntlrTokenColorer.class;
+	}
+	
+	public Class<? extends org.eclipse.jface.text.rules.ITokenScanner> bindITokenScanner() {
+		return org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr.AntlrTokenScanner.class;
+	}
+	
 	
 	
 }

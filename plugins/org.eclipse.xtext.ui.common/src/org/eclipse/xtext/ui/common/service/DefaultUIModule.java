@@ -15,9 +15,9 @@ import org.eclipse.xtext.ui.common.editor.contentassist.ITemplateContentAssistPr
 import org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultContentAssistProcessor;
 import org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultTemplateContentAssistProcessor;
 import org.eclipse.xtext.ui.common.editor.outline.XtextContentOutlinePage;
-import org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr.AntlrTokenScanner;
-import org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr.BuiltinAntlrTokenColorer;
+import org.eclipse.xtext.ui.common.editor.syntaxcoloring.DefaultTokenScanner;
 import org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr.ITokenColorer;
+import org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr.NullTokenColorer;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
@@ -41,11 +41,11 @@ public abstract class DefaultUIModule extends AbstractXtextModule {
 	}
 	
 	public Class<? extends ITokenColorer> bindITokenColorer() {
-		return BuiltinAntlrTokenColorer.class;
+		return NullTokenColorer.class;
 	}
 	
 	public Class<? extends ITokenScanner> bindITokenScanner() {
-		return AntlrTokenScanner.class;
+		return DefaultTokenScanner.class;
 	}
 	
 	public Class<? extends IContentOutlinePage> bindIContentOutlinePage() {

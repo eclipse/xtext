@@ -55,6 +55,9 @@ public abstract class AbstractLangATestLanguageRuntimeModule extends DefaultRunt
 	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
 		return org.eclipse.xtext.crossrefs.parser.antlr.internal.InternalLangATestLanguageLexer.class;
 	}
+	public Class<? extends org.eclipse.xtext.parser.antlr.ITokenDefProvider> bindITokenDefProvider() {
+		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
+	}
 	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
 		return org.eclipse.xtext.crossrefs.parser.packrat.LangATestLanguagePackratParser.class;
 	}
