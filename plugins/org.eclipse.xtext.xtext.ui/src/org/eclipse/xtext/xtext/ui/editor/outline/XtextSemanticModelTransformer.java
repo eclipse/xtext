@@ -94,7 +94,7 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 				@Override
 				public ContentOutlineNode caseGeneratedMetamodel(org.eclipse.xtext.GeneratedMetamodel object) {
 					outlineNode.setLabel("generate " + object.getName());
-					outlineNode.setImageDescriptor(Activator.getImageDescriptor("icons/generate.gif"));
+					outlineNode.setImageDescriptor(Activator.getImageDescriptor("icons/export.gif"));
 					return outlineNode;
 				};
 
@@ -108,6 +108,7 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 				@Override
 				public ContentOutlineNode caseParserRule(org.eclipse.xtext.ParserRule object) {
 					outlineNode.setLabel(object.getName());
+					outlineNode.setImageDescriptor(Activator.getImageDescriptor("icons/rule.gif"));
 					return outlineNode;
 				};
 
