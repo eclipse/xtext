@@ -39,7 +39,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
         
 
     public String[] getTokenNames() { return tokenNames; }
-    public String getGrammarFileName() { return "./src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g"; }
+    public String getGrammarFileName() { return "../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g"; }
 
 
      
@@ -63,7 +63,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRuleRef2
-    // ./src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:68:1: entryRuleRef2 returns [EObject current=null] : iv_ruleRef2= ruleRef2 EOF ;
+    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:68:1: entryRuleRef2 returns [EObject current=null] : iv_ruleRef2= ruleRef2 EOF ;
     public final EObject entryRuleRef2() throws RecognitionException {
         EObject current = null;
 
@@ -71,8 +71,8 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:68:46: (iv_ruleRef2= ruleRef2 EOF )
-            // ./src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:69:2: iv_ruleRef2= ruleRef2 EOF
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:68:46: (iv_ruleRef2= ruleRef2 EOF )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:69:2: iv_ruleRef2= ruleRef2 EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/valueconverter/Bug250313.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleRef2_in_entryRuleRef272);
@@ -98,7 +98,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleRef2
-    // ./src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:76:1: ruleRef2 returns [EObject current=null] : ( '#2' (lv_ref2= ( ( 'mykeyword1' | RULE_STRING ) | RULE_ID ) ) ) ;
+    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:76:1: ruleRef2 returns [EObject current=null] : ( '#2' (lv_ref2= ( ( 'mykeyword1' | RULE_STRING ) | RULE_ID ) ) ) ;
     public final EObject ruleRef2() throws RecognitionException {
         EObject current = null;
 
@@ -107,20 +107,20 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ./src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:80:6: ( ( '#2' (lv_ref2= ( ( 'mykeyword1' | RULE_STRING ) | RULE_ID ) ) ) )
-            // ./src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:81:1: ( '#2' (lv_ref2= ( ( 'mykeyword1' | RULE_STRING ) | RULE_ID ) ) )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:80:6: ( ( '#2' (lv_ref2= ( ( 'mykeyword1' | RULE_STRING ) | RULE_ID ) ) ) )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:81:1: ( '#2' (lv_ref2= ( ( 'mykeyword1' | RULE_STRING ) | RULE_ID ) ) )
             {
-            // ./src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:81:1: ( '#2' (lv_ref2= ( ( 'mykeyword1' | RULE_STRING ) | RULE_ID ) ) )
-            // ./src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:81:2: '#2' (lv_ref2= ( ( 'mykeyword1' | RULE_STRING ) | RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:81:1: ( '#2' (lv_ref2= ( ( 'mykeyword1' | RULE_STRING ) | RULE_ID ) ) )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:81:2: '#2' (lv_ref2= ( ( 'mykeyword1' | RULE_STRING ) | RULE_ID ) )
             {
             match(input,11,FOLLOW_11_in_ruleRef2116); 
 
                     createLeafNode("classpath:/org/eclipse/xtext/valueconverter/Bug250313.xmi#//@rules.0/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
-            // ./src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:85:1: (lv_ref2= ( ( 'mykeyword1' | RULE_STRING ) | RULE_ID ) )
-            // ./src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:87:6: lv_ref2= ( ( 'mykeyword1' | RULE_STRING ) | RULE_ID )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:85:1: (lv_ref2= ( ( 'mykeyword1' | RULE_STRING ) | RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:87:6: lv_ref2= ( ( 'mykeyword1' | RULE_STRING ) | RULE_ID )
             {
-            // ./src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:87:14: ( ( 'mykeyword1' | RULE_STRING ) | RULE_ID )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:87:14: ( ( 'mykeyword1' | RULE_STRING ) | RULE_ID )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -138,9 +138,9 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
             }
             switch (alt2) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:87:15: ( 'mykeyword1' | RULE_STRING )
+                    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:87:15: ( 'mykeyword1' | RULE_STRING )
                     {
-                    // ./src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:87:15: ( 'mykeyword1' | RULE_STRING )
+                    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:87:15: ( 'mykeyword1' | RULE_STRING )
                     int alt1=2;
                     int LA1_0 = input.LA(1);
 
@@ -158,7 +158,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                     }
                     switch (alt1) {
                         case 1 :
-                            // ./src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:87:16: 'mykeyword1'
+                            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:87:16: 'mykeyword1'
                             {
                             match(input,12,FOLLOW_12_in_ruleRef2139); 
 
@@ -168,7 +168,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 2 :
-                            // ./src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:92:6: RULE_STRING
+                            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:92:6: RULE_STRING
                             {
                             match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleRef2154); 
                              
@@ -184,7 +184,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ./src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:97:6: RULE_ID
+                    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:97:6: RULE_ID
                     {
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleRef2169); 
                      

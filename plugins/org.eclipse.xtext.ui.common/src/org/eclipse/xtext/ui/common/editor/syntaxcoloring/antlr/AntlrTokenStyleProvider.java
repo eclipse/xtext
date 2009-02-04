@@ -10,7 +10,7 @@ package org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
+import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.ui.common.editor.syntaxcoloring.ITokenStyle;
 import org.eclipse.xtext.ui.common.editor.syntaxcoloring.ITokenStyleProvider;
 
@@ -22,7 +22,7 @@ import com.google.inject.Inject;
 public class AntlrTokenStyleProvider implements ITokenStyleProvider {
 
 	@Inject
-	private AntlrTokenDefProvider tokenDefProvider;
+	private ITokenDefProvider tokenDefProvider;
 	
 	@Inject
 	private ITokenColorer tc;

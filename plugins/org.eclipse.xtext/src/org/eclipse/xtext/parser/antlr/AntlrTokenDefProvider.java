@@ -11,6 +11,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -19,19 +20,23 @@ import java.util.regex.Pattern;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.WrappedException;
 
+import com.google.inject.Inject;
+
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
-public class AntlrTokenDefProvider {
+public class AntlrTokenDefProvider implements ITokenDefProvider {
 	
 	private static final Logger log = Logger.getLogger(AntlrTokenDefProvider.class);
 	
-	@com.google.inject.Inject
+	@Inject
 	protected IAntlrTokenFileProvider antlrTokenFileProvider;
 	
 	protected Map<Integer, String> tokenDefMap;
 	
 	public Map<Integer, String> getTokenDefMap() {
+		if (antlrTokenFileProvider == null)
+			return Collections.emptyMap();
 		if (tokenDefMap == null) {
 			InputStream tokenFile = antlrTokenFileProvider.getAntlrTokenFile();
 			try {

@@ -4,7 +4,7 @@ Generated with Xtext
 package org.eclipse.xtext.parser.datatyperules.parser.antlr;
 
 import org.antlr.runtime.ANTLRInputStream;
-import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
+import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
@@ -17,7 +17,7 @@ import org.eclipse.xtext.parser.datatyperules.parser.antlr.internal.InternalData
 public class DatatypeRulesTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
 	
 	@Inject 
-    protected AntlrTokenDefProvider antlrTokenDefProvider;
+    protected ITokenDefProvider antlrTokenDefProvider;
 	
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {

@@ -15,6 +15,8 @@ import org.eclipse.xtext.crossref.impl.DefaultScopeProvider;
 import org.eclipse.xtext.crossref.internal.Linker;
 import org.eclipse.xtext.parser.SwitchingParser;
 import org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter;
+import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
+import org.eclipse.xtext.parser.antlr.NullTokenDefProvider;
 import org.eclipse.xtext.parser.packrat.ParseResultFactory;
 import org.eclipse.xtext.resource.DefaultFragmentProvider;
 import org.eclipse.xtext.resource.IFragmentProvider;
@@ -54,6 +56,10 @@ public abstract class DefaultRuntimeModule extends AbstractXtextModule {
 
 	public Class<? extends org.eclipse.xtext.parser.ISwitchingParser> bindISwitchingParser() {
 		return SwitchingParser.class;
+	}
+	
+	public Class<? extends ITokenDefProvider> bindITokenDefProvider() {
+		return NullTokenDefProvider.class;
 	}
 
 }
