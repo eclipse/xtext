@@ -60,7 +60,6 @@ public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransf
 		ContentOutlineNode outlineNode = new ContentOutlineNode();
 
 		outlineNode.setLabel(getText(semanticNode));
-		outlineNode.setImage("DefaultOutlineNode");
 
 		NodeAdapter nodeAdapter = (NodeAdapter) NodeAdapterFactory.INSTANCE.adapt(semanticNode, AbstractNode.class);
 		CompositeNode parserNode = nodeAdapter.getParserNode();

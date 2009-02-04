@@ -65,6 +65,7 @@ public class Activator extends XtextActivator {
 	private static void setDefault(Activator activator) {
 		plugin = activator;
 	}
+	
 	/**
 	 * Returns an image descriptor for the image file at the given
 	 * plug-in relative path

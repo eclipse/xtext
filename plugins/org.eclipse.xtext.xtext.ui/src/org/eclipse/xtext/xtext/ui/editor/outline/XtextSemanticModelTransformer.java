@@ -13,6 +13,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
 import org.eclipse.xtext.ui.common.editor.outline.impl.DefaultSemanticModelTransformer;
 import org.eclipse.xtext.util.XtextSwitch;
+import org.eclipse.xtext.xtext.ui.Activator;
 
 /**
  * @author Peter Friese - Initial contribution and API
@@ -86,18 +87,21 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 						}
 					}
 					outlineNode.setLabel("language " + stringBuffer.toString());
+					outlineNode.setImageDescriptor(Activator.getImageDescriptor("icons/language.gif"));
 					return outlineNode;
 				}
 
 				@Override
 				public ContentOutlineNode caseGeneratedMetamodel(org.eclipse.xtext.GeneratedMetamodel object) {
 					outlineNode.setLabel("generate " + object.getName());
+					outlineNode.setImageDescriptor(Activator.getImageDescriptor("icons/generate.gif"));
 					return outlineNode;
 				};
 
 				@Override
 				public ContentOutlineNode caseReferencedMetamodel(org.eclipse.xtext.ReferencedMetamodel object) {
 					outlineNode.setLabel("import " + object.getAlias());
+					outlineNode.setImageDescriptor(Activator.getImageDescriptor("icons/import.gif"));
 					return outlineNode;
 				};
 

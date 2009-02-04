@@ -11,6 +11,8 @@ package org.eclipse.xtext.ui.common.editor.outline;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.jface.resource.ImageDescriptor;
+
 /**
  * @author Peter Friese - Initial contribution and API
  */
@@ -18,6 +20,7 @@ public class ContentOutlineNode {
 
 	private String label;
 	private String image;
+	private ImageDescriptor imageDescriptor;
 	private int selectionOffset;
 	private int selectionLength;
 	private List<ContentOutlineNode> children;
@@ -72,6 +75,14 @@ public class ContentOutlineNode {
 
 	public int getSelectionLength() {
 		return selectionLength;
+	}
+
+	public void setImageDescriptor(ImageDescriptor imageDescriptor) {
+		this.imageDescriptor = imageDescriptor;
+	}
+
+	public ImageDescriptor getImageDescriptor() {
+		return imageDescriptor;
 	}
 
 }
