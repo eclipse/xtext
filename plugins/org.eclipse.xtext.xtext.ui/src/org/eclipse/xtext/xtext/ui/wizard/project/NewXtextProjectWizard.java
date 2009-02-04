@@ -188,7 +188,6 @@ public class NewXtextProjectWizard extends Wizard implements INewWizard {
 							"org.eclipse.xtend.typesystem.emf", 
 							"org.eclipse.xpand",
 							"org.apache.commons.logging",
-							"org.apache.log4j",
 							"de.itemis.xtext.antlr;resolution:=optional",
 							"org.eclipse.xtend.util.stdlib")), exportedPackages,
 							null, null, monitor,
@@ -207,7 +206,6 @@ public class NewXtextProjectWizard extends Wizard implements INewWizard {
 							xtextProjectInfo.getProjectName().toLowerCase() + ";visibility:=reexport",
 							"org.eclipse.xtext.ui.core", "org.eclipse.xtext.ui.common",
 							"org.eclipse.xtext.log4j;bundle-version=\"1.2.15\"",
-							"org.apache.log4j",
 							"org.eclipse.ui.editors;bundle-version=\"3.4.0\"")), null, null, 
 							xtextProjectInfo.getBasePackage() + ".ui.Activator", monitor,
 					NewXtextProjectWizard.this.getShell());
