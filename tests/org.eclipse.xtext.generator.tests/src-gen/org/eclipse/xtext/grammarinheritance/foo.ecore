@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="foo" nsURI="http://holla" nsPrefix="foo">
-  <eClassifiers xsi:type="ecore:EClass" name="ConcreteParserRule">
+  <eClassifiers xsi:type="ecore:EClass" name="RootRule"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ConcreteParserRule" eSuperTypes="//RootRule">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="magicNumber">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
     </eStructuralFeatures>

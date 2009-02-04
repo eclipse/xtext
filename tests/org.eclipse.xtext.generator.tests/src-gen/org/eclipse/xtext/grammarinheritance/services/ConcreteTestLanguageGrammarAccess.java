@@ -10,8 +10,19 @@ import org.eclipse.xtext.grammarinheritance.services.AbstractTestLanguageGrammar
 
 public class ConcreteTestLanguageGrammarAccess extends BaseEPackageAccess implements IGrammarAccess {
 	
-	public class ConcreteParserRuleElements implements IParserRuleAccess {
+	public class RootRuleElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(1);
+		private final RuleCall cParserRuleCallConcreteParserRule = (RuleCall)rule.eContents().get(1);
+		
+		// RootRule : ConcreteParserRule ;
+		public ParserRule getRule() { return rule; }
+
+		// ConcreteParserRule
+		public RuleCall eleParserRuleCallConcreteParserRule() { return cParserRuleCallConcreteParserRule; }
+	}
+
+	public class ConcreteParserRuleElements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(2);
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
@@ -57,6 +68,7 @@ public class ConcreteTestLanguageGrammarAccess extends BaseEPackageAccess implem
 
 	private static final String CONCRETETESTLANGUAGE_GRAMMAR_CP_URI = "classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi";
 	private static Grammar GRAMMAR = null;
+	private static RootRuleElements pRootRule;
 	private static ConcreteParserRuleElements pConcreteParserRule;
 
 	@SuppressWarnings("unused")
@@ -74,6 +86,11 @@ public class ConcreteTestLanguageGrammarAccess extends BaseEPackageAccess implem
 	}
 
 	
+	// RootRule : ConcreteParserRule ;
+	public RootRuleElements prRootRule() {
+		return (pRootRule != null) ? pRootRule : (pRootRule = new RootRuleElements());
+	} 
+
 	// ConcreteParserRule : "model" magicNumber = REAL ":" ( elements += InheritedParserRule ) * ;
 	public ConcreteParserRuleElements prConcreteParserRule() {
 		return (pConcreteParserRule != null) ? pConcreteParserRule : (pConcreteParserRule = new ConcreteParserRuleElements());

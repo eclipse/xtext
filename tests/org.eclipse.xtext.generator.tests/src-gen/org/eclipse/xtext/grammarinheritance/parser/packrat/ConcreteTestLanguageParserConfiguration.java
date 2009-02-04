@@ -8,8 +8,13 @@ import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 
 import org.eclipse.xtext.grammarinheritance.parser.packrat.AbstractTestLanguageParserConfiguration; 
 
+import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.ConcreteTestLanguageRootRuleConsumer;
 import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.ConcreteTestLanguageConcreteParserRuleConsumer;
 import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.AbstractTestLanguageInheritedParserRuleConsumer;
+import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.AbstractTestLanguageAbstractCallOverridenParserRuleConsumer;
+import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.AbstractTestLanguageOverridableParserRuleConsumer;
+import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.AbstractTestLanguageAbstractCallExtendedParserRuleConsumer;
+import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.AbstractTestLanguageExtendableParserRuleConsumer;
 import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.AbstractTestLanguageREALConsumer;
 import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.AbstractTestLanguageIDConsumer;
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinINTConsumer;
@@ -24,6 +29,7 @@ public class ConcreteTestLanguageParserConfiguration extends AbstractParserConfi
 
 	private AbstractTestLanguageParserConfiguration abstractTestLanguageConfiguration; 
 
+    private ConcreteTestLanguageRootRuleConsumer rootRuleConsumer;
     private ConcreteTestLanguageConcreteParserRuleConsumer concreteParserRuleConsumer;
 
 	public ConcreteTestLanguageParserConfiguration(IInternalParserConfiguration configuration) {
@@ -31,12 +37,15 @@ public class ConcreteTestLanguageParserConfiguration extends AbstractParserConfi
 		this.abstractTestLanguageConfiguration = new AbstractTestLanguageParserConfiguration(configuration);
 	}
 
-	public ConcreteTestLanguageConcreteParserRuleConsumer getRootConsumer() {
-		return concreteParserRuleConsumer;
+	public ConcreteTestLanguageRootRuleConsumer getRootConsumer() {
+		return rootRuleConsumer;
 	} 
 	
 	public void createNonTerminalConsumers() {
 		getAbstractTestLanguageConfiguration().createNonTerminalConsumers();
+		rootRuleConsumer = new ConcreteTestLanguageRootRuleConsumer(
+    		this, null
+    	);
 		concreteParserRuleConsumer = new ConcreteTestLanguageConcreteParserRuleConsumer(
     		this, null
     	);
@@ -47,16 +56,32 @@ public class ConcreteTestLanguageParserConfiguration extends AbstractParserConfi
 	}
 	
 	public void configureConsumers() {
+		getRootRuleConsumer().setConcreteParserRuleConsumer(getConcreteParserRuleConsumer());
+
 		getConcreteParserRuleConsumer().setInheritedParserRuleConsumer(getInheritedParserRuleConsumer());
 		getConcreteParserRuleConsumer().setRealConsumer(getRealConsumer());
 
 		getInheritedParserRuleConsumer().setIdConsumer(getIdConsumer());
 
-		getConcreteParserRuleConsumer().setKeyword$4$Delimiter(ConcreteTestLanguageDelimiters.keyword$6$Delimiter);
-		getConcreteParserRuleConsumer().setKeyword$7$Delimiter(ConcreteTestLanguageDelimiters.keyword$9$Delimiter);
-		getConcreteParserRuleConsumer().setRuleCall$6$Delimiter(ConcreteTestLanguageDelimiters.ruleCall$8$Delimiter);
-		getInheritedParserRuleConsumer().setKeyword$2$Delimiter(ConcreteTestLanguageDelimiters.keyword$6$Delimiter);
+		getAbstractCallOverridenParserRuleConsumer().setOverridableParserRuleConsumer(getOverridableParserRuleConsumer());
+
+		getOverridableParserRuleConsumer().setIdConsumer(getIdConsumer());
+
+		getAbstractCallExtendedParserRuleConsumer().setExtendableParserRuleConsumer(getExtendableParserRuleConsumer());
+
+		getExtendableParserRuleConsumer().setIdConsumer(getIdConsumer());
+
+		getConcreteParserRuleConsumer().setKeyword$7$Delimiter(ConcreteTestLanguageDelimiters.keyword$12$Delimiter);
+		getConcreteParserRuleConsumer().setKeyword$4$Delimiter(ConcreteTestLanguageDelimiters.keyword$9$Delimiter);
+		getConcreteParserRuleConsumer().setRuleCall$6$Delimiter(ConcreteTestLanguageDelimiters.ruleCall$11$Delimiter);
+		getInheritedParserRuleConsumer().setKeyword$2$Delimiter(ConcreteTestLanguageDelimiters.keyword$9$Delimiter);
 		getInheritedParserRuleConsumer().setRuleCall$4$Delimiter(ConcreteTestLanguageDelimiters.ruleCall$7$Delimiter);
+		getAbstractCallOverridenParserRuleConsumer().setKeyword$2$Delimiter(ConcreteTestLanguageDelimiters.keyword$9$Delimiter);
+		getOverridableParserRuleConsumer().setKeyword$2$Delimiter(ConcreteTestLanguageDelimiters.keyword$9$Delimiter);
+		getOverridableParserRuleConsumer().setRuleCall$4$Delimiter(ConcreteTestLanguageDelimiters.ruleCall$19$Delimiter);
+		getAbstractCallExtendedParserRuleConsumer().setKeyword$2$Delimiter(ConcreteTestLanguageDelimiters.keyword$9$Delimiter);
+		getExtendableParserRuleConsumer().setKeyword$2$Delimiter(ConcreteTestLanguageDelimiters.keyword$9$Delimiter);
+		getExtendableParserRuleConsumer().setRuleCall$4$Delimiter(ConcreteTestLanguageDelimiters.ruleCall$31$Delimiter);
 	}
 	
 	// TODO collect superGrammars transitive
@@ -64,12 +89,32 @@ public class ConcreteTestLanguageParserConfiguration extends AbstractParserConfi
 		return abstractTestLanguageConfiguration;
 	} 
 	
+    public ConcreteTestLanguageRootRuleConsumer getRootRuleConsumer() {
+    	return rootRuleConsumer;
+    }
+
     public ConcreteTestLanguageConcreteParserRuleConsumer getConcreteParserRuleConsumer() {
     	return concreteParserRuleConsumer;
     }
 
     public AbstractTestLanguageInheritedParserRuleConsumer getInheritedParserRuleConsumer() {
     	return getAbstractTestLanguageConfiguration().getInheritedParserRuleConsumer();
+    }
+
+    public AbstractTestLanguageAbstractCallOverridenParserRuleConsumer getAbstractCallOverridenParserRuleConsumer() {
+    	return getAbstractTestLanguageConfiguration().getAbstractCallOverridenParserRuleConsumer();
+    }
+
+    public AbstractTestLanguageOverridableParserRuleConsumer getOverridableParserRuleConsumer() {
+    	return getAbstractTestLanguageConfiguration().getOverridableParserRuleConsumer();
+    }
+
+    public AbstractTestLanguageAbstractCallExtendedParserRuleConsumer getAbstractCallExtendedParserRuleConsumer() {
+    	return getAbstractTestLanguageConfiguration().getAbstractCallExtendedParserRuleConsumer();
+    }
+
+    public AbstractTestLanguageExtendableParserRuleConsumer getExtendableParserRuleConsumer() {
+    	return getAbstractTestLanguageConfiguration().getExtendableParserRuleConsumer();
     }
 
     public AbstractTestLanguageREALConsumer getRealConsumer() {

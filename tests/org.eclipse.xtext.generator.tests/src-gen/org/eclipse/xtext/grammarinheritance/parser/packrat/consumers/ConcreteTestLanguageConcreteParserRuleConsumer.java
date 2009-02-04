@@ -24,16 +24,16 @@ public final class ConcreteTestLanguageConcreteParserRuleConsumer extends NonTer
 	private AbstractTestLanguageInheritedParserRuleConsumer inheritedParserRuleConsumer;
 	private AbstractTestLanguageREALConsumer realConsumer;
 
-	private ICharacterClass keyword$4$Delimiter;
-	
 	private ICharacterClass keyword$7$Delimiter;
+	
+	private ICharacterClass keyword$4$Delimiter;
 	
 	private ISequenceMatcher ruleCall$6$Delimiter;
 	
 	public ConcreteTestLanguageConcreteParserRuleConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
-		keyword$4$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$4$Delimiter = ICharacterClass.Factory.nullClass();
 		ruleCall$6$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
@@ -156,20 +156,20 @@ public final class ConcreteTestLanguageConcreteParserRuleConsumer extends NonTer
 		this.realConsumer = realConsumer;
 	}
 	
-	public ICharacterClass getKeyword$4$Delimiter() {
-		return keyword$4$Delimiter;
-	}
-	
-	public void setKeyword$4$Delimiter(ICharacterClass characterClass) {
-		keyword$4$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
 	public ICharacterClass getKeyword$7$Delimiter() {
 		return keyword$7$Delimiter;
 	}
 	
 	public void setKeyword$7$Delimiter(ICharacterClass characterClass) {
 		keyword$7$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$4$Delimiter() {
+		return keyword$4$Delimiter;
+	}
+	
+	public void setKeyword$4$Delimiter(ICharacterClass characterClass) {
+		keyword$4$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ISequenceMatcher getRuleCall$6$Delimiter() {
