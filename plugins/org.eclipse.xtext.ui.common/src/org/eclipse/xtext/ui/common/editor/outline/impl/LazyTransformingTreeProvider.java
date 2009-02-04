@@ -8,10 +8,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.outline.impl;
 
-
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jface.resource.JFaceResources;
+import org.eclipse.jface.resource.LocalResourceManager;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
@@ -20,6 +22,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
 import org.eclipse.xtext.ui.common.editor.outline.ILazyTreeProvider;
 import org.eclipse.xtext.ui.common.editor.outline.ISemanticModelTransformer;
+import org.eclipse.xtext.ui.common.internal.Activator;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocument;
@@ -33,13 +36,15 @@ public class LazyTransformingTreeProvider extends LabelProvider implements ILazy
 
 	final static Logger logger = Logger.getLogger(LazyTransformingTreeProvider.class);
 
+	private LocalResourceManager resourceManager = new LocalResourceManager(JFaceResources.getResources());
+
 	private TreeViewer viewer;
 	private ContentOutlineNode outlineModel;
 
 	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 		Assert.isTrue(viewer instanceof TreeViewer);
 		this.viewer = (TreeViewer) viewer;
-		
+
 		if (newInput instanceof XtextDocument) {
 			XtextDocument document = (XtextDocument) newInput;
 			outlineModel = document.readOnly(new UnitOfWork<ContentOutlineNode>() {
@@ -50,15 +55,17 @@ public class LazyTransformingTreeProvider extends LabelProvider implements ILazy
 			});
 		}
 	}
-	
+
 	@Inject
 	private ISemanticModelTransformer semanticModelTransformer;
-	
+
 	private ContentOutlineNode transformSemanticModelToOutlineModel(EObject semanticModel) {
 		return semanticModelTransformer.transformSemanticModel(semanticModel);
 	}
 
 	public void dispose() {
+		super.dispose();
+		resourceManager.dispose();
 	}
 
 	public Object getParent(Object element) {
@@ -94,7 +101,7 @@ public class LazyTransformingTreeProvider extends LabelProvider implements ILazy
 		viewer.replace(parent, index, element);
 		updateChildCount(element, -1);
 	}
-	
+
 	@Override
 	public String getText(Object element) {
 		if (element instanceof ContentOutlineNode) {
@@ -103,12 +110,16 @@ public class LazyTransformingTreeProvider extends LabelProvider implements ILazy
 		}
 		return super.getText(element);
 	}
-	
+
 	@Override
 	public Image getImage(Object element) {
 		if (element instanceof ContentOutlineNode) {
 			ContentOutlineNode contentOutlineNode = (ContentOutlineNode) element;
-			// TODO load image
+			ImageDescriptor imageDescriptor = contentOutlineNode.getImageDescriptor();
+			if (imageDescriptor == null) {
+				imageDescriptor = Activator.getImageDescriptor("icons/defaultoutlinenode.gif");
+			}
+			return resourceManager.createImage(imageDescriptor);
 		}
 		return super.getImage(element);
 	}
