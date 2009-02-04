@@ -39,29 +39,23 @@ public class Generator {
 
 	public void generate() throws IOException {
 		«this.languageNameAbbreviation»StandaloneSetup.doSetup();
-
 	
 		GeneratorFacade.cleanFolder(SRC_GEN_PATH);
 
 		String classpathUri = "classpath:/model/Model.«this.firstFileExtension»";
 		ResourceSet rs = new XtextResourceSet();
-		Resource resource = rs
-				.createResource(new ClassloaderClasspathUriResolver().resolve(
-						null, URI.createURI(classpathUri)));
+		Resource resource = rs.createResource(
+		  new ClassloaderClasspathUriResolver().resolve(null, URI.createURI(classpathUri)));
 		resource.load(null);
 		EObject model = resource.getContents().get(0);
 		System.out.println(model);
 
 		OutputImpl output = new OutputImpl();
 		String defaultEncoding = System.getProperty("file.encoding");
-		output.addOutlet(new Outlet(false, defaultEncoding, null, true,
-				SRC_GEN_PATH));
+		output.addOutlet(new Outlet(false, defaultEncoding, null, true,	SRC_GEN_PATH));
 
-		XpandExecutionContextImpl execCtx = new XpandExecutionContextImpl(
-				output, null, null, null, null);
-		execCtx
-				.registerMetaModel(new EmfMetaModel(model.eClass()
-						.getEPackage()));
+		XpandExecutionContextImpl execCtx = new XpandExecutionContextImpl(output, null, null, null, null);
+		execCtx.registerMetaModel(new EmfMetaModel(model.eClass().getEPackage()));
 
 		// generate
 		XpandFacade facade = XpandFacade.create(execCtx);
@@ -74,7 +68,6 @@ public class Generator {
 	}
 
 }
-
 «ENDFILE»
 «ENDDEFINE»
 
