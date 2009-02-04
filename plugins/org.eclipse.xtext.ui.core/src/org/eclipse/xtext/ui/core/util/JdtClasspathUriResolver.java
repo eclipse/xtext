@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtext.ui.core.util;
 
 import java.util.zip.ZipEntry;
@@ -49,9 +56,6 @@ public class JdtClasspathUriResolver implements IClasspathUriResolver {
 		if (javaProject.exists()) {
 			IPackageFragmentRoot[] allPackageFragmentRoots = javaProject.getAllPackageFragmentRoots();
 			for (IPackageFragmentRoot packageFragmentRoot : allPackageFragmentRoots) {
-				// prevents MalFormedURIException after executing the NewXtextProjectWizard
-				if (!packageFragmentRoot.isOpen())
-					packageFragmentRoot.open(null);
 				IResource correspondingResource = packageFragmentRoot.getCorrespondingResource();
 				if ((correspondingResource != null && correspondingResource instanceof IFile)
 						|| packageFragmentRoot instanceof JarPackageFragmentRoot) {
