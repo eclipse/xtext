@@ -17,7 +17,7 @@ ConcreteParserRule :
 
 // override OverridableParserRule and call it
 
-/* TODO: make me work!
+/* TODO: make me work! (see https://bugs.eclipse.org/bugs/show_bug.cgi?id=263651)
 OverridableParserRule returns mm::AType:
 	'overriddenelement' name=ID;
 	
@@ -28,7 +28,7 @@ CallOverridenParserRule:
 	
 // override and extend ExtendableParserRule and call it
 
-/* TODO: make me work!
+/* TODO: make me work! (see https://bugs.eclipse.org/bugs/show_bug.cgi?id=263651)
 ExtendableParserRule returns mm::AType:
 	Subrule1 | Subrule2 | Subrule3;
 	
