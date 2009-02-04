@@ -41,7 +41,7 @@ public class XtextTokenStream extends CommonTokenStream {
 		tokens = new TokenList(500);
 	}
 
-	public XtextTokenStream(TokenSource tokenSource, AntlrTokenDefProvider tokenDefProvider) {
+	public XtextTokenStream(TokenSource tokenSource, ITokenDefProvider tokenDefProvider) {
 		super(tokenSource);
 		tokens = new TokenList(500);
 		rulenameToTokenType = new HashMap<String, Integer>(tokenDefProvider.getTokenDefMap().size());
