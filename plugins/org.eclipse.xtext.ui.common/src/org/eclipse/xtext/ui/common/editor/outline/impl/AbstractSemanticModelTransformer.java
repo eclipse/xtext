@@ -8,7 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.outline.impl;
 
-import java.util.Iterator;
+import java.util.Arrays;
+import java.util.Comparator;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -22,6 +23,8 @@ import org.eclipse.xtext.ui.common.editor.outline.ISemanticModelTransformer;
  * @author Peter Friese - Initial contribution and API
  */
 public abstract class AbstractSemanticModelTransformer implements ISemanticModelTransformer {
+
+	private boolean sorted = false;
 
 	public ContentOutlineNode transformSemanticModel(EObject semanticModel) {
 		ContentOutlineNode outlineModel = new ContentOutlineNode();
@@ -53,12 +56,32 @@ public abstract class AbstractSemanticModelTransformer implements ISemanticModel
 
 	private void transformSemanticChildNodes(EObject semanticNode, ContentOutlineNode outlineNode) {
 		if (consumeSemanticChildNodes(semanticNode)) {
-			for (Iterator<EObject> iterator = semanticNode.eContents().iterator(); iterator.hasNext();) {
-				EObject semanticChildNode = iterator.next();
+			EObject[] array = sortChildren(semanticNode);
+			for (EObject semanticChildNode : array) {
 				transformSemanticNode(semanticChildNode, outlineNode);
 			}
 		}
 	}
+
+	private EObject[] sortChildren(EObject semanticNode) {
+		EObject[] result = semanticNode.eContents().toArray(new EObject[semanticNode.eContents().size()]);
+		if (sorted) {
+			Arrays.sort(result, new Comparator<EObject>() {
+				public int compare(EObject arg0, EObject arg1) {
+					String txt0 = getText(arg0);
+					String txt1 = getText(arg1);
+					return txt0.compareTo(txt1);
+				}
+			});
+		}
+		return result;
+	}
+
+	public void setSorted(boolean on) {
+		this.sorted = on;
+	}
+
+	protected abstract boolean doSortChildren(EObject semanticNode);
 
 	protected abstract ContentOutlineNode createOutlineNode(EObject semanticNode, ContentOutlineNode outlineParentNode);
 
@@ -90,9 +113,11 @@ public abstract class AbstractSemanticModelTransformer implements ISemanticModel
 				if ("name".equalsIgnoreCase(eAttribute.getName())) {
 					result = eAttribute;
 					break;
-				} else if (result == null) {
+				}
+				else if (result == null) {
 					result = eAttribute;
-				} else if (eAttribute.getEAttributeType().getInstanceClass() == String.class
+				}
+				else if (eAttribute.getEAttributeType().getInstanceClass() == String.class
 						&& result.getEAttributeType().getInstanceClass() != String.class) {
 					result = eAttribute;
 				}

@@ -54,6 +54,11 @@ public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransf
 			return false;
 		}
 	}
+	
+	@Override
+	protected boolean doSortChildren(EObject semanticNode) {
+		return false;
+	}
 
 	@Override
 	protected ContentOutlineNode createOutlineNode(EObject semanticNode, ContentOutlineNode outlineParentNode) {

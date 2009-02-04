@@ -16,5 +16,6 @@ import org.eclipse.jface.viewers.ILazyTreeContentProvider;
  */
 public interface ILazyTreeProvider extends ILazyTreeContentProvider,
 		ILabelProvider {
-	
+
+	void setSorted(boolean on);
 }

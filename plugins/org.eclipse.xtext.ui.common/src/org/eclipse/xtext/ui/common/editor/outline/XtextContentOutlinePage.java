@@ -31,6 +31,7 @@ import org.eclipse.xtext.ui.common.editor.outline.impl.ContentOutlineNodeAdapter
 import org.eclipse.xtext.ui.common.editor.outline.impl.ContentOutlineNodeAdapterFactory;
 import org.eclipse.xtext.ui.common.editor.outline.impl.EditorSelectionChangedListener;
 import org.eclipse.xtext.ui.common.editor.outline.impl.LazyVirtualContentOutlinePage;
+import org.eclipse.xtext.ui.common.editor.outline.impl.LexicalSortingAction;
 import org.eclipse.xtext.ui.common.editor.outline.impl.LinkingHelper;
 import org.eclipse.xtext.ui.common.editor.outline.impl.OutlineSelectionChangedListener;
 import org.eclipse.xtext.ui.common.editor.outline.impl.ToggleLinkWithEditorAction;
@@ -43,15 +44,31 @@ import org.eclipse.xtext.ui.core.editor.model.XtextDocumentUtil;
 import com.google.inject.Inject;
 
 /**
+ * An outline page for Xtext resources.
+ * 
+ * This class is not intended to be subclassed. It is designed to be configured
+ * with a domain specific combined label and content provider (which is
+ * automatically injected to the {@link #provider} field).
+ * 
+ * The outline page can synchronize itself with the associated editor.
+ * Selections made in the outline will be propagated to the editor at any time,
+ * whereas the synchronization from the editor to the outline can be controlled
+ * by the user using the "Link with Editor" button.
+ * 
  * @author Peter Friese - Initial contribution and API
  */
 public class XtextContentOutlinePage extends LazyVirtualContentOutlinePage implements ISourceViewerAware {
 
 	static final Logger logger = Logger.getLogger(XtextContentOutlinePage.class);
 
+	@Inject
+	private ILazyTreeProvider provider;
+
 	private ISourceViewer sourceViewer;
 	private OutlineSelectionChangedListener outlineSelectionChangedListener;
 	private EditorSelectionChangedListener editorSelectionChangedListener;
+
+	private boolean sorted;
 
 	@Override
 	public void createControl(Composite parent) {
@@ -61,10 +78,60 @@ public class XtextContentOutlinePage extends LazyVirtualContentOutlinePage imple
 		configureDocument();
 	}
 
+	private void configureViewer() {
+		TreeViewer viewer = getTreeViewer();
+		viewer.setAutoExpandLevel(TreeViewer.ALL_LEVELS);
+	}
+
+	private void configureProviders() {
+		Assert.isNotNull(provider, "No ILazyTreeProvider available. Dependency injection broken?");
+		getTreeViewer().setContentProvider(provider);
+		getTreeViewer().setLabelProvider(provider);
+	}
+
+	private void configureDocument() {
+		if (sourceViewer != null) {
+			IDocument document = sourceViewer.getDocument();
+			IXtextDocument xtextDocument = XtextDocumentUtil.get(document);
+
+			// TODO: it would be better to have NodeContentAdapter update the
+			// parts of the outline model that need updates
+			xtextDocument.addModelListener(new IXtextModelListener() {
+				public void modelChanged(XtextResource resource) {
+					if (logger.isDebugEnabled()) {
+						logger.debug("Document has been changed. Triggering update of outline.");
+					}
+					runInSWTThread(new Runnable() {
+						public void run() {
+							TreeViewer viewer = getTreeViewer();
+							IDocument document = sourceViewer.getDocument();
+							internalSetInput(XtextDocumentUtil.get(document));
+							viewer.refresh();
+						}
+					});
+				}
+			});
+
+			internalSetInput(xtextDocument);
+		}
+	}
+
+	public IXtextDocument getDocument() {
+		return XtextDocumentUtil.get(getSourceViewer());
+	}
+
 	@Override
 	public void init(IPageSite pageSite) {
 		super.init(pageSite);
 		registerToolbarActions(getSite().getActionBars());
+	}
+
+	private void registerToolbarActions(IActionBars actionBars) {
+		IToolBarManager toolBarManager = actionBars.getToolBarManager();
+		if (toolBarManager != null) {
+			toolBarManager.add(new ToggleLinkWithEditorAction(this));
+			toolBarManager.add(new LexicalSortingAction(this));
+		}
 	}
 
 	@Override
@@ -76,54 +143,12 @@ public class XtextContentOutlinePage extends LazyVirtualContentOutlinePage imple
 		super.dispose();
 	}
 
-	private void registerToolbarActions(IActionBars actionBars) {
-		IToolBarManager toolBarManager = actionBars.getToolBarManager();
-		if (toolBarManager != null) {
-			toolBarManager.add(new ToggleLinkWithEditorAction(this));
-		}
-	}
-
-	private void configureViewer() {
-		TreeViewer viewer = getTreeViewer();
-		viewer.setAutoExpandLevel(2);
-	}
-
-	@Inject
-	private ILazyTreeProvider provider;
-
-	private void configureProviders() {
-		getTreeViewer().setContentProvider(provider);
-		getTreeViewer().setLabelProvider(provider);
-	}
-
-	private void configureDocument() {
-		if (sourceViewer != null) {
-			IDocument document = sourceViewer.getDocument();
-			IXtextDocument xtextDocument = XtextDocumentUtil.get(document);
-			xtextDocument.addModelListener(new IXtextModelListener() {
-				public void modelChanged(XtextResource resource) {
-					if (logger.isDebugEnabled())
-						logger.debug("Document has been changed. Triggering update of outline.");
-					runInSWTThread(new Runnable() {
-						public void run() {
-							TreeViewer viewer = getTreeViewer();
-							IDocument document = sourceViewer.getDocument();
-							internalSetInput(XtextDocumentUtil.get(document));
-							viewer.refresh();
-						}
-					});
-				}
-			});
-			internalSetInput(xtextDocument);
-		}
-	}
-
 	/**
 	 * Runs the runnable in the SWT thread. (Simply runs the runnable if the
 	 * current thread is the UI thread, otherwise calls the runnable in
 	 * asyncexec.)
 	 */
-	public void runInSWTThread(Runnable runnable) {
+	private void runInSWTThread(Runnable runnable) {
 		if (Display.getCurrent() == null) {
 			Display.getDefault().asyncExec(runnable);
 		}
@@ -173,8 +198,8 @@ public class XtextContentOutlinePage extends LazyVirtualContentOutlinePage imple
 		LinkingHelper.setLinkingEnabled(enabled);
 	}
 
-	public IXtextDocument getDocument() {
-		return XtextDocumentUtil.get(getSourceViewer());
+	public void setSelection(ISelection selection, boolean reveal) {
+		getTreeViewer().setSelection(selection, reveal);
 	}
 
 	public void synchronizeOutlinePage() {
@@ -222,8 +247,18 @@ public class XtextContentOutlinePage extends LazyVirtualContentOutlinePage imple
 		}
 	}
 
-	public void setSelection(ISelection selection, boolean reveal) {
-		getTreeViewer().setSelection(selection, reveal);
+	public void setSorted(boolean sorted) {
+		this.sorted = sorted;
+		provider.setSorted(sorted);
+		runInSWTThread(new Runnable() {
+			public void run() {
+				TreeViewer tv = getTreeViewer();
+				if (tv != null) {
+					IDocument document = sourceViewer.getDocument();
+					internalSetInput(XtextDocumentUtil.get(document));
+					tv.refresh();
+				}
+			}
+		});
 	}
-
 }
