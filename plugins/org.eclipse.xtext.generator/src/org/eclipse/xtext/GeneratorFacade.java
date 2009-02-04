@@ -282,7 +282,7 @@ public class GeneratorFacade {
 					xtendProposalProvider
 							.setTemplatePath("org::eclipse::xtext::ui::contentassist::XtendProposals::root");
 					PluginDependency xtendPlugin = XtextgenFactory.eINSTANCE.createPluginDependency();
-					xtendPlugin.setBundleID("org.eclipse.xtext.ui.common.xtend");
+					xtendPlugin.setBundleID("org.eclipse.xtext.xtend");
 					xtendProposalProvider.getPluginDependencies().add(xtendPlugin);
 					genModel.getServices().add(xtendProposalProvider);
 				}
