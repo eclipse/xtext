@@ -23,7 +23,7 @@
 	<!-- all tests that are to be run. Initialization for individual tests -->
 	<!-- should be done within the body of the suite target. -->
 	<target name="init">
-		<property name="classname" value="org.eclipse.xtext.generator.AutoTestSuite" />
+		<property name="classname" value="org.eclipse.xtext.generator.PluginTestSuite" />
 		<tstamp />
 		<delete>
 			<fileset dir="${eclipse-home}" includes="org*.xml" />
