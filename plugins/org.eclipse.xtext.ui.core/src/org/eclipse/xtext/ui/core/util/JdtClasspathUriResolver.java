@@ -102,8 +102,17 @@ public class JdtClasspathUriResolver implements IClasspathUriResolver {
 		if (zipFile != null) {
 			ZipEntry zipEntry = zipFile.getEntry(projectRelativePath.substring(1));
 			if (zipEntry != null) {
-				return URI.createURI("jar:" + "platform:/resource" + jarPackageFragmentRoot.resource().getFullPath()
-						+ "!" + projectRelativePath, true);
+				IResource resource = jarPackageFragmentRoot.resource();
+				if (resource == null) {
+					resource = jarPackageFragmentRoot.getUnderlyingResource();
+					if (resource == null) {
+						String name = zipFile.getName();
+						String uri = "jar:file:" + name + "!" + projectRelativePath;
+						return URI.createURI(uri);
+					}
+				}
+				return URI.createURI(
+						"jar:" + "platform:/resource" + resource.getFullPath() + "!" + projectRelativePath, true);
 			}
 		}
 		return null;
