@@ -13,6 +13,12 @@
   <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="foo">
     <ePackage href="http://holla#/"/>
   </metamodelDeclarations>
+  <rules xsi:type="xtext:ParserRule" name="RootRule">
+    <type metamodel="//@metamodelDeclarations.0">
+      <type xsi:type="ecore:EClass" href="http://holla#//RootRule"/>
+    </type>
+    <alternatives xsi:type="xtext:RuleCall" rule="//@rules.1"/>
+  </rules>
   <rules xsi:type="xtext:ParserRule" name="ConcreteParserRule">
     <type metamodel="//@metamodelDeclarations.0">
       <type xsi:type="ecore:EClass" href="http://holla#//ConcreteParserRule"/>
@@ -23,7 +29,7 @@
           <abstractTokens xsi:type="xtext:Keyword" value="model"/>
           <abstractTokens xsi:type="xtext:Assignment" feature="magicNumber" operator="=">
             <terminal xsi:type="xtext:RuleCall">
-              <rule href="classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xtext#//@rules.1"/>
+              <rule href="classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xtext#//@rules.5"/>
             </terminal>
           </abstractTokens>
         </abstractTokens>

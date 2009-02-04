@@ -22,6 +22,6 @@ public final class AbstractTestLanguageDelimiters {
 	);
 
 	public static ISequenceMatcher ruleCall$7$Delimiter = new SetBasedKeywordMatcher(
-		"element");
+		"element", "overridemodel", "extendedmodel");
 
 }

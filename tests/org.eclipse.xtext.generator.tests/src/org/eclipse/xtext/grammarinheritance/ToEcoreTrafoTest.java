@@ -69,7 +69,7 @@ public class ToEcoreTrafoTest extends AbstractGeneratorTest {
 		assertNotNull(metaModel.getNsURI());
 		assertNotNull(metaModel.getName());
 		EList<EClassifier> types = metaModel.getEClassifiers();
-		EClass type = (EClass) types.get(0);
+		EClass type = (EClass) types.get(1);
 		EStructuralFeature feature = type.getEStructuralFeature("elements");
 		assertNotNull(feature.getEType());
 	}

@@ -9,6 +9,10 @@ import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 
 import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.AbstractTestLanguageInheritedParserRuleConsumer;
+import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.AbstractTestLanguageAbstractCallOverridenParserRuleConsumer;
+import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.AbstractTestLanguageOverridableParserRuleConsumer;
+import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.AbstractTestLanguageAbstractCallExtendedParserRuleConsumer;
+import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.AbstractTestLanguageExtendableParserRuleConsumer;
 import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.AbstractTestLanguageREALConsumer;
 import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.AbstractTestLanguageIDConsumer;
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinINTConsumer;
@@ -24,6 +28,10 @@ public class AbstractTestLanguageParserConfiguration extends AbstractParserConfi
 	private XtextBuiltinParserConfiguration xtextBuiltinConfiguration; 
 
     private AbstractTestLanguageInheritedParserRuleConsumer inheritedParserRuleConsumer;
+    private AbstractTestLanguageAbstractCallOverridenParserRuleConsumer abstractCallOverridenParserRuleConsumer;
+    private AbstractTestLanguageOverridableParserRuleConsumer overridableParserRuleConsumer;
+    private AbstractTestLanguageAbstractCallExtendedParserRuleConsumer abstractCallExtendedParserRuleConsumer;
+    private AbstractTestLanguageExtendableParserRuleConsumer extendableParserRuleConsumer;
     private AbstractTestLanguageREALConsumer realConsumer;
     private AbstractTestLanguageIDConsumer idConsumer;
 
@@ -41,6 +49,18 @@ public class AbstractTestLanguageParserConfiguration extends AbstractParserConfi
 		inheritedParserRuleConsumer = new AbstractTestLanguageInheritedParserRuleConsumer(
     		this, null
     	);
+		abstractCallOverridenParserRuleConsumer = new AbstractTestLanguageAbstractCallOverridenParserRuleConsumer(
+    		this, null
+    	);
+		overridableParserRuleConsumer = new AbstractTestLanguageOverridableParserRuleConsumer(
+    		this, null
+    	);
+		abstractCallExtendedParserRuleConsumer = new AbstractTestLanguageAbstractCallExtendedParserRuleConsumer(
+    		this, null
+    	);
+		extendableParserRuleConsumer = new AbstractTestLanguageExtendableParserRuleConsumer(
+    		this, null
+    	);
 	}
 	
 	public void createTerminalConsumers() {
@@ -52,8 +72,22 @@ public class AbstractTestLanguageParserConfiguration extends AbstractParserConfi
 	public void configureConsumers() {
 		getInheritedParserRuleConsumer().setIdConsumer(getIdConsumer());
 
+		getAbstractCallOverridenParserRuleConsumer().setOverridableParserRuleConsumer(getOverridableParserRuleConsumer());
+
+		getOverridableParserRuleConsumer().setIdConsumer(getIdConsumer());
+
+		getAbstractCallExtendedParserRuleConsumer().setExtendableParserRuleConsumer(getExtendableParserRuleConsumer());
+
+		getExtendableParserRuleConsumer().setIdConsumer(getIdConsumer());
+
 		getInheritedParserRuleConsumer().setKeyword$2$Delimiter(AbstractTestLanguageDelimiters.keyword$5$Delimiter);
 		getInheritedParserRuleConsumer().setRuleCall$4$Delimiter(AbstractTestLanguageDelimiters.ruleCall$7$Delimiter);
+		getAbstractCallOverridenParserRuleConsumer().setKeyword$2$Delimiter(AbstractTestLanguageDelimiters.keyword$5$Delimiter);
+		getOverridableParserRuleConsumer().setKeyword$2$Delimiter(AbstractTestLanguageDelimiters.keyword$5$Delimiter);
+		getOverridableParserRuleConsumer().setRuleCall$4$Delimiter(AbstractTestLanguageDelimiters.ruleCall$7$Delimiter);
+		getAbstractCallExtendedParserRuleConsumer().setKeyword$2$Delimiter(AbstractTestLanguageDelimiters.keyword$5$Delimiter);
+		getExtendableParserRuleConsumer().setKeyword$2$Delimiter(AbstractTestLanguageDelimiters.keyword$5$Delimiter);
+		getExtendableParserRuleConsumer().setRuleCall$4$Delimiter(AbstractTestLanguageDelimiters.ruleCall$7$Delimiter);
 	}
 	
 	// TODO collect superGrammars transitive
@@ -63,6 +97,22 @@ public class AbstractTestLanguageParserConfiguration extends AbstractParserConfi
 	
     public AbstractTestLanguageInheritedParserRuleConsumer getInheritedParserRuleConsumer() {
     	return inheritedParserRuleConsumer;
+    }
+
+    public AbstractTestLanguageAbstractCallOverridenParserRuleConsumer getAbstractCallOverridenParserRuleConsumer() {
+    	return abstractCallOverridenParserRuleConsumer;
+    }
+
+    public AbstractTestLanguageOverridableParserRuleConsumer getOverridableParserRuleConsumer() {
+    	return overridableParserRuleConsumer;
+    }
+
+    public AbstractTestLanguageAbstractCallExtendedParserRuleConsumer getAbstractCallExtendedParserRuleConsumer() {
+    	return abstractCallExtendedParserRuleConsumer;
+    }
+
+    public AbstractTestLanguageExtendableParserRuleConsumer getExtendableParserRuleConsumer() {
+    	return extendableParserRuleConsumer;
     }
 
     public AbstractTestLanguageREALConsumer getRealConsumer() {

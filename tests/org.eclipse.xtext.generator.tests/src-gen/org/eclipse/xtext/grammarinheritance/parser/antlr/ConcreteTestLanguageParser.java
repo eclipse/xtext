@@ -39,6 +39,6 @@ public class ConcreteTestLanguageParser extends org.eclipse.xtext.parser.antlr.A
 	
 	@Override 
 	protected String getDefaultRuleName() {
-		return "ConcreteParserRule";
+		return "RootRule";
 	}
 }
