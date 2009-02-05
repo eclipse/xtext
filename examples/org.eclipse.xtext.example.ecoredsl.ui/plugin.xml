@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<plugin>
+
+<extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="org.eclipse.xtext.example.ui.editor.EcoreDslEditor"
+            contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+            default="true"
+            extensions="ecoredsl"
+            id="org.eclipse.xtext.example.EcoreDsl"
+            name="EcoreDsl Editor">
+      </editor>
+   </extension>
+ <extension
+         point="org.eclipse.ui.preferencePages">
+		<page
+			class="org.eclipse.xtext.ui.core.util.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage/org.eclipse.xtext.example.EcoreDsl"
+			id="org.eclipse.xtext.example.EcoreDsl"
+			name="EcoreDsl">
+			<keywordReference
+				id="org.eclipse.xtext.example.ui.keyword_EcoreDsl">
+			</keywordReference>
+		</page>
+		<page
+		    category="org.eclipse.xtext.example.EcoreDsl"
+		    class="org.eclipse.xtext.ui.core.util.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.EditorPreferencePage/org.eclipse.xtext.example.EcoreDsl"
+		    id="org.eclipse.xtext.example.EcoreDsl.editor"
+		    name="Editor">
+		    	<keywordReference 
+           			id="org.eclipse.xtext.keyword.editor">
+     			</keywordReference>
+		</page>
+      </extension>
+	<extension
+		point="org.eclipse.ui.keywords">
+		<keyword
+			id="org.eclipse.xtext.example.ui.keyword_EcoreDsl"
+			label="EcoreDsl">
+		</keyword>
+		<keyword
+            id="org.eclipse.xtext.example.EcoreDsl.tasktags"
+            label="Task Tags">
+        </keyword>
+	</extension>
+	
+	   <extension point="org.eclipse.ui.editors.templates">
+        <contextType name="EPackageDecl"
+            class="org.eclipse.xtext.ui.common.editor.contentassist.impl.XtextTemplateContextType"
+            id="org.eclipse.xtext.ecore.dsl.ui.templates.contextType.EPackageDecl">
+        </contextType>
+        <contextType name="EClassDecl"
+            class="org.eclipse.xtext.ui.common.editor.contentassist.impl.XtextTemplateContextType"
+            id="org.eclipse.xtext.ecore.dsl.ui.templates.contextType.EClassDecl">
+        </contextType>
+        <contextType name="EDataTypeDecl"
+            class="org.eclipse.xtext.ui.common.editor.contentassist.impl.XtextTemplateContextType"
+            id="org.eclipse.xtext.ecore.dsl.ui.templates.contextType.EDataTypeDecl">
+        </contextType>
+        <contextType name="EEnumDecl"
+            class="org.eclipse.xtext.ui.common.editor.contentassist.impl.XtextTemplateContextType"
+            id="org.eclipse.xtext.ecore.dsl.ui.templates.contextType.EEnumDecl">
+        </contextType>
+        <contextType name="EAttributeDecl"
+            class="org.eclipse.xtext.ui.common.editor.contentassist.impl.XtextTemplateContextType"
+            id="org.eclipse.xtext.ecore.dsl.ui.templates.contextType.EAttributeDecl">
+        </contextType>
+        <include file="templates/templates.xml" /> 
+    </extension>
+    <extension
+         point="org.eclipse.ui.commands">
+         <command
+               id="org.eclipse.xtext.ecore.dsl.GenerateEcore"
+               name="Generate Ecore Model"
+               description="Generate Ecore Model">
+         </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+         <command
+               id="org.eclipse.xtext.ecore.dsl.GenerateEcoreDsl"
+               name="Generate Ecore Dsl"
+               description="Generate Ecore Dsl">
+         </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="org.eclipse.xtext.example.handler.GenerateEcoreDslHandler"
+            commandId="org.eclipse.xtext.ecore.dsl.GenerateEcoreDsl">
+      </handler>
+      <handler
+            class="org.eclipse.xtext.example.handler.GenerateEcoreHandler"
+            commandId="org.eclipse.xtext.ecore.dsl.GenerateEcore">
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+         <command commandId="org.eclipse.xtext.ecore.dsl.GenerateEcore">
+            <visibleWhen
+                  checkEnabled="false">
+               <iterate>
+                  <adapt
+                        type="org.eclipse.core.resources.IResource">
+                     <test property="org.eclipse.core.resources.name"
+                           value="*.ecoredsl">
+                     </test>
+                  </adapt></iterate>
+            </visibleWhen>
+         </command>
+         <command commandId="org.eclipse.xtext.ecore.dsl.GenerateEcoreDsl">
+            <visibleWhen
+                  checkEnabled="false">
+               <iterate>
+                  <adapt
+                        type="org.eclipse.core.resources.IResource">
+                     <test property="org.eclipse.core.resources.name"
+                           value="*.ecore">
+                     </test>
+                  </adapt></iterate>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
+	
+
+</plugin>
