@@ -9,7 +9,6 @@ import org::eclipse::xtext::crossref;
 
 import ReferenceGrammar;
 
-extension org::eclipse::xtext::crossref::Crossref reexport;
 extension org::eclipse::xtext::testlanguages::GenReferenceGrammarTestLanguageScopeProvider reexport;
 
 /**

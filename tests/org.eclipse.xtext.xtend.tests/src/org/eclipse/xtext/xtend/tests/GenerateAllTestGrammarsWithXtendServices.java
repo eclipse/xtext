@@ -69,7 +69,7 @@ public class GenerateAllTestGrammarsWithXtendServices {
 				resource.load(null);
 				Grammar grammarModel = (Grammar) resource.getContents()
 						.iterator().next();
-				GeneratorFacade.generate(grammarModel, runtimePath, uiPath, true, false, false, clazz
+				GeneratorFacade.generate(grammarModel, runtimePath, uiPath, true, false, true, clazz
 						.getSimpleName().toLowerCase());
 			}
 		} catch (Exception e) {
