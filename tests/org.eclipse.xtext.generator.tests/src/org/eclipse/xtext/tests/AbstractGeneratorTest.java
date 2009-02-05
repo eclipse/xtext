@@ -8,9 +8,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.tests;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Method;
+import java.net.URL;
 
 import junit.framework.TestCase;
 
@@ -235,7 +237,18 @@ public abstract class AbstractGeneratorTest extends TestCase {
 
 	protected String readFileIntoString(String filePath) throws IOException {
 		ClassLoader classLoader = getClass().getClassLoader();
+		URL url = classLoader.getResource(filePath);
+		if (url == null)
+			fail("Could not read resource: '" + filePath + "'. Is your file system case sensitive?");
+		if(!new File(url.getPath()).getCanonicalPath().endsWith(filePath))
+			throw new RuntimeException(filePath + ":\n" +
+					"The file does not exist exactly as it was named.\n" +
+					"The test is likely to cause trouble on the build server.\n" +
+					"Is your filesystem case insensitive? Please verify the spelling.");
+		
 		InputStream resourceAsStream = classLoader.getResourceAsStream(filePath);
+		if (resourceAsStream == null)
+			fail("Could not read resource: '" + filePath + "'. Is your file system case sensitive?");
 		byte[] buffer = new byte[2048];
 		int bytesRead = 0;
 		StringBuffer b = new StringBuffer();
