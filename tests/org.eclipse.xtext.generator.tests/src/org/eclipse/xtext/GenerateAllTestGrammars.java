@@ -8,6 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtext;
 
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -15,6 +18,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.crossrefs.ImportUriTestLanguage;
 import org.eclipse.xtext.crossrefs.LangATestLanguage;
 import org.eclipse.xtext.dummy.DummyTestLanguage;
+import org.eclipse.xtext.generator.LowerCaseNamedTestLanguage;
 import org.eclipse.xtext.grammarinheritance.AbstractTestLanguage;
 import org.eclipse.xtext.grammarinheritance.ConcreteTestLanguage;
 import org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTestLanguage;
@@ -84,7 +88,8 @@ public class GenerateAllTestGrammars {
 			XtextTerminalsTestLanguage.class,
 			HiddenTerminalsTestLanguage.class,
 			EpatchTestLanguage.class,
-			KeywordsTestLanguage.class
+			KeywordsTestLanguage.class,
+			LowerCaseNamedTestLanguage.class
 	};
 
 	public static void main(String... args) throws Exception {
@@ -95,7 +100,7 @@ public class GenerateAllTestGrammars {
 			}
 			GeneratorFacade.cleanFolder(path + "/src-gen");
 			for (Class<?> c : testclasses) {
-				String filename = "classpath:/" + c.getName().replace('.', '/') + ".xtext";
+				String filename = "classpath:/" + getGrammarFileName(c);
 				log.info("loading " + filename);
 				ResourceSetImpl rs = new XtextResourceSet();
 				URI uri = URI.createURI(filename);
@@ -107,5 +112,20 @@ public class GenerateAllTestGrammars {
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
+	}
+
+	private static String getGrammarFileName(Class<?> c) {
+		try {
+			Method m = c.getMethod("getGrammarFileName");
+			if (m != null && Modifier.isStatic(m.getModifiers()) && String.class.equals(m.getReturnType()))
+			try {
+				return ((String) m.invoke(null)).replace('.', '/') + ".xtext";
+			}
+			catch (Exception e) {
+				log.error("Cannot invoke 'getGrammarFileName'", e);
+			}
+		} catch (NoSuchMethodException e) {
+		}
+		return c.getName().replace('.', '/') + ".xtext";
 	}
 }

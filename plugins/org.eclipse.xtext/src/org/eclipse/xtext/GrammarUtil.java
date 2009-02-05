@@ -67,11 +67,11 @@ public class GrammarUtil {
 	}
 
 	public static String getName(Grammar g) {
-		return g.getIdElements().get(g.getIdElements().size() - 1);
+		return Strings.toFirstUpper(g.getIdElements().get(g.getIdElements().size() - 1));
 	}
 
 	public static String getNamespace(Grammar g) {
-		return Strings.concat(".", g.getIdElements(), 1);
+		return Strings.concat(".", g.getIdElements(), 1).toLowerCase();
 	}
 
 	public static Grammar getGrammar(EObject grammarElement) {

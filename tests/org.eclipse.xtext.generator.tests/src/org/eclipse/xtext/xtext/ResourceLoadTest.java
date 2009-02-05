@@ -31,6 +31,7 @@ import org.eclipse.xtext.util.Pair;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@SuppressWarnings("unused")
 public class ResourceLoadTest extends AbstractGeneratorTest {
 
 	private Class<?> clazz;
