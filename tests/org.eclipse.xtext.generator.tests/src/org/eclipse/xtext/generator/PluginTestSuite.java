@@ -19,6 +19,7 @@ public class PluginTestSuite {
 		suite.addTestSuite(org.eclipse.xtext.crossrefs.CrossRefTest.class);
 		suite.addTestSuite(org.eclipse.xtext.crossrefs.DefaultScopeProviderTest.class);
 		suite.addTestSuite(org.eclipse.xtext.crossrefs.LinkingErrorTest.class);
+		suite.addTestSuite(org.eclipse.xtext.generator.ParserTest.class);
 		suite.addTestSuite(org.eclipse.xtext.generator.resource.ResourceTest.class);
 		suite.addTestSuite(org.eclipse.xtext.grammarinheritance.InheritanceTest.class);
 		suite.addTestSuite(org.eclipse.xtext.grammarinheritance.ToEcoreTrafoTest.class);
