@@ -79,6 +79,7 @@ public class EcoreDslRuntimeModule extends AbstractEcoreDslRuntimeModule {
 		
 		@Override
 		protected void setDefaultValueImpl(EObject obj, EReference ref, IDiagnosticProducer producer) {
+			//hack: ePackage always needs an eFactoryInstance (gets cleared in #clearReferences?)
 			if (ref.getName().equalsIgnoreCase("eFactoryInstance")) {
 				((EPackage) obj).setEFactoryInstance(EcoreFactoryImpl.eINSTANCE.createEFactory());
 			}
@@ -88,8 +89,8 @@ public class EcoreDslRuntimeModule extends AbstractEcoreDslRuntimeModule {
 		protected void clearReferences(EObject obj) {
 			EList<EReference> allReferences = obj instanceof EClass ? ((EClass) obj).getEAllReferences() : obj.eClass()
 					.getEAllReferences();
+			// hack: exceptions when eType, eExceptions are null
 			for (EReference ref : allReferences) {
-				
 				try {
 					if (ref.isContainment() || 
 					    ref.isContainer()   || 
@@ -113,20 +114,10 @@ public class EcoreDslRuntimeModule extends AbstractEcoreDslRuntimeModule {
 		// logger available to subclasses
 		protected final Logger logger = Logger.getLogger(getClass());
 		
-		// @Override
-		// public EObject create(String fullTypeName) {
-		// EObject create = super.create(fullTypeName);
-		// if (create instanceof EPackage) {
-		// EFactory factoryInstance = ((EPackage) create).getEFactoryInstance();
-		// ((EPackage) create).setEFactoryInstance(factoryInstance);
-		// }
-		// return create;
-		// }
-
 		@Override
 		public void set(EObject _this, String feature, Object value, String ruleName, AbstractNode node)
 				throws ValueConverterException {
-
+			// hack: negated boolean assignments (not possible out of the box with xtext)
 			if (ruleName.equals("readonly")) {
 				((EStructuralFeature) _this).setChangeable(false);
 				return;
