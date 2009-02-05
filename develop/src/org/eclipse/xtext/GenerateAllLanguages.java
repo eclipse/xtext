@@ -23,6 +23,7 @@ public class GenerateAllLanguages {
 			org.eclipse.xtext.example.FowlerDsl.main("../org.eclipse.xtext.example.fowlerdsl");
 			org.eclipse.xtext.reference.ReferenceGrammar.main("../org.eclipse.xtext.reference");
 			org.eclipse.xtext.example.EcoreDsl.main("../org.eclipse.xtext.example.ecoredsl");
+			org.eclipse.xtext.xtend.tests.GenerateAllTestGrammarsWithXtendServices.main("../org.eclipse.xtext.xtend.tests");
 		}
 		catch (Exception e) {
 			e.printStackTrace();

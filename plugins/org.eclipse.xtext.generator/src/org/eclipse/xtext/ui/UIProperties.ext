@@ -41,12 +41,6 @@ editorExtensionId(GenModel this):
 uiProposalProviderClass() :
 	grammar().getId() + "ProposalProvider";
 	
-xtendProposalProvider() :
-	grammar().getId() + "Proposals";
-
-xtendGenProposalProvider() :
-	grammar().getNamespace() + ".Gen" + grammar().getName() + "Proposals";
-
 languageKeywordId(GenModel this):
 	packageName() + ".ui.keyword_"+languageName();
 

@@ -1,0 +1,33 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+import xtext;
+import xtextgen;
+import ecore;
+
+extension org::eclipse::xtext::Extensions;
+extension org::eclipse::xtext::Properties reexport;
+
+String xtendGenScopeProvider():
+	grammar().getNamespace() + ".Gen" + grammar().getName() + "ScopeProvider";
+
+String xtendScopeProvider():
+	grammar().getId() + "ScopeProvider";
+
+List[CrossReference] allCrossReferences(Grammar this) :
+	eAllContents.typeSelect(CrossReference);
+	
+Collection[ecore::EReference] eReferencesFromCrossRefs(Grammar this):
+	allCrossReferences().eReference().toSet();
+
+qualifiedXtendName(Grammar this, EClassifier eClass) :
+	metamodelDeclarations.select(m|m.ePackage==eClass.ePackage).first().aliasPrefix() + eClass.name;
+	
+aliasPrefix(AbstractMetamodelDeclaration this) :
+	alias == null ? "" : alias + "::";
+ 

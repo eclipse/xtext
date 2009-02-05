@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<plugin>
+    <extension
+         point="org.eclipse.xtend.typesystem.emf.checks">
+      
+      <metaModel
+            nsURI="http://eclipse.org/xtext/reference/ReferenceGrammar">
+         <checkFile
+               path="org/eclipse/xtext/testlanguages/ReferenceGrammarChecks.chk">
+         </checkFile>
+      </metaModel>
+      
+   </extension>
+   <extension
+         point="org.eclipse.emf.ecore.extension_parser">
+      <parser
+            class="org.eclipse.xtext.testlanguages.services.ReferenceGrammarTestLanguageResourceFactory"
+            type="referencegrammartestlanguage">
+      </parser>
+   </extension>
+   
+   
+<extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="org.eclipse.xtext.testlanguages.ui.editor.ReferenceGrammarTestLanguageEditor"
+            contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+            default="true"
+            extensions="referencegrammartestlanguage"
+            id="org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage"
+            name="ReferenceGrammarTestLanguage Editor">
+      </editor>
+   </extension>
+ <extension
+         point="org.eclipse.ui.preferencePages">
+		<page
+			class="org.eclipse.xtext.ui.core.util.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage/org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage"
+			id="org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage"
+			name="ReferenceGrammarTestLanguage">
+			<keywordReference
+				id="org.eclipse.xtext.testlanguages.ui.keyword_ReferenceGrammarTestLanguage">
+			</keywordReference>
+		</page>
+		<page
+		    category="org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage"
+		    class="org.eclipse.xtext.ui.core.util.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.EditorPreferencePage/org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage"
+		    id="org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage.editor"
+		    name="Editor">
+		    	<keywordReference 
+           			id="org.eclipse.xtext.keyword.editor">
+     			</keywordReference>
+		</page>
+      </extension>
+	<extension
+		point="org.eclipse.ui.keywords">
+		<keyword
+			id="org.eclipse.xtext.testlanguages.ui.keyword_ReferenceGrammarTestLanguage"
+			label="ReferenceGrammarTestLanguage">
+		</keyword>
+		<keyword
+            id="org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage.tasktags"
+            label="Task Tags">
+        </keyword>
+	</extension>
+
+</plugin>

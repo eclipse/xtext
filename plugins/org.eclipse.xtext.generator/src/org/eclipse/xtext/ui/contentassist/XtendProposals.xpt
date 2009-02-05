@@ -43,7 +43,7 @@ import org::eclipse::xtext::ui::common::xtend::contentassist;
 import «mm.ePackage.name»;
 «ENDFOREACH-»
 
-extension org::eclipse::xtext::ui::common::xtend::contentassist::ContentAssist reexport;
+extension org::eclipse::xtext::xtend::contentassist::ContentAssist reexport;
 extension org::eclipse::xtend::util::stdlib::io;
 
 /**
@@ -117,7 +117,6 @@ import org::eclipse::xtext::ui::common::xtend::contentassist;
 import «mm.ePackage.name»;
 «ENDFOREACH-»
 
-extension org::eclipse::xtext::ui::common::xtend::contentassist::ContentAssist;
 extension «xtendGenProposalProvider().toXtendFqName()» reexport;
 
 /**
@@ -135,7 +134,7 @@ extension «xtendGenProposalProvider().toXtendFqName()» reexport;
 
 package «genClassFQName.toJavaPackage()»;
 
-import org.eclipse.xtext.ui.common.xtend.contentassist.AbstractXtendProposalProvider;
+import org.eclipse.xtext.xtend.contentassist.AbstractXtendProposalProvider;
 
 /**
  * A {@link IProposalProvider} that calls Xtend extensions.

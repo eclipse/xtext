@@ -1,0 +1,27 @@
+/*
+Generated with Xtext
+*/
+
+import org::eclipse::xtext::crossref;
+
+import ReferenceGrammar;
+
+extension org::eclipse::xtext::xtend::crossref::Crossref reexport;
+extension org::eclipse::xtend::util::stdlib::io;
+
+/**
+ * Represents a generated, default implementation of interface {@link IScopeProvider}.
+ * 
+ * @see org.eclipse.xtext.ui.common.editor.contentassist.IScopeProvider
+ */
+
+
+List[IScopedElement] scope_kinder(Kind this):
+	allRootElements().typeSelect(Kind).collect(x | createScopedElement(x.name, x));
+
+List[IScopedElement] scope_vater(Erwachsener this):
+	allRootElements().typeSelect(Erwachsener).collect(x | createScopedElement(x.name, x));
+
+List[IScopedElement] scope_mutter(Erwachsener this):
+	allRootElements().typeSelect(Erwachsener).collect(x | createScopedElement(x.name, x));
+

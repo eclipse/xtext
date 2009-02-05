@@ -272,6 +272,18 @@ public class GeneratorFacade {
 					.setGenClassFQName("org.eclipse.xtext.parsetree.reconstr.impl.SimpleTransientValueService");
 			genModel.getServices().add(transientValueService);
 
+			if(isGenerateXtendServices) {
+				GenService xtendScopeProvider = XtextgenFactory.eINSTANCE.createGenService();
+				xtendScopeProvider.setServiceInterfaceFQName("org.eclipse.xtext.crossref.IScopeProvider");
+				xtendScopeProvider.setGenClassFQName(namespace + ".Xtend" + languageName + "ScopeProvider");
+				xtendScopeProvider
+					.setTemplatePath("org::eclipse::xtext::crossref::XtendScopes::root");
+				PluginDependency anotherXtendPlugin = XtextgenFactory.eINSTANCE.createPluginDependency();
+				anotherXtendPlugin.setBundleID("org.eclipse.xtext.xtend");
+				xtendScopeProvider.getPluginDependencies().add(anotherXtendPlugin);
+				genModel.getServices().add(xtendScopeProvider);
+			}
+			
 			if (uiProjectPath != null) {
 				if (isGenerateXtendServices) {
 					GenService xtendProposalProvider = XtextgenFactory.eINSTANCE.createGenService();

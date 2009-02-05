@@ -12,6 +12,13 @@ import xtextgen;
 extension org::eclipse::xtext::Extensions;
 extension org::eclipse::xtext::Properties reexport;
 
+xtendProposalProvider() :
+	grammar().getId() + "Proposals";
+
+xtendGenProposalProvider() :
+	grammar().getNamespace() + ".Gen" + grammar().getName() + "Proposals";
+
+
 String getFqFeatureName(Assignment this):
 	containingParserRule().name.toFirstUpper()+"_"+feature.toFirstUpper();
 	
