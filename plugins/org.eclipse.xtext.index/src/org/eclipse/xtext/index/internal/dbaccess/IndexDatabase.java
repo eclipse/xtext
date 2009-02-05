@@ -117,7 +117,7 @@ public class IndexDatabase {
 					conn = DriverManager.getConnection(connectionURL, props);
 				}
 				catch (SQLException e) {
-					Files.cleanFolder(dbHome);
+					Files.sweepFolder(dbHome);
 					conn = DriverManager.getConnection(connectionURL, props);
 				}
 				break;
@@ -135,7 +135,7 @@ public class IndexDatabase {
 					conn = DriverManager.getConnection(connectionBaseURL, USER_NAME, PASSWORD);
 				}
 				catch (SQLException e) {
-					Files.cleanFolder(dbHome);
+					Files.sweepFolder(dbHome);
 					conn = DriverManager.getConnection(connectionBaseURL, USER_NAME, PASSWORD);
 				}
 				break;
