@@ -19,7 +19,7 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
-import org.eclipse.xtext.parsetree.NodeAdapterFactory;
+import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
 
 /**
@@ -66,8 +66,7 @@ public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransf
 
 		outlineNode.setLabel(getText(semanticNode));
 
-		// XXX: Why don't we use NodeUtil.getNodeAdapter?
-		NodeAdapter nodeAdapter = (NodeAdapter) NodeAdapterFactory.INSTANCE.adapt(semanticNode, AbstractNode.class);
+		NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(semanticNode);
 		CompositeNode parserNode = nodeAdapter.getParserNode();
 		if (parserNode != null) {
 			SelectionCoordinates selectionNodeCoordinates = getSelectionNodeCoordinates(parserNode);
@@ -87,9 +86,13 @@ public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransf
 		 * when we want to synch the outline with the currently selected editor
 		 * position.
 		 * 
-		 * XXX SZ: is this feasible? What if i want to create more than one one outline node
+		 * XXX SZ: is this feasible? What if I want to create more than one one outline node
 		 *         per semantic node? Can't we use the offset information of the outline node
 		 *         and the editor to synchronize them?
+		 *     PF: Reason for using an adapter was to not need to traverse a (more or less) 
+		 *         large part the outline model when syncing the outline to the editor selection.
+		 *         However, SZ and I agreed on leaving it as-is and look into a tree traversal 
+		 *         approach if we run into memory problems.  
 		 */
 		ContentOutlineNodeAdapter outlineAdapter = (ContentOutlineNodeAdapter) ContentOutlineNodeAdapterFactory.INSTANCE
 				.adapt(semanticNode, ContentOutlineNode.class);
@@ -126,7 +129,7 @@ public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransf
 	}
 
 	// TODO this should really be protected to enable subclasses to implement another behavior
-	private SelectionCoordinates getSelectionNodeCoordinates(CompositeNode startNode) {
+	protected SelectionCoordinates getSelectionNodeCoordinates(CompositeNode startNode) {
 		EList<AbstractNode> leafNodes = startNode.getChildren();
 		AbstractNode keywordNode = null;
 		List<AbstractNode> idNodes = null;
