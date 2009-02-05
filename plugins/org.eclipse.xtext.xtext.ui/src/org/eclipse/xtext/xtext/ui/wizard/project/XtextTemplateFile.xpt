@@ -10,7 +10,7 @@
 «ENDREM»
 «DEFINE root FOR XtextProjectInfo»
 «FILE this.languageNameAbbreviation+".xtext" GRAMMAR_GENERATOR_OUTLET -»
-language «this.basePackage».«this.languageNameAbbreviation»
+language «this.languageName»
 generate «this.languageNameAbbreviation» "«this.nsURI»"
 
 Model :
