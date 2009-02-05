@@ -17,6 +17,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.xtext.GenerateAllTestGrammars;
 import org.eclipse.xtext.GeneratorFacade;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextGrammarTestLanguage;
@@ -68,8 +69,7 @@ public class GenerateAllTestGrammarsWithUiConfig {
 			XtextStandaloneSetup.doSetup();
 			GeneratorFacade.cleanFolder(uiPath + "/src-gen");
 			for (Class<?> clazz : testClasses) {
-				String filename = "classpath:/" + clazz.getName().replace('.', '/')
-						+ ".xtext";
+				String filename = GenerateAllTestGrammars.getGrammarFileNameAsURI(clazz);
 				logger.info("loading " + filename);
 				ResourceSetImpl rs = new XtextResourceSet();
 				URI uri = URI.createURI(filename);
