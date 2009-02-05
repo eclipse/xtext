@@ -7,6 +7,7 @@ import java.util.Collection;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.codegen.ecore.generator.Generator;
 import org.eclipse.emf.codegen.ecore.generator.GeneratorAdapterFactory;
+import org.eclipse.emf.codegen.ecore.genmodel.GenJDKLevel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
@@ -41,8 +42,8 @@ public class GenerateJavaFromEcore {
 		genModel.setCanGenerate(true);
 		genModel.setFacadeHelperClass(null);
 		genModel.setBundleManifest(false);
+		genModel.setComplianceLevel(GenJDKLevel.JDK50_LITERAL);
 
-		
 		for (GenPackage genPackage : genModel.getGenPackages()) {
 			genPackage.setBasePackage(basePackage);
 		}
