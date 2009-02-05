@@ -16,14 +16,14 @@
 	<property name="eclipse-home" value="${basedir}\..\.." />
 
 	<!-- sets the properties plugin-name, and library-file -->
-	<property name="plugin-name" value="org.eclipse.xtext.tests" />
+	<property name="plugin-name" value="org.eclipse.xtext.ui.common.tests" />
 	<property name="library-file" value="${eclipse-home}/dropins/eclipse/plugins/org.eclipse.test/library.xml" /> 
 
 	<!-- This target holds all initialization code that needs to be done for -->
 	<!-- all tests that are to be run. Initialization for individual tests -->
 	<!-- should be done within the body of the suite target. -->
 	<target name="init">
-		<property name="classname" value="org.eclipse.xtext.AutoTestSuite" />
+		<property name="classname" value="org.eclipse.xtext.ui.common.tests.AllTests" />
 		<tstamp />
 		<delete>
 			<fileset dir="${eclipse-home}" includes="org*.xml" />
