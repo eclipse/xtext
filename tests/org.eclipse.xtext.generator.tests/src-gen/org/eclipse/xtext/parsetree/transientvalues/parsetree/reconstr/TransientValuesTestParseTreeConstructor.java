@@ -264,7 +264,7 @@ protected class TestRequired_0_1_Assignment_required1 extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("required1",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("required1");
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = TransientValuesTestGrammarAccess.INSTANCE.prTestRequired().ele010LexerRuleCallINT();
 			return new Solution(obj);
@@ -288,7 +288,7 @@ protected class TestRequired_1_Assignment_required2 extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("required2",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("required2");
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = TransientValuesTestGrammarAccess.INSTANCE.prTestRequired().ele10LexerRuleCallINT();
 			return new Solution(obj);
@@ -390,7 +390,7 @@ protected class TestOptional_0_1_Assignment_opt1 extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("opt1",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("opt1");
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = TransientValuesTestGrammarAccess.INSTANCE.prTestOptional().ele010LexerRuleCallINT();
 			return new Solution(obj);
@@ -454,7 +454,7 @@ protected class TestOptional_1_1_Assignment_opt2 extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("opt2",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("opt2");
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = TransientValuesTestGrammarAccess.INSTANCE.prTestOptional().ele110LexerRuleCallINT();
 			return new Solution(obj);
@@ -529,7 +529,7 @@ protected class TestList_1_Assignment_item extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("item",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("item");
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = TransientValuesTestGrammarAccess.INSTANCE.prTestList().ele10LexerRuleCallINT();
 			return new Solution(obj);

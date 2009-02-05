@@ -323,7 +323,7 @@ protected class WithoutHiddens_0_0_0_1_Assignment_spaces extends AssignmentToken
 		if((value = current.getConsumable("spaces",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("spaces");
 
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
 			type = AssignmentType.PRC;
 			element = HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prWithoutHiddens().ele00010ParserRuleCallWS();
 			return new Solution(obj);
@@ -362,7 +362,7 @@ protected class WithoutHiddens_0_1_Assignment_spaces extends AssignmentToken  {
 		if((value = current.getConsumable("spaces",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("spaces");
 
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
 			type = AssignmentType.PRC;
 			element = HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prWithoutHiddens().ele010ParserRuleCallWS();
 			return new Solution(obj);
@@ -868,7 +868,7 @@ protected class OverridingHiddensCall_0_1_Assignment_spaces extends AssignmentTo
 		if((value = current.getConsumable("spaces",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("spaces");
 
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
 			type = AssignmentType.PRC;
 			element = HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prOverridingHiddensCall().ele010ParserRuleCallWS();
 			return new Solution(obj);
@@ -1310,7 +1310,7 @@ protected class HidingHiddens_0_1_Assignment_space extends AssignmentToken  {
 		if((value = current.getConsumable("space",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("space");
 
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
 			type = AssignmentType.PRC;
 			element = HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prHidingHiddens().ele010ParserRuleCallWS();
 			return new Solution(obj);

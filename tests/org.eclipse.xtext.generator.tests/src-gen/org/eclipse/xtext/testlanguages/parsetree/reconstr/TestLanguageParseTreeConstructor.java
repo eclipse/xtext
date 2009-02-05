@@ -251,7 +251,7 @@ protected class ChoiceRule_1_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = TestLanguageGrammarAccess.INSTANCE.prChoiceRule().ele10LexerRuleCallID();
 			return new Solution(obj);
@@ -463,7 +463,7 @@ protected class TerminalRule_Assignment_stringFeature extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("stringFeature",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("stringFeature");
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = TestLanguageGrammarAccess.INSTANCE.prTerminalRule().ele0LexerRuleCallSTRING();
 			return new Solution(obj);

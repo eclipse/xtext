@@ -187,7 +187,7 @@ protected class Import_1_Assignment_importURI extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("importURI",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("importURI");
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = ImportUriTestLanguageGrammarAccess.INSTANCE.prImport().ele10LexerRuleCallSTRING();
 			return new Solution(obj);
@@ -317,7 +317,7 @@ protected class Type_0_0_1_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = ImportUriTestLanguageGrammarAccess.INSTANCE.prType().ele0010LexerRuleCallID();
 			return new Solution(obj);

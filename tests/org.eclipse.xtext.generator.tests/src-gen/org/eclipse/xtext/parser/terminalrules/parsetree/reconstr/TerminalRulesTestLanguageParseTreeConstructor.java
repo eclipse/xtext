@@ -170,7 +170,7 @@ protected class Model_0_0_0_0_0_0_Assignment_idValue extends AssignmentToken  {
 		if((value = current.getConsumable("idValue",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("idValue");
 
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
 			type = AssignmentType.PRC;
 			element = TerminalRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele0000000ParserRuleCallID();
 			return new Solution(obj);
@@ -195,7 +195,7 @@ protected class Model_0_0_0_0_0_1_Assignment_intValue extends AssignmentToken  {
 		if((value = current.getConsumable("intValue",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("intValue");
 
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
 			type = AssignmentType.PRC;
 			element = TerminalRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele0000010ParserRuleCallINT();
 			return new Solution(obj);
@@ -221,7 +221,7 @@ protected class Model_0_0_0_0_1_Assignment_stringValue extends AssignmentToken  
 		if((value = current.getConsumable("stringValue",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("stringValue");
 
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
 			type = AssignmentType.PRC;
 			element = TerminalRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele000010ParserRuleCallSTRING();
 			return new Solution(obj);
@@ -247,7 +247,7 @@ protected class Model_0_0_0_1_Assignment_mlCommentValue extends AssignmentToken 
 		if((value = current.getConsumable("mlCommentValue",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("mlCommentValue");
 
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
 			type = AssignmentType.PRC;
 			element = TerminalRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele00010ParserRuleCallML_COMMENT();
 			return new Solution(obj);
@@ -273,7 +273,7 @@ protected class Model_0_0_1_Assignment_slCommentValue extends AssignmentToken  {
 		if((value = current.getConsumable("slCommentValue",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("slCommentValue");
 
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
 			type = AssignmentType.PRC;
 			element = TerminalRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele0010ParserRuleCallSL_COMMENT();
 			return new Solution(obj);
@@ -299,7 +299,7 @@ protected class Model_0_1_Assignment_wsValue extends AssignmentToken  {
 		if((value = current.getConsumable("wsValue",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("wsValue");
 
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
 			type = AssignmentType.PRC;
 			element = TerminalRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele010ParserRuleCallWS();
 			return new Solution(obj);
@@ -325,7 +325,7 @@ protected class Model_1_Assignment_anyValue extends AssignmentToken  {
 		if((value = current.getConsumable("anyValue",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("anyValue");
 
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
 			type = AssignmentType.PRC;
 			element = TerminalRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele10ParserRuleCallANY_OTHER();
 			return new Solution(obj);
