@@ -100,7 +100,7 @@ public class GenerateAllTestGrammars {
 			}
 			GeneratorFacade.cleanFolder(path + "/src-gen");
 			for (Class<?> c : testclasses) {
-				String filename = "classpath:/" + getGrammarFileName(c);
+				String filename = getGrammarFileNameAsURI(c);
 				log.info("loading " + filename);
 				ResourceSetImpl rs = new XtextResourceSet();
 				URI uri = URI.createURI(filename);
@@ -114,7 +114,12 @@ public class GenerateAllTestGrammars {
 		}
 	}
 
-	private static String getGrammarFileName(Class<?> c) {
+	public static String getGrammarFileNameAsURI(Class<?> c) {
+		String filename = "classpath:/" + getGrammarFileName(c);
+		return filename;
+	}
+	
+	public static String getGrammarFileName(Class<?> c) {
 		try {
 			Method m = c.getMethod("getGrammarFileName");
 			if (m != null && Modifier.isStatic(m.getModifiers()) && String.class.equals(m.getReturnType()))

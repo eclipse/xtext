@@ -67,7 +67,7 @@ public class ResourceLoadTest extends AbstractGeneratorTest {
 
 	private void initModel() {
 		try {
-			model = readFileIntoString(clazz.getName().replace('.', '/') + ".xtext");
+			model = readFileIntoString(GenerateAllTestGrammars.getGrammarFileName(clazz));
 		} catch(IOException e) {
 			throw new RuntimeException(e);
 		}
