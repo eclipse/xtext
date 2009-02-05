@@ -15,6 +15,7 @@ package org.eclipse.xtext.ui.common.editor.contentassist.impl;
 
 
 import org.eclipse.xtext.XtextGrammarTestLanguageUiSetup;
+import org.eclipse.xtext.parser.keywords.KeywordsTestLanguageUiSetup;
 import org.eclipse.xtext.testlanguages.ContentAssistTestLanguageUiSetup;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageUiSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
@@ -191,6 +192,11 @@ public class DefaultContentAssistProcessorTest extends AbstractGeneratorTest
                     );
 	
     }
+    
+    public void testKeywordWithBackslashes() throws Exception {
+		newBuilder(KeywordsTestLanguageUiSetup.class)
+			.assertText("foo\\bar", "foo\\", "\\bar", "\\");
+	}
 	
 	private ContentAssistProcessorTestBuilder newBuilder(Class<?> standAloneSetup) throws Exception {
 		with(standAloneSetup);

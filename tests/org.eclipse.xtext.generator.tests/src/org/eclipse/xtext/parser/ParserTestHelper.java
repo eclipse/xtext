@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.util.StringInputStream;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -44,6 +45,10 @@ public class ParserTestHelper {
 			System.out.println("Resource Warning: " + d);
 
 		return resource;
+	}
+	
+	public XtextResource getResourceFromString(String in) throws IOException {
+		return getResourceFromStream(new StringInputStream(in));
 	}
 
 	public XtextResource createResource(URI uri) {

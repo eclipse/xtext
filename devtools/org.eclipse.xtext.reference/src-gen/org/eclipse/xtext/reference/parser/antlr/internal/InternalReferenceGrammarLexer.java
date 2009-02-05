@@ -307,10 +307,10 @@ public class InternalReferenceGrammarLexer extends Lexer {
     public final void mT25() throws RecognitionException {
         try {
             int _type = T25;
-            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:24:5: ( 'GRÜN' )
-            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:24:7: 'GRÜN'
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:24:5: ( 'GR\\u00DCN' )
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:24:7: 'GR\\u00DCN'
             {
-            match("GRÜN"); 
+            match("GR\u00DCN"); 
 
 
             }

@@ -479,7 +479,7 @@ ruleFarbe returns [EObject current=null]
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.5/@alternatives/@groups.0/@groups.1" /* xtext::Keyword */, null); 
     }
 )
-    |'GRÜN' 
+    |'GR\u00DCN' 
     {
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.5/@alternatives/@groups.1" /* xtext::Keyword */, null); 
     }
