@@ -29,6 +29,7 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.crossref.IScopeProvider;
 import org.eclipse.xtext.parser.DefaultEcoreElementFactory;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParser;
@@ -142,6 +143,9 @@ public abstract class AbstractGeneratorTest extends TestCase {
 		return ServiceRegistry.getInjector(currentScope).getInstance(ITokenSerializer.class);
 	}
 
+	protected IScopeProvider getScopeProvider() {
+		return ServiceRegistry.getInjector(currentScope).getInstance(IScopeProvider.class);
+	}
 	// parse methods
 
 	public EObject getModel(String model) throws Exception {
