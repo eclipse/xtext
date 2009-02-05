@@ -209,14 +209,14 @@ protected class «elementMethodName()» extends RuleCallToken {
 			}
 		}
 «ELSE»
-		if(true) { // «metaType.name» FIXME: check if value is valid for datatype rule
+		if(Boolean.TRUE.booleanValue()) { // «metaType.name» FIXME: check if value is valid for datatype rule
 			type = AssignmentType.PRC;
 			element = «gaFullAccessor()»;
 			return new Solution(obj);
 		}
 «ENDIF»
 «ELSE-»
-		if(true) { // «metaType.name» FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // «metaType.name» FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = «gaFullAccessor()»;
 			return new Solution(obj);
