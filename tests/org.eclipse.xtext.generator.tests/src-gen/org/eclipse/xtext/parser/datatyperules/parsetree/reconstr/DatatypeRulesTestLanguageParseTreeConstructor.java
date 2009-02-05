@@ -199,7 +199,7 @@ protected class Model_0_0_0_0_Assignment_id extends AssignmentToken  {
 		if((value = current.getConsumable("id",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("id");
 
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
 			type = AssignmentType.PRC;
 			element = DatatypeRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele00000ParserRuleCallNestedModelId();
 			return new Solution(obj);
@@ -264,7 +264,7 @@ protected class Model_0_0_0_1_1_Assignment_value extends AssignmentToken  {
 		if((value = current.getConsumable("value",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
 
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
 			type = AssignmentType.PRC;
 			element = DatatypeRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele000110ParserRuleCallFraction();
 			return new Solution(obj);
@@ -331,7 +331,7 @@ protected class Model_0_0_1_1_Assignment_vector extends AssignmentToken  {
 		if((value = current.getConsumable("vector",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("vector");
 
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
 			type = AssignmentType.PRC;
 			element = DatatypeRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele00110ParserRuleCallVector();
 			return new Solution(obj);
@@ -398,7 +398,7 @@ protected class Model_0_1_1_Assignment_dots extends AssignmentToken  {
 		if((value = current.getConsumable("dots",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("dots");
 
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
 			type = AssignmentType.PRC;
 			element = DatatypeRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele0110ParserRuleCallDots();
 			return new Solution(obj);

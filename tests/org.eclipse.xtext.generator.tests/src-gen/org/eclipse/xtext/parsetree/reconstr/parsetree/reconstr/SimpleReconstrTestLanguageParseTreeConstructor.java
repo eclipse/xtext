@@ -498,7 +498,7 @@ protected class Atom_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prAtom().ele0LexerRuleCallID();
 			return new Solution(obj);
@@ -751,7 +751,7 @@ protected class TwoNumbers_0_0_Assignment_num1 extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("num1",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("num1");
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prTwoNumbers().ele000LexerRuleCallINT();
 			return new Solution(obj);
@@ -774,7 +774,7 @@ protected class TwoNumbers_0_1_Assignment_num2 extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("num2",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("num2");
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prTwoNumbers().ele010LexerRuleCallINT();
 			return new Solution(obj);
@@ -838,7 +838,7 @@ protected class TwoNumbers_1_1_Assignment_num3 extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("num3",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("num3");
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prTwoNumbers().ele110LexerRuleCallINT();
 			return new Solution(obj);
@@ -941,7 +941,7 @@ protected class ManyStrings_0_1_Assignment_str1 extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("str1",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("str1");
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prManyStrings().ele010LexerRuleCallSTRING();
 			return new Solution(obj);
@@ -965,7 +965,7 @@ protected class ManyStrings_1_Assignment_str2 extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("str2",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("str2");
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prManyStrings().ele10LexerRuleCallSTRING();
 			return new Solution(obj);
@@ -1095,7 +1095,7 @@ protected class Type_0_0_1_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prType().ele0010LexerRuleCallID();
 			return new Solution(obj);
@@ -1223,7 +1223,7 @@ protected class Ref2_1_Assignment_ref2 extends AssignmentToken  {
 			return new Solution(obj);
 		}
 
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prRef2().ele1001LexerRuleCallSTRING();
 			return new Solution(obj);
@@ -1325,7 +1325,7 @@ protected class Spare_0_1_Assignment_id extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("id",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("id");
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prSpare().ele010LexerRuleCallID();
 			return new Solution(obj);
@@ -1389,7 +1389,7 @@ protected class Spare_1_1_Assignment_id extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("id",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("id");
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prSpare().ele110LexerRuleCallID();
 			return new Solution(obj);
@@ -1559,7 +1559,7 @@ protected class Boolean_1_Assignment_value extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("value",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prBoolean().ele10LexerRuleCallID();
 			return new Solution(obj);

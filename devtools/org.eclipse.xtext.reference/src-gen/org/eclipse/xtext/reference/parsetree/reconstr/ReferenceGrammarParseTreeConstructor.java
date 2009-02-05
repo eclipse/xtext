@@ -203,7 +203,7 @@ protected class Spielplatz_0_0_0_0_1_Assignment_groesse extends AssignmentToken 
 	protected Solution createSolution() {
 		if((value = current.getConsumable("groesse",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("groesse");
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = ReferenceGrammarGrammarAccess.INSTANCE.prSpielplatz().ele000010LexerRuleCallINT();
 			return new Solution(obj);
@@ -227,7 +227,7 @@ protected class Spielplatz_0_0_0_1_Assignment_beschreibung extends AssignmentTok
 	protected Solution createSolution() {
 		if((value = current.getConsumable("beschreibung",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("beschreibung");
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = ReferenceGrammarGrammarAccess.INSTANCE.prSpielplatz().ele00010LexerRuleCallSTRING();
 			return new Solution(obj);
@@ -736,7 +736,7 @@ protected class Kind_0_0_1_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = ReferenceGrammarGrammarAccess.INSTANCE.prKind().ele0010LexerRuleCallID();
 			return new Solution(obj);
@@ -760,7 +760,7 @@ protected class Kind_0_1_Assignment_age extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("age",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("age");
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = ReferenceGrammarGrammarAccess.INSTANCE.prKind().ele010LexerRuleCallINT();
 			return new Solution(obj);
@@ -944,7 +944,7 @@ protected class Erwachsener_0_0_1_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = ReferenceGrammarGrammarAccess.INSTANCE.prErwachsener().ele0010LexerRuleCallID();
 			return new Solution(obj);
@@ -968,7 +968,7 @@ protected class Erwachsener_0_1_Assignment_age extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("age",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("age");
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = ReferenceGrammarGrammarAccess.INSTANCE.prErwachsener().ele010LexerRuleCallINT();
 			return new Solution(obj);
@@ -1152,7 +1152,7 @@ protected class Spielzeug_0_0_1_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = ReferenceGrammarGrammarAccess.INSTANCE.prSpielzeug().ele0010LexerRuleCallID();
 			return new Solution(obj);
@@ -1459,12 +1459,12 @@ protected class Familie_0_0_0_0_0_1_Assignment_name extends AssignmentToken  {
 			return new Solution(obj);
 		}
 
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = ReferenceGrammarGrammarAccess.INSTANCE.prFamilie().ele000001001LexerRuleCallSTRING();
 			return new Solution(obj);
 		}
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = ReferenceGrammarGrammarAccess.INSTANCE.prFamilie().ele00000101LexerRuleCallID();
 			return new Solution(obj);
@@ -1756,7 +1756,7 @@ protected class CustomTypeParserRule_1_Assignment_name extends AssignmentToken  
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = ReferenceGrammarGrammarAccess.INSTANCE.prCustomTypeParserRule().ele10LexerRuleCallID();
 			return new Solution(obj);

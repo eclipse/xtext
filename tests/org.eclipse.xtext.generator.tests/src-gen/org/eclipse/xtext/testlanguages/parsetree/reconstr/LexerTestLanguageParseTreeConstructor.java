@@ -114,7 +114,7 @@ protected class Element_0_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = LexerTestLanguageGrammarAccess.INSTANCE.prElement().ele00LexerRuleCallID();
 			return new Solution(obj);
@@ -137,7 +137,7 @@ protected class Element_1_Assignment_h extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("h",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("h");
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = LexerTestLanguageGrammarAccess.INSTANCE.prElement().ele10LexerRuleCallSTRING();
 			return new Solution(obj);

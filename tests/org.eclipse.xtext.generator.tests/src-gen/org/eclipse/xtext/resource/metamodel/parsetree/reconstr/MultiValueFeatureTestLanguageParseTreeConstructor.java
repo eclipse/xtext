@@ -44,7 +44,7 @@ protected class Start_Assignment_featureA extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("featureA",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("featureA");
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = MultiValueFeatureTestLanguageGrammarAccess.INSTANCE.prStart().ele0LexerRuleCallID();
 			return new Solution(obj);

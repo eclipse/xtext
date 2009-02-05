@@ -73,7 +73,7 @@ protected class Foo_0_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = MultiGenMMTestLanguageGrammarAccess.INSTANCE.prFoo().ele00LexerRuleCallID();
 			return new Solution(obj);
@@ -138,7 +138,7 @@ protected class NameRef_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = MultiGenMMTestLanguageGrammarAccess.INSTANCE.prNameRef().ele0LexerRuleCallSTRING();
 			return new Solution(obj);

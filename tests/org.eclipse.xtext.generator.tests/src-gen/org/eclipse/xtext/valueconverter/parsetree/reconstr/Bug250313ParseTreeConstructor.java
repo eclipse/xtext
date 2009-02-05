@@ -91,12 +91,12 @@ protected class Ref2_1_Assignment_ref2 extends AssignmentToken  {
 			return new Solution(obj);
 		}
 
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = Bug250313GrammarAccess.INSTANCE.prRef2().ele1001LexerRuleCallSTRING();
 			return new Solution(obj);
 		}
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = Bug250313GrammarAccess.INSTANCE.prRef2().ele101LexerRuleCallID();
 			return new Solution(obj);
