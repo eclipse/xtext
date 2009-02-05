@@ -17,7 +17,7 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class TestValueConverter extends TestCase {
+public class ValueConverterTest extends TestCase {
 
 	private IValueConverter<BigDecimal> valueConverter;
 
