@@ -47,6 +47,7 @@ public class EpatchComparingTest extends AbstractPackratAntlrComparingTest {
 		});
 	}
 
+	@SuppressWarnings("all")
 	private Iterator<String> getAllEpatchTestcases() {
 		final ClassLoader classLoader = getClass().getClassLoader();
 		final String root = (getClass().getPackage().getName() + ".testcases.").replace('.', '/');
