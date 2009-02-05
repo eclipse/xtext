@@ -17,8 +17,7 @@ import org.eclipse.xtext.util.EmfFormater;
 
 public class SimpleReconstrTest extends AbstractGeneratorTest {
 
-	private static final Logger logger = Logger
-			.getLogger(ComplexReconstrTest.class);
+	private static final Logger logger = Logger.getLogger(SimpleReconstrTest.class);
 
 	public void testSimple1() throws Exception {
 		String model = "a b";
@@ -42,12 +41,10 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 
 	private String parseAndSerialize(String model) throws Exception {
 		EObject result = (EObject) getModel(model);
-		if (logger.isDebugEnabled()) {
-			logger.debug(EmfFormater.objToStr(result));
-			logger
-					.debug(EmfFormater.objToStr(NodeUtil.getRootNode(result)));
-			logger.debug(EmfFormater.objToStr(NodeUtil.getRootNode(result)
-					.getLeafNodes()));
+		if (logger.isTraceEnabled()) {
+			logger.trace(EmfFormater.objToStr(result));
+			logger.trace(EmfFormater.objToStr(NodeUtil.getRootNode(result)));
+			logger.trace(EmfFormater.objToStr(NodeUtil.getRootNode(result).getLeafNodes()));
 		}
 		return serialize(result);
 	}
