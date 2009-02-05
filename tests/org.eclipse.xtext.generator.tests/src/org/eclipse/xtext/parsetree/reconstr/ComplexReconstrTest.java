@@ -19,8 +19,7 @@ import org.eclipse.xtext.util.EmfFormater;
 
 public class ComplexReconstrTest extends AbstractGeneratorTest {
 
-	private static final Logger logger = Logger
-			.getLogger(ComplexReconstrTest.class);
+	private static final Logger logger = Logger.getLogger(ComplexReconstrTest.class);
 
 	@Override
 	protected void setUp() throws Exception {
