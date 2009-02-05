@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<plugin>
+    <extension
+         point="org.eclipse.xtend.typesystem.emf.checks">
+      
+      <metaModel
+            nsURI="http://example.xtext.org/EcoreDsl">
+         <checkFile
+               path="org/eclipse/xtext/example/EcoredslChecks.chk">
+         </checkFile>
+      </metaModel>
+      
+   </extension>
+   <extension
+         point="org.eclipse.emf.ecore.extension_parser">
+      <parser
+            class="org.eclipse.xtext.example.services.EcoreDslResourceFactory"
+            type="ecoredsl">
+      </parser>
+   </extension>
+   
+   
+</plugin>
