@@ -19,6 +19,41 @@
 
 «DEFINE root FOR GenService»
 «EXPAND terminalConsumer FOREACH grammar().rules.typeSelect(ParserRule).select(e|e.terminal)»
+«EXPAND terminalConsumer FOREACH grammar().rules.typeSelect(LexerRule)»
+«ENDDEFINE»
+
+«DEFINE terminalConsumer FOR LexerRule»
+«FILE this.fullConsumerClassName().toJavaFilePath() SRC-»
+/*
+«fileHeader()»
+*/
+package «this.consumerPackageName()»;
+
+import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumerConfiguration;
+import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+
+import «this.containingGrammar().grammarAccess()»;
+
+@SuppressWarnings("unused")
+public final class «this.consumerClassName()» extends AbstractRuleAwareTerminalConsumer {
+
+	public «this.consumerClassName()»(ITerminalConsumerConfiguration configuration) {
+		super(configuration);
+	}
+	
+	protected int doConsume() {
+		throw new UnsupportedOperationException("TerminalConsumers for lexer rules have to be implemented by hand.\n" +
+		   "Maybe you should try to use terminal rules or datatype rules instead.");
+	}
+
+	public AbstractRule doGetRule() {
+		return «grammar().grammarAccess().toSimpleName()».INSTANCE.lr«this.name»();
+	}
+}
+«ENDFILE»
 «ENDDEFINE»
 
 «DEFINE terminalConsumer FOR ParserRule»
