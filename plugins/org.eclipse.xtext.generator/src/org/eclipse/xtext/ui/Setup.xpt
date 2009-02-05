@@ -16,11 +16,11 @@
 «EXTENSION org::eclipse::xtext::Properties»
 
 «DEFINE root FOR GenModel»
-«FILE uiSetupClass(grammar()).toJavaFilePath() UI_SRC_GEN -»
+«FILE grammar().uiSetupClass().toJavaFilePath() UI_SRC_GEN -»
 /*
 «fileHeader()»
 */
-package «uiSetupClass(grammar()).toJavaPackage()»;
+package «grammar().uiSetupClass().toJavaPackage()»;
 
 import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.ServiceRegistry;
@@ -31,7 +31,7 @@ import com.google.inject.Injector;
 /**
  * GENERATED! 
  */
-public class «uiSetupClass(grammar()).toSimpleName()» {
+public class «grammar().uiSetupClass().toSimpleName()» {
 
 	private static boolean initialized = false;
 	
@@ -40,7 +40,7 @@ public class «uiSetupClass(grammar()).toSimpleName()» {
 			«standaloneSetupClass(grammar())».doSetup();
 			«IF !grammar.isAbstract()»
 			// overwriting runtime configuration
-		    Injector injector = Guice.createInjector(new «runtimeModuleClass()»(), new «uiModuleClass()»());
+		    Injector injector = Guice.createInjector(new «grammar().runtimeModuleClass()»(), new «grammar().uiModuleClass()»());
 			ServiceRegistry.registerInjector(«languageInterfaceFQName».SCOPE, injector);
 			«ENDIF»		   
 		   initialized = true;

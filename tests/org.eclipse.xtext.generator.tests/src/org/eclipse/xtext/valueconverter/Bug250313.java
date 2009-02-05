@@ -3,6 +3,7 @@ package org.eclipse.xtext.valueconverter;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
+@SuppressWarnings("unused")
 public class Bug250313 extends AbstractGeneratorTest {
 	@Override
 	protected void setUp() throws Exception {

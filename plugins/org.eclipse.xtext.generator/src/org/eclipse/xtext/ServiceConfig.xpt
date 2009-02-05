@@ -17,11 +17,11 @@
 
 «DEFINE root FOR GenModel»
 «IF !grammar().isAbstract()»
-«FILE generatedRuntimeModuleClass().toJavaFilePath() SRC_GEN -»
+«FILE grammar().generatedRuntimeModuleClass().toJavaFilePath() SRC_GEN -»
 /*
 «fileHeader()»
 */
-package «generatedRuntimeModuleClass().toJavaPackage()»;
+package «grammar().generatedRuntimeModuleClass().toJavaPackage()»;
 
 import org.eclipse.xtext.service.DefaultRuntimeModule;
 import org.eclipse.xtext.service.IServiceScope;
@@ -29,9 +29,9 @@ import org.eclipse.xtext.service.IServiceScope;
 import com.google.inject.Binder;
 
 /**
- * GENERATED! Manual modification goes to «runtimeModuleClass().toSimpleName()»
+ * GENERATED! Manual modification goes to «grammar().runtimeModuleClass().toSimpleName()»
  */
-public abstract class «generatedRuntimeModuleClass().toSimpleName()» extends DefaultRuntimeModule {
+public abstract class «grammar().generatedRuntimeModuleClass().toSimpleName()» extends DefaultRuntimeModule {
 	
 	@Override
 	public void configure(Binder binder) {
@@ -48,18 +48,18 @@ public abstract class «generatedRuntimeModuleClass().toSimpleName()» extends Def
 }
 «ENDFILE»
 
-«FILE runtimeModuleClass().toJavaFilePath() SRC -»
+«FILE grammar().runtimeModuleClass().toJavaFilePath() SRC -»
 /*
 «fileHeader()»
 */
-package «runtimeModuleClass().toJavaPackage()»;
+package «grammar().runtimeModuleClass().toJavaPackage()»;
 
 import com.google.inject.Binder;
 
 /**
  * used to register components to be used within the IDE.
  */
-public class «runtimeModuleClass().toSimpleName()» extends «generatedRuntimeModuleClass().toSimpleName()» {
+public class «grammar().runtimeModuleClass().toSimpleName()» extends «grammar().generatedRuntimeModuleClass().toSimpleName()» {
 
 	@Override
 	public void configure(Binder binder) {

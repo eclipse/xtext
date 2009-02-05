@@ -41,7 +41,7 @@ public abstract class «grammar().standaloneSetupClass().toSimpleName()» {
 	public synchronized static void doSetup() {
 		if(!isInitialized) {
 		    «IF !grammar.isAbstract()»
-		    Injector injector = Guice.createInjector(new «runtimeModuleClass()»());
+		    Injector injector = Guice.createInjector(new «grammar().runtimeModuleClass()»());
 			ServiceRegistry.registerInjector(«languageInterfaceFQName».SCOPE, injector);
 			«ENDIF»
 			

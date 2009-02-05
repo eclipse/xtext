@@ -46,7 +46,7 @@ public class «genClassFQName.toSimpleName()» extends AbstractPackratParser {
 «ENDDEFINE»
 
 «DEFINE parserConfiguration FOR GenService»
-«FILE (genClassFQName.toJavaPackage() + "." + languageName() + "ParserConfiguration").toJavaFilePath() SRC_GEN-»
+«FILE (genClassFQName.toJavaPackage() + "." + languageName().toFirstUpper() + "ParserConfiguration").toJavaFilePath() SRC_GEN-»
 /*
 «fileHeader()»
 */
