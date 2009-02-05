@@ -631,7 +631,7 @@ ruleFarbe returns [EObject current=null]
         createLeafNode("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.6/@alternatives/@terminal/@groups.0/@groups.1" /* xtext::Keyword */, "wert"); 
     }
 )
-    |'GRÜN' 
+    |'GR\u00DCN' 
     {
         createLeafNode("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.6/@alternatives/@terminal/@groups.1" /* xtext::Keyword */, "wert"); 
     }

@@ -31,7 +31,9 @@ import org.eclipse.xtext.parser.DefaultEcoreElementFactory;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.ISwitchingParser;
+import org.eclipse.xtext.parser.antlr.IAntlrParser;
 import org.eclipse.xtext.parser.packrat.AbstractPackratParser;
+import org.eclipse.xtext.parser.packrat.IPackratParser;
 import org.eclipse.xtext.parser.packrat.ParseResultFactory;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
@@ -100,6 +102,14 @@ public abstract class AbstractGeneratorTest extends TestCase {
 
 	protected IParser getParser() {
 		return ServiceRegistry.getInjector(currentScope).getInstance(ISwitchingParser.class);
+	}
+	
+	protected IAntlrParser getAntlrParser() {
+		return ServiceRegistry.getInjector(currentScope).getInstance(IAntlrParser.class);
+	}
+	
+	protected IPackratParser getPackratParser() {
+		return ServiceRegistry.getInjector(currentScope).getInstance(IPackratParser.class);
 	}
 
 	protected IAstFactory getASTFactory() {
