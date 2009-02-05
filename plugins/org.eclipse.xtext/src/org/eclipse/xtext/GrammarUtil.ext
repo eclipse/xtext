@@ -95,3 +95,6 @@ Grammar getSuperGrammar(Grammar this) :
 LexerRule calledLexerRule(CrossReference this) :
 	JAVA org.eclipse.xtext.GrammarUtil.getCalledLexerRule(org.eclipse.xtext.CrossReference);
 
+ecore::EReference eReference(CrossReference this) :
+	JAVA org.eclipse.xtext.GrammarUtil.getReference(org.eclipse.xtext.CrossReference);
+
