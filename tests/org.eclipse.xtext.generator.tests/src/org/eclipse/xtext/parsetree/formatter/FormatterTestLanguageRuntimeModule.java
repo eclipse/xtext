@@ -5,8 +5,6 @@ package org.eclipse.xtext.parsetree.formatter;
 
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
 
-import com.google.inject.Binder;
-
 /**
  * used to register components to be used within the IDE.
  */

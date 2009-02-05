@@ -60,6 +60,7 @@ public class WhitespacePreservingCallbackTest extends AbstractGeneratorTest {
 		return serialize(result);
 	}
 
+	@SuppressWarnings("unused")
 	private void failsWith(EObject o, Class<? extends RuntimeException> clazz) {
 		try {
 			SerializerUtil.serialize(getCurrentServiceScope(), o);
