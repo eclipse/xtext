@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.eclipse.xtext.example.domainmodel
 Bundle-Vendor: itemis AG
-Bundle-Version: 1.0.0
+Bundle-Version: 0.7.0
 Bundle-SymbolicName: org.eclipse.xtext.example.domainmodel; singleton:=true
 Eclipse-RegisterBuddy: org.eclipse.xtext.log4j
 Bundle-ActivationPolicy: lazy
