@@ -46,12 +46,15 @@ public class Files {
 						fwr.write(buff, 0, read);
 					}
 					log.debug("Copied " + copy);
-				} catch (IOException e) {
+				}
+				catch (IOException e) {
 					log.error(e);
-				} finally {
+				}
+				finally {
 					try {
 						is.close();
-					} catch (IOException e) {
+					}
+					catch (IOException e) {
 						log.error(e);
 					}
 				}
@@ -59,7 +62,8 @@ public class Files {
 		}
 	}
 
-	public static boolean cleanFolder(File parentFolder, FileFilter filter, boolean continueOnError, boolean deleteParentFolder) throws FileNotFoundException {
+	public static boolean cleanFolder(File parentFolder, FileFilter filter, boolean continueOnError,
+			boolean deleteParentFolder) throws FileNotFoundException {
 		if (!parentFolder.exists()) {
 			throw new FileNotFoundException(parentFolder.getAbsolutePath());
 		}
@@ -76,7 +80,8 @@ public class Files {
 			if (file.isDirectory()) {
 				if (!cleanFolder(file, filter, continueOnError, false) && !continueOnError)
 					return false;
-			} else {
+			}
+			else {
 				if (!file.delete()) {
 					log.error("Couldn't delete " + file.getAbsolutePath());
 					if (!continueOnError)
@@ -91,5 +96,22 @@ public class Files {
 			}
 		}
 		return true;
+	}
+
+	/**
+	 * This will completely sweep the given folder. Consider using
+	 * {@link #cleanFolder(File, FileFilter, boolean, boolean)} if you want to
+	 * preserve CVS or SVN information.
+	 * 
+	 * @param folder
+	 * @return
+	 * @throws FileNotFoundException
+	 */
+	public static boolean sweepFolder(File folder) throws FileNotFoundException {
+		return Files.cleanFolder(folder, new FileFilter() {
+			public boolean accept(File pathname) {
+				return true;
+			}
+		}, true, false);
 	}
 }
