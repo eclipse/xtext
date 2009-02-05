@@ -35,7 +35,7 @@ import org::eclipse::xtext::crossref;
 import «mm.ePackage.name»;
 «ENDFOREACH-»
 
-extension org::eclipse::xtext::xtend::crossref::Crossref reexport;
+extension org::eclipse::xtext::xtend::crossref::ScopeProvider reexport;
 extension org::eclipse::xtend::util::stdlib::io;
 
 /**
@@ -46,7 +46,7 @@ extension org::eclipse::xtend::util::stdlib::io;
 
 «LET {} AS processedFqnFeatureNames»«
 	FOREACH grammar().eReferencesFromCrossRefs() AS eReference»
-List[IScopedElement] scope_«eReference.name»(«grammar().qualifiedXtendName(eReference.eType)» this):
+List[IScopedElement] scope_«eReference.name»(«grammar().qualifiedXtendName(eReference.eContainingClass)» this):
 	allRootElements().typeSelect(«grammar().qualifiedXtendName(eReference.eType)»).collect(x | createScopedElement(x.name, x));
 «	ENDFOREACH»«
 ENDLET»

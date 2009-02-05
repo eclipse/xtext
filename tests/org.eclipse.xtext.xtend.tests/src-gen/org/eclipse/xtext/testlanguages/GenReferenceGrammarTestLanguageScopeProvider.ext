@@ -6,7 +6,7 @@ import org::eclipse::xtext::crossref;
 
 import ReferenceGrammar;
 
-extension org::eclipse::xtext::xtend::crossref::Crossref reexport;
+extension org::eclipse::xtext::xtend::crossref::ScopeProvider reexport;
 extension org::eclipse::xtend::util::stdlib::io;
 
 /**
@@ -16,12 +16,12 @@ extension org::eclipse::xtend::util::stdlib::io;
  */
 
 
-List[IScopedElement] scope_kinder(Kind this):
+List[IScopedElement] scope_kinder(Familie this):
 	allRootElements().typeSelect(Kind).collect(x | createScopedElement(x.name, x));
 
-List[IScopedElement] scope_vater(Erwachsener this):
+List[IScopedElement] scope_mutter(Familie this):
 	allRootElements().typeSelect(Erwachsener).collect(x | createScopedElement(x.name, x));
 
-List[IScopedElement] scope_mutter(Erwachsener this):
+List[IScopedElement] scope_vater(Familie this):
 	allRootElements().typeSelect(Erwachsener).collect(x | createScopedElement(x.name, x));
 
