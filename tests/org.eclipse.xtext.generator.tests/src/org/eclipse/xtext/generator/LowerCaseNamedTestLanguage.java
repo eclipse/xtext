@@ -1,29 +1,18 @@
-«REM»
 /*******************************************************************************
- * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
  *******************************************************************************/
-«ENDREM»
-«DEFINE root FOR XtextProjectInfo»
-«FILE this.languageNameAbbreviation+".xtext" GRAMMAR_GENERATOR_OUTLET -»
-language «this.languageName»
-generate «this.languageNameAbbreviation» "«this.nsURI»"
+package org.eclipse.xtext.generator;
 
-Model :
-	(elements+=Element+);
-	
-Element :
-	Foo | Bar;
-	
-Foo :
-	"foo" name=ID;
-	
-Bar :
-	"bar" name=ID;
-«ENDFILE»
-«ENDDEFINE»
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
+public class LowerCaseNamedTestLanguage {
 
+	public static String getGrammarFileName() {
+		return LowerCaseNamedTestLanguage.class.getPackage().getName() + ".lowerCaseNamedTestLanguage";
+	}
+}

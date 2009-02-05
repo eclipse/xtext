@@ -16,18 +16,18 @@
 «EXTENSION org::eclipse::xtext::Properties»
 
 «DEFINE root FOR GenModel»
-«FILE generatedUiModuleClass().toJavaFilePath() UI_SRC_GEN -»
+«FILE grammar().generatedUiModuleClass().toJavaFilePath() UI_SRC_GEN -»
 /*
 «fileHeader()»
 */
-package «generatedUiModuleClass().toJavaPackage()»;
+package «grammar().generatedUiModuleClass().toJavaPackage()»;
 
 import org.eclipse.xtext.ui.common.service.DefaultUIModule;
 
 /**
- * GENERATED! Manual modification goes to «uiModuleClass().toSimpleName()»
+ * GENERATED! Manual modification goes to «grammar().uiModuleClass().toSimpleName()»
  */
-public abstract class «generatedUiModuleClass().toSimpleName()» extends DefaultUIModule {
+public abstract class «grammar().generatedUiModuleClass().toSimpleName()» extends DefaultUIModule {
 	
 	
 	«FOREACH genModel().services.select(e|e.uiService) AS s-»
@@ -40,18 +40,18 @@ public abstract class «generatedUiModuleClass().toSimpleName()» extends DefaultU
 }
 «ENDFILE»
 
-«FILE uiModuleClass().toJavaFilePath() UI_SRC -»
+«FILE grammar().uiModuleClass().toJavaFilePath() UI_SRC -»
 /*
 «fileHeader()»
 */
-package «uiModuleClass().toJavaPackage()»;
+package «grammar().uiModuleClass().toJavaPackage()»;
 
 import com.google.inject.Binder;
 
 /**
  * used to manually extend and modify configuration for components used within the IDE.
  */
-public class «uiModuleClass().toSimpleName()» extends «generatedUiModuleClass().toSimpleName()» {
+public class «grammar().uiModuleClass().toSimpleName()» extends «grammar().generatedUiModuleClass().toSimpleName()» {
 
 	
 }

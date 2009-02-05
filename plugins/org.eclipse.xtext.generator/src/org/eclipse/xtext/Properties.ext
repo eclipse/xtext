@@ -66,34 +66,34 @@ toSimpleName(String fqName) :
 	lastToken(fqName, '.');
 	
 standaloneSetupClass(Grammar this) :
-	getId() + "StandaloneSetup";
+	getNamespace() + "." + getName()+ "StandaloneSetup";
 	
 uiSetupClass(Grammar this) :
-	getId() + "UiSetup";
+	getNamespace() + "." + getName() + "UiSetup";
 
 // module classes start
-runtimeModuleClass() :
-	grammar().getId() + "RuntimeModule";
+runtimeModuleClass(Grammar this) :
+	getNamespace() + "." + getName() + "RuntimeModule";
 
-generatedRuntimeModuleClass() :
+generatedRuntimeModuleClass(Grammar this) :
 	grammar().getNamespace()+".Abstract"+grammar().getName() + "RuntimeModule";	
 	
-uiModuleClass() :
-	grammar().getId() + "UIModule";
+uiModuleClass(Grammar this) :
+	getNamespace() + "." + getName() + "UIModule";
 	
-generatedUiModuleClass() :
+generatedUiModuleClass(Grammar this) :
 	grammar().getNamespace()+".Abstract"+grammar().getName() + "UiModule";	
 
 // module classes end
 
-uiGenProposalProviderClass() :
-	grammar().getId() + "GenProposalProvider";
+uiGenProposalProviderClass(Grammar this) :
+	getNamespace() + "." + getName() + "GenProposalProvider";
 
-tokenScannerClass() :
-	grammar().getId() + "TokenScanner";
+tokenScannerClass(Grammar this) :
+	getNamespace() + "." + getName() + "TokenScanner";
 	
 languageInterface(Grammar this) :
-	toJavaPackage(getId()) + ".I"+toSimpleName(getId());
+	getNamespace() + ".I"+getName();
 
 private String skipLastToken(String s, String separator) :
 	JAVA org.eclipse.xtext.util.Strings.skipLastToken(java.lang.String, java.lang.String);

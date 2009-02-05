@@ -10,6 +10,8 @@ package org.eclipse.xtext.xtext.ui.wizard.project;
 
 import java.util.StringTokenizer;
 
+import org.eclipse.xtext.util.Strings;
+
 /**
  * Simple valueobject class containing all relevant attributes necessary for the
  * creation of new Xtext projects.
@@ -55,9 +57,9 @@ public class XtextProjectInfo {
 		this.projectName = projectName;
 	}
 
-	public String getGrammarName() {
-		return getLanguageName().replaceAll("\\s", "_") + ".xtxt";
-	}
+//	public String getGrammarName() {
+//		return getLanguageName().replaceAll("\\s", "_") + ".xtxt";
+//	}
 
 	public String getBasePackagePath() {
 		return getBasePackage().replaceAll("\\.", "/");
@@ -65,12 +67,13 @@ public class XtextProjectInfo {
 	
 	public String getBasePackage() {
 		int lastIndexOf = getLanguageName().lastIndexOf(".");
-		return getLanguageName().substring(0,(lastIndexOf==-1?getLanguageName().length():lastIndexOf));
+		String result = getLanguageName().substring(0,(lastIndexOf==-1?getLanguageName().length():lastIndexOf));
+		return result.toLowerCase();
 	}
 
 	public String getLanguageNameAbbreviation() {
 		String[] packageNames = languageName.split("\\.");
-		return packageNames[packageNames.length - 1];
+		return Strings.toFirstUpper(packageNames[packageNames.length - 1]);
 	}
 	
 	public String getNsURI() {

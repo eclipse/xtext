@@ -12,7 +12,6 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.crossrefs.ILangATestLanguage;
 import org.eclipse.xtext.crossrefs.LangATestLanguageStandaloneSetup;
 import org.eclipse.xtext.crossrefs.services.LangATestLanguageGrammarAccess;
 import org.eclipse.xtext.resource.XtextResource;
