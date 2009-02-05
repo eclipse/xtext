@@ -66,6 +66,7 @@ public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransf
 
 		outlineNode.setLabel(getText(semanticNode));
 
+		// XXX: Why don't we use NodeUtil.getNodeAdapter?
 		NodeAdapter nodeAdapter = (NodeAdapter) NodeAdapterFactory.INSTANCE.adapt(semanticNode, AbstractNode.class);
 		CompositeNode parserNode = nodeAdapter.getParserNode();
 		if (parserNode != null) {
@@ -85,6 +86,10 @@ public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransf
 		 * able to get the corresponding ContentOutlineNode. This is needed e.g.
 		 * when we want to synch the outline with the currently selected editor
 		 * position.
+		 * 
+		 * XXX SZ: is this feasible? What if i want to create more than one one outline node
+		 *         per semantic node? Can't we use the offset information of the outline node
+		 *         and the editor to synchronize them?
 		 */
 		ContentOutlineNodeAdapter outlineAdapter = (ContentOutlineNodeAdapter) ContentOutlineNodeAdapterFactory.INSTANCE
 				.adapt(semanticNode, ContentOutlineNode.class);
@@ -93,6 +98,7 @@ public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransf
 		return outlineNode;
 	}
 
+	// TODO should we extract and reuse PartialParsingUtil.Range?
 	private class SelectionCoordinates {
 		private int offset;
 		private int length;
@@ -119,6 +125,7 @@ public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransf
 		}
 	}
 
+	// TODO this should really be protected to enable subclasses to implement another behavior
 	private SelectionCoordinates getSelectionNodeCoordinates(CompositeNode startNode) {
 		EList<AbstractNode> leafNodes = startNode.getChildren();
 		AbstractNode keywordNode = null;
@@ -129,6 +136,8 @@ public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransf
 				RuleCall ruleCall = (RuleCall) grammarElement;
 				String ruleName = ruleCall.getRule().getName();
 
+				// TODO usually we use the name feature if the instead of the id call
+				// LeafNode.getFeature()
 				if (ruleName.equals("ID")) {
 					if (idNodes == null) {
 						idNodes = new ArrayList<AbstractNode>();

@@ -48,11 +48,11 @@ public class EcoreDslRuntimeModule extends AbstractEcoreDslRuntimeModule {
 	
 	
 	public Class<? extends org.eclipse.xtext.crossref.ILinker> bindILinker() {
-		return EcoreDslRuntimeModule.CustomXtextLinker.class;
+		return EcoreDslRuntimeModule.EcoreDslLinker.class;
 	}
 	
 	public Class<? extends org.eclipse.xtext.parser.IAstFactory> bindIAstFactory() {
-		return EcoreDslRuntimeModule.CustomGenericEcoreElementFactory.class;
+		return EcoreDslRuntimeModule.EcoreDslElementFactory.class;
 	}
 	
 	public Class<? extends org.eclipse.xtext.conversion.IValueConverterService> bindIValueConverterService() {
@@ -72,7 +72,7 @@ public class EcoreDslRuntimeModule extends AbstractEcoreDslRuntimeModule {
 
 	}
 
-	public static class CustomXtextLinker extends Linker {
+	public static class EcoreDslLinker extends Linker {
 
 		// logger available to subclasses
 		protected final Logger logger = Logger.getLogger(getClass());
@@ -109,7 +109,7 @@ public class EcoreDslRuntimeModule extends AbstractEcoreDslRuntimeModule {
 		}
 	}
 
-	public static class CustomGenericEcoreElementFactory extends DefaultEcoreElementFactory {
+	public static class EcoreDslElementFactory extends DefaultEcoreElementFactory {
 
 		// logger available to subclasses
 		protected final Logger logger = Logger.getLogger(getClass());

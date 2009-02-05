@@ -16,9 +16,17 @@ public class PluginTestSuite {
 		suite.addTestSuite(org.eclipse.xtext.crossref.PartialLinkingTest.class);
 		suite.addTestSuite(org.eclipse.xtext.crossref.impl.SimpleAttributeResolverTest.class);
 		suite.addTestSuite(org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleTokenTest.class);
+		suite.addTestSuite(org.eclipse.xtext.parser.packrat.consumers.RecoveryStateTest.Simple.class);
+		suite.addTestSuite(org.eclipse.xtext.parser.packrat.consumers.RecoveryStateTest.CopyEmpty.class);
+		suite.addTestSuite(org.eclipse.xtext.parser.packrat.consumers.RecoveryStateTest.CopyFilled.class);
+		suite.addTestSuite(org.eclipse.xtext.parser.packrat.consumers.RecoveryStateTest.CopyFilledWithOne.class);
+		suite.addTestSuite(org.eclipse.xtext.parser.packrat.consumers.RecoveryStatePerformanceTest.class);
 		suite.addTestSuite(org.eclipse.xtext.parsetree.AbstractNodeTest.class);
 		suite.addTestSuite(org.eclipse.xtext.parsetree.NodeContentAdapterTest.class);
+		suite.addTestSuite(org.eclipse.xtext.parsetree.impl.ParsetreeUtilTest.Windows.class);
+		suite.addTestSuite(org.eclipse.xtext.parsetree.impl.ParsetreeUtilTest.LinuxAndMac.class);
 		suite.addTestSuite(org.eclipse.xtext.resource.ClassloaderClasspathUriResolverTests.class);
+		suite.addTestSuite(org.eclipse.xtext.service.AbstractRuntimeModuleTest.class);
 		suite.addTestSuite(org.eclipse.xtext.util.ChainedIteratorTest.class);
 		suite.addTestSuite(org.eclipse.xtext.util.FilteringIteratorTest.class);
 		suite.addTestSuite(org.eclipse.xtext.util.MappingIteratorTest.class);
