@@ -10,7 +10,7 @@ Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtext.generator,
  org.eclipse.xtext.log4j;bundle-version="1.2.15",
- de.itemis.xtext.antlr;bundle-version="1.0.0"
+ de.itemis.xtext.antlr;resolution:=optional
 Export-Package: org.eclipse.xtext.example.parsetree.reconstr,
  org.eclipse.xtext.example.services,
  org.eclipse.xtext.example
