@@ -27,7 +27,7 @@ public abstract class AbstractXtextGrammarParsingTest extends AbstractPackratAnt
 		List<Class<?>> classes = Arrays.asList(GenerateAllTestGrammars.testclasses);
 		return CollectionUtils.map(classes, new Function<Class<?>, Pair<String, String>>() {
 			public Pair<String, String> exec(Class<?> param) {
-				String filename = "" + param.getName().replace('.', '/') + ".xtext";
+				String filename = GenerateAllTestGrammars.getGrammarFileName(param);
 				String model;
 				try {
 					model = readFileIntoString(filename);
