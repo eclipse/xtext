@@ -12,7 +12,6 @@ import org::eclipse::xtext::ui::common::xtend::contentassist;
 import ReferenceGrammar;
 import ReferenceModel;
 
-extension org::eclipse::xtext::ui::common::xtend::contentassist::ContentAssist reexport;
 extension org::eclipse::xtext::reference::GenReferenceGrammarProposals reexport;
 
 /**

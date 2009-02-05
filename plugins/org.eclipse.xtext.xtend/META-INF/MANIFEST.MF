@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Xtext Xtend Extensions Plug-in
 Bundle-SymbolicName: org.eclipse.xtext.xtend
 Bundle-Version: 0.7.0.qualifier
-Bundle-Activator: org.eclipse.xtext.ui.common.xtend.Activator
+Bundle-Activator: org.eclipse.xtext.xtend.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.xtext.ui.common;bundle-version="0.7.0",
@@ -15,5 +15,6 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.xtend.util.stdlib;bundle-version="0.7.0";visibility:=reexport
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Export-Package: org.eclipse.xtext.ui.common.xtend,
- org.eclipse.xtext.ui.common.xtend.contentassist
+Export-Package: org.eclipse.xtext.xtend,
+ org.eclipse.xtext.xtend.contentassist,
+ org.eclipse.xtext.xtend.crossref

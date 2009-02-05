@@ -9,12 +9,11 @@ import org::eclipse::xtext::crossref;
 import org::eclipse::xtext::ui::common::editor::contentassist;
 import org::eclipse::xtext::ui::common::xtend::contentassist;
 
-import domainmodel;
-import ecore;
+import ReferenceGrammar;
 
-extension org::eclipse::xtext::example::GenDomainmodelProposals reexport;
+extension org::eclipse::xtext::testlanguages::GenReferenceGrammarTestLanguageProposals reexport;
 
 /**
- * Customize functions defined in org/eclipse/xtext/example/GenDomainmodelProposals.ext here.
+ * Customize functions defined in org/eclipse/xtext/testlanguages/GenReferenceGrammarTestLanguageProposals.ext here.
  */
 
