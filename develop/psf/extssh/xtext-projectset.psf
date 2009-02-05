@@ -44,6 +44,8 @@
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/examples/org.eclipse.xtext.example.fowlerdsl.ui,org.eclipse.xtext.example.fowlerdsl.ui"/>
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/examples/org.eclipse.xtext.example.domainmodel,org.eclipse.xtext.example.domainmodel"/>
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/examples/org.eclipse.xtext.example.domainmodel.ui,org.eclipse.xtext.example.domainmodel.ui"/>
+<project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/examples/org.eclipse.xtext.example.ecoredsl,org.eclipse.xtext.example.ecoredsl"/>
+<project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/examples/org.eclipse.xtext.example.ecoredsl.ui,org.eclipse.xtext.example.ecoredsl.ui"/>
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.xtend,org.eclipse.xtext.xtend"/>
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/tests/org.eclipse.xtext.xtend.tests,org.eclipse.xtext.xtend.tests"/>
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/tests/org.eclipse.xtext.ui.integration.tests,org.eclipse.xtext.ui.integration.tests"/>
@@ -106,6 +108,8 @@
 <item elementID="=org.eclipse.xtext.example.fowlerdsl" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.xtext.example.domainmodel.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.xtext.example.domainmodel" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.example.ecoredsl.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.example.ecoredsl" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 </workingSets>
 <workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" label="Xtext UI" name="Xtext UI">
 <item elementID="=org.eclipse.xtext.logging" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
