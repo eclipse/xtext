@@ -12,16 +12,13 @@ import static org.eclipse.xtext.util.CollectionUtils.map;
 
 import java.util.List;
 
-import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.crossref.IScope;
 import org.eclipse.xtext.crossref.IScopeProvider;
 import org.eclipse.xtext.crossref.IScopedElement;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
-import org.eclipse.xtext.testlanguages.referenceGrammarTestLanguage.ReferenceGrammar.Familie;
-import org.eclipse.xtext.testlanguages.referenceGrammarTestLanguage.ReferenceGrammar.ReferenceGrammarFactory;
-import org.eclipse.xtext.testlanguages.referenceGrammarTestLanguage.ReferenceGrammar.ReferenceGrammarPackage;
-import org.eclipse.xtext.testlanguages.referenceGrammarTestLanguage.ReferenceGrammar.Spielplatz;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.util.Function;
 
@@ -31,21 +28,20 @@ import org.eclipse.xtext.util.Function;
 public class CrossrefTest extends AbstractGeneratorTest {
 
 	public void testCrossRef() throws Exception {
-		EPackage.Registry.INSTANCE.put(ReferenceGrammarPackage.eNS_URI, ReferenceGrammarPackage.eINSTANCE);
 		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
-		Spielplatz model = (Spielplatz) getModel("spielplatz 1 \"SpielplatzBeschreibung\" { kind(k1 0) kind(k2 0) erwachsener(v1 1) erwachsener(m1 1) }");
-		Familie familie = ReferenceGrammarFactory.eINSTANCE.createFamilie();
-		model.getFamilie().add(familie);
+		EObject spielplatz = getModel("spielplatz 1 \"SpielplatzBeschreibung\" { kind(k1 0) kind(k2 0) erwachsener(v1 1) erwachsener(m1 1) }");
+		EObject familie = getASTFactory().create("Familie");
+		getASTFactory().add(spielplatz, "familie", familie, null, null);
 
-		assertInScope(familie, ReferenceGrammarPackage.Literals.FAMILIE__KINDER, "k1", "k2");
-		assertInScope(familie, ReferenceGrammarPackage.Literals.FAMILIE__VATER, "v1", "m1");
-		assertInScope(familie, ReferenceGrammarPackage.Literals.FAMILIE__MUTTER, "v1", "m1");
+		assertInScope(familie, familie.eClass().getEStructuralFeature("kinder"), "k1", "k2");
+		assertInScope(familie, familie.eClass().getEStructuralFeature("vater"), "v1", "m1");
+		assertInScope(familie, familie.eClass().getEStructuralFeature("mutter"), "v1", "m1");
 	}
 
-	private void assertInScope(Familie familie, EReference eReference, String... names) {
+	private void assertInScope(EObject familie, EStructuralFeature eReference, String... names) {
 		IScopeProvider scopeProvider = getScopeProvider();
 		assertTrue(scopeProvider instanceof AbstractXtendScopeProvider);
-		IScope scope = scopeProvider.getScope(familie, eReference);
+		IScope scope = scopeProvider.getScope(familie, (EReference) eReference);
 		List<String> namesInScope = list(map(scope.getContents(), new Function<IScopedElement, String>() {
 			public String exec(IScopedElement param) {
 				return param.name();

@@ -18,6 +18,7 @@ extension org::eclipse::xtend::util::stdlib::io;
 
 List[IScopedElement] scope_rule(AbstractRuleCall this):
 	allElements().typeSelect(AbstractRule).collect(x | createScopedElement(x.referenceName(), x));
+	
 List[IScopedElement] scope_rule(emf::EObject this) :
 	allElements().collect(x | createScopedElement(x.referenceName(), x));
 
