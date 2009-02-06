@@ -47,7 +47,10 @@ extension org::eclipse::xtend::util::stdlib::io;
 «LET {} AS processedFqnFeatureNames»«
 	FOREACH grammar().eReferencesFromCrossRefs() AS eReference»
 List[IScopedElement] scope_«eReference.name»(«grammar().qualifiedXtendName(eReference.eContainingClass)» this):
-	allRootElements().typeSelect(«grammar().qualifiedXtendName(eReference.eType)»).collect(x | createScopedElement(x.name, x));
+	allElements().typeSelect(«grammar().qualifiedXtendName(eReference.eType)»).collect(x | createScopedElement(x.referenceName(), x));
+	
+List[IScopedElement] scope_«eReference.name»(emf::EObject this) :
+	allElements().collect(x | createScopedElement(x.referenceName(), x));
 «	ENDFOREACH»«
 ENDLET»
 «ENDFILE»
