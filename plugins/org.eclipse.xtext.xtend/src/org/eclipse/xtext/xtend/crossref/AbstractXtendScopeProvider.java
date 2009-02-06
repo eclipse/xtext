@@ -8,9 +8,12 @@
 package org.eclipse.xtext.xtend.crossref;
 
 import static org.eclipse.xtext.util.CollectionUtils.filter;
+import static org.eclipse.xtext.util.CollectionUtils.nextOrNull;
+import static org.eclipse.xtext.util.CollectionUtils.list;
 
+import java.util.Collection;
 import java.util.Collections;
-import java.util.Iterator;
+import java.util.HashSet;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -31,12 +34,20 @@ public abstract class AbstractXtendScopeProvider extends AbstractXtendService im
 
 	private static final String SCOPE_EXTENSION_PREFIX = "scope_";
 
-	public IScope getScope(EObject context, EReference reference) {
+	public IScope getScope(EObject context, final EReference reference) {
 		try {
 			List<IScopedElement> scopedElements = invokeExtension(extensionName(context, reference), Collections
 					.singletonList(context));
-			// TODO: filter elements
-			return new XtendScope(scopedElements);
+			final Collection<String> names = new HashSet<String>(scopedElements.size()); 
+			return new XtendScope(list(filter(scopedElements, new Filter<IScopedElement>() {
+				public boolean matches(IScopedElement param) {
+					boolean result = reference.getEReferenceType().isSuperTypeOf(param.element().eClass());
+					if (result) {
+						result = names.add(param.name());
+					}
+					return result;
+				}
+			})));
 		}
 		catch (Throwable e) {
 			log.error("Error invoking scope extension", e);
@@ -69,12 +80,12 @@ public abstract class AbstractXtendScopeProvider extends AbstractXtendService im
 		}
 
 		public IScopedElement getScopedElement(final EObject element) {
-			Iterator<IScopedElement> matchesIterator = filter(scopedElements, new Filter<IScopedElement>() {
+			Iterable<IScopedElement> allMatches = filter(scopedElements, new Filter<IScopedElement>() {
 				public boolean matches(IScopedElement param) {
 					return param.element().equals(element);
 				}
-			}).iterator();
-			return (matchesIterator.hasNext()) ? matchesIterator.next() : null;
+			});
+			return nextOrNull(allMatches);
 		}
 
 	}

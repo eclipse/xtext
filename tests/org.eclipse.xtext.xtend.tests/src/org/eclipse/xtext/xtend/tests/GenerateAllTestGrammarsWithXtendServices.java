@@ -75,7 +75,7 @@ public class GenerateAllTestGrammarsWithXtendServices {
 				Resource resource = rs.createResource(uri);
 				resource.load(null);
 				Grammar grammarModel = (Grammar) resource.getContents().iterator().next();
-				GeneratorFacade.generate(grammarModel, runtimePath, uiPath, true, false, true, clazz.getSimpleName()
+				GeneratorFacade.generate(grammarModel, runtimePath, uiPath, true, false, false, clazz.getSimpleName()
 						.toLowerCase());
 			}
 		}
