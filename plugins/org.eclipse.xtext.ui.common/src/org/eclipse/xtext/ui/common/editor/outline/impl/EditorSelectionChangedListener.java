@@ -38,15 +38,15 @@ public final class EditorSelectionChangedListener extends AbstractSelectionChang
 
 			final ITextSelection textSel = (ITextSelection) selection;
 
-			getDocument().readOnly(new UnitOfWork<Object>() {
-				public Object exec(XtextResource resource) throws Exception {
+			getDocument().readOnly(new UnitOfWork<Void>() {
+				public Void exec(XtextResource resource) throws Exception {
 					IParseResult parseResult = resource.getParseResult();
 					Assert.isNotNull(parseResult);
 					CompositeNode rootNode = parseResult.getRootNode();
 
 					// Get the current element from the offset
 					int offset = textSel.getOffset();
-					AbstractNode node = ParseTreeUtil.getCurrentOrPrecedingNodeByOffset(rootNode, offset);
+					AbstractNode node = ParseTreeUtil.getCurrentOrFollowingNodeByOffset(rootNode, offset);
 					
 					// Synchronize the outline page
 					outlinePage.synchronizeOutlinePage(node);

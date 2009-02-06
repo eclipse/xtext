@@ -67,11 +67,13 @@ public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransf
 		outlineNode.setLabel(getText(semanticNode));
 
 		NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(semanticNode);
-		CompositeNode parserNode = nodeAdapter.getParserNode();
-		if (parserNode != null) {
-			SelectionCoordinates selectionNodeCoordinates = getSelectionNodeCoordinates(parserNode);
-			outlineNode.setSelectionOffset(selectionNodeCoordinates.getOffset());
-			outlineNode.setSelectionLength(selectionNodeCoordinates.getLength());
+		if (nodeAdapter != null) {
+			CompositeNode parserNode = nodeAdapter.getParserNode();
+			if (parserNode != null) {
+				SelectionCoordinates selectionNodeCoordinates = getSelectionNodeCoordinates(parserNode);
+				outlineNode.setSelectionOffset(selectionNodeCoordinates.getOffset());
+				outlineNode.setSelectionLength(selectionNodeCoordinates.getLength());
+			}
 		}
 
 		// link with parent

@@ -57,8 +57,12 @@ public class OutlineViewTest extends AbstractEditorTest {
 		closeWelcomePage();
 
 		project = createProject("foo.outline");
-		IFile file = createFile(project, "spielplatz.tst", "spielplatz 300 { \n" + "	kind (lennart 5) \n"
-				+ "	kind (soeren 8) \n" + "}");
+		IFile file = createFile(project, "spielplatz.tst", 
+				"spielplatz 300 { \n" + 
+				"	kind (lennart 5) \n" + 
+				"	kind (soeren 8) \n" +
+				"	kind (jonas 2)kind (ian 6) \n" + 
+				"}");
 		editor = openEditor(file);
 		assertNotNull(editor);
 		XtextDocument document = (XtextDocument) editor.getDocument();
@@ -141,6 +145,9 @@ public class OutlineViewTest extends AbstractEditorTest {
 		assertSynchronized(editor, 38, "kind".length());
 		// select whole node
 		assertSynchronized(editor, 38, "kind (soeren 8)".length());
+		
+		// select "kind (ian 6)", full node
+		assertSynchronized(editor, 70, "kind (ian 6)".length());
 	}
 
 	public void testLeftBoundariesSyncEditorToOutline() throws Exception {
@@ -202,7 +209,7 @@ public class OutlineViewTest extends AbstractEditorTest {
 		});
 		Assert.isNotNull(rootNode);
 
-		return ParseTreeUtil.getCurrentOrPrecedingNodeByOffset(rootNode, offset);
+		return ParseTreeUtil.getCurrentOrFollowingNodeByOffset(rootNode, offset);
 	}
 
 	protected void assertSynchronized(XtextEditor editor, int offset, int length) {
@@ -241,7 +248,7 @@ public class OutlineViewTest extends AbstractEditorTest {
 			CompositeNode rootNode = parseResult.getRootNode();
 
 			// Get the current element from the offset
-			AbstractNode node = ParseTreeUtil.getCurrentOrPrecedingNodeByOffset(rootNode, offset);
+			AbstractNode node = ParseTreeUtil.getCurrentOrFollowingNodeByOffset(rootNode, offset);
 			EObject element = NodeUtil.getNearestSemanticObject(node);
 
 			// get the associated content outline node
