@@ -30,28 +30,20 @@ public abstract class AbstractSemanticModelTransformer implements ISemanticModel
 		ContentOutlineNode outlineModel = new ContentOutlineNode();
 		outlineModel.setLabel("Invisible Root Node");
 
-		// OutlineNodeAdapter adapter = (OutlineNodeAdapter)
-		// OutlineNodeAdapterFactory.INSTANCE.adapt(semanticModel,
-		// ContentOutlineNode.class);
-		// adapter.setOutlineNode(outlineModel);
-		// adapter.setTransformer(this);
-
 		transformSemanticNode(semanticModel, outlineModel);
 		return outlineModel;
 	}
 
 	public void transformSemanticNode(EObject semanticNode, ContentOutlineNode outlineParentNode) {
+		ContentOutlineNode outlineNode;
 		if (consumeSemanticNode(semanticNode)) {
-			ContentOutlineNode outlineNode = createOutlineNode(semanticNode, outlineParentNode);
-
-			// OutlineNodeAdapter adapter = (OutlineNodeAdapter)
-			// OutlineNodeAdapterFactory.INSTANCE.adapt(semanticNode,
-			// ContentOutlineNode.class);
-			// adapter.setOutlineNode(outlineNode);
-			// adapter.setTransformer(this);
-
-			transformSemanticChildNodes(semanticNode, outlineNode);
+			outlineNode = createOutlineNode(semanticNode, outlineParentNode);
 		}
+		else {
+			outlineNode = outlineParentNode;
+		}
+		transformSemanticChildNodes(semanticNode, outlineNode);
+
 	}
 
 	private void transformSemanticChildNodes(EObject semanticNode, ContentOutlineNode outlineNode) {

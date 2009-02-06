@@ -11,6 +11,7 @@ package org.eclipse.xtext.ui.common.editor.outline;
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.source.ISourceViewer;
@@ -28,7 +29,6 @@ import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.ParseTreeUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.common.editor.outline.impl.ContentOutlineNodeAdapter;
-import org.eclipse.xtext.ui.common.editor.outline.impl.ContentOutlineNodeAdapterFactory;
 import org.eclipse.xtext.ui.common.editor.outline.impl.EditorSelectionChangedListener;
 import org.eclipse.xtext.ui.common.editor.outline.impl.LazyVirtualContentOutlinePage;
 import org.eclipse.xtext.ui.common.editor.outline.impl.LexicalSortingAction;
@@ -67,8 +67,6 @@ public class XtextContentOutlinePage extends LazyVirtualContentOutlinePage imple
 	private ISourceViewer sourceViewer;
 	private OutlineSelectionChangedListener outlineSelectionChangedListener;
 	private EditorSelectionChangedListener editorSelectionChangedListener;
-
-	private boolean sorted;
 
 	@Override
 	public void createControl(Composite parent) {
@@ -160,9 +158,11 @@ public class XtextContentOutlinePage extends LazyVirtualContentOutlinePage imple
 	private void internalSetInput(IXtextDocument xtextDocument) {
 		TreeViewer tree = getTreeViewer();
 		if (tree != null) {
-			Object[] expandedElements = tree.getExpandedElements();
+//			TreePath[] expandedTreePaths = tree.getExpandedTreePaths();
+//			Object[] expandedElements = tree.getExpandedElements();
 			tree.setInput(xtextDocument);
-			tree.setExpandedElements(expandedElements);
+//			tree.setExpandedElements(expandedElements);
+//			tree.setExpandedTreePaths(expandedTreePaths);
 		}
 	}
 
@@ -220,26 +220,35 @@ public class XtextContentOutlinePage extends LazyVirtualContentOutlinePage imple
 	private boolean shouldSynchronizeOutlinePage() {
 		return isLinkingEnabled();
 	}
+	
+	private ContentOutlineNode findMostSignificantOutlineNode(AbstractNode node) {
+		if (node != null) {
+			CompositeNode compositeNode = node instanceof CompositeNode ? (CompositeNode) node : node.getParent();
+			EObject astElement = NodeUtil.getASTElementForRootNode(compositeNode);
+			if (astElement != null) {
+				ContentOutlineNodeAdapter adapter = (ContentOutlineNodeAdapter) EcoreUtil.getAdapter(astElement.eAdapters(), ContentOutlineNode.class);
+				if (adapter != null) {
+					ContentOutlineNode contentOutlineNode = adapter.getContentOutlineNode();
+					if (contentOutlineNode != null) {
+						return contentOutlineNode;
+					}
+				}
+				else {
+					CompositeNode parent = node.getParent();
+					return findMostSignificantOutlineNode(parent);
+				}
+			}
+		}
+		return null;
+	}
 
 	public void synchronizeOutlinePage(AbstractNode node) {
 		ISelection selection = StructuredSelection.EMPTY;
 
 		if (shouldSynchronizeOutlinePage()) {
-			if (node != null) {
-				EObject nearestSemanticObject = NodeUtil.getNearestSemanticObject(node);
-
-				CompositeNode compositeNode = node instanceof CompositeNode ? (CompositeNode) node : node.getParent();
-				EObject astElement = NodeUtil.getASTElementForRootNode(compositeNode);
-				if (astElement != null) {
-					ContentOutlineNodeAdapter adapter = (ContentOutlineNodeAdapter) ContentOutlineNodeAdapterFactory.INSTANCE
-							.adapt(astElement, ContentOutlineNode.class);
-					if (adapter != null) {
-						ContentOutlineNode contentOutlineNode = adapter.getContentOutlineNode();
-						if (contentOutlineNode != null) {
-							selection = new StructuredSelection(contentOutlineNode);
-						}
-					}
-				}
+			ContentOutlineNode mostSignificantOutlineNode = findMostSignificantOutlineNode(node);
+			if (mostSignificantOutlineNode != null) {
+				selection = new StructuredSelection(mostSignificantOutlineNode);
 			}
 			outlineSelectionChangedListener.uninstall(this);
 			this.setSelection(selection, true);
@@ -248,7 +257,6 @@ public class XtextContentOutlinePage extends LazyVirtualContentOutlinePage imple
 	}
 
 	public void setSorted(boolean sorted) {
-		this.sorted = sorted;
 		provider.setSorted(sorted);
 		runInSWTThread(new Runnable() {
 			public void run() {

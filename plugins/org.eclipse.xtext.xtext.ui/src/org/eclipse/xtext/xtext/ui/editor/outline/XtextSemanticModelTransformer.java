@@ -11,9 +11,13 @@ package org.eclipse.xtext.xtext.ui.editor.outline;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
@@ -34,6 +38,10 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 			return new XtextSwitch<Boolean>() {
 				@Override
 				public Boolean caseTypeRef(org.eclipse.xtext.TypeRef object) {
+					return false;
+				}
+				
+				public Boolean caseGroup(org.eclipse.xtext.Group object) {
 					return false;
 				}
 
@@ -60,12 +68,16 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 				public Boolean caseParserRule(org.eclipse.xtext.ParserRule object) {
 					return true;
 				}
+				
+				public Boolean caseAssignment(org.eclipse.xtext.Assignment object) {
+					return false;
+				}
 
 				@Override
 				public Boolean caseAlternatives(org.eclipse.xtext.Alternatives object) {
 					return true;
 				}
-
+				
 				@Override
 				public Boolean defaultCase(EObject object) {
 					return true;
@@ -84,17 +96,6 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 			return new XtextSwitch<ContentOutlineNode>() {
 				@Override
 				public ContentOutlineNode caseGrammar(Grammar object) {
-					// create fully qualified ID string
-					
-//					Object[] idElements = object.getIdElements().toArray();
-//					int size = idElements.length;
-//					StringBuffer stringBuffer = new StringBuffer();
-//					for (int i = 0; i < size;) {
-//						stringBuffer.append(String.valueOf(idElements[i]));
-//						if (++i < size) {
-//							stringBuffer.append(".");
-//						}
-//					}
 					outlineNode.setLabel("language " + GrammarUtil.getLanguageId(object));
 					outlineNode.setImageDescriptor(Activator.getImageDescriptor("icons/language.gif"));
 					return outlineNode;
@@ -113,6 +114,38 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 					outlineNode.setImageDescriptor(Activator.getImageDescriptor("icons/import.gif"));
 					return outlineNode;
 				}
+				
+				@Override
+				public ContentOutlineNode caseAssignment(org.eclipse.xtext.Assignment object) {
+					StringBuffer label = new StringBuffer();
+					label.append(object.getFeature()).append(" ").append(object.getOperator()).append(" ");
+					
+					AbstractElement terminal = object.getTerminal();
+					if (terminal instanceof RuleCall) {
+						RuleCall ruleCall = (RuleCall) terminal;
+						String name = ruleCall.getRule().getName();
+						label.append(name);
+					}
+					else if (terminal instanceof Keyword) {
+						Keyword keyword = (Keyword) terminal;
+						String value = keyword.getValue();
+						label.append(value);
+					}
+					else if (terminal instanceof CrossReference) {
+						CrossReference crossReference = (CrossReference) terminal;
+						TypeRef type = crossReference.getType();
+						String typeName = "<unknown>";
+						if (type != null && type.getType() != null) {
+							typeName = type.getType().getName();
+						}
+						label.append("[").append(typeName).append("]");
+					}
+					
+					String cardinality = object.getCardinality();
+					label.append(cardinality != null ? cardinality : "");
+					outlineNode.setLabel(label.toString());
+					return outlineNode;
+				}
 
 				@Override
 				public ContentOutlineNode caseAbstractRule(org.eclipse.xtext.AbstractRule object) {
@@ -121,9 +154,11 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 					return outlineNode;
 				}
 				
+				@Override
 				public ContentOutlineNode caseRuleCall(RuleCall ruleCall) {
-					if (ruleCall.getRule() != null)
-						outlineNode.setLabel("call " + ruleCall.getRule().getName());
+					if (ruleCall.getRule() != null) {
+						outlineNode.setLabel(ruleCall.getRule().getName());
+					}
 					else {
 						NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(ruleCall);
 						String ruleName = "???";
@@ -147,6 +182,12 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 				@Override
 				public ContentOutlineNode caseAlternatives(org.eclipse.xtext.Alternatives object) {
 					outlineNode.setLabel("|");
+					return outlineNode;
+				}
+				
+				public ContentOutlineNode caseKeyword(Keyword object) {
+					outlineNode.setLabel("'" + object.getValue() + "'");
+					outlineNode.setImageDescriptor(Activator.getImageDescriptor("icons/keyword.gif"));
 					return outlineNode;
 				}
 
