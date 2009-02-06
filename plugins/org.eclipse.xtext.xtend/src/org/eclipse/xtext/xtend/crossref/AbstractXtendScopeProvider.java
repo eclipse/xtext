@@ -48,7 +48,7 @@ public abstract class AbstractXtendScopeProvider extends AbstractXtendService im
 		return SCOPE_EXTENSION_PREFIX + reference.getName();
 	}
 
-	private class XtendScope implements IScope {
+	public static class XtendScope implements IScope {
 
 		private Iterable<IScopedElement> scopedElements;
 

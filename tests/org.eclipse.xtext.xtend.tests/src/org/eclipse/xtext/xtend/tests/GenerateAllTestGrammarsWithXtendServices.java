@@ -20,20 +20,27 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.GenerateAllTestGrammars;
 import org.eclipse.xtext.GeneratorFacade;
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.XtextGrammarTestLanguage;
 import org.eclipse.xtext.XtextStandaloneSetup;
+import org.eclipse.xtext.parser.keywords.KeywordsTestLanguage;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.testlanguages.ContentAssistTestLanguage;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage;
+import org.eclipse.xtext.testlanguages.TreeTestLanguage;
 
 /**
- * Generates all required testgrammars with xtend services for this test project.
+ * Generates all required testgrammars with xtend services for this test
+ * project.
  * 
- * This code was copied from class <code>GenerateAllTestGrammars</code> within project
- * 'org.eclipse.xtext[.generator.]tests'. 
- * <p/>
- * The duplication of this class was required because tests in this project rely on generated Xtend services.
+ * This code was copied from class
+ * <code>org.eclipse.xtext.ui.common.GenerateAllTestGrammarsWithUiConfig</code>
+ * within project 'org.eclipse.xtext.ui.common.tests'. <p/>
+ * 
+ * The duplication of this class was required because we need a language setup
+ * with xtend services. services.
  * 
  * @author Michael Clay - Initial contribution and API
- * @author Jan Koehnlein 
+ * @author Jan Koehnlein
  */
 public class GenerateAllTestGrammarsWithXtendServices {
 
@@ -42,10 +49,10 @@ public class GenerateAllTestGrammarsWithXtendServices {
 
 	private static Logger logger = Logger.getLogger(GenerateAllTestGrammarsWithXtendServices.class);
 
-	private final static Class<?>[] testClasses = new Class[] { 
-		ReferenceGrammarTestLanguage.class, 
-	};
-	
+	private final static Class<?>[] testClasses = new Class[] { ReferenceGrammarTestLanguage.class,
+			TreeTestLanguage.class, XtextGrammarTestLanguage.class, ContentAssistTestLanguage.class,
+			KeywordsTestLanguage.class };
+
 	/**
 	 * @return the testclasses
 	 */
@@ -55,8 +62,8 @@ public class GenerateAllTestGrammarsWithXtendServices {
 
 	public static void main(String... args) throws Exception {
 		try {
-			String uiPath = (args.length >0) ? args[0]: UI_PATH;
-			String runtimePath = ((args.length >0) ? args[0] + "/": "") + RUNTIME_PATH;
+			String uiPath = (args.length > 0) ? args[0] : UI_PATH;
+			String runtimePath = ((args.length > 0) ? args[0] + "/" : "") + RUNTIME_PATH;
 
 			XtextStandaloneSetup.doSetup();
 			GeneratorFacade.cleanFolder(uiPath + "/src-gen");
@@ -67,13 +74,13 @@ public class GenerateAllTestGrammarsWithXtendServices {
 				URI uri = URI.createURI(filename);
 				Resource resource = rs.createResource(uri);
 				resource.load(null);
-				Grammar grammarModel = (Grammar) resource.getContents()
-						.iterator().next();
-				GeneratorFacade.generate(grammarModel, runtimePath, uiPath, true, false, true, clazz
-						.getSimpleName().toLowerCase());
+				Grammar grammarModel = (Grammar) resource.getContents().iterator().next();
+				GeneratorFacade.generate(grammarModel, runtimePath, uiPath, true, false, true, clazz.getSimpleName()
+						.toLowerCase());
 			}
-		} catch (Exception e) {
-			logger.error("Error while generating test grammars",e);
+		}
+		catch (Exception e) {
+			logger.error("Error while generating test grammars", e);
 		}
 	}
 

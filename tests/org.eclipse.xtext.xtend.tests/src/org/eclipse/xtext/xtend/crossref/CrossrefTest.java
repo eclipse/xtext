@@ -7,9 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend.crossref;
 
+import static org.eclipse.xtext.util.CollectionUtils.list;
+import static org.eclipse.xtext.util.CollectionUtils.map;
+
 import java.util.List;
 
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.crossref.IScope;
 import org.eclipse.xtext.crossref.IScopeProvider;
 import org.eclipse.xtext.crossref.IScopedElement;
@@ -19,12 +23,12 @@ import org.eclipse.xtext.testlanguages.referenceGrammarTestLanguage.ReferenceGra
 import org.eclipse.xtext.testlanguages.referenceGrammarTestLanguage.ReferenceGrammar.ReferenceGrammarPackage;
 import org.eclipse.xtext.testlanguages.referenceGrammarTestLanguage.ReferenceGrammar.Spielplatz;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
-import org.eclipse.xtext.util.CollectionUtils;
+import org.eclipse.xtext.util.Function;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
-public class Crossreftest extends AbstractGeneratorTest {
+public class CrossrefTest extends AbstractGeneratorTest {
 
 	public void testCrossRef() throws Exception {
 		EPackage.Registry.INSTANCE.put(ReferenceGrammarPackage.eNS_URI, ReferenceGrammarPackage.eINSTANCE);
@@ -33,18 +37,23 @@ public class Crossreftest extends AbstractGeneratorTest {
 		Familie familie = ReferenceGrammarFactory.eINSTANCE.createFamilie();
 		model.getFamilie().add(familie);
 
+		assertInScope(familie, ReferenceGrammarPackage.Literals.FAMILIE__KINDER, "k1", "k2");
+		assertInScope(familie, ReferenceGrammarPackage.Literals.FAMILIE__VATER, "v1", "m1");
+		assertInScope(familie, ReferenceGrammarPackage.Literals.FAMILIE__MUTTER, "v1", "m1");
+	}
+
+	private void assertInScope(Familie familie, EReference eReference, String... names) {
 		IScopeProvider scopeProvider = getScopeProvider();
-		IScope kinderScope = scopeProvider.getScope(familie, ReferenceGrammarPackage.Literals.FAMILIE__KINDER);
-		List<IScopedElement> kinder = CollectionUtils.list(kinderScope.getContents());
-		assertTrue(kinder.size() == 2);
-		assertEquals("k1", kinder.get(0).name());
-		assertEquals("k2", kinder.get(1).name());
-
-		IScope vaterScope = scopeProvider.getScope(familie, ReferenceGrammarPackage.Literals.FAMILIE__VATER);
-		List<IScopedElement> erwachsene = CollectionUtils.list(vaterScope.getContents());
-		assertTrue(erwachsene.size() == 2);
-		assertEquals("v1", erwachsene.get(0).name());
-		assertEquals("m1", erwachsene.get(1).name());
-
+		assertTrue(scopeProvider instanceof AbstractXtendScopeProvider);
+		IScope scope = scopeProvider.getScope(familie, eReference);
+		List<String> namesInScope = list(map(scope.getContents(), new Function<IScopedElement, String>() {
+			public String exec(IScopedElement param) {
+				return param.name();
+			}
+		}));
+		assertTrue(namesInScope.size() == 2);
+		for(String name : names){
+			assertTrue(namesInScope.contains(name));
+		}
 	}
 }

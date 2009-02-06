@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SpielzeugImpl.java,v 1.1 2009/02/05 19:05:39 jkohnlein Exp $
+ * $Id: SpielzeugImpl.java,v 1.2 2009/02/06 09:46:54 jkohnlein Exp $
  */
 package org.eclipse.xtext.testlanguages.referenceGrammarTestLanguage.ReferenceGrammar.impl;
 

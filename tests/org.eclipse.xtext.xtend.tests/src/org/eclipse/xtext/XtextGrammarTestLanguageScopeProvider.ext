@@ -1,0 +1,18 @@
+/*
+Generated with Xtext
+*/
+
+import xtext;
+
+import org::eclipse::jface::text::contentassist;
+import org::eclipse::xtext::crossref;
+
+import XtextTest;
+import ecore;
+
+extension org::eclipse::xtext::GenXtextGrammarTestLanguageScopeProvider reexport;
+
+/**
+ * Customize functions defined in org/eclipse/xtext/GenXtextGrammarTestLanguageScopeProvider.ext here.
+ */
+

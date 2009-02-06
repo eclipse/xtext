@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
+  <idElements>org</idElements>
+  <idElements>eclipse</idElements>
+  <idElements>xtext</idElements>
+  <idElements>parser</idElements>
+  <idElements>keywords</idElements>
+  <idElements>KeywordsTestLanguage</idElements>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="KeywordsTestLanguage">
+    <ePackage href="http://www.eclipse.org/2009/tmf/xtext/KeywordsTestLanguage#/"/>
+  </metamodelDeclarations>
+  <rules xsi:type="xtext:ParserRule" name="Model" definesHiddenTokens="true">
+    <type metamodel="//@metamodelDeclarations.0">
+      <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/KeywordsTestLanguage#//Model"/>
+    </type>
+    <hiddenTokens href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.5"/>
+    <hiddenTokens href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.3"/>
+    <hiddenTokens href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.4"/>
+    <alternatives xsi:type="xtext:Alternatives">
+      <groups xsi:type="xtext:Alternatives">
+        <groups xsi:type="xtext:Alternatives">
+          <groups xsi:type="xtext:Assignment" feature="first" operator="?=">
+            <terminal xsi:type="xtext:Keyword" value="foo\bar"/>
+          </groups>
+          <groups xsi:type="xtext:Assignment" feature="second" operator="?=">
+            <terminal xsi:type="xtext:Keyword" value="foo\"/>
+          </groups>
+        </groups>
+        <groups xsi:type="xtext:Assignment" feature="third" operator="?=">
+          <terminal xsi:type="xtext:Keyword" value="\bar"/>
+        </groups>
+      </groups>
+      <groups xsi:type="xtext:Assignment" feature="forth" operator="?=">
+        <terminal xsi:type="xtext:Keyword" value="\"/>
+      </groups>
+    </alternatives>
+  </rules>
+</xtext:Grammar>
