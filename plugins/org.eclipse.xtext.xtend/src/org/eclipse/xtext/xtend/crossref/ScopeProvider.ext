@@ -10,6 +10,11 @@ import org::eclipse::xtext::crossref;
 
 extension org::eclipse::xtext::xtend::Services reexport;
 
+String referenceName(emf::EObject this) :
+	(metaType.getProperty("name") != null) 
+		? metaType.getProperty("name").get(this) 
+		: null;
+
 IScopedElement createScopedElement(String name, emf::EObject obj, Object additionalInfo) :
   JAVA org.eclipse.xtext.crossref.impl.ScopedElement.^create(java.lang.String, org.eclipse.emf.ecore.EObject, java.lang.Object);
 

@@ -1,0 +1,44 @@
+/*
+Generated with Xtext
+*/
+package org.eclipse.xtext.parser.antlr;
+
+import org.antlr.runtime.ANTLRInputStream;
+import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
+import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.parser.ParseException;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+
+import com.google.inject.Inject;
+
+import org.eclipse.xtext.parser.antlr.internal.InternalXtextGrammarTestLanguageLexer;
+import org.eclipse.xtext.parser.antlr.internal.InternalXtextGrammarTestLanguageParser;
+
+public class XtextGrammarTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
+	
+	@Inject 
+    protected ITokenDefProvider antlrTokenDefProvider;
+	
+	@Override
+	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
+		InternalXtextGrammarTestLanguageLexer lexer = new InternalXtextGrammarTestLanguageLexer(in);
+		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
+		InternalXtextGrammarTestLanguageParser parser = new InternalXtextGrammarTestLanguageParser(
+				stream, getElementFactory(), grammarAccess.getGrammar());
+		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());
+		try {
+			if(ruleName != null) {
+				return parser.parse(ruleName);
+			} else {
+				return parser.parse();
+			}
+		} catch (Exception re) {
+			throw new ParseException(re.getMessage(),re);
+		}
+	}
+	
+	@Override 
+	protected String getDefaultRuleName() {
+		return "Grammar";
+	}
+}

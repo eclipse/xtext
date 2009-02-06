@@ -29,6 +29,7 @@ public class ContentAssistHelper {
 	public static IScope getScope(IScopeProvider scopeProvider, Object context, Object reference) {
 		if (reference == null)
 			return null;
-		return scopeProvider.getScope((EObject) context, (EReference) reference);
+		IScope scope = scopeProvider.getScope((EObject) context, (EReference) reference);
+		return scope;
 	}
 }

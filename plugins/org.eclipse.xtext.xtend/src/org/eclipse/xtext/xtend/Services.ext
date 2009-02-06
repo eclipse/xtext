@@ -22,6 +22,9 @@ IScopeProvider scopeProvider():
 List[emf::EObject] allRootElements(emf::EObject this) :
 	JAVA org.eclipse.xtext.xtend.ServiceHelper.allRootElements(org.eclipse.emf.ecore.EObject);
 
+List[emf::EObject] allElements(emf::EObject this) :
+	allRootElements().eAllContents.flatten();
+
 /**
  *  We have conflicting metamodels for ecore - Java and EmfRegistry, so we use this 
  *	Java hack to do the conversion. 
