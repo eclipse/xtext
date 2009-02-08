@@ -127,22 +127,22 @@ public final class PackratParserGenUtil {
 
 	private static String getFieldName(String name, String suffix) {
 		String result = getAsFieldName(name);
-		if (result.length() == 0) // name is a single underscore or empty
+		if (result.length() == 0) { // name is a single underscore or empty
 			if (Strings.isEmpty(name))
 				return suffix;
-			else 
-				return "_" + Strings.toFirstUpper(suffix);
+			return "_" + Strings.toFirstUpper(suffix);
+		}
 		return result.toString() + Strings.toFirstUpper(suffix);
 	}
 
 	private static String getAsFieldName(String name) {
-		name = Strings.emptyIfNull(name);
-		StringBuilder result = new StringBuilder(name.length());
+		String myName = Strings.emptyIfNull(name);
+		StringBuilder result = new StringBuilder(myName.length());
 		boolean wasUnderscore = false;
 		boolean wasUppercase = true;
 		boolean wasDigit = false;
-		for(int i=0; i<name.length(); i++) {
-			char c = name.charAt(i);
+		for(int i=0; i<myName.length(); i++) {
+			char c = myName.charAt(i);
 			if (c == '_') {
 				if (wasUnderscore) { // we may not strip more then one underscore in the middle
 					if (result.length() == 0) 
@@ -163,8 +163,8 @@ public final class PackratParserGenUtil {
 						result.append(Character.toUpperCase(c));
 					} else if (Character.isUpperCase(c)) {
 						if (wasUppercase) {
-							if (i!=0 && i != name.length() - 1) {
-								char next = name.charAt(i + 1);
+							if (i!=0 && i != myName.length() - 1) {
+								char next = myName.charAt(i + 1);
 								if (Character.isLetter(next) && Character.isLowerCase(next)) {
 									result.append(c);
 								} else {
@@ -239,7 +239,7 @@ public final class PackratParserGenUtil {
 	
 	// TODO SZ: replace return value with ICharacterClass or similar
 	public static List<AbstractRule> getConflictingLexerRules(final Keyword keyword, final Grammar grammar) {
-		AbstractRule rule = (AbstractRule) GrammarUtil.findRuleForName(grammar, "ID");
+		AbstractRule rule = GrammarUtil.findRuleForName(grammar, "ID");
 		if (rule != null) {
 			// TODO SZ: use interpreter
 			final StringWithOffset input = new StringWithOffset(keyword.getValue());
@@ -252,17 +252,13 @@ public final class PackratParserGenUtil {
 	
 	public static List<String> getConflictingKeywords(final AbstractElement element, final Grammar grammar) {
 		if (element instanceof RuleCall) {
-			if (((RuleCall) element).getRule() instanceof AbstractRule) {
-				AbstractRule rule = (AbstractRule) ((RuleCall) element).getRule();
-				if (rule instanceof LexerRule || ((ParserRule) rule).isTerminal())
-					return getConflictingKeywordsImpl(grammar, rule);
-			}
+			AbstractRule rule = ((RuleCall) element).getRule();
+			if (rule instanceof LexerRule || ((ParserRule) rule).isTerminal())
+				return getConflictingKeywordsImpl(grammar, rule);
 		} else if (element instanceof CrossReference) {
-			if (((CrossReference) element).getRule() instanceof AbstractRule) {
-				AbstractRule rule = (AbstractRule) ((CrossReference) element).getRule();
-				if (rule instanceof LexerRule || ((ParserRule) rule).isTerminal())
-					return getConflictingKeywordsImpl(grammar, rule);
-			}
+			AbstractRule rule = ((CrossReference) element).getRule();
+			if (rule instanceof LexerRule || ((ParserRule) rule).isTerminal())
+				return getConflictingKeywordsImpl(grammar, rule);
 		}
 		return null;
 	}

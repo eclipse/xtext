@@ -15,7 +15,6 @@
 «EXTENSION org::eclipse::xtext::Extensions»
 «EXTENSION org::eclipse::xtext::parser::packrat::PackratParserGen»
 «EXTENSION org::eclipse::xtext::grammaraccess::GrammarAccess»
-«EXTENSION org::eclipse::xtend::util::stdlib::io»
 
 «DEFINE root FOR GenService»
 «EXPAND nonTerminalConsumer FOREACH grammar().rules.typeSelect(ParserRule).select(e|!e.terminal)»
@@ -354,7 +353,7 @@ public final class «this.consumerClassName()» extends NonTerminalConsumer {
 
 «DEFINE defineConsumeBody(RuleCall call) FOR ParserRule-»
 «IF !terminal-»
-		return consumeNonTerminal(«consumerFieldName()», null, false, «isDatatypeRule()», getRule().«call.gaElementAccessMethodeName()»());
+		return consumeNonTerminal(«consumerFieldName()», null, false, «isDatatypeRule()», false, getRule().«call.gaElementAccessMethodeName()»());
 «ELSE-»
 		return consumeTerminal(«consumerFieldName()», null, false, false, getRule().«call.gaElementAccessMethodeName()»(), get«call.delimiterFieldName().toFirstUpper()»());
 «ENDIF-»
@@ -392,7 +391,7 @@ public final class «this.consumerClassName()» extends NonTerminalConsumer {
 
 «DEFINE defineConsumeCrossReferenceAssignmentBody(Assignment assignment, CrossReference reference) FOR ParserRule-»
 «IF !terminal-»
-		tempResult = consumeNonTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «isDatatypeRule()», getRule().«reference.gaElementAccessMethodeName()»());
+		tempResult = consumeNonTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «isDatatypeRule()», «assignment.isBoolean()», getRule().«reference.gaElementAccessMethodeName()»());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -427,7 +426,7 @@ public final class «this.consumerClassName()» extends NonTerminalConsumer {
 
 «DEFINE defineConsumeAssignmentBody(Assignment assignment, RuleCall call) FOR ParserRule-»
 «IF !terminal-»
-		tempResult = consumeNonTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «isDatatypeRule()», getRule().«call.gaElementAccessMethodeName()»());
+		tempResult = consumeNonTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «isDatatypeRule()», «assignment.isBoolean()», getRule().«call.gaElementAccessMethodeName()»());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

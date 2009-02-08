@@ -24,6 +24,7 @@ public class HiddensTest extends AbstractGeneratorTest {
 	private EClass overridingHiddens;
 	private EClass inheritingHiddens;
 	private EClass model;
+	private EClass datatypeHiddens;
 	private EStructuralFeature spacesWithoutHiddens;
 	private EStructuralFeature valid;
 	private EClass overridingHiddensCall;
@@ -39,6 +40,7 @@ public class HiddensTest extends AbstractGeneratorTest {
 		EPackage pack = getMetamodelAccess().getGeneratedEPackages()[0];
 		withoutHiddens = (EClass) pack.getEClassifier("WithoutHiddens");
 		withHiddens = (EClass) pack.getEClassifier("WithHiddens");
+		datatypeHiddens = (EClass) pack.getEClassifier("DatatypeHiddens");
 		overridingHiddens = (EClass) pack.getEClassifier("OverridingHiddens");
 		overridingHiddensCall = (EClass) pack.getEClassifier("OverridingHiddensCall");
 		inheritingHiddens = (EClass) pack.getEClassifier("InheritingHiddens");
@@ -166,5 +168,31 @@ public class HiddensTest extends AbstractGeneratorTest {
 		assertNotNull(root);
 		assertEquals(inheritingHiddens, root.eClass());
 		assertTrue((Boolean) root.eGet(valid));
+	}
+	
+	public void testDatatypeHiddens_01() throws Exception {
+		String model = "datatype rule;";
+		Resource res = getResourceFromString(model);
+		assertTrue(res.getErrors().isEmpty());
+		EObject root = res.getContents().get(0);
+		assertNotNull(root);
+		assertEquals(datatypeHiddens, root.eClass());
+		assertTrue((Boolean) root.eGet(valid));
+	}
+	
+	public void testDatatypeHiddens_02() throws Exception {
+		String model = "datatype rule  ;";
+		Resource res = getResourceFromString(model);
+		assertTrue(res.getErrors().isEmpty());
+		EObject root = res.getContents().get(0);
+		assertNotNull(root);
+		assertEquals(datatypeHiddens, root.eClass());
+		assertTrue((Boolean) root.eGet(valid));
+	}
+	
+	public void testDatatypeHiddens_03() throws Exception {
+		String model = "datatype rule /* foo */ ;";
+		Resource res = getResourceFromString(model);
+		assertFalse(res.getErrors().isEmpty());
 	}
 }

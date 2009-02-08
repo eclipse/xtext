@@ -15,7 +15,6 @@ import oaw;
 extension org::eclipse::xtext::Properties reexport;
 extension org::eclipse::xtext::Extensions reexport;
 extension org::eclipse::xtext::GrammarUtil reexport;
-extension org::eclipse::xtend::util::stdlib::io;
 
 cached String consumeMethodName(AbstractElement this):
 	JAVA org.eclipse.xtext.parser.packrat.PackratParserGenUtil.getConsumeMethodName(org.eclipse.xtext.AbstractElement);
