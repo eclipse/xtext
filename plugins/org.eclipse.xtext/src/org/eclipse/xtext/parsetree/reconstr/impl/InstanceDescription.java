@@ -10,7 +10,6 @@ package org.eclipse.xtext.parsetree.reconstr.impl;
 
 import java.util.ArrayList;
 import java.util.BitSet;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -139,16 +138,16 @@ public class InstanceDescription implements IInstanceDescription {
 		return class1 != null && class1.isSuperTypeOf(getDelegate().eClass());
 	}
 
-	private int nextID(EStructuralFeature f, int lastID) {
-		if (f.isMany() && multiFeatures != null
-				&& multiFeatures.get(f.getFeatureID())) {
-			lastID--;
+	private int nextID(EStructuralFeature f, int lastId) {
+		int myLastId = lastId;
+		if (f.isMany() && multiFeatures != null	&& multiFeatures.get(f.getFeatureID())) {
+			myLastId--;
 			ITransientValueService ts = astSer.getTVService();
-			while (lastID >= 0 && ts.isTransient(described, f, lastID))
-				lastID--;
-			return lastID;
-		} else
-			return lastID - 1;
+			while (myLastId >= 0 && ts.isTransient(described, f, myLastId))
+				myLastId--;
+			return myLastId;
+		}
+		return myLastId - 1;
 	}
 
 	@Override

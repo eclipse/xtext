@@ -18,13 +18,22 @@ import org.eclipse.xtext.conversion.impl.AbstractToStringConverter;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.util.Strings;
 
+import com.google.inject.Inject;
+
+/**
+ * Simple converters for Strings, Integers and IDs.
+ */
 public class XtextBuiltInConverters extends AbstractAnnotationBasedValueConverterService {
 
-	private Grammar g;
+	private Grammar grammar;
 	
-	@com.google.inject.Inject
-	public void setGrammar(IGrammarAccess ga) {
-		this.g = ga.getGrammar();
+	@Inject
+	public void setGrammar(IGrammarAccess grammarAccess) {
+		this.grammar = grammarAccess.getGrammar();
+	}
+	
+	protected Grammar getGrammar() {
+		return grammar;
 	}
 	
 	@ValueConverter(rule = "ID")
@@ -37,10 +46,10 @@ public class XtextBuiltInConverters extends AbstractAnnotationBasedValueConverte
 
 			@Override
 			protected String internalToString(String value) {
-				if (GrammarUtil.getAllKeywords(g).contains(value)) {
+				if (GrammarUtil.getAllKeywords(getGrammar()).contains(value)) {
 					return "^"+value;
 				}
-				return (String) value;
+				return value;
 			}
 		};
 	}
@@ -48,6 +57,7 @@ public class XtextBuiltInConverters extends AbstractAnnotationBasedValueConverte
 	@ValueConverter(rule = "STRING")
 	public IValueConverter<String> STRING() {
 		return new AbstractNullSafeConverter<String>() {
+			@Override
 			protected String internalToValue(String string, AbstractNode node) {
 				return Strings.convertFromJavaString(string.substring(1, string.length() - 1));
 			}
@@ -62,6 +72,7 @@ public class XtextBuiltInConverters extends AbstractAnnotationBasedValueConverte
 	@ValueConverter(rule = "INT")
 	public IValueConverter<Integer> INT() {
 		return new AbstractToStringConverter<Integer>() {
+			@Override
 			public Integer internalToValue(String string, AbstractNode node) {
 				return Integer.valueOf(string);
 			}

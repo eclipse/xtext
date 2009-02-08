@@ -29,6 +29,7 @@ public final class XtextBuiltinSTRINGConsumer extends AbstractRuleAwareTerminalC
 		super(configuration);
 	}
 
+	@Override
 	public int doConsume() {
 		boolean result = true;
 		// '\"' ( '\\\\' ('b'|'t'|'n'|'f'|'r'|'\\\"'|'\\''|'\\\\') | ~('\\\\'|'\"') )* '\"' | 

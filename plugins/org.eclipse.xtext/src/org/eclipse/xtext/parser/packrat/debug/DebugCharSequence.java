@@ -41,6 +41,7 @@ public class DebugCharSequence implements CharSequence {
 		return new DebugCharSequence(delegate.subSequence(start, end));
 	}
 
+	@Override
 	public String toString() {
 		if (log.isTraceEnabled()) {
 			log.trace("toString()");

@@ -165,10 +165,8 @@ public final class ParseTreeUtil {
 					if (abstractNode.getTotalLength() > 0 
 							|| (result==null || result.getTotalLength()==0)) {
 						
-						if (abstractNode instanceof LeafNode && 
-								abstractNode.getTotalOffset()==offsetPosition && ((LeafNode)abstractNode).isHidden()) {
-							;
-						} else {
+						if (!(abstractNode instanceof LeafNode && 
+								abstractNode.getTotalOffset()==offsetPosition && ((LeafNode)abstractNode).isHidden())) {
 							result = abstractNode;
 						}
 					}
@@ -230,9 +228,7 @@ public final class ParseTreeUtil {
 		if (eObject instanceof Grammar) {
 			return (Grammar) eObject;
 		}
-		else {
-			return getGrammar(eObject.eContainer());
-		}
+		return getGrammar(eObject.eContainer());
 	}
 	/**
 	 * asserts if the given parameter object isnt null
@@ -266,12 +262,12 @@ public final class ParseTreeUtil {
 		return abstractElement;
 	}
 
-	private static Set<AbstractElement> calculatePossibleElementSet(AbstractNode contextNode,
+	private static Set<AbstractElement> calculatePossibleElementSet(AbstractNode node,
 			AbstractElement abstractElement) {
-		assertParameterNotNull(contextNode, "parameter 'contextNode' must not be null");
+		assertParameterNotNull(node, "parameter 'node' must not be null");
 
 		Set<AbstractElement> elementSet = new LinkedHashSet<AbstractElement>();
-
+		AbstractNode contextNode = node;
 		if (getGrammarElementFromNode(contextNode).eContainer() instanceof ParserRule
 				&& isDefaultRule((ParserRule) getGrammarElementFromNode(contextNode).eContainer())) {
 			elementSet.add(getGrammarElementFromNode(contextNode));
@@ -350,8 +346,9 @@ public final class ParseTreeUtil {
 
 	}
 
-	private static final String dumpParentHierarchy(AbstractNode abstractNode) {
+	private static final String dumpParentHierarchy(final AbstractNode node) {
 		StringBuilder stringBuilder = new StringBuilder();
+		AbstractNode abstractNode = node;
 		while (null != abstractNode) {
 			stringBuilder.append(abstractNode.getGrammarElement().getClass().getSimpleName());
 			if (abstractNode.getGrammarElement() instanceof ParserRule) {
@@ -393,8 +390,9 @@ public final class ParseTreeUtil {
 	}
 
 	
-	private static Alternatives getOutermostAlternativesElement(AbstractNode baseNode) {
+	private static Alternatives getOutermostAlternativesElement(final AbstractNode node) {
 		Alternatives alternatives = null;
+		AbstractNode baseNode = node;
 		while ((baseNode = (AbstractNode) baseNode.eContainer()) != null
 				&& baseNode.getGrammarElement().eContainer() instanceof Alternatives) {
 			for (AbstractElement abstractElement = (AbstractElement) baseNode.getGrammarElement(); abstractElement

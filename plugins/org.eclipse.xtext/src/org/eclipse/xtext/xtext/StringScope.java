@@ -18,7 +18,7 @@ import org.eclipse.xtext.util.Function;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-class StringScope extends AbstractNestedScope implements IScope {
+class StringScope extends AbstractNestedScope {
 
 	private static class StringScopeElement implements IScopedElement {
 		

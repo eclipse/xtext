@@ -167,8 +167,7 @@ public class EcoreUtil2 extends EcoreUtil {
 				return -1;
 			if (classB.getEAllSuperTypes().contains(classA))
 				return 1;
-			else
-				return 0;
+			return 0;
 		}
 	}
 
@@ -300,12 +299,10 @@ public class EcoreUtil2 extends EcoreUtil {
 		if (reference.getUpperBound() == 1) {
 			EObject eObject = (EObject) referer.eGet(reference);
 			if (null != eObject)
-				return (List<EObject>) Collections.singletonList(eObject);
-			else
-				return Collections.<EObject>emptyList();
+				return Collections.singletonList(eObject);
+			return Collections.<EObject>emptyList();
 		}
-		else
-			return (List<EObject>) referer.eGet(reference);
+		return (List<EObject>) referer.eGet(reference);
 	}
 
 }

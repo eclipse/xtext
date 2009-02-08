@@ -29,16 +29,17 @@ public class ClassloaderClasspathUriResolver implements IClasspathUriResolver {
      *      If null, the context classloader of the current thread is used.
      */
     public URI resolve(Object context, URI classpathUri) {
-        if (context == null) {
-            context = Thread.currentThread().getContextClassLoader();
+    	Object myContext = context;
+        if (myContext == null) {
+            myContext = Thread.currentThread().getContextClassLoader();
         }
-        if (context instanceof Class) {
-            context = ((Class<?>)context).getClassLoader();
+        if (myContext instanceof Class<?>) {
+            myContext = ((Class<?>)myContext).getClassLoader();
         }
-        if (!(context instanceof ClassLoader)) {
-        	context = context.getClass().getClassLoader();
+        if (!(myContext instanceof ClassLoader)) {
+        	myContext = myContext.getClass().getClassLoader();
         }
-        ClassLoader classLoader = (ClassLoader) context;
+        ClassLoader classLoader = (ClassLoader) myContext;
         try {
             if (ClasspathUriUtil.isClasspathUri(classpathUri)) {
                 return findResourceOnClasspath(classLoader, classpathUri);

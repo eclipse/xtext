@@ -99,9 +99,7 @@ public class XtextLinkingService extends DefaultLinkingService {
 				Resource resource = resourceSet.getResource(uri, true);
 				return (EPackage) resource.getContents().get(0);
 			}
-			else {
-				return (EPackage) resourceSet.getEObject(uri, true);
-			}
+			return (EPackage) resourceSet.getEObject(uri, true);
 		} catch(RuntimeException ex) {
 			log.trace("Cannot load package with URI '" + resourceOrNsURI + "'", ex);
 			return null;

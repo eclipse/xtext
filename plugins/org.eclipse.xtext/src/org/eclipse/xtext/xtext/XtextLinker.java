@@ -57,11 +57,13 @@ public class XtextLinker extends Linker {
 		return new AbstractDiagnosticProducerDecorator(super.createDiagnosticProducer(consumer)) {
 			private boolean filter = false;
 
+			@Override
 			public void addDiagnostic(String message) {
 				if (!filter)
 					super.addDiagnostic(message);
 			}
 
+			@Override
 			public void setTarget(EObject object, EStructuralFeature feature) {
 				super.setTarget(object, feature);
 				// we don't want to mark generated types as errors unless generation fails
@@ -74,6 +76,7 @@ public class XtextLinker extends Linker {
 		};
 	}
 
+	@Override
 	protected void setDefaultValueImpl(EObject obj, EReference ref, IDiagnosticProducer producer) {
 		if (XtextPackage.eINSTANCE.getTypeRef_Metamodel() == ref) {
 			final TypeRef typeRef = (TypeRef) obj;

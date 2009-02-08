@@ -9,7 +9,6 @@
 package org.eclipse.xtext.resource;
 
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
-import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.SyntaxError;
 
@@ -17,7 +16,7 @@ import org.eclipse.xtext.parsetree.SyntaxError;
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public class XtextSyntaxDiagnostic extends AbstractDiagnostic implements Diagnostic {
+public class XtextSyntaxDiagnostic extends AbstractDiagnostic {
 
 	final SyntaxError error;
 
@@ -34,6 +33,7 @@ public class XtextSyntaxDiagnostic extends AbstractDiagnostic implements Diagnos
 		return error.getMessage();
 	}
 	
+	@Override
 	public String getLocation() {
 		if (error.eResource() != null)
 			return error.eResource().getURI().toString();

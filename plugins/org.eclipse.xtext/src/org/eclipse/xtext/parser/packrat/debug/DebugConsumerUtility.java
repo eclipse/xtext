@@ -54,15 +54,16 @@ public class DebugConsumerUtility implements IConsumerUtility {
 	}
 
 	public int consumeNonTerminal(INonTerminalConsumer consumer, String feature, boolean isMany,
-			boolean isDatatype, AbstractElement grammarElement) throws Exception {
+			boolean isDatatype, boolean isBoolean, AbstractElement grammarElement) throws Exception {
 		if (log.isDebugEnabled()) {
 			log.debug("consumeNonTerminal(consumer = '" + consumer + "', " +
 					"feature = " + feature + ", " +
 					"isMany = " + isMany + ", " +
 					"isDatatype = " + isDatatype + ", " +
+					"isBoolean = " + isBoolean + ", " +
 					"grammarElement = " + grammarElement.eClass().getName() + ")"); 
 		}
-		int result = delegate.consumeNonTerminal(consumer, feature, isMany, isDatatype, grammarElement);
+		int result = delegate.consumeNonTerminal(consumer, feature, isMany, isDatatype, isBoolean, grammarElement);
 		if (log.isDebugEnabled()) {
 			log.debug("consumeNonTerminal(" + consumer + ") = " + result); 
 		}

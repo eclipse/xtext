@@ -23,6 +23,7 @@ public final class XtextBuiltinML_COMMENTConsumer extends AbstractRuleAwareTermi
 		super(configuration);
 	}
 
+	@Override
 	public int doConsume() {
 		boolean result = true;
 		// '/*'

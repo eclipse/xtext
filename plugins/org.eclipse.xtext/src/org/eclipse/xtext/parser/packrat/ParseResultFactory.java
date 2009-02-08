@@ -144,8 +144,10 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 		EObject created = currentStack.removeLast();
 		if (!token.isDatatype()) {
 			if (created == null) {
-				created = factory.create(nonTerminal.getTypeName());
-				associateNodeWithAstElement(currentNode, created);
+				if (!token.isBoolean()) {
+					created = factory.create(nonTerminal.getTypeName());
+					associateNodeWithAstElement(currentNode, created);
+				}
 			}
 			if (token.getFeature() == null) {
 				if (currentStack.isEmpty())
@@ -159,17 +161,24 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 				final AbstractRule rule = nonTerminal.getGrammarElement() instanceof AbstractRule ?
 						(AbstractRule)nonTerminal.getGrammarElement() :
 						((RuleCall)nonTerminal.getGrammarElement()).getRule();
-				setFeatureValue(token, created, rule);
+				if (!token.isBoolean())
+					setFeatureValue(token, created, rule);
+				else
+					setFeatureValue(token, true, rule);
 			}
 		} else {
 			if (token.getFeature() != null) {
-				final StringBuilder builder = new StringBuilder(token.getLength());
-				final boolean[] wasHidden = new boolean[] {false};
-				getDatatypeValue(currentNode, builder, wasHidden);
 				final AbstractRule rule = nonTerminal.getGrammarElement() instanceof AbstractRule ?
 						(AbstractRule)nonTerminal.getGrammarElement() :
 						((RuleCall)nonTerminal.getGrammarElement()).getRule();
-				setFeatureValue(token, builder.toString(), rule);
+				if (!token.isBoolean()) {
+					final StringBuilder builder = new StringBuilder(token.getLength());
+					final boolean[] wasHidden = new boolean[] {false};
+					getDatatypeValue(currentNode, builder, wasHidden);
+					setFeatureValue(token, builder.toString(), rule);
+				} else {
+					setFeatureValue(token, true, rule);
+				}
 			}
 		}
 		if (currentNode.getParent() != null) {

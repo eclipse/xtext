@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.xtext.crossref.IScope;
-import org.eclipse.xtext.crossref.IScopeProvider;
 import org.eclipse.xtext.util.Function;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.SimpleCache;
@@ -25,14 +24,14 @@ import org.eclipse.xtext.util.Tuples;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- *
  */
-public class DefaultScopeProvider extends AbstractScopeProvider implements IScopeProvider {
+public class DefaultScopeProvider extends AbstractScopeProvider {
 
 	private static final Logger logger = Logger.getLogger(DefaultScopeProvider.class);
 
 	private final EContentAdapter adapter = new EContentAdapter() {
 
+		@Override
 		public void notifyChanged(Notification notification) {
 			if (!notification.isTouch() && !cache.isEmpty()) {
 				Object notifier = notification.getNotifier();

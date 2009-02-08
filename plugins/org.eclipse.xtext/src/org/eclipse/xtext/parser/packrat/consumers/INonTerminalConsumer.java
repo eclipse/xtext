@@ -16,7 +16,7 @@ public interface INonTerminalConsumer {
 
 	void consumeAsRoot(IRootConsumerListener listener);
 	
-	int consume(String feature, boolean isMany, boolean isDatatype, AbstractElement element) throws Exception;
+	int consume(String feature, boolean isMany, boolean isDatatype, boolean isBoolean, AbstractElement element) throws Exception;
 	
 	boolean isDefiningHiddens();
 

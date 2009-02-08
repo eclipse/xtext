@@ -106,8 +106,7 @@ public class EClassifierInfos {
 					"Simple Datatypes (lexer rules or keywords) do not have a common supertype (" + infoA + ", "
 							+ infoB + ")");
 
-		EClassifier compatibleType = EcoreUtil2.getCompatibleType((EClass) infoA.getEClassifier(), (EClass) infoB
-				.getEClassifier());
+		EClassifier compatibleType = EcoreUtil2.getCompatibleType(infoA.getEClassifier(), infoB.getEClassifier());
 		
 		return getInfoOrNull(compatibleType);
 	}
@@ -136,8 +135,8 @@ public class EClassifierInfos {
 		final EClassifierInfo compatibleType = getCompatibleTypeOf(types);
 		if (compatibleType != null)
 			return compatibleType.getEClassifier();
-		else
-			return EcorePackage.Literals.EOBJECT;
+
+		return EcorePackage.Literals.EOBJECT;
 	}
 
 	public List<EClassInfo> getAllEClassInfos() {

@@ -66,9 +66,10 @@ public class NodeUtil {
     	if(compositeNode.getElement() != null) {
     		return compositeNode.getElement();
     	}
-    	WHILE: while (!compositeNode.getChildren().isEmpty()) {
+    	CompositeNode myCompositeNode = compositeNode;
+    	WHILE: while (!myCompositeNode.getChildren().isEmpty()) {
 			boolean foundCompositeChild = false;
-			for (AbstractNode child : compositeNode.getChildren()) {
+			for (AbstractNode child : myCompositeNode.getChildren()) {
 				if (child instanceof CompositeNode) {
 					if (foundCompositeChild) {
 						throw new IllegalStateException(
@@ -79,10 +80,8 @@ public class NodeUtil {
 					if (childComposite.getElement() != null) {
 						return childComposite.getElement();
 					}
-					else {
-						compositeNode = childComposite;
-						continue WHILE;
-					}
+					myCompositeNode = childComposite;
+					continue WHILE;
 				}
 			}
 			return null;
@@ -137,7 +136,7 @@ public class NodeUtil {
 			if (node.getTotalOffset() + node.getTotalLength() >= offset) {
 				if (node.getTotalOffset() <= offset) {
 					if (node instanceof LeafNode)
-						return (LeafNode) node;
+						return node;
 					else if (node instanceof CompositeNode)
 						return findLeafNodeAtOffset((CompositeNode) node, offset);
 				}
@@ -157,7 +156,7 @@ public class NodeUtil {
 		return parentNode;
 	}
 	
-	public static void checkOffsetConsistency(CompositeNode rootNode) {
+	public static void checkOffsetConsistency(final CompositeNode rootNode) {
 		int currentOffset = rootNode.getTotalOffset();
 		for(AbstractNode child:rootNode.getChildren()) {
 			if(child.getTotalOffset() != currentOffset) {
@@ -174,12 +173,13 @@ public class NodeUtil {
 		}
 	}
 
-	public static EObject getNearestSemanticObject(AbstractNode node) {
-		while(node != null) {
-			if(node.getElement()!=null)
-				return node.getElement();
+	public static EObject getNearestSemanticObject(final AbstractNode node) {
+		AbstractNode myNode = node;
+		while(myNode != null) {
+			if(myNode.getElement()!=null)
+				return myNode.getElement();
 			
-			node = (AbstractNode) node.eContainer();
+			myNode = (AbstractNode) myNode.eContainer();
 		}	
 
 		return null;

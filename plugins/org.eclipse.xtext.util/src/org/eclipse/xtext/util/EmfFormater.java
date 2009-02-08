@@ -86,7 +86,7 @@ public class EmfFormater {
 			buf.append(indent).append("}");
 			return;
 		}
-		if (obj instanceof Collection) {
+		if (obj instanceof Collection<?>) {
 			int counter = 0;
 			Collection<?> coll = (Collection<?>) obj;
 			buf.append("[\n");
@@ -119,13 +119,13 @@ public class EmfFormater {
 			getURI(obj, eo, buf);
 			return;
 		}
-		if (o instanceof Collection) {
+		if (o instanceof Collection<?>) {
 			String innerIndent = indent + INDENT;
 			buf.append("[");
 			int counter = 0;
-			Collection coll = (Collection) o;
+			Collection<?> coll = (Collection<?>) o;
 			for (Iterator i = coll.iterator(); i.hasNext();) {
-				Object item = (Object) i.next();
+				Object item = i.next();
 				if (counter == 0)
 					buf.append('\n');
 				buf.append(innerIndent);

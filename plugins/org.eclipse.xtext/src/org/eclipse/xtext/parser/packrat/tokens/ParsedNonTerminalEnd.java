@@ -17,12 +17,14 @@ public class ParsedNonTerminalEnd extends AbstractParsedToken {
 	private final String feature;
 	private final boolean isMany;
 	private final boolean isDatatype;
+	private final boolean isBoolean;
 
-	public ParsedNonTerminalEnd(int offset, String feature, boolean isMany, boolean isDatatype) {
+	public ParsedNonTerminalEnd(int offset, String feature, boolean isMany, boolean isDatatype, boolean isBoolean) {
 		super(offset, 0);
 		this.feature = feature;
 		this.isMany = isMany;
 		this.isDatatype = isDatatype;
+		this.isBoolean = isBoolean;
 	}
 
 	@Override
@@ -40,6 +42,10 @@ public class ParsedNonTerminalEnd extends AbstractParsedToken {
 
 	public boolean isDatatype() {
 		return isDatatype;
+	}
+
+	public boolean isBoolean() {
+		return isBoolean;
 	}
 	
 }

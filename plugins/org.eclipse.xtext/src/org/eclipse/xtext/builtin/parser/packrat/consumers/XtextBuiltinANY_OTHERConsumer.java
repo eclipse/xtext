@@ -23,6 +23,7 @@ public final class XtextBuiltinANY_OTHERConsumer extends AbstractRuleAwareTermin
 		super(configuration);
 	}
 
+	@Override
 	public int doConsume() {
 		return readAnyChar() ? ConsumeResult.SUCCESS : ConsumeResult.EMPTY_MATCH;
 	}

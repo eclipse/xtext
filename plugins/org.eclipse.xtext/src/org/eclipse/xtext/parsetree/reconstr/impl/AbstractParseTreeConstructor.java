@@ -84,6 +84,7 @@ public abstract class AbstractParseTreeConstructor implements
 			return prio;
 		}
 
+		@Override
 		public String toString() {
 			return getPrio() + ": in " + getLocation() + ": " + getMessage();
 		}
@@ -201,9 +202,8 @@ public abstract class AbstractParseTreeConstructor implements
 
 			if (t1 == null)
 				return required ? null : new Solution(current, predecessor);
-			else
-				otherSolution = required ? null : new Solution(current,
-						predecessor);
+			
+			otherSolution = required ? null : new Solution(current,	predecessor);
 			if (many) {
 				AbstractToken t = newInstance(t1.getCurrent(), t1
 						.getPredecessor());
@@ -320,6 +320,7 @@ public abstract class AbstractParseTreeConstructor implements
 			super(curr, pred, many, required);
 		}
 
+		@Override
 		protected boolean activateNextSolution() {
 			if (first) {
 				first = false;
@@ -413,6 +414,7 @@ public abstract class AbstractParseTreeConstructor implements
 			super(curr, pred, many, required);
 		}
 
+		@Override
 		protected Solution createSolution() {
 			return new Solution();
 		}
@@ -460,8 +462,8 @@ public abstract class AbstractParseTreeConstructor implements
 		if (r.isMany()) {
 			int index = ((List<?>) c.eGet(r)).indexOf(obj);
 			return getPath(c) + "/" + r.getName() + "[" + index + "]";
-		} else
-			return getPath(c) + "/" + r.getName();
+		}
+		return getPath(c) + "/" + r.getName();
 	}
 
 	public ITransientValueService getTVService() {

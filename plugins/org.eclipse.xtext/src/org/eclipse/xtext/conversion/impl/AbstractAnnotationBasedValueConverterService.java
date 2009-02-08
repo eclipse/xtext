@@ -44,20 +44,20 @@ public class AbstractAnnotationBasedValueConverterService implements IValueConve
 	private Map<String, IValueConverter<Object>> getConverters() {
 		if (converters==null) {
 			converters = new HashMap<String, IValueConverter<Object>>();
-			internalRegisterForClass(converters, getClass());
+			internalRegisterForClass(getClass());
 		}
 		return converters;
 	}
 	
 	@SuppressWarnings("unchecked")
-	private void internalRegisterForClass(Map<String, IValueConverter<Object>> converters, Class<?> class1) {
-		Method[] methods = class1.getDeclaredMethods();
+	private void internalRegisterForClass(Class<?> clazz) {
+		Method[] methods = clazz.getDeclaredMethods();
 		for (Method method : methods) {
 			if(isConfigurationMethod(method)) {
 				try {
 					String lexerRule = method.getAnnotation(ValueConverter.class).rule();
 					if (converters.containsKey(lexerRule)) {
-						log.info("value converter for lexer rule "+lexerRule+ " in class "+class1.getSimpleName()+" has been overwritten.");
+						log.info("value converter for lexer rule "+lexerRule+ " in class "+clazz.getSimpleName()+" has been overwritten.");
 					}
 					converters.put(lexerRule, (IValueConverter<Object>) method.invoke(this));
 					
@@ -66,8 +66,8 @@ public class AbstractAnnotationBasedValueConverterService implements IValueConve
 				}
 			}
 		}
-		if (class1.getSuperclass()!=null) {
-			internalRegisterForClass(converters, class1.getSuperclass());
+		if (clazz.getSuperclass()!=null) {
+			internalRegisterForClass(clazz.getSuperclass());
 		}
 	}
 	

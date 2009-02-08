@@ -20,6 +20,7 @@ public class LinkingDiagnosticProducer extends AbstractDiagnosticProducer {
 		super(consumer);
 	}
 
+	@Override
 	protected Diagnostic createDiagnostic(String message) {
 		return new XtextLinkingDiagnostic(getNode(), message);
 	}

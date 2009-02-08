@@ -93,8 +93,8 @@ public abstract class EClassifierInfo {
 				// cannot add class as it's own superclass
 				// this usually happens due to a rule call
 				return false;
-			else
-				return eClass.getESuperTypes().add(superEClass);
+
+			return eClass.getESuperTypes().add(superEClass);
 		}
 
 		@Override

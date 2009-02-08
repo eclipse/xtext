@@ -34,8 +34,8 @@ import org.eclipse.xtext.util.Strings;
  */
 public class XtextTransientValueService extends SimpleTransientValueService {
 
-	public boolean isTransient(EObject owner, EStructuralFeature feature,
-			int index) {
+	@Override
+	public boolean isTransient(EObject owner, EStructuralFeature feature, int index) {
 		if (feature == XtextPackage.eINSTANCE.getTypeRef_Metamodel()) {
 			final TypeRef typeRef = (TypeRef) owner;
 			final AbstractMetamodelDeclaration m = typeRef.getMetamodel();

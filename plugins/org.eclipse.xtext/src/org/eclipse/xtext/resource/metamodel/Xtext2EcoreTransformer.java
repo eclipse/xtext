@@ -250,20 +250,16 @@ public class Xtext2EcoreTransformer {
 	}
 
 	private Xtext2ECoreInterpretationContext deriveFeatures(final Xtext2ECoreInterpretationContext context,
-			AbstractElement element) throws TransformationException {
+			AbstractElement element) {
 		XtextSwitch<Xtext2ECoreInterpretationContext> visitor = new XtextSwitch<Xtext2ECoreInterpretationContext>() {
 			@Override
 			public Xtext2ECoreInterpretationContext caseAlternatives(Alternatives object) {
-				try {
-					List<Xtext2ECoreInterpretationContext> contexts = new ArrayList<Xtext2ECoreInterpretationContext>();
-					for (AbstractElement group : object.getGroups()) {
-						contexts.add(deriveFeatures(context, group));
-					}
-					if (!GrammarUtil.isOptionalCardinality(object))
-						return context.mergeSpawnedContexts(contexts);
-				} catch(TransformationException ex) {
-					reportError(ex);
+				List<Xtext2ECoreInterpretationContext> contexts = new ArrayList<Xtext2ECoreInterpretationContext>();
+				for (AbstractElement group : object.getGroups()) {
+					contexts.add(deriveFeatures(context, group));
 				}
+				if (!GrammarUtil.isOptionalCardinality(object))
+					return context.mergeSpawnedContexts(contexts);
 				return context;
 			}
 
@@ -279,13 +275,7 @@ public class Xtext2EcoreTransformer {
 
 			@Override
 			public Xtext2ECoreInterpretationContext caseGroup(Group object) {
-				try {
-					return deriveFeatures(context.spawnContextForGroup(), object.getAbstractTokens());
-				}
-				catch (TransformationException e) {
-					reportError(e);
-					return context;
-				}
+				return deriveFeatures(context.spawnContextForGroup(), object.getAbstractTokens());
 			}
 
 			@Override
@@ -333,11 +323,12 @@ public class Xtext2EcoreTransformer {
 	}
 
 	private Xtext2ECoreInterpretationContext deriveFeatures(Xtext2ECoreInterpretationContext context,
-			EList<AbstractElement> elements) throws TransformationException {
+			EList<AbstractElement> elements) {
+		Xtext2ECoreInterpretationContext result = context;
 		for (AbstractElement element : elements) {
-			context = deriveFeatures(context, element);
+			result = deriveFeatures(result, element);
 		}
-		return context;
+		return result;
 	}
 
 	private void deriveFeatures(ParserRule rule) throws TransformationException {
@@ -445,9 +436,9 @@ public class Xtext2EcoreTransformer {
 					throw new TransformationException(
 							TransformationErrorCode.NoSuchRuleAvailable, "Cannot find rule " + 
 							adapter.getParserNode().serialize().trim(), ruleCall);
-				else
-					throw new TransformationException(
-							TransformationErrorCode.NoSuchRuleAvailable, "Cannot find called rule.", ruleCall);
+
+				throw new TransformationException(
+						TransformationErrorCode.NoSuchRuleAvailable, "Cannot find called rule.", ruleCall);
 			}
 			final TypeRef calledRuleReturnTypeRef = getOrComputeReturnType(calledRule);
 			addSuperType(rule, calledRuleReturnTypeRef, ruleReturnType);
@@ -526,9 +517,7 @@ public class Xtext2EcoreTransformer {
 						throw new TransformationException(TransformationErrorCode.AliasForMetamodelAlreadyExists, "Alias '" + alias
 								+ "' registered more than once.", metamodelDeclaration);
 					}
-					else {
-						generateUs.put(alias, (GeneratedMetamodel) metamodelDeclaration);
-					}
+					generateUs.put(alias, (GeneratedMetamodel) metamodelDeclaration);
 				}
 				else
 					throw new IllegalStateException("unknown metamodelDeclaraton " + metamodelDeclaration);
@@ -649,10 +638,9 @@ public class Xtext2EcoreTransformer {
 			if (!eClassifierInfos.addInfo(typeRef, result))
 				throw new IllegalStateException("cannot add type for typeRef twice: '" + classifierName + "'");
 			return result;
-		} else {
-			typeRef.setType(classifier);
-			return eClassifierInfos.getInfo(classifier);
 		}
+		typeRef.setType(classifier);
+		return eClassifierInfos.getInfo(classifier);
 	}
 
 	private void addGeneratedEPackage(GeneratedMetamodel generatedMetamodel) throws TransformationException {

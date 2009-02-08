@@ -34,7 +34,7 @@ public interface IScope {
 		}
 
 		public IScope getOuterScope() {
-			return (IScope) NULLSCOPE;
+			return NULLSCOPE;
 		}
 
 		public IScopedElement getScopedElement(EObject element) {
