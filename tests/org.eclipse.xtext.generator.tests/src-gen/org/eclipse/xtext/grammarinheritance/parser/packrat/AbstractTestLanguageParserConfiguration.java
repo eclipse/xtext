@@ -5,6 +5,7 @@ package org.eclipse.xtext.grammarinheritance.parser.packrat;
 
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 
@@ -43,7 +44,7 @@ public class AbstractTestLanguageParserConfiguration extends AbstractParserConfi
 	public AbstractTestLanguageInheritedParserRuleConsumer getRootConsumer() {
 		return inheritedParserRuleConsumer;
 	} 
-	
+
 	public void createNonTerminalConsumers() {
 		getXtextBuiltinConfiguration().createNonTerminalConsumers();
 		inheritedParserRuleConsumer = new AbstractTestLanguageInheritedParserRuleConsumer(
@@ -148,4 +149,9 @@ public class AbstractTestLanguageParserConfiguration extends AbstractParserConfi
     }
 
 
+	@Override
+	public ITerminalConsumer[] getInitialHiddenTerminals() {
+		return getXtextBuiltinConfiguration().getInitialHiddenTerminals();
+	}
+	
 }

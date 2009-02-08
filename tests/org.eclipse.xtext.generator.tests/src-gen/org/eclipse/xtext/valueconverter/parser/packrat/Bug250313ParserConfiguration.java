@@ -5,6 +5,7 @@ package org.eclipse.xtext.valueconverter.parser.packrat;
 
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 
@@ -32,7 +33,7 @@ public class Bug250313ParserConfiguration extends AbstractParserConfiguration {
 	public Bug250313Ref2Consumer getRootConsumer() {
 		return ref2Consumer;
 	} 
-	
+
 	public void createNonTerminalConsumers() {
 		getXtextBuiltinConfiguration().createNonTerminalConsumers();
 		ref2Consumer = new Bug250313Ref2Consumer(
@@ -92,4 +93,9 @@ public class Bug250313ParserConfiguration extends AbstractParserConfiguration {
     }
 
 
+	@Override
+	public ITerminalConsumer[] getInitialHiddenTerminals() {
+		return getXtextBuiltinConfiguration().getInitialHiddenTerminals();
+	}
+	
 }

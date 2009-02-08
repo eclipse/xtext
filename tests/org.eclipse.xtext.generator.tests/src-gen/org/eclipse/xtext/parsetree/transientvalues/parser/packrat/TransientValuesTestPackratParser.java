@@ -12,5 +12,5 @@ public class TransientValuesTestPackratParser extends AbstractPackratParser {
 	protected TransientValuesTestParserConfiguration createParserConfiguration(IInternalParserConfiguration configuration) {
 		return new TransientValuesTestParserConfiguration(configuration);
 	}
-
+	
 }

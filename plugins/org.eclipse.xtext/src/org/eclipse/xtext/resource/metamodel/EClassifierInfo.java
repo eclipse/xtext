@@ -172,7 +172,7 @@ public abstract class EClassifierInfo {
 			newFeature.setEType(featureClassifier);
 			newFeature.setLowerBound(0);
 			newFeature.setUpperBound(isMultivalue ? -1 : 1);
-			newFeature.setUnique(!isMultivalue);
+			newFeature.setUnique(!isMultivalue || (isContainment && featureClassifier instanceof EClass));
 			return newFeature;
 		}
 

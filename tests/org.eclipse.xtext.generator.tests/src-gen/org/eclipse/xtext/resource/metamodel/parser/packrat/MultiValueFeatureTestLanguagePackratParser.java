@@ -12,5 +12,5 @@ public class MultiValueFeatureTestLanguagePackratParser extends AbstractPackratP
 	protected MultiValueFeatureTestLanguageParserConfiguration createParserConfiguration(IInternalParserConfiguration configuration) {
 		return new MultiValueFeatureTestLanguageParserConfiguration(configuration);
 	}
-
+	
 }

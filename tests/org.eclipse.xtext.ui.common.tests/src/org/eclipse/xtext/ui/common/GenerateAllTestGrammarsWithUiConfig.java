@@ -22,6 +22,7 @@ import org.eclipse.xtext.GeneratorFacade;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextGrammarTestLanguage;
 import org.eclipse.xtext.XtextStandaloneSetup;
+import org.eclipse.xtext.grammarinheritance.AbstractTestLanguage;
 import org.eclipse.xtext.parser.keywords.KeywordsTestLanguage;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.testlanguages.ContentAssistTestLanguage;
@@ -47,6 +48,7 @@ public class GenerateAllTestGrammarsWithUiConfig {
 	private static Logger logger = Logger.getLogger(GenerateAllTestGrammarsWithUiConfig.class);
 
 	private final static Class<?>[] testClasses = new Class[] { 
+		AbstractTestLanguage.class,
 		ReferenceGrammarTestLanguage.class, 
 		TreeTestLanguage.class,
 		XtextGrammarTestLanguage.class, 

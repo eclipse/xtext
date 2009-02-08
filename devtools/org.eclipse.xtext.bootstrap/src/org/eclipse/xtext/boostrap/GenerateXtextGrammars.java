@@ -26,6 +26,17 @@ import org.eclipse.xtext.resource.XtextResourceSet;
  * 
  */
 public class GenerateXtextGrammars {
+	
+	private static final String[] xtextGrammars = new String[]{
+		"/src/org/eclipse/xtext/builtin/XtextBuiltin.xtext",
+		"/src/org/eclipse/xtext/Xtext.xtext"
+	};
+	
+	private static final String[][] extensions = new String[][] {
+		{},
+		{"xtext", "xtext2"}
+	};
+	
 	private static final String path = "../org.eclipse.xtext";
 	private static final String uiPath = "../org.eclipse.xtext.xtext.ui";
 	private static final Logger logger = Logger.getLogger(GenerateXtextGrammars.class);
@@ -35,21 +46,26 @@ public class GenerateXtextGrammars {
 			EcorePackage.eINSTANCE.eClass();
 			EcorePackage.eINSTANCE.getNsURI();
 			XtextStandaloneSetup.doSetup();
-			String filename = path + "/src/org/eclipse/xtext/Xtext.xtext";
-			logger.info("loading " + filename);
-			XtextStandaloneSetup.doSetup();
-
+			
 			GeneratorFacade.cleanFolder(path + "/src-gen");
 			GeneratorFacade.cleanFolder(uiPath + "/src-gen");
-			ResourceSet rs = new XtextResourceSet();
-			XtextResource resource = (XtextResource) rs.createResource(URI.createURI(filename));
-			resource.load(null);
-			List<SyntaxError> parseErrors = resource.getParseResult().getParseErrors();
-			for (SyntaxError syntaxError : parseErrors) {
-				logger.error(syntaxError.getMessage());
+			
+			for (int i = 0; i < xtextGrammars.length; i++) {
+				String xtextGrammar = xtextGrammars[i];
+				String filename = path + xtextGrammar;
+				logger.info("loading " + filename);
+	
+				
+				ResourceSet rs = new XtextResourceSet();
+				XtextResource resource = (XtextResource) rs.createResource(URI.createURI(filename));
+				resource.load(null);
+				List<SyntaxError> parseErrors = resource.getParseResult().getParseErrors();
+				for (SyntaxError syntaxError : parseErrors) {
+					logger.error(syntaxError.getMessage());
+				}
+				Grammar grammarModel = (Grammar) resource.getContents().iterator().next();
+				GeneratorFacade.generate(grammarModel, path, uiPath, extensions[i]);
 			}
-			Grammar grammarModel = (Grammar) resource.getContents().iterator().next();
-			GeneratorFacade.generate(grammarModel, path, uiPath, "xtext", "xtext2");
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;

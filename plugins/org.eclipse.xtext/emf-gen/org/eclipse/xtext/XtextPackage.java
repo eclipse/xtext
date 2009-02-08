@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextPackage.java,v 1.18 2009/01/19 14:39:52 szarnekow Exp $
+ * $Id: XtextPackage.java,v 1.19 2009/02/08 19:10:20 szarnekow Exp $
  */
 package org.eclipse.xtext;
 
@@ -97,13 +97,31 @@ public interface XtextPackage extends EPackage {
 	int GRAMMAR__SUPER_GRAMMAR_ID_ELEMENTS = 2;
 
 	/**
+	 * The feature id for the '<em><b>Defines Hidden Tokens</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRAMMAR__DEFINES_HIDDEN_TOKENS = 3;
+
+	/**
+	 * The feature id for the '<em><b>Hidden Tokens</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRAMMAR__HIDDEN_TOKENS = 4;
+
+	/**
 	 * The feature id for the '<em><b>Metamodel Declarations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GRAMMAR__METAMODEL_DECLARATIONS = 3;
+	int GRAMMAR__METAMODEL_DECLARATIONS = 5;
 
 	/**
 	 * The feature id for the '<em><b>Rules</b></em>' containment reference list.
@@ -112,7 +130,7 @@ public interface XtextPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GRAMMAR__RULES = 4;
+	int GRAMMAR__RULES = 6;
 
 	/**
 	 * The number of structural features of the '<em>Grammar</em>' class.
@@ -121,7 +139,7 @@ public interface XtextPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GRAMMAR_FEATURE_COUNT = 5;
+	int GRAMMAR_FEATURE_COUNT = 7;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.impl.AbstractRuleImpl <em>Abstract Rule</em>}' class.
@@ -1007,6 +1025,28 @@ public interface XtextPackage extends EPackage {
 	EAttribute getGrammar_SuperGrammarIdElements();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.Grammar#isDefinesHiddenTokens <em>Defines Hidden Tokens</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Defines Hidden Tokens</em>'.
+	 * @see org.eclipse.xtext.Grammar#isDefinesHiddenTokens()
+	 * @see #getGrammar()
+	 * @generated
+	 */
+	EAttribute getGrammar_DefinesHiddenTokens();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.xtext.Grammar#getHiddenTokens <em>Hidden Tokens</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Hidden Tokens</em>'.
+	 * @see org.eclipse.xtext.Grammar#getHiddenTokens()
+	 * @see #getGrammar()
+	 * @generated
+	 */
+	EReference getGrammar_HiddenTokens();
+
+	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.Grammar#getMetamodelDeclarations <em>Metamodel Declarations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1602,6 +1642,22 @@ public interface XtextPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute GRAMMAR__SUPER_GRAMMAR_ID_ELEMENTS = eINSTANCE.getGrammar_SuperGrammarIdElements();
+
+		/**
+		 * The meta object literal for the '<em><b>Defines Hidden Tokens</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute GRAMMAR__DEFINES_HIDDEN_TOKENS = eINSTANCE.getGrammar_DefinesHiddenTokens();
+
+		/**
+		 * The meta object literal for the '<em><b>Hidden Tokens</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference GRAMMAR__HIDDEN_TOKENS = eINSTANCE.getGrammar_HiddenTokens();
 
 		/**
 		 * The meta object literal for the '<em><b>Metamodel Declarations</b></em>' containment reference list feature.

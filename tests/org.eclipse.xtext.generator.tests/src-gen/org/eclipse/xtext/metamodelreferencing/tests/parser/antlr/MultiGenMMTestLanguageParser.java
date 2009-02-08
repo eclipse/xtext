@@ -23,6 +23,7 @@ public class MultiGenMMTestLanguageParser extends org.eclipse.xtext.parser.antlr
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
 		InternalMultiGenMMTestLanguageLexer lexer = new InternalMultiGenMMTestLanguageLexer(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
+		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 		InternalMultiGenMMTestLanguageParser parser = new InternalMultiGenMMTestLanguageParser(
 				stream, getElementFactory(), grammarAccess.getGrammar());
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());

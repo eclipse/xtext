@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: WildcardImpl.java,v 1.1 2009/01/19 14:39:51 szarnekow Exp $
+ * $Id: WildcardImpl.java,v 1.2 2009/02/08 19:10:19 szarnekow Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -95,7 +95,7 @@ public class WildcardImpl extends AbstractElementImpl implements Wildcard {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case XtextPackage.WILDCARD__IS_WILDCARD:
-				return isIsWildcard() ? Boolean.TRUE : Boolean.FALSE;
+				return isIsWildcard();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -109,7 +109,7 @@ public class WildcardImpl extends AbstractElementImpl implements Wildcard {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case XtextPackage.WILDCARD__IS_WILDCARD:
-				setIsWildcard(((Boolean)newValue).booleanValue());
+				setIsWildcard((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

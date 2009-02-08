@@ -23,6 +23,7 @@ public class XtextTerminalsTestLanguageParser extends org.eclipse.xtext.parser.a
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
 		InternalXtextTerminalsTestLanguageLexer lexer = new InternalXtextTerminalsTestLanguageLexer(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
+		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 		InternalXtextTerminalsTestLanguageParser parser = new InternalXtextTerminalsTestLanguageParser(
 				stream, getElementFactory(), grammarAccess.getGrammar());
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());

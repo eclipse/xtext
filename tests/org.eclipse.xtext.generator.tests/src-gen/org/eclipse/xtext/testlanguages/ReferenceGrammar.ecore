@@ -7,17 +7,17 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="beschreibung">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="kinder" unique="false" upperBound="-1" eType="//Kind" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="erzieher" unique="false" upperBound="-1" eType="//Erwachsener" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="spielzeuge" unique="false" upperBound="-1" eType="//Spielzeug" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="familie" unique="false" upperBound="-1" eType="//Familie" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="kinder" upperBound="-1" eType="//Kind" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="erzieher" upperBound="-1" eType="//Erwachsener" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="spielzeuge" upperBound="-1" eType="//Spielzeug" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="familie" upperBound="-1" eType="//Familie" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Person">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="age">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="age">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Kind" eSuperTypes="//Person"/>

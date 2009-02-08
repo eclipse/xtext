@@ -12,5 +12,5 @@ public class ComplexReconstrTestLanguagePackratParser extends AbstractPackratPar
 	protected ComplexReconstrTestLanguageParserConfiguration createParserConfiguration(IInternalParserConfiguration configuration) {
 		return new ComplexReconstrTestLanguageParserConfiguration(configuration);
 	}
-
+	
 }

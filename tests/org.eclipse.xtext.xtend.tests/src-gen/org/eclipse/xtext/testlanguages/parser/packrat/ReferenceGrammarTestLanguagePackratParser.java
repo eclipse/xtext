@@ -12,5 +12,5 @@ public class ReferenceGrammarTestLanguagePackratParser extends AbstractPackratPa
 	protected ReferenceGrammarTestLanguageParserConfiguration createParserConfiguration(IInternalParserConfiguration configuration) {
 		return new ReferenceGrammarTestLanguageParserConfiguration(configuration);
 	}
-
+	
 }

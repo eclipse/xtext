@@ -26,7 +26,7 @@ public class DatatypeRulesTestLanguageParseTreeConstructor extends AbstractParse
 
 /************ begin Rule CompositeModel ****************
  *
- * CompositeModel hidden ( WS , ML_COMMENT , SL_COMMENT ) : ( model += Model ) + ;
+ * CompositeModel : ( model += Model ) + ;
  *
  **/
 

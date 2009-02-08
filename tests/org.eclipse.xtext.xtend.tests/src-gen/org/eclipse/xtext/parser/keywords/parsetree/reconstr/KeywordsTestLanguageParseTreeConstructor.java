@@ -25,7 +25,7 @@ public class KeywordsTestLanguageParseTreeConstructor extends AbstractParseTreeC
 
 /************ begin Rule Model ****************
  *
- * Model hidden ( WS , ML_COMMENT , SL_COMMENT ) : first ?= "foo\\bar" | second ?= "foo\\" | third ?= "\\bar" | forth ?= "\\" ;
+ * Model : first ?= "foo\\bar" | second ?= "foo\\" | third ?= "\\bar" | forth ?= "\\" ;
  *
  **/
 

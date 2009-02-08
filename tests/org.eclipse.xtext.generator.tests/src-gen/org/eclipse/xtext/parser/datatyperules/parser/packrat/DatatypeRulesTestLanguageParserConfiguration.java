@@ -5,6 +5,7 @@ package org.eclipse.xtext.parser.datatyperules.parser.packrat;
 
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 
@@ -44,11 +45,11 @@ public class DatatypeRulesTestLanguageParserConfiguration extends AbstractParser
 	public DatatypeRulesTestLanguageCompositeModelConsumer getRootConsumer() {
 		return compositeModelConsumer;
 	} 
-	
+
 	public void createNonTerminalConsumers() {
 		getXtextBuiltinConfiguration().createNonTerminalConsumers();
 		compositeModelConsumer = new DatatypeRulesTestLanguageCompositeModelConsumer(
-    		this, new ITerminalConsumer[]{ getWsConsumer(), getMlCommentConsumer(), getSlCommentConsumer() }
+    		this, null
     	);
 		modelConsumer = new DatatypeRulesTestLanguageModelConsumer(
     		this, null
@@ -172,4 +173,9 @@ public class DatatypeRulesTestLanguageParserConfiguration extends AbstractParser
     }
 
 
+	@Override
+	public ITerminalConsumer[] getInitialHiddenTerminals() {
+		return getXtextBuiltinConfiguration().getInitialHiddenTerminals();
+	}
+	
 }

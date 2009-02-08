@@ -12,5 +12,5 @@ public class XtextGrammarTestLanguagePackratParser extends AbstractPackratParser
 	protected XtextGrammarTestLanguageParserConfiguration createParserConfiguration(IInternalParserConfiguration configuration) {
 		return new XtextGrammarTestLanguageParserConfiguration(configuration);
 	}
-
+	
 }

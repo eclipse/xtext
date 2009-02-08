@@ -1,6 +1,6 @@
 // when LEXER_BODY has been removed use the following...
-abstract language org.eclipse.xtext.builtin.XtextBuiltIn_Temp
-
+abstract language org.eclipse.xtext.builtin.XtextBuiltin extends NULL hidden(WS, ML_COMMENT, SL_COMMENT)
+											
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 lexer ID  		: "('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*";
@@ -10,9 +10,9 @@ lexer STRING		: "
 			  '\"' ( '\\\\' ('b'|'t'|'n'|'f'|'r'|'\\\"'|'\\''|'\\\\') | ~('\\\\'|'\"') )* '\"' | 
               '\\'' ( '\\\\' ('b'|'t'|'n'|'f'|'r'|'\\\"'|'\\''|'\\\\') | ~('\\\\'|'\\'') )* '\\''
               ";
-lexer ML_COMMENT	: "'/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;}";
-lexer SL_COMMENT 	: "'//' ~('\\n'|'\\r')* '\\r'? '\\n' {$channel=HIDDEN;}";
+lexer ML_COMMENT	: "'/*' ( options {greedy=false;} : . )* '*/'";
+lexer SL_COMMENT 	: "'//' ~('\\n'|'\\r')* ('\\r'? '\\n')?";
 
-lexer WS			: "(' '|'\\t'|'\\r'|'\\n')+ {$channel=HIDDEN;}";
+lexer WS			: "(' '|'\\t'|'\\r'|'\\n')+";
 
 lexer ANY_OTHER 	: ".";

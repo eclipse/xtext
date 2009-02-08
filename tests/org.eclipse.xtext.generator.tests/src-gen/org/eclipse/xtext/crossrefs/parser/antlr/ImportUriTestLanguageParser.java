@@ -23,6 +23,7 @@ public class ImportUriTestLanguageParser extends org.eclipse.xtext.parser.antlr.
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
 		InternalImportUriTestLanguageLexer lexer = new InternalImportUriTestLanguageLexer(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
+		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 		InternalImportUriTestLanguageParser parser = new InternalImportUriTestLanguageParser(
 				stream, getElementFactory(), grammarAccess.getGrammar());
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());

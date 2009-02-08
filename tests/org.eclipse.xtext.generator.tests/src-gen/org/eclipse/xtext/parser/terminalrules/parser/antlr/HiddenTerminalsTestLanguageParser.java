@@ -23,6 +23,7 @@ public class HiddenTerminalsTestLanguageParser extends org.eclipse.xtext.parser.
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
 		InternalHiddenTerminalsTestLanguageLexer lexer = new InternalHiddenTerminalsTestLanguageLexer(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
+		stream.setInitialHiddenTokens();
 		InternalHiddenTerminalsTestLanguageParser parser = new InternalHiddenTerminalsTestLanguageParser(
 				stream, getElementFactory(), grammarAccess.getGrammar());
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());

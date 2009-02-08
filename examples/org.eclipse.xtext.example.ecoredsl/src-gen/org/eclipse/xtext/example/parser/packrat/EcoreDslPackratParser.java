@@ -12,5 +12,5 @@ public class EcoreDslPackratParser extends AbstractPackratParser {
 	protected EcoreDslParserConfiguration createParserConfiguration(IInternalParserConfiguration configuration) {
 		return new EcoreDslParserConfiguration(configuration);
 	}
-
+	
 }

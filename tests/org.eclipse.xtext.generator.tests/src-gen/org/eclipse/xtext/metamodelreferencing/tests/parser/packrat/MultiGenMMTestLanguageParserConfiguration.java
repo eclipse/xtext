@@ -5,6 +5,7 @@ package org.eclipse.xtext.metamodelreferencing.tests.parser.packrat;
 
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 
@@ -34,7 +35,7 @@ public class MultiGenMMTestLanguageParserConfiguration extends AbstractParserCon
 	public MultiGenMMTestLanguageFooConsumer getRootConsumer() {
 		return fooConsumer;
 	} 
-	
+
 	public void createNonTerminalConsumers() {
 		getXtextBuiltinConfiguration().createNonTerminalConsumers();
 		fooConsumer = new MultiGenMMTestLanguageFooConsumer(
@@ -101,4 +102,9 @@ public class MultiGenMMTestLanguageParserConfiguration extends AbstractParserCon
     }
 
 
+	@Override
+	public ITerminalConsumer[] getInitialHiddenTerminals() {
+		return getXtextBuiltinConfiguration().getInitialHiddenTerminals();
+	}
+	
 }

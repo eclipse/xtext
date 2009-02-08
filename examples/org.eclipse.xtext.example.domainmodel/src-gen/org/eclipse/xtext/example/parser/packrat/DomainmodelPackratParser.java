@@ -12,5 +12,5 @@ public class DomainmodelPackratParser extends AbstractPackratParser {
 	protected DomainmodelParserConfiguration createParserConfiguration(IInternalParserConfiguration configuration) {
 		return new DomainmodelParserConfiguration(configuration);
 	}
-
+	
 }

@@ -23,6 +23,7 @@ public class SimpleReconstrTestLanguageParser extends org.eclipse.xtext.parser.a
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
 		InternalSimpleReconstrTestLanguageLexer lexer = new InternalSimpleReconstrTestLanguageLexer(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
+		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 		InternalSimpleReconstrTestLanguageParser parser = new InternalSimpleReconstrTestLanguageParser(
 				stream, getElementFactory(), grammarAccess.getGrammar());
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());

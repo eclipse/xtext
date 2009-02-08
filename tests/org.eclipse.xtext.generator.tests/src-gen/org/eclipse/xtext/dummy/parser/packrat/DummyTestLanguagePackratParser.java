@@ -12,5 +12,5 @@ public class DummyTestLanguagePackratParser extends AbstractPackratParser {
 	protected DummyTestLanguageParserConfiguration createParserConfiguration(IInternalParserConfiguration configuration) {
 		return new DummyTestLanguageParserConfiguration(configuration);
 	}
-
+	
 }

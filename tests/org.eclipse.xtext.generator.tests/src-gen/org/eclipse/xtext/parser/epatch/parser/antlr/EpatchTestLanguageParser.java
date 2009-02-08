@@ -23,6 +23,7 @@ public class EpatchTestLanguageParser extends org.eclipse.xtext.parser.antlr.Abs
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
 		InternalEpatchTestLanguageLexer lexer = new InternalEpatchTestLanguageLexer(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
+		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 		InternalEpatchTestLanguageParser parser = new InternalEpatchTestLanguageParser(
 				stream, getElementFactory(), grammarAccess.getGrammar());
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());

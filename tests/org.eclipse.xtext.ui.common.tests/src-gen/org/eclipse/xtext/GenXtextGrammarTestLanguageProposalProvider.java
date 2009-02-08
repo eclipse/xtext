@@ -21,7 +21,7 @@ import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
  */
 public class GenXtextGrammarTestLanguageProposalProvider extends AbstractJavaProposalProvider {
 	// constants
-	private static final String UI_PLUGIN_ID  = "";
+	private static final String UI_PLUGIN_ID  = ".";
 	
 	
 			
@@ -51,6 +51,25 @@ public class GenXtextGrammarTestLanguageProposalProvider extends AbstractJavaPro
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
 		return Collections.singletonList(createCompletionProposal(assignment, "Grammar_SuperGrammarIdElements", contentAssistContext));
+	}
+			
+			
+	public List<? extends ICompletionProposal> completeGrammar_DefinesHiddenTokens(Assignment assignment, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeGrammar_DefinesHiddenTokens feature '" + assignment.getFeature() + "' terminal '"
+					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
+					+ contentAssistContext.getMatchString().trim() + "'");
+		}
+		return Collections.emptyList();
+	}
+			
+	public List<? extends ICompletionProposal> completeGrammar_HiddenTokens(Assignment assignment, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeGrammar_HiddenTokens feature '" + assignment.getFeature() + "' terminal '"
+					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
+					+ contentAssistContext.getMatchString().trim() + "'");
+		}
+		return lookupCrossReference(((CrossReference)assignment.getTerminal()), contentAssistContext);
 	}
 			
 			

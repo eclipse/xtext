@@ -12,5 +12,5 @@ public class ImportUriTestLanguagePackratParser extends AbstractPackratParser {
 	protected ImportUriTestLanguageParserConfiguration createParserConfiguration(IInternalParserConfiguration configuration) {
 		return new ImportUriTestLanguageParserConfiguration(configuration);
 	}
-
+	
 }

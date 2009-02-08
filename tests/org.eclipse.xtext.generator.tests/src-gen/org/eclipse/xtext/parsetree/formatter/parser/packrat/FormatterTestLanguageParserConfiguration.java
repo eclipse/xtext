@@ -5,6 +5,7 @@ package org.eclipse.xtext.parsetree.formatter.parser.packrat;
 
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 
@@ -38,7 +39,7 @@ public class FormatterTestLanguageParserConfiguration extends AbstractParserConf
 	public FormatterTestLanguageRootConsumer getRootConsumer() {
 		return rootConsumer;
 	} 
-	
+
 	public void createNonTerminalConsumers() {
 		getXtextBuiltinConfiguration().createNonTerminalConsumers();
 		rootConsumer = new FormatterTestLanguageRootConsumer(
@@ -130,4 +131,9 @@ public class FormatterTestLanguageParserConfiguration extends AbstractParserConf
     }
 
 
+	@Override
+	public ITerminalConsumer[] getInitialHiddenTerminals() {
+		return getXtextBuiltinConfiguration().getInitialHiddenTerminals();
+	}
+	
 }

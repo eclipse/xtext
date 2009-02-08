@@ -23,6 +23,7 @@ public class XtextParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrPar
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
 		InternalXtextLexer lexer = new InternalXtextLexer(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
+		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 		InternalXtextParser parser = new InternalXtextParser(
 				stream, getElementFactory(), grammarAccess.getGrammar());
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());

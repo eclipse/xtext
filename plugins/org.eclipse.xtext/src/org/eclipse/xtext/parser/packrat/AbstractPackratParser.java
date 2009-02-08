@@ -89,7 +89,7 @@ public abstract class AbstractPackratParser extends AbstractParser<CharSequence>
 	
 	private CharSequence input;
 	
-	private ITerminalConsumer[] hiddens = EMPTY_HIDDENS;
+	private ITerminalConsumer[] hiddens;
 	
 	private int offset;
 	
@@ -112,6 +112,9 @@ public abstract class AbstractPackratParser extends AbstractParser<CharSequence>
 		parserConfiguration = createParserConfiguration();
 		keywordConsumer = createKeywordConsumer();
 		markerBuffer = new Marker[MARKER_BUFFER_SIZE];
+		hiddens = parserConfiguration.getInitialHiddenTerminals();
+		for(ITerminalConsumer hidden: this.hiddens)
+			hidden.setHidden(true);
 	}
 	
 	private IParserConfiguration createParserConfiguration() {

@@ -9,13 +9,10 @@
   <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="KeywordsTestLanguage">
     <ePackage href="http://www.eclipse.org/2009/tmf/xtext/KeywordsTestLanguage#/"/>
   </metamodelDeclarations>
-  <rules xsi:type="xtext:ParserRule" name="Model" definesHiddenTokens="true">
+  <rules xsi:type="xtext:ParserRule" name="Model">
     <type metamodel="//@metamodelDeclarations.0">
       <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/KeywordsTestLanguage#//Model"/>
     </type>
-    <hiddenTokens href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.5"/>
-    <hiddenTokens href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.3"/>
-    <hiddenTokens href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.4"/>
     <alternatives xsi:type="xtext:Alternatives">
       <groups xsi:type="xtext:Alternatives">
         <groups xsi:type="xtext:Alternatives">

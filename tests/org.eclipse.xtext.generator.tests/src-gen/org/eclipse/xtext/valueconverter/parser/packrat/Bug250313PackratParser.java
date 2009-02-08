@@ -12,5 +12,5 @@ public class Bug250313PackratParser extends AbstractPackratParser {
 	protected Bug250313ParserConfiguration createParserConfiguration(IInternalParserConfiguration configuration) {
 		return new Bug250313ParserConfiguration(configuration);
 	}
-
+	
 }

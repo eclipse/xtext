@@ -12,5 +12,5 @@ public class XtextPackratParser extends AbstractPackratParser {
 	protected XtextParserConfiguration createParserConfiguration(IInternalParserConfiguration configuration) {
 		return new XtextParserConfiguration(configuration);
 	}
-
+	
 }

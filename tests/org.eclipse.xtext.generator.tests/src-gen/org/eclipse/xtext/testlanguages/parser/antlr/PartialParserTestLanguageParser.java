@@ -23,6 +23,7 @@ public class PartialParserTestLanguageParser extends org.eclipse.xtext.parser.an
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
 		InternalPartialParserTestLanguageLexer lexer = new InternalPartialParserTestLanguageLexer(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
+		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 		InternalPartialParserTestLanguageParser parser = new InternalPartialParserTestLanguageParser(
 				stream, getElementFactory(), grammarAccess.getGrammar());
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());

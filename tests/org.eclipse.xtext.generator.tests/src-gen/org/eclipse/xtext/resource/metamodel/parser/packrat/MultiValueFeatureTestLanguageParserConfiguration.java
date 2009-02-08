@@ -5,6 +5,7 @@ package org.eclipse.xtext.resource.metamodel.parser.packrat;
 
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 
@@ -32,7 +33,7 @@ public class MultiValueFeatureTestLanguageParserConfiguration extends AbstractPa
 	public MultiValueFeatureTestLanguageStartConsumer getRootConsumer() {
 		return startConsumer;
 	} 
-	
+
 	public void createNonTerminalConsumers() {
 		getXtextBuiltinConfiguration().createNonTerminalConsumers();
 		startConsumer = new MultiValueFeatureTestLanguageStartConsumer(
@@ -88,4 +89,9 @@ public class MultiValueFeatureTestLanguageParserConfiguration extends AbstractPa
     }
 
 
+	@Override
+	public ITerminalConsumer[] getInitialHiddenTerminals() {
+		return getXtextBuiltinConfiguration().getInitialHiddenTerminals();
+	}
+	
 }

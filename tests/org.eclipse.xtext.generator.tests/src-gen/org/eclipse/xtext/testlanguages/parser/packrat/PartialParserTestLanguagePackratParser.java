@@ -12,5 +12,5 @@ public class PartialParserTestLanguagePackratParser extends AbstractPackratParse
 	protected PartialParserTestLanguageParserConfiguration createParserConfiguration(IInternalParserConfiguration configuration) {
 		return new PartialParserTestLanguageParserConfiguration(configuration);
 	}
-
+	
 }

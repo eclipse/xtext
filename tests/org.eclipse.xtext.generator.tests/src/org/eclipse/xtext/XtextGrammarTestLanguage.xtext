@@ -10,8 +10,9 @@ language org.eclipse.xtext.XtextGrammarTestLanguage
 generate XtextTest "http://www.eclipse.org/2008/Test/XtextTest"
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
-Grammar hidden(WS, ML_COMMENT, SL_COMMENT):
+Grammar:
     (abstract?='abstract language' | 'language') idElements+=ID ('.' idElements+=ID)* ('extends' superGrammarIdElements+=ID ('.' superGrammarIdElements+=ID)*)?
+	(definesHiddenTokens?='hidden' '(' (hiddenTokens+=[AbstractRule] (',' hiddenTokens+=[AbstractRule])*)? ')')?
 	metamodelDeclarations+=AbstractMetamodelDeclaration* 
     (rules+=AbstractRule)+
 ;
@@ -37,7 +38,7 @@ LexerRule :
 ;
 
 ParserRule :
-    name=ID ('returns' type=TypeRef)? (definesHiddenTokens?='hidden' '(' hiddenTokens+=[AbstractRule] (',' hiddenTokens+=[AbstractRule]) ')')?':' 
+    name=ID ('returns' type=TypeRef)? (definesHiddenTokens?='hidden' '(' (hiddenTokens+=[AbstractRule] (',' hiddenTokens+=[AbstractRule])*)? ')')?':' 
     	alternatives=Alternatives   
     ';'
 ;
@@ -131,4 +132,3 @@ Keyword :
 RuleCall :
    rule=[AbstractRule]
 ;
-   

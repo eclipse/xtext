@@ -4,9 +4,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="imports" unique="false" upperBound="-1" eType="//Import" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="resources" unique="false" upperBound="-1" eType="//NamedResource" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="objects" unique="false" upperBound="-1" eType="//ObjectRef" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1" eType="//Import" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="resources" upperBound="-1" eType="//NamedResource" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="objects" upperBound="-1" eType="//ObjectRef" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Import"/>
   <eClassifiers xsi:type="ecore:EClass" name="ModelImport" eSuperTypes="//Import">
@@ -48,10 +48,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="rightRoot" eType="//CreatedObject" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NamedObject">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="assignments" unique="false" upperBound="-1" eType="//Assignment" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="assignments" upperBound="-1" eType="//Assignment" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="leftMig" eType="//Migration" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ObjectRef" eSuperTypes="//NamedObject">
@@ -75,8 +75,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="rightValue" eType="//AssignmentValue" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ListAssignment" eSuperTypes="//Assignment">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="leftValues" unique="false" upperBound="-1" eType="//AssignmentValue" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="rightValues" unique="false" upperBound="-1" eType="//AssignmentValue" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftValues" upperBound="-1" eType="//AssignmentValue" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightValues" upperBound="-1" eType="//AssignmentValue" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AssignmentValue">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value">

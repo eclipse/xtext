@@ -53,12 +53,12 @@ public class XtextParseTreeConstructor extends AbstractParseTreeConstructor {
 
 /************ begin Rule Grammar ****************
  *
- * Grammar hidden ( WS , ML_COMMENT , SL_COMMENT ) : ( abstract ?= "abstract language" | "language" ) idElements += ID ( "." idElements += ID ) * ( "extends" superGrammarIdElements += ID ( "." superGrammarIdElements += ID ) * ) ? ( metamodelDeclarations += AbstractMetamodelDeclaration ) * ( rules += AbstractRule ) + ;
+ * Grammar : ( abstract ?= "abstract language" | "language" ) idElements += ID ( "." idElements += ID ) * ( "extends" superGrammarIdElements += ID ( "." superGrammarIdElements += ID ) * ) ? ( definesHiddenTokens ?= "hidden" "(" ( hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ) ? ")" ) ? ( metamodelDeclarations += AbstractMetamodelDeclaration ) * ( rules += AbstractRule ) + ;
  *
  **/
 
 
-// ( abstract ?= "abstract language" | "language" ) idElements += ID ( "." idElements += ID ) * ( "extends" superGrammarIdElements += ID ( "." superGrammarIdElements += ID ) * ) ? ( metamodelDeclarations += AbstractMetamodelDeclaration ) * ( rules += AbstractRule ) +
+// ( abstract ?= "abstract language" | "language" ) idElements += ID ( "." idElements += ID ) * ( "extends" superGrammarIdElements += ID ( "." superGrammarIdElements += ID ) * ) ? ( definesHiddenTokens ?= "hidden" "(" ( hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ) ? ")" ) ? ( metamodelDeclarations += AbstractMetamodelDeclaration ) * ( rules += AbstractRule ) +
 protected class Grammar_Group extends GroupToken {
 	
 	public Grammar_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -86,7 +86,7 @@ protected class Grammar_Group extends GroupToken {
 	}
 }
 
-// ( abstract ?= "abstract language" | "language" ) idElements += ID ( "." idElements += ID ) * ( "extends" superGrammarIdElements += ID ( "." superGrammarIdElements += ID ) * ) ? ( metamodelDeclarations += AbstractMetamodelDeclaration ) *
+// ( abstract ?= "abstract language" | "language" ) idElements += ID ( "." idElements += ID ) * ( "extends" superGrammarIdElements += ID ( "." superGrammarIdElements += ID ) * ) ? ( definesHiddenTokens ?= "hidden" "(" ( hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ) ? ")" ) ? ( metamodelDeclarations += AbstractMetamodelDeclaration ) *
 protected class Grammar_0_Group extends GroupToken {
 	
 	public Grammar_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -114,7 +114,7 @@ protected class Grammar_0_Group extends GroupToken {
 	}
 }
 
-// ( abstract ?= "abstract language" | "language" ) idElements += ID ( "." idElements += ID ) * ( "extends" superGrammarIdElements += ID ( "." superGrammarIdElements += ID ) * ) ?
+// ( abstract ?= "abstract language" | "language" ) idElements += ID ( "." idElements += ID ) * ( "extends" superGrammarIdElements += ID ( "." superGrammarIdElements += ID ) * ) ? ( definesHiddenTokens ?= "hidden" "(" ( hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ) ? ")" ) ?
 protected class Grammar_0_0_Group extends GroupToken {
 	
 	public Grammar_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -142,7 +142,7 @@ protected class Grammar_0_0_Group extends GroupToken {
 	}
 }
 
-// ( abstract ?= "abstract language" | "language" ) idElements += ID ( "." idElements += ID ) *
+// ( abstract ?= "abstract language" | "language" ) idElements += ID ( "." idElements += ID ) * ( "extends" superGrammarIdElements += ID ( "." superGrammarIdElements += ID ) * ) ?
 protected class Grammar_0_0_0_Group extends GroupToken {
 	
 	public Grammar_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -170,7 +170,7 @@ protected class Grammar_0_0_0_Group extends GroupToken {
 	}
 }
 
-// ( abstract ?= "abstract language" | "language" ) idElements += ID
+// ( abstract ?= "abstract language" | "language" ) idElements += ID ( "." idElements += ID ) *
 protected class Grammar_0_0_0_0_Group extends GroupToken {
 	
 	public Grammar_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -182,9 +182,37 @@ protected class Grammar_0_0_0_0_Group extends GroupToken {
 	}
 		
 	protected Solution createSolution() {	
-		Solution s1 = new Grammar_0_0_0_0_1_Assignment_idElements(current, this).firstSolution();
+		Solution s1 = new Grammar_0_0_0_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
-			Solution s2 = new Grammar_0_0_0_0_0_Alternatives(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			Solution s2 = new Grammar_0_0_0_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 == null) {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
+				if(s1 == null) return null;
+			} else {
+				last = s2.getPredecessor();
+				return s2;
+			}
+		}
+		return null;
+		
+	}
+}
+
+// ( abstract ?= "abstract language" | "language" ) idElements += ID
+protected class Grammar_0_0_0_0_0_Group extends GroupToken {
+	
+	public Grammar_0_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Group getGrammarElement() {
+		return XtextGrammarAccess.INSTANCE.prGrammar().ele00000Group();
+	}
+		
+	protected Solution createSolution() {	
+		Solution s1 = new Grammar_0_0_0_0_0_1_Assignment_idElements(current, this).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new Grammar_0_0_0_0_0_0_Alternatives(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
 				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
@@ -199,18 +227,18 @@ protected class Grammar_0_0_0_0_Group extends GroupToken {
 }
 
 // abstract ?= "abstract language" | "language"
-protected class Grammar_0_0_0_0_0_Alternatives extends AlternativesToken {
+protected class Grammar_0_0_0_0_0_0_Alternatives extends AlternativesToken {
 
-	public Grammar_0_0_0_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
+	public Grammar_0_0_0_0_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public Alternatives getGrammarElement() {
-		return XtextGrammarAccess.INSTANCE.prGrammar().ele00000Alternatives();
+		return XtextGrammarAccess.INSTANCE.prGrammar().ele000000Alternatives();
 	}
 	
 	protected Solution createSolution() {
-		AbstractToken t = (first) ? new Grammar_0_0_0_0_0_1_Keyword_language(current, this) : new Grammar_0_0_0_0_0_0_Assignment_abstract(current, this);
+		AbstractToken t = (first) ? new Grammar_0_0_0_0_0_0_1_Keyword_language(current, this) : new Grammar_0_0_0_0_0_0_0_Assignment_abstract(current, this);
 		Solution s = t.firstSolution();
 		if(s == null && activateNextSolution()) s = createSolution();
 		if(s == null) return null;
@@ -220,14 +248,14 @@ protected class Grammar_0_0_0_0_0_Alternatives extends AlternativesToken {
 }
 
 // abstract ?= "abstract language"
-protected class Grammar_0_0_0_0_0_0_Assignment_abstract extends AssignmentToken  {
+protected class Grammar_0_0_0_0_0_0_0_Assignment_abstract extends AssignmentToken  {
 	
-	public Grammar_0_0_0_0_0_0_Assignment_abstract(IInstanceDescription curr, AbstractToken pred) {
+	public Grammar_0_0_0_0_0_0_0_Assignment_abstract(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public Assignment getGrammarElement() {
-		return XtextGrammarAccess.INSTANCE.prGrammar().ele000000AssignmentAbstract();
+		return XtextGrammarAccess.INSTANCE.prGrammar().ele0000000AssignmentAbstract();
 	}
 	
 	protected Solution createSolution() {
@@ -236,7 +264,7 @@ protected class Grammar_0_0_0_0_0_0_Assignment_abstract extends AssignmentToken 
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = XtextGrammarAccess.INSTANCE.prGrammar().ele0000000KeywordAbstractLanguage();
+			element = XtextGrammarAccess.INSTANCE.prGrammar().ele00000000KeywordAbstractLanguage();
 			return new Solution(obj);
 		}
 
@@ -245,27 +273,27 @@ protected class Grammar_0_0_0_0_0_0_Assignment_abstract extends AssignmentToken 
 }
 
 // "language"
-protected class Grammar_0_0_0_0_0_1_Keyword_language extends KeywordToken  {
+protected class Grammar_0_0_0_0_0_0_1_Keyword_language extends KeywordToken  {
 	
-	public Grammar_0_0_0_0_0_1_Keyword_language(IInstanceDescription curr, AbstractToken pred) {
+	public Grammar_0_0_0_0_0_0_1_Keyword_language(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public Keyword getGrammarElement() {
-		return XtextGrammarAccess.INSTANCE.prGrammar().ele000001KeywordLanguage();
+		return XtextGrammarAccess.INSTANCE.prGrammar().ele0000001KeywordLanguage();
 	}	
 }
 
 
 // idElements += ID
-protected class Grammar_0_0_0_0_1_Assignment_idElements extends AssignmentToken  {
+protected class Grammar_0_0_0_0_0_1_Assignment_idElements extends AssignmentToken  {
 	
-	public Grammar_0_0_0_0_1_Assignment_idElements(IInstanceDescription curr, AbstractToken pred) {
+	public Grammar_0_0_0_0_0_1_Assignment_idElements(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public Assignment getGrammarElement() {
-		return XtextGrammarAccess.INSTANCE.prGrammar().ele00001AssignmentIdElements();
+		return XtextGrammarAccess.INSTANCE.prGrammar().ele000001AssignmentIdElements();
 	}
 	
 	protected Solution createSolution() {
@@ -273,7 +301,7 @@ protected class Grammar_0_0_0_0_1_Assignment_idElements extends AssignmentToken 
 		IInstanceDescription obj = current.cloneAndConsume("idElements");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = XtextGrammarAccess.INSTANCE.prGrammar().ele000010LexerRuleCallID();
+			element = XtextGrammarAccess.INSTANCE.prGrammar().ele0000010LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -282,20 +310,20 @@ protected class Grammar_0_0_0_0_1_Assignment_idElements extends AssignmentToken 
 
 
 // ( "." idElements += ID ) *
-protected class Grammar_0_0_0_1_Group extends GroupToken {
+protected class Grammar_0_0_0_0_1_Group extends GroupToken {
 	
-	public Grammar_0_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
+	public Grammar_0_0_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 	
 	public Group getGrammarElement() {
-		return XtextGrammarAccess.INSTANCE.prGrammar().ele0001Group();
+		return XtextGrammarAccess.INSTANCE.prGrammar().ele00001Group();
 	}
 		
 	protected Solution createSolution() {	
-		Solution s1 = new Grammar_0_0_0_1_1_Assignment_idElements(current, this).firstSolution();
+		Solution s1 = new Grammar_0_0_0_0_1_1_Assignment_idElements(current, this).firstSolution();
 		while(s1 != null) {
-			Solution s2 = new Grammar_0_0_0_1_0_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			Solution s2 = new Grammar_0_0_0_0_1_0_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
 				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
@@ -310,26 +338,26 @@ protected class Grammar_0_0_0_1_Group extends GroupToken {
 }
 
 // "."
-protected class Grammar_0_0_0_1_0_Keyword extends KeywordToken  {
+protected class Grammar_0_0_0_0_1_0_Keyword extends KeywordToken  {
 	
-	public Grammar_0_0_0_1_0_Keyword(IInstanceDescription curr, AbstractToken pred) {
+	public Grammar_0_0_0_0_1_0_Keyword(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public Keyword getGrammarElement() {
-		return XtextGrammarAccess.INSTANCE.prGrammar().ele00010KeywordFullStop();
+		return XtextGrammarAccess.INSTANCE.prGrammar().ele000010KeywordFullStop();
 	}	
 }
 
 // idElements += ID
-protected class Grammar_0_0_0_1_1_Assignment_idElements extends AssignmentToken  {
+protected class Grammar_0_0_0_0_1_1_Assignment_idElements extends AssignmentToken  {
 	
-	public Grammar_0_0_0_1_1_Assignment_idElements(IInstanceDescription curr, AbstractToken pred) {
+	public Grammar_0_0_0_0_1_1_Assignment_idElements(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public Assignment getGrammarElement() {
-		return XtextGrammarAccess.INSTANCE.prGrammar().ele00011AssignmentIdElements();
+		return XtextGrammarAccess.INSTANCE.prGrammar().ele000011AssignmentIdElements();
 	}
 	
 	protected Solution createSolution() {
@@ -337,7 +365,7 @@ protected class Grammar_0_0_0_1_1_Assignment_idElements extends AssignmentToken 
 		IInstanceDescription obj = current.cloneAndConsume("idElements");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = XtextGrammarAccess.INSTANCE.prGrammar().ele000110LexerRuleCallID();
+			element = XtextGrammarAccess.INSTANCE.prGrammar().ele0000110LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -347,6 +375,164 @@ protected class Grammar_0_0_0_1_1_Assignment_idElements extends AssignmentToken 
 
 
 // ( "extends" superGrammarIdElements += ID ( "." superGrammarIdElements += ID ) * ) ?
+protected class Grammar_0_0_0_1_Group extends GroupToken {
+	
+	public Grammar_0_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, !IS_REQUIRED);
+	}
+	
+	public Group getGrammarElement() {
+		return XtextGrammarAccess.INSTANCE.prGrammar().ele0001Group();
+	}
+		
+	protected Solution createSolution() {	
+		Solution s1 = new Grammar_0_0_0_1_1_Group(current, this).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new Grammar_0_0_0_1_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 == null) {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
+				if(s1 == null) return null;
+			} else {
+				last = s2.getPredecessor();
+				return s2;
+			}
+		}
+		return null;
+		
+	}
+}
+
+// "extends" superGrammarIdElements += ID
+protected class Grammar_0_0_0_1_0_Group extends GroupToken {
+	
+	public Grammar_0_0_0_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Group getGrammarElement() {
+		return XtextGrammarAccess.INSTANCE.prGrammar().ele00010Group();
+	}
+		
+	protected Solution createSolution() {	
+		Solution s1 = new Grammar_0_0_0_1_0_1_Assignment_superGrammarIdElements(current, this).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new Grammar_0_0_0_1_0_0_Keyword_extends(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 == null) {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
+				if(s1 == null) return null;
+			} else {
+				last = s2.getPredecessor();
+				return s2;
+			}
+		}
+		return null;
+		
+	}
+}
+
+// "extends"
+protected class Grammar_0_0_0_1_0_0_Keyword_extends extends KeywordToken  {
+	
+	public Grammar_0_0_0_1_0_0_Keyword_extends(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Keyword getGrammarElement() {
+		return XtextGrammarAccess.INSTANCE.prGrammar().ele000100KeywordExtends();
+	}	
+}
+
+// superGrammarIdElements += ID
+protected class Grammar_0_0_0_1_0_1_Assignment_superGrammarIdElements extends AssignmentToken  {
+	
+	public Grammar_0_0_0_1_0_1_Assignment_superGrammarIdElements(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Assignment getGrammarElement() {
+		return XtextGrammarAccess.INSTANCE.prGrammar().ele000101AssignmentSuperGrammarIdElements();
+	}
+	
+	protected Solution createSolution() {
+		if((value = current.getConsumable("superGrammarIdElements",IS_REQUIRED)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("superGrammarIdElements");
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = XtextGrammarAccess.INSTANCE.prGrammar().ele0001010LexerRuleCallID();
+			return new Solution(obj);
+		}
+		return null;
+	}
+}
+
+
+// ( "." superGrammarIdElements += ID ) *
+protected class Grammar_0_0_0_1_1_Group extends GroupToken {
+	
+	public Grammar_0_0_0_1_1_Group(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, IS_MANY, !IS_REQUIRED);
+	}
+	
+	public Group getGrammarElement() {
+		return XtextGrammarAccess.INSTANCE.prGrammar().ele00011Group();
+	}
+		
+	protected Solution createSolution() {	
+		Solution s1 = new Grammar_0_0_0_1_1_1_Assignment_superGrammarIdElements(current, this).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new Grammar_0_0_0_1_1_0_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 == null) {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
+				if(s1 == null) return null;
+			} else {
+				last = s2.getPredecessor();
+				return s2;
+			}
+		}
+		return null;
+		
+	}
+}
+
+// "."
+protected class Grammar_0_0_0_1_1_0_Keyword extends KeywordToken  {
+	
+	public Grammar_0_0_0_1_1_0_Keyword(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Keyword getGrammarElement() {
+		return XtextGrammarAccess.INSTANCE.prGrammar().ele000110KeywordFullStop();
+	}	
+}
+
+// superGrammarIdElements += ID
+protected class Grammar_0_0_0_1_1_1_Assignment_superGrammarIdElements extends AssignmentToken  {
+	
+	public Grammar_0_0_0_1_1_1_Assignment_superGrammarIdElements(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Assignment getGrammarElement() {
+		return XtextGrammarAccess.INSTANCE.prGrammar().ele000111AssignmentSuperGrammarIdElements();
+	}
+	
+	protected Solution createSolution() {
+		if((value = current.getConsumable("superGrammarIdElements",!IS_REQUIRED)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("superGrammarIdElements");
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = XtextGrammarAccess.INSTANCE.prGrammar().ele0001110LexerRuleCallID();
+			return new Solution(obj);
+		}
+		return null;
+	}
+}
+
+
+
+
+// ( definesHiddenTokens ?= "hidden" "(" ( hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ) ? ")" ) ?
 protected class Grammar_0_0_1_Group extends GroupToken {
 	
 	public Grammar_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -358,7 +544,7 @@ protected class Grammar_0_0_1_Group extends GroupToken {
 	}
 		
 	protected Solution createSolution() {	
-		Solution s1 = new Grammar_0_0_1_1_Group(current, this).firstSolution();
+		Solution s1 = new Grammar_0_0_1_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new Grammar_0_0_1_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
@@ -374,7 +560,7 @@ protected class Grammar_0_0_1_Group extends GroupToken {
 	}
 }
 
-// "extends" superGrammarIdElements += ID
+// definesHiddenTokens ?= "hidden" "(" ( hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ) ?
 protected class Grammar_0_0_1_0_Group extends GroupToken {
 	
 	public Grammar_0_0_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -386,9 +572,9 @@ protected class Grammar_0_0_1_0_Group extends GroupToken {
 	}
 		
 	protected Solution createSolution() {	
-		Solution s1 = new Grammar_0_0_1_0_1_Assignment_superGrammarIdElements(current, this).firstSolution();
+		Solution s1 = new Grammar_0_0_1_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
-			Solution s2 = new Grammar_0_0_1_0_0_Keyword_extends(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			Solution s2 = new Grammar_0_0_1_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
 				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
@@ -402,57 +588,141 @@ protected class Grammar_0_0_1_0_Group extends GroupToken {
 	}
 }
 
-// "extends"
-protected class Grammar_0_0_1_0_0_Keyword_extends extends KeywordToken  {
+// definesHiddenTokens ?= "hidden" "("
+protected class Grammar_0_0_1_0_0_Group extends GroupToken {
 	
-	public Grammar_0_0_1_0_0_Keyword_extends(IInstanceDescription curr, AbstractToken pred) {
+	public Grammar_0_0_1_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
-	public Keyword getGrammarElement() {
-		return XtextGrammarAccess.INSTANCE.prGrammar().ele00100KeywordExtends();
-	}	
+	public Group getGrammarElement() {
+		return XtextGrammarAccess.INSTANCE.prGrammar().ele00100Group();
+	}
+		
+	protected Solution createSolution() {	
+		Solution s1 = new Grammar_0_0_1_0_0_1_Keyword(current, this).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new Grammar_0_0_1_0_0_0_Assignment_definesHiddenTokens(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 == null) {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
+				if(s1 == null) return null;
+			} else {
+				last = s2.getPredecessor();
+				return s2;
+			}
+		}
+		return null;
+		
+	}
 }
 
-// superGrammarIdElements += ID
-protected class Grammar_0_0_1_0_1_Assignment_superGrammarIdElements extends AssignmentToken  {
+// definesHiddenTokens ?= "hidden"
+protected class Grammar_0_0_1_0_0_0_Assignment_definesHiddenTokens extends AssignmentToken  {
 	
-	public Grammar_0_0_1_0_1_Assignment_superGrammarIdElements(IInstanceDescription curr, AbstractToken pred) {
+	public Grammar_0_0_1_0_0_0_Assignment_definesHiddenTokens(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public Assignment getGrammarElement() {
-		return XtextGrammarAccess.INSTANCE.prGrammar().ele00101AssignmentSuperGrammarIdElements();
+		return XtextGrammarAccess.INSTANCE.prGrammar().ele001000AssignmentDefinesHiddenTokens();
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("superGrammarIdElements",IS_REQUIRED)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("superGrammarIdElements");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
-			type = AssignmentType.LRC;
-			element = XtextGrammarAccess.INSTANCE.prGrammar().ele001010LexerRuleCallID();
+		if((value = current.getConsumable("definesHiddenTokens",IS_REQUIRED)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("definesHiddenTokens");
+
+		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
+			type = AssignmentType.KW;
+			element = XtextGrammarAccess.INSTANCE.prGrammar().ele0010000KeywordHidden();
 			return new Solution(obj);
+		}
+
+		return null;
+	}
+}
+
+// "("
+protected class Grammar_0_0_1_0_0_1_Keyword extends KeywordToken  {
+	
+	public Grammar_0_0_1_0_0_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Keyword getGrammarElement() {
+		return XtextGrammarAccess.INSTANCE.prGrammar().ele001001KeywordLeftParenthesis();
+	}	
+}
+
+
+// ( hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ) ?
+protected class Grammar_0_0_1_0_1_Group extends GroupToken {
+	
+	public Grammar_0_0_1_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, !IS_REQUIRED);
+	}
+	
+	public Group getGrammarElement() {
+		return XtextGrammarAccess.INSTANCE.prGrammar().ele00101Group();
+	}
+		
+	protected Solution createSolution() {	
+		Solution s1 = new Grammar_0_0_1_0_1_1_Group(current, this).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new Grammar_0_0_1_0_1_0_Assignment_hiddenTokens(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 == null) {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
+				if(s1 == null) return null;
+			} else {
+				last = s2.getPredecessor();
+				return s2;
+			}
+		}
+		return null;
+		
+	}
+}
+
+// hiddenTokens += [ AbstractRule ]
+protected class Grammar_0_0_1_0_1_0_Assignment_hiddenTokens extends AssignmentToken  {
+	
+	public Grammar_0_0_1_0_1_0_Assignment_hiddenTokens(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Assignment getGrammarElement() {
+		return XtextGrammarAccess.INSTANCE.prGrammar().ele001010AssignmentHiddenTokens();
+	}
+	
+	protected Solution createSolution() {
+		if((value = current.getConsumable("hiddenTokens",IS_REQUIRED)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("hiddenTokens");
+		if(value instanceof EObject) { // xtext::CrossReference
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf("AbstractRule")) {
+				type = AssignmentType.CR;
+				element = XtextGrammarAccess.INSTANCE.prGrammar().ele0010100CrossReferenceEStringAbstractRule(); 
+				return new Solution(obj);
+			}
 		}
 		return null;
 	}
 }
 
-
-// ( "." superGrammarIdElements += ID ) *
-protected class Grammar_0_0_1_1_Group extends GroupToken {
+// ( "," hiddenTokens += [ AbstractRule ] ) *
+protected class Grammar_0_0_1_0_1_1_Group extends GroupToken {
 	
-	public Grammar_0_0_1_1_Group(IInstanceDescription curr, AbstractToken pred) {
+	public Grammar_0_0_1_0_1_1_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 	
 	public Group getGrammarElement() {
-		return XtextGrammarAccess.INSTANCE.prGrammar().ele0011Group();
+		return XtextGrammarAccess.INSTANCE.prGrammar().ele001011Group();
 	}
 		
 	protected Solution createSolution() {	
-		Solution s1 = new Grammar_0_0_1_1_1_Assignment_superGrammarIdElements(current, this).firstSolution();
+		Solution s1 = new Grammar_0_0_1_0_1_1_1_Assignment_hiddenTokens(current, this).firstSolution();
 		while(s1 != null) {
-			Solution s2 = new Grammar_0_0_1_1_0_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			Solution s2 = new Grammar_0_0_1_0_1_1_0_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
 				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
@@ -466,41 +736,58 @@ protected class Grammar_0_0_1_1_Group extends GroupToken {
 	}
 }
 
-// "."
-protected class Grammar_0_0_1_1_0_Keyword extends KeywordToken  {
+// ","
+protected class Grammar_0_0_1_0_1_1_0_Keyword extends KeywordToken  {
 	
-	public Grammar_0_0_1_1_0_Keyword(IInstanceDescription curr, AbstractToken pred) {
+	public Grammar_0_0_1_0_1_1_0_Keyword(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public Keyword getGrammarElement() {
-		return XtextGrammarAccess.INSTANCE.prGrammar().ele00110KeywordFullStop();
+		return XtextGrammarAccess.INSTANCE.prGrammar().ele0010110KeywordComma();
 	}	
 }
 
-// superGrammarIdElements += ID
-protected class Grammar_0_0_1_1_1_Assignment_superGrammarIdElements extends AssignmentToken  {
+// hiddenTokens += [ AbstractRule ]
+protected class Grammar_0_0_1_0_1_1_1_Assignment_hiddenTokens extends AssignmentToken  {
 	
-	public Grammar_0_0_1_1_1_Assignment_superGrammarIdElements(IInstanceDescription curr, AbstractToken pred) {
+	public Grammar_0_0_1_0_1_1_1_Assignment_hiddenTokens(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public Assignment getGrammarElement() {
-		return XtextGrammarAccess.INSTANCE.prGrammar().ele00111AssignmentSuperGrammarIdElements();
+		return XtextGrammarAccess.INSTANCE.prGrammar().ele0010111AssignmentHiddenTokens();
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("superGrammarIdElements",!IS_REQUIRED)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("superGrammarIdElements");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
-			type = AssignmentType.LRC;
-			element = XtextGrammarAccess.INSTANCE.prGrammar().ele001110LexerRuleCallID();
-			return new Solution(obj);
+		if((value = current.getConsumable("hiddenTokens",!IS_REQUIRED)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("hiddenTokens");
+		if(value instanceof EObject) { // xtext::CrossReference
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf("AbstractRule")) {
+				type = AssignmentType.CR;
+				element = XtextGrammarAccess.INSTANCE.prGrammar().ele00101110CrossReferenceEStringAbstractRule(); 
+				return new Solution(obj);
+			}
 		}
 		return null;
 	}
 }
 
+
+
+
+// ")"
+protected class Grammar_0_0_1_1_Keyword extends KeywordToken  {
+	
+	public Grammar_0_0_1_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Keyword getGrammarElement() {
+		return XtextGrammarAccess.INSTANCE.prGrammar().ele0011KeywordRightParenthesis();
+	}	
+}
 
 
 

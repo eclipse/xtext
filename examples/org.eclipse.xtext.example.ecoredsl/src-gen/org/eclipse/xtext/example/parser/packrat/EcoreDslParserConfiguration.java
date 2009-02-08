@@ -5,6 +5,7 @@ package org.eclipse.xtext.example.parser.packrat;
 
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 
@@ -78,7 +79,7 @@ public class EcoreDslParserConfiguration extends AbstractParserConfiguration {
 	public EcoreDslEcoreDslConsumer getRootConsumer() {
 		return ecoreDslConsumer;
 	} 
-	
+
 	public void createNonTerminalConsumers() {
 		getXtextBuiltinConfiguration().createNonTerminalConsumers();
 		ecoreDslConsumer = new EcoreDslEcoreDslConsumer(
@@ -514,4 +515,9 @@ public class EcoreDslParserConfiguration extends AbstractParserConfiguration {
     }
 
 
+	@Override
+	public ITerminalConsumer[] getInitialHiddenTerminals() {
+		return getXtextBuiltinConfiguration().getInitialHiddenTerminals();
+	}
+	
 }

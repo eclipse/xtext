@@ -5,6 +5,7 @@ package org.eclipse.xtext.parser.terminalrules.parser.packrat;
 
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.TerminalRulesTestLanguageModelConsumer;
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.TerminalRulesTestLanguageIDConsumer;
@@ -34,7 +35,7 @@ public class TerminalRulesTestLanguageParserConfiguration extends AbstractParser
 	public TerminalRulesTestLanguageModelConsumer getRootConsumer() {
 		return modelConsumer;
 	} 
-	
+
 	public void createNonTerminalConsumers() {
 		modelConsumer = new TerminalRulesTestLanguageModelConsumer(
     		this, null

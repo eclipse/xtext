@@ -64,7 +64,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="tree" eType="//TrickyG1" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TrickyG1" eSuperTypes="//TrickyG2">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="vals" unique="false" upperBound="-1" eType="//TrickyG2" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="vals" upperBound="-1" eType="//TrickyG2" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TrickyG2">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="val">
@@ -72,10 +72,10 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Add" eSuperTypes="//Expression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="addOperands" unique="false" upperBound="-1" eType="//Expression" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="addOperands" upperBound="-1" eType="//Expression" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Minus" eSuperTypes="//Expression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="minusOperands" unique="false" upperBound="-1" eType="//Expression" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="minusOperands" upperBound="-1" eType="//Expression" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TypeB" eSuperTypes="//TypeA1">
     <eStructuralFeatures xsi:type="ecore:EReference" name="x" eType="//TypeD" containment="true"/>

@@ -12,5 +12,5 @@ public class ConcreteTestLanguagePackratParser extends AbstractPackratParser {
 	protected ConcreteTestLanguageParserConfiguration createParserConfiguration(IInternalParserConfiguration configuration) {
 		return new ConcreteTestLanguageParserConfiguration(configuration);
 	}
-
+	
 }

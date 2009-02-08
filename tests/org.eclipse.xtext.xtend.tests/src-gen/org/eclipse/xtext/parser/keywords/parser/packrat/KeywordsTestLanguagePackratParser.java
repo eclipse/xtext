@@ -12,5 +12,5 @@ public class KeywordsTestLanguagePackratParser extends AbstractPackratParser {
 	protected KeywordsTestLanguageParserConfiguration createParserConfiguration(IInternalParserConfiguration configuration) {
 		return new KeywordsTestLanguageParserConfiguration(configuration);
 	}
-
+	
 }

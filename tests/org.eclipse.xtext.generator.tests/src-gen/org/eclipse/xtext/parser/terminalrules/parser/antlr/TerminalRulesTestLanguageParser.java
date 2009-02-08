@@ -23,6 +23,7 @@ public class TerminalRulesTestLanguageParser extends org.eclipse.xtext.parser.an
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
 		InternalTerminalRulesTestLanguageLexer lexer = new InternalTerminalRulesTestLanguageLexer(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
+		stream.setInitialHiddenTokens();
 		InternalTerminalRulesTestLanguageParser parser = new InternalTerminalRulesTestLanguageParser(
 				stream, getElementFactory(), grammarAccess.getGrammar());
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());

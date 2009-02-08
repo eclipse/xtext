@@ -5,6 +5,7 @@ package org.eclipse.xtext.parsetree.transientvalues.parser.packrat;
 
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 
@@ -38,7 +39,7 @@ public class TransientValuesTestParserConfiguration extends AbstractParserConfig
 	public TransientValuesTestRootConsumer getRootConsumer() {
 		return rootConsumer;
 	} 
-	
+
 	public void createNonTerminalConsumers() {
 		getXtextBuiltinConfiguration().createNonTerminalConsumers();
 		rootConsumer = new TransientValuesTestRootConsumer(
@@ -132,4 +133,9 @@ public class TransientValuesTestParserConfiguration extends AbstractParserConfig
     }
 
 
+	@Override
+	public ITerminalConsumer[] getInitialHiddenTerminals() {
+		return getXtextBuiltinConfiguration().getInitialHiddenTerminals();
+	}
+	
 }

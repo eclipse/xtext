@@ -26,29 +26,29 @@ public final class XtextLexerRuleConsumer extends NonTerminalConsumer {
 	private XtextBuiltinSTRINGConsumer stringConsumer;
 	private XtextTypeRefConsumer typeRefConsumer;
 
-	private ICharacterClass keyword$7$Delimiter;
-	
-	private ICharacterClass keyword$8$Delimiter;
-	
 	private ICharacterClass keyword$12$Delimiter;
 	
 	private ICharacterClass keyword$15$Delimiter;
 	
 	private ICharacterClass keyword$18$Delimiter;
 	
-	private ISequenceMatcher ruleCall$10$Delimiter;
+	private ICharacterClass keyword$7$Delimiter;
+	
+	private ICharacterClass keyword$8$Delimiter;
 	
 	private ISequenceMatcher ruleCall$17$Delimiter;
 	
+	private ISequenceMatcher ruleCall$10$Delimiter;
+	
 	public XtextLexerRuleConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
-		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$12$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$15$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$18$Delimiter = ICharacterClass.Factory.nullClass();
-		ruleCall$10$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
 		ruleCall$17$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		ruleCall$10$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	protected int doConsume(int entryPoint) throws Exception {
@@ -269,22 +269,6 @@ public final class XtextLexerRuleConsumer extends NonTerminalConsumer {
 		this.typeRefConsumer = typeRefConsumer;
 	}
 	
-	public ICharacterClass getKeyword$7$Delimiter() {
-		return keyword$7$Delimiter;
-	}
-	
-	public void setKeyword$7$Delimiter(ICharacterClass characterClass) {
-		keyword$7$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
-	public ICharacterClass getKeyword$8$Delimiter() {
-		return keyword$8$Delimiter;
-	}
-	
-	public void setKeyword$8$Delimiter(ICharacterClass characterClass) {
-		keyword$8$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
 	public ICharacterClass getKeyword$12$Delimiter() {
 		return keyword$12$Delimiter;
 	}
@@ -309,12 +293,20 @@ public final class XtextLexerRuleConsumer extends NonTerminalConsumer {
 		keyword$18$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
-	public ISequenceMatcher getRuleCall$10$Delimiter() {
-		return ruleCall$10$Delimiter;
+	public ICharacterClass getKeyword$7$Delimiter() {
+		return keyword$7$Delimiter;
 	}
 	
-	public void setRuleCall$10$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$10$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	public void setKeyword$7$Delimiter(ICharacterClass characterClass) {
+		keyword$7$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$8$Delimiter() {
+		return keyword$8$Delimiter;
+	}
+	
+	public void setKeyword$8$Delimiter(ICharacterClass characterClass) {
+		keyword$8$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ISequenceMatcher getRuleCall$17$Delimiter() {
@@ -323,6 +315,14 @@ public final class XtextLexerRuleConsumer extends NonTerminalConsumer {
 	
 	public void setRuleCall$17$Delimiter(ISequenceMatcher matcher) {
 		ruleCall$17$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	}
+	
+	public ISequenceMatcher getRuleCall$10$Delimiter() {
+		return ruleCall$10$Delimiter;
+	}
+	
+	public void setRuleCall$10$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$10$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 }

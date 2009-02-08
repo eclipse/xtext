@@ -5,6 +5,7 @@ package org.eclipse.xtext.parser.terminalrules.parser.packrat;
 
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerminalsTestLanguageGrammarConsumer;
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerminalsTestLanguageAbstractRuleConsumer;
@@ -90,10 +91,10 @@ public class XtextTerminalsTestLanguageParserConfiguration extends AbstractParse
 	public XtextTerminalsTestLanguageGrammarConsumer getRootConsumer() {
 		return grammarConsumer;
 	} 
-	
+
 	public void createNonTerminalConsumers() {
 		grammarConsumer = new XtextTerminalsTestLanguageGrammarConsumer(
-    		this, new ITerminalConsumer[]{ getWsConsumer(), getMlCommentConsumer(), getSlCommentConsumer() }
+    		this, null
     	);
 		abstractRuleConsumer = new XtextTerminalsTestLanguageAbstractRuleConsumer(
     		this, null
@@ -499,4 +500,9 @@ public class XtextTerminalsTestLanguageParserConfiguration extends AbstractParse
     }
 
 
+	@Override
+	public ITerminalConsumer[] getInitialHiddenTerminals() {
+		return new ITerminalConsumer[]{ getWsConsumer(), getMlCommentConsumer(), getSlCommentConsumer() };
+	}
+	
 }

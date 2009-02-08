@@ -40,7 +40,7 @@ public class «genClassFQName.toSimpleName()» extends AbstractPackratParser {
 	protected «languageName().toFirstUpper()»ParserConfiguration createParserConfiguration(IInternalParserConfiguration configuration) {
 		return new «languageName().toFirstUpper()»ParserConfiguration(configuration);
 	}
-
+	
 }
 «ENDFILE»
 «ENDDEFINE»
@@ -54,6 +54,7 @@ package «genClassFQName.toJavaPackage()»;
 
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
 «LET grammar().getSuperGrammar() AS superGrammar-»
 «IF superGrammar != null-»
@@ -87,10 +88,15 @@ public class «languageName().toFirstUpper()»ParserConfiguration extends Abstract
 «ENDLET-»
 	}
 
+«IF !grammar().allParserRules().isEmpty-»
 	public «grammar().allParserRules().first().consumerClassName()» getRootConsumer() {
 		return «grammar().allParserRules().first().consumerFieldName()»;
+«ELSE-»
+	public INonTerminalConsumer getRootConsumer() {
+		return null;
+«ENDIF-»
 	} 
-	
+
 	public void createNonTerminalConsumers() {
 «LET grammar().getSuperGrammar() AS superGrammar-»
 «IF superGrammar != null-»
@@ -182,6 +188,23 @@ public class «languageName().toFirstUpper()»ParserConfiguration extends Abstract
 «ENDFOREACH-»
 «ENDLET-»
 
+«LET grammar().getSuperGrammar() AS superGrammar-»
+«IF grammar().definesHiddenTokens || superGrammar != null-»
+	@Override
+	public ITerminalConsumer[] getInitialHiddenTerminals() {
+«IF grammar().definesHiddenTokens-»
+«IF grammar().hiddenTokens.isEmpty-»
+		return EMPTY_HIDDENS;
+«ELSE-»
+		return new ITerminalConsumer[]{ «FOREACH grammar().hiddenTokens AS hidden SEPARATOR ", "»«hidden.consumerGetterName()»()«ENDFOREACH-» };
+«ENDIF-»
+«ELSE-»
+		return get«superGrammar.getName().replaceAll("\\s","_").toFirstUpper()»Configuration().getInitialHiddenTerminals();
+«ENDIF-»
+	}
+	
+«ENDIF-»
+«ENDLET-»
 }
 «ENDFILE»
 «ENDDEFINE»
@@ -205,6 +228,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.matching.SetBasedKeywordMatcher;
 
+@SuppressWarnings("unused")
 public final class «languageName()»Delimiters {
 
 	private «languageName()»Delimiters() {

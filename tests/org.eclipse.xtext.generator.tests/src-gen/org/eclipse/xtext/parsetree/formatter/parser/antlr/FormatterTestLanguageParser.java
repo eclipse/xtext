@@ -23,6 +23,7 @@ public class FormatterTestLanguageParser extends org.eclipse.xtext.parser.antlr.
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
 		InternalFormatterTestLanguageLexer lexer = new InternalFormatterTestLanguageLexer(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
+		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 		InternalFormatterTestLanguageParser parser = new InternalFormatterTestLanguageParser(
 				stream, getElementFactory(), grammarAccess.getGrammar());
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());

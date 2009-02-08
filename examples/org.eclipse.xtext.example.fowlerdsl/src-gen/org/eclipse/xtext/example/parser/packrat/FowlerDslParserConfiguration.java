@@ -5,6 +5,7 @@ package org.eclipse.xtext.example.parser.packrat;
 
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 
@@ -40,7 +41,7 @@ public class FowlerDslParserConfiguration extends AbstractParserConfiguration {
 	public FowlerDslStatemachineConsumer getRootConsumer() {
 		return statemachineConsumer;
 	} 
-	
+
 	public void createNonTerminalConsumers() {
 		getXtextBuiltinConfiguration().createNonTerminalConsumers();
 		statemachineConsumer = new FowlerDslStatemachineConsumer(
@@ -153,4 +154,9 @@ public class FowlerDslParserConfiguration extends AbstractParserConfiguration {
     }
 
 
+	@Override
+	public ITerminalConsumer[] getInitialHiddenTerminals() {
+		return getXtextBuiltinConfiguration().getInitialHiddenTerminals();
+	}
+	
 }

@@ -12,5 +12,5 @@ public class DatatypeRulesTestLanguagePackratParser extends AbstractPackratParse
 	protected DatatypeRulesTestLanguageParserConfiguration createParserConfiguration(IInternalParserConfiguration configuration) {
 		return new DatatypeRulesTestLanguageParserConfiguration(configuration);
 	}
-
+	
 }

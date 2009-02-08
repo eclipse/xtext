@@ -23,6 +23,7 @@ public class Bug250313Parser extends org.eclipse.xtext.parser.antlr.AbstractAntl
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
 		InternalBug250313Lexer lexer = new InternalBug250313Lexer(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
+		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 		InternalBug250313Parser parser = new InternalBug250313Parser(
 				stream, getElementFactory(), grammarAccess.getGrammar());
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());

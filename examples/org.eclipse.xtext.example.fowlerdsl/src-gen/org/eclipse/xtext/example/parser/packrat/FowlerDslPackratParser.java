@@ -12,5 +12,5 @@ public class FowlerDslPackratParser extends AbstractPackratParser {
 	protected FowlerDslParserConfiguration createParserConfiguration(IInternalParserConfiguration configuration) {
 		return new FowlerDslParserConfiguration(configuration);
 	}
-
+	
 }

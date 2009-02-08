@@ -8,6 +8,7 @@
 package org.eclipse.xtext.parser.packrat;
 
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.KeywordConsumer;
 
 /**
@@ -57,5 +58,11 @@ public interface IParserConfiguration {
 	 * @return a fresh keyword consumer.
 	 */
 	KeywordConsumer createKeywordConsumer();
+
+	/**
+	 * Provides access to the initial (e.g. default) hidden terminal consumers.
+	 * @return the initial hidden terminals.
+	 */
+	ITerminalConsumer[] getInitialHiddenTerminals();
 	
 }

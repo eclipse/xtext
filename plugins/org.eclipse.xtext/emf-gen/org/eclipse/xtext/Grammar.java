@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Grammar.java,v 1.16 2009/01/19 14:39:52 szarnekow Exp $
+ * $Id: Grammar.java,v 1.17 2009/02/08 19:10:20 szarnekow Exp $
  */
 package org.eclipse.xtext;
 
@@ -21,6 +21,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.Grammar#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.eclipse.xtext.Grammar#getIdElements <em>Id Elements</em>}</li>
  *   <li>{@link org.eclipse.xtext.Grammar#getSuperGrammarIdElements <em>Super Grammar Id Elements</em>}</li>
+ *   <li>{@link org.eclipse.xtext.Grammar#isDefinesHiddenTokens <em>Defines Hidden Tokens</em>}</li>
+ *   <li>{@link org.eclipse.xtext.Grammar#getHiddenTokens <em>Hidden Tokens</em>}</li>
  *   <li>{@link org.eclipse.xtext.Grammar#getMetamodelDeclarations <em>Metamodel Declarations</em>}</li>
  *   <li>{@link org.eclipse.xtext.Grammar#getRules <em>Rules</em>}</li>
  * </ul>
@@ -68,7 +70,7 @@ public interface Grammar extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Id Elements</em>' attribute list.
 	 * @see org.eclipse.xtext.XtextPackage#getGrammar_IdElements()
-	 * @model unique="false"
+	 * @model
 	 * @generated
 	 */
 	EList<String> getIdElements();
@@ -84,10 +86,52 @@ public interface Grammar extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Super Grammar Id Elements</em>' attribute list.
 	 * @see org.eclipse.xtext.XtextPackage#getGrammar_SuperGrammarIdElements()
-	 * @model unique="false"
+	 * @model
 	 * @generated
 	 */
 	EList<String> getSuperGrammarIdElements();
+
+	/**
+	 * Returns the value of the '<em><b>Defines Hidden Tokens</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Defines Hidden Tokens</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Defines Hidden Tokens</em>' attribute.
+	 * @see #setDefinesHiddenTokens(boolean)
+	 * @see org.eclipse.xtext.XtextPackage#getGrammar_DefinesHiddenTokens()
+	 * @model
+	 * @generated
+	 */
+	boolean isDefinesHiddenTokens();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.Grammar#isDefinesHiddenTokens <em>Defines Hidden Tokens</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Defines Hidden Tokens</em>' attribute.
+	 * @see #isDefinesHiddenTokens()
+	 * @generated
+	 */
+	void setDefinesHiddenTokens(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Hidden Tokens</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.xtext.AbstractRule}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Hidden Tokens</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Hidden Tokens</em>' reference list.
+	 * @see org.eclipse.xtext.XtextPackage#getGrammar_HiddenTokens()
+	 * @model
+	 * @generated
+	 */
+	EList<AbstractRule> getHiddenTokens();
 
 	/**
 	 * Returns the value of the '<em><b>Metamodel Declarations</b></em>' containment reference list.

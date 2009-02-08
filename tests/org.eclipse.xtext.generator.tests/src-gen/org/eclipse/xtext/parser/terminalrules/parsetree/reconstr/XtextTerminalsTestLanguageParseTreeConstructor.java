@@ -52,7 +52,7 @@ public class XtextTerminalsTestLanguageParseTreeConstructor extends AbstractPars
 
 /************ begin Rule Grammar ****************
  *
- * Grammar hidden ( WS , ML_COMMENT , SL_COMMENT ) : ( abstract ?= "abstract language" | "language" ) idElements += ID ( "." idElements += ID ) * ( "extends" superGrammarIdElements += ID ( "." superGrammarIdElements += ID ) * ) ? ( metamodelDeclarations += AbstractMetamodelDeclaration ) * ( rules += AbstractRule ) + ;
+ * Grammar : ( abstract ?= "abstract language" | "language" ) idElements += ID ( "." idElements += ID ) * ( "extends" superGrammarIdElements += ID ( "." superGrammarIdElements += ID ) * ) ? ( metamodelDeclarations += AbstractMetamodelDeclaration ) * ( rules += AbstractRule ) + ;
  *
  **/
 

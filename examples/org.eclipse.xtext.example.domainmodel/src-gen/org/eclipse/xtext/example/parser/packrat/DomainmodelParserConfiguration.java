@@ -5,6 +5,7 @@ package org.eclipse.xtext.example.parser.packrat;
 
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 
@@ -62,7 +63,7 @@ public class DomainmodelParserConfiguration extends AbstractParserConfiguration 
 	public DomainmodelFileConsumer getRootConsumer() {
 		return fileConsumer;
 	} 
-	
+
 	public void createNonTerminalConsumers() {
 		getXtextBuiltinConfiguration().createNonTerminalConsumers();
 		fileConsumer = new DomainmodelFileConsumer(
@@ -297,4 +298,9 @@ public class DomainmodelParserConfiguration extends AbstractParserConfiguration 
     }
 
 
+	@Override
+	public ITerminalConsumer[] getInitialHiddenTerminals() {
+		return getXtextBuiltinConfiguration().getInitialHiddenTerminals();
+	}
+	
 }

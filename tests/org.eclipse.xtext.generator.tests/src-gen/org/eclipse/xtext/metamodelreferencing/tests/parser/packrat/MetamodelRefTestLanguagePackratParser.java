@@ -12,5 +12,5 @@ public class MetamodelRefTestLanguagePackratParser extends AbstractPackratParser
 	protected MetamodelRefTestLanguageParserConfiguration createParserConfiguration(IInternalParserConfiguration configuration) {
 		return new MetamodelRefTestLanguageParserConfiguration(configuration);
 	}
-
+	
 }

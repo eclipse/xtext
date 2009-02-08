@@ -54,6 +54,25 @@ public class GenXtextProposalProvider extends AbstractJavaProposalProvider {
 	}
 			
 			
+	public List<? extends ICompletionProposal> completeGrammar_DefinesHiddenTokens(Assignment assignment, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeGrammar_DefinesHiddenTokens feature '" + assignment.getFeature() + "' terminal '"
+					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
+					+ contentAssistContext.getMatchString().trim() + "'");
+		}
+		return Collections.emptyList();
+	}
+			
+	public List<? extends ICompletionProposal> completeGrammar_HiddenTokens(Assignment assignment, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeGrammar_HiddenTokens feature '" + assignment.getFeature() + "' terminal '"
+					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
+					+ contentAssistContext.getMatchString().trim() + "'");
+		}
+		return lookupCrossReference(((CrossReference)assignment.getTerminal()), contentAssistContext);
+	}
+			
+			
 	public List<? extends ICompletionProposal> completeGrammar_MetamodelDeclarations(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeGrammar_MetamodelDeclarations feature '" + assignment.getFeature() + "' terminal '"

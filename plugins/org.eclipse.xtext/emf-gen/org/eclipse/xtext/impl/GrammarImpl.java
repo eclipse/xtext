@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: GrammarImpl.java,v 1.16 2009/01/19 14:39:51 szarnekow Exp $
+ * $Id: GrammarImpl.java,v 1.17 2009/02/08 19:10:19 szarnekow Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -19,8 +19,10 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EDataTypeEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
@@ -38,6 +40,8 @@ import org.eclipse.xtext.XtextPackage;
  *   <li>{@link org.eclipse.xtext.impl.GrammarImpl#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.eclipse.xtext.impl.GrammarImpl#getIdElements <em>Id Elements</em>}</li>
  *   <li>{@link org.eclipse.xtext.impl.GrammarImpl#getSuperGrammarIdElements <em>Super Grammar Id Elements</em>}</li>
+ *   <li>{@link org.eclipse.xtext.impl.GrammarImpl#isDefinesHiddenTokens <em>Defines Hidden Tokens</em>}</li>
+ *   <li>{@link org.eclipse.xtext.impl.GrammarImpl#getHiddenTokens <em>Hidden Tokens</em>}</li>
  *   <li>{@link org.eclipse.xtext.impl.GrammarImpl#getMetamodelDeclarations <em>Metamodel Declarations</em>}</li>
  *   <li>{@link org.eclipse.xtext.impl.GrammarImpl#getRules <em>Rules</em>}</li>
  * </ul>
@@ -85,6 +89,36 @@ public class GrammarImpl extends EObjectImpl implements Grammar {
 	 * @ordered
 	 */
 	protected EList<String> superGrammarIdElements;
+
+	/**
+	 * The default value of the '{@link #isDefinesHiddenTokens() <em>Defines Hidden Tokens</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isDefinesHiddenTokens()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean DEFINES_HIDDEN_TOKENS_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isDefinesHiddenTokens() <em>Defines Hidden Tokens</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isDefinesHiddenTokens()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean definesHiddenTokens = DEFINES_HIDDEN_TOKENS_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getHiddenTokens() <em>Hidden Tokens</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getHiddenTokens()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<AbstractRule> hiddenTokens;
 
 	/**
 	 * The cached value of the '{@link #getMetamodelDeclarations() <em>Metamodel Declarations</em>}' containment reference list.
@@ -153,7 +187,7 @@ public class GrammarImpl extends EObjectImpl implements Grammar {
 	 */
 	public EList<String> getIdElements() {
 		if (idElements == null) {
-			idElements = new EDataTypeEList<String>(String.class, this, XtextPackage.GRAMMAR__ID_ELEMENTS);
+			idElements = new EDataTypeUniqueEList<String>(String.class, this, XtextPackage.GRAMMAR__ID_ELEMENTS);
 		}
 		return idElements;
 	}
@@ -165,9 +199,42 @@ public class GrammarImpl extends EObjectImpl implements Grammar {
 	 */
 	public EList<String> getSuperGrammarIdElements() {
 		if (superGrammarIdElements == null) {
-			superGrammarIdElements = new EDataTypeEList<String>(String.class, this, XtextPackage.GRAMMAR__SUPER_GRAMMAR_ID_ELEMENTS);
+			superGrammarIdElements = new EDataTypeUniqueEList<String>(String.class, this, XtextPackage.GRAMMAR__SUPER_GRAMMAR_ID_ELEMENTS);
 		}
 		return superGrammarIdElements;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isDefinesHiddenTokens() {
+		return definesHiddenTokens;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDefinesHiddenTokens(boolean newDefinesHiddenTokens) {
+		boolean oldDefinesHiddenTokens = definesHiddenTokens;
+		definesHiddenTokens = newDefinesHiddenTokens;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.GRAMMAR__DEFINES_HIDDEN_TOKENS, oldDefinesHiddenTokens, definesHiddenTokens));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<AbstractRule> getHiddenTokens() {
+		if (hiddenTokens == null) {
+			hiddenTokens = new EObjectResolvingEList<AbstractRule>(AbstractRule.class, this, XtextPackage.GRAMMAR__HIDDEN_TOKENS);
+		}
+		return hiddenTokens;
 	}
 
 	/**
@@ -219,11 +286,15 @@ public class GrammarImpl extends EObjectImpl implements Grammar {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case XtextPackage.GRAMMAR__ABSTRACT:
-				return isAbstract() ? Boolean.TRUE : Boolean.FALSE;
+				return isAbstract();
 			case XtextPackage.GRAMMAR__ID_ELEMENTS:
 				return getIdElements();
 			case XtextPackage.GRAMMAR__SUPER_GRAMMAR_ID_ELEMENTS:
 				return getSuperGrammarIdElements();
+			case XtextPackage.GRAMMAR__DEFINES_HIDDEN_TOKENS:
+				return isDefinesHiddenTokens();
+			case XtextPackage.GRAMMAR__HIDDEN_TOKENS:
+				return getHiddenTokens();
 			case XtextPackage.GRAMMAR__METAMODEL_DECLARATIONS:
 				return getMetamodelDeclarations();
 			case XtextPackage.GRAMMAR__RULES:
@@ -242,7 +313,7 @@ public class GrammarImpl extends EObjectImpl implements Grammar {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case XtextPackage.GRAMMAR__ABSTRACT:
-				setAbstract(((Boolean)newValue).booleanValue());
+				setAbstract((Boolean)newValue);
 				return;
 			case XtextPackage.GRAMMAR__ID_ELEMENTS:
 				getIdElements().clear();
@@ -251,6 +322,13 @@ public class GrammarImpl extends EObjectImpl implements Grammar {
 			case XtextPackage.GRAMMAR__SUPER_GRAMMAR_ID_ELEMENTS:
 				getSuperGrammarIdElements().clear();
 				getSuperGrammarIdElements().addAll((Collection<? extends String>)newValue);
+				return;
+			case XtextPackage.GRAMMAR__DEFINES_HIDDEN_TOKENS:
+				setDefinesHiddenTokens((Boolean)newValue);
+				return;
+			case XtextPackage.GRAMMAR__HIDDEN_TOKENS:
+				getHiddenTokens().clear();
+				getHiddenTokens().addAll((Collection<? extends AbstractRule>)newValue);
 				return;
 			case XtextPackage.GRAMMAR__METAMODEL_DECLARATIONS:
 				getMetamodelDeclarations().clear();
@@ -281,6 +359,12 @@ public class GrammarImpl extends EObjectImpl implements Grammar {
 			case XtextPackage.GRAMMAR__SUPER_GRAMMAR_ID_ELEMENTS:
 				getSuperGrammarIdElements().clear();
 				return;
+			case XtextPackage.GRAMMAR__DEFINES_HIDDEN_TOKENS:
+				setDefinesHiddenTokens(DEFINES_HIDDEN_TOKENS_EDEFAULT);
+				return;
+			case XtextPackage.GRAMMAR__HIDDEN_TOKENS:
+				getHiddenTokens().clear();
+				return;
 			case XtextPackage.GRAMMAR__METAMODEL_DECLARATIONS:
 				getMetamodelDeclarations().clear();
 				return;
@@ -305,6 +389,10 @@ public class GrammarImpl extends EObjectImpl implements Grammar {
 				return idElements != null && !idElements.isEmpty();
 			case XtextPackage.GRAMMAR__SUPER_GRAMMAR_ID_ELEMENTS:
 				return superGrammarIdElements != null && !superGrammarIdElements.isEmpty();
+			case XtextPackage.GRAMMAR__DEFINES_HIDDEN_TOKENS:
+				return definesHiddenTokens != DEFINES_HIDDEN_TOKENS_EDEFAULT;
+			case XtextPackage.GRAMMAR__HIDDEN_TOKENS:
+				return hiddenTokens != null && !hiddenTokens.isEmpty();
 			case XtextPackage.GRAMMAR__METAMODEL_DECLARATIONS:
 				return metamodelDeclarations != null && !metamodelDeclarations.isEmpty();
 			case XtextPackage.GRAMMAR__RULES:
@@ -329,6 +417,8 @@ public class GrammarImpl extends EObjectImpl implements Grammar {
 		result.append(idElements);
 		result.append(", superGrammarIdElements: ");
 		result.append(superGrammarIdElements);
+		result.append(", definesHiddenTokens: ");
+		result.append(definesHiddenTokens);
 		result.append(')');
 		return result.toString();
 	}

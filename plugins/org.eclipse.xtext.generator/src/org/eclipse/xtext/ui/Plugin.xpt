@@ -29,6 +29,7 @@
 «ENDDEFINE»
 
 «DEFINE body FOR GenModel»
+«IF !grammar().abstract -»
 <extension
          point="org.eclipse.ui.editors">
       <editor
@@ -71,4 +72,5 @@
             label="Task Tags">
         </keyword>
 	</extension>
+«ENDIF-»
 «ENDDEFINE»
