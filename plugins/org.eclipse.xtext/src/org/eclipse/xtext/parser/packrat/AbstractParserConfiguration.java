@@ -9,6 +9,7 @@ package org.eclipse.xtext.parser.packrat;
 
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
+import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.KeywordConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.RecoveryStateHolder;
@@ -22,6 +23,8 @@ public abstract class AbstractParserConfiguration implements
 	ITerminalConsumerConfiguration, 
 	INonTerminalConsumerConfiguration {
 
+	protected static ITerminalConsumer[] EMPTY_HIDDENS = IHiddenTokenHandler.EMPTY_HIDDENS;
+	
 	public interface IInternalParserConfiguration {
 
 		ICharSequenceWithOffset getInput();
@@ -80,6 +83,14 @@ public abstract class AbstractParserConfiguration implements
 
 	public KeywordConsumer createKeywordConsumer() {
 		return new KeywordConsumer(this);
+	}
+	
+	public ITerminalConsumer[] getInitialHiddenTerminals() {
+		return EMPTY_HIDDENS;
+	}
+	
+	protected ITerminalConsumer[] toArray(ITerminalConsumer... consumers) {
+		return consumers;
 	}
 }
 

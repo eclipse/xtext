@@ -81,6 +81,15 @@ public class XtextTokenStream extends CommonTokenStream {
 		hiddenTokens = newHiddens;
 		return result;
 	}
+	
+	public void setInitialHiddenTokens(String... lexerRules) {
+		BitSet newHiddens = new BitSet();
+		for(String lexerRule: lexerRules) {
+			int idx = rulenameToTokenType.get(lexerRule);
+			newHiddens.set(idx);
+		}
+		hiddenTokens = newHiddens;
+	}
 
 	private class MyHiddenTokens implements HiddenTokens {
 

@@ -10,5 +10,5 @@ language org.eclipse.xtext.parser.keywords.KeywordsTestLanguage
 
 generate KeywordsTestLanguage "http://www.eclipse.org/2009/tmf/xtext/KeywordsTestLanguage"
  
-Model hidden(WS, ML_COMMENT, SL_COMMENT):
+Model:
   first?="foo\\bar" | second?="foo\\" | third?="\\bar" | forth?="\\"; 
