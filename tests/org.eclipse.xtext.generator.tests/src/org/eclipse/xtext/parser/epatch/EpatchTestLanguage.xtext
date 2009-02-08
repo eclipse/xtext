@@ -10,7 +10,7 @@ language org.eclipse.xtext.parser.epatch.EpatchTestLanguage
 
 generate EpatchTestLanguage "http://www.eclipse.org/2008/tmf/xtext/EpatchTestLanguage"
 
-EPatch hidden(WS, ML_COMMENT, SL_COMMENT):
+EPatch:
 	"epatch" name=ID "{" imports+=Import* resources+=NamedResource* objects+=ObjectRef* "}";
 	
 Import:
