@@ -18,18 +18,21 @@ RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 RULE_INT : ('0'..'9')+;
 
 // $ANTLR src "../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/dummy/parser/antlr/internal/InternalDummyTestLanguage.g" 208
-RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' |                '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
+RULE_STRING : 
+			  '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' | 
+              '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\''
+              ;
 
-// $ANTLR src "../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/dummy/parser/antlr/internal/InternalDummyTestLanguage.g" 210
-RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
+// $ANTLR src "../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/dummy/parser/antlr/internal/InternalDummyTestLanguage.g" 213
+RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/';
 
-// $ANTLR src "../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/dummy/parser/antlr/internal/InternalDummyTestLanguage.g" 212
-RULE_SL_COMMENT : '//' ~('\n'|'\r')* ('\r'? '\n')? {$channel=HIDDEN;};
+// $ANTLR src "../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/dummy/parser/antlr/internal/InternalDummyTestLanguage.g" 215
+RULE_SL_COMMENT : '//' ~('\n'|'\r')* ('\r'? '\n')?;
 
-// $ANTLR src "../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/dummy/parser/antlr/internal/InternalDummyTestLanguage.g" 214
-RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
+// $ANTLR src "../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/dummy/parser/antlr/internal/InternalDummyTestLanguage.g" 217
+RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
-// $ANTLR src "../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/dummy/parser/antlr/internal/InternalDummyTestLanguage.g" 216
+// $ANTLR src "../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/dummy/parser/antlr/internal/InternalDummyTestLanguage.g" 219
 RULE_ANY_OTHER : .;
 
 

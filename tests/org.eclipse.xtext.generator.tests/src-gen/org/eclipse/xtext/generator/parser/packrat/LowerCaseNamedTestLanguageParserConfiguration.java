@@ -5,6 +5,7 @@ package org.eclipse.xtext.generator.parser.packrat;
 
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 
@@ -32,7 +33,7 @@ public class LowerCaseNamedTestLanguageParserConfiguration extends AbstractParse
 	public LowerCaseNamedTestLanguageModelConsumer getRootConsumer() {
 		return modelConsumer;
 	} 
-	
+
 	public void createNonTerminalConsumers() {
 		getXtextBuiltinConfiguration().createNonTerminalConsumers();
 		modelConsumer = new LowerCaseNamedTestLanguageModelConsumer(
@@ -88,4 +89,9 @@ public class LowerCaseNamedTestLanguageParserConfiguration extends AbstractParse
     }
 
 
+	@Override
+	public ITerminalConsumer[] getInitialHiddenTerminals() {
+		return getXtextBuiltinConfiguration().getInitialHiddenTerminals();
+	}
+	
 }

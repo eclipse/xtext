@@ -12,5 +12,5 @@ public class TerminalRulesTestLanguagePackratParser extends AbstractPackratParse
 	protected TerminalRulesTestLanguageParserConfiguration createParserConfiguration(IInternalParserConfiguration configuration) {
 		return new TerminalRulesTestLanguageParserConfiguration(configuration);
 	}
-
+	
 }

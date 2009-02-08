@@ -12,5 +12,5 @@ public class HiddenTerminalsTestLanguagePackratParser extends AbstractPackratPar
 	protected HiddenTerminalsTestLanguageParserConfiguration createParserConfiguration(IInternalParserConfiguration configuration) {
 		return new HiddenTerminalsTestLanguageParserConfiguration(configuration);
 	}
-
+	
 }

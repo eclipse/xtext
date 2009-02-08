@@ -12,5 +12,5 @@ public class MultiGenMMTestLanguagePackratParser extends AbstractPackratParser {
 	protected MultiGenMMTestLanguageParserConfiguration createParserConfiguration(IInternalParserConfiguration configuration) {
 		return new MultiGenMMTestLanguageParserConfiguration(configuration);
 	}
-
+	
 }

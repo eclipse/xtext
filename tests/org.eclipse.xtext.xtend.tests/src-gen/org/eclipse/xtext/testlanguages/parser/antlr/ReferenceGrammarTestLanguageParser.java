@@ -23,6 +23,7 @@ public class ReferenceGrammarTestLanguageParser extends org.eclipse.xtext.parser
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
 		InternalReferenceGrammarTestLanguageLexer lexer = new InternalReferenceGrammarTestLanguageLexer(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
+		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 		InternalReferenceGrammarTestLanguageParser parser = new InternalReferenceGrammarTestLanguageParser(
 				stream, getElementFactory(), grammarAccess.getGrammar());
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());

@@ -12,5 +12,5 @@ public class ReferenceGrammarPackratParser extends AbstractPackratParser {
 	protected ReferenceGrammarParserConfiguration createParserConfiguration(IInternalParserConfiguration configuration) {
 		return new ReferenceGrammarParserConfiguration(configuration);
 	}
-
+	
 }

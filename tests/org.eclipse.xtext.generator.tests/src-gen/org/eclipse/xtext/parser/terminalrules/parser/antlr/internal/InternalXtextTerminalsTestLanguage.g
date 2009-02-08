@@ -75,10 +75,8 @@ entryRuleGrammar returns [EObject current=null] :
 // Rule Grammar
 ruleGrammar returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
-		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
     }
     @after { resetLookahead(); 
-		myHiddenTokenState.restore();
     }:
 (((((((	
 	

@@ -21,7 +21,7 @@ import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
  */
 public class GenReferenceGrammarTestLanguageProposalProvider extends AbstractJavaProposalProvider {
 	// constants
-	private static final String UI_PLUGIN_ID  = "";
+	private static final String UI_PLUGIN_ID  = ".";
 	
 	
 			

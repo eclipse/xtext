@@ -40,7 +40,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess 
 		private final Assignment c1AssignmentRules = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall c10ParserRuleCallAbstractRule = (RuleCall)c1AssignmentRules.eContents().get(0);
 		
-		// Grammar hidden ( WS , ML_COMMENT , SL_COMMENT ) : ( abstract ?= "abstract language" | "language" ) idElements += ID ( "." idElements += ID ) * ( "extends" superGrammarIdElements += ID ( "." superGrammarIdElements += ID ) * ) ? ( metamodelDeclarations += AbstractMetamodelDeclaration ) * ( rules += AbstractRule ) + ;
+		// Grammar : ( abstract ?= "abstract language" | "language" ) idElements += ID ( "." idElements += ID ) * ( "extends" superGrammarIdElements += ID ( "." superGrammarIdElements += ID ) * ) ? ( metamodelDeclarations += AbstractMetamodelDeclaration ) * ( rules += AbstractRule ) + ;
 		public ParserRule getRule() { return rule; }
 
 		// ( abstract ?= "abstract language" | "language" ) idElements += ID ( "." idElements += ID ) * ( "extends" superGrammarIdElements += ID ( "." superGrammarIdElements += ID ) * ) ? ( metamodelDeclarations += AbstractMetamodelDeclaration ) * ( rules += AbstractRule ) +
@@ -1817,7 +1817,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess 
 	}
 
 	
-	// Grammar hidden ( WS , ML_COMMENT , SL_COMMENT ) : ( abstract ?= "abstract language" | "language" ) idElements += ID ( "." idElements += ID ) * ( "extends" superGrammarIdElements += ID ( "." superGrammarIdElements += ID ) * ) ? ( metamodelDeclarations += AbstractMetamodelDeclaration ) * ( rules += AbstractRule ) + ;
+	// Grammar : ( abstract ?= "abstract language" | "language" ) idElements += ID ( "." idElements += ID ) * ( "extends" superGrammarIdElements += ID ( "." superGrammarIdElements += ID ) * ) ? ( metamodelDeclarations += AbstractMetamodelDeclaration ) * ( rules += AbstractRule ) + ;
 	public GrammarElements prGrammar() {
 		return (pGrammar != null) ? pGrammar : (pGrammar = new GrammarElements());
 	} 

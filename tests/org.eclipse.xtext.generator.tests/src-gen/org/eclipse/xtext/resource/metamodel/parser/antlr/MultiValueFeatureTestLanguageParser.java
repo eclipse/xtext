@@ -23,6 +23,7 @@ public class MultiValueFeatureTestLanguageParser extends org.eclipse.xtext.parse
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
 		InternalMultiValueFeatureTestLanguageLexer lexer = new InternalMultiValueFeatureTestLanguageLexer(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
+		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 		InternalMultiValueFeatureTestLanguageParser parser = new InternalMultiValueFeatureTestLanguageParser(
 				stream, getElementFactory(), grammarAccess.getGrammar());
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());

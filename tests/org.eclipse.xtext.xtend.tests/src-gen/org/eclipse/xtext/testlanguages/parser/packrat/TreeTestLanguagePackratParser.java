@@ -12,5 +12,5 @@ public class TreeTestLanguagePackratParser extends AbstractPackratParser {
 	protected TreeTestLanguageParserConfiguration createParserConfiguration(IInternalParserConfiguration configuration) {
 		return new TreeTestLanguageParserConfiguration(configuration);
 	}
-
+	
 }

@@ -30,7 +30,7 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		private final RuleCall c010ParserRuleCallObjectRef = (RuleCall)c01AssignmentObjects.eContents().get(0);
 		private final Keyword c1KeywordRightCurlyBracket = (Keyword)cGroup.eContents().get(1);
 		
-		// EPatch hidden ( WS , ML_COMMENT , SL_COMMENT ) : "epatch" name = ID "{" ( imports += Import ) * ( resources += NamedResource ) * ( objects += ObjectRef ) * "}" ;
+		// EPatch : "epatch" name = ID "{" ( imports += Import ) * ( resources += NamedResource ) * ( objects += ObjectRef ) * "}" ;
 		public ParserRule getRule() { return rule; }
 
 		// "epatch" name = ID "{" ( imports += Import ) * ( resources += NamedResource ) * ( objects += ObjectRef ) * "}"
@@ -1739,7 +1739,7 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 	}
 
 	
-	// EPatch hidden ( WS , ML_COMMENT , SL_COMMENT ) : "epatch" name = ID "{" ( imports += Import ) * ( resources += NamedResource ) * ( objects += ObjectRef ) * "}" ;
+	// EPatch : "epatch" name = ID "{" ( imports += Import ) * ( resources += NamedResource ) * ( objects += ObjectRef ) * "}" ;
 	public EPatchElements prEPatch() {
 		return (pEPatch != null) ? pEPatch : (pEPatch = new EPatchElements());
 	} 

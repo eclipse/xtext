@@ -26,6 +26,15 @@ public abstract class XtextTerminalsTestLanguageStandaloneSetup {
 			ServiceRegistry.registerInjector(org.eclipse.xtext.parser.terminalrules.IXtextTerminalsTestLanguage.SCOPE, injector);
 			
 			
+			// register default ePackages
+			if (!Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("ecore"))
+				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+					"ecore", new org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl());
+			if (!Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("xmi"))
+				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+					"xmi", new org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl());
+			if (!EPackage.Registry.INSTANCE.containsKey(org.eclipse.xtext.XtextPackage.eNS_URI))
+				EPackage.Registry.INSTANCE.put(org.eclipse.xtext.XtextPackage.eNS_URI, org.eclipse.xtext.XtextPackage.eINSTANCE);
 			
 			
 			// register resource factory to EMF

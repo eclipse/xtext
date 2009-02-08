@@ -24,7 +24,7 @@ public class KeywordsTestLanguageGrammarAccess extends BaseEPackageAccess implem
 		private final Assignment c1AssignmentForth = (Assignment)cAlternatives.eContents().get(1);
 		private final Keyword c10KeywordReverseSolidus = (Keyword)c1AssignmentForth.eContents().get(0);
 		
-		// Model hidden ( WS , ML_COMMENT , SL_COMMENT ) : first ?= "foo\\bar" | second ?= "foo\\" | third ?= "\\bar" | forth ?= "\\" ;
+		// Model : first ?= "foo\\bar" | second ?= "foo\\" | third ?= "\\bar" | forth ?= "\\" ;
 		public ParserRule getRule() { return rule; }
 
 		// first ?= "foo\\bar" | second ?= "foo\\" | third ?= "\\bar" | forth ?= "\\"
@@ -82,7 +82,7 @@ public class KeywordsTestLanguageGrammarAccess extends BaseEPackageAccess implem
 	}
 
 	
-	// Model hidden ( WS , ML_COMMENT , SL_COMMENT ) : first ?= "foo\\bar" | second ?= "foo\\" | third ?= "\\bar" | forth ?= "\\" ;
+	// Model : first ?= "foo\\bar" | second ?= "foo\\" | third ?= "\\bar" | forth ?= "\\" ;
 	public ModelElements prModel() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	} 

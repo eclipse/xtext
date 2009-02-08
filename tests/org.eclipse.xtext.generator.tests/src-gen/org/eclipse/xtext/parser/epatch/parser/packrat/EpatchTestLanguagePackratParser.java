@@ -12,5 +12,5 @@ public class EpatchTestLanguagePackratParser extends AbstractPackratParser {
 	protected EpatchTestLanguageParserConfiguration createParserConfiguration(IInternalParserConfiguration configuration) {
 		return new EpatchTestLanguageParserConfiguration(configuration);
 	}
-
+	
 }

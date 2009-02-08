@@ -54,6 +54,6 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Op" eSuperTypes="//Expression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="values" unique="false" upperBound="-1" eType="//Expression" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1" eType="//Expression" containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

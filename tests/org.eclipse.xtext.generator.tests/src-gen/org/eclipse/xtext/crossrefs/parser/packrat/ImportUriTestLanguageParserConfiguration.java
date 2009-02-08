@@ -5,6 +5,7 @@ package org.eclipse.xtext.crossrefs.parser.packrat;
 
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 
@@ -36,7 +37,7 @@ public class ImportUriTestLanguageParserConfiguration extends AbstractParserConf
 	public ImportUriTestLanguageMainConsumer getRootConsumer() {
 		return mainConsumer;
 	} 
-	
+
 	public void createNonTerminalConsumers() {
 		getXtextBuiltinConfiguration().createNonTerminalConsumers();
 		mainConsumer = new ImportUriTestLanguageMainConsumer(
@@ -116,4 +117,9 @@ public class ImportUriTestLanguageParserConfiguration extends AbstractParserConf
     }
 
 
+	@Override
+	public ITerminalConsumer[] getInitialHiddenTerminals() {
+		return getXtextBuiltinConfiguration().getInitialHiddenTerminals();
+	}
+	
 }

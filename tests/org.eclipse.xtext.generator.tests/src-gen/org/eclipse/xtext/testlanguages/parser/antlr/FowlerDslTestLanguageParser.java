@@ -23,6 +23,7 @@ public class FowlerDslTestLanguageParser extends org.eclipse.xtext.parser.antlr.
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
 		InternalFowlerDslTestLanguageLexer lexer = new InternalFowlerDslTestLanguageLexer(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
+		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 		InternalFowlerDslTestLanguageParser parser = new InternalFowlerDslTestLanguageParser(
 				stream, getElementFactory(), grammarAccess.getGrammar());
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());

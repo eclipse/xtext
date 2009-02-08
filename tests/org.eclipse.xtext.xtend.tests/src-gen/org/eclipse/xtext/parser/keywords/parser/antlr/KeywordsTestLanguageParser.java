@@ -23,6 +23,7 @@ public class KeywordsTestLanguageParser extends org.eclipse.xtext.parser.antlr.A
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
 		InternalKeywordsTestLanguageLexer lexer = new InternalKeywordsTestLanguageLexer(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
+		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 		InternalKeywordsTestLanguageParser parser = new InternalKeywordsTestLanguageParser(
 				stream, getElementFactory(), grammarAccess.getGrammar());
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());

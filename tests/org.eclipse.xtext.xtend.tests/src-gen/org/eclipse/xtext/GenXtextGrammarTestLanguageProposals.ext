@@ -43,6 +43,19 @@ List[ICompletionProposal] completeGrammar_SuperGrammarIdElements(Assignment assi
     { newProposal(assignment, "Grammar_SuperGrammarIdElements", contentAssistContext) };
 
 	 
+List[ICompletionProposal] completeGrammar_DefinesHiddenTokens(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeGrammar_DefinesHiddenTokens feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	{};
+	 
+List[ICompletionProposal] completeGrammar_HiddenTokens(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeGrammar_HiddenTokens feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	lookupCrossReference(((CrossReference)assignment.terminal), contentAssistContext);
+
+	 
 List[ICompletionProposal] completeGrammar_MetamodelDeclarations(Assignment assignment, IContentAssistContext contentAssistContext) :
 	debug("completeGrammar_MetamodelDeclarations feature '" + assignment.feature + "' terminal '"
 					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"

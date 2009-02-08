@@ -5,6 +5,7 @@ package org.eclipse.xtext.parser.terminalrules.parser.packrat;
 
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.HiddenTerminalsTestLanguageModelConsumer;
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.HiddenTerminalsTestLanguageWithoutHiddensConsumer;
@@ -46,7 +47,7 @@ public class HiddenTerminalsTestLanguageParserConfiguration extends AbstractPars
 	public HiddenTerminalsTestLanguageModelConsumer getRootConsumer() {
 		return modelConsumer;
 	} 
-	
+
 	public void createNonTerminalConsumers() {
 		modelConsumer = new HiddenTerminalsTestLanguageModelConsumer(
     		this, null

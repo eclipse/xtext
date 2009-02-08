@@ -5,6 +5,7 @@ package org.eclipse.xtext.parser.keywords.parser.packrat;
 
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 
@@ -32,11 +33,11 @@ public class KeywordsTestLanguageParserConfiguration extends AbstractParserConfi
 	public KeywordsTestLanguageModelConsumer getRootConsumer() {
 		return modelConsumer;
 	} 
-	
+
 	public void createNonTerminalConsumers() {
 		getXtextBuiltinConfiguration().createNonTerminalConsumers();
 		modelConsumer = new KeywordsTestLanguageModelConsumer(
-    		this, new ITerminalConsumer[]{ getWsConsumer(), getMlCommentConsumer(), getSlCommentConsumer() }
+    		this, null
     	);
 	}
 	
@@ -89,4 +90,9 @@ public class KeywordsTestLanguageParserConfiguration extends AbstractParserConfi
     }
 
 
+	@Override
+	public ITerminalConsumer[] getInitialHiddenTerminals() {
+		return getXtextBuiltinConfiguration().getInitialHiddenTerminals();
+	}
+	
 }

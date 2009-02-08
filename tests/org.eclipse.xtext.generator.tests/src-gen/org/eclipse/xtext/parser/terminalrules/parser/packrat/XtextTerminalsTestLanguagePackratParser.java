@@ -12,5 +12,5 @@ public class XtextTerminalsTestLanguagePackratParser extends AbstractPackratPars
 	protected XtextTerminalsTestLanguageParserConfiguration createParserConfiguration(IInternalParserConfiguration configuration) {
 		return new XtextTerminalsTestLanguageParserConfiguration(configuration);
 	}
-
+	
 }

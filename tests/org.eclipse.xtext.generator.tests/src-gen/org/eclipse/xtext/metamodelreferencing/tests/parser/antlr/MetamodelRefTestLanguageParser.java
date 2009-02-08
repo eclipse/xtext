@@ -23,6 +23,7 @@ public class MetamodelRefTestLanguageParser extends org.eclipse.xtext.parser.ant
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
 		InternalMetamodelRefTestLanguageLexer lexer = new InternalMetamodelRefTestLanguageLexer(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
+		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 		InternalMetamodelRefTestLanguageParser parser = new InternalMetamodelRefTestLanguageParser(
 				stream, getElementFactory(), grammarAccess.getGrammar());
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());

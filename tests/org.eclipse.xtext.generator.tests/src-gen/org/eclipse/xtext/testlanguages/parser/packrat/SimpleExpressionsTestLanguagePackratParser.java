@@ -12,5 +12,5 @@ public class SimpleExpressionsTestLanguagePackratParser extends AbstractPackratP
 	protected SimpleExpressionsTestLanguageParserConfiguration createParserConfiguration(IInternalParserConfiguration configuration) {
 		return new SimpleExpressionsTestLanguageParserConfiguration(configuration);
 	}
-
+	
 }

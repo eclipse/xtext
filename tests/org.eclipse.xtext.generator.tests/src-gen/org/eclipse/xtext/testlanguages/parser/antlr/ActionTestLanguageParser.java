@@ -23,6 +23,7 @@ public class ActionTestLanguageParser extends org.eclipse.xtext.parser.antlr.Abs
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
 		InternalActionTestLanguageLexer lexer = new InternalActionTestLanguageLexer(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
+		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 		InternalActionTestLanguageParser parser = new InternalActionTestLanguageParser(
 				stream, getElementFactory(), grammarAccess.getGrammar());
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());

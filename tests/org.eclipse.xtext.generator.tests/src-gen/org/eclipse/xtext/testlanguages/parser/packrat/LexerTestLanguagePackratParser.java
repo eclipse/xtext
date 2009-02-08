@@ -12,5 +12,5 @@ public class LexerTestLanguagePackratParser extends AbstractPackratParser {
 	protected LexerTestLanguageParserConfiguration createParserConfiguration(IInternalParserConfiguration configuration) {
 		return new LexerTestLanguageParserConfiguration(configuration);
 	}
-
+	
 }

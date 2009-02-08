@@ -12,5 +12,5 @@ public class OptionalEmptyTestLanguagePackratParser extends AbstractPackratParse
 	protected OptionalEmptyTestLanguageParserConfiguration createParserConfiguration(IInternalParserConfiguration configuration) {
 		return new OptionalEmptyTestLanguageParserConfiguration(configuration);
 	}
-
+	
 }

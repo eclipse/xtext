@@ -23,6 +23,7 @@ public class LowerCaseNamedTestLanguageParser extends org.eclipse.xtext.parser.a
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
 		InternalLowerCaseNamedTestLanguageLexer lexer = new InternalLowerCaseNamedTestLanguageLexer(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
+		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 		InternalLowerCaseNamedTestLanguageParser parser = new InternalLowerCaseNamedTestLanguageParser(
 				stream, getElementFactory(), grammarAccess.getGrammar());
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());

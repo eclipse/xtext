@@ -5,6 +5,7 @@ package org.eclipse.xtext.testlanguages.parser.packrat;
 
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 
@@ -44,7 +45,7 @@ public class ReferenceGrammarTestLanguageParserConfiguration extends AbstractPar
 	public ReferenceGrammarTestLanguageSpielplatzConsumer getRootConsumer() {
 		return spielplatzConsumer;
 	} 
-	
+
 	public void createNonTerminalConsumers() {
 		getXtextBuiltinConfiguration().createNonTerminalConsumers();
 		spielplatzConsumer = new ReferenceGrammarTestLanguageSpielplatzConsumer(
@@ -195,4 +196,9 @@ public class ReferenceGrammarTestLanguageParserConfiguration extends AbstractPar
     }
 
 
+	@Override
+	public ITerminalConsumer[] getInitialHiddenTerminals() {
+		return getXtextBuiltinConfiguration().getInitialHiddenTerminals();
+	}
+	
 }

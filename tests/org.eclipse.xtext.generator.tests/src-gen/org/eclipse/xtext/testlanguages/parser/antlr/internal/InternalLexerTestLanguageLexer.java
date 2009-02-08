@@ -248,7 +248,6 @@ public class InternalLexerTestLanguageLexer extends Lexer {
 
             match("*/"); 
 
-            channel=HIDDEN;
 
             }
 
@@ -338,7 +337,6 @@ public class InternalLexerTestLanguageLexer extends Lexer {
 
             }
 
-            channel=HIDDEN;
 
             }
 
@@ -395,7 +393,6 @@ public class InternalLexerTestLanguageLexer extends Lexer {
                 cnt9++;
             } while (true);
 
-            channel=HIDDEN;
 
             }
 

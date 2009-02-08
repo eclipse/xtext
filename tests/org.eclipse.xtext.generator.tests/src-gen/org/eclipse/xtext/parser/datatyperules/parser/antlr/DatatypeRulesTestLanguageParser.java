@@ -23,6 +23,7 @@ public class DatatypeRulesTestLanguageParser extends org.eclipse.xtext.parser.an
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
 		InternalDatatypeRulesTestLanguageLexer lexer = new InternalDatatypeRulesTestLanguageLexer(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
+		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 		InternalDatatypeRulesTestLanguageParser parser = new InternalDatatypeRulesTestLanguageParser(
 				stream, getElementFactory(), grammarAccess.getGrammar());
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());

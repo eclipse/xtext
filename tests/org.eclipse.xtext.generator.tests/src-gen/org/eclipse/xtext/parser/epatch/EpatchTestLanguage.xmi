@@ -9,13 +9,10 @@
   <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="EpatchTestLanguage">
     <ePackage href="http://www.eclipse.org/2008/tmf/xtext/EpatchTestLanguage#/"/>
   </metamodelDeclarations>
-  <rules xsi:type="xtext:ParserRule" name="EPatch" definesHiddenTokens="true">
+  <rules xsi:type="xtext:ParserRule" name="EPatch">
     <type metamodel="//@metamodelDeclarations.0">
       <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/tmf/xtext/EpatchTestLanguage#//EPatch"/>
     </type>
-    <hiddenTokens href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.5"/>
-    <hiddenTokens href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.3"/>
-    <hiddenTokens href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.4"/>
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Group">
         <abstractTokens xsi:type="xtext:Group">

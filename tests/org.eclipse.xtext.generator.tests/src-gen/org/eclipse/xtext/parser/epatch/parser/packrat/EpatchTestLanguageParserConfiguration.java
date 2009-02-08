@@ -5,6 +5,7 @@ package org.eclipse.xtext.parser.epatch.parser.packrat;
 
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 
@@ -82,11 +83,11 @@ public class EpatchTestLanguageParserConfiguration extends AbstractParserConfigu
 	public EpatchTestLanguageEPatchConsumer getRootConsumer() {
 		return ePatchConsumer;
 	} 
-	
+
 	public void createNonTerminalConsumers() {
 		getXtextBuiltinConfiguration().createNonTerminalConsumers();
 		ePatchConsumer = new EpatchTestLanguageEPatchConsumer(
-    		this, new ITerminalConsumer[]{ getWsConsumer(), getMlCommentConsumer(), getSlCommentConsumer() }
+    		this, null
     	);
 		importConsumer = new EpatchTestLanguageImportConsumer(
     		this, null
@@ -520,4 +521,9 @@ public class EpatchTestLanguageParserConfiguration extends AbstractParserConfigu
     }
 
 
+	@Override
+	public ITerminalConsumer[] getInitialHiddenTerminals() {
+		return getXtextBuiltinConfiguration().getInitialHiddenTerminals();
+	}
+	
 }

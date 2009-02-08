@@ -5,6 +5,7 @@ package org.eclipse.xtext.testlanguages.parser.packrat;
 
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 
@@ -42,7 +43,7 @@ public class SimpleExpressionsTestLanguageParserConfiguration extends AbstractPa
 	public SimpleExpressionsTestLanguageSequenceConsumer getRootConsumer() {
 		return sequenceConsumer;
 	} 
-	
+
 	public void createNonTerminalConsumers() {
 		getXtextBuiltinConfiguration().createNonTerminalConsumers();
 		sequenceConsumer = new SimpleExpressionsTestLanguageSequenceConsumer(
@@ -150,4 +151,9 @@ public class SimpleExpressionsTestLanguageParserConfiguration extends AbstractPa
     }
 
 
+	@Override
+	public ITerminalConsumer[] getInitialHiddenTerminals() {
+		return getXtextBuiltinConfiguration().getInitialHiddenTerminals();
+	}
+	
 }

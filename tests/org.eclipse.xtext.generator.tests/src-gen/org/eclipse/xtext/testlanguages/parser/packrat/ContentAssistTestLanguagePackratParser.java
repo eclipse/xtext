@@ -12,5 +12,5 @@ public class ContentAssistTestLanguagePackratParser extends AbstractPackratParse
 	protected ContentAssistTestLanguageParserConfiguration createParserConfiguration(IInternalParserConfiguration configuration) {
 		return new ContentAssistTestLanguageParserConfiguration(configuration);
 	}
-
+	
 }

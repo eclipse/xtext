@@ -23,6 +23,7 @@ public class SimpleExpressionsTestLanguageParser extends org.eclipse.xtext.parse
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
 		InternalSimpleExpressionsTestLanguageLexer lexer = new InternalSimpleExpressionsTestLanguageLexer(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
+		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 		InternalSimpleExpressionsTestLanguageParser parser = new InternalSimpleExpressionsTestLanguageParser(
 				stream, getElementFactory(), grammarAccess.getGrammar());
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());

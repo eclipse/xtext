@@ -12,5 +12,5 @@ public class SimpleReconstrTestLanguagePackratParser extends AbstractPackratPars
 	protected SimpleReconstrTestLanguageParserConfiguration createParserConfiguration(IInternalParserConfiguration configuration) {
 		return new SimpleReconstrTestLanguageParserConfiguration(configuration);
 	}
-
+	
 }

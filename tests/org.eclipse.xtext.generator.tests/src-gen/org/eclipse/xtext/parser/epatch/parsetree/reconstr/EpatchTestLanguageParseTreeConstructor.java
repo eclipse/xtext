@@ -49,7 +49,7 @@ public class EpatchTestLanguageParseTreeConstructor extends AbstractParseTreeCon
 
 /************ begin Rule EPatch ****************
  *
- * EPatch hidden ( WS , ML_COMMENT , SL_COMMENT ) : "epatch" name = ID "{" ( imports += Import ) * ( resources += NamedResource ) * ( objects += ObjectRef ) * "}" ;
+ * EPatch : "epatch" name = ID "{" ( imports += Import ) * ( resources += NamedResource ) * ( objects += ObjectRef ) * "}" ;
  *
  **/
 

@@ -12,5 +12,5 @@ public class LowerCaseNamedTestLanguagePackratParser extends AbstractPackratPars
 	protected LowerCaseNamedTestLanguageParserConfiguration createParserConfiguration(IInternalParserConfiguration configuration) {
 		return new LowerCaseNamedTestLanguageParserConfiguration(configuration);
 	}
-
+	
 }

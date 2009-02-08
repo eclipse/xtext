@@ -5,6 +5,7 @@ package org.eclipse.xtext.reference.parser.packrat;
 
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 
@@ -46,7 +47,7 @@ public class ReferenceGrammarParserConfiguration extends AbstractParserConfigura
 	public ReferenceGrammarSpielplatzConsumer getRootConsumer() {
 		return spielplatzConsumer;
 	} 
-	
+
 	public void createNonTerminalConsumers() {
 		getXtextBuiltinConfiguration().createNonTerminalConsumers();
 		spielplatzConsumer = new ReferenceGrammarSpielplatzConsumer(
@@ -209,4 +210,9 @@ public class ReferenceGrammarParserConfiguration extends AbstractParserConfigura
     }
 
 
+	@Override
+	public ITerminalConsumer[] getInitialHiddenTerminals() {
+		return getXtextBuiltinConfiguration().getInitialHiddenTerminals();
+	}
+	
 }

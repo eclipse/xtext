@@ -23,6 +23,7 @@ public class TransientValuesTestParser extends org.eclipse.xtext.parser.antlr.Ab
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
 		InternalTransientValuesTestLexer lexer = new InternalTransientValuesTestLexer(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
+		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 		InternalTransientValuesTestParser parser = new InternalTransientValuesTestParser(
 				stream, getElementFactory(), grammarAccess.getGrammar());
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());

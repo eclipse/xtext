@@ -5,6 +5,7 @@ package org.eclipse.xtext.testlanguages.parser.packrat;
 
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 
@@ -35,7 +36,7 @@ public class LexerTestLanguageParserConfiguration extends AbstractParserConfigur
 	public LexerTestLanguageModelConsumer getRootConsumer() {
 		return modelConsumer;
 	} 
-	
+
 	public void createNonTerminalConsumers() {
 		getXtextBuiltinConfiguration().createNonTerminalConsumers();
 		modelConsumer = new LexerTestLanguageModelConsumer(
@@ -103,4 +104,9 @@ public class LexerTestLanguageParserConfiguration extends AbstractParserConfigur
     }
 
 
+	@Override
+	public ITerminalConsumer[] getInitialHiddenTerminals() {
+		return getXtextBuiltinConfiguration().getInitialHiddenTerminals();
+	}
+	
 }

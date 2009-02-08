@@ -12,5 +12,5 @@ public class FormatterTestLanguagePackratParser extends AbstractPackratParser {
 	protected FormatterTestLanguageParserConfiguration createParserConfiguration(IInternalParserConfiguration configuration) {
 		return new FormatterTestLanguageParserConfiguration(configuration);
 	}
-
+	
 }

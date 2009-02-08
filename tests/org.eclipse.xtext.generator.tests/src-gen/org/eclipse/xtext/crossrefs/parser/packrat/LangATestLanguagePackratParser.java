@@ -12,5 +12,5 @@ public class LangATestLanguagePackratParser extends AbstractPackratParser {
 	protected LangATestLanguageParserConfiguration createParserConfiguration(IInternalParserConfiguration configuration) {
 		return new LangATestLanguageParserConfiguration(configuration);
 	}
-
+	
 }

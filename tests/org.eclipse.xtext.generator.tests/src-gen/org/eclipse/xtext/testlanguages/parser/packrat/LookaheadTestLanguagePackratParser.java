@@ -12,5 +12,5 @@ public class LookaheadTestLanguagePackratParser extends AbstractPackratParser {
 	protected LookaheadTestLanguageParserConfiguration createParserConfiguration(IInternalParserConfiguration configuration) {
 		return new LookaheadTestLanguageParserConfiguration(configuration);
 	}
-
+	
 }
