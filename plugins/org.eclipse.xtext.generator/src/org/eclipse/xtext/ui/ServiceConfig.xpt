@@ -16,6 +16,7 @@
 «EXTENSION org::eclipse::xtext::Properties»
 
 «DEFINE root FOR GenModel»
+«IF !grammar().isAbstract()»
 «FILE grammar().generatedUiModuleClass().toJavaFilePath() UI_SRC_GEN -»
 /*
 «fileHeader()»
@@ -56,5 +57,5 @@ public class «grammar().uiModuleClass().toSimpleName()» extends «grammar().gener
 	
 }
 «ENDFILE»
-
+«ENDIF-»
 «ENDDEFINE»

@@ -46,6 +46,7 @@ public class «activatorClassFQN().toSimpleName()» extends AbstractUIPlugin {
  «ENDDEFINE»
  
 «DEFINE editor FOR GenModel»
+ «IF !grammar().abstract-»
  «FILE editorClassFQN().toJavaFilePath() UI_SRC_GEN-»
 package «editorClassFQN().toJavaPackage()»;
 
@@ -53,5 +54,5 @@ public class «editorClassFQN().toSimpleName()» extends org.eclipse.xtext.ui.core
 
 }
  «ENDFILE»
- 
+ «ENDIF-» 
  «ENDDEFINE»
