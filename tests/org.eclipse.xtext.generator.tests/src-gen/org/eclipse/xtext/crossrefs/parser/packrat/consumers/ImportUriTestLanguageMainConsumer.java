@@ -76,7 +76,7 @@ public final class ImportUriTestLanguageMainConsumer extends NonTerminalConsumer
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(importConsumer, "imports", true, false, getRule().ele00ParserRuleCallImport());
+		tempResult = consumeNonTerminal(importConsumer, "imports", true, false, false, getRule().ele00ParserRuleCallImport());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -99,7 +99,7 @@ public final class ImportUriTestLanguageMainConsumer extends NonTerminalConsumer
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(typeConsumer, "types", true, false, getRule().ele10ParserRuleCallType());
+		tempResult = consumeNonTerminal(typeConsumer, "types", true, false, false, getRule().ele10ParserRuleCallType());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

@@ -52,11 +52,11 @@ public final class PartialParserTestLanguageAbstractChildConsumer extends NonTer
 	}
 
 	protected int consumeRuleCall$2(int entryPoint) throws Exception {
-		return consumeNonTerminal(firstConcreteConsumer, null, false, false, getRule().ele0ParserRuleCallFirstConcrete());
+		return consumeNonTerminal(firstConcreteConsumer, null, false, false, false, getRule().ele0ParserRuleCallFirstConcrete());
 	}
 
 	protected int consumeRuleCall$3(int entryPoint) throws Exception {
-		return consumeNonTerminal(secondConcreteConsumer, null, false, false, getRule().ele1ParserRuleCallSecondConcrete());
+		return consumeNonTerminal(secondConcreteConsumer, null, false, false, false, getRule().ele1ParserRuleCallSecondConcrete());
 	}
 
 	public AbstractChildElements getRule() {

@@ -44,7 +44,7 @@ public final class OptionalEmptyTestLanguageModelConsumer extends NonTerminalCon
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(greetingConsumer, "child", false, false, getRule().ele0ParserRuleCallGreeting());
+		tempResult = consumeNonTerminal(greetingConsumer, "child", false, false, false, getRule().ele0ParserRuleCallGreeting());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

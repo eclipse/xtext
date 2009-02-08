@@ -52,11 +52,11 @@ public final class TestLanguageAbstractRuleConsumer extends NonTerminalConsumer 
 	}
 
 	protected int consumeRuleCall$2(int entryPoint) throws Exception {
-		return consumeNonTerminal(choiceRuleConsumer, null, false, false, getRule().ele0ParserRuleCallChoiceRule());
+		return consumeNonTerminal(choiceRuleConsumer, null, false, false, false, getRule().ele0ParserRuleCallChoiceRule());
 	}
 
 	protected int consumeRuleCall$3(int entryPoint) throws Exception {
-		return consumeNonTerminal(reducibleRuleConsumer, null, false, false, getRule().ele1ParserRuleCallReducibleRule());
+		return consumeNonTerminal(reducibleRuleConsumer, null, false, false, false, getRule().ele1ParserRuleCallReducibleRule());
 	}
 
 	public AbstractRuleElements getRule() {

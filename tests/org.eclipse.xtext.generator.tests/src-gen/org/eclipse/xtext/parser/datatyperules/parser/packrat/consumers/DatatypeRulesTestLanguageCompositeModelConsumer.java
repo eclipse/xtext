@@ -63,7 +63,7 @@ public final class DatatypeRulesTestLanguageCompositeModelConsumer extends NonTe
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(modelConsumer, "model", true, false, getRule().ele0ParserRuleCallModel());
+		tempResult = consumeNonTerminal(modelConsumer, "model", true, false, false, getRule().ele0ParserRuleCallModel());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

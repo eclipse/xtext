@@ -195,7 +195,7 @@ public final class EcoreDslEGenericTypeDeclConsumer extends NonTerminalConsumer 
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(eGenericTypeDeclConsumer, "eTypeArguments", true, false, getRule().ele0010010ParserRuleCallEGenericTypeDecl());
+		tempResult = consumeNonTerminal(eGenericTypeDeclConsumer, "eTypeArguments", true, false, false, getRule().ele0010010ParserRuleCallEGenericTypeDecl());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -253,7 +253,7 @@ public final class EcoreDslEGenericTypeDeclConsumer extends NonTerminalConsumer 
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(eGenericTypeDeclConsumer, "eTypeArguments", true, false, getRule().ele0010110ParserRuleCallEGenericTypeDecl());
+		tempResult = consumeNonTerminal(eGenericTypeDeclConsumer, "eTypeArguments", true, false, false, getRule().ele0010110ParserRuleCallEGenericTypeDecl());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -409,7 +409,7 @@ public final class EcoreDslEGenericTypeDeclConsumer extends NonTerminalConsumer 
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(eGenericTypeDeclConsumer, "eUpperBound", false, false, getRule().ele11010ParserRuleCallEGenericTypeDecl());
+		tempResult = consumeNonTerminal(eGenericTypeDeclConsumer, "eUpperBound", false, false, false, getRule().ele11010ParserRuleCallEGenericTypeDecl());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -458,7 +458,7 @@ public final class EcoreDslEGenericTypeDeclConsumer extends NonTerminalConsumer 
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(eGenericTypeDeclConsumer, "eLowerBound", false, false, getRule().ele11110ParserRuleCallEGenericTypeDecl());
+		tempResult = consumeNonTerminal(eGenericTypeDeclConsumer, "eLowerBound", false, false, false, getRule().ele11110ParserRuleCallEGenericTypeDecl());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

@@ -107,7 +107,7 @@ public final class DomainmodelPackageConsumer extends NonTerminalConsumer {
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(qualifiedNameConsumer, "name", false, true, getRule().ele00010ParserRuleCallQualifiedName());
+		tempResult = consumeNonTerminal(qualifiedNameConsumer, "name", false, true, false, getRule().ele00010ParserRuleCallQualifiedName());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -134,7 +134,7 @@ public final class DomainmodelPackageConsumer extends NonTerminalConsumer {
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(namedElementConsumer, "namedElements", true, false, getRule().ele010ParserRuleCallNamedElement());
+		tempResult = consumeNonTerminal(namedElementConsumer, "namedElements", true, false, false, getRule().ele010ParserRuleCallNamedElement());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

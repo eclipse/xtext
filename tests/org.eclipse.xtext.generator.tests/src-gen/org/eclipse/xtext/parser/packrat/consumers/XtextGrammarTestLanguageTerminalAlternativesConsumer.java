@@ -65,7 +65,7 @@ public final class XtextGrammarTestLanguageTerminalAlternativesConsumer extends 
 	}
 
 	protected int consumeRuleCall$2(int entryPoint) throws Exception {
-		return consumeNonTerminal(terminalGroupConsumer, null, false, false, getRule().ele0ParserRuleCallTerminalGroup());
+		return consumeNonTerminal(terminalGroupConsumer, null, false, false, false, getRule().ele0ParserRuleCallTerminalGroup());
 	}
 
 	protected int consumeGroup$3(int entryPoint) throws Exception {
@@ -129,7 +129,7 @@ public final class XtextGrammarTestLanguageTerminalAlternativesConsumer extends 
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(terminalGroupConsumer, "groups", true, false, getRule().ele110ParserRuleCallTerminalGroup());
+		tempResult = consumeNonTerminal(terminalGroupConsumer, "groups", true, false, false, getRule().ele110ParserRuleCallTerminalGroup());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

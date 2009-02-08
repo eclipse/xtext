@@ -52,11 +52,11 @@ public final class EcoreDslEClassifierDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeRuleCall$2(int entryPoint) throws Exception {
-		return consumeNonTerminal(eClassDeclConsumer, null, false, false, getRule().ele0ParserRuleCallEClassDecl());
+		return consumeNonTerminal(eClassDeclConsumer, null, false, false, false, getRule().ele0ParserRuleCallEClassDecl());
 	}
 
 	protected int consumeRuleCall$3(int entryPoint) throws Exception {
-		return consumeNonTerminal(eDataTypeDeclConsumer, null, false, false, getRule().ele1ParserRuleCallEDataTypeDecl());
+		return consumeNonTerminal(eDataTypeDeclConsumer, null, false, false, false, getRule().ele1ParserRuleCallEDataTypeDecl());
 	}
 
 	public EClassifierDeclElements getRule() {

@@ -31,7 +31,7 @@ public final class ConcreteTestLanguageRootRuleConsumer extends NonTerminalConsu
 	}
 
 	protected int consumeRuleCall$1(int entryPoint) throws Exception {
-		return consumeNonTerminal(concreteParserRuleConsumer, null, false, false, getRule().eleParserRuleCallConcreteParserRule());
+		return consumeNonTerminal(concreteParserRuleConsumer, null, false, false, false, getRule().eleParserRuleCallConcreteParserRule());
 	}
 
 	public RootRuleElements getRule() {

@@ -14,34 +14,42 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Alternatives c0Alternatives = (Alternatives)cAlternatives.eContents().get(0);
 		private final Alternatives c00Alternatives = (Alternatives)c0Alternatives.eContents().get(0);
-		private final RuleCall c000ParserRuleCallWithoutHiddens = (RuleCall)c00Alternatives.eContents().get(0);
-		private final RuleCall c001ParserRuleCallWithHiddens = (RuleCall)c00Alternatives.eContents().get(1);
-		private final RuleCall c01ParserRuleCallOverridingHiddens = (RuleCall)c0Alternatives.eContents().get(1);
-		private final RuleCall c1ParserRuleCallInheritingHiddens = (RuleCall)cAlternatives.eContents().get(1);
+		private final Alternatives c000Alternatives = (Alternatives)c00Alternatives.eContents().get(0);
+		private final RuleCall c0000ParserRuleCallWithoutHiddens = (RuleCall)c000Alternatives.eContents().get(0);
+		private final RuleCall c0001ParserRuleCallWithHiddens = (RuleCall)c000Alternatives.eContents().get(1);
+		private final RuleCall c001ParserRuleCallOverridingHiddens = (RuleCall)c00Alternatives.eContents().get(1);
+		private final RuleCall c01ParserRuleCallInheritingHiddens = (RuleCall)c0Alternatives.eContents().get(1);
+		private final RuleCall c1ParserRuleCallDatatypeHiddens = (RuleCall)cAlternatives.eContents().get(1);
 		
-		// Model : WithoutHiddens | WithHiddens | OverridingHiddens | InheritingHiddens ;
+		// Model : WithoutHiddens | WithHiddens | OverridingHiddens | InheritingHiddens | DatatypeHiddens ;
 		public ParserRule getRule() { return rule; }
 
-		// WithoutHiddens | WithHiddens | OverridingHiddens | InheritingHiddens
+		// WithoutHiddens | WithHiddens | OverridingHiddens | InheritingHiddens | DatatypeHiddens
 		public Alternatives eleAlternatives() { return cAlternatives; }
 
-		// WithoutHiddens | WithHiddens | OverridingHiddens
+		// WithoutHiddens | WithHiddens | OverridingHiddens | InheritingHiddens
 		public Alternatives ele0Alternatives() { return c0Alternatives; }
 
-		// WithoutHiddens | WithHiddens
+		// WithoutHiddens | WithHiddens | OverridingHiddens
 		public Alternatives ele00Alternatives() { return c00Alternatives; }
 
+		// WithoutHiddens | WithHiddens
+		public Alternatives ele000Alternatives() { return c000Alternatives; }
+
 		// WithoutHiddens
-		public RuleCall ele000ParserRuleCallWithoutHiddens() { return c000ParserRuleCallWithoutHiddens; }
+		public RuleCall ele0000ParserRuleCallWithoutHiddens() { return c0000ParserRuleCallWithoutHiddens; }
 
 		// WithHiddens
-		public RuleCall ele001ParserRuleCallWithHiddens() { return c001ParserRuleCallWithHiddens; }
+		public RuleCall ele0001ParserRuleCallWithHiddens() { return c0001ParserRuleCallWithHiddens; }
 
 		// OverridingHiddens
-		public RuleCall ele01ParserRuleCallOverridingHiddens() { return c01ParserRuleCallOverridingHiddens; }
+		public RuleCall ele001ParserRuleCallOverridingHiddens() { return c001ParserRuleCallOverridingHiddens; }
 
 		// InheritingHiddens
-		public RuleCall ele1ParserRuleCallInheritingHiddens() { return c1ParserRuleCallInheritingHiddens; }
+		public RuleCall ele01ParserRuleCallInheritingHiddens() { return c01ParserRuleCallInheritingHiddens; }
+
+		// DatatypeHiddens
+		public RuleCall ele1ParserRuleCallDatatypeHiddens() { return c1ParserRuleCallDatatypeHiddens; }
 	}
 
 	public class WithoutHiddensElements implements IParserRuleAccess {
@@ -295,8 +303,50 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess
 		public Keyword ele10KeywordSemicolon() { return c10KeywordSemicolon; }
 	}
 
-	public class HidingHiddensElements implements IParserRuleAccess {
+	public class DatatypeHiddensElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(8);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword c0KeywordDatatype = (Keyword)cGroup.eContents().get(0);
+		private final Assignment c1AssignmentValid = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall c10ParserRuleCallDatatypeRule = (RuleCall)c1AssignmentValid.eContents().get(0);
+		
+		// DatatypeHiddens : "datatype" valid ?= DatatypeRule ;
+		public ParserRule getRule() { return rule; }
+
+		// "datatype" valid ?= DatatypeRule
+		public Group eleGroup() { return cGroup; }
+
+		// "datatype"
+		public Keyword ele0KeywordDatatype() { return c0KeywordDatatype; }
+
+		// valid ?= DatatypeRule
+		public Assignment ele1AssignmentValid() { return c1AssignmentValid; }
+
+		// DatatypeRule
+		public RuleCall ele10ParserRuleCallDatatypeRule() { return c10ParserRuleCallDatatypeRule; }
+	}
+
+	public class DatatypeRuleElements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(9);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword c0KeywordRule = (Keyword)cGroup.eContents().get(0);
+		private final Keyword c1KeywordSemicolon = (Keyword)cGroup.eContents().get(1);
+		
+		// DatatypeRule returns EString hidden ( WS ) : "rule" ";" ;
+		public ParserRule getRule() { return rule; }
+
+		// "rule" ";"
+		public Group eleGroup() { return cGroup; }
+
+		// "rule"
+		public Keyword ele0KeywordRule() { return c0KeywordRule; }
+
+		// ";"
+		public Keyword ele1KeywordSemicolon() { return c1KeywordSemicolon; }
+	}
+
+	public class HidingHiddensElements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(10);
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Keyword c00KeywordHiding = (Keyword)c0Group.eContents().get(0);
@@ -331,7 +381,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess
 	}
 
 	public class InheritingHiddensCallElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(9);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(11);
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword c0KeywordCall = (Keyword)cGroup.eContents().get(0);
 		private final Assignment c1AssignmentValid = (Assignment)cGroup.eContents().get(1);
@@ -354,7 +404,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess
 	}
 
 	public class ML_COMMENTElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(10);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(12);
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword c0KeywordSolidusAsterisk = (Keyword)cGroup.eContents().get(0);
 		private final UpToToken c1UpToToken = (UpToToken)cGroup.eContents().get(1);
@@ -377,7 +427,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess
 	}
 
 	public class SL_COMMENTElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(11);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(13);
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Keyword c00KeywordSolidusSolidus = (Keyword)c0Group.eContents().get(0);
@@ -424,7 +474,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess
 	}
 
 	public class WSElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(12);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(14);
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Alternatives c0Alternatives = (Alternatives)cAlternatives.eContents().get(0);
 		private final Alternatives c00Alternatives = (Alternatives)c0Alternatives.eContents().get(0);
@@ -459,7 +509,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess
 	}
 
 	public class ANY_OTHERElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(13);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(15);
 		private final Wildcard cWildcard = (Wildcard)rule.eContents().get(1);
 		
 		// terminal ANY_OTHER returns EString : . ;
@@ -479,6 +529,8 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess
 	private static OverridingHiddensElements pOverridingHiddens;
 	private static OverridingHiddensCallElements pOverridingHiddensCall;
 	private static InheritingHiddensElements pInheritingHiddens;
+	private static DatatypeHiddensElements pDatatypeHiddens;
+	private static DatatypeRuleElements pDatatypeRule;
 	private static HidingHiddensElements pHidingHiddens;
 	private static InheritingHiddensCallElements pInheritingHiddensCall;
 	private static ML_COMMENTElements pML_COMMENT;
@@ -501,7 +553,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess
 	}
 
 	
-	// Model : WithoutHiddens | WithHiddens | OverridingHiddens | InheritingHiddens ;
+	// Model : WithoutHiddens | WithHiddens | OverridingHiddens | InheritingHiddens | DatatypeHiddens ;
 	public ModelElements prModel() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	} 
@@ -529,6 +581,16 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess
 	// InheritingHiddens hidden ( WS , ML_COMMENT , SL_COMMENT ) : "inheriting" "hiddens" "(" ( called = InheritingHiddensCall | hidingCalled = HidingHiddens ) ")" valid ?= ";" ;
 	public InheritingHiddensElements prInheritingHiddens() {
 		return (pInheritingHiddens != null) ? pInheritingHiddens : (pInheritingHiddens = new InheritingHiddensElements());
+	} 
+
+	// DatatypeHiddens : "datatype" valid ?= DatatypeRule ;
+	public DatatypeHiddensElements prDatatypeHiddens() {
+		return (pDatatypeHiddens != null) ? pDatatypeHiddens : (pDatatypeHiddens = new DatatypeHiddensElements());
+	} 
+
+	// DatatypeRule returns EString hidden ( WS ) : "rule" ";" ;
+	public DatatypeRuleElements prDatatypeRule() {
+		return (pDatatypeRule != null) ? pDatatypeRule : (pDatatypeRule = new DatatypeRuleElements());
 	} 
 
 	// HidingHiddens hidden ( ) : "hiding" space = WS called = InheritingHiddensCall ;

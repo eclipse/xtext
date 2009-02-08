@@ -94,35 +94,35 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 	}
 
 	protected int consumeRuleCall$8(int entryPoint) throws Exception {
-		return consumeNonTerminal(atomConsumer, null, false, false, getRule().ele0000000ParserRuleCallAtom());
+		return consumeNonTerminal(atomConsumer, null, false, false, false, getRule().ele0000000ParserRuleCallAtom());
 	}
 
 	protected int consumeRuleCall$9(int entryPoint) throws Exception {
-		return consumeNonTerminal(twoNumbersConsumer, null, false, false, getRule().ele0000001ParserRuleCallTwoNumbers());
+		return consumeNonTerminal(twoNumbersConsumer, null, false, false, false, getRule().ele0000001ParserRuleCallTwoNumbers());
 	}
 
 	protected int consumeRuleCall$10(int entryPoint) throws Exception {
-		return consumeNonTerminal(manyStringsConsumer, null, false, false, getRule().ele000001ParserRuleCallManyStrings());
+		return consumeNonTerminal(manyStringsConsumer, null, false, false, false, getRule().ele000001ParserRuleCallManyStrings());
 	}
 
 	protected int consumeRuleCall$11(int entryPoint) throws Exception {
-		return consumeNonTerminal(parensConsumer, null, false, false, getRule().ele00001ParserRuleCallParens());
+		return consumeNonTerminal(parensConsumer, null, false, false, false, getRule().ele00001ParserRuleCallParens());
 	}
 
 	protected int consumeRuleCall$12(int entryPoint) throws Exception {
-		return consumeNonTerminal(typeConsumer, null, false, false, getRule().ele0001ParserRuleCallType());
+		return consumeNonTerminal(typeConsumer, null, false, false, false, getRule().ele0001ParserRuleCallType());
 	}
 
 	protected int consumeRuleCall$13(int entryPoint) throws Exception {
-		return consumeNonTerminal(ref2Consumer, null, false, false, getRule().ele001ParserRuleCallRef2());
+		return consumeNonTerminal(ref2Consumer, null, false, false, false, getRule().ele001ParserRuleCallRef2());
 	}
 
 	protected int consumeRuleCall$14(int entryPoint) throws Exception {
-		return consumeNonTerminal(spareConsumer, null, false, false, getRule().ele01ParserRuleCallSpare());
+		return consumeNonTerminal(spareConsumer, null, false, false, false, getRule().ele01ParserRuleCallSpare());
 	}
 
 	protected int consumeRuleCall$15(int entryPoint) throws Exception {
-		return consumeNonTerminal(booleanConsumer, null, false, false, getRule().ele1ParserRuleCallBoolean());
+		return consumeNonTerminal(booleanConsumer, null, false, false, false, getRule().ele1ParserRuleCallBoolean());
 	}
 
 	public TermElements getRule() {

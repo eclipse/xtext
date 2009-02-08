@@ -220,7 +220,7 @@ public final class ReferenceGrammarTestLanguageSpielplatzConsumer extends NonTer
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(kindConsumer, "kinder", true, false, getRule().ele010000ParserRuleCallKind());
+		tempResult = consumeNonTerminal(kindConsumer, "kinder", true, false, false, getRule().ele010000ParserRuleCallKind());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -234,7 +234,7 @@ public final class ReferenceGrammarTestLanguageSpielplatzConsumer extends NonTer
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(erwachsenerConsumer, "erzieher", true, false, getRule().ele010010ParserRuleCallErwachsener());
+		tempResult = consumeNonTerminal(erwachsenerConsumer, "erzieher", true, false, false, getRule().ele010010ParserRuleCallErwachsener());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -248,7 +248,7 @@ public final class ReferenceGrammarTestLanguageSpielplatzConsumer extends NonTer
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(spielzeugConsumer, "spielzeuge", true, false, getRule().ele01010ParserRuleCallSpielzeug());
+		tempResult = consumeNonTerminal(spielzeugConsumer, "spielzeuge", true, false, false, getRule().ele01010ParserRuleCallSpielzeug());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -262,7 +262,7 @@ public final class ReferenceGrammarTestLanguageSpielplatzConsumer extends NonTer
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(familieConsumer, "familie", true, false, getRule().ele0110ParserRuleCallFamilie());
+		tempResult = consumeNonTerminal(familieConsumer, "familie", true, false, false, getRule().ele0110ParserRuleCallFamilie());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

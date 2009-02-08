@@ -211,7 +211,7 @@ public final class DomainmodelEntityConsumer extends NonTerminalConsumer {
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(featureConsumer, "features", true, false, getRule().ele010ParserRuleCallFeature());
+		tempResult = consumeNonTerminal(featureConsumer, "features", true, false, false, getRule().ele010ParserRuleCallFeature());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

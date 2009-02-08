@@ -68,7 +68,7 @@ public final class SimpleExpressionsTestLanguageAdditionConsumer extends NonTerm
 	}
 
 	protected int consumeRuleCall$2(int entryPoint) throws Exception {
-		return consumeNonTerminal(multiplicationConsumer, null, false, false, getRule().ele0ParserRuleCallMultiplication());
+		return consumeNonTerminal(multiplicationConsumer, null, false, false, false, getRule().ele0ParserRuleCallMultiplication());
 	}
 
 	protected int consumeGroup$3(int entryPoint) throws Exception {
@@ -153,7 +153,7 @@ public final class SimpleExpressionsTestLanguageAdditionConsumer extends NonTerm
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(multiplicationConsumer, "values", true, false, getRule().ele110ParserRuleCallMultiplication());
+		tempResult = consumeNonTerminal(multiplicationConsumer, "values", true, false, false, getRule().ele110ParserRuleCallMultiplication());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

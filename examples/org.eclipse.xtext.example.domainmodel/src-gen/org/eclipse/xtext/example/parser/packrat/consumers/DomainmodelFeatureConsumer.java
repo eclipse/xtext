@@ -52,11 +52,11 @@ public final class DomainmodelFeatureConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeRuleCall$2(int entryPoint) throws Exception {
-		return consumeNonTerminal(structuralFeatureConsumer, null, false, false, getRule().ele0ParserRuleCallStructuralFeature());
+		return consumeNonTerminal(structuralFeatureConsumer, null, false, false, false, getRule().ele0ParserRuleCallStructuralFeature());
 	}
 
 	protected int consumeRuleCall$3(int entryPoint) throws Exception {
-		return consumeNonTerminal(operationConsumer, null, false, false, getRule().ele1ParserRuleCallOperation());
+		return consumeNonTerminal(operationConsumer, null, false, false, false, getRule().ele1ParserRuleCallOperation());
 	}
 
 	public FeatureElements getRule() {

@@ -112,7 +112,7 @@ public final class EpatchTestLanguageMonoSingleAssignmentConsumer extends NonTer
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(singleAssignmentValueConsumer, "leftValue", false, false, getRule().ele010ParserRuleCallSingleAssignmentValue());
+		tempResult = consumeNonTerminal(singleAssignmentValueConsumer, "leftValue", false, false, false, getRule().ele010ParserRuleCallSingleAssignmentValue());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

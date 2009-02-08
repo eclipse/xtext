@@ -256,7 +256,7 @@ public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsume
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(transitionConsumer, "transitions", true, false, getRule().ele010ParserRuleCallTransition());
+		tempResult = consumeNonTerminal(transitionConsumer, "transitions", true, false, false, getRule().ele010ParserRuleCallTransition());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

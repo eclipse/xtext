@@ -52,11 +52,11 @@ public final class XtextGrammarTestLanguageAbstractNegatedTokenConsumer extends 
 	}
 
 	protected int consumeRuleCall$2(int entryPoint) throws Exception {
-		return consumeNonTerminal(negatedTokenConsumer, null, false, false, getRule().ele0ParserRuleCallNegatedToken());
+		return consumeNonTerminal(negatedTokenConsumer, null, false, false, false, getRule().ele0ParserRuleCallNegatedToken());
 	}
 
 	protected int consumeRuleCall$3(int entryPoint) throws Exception {
-		return consumeNonTerminal(upToTokenConsumer, null, false, false, getRule().ele1ParserRuleCallUpToToken());
+		return consumeNonTerminal(upToTokenConsumer, null, false, false, false, getRule().ele1ParserRuleCallUpToToken());
 	}
 
 	public AbstractNegatedTokenElements getRule() {

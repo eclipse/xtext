@@ -195,7 +195,7 @@ public final class DomainmodelOperationConsumer extends NonTerminalConsumer {
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(parameterConsumer, "params", true, false, getRule().ele000100ParserRuleCallParameter());
+		tempResult = consumeNonTerminal(parameterConsumer, "params", true, false, false, getRule().ele000100ParserRuleCallParameter());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -253,7 +253,7 @@ public final class DomainmodelOperationConsumer extends NonTerminalConsumer {
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(parameterConsumer, "params", true, false, getRule().ele0001110ParserRuleCallParameter());
+		tempResult = consumeNonTerminal(parameterConsumer, "params", true, false, false, getRule().ele0001110ParserRuleCallParameter());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -275,7 +275,7 @@ public final class DomainmodelOperationConsumer extends NonTerminalConsumer {
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(typeRefConsumer, "type", false, false, getRule().ele10ParserRuleCallTypeRef());
+		tempResult = consumeNonTerminal(typeRefConsumer, "type", false, false, false, getRule().ele10ParserRuleCallTypeRef());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

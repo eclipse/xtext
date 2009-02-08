@@ -59,15 +59,15 @@ public final class LookaheadTestLanguageAltsConsumer extends NonTerminalConsumer
 	}
 
 	protected int consumeRuleCall$3(int entryPoint) throws Exception {
-		return consumeNonTerminal(lookAhead0Consumer, null, false, false, getRule().ele00ParserRuleCallLookAhead0());
+		return consumeNonTerminal(lookAhead0Consumer, null, false, false, false, getRule().ele00ParserRuleCallLookAhead0());
 	}
 
 	protected int consumeRuleCall$4(int entryPoint) throws Exception {
-		return consumeNonTerminal(lookAhead1Consumer, null, false, false, getRule().ele01ParserRuleCallLookAhead1());
+		return consumeNonTerminal(lookAhead1Consumer, null, false, false, false, getRule().ele01ParserRuleCallLookAhead1());
 	}
 
 	protected int consumeRuleCall$5(int entryPoint) throws Exception {
-		return consumeNonTerminal(lookAhead3Consumer, null, false, false, getRule().ele1ParserRuleCallLookAhead3());
+		return consumeNonTerminal(lookAhead3Consumer, null, false, false, false, getRule().ele1ParserRuleCallLookAhead3());
 	}
 
 	public AltsElements getRule() {

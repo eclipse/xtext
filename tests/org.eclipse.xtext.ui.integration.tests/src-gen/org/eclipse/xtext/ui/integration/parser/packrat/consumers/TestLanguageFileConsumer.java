@@ -43,7 +43,7 @@ public final class TestLanguageFileConsumer extends NonTerminalConsumer {
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(stuffConsumer, "stuff", true, false, getRule().ele0ParserRuleCallStuff());
+		tempResult = consumeNonTerminal(stuffConsumer, "stuff", true, false, false, getRule().ele0ParserRuleCallStuff());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

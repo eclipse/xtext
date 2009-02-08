@@ -99,15 +99,15 @@ public final class XtextTerminalsTestLanguageAbstractTokenConsumer extends NonTe
 	}
 
 	protected int consumeRuleCall$4(int entryPoint) throws Exception {
-		return consumeNonTerminal(assignmentConsumer, null, false, false, getRule().ele000ParserRuleCallAssignment());
+		return consumeNonTerminal(assignmentConsumer, null, false, false, false, getRule().ele000ParserRuleCallAssignment());
 	}
 
 	protected int consumeRuleCall$5(int entryPoint) throws Exception {
-		return consumeNonTerminal(actionConsumer, null, false, false, getRule().ele001ParserRuleCallAction());
+		return consumeNonTerminal(actionConsumer, null, false, false, false, getRule().ele001ParserRuleCallAction());
 	}
 
 	protected int consumeRuleCall$6(int entryPoint) throws Exception {
-		return consumeNonTerminal(abstractTerminalConsumer, null, false, false, getRule().ele01ParserRuleCallAbstractTerminal());
+		return consumeNonTerminal(abstractTerminalConsumer, null, false, false, false, getRule().ele01ParserRuleCallAbstractTerminal());
 	}
 
 	protected int consumeAssignment$7(int entryPoint) throws Exception {

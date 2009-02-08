@@ -159,7 +159,7 @@ public final class EcoreDslEDataTypeDeclConsumer extends NonTerminalConsumer {
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(eAnnotationDeclConsumer, "eAnnotations", true, false, getRule().ele0000ParserRuleCallEAnnotationDecl());
+		tempResult = consumeNonTerminal(eAnnotationDeclConsumer, "eAnnotations", true, false, false, getRule().ele0000ParserRuleCallEAnnotationDecl());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -219,7 +219,7 @@ public final class EcoreDslEDataTypeDeclConsumer extends NonTerminalConsumer {
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(stringOrQidConsumer, "instanceClassName", false, true, getRule().ele01010ParserRuleCallSTRING_OR_QID());
+		tempResult = consumeNonTerminal(stringOrQidConsumer, "instanceClassName", false, true, false, getRule().ele01010ParserRuleCallSTRING_OR_QID());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -234,7 +234,7 @@ public final class EcoreDslEDataTypeDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeRuleCall$19(int entryPoint) throws Exception {
-		return consumeNonTerminal(eEnumDeclConsumer, null, false, false, getRule().ele1ParserRuleCallEEnumDecl());
+		return consumeNonTerminal(eEnumDeclConsumer, null, false, false, false, getRule().ele1ParserRuleCallEEnumDecl());
 	}
 
 	public EDataTypeDeclElements getRule() {

@@ -194,7 +194,7 @@ public final class XtextTerminalsTestLanguageParserRuleConsumer extends NonTermi
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(typeRefConsumer, "type", false, false, getRule().ele0000110ParserRuleCallTypeRef());
+		tempResult = consumeNonTerminal(typeRefConsumer, "type", false, false, false, getRule().ele0000110ParserRuleCallTypeRef());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -406,7 +406,7 @@ public final class XtextTerminalsTestLanguageParserRuleConsumer extends NonTermi
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(alternativesConsumer, "alternatives", false, false, getRule().ele010ParserRuleCallAlternatives());
+		tempResult = consumeNonTerminal(alternativesConsumer, "alternatives", false, false, false, getRule().ele010ParserRuleCallAlternatives());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

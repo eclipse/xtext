@@ -129,7 +129,7 @@ public final class PartialParserTestLanguageNestedConsumer extends NonTerminalCo
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(containerConsumer, "nested", true, false, getRule().ele010ParserRuleCallContainer());
+		tempResult = consumeNonTerminal(containerConsumer, "nested", true, false, false, getRule().ele010ParserRuleCallContainer());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

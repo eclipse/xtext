@@ -193,7 +193,7 @@ public final class XtextGrammarTestLanguageTerminalRuleConsumer extends NonTermi
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(typeRefConsumer, "type", false, false, getRule().ele000110ParserRuleCallTypeRef());
+		tempResult = consumeNonTerminal(typeRefConsumer, "type", false, false, false, getRule().ele000110ParserRuleCallTypeRef());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -211,7 +211,7 @@ public final class XtextGrammarTestLanguageTerminalRuleConsumer extends NonTermi
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(terminalAlternativesConsumer, "alternatives", false, false, getRule().ele010ParserRuleCallTerminalAlternatives());
+		tempResult = consumeNonTerminal(terminalAlternativesConsumer, "alternatives", false, false, false, getRule().ele010ParserRuleCallTerminalAlternatives());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

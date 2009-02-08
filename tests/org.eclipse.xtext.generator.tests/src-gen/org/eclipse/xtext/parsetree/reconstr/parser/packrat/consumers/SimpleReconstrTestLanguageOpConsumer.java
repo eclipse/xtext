@@ -62,7 +62,7 @@ public final class SimpleReconstrTestLanguageOpConsumer extends NonTerminalConsu
 	}
 
 	protected int consumeRuleCall$2(int entryPoint) throws Exception {
-		return consumeNonTerminal(termConsumer, null, false, false, getRule().ele0ParserRuleCallTerm());
+		return consumeNonTerminal(termConsumer, null, false, false, false, getRule().ele0ParserRuleCallTerm());
 	}
 
 	protected int consumeGroup$3(int entryPoint) throws Exception {
@@ -113,7 +113,7 @@ public final class SimpleReconstrTestLanguageOpConsumer extends NonTerminalConsu
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(termConsumer, "values", true, false, getRule().ele110ParserRuleCallTerm());
+		tempResult = consumeNonTerminal(termConsumer, "values", true, false, false, getRule().ele110ParserRuleCallTerm());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

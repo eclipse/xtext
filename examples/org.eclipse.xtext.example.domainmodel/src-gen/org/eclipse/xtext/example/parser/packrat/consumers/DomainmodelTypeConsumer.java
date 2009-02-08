@@ -52,11 +52,11 @@ public final class DomainmodelTypeConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeRuleCall$2(int entryPoint) throws Exception {
-		return consumeNonTerminal(entityConsumer, null, false, false, getRule().ele0ParserRuleCallEntity());
+		return consumeNonTerminal(entityConsumer, null, false, false, false, getRule().ele0ParserRuleCallEntity());
 	}
 
 	protected int consumeRuleCall$3(int entryPoint) throws Exception {
-		return consumeNonTerminal(dataTypeConsumer, null, false, false, getRule().ele1ParserRuleCallDataType());
+		return consumeNonTerminal(dataTypeConsumer, null, false, false, false, getRule().ele1ParserRuleCallDataType());
 	}
 
 	public TypeElements getRule() {

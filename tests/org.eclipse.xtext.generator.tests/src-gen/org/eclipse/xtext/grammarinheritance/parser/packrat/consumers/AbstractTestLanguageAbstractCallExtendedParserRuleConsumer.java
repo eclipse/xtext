@@ -81,7 +81,7 @@ public final class AbstractTestLanguageAbstractCallExtendedParserRuleConsumer ex
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(extendableParserRuleConsumer, "elements", true, false, getRule().ele10ParserRuleCallExtendableParserRule());
+		tempResult = consumeNonTerminal(extendableParserRuleConsumer, "elements", true, false, false, getRule().ele10ParserRuleCallExtendableParserRule());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

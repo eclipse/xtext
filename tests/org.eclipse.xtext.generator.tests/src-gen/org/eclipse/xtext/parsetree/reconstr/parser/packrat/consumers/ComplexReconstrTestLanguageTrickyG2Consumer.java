@@ -55,7 +55,7 @@ public final class ComplexReconstrTestLanguageTrickyG2Consumer extends NonTermin
 	}
 
 	protected int consumeRuleCall$2(int entryPoint) throws Exception {
-		return consumeNonTerminal(trickyG1Consumer, null, false, false, getRule().ele0ParserRuleCallTrickyG1());
+		return consumeNonTerminal(trickyG1Consumer, null, false, false, false, getRule().ele0ParserRuleCallTrickyG1());
 	}
 
 	protected int consumeAssignment$3(int entryPoint) throws Exception {

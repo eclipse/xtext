@@ -184,7 +184,7 @@ public final class EpatchTestLanguageMonoListAssignmentConsumer extends NonTermi
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(assignmentValueConsumer, "leftValues", true, false, getRule().ele00100ParserRuleCallAssignmentValue());
+		tempResult = consumeNonTerminal(assignmentValueConsumer, "leftValues", true, false, false, getRule().ele00100ParserRuleCallAssignmentValue());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -242,7 +242,7 @@ public final class EpatchTestLanguageMonoListAssignmentConsumer extends NonTermi
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(assignmentValueConsumer, "leftValues", true, false, getRule().ele001110ParserRuleCallAssignmentValue());
+		tempResult = consumeNonTerminal(assignmentValueConsumer, "leftValues", true, false, false, getRule().ele001110ParserRuleCallAssignmentValue());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

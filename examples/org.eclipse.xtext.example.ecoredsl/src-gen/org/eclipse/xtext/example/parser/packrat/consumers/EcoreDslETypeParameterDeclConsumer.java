@@ -132,7 +132,7 @@ public final class EcoreDslETypeParameterDeclConsumer extends NonTerminalConsume
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(eGenericTypeDeclConsumer, "eBounds", true, false, getRule().ele110ParserRuleCallEGenericTypeDecl());
+		tempResult = consumeNonTerminal(eGenericTypeDeclConsumer, "eBounds", true, false, false, getRule().ele110ParserRuleCallEGenericTypeDecl());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

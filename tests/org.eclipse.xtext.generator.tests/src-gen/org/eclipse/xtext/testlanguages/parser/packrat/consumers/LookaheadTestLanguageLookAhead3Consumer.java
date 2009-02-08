@@ -114,7 +114,7 @@ public final class LookaheadTestLanguageLookAhead3Consumer extends NonTerminalCo
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(lookAhead4Consumer, "z", false, false, getRule().ele10ParserRuleCallLookAhead4());
+		tempResult = consumeNonTerminal(lookAhead4Consumer, "z", false, false, false, getRule().ele10ParserRuleCallLookAhead4());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

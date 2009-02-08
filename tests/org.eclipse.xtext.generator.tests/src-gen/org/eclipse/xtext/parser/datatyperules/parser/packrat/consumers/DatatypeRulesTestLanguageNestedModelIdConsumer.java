@@ -74,7 +74,7 @@ public final class DatatypeRulesTestLanguageNestedModelIdConsumer extends NonTer
 	}
 
 	protected int consumeRuleCall$3(int entryPoint) throws Exception {
-		return consumeNonTerminal(modelIdConsumer, null, false, true, getRule().ele00ParserRuleCallModelId());
+		return consumeNonTerminal(modelIdConsumer, null, false, true, false, getRule().ele00ParserRuleCallModelId());
 	}
 
 	protected int consumeKeyword$4(int entryPoint) throws Exception {
@@ -82,7 +82,7 @@ public final class DatatypeRulesTestLanguageNestedModelIdConsumer extends NonTer
 	}
 
 	protected int consumeRuleCall$5(int entryPoint) throws Exception {
-		return consumeNonTerminal(modelIdConsumer, null, false, true, getRule().ele1ParserRuleCallModelId());
+		return consumeNonTerminal(modelIdConsumer, null, false, true, false, getRule().ele1ParserRuleCallModelId());
 	}
 
 	public NestedModelIdElements getRule() {

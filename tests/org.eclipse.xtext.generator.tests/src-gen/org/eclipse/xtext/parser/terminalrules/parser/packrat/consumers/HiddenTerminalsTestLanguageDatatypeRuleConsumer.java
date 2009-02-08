@@ -12,21 +12,22 @@ import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
-import org.eclipse.xtext.parser.terminalrules.services.XtextTerminalsTestLanguageGrammarAccess;
-import org.eclipse.xtext.parser.terminalrules.services.XtextTerminalsTestLanguageGrammarAccess.NegatedTokenElements;
+import org.eclipse.xtext.parser.terminalrules.services.HiddenTerminalsTestLanguageGrammarAccess;
+import org.eclipse.xtext.parser.terminalrules.services.HiddenTerminalsTestLanguageGrammarAccess.DatatypeRuleElements;
 
-import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerminalsTestLanguageTerminalTokenElementConsumer;
 
 @SuppressWarnings("unused")
-public final class XtextTerminalsTestLanguageNegatedTokenConsumer extends NonTerminalConsumer {
+public final class HiddenTerminalsTestLanguageDatatypeRuleConsumer extends NonTerminalConsumer {
 
-	private XtextTerminalsTestLanguageTerminalTokenElementConsumer terminalTokenElementConsumer;
 
 	private ICharacterClass keyword$2$Delimiter;
 	
-	public XtextTerminalsTestLanguageNegatedTokenConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
+	private ICharacterClass keyword$3$Delimiter;
+	
+	public HiddenTerminalsTestLanguageDatatypeRuleConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$3$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	protected int doConsume(int entryPoint) throws Exception {
@@ -44,16 +45,16 @@ public final class XtextTerminalsTestLanguageNegatedTokenConsumer extends NonTer
 				announceNextStep();
 				result = consumeKeyword$2(nextEntryPoint());
 				if (result!=ConsumeResult.SUCCESS) {
-					error("Another token expected.", getRule().ele0KeywordExclamationMark());
+					error("Another token expected.", getRule().ele0KeywordRule());
 					marker.commit();
 					announceLevelFinished();
 					return result;
 				}
 			case 1:
 				announceNextStep();
-				result = consumeAssignment$3(nextEntryPoint());
+				result = consumeKeyword$3(nextEntryPoint());
 				if (result!=ConsumeResult.SUCCESS) {
-					error("Another token expected.", getRule().ele1AssignmentTerminal());
+					error("Another token expected.", getRule().ele1KeywordSemicolon());
 					marker.commit();
 					announceLevelFinished();
 					return result;
@@ -65,25 +66,15 @@ public final class XtextTerminalsTestLanguageNegatedTokenConsumer extends NonTer
 	}
 
 	protected int consumeKeyword$2(int entryPoint) throws Exception {
-		return consumeKeyword(getRule().ele0KeywordExclamationMark(), null, false, false, getKeyword$2$Delimiter());
+		return consumeKeyword(getRule().ele0KeywordRule(), null, false, false, getKeyword$2$Delimiter());
 	}
 
-	protected int consumeAssignment$3(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(terminalTokenElementConsumer, "terminal", false, false, false, getRule().ele10ParserRuleCallTerminalTokenElement());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+	protected int consumeKeyword$3(int entryPoint) throws Exception {
+		return consumeKeyword(getRule().ele1KeywordSemicolon(), null, false, false, getKeyword$3$Delimiter());
 	}
 
-	public NegatedTokenElements getRule() {
-		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prNegatedToken();
+	public DatatypeRuleElements getRule() {
+		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prDatatypeRule();
 	}
 	
 	protected EObject getGrammarElement() {
@@ -92,11 +83,7 @@ public final class XtextTerminalsTestLanguageNegatedTokenConsumer extends NonTer
 
 	@Override
 	protected String getDefaultTypeName() {
-		return "NegatedToken";
-	}
-	
-	public void setTerminalTokenElementConsumer(XtextTerminalsTestLanguageTerminalTokenElementConsumer terminalTokenElementConsumer) {
-		this.terminalTokenElementConsumer = terminalTokenElementConsumer;
+		return "EString";
 	}
 	
 	public ICharacterClass getKeyword$2$Delimiter() {
@@ -105,6 +92,14 @@ public final class XtextTerminalsTestLanguageNegatedTokenConsumer extends NonTer
 	
 	public void setKeyword$2$Delimiter(ICharacterClass characterClass) {
 		keyword$2$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$3$Delimiter() {
+		return keyword$3$Delimiter;
+	}
+	
+	public void setKeyword$3$Delimiter(ICharacterClass characterClass) {
+		keyword$3$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

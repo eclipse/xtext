@@ -65,7 +65,7 @@ public final class XtextGrammarTestLanguageCharacterRangeConsumer extends NonTer
 	}
 
 	protected int consumeRuleCall$2(int entryPoint) throws Exception {
-		return consumeNonTerminal(keywordConsumer, null, false, false, getRule().ele0ParserRuleCallKeyword());
+		return consumeNonTerminal(keywordConsumer, null, false, false, false, getRule().ele0ParserRuleCallKeyword());
 	}
 
 	protected int consumeGroup$3(int entryPoint) throws Exception {
@@ -130,7 +130,7 @@ public final class XtextGrammarTestLanguageCharacterRangeConsumer extends NonTer
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(keywordConsumer, "right", false, false, getRule().ele110ParserRuleCallKeyword());
+		tempResult = consumeNonTerminal(keywordConsumer, "right", false, false, false, getRule().ele110ParserRuleCallKeyword());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

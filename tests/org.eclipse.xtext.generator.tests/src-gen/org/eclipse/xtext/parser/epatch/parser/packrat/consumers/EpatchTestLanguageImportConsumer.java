@@ -59,15 +59,15 @@ public final class EpatchTestLanguageImportConsumer extends NonTerminalConsumer 
 	}
 
 	protected int consumeRuleCall$3(int entryPoint) throws Exception {
-		return consumeNonTerminal(modelImportConsumer, null, false, false, getRule().ele00ParserRuleCallModelImport());
+		return consumeNonTerminal(modelImportConsumer, null, false, false, false, getRule().ele00ParserRuleCallModelImport());
 	}
 
 	protected int consumeRuleCall$4(int entryPoint) throws Exception {
-		return consumeNonTerminal(javaImportConsumer, null, false, false, getRule().ele01ParserRuleCallJavaImport());
+		return consumeNonTerminal(javaImportConsumer, null, false, false, false, getRule().ele01ParserRuleCallJavaImport());
 	}
 
 	protected int consumeRuleCall$5(int entryPoint) throws Exception {
-		return consumeNonTerminal(extensionImportConsumer, null, false, false, getRule().ele1ParserRuleCallExtensionImport());
+		return consumeNonTerminal(extensionImportConsumer, null, false, false, false, getRule().ele1ParserRuleCallExtensionImport());
 	}
 
 	public ImportElements getRule() {

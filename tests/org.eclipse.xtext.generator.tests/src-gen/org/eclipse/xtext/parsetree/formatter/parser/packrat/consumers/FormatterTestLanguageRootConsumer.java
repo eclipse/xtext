@@ -90,11 +90,11 @@ public final class FormatterTestLanguageRootConsumer extends NonTerminalConsumer
 	}
 
 	protected int consumeRuleCall$4(int entryPoint) throws Exception {
-		return consumeNonTerminal(testLinewrapConsumer, null, false, false, getRule().ele10ParserRuleCallTestLinewrap());
+		return consumeNonTerminal(testLinewrapConsumer, null, false, false, false, getRule().ele10ParserRuleCallTestLinewrap());
 	}
 
 	protected int consumeRuleCall$5(int entryPoint) throws Exception {
-		return consumeNonTerminal(testIndentationConsumer, null, false, false, getRule().ele11ParserRuleCallTestIndentation());
+		return consumeNonTerminal(testIndentationConsumer, null, false, false, false, getRule().ele11ParserRuleCallTestIndentation());
 	}
 
 	public RootElements getRule() {

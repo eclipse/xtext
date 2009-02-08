@@ -43,7 +43,7 @@ public final class LookaheadTestLanguageEntryConsumer extends NonTerminalConsume
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(altsConsumer, "contents", true, false, getRule().ele0ParserRuleCallAlts());
+		tempResult = consumeNonTerminal(altsConsumer, "contents", true, false, false, getRule().ele0ParserRuleCallAlts());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

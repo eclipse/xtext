@@ -71,7 +71,7 @@ public final class XtextTerminalsTestLanguageTerminalTokenConsumer extends NonTe
 	}
 
 	protected int consumeRuleCall$2(int entryPoint) throws Exception {
-		return consumeNonTerminal(terminalTokenElementConsumer, null, false, false, getRule().ele0ParserRuleCallTerminalTokenElement());
+		return consumeNonTerminal(terminalTokenElementConsumer, null, false, false, false, getRule().ele0ParserRuleCallTerminalTokenElement());
 	}
 
 	protected int consumeAssignment$3(int entryPoint) throws Exception {

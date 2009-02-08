@@ -110,7 +110,7 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(nestedModelIdConsumer, "id", false, true, getRule().ele00000ParserRuleCallNestedModelId());
+		tempResult = consumeNonTerminal(nestedModelIdConsumer, "id", false, true, false, getRule().ele00000ParserRuleCallNestedModelId());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -169,7 +169,7 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(fractionConsumer, "value", false, true, getRule().ele000110ParserRuleCallFraction());
+		tempResult = consumeNonTerminal(fractionConsumer, "value", false, true, false, getRule().ele000110ParserRuleCallFraction());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -228,7 +228,7 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(vectorConsumer, "vector", false, true, getRule().ele00110ParserRuleCallVector());
+		tempResult = consumeNonTerminal(vectorConsumer, "vector", false, true, false, getRule().ele00110ParserRuleCallVector());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -287,7 +287,7 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(dotsConsumer, "dots", false, true, getRule().ele0110ParserRuleCallDots());
+		tempResult = consumeNonTerminal(dotsConsumer, "dots", false, true, false, getRule().ele0110ParserRuleCallDots());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

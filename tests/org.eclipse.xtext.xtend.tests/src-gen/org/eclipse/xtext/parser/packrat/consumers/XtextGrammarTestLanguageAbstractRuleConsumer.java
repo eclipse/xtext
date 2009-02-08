@@ -59,15 +59,15 @@ public final class XtextGrammarTestLanguageAbstractRuleConsumer extends NonTermi
 	}
 
 	protected int consumeRuleCall$3(int entryPoint) throws Exception {
-		return consumeNonTerminal(lexerRuleConsumer, null, false, false, getRule().ele00ParserRuleCallLexerRule());
+		return consumeNonTerminal(lexerRuleConsumer, null, false, false, false, getRule().ele00ParserRuleCallLexerRule());
 	}
 
 	protected int consumeRuleCall$4(int entryPoint) throws Exception {
-		return consumeNonTerminal(parserRuleConsumer, null, false, false, getRule().ele01ParserRuleCallParserRule());
+		return consumeNonTerminal(parserRuleConsumer, null, false, false, false, getRule().ele01ParserRuleCallParserRule());
 	}
 
 	protected int consumeRuleCall$5(int entryPoint) throws Exception {
-		return consumeNonTerminal(terminalRuleConsumer, null, false, false, getRule().ele1ParserRuleCallTerminalRule());
+		return consumeNonTerminal(terminalRuleConsumer, null, false, false, false, getRule().ele1ParserRuleCallTerminalRule());
 	}
 
 	public AbstractRuleElements getRule() {

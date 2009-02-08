@@ -81,7 +81,7 @@ public final class FormatterTestLanguageTestLinewrapConsumer extends NonTerminal
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(lineConsumer, "items", true, false, getRule().ele10ParserRuleCallLine());
+		tempResult = consumeNonTerminal(lineConsumer, "items", true, false, false, getRule().ele10ParserRuleCallLine());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

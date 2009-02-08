@@ -43,7 +43,7 @@ public final class TestLanguageEntryRuleConsumer extends NonTerminalConsumer {
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(abstractRuleConsumer, "multiFeature", true, false, getRule().ele0ParserRuleCallAbstractRule());
+		tempResult = consumeNonTerminal(abstractRuleConsumer, "multiFeature", true, false, false, getRule().ele0ParserRuleCallAbstractRule());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

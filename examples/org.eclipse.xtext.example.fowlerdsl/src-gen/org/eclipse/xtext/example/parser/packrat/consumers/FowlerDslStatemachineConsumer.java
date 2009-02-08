@@ -139,7 +139,7 @@ public final class FowlerDslStatemachineConsumer extends NonTerminalConsumer {
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(eventConsumer, "events", true, false, getRule().ele0000010ParserRuleCallEvent());
+		tempResult = consumeNonTerminal(eventConsumer, "events", true, false, false, getRule().ele0000010ParserRuleCallEvent());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -170,7 +170,7 @@ public final class FowlerDslStatemachineConsumer extends NonTerminalConsumer {
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(commandConsumer, "commands", true, false, getRule().ele0010ParserRuleCallCommand());
+		tempResult = consumeNonTerminal(commandConsumer, "commands", true, false, false, getRule().ele0010ParserRuleCallCommand());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -197,7 +197,7 @@ public final class FowlerDslStatemachineConsumer extends NonTerminalConsumer {
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(stateConsumer, "states", true, false, getRule().ele10ParserRuleCallState());
+		tempResult = consumeNonTerminal(stateConsumer, "states", true, false, false, getRule().ele10ParserRuleCallState());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

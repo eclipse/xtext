@@ -52,11 +52,11 @@ public final class ReferenceGrammarTestLanguagePersonConsumer extends NonTermina
 	}
 
 	protected int consumeRuleCall$2(int entryPoint) throws Exception {
-		return consumeNonTerminal(kindConsumer, null, false, false, getRule().ele0ParserRuleCallKind());
+		return consumeNonTerminal(kindConsumer, null, false, false, false, getRule().ele0ParserRuleCallKind());
 	}
 
 	protected int consumeRuleCall$3(int entryPoint) throws Exception {
-		return consumeNonTerminal(erwachsenerConsumer, null, false, false, getRule().ele1ParserRuleCallErwachsener());
+		return consumeNonTerminal(erwachsenerConsumer, null, false, false, false, getRule().ele1ParserRuleCallErwachsener());
 	}
 
 	public PersonElements getRule() {

@@ -52,11 +52,11 @@ public final class EpatchTestLanguageModelImportConsumer extends NonTerminalCons
 	}
 
 	protected int consumeRuleCall$2(int entryPoint) throws Exception {
-		return consumeNonTerminal(resourceImportConsumer, null, false, false, getRule().ele0ParserRuleCallResourceImport());
+		return consumeNonTerminal(resourceImportConsumer, null, false, false, false, getRule().ele0ParserRuleCallResourceImport());
 	}
 
 	protected int consumeRuleCall$3(int entryPoint) throws Exception {
-		return consumeNonTerminal(ePackageImportConsumer, null, false, false, getRule().ele1ParserRuleCallEPackageImport());
+		return consumeNonTerminal(ePackageImportConsumer, null, false, false, false, getRule().ele1ParserRuleCallEPackageImport());
 	}
 
 	public ModelImportElements getRule() {

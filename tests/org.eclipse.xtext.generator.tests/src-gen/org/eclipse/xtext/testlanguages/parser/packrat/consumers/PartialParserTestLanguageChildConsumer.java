@@ -116,7 +116,7 @@ public final class PartialParserTestLanguageChildConsumer extends NonTerminalCon
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(namedConsumer, "value", false, false, getRule().ele010ParserRuleCallNamed());
+		tempResult = consumeNonTerminal(namedConsumer, "value", false, false, false, getRule().ele010ParserRuleCallNamed());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

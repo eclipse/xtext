@@ -81,7 +81,7 @@ public final class XtextTerminalsTestLanguageParenthesizedElementConsumer extend
 	}
 
 	protected int consumeRuleCall$4(int entryPoint) throws Exception {
-		return consumeNonTerminal(alternativesConsumer, null, false, false, getRule().ele01ParserRuleCallAlternatives());
+		return consumeNonTerminal(alternativesConsumer, null, false, false, false, getRule().ele01ParserRuleCallAlternatives());
 	}
 
 	protected int consumeKeyword$5(int entryPoint) throws Exception {

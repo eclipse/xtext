@@ -11,7 +11,7 @@ import org.eclipse.xtext.xtend.contentassist.AbstractXtendProposalProvider;
  */
 public class XtendReferenceGrammarTestLanguageProposalProvider extends AbstractXtendProposalProvider {
 
-	private static final String UI_PLUGIN_ID = ".";
+	private static final String UI_PLUGIN_ID = "org.eclipse.xtext.xtend.tests";
 		
 	@Override
 	protected ClassLoader getClassLoader() {

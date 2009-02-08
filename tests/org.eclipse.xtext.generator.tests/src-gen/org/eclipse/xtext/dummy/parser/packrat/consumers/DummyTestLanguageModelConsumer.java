@@ -43,7 +43,7 @@ public final class DummyTestLanguageModelConsumer extends NonTerminalConsumer {
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(elementConsumer, "elements", true, false, getRule().ele0ParserRuleCallElement());
+		tempResult = consumeNonTerminal(elementConsumer, "elements", true, false, false, getRule().ele0ParserRuleCallElement());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

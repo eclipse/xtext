@@ -178,7 +178,7 @@ public final class EcoreDslEAnnotationDeclConsumer extends NonTerminalConsumer {
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(mapEntrySuperConsumer, "contents", true, false, getRule().ele0010ParserRuleCallMapEntrySuper());
+		tempResult = consumeNonTerminal(mapEntrySuperConsumer, "contents", true, false, false, getRule().ele0010ParserRuleCallMapEntrySuper());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -236,7 +236,7 @@ public final class EcoreDslEAnnotationDeclConsumer extends NonTerminalConsumer {
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(mapEntrySuperConsumer, "contents", true, false, getRule().ele0110ParserRuleCallMapEntrySuper());
+		tempResult = consumeNonTerminal(mapEntrySuperConsumer, "contents", true, false, false, getRule().ele0110ParserRuleCallMapEntrySuper());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

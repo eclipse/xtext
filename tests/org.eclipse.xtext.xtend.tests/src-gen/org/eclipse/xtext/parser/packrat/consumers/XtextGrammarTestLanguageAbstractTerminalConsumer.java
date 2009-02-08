@@ -66,19 +66,19 @@ public final class XtextGrammarTestLanguageAbstractTerminalConsumer extends NonT
 	}
 
 	protected int consumeRuleCall$4(int entryPoint) throws Exception {
-		return consumeNonTerminal(keywordConsumer, null, false, false, getRule().ele000ParserRuleCallKeyword());
+		return consumeNonTerminal(keywordConsumer, null, false, false, false, getRule().ele000ParserRuleCallKeyword());
 	}
 
 	protected int consumeRuleCall$5(int entryPoint) throws Exception {
-		return consumeNonTerminal(ruleCallConsumer, null, false, false, getRule().ele001ParserRuleCallRuleCall());
+		return consumeNonTerminal(ruleCallConsumer, null, false, false, false, getRule().ele001ParserRuleCallRuleCall());
 	}
 
 	protected int consumeRuleCall$6(int entryPoint) throws Exception {
-		return consumeNonTerminal(parenthesizedElementConsumer, null, false, false, getRule().ele01ParserRuleCallParenthesizedElement());
+		return consumeNonTerminal(parenthesizedElementConsumer, null, false, false, false, getRule().ele01ParserRuleCallParenthesizedElement());
 	}
 
 	protected int consumeRuleCall$7(int entryPoint) throws Exception {
-		return consumeNonTerminal(crossReferenceConsumer, null, false, false, getRule().ele1ParserRuleCallCrossReference());
+		return consumeNonTerminal(crossReferenceConsumer, null, false, false, false, getRule().ele1ParserRuleCallCrossReference());
 	}
 
 	public AbstractTerminalElements getRule() {

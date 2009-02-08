@@ -227,7 +227,7 @@ public final class ReferenceGrammarSpielplatzConsumer extends NonTerminalConsume
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(kindConsumer, "kinder", true, false, getRule().ele0100000ParserRuleCallKind());
+		tempResult = consumeNonTerminal(kindConsumer, "kinder", true, false, false, getRule().ele0100000ParserRuleCallKind());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -241,7 +241,7 @@ public final class ReferenceGrammarSpielplatzConsumer extends NonTerminalConsume
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(erwachsenerConsumer, "erzieher", true, false, getRule().ele0100010ParserRuleCallErwachsener());
+		tempResult = consumeNonTerminal(erwachsenerConsumer, "erzieher", true, false, false, getRule().ele0100010ParserRuleCallErwachsener());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -255,7 +255,7 @@ public final class ReferenceGrammarSpielplatzConsumer extends NonTerminalConsume
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(spielzeugConsumer, "spielzeuge", true, false, getRule().ele010010ParserRuleCallSpielzeug());
+		tempResult = consumeNonTerminal(spielzeugConsumer, "spielzeuge", true, false, false, getRule().ele010010ParserRuleCallSpielzeug());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -269,7 +269,7 @@ public final class ReferenceGrammarSpielplatzConsumer extends NonTerminalConsume
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(familieConsumer, "familie", true, false, getRule().ele01010ParserRuleCallFamilie());
+		tempResult = consumeNonTerminal(familieConsumer, "familie", true, false, false, getRule().ele01010ParserRuleCallFamilie());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -283,7 +283,7 @@ public final class ReferenceGrammarSpielplatzConsumer extends NonTerminalConsume
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(customTypeParserRuleConsumer, "types", true, false, getRule().ele0110ParserRuleCallCustomTypeParserRule());
+		tempResult = consumeNonTerminal(customTypeParserRuleConsumer, "types", true, false, false, getRule().ele0110ParserRuleCallCustomTypeParserRule());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

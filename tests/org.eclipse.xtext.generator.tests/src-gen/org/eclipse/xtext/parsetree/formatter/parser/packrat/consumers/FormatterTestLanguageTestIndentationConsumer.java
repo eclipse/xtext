@@ -130,7 +130,7 @@ public final class FormatterTestLanguageTestIndentationConsumer extends NonTermi
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(testIndentationConsumer, "sub", true, false, getRule().ele0100ParserRuleCallTestIndentation());
+		tempResult = consumeNonTerminal(testIndentationConsumer, "sub", true, false, false, getRule().ele0100ParserRuleCallTestIndentation());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -144,7 +144,7 @@ public final class FormatterTestLanguageTestIndentationConsumer extends NonTermi
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(lineConsumer, "items", true, false, getRule().ele0110ParserRuleCallLine());
+		tempResult = consumeNonTerminal(lineConsumer, "items", true, false, false, getRule().ele0110ParserRuleCallLine());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

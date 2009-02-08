@@ -109,11 +109,11 @@ public final class EpatchTestLanguageCreatedObjectConsumer extends NonTerminalCo
 	}
 
 	protected int consumeRuleCall$4(int entryPoint) throws Exception {
-		return consumeNonTerminal(objectNewConsumer, null, false, false, getRule().ele000ParserRuleCallObjectNew());
+		return consumeNonTerminal(objectNewConsumer, null, false, false, false, getRule().ele000ParserRuleCallObjectNew());
 	}
 
 	protected int consumeRuleCall$5(int entryPoint) throws Exception {
-		return consumeNonTerminal(objectCopyConsumer, null, false, false, getRule().ele001ParserRuleCallObjectCopy());
+		return consumeNonTerminal(objectCopyConsumer, null, false, false, false, getRule().ele001ParserRuleCallObjectCopy());
 	}
 
 	protected int consumeAssignment$6(int entryPoint) throws Exception {
@@ -255,7 +255,7 @@ public final class EpatchTestLanguageCreatedObjectConsumer extends NonTerminalCo
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(monoSingleAssignmentConsumer, "assignments", true, false, getRule().ele100100ParserRuleCallMonoSingleAssignment());
+		tempResult = consumeNonTerminal(monoSingleAssignmentConsumer, "assignments", true, false, false, getRule().ele100100ParserRuleCallMonoSingleAssignment());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -269,7 +269,7 @@ public final class EpatchTestLanguageCreatedObjectConsumer extends NonTerminalCo
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(monoListAssignmentConsumer, "assignments", true, false, getRule().ele100110ParserRuleCallMonoListAssignment());
+		tempResult = consumeNonTerminal(monoListAssignmentConsumer, "assignments", true, false, false, getRule().ele100110ParserRuleCallMonoListAssignment());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -293,7 +293,7 @@ public final class EpatchTestLanguageCreatedObjectConsumer extends NonTerminalCo
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(migrationConsumer, "leftMig", false, false, getRule().ele1010ParserRuleCallMigration());
+		tempResult = consumeNonTerminal(migrationConsumer, "leftMig", false, false, false, getRule().ele1010ParserRuleCallMigration());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

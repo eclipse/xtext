@@ -100,7 +100,7 @@ public final class HiddenTerminalsTestLanguageHidingHiddensConsumer extends NonT
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(inheritingHiddensCallConsumer, "called", false, false, getRule().ele10ParserRuleCallInheritingHiddensCall());
+		tempResult = consumeNonTerminal(inheritingHiddensCallConsumer, "called", false, false, false, getRule().ele10ParserRuleCallInheritingHiddensCall());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
