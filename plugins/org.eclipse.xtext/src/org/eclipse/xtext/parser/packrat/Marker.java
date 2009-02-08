@@ -140,6 +140,7 @@ public class Marker extends AbstractParsedToken implements IMarkerFactory.IMarke
 		return super.toString() + " dangling children: '" + danglingChildCount + "' actual content: '" + content.size() + "'";
 	}
 
+	@Override
 	public void accept(IParsedTokenVisitor visitor) {
 		if (danglingChildCount != 0)
 			throw new IllegalStateException("cannot accept visitor if there exist any dangling children.");

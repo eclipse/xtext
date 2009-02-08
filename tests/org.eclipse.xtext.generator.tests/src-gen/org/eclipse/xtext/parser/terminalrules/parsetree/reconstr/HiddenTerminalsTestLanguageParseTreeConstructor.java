@@ -23,6 +23,7 @@ public class HiddenTerminalsTestLanguageParseTreeConstructor extends AbstractPar
 		if(inst.isInstanceOf("OverridingHiddens") && (s = new OverridingHiddens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		if(inst.isInstanceOf("OverridingHiddensCall") && (s = new OverridingHiddensCall_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		if(inst.isInstanceOf("InheritingHiddens") && (s = new InheritingHiddens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("DatatypeHiddens") && (s = new DatatypeHiddens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		if(inst.isInstanceOf("HidingHiddens") && (s = new HidingHiddens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		if(inst.isInstanceOf("InheritingHiddensCall") && (s = new InheritingHiddensCall_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
@@ -31,12 +32,12 @@ public class HiddenTerminalsTestLanguageParseTreeConstructor extends AbstractPar
 
 /************ begin Rule Model ****************
  *
- * Model : WithoutHiddens | WithHiddens | OverridingHiddens | InheritingHiddens ;
+ * Model : WithoutHiddens | WithHiddens | OverridingHiddens | InheritingHiddens | DatatypeHiddens ;
  *
  **/
 
 
-// WithoutHiddens | WithHiddens | OverridingHiddens | InheritingHiddens
+// WithoutHiddens | WithHiddens | OverridingHiddens | InheritingHiddens | DatatypeHiddens
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -48,7 +49,7 @@ protected class Model_Alternatives extends AlternativesToken {
 	}
 	
 	protected Solution createSolution() {
-		AbstractToken t = (first) ? new Model_1_RuleCall_InheritingHiddens(current, this) : new Model_0_Alternatives(current, this);
+		AbstractToken t = (first) ? new Model_1_RuleCall_DatatypeHiddens(current, this) : new Model_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
 		if(s == null && activateNextSolution()) s = createSolution();
 		if(s == null) return null;
@@ -57,7 +58,7 @@ protected class Model_Alternatives extends AlternativesToken {
 	}
 }
 
-// WithoutHiddens | WithHiddens | OverridingHiddens
+// WithoutHiddens | WithHiddens | OverridingHiddens | InheritingHiddens
 protected class Model_0_Alternatives extends AlternativesToken {
 
 	public Model_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -69,7 +70,7 @@ protected class Model_0_Alternatives extends AlternativesToken {
 	}
 	
 	protected Solution createSolution() {
-		AbstractToken t = (first) ? new Model_0_1_RuleCall_OverridingHiddens(current, this) : new Model_0_0_Alternatives(current, this);
+		AbstractToken t = (first) ? new Model_0_1_RuleCall_InheritingHiddens(current, this) : new Model_0_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
 		if(s == null && activateNextSolution()) s = createSolution();
 		if(s == null) return null;
@@ -78,7 +79,7 @@ protected class Model_0_Alternatives extends AlternativesToken {
 	}
 }
 
-// WithoutHiddens | WithHiddens
+// WithoutHiddens | WithHiddens | OverridingHiddens
 protected class Model_0_0_Alternatives extends AlternativesToken {
 
 	public Model_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -90,7 +91,28 @@ protected class Model_0_0_Alternatives extends AlternativesToken {
 	}
 	
 	protected Solution createSolution() {
-		AbstractToken t = (first) ? new Model_0_0_1_RuleCall_WithHiddens(current, this) : new Model_0_0_0_RuleCall_WithoutHiddens(current, this);
+		AbstractToken t = (first) ? new Model_0_0_1_RuleCall_OverridingHiddens(current, this) : new Model_0_0_0_Alternatives(current, this);
+		Solution s = t.firstSolution();
+		if(s == null && activateNextSolution()) s = createSolution();
+		if(s == null) return null;
+		last = s.getPredecessor();
+		return s; 
+	}
+}
+
+// WithoutHiddens | WithHiddens
+protected class Model_0_0_0_Alternatives extends AlternativesToken {
+
+	public Model_0_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Alternatives getGrammarElement() {
+		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prModel().ele000Alternatives();
+	}
+	
+	protected Solution createSolution() {
+		AbstractToken t = (first) ? new Model_0_0_0_1_RuleCall_WithHiddens(current, this) : new Model_0_0_0_0_RuleCall_WithoutHiddens(current, this);
 		Solution s = t.firstSolution();
 		if(s == null && activateNextSolution()) s = createSolution();
 		if(s == null) return null;
@@ -100,14 +122,14 @@ protected class Model_0_0_Alternatives extends AlternativesToken {
 }
 
 // WithoutHiddens
-protected class Model_0_0_0_RuleCall_WithoutHiddens extends RuleCallToken {
+protected class Model_0_0_0_0_RuleCall_WithoutHiddens extends RuleCallToken {
 	
-	public Model_0_0_0_RuleCall_WithoutHiddens(IInstanceDescription curr, AbstractToken pred) {
+	public Model_0_0_0_0_RuleCall_WithoutHiddens(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public RuleCall getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prModel().ele000ParserRuleCallWithoutHiddens();
+		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prModel().ele0000ParserRuleCallWithoutHiddens();
 	}
 	
 	protected Solution createSolution() {
@@ -118,14 +140,14 @@ protected class Model_0_0_0_RuleCall_WithoutHiddens extends RuleCallToken {
 }
 
 // WithHiddens
-protected class Model_0_0_1_RuleCall_WithHiddens extends RuleCallToken {
+protected class Model_0_0_0_1_RuleCall_WithHiddens extends RuleCallToken {
 	
-	public Model_0_0_1_RuleCall_WithHiddens(IInstanceDescription curr, AbstractToken pred) {
+	public Model_0_0_0_1_RuleCall_WithHiddens(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public RuleCall getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prModel().ele001ParserRuleCallWithHiddens();
+		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prModel().ele0001ParserRuleCallWithHiddens();
 	}
 	
 	protected Solution createSolution() {
@@ -137,14 +159,14 @@ protected class Model_0_0_1_RuleCall_WithHiddens extends RuleCallToken {
 
 
 // OverridingHiddens
-protected class Model_0_1_RuleCall_OverridingHiddens extends RuleCallToken {
+protected class Model_0_0_1_RuleCall_OverridingHiddens extends RuleCallToken {
 	
-	public Model_0_1_RuleCall_OverridingHiddens(IInstanceDescription curr, AbstractToken pred) {
+	public Model_0_0_1_RuleCall_OverridingHiddens(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public RuleCall getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prModel().ele01ParserRuleCallOverridingHiddens();
+		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prModel().ele001ParserRuleCallOverridingHiddens();
 	}
 	
 	protected Solution createSolution() {
@@ -156,20 +178,39 @@ protected class Model_0_1_RuleCall_OverridingHiddens extends RuleCallToken {
 
 
 // InheritingHiddens
-protected class Model_1_RuleCall_InheritingHiddens extends RuleCallToken {
+protected class Model_0_1_RuleCall_InheritingHiddens extends RuleCallToken {
 	
-	public Model_1_RuleCall_InheritingHiddens(IInstanceDescription curr, AbstractToken pred) {
+	public Model_0_1_RuleCall_InheritingHiddens(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public RuleCall getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prModel().ele1ParserRuleCallInheritingHiddens();
+		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prModel().ele01ParserRuleCallInheritingHiddens();
 	}
 	
 	protected Solution createSolution() {
 		if(checkForRecursion(InheritingHiddens_Group.class, current)) return null;
 		if(!current.isInstanceOf("InheritingHiddens")) return null;
 		return new InheritingHiddens_Group(current, this).firstSolution();
+	}
+}
+
+
+// DatatypeHiddens
+protected class Model_1_RuleCall_DatatypeHiddens extends RuleCallToken {
+	
+	public Model_1_RuleCall_DatatypeHiddens(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public RuleCall getGrammarElement() {
+		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prModel().ele1ParserRuleCallDatatypeHiddens();
+	}
+	
+	protected Solution createSolution() {
+		if(checkForRecursion(DatatypeHiddens_Group.class, current)) return null;
+		if(!current.isInstanceOf("DatatypeHiddens")) return null;
+		return new DatatypeHiddens_Group(current, this).firstSolution();
 	}
 }
 
@@ -1218,6 +1259,83 @@ protected class InheritingHiddens_1_Assignment_valid extends AssignmentToken  {
 
 
 /************ end Rule InheritingHiddens ****************/
+
+
+/************ begin Rule DatatypeHiddens ****************
+ *
+ * DatatypeHiddens : "datatype" valid ?= DatatypeRule ;
+ *
+ **/
+
+
+// "datatype" valid ?= DatatypeRule
+protected class DatatypeHiddens_Group extends GroupToken {
+	
+	public DatatypeHiddens_Group(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Group getGrammarElement() {
+		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prDatatypeHiddens().eleGroup();
+	}
+		
+	protected Solution createSolution() {	
+		Solution s1 = new DatatypeHiddens_1_Assignment_valid(current, this).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new DatatypeHiddens_0_Keyword_datatype(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 == null) {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
+				if(s1 == null) return null;
+			} else {
+				last = s2.getPredecessor();
+				return s2;
+			}
+		}
+		return null;
+		
+	}
+}
+
+// "datatype"
+protected class DatatypeHiddens_0_Keyword_datatype extends KeywordToken  {
+	
+	public DatatypeHiddens_0_Keyword_datatype(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Keyword getGrammarElement() {
+		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prDatatypeHiddens().ele0KeywordDatatype();
+	}	
+}
+
+// valid ?= DatatypeRule
+protected class DatatypeHiddens_1_Assignment_valid extends AssignmentToken  {
+	
+	public DatatypeHiddens_1_Assignment_valid(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Assignment getGrammarElement() {
+		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prDatatypeHiddens().ele1AssignmentValid();
+	}
+	
+	protected Solution createSolution() {
+		if((value = current.getConsumable("valid",IS_REQUIRED)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("valid");
+
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
+			type = AssignmentType.PRC;
+			element = HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prDatatypeHiddens().ele10ParserRuleCallDatatypeRule();
+			return new Solution(obj);
+		}
+
+		return null;
+	}
+}
+
+
+/************ end Rule DatatypeHiddens ****************/
+
 
 
 /************ begin Rule HidingHiddens ****************

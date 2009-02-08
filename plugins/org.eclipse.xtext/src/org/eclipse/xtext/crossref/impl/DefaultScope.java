@@ -16,7 +16,6 @@ import org.eclipse.xtext.crossref.IScope;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- *
  */
 public class DefaultScope extends SimpleCachingScope {
 
@@ -29,12 +28,12 @@ public class DefaultScope extends SimpleCachingScope {
 
 	private IScope createParent(Iterator<EObject> iter, EClass type) {
 		while (iter.hasNext()) {
-			EObject object = (EObject) iter.next();
+			EObject object = iter.next();
 			String uri = importResolver.getValue(object);
 			if (uri != null) {
 				return new LazyReferencedResourceScope(createParent(iter, type), type, object, uri);
 			}
 		}
-		return (IScope) IScope.NULLSCOPE;
+		return IScope.NULLSCOPE;
 	}
 }

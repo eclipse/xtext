@@ -196,7 +196,7 @@ public final class EcoreDslEPackageDeclConsumer extends NonTerminalConsumer {
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(eAnnotationDeclConsumer, "eAnnotations", true, false, getRule().ele000000000000ParserRuleCallEAnnotationDecl());
+		tempResult = consumeNonTerminal(eAnnotationDeclConsumer, "eAnnotations", true, false, false, getRule().ele000000000000ParserRuleCallEAnnotationDecl());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -214,7 +214,7 @@ public final class EcoreDslEPackageDeclConsumer extends NonTerminalConsumer {
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(qidConsumer, "name", false, true, getRule().ele00000000010ParserRuleCallQID());
+		tempResult = consumeNonTerminal(qidConsumer, "name", false, true, false, getRule().ele00000000010ParserRuleCallQID());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -258,7 +258,7 @@ public final class EcoreDslEPackageDeclConsumer extends NonTerminalConsumer {
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(qidConsumer, "nsPrefix", false, true, getRule().ele00010ParserRuleCallQID());
+		tempResult = consumeNonTerminal(qidConsumer, "nsPrefix", false, true, false, getRule().ele00010ParserRuleCallQID());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -304,7 +304,7 @@ public final class EcoreDslEPackageDeclConsumer extends NonTerminalConsumer {
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(subEPackageDeclConsumer, "eSubpackages", true, false, getRule().ele0100ParserRuleCallSubEPackageDecl());
+		tempResult = consumeNonTerminal(subEPackageDeclConsumer, "eSubpackages", true, false, false, getRule().ele0100ParserRuleCallSubEPackageDecl());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -318,7 +318,7 @@ public final class EcoreDslEPackageDeclConsumer extends NonTerminalConsumer {
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(eClassifierDeclConsumer, "eClassifiers", true, false, getRule().ele0110ParserRuleCallEClassifierDecl());
+		tempResult = consumeNonTerminal(eClassifierDeclConsumer, "eClassifiers", true, false, false, getRule().ele0110ParserRuleCallEClassifierDecl());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

@@ -73,23 +73,23 @@ public final class XtextTerminalsTestLanguageTerminalTokenElementConsumer extend
 	}
 
 	protected int consumeRuleCall$5(int entryPoint) throws Exception {
-		return consumeNonTerminal(characterRangeConsumer, null, false, false, getRule().ele0000ParserRuleCallCharacterRange());
+		return consumeNonTerminal(characterRangeConsumer, null, false, false, false, getRule().ele0000ParserRuleCallCharacterRange());
 	}
 
 	protected int consumeRuleCall$6(int entryPoint) throws Exception {
-		return consumeNonTerminal(ruleCallConsumer, null, false, false, getRule().ele0001ParserRuleCallRuleCall());
+		return consumeNonTerminal(ruleCallConsumer, null, false, false, false, getRule().ele0001ParserRuleCallRuleCall());
 	}
 
 	protected int consumeRuleCall$7(int entryPoint) throws Exception {
-		return consumeNonTerminal(parenthesizedTerminalElementConsumer, null, false, false, getRule().ele001ParserRuleCallParenthesizedTerminalElement());
+		return consumeNonTerminal(parenthesizedTerminalElementConsumer, null, false, false, false, getRule().ele001ParserRuleCallParenthesizedTerminalElement());
 	}
 
 	protected int consumeRuleCall$8(int entryPoint) throws Exception {
-		return consumeNonTerminal(abstractNegatedTokenConsumer, null, false, false, getRule().ele01ParserRuleCallAbstractNegatedToken());
+		return consumeNonTerminal(abstractNegatedTokenConsumer, null, false, false, false, getRule().ele01ParserRuleCallAbstractNegatedToken());
 	}
 
 	protected int consumeRuleCall$9(int entryPoint) throws Exception {
-		return consumeNonTerminal(wildcardConsumer, null, false, false, getRule().ele1ParserRuleCallWildcard());
+		return consumeNonTerminal(wildcardConsumer, null, false, false, false, getRule().ele1ParserRuleCallWildcard());
 	}
 
 	public TerminalTokenElementElements getRule() {

@@ -128,7 +128,7 @@ public final class ContentAssistTestLanguageSecondAbstractRuleChildConsumer exte
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(abstractRuleCallConsumer, "rule", false, false, getRule().ele010ParserRuleCallAbstractRuleCall());
+		tempResult = consumeNonTerminal(abstractRuleCallConsumer, "rule", false, false, false, getRule().ele010ParserRuleCallAbstractRuleCall());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

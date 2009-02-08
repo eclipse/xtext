@@ -204,6 +204,8 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 			LeafNode leafNode = createLeafNode(currentToken, true);
 			setLexerRule(leafNode, currentToken);
 			skipped.add(leafNode);
+			if (currentToken == null)
+				throw new IllegalStateException("currentToken is null");
 			lastConsumedIndex = currentToken.getTokenIndex();
 		}
 		return skipped;

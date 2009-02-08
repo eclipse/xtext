@@ -52,11 +52,11 @@ public final class EpatchTestLanguageExecutableConsumer extends NonTerminalConsu
 	}
 
 	protected int consumeRuleCall$2(int entryPoint) throws Exception {
-		return consumeNonTerminal(javaExecutableConsumer, null, false, false, getRule().ele0ParserRuleCallJavaExecutable());
+		return consumeNonTerminal(javaExecutableConsumer, null, false, false, false, getRule().ele0ParserRuleCallJavaExecutable());
 	}
 
 	protected int consumeRuleCall$3(int entryPoint) throws Exception {
-		return consumeNonTerminal(expressionExecutableConsumer, null, false, false, getRule().ele1ParserRuleCallExpressionExecutable());
+		return consumeNonTerminal(expressionExecutableConsumer, null, false, false, false, getRule().ele1ParserRuleCallExpressionExecutable());
 	}
 
 	public ExecutableElements getRule() {

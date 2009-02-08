@@ -21,7 +21,6 @@ import org.eclipse.xtext.service.ILanguageService;
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @author Moritz Eysholt
- * 
  */
 
 // TODO: rename to IAstSerializer
@@ -55,7 +54,7 @@ public interface IParseTreeConstructor extends ILanguageService {
 
 	public enum AssignmentType {
 		KW, PRC, LRC, CR
-	};
+	}
 
 	public interface IAssignmentToken extends IValueToken {
 		public AssignmentType getType();

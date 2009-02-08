@@ -97,15 +97,15 @@ public final class TransientValuesTestRootConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeRuleCall$5(int entryPoint) throws Exception {
-		return consumeNonTerminal(testRequiredConsumer, null, false, false, getRule().ele100ParserRuleCallTestRequired());
+		return consumeNonTerminal(testRequiredConsumer, null, false, false, false, getRule().ele100ParserRuleCallTestRequired());
 	}
 
 	protected int consumeRuleCall$6(int entryPoint) throws Exception {
-		return consumeNonTerminal(testOptionalConsumer, null, false, false, getRule().ele101ParserRuleCallTestOptional());
+		return consumeNonTerminal(testOptionalConsumer, null, false, false, false, getRule().ele101ParserRuleCallTestOptional());
 	}
 
 	protected int consumeRuleCall$7(int entryPoint) throws Exception {
-		return consumeNonTerminal(testListConsumer, null, false, false, getRule().ele11ParserRuleCallTestList());
+		return consumeNonTerminal(testListConsumer, null, false, false, false, getRule().ele11ParserRuleCallTestList());
 	}
 
 	public RootElements getRule() {

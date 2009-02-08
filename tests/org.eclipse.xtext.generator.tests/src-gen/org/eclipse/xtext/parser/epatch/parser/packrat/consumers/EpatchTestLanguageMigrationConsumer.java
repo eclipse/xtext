@@ -109,7 +109,7 @@ public final class EpatchTestLanguageMigrationConsumer extends NonTerminalConsum
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(executableConsumer, "first", false, false, getRule().ele0010ParserRuleCallExecutable());
+		tempResult = consumeNonTerminal(executableConsumer, "first", false, false, false, getRule().ele0010ParserRuleCallExecutable());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -187,7 +187,7 @@ public final class EpatchTestLanguageMigrationConsumer extends NonTerminalConsum
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(executableConsumer, "asOp", false, false, getRule().ele01010ParserRuleCallExecutable());
+		tempResult = consumeNonTerminal(executableConsumer, "asOp", false, false, false, getRule().ele01010ParserRuleCallExecutable());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -236,7 +236,7 @@ public final class EpatchTestLanguageMigrationConsumer extends NonTerminalConsum
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(executableConsumer, "eachOp", false, false, getRule().ele01110ParserRuleCallExecutable());
+		tempResult = consumeNonTerminal(executableConsumer, "eachOp", false, false, false, getRule().ele01110ParserRuleCallExecutable());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

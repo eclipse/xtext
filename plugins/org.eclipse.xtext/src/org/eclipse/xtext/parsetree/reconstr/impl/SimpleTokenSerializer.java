@@ -10,7 +10,6 @@ package org.eclipse.xtext.parsetree.reconstr.impl;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.CrossReference;
@@ -31,8 +30,6 @@ import com.google.inject.Inject;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class SimpleTokenSerializer extends DefaultTokenSerializer {
-	static final Logger logger = Logger
-			.getLogger(SimpleTokenSerializer.class);
 
 	@Inject
 	protected IValueConverterService converterService;
@@ -44,10 +41,15 @@ public class SimpleTokenSerializer extends DefaultTokenSerializer {
 
 	protected OutputStream out;
 
-	protected void afterElement(IInstanceDescription curr, AbstractElement ele)
-			throws IOException {
+	/**
+	 * @throws IOException  
+	 */
+	protected void afterElement(IInstanceDescription curr, AbstractElement ele) throws IOException {
 	}
 
+	/**
+	 * @throws IOException  
+	 */
 	protected void afterToken(IAbstractToken token) throws IOException {
 	}
 
@@ -59,12 +61,14 @@ public class SimpleTokenSerializer extends DefaultTokenSerializer {
 		outputHasStarted = true;
 	}
 
-	protected void beforeElement(IInstanceDescription curr, AbstractElement ele)
-			throws IOException {
+	protected void beforeElement(IInstanceDescription curr, AbstractElement ele) throws IOException {
 		if (outputHasStarted)
 			append(" ");
 	}
 
+	/**
+	 * @throws IOException  
+	 */
 	protected void beforeToken(IAbstractToken token) throws IOException {
 	}
 
@@ -89,8 +93,8 @@ public class SimpleTokenSerializer extends DefaultTokenSerializer {
 		afterElement(current, call);
 	}
 
-	public void serialize(IAbstractToken firstToken, OutputStream out)
-			throws IOException {
+	@Override
+	public void serialize(IAbstractToken firstToken, OutputStream out) throws IOException {
 		outputHasStarted = false;
 		this.out = out;
 		for (IAbstractToken t = firstToken; t != null; t = t.getNext()) {

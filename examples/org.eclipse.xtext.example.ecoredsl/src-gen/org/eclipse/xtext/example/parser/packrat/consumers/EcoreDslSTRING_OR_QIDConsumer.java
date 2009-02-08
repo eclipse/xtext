@@ -59,7 +59,7 @@ public final class EcoreDslSTRING_OR_QIDConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeRuleCall$3(int entryPoint) throws Exception {
-		return consumeNonTerminal(qidConsumer, null, false, true, getRule().ele1ParserRuleCallQID());
+		return consumeNonTerminal(qidConsumer, null, false, true, false, getRule().ele1ParserRuleCallQID());
 	}
 
 	public STRING_OR_QIDElements getRule() {

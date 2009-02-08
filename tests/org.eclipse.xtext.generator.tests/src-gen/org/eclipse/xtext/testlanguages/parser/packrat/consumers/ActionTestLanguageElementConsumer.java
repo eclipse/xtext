@@ -71,7 +71,7 @@ public final class ActionTestLanguageElementConsumer extends NonTerminalConsumer
 	}
 
 	protected int consumeRuleCall$2(int entryPoint) throws Exception {
-		return consumeNonTerminal(itemConsumer, null, false, false, getRule().ele0ParserRuleCallItem());
+		return consumeNonTerminal(itemConsumer, null, false, false, false, getRule().ele0ParserRuleCallItem());
 	}
 	protected int consumeAction$4(int entryPoint) {
 		consumeAction(getRule().ele10ActionItemitems(), "Item", true);
@@ -82,7 +82,7 @@ public final class ActionTestLanguageElementConsumer extends NonTerminalConsumer
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(itemConsumer, "items", true, false, getRule().ele110ParserRuleCallItem());
+		tempResult = consumeNonTerminal(itemConsumer, "items", true, false, false, getRule().ele110ParserRuleCallItem());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

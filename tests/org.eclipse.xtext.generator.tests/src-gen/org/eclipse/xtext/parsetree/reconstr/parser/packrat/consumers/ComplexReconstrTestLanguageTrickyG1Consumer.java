@@ -128,7 +128,7 @@ public final class ComplexReconstrTestLanguageTrickyG1Consumer extends NonTermin
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(trickyG2Consumer, "vals", true, false, getRule().ele0100ParserRuleCallTrickyG2());
+		tempResult = consumeNonTerminal(trickyG2Consumer, "vals", true, false, false, getRule().ele0100ParserRuleCallTrickyG2());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -186,7 +186,7 @@ public final class ComplexReconstrTestLanguageTrickyG1Consumer extends NonTermin
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(trickyG2Consumer, "vals", true, false, getRule().ele01110ParserRuleCallTrickyG2());
+		tempResult = consumeNonTerminal(trickyG2Consumer, "vals", true, false, false, getRule().ele01110ParserRuleCallTrickyG2());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

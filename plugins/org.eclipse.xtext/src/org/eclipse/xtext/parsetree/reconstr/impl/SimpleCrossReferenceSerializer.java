@@ -26,6 +26,7 @@ public class SimpleCrossReferenceSerializer extends
 	@Inject
 	private ILinkingService linkingService;
 
+	@Override
 	public String serializeCrossRef(IInstanceDescription container,
 			CrossReference grammarElement, EObject target) {
 		final EObject context = container.getDelegate();

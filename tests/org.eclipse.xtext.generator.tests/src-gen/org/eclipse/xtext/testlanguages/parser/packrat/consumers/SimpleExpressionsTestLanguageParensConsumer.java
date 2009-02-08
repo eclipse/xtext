@@ -81,7 +81,7 @@ public final class SimpleExpressionsTestLanguageParensConsumer extends NonTermin
 	}
 
 	protected int consumeRuleCall$4(int entryPoint) throws Exception {
-		return consumeNonTerminal(additionConsumer, null, false, false, getRule().ele01ParserRuleCallAddition());
+		return consumeNonTerminal(additionConsumer, null, false, false, false, getRule().ele01ParserRuleCallAddition());
 	}
 
 	protected int consumeKeyword$5(int entryPoint) throws Exception {

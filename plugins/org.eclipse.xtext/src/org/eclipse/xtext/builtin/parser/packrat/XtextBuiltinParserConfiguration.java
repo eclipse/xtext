@@ -15,14 +15,7 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSL_COMMENT
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGConsumer;
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinWSConsumer;
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
-import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
-import org.eclipse.xtext.parser.packrat.IHiddenTokenHandler;
-import org.eclipse.xtext.parser.packrat.IMarkerFactory;
-import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration.IInternalParserConfiguration;
-import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.RecoveryStateHolder;
-import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -42,9 +35,11 @@ public class XtextBuiltinParserConfiguration extends AbstractParserConfiguration
 	}
 
 	public void configureConsumers() {
+		// nothing to do
 	}
 
 	public void createNonTerminalConsumers() {
+		// nothing to do
 	}
 
 	public void createTerminalConsumers() {

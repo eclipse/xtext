@@ -73,13 +73,11 @@ public class DefaultEcoreElementFactory implements IAstFactory {
 		return clazz.getEPackage().getEFactoryInstance().create(clazz);
 	}
 
-	public void set(EObject _this, String feature, Object value, String ruleName, AbstractNode node) throws ValueConverterException {
-		value = getTokenValue(value, ruleName, node);
-		EObject eo = (EObject) _this;
-		EStructuralFeature structuralFeature = eo.eClass().getEStructuralFeature(feature);
+	public void set(EObject object, String feature, Object value, String ruleName, AbstractNode node) throws ValueConverterException {
+		final EStructuralFeature structuralFeature = object.eClass().getEStructuralFeature(feature);
 		if (structuralFeature == null)
 			throw new IllegalArgumentException(feature);
-		eo.eSet(structuralFeature, value);
+		object.eSet(structuralFeature, getTokenValue(value, ruleName, node));
 	}
 	
 	private Object getTokenValue(Object tokenOrValue, String ruleName, AbstractNode node) throws ValueConverterException {
@@ -103,13 +101,13 @@ public class DefaultEcoreElementFactory implements IAstFactory {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void add(EObject _this, String feature, Object value, String ruleName, AbstractNode node) throws ValueConverterException {
+	public void add(EObject object, String feature, Object value, String ruleName, AbstractNode node) throws ValueConverterException {
 		if (value == null)
 			return;
-		value = getTokenValue(value, ruleName, node);
-		EObject eo = (EObject) _this;
-		EStructuralFeature structuralFeature = eo.eClass().getEStructuralFeature(feature);
-		((Collection) eo.eGet(structuralFeature)).add(value);
+		final EStructuralFeature structuralFeature = object.eClass().getEStructuralFeature(feature);
+		if (structuralFeature == null)
+			throw new IllegalArgumentException(feature);
+		((Collection<Object>) object.eGet(structuralFeature)).add(getTokenValue(value, ruleName, node));
 	}
 
 	protected EPackage getEPackage(AbstractMetamodelDeclaration metaModelDecl) {

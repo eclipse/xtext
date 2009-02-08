@@ -122,7 +122,7 @@ public final class EcoreDslEEnumLiteralDeclConsumer extends NonTerminalConsumer 
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(eAnnotationDeclConsumer, "eAnnotations", true, false, getRule().ele00000ParserRuleCallEAnnotationDecl());
+		tempResult = consumeNonTerminal(eAnnotationDeclConsumer, "eAnnotations", true, false, false, getRule().ele00000ParserRuleCallEAnnotationDecl());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

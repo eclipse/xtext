@@ -37,6 +37,7 @@ public abstract class Lexer extends org.antlr.runtime.Lexer {
 
 	private Map<Token, String> tokenErrorMap = new HashMap<Token, String>();
 
+	@Override
 	public Token nextToken() {
 		while (true) {
 			this.token = null;

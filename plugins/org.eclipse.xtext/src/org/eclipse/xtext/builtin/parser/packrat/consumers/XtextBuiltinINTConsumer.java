@@ -23,6 +23,7 @@ public final class XtextBuiltinINTConsumer extends AbstractRuleAwareTerminalCons
 		super(configuration);
 	}
 
+	@Override
 	public int doConsume() {
 		//			Marker marker = mark(); // not needed because we have no alternatives
 		boolean result = true;

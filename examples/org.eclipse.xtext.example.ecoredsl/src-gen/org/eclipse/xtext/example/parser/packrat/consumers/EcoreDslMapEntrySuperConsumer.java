@@ -31,7 +31,7 @@ public final class EcoreDslMapEntrySuperConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeRuleCall$1(int entryPoint) throws Exception {
-		return consumeNonTerminal(mapEntryConsumer, null, false, false, getRule().eleParserRuleCallMapEntry());
+		return consumeNonTerminal(mapEntryConsumer, null, false, false, false, getRule().eleParserRuleCallMapEntry());
 	}
 
 	public MapEntrySuperElements getRule() {

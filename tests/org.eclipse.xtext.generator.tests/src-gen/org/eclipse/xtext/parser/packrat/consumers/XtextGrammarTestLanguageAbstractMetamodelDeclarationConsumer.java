@@ -52,11 +52,11 @@ public final class XtextGrammarTestLanguageAbstractMetamodelDeclarationConsumer 
 	}
 
 	protected int consumeRuleCall$2(int entryPoint) throws Exception {
-		return consumeNonTerminal(generatedMetamodelConsumer, null, false, false, getRule().ele0ParserRuleCallGeneratedMetamodel());
+		return consumeNonTerminal(generatedMetamodelConsumer, null, false, false, false, getRule().ele0ParserRuleCallGeneratedMetamodel());
 	}
 
 	protected int consumeRuleCall$3(int entryPoint) throws Exception {
-		return consumeNonTerminal(referencedMetamodelConsumer, null, false, false, getRule().ele1ParserRuleCallReferencedMetamodel());
+		return consumeNonTerminal(referencedMetamodelConsumer, null, false, false, false, getRule().ele1ParserRuleCallReferencedMetamodel());
 	}
 
 	public AbstractMetamodelDeclarationElements getRule() {

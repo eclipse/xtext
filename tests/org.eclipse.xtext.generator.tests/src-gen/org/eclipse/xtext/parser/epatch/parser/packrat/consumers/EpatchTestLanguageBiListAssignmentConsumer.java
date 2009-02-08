@@ -208,7 +208,7 @@ public final class EpatchTestLanguageBiListAssignmentConsumer extends NonTermina
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(listAssignmentValueConsumer, "leftValues", true, false, getRule().ele0000100ParserRuleCallListAssignmentValue());
+		tempResult = consumeNonTerminal(listAssignmentValueConsumer, "leftValues", true, false, false, getRule().ele0000100ParserRuleCallListAssignmentValue());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -266,7 +266,7 @@ public final class EpatchTestLanguageBiListAssignmentConsumer extends NonTermina
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(listAssignmentValueConsumer, "leftValues", true, false, getRule().ele00001110ParserRuleCallListAssignmentValue());
+		tempResult = consumeNonTerminal(listAssignmentValueConsumer, "leftValues", true, false, false, getRule().ele00001110ParserRuleCallListAssignmentValue());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -325,7 +325,7 @@ public final class EpatchTestLanguageBiListAssignmentConsumer extends NonTermina
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(listAssignmentValueConsumer, "rightValues", true, false, getRule().ele00100ParserRuleCallListAssignmentValue());
+		tempResult = consumeNonTerminal(listAssignmentValueConsumer, "rightValues", true, false, false, getRule().ele00100ParserRuleCallListAssignmentValue());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -383,7 +383,7 @@ public final class EpatchTestLanguageBiListAssignmentConsumer extends NonTermina
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(listAssignmentValueConsumer, "rightValues", true, false, getRule().ele001110ParserRuleCallListAssignmentValue());
+		tempResult = consumeNonTerminal(listAssignmentValueConsumer, "rightValues", true, false, false, getRule().ele001110ParserRuleCallListAssignmentValue());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

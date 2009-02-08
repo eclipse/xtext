@@ -109,8 +109,7 @@ public class PartialParsingPointers {
 		// AST element is attached to a child not enclosing the region.
 		// In this case, there must not be any composite nodes with
 		// multiple composite children on the way down.
-		return NodeUtil.getASTElementForRootNode((CompositeNode) nodesEnclosingChangeRegion.get(
-				nodesEnclosingChangeRegion.size() - 1));
+		return NodeUtil.getASTElementForRootNode(nodesEnclosingChangeRegion.get(nodesEnclosingChangeRegion.size() - 1));
 	}
 
 	public String findASTContainmentFeatureName() {
@@ -125,9 +124,7 @@ public class PartialParsingPointers {
 				// assigned to, not the feature of the action itself
 				return internalFindASTContainmentFeatureName(replaceRootNode.getParent());
 			}
-			else {
-				return internalFindASTContainmentFeatureName(replaceRootNode);
-			}
+			return internalFindASTContainmentFeatureName(replaceRootNode);
 		}
 		return null;
 	}

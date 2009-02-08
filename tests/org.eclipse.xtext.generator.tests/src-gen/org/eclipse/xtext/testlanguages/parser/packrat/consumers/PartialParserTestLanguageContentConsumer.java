@@ -52,11 +52,11 @@ public final class PartialParserTestLanguageContentConsumer extends NonTerminalC
 	}
 
 	protected int consumeRuleCall$2(int entryPoint) throws Exception {
-		return consumeNonTerminal(childrenConsumer, null, false, false, getRule().ele0ParserRuleCallChildren());
+		return consumeNonTerminal(childrenConsumer, null, false, false, false, getRule().ele0ParserRuleCallChildren());
 	}
 
 	protected int consumeRuleCall$3(int entryPoint) throws Exception {
-		return consumeNonTerminal(abstractChildrenConsumer, null, false, false, getRule().ele1ParserRuleCallAbstractChildren());
+		return consumeNonTerminal(abstractChildrenConsumer, null, false, false, false, getRule().ele1ParserRuleCallAbstractChildren());
 	}
 
 	public ContentElements getRule() {

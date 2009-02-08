@@ -44,16 +44,14 @@ public class Strings {
 		int endIndex = value.lastIndexOf(separator);
 		if (endIndex > 0)
 			return value.substring(0, endIndex);
-		else
-			return value;
+		return value;
 	}
 
 	public static String lastToken(String value, String separator) {
 		int index = value.lastIndexOf(separator) + 1;
 		if (index < value.length())
 			return value.substring(index, value.length());
-		else
-			return "";
+		return "";
 	}
 
 	public static String toFirstUpper(String s) {
@@ -156,7 +154,7 @@ public class Strings {
 				}
 			}
 			else {
-				out[outLen++] = (char) aChar;
+				out[outLen++] = aChar;
 			}
 		}
 		return new String(out, 0, outLen);

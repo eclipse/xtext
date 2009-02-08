@@ -17,6 +17,7 @@ public class FormattingConfig extends AbstractFormattingConfig {
 		protected int column = 0;
 		protected int indentationLevel = 0;
 
+		@Override
 		public String getSummarizedSpaces() {
 			boolean nospace = false;
 			int wrap = wrapNeeded() ? 1 : 0;
@@ -96,14 +97,17 @@ public class FormattingConfig extends AbstractFormattingConfig {
 			this(1);
 		}
 
+		@Override
 		public void after(AbstractElement left) {
 			super.after(left);
 		}
 
+		@Override
 		public void before(AbstractElement right) {
 			super.before(right);
 		}
 
+		@Override
 		public void between(AbstractElement left, AbstractElement right) {
 			super.between(left, right);
 		}
@@ -112,18 +116,22 @@ public class FormattingConfig extends AbstractFormattingConfig {
 
 	public class NoLinewrapLocator extends ElementLocator {
 
+		@Override
 		public void after(AbstractElement left) {
 			super.after(left);
 		}
 
+		@Override
 		public void before(AbstractElement right) {
 			super.before(right);
 		}
 
+		@Override
 		public void between(AbstractElement left, AbstractElement right) {
 			super.between(left, right);
 		}
 
+		@Override
 		public void range(AbstractElement left, AbstractElement right) {
 			super.range(left, right);
 		}
@@ -132,22 +140,27 @@ public class FormattingConfig extends AbstractFormattingConfig {
 
 	public class NoSpaceLocator extends ElementLocator {
 
+		@Override
 		public void after(AbstractElement left) {
 			super.after(left);
 		}
 
+		@Override
 		public void before(AbstractElement right) {
 			super.before(right);
 		}
 
+		@Override
 		public void between(AbstractElement left, AbstractElement right) {
 			super.between(left, right);
 		}
 
+		@Override
 		public void range(AbstractElement left, AbstractElement right) {
 			super.range(left, right);
 		}
 
+		@Override
 		public void around(AbstractElement ele) {
 			super.around(ele);
 		}
@@ -158,6 +171,7 @@ public class FormattingConfig extends AbstractFormattingConfig {
 
 	protected String indentationSpace = "  ";
 
+	@Override
 	public ConfigRunner run() {
 		return new FormattingRunner();
 	}

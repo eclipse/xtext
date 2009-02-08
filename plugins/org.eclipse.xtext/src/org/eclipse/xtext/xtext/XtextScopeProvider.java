@@ -56,7 +56,7 @@ public class XtextScopeProvider extends DefaultScopeProvider {
 					EPackage pack = metaModel.getEPackage();
 					if (pack != null)
 						return createClassifierScope(pack.getEClassifiers());
-				} else if (metaModel == null) {
+				} else {
 					return createReferencedPackagesScope(GrammarUtil.getGrammar(context));
 				}
 			} else if (context instanceof CrossReference || context instanceof ParserRule) {

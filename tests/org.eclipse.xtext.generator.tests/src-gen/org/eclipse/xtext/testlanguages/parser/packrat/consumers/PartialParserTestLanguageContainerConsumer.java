@@ -158,7 +158,7 @@ public final class PartialParserTestLanguageContainerConsumer extends NonTermina
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(nestedConsumer, "nested", true, false, getRule().ele0100ParserRuleCallNested());
+		tempResult = consumeNonTerminal(nestedConsumer, "nested", true, false, false, getRule().ele0100ParserRuleCallNested());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -172,7 +172,7 @@ public final class PartialParserTestLanguageContainerConsumer extends NonTermina
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(contentConsumer, "content", true, false, getRule().ele0110ParserRuleCallContent());
+		tempResult = consumeNonTerminal(contentConsumer, "content", true, false, false, getRule().ele0110ParserRuleCallContent());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

@@ -52,11 +52,11 @@ public final class ComplexReconstrTestLanguageTermConsumer extends NonTerminalCo
 	}
 
 	protected int consumeRuleCall$2(int entryPoint) throws Exception {
-		return consumeNonTerminal(atomConsumer, null, false, false, getRule().ele0ParserRuleCallAtom());
+		return consumeNonTerminal(atomConsumer, null, false, false, false, getRule().ele0ParserRuleCallAtom());
 	}
 
 	protected int consumeRuleCall$3(int entryPoint) throws Exception {
-		return consumeNonTerminal(parensConsumer, null, false, false, getRule().ele1ParserRuleCallParens());
+		return consumeNonTerminal(parensConsumer, null, false, false, false, getRule().ele1ParserRuleCallParens());
 	}
 
 	public TermElements getRule() {

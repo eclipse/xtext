@@ -103,7 +103,7 @@ public class Linker implements ILinker {
 		handledReferences.add(eRef);
 		beforeEnsureIsLinked(obj, eRef, producer);
 		producer.setTarget(obj, eRef);
-		final List<EObject> links = linkingService.getLinkedObjects(obj, eRef, (LeafNode) node);
+		final List<EObject> links = linkingService.getLinkedObjects(obj, eRef, node);
 		if (links == null || links.isEmpty()) {
 			producer.addDiagnostic("Cannot resolve reference to '" + node.getText() + "'");
 			return;

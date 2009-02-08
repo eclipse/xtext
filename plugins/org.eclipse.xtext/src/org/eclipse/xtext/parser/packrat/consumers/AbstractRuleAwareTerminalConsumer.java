@@ -20,6 +20,7 @@ public abstract class AbstractRuleAwareTerminalConsumer extends TerminalConsumer
 		super(configuration);
 	}
 	
+	@Override
 	public final AbstractRule getGrammarElement() {
 		if (rule == null) {
 			rule = doGetRule();

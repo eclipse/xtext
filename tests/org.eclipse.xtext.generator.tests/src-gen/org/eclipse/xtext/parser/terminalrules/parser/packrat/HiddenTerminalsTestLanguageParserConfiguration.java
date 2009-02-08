@@ -12,6 +12,8 @@ import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.HiddenTer
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.HiddenTerminalsTestLanguageOverridingHiddensConsumer;
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.HiddenTerminalsTestLanguageOverridingHiddensCallConsumer;
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.HiddenTerminalsTestLanguageInheritingHiddensConsumer;
+import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.HiddenTerminalsTestLanguageDatatypeHiddensConsumer;
+import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.HiddenTerminalsTestLanguageDatatypeRuleConsumer;
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.HiddenTerminalsTestLanguageHidingHiddensConsumer;
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.HiddenTerminalsTestLanguageInheritingHiddensCallConsumer;
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.HiddenTerminalsTestLanguageML_COMMENTConsumer;
@@ -28,6 +30,8 @@ public class HiddenTerminalsTestLanguageParserConfiguration extends AbstractPars
     private HiddenTerminalsTestLanguageOverridingHiddensConsumer overridingHiddensConsumer;
     private HiddenTerminalsTestLanguageOverridingHiddensCallConsumer overridingHiddensCallConsumer;
     private HiddenTerminalsTestLanguageInheritingHiddensConsumer inheritingHiddensConsumer;
+    private HiddenTerminalsTestLanguageDatatypeHiddensConsumer datatypeHiddensConsumer;
+    private HiddenTerminalsTestLanguageDatatypeRuleConsumer datatypeRuleConsumer;
     private HiddenTerminalsTestLanguageHidingHiddensConsumer hidingHiddensConsumer;
     private HiddenTerminalsTestLanguageInheritingHiddensCallConsumer inheritingHiddensCallConsumer;
     private HiddenTerminalsTestLanguageML_COMMENTConsumer mlCommentConsumer;
@@ -62,6 +66,12 @@ public class HiddenTerminalsTestLanguageParserConfiguration extends AbstractPars
 		inheritingHiddensConsumer = new HiddenTerminalsTestLanguageInheritingHiddensConsumer(
     		this, new ITerminalConsumer[]{ getWsConsumer(), getMlCommentConsumer(), getSlCommentConsumer() }
     	);
+		datatypeHiddensConsumer = new HiddenTerminalsTestLanguageDatatypeHiddensConsumer(
+    		this, null
+    	);
+		datatypeRuleConsumer = new HiddenTerminalsTestLanguageDatatypeRuleConsumer(
+    		this, new ITerminalConsumer[]{ getWsConsumer() }
+    	);
 		hidingHiddensConsumer = new HiddenTerminalsTestLanguageHidingHiddensConsumer(
     		this, new ITerminalConsumer[]{  }
     	);
@@ -78,6 +88,7 @@ public class HiddenTerminalsTestLanguageParserConfiguration extends AbstractPars
 	}
 	
 	public void configureConsumers() {
+		getModelConsumer().setDatatypeHiddensConsumer(getDatatypeHiddensConsumer());
 		getModelConsumer().setInheritingHiddensConsumer(getInheritingHiddensConsumer());
 		getModelConsumer().setOverridingHiddensConsumer(getOverridingHiddensConsumer());
 		getModelConsumer().setWithHiddensConsumer(getWithHiddensConsumer());
@@ -92,34 +103,39 @@ public class HiddenTerminalsTestLanguageParserConfiguration extends AbstractPars
 		getInheritingHiddensConsumer().setHidingHiddensConsumer(getHidingHiddensConsumer());
 		getInheritingHiddensConsumer().setInheritingHiddensCallConsumer(getInheritingHiddensCallConsumer());
 
+		getDatatypeHiddensConsumer().setDatatypeRuleConsumer(getDatatypeRuleConsumer());
+
 		getHidingHiddensConsumer().setInheritingHiddensCallConsumer(getInheritingHiddensCallConsumer());
 		getHidingHiddensConsumer().setWsConsumer(getWsConsumer());
 
-		getWithoutHiddensConsumer().setKeyword$5$Delimiter(HiddenTerminalsTestLanguageDelimiters.keyword$17$Delimiter);
-		getWithoutHiddensConsumer().setKeyword$8$Delimiter(HiddenTerminalsTestLanguageDelimiters.keyword$17$Delimiter);
-		getWithoutHiddensConsumer().setKeyword$12$Delimiter(HiddenTerminalsTestLanguageDelimiters.keyword$17$Delimiter);
-		getWithoutHiddensConsumer().setRuleCall$7$Delimiter(HiddenTerminalsTestLanguageDelimiters.ruleCall$19$Delimiter);
-		getWithoutHiddensConsumer().setRuleCall$10$Delimiter(HiddenTerminalsTestLanguageDelimiters.ruleCall$19$Delimiter);
-		getWithHiddensConsumer().setKeyword$3$Delimiter(HiddenTerminalsTestLanguageDelimiters.keyword$17$Delimiter);
-		getWithHiddensConsumer().setKeyword$4$Delimiter(HiddenTerminalsTestLanguageDelimiters.keyword$17$Delimiter);
-		getWithHiddensConsumer().setKeyword$6$Delimiter(HiddenTerminalsTestLanguageDelimiters.keyword$17$Delimiter);
-		getOverridingHiddensConsumer().setKeyword$6$Delimiter(HiddenTerminalsTestLanguageDelimiters.keyword$17$Delimiter);
-		getOverridingHiddensConsumer().setKeyword$7$Delimiter(HiddenTerminalsTestLanguageDelimiters.keyword$17$Delimiter);
-		getOverridingHiddensConsumer().setKeyword$8$Delimiter(HiddenTerminalsTestLanguageDelimiters.keyword$17$Delimiter);
-		getOverridingHiddensConsumer().setKeyword$11$Delimiter(HiddenTerminalsTestLanguageDelimiters.keyword$17$Delimiter);
-		getOverridingHiddensConsumer().setKeyword$13$Delimiter(HiddenTerminalsTestLanguageDelimiters.keyword$17$Delimiter);
-		getOverridingHiddensCallConsumer().setKeyword$3$Delimiter(HiddenTerminalsTestLanguageDelimiters.keyword$17$Delimiter);
-		getOverridingHiddensCallConsumer().setKeyword$7$Delimiter(HiddenTerminalsTestLanguageDelimiters.keyword$17$Delimiter);
-		getOverridingHiddensCallConsumer().setRuleCall$5$Delimiter(HiddenTerminalsTestLanguageDelimiters.ruleCall$19$Delimiter);
-		getInheritingHiddensConsumer().setKeyword$6$Delimiter(HiddenTerminalsTestLanguageDelimiters.keyword$17$Delimiter);
-		getInheritingHiddensConsumer().setKeyword$7$Delimiter(HiddenTerminalsTestLanguageDelimiters.keyword$17$Delimiter);
-		getInheritingHiddensConsumer().setKeyword$8$Delimiter(HiddenTerminalsTestLanguageDelimiters.keyword$17$Delimiter);
-		getInheritingHiddensConsumer().setKeyword$14$Delimiter(HiddenTerminalsTestLanguageDelimiters.keyword$17$Delimiter);
-		getInheritingHiddensConsumer().setKeyword$16$Delimiter(HiddenTerminalsTestLanguageDelimiters.keyword$17$Delimiter);
-		getHidingHiddensConsumer().setKeyword$3$Delimiter(HiddenTerminalsTestLanguageDelimiters.keyword$17$Delimiter);
-		getHidingHiddensConsumer().setRuleCall$5$Delimiter(HiddenTerminalsTestLanguageDelimiters.ruleCall$19$Delimiter);
-		getInheritingHiddensCallConsumer().setKeyword$2$Delimiter(HiddenTerminalsTestLanguageDelimiters.keyword$17$Delimiter);
-		getInheritingHiddensCallConsumer().setKeyword$4$Delimiter(HiddenTerminalsTestLanguageDelimiters.keyword$17$Delimiter);
+		getWithoutHiddensConsumer().setKeyword$5$Delimiter(HiddenTerminalsTestLanguageDelimiters.keyword$19$Delimiter);
+		getWithoutHiddensConsumer().setKeyword$8$Delimiter(HiddenTerminalsTestLanguageDelimiters.keyword$19$Delimiter);
+		getWithoutHiddensConsumer().setKeyword$12$Delimiter(HiddenTerminalsTestLanguageDelimiters.keyword$19$Delimiter);
+		getWithoutHiddensConsumer().setRuleCall$7$Delimiter(HiddenTerminalsTestLanguageDelimiters.ruleCall$21$Delimiter);
+		getWithoutHiddensConsumer().setRuleCall$10$Delimiter(HiddenTerminalsTestLanguageDelimiters.ruleCall$21$Delimiter);
+		getWithHiddensConsumer().setKeyword$3$Delimiter(HiddenTerminalsTestLanguageDelimiters.keyword$19$Delimiter);
+		getWithHiddensConsumer().setKeyword$4$Delimiter(HiddenTerminalsTestLanguageDelimiters.keyword$19$Delimiter);
+		getWithHiddensConsumer().setKeyword$6$Delimiter(HiddenTerminalsTestLanguageDelimiters.keyword$19$Delimiter);
+		getOverridingHiddensConsumer().setKeyword$6$Delimiter(HiddenTerminalsTestLanguageDelimiters.keyword$19$Delimiter);
+		getOverridingHiddensConsumer().setKeyword$7$Delimiter(HiddenTerminalsTestLanguageDelimiters.keyword$19$Delimiter);
+		getOverridingHiddensConsumer().setKeyword$8$Delimiter(HiddenTerminalsTestLanguageDelimiters.keyword$19$Delimiter);
+		getOverridingHiddensConsumer().setKeyword$11$Delimiter(HiddenTerminalsTestLanguageDelimiters.keyword$19$Delimiter);
+		getOverridingHiddensConsumer().setKeyword$13$Delimiter(HiddenTerminalsTestLanguageDelimiters.keyword$19$Delimiter);
+		getOverridingHiddensCallConsumer().setKeyword$3$Delimiter(HiddenTerminalsTestLanguageDelimiters.keyword$19$Delimiter);
+		getOverridingHiddensCallConsumer().setKeyword$7$Delimiter(HiddenTerminalsTestLanguageDelimiters.keyword$19$Delimiter);
+		getOverridingHiddensCallConsumer().setRuleCall$5$Delimiter(HiddenTerminalsTestLanguageDelimiters.ruleCall$21$Delimiter);
+		getInheritingHiddensConsumer().setKeyword$6$Delimiter(HiddenTerminalsTestLanguageDelimiters.keyword$19$Delimiter);
+		getInheritingHiddensConsumer().setKeyword$7$Delimiter(HiddenTerminalsTestLanguageDelimiters.keyword$19$Delimiter);
+		getInheritingHiddensConsumer().setKeyword$8$Delimiter(HiddenTerminalsTestLanguageDelimiters.keyword$19$Delimiter);
+		getInheritingHiddensConsumer().setKeyword$14$Delimiter(HiddenTerminalsTestLanguageDelimiters.keyword$19$Delimiter);
+		getInheritingHiddensConsumer().setKeyword$16$Delimiter(HiddenTerminalsTestLanguageDelimiters.keyword$19$Delimiter);
+		getDatatypeHiddensConsumer().setKeyword$2$Delimiter(HiddenTerminalsTestLanguageDelimiters.keyword$19$Delimiter);
+		getDatatypeRuleConsumer().setKeyword$2$Delimiter(HiddenTerminalsTestLanguageDelimiters.keyword$19$Delimiter);
+		getDatatypeRuleConsumer().setKeyword$3$Delimiter(HiddenTerminalsTestLanguageDelimiters.keyword$19$Delimiter);
+		getHidingHiddensConsumer().setKeyword$3$Delimiter(HiddenTerminalsTestLanguageDelimiters.keyword$19$Delimiter);
+		getHidingHiddensConsumer().setRuleCall$5$Delimiter(HiddenTerminalsTestLanguageDelimiters.ruleCall$21$Delimiter);
+		getInheritingHiddensCallConsumer().setKeyword$2$Delimiter(HiddenTerminalsTestLanguageDelimiters.keyword$19$Delimiter);
+		getInheritingHiddensCallConsumer().setKeyword$4$Delimiter(HiddenTerminalsTestLanguageDelimiters.keyword$19$Delimiter);
 	}
 	
     public HiddenTerminalsTestLanguageModelConsumer getModelConsumer() {
@@ -144,6 +160,14 @@ public class HiddenTerminalsTestLanguageParserConfiguration extends AbstractPars
 
     public HiddenTerminalsTestLanguageInheritingHiddensConsumer getInheritingHiddensConsumer() {
     	return inheritingHiddensConsumer;
+    }
+
+    public HiddenTerminalsTestLanguageDatatypeHiddensConsumer getDatatypeHiddensConsumer() {
+    	return datatypeHiddensConsumer;
+    }
+
+    public HiddenTerminalsTestLanguageDatatypeRuleConsumer getDatatypeRuleConsumer() {
+    	return datatypeRuleConsumer;
     }
 
     public HiddenTerminalsTestLanguageHidingHiddensConsumer getHidingHiddensConsumer() {

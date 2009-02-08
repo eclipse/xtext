@@ -30,15 +30,15 @@ public class WhitespacePreservingTokenSerializer extends SimpleTokenSerializer {
 
 	private int lastLeaf = -1;
 
-	public void serialize(IAbstractToken firstToken, OutputStream out)
-			throws IOException {
+	@Override
+	public void serialize(IAbstractToken firstToken, OutputStream out) throws IOException {
 		beginSerialize();
 		super.serialize(firstToken, out);
 		endSerialize();
 	}
 
-	protected void beforeElement(IInstanceDescription curr, AbstractElement ele)
-			throws IOException {
+	@Override
+	protected void beforeElement(IInstanceDescription curr, AbstractElement ele) throws IOException {
 		int i = lastLeaf, last = findLeafNodeFor(curr, ele);
 		if (last < 0)
 			defaultSpacing(curr, ele);

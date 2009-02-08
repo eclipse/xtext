@@ -76,7 +76,7 @@ public final class EcoreDslEcoreDslConsumer extends NonTerminalConsumer {
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(importStatementDeclConsumer, "imports", true, false, getRule().ele00ParserRuleCallImportStatementDecl());
+		tempResult = consumeNonTerminal(importStatementDeclConsumer, "imports", true, false, false, getRule().ele00ParserRuleCallImportStatementDecl());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -90,7 +90,7 @@ public final class EcoreDslEcoreDslConsumer extends NonTerminalConsumer {
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(ePackageDeclConsumer, "package", false, false, getRule().ele10ParserRuleCallEPackageDecl());
+		tempResult = consumeNonTerminal(ePackageDeclConsumer, "package", false, false, false, getRule().ele10ParserRuleCallEPackageDecl());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

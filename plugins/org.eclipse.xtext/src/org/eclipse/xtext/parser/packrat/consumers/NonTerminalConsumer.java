@@ -79,7 +79,7 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 		this.hiddenTokens = hiddenTokens;
 	}
 
-	public int consume(String feature, boolean isMany, boolean isDatatype, AbstractElement grammarElement) throws Exception {
+	public int consume(String feature, boolean isMany, boolean isDatatype, boolean isBoolean, AbstractElement grammarElement) throws Exception {
 		IHiddenTokenState prevState = hiddenTokenHandler.replaceHiddenTokens(hiddenTokens);
 		IMarker marker = mark();
 		int prevOffset = getOffset();
@@ -88,7 +88,7 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 		if (result != ConsumeResult.SUCCESS) {
 			acceptor.accept(new ErrorToken(prevOffset, 0, null, "Expected " + getDefaultTypeName() + ", but could not find."));
 		}
-		acceptor.accept(new ParsedNonTerminalEnd(input.getOffset(), feature, isMany, isDatatype));
+		acceptor.accept(new ParsedNonTerminalEnd(input.getOffset(), feature, isMany, isDatatype, isBoolean));
 		marker.commit();
 		prevState.restore();
 		return result;
@@ -116,7 +116,7 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 			listener.handleException(this, e, this);
 		}
 		listener.beforeNonTerminalEnd(this, result, this);
-		acceptor.accept(new ParsedNonTerminalEnd(input.getOffset(), null, false, false));
+		acceptor.accept(new ParsedNonTerminalEnd(input.getOffset(), null, false, false, false));
 		marker.commit();
 		prevState.restore();
 	}
@@ -137,8 +137,8 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 		return consumerUtil.consumeTerminal(consumer, feature, isMany, isBoolean, grammarElement, notMatching);
 	}
 	
-	protected final int consumeNonTerminal(INonTerminalConsumer consumer, String feature, boolean isMany, boolean isDatatype, AbstractElement grammarElement) throws Exception {
-		return consumerUtil.consumeNonTerminal(consumer, feature, isMany, isDatatype, grammarElement);
+	protected final int consumeNonTerminal(INonTerminalConsumer consumer, String feature, boolean isMany, boolean isDatatype, boolean isBoolean, AbstractElement grammarElement) throws Exception {
+		return consumerUtil.consumeNonTerminal(consumer, feature, isMany, isDatatype, isBoolean, grammarElement);
 	}
 	
 	protected final void consumeAction(Action action, String typeName, boolean isMany) {

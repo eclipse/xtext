@@ -93,7 +93,7 @@ public final class ComplexReconstrTestLanguageParensConsumer extends NonTerminal
 	}
 
 	protected int consumeRuleCall$5(int entryPoint) throws Exception {
-		return consumeNonTerminal(opConsumer, null, false, false, getRule().ele001ParserRuleCallOp());
+		return consumeNonTerminal(opConsumer, null, false, false, false, getRule().ele001ParserRuleCallOp());
 	}
 
 	protected int consumeKeyword$6(int entryPoint) throws Exception {

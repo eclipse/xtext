@@ -33,6 +33,7 @@ public abstract class AbstractAntlrParser extends AbstractParser<InputStream> im
 	@Inject
 	protected IGrammarAccess grammarAccess;
 
+	@Override
 	public IParseResult doParse(InputStream in) {
 		return parse(getDefaultRuleName(), in);
 	}
@@ -59,7 +60,7 @@ public abstract class AbstractAntlrParser extends AbstractParser<InputStream> im
 	
 	public IParseResult parse(String ruleName, InputStream in) {
         try {
-            IParseResult parseResult = (IParseResult) parse(ruleName, new ANTLRInputStream(in));
+            IParseResult parseResult = parse(ruleName, new ANTLRInputStream(in));
             return parseResult;
         } catch (IOException e) {
             throw new WrappedException(e);

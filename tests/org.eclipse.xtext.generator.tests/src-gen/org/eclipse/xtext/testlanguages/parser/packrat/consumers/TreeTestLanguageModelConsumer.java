@@ -43,7 +43,7 @@ public final class TreeTestLanguageModelConsumer extends NonTerminalConsumer {
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(nodeConsumer, "children", true, false, getRule().ele0ParserRuleCallNode());
+		tempResult = consumeNonTerminal(nodeConsumer, "children", true, false, false, getRule().ele0ParserRuleCallNode());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

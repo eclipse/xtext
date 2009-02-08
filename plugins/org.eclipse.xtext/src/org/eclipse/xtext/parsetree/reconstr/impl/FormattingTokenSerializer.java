@@ -30,6 +30,7 @@ public abstract class FormattingTokenSerializer extends SimpleTokenSerializer {
 		configureFormatting(config);
 	}
 
+	@Override
 	protected void afterToken(IAbstractToken token) throws IOException {
 		if (token.getNext() != null)
 			formatter.collectLocators(token.getGrammarElement(), token
@@ -37,6 +38,7 @@ public abstract class FormattingTokenSerializer extends SimpleTokenSerializer {
 		super.afterToken(token);
 	}
 
+	@Override
 	protected void beforeElement(IInstanceDescription curr, AbstractElement ele)
 			throws IOException {
 		if (outputHasStarted)
@@ -50,6 +52,7 @@ public abstract class FormattingTokenSerializer extends SimpleTokenSerializer {
 		return new FormattingConfig();
 	}
 
+	@Override
 	public void serialize(IAbstractToken firstToken, OutputStream out)
 			throws IOException {
 		formatter = config.run();

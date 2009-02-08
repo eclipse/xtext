@@ -146,7 +146,7 @@ public final class PartialParserTestLanguageSecondConcreteConsumer extends NonTe
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(namedConsumer, "value", false, false, getRule().ele0010ParserRuleCallNamed());
+		tempResult = consumeNonTerminal(namedConsumer, "value", false, false, false, getRule().ele0010ParserRuleCallNamed());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

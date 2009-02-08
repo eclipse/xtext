@@ -40,15 +40,16 @@ public class TransformationDiagnosticsProducer extends AbstractDiagnosticProduce
 	
 	@Override
 	public void setTarget(EObject object, EStructuralFeature feature) {
-		NodeAdapter adapter = NodeUtil.getNodeAdapter(object);
+		EObject myObject = object;
+		NodeAdapter adapter = NodeUtil.getNodeAdapter(myObject);
 		while (adapter == null) {
-			object = object.eContainer();
-			if (object == null)
+			myObject = myObject.eContainer();
+			if (myObject == null)
 				break;
-			adapter = NodeUtil.getNodeAdapter(object);
+			adapter = NodeUtil.getNodeAdapter(myObject);
 		}
 		if (adapter == null)
-			throw new IllegalStateException("Cannot find NodeAdapter for object: " + object);
+			throw new IllegalStateException("Cannot find NodeAdapter for object: " + myObject);
 		setNode(adapter.getParserNode());
 	}
 

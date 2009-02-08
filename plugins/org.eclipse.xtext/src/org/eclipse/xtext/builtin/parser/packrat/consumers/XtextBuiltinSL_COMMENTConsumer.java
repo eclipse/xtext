@@ -26,6 +26,7 @@ public final class XtextBuiltinSL_COMMENTConsumer extends AbstractRuleAwareTermi
 		super(configuration);
 	}
 
+	@Override
 	public int doConsume() {
 		boolean result = true;
 		// '//'

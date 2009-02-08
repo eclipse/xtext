@@ -52,11 +52,11 @@ public final class ContentAssistTestLanguageAbstractRuleConsumer extends NonTerm
 	}
 
 	protected int consumeRuleCall$2(int entryPoint) throws Exception {
-		return consumeNonTerminal(firstAbstractRuleChildConsumer, null, false, false, getRule().ele0ParserRuleCallFirstAbstractRuleChild());
+		return consumeNonTerminal(firstAbstractRuleChildConsumer, null, false, false, false, getRule().ele0ParserRuleCallFirstAbstractRuleChild());
 	}
 
 	protected int consumeRuleCall$3(int entryPoint) throws Exception {
-		return consumeNonTerminal(secondAbstractRuleChildConsumer, null, false, false, getRule().ele1ParserRuleCallSecondAbstractRuleChild());
+		return consumeNonTerminal(secondAbstractRuleChildConsumer, null, false, false, false, getRule().ele1ParserRuleCallSecondAbstractRuleChild());
 	}
 
 	public AbstractRuleElements getRule() {

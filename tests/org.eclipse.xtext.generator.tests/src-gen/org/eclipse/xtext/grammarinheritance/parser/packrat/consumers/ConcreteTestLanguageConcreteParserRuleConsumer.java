@@ -125,7 +125,7 @@ public final class ConcreteTestLanguageConcreteParserRuleConsumer extends NonTer
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(inheritedParserRuleConsumer, "elements", true, false, getRule().ele10ParserRuleCallInheritedParserRule());
+		tempResult = consumeNonTerminal(inheritedParserRuleConsumer, "elements", true, false, false, getRule().ele10ParserRuleCallInheritedParserRule());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

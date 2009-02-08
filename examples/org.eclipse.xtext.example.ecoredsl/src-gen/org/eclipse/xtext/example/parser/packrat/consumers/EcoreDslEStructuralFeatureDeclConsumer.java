@@ -52,11 +52,11 @@ public final class EcoreDslEStructuralFeatureDeclConsumer extends NonTerminalCon
 	}
 
 	protected int consumeRuleCall$2(int entryPoint) throws Exception {
-		return consumeNonTerminal(eAttributeDeclConsumer, null, false, false, getRule().ele0ParserRuleCallEAttributeDecl());
+		return consumeNonTerminal(eAttributeDeclConsumer, null, false, false, false, getRule().ele0ParserRuleCallEAttributeDecl());
 	}
 
 	protected int consumeRuleCall$3(int entryPoint) throws Exception {
-		return consumeNonTerminal(eReferenceDeclConsumer, null, false, false, getRule().ele1ParserRuleCallEReferenceDecl());
+		return consumeNonTerminal(eReferenceDeclConsumer, null, false, false, false, getRule().ele1ParserRuleCallEReferenceDecl());
 	}
 
 	public EStructuralFeatureDeclElements getRule() {

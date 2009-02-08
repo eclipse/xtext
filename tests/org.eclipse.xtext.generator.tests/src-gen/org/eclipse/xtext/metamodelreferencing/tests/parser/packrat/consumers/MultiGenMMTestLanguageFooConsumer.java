@@ -93,7 +93,7 @@ public final class MultiGenMMTestLanguageFooConsumer extends NonTerminalConsumer
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(nameRefConsumer, "nameRefs", true, false, getRule().ele10ParserRuleCallNameRef());
+		tempResult = consumeNonTerminal(nameRefConsumer, "nameRefs", true, false, false, getRule().ele10ParserRuleCallNameRef());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

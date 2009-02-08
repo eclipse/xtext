@@ -149,7 +149,7 @@ public final class HiddenTerminalsTestLanguageInheritingHiddensConsumer extends 
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(inheritingHiddensCallConsumer, "called", false, false, getRule().ele00100ParserRuleCallInheritingHiddensCall());
+		tempResult = consumeNonTerminal(inheritingHiddensCallConsumer, "called", false, false, false, getRule().ele00100ParserRuleCallInheritingHiddensCall());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -163,7 +163,7 @@ public final class HiddenTerminalsTestLanguageInheritingHiddensConsumer extends 
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(hidingHiddensConsumer, "hidingCalled", false, false, getRule().ele00110ParserRuleCallHidingHiddens());
+		tempResult = consumeNonTerminal(hidingHiddensConsumer, "hidingCalled", false, false, false, getRule().ele00110ParserRuleCallHidingHiddens());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

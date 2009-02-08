@@ -52,11 +52,11 @@ public final class EpatchTestLanguageNamedObjectConsumer extends NonTerminalCons
 	}
 
 	protected int consumeRuleCall$2(int entryPoint) throws Exception {
-		return consumeNonTerminal(objectRefConsumer, null, false, false, getRule().ele0ParserRuleCallObjectRef());
+		return consumeNonTerminal(objectRefConsumer, null, false, false, false, getRule().ele0ParserRuleCallObjectRef());
 	}
 
 	protected int consumeRuleCall$3(int entryPoint) throws Exception {
-		return consumeNonTerminal(createdObjectConsumer, null, false, false, getRule().ele1ParserRuleCallCreatedObject());
+		return consumeNonTerminal(createdObjectConsumer, null, false, false, false, getRule().ele1ParserRuleCallCreatedObject());
 	}
 
 	public NamedObjectElements getRule() {

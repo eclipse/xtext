@@ -72,7 +72,7 @@ public final class XtextNegatedTokenConsumer extends NonTerminalConsumer {
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(terminalTokenElementConsumer, "terminal", false, false, getRule().ele10ParserRuleCallTerminalTokenElement());
+		tempResult = consumeNonTerminal(terminalTokenElementConsumer, "terminal", false, false, false, getRule().ele10ParserRuleCallTerminalTokenElement());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

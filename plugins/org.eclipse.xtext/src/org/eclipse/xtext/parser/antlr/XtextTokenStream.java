@@ -56,6 +56,7 @@ public class XtextTokenStream extends CommonTokenStream {
 			super(initialCapacity);
 		}
 
+		@Override
 		public Object get(int index) {
 			Token tok = (Token) super.get(index);
 			// adjust only tokens in the 'future', as we wont change the channel of previously parsed

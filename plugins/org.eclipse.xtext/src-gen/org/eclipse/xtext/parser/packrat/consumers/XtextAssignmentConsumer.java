@@ -138,7 +138,7 @@ public final class XtextAssignmentConsumer extends NonTerminalConsumer {
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(abstractTerminalConsumer, "terminal", false, false, getRule().ele10ParserRuleCallAbstractTerminal());
+		tempResult = consumeNonTerminal(abstractTerminalConsumer, "terminal", false, false, false, getRule().ele10ParserRuleCallAbstractTerminal());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

@@ -437,7 +437,7 @@ public final class EpatchTestLanguageListAssignmentValueConsumer extends NonTerm
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(createdObjectConsumer, "newObject", false, false, getRule().ele1010ParserRuleCallCreatedObject());
+		tempResult = consumeNonTerminal(createdObjectConsumer, "newObject", false, false, false, getRule().ele1010ParserRuleCallCreatedObject());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

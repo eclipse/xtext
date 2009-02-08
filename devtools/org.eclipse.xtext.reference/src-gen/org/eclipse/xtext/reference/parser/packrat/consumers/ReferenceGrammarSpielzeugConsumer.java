@@ -128,7 +128,7 @@ public final class ReferenceGrammarSpielzeugConsumer extends NonTerminalConsumer
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(farbeConsumer, "farbe", false, false, getRule().ele010ParserRuleCallFarbe());
+		tempResult = consumeNonTerminal(farbeConsumer, "farbe", false, false, false, getRule().ele010ParserRuleCallFarbe());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

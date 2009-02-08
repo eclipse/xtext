@@ -205,7 +205,7 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(eAnnotationDeclConsumer, "eAnnotations", true, false, getRule().ele00000000000ParserRuleCallEAnnotationDecl());
+		tempResult = consumeNonTerminal(eAnnotationDeclConsumer, "eAnnotations", true, false, false, getRule().ele00000000000ParserRuleCallEAnnotationDecl());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -298,7 +298,7 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(eGenericTypeReferenceDeclConsumer, "eGenericType", false, false, getRule().ele0000000100ParserRuleCallEGenericTypeReferenceDecl());
+		tempResult = consumeNonTerminal(eGenericTypeReferenceDeclConsumer, "eGenericType", false, false, false, getRule().ele0000000100ParserRuleCallEGenericTypeReferenceDecl());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -393,7 +393,7 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(eTypeParameterDeclConsumer, "eTypeParameters", true, false, getRule().ele0000010010ParserRuleCallETypeParameterDecl());
+		tempResult = consumeNonTerminal(eTypeParameterDeclConsumer, "eTypeParameters", true, false, false, getRule().ele0000010010ParserRuleCallETypeParameterDecl());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -451,7 +451,7 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(eTypeParameterDeclConsumer, "eTypeParameters", true, false, getRule().ele0000010110ParserRuleCallETypeParameterDecl());
+		tempResult = consumeNonTerminal(eTypeParameterDeclConsumer, "eTypeParameters", true, false, false, getRule().ele0000010110ParserRuleCallETypeParameterDecl());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -514,7 +514,7 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(eParameterDeclConsumer, "eParameters", true, false, getRule().ele000100ParserRuleCallEParameterDecl());
+		tempResult = consumeNonTerminal(eParameterDeclConsumer, "eParameters", true, false, false, getRule().ele000100ParserRuleCallEParameterDecl());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -572,7 +572,7 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(eParameterDeclConsumer, "eParameters", true, false, getRule().ele0001110ParserRuleCallEParameterDecl());
+		tempResult = consumeNonTerminal(eParameterDeclConsumer, "eParameters", true, false, false, getRule().ele0001110ParserRuleCallEParameterDecl());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -644,7 +644,7 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(eGenericTypeReferenceDeclConsumer, "eGenericExceptions", true, false, getRule().ele01010ParserRuleCallEGenericTypeReferenceDecl());
+		tempResult = consumeNonTerminal(eGenericTypeReferenceDeclConsumer, "eGenericExceptions", true, false, false, getRule().ele01010ParserRuleCallEGenericTypeReferenceDecl());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -702,7 +702,7 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(eGenericTypeReferenceDeclConsumer, "eGenericExceptions", true, false, getRule().ele01110ParserRuleCallEGenericTypeReferenceDecl());
+		tempResult = consumeNonTerminal(eGenericTypeReferenceDeclConsumer, "eGenericExceptions", true, false, false, getRule().ele01110ParserRuleCallEGenericTypeReferenceDecl());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

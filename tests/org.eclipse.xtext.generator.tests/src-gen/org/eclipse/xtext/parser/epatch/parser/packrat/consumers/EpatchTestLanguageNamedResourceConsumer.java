@@ -271,7 +271,7 @@ public final class EpatchTestLanguageNamedResourceConsumer extends NonTerminalCo
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(createdObjectConsumer, "leftRoot", false, false, getRule().ele00000110ParserRuleCallCreatedObject());
+		tempResult = consumeNonTerminal(createdObjectConsumer, "leftRoot", false, false, false, getRule().ele00000110ParserRuleCallCreatedObject());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -361,7 +361,7 @@ public final class EpatchTestLanguageNamedResourceConsumer extends NonTerminalCo
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(createdObjectConsumer, "rightRoot", false, false, getRule().ele00110ParserRuleCallCreatedObject());
+		tempResult = consumeNonTerminal(createdObjectConsumer, "rightRoot", false, false, false, getRule().ele00110ParserRuleCallCreatedObject());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

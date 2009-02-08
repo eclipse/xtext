@@ -23,6 +23,7 @@ public final class XtextBuiltinWSConsumer extends AbstractRuleAwareTerminalConsu
 		super(configuration);
 	}
 
+	@Override
 	public int doConsume() {
 		boolean result = true;
 		// (' '|'\\t'|'\\r'|'\\n')+

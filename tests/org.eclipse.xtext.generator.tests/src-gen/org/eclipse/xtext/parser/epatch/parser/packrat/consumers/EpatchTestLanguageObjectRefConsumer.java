@@ -490,7 +490,7 @@ public final class EpatchTestLanguageObjectRefConsumer extends NonTerminalConsum
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(biSingleAssignmentConsumer, "assignments", true, false, getRule().ele1000100ParserRuleCallBiSingleAssignment());
+		tempResult = consumeNonTerminal(biSingleAssignmentConsumer, "assignments", true, false, false, getRule().ele1000100ParserRuleCallBiSingleAssignment());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -504,7 +504,7 @@ public final class EpatchTestLanguageObjectRefConsumer extends NonTerminalConsum
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(biListAssignmentConsumer, "assignments", true, false, getRule().ele1000110ParserRuleCallBiListAssignment());
+		tempResult = consumeNonTerminal(biListAssignmentConsumer, "assignments", true, false, false, getRule().ele1000110ParserRuleCallBiListAssignment());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -563,7 +563,7 @@ public final class EpatchTestLanguageObjectRefConsumer extends NonTerminalConsum
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(migrationConsumer, "leftMig", false, false, getRule().ele100110ParserRuleCallMigration());
+		tempResult = consumeNonTerminal(migrationConsumer, "leftMig", false, false, false, getRule().ele100110ParserRuleCallMigration());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -622,7 +622,7 @@ public final class EpatchTestLanguageObjectRefConsumer extends NonTerminalConsum
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(migrationConsumer, "rightMig", false, false, getRule().ele10110ParserRuleCallMigration());
+		tempResult = consumeNonTerminal(migrationConsumer, "rightMig", false, false, false, getRule().ele10110ParserRuleCallMigration());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

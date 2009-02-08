@@ -131,7 +131,7 @@ public final class DomainmodelReferenceConsumer extends NonTerminalConsumer {
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(typeRefConsumer, "type", false, false, getRule().ele010ParserRuleCallTypeRef());
+		tempResult = consumeNonTerminal(typeRefConsumer, "type", false, false, false, getRule().ele010ParserRuleCallTypeRef());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

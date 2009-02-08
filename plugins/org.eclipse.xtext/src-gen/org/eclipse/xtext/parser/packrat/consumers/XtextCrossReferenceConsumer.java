@@ -101,7 +101,7 @@ public final class XtextCrossReferenceConsumer extends NonTerminalConsumer {
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(typeRefConsumer, "type", false, false, getRule().ele0010ParserRuleCallTypeRef());
+		tempResult = consumeNonTerminal(typeRefConsumer, "type", false, false, false, getRule().ele0010ParserRuleCallTypeRef());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

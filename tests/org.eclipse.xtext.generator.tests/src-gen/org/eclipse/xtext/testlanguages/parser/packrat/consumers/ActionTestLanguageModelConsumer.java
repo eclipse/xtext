@@ -43,7 +43,7 @@ public final class ActionTestLanguageModelConsumer extends NonTerminalConsumer {
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(elementConsumer, "children", true, false, getRule().ele0ParserRuleCallElement());
+		tempResult = consumeNonTerminal(elementConsumer, "children", true, false, false, getRule().ele0ParserRuleCallElement());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

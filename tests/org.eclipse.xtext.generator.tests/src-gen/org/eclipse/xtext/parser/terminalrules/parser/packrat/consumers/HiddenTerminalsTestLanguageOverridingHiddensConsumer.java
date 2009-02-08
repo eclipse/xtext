@@ -128,7 +128,7 @@ public final class HiddenTerminalsTestLanguageOverridingHiddensConsumer extends 
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(overridingHiddensCallConsumer, "called", false, false, getRule().ele0010ParserRuleCallOverridingHiddensCall());
+		tempResult = consumeNonTerminal(overridingHiddensCallConsumer, "called", false, false, false, getRule().ele0010ParserRuleCallOverridingHiddensCall());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

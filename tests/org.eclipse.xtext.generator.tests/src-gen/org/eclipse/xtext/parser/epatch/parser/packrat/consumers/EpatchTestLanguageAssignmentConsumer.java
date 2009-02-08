@@ -66,19 +66,19 @@ public final class EpatchTestLanguageAssignmentConsumer extends NonTerminalConsu
 	}
 
 	protected int consumeRuleCall$4(int entryPoint) throws Exception {
-		return consumeNonTerminal(biSingleAssignmentConsumer, null, false, false, getRule().ele000ParserRuleCallBiSingleAssignment());
+		return consumeNonTerminal(biSingleAssignmentConsumer, null, false, false, false, getRule().ele000ParserRuleCallBiSingleAssignment());
 	}
 
 	protected int consumeRuleCall$5(int entryPoint) throws Exception {
-		return consumeNonTerminal(biListAssignmentConsumer, null, false, false, getRule().ele001ParserRuleCallBiListAssignment());
+		return consumeNonTerminal(biListAssignmentConsumer, null, false, false, false, getRule().ele001ParserRuleCallBiListAssignment());
 	}
 
 	protected int consumeRuleCall$6(int entryPoint) throws Exception {
-		return consumeNonTerminal(monoSingleAssignmentConsumer, null, false, false, getRule().ele01ParserRuleCallMonoSingleAssignment());
+		return consumeNonTerminal(monoSingleAssignmentConsumer, null, false, false, false, getRule().ele01ParserRuleCallMonoSingleAssignment());
 	}
 
 	protected int consumeRuleCall$7(int entryPoint) throws Exception {
-		return consumeNonTerminal(monoListAssignmentConsumer, null, false, false, getRule().ele1ParserRuleCallMonoListAssignment());
+		return consumeNonTerminal(monoListAssignmentConsumer, null, false, false, false, getRule().ele1ParserRuleCallMonoListAssignment());
 	}
 
 	public AssignmentElements getRule() {

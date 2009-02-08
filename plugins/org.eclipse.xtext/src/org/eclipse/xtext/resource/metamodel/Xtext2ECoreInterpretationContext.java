@@ -104,8 +104,8 @@ public class Xtext2ECoreInterpretationContext {
 			if (adapter != null) {
 				final AbstractNode node = adapter.getParserNode();
 				throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable, "Cannot find type for '" + node.serialize() + "'.", terminal);
-			} else
-				throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable, "Cannot find type for " + terminal.eClass().getName(), terminal);
+			}
+			throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable, "Cannot find type for " + terminal.eClass().getName(), terminal);
 		}
 		return result;
 	}

@@ -113,7 +113,7 @@ public final class ContentAssistTestLanguageStartConsumer extends NonTerminalCon
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(abstractRuleConsumer, "rules", true, false, getRule().ele010ParserRuleCallAbstractRule());
+		tempResult = consumeNonTerminal(abstractRuleConsumer, "rules", true, false, false, getRule().ele010ParserRuleCallAbstractRule());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

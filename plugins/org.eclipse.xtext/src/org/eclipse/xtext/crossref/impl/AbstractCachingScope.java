@@ -45,6 +45,7 @@ public abstract class AbstractCachingScope extends AbstractNestedScope {
 		this.refuseDuplicates = refuseDuplicates;
 	}
 
+	@Override
 	public Iterable<IScopedElement> getContents() {
 		if (elements == null) {
 			ScopedElementProducer producer = new ScopedElementProducer(refuseDuplicates);
@@ -66,7 +67,7 @@ public abstract class AbstractCachingScope extends AbstractNestedScope {
 			ScopedElementProducer producer) {
 		final TreeIterator<EObject> iterator = resource.getAllContents();
 		while (iterator.hasNext()) {
-			final EObject object = (EObject) iterator.next();
+			final EObject object = iterator.next();
 			if (EcoreUtil2.isAssignableFrom(type, object.eClass())) {
 				String value = resolver.getValue(object);
 				producer.produce(value, object);

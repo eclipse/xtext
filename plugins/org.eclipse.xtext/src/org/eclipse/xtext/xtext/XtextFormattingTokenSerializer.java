@@ -25,6 +25,7 @@ import org.eclipse.xtext.services.XtextGrammarAccess.ParserRuleElements;
  */
 public class XtextFormattingTokenSerializer extends FormattingTokenSerializer {
 
+	@Override
 	protected void configureFormatting(FormattingConfig cfg) {
 		XtextGrammarAccess g = XtextGrammarAccess.INSTANCE;
 

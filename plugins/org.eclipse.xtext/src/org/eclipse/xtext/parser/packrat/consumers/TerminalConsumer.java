@@ -39,7 +39,7 @@ public abstract class TerminalConsumer extends AbstractConsumer implements ITerm
 			if (feature != null) {
 				if (element instanceof CrossReference)
 					acceptor.accept(new ParsedTerminalWithFeatureInfo(prevMarker, input.getOffset()-prevMarker, 
-							element != null ? element : getGrammarElement(), isHidden(), feature));
+							element, isHidden(), feature));
 				else
 					acceptor.accept(new ParsedTerminalWithFeature(prevMarker, input.getOffset()-prevMarker, 
 							element != null ? element : getGrammarElement(), isHidden(), feature, isMany, isBoolean, getRuleName()));
@@ -131,22 +131,26 @@ public abstract class TerminalConsumer extends AbstractConsumer implements ITerm
 	}
 	
 	protected boolean readAnyChars(char... candidates) {
-		while(readAnyChar(candidates));
+		while(readAnyChar(candidates)) {
+		}
 		return true;
 	}
 	
 	protected boolean readChars(char candidate) {
-		while(readChar(candidate));
+		while(readChar(candidate)) {
+		}
 		return true;
 	}
 	
 	protected boolean readChars(ICharacterClass characterClass) {
-		while(readChar(characterClass));
+		while(readChar(characterClass)) {
+		}
 		return true;
 	}
 	
 	protected boolean readCharsBetween(char min, char max) {
-		while(readCharBetween(min, max));
+		while(readCharBetween(min, max)) {
+		}
 		return true;
 	}
 	

@@ -201,7 +201,7 @@ public final class XtextActionConsumer extends NonTerminalConsumer {
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(typeRefConsumer, "typeName", false, false, getRule().ele0000010ParserRuleCallTypeRef());
+		tempResult = consumeNonTerminal(typeRefConsumer, "typeName", false, false, false, getRule().ele0000010ParserRuleCallTypeRef());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;

@@ -62,23 +62,24 @@ public class Files {
 		}
 	}
 
-	public static boolean cleanFolder(File parentFolder, FileFilter filter, boolean continueOnError,
+	public static boolean cleanFolder(File parentFolder, final FileFilter filter, boolean continueOnError,
 			boolean deleteParentFolder) throws FileNotFoundException {
 		if (!parentFolder.exists()) {
 			throw new FileNotFoundException(parentFolder.getAbsolutePath());
 		}
-		if (filter == null)
-			filter = new FileFilter() {
+		FileFilter myFilter = filter;
+		if (myFilter == null)
+			myFilter = new FileFilter() {
 				public boolean accept(File pathname) {
 					return true;
 				}
 			};
 		log.debug("Cleaning folder " + parentFolder.toString());
-		final File[] contents = parentFolder.listFiles(filter);
+		final File[] contents = parentFolder.listFiles(myFilter);
 		for (int j = 0; j < contents.length; j++) {
 			final File file = contents[j];
 			if (file.isDirectory()) {
-				if (!cleanFolder(file, filter, continueOnError, false) && !continueOnError)
+				if (!cleanFolder(file, myFilter, continueOnError, false) && !continueOnError)
 					return false;
 			}
 			else {

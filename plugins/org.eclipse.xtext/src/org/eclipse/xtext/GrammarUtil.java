@@ -126,9 +126,7 @@ public class GrammarUtil {
 			if (ae == _this || eAllContentsAsList(ae).contains(_this)) {
 				return result;
 			}
-			else {
-				result.add(ae);
-			}
+			result.add(ae);
 		}
 		return result;
 	}

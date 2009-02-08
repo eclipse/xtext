@@ -162,18 +162,20 @@ public class PartialParsingUtil {
 		return reparseRegion.toString();
 	}
 
-	public static PartialParsingPointers calculatePartialParsingPointers(CompositeNode rootNode, int offset,
+	public static PartialParsingPointers calculatePartialParsingPointers(CompositeNode rootNode, final int offset,
 			int replacedTextLength) {
-		if (offset == rootNode.getTotalLength() && offset != 0) {
+		int myOffset = offset;
+		int myReplacedTextLength = replacedTextLength;
+		if (myOffset == rootNode.getTotalLength() && myOffset != 0) {
 			// newText is appended, so look for the last original character instead 
-			--offset;
-			replacedTextLength = 1;
+			--myOffset;
+			myReplacedTextLength = 1;
 		}
 		// include any existing parse errors
-		Range range = new Range(offset, offset + replacedTextLength);
+		Range range = new Range(myOffset, myOffset + myReplacedTextLength);
 		mergeErrorRange(rootNode, range);
 		
-		offset = range.fromOffset;
+		myOffset = range.fromOffset;
 //		EList<SyntaxError> allErrors = rootNode.allSyntaxErrors(); // uses TreeIterator and is not as fast as it should be
 		List<CompositeNode> nodesEnclosingRegion = collectNodesEnclosingChangeRegion(rootNode, range.fromOffset,
 				range.toOffset - range.fromOffset);
@@ -184,7 +186,7 @@ public class PartialParsingUtil {
 		if (validReplaceRootNodes.isEmpty()) {
 			validReplaceRootNodes = Collections.<CompositeNode> singletonList(rootNode);
 		}
-		return new PartialParsingPointers(rootNode, offset, replacedTextLength, validReplaceRootNodes,
+		return new PartialParsingPointers(rootNode, myOffset, myReplacedTextLength, validReplaceRootNodes,
 				nodesEnclosingRegion);
 	}
 	
