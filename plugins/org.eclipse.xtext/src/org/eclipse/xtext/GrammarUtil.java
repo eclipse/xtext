@@ -15,6 +15,7 @@ import static org.eclipse.xtext.EcoreUtil2.getContainerOfType;
 import static org.eclipse.xtext.EcoreUtil2.typeSelect;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -63,15 +64,21 @@ public class GrammarUtil {
 	}
 
 	public static String getLanguageId(Grammar g) {
-		return Strings.concat(".", g.getIdElements());
+		return g.getName();
 	}
 
 	public static String getName(Grammar g) {
-		return Strings.toFirstUpper(g.getIdElements().get(g.getIdElements().size() - 1));
+		if (Strings.isEmpty(g.getName()))
+			return null;
+		String[] splitted = g.getName().split("\\.");
+		return Strings.toFirstUpper(splitted[splitted.length - 1]);
 	}
 
 	public static String getNamespace(Grammar g) {
-		return Strings.concat(".", g.getIdElements(), 1).toLowerCase();
+		if (Strings.isEmpty(g.getName()))
+			return null;
+		String[] splitted = g.getName().split("\\.");
+		return Strings.concat(".", Arrays.asList(splitted), 1).toLowerCase();
 	}
 
 	public static Grammar getGrammar(EObject grammarElement) {
@@ -172,22 +179,15 @@ public class GrammarUtil {
 
 	}
 
-	public static String getSuperGrammarId(Grammar _this) {
-		if (IXtextBuiltin.ID.equals(getLanguageId(_this))) {
+	public static String getSuperGrammarId(Grammar grammar) {
+		if (IXtextBuiltin.ID.equals(getLanguageId(grammar))) {
 			return null;
 		}
-		if (_this.getSuperGrammarIdElements().isEmpty())
+		if (grammar.getSuperGrammarName() == null)
 			return IXtextBuiltin.ID;
-		StringBuffer buff = new StringBuffer();
-		for (int i = 0, x = _this.getSuperGrammarIdElements().size(); i < x; i++) {
-			buff.append(_this.getSuperGrammarIdElements().get(i));
-			if ((i + 1) < x)
-				buff.append(".");
-		}
-		// TODO SZ: remove workaround
-		if ("NULL".equals(buff.toString()))
+		if ("NULL".equals(grammar.getSuperGrammarName()))
 			return null;
-		return buff.toString();
+		return grammar.getSuperGrammarName();
 	}
 
 	public static AbstractRule findRuleForName(Grammar _this, String ruleName) {
