@@ -19,8 +19,6 @@ public interface ISemanticModelTransformer {
 
 	public abstract void transformSemanticNode(EObject semanticNode, ContentOutlineNode outlineParentNode);
 
-	public abstract void updateOutlineNode(EObject semanticNode, ContentOutlineNode outlineNode);
-
 	public abstract void setSorted(boolean on);
 
 }

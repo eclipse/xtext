@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.swt.graphics.Image;
 
 /**
  * @author Peter Friese - Initial contribution and API
@@ -19,7 +20,7 @@ import org.eclipse.jface.resource.ImageDescriptor;
 public class ContentOutlineNode {
 
 	private String label;
-	private String image;
+	private Image image;
 	private ImageDescriptor imageDescriptor;
 	private int selectionOffset;
 	private int selectionLength;
@@ -34,11 +35,11 @@ public class ContentOutlineNode {
 		return label;
 	}
 
-	public void setImage(String image) {
+	public void setImage(Image image) {
 		this.image = image;
 	}
 
-	public String getImage() {
+	public Image getImage() {
 		return image;
 	}
 
