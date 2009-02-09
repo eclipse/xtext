@@ -8,12 +8,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.example;
 
-import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
-import org.eclipse.xtext.example.editor.outline.EcoreDslOutlinePage;
-
+import org.eclipse.xtext.example.editor.outline.EcoreSemanticModelTransformer;
 
 /**
- * used to manually extend and modify configuration for components used within the IDE.
+ * used to manually extend and modify configuration for components used within
+ * the IDE.
  * 
  * @author Michael Clay - Initial contribution and API
  */
@@ -22,10 +21,8 @@ public class EcoreDslUIModule extends AbstractEcoreDslUiModule {
 	public Class<? extends org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider> bindIProposalProvider() {
 		return org.eclipse.xtext.example.EcoreDslProposalProvider.class;
 	}
-	public Class<? extends IContentOutlinePage> bindIContentOutlinePage() {
-		return EcoreDslOutlinePage.class;
-	}
+	
 	public Class<? extends org.eclipse.xtext.ui.common.editor.outline.ISemanticModelTransformer> bindISemanticModelTransformer() {
-		return EcoreDslOutlinePage.EcoreSemanticModelTransformer.class;
+		return EcoreSemanticModelTransformer.class;
 	}
 }
