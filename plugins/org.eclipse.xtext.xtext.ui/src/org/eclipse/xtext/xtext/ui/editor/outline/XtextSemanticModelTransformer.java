@@ -39,7 +39,7 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 				@Override
 				public Boolean caseTypeRef(org.eclipse.xtext.TypeRef object) {
 					return false;
-				}
+				}	
 				
 				public Boolean caseGroup(org.eclipse.xtext.Group object) {
 					return false;
@@ -87,7 +87,7 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 			return true;
 		}
 	}
-
+	
 	@Override
 	protected ContentOutlineNode createOutlineNode(EObject semanticNode, ContentOutlineNode outlineParentNode) {
 		final ContentOutlineNode outlineNode = super.createOutlineNode(semanticNode, outlineParentNode);
@@ -202,5 +202,5 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 			return outlineNode;
 		}
 	}
-
+	
 }
