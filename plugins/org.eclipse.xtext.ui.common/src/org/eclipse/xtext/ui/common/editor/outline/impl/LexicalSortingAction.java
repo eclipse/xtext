@@ -1,12 +1,8 @@
 package org.eclipse.xtext.ui.common.editor.outline.impl;
 
 import org.eclipse.jface.action.Action;
-import org.eclipse.jface.viewers.TreeViewer;
-import org.eclipse.swt.custom.BusyIndicator;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.xtext.ui.common.editor.outline.XtextContentOutlinePage;
 import org.eclipse.xtext.ui.common.internal.Activator;
-import org.eclipse.xtext.ui.core.XtextUIMessages;
 import org.eclipse.xtext.ui.core.internal.XtextPluginImages;
 
 public class LexicalSortingAction extends Action {
