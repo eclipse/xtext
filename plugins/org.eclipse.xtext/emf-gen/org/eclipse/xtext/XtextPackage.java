@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextPackage.java,v 1.19 2009/02/08 19:10:20 szarnekow Exp $
+ * $Id: XtextPackage.java,v 1.20 2009/02/09 12:35:53 szarnekow Exp $
  */
 package org.eclipse.xtext;
 
@@ -79,22 +79,22 @@ public interface XtextPackage extends EPackage {
 	int GRAMMAR__ABSTRACT = 0;
 
 	/**
-	 * The feature id for the '<em><b>Id Elements</b></em>' attribute list.
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GRAMMAR__ID_ELEMENTS = 1;
+	int GRAMMAR__NAME = 1;
 
 	/**
-	 * The feature id for the '<em><b>Super Grammar Id Elements</b></em>' attribute list.
+	 * The feature id for the '<em><b>Super Grammar Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GRAMMAR__SUPER_GRAMMAR_ID_ELEMENTS = 2;
+	int GRAMMAR__SUPER_GRAMMAR_NAME = 2;
 
 	/**
 	 * The feature id for the '<em><b>Defines Hidden Tokens</b></em>' attribute.
@@ -152,22 +152,22 @@ public interface XtextPackage extends EPackage {
 	int ABSTRACT_RULE = 1;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_RULE__NAME = 0;
-
-	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_RULE__TYPE = 1;
+	int ABSTRACT_RULE__TYPE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_RULE__NAME = 1;
 
 	/**
 	 * The number of structural features of the '<em>Abstract Rule</em>' class.
@@ -189,22 +189,22 @@ public interface XtextPackage extends EPackage {
 	int ABSTRACT_METAMODEL_DECLARATION = 2;
 
 	/**
-	 * The feature id for the '<em><b>Alias</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_METAMODEL_DECLARATION__ALIAS = 0;
-
-	/**
 	 * The feature id for the '<em><b>EPackage</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_METAMODEL_DECLARATION__EPACKAGE = 1;
+	int ABSTRACT_METAMODEL_DECLARATION__EPACKAGE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Alias</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_METAMODEL_DECLARATION__ALIAS = 1;
 
 	/**
 	 * The number of structural features of the '<em>Abstract Metamodel Declaration</em>' class.
@@ -226,15 +226,6 @@ public interface XtextPackage extends EPackage {
 	int GENERATED_METAMODEL = 3;
 
 	/**
-	 * The feature id for the '<em><b>Alias</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GENERATED_METAMODEL__ALIAS = ABSTRACT_METAMODEL_DECLARATION__ALIAS;
-
-	/**
 	 * The feature id for the '<em><b>EPackage</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -242,6 +233,15 @@ public interface XtextPackage extends EPackage {
 	 * @ordered
 	 */
 	int GENERATED_METAMODEL__EPACKAGE = ABSTRACT_METAMODEL_DECLARATION__EPACKAGE;
+
+	/**
+	 * The feature id for the '<em><b>Alias</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERATED_METAMODEL__ALIAS = ABSTRACT_METAMODEL_DECLARATION__ALIAS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -272,15 +272,6 @@ public interface XtextPackage extends EPackage {
 	int REFERENCED_METAMODEL = 4;
 
 	/**
-	 * The feature id for the '<em><b>Alias</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REFERENCED_METAMODEL__ALIAS = ABSTRACT_METAMODEL_DECLARATION__ALIAS;
-
-	/**
 	 * The feature id for the '<em><b>EPackage</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -288,6 +279,15 @@ public interface XtextPackage extends EPackage {
 	 * @ordered
 	 */
 	int REFERENCED_METAMODEL__EPACKAGE = ABSTRACT_METAMODEL_DECLARATION__EPACKAGE;
+
+	/**
+	 * The feature id for the '<em><b>Alias</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCED_METAMODEL__ALIAS = ABSTRACT_METAMODEL_DECLARATION__ALIAS;
 
 	/**
 	 * The number of structural features of the '<em>Referenced Metamodel</em>' class.
@@ -309,15 +309,6 @@ public interface XtextPackage extends EPackage {
 	int LEXER_RULE = 5;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LEXER_RULE__NAME = ABSTRACT_RULE__NAME;
-
-	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -325,6 +316,15 @@ public interface XtextPackage extends EPackage {
 	 * @ordered
 	 */
 	int LEXER_RULE__TYPE = ABSTRACT_RULE__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LEXER_RULE__NAME = ABSTRACT_RULE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Body</b></em>' attribute.
@@ -355,15 +355,6 @@ public interface XtextPackage extends EPackage {
 	int PARSER_RULE = 6;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARSER_RULE__NAME = ABSTRACT_RULE__NAME;
-
-	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -371,6 +362,15 @@ public interface XtextPackage extends EPackage {
 	 * @ordered
 	 */
 	int PARSER_RULE__TYPE = ABSTRACT_RULE__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARSER_RULE__NAME = ABSTRACT_RULE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Defines Hidden Tokens</b></em>' attribute.
@@ -1003,26 +1003,26 @@ public interface XtextPackage extends EPackage {
 	EAttribute getGrammar_Abstract();
 
 	/**
-	 * Returns the meta object for the attribute list '{@link org.eclipse.xtext.Grammar#getIdElements <em>Id Elements</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.Grammar#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute list '<em>Id Elements</em>'.
-	 * @see org.eclipse.xtext.Grammar#getIdElements()
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.eclipse.xtext.Grammar#getName()
 	 * @see #getGrammar()
 	 * @generated
 	 */
-	EAttribute getGrammar_IdElements();
+	EAttribute getGrammar_Name();
 
 	/**
-	 * Returns the meta object for the attribute list '{@link org.eclipse.xtext.Grammar#getSuperGrammarIdElements <em>Super Grammar Id Elements</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.Grammar#getSuperGrammarName <em>Super Grammar Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute list '<em>Super Grammar Id Elements</em>'.
-	 * @see org.eclipse.xtext.Grammar#getSuperGrammarIdElements()
+	 * @return the meta object for the attribute '<em>Super Grammar Name</em>'.
+	 * @see org.eclipse.xtext.Grammar#getSuperGrammarName()
 	 * @see #getGrammar()
 	 * @generated
 	 */
-	EAttribute getGrammar_SuperGrammarIdElements();
+	EAttribute getGrammar_SuperGrammarName();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.Grammar#isDefinesHiddenTokens <em>Defines Hidden Tokens</em>}'.
@@ -1628,20 +1628,20 @@ public interface XtextPackage extends EPackage {
 		EAttribute GRAMMAR__ABSTRACT = eINSTANCE.getGrammar_Abstract();
 
 		/**
-		 * The meta object literal for the '<em><b>Id Elements</b></em>' attribute list feature.
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute GRAMMAR__ID_ELEMENTS = eINSTANCE.getGrammar_IdElements();
+		EAttribute GRAMMAR__NAME = eINSTANCE.getGrammar_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Super Grammar Id Elements</b></em>' attribute list feature.
+		 * The meta object literal for the '<em><b>Super Grammar Name</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute GRAMMAR__SUPER_GRAMMAR_ID_ELEMENTS = eINSTANCE.getGrammar_SuperGrammarIdElements();
+		EAttribute GRAMMAR__SUPER_GRAMMAR_NAME = eINSTANCE.getGrammar_SuperGrammarName();
 
 		/**
 		 * The meta object literal for the '<em><b>Defines Hidden Tokens</b></em>' attribute feature.

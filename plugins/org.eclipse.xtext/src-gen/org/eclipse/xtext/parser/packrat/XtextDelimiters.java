@@ -14,19 +14,19 @@ public final class XtextDelimiters {
 		throw new UnsupportedOperationException("Utility classes may not be initialized");
 	}
 	
+	public static ISequenceMatcher crossReference$27$Delimiter = new SetBasedKeywordMatcher(
+		"abstract language", "language", "extends", "hidden", "generate", "as", "import", "native", "lexer", "returns", "terminal", "current");
+
     // TODO: remove hardcoded character class from template
-	public static ICharacterClass keyword$12$Delimiter = ICharacterClass.Factory.join(
+	public static ICharacterClass keyword$11$Delimiter = ICharacterClass.Factory.join(
 			ICharacterClass.Factory.createRange('a', 'z'),
 			ICharacterClass.Factory.createRange('A', 'Z'),
 			ICharacterClass.Factory.create('_'),
 			ICharacterClass.Factory.createRange('0', '9')
 	);
 
-	public static ICharacterClass keyword$17$Delimiter = ICharacterClass.Factory.nullClass();
+	public static ICharacterClass keyword$24$Delimiter = ICharacterClass.Factory.nullClass();
 
-	public static ISequenceMatcher ruleCall$15$Delimiter = new SetBasedKeywordMatcher(
-		"abstract language", "language", "extends", "hidden", "generate", "as", "import", "native", "lexer", "returns", "terminal", "current");
-
-	public static ISequenceMatcher crossReference$70$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+	public static ISequenceMatcher crossReference$67$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 
 }

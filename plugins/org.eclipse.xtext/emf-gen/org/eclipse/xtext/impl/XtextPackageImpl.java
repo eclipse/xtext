@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextPackageImpl.java,v 1.19 2009/02/08 19:10:19 szarnekow Exp $
+ * $Id: XtextPackageImpl.java,v 1.20 2009/02/09 12:35:53 szarnekow Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -282,7 +282,7 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getGrammar_IdElements() {
+	public EAttribute getGrammar_Name() {
 		return (EAttribute)grammarEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -291,7 +291,7 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getGrammar_SuperGrammarIdElements() {
+	public EAttribute getGrammar_SuperGrammarName() {
 		return (EAttribute)grammarEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -346,7 +346,7 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage {
 	 * @generated
 	 */
 	public EAttribute getAbstractRule_Name() {
-		return (EAttribute)abstractRuleEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)abstractRuleEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -355,7 +355,7 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage {
 	 * @generated
 	 */
 	public EReference getAbstractRule_Type() {
-		return (EReference)abstractRuleEClass.getEStructuralFeatures().get(1);
+		return (EReference)abstractRuleEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -373,7 +373,7 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage {
 	 * @generated
 	 */
 	public EAttribute getAbstractMetamodelDeclaration_Alias() {
-		return (EAttribute)abstractMetamodelDeclarationEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)abstractMetamodelDeclarationEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -382,7 +382,7 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage {
 	 * @generated
 	 */
 	public EReference getAbstractMetamodelDeclaration_EPackage() {
-		return (EReference)abstractMetamodelDeclarationEClass.getEStructuralFeatures().get(1);
+		return (EReference)abstractMetamodelDeclarationEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -802,20 +802,20 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage {
 		// Create classes and their features
 		grammarEClass = createEClass(GRAMMAR);
 		createEAttribute(grammarEClass, GRAMMAR__ABSTRACT);
-		createEAttribute(grammarEClass, GRAMMAR__ID_ELEMENTS);
-		createEAttribute(grammarEClass, GRAMMAR__SUPER_GRAMMAR_ID_ELEMENTS);
+		createEAttribute(grammarEClass, GRAMMAR__NAME);
+		createEAttribute(grammarEClass, GRAMMAR__SUPER_GRAMMAR_NAME);
 		createEAttribute(grammarEClass, GRAMMAR__DEFINES_HIDDEN_TOKENS);
 		createEReference(grammarEClass, GRAMMAR__HIDDEN_TOKENS);
 		createEReference(grammarEClass, GRAMMAR__METAMODEL_DECLARATIONS);
 		createEReference(grammarEClass, GRAMMAR__RULES);
 
 		abstractRuleEClass = createEClass(ABSTRACT_RULE);
-		createEAttribute(abstractRuleEClass, ABSTRACT_RULE__NAME);
 		createEReference(abstractRuleEClass, ABSTRACT_RULE__TYPE);
+		createEAttribute(abstractRuleEClass, ABSTRACT_RULE__NAME);
 
 		abstractMetamodelDeclarationEClass = createEClass(ABSTRACT_METAMODEL_DECLARATION);
-		createEAttribute(abstractMetamodelDeclarationEClass, ABSTRACT_METAMODEL_DECLARATION__ALIAS);
 		createEReference(abstractMetamodelDeclarationEClass, ABSTRACT_METAMODEL_DECLARATION__EPACKAGE);
+		createEAttribute(abstractMetamodelDeclarationEClass, ABSTRACT_METAMODEL_DECLARATION__ALIAS);
 
 		generatedMetamodelEClass = createEClass(GENERATED_METAMODEL);
 		createEAttribute(generatedMetamodelEClass, GENERATED_METAMODEL__NAME);
@@ -927,20 +927,20 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage {
 		// Initialize classes and features; add operations and parameters
 		initEClass(grammarEClass, Grammar.class, "Grammar", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getGrammar_Abstract(), ecorePackage.getEBoolean(), "abstract", null, 0, 1, Grammar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getGrammar_IdElements(), ecorePackage.getEString(), "idElements", null, 0, -1, Grammar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getGrammar_SuperGrammarIdElements(), ecorePackage.getEString(), "superGrammarIdElements", null, 0, -1, Grammar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getGrammar_Name(), ecorePackage.getEString(), "name", null, 0, 1, Grammar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getGrammar_SuperGrammarName(), ecorePackage.getEString(), "superGrammarName", null, 0, 1, Grammar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getGrammar_DefinesHiddenTokens(), ecorePackage.getEBoolean(), "definesHiddenTokens", null, 0, 1, Grammar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGrammar_HiddenTokens(), this.getAbstractRule(), null, "hiddenTokens", null, 0, -1, Grammar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGrammar_MetamodelDeclarations(), this.getAbstractMetamodelDeclaration(), null, "metamodelDeclarations", null, 0, -1, Grammar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGrammar_Rules(), this.getAbstractRule(), null, "rules", null, 0, -1, Grammar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(abstractRuleEClass, AbstractRule.class, "AbstractRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getAbstractRule_Name(), ecorePackage.getEString(), "name", null, 0, 1, AbstractRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractRule_Type(), this.getTypeRef(), null, "type", null, 0, 1, AbstractRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAbstractRule_Name(), ecorePackage.getEString(), "name", null, 0, 1, AbstractRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(abstractMetamodelDeclarationEClass, AbstractMetamodelDeclaration.class, "AbstractMetamodelDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getAbstractMetamodelDeclaration_Alias(), ecorePackage.getEString(), "alias", null, 0, 1, AbstractMetamodelDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractMetamodelDeclaration_EPackage(), ecorePackage.getEPackage(), null, "ePackage", null, 0, 1, AbstractMetamodelDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAbstractMetamodelDeclaration_Alias(), ecorePackage.getEString(), "alias", null, 0, 1, AbstractMetamodelDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(generatedMetamodelEClass, GeneratedMetamodel.class, "GeneratedMetamodel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getGeneratedMetamodel_Name(), ecorePackage.getEString(), "name", null, 0, 1, GeneratedMetamodel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

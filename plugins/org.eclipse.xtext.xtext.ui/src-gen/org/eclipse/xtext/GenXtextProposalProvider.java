@@ -34,25 +34,23 @@ public class GenXtextProposalProvider extends AbstractJavaProposalProvider {
 		return Collections.emptyList();
 	}
 			
-	public List<? extends ICompletionProposal> completeGrammar_IdElements(Assignment assignment, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeGrammar_Name(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeGrammar_IdElements feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeGrammar_Name feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal(assignment, "Grammar_IdElements", contentAssistContext));
+		return Collections.emptyList();
 	}
 			
-			
-	public List<? extends ICompletionProposal> completeGrammar_SuperGrammarIdElements(Assignment assignment, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeGrammar_SuperGrammarName(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeGrammar_SuperGrammarIdElements feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeGrammar_SuperGrammarName feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal(assignment, "Grammar_SuperGrammarIdElements", contentAssistContext));
+		return Collections.emptyList();
 	}
-			
 			
 	public List<? extends ICompletionProposal> completeGrammar_DefinesHiddenTokens(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
@@ -447,6 +445,14 @@ public class GenXtextProposalProvider extends AbstractJavaProposalProvider {
 	public List<? extends ICompletionProposal> complete(RuleCall ruleCall, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("complete '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
+					+ "' for model '" + contentAssistContext.getModel() + "' and prefix '" + contentAssistContext.getMatchString() + "'");
+		}
+		return Collections.emptyList();
+	}
+			
+	public List<? extends ICompletionProposal> completeEcore_EString(RuleCall ruleCall, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeEcore_EString '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
 					+ "' for model '" + contentAssistContext.getModel() + "' and prefix '" + contentAssistContext.getMatchString() + "'");
 		}
 		return Collections.emptyList();

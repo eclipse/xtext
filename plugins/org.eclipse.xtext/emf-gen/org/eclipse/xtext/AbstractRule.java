@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractRule.java,v 1.15 2009/01/19 14:39:52 szarnekow Exp $
+ * $Id: AbstractRule.java,v 1.16 2009/02/09 12:35:53 szarnekow Exp $
  */
 package org.eclipse.xtext;
 
@@ -16,8 +16,8 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.xtext.AbstractRule#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.AbstractRule#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipse.xtext.AbstractRule#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *

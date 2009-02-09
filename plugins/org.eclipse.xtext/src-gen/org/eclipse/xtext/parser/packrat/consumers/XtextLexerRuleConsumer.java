@@ -26,8 +26,6 @@ public final class XtextLexerRuleConsumer extends NonTerminalConsumer {
 	private XtextBuiltinSTRINGConsumer stringConsumer;
 	private XtextTypeRefConsumer typeRefConsumer;
 
-	private ICharacterClass keyword$12$Delimiter;
-	
 	private ICharacterClass keyword$15$Delimiter;
 	
 	private ICharacterClass keyword$18$Delimiter;
@@ -36,17 +34,19 @@ public final class XtextLexerRuleConsumer extends NonTerminalConsumer {
 	
 	private ICharacterClass keyword$8$Delimiter;
 	
+	private ICharacterClass keyword$12$Delimiter;
+	
 	private ISequenceMatcher ruleCall$17$Delimiter;
 	
 	private ISequenceMatcher ruleCall$10$Delimiter;
 	
 	public XtextLexerRuleConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
-		keyword$12$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$15$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$18$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$12$Delimiter = ICharacterClass.Factory.nullClass();
 		ruleCall$17$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		ruleCall$10$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
@@ -269,14 +269,6 @@ public final class XtextLexerRuleConsumer extends NonTerminalConsumer {
 		this.typeRefConsumer = typeRefConsumer;
 	}
 	
-	public ICharacterClass getKeyword$12$Delimiter() {
-		return keyword$12$Delimiter;
-	}
-	
-	public void setKeyword$12$Delimiter(ICharacterClass characterClass) {
-		keyword$12$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
 	public ICharacterClass getKeyword$15$Delimiter() {
 		return keyword$15$Delimiter;
 	}
@@ -307,6 +299,14 @@ public final class XtextLexerRuleConsumer extends NonTerminalConsumer {
 	
 	public void setKeyword$8$Delimiter(ICharacterClass characterClass) {
 		keyword$8$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$12$Delimiter() {
+		return keyword$12$Delimiter;
+	}
+	
+	public void setKeyword$12$Delimiter(ICharacterClass characterClass) {
+		keyword$12$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ISequenceMatcher getRuleCall$17$Delimiter() {

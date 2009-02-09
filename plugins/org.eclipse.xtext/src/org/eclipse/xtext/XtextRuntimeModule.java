@@ -3,6 +3,7 @@ Generated with Xtext
 */
 package org.eclipse.xtext;
 
+import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.crossref.ILinker;
 import org.eclipse.xtext.crossref.ILinkingService;
 import org.eclipse.xtext.crossref.IScopeProvider;
@@ -12,6 +13,7 @@ import org.eclipse.xtext.xtext.XtextFormattingTokenSerializer;
 import org.eclipse.xtext.xtext.XtextLinkingService;
 import org.eclipse.xtext.xtext.XtextScopeProvider;
 import org.eclipse.xtext.xtext.XtextTransientValueService;
+import org.eclipse.xtext.xtext.XtextValueConverters;
 
 import com.google.inject.Binder;
 
@@ -46,13 +48,14 @@ public class XtextRuntimeModule extends AbstractXtextRuntimeModule {
 		return XtextTransientValueService.class;
 	}
 	
-	/* (non-Javadoc)
-	 * @see org.eclipse.xtext.AbstractXtextRuntimeModule#bindITokenSerializer()
-	 */
 	@Override
 	public Class<? extends ITokenSerializer> bindITokenSerializer() {
 		return XtextFormattingTokenSerializer.class;
 	}
 
+	@Override
+	public Class<? extends IValueConverterService> bindIValueConverterService() {
+		return XtextValueConverters.class;
+	}
 
 }

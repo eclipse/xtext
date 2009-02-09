@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: GrammarValidator.java,v 1.1 2009/02/08 19:10:20 szarnekow Exp $
+ * $Id: GrammarValidator.java,v 1.2 2009/02/09 12:35:53 szarnekow Exp $
  */
 package org.eclipse.xtext.validation;
 
@@ -22,7 +22,11 @@ public interface GrammarValidator {
 
 	boolean validateAbstract(boolean value);
 	boolean validateIdElements(EList<String> value);
+	boolean validateName(String value);
+
 	boolean validateSuperGrammarIdElements(EList<String> value);
+	boolean validateSuperGrammarName(String value);
+
 	boolean validateDefinesHiddenTokens(boolean value);
 	boolean validateHiddenTokens(EList<AbstractRule> value);
 	boolean validateMetamodelDeclarations(EList<AbstractMetamodelDeclaration> value);

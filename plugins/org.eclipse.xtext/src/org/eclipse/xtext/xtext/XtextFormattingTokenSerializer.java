@@ -34,8 +34,6 @@ public class XtextFormattingTokenSerializer extends FormattingTokenSerializer {
 		cfg.setLinewrap(2).after(gr.ele00Group());
 		cfg.setLinewrap(2).after(gr.ele01AssignmentMetamodelDeclarations());
 		cfg.setLinewrap(2).after(gr.ele1AssignmentRules());
-		cfg.setNoSpace().around(gr.ele000010KeywordFullStop());
-		cfg.setNoSpace().around(gr.ele000110KeywordFullStop());
 
 		// ParserRule
 		ParserRuleElements pr = g.prParserRule();

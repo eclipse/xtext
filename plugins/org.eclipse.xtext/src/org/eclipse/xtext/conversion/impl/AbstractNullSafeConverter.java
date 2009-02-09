@@ -8,6 +8,7 @@
 package org.eclipse.xtext.conversion.impl;
 
 import org.eclipse.xtext.conversion.IValueConverter;
+import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.parsetree.AbstractNode;
 
 public abstract class AbstractNullSafeConverter<T> implements IValueConverter<T> {
@@ -20,12 +21,12 @@ public abstract class AbstractNullSafeConverter<T> implements IValueConverter<T>
 
 	protected abstract String internalToString(T value);
 
-	public final T toValue(String string, AbstractNode node) {
+	public final T toValue(String string, AbstractNode node) throws ValueConverterException {
 		if (string == null)
 			return null;
 		return internalToValue(string, node);
 	}
 
-	protected abstract T internalToValue(String string, AbstractNode node);
+	protected abstract T internalToValue(String string, AbstractNode node) throws ValueConverterException;
 
 }

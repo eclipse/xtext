@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
-  <idElements>org</idElements>
-  <idElements>eclipse</idElements>
-  <idElements>xtext</idElements>
-  <idElements>metamodelreferencing</idElements>
-  <idElements>tests</idElements>
-  <idElements>MultiGenMMTestLanguage</idElements>
+<xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:xtext="http://www.eclipse.org/2008/Xtext" name="org.eclipse.xtext.metamodelreferencing.tests.MultiGenMMTestLanguage">
   <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="SimpleTest">
     <ePackage href="http://eclipse.org/xtext/tests/SimpleTest#/"/>
   </metamodelDeclarations>

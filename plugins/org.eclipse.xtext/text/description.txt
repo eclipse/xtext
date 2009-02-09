@@ -9,20 +9,20 @@ Package xtext <http://www.eclipse.org/2008/Xtext>
 
   Class Grammar
     Attribute abstract : EBoolean
-    Attribute idElements : EString<<0..*>>
-    Attribute superGrammarIdElements : EString<<0..*>>
+    Attribute name : EString
+    Attribute superGrammarName : EString
     Attribute definesHiddenTokens : EBoolean
     Reference hiddenTokens : AbstractRule<<0..*>>
     Reference metamodelDeclarations : AbstractMetamodelDeclaration<<0..*>>
     Reference rules : AbstractRule<<0..*>>
 
   Class AbstractRule
-    Attribute name : EString
     Reference type : TypeRef
+    Attribute name : EString
 
   Class AbstractMetamodelDeclaration
-    Attribute alias : EString
     Reference ePackage : EPackage
+    Attribute alias : EString
 
   Class GeneratedMetamodel -> AbstractMetamodelDeclaration
     Attribute name : EString

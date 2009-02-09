@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Grammar.java,v 1.17 2009/02/08 19:10:20 szarnekow Exp $
+ * $Id: Grammar.java,v 1.18 2009/02/09 12:35:53 szarnekow Exp $
  */
 package org.eclipse.xtext;
 
@@ -19,8 +19,8 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.xtext.Grammar#isAbstract <em>Abstract</em>}</li>
- *   <li>{@link org.eclipse.xtext.Grammar#getIdElements <em>Id Elements</em>}</li>
- *   <li>{@link org.eclipse.xtext.Grammar#getSuperGrammarIdElements <em>Super Grammar Id Elements</em>}</li>
+ *   <li>{@link org.eclipse.xtext.Grammar#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.Grammar#getSuperGrammarName <em>Super Grammar Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.Grammar#isDefinesHiddenTokens <em>Defines Hidden Tokens</em>}</li>
  *   <li>{@link org.eclipse.xtext.Grammar#getHiddenTokens <em>Hidden Tokens</em>}</li>
  *   <li>{@link org.eclipse.xtext.Grammar#getMetamodelDeclarations <em>Metamodel Declarations</em>}</li>
@@ -60,36 +60,56 @@ public interface Grammar extends EObject {
 	void setAbstract(boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Id Elements</b></em>' attribute list.
-	 * The list contents are of type {@link java.lang.String}.
+	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Id Elements</em>' attribute list isn't clear,
+	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Id Elements</em>' attribute list.
-	 * @see org.eclipse.xtext.XtextPackage#getGrammar_IdElements()
+	 * @return the value of the '<em>Name</em>' attribute.
+	 * @see #setName(String)
+	 * @see org.eclipse.xtext.XtextPackage#getGrammar_Name()
 	 * @model
 	 * @generated
 	 */
-	EList<String> getIdElements();
+	String getName();
 
 	/**
-	 * Returns the value of the '<em><b>Super Grammar Id Elements</b></em>' attribute list.
-	 * The list contents are of type {@link java.lang.String}.
+	 * Sets the value of the '{@link org.eclipse.xtext.Grammar#getName <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Name</em>' attribute.
+	 * @see #getName()
+	 * @generated
+	 */
+	void setName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Super Grammar Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Super Grammar Id Elements</em>' attribute list isn't clear,
+	 * If the meaning of the '<em>Super Grammar Name</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Super Grammar Id Elements</em>' attribute list.
-	 * @see org.eclipse.xtext.XtextPackage#getGrammar_SuperGrammarIdElements()
+	 * @return the value of the '<em>Super Grammar Name</em>' attribute.
+	 * @see #setSuperGrammarName(String)
+	 * @see org.eclipse.xtext.XtextPackage#getGrammar_SuperGrammarName()
 	 * @model
 	 * @generated
 	 */
-	EList<String> getSuperGrammarIdElements();
+	String getSuperGrammarName();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.Grammar#getSuperGrammarName <em>Super Grammar Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Super Grammar Name</em>' attribute.
+	 * @see #getSuperGrammarName()
+	 * @generated
+	 */
+	void setSuperGrammarName(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Defines Hidden Tokens</b></em>' attribute.
