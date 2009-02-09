@@ -14,6 +14,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.parsetree.AbstractNode;
@@ -65,6 +66,10 @@ public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransf
 		ContentOutlineNode outlineNode = new ContentOutlineNode();
 
 		outlineNode.setLabel(getText(semanticNode));
+		Image image = getImage(semanticNode);
+		if (image != null) {
+			outlineNode.setImage(image);
+		}
 
 		NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(semanticNode);
 		if (nodeAdapter != null) {

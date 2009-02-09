@@ -1,0 +1,4 @@
+- when setting the input of the outline page, the treeviewer should NOT 
+  see the xtext document, but instead the root node
+  
+

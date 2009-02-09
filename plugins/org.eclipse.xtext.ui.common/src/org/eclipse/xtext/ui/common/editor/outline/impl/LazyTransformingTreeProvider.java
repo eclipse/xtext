@@ -35,11 +35,18 @@ import com.google.inject.Inject;
 public class LazyTransformingTreeProvider extends LabelProvider implements ILazyTreeProvider {
 
 	final static Logger logger = Logger.getLogger(LazyTransformingTreeProvider.class);
-
+	
 	private LocalResourceManager resourceManager = new LocalResourceManager(JFaceResources.getResources());
 
 	private TreeViewer viewer;
 	private ContentOutlineNode outlineModel;
+	
+	@Override
+	public void dispose() {
+		super.dispose();
+		resourceManager.dispose();
+		outlineModel = null;
+	}
 
 	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 		Assert.isTrue(viewer instanceof TreeViewer);
@@ -61,11 +68,6 @@ public class LazyTransformingTreeProvider extends LabelProvider implements ILazy
 
 	private ContentOutlineNode transformSemanticModelToOutlineModel(EObject semanticModel) {
 		return semanticModelTransformer.transformSemanticModel(semanticModel);
-	}
-
-	public void dispose() {
-		super.dispose();
-		resourceManager.dispose();
 	}
 
 	public Object getParent(Object element) {
@@ -115,13 +117,16 @@ public class LazyTransformingTreeProvider extends LabelProvider implements ILazy
 	public Image getImage(Object element) {
 		if (element instanceof ContentOutlineNode) {
 			ContentOutlineNode contentOutlineNode = (ContentOutlineNode) element;
-			ImageDescriptor imageDescriptor = contentOutlineNode.getImageDescriptor();
-			if (imageDescriptor == null) {
-				imageDescriptor = Activator.getImageDescriptor("icons/defaultoutlinenode.gif");
+			Image image = contentOutlineNode.getImage();
+			if (image == null) {
+				ImageDescriptor imageDescriptor = contentOutlineNode.getImageDescriptor();
+				if (imageDescriptor == null) {
+					imageDescriptor = Activator.getImageDescriptor("icons/defaultoutlinenode.gif");
+				}
+				image = resourceManager.createImage(imageDescriptor);
+				contentOutlineNode.setImage(image);
 			}
-			if (imageDescriptor != null) {
-				return resourceManager.createImage(imageDescriptor);
-			}
+			return image;
 		}
 		return super.getImage(element);
 	}

@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.FeatureMap;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
 import org.eclipse.xtext.ui.common.editor.outline.ISemanticModelTransformer;
 
@@ -81,7 +82,7 @@ public abstract class AbstractSemanticModelTransformer implements ISemanticModel
 
 	protected abstract boolean consumeSemanticNode(EObject semanticNode);
 
-	public String getText(Object object) {
+	public String getText(EObject object) {
 		if (object != null) {
 			EObject eObject = (EObject) object;
 			EClass eClass = eObject.eClass();
@@ -118,8 +119,8 @@ public abstract class AbstractSemanticModelTransformer implements ISemanticModel
 		return result;
 	}
 
-	public void updateOutlineNode(EObject semanticNode, ContentOutlineNode outlineNode) {
-		outlineNode.setLabel(getText(semanticNode));
+	public Image getImage(EObject object) {
+		return null;
 	}
 
 }

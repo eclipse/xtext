@@ -81,12 +81,12 @@ public class XtextContentOutlinePage extends LazyVirtualContentOutlinePage imple
 		viewer.setAutoExpandLevel(TreeViewer.ALL_LEVELS);
 	}
 
-	private void configureProviders() {
+	protected void configureProviders() {
 		Assert.isNotNull(provider, "No ILazyTreeProvider available. Dependency injection broken?");
 		getTreeViewer().setContentProvider(provider);
 		getTreeViewer().setLabelProvider(provider);
 	}
-
+	
 	private void configureDocument() {
 		if (sourceViewer != null) {
 			IDocument document = sourceViewer.getDocument();
@@ -128,7 +128,11 @@ public class XtextContentOutlinePage extends LazyVirtualContentOutlinePage imple
 		IToolBarManager toolBarManager = actionBars.getToolBarManager();
 		if (toolBarManager != null) {
 			toolBarManager.add(new ToggleLinkWithEditorAction(this));
-			toolBarManager.add(new LexicalSortingAction(this));
+			
+			// sort button only available if provider offers sorting facilities
+			if (provider instanceof ISortableContentProvider) {
+				toolBarManager.add(new LexicalSortingAction(this));
+			}
 		}
 	}
 
@@ -138,6 +142,8 @@ public class XtextContentOutlinePage extends LazyVirtualContentOutlinePage imple
 		outlineSelectionChangedListener = null;
 		editorSelectionChangedListener.uninstall(sourceViewer.getSelectionProvider());
 		editorSelectionChangedListener = null;
+		provider.dispose();
+		provider = null;
 		super.dispose();
 	}
 
@@ -158,11 +164,11 @@ public class XtextContentOutlinePage extends LazyVirtualContentOutlinePage imple
 	private void internalSetInput(IXtextDocument xtextDocument) {
 		TreeViewer tree = getTreeViewer();
 		if (tree != null) {
-//			TreePath[] expandedTreePaths = tree.getExpandedTreePaths();
-//			Object[] expandedElements = tree.getExpandedElements();
+			// TreePath[] expandedTreePaths = tree.getExpandedTreePaths();
+			// Object[] expandedElements = tree.getExpandedElements();
 			tree.setInput(xtextDocument);
-//			tree.setExpandedElements(expandedElements);
-//			tree.setExpandedTreePaths(expandedTreePaths);
+			// tree.setExpandedElements(expandedElements);
+			// tree.setExpandedTreePaths(expandedTreePaths);
 		}
 	}
 
@@ -220,13 +226,14 @@ public class XtextContentOutlinePage extends LazyVirtualContentOutlinePage imple
 	private boolean shouldSynchronizeOutlinePage() {
 		return isLinkingEnabled();
 	}
-	
+
 	private ContentOutlineNode findMostSignificantOutlineNode(AbstractNode node) {
 		if (node != null) {
 			CompositeNode compositeNode = node instanceof CompositeNode ? (CompositeNode) node : node.getParent();
 			EObject astElement = NodeUtil.getASTElementForRootNode(compositeNode);
 			if (astElement != null) {
-				ContentOutlineNodeAdapter adapter = (ContentOutlineNodeAdapter) EcoreUtil.getAdapter(astElement.eAdapters(), ContentOutlineNode.class);
+				ContentOutlineNodeAdapter adapter = (ContentOutlineNodeAdapter) EcoreUtil.getAdapter(astElement
+						.eAdapters(), ContentOutlineNode.class);
 				if (adapter != null) {
 					ContentOutlineNode contentOutlineNode = adapter.getContentOutlineNode();
 					if (contentOutlineNode != null) {
@@ -257,16 +264,19 @@ public class XtextContentOutlinePage extends LazyVirtualContentOutlinePage imple
 	}
 
 	public void setSorted(boolean sorted) {
-		provider.setSorted(sorted);
-		runInSWTThread(new Runnable() {
-			public void run() {
-				TreeViewer tv = getTreeViewer();
-				if (tv != null) {
-					IDocument document = sourceViewer.getDocument();
-					internalSetInput(XtextDocumentUtil.get(document));
-					tv.refresh();
+		if (provider instanceof ISortableContentProvider) {
+			ISortableContentProvider sortableContentProvider = (ISortableContentProvider) provider;
+			sortableContentProvider.setSorted(sorted);
+			runInSWTThread(new Runnable() {
+				public void run() {
+					TreeViewer tv = getTreeViewer();
+					if (tv != null) {
+						IDocument document = sourceViewer.getDocument();
+						internalSetInput(XtextDocumentUtil.get(document));
+						tv.refresh();
+					}
 				}
-			}
-		});
+			});
+		}
 	}
 }

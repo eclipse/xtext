@@ -26,6 +26,7 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.ParseTreeUtil;
 import org.eclipse.xtext.resource.XtextResource;
@@ -37,6 +38,8 @@ import org.eclipse.xtext.ui.core.editor.XtextEditor;
 import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.integration.editor.AbstractEditorTest;
+
+import antlr.DumpASTVisitor;
 
 /**
  * @author Peter Friese - Initial contribution and API
@@ -162,13 +165,13 @@ public class OutlineViewTest extends AbstractEditorTest {
 	}
 
 	public void testRightBoundariesSyncEditorToOutline() throws Exception {
-		// left of "spielplatz"
+		// right of "spielplatz"
 		assertSynchronized(editor, "spielplatz".length(), 0);
 
-		// left of "kind" 1
+		// right of "kind" 1
 		assertSynchronized(editor, 19 + "kind (lennart 5)".length(), 0);
 
-		// left of "kind" 2
+		// right of "kind" 2
 		assertSynchronized(editor, 38 + "kind (soeren 8)".length(), 0);
 	}
 
@@ -241,7 +244,6 @@ public class OutlineViewTest extends AbstractEditorTest {
 		public Boolean exec(XtextResource resource) throws Exception {
 			// select text fragment in editor and wait until outline syncs
 			editor.selectAndReveal(offset, length);
-			sleep(1000);
 
 			IParseResult parseResult = resource.getParseResult();
 			Assert.isNotNull(parseResult);
@@ -249,8 +251,16 @@ public class OutlineViewTest extends AbstractEditorTest {
 
 			// Get the current element from the offset
 			AbstractNode node = ParseTreeUtil.getCurrentOrFollowingNodeByOffset(rootNode, offset);
+//			if (node instanceof LeafNode) {
+//				LeafNode leaf = (LeafNode) node;
+//				String text = leaf.getText();
+//				System.out.println(text);
+//			}
+			
 			EObject element = NodeUtil.getNearestSemanticObject(node);
 
+			sleep(600); // XXX necessary? yes, see org.eclipse.jface.text.TextViewer.queuePostSelectionChanged(boolean)
+			
 			// get the associated content outline node
 			ContentOutlineNodeAdapter adapter = (ContentOutlineNodeAdapter) ContentOutlineNodeAdapterFactory.INSTANCE
 					.adapt(element, ContentOutlineNode.class);
