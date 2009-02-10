@@ -86,6 +86,32 @@
 <project reference="1.0,:extssh:proxy.eclipse.org:443:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.xtend,org.eclipse.xtext.xtend"/>
 <project reference="1.0,:extssh:proxy.eclipse.org:443:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/tests/org.eclipse.xtext.xtend.tests,org.eclipse.xtext.xtend.tests"/>
 <project reference="1.0,:extssh:proxy.eclipse.org:443:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.xtext.ui,org.eclipse.xtext.xtext.ui"/>
+
+<project reference="1.0,:extssh:proxy.eclipse.org:443:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf/plugins/org.eclipse.emf,org.eclipse.emf"/>
+<project reference="1.0,:extssh:proxy.eclipse.org:443:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf/plugins/org.eclipse.emf.ant,org.eclipse.emf.ant"/>
+<project reference="1.0,:extssh:proxy.eclipse.org:443:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf/plugins/org.eclipse.emf.codegen,org.eclipse.emf.codegen"/>
+<project reference="1.0,:extssh:proxy.eclipse.org:443:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf/plugins/org.eclipse.emf.codegen.ecore,org.eclipse.emf.codegen.ecore"/>
+<project reference="1.0,:extssh:proxy.eclipse.org:443:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf/plugins/org.eclipse.emf.codegen.ecore.ui,org.eclipse.emf.codegen.ecore.ui"/>
+<project reference="1.0,:extssh:proxy.eclipse.org:443:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf/plugins/org.eclipse.emf.codegen.ui,org.eclipse.emf.codegen.ui"/>
+<project reference="1.0,:extssh:proxy.eclipse.org:443:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf/plugins/org.eclipse.emf.common,org.eclipse.emf.common"/>
+<project reference="1.0,:extssh:proxy.eclipse.org:443:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf/plugins/org.eclipse.emf.common.ui,org.eclipse.emf.common.ui"/>
+<project reference="1.0,:extssh:proxy.eclipse.org:443:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf/plugins/org.eclipse.emf.converter,org.eclipse.emf.converter"/>
+<project reference="1.0,:extssh:proxy.eclipse.org:443:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf/plugins/org.eclipse.emf.databinding,org.eclipse.emf.databinding"/>
+<project reference="1.0,:extssh:proxy.eclipse.org:443:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf/plugins/org.eclipse.emf.databinding.edit,org.eclipse.emf.databinding.edit"/>
+<project reference="1.0,:extssh:proxy.eclipse.org:443:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf/plugins/org.eclipse.emf.ecore,org.eclipse.emf.ecore"/>
+<project reference="1.0,:extssh:proxy.eclipse.org:443:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf/plugins/org.eclipse.emf.ecore.change,org.eclipse.emf.ecore.change"/>
+<project reference="1.0,:extssh:proxy.eclipse.org:443:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf/plugins/org.eclipse.emf.ecore.change.edit,org.eclipse.emf.ecore.change.edit"/>
+<project reference="1.0,:extssh:proxy.eclipse.org:443:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf/plugins/org.eclipse.emf.ecore.edit,org.eclipse.emf.ecore.edit"/>
+<project reference="1.0,:extssh:proxy.eclipse.org:443:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf/plugins/org.eclipse.emf.ecore.editor,org.eclipse.emf.ecore.editor"/>
+<project reference="1.0,:extssh:proxy.eclipse.org:443:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf/plugins/org.eclipse.emf.ecore.xmi,org.eclipse.emf.ecore.xmi"/>
+<project reference="1.0,:extssh:proxy.eclipse.org:443:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf/plugins/org.eclipse.emf.edit,org.eclipse.emf.edit"/>
+<project reference="1.0,:extssh:proxy.eclipse.org:443:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf/plugins/org.eclipse.emf.edit.ui,org.eclipse.emf.edit.ui"/>
+<project reference="1.0,:extssh:proxy.eclipse.org:443:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf.mwe/plugins/org.eclipse.emf.mwe.ewm.core,org.eclipse.emf.mwe.ewm.core"/>
+<project reference="1.0,:extssh:proxy.eclipse.org:443:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf.mwe/tests/org.eclipse.emf.mwe.ewm.core.tests,org.eclipse.emf.mwe.ewm.core.tests"/>
+<project reference="1.0,:extssh:proxy.eclipse.org:443:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf.mwe/plugins/org.eclipse.emf.mwe.ewm.launcher.core,org.eclipse.emf.mwe.ewm.launcher.core"/>
+<project reference="1.0,:extssh:proxy.eclipse.org:443:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf.mwe/tests/org.eclipse.emf.mwe.ewm.launcher.core.tests,org.eclipse.emf.mwe.ewm.launcher.core.tests"/>
+<project reference="1.0,:extssh:proxy.eclipse.org:443:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf.mwe/plugins/org.eclipse.emf.mwe.ewm.launcher.ui,org.eclipse.emf.mwe.ewm.launcher.ui"/>
+
 </provider>
 
 
