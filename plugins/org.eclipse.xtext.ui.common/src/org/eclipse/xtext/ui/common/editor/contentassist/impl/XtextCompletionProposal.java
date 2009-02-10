@@ -13,7 +13,6 @@ import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
-import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
 
 /**
@@ -21,6 +20,7 @@ import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
  * 
  * @author Dennis Hübner - Initial contribution and API
  * @author Michael Clay
+ * @author Jan Köhnlein
  * @see org.eclipse.jface.text.contentassist.ICompletionProposal
  */
 public class XtextCompletionProposal implements ICompletionProposal {
@@ -30,123 +30,92 @@ public class XtextCompletionProposal implements ICompletionProposal {
 
 	private final AbstractElement abstractElement;
 	private final String text;
-	private final IContentAssistContext contentAssistContext;
 	private int selectionOffset;
+
+	// information copied from contentAssistContext
+	private int offset;
+	private int nodeTotalOffset;
+	private int nodeTotalLength;
+	private String matchString;
+	private EObject grammarElement;
+	private boolean isCusorAtEndOfLastCompleteNode;
 
 	public XtextCompletionProposal(AbstractElement abstractElement, String displayString,
 			IContentAssistContext contentAssistContext) {
 		this.abstractElement = abstractElement;
 		this.text = displayString;
-		this.contentAssistContext = contentAssistContext;
+		this.offset = contentAssistContext.getOffSet();
+		this.nodeTotalOffset = contentAssistContext.getNode().getTotalOffset();
+		this.nodeTotalLength = contentAssistContext.getNode().getTotalLength();
+		this.matchString = contentAssistContext.getMatchString();
+		this.grammarElement = contentAssistContext.getNode().getGrammarElement();
+		this.isCusorAtEndOfLastCompleteNode = contentAssistContext.getNode() == contentAssistContext.getReferenceNode();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.eclipse.jface.text.contentassist.ICompletionProposal#apply(org.eclipse.jface.text.IDocument)
-	 */
 	public void apply(IDocument document) {
-
 		try {
-
-			AbstractNode abstractNode = this.contentAssistContext.getNode();
-
-			int replacementOffset = this.contentAssistContext.getOffSet();
-
-			if (!"".equals(this.contentAssistContext.getMatchString())
-					&& getDisplayString().toUpperCase().startsWith(
-							this.contentAssistContext.getMatchString().toUpperCase())) {
-
-				document.replace(abstractNode.getTotalOffset(), abstractNode.getTotalLength(), "");
-
-				replacementOffset = abstractNode.getTotalOffset();
-
+			int replacementOffset = offset;
+			if (!"".equals(matchString) && getDisplayString().toUpperCase().startsWith(matchString.toUpperCase())) {
+				document.replace(nodeTotalOffset, nodeTotalLength, "");
+				replacementOffset = nodeTotalOffset;
 			}
-
 			document.replace(replacementOffset, 0, this.text.trim());
-
 			this.selectionOffset = replacementOffset + this.text.trim().length();
-
 		}
 		catch (BadLocationException e) {
 			logger.error(e);
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.eclipse.jface.text.contentassist.ICompletionProposal#getAdditionalProposalInfo()
-	 */
 	public String getAdditionalProposalInfo() {
 		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.eclipse.jface.text.contentassist.ICompletionProposal#getContextInformation()
-	 */
 	public IContextInformation getContextInformation() {
 		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.eclipse.jface.text.contentassist.ICompletionProposal#getDisplayString()
-	 */
 	public String getDisplayString() {
 		return this.text;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.eclipse.jface.text.contentassist.ICompletionProposal#getImage()
-	 */
 	public Image getImage() {
 		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.eclipse.jface.text.contentassist.ICompletionProposal#getSelection(org.eclipse.jface.text.IDocument)
-	 */
 	public Point getSelection(IDocument document) {
 		return new Point(this.selectionOffset, 0);
 	}
 
 	/**
 	 * 
-	 * @return true or false whether the given prefix matches the text of this completion proposal
+	 * @return true or false whether the given prefix matches the text of this
+	 *         completion proposal
 	 */
 	public boolean matches() {
-
 		boolean matches = true;
-
 		AbstractElement abstractElement = null;
-
 		if (this.abstractElement instanceof Keyword || this.abstractElement instanceof CrossReference) {
 			abstractElement = GrammarUtil.containingAssignment(this.abstractElement);
 		}
-
 		if (null == abstractElement) {
 			abstractElement = this.abstractElement;
 		}
-
 		boolean candidateToCompare = false;
 
 		// means if we are at the end of a complete token we want to filter only
 		// equal grammarelements (not the 'next' ones)
-		if (isCusorAtEndOfLastCompleteNode() && abstractElement.equals(getCurrentGrammarElement())) {
+		if (isCusorAtEndOfLastCompleteNode && abstractElement.equals(getCurrentGrammarElement())) {
 			candidateToCompare = true;
 		}
-		else if (!isCusorAtEndOfLastCompleteNode()) {
+		else if (!isCusorAtEndOfLastCompleteNode) {
 			candidateToCompare = true;
 		}
-
 		if (candidateToCompare
-				&& (!"".equals(this.contentAssistContext.getMatchString().trim()) && !getDisplayString().toUpperCase()
-						.trim().startsWith(this.contentAssistContext.getMatchString().toUpperCase().trim()))) {
+				&& (!"".equals(matchString.trim()) && !getDisplayString().toUpperCase().trim().startsWith(
+						matchString.toUpperCase().trim()))) {
 			matches = false;
 		}
-
 		return matches;
 	}
 
@@ -156,26 +125,14 @@ public class XtextCompletionProposal implements ICompletionProposal {
 	}
 
 	/**
-	 * @return true or false wheter the cursor is at the the last complete node
-	 */
-	public boolean isCusorAtEndOfLastCompleteNode() {
-		return this.contentAssistContext.getNode() == this.contentAssistContext.getReferenceNode();
-	}
-
-	/**
 	 * @return the grammar element of the current node
 	 */
 	public EObject getCurrentGrammarElement() {
-
-		EObject grammarElement = GrammarUtil.containingAssignment(this.contentAssistContext.getNode()
-				.getGrammarElement());
-
-		if (null == grammarElement) {
-			grammarElement = (this.contentAssistContext.getNode().getGrammarElement() instanceof ParserRule ? ((ParserRule) this.contentAssistContext
-					.getNode().getGrammarElement()).getAlternatives()
-					: this.contentAssistContext.getNode().getGrammarElement());
+		EObject containingAssignment = GrammarUtil.containingAssignment(grammarElement);
+		if (containingAssignment == null) {
+			return grammarElement instanceof ParserRule ? ((ParserRule) grammarElement).getAlternatives()
+					: grammarElement;
 		}
-
-		return grammarElement;
+		return containingAssignment;
 	}
 }
