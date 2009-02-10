@@ -10,7 +10,8 @@ import com.google.inject.Binder;
 import com.google.inject.name.Names;
 
 /**
- * GENERATED! Manual modification goes to LangATestLanguageRuntimeModule
+ * Generated from ServiceConfig.xpt! 
+ * Manual modifications go to LangATestLanguageRuntimeModule
  */
 public abstract class AbstractLangATestLanguageRuntimeModule extends DefaultRuntimeModule {
 	
@@ -18,7 +19,7 @@ public abstract class AbstractLangATestLanguageRuntimeModule extends DefaultRunt
 	public void configure(Binder binder) {
 		super.configure(binder);
 		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance(
-				"org.eclipse.xtext.crossrefs.LangATestLanguage");
+			"org.eclipse.xtext.crossrefs.LangATestLanguage");
 	}
 	
 	public Class<? extends org.eclipse.xtext.IMetamodelAccess> bindIMetamodelAccess() {
@@ -54,6 +55,5 @@ public abstract class AbstractLangATestLanguageRuntimeModule extends DefaultRunt
 	public Class<? extends org.eclipse.xtext.parser.ISwitchingParser> bindISwitchingParser() {
 		return org.eclipse.xtext.parser.SwitchingParser.class;
 	}
-	
 	
 }

@@ -12,6 +12,9 @@ import org.eclipse.xtext.resource.IResourceFactory;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
+/**
+ * Generated from StandaloneSetup.xpt!
+ */
 public class DomainmodelStandaloneSetup implements ISetup {
 
 	public static void doSetup() {
@@ -19,19 +22,15 @@ public class DomainmodelStandaloneSetup implements ISetup {
 	}
 
 	public Injector createInjectorAndDoEMFRegistration() {
-			
-			new org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup().doSetup();
-			
-		    registerEPackages();
-		    
-		    Injector injector = createInjector();
-		    IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
-		    registerResourceFactory(resourceFactory);
-		    return injector;
-		    
+		
+		org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
+		registerEPackages();
+		Injector injector = createInjector();
+		IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
+		registerResourceFactory(resourceFactory);
+		return injector;
 	}
 	
-    
 	public Injector createInjector() {
 		return Guice.createInjector(new org.eclipse.xtext.example.DomainmodelRuntimeModule());
 	}
@@ -40,23 +39,20 @@ public class DomainmodelStandaloneSetup implements ISetup {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("dmodel", resourceFactory);
 		
 	}
-    
 
 	/**
-	 * initializes all EPackages generated for this language and registers them at EPackage.Registry.INSTANCE
+	 * Initializes all EPackages generated for this language and registers them with EPackage.Registry.INSTANCE
 	 */	
 	public void registerEPackages() {
-		
-			if (!EPackage.Registry.INSTANCE.containsKey("http://www.example.xtext/Domainmodel")) {
-				EPackage domainmodel = EcoreUtil2.loadEPackage(
-						"classpath:/org/eclipse/xtext/example/domainmodel.ecore",
-						DomainmodelStandaloneSetup.class.getClassLoader());
-				if (domainmodel == null)
-					throw new IllegalStateException(
-							"Couldn't load EPackage from 'classpath:/org/eclipse/xtext/example/domainmodel.ecore'");
-				EPackage.Registry.INSTANCE.put("http://www.example.xtext/Domainmodel", domainmodel);
-			}
-		
+		if (!EPackage.Registry.INSTANCE.containsKey("http://www.example.xtext/Domainmodel")) {
+			EPackage domainmodel = EcoreUtil2.loadEPackage(
+				"classpath:/org/eclipse/xtext/example/domainmodel.ecore",
+				DomainmodelStandaloneSetup.class.getClassLoader());
+			if (domainmodel == null)
+				throw new IllegalStateException(
+					"Couldn't load EPackage from 'classpath:/org/eclipse/xtext/example/domainmodel.ecore'");
+			EPackage.Registry.INSTANCE.put("http://www.example.xtext/Domainmodel", domainmodel);
+		}
 	}
 	
 }

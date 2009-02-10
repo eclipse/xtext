@@ -10,7 +10,8 @@ import com.google.inject.Binder;
 import com.google.inject.name.Names;
 
 /**
- * GENERATED! Manual modification goes to MultiGenMMTestLanguageRuntimeModule
+ * Generated from ServiceConfig.xpt! 
+ * Manual modifications go to MultiGenMMTestLanguageRuntimeModule
  */
 public abstract class AbstractMultiGenMMTestLanguageRuntimeModule extends DefaultRuntimeModule {
 	
@@ -18,7 +19,7 @@ public abstract class AbstractMultiGenMMTestLanguageRuntimeModule extends Defaul
 	public void configure(Binder binder) {
 		super.configure(binder);
 		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance(
-				"org.eclipse.xtext.metamodelreferencing.tests.MultiGenMMTestLanguage");
+			"org.eclipse.xtext.metamodelreferencing.tests.MultiGenMMTestLanguage");
 	}
 	
 	public Class<? extends org.eclipse.xtext.IMetamodelAccess> bindIMetamodelAccess() {
@@ -54,6 +55,5 @@ public abstract class AbstractMultiGenMMTestLanguageRuntimeModule extends Defaul
 	public Class<? extends org.eclipse.xtext.parser.ISwitchingParser> bindISwitchingParser() {
 		return org.eclipse.xtext.parser.SwitchingParser.class;
 	}
-	
 	
 }
