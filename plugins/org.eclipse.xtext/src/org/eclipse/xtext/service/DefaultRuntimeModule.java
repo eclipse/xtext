@@ -22,7 +22,6 @@ import org.eclipse.xtext.parsetree.reconstr.ICrossReferenceSerializer;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
 import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
 import org.eclipse.xtext.parsetree.reconstr.impl.DefaultCrossReferenceSerializer;
-import org.eclipse.xtext.parsetree.reconstr.impl.DefaultTokenSerializer;
 import org.eclipse.xtext.parsetree.reconstr.impl.DefaultTransientValueService;
 import org.eclipse.xtext.parsetree.reconstr.impl.WhitespacePreservingTokenSerializer;
 import org.eclipse.xtext.resource.DefaultFragmentProvider;
