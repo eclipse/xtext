@@ -51,6 +51,7 @@ public final class ComplexReconstrTestLanguageTrickyEConsumer extends NonTermina
 		ruleCall$18$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
+	@Override
 	protected int doConsume(int entryPoint) throws Exception {
 		return consumeGroup$1(entryPoint);
 	}

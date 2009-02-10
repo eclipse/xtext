@@ -76,6 +76,7 @@ public final class EpatchTestLanguageListAssignmentValueConsumer extends NonTerm
 		ruleCall$40$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
+	@Override
 	protected int doConsume(int entryPoint) throws Exception {
 		return consumeGroup$1(entryPoint);
 	}

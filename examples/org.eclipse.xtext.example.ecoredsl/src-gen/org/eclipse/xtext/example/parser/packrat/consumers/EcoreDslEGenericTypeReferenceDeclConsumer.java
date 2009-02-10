@@ -46,6 +46,7 @@ public final class EcoreDslEGenericTypeReferenceDeclConsumer extends NonTerminal
 		keyword$18$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
+	@Override
 	protected int doConsume(int entryPoint) throws Exception {
 		return consumeAlternatives$1(entryPoint);
 	}

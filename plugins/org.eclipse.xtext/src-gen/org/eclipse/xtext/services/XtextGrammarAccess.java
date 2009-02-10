@@ -25,8 +25,8 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		private final RuleCall c000010ParserRuleCallGrammarID = (RuleCall)c00001AssignmentName.eContents().get(0);
 		private final Group c0001Group = (Group)c000Group.eContents().get(1);
 		private final Keyword c00010KeywordExtends = (Keyword)c0001Group.eContents().get(0);
-		private final Assignment c00011AssignmentSuperGrammarName = (Assignment)c0001Group.eContents().get(1);
-		private final RuleCall c000110ParserRuleCallGrammarID = (RuleCall)c00011AssignmentSuperGrammarName.eContents().get(0);
+		private final Assignment c00011AssignmentSuperGrammar = (Assignment)c0001Group.eContents().get(1);
+		private final CrossReference c000110CrossReferenceEStringGrammar = (CrossReference)c00011AssignmentSuperGrammar.eContents().get(0);
 		private final Group c001Group = (Group)c00Group.eContents().get(1);
 		private final Group c0010Group = (Group)c001Group.eContents().get(0);
 		private final Group c00100Group = (Group)c0010Group.eContents().get(0);
@@ -46,19 +46,19 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		private final Assignment c1AssignmentRules = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall c10ParserRuleCallAbstractRule = (RuleCall)c1AssignmentRules.eContents().get(0);
 		
-		// Grammar:   (abstract?="abstract language"|"language") name=GrammarID ("extends" superGrammarName=GrammarID)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? (metamodelDeclarations+=AbstractMetamodelDeclaration)* (rules+=AbstractRule)+;
+		// Grammar:   (abstract?="abstract language"|"language") name=GrammarID ("extends" superGrammar=[Grammar|GrammarID])? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? (metamodelDeclarations+=AbstractMetamodelDeclaration)* (rules+=AbstractRule)+;
 		public ParserRule getRule() { return rule; }
 
-		// (abstract?="abstract language"|"language") name=GrammarID ("extends" superGrammarName=GrammarID)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? (metamodelDeclarations+=AbstractMetamodelDeclaration)* (rules+=AbstractRule)+
+		// (abstract?="abstract language"|"language") name=GrammarID ("extends" superGrammar=[Grammar|GrammarID])? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? (metamodelDeclarations+=AbstractMetamodelDeclaration)* (rules+=AbstractRule)+
 		public Group eleGroup() { return cGroup; }
 
-		// (abstract?="abstract language"|"language") name=GrammarID ("extends" superGrammarName=GrammarID)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? (metamodelDeclarations+=AbstractMetamodelDeclaration)*
+		// (abstract?="abstract language"|"language") name=GrammarID ("extends" superGrammar=[Grammar|GrammarID])? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? (metamodelDeclarations+=AbstractMetamodelDeclaration)*
 		public Group ele0Group() { return c0Group; }
 
-		// (abstract?="abstract language"|"language") name=GrammarID ("extends" superGrammarName=GrammarID)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")?
+		// (abstract?="abstract language"|"language") name=GrammarID ("extends" superGrammar=[Grammar|GrammarID])? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")?
 		public Group ele00Group() { return c00Group; }
 
-		// (abstract?="abstract language"|"language") name=GrammarID ("extends" superGrammarName=GrammarID)?
+		// (abstract?="abstract language"|"language") name=GrammarID ("extends" superGrammar=[Grammar|GrammarID])?
 		public Group ele000Group() { return c000Group; }
 
 		// (abstract?="abstract language"|"language") name=GrammarID
@@ -82,17 +82,17 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		// GrammarID
 		public RuleCall ele000010ParserRuleCallGrammarID() { return c000010ParserRuleCallGrammarID; }
 
-		// ("extends" superGrammarName=GrammarID)?
+		// ("extends" superGrammar=[Grammar|GrammarID])?
 		public Group ele0001Group() { return c0001Group; }
 
 		// "extends"
 		public Keyword ele00010KeywordExtends() { return c00010KeywordExtends; }
 
-		// superGrammarName=GrammarID
-		public Assignment ele00011AssignmentSuperGrammarName() { return c00011AssignmentSuperGrammarName; }
+		// superGrammar=[Grammar|GrammarID]
+		public Assignment ele00011AssignmentSuperGrammar() { return c00011AssignmentSuperGrammar; }
 
-		// GrammarID
-		public RuleCall ele000110ParserRuleCallGrammarID() { return c000110ParserRuleCallGrammarID; }
+		// [Grammar|GrammarID]
+		public CrossReference ele000110CrossReferenceEStringGrammar() { return c000110CrossReferenceEStringGrammar; }
 
 		// (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")?
 		public Group ele001Group() { return c001Group; }
@@ -1398,7 +1398,7 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 	}
 
 	
-	// Grammar:   (abstract?="abstract language"|"language") name=GrammarID ("extends" superGrammarName=GrammarID)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? (metamodelDeclarations+=AbstractMetamodelDeclaration)* (rules+=AbstractRule)+;
+	// Grammar:   (abstract?="abstract language"|"language") name=GrammarID ("extends" superGrammar=[Grammar|GrammarID])? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? (metamodelDeclarations+=AbstractMetamodelDeclaration)* (rules+=AbstractRule)+;
 	public GrammarElements prGrammar() {
 		return (pGrammar != null) ? pGrammar : (pGrammar = new GrammarElements());
 	} 

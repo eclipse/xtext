@@ -14,7 +14,7 @@ public final class XtextDelimiters {
 		throw new UnsupportedOperationException("Utility classes may not be initialized");
 	}
 	
-	public static ISequenceMatcher crossReference$27$Delimiter = new SetBasedKeywordMatcher(
+	public static ISequenceMatcher crossReference$28$Delimiter = new SetBasedKeywordMatcher(
 		"abstract language", "language", "extends", "hidden", "generate", "as", "import", "native", "lexer", "returns", "terminal", "current");
 
     // TODO: remove hardcoded character class from template
@@ -25,8 +25,8 @@ public final class XtextDelimiters {
 			ICharacterClass.Factory.createRange('0', '9')
 	);
 
-	public static ICharacterClass keyword$24$Delimiter = ICharacterClass.Factory.nullClass();
+	public static ICharacterClass keyword$25$Delimiter = ICharacterClass.Factory.nullClass();
 
-	public static ISequenceMatcher crossReference$67$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+	public static ISequenceMatcher crossReference$68$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 
 }

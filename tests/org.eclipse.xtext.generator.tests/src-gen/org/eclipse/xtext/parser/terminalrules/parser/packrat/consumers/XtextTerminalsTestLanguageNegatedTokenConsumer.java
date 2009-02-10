@@ -29,6 +29,7 @@ public final class XtextTerminalsTestLanguageNegatedTokenConsumer extends NonTer
 		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
+	@Override
 	protected int doConsume(int entryPoint) throws Exception {
 		return consumeGroup$1(entryPoint);
 	}

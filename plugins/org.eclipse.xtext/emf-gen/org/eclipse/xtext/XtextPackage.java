@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextPackage.java,v 1.20 2009/02/09 12:35:53 szarnekow Exp $
+ * $Id: XtextPackage.java,v 1.21 2009/02/10 15:48:30 szarnekow Exp $
  */
 package org.eclipse.xtext;
 
@@ -88,13 +88,13 @@ public interface XtextPackage extends EPackage {
 	int GRAMMAR__NAME = 1;
 
 	/**
-	 * The feature id for the '<em><b>Super Grammar Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Super Grammar</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GRAMMAR__SUPER_GRAMMAR_NAME = 2;
+	int GRAMMAR__SUPER_GRAMMAR = 2;
 
 	/**
 	 * The feature id for the '<em><b>Defines Hidden Tokens</b></em>' attribute.
@@ -189,22 +189,22 @@ public interface XtextPackage extends EPackage {
 	int ABSTRACT_METAMODEL_DECLARATION = 2;
 
 	/**
-	 * The feature id for the '<em><b>EPackage</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_METAMODEL_DECLARATION__EPACKAGE = 0;
-
-	/**
 	 * The feature id for the '<em><b>Alias</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_METAMODEL_DECLARATION__ALIAS = 1;
+	int ABSTRACT_METAMODEL_DECLARATION__ALIAS = 0;
+
+	/**
+	 * The feature id for the '<em><b>EPackage</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_METAMODEL_DECLARATION__EPACKAGE = 1;
 
 	/**
 	 * The number of structural features of the '<em>Abstract Metamodel Declaration</em>' class.
@@ -226,15 +226,6 @@ public interface XtextPackage extends EPackage {
 	int GENERATED_METAMODEL = 3;
 
 	/**
-	 * The feature id for the '<em><b>EPackage</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GENERATED_METAMODEL__EPACKAGE = ABSTRACT_METAMODEL_DECLARATION__EPACKAGE;
-
-	/**
 	 * The feature id for the '<em><b>Alias</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -242,6 +233,15 @@ public interface XtextPackage extends EPackage {
 	 * @ordered
 	 */
 	int GENERATED_METAMODEL__ALIAS = ABSTRACT_METAMODEL_DECLARATION__ALIAS;
+
+	/**
+	 * The feature id for the '<em><b>EPackage</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERATED_METAMODEL__EPACKAGE = ABSTRACT_METAMODEL_DECLARATION__EPACKAGE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -272,15 +272,6 @@ public interface XtextPackage extends EPackage {
 	int REFERENCED_METAMODEL = 4;
 
 	/**
-	 * The feature id for the '<em><b>EPackage</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REFERENCED_METAMODEL__EPACKAGE = ABSTRACT_METAMODEL_DECLARATION__EPACKAGE;
-
-	/**
 	 * The feature id for the '<em><b>Alias</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -288,6 +279,15 @@ public interface XtextPackage extends EPackage {
 	 * @ordered
 	 */
 	int REFERENCED_METAMODEL__ALIAS = ABSTRACT_METAMODEL_DECLARATION__ALIAS;
+
+	/**
+	 * The feature id for the '<em><b>EPackage</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCED_METAMODEL__EPACKAGE = ABSTRACT_METAMODEL_DECLARATION__EPACKAGE;
 
 	/**
 	 * The number of structural features of the '<em>Referenced Metamodel</em>' class.
@@ -1014,15 +1014,15 @@ public interface XtextPackage extends EPackage {
 	EAttribute getGrammar_Name();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.Grammar#getSuperGrammarName <em>Super Grammar Name</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.xtext.Grammar#getSuperGrammar <em>Super Grammar</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Super Grammar Name</em>'.
-	 * @see org.eclipse.xtext.Grammar#getSuperGrammarName()
+	 * @return the meta object for the reference '<em>Super Grammar</em>'.
+	 * @see org.eclipse.xtext.Grammar#getSuperGrammar()
 	 * @see #getGrammar()
 	 * @generated
 	 */
-	EAttribute getGrammar_SuperGrammarName();
+	EReference getGrammar_SuperGrammar();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.Grammar#isDefinesHiddenTokens <em>Defines Hidden Tokens</em>}'.
@@ -1636,12 +1636,12 @@ public interface XtextPackage extends EPackage {
 		EAttribute GRAMMAR__NAME = eINSTANCE.getGrammar_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Super Grammar Name</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Super Grammar</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute GRAMMAR__SUPER_GRAMMAR_NAME = eINSTANCE.getGrammar_SuperGrammarName();
+		EReference GRAMMAR__SUPER_GRAMMAR = eINSTANCE.getGrammar_SuperGrammar();
 
 		/**
 		 * The meta object literal for the '<em><b>Defines Hidden Tokens</b></em>' attribute feature.

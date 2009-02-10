@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:xtext="http://www.eclipse.org/2008/Xtext" name="org.eclipse.xtext.XtextGrammarTestLanguage">
+  <superGrammar href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#/"/>
   <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="XtextTest">
     <ePackage href="http://www.eclipse.org/2008/Test/XtextTest#/"/>
   </metamodelDeclarations>
@@ -24,7 +25,7 @@
                 </abstractTokens>
                 <abstractTokens xsi:type="xtext:Assignment" feature="idElements" operator="+=">
                   <terminal xsi:type="xtext:RuleCall">
-                    <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+                    <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.0"/>
                   </terminal>
                 </abstractTokens>
               </abstractTokens>
@@ -32,7 +33,7 @@
                 <abstractTokens xsi:type="xtext:Keyword" value="."/>
                 <abstractTokens xsi:type="xtext:Assignment" feature="idElements" operator="+=">
                   <terminal xsi:type="xtext:RuleCall">
-                    <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+                    <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.0"/>
                   </terminal>
                 </abstractTokens>
               </abstractTokens>
@@ -42,7 +43,7 @@
                 <abstractTokens xsi:type="xtext:Keyword" value="extends"/>
                 <abstractTokens xsi:type="xtext:Assignment" feature="superGrammarIdElements" operator="+=">
                   <terminal xsi:type="xtext:RuleCall">
-                    <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+                    <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.0"/>
                   </terminal>
                 </abstractTokens>
               </abstractTokens>
@@ -50,7 +51,7 @@
                 <abstractTokens xsi:type="xtext:Keyword" value="."/>
                 <abstractTokens xsi:type="xtext:Assignment" feature="superGrammarIdElements" operator="+=">
                   <terminal xsi:type="xtext:RuleCall">
-                    <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+                    <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.0"/>
                   </terminal>
                 </abstractTokens>
               </abstractTokens>
@@ -70,7 +71,7 @@
                     <type metamodel="//@metamodelDeclarations.0">
                       <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractRule"/>
                     </type>
-                    <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+                    <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.0"/>
                   </terminal>
                 </abstractTokens>
                 <abstractTokens xsi:type="xtext:Group" cardinality="*">
@@ -80,7 +81,7 @@
                       <type metamodel="//@metamodelDeclarations.0">
                         <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractRule"/>
                       </type>
-                      <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+                      <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.0"/>
                     </terminal>
                   </abstractTokens>
                 </abstractTokens>
@@ -129,7 +130,7 @@
           <abstractTokens xsi:type="xtext:Keyword" value="generate"/>
           <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
             <terminal xsi:type="xtext:RuleCall">
-              <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+              <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.0"/>
             </terminal>
           </abstractTokens>
         </abstractTokens>
@@ -138,7 +139,7 @@
             <type metamodel="//@metamodelDeclarations.1">
               <type xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
             </type>
-            <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.2"/>
+            <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.2"/>
           </terminal>
         </abstractTokens>
       </abstractTokens>
@@ -146,7 +147,7 @@
         <abstractTokens xsi:type="xtext:Keyword" value="as"/>
         <abstractTokens xsi:type="xtext:Assignment" feature="alias" operator="=">
           <terminal xsi:type="xtext:RuleCall">
-            <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+            <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.0"/>
           </terminal>
         </abstractTokens>
       </abstractTokens>
@@ -164,7 +165,7 @@
             <type metamodel="//@metamodelDeclarations.1">
               <type xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
             </type>
-            <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.2"/>
+            <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.2"/>
           </terminal>
         </abstractTokens>
       </abstractTokens>
@@ -172,7 +173,7 @@
         <abstractTokens xsi:type="xtext:Keyword" value="as"/>
         <abstractTokens xsi:type="xtext:Assignment" feature="alias" operator="=">
           <terminal xsi:type="xtext:RuleCall">
-            <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+            <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.0"/>
           </terminal>
         </abstractTokens>
       </abstractTokens>
@@ -193,7 +194,7 @@
               </abstractTokens>
               <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
                 <terminal xsi:type="xtext:RuleCall">
-                  <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+                  <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.0"/>
                 </terminal>
               </abstractTokens>
             </abstractTokens>
@@ -208,7 +209,7 @@
         </abstractTokens>
         <abstractTokens xsi:type="xtext:Assignment" feature="body" operator="=">
           <terminal xsi:type="xtext:RuleCall">
-            <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.2"/>
+            <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.2"/>
           </terminal>
         </abstractTokens>
       </abstractTokens>
@@ -226,7 +227,7 @@
             <abstractTokens xsi:type="xtext:Group">
               <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
                 <terminal xsi:type="xtext:RuleCall">
-                  <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+                  <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.0"/>
                 </terminal>
               </abstractTokens>
               <abstractTokens xsi:type="xtext:Group" cardinality="?">
@@ -250,7 +251,7 @@
                       <type metamodel="//@metamodelDeclarations.0">
                         <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractRule"/>
                       </type>
-                      <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+                      <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.0"/>
                     </terminal>
                   </abstractTokens>
                   <abstractTokens xsi:type="xtext:Group" cardinality="*">
@@ -260,7 +261,7 @@
                         <type metamodel="//@metamodelDeclarations.0">
                           <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractRule"/>
                         </type>
-                        <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+                        <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.0"/>
                       </terminal>
                     </abstractTokens>
                   </abstractTokens>
@@ -292,7 +293,7 @@
               </abstractTokens>
               <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
                 <terminal xsi:type="xtext:RuleCall">
-                  <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+                  <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.0"/>
                 </terminal>
               </abstractTokens>
             </abstractTokens>
@@ -323,7 +324,7 @@
             <type metamodel="//@metamodelDeclarations.0">
               <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractMetamodelDeclaration"/>
             </type>
-            <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+            <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.0"/>
           </terminal>
         </abstractTokens>
         <abstractTokens xsi:type="xtext:Keyword" value="::"/>
@@ -333,7 +334,7 @@
           <type metamodel="//@metamodelDeclarations.1">
             <type xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EClassifier"/>
           </type>
-          <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+          <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.0"/>
         </terminal>
       </abstractTokens>
     </alternatives>
@@ -464,7 +465,7 @@
       <abstractTokens xsi:type="xtext:Group">
         <abstractTokens xsi:type="xtext:Assignment" feature="feature" operator="=">
           <terminal xsi:type="xtext:RuleCall">
-            <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+            <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.0"/>
           </terminal>
         </abstractTokens>
         <abstractTokens xsi:type="xtext:Assignment" feature="operator" operator="=">
@@ -507,7 +508,7 @@
             </abstractTokens>
             <abstractTokens xsi:type="xtext:Assignment" feature="feature" operator="=">
               <terminal xsi:type="xtext:RuleCall">
-                <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+                <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.0"/>
               </terminal>
             </abstractTokens>
           </abstractTokens>
@@ -635,7 +636,7 @@
               <type metamodel="//@metamodelDeclarations.0">
                 <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractRule"/>
               </type>
-              <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+              <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.0"/>
             </terminal>
           </abstractTokens>
         </abstractTokens>
@@ -673,7 +674,7 @@
     </type>
     <alternatives xsi:type="xtext:Assignment" feature="value" operator="=">
       <terminal xsi:type="xtext:RuleCall">
-        <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.2"/>
+        <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.2"/>
       </terminal>
     </alternatives>
   </rules>
@@ -686,7 +687,7 @@
         <type metamodel="//@metamodelDeclarations.0">
           <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractRule"/>
         </type>
-        <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+        <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.0"/>
       </terminal>
     </alternatives>
   </rules>

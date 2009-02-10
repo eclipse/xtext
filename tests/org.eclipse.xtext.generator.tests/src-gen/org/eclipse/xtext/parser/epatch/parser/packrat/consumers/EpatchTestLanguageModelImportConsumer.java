@@ -28,6 +28,7 @@ public final class EpatchTestLanguageModelImportConsumer extends NonTerminalCons
 		super(configuration, hiddenTokens);
 	}
 	
+	@Override
 	protected int doConsume(int entryPoint) throws Exception {
 		return consumeAlternatives$1(entryPoint);
 	}

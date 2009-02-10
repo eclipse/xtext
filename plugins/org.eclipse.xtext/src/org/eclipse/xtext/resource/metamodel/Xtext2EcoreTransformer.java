@@ -69,15 +69,9 @@ public class Xtext2EcoreTransformer {
 	private Grammar superGrammar;
 	private EClassifierInfos eClassifierInfos;
 	private ErrorAcceptor errorAcceptor = new NullErrorAcceptor();
-	private boolean superGrammarFailed;
 
 	public Xtext2EcoreTransformer(Grammar grammar) {
 		this.grammar = grammar;
-		try {
-			superGrammar = GrammarUtil.getSuperGrammar(grammar);
-		} catch(Exception e) {
-			superGrammarFailed = true;
-		}
 	}
 
 	public ErrorAcceptor getErrorAcceptor() {
@@ -121,10 +115,8 @@ public class Xtext2EcoreTransformer {
 	 * pre-conditions - ensure non-duplicate aliases - ensure all aliases have matching metamodel declarations
 	 */
 	public void transform() {
-		if (superGrammarFailed) {
-			// TODO should not highlight the whole grammar
-			errorAcceptor.acceptError(null, "Could not resolve super grammar", grammar);
-		}
+		superGrammar = grammar.getSuperGrammar();
+		
 		eClassifierInfos = new EClassifierInfos();
 		generatedEPackages = new HashMap<String, EPackage>();
 

@@ -30,6 +30,7 @@ public final class LookaheadTestLanguageLookAhead0Consumer extends NonTerminalCo
 		keyword$4$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
+	@Override
 	protected int doConsume(int entryPoint) throws Exception {
 		return consumeGroup$1(entryPoint);
 	}

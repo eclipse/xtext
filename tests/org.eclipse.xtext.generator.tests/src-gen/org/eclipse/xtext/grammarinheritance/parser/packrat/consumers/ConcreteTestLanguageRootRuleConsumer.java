@@ -26,6 +26,7 @@ public final class ConcreteTestLanguageRootRuleConsumer extends NonTerminalConsu
 		super(configuration, hiddenTokens);
 	}
 	
+	@Override
 	protected int doConsume(int entryPoint) throws Exception {
 		return consumeRuleCall$1(entryPoint);
 	}

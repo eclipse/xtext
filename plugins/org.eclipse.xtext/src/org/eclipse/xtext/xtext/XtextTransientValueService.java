@@ -25,6 +25,7 @@ import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextPackage;
+import org.eclipse.xtext.builtin.IXtextBuiltin;
 import org.eclipse.xtext.parsetree.reconstr.impl.DefaultTransientValueService;
 import org.eclipse.xtext.util.Strings;
 
@@ -63,8 +64,13 @@ public class XtextTransientValueService extends DefaultTransientValueService {
 		}
 		else if (feature == XtextPackage.eINSTANCE.getCrossReference_Rule()) {
 			final CrossReference ref = (CrossReference) owner;
+			// TODO don't use literal but lexer rule
 			if (ref.getRule() != null && "ID".equals(ref.getRule().getName()))
 				return true;
+		}
+		else if (feature == XtextPackage.eINSTANCE.getGrammar_SuperGrammar()) {
+			final Grammar grammar = (Grammar) owner;
+			return grammar.getSuperGrammar() != null && IXtextBuiltin.ID.equals(grammar.getSuperGrammar().getName());
 		}
 		return super.isTransient(owner, feature, index);
 	}

@@ -34,6 +34,7 @@ public final class XtextTerminalTokenElementConsumer extends NonTerminalConsumer
 		super(configuration, hiddenTokens);
 	}
 	
+	@Override
 	protected int doConsume(int entryPoint) throws Exception {
 		return consumeAlternatives$1(entryPoint);
 	}

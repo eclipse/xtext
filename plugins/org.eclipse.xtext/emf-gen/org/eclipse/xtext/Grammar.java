@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Grammar.java,v 1.18 2009/02/09 12:35:53 szarnekow Exp $
+ * $Id: Grammar.java,v 1.19 2009/02/10 15:48:30 szarnekow Exp $
  */
 package org.eclipse.xtext;
 
@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.eclipse.xtext.Grammar#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.eclipse.xtext.Grammar#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.xtext.Grammar#getSuperGrammarName <em>Super Grammar Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.Grammar#getSuperGrammar <em>Super Grammar</em>}</li>
  *   <li>{@link org.eclipse.xtext.Grammar#isDefinesHiddenTokens <em>Defines Hidden Tokens</em>}</li>
  *   <li>{@link org.eclipse.xtext.Grammar#getHiddenTokens <em>Hidden Tokens</em>}</li>
  *   <li>{@link org.eclipse.xtext.Grammar#getMetamodelDeclarations <em>Metamodel Declarations</em>}</li>
@@ -86,30 +86,30 @@ public interface Grammar extends EObject {
 	void setName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Super Grammar Name</b></em>' attribute.
+	 * Returns the value of the '<em><b>Super Grammar</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Super Grammar Name</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Super Grammar</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Super Grammar Name</em>' attribute.
-	 * @see #setSuperGrammarName(String)
-	 * @see org.eclipse.xtext.XtextPackage#getGrammar_SuperGrammarName()
+	 * @return the value of the '<em>Super Grammar</em>' reference.
+	 * @see #setSuperGrammar(Grammar)
+	 * @see org.eclipse.xtext.XtextPackage#getGrammar_SuperGrammar()
 	 * @model
 	 * @generated
 	 */
-	String getSuperGrammarName();
+	Grammar getSuperGrammar();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.xtext.Grammar#getSuperGrammarName <em>Super Grammar Name</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.xtext.Grammar#getSuperGrammar <em>Super Grammar</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Super Grammar Name</em>' attribute.
-	 * @see #getSuperGrammarName()
+	 * @param value the new value of the '<em>Super Grammar</em>' reference.
+	 * @see #getSuperGrammar()
 	 * @generated
 	 */
-	void setSuperGrammarName(String value);
+	void setSuperGrammar(Grammar value);
 
 	/**
 	 * Returns the value of the '<em><b>Defines Hidden Tokens</b></em>' attribute.

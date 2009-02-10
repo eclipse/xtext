@@ -35,6 +35,7 @@ public final class XtextTerminalTokenConsumer extends NonTerminalConsumer {
 		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
+	@Override
 	protected int doConsume(int entryPoint) throws Exception {
 		return consumeGroup$1(entryPoint);
 	}

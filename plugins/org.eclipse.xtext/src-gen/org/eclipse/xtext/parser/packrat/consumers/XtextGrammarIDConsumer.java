@@ -35,6 +35,7 @@ public final class XtextGrammarIDConsumer extends NonTerminalConsumer {
 		ruleCall$5$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
+	@Override
 	protected int doConsume(int entryPoint) throws Exception {
 		return consumeGroup$1(entryPoint);
 	}

@@ -130,24 +130,23 @@ ruleGrammar returns [EObject current=null]
     }
 (	
 	
-	    
-	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
-	    }
-	    lv_superGrammarName=ruleGrammarID 
-	    {
-	        if ($current==null) {
+		
+		{
+			if ($current==null) {
 	            $current = factory.create("Grammar");
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            associateNodeWithAstElement(currentNode, $current);
 	        }
-	        
-	        try {
-	        	factory.set($current, "superGrammarName", lv_superGrammarName, "GrammarID", currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
-	    }
+        }
+(
+
+    { 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::CrossReference */, currentNode); 
+    }
+	ruleGrammarID
+    { 
+        currentNode = currentNode.getParent();
+    }
+) 
 	
 ))?)((((	
 	

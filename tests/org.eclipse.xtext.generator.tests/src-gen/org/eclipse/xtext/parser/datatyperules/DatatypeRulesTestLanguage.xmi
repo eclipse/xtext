@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:xtext="http://www.eclipse.org/2008/Xtext" name="org.eclipse.xtext.parser.datatyperules.DatatypeRulesTestLanguage">
+  <superGrammar href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#/"/>
   <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="ecore">
     <ePackage href="http://www.eclipse.org/emf/2002/Ecore#/"/>
   </metamodelDeclarations>
@@ -56,12 +57,12 @@
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Group">
         <abstractTokens xsi:type="xtext:RuleCall">
-          <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+          <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.0"/>
         </abstractTokens>
         <abstractTokens xsi:type="xtext:Keyword" value="."/>
       </abstractTokens>
       <abstractTokens xsi:type="xtext:RuleCall">
-        <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+        <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.0"/>
       </abstractTokens>
     </alternatives>
   </rules>
@@ -83,12 +84,12 @@
     </type>
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:RuleCall">
-        <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.1"/>
+        <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.1"/>
       </abstractTokens>
       <abstractTokens xsi:type="xtext:Group" cardinality="?">
         <abstractTokens xsi:type="xtext:Keyword" value="/"/>
         <abstractTokens xsi:type="xtext:RuleCall">
-          <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.1"/>
+          <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.1"/>
         </abstractTokens>
       </abstractTokens>
     </alternatives>
@@ -102,11 +103,11 @@
         <abstractTokens xsi:type="xtext:Group">
           <abstractTokens xsi:type="xtext:Keyword" value="("/>
           <abstractTokens xsi:type="xtext:RuleCall">
-            <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.1"/>
+            <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.1"/>
           </abstractTokens>
         </abstractTokens>
         <abstractTokens xsi:type="xtext:RuleCall">
-          <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.1"/>
+          <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.1"/>
         </abstractTokens>
       </abstractTokens>
       <abstractTokens xsi:type="xtext:Keyword" value=")"/>

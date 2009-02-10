@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextPackageImpl.java,v 1.20 2009/02/09 12:35:53 szarnekow Exp $
+ * $Id: XtextPackageImpl.java,v 1.21 2009/02/10 15:48:28 szarnekow Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -291,8 +291,8 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getGrammar_SuperGrammarName() {
-		return (EAttribute)grammarEClass.getEStructuralFeatures().get(2);
+	public EReference getGrammar_SuperGrammar() {
+		return (EReference)grammarEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -373,7 +373,7 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage {
 	 * @generated
 	 */
 	public EAttribute getAbstractMetamodelDeclaration_Alias() {
-		return (EAttribute)abstractMetamodelDeclarationEClass.getEStructuralFeatures().get(1);
+		return (EAttribute)abstractMetamodelDeclarationEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -382,7 +382,7 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage {
 	 * @generated
 	 */
 	public EReference getAbstractMetamodelDeclaration_EPackage() {
-		return (EReference)abstractMetamodelDeclarationEClass.getEStructuralFeatures().get(0);
+		return (EReference)abstractMetamodelDeclarationEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -803,7 +803,7 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage {
 		grammarEClass = createEClass(GRAMMAR);
 		createEAttribute(grammarEClass, GRAMMAR__ABSTRACT);
 		createEAttribute(grammarEClass, GRAMMAR__NAME);
-		createEAttribute(grammarEClass, GRAMMAR__SUPER_GRAMMAR_NAME);
+		createEReference(grammarEClass, GRAMMAR__SUPER_GRAMMAR);
 		createEAttribute(grammarEClass, GRAMMAR__DEFINES_HIDDEN_TOKENS);
 		createEReference(grammarEClass, GRAMMAR__HIDDEN_TOKENS);
 		createEReference(grammarEClass, GRAMMAR__METAMODEL_DECLARATIONS);
@@ -814,8 +814,8 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage {
 		createEAttribute(abstractRuleEClass, ABSTRACT_RULE__NAME);
 
 		abstractMetamodelDeclarationEClass = createEClass(ABSTRACT_METAMODEL_DECLARATION);
-		createEReference(abstractMetamodelDeclarationEClass, ABSTRACT_METAMODEL_DECLARATION__EPACKAGE);
 		createEAttribute(abstractMetamodelDeclarationEClass, ABSTRACT_METAMODEL_DECLARATION__ALIAS);
+		createEReference(abstractMetamodelDeclarationEClass, ABSTRACT_METAMODEL_DECLARATION__EPACKAGE);
 
 		generatedMetamodelEClass = createEClass(GENERATED_METAMODEL);
 		createEAttribute(generatedMetamodelEClass, GENERATED_METAMODEL__NAME);
@@ -928,7 +928,7 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage {
 		initEClass(grammarEClass, Grammar.class, "Grammar", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getGrammar_Abstract(), ecorePackage.getEBoolean(), "abstract", null, 0, 1, Grammar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getGrammar_Name(), ecorePackage.getEString(), "name", null, 0, 1, Grammar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getGrammar_SuperGrammarName(), ecorePackage.getEString(), "superGrammarName", null, 0, 1, Grammar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getGrammar_SuperGrammar(), this.getGrammar(), null, "superGrammar", null, 0, 1, Grammar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getGrammar_DefinesHiddenTokens(), ecorePackage.getEBoolean(), "definesHiddenTokens", null, 0, 1, Grammar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGrammar_HiddenTokens(), this.getAbstractRule(), null, "hiddenTokens", null, 0, -1, Grammar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGrammar_MetamodelDeclarations(), this.getAbstractMetamodelDeclaration(), null, "metamodelDeclarations", null, 0, -1, Grammar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -939,8 +939,8 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage {
 		initEAttribute(getAbstractRule_Name(), ecorePackage.getEString(), "name", null, 0, 1, AbstractRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(abstractMetamodelDeclarationEClass, AbstractMetamodelDeclaration.class, "AbstractMetamodelDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAbstractMetamodelDeclaration_EPackage(), ecorePackage.getEPackage(), null, "ePackage", null, 0, 1, AbstractMetamodelDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAbstractMetamodelDeclaration_Alias(), ecorePackage.getEString(), "alias", null, 0, 1, AbstractMetamodelDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractMetamodelDeclaration_EPackage(), ecorePackage.getEPackage(), null, "ePackage", null, 0, 1, AbstractMetamodelDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(generatedMetamodelEClass, GeneratedMetamodel.class, "GeneratedMetamodel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getGeneratedMetamodel_Name(), ecorePackage.getEString(), "name", null, 0, 1, GeneratedMetamodel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

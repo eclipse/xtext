@@ -30,7 +30,6 @@ public class DefaultScopeProvider extends AbstractScopeProvider {
 	private static final Logger logger = Logger.getLogger(DefaultScopeProvider.class);
 
 	private final EContentAdapter adapter = new EContentAdapter() {
-
 		@Override
 		public void notifyChanged(Notification notification) {
 			if (!notification.isTouch() && !cache.isEmpty()) {
@@ -56,7 +55,6 @@ public class DefaultScopeProvider extends AbstractScopeProvider {
 	// this might result in no caching at all, depending on how often the GC is triggered
 	private final SimpleCache<Pair<Resource, EClass>, IScope> cache = new SimpleCache<Pair<Resource, EClass>, IScope>(
 			new Function<Pair<Resource, EClass>, IScope>() {
-
 				public IScope exec(Pair<Resource, EClass> param) {
 					EList<Adapter> adapters = param.getFirst().getResourceSet().eAdapters();
 					if (!adapters.contains(adapter))

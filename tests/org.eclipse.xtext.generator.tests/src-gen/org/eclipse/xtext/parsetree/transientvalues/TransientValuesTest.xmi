@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:xtext="http://www.eclipse.org/2008/Xtext" name="org.eclipse.xtext.parsetree.transientvalues.TransientValuesTest">
+  <superGrammar href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#/"/>
   <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="transientvaluestest">
     <ePackage href="http://simple/transientvaluestest#/"/>
   </metamodelDeclarations>
@@ -27,13 +28,13 @@
         <abstractTokens xsi:type="xtext:Keyword" value="required"/>
         <abstractTokens xsi:type="xtext:Assignment" feature="required1" operator="=">
           <terminal xsi:type="xtext:RuleCall">
-            <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.1"/>
+            <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.1"/>
           </terminal>
         </abstractTokens>
       </abstractTokens>
       <abstractTokens xsi:type="xtext:Assignment" feature="required2" operator="=">
         <terminal xsi:type="xtext:RuleCall">
-          <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.1"/>
+          <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.1"/>
         </terminal>
       </abstractTokens>
     </alternatives>
@@ -47,7 +48,7 @@
         <abstractTokens xsi:type="xtext:Keyword" value="optional"/>
         <abstractTokens xsi:type="xtext:Assignment" cardinality="?" feature="opt1" operator="=">
           <terminal xsi:type="xtext:RuleCall">
-            <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.1"/>
+            <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.1"/>
           </terminal>
         </abstractTokens>
       </abstractTokens>
@@ -55,7 +56,7 @@
         <abstractTokens xsi:type="xtext:Keyword" value=":"/>
         <abstractTokens xsi:type="xtext:Assignment" feature="opt2" operator="=">
           <terminal xsi:type="xtext:RuleCall">
-            <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.1"/>
+            <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.1"/>
           </terminal>
         </abstractTokens>
       </abstractTokens>
@@ -69,7 +70,7 @@
       <abstractTokens xsi:type="xtext:Keyword" value="list"/>
       <abstractTokens xsi:type="xtext:Assignment" cardinality="*" feature="item" operator="+=">
         <terminal xsi:type="xtext:RuleCall">
-          <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.1"/>
+          <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.1"/>
         </terminal>
       </abstractTokens>
     </alternatives>

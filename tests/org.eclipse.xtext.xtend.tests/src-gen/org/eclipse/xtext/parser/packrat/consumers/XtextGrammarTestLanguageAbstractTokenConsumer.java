@@ -39,6 +39,7 @@ public final class XtextGrammarTestLanguageAbstractTokenConsumer extends NonTerm
 		keyword$12$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
+	@Override
 	protected int doConsume(int entryPoint) throws Exception {
 		return consumeGroup$1(entryPoint);
 	}

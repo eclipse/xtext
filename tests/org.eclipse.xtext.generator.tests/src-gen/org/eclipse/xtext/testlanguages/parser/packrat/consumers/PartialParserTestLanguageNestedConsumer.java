@@ -35,6 +35,7 @@ public final class PartialParserTestLanguageNestedConsumer extends NonTerminalCo
 		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
+	@Override
 	protected int doConsume(int entryPoint) throws Exception {
 		return consumeGroup$1(entryPoint);
 	}

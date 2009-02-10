@@ -28,9 +28,9 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 	private XtextGrammarIDConsumer grammarIdConsumer;
 	private XtextBuiltinIDConsumer idConsumer;
 
-	private ISequenceMatcher crossReference$24$Delimiter;
+	private ISequenceMatcher crossReference$25$Delimiter;
 	
-	private ISequenceMatcher crossReference$29$Delimiter;
+	private ISequenceMatcher crossReference$30$Delimiter;
 	
 	private ICharacterClass keyword$8$Delimiter;
 	
@@ -38,27 +38,28 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 	
 	private ICharacterClass keyword$13$Delimiter;
 	
-	private ICharacterClass keyword$20$Delimiter;
-	
 	private ICharacterClass keyword$21$Delimiter;
 	
-	private ICharacterClass keyword$27$Delimiter;
+	private ICharacterClass keyword$22$Delimiter;
 	
-	private ICharacterClass keyword$31$Delimiter;
+	private ICharacterClass keyword$28$Delimiter;
+	
+	private ICharacterClass keyword$32$Delimiter;
 	
 	public XtextGrammarConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
-		crossReference$24$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-		crossReference$29$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		crossReference$25$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		crossReference$30$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$9$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$13$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$20$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$21$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$27$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$31$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$22$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$28$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$32$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
+	@Override
 	protected int doConsume(int entryPoint) throws Exception {
 		return consumeGroup$1(entryPoint);
 	}
@@ -99,7 +100,7 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 				}
 			case 3:
 				announceNextStep();
-				result = consumeGroup$16(nextEntryPoint());
+				result = consumeGroup$17(nextEntryPoint());
 				if (result!=ConsumeResult.SUCCESS) {
 					error("Another token expected.", getRule().ele001Group());
 					marker.commit();
@@ -108,7 +109,7 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 				}
 			case 4:
 				announceNextStep();
-				result = consumeAssignment$32(nextEntryPoint());
+				result = consumeAssignment$33(nextEntryPoint());
 				if (result!=ConsumeResult.SUCCESS) {
 					error("Another token expected.", getRule().ele01AssignmentMetamodelDeclarations());
 					marker.commit();
@@ -117,7 +118,7 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 				}
 			case 5:
 				announceNextStep();
-				result = consumeAssignment$34(nextEntryPoint());
+				result = consumeAssignment$35(nextEntryPoint());
 				if (result!=ConsumeResult.SUCCESS) {
 					error("Another token expected.", getRule().ele1AssignmentRules());
 					marker.commit();
@@ -211,7 +212,7 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 				announceNextStep();
 				result = consumeAssignment$14(nextEntryPoint());
 				if (result!=ConsumeResult.SUCCESS) {
-					error("Another token expected.", getRule().ele00011AssignmentSuperGrammarName());
+					error("Another token expected.", getRule().ele00011AssignmentSuperGrammar());
 					marker.commit();
 					announceLevelFinished();
 					return result;
@@ -230,7 +231,7 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeNonTerminal(grammarIdConsumer, "superGrammarName", false, true, false, getRule().ele000110ParserRuleCallGrammarID());
+		tempResult = consumeNonTerminal(grammarIdConsumer, "superGrammar", false, true, false, getRule().ele000110CrossReferenceEStringGrammar());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -240,9 +241,9 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 		return result;
 	}
 
-	protected int consumeGroup$16(int entryPoint) throws Exception {
+	protected int consumeGroup$17(int entryPoint) throws Exception {
 		IMarker marker = mark();
-		int result = doConsumeGroup$16(entryPoint);
+		int result = doConsumeGroup$17(entryPoint);
 		if (result != ConsumeResult.SUCCESS)
 			marker.rollback();
 		else
@@ -250,7 +251,7 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 		return ConsumeResult.SUCCESS;
 	}
 
-	protected int doConsumeGroup$16(int entryPoint) throws Exception {
+	protected int doConsumeGroup$17(int entryPoint) throws Exception {
 		announceNextLevel();
 		final IMarker marker = mark();
 		int result = ConsumeResult.SUCCESS;
@@ -259,7 +260,7 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 				result = ConsumeResult.EMPTY_MATCH;
 			case 0:
 				announceNextStep();
-				result = consumeAssignment$19(nextEntryPoint());
+				result = consumeAssignment$20(nextEntryPoint());
 				if (result!=ConsumeResult.SUCCESS) {
 					error("Another token expected.", getRule().ele001000AssignmentDefinesHiddenTokens());
 					marker.commit();
@@ -268,7 +269,7 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 				}
 			case 1:
 				announceNextStep();
-				result = consumeKeyword$21(nextEntryPoint());
+				result = consumeKeyword$22(nextEntryPoint());
 				if (result!=ConsumeResult.SUCCESS) {
 					error("Another token expected.", getRule().ele001001KeywordLeftParenthesis());
 					marker.commit();
@@ -277,7 +278,7 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 				}
 			case 2:
 				announceNextStep();
-				result = consumeGroup$22(nextEntryPoint());
+				result = consumeGroup$23(nextEntryPoint());
 				if (result!=ConsumeResult.SUCCESS) {
 					error("Another token expected.", getRule().ele00101Group());
 					marker.commit();
@@ -286,7 +287,7 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 				}
 			case 3:
 				announceNextStep();
-				result = consumeKeyword$31(nextEntryPoint());
+				result = consumeKeyword$32(nextEntryPoint());
 				if (result!=ConsumeResult.SUCCESS) {
 					error("Another token expected.", getRule().ele0011KeywordRightParenthesis());
 					marker.commit();
@@ -299,11 +300,11 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 		return result;
 	}
 
-	protected int consumeAssignment$19(int entryPoint) throws Exception {
+	protected int consumeAssignment$20(int entryPoint) throws Exception {
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeKeyword(getRule().ele0010000KeywordHidden(), "definesHiddenTokens", false, true, getKeyword$20$Delimiter()); 
+		tempResult = consumeKeyword(getRule().ele0010000KeywordHidden(), "definesHiddenTokens", false, true, getKeyword$21$Delimiter()); 
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -313,13 +314,13 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 		return result;
 	}
 
-	protected int consumeKeyword$21(int entryPoint) throws Exception {
-		return consumeKeyword(getRule().ele001001KeywordLeftParenthesis(), null, false, false, getKeyword$21$Delimiter());
+	protected int consumeKeyword$22(int entryPoint) throws Exception {
+		return consumeKeyword(getRule().ele001001KeywordLeftParenthesis(), null, false, false, getKeyword$22$Delimiter());
 	}
 
-	protected int consumeGroup$22(int entryPoint) throws Exception {
+	protected int consumeGroup$23(int entryPoint) throws Exception {
 		IMarker marker = mark();
-		int result = doConsumeGroup$22(entryPoint);
+		int result = doConsumeGroup$23(entryPoint);
 		if (result != ConsumeResult.SUCCESS)
 			marker.rollback();
 		else
@@ -327,7 +328,7 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 		return ConsumeResult.SUCCESS;
 	}
 
-	protected int doConsumeGroup$22(int entryPoint) throws Exception {
+	protected int doConsumeGroup$23(int entryPoint) throws Exception {
 		announceNextLevel();
 		final IMarker marker = mark();
 		int result = ConsumeResult.SUCCESS;
@@ -336,7 +337,7 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 				result = ConsumeResult.EMPTY_MATCH;
 			case 0:
 				announceNextStep();
-				result = consumeAssignment$23(nextEntryPoint());
+				result = consumeAssignment$24(nextEntryPoint());
 				if (result!=ConsumeResult.SUCCESS) {
 					error("Another token expected.", getRule().ele001010AssignmentHiddenTokens());
 					marker.commit();
@@ -345,7 +346,7 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 				}
 			case 1:
 				announceNextStep();
-				result = consumeGroup$26(nextEntryPoint());
+				result = consumeGroup$27(nextEntryPoint());
 				if (result!=ConsumeResult.SUCCESS) {
 					error("Another token expected.", getRule().ele001011Group());
 					marker.commit();
@@ -358,11 +359,11 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 		return result;
 	}
 
-	protected int consumeAssignment$23(int entryPoint) throws Exception {
+	protected int consumeAssignment$24(int entryPoint) throws Exception {
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "hiddenTokens", true, false, getRule().ele0010100CrossReferenceEStringAbstractRule(), getCrossReference$24$Delimiter());
+		tempResult = consumeTerminal(idConsumer, "hiddenTokens", true, false, getRule().ele0010100CrossReferenceEStringAbstractRule(), getCrossReference$25$Delimiter());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -372,16 +373,16 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 		return result;
 	}
 
-	protected int consumeGroup$26(int entryPoint) throws Exception {
+	protected int consumeGroup$27(int entryPoint) throws Exception {
 		IMarker marker = mark();
-		while(doConsumeGroup$26(entryPoint) == ConsumeResult.SUCCESS) {
+		while(doConsumeGroup$27(entryPoint) == ConsumeResult.SUCCESS) {
 			marker.flush();
 		}
 		marker.rollback();
 		return ConsumeResult.SUCCESS;
 	}
 
-	protected int doConsumeGroup$26(int entryPoint) throws Exception {
+	protected int doConsumeGroup$27(int entryPoint) throws Exception {
 		announceNextLevel();
 		final IMarker marker = mark();
 		int result = ConsumeResult.SUCCESS;
@@ -390,7 +391,7 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 				result = ConsumeResult.EMPTY_MATCH;
 			case 0:
 				announceNextStep();
-				result = consumeKeyword$27(nextEntryPoint());
+				result = consumeKeyword$28(nextEntryPoint());
 				if (result!=ConsumeResult.SUCCESS) {
 					error("Another token expected.", getRule().ele0010110KeywordComma());
 					marker.commit();
@@ -399,7 +400,7 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 				}
 			case 1:
 				announceNextStep();
-				result = consumeAssignment$28(nextEntryPoint());
+				result = consumeAssignment$29(nextEntryPoint());
 				if (result!=ConsumeResult.SUCCESS) {
 					error("Another token expected.", getRule().ele0010111AssignmentHiddenTokens());
 					marker.commit();
@@ -412,15 +413,15 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 		return result;
 	}
 
-	protected int consumeKeyword$27(int entryPoint) throws Exception {
-		return consumeKeyword(getRule().ele0010110KeywordComma(), null, false, false, getKeyword$27$Delimiter());
+	protected int consumeKeyword$28(int entryPoint) throws Exception {
+		return consumeKeyword(getRule().ele0010110KeywordComma(), null, false, false, getKeyword$28$Delimiter());
 	}
 
-	protected int consumeAssignment$28(int entryPoint) throws Exception {
+	protected int consumeAssignment$29(int entryPoint) throws Exception {
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "hiddenTokens", true, false, getRule().ele00101110CrossReferenceEStringAbstractRule(), getCrossReference$29$Delimiter());
+		tempResult = consumeTerminal(idConsumer, "hiddenTokens", true, false, getRule().ele00101110CrossReferenceEStringAbstractRule(), getCrossReference$30$Delimiter());
 		if (tempResult == ConsumeResult.SUCCESS) {
 			announceLevelFinished();
 			return tempResult;
@@ -430,20 +431,20 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 		return result;
 	}
 
-	protected int consumeKeyword$31(int entryPoint) throws Exception {
-		return consumeKeyword(getRule().ele0011KeywordRightParenthesis(), null, false, false, getKeyword$31$Delimiter());
+	protected int consumeKeyword$32(int entryPoint) throws Exception {
+		return consumeKeyword(getRule().ele0011KeywordRightParenthesis(), null, false, false, getKeyword$32$Delimiter());
 	}
 
-	protected int consumeAssignment$32(int entryPoint) throws Exception {
+	protected int consumeAssignment$33(int entryPoint) throws Exception {
 		IMarker marker = mark();
-		while(doConsumeAssignment$32(entryPoint) == ConsumeResult.SUCCESS) {
+		while(doConsumeAssignment$33(entryPoint) == ConsumeResult.SUCCESS) {
 			marker.flush();
 		}
 		marker.rollback();
 		return ConsumeResult.SUCCESS;
 	}
 
-	protected int doConsumeAssignment$32(int entryPoint) throws Exception {
+	protected int doConsumeAssignment$33(int entryPoint) throws Exception {
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
@@ -457,7 +458,7 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 		return result;
 	}
 
-	protected int consumeAssignment$34(int entryPoint) throws Exception {
+	protected int consumeAssignment$35(int entryPoint) throws Exception {
 		IMarker marker = mark();
 		int result = ConsumeResult.SUCCESS;
 		announceNextLevel();
@@ -466,12 +467,12 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 				result = ConsumeResult.EMPTY_MATCH;
 			case 0:
 				announceNextStep();
-				result = doConsumeAssignment$34(nextEntryPoint());
+				result = doConsumeAssignment$35(nextEntryPoint());
 			case 1:
 				announceNextStep();
 				if (result == ConsumeResult.SUCCESS) {
 					marker.flush();
-					while(doConsumeAssignment$34(nextEntryPoint())==ConsumeResult.SUCCESS) {
+					while(doConsumeAssignment$35(nextEntryPoint())==ConsumeResult.SUCCESS) {
 						marker.flush();
 					}
 					marker.rollback();
@@ -486,7 +487,7 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 		return result;
 	}
 
-	protected int doConsumeAssignment$34(int entryPoint) throws Exception {
+	protected int doConsumeAssignment$35(int entryPoint) throws Exception {
 		int result = ConsumeResult.EMPTY_MATCH;
 		int tempResult;
 		announceNextLevel();
@@ -529,20 +530,20 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 		this.idConsumer = idConsumer;
 	}
 	
-	public ISequenceMatcher getCrossReference$24$Delimiter() {
-		return crossReference$24$Delimiter;
+	public ISequenceMatcher getCrossReference$25$Delimiter() {
+		return crossReference$25$Delimiter;
 	}
 	
-	public void setCrossReference$24$Delimiter(ISequenceMatcher matcher) {
-		crossReference$24$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	public void setCrossReference$25$Delimiter(ISequenceMatcher matcher) {
+		crossReference$25$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
-	public ISequenceMatcher getCrossReference$29$Delimiter() {
-		return crossReference$29$Delimiter;
+	public ISequenceMatcher getCrossReference$30$Delimiter() {
+		return crossReference$30$Delimiter;
 	}
 	
-	public void setCrossReference$29$Delimiter(ISequenceMatcher matcher) {
-		crossReference$29$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	public void setCrossReference$30$Delimiter(ISequenceMatcher matcher) {
+		crossReference$30$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	public ICharacterClass getKeyword$8$Delimiter() {
@@ -569,14 +570,6 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 		keyword$13$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
-	public ICharacterClass getKeyword$20$Delimiter() {
-		return keyword$20$Delimiter;
-	}
-	
-	public void setKeyword$20$Delimiter(ICharacterClass characterClass) {
-		keyword$20$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
 	public ICharacterClass getKeyword$21$Delimiter() {
 		return keyword$21$Delimiter;
 	}
@@ -585,20 +578,28 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 		keyword$21$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
-	public ICharacterClass getKeyword$27$Delimiter() {
-		return keyword$27$Delimiter;
+	public ICharacterClass getKeyword$22$Delimiter() {
+		return keyword$22$Delimiter;
 	}
 	
-	public void setKeyword$27$Delimiter(ICharacterClass characterClass) {
-		keyword$27$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setKeyword$22$Delimiter(ICharacterClass characterClass) {
+		keyword$22$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
-	public ICharacterClass getKeyword$31$Delimiter() {
-		return keyword$31$Delimiter;
+	public ICharacterClass getKeyword$28$Delimiter() {
+		return keyword$28$Delimiter;
 	}
 	
-	public void setKeyword$31$Delimiter(ICharacterClass characterClass) {
-		keyword$31$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setKeyword$28$Delimiter(ICharacterClass characterClass) {
+		keyword$28$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$32$Delimiter() {
+		return keyword$32$Delimiter;
+	}
+	
+	public void setKeyword$32$Delimiter(ICharacterClass characterClass) {
+		keyword$32$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

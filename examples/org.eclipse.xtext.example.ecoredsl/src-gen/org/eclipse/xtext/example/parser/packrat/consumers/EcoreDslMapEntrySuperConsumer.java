@@ -26,6 +26,7 @@ public final class EcoreDslMapEntrySuperConsumer extends NonTerminalConsumer {
 		super(configuration, hiddenTokens);
 	}
 	
+	@Override
 	protected int doConsume(int entryPoint) throws Exception {
 		return consumeRuleCall$1(entryPoint);
 	}

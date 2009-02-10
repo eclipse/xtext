@@ -27,6 +27,7 @@ public final class XtextGrammarTestLanguageWildcardConsumer extends NonTerminalC
 		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
+	@Override
 	protected int doConsume(int entryPoint) throws Exception {
 		return consumeAssignment$1(entryPoint);
 	}

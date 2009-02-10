@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: GrammarImpl.java,v 1.18 2009/02/09 12:35:53 szarnekow Exp $
+ * $Id: GrammarImpl.java,v 1.19 2009/02/10 15:48:28 szarnekow Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -39,7 +39,7 @@ import org.eclipse.xtext.XtextPackage;
  * <ul>
  *   <li>{@link org.eclipse.xtext.impl.GrammarImpl#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.eclipse.xtext.impl.GrammarImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.xtext.impl.GrammarImpl#getSuperGrammarName <em>Super Grammar Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.impl.GrammarImpl#getSuperGrammar <em>Super Grammar</em>}</li>
  *   <li>{@link org.eclipse.xtext.impl.GrammarImpl#isDefinesHiddenTokens <em>Defines Hidden Tokens</em>}</li>
  *   <li>{@link org.eclipse.xtext.impl.GrammarImpl#getHiddenTokens <em>Hidden Tokens</em>}</li>
  *   <li>{@link org.eclipse.xtext.impl.GrammarImpl#getMetamodelDeclarations <em>Metamodel Declarations</em>}</li>
@@ -91,24 +91,14 @@ public class GrammarImpl extends EObjectImpl implements Grammar {
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getSuperGrammarName() <em>Super Grammar Name</em>}' attribute.
+	 * The cached value of the '{@link #getSuperGrammar() <em>Super Grammar</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSuperGrammarName()
+	 * @see #getSuperGrammar()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String SUPER_GRAMMAR_NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getSuperGrammarName() <em>Super Grammar Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSuperGrammarName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String superGrammarName = SUPER_GRAMMAR_NAME_EDEFAULT;
+	protected Grammar superGrammar;
 
 	/**
 	 * The default value of the '{@link #isDefinesHiddenTokens() <em>Defines Hidden Tokens</em>}' attribute.
@@ -226,8 +216,16 @@ public class GrammarImpl extends EObjectImpl implements Grammar {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getSuperGrammarName() {
-		return superGrammarName;
+	public Grammar getSuperGrammar() {
+		if (superGrammar != null && superGrammar.eIsProxy()) {
+			InternalEObject oldSuperGrammar = (InternalEObject)superGrammar;
+			superGrammar = (Grammar)eResolveProxy(oldSuperGrammar);
+			if (superGrammar != oldSuperGrammar) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, XtextPackage.GRAMMAR__SUPER_GRAMMAR, oldSuperGrammar, superGrammar));
+			}
+		}
+		return superGrammar;
 	}
 
 	/**
@@ -235,11 +233,20 @@ public class GrammarImpl extends EObjectImpl implements Grammar {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSuperGrammarName(String newSuperGrammarName) {
-		String oldSuperGrammarName = superGrammarName;
-		superGrammarName = newSuperGrammarName;
+	public Grammar basicGetSuperGrammar() {
+		return superGrammar;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSuperGrammar(Grammar newSuperGrammar) {
+		Grammar oldSuperGrammar = superGrammar;
+		superGrammar = newSuperGrammar;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.GRAMMAR__SUPER_GRAMMAR_NAME, oldSuperGrammarName, superGrammarName));
+			eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.GRAMMAR__SUPER_GRAMMAR, oldSuperGrammar, superGrammar));
 	}
 
 	/**
@@ -327,8 +334,9 @@ public class GrammarImpl extends EObjectImpl implements Grammar {
 				return isAbstract();
 			case XtextPackage.GRAMMAR__NAME:
 				return getName();
-			case XtextPackage.GRAMMAR__SUPER_GRAMMAR_NAME:
-				return getSuperGrammarName();
+			case XtextPackage.GRAMMAR__SUPER_GRAMMAR:
+				if (resolve) return getSuperGrammar();
+				return basicGetSuperGrammar();
 			case XtextPackage.GRAMMAR__DEFINES_HIDDEN_TOKENS:
 				return isDefinesHiddenTokens();
 			case XtextPackage.GRAMMAR__HIDDEN_TOKENS:
@@ -356,8 +364,8 @@ public class GrammarImpl extends EObjectImpl implements Grammar {
 			case XtextPackage.GRAMMAR__NAME:
 				setName((String)newValue);
 				return;
-			case XtextPackage.GRAMMAR__SUPER_GRAMMAR_NAME:
-				setSuperGrammarName((String)newValue);
+			case XtextPackage.GRAMMAR__SUPER_GRAMMAR:
+				setSuperGrammar((Grammar)newValue);
 				return;
 			case XtextPackage.GRAMMAR__DEFINES_HIDDEN_TOKENS:
 				setDefinesHiddenTokens((Boolean)newValue);
@@ -392,8 +400,8 @@ public class GrammarImpl extends EObjectImpl implements Grammar {
 			case XtextPackage.GRAMMAR__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case XtextPackage.GRAMMAR__SUPER_GRAMMAR_NAME:
-				setSuperGrammarName(SUPER_GRAMMAR_NAME_EDEFAULT);
+			case XtextPackage.GRAMMAR__SUPER_GRAMMAR:
+				setSuperGrammar((Grammar)null);
 				return;
 			case XtextPackage.GRAMMAR__DEFINES_HIDDEN_TOKENS:
 				setDefinesHiddenTokens(DEFINES_HIDDEN_TOKENS_EDEFAULT);
@@ -423,8 +431,8 @@ public class GrammarImpl extends EObjectImpl implements Grammar {
 				return abstract_ != ABSTRACT_EDEFAULT;
 			case XtextPackage.GRAMMAR__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case XtextPackage.GRAMMAR__SUPER_GRAMMAR_NAME:
-				return SUPER_GRAMMAR_NAME_EDEFAULT == null ? superGrammarName != null : !SUPER_GRAMMAR_NAME_EDEFAULT.equals(superGrammarName);
+			case XtextPackage.GRAMMAR__SUPER_GRAMMAR:
+				return superGrammar != null;
 			case XtextPackage.GRAMMAR__DEFINES_HIDDEN_TOKENS:
 				return definesHiddenTokens != DEFINES_HIDDEN_TOKENS_EDEFAULT;
 			case XtextPackage.GRAMMAR__HIDDEN_TOKENS:
@@ -451,8 +459,6 @@ public class GrammarImpl extends EObjectImpl implements Grammar {
 		result.append(abstract_);
 		result.append(", name: ");
 		result.append(name);
-		result.append(", superGrammarName: ");
-		result.append(superGrammarName);
 		result.append(", definesHiddenTokens: ");
 		result.append(definesHiddenTokens);
 		result.append(')');

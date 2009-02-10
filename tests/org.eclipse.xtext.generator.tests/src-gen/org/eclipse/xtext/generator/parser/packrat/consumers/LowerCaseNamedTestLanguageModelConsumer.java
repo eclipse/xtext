@@ -29,6 +29,7 @@ public final class LowerCaseNamedTestLanguageModelConsumer extends NonTerminalCo
 		ruleCall$2$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
+	@Override
 	protected int doConsume(int entryPoint) throws Exception {
 		return consumeAssignment$1(entryPoint);
 	}

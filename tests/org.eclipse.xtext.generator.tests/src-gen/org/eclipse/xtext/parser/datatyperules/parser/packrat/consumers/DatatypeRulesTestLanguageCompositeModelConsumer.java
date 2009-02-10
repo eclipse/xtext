@@ -26,6 +26,7 @@ public final class DatatypeRulesTestLanguageCompositeModelConsumer extends NonTe
 		super(configuration, hiddenTokens);
 	}
 	
+	@Override
 	protected int doConsume(int entryPoint) throws Exception {
 		return consumeAssignment$1(entryPoint);
 	}

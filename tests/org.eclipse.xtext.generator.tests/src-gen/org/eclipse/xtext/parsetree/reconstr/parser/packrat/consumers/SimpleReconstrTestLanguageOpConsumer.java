@@ -26,6 +26,7 @@ public final class SimpleReconstrTestLanguageOpConsumer extends NonTerminalConsu
 		super(configuration, hiddenTokens);
 	}
 	
+	@Override
 	protected int doConsume(int entryPoint) throws Exception {
 		return consumeGroup$1(entryPoint);
 	}

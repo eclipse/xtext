@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:xtext="http://www.eclipse.org/2008/Xtext" name="org.eclipse.xtext.dummy.DummyTestLanguage">
+  <superGrammar href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#/"/>
   <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="DummyLang">
     <ePackage href="http://www.eclipse.org/2008/xtext/DummyLang#/"/>
   </metamodelDeclarations>
@@ -26,13 +27,13 @@
           </abstractTokens>
           <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
             <terminal xsi:type="xtext:RuleCall">
-              <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+              <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.0"/>
             </terminal>
           </abstractTokens>
         </abstractTokens>
         <abstractTokens xsi:type="xtext:Assignment" cardinality="*" feature="descriptions" operator="+=">
           <terminal xsi:type="xtext:RuleCall">
-            <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.2"/>
+            <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.2"/>
           </terminal>
         </abstractTokens>
       </abstractTokens>

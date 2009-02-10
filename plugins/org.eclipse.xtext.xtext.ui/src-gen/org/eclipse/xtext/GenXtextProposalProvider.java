@@ -43,13 +43,13 @@ public class GenXtextProposalProvider extends AbstractJavaProposalProvider {
 		return Collections.emptyList();
 	}
 			
-	public List<? extends ICompletionProposal> completeGrammar_SuperGrammarName(Assignment assignment, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeGrammar_SuperGrammar(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeGrammar_SuperGrammarName feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeGrammar_SuperGrammar feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
-		return Collections.emptyList();
+		return lookupCrossReference(((CrossReference)assignment.getTerminal()), contentAssistContext);
 	}
 			
 	public List<? extends ICompletionProposal> completeGrammar_DefinesHiddenTokens(Assignment assignment, IContentAssistContext contentAssistContext) {

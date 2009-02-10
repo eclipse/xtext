@@ -11,7 +11,8 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.crossref.impl.IllegalNodeException;
+import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.service.ILanguageService;
 
 /**
@@ -24,7 +25,7 @@ public interface ILinkingService extends ILanguageService {
 	 * Returns all {@link EObject}s referenced by the given link text in the given context.
 	 * But does not set the references or modifies the passed information somehow
 	 */
-	List<EObject> getLinkedObjects(EObject context, EReference reference, LeafNode text);
+	List<EObject> getLinkedObjects(EObject context, EReference reference, AbstractNode node) throws IllegalNodeException;
 
 	/**
 	 * Returns the textual representation of a given object as it would be serialized in the given context.

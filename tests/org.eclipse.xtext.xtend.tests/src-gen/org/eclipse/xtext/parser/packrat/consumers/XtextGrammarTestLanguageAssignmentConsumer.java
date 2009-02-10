@@ -40,6 +40,7 @@ public final class XtextGrammarTestLanguageAssignmentConsumer extends NonTermina
 		ruleCall$4$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
+	@Override
 	protected int doConsume(int entryPoint) throws Exception {
 		return consumeGroup$1(entryPoint);
 	}

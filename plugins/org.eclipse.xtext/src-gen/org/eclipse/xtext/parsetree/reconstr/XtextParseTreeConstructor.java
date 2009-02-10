@@ -53,12 +53,12 @@ public class XtextParseTreeConstructor extends AbstractParseTreeConstructor {
 
 /************ begin Rule Grammar ****************
  *
- * Grammar:   (abstract?="abstract language"|"language") name=GrammarID ("extends" superGrammarName=GrammarID)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? (metamodelDeclarations+=AbstractMetamodelDeclaration)* (rules+=AbstractRule)+;
+ * Grammar:   (abstract?="abstract language"|"language") name=GrammarID ("extends" superGrammar=[Grammar|GrammarID])? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? (metamodelDeclarations+=AbstractMetamodelDeclaration)* (rules+=AbstractRule)+;
  *
  **/
 
 
-// (abstract?="abstract language"|"language") name=GrammarID ("extends" superGrammarName=GrammarID)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? (metamodelDeclarations+=AbstractMetamodelDeclaration)* (rules+=AbstractRule)+
+// (abstract?="abstract language"|"language") name=GrammarID ("extends" superGrammar=[Grammar|GrammarID])? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? (metamodelDeclarations+=AbstractMetamodelDeclaration)* (rules+=AbstractRule)+
 protected class Grammar_Group extends GroupToken {
 	
 	public Grammar_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -86,7 +86,7 @@ protected class Grammar_Group extends GroupToken {
 	}
 }
 
-// (abstract?="abstract language"|"language") name=GrammarID ("extends" superGrammarName=GrammarID)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? (metamodelDeclarations+=AbstractMetamodelDeclaration)*
+// (abstract?="abstract language"|"language") name=GrammarID ("extends" superGrammar=[Grammar|GrammarID])? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? (metamodelDeclarations+=AbstractMetamodelDeclaration)*
 protected class Grammar_0_Group extends GroupToken {
 	
 	public Grammar_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -114,7 +114,7 @@ protected class Grammar_0_Group extends GroupToken {
 	}
 }
 
-// (abstract?="abstract language"|"language") name=GrammarID ("extends" superGrammarName=GrammarID)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")?
+// (abstract?="abstract language"|"language") name=GrammarID ("extends" superGrammar=[Grammar|GrammarID])? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")?
 protected class Grammar_0_0_Group extends GroupToken {
 	
 	public Grammar_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -142,7 +142,7 @@ protected class Grammar_0_0_Group extends GroupToken {
 	}
 }
 
-// (abstract?="abstract language"|"language") name=GrammarID ("extends" superGrammarName=GrammarID)?
+// (abstract?="abstract language"|"language") name=GrammarID ("extends" superGrammar=[Grammar|GrammarID])?
 protected class Grammar_0_0_0_Group extends GroupToken {
 	
 	public Grammar_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -283,7 +283,7 @@ protected class Grammar_0_0_0_0_1_Assignment_name extends AssignmentToken  {
 }
 
 
-// ("extends" superGrammarName=GrammarID)?
+// ("extends" superGrammar=[Grammar|GrammarID])?
 protected class Grammar_0_0_0_1_Group extends GroupToken {
 	
 	public Grammar_0_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -295,7 +295,7 @@ protected class Grammar_0_0_0_1_Group extends GroupToken {
 	}
 		
 	protected Solution createSolution() {	
-		Solution s1 = new Grammar_0_0_0_1_1_Assignment_superGrammarName(current, this).firstSolution();
+		Solution s1 = new Grammar_0_0_0_1_1_Assignment_superGrammar(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new Grammar_0_0_0_1_0_Keyword_extends(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
@@ -323,27 +323,28 @@ protected class Grammar_0_0_0_1_0_Keyword_extends extends KeywordToken  {
 	}	
 }
 
-// superGrammarName=GrammarID
-protected class Grammar_0_0_0_1_1_Assignment_superGrammarName extends AssignmentToken  {
+// superGrammar=[Grammar|GrammarID]
+protected class Grammar_0_0_0_1_1_Assignment_superGrammar extends AssignmentToken  {
 	
-	public Grammar_0_0_0_1_1_Assignment_superGrammarName(IInstanceDescription curr, AbstractToken pred) {
+	public Grammar_0_0_0_1_1_Assignment_superGrammar(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public Assignment getGrammarElement() {
-		return XtextGrammarAccess.INSTANCE.prGrammar().ele00011AssignmentSuperGrammarName();
+		return XtextGrammarAccess.INSTANCE.prGrammar().ele00011AssignmentSuperGrammar();
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("superGrammarName",!IS_REQUIRED)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("superGrammarName");
-
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
-			element = XtextGrammarAccess.INSTANCE.prGrammar().ele000110ParserRuleCallGrammarID();
-			return new Solution(obj);
+		if((value = current.getConsumable("superGrammar",!IS_REQUIRED)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("superGrammar");
+		if(value instanceof EObject) { // xtext::CrossReference
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf("Grammar")) {
+				type = AssignmentType.CR;
+				element = XtextGrammarAccess.INSTANCE.prGrammar().ele000110CrossReferenceEStringGrammar(); 
+				return new Solution(obj);
+			}
 		}
-
 		return null;
 	}
 }

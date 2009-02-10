@@ -35,6 +35,7 @@ public final class SimpleReconstrTestLanguageManyStringsConsumer extends NonTerm
 		ruleCall$7$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
+	@Override
 	protected int doConsume(int entryPoint) throws Exception {
 		return consumeGroup$1(entryPoint);
 	}
