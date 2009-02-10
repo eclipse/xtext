@@ -26,18 +26,15 @@ package «grammar().generatedUiModuleClass().toJavaPackage()»;
 import org.eclipse.xtext.ui.common.service.DefaultUIModule;
 
 /**
- * GENERATED! Manual modification goes to «grammar().uiModuleClass().toSimpleName()»
+ * Generated from ServiceConfig.xpt!
+ * Manual modifications go to «grammar().uiModuleClass().toSimpleName()»
  */
 public abstract class «grammar().generatedUiModuleClass().toSimpleName()» extends DefaultUIModule {
-	
-	
 	«FOREACH genModel().services.select(e|e.uiService) AS s-»
 	public Class<? extends «s.serviceInterfaceFQName»> bind«s.serviceInterfaceFQName.toSimpleName()»() {
 		return «s.genClassFQName».class;
 	}
-	
-	«ENDFOREACH»
-	
+	«ENDFOREACH-»
 }
 «ENDFILE»
 
@@ -50,11 +47,9 @@ package «grammar().uiModuleClass().toJavaPackage()»;
 import com.google.inject.Binder;
 
 /**
- * used to manually extend and modify configuration for components used within the IDE.
+ * Use this class to manually extend and modify configuration for components used within the IDE.
  */
 public class «grammar().uiModuleClass().toSimpleName()» extends «grammar().generatedUiModuleClass().toSimpleName()» {
-
-	
 }
 «ENDFILE»
 «ENDIF-»

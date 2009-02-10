@@ -45,8 +45,8 @@ public class PluginXmlMerger {
 	
 	public void writeXml(Document doc, File file) throws Exception {
 		Source source = new DOMSource(doc);
-        Result result = new StreamResult(file);
-        Transformer xformer = TransformerFactory.newInstance().newTransformer();
-        xformer.transform(source, result);
+		Result result = new StreamResult(file);
+		Transformer xformer = TransformerFactory.newInstance().newTransformer();
+		xformer.transform(source, result);
 	}
 }

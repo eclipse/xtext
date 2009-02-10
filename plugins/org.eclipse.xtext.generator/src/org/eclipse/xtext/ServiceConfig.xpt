@@ -30,7 +30,8 @@ import com.google.inject.Binder;
 import com.google.inject.name.Names;
 
 /**
- * GENERATED! Manual modification goes to «grammar().runtimeModuleClass().toSimpleName()»
+ * Generated from ServiceConfig.xpt! 
+ * Manual modifications go to «grammar().runtimeModuleClass().toSimpleName()»
  */
 public abstract class «grammar().generatedRuntimeModuleClass().toSimpleName()» extends DefaultRuntimeModule {
 	
@@ -38,14 +39,14 @@ public abstract class «grammar().generatedRuntimeModuleClass().toSimpleName()» e
 	public void configure(Binder binder) {
 		super.configure(binder);
 		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance(
-				"«languageId()»");
+			"«languageId()»");
 	}
 	
 	«FOREACH services.select(e|!e.uiService) AS s-»
 	public Class<? extends «s.serviceInterfaceFQName»> bind«s.serviceInterfaceFQName.toSimpleName()»() {
 		return «s.genClassFQName».class;
 	}
-	«ENDFOREACH»
+	«ENDFOREACH-»
 	
 }
 «ENDFILE»
@@ -59,7 +60,7 @@ package «grammar().runtimeModuleClass().toJavaPackage()»;
 import com.google.inject.Binder;
 
 /**
- * used to register components to be used within the IDE.
+ * Use this class to register components to be used within the IDE.
  */
 public class «grammar().runtimeModuleClass().toSimpleName()» extends «grammar().generatedRuntimeModuleClass().toSimpleName()» {
 

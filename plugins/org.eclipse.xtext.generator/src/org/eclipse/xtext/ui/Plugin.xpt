@@ -30,19 +30,19 @@
 
 «DEFINE body FOR GenModel»
 «IF !grammar().abstract -»
-<extension
-         point="org.eclipse.ui.editors">
-      <editor
-            class="«guiceInjectorClass()»:«editorClassFQN()»"
-            contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
-            default="true"
-            extensions="«modelFileExtensions.toString(",")»"
-            id="«languageId()»"
-            name="«languageName()» Editor">
-      </editor>
-   </extension>
- <extension
-         point="org.eclipse.ui.preferencePages">
+	<extension
+			point="org.eclipse.ui.editors">
+		<editor
+			class="«guiceInjectorClass()»:«editorClassFQN()»"
+			contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+			default="true"
+			extensions="«modelFileExtensions.toString(",")»"
+			id="«languageId()»"
+			name="«languageName()» Editor">
+		</editor>
+	</extension>
+	 <extension
+			point="org.eclipse.ui.preferencePages">
 		<page
 			class="«guiceInjectorClass()»:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
 			id="«languageId()»"
@@ -52,15 +52,15 @@
 			</keywordReference>
 		</page>
 		<page
-		    category="«languageId()»"
-		    class="«guiceInjectorClass()»:org.eclipse.xtext.ui.core.editor.preferences.EditorPreferencePage"
-		    id="«languageId()».editor"
-		    name="Editor">
-		    	<keywordReference 
-           			id="org.eclipse.xtext.keyword.editor">
-     			</keywordReference>
+			category="«languageId()»"
+			class="«guiceInjectorClass()»:org.eclipse.xtext.ui.core.editor.preferences.EditorPreferencePage"
+			id="«languageId()».editor"
+			name="Editor">
+			<keywordReference 
+				id="org.eclipse.xtext.keyword.editor">
+			</keywordReference>
 		</page>
-      </extension>
+	</extension>
 	<extension
 		point="org.eclipse.ui.keywords">
 		<keyword
@@ -68,19 +68,18 @@
 			label="«languageName()»">
 		</keyword>
 		<keyword
-            id="«languageId()».tasktags"
-            label="Task Tags">
-        </keyword>
+			id="«languageId()».tasktags"
+			label="Task Tags">
+		</keyword>
 	</extension>
-	
-	«FOREACH modelFileExtensions() AS ext»
+	«FOREACH modelFileExtensions() AS ext-»
 	<extension
-         point="org.eclipse.emf.ecore.extension_parser">
-      <parser
-            class="«guiceInjectorClass()»:org.eclipse.xtext.resource.XtextResourceFactory"
-            type="«ext»">
-      </parser>
-   </extension>
-	«ENDFOREACH»
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="«guiceInjectorClass()»:org.eclipse.xtext.resource.XtextResourceFactory"
+			type="«ext»">
+		</parser>
+	</extension>
+	«ENDFOREACH-»
 «ENDIF-»
 «ENDDEFINE»

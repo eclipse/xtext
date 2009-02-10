@@ -9,8 +9,6 @@
 package org.eclipse.xtext.ui.core.internal;
 
 import org.apache.log4j.Logger;
-import org.eclipse.core.internal.registry.Extension;
-import org.eclipse.core.internal.registry.ExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
