@@ -6,23 +6,17 @@ package org.eclipse.xtext;
 import org.eclipse.xtext.ui.common.service.DefaultUIModule;
 
 /**
- * GENERATED! Manual modification goes to XtextUIModule
+ * Generated from ServiceConfig.xpt!
+ * Manual modifications go to XtextUIModule
  */
 public abstract class AbstractXtextUiModule extends DefaultUIModule {
-	
-	
 	public Class<? extends org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider> bindIProposalProvider() {
 		return org.eclipse.xtext.GenXtextProposalProvider.class;
 	}
-	
 	public Class<? extends org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr.ITokenColorer> bindITokenColorer() {
 		return org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr.BuiltinAntlrTokenColorer.class;
 	}
-	
 	public Class<? extends org.eclipse.jface.text.rules.ITokenScanner> bindITokenScanner() {
 		return org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr.AntlrTokenScanner.class;
 	}
-	
-	
-	
 }

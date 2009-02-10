@@ -6,6 +6,9 @@ import org.osgi.framework.BundleContext;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
+/**
+ * Generated from UIPlugin.xpt
+ */
 public class ReferenceGrammarActivator extends AbstractUIPlugin {
 
 	private Injector injector;
@@ -27,4 +30,3 @@ public class ReferenceGrammarActivator extends AbstractUIPlugin {
 	}
 	
 }
- 

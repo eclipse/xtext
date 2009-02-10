@@ -50,7 +50,7 @@ public class XtextDocumentProvider extends FileDocumentProvider implements IDocu
 		private ReferencedResourcesUpdater(XtextDocument document) {
 			this.document = document;
 		}
-
+		
 		public void resourceChanged(final IResourceChangeEvent event) {
 			
 			final ResourceDeltaVisitor visitor = new ResourceDeltaVisitor(document);
@@ -162,8 +162,10 @@ public class XtextDocumentProvider extends FileDocumentProvider implements IDocu
 	@Override
 	protected void disconnected() {
 		super.disconnected();
-		if (resourceChangeListener != null)
+		if (resourceChangeListener != null) {
 			ResourcesPlugin.getWorkspace().removeResourceChangeListener(resourceChangeListener);
+			resourceChangeListener = null;
+		}
 	}
 
 }

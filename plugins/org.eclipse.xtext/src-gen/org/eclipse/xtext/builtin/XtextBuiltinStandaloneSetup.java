@@ -12,6 +12,9 @@ import org.eclipse.xtext.resource.IResourceFactory;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
+/**
+ * Generated from StandaloneSetup.xpt!
+ */
 public class XtextBuiltinStandaloneSetup implements ISetup {
 
 	public static void doSetup() {
@@ -19,29 +22,24 @@ public class XtextBuiltinStandaloneSetup implements ISetup {
 	}
 
 	public Injector createInjectorAndDoEMFRegistration() {
-			// register default ePackages
-			if (!Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("ecore"))
-				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-					"ecore", new org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl());
-			if (!Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("xmi"))
-				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-					"xmi", new org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl());
-			if (!EPackage.Registry.INSTANCE.containsKey(org.eclipse.xtext.XtextPackage.eNS_URI))
-				EPackage.Registry.INSTANCE.put(org.eclipse.xtext.XtextPackage.eNS_URI, org.eclipse.xtext.XtextPackage.eINSTANCE);
-			
-		    registerEPackages();
-		    
-		    return null;
-			
+		// register default ePackages
+		if (!Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("ecore"))
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+				"ecore", new org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl());
+		if (!Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("xmi"))
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+				"xmi", new org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl());
+		if (!EPackage.Registry.INSTANCE.containsKey(org.eclipse.xtext.XtextPackage.eNS_URI))
+			EPackage.Registry.INSTANCE.put(org.eclipse.xtext.XtextPackage.eNS_URI, org.eclipse.xtext.XtextPackage.eINSTANCE);
+		registerEPackages();
+		return null;
 	}
 	
-    
 
 	/**
-	 * initializes all EPackages generated for this language and registers them at EPackage.Registry.INSTANCE
+	 * Initializes all EPackages generated for this language and registers them with EPackage.Registry.INSTANCE
 	 */	
 	public void registerEPackages() {
-		
 	}
 	
 }
