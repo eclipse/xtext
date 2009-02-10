@@ -14,7 +14,6 @@ import org.eclipse.xtext.crossrefs.services.LangATestLanguageGrammarAccess;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 public class CrossRefTest extends AbstractGeneratorTest {
@@ -25,7 +24,7 @@ public class CrossRefTest extends AbstractGeneratorTest {
 	protected void setUp() throws Exception {
 		super.setUp();
 		with(LangATestLanguageStandaloneSetup.class);
-		linkingService = (DefaultLinkingService) ServiceRegistry.getInjector(ILangATestLanguage.SCOPE).getInstance(ILinkingService.class);
+		linkingService = (DefaultLinkingService) get(ILinkingService.class);
 	}
 
 	public void testSimple() throws Exception {
