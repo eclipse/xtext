@@ -10,7 +10,8 @@ import com.google.inject.Binder;
 import com.google.inject.name.Names;
 
 /**
- * GENERATED! Manual modification goes to ActionTestLanguageRuntimeModule
+ * Generated from ServiceConfig.xpt! 
+ * Manual modifications go to ActionTestLanguageRuntimeModule
  */
 public abstract class AbstractActionTestLanguageRuntimeModule extends DefaultRuntimeModule {
 	
@@ -18,7 +19,7 @@ public abstract class AbstractActionTestLanguageRuntimeModule extends DefaultRun
 	public void configure(Binder binder) {
 		super.configure(binder);
 		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance(
-				"org.eclipse.xtext.testlanguages.ActionTestLanguage");
+			"org.eclipse.xtext.testlanguages.ActionTestLanguage");
 	}
 	
 	public Class<? extends org.eclipse.xtext.IMetamodelAccess> bindIMetamodelAccess() {
@@ -54,6 +55,5 @@ public abstract class AbstractActionTestLanguageRuntimeModule extends DefaultRun
 	public Class<? extends org.eclipse.xtext.parser.ISwitchingParser> bindISwitchingParser() {
 		return org.eclipse.xtext.parser.SwitchingParser.class;
 	}
-	
 	
 }

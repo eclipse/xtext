@@ -12,6 +12,9 @@ import org.eclipse.xtext.resource.IResourceFactory;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
+/**
+ * Generated from StandaloneSetup.xpt!
+ */
 public class PartialParserTestLanguageStandaloneSetup implements ISetup {
 
 	public static void doSetup() {
@@ -19,19 +22,15 @@ public class PartialParserTestLanguageStandaloneSetup implements ISetup {
 	}
 
 	public Injector createInjectorAndDoEMFRegistration() {
-			
-			new org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup().doSetup();
-			
-		    registerEPackages();
-		    
-		    Injector injector = createInjector();
-		    IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
-		    registerResourceFactory(resourceFactory);
-		    return injector;
-		    
+		
+		org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
+		registerEPackages();
+		Injector injector = createInjector();
+		IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
+		registerResourceFactory(resourceFactory);
+		return injector;
 	}
 	
-    
 	public Injector createInjector() {
 		return Guice.createInjector(new org.eclipse.xtext.testlanguages.PartialParserTestLanguageRuntimeModule());
 	}
@@ -40,23 +39,20 @@ public class PartialParserTestLanguageStandaloneSetup implements ISetup {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("partialparsertestlanguage", resourceFactory);
 		
 	}
-    
 
 	/**
-	 * initializes all EPackages generated for this language and registers them at EPackage.Registry.INSTANCE
+	 * Initializes all EPackages generated for this language and registers them with EPackage.Registry.INSTANCE
 	 */	
 	public void registerEPackages() {
-		
-			if (!EPackage.Registry.INSTANCE.containsKey("http://example.xtext.org/PartialParserTestLanguage")) {
-				EPackage partialParserTestLanguage = EcoreUtil2.loadEPackage(
-						"classpath:/org/eclipse/xtext/testlanguages/partialParserTestLanguage.ecore",
-						PartialParserTestLanguageStandaloneSetup.class.getClassLoader());
-				if (partialParserTestLanguage == null)
-					throw new IllegalStateException(
-							"Couldn't load EPackage from 'classpath:/org/eclipse/xtext/testlanguages/partialParserTestLanguage.ecore'");
-				EPackage.Registry.INSTANCE.put("http://example.xtext.org/PartialParserTestLanguage", partialParserTestLanguage);
-			}
-		
+		if (!EPackage.Registry.INSTANCE.containsKey("http://example.xtext.org/PartialParserTestLanguage")) {
+			EPackage partialParserTestLanguage = EcoreUtil2.loadEPackage(
+				"classpath:/org/eclipse/xtext/testlanguages/partialParserTestLanguage.ecore",
+				PartialParserTestLanguageStandaloneSetup.class.getClassLoader());
+			if (partialParserTestLanguage == null)
+				throw new IllegalStateException(
+					"Couldn't load EPackage from 'classpath:/org/eclipse/xtext/testlanguages/partialParserTestLanguage.ecore'");
+			EPackage.Registry.INSTANCE.put("http://example.xtext.org/PartialParserTestLanguage", partialParserTestLanguage);
+		}
 	}
 	
 }

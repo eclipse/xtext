@@ -10,7 +10,8 @@ import com.google.inject.Binder;
 import com.google.inject.name.Names;
 
 /**
- * GENERATED! Manual modification goes to FormatterTestLanguageRuntimeModule
+ * Generated from ServiceConfig.xpt! 
+ * Manual modifications go to FormatterTestLanguageRuntimeModule
  */
 public abstract class AbstractFormatterTestLanguageRuntimeModule extends DefaultRuntimeModule {
 	
@@ -18,7 +19,7 @@ public abstract class AbstractFormatterTestLanguageRuntimeModule extends Default
 	public void configure(Binder binder) {
 		super.configure(binder);
 		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance(
-				"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage");
+			"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage");
 	}
 	
 	public Class<? extends org.eclipse.xtext.IMetamodelAccess> bindIMetamodelAccess() {
@@ -54,6 +55,5 @@ public abstract class AbstractFormatterTestLanguageRuntimeModule extends Default
 	public Class<? extends org.eclipse.xtext.parser.ISwitchingParser> bindISwitchingParser() {
 		return org.eclipse.xtext.parser.SwitchingParser.class;
 	}
-	
 	
 }

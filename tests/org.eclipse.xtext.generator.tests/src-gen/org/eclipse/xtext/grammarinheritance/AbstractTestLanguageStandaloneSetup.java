@@ -12,6 +12,9 @@ import org.eclipse.xtext.resource.IResourceFactory;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
+/**
+ * Generated from StandaloneSetup.xpt!
+ */
 public class AbstractTestLanguageStandaloneSetup implements ISetup {
 
 	public static void doSetup() {
@@ -19,22 +22,17 @@ public class AbstractTestLanguageStandaloneSetup implements ISetup {
 	}
 
 	public Injector createInjectorAndDoEMFRegistration() {
-			
-			new org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup().doSetup();
-			
-		    registerEPackages();
-		    
-		    return null;
-			
+		
+		org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
+		registerEPackages();
+		return null;
 	}
 	
-    
 
 	/**
-	 * initializes all EPackages generated for this language and registers them at EPackage.Registry.INSTANCE
+	 * Initializes all EPackages generated for this language and registers them with EPackage.Registry.INSTANCE
 	 */	
 	public void registerEPackages() {
-		
 	}
 	
 }

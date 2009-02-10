@@ -12,6 +12,9 @@ import org.eclipse.xtext.resource.IResourceFactory;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
+/**
+ * Generated from StandaloneSetup.xpt!
+ */
 public class OptionalEmptyTestLanguageStandaloneSetup implements ISetup {
 
 	public static void doSetup() {
@@ -19,19 +22,15 @@ public class OptionalEmptyTestLanguageStandaloneSetup implements ISetup {
 	}
 
 	public Injector createInjectorAndDoEMFRegistration() {
-			
-			new org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup().doSetup();
-			
-		    registerEPackages();
-		    
-		    Injector injector = createInjector();
-		    IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
-		    registerResourceFactory(resourceFactory);
-		    return injector;
-		    
+		
+		org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
+		registerEPackages();
+		Injector injector = createInjector();
+		IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
+		registerResourceFactory(resourceFactory);
+		return injector;
 	}
 	
-    
 	public Injector createInjector() {
 		return Guice.createInjector(new org.eclipse.xtext.testlanguages.OptionalEmptyTestLanguageRuntimeModule());
 	}
@@ -40,23 +39,20 @@ public class OptionalEmptyTestLanguageStandaloneSetup implements ISetup {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("optionalemptytestlanguage", resourceFactory);
 		
 	}
-    
 
 	/**
-	 * initializes all EPackages generated for this language and registers them at EPackage.Registry.INSTANCE
+	 * Initializes all EPackages generated for this language and registers them with EPackage.Registry.INSTANCE
 	 */	
 	public void registerEPackages() {
-		
-			if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/2008/tmf/xtext/OptionalEmpty")) {
-				EPackage OptionalEmpty = EcoreUtil2.loadEPackage(
-						"classpath:/org/eclipse/xtext/testlanguages/OptionalEmpty.ecore",
-						OptionalEmptyTestLanguageStandaloneSetup.class.getClassLoader());
-				if (OptionalEmpty == null)
-					throw new IllegalStateException(
-							"Couldn't load EPackage from 'classpath:/org/eclipse/xtext/testlanguages/OptionalEmpty.ecore'");
-				EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2008/tmf/xtext/OptionalEmpty", OptionalEmpty);
-			}
-		
+		if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/2008/tmf/xtext/OptionalEmpty")) {
+			EPackage OptionalEmpty = EcoreUtil2.loadEPackage(
+				"classpath:/org/eclipse/xtext/testlanguages/OptionalEmpty.ecore",
+				OptionalEmptyTestLanguageStandaloneSetup.class.getClassLoader());
+			if (OptionalEmpty == null)
+				throw new IllegalStateException(
+					"Couldn't load EPackage from 'classpath:/org/eclipse/xtext/testlanguages/OptionalEmpty.ecore'");
+			EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2008/tmf/xtext/OptionalEmpty", OptionalEmpty);
+		}
 	}
 	
 }
