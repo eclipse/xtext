@@ -1,7 +1,5 @@
 package org.eclipse.xtext;
 
-import org.eclipse.xtext.resource.IResourceFactory;
-
 import com.google.inject.Injector;
 
 
