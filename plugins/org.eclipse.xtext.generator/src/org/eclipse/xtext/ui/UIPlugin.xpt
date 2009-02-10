@@ -18,17 +18,17 @@
 
 «DEFINE root FOR GenModel»
 «IF !this.grammar.isAbstract()»
-    «EXPAND Plugin::plugin_xml»
-    «EXPAND ServiceConfig::root»
-    «EXPAND Manifest::manifest_mf»
-    «EXPAND GuiceInjector::root»
-    «EXPAND activator»
-    «copyFiles("org/eclipse/xtext/ui", outletPath("UI") + "/icons/", { "editor.gif" })»  
+	«EXPAND Plugin::plugin_xml»
+	«EXPAND ServiceConfig::root»
+	«EXPAND Manifest::manifest_mf»
+	«EXPAND GuiceInjector::root»
+	«EXPAND activator»
+	«copyFiles("org/eclipse/xtext/ui", outletPath("UI") + "/icons/", { "editor.gif" })»  
 «ENDIF»
 «ENDDEFINE»
 
- «DEFINE activator FOR GenModel»
- «FILE activatorClassFQN().toJavaFilePath() UI_SRC_GEN-»
+«DEFINE activator FOR GenModel»
+«FILE activatorClassFQN().toJavaFilePath() UI_SRC_GEN-»
 package «activatorClassFQN().toJavaPackage()»;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
@@ -37,6 +37,9 @@ import org.osgi.framework.BundleContext;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
+/**
+ * Generated from UIPlugin.xpt
+ */
 public class «activatorClassFQN().toSimpleName()» extends AbstractUIPlugin {
 
 	private Injector injector;
@@ -58,5 +61,5 @@ public class «activatorClassFQN().toSimpleName()» extends AbstractUIPlugin {
 	}
 	
 }
- «ENDFILE»
- «ENDDEFINE»
+«ENDFILE»
+«ENDDEFINE»

@@ -28,19 +28,18 @@
 <?eclipse version="3.0"?>
 
 <plugin>
-    <extension
-         point="org.eclipse.xtend.typesystem.emf.checks">
-      «FOREACH getGeneratedEPackages(grammar()) AS p»
-      <metaModel
-            nsURI="«p.nsURI»">
-         <checkFile
-               path="«languageNamespace().toPath()»/«p.name.toFirstUpper()»Checks.chk">
-         </checkFile>
-      </metaModel>
-      «ENDFOREACH»
-   </extension>
-   
-   «IF generateMergedPluginXml()»«EXPAND org::eclipse::xtext::ui::Plugin::body»«ENDIF»
+	<extension
+		point="org.eclipse.xtend.typesystem.emf.checks">
+	«FOREACH getGeneratedEPackages(grammar()) AS p-»
+		<metaModel
+			nsURI="«p.nsURI»">
+			<checkFile
+				path="«languageNamespace().toPath()»/«p.name.toFirstUpper()»Checks.chk">
+			</checkFile>
+		</metaModel>
+	«ENDFOREACH»
+	</extension>
+	«IF generateMergedPluginXml()»«EXPAND org::eclipse::xtext::ui::Plugin::body»«ENDIF»
 </plugin>
 «ENDFILE»
 «ENDIF»

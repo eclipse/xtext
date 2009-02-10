@@ -18,7 +18,7 @@ boolean generateMergedPluginXml() :
 	GLOBALVAR generateMergedPluginXml;
 	
 nonUiServices(GenModel this):
-    this.services.select(e|e.uiService==false);
+	this.services.select(e|e.uiService==false);
 
 modelFileExtensions() :
 	genModel().modelFileExtensions;
