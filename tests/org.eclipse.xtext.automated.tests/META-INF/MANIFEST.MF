@@ -7,7 +7,6 @@ Bundle-Activator: org.eclipse.xtext.automated.tests.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.junit;bundle-version="3.8.2",
- org.eclipse.xtext.generator.tests,
- org.eclipse.xtext.tests
+ org.eclipse.xtext.generator.tests
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
