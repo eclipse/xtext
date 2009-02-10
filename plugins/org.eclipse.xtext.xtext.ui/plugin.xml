@@ -1,26 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?eclipse version="3.2"?>
+<?eclipse version="3.0"?>
+
 <plugin>
-   <extension
-         point="org.eclipse.ui.newWizards">
-      <category
-            name="Xtext"
-            id="org.eclipse.xtext.projectwiz">
-      </category>
-      <wizard
-            category="org.eclipse.xtext.projectwiz"
-            class="org.eclipse.xtext.xtext.ui.wizard.project.NewXtextProjectWizard"
-            icon="icons/editor.gif"
-            id="org.eclipse.xtext.xtext.ui.wizard.project.NewXtextProjectWizard"
-            name="New Xtext Project"
-            project="true">
-      </wizard>
-   </extension>
-   
-   <extension
+
+<extension
          point="org.eclipse.ui.editors">
       <editor
-            class="org.eclipse.xtext.ui.editor.XtextEditor"
+            class="guice.Aware:org.eclipse.xtext.ui.core.editor.XtextEditor"
             contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
             default="true"
             extensions="xtext,xtext2"
@@ -31,16 +17,16 @@
  <extension
          point="org.eclipse.ui.preferencePages">
 		<page
-			class="org.eclipse.xtext.ui.core.util.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage/org.eclipse.xtext.Xtext"
+			class="guice.Aware:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
 			id="org.eclipse.xtext.Xtext"
 			name="Xtext">
 			<keywordReference
-				id="org.eclipse.xtext.xtext.ui.keyword_Xtext">
+				id="org.eclipse.xtext.ui.keyword_Xtext">
 			</keywordReference>
 		</page>
 		<page
 		    category="org.eclipse.xtext.Xtext"
-		    class="org.eclipse.xtext.ui.core.util.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.EditorPreferencePage/org.eclipse.xtext.Xtext"
+		    class="guice.Aware:org.eclipse.xtext.ui.core.editor.preferences.EditorPreferencePage"
 		    id="org.eclipse.xtext.Xtext.editor"
 		    name="Editor">
 		    	<keywordReference 
@@ -51,7 +37,7 @@
 	<extension
 		point="org.eclipse.ui.keywords">
 		<keyword
-			id="org.eclipse.xtext.xtext.ui.keyword_Xtext"
+			id="org.eclipse.xtext.ui.keyword_Xtext"
 			label="Xtext">
 		</keyword>
 		<keyword
@@ -59,5 +45,23 @@
             label="Task Tags">
         </keyword>
 	</extension>
+	
+	
+	<extension
+         point="org.eclipse.emf.ecore.extension_parser">
+      <parser
+            class="guice.Aware:org.eclipse.xtext.resource.XtextResourceFactory"
+            type="xtext">
+      </parser>
+   </extension>
+	
+	<extension
+         point="org.eclipse.emf.ecore.extension_parser">
+      <parser
+            class="guice.Aware:org.eclipse.xtext.resource.XtextResourceFactory"
+            type="xtext2">
+      </parser>
+   </extension>
+	
 
 </plugin>
