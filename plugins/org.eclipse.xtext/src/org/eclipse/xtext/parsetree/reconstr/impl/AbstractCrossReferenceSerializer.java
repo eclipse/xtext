@@ -8,16 +8,19 @@
 package org.eclipse.xtext.parsetree.reconstr.impl;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.parsetree.reconstr.ICrossReferenceSerializer;
+import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class DefaultTransientValueService extends AbstractTransientValueService {
-	
-	@Override
-	public boolean isTransient(EObject owner, EStructuralFeature feature, int index) {
-		return !owner.eIsSet(feature);
+public class AbstractCrossReferenceSerializer implements
+		ICrossReferenceSerializer {
+
+	public String serializeCrossRef(IInstanceDescription container,
+			CrossReference grammarElement, EObject target) {
+		return null;
 	}
 
 }

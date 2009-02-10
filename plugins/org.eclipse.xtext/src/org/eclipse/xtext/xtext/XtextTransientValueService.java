@@ -25,14 +25,14 @@ import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextPackage;
-import org.eclipse.xtext.parsetree.reconstr.impl.SimpleTransientValueService;
+import org.eclipse.xtext.parsetree.reconstr.impl.DefaultTransientValueService;
 import org.eclipse.xtext.util.Strings;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  * @author Sebastian Zarnekow
  */
-public class XtextTransientValueService extends SimpleTransientValueService {
+public class XtextTransientValueService extends DefaultTransientValueService {
 
 	@Override
 	public boolean isTransient(EObject owner, EStructuralFeature feature, int index) {

@@ -94,7 +94,7 @@ public class GenerateAllTestGrammars {
 
 	public static void main(String... args) throws Exception {
 		try {
-			XtextStandaloneSetup.doSetup();
+			new XtextStandaloneSetup().createInjectorAndDoEMFRegistration();
 			if (args.length > 0) {
 				path = args[0];
 			}

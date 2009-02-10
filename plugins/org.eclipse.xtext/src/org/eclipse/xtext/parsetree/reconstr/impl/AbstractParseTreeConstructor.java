@@ -22,14 +22,13 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.IXtext;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
+import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
 import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
 import org.eclipse.xtext.parsetree.reconstr.XtextSerializationException;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
-import org.eclipse.xtext.service.ServiceRegistry;
 
 import com.google.inject.Inject;
 
@@ -173,13 +172,14 @@ public abstract class AbstractParseTreeConstructor implements
 				b.append(" ");
 			return b.toString();
 		}
-
+		
+		@Inject
+		protected ITokenSerializer tokenSerializer;
+		
 		private String dsl(AbstractToken ele) {
 			ByteArrayOutputStream out = new ByteArrayOutputStream();
 			try {
-				SimpleTokenSerializer sts = new SimpleTokenSerializer();
-				ServiceRegistry.getInjector(IXtext.SCOPE).injectMembers(sts);
-				sts.serialize(ele, out);
+				tokenSerializer.serialize(ele, out);
 			} catch (Throwable e) {
 				e.printStackTrace();
 				return "Error: " + e.getMessage();

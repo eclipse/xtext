@@ -82,7 +82,6 @@ public class PluginTestSuite {
 		suite.addTestSuite(org.eclipse.xtext.resource.metamodel.ResourceTests.class);
 		suite.addTestSuite(org.eclipse.xtext.resource.metamodel.TypeHierarchyHelperTests.class);
 		suite.addTestSuite(org.eclipse.xtext.resource.metamodel.Xtext2EcoreTransformerTest.class);		
-		suite.addTestSuite(org.eclipse.xtext.resource.metamodel.XtextMetamodelResourceTest.class);		
 		suite.addTestSuite(org.eclipse.xtext.valueconverter.Bug250313.class);		
 		suite.addTestSuite(org.eclipse.xtext.xtext.ExceptionTest.class);		
 		suite.addTestSuite(org.eclipse.xtext.xtext.ResourceLoadTest.class);		

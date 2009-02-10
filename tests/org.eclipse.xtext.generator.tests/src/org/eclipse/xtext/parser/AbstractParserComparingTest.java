@@ -8,6 +8,7 @@
 package org.eclipse.xtext.parser;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.parsetree.ParsetreePackage;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
@@ -36,7 +37,7 @@ public abstract class AbstractParserComparingTest extends AbstractGeneratorTest 
 		secondHelper = new ParserTestHelper(getResourceFactory(), secondParser);
 	}
 
-	protected abstract Class<?> getStandaloneSetupClass();
+	protected abstract Class<? extends ISetup> getStandaloneSetupClass();
 
 	protected abstract IParser createFirstParser();
 	protected abstract IParser createSecondParser();

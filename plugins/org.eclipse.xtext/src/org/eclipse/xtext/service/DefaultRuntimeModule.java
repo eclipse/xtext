@@ -18,16 +18,49 @@ import org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.parser.antlr.NullTokenDefProvider;
 import org.eclipse.xtext.parser.packrat.ParseResultFactory;
+import org.eclipse.xtext.parsetree.reconstr.ICrossReferenceSerializer;
+import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
+import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
+import org.eclipse.xtext.parsetree.reconstr.impl.DefaultCrossReferenceSerializer;
+import org.eclipse.xtext.parsetree.reconstr.impl.DefaultTokenSerializer;
+import org.eclipse.xtext.parsetree.reconstr.impl.DefaultTransientValueService;
+import org.eclipse.xtext.parsetree.reconstr.impl.WhitespacePreservingTokenSerializer;
 import org.eclipse.xtext.resource.DefaultFragmentProvider;
 import org.eclipse.xtext.resource.IFragmentProvider;
+import org.eclipse.xtext.resource.IResourceFactory;
+import org.eclipse.xtext.resource.XtextResourceFactory;
+
+import com.google.inject.Binder;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
+ * @author Sven Efftinge
  */
-public abstract class DefaultRuntimeModule extends AbstractXtextModule {
-
+public abstract class DefaultRuntimeModule extends AbstractGenericModule {
+	
+	@Override
+	public void configure(Binder binder) {
+		super.configure(binder);
+	}
+	
 	public Class<? extends IFragmentProvider> bindIFragmentProvider() {
 		return DefaultFragmentProvider.class;
+	}
+	
+	public Class<? extends ITransientValueService> bindITransientValueService() {
+		return DefaultTransientValueService.class;
+	}
+	
+	public Class<? extends ICrossReferenceSerializer> bindICrossReferenceSerializer() {
+		return DefaultCrossReferenceSerializer.class;
+	}
+	
+	public Class<? extends ITokenSerializer> bindITokenSerializer() {
+		return WhitespacePreservingTokenSerializer.class;
+	}
+	
+	public Class<? extends IResourceFactory> bindIResourceFactory() {
+		return XtextResourceFactory.class;
 	}
 
 	public Class<? extends ILinkingService> bindILinkingService() {
@@ -62,4 +95,7 @@ public abstract class DefaultRuntimeModule extends AbstractXtextModule {
 		return NullTokenDefProvider.class;
 	}
 
+	public Class<? extends org.eclipse.xtext.parser.IAstFactory> bindIAstFactory() {
+		return org.eclipse.xtext.parser.DefaultEcoreElementFactory.class;
+	}
 }

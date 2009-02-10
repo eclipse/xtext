@@ -30,7 +30,7 @@ public class ToEcoreTrafoTest extends AbstractGeneratorTest {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		with(XtextStandaloneSetup.class);
+		with(new XtextStandaloneSetup());
 	}
 
 	public void testAbstractLanguageToMetamodel() throws Exception {

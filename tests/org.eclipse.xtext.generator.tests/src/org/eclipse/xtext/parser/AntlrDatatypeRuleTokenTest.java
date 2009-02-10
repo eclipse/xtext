@@ -5,9 +5,10 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.parser.antlr;
+package org.eclipse.xtext.parser;
 
 import org.antlr.runtime.CommonToken;
+import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
 import org.eclipse.xtext.parser.impl.DatatypeRuleToken;
 
 import junit.framework.TestCase;

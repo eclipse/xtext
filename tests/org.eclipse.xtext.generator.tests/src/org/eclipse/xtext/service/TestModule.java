@@ -4,20 +4,24 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
+ *
  *******************************************************************************/
-package org.eclipse.xtext.parsetree.reconstr.impl;
+package org.eclipse.xtext.service;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
+import java.lang.reflect.Type;
 
-/**
- * @author Moritz Eysholdt - Initial contribution and API
- */
-public class DefaultTransientValueService extends AbstractTransientValueService {
-	
-	@Override
-	public boolean isTransient(EObject owner, EStructuralFeature feature, int index) {
-		return !owner.eIsSet(feature);
+import junit.framework.TestCase;
+
+public class TestModule extends AbstractGenericModule {
+	public Class<? extends CharSequence> bindString() {
+		return String.class;
 	}
 
+	public Class<? extends Type> bindType() {
+		return Class.class;
+	}
+
+	public Class<? extends TestCase> bindTestCase() {
+		return AbstractGenericModuleTest.class;
+	}
 }

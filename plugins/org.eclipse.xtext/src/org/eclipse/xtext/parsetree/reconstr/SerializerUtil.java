@@ -5,31 +5,32 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.service.IServiceScope;
-import org.eclipse.xtext.service.ServiceRegistry;
+
+import com.google.inject.Inject;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class SerializerUtil {
-	public static void serialize(IParseTreeConstructor astSerializer,
-			ITokenSerializer tokenSerializer, EObject obj, OutputStream out)
+	
+	private IParseTreeConstructor parseTreeReconstructor;
+	private ITokenSerializer tokenSerializer;
+
+	@Inject
+	public SerializerUtil(IParseTreeConstructor ptc, ITokenSerializer tokenserializer) {
+		this.parseTreeReconstructor = ptc;
+		this.tokenSerializer = tokenserializer;
+	}
+	
+	public void serialize(EObject obj, OutputStream out)
 			throws IOException {
-		tokenSerializer.serialize(astSerializer.serialize(obj), out);
+		tokenSerializer.serialize(parseTreeReconstructor.serialize(obj), out);
 	}
 
-	public static void serialize(IServiceScope scope, EObject obj, OutputStream out)
-			throws IOException {
-		//TODO god kills a kitten every time you use ServiceRegistry directly! 
-		IParseTreeConstructor astSer = ServiceRegistry.getInjector(scope).getInstance(IParseTreeConstructor.class);
-		ITokenSerializer tSer = ServiceRegistry.getInjector(scope).getInstance(ITokenSerializer.class);
-		serialize(astSer, tSer, obj, out);
-	}
-
-	public static String serialize(IServiceScope scope, EObject obj) {
+	public String serialize(EObject obj) {
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		try {
-			serialize(scope, obj, out);
+			serialize(obj, out);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}

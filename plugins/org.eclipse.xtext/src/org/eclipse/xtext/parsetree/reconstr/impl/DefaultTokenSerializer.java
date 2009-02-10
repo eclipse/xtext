@@ -10,16 +10,139 @@ package org.eclipse.xtext.parsetree.reconstr.impl;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.parsetree.reconstr.ICrossReferenceSerializer;
+import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.IAbstractToken;
+import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.IAssignmentToken;
+import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.IKeywordToken;
+
+import com.google.inject.Inject;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class DefaultTokenSerializer implements ITokenSerializer {
+public class DefaultTokenSerializer extends AbstractTokenSerializer {
 
+	@Inject
+	protected IValueConverterService converterService;
+
+	@Inject
+	protected ICrossReferenceSerializer crossRefSerializer;
+
+	protected boolean outputHasStarted;
+
+	protected OutputStream out;
+
+	/**
+	 * @throws IOException  
+	 */
+	protected void afterElement(IInstanceDescription curr, AbstractElement ele) throws IOException {
+	}
+
+	/**
+	 * @throws IOException  
+	 */
+	protected void afterToken(IAbstractToken token) throws IOException {
+	}
+
+	protected void append(String str) throws IOException {
+		if (str == null)
+			out.write("null".getBytes());
+		else
+			out.write(str.getBytes());
+		outputHasStarted = true;
+	}
+
+	protected void beforeElement(IInstanceDescription curr, AbstractElement ele) throws IOException {
+		if (outputHasStarted)
+			append(" ");
+	}
+
+	/**
+	 * @throws IOException  
+	 */
+	protected void beforeToken(IAbstractToken token) throws IOException {
+	}
+
+	protected void elementCrossRef(IInstanceDescription current,
+			CrossReference call, EObject value) throws IOException {
+		beforeElement(current, call);
+		append(crossRefSerializer.serializeCrossRef(current, call, value));
+		afterElement(current, call);
+	}
+
+	protected void elementKeyword(IInstanceDescription current, Keyword call)
+			throws IOException {
+		beforeElement(current, call);
+		append(call.getValue());
+		afterElement(current, call);
+	}
+
+	protected void elementLexerRuleCall(IInstanceDescription current,
+			RuleCall call, Object value) throws IOException {
+		beforeElement(current, call);
+		append(converterService.toString(value, call.getRule().getName()));
+		afterElement(current, call);
+	}
+
+	@Override
 	public void serialize(IAbstractToken firstToken, OutputStream out) throws IOException {
+		outputHasStarted = false;
+		this.out = out;
+		for (IAbstractToken t = firstToken; t != null; t = t.getNext()) {
+			beforeToken(t);
+			token(t);
+			afterToken(t);
+		}
+	}
+
+	protected void token(IAbstractToken t) throws IOException {
+		if (t instanceof IKeywordToken)
+			tokenKeyword((IKeywordToken) t);
+		else if (t instanceof IAssignmentToken)
+			tokenAssignment((IAssignmentToken) t);
+	}
+
+	protected void tokenAssignment(IAssignmentToken ass) throws IOException {
+		if (ass == null || ass.getType() == null)
+			return;
+		switch (ass.getType()) {
+		case CR:
+			elementCrossRef(ass.getCurrent(), (CrossReference) ass
+					.getAssignmentElement(), (EObject) ass.getValue());
+			break;
+		case KW:
+			elementKeyword(ass.getCurrent(), (Keyword) ass
+					.getAssignmentElement());
+			break;
+		case LRC:
+			elementLexerRuleCall(ass.getCurrent(), (RuleCall) ass
+					.getAssignmentElement(), ass.getValue());
+			break;
+		case PRC: 
+			final RuleCall ruleCall = (RuleCall) ass.getAssignmentElement();
+			if (ruleCall != null) {
+				final ParserRule parserRule = (ParserRule) ruleCall.getRule();
+				if (GrammarUtil.isDatatypeRule(parserRule)) {
+					elementLexerRuleCall(ass.getCurrent(), ruleCall, ass.getValue());	
+				}
+			}
+			break;
+		default:
+			break;
+		}
 
 	}
 
+	protected void tokenKeyword(IKeywordToken kw) throws IOException {
+		elementKeyword(kw.getCurrent(), kw.getGrammarElement());
+	}
 }

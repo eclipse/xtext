@@ -7,12 +7,12 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.xtext.parsetree.reconstr.impl.SimpleTransientValueService;
+import org.eclipse.xtext.parsetree.reconstr.impl.DefaultTransientValueService;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class TransientHandler extends SimpleTransientValueService {
+public class TransientHandler extends DefaultTransientValueService {
 
 	public boolean isTransient(EObject owner, EStructuralFeature feature,
 			int index) {

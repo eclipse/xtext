@@ -18,7 +18,7 @@ import org.eclipse.xtext.parsetree.reconstr.impl.AbstractFormattingConfig.Config
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public abstract class FormattingTokenSerializer extends SimpleTokenSerializer {
+public abstract class FormattingTokenSerializer extends DefaultTokenSerializer {
 
 	protected FormattingConfig config;
 
