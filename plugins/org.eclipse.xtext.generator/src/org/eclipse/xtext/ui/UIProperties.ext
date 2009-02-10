@@ -24,10 +24,13 @@ packageName(GenModel this):
 //	this.packageName();
     
 editorClassFQN(GenModel this):
-    packageName() + ".ui.editor." + this.grammar.getName()+"Editor";
+    "org.eclipse.xtext.ui.core.editor.XtextEditor";
 
 activatorClassFQN(GenModel this):
     packageName() + ".ui.internal." + this.grammar.getName()+"Activator";
+    
+guiceInjectorClass(GenModel this) :
+	"guice.Aware";
     
 //editorPackage(GenModel this):
 //    packageName() + ".ui.editor";

@@ -16,7 +16,6 @@
 «EXTENSION org::eclipse::xtext::ecore::Xtext2Ecore»
 
 «DEFINE root FOR GenModel»
-«EXPAND ILanguage::root»
 «EXPAND StandaloneSetup::root»
 «EXPAND ServiceConfig::root»
 «EXPAND pluginxml»
@@ -40,15 +39,6 @@
       </metaModel>
       «ENDFOREACH»
    </extension>
-   «FOREACH modelFileExtensions() AS modelFileExtension-»
-   <extension
-         point="org.eclipse.emf.ecore.extension_parser">
-      <parser
-            class="«resourceFactoryService().genClassFQName»"
-            type="«modelFileExtension»">
-      </parser>
-   </extension>
-   «ENDFOREACH-»
    
    «IF generateMergedPluginXml()»«EXPAND org::eclipse::xtext::ui::Plugin::body»«ENDIF»
 </plugin>

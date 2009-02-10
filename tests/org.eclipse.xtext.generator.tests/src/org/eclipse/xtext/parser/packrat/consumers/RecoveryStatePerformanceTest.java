@@ -9,6 +9,8 @@ package org.eclipse.xtext.parser.packrat.consumers;
 
 import java.util.ArrayList;
 
+import org.eclipse.xtext.parser.packrat.consumers.RecoveryState;
+
 import junit.framework.TestCase;
 
 /**

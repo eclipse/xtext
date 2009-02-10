@@ -9,6 +9,8 @@ package org.eclipse.xtext.parser.packrat.consumers;
 
 import java.util.Iterator;
 
+import org.eclipse.xtext.parser.packrat.consumers.RecoveryState;
+
 import junit.framework.TestCase;
 
 /**

@@ -7,13 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree;
 
+import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class AbstractNodeTest extends AbstractGeneratorTest {
+public class AbstractNodeTest extends AbstractXtextTests {
 
 	private AbstractNode rootNode;
 	

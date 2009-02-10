@@ -12,7 +12,7 @@ import java.lang.reflect.Type;
 
 import junit.framework.TestCase;
 
-public class TestModule extends AbstractXtextModule {
+public class TestModule extends AbstractGenericModule {
 	public Class<? extends CharSequence> bindString() {
 		return String.class;
 	}
@@ -22,6 +22,6 @@ public class TestModule extends AbstractXtextModule {
 	}
 
 	public Class<? extends TestCase> bindTestCase() {
-		return AbstractRuntimeModuleTest.class;
+		return AbstractGenericModuleTest.class;
 	}
 }

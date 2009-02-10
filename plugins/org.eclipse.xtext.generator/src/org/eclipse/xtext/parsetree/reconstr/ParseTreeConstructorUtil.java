@@ -19,13 +19,11 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.GeneratorFacade;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
-import org.eclipse.xtext.IXtext;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.parsetree.reconstr.impl.SimpleTokenSerializer;
-import org.eclipse.xtext.service.ServiceRegistry;
 
 public class ParseTreeConstructorUtil {
 
@@ -87,21 +85,12 @@ public class ParseTreeConstructorUtil {
 		return "UnknownRule_" + r;
 	}
 
-	private static IParseTreeConstructor AST_SERIALIZER = ServiceRegistry.getInjector(IXtext.SCOPE).getInstance(
-			IParseTreeConstructor.class);
-	private static ITokenSerializer TOKEN_SERIALIZER = createTokenSerializer();
-
-	private static ITokenSerializer createTokenSerializer() {
-		ITokenSerializer ts = new SimpleTokenSerializer();
-		ServiceRegistry.getInjector(IXtext.SCOPE).injectMembers(ts);
-		return ts;
-	}
-
 	public static String grammarFragmentToStr(EObject obj) {
 		try {
 			ByteArrayOutputStream out = new ByteArrayOutputStream();
-			SerializerUtil.serialize(AST_SERIALIZER, TOKEN_SERIALIZER, obj, out);
-			return out.toString();
+			GeneratorFacade.getSerializer().serialize(obj, out);
+			String trim = out.toString().trim().replace('\n', ' ').replace('\r', ' ');
+			return trim;
 		}
 		catch (Throwable e) {
 			log.warn(e.getMessage());

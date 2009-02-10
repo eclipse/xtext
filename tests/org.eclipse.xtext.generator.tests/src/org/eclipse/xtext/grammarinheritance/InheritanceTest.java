@@ -16,7 +16,7 @@ public class InheritanceTest extends AbstractGeneratorTest {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		with(ConcreteTestLanguageStandaloneSetup.class);
+		with(new ConcreteTestLanguageRuntimeModule());
 	}
 
 	public void testSimple() throws Exception {
