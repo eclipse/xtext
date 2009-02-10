@@ -10,7 +10,8 @@ import com.google.inject.Binder;
 import com.google.inject.name.Names;
 
 /**
- * GENERATED! Manual modification goes to ReferenceGrammarRuntimeModule
+ * Generated from ServiceConfig.xpt! 
+ * Manual modifications go to ReferenceGrammarRuntimeModule
  */
 public abstract class AbstractReferenceGrammarRuntimeModule extends DefaultRuntimeModule {
 	
@@ -18,7 +19,7 @@ public abstract class AbstractReferenceGrammarRuntimeModule extends DefaultRunti
 	public void configure(Binder binder) {
 		super.configure(binder);
 		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance(
-				"org.eclipse.xtext.reference.ReferenceGrammar");
+			"org.eclipse.xtext.reference.ReferenceGrammar");
 	}
 	
 	public Class<? extends org.eclipse.xtext.IMetamodelAccess> bindIMetamodelAccess() {
@@ -54,6 +55,5 @@ public abstract class AbstractReferenceGrammarRuntimeModule extends DefaultRunti
 	public Class<? extends org.eclipse.xtext.parser.ISwitchingParser> bindISwitchingParser() {
 		return org.eclipse.xtext.parser.SwitchingParser.class;
 	}
-	
 	
 }
