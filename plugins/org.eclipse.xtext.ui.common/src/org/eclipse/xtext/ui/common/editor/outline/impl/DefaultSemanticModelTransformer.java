@@ -8,20 +8,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.outline.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.log4j.Logger;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.text.Region;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.NodeAdapter;
-import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
+import org.eclipse.xtext.ui.core.ILocationInFileProvider;
+
+import com.google.inject.Inject;
 
 /**
  * @author Peter Friese - Initial contribution and API
@@ -29,6 +23,9 @@ import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
 public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransformer {
 	
 	final static Logger logger = Logger.getLogger(AbstractSemanticModelTransformer.class);
+	
+	@Inject
+	private ILocationInFileProvider locationProvider;
 
 	public boolean consumeSemanticNode(EObject semanticNode) {
 		if (semanticNode != null) {
@@ -71,15 +68,9 @@ public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransf
 			outlineNode.setImage(image);
 		}
 
-		NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(semanticNode);
-		if (nodeAdapter != null) {
-			CompositeNode parserNode = nodeAdapter.getParserNode();
-			if (parserNode != null) {
-				SelectionCoordinates selectionNodeCoordinates = getSelectionNodeCoordinates(parserNode);
-				outlineNode.setSelectionOffset(selectionNodeCoordinates.getOffset());
-				outlineNode.setSelectionLength(selectionNodeCoordinates.getLength());
-			}
-		}
+		Region location = locationProvider.getLocation(semanticNode);
+		outlineNode.setSelectionOffset(location.getOffset());
+		outlineNode.setSelectionLength(location.getLength());
 
 		// link with parent
 		if (outlineParentNode != null) {
@@ -106,75 +97,5 @@ public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransf
 		outlineAdapter.setContentOutlineNode(outlineNode);
 
 		return outlineNode;
-	}
-
-	// TODO should we extract and reuse PartialParsingUtil.Range?
-	private class SelectionCoordinates {
-		private int offset;
-		private int length;
-
-		public SelectionCoordinates(int offset, int length) {
-			this.setOffset(offset);
-			this.setLength(length);
-		}
-
-		public void setLength(int length) {
-			this.length = length;
-		}
-
-		public int getLength() {
-			return length;
-		}
-
-		public void setOffset(int offset) {
-			this.offset = offset;
-		}
-
-		public int getOffset() {
-			return offset;
-		}
-	}
-
-	// TODO this should really be protected to enable subclasses to implement another behavior
-	protected SelectionCoordinates getSelectionNodeCoordinates(CompositeNode startNode) {
-		EList<AbstractNode> leafNodes = startNode.getChildren();
-		AbstractNode keywordNode = null;
-		List<AbstractNode> idNodes = null;
-		for (AbstractNode leafNode : leafNodes) {
-			EObject grammarElement = leafNode.getGrammarElement();
-			if (grammarElement instanceof RuleCall) {
-				RuleCall ruleCall = (RuleCall) grammarElement;
-				String ruleName = ruleCall.getRule().getName();
-
-				// TODO usually we use the name feature if the instead of the id call
-				// LeafNode.getFeature()
-				if (ruleName.equals("ID")) {
-					if (idNodes == null) {
-						idNodes = new ArrayList<AbstractNode>();
-					}
-					idNodes.add(leafNode);
-				}
-			}
-			else if (grammarElement instanceof Keyword) {
-				if (keywordNode == null) {
-					keywordNode = leafNode;
-				}
-			}
-		}
-
-		if (idNodes != null) {
-			// if we've got more than one ID elements, we want to select
-			// them all
-			AbstractNode firstIdNode = idNodes.get(0);
-			AbstractNode lastIdNode = idNodes.get(idNodes.size() - 1);
-			int length = (lastIdNode.getOffset() - firstIdNode.getOffset()) + lastIdNode.getLength();
-			return new SelectionCoordinates(firstIdNode.getOffset(), length);
-		}
-		else if (keywordNode != null) {
-			return new SelectionCoordinates(keywordNode.getOffset(), keywordNode.getLength());
-		}
-		else {
-			return new SelectionCoordinates(startNode.getOffset(), startNode.getLength());
-		}
 	}
 }
