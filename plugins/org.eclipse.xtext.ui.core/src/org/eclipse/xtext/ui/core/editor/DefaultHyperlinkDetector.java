@@ -32,6 +32,7 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.crossref.ILinkingService;
+import org.eclipse.xtext.crossref.impl.IllegalNodeException;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.LeafNode;
@@ -135,8 +136,12 @@ public class DefaultHyperlinkDetector extends org.eclipse.core.commands.Abstract
 		if (node instanceof LeafNode && node.getGrammarElement() instanceof CrossReference) {
 			EObject semanticModel = NodeUtil.getNearestSemanticObject(node);
 			EReference eReference = GrammarUtil.getReference((CrossReference) node.getGrammarElement(),
-					semanticModel.eClass());	
-			return linkingService.getLinkedObjects(semanticModel, eReference, (LeafNode) node);
+					semanticModel.eClass());
+			try {
+				return linkingService.getLinkedObjects(semanticModel, eReference, node);
+			} catch (IllegalNodeException ex) {
+				return Collections.emptyList();
+			}
 		}
 		return Collections.emptyList();
 	}

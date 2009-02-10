@@ -35,6 +35,7 @@ public final class XtextGrammarTestLanguageTypeRefConsumer extends NonTerminalCo
 		keyword$6$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
+	@Override
 	protected int doConsume(int entryPoint) throws Exception {
 		return consumeGroup$1(entryPoint);
 	}

@@ -31,6 +31,7 @@ public final class EcoreDslSTRING_OR_QIDConsumer extends NonTerminalConsumer {
 		ruleCall$2$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
+	@Override
 	protected int doConsume(int entryPoint) throws Exception {
 		return consumeAlternatives$1(entryPoint);
 	}

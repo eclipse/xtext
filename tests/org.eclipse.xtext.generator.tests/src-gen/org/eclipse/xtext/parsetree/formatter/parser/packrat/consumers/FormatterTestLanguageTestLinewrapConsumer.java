@@ -29,6 +29,7 @@ public final class FormatterTestLanguageTestLinewrapConsumer extends NonTerminal
 		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
+	@Override
 	protected int doConsume(int entryPoint) throws Exception {
 		return consumeGroup$1(entryPoint);
 	}

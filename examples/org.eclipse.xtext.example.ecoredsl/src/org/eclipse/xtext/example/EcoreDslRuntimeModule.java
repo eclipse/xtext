@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.ETypedElement;
-import org.eclipse.emf.ecore.impl.EcoreFactoryImpl;
+import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.xtext.builtin.conversion.XtextBuiltInConverters;
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverter;
@@ -28,8 +28,6 @@ import org.eclipse.xtext.crossref.internal.Linker;
 import org.eclipse.xtext.diagnostics.IDiagnosticProducer;
 import org.eclipse.xtext.parser.DefaultEcoreElementFactory;
 import org.eclipse.xtext.parsetree.AbstractNode;
-
-import com.google.inject.Binder;
 
 /**
  * Used to register components to be used within the IDE.
@@ -42,19 +40,16 @@ public class EcoreDslRuntimeModule extends AbstractEcoreDslRuntimeModule {
 	protected final Logger logger = Logger.getLogger(getClass());
 	
 	@Override
-	public void configure(Binder binder) {
-		super.configure(binder);
-	}
-	
-	
 	public Class<? extends org.eclipse.xtext.crossref.ILinker> bindILinker() {
 		return EcoreDslRuntimeModule.EcoreDslLinker.class;
 	}
 	
+	@Override
 	public Class<? extends org.eclipse.xtext.parser.IAstFactory> bindIAstFactory() {
 		return EcoreDslRuntimeModule.EcoreDslElementFactory.class;
 	}
 	
+	@Override
 	public Class<? extends org.eclipse.xtext.conversion.IValueConverterService> bindIValueConverterService() {
 		return EcoreDslRuntimeModule.EcoreDslConverters.class;
 	}
@@ -64,6 +59,7 @@ public class EcoreDslRuntimeModule extends AbstractEcoreDslRuntimeModule {
 		@ValueConverter(rule = "SINT")
 		public IValueConverter<Integer> SINT() {
 			return new AbstractToStringConverter<Integer>() {
+				@Override
 				public Integer internalToValue(String string, AbstractNode node) {
 					return Integer.valueOf(string);
 				}
@@ -81,11 +77,12 @@ public class EcoreDslRuntimeModule extends AbstractEcoreDslRuntimeModule {
 		protected void setDefaultValueImpl(EObject obj, EReference ref, IDiagnosticProducer producer) {
 			//hack: ePackage always needs an eFactoryInstance (gets cleared in #clearReferences?)
 			if (ref.getName().equalsIgnoreCase("eFactoryInstance")) {
-				((EPackage) obj).setEFactoryInstance(EcoreFactoryImpl.eINSTANCE.createEFactory());
+				((EPackage) obj).setEFactoryInstance(EcoreFactory.eINSTANCE.createEFactory());
 			}
 			super.setDefaultValueImpl(obj, ref, producer);
 		}
 
+		@Override
 		protected void clearReferences(EObject obj) {
 			EList<EReference> allReferences = obj instanceof EClass ? ((EClass) obj).getEAllReferences() : obj.eClass()
 					.getEAllReferences();

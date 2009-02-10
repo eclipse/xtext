@@ -34,6 +34,7 @@ public final class LexerTestLanguageElementConsumer extends NonTerminalConsumer 
 		ruleCall$3$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
+	@Override
 	protected int doConsume(int entryPoint) throws Exception {
 		return consumeGroup$1(entryPoint);
 	}

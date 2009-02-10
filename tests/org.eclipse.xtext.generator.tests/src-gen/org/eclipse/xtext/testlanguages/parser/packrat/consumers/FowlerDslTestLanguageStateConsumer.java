@@ -49,6 +49,7 @@ public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsume
 		ruleCall$7$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
+	@Override
 	protected int doConsume(int entryPoint) throws Exception {
 		return consumeGroup$1(entryPoint);
 	}

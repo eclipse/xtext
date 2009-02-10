@@ -38,6 +38,7 @@ public final class SimpleReconstrTestLanguageBooleanConsumer extends NonTerminal
 		ruleCall$9$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
+	@Override
 	protected int doConsume(int entryPoint) throws Exception {
 		return consumeGroup$1(entryPoint);
 	}

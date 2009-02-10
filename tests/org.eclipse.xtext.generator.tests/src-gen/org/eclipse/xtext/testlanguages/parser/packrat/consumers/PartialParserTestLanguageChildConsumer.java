@@ -38,6 +38,7 @@ public final class PartialParserTestLanguageChildConsumer extends NonTerminalCon
 		keyword$10$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
+	@Override
 	protected int doConsume(int entryPoint) throws Exception {
 		return consumeGroup$1(entryPoint);
 	}

@@ -26,6 +26,7 @@ public final class OptionalEmptyTestLanguageModelConsumer extends NonTerminalCon
 		super(configuration, hiddenTokens);
 	}
 	
+	@Override
 	protected int doConsume(int entryPoint) throws Exception {
 		return consumeAssignment$1(entryPoint);
 	}

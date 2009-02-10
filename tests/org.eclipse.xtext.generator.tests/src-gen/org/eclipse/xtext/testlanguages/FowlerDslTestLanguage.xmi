@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:xtext="http://www.eclipse.org/2008/Xtext" name="org.eclipse.xtext.testlanguages.FowlerDslTestLanguage">
+  <superGrammar href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#/"/>
   <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="fowlerdsl">
     <ePackage href="http://example.xtext.org/FowlerDslTestLanguage#/"/>
   </metamodelDeclarations>
@@ -44,13 +45,13 @@
         </abstractTokens>
         <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
           <terminal xsi:type="xtext:RuleCall">
-            <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+            <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.0"/>
           </terminal>
         </abstractTokens>
       </abstractTokens>
       <abstractTokens xsi:type="xtext:Assignment" feature="code" operator="=">
         <terminal xsi:type="xtext:RuleCall">
-          <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+          <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.0"/>
         </terminal>
       </abstractTokens>
     </alternatives>
@@ -62,12 +63,12 @@
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
         <terminal xsi:type="xtext:RuleCall">
-          <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+          <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.0"/>
         </terminal>
       </abstractTokens>
       <abstractTokens xsi:type="xtext:Assignment" feature="code" operator="=">
         <terminal xsi:type="xtext:RuleCall">
-          <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+          <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.0"/>
         </terminal>
       </abstractTokens>
     </alternatives>
@@ -83,7 +84,7 @@
             <abstractTokens xsi:type="xtext:Keyword" value="state"/>
             <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
               <terminal xsi:type="xtext:RuleCall">
-                <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+                <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.0"/>
               </terminal>
             </abstractTokens>
           </abstractTokens>
@@ -98,7 +99,7 @@
                   <type metamodel="//@metamodelDeclarations.0">
                     <type xsi:type="ecore:EClass" href="http://example.xtext.org/FowlerDslTestLanguage#//Command"/>
                   </type>
-                  <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+                  <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.0"/>
                 </terminal>
               </abstractTokens>
             </abstractTokens>
@@ -123,7 +124,7 @@
             <type metamodel="//@metamodelDeclarations.0">
               <type xsi:type="ecore:EClass" href="http://example.xtext.org/FowlerDslTestLanguage#//Event"/>
             </type>
-            <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+            <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.0"/>
           </terminal>
         </abstractTokens>
         <abstractTokens xsi:type="xtext:Keyword" value="=>"/>
@@ -133,7 +134,7 @@
           <type metamodel="//@metamodelDeclarations.0">
             <type xsi:type="ecore:EClass" href="http://example.xtext.org/FowlerDslTestLanguage#//State"/>
           </type>
-          <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+          <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.0"/>
         </terminal>
       </abstractTokens>
     </alternatives>

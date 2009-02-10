@@ -30,6 +30,7 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.crossref.ILinkingService;
+import org.eclipse.xtext.crossref.impl.IllegalNodeException;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
@@ -186,10 +187,11 @@ public class DefaultContentAssistCalculator extends XtextSwitch<List<AbstractEle
 
 		if (referencedObjects.isEmpty())
 			return false;
-		else {
-			List<EObject> linkCandidates = linkingService.getLinkedObjects(semanticModel, eReference,
-					(LeafNode) lastCompleteNode);
+		try {
+			List<EObject> linkCandidates = linkingService.getLinkedObjects(semanticModel, eReference, lastCompleteNode);
 			return !linkCandidates.isEmpty() && referencedObjects.containsAll(linkCandidates);
+		} catch( IllegalNodeException ex) {
+			return false;
 		}
 	}
 	

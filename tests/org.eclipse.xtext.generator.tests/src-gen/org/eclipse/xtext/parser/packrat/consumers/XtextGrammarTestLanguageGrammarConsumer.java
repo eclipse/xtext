@@ -75,6 +75,7 @@ public final class XtextGrammarTestLanguageGrammarConsumer extends NonTerminalCo
 		ruleCall$25$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
+	@Override
 	protected int doConsume(int entryPoint) throws Exception {
 		return consumeGroup$1(entryPoint);
 	}

@@ -35,6 +35,7 @@ public final class ComplexReconstrTestLanguageTrickyG1Consumer extends NonTermin
 		keyword$11$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
+	@Override
 	protected int doConsume(int entryPoint) throws Exception {
 		return consumeGroup$1(entryPoint);
 	}

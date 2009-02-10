@@ -29,6 +29,7 @@ public final class MultiValueFeatureTestLanguageStartConsumer extends NonTermina
 		ruleCall$2$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
+	@Override
 	protected int doConsume(int entryPoint) throws Exception {
 		return consumeAssignment$1(entryPoint);
 	}

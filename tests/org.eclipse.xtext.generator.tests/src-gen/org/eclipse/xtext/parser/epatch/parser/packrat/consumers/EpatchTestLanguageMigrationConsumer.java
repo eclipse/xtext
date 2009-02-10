@@ -38,6 +38,7 @@ public final class EpatchTestLanguageMigrationConsumer extends NonTerminalConsum
 		keyword$16$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
+	@Override
 	protected int doConsume(int entryPoint) throws Exception {
 		return consumeGroup$1(entryPoint);
 	}

@@ -47,6 +47,7 @@ public final class EcoreDslEDataTypeDeclConsumer extends NonTerminalConsumer {
 		ruleCall$14$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
+	@Override
 	protected int doConsume(int entryPoint) throws Exception {
 		return consumeAlternatives$1(entryPoint);
 	}

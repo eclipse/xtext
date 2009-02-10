@@ -59,6 +59,7 @@ public final class TerminalRulesTestLanguageModelConsumer extends NonTerminalCon
 		ruleCall$20$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
+	@Override
 	protected int doConsume(int entryPoint) throws Exception {
 		return consumeAlternatives$1(entryPoint);
 	}

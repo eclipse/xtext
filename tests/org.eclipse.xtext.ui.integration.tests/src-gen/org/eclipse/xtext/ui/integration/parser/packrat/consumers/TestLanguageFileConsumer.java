@@ -26,6 +26,7 @@ public final class TestLanguageFileConsumer extends NonTerminalConsumer {
 		super(configuration, hiddenTokens);
 	}
 	
+	@Override
 	protected int doConsume(int entryPoint) throws Exception {
 		return consumeAssignment$1(entryPoint);
 	}

@@ -36,6 +36,7 @@ public final class KeywordsTestLanguageModelConsumer extends NonTerminalConsumer
 		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
+	@Override
 	protected int doConsume(int entryPoint) throws Exception {
 		return consumeAlternatives$1(entryPoint);
 	}

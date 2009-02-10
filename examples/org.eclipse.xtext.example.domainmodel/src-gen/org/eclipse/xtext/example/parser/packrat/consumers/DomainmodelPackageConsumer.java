@@ -37,6 +37,7 @@ public final class DomainmodelPackageConsumer extends NonTerminalConsumer {
 		keyword$11$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
+	@Override
 	protected int doConsume(int entryPoint) throws Exception {
 		return consumeGroup$1(entryPoint);
 	}

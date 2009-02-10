@@ -53,6 +53,7 @@ public final class ReferenceGrammarSpielplatzConsumer extends NonTerminalConsume
 		ruleCall$10$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
+	@Override
 	protected int doConsume(int entryPoint) throws Exception {
 		return consumeGroup$1(entryPoint);
 	}
