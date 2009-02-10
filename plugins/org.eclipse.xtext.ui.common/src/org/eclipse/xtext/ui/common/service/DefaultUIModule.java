@@ -8,7 +8,6 @@
 package org.eclipse.xtext.ui.common.service;
 
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
-import org.eclipse.jface.text.hyperlink.DefaultHyperlinkPresenter;
 import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
 import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.jface.viewers.ILabelProvider;
