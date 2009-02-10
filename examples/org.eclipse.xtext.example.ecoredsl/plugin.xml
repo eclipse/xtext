@@ -13,13 +13,6 @@
       </metaModel>
       
    </extension>
-   <extension
-         point="org.eclipse.emf.ecore.extension_parser">
-      <parser
-            class="org.eclipse.xtext.example.services.EcoreDslResourceFactory"
-            type="ecoredsl">
-      </parser>
-   </extension>
    
    
 </plugin>
