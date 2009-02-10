@@ -12,6 +12,7 @@ import java.util.LinkedList;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.parser.IAstFactory;
@@ -167,10 +168,14 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 					setFeatureValue(token, true, rule);
 			}
 		} else {
-			if (token.getFeature() != null) {
-				final AbstractRule rule = nonTerminal.getGrammarElement() instanceof AbstractRule ?
-						(AbstractRule)nonTerminal.getGrammarElement() :
-						((RuleCall)nonTerminal.getGrammarElement()).getRule();
+			if (token.getFeature() != null && !(nonTerminal.getGrammarElement() instanceof CrossReference)) {
+				AbstractRule rule = null;
+				if (nonTerminal.getGrammarElement() instanceof AbstractRule)
+					rule = (AbstractRule)nonTerminal.getGrammarElement();
+				else if (nonTerminal.getGrammarElement() instanceof RuleCall)
+					rule = ((RuleCall)nonTerminal.getGrammarElement()).getRule();
+				if (rule == null)
+					throw new IllegalStateException("Unexpected grammar element '" + nonTerminal.getGrammarElement() + "'");
 				if (!token.isBoolean()) {
 					final StringBuilder builder = new StringBuilder(token.getLength());
 					final boolean[] wasHidden = new boolean[] {false};

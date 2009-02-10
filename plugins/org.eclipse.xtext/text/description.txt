@@ -10,7 +10,7 @@ Package xtext <http://www.eclipse.org/2008/Xtext>
   Class Grammar
     Attribute abstract : EBoolean
     Attribute name : EString
-    Attribute superGrammarName : EString
+    Reference superGrammar : Grammar
     Attribute definesHiddenTokens : EBoolean
     Reference hiddenTokens : AbstractRule<<0..*>>
     Reference metamodelDeclarations : AbstractMetamodelDeclaration<<0..*>>
@@ -21,8 +21,8 @@ Package xtext <http://www.eclipse.org/2008/Xtext>
     Attribute name : EString
 
   Class AbstractMetamodelDeclaration
-    Reference ePackage : EPackage
     Attribute alias : EString
+    Reference ePackage : EPackage
 
   Class GeneratedMetamodel -> AbstractMetamodelDeclaration
     Attribute name : EString

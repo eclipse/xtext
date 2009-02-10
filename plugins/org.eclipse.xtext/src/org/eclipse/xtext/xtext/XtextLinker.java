@@ -10,10 +10,13 @@ package org.eclipse.xtext.xtext;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GeneratedMetamodel;
@@ -21,14 +24,18 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextPackage;
+import org.eclipse.xtext.builtin.IXtextBuiltin;
 import org.eclipse.xtext.crossref.IScopeProvider;
 import org.eclipse.xtext.crossref.internal.Linker;
 import org.eclipse.xtext.diagnostics.AbstractDiagnosticProducerDecorator;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 import org.eclipse.xtext.diagnostics.IDiagnosticProducer;
+import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.resource.ClasspathUriUtil;
 import org.eclipse.xtext.resource.metamodel.TransformationDiagnosticsProducer;
 import org.eclipse.xtext.resource.metamodel.Xtext2EcoreTransformer;
 
@@ -93,9 +100,30 @@ public class XtextLinker extends Linker {
 			} catch(IllegalArgumentException ex) {
 				producer.addDiagnostic("Cannot resolve implicit reference to rule 'ID'");
 			}
+		} else if (XtextPackage.eINSTANCE.getGrammar_SuperGrammar() == ref) {
+			final Grammar grammar = (Grammar) obj;
+			if (!IXtextBuiltin.ID.equals(grammar.getName())) {
+				final ResourceSet resourceSet = grammar.eResource().getResourceSet();
+				final Resource resource = resourceSet.getResource(URI.createURI(
+						ClasspathUriUtil.CLASSPATH_SCHEME + ":/" + IXtextBuiltin.ID.replace('.', '/') + ".xtext"), true);
+				grammar.setSuperGrammar((Grammar) resource.getContents().get(0));
+			}
 		} else {
 			super.setDefaultValueImpl(obj, ref, producer);
 		}
+	}
+	
+	@Override
+	protected boolean isNullValidResult(EObject obj, EReference eRef, AbstractNode node) {
+		if (XtextPackage.eINSTANCE.getGrammar_SuperGrammar() == eRef) {
+			final StringBuilder builder = new StringBuilder(node.getLength());
+			for (LeafNode leaf: node.getLeafNodes()) {
+				if (!leaf.isHidden())
+					builder.append(leaf.getText());
+			}
+			return "NULL".equals(builder.toString());
+		}
+		return super.isNullValidResult(obj, eRef, node);
 	}
 
 	@Override

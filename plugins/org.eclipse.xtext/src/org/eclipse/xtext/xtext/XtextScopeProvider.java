@@ -10,7 +10,6 @@ package org.eclipse.xtext.xtext;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
@@ -41,8 +40,6 @@ import com.google.inject.Inject;
  */
 public class XtextScopeProvider extends DefaultScopeProvider {
 
-	private static final Logger log = Logger.getLogger(XtextScopeProvider.class);
-	
 	@Inject
 	private IValueConverterService valueConverterService;
 	
@@ -101,15 +98,10 @@ public class XtextScopeProvider extends DefaultScopeProvider {
 		return createScope((Grammar) firstContent, type);
 	}
 
-	protected IScope createScope(Grammar g, EClass type) {
-		Grammar superGrammar = null;
-		try {
-			superGrammar = GrammarUtil.getSuperGrammar(g);
-		} catch (Exception e) {
-			log.debug(e);
-		}
+	protected IScope createScope(Grammar grammar, EClass type) {
+		Grammar superGrammar = grammar.getSuperGrammar();
 		final IScope parent = superGrammar != null ? createScope(superGrammar, type): IScope.NULLSCOPE;
-		return new SimpleCachingScope(parent, g.eResource(), type);
+		return new SimpleCachingScope(parent, grammar.eResource(), type);
 	}
 
 }

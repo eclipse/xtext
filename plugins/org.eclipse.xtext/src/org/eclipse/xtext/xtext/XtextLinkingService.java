@@ -31,10 +31,13 @@ import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.crossref.impl.DefaultLinkingService;
+import org.eclipse.xtext.crossref.impl.IllegalNodeException;
 import org.eclipse.xtext.crossref.impl.SimpleAttributeResolver;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.resource.ClasspathUriResolutionException;
+import org.eclipse.xtext.resource.ClasspathUriUtil;
 
 import com.google.inject.Inject;
 
@@ -56,21 +59,33 @@ public class XtextLinkingService extends DefaultLinkingService {
 	}
 	
 	@Override
-	public List<EObject> getLinkedObjects(EObject context, EReference ref, LeafNode text) {
+	public List<EObject> getLinkedObjects(EObject context, EReference ref, AbstractNode node) throws IllegalNodeException {
+		if (ref == XtextPackage.eINSTANCE.getGrammar_SuperGrammar())
+			return getSuperGrammar((Grammar) context, node);
 		if (ref == XtextPackage.eINSTANCE.getTypeRef_Metamodel())
-			return getLinkedMetaModel((TypeRef)context, ref, text);
+			return getLinkedMetaModel((TypeRef)context, ref, (LeafNode) node);
 		if (ref == XtextPackage.eINSTANCE.getAbstractMetamodelDeclaration_EPackage() && context instanceof GeneratedMetamodel)
-			return createPackage((GeneratedMetamodel) context, text);
+			return createPackage((GeneratedMetamodel) context, (LeafNode) node);
 		if (ref == XtextPackage.eINSTANCE.getAbstractMetamodelDeclaration_EPackage() && context instanceof ReferencedMetamodel)
-			return getPackage((ReferencedMetamodel)context, text);
-		return super.getLinkedObjects(context, ref, text);
+			return getPackage((ReferencedMetamodel)context, (LeafNode) node);
+		return super.getLinkedObjects(context, ref, node);
 	}
 	
-	/**
-	 * @param context
-	 * @param text
-	 * @return
-	 */
+	private List<EObject> getSuperGrammar(Grammar grammar, AbstractNode node) {
+		try {
+			String grammarName = (String) valueConverterService.toValue("", "GrammarID", node);
+			final ResourceSet resourceSet = grammar.eResource().getResourceSet();
+			final Resource resource = resourceSet.getResource(URI.createURI(
+					ClasspathUriUtil.CLASSPATH_SCHEME + ":/" + grammarName.replace('.', '/') + ".xtext"), true);
+			return Collections.singletonList(resource.getContents().get(0));
+		}
+		catch (ClasspathUriResolutionException ex) {
+			return Collections.emptyList();
+		} catch (ValueConverterException e) {
+			return Collections.emptyList();
+		}
+	}
+	
 	private List<EObject> getPackage(ReferencedMetamodel context, LeafNode text) {
 		EPackage pack = loadEPackage(
 				getMetamodelNsURI(text), 
@@ -90,7 +105,7 @@ public class XtextLinkingService extends DefaultLinkingService {
 		}
 	}
 	
-	EPackage loadEPackage(String resourceOrNsURI, ResourceSet resourceSet) {
+	private EPackage loadEPackage(String resourceOrNsURI, ResourceSet resourceSet) {
 		if (EPackage.Registry.INSTANCE.containsKey(resourceOrNsURI))
 			return EPackage.Registry.INSTANCE.getEPackage(resourceOrNsURI);
 		try {
@@ -140,7 +155,7 @@ public class XtextLinkingService extends DefaultLinkingService {
 		return false;
 	}
 
-	private List<EObject> getLinkedMetaModel(TypeRef context, EReference ref, LeafNode text) {
+	private List<EObject> getLinkedMetaModel(TypeRef context, EReference ref, LeafNode text) throws IllegalNodeException {
 		final CompositeNode parentNode = text.getParent();
 		for(int i = parentNode.getChildren().size() - 1; i >= 0; i-- ) {
 			AbstractNode child = parentNode.getChildren().get(i);
@@ -158,13 +173,17 @@ public class XtextLinkingService extends DefaultLinkingService {
 	}
 	
 	@Override
-	public String getLinkText(EObject object, EReference reference, EObject context) {
+	protected String getUnconvertedLinkText(EObject object, EReference reference, EObject context) {
+		if (reference == XtextPackage.eINSTANCE.getGrammar_SuperGrammar()) {
+			if (object == null)
+				return "NULL";
+			return ((Grammar) object).getName();
+		}
 		if (reference == XtextPackage.eINSTANCE.getTypeRef_Metamodel())
 			return aliasResolver.getValue(object);
 		if (reference == XtextPackage.eINSTANCE.getAbstractMetamodelDeclaration_EPackage())
-			// TODO use value converter that produces double quotes
-			return '"' + ((EPackage) object).getNsURI() + '"';
-		return super.getLinkText(object, reference, context);
+			return ((EPackage) object).getNsURI();
+		return super.getUnconvertedLinkText(object, reference, context);
 	}
 	
 }

@@ -23,11 +23,11 @@ import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.crossref.ILinker;
 import org.eclipse.xtext.crossref.ILinkingService;
+import org.eclipse.xtext.crossref.impl.IllegalNodeException;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 import org.eclipse.xtext.diagnostics.IDiagnosticProducer;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
 
@@ -36,7 +36,6 @@ import org.eclipse.xtext.parsetree.NodeUtil;
  */
 public class Linker implements ILinker {
 
-	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(Linker.class);
 	
 	@com.google.inject.Inject
@@ -47,14 +46,13 @@ public class Linker implements ILinker {
 		if (nodeAdapter == null)
 			return;
 		final CompositeNode node = nodeAdapter.getParserNode();
-		
 		EList<AbstractNode> children = node.getChildren();
 		Set<EReference> handledReferences = new HashSet<EReference>();
 		for (AbstractNode abstractNode : children) {
-			if (abstractNode instanceof LeafNode && abstractNode.getGrammarElement() instanceof CrossReference) {
+			if (abstractNode.getGrammarElement() instanceof CrossReference) {
 				CrossReference ref = (CrossReference) abstractNode.getGrammarElement();
 				producer.setNode(abstractNode);
-				ensureIsLinked(obj, (LeafNode) abstractNode, ref, handledReferences, producer);
+				ensureIsLinked(obj, abstractNode, ref, handledReferences, producer);
 			}
 		}
 		producer.setNode(node);
@@ -97,50 +95,65 @@ public class Linker implements ILinker {
 	}
 	
 	@SuppressWarnings("unchecked")
-	protected void ensureIsLinked(EObject obj, LeafNode node, CrossReference ref, 
+	protected void ensureIsLinked(EObject obj, AbstractNode node, CrossReference ref, 
 			Set<EReference> handledReferences, IDiagnosticProducer producer) {
 		final EReference eRef = GrammarUtil.getReference(ref, obj.eClass());
-		handledReferences.add(eRef);
-		beforeEnsureIsLinked(obj, eRef, producer);
-		producer.setTarget(obj, eRef);
-		final List<EObject> links = linkingService.getLinkedObjects(obj, eRef, node);
-		if (links == null || links.isEmpty()) {
-			producer.addDiagnostic("Cannot resolve reference to '" + node.getText() + "'");
-			return;
-		}
-		// SZ: can this actually happen - I thing the linking service will fail, if no eRef was found?
 		if (eRef == null) {
 			producer.addDiagnostic("Cannot find reference " + ref);
 			return;
 		}
-
-		if (eRef.getUpperBound() >= 0 && links.size() > eRef.getUpperBound()) {
-			producer.addDiagnostic("Too many matches for reference to '"
-					+ node.getText() + "'. Feature " + eRef.getName() + " can only hold " + eRef.getUpperBound()
-					+ " reference" + (eRef.getUpperBound() != 1 ? "s" : "") + " but found " + links.size() + " candidates" + 
-					(links.size()!=1 ? "s" : ""));
-			return;
-		}
-
-		if (eRef.getUpperBound() == 1) {
-			obj.eSet(eRef, links.get(0));
-		}
-		else { // eRef.getUpperBound() == -1 || 
-			// eRef.getUpperBound() < links.size
-			// TODO extract and check weather equals or identity is used by list
-			final List<EObject> list = (List<EObject>) obj.eGet(eRef);
-			if (links.size() > 1 && eRef.isUnique() && (list instanceof BasicEList)) {
-				final Set<EObject> addUs = new LinkedHashSet<EObject>(links);
-				//addUs.removeAll(list); // removeAll calls most likely list.contains() which is rather slow
-				for (int i = 0; i < list.size(); i++)
-					addUs.remove(list.get(i));
-				if (!((BasicEList) list).addAllUnique(addUs))
-					producer.addDiagnostic("Cannot refer to '" + node.getText() + "' more than once.");
+		handledReferences.add(eRef);
+		beforeEnsureIsLinked(obj, eRef, producer);
+		producer.setTarget(obj, eRef);
+		try {
+			final List<EObject> links = getLinkedObject(obj, eRef, node);
+			if (links == null || links.isEmpty()) {
+				if (!isNullValidResult(obj, eRef, node))
+					producer.addDiagnostic("Cannot resolve reference to '" + node.serialize() + "'");
+				return;
 			}
-			else
-				if (!list.addAll(links))
-					producer.addDiagnostic("Cannot refer to '" + node.getText() + "' more than once.");
+
+			if (eRef.getUpperBound() >= 0 && links.size() > eRef.getUpperBound()) {
+				producer.addDiagnostic("Too many matches for reference to '"
+						+ node.serialize() + "'. Feature " + eRef.getName() + " can only hold " + eRef.getUpperBound()
+						+ " reference" + (eRef.getUpperBound() != 1 ? "s" : "") + " but found " + links.size() + " candidates" + 
+						(links.size()!=1 ? "s" : ""));
+				return;
+			}
+
+			if (eRef.getUpperBound() == 1) {
+				obj.eSet(eRef, links.get(0));
+			}
+			else { // eRef.getUpperBound() == -1 || 
+				// eRef.getUpperBound() < links.size
+				// TODO extract and check weather equals or identity is used by list
+				final List<EObject> list = (List<EObject>) obj.eGet(eRef);
+				if (links.size() > 1 && eRef.isUnique() && (list instanceof BasicEList)) {
+					final Set<EObject> addUs = new LinkedHashSet<EObject>(links);
+					//addUs.removeAll(list); // removeAll calls most likely list.contains() which is rather slow
+					for (int i = 0; i < list.size(); i++)
+						addUs.remove(list.get(i));
+					if (!((BasicEList) list).addAllUnique(addUs))
+						producer.addDiagnostic("Cannot refer to '" + node.serialize() + "' more than once.");
+				}
+				else
+					if (!list.addAll(links))
+						producer.addDiagnostic("Cannot refer to '" + node.serialize() + "' more than once.");
+			}
+		} catch (IllegalNodeException e) {
+			producer.addDiagnostic(e.getMessage());
+			if (log.isDebugEnabled()) {
+				log.debug(e.getMessage(), e);
+			}
 		}
+	}
+	
+	protected List<EObject> getLinkedObject(EObject obj, EReference eRef, AbstractNode node) throws IllegalNodeException {
+		return linkingService.getLinkedObjects(obj, eRef, node);
+	}
+
+	protected boolean isNullValidResult(EObject obj, EReference eRef, AbstractNode node) {
+		return false;
 	}
 
 	public ILinkingService getLinkingService() {

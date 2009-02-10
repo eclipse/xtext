@@ -21,20 +21,15 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.builtin.IXtextBuiltin;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
-import org.eclipse.xtext.resource.ClasspathUriResolutionException;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Tuples;
@@ -48,10 +43,6 @@ import org.eclipse.xtext.util.Tuples;
 public class GrammarUtil {
 
 	private static final Logger log = Logger.getLogger(GrammarUtil.class);
-
-	private static URI getClasspathURIForLanguageId(String id) {
-		return URI.createURI("classpath:/" + id.replace('.', '/') + (IXtextBuiltin.ID.equals(id) ? ".xmi" : ".xtext"));
-	}
 
 	public static String getClasspathRelativePathToXmi(Grammar grammar) {
 		return getLanguageId(grammar).replace('.', '/') + ".xmi";
@@ -154,40 +145,14 @@ public class GrammarUtil {
 		return false;
 	}
 
-	public static Grammar getSuperGrammar(Grammar _this) {
-		if (_this == null)
-			throw new NullPointerException("Grammar was null");
-		String id = getSuperGrammarId(_this);
-		if (id == null)
-			return null;
-		if (!(_this.eResource() != null && _this.eResource().getResourceSet() != null))
-			throw new IllegalArgumentException("The passed grammar is not contained in a Resourceset");
-		ResourceSet resourceSet = _this.eResource().getResourceSet();
-		URI uri = getClasspathURIForLanguageId(id);
-		// uri = uri.appendFragment("");
-		Resource resource = null;
-		try {
-			resource = resourceSet.getResource(uri, true);
-		}
-		catch (ClasspathUriResolutionException ex) {
-			throw new IllegalArgumentException("Couldn't find grammar for super language " + id, ex);
-		}
-		if (resource == null || resource.getContents().isEmpty())
-			throw new IllegalArgumentException("Couldn't find grammar for super language " + id);
-		Grammar grammar = (Grammar) resource.getContents().get(0);
-		return grammar;
-
+	public static Grammar getSuperGrammar(Grammar grammar) {
+		return grammar.getSuperGrammar();
 	}
 
 	public static String getSuperGrammarId(Grammar grammar) {
-		if (IXtextBuiltin.ID.equals(getLanguageId(grammar))) {
+		if (grammar.getSuperGrammar() == null)
 			return null;
-		}
-		if (grammar.getSuperGrammarName() == null)
-			return IXtextBuiltin.ID;
-		if ("NULL".equals(grammar.getSuperGrammarName()))
-			return null;
-		return grammar.getSuperGrammarName();
+		return grammar.getSuperGrammar().getName();
 	}
 
 	public static AbstractRule findRuleForName(Grammar _this, String ruleName) {
@@ -342,7 +307,7 @@ public class GrammarUtil {
 		return parserRule.getType() != null && parserRule.getType().getType() instanceof EDataType;
 	}
 
-	public static AbstractRule getCalledLexerRule(CrossReference ref) {
+	public static AbstractRule getCalledRule(CrossReference ref) {
 		if (ref.getRule() != null)
 			return ref.getRule();
 		return findRuleForName(getGrammar(ref), "ID");
