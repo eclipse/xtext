@@ -50,6 +50,8 @@ public class GenerateXtextGrammars {
 			GeneratorFacade.cleanFolder(path + "/src-gen");
 			GeneratorFacade.cleanFolder(uiPath + "/src-gen");
 			
+			System.out.println("Generating " + xtextGrammars.length + " Xtext Grammars.");
+			
 			for (int i = 0; i < xtextGrammars.length; i++) {
 				String xtextGrammar = xtextGrammars[i];
 				String filename = path + xtextGrammar;
@@ -66,6 +68,8 @@ public class GenerateXtextGrammars {
 				Grammar grammarModel = (Grammar) resource.getContents().iterator().next();
 				GeneratorFacade.generate(grammarModel, path, uiPath, extensions[i]);
 			}
+			
+			System.out.println("DONE.");
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
