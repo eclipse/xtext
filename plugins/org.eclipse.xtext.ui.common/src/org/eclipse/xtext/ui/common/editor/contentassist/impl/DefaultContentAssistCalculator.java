@@ -32,7 +32,6 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.crossref.ILinkingService;
 import org.eclipse.xtext.crossref.impl.IllegalNodeException;
 import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.ParseTreeUtil;
 import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistCalculator;
