@@ -26,12 +26,12 @@ public class OptionalEmptyTestLanguageParseTreeConstructor extends AbstractParse
 
 /************ begin Rule Model ****************
  *
- * Model : ( child = Greeting ) ? ;
+ * Model:   (child=Greeting)?;
  *
  **/
 
 
-// ( child = Greeting ) ?
+// (child=Greeting)?
 protected class Model_Assignment_child extends AssignmentToken  {
 	
 	public Model_Assignment_child(IInstanceDescription curr, AbstractToken pred) {
@@ -67,12 +67,12 @@ protected class Model_Assignment_child extends AssignmentToken  {
 
 /************ begin Rule Greeting ****************
  *
- * Greeting : "hallo" name = ID ;
+ * Greeting:   "hallo" name=ID;
  *
  **/
 
 
-// "hallo" name = ID
+// "hallo" name=ID
 protected class Greeting_Group extends GroupToken {
 	
 	public Greeting_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -112,7 +112,7 @@ protected class Greeting_0_Keyword_hallo extends KeywordToken  {
 	}	
 }
 
-// name = ID
+// name=ID
 protected class Greeting_1_Assignment_name extends AssignmentToken  {
 	
 	public Greeting_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {

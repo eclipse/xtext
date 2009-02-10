@@ -8,9 +8,12 @@
 package org.eclipse.xtext.ui.common.service;
 
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
+import org.eclipse.jface.text.hyperlink.DefaultHyperlinkPresenter;
+import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
 import org.eclipse.jface.text.rules.ITokenScanner;
+import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
-import org.eclipse.xtext.service.AbstractXtextModule;
+import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.ui.common.editor.contentassist.ITemplateContentAssistProcessor;
 import org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultContentAssistProcessor;
 import org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultTemplateContentAssistProcessor;
@@ -18,11 +21,15 @@ import org.eclipse.xtext.ui.common.editor.outline.XtextContentOutlinePage;
 import org.eclipse.xtext.ui.common.editor.syntaxcoloring.DefaultTokenScanner;
 import org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr.ITokenColorer;
 import org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr.NullTokenColorer;
+import org.eclipse.xtext.ui.core.DefaultLabelProvider;
+import org.eclipse.xtext.ui.core.DefaultLocationInFileProvider;
+import org.eclipse.xtext.ui.core.ILocationInFileProvider;
+import org.eclipse.xtext.ui.core.editor.DefaultHyperlinkDetector;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
  */
-public abstract class DefaultUIModule extends AbstractXtextModule {
+public abstract class DefaultUIModule extends AbstractGenericModule {
 
 	public Class<? extends org.eclipse.xtext.ui.common.editor.outline.ISemanticModelTransformer> bindISemanticModelTransformer() {
 		return org.eclipse.xtext.ui.common.editor.outline.impl.DefaultSemanticModelTransformer.class;
@@ -50,6 +57,18 @@ public abstract class DefaultUIModule extends AbstractXtextModule {
 	
 	public Class<? extends IContentOutlinePage> bindIContentOutlinePage() {
 		return XtextContentOutlinePage.class;
+	}
+	
+	public Class<? extends ILabelProvider> bindILabelProvider() {
+		return DefaultLabelProvider.class;
+	}
+	
+	public Class<? extends ILocationInFileProvider> bindILocationInFileProvider() {
+		return DefaultLocationInFileProvider.class;
+	}
+	
+	public Class<? extends IHyperlinkDetector> bindIHyperlinkDetector() {
+		return DefaultHyperlinkDetector.class;
 	}
 	
 }

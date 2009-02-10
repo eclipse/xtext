@@ -25,12 +25,12 @@ public class KeywordsTestLanguageParseTreeConstructor extends AbstractParseTreeC
 
 /************ begin Rule Model ****************
  *
- * Model : first ?= "foo\\bar" | second ?= "foo\\" | third ?= "\\bar" | forth ?= "\\" ;
+ * Model:   first?="foo\\bar"|second?="foo\\"|third?="\\bar"|forth?="\\";
  *
  **/
 
 
-// first ?= "foo\\bar" | second ?= "foo\\" | third ?= "\\bar" | forth ?= "\\"
+// first?="foo\\bar"|second?="foo\\"|third?="\\bar"|forth?="\\"
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -51,7 +51,7 @@ protected class Model_Alternatives extends AlternativesToken {
 	}
 }
 
-// first ?= "foo\\bar" | second ?= "foo\\" | third ?= "\\bar"
+// first?="foo\\bar"|second?="foo\\"|third?="\\bar"
 protected class Model_0_Alternatives extends AlternativesToken {
 
 	public Model_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -72,7 +72,7 @@ protected class Model_0_Alternatives extends AlternativesToken {
 	}
 }
 
-// first ?= "foo\\bar" | second ?= "foo\\"
+// first?="foo\\bar"|second?="foo\\"
 protected class Model_0_0_Alternatives extends AlternativesToken {
 
 	public Model_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -93,7 +93,7 @@ protected class Model_0_0_Alternatives extends AlternativesToken {
 	}
 }
 
-// first ?= "foo\\bar"
+// first?="foo\\bar"
 protected class Model_0_0_0_Assignment_first extends AssignmentToken  {
 	
 	public Model_0_0_0_Assignment_first(IInstanceDescription curr, AbstractToken pred) {
@@ -118,7 +118,7 @@ protected class Model_0_0_0_Assignment_first extends AssignmentToken  {
 	}
 }
 
-// second ?= "foo\\"
+// second?="foo\\"
 protected class Model_0_0_1_Assignment_second extends AssignmentToken  {
 	
 	public Model_0_0_1_Assignment_second(IInstanceDescription curr, AbstractToken pred) {
@@ -144,7 +144,7 @@ protected class Model_0_0_1_Assignment_second extends AssignmentToken  {
 }
 
 
-// third ?= "\\bar"
+// third?="\\bar"
 protected class Model_0_1_Assignment_third extends AssignmentToken  {
 	
 	public Model_0_1_Assignment_third(IInstanceDescription curr, AbstractToken pred) {
@@ -170,7 +170,7 @@ protected class Model_0_1_Assignment_third extends AssignmentToken  {
 }
 
 
-// forth ?= "\\"
+// forth?="\\"
 protected class Model_1_Assignment_forth extends AssignmentToken  {
 	
 	public Model_1_Assignment_forth(IInstanceDescription curr, AbstractToken pred) {

@@ -27,12 +27,12 @@ public class ActionTestLanguageParseTreeConstructor extends AbstractParseTreeCon
 
 /************ begin Rule Model ****************
  *
- * Model : ( children += Element ) * ;
+ * Model:   (children+=Element)*;
  *
  **/
 
 
-// ( children += Element ) *
+// (children+=Element)*
 protected class Model_Assignment_children extends AssignmentToken  {
 	
 	public Model_Assignment_children(IInstanceDescription curr, AbstractToken pred) {
@@ -68,12 +68,12 @@ protected class Model_Assignment_children extends AssignmentToken  {
 
 /************ begin Rule Element ****************
  *
- * Element returns Type : Item ( { current = Item . items += current } items += Item ) ;
+ * Element returns Type:   Item ({current=Item.items+=current} items+=Item);
  *
  **/
 
 
-// Item ( { current = Item . items += current } items += Item )
+// Item ({current=Item.items+=current} items+=Item)
 protected class Element_Group extends GroupToken {
 	
 	public Element_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -119,7 +119,7 @@ protected class Element_0_RuleCall_Item extends RuleCallToken {
 	}
 }
 
-// { current = Item . items += current } items += Item
+// {current=Item.items+=current} items+=Item
 protected class Element_1_Group extends GroupToken {
 	
 	public Element_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -147,7 +147,7 @@ protected class Element_1_Group extends GroupToken {
 	}
 }
 
-// { current = Item . items += current }
+// {current=Item.items+=current}
 protected class Element_1_0_Action_Item_items extends ActionToken  {
 
 	public Element_1_0_Action_Item_items(IInstanceDescription curr, AbstractToken pred) {
@@ -167,7 +167,7 @@ protected class Element_1_0_Action_Item_items extends ActionToken  {
 	}
 }
 
-// items += Item
+// items+=Item
 protected class Element_1_1_Assignment_items extends AssignmentToken  {
 	
 	public Element_1_1_Assignment_items(IInstanceDescription curr, AbstractToken pred) {
@@ -205,12 +205,12 @@ protected class Element_1_1_Assignment_items extends AssignmentToken  {
 
 /************ begin Rule Item ****************
  *
- * Item returns Type : { current = Thing . content = current } name = ID ;
+ * Item returns Type:   {current=Thing.content=current} name=ID;
  *
  **/
 
 
-// { current = Thing . content = current } name = ID
+// {current=Thing.content=current} name=ID
 protected class Item_Group extends GroupToken {
 	
 	public Item_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -238,7 +238,7 @@ protected class Item_Group extends GroupToken {
 	}
 }
 
-// { current = Thing . content = current }
+// {current=Thing.content=current}
 protected class Item_0_Action_Thing_content extends ActionToken  {
 
 	public Item_0_Action_Thing_content(IInstanceDescription curr, AbstractToken pred) {
@@ -258,7 +258,7 @@ protected class Item_0_Action_Thing_content extends ActionToken  {
 	}
 }
 
-// name = ID
+// name=ID
 protected class Item_1_Assignment_name extends AssignmentToken  {
 	
 	public Item_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {

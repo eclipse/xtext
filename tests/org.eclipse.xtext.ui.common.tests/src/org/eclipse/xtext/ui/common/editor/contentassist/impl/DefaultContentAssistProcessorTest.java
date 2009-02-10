@@ -14,7 +14,23 @@
 package org.eclipse.xtext.ui.common.editor.contentassist.impl;
 
 
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
+import org.eclipse.xtext.ISetup;
+import org.eclipse.xtext.XtextGrammarTestLanguageRuntimeModule;
+import org.eclipse.xtext.XtextGrammarTestLanguageStandaloneSetup;
+import org.eclipse.xtext.XtextGrammarTestLanguageUIModule;
+import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.parser.keywords.KeywordsTestLanguageRuntimeModule;
+import org.eclipse.xtext.parser.keywords.KeywordsTestLanguageStandaloneSetup;
+import org.eclipse.xtext.parser.keywords.KeywordsTestLanguageUIModule;
+import org.eclipse.xtext.testlanguages.ContentAssistTestLanguageRuntimeModule;
+import org.eclipse.xtext.testlanguages.ContentAssistTestLanguageStandaloneSetup;
+import org.eclipse.xtext.testlanguages.ContentAssistTestLanguageUIModule;
+import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageRuntimeModule;
+import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
+import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageUIModule;
+
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 
 
 /**
@@ -24,11 +40,47 @@ import org.eclipse.xtext.tests.AbstractGeneratorTest;
  * @author Jan Koehnlein
  * @see org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultContentAssistProcessor
  */
-public class DefaultContentAssistProcessorTest extends AbstractGeneratorTest 
+public class DefaultContentAssistProcessorTest extends AbstractXtextTests 
 {
 	
+	private ISetup getRefGrammarSetup() {
+		return new ReferenceGrammarTestLanguageStandaloneSetup() {
+			@Override
+			public Injector createInjector() {
+				return Guice.createInjector(new ReferenceGrammarTestLanguageRuntimeModule(), new ReferenceGrammarTestLanguageUIModule());
+			}
+		};
+	}
+	
+	private ISetup getXtextGrammarSetup() {
+		return new XtextGrammarTestLanguageStandaloneSetup() {
+			@Override
+			public Injector createInjector() {
+				return Guice.createInjector(new XtextGrammarTestLanguageRuntimeModule(), new XtextGrammarTestLanguageUIModule());
+			}
+		};
+	}
+	
+	private ISetup getContentAssistGrammarSetup() {
+		return new ContentAssistTestLanguageStandaloneSetup() {
+			@Override
+			public Injector createInjector() {
+				return Guice.createInjector(new ContentAssistTestLanguageRuntimeModule(), new ContentAssistTestLanguageUIModule());
+			}
+		};
+	}
+	
+	private ISetup getKeywordsLangSetup() {
+		return new KeywordsTestLanguageStandaloneSetup() {
+			@Override
+			public Injector createInjector() {
+				return Guice.createInjector(new KeywordsTestLanguageRuntimeModule(), new KeywordsTestLanguageUIModule());
+			}
+		};
+	}
+	
 	public void testComputePrefix() throws Exception {
-		newBuilder("org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageUiSetup")
+		newBuilder(getRefGrammarSetup())
 		.append("foo fvdf dfv(").assertMatchString("(").reset()
 		.append("foo fvdf dfv").assertMatchString("dfv").reset()
 		.append("foo fvdf dfv_").assertMatchString("dfv_").reset()
@@ -37,7 +89,7 @@ public class DefaultContentAssistProcessorTest extends AbstractGeneratorTest
 	}
 	
 	public void testComputeCompletionProposalsCount() throws Exception {
-		newBuilder("org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageUiSetup").assertCount(1)
+		newBuilder(getRefGrammarSetup()).assertCount(1)
 			.append("spielplatz ").assertCount(1)
 			.append("1 ").assertCount(2)
 			.append("\"JUNIT\" ").assertCount(1)
@@ -49,7 +101,7 @@ public class DefaultContentAssistProcessorTest extends AbstractGeneratorTest
 	}
 	
 	public void testComputeCompletionProposalsText() throws Exception {
-		newBuilder("org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageUiSetup").assertText("spielplatz")
+		newBuilder(getRefGrammarSetup()).assertText("spielplatz")
 			.applyText().assertText("1")
 			.applyText().assertText("\"Spielplatz_Beschreibung\"","{")
 			.applyText().assertText("{")
@@ -76,7 +128,7 @@ public class DefaultContentAssistProcessorTest extends AbstractGeneratorTest
 	}
 	
 	public void testComputeCompletionProposalsIgnoreCase() throws Exception {
-		ContentAssistProcessorTestBuilder builder = newBuilder("org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageUiSetup");
+		ContentAssistProcessorTestBuilder builder = newBuilder(getRefGrammarSetup());
 		builder = builder.append("spielplatz 1 \"SpielplatzBeschreibung\" { kind(k1 0) kind(k2 0) erwachsener(e1 0) erwachsener(e2 0) ");
 		builder.append(" KI").assertText("kind");
 		builder.append(" ER").assertText("erwachsener");
@@ -127,7 +179,7 @@ public class DefaultContentAssistProcessorTest extends AbstractGeneratorTest
 	
 	
 	public void testCompleteRuleCall() throws Exception {
-		newBuilder("org.eclipse.xtext.XtextGrammarTestLanguageUiSetup")
+		newBuilder(getXtextGrammarSetup())
 			.appendNl("language foo")
 			.appendNl("generate foo \"foo\"")
 			.appendNl("R1 : (attr+=R2)*;")
@@ -144,7 +196,7 @@ public class DefaultContentAssistProcessorTest extends AbstractGeneratorTest
 	}
 	
 	public void testCompleteAbstractRuleCall() throws Exception {
-		newBuilder("org.eclipse.xtext.testlanguages.ContentAssistTestLanguageUiSetup")
+		newBuilder(getContentAssistGrammarSetup())
 			.appendNl("abstract rules")
 			.appendNl("R1 ();")
 			.append("R2 rule :").assertText(
@@ -155,7 +207,7 @@ public class DefaultContentAssistProcessorTest extends AbstractGeneratorTest
 	}
 	
 	public void testDefaultRule() throws Exception {
-		ContentAssistProcessorTestBuilder builder = newBuilder("org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageUiSetup");
+		ContentAssistProcessorTestBuilder builder = newBuilder(getRefGrammarSetup());
 		builder.assertText("spielplatz");
 		builder.append(" spielplatz 1 \"SpielplatzBeschreibung\" { } ")
 			.assertTextAtCursorPosition(1, "spielplatz");
@@ -166,7 +218,7 @@ public class DefaultContentAssistProcessorTest extends AbstractGeneratorTest
      * https://bugs.eclipse.org/bugs/show_bug.cgi?id=260825
      */
     public void testCompleteParserRule() throws Exception {
-            newBuilder("org.eclipse.xtext.XtextGrammarTestLanguageUiSetup")
+            newBuilder(getXtextGrammarSetup())
                     .appendNl("language foo")
                     .appendNl("generate foo \"foo\"")
                     .appendNl("MyRule : 'foo' name=ID; ").assertText(
@@ -181,7 +233,7 @@ public class DefaultContentAssistProcessorTest extends AbstractGeneratorTest
      * https://bugs.eclipse.org/bugs/show_bug.cgi?id=262313
      */
     public void testCompleteAssignmentWithBacktracking() throws Exception {
-    	newBuilder("org.eclipse.xtext.XtextGrammarTestLanguageUiSetup")
+    	newBuilder(getXtextGrammarSetup())
                     .appendNl("language foo")
                     .appendNl("generate foo \"foo\"")
                     .append("MyRule : 'foo' name").assertText(
@@ -191,14 +243,13 @@ public class DefaultContentAssistProcessorTest extends AbstractGeneratorTest
     }
     
     public void testKeywordWithBackslashes() throws Exception {
-		newBuilder("org.eclipse.xtext.parser.keywords.KeywordsTestLanguageUiSetup")
+		newBuilder(getKeywordsLangSetup())
 			.assertText("foo\\bar", "foo\\", "\\bar", "\\");
 	}
 	
-	protected ContentAssistProcessorTestBuilder newBuilder(String standAloneSetupFQN) throws Exception {
-		Class<?> standAloneSetup = getClass().getClassLoader().loadClass(standAloneSetupFQN);
+	protected ContentAssistProcessorTestBuilder newBuilder(ISetup standAloneSetup) throws Exception {
 		with(standAloneSetup);
-		return new ContentAssistProcessorTestBuilder(getCurrentServiceScope(), new DefaultContentAssistProcessor());
+		return new ContentAssistProcessorTestBuilder(standAloneSetup);
 	}
 	
 }

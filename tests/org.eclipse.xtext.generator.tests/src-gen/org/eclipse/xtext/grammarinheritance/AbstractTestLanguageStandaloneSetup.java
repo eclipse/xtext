@@ -5,38 +5,36 @@ package org.eclipse.xtext.grammarinheritance;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.ISetup;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.IResourceFactory;
-import org.eclipse.xtext.service.IServiceScope;
-import org.eclipse.xtext.service.ServiceRegistry;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
-import org.eclipse.xtext.grammarinheritance.IAbstractTestLanguage;
+public class AbstractTestLanguageStandaloneSetup implements ISetup {
 
-public abstract class AbstractTestLanguageStandaloneSetup {
+	public static void doSetup() {
+		new AbstractTestLanguageStandaloneSetup().createInjectorAndDoEMFRegistration();
+	}
 
-	private static boolean isInitialized = false;
-
-	public synchronized static void doSetup() {
-		if(!isInitialized) {
+	public Injector createInjectorAndDoEMFRegistration() {
+			
+			new org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup().doSetup();
+			
+		    registerEPackages();
 		    
+		    return null;
 			
-			
-			org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
-			
-			
-			
-			// initialize EPackages
-			
-			isInitialized = true;
-		}
 	}
 	
-	public static IServiceScope getServiceScope() {
-	   doSetup();
-	   return org.eclipse.xtext.grammarinheritance.IAbstractTestLanguage.SCOPE;
+    
+
+	/**
+	 * initializes all EPackages generated for this language and registers them at EPackage.Registry.INSTANCE
+	 */	
+	public void registerEPackages() {
+		
 	}
 	
 }

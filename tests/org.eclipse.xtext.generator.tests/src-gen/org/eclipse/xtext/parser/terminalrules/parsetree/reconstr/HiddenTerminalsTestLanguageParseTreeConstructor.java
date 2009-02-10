@@ -32,12 +32,12 @@ public class HiddenTerminalsTestLanguageParseTreeConstructor extends AbstractPar
 
 /************ begin Rule Model ****************
  *
- * Model : WithoutHiddens | WithHiddens | OverridingHiddens | InheritingHiddens | DatatypeHiddens ;
+ * Model:   WithoutHiddens|WithHiddens|OverridingHiddens|InheritingHiddens|DatatypeHiddens;
  *
  **/
 
 
-// WithoutHiddens | WithHiddens | OverridingHiddens | InheritingHiddens | DatatypeHiddens
+// WithoutHiddens|WithHiddens|OverridingHiddens|InheritingHiddens|DatatypeHiddens
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -58,7 +58,7 @@ protected class Model_Alternatives extends AlternativesToken {
 	}
 }
 
-// WithoutHiddens | WithHiddens | OverridingHiddens | InheritingHiddens
+// WithoutHiddens|WithHiddens|OverridingHiddens|InheritingHiddens
 protected class Model_0_Alternatives extends AlternativesToken {
 
 	public Model_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -79,7 +79,7 @@ protected class Model_0_Alternatives extends AlternativesToken {
 	}
 }
 
-// WithoutHiddens | WithHiddens | OverridingHiddens
+// WithoutHiddens|WithHiddens|OverridingHiddens
 protected class Model_0_0_Alternatives extends AlternativesToken {
 
 	public Model_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -100,7 +100,7 @@ protected class Model_0_0_Alternatives extends AlternativesToken {
 	}
 }
 
-// WithoutHiddens | WithHiddens
+// WithoutHiddens|WithHiddens
 protected class Model_0_0_0_Alternatives extends AlternativesToken {
 
 	public Model_0_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -220,12 +220,12 @@ protected class Model_1_RuleCall_DatatypeHiddens extends RuleCallToken {
 
 /************ begin Rule WithoutHiddens ****************
  *
- * WithoutHiddens : "without" spaces += WS "hiddens" ( spaces += WS ) ? valid ?= ";" ;
+ * WithoutHiddens:   "without" spaces+=WS "hiddens" (spaces+=WS)? valid?=";";
  *
  **/
 
 
-// "without" spaces += WS "hiddens" ( spaces += WS ) ? valid ?= ";"
+// "without" spaces+=WS "hiddens" (spaces+=WS)? valid?=";"
 protected class WithoutHiddens_Group extends GroupToken {
 	
 	public WithoutHiddens_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -253,7 +253,7 @@ protected class WithoutHiddens_Group extends GroupToken {
 	}
 }
 
-// "without" spaces += WS "hiddens" ( spaces += WS ) ?
+// "without" spaces+=WS "hiddens" (spaces+=WS)?
 protected class WithoutHiddens_0_Group extends GroupToken {
 	
 	public WithoutHiddens_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -281,7 +281,7 @@ protected class WithoutHiddens_0_Group extends GroupToken {
 	}
 }
 
-// "without" spaces += WS "hiddens"
+// "without" spaces+=WS "hiddens"
 protected class WithoutHiddens_0_0_Group extends GroupToken {
 	
 	public WithoutHiddens_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -309,7 +309,7 @@ protected class WithoutHiddens_0_0_Group extends GroupToken {
 	}
 }
 
-// "without" spaces += WS
+// "without" spaces+=WS
 protected class WithoutHiddens_0_0_0_Group extends GroupToken {
 	
 	public WithoutHiddens_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -349,7 +349,7 @@ protected class WithoutHiddens_0_0_0_0_Keyword_without extends KeywordToken  {
 	}	
 }
 
-// spaces += WS
+// spaces+=WS
 protected class WithoutHiddens_0_0_0_1_Assignment_spaces extends AssignmentToken  {
 	
 	public WithoutHiddens_0_0_0_1_Assignment_spaces(IInstanceDescription curr, AbstractToken pred) {
@@ -388,7 +388,7 @@ protected class WithoutHiddens_0_0_1_Keyword_hiddens extends KeywordToken  {
 }
 
 
-// ( spaces += WS ) ?
+// (spaces+=WS)?
 protected class WithoutHiddens_0_1_Assignment_spaces extends AssignmentToken  {
 	
 	public WithoutHiddens_0_1_Assignment_spaces(IInstanceDescription curr, AbstractToken pred) {
@@ -414,7 +414,7 @@ protected class WithoutHiddens_0_1_Assignment_spaces extends AssignmentToken  {
 }
 
 
-// valid ?= ";"
+// valid?=";"
 protected class WithoutHiddens_1_Assignment_valid extends AssignmentToken  {
 	
 	public WithoutHiddens_1_Assignment_valid(IInstanceDescription curr, AbstractToken pred) {
@@ -445,12 +445,12 @@ protected class WithoutHiddens_1_Assignment_valid extends AssignmentToken  {
 
 /************ begin Rule WithHiddens ****************
  *
- * WithHiddens hidden ( WS , ML_COMMENT , SL_COMMENT ) : "with" "hiddens" valid ?= ";" ;
+ * WithHiddens hidden ( WS , ML_COMMENT , SL_COMMENT ):   "with" "hiddens" valid?=";";
  *
  **/
 
 
-// "with" "hiddens" valid ?= ";"
+// "with" "hiddens" valid?=";"
 protected class WithHiddens_Group extends GroupToken {
 	
 	public WithHiddens_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -531,7 +531,7 @@ protected class WithHiddens_0_1_Keyword_hiddens extends KeywordToken  {
 }
 
 
-// valid ?= ";"
+// valid?=";"
 protected class WithHiddens_1_Assignment_valid extends AssignmentToken  {
 	
 	public WithHiddens_1_Assignment_valid(IInstanceDescription curr, AbstractToken pred) {
@@ -562,12 +562,12 @@ protected class WithHiddens_1_Assignment_valid extends AssignmentToken  {
 
 /************ begin Rule OverridingHiddens ****************
  *
- * OverridingHiddens hidden ( WS , ML_COMMENT , SL_COMMENT ) : "overriding" "hiddens" "(" called = OverridingHiddensCall ")" valid ?= ";" ;
+ * OverridingHiddens hidden ( WS , ML_COMMENT , SL_COMMENT ):   "overriding" "hiddens" "(" called=OverridingHiddensCall ")" valid?=";";
  *
  **/
 
 
-// "overriding" "hiddens" "(" called = OverridingHiddensCall ")" valid ?= ";"
+// "overriding" "hiddens" "(" called=OverridingHiddensCall ")" valid?=";"
 protected class OverridingHiddens_Group extends GroupToken {
 	
 	public OverridingHiddens_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -595,7 +595,7 @@ protected class OverridingHiddens_Group extends GroupToken {
 	}
 }
 
-// "overriding" "hiddens" "(" called = OverridingHiddensCall ")"
+// "overriding" "hiddens" "(" called=OverridingHiddensCall ")"
 protected class OverridingHiddens_0_Group extends GroupToken {
 	
 	public OverridingHiddens_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -623,7 +623,7 @@ protected class OverridingHiddens_0_Group extends GroupToken {
 	}
 }
 
-// "overriding" "hiddens" "(" called = OverridingHiddensCall
+// "overriding" "hiddens" "(" called=OverridingHiddensCall
 protected class OverridingHiddens_0_0_Group extends GroupToken {
 	
 	public OverridingHiddens_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -745,7 +745,7 @@ protected class OverridingHiddens_0_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-// called = OverridingHiddensCall
+// called=OverridingHiddensCall
 protected class OverridingHiddens_0_0_1_Assignment_called extends AssignmentToken  {
 	
 	public OverridingHiddens_0_0_1_Assignment_called(IInstanceDescription curr, AbstractToken pred) {
@@ -790,7 +790,7 @@ protected class OverridingHiddens_0_1_Keyword extends KeywordToken  {
 }
 
 
-// valid ?= ";"
+// valid?=";"
 protected class OverridingHiddens_1_Assignment_valid extends AssignmentToken  {
 	
 	public OverridingHiddens_1_Assignment_valid(IInstanceDescription curr, AbstractToken pred) {
@@ -821,12 +821,12 @@ protected class OverridingHiddens_1_Assignment_valid extends AssignmentToken  {
 
 /************ begin Rule OverridingHiddensCall ****************
  *
- * OverridingHiddensCall hidden ( ) : "call" ( spaces += WS ) ? valid ?= ";" ;
+ * OverridingHiddensCall hidden ( ):   "call" (spaces+=WS)? valid?=";";
  *
  **/
 
 
-// "call" ( spaces += WS ) ? valid ?= ";"
+// "call" (spaces+=WS)? valid?=";"
 protected class OverridingHiddensCall_Group extends GroupToken {
 	
 	public OverridingHiddensCall_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -854,7 +854,7 @@ protected class OverridingHiddensCall_Group extends GroupToken {
 	}
 }
 
-// "call" ( spaces += WS ) ?
+// "call" (spaces+=WS)?
 protected class OverridingHiddensCall_0_Group extends GroupToken {
 	
 	public OverridingHiddensCall_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -894,7 +894,7 @@ protected class OverridingHiddensCall_0_0_Keyword_call extends KeywordToken  {
 	}	
 }
 
-// ( spaces += WS ) ?
+// (spaces+=WS)?
 protected class OverridingHiddensCall_0_1_Assignment_spaces extends AssignmentToken  {
 	
 	public OverridingHiddensCall_0_1_Assignment_spaces(IInstanceDescription curr, AbstractToken pred) {
@@ -920,7 +920,7 @@ protected class OverridingHiddensCall_0_1_Assignment_spaces extends AssignmentTo
 }
 
 
-// valid ?= ";"
+// valid?=";"
 protected class OverridingHiddensCall_1_Assignment_valid extends AssignmentToken  {
 	
 	public OverridingHiddensCall_1_Assignment_valid(IInstanceDescription curr, AbstractToken pred) {
@@ -951,12 +951,12 @@ protected class OverridingHiddensCall_1_Assignment_valid extends AssignmentToken
 
 /************ begin Rule InheritingHiddens ****************
  *
- * InheritingHiddens hidden ( WS , ML_COMMENT , SL_COMMENT ) : "inheriting" "hiddens" "(" ( called = InheritingHiddensCall | hidingCalled = HidingHiddens ) ")" valid ?= ";" ;
+ * InheritingHiddens hidden ( WS , ML_COMMENT , SL_COMMENT ):   "inheriting" "hiddens" "(" (called=InheritingHiddensCall|hidingCalled=HidingHiddens) ")" valid?=";";
  *
  **/
 
 
-// "inheriting" "hiddens" "(" ( called = InheritingHiddensCall | hidingCalled = HidingHiddens ) ")" valid ?= ";"
+// "inheriting" "hiddens" "(" (called=InheritingHiddensCall|hidingCalled=HidingHiddens) ")" valid?=";"
 protected class InheritingHiddens_Group extends GroupToken {
 	
 	public InheritingHiddens_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -984,7 +984,7 @@ protected class InheritingHiddens_Group extends GroupToken {
 	}
 }
 
-// "inheriting" "hiddens" "(" ( called = InheritingHiddensCall | hidingCalled = HidingHiddens ) ")"
+// "inheriting" "hiddens" "(" (called=InheritingHiddensCall|hidingCalled=HidingHiddens) ")"
 protected class InheritingHiddens_0_Group extends GroupToken {
 	
 	public InheritingHiddens_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1012,7 +1012,7 @@ protected class InheritingHiddens_0_Group extends GroupToken {
 	}
 }
 
-// "inheriting" "hiddens" "(" ( called = InheritingHiddensCall | hidingCalled = HidingHiddens )
+// "inheriting" "hiddens" "(" (called=InheritingHiddensCall|hidingCalled=HidingHiddens)
 protected class InheritingHiddens_0_0_Group extends GroupToken {
 	
 	public InheritingHiddens_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1134,7 +1134,7 @@ protected class InheritingHiddens_0_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-// called = InheritingHiddensCall | hidingCalled = HidingHiddens
+// called=InheritingHiddensCall|hidingCalled=HidingHiddens
 protected class InheritingHiddens_0_0_1_Alternatives extends AlternativesToken {
 
 	public InheritingHiddens_0_0_1_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -1155,7 +1155,7 @@ protected class InheritingHiddens_0_0_1_Alternatives extends AlternativesToken {
 	}
 }
 
-// called = InheritingHiddensCall
+// called=InheritingHiddensCall
 protected class InheritingHiddens_0_0_1_0_Assignment_called extends AssignmentToken  {
 	
 	public InheritingHiddens_0_0_1_0_Assignment_called(IInstanceDescription curr, AbstractToken pred) {
@@ -1186,7 +1186,7 @@ protected class InheritingHiddens_0_0_1_0_Assignment_called extends AssignmentTo
 	}
 }
 
-// hidingCalled = HidingHiddens
+// hidingCalled=HidingHiddens
 protected class InheritingHiddens_0_0_1_1_Assignment_hidingCalled extends AssignmentToken  {
 	
 	public InheritingHiddens_0_0_1_1_Assignment_hidingCalled(IInstanceDescription curr, AbstractToken pred) {
@@ -1232,7 +1232,7 @@ protected class InheritingHiddens_0_1_Keyword extends KeywordToken  {
 }
 
 
-// valid ?= ";"
+// valid?=";"
 protected class InheritingHiddens_1_Assignment_valid extends AssignmentToken  {
 	
 	public InheritingHiddens_1_Assignment_valid(IInstanceDescription curr, AbstractToken pred) {
@@ -1263,12 +1263,12 @@ protected class InheritingHiddens_1_Assignment_valid extends AssignmentToken  {
 
 /************ begin Rule DatatypeHiddens ****************
  *
- * DatatypeHiddens : "datatype" valid ?= DatatypeRule ;
+ * DatatypeHiddens:   "datatype" valid?=DatatypeRule;
  *
  **/
 
 
-// "datatype" valid ?= DatatypeRule
+// "datatype" valid?=DatatypeRule
 protected class DatatypeHiddens_Group extends GroupToken {
 	
 	public DatatypeHiddens_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1308,7 +1308,7 @@ protected class DatatypeHiddens_0_Keyword_datatype extends KeywordToken  {
 	}	
 }
 
-// valid ?= DatatypeRule
+// valid?=DatatypeRule
 protected class DatatypeHiddens_1_Assignment_valid extends AssignmentToken  {
 	
 	public DatatypeHiddens_1_Assignment_valid(IInstanceDescription curr, AbstractToken pred) {
@@ -1340,12 +1340,12 @@ protected class DatatypeHiddens_1_Assignment_valid extends AssignmentToken  {
 
 /************ begin Rule HidingHiddens ****************
  *
- * HidingHiddens hidden ( ) : "hiding" space = WS called = InheritingHiddensCall ;
+ * HidingHiddens hidden ( ):   "hiding" space=WS called=InheritingHiddensCall;
  *
  **/
 
 
-// "hiding" space = WS called = InheritingHiddensCall
+// "hiding" space=WS called=InheritingHiddensCall
 protected class HidingHiddens_Group extends GroupToken {
 	
 	public HidingHiddens_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1373,7 +1373,7 @@ protected class HidingHiddens_Group extends GroupToken {
 	}
 }
 
-// "hiding" space = WS
+// "hiding" space=WS
 protected class HidingHiddens_0_Group extends GroupToken {
 	
 	public HidingHiddens_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1413,7 +1413,7 @@ protected class HidingHiddens_0_0_Keyword_hiding extends KeywordToken  {
 	}	
 }
 
-// space = WS
+// space=WS
 protected class HidingHiddens_0_1_Assignment_space extends AssignmentToken  {
 	
 	public HidingHiddens_0_1_Assignment_space(IInstanceDescription curr, AbstractToken pred) {
@@ -1439,7 +1439,7 @@ protected class HidingHiddens_0_1_Assignment_space extends AssignmentToken  {
 }
 
 
-// called = InheritingHiddensCall
+// called=InheritingHiddensCall
 protected class HidingHiddens_1_Assignment_called extends AssignmentToken  {
 	
 	public HidingHiddens_1_Assignment_called(IInstanceDescription curr, AbstractToken pred) {
@@ -1476,12 +1476,12 @@ protected class HidingHiddens_1_Assignment_called extends AssignmentToken  {
 
 /************ begin Rule InheritingHiddensCall ****************
  *
- * InheritingHiddensCall : "call" valid ?= ";" ;
+ * InheritingHiddensCall:   "call" valid?=";";
  *
  **/
 
 
-// "call" valid ?= ";"
+// "call" valid?=";"
 protected class InheritingHiddensCall_Group extends GroupToken {
 	
 	public InheritingHiddensCall_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1521,7 +1521,7 @@ protected class InheritingHiddensCall_0_Keyword_call extends KeywordToken  {
 	}	
 }
 
-// valid ?= ";"
+// valid?=";"
 protected class InheritingHiddensCall_1_Assignment_valid extends AssignmentToken  {
 	
 	public InheritingHiddensCall_1_Assignment_valid(IInstanceDescription curr, AbstractToken pred) {

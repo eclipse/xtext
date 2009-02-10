@@ -30,31 +30,31 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		private final RuleCall c010ParserRuleCallObjectRef = (RuleCall)c01AssignmentObjects.eContents().get(0);
 		private final Keyword c1KeywordRightCurlyBracket = (Keyword)cGroup.eContents().get(1);
 		
-		// EPatch : "epatch" name = ID "{" ( imports += Import ) * ( resources += NamedResource ) * ( objects += ObjectRef ) * "}" ;
+		// EPatch:   "epatch" name=ID "{" (imports+=Import)* (resources+=NamedResource)* (objects+=ObjectRef)* "}";
 		public ParserRule getRule() { return rule; }
 
-		// "epatch" name = ID "{" ( imports += Import ) * ( resources += NamedResource ) * ( objects += ObjectRef ) * "}"
+		// "epatch" name=ID "{" (imports+=Import)* (resources+=NamedResource)* (objects+=ObjectRef)* "}"
 		public Group eleGroup() { return cGroup; }
 
-		// "epatch" name = ID "{" ( imports += Import ) * ( resources += NamedResource ) * ( objects += ObjectRef ) *
+		// "epatch" name=ID "{" (imports+=Import)* (resources+=NamedResource)* (objects+=ObjectRef)*
 		public Group ele0Group() { return c0Group; }
 
-		// "epatch" name = ID "{" ( imports += Import ) * ( resources += NamedResource ) *
+		// "epatch" name=ID "{" (imports+=Import)* (resources+=NamedResource)*
 		public Group ele00Group() { return c00Group; }
 
-		// "epatch" name = ID "{" ( imports += Import ) *
+		// "epatch" name=ID "{" (imports+=Import)*
 		public Group ele000Group() { return c000Group; }
 
-		// "epatch" name = ID "{"
+		// "epatch" name=ID "{"
 		public Group ele0000Group() { return c0000Group; }
 
-		// "epatch" name = ID
+		// "epatch" name=ID
 		public Group ele00000Group() { return c00000Group; }
 
 		// "epatch"
 		public Keyword ele000000KeywordEpatch() { return c000000KeywordEpatch; }
 
-		// name = ID
+		// name=ID
 		public Assignment ele000001AssignmentName() { return c000001AssignmentName; }
 
 		// ID
@@ -63,19 +63,19 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		// "{"
 		public Keyword ele00001KeywordLeftCurlyBracket() { return c00001KeywordLeftCurlyBracket; }
 
-		// ( imports += Import ) *
+		// (imports+=Import)*
 		public Assignment ele0001AssignmentImports() { return c0001AssignmentImports; }
 
 		// Import
 		public RuleCall ele00010ParserRuleCallImport() { return c00010ParserRuleCallImport; }
 
-		// ( resources += NamedResource ) *
+		// (resources+=NamedResource)*
 		public Assignment ele001AssignmentResources() { return c001AssignmentResources; }
 
 		// NamedResource
 		public RuleCall ele0010ParserRuleCallNamedResource() { return c0010ParserRuleCallNamedResource; }
 
-		// ( objects += ObjectRef ) *
+		// (objects+=ObjectRef)*
 		public Assignment ele01AssignmentObjects() { return c01AssignmentObjects; }
 
 		// ObjectRef
@@ -93,13 +93,13 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		private final RuleCall c01ParserRuleCallJavaImport = (RuleCall)c0Alternatives.eContents().get(1);
 		private final RuleCall c1ParserRuleCallExtensionImport = (RuleCall)cAlternatives.eContents().get(1);
 		
-		// Import : ModelImport | JavaImport | ExtensionImport ;
+		// Import:   ModelImport|JavaImport|ExtensionImport;
 		public ParserRule getRule() { return rule; }
 
-		// ModelImport | JavaImport | ExtensionImport
+		// ModelImport|JavaImport|ExtensionImport
 		public Alternatives eleAlternatives() { return cAlternatives; }
 
-		// ModelImport | JavaImport
+		// ModelImport|JavaImport
 		public Alternatives ele0Alternatives() { return c0Alternatives; }
 
 		// ModelImport
@@ -118,10 +118,10 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		private final RuleCall c0ParserRuleCallResourceImport = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall c1ParserRuleCallEPackageImport = (RuleCall)cAlternatives.eContents().get(1);
 		
-		// ModelImport : ResourceImport | EPackageImport ;
+		// ModelImport:   ResourceImport|EPackageImport;
 		public ParserRule getRule() { return rule; }
 
-		// ResourceImport | EPackageImport
+		// ResourceImport|EPackageImport
 		public Alternatives eleAlternatives() { return cAlternatives; }
 
 		// ResourceImport
@@ -143,22 +143,22 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		private final Assignment c1AssignmentUri = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall c10LexerRuleCallSTRING = (RuleCall)c1AssignmentUri.eContents().get(0);
 		
-		// ResourceImport : "import" name = ID "uri" uri = STRING ;
+		// ResourceImport:   "import" name=ID "uri" uri=STRING;
 		public ParserRule getRule() { return rule; }
 
-		// "import" name = ID "uri" uri = STRING
+		// "import" name=ID "uri" uri=STRING
 		public Group eleGroup() { return cGroup; }
 
-		// "import" name = ID "uri"
+		// "import" name=ID "uri"
 		public Group ele0Group() { return c0Group; }
 
-		// "import" name = ID
+		// "import" name=ID
 		public Group ele00Group() { return c00Group; }
 
 		// "import"
 		public Keyword ele000KeywordImport() { return c000KeywordImport; }
 
-		// name = ID
+		// name=ID
 		public Assignment ele001AssignmentName() { return c001AssignmentName; }
 
 		// ID
@@ -167,7 +167,7 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		// "uri"
 		public Keyword ele01KeywordUri() { return c01KeywordUri; }
 
-		// uri = STRING
+		// uri=STRING
 		public Assignment ele1AssignmentUri() { return c1AssignmentUri; }
 
 		// STRING
@@ -186,22 +186,22 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		private final Assignment c1AssignmentNsURI = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall c10LexerRuleCallSTRING = (RuleCall)c1AssignmentNsURI.eContents().get(0);
 		
-		// EPackageImport : "import" name = ID "ns" nsURI = STRING ;
+		// EPackageImport:   "import" name=ID "ns" nsURI=STRING;
 		public ParserRule getRule() { return rule; }
 
-		// "import" name = ID "ns" nsURI = STRING
+		// "import" name=ID "ns" nsURI=STRING
 		public Group eleGroup() { return cGroup; }
 
-		// "import" name = ID "ns"
+		// "import" name=ID "ns"
 		public Group ele0Group() { return c0Group; }
 
-		// "import" name = ID
+		// "import" name=ID
 		public Group ele00Group() { return c00Group; }
 
 		// "import"
 		public Keyword ele000KeywordImport() { return c000KeywordImport; }
 
-		// name = ID
+		// name=ID
 		public Assignment ele001AssignmentName() { return c001AssignmentName; }
 
 		// ID
@@ -210,7 +210,7 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		// "ns"
 		public Keyword ele01KeywordNs() { return c01KeywordNs; }
 
-		// nsURI = STRING
+		// nsURI=STRING
 		public Assignment ele1AssignmentNsURI() { return c1AssignmentNsURI; }
 
 		// STRING
@@ -231,13 +231,13 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		private final Assignment c11AssignmentPath = (Assignment)c1Group.eContents().get(1);
 		private final RuleCall c110LexerRuleCallID = (RuleCall)c11AssignmentPath.eContents().get(0);
 		
-		// JavaImport : "import" "java" path += ID ( "." path += ID ) * ;
+		// JavaImport:   "import" "java" path+=ID ("." path+=ID)*;
 		public ParserRule getRule() { return rule; }
 
-		// "import" "java" path += ID ( "." path += ID ) *
+		// "import" "java" path+=ID ("." path+=ID)*
 		public Group eleGroup() { return cGroup; }
 
-		// "import" "java" path += ID
+		// "import" "java" path+=ID
 		public Group ele0Group() { return c0Group; }
 
 		// "import" "java"
@@ -249,19 +249,19 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		// "java"
 		public Keyword ele001KeywordJava() { return c001KeywordJava; }
 
-		// path += ID
+		// path+=ID
 		public Assignment ele01AssignmentPath() { return c01AssignmentPath; }
 
 		// ID
 		public RuleCall ele010LexerRuleCallID() { return c010LexerRuleCallID; }
 
-		// ( "." path += ID ) *
+		// ("." path+=ID)*
 		public Group ele1Group() { return c1Group; }
 
 		// "."
 		public Keyword ele10KeywordFullStop() { return c10KeywordFullStop; }
 
-		// path += ID
+		// path+=ID
 		public Assignment ele11AssignmentPath() { return c11AssignmentPath; }
 
 		// ID
@@ -282,13 +282,13 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		private final Assignment c11AssignmentPath = (Assignment)c1Group.eContents().get(1);
 		private final RuleCall c110LexerRuleCallID = (RuleCall)c11AssignmentPath.eContents().get(0);
 		
-		// ExtensionImport : "import" "extension" path += ID ( "::" path += ID ) * ;
+		// ExtensionImport:   "import" "extension" path+=ID ("::" path+=ID)*;
 		public ParserRule getRule() { return rule; }
 
-		// "import" "extension" path += ID ( "::" path += ID ) *
+		// "import" "extension" path+=ID ("::" path+=ID)*
 		public Group eleGroup() { return cGroup; }
 
-		// "import" "extension" path += ID
+		// "import" "extension" path+=ID
 		public Group ele0Group() { return c0Group; }
 
 		// "import" "extension"
@@ -300,19 +300,19 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		// "extension"
 		public Keyword ele001KeywordExtension() { return c001KeywordExtension; }
 
-		// path += ID
+		// path+=ID
 		public Assignment ele01AssignmentPath() { return c01AssignmentPath; }
 
 		// ID
 		public RuleCall ele010LexerRuleCallID() { return c010LexerRuleCallID; }
 
-		// ( "::" path += ID ) *
+		// ("::" path+=ID)*
 		public Group ele1Group() { return c1Group; }
 
 		// "::"
 		public Keyword ele10KeywordColonColon() { return c10KeywordColonColon; }
 
-		// path += ID
+		// path+=ID
 		public Assignment ele11AssignmentPath() { return c11AssignmentPath; }
 
 		// ID
@@ -354,40 +354,40 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		private final Keyword c01KeywordSemicolon = (Keyword)c0Group.eContents().get(1);
 		private final Keyword c1KeywordRightCurlyBracket = (Keyword)cGroup.eContents().get(1);
 		
-		// NamedResource : "resource" name = ID "{" "left" ( "uri" leftUri = STRING | leftRoot = CreatedObject ) ";" "right" ( "uri" rightUri = STRING | rightRoot = CreatedObject ) ";" "}" ;
+		// NamedResource:   "resource" name=ID "{" "left" ("uri" leftUri=STRING|leftRoot=CreatedObject) ";" "right" ("uri" rightUri=STRING|rightRoot=CreatedObject) ";" "}";
 		public ParserRule getRule() { return rule; }
 
-		// "resource" name = ID "{" "left" ( "uri" leftUri = STRING | leftRoot = CreatedObject ) ";" "right" ( "uri" rightUri = STRING | rightRoot = CreatedObject ) ";" "}"
+		// "resource" name=ID "{" "left" ("uri" leftUri=STRING|leftRoot=CreatedObject) ";" "right" ("uri" rightUri=STRING|rightRoot=CreatedObject) ";" "}"
 		public Group eleGroup() { return cGroup; }
 
-		// "resource" name = ID "{" "left" ( "uri" leftUri = STRING | leftRoot = CreatedObject ) ";" "right" ( "uri" rightUri = STRING | rightRoot = CreatedObject ) ";"
+		// "resource" name=ID "{" "left" ("uri" leftUri=STRING|leftRoot=CreatedObject) ";" "right" ("uri" rightUri=STRING|rightRoot=CreatedObject) ";"
 		public Group ele0Group() { return c0Group; }
 
-		// "resource" name = ID "{" "left" ( "uri" leftUri = STRING | leftRoot = CreatedObject ) ";" "right" ( "uri" rightUri = STRING | rightRoot = CreatedObject )
+		// "resource" name=ID "{" "left" ("uri" leftUri=STRING|leftRoot=CreatedObject) ";" "right" ("uri" rightUri=STRING|rightRoot=CreatedObject)
 		public Group ele00Group() { return c00Group; }
 
-		// "resource" name = ID "{" "left" ( "uri" leftUri = STRING | leftRoot = CreatedObject ) ";" "right"
+		// "resource" name=ID "{" "left" ("uri" leftUri=STRING|leftRoot=CreatedObject) ";" "right"
 		public Group ele000Group() { return c000Group; }
 
-		// "resource" name = ID "{" "left" ( "uri" leftUri = STRING | leftRoot = CreatedObject ) ";"
+		// "resource" name=ID "{" "left" ("uri" leftUri=STRING|leftRoot=CreatedObject) ";"
 		public Group ele0000Group() { return c0000Group; }
 
-		// "resource" name = ID "{" "left" ( "uri" leftUri = STRING | leftRoot = CreatedObject )
+		// "resource" name=ID "{" "left" ("uri" leftUri=STRING|leftRoot=CreatedObject)
 		public Group ele00000Group() { return c00000Group; }
 
-		// "resource" name = ID "{" "left"
+		// "resource" name=ID "{" "left"
 		public Group ele000000Group() { return c000000Group; }
 
-		// "resource" name = ID "{"
+		// "resource" name=ID "{"
 		public Group ele0000000Group() { return c0000000Group; }
 
-		// "resource" name = ID
+		// "resource" name=ID
 		public Group ele00000000Group() { return c00000000Group; }
 
 		// "resource"
 		public Keyword ele000000000KeywordResource() { return c000000000KeywordResource; }
 
-		// name = ID
+		// name=ID
 		public Assignment ele000000001AssignmentName() { return c000000001AssignmentName; }
 
 		// ID
@@ -399,22 +399,22 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		// "left"
 		public Keyword ele0000001KeywordLeft() { return c0000001KeywordLeft; }
 
-		// "uri" leftUri = STRING | leftRoot = CreatedObject
+		// "uri" leftUri=STRING|leftRoot=CreatedObject
 		public Alternatives ele000001Alternatives() { return c000001Alternatives; }
 
-		// "uri" leftUri = STRING
+		// "uri" leftUri=STRING
 		public Group ele0000010Group() { return c0000010Group; }
 
 		// "uri"
 		public Keyword ele00000100KeywordUri() { return c00000100KeywordUri; }
 
-		// leftUri = STRING
+		// leftUri=STRING
 		public Assignment ele00000101AssignmentLeftUri() { return c00000101AssignmentLeftUri; }
 
 		// STRING
 		public RuleCall ele000001010LexerRuleCallSTRING() { return c000001010LexerRuleCallSTRING; }
 
-		// leftRoot = CreatedObject
+		// leftRoot=CreatedObject
 		public Assignment ele0000011AssignmentLeftRoot() { return c0000011AssignmentLeftRoot; }
 
 		// CreatedObject
@@ -426,22 +426,22 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		// "right"
 		public Keyword ele0001KeywordRight() { return c0001KeywordRight; }
 
-		// "uri" rightUri = STRING | rightRoot = CreatedObject
+		// "uri" rightUri=STRING|rightRoot=CreatedObject
 		public Alternatives ele001Alternatives() { return c001Alternatives; }
 
-		// "uri" rightUri = STRING
+		// "uri" rightUri=STRING
 		public Group ele0010Group() { return c0010Group; }
 
 		// "uri"
 		public Keyword ele00100KeywordUri() { return c00100KeywordUri; }
 
-		// rightUri = STRING
+		// rightUri=STRING
 		public Assignment ele00101AssignmentRightUri() { return c00101AssignmentRightUri; }
 
 		// STRING
 		public RuleCall ele001010LexerRuleCallSTRING() { return c001010LexerRuleCallSTRING; }
 
-		// rightRoot = CreatedObject
+		// rightRoot=CreatedObject
 		public Assignment ele0011AssignmentRightRoot() { return c0011AssignmentRightRoot; }
 
 		// CreatedObject
@@ -460,10 +460,10 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		private final RuleCall c0ParserRuleCallObjectRef = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall c1ParserRuleCallCreatedObject = (RuleCall)cAlternatives.eContents().get(1);
 		
-		// NamedObject : ObjectRef | CreatedObject ;
+		// NamedObject:   ObjectRef|CreatedObject;
 		public ParserRule getRule() { return rule; }
 
-		// ObjectRef | CreatedObject
+		// ObjectRef|CreatedObject
 		public Alternatives eleAlternatives() { return cAlternatives; }
 
 		// ObjectRef
@@ -522,70 +522,70 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		private final RuleCall c10110ParserRuleCallMigration = (RuleCall)c1011AssignmentRightMig.eContents().get(0);
 		private final Keyword c11KeywordRightCurlyBracket = (Keyword)c1Group.eContents().get(1);
 		
-		// ObjectRef : "object" ( name = ID ) ? ( leftRes = [ NamedResource ] leftFrag = FRAGMENT | "left" leftRes = [ NamedResource ] leftFrag = FRAGMENT "right" rightRes = [ NamedResource ] rightFrag = FRAGMENT ) ( "{" ( assignments += BiSingleAssignment | assignments += BiListAssignment ) + ( "left" leftMig = Migration ) ? ( "right" rightMig = Migration ) ? "}" ) ? ;
+		// ObjectRef:   "object" (name=ID)? (leftRes=[NamedResource] leftFrag=FRAGMENT|"left" leftRes=[NamedResource] leftFrag=FRAGMENT "right" rightRes=[NamedResource] rightFrag=FRAGMENT) ("{" (assignments+=BiSingleAssignment|assignments+=BiListAssignment)+ ("left" leftMig=Migration)? ("right" rightMig=Migration)? "}")?;
 		public ParserRule getRule() { return rule; }
 
-		// "object" ( name = ID ) ? ( leftRes = [ NamedResource ] leftFrag = FRAGMENT | "left" leftRes = [ NamedResource ] leftFrag = FRAGMENT "right" rightRes = [ NamedResource ] rightFrag = FRAGMENT ) ( "{" ( assignments += BiSingleAssignment | assignments += BiListAssignment ) + ( "left" leftMig = Migration ) ? ( "right" rightMig = Migration ) ? "}" ) ?
+		// "object" (name=ID)? (leftRes=[NamedResource] leftFrag=FRAGMENT|"left" leftRes=[NamedResource] leftFrag=FRAGMENT "right" rightRes=[NamedResource] rightFrag=FRAGMENT) ("{" (assignments+=BiSingleAssignment|assignments+=BiListAssignment)+ ("left" leftMig=Migration)? ("right" rightMig=Migration)? "}")?
 		public Group eleGroup() { return cGroup; }
 
-		// "object" ( name = ID ) ? ( leftRes = [ NamedResource ] leftFrag = FRAGMENT | "left" leftRes = [ NamedResource ] leftFrag = FRAGMENT "right" rightRes = [ NamedResource ] rightFrag = FRAGMENT )
+		// "object" (name=ID)? (leftRes=[NamedResource] leftFrag=FRAGMENT|"left" leftRes=[NamedResource] leftFrag=FRAGMENT "right" rightRes=[NamedResource] rightFrag=FRAGMENT)
 		public Group ele0Group() { return c0Group; }
 
-		// "object" ( name = ID ) ?
+		// "object" (name=ID)?
 		public Group ele00Group() { return c00Group; }
 
 		// "object"
 		public Keyword ele000KeywordObject() { return c000KeywordObject; }
 
-		// ( name = ID ) ?
+		// (name=ID)?
 		public Assignment ele001AssignmentName() { return c001AssignmentName; }
 
 		// ID
 		public RuleCall ele0010LexerRuleCallID() { return c0010LexerRuleCallID; }
 
-		// leftRes = [ NamedResource ] leftFrag = FRAGMENT | "left" leftRes = [ NamedResource ] leftFrag = FRAGMENT "right" rightRes = [ NamedResource ] rightFrag = FRAGMENT
+		// leftRes=[NamedResource] leftFrag=FRAGMENT|"left" leftRes=[NamedResource] leftFrag=FRAGMENT "right" rightRes=[NamedResource] rightFrag=FRAGMENT
 		public Alternatives ele01Alternatives() { return c01Alternatives; }
 
-		// leftRes = [ NamedResource ] leftFrag = FRAGMENT
+		// leftRes=[NamedResource] leftFrag=FRAGMENT
 		public Group ele010Group() { return c010Group; }
 
-		// leftRes = [ NamedResource ]
+		// leftRes=[NamedResource]
 		public Assignment ele0100AssignmentLeftRes() { return c0100AssignmentLeftRes; }
 
-		// [ NamedResource ]
+		// [NamedResource]
 		public CrossReference ele01000CrossReferenceEStringNamedResource() { return c01000CrossReferenceEStringNamedResource; }
 
-		// leftFrag = FRAGMENT
+		// leftFrag=FRAGMENT
 		public Assignment ele0101AssignmentLeftFrag() { return c0101AssignmentLeftFrag; }
 
 		// FRAGMENT
 		public RuleCall ele01010LexerRuleCallFRAGMENT() { return c01010LexerRuleCallFRAGMENT; }
 
-		// "left" leftRes = [ NamedResource ] leftFrag = FRAGMENT "right" rightRes = [ NamedResource ] rightFrag = FRAGMENT
+		// "left" leftRes=[NamedResource] leftFrag=FRAGMENT "right" rightRes=[NamedResource] rightFrag=FRAGMENT
 		public Group ele011Group() { return c011Group; }
 
-		// "left" leftRes = [ NamedResource ] leftFrag = FRAGMENT "right" rightRes = [ NamedResource ]
+		// "left" leftRes=[NamedResource] leftFrag=FRAGMENT "right" rightRes=[NamedResource]
 		public Group ele0110Group() { return c0110Group; }
 
-		// "left" leftRes = [ NamedResource ] leftFrag = FRAGMENT "right"
+		// "left" leftRes=[NamedResource] leftFrag=FRAGMENT "right"
 		public Group ele01100Group() { return c01100Group; }
 
-		// "left" leftRes = [ NamedResource ] leftFrag = FRAGMENT
+		// "left" leftRes=[NamedResource] leftFrag=FRAGMENT
 		public Group ele011000Group() { return c011000Group; }
 
-		// "left" leftRes = [ NamedResource ]
+		// "left" leftRes=[NamedResource]
 		public Group ele0110000Group() { return c0110000Group; }
 
 		// "left"
 		public Keyword ele01100000KeywordLeft() { return c01100000KeywordLeft; }
 
-		// leftRes = [ NamedResource ]
+		// leftRes=[NamedResource]
 		public Assignment ele01100001AssignmentLeftRes() { return c01100001AssignmentLeftRes; }
 
-		// [ NamedResource ]
+		// [NamedResource]
 		public CrossReference ele011000010CrossReferenceEStringNamedResource() { return c011000010CrossReferenceEStringNamedResource; }
 
-		// leftFrag = FRAGMENT
+		// leftFrag=FRAGMENT
 		public Assignment ele0110001AssignmentLeftFrag() { return c0110001AssignmentLeftFrag; }
 
 		// FRAGMENT
@@ -594,67 +594,67 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		// "right"
 		public Keyword ele011001KeywordRight() { return c011001KeywordRight; }
 
-		// rightRes = [ NamedResource ]
+		// rightRes=[NamedResource]
 		public Assignment ele01101AssignmentRightRes() { return c01101AssignmentRightRes; }
 
-		// [ NamedResource ]
+		// [NamedResource]
 		public CrossReference ele011010CrossReferenceEStringNamedResource() { return c011010CrossReferenceEStringNamedResource; }
 
-		// rightFrag = FRAGMENT
+		// rightFrag=FRAGMENT
 		public Assignment ele0111AssignmentRightFrag() { return c0111AssignmentRightFrag; }
 
 		// FRAGMENT
 		public RuleCall ele01110LexerRuleCallFRAGMENT() { return c01110LexerRuleCallFRAGMENT; }
 
-		// ( "{" ( assignments += BiSingleAssignment | assignments += BiListAssignment ) + ( "left" leftMig = Migration ) ? ( "right" rightMig = Migration ) ? "}" ) ?
+		// ("{" (assignments+=BiSingleAssignment|assignments+=BiListAssignment)+ ("left" leftMig=Migration)? ("right" rightMig=Migration)? "}")?
 		public Group ele1Group() { return c1Group; }
 
-		// "{" ( assignments += BiSingleAssignment | assignments += BiListAssignment ) + ( "left" leftMig = Migration ) ? ( "right" rightMig = Migration ) ?
+		// "{" (assignments+=BiSingleAssignment|assignments+=BiListAssignment)+ ("left" leftMig=Migration)? ("right" rightMig=Migration)?
 		public Group ele10Group() { return c10Group; }
 
-		// "{" ( assignments += BiSingleAssignment | assignments += BiListAssignment ) + ( "left" leftMig = Migration ) ?
+		// "{" (assignments+=BiSingleAssignment|assignments+=BiListAssignment)+ ("left" leftMig=Migration)?
 		public Group ele100Group() { return c100Group; }
 
-		// "{" ( assignments += BiSingleAssignment | assignments += BiListAssignment ) +
+		// "{" (assignments+=BiSingleAssignment|assignments+=BiListAssignment)+
 		public Group ele1000Group() { return c1000Group; }
 
 		// "{"
 		public Keyword ele10000KeywordLeftCurlyBracket() { return c10000KeywordLeftCurlyBracket; }
 
-		// ( assignments += BiSingleAssignment | assignments += BiListAssignment ) +
+		// (assignments+=BiSingleAssignment|assignments+=BiListAssignment)+
 		public Alternatives ele10001Alternatives() { return c10001Alternatives; }
 
-		// assignments += BiSingleAssignment
+		// assignments+=BiSingleAssignment
 		public Assignment ele100010AssignmentAssignments() { return c100010AssignmentAssignments; }
 
 		// BiSingleAssignment
 		public RuleCall ele1000100ParserRuleCallBiSingleAssignment() { return c1000100ParserRuleCallBiSingleAssignment; }
 
-		// assignments += BiListAssignment
+		// assignments+=BiListAssignment
 		public Assignment ele100011AssignmentAssignments() { return c100011AssignmentAssignments; }
 
 		// BiListAssignment
 		public RuleCall ele1000110ParserRuleCallBiListAssignment() { return c1000110ParserRuleCallBiListAssignment; }
 
-		// ( "left" leftMig = Migration ) ?
+		// ("left" leftMig=Migration)?
 		public Group ele1001Group() { return c1001Group; }
 
 		// "left"
 		public Keyword ele10010KeywordLeft() { return c10010KeywordLeft; }
 
-		// leftMig = Migration
+		// leftMig=Migration
 		public Assignment ele10011AssignmentLeftMig() { return c10011AssignmentLeftMig; }
 
 		// Migration
 		public RuleCall ele100110ParserRuleCallMigration() { return c100110ParserRuleCallMigration; }
 
-		// ( "right" rightMig = Migration ) ?
+		// ("right" rightMig=Migration)?
 		public Group ele101Group() { return c101Group; }
 
 		// "right"
 		public Keyword ele1010KeywordRight() { return c1010KeywordRight; }
 
-		// rightMig = Migration
+		// rightMig=Migration
 		public Assignment ele1011AssignmentRightMig() { return c1011AssignmentRightMig; }
 
 		// Migration
@@ -674,16 +674,16 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		private final RuleCall c01ParserRuleCallMonoSingleAssignment = (RuleCall)c0Alternatives.eContents().get(1);
 		private final RuleCall c1ParserRuleCallMonoListAssignment = (RuleCall)cAlternatives.eContents().get(1);
 		
-		// Assignment : BiSingleAssignment | BiListAssignment | MonoSingleAssignment | MonoListAssignment ;
+		// Assignment:   BiSingleAssignment|BiListAssignment|MonoSingleAssignment|MonoListAssignment;
 		public ParserRule getRule() { return rule; }
 
-		// BiSingleAssignment | BiListAssignment | MonoSingleAssignment | MonoListAssignment
+		// BiSingleAssignment|BiListAssignment|MonoSingleAssignment|MonoListAssignment
 		public Alternatives eleAlternatives() { return cAlternatives; }
 
-		// BiSingleAssignment | BiListAssignment | MonoSingleAssignment
+		// BiSingleAssignment|BiListAssignment|MonoSingleAssignment
 		public Alternatives ele0Alternatives() { return c0Alternatives; }
 
-		// BiSingleAssignment | BiListAssignment
+		// BiSingleAssignment|BiListAssignment
 		public Alternatives ele00Alternatives() { return c00Alternatives; }
 
 		// BiSingleAssignment
@@ -716,25 +716,25 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		private final RuleCall c010ParserRuleCallSingleAssignmentValue = (RuleCall)c01AssignmentRightValue.eContents().get(0);
 		private final Keyword c1KeywordSemicolon = (Keyword)cGroup.eContents().get(1);
 		
-		// BiSingleAssignment returns SingleAssignment : feature = ID "=" leftValue = SingleAssignmentValue "|" rightValue = SingleAssignmentValue ";" ;
+		// BiSingleAssignment returns SingleAssignment:   feature=ID "=" leftValue=SingleAssignmentValue "|" rightValue=SingleAssignmentValue ";";
 		public ParserRule getRule() { return rule; }
 
-		// feature = ID "=" leftValue = SingleAssignmentValue "|" rightValue = SingleAssignmentValue ";"
+		// feature=ID "=" leftValue=SingleAssignmentValue "|" rightValue=SingleAssignmentValue ";"
 		public Group eleGroup() { return cGroup; }
 
-		// feature = ID "=" leftValue = SingleAssignmentValue "|" rightValue = SingleAssignmentValue
+		// feature=ID "=" leftValue=SingleAssignmentValue "|" rightValue=SingleAssignmentValue
 		public Group ele0Group() { return c0Group; }
 
-		// feature = ID "=" leftValue = SingleAssignmentValue "|"
+		// feature=ID "=" leftValue=SingleAssignmentValue "|"
 		public Group ele00Group() { return c00Group; }
 
-		// feature = ID "=" leftValue = SingleAssignmentValue
+		// feature=ID "=" leftValue=SingleAssignmentValue
 		public Group ele000Group() { return c000Group; }
 
-		// feature = ID "="
+		// feature=ID "="
 		public Group ele0000Group() { return c0000Group; }
 
-		// feature = ID
+		// feature=ID
 		public Assignment ele00000AssignmentFeature() { return c00000AssignmentFeature; }
 
 		// ID
@@ -743,7 +743,7 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		// "="
 		public Keyword ele00001KeywordEqualsSign() { return c00001KeywordEqualsSign; }
 
-		// leftValue = SingleAssignmentValue
+		// leftValue=SingleAssignmentValue
 		public Assignment ele0001AssignmentLeftValue() { return c0001AssignmentLeftValue; }
 
 		// SingleAssignmentValue
@@ -752,7 +752,7 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		// "|"
 		public Keyword ele001KeywordVerticalLine() { return c001KeywordVerticalLine; }
 
-		// rightValue = SingleAssignmentValue
+		// rightValue=SingleAssignmentValue
 		public Assignment ele01AssignmentRightValue() { return c01AssignmentRightValue; }
 
 		// SingleAssignmentValue
@@ -793,31 +793,31 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		private final Keyword c01KeywordRightSquareBracket = (Keyword)c0Group.eContents().get(1);
 		private final Keyword c1KeywordSemicolon = (Keyword)cGroup.eContents().get(1);
 		
-		// BiListAssignment returns ListAssignment : feature = ID "=" "[" ( leftValues += ListAssignmentValue ( "," leftValues += ListAssignmentValue ) * ) ? "|" ( rightValues += ListAssignmentValue ( "," rightValues += ListAssignmentValue ) * ) ? "]" ";" ;
+		// BiListAssignment returns ListAssignment:   feature=ID "=" "[" (leftValues+=ListAssignmentValue ("," leftValues+=ListAssignmentValue)*)? "|" (rightValues+=ListAssignmentValue ("," rightValues+=ListAssignmentValue)*)? "]" ";";
 		public ParserRule getRule() { return rule; }
 
-		// feature = ID "=" "[" ( leftValues += ListAssignmentValue ( "," leftValues += ListAssignmentValue ) * ) ? "|" ( rightValues += ListAssignmentValue ( "," rightValues += ListAssignmentValue ) * ) ? "]" ";"
+		// feature=ID "=" "[" (leftValues+=ListAssignmentValue ("," leftValues+=ListAssignmentValue)*)? "|" (rightValues+=ListAssignmentValue ("," rightValues+=ListAssignmentValue)*)? "]" ";"
 		public Group eleGroup() { return cGroup; }
 
-		// feature = ID "=" "[" ( leftValues += ListAssignmentValue ( "," leftValues += ListAssignmentValue ) * ) ? "|" ( rightValues += ListAssignmentValue ( "," rightValues += ListAssignmentValue ) * ) ? "]"
+		// feature=ID "=" "[" (leftValues+=ListAssignmentValue ("," leftValues+=ListAssignmentValue)*)? "|" (rightValues+=ListAssignmentValue ("," rightValues+=ListAssignmentValue)*)? "]"
 		public Group ele0Group() { return c0Group; }
 
-		// feature = ID "=" "[" ( leftValues += ListAssignmentValue ( "," leftValues += ListAssignmentValue ) * ) ? "|" ( rightValues += ListAssignmentValue ( "," rightValues += ListAssignmentValue ) * ) ?
+		// feature=ID "=" "[" (leftValues+=ListAssignmentValue ("," leftValues+=ListAssignmentValue)*)? "|" (rightValues+=ListAssignmentValue ("," rightValues+=ListAssignmentValue)*)?
 		public Group ele00Group() { return c00Group; }
 
-		// feature = ID "=" "[" ( leftValues += ListAssignmentValue ( "," leftValues += ListAssignmentValue ) * ) ? "|"
+		// feature=ID "=" "[" (leftValues+=ListAssignmentValue ("," leftValues+=ListAssignmentValue)*)? "|"
 		public Group ele000Group() { return c000Group; }
 
-		// feature = ID "=" "[" ( leftValues += ListAssignmentValue ( "," leftValues += ListAssignmentValue ) * ) ?
+		// feature=ID "=" "[" (leftValues+=ListAssignmentValue ("," leftValues+=ListAssignmentValue)*)?
 		public Group ele0000Group() { return c0000Group; }
 
-		// feature = ID "=" "["
+		// feature=ID "=" "["
 		public Group ele00000Group() { return c00000Group; }
 
-		// feature = ID "="
+		// feature=ID "="
 		public Group ele000000Group() { return c000000Group; }
 
-		// feature = ID
+		// feature=ID
 		public Assignment ele0000000AssignmentFeature() { return c0000000AssignmentFeature; }
 
 		// ID
@@ -829,22 +829,22 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		// "["
 		public Keyword ele000001KeywordLeftSquareBracket() { return c000001KeywordLeftSquareBracket; }
 
-		// ( leftValues += ListAssignmentValue ( "," leftValues += ListAssignmentValue ) * ) ?
+		// (leftValues+=ListAssignmentValue ("," leftValues+=ListAssignmentValue)*)?
 		public Group ele00001Group() { return c00001Group; }
 
-		// leftValues += ListAssignmentValue
+		// leftValues+=ListAssignmentValue
 		public Assignment ele000010AssignmentLeftValues() { return c000010AssignmentLeftValues; }
 
 		// ListAssignmentValue
 		public RuleCall ele0000100ParserRuleCallListAssignmentValue() { return c0000100ParserRuleCallListAssignmentValue; }
 
-		// ( "," leftValues += ListAssignmentValue ) *
+		// ("," leftValues+=ListAssignmentValue)*
 		public Group ele000011Group() { return c000011Group; }
 
 		// ","
 		public Keyword ele0000110KeywordComma() { return c0000110KeywordComma; }
 
-		// leftValues += ListAssignmentValue
+		// leftValues+=ListAssignmentValue
 		public Assignment ele0000111AssignmentLeftValues() { return c0000111AssignmentLeftValues; }
 
 		// ListAssignmentValue
@@ -853,22 +853,22 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		// "|"
 		public Keyword ele0001KeywordVerticalLine() { return c0001KeywordVerticalLine; }
 
-		// ( rightValues += ListAssignmentValue ( "," rightValues += ListAssignmentValue ) * ) ?
+		// (rightValues+=ListAssignmentValue ("," rightValues+=ListAssignmentValue)*)?
 		public Group ele001Group() { return c001Group; }
 
-		// rightValues += ListAssignmentValue
+		// rightValues+=ListAssignmentValue
 		public Assignment ele0010AssignmentRightValues() { return c0010AssignmentRightValues; }
 
 		// ListAssignmentValue
 		public RuleCall ele00100ParserRuleCallListAssignmentValue() { return c00100ParserRuleCallListAssignmentValue; }
 
-		// ( "," rightValues += ListAssignmentValue ) *
+		// ("," rightValues+=ListAssignmentValue)*
 		public Group ele0011Group() { return c0011Group; }
 
 		// ","
 		public Keyword ele00110KeywordComma() { return c00110KeywordComma; }
 
-		// rightValues += ListAssignmentValue
+		// rightValues+=ListAssignmentValue
 		public Assignment ele00111AssignmentRightValues() { return c00111AssignmentRightValues; }
 
 		// ListAssignmentValue
@@ -893,19 +893,19 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		private final RuleCall c010ParserRuleCallSingleAssignmentValue = (RuleCall)c01AssignmentLeftValue.eContents().get(0);
 		private final Keyword c1KeywordSemicolon = (Keyword)cGroup.eContents().get(1);
 		
-		// MonoSingleAssignment returns SingleAssignment : feature = ID "=" leftValue = SingleAssignmentValue ";" ;
+		// MonoSingleAssignment returns SingleAssignment:   feature=ID "=" leftValue=SingleAssignmentValue ";";
 		public ParserRule getRule() { return rule; }
 
-		// feature = ID "=" leftValue = SingleAssignmentValue ";"
+		// feature=ID "=" leftValue=SingleAssignmentValue ";"
 		public Group eleGroup() { return cGroup; }
 
-		// feature = ID "=" leftValue = SingleAssignmentValue
+		// feature=ID "=" leftValue=SingleAssignmentValue
 		public Group ele0Group() { return c0Group; }
 
-		// feature = ID "="
+		// feature=ID "="
 		public Group ele00Group() { return c00Group; }
 
-		// feature = ID
+		// feature=ID
 		public Assignment ele000AssignmentFeature() { return c000AssignmentFeature; }
 
 		// ID
@@ -914,7 +914,7 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		// "="
 		public Keyword ele001KeywordEqualsSign() { return c001KeywordEqualsSign; }
 
-		// leftValue = SingleAssignmentValue
+		// leftValue=SingleAssignmentValue
 		public Assignment ele01AssignmentLeftValue() { return c01AssignmentLeftValue; }
 
 		// SingleAssignmentValue
@@ -945,25 +945,25 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		private final Keyword c01KeywordRightSquareBracket = (Keyword)c0Group.eContents().get(1);
 		private final Keyword c1KeywordSemicolon = (Keyword)cGroup.eContents().get(1);
 		
-		// MonoListAssignment returns ListAssignment : feature = ID "=" "[" ( leftValues += AssignmentValue ( "," leftValues += AssignmentValue ) * ) ? "]" ";" ;
+		// MonoListAssignment returns ListAssignment:   feature=ID "=" "[" (leftValues+=AssignmentValue ("," leftValues+=AssignmentValue)*)? "]" ";";
 		public ParserRule getRule() { return rule; }
 
-		// feature = ID "=" "[" ( leftValues += AssignmentValue ( "," leftValues += AssignmentValue ) * ) ? "]" ";"
+		// feature=ID "=" "[" (leftValues+=AssignmentValue ("," leftValues+=AssignmentValue)*)? "]" ";"
 		public Group eleGroup() { return cGroup; }
 
-		// feature = ID "=" "[" ( leftValues += AssignmentValue ( "," leftValues += AssignmentValue ) * ) ? "]"
+		// feature=ID "=" "[" (leftValues+=AssignmentValue ("," leftValues+=AssignmentValue)*)? "]"
 		public Group ele0Group() { return c0Group; }
 
-		// feature = ID "=" "[" ( leftValues += AssignmentValue ( "," leftValues += AssignmentValue ) * ) ?
+		// feature=ID "=" "[" (leftValues+=AssignmentValue ("," leftValues+=AssignmentValue)*)?
 		public Group ele00Group() { return c00Group; }
 
-		// feature = ID "=" "["
+		// feature=ID "=" "["
 		public Group ele000Group() { return c000Group; }
 
-		// feature = ID "="
+		// feature=ID "="
 		public Group ele0000Group() { return c0000Group; }
 
-		// feature = ID
+		// feature=ID
 		public Assignment ele00000AssignmentFeature() { return c00000AssignmentFeature; }
 
 		// ID
@@ -975,22 +975,22 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		// "["
 		public Keyword ele0001KeywordLeftSquareBracket() { return c0001KeywordLeftSquareBracket; }
 
-		// ( leftValues += AssignmentValue ( "," leftValues += AssignmentValue ) * ) ?
+		// (leftValues+=AssignmentValue ("," leftValues+=AssignmentValue)*)?
 		public Group ele001Group() { return c001Group; }
 
-		// leftValues += AssignmentValue
+		// leftValues+=AssignmentValue
 		public Assignment ele0010AssignmentLeftValues() { return c0010AssignmentLeftValues; }
 
 		// AssignmentValue
 		public RuleCall ele00100ParserRuleCallAssignmentValue() { return c00100ParserRuleCallAssignmentValue; }
 
-		// ( "," leftValues += AssignmentValue ) *
+		// ("," leftValues+=AssignmentValue)*
 		public Group ele0011Group() { return c0011Group; }
 
 		// ","
 		public Keyword ele00110KeywordComma() { return c00110KeywordComma; }
 
-		// leftValues += AssignmentValue
+		// leftValues+=AssignmentValue
 		public Assignment ele00111AssignmentLeftValues() { return c00111AssignmentLeftValues; }
 
 		// AssignmentValue
@@ -1032,58 +1032,58 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		private final Assignment c11AssignmentImpFrag = (Assignment)c1Group.eContents().get(1);
 		private final RuleCall c110LexerRuleCallFRAGMENT = (RuleCall)c11AssignmentImpFrag.eContents().get(0);
 		
-		// AssignmentValue : value = STRING | refObject = [ NamedObject ] ( "." refFeature = ID ( "[" refIndex = INT "]" ) ? ) ? | newObject = CreatedObject | ^import = [ Import ] impFrag = FRAGMENT ;
+		// AssignmentValue:   value=STRING|refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?|newObject=CreatedObject|^import=[Import] impFrag=FRAGMENT;
 		public ParserRule getRule() { return rule; }
 
-		// value = STRING | refObject = [ NamedObject ] ( "." refFeature = ID ( "[" refIndex = INT "]" ) ? ) ? | newObject = CreatedObject | ^import = [ Import ] impFrag = FRAGMENT
+		// value=STRING|refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?|newObject=CreatedObject|^import=[Import] impFrag=FRAGMENT
 		public Alternatives eleAlternatives() { return cAlternatives; }
 
-		// value = STRING | refObject = [ NamedObject ] ( "." refFeature = ID ( "[" refIndex = INT "]" ) ? ) ? | newObject = CreatedObject
+		// value=STRING|refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?|newObject=CreatedObject
 		public Alternatives ele0Alternatives() { return c0Alternatives; }
 
-		// value = STRING | refObject = [ NamedObject ] ( "." refFeature = ID ( "[" refIndex = INT "]" ) ? ) ?
+		// value=STRING|refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?
 		public Alternatives ele00Alternatives() { return c00Alternatives; }
 
-		// value = STRING
+		// value=STRING
 		public Assignment ele000AssignmentValue() { return c000AssignmentValue; }
 
 		// STRING
 		public RuleCall ele0000LexerRuleCallSTRING() { return c0000LexerRuleCallSTRING; }
 
-		// refObject = [ NamedObject ] ( "." refFeature = ID ( "[" refIndex = INT "]" ) ? ) ?
+		// refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?
 		public Group ele001Group() { return c001Group; }
 
-		// refObject = [ NamedObject ]
+		// refObject=[NamedObject]
 		public Assignment ele0010AssignmentRefObject() { return c0010AssignmentRefObject; }
 
-		// [ NamedObject ]
+		// [NamedObject]
 		public CrossReference ele00100CrossReferenceEStringNamedObject() { return c00100CrossReferenceEStringNamedObject; }
 
-		// ( "." refFeature = ID ( "[" refIndex = INT "]" ) ? ) ?
+		// ("." refFeature=ID ("[" refIndex=INT "]")?)?
 		public Group ele0011Group() { return c0011Group; }
 
-		// "." refFeature = ID
+		// "." refFeature=ID
 		public Group ele00110Group() { return c00110Group; }
 
 		// "."
 		public Keyword ele001100KeywordFullStop() { return c001100KeywordFullStop; }
 
-		// refFeature = ID
+		// refFeature=ID
 		public Assignment ele001101AssignmentRefFeature() { return c001101AssignmentRefFeature; }
 
 		// ID
 		public RuleCall ele0011010LexerRuleCallID() { return c0011010LexerRuleCallID; }
 
-		// ( "[" refIndex = INT "]" ) ?
+		// ("[" refIndex=INT "]")?
 		public Group ele00111Group() { return c00111Group; }
 
-		// "[" refIndex = INT
+		// "[" refIndex=INT
 		public Group ele001110Group() { return c001110Group; }
 
 		// "["
 		public Keyword ele0011100KeywordLeftSquareBracket() { return c0011100KeywordLeftSquareBracket; }
 
-		// refIndex = INT
+		// refIndex=INT
 		public Assignment ele0011101AssignmentRefIndex() { return c0011101AssignmentRefIndex; }
 
 		// INT
@@ -1092,22 +1092,22 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		// "]"
 		public Keyword ele001111KeywordRightSquareBracket() { return c001111KeywordRightSquareBracket; }
 
-		// newObject = CreatedObject
+		// newObject=CreatedObject
 		public Assignment ele01AssignmentNewObject() { return c01AssignmentNewObject; }
 
 		// CreatedObject
 		public RuleCall ele010ParserRuleCallCreatedObject() { return c010ParserRuleCallCreatedObject; }
 
-		// ^import = [ Import ] impFrag = FRAGMENT
+		// ^import=[Import] impFrag=FRAGMENT
 		public Group ele1Group() { return c1Group; }
 
-		// ^import = [ Import ]
+		// ^import=[Import]
 		public Assignment ele10AssignmentImport() { return c10AssignmentImport; }
 
-		// [ Import ]
+		// [Import]
 		public CrossReference ele100CrossReferenceEStringImport() { return c100CrossReferenceEStringImport; }
 
-		// impFrag = FRAGMENT
+		// impFrag=FRAGMENT
 		public Assignment ele11AssignmentImpFrag() { return c11AssignmentImpFrag; }
 
 		// FRAGMENT
@@ -1155,16 +1155,16 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		private final Assignment c111AssignmentImpFrag = (Assignment)c11Group.eContents().get(1);
 		private final RuleCall c1110LexerRuleCallFRAGMENT = (RuleCall)c111AssignmentImpFrag.eContents().get(0);
 		
-		// ListAssignmentValue returns AssignmentValue : index = INT ":" ( "[" refIndex = INT "]" | value = STRING | refObject = [ NamedObject ] ( "." refFeature = ID ( "[" refIndex = INT "]" ) ? ) ? | newObject = CreatedObject | ^import = [ Import ] impFrag = FRAGMENT ) ;
+		// ListAssignmentValue returns AssignmentValue:   index=INT ":" ("[" refIndex=INT "]"|value=STRING|refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?|newObject=CreatedObject|^import=[Import] impFrag=FRAGMENT);
 		public ParserRule getRule() { return rule; }
 
-		// index = INT ":" ( "[" refIndex = INT "]" | value = STRING | refObject = [ NamedObject ] ( "." refFeature = ID ( "[" refIndex = INT "]" ) ? ) ? | newObject = CreatedObject | ^import = [ Import ] impFrag = FRAGMENT )
+		// index=INT ":" ("[" refIndex=INT "]"|value=STRING|refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?|newObject=CreatedObject|^import=[Import] impFrag=FRAGMENT)
 		public Group eleGroup() { return cGroup; }
 
-		// index = INT ":"
+		// index=INT ":"
 		public Group ele0Group() { return c0Group; }
 
-		// index = INT
+		// index=INT
 		public Assignment ele00AssignmentIndex() { return c00AssignmentIndex; }
 
 		// INT
@@ -1173,28 +1173,28 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		// ":"
 		public Keyword ele01KeywordColon() { return c01KeywordColon; }
 
-		// "[" refIndex = INT "]" | value = STRING | refObject = [ NamedObject ] ( "." refFeature = ID ( "[" refIndex = INT "]" ) ? ) ? | newObject = CreatedObject | ^import = [ Import ] impFrag = FRAGMENT
+		// "[" refIndex=INT "]"|value=STRING|refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?|newObject=CreatedObject|^import=[Import] impFrag=FRAGMENT
 		public Alternatives ele1Alternatives() { return c1Alternatives; }
 
-		// "[" refIndex = INT "]" | value = STRING | refObject = [ NamedObject ] ( "." refFeature = ID ( "[" refIndex = INT "]" ) ? ) ? | newObject = CreatedObject
+		// "[" refIndex=INT "]"|value=STRING|refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?|newObject=CreatedObject
 		public Alternatives ele10Alternatives() { return c10Alternatives; }
 
-		// "[" refIndex = INT "]" | value = STRING | refObject = [ NamedObject ] ( "." refFeature = ID ( "[" refIndex = INT "]" ) ? ) ?
+		// "[" refIndex=INT "]"|value=STRING|refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?
 		public Alternatives ele100Alternatives() { return c100Alternatives; }
 
-		// "[" refIndex = INT "]" | value = STRING
+		// "[" refIndex=INT "]"|value=STRING
 		public Alternatives ele1000Alternatives() { return c1000Alternatives; }
 
-		// "[" refIndex = INT "]"
+		// "[" refIndex=INT "]"
 		public Group ele10000Group() { return c10000Group; }
 
-		// "[" refIndex = INT
+		// "[" refIndex=INT
 		public Group ele100000Group() { return c100000Group; }
 
 		// "["
 		public Keyword ele1000000KeywordLeftSquareBracket() { return c1000000KeywordLeftSquareBracket; }
 
-		// refIndex = INT
+		// refIndex=INT
 		public Assignment ele1000001AssignmentRefIndex() { return c1000001AssignmentRefIndex; }
 
 		// INT
@@ -1203,46 +1203,46 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		// "]"
 		public Keyword ele100001KeywordRightSquareBracket() { return c100001KeywordRightSquareBracket; }
 
-		// value = STRING
+		// value=STRING
 		public Assignment ele10001AssignmentValue() { return c10001AssignmentValue; }
 
 		// STRING
 		public RuleCall ele100010LexerRuleCallSTRING() { return c100010LexerRuleCallSTRING; }
 
-		// refObject = [ NamedObject ] ( "." refFeature = ID ( "[" refIndex = INT "]" ) ? ) ?
+		// refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?
 		public Group ele1001Group() { return c1001Group; }
 
-		// refObject = [ NamedObject ]
+		// refObject=[NamedObject]
 		public Assignment ele10010AssignmentRefObject() { return c10010AssignmentRefObject; }
 
-		// [ NamedObject ]
+		// [NamedObject]
 		public CrossReference ele100100CrossReferenceEStringNamedObject() { return c100100CrossReferenceEStringNamedObject; }
 
-		// ( "." refFeature = ID ( "[" refIndex = INT "]" ) ? ) ?
+		// ("." refFeature=ID ("[" refIndex=INT "]")?)?
 		public Group ele10011Group() { return c10011Group; }
 
-		// "." refFeature = ID
+		// "." refFeature=ID
 		public Group ele100110Group() { return c100110Group; }
 
 		// "."
 		public Keyword ele1001100KeywordFullStop() { return c1001100KeywordFullStop; }
 
-		// refFeature = ID
+		// refFeature=ID
 		public Assignment ele1001101AssignmentRefFeature() { return c1001101AssignmentRefFeature; }
 
 		// ID
 		public RuleCall ele10011010LexerRuleCallID() { return c10011010LexerRuleCallID; }
 
-		// ( "[" refIndex = INT "]" ) ?
+		// ("[" refIndex=INT "]")?
 		public Group ele100111Group() { return c100111Group; }
 
-		// "[" refIndex = INT
+		// "[" refIndex=INT
 		public Group ele1001110Group() { return c1001110Group; }
 
 		// "["
 		public Keyword ele10011100KeywordLeftSquareBracket() { return c10011100KeywordLeftSquareBracket; }
 
-		// refIndex = INT
+		// refIndex=INT
 		public Assignment ele10011101AssignmentRefIndex() { return c10011101AssignmentRefIndex; }
 
 		// INT
@@ -1251,22 +1251,22 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		// "]"
 		public Keyword ele1001111KeywordRightSquareBracket() { return c1001111KeywordRightSquareBracket; }
 
-		// newObject = CreatedObject
+		// newObject=CreatedObject
 		public Assignment ele101AssignmentNewObject() { return c101AssignmentNewObject; }
 
 		// CreatedObject
 		public RuleCall ele1010ParserRuleCallCreatedObject() { return c1010ParserRuleCallCreatedObject; }
 
-		// ^import = [ Import ] impFrag = FRAGMENT
+		// ^import=[Import] impFrag=FRAGMENT
 		public Group ele11Group() { return c11Group; }
 
-		// ^import = [ Import ]
+		// ^import=[Import]
 		public Assignment ele110AssignmentImport() { return c110AssignmentImport; }
 
-		// [ Import ]
+		// [Import]
 		public CrossReference ele1100CrossReferenceEStringImport() { return c1100CrossReferenceEStringImport; }
 
-		// impFrag = FRAGMENT
+		// impFrag=FRAGMENT
 		public Assignment ele111AssignmentImpFrag() { return c111AssignmentImpFrag; }
 
 		// FRAGMENT
@@ -1305,67 +1305,67 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		private final Assignment c11AssignmentImpFrag = (Assignment)c1Group.eContents().get(1);
 		private final RuleCall c110LexerRuleCallFRAGMENT = (RuleCall)c11AssignmentImpFrag.eContents().get(0);
 		
-		// SingleAssignmentValue returns AssignmentValue : keyword = "null" | value = STRING | refObject = [ NamedObject ] ( "." refFeature = ID ( "[" refIndex = INT "]" ) ? ) ? | newObject = CreatedObject | ^import = [ Import ] impFrag = FRAGMENT ;
+		// SingleAssignmentValue returns AssignmentValue:   keyword="null"|value=STRING|refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?|newObject=CreatedObject|^import=[Import] impFrag=FRAGMENT;
 		public ParserRule getRule() { return rule; }
 
-		// keyword = "null" | value = STRING | refObject = [ NamedObject ] ( "." refFeature = ID ( "[" refIndex = INT "]" ) ? ) ? | newObject = CreatedObject | ^import = [ Import ] impFrag = FRAGMENT
+		// keyword="null"|value=STRING|refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?|newObject=CreatedObject|^import=[Import] impFrag=FRAGMENT
 		public Alternatives eleAlternatives() { return cAlternatives; }
 
-		// keyword = "null" | value = STRING | refObject = [ NamedObject ] ( "." refFeature = ID ( "[" refIndex = INT "]" ) ? ) ? | newObject = CreatedObject
+		// keyword="null"|value=STRING|refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?|newObject=CreatedObject
 		public Alternatives ele0Alternatives() { return c0Alternatives; }
 
-		// keyword = "null" | value = STRING | refObject = [ NamedObject ] ( "." refFeature = ID ( "[" refIndex = INT "]" ) ? ) ?
+		// keyword="null"|value=STRING|refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?
 		public Alternatives ele00Alternatives() { return c00Alternatives; }
 
-		// keyword = "null" | value = STRING
+		// keyword="null"|value=STRING
 		public Alternatives ele000Alternatives() { return c000Alternatives; }
 
-		// keyword = "null"
+		// keyword="null"
 		public Assignment ele0000AssignmentKeyword() { return c0000AssignmentKeyword; }
 
 		// "null"
 		public Keyword ele00000KeywordNull() { return c00000KeywordNull; }
 
-		// value = STRING
+		// value=STRING
 		public Assignment ele0001AssignmentValue() { return c0001AssignmentValue; }
 
 		// STRING
 		public RuleCall ele00010LexerRuleCallSTRING() { return c00010LexerRuleCallSTRING; }
 
-		// refObject = [ NamedObject ] ( "." refFeature = ID ( "[" refIndex = INT "]" ) ? ) ?
+		// refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?
 		public Group ele001Group() { return c001Group; }
 
-		// refObject = [ NamedObject ]
+		// refObject=[NamedObject]
 		public Assignment ele0010AssignmentRefObject() { return c0010AssignmentRefObject; }
 
-		// [ NamedObject ]
+		// [NamedObject]
 		public CrossReference ele00100CrossReferenceEStringNamedObject() { return c00100CrossReferenceEStringNamedObject; }
 
-		// ( "." refFeature = ID ( "[" refIndex = INT "]" ) ? ) ?
+		// ("." refFeature=ID ("[" refIndex=INT "]")?)?
 		public Group ele0011Group() { return c0011Group; }
 
-		// "." refFeature = ID
+		// "." refFeature=ID
 		public Group ele00110Group() { return c00110Group; }
 
 		// "."
 		public Keyword ele001100KeywordFullStop() { return c001100KeywordFullStop; }
 
-		// refFeature = ID
+		// refFeature=ID
 		public Assignment ele001101AssignmentRefFeature() { return c001101AssignmentRefFeature; }
 
 		// ID
 		public RuleCall ele0011010LexerRuleCallID() { return c0011010LexerRuleCallID; }
 
-		// ( "[" refIndex = INT "]" ) ?
+		// ("[" refIndex=INT "]")?
 		public Group ele00111Group() { return c00111Group; }
 
-		// "[" refIndex = INT
+		// "[" refIndex=INT
 		public Group ele001110Group() { return c001110Group; }
 
 		// "["
 		public Keyword ele0011100KeywordLeftSquareBracket() { return c0011100KeywordLeftSquareBracket; }
 
-		// refIndex = INT
+		// refIndex=INT
 		public Assignment ele0011101AssignmentRefIndex() { return c0011101AssignmentRefIndex; }
 
 		// INT
@@ -1374,22 +1374,22 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		// "]"
 		public Keyword ele001111KeywordRightSquareBracket() { return c001111KeywordRightSquareBracket; }
 
-		// newObject = CreatedObject
+		// newObject=CreatedObject
 		public Assignment ele01AssignmentNewObject() { return c01AssignmentNewObject; }
 
 		// CreatedObject
 		public RuleCall ele010ParserRuleCallCreatedObject() { return c010ParserRuleCallCreatedObject; }
 
-		// ^import = [ Import ] impFrag = FRAGMENT
+		// ^import=[Import] impFrag=FRAGMENT
 		public Group ele1Group() { return c1Group; }
 
-		// ^import = [ Import ]
+		// ^import=[Import]
 		public Assignment ele10AssignmentImport() { return c10AssignmentImport; }
 
-		// [ Import ]
+		// [Import]
 		public CrossReference ele100CrossReferenceEStringImport() { return c100CrossReferenceEStringImport; }
 
-		// impFrag = FRAGMENT
+		// impFrag=FRAGMENT
 		public Assignment ele11AssignmentImpFrag() { return c11AssignmentImpFrag; }
 
 		// FRAGMENT
@@ -1418,16 +1418,16 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		private final RuleCall c1010ParserRuleCallMigration = (RuleCall)c101AssignmentLeftMig.eContents().get(0);
 		private final Keyword c11KeywordRightCurlyBracket = (Keyword)c1Group.eContents().get(1);
 		
-		// CreatedObject : ( ObjectNew | ObjectCopy ) ( name = ID ) ? ( "{" ( assignments += MonoSingleAssignment | assignments += MonoListAssignment ) + ( leftMig = Migration ) ? "}" ) ? ;
+		// CreatedObject:   (ObjectNew|ObjectCopy) (name=ID)? ("{" (assignments+=MonoSingleAssignment|assignments+=MonoListAssignment)+ (leftMig=Migration)? "}")?;
 		public ParserRule getRule() { return rule; }
 
-		// ( ObjectNew | ObjectCopy ) ( name = ID ) ? ( "{" ( assignments += MonoSingleAssignment | assignments += MonoListAssignment ) + ( leftMig = Migration ) ? "}" ) ?
+		// (ObjectNew|ObjectCopy) (name=ID)? ("{" (assignments+=MonoSingleAssignment|assignments+=MonoListAssignment)+ (leftMig=Migration)? "}")?
 		public Group eleGroup() { return cGroup; }
 
-		// ( ObjectNew | ObjectCopy ) ( name = ID ) ?
+		// (ObjectNew|ObjectCopy) (name=ID)?
 		public Group ele0Group() { return c0Group; }
 
-		// ObjectNew | ObjectCopy
+		// ObjectNew|ObjectCopy
 		public Alternatives ele00Alternatives() { return c00Alternatives; }
 
 		// ObjectNew
@@ -1436,40 +1436,40 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		// ObjectCopy
 		public RuleCall ele001ParserRuleCallObjectCopy() { return c001ParserRuleCallObjectCopy; }
 
-		// ( name = ID ) ?
+		// (name=ID)?
 		public Assignment ele01AssignmentName() { return c01AssignmentName; }
 
 		// ID
 		public RuleCall ele010LexerRuleCallID() { return c010LexerRuleCallID; }
 
-		// ( "{" ( assignments += MonoSingleAssignment | assignments += MonoListAssignment ) + ( leftMig = Migration ) ? "}" ) ?
+		// ("{" (assignments+=MonoSingleAssignment|assignments+=MonoListAssignment)+ (leftMig=Migration)? "}")?
 		public Group ele1Group() { return c1Group; }
 
-		// "{" ( assignments += MonoSingleAssignment | assignments += MonoListAssignment ) + ( leftMig = Migration ) ?
+		// "{" (assignments+=MonoSingleAssignment|assignments+=MonoListAssignment)+ (leftMig=Migration)?
 		public Group ele10Group() { return c10Group; }
 
-		// "{" ( assignments += MonoSingleAssignment | assignments += MonoListAssignment ) +
+		// "{" (assignments+=MonoSingleAssignment|assignments+=MonoListAssignment)+
 		public Group ele100Group() { return c100Group; }
 
 		// "{"
 		public Keyword ele1000KeywordLeftCurlyBracket() { return c1000KeywordLeftCurlyBracket; }
 
-		// ( assignments += MonoSingleAssignment | assignments += MonoListAssignment ) +
+		// (assignments+=MonoSingleAssignment|assignments+=MonoListAssignment)+
 		public Alternatives ele1001Alternatives() { return c1001Alternatives; }
 
-		// assignments += MonoSingleAssignment
+		// assignments+=MonoSingleAssignment
 		public Assignment ele10010AssignmentAssignments() { return c10010AssignmentAssignments; }
 
 		// MonoSingleAssignment
 		public RuleCall ele100100ParserRuleCallMonoSingleAssignment() { return c100100ParserRuleCallMonoSingleAssignment; }
 
-		// assignments += MonoListAssignment
+		// assignments+=MonoListAssignment
 		public Assignment ele10011AssignmentAssignments() { return c10011AssignmentAssignments; }
 
 		// MonoListAssignment
 		public RuleCall ele100110ParserRuleCallMonoListAssignment() { return c100110ParserRuleCallMonoListAssignment; }
 
-		// ( leftMig = Migration ) ?
+		// (leftMig=Migration)?
 		public Assignment ele101AssignmentLeftMig() { return c101AssignmentLeftMig; }
 
 		// Migration
@@ -1489,25 +1489,25 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		private final Assignment c1AssignmentImpFrag = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall c10LexerRuleCallFRAGMENT = (RuleCall)c1AssignmentImpFrag.eContents().get(0);
 		
-		// ObjectNew : "new" ^import = [ Import ] impFrag = FRAGMENT ;
+		// ObjectNew:   "new" ^import=[Import] impFrag=FRAGMENT;
 		public ParserRule getRule() { return rule; }
 
-		// "new" ^import = [ Import ] impFrag = FRAGMENT
+		// "new" ^import=[Import] impFrag=FRAGMENT
 		public Group eleGroup() { return cGroup; }
 
-		// "new" ^import = [ Import ]
+		// "new" ^import=[Import]
 		public Group ele0Group() { return c0Group; }
 
 		// "new"
 		public Keyword ele00KeywordNew() { return c00KeywordNew; }
 
-		// ^import = [ Import ]
+		// ^import=[Import]
 		public Assignment ele01AssignmentImport() { return c01AssignmentImport; }
 
-		// [ Import ]
+		// [Import]
 		public CrossReference ele010CrossReferenceEStringImport() { return c010CrossReferenceEStringImport; }
 
-		// impFrag = FRAGMENT
+		// impFrag=FRAGMENT
 		public Assignment ele1AssignmentImpFrag() { return c1AssignmentImpFrag; }
 
 		// FRAGMENT
@@ -1524,25 +1524,25 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		private final Assignment c1AssignmentFragment = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall c10LexerRuleCallFRAGMENT = (RuleCall)c1AssignmentFragment.eContents().get(0);
 		
-		// ObjectCopy : "copy" resource = [ NamedResource ] fragment = FRAGMENT ;
+		// ObjectCopy:   "copy" resource=[NamedResource] fragment=FRAGMENT;
 		public ParserRule getRule() { return rule; }
 
-		// "copy" resource = [ NamedResource ] fragment = FRAGMENT
+		// "copy" resource=[NamedResource] fragment=FRAGMENT
 		public Group eleGroup() { return cGroup; }
 
-		// "copy" resource = [ NamedResource ]
+		// "copy" resource=[NamedResource]
 		public Group ele0Group() { return c0Group; }
 
 		// "copy"
 		public Keyword ele00KeywordCopy() { return c00KeywordCopy; }
 
-		// resource = [ NamedResource ]
+		// resource=[NamedResource]
 		public Assignment ele01AssignmentResource() { return c01AssignmentResource; }
 
-		// [ NamedResource ]
+		// [NamedResource]
 		public CrossReference ele010CrossReferenceEStringNamedResource() { return c010CrossReferenceEStringNamedResource; }
 
-		// fragment = FRAGMENT
+		// fragment=FRAGMENT
 		public Assignment ele1AssignmentFragment() { return c1AssignmentFragment; }
 
 		// FRAGMENT
@@ -1568,49 +1568,49 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		private final RuleCall c01110ParserRuleCallExecutable = (RuleCall)c0111AssignmentEachOp.eContents().get(0);
 		private final Keyword c1KeywordSemicolon = (Keyword)cGroup.eContents().get(1);
 		
-		// Migration : "migrate" ( first = Executable ) ? ( "as" asOp = Executable | "each" eachOp = Executable ) ? ";" ;
+		// Migration:   "migrate" (first=Executable)? ("as" asOp=Executable|"each" eachOp=Executable)? ";";
 		public ParserRule getRule() { return rule; }
 
-		// "migrate" ( first = Executable ) ? ( "as" asOp = Executable | "each" eachOp = Executable ) ? ";"
+		// "migrate" (first=Executable)? ("as" asOp=Executable|"each" eachOp=Executable)? ";"
 		public Group eleGroup() { return cGroup; }
 
-		// "migrate" ( first = Executable ) ? ( "as" asOp = Executable | "each" eachOp = Executable ) ?
+		// "migrate" (first=Executable)? ("as" asOp=Executable|"each" eachOp=Executable)?
 		public Group ele0Group() { return c0Group; }
 
-		// "migrate" ( first = Executable ) ?
+		// "migrate" (first=Executable)?
 		public Group ele00Group() { return c00Group; }
 
 		// "migrate"
 		public Keyword ele000KeywordMigrate() { return c000KeywordMigrate; }
 
-		// ( first = Executable ) ?
+		// (first=Executable)?
 		public Assignment ele001AssignmentFirst() { return c001AssignmentFirst; }
 
 		// Executable
 		public RuleCall ele0010ParserRuleCallExecutable() { return c0010ParserRuleCallExecutable; }
 
-		// ( "as" asOp = Executable | "each" eachOp = Executable ) ?
+		// ("as" asOp=Executable|"each" eachOp=Executable)?
 		public Alternatives ele01Alternatives() { return c01Alternatives; }
 
-		// "as" asOp = Executable
+		// "as" asOp=Executable
 		public Group ele010Group() { return c010Group; }
 
 		// "as"
 		public Keyword ele0100KeywordAs() { return c0100KeywordAs; }
 
-		// asOp = Executable
+		// asOp=Executable
 		public Assignment ele0101AssignmentAsOp() { return c0101AssignmentAsOp; }
 
 		// Executable
 		public RuleCall ele01010ParserRuleCallExecutable() { return c01010ParserRuleCallExecutable; }
 
-		// "each" eachOp = Executable
+		// "each" eachOp=Executable
 		public Group ele011Group() { return c011Group; }
 
 		// "each"
 		public Keyword ele0110KeywordEach() { return c0110KeywordEach; }
 
-		// eachOp = Executable
+		// eachOp=Executable
 		public Assignment ele0111AssignmentEachOp() { return c0111AssignmentEachOp; }
 
 		// Executable
@@ -1626,10 +1626,10 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		private final RuleCall c0ParserRuleCallJavaExecutable = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall c1ParserRuleCallExpressionExecutable = (RuleCall)cAlternatives.eContents().get(1);
 		
-		// Executable : JavaExecutable | ExpressionExecutable ;
+		// Executable:   JavaExecutable|ExpressionExecutable;
 		public ParserRule getRule() { return rule; }
 
-		// JavaExecutable | ExpressionExecutable
+		// JavaExecutable|ExpressionExecutable
 		public Alternatives eleAlternatives() { return cAlternatives; }
 
 		// JavaExecutable
@@ -1650,22 +1650,22 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		private final Keyword c01KeywordLeftParenthesis = (Keyword)c0Group.eContents().get(1);
 		private final Keyword c1KeywordRightParenthesis = (Keyword)cGroup.eContents().get(1);
 		
-		// JavaExecutable : "java" method = ID "(" ")" ;
+		// JavaExecutable:   "java" method=ID "(" ")";
 		public ParserRule getRule() { return rule; }
 
-		// "java" method = ID "(" ")"
+		// "java" method=ID "(" ")"
 		public Group eleGroup() { return cGroup; }
 
-		// "java" method = ID "("
+		// "java" method=ID "("
 		public Group ele0Group() { return c0Group; }
 
-		// "java" method = ID
+		// "java" method=ID
 		public Group ele00Group() { return c00Group; }
 
 		// "java"
 		public Keyword ele000KeywordJava() { return c000KeywordJava; }
 
-		// method = ID
+		// method=ID
 		public Assignment ele001AssignmentMethod() { return c001AssignmentMethod; }
 
 		// ID
@@ -1683,10 +1683,10 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		private final Assignment cAssignmentExprstr = (Assignment)rule.eContents().get(1);
 		private final RuleCall c0LexerRuleCallSTRING = (RuleCall)cAssignmentExprstr.eContents().get(0);
 		
-		// ExpressionExecutable : exprstr = STRING ;
+		// ExpressionExecutable:   exprstr=STRING;
 		public ParserRule getRule() { return rule; }
 
-		// exprstr = STRING
+		// exprstr=STRING
 		public Assignment eleAssignmentExprstr() { return cAssignmentExprstr; }
 
 		// STRING
@@ -1739,132 +1739,132 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 	}
 
 	
-	// EPatch : "epatch" name = ID "{" ( imports += Import ) * ( resources += NamedResource ) * ( objects += ObjectRef ) * "}" ;
+	// EPatch:   "epatch" name=ID "{" (imports+=Import)* (resources+=NamedResource)* (objects+=ObjectRef)* "}";
 	public EPatchElements prEPatch() {
 		return (pEPatch != null) ? pEPatch : (pEPatch = new EPatchElements());
 	} 
 
-	// Import : ModelImport | JavaImport | ExtensionImport ;
+	// Import:   ModelImport|JavaImport|ExtensionImport;
 	public ImportElements prImport() {
 		return (pImport != null) ? pImport : (pImport = new ImportElements());
 	} 
 
-	// ModelImport : ResourceImport | EPackageImport ;
+	// ModelImport:   ResourceImport|EPackageImport;
 	public ModelImportElements prModelImport() {
 		return (pModelImport != null) ? pModelImport : (pModelImport = new ModelImportElements());
 	} 
 
-	// ResourceImport : "import" name = ID "uri" uri = STRING ;
+	// ResourceImport:   "import" name=ID "uri" uri=STRING;
 	public ResourceImportElements prResourceImport() {
 		return (pResourceImport != null) ? pResourceImport : (pResourceImport = new ResourceImportElements());
 	} 
 
-	// EPackageImport : "import" name = ID "ns" nsURI = STRING ;
+	// EPackageImport:   "import" name=ID "ns" nsURI=STRING;
 	public EPackageImportElements prEPackageImport() {
 		return (pEPackageImport != null) ? pEPackageImport : (pEPackageImport = new EPackageImportElements());
 	} 
 
-	// JavaImport : "import" "java" path += ID ( "." path += ID ) * ;
+	// JavaImport:   "import" "java" path+=ID ("." path+=ID)*;
 	public JavaImportElements prJavaImport() {
 		return (pJavaImport != null) ? pJavaImport : (pJavaImport = new JavaImportElements());
 	} 
 
-	// ExtensionImport : "import" "extension" path += ID ( "::" path += ID ) * ;
+	// ExtensionImport:   "import" "extension" path+=ID ("::" path+=ID)*;
 	public ExtensionImportElements prExtensionImport() {
 		return (pExtensionImport != null) ? pExtensionImport : (pExtensionImport = new ExtensionImportElements());
 	} 
 
-	// NamedResource : "resource" name = ID "{" "left" ( "uri" leftUri = STRING | leftRoot = CreatedObject ) ";" "right" ( "uri" rightUri = STRING | rightRoot = CreatedObject ) ";" "}" ;
+	// NamedResource:   "resource" name=ID "{" "left" ("uri" leftUri=STRING|leftRoot=CreatedObject) ";" "right" ("uri" rightUri=STRING|rightRoot=CreatedObject) ";" "}";
 	public NamedResourceElements prNamedResource() {
 		return (pNamedResource != null) ? pNamedResource : (pNamedResource = new NamedResourceElements());
 	} 
 
-	// NamedObject : ObjectRef | CreatedObject ;
+	// NamedObject:   ObjectRef|CreatedObject;
 	public NamedObjectElements prNamedObject() {
 		return (pNamedObject != null) ? pNamedObject : (pNamedObject = new NamedObjectElements());
 	} 
 
-	// ObjectRef : "object" ( name = ID ) ? ( leftRes = [ NamedResource ] leftFrag = FRAGMENT | "left" leftRes = [ NamedResource ] leftFrag = FRAGMENT "right" rightRes = [ NamedResource ] rightFrag = FRAGMENT ) ( "{" ( assignments += BiSingleAssignment | assignments += BiListAssignment ) + ( "left" leftMig = Migration ) ? ( "right" rightMig = Migration ) ? "}" ) ? ;
+	// ObjectRef:   "object" (name=ID)? (leftRes=[NamedResource] leftFrag=FRAGMENT|"left" leftRes=[NamedResource] leftFrag=FRAGMENT "right" rightRes=[NamedResource] rightFrag=FRAGMENT) ("{" (assignments+=BiSingleAssignment|assignments+=BiListAssignment)+ ("left" leftMig=Migration)? ("right" rightMig=Migration)? "}")?;
 	public ObjectRefElements prObjectRef() {
 		return (pObjectRef != null) ? pObjectRef : (pObjectRef = new ObjectRefElements());
 	} 
 
-	// Assignment : BiSingleAssignment | BiListAssignment | MonoSingleAssignment | MonoListAssignment ;
+	// Assignment:   BiSingleAssignment|BiListAssignment|MonoSingleAssignment|MonoListAssignment;
 	public AssignmentElements prAssignment() {
 		return (pAssignment != null) ? pAssignment : (pAssignment = new AssignmentElements());
 	} 
 
-	// BiSingleAssignment returns SingleAssignment : feature = ID "=" leftValue = SingleAssignmentValue "|" rightValue = SingleAssignmentValue ";" ;
+	// BiSingleAssignment returns SingleAssignment:   feature=ID "=" leftValue=SingleAssignmentValue "|" rightValue=SingleAssignmentValue ";";
 	public BiSingleAssignmentElements prBiSingleAssignment() {
 		return (pBiSingleAssignment != null) ? pBiSingleAssignment : (pBiSingleAssignment = new BiSingleAssignmentElements());
 	} 
 
-	// BiListAssignment returns ListAssignment : feature = ID "=" "[" ( leftValues += ListAssignmentValue ( "," leftValues += ListAssignmentValue ) * ) ? "|" ( rightValues += ListAssignmentValue ( "," rightValues += ListAssignmentValue ) * ) ? "]" ";" ;
+	// BiListAssignment returns ListAssignment:   feature=ID "=" "[" (leftValues+=ListAssignmentValue ("," leftValues+=ListAssignmentValue)*)? "|" (rightValues+=ListAssignmentValue ("," rightValues+=ListAssignmentValue)*)? "]" ";";
 	public BiListAssignmentElements prBiListAssignment() {
 		return (pBiListAssignment != null) ? pBiListAssignment : (pBiListAssignment = new BiListAssignmentElements());
 	} 
 
-	// MonoSingleAssignment returns SingleAssignment : feature = ID "=" leftValue = SingleAssignmentValue ";" ;
+	// MonoSingleAssignment returns SingleAssignment:   feature=ID "=" leftValue=SingleAssignmentValue ";";
 	public MonoSingleAssignmentElements prMonoSingleAssignment() {
 		return (pMonoSingleAssignment != null) ? pMonoSingleAssignment : (pMonoSingleAssignment = new MonoSingleAssignmentElements());
 	} 
 
-	// MonoListAssignment returns ListAssignment : feature = ID "=" "[" ( leftValues += AssignmentValue ( "," leftValues += AssignmentValue ) * ) ? "]" ";" ;
+	// MonoListAssignment returns ListAssignment:   feature=ID "=" "[" (leftValues+=AssignmentValue ("," leftValues+=AssignmentValue)*)? "]" ";";
 	public MonoListAssignmentElements prMonoListAssignment() {
 		return (pMonoListAssignment != null) ? pMonoListAssignment : (pMonoListAssignment = new MonoListAssignmentElements());
 	} 
 
-	// AssignmentValue : value = STRING | refObject = [ NamedObject ] ( "." refFeature = ID ( "[" refIndex = INT "]" ) ? ) ? | newObject = CreatedObject | ^import = [ Import ] impFrag = FRAGMENT ;
+	// AssignmentValue:   value=STRING|refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?|newObject=CreatedObject|^import=[Import] impFrag=FRAGMENT;
 	public AssignmentValueElements prAssignmentValue() {
 		return (pAssignmentValue != null) ? pAssignmentValue : (pAssignmentValue = new AssignmentValueElements());
 	} 
 
-	// ListAssignmentValue returns AssignmentValue : index = INT ":" ( "[" refIndex = INT "]" | value = STRING | refObject = [ NamedObject ] ( "." refFeature = ID ( "[" refIndex = INT "]" ) ? ) ? | newObject = CreatedObject | ^import = [ Import ] impFrag = FRAGMENT ) ;
+	// ListAssignmentValue returns AssignmentValue:   index=INT ":" ("[" refIndex=INT "]"|value=STRING|refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?|newObject=CreatedObject|^import=[Import] impFrag=FRAGMENT);
 	public ListAssignmentValueElements prListAssignmentValue() {
 		return (pListAssignmentValue != null) ? pListAssignmentValue : (pListAssignmentValue = new ListAssignmentValueElements());
 	} 
 
-	// SingleAssignmentValue returns AssignmentValue : keyword = "null" | value = STRING | refObject = [ NamedObject ] ( "." refFeature = ID ( "[" refIndex = INT "]" ) ? ) ? | newObject = CreatedObject | ^import = [ Import ] impFrag = FRAGMENT ;
+	// SingleAssignmentValue returns AssignmentValue:   keyword="null"|value=STRING|refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?|newObject=CreatedObject|^import=[Import] impFrag=FRAGMENT;
 	public SingleAssignmentValueElements prSingleAssignmentValue() {
 		return (pSingleAssignmentValue != null) ? pSingleAssignmentValue : (pSingleAssignmentValue = new SingleAssignmentValueElements());
 	} 
 
-	// CreatedObject : ( ObjectNew | ObjectCopy ) ( name = ID ) ? ( "{" ( assignments += MonoSingleAssignment | assignments += MonoListAssignment ) + ( leftMig = Migration ) ? "}" ) ? ;
+	// CreatedObject:   (ObjectNew|ObjectCopy) (name=ID)? ("{" (assignments+=MonoSingleAssignment|assignments+=MonoListAssignment)+ (leftMig=Migration)? "}")?;
 	public CreatedObjectElements prCreatedObject() {
 		return (pCreatedObject != null) ? pCreatedObject : (pCreatedObject = new CreatedObjectElements());
 	} 
 
-	// ObjectNew : "new" ^import = [ Import ] impFrag = FRAGMENT ;
+	// ObjectNew:   "new" ^import=[Import] impFrag=FRAGMENT;
 	public ObjectNewElements prObjectNew() {
 		return (pObjectNew != null) ? pObjectNew : (pObjectNew = new ObjectNewElements());
 	} 
 
-	// ObjectCopy : "copy" resource = [ NamedResource ] fragment = FRAGMENT ;
+	// ObjectCopy:   "copy" resource=[NamedResource] fragment=FRAGMENT;
 	public ObjectCopyElements prObjectCopy() {
 		return (pObjectCopy != null) ? pObjectCopy : (pObjectCopy = new ObjectCopyElements());
 	} 
 
-	// lexer FRAGMENT : "\'#\' (\'a\'..\'z\'|\'A\'..\'Z\'|\'0\'..\'9\'|\'_\'|\'/\'|\'[\'|\']\'|\'{\'|\'}\'|\'.\'|\'@\')+" ;
+	// lexer FRAGMENT:   "\'#\' (\'a\'..\'z\'|\'A\'..\'Z\'|\'0\'..\'9\'|\'_\'|\'/\'|\'[\'|\']\'|\'{\'|\'}\'|\'.\'|\'@\')+";
 	public LexerRule lrFRAGMENT() {
 		return (lFRAGMENT != null) ? lFRAGMENT : (lFRAGMENT = (LexerRule) getGrammar().eContents().get(22));
 	} 
 
-	// Migration : "migrate" ( first = Executable ) ? ( "as" asOp = Executable | "each" eachOp = Executable ) ? ";" ;
+	// Migration:   "migrate" (first=Executable)? ("as" asOp=Executable|"each" eachOp=Executable)? ";";
 	public MigrationElements prMigration() {
 		return (pMigration != null) ? pMigration : (pMigration = new MigrationElements());
 	} 
 
-	// Executable : JavaExecutable | ExpressionExecutable ;
+	// Executable:   JavaExecutable|ExpressionExecutable;
 	public ExecutableElements prExecutable() {
 		return (pExecutable != null) ? pExecutable : (pExecutable = new ExecutableElements());
 	} 
 
-	// JavaExecutable : "java" method = ID "(" ")" ;
+	// JavaExecutable:   "java" method=ID "(" ")";
 	public JavaExecutableElements prJavaExecutable() {
 		return (pJavaExecutable != null) ? pJavaExecutable : (pJavaExecutable = new JavaExecutableElements());
 	} 
 
-	// ExpressionExecutable : exprstr = STRING ;
+	// ExpressionExecutable:   exprstr=STRING;
 	public ExpressionExecutableElements prExpressionExecutable() {
 		return (pExpressionExecutable != null) ? pExpressionExecutable : (pExpressionExecutable = new ExpressionExecutableElements());
 	} 

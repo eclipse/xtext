@@ -10,7 +10,6 @@ Export-Package: org.eclipse.xtext.ui.core.util,
  org.eclipse.xtext.ui.integration.workbench
 Require-Bundle: org.eclipse.xtext.generator;bundle-version="0.7.0",
  org.eclipse.xtext.log4j;bundle-version="1.2.15",
- org.eclipse.xtext.service;bundle-version="0.7.0",
  org.eclipse.xtext;bundle-version="0.7.0",
  org.eclipse.xtext.ui.common;bundle-version="0.7.0",
  org.eclipse.xtext.ui.core;bundle-version="0.7.0",

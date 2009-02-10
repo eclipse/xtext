@@ -11,10 +11,17 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.Token;
 
+import com.google.inject.Provider;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class DefaultTokenScanner extends AbstractTokenScanner {
+
+	public DefaultTokenScanner(String languageName, Provider<SyntaxColoringPreferencePage> preferencePageProvider,
+			PreferenceStoreAccessor accessor) {
+		super(languageName, preferencePageProvider, accessor);
+	}
 
 	private int length;
 	private boolean tokenReturned;

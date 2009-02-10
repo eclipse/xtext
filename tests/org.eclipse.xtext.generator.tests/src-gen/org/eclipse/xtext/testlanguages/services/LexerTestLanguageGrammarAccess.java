@@ -15,10 +15,10 @@ public class LexerTestLanguageGrammarAccess extends BaseEPackageAccess implement
 		private final Assignment cAssignmentChildren = (Assignment)rule.eContents().get(1);
 		private final RuleCall c0ParserRuleCallElement = (RuleCall)cAssignmentChildren.eContents().get(0);
 		
-		// Model : ( children += Element ) * ;
+		// Model:   (children+=Element)*;
 		public ParserRule getRule() { return rule; }
 
-		// ( children += Element ) *
+		// (children+=Element)*
 		public Assignment eleAssignmentChildren() { return cAssignmentChildren; }
 
 		// Element
@@ -33,19 +33,19 @@ public class LexerTestLanguageGrammarAccess extends BaseEPackageAccess implement
 		private final Assignment c1AssignmentH = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall c10LexerRuleCallSTRING = (RuleCall)c1AssignmentH.eContents().get(0);
 		
-		// Element : name = ID h = STRING ;
+		// Element:   name=ID h=STRING;
 		public ParserRule getRule() { return rule; }
 
-		// name = ID h = STRING
+		// name=ID h=STRING
 		public Group eleGroup() { return cGroup; }
 
-		// name = ID
+		// name=ID
 		public Assignment ele0AssignmentName() { return c0AssignmentName; }
 
 		// ID
 		public RuleCall ele00LexerRuleCallID() { return c00LexerRuleCallID; }
 
-		// h = STRING
+		// h=STRING
 		public Assignment ele1AssignmentH() { return c1AssignmentH; }
 
 		// STRING
@@ -75,17 +75,17 @@ public class LexerTestLanguageGrammarAccess extends BaseEPackageAccess implement
 	}
 
 	
-	// Model : ( children += Element ) * ;
+	// Model:   (children+=Element)*;
 	public ModelElements prModel() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	} 
 
-	// Element : name = ID h = STRING ;
+	// Element:   name=ID h=STRING;
 	public ElementElements prElement() {
 		return (pElement != null) ? pElement : (pElement = new ElementElements());
 	} 
 
-	// lexer STRING : " \'#\' (\'B\')+ " ;
+	// lexer STRING:   " \'#\' (\'B\')+ ";
 	public LexerRule lrSTRING() {
 		return (lSTRING != null) ? lSTRING : (lSTRING = (LexerRule) getGrammar().eContents().get(3));
 	} 

@@ -5,55 +5,58 @@ package org.eclipse.xtext.parsetree.reconstr;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.ISetup;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.IResourceFactory;
-import org.eclipse.xtext.service.IServiceScope;
-import org.eclipse.xtext.service.ServiceRegistry;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
-import org.eclipse.xtext.parsetree.reconstr.ISimpleReconstrTestLanguage;
+public class SimpleReconstrTestLanguageStandaloneSetup implements ISetup {
 
-public abstract class SimpleReconstrTestLanguageStandaloneSetup {
+	public static void doSetup() {
+		new SimpleReconstrTestLanguageStandaloneSetup().createInjectorAndDoEMFRegistration();
+	}
 
-	private static boolean isInitialized = false;
-
-	public synchronized static void doSetup() {
-		if(!isInitialized) {
+	public Injector createInjectorAndDoEMFRegistration() {
+			
+			new org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup().doSetup();
+			
+		    registerEPackages();
 		    
-		    Injector injector = Guice.createInjector(new org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguageRuntimeModule());
-			ServiceRegistry.registerInjector(org.eclipse.xtext.parsetree.reconstr.ISimpleReconstrTestLanguage.SCOPE, injector);
-			
-			
-			
-			org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
-			
-			
-			// register resource factory to EMF
-			IResourceFactory resourceFactory = new org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestLanguageResourceFactory();
-			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("simplereconstrtestlanguage", resourceFactory);
-			
-			
-			// initialize EPackages
-			
-				if (!EPackage.Registry.INSTANCE.containsKey("http://simple/rewrite/test")) {
-					EPackage simplerewritetest = EcoreUtil2.loadEPackage(
-							"classpath:/org/eclipse/xtext/parsetree/reconstr/simplerewritetest.ecore",
-							SimpleReconstrTestLanguageStandaloneSetup.class.getClassLoader());
-					if (simplerewritetest == null)
-						throw new IllegalStateException(
-								"Couldn't load EPackage from 'classpath:/org/eclipse/xtext/parsetree/reconstr/simplerewritetest.ecore'");
-					EPackage.Registry.INSTANCE.put("http://simple/rewrite/test", simplerewritetest);
-				}
-			
-			isInitialized = true;
-		}
+		    Injector injector = createInjector();
+		    IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
+		    registerResourceFactory(resourceFactory);
+		    return injector;
+		    
 	}
 	
-	public static IServiceScope getServiceScope() {
-	   doSetup();
-	   return org.eclipse.xtext.parsetree.reconstr.ISimpleReconstrTestLanguage.SCOPE;
+    
+	public Injector createInjector() {
+		return Guice.createInjector(new org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguageRuntimeModule());
+	}
+	
+	public void registerResourceFactory(IResourceFactory resourceFactory) {
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("simplereconstrtestlanguage", resourceFactory);
+		
+	}
+    
+
+	/**
+	 * initializes all EPackages generated for this language and registers them at EPackage.Registry.INSTANCE
+	 */	
+	public void registerEPackages() {
+		
+			if (!EPackage.Registry.INSTANCE.containsKey("http://simple/rewrite/test")) {
+				EPackage simplerewritetest = EcoreUtil2.loadEPackage(
+						"classpath:/org/eclipse/xtext/parsetree/reconstr/simplerewritetest.ecore",
+						SimpleReconstrTestLanguageStandaloneSetup.class.getClassLoader());
+				if (simplerewritetest == null)
+					throw new IllegalStateException(
+							"Couldn't load EPackage from 'classpath:/org/eclipse/xtext/parsetree/reconstr/simplerewritetest.ecore'");
+				EPackage.Registry.INSTANCE.put("http://simple/rewrite/test", simplerewritetest);
+			}
+		
 	}
 	
 }

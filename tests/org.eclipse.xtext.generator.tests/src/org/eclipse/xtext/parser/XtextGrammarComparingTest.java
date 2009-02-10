@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser;
 
+import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.parser.packrat.XtextPackratParser;
 
@@ -23,7 +24,7 @@ public class XtextGrammarComparingTest extends AbstractXtextGrammarParsingTest {
 	}
 
 	@Override
-	protected Class<?> getStandaloneSetupClass() {
+	protected Class<? extends ISetup> getStandaloneSetupClass() {
 		return XtextStandaloneSetup.class;
 	}
 

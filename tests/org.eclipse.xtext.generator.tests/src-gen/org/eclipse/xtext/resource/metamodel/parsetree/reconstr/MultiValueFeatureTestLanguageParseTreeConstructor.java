@@ -25,12 +25,12 @@ public class MultiValueFeatureTestLanguageParseTreeConstructor extends AbstractP
 
 /************ begin Rule Start ****************
  *
- * Start : ( featureA += ID ) + ;
+ * Start:   (featureA+=ID)+;
  *
  **/
 
 
-// ( featureA += ID ) +
+// (featureA+=ID)+
 protected class Start_Assignment_featureA extends AssignmentToken  {
 	
 	public Start_Assignment_featureA(IInstanceDescription curr, AbstractToken pred) {

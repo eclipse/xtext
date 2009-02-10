@@ -24,37 +24,37 @@ public class KeywordsTestLanguageGrammarAccess extends BaseEPackageAccess implem
 		private final Assignment c1AssignmentForth = (Assignment)cAlternatives.eContents().get(1);
 		private final Keyword c10KeywordReverseSolidus = (Keyword)c1AssignmentForth.eContents().get(0);
 		
-		// Model : first ?= "foo\\bar" | second ?= "foo\\" | third ?= "\\bar" | forth ?= "\\" ;
+		// Model:   first?="foo\\bar"|second?="foo\\"|third?="\\bar"|forth?="\\";
 		public ParserRule getRule() { return rule; }
 
-		// first ?= "foo\\bar" | second ?= "foo\\" | third ?= "\\bar" | forth ?= "\\"
+		// first?="foo\\bar"|second?="foo\\"|third?="\\bar"|forth?="\\"
 		public Alternatives eleAlternatives() { return cAlternatives; }
 
-		// first ?= "foo\\bar" | second ?= "foo\\" | third ?= "\\bar"
+		// first?="foo\\bar"|second?="foo\\"|third?="\\bar"
 		public Alternatives ele0Alternatives() { return c0Alternatives; }
 
-		// first ?= "foo\\bar" | second ?= "foo\\"
+		// first?="foo\\bar"|second?="foo\\"
 		public Alternatives ele00Alternatives() { return c00Alternatives; }
 
-		// first ?= "foo\\bar"
+		// first?="foo\\bar"
 		public Assignment ele000AssignmentFirst() { return c000AssignmentFirst; }
 
 		// "foo\\bar"
 		public Keyword ele0000KeywordFooBar() { return c0000KeywordFooBar; }
 
-		// second ?= "foo\\"
+		// second?="foo\\"
 		public Assignment ele001AssignmentSecond() { return c001AssignmentSecond; }
 
 		// "foo\\"
 		public Keyword ele0010KeywordFoo() { return c0010KeywordFoo; }
 
-		// third ?= "\\bar"
+		// third?="\\bar"
 		public Assignment ele01AssignmentThird() { return c01AssignmentThird; }
 
 		// "\\bar"
 		public Keyword ele010KeywordBar() { return c010KeywordBar; }
 
-		// forth ?= "\\"
+		// forth?="\\"
 		public Assignment ele1AssignmentForth() { return c1AssignmentForth; }
 
 		// "\\"
@@ -82,7 +82,7 @@ public class KeywordsTestLanguageGrammarAccess extends BaseEPackageAccess implem
 	}
 
 	
-	// Model : first ?= "foo\\bar" | second ?= "foo\\" | third ?= "\\bar" | forth ?= "\\" ;
+	// Model:   first?="foo\\bar"|second?="foo\\"|third?="\\bar"|forth?="\\";
 	public ModelElements prModel() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	} 

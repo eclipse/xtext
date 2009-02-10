@@ -19,22 +19,22 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends BaseEPackageAcce
 		private final Assignment c11AssignmentExpressions = (Assignment)c1Group.eContents().get(1);
 		private final RuleCall c110ParserRuleCallAddition = (RuleCall)c11AssignmentExpressions.eContents().get(0);
 		
-		// Sequence : Addition ( { current = Sequence . expressions += current } expressions += Addition ) * ;
+		// Sequence:   Addition ({current=Sequence.expressions+=current} expressions+=Addition)*;
 		public ParserRule getRule() { return rule; }
 
-		// Addition ( { current = Sequence . expressions += current } expressions += Addition ) *
+		// Addition ({current=Sequence.expressions+=current} expressions+=Addition)*
 		public Group eleGroup() { return cGroup; }
 
 		// Addition
 		public RuleCall ele0ParserRuleCallAddition() { return c0ParserRuleCallAddition; }
 
-		// ( { current = Sequence . expressions += current } expressions += Addition ) *
+		// ({current=Sequence.expressions+=current} expressions+=Addition)*
 		public Group ele1Group() { return c1Group; }
 
-		// { current = Sequence . expressions += current }
+		// {current=Sequence.expressions+=current}
 		public Action ele10ActionSequenceexpressions() { return c10ActionSequenceexpressions; }
 
-		// expressions += Addition
+		// expressions+=Addition
 		public Assignment ele11AssignmentExpressions() { return c11AssignmentExpressions; }
 
 		// Addition
@@ -55,28 +55,28 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends BaseEPackageAcce
 		private final Assignment c11AssignmentValues = (Assignment)c1Group.eContents().get(1);
 		private final RuleCall c110ParserRuleCallMultiplication = (RuleCall)c11AssignmentValues.eContents().get(0);
 		
-		// Addition returns Expression : Multiplication ( { current = Op . values += current } operator = ( "+" | "-" ) values += Multiplication ) * ;
+		// Addition returns Expression:   Multiplication ({current=Op.values+=current} operator=("+"|"-") values+=Multiplication)*;
 		public ParserRule getRule() { return rule; }
 
-		// Multiplication ( { current = Op . values += current } operator = ( "+" | "-" ) values += Multiplication ) *
+		// Multiplication ({current=Op.values+=current} operator=("+"|"-") values+=Multiplication)*
 		public Group eleGroup() { return cGroup; }
 
 		// Multiplication
 		public RuleCall ele0ParserRuleCallMultiplication() { return c0ParserRuleCallMultiplication; }
 
-		// ( { current = Op . values += current } operator = ( "+" | "-" ) values += Multiplication ) *
+		// ({current=Op.values+=current} operator=("+"|"-") values+=Multiplication)*
 		public Group ele1Group() { return c1Group; }
 
-		// { current = Op . values += current } operator = ( "+" | "-" )
+		// {current=Op.values+=current} operator=("+"|"-")
 		public Group ele10Group() { return c10Group; }
 
-		// { current = Op . values += current }
+		// {current=Op.values+=current}
 		public Action ele100ActionOpvalues() { return c100ActionOpvalues; }
 
-		// operator = ( "+" | "-" )
+		// operator=("+"|"-")
 		public Assignment ele101AssignmentOperator() { return c101AssignmentOperator; }
 
-		// "+" | "-"
+		// "+"|"-"
 		public Alternatives ele1010Alternatives() { return c1010Alternatives; }
 
 		// "+"
@@ -85,7 +85,7 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends BaseEPackageAcce
 		// "-"
 		public Keyword ele10101KeywordHyphenMinus() { return c10101KeywordHyphenMinus; }
 
-		// values += Multiplication
+		// values+=Multiplication
 		public Assignment ele11AssignmentValues() { return c11AssignmentValues; }
 
 		// Multiplication
@@ -106,28 +106,28 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends BaseEPackageAcce
 		private final Assignment c11AssignmentValues = (Assignment)c1Group.eContents().get(1);
 		private final RuleCall c110ParserRuleCallTerm = (RuleCall)c11AssignmentValues.eContents().get(0);
 		
-		// Multiplication returns Expression : Term ( { current = Op . values += current } operator = ( "*" | "/" ) values += Term ) * ;
+		// Multiplication returns Expression:   Term ({current=Op.values+=current} operator=("*"|"/") values+=Term)*;
 		public ParserRule getRule() { return rule; }
 
-		// Term ( { current = Op . values += current } operator = ( "*" | "/" ) values += Term ) *
+		// Term ({current=Op.values+=current} operator=("*"|"/") values+=Term)*
 		public Group eleGroup() { return cGroup; }
 
 		// Term
 		public RuleCall ele0ParserRuleCallTerm() { return c0ParserRuleCallTerm; }
 
-		// ( { current = Op . values += current } operator = ( "*" | "/" ) values += Term ) *
+		// ({current=Op.values+=current} operator=("*"|"/") values+=Term)*
 		public Group ele1Group() { return c1Group; }
 
-		// { current = Op . values += current } operator = ( "*" | "/" )
+		// {current=Op.values+=current} operator=("*"|"/")
 		public Group ele10Group() { return c10Group; }
 
-		// { current = Op . values += current }
+		// {current=Op.values+=current}
 		public Action ele100ActionOpvalues() { return c100ActionOpvalues; }
 
-		// operator = ( "*" | "/" )
+		// operator=("*"|"/")
 		public Assignment ele101AssignmentOperator() { return c101AssignmentOperator; }
 
-		// "*" | "/"
+		// "*"|"/"
 		public Alternatives ele1010Alternatives() { return c1010Alternatives; }
 
 		// "*"
@@ -136,7 +136,7 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends BaseEPackageAcce
 		// "/"
 		public Keyword ele10101KeywordSolidus() { return c10101KeywordSolidus; }
 
-		// values += Term
+		// values+=Term
 		public Assignment ele11AssignmentValues() { return c11AssignmentValues; }
 
 		// Term
@@ -149,10 +149,10 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends BaseEPackageAcce
 		private final RuleCall c0ParserRuleCallAtom = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall c1ParserRuleCallParens = (RuleCall)cAlternatives.eContents().get(1);
 		
-		// Term returns Expression : Atom | Parens ;
+		// Term returns Expression:   Atom|Parens;
 		public ParserRule getRule() { return rule; }
 
-		// Atom | Parens
+		// Atom|Parens
 		public Alternatives eleAlternatives() { return cAlternatives; }
 
 		// Atom
@@ -167,10 +167,10 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends BaseEPackageAcce
 		private final Assignment cAssignmentName = (Assignment)rule.eContents().get(1);
 		private final RuleCall c0LexerRuleCallID = (RuleCall)cAssignmentName.eContents().get(0);
 		
-		// Atom : name = ID ;
+		// Atom:   name=ID;
 		public ParserRule getRule() { return rule; }
 
-		// name = ID
+		// name=ID
 		public Assignment eleAssignmentName() { return cAssignmentName; }
 
 		// ID
@@ -185,7 +185,7 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends BaseEPackageAcce
 		private final RuleCall c01ParserRuleCallAddition = (RuleCall)c0Group.eContents().get(1);
 		private final Keyword c1KeywordRightParenthesis = (Keyword)cGroup.eContents().get(1);
 		
-		// Parens returns Expression : "(" Addition ")" ;
+		// Parens returns Expression:   "(" Addition ")";
 		public ParserRule getRule() { return rule; }
 
 		// "(" Addition ")"
@@ -230,32 +230,32 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends BaseEPackageAcce
 	}
 
 	
-	// Sequence : Addition ( { current = Sequence . expressions += current } expressions += Addition ) * ;
+	// Sequence:   Addition ({current=Sequence.expressions+=current} expressions+=Addition)*;
 	public SequenceElements prSequence() {
 		return (pSequence != null) ? pSequence : (pSequence = new SequenceElements());
 	} 
 
-	// Addition returns Expression : Multiplication ( { current = Op . values += current } operator = ( "+" | "-" ) values += Multiplication ) * ;
+	// Addition returns Expression:   Multiplication ({current=Op.values+=current} operator=("+"|"-") values+=Multiplication)*;
 	public AdditionElements prAddition() {
 		return (pAddition != null) ? pAddition : (pAddition = new AdditionElements());
 	} 
 
-	// Multiplication returns Expression : Term ( { current = Op . values += current } operator = ( "*" | "/" ) values += Term ) * ;
+	// Multiplication returns Expression:   Term ({current=Op.values+=current} operator=("*"|"/") values+=Term)*;
 	public MultiplicationElements prMultiplication() {
 		return (pMultiplication != null) ? pMultiplication : (pMultiplication = new MultiplicationElements());
 	} 
 
-	// Term returns Expression : Atom | Parens ;
+	// Term returns Expression:   Atom|Parens;
 	public TermElements prTerm() {
 		return (pTerm != null) ? pTerm : (pTerm = new TermElements());
 	} 
 
-	// Atom : name = ID ;
+	// Atom:   name=ID;
 	public AtomElements prAtom() {
 		return (pAtom != null) ? pAtom : (pAtom = new AtomElements());
 	} 
 
-	// Parens returns Expression : "(" Addition ")" ;
+	// Parens returns Expression:   "(" Addition ")";
 	public ParensElements prParens() {
 		return (pParens != null) ? pParens : (pParens = new ParensElements());
 	} 

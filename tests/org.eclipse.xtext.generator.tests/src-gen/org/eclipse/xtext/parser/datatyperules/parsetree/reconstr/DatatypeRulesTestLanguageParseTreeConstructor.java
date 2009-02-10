@@ -26,12 +26,12 @@ public class DatatypeRulesTestLanguageParseTreeConstructor extends AbstractParse
 
 /************ begin Rule CompositeModel ****************
  *
- * CompositeModel : ( model += Model ) + ;
+ * CompositeModel:   (model+=Model)+;
  *
  **/
 
 
-// ( model += Model ) +
+// (model+=Model)+
 protected class CompositeModel_Assignment_model extends AssignmentToken  {
 	
 	public CompositeModel_Assignment_model(IInstanceDescription curr, AbstractToken pred) {
@@ -67,12 +67,12 @@ protected class CompositeModel_Assignment_model extends AssignmentToken  {
 
 /************ begin Rule Model ****************
  *
- * Model : id = NestedModelId ( ":" value = Fraction ) ? ( "#" vector = Vector ) ? ( "+" dots = Dots ) ? ";" ;
+ * Model:   id=NestedModelId (":" value=Fraction)? ("#" vector=Vector)? ("+" dots=Dots)? ";";
  *
  **/
 
 
-// id = NestedModelId ( ":" value = Fraction ) ? ( "#" vector = Vector ) ? ( "+" dots = Dots ) ? ";"
+// id=NestedModelId (":" value=Fraction)? ("#" vector=Vector)? ("+" dots=Dots)? ";"
 protected class Model_Group extends GroupToken {
 	
 	public Model_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -100,7 +100,7 @@ protected class Model_Group extends GroupToken {
 	}
 }
 
-// id = NestedModelId ( ":" value = Fraction ) ? ( "#" vector = Vector ) ? ( "+" dots = Dots ) ?
+// id=NestedModelId (":" value=Fraction)? ("#" vector=Vector)? ("+" dots=Dots)?
 protected class Model_0_Group extends GroupToken {
 	
 	public Model_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -128,7 +128,7 @@ protected class Model_0_Group extends GroupToken {
 	}
 }
 
-// id = NestedModelId ( ":" value = Fraction ) ? ( "#" vector = Vector ) ?
+// id=NestedModelId (":" value=Fraction)? ("#" vector=Vector)?
 protected class Model_0_0_Group extends GroupToken {
 	
 	public Model_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -156,7 +156,7 @@ protected class Model_0_0_Group extends GroupToken {
 	}
 }
 
-// id = NestedModelId ( ":" value = Fraction ) ?
+// id=NestedModelId (":" value=Fraction)?
 protected class Model_0_0_0_Group extends GroupToken {
 	
 	public Model_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -184,7 +184,7 @@ protected class Model_0_0_0_Group extends GroupToken {
 	}
 }
 
-// id = NestedModelId
+// id=NestedModelId
 protected class Model_0_0_0_0_Assignment_id extends AssignmentToken  {
 	
 	public Model_0_0_0_0_Assignment_id(IInstanceDescription curr, AbstractToken pred) {
@@ -209,7 +209,7 @@ protected class Model_0_0_0_0_Assignment_id extends AssignmentToken  {
 	}
 }
 
-// ( ":" value = Fraction ) ?
+// (":" value=Fraction)?
 protected class Model_0_0_0_1_Group extends GroupToken {
 	
 	public Model_0_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -249,7 +249,7 @@ protected class Model_0_0_0_1_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// value = Fraction
+// value=Fraction
 protected class Model_0_0_0_1_1_Assignment_value extends AssignmentToken  {
 	
 	public Model_0_0_0_1_1_Assignment_value(IInstanceDescription curr, AbstractToken pred) {
@@ -276,7 +276,7 @@ protected class Model_0_0_0_1_1_Assignment_value extends AssignmentToken  {
 
 
 
-// ( "#" vector = Vector ) ?
+// ("#" vector=Vector)?
 protected class Model_0_0_1_Group extends GroupToken {
 	
 	public Model_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -316,7 +316,7 @@ protected class Model_0_0_1_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// vector = Vector
+// vector=Vector
 protected class Model_0_0_1_1_Assignment_vector extends AssignmentToken  {
 	
 	public Model_0_0_1_1_Assignment_vector(IInstanceDescription curr, AbstractToken pred) {
@@ -343,7 +343,7 @@ protected class Model_0_0_1_1_Assignment_vector extends AssignmentToken  {
 
 
 
-// ( "+" dots = Dots ) ?
+// ("+" dots=Dots)?
 protected class Model_0_1_Group extends GroupToken {
 	
 	public Model_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -383,7 +383,7 @@ protected class Model_0_1_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// dots = Dots
+// dots=Dots
 protected class Model_0_1_1_Assignment_dots extends AssignmentToken  {
 	
 	public Model_0_1_1_Assignment_dots(IInstanceDescription curr, AbstractToken pred) {

@@ -26,12 +26,12 @@ public class TestLanguageParseTreeConstructor extends AbstractParseTreeConstruct
 
 /************ begin Rule File ****************
  *
- * File : ( stuff += Stuff ) * ;
+ * File:   (stuff+=Stuff)*;
  *
  **/
 
 
-// ( stuff += Stuff ) *
+// (stuff+=Stuff)*
 protected class File_Assignment_stuff extends AssignmentToken  {
 	
 	public File_Assignment_stuff(IInstanceDescription curr, AbstractToken pred) {
@@ -67,12 +67,12 @@ protected class File_Assignment_stuff extends AssignmentToken  {
 
 /************ begin Rule Stuff ****************
  *
- * Stuff : "stuff" name = ID ;
+ * Stuff:   "stuff" name=ID;
  *
  **/
 
 
-// "stuff" name = ID
+// "stuff" name=ID
 protected class Stuff_Group extends GroupToken {
 	
 	public Stuff_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -112,7 +112,7 @@ protected class Stuff_0_Keyword_stuff extends KeywordToken  {
 	}	
 }
 
-// name = ID
+// name=ID
 protected class Stuff_1_Assignment_name extends AssignmentToken  {
 	
 	public Stuff_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {

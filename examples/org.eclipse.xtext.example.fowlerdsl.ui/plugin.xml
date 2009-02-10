@@ -2,10 +2,11 @@
 <?eclipse version="3.0"?>
 
 <plugin>
-	<extension
+
+<extension
          point="org.eclipse.ui.editors">
       <editor
-            class="org.eclipse.xtext.example.ui.editor.FowlerDslEditor"
+            class="guice.Aware:org.eclipse.xtext.ui.core.editor.XtextEditor"
             contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
             default="true"
             extensions="fowlerdsl"
@@ -16,16 +17,16 @@
  <extension
          point="org.eclipse.ui.preferencePages">
 		<page
-			class="org.eclipse.xtext.ui.core.util.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage/org.eclipse.xtext.example.FowlerDsl"
+			class="guice.Aware:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
 			id="org.eclipse.xtext.example.FowlerDsl"
 			name="FowlerDsl">
 			<keywordReference
-				id="org.eclipse.xtext.example.fowlerdsl.ui.ui.keyword_FowlerDsl">
+				id="org.eclipse.xtext.example.ui.keyword_FowlerDsl">
 			</keywordReference>
 		</page>
 		<page
 		    category="org.eclipse.xtext.example.FowlerDsl"
-		    class="org.eclipse.xtext.ui.core.util.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.EditorPreferencePage/org.eclipse.xtext.example.FowlerDsl"
+		    class="guice.Aware:org.eclipse.xtext.ui.core.editor.preferences.EditorPreferencePage"
 		    id="org.eclipse.xtext.example.FowlerDsl.editor"
 		    name="Editor">
 		    	<keywordReference 
@@ -36,7 +37,7 @@
 	<extension
 		point="org.eclipse.ui.keywords">
 		<keyword
-			id="org.eclipse.xtext.example.fowlerdsl.ui.ui.keyword_FowlerDsl"
+			id="org.eclipse.xtext.example.ui.keyword_FowlerDsl"
 			label="FowlerDsl">
 		</keyword>
 		<keyword
@@ -44,32 +45,15 @@
             label="Task Tags">
         </keyword>
 	</extension>
-	<extension point="org.eclipse.ui.editors.templates">
-		<contextType name="templatesContextTypeEventsName"
-			class="org.eclipse.xtext.ui.common.editor.contentassist.impl.XtextTemplateContextType"
-			id="org.eclipse.xtext.example.fowlerdsl.ui.templates.contextType.events">
-		</contextType>
-		<contextType name="templatesContextTypeActionsName"
-			class="org.eclipse.xtext.ui.common.editor.contentassist.impl.XtextTemplateContextType"
-			id="org.eclipse.xtext.example.fowlerdsl.ui.templates.contextType.actions">
-		</contextType>
-		<contextType name="templatesContextTypeStateName"
-			class="org.eclipse.xtext.ui.common.editor.contentassist.impl.XtextTemplateContextType"
-			id="org.eclipse.xtext.example.fowlerdsl.ui.templates.contextType.state">
-		</contextType>
-		<contextType name="templatesContextTypeEventName"
-			class="org.eclipse.xtext.ui.common.editor.contentassist.impl.XtextTemplateContextType"
-			id="org.eclipse.xtext.example.fowlerdsl.ui.templates.contextType.Event">
-		</contextType>
-		<contextType name="templatesContextTypeCommandName"
-			class="org.eclipse.xtext.ui.common.editor.contentassist.impl.XtextTemplateContextType"
-			id="org.eclipse.xtext.example.fowlerdsl.ui.templates.contextType.Command">
-		</contextType>
-		<contextType name="templatesContextTypeTransitionName"
-			class="org.eclipse.xtext.ui.common.editor.contentassist.impl.XtextTemplateContextType"
-			id="org.eclipse.xtext.example.fowlerdsl.ui.templates.contextType.Transition">
-		</contextType>
-		<include file="templates/templates.xml" /> 
-	</extension>
 	
+	
+	<extension
+         point="org.eclipse.emf.ecore.extension_parser">
+      <parser
+            class="guice.Aware:org.eclipse.xtext.resource.XtextResourceFactory"
+            type="fowlerdsl">
+      </parser>
+   </extension>
+	
+
 </plugin>

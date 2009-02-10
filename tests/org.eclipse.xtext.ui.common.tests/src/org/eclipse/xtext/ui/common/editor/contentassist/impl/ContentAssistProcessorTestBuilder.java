@@ -13,12 +13,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.contentassist.impl;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertTrue;
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.*;
 
-import java.io.InputStream;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
@@ -27,19 +23,15 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.easymock.EasyMock;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.xtext.resource.IResourceFactory;
+import org.eclipse.xtext.ISetup;
+import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.service.IServiceScope;
-import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
@@ -52,39 +44,39 @@ import org.eclipse.xtext.util.Strings;
  * @author Michael Clay - Initial contribution and API
  * @author Sven Efftinge
  */
-public class ContentAssistProcessorTestBuilder {
+public class ContentAssistProcessorTestBuilder extends AbstractXtextTests {
 
 	private IContentAssistProcessor contentAssistProcessor;
-	private IServiceScope serviceScope;
 	private ITextViewer textViewerMock;
 	private String model;
 	private int cursorPosition;
+	private ISetup setupClazz;
 
-	public ContentAssistProcessorTestBuilder(IServiceScope serviceScope, IContentAssistProcessor contentAssistProcessor) {
-		this.contentAssistProcessor = contentAssistProcessor;
-		this.serviceScope = serviceScope;
+	public ContentAssistProcessorTestBuilder(ISetup setupClazz) throws Exception {
+		this.setupClazz = setupClazz;
+		with(setupClazz);
+		this.contentAssistProcessor = get(IContentAssistProcessor.class);
 		this.textViewerMock = EasyMock.createMock(ITextViewer.class);
-		ServiceRegistry.getInjector(serviceScope).injectMembers(this.contentAssistProcessor);
 	}
 	
-	public ContentAssistProcessorTestBuilder reset() {
+	public ContentAssistProcessorTestBuilder reset() throws Exception {
 		return clone("",0);
 	}
 
-	public ContentAssistProcessorTestBuilder append(String model) {
+	public ContentAssistProcessorTestBuilder append(String model) throws Exception {
 		return clone(getModel()+model, cursorPosition+model.length());
 	}
 
-	public ContentAssistProcessorTestBuilder appendNl(String model) {
+	public ContentAssistProcessorTestBuilder appendNl(String model) throws Exception {
 		return append(model).append(Strings.newLine());
 	}
 
-	public ContentAssistProcessorTestBuilder insert(String model, int cursorPosition) {
+	public ContentAssistProcessorTestBuilder insert(String model, int cursorPosition) throws Exception {
 		StringBuilder builder = new StringBuilder(getModel()).insert(cursorPosition, model);
 		return clone(builder.toString(), cursorPosition + model.length());
 	}
 
-	public ContentAssistProcessorTestBuilder cursorBack(int times) {
+	public ContentAssistProcessorTestBuilder cursorBack(int times) throws Exception {
 		return clone(model,this.cursorPosition -= times);
 	}
 
@@ -200,14 +192,6 @@ public class ContentAssistProcessorTestBuilder {
 				+ this.cursorPosition;
 	}
 
-	private XtextResource getResource(InputStream in) throws Exception {
-		ResourceSet rs = new XtextResourceSet();
-		XtextResource resource = (XtextResource) rs.createResource(URI.createURI("mytestmodel."
-				+ getResourceFactory().getModelFileExtensions()[0]));
-		resource.load(in, null);
-		return resource;
-	}
-
 	private IXtextDocument getDocument(final XtextResource xtextResource) {
 		final IXtextDocument xtextDocument = (IXtextDocument) Proxy.newProxyInstance(getClass().getClassLoader(),
 				new Class[] { IXtextDocument.class }, new InvocationHandler() {
@@ -224,10 +208,6 @@ public class ContentAssistProcessorTestBuilder {
 		return xtextDocument;
 	}
 	
-	private IResourceFactory getResourceFactory() {
-		return ServiceRegistry.getInjector(serviceScope).getInstance(IResourceFactory.class);
-	}
-	
 	private ITextViewer resetTextViewerMock(final String currentModelToParse, final IXtextDocument xtextDocument) {
 		EasyMock.reset(textViewerMock);
 		expect(textViewerMock.getDocument()).andReturn(xtextDocument);
@@ -236,8 +216,8 @@ public class ContentAssistProcessorTestBuilder {
 		return textViewerMock;
 	}
 	
-	private ContentAssistProcessorTestBuilder clone(String model, int offset) {
-		ContentAssistProcessorTestBuilder builder = new ContentAssistProcessorTestBuilder(this.serviceScope, this.contentAssistProcessor);
+	private ContentAssistProcessorTestBuilder clone(String model, int offset) throws Exception {
+		ContentAssistProcessorTestBuilder builder = new ContentAssistProcessorTestBuilder(setupClazz);
 		builder.model = model;
 		builder.cursorPosition = offset;
 		return builder;

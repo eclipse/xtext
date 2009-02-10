@@ -16,13 +16,18 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtend.typesystem.emf,
  org.eclipse.xtend.util.stdlib,
  de.itemis.xtext.antlr;resolution:=optional,
- org.easymock;bundle-version="2.3.0"
+ org.easymock;bundle-version="2.3.0",
+ org.eclipse.xtext.junit;bundle-version="0.7.0",
+ org.eclipse.xtext.reference;bundle-version="0.7.0"
 Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.crossrefs,
  org.eclipse.xtext.grammarinheritance,
  org.eclipse.xtext.parser.keywords,
+ org.eclipse.xtext.resource,
  org.eclipse.xtext.testlanguages,
  org.eclipse.xtext.testlanguages.parser.antlr.internal,
  org.eclipse.xtext.testlanguages.parsetree.reconstr,
  org.eclipse.xtext.testlanguages.services,
  org.eclipse.xtext.tests
+Bundle-ClassPath: lib/simple.jar,
+ .

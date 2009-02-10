@@ -89,7 +89,8 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 	
 	protected XtextResource getResource(InputStream in) throws Exception {
 		ResourceSet rs = new XtextResourceSet();
-		XtextResource resource = (XtextResource) rs.createResource(URI.createURI("mytestmodel."+getResourceFactory().getModelFileExtensions()[0]));
+		XtextResource resource = (XtextResource) getResourceFactory().createResource(URI.createURI("mytestmodel.test"));
+		rs.getResources().add(resource);
 		XtextLinker linker = new XtextLinker() {
 			@Override
 			protected Xtext2EcoreTransformer createTransformer(Grammar grammar, IDiagnosticConsumer consumer) {

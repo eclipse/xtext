@@ -18,19 +18,19 @@ public class MetamodelRefTestLanguageGrammarAccess extends BaseEPackageAccess im
 		private final Assignment c1AssignmentNameRefs = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall c10ParserRuleCallNameRef = (RuleCall)c1AssignmentNameRefs.eContents().get(0);
 		
-		// Foo : name = ID ( nameRefs += NameRef ) * ;
+		// Foo:   name=ID (nameRefs+=NameRef)*;
 		public ParserRule getRule() { return rule; }
 
-		// name = ID ( nameRefs += NameRef ) *
+		// name=ID (nameRefs+=NameRef)*
 		public Group eleGroup() { return cGroup; }
 
-		// name = ID
+		// name=ID
 		public Assignment ele0AssignmentName() { return c0AssignmentName; }
 
 		// ID
 		public RuleCall ele00LexerRuleCallID() { return c00LexerRuleCallID; }
 
-		// ( nameRefs += NameRef ) *
+		// (nameRefs+=NameRef)*
 		public Assignment ele1AssignmentNameRefs() { return c1AssignmentNameRefs; }
 
 		// NameRef
@@ -42,13 +42,13 @@ public class MetamodelRefTestLanguageGrammarAccess extends BaseEPackageAccess im
 		private final Assignment cAssignmentRule = (Assignment)rule.eContents().get(1);
 		private final CrossReference c0CrossReferenceEStringParserRule = (CrossReference)cAssignmentRule.eContents().get(0);
 		
-		// NameRef returns RuleCall : rule = [ ParserRule ] ;
+		// NameRef returns RuleCall:   rule=[ParserRule];
 		public ParserRule getRule() { return rule; }
 
-		// rule = [ ParserRule ]
+		// rule=[ParserRule]
 		public Assignment eleAssignmentRule() { return cAssignmentRule; }
 
-		// [ ParserRule ]
+		// [ParserRule]
 		public CrossReference ele0CrossReferenceEStringParserRule() { return c0CrossReferenceEStringParserRule; }
 	}
 
@@ -57,10 +57,10 @@ public class MetamodelRefTestLanguageGrammarAccess extends BaseEPackageAccess im
 		private final Assignment cAssignmentName = (Assignment)rule.eContents().get(1);
 		private final RuleCall c0LexerRuleCallID = (RuleCall)cAssignmentName.eContents().get(0);
 		
-		// MyRule returns ParserRule : name = ID ;
+		// MyRule returns ParserRule:   name=ID;
 		public ParserRule getRule() { return rule; }
 
-		// name = ID
+		// name=ID
 		public Assignment eleAssignmentName() { return cAssignmentName; }
 
 		// ID
@@ -90,17 +90,17 @@ public class MetamodelRefTestLanguageGrammarAccess extends BaseEPackageAccess im
 	}
 
 	
-	// Foo : name = ID ( nameRefs += NameRef ) * ;
+	// Foo:   name=ID (nameRefs+=NameRef)*;
 	public FooElements prFoo() {
 		return (pFoo != null) ? pFoo : (pFoo = new FooElements());
 	} 
 
-	// NameRef returns RuleCall : rule = [ ParserRule ] ;
+	// NameRef returns RuleCall:   rule=[ParserRule];
 	public NameRefElements prNameRef() {
 		return (pNameRef != null) ? pNameRef : (pNameRef = new NameRefElements());
 	} 
 
-	// MyRule returns ParserRule : name = ID ;
+	// MyRule returns ParserRule:   name=ID;
 	public MyRuleElements prMyRule() {
 		return (pMyRule != null) ? pMyRule : (pMyRule = new MyRuleElements());
 	} 

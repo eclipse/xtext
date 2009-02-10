@@ -155,4 +155,9 @@ public class EditorTest extends AbstractEditorTest {
 		openEditor.close(true);
 	}
 
+	@Override
+	protected String getEditorId() {
+		return "org.eclipse.xtext.ui.integration.TestLanguage";
+	}
+
 }

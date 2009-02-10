@@ -45,12 +45,12 @@ public class EcoreDslParseTreeConstructor extends AbstractParseTreeConstructor {
 
 /************ begin Rule EcoreDsl ****************
  *
- * EcoreDsl : ( imports += ImportStatementDecl ) * package = EPackageDecl ;
+ * EcoreDsl:   (imports+=ImportStatementDecl)* package=EPackageDecl;
  *
  **/
 
 
-// ( imports += ImportStatementDecl ) * package = EPackageDecl
+// (imports+=ImportStatementDecl)* package=EPackageDecl
 protected class EcoreDsl_Group extends GroupToken {
 	
 	public EcoreDsl_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -78,7 +78,7 @@ protected class EcoreDsl_Group extends GroupToken {
 	}
 }
 
-// ( imports += ImportStatementDecl ) *
+// (imports+=ImportStatementDecl)*
 protected class EcoreDsl_0_Assignment_imports extends AssignmentToken  {
 	
 	public EcoreDsl_0_Assignment_imports(IInstanceDescription curr, AbstractToken pred) {
@@ -109,7 +109,7 @@ protected class EcoreDsl_0_Assignment_imports extends AssignmentToken  {
 	}
 }
 
-// package = EPackageDecl
+// package=EPackageDecl
 protected class EcoreDsl_1_Assignment_package extends AssignmentToken  {
 	
 	public EcoreDsl_1_Assignment_package(IInstanceDescription curr, AbstractToken pred) {
@@ -146,12 +146,12 @@ protected class EcoreDsl_1_Assignment_package extends AssignmentToken  {
 
 /************ begin Rule ImportStatementDecl ****************
  *
- * ImportStatementDecl : "import" ( alias = ID "=" ) ? importURI = STRING ";" ;
+ * ImportStatementDecl:   "import" (alias=ID "=")? importURI=STRING ";";
  *
  **/
 
 
-// "import" ( alias = ID "=" ) ? importURI = STRING ";"
+// "import" (alias=ID "=")? importURI=STRING ";"
 protected class ImportStatementDecl_Group extends GroupToken {
 	
 	public ImportStatementDecl_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -179,7 +179,7 @@ protected class ImportStatementDecl_Group extends GroupToken {
 	}
 }
 
-// "import" ( alias = ID "=" ) ? importURI = STRING
+// "import" (alias=ID "=")? importURI=STRING
 protected class ImportStatementDecl_0_Group extends GroupToken {
 	
 	public ImportStatementDecl_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -207,7 +207,7 @@ protected class ImportStatementDecl_0_Group extends GroupToken {
 	}
 }
 
-// "import" ( alias = ID "=" ) ?
+// "import" (alias=ID "=")?
 protected class ImportStatementDecl_0_0_Group extends GroupToken {
 	
 	public ImportStatementDecl_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -247,7 +247,7 @@ protected class ImportStatementDecl_0_0_0_Keyword_import extends KeywordToken  {
 	}	
 }
 
-// ( alias = ID "=" ) ?
+// (alias=ID "=")?
 protected class ImportStatementDecl_0_0_1_Group extends GroupToken {
 	
 	public ImportStatementDecl_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -275,7 +275,7 @@ protected class ImportStatementDecl_0_0_1_Group extends GroupToken {
 	}
 }
 
-// alias = ID
+// alias=ID
 protected class ImportStatementDecl_0_0_1_0_Assignment_alias extends AssignmentToken  {
 	
 	public ImportStatementDecl_0_0_1_0_Assignment_alias(IInstanceDescription curr, AbstractToken pred) {
@@ -312,7 +312,7 @@ protected class ImportStatementDecl_0_0_1_1_Keyword extends KeywordToken  {
 
 
 
-// importURI = STRING
+// importURI=STRING
 protected class ImportStatementDecl_0_1_Assignment_importURI extends AssignmentToken  {
 	
 	public ImportStatementDecl_0_1_Assignment_importURI(IInstanceDescription curr, AbstractToken pred) {
@@ -354,12 +354,12 @@ protected class ImportStatementDecl_1_Keyword extends KeywordToken  {
 
 /************ begin Rule EPackageDecl ****************
  *
- * EPackageDecl returns EPackage : ( eAnnotations += EAnnotationDecl ) * "package" name = QID "nsURI" "=" nsURI = STRING "nsPrefix" "=" nsPrefix = QID "{" ( eSubpackages += SubEPackageDecl | eClassifiers += EClassifierDecl ) * "}" ;
+ * EPackageDecl returns EPackage:   (eAnnotations+=EAnnotationDecl)* "package" name=QID "nsURI" "=" nsURI=STRING "nsPrefix" "=" nsPrefix=QID "{" (eSubpackages+=SubEPackageDecl|eClassifiers+=EClassifierDecl)* "}";
  *
  **/
 
 
-// ( eAnnotations += EAnnotationDecl ) * "package" name = QID "nsURI" "=" nsURI = STRING "nsPrefix" "=" nsPrefix = QID "{" ( eSubpackages += SubEPackageDecl | eClassifiers += EClassifierDecl ) * "}"
+// (eAnnotations+=EAnnotationDecl)* "package" name=QID "nsURI" "=" nsURI=STRING "nsPrefix" "=" nsPrefix=QID "{" (eSubpackages+=SubEPackageDecl|eClassifiers+=EClassifierDecl)* "}"
 protected class EPackageDecl_Group extends GroupToken {
 	
 	public EPackageDecl_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -387,7 +387,7 @@ protected class EPackageDecl_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * "package" name = QID "nsURI" "=" nsURI = STRING "nsPrefix" "=" nsPrefix = QID "{" ( eSubpackages += SubEPackageDecl | eClassifiers += EClassifierDecl ) *
+// (eAnnotations+=EAnnotationDecl)* "package" name=QID "nsURI" "=" nsURI=STRING "nsPrefix" "=" nsPrefix=QID "{" (eSubpackages+=SubEPackageDecl|eClassifiers+=EClassifierDecl)*
 protected class EPackageDecl_0_Group extends GroupToken {
 	
 	public EPackageDecl_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -415,7 +415,7 @@ protected class EPackageDecl_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * "package" name = QID "nsURI" "=" nsURI = STRING "nsPrefix" "=" nsPrefix = QID "{"
+// (eAnnotations+=EAnnotationDecl)* "package" name=QID "nsURI" "=" nsURI=STRING "nsPrefix" "=" nsPrefix=QID "{"
 protected class EPackageDecl_0_0_Group extends GroupToken {
 	
 	public EPackageDecl_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -443,7 +443,7 @@ protected class EPackageDecl_0_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * "package" name = QID "nsURI" "=" nsURI = STRING "nsPrefix" "=" nsPrefix = QID
+// (eAnnotations+=EAnnotationDecl)* "package" name=QID "nsURI" "=" nsURI=STRING "nsPrefix" "=" nsPrefix=QID
 protected class EPackageDecl_0_0_0_Group extends GroupToken {
 	
 	public EPackageDecl_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -471,7 +471,7 @@ protected class EPackageDecl_0_0_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * "package" name = QID "nsURI" "=" nsURI = STRING "nsPrefix" "="
+// (eAnnotations+=EAnnotationDecl)* "package" name=QID "nsURI" "=" nsURI=STRING "nsPrefix" "="
 protected class EPackageDecl_0_0_0_0_Group extends GroupToken {
 	
 	public EPackageDecl_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -499,7 +499,7 @@ protected class EPackageDecl_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * "package" name = QID "nsURI" "=" nsURI = STRING "nsPrefix"
+// (eAnnotations+=EAnnotationDecl)* "package" name=QID "nsURI" "=" nsURI=STRING "nsPrefix"
 protected class EPackageDecl_0_0_0_0_0_Group extends GroupToken {
 	
 	public EPackageDecl_0_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -527,7 +527,7 @@ protected class EPackageDecl_0_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * "package" name = QID "nsURI" "=" nsURI = STRING
+// (eAnnotations+=EAnnotationDecl)* "package" name=QID "nsURI" "=" nsURI=STRING
 protected class EPackageDecl_0_0_0_0_0_0_Group extends GroupToken {
 	
 	public EPackageDecl_0_0_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -555,7 +555,7 @@ protected class EPackageDecl_0_0_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * "package" name = QID "nsURI" "="
+// (eAnnotations+=EAnnotationDecl)* "package" name=QID "nsURI" "="
 protected class EPackageDecl_0_0_0_0_0_0_0_Group extends GroupToken {
 	
 	public EPackageDecl_0_0_0_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -583,7 +583,7 @@ protected class EPackageDecl_0_0_0_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * "package" name = QID "nsURI"
+// (eAnnotations+=EAnnotationDecl)* "package" name=QID "nsURI"
 protected class EPackageDecl_0_0_0_0_0_0_0_0_Group extends GroupToken {
 	
 	public EPackageDecl_0_0_0_0_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -611,7 +611,7 @@ protected class EPackageDecl_0_0_0_0_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * "package" name = QID
+// (eAnnotations+=EAnnotationDecl)* "package" name=QID
 protected class EPackageDecl_0_0_0_0_0_0_0_0_0_Group extends GroupToken {
 	
 	public EPackageDecl_0_0_0_0_0_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -639,7 +639,7 @@ protected class EPackageDecl_0_0_0_0_0_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * "package"
+// (eAnnotations+=EAnnotationDecl)* "package"
 protected class EPackageDecl_0_0_0_0_0_0_0_0_0_0_Group extends GroupToken {
 	
 	public EPackageDecl_0_0_0_0_0_0_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -667,7 +667,7 @@ protected class EPackageDecl_0_0_0_0_0_0_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) *
+// (eAnnotations+=EAnnotationDecl)*
 protected class EPackageDecl_0_0_0_0_0_0_0_0_0_0_0_Assignment_eAnnotations extends AssignmentToken  {
 	
 	public EPackageDecl_0_0_0_0_0_0_0_0_0_0_0_Assignment_eAnnotations(IInstanceDescription curr, AbstractToken pred) {
@@ -711,7 +711,7 @@ protected class EPackageDecl_0_0_0_0_0_0_0_0_0_0_1_Keyword_package extends Keywo
 }
 
 
-// name = QID
+// name=QID
 protected class EPackageDecl_0_0_0_0_0_0_0_0_0_1_Assignment_name extends AssignmentToken  {
 	
 	public EPackageDecl_0_0_0_0_0_0_0_0_0_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -763,7 +763,7 @@ protected class EPackageDecl_0_0_0_0_0_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-// nsURI = STRING
+// nsURI=STRING
 protected class EPackageDecl_0_0_0_0_0_0_1_Assignment_nsURI extends AssignmentToken  {
 	
 	public EPackageDecl_0_0_0_0_0_0_1_Assignment_nsURI(IInstanceDescription curr, AbstractToken pred) {
@@ -813,7 +813,7 @@ protected class EPackageDecl_0_0_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-// nsPrefix = QID
+// nsPrefix=QID
 protected class EPackageDecl_0_0_0_1_Assignment_nsPrefix extends AssignmentToken  {
 	
 	public EPackageDecl_0_0_0_1_Assignment_nsPrefix(IInstanceDescription curr, AbstractToken pred) {
@@ -852,7 +852,7 @@ protected class EPackageDecl_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-// ( eSubpackages += SubEPackageDecl | eClassifiers += EClassifierDecl ) *
+// (eSubpackages+=SubEPackageDecl|eClassifiers+=EClassifierDecl)*
 protected class EPackageDecl_0_1_Alternatives extends AlternativesToken {
 
 	public EPackageDecl_0_1_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -873,7 +873,7 @@ protected class EPackageDecl_0_1_Alternatives extends AlternativesToken {
 	}
 }
 
-// eSubpackages += SubEPackageDecl
+// eSubpackages+=SubEPackageDecl
 protected class EPackageDecl_0_1_0_Assignment_eSubpackages extends AssignmentToken  {
 	
 	public EPackageDecl_0_1_0_Assignment_eSubpackages(IInstanceDescription curr, AbstractToken pred) {
@@ -904,7 +904,7 @@ protected class EPackageDecl_0_1_0_Assignment_eSubpackages extends AssignmentTok
 	}
 }
 
-// eClassifiers += EClassifierDecl
+// eClassifiers+=EClassifierDecl
 protected class EPackageDecl_0_1_1_Assignment_eClassifiers extends AssignmentToken  {
 	
 	public EPackageDecl_0_1_1_Assignment_eClassifiers(IInstanceDescription curr, AbstractToken pred) {
@@ -955,12 +955,12 @@ protected class EPackageDecl_1_Keyword extends KeywordToken  {
 
 /************ begin Rule SubEPackageDecl ****************
  *
- * SubEPackageDecl returns EPackage : ( eAnnotations += EAnnotationDecl ) * "package" name = ID "{" ( eSubpackages += SubEPackageDecl | eClassifiers += EClassifierDecl ) * "}" ;
+ * SubEPackageDecl returns EPackage:   (eAnnotations+=EAnnotationDecl)* "package" name=ID "{" (eSubpackages+=SubEPackageDecl|eClassifiers+=EClassifierDecl)* "}";
  *
  **/
 
 
-// ( eAnnotations += EAnnotationDecl ) * "package" name = ID "{" ( eSubpackages += SubEPackageDecl | eClassifiers += EClassifierDecl ) * "}"
+// (eAnnotations+=EAnnotationDecl)* "package" name=ID "{" (eSubpackages+=SubEPackageDecl|eClassifiers+=EClassifierDecl)* "}"
 protected class SubEPackageDecl_Group extends GroupToken {
 	
 	public SubEPackageDecl_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -988,7 +988,7 @@ protected class SubEPackageDecl_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * "package" name = ID "{" ( eSubpackages += SubEPackageDecl | eClassifiers += EClassifierDecl ) *
+// (eAnnotations+=EAnnotationDecl)* "package" name=ID "{" (eSubpackages+=SubEPackageDecl|eClassifiers+=EClassifierDecl)*
 protected class SubEPackageDecl_0_Group extends GroupToken {
 	
 	public SubEPackageDecl_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1016,7 +1016,7 @@ protected class SubEPackageDecl_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * "package" name = ID "{"
+// (eAnnotations+=EAnnotationDecl)* "package" name=ID "{"
 protected class SubEPackageDecl_0_0_Group extends GroupToken {
 	
 	public SubEPackageDecl_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1044,7 +1044,7 @@ protected class SubEPackageDecl_0_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * "package" name = ID
+// (eAnnotations+=EAnnotationDecl)* "package" name=ID
 protected class SubEPackageDecl_0_0_0_Group extends GroupToken {
 	
 	public SubEPackageDecl_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1072,7 +1072,7 @@ protected class SubEPackageDecl_0_0_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * "package"
+// (eAnnotations+=EAnnotationDecl)* "package"
 protected class SubEPackageDecl_0_0_0_0_Group extends GroupToken {
 	
 	public SubEPackageDecl_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1100,7 +1100,7 @@ protected class SubEPackageDecl_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) *
+// (eAnnotations+=EAnnotationDecl)*
 protected class SubEPackageDecl_0_0_0_0_0_Assignment_eAnnotations extends AssignmentToken  {
 	
 	public SubEPackageDecl_0_0_0_0_0_Assignment_eAnnotations(IInstanceDescription curr, AbstractToken pred) {
@@ -1144,7 +1144,7 @@ protected class SubEPackageDecl_0_0_0_0_1_Keyword_package extends KeywordToken  
 }
 
 
-// name = ID
+// name=ID
 protected class SubEPackageDecl_0_0_0_1_Assignment_name extends AssignmentToken  {
 	
 	public SubEPackageDecl_0_0_0_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -1181,7 +1181,7 @@ protected class SubEPackageDecl_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-// ( eSubpackages += SubEPackageDecl | eClassifiers += EClassifierDecl ) *
+// (eSubpackages+=SubEPackageDecl|eClassifiers+=EClassifierDecl)*
 protected class SubEPackageDecl_0_1_Alternatives extends AlternativesToken {
 
 	public SubEPackageDecl_0_1_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -1202,7 +1202,7 @@ protected class SubEPackageDecl_0_1_Alternatives extends AlternativesToken {
 	}
 }
 
-// eSubpackages += SubEPackageDecl
+// eSubpackages+=SubEPackageDecl
 protected class SubEPackageDecl_0_1_0_Assignment_eSubpackages extends AssignmentToken  {
 	
 	public SubEPackageDecl_0_1_0_Assignment_eSubpackages(IInstanceDescription curr, AbstractToken pred) {
@@ -1233,7 +1233,7 @@ protected class SubEPackageDecl_0_1_0_Assignment_eSubpackages extends Assignment
 	}
 }
 
-// eClassifiers += EClassifierDecl
+// eClassifiers+=EClassifierDecl
 protected class SubEPackageDecl_0_1_1_Assignment_eClassifiers extends AssignmentToken  {
 	
 	public SubEPackageDecl_0_1_1_Assignment_eClassifiers(IInstanceDescription curr, AbstractToken pred) {
@@ -1284,12 +1284,12 @@ protected class SubEPackageDecl_1_Keyword extends KeywordToken  {
 
 /************ begin Rule EClassifierDecl ****************
  *
- * EClassifierDecl returns EClassifier : EClassDecl | EDataTypeDecl ;
+ * EClassifierDecl returns EClassifier:   EClassDecl|EDataTypeDecl;
  *
  **/
 
 
-// EClassDecl | EDataTypeDecl
+// EClassDecl|EDataTypeDecl
 protected class EClassifierDecl_Alternatives extends AlternativesToken {
 
 	public EClassifierDecl_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -1352,12 +1352,12 @@ protected class EClassifierDecl_1_RuleCall_EDataTypeDecl extends RuleCallToken {
 
 /************ begin Rule EDataTypeDecl ****************
  *
- * EDataTypeDecl returns EDataType : ( eAnnotations += EAnnotationDecl ) * ( serializable ?= "!serializable" ) ? ( "datatype" name = ID ":" instanceClassName = STRING_OR_QID ";" ) | EEnumDecl ;
+ * EDataTypeDecl returns EDataType:   (eAnnotations+=EAnnotationDecl)* (serializable?="!serializable")? ("datatype" name=ID ":" instanceClassName=STRING_OR_QID ";")|EEnumDecl;
  *
  **/
 
 
-// ( eAnnotations += EAnnotationDecl ) * ( serializable ?= "!serializable" ) ? ( "datatype" name = ID ":" instanceClassName = STRING_OR_QID ";" ) | EEnumDecl
+// (eAnnotations+=EAnnotationDecl)* (serializable?="!serializable")? ("datatype" name=ID ":" instanceClassName=STRING_OR_QID ";")|EEnumDecl
 protected class EDataTypeDecl_Alternatives extends AlternativesToken {
 
 	public EDataTypeDecl_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -1378,7 +1378,7 @@ protected class EDataTypeDecl_Alternatives extends AlternativesToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * ( serializable ?= "!serializable" ) ? ( "datatype" name = ID ":" instanceClassName = STRING_OR_QID ";" )
+// (eAnnotations+=EAnnotationDecl)* (serializable?="!serializable")? ("datatype" name=ID ":" instanceClassName=STRING_OR_QID ";")
 protected class EDataTypeDecl_0_Group extends GroupToken {
 	
 	public EDataTypeDecl_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1406,7 +1406,7 @@ protected class EDataTypeDecl_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * ( serializable ?= "!serializable" ) ?
+// (eAnnotations+=EAnnotationDecl)* (serializable?="!serializable")?
 protected class EDataTypeDecl_0_0_Group extends GroupToken {
 	
 	public EDataTypeDecl_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1434,7 +1434,7 @@ protected class EDataTypeDecl_0_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) *
+// (eAnnotations+=EAnnotationDecl)*
 protected class EDataTypeDecl_0_0_0_Assignment_eAnnotations extends AssignmentToken  {
 	
 	public EDataTypeDecl_0_0_0_Assignment_eAnnotations(IInstanceDescription curr, AbstractToken pred) {
@@ -1465,7 +1465,7 @@ protected class EDataTypeDecl_0_0_0_Assignment_eAnnotations extends AssignmentTo
 	}
 }
 
-// ( serializable ?= "!serializable" ) ?
+// (serializable?="!serializable")?
 protected class EDataTypeDecl_0_0_1_Assignment_serializable extends AssignmentToken  {
 	
 	public EDataTypeDecl_0_0_1_Assignment_serializable(IInstanceDescription curr, AbstractToken pred) {
@@ -1491,7 +1491,7 @@ protected class EDataTypeDecl_0_0_1_Assignment_serializable extends AssignmentTo
 }
 
 
-// "datatype" name = ID ":" instanceClassName = STRING_OR_QID ";"
+// "datatype" name=ID ":" instanceClassName=STRING_OR_QID ";"
 protected class EDataTypeDecl_0_1_Group extends GroupToken {
 	
 	public EDataTypeDecl_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1519,7 +1519,7 @@ protected class EDataTypeDecl_0_1_Group extends GroupToken {
 	}
 }
 
-// "datatype" name = ID ":" instanceClassName = STRING_OR_QID
+// "datatype" name=ID ":" instanceClassName=STRING_OR_QID
 protected class EDataTypeDecl_0_1_0_Group extends GroupToken {
 	
 	public EDataTypeDecl_0_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1547,7 +1547,7 @@ protected class EDataTypeDecl_0_1_0_Group extends GroupToken {
 	}
 }
 
-// "datatype" name = ID ":"
+// "datatype" name=ID ":"
 protected class EDataTypeDecl_0_1_0_0_Group extends GroupToken {
 	
 	public EDataTypeDecl_0_1_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1575,7 +1575,7 @@ protected class EDataTypeDecl_0_1_0_0_Group extends GroupToken {
 	}
 }
 
-// "datatype" name = ID
+// "datatype" name=ID
 protected class EDataTypeDecl_0_1_0_0_0_Group extends GroupToken {
 	
 	public EDataTypeDecl_0_1_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1615,7 +1615,7 @@ protected class EDataTypeDecl_0_1_0_0_0_0_Keyword_datatype extends KeywordToken 
 	}	
 }
 
-// name = ID
+// name=ID
 protected class EDataTypeDecl_0_1_0_0_0_1_Assignment_name extends AssignmentToken  {
 	
 	public EDataTypeDecl_0_1_0_0_0_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -1652,7 +1652,7 @@ protected class EDataTypeDecl_0_1_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-// instanceClassName = STRING_OR_QID
+// instanceClassName=STRING_OR_QID
 protected class EDataTypeDecl_0_1_0_1_Assignment_instanceClassName extends AssignmentToken  {
 	
 	public EDataTypeDecl_0_1_0_1_Assignment_instanceClassName(IInstanceDescription curr, AbstractToken pred) {
@@ -1716,12 +1716,12 @@ protected class EDataTypeDecl_1_RuleCall_EEnumDecl extends RuleCallToken {
 
 /************ begin Rule EAnnotationDecl ****************
  *
- * EAnnotationDecl returns EAnnotation : "@" source = STRING ( eModelElement = [ EModelElement ] ) ? "(" contents += MapEntrySuper ( "," contents += MapEntrySuper ) * ")" ;
+ * EAnnotationDecl returns EAnnotation:   "@" source=STRING (eModelElement=[EModelElement])? "(" contents+=MapEntrySuper ("," contents+=MapEntrySuper)* ")";
  *
  **/
 
 
-// "@" source = STRING ( eModelElement = [ EModelElement ] ) ? "(" contents += MapEntrySuper ( "," contents += MapEntrySuper ) * ")"
+// "@" source=STRING (eModelElement=[EModelElement])? "(" contents+=MapEntrySuper ("," contents+=MapEntrySuper)* ")"
 protected class EAnnotationDecl_Group extends GroupToken {
 	
 	public EAnnotationDecl_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1749,7 +1749,7 @@ protected class EAnnotationDecl_Group extends GroupToken {
 	}
 }
 
-// "@" source = STRING ( eModelElement = [ EModelElement ] ) ? "(" contents += MapEntrySuper ( "," contents += MapEntrySuper ) *
+// "@" source=STRING (eModelElement=[EModelElement])? "(" contents+=MapEntrySuper ("," contents+=MapEntrySuper)*
 protected class EAnnotationDecl_0_Group extends GroupToken {
 	
 	public EAnnotationDecl_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1777,7 +1777,7 @@ protected class EAnnotationDecl_0_Group extends GroupToken {
 	}
 }
 
-// "@" source = STRING ( eModelElement = [ EModelElement ] ) ? "(" contents += MapEntrySuper
+// "@" source=STRING (eModelElement=[EModelElement])? "(" contents+=MapEntrySuper
 protected class EAnnotationDecl_0_0_Group extends GroupToken {
 	
 	public EAnnotationDecl_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1805,7 +1805,7 @@ protected class EAnnotationDecl_0_0_Group extends GroupToken {
 	}
 }
 
-// "@" source = STRING ( eModelElement = [ EModelElement ] ) ? "("
+// "@" source=STRING (eModelElement=[EModelElement])? "("
 protected class EAnnotationDecl_0_0_0_Group extends GroupToken {
 	
 	public EAnnotationDecl_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1833,7 +1833,7 @@ protected class EAnnotationDecl_0_0_0_Group extends GroupToken {
 	}
 }
 
-// "@" source = STRING ( eModelElement = [ EModelElement ] ) ?
+// "@" source=STRING (eModelElement=[EModelElement])?
 protected class EAnnotationDecl_0_0_0_0_Group extends GroupToken {
 	
 	public EAnnotationDecl_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1861,7 +1861,7 @@ protected class EAnnotationDecl_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// "@" source = STRING
+// "@" source=STRING
 protected class EAnnotationDecl_0_0_0_0_0_Group extends GroupToken {
 	
 	public EAnnotationDecl_0_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1901,7 +1901,7 @@ protected class EAnnotationDecl_0_0_0_0_0_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// source = STRING
+// source=STRING
 protected class EAnnotationDecl_0_0_0_0_0_1_Assignment_source extends AssignmentToken  {
 	
 	public EAnnotationDecl_0_0_0_0_0_1_Assignment_source(IInstanceDescription curr, AbstractToken pred) {
@@ -1925,7 +1925,7 @@ protected class EAnnotationDecl_0_0_0_0_0_1_Assignment_source extends Assignment
 }
 
 
-// ( eModelElement = [ EModelElement ] ) ?
+// (eModelElement=[EModelElement])?
 protected class EAnnotationDecl_0_0_0_0_1_Assignment_eModelElement extends AssignmentToken  {
 	
 	public EAnnotationDecl_0_0_0_0_1_Assignment_eModelElement(IInstanceDescription curr, AbstractToken pred) {
@@ -1965,7 +1965,7 @@ protected class EAnnotationDecl_0_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-// contents += MapEntrySuper
+// contents+=MapEntrySuper
 protected class EAnnotationDecl_0_0_1_Assignment_contents extends AssignmentToken  {
 	
 	public EAnnotationDecl_0_0_1_Assignment_contents(IInstanceDescription curr, AbstractToken pred) {
@@ -1997,7 +1997,7 @@ protected class EAnnotationDecl_0_0_1_Assignment_contents extends AssignmentToke
 }
 
 
-// ( "," contents += MapEntrySuper ) *
+// ("," contents+=MapEntrySuper)*
 protected class EAnnotationDecl_0_1_Group extends GroupToken {
 	
 	public EAnnotationDecl_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2037,7 +2037,7 @@ protected class EAnnotationDecl_0_1_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// contents += MapEntrySuper
+// contents+=MapEntrySuper
 protected class EAnnotationDecl_0_1_1_Assignment_contents extends AssignmentToken  {
 	
 	public EAnnotationDecl_0_1_1_Assignment_contents(IInstanceDescription curr, AbstractToken pred) {
@@ -2088,12 +2088,12 @@ protected class EAnnotationDecl_1_Keyword extends KeywordToken  {
 
 /************ begin Rule EClassDecl ****************
  *
- * EClassDecl returns EClass : ( eAnnotations += EAnnotationDecl ) * ( abstract ?= "abstract" ) ? ( interface ?= "interface" | "class" ) name = ID ( "<" eTypeParameters += ETypeParameterDecl ( "," eTypeParameters += ETypeParameterDecl ) * ">" ) ? ( "extends" eGenericSuperTypes += EGenericTypeReferenceDecl ( "," eGenericSuperTypes += EGenericTypeReferenceDecl ) * ) ? ( ":" instanceClassName = STRING_OR_QID ) ? "{" ( eStructuralFeatures += EStructuralFeatureDecl | eOperations += EOperationDecl ) * "}" ;
+ * EClassDecl returns EClass:   (eAnnotations+=EAnnotationDecl)* (abstract?="abstract")? (interface?="interface"|"class") name=ID ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")? ("extends" eGenericSuperTypes+=EGenericTypeReferenceDecl ("," eGenericSuperTypes+=EGenericTypeReferenceDecl)*)? (":" instanceClassName=STRING_OR_QID)? "{" (eStructuralFeatures+=EStructuralFeatureDecl|eOperations+=EOperationDecl)* "}";
  *
  **/
 
 
-// ( eAnnotations += EAnnotationDecl ) * ( abstract ?= "abstract" ) ? ( interface ?= "interface" | "class" ) name = ID ( "<" eTypeParameters += ETypeParameterDecl ( "," eTypeParameters += ETypeParameterDecl ) * ">" ) ? ( "extends" eGenericSuperTypes += EGenericTypeReferenceDecl ( "," eGenericSuperTypes += EGenericTypeReferenceDecl ) * ) ? ( ":" instanceClassName = STRING_OR_QID ) ? "{" ( eStructuralFeatures += EStructuralFeatureDecl | eOperations += EOperationDecl ) * "}"
+// (eAnnotations+=EAnnotationDecl)* (abstract?="abstract")? (interface?="interface"|"class") name=ID ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")? ("extends" eGenericSuperTypes+=EGenericTypeReferenceDecl ("," eGenericSuperTypes+=EGenericTypeReferenceDecl)*)? (":" instanceClassName=STRING_OR_QID)? "{" (eStructuralFeatures+=EStructuralFeatureDecl|eOperations+=EOperationDecl)* "}"
 protected class EClassDecl_Group extends GroupToken {
 	
 	public EClassDecl_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2121,7 +2121,7 @@ protected class EClassDecl_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * ( abstract ?= "abstract" ) ? ( interface ?= "interface" | "class" ) name = ID ( "<" eTypeParameters += ETypeParameterDecl ( "," eTypeParameters += ETypeParameterDecl ) * ">" ) ? ( "extends" eGenericSuperTypes += EGenericTypeReferenceDecl ( "," eGenericSuperTypes += EGenericTypeReferenceDecl ) * ) ? ( ":" instanceClassName = STRING_OR_QID ) ? "{" ( eStructuralFeatures += EStructuralFeatureDecl | eOperations += EOperationDecl ) *
+// (eAnnotations+=EAnnotationDecl)* (abstract?="abstract")? (interface?="interface"|"class") name=ID ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")? ("extends" eGenericSuperTypes+=EGenericTypeReferenceDecl ("," eGenericSuperTypes+=EGenericTypeReferenceDecl)*)? (":" instanceClassName=STRING_OR_QID)? "{" (eStructuralFeatures+=EStructuralFeatureDecl|eOperations+=EOperationDecl)*
 protected class EClassDecl_0_Group extends GroupToken {
 	
 	public EClassDecl_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2149,7 +2149,7 @@ protected class EClassDecl_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * ( abstract ?= "abstract" ) ? ( interface ?= "interface" | "class" ) name = ID ( "<" eTypeParameters += ETypeParameterDecl ( "," eTypeParameters += ETypeParameterDecl ) * ">" ) ? ( "extends" eGenericSuperTypes += EGenericTypeReferenceDecl ( "," eGenericSuperTypes += EGenericTypeReferenceDecl ) * ) ? ( ":" instanceClassName = STRING_OR_QID ) ? "{"
+// (eAnnotations+=EAnnotationDecl)* (abstract?="abstract")? (interface?="interface"|"class") name=ID ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")? ("extends" eGenericSuperTypes+=EGenericTypeReferenceDecl ("," eGenericSuperTypes+=EGenericTypeReferenceDecl)*)? (":" instanceClassName=STRING_OR_QID)? "{"
 protected class EClassDecl_0_0_Group extends GroupToken {
 	
 	public EClassDecl_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2177,7 +2177,7 @@ protected class EClassDecl_0_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * ( abstract ?= "abstract" ) ? ( interface ?= "interface" | "class" ) name = ID ( "<" eTypeParameters += ETypeParameterDecl ( "," eTypeParameters += ETypeParameterDecl ) * ">" ) ? ( "extends" eGenericSuperTypes += EGenericTypeReferenceDecl ( "," eGenericSuperTypes += EGenericTypeReferenceDecl ) * ) ? ( ":" instanceClassName = STRING_OR_QID ) ?
+// (eAnnotations+=EAnnotationDecl)* (abstract?="abstract")? (interface?="interface"|"class") name=ID ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")? ("extends" eGenericSuperTypes+=EGenericTypeReferenceDecl ("," eGenericSuperTypes+=EGenericTypeReferenceDecl)*)? (":" instanceClassName=STRING_OR_QID)?
 protected class EClassDecl_0_0_0_Group extends GroupToken {
 	
 	public EClassDecl_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2205,7 +2205,7 @@ protected class EClassDecl_0_0_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * ( abstract ?= "abstract" ) ? ( interface ?= "interface" | "class" ) name = ID ( "<" eTypeParameters += ETypeParameterDecl ( "," eTypeParameters += ETypeParameterDecl ) * ">" ) ? ( "extends" eGenericSuperTypes += EGenericTypeReferenceDecl ( "," eGenericSuperTypes += EGenericTypeReferenceDecl ) * ) ?
+// (eAnnotations+=EAnnotationDecl)* (abstract?="abstract")? (interface?="interface"|"class") name=ID ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")? ("extends" eGenericSuperTypes+=EGenericTypeReferenceDecl ("," eGenericSuperTypes+=EGenericTypeReferenceDecl)*)?
 protected class EClassDecl_0_0_0_0_Group extends GroupToken {
 	
 	public EClassDecl_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2233,7 +2233,7 @@ protected class EClassDecl_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * ( abstract ?= "abstract" ) ? ( interface ?= "interface" | "class" ) name = ID ( "<" eTypeParameters += ETypeParameterDecl ( "," eTypeParameters += ETypeParameterDecl ) * ">" ) ?
+// (eAnnotations+=EAnnotationDecl)* (abstract?="abstract")? (interface?="interface"|"class") name=ID ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")?
 protected class EClassDecl_0_0_0_0_0_Group extends GroupToken {
 	
 	public EClassDecl_0_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2261,7 +2261,7 @@ protected class EClassDecl_0_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * ( abstract ?= "abstract" ) ? ( interface ?= "interface" | "class" ) name = ID
+// (eAnnotations+=EAnnotationDecl)* (abstract?="abstract")? (interface?="interface"|"class") name=ID
 protected class EClassDecl_0_0_0_0_0_0_Group extends GroupToken {
 	
 	public EClassDecl_0_0_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2289,7 +2289,7 @@ protected class EClassDecl_0_0_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * ( abstract ?= "abstract" ) ? ( interface ?= "interface" | "class" )
+// (eAnnotations+=EAnnotationDecl)* (abstract?="abstract")? (interface?="interface"|"class")
 protected class EClassDecl_0_0_0_0_0_0_0_Group extends GroupToken {
 	
 	public EClassDecl_0_0_0_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2317,7 +2317,7 @@ protected class EClassDecl_0_0_0_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * ( abstract ?= "abstract" ) ?
+// (eAnnotations+=EAnnotationDecl)* (abstract?="abstract")?
 protected class EClassDecl_0_0_0_0_0_0_0_0_Group extends GroupToken {
 	
 	public EClassDecl_0_0_0_0_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2345,7 +2345,7 @@ protected class EClassDecl_0_0_0_0_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) *
+// (eAnnotations+=EAnnotationDecl)*
 protected class EClassDecl_0_0_0_0_0_0_0_0_0_Assignment_eAnnotations extends AssignmentToken  {
 	
 	public EClassDecl_0_0_0_0_0_0_0_0_0_Assignment_eAnnotations(IInstanceDescription curr, AbstractToken pred) {
@@ -2376,7 +2376,7 @@ protected class EClassDecl_0_0_0_0_0_0_0_0_0_Assignment_eAnnotations extends Ass
 	}
 }
 
-// ( abstract ?= "abstract" ) ?
+// (abstract?="abstract")?
 protected class EClassDecl_0_0_0_0_0_0_0_0_1_Assignment_abstract extends AssignmentToken  {
 	
 	public EClassDecl_0_0_0_0_0_0_0_0_1_Assignment_abstract(IInstanceDescription curr, AbstractToken pred) {
@@ -2402,7 +2402,7 @@ protected class EClassDecl_0_0_0_0_0_0_0_0_1_Assignment_abstract extends Assignm
 }
 
 
-// interface ?= "interface" | "class"
+// interface?="interface"|"class"
 protected class EClassDecl_0_0_0_0_0_0_0_1_Alternatives extends AlternativesToken {
 
 	public EClassDecl_0_0_0_0_0_0_0_1_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -2423,7 +2423,7 @@ protected class EClassDecl_0_0_0_0_0_0_0_1_Alternatives extends AlternativesToke
 	}
 }
 
-// interface ?= "interface"
+// interface?="interface"
 protected class EClassDecl_0_0_0_0_0_0_0_1_0_Assignment_interface extends AssignmentToken  {
 	
 	public EClassDecl_0_0_0_0_0_0_0_1_0_Assignment_interface(IInstanceDescription curr, AbstractToken pred) {
@@ -2462,7 +2462,7 @@ protected class EClassDecl_0_0_0_0_0_0_0_1_1_Keyword_class extends KeywordToken 
 
 
 
-// name = ID
+// name=ID
 protected class EClassDecl_0_0_0_0_0_0_1_Assignment_name extends AssignmentToken  {
 	
 	public EClassDecl_0_0_0_0_0_0_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -2486,7 +2486,7 @@ protected class EClassDecl_0_0_0_0_0_0_1_Assignment_name extends AssignmentToken
 }
 
 
-// ( "<" eTypeParameters += ETypeParameterDecl ( "," eTypeParameters += ETypeParameterDecl ) * ">" ) ?
+// ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")?
 protected class EClassDecl_0_0_0_0_0_1_Group extends GroupToken {
 	
 	public EClassDecl_0_0_0_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2514,7 +2514,7 @@ protected class EClassDecl_0_0_0_0_0_1_Group extends GroupToken {
 	}
 }
 
-// "<" eTypeParameters += ETypeParameterDecl ( "," eTypeParameters += ETypeParameterDecl ) *
+// "<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)*
 protected class EClassDecl_0_0_0_0_0_1_0_Group extends GroupToken {
 	
 	public EClassDecl_0_0_0_0_0_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2542,7 +2542,7 @@ protected class EClassDecl_0_0_0_0_0_1_0_Group extends GroupToken {
 	}
 }
 
-// "<" eTypeParameters += ETypeParameterDecl
+// "<" eTypeParameters+=ETypeParameterDecl
 protected class EClassDecl_0_0_0_0_0_1_0_0_Group extends GroupToken {
 	
 	public EClassDecl_0_0_0_0_0_1_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2582,7 +2582,7 @@ protected class EClassDecl_0_0_0_0_0_1_0_0_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// eTypeParameters += ETypeParameterDecl
+// eTypeParameters+=ETypeParameterDecl
 protected class EClassDecl_0_0_0_0_0_1_0_0_1_Assignment_eTypeParameters extends AssignmentToken  {
 	
 	public EClassDecl_0_0_0_0_0_1_0_0_1_Assignment_eTypeParameters(IInstanceDescription curr, AbstractToken pred) {
@@ -2614,7 +2614,7 @@ protected class EClassDecl_0_0_0_0_0_1_0_0_1_Assignment_eTypeParameters extends 
 }
 
 
-// ( "," eTypeParameters += ETypeParameterDecl ) *
+// ("," eTypeParameters+=ETypeParameterDecl)*
 protected class EClassDecl_0_0_0_0_0_1_0_1_Group extends GroupToken {
 	
 	public EClassDecl_0_0_0_0_0_1_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2654,7 +2654,7 @@ protected class EClassDecl_0_0_0_0_0_1_0_1_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// eTypeParameters += ETypeParameterDecl
+// eTypeParameters+=ETypeParameterDecl
 protected class EClassDecl_0_0_0_0_0_1_0_1_1_Assignment_eTypeParameters extends AssignmentToken  {
 	
 	public EClassDecl_0_0_0_0_0_1_0_1_1_Assignment_eTypeParameters(IInstanceDescription curr, AbstractToken pred) {
@@ -2701,7 +2701,7 @@ protected class EClassDecl_0_0_0_0_0_1_1_Keyword extends KeywordToken  {
 
 
 
-// ( "extends" eGenericSuperTypes += EGenericTypeReferenceDecl ( "," eGenericSuperTypes += EGenericTypeReferenceDecl ) * ) ?
+// ("extends" eGenericSuperTypes+=EGenericTypeReferenceDecl ("," eGenericSuperTypes+=EGenericTypeReferenceDecl)*)?
 protected class EClassDecl_0_0_0_0_1_Group extends GroupToken {
 	
 	public EClassDecl_0_0_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2729,7 +2729,7 @@ protected class EClassDecl_0_0_0_0_1_Group extends GroupToken {
 	}
 }
 
-// "extends" eGenericSuperTypes += EGenericTypeReferenceDecl
+// "extends" eGenericSuperTypes+=EGenericTypeReferenceDecl
 protected class EClassDecl_0_0_0_0_1_0_Group extends GroupToken {
 	
 	public EClassDecl_0_0_0_0_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2769,7 +2769,7 @@ protected class EClassDecl_0_0_0_0_1_0_0_Keyword_extends extends KeywordToken  {
 	}	
 }
 
-// eGenericSuperTypes += EGenericTypeReferenceDecl
+// eGenericSuperTypes+=EGenericTypeReferenceDecl
 protected class EClassDecl_0_0_0_0_1_0_1_Assignment_eGenericSuperTypes extends AssignmentToken  {
 	
 	public EClassDecl_0_0_0_0_1_0_1_Assignment_eGenericSuperTypes(IInstanceDescription curr, AbstractToken pred) {
@@ -2801,7 +2801,7 @@ protected class EClassDecl_0_0_0_0_1_0_1_Assignment_eGenericSuperTypes extends A
 }
 
 
-// ( "," eGenericSuperTypes += EGenericTypeReferenceDecl ) *
+// ("," eGenericSuperTypes+=EGenericTypeReferenceDecl)*
 protected class EClassDecl_0_0_0_0_1_1_Group extends GroupToken {
 	
 	public EClassDecl_0_0_0_0_1_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2841,7 +2841,7 @@ protected class EClassDecl_0_0_0_0_1_1_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// eGenericSuperTypes += EGenericTypeReferenceDecl
+// eGenericSuperTypes+=EGenericTypeReferenceDecl
 protected class EClassDecl_0_0_0_0_1_1_1_Assignment_eGenericSuperTypes extends AssignmentToken  {
 	
 	public EClassDecl_0_0_0_0_1_1_1_Assignment_eGenericSuperTypes(IInstanceDescription curr, AbstractToken pred) {
@@ -2875,7 +2875,7 @@ protected class EClassDecl_0_0_0_0_1_1_1_Assignment_eGenericSuperTypes extends A
 
 
 
-// ( ":" instanceClassName = STRING_OR_QID ) ?
+// (":" instanceClassName=STRING_OR_QID)?
 protected class EClassDecl_0_0_0_1_Group extends GroupToken {
 	
 	public EClassDecl_0_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2915,7 +2915,7 @@ protected class EClassDecl_0_0_0_1_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// instanceClassName = STRING_OR_QID
+// instanceClassName=STRING_OR_QID
 protected class EClassDecl_0_0_0_1_1_Assignment_instanceClassName extends AssignmentToken  {
 	
 	public EClassDecl_0_0_0_1_1_Assignment_instanceClassName(IInstanceDescription curr, AbstractToken pred) {
@@ -2955,7 +2955,7 @@ protected class EClassDecl_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-// ( eStructuralFeatures += EStructuralFeatureDecl | eOperations += EOperationDecl ) *
+// (eStructuralFeatures+=EStructuralFeatureDecl|eOperations+=EOperationDecl)*
 protected class EClassDecl_0_1_Alternatives extends AlternativesToken {
 
 	public EClassDecl_0_1_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -2976,7 +2976,7 @@ protected class EClassDecl_0_1_Alternatives extends AlternativesToken {
 	}
 }
 
-// eStructuralFeatures += EStructuralFeatureDecl
+// eStructuralFeatures+=EStructuralFeatureDecl
 protected class EClassDecl_0_1_0_Assignment_eStructuralFeatures extends AssignmentToken  {
 	
 	public EClassDecl_0_1_0_Assignment_eStructuralFeatures(IInstanceDescription curr, AbstractToken pred) {
@@ -3007,7 +3007,7 @@ protected class EClassDecl_0_1_0_Assignment_eStructuralFeatures extends Assignme
 	}
 }
 
-// eOperations += EOperationDecl
+// eOperations+=EOperationDecl
 protected class EClassDecl_0_1_1_Assignment_eOperations extends AssignmentToken  {
 	
 	public EClassDecl_0_1_1_Assignment_eOperations(IInstanceDescription curr, AbstractToken pred) {
@@ -3058,12 +3058,12 @@ protected class EClassDecl_1_Keyword extends KeywordToken  {
 
 /************ begin Rule EStructuralFeatureDecl ****************
  *
- * EStructuralFeatureDecl returns EStructuralFeature : EAttributeDecl | EReferenceDecl ;
+ * EStructuralFeatureDecl returns EStructuralFeature:   EAttributeDecl|EReferenceDecl;
  *
  **/
 
 
-// EAttributeDecl | EReferenceDecl
+// EAttributeDecl|EReferenceDecl
 protected class EStructuralFeatureDecl_Alternatives extends AlternativesToken {
 
 	public EStructuralFeatureDecl_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -3126,12 +3126,12 @@ protected class EStructuralFeatureDecl_1_RuleCall_EReferenceDecl extends RuleCal
 
 /************ begin Rule EAttributeDecl ****************
  *
- * EAttributeDecl returns EAttribute : ( eAnnotations += EAnnotationDecl ) * ( iD ?= "ID" | unique ?= "bag" | ordered ?= "random" | changeable ?= "readonly" | volatile ?= "volatile" | transient ?= "transient" | unsettable ?= "unsettable" | derived ?= "derived" ) * "attr" eGenericType = EGenericTypeReferenceDecl ( "[" lowerBound = INT ( ".." upperBound = SINT ) ? "]" ) ? name = ID ( "=" defaultValueLiteral = STRING ) ? ";" ;
+ * EAttributeDecl returns EAttribute:   (eAnnotations+=EAnnotationDecl)* (iD?="ID"|unique?="bag"|ordered?="random"|changeable?="readonly"|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"|derived?="derived")* "attr" eGenericType=EGenericTypeReferenceDecl ("[" lowerBound=INT (".." upperBound=SINT)? "]")? name=ID ("=" defaultValueLiteral=STRING)? ";";
  *
  **/
 
 
-// ( eAnnotations += EAnnotationDecl ) * ( iD ?= "ID" | unique ?= "bag" | ordered ?= "random" | changeable ?= "readonly" | volatile ?= "volatile" | transient ?= "transient" | unsettable ?= "unsettable" | derived ?= "derived" ) * "attr" eGenericType = EGenericTypeReferenceDecl ( "[" lowerBound = INT ( ".." upperBound = SINT ) ? "]" ) ? name = ID ( "=" defaultValueLiteral = STRING ) ? ";"
+// (eAnnotations+=EAnnotationDecl)* (iD?="ID"|unique?="bag"|ordered?="random"|changeable?="readonly"|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"|derived?="derived")* "attr" eGenericType=EGenericTypeReferenceDecl ("[" lowerBound=INT (".." upperBound=SINT)? "]")? name=ID ("=" defaultValueLiteral=STRING)? ";"
 protected class EAttributeDecl_Group extends GroupToken {
 	
 	public EAttributeDecl_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3159,7 +3159,7 @@ protected class EAttributeDecl_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * ( iD ?= "ID" | unique ?= "bag" | ordered ?= "random" | changeable ?= "readonly" | volatile ?= "volatile" | transient ?= "transient" | unsettable ?= "unsettable" | derived ?= "derived" ) * "attr" eGenericType = EGenericTypeReferenceDecl ( "[" lowerBound = INT ( ".." upperBound = SINT ) ? "]" ) ? name = ID ( "=" defaultValueLiteral = STRING ) ?
+// (eAnnotations+=EAnnotationDecl)* (iD?="ID"|unique?="bag"|ordered?="random"|changeable?="readonly"|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"|derived?="derived")* "attr" eGenericType=EGenericTypeReferenceDecl ("[" lowerBound=INT (".." upperBound=SINT)? "]")? name=ID ("=" defaultValueLiteral=STRING)?
 protected class EAttributeDecl_0_Group extends GroupToken {
 	
 	public EAttributeDecl_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3187,7 +3187,7 @@ protected class EAttributeDecl_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * ( iD ?= "ID" | unique ?= "bag" | ordered ?= "random" | changeable ?= "readonly" | volatile ?= "volatile" | transient ?= "transient" | unsettable ?= "unsettable" | derived ?= "derived" ) * "attr" eGenericType = EGenericTypeReferenceDecl ( "[" lowerBound = INT ( ".." upperBound = SINT ) ? "]" ) ? name = ID
+// (eAnnotations+=EAnnotationDecl)* (iD?="ID"|unique?="bag"|ordered?="random"|changeable?="readonly"|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"|derived?="derived")* "attr" eGenericType=EGenericTypeReferenceDecl ("[" lowerBound=INT (".." upperBound=SINT)? "]")? name=ID
 protected class EAttributeDecl_0_0_Group extends GroupToken {
 	
 	public EAttributeDecl_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3215,7 +3215,7 @@ protected class EAttributeDecl_0_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * ( iD ?= "ID" | unique ?= "bag" | ordered ?= "random" | changeable ?= "readonly" | volatile ?= "volatile" | transient ?= "transient" | unsettable ?= "unsettable" | derived ?= "derived" ) * "attr" eGenericType = EGenericTypeReferenceDecl ( "[" lowerBound = INT ( ".." upperBound = SINT ) ? "]" ) ?
+// (eAnnotations+=EAnnotationDecl)* (iD?="ID"|unique?="bag"|ordered?="random"|changeable?="readonly"|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"|derived?="derived")* "attr" eGenericType=EGenericTypeReferenceDecl ("[" lowerBound=INT (".." upperBound=SINT)? "]")?
 protected class EAttributeDecl_0_0_0_Group extends GroupToken {
 	
 	public EAttributeDecl_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3243,7 +3243,7 @@ protected class EAttributeDecl_0_0_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * ( iD ?= "ID" | unique ?= "bag" | ordered ?= "random" | changeable ?= "readonly" | volatile ?= "volatile" | transient ?= "transient" | unsettable ?= "unsettable" | derived ?= "derived" ) * "attr" eGenericType = EGenericTypeReferenceDecl
+// (eAnnotations+=EAnnotationDecl)* (iD?="ID"|unique?="bag"|ordered?="random"|changeable?="readonly"|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"|derived?="derived")* "attr" eGenericType=EGenericTypeReferenceDecl
 protected class EAttributeDecl_0_0_0_0_Group extends GroupToken {
 	
 	public EAttributeDecl_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3271,7 +3271,7 @@ protected class EAttributeDecl_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * ( iD ?= "ID" | unique ?= "bag" | ordered ?= "random" | changeable ?= "readonly" | volatile ?= "volatile" | transient ?= "transient" | unsettable ?= "unsettable" | derived ?= "derived" ) * "attr"
+// (eAnnotations+=EAnnotationDecl)* (iD?="ID"|unique?="bag"|ordered?="random"|changeable?="readonly"|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"|derived?="derived")* "attr"
 protected class EAttributeDecl_0_0_0_0_0_Group extends GroupToken {
 	
 	public EAttributeDecl_0_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3299,7 +3299,7 @@ protected class EAttributeDecl_0_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * ( iD ?= "ID" | unique ?= "bag" | ordered ?= "random" | changeable ?= "readonly" | volatile ?= "volatile" | transient ?= "transient" | unsettable ?= "unsettable" | derived ?= "derived" ) *
+// (eAnnotations+=EAnnotationDecl)* (iD?="ID"|unique?="bag"|ordered?="random"|changeable?="readonly"|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"|derived?="derived")*
 protected class EAttributeDecl_0_0_0_0_0_0_Group extends GroupToken {
 	
 	public EAttributeDecl_0_0_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3327,7 +3327,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) *
+// (eAnnotations+=EAnnotationDecl)*
 protected class EAttributeDecl_0_0_0_0_0_0_0_Assignment_eAnnotations extends AssignmentToken  {
 	
 	public EAttributeDecl_0_0_0_0_0_0_0_Assignment_eAnnotations(IInstanceDescription curr, AbstractToken pred) {
@@ -3358,7 +3358,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_0_Assignment_eAnnotations extends Ass
 	}
 }
 
-// ( iD ?= "ID" | unique ?= "bag" | ordered ?= "random" | changeable ?= "readonly" | volatile ?= "volatile" | transient ?= "transient" | unsettable ?= "unsettable" | derived ?= "derived" ) *
+// (iD?="ID"|unique?="bag"|ordered?="random"|changeable?="readonly"|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"|derived?="derived")*
 protected class EAttributeDecl_0_0_0_0_0_0_1_Alternatives extends AlternativesToken {
 
 	public EAttributeDecl_0_0_0_0_0_0_1_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -3379,7 +3379,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_Alternatives extends AlternativesTo
 	}
 }
 
-// iD ?= "ID" | unique ?= "bag" | ordered ?= "random" | changeable ?= "readonly" | volatile ?= "volatile" | transient ?= "transient" | unsettable ?= "unsettable"
+// iD?="ID"|unique?="bag"|ordered?="random"|changeable?="readonly"|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"
 protected class EAttributeDecl_0_0_0_0_0_0_1_0_Alternatives extends AlternativesToken {
 
 	public EAttributeDecl_0_0_0_0_0_0_1_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -3400,7 +3400,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_0_Alternatives extends Alternatives
 	}
 }
 
-// iD ?= "ID" | unique ?= "bag" | ordered ?= "random" | changeable ?= "readonly" | volatile ?= "volatile" | transient ?= "transient"
+// iD?="ID"|unique?="bag"|ordered?="random"|changeable?="readonly"|volatile?="volatile"|transient?="transient"
 protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_Alternatives extends AlternativesToken {
 
 	public EAttributeDecl_0_0_0_0_0_0_1_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -3421,7 +3421,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_Alternatives extends Alternativ
 	}
 }
 
-// iD ?= "ID" | unique ?= "bag" | ordered ?= "random" | changeable ?= "readonly" | volatile ?= "volatile"
+// iD?="ID"|unique?="bag"|ordered?="random"|changeable?="readonly"|volatile?="volatile"
 protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_0_Alternatives extends AlternativesToken {
 
 	public EAttributeDecl_0_0_0_0_0_0_1_0_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -3442,7 +3442,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_0_Alternatives extends Alternat
 	}
 }
 
-// iD ?= "ID" | unique ?= "bag" | ordered ?= "random" | changeable ?= "readonly"
+// iD?="ID"|unique?="bag"|ordered?="random"|changeable?="readonly"
 protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_0_0_Alternatives extends AlternativesToken {
 
 	public EAttributeDecl_0_0_0_0_0_0_1_0_0_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -3463,7 +3463,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_0_0_Alternatives extends Altern
 	}
 }
 
-// iD ?= "ID" | unique ?= "bag" | ordered ?= "random"
+// iD?="ID"|unique?="bag"|ordered?="random"
 protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_0_0_0_Alternatives extends AlternativesToken {
 
 	public EAttributeDecl_0_0_0_0_0_0_1_0_0_0_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -3484,7 +3484,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_0_0_0_Alternatives extends Alte
 	}
 }
 
-// iD ?= "ID" | unique ?= "bag"
+// iD?="ID"|unique?="bag"
 protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_0_0_0_0_Alternatives extends AlternativesToken {
 
 	public EAttributeDecl_0_0_0_0_0_0_1_0_0_0_0_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -3505,7 +3505,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_0_0_0_0_Alternatives extends Al
 	}
 }
 
-// iD ?= "ID"
+// iD?="ID"
 protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_0_0_0_0_0_Assignment_iD extends AssignmentToken  {
 	
 	public EAttributeDecl_0_0_0_0_0_0_1_0_0_0_0_0_0_0_Assignment_iD(IInstanceDescription curr, AbstractToken pred) {
@@ -3530,7 +3530,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_0_0_0_0_0_Assignment_iD extends
 	}
 }
 
-// unique ?= "bag"
+// unique?="bag"
 protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_0_0_0_0_1_Assignment_unique extends AssignmentToken  {
 	
 	public EAttributeDecl_0_0_0_0_0_0_1_0_0_0_0_0_0_1_Assignment_unique(IInstanceDescription curr, AbstractToken pred) {
@@ -3556,7 +3556,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_0_0_0_0_1_Assignment_unique ext
 }
 
 
-// ordered ?= "random"
+// ordered?="random"
 protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_0_0_0_1_Assignment_ordered extends AssignmentToken  {
 	
 	public EAttributeDecl_0_0_0_0_0_0_1_0_0_0_0_0_1_Assignment_ordered(IInstanceDescription curr, AbstractToken pred) {
@@ -3582,7 +3582,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_0_0_0_1_Assignment_ordered exte
 }
 
 
-// changeable ?= "readonly"
+// changeable?="readonly"
 protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_0_0_1_Assignment_changeable extends AssignmentToken  {
 	
 	public EAttributeDecl_0_0_0_0_0_0_1_0_0_0_0_1_Assignment_changeable(IInstanceDescription curr, AbstractToken pred) {
@@ -3608,7 +3608,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_0_0_1_Assignment_changeable ext
 }
 
 
-// volatile ?= "volatile"
+// volatile?="volatile"
 protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_0_1_Assignment_volatile extends AssignmentToken  {
 	
 	public EAttributeDecl_0_0_0_0_0_0_1_0_0_0_1_Assignment_volatile(IInstanceDescription curr, AbstractToken pred) {
@@ -3634,7 +3634,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_0_1_Assignment_volatile extends
 }
 
 
-// transient ?= "transient"
+// transient?="transient"
 protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_1_Assignment_transient extends AssignmentToken  {
 	
 	public EAttributeDecl_0_0_0_0_0_0_1_0_0_1_Assignment_transient(IInstanceDescription curr, AbstractToken pred) {
@@ -3660,7 +3660,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_1_Assignment_transient extends 
 }
 
 
-// unsettable ?= "unsettable"
+// unsettable?="unsettable"
 protected class EAttributeDecl_0_0_0_0_0_0_1_0_1_Assignment_unsettable extends AssignmentToken  {
 	
 	public EAttributeDecl_0_0_0_0_0_0_1_0_1_Assignment_unsettable(IInstanceDescription curr, AbstractToken pred) {
@@ -3686,7 +3686,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_0_1_Assignment_unsettable extends A
 }
 
 
-// derived ?= "derived"
+// derived?="derived"
 protected class EAttributeDecl_0_0_0_0_0_0_1_1_Assignment_derived extends AssignmentToken  {
 	
 	public EAttributeDecl_0_0_0_0_0_0_1_1_Assignment_derived(IInstanceDescription curr, AbstractToken pred) {
@@ -3726,7 +3726,7 @@ protected class EAttributeDecl_0_0_0_0_0_1_Keyword_attr extends KeywordToken  {
 }
 
 
-// eGenericType = EGenericTypeReferenceDecl
+// eGenericType=EGenericTypeReferenceDecl
 protected class EAttributeDecl_0_0_0_0_1_Assignment_eGenericType extends AssignmentToken  {
 	
 	public EAttributeDecl_0_0_0_0_1_Assignment_eGenericType(IInstanceDescription curr, AbstractToken pred) {
@@ -3758,7 +3758,7 @@ protected class EAttributeDecl_0_0_0_0_1_Assignment_eGenericType extends Assignm
 }
 
 
-// ( "[" lowerBound = INT ( ".." upperBound = SINT ) ? "]" ) ?
+// ("[" lowerBound=INT (".." upperBound=SINT)? "]")?
 protected class EAttributeDecl_0_0_0_1_Group extends GroupToken {
 	
 	public EAttributeDecl_0_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3786,7 +3786,7 @@ protected class EAttributeDecl_0_0_0_1_Group extends GroupToken {
 	}
 }
 
-// "[" lowerBound = INT ( ".." upperBound = SINT ) ?
+// "[" lowerBound=INT (".." upperBound=SINT)?
 protected class EAttributeDecl_0_0_0_1_0_Group extends GroupToken {
 	
 	public EAttributeDecl_0_0_0_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3814,7 +3814,7 @@ protected class EAttributeDecl_0_0_0_1_0_Group extends GroupToken {
 	}
 }
 
-// "[" lowerBound = INT
+// "[" lowerBound=INT
 protected class EAttributeDecl_0_0_0_1_0_0_Group extends GroupToken {
 	
 	public EAttributeDecl_0_0_0_1_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3854,7 +3854,7 @@ protected class EAttributeDecl_0_0_0_1_0_0_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// lowerBound = INT
+// lowerBound=INT
 protected class EAttributeDecl_0_0_0_1_0_0_1_Assignment_lowerBound extends AssignmentToken  {
 	
 	public EAttributeDecl_0_0_0_1_0_0_1_Assignment_lowerBound(IInstanceDescription curr, AbstractToken pred) {
@@ -3878,7 +3878,7 @@ protected class EAttributeDecl_0_0_0_1_0_0_1_Assignment_lowerBound extends Assig
 }
 
 
-// ( ".." upperBound = SINT ) ?
+// (".." upperBound=SINT)?
 protected class EAttributeDecl_0_0_0_1_0_1_Group extends GroupToken {
 	
 	public EAttributeDecl_0_0_0_1_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3918,7 +3918,7 @@ protected class EAttributeDecl_0_0_0_1_0_1_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// upperBound = SINT
+// upperBound=SINT
 protected class EAttributeDecl_0_0_0_1_0_1_1_Assignment_upperBound extends AssignmentToken  {
 	
 	public EAttributeDecl_0_0_0_1_0_1_1_Assignment_upperBound(IInstanceDescription curr, AbstractToken pred) {
@@ -3959,7 +3959,7 @@ protected class EAttributeDecl_0_0_0_1_1_Keyword extends KeywordToken  {
 
 
 
-// name = ID
+// name=ID
 protected class EAttributeDecl_0_0_1_Assignment_name extends AssignmentToken  {
 	
 	public EAttributeDecl_0_0_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -3983,7 +3983,7 @@ protected class EAttributeDecl_0_0_1_Assignment_name extends AssignmentToken  {
 }
 
 
-// ( "=" defaultValueLiteral = STRING ) ?
+// ("=" defaultValueLiteral=STRING)?
 protected class EAttributeDecl_0_1_Group extends GroupToken {
 	
 	public EAttributeDecl_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -4023,7 +4023,7 @@ protected class EAttributeDecl_0_1_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// defaultValueLiteral = STRING
+// defaultValueLiteral=STRING
 protected class EAttributeDecl_0_1_1_Assignment_defaultValueLiteral extends AssignmentToken  {
 	
 	public EAttributeDecl_0_1_1_Assignment_defaultValueLiteral(IInstanceDescription curr, AbstractToken pred) {
@@ -4066,12 +4066,12 @@ protected class EAttributeDecl_1_Keyword extends KeywordToken  {
 
 /************ begin Rule EReferenceDecl ****************
  *
- * EReferenceDecl returns EReference : ( eAnnotations += EAnnotationDecl ) * ( resolveProxies ?= "local" | unique ?= "bag" | ordered ?= "random" | changeable ?= "readonly" | volatile ?= "volatile" | transient ?= "transient" | unsettable ?= "unsettable" | derived ?= "derived" ) * ( containment ?= "val" | "ref" ) eGenericType = EGenericTypeReferenceDecl ( "[" lowerBound = INT ( ".." upperBound = SINT ) ? "]" ) ? ( "#" eOpposite = [ EReference ] ) ? name = ID ";" ;
+ * EReferenceDecl returns EReference:   (eAnnotations+=EAnnotationDecl)* (resolveProxies?="local"|unique?="bag"|ordered?="random"|changeable?="readonly"|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"|derived?="derived")* (containment?="val"|"ref") eGenericType=EGenericTypeReferenceDecl ("[" lowerBound=INT (".." upperBound=SINT)? "]")? ("#" eOpposite=[EReference])? name=ID ";";
  *
  **/
 
 
-// ( eAnnotations += EAnnotationDecl ) * ( resolveProxies ?= "local" | unique ?= "bag" | ordered ?= "random" | changeable ?= "readonly" | volatile ?= "volatile" | transient ?= "transient" | unsettable ?= "unsettable" | derived ?= "derived" ) * ( containment ?= "val" | "ref" ) eGenericType = EGenericTypeReferenceDecl ( "[" lowerBound = INT ( ".." upperBound = SINT ) ? "]" ) ? ( "#" eOpposite = [ EReference ] ) ? name = ID ";"
+// (eAnnotations+=EAnnotationDecl)* (resolveProxies?="local"|unique?="bag"|ordered?="random"|changeable?="readonly"|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"|derived?="derived")* (containment?="val"|"ref") eGenericType=EGenericTypeReferenceDecl ("[" lowerBound=INT (".." upperBound=SINT)? "]")? ("#" eOpposite=[EReference])? name=ID ";"
 protected class EReferenceDecl_Group extends GroupToken {
 	
 	public EReferenceDecl_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -4099,7 +4099,7 @@ protected class EReferenceDecl_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * ( resolveProxies ?= "local" | unique ?= "bag" | ordered ?= "random" | changeable ?= "readonly" | volatile ?= "volatile" | transient ?= "transient" | unsettable ?= "unsettable" | derived ?= "derived" ) * ( containment ?= "val" | "ref" ) eGenericType = EGenericTypeReferenceDecl ( "[" lowerBound = INT ( ".." upperBound = SINT ) ? "]" ) ? ( "#" eOpposite = [ EReference ] ) ? name = ID
+// (eAnnotations+=EAnnotationDecl)* (resolveProxies?="local"|unique?="bag"|ordered?="random"|changeable?="readonly"|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"|derived?="derived")* (containment?="val"|"ref") eGenericType=EGenericTypeReferenceDecl ("[" lowerBound=INT (".." upperBound=SINT)? "]")? ("#" eOpposite=[EReference])? name=ID
 protected class EReferenceDecl_0_Group extends GroupToken {
 	
 	public EReferenceDecl_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -4127,7 +4127,7 @@ protected class EReferenceDecl_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * ( resolveProxies ?= "local" | unique ?= "bag" | ordered ?= "random" | changeable ?= "readonly" | volatile ?= "volatile" | transient ?= "transient" | unsettable ?= "unsettable" | derived ?= "derived" ) * ( containment ?= "val" | "ref" ) eGenericType = EGenericTypeReferenceDecl ( "[" lowerBound = INT ( ".." upperBound = SINT ) ? "]" ) ? ( "#" eOpposite = [ EReference ] ) ?
+// (eAnnotations+=EAnnotationDecl)* (resolveProxies?="local"|unique?="bag"|ordered?="random"|changeable?="readonly"|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"|derived?="derived")* (containment?="val"|"ref") eGenericType=EGenericTypeReferenceDecl ("[" lowerBound=INT (".." upperBound=SINT)? "]")? ("#" eOpposite=[EReference])?
 protected class EReferenceDecl_0_0_Group extends GroupToken {
 	
 	public EReferenceDecl_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -4155,7 +4155,7 @@ protected class EReferenceDecl_0_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * ( resolveProxies ?= "local" | unique ?= "bag" | ordered ?= "random" | changeable ?= "readonly" | volatile ?= "volatile" | transient ?= "transient" | unsettable ?= "unsettable" | derived ?= "derived" ) * ( containment ?= "val" | "ref" ) eGenericType = EGenericTypeReferenceDecl ( "[" lowerBound = INT ( ".." upperBound = SINT ) ? "]" ) ?
+// (eAnnotations+=EAnnotationDecl)* (resolveProxies?="local"|unique?="bag"|ordered?="random"|changeable?="readonly"|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"|derived?="derived")* (containment?="val"|"ref") eGenericType=EGenericTypeReferenceDecl ("[" lowerBound=INT (".." upperBound=SINT)? "]")?
 protected class EReferenceDecl_0_0_0_Group extends GroupToken {
 	
 	public EReferenceDecl_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -4183,7 +4183,7 @@ protected class EReferenceDecl_0_0_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * ( resolveProxies ?= "local" | unique ?= "bag" | ordered ?= "random" | changeable ?= "readonly" | volatile ?= "volatile" | transient ?= "transient" | unsettable ?= "unsettable" | derived ?= "derived" ) * ( containment ?= "val" | "ref" ) eGenericType = EGenericTypeReferenceDecl
+// (eAnnotations+=EAnnotationDecl)* (resolveProxies?="local"|unique?="bag"|ordered?="random"|changeable?="readonly"|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"|derived?="derived")* (containment?="val"|"ref") eGenericType=EGenericTypeReferenceDecl
 protected class EReferenceDecl_0_0_0_0_Group extends GroupToken {
 	
 	public EReferenceDecl_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -4211,7 +4211,7 @@ protected class EReferenceDecl_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * ( resolveProxies ?= "local" | unique ?= "bag" | ordered ?= "random" | changeable ?= "readonly" | volatile ?= "volatile" | transient ?= "transient" | unsettable ?= "unsettable" | derived ?= "derived" ) * ( containment ?= "val" | "ref" )
+// (eAnnotations+=EAnnotationDecl)* (resolveProxies?="local"|unique?="bag"|ordered?="random"|changeable?="readonly"|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"|derived?="derived")* (containment?="val"|"ref")
 protected class EReferenceDecl_0_0_0_0_0_Group extends GroupToken {
 	
 	public EReferenceDecl_0_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -4239,7 +4239,7 @@ protected class EReferenceDecl_0_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * ( resolveProxies ?= "local" | unique ?= "bag" | ordered ?= "random" | changeable ?= "readonly" | volatile ?= "volatile" | transient ?= "transient" | unsettable ?= "unsettable" | derived ?= "derived" ) *
+// (eAnnotations+=EAnnotationDecl)* (resolveProxies?="local"|unique?="bag"|ordered?="random"|changeable?="readonly"|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"|derived?="derived")*
 protected class EReferenceDecl_0_0_0_0_0_0_Group extends GroupToken {
 	
 	public EReferenceDecl_0_0_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -4267,7 +4267,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) *
+// (eAnnotations+=EAnnotationDecl)*
 protected class EReferenceDecl_0_0_0_0_0_0_0_Assignment_eAnnotations extends AssignmentToken  {
 	
 	public EReferenceDecl_0_0_0_0_0_0_0_Assignment_eAnnotations(IInstanceDescription curr, AbstractToken pred) {
@@ -4298,7 +4298,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_0_Assignment_eAnnotations extends Ass
 	}
 }
 
-// ( resolveProxies ?= "local" | unique ?= "bag" | ordered ?= "random" | changeable ?= "readonly" | volatile ?= "volatile" | transient ?= "transient" | unsettable ?= "unsettable" | derived ?= "derived" ) *
+// (resolveProxies?="local"|unique?="bag"|ordered?="random"|changeable?="readonly"|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"|derived?="derived")*
 protected class EReferenceDecl_0_0_0_0_0_0_1_Alternatives extends AlternativesToken {
 
 	public EReferenceDecl_0_0_0_0_0_0_1_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -4319,7 +4319,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_Alternatives extends AlternativesTo
 	}
 }
 
-// resolveProxies ?= "local" | unique ?= "bag" | ordered ?= "random" | changeable ?= "readonly" | volatile ?= "volatile" | transient ?= "transient" | unsettable ?= "unsettable"
+// resolveProxies?="local"|unique?="bag"|ordered?="random"|changeable?="readonly"|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"
 protected class EReferenceDecl_0_0_0_0_0_0_1_0_Alternatives extends AlternativesToken {
 
 	public EReferenceDecl_0_0_0_0_0_0_1_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -4340,7 +4340,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_0_Alternatives extends Alternatives
 	}
 }
 
-// resolveProxies ?= "local" | unique ?= "bag" | ordered ?= "random" | changeable ?= "readonly" | volatile ?= "volatile" | transient ?= "transient"
+// resolveProxies?="local"|unique?="bag"|ordered?="random"|changeable?="readonly"|volatile?="volatile"|transient?="transient"
 protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_Alternatives extends AlternativesToken {
 
 	public EReferenceDecl_0_0_0_0_0_0_1_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -4361,7 +4361,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_Alternatives extends Alternativ
 	}
 }
 
-// resolveProxies ?= "local" | unique ?= "bag" | ordered ?= "random" | changeable ?= "readonly" | volatile ?= "volatile"
+// resolveProxies?="local"|unique?="bag"|ordered?="random"|changeable?="readonly"|volatile?="volatile"
 protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_0_Alternatives extends AlternativesToken {
 
 	public EReferenceDecl_0_0_0_0_0_0_1_0_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -4382,7 +4382,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_0_Alternatives extends Alternat
 	}
 }
 
-// resolveProxies ?= "local" | unique ?= "bag" | ordered ?= "random" | changeable ?= "readonly"
+// resolveProxies?="local"|unique?="bag"|ordered?="random"|changeable?="readonly"
 protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_0_0_Alternatives extends AlternativesToken {
 
 	public EReferenceDecl_0_0_0_0_0_0_1_0_0_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -4403,7 +4403,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_0_0_Alternatives extends Altern
 	}
 }
 
-// resolveProxies ?= "local" | unique ?= "bag" | ordered ?= "random"
+// resolveProxies?="local"|unique?="bag"|ordered?="random"
 protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_0_0_0_Alternatives extends AlternativesToken {
 
 	public EReferenceDecl_0_0_0_0_0_0_1_0_0_0_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -4424,7 +4424,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_0_0_0_Alternatives extends Alte
 	}
 }
 
-// resolveProxies ?= "local" | unique ?= "bag"
+// resolveProxies?="local"|unique?="bag"
 protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_0_0_0_0_Alternatives extends AlternativesToken {
 
 	public EReferenceDecl_0_0_0_0_0_0_1_0_0_0_0_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -4445,7 +4445,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_0_0_0_0_Alternatives extends Al
 	}
 }
 
-// resolveProxies ?= "local"
+// resolveProxies?="local"
 protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_0_0_0_0_0_Assignment_resolveProxies extends AssignmentToken  {
 	
 	public EReferenceDecl_0_0_0_0_0_0_1_0_0_0_0_0_0_0_Assignment_resolveProxies(IInstanceDescription curr, AbstractToken pred) {
@@ -4470,7 +4470,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_0_0_0_0_0_Assignment_resolvePro
 	}
 }
 
-// unique ?= "bag"
+// unique?="bag"
 protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_0_0_0_0_1_Assignment_unique extends AssignmentToken  {
 	
 	public EReferenceDecl_0_0_0_0_0_0_1_0_0_0_0_0_0_1_Assignment_unique(IInstanceDescription curr, AbstractToken pred) {
@@ -4496,7 +4496,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_0_0_0_0_1_Assignment_unique ext
 }
 
 
-// ordered ?= "random"
+// ordered?="random"
 protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_0_0_0_1_Assignment_ordered extends AssignmentToken  {
 	
 	public EReferenceDecl_0_0_0_0_0_0_1_0_0_0_0_0_1_Assignment_ordered(IInstanceDescription curr, AbstractToken pred) {
@@ -4522,7 +4522,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_0_0_0_1_Assignment_ordered exte
 }
 
 
-// changeable ?= "readonly"
+// changeable?="readonly"
 protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_0_0_1_Assignment_changeable extends AssignmentToken  {
 	
 	public EReferenceDecl_0_0_0_0_0_0_1_0_0_0_0_1_Assignment_changeable(IInstanceDescription curr, AbstractToken pred) {
@@ -4548,7 +4548,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_0_0_1_Assignment_changeable ext
 }
 
 
-// volatile ?= "volatile"
+// volatile?="volatile"
 protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_0_1_Assignment_volatile extends AssignmentToken  {
 	
 	public EReferenceDecl_0_0_0_0_0_0_1_0_0_0_1_Assignment_volatile(IInstanceDescription curr, AbstractToken pred) {
@@ -4574,7 +4574,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_0_1_Assignment_volatile extends
 }
 
 
-// transient ?= "transient"
+// transient?="transient"
 protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_1_Assignment_transient extends AssignmentToken  {
 	
 	public EReferenceDecl_0_0_0_0_0_0_1_0_0_1_Assignment_transient(IInstanceDescription curr, AbstractToken pred) {
@@ -4600,7 +4600,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_1_Assignment_transient extends 
 }
 
 
-// unsettable ?= "unsettable"
+// unsettable?="unsettable"
 protected class EReferenceDecl_0_0_0_0_0_0_1_0_1_Assignment_unsettable extends AssignmentToken  {
 	
 	public EReferenceDecl_0_0_0_0_0_0_1_0_1_Assignment_unsettable(IInstanceDescription curr, AbstractToken pred) {
@@ -4626,7 +4626,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_0_1_Assignment_unsettable extends A
 }
 
 
-// derived ?= "derived"
+// derived?="derived"
 protected class EReferenceDecl_0_0_0_0_0_0_1_1_Assignment_derived extends AssignmentToken  {
 	
 	public EReferenceDecl_0_0_0_0_0_0_1_1_Assignment_derived(IInstanceDescription curr, AbstractToken pred) {
@@ -4653,7 +4653,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_1_Assignment_derived extends Assign
 
 
 
-// containment ?= "val" | "ref"
+// containment?="val"|"ref"
 protected class EReferenceDecl_0_0_0_0_0_1_Alternatives extends AlternativesToken {
 
 	public EReferenceDecl_0_0_0_0_0_1_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -4674,7 +4674,7 @@ protected class EReferenceDecl_0_0_0_0_0_1_Alternatives extends AlternativesToke
 	}
 }
 
-// containment ?= "val"
+// containment?="val"
 protected class EReferenceDecl_0_0_0_0_0_1_0_Assignment_containment extends AssignmentToken  {
 	
 	public EReferenceDecl_0_0_0_0_0_1_0_Assignment_containment(IInstanceDescription curr, AbstractToken pred) {
@@ -4713,7 +4713,7 @@ protected class EReferenceDecl_0_0_0_0_0_1_1_Keyword_ref extends KeywordToken  {
 
 
 
-// eGenericType = EGenericTypeReferenceDecl
+// eGenericType=EGenericTypeReferenceDecl
 protected class EReferenceDecl_0_0_0_0_1_Assignment_eGenericType extends AssignmentToken  {
 	
 	public EReferenceDecl_0_0_0_0_1_Assignment_eGenericType(IInstanceDescription curr, AbstractToken pred) {
@@ -4745,7 +4745,7 @@ protected class EReferenceDecl_0_0_0_0_1_Assignment_eGenericType extends Assignm
 }
 
 
-// ( "[" lowerBound = INT ( ".." upperBound = SINT ) ? "]" ) ?
+// ("[" lowerBound=INT (".." upperBound=SINT)? "]")?
 protected class EReferenceDecl_0_0_0_1_Group extends GroupToken {
 	
 	public EReferenceDecl_0_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -4773,7 +4773,7 @@ protected class EReferenceDecl_0_0_0_1_Group extends GroupToken {
 	}
 }
 
-// "[" lowerBound = INT ( ".." upperBound = SINT ) ?
+// "[" lowerBound=INT (".." upperBound=SINT)?
 protected class EReferenceDecl_0_0_0_1_0_Group extends GroupToken {
 	
 	public EReferenceDecl_0_0_0_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -4801,7 +4801,7 @@ protected class EReferenceDecl_0_0_0_1_0_Group extends GroupToken {
 	}
 }
 
-// "[" lowerBound = INT
+// "[" lowerBound=INT
 protected class EReferenceDecl_0_0_0_1_0_0_Group extends GroupToken {
 	
 	public EReferenceDecl_0_0_0_1_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -4841,7 +4841,7 @@ protected class EReferenceDecl_0_0_0_1_0_0_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// lowerBound = INT
+// lowerBound=INT
 protected class EReferenceDecl_0_0_0_1_0_0_1_Assignment_lowerBound extends AssignmentToken  {
 	
 	public EReferenceDecl_0_0_0_1_0_0_1_Assignment_lowerBound(IInstanceDescription curr, AbstractToken pred) {
@@ -4865,7 +4865,7 @@ protected class EReferenceDecl_0_0_0_1_0_0_1_Assignment_lowerBound extends Assig
 }
 
 
-// ( ".." upperBound = SINT ) ?
+// (".." upperBound=SINT)?
 protected class EReferenceDecl_0_0_0_1_0_1_Group extends GroupToken {
 	
 	public EReferenceDecl_0_0_0_1_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -4905,7 +4905,7 @@ protected class EReferenceDecl_0_0_0_1_0_1_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// upperBound = SINT
+// upperBound=SINT
 protected class EReferenceDecl_0_0_0_1_0_1_1_Assignment_upperBound extends AssignmentToken  {
 	
 	public EReferenceDecl_0_0_0_1_0_1_1_Assignment_upperBound(IInstanceDescription curr, AbstractToken pred) {
@@ -4946,7 +4946,7 @@ protected class EReferenceDecl_0_0_0_1_1_Keyword extends KeywordToken  {
 
 
 
-// ( "#" eOpposite = [ EReference ] ) ?
+// ("#" eOpposite=[EReference])?
 protected class EReferenceDecl_0_0_1_Group extends GroupToken {
 	
 	public EReferenceDecl_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -4986,7 +4986,7 @@ protected class EReferenceDecl_0_0_1_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// eOpposite = [ EReference ]
+// eOpposite=[EReference]
 protected class EReferenceDecl_0_0_1_1_Assignment_eOpposite extends AssignmentToken  {
 	
 	public EReferenceDecl_0_0_1_1_Assignment_eOpposite(IInstanceDescription curr, AbstractToken pred) {
@@ -5014,7 +5014,7 @@ protected class EReferenceDecl_0_0_1_1_Assignment_eOpposite extends AssignmentTo
 
 
 
-// name = ID
+// name=ID
 protected class EReferenceDecl_0_1_Assignment_name extends AssignmentToken  {
 	
 	public EReferenceDecl_0_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -5056,12 +5056,12 @@ protected class EReferenceDecl_1_Keyword extends KeywordToken  {
 
 /************ begin Rule EEnumDecl ****************
  *
- * EEnumDecl returns EEnum : ( eAnnotations += EAnnotationDecl ) * "enum" name = ID "{" ( eLiterals += EEnumLiteralDecl ) + "}" ;
+ * EEnumDecl returns EEnum:   (eAnnotations+=EAnnotationDecl)* "enum" name=ID "{" (eLiterals+=EEnumLiteralDecl)+ "}";
  *
  **/
 
 
-// ( eAnnotations += EAnnotationDecl ) * "enum" name = ID "{" ( eLiterals += EEnumLiteralDecl ) + "}"
+// (eAnnotations+=EAnnotationDecl)* "enum" name=ID "{" (eLiterals+=EEnumLiteralDecl)+ "}"
 protected class EEnumDecl_Group extends GroupToken {
 	
 	public EEnumDecl_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -5089,7 +5089,7 @@ protected class EEnumDecl_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * "enum" name = ID "{" ( eLiterals += EEnumLiteralDecl ) +
+// (eAnnotations+=EAnnotationDecl)* "enum" name=ID "{" (eLiterals+=EEnumLiteralDecl)+
 protected class EEnumDecl_0_Group extends GroupToken {
 	
 	public EEnumDecl_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -5117,7 +5117,7 @@ protected class EEnumDecl_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * "enum" name = ID "{"
+// (eAnnotations+=EAnnotationDecl)* "enum" name=ID "{"
 protected class EEnumDecl_0_0_Group extends GroupToken {
 	
 	public EEnumDecl_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -5145,7 +5145,7 @@ protected class EEnumDecl_0_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * "enum" name = ID
+// (eAnnotations+=EAnnotationDecl)* "enum" name=ID
 protected class EEnumDecl_0_0_0_Group extends GroupToken {
 	
 	public EEnumDecl_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -5173,7 +5173,7 @@ protected class EEnumDecl_0_0_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * "enum"
+// (eAnnotations+=EAnnotationDecl)* "enum"
 protected class EEnumDecl_0_0_0_0_Group extends GroupToken {
 	
 	public EEnumDecl_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -5201,7 +5201,7 @@ protected class EEnumDecl_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) *
+// (eAnnotations+=EAnnotationDecl)*
 protected class EEnumDecl_0_0_0_0_0_Assignment_eAnnotations extends AssignmentToken  {
 	
 	public EEnumDecl_0_0_0_0_0_Assignment_eAnnotations(IInstanceDescription curr, AbstractToken pred) {
@@ -5245,7 +5245,7 @@ protected class EEnumDecl_0_0_0_0_1_Keyword_enum extends KeywordToken  {
 }
 
 
-// name = ID
+// name=ID
 protected class EEnumDecl_0_0_0_1_Assignment_name extends AssignmentToken  {
 	
 	public EEnumDecl_0_0_0_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -5282,7 +5282,7 @@ protected class EEnumDecl_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-// ( eLiterals += EEnumLiteralDecl ) +
+// (eLiterals+=EEnumLiteralDecl)+
 protected class EEnumDecl_0_1_Assignment_eLiterals extends AssignmentToken  {
 	
 	public EEnumDecl_0_1_Assignment_eLiterals(IInstanceDescription curr, AbstractToken pred) {
@@ -5332,12 +5332,12 @@ protected class EEnumDecl_1_Keyword extends KeywordToken  {
 
 /************ begin Rule EEnumLiteralDecl ****************
  *
- * EEnumLiteralDecl returns EEnumLiteral : ( eAnnotations += EAnnotationDecl ) * name = ID ( "=" value = INT ) ? ( literal = STRING ) ? ";" ;
+ * EEnumLiteralDecl returns EEnumLiteral:   (eAnnotations+=EAnnotationDecl)* name=ID ("=" value=INT)? (literal=STRING)? ";";
  *
  **/
 
 
-// ( eAnnotations += EAnnotationDecl ) * name = ID ( "=" value = INT ) ? ( literal = STRING ) ? ";"
+// (eAnnotations+=EAnnotationDecl)* name=ID ("=" value=INT)? (literal=STRING)? ";"
 protected class EEnumLiteralDecl_Group extends GroupToken {
 	
 	public EEnumLiteralDecl_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -5365,7 +5365,7 @@ protected class EEnumLiteralDecl_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * name = ID ( "=" value = INT ) ? ( literal = STRING ) ?
+// (eAnnotations+=EAnnotationDecl)* name=ID ("=" value=INT)? (literal=STRING)?
 protected class EEnumLiteralDecl_0_Group extends GroupToken {
 	
 	public EEnumLiteralDecl_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -5393,7 +5393,7 @@ protected class EEnumLiteralDecl_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * name = ID ( "=" value = INT ) ?
+// (eAnnotations+=EAnnotationDecl)* name=ID ("=" value=INT)?
 protected class EEnumLiteralDecl_0_0_Group extends GroupToken {
 	
 	public EEnumLiteralDecl_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -5421,7 +5421,7 @@ protected class EEnumLiteralDecl_0_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * name = ID
+// (eAnnotations+=EAnnotationDecl)* name=ID
 protected class EEnumLiteralDecl_0_0_0_Group extends GroupToken {
 	
 	public EEnumLiteralDecl_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -5449,7 +5449,7 @@ protected class EEnumLiteralDecl_0_0_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) *
+// (eAnnotations+=EAnnotationDecl)*
 protected class EEnumLiteralDecl_0_0_0_0_Assignment_eAnnotations extends AssignmentToken  {
 	
 	public EEnumLiteralDecl_0_0_0_0_Assignment_eAnnotations(IInstanceDescription curr, AbstractToken pred) {
@@ -5480,7 +5480,7 @@ protected class EEnumLiteralDecl_0_0_0_0_Assignment_eAnnotations extends Assignm
 	}
 }
 
-// name = ID
+// name=ID
 protected class EEnumLiteralDecl_0_0_0_1_Assignment_name extends AssignmentToken  {
 	
 	public EEnumLiteralDecl_0_0_0_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -5504,7 +5504,7 @@ protected class EEnumLiteralDecl_0_0_0_1_Assignment_name extends AssignmentToken
 }
 
 
-// ( "=" value = INT ) ?
+// ("=" value=INT)?
 protected class EEnumLiteralDecl_0_0_1_Group extends GroupToken {
 	
 	public EEnumLiteralDecl_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -5544,7 +5544,7 @@ protected class EEnumLiteralDecl_0_0_1_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// value = INT
+// value=INT
 protected class EEnumLiteralDecl_0_0_1_1_Assignment_value extends AssignmentToken  {
 	
 	public EEnumLiteralDecl_0_0_1_1_Assignment_value(IInstanceDescription curr, AbstractToken pred) {
@@ -5569,7 +5569,7 @@ protected class EEnumLiteralDecl_0_0_1_1_Assignment_value extends AssignmentToke
 
 
 
-// ( literal = STRING ) ?
+// (literal=STRING)?
 protected class EEnumLiteralDecl_0_1_Assignment_literal extends AssignmentToken  {
 	
 	public EEnumLiteralDecl_0_1_Assignment_literal(IInstanceDescription curr, AbstractToken pred) {
@@ -5611,12 +5611,12 @@ protected class EEnumLiteralDecl_1_Keyword extends KeywordToken  {
 
 /************ begin Rule ETypeParameterDecl ****************
  *
- * ETypeParameterDecl returns ETypeParameter : name = ID ( "extends" eBounds += EGenericTypeDecl ) ? ;
+ * ETypeParameterDecl returns ETypeParameter:   name=ID ("extends" eBounds+=EGenericTypeDecl)?;
  *
  **/
 
 
-// name = ID ( "extends" eBounds += EGenericTypeDecl ) ?
+// name=ID ("extends" eBounds+=EGenericTypeDecl)?
 protected class ETypeParameterDecl_Group extends GroupToken {
 	
 	public ETypeParameterDecl_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -5644,7 +5644,7 @@ protected class ETypeParameterDecl_Group extends GroupToken {
 	}
 }
 
-// name = ID
+// name=ID
 protected class ETypeParameterDecl_0_Assignment_name extends AssignmentToken  {
 	
 	public ETypeParameterDecl_0_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -5667,7 +5667,7 @@ protected class ETypeParameterDecl_0_Assignment_name extends AssignmentToken  {
 	}
 }
 
-// ( "extends" eBounds += EGenericTypeDecl ) ?
+// ("extends" eBounds+=EGenericTypeDecl)?
 protected class ETypeParameterDecl_1_Group extends GroupToken {
 	
 	public ETypeParameterDecl_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -5707,7 +5707,7 @@ protected class ETypeParameterDecl_1_0_Keyword_extends extends KeywordToken  {
 	}	
 }
 
-// eBounds += EGenericTypeDecl
+// eBounds+=EGenericTypeDecl
 protected class ETypeParameterDecl_1_1_Assignment_eBounds extends AssignmentToken  {
 	
 	public ETypeParameterDecl_1_1_Assignment_eBounds(IInstanceDescription curr, AbstractToken pred) {
@@ -5745,12 +5745,12 @@ protected class ETypeParameterDecl_1_1_Assignment_eBounds extends AssignmentToke
 
 /************ begin Rule EGenericTypeReferenceDecl ****************
  *
- * EGenericTypeReferenceDecl returns EGenericType : eClassifier = [ EClassifier ] ( "<" eTypeArguments += EGenericTypeDecl ( "," eTypeArguments += EGenericTypeDecl ) * ">" ) ? | "#" eTypeParameter = [ ETypeParameter ] ;
+ * EGenericTypeReferenceDecl returns EGenericType:   eClassifier=[EClassifier] ("<" eTypeArguments+=EGenericTypeDecl ("," eTypeArguments+=EGenericTypeDecl)* ">")?|"#" eTypeParameter=[ETypeParameter];
  *
  **/
 
 
-// eClassifier = [ EClassifier ] ( "<" eTypeArguments += EGenericTypeDecl ( "," eTypeArguments += EGenericTypeDecl ) * ">" ) ? | "#" eTypeParameter = [ ETypeParameter ]
+// eClassifier=[EClassifier] ("<" eTypeArguments+=EGenericTypeDecl ("," eTypeArguments+=EGenericTypeDecl)* ">")?|"#" eTypeParameter=[ETypeParameter]
 protected class EGenericTypeReferenceDecl_Alternatives extends AlternativesToken {
 
 	public EGenericTypeReferenceDecl_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -5771,7 +5771,7 @@ protected class EGenericTypeReferenceDecl_Alternatives extends AlternativesToken
 	}
 }
 
-// eClassifier = [ EClassifier ] ( "<" eTypeArguments += EGenericTypeDecl ( "," eTypeArguments += EGenericTypeDecl ) * ">" ) ?
+// eClassifier=[EClassifier] ("<" eTypeArguments+=EGenericTypeDecl ("," eTypeArguments+=EGenericTypeDecl)* ">")?
 protected class EGenericTypeReferenceDecl_0_Group extends GroupToken {
 	
 	public EGenericTypeReferenceDecl_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -5799,7 +5799,7 @@ protected class EGenericTypeReferenceDecl_0_Group extends GroupToken {
 	}
 }
 
-// eClassifier = [ EClassifier ]
+// eClassifier=[EClassifier]
 protected class EGenericTypeReferenceDecl_0_0_Assignment_eClassifier extends AssignmentToken  {
 	
 	public EGenericTypeReferenceDecl_0_0_Assignment_eClassifier(IInstanceDescription curr, AbstractToken pred) {
@@ -5825,7 +5825,7 @@ protected class EGenericTypeReferenceDecl_0_0_Assignment_eClassifier extends Ass
 	}
 }
 
-// ( "<" eTypeArguments += EGenericTypeDecl ( "," eTypeArguments += EGenericTypeDecl ) * ">" ) ?
+// ("<" eTypeArguments+=EGenericTypeDecl ("," eTypeArguments+=EGenericTypeDecl)* ">")?
 protected class EGenericTypeReferenceDecl_0_1_Group extends GroupToken {
 	
 	public EGenericTypeReferenceDecl_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -5853,7 +5853,7 @@ protected class EGenericTypeReferenceDecl_0_1_Group extends GroupToken {
 	}
 }
 
-// "<" eTypeArguments += EGenericTypeDecl ( "," eTypeArguments += EGenericTypeDecl ) *
+// "<" eTypeArguments+=EGenericTypeDecl ("," eTypeArguments+=EGenericTypeDecl)*
 protected class EGenericTypeReferenceDecl_0_1_0_Group extends GroupToken {
 	
 	public EGenericTypeReferenceDecl_0_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -5881,7 +5881,7 @@ protected class EGenericTypeReferenceDecl_0_1_0_Group extends GroupToken {
 	}
 }
 
-// "<" eTypeArguments += EGenericTypeDecl
+// "<" eTypeArguments+=EGenericTypeDecl
 protected class EGenericTypeReferenceDecl_0_1_0_0_Group extends GroupToken {
 	
 	public EGenericTypeReferenceDecl_0_1_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -5921,7 +5921,7 @@ protected class EGenericTypeReferenceDecl_0_1_0_0_0_Keyword extends KeywordToken
 	}	
 }
 
-// eTypeArguments += EGenericTypeDecl
+// eTypeArguments+=EGenericTypeDecl
 protected class EGenericTypeReferenceDecl_0_1_0_0_1_Assignment_eTypeArguments extends AssignmentToken  {
 	
 	public EGenericTypeReferenceDecl_0_1_0_0_1_Assignment_eTypeArguments(IInstanceDescription curr, AbstractToken pred) {
@@ -5953,7 +5953,7 @@ protected class EGenericTypeReferenceDecl_0_1_0_0_1_Assignment_eTypeArguments ex
 }
 
 
-// ( "," eTypeArguments += EGenericTypeDecl ) *
+// ("," eTypeArguments+=EGenericTypeDecl)*
 protected class EGenericTypeReferenceDecl_0_1_0_1_Group extends GroupToken {
 	
 	public EGenericTypeReferenceDecl_0_1_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -5993,7 +5993,7 @@ protected class EGenericTypeReferenceDecl_0_1_0_1_0_Keyword extends KeywordToken
 	}	
 }
 
-// eTypeArguments += EGenericTypeDecl
+// eTypeArguments+=EGenericTypeDecl
 protected class EGenericTypeReferenceDecl_0_1_0_1_1_Assignment_eTypeArguments extends AssignmentToken  {
 	
 	public EGenericTypeReferenceDecl_0_1_0_1_1_Assignment_eTypeArguments(IInstanceDescription curr, AbstractToken pred) {
@@ -6040,7 +6040,7 @@ protected class EGenericTypeReferenceDecl_0_1_1_Keyword extends KeywordToken  {
 
 
 
-// "#" eTypeParameter = [ ETypeParameter ]
+// "#" eTypeParameter=[ETypeParameter]
 protected class EGenericTypeReferenceDecl_1_Group extends GroupToken {
 	
 	public EGenericTypeReferenceDecl_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -6080,7 +6080,7 @@ protected class EGenericTypeReferenceDecl_1_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// eTypeParameter = [ ETypeParameter ]
+// eTypeParameter=[ETypeParameter]
 protected class EGenericTypeReferenceDecl_1_1_Assignment_eTypeParameter extends AssignmentToken  {
 	
 	public EGenericTypeReferenceDecl_1_1_Assignment_eTypeParameter(IInstanceDescription curr, AbstractToken pred) {
@@ -6113,12 +6113,12 @@ protected class EGenericTypeReferenceDecl_1_1_Assignment_eTypeParameter extends 
 
 /************ begin Rule EGenericTypeDecl ****************
  *
- * EGenericTypeDecl returns EGenericType : eClassifier = [ EClassifier ] ( "<" eTypeArguments += EGenericTypeDecl ( "," eTypeArguments += EGenericTypeDecl ) * ">" ) ? | "#" eTypeParameter = [ ETypeParameter ] | "?" ( "extends" eUpperBound = EGenericTypeDecl | "super" eLowerBound = EGenericTypeDecl ) ;
+ * EGenericTypeDecl returns EGenericType:   eClassifier=[EClassifier] ("<" eTypeArguments+=EGenericTypeDecl ("," eTypeArguments+=EGenericTypeDecl)* ">")?|"#" eTypeParameter=[ETypeParameter]|"?" ("extends" eUpperBound=EGenericTypeDecl|"super" eLowerBound=EGenericTypeDecl);
  *
  **/
 
 
-// eClassifier = [ EClassifier ] ( "<" eTypeArguments += EGenericTypeDecl ( "," eTypeArguments += EGenericTypeDecl ) * ">" ) ? | "#" eTypeParameter = [ ETypeParameter ] | "?" ( "extends" eUpperBound = EGenericTypeDecl | "super" eLowerBound = EGenericTypeDecl )
+// eClassifier=[EClassifier] ("<" eTypeArguments+=EGenericTypeDecl ("," eTypeArguments+=EGenericTypeDecl)* ">")?|"#" eTypeParameter=[ETypeParameter]|"?" ("extends" eUpperBound=EGenericTypeDecl|"super" eLowerBound=EGenericTypeDecl)
 protected class EGenericTypeDecl_Alternatives extends AlternativesToken {
 
 	public EGenericTypeDecl_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -6139,7 +6139,7 @@ protected class EGenericTypeDecl_Alternatives extends AlternativesToken {
 	}
 }
 
-// eClassifier = [ EClassifier ] ( "<" eTypeArguments += EGenericTypeDecl ( "," eTypeArguments += EGenericTypeDecl ) * ">" ) ? | "#" eTypeParameter = [ ETypeParameter ]
+// eClassifier=[EClassifier] ("<" eTypeArguments+=EGenericTypeDecl ("," eTypeArguments+=EGenericTypeDecl)* ">")?|"#" eTypeParameter=[ETypeParameter]
 protected class EGenericTypeDecl_0_Alternatives extends AlternativesToken {
 
 	public EGenericTypeDecl_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -6160,7 +6160,7 @@ protected class EGenericTypeDecl_0_Alternatives extends AlternativesToken {
 	}
 }
 
-// eClassifier = [ EClassifier ] ( "<" eTypeArguments += EGenericTypeDecl ( "," eTypeArguments += EGenericTypeDecl ) * ">" ) ?
+// eClassifier=[EClassifier] ("<" eTypeArguments+=EGenericTypeDecl ("," eTypeArguments+=EGenericTypeDecl)* ">")?
 protected class EGenericTypeDecl_0_0_Group extends GroupToken {
 	
 	public EGenericTypeDecl_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -6188,7 +6188,7 @@ protected class EGenericTypeDecl_0_0_Group extends GroupToken {
 	}
 }
 
-// eClassifier = [ EClassifier ]
+// eClassifier=[EClassifier]
 protected class EGenericTypeDecl_0_0_0_Assignment_eClassifier extends AssignmentToken  {
 	
 	public EGenericTypeDecl_0_0_0_Assignment_eClassifier(IInstanceDescription curr, AbstractToken pred) {
@@ -6214,7 +6214,7 @@ protected class EGenericTypeDecl_0_0_0_Assignment_eClassifier extends Assignment
 	}
 }
 
-// ( "<" eTypeArguments += EGenericTypeDecl ( "," eTypeArguments += EGenericTypeDecl ) * ">" ) ?
+// ("<" eTypeArguments+=EGenericTypeDecl ("," eTypeArguments+=EGenericTypeDecl)* ">")?
 protected class EGenericTypeDecl_0_0_1_Group extends GroupToken {
 	
 	public EGenericTypeDecl_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -6242,7 +6242,7 @@ protected class EGenericTypeDecl_0_0_1_Group extends GroupToken {
 	}
 }
 
-// "<" eTypeArguments += EGenericTypeDecl ( "," eTypeArguments += EGenericTypeDecl ) *
+// "<" eTypeArguments+=EGenericTypeDecl ("," eTypeArguments+=EGenericTypeDecl)*
 protected class EGenericTypeDecl_0_0_1_0_Group extends GroupToken {
 	
 	public EGenericTypeDecl_0_0_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -6270,7 +6270,7 @@ protected class EGenericTypeDecl_0_0_1_0_Group extends GroupToken {
 	}
 }
 
-// "<" eTypeArguments += EGenericTypeDecl
+// "<" eTypeArguments+=EGenericTypeDecl
 protected class EGenericTypeDecl_0_0_1_0_0_Group extends GroupToken {
 	
 	public EGenericTypeDecl_0_0_1_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -6310,7 +6310,7 @@ protected class EGenericTypeDecl_0_0_1_0_0_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// eTypeArguments += EGenericTypeDecl
+// eTypeArguments+=EGenericTypeDecl
 protected class EGenericTypeDecl_0_0_1_0_0_1_Assignment_eTypeArguments extends AssignmentToken  {
 	
 	public EGenericTypeDecl_0_0_1_0_0_1_Assignment_eTypeArguments(IInstanceDescription curr, AbstractToken pred) {
@@ -6342,7 +6342,7 @@ protected class EGenericTypeDecl_0_0_1_0_0_1_Assignment_eTypeArguments extends A
 }
 
 
-// ( "," eTypeArguments += EGenericTypeDecl ) *
+// ("," eTypeArguments+=EGenericTypeDecl)*
 protected class EGenericTypeDecl_0_0_1_0_1_Group extends GroupToken {
 	
 	public EGenericTypeDecl_0_0_1_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -6382,7 +6382,7 @@ protected class EGenericTypeDecl_0_0_1_0_1_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// eTypeArguments += EGenericTypeDecl
+// eTypeArguments+=EGenericTypeDecl
 protected class EGenericTypeDecl_0_0_1_0_1_1_Assignment_eTypeArguments extends AssignmentToken  {
 	
 	public EGenericTypeDecl_0_0_1_0_1_1_Assignment_eTypeArguments(IInstanceDescription curr, AbstractToken pred) {
@@ -6429,7 +6429,7 @@ protected class EGenericTypeDecl_0_0_1_1_Keyword extends KeywordToken  {
 
 
 
-// "#" eTypeParameter = [ ETypeParameter ]
+// "#" eTypeParameter=[ETypeParameter]
 protected class EGenericTypeDecl_0_1_Group extends GroupToken {
 	
 	public EGenericTypeDecl_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -6469,7 +6469,7 @@ protected class EGenericTypeDecl_0_1_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// eTypeParameter = [ ETypeParameter ]
+// eTypeParameter=[ETypeParameter]
 protected class EGenericTypeDecl_0_1_1_Assignment_eTypeParameter extends AssignmentToken  {
 	
 	public EGenericTypeDecl_0_1_1_Assignment_eTypeParameter(IInstanceDescription curr, AbstractToken pred) {
@@ -6497,7 +6497,7 @@ protected class EGenericTypeDecl_0_1_1_Assignment_eTypeParameter extends Assignm
 
 
 
-// "?" ( "extends" eUpperBound = EGenericTypeDecl | "super" eLowerBound = EGenericTypeDecl )
+// "?" ("extends" eUpperBound=EGenericTypeDecl|"super" eLowerBound=EGenericTypeDecl)
 protected class EGenericTypeDecl_1_Group extends GroupToken {
 	
 	public EGenericTypeDecl_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -6537,7 +6537,7 @@ protected class EGenericTypeDecl_1_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// "extends" eUpperBound = EGenericTypeDecl | "super" eLowerBound = EGenericTypeDecl
+// "extends" eUpperBound=EGenericTypeDecl|"super" eLowerBound=EGenericTypeDecl
 protected class EGenericTypeDecl_1_1_Alternatives extends AlternativesToken {
 
 	public EGenericTypeDecl_1_1_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -6558,7 +6558,7 @@ protected class EGenericTypeDecl_1_1_Alternatives extends AlternativesToken {
 	}
 }
 
-// "extends" eUpperBound = EGenericTypeDecl
+// "extends" eUpperBound=EGenericTypeDecl
 protected class EGenericTypeDecl_1_1_0_Group extends GroupToken {
 	
 	public EGenericTypeDecl_1_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -6598,7 +6598,7 @@ protected class EGenericTypeDecl_1_1_0_0_Keyword_extends extends KeywordToken  {
 	}	
 }
 
-// eUpperBound = EGenericTypeDecl
+// eUpperBound=EGenericTypeDecl
 protected class EGenericTypeDecl_1_1_0_1_Assignment_eUpperBound extends AssignmentToken  {
 	
 	public EGenericTypeDecl_1_1_0_1_Assignment_eUpperBound(IInstanceDescription curr, AbstractToken pred) {
@@ -6630,7 +6630,7 @@ protected class EGenericTypeDecl_1_1_0_1_Assignment_eUpperBound extends Assignme
 }
 
 
-// "super" eLowerBound = EGenericTypeDecl
+// "super" eLowerBound=EGenericTypeDecl
 protected class EGenericTypeDecl_1_1_1_Group extends GroupToken {
 	
 	public EGenericTypeDecl_1_1_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -6670,7 +6670,7 @@ protected class EGenericTypeDecl_1_1_1_0_Keyword_super extends KeywordToken  {
 	}	
 }
 
-// eLowerBound = EGenericTypeDecl
+// eLowerBound=EGenericTypeDecl
 protected class EGenericTypeDecl_1_1_1_1_Assignment_eLowerBound extends AssignmentToken  {
 	
 	public EGenericTypeDecl_1_1_1_1_Assignment_eLowerBound(IInstanceDescription curr, AbstractToken pred) {
@@ -6710,12 +6710,12 @@ protected class EGenericTypeDecl_1_1_1_1_Assignment_eLowerBound extends Assignme
 
 /************ begin Rule EOperationDecl ****************
  *
- * EOperationDecl returns EOperation : ( eAnnotations += EAnnotationDecl ) * ( unique ?= "bag" | ordered ?= "random" ) * "op" ( eGenericType = EGenericTypeReferenceDecl | "void" ) name = ID ( "<" eTypeParameters += ETypeParameterDecl ( "," eTypeParameters += ETypeParameterDecl ) * ">" ) ? "(" ( eParameters += EParameterDecl ( "," eParameters += EParameterDecl ) * ) ? ")" ( "throws" eGenericExceptions += EGenericTypeReferenceDecl ( "," eGenericExceptions += EGenericTypeReferenceDecl ) * ) ? ";" ;
+ * EOperationDecl returns EOperation:   (eAnnotations+=EAnnotationDecl)* (unique?="bag"|ordered?="random")* "op" (eGenericType=EGenericTypeReferenceDecl|"void") name=ID ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")? "(" (eParameters+=EParameterDecl ("," eParameters+=EParameterDecl)*)? ")" ("throws" eGenericExceptions+=EGenericTypeReferenceDecl ("," eGenericExceptions+=EGenericTypeReferenceDecl)*)? ";";
  *
  **/
 
 
-// ( eAnnotations += EAnnotationDecl ) * ( unique ?= "bag" | ordered ?= "random" ) * "op" ( eGenericType = EGenericTypeReferenceDecl | "void" ) name = ID ( "<" eTypeParameters += ETypeParameterDecl ( "," eTypeParameters += ETypeParameterDecl ) * ">" ) ? "(" ( eParameters += EParameterDecl ( "," eParameters += EParameterDecl ) * ) ? ")" ( "throws" eGenericExceptions += EGenericTypeReferenceDecl ( "," eGenericExceptions += EGenericTypeReferenceDecl ) * ) ? ";"
+// (eAnnotations+=EAnnotationDecl)* (unique?="bag"|ordered?="random")* "op" (eGenericType=EGenericTypeReferenceDecl|"void") name=ID ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")? "(" (eParameters+=EParameterDecl ("," eParameters+=EParameterDecl)*)? ")" ("throws" eGenericExceptions+=EGenericTypeReferenceDecl ("," eGenericExceptions+=EGenericTypeReferenceDecl)*)? ";"
 protected class EOperationDecl_Group extends GroupToken {
 	
 	public EOperationDecl_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -6743,7 +6743,7 @@ protected class EOperationDecl_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * ( unique ?= "bag" | ordered ?= "random" ) * "op" ( eGenericType = EGenericTypeReferenceDecl | "void" ) name = ID ( "<" eTypeParameters += ETypeParameterDecl ( "," eTypeParameters += ETypeParameterDecl ) * ">" ) ? "(" ( eParameters += EParameterDecl ( "," eParameters += EParameterDecl ) * ) ? ")" ( "throws" eGenericExceptions += EGenericTypeReferenceDecl ( "," eGenericExceptions += EGenericTypeReferenceDecl ) * ) ?
+// (eAnnotations+=EAnnotationDecl)* (unique?="bag"|ordered?="random")* "op" (eGenericType=EGenericTypeReferenceDecl|"void") name=ID ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")? "(" (eParameters+=EParameterDecl ("," eParameters+=EParameterDecl)*)? ")" ("throws" eGenericExceptions+=EGenericTypeReferenceDecl ("," eGenericExceptions+=EGenericTypeReferenceDecl)*)?
 protected class EOperationDecl_0_Group extends GroupToken {
 	
 	public EOperationDecl_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -6771,7 +6771,7 @@ protected class EOperationDecl_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * ( unique ?= "bag" | ordered ?= "random" ) * "op" ( eGenericType = EGenericTypeReferenceDecl | "void" ) name = ID ( "<" eTypeParameters += ETypeParameterDecl ( "," eTypeParameters += ETypeParameterDecl ) * ">" ) ? "(" ( eParameters += EParameterDecl ( "," eParameters += EParameterDecl ) * ) ? ")"
+// (eAnnotations+=EAnnotationDecl)* (unique?="bag"|ordered?="random")* "op" (eGenericType=EGenericTypeReferenceDecl|"void") name=ID ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")? "(" (eParameters+=EParameterDecl ("," eParameters+=EParameterDecl)*)? ")"
 protected class EOperationDecl_0_0_Group extends GroupToken {
 	
 	public EOperationDecl_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -6799,7 +6799,7 @@ protected class EOperationDecl_0_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * ( unique ?= "bag" | ordered ?= "random" ) * "op" ( eGenericType = EGenericTypeReferenceDecl | "void" ) name = ID ( "<" eTypeParameters += ETypeParameterDecl ( "," eTypeParameters += ETypeParameterDecl ) * ">" ) ? "(" ( eParameters += EParameterDecl ( "," eParameters += EParameterDecl ) * ) ?
+// (eAnnotations+=EAnnotationDecl)* (unique?="bag"|ordered?="random")* "op" (eGenericType=EGenericTypeReferenceDecl|"void") name=ID ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")? "(" (eParameters+=EParameterDecl ("," eParameters+=EParameterDecl)*)?
 protected class EOperationDecl_0_0_0_Group extends GroupToken {
 	
 	public EOperationDecl_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -6827,7 +6827,7 @@ protected class EOperationDecl_0_0_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * ( unique ?= "bag" | ordered ?= "random" ) * "op" ( eGenericType = EGenericTypeReferenceDecl | "void" ) name = ID ( "<" eTypeParameters += ETypeParameterDecl ( "," eTypeParameters += ETypeParameterDecl ) * ">" ) ? "("
+// (eAnnotations+=EAnnotationDecl)* (unique?="bag"|ordered?="random")* "op" (eGenericType=EGenericTypeReferenceDecl|"void") name=ID ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")? "("
 protected class EOperationDecl_0_0_0_0_Group extends GroupToken {
 	
 	public EOperationDecl_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -6855,7 +6855,7 @@ protected class EOperationDecl_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * ( unique ?= "bag" | ordered ?= "random" ) * "op" ( eGenericType = EGenericTypeReferenceDecl | "void" ) name = ID ( "<" eTypeParameters += ETypeParameterDecl ( "," eTypeParameters += ETypeParameterDecl ) * ">" ) ?
+// (eAnnotations+=EAnnotationDecl)* (unique?="bag"|ordered?="random")* "op" (eGenericType=EGenericTypeReferenceDecl|"void") name=ID ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")?
 protected class EOperationDecl_0_0_0_0_0_Group extends GroupToken {
 	
 	public EOperationDecl_0_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -6883,7 +6883,7 @@ protected class EOperationDecl_0_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * ( unique ?= "bag" | ordered ?= "random" ) * "op" ( eGenericType = EGenericTypeReferenceDecl | "void" ) name = ID
+// (eAnnotations+=EAnnotationDecl)* (unique?="bag"|ordered?="random")* "op" (eGenericType=EGenericTypeReferenceDecl|"void") name=ID
 protected class EOperationDecl_0_0_0_0_0_0_Group extends GroupToken {
 	
 	public EOperationDecl_0_0_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -6911,7 +6911,7 @@ protected class EOperationDecl_0_0_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * ( unique ?= "bag" | ordered ?= "random" ) * "op" ( eGenericType = EGenericTypeReferenceDecl | "void" )
+// (eAnnotations+=EAnnotationDecl)* (unique?="bag"|ordered?="random")* "op" (eGenericType=EGenericTypeReferenceDecl|"void")
 protected class EOperationDecl_0_0_0_0_0_0_0_Group extends GroupToken {
 	
 	public EOperationDecl_0_0_0_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -6939,7 +6939,7 @@ protected class EOperationDecl_0_0_0_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * ( unique ?= "bag" | ordered ?= "random" ) * "op"
+// (eAnnotations+=EAnnotationDecl)* (unique?="bag"|ordered?="random")* "op"
 protected class EOperationDecl_0_0_0_0_0_0_0_0_Group extends GroupToken {
 	
 	public EOperationDecl_0_0_0_0_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -6967,7 +6967,7 @@ protected class EOperationDecl_0_0_0_0_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * ( unique ?= "bag" | ordered ?= "random" ) *
+// (eAnnotations+=EAnnotationDecl)* (unique?="bag"|ordered?="random")*
 protected class EOperationDecl_0_0_0_0_0_0_0_0_0_Group extends GroupToken {
 	
 	public EOperationDecl_0_0_0_0_0_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -6995,7 +6995,7 @@ protected class EOperationDecl_0_0_0_0_0_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) *
+// (eAnnotations+=EAnnotationDecl)*
 protected class EOperationDecl_0_0_0_0_0_0_0_0_0_0_Assignment_eAnnotations extends AssignmentToken  {
 	
 	public EOperationDecl_0_0_0_0_0_0_0_0_0_0_Assignment_eAnnotations(IInstanceDescription curr, AbstractToken pred) {
@@ -7026,7 +7026,7 @@ protected class EOperationDecl_0_0_0_0_0_0_0_0_0_0_Assignment_eAnnotations exten
 	}
 }
 
-// ( unique ?= "bag" | ordered ?= "random" ) *
+// (unique?="bag"|ordered?="random")*
 protected class EOperationDecl_0_0_0_0_0_0_0_0_0_1_Alternatives extends AlternativesToken {
 
 	public EOperationDecl_0_0_0_0_0_0_0_0_0_1_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -7047,7 +7047,7 @@ protected class EOperationDecl_0_0_0_0_0_0_0_0_0_1_Alternatives extends Alternat
 	}
 }
 
-// unique ?= "bag"
+// unique?="bag"
 protected class EOperationDecl_0_0_0_0_0_0_0_0_0_1_0_Assignment_unique extends AssignmentToken  {
 	
 	public EOperationDecl_0_0_0_0_0_0_0_0_0_1_0_Assignment_unique(IInstanceDescription curr, AbstractToken pred) {
@@ -7072,7 +7072,7 @@ protected class EOperationDecl_0_0_0_0_0_0_0_0_0_1_0_Assignment_unique extends A
 	}
 }
 
-// ordered ?= "random"
+// ordered?="random"
 protected class EOperationDecl_0_0_0_0_0_0_0_0_0_1_1_Assignment_ordered extends AssignmentToken  {
 	
 	public EOperationDecl_0_0_0_0_0_0_0_0_0_1_1_Assignment_ordered(IInstanceDescription curr, AbstractToken pred) {
@@ -7112,7 +7112,7 @@ protected class EOperationDecl_0_0_0_0_0_0_0_0_1_Keyword_op extends KeywordToken
 }
 
 
-// eGenericType = EGenericTypeReferenceDecl | "void"
+// eGenericType=EGenericTypeReferenceDecl|"void"
 protected class EOperationDecl_0_0_0_0_0_0_0_1_Alternatives extends AlternativesToken {
 
 	public EOperationDecl_0_0_0_0_0_0_0_1_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -7133,7 +7133,7 @@ protected class EOperationDecl_0_0_0_0_0_0_0_1_Alternatives extends Alternatives
 	}
 }
 
-// eGenericType = EGenericTypeReferenceDecl
+// eGenericType=EGenericTypeReferenceDecl
 protected class EOperationDecl_0_0_0_0_0_0_0_1_0_Assignment_eGenericType extends AssignmentToken  {
 	
 	public EOperationDecl_0_0_0_0_0_0_0_1_0_Assignment_eGenericType(IInstanceDescription curr, AbstractToken pred) {
@@ -7178,7 +7178,7 @@ protected class EOperationDecl_0_0_0_0_0_0_0_1_1_Keyword_void extends KeywordTok
 
 
 
-// name = ID
+// name=ID
 protected class EOperationDecl_0_0_0_0_0_0_1_Assignment_name extends AssignmentToken  {
 	
 	public EOperationDecl_0_0_0_0_0_0_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -7202,7 +7202,7 @@ protected class EOperationDecl_0_0_0_0_0_0_1_Assignment_name extends AssignmentT
 }
 
 
-// ( "<" eTypeParameters += ETypeParameterDecl ( "," eTypeParameters += ETypeParameterDecl ) * ">" ) ?
+// ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")?
 protected class EOperationDecl_0_0_0_0_0_1_Group extends GroupToken {
 	
 	public EOperationDecl_0_0_0_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -7230,7 +7230,7 @@ protected class EOperationDecl_0_0_0_0_0_1_Group extends GroupToken {
 	}
 }
 
-// "<" eTypeParameters += ETypeParameterDecl ( "," eTypeParameters += ETypeParameterDecl ) *
+// "<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)*
 protected class EOperationDecl_0_0_0_0_0_1_0_Group extends GroupToken {
 	
 	public EOperationDecl_0_0_0_0_0_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -7258,7 +7258,7 @@ protected class EOperationDecl_0_0_0_0_0_1_0_Group extends GroupToken {
 	}
 }
 
-// "<" eTypeParameters += ETypeParameterDecl
+// "<" eTypeParameters+=ETypeParameterDecl
 protected class EOperationDecl_0_0_0_0_0_1_0_0_Group extends GroupToken {
 	
 	public EOperationDecl_0_0_0_0_0_1_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -7298,7 +7298,7 @@ protected class EOperationDecl_0_0_0_0_0_1_0_0_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// eTypeParameters += ETypeParameterDecl
+// eTypeParameters+=ETypeParameterDecl
 protected class EOperationDecl_0_0_0_0_0_1_0_0_1_Assignment_eTypeParameters extends AssignmentToken  {
 	
 	public EOperationDecl_0_0_0_0_0_1_0_0_1_Assignment_eTypeParameters(IInstanceDescription curr, AbstractToken pred) {
@@ -7330,7 +7330,7 @@ protected class EOperationDecl_0_0_0_0_0_1_0_0_1_Assignment_eTypeParameters exte
 }
 
 
-// ( "," eTypeParameters += ETypeParameterDecl ) *
+// ("," eTypeParameters+=ETypeParameterDecl)*
 protected class EOperationDecl_0_0_0_0_0_1_0_1_Group extends GroupToken {
 	
 	public EOperationDecl_0_0_0_0_0_1_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -7370,7 +7370,7 @@ protected class EOperationDecl_0_0_0_0_0_1_0_1_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// eTypeParameters += ETypeParameterDecl
+// eTypeParameters+=ETypeParameterDecl
 protected class EOperationDecl_0_0_0_0_0_1_0_1_1_Assignment_eTypeParameters extends AssignmentToken  {
 	
 	public EOperationDecl_0_0_0_0_0_1_0_1_1_Assignment_eTypeParameters(IInstanceDescription curr, AbstractToken pred) {
@@ -7430,7 +7430,7 @@ protected class EOperationDecl_0_0_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-// ( eParameters += EParameterDecl ( "," eParameters += EParameterDecl ) * ) ?
+// (eParameters+=EParameterDecl ("," eParameters+=EParameterDecl)*)?
 protected class EOperationDecl_0_0_0_1_Group extends GroupToken {
 	
 	public EOperationDecl_0_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -7458,7 +7458,7 @@ protected class EOperationDecl_0_0_0_1_Group extends GroupToken {
 	}
 }
 
-// eParameters += EParameterDecl
+// eParameters+=EParameterDecl
 protected class EOperationDecl_0_0_0_1_0_Assignment_eParameters extends AssignmentToken  {
 	
 	public EOperationDecl_0_0_0_1_0_Assignment_eParameters(IInstanceDescription curr, AbstractToken pred) {
@@ -7489,7 +7489,7 @@ protected class EOperationDecl_0_0_0_1_0_Assignment_eParameters extends Assignme
 	}
 }
 
-// ( "," eParameters += EParameterDecl ) *
+// ("," eParameters+=EParameterDecl)*
 protected class EOperationDecl_0_0_0_1_1_Group extends GroupToken {
 	
 	public EOperationDecl_0_0_0_1_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -7529,7 +7529,7 @@ protected class EOperationDecl_0_0_0_1_1_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// eParameters += EParameterDecl
+// eParameters+=EParameterDecl
 protected class EOperationDecl_0_0_0_1_1_1_Assignment_eParameters extends AssignmentToken  {
 	
 	public EOperationDecl_0_0_0_1_1_1_Assignment_eParameters(IInstanceDescription curr, AbstractToken pred) {
@@ -7576,7 +7576,7 @@ protected class EOperationDecl_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-// ( "throws" eGenericExceptions += EGenericTypeReferenceDecl ( "," eGenericExceptions += EGenericTypeReferenceDecl ) * ) ?
+// ("throws" eGenericExceptions+=EGenericTypeReferenceDecl ("," eGenericExceptions+=EGenericTypeReferenceDecl)*)?
 protected class EOperationDecl_0_1_Group extends GroupToken {
 	
 	public EOperationDecl_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -7604,7 +7604,7 @@ protected class EOperationDecl_0_1_Group extends GroupToken {
 	}
 }
 
-// "throws" eGenericExceptions += EGenericTypeReferenceDecl
+// "throws" eGenericExceptions+=EGenericTypeReferenceDecl
 protected class EOperationDecl_0_1_0_Group extends GroupToken {
 	
 	public EOperationDecl_0_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -7644,7 +7644,7 @@ protected class EOperationDecl_0_1_0_0_Keyword_throws extends KeywordToken  {
 	}	
 }
 
-// eGenericExceptions += EGenericTypeReferenceDecl
+// eGenericExceptions+=EGenericTypeReferenceDecl
 protected class EOperationDecl_0_1_0_1_Assignment_eGenericExceptions extends AssignmentToken  {
 	
 	public EOperationDecl_0_1_0_1_Assignment_eGenericExceptions(IInstanceDescription curr, AbstractToken pred) {
@@ -7676,7 +7676,7 @@ protected class EOperationDecl_0_1_0_1_Assignment_eGenericExceptions extends Ass
 }
 
 
-// ( "," eGenericExceptions += EGenericTypeReferenceDecl ) *
+// ("," eGenericExceptions+=EGenericTypeReferenceDecl)*
 protected class EOperationDecl_0_1_1_Group extends GroupToken {
 	
 	public EOperationDecl_0_1_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -7716,7 +7716,7 @@ protected class EOperationDecl_0_1_1_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// eGenericExceptions += EGenericTypeReferenceDecl
+// eGenericExceptions+=EGenericTypeReferenceDecl
 protected class EOperationDecl_0_1_1_1_Assignment_eGenericExceptions extends AssignmentToken  {
 	
 	public EOperationDecl_0_1_1_1_Assignment_eGenericExceptions(IInstanceDescription curr, AbstractToken pred) {
@@ -7768,12 +7768,12 @@ protected class EOperationDecl_1_Keyword extends KeywordToken  {
 
 /************ begin Rule EParameterDecl ****************
  *
- * EParameterDecl returns EParameter : ( eAnnotations += EAnnotationDecl ) * eGenericType = EGenericTypeReferenceDecl name = ID ;
+ * EParameterDecl returns EParameter:   (eAnnotations+=EAnnotationDecl)* eGenericType=EGenericTypeReferenceDecl name=ID;
  *
  **/
 
 
-// ( eAnnotations += EAnnotationDecl ) * eGenericType = EGenericTypeReferenceDecl name = ID
+// (eAnnotations+=EAnnotationDecl)* eGenericType=EGenericTypeReferenceDecl name=ID
 protected class EParameterDecl_Group extends GroupToken {
 	
 	public EParameterDecl_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -7801,7 +7801,7 @@ protected class EParameterDecl_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) * eGenericType = EGenericTypeReferenceDecl
+// (eAnnotations+=EAnnotationDecl)* eGenericType=EGenericTypeReferenceDecl
 protected class EParameterDecl_0_Group extends GroupToken {
 	
 	public EParameterDecl_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -7829,7 +7829,7 @@ protected class EParameterDecl_0_Group extends GroupToken {
 	}
 }
 
-// ( eAnnotations += EAnnotationDecl ) *
+// (eAnnotations+=EAnnotationDecl)*
 protected class EParameterDecl_0_0_Assignment_eAnnotations extends AssignmentToken  {
 	
 	public EParameterDecl_0_0_Assignment_eAnnotations(IInstanceDescription curr, AbstractToken pred) {
@@ -7860,7 +7860,7 @@ protected class EParameterDecl_0_0_Assignment_eAnnotations extends AssignmentTok
 	}
 }
 
-// eGenericType = EGenericTypeReferenceDecl
+// eGenericType=EGenericTypeReferenceDecl
 protected class EParameterDecl_0_1_Assignment_eGenericType extends AssignmentToken  {
 	
 	public EParameterDecl_0_1_Assignment_eGenericType(IInstanceDescription curr, AbstractToken pred) {
@@ -7892,7 +7892,7 @@ protected class EParameterDecl_0_1_Assignment_eGenericType extends AssignmentTok
 }
 
 
-// name = ID
+// name=ID
 protected class EParameterDecl_1_Assignment_name extends AssignmentToken  {
 	
 	public EParameterDecl_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -7921,7 +7921,7 @@ protected class EParameterDecl_1_Assignment_name extends AssignmentToken  {
 
 /************ begin Rule MapEntrySuper ****************
  *
- * MapEntrySuper returns EObject : MapEntry ;
+ * MapEntrySuper returns EObject:   MapEntry;
  *
  **/
 
@@ -7949,12 +7949,12 @@ protected class MapEntrySuper_RuleCall_MapEntry extends RuleCallToken {
 
 /************ begin Rule MapEntry ****************
  *
- * MapEntry : detailKey = ID "=" detailValue = STRING ;
+ * MapEntry:   detailKey=ID "=" detailValue=STRING;
  *
  **/
 
 
-// detailKey = ID "=" detailValue = STRING
+// detailKey=ID "=" detailValue=STRING
 protected class MapEntry_Group extends GroupToken {
 	
 	public MapEntry_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -7982,7 +7982,7 @@ protected class MapEntry_Group extends GroupToken {
 	}
 }
 
-// detailKey = ID "="
+// detailKey=ID "="
 protected class MapEntry_0_Group extends GroupToken {
 	
 	public MapEntry_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -8010,7 +8010,7 @@ protected class MapEntry_0_Group extends GroupToken {
 	}
 }
 
-// detailKey = ID
+// detailKey=ID
 protected class MapEntry_0_0_Assignment_detailKey extends AssignmentToken  {
 	
 	public MapEntry_0_0_Assignment_detailKey(IInstanceDescription curr, AbstractToken pred) {
@@ -8046,7 +8046,7 @@ protected class MapEntry_0_1_Keyword extends KeywordToken  {
 }
 
 
-// detailValue = STRING
+// detailValue=STRING
 protected class MapEntry_1_Assignment_detailValue extends AssignmentToken  {
 	
 	public MapEntry_1_Assignment_detailValue(IInstanceDescription curr, AbstractToken pred) {
@@ -8075,12 +8075,12 @@ protected class MapEntry_1_Assignment_detailValue extends AssignmentToken  {
 
 /************ begin Rule MultiplicityExpr ****************
  *
- * MultiplicityExpr : "+" | "?" | "*" ;
+ * MultiplicityExpr:   "+"|"?"|"*";
  *
  **/
 
 
-// "+" | "?" | "*"
+// "+"|"?"|"*"
 protected class MultiplicityExpr_Alternatives extends AlternativesToken {
 
 	public MultiplicityExpr_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -8101,7 +8101,7 @@ protected class MultiplicityExpr_Alternatives extends AlternativesToken {
 	}
 }
 
-// "+" | "?"
+// "+"|"?"
 protected class MultiplicityExpr_0_Alternatives extends AlternativesToken {
 
 	public MultiplicityExpr_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {

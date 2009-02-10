@@ -9,9 +9,12 @@ package org.eclipse.xtext.ui.common.editor.syntaxcoloring;
 
 import org.eclipse.xtext.service.ILanguageService;
 
+import com.google.inject.ImplementedBy;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@ImplementedBy(NullTokenStyleProvider.class)
 public interface ITokenStyleProvider extends ILanguageService {
 
 	ITokenStyle[] getTokenStyles();

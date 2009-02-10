@@ -18,19 +18,19 @@ public class ImportUriTestLanguageGrammarAccess extends BaseEPackageAccess imple
 		private final Assignment c1AssignmentTypes = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall c10ParserRuleCallType = (RuleCall)c1AssignmentTypes.eContents().get(0);
 		
-		// Main : ( imports += Import ) * ( types += Type ) * ;
+		// Main:   (imports+=Import)* (types+=Type)*;
 		public ParserRule getRule() { return rule; }
 
-		// ( imports += Import ) * ( types += Type ) *
+		// (imports+=Import)* (types+=Type)*
 		public Group eleGroup() { return cGroup; }
 
-		// ( imports += Import ) *
+		// (imports+=Import)*
 		public Assignment ele0AssignmentImports() { return c0AssignmentImports; }
 
 		// Import
 		public RuleCall ele00ParserRuleCallImport() { return c00ParserRuleCallImport; }
 
-		// ( types += Type ) *
+		// (types+=Type)*
 		public Assignment ele1AssignmentTypes() { return c1AssignmentTypes; }
 
 		// Type
@@ -44,16 +44,16 @@ public class ImportUriTestLanguageGrammarAccess extends BaseEPackageAccess imple
 		private final Assignment c1AssignmentImportURI = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall c10LexerRuleCallSTRING = (RuleCall)c1AssignmentImportURI.eContents().get(0);
 		
-		// Import : "import" importURI = STRING ;
+		// Import:   "import" importURI=STRING;
 		public ParserRule getRule() { return rule; }
 
-		// "import" importURI = STRING
+		// "import" importURI=STRING
 		public Group eleGroup() { return cGroup; }
 
 		// "import"
 		public Keyword ele0KeywordImport() { return c0KeywordImport; }
 
-		// importURI = STRING
+		// importURI=STRING
 		public Assignment ele1AssignmentImportURI() { return c1AssignmentImportURI; }
 
 		// STRING
@@ -72,22 +72,22 @@ public class ImportUriTestLanguageGrammarAccess extends BaseEPackageAccess imple
 		private final Assignment c1AssignmentExtends = (Assignment)cGroup.eContents().get(1);
 		private final CrossReference c10CrossReferenceEStringType = (CrossReference)c1AssignmentExtends.eContents().get(0);
 		
-		// Type : "type" name = ID "extends" ^extends = [ Type ] ;
+		// Type:   "type" name=ID "extends" ^extends=[Type];
 		public ParserRule getRule() { return rule; }
 
-		// "type" name = ID "extends" ^extends = [ Type ]
+		// "type" name=ID "extends" ^extends=[Type]
 		public Group eleGroup() { return cGroup; }
 
-		// "type" name = ID "extends"
+		// "type" name=ID "extends"
 		public Group ele0Group() { return c0Group; }
 
-		// "type" name = ID
+		// "type" name=ID
 		public Group ele00Group() { return c00Group; }
 
 		// "type"
 		public Keyword ele000KeywordType() { return c000KeywordType; }
 
-		// name = ID
+		// name=ID
 		public Assignment ele001AssignmentName() { return c001AssignmentName; }
 
 		// ID
@@ -96,10 +96,10 @@ public class ImportUriTestLanguageGrammarAccess extends BaseEPackageAccess imple
 		// "extends"
 		public Keyword ele01KeywordExtends() { return c01KeywordExtends; }
 
-		// ^extends = [ Type ]
+		// ^extends=[Type]
 		public Assignment ele1AssignmentExtends() { return c1AssignmentExtends; }
 
-		// [ Type ]
+		// [Type]
 		public CrossReference ele10CrossReferenceEStringType() { return c10CrossReferenceEStringType; }
 	}
 	
@@ -126,17 +126,17 @@ public class ImportUriTestLanguageGrammarAccess extends BaseEPackageAccess imple
 	}
 
 	
-	// Main : ( imports += Import ) * ( types += Type ) * ;
+	// Main:   (imports+=Import)* (types+=Type)*;
 	public MainElements prMain() {
 		return (pMain != null) ? pMain : (pMain = new MainElements());
 	} 
 
-	// Import : "import" importURI = STRING ;
+	// Import:   "import" importURI=STRING;
 	public ImportElements prImport() {
 		return (pImport != null) ? pImport : (pImport = new ImportElements());
 	} 
 
-	// Type : "type" name = ID "extends" ^extends = [ Type ] ;
+	// Type:   "type" name=ID "extends" ^extends=[Type];
 	public TypeElements prType() {
 		return (pType != null) ? pType : (pType = new TypeElements());
 	} 

@@ -5,55 +5,58 @@ package org.eclipse.xtext.parsetree.reconstr;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.ISetup;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.IResourceFactory;
-import org.eclipse.xtext.service.IServiceScope;
-import org.eclipse.xtext.service.ServiceRegistry;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
-import org.eclipse.xtext.parsetree.reconstr.IComplexReconstrTestLanguage;
+public class ComplexReconstrTestLanguageStandaloneSetup implements ISetup {
 
-public abstract class ComplexReconstrTestLanguageStandaloneSetup {
+	public static void doSetup() {
+		new ComplexReconstrTestLanguageStandaloneSetup().createInjectorAndDoEMFRegistration();
+	}
 
-	private static boolean isInitialized = false;
-
-	public synchronized static void doSetup() {
-		if(!isInitialized) {
+	public Injector createInjectorAndDoEMFRegistration() {
+			
+			new org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup().doSetup();
+			
+		    registerEPackages();
 		    
-		    Injector injector = Guice.createInjector(new org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTestLanguageRuntimeModule());
-			ServiceRegistry.registerInjector(org.eclipse.xtext.parsetree.reconstr.IComplexReconstrTestLanguage.SCOPE, injector);
-			
-			
-			
-			org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
-			
-			
-			// register resource factory to EMF
-			IResourceFactory resourceFactory = new org.eclipse.xtext.parsetree.reconstr.services.ComplexReconstrTestLanguageResourceFactory();
-			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("complexreconstrtestlanguage", resourceFactory);
-			
-			
-			// initialize EPackages
-			
-				if (!EPackage.Registry.INSTANCE.containsKey("http://complex/rewrite/test")) {
-					EPackage complexrewritetest = EcoreUtil2.loadEPackage(
-							"classpath:/org/eclipse/xtext/parsetree/reconstr/complexrewritetest.ecore",
-							ComplexReconstrTestLanguageStandaloneSetup.class.getClassLoader());
-					if (complexrewritetest == null)
-						throw new IllegalStateException(
-								"Couldn't load EPackage from 'classpath:/org/eclipse/xtext/parsetree/reconstr/complexrewritetest.ecore'");
-					EPackage.Registry.INSTANCE.put("http://complex/rewrite/test", complexrewritetest);
-				}
-			
-			isInitialized = true;
-		}
+		    Injector injector = createInjector();
+		    IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
+		    registerResourceFactory(resourceFactory);
+		    return injector;
+		    
 	}
 	
-	public static IServiceScope getServiceScope() {
-	   doSetup();
-	   return org.eclipse.xtext.parsetree.reconstr.IComplexReconstrTestLanguage.SCOPE;
+    
+	public Injector createInjector() {
+		return Guice.createInjector(new org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTestLanguageRuntimeModule());
+	}
+	
+	public void registerResourceFactory(IResourceFactory resourceFactory) {
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("complexreconstrtestlanguage", resourceFactory);
+		
+	}
+    
+
+	/**
+	 * initializes all EPackages generated for this language and registers them at EPackage.Registry.INSTANCE
+	 */	
+	public void registerEPackages() {
+		
+			if (!EPackage.Registry.INSTANCE.containsKey("http://complex/rewrite/test")) {
+				EPackage complexrewritetest = EcoreUtil2.loadEPackage(
+						"classpath:/org/eclipse/xtext/parsetree/reconstr/complexrewritetest.ecore",
+						ComplexReconstrTestLanguageStandaloneSetup.class.getClassLoader());
+				if (complexrewritetest == null)
+					throw new IllegalStateException(
+							"Couldn't load EPackage from 'classpath:/org/eclipse/xtext/parsetree/reconstr/complexrewritetest.ecore'");
+				EPackage.Registry.INSTANCE.put("http://complex/rewrite/test", complexrewritetest);
+			}
+		
 	}
 	
 }

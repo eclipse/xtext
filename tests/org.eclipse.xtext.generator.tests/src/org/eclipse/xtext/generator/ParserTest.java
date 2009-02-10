@@ -16,7 +16,7 @@ import org.eclipse.xtext.tests.AbstractGeneratorTest;
 public class ParserTest extends AbstractGeneratorTest {
 
 	public void testSimpleParse() throws Exception {
-		with(LowerCaseNamedTestLanguageStandaloneSetup.class);
+		with(new LowerCaseNamedTestLanguageRuntimeModule());
 		XtextResource resource = getResourceFromString("myID");
 		assertTrue(resource.getErrors().isEmpty());
 	}

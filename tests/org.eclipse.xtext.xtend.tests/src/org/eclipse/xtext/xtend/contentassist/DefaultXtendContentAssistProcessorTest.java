@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend.contentassist;
 
-import org.eclipse.xtext.service.ServiceRegistry;
+import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider;
 import org.eclipse.xtext.ui.common.editor.contentassist.impl.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultContentAssistProcessorTest;
@@ -21,10 +21,9 @@ public class DefaultXtendContentAssistProcessorTest extends DefaultContentAssist
 	 * @see org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultContentAssistProcessorTest#newBuilder(java.lang.String)
 	 */
 	@Override
-	protected ContentAssistProcessorTestBuilder newBuilder(String standAloneSetupFQN) throws Exception {
-		ContentAssistProcessorTestBuilder newBuilder = super.newBuilder(standAloneSetupFQN);
-		IProposalProvider proposalProvider = ServiceRegistry.getInjector(getCurrentServiceScope()).getInstance(IProposalProvider.class);
-		assertTrue(proposalProvider instanceof AbstractXtendProposalProvider);
+	protected ContentAssistProcessorTestBuilder newBuilder(ISetup setup) throws Exception {
+		ContentAssistProcessorTestBuilder newBuilder = super.newBuilder(setup);
+		assertTrue(newBuilder.get(IProposalProvider.class) instanceof AbstractXtendProposalProvider);
 		return newBuilder;
 	}
 	

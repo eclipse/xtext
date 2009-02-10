@@ -34,12 +34,12 @@ public class PartialParserTestLanguageParseTreeConstructor extends AbstractParse
 
 /************ begin Rule Container ****************
  *
- * Container : "container" name = ID "{" ( nested += Nested | content += Content ) * "}" ;
+ * Container:   "container" name=ID "{" (nested+=Nested|content+=Content)* "}";
  *
  **/
 
 
-// "container" name = ID "{" ( nested += Nested | content += Content ) * "}"
+// "container" name=ID "{" (nested+=Nested|content+=Content)* "}"
 protected class Container_Group extends GroupToken {
 	
 	public Container_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -67,7 +67,7 @@ protected class Container_Group extends GroupToken {
 	}
 }
 
-// "container" name = ID "{" ( nested += Nested | content += Content ) *
+// "container" name=ID "{" (nested+=Nested|content+=Content)*
 protected class Container_0_Group extends GroupToken {
 	
 	public Container_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -95,7 +95,7 @@ protected class Container_0_Group extends GroupToken {
 	}
 }
 
-// "container" name = ID "{"
+// "container" name=ID "{"
 protected class Container_0_0_Group extends GroupToken {
 	
 	public Container_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -123,7 +123,7 @@ protected class Container_0_0_Group extends GroupToken {
 	}
 }
 
-// "container" name = ID
+// "container" name=ID
 protected class Container_0_0_0_Group extends GroupToken {
 	
 	public Container_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -163,7 +163,7 @@ protected class Container_0_0_0_0_Keyword_container extends KeywordToken  {
 	}	
 }
 
-// name = ID
+// name=ID
 protected class Container_0_0_0_1_Assignment_name extends AssignmentToken  {
 	
 	public Container_0_0_0_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -200,7 +200,7 @@ protected class Container_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-// ( nested += Nested | content += Content ) *
+// (nested+=Nested|content+=Content)*
 protected class Container_0_1_Alternatives extends AlternativesToken {
 
 	public Container_0_1_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -221,7 +221,7 @@ protected class Container_0_1_Alternatives extends AlternativesToken {
 	}
 }
 
-// nested += Nested
+// nested+=Nested
 protected class Container_0_1_0_Assignment_nested extends AssignmentToken  {
 	
 	public Container_0_1_0_Assignment_nested(IInstanceDescription curr, AbstractToken pred) {
@@ -252,7 +252,7 @@ protected class Container_0_1_0_Assignment_nested extends AssignmentToken  {
 	}
 }
 
-// content += Content
+// content+=Content
 protected class Container_0_1_1_Assignment_content extends AssignmentToken  {
 	
 	public Container_0_1_1_Assignment_content(IInstanceDescription curr, AbstractToken pred) {
@@ -303,12 +303,12 @@ protected class Container_1_Keyword extends KeywordToken  {
 
 /************ begin Rule Nested ****************
  *
- * Nested : "nested" "{" ( nested += Container ) + "}" ;
+ * Nested:   "nested" "{" (nested+=Container)+ "}";
  *
  **/
 
 
-// "nested" "{" ( nested += Container ) + "}"
+// "nested" "{" (nested+=Container)+ "}"
 protected class Nested_Group extends GroupToken {
 	
 	public Nested_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -336,7 +336,7 @@ protected class Nested_Group extends GroupToken {
 	}
 }
 
-// "nested" "{" ( nested += Container ) +
+// "nested" "{" (nested+=Container)+
 protected class Nested_0_Group extends GroupToken {
 	
 	public Nested_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -417,7 +417,7 @@ protected class Nested_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-// ( nested += Container ) +
+// (nested+=Container)+
 protected class Nested_0_1_Assignment_nested extends AssignmentToken  {
 	
 	public Nested_0_1_Assignment_nested(IInstanceDescription curr, AbstractToken pred) {
@@ -467,12 +467,12 @@ protected class Nested_1_Keyword extends KeywordToken  {
 
 /************ begin Rule Content ****************
  *
- * Content : Children | AbstractChildren ;
+ * Content:   Children|AbstractChildren;
  *
  **/
 
 
-// Children | AbstractChildren
+// Children|AbstractChildren
 protected class Content_Alternatives extends AlternativesToken {
 
 	public Content_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -535,12 +535,12 @@ protected class Content_1_RuleCall_AbstractChildren extends RuleCallToken {
 
 /************ begin Rule Children ****************
  *
- * Children : "children" "{" children += Child ( "," children += Child ) * "}" ;
+ * Children:   "children" "{" children+=Child ("," children+=Child)* "}";
  *
  **/
 
 
-// "children" "{" children += Child ( "," children += Child ) * "}"
+// "children" "{" children+=Child ("," children+=Child)* "}"
 protected class Children_Group extends GroupToken {
 	
 	public Children_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -568,7 +568,7 @@ protected class Children_Group extends GroupToken {
 	}
 }
 
-// "children" "{" children += Child ( "," children += Child ) *
+// "children" "{" children+=Child ("," children+=Child)*
 protected class Children_0_Group extends GroupToken {
 	
 	public Children_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -596,7 +596,7 @@ protected class Children_0_Group extends GroupToken {
 	}
 }
 
-// "children" "{" children += Child
+// "children" "{" children+=Child
 protected class Children_0_0_Group extends GroupToken {
 	
 	public Children_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -677,7 +677,7 @@ protected class Children_0_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-// children += Child
+// children+=Child
 protected class Children_0_0_1_Assignment_children extends AssignmentToken  {
 	
 	public Children_0_0_1_Assignment_children(IInstanceDescription curr, AbstractToken pred) {
@@ -709,7 +709,7 @@ protected class Children_0_0_1_Assignment_children extends AssignmentToken  {
 }
 
 
-// ( "," children += Child ) *
+// ("," children+=Child)*
 protected class Children_0_1_Group extends GroupToken {
 	
 	public Children_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -749,7 +749,7 @@ protected class Children_0_1_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// children += Child
+// children+=Child
 protected class Children_0_1_1_Assignment_children extends AssignmentToken  {
 	
 	public Children_0_1_1_Assignment_children(IInstanceDescription curr, AbstractToken pred) {
@@ -800,12 +800,12 @@ protected class Children_1_Keyword extends KeywordToken  {
 
 /************ begin Rule Child ****************
  *
- * Child : "->" "C" "(" value = Named ")" ;
+ * Child:   "->" "C" "(" value=Named ")";
  *
  **/
 
 
-// "->" "C" "(" value = Named ")"
+// "->" "C" "(" value=Named ")"
 protected class Child_Group extends GroupToken {
 	
 	public Child_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -833,7 +833,7 @@ protected class Child_Group extends GroupToken {
 	}
 }
 
-// "->" "C" "(" value = Named
+// "->" "C" "(" value=Named
 protected class Child_0_Group extends GroupToken {
 	
 	public Child_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -955,7 +955,7 @@ protected class Child_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-// value = Named
+// value=Named
 protected class Child_0_1_Assignment_value extends AssignmentToken  {
 	
 	public Child_0_1_Assignment_value(IInstanceDescription curr, AbstractToken pred) {
@@ -1005,12 +1005,12 @@ protected class Child_1_Keyword extends KeywordToken  {
 
 /************ begin Rule AbstractChildren ****************
  *
- * AbstractChildren : "abstract children" "{" ( abstractChildren += AbstractChild ) + "}" ;
+ * AbstractChildren:   "abstract children" "{" (abstractChildren+=AbstractChild)+ "}";
  *
  **/
 
 
-// "abstract children" "{" ( abstractChildren += AbstractChild ) + "}"
+// "abstract children" "{" (abstractChildren+=AbstractChild)+ "}"
 protected class AbstractChildren_Group extends GroupToken {
 	
 	public AbstractChildren_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1038,7 +1038,7 @@ protected class AbstractChildren_Group extends GroupToken {
 	}
 }
 
-// "abstract children" "{" ( abstractChildren += AbstractChild ) +
+// "abstract children" "{" (abstractChildren+=AbstractChild)+
 protected class AbstractChildren_0_Group extends GroupToken {
 	
 	public AbstractChildren_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1119,7 +1119,7 @@ protected class AbstractChildren_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-// ( abstractChildren += AbstractChild ) +
+// (abstractChildren+=AbstractChild)+
 protected class AbstractChildren_0_1_Assignment_abstractChildren extends AssignmentToken  {
 	
 	public AbstractChildren_0_1_Assignment_abstractChildren(IInstanceDescription curr, AbstractToken pred) {
@@ -1169,12 +1169,12 @@ protected class AbstractChildren_1_Keyword extends KeywordToken  {
 
 /************ begin Rule AbstractChild ****************
  *
- * AbstractChild : FirstConcrete | SecondConcrete ;
+ * AbstractChild:   FirstConcrete|SecondConcrete;
  *
  **/
 
 
-// FirstConcrete | SecondConcrete
+// FirstConcrete|SecondConcrete
 protected class AbstractChild_Alternatives extends AlternativesToken {
 
 	public AbstractChild_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -1237,12 +1237,12 @@ protected class AbstractChild_1_RuleCall_SecondConcrete extends RuleCallToken {
 
 /************ begin Rule FirstConcrete ****************
  *
- * FirstConcrete : "->" "F" "(" value = Named ( referencedContainer = [ Container ] ) ? ")" ;
+ * FirstConcrete:   "->" "F" "(" value=Named (referencedContainer=[Container])? ")";
  *
  **/
 
 
-// "->" "F" "(" value = Named ( referencedContainer = [ Container ] ) ? ")"
+// "->" "F" "(" value=Named (referencedContainer=[Container])? ")"
 protected class FirstConcrete_Group extends GroupToken {
 	
 	public FirstConcrete_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1270,7 +1270,7 @@ protected class FirstConcrete_Group extends GroupToken {
 	}
 }
 
-// "->" "F" "(" value = Named ( referencedContainer = [ Container ] ) ?
+// "->" "F" "(" value=Named (referencedContainer=[Container])?
 protected class FirstConcrete_0_Group extends GroupToken {
 	
 	public FirstConcrete_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1298,7 +1298,7 @@ protected class FirstConcrete_0_Group extends GroupToken {
 	}
 }
 
-// "->" "F" "(" value = Named
+// "->" "F" "(" value=Named
 protected class FirstConcrete_0_0_Group extends GroupToken {
 	
 	public FirstConcrete_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1420,7 +1420,7 @@ protected class FirstConcrete_0_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-// value = Named
+// value=Named
 protected class FirstConcrete_0_0_1_Assignment_value extends AssignmentToken  {
 	
 	public FirstConcrete_0_0_1_Assignment_value(IInstanceDescription curr, AbstractToken pred) {
@@ -1452,7 +1452,7 @@ protected class FirstConcrete_0_0_1_Assignment_value extends AssignmentToken  {
 }
 
 
-// ( referencedContainer = [ Container ] ) ?
+// (referencedContainer=[Container])?
 protected class FirstConcrete_0_1_Assignment_referencedContainer extends AssignmentToken  {
 	
 	public FirstConcrete_0_1_Assignment_referencedContainer(IInstanceDescription curr, AbstractToken pred) {
@@ -1497,12 +1497,12 @@ protected class FirstConcrete_1_Keyword extends KeywordToken  {
 
 /************ begin Rule SecondConcrete ****************
  *
- * SecondConcrete : "->" "F" "S" "(" value = Named ( referencedChildren += [ Child ] ) ? ")" ;
+ * SecondConcrete:   "->" "F" "S" "(" value=Named (referencedChildren+=[Child])? ")";
  *
  **/
 
 
-// "->" "F" "S" "(" value = Named ( referencedChildren += [ Child ] ) ? ")"
+// "->" "F" "S" "(" value=Named (referencedChildren+=[Child])? ")"
 protected class SecondConcrete_Group extends GroupToken {
 	
 	public SecondConcrete_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1530,7 +1530,7 @@ protected class SecondConcrete_Group extends GroupToken {
 	}
 }
 
-// "->" "F" "S" "(" value = Named ( referencedChildren += [ Child ] ) ?
+// "->" "F" "S" "(" value=Named (referencedChildren+=[Child])?
 protected class SecondConcrete_0_Group extends GroupToken {
 	
 	public SecondConcrete_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1558,7 +1558,7 @@ protected class SecondConcrete_0_Group extends GroupToken {
 	}
 }
 
-// "->" "F" "S" "(" value = Named
+// "->" "F" "S" "(" value=Named
 protected class SecondConcrete_0_0_Group extends GroupToken {
 	
 	public SecondConcrete_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1721,7 +1721,7 @@ protected class SecondConcrete_0_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-// value = Named
+// value=Named
 protected class SecondConcrete_0_0_1_Assignment_value extends AssignmentToken  {
 	
 	public SecondConcrete_0_0_1_Assignment_value(IInstanceDescription curr, AbstractToken pred) {
@@ -1753,7 +1753,7 @@ protected class SecondConcrete_0_0_1_Assignment_value extends AssignmentToken  {
 }
 
 
-// ( referencedChildren += [ Child ] ) ?
+// (referencedChildren+=[Child])?
 protected class SecondConcrete_0_1_Assignment_referencedChildren extends AssignmentToken  {
 	
 	public SecondConcrete_0_1_Assignment_referencedChildren(IInstanceDescription curr, AbstractToken pred) {
@@ -1798,12 +1798,12 @@ protected class SecondConcrete_1_Keyword extends KeywordToken  {
 
 /************ begin Rule Named ****************
  *
- * Named : name = ID ;
+ * Named:   name=ID;
  *
  **/
 
 
-// name = ID
+// name=ID
 protected class Named_Assignment_name extends AssignmentToken  {
 	
 	public Named_Assignment_name(IInstanceDescription curr, AbstractToken pred) {

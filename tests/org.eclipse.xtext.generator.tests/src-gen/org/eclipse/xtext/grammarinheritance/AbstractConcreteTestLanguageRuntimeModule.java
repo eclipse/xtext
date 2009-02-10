@@ -3,10 +3,11 @@ Generated with Xtext
 */
 package org.eclipse.xtext.grammarinheritance;
 
+import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.service.DefaultRuntimeModule;
-import org.eclipse.xtext.service.IServiceScope;
 
 import com.google.inject.Binder;
+import com.google.inject.name.Names;
 
 /**
  * GENERATED! Manual modification goes to ConcreteTestLanguageRuntimeModule
@@ -16,7 +17,8 @@ public abstract class AbstractConcreteTestLanguageRuntimeModule extends DefaultR
 	@Override
 	public void configure(Binder binder) {
 		super.configure(binder);
-		binder.bind(IServiceScope.class).toInstance(org.eclipse.xtext.grammarinheritance.IConcreteTestLanguage.SCOPE);
+		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance(
+				"org.eclipse.xtext.grammarinheritance.ConcreteTestLanguage");
 	}
 	
 	public Class<? extends org.eclipse.xtext.IMetamodelAccess> bindIMetamodelAccess() {
@@ -25,23 +27,8 @@ public abstract class AbstractConcreteTestLanguageRuntimeModule extends DefaultR
 	public Class<? extends org.eclipse.xtext.IGrammarAccess> bindIGrammarAccess() {
 		return org.eclipse.xtext.grammarinheritance.services.ConcreteTestLanguageGrammarAccess.class;
 	}
-	public Class<? extends org.eclipse.xtext.parser.IAstFactory> bindIAstFactory() {
-		return org.eclipse.xtext.parser.DefaultEcoreElementFactory.class;
-	}
-	public Class<? extends org.eclipse.xtext.resource.IResourceFactory> bindIResourceFactory() {
-		return org.eclipse.xtext.grammarinheritance.services.ConcreteTestLanguageResourceFactory.class;
-	}
 	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
 		return org.eclipse.xtext.grammarinheritance.parsetree.reconstr.ConcreteTestLanguageParseTreeConstructor.class;
-	}
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.ITokenSerializer> bindITokenSerializer() {
-		return org.eclipse.xtext.parsetree.reconstr.impl.WhitespacePreservingTokenSerializer.class;
-	}
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.ICrossReferenceSerializer> bindICrossReferenceSerializer() {
-		return org.eclipse.xtext.parsetree.reconstr.impl.SimpleCrossReferenceSerializer.class;
-	}
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.ITransientValueService> bindITransientValueService() {
-		return org.eclipse.xtext.parsetree.reconstr.impl.SimpleTransientValueService.class;
 	}
 	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrParser> bindIAntlrParser() {
 		return org.eclipse.xtext.grammarinheritance.parser.antlr.ConcreteTestLanguageParser.class;

@@ -32,7 +32,7 @@ public class ConcreteTestLanguageParseTreeConstructor extends AbstractParseTreeC
 
 /************ begin Rule RootRule ****************
  *
- * RootRule : ConcreteParserRule ;
+ * RootRule:   ConcreteParserRule;
  *
  **/
 
@@ -60,12 +60,12 @@ protected class RootRule_RuleCall_ConcreteParserRule extends RuleCallToken {
 
 /************ begin Rule ConcreteParserRule ****************
  *
- * ConcreteParserRule : "model" magicNumber = REAL ":" ( elements += InheritedParserRule ) * ;
+ * ConcreteParserRule:   "model" magicNumber=REAL ":" (elements+=InheritedParserRule)*;
  *
  **/
 
 
-// "model" magicNumber = REAL ":" ( elements += InheritedParserRule ) *
+// "model" magicNumber=REAL ":" (elements+=InheritedParserRule)*
 protected class ConcreteParserRule_Group extends GroupToken {
 	
 	public ConcreteParserRule_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -93,7 +93,7 @@ protected class ConcreteParserRule_Group extends GroupToken {
 	}
 }
 
-// "model" magicNumber = REAL ":"
+// "model" magicNumber=REAL ":"
 protected class ConcreteParserRule_0_Group extends GroupToken {
 	
 	public ConcreteParserRule_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -121,7 +121,7 @@ protected class ConcreteParserRule_0_Group extends GroupToken {
 	}
 }
 
-// "model" magicNumber = REAL
+// "model" magicNumber=REAL
 protected class ConcreteParserRule_0_0_Group extends GroupToken {
 	
 	public ConcreteParserRule_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -161,7 +161,7 @@ protected class ConcreteParserRule_0_0_0_Keyword_model extends KeywordToken  {
 	}	
 }
 
-// magicNumber = REAL
+// magicNumber=REAL
 protected class ConcreteParserRule_0_0_1_Assignment_magicNumber extends AssignmentToken  {
 	
 	public ConcreteParserRule_0_0_1_Assignment_magicNumber(IInstanceDescription curr, AbstractToken pred) {
@@ -198,7 +198,7 @@ protected class ConcreteParserRule_0_1_Keyword extends KeywordToken  {
 }
 
 
-// ( elements += InheritedParserRule ) *
+// (elements+=InheritedParserRule)*
 protected class ConcreteParserRule_1_Assignment_elements extends AssignmentToken  {
 	
 	public ConcreteParserRule_1_Assignment_elements(IInstanceDescription curr, AbstractToken pred) {
@@ -235,12 +235,12 @@ protected class ConcreteParserRule_1_Assignment_elements extends AssignmentToken
 
 /************ begin Rule InheritedParserRule ****************
  *
- * InheritedParserRule returns AType : "element" name = ID ;
+ * InheritedParserRule returns AType:   "element" name=ID;
  *
  **/
 
 
-// "element" name = ID
+// "element" name=ID
 protected class InheritedParserRule_Group extends GroupToken {
 	
 	public InheritedParserRule_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -280,7 +280,7 @@ protected class InheritedParserRule_0_Keyword_element extends KeywordToken  {
 	}	
 }
 
-// name = ID
+// name=ID
 protected class InheritedParserRule_1_Assignment_name extends AssignmentToken  {
 	
 	public InheritedParserRule_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -309,12 +309,12 @@ protected class InheritedParserRule_1_Assignment_name extends AssignmentToken  {
 
 /************ begin Rule AbstractCallOverridenParserRule ****************
  *
- * AbstractCallOverridenParserRule returns AModel : "overridemodel" ( elements += OverridableParserRule ) * ;
+ * AbstractCallOverridenParserRule returns AModel:   "overridemodel" (elements+=OverridableParserRule)*;
  *
  **/
 
 
-// "overridemodel" ( elements += OverridableParserRule ) *
+// "overridemodel" (elements+=OverridableParserRule)*
 protected class AbstractCallOverridenParserRule_Group extends GroupToken {
 	
 	public AbstractCallOverridenParserRule_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -354,7 +354,7 @@ protected class AbstractCallOverridenParserRule_0_Keyword_overridemodel extends 
 	}	
 }
 
-// ( elements += OverridableParserRule ) *
+// (elements+=OverridableParserRule)*
 protected class AbstractCallOverridenParserRule_1_Assignment_elements extends AssignmentToken  {
 	
 	public AbstractCallOverridenParserRule_1_Assignment_elements(IInstanceDescription curr, AbstractToken pred) {
@@ -391,12 +391,12 @@ protected class AbstractCallOverridenParserRule_1_Assignment_elements extends As
 
 /************ begin Rule OverridableParserRule ****************
  *
- * OverridableParserRule returns AType : "element" name = ID ;
+ * OverridableParserRule returns AType:   "element" name=ID;
  *
  **/
 
 
-// "element" name = ID
+// "element" name=ID
 protected class OverridableParserRule_Group extends GroupToken {
 	
 	public OverridableParserRule_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -436,7 +436,7 @@ protected class OverridableParserRule_0_Keyword_element extends KeywordToken  {
 	}	
 }
 
-// name = ID
+// name=ID
 protected class OverridableParserRule_1_Assignment_name extends AssignmentToken  {
 	
 	public OverridableParserRule_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -465,12 +465,12 @@ protected class OverridableParserRule_1_Assignment_name extends AssignmentToken 
 
 /************ begin Rule AbstractCallExtendedParserRule ****************
  *
- * AbstractCallExtendedParserRule returns AModel : "extendedmodel" ( elements += ExtendableParserRule ) * ;
+ * AbstractCallExtendedParserRule returns AModel:   "extendedmodel" (elements+=ExtendableParserRule)*;
  *
  **/
 
 
-// "extendedmodel" ( elements += ExtendableParserRule ) *
+// "extendedmodel" (elements+=ExtendableParserRule)*
 protected class AbstractCallExtendedParserRule_Group extends GroupToken {
 	
 	public AbstractCallExtendedParserRule_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -510,7 +510,7 @@ protected class AbstractCallExtendedParserRule_0_Keyword_extendedmodel extends K
 	}	
 }
 
-// ( elements += ExtendableParserRule ) *
+// (elements+=ExtendableParserRule)*
 protected class AbstractCallExtendedParserRule_1_Assignment_elements extends AssignmentToken  {
 	
 	public AbstractCallExtendedParserRule_1_Assignment_elements(IInstanceDescription curr, AbstractToken pred) {
@@ -547,12 +547,12 @@ protected class AbstractCallExtendedParserRule_1_Assignment_elements extends Ass
 
 /************ begin Rule ExtendableParserRule ****************
  *
- * ExtendableParserRule returns AType : "element" name = ID ;
+ * ExtendableParserRule returns AType:   "element" name=ID;
  *
  **/
 
 
-// "element" name = ID
+// "element" name=ID
 protected class ExtendableParserRule_Group extends GroupToken {
 	
 	public ExtendableParserRule_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -592,7 +592,7 @@ protected class ExtendableParserRule_0_Keyword_element extends KeywordToken  {
 	}	
 }
 
-// name = ID
+// name=ID
 protected class ExtendableParserRule_1_Assignment_name extends AssignmentToken  {
 	
 	public ExtendableParserRule_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {

@@ -26,12 +26,12 @@ public class TreeTestLanguageParseTreeConstructor extends AbstractParseTreeConst
 
 /************ begin Rule Model ****************
  *
- * Model : ( children += Node ) * ;
+ * Model:   (children+=Node)*;
  *
  **/
 
 
-// ( children += Node ) *
+// (children+=Node)*
 protected class Model_Assignment_children extends AssignmentToken  {
 	
 	public Model_Assignment_children(IInstanceDescription curr, AbstractToken pred) {
@@ -67,12 +67,12 @@ protected class Model_Assignment_children extends AssignmentToken  {
 
 /************ begin Rule Node ****************
  *
- * Node : name = ID "(" attrib = STRING ")" "{" ( children += Node ) * "};" ;
+ * Node:   name=ID "(" attrib=STRING ")" "{" (children+=Node)* "};";
  *
  **/
 
 
-// name = ID "(" attrib = STRING ")" "{" ( children += Node ) * "};"
+// name=ID "(" attrib=STRING ")" "{" (children+=Node)* "};"
 protected class Node_Group extends GroupToken {
 	
 	public Node_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -100,7 +100,7 @@ protected class Node_Group extends GroupToken {
 	}
 }
 
-// name = ID "(" attrib = STRING ")" "{" ( children += Node ) *
+// name=ID "(" attrib=STRING ")" "{" (children+=Node)*
 protected class Node_0_Group extends GroupToken {
 	
 	public Node_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -128,7 +128,7 @@ protected class Node_0_Group extends GroupToken {
 	}
 }
 
-// name = ID "(" attrib = STRING ")" "{"
+// name=ID "(" attrib=STRING ")" "{"
 protected class Node_0_0_Group extends GroupToken {
 	
 	public Node_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -156,7 +156,7 @@ protected class Node_0_0_Group extends GroupToken {
 	}
 }
 
-// name = ID "(" attrib = STRING ")"
+// name=ID "(" attrib=STRING ")"
 protected class Node_0_0_0_Group extends GroupToken {
 	
 	public Node_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -184,7 +184,7 @@ protected class Node_0_0_0_Group extends GroupToken {
 	}
 }
 
-// name = ID "(" attrib = STRING
+// name=ID "(" attrib=STRING
 protected class Node_0_0_0_0_Group extends GroupToken {
 	
 	public Node_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -212,7 +212,7 @@ protected class Node_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// name = ID "("
+// name=ID "("
 protected class Node_0_0_0_0_0_Group extends GroupToken {
 	
 	public Node_0_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -240,7 +240,7 @@ protected class Node_0_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// name = ID
+// name=ID
 protected class Node_0_0_0_0_0_0_Assignment_name extends AssignmentToken  {
 	
 	public Node_0_0_0_0_0_0_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -276,7 +276,7 @@ protected class Node_0_0_0_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-// attrib = STRING
+// attrib=STRING
 protected class Node_0_0_0_0_1_Assignment_attrib extends AssignmentToken  {
 	
 	public Node_0_0_0_0_1_Assignment_attrib(IInstanceDescription curr, AbstractToken pred) {
@@ -326,7 +326,7 @@ protected class Node_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-// ( children += Node ) *
+// (children+=Node)*
 protected class Node_0_1_Assignment_children extends AssignmentToken  {
 	
 	public Node_0_1_Assignment_children(IInstanceDescription curr, AbstractToken pred) {

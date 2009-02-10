@@ -10,6 +10,7 @@ package org.eclipse.xtext.parser.epatch;
 import java.io.IOException;
 import java.util.Iterator;
 
+import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.parser.AbstractPackratAntlrComparingTest;
 import org.eclipse.xtext.parser.epatch.parser.packrat.EpatchTestLanguagePackratParser;
 import org.eclipse.xtext.util.CollectionUtils;
@@ -80,7 +81,7 @@ public class EpatchComparingTest extends AbstractPackratAntlrComparingTest {
 	}
 
 	@Override
-	protected Class<?> getStandaloneSetupClass() {
+	protected Class<? extends ISetup> getStandaloneSetupClass() {
 		return EpatchTestLanguageStandaloneSetup.class;
 	}
 

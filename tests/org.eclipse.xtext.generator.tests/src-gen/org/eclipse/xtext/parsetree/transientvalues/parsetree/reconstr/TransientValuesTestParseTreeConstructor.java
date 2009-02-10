@@ -28,12 +28,12 @@ public class TransientValuesTestParseTreeConstructor extends AbstractParseTreeCo
 
 /************ begin Rule Root ****************
  *
- * Root : "test" ( TestRequired | TestOptional | TestList ) ;
+ * Root:   "test" (TestRequired|TestOptional|TestList);
  *
  **/
 
 
-// "test" ( TestRequired | TestOptional | TestList )
+// "test" (TestRequired|TestOptional|TestList)
 protected class Root_Group extends GroupToken {
 	
 	public Root_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -73,7 +73,7 @@ protected class Root_0_Keyword_test extends KeywordToken  {
 	}	
 }
 
-// TestRequired | TestOptional | TestList
+// TestRequired|TestOptional|TestList
 protected class Root_1_Alternatives extends AlternativesToken {
 
 	public Root_1_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -94,7 +94,7 @@ protected class Root_1_Alternatives extends AlternativesToken {
 	}
 }
 
-// TestRequired | TestOptional
+// TestRequired|TestOptional
 protected class Root_1_0_Alternatives extends AlternativesToken {
 
 	public Root_1_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -177,12 +177,12 @@ protected class Root_1_1_RuleCall_TestList extends RuleCallToken {
 
 /************ begin Rule TestRequired ****************
  *
- * TestRequired : "required" required1 = INT required2 = INT ;
+ * TestRequired:   "required" required1=INT required2=INT;
  *
  **/
 
 
-// "required" required1 = INT required2 = INT
+// "required" required1=INT required2=INT
 protected class TestRequired_Group extends GroupToken {
 	
 	public TestRequired_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -210,7 +210,7 @@ protected class TestRequired_Group extends GroupToken {
 	}
 }
 
-// "required" required1 = INT
+// "required" required1=INT
 protected class TestRequired_0_Group extends GroupToken {
 	
 	public TestRequired_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -250,7 +250,7 @@ protected class TestRequired_0_0_Keyword_required extends KeywordToken  {
 	}	
 }
 
-// required1 = INT
+// required1=INT
 protected class TestRequired_0_1_Assignment_required1 extends AssignmentToken  {
 	
 	public TestRequired_0_1_Assignment_required1(IInstanceDescription curr, AbstractToken pred) {
@@ -274,7 +274,7 @@ protected class TestRequired_0_1_Assignment_required1 extends AssignmentToken  {
 }
 
 
-// required2 = INT
+// required2=INT
 protected class TestRequired_1_Assignment_required2 extends AssignmentToken  {
 	
 	public TestRequired_1_Assignment_required2(IInstanceDescription curr, AbstractToken pred) {
@@ -303,12 +303,12 @@ protected class TestRequired_1_Assignment_required2 extends AssignmentToken  {
 
 /************ begin Rule TestOptional ****************
  *
- * TestOptional : "optional" ( opt1 = INT ) ? ( ":" opt2 = INT ) ? ;
+ * TestOptional:   "optional" (opt1=INT)? (":" opt2=INT)?;
  *
  **/
 
 
-// "optional" ( opt1 = INT ) ? ( ":" opt2 = INT ) ?
+// "optional" (opt1=INT)? (":" opt2=INT)?
 protected class TestOptional_Group extends GroupToken {
 	
 	public TestOptional_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -336,7 +336,7 @@ protected class TestOptional_Group extends GroupToken {
 	}
 }
 
-// "optional" ( opt1 = INT ) ?
+// "optional" (opt1=INT)?
 protected class TestOptional_0_Group extends GroupToken {
 	
 	public TestOptional_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -376,7 +376,7 @@ protected class TestOptional_0_0_Keyword_optional extends KeywordToken  {
 	}	
 }
 
-// ( opt1 = INT ) ?
+// (opt1=INT)?
 protected class TestOptional_0_1_Assignment_opt1 extends AssignmentToken  {
 	
 	public TestOptional_0_1_Assignment_opt1(IInstanceDescription curr, AbstractToken pred) {
@@ -400,7 +400,7 @@ protected class TestOptional_0_1_Assignment_opt1 extends AssignmentToken  {
 }
 
 
-// ( ":" opt2 = INT ) ?
+// (":" opt2=INT)?
 protected class TestOptional_1_Group extends GroupToken {
 	
 	public TestOptional_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -440,7 +440,7 @@ protected class TestOptional_1_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// opt2 = INT
+// opt2=INT
 protected class TestOptional_1_1_Assignment_opt2 extends AssignmentToken  {
 	
 	public TestOptional_1_1_Assignment_opt2(IInstanceDescription curr, AbstractToken pred) {
@@ -470,12 +470,12 @@ protected class TestOptional_1_1_Assignment_opt2 extends AssignmentToken  {
 
 /************ begin Rule TestList ****************
  *
- * TestList : "list" ( item += INT ) * ;
+ * TestList:   "list" (item+=INT)*;
  *
  **/
 
 
-// "list" ( item += INT ) *
+// "list" (item+=INT)*
 protected class TestList_Group extends GroupToken {
 	
 	public TestList_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -515,7 +515,7 @@ protected class TestList_0_Keyword_list extends KeywordToken  {
 	}	
 }
 
-// ( item += INT ) *
+// (item+=INT)*
 protected class TestList_1_Assignment_item extends AssignmentToken  {
 	
 	public TestList_1_Assignment_item(IInstanceDescription curr, AbstractToken pred) {

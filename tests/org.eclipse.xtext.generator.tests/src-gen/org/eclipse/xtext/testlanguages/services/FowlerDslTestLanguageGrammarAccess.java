@@ -29,31 +29,31 @@ public class FowlerDslTestLanguageGrammarAccess extends BaseEPackageAccess imple
 		private final Assignment c1AssignmentStates = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall c10ParserRuleCallState = (RuleCall)c1AssignmentStates.eContents().get(0);
 		
-		// Statemachine : "events" ( events += Event ) * "end" "commands" ( commands += Command ) * "end" ( states += State ) * ;
+		// Statemachine:   "events" (events+=Event)* "end" "commands" (commands+=Command)* "end" (states+=State)*;
 		public ParserRule getRule() { return rule; }
 
-		// "events" ( events += Event ) * "end" "commands" ( commands += Command ) * "end" ( states += State ) *
+		// "events" (events+=Event)* "end" "commands" (commands+=Command)* "end" (states+=State)*
 		public Group eleGroup() { return cGroup; }
 
-		// "events" ( events += Event ) * "end" "commands" ( commands += Command ) * "end"
+		// "events" (events+=Event)* "end" "commands" (commands+=Command)* "end"
 		public Group ele0Group() { return c0Group; }
 
-		// "events" ( events += Event ) * "end" "commands" ( commands += Command ) *
+		// "events" (events+=Event)* "end" "commands" (commands+=Command)*
 		public Group ele00Group() { return c00Group; }
 
-		// "events" ( events += Event ) * "end" "commands"
+		// "events" (events+=Event)* "end" "commands"
 		public Group ele000Group() { return c000Group; }
 
-		// "events" ( events += Event ) * "end"
+		// "events" (events+=Event)* "end"
 		public Group ele0000Group() { return c0000Group; }
 
-		// "events" ( events += Event ) *
+		// "events" (events+=Event)*
 		public Group ele00000Group() { return c00000Group; }
 
 		// "events"
 		public Keyword ele000000KeywordEvents() { return c000000KeywordEvents; }
 
-		// ( events += Event ) *
+		// (events+=Event)*
 		public Assignment ele000001AssignmentEvents() { return c000001AssignmentEvents; }
 
 		// Event
@@ -65,7 +65,7 @@ public class FowlerDslTestLanguageGrammarAccess extends BaseEPackageAccess imple
 		// "commands"
 		public Keyword ele0001KeywordCommands() { return c0001KeywordCommands; }
 
-		// ( commands += Command ) *
+		// (commands+=Command)*
 		public Assignment ele001AssignmentCommands() { return c001AssignmentCommands; }
 
 		// Command
@@ -74,7 +74,7 @@ public class FowlerDslTestLanguageGrammarAccess extends BaseEPackageAccess imple
 		// "end"
 		public Keyword ele01KeywordEnd() { return c01KeywordEnd; }
 
-		// ( states += State ) *
+		// (states+=State)*
 		public Assignment ele1AssignmentStates() { return c1AssignmentStates; }
 
 		// State
@@ -92,28 +92,28 @@ public class FowlerDslTestLanguageGrammarAccess extends BaseEPackageAccess imple
 		private final Assignment c1AssignmentCode = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall c10LexerRuleCallID = (RuleCall)c1AssignmentCode.eContents().get(0);
 		
-		// Event : ( resetting ?= "resetting" ) ? name = ID code = ID ;
+		// Event:   (resetting?="resetting")? name=ID code=ID;
 		public ParserRule getRule() { return rule; }
 
-		// ( resetting ?= "resetting" ) ? name = ID code = ID
+		// (resetting?="resetting")? name=ID code=ID
 		public Group eleGroup() { return cGroup; }
 
-		// ( resetting ?= "resetting" ) ? name = ID
+		// (resetting?="resetting")? name=ID
 		public Group ele0Group() { return c0Group; }
 
-		// ( resetting ?= "resetting" ) ?
+		// (resetting?="resetting")?
 		public Assignment ele00AssignmentResetting() { return c00AssignmentResetting; }
 
 		// "resetting"
 		public Keyword ele000KeywordResetting() { return c000KeywordResetting; }
 
-		// name = ID
+		// name=ID
 		public Assignment ele01AssignmentName() { return c01AssignmentName; }
 
 		// ID
 		public RuleCall ele010LexerRuleCallID() { return c010LexerRuleCallID; }
 
-		// code = ID
+		// code=ID
 		public Assignment ele1AssignmentCode() { return c1AssignmentCode; }
 
 		// ID
@@ -128,19 +128,19 @@ public class FowlerDslTestLanguageGrammarAccess extends BaseEPackageAccess imple
 		private final Assignment c1AssignmentCode = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall c10LexerRuleCallID = (RuleCall)c1AssignmentCode.eContents().get(0);
 		
-		// Command : name = ID code = ID ;
+		// Command:   name=ID code=ID;
 		public ParserRule getRule() { return rule; }
 
-		// name = ID code = ID
+		// name=ID code=ID
 		public Group eleGroup() { return cGroup; }
 
-		// name = ID
+		// name=ID
 		public Assignment ele0AssignmentName() { return c0AssignmentName; }
 
 		// ID
 		public RuleCall ele00LexerRuleCallID() { return c00LexerRuleCallID; }
 
-		// code = ID
+		// code=ID
 		public Assignment ele1AssignmentCode() { return c1AssignmentCode; }
 
 		// ID
@@ -168,34 +168,34 @@ public class FowlerDslTestLanguageGrammarAccess extends BaseEPackageAccess imple
 		private final RuleCall c010ParserRuleCallTransition = (RuleCall)c01AssignmentTransitions.eContents().get(0);
 		private final Keyword c1KeywordEnd = (Keyword)cGroup.eContents().get(1);
 		
-		// State : "state" name = ID ( "actions" "{" ( actions += [ Command ] ) + "}" ) ? ( transitions += Transition ) * "end" ;
+		// State:   "state" name=ID ("actions" "{" (actions+=[Command])+ "}")? (transitions+=Transition)* "end";
 		public ParserRule getRule() { return rule; }
 
-		// "state" name = ID ( "actions" "{" ( actions += [ Command ] ) + "}" ) ? ( transitions += Transition ) * "end"
+		// "state" name=ID ("actions" "{" (actions+=[Command])+ "}")? (transitions+=Transition)* "end"
 		public Group eleGroup() { return cGroup; }
 
-		// "state" name = ID ( "actions" "{" ( actions += [ Command ] ) + "}" ) ? ( transitions += Transition ) *
+		// "state" name=ID ("actions" "{" (actions+=[Command])+ "}")? (transitions+=Transition)*
 		public Group ele0Group() { return c0Group; }
 
-		// "state" name = ID ( "actions" "{" ( actions += [ Command ] ) + "}" ) ?
+		// "state" name=ID ("actions" "{" (actions+=[Command])+ "}")?
 		public Group ele00Group() { return c00Group; }
 
-		// "state" name = ID
+		// "state" name=ID
 		public Group ele000Group() { return c000Group; }
 
 		// "state"
 		public Keyword ele0000KeywordState() { return c0000KeywordState; }
 
-		// name = ID
+		// name=ID
 		public Assignment ele0001AssignmentName() { return c0001AssignmentName; }
 
 		// ID
 		public RuleCall ele00010LexerRuleCallID() { return c00010LexerRuleCallID; }
 
-		// ( "actions" "{" ( actions += [ Command ] ) + "}" ) ?
+		// ("actions" "{" (actions+=[Command])+ "}")?
 		public Group ele001Group() { return c001Group; }
 
-		// "actions" "{" ( actions += [ Command ] ) +
+		// "actions" "{" (actions+=[Command])+
 		public Group ele0010Group() { return c0010Group; }
 
 		// "actions" "{"
@@ -207,16 +207,16 @@ public class FowlerDslTestLanguageGrammarAccess extends BaseEPackageAccess imple
 		// "{"
 		public Keyword ele001001KeywordLeftCurlyBracket() { return c001001KeywordLeftCurlyBracket; }
 
-		// ( actions += [ Command ] ) +
+		// (actions+=[Command])+
 		public Assignment ele00101AssignmentActions() { return c00101AssignmentActions; }
 
-		// [ Command ]
+		// [Command]
 		public CrossReference ele001010CrossReferenceEStringCommand() { return c001010CrossReferenceEStringCommand; }
 
 		// "}"
 		public Keyword ele0011KeywordRightCurlyBracket() { return c0011KeywordRightCurlyBracket; }
 
-		// ( transitions += Transition ) *
+		// (transitions+=Transition)*
 		public Assignment ele01AssignmentTransitions() { return c01AssignmentTransitions; }
 
 		// Transition
@@ -236,28 +236,28 @@ public class FowlerDslTestLanguageGrammarAccess extends BaseEPackageAccess imple
 		private final Assignment c1AssignmentState = (Assignment)cGroup.eContents().get(1);
 		private final CrossReference c10CrossReferenceEStringState = (CrossReference)c1AssignmentState.eContents().get(0);
 		
-		// Transition : event = [ Event ] "=>" state = [ State ] ;
+		// Transition:   event=[Event] "=>" state=[State];
 		public ParserRule getRule() { return rule; }
 
-		// event = [ Event ] "=>" state = [ State ]
+		// event=[Event] "=>" state=[State]
 		public Group eleGroup() { return cGroup; }
 
-		// event = [ Event ] "=>"
+		// event=[Event] "=>"
 		public Group ele0Group() { return c0Group; }
 
-		// event = [ Event ]
+		// event=[Event]
 		public Assignment ele00AssignmentEvent() { return c00AssignmentEvent; }
 
-		// [ Event ]
+		// [Event]
 		public CrossReference ele000CrossReferenceEStringEvent() { return c000CrossReferenceEStringEvent; }
 
 		// "=>"
 		public Keyword ele01KeywordEqualsSignGreaterThanSign() { return c01KeywordEqualsSignGreaterThanSign; }
 
-		// state = [ State ]
+		// state=[State]
 		public Assignment ele1AssignmentState() { return c1AssignmentState; }
 
-		// [ State ]
+		// [State]
 		public CrossReference ele10CrossReferenceEStringState() { return c10CrossReferenceEStringState; }
 	}
 	
@@ -286,27 +286,27 @@ public class FowlerDslTestLanguageGrammarAccess extends BaseEPackageAccess imple
 	}
 
 	
-	// Statemachine : "events" ( events += Event ) * "end" "commands" ( commands += Command ) * "end" ( states += State ) * ;
+	// Statemachine:   "events" (events+=Event)* "end" "commands" (commands+=Command)* "end" (states+=State)*;
 	public StatemachineElements prStatemachine() {
 		return (pStatemachine != null) ? pStatemachine : (pStatemachine = new StatemachineElements());
 	} 
 
-	// Event : ( resetting ?= "resetting" ) ? name = ID code = ID ;
+	// Event:   (resetting?="resetting")? name=ID code=ID;
 	public EventElements prEvent() {
 		return (pEvent != null) ? pEvent : (pEvent = new EventElements());
 	} 
 
-	// Command : name = ID code = ID ;
+	// Command:   name=ID code=ID;
 	public CommandElements prCommand() {
 		return (pCommand != null) ? pCommand : (pCommand = new CommandElements());
 	} 
 
-	// State : "state" name = ID ( "actions" "{" ( actions += [ Command ] ) + "}" ) ? ( transitions += Transition ) * "end" ;
+	// State:   "state" name=ID ("actions" "{" (actions+=[Command])+ "}")? (transitions+=Transition)* "end";
 	public StateElements prState() {
 		return (pState != null) ? pState : (pState = new StateElements());
 	} 
 
-	// Transition : event = [ Event ] "=>" state = [ State ] ;
+	// Transition:   event=[Event] "=>" state=[State];
 	public TransitionElements prTransition() {
 		return (pTransition != null) ? pTransition : (pTransition = new TransitionElements());
 	} 

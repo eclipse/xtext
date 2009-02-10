@@ -15,10 +15,10 @@ public class OptionalEmptyTestLanguageGrammarAccess extends BaseEPackageAccess i
 		private final Assignment cAssignmentChild = (Assignment)rule.eContents().get(1);
 		private final RuleCall c0ParserRuleCallGreeting = (RuleCall)cAssignmentChild.eContents().get(0);
 		
-		// Model : ( child = Greeting ) ? ;
+		// Model:   (child=Greeting)?;
 		public ParserRule getRule() { return rule; }
 
-		// ( child = Greeting ) ?
+		// (child=Greeting)?
 		public Assignment eleAssignmentChild() { return cAssignmentChild; }
 
 		// Greeting
@@ -32,16 +32,16 @@ public class OptionalEmptyTestLanguageGrammarAccess extends BaseEPackageAccess i
 		private final Assignment c1AssignmentName = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall c10LexerRuleCallID = (RuleCall)c1AssignmentName.eContents().get(0);
 		
-		// Greeting : "hallo" name = ID ;
+		// Greeting:   "hallo" name=ID;
 		public ParserRule getRule() { return rule; }
 
-		// "hallo" name = ID
+		// "hallo" name=ID
 		public Group eleGroup() { return cGroup; }
 
 		// "hallo"
 		public Keyword ele0KeywordHallo() { return c0KeywordHallo; }
 
-		// name = ID
+		// name=ID
 		public Assignment ele1AssignmentName() { return c1AssignmentName; }
 
 		// ID
@@ -70,12 +70,12 @@ public class OptionalEmptyTestLanguageGrammarAccess extends BaseEPackageAccess i
 	}
 
 	
-	// Model : ( child = Greeting ) ? ;
+	// Model:   (child=Greeting)?;
 	public ModelElements prModel() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	} 
 
-	// Greeting : "hallo" name = ID ;
+	// Greeting:   "hallo" name=ID;
 	public GreetingElements prGreeting() {
 		return (pGreeting != null) ? pGreeting : (pGreeting = new GreetingElements());
 	} 

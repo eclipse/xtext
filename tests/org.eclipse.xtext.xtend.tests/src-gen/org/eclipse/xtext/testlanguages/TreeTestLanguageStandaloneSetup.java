@@ -5,55 +5,58 @@ package org.eclipse.xtext.testlanguages;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.ISetup;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.IResourceFactory;
-import org.eclipse.xtext.service.IServiceScope;
-import org.eclipse.xtext.service.ServiceRegistry;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
-import org.eclipse.xtext.testlanguages.ITreeTestLanguage;
+public class TreeTestLanguageStandaloneSetup implements ISetup {
 
-public abstract class TreeTestLanguageStandaloneSetup {
+	public static void doSetup() {
+		new TreeTestLanguageStandaloneSetup().createInjectorAndDoEMFRegistration();
+	}
 
-	private static boolean isInitialized = false;
-
-	public synchronized static void doSetup() {
-		if(!isInitialized) {
+	public Injector createInjectorAndDoEMFRegistration() {
+			
+			new org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup().doSetup();
+			
+		    registerEPackages();
 		    
-		    Injector injector = Guice.createInjector(new org.eclipse.xtext.testlanguages.TreeTestLanguageRuntimeModule());
-			ServiceRegistry.registerInjector(org.eclipse.xtext.testlanguages.ITreeTestLanguage.SCOPE, injector);
-			
-			
-			
-			org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
-			
-			
-			// register resource factory to EMF
-			IResourceFactory resourceFactory = new org.eclipse.xtext.testlanguages.services.TreeTestLanguageResourceFactory();
-			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("treetestlanguage", resourceFactory);
-			
-			
-			// initialize EPackages
-			
-				if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/2008/tmf/xtext/TreeTestLanguage")) {
-					EPackage TreeTestLanguage = EcoreUtil2.loadEPackage(
-							"classpath:/org/eclipse/xtext/testlanguages/TreeTestLanguage.ecore",
-							TreeTestLanguageStandaloneSetup.class.getClassLoader());
-					if (TreeTestLanguage == null)
-						throw new IllegalStateException(
-								"Couldn't load EPackage from 'classpath:/org/eclipse/xtext/testlanguages/TreeTestLanguage.ecore'");
-					EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2008/tmf/xtext/TreeTestLanguage", TreeTestLanguage);
-				}
-			
-			isInitialized = true;
-		}
+		    Injector injector = createInjector();
+		    IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
+		    registerResourceFactory(resourceFactory);
+		    return injector;
+		    
 	}
 	
-	public static IServiceScope getServiceScope() {
-	   doSetup();
-	   return org.eclipse.xtext.testlanguages.ITreeTestLanguage.SCOPE;
+    
+	public Injector createInjector() {
+		return Guice.createInjector(new org.eclipse.xtext.testlanguages.TreeTestLanguageRuntimeModule());
+	}
+	
+	public void registerResourceFactory(IResourceFactory resourceFactory) {
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("treetestlanguage", resourceFactory);
+		
+	}
+    
+
+	/**
+	 * initializes all EPackages generated for this language and registers them at EPackage.Registry.INSTANCE
+	 */	
+	public void registerEPackages() {
+		
+			if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/2008/tmf/xtext/TreeTestLanguage")) {
+				EPackage TreeTestLanguage = EcoreUtil2.loadEPackage(
+						"classpath:/org/eclipse/xtext/testlanguages/TreeTestLanguage.ecore",
+						TreeTestLanguageStandaloneSetup.class.getClassLoader());
+				if (TreeTestLanguage == null)
+					throw new IllegalStateException(
+							"Couldn't load EPackage from 'classpath:/org/eclipse/xtext/testlanguages/TreeTestLanguage.ecore'");
+				EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2008/tmf/xtext/TreeTestLanguage", TreeTestLanguage);
+			}
+		
 	}
 	
 }

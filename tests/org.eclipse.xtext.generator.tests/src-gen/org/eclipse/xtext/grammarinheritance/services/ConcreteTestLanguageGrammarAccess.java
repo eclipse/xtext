@@ -14,7 +14,7 @@ public class ConcreteTestLanguageGrammarAccess extends BaseEPackageAccess implem
 		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(1);
 		private final RuleCall cParserRuleCallConcreteParserRule = (RuleCall)rule.eContents().get(1);
 		
-		// RootRule : ConcreteParserRule ;
+		// RootRule:   ConcreteParserRule;
 		public ParserRule getRule() { return rule; }
 
 		// ConcreteParserRule
@@ -33,22 +33,22 @@ public class ConcreteTestLanguageGrammarAccess extends BaseEPackageAccess implem
 		private final Assignment c1AssignmentElements = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall c10ParserRuleCallInheritedParserRule = (RuleCall)c1AssignmentElements.eContents().get(0);
 		
-		// ConcreteParserRule : "model" magicNumber = REAL ":" ( elements += InheritedParserRule ) * ;
+		// ConcreteParserRule:   "model" magicNumber=REAL ":" (elements+=InheritedParserRule)*;
 		public ParserRule getRule() { return rule; }
 
-		// "model" magicNumber = REAL ":" ( elements += InheritedParserRule ) *
+		// "model" magicNumber=REAL ":" (elements+=InheritedParserRule)*
 		public Group eleGroup() { return cGroup; }
 
-		// "model" magicNumber = REAL ":"
+		// "model" magicNumber=REAL ":"
 		public Group ele0Group() { return c0Group; }
 
-		// "model" magicNumber = REAL
+		// "model" magicNumber=REAL
 		public Group ele00Group() { return c00Group; }
 
 		// "model"
 		public Keyword ele000KeywordModel() { return c000KeywordModel; }
 
-		// magicNumber = REAL
+		// magicNumber=REAL
 		public Assignment ele001AssignmentMagicNumber() { return c001AssignmentMagicNumber; }
 
 		// REAL
@@ -57,7 +57,7 @@ public class ConcreteTestLanguageGrammarAccess extends BaseEPackageAccess implem
 		// ":"
 		public Keyword ele01KeywordColon() { return c01KeywordColon; }
 
-		// ( elements += InheritedParserRule ) *
+		// (elements+=InheritedParserRule)*
 		public Assignment ele1AssignmentElements() { return c1AssignmentElements; }
 
 		// InheritedParserRule
@@ -86,12 +86,12 @@ public class ConcreteTestLanguageGrammarAccess extends BaseEPackageAccess implem
 	}
 
 	
-	// RootRule : ConcreteParserRule ;
+	// RootRule:   ConcreteParserRule;
 	public RootRuleElements prRootRule() {
 		return (pRootRule != null) ? pRootRule : (pRootRule = new RootRuleElements());
 	} 
 
-	// ConcreteParserRule : "model" magicNumber = REAL ":" ( elements += InheritedParserRule ) * ;
+	// ConcreteParserRule:   "model" magicNumber=REAL ":" (elements+=InheritedParserRule)*;
 	public ConcreteParserRuleElements prConcreteParserRule() {
 		return (pConcreteParserRule != null) ? pConcreteParserRule : (pConcreteParserRule = new ConcreteParserRuleElements());
 	} 

@@ -49,12 +49,12 @@ public class EpatchTestLanguageParseTreeConstructor extends AbstractParseTreeCon
 
 /************ begin Rule EPatch ****************
  *
- * EPatch : "epatch" name = ID "{" ( imports += Import ) * ( resources += NamedResource ) * ( objects += ObjectRef ) * "}" ;
+ * EPatch:   "epatch" name=ID "{" (imports+=Import)* (resources+=NamedResource)* (objects+=ObjectRef)* "}";
  *
  **/
 
 
-// "epatch" name = ID "{" ( imports += Import ) * ( resources += NamedResource ) * ( objects += ObjectRef ) * "}"
+// "epatch" name=ID "{" (imports+=Import)* (resources+=NamedResource)* (objects+=ObjectRef)* "}"
 protected class EPatch_Group extends GroupToken {
 	
 	public EPatch_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -82,7 +82,7 @@ protected class EPatch_Group extends GroupToken {
 	}
 }
 
-// "epatch" name = ID "{" ( imports += Import ) * ( resources += NamedResource ) * ( objects += ObjectRef ) *
+// "epatch" name=ID "{" (imports+=Import)* (resources+=NamedResource)* (objects+=ObjectRef)*
 protected class EPatch_0_Group extends GroupToken {
 	
 	public EPatch_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -110,7 +110,7 @@ protected class EPatch_0_Group extends GroupToken {
 	}
 }
 
-// "epatch" name = ID "{" ( imports += Import ) * ( resources += NamedResource ) *
+// "epatch" name=ID "{" (imports+=Import)* (resources+=NamedResource)*
 protected class EPatch_0_0_Group extends GroupToken {
 	
 	public EPatch_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -138,7 +138,7 @@ protected class EPatch_0_0_Group extends GroupToken {
 	}
 }
 
-// "epatch" name = ID "{" ( imports += Import ) *
+// "epatch" name=ID "{" (imports+=Import)*
 protected class EPatch_0_0_0_Group extends GroupToken {
 	
 	public EPatch_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -166,7 +166,7 @@ protected class EPatch_0_0_0_Group extends GroupToken {
 	}
 }
 
-// "epatch" name = ID "{"
+// "epatch" name=ID "{"
 protected class EPatch_0_0_0_0_Group extends GroupToken {
 	
 	public EPatch_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -194,7 +194,7 @@ protected class EPatch_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// "epatch" name = ID
+// "epatch" name=ID
 protected class EPatch_0_0_0_0_0_Group extends GroupToken {
 	
 	public EPatch_0_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -234,7 +234,7 @@ protected class EPatch_0_0_0_0_0_0_Keyword_epatch extends KeywordToken  {
 	}	
 }
 
-// name = ID
+// name=ID
 protected class EPatch_0_0_0_0_0_1_Assignment_name extends AssignmentToken  {
 	
 	public EPatch_0_0_0_0_0_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -271,7 +271,7 @@ protected class EPatch_0_0_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-// ( imports += Import ) *
+// (imports+=Import)*
 protected class EPatch_0_0_0_1_Assignment_imports extends AssignmentToken  {
 	
 	public EPatch_0_0_0_1_Assignment_imports(IInstanceDescription curr, AbstractToken pred) {
@@ -303,7 +303,7 @@ protected class EPatch_0_0_0_1_Assignment_imports extends AssignmentToken  {
 }
 
 
-// ( resources += NamedResource ) *
+// (resources+=NamedResource)*
 protected class EPatch_0_0_1_Assignment_resources extends AssignmentToken  {
 	
 	public EPatch_0_0_1_Assignment_resources(IInstanceDescription curr, AbstractToken pred) {
@@ -335,7 +335,7 @@ protected class EPatch_0_0_1_Assignment_resources extends AssignmentToken  {
 }
 
 
-// ( objects += ObjectRef ) *
+// (objects+=ObjectRef)*
 protected class EPatch_0_1_Assignment_objects extends AssignmentToken  {
 	
 	public EPatch_0_1_Assignment_objects(IInstanceDescription curr, AbstractToken pred) {
@@ -385,12 +385,12 @@ protected class EPatch_1_Keyword extends KeywordToken  {
 
 /************ begin Rule Import ****************
  *
- * Import : ModelImport | JavaImport | ExtensionImport ;
+ * Import:   ModelImport|JavaImport|ExtensionImport;
  *
  **/
 
 
-// ModelImport | JavaImport | ExtensionImport
+// ModelImport|JavaImport|ExtensionImport
 protected class Import_Alternatives extends AlternativesToken {
 
 	public Import_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -411,7 +411,7 @@ protected class Import_Alternatives extends AlternativesToken {
 	}
 }
 
-// ModelImport | JavaImport
+// ModelImport|JavaImport
 protected class Import_0_Alternatives extends AlternativesToken {
 
 	public Import_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -493,12 +493,12 @@ protected class Import_1_RuleCall_ExtensionImport extends RuleCallToken {
 
 /************ begin Rule ModelImport ****************
  *
- * ModelImport : ResourceImport | EPackageImport ;
+ * ModelImport:   ResourceImport|EPackageImport;
  *
  **/
 
 
-// ResourceImport | EPackageImport
+// ResourceImport|EPackageImport
 protected class ModelImport_Alternatives extends AlternativesToken {
 
 	public ModelImport_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -561,12 +561,12 @@ protected class ModelImport_1_RuleCall_EPackageImport extends RuleCallToken {
 
 /************ begin Rule ResourceImport ****************
  *
- * ResourceImport : "import" name = ID "uri" uri = STRING ;
+ * ResourceImport:   "import" name=ID "uri" uri=STRING;
  *
  **/
 
 
-// "import" name = ID "uri" uri = STRING
+// "import" name=ID "uri" uri=STRING
 protected class ResourceImport_Group extends GroupToken {
 	
 	public ResourceImport_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -594,7 +594,7 @@ protected class ResourceImport_Group extends GroupToken {
 	}
 }
 
-// "import" name = ID "uri"
+// "import" name=ID "uri"
 protected class ResourceImport_0_Group extends GroupToken {
 	
 	public ResourceImport_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -622,7 +622,7 @@ protected class ResourceImport_0_Group extends GroupToken {
 	}
 }
 
-// "import" name = ID
+// "import" name=ID
 protected class ResourceImport_0_0_Group extends GroupToken {
 	
 	public ResourceImport_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -662,7 +662,7 @@ protected class ResourceImport_0_0_0_Keyword_import extends KeywordToken  {
 	}	
 }
 
-// name = ID
+// name=ID
 protected class ResourceImport_0_0_1_Assignment_name extends AssignmentToken  {
 	
 	public ResourceImport_0_0_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -699,7 +699,7 @@ protected class ResourceImport_0_1_Keyword_uri extends KeywordToken  {
 }
 
 
-// uri = STRING
+// uri=STRING
 protected class ResourceImport_1_Assignment_uri extends AssignmentToken  {
 	
 	public ResourceImport_1_Assignment_uri(IInstanceDescription curr, AbstractToken pred) {
@@ -728,12 +728,12 @@ protected class ResourceImport_1_Assignment_uri extends AssignmentToken  {
 
 /************ begin Rule EPackageImport ****************
  *
- * EPackageImport : "import" name = ID "ns" nsURI = STRING ;
+ * EPackageImport:   "import" name=ID "ns" nsURI=STRING;
  *
  **/
 
 
-// "import" name = ID "ns" nsURI = STRING
+// "import" name=ID "ns" nsURI=STRING
 protected class EPackageImport_Group extends GroupToken {
 	
 	public EPackageImport_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -761,7 +761,7 @@ protected class EPackageImport_Group extends GroupToken {
 	}
 }
 
-// "import" name = ID "ns"
+// "import" name=ID "ns"
 protected class EPackageImport_0_Group extends GroupToken {
 	
 	public EPackageImport_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -789,7 +789,7 @@ protected class EPackageImport_0_Group extends GroupToken {
 	}
 }
 
-// "import" name = ID
+// "import" name=ID
 protected class EPackageImport_0_0_Group extends GroupToken {
 	
 	public EPackageImport_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -829,7 +829,7 @@ protected class EPackageImport_0_0_0_Keyword_import extends KeywordToken  {
 	}	
 }
 
-// name = ID
+// name=ID
 protected class EPackageImport_0_0_1_Assignment_name extends AssignmentToken  {
 	
 	public EPackageImport_0_0_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -866,7 +866,7 @@ protected class EPackageImport_0_1_Keyword_ns extends KeywordToken  {
 }
 
 
-// nsURI = STRING
+// nsURI=STRING
 protected class EPackageImport_1_Assignment_nsURI extends AssignmentToken  {
 	
 	public EPackageImport_1_Assignment_nsURI(IInstanceDescription curr, AbstractToken pred) {
@@ -895,12 +895,12 @@ protected class EPackageImport_1_Assignment_nsURI extends AssignmentToken  {
 
 /************ begin Rule JavaImport ****************
  *
- * JavaImport : "import" "java" path += ID ( "." path += ID ) * ;
+ * JavaImport:   "import" "java" path+=ID ("." path+=ID)*;
  *
  **/
 
 
-// "import" "java" path += ID ( "." path += ID ) *
+// "import" "java" path+=ID ("." path+=ID)*
 protected class JavaImport_Group extends GroupToken {
 	
 	public JavaImport_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -928,7 +928,7 @@ protected class JavaImport_Group extends GroupToken {
 	}
 }
 
-// "import" "java" path += ID
+// "import" "java" path+=ID
 protected class JavaImport_0_Group extends GroupToken {
 	
 	public JavaImport_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1009,7 +1009,7 @@ protected class JavaImport_0_0_1_Keyword_java extends KeywordToken  {
 }
 
 
-// path += ID
+// path+=ID
 protected class JavaImport_0_1_Assignment_path extends AssignmentToken  {
 	
 	public JavaImport_0_1_Assignment_path(IInstanceDescription curr, AbstractToken pred) {
@@ -1033,7 +1033,7 @@ protected class JavaImport_0_1_Assignment_path extends AssignmentToken  {
 }
 
 
-// ( "." path += ID ) *
+// ("." path+=ID)*
 protected class JavaImport_1_Group extends GroupToken {
 	
 	public JavaImport_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1073,7 +1073,7 @@ protected class JavaImport_1_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// path += ID
+// path+=ID
 protected class JavaImport_1_1_Assignment_path extends AssignmentToken  {
 	
 	public JavaImport_1_1_Assignment_path(IInstanceDescription curr, AbstractToken pred) {
@@ -1103,12 +1103,12 @@ protected class JavaImport_1_1_Assignment_path extends AssignmentToken  {
 
 /************ begin Rule ExtensionImport ****************
  *
- * ExtensionImport : "import" "extension" path += ID ( "::" path += ID ) * ;
+ * ExtensionImport:   "import" "extension" path+=ID ("::" path+=ID)*;
  *
  **/
 
 
-// "import" "extension" path += ID ( "::" path += ID ) *
+// "import" "extension" path+=ID ("::" path+=ID)*
 protected class ExtensionImport_Group extends GroupToken {
 	
 	public ExtensionImport_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1136,7 +1136,7 @@ protected class ExtensionImport_Group extends GroupToken {
 	}
 }
 
-// "import" "extension" path += ID
+// "import" "extension" path+=ID
 protected class ExtensionImport_0_Group extends GroupToken {
 	
 	public ExtensionImport_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1217,7 +1217,7 @@ protected class ExtensionImport_0_0_1_Keyword_extension extends KeywordToken  {
 }
 
 
-// path += ID
+// path+=ID
 protected class ExtensionImport_0_1_Assignment_path extends AssignmentToken  {
 	
 	public ExtensionImport_0_1_Assignment_path(IInstanceDescription curr, AbstractToken pred) {
@@ -1241,7 +1241,7 @@ protected class ExtensionImport_0_1_Assignment_path extends AssignmentToken  {
 }
 
 
-// ( "::" path += ID ) *
+// ("::" path+=ID)*
 protected class ExtensionImport_1_Group extends GroupToken {
 	
 	public ExtensionImport_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1281,7 +1281,7 @@ protected class ExtensionImport_1_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// path += ID
+// path+=ID
 protected class ExtensionImport_1_1_Assignment_path extends AssignmentToken  {
 	
 	public ExtensionImport_1_1_Assignment_path(IInstanceDescription curr, AbstractToken pred) {
@@ -1311,12 +1311,12 @@ protected class ExtensionImport_1_1_Assignment_path extends AssignmentToken  {
 
 /************ begin Rule NamedResource ****************
  *
- * NamedResource : "resource" name = ID "{" "left" ( "uri" leftUri = STRING | leftRoot = CreatedObject ) ";" "right" ( "uri" rightUri = STRING | rightRoot = CreatedObject ) ";" "}" ;
+ * NamedResource:   "resource" name=ID "{" "left" ("uri" leftUri=STRING|leftRoot=CreatedObject) ";" "right" ("uri" rightUri=STRING|rightRoot=CreatedObject) ";" "}";
  *
  **/
 
 
-// "resource" name = ID "{" "left" ( "uri" leftUri = STRING | leftRoot = CreatedObject ) ";" "right" ( "uri" rightUri = STRING | rightRoot = CreatedObject ) ";" "}"
+// "resource" name=ID "{" "left" ("uri" leftUri=STRING|leftRoot=CreatedObject) ";" "right" ("uri" rightUri=STRING|rightRoot=CreatedObject) ";" "}"
 protected class NamedResource_Group extends GroupToken {
 	
 	public NamedResource_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1344,7 +1344,7 @@ protected class NamedResource_Group extends GroupToken {
 	}
 }
 
-// "resource" name = ID "{" "left" ( "uri" leftUri = STRING | leftRoot = CreatedObject ) ";" "right" ( "uri" rightUri = STRING | rightRoot = CreatedObject ) ";"
+// "resource" name=ID "{" "left" ("uri" leftUri=STRING|leftRoot=CreatedObject) ";" "right" ("uri" rightUri=STRING|rightRoot=CreatedObject) ";"
 protected class NamedResource_0_Group extends GroupToken {
 	
 	public NamedResource_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1372,7 +1372,7 @@ protected class NamedResource_0_Group extends GroupToken {
 	}
 }
 
-// "resource" name = ID "{" "left" ( "uri" leftUri = STRING | leftRoot = CreatedObject ) ";" "right" ( "uri" rightUri = STRING | rightRoot = CreatedObject )
+// "resource" name=ID "{" "left" ("uri" leftUri=STRING|leftRoot=CreatedObject) ";" "right" ("uri" rightUri=STRING|rightRoot=CreatedObject)
 protected class NamedResource_0_0_Group extends GroupToken {
 	
 	public NamedResource_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1400,7 +1400,7 @@ protected class NamedResource_0_0_Group extends GroupToken {
 	}
 }
 
-// "resource" name = ID "{" "left" ( "uri" leftUri = STRING | leftRoot = CreatedObject ) ";" "right"
+// "resource" name=ID "{" "left" ("uri" leftUri=STRING|leftRoot=CreatedObject) ";" "right"
 protected class NamedResource_0_0_0_Group extends GroupToken {
 	
 	public NamedResource_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1428,7 +1428,7 @@ protected class NamedResource_0_0_0_Group extends GroupToken {
 	}
 }
 
-// "resource" name = ID "{" "left" ( "uri" leftUri = STRING | leftRoot = CreatedObject ) ";"
+// "resource" name=ID "{" "left" ("uri" leftUri=STRING|leftRoot=CreatedObject) ";"
 protected class NamedResource_0_0_0_0_Group extends GroupToken {
 	
 	public NamedResource_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1456,7 +1456,7 @@ protected class NamedResource_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// "resource" name = ID "{" "left" ( "uri" leftUri = STRING | leftRoot = CreatedObject )
+// "resource" name=ID "{" "left" ("uri" leftUri=STRING|leftRoot=CreatedObject)
 protected class NamedResource_0_0_0_0_0_Group extends GroupToken {
 	
 	public NamedResource_0_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1484,7 +1484,7 @@ protected class NamedResource_0_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// "resource" name = ID "{" "left"
+// "resource" name=ID "{" "left"
 protected class NamedResource_0_0_0_0_0_0_Group extends GroupToken {
 	
 	public NamedResource_0_0_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1512,7 +1512,7 @@ protected class NamedResource_0_0_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// "resource" name = ID "{"
+// "resource" name=ID "{"
 protected class NamedResource_0_0_0_0_0_0_0_Group extends GroupToken {
 	
 	public NamedResource_0_0_0_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1540,7 +1540,7 @@ protected class NamedResource_0_0_0_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// "resource" name = ID
+// "resource" name=ID
 protected class NamedResource_0_0_0_0_0_0_0_0_Group extends GroupToken {
 	
 	public NamedResource_0_0_0_0_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1580,7 +1580,7 @@ protected class NamedResource_0_0_0_0_0_0_0_0_0_Keyword_resource extends Keyword
 	}	
 }
 
-// name = ID
+// name=ID
 protected class NamedResource_0_0_0_0_0_0_0_0_1_Assignment_name extends AssignmentToken  {
 	
 	public NamedResource_0_0_0_0_0_0_0_0_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -1630,7 +1630,7 @@ protected class NamedResource_0_0_0_0_0_0_1_Keyword_left extends KeywordToken  {
 }
 
 
-// "uri" leftUri = STRING | leftRoot = CreatedObject
+// "uri" leftUri=STRING|leftRoot=CreatedObject
 protected class NamedResource_0_0_0_0_0_1_Alternatives extends AlternativesToken {
 
 	public NamedResource_0_0_0_0_0_1_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -1651,7 +1651,7 @@ protected class NamedResource_0_0_0_0_0_1_Alternatives extends AlternativesToken
 	}
 }
 
-// "uri" leftUri = STRING
+// "uri" leftUri=STRING
 protected class NamedResource_0_0_0_0_0_1_0_Group extends GroupToken {
 	
 	public NamedResource_0_0_0_0_0_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1691,7 +1691,7 @@ protected class NamedResource_0_0_0_0_0_1_0_0_Keyword_uri extends KeywordToken  
 	}	
 }
 
-// leftUri = STRING
+// leftUri=STRING
 protected class NamedResource_0_0_0_0_0_1_0_1_Assignment_leftUri extends AssignmentToken  {
 	
 	public NamedResource_0_0_0_0_0_1_0_1_Assignment_leftUri(IInstanceDescription curr, AbstractToken pred) {
@@ -1715,7 +1715,7 @@ protected class NamedResource_0_0_0_0_0_1_0_1_Assignment_leftUri extends Assignm
 }
 
 
-// leftRoot = CreatedObject
+// leftRoot=CreatedObject
 protected class NamedResource_0_0_0_0_0_1_1_Assignment_leftRoot extends AssignmentToken  {
 	
 	public NamedResource_0_0_0_0_0_1_1_Assignment_leftRoot(IInstanceDescription curr, AbstractToken pred) {
@@ -1774,7 +1774,7 @@ protected class NamedResource_0_0_0_1_Keyword_right extends KeywordToken  {
 }
 
 
-// "uri" rightUri = STRING | rightRoot = CreatedObject
+// "uri" rightUri=STRING|rightRoot=CreatedObject
 protected class NamedResource_0_0_1_Alternatives extends AlternativesToken {
 
 	public NamedResource_0_0_1_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -1795,7 +1795,7 @@ protected class NamedResource_0_0_1_Alternatives extends AlternativesToken {
 	}
 }
 
-// "uri" rightUri = STRING
+// "uri" rightUri=STRING
 protected class NamedResource_0_0_1_0_Group extends GroupToken {
 	
 	public NamedResource_0_0_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1835,7 +1835,7 @@ protected class NamedResource_0_0_1_0_0_Keyword_uri extends KeywordToken  {
 	}	
 }
 
-// rightUri = STRING
+// rightUri=STRING
 protected class NamedResource_0_0_1_0_1_Assignment_rightUri extends AssignmentToken  {
 	
 	public NamedResource_0_0_1_0_1_Assignment_rightUri(IInstanceDescription curr, AbstractToken pred) {
@@ -1859,7 +1859,7 @@ protected class NamedResource_0_0_1_0_1_Assignment_rightUri extends AssignmentTo
 }
 
 
-// rightRoot = CreatedObject
+// rightRoot=CreatedObject
 protected class NamedResource_0_0_1_1_Assignment_rightRoot extends AssignmentToken  {
 	
 	public NamedResource_0_0_1_1_Assignment_rightRoot(IInstanceDescription curr, AbstractToken pred) {
@@ -1923,12 +1923,12 @@ protected class NamedResource_1_Keyword extends KeywordToken  {
 
 /************ begin Rule NamedObject ****************
  *
- * NamedObject : ObjectRef | CreatedObject ;
+ * NamedObject:   ObjectRef|CreatedObject;
  *
  **/
 
 
-// ObjectRef | CreatedObject
+// ObjectRef|CreatedObject
 protected class NamedObject_Alternatives extends AlternativesToken {
 
 	public NamedObject_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -1991,12 +1991,12 @@ protected class NamedObject_1_RuleCall_CreatedObject extends RuleCallToken {
 
 /************ begin Rule ObjectRef ****************
  *
- * ObjectRef : "object" ( name = ID ) ? ( leftRes = [ NamedResource ] leftFrag = FRAGMENT | "left" leftRes = [ NamedResource ] leftFrag = FRAGMENT "right" rightRes = [ NamedResource ] rightFrag = FRAGMENT ) ( "{" ( assignments += BiSingleAssignment | assignments += BiListAssignment ) + ( "left" leftMig = Migration ) ? ( "right" rightMig = Migration ) ? "}" ) ? ;
+ * ObjectRef:   "object" (name=ID)? (leftRes=[NamedResource] leftFrag=FRAGMENT|"left" leftRes=[NamedResource] leftFrag=FRAGMENT "right" rightRes=[NamedResource] rightFrag=FRAGMENT) ("{" (assignments+=BiSingleAssignment|assignments+=BiListAssignment)+ ("left" leftMig=Migration)? ("right" rightMig=Migration)? "}")?;
  *
  **/
 
 
-// "object" ( name = ID ) ? ( leftRes = [ NamedResource ] leftFrag = FRAGMENT | "left" leftRes = [ NamedResource ] leftFrag = FRAGMENT "right" rightRes = [ NamedResource ] rightFrag = FRAGMENT ) ( "{" ( assignments += BiSingleAssignment | assignments += BiListAssignment ) + ( "left" leftMig = Migration ) ? ( "right" rightMig = Migration ) ? "}" ) ?
+// "object" (name=ID)? (leftRes=[NamedResource] leftFrag=FRAGMENT|"left" leftRes=[NamedResource] leftFrag=FRAGMENT "right" rightRes=[NamedResource] rightFrag=FRAGMENT) ("{" (assignments+=BiSingleAssignment|assignments+=BiListAssignment)+ ("left" leftMig=Migration)? ("right" rightMig=Migration)? "}")?
 protected class ObjectRef_Group extends GroupToken {
 	
 	public ObjectRef_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2024,7 +2024,7 @@ protected class ObjectRef_Group extends GroupToken {
 	}
 }
 
-// "object" ( name = ID ) ? ( leftRes = [ NamedResource ] leftFrag = FRAGMENT | "left" leftRes = [ NamedResource ] leftFrag = FRAGMENT "right" rightRes = [ NamedResource ] rightFrag = FRAGMENT )
+// "object" (name=ID)? (leftRes=[NamedResource] leftFrag=FRAGMENT|"left" leftRes=[NamedResource] leftFrag=FRAGMENT "right" rightRes=[NamedResource] rightFrag=FRAGMENT)
 protected class ObjectRef_0_Group extends GroupToken {
 	
 	public ObjectRef_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2052,7 +2052,7 @@ protected class ObjectRef_0_Group extends GroupToken {
 	}
 }
 
-// "object" ( name = ID ) ?
+// "object" (name=ID)?
 protected class ObjectRef_0_0_Group extends GroupToken {
 	
 	public ObjectRef_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2092,7 +2092,7 @@ protected class ObjectRef_0_0_0_Keyword_object extends KeywordToken  {
 	}	
 }
 
-// ( name = ID ) ?
+// (name=ID)?
 protected class ObjectRef_0_0_1_Assignment_name extends AssignmentToken  {
 	
 	public ObjectRef_0_0_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -2116,7 +2116,7 @@ protected class ObjectRef_0_0_1_Assignment_name extends AssignmentToken  {
 }
 
 
-// leftRes = [ NamedResource ] leftFrag = FRAGMENT | "left" leftRes = [ NamedResource ] leftFrag = FRAGMENT "right" rightRes = [ NamedResource ] rightFrag = FRAGMENT
+// leftRes=[NamedResource] leftFrag=FRAGMENT|"left" leftRes=[NamedResource] leftFrag=FRAGMENT "right" rightRes=[NamedResource] rightFrag=FRAGMENT
 protected class ObjectRef_0_1_Alternatives extends AlternativesToken {
 
 	public ObjectRef_0_1_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -2137,7 +2137,7 @@ protected class ObjectRef_0_1_Alternatives extends AlternativesToken {
 	}
 }
 
-// leftRes = [ NamedResource ] leftFrag = FRAGMENT
+// leftRes=[NamedResource] leftFrag=FRAGMENT
 protected class ObjectRef_0_1_0_Group extends GroupToken {
 	
 	public ObjectRef_0_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2165,7 +2165,7 @@ protected class ObjectRef_0_1_0_Group extends GroupToken {
 	}
 }
 
-// leftRes = [ NamedResource ]
+// leftRes=[NamedResource]
 protected class ObjectRef_0_1_0_0_Assignment_leftRes extends AssignmentToken  {
 	
 	public ObjectRef_0_1_0_0_Assignment_leftRes(IInstanceDescription curr, AbstractToken pred) {
@@ -2191,7 +2191,7 @@ protected class ObjectRef_0_1_0_0_Assignment_leftRes extends AssignmentToken  {
 	}
 }
 
-// leftFrag = FRAGMENT
+// leftFrag=FRAGMENT
 protected class ObjectRef_0_1_0_1_Assignment_leftFrag extends AssignmentToken  {
 	
 	public ObjectRef_0_1_0_1_Assignment_leftFrag(IInstanceDescription curr, AbstractToken pred) {
@@ -2215,7 +2215,7 @@ protected class ObjectRef_0_1_0_1_Assignment_leftFrag extends AssignmentToken  {
 }
 
 
-// "left" leftRes = [ NamedResource ] leftFrag = FRAGMENT "right" rightRes = [ NamedResource ] rightFrag = FRAGMENT
+// "left" leftRes=[NamedResource] leftFrag=FRAGMENT "right" rightRes=[NamedResource] rightFrag=FRAGMENT
 protected class ObjectRef_0_1_1_Group extends GroupToken {
 	
 	public ObjectRef_0_1_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2243,7 +2243,7 @@ protected class ObjectRef_0_1_1_Group extends GroupToken {
 	}
 }
 
-// "left" leftRes = [ NamedResource ] leftFrag = FRAGMENT "right" rightRes = [ NamedResource ]
+// "left" leftRes=[NamedResource] leftFrag=FRAGMENT "right" rightRes=[NamedResource]
 protected class ObjectRef_0_1_1_0_Group extends GroupToken {
 	
 	public ObjectRef_0_1_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2271,7 +2271,7 @@ protected class ObjectRef_0_1_1_0_Group extends GroupToken {
 	}
 }
 
-// "left" leftRes = [ NamedResource ] leftFrag = FRAGMENT "right"
+// "left" leftRes=[NamedResource] leftFrag=FRAGMENT "right"
 protected class ObjectRef_0_1_1_0_0_Group extends GroupToken {
 	
 	public ObjectRef_0_1_1_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2299,7 +2299,7 @@ protected class ObjectRef_0_1_1_0_0_Group extends GroupToken {
 	}
 }
 
-// "left" leftRes = [ NamedResource ] leftFrag = FRAGMENT
+// "left" leftRes=[NamedResource] leftFrag=FRAGMENT
 protected class ObjectRef_0_1_1_0_0_0_Group extends GroupToken {
 	
 	public ObjectRef_0_1_1_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2327,7 +2327,7 @@ protected class ObjectRef_0_1_1_0_0_0_Group extends GroupToken {
 	}
 }
 
-// "left" leftRes = [ NamedResource ]
+// "left" leftRes=[NamedResource]
 protected class ObjectRef_0_1_1_0_0_0_0_Group extends GroupToken {
 	
 	public ObjectRef_0_1_1_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2367,7 +2367,7 @@ protected class ObjectRef_0_1_1_0_0_0_0_0_Keyword_left extends KeywordToken  {
 	}	
 }
 
-// leftRes = [ NamedResource ]
+// leftRes=[NamedResource]
 protected class ObjectRef_0_1_1_0_0_0_0_1_Assignment_leftRes extends AssignmentToken  {
 	
 	public ObjectRef_0_1_1_0_0_0_0_1_Assignment_leftRes(IInstanceDescription curr, AbstractToken pred) {
@@ -2394,7 +2394,7 @@ protected class ObjectRef_0_1_1_0_0_0_0_1_Assignment_leftRes extends AssignmentT
 }
 
 
-// leftFrag = FRAGMENT
+// leftFrag=FRAGMENT
 protected class ObjectRef_0_1_1_0_0_0_1_Assignment_leftFrag extends AssignmentToken  {
 	
 	public ObjectRef_0_1_1_0_0_0_1_Assignment_leftFrag(IInstanceDescription curr, AbstractToken pred) {
@@ -2431,7 +2431,7 @@ protected class ObjectRef_0_1_1_0_0_1_Keyword_right extends KeywordToken  {
 }
 
 
-// rightRes = [ NamedResource ]
+// rightRes=[NamedResource]
 protected class ObjectRef_0_1_1_0_1_Assignment_rightRes extends AssignmentToken  {
 	
 	public ObjectRef_0_1_1_0_1_Assignment_rightRes(IInstanceDescription curr, AbstractToken pred) {
@@ -2458,7 +2458,7 @@ protected class ObjectRef_0_1_1_0_1_Assignment_rightRes extends AssignmentToken 
 }
 
 
-// rightFrag = FRAGMENT
+// rightFrag=FRAGMENT
 protected class ObjectRef_0_1_1_1_Assignment_rightFrag extends AssignmentToken  {
 	
 	public ObjectRef_0_1_1_1_Assignment_rightFrag(IInstanceDescription curr, AbstractToken pred) {
@@ -2484,7 +2484,7 @@ protected class ObjectRef_0_1_1_1_Assignment_rightFrag extends AssignmentToken  
 
 
 
-// ( "{" ( assignments += BiSingleAssignment | assignments += BiListAssignment ) + ( "left" leftMig = Migration ) ? ( "right" rightMig = Migration ) ? "}" ) ?
+// ("{" (assignments+=BiSingleAssignment|assignments+=BiListAssignment)+ ("left" leftMig=Migration)? ("right" rightMig=Migration)? "}")?
 protected class ObjectRef_1_Group extends GroupToken {
 	
 	public ObjectRef_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2512,7 +2512,7 @@ protected class ObjectRef_1_Group extends GroupToken {
 	}
 }
 
-// "{" ( assignments += BiSingleAssignment | assignments += BiListAssignment ) + ( "left" leftMig = Migration ) ? ( "right" rightMig = Migration ) ?
+// "{" (assignments+=BiSingleAssignment|assignments+=BiListAssignment)+ ("left" leftMig=Migration)? ("right" rightMig=Migration)?
 protected class ObjectRef_1_0_Group extends GroupToken {
 	
 	public ObjectRef_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2540,7 +2540,7 @@ protected class ObjectRef_1_0_Group extends GroupToken {
 	}
 }
 
-// "{" ( assignments += BiSingleAssignment | assignments += BiListAssignment ) + ( "left" leftMig = Migration ) ?
+// "{" (assignments+=BiSingleAssignment|assignments+=BiListAssignment)+ ("left" leftMig=Migration)?
 protected class ObjectRef_1_0_0_Group extends GroupToken {
 	
 	public ObjectRef_1_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2568,7 +2568,7 @@ protected class ObjectRef_1_0_0_Group extends GroupToken {
 	}
 }
 
-// "{" ( assignments += BiSingleAssignment | assignments += BiListAssignment ) +
+// "{" (assignments+=BiSingleAssignment|assignments+=BiListAssignment)+
 protected class ObjectRef_1_0_0_0_Group extends GroupToken {
 	
 	public ObjectRef_1_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2608,7 +2608,7 @@ protected class ObjectRef_1_0_0_0_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// ( assignments += BiSingleAssignment | assignments += BiListAssignment ) +
+// (assignments+=BiSingleAssignment|assignments+=BiListAssignment)+
 protected class ObjectRef_1_0_0_0_1_Alternatives extends AlternativesToken {
 
 	public ObjectRef_1_0_0_0_1_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -2629,7 +2629,7 @@ protected class ObjectRef_1_0_0_0_1_Alternatives extends AlternativesToken {
 	}
 }
 
-// assignments += BiSingleAssignment
+// assignments+=BiSingleAssignment
 protected class ObjectRef_1_0_0_0_1_0_Assignment_assignments extends AssignmentToken  {
 	
 	public ObjectRef_1_0_0_0_1_0_Assignment_assignments(IInstanceDescription curr, AbstractToken pred) {
@@ -2660,7 +2660,7 @@ protected class ObjectRef_1_0_0_0_1_0_Assignment_assignments extends AssignmentT
 	}
 }
 
-// assignments += BiListAssignment
+// assignments+=BiListAssignment
 protected class ObjectRef_1_0_0_0_1_1_Assignment_assignments extends AssignmentToken  {
 	
 	public ObjectRef_1_0_0_0_1_1_Assignment_assignments(IInstanceDescription curr, AbstractToken pred) {
@@ -2693,7 +2693,7 @@ protected class ObjectRef_1_0_0_0_1_1_Assignment_assignments extends AssignmentT
 
 
 
-// ( "left" leftMig = Migration ) ?
+// ("left" leftMig=Migration)?
 protected class ObjectRef_1_0_0_1_Group extends GroupToken {
 	
 	public ObjectRef_1_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2733,7 +2733,7 @@ protected class ObjectRef_1_0_0_1_0_Keyword_left extends KeywordToken  {
 	}	
 }
 
-// leftMig = Migration
+// leftMig=Migration
 protected class ObjectRef_1_0_0_1_1_Assignment_leftMig extends AssignmentToken  {
 	
 	public ObjectRef_1_0_0_1_1_Assignment_leftMig(IInstanceDescription curr, AbstractToken pred) {
@@ -2766,7 +2766,7 @@ protected class ObjectRef_1_0_0_1_1_Assignment_leftMig extends AssignmentToken  
 
 
 
-// ( "right" rightMig = Migration ) ?
+// ("right" rightMig=Migration)?
 protected class ObjectRef_1_0_1_Group extends GroupToken {
 	
 	public ObjectRef_1_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2806,7 +2806,7 @@ protected class ObjectRef_1_0_1_0_Keyword_right extends KeywordToken  {
 	}	
 }
 
-// rightMig = Migration
+// rightMig=Migration
 protected class ObjectRef_1_0_1_1_Assignment_rightMig extends AssignmentToken  {
 	
 	public ObjectRef_1_0_1_1_Assignment_rightMig(IInstanceDescription curr, AbstractToken pred) {
@@ -2858,12 +2858,12 @@ protected class ObjectRef_1_1_Keyword extends KeywordToken  {
 
 /************ begin Rule Assignment ****************
  *
- * Assignment : BiSingleAssignment | BiListAssignment | MonoSingleAssignment | MonoListAssignment ;
+ * Assignment:   BiSingleAssignment|BiListAssignment|MonoSingleAssignment|MonoListAssignment;
  *
  **/
 
 
-// BiSingleAssignment | BiListAssignment | MonoSingleAssignment | MonoListAssignment
+// BiSingleAssignment|BiListAssignment|MonoSingleAssignment|MonoListAssignment
 protected class Assignment_Alternatives extends AlternativesToken {
 
 	public Assignment_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -2884,7 +2884,7 @@ protected class Assignment_Alternatives extends AlternativesToken {
 	}
 }
 
-// BiSingleAssignment | BiListAssignment | MonoSingleAssignment
+// BiSingleAssignment|BiListAssignment|MonoSingleAssignment
 protected class Assignment_0_Alternatives extends AlternativesToken {
 
 	public Assignment_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -2905,7 +2905,7 @@ protected class Assignment_0_Alternatives extends AlternativesToken {
 	}
 }
 
-// BiSingleAssignment | BiListAssignment
+// BiSingleAssignment|BiListAssignment
 protected class Assignment_0_0_Alternatives extends AlternativesToken {
 
 	public Assignment_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -3006,12 +3006,12 @@ protected class Assignment_1_RuleCall_MonoListAssignment extends RuleCallToken {
 
 /************ begin Rule BiSingleAssignment ****************
  *
- * BiSingleAssignment returns SingleAssignment : feature = ID "=" leftValue = SingleAssignmentValue "|" rightValue = SingleAssignmentValue ";" ;
+ * BiSingleAssignment returns SingleAssignment:   feature=ID "=" leftValue=SingleAssignmentValue "|" rightValue=SingleAssignmentValue ";";
  *
  **/
 
 
-// feature = ID "=" leftValue = SingleAssignmentValue "|" rightValue = SingleAssignmentValue ";"
+// feature=ID "=" leftValue=SingleAssignmentValue "|" rightValue=SingleAssignmentValue ";"
 protected class BiSingleAssignment_Group extends GroupToken {
 	
 	public BiSingleAssignment_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3039,7 +3039,7 @@ protected class BiSingleAssignment_Group extends GroupToken {
 	}
 }
 
-// feature = ID "=" leftValue = SingleAssignmentValue "|" rightValue = SingleAssignmentValue
+// feature=ID "=" leftValue=SingleAssignmentValue "|" rightValue=SingleAssignmentValue
 protected class BiSingleAssignment_0_Group extends GroupToken {
 	
 	public BiSingleAssignment_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3067,7 +3067,7 @@ protected class BiSingleAssignment_0_Group extends GroupToken {
 	}
 }
 
-// feature = ID "=" leftValue = SingleAssignmentValue "|"
+// feature=ID "=" leftValue=SingleAssignmentValue "|"
 protected class BiSingleAssignment_0_0_Group extends GroupToken {
 	
 	public BiSingleAssignment_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3095,7 +3095,7 @@ protected class BiSingleAssignment_0_0_Group extends GroupToken {
 	}
 }
 
-// feature = ID "=" leftValue = SingleAssignmentValue
+// feature=ID "=" leftValue=SingleAssignmentValue
 protected class BiSingleAssignment_0_0_0_Group extends GroupToken {
 	
 	public BiSingleAssignment_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3123,7 +3123,7 @@ protected class BiSingleAssignment_0_0_0_Group extends GroupToken {
 	}
 }
 
-// feature = ID "="
+// feature=ID "="
 protected class BiSingleAssignment_0_0_0_0_Group extends GroupToken {
 	
 	public BiSingleAssignment_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3151,7 +3151,7 @@ protected class BiSingleAssignment_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// feature = ID
+// feature=ID
 protected class BiSingleAssignment_0_0_0_0_0_Assignment_feature extends AssignmentToken  {
 	
 	public BiSingleAssignment_0_0_0_0_0_Assignment_feature(IInstanceDescription curr, AbstractToken pred) {
@@ -3187,7 +3187,7 @@ protected class BiSingleAssignment_0_0_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-// leftValue = SingleAssignmentValue
+// leftValue=SingleAssignmentValue
 protected class BiSingleAssignment_0_0_0_1_Assignment_leftValue extends AssignmentToken  {
 	
 	public BiSingleAssignment_0_0_0_1_Assignment_leftValue(IInstanceDescription curr, AbstractToken pred) {
@@ -3232,7 +3232,7 @@ protected class BiSingleAssignment_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-// rightValue = SingleAssignmentValue
+// rightValue=SingleAssignmentValue
 protected class BiSingleAssignment_0_1_Assignment_rightValue extends AssignmentToken  {
 	
 	public BiSingleAssignment_0_1_Assignment_rightValue(IInstanceDescription curr, AbstractToken pred) {
@@ -3282,12 +3282,12 @@ protected class BiSingleAssignment_1_Keyword extends KeywordToken  {
 
 /************ begin Rule BiListAssignment ****************
  *
- * BiListAssignment returns ListAssignment : feature = ID "=" "[" ( leftValues += ListAssignmentValue ( "," leftValues += ListAssignmentValue ) * ) ? "|" ( rightValues += ListAssignmentValue ( "," rightValues += ListAssignmentValue ) * ) ? "]" ";" ;
+ * BiListAssignment returns ListAssignment:   feature=ID "=" "[" (leftValues+=ListAssignmentValue ("," leftValues+=ListAssignmentValue)*)? "|" (rightValues+=ListAssignmentValue ("," rightValues+=ListAssignmentValue)*)? "]" ";";
  *
  **/
 
 
-// feature = ID "=" "[" ( leftValues += ListAssignmentValue ( "," leftValues += ListAssignmentValue ) * ) ? "|" ( rightValues += ListAssignmentValue ( "," rightValues += ListAssignmentValue ) * ) ? "]" ";"
+// feature=ID "=" "[" (leftValues+=ListAssignmentValue ("," leftValues+=ListAssignmentValue)*)? "|" (rightValues+=ListAssignmentValue ("," rightValues+=ListAssignmentValue)*)? "]" ";"
 protected class BiListAssignment_Group extends GroupToken {
 	
 	public BiListAssignment_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3315,7 +3315,7 @@ protected class BiListAssignment_Group extends GroupToken {
 	}
 }
 
-// feature = ID "=" "[" ( leftValues += ListAssignmentValue ( "," leftValues += ListAssignmentValue ) * ) ? "|" ( rightValues += ListAssignmentValue ( "," rightValues += ListAssignmentValue ) * ) ? "]"
+// feature=ID "=" "[" (leftValues+=ListAssignmentValue ("," leftValues+=ListAssignmentValue)*)? "|" (rightValues+=ListAssignmentValue ("," rightValues+=ListAssignmentValue)*)? "]"
 protected class BiListAssignment_0_Group extends GroupToken {
 	
 	public BiListAssignment_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3343,7 +3343,7 @@ protected class BiListAssignment_0_Group extends GroupToken {
 	}
 }
 
-// feature = ID "=" "[" ( leftValues += ListAssignmentValue ( "," leftValues += ListAssignmentValue ) * ) ? "|" ( rightValues += ListAssignmentValue ( "," rightValues += ListAssignmentValue ) * ) ?
+// feature=ID "=" "[" (leftValues+=ListAssignmentValue ("," leftValues+=ListAssignmentValue)*)? "|" (rightValues+=ListAssignmentValue ("," rightValues+=ListAssignmentValue)*)?
 protected class BiListAssignment_0_0_Group extends GroupToken {
 	
 	public BiListAssignment_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3371,7 +3371,7 @@ protected class BiListAssignment_0_0_Group extends GroupToken {
 	}
 }
 
-// feature = ID "=" "[" ( leftValues += ListAssignmentValue ( "," leftValues += ListAssignmentValue ) * ) ? "|"
+// feature=ID "=" "[" (leftValues+=ListAssignmentValue ("," leftValues+=ListAssignmentValue)*)? "|"
 protected class BiListAssignment_0_0_0_Group extends GroupToken {
 	
 	public BiListAssignment_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3399,7 +3399,7 @@ protected class BiListAssignment_0_0_0_Group extends GroupToken {
 	}
 }
 
-// feature = ID "=" "[" ( leftValues += ListAssignmentValue ( "," leftValues += ListAssignmentValue ) * ) ?
+// feature=ID "=" "[" (leftValues+=ListAssignmentValue ("," leftValues+=ListAssignmentValue)*)?
 protected class BiListAssignment_0_0_0_0_Group extends GroupToken {
 	
 	public BiListAssignment_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3427,7 +3427,7 @@ protected class BiListAssignment_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// feature = ID "=" "["
+// feature=ID "=" "["
 protected class BiListAssignment_0_0_0_0_0_Group extends GroupToken {
 	
 	public BiListAssignment_0_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3455,7 +3455,7 @@ protected class BiListAssignment_0_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// feature = ID "="
+// feature=ID "="
 protected class BiListAssignment_0_0_0_0_0_0_Group extends GroupToken {
 	
 	public BiListAssignment_0_0_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3483,7 +3483,7 @@ protected class BiListAssignment_0_0_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// feature = ID
+// feature=ID
 protected class BiListAssignment_0_0_0_0_0_0_0_Assignment_feature extends AssignmentToken  {
 	
 	public BiListAssignment_0_0_0_0_0_0_0_Assignment_feature(IInstanceDescription curr, AbstractToken pred) {
@@ -3532,7 +3532,7 @@ protected class BiListAssignment_0_0_0_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-// ( leftValues += ListAssignmentValue ( "," leftValues += ListAssignmentValue ) * ) ?
+// (leftValues+=ListAssignmentValue ("," leftValues+=ListAssignmentValue)*)?
 protected class BiListAssignment_0_0_0_0_1_Group extends GroupToken {
 	
 	public BiListAssignment_0_0_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3560,7 +3560,7 @@ protected class BiListAssignment_0_0_0_0_1_Group extends GroupToken {
 	}
 }
 
-// leftValues += ListAssignmentValue
+// leftValues+=ListAssignmentValue
 protected class BiListAssignment_0_0_0_0_1_0_Assignment_leftValues extends AssignmentToken  {
 	
 	public BiListAssignment_0_0_0_0_1_0_Assignment_leftValues(IInstanceDescription curr, AbstractToken pred) {
@@ -3591,7 +3591,7 @@ protected class BiListAssignment_0_0_0_0_1_0_Assignment_leftValues extends Assig
 	}
 }
 
-// ( "," leftValues += ListAssignmentValue ) *
+// ("," leftValues+=ListAssignmentValue)*
 protected class BiListAssignment_0_0_0_0_1_1_Group extends GroupToken {
 	
 	public BiListAssignment_0_0_0_0_1_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3631,7 +3631,7 @@ protected class BiListAssignment_0_0_0_0_1_1_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// leftValues += ListAssignmentValue
+// leftValues+=ListAssignmentValue
 protected class BiListAssignment_0_0_0_0_1_1_1_Assignment_leftValues extends AssignmentToken  {
 	
 	public BiListAssignment_0_0_0_0_1_1_1_Assignment_leftValues(IInstanceDescription curr, AbstractToken pred) {
@@ -3678,7 +3678,7 @@ protected class BiListAssignment_0_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-// ( rightValues += ListAssignmentValue ( "," rightValues += ListAssignmentValue ) * ) ?
+// (rightValues+=ListAssignmentValue ("," rightValues+=ListAssignmentValue)*)?
 protected class BiListAssignment_0_0_1_Group extends GroupToken {
 	
 	public BiListAssignment_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3706,7 +3706,7 @@ protected class BiListAssignment_0_0_1_Group extends GroupToken {
 	}
 }
 
-// rightValues += ListAssignmentValue
+// rightValues+=ListAssignmentValue
 protected class BiListAssignment_0_0_1_0_Assignment_rightValues extends AssignmentToken  {
 	
 	public BiListAssignment_0_0_1_0_Assignment_rightValues(IInstanceDescription curr, AbstractToken pred) {
@@ -3737,7 +3737,7 @@ protected class BiListAssignment_0_0_1_0_Assignment_rightValues extends Assignme
 	}
 }
 
-// ( "," rightValues += ListAssignmentValue ) *
+// ("," rightValues+=ListAssignmentValue)*
 protected class BiListAssignment_0_0_1_1_Group extends GroupToken {
 	
 	public BiListAssignment_0_0_1_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3777,7 +3777,7 @@ protected class BiListAssignment_0_0_1_1_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// rightValues += ListAssignmentValue
+// rightValues+=ListAssignmentValue
 protected class BiListAssignment_0_0_1_1_1_Assignment_rightValues extends AssignmentToken  {
 	
 	public BiListAssignment_0_0_1_1_1_Assignment_rightValues(IInstanceDescription curr, AbstractToken pred) {
@@ -3842,12 +3842,12 @@ protected class BiListAssignment_1_Keyword extends KeywordToken  {
 
 /************ begin Rule MonoSingleAssignment ****************
  *
- * MonoSingleAssignment returns SingleAssignment : feature = ID "=" leftValue = SingleAssignmentValue ";" ;
+ * MonoSingleAssignment returns SingleAssignment:   feature=ID "=" leftValue=SingleAssignmentValue ";";
  *
  **/
 
 
-// feature = ID "=" leftValue = SingleAssignmentValue ";"
+// feature=ID "=" leftValue=SingleAssignmentValue ";"
 protected class MonoSingleAssignment_Group extends GroupToken {
 	
 	public MonoSingleAssignment_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3875,7 +3875,7 @@ protected class MonoSingleAssignment_Group extends GroupToken {
 	}
 }
 
-// feature = ID "=" leftValue = SingleAssignmentValue
+// feature=ID "=" leftValue=SingleAssignmentValue
 protected class MonoSingleAssignment_0_Group extends GroupToken {
 	
 	public MonoSingleAssignment_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3903,7 +3903,7 @@ protected class MonoSingleAssignment_0_Group extends GroupToken {
 	}
 }
 
-// feature = ID "="
+// feature=ID "="
 protected class MonoSingleAssignment_0_0_Group extends GroupToken {
 	
 	public MonoSingleAssignment_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3931,7 +3931,7 @@ protected class MonoSingleAssignment_0_0_Group extends GroupToken {
 	}
 }
 
-// feature = ID
+// feature=ID
 protected class MonoSingleAssignment_0_0_0_Assignment_feature extends AssignmentToken  {
 	
 	public MonoSingleAssignment_0_0_0_Assignment_feature(IInstanceDescription curr, AbstractToken pred) {
@@ -3967,7 +3967,7 @@ protected class MonoSingleAssignment_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-// leftValue = SingleAssignmentValue
+// leftValue=SingleAssignmentValue
 protected class MonoSingleAssignment_0_1_Assignment_leftValue extends AssignmentToken  {
 	
 	public MonoSingleAssignment_0_1_Assignment_leftValue(IInstanceDescription curr, AbstractToken pred) {
@@ -4017,12 +4017,12 @@ protected class MonoSingleAssignment_1_Keyword extends KeywordToken  {
 
 /************ begin Rule MonoListAssignment ****************
  *
- * MonoListAssignment returns ListAssignment : feature = ID "=" "[" ( leftValues += AssignmentValue ( "," leftValues += AssignmentValue ) * ) ? "]" ";" ;
+ * MonoListAssignment returns ListAssignment:   feature=ID "=" "[" (leftValues+=AssignmentValue ("," leftValues+=AssignmentValue)*)? "]" ";";
  *
  **/
 
 
-// feature = ID "=" "[" ( leftValues += AssignmentValue ( "," leftValues += AssignmentValue ) * ) ? "]" ";"
+// feature=ID "=" "[" (leftValues+=AssignmentValue ("," leftValues+=AssignmentValue)*)? "]" ";"
 protected class MonoListAssignment_Group extends GroupToken {
 	
 	public MonoListAssignment_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -4050,7 +4050,7 @@ protected class MonoListAssignment_Group extends GroupToken {
 	}
 }
 
-// feature = ID "=" "[" ( leftValues += AssignmentValue ( "," leftValues += AssignmentValue ) * ) ? "]"
+// feature=ID "=" "[" (leftValues+=AssignmentValue ("," leftValues+=AssignmentValue)*)? "]"
 protected class MonoListAssignment_0_Group extends GroupToken {
 	
 	public MonoListAssignment_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -4078,7 +4078,7 @@ protected class MonoListAssignment_0_Group extends GroupToken {
 	}
 }
 
-// feature = ID "=" "[" ( leftValues += AssignmentValue ( "," leftValues += AssignmentValue ) * ) ?
+// feature=ID "=" "[" (leftValues+=AssignmentValue ("," leftValues+=AssignmentValue)*)?
 protected class MonoListAssignment_0_0_Group extends GroupToken {
 	
 	public MonoListAssignment_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -4106,7 +4106,7 @@ protected class MonoListAssignment_0_0_Group extends GroupToken {
 	}
 }
 
-// feature = ID "=" "["
+// feature=ID "=" "["
 protected class MonoListAssignment_0_0_0_Group extends GroupToken {
 	
 	public MonoListAssignment_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -4134,7 +4134,7 @@ protected class MonoListAssignment_0_0_0_Group extends GroupToken {
 	}
 }
 
-// feature = ID "="
+// feature=ID "="
 protected class MonoListAssignment_0_0_0_0_Group extends GroupToken {
 	
 	public MonoListAssignment_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -4162,7 +4162,7 @@ protected class MonoListAssignment_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// feature = ID
+// feature=ID
 protected class MonoListAssignment_0_0_0_0_0_Assignment_feature extends AssignmentToken  {
 	
 	public MonoListAssignment_0_0_0_0_0_Assignment_feature(IInstanceDescription curr, AbstractToken pred) {
@@ -4211,7 +4211,7 @@ protected class MonoListAssignment_0_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-// ( leftValues += AssignmentValue ( "," leftValues += AssignmentValue ) * ) ?
+// (leftValues+=AssignmentValue ("," leftValues+=AssignmentValue)*)?
 protected class MonoListAssignment_0_0_1_Group extends GroupToken {
 	
 	public MonoListAssignment_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -4239,7 +4239,7 @@ protected class MonoListAssignment_0_0_1_Group extends GroupToken {
 	}
 }
 
-// leftValues += AssignmentValue
+// leftValues+=AssignmentValue
 protected class MonoListAssignment_0_0_1_0_Assignment_leftValues extends AssignmentToken  {
 	
 	public MonoListAssignment_0_0_1_0_Assignment_leftValues(IInstanceDescription curr, AbstractToken pred) {
@@ -4270,7 +4270,7 @@ protected class MonoListAssignment_0_0_1_0_Assignment_leftValues extends Assignm
 	}
 }
 
-// ( "," leftValues += AssignmentValue ) *
+// ("," leftValues+=AssignmentValue)*
 protected class MonoListAssignment_0_0_1_1_Group extends GroupToken {
 	
 	public MonoListAssignment_0_0_1_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -4310,7 +4310,7 @@ protected class MonoListAssignment_0_0_1_1_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// leftValues += AssignmentValue
+// leftValues+=AssignmentValue
 protected class MonoListAssignment_0_0_1_1_1_Assignment_leftValues extends AssignmentToken  {
 	
 	public MonoListAssignment_0_0_1_1_1_Assignment_leftValues(IInstanceDescription curr, AbstractToken pred) {
@@ -4375,12 +4375,12 @@ protected class MonoListAssignment_1_Keyword extends KeywordToken  {
 
 /************ begin Rule AssignmentValue ****************
  *
- * AssignmentValue : value = STRING | refObject = [ NamedObject ] ( "." refFeature = ID ( "[" refIndex = INT "]" ) ? ) ? | newObject = CreatedObject | ^import = [ Import ] impFrag = FRAGMENT ;
+ * AssignmentValue:   value=STRING|refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?|newObject=CreatedObject|^import=[Import] impFrag=FRAGMENT;
  *
  **/
 
 
-// value = STRING | refObject = [ NamedObject ] ( "." refFeature = ID ( "[" refIndex = INT "]" ) ? ) ? | newObject = CreatedObject | ^import = [ Import ] impFrag = FRAGMENT
+// value=STRING|refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?|newObject=CreatedObject|^import=[Import] impFrag=FRAGMENT
 protected class AssignmentValue_Alternatives extends AlternativesToken {
 
 	public AssignmentValue_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -4401,7 +4401,7 @@ protected class AssignmentValue_Alternatives extends AlternativesToken {
 	}
 }
 
-// value = STRING | refObject = [ NamedObject ] ( "." refFeature = ID ( "[" refIndex = INT "]" ) ? ) ? | newObject = CreatedObject
+// value=STRING|refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?|newObject=CreatedObject
 protected class AssignmentValue_0_Alternatives extends AlternativesToken {
 
 	public AssignmentValue_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -4422,7 +4422,7 @@ protected class AssignmentValue_0_Alternatives extends AlternativesToken {
 	}
 }
 
-// value = STRING | refObject = [ NamedObject ] ( "." refFeature = ID ( "[" refIndex = INT "]" ) ? ) ?
+// value=STRING|refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?
 protected class AssignmentValue_0_0_Alternatives extends AlternativesToken {
 
 	public AssignmentValue_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -4443,7 +4443,7 @@ protected class AssignmentValue_0_0_Alternatives extends AlternativesToken {
 	}
 }
 
-// value = STRING
+// value=STRING
 protected class AssignmentValue_0_0_0_Assignment_value extends AssignmentToken  {
 	
 	public AssignmentValue_0_0_0_Assignment_value(IInstanceDescription curr, AbstractToken pred) {
@@ -4466,7 +4466,7 @@ protected class AssignmentValue_0_0_0_Assignment_value extends AssignmentToken  
 	}
 }
 
-// refObject = [ NamedObject ] ( "." refFeature = ID ( "[" refIndex = INT "]" ) ? ) ?
+// refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?
 protected class AssignmentValue_0_0_1_Group extends GroupToken {
 	
 	public AssignmentValue_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -4494,7 +4494,7 @@ protected class AssignmentValue_0_0_1_Group extends GroupToken {
 	}
 }
 
-// refObject = [ NamedObject ]
+// refObject=[NamedObject]
 protected class AssignmentValue_0_0_1_0_Assignment_refObject extends AssignmentToken  {
 	
 	public AssignmentValue_0_0_1_0_Assignment_refObject(IInstanceDescription curr, AbstractToken pred) {
@@ -4520,7 +4520,7 @@ protected class AssignmentValue_0_0_1_0_Assignment_refObject extends AssignmentT
 	}
 }
 
-// ( "." refFeature = ID ( "[" refIndex = INT "]" ) ? ) ?
+// ("." refFeature=ID ("[" refIndex=INT "]")?)?
 protected class AssignmentValue_0_0_1_1_Group extends GroupToken {
 	
 	public AssignmentValue_0_0_1_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -4548,7 +4548,7 @@ protected class AssignmentValue_0_0_1_1_Group extends GroupToken {
 	}
 }
 
-// "." refFeature = ID
+// "." refFeature=ID
 protected class AssignmentValue_0_0_1_1_0_Group extends GroupToken {
 	
 	public AssignmentValue_0_0_1_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -4588,7 +4588,7 @@ protected class AssignmentValue_0_0_1_1_0_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// refFeature = ID
+// refFeature=ID
 protected class AssignmentValue_0_0_1_1_0_1_Assignment_refFeature extends AssignmentToken  {
 	
 	public AssignmentValue_0_0_1_1_0_1_Assignment_refFeature(IInstanceDescription curr, AbstractToken pred) {
@@ -4612,7 +4612,7 @@ protected class AssignmentValue_0_0_1_1_0_1_Assignment_refFeature extends Assign
 }
 
 
-// ( "[" refIndex = INT "]" ) ?
+// ("[" refIndex=INT "]")?
 protected class AssignmentValue_0_0_1_1_1_Group extends GroupToken {
 	
 	public AssignmentValue_0_0_1_1_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -4640,7 +4640,7 @@ protected class AssignmentValue_0_0_1_1_1_Group extends GroupToken {
 	}
 }
 
-// "[" refIndex = INT
+// "[" refIndex=INT
 protected class AssignmentValue_0_0_1_1_1_0_Group extends GroupToken {
 	
 	public AssignmentValue_0_0_1_1_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -4680,7 +4680,7 @@ protected class AssignmentValue_0_0_1_1_1_0_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// refIndex = INT
+// refIndex=INT
 protected class AssignmentValue_0_0_1_1_1_0_1_Assignment_refIndex extends AssignmentToken  {
 	
 	public AssignmentValue_0_0_1_1_1_0_1_Assignment_refIndex(IInstanceDescription curr, AbstractToken pred) {
@@ -4720,7 +4720,7 @@ protected class AssignmentValue_0_0_1_1_1_1_Keyword extends KeywordToken  {
 
 
 
-// newObject = CreatedObject
+// newObject=CreatedObject
 protected class AssignmentValue_0_1_Assignment_newObject extends AssignmentToken  {
 	
 	public AssignmentValue_0_1_Assignment_newObject(IInstanceDescription curr, AbstractToken pred) {
@@ -4752,7 +4752,7 @@ protected class AssignmentValue_0_1_Assignment_newObject extends AssignmentToken
 }
 
 
-// ^import = [ Import ] impFrag = FRAGMENT
+// ^import=[Import] impFrag=FRAGMENT
 protected class AssignmentValue_1_Group extends GroupToken {
 	
 	public AssignmentValue_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -4780,7 +4780,7 @@ protected class AssignmentValue_1_Group extends GroupToken {
 	}
 }
 
-// ^import = [ Import ]
+// ^import=[Import]
 protected class AssignmentValue_1_0_Assignment_import extends AssignmentToken  {
 	
 	public AssignmentValue_1_0_Assignment_import(IInstanceDescription curr, AbstractToken pred) {
@@ -4806,7 +4806,7 @@ protected class AssignmentValue_1_0_Assignment_import extends AssignmentToken  {
 	}
 }
 
-// impFrag = FRAGMENT
+// impFrag=FRAGMENT
 protected class AssignmentValue_1_1_Assignment_impFrag extends AssignmentToken  {
 	
 	public AssignmentValue_1_1_Assignment_impFrag(IInstanceDescription curr, AbstractToken pred) {
@@ -4836,12 +4836,12 @@ protected class AssignmentValue_1_1_Assignment_impFrag extends AssignmentToken  
 
 /************ begin Rule ListAssignmentValue ****************
  *
- * ListAssignmentValue returns AssignmentValue : index = INT ":" ( "[" refIndex = INT "]" | value = STRING | refObject = [ NamedObject ] ( "." refFeature = ID ( "[" refIndex = INT "]" ) ? ) ? | newObject = CreatedObject | ^import = [ Import ] impFrag = FRAGMENT ) ;
+ * ListAssignmentValue returns AssignmentValue:   index=INT ":" ("[" refIndex=INT "]"|value=STRING|refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?|newObject=CreatedObject|^import=[Import] impFrag=FRAGMENT);
  *
  **/
 
 
-// index = INT ":" ( "[" refIndex = INT "]" | value = STRING | refObject = [ NamedObject ] ( "." refFeature = ID ( "[" refIndex = INT "]" ) ? ) ? | newObject = CreatedObject | ^import = [ Import ] impFrag = FRAGMENT )
+// index=INT ":" ("[" refIndex=INT "]"|value=STRING|refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?|newObject=CreatedObject|^import=[Import] impFrag=FRAGMENT)
 protected class ListAssignmentValue_Group extends GroupToken {
 	
 	public ListAssignmentValue_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -4869,7 +4869,7 @@ protected class ListAssignmentValue_Group extends GroupToken {
 	}
 }
 
-// index = INT ":"
+// index=INT ":"
 protected class ListAssignmentValue_0_Group extends GroupToken {
 	
 	public ListAssignmentValue_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -4897,7 +4897,7 @@ protected class ListAssignmentValue_0_Group extends GroupToken {
 	}
 }
 
-// index = INT
+// index=INT
 protected class ListAssignmentValue_0_0_Assignment_index extends AssignmentToken  {
 	
 	public ListAssignmentValue_0_0_Assignment_index(IInstanceDescription curr, AbstractToken pred) {
@@ -4933,7 +4933,7 @@ protected class ListAssignmentValue_0_1_Keyword extends KeywordToken  {
 }
 
 
-// "[" refIndex = INT "]" | value = STRING | refObject = [ NamedObject ] ( "." refFeature = ID ( "[" refIndex = INT "]" ) ? ) ? | newObject = CreatedObject | ^import = [ Import ] impFrag = FRAGMENT
+// "[" refIndex=INT "]"|value=STRING|refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?|newObject=CreatedObject|^import=[Import] impFrag=FRAGMENT
 protected class ListAssignmentValue_1_Alternatives extends AlternativesToken {
 
 	public ListAssignmentValue_1_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -4954,7 +4954,7 @@ protected class ListAssignmentValue_1_Alternatives extends AlternativesToken {
 	}
 }
 
-// "[" refIndex = INT "]" | value = STRING | refObject = [ NamedObject ] ( "." refFeature = ID ( "[" refIndex = INT "]" ) ? ) ? | newObject = CreatedObject
+// "[" refIndex=INT "]"|value=STRING|refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?|newObject=CreatedObject
 protected class ListAssignmentValue_1_0_Alternatives extends AlternativesToken {
 
 	public ListAssignmentValue_1_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -4975,7 +4975,7 @@ protected class ListAssignmentValue_1_0_Alternatives extends AlternativesToken {
 	}
 }
 
-// "[" refIndex = INT "]" | value = STRING | refObject = [ NamedObject ] ( "." refFeature = ID ( "[" refIndex = INT "]" ) ? ) ?
+// "[" refIndex=INT "]"|value=STRING|refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?
 protected class ListAssignmentValue_1_0_0_Alternatives extends AlternativesToken {
 
 	public ListAssignmentValue_1_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -4996,7 +4996,7 @@ protected class ListAssignmentValue_1_0_0_Alternatives extends AlternativesToken
 	}
 }
 
-// "[" refIndex = INT "]" | value = STRING
+// "[" refIndex=INT "]"|value=STRING
 protected class ListAssignmentValue_1_0_0_0_Alternatives extends AlternativesToken {
 
 	public ListAssignmentValue_1_0_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -5017,7 +5017,7 @@ protected class ListAssignmentValue_1_0_0_0_Alternatives extends AlternativesTok
 	}
 }
 
-// "[" refIndex = INT "]"
+// "[" refIndex=INT "]"
 protected class ListAssignmentValue_1_0_0_0_0_Group extends GroupToken {
 	
 	public ListAssignmentValue_1_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -5045,7 +5045,7 @@ protected class ListAssignmentValue_1_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// "[" refIndex = INT
+// "[" refIndex=INT
 protected class ListAssignmentValue_1_0_0_0_0_0_Group extends GroupToken {
 	
 	public ListAssignmentValue_1_0_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -5085,7 +5085,7 @@ protected class ListAssignmentValue_1_0_0_0_0_0_0_Keyword extends KeywordToken  
 	}	
 }
 
-// refIndex = INT
+// refIndex=INT
 protected class ListAssignmentValue_1_0_0_0_0_0_1_Assignment_refIndex extends AssignmentToken  {
 	
 	public ListAssignmentValue_1_0_0_0_0_0_1_Assignment_refIndex(IInstanceDescription curr, AbstractToken pred) {
@@ -5122,7 +5122,7 @@ protected class ListAssignmentValue_1_0_0_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-// value = STRING
+// value=STRING
 protected class ListAssignmentValue_1_0_0_0_1_Assignment_value extends AssignmentToken  {
 	
 	public ListAssignmentValue_1_0_0_0_1_Assignment_value(IInstanceDescription curr, AbstractToken pred) {
@@ -5146,7 +5146,7 @@ protected class ListAssignmentValue_1_0_0_0_1_Assignment_value extends Assignmen
 }
 
 
-// refObject = [ NamedObject ] ( "." refFeature = ID ( "[" refIndex = INT "]" ) ? ) ?
+// refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?
 protected class ListAssignmentValue_1_0_0_1_Group extends GroupToken {
 	
 	public ListAssignmentValue_1_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -5174,7 +5174,7 @@ protected class ListAssignmentValue_1_0_0_1_Group extends GroupToken {
 	}
 }
 
-// refObject = [ NamedObject ]
+// refObject=[NamedObject]
 protected class ListAssignmentValue_1_0_0_1_0_Assignment_refObject extends AssignmentToken  {
 	
 	public ListAssignmentValue_1_0_0_1_0_Assignment_refObject(IInstanceDescription curr, AbstractToken pred) {
@@ -5200,7 +5200,7 @@ protected class ListAssignmentValue_1_0_0_1_0_Assignment_refObject extends Assig
 	}
 }
 
-// ( "." refFeature = ID ( "[" refIndex = INT "]" ) ? ) ?
+// ("." refFeature=ID ("[" refIndex=INT "]")?)?
 protected class ListAssignmentValue_1_0_0_1_1_Group extends GroupToken {
 	
 	public ListAssignmentValue_1_0_0_1_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -5228,7 +5228,7 @@ protected class ListAssignmentValue_1_0_0_1_1_Group extends GroupToken {
 	}
 }
 
-// "." refFeature = ID
+// "." refFeature=ID
 protected class ListAssignmentValue_1_0_0_1_1_0_Group extends GroupToken {
 	
 	public ListAssignmentValue_1_0_0_1_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -5268,7 +5268,7 @@ protected class ListAssignmentValue_1_0_0_1_1_0_0_Keyword extends KeywordToken  
 	}	
 }
 
-// refFeature = ID
+// refFeature=ID
 protected class ListAssignmentValue_1_0_0_1_1_0_1_Assignment_refFeature extends AssignmentToken  {
 	
 	public ListAssignmentValue_1_0_0_1_1_0_1_Assignment_refFeature(IInstanceDescription curr, AbstractToken pred) {
@@ -5292,7 +5292,7 @@ protected class ListAssignmentValue_1_0_0_1_1_0_1_Assignment_refFeature extends 
 }
 
 
-// ( "[" refIndex = INT "]" ) ?
+// ("[" refIndex=INT "]")?
 protected class ListAssignmentValue_1_0_0_1_1_1_Group extends GroupToken {
 	
 	public ListAssignmentValue_1_0_0_1_1_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -5320,7 +5320,7 @@ protected class ListAssignmentValue_1_0_0_1_1_1_Group extends GroupToken {
 	}
 }
 
-// "[" refIndex = INT
+// "[" refIndex=INT
 protected class ListAssignmentValue_1_0_0_1_1_1_0_Group extends GroupToken {
 	
 	public ListAssignmentValue_1_0_0_1_1_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -5360,7 +5360,7 @@ protected class ListAssignmentValue_1_0_0_1_1_1_0_0_Keyword extends KeywordToken
 	}	
 }
 
-// refIndex = INT
+// refIndex=INT
 protected class ListAssignmentValue_1_0_0_1_1_1_0_1_Assignment_refIndex extends AssignmentToken  {
 	
 	public ListAssignmentValue_1_0_0_1_1_1_0_1_Assignment_refIndex(IInstanceDescription curr, AbstractToken pred) {
@@ -5400,7 +5400,7 @@ protected class ListAssignmentValue_1_0_0_1_1_1_1_Keyword extends KeywordToken  
 
 
 
-// newObject = CreatedObject
+// newObject=CreatedObject
 protected class ListAssignmentValue_1_0_1_Assignment_newObject extends AssignmentToken  {
 	
 	public ListAssignmentValue_1_0_1_Assignment_newObject(IInstanceDescription curr, AbstractToken pred) {
@@ -5432,7 +5432,7 @@ protected class ListAssignmentValue_1_0_1_Assignment_newObject extends Assignmen
 }
 
 
-// ^import = [ Import ] impFrag = FRAGMENT
+// ^import=[Import] impFrag=FRAGMENT
 protected class ListAssignmentValue_1_1_Group extends GroupToken {
 	
 	public ListAssignmentValue_1_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -5460,7 +5460,7 @@ protected class ListAssignmentValue_1_1_Group extends GroupToken {
 	}
 }
 
-// ^import = [ Import ]
+// ^import=[Import]
 protected class ListAssignmentValue_1_1_0_Assignment_import extends AssignmentToken  {
 	
 	public ListAssignmentValue_1_1_0_Assignment_import(IInstanceDescription curr, AbstractToken pred) {
@@ -5486,7 +5486,7 @@ protected class ListAssignmentValue_1_1_0_Assignment_import extends AssignmentTo
 	}
 }
 
-// impFrag = FRAGMENT
+// impFrag=FRAGMENT
 protected class ListAssignmentValue_1_1_1_Assignment_impFrag extends AssignmentToken  {
 	
 	public ListAssignmentValue_1_1_1_Assignment_impFrag(IInstanceDescription curr, AbstractToken pred) {
@@ -5517,12 +5517,12 @@ protected class ListAssignmentValue_1_1_1_Assignment_impFrag extends AssignmentT
 
 /************ begin Rule SingleAssignmentValue ****************
  *
- * SingleAssignmentValue returns AssignmentValue : keyword = "null" | value = STRING | refObject = [ NamedObject ] ( "." refFeature = ID ( "[" refIndex = INT "]" ) ? ) ? | newObject = CreatedObject | ^import = [ Import ] impFrag = FRAGMENT ;
+ * SingleAssignmentValue returns AssignmentValue:   keyword="null"|value=STRING|refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?|newObject=CreatedObject|^import=[Import] impFrag=FRAGMENT;
  *
  **/
 
 
-// keyword = "null" | value = STRING | refObject = [ NamedObject ] ( "." refFeature = ID ( "[" refIndex = INT "]" ) ? ) ? | newObject = CreatedObject | ^import = [ Import ] impFrag = FRAGMENT
+// keyword="null"|value=STRING|refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?|newObject=CreatedObject|^import=[Import] impFrag=FRAGMENT
 protected class SingleAssignmentValue_Alternatives extends AlternativesToken {
 
 	public SingleAssignmentValue_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -5543,7 +5543,7 @@ protected class SingleAssignmentValue_Alternatives extends AlternativesToken {
 	}
 }
 
-// keyword = "null" | value = STRING | refObject = [ NamedObject ] ( "." refFeature = ID ( "[" refIndex = INT "]" ) ? ) ? | newObject = CreatedObject
+// keyword="null"|value=STRING|refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?|newObject=CreatedObject
 protected class SingleAssignmentValue_0_Alternatives extends AlternativesToken {
 
 	public SingleAssignmentValue_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -5564,7 +5564,7 @@ protected class SingleAssignmentValue_0_Alternatives extends AlternativesToken {
 	}
 }
 
-// keyword = "null" | value = STRING | refObject = [ NamedObject ] ( "." refFeature = ID ( "[" refIndex = INT "]" ) ? ) ?
+// keyword="null"|value=STRING|refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?
 protected class SingleAssignmentValue_0_0_Alternatives extends AlternativesToken {
 
 	public SingleAssignmentValue_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -5585,7 +5585,7 @@ protected class SingleAssignmentValue_0_0_Alternatives extends AlternativesToken
 	}
 }
 
-// keyword = "null" | value = STRING
+// keyword="null"|value=STRING
 protected class SingleAssignmentValue_0_0_0_Alternatives extends AlternativesToken {
 
 	public SingleAssignmentValue_0_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -5606,7 +5606,7 @@ protected class SingleAssignmentValue_0_0_0_Alternatives extends AlternativesTok
 	}
 }
 
-// keyword = "null"
+// keyword="null"
 protected class SingleAssignmentValue_0_0_0_0_Assignment_keyword extends AssignmentToken  {
 	
 	public SingleAssignmentValue_0_0_0_0_Assignment_keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -5631,7 +5631,7 @@ protected class SingleAssignmentValue_0_0_0_0_Assignment_keyword extends Assignm
 	}
 }
 
-// value = STRING
+// value=STRING
 protected class SingleAssignmentValue_0_0_0_1_Assignment_value extends AssignmentToken  {
 	
 	public SingleAssignmentValue_0_0_0_1_Assignment_value(IInstanceDescription curr, AbstractToken pred) {
@@ -5655,7 +5655,7 @@ protected class SingleAssignmentValue_0_0_0_1_Assignment_value extends Assignmen
 }
 
 
-// refObject = [ NamedObject ] ( "." refFeature = ID ( "[" refIndex = INT "]" ) ? ) ?
+// refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?
 protected class SingleAssignmentValue_0_0_1_Group extends GroupToken {
 	
 	public SingleAssignmentValue_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -5683,7 +5683,7 @@ protected class SingleAssignmentValue_0_0_1_Group extends GroupToken {
 	}
 }
 
-// refObject = [ NamedObject ]
+// refObject=[NamedObject]
 protected class SingleAssignmentValue_0_0_1_0_Assignment_refObject extends AssignmentToken  {
 	
 	public SingleAssignmentValue_0_0_1_0_Assignment_refObject(IInstanceDescription curr, AbstractToken pred) {
@@ -5709,7 +5709,7 @@ protected class SingleAssignmentValue_0_0_1_0_Assignment_refObject extends Assig
 	}
 }
 
-// ( "." refFeature = ID ( "[" refIndex = INT "]" ) ? ) ?
+// ("." refFeature=ID ("[" refIndex=INT "]")?)?
 protected class SingleAssignmentValue_0_0_1_1_Group extends GroupToken {
 	
 	public SingleAssignmentValue_0_0_1_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -5737,7 +5737,7 @@ protected class SingleAssignmentValue_0_0_1_1_Group extends GroupToken {
 	}
 }
 
-// "." refFeature = ID
+// "." refFeature=ID
 protected class SingleAssignmentValue_0_0_1_1_0_Group extends GroupToken {
 	
 	public SingleAssignmentValue_0_0_1_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -5777,7 +5777,7 @@ protected class SingleAssignmentValue_0_0_1_1_0_0_Keyword extends KeywordToken  
 	}	
 }
 
-// refFeature = ID
+// refFeature=ID
 protected class SingleAssignmentValue_0_0_1_1_0_1_Assignment_refFeature extends AssignmentToken  {
 	
 	public SingleAssignmentValue_0_0_1_1_0_1_Assignment_refFeature(IInstanceDescription curr, AbstractToken pred) {
@@ -5801,7 +5801,7 @@ protected class SingleAssignmentValue_0_0_1_1_0_1_Assignment_refFeature extends 
 }
 
 
-// ( "[" refIndex = INT "]" ) ?
+// ("[" refIndex=INT "]")?
 protected class SingleAssignmentValue_0_0_1_1_1_Group extends GroupToken {
 	
 	public SingleAssignmentValue_0_0_1_1_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -5829,7 +5829,7 @@ protected class SingleAssignmentValue_0_0_1_1_1_Group extends GroupToken {
 	}
 }
 
-// "[" refIndex = INT
+// "[" refIndex=INT
 protected class SingleAssignmentValue_0_0_1_1_1_0_Group extends GroupToken {
 	
 	public SingleAssignmentValue_0_0_1_1_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -5869,7 +5869,7 @@ protected class SingleAssignmentValue_0_0_1_1_1_0_0_Keyword extends KeywordToken
 	}	
 }
 
-// refIndex = INT
+// refIndex=INT
 protected class SingleAssignmentValue_0_0_1_1_1_0_1_Assignment_refIndex extends AssignmentToken  {
 	
 	public SingleAssignmentValue_0_0_1_1_1_0_1_Assignment_refIndex(IInstanceDescription curr, AbstractToken pred) {
@@ -5909,7 +5909,7 @@ protected class SingleAssignmentValue_0_0_1_1_1_1_Keyword extends KeywordToken  
 
 
 
-// newObject = CreatedObject
+// newObject=CreatedObject
 protected class SingleAssignmentValue_0_1_Assignment_newObject extends AssignmentToken  {
 	
 	public SingleAssignmentValue_0_1_Assignment_newObject(IInstanceDescription curr, AbstractToken pred) {
@@ -5941,7 +5941,7 @@ protected class SingleAssignmentValue_0_1_Assignment_newObject extends Assignmen
 }
 
 
-// ^import = [ Import ] impFrag = FRAGMENT
+// ^import=[Import] impFrag=FRAGMENT
 protected class SingleAssignmentValue_1_Group extends GroupToken {
 	
 	public SingleAssignmentValue_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -5969,7 +5969,7 @@ protected class SingleAssignmentValue_1_Group extends GroupToken {
 	}
 }
 
-// ^import = [ Import ]
+// ^import=[Import]
 protected class SingleAssignmentValue_1_0_Assignment_import extends AssignmentToken  {
 	
 	public SingleAssignmentValue_1_0_Assignment_import(IInstanceDescription curr, AbstractToken pred) {
@@ -5995,7 +5995,7 @@ protected class SingleAssignmentValue_1_0_Assignment_import extends AssignmentTo
 	}
 }
 
-// impFrag = FRAGMENT
+// impFrag=FRAGMENT
 protected class SingleAssignmentValue_1_1_Assignment_impFrag extends AssignmentToken  {
 	
 	public SingleAssignmentValue_1_1_Assignment_impFrag(IInstanceDescription curr, AbstractToken pred) {
@@ -6025,12 +6025,12 @@ protected class SingleAssignmentValue_1_1_Assignment_impFrag extends AssignmentT
 
 /************ begin Rule CreatedObject ****************
  *
- * CreatedObject : ( ObjectNew | ObjectCopy ) ( name = ID ) ? ( "{" ( assignments += MonoSingleAssignment | assignments += MonoListAssignment ) + ( leftMig = Migration ) ? "}" ) ? ;
+ * CreatedObject:   (ObjectNew|ObjectCopy) (name=ID)? ("{" (assignments+=MonoSingleAssignment|assignments+=MonoListAssignment)+ (leftMig=Migration)? "}")?;
  *
  **/
 
 
-// ( ObjectNew | ObjectCopy ) ( name = ID ) ? ( "{" ( assignments += MonoSingleAssignment | assignments += MonoListAssignment ) + ( leftMig = Migration ) ? "}" ) ?
+// (ObjectNew|ObjectCopy) (name=ID)? ("{" (assignments+=MonoSingleAssignment|assignments+=MonoListAssignment)+ (leftMig=Migration)? "}")?
 protected class CreatedObject_Group extends GroupToken {
 	
 	public CreatedObject_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -6058,7 +6058,7 @@ protected class CreatedObject_Group extends GroupToken {
 	}
 }
 
-// ( ObjectNew | ObjectCopy ) ( name = ID ) ?
+// (ObjectNew|ObjectCopy) (name=ID)?
 protected class CreatedObject_0_Group extends GroupToken {
 	
 	public CreatedObject_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -6086,7 +6086,7 @@ protected class CreatedObject_0_Group extends GroupToken {
 	}
 }
 
-// ObjectNew | ObjectCopy
+// ObjectNew|ObjectCopy
 protected class CreatedObject_0_0_Alternatives extends AlternativesToken {
 
 	public CreatedObject_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -6144,7 +6144,7 @@ protected class CreatedObject_0_0_1_RuleCall_ObjectCopy extends RuleCallToken {
 }
 
 
-// ( name = ID ) ?
+// (name=ID)?
 protected class CreatedObject_0_1_Assignment_name extends AssignmentToken  {
 	
 	public CreatedObject_0_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -6168,7 +6168,7 @@ protected class CreatedObject_0_1_Assignment_name extends AssignmentToken  {
 }
 
 
-// ( "{" ( assignments += MonoSingleAssignment | assignments += MonoListAssignment ) + ( leftMig = Migration ) ? "}" ) ?
+// ("{" (assignments+=MonoSingleAssignment|assignments+=MonoListAssignment)+ (leftMig=Migration)? "}")?
 protected class CreatedObject_1_Group extends GroupToken {
 	
 	public CreatedObject_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -6196,7 +6196,7 @@ protected class CreatedObject_1_Group extends GroupToken {
 	}
 }
 
-// "{" ( assignments += MonoSingleAssignment | assignments += MonoListAssignment ) + ( leftMig = Migration ) ?
+// "{" (assignments+=MonoSingleAssignment|assignments+=MonoListAssignment)+ (leftMig=Migration)?
 protected class CreatedObject_1_0_Group extends GroupToken {
 	
 	public CreatedObject_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -6224,7 +6224,7 @@ protected class CreatedObject_1_0_Group extends GroupToken {
 	}
 }
 
-// "{" ( assignments += MonoSingleAssignment | assignments += MonoListAssignment ) +
+// "{" (assignments+=MonoSingleAssignment|assignments+=MonoListAssignment)+
 protected class CreatedObject_1_0_0_Group extends GroupToken {
 	
 	public CreatedObject_1_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -6264,7 +6264,7 @@ protected class CreatedObject_1_0_0_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// ( assignments += MonoSingleAssignment | assignments += MonoListAssignment ) +
+// (assignments+=MonoSingleAssignment|assignments+=MonoListAssignment)+
 protected class CreatedObject_1_0_0_1_Alternatives extends AlternativesToken {
 
 	public CreatedObject_1_0_0_1_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -6285,7 +6285,7 @@ protected class CreatedObject_1_0_0_1_Alternatives extends AlternativesToken {
 	}
 }
 
-// assignments += MonoSingleAssignment
+// assignments+=MonoSingleAssignment
 protected class CreatedObject_1_0_0_1_0_Assignment_assignments extends AssignmentToken  {
 	
 	public CreatedObject_1_0_0_1_0_Assignment_assignments(IInstanceDescription curr, AbstractToken pred) {
@@ -6316,7 +6316,7 @@ protected class CreatedObject_1_0_0_1_0_Assignment_assignments extends Assignmen
 	}
 }
 
-// assignments += MonoListAssignment
+// assignments+=MonoListAssignment
 protected class CreatedObject_1_0_0_1_1_Assignment_assignments extends AssignmentToken  {
 	
 	public CreatedObject_1_0_0_1_1_Assignment_assignments(IInstanceDescription curr, AbstractToken pred) {
@@ -6349,7 +6349,7 @@ protected class CreatedObject_1_0_0_1_1_Assignment_assignments extends Assignmen
 
 
 
-// ( leftMig = Migration ) ?
+// (leftMig=Migration)?
 protected class CreatedObject_1_0_1_Assignment_leftMig extends AssignmentToken  {
 	
 	public CreatedObject_1_0_1_Assignment_leftMig(IInstanceDescription curr, AbstractToken pred) {
@@ -6400,12 +6400,12 @@ protected class CreatedObject_1_1_Keyword extends KeywordToken  {
 
 /************ begin Rule ObjectNew ****************
  *
- * ObjectNew : "new" ^import = [ Import ] impFrag = FRAGMENT ;
+ * ObjectNew:   "new" ^import=[Import] impFrag=FRAGMENT;
  *
  **/
 
 
-// "new" ^import = [ Import ] impFrag = FRAGMENT
+// "new" ^import=[Import] impFrag=FRAGMENT
 protected class ObjectNew_Group extends GroupToken {
 	
 	public ObjectNew_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -6433,7 +6433,7 @@ protected class ObjectNew_Group extends GroupToken {
 	}
 }
 
-// "new" ^import = [ Import ]
+// "new" ^import=[Import]
 protected class ObjectNew_0_Group extends GroupToken {
 	
 	public ObjectNew_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -6473,7 +6473,7 @@ protected class ObjectNew_0_0_Keyword_new extends KeywordToken  {
 	}	
 }
 
-// ^import = [ Import ]
+// ^import=[Import]
 protected class ObjectNew_0_1_Assignment_import extends AssignmentToken  {
 	
 	public ObjectNew_0_1_Assignment_import(IInstanceDescription curr, AbstractToken pred) {
@@ -6500,7 +6500,7 @@ protected class ObjectNew_0_1_Assignment_import extends AssignmentToken  {
 }
 
 
-// impFrag = FRAGMENT
+// impFrag=FRAGMENT
 protected class ObjectNew_1_Assignment_impFrag extends AssignmentToken  {
 	
 	public ObjectNew_1_Assignment_impFrag(IInstanceDescription curr, AbstractToken pred) {
@@ -6529,12 +6529,12 @@ protected class ObjectNew_1_Assignment_impFrag extends AssignmentToken  {
 
 /************ begin Rule ObjectCopy ****************
  *
- * ObjectCopy : "copy" resource = [ NamedResource ] fragment = FRAGMENT ;
+ * ObjectCopy:   "copy" resource=[NamedResource] fragment=FRAGMENT;
  *
  **/
 
 
-// "copy" resource = [ NamedResource ] fragment = FRAGMENT
+// "copy" resource=[NamedResource] fragment=FRAGMENT
 protected class ObjectCopy_Group extends GroupToken {
 	
 	public ObjectCopy_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -6562,7 +6562,7 @@ protected class ObjectCopy_Group extends GroupToken {
 	}
 }
 
-// "copy" resource = [ NamedResource ]
+// "copy" resource=[NamedResource]
 protected class ObjectCopy_0_Group extends GroupToken {
 	
 	public ObjectCopy_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -6602,7 +6602,7 @@ protected class ObjectCopy_0_0_Keyword_copy extends KeywordToken  {
 	}	
 }
 
-// resource = [ NamedResource ]
+// resource=[NamedResource]
 protected class ObjectCopy_0_1_Assignment_resource extends AssignmentToken  {
 	
 	public ObjectCopy_0_1_Assignment_resource(IInstanceDescription curr, AbstractToken pred) {
@@ -6629,7 +6629,7 @@ protected class ObjectCopy_0_1_Assignment_resource extends AssignmentToken  {
 }
 
 
-// fragment = FRAGMENT
+// fragment=FRAGMENT
 protected class ObjectCopy_1_Assignment_fragment extends AssignmentToken  {
 	
 	public ObjectCopy_1_Assignment_fragment(IInstanceDescription curr, AbstractToken pred) {
@@ -6658,12 +6658,12 @@ protected class ObjectCopy_1_Assignment_fragment extends AssignmentToken  {
 
 /************ begin Rule Migration ****************
  *
- * Migration : "migrate" ( first = Executable ) ? ( "as" asOp = Executable | "each" eachOp = Executable ) ? ";" ;
+ * Migration:   "migrate" (first=Executable)? ("as" asOp=Executable|"each" eachOp=Executable)? ";";
  *
  **/
 
 
-// "migrate" ( first = Executable ) ? ( "as" asOp = Executable | "each" eachOp = Executable ) ? ";"
+// "migrate" (first=Executable)? ("as" asOp=Executable|"each" eachOp=Executable)? ";"
 protected class Migration_Group extends GroupToken {
 	
 	public Migration_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -6691,7 +6691,7 @@ protected class Migration_Group extends GroupToken {
 	}
 }
 
-// "migrate" ( first = Executable ) ? ( "as" asOp = Executable | "each" eachOp = Executable ) ?
+// "migrate" (first=Executable)? ("as" asOp=Executable|"each" eachOp=Executable)?
 protected class Migration_0_Group extends GroupToken {
 	
 	public Migration_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -6719,7 +6719,7 @@ protected class Migration_0_Group extends GroupToken {
 	}
 }
 
-// "migrate" ( first = Executable ) ?
+// "migrate" (first=Executable)?
 protected class Migration_0_0_Group extends GroupToken {
 	
 	public Migration_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -6759,7 +6759,7 @@ protected class Migration_0_0_0_Keyword_migrate extends KeywordToken  {
 	}	
 }
 
-// ( first = Executable ) ?
+// (first=Executable)?
 protected class Migration_0_0_1_Assignment_first extends AssignmentToken  {
 	
 	public Migration_0_0_1_Assignment_first(IInstanceDescription curr, AbstractToken pred) {
@@ -6791,7 +6791,7 @@ protected class Migration_0_0_1_Assignment_first extends AssignmentToken  {
 }
 
 
-// ( "as" asOp = Executable | "each" eachOp = Executable ) ?
+// ("as" asOp=Executable|"each" eachOp=Executable)?
 protected class Migration_0_1_Alternatives extends AlternativesToken {
 
 	public Migration_0_1_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -6812,7 +6812,7 @@ protected class Migration_0_1_Alternatives extends AlternativesToken {
 	}
 }
 
-// "as" asOp = Executable
+// "as" asOp=Executable
 protected class Migration_0_1_0_Group extends GroupToken {
 	
 	public Migration_0_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -6852,7 +6852,7 @@ protected class Migration_0_1_0_0_Keyword_as extends KeywordToken  {
 	}	
 }
 
-// asOp = Executable
+// asOp=Executable
 protected class Migration_0_1_0_1_Assignment_asOp extends AssignmentToken  {
 	
 	public Migration_0_1_0_1_Assignment_asOp(IInstanceDescription curr, AbstractToken pred) {
@@ -6884,7 +6884,7 @@ protected class Migration_0_1_0_1_Assignment_asOp extends AssignmentToken  {
 }
 
 
-// "each" eachOp = Executable
+// "each" eachOp=Executable
 protected class Migration_0_1_1_Group extends GroupToken {
 	
 	public Migration_0_1_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -6924,7 +6924,7 @@ protected class Migration_0_1_1_0_Keyword_each extends KeywordToken  {
 	}	
 }
 
-// eachOp = Executable
+// eachOp=Executable
 protected class Migration_0_1_1_1_Assignment_eachOp extends AssignmentToken  {
 	
 	public Migration_0_1_1_1_Assignment_eachOp(IInstanceDescription curr, AbstractToken pred) {
@@ -6976,12 +6976,12 @@ protected class Migration_1_Keyword extends KeywordToken  {
 
 /************ begin Rule Executable ****************
  *
- * Executable : JavaExecutable | ExpressionExecutable ;
+ * Executable:   JavaExecutable|ExpressionExecutable;
  *
  **/
 
 
-// JavaExecutable | ExpressionExecutable
+// JavaExecutable|ExpressionExecutable
 protected class Executable_Alternatives extends AlternativesToken {
 
 	public Executable_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -7044,12 +7044,12 @@ protected class Executable_1_RuleCall_ExpressionExecutable extends RuleCallToken
 
 /************ begin Rule JavaExecutable ****************
  *
- * JavaExecutable : "java" method = ID "(" ")" ;
+ * JavaExecutable:   "java" method=ID "(" ")";
  *
  **/
 
 
-// "java" method = ID "(" ")"
+// "java" method=ID "(" ")"
 protected class JavaExecutable_Group extends GroupToken {
 	
 	public JavaExecutable_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -7077,7 +7077,7 @@ protected class JavaExecutable_Group extends GroupToken {
 	}
 }
 
-// "java" method = ID "("
+// "java" method=ID "("
 protected class JavaExecutable_0_Group extends GroupToken {
 	
 	public JavaExecutable_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -7105,7 +7105,7 @@ protected class JavaExecutable_0_Group extends GroupToken {
 	}
 }
 
-// "java" method = ID
+// "java" method=ID
 protected class JavaExecutable_0_0_Group extends GroupToken {
 	
 	public JavaExecutable_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -7145,7 +7145,7 @@ protected class JavaExecutable_0_0_0_Keyword_java extends KeywordToken  {
 	}	
 }
 
-// method = ID
+// method=ID
 protected class JavaExecutable_0_0_1_Assignment_method extends AssignmentToken  {
 	
 	public JavaExecutable_0_0_1_Assignment_method(IInstanceDescription curr, AbstractToken pred) {
@@ -7200,12 +7200,12 @@ protected class JavaExecutable_1_Keyword extends KeywordToken  {
 
 /************ begin Rule ExpressionExecutable ****************
  *
- * ExpressionExecutable : exprstr = STRING ;
+ * ExpressionExecutable:   exprstr=STRING;
  *
  **/
 
 
-// exprstr = STRING
+// exprstr=STRING
 protected class ExpressionExecutable_Assignment_exprstr extends AssignmentToken  {
 	
 	public ExpressionExecutable_Assignment_exprstr(IInstanceDescription curr, AbstractToken pred) {

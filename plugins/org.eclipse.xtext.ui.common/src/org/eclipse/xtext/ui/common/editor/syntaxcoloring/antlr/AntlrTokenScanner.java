@@ -15,8 +15,11 @@ import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.Token;
 import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.ui.common.editor.syntaxcoloring.AbstractTokenScanner;
+import org.eclipse.xtext.ui.common.editor.syntaxcoloring.PreferenceStoreAccessor;
+import org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferencePage;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * Default implementation for the ITokenScanner. Uses an AntLR based
@@ -26,9 +29,15 @@ import com.google.inject.Inject;
 public class AntlrTokenScanner extends AbstractTokenScanner {
 
 	@Inject
+	public AntlrTokenScanner(String languageName, Provider<SyntaxColoringPreferencePage> preferencePageProvider,
+			PreferenceStoreAccessor accessor,ITokenColorer tokenColorer,Lexer lexer) {
+		super(languageName, preferencePageProvider, accessor);
+		this.tokenColorer = tokenColorer;
+		this.lexer = lexer;
+	}
+
 	private ITokenColorer tokenColorer;
 	
-	@Inject
 	private Lexer lexer;
 
 	private int dirtyRegionOffset;

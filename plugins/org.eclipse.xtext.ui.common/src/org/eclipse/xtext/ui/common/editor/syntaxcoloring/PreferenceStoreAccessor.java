@@ -8,12 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.syntaxcoloring;
 
-import static org.eclipse.xtext.ui.common.editor.preferencepage.CommonPreferenceConstants.BACKGROUNDCOLOR_SUFIX;
-import static org.eclipse.xtext.ui.common.editor.preferencepage.CommonPreferenceConstants.FONT_SUFIX;
-import static org.eclipse.xtext.ui.common.editor.preferencepage.CommonPreferenceConstants.STYLE_SUFIX;
-import static org.eclipse.xtext.ui.common.editor.preferencepage.CommonPreferenceConstants.SYNTAX_COLORER_PREFERENCE_TAG;
-import static org.eclipse.xtext.ui.common.editor.preferencepage.CommonPreferenceConstants.TOKEN_STYLES_PREFERENCE_TAG;
-import static org.eclipse.xtext.ui.core.editor.preferences.PreferenceConstants.SEPARATOR;
+import static org.eclipse.xtext.ui.common.editor.preferencepage.CommonPreferenceConstants.*;
 
 import java.util.Arrays;
 
@@ -29,10 +24,13 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.editors.text.EditorsUI;
 import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
-import org.eclipse.xtext.service.IServiceScope;
+import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.ui.common.editor.preferencepage.CommonPreferenceConstants;
 import org.eclipse.xtext.ui.core.editor.utils.TextStyle;
 import org.eclipse.xtext.ui.core.internal.Activator;
+
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
@@ -42,8 +40,9 @@ public class PreferenceStoreAccessor {
 	private String PREFERENCE_TAG;
 	private static ScopedPreferenceStore preferenceStore;
 
-	public PreferenceStoreAccessor(IServiceScope serviceScope) {
-		PREFERENCE_TAG = tokenTypeTag(serviceScope) + SEPARATOR;
+	@Inject
+	public PreferenceStoreAccessor(@Named(Constants.LANGUAGE_NAME) String languageName) {
+		PREFERENCE_TAG = tokenTypeTag(languageName) + SEPARATOR;
 	}
 
 	private static final ScopedPreferenceStore getPreferenceStore() {
@@ -125,15 +124,11 @@ public class PreferenceStoreAccessor {
 		return tokenType + SEPARATOR + STYLE_SUFIX;
 	}
 
-	public static String languageTag(IServiceScope serviceScope) {
-		return serviceScope.getId();
+	public static String syntaxColorerTag(String languageName) {
+		return languageName + SEPARATOR + SYNTAX_COLORER_PREFERENCE_TAG;
 	}
 
-	public static String syntaxColorerTag(IServiceScope serviceScope) {
-		return languageTag(serviceScope) + SEPARATOR + SYNTAX_COLORER_PREFERENCE_TAG;
-	}
-
-	public static String tokenTypeTag(IServiceScope serviceScope) {
-		return syntaxColorerTag(serviceScope) + SEPARATOR + TOKEN_STYLES_PREFERENCE_TAG;
+	public static String tokenTypeTag(String languageName) {
+		return syntaxColorerTag(languageName) + SEPARATOR + TOKEN_STYLES_PREFERENCE_TAG;
 	}
 }

@@ -2,10 +2,11 @@
 <?eclipse version="3.0"?>
 
 <plugin>
-	<extension
+
+<extension
          point="org.eclipse.ui.editors">
       <editor
-            class="org.eclipse.xtext.example.ui.editor.DomainmodelEditor"
+            class="guice.Aware:org.eclipse.xtext.ui.core.editor.XtextEditor"
             contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
             default="true"
             extensions="dmodel"
@@ -16,16 +17,16 @@
  <extension
          point="org.eclipse.ui.preferencePages">
 		<page
-			class="org.eclipse.xtext.ui.core.util.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage/org.eclipse.xtext.example.Domainmodel"
+			class="guice.Aware:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
 			id="org.eclipse.xtext.example.Domainmodel"
 			name="Domainmodel">
 			<keywordReference
-				id="org.eclipse.xtext.example.domainmodel.ui.ui.keyword_Domainmodel">
+				id="org.eclipse.xtext.example.ui.keyword_Domainmodel">
 			</keywordReference>
 		</page>
 		<page
 		    category="org.eclipse.xtext.example.Domainmodel"
-		    class="org.eclipse.xtext.ui.core.util.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.EditorPreferencePage/org.eclipse.xtext.example.Domainmodel"
+		    class="guice.Aware:org.eclipse.xtext.ui.core.editor.preferences.EditorPreferencePage"
 		    id="org.eclipse.xtext.example.Domainmodel.editor"
 		    name="Editor">
 		    	<keywordReference 
@@ -36,7 +37,7 @@
 	<extension
 		point="org.eclipse.ui.keywords">
 		<keyword
-			id="org.eclipse.xtext.example.domainmodel.ui.ui.keyword_Domainmodel"
+			id="org.eclipse.xtext.example.ui.keyword_Domainmodel"
 			label="Domainmodel">
 		</keyword>
 		<keyword
@@ -44,4 +45,15 @@
             label="Task Tags">
         </keyword>
 	</extension>
+	
+	
+	<extension
+         point="org.eclipse.emf.ecore.extension_parser">
+      <parser
+            class="guice.Aware:org.eclipse.xtext.resource.XtextResourceFactory"
+            type="dmodel">
+      </parser>
+   </extension>
+	
+
 </plugin>
