@@ -53,12 +53,12 @@ public class XtextParseTreeConstructor extends AbstractParseTreeConstructor {
 
 /************ begin Rule Grammar ****************
  *
- * Grammar : ( abstract ?= "abstract language" | "language" ) name = GrammarID ( "extends" superGrammarName = GrammarID ) ? ( definesHiddenTokens ?= "hidden" "(" ( hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ) ? ")" ) ? ( metamodelDeclarations += AbstractMetamodelDeclaration ) * ( rules += AbstractRule ) + ;
+ * Grammar:   (abstract?="abstract language"|"language") name=GrammarID ("extends" superGrammarName=GrammarID)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? (metamodelDeclarations+=AbstractMetamodelDeclaration)* (rules+=AbstractRule)+;
  *
  **/
 
 
-// ( abstract ?= "abstract language" | "language" ) name = GrammarID ( "extends" superGrammarName = GrammarID ) ? ( definesHiddenTokens ?= "hidden" "(" ( hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ) ? ")" ) ? ( metamodelDeclarations += AbstractMetamodelDeclaration ) * ( rules += AbstractRule ) +
+// (abstract?="abstract language"|"language") name=GrammarID ("extends" superGrammarName=GrammarID)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? (metamodelDeclarations+=AbstractMetamodelDeclaration)* (rules+=AbstractRule)+
 protected class Grammar_Group extends GroupToken {
 	
 	public Grammar_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -86,7 +86,7 @@ protected class Grammar_Group extends GroupToken {
 	}
 }
 
-// ( abstract ?= "abstract language" | "language" ) name = GrammarID ( "extends" superGrammarName = GrammarID ) ? ( definesHiddenTokens ?= "hidden" "(" ( hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ) ? ")" ) ? ( metamodelDeclarations += AbstractMetamodelDeclaration ) *
+// (abstract?="abstract language"|"language") name=GrammarID ("extends" superGrammarName=GrammarID)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? (metamodelDeclarations+=AbstractMetamodelDeclaration)*
 protected class Grammar_0_Group extends GroupToken {
 	
 	public Grammar_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -114,7 +114,7 @@ protected class Grammar_0_Group extends GroupToken {
 	}
 }
 
-// ( abstract ?= "abstract language" | "language" ) name = GrammarID ( "extends" superGrammarName = GrammarID ) ? ( definesHiddenTokens ?= "hidden" "(" ( hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ) ? ")" ) ?
+// (abstract?="abstract language"|"language") name=GrammarID ("extends" superGrammarName=GrammarID)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")?
 protected class Grammar_0_0_Group extends GroupToken {
 	
 	public Grammar_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -142,7 +142,7 @@ protected class Grammar_0_0_Group extends GroupToken {
 	}
 }
 
-// ( abstract ?= "abstract language" | "language" ) name = GrammarID ( "extends" superGrammarName = GrammarID ) ?
+// (abstract?="abstract language"|"language") name=GrammarID ("extends" superGrammarName=GrammarID)?
 protected class Grammar_0_0_0_Group extends GroupToken {
 	
 	public Grammar_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -170,7 +170,7 @@ protected class Grammar_0_0_0_Group extends GroupToken {
 	}
 }
 
-// ( abstract ?= "abstract language" | "language" ) name = GrammarID
+// (abstract?="abstract language"|"language") name=GrammarID
 protected class Grammar_0_0_0_0_Group extends GroupToken {
 	
 	public Grammar_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -198,7 +198,7 @@ protected class Grammar_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// abstract ?= "abstract language" | "language"
+// abstract?="abstract language"|"language"
 protected class Grammar_0_0_0_0_0_Alternatives extends AlternativesToken {
 
 	public Grammar_0_0_0_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -219,7 +219,7 @@ protected class Grammar_0_0_0_0_0_Alternatives extends AlternativesToken {
 	}
 }
 
-// abstract ?= "abstract language"
+// abstract?="abstract language"
 protected class Grammar_0_0_0_0_0_0_Assignment_abstract extends AssignmentToken  {
 	
 	public Grammar_0_0_0_0_0_0_Assignment_abstract(IInstanceDescription curr, AbstractToken pred) {
@@ -257,7 +257,7 @@ protected class Grammar_0_0_0_0_0_1_Keyword_language extends KeywordToken  {
 }
 
 
-// name = GrammarID
+// name=GrammarID
 protected class Grammar_0_0_0_0_1_Assignment_name extends AssignmentToken  {
 	
 	public Grammar_0_0_0_0_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -283,7 +283,7 @@ protected class Grammar_0_0_0_0_1_Assignment_name extends AssignmentToken  {
 }
 
 
-// ( "extends" superGrammarName = GrammarID ) ?
+// ("extends" superGrammarName=GrammarID)?
 protected class Grammar_0_0_0_1_Group extends GroupToken {
 	
 	public Grammar_0_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -323,7 +323,7 @@ protected class Grammar_0_0_0_1_0_Keyword_extends extends KeywordToken  {
 	}	
 }
 
-// superGrammarName = GrammarID
+// superGrammarName=GrammarID
 protected class Grammar_0_0_0_1_1_Assignment_superGrammarName extends AssignmentToken  {
 	
 	public Grammar_0_0_0_1_1_Assignment_superGrammarName(IInstanceDescription curr, AbstractToken pred) {
@@ -350,7 +350,7 @@ protected class Grammar_0_0_0_1_1_Assignment_superGrammarName extends Assignment
 
 
 
-// ( definesHiddenTokens ?= "hidden" "(" ( hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ) ? ")" ) ?
+// (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")?
 protected class Grammar_0_0_1_Group extends GroupToken {
 	
 	public Grammar_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -378,7 +378,7 @@ protected class Grammar_0_0_1_Group extends GroupToken {
 	}
 }
 
-// definesHiddenTokens ?= "hidden" "(" ( hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ) ?
+// definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)?
 protected class Grammar_0_0_1_0_Group extends GroupToken {
 	
 	public Grammar_0_0_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -406,7 +406,7 @@ protected class Grammar_0_0_1_0_Group extends GroupToken {
 	}
 }
 
-// definesHiddenTokens ?= "hidden" "("
+// definesHiddenTokens?="hidden" "("
 protected class Grammar_0_0_1_0_0_Group extends GroupToken {
 	
 	public Grammar_0_0_1_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -434,7 +434,7 @@ protected class Grammar_0_0_1_0_0_Group extends GroupToken {
 	}
 }
 
-// definesHiddenTokens ?= "hidden"
+// definesHiddenTokens?="hidden"
 protected class Grammar_0_0_1_0_0_0_Assignment_definesHiddenTokens extends AssignmentToken  {
 	
 	public Grammar_0_0_1_0_0_0_Assignment_definesHiddenTokens(IInstanceDescription curr, AbstractToken pred) {
@@ -472,7 +472,7 @@ protected class Grammar_0_0_1_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-// ( hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ) ?
+// (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)?
 protected class Grammar_0_0_1_0_1_Group extends GroupToken {
 	
 	public Grammar_0_0_1_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -500,7 +500,7 @@ protected class Grammar_0_0_1_0_1_Group extends GroupToken {
 	}
 }
 
-// hiddenTokens += [ AbstractRule ]
+// hiddenTokens+=[AbstractRule]
 protected class Grammar_0_0_1_0_1_0_Assignment_hiddenTokens extends AssignmentToken  {
 	
 	public Grammar_0_0_1_0_1_0_Assignment_hiddenTokens(IInstanceDescription curr, AbstractToken pred) {
@@ -526,7 +526,7 @@ protected class Grammar_0_0_1_0_1_0_Assignment_hiddenTokens extends AssignmentTo
 	}
 }
 
-// ( "," hiddenTokens += [ AbstractRule ] ) *
+// ("," hiddenTokens+=[AbstractRule])*
 protected class Grammar_0_0_1_0_1_1_Group extends GroupToken {
 	
 	public Grammar_0_0_1_0_1_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -566,7 +566,7 @@ protected class Grammar_0_0_1_0_1_1_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// hiddenTokens += [ AbstractRule ]
+// hiddenTokens+=[AbstractRule]
 protected class Grammar_0_0_1_0_1_1_1_Assignment_hiddenTokens extends AssignmentToken  {
 	
 	public Grammar_0_0_1_0_1_1_1_Assignment_hiddenTokens(IInstanceDescription curr, AbstractToken pred) {
@@ -609,7 +609,7 @@ protected class Grammar_0_0_1_1_Keyword extends KeywordToken  {
 
 
 
-// ( metamodelDeclarations += AbstractMetamodelDeclaration ) *
+// (metamodelDeclarations+=AbstractMetamodelDeclaration)*
 protected class Grammar_0_1_Assignment_metamodelDeclarations extends AssignmentToken  {
 	
 	public Grammar_0_1_Assignment_metamodelDeclarations(IInstanceDescription curr, AbstractToken pred) {
@@ -641,7 +641,7 @@ protected class Grammar_0_1_Assignment_metamodelDeclarations extends AssignmentT
 }
 
 
-// ( rules += AbstractRule ) +
+// (rules+=AbstractRule)+
 protected class Grammar_1_Assignment_rules extends AssignmentToken  {
 	
 	public Grammar_1_Assignment_rules(IInstanceDescription curr, AbstractToken pred) {
@@ -679,12 +679,12 @@ protected class Grammar_1_Assignment_rules extends AssignmentToken  {
 
 /************ begin Rule AbstractRule ****************
  *
- * AbstractRule : LexerRule | ParserRule | TerminalRule ;
+ * AbstractRule:   LexerRule|ParserRule|TerminalRule;
  *
  **/
 
 
-// LexerRule | ParserRule | TerminalRule
+// LexerRule|ParserRule|TerminalRule
 protected class AbstractRule_Alternatives extends AlternativesToken {
 
 	public AbstractRule_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -705,7 +705,7 @@ protected class AbstractRule_Alternatives extends AlternativesToken {
 	}
 }
 
-// LexerRule | ParserRule
+// LexerRule|ParserRule
 protected class AbstractRule_0_Alternatives extends AlternativesToken {
 
 	public AbstractRule_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -787,12 +787,12 @@ protected class AbstractRule_1_RuleCall_TerminalRule extends RuleCallToken {
 
 /************ begin Rule AbstractMetamodelDeclaration ****************
  *
- * AbstractMetamodelDeclaration : GeneratedMetamodel | ReferencedMetamodel ;
+ * AbstractMetamodelDeclaration:   GeneratedMetamodel|ReferencedMetamodel;
  *
  **/
 
 
-// GeneratedMetamodel | ReferencedMetamodel
+// GeneratedMetamodel|ReferencedMetamodel
 protected class AbstractMetamodelDeclaration_Alternatives extends AlternativesToken {
 
 	public AbstractMetamodelDeclaration_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -855,12 +855,12 @@ protected class AbstractMetamodelDeclaration_1_RuleCall_ReferencedMetamodel exte
 
 /************ begin Rule GeneratedMetamodel ****************
  *
- * GeneratedMetamodel : "generate" name = ID ePackage = [ EPackage | STRING ] ( "as" alias = ID ) ? ;
+ * GeneratedMetamodel:   "generate" name=ID ePackage=[EPackage|STRING] ("as" alias=ID)?;
  *
  **/
 
 
-// "generate" name = ID ePackage = [ EPackage | STRING ] ( "as" alias = ID ) ?
+// "generate" name=ID ePackage=[EPackage|STRING] ("as" alias=ID)?
 protected class GeneratedMetamodel_Group extends GroupToken {
 	
 	public GeneratedMetamodel_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -888,7 +888,7 @@ protected class GeneratedMetamodel_Group extends GroupToken {
 	}
 }
 
-// "generate" name = ID ePackage = [ EPackage | STRING ]
+// "generate" name=ID ePackage=[EPackage|STRING]
 protected class GeneratedMetamodel_0_Group extends GroupToken {
 	
 	public GeneratedMetamodel_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -916,7 +916,7 @@ protected class GeneratedMetamodel_0_Group extends GroupToken {
 	}
 }
 
-// "generate" name = ID
+// "generate" name=ID
 protected class GeneratedMetamodel_0_0_Group extends GroupToken {
 	
 	public GeneratedMetamodel_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -956,7 +956,7 @@ protected class GeneratedMetamodel_0_0_0_Keyword_generate extends KeywordToken  
 	}	
 }
 
-// name = ID
+// name=ID
 protected class GeneratedMetamodel_0_0_1_Assignment_name extends AssignmentToken  {
 	
 	public GeneratedMetamodel_0_0_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -980,7 +980,7 @@ protected class GeneratedMetamodel_0_0_1_Assignment_name extends AssignmentToken
 }
 
 
-// ePackage = [ EPackage | STRING ]
+// ePackage=[EPackage|STRING]
 protected class GeneratedMetamodel_0_1_Assignment_ePackage extends AssignmentToken  {
 	
 	public GeneratedMetamodel_0_1_Assignment_ePackage(IInstanceDescription curr, AbstractToken pred) {
@@ -1007,7 +1007,7 @@ protected class GeneratedMetamodel_0_1_Assignment_ePackage extends AssignmentTok
 }
 
 
-// ( "as" alias = ID ) ?
+// ("as" alias=ID)?
 protected class GeneratedMetamodel_1_Group extends GroupToken {
 	
 	public GeneratedMetamodel_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1047,7 +1047,7 @@ protected class GeneratedMetamodel_1_0_Keyword_as extends KeywordToken  {
 	}	
 }
 
-// alias = ID
+// alias=ID
 protected class GeneratedMetamodel_1_1_Assignment_alias extends AssignmentToken  {
 	
 	public GeneratedMetamodel_1_1_Assignment_alias(IInstanceDescription curr, AbstractToken pred) {
@@ -1077,12 +1077,12 @@ protected class GeneratedMetamodel_1_1_Assignment_alias extends AssignmentToken 
 
 /************ begin Rule ReferencedMetamodel ****************
  *
- * ReferencedMetamodel : "import" ePackage = [ EPackage | STRING ] ( "as" alias = ID ) ? ;
+ * ReferencedMetamodel:   "import" ePackage=[EPackage|STRING] ("as" alias=ID)?;
  *
  **/
 
 
-// "import" ePackage = [ EPackage | STRING ] ( "as" alias = ID ) ?
+// "import" ePackage=[EPackage|STRING] ("as" alias=ID)?
 protected class ReferencedMetamodel_Group extends GroupToken {
 	
 	public ReferencedMetamodel_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1110,7 +1110,7 @@ protected class ReferencedMetamodel_Group extends GroupToken {
 	}
 }
 
-// "import" ePackage = [ EPackage | STRING ]
+// "import" ePackage=[EPackage|STRING]
 protected class ReferencedMetamodel_0_Group extends GroupToken {
 	
 	public ReferencedMetamodel_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1150,7 +1150,7 @@ protected class ReferencedMetamodel_0_0_Keyword_import extends KeywordToken  {
 	}	
 }
 
-// ePackage = [ EPackage | STRING ]
+// ePackage=[EPackage|STRING]
 protected class ReferencedMetamodel_0_1_Assignment_ePackage extends AssignmentToken  {
 	
 	public ReferencedMetamodel_0_1_Assignment_ePackage(IInstanceDescription curr, AbstractToken pred) {
@@ -1177,7 +1177,7 @@ protected class ReferencedMetamodel_0_1_Assignment_ePackage extends AssignmentTo
 }
 
 
-// ( "as" alias = ID ) ?
+// ("as" alias=ID)?
 protected class ReferencedMetamodel_1_Group extends GroupToken {
 	
 	public ReferencedMetamodel_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1217,7 +1217,7 @@ protected class ReferencedMetamodel_1_0_Keyword_as extends KeywordToken  {
 	}	
 }
 
-// alias = ID
+// alias=ID
 protected class ReferencedMetamodel_1_1_Assignment_alias extends AssignmentToken  {
 	
 	public ReferencedMetamodel_1_1_Assignment_alias(IInstanceDescription curr, AbstractToken pred) {
@@ -1247,12 +1247,12 @@ protected class ReferencedMetamodel_1_1_Assignment_alias extends AssignmentToken
 
 /************ begin Rule LexerRule ****************
  *
- * LexerRule : ( "native" | "lexer" ) name = ID ( "returns" type = TypeRef ) ? ":" body = STRING ";" ;
+ * LexerRule:   ("native"|"lexer") name=ID ("returns" type=TypeRef)? ":" body=STRING ";";
  *
  **/
 
 
-// ( "native" | "lexer" ) name = ID ( "returns" type = TypeRef ) ? ":" body = STRING ";"
+// ("native"|"lexer") name=ID ("returns" type=TypeRef)? ":" body=STRING ";"
 protected class LexerRule_Group extends GroupToken {
 	
 	public LexerRule_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1280,7 +1280,7 @@ protected class LexerRule_Group extends GroupToken {
 	}
 }
 
-// ( "native" | "lexer" ) name = ID ( "returns" type = TypeRef ) ? ":" body = STRING
+// ("native"|"lexer") name=ID ("returns" type=TypeRef)? ":" body=STRING
 protected class LexerRule_0_Group extends GroupToken {
 	
 	public LexerRule_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1308,7 +1308,7 @@ protected class LexerRule_0_Group extends GroupToken {
 	}
 }
 
-// ( "native" | "lexer" ) name = ID ( "returns" type = TypeRef ) ? ":"
+// ("native"|"lexer") name=ID ("returns" type=TypeRef)? ":"
 protected class LexerRule_0_0_Group extends GroupToken {
 	
 	public LexerRule_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1336,7 +1336,7 @@ protected class LexerRule_0_0_Group extends GroupToken {
 	}
 }
 
-// ( "native" | "lexer" ) name = ID ( "returns" type = TypeRef ) ?
+// ("native"|"lexer") name=ID ("returns" type=TypeRef)?
 protected class LexerRule_0_0_0_Group extends GroupToken {
 	
 	public LexerRule_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1364,7 +1364,7 @@ protected class LexerRule_0_0_0_Group extends GroupToken {
 	}
 }
 
-// ( "native" | "lexer" ) name = ID
+// ("native"|"lexer") name=ID
 protected class LexerRule_0_0_0_0_Group extends GroupToken {
 	
 	public LexerRule_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1392,7 +1392,7 @@ protected class LexerRule_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// "native" | "lexer"
+// "native"|"lexer"
 protected class LexerRule_0_0_0_0_0_Alternatives extends AlternativesToken {
 
 	public LexerRule_0_0_0_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -1438,7 +1438,7 @@ protected class LexerRule_0_0_0_0_0_1_Keyword_lexer extends KeywordToken  {
 }
 
 
-// name = ID
+// name=ID
 protected class LexerRule_0_0_0_0_1_Assignment_name extends AssignmentToken  {
 	
 	public LexerRule_0_0_0_0_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -1462,7 +1462,7 @@ protected class LexerRule_0_0_0_0_1_Assignment_name extends AssignmentToken  {
 }
 
 
-// ( "returns" type = TypeRef ) ?
+// ("returns" type=TypeRef)?
 protected class LexerRule_0_0_0_1_Group extends GroupToken {
 	
 	public LexerRule_0_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1502,7 +1502,7 @@ protected class LexerRule_0_0_0_1_0_Keyword_returns extends KeywordToken  {
 	}	
 }
 
-// type = TypeRef
+// type=TypeRef
 protected class LexerRule_0_0_0_1_1_Assignment_type extends AssignmentToken  {
 	
 	public LexerRule_0_0_0_1_1_Assignment_type(IInstanceDescription curr, AbstractToken pred) {
@@ -1548,7 +1548,7 @@ protected class LexerRule_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-// body = STRING
+// body=STRING
 protected class LexerRule_0_1_Assignment_body extends AssignmentToken  {
 	
 	public LexerRule_0_1_Assignment_body(IInstanceDescription curr, AbstractToken pred) {
@@ -1590,12 +1590,12 @@ protected class LexerRule_1_Keyword extends KeywordToken  {
 
 /************ begin Rule ParserRule ****************
  *
- * ParserRule : name = ID ( "returns" type = TypeRef ) ? ( definesHiddenTokens ?= "hidden" "(" ( hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ) ? ")" ) ? ":" alternatives = Alternatives ";" ;
+ * ParserRule:   name=ID ("returns" type=TypeRef)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? ":" alternatives=Alternatives ";";
  *
  **/
 
 
-// name = ID ( "returns" type = TypeRef ) ? ( definesHiddenTokens ?= "hidden" "(" ( hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ) ? ")" ) ? ":" alternatives = Alternatives ";"
+// name=ID ("returns" type=TypeRef)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? ":" alternatives=Alternatives ";"
 protected class ParserRule_Group extends GroupToken {
 	
 	public ParserRule_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1623,7 +1623,7 @@ protected class ParserRule_Group extends GroupToken {
 	}
 }
 
-// name = ID ( "returns" type = TypeRef ) ? ( definesHiddenTokens ?= "hidden" "(" ( hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ) ? ")" ) ? ":" alternatives = Alternatives
+// name=ID ("returns" type=TypeRef)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? ":" alternatives=Alternatives
 protected class ParserRule_0_Group extends GroupToken {
 	
 	public ParserRule_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1651,7 +1651,7 @@ protected class ParserRule_0_Group extends GroupToken {
 	}
 }
 
-// name = ID ( "returns" type = TypeRef ) ? ( definesHiddenTokens ?= "hidden" "(" ( hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ) ? ")" ) ? ":"
+// name=ID ("returns" type=TypeRef)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? ":"
 protected class ParserRule_0_0_Group extends GroupToken {
 	
 	public ParserRule_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1679,7 +1679,7 @@ protected class ParserRule_0_0_Group extends GroupToken {
 	}
 }
 
-// name = ID ( "returns" type = TypeRef ) ? ( definesHiddenTokens ?= "hidden" "(" ( hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ) ? ")" ) ?
+// name=ID ("returns" type=TypeRef)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")?
 protected class ParserRule_0_0_0_Group extends GroupToken {
 	
 	public ParserRule_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1707,7 +1707,7 @@ protected class ParserRule_0_0_0_Group extends GroupToken {
 	}
 }
 
-// name = ID ( "returns" type = TypeRef ) ?
+// name=ID ("returns" type=TypeRef)?
 protected class ParserRule_0_0_0_0_Group extends GroupToken {
 	
 	public ParserRule_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1735,7 +1735,7 @@ protected class ParserRule_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// name = ID
+// name=ID
 protected class ParserRule_0_0_0_0_0_Assignment_name extends AssignmentToken  {
 	
 	public ParserRule_0_0_0_0_0_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -1758,7 +1758,7 @@ protected class ParserRule_0_0_0_0_0_Assignment_name extends AssignmentToken  {
 	}
 }
 
-// ( "returns" type = TypeRef ) ?
+// ("returns" type=TypeRef)?
 protected class ParserRule_0_0_0_0_1_Group extends GroupToken {
 	
 	public ParserRule_0_0_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1798,7 +1798,7 @@ protected class ParserRule_0_0_0_0_1_0_Keyword_returns extends KeywordToken  {
 	}	
 }
 
-// type = TypeRef
+// type=TypeRef
 protected class ParserRule_0_0_0_0_1_1_Assignment_type extends AssignmentToken  {
 	
 	public ParserRule_0_0_0_0_1_1_Assignment_type(IInstanceDescription curr, AbstractToken pred) {
@@ -1831,7 +1831,7 @@ protected class ParserRule_0_0_0_0_1_1_Assignment_type extends AssignmentToken  
 
 
 
-// ( definesHiddenTokens ?= "hidden" "(" ( hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ) ? ")" ) ?
+// (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")?
 protected class ParserRule_0_0_0_1_Group extends GroupToken {
 	
 	public ParserRule_0_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1859,7 +1859,7 @@ protected class ParserRule_0_0_0_1_Group extends GroupToken {
 	}
 }
 
-// definesHiddenTokens ?= "hidden" "(" ( hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ) ?
+// definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)?
 protected class ParserRule_0_0_0_1_0_Group extends GroupToken {
 	
 	public ParserRule_0_0_0_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1887,7 +1887,7 @@ protected class ParserRule_0_0_0_1_0_Group extends GroupToken {
 	}
 }
 
-// definesHiddenTokens ?= "hidden" "("
+// definesHiddenTokens?="hidden" "("
 protected class ParserRule_0_0_0_1_0_0_Group extends GroupToken {
 	
 	public ParserRule_0_0_0_1_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1915,7 +1915,7 @@ protected class ParserRule_0_0_0_1_0_0_Group extends GroupToken {
 	}
 }
 
-// definesHiddenTokens ?= "hidden"
+// definesHiddenTokens?="hidden"
 protected class ParserRule_0_0_0_1_0_0_0_Assignment_definesHiddenTokens extends AssignmentToken  {
 	
 	public ParserRule_0_0_0_1_0_0_0_Assignment_definesHiddenTokens(IInstanceDescription curr, AbstractToken pred) {
@@ -1953,7 +1953,7 @@ protected class ParserRule_0_0_0_1_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-// ( hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ) ?
+// (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)?
 protected class ParserRule_0_0_0_1_0_1_Group extends GroupToken {
 	
 	public ParserRule_0_0_0_1_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1981,7 +1981,7 @@ protected class ParserRule_0_0_0_1_0_1_Group extends GroupToken {
 	}
 }
 
-// hiddenTokens += [ AbstractRule ]
+// hiddenTokens+=[AbstractRule]
 protected class ParserRule_0_0_0_1_0_1_0_Assignment_hiddenTokens extends AssignmentToken  {
 	
 	public ParserRule_0_0_0_1_0_1_0_Assignment_hiddenTokens(IInstanceDescription curr, AbstractToken pred) {
@@ -2007,7 +2007,7 @@ protected class ParserRule_0_0_0_1_0_1_0_Assignment_hiddenTokens extends Assignm
 	}
 }
 
-// ( "," hiddenTokens += [ AbstractRule ] ) *
+// ("," hiddenTokens+=[AbstractRule])*
 protected class ParserRule_0_0_0_1_0_1_1_Group extends GroupToken {
 	
 	public ParserRule_0_0_0_1_0_1_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2047,7 +2047,7 @@ protected class ParserRule_0_0_0_1_0_1_1_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// hiddenTokens += [ AbstractRule ]
+// hiddenTokens+=[AbstractRule]
 protected class ParserRule_0_0_0_1_0_1_1_1_Assignment_hiddenTokens extends AssignmentToken  {
 	
 	public ParserRule_0_0_0_1_0_1_1_1_Assignment_hiddenTokens(IInstanceDescription curr, AbstractToken pred) {
@@ -2103,7 +2103,7 @@ protected class ParserRule_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-// alternatives = Alternatives
+// alternatives=Alternatives
 protected class ParserRule_0_1_Assignment_alternatives extends AssignmentToken  {
 	
 	public ParserRule_0_1_Assignment_alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -2153,12 +2153,12 @@ protected class ParserRule_1_Keyword extends KeywordToken  {
 
 /************ begin Rule TerminalRule ****************
  *
- * TerminalRule returns ParserRule : ^terminal ?= "terminal" name = ID ( "returns" type = TypeRef ) ? ":" alternatives = TerminalAlternatives ";" ;
+ * TerminalRule returns ParserRule:   ^terminal?="terminal" name=ID ("returns" type=TypeRef)? ":" alternatives=TerminalAlternatives ";";
  *
  **/
 
 
-// ^terminal ?= "terminal" name = ID ( "returns" type = TypeRef ) ? ":" alternatives = TerminalAlternatives ";"
+// ^terminal?="terminal" name=ID ("returns" type=TypeRef)? ":" alternatives=TerminalAlternatives ";"
 protected class TerminalRule_Group extends GroupToken {
 	
 	public TerminalRule_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2186,7 +2186,7 @@ protected class TerminalRule_Group extends GroupToken {
 	}
 }
 
-// ^terminal ?= "terminal" name = ID ( "returns" type = TypeRef ) ? ":" alternatives = TerminalAlternatives
+// ^terminal?="terminal" name=ID ("returns" type=TypeRef)? ":" alternatives=TerminalAlternatives
 protected class TerminalRule_0_Group extends GroupToken {
 	
 	public TerminalRule_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2214,7 +2214,7 @@ protected class TerminalRule_0_Group extends GroupToken {
 	}
 }
 
-// ^terminal ?= "terminal" name = ID ( "returns" type = TypeRef ) ? ":"
+// ^terminal?="terminal" name=ID ("returns" type=TypeRef)? ":"
 protected class TerminalRule_0_0_Group extends GroupToken {
 	
 	public TerminalRule_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2242,7 +2242,7 @@ protected class TerminalRule_0_0_Group extends GroupToken {
 	}
 }
 
-// ^terminal ?= "terminal" name = ID ( "returns" type = TypeRef ) ?
+// ^terminal?="terminal" name=ID ("returns" type=TypeRef)?
 protected class TerminalRule_0_0_0_Group extends GroupToken {
 	
 	public TerminalRule_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2270,7 +2270,7 @@ protected class TerminalRule_0_0_0_Group extends GroupToken {
 	}
 }
 
-// ^terminal ?= "terminal" name = ID
+// ^terminal?="terminal" name=ID
 protected class TerminalRule_0_0_0_0_Group extends GroupToken {
 	
 	public TerminalRule_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2298,7 +2298,7 @@ protected class TerminalRule_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// ^terminal ?= "terminal"
+// ^terminal?="terminal"
 protected class TerminalRule_0_0_0_0_0_Assignment_terminal extends AssignmentToken  {
 	
 	public TerminalRule_0_0_0_0_0_Assignment_terminal(IInstanceDescription curr, AbstractToken pred) {
@@ -2323,7 +2323,7 @@ protected class TerminalRule_0_0_0_0_0_Assignment_terminal extends AssignmentTok
 	}
 }
 
-// name = ID
+// name=ID
 protected class TerminalRule_0_0_0_0_1_Assignment_name extends AssignmentToken  {
 	
 	public TerminalRule_0_0_0_0_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -2347,7 +2347,7 @@ protected class TerminalRule_0_0_0_0_1_Assignment_name extends AssignmentToken  
 }
 
 
-// ( "returns" type = TypeRef ) ?
+// ("returns" type=TypeRef)?
 protected class TerminalRule_0_0_0_1_Group extends GroupToken {
 	
 	public TerminalRule_0_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2387,7 +2387,7 @@ protected class TerminalRule_0_0_0_1_0_Keyword_returns extends KeywordToken  {
 	}	
 }
 
-// type = TypeRef
+// type=TypeRef
 protected class TerminalRule_0_0_0_1_1_Assignment_type extends AssignmentToken  {
 	
 	public TerminalRule_0_0_0_1_1_Assignment_type(IInstanceDescription curr, AbstractToken pred) {
@@ -2433,7 +2433,7 @@ protected class TerminalRule_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-// alternatives = TerminalAlternatives
+// alternatives=TerminalAlternatives
 protected class TerminalRule_0_1_Assignment_alternatives extends AssignmentToken  {
 	
 	public TerminalRule_0_1_Assignment_alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -2483,12 +2483,12 @@ protected class TerminalRule_1_Keyword extends KeywordToken  {
 
 /************ begin Rule TypeRef ****************
  *
- * TypeRef : ( metamodel = [ AbstractMetamodelDeclaration ] "::" ) ? type = [ EClassifier ] ;
+ * TypeRef:   (metamodel=[AbstractMetamodelDeclaration] "::")? type=[EClassifier];
  *
  **/
 
 
-// ( metamodel = [ AbstractMetamodelDeclaration ] "::" ) ? type = [ EClassifier ]
+// (metamodel=[AbstractMetamodelDeclaration] "::")? type=[EClassifier]
 protected class TypeRef_Group extends GroupToken {
 	
 	public TypeRef_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2516,7 +2516,7 @@ protected class TypeRef_Group extends GroupToken {
 	}
 }
 
-// ( metamodel = [ AbstractMetamodelDeclaration ] "::" ) ?
+// (metamodel=[AbstractMetamodelDeclaration] "::")?
 protected class TypeRef_0_Group extends GroupToken {
 	
 	public TypeRef_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2544,7 +2544,7 @@ protected class TypeRef_0_Group extends GroupToken {
 	}
 }
 
-// metamodel = [ AbstractMetamodelDeclaration ]
+// metamodel=[AbstractMetamodelDeclaration]
 protected class TypeRef_0_0_Assignment_metamodel extends AssignmentToken  {
 	
 	public TypeRef_0_0_Assignment_metamodel(IInstanceDescription curr, AbstractToken pred) {
@@ -2583,7 +2583,7 @@ protected class TypeRef_0_1_Keyword extends KeywordToken  {
 }
 
 
-// type = [ EClassifier ]
+// type=[EClassifier]
 protected class TypeRef_1_Assignment_type extends AssignmentToken  {
 	
 	public TypeRef_1_Assignment_type(IInstanceDescription curr, AbstractToken pred) {
@@ -2615,12 +2615,12 @@ protected class TypeRef_1_Assignment_type extends AssignmentToken  {
 
 /************ begin Rule Alternatives ****************
  *
- * Alternatives returns AbstractElement : Group ( { current = Alternatives . groups += current } "|" groups += Group ) * ;
+ * Alternatives returns AbstractElement:   Group ({current=Alternatives.groups+=current} "|" groups+=Group)*;
  *
  **/
 
 
-// Group ( { current = Alternatives . groups += current } "|" groups += Group ) *
+// Group ({current=Alternatives.groups+=current} "|" groups+=Group)*
 protected class Alternatives_Group extends GroupToken {
 	
 	public Alternatives_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2666,7 +2666,7 @@ protected class Alternatives_0_RuleCall_Group extends RuleCallToken {
 	}
 }
 
-// ( { current = Alternatives . groups += current } "|" groups += Group ) *
+// ({current=Alternatives.groups+=current} "|" groups+=Group)*
 protected class Alternatives_1_Group extends GroupToken {
 	
 	public Alternatives_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2694,7 +2694,7 @@ protected class Alternatives_1_Group extends GroupToken {
 	}
 }
 
-// { current = Alternatives . groups += current } "|"
+// {current=Alternatives.groups+=current} "|"
 protected class Alternatives_1_0_Group extends GroupToken {
 	
 	public Alternatives_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2722,7 +2722,7 @@ protected class Alternatives_1_0_Group extends GroupToken {
 	}
 }
 
-// { current = Alternatives . groups += current }
+// {current=Alternatives.groups+=current}
 protected class Alternatives_1_0_0_Action_Alternatives_groups extends ActionToken  {
 
 	public Alternatives_1_0_0_Action_Alternatives_groups(IInstanceDescription curr, AbstractToken pred) {
@@ -2755,7 +2755,7 @@ protected class Alternatives_1_0_1_Keyword extends KeywordToken  {
 }
 
 
-// groups += Group
+// groups+=Group
 protected class Alternatives_1_1_Assignment_groups extends AssignmentToken  {
 	
 	public Alternatives_1_1_Assignment_groups(IInstanceDescription curr, AbstractToken pred) {
@@ -2793,12 +2793,12 @@ protected class Alternatives_1_1_Assignment_groups extends AssignmentToken  {
 
 /************ begin Rule TerminalAlternatives ****************
  *
- * TerminalAlternatives returns AbstractElement : TerminalGroup ( { current = Alternatives . groups += current } "|" groups += TerminalGroup ) * ;
+ * TerminalAlternatives returns AbstractElement:   TerminalGroup ({current=Alternatives.groups+=current} "|" groups+=TerminalGroup)*;
  *
  **/
 
 
-// TerminalGroup ( { current = Alternatives . groups += current } "|" groups += TerminalGroup ) *
+// TerminalGroup ({current=Alternatives.groups+=current} "|" groups+=TerminalGroup)*
 protected class TerminalAlternatives_Group extends GroupToken {
 	
 	public TerminalAlternatives_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2844,7 +2844,7 @@ protected class TerminalAlternatives_0_RuleCall_TerminalGroup extends RuleCallTo
 	}
 }
 
-// ( { current = Alternatives . groups += current } "|" groups += TerminalGroup ) *
+// ({current=Alternatives.groups+=current} "|" groups+=TerminalGroup)*
 protected class TerminalAlternatives_1_Group extends GroupToken {
 	
 	public TerminalAlternatives_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2872,7 +2872,7 @@ protected class TerminalAlternatives_1_Group extends GroupToken {
 	}
 }
 
-// { current = Alternatives . groups += current } "|"
+// {current=Alternatives.groups+=current} "|"
 protected class TerminalAlternatives_1_0_Group extends GroupToken {
 	
 	public TerminalAlternatives_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2900,7 +2900,7 @@ protected class TerminalAlternatives_1_0_Group extends GroupToken {
 	}
 }
 
-// { current = Alternatives . groups += current }
+// {current=Alternatives.groups+=current}
 protected class TerminalAlternatives_1_0_0_Action_Alternatives_groups extends ActionToken  {
 
 	public TerminalAlternatives_1_0_0_Action_Alternatives_groups(IInstanceDescription curr, AbstractToken pred) {
@@ -2933,7 +2933,7 @@ protected class TerminalAlternatives_1_0_1_Keyword extends KeywordToken  {
 }
 
 
-// groups += TerminalGroup
+// groups+=TerminalGroup
 protected class TerminalAlternatives_1_1_Assignment_groups extends AssignmentToken  {
 	
 	public TerminalAlternatives_1_1_Assignment_groups(IInstanceDescription curr, AbstractToken pred) {
@@ -2971,12 +2971,12 @@ protected class TerminalAlternatives_1_1_Assignment_groups extends AssignmentTok
 
 /************ begin Rule Group ****************
  *
- * Group returns AbstractElement : AbstractToken ( { current = Group . abstractTokens += current } abstractTokens += AbstractToken ) * ;
+ * Group returns AbstractElement:   AbstractToken ({current=Group.abstractTokens+=current} abstractTokens+=AbstractToken)*;
  *
  **/
 
 
-// AbstractToken ( { current = Group . abstractTokens += current } abstractTokens += AbstractToken ) *
+// AbstractToken ({current=Group.abstractTokens+=current} abstractTokens+=AbstractToken)*
 protected class Group_Group extends GroupToken {
 	
 	public Group_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3022,7 +3022,7 @@ protected class Group_0_RuleCall_AbstractToken extends RuleCallToken {
 	}
 }
 
-// ( { current = Group . abstractTokens += current } abstractTokens += AbstractToken ) *
+// ({current=Group.abstractTokens+=current} abstractTokens+=AbstractToken)*
 protected class Group_1_Group extends GroupToken {
 	
 	public Group_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3050,7 +3050,7 @@ protected class Group_1_Group extends GroupToken {
 	}
 }
 
-// { current = Group . abstractTokens += current }
+// {current=Group.abstractTokens+=current}
 protected class Group_1_0_Action_Group_abstractTokens extends ActionToken  {
 
 	public Group_1_0_Action_Group_abstractTokens(IInstanceDescription curr, AbstractToken pred) {
@@ -3070,7 +3070,7 @@ protected class Group_1_0_Action_Group_abstractTokens extends ActionToken  {
 	}
 }
 
-// abstractTokens += AbstractToken
+// abstractTokens+=AbstractToken
 protected class Group_1_1_Assignment_abstractTokens extends AssignmentToken  {
 	
 	public Group_1_1_Assignment_abstractTokens(IInstanceDescription curr, AbstractToken pred) {
@@ -3108,12 +3108,12 @@ protected class Group_1_1_Assignment_abstractTokens extends AssignmentToken  {
 
 /************ begin Rule TerminalGroup ****************
  *
- * TerminalGroup returns AbstractElement : TerminalToken ( { current = Group . abstractTokens += current } abstractTokens += TerminalToken ) * ;
+ * TerminalGroup returns AbstractElement:   TerminalToken ({current=Group.abstractTokens+=current} abstractTokens+=TerminalToken)*;
  *
  **/
 
 
-// TerminalToken ( { current = Group . abstractTokens += current } abstractTokens += TerminalToken ) *
+// TerminalToken ({current=Group.abstractTokens+=current} abstractTokens+=TerminalToken)*
 protected class TerminalGroup_Group extends GroupToken {
 	
 	public TerminalGroup_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3159,7 +3159,7 @@ protected class TerminalGroup_0_RuleCall_TerminalToken extends RuleCallToken {
 	}
 }
 
-// ( { current = Group . abstractTokens += current } abstractTokens += TerminalToken ) *
+// ({current=Group.abstractTokens+=current} abstractTokens+=TerminalToken)*
 protected class TerminalGroup_1_Group extends GroupToken {
 	
 	public TerminalGroup_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3187,7 +3187,7 @@ protected class TerminalGroup_1_Group extends GroupToken {
 	}
 }
 
-// { current = Group . abstractTokens += current }
+// {current=Group.abstractTokens+=current}
 protected class TerminalGroup_1_0_Action_Group_abstractTokens extends ActionToken  {
 
 	public TerminalGroup_1_0_Action_Group_abstractTokens(IInstanceDescription curr, AbstractToken pred) {
@@ -3207,7 +3207,7 @@ protected class TerminalGroup_1_0_Action_Group_abstractTokens extends ActionToke
 	}
 }
 
-// abstractTokens += TerminalToken
+// abstractTokens+=TerminalToken
 protected class TerminalGroup_1_1_Assignment_abstractTokens extends AssignmentToken  {
 	
 	public TerminalGroup_1_1_Assignment_abstractTokens(IInstanceDescription curr, AbstractToken pred) {
@@ -3245,12 +3245,12 @@ protected class TerminalGroup_1_1_Assignment_abstractTokens extends AssignmentTo
 
 /************ begin Rule AbstractToken ****************
  *
- * AbstractToken returns AbstractElement : ( Assignment | Action | AbstractTerminal ) ( cardinality = ( "?" | "*" | "+" ) ) ? ;
+ * AbstractToken returns AbstractElement:   (Assignment|Action|AbstractTerminal) (cardinality=("?"|"*"|"+"))?;
  *
  **/
 
 
-// ( Assignment | Action | AbstractTerminal ) ( cardinality = ( "?" | "*" | "+" ) ) ?
+// (Assignment|Action|AbstractTerminal) (cardinality=("?"|"*"|"+"))?
 protected class AbstractToken_Group extends GroupToken {
 	
 	public AbstractToken_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3278,7 +3278,7 @@ protected class AbstractToken_Group extends GroupToken {
 	}
 }
 
-// Assignment | Action | AbstractTerminal
+// Assignment|Action|AbstractTerminal
 protected class AbstractToken_0_Alternatives extends AlternativesToken {
 
 	public AbstractToken_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -3299,7 +3299,7 @@ protected class AbstractToken_0_Alternatives extends AlternativesToken {
 	}
 }
 
-// Assignment | Action
+// Assignment|Action
 protected class AbstractToken_0_0_Alternatives extends AlternativesToken {
 
 	public AbstractToken_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -3376,7 +3376,7 @@ protected class AbstractToken_0_1_RuleCall_AbstractTerminal extends RuleCallToke
 }
 
 
-// ( cardinality = ( "?" | "*" | "+" ) ) ?
+// (cardinality=("?"|"*"|"+"))?
 protected class AbstractToken_1_Assignment_cardinality extends AssignmentToken  {
 	
 	public AbstractToken_1_Assignment_cardinality(IInstanceDescription curr, AbstractToken pred) {
@@ -3421,12 +3421,12 @@ protected class AbstractToken_1_Assignment_cardinality extends AssignmentToken  
 
 /************ begin Rule TerminalToken ****************
  *
- * TerminalToken returns AbstractElement : TerminalTokenElement ( cardinality = ( "?" | "*" | "+" ) ) ? ;
+ * TerminalToken returns AbstractElement:   TerminalTokenElement (cardinality=("?"|"*"|"+"))?;
  *
  **/
 
 
-// TerminalTokenElement ( cardinality = ( "?" | "*" | "+" ) ) ?
+// TerminalTokenElement (cardinality=("?"|"*"|"+"))?
 protected class TerminalToken_Group extends GroupToken {
 	
 	public TerminalToken_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3472,7 +3472,7 @@ protected class TerminalToken_0_RuleCall_TerminalTokenElement extends RuleCallTo
 	}
 }
 
-// ( cardinality = ( "?" | "*" | "+" ) ) ?
+// (cardinality=("?"|"*"|"+"))?
 protected class TerminalToken_1_Assignment_cardinality extends AssignmentToken  {
 	
 	public TerminalToken_1_Assignment_cardinality(IInstanceDescription curr, AbstractToken pred) {
@@ -3517,12 +3517,12 @@ protected class TerminalToken_1_Assignment_cardinality extends AssignmentToken  
 
 /************ begin Rule Assignment ****************
  *
- * Assignment : feature = ID operator = ( "+=" | "=" | "?=" ) ^terminal = AbstractTerminal ;
+ * Assignment:   feature=ID operator=("+="|"="|"?=") ^terminal=AbstractTerminal;
  *
  **/
 
 
-// feature = ID operator = ( "+=" | "=" | "?=" ) ^terminal = AbstractTerminal
+// feature=ID operator=("+="|"="|"?=") ^terminal=AbstractTerminal
 protected class Assignment_Group extends GroupToken {
 	
 	public Assignment_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3550,7 +3550,7 @@ protected class Assignment_Group extends GroupToken {
 	}
 }
 
-// feature = ID operator = ( "+=" | "=" | "?=" )
+// feature=ID operator=("+="|"="|"?=")
 protected class Assignment_0_Group extends GroupToken {
 	
 	public Assignment_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3578,7 +3578,7 @@ protected class Assignment_0_Group extends GroupToken {
 	}
 }
 
-// feature = ID
+// feature=ID
 protected class Assignment_0_0_Assignment_feature extends AssignmentToken  {
 	
 	public Assignment_0_0_Assignment_feature(IInstanceDescription curr, AbstractToken pred) {
@@ -3601,7 +3601,7 @@ protected class Assignment_0_0_Assignment_feature extends AssignmentToken  {
 	}
 }
 
-// operator = ( "+=" | "=" | "?=" )
+// operator=("+="|"="|"?=")
 protected class Assignment_0_1_Assignment_operator extends AssignmentToken  {
 	
 	public Assignment_0_1_Assignment_operator(IInstanceDescription curr, AbstractToken pred) {
@@ -3641,7 +3641,7 @@ protected class Assignment_0_1_Assignment_operator extends AssignmentToken  {
 }
 
 
-// ^terminal = AbstractTerminal
+// ^terminal=AbstractTerminal
 protected class Assignment_1_Assignment_terminal extends AssignmentToken  {
 	
 	public Assignment_1_Assignment_terminal(IInstanceDescription curr, AbstractToken pred) {
@@ -3678,12 +3678,12 @@ protected class Assignment_1_Assignment_terminal extends AssignmentToken  {
 
 /************ begin Rule Action ****************
  *
- * Action : "{" ( "current" "=" ) ? typeName = TypeRef "." feature = ID operator = ( "=" | "+=" ) "current" "}" ;
+ * Action:   "{" ("current" "=")? typeName=TypeRef "." feature=ID operator=("="|"+=") "current" "}";
  *
  **/
 
 
-// "{" ( "current" "=" ) ? typeName = TypeRef "." feature = ID operator = ( "=" | "+=" ) "current" "}"
+// "{" ("current" "=")? typeName=TypeRef "." feature=ID operator=("="|"+=") "current" "}"
 protected class Action_Group extends GroupToken {
 	
 	public Action_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3711,7 +3711,7 @@ protected class Action_Group extends GroupToken {
 	}
 }
 
-// "{" ( "current" "=" ) ? typeName = TypeRef "." feature = ID operator = ( "=" | "+=" ) "current"
+// "{" ("current" "=")? typeName=TypeRef "." feature=ID operator=("="|"+=") "current"
 protected class Action_0_Group extends GroupToken {
 	
 	public Action_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3739,7 +3739,7 @@ protected class Action_0_Group extends GroupToken {
 	}
 }
 
-// "{" ( "current" "=" ) ? typeName = TypeRef "." feature = ID operator = ( "=" | "+=" )
+// "{" ("current" "=")? typeName=TypeRef "." feature=ID operator=("="|"+=")
 protected class Action_0_0_Group extends GroupToken {
 	
 	public Action_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3767,7 +3767,7 @@ protected class Action_0_0_Group extends GroupToken {
 	}
 }
 
-// "{" ( "current" "=" ) ? typeName = TypeRef "." feature = ID
+// "{" ("current" "=")? typeName=TypeRef "." feature=ID
 protected class Action_0_0_0_Group extends GroupToken {
 	
 	public Action_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3795,7 +3795,7 @@ protected class Action_0_0_0_Group extends GroupToken {
 	}
 }
 
-// "{" ( "current" "=" ) ? typeName = TypeRef "."
+// "{" ("current" "=")? typeName=TypeRef "."
 protected class Action_0_0_0_0_Group extends GroupToken {
 	
 	public Action_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3823,7 +3823,7 @@ protected class Action_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// "{" ( "current" "=" ) ? typeName = TypeRef
+// "{" ("current" "=")? typeName=TypeRef
 protected class Action_0_0_0_0_0_Group extends GroupToken {
 	
 	public Action_0_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3851,7 +3851,7 @@ protected class Action_0_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// "{" ( "current" "=" ) ?
+// "{" ("current" "=")?
 protected class Action_0_0_0_0_0_0_Group extends GroupToken {
 	
 	public Action_0_0_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3891,7 +3891,7 @@ protected class Action_0_0_0_0_0_0_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// ( "current" "=" ) ?
+// ("current" "=")?
 protected class Action_0_0_0_0_0_0_1_Group extends GroupToken {
 	
 	public Action_0_0_0_0_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3945,7 +3945,7 @@ protected class Action_0_0_0_0_0_0_1_1_Keyword extends KeywordToken  {
 
 
 
-// typeName = TypeRef
+// typeName=TypeRef
 protected class Action_0_0_0_0_0_1_Assignment_typeName extends AssignmentToken  {
 	
 	public Action_0_0_0_0_0_1_Assignment_typeName(IInstanceDescription curr, AbstractToken pred) {
@@ -3990,7 +3990,7 @@ protected class Action_0_0_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-// feature = ID
+// feature=ID
 protected class Action_0_0_0_1_Assignment_feature extends AssignmentToken  {
 	
 	public Action_0_0_0_1_Assignment_feature(IInstanceDescription curr, AbstractToken pred) {
@@ -4014,7 +4014,7 @@ protected class Action_0_0_0_1_Assignment_feature extends AssignmentToken  {
 }
 
 
-// operator = ( "=" | "+=" )
+// operator=("="|"+=")
 protected class Action_0_0_1_Assignment_operator extends AssignmentToken  {
 	
 	public Action_0_0_1_Assignment_operator(IInstanceDescription curr, AbstractToken pred) {
@@ -4078,12 +4078,12 @@ protected class Action_1_Keyword extends KeywordToken  {
 
 /************ begin Rule AbstractTerminal ****************
  *
- * AbstractTerminal returns AbstractElement : Keyword | RuleCall | ParenthesizedElement | CrossReference ;
+ * AbstractTerminal returns AbstractElement:   Keyword|RuleCall|ParenthesizedElement|CrossReference;
  *
  **/
 
 
-// Keyword | RuleCall | ParenthesizedElement | CrossReference
+// Keyword|RuleCall|ParenthesizedElement|CrossReference
 protected class AbstractTerminal_Alternatives extends AlternativesToken {
 
 	public AbstractTerminal_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -4104,7 +4104,7 @@ protected class AbstractTerminal_Alternatives extends AlternativesToken {
 	}
 }
 
-// Keyword | RuleCall | ParenthesizedElement
+// Keyword|RuleCall|ParenthesizedElement
 protected class AbstractTerminal_0_Alternatives extends AlternativesToken {
 
 	public AbstractTerminal_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -4125,7 +4125,7 @@ protected class AbstractTerminal_0_Alternatives extends AlternativesToken {
 	}
 }
 
-// Keyword | RuleCall
+// Keyword|RuleCall
 protected class AbstractTerminal_0_0_Alternatives extends AlternativesToken {
 
 	public AbstractTerminal_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -4226,12 +4226,12 @@ protected class AbstractTerminal_1_RuleCall_CrossReference extends RuleCallToken
 
 /************ begin Rule TerminalTokenElement ****************
  *
- * TerminalTokenElement returns AbstractElement : CharacterRange | RuleCall | ParenthesizedTerminalElement | AbstractNegatedToken | Wildcard ;
+ * TerminalTokenElement returns AbstractElement:   CharacterRange|RuleCall|ParenthesizedTerminalElement|AbstractNegatedToken|Wildcard;
  *
  **/
 
 
-// CharacterRange | RuleCall | ParenthesizedTerminalElement | AbstractNegatedToken | Wildcard
+// CharacterRange|RuleCall|ParenthesizedTerminalElement|AbstractNegatedToken|Wildcard
 protected class TerminalTokenElement_Alternatives extends AlternativesToken {
 
 	public TerminalTokenElement_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -4252,7 +4252,7 @@ protected class TerminalTokenElement_Alternatives extends AlternativesToken {
 	}
 }
 
-// CharacterRange | RuleCall | ParenthesizedTerminalElement | AbstractNegatedToken
+// CharacterRange|RuleCall|ParenthesizedTerminalElement|AbstractNegatedToken
 protected class TerminalTokenElement_0_Alternatives extends AlternativesToken {
 
 	public TerminalTokenElement_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -4273,7 +4273,7 @@ protected class TerminalTokenElement_0_Alternatives extends AlternativesToken {
 	}
 }
 
-// CharacterRange | RuleCall | ParenthesizedTerminalElement
+// CharacterRange|RuleCall|ParenthesizedTerminalElement
 protected class TerminalTokenElement_0_0_Alternatives extends AlternativesToken {
 
 	public TerminalTokenElement_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -4294,7 +4294,7 @@ protected class TerminalTokenElement_0_0_Alternatives extends AlternativesToken 
 	}
 }
 
-// CharacterRange | RuleCall
+// CharacterRange|RuleCall
 protected class TerminalTokenElement_0_0_0_Alternatives extends AlternativesToken {
 
 	public TerminalTokenElement_0_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -4414,12 +4414,12 @@ protected class TerminalTokenElement_1_RuleCall_Wildcard extends RuleCallToken {
 
 /************ begin Rule AbstractNegatedToken ****************
  *
- * AbstractNegatedToken : NegatedToken | UpToToken ;
+ * AbstractNegatedToken:   NegatedToken|UpToToken;
  *
  **/
 
 
-// NegatedToken | UpToToken
+// NegatedToken|UpToToken
 protected class AbstractNegatedToken_Alternatives extends AlternativesToken {
 
 	public AbstractNegatedToken_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -4482,12 +4482,12 @@ protected class AbstractNegatedToken_1_RuleCall_UpToToken extends RuleCallToken 
 
 /************ begin Rule NegatedToken ****************
  *
- * NegatedToken : "!" ^terminal = TerminalTokenElement ;
+ * NegatedToken:   "!" ^terminal=TerminalTokenElement;
  *
  **/
 
 
-// "!" ^terminal = TerminalTokenElement
+// "!" ^terminal=TerminalTokenElement
 protected class NegatedToken_Group extends GroupToken {
 	
 	public NegatedToken_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -4527,7 +4527,7 @@ protected class NegatedToken_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// ^terminal = TerminalTokenElement
+// ^terminal=TerminalTokenElement
 protected class NegatedToken_1_Assignment_terminal extends AssignmentToken  {
 	
 	public NegatedToken_1_Assignment_terminal(IInstanceDescription curr, AbstractToken pred) {
@@ -4564,12 +4564,12 @@ protected class NegatedToken_1_Assignment_terminal extends AssignmentToken  {
 
 /************ begin Rule UpToToken ****************
  *
- * UpToToken : "->" ^terminal = TerminalTokenElement ;
+ * UpToToken:   "->" ^terminal=TerminalTokenElement;
  *
  **/
 
 
-// "->" ^terminal = TerminalTokenElement
+// "->" ^terminal=TerminalTokenElement
 protected class UpToToken_Group extends GroupToken {
 	
 	public UpToToken_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -4609,7 +4609,7 @@ protected class UpToToken_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// ^terminal = TerminalTokenElement
+// ^terminal=TerminalTokenElement
 protected class UpToToken_1_Assignment_terminal extends AssignmentToken  {
 	
 	public UpToToken_1_Assignment_terminal(IInstanceDescription curr, AbstractToken pred) {
@@ -4646,12 +4646,12 @@ protected class UpToToken_1_Assignment_terminal extends AssignmentToken  {
 
 /************ begin Rule Wildcard ****************
  *
- * Wildcard : isWildcard ?= "." ;
+ * Wildcard:   isWildcard?=".";
  *
  **/
 
 
-// isWildcard ?= "."
+// isWildcard?="."
 protected class Wildcard_Assignment_isWildcard extends AssignmentToken  {
 	
 	public Wildcard_Assignment_isWildcard(IInstanceDescription curr, AbstractToken pred) {
@@ -4681,12 +4681,12 @@ protected class Wildcard_Assignment_isWildcard extends AssignmentToken  {
 
 /************ begin Rule CharacterRange ****************
  *
- * CharacterRange returns AbstractElement : Keyword ( { current = CharacterRange . left = current } ".." right = Keyword ) ? ;
+ * CharacterRange returns AbstractElement:   Keyword ({current=CharacterRange.left=current} ".." right=Keyword)?;
  *
  **/
 
 
-// Keyword ( { current = CharacterRange . left = current } ".." right = Keyword ) ?
+// Keyword ({current=CharacterRange.left=current} ".." right=Keyword)?
 protected class CharacterRange_Group extends GroupToken {
 	
 	public CharacterRange_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -4732,7 +4732,7 @@ protected class CharacterRange_0_RuleCall_Keyword extends RuleCallToken {
 	}
 }
 
-// ( { current = CharacterRange . left = current } ".." right = Keyword ) ?
+// ({current=CharacterRange.left=current} ".." right=Keyword)?
 protected class CharacterRange_1_Group extends GroupToken {
 	
 	public CharacterRange_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -4760,7 +4760,7 @@ protected class CharacterRange_1_Group extends GroupToken {
 	}
 }
 
-// { current = CharacterRange . left = current } ".."
+// {current=CharacterRange.left=current} ".."
 protected class CharacterRange_1_0_Group extends GroupToken {
 	
 	public CharacterRange_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -4788,7 +4788,7 @@ protected class CharacterRange_1_0_Group extends GroupToken {
 	}
 }
 
-// { current = CharacterRange . left = current }
+// {current=CharacterRange.left=current}
 protected class CharacterRange_1_0_0_Action_CharacterRange_left extends ActionToken  {
 
 	public CharacterRange_1_0_0_Action_CharacterRange_left(IInstanceDescription curr, AbstractToken pred) {
@@ -4821,7 +4821,7 @@ protected class CharacterRange_1_0_1_Keyword extends KeywordToken  {
 }
 
 
-// right = Keyword
+// right=Keyword
 protected class CharacterRange_1_1_Assignment_right extends AssignmentToken  {
 	
 	public CharacterRange_1_1_Assignment_right(IInstanceDescription curr, AbstractToken pred) {
@@ -4859,12 +4859,12 @@ protected class CharacterRange_1_1_Assignment_right extends AssignmentToken  {
 
 /************ begin Rule CrossReference ****************
  *
- * CrossReference : "[" type = TypeRef ( "|" rule = [ AbstractRule ] ) ? "]" ;
+ * CrossReference:   "[" type=TypeRef ("|" rule=[AbstractRule])? "]";
  *
  **/
 
 
-// "[" type = TypeRef ( "|" rule = [ AbstractRule ] ) ? "]"
+// "[" type=TypeRef ("|" rule=[AbstractRule])? "]"
 protected class CrossReference_Group extends GroupToken {
 	
 	public CrossReference_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -4892,7 +4892,7 @@ protected class CrossReference_Group extends GroupToken {
 	}
 }
 
-// "[" type = TypeRef ( "|" rule = [ AbstractRule ] ) ?
+// "[" type=TypeRef ("|" rule=[AbstractRule])?
 protected class CrossReference_0_Group extends GroupToken {
 	
 	public CrossReference_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -4920,7 +4920,7 @@ protected class CrossReference_0_Group extends GroupToken {
 	}
 }
 
-// "[" type = TypeRef
+// "[" type=TypeRef
 protected class CrossReference_0_0_Group extends GroupToken {
 	
 	public CrossReference_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -4960,7 +4960,7 @@ protected class CrossReference_0_0_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// type = TypeRef
+// type=TypeRef
 protected class CrossReference_0_0_1_Assignment_type extends AssignmentToken  {
 	
 	public CrossReference_0_0_1_Assignment_type(IInstanceDescription curr, AbstractToken pred) {
@@ -4992,7 +4992,7 @@ protected class CrossReference_0_0_1_Assignment_type extends AssignmentToken  {
 }
 
 
-// ( "|" rule = [ AbstractRule ] ) ?
+// ("|" rule=[AbstractRule])?
 protected class CrossReference_0_1_Group extends GroupToken {
 	
 	public CrossReference_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -5032,7 +5032,7 @@ protected class CrossReference_0_1_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// rule = [ AbstractRule ]
+// rule=[AbstractRule]
 protected class CrossReference_0_1_1_Assignment_rule extends AssignmentToken  {
 	
 	public CrossReference_0_1_1_Assignment_rule(IInstanceDescription curr, AbstractToken pred) {
@@ -5078,7 +5078,7 @@ protected class CrossReference_1_Keyword extends KeywordToken  {
 
 /************ begin Rule ParenthesizedElement ****************
  *
- * ParenthesizedElement returns AbstractElement : "(" Alternatives ")" ;
+ * ParenthesizedElement returns AbstractElement:   "(" Alternatives ")";
  *
  **/
 
@@ -5188,7 +5188,7 @@ protected class ParenthesizedElement_1_Keyword extends KeywordToken  {
 
 /************ begin Rule ParenthesizedTerminalElement ****************
  *
- * ParenthesizedTerminalElement returns AbstractElement : "(" TerminalAlternatives ")" ;
+ * ParenthesizedTerminalElement returns AbstractElement:   "(" TerminalAlternatives ")";
  *
  **/
 
@@ -5298,12 +5298,12 @@ protected class ParenthesizedTerminalElement_1_Keyword extends KeywordToken  {
 
 /************ begin Rule Keyword ****************
  *
- * Keyword : value = STRING ;
+ * Keyword:   value=STRING;
  *
  **/
 
 
-// value = STRING
+// value=STRING
 protected class Keyword_Assignment_value extends AssignmentToken  {
 	
 	public Keyword_Assignment_value(IInstanceDescription curr, AbstractToken pred) {
@@ -5331,12 +5331,12 @@ protected class Keyword_Assignment_value extends AssignmentToken  {
 
 /************ begin Rule RuleCall ****************
  *
- * RuleCall : rule = [ AbstractRule ] ;
+ * RuleCall:   rule=[AbstractRule];
  *
  **/
 
 
-// rule = [ AbstractRule ]
+// rule=[AbstractRule]
 protected class RuleCall_Assignment_rule extends AssignmentToken  {
 	
 	public RuleCall_Assignment_rule(IInstanceDescription curr, AbstractToken pred) {

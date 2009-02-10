@@ -15,10 +15,10 @@ public class TestLanguageGrammarAccess extends BaseEPackageAccess implements IGr
 		private final Assignment cAssignmentMultiFeature = (Assignment)rule.eContents().get(1);
 		private final RuleCall c0ParserRuleCallAbstractRule = (RuleCall)cAssignmentMultiFeature.eContents().get(0);
 		
-		// EntryRule returns Model : ( multiFeature += AbstractRule ) * ;
+		// EntryRule returns Model:   (multiFeature+=AbstractRule)*;
 		public ParserRule getRule() { return rule; }
 
-		// ( multiFeature += AbstractRule ) *
+		// (multiFeature+=AbstractRule)*
 		public Assignment eleAssignmentMultiFeature() { return cAssignmentMultiFeature; }
 
 		// AbstractRule
@@ -31,10 +31,10 @@ public class TestLanguageGrammarAccess extends BaseEPackageAccess implements IGr
 		private final RuleCall c0ParserRuleCallChoiceRule = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall c1ParserRuleCallReducibleRule = (RuleCall)cAlternatives.eContents().get(1);
 		
-		// AbstractRule returns AbstractElement : ChoiceRule | ReducibleRule ;
+		// AbstractRule returns AbstractElement:   ChoiceRule|ReducibleRule;
 		public ParserRule getRule() { return rule; }
 
-		// ChoiceRule | ReducibleRule
+		// ChoiceRule|ReducibleRule
 		public Alternatives eleAlternatives() { return cAlternatives; }
 
 		// ChoiceRule
@@ -54,25 +54,25 @@ public class TestLanguageGrammarAccess extends BaseEPackageAccess implements IGr
 		private final Assignment c1AssignmentName = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall c10LexerRuleCallID = (RuleCall)c1AssignmentName.eContents().get(0);
 		
-		// ChoiceRule returns ChoiceElement : "choice" ( optionalKeyword ?= "optional" ) ? name = ID ;
+		// ChoiceRule returns ChoiceElement:   "choice" (optionalKeyword?="optional")? name=ID;
 		public ParserRule getRule() { return rule; }
 
-		// "choice" ( optionalKeyword ?= "optional" ) ? name = ID
+		// "choice" (optionalKeyword?="optional")? name=ID
 		public Group eleGroup() { return cGroup; }
 
-		// "choice" ( optionalKeyword ?= "optional" ) ?
+		// "choice" (optionalKeyword?="optional")?
 		public Group ele0Group() { return c0Group; }
 
 		// "choice"
 		public Keyword ele00KeywordChoice() { return c00KeywordChoice; }
 
-		// ( optionalKeyword ?= "optional" ) ?
+		// (optionalKeyword?="optional")?
 		public Assignment ele01AssignmentOptionalKeyword() { return c01AssignmentOptionalKeyword; }
 
 		// "optional"
 		public Keyword ele010KeywordOptional() { return c010KeywordOptional; }
 
-		// name = ID
+		// name=ID
 		public Assignment ele1AssignmentName() { return c1AssignmentName; }
 
 		// ID
@@ -90,10 +90,10 @@ public class TestLanguageGrammarAccess extends BaseEPackageAccess implements IGr
 		private final Assignment c11AssignmentActionFeature = (Assignment)c1Group.eContents().get(1);
 		private final RuleCall c110ParserRuleCallTerminalRule = (RuleCall)c11AssignmentActionFeature.eContents().get(0);
 		
-		// ReducibleRule returns ReducibleElement : "reducible" TerminalRule ( { current = ReducibleComposite . actionFeature += current } actionFeature += TerminalRule ) ? ;
+		// ReducibleRule returns ReducibleElement:   "reducible" TerminalRule ({current=ReducibleComposite.actionFeature+=current} actionFeature+=TerminalRule)?;
 		public ParserRule getRule() { return rule; }
 
-		// "reducible" TerminalRule ( { current = ReducibleComposite . actionFeature += current } actionFeature += TerminalRule ) ?
+		// "reducible" TerminalRule ({current=ReducibleComposite.actionFeature+=current} actionFeature+=TerminalRule)?
 		public Group eleGroup() { return cGroup; }
 
 		// "reducible" TerminalRule
@@ -105,13 +105,13 @@ public class TestLanguageGrammarAccess extends BaseEPackageAccess implements IGr
 		// TerminalRule
 		public RuleCall ele01ParserRuleCallTerminalRule() { return c01ParserRuleCallTerminalRule; }
 
-		// ( { current = ReducibleComposite . actionFeature += current } actionFeature += TerminalRule ) ?
+		// ({current=ReducibleComposite.actionFeature+=current} actionFeature+=TerminalRule)?
 		public Group ele1Group() { return c1Group; }
 
-		// { current = ReducibleComposite . actionFeature += current }
+		// {current=ReducibleComposite.actionFeature+=current}
 		public Action ele10ActionReducibleCompositeactionFeature() { return c10ActionReducibleCompositeactionFeature; }
 
-		// actionFeature += TerminalRule
+		// actionFeature+=TerminalRule
 		public Assignment ele11AssignmentActionFeature() { return c11AssignmentActionFeature; }
 
 		// TerminalRule
@@ -123,10 +123,10 @@ public class TestLanguageGrammarAccess extends BaseEPackageAccess implements IGr
 		private final Assignment cAssignmentStringFeature = (Assignment)rule.eContents().get(1);
 		private final RuleCall c0LexerRuleCallSTRING = (RuleCall)cAssignmentStringFeature.eContents().get(0);
 		
-		// TerminalRule returns TerminalElement : stringFeature = STRING ;
+		// TerminalRule returns TerminalElement:   stringFeature=STRING;
 		public ParserRule getRule() { return rule; }
 
-		// stringFeature = STRING
+		// stringFeature=STRING
 		public Assignment eleAssignmentStringFeature() { return cAssignmentStringFeature; }
 
 		// STRING
@@ -158,27 +158,27 @@ public class TestLanguageGrammarAccess extends BaseEPackageAccess implements IGr
 	}
 
 	
-	// EntryRule returns Model : ( multiFeature += AbstractRule ) * ;
+	// EntryRule returns Model:   (multiFeature+=AbstractRule)*;
 	public EntryRuleElements prEntryRule() {
 		return (pEntryRule != null) ? pEntryRule : (pEntryRule = new EntryRuleElements());
 	} 
 
-	// AbstractRule returns AbstractElement : ChoiceRule | ReducibleRule ;
+	// AbstractRule returns AbstractElement:   ChoiceRule|ReducibleRule;
 	public AbstractRuleElements prAbstractRule() {
 		return (pAbstractRule != null) ? pAbstractRule : (pAbstractRule = new AbstractRuleElements());
 	} 
 
-	// ChoiceRule returns ChoiceElement : "choice" ( optionalKeyword ?= "optional" ) ? name = ID ;
+	// ChoiceRule returns ChoiceElement:   "choice" (optionalKeyword?="optional")? name=ID;
 	public ChoiceRuleElements prChoiceRule() {
 		return (pChoiceRule != null) ? pChoiceRule : (pChoiceRule = new ChoiceRuleElements());
 	} 
 
-	// ReducibleRule returns ReducibleElement : "reducible" TerminalRule ( { current = ReducibleComposite . actionFeature += current } actionFeature += TerminalRule ) ? ;
+	// ReducibleRule returns ReducibleElement:   "reducible" TerminalRule ({current=ReducibleComposite.actionFeature+=current} actionFeature+=TerminalRule)?;
 	public ReducibleRuleElements prReducibleRule() {
 		return (pReducibleRule != null) ? pReducibleRule : (pReducibleRule = new ReducibleRuleElements());
 	} 
 
-	// TerminalRule returns TerminalElement : stringFeature = STRING ;
+	// TerminalRule returns TerminalElement:   stringFeature=STRING;
 	public TerminalRuleElements prTerminalRule() {
 		return (pTerminalRule != null) ? pTerminalRule : (pTerminalRule = new TerminalRuleElements());
 	} 

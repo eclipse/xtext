@@ -23,10 +23,11 @@
 */
 package «grammar().generatedRuntimeModuleClass().toJavaPackage()»;
 
+import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.service.DefaultRuntimeModule;
-import org.eclipse.xtext.service.IServiceScope;
 
 import com.google.inject.Binder;
+import com.google.inject.name.Names;
 
 /**
  * GENERATED! Manual modification goes to «grammar().runtimeModuleClass().toSimpleName()»
@@ -36,7 +37,8 @@ public abstract class «grammar().generatedRuntimeModuleClass().toSimpleName()» e
 	@Override
 	public void configure(Binder binder) {
 		super.configure(binder);
-		binder.bind(IServiceScope.class).toInstance(«languageInterface(grammar)».SCOPE);
+		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance(
+				"«languageId()»");
 	}
 	
 	«FOREACH services.select(e|!e.uiService) AS s-»

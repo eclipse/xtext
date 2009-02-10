@@ -28,12 +28,12 @@ public class FormatterTestLanguageParseTreeConstructor extends AbstractParseTree
 
 /************ begin Rule Root ****************
  *
- * Root : "test" ( TestLinewrap | TestIndentation ) ;
+ * Root:   "test" (TestLinewrap|TestIndentation);
  *
  **/
 
 
-// "test" ( TestLinewrap | TestIndentation )
+// "test" (TestLinewrap|TestIndentation)
 protected class Root_Group extends GroupToken {
 	
 	public Root_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -73,7 +73,7 @@ protected class Root_0_Keyword_test extends KeywordToken  {
 	}	
 }
 
-// TestLinewrap | TestIndentation
+// TestLinewrap|TestIndentation
 protected class Root_1_Alternatives extends AlternativesToken {
 
 	public Root_1_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -137,12 +137,12 @@ protected class Root_1_1_RuleCall_TestIndentation extends RuleCallToken {
 
 /************ begin Rule Line ****************
  *
- * Line : type += ID name += ID ";" ;
+ * Line:   type+=ID name+=ID ";";
  *
  **/
 
 
-// type += ID name += ID ";"
+// type+=ID name+=ID ";"
 protected class Line_Group extends GroupToken {
 	
 	public Line_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -170,7 +170,7 @@ protected class Line_Group extends GroupToken {
 	}
 }
 
-// type += ID name += ID
+// type+=ID name+=ID
 protected class Line_0_Group extends GroupToken {
 	
 	public Line_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -198,7 +198,7 @@ protected class Line_0_Group extends GroupToken {
 	}
 }
 
-// type += ID
+// type+=ID
 protected class Line_0_0_Assignment_type extends AssignmentToken  {
 	
 	public Line_0_0_Assignment_type(IInstanceDescription curr, AbstractToken pred) {
@@ -221,7 +221,7 @@ protected class Line_0_0_Assignment_type extends AssignmentToken  {
 	}
 }
 
-// name += ID
+// name+=ID
 protected class Line_0_1_Assignment_name extends AssignmentToken  {
 	
 	public Line_0_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -263,12 +263,12 @@ protected class Line_1_Keyword extends KeywordToken  {
 
 /************ begin Rule TestLinewrap ****************
  *
- * TestLinewrap : "linewrap" ( items += Line ) * ;
+ * TestLinewrap:   "linewrap" (items+=Line)*;
  *
  **/
 
 
-// "linewrap" ( items += Line ) *
+// "linewrap" (items+=Line)*
 protected class TestLinewrap_Group extends GroupToken {
 	
 	public TestLinewrap_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -308,7 +308,7 @@ protected class TestLinewrap_0_Keyword_linewrap extends KeywordToken  {
 	}	
 }
 
-// ( items += Line ) *
+// (items+=Line)*
 protected class TestLinewrap_1_Assignment_items extends AssignmentToken  {
 	
 	public TestLinewrap_1_Assignment_items(IInstanceDescription curr, AbstractToken pred) {
@@ -345,12 +345,12 @@ protected class TestLinewrap_1_Assignment_items extends AssignmentToken  {
 
 /************ begin Rule TestIndentation ****************
  *
- * TestIndentation : "indentation" "{" ( sub += TestIndentation | items += Line ) * "}" ;
+ * TestIndentation:   "indentation" "{" (sub+=TestIndentation|items+=Line)* "}";
  *
  **/
 
 
-// "indentation" "{" ( sub += TestIndentation | items += Line ) * "}"
+// "indentation" "{" (sub+=TestIndentation|items+=Line)* "}"
 protected class TestIndentation_Group extends GroupToken {
 	
 	public TestIndentation_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -378,7 +378,7 @@ protected class TestIndentation_Group extends GroupToken {
 	}
 }
 
-// "indentation" "{" ( sub += TestIndentation | items += Line ) *
+// "indentation" "{" (sub+=TestIndentation|items+=Line)*
 protected class TestIndentation_0_Group extends GroupToken {
 	
 	public TestIndentation_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -459,7 +459,7 @@ protected class TestIndentation_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-// ( sub += TestIndentation | items += Line ) *
+// (sub+=TestIndentation|items+=Line)*
 protected class TestIndentation_0_1_Alternatives extends AlternativesToken {
 
 	public TestIndentation_0_1_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -480,7 +480,7 @@ protected class TestIndentation_0_1_Alternatives extends AlternativesToken {
 	}
 }
 
-// sub += TestIndentation
+// sub+=TestIndentation
 protected class TestIndentation_0_1_0_Assignment_sub extends AssignmentToken  {
 	
 	public TestIndentation_0_1_0_Assignment_sub(IInstanceDescription curr, AbstractToken pred) {
@@ -511,7 +511,7 @@ protected class TestIndentation_0_1_0_Assignment_sub extends AssignmentToken  {
 	}
 }
 
-// items += Line
+// items+=Line
 protected class TestIndentation_0_1_1_Assignment_items extends AssignmentToken  {
 	
 	public TestIndentation_0_1_1_Assignment_items(IInstanceDescription curr, AbstractToken pred) {

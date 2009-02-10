@@ -46,28 +46,28 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		private final Assignment c1AssignmentRules = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall c10ParserRuleCallAbstractRule = (RuleCall)c1AssignmentRules.eContents().get(0);
 		
-		// Grammar : ( abstract ?= "abstract language" | "language" ) name = GrammarID ( "extends" superGrammarName = GrammarID ) ? ( definesHiddenTokens ?= "hidden" "(" ( hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ) ? ")" ) ? ( metamodelDeclarations += AbstractMetamodelDeclaration ) * ( rules += AbstractRule ) + ;
+		// Grammar:   (abstract?="abstract language"|"language") name=GrammarID ("extends" superGrammarName=GrammarID)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? (metamodelDeclarations+=AbstractMetamodelDeclaration)* (rules+=AbstractRule)+;
 		public ParserRule getRule() { return rule; }
 
-		// ( abstract ?= "abstract language" | "language" ) name = GrammarID ( "extends" superGrammarName = GrammarID ) ? ( definesHiddenTokens ?= "hidden" "(" ( hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ) ? ")" ) ? ( metamodelDeclarations += AbstractMetamodelDeclaration ) * ( rules += AbstractRule ) +
+		// (abstract?="abstract language"|"language") name=GrammarID ("extends" superGrammarName=GrammarID)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? (metamodelDeclarations+=AbstractMetamodelDeclaration)* (rules+=AbstractRule)+
 		public Group eleGroup() { return cGroup; }
 
-		// ( abstract ?= "abstract language" | "language" ) name = GrammarID ( "extends" superGrammarName = GrammarID ) ? ( definesHiddenTokens ?= "hidden" "(" ( hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ) ? ")" ) ? ( metamodelDeclarations += AbstractMetamodelDeclaration ) *
+		// (abstract?="abstract language"|"language") name=GrammarID ("extends" superGrammarName=GrammarID)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? (metamodelDeclarations+=AbstractMetamodelDeclaration)*
 		public Group ele0Group() { return c0Group; }
 
-		// ( abstract ?= "abstract language" | "language" ) name = GrammarID ( "extends" superGrammarName = GrammarID ) ? ( definesHiddenTokens ?= "hidden" "(" ( hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ) ? ")" ) ?
+		// (abstract?="abstract language"|"language") name=GrammarID ("extends" superGrammarName=GrammarID)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")?
 		public Group ele00Group() { return c00Group; }
 
-		// ( abstract ?= "abstract language" | "language" ) name = GrammarID ( "extends" superGrammarName = GrammarID ) ?
+		// (abstract?="abstract language"|"language") name=GrammarID ("extends" superGrammarName=GrammarID)?
 		public Group ele000Group() { return c000Group; }
 
-		// ( abstract ?= "abstract language" | "language" ) name = GrammarID
+		// (abstract?="abstract language"|"language") name=GrammarID
 		public Group ele0000Group() { return c0000Group; }
 
-		// abstract ?= "abstract language" | "language"
+		// abstract?="abstract language"|"language"
 		public Alternatives ele00000Alternatives() { return c00000Alternatives; }
 
-		// abstract ?= "abstract language"
+		// abstract?="abstract language"
 		public Assignment ele000000AssignmentAbstract() { return c000000AssignmentAbstract; }
 
 		// "abstract language"
@@ -76,34 +76,34 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		// "language"
 		public Keyword ele000001KeywordLanguage() { return c000001KeywordLanguage; }
 
-		// name = GrammarID
+		// name=GrammarID
 		public Assignment ele00001AssignmentName() { return c00001AssignmentName; }
 
 		// GrammarID
 		public RuleCall ele000010ParserRuleCallGrammarID() { return c000010ParserRuleCallGrammarID; }
 
-		// ( "extends" superGrammarName = GrammarID ) ?
+		// ("extends" superGrammarName=GrammarID)?
 		public Group ele0001Group() { return c0001Group; }
 
 		// "extends"
 		public Keyword ele00010KeywordExtends() { return c00010KeywordExtends; }
 
-		// superGrammarName = GrammarID
+		// superGrammarName=GrammarID
 		public Assignment ele00011AssignmentSuperGrammarName() { return c00011AssignmentSuperGrammarName; }
 
 		// GrammarID
 		public RuleCall ele000110ParserRuleCallGrammarID() { return c000110ParserRuleCallGrammarID; }
 
-		// ( definesHiddenTokens ?= "hidden" "(" ( hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ) ? ")" ) ?
+		// (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")?
 		public Group ele001Group() { return c001Group; }
 
-		// definesHiddenTokens ?= "hidden" "(" ( hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ) ?
+		// definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)?
 		public Group ele0010Group() { return c0010Group; }
 
-		// definesHiddenTokens ?= "hidden" "("
+		// definesHiddenTokens?="hidden" "("
 		public Group ele00100Group() { return c00100Group; }
 
-		// definesHiddenTokens ?= "hidden"
+		// definesHiddenTokens?="hidden"
 		public Assignment ele001000AssignmentDefinesHiddenTokens() { return c001000AssignmentDefinesHiddenTokens; }
 
 		// "hidden"
@@ -112,37 +112,37 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		// "("
 		public Keyword ele001001KeywordLeftParenthesis() { return c001001KeywordLeftParenthesis; }
 
-		// ( hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ) ?
+		// (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)?
 		public Group ele00101Group() { return c00101Group; }
 
-		// hiddenTokens += [ AbstractRule ]
+		// hiddenTokens+=[AbstractRule]
 		public Assignment ele001010AssignmentHiddenTokens() { return c001010AssignmentHiddenTokens; }
 
-		// [ AbstractRule ]
+		// [AbstractRule]
 		public CrossReference ele0010100CrossReferenceEStringAbstractRule() { return c0010100CrossReferenceEStringAbstractRule; }
 
-		// ( "," hiddenTokens += [ AbstractRule ] ) *
+		// ("," hiddenTokens+=[AbstractRule])*
 		public Group ele001011Group() { return c001011Group; }
 
 		// ","
 		public Keyword ele0010110KeywordComma() { return c0010110KeywordComma; }
 
-		// hiddenTokens += [ AbstractRule ]
+		// hiddenTokens+=[AbstractRule]
 		public Assignment ele0010111AssignmentHiddenTokens() { return c0010111AssignmentHiddenTokens; }
 
-		// [ AbstractRule ]
+		// [AbstractRule]
 		public CrossReference ele00101110CrossReferenceEStringAbstractRule() { return c00101110CrossReferenceEStringAbstractRule; }
 
 		// ")"
 		public Keyword ele0011KeywordRightParenthesis() { return c0011KeywordRightParenthesis; }
 
-		// ( metamodelDeclarations += AbstractMetamodelDeclaration ) *
+		// (metamodelDeclarations+=AbstractMetamodelDeclaration)*
 		public Assignment ele01AssignmentMetamodelDeclarations() { return c01AssignmentMetamodelDeclarations; }
 
 		// AbstractMetamodelDeclaration
 		public RuleCall ele010ParserRuleCallAbstractMetamodelDeclaration() { return c010ParserRuleCallAbstractMetamodelDeclaration; }
 
-		// ( rules += AbstractRule ) +
+		// (rules+=AbstractRule)+
 		public Assignment ele1AssignmentRules() { return c1AssignmentRules; }
 
 		// AbstractRule
@@ -157,16 +157,16 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		private final Keyword c10KeywordFullStop = (Keyword)c1Group.eContents().get(0);
 		private final RuleCall c11LexerRuleCallID = (RuleCall)c1Group.eContents().get(1);
 		
-		// GrammarID returns EString : ID ( "." ID ) * ;
+		// GrammarID returns EString:   ID ("." ID)*;
 		public ParserRule getRule() { return rule; }
 
-		// ID ( "." ID ) *
+		// ID ("." ID)*
 		public Group eleGroup() { return cGroup; }
 
 		// ID
 		public RuleCall ele0LexerRuleCallID() { return c0LexerRuleCallID; }
 
-		// ( "." ID ) *
+		// ("." ID)*
 		public Group ele1Group() { return c1Group; }
 
 		// "."
@@ -184,13 +184,13 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		private final RuleCall c01ParserRuleCallParserRule = (RuleCall)c0Alternatives.eContents().get(1);
 		private final RuleCall c1ParserRuleCallTerminalRule = (RuleCall)cAlternatives.eContents().get(1);
 		
-		// AbstractRule : LexerRule | ParserRule | TerminalRule ;
+		// AbstractRule:   LexerRule|ParserRule|TerminalRule;
 		public ParserRule getRule() { return rule; }
 
-		// LexerRule | ParserRule | TerminalRule
+		// LexerRule|ParserRule|TerminalRule
 		public Alternatives eleAlternatives() { return cAlternatives; }
 
-		// LexerRule | ParserRule
+		// LexerRule|ParserRule
 		public Alternatives ele0Alternatives() { return c0Alternatives; }
 
 		// LexerRule
@@ -209,10 +209,10 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		private final RuleCall c0ParserRuleCallGeneratedMetamodel = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall c1ParserRuleCallReferencedMetamodel = (RuleCall)cAlternatives.eContents().get(1);
 		
-		// AbstractMetamodelDeclaration : GeneratedMetamodel | ReferencedMetamodel ;
+		// AbstractMetamodelDeclaration:   GeneratedMetamodel|ReferencedMetamodel;
 		public ParserRule getRule() { return rule; }
 
-		// GeneratedMetamodel | ReferencedMetamodel
+		// GeneratedMetamodel|ReferencedMetamodel
 		public Alternatives eleAlternatives() { return cAlternatives; }
 
 		// GeneratedMetamodel
@@ -237,40 +237,40 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		private final Assignment c11AssignmentAlias = (Assignment)c1Group.eContents().get(1);
 		private final RuleCall c110LexerRuleCallID = (RuleCall)c11AssignmentAlias.eContents().get(0);
 		
-		// GeneratedMetamodel : "generate" name = ID ePackage = [ EPackage | STRING ] ( "as" alias = ID ) ? ;
+		// GeneratedMetamodel:   "generate" name=ID ePackage=[EPackage|STRING] ("as" alias=ID)?;
 		public ParserRule getRule() { return rule; }
 
-		// "generate" name = ID ePackage = [ EPackage | STRING ] ( "as" alias = ID ) ?
+		// "generate" name=ID ePackage=[EPackage|STRING] ("as" alias=ID)?
 		public Group eleGroup() { return cGroup; }
 
-		// "generate" name = ID ePackage = [ EPackage | STRING ]
+		// "generate" name=ID ePackage=[EPackage|STRING]
 		public Group ele0Group() { return c0Group; }
 
-		// "generate" name = ID
+		// "generate" name=ID
 		public Group ele00Group() { return c00Group; }
 
 		// "generate"
 		public Keyword ele000KeywordGenerate() { return c000KeywordGenerate; }
 
-		// name = ID
+		// name=ID
 		public Assignment ele001AssignmentName() { return c001AssignmentName; }
 
 		// ID
 		public RuleCall ele0010LexerRuleCallID() { return c0010LexerRuleCallID; }
 
-		// ePackage = [ EPackage | STRING ]
+		// ePackage=[EPackage|STRING]
 		public Assignment ele01AssignmentEPackage() { return c01AssignmentEPackage; }
 
-		// [ EPackage | STRING ]
+		// [EPackage|STRING]
 		public CrossReference ele010CrossReferenceEStringEPackage() { return c010CrossReferenceEStringEPackage; }
 
-		// ( "as" alias = ID ) ?
+		// ("as" alias=ID)?
 		public Group ele1Group() { return c1Group; }
 
 		// "as"
 		public Keyword ele10KeywordAs() { return c10KeywordAs; }
 
-		// alias = ID
+		// alias=ID
 		public Assignment ele11AssignmentAlias() { return c11AssignmentAlias; }
 
 		// ID
@@ -289,31 +289,31 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		private final Assignment c11AssignmentAlias = (Assignment)c1Group.eContents().get(1);
 		private final RuleCall c110LexerRuleCallID = (RuleCall)c11AssignmentAlias.eContents().get(0);
 		
-		// ReferencedMetamodel : "import" ePackage = [ EPackage | STRING ] ( "as" alias = ID ) ? ;
+		// ReferencedMetamodel:   "import" ePackage=[EPackage|STRING] ("as" alias=ID)?;
 		public ParserRule getRule() { return rule; }
 
-		// "import" ePackage = [ EPackage | STRING ] ( "as" alias = ID ) ?
+		// "import" ePackage=[EPackage|STRING] ("as" alias=ID)?
 		public Group eleGroup() { return cGroup; }
 
-		// "import" ePackage = [ EPackage | STRING ]
+		// "import" ePackage=[EPackage|STRING]
 		public Group ele0Group() { return c0Group; }
 
 		// "import"
 		public Keyword ele00KeywordImport() { return c00KeywordImport; }
 
-		// ePackage = [ EPackage | STRING ]
+		// ePackage=[EPackage|STRING]
 		public Assignment ele01AssignmentEPackage() { return c01AssignmentEPackage; }
 
-		// [ EPackage | STRING ]
+		// [EPackage|STRING]
 		public CrossReference ele010CrossReferenceEStringEPackage() { return c010CrossReferenceEStringEPackage; }
 
-		// ( "as" alias = ID ) ?
+		// ("as" alias=ID)?
 		public Group ele1Group() { return c1Group; }
 
 		// "as"
 		public Keyword ele10KeywordAs() { return c10KeywordAs; }
 
-		// alias = ID
+		// alias=ID
 		public Assignment ele11AssignmentAlias() { return c11AssignmentAlias; }
 
 		// ID
@@ -341,25 +341,25 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		private final RuleCall c010LexerRuleCallSTRING = (RuleCall)c01AssignmentBody.eContents().get(0);
 		private final Keyword c1KeywordSemicolon = (Keyword)cGroup.eContents().get(1);
 		
-		// LexerRule : ( "native" | "lexer" ) name = ID ( "returns" type = TypeRef ) ? ":" body = STRING ";" ;
+		// LexerRule:   ("native"|"lexer") name=ID ("returns" type=TypeRef)? ":" body=STRING ";";
 		public ParserRule getRule() { return rule; }
 
-		// ( "native" | "lexer" ) name = ID ( "returns" type = TypeRef ) ? ":" body = STRING ";"
+		// ("native"|"lexer") name=ID ("returns" type=TypeRef)? ":" body=STRING ";"
 		public Group eleGroup() { return cGroup; }
 
-		// ( "native" | "lexer" ) name = ID ( "returns" type = TypeRef ) ? ":" body = STRING
+		// ("native"|"lexer") name=ID ("returns" type=TypeRef)? ":" body=STRING
 		public Group ele0Group() { return c0Group; }
 
-		// ( "native" | "lexer" ) name = ID ( "returns" type = TypeRef ) ? ":"
+		// ("native"|"lexer") name=ID ("returns" type=TypeRef)? ":"
 		public Group ele00Group() { return c00Group; }
 
-		// ( "native" | "lexer" ) name = ID ( "returns" type = TypeRef ) ?
+		// ("native"|"lexer") name=ID ("returns" type=TypeRef)?
 		public Group ele000Group() { return c000Group; }
 
-		// ( "native" | "lexer" ) name = ID
+		// ("native"|"lexer") name=ID
 		public Group ele0000Group() { return c0000Group; }
 
-		// "native" | "lexer"
+		// "native"|"lexer"
 		public Alternatives ele00000Alternatives() { return c00000Alternatives; }
 
 		// "native"
@@ -368,19 +368,19 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		// "lexer"
 		public Keyword ele000001KeywordLexer() { return c000001KeywordLexer; }
 
-		// name = ID
+		// name=ID
 		public Assignment ele00001AssignmentName() { return c00001AssignmentName; }
 
 		// ID
 		public RuleCall ele000010LexerRuleCallID() { return c000010LexerRuleCallID; }
 
-		// ( "returns" type = TypeRef ) ?
+		// ("returns" type=TypeRef)?
 		public Group ele0001Group() { return c0001Group; }
 
 		// "returns"
 		public Keyword ele00010KeywordReturns() { return c00010KeywordReturns; }
 
-		// type = TypeRef
+		// type=TypeRef
 		public Assignment ele00011AssignmentType() { return c00011AssignmentType; }
 
 		// TypeRef
@@ -389,7 +389,7 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		// ":"
 		public Keyword ele001KeywordColon() { return c001KeywordColon; }
 
-		// body = STRING
+		// body=STRING
 		public Assignment ele01AssignmentBody() { return c01AssignmentBody; }
 
 		// STRING
@@ -431,52 +431,52 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		private final RuleCall c010ParserRuleCallAlternatives = (RuleCall)c01AssignmentAlternatives.eContents().get(0);
 		private final Keyword c1KeywordSemicolon = (Keyword)cGroup.eContents().get(1);
 		
-		// ParserRule : name = ID ( "returns" type = TypeRef ) ? ( definesHiddenTokens ?= "hidden" "(" ( hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ) ? ")" ) ? ":" alternatives = Alternatives ";" ;
+		// ParserRule:   name=ID ("returns" type=TypeRef)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? ":" alternatives=Alternatives ";";
 		public ParserRule getRule() { return rule; }
 
-		// name = ID ( "returns" type = TypeRef ) ? ( definesHiddenTokens ?= "hidden" "(" ( hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ) ? ")" ) ? ":" alternatives = Alternatives ";"
+		// name=ID ("returns" type=TypeRef)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? ":" alternatives=Alternatives ";"
 		public Group eleGroup() { return cGroup; }
 
-		// name = ID ( "returns" type = TypeRef ) ? ( definesHiddenTokens ?= "hidden" "(" ( hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ) ? ")" ) ? ":" alternatives = Alternatives
+		// name=ID ("returns" type=TypeRef)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? ":" alternatives=Alternatives
 		public Group ele0Group() { return c0Group; }
 
-		// name = ID ( "returns" type = TypeRef ) ? ( definesHiddenTokens ?= "hidden" "(" ( hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ) ? ")" ) ? ":"
+		// name=ID ("returns" type=TypeRef)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? ":"
 		public Group ele00Group() { return c00Group; }
 
-		// name = ID ( "returns" type = TypeRef ) ? ( definesHiddenTokens ?= "hidden" "(" ( hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ) ? ")" ) ?
+		// name=ID ("returns" type=TypeRef)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")?
 		public Group ele000Group() { return c000Group; }
 
-		// name = ID ( "returns" type = TypeRef ) ?
+		// name=ID ("returns" type=TypeRef)?
 		public Group ele0000Group() { return c0000Group; }
 
-		// name = ID
+		// name=ID
 		public Assignment ele00000AssignmentName() { return c00000AssignmentName; }
 
 		// ID
 		public RuleCall ele000000LexerRuleCallID() { return c000000LexerRuleCallID; }
 
-		// ( "returns" type = TypeRef ) ?
+		// ("returns" type=TypeRef)?
 		public Group ele00001Group() { return c00001Group; }
 
 		// "returns"
 		public Keyword ele000010KeywordReturns() { return c000010KeywordReturns; }
 
-		// type = TypeRef
+		// type=TypeRef
 		public Assignment ele000011AssignmentType() { return c000011AssignmentType; }
 
 		// TypeRef
 		public RuleCall ele0000110ParserRuleCallTypeRef() { return c0000110ParserRuleCallTypeRef; }
 
-		// ( definesHiddenTokens ?= "hidden" "(" ( hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ) ? ")" ) ?
+		// (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")?
 		public Group ele0001Group() { return c0001Group; }
 
-		// definesHiddenTokens ?= "hidden" "(" ( hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ) ?
+		// definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)?
 		public Group ele00010Group() { return c00010Group; }
 
-		// definesHiddenTokens ?= "hidden" "("
+		// definesHiddenTokens?="hidden" "("
 		public Group ele000100Group() { return c000100Group; }
 
-		// definesHiddenTokens ?= "hidden"
+		// definesHiddenTokens?="hidden"
 		public Assignment ele0001000AssignmentDefinesHiddenTokens() { return c0001000AssignmentDefinesHiddenTokens; }
 
 		// "hidden"
@@ -485,25 +485,25 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		// "("
 		public Keyword ele0001001KeywordLeftParenthesis() { return c0001001KeywordLeftParenthesis; }
 
-		// ( hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ) ?
+		// (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)?
 		public Group ele000101Group() { return c000101Group; }
 
-		// hiddenTokens += [ AbstractRule ]
+		// hiddenTokens+=[AbstractRule]
 		public Assignment ele0001010AssignmentHiddenTokens() { return c0001010AssignmentHiddenTokens; }
 
-		// [ AbstractRule ]
+		// [AbstractRule]
 		public CrossReference ele00010100CrossReferenceEStringAbstractRule() { return c00010100CrossReferenceEStringAbstractRule; }
 
-		// ( "," hiddenTokens += [ AbstractRule ] ) *
+		// ("," hiddenTokens+=[AbstractRule])*
 		public Group ele0001011Group() { return c0001011Group; }
 
 		// ","
 		public Keyword ele00010110KeywordComma() { return c00010110KeywordComma; }
 
-		// hiddenTokens += [ AbstractRule ]
+		// hiddenTokens+=[AbstractRule]
 		public Assignment ele00010111AssignmentHiddenTokens() { return c00010111AssignmentHiddenTokens; }
 
-		// [ AbstractRule ]
+		// [AbstractRule]
 		public CrossReference ele000101110CrossReferenceEStringAbstractRule() { return c000101110CrossReferenceEStringAbstractRule; }
 
 		// ")"
@@ -512,7 +512,7 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		// ":"
 		public Keyword ele001KeywordColon() { return c001KeywordColon; }
 
-		// alternatives = Alternatives
+		// alternatives=Alternatives
 		public Assignment ele01AssignmentAlternatives() { return c01AssignmentAlternatives; }
 
 		// Alternatives
@@ -542,43 +542,43 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		private final RuleCall c010ParserRuleCallTerminalAlternatives = (RuleCall)c01AssignmentAlternatives.eContents().get(0);
 		private final Keyword c1KeywordSemicolon = (Keyword)cGroup.eContents().get(1);
 		
-		// TerminalRule returns ParserRule : ^terminal ?= "terminal" name = ID ( "returns" type = TypeRef ) ? ":" alternatives = TerminalAlternatives ";" ;
+		// TerminalRule returns ParserRule:   ^terminal?="terminal" name=ID ("returns" type=TypeRef)? ":" alternatives=TerminalAlternatives ";";
 		public ParserRule getRule() { return rule; }
 
-		// ^terminal ?= "terminal" name = ID ( "returns" type = TypeRef ) ? ":" alternatives = TerminalAlternatives ";"
+		// ^terminal?="terminal" name=ID ("returns" type=TypeRef)? ":" alternatives=TerminalAlternatives ";"
 		public Group eleGroup() { return cGroup; }
 
-		// ^terminal ?= "terminal" name = ID ( "returns" type = TypeRef ) ? ":" alternatives = TerminalAlternatives
+		// ^terminal?="terminal" name=ID ("returns" type=TypeRef)? ":" alternatives=TerminalAlternatives
 		public Group ele0Group() { return c0Group; }
 
-		// ^terminal ?= "terminal" name = ID ( "returns" type = TypeRef ) ? ":"
+		// ^terminal?="terminal" name=ID ("returns" type=TypeRef)? ":"
 		public Group ele00Group() { return c00Group; }
 
-		// ^terminal ?= "terminal" name = ID ( "returns" type = TypeRef ) ?
+		// ^terminal?="terminal" name=ID ("returns" type=TypeRef)?
 		public Group ele000Group() { return c000Group; }
 
-		// ^terminal ?= "terminal" name = ID
+		// ^terminal?="terminal" name=ID
 		public Group ele0000Group() { return c0000Group; }
 
-		// ^terminal ?= "terminal"
+		// ^terminal?="terminal"
 		public Assignment ele00000AssignmentTerminal() { return c00000AssignmentTerminal; }
 
 		// "terminal"
 		public Keyword ele000000KeywordTerminal() { return c000000KeywordTerminal; }
 
-		// name = ID
+		// name=ID
 		public Assignment ele00001AssignmentName() { return c00001AssignmentName; }
 
 		// ID
 		public RuleCall ele000010LexerRuleCallID() { return c000010LexerRuleCallID; }
 
-		// ( "returns" type = TypeRef ) ?
+		// ("returns" type=TypeRef)?
 		public Group ele0001Group() { return c0001Group; }
 
 		// "returns"
 		public Keyword ele00010KeywordReturns() { return c00010KeywordReturns; }
 
-		// type = TypeRef
+		// type=TypeRef
 		public Assignment ele00011AssignmentType() { return c00011AssignmentType; }
 
 		// TypeRef
@@ -587,7 +587,7 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		// ":"
 		public Keyword ele001KeywordColon() { return c001KeywordColon; }
 
-		// alternatives = TerminalAlternatives
+		// alternatives=TerminalAlternatives
 		public Assignment ele01AssignmentAlternatives() { return c01AssignmentAlternatives; }
 
 		// TerminalAlternatives
@@ -607,28 +607,28 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		private final Assignment c1AssignmentType = (Assignment)cGroup.eContents().get(1);
 		private final CrossReference c10CrossReferenceEStringEClassifier = (CrossReference)c1AssignmentType.eContents().get(0);
 		
-		// TypeRef : ( metamodel = [ AbstractMetamodelDeclaration ] "::" ) ? type = [ EClassifier ] ;
+		// TypeRef:   (metamodel=[AbstractMetamodelDeclaration] "::")? type=[EClassifier];
 		public ParserRule getRule() { return rule; }
 
-		// ( metamodel = [ AbstractMetamodelDeclaration ] "::" ) ? type = [ EClassifier ]
+		// (metamodel=[AbstractMetamodelDeclaration] "::")? type=[EClassifier]
 		public Group eleGroup() { return cGroup; }
 
-		// ( metamodel = [ AbstractMetamodelDeclaration ] "::" ) ?
+		// (metamodel=[AbstractMetamodelDeclaration] "::")?
 		public Group ele0Group() { return c0Group; }
 
-		// metamodel = [ AbstractMetamodelDeclaration ]
+		// metamodel=[AbstractMetamodelDeclaration]
 		public Assignment ele00AssignmentMetamodel() { return c00AssignmentMetamodel; }
 
-		// [ AbstractMetamodelDeclaration ]
+		// [AbstractMetamodelDeclaration]
 		public CrossReference ele000CrossReferenceEStringAbstractMetamodelDeclaration() { return c000CrossReferenceEStringAbstractMetamodelDeclaration; }
 
 		// "::"
 		public Keyword ele01KeywordColonColon() { return c01KeywordColonColon; }
 
-		// type = [ EClassifier ]
+		// type=[EClassifier]
 		public Assignment ele1AssignmentType() { return c1AssignmentType; }
 
-		// [ EClassifier ]
+		// [EClassifier]
 		public CrossReference ele10CrossReferenceEStringEClassifier() { return c10CrossReferenceEStringEClassifier; }
 	}
 
@@ -643,28 +643,28 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		private final Assignment c11AssignmentGroups = (Assignment)c1Group.eContents().get(1);
 		private final RuleCall c110ParserRuleCallGroup = (RuleCall)c11AssignmentGroups.eContents().get(0);
 		
-		// Alternatives returns AbstractElement : Group ( { current = Alternatives . groups += current } "|" groups += Group ) * ;
+		// Alternatives returns AbstractElement:   Group ({current=Alternatives.groups+=current} "|" groups+=Group)*;
 		public ParserRule getRule() { return rule; }
 
-		// Group ( { current = Alternatives . groups += current } "|" groups += Group ) *
+		// Group ({current=Alternatives.groups+=current} "|" groups+=Group)*
 		public Group eleGroup() { return cGroup; }
 
 		// Group
 		public RuleCall ele0ParserRuleCallGroup() { return c0ParserRuleCallGroup; }
 
-		// ( { current = Alternatives . groups += current } "|" groups += Group ) *
+		// ({current=Alternatives.groups+=current} "|" groups+=Group)*
 		public Group ele1Group() { return c1Group; }
 
-		// { current = Alternatives . groups += current } "|"
+		// {current=Alternatives.groups+=current} "|"
 		public Group ele10Group() { return c10Group; }
 
-		// { current = Alternatives . groups += current }
+		// {current=Alternatives.groups+=current}
 		public Action ele100ActionAlternativesgroups() { return c100ActionAlternativesgroups; }
 
 		// "|"
 		public Keyword ele101KeywordVerticalLine() { return c101KeywordVerticalLine; }
 
-		// groups += Group
+		// groups+=Group
 		public Assignment ele11AssignmentGroups() { return c11AssignmentGroups; }
 
 		// Group
@@ -682,28 +682,28 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		private final Assignment c11AssignmentGroups = (Assignment)c1Group.eContents().get(1);
 		private final RuleCall c110ParserRuleCallTerminalGroup = (RuleCall)c11AssignmentGroups.eContents().get(0);
 		
-		// TerminalAlternatives returns AbstractElement : TerminalGroup ( { current = Alternatives . groups += current } "|" groups += TerminalGroup ) * ;
+		// TerminalAlternatives returns AbstractElement:   TerminalGroup ({current=Alternatives.groups+=current} "|" groups+=TerminalGroup)*;
 		public ParserRule getRule() { return rule; }
 
-		// TerminalGroup ( { current = Alternatives . groups += current } "|" groups += TerminalGroup ) *
+		// TerminalGroup ({current=Alternatives.groups+=current} "|" groups+=TerminalGroup)*
 		public Group eleGroup() { return cGroup; }
 
 		// TerminalGroup
 		public RuleCall ele0ParserRuleCallTerminalGroup() { return c0ParserRuleCallTerminalGroup; }
 
-		// ( { current = Alternatives . groups += current } "|" groups += TerminalGroup ) *
+		// ({current=Alternatives.groups+=current} "|" groups+=TerminalGroup)*
 		public Group ele1Group() { return c1Group; }
 
-		// { current = Alternatives . groups += current } "|"
+		// {current=Alternatives.groups+=current} "|"
 		public Group ele10Group() { return c10Group; }
 
-		// { current = Alternatives . groups += current }
+		// {current=Alternatives.groups+=current}
 		public Action ele100ActionAlternativesgroups() { return c100ActionAlternativesgroups; }
 
 		// "|"
 		public Keyword ele101KeywordVerticalLine() { return c101KeywordVerticalLine; }
 
-		// groups += TerminalGroup
+		// groups+=TerminalGroup
 		public Assignment ele11AssignmentGroups() { return c11AssignmentGroups; }
 
 		// TerminalGroup
@@ -719,22 +719,22 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		private final Assignment c11AssignmentAbstractTokens = (Assignment)c1Group.eContents().get(1);
 		private final RuleCall c110ParserRuleCallAbstractToken = (RuleCall)c11AssignmentAbstractTokens.eContents().get(0);
 		
-		// Group returns AbstractElement : AbstractToken ( { current = Group . abstractTokens += current } abstractTokens += AbstractToken ) * ;
+		// Group returns AbstractElement:   AbstractToken ({current=Group.abstractTokens+=current} abstractTokens+=AbstractToken)*;
 		public ParserRule getRule() { return rule; }
 
-		// AbstractToken ( { current = Group . abstractTokens += current } abstractTokens += AbstractToken ) *
+		// AbstractToken ({current=Group.abstractTokens+=current} abstractTokens+=AbstractToken)*
 		public Group eleGroup() { return cGroup; }
 
 		// AbstractToken
 		public RuleCall ele0ParserRuleCallAbstractToken() { return c0ParserRuleCallAbstractToken; }
 
-		// ( { current = Group . abstractTokens += current } abstractTokens += AbstractToken ) *
+		// ({current=Group.abstractTokens+=current} abstractTokens+=AbstractToken)*
 		public Group ele1Group() { return c1Group; }
 
-		// { current = Group . abstractTokens += current }
+		// {current=Group.abstractTokens+=current}
 		public Action ele10ActionGroupabstractTokens() { return c10ActionGroupabstractTokens; }
 
-		// abstractTokens += AbstractToken
+		// abstractTokens+=AbstractToken
 		public Assignment ele11AssignmentAbstractTokens() { return c11AssignmentAbstractTokens; }
 
 		// AbstractToken
@@ -750,22 +750,22 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		private final Assignment c11AssignmentAbstractTokens = (Assignment)c1Group.eContents().get(1);
 		private final RuleCall c110ParserRuleCallTerminalToken = (RuleCall)c11AssignmentAbstractTokens.eContents().get(0);
 		
-		// TerminalGroup returns AbstractElement : TerminalToken ( { current = Group . abstractTokens += current } abstractTokens += TerminalToken ) * ;
+		// TerminalGroup returns AbstractElement:   TerminalToken ({current=Group.abstractTokens+=current} abstractTokens+=TerminalToken)*;
 		public ParserRule getRule() { return rule; }
 
-		// TerminalToken ( { current = Group . abstractTokens += current } abstractTokens += TerminalToken ) *
+		// TerminalToken ({current=Group.abstractTokens+=current} abstractTokens+=TerminalToken)*
 		public Group eleGroup() { return cGroup; }
 
 		// TerminalToken
 		public RuleCall ele0ParserRuleCallTerminalToken() { return c0ParserRuleCallTerminalToken; }
 
-		// ( { current = Group . abstractTokens += current } abstractTokens += TerminalToken ) *
+		// ({current=Group.abstractTokens+=current} abstractTokens+=TerminalToken)*
 		public Group ele1Group() { return c1Group; }
 
-		// { current = Group . abstractTokens += current }
+		// {current=Group.abstractTokens+=current}
 		public Action ele10ActionGroupabstractTokens() { return c10ActionGroupabstractTokens; }
 
-		// abstractTokens += TerminalToken
+		// abstractTokens+=TerminalToken
 		public Assignment ele11AssignmentAbstractTokens() { return c11AssignmentAbstractTokens; }
 
 		// TerminalToken
@@ -787,16 +787,16 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		private final Keyword c1001KeywordAsterisk = (Keyword)c100Alternatives.eContents().get(1);
 		private final Keyword c101KeywordPlusSign = (Keyword)c10Alternatives.eContents().get(1);
 		
-		// AbstractToken returns AbstractElement : ( Assignment | Action | AbstractTerminal ) ( cardinality = ( "?" | "*" | "+" ) ) ? ;
+		// AbstractToken returns AbstractElement:   (Assignment|Action|AbstractTerminal) (cardinality=("?"|"*"|"+"))?;
 		public ParserRule getRule() { return rule; }
 
-		// ( Assignment | Action | AbstractTerminal ) ( cardinality = ( "?" | "*" | "+" ) ) ?
+		// (Assignment|Action|AbstractTerminal) (cardinality=("?"|"*"|"+"))?
 		public Group eleGroup() { return cGroup; }
 
-		// Assignment | Action | AbstractTerminal
+		// Assignment|Action|AbstractTerminal
 		public Alternatives ele0Alternatives() { return c0Alternatives; }
 
-		// Assignment | Action
+		// Assignment|Action
 		public Alternatives ele00Alternatives() { return c00Alternatives; }
 
 		// Assignment
@@ -808,13 +808,13 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		// AbstractTerminal
 		public RuleCall ele01ParserRuleCallAbstractTerminal() { return c01ParserRuleCallAbstractTerminal; }
 
-		// ( cardinality = ( "?" | "*" | "+" ) ) ?
+		// (cardinality=("?"|"*"|"+"))?
 		public Assignment ele1AssignmentCardinality() { return c1AssignmentCardinality; }
 
-		// "?" | "*" | "+"
+		// "?"|"*"|"+"
 		public Alternatives ele10Alternatives() { return c10Alternatives; }
 
-		// "?" | "*"
+		// "?"|"*"
 		public Alternatives ele100Alternatives() { return c100Alternatives; }
 
 		// "?"
@@ -838,22 +838,22 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		private final Keyword c1001KeywordAsterisk = (Keyword)c100Alternatives.eContents().get(1);
 		private final Keyword c101KeywordPlusSign = (Keyword)c10Alternatives.eContents().get(1);
 		
-		// TerminalToken returns AbstractElement : TerminalTokenElement ( cardinality = ( "?" | "*" | "+" ) ) ? ;
+		// TerminalToken returns AbstractElement:   TerminalTokenElement (cardinality=("?"|"*"|"+"))?;
 		public ParserRule getRule() { return rule; }
 
-		// TerminalTokenElement ( cardinality = ( "?" | "*" | "+" ) ) ?
+		// TerminalTokenElement (cardinality=("?"|"*"|"+"))?
 		public Group eleGroup() { return cGroup; }
 
 		// TerminalTokenElement
 		public RuleCall ele0ParserRuleCallTerminalTokenElement() { return c0ParserRuleCallTerminalTokenElement; }
 
-		// ( cardinality = ( "?" | "*" | "+" ) ) ?
+		// (cardinality=("?"|"*"|"+"))?
 		public Assignment ele1AssignmentCardinality() { return c1AssignmentCardinality; }
 
-		// "?" | "*" | "+"
+		// "?"|"*"|"+"
 		public Alternatives ele10Alternatives() { return c10Alternatives; }
 
-		// "?" | "*"
+		// "?"|"*"
 		public Alternatives ele100Alternatives() { return c100Alternatives; }
 
 		// "?"
@@ -881,28 +881,28 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		private final Assignment c1AssignmentTerminal = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall c10ParserRuleCallAbstractTerminal = (RuleCall)c1AssignmentTerminal.eContents().get(0);
 		
-		// Assignment : feature = ID operator = ( "+=" | "=" | "?=" ) ^terminal = AbstractTerminal ;
+		// Assignment:   feature=ID operator=("+="|"="|"?=") ^terminal=AbstractTerminal;
 		public ParserRule getRule() { return rule; }
 
-		// feature = ID operator = ( "+=" | "=" | "?=" ) ^terminal = AbstractTerminal
+		// feature=ID operator=("+="|"="|"?=") ^terminal=AbstractTerminal
 		public Group eleGroup() { return cGroup; }
 
-		// feature = ID operator = ( "+=" | "=" | "?=" )
+		// feature=ID operator=("+="|"="|"?=")
 		public Group ele0Group() { return c0Group; }
 
-		// feature = ID
+		// feature=ID
 		public Assignment ele00AssignmentFeature() { return c00AssignmentFeature; }
 
 		// ID
 		public RuleCall ele000LexerRuleCallID() { return c000LexerRuleCallID; }
 
-		// operator = ( "+=" | "=" | "?=" )
+		// operator=("+="|"="|"?=")
 		public Assignment ele01AssignmentOperator() { return c01AssignmentOperator; }
 
-		// "+=" | "=" | "?="
+		// "+="|"="|"?="
 		public Alternatives ele010Alternatives() { return c010Alternatives; }
 
-		// "+=" | "="
+		// "+="|"="
 		public Alternatives ele0100Alternatives() { return c0100Alternatives; }
 
 		// "+="
@@ -914,7 +914,7 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		// "?="
 		public Keyword ele0101KeywordQuestionMarkEqualsSign() { return c0101KeywordQuestionMarkEqualsSign; }
 
-		// ^terminal = AbstractTerminal
+		// ^terminal=AbstractTerminal
 		public Assignment ele1AssignmentTerminal() { return c1AssignmentTerminal; }
 
 		// AbstractTerminal
@@ -946,34 +946,34 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		private final Keyword c01KeywordCurrent = (Keyword)c0Group.eContents().get(1);
 		private final Keyword c1KeywordRightCurlyBracket = (Keyword)cGroup.eContents().get(1);
 		
-		// Action : "{" ( "current" "=" ) ? typeName = TypeRef "." feature = ID operator = ( "=" | "+=" ) "current" "}" ;
+		// Action:   "{" ("current" "=")? typeName=TypeRef "." feature=ID operator=("="|"+=") "current" "}";
 		public ParserRule getRule() { return rule; }
 
-		// "{" ( "current" "=" ) ? typeName = TypeRef "." feature = ID operator = ( "=" | "+=" ) "current" "}"
+		// "{" ("current" "=")? typeName=TypeRef "." feature=ID operator=("="|"+=") "current" "}"
 		public Group eleGroup() { return cGroup; }
 
-		// "{" ( "current" "=" ) ? typeName = TypeRef "." feature = ID operator = ( "=" | "+=" ) "current"
+		// "{" ("current" "=")? typeName=TypeRef "." feature=ID operator=("="|"+=") "current"
 		public Group ele0Group() { return c0Group; }
 
-		// "{" ( "current" "=" ) ? typeName = TypeRef "." feature = ID operator = ( "=" | "+=" )
+		// "{" ("current" "=")? typeName=TypeRef "." feature=ID operator=("="|"+=")
 		public Group ele00Group() { return c00Group; }
 
-		// "{" ( "current" "=" ) ? typeName = TypeRef "." feature = ID
+		// "{" ("current" "=")? typeName=TypeRef "." feature=ID
 		public Group ele000Group() { return c000Group; }
 
-		// "{" ( "current" "=" ) ? typeName = TypeRef "."
+		// "{" ("current" "=")? typeName=TypeRef "."
 		public Group ele0000Group() { return c0000Group; }
 
-		// "{" ( "current" "=" ) ? typeName = TypeRef
+		// "{" ("current" "=")? typeName=TypeRef
 		public Group ele00000Group() { return c00000Group; }
 
-		// "{" ( "current" "=" ) ?
+		// "{" ("current" "=")?
 		public Group ele000000Group() { return c000000Group; }
 
 		// "{"
 		public Keyword ele0000000KeywordLeftCurlyBracket() { return c0000000KeywordLeftCurlyBracket; }
 
-		// ( "current" "=" ) ?
+		// ("current" "=")?
 		public Group ele0000001Group() { return c0000001Group; }
 
 		// "current"
@@ -982,7 +982,7 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		// "="
 		public Keyword ele00000011KeywordEqualsSign() { return c00000011KeywordEqualsSign; }
 
-		// typeName = TypeRef
+		// typeName=TypeRef
 		public Assignment ele000001AssignmentTypeName() { return c000001AssignmentTypeName; }
 
 		// TypeRef
@@ -991,16 +991,16 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		// "."
 		public Keyword ele00001KeywordFullStop() { return c00001KeywordFullStop; }
 
-		// feature = ID
+		// feature=ID
 		public Assignment ele0001AssignmentFeature() { return c0001AssignmentFeature; }
 
 		// ID
 		public RuleCall ele00010LexerRuleCallID() { return c00010LexerRuleCallID; }
 
-		// operator = ( "=" | "+=" )
+		// operator=("="|"+=")
 		public Assignment ele001AssignmentOperator() { return c001AssignmentOperator; }
 
-		// "=" | "+="
+		// "="|"+="
 		public Alternatives ele0010Alternatives() { return c0010Alternatives; }
 
 		// "="
@@ -1026,16 +1026,16 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		private final RuleCall c01ParserRuleCallParenthesizedElement = (RuleCall)c0Alternatives.eContents().get(1);
 		private final RuleCall c1ParserRuleCallCrossReference = (RuleCall)cAlternatives.eContents().get(1);
 		
-		// AbstractTerminal returns AbstractElement : Keyword | RuleCall | ParenthesizedElement | CrossReference ;
+		// AbstractTerminal returns AbstractElement:   Keyword|RuleCall|ParenthesizedElement|CrossReference;
 		public ParserRule getRule() { return rule; }
 
-		// Keyword | RuleCall | ParenthesizedElement | CrossReference
+		// Keyword|RuleCall|ParenthesizedElement|CrossReference
 		public Alternatives eleAlternatives() { return cAlternatives; }
 
-		// Keyword | RuleCall | ParenthesizedElement
+		// Keyword|RuleCall|ParenthesizedElement
 		public Alternatives ele0Alternatives() { return c0Alternatives; }
 
-		// Keyword | RuleCall
+		// Keyword|RuleCall
 		public Alternatives ele00Alternatives() { return c00Alternatives; }
 
 		// Keyword
@@ -1063,19 +1063,19 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		private final RuleCall c01ParserRuleCallAbstractNegatedToken = (RuleCall)c0Alternatives.eContents().get(1);
 		private final RuleCall c1ParserRuleCallWildcard = (RuleCall)cAlternatives.eContents().get(1);
 		
-		// TerminalTokenElement returns AbstractElement : CharacterRange | RuleCall | ParenthesizedTerminalElement | AbstractNegatedToken | Wildcard ;
+		// TerminalTokenElement returns AbstractElement:   CharacterRange|RuleCall|ParenthesizedTerminalElement|AbstractNegatedToken|Wildcard;
 		public ParserRule getRule() { return rule; }
 
-		// CharacterRange | RuleCall | ParenthesizedTerminalElement | AbstractNegatedToken | Wildcard
+		// CharacterRange|RuleCall|ParenthesizedTerminalElement|AbstractNegatedToken|Wildcard
 		public Alternatives eleAlternatives() { return cAlternatives; }
 
-		// CharacterRange | RuleCall | ParenthesizedTerminalElement | AbstractNegatedToken
+		// CharacterRange|RuleCall|ParenthesizedTerminalElement|AbstractNegatedToken
 		public Alternatives ele0Alternatives() { return c0Alternatives; }
 
-		// CharacterRange | RuleCall | ParenthesizedTerminalElement
+		// CharacterRange|RuleCall|ParenthesizedTerminalElement
 		public Alternatives ele00Alternatives() { return c00Alternatives; }
 
-		// CharacterRange | RuleCall
+		// CharacterRange|RuleCall
 		public Alternatives ele000Alternatives() { return c000Alternatives; }
 
 		// CharacterRange
@@ -1100,10 +1100,10 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		private final RuleCall c0ParserRuleCallNegatedToken = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall c1ParserRuleCallUpToToken = (RuleCall)cAlternatives.eContents().get(1);
 		
-		// AbstractNegatedToken : NegatedToken | UpToToken ;
+		// AbstractNegatedToken:   NegatedToken|UpToToken;
 		public ParserRule getRule() { return rule; }
 
-		// NegatedToken | UpToToken
+		// NegatedToken|UpToToken
 		public Alternatives eleAlternatives() { return cAlternatives; }
 
 		// NegatedToken
@@ -1120,16 +1120,16 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		private final Assignment c1AssignmentTerminal = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall c10ParserRuleCallTerminalTokenElement = (RuleCall)c1AssignmentTerminal.eContents().get(0);
 		
-		// NegatedToken : "!" ^terminal = TerminalTokenElement ;
+		// NegatedToken:   "!" ^terminal=TerminalTokenElement;
 		public ParserRule getRule() { return rule; }
 
-		// "!" ^terminal = TerminalTokenElement
+		// "!" ^terminal=TerminalTokenElement
 		public Group eleGroup() { return cGroup; }
 
 		// "!"
 		public Keyword ele0KeywordExclamationMark() { return c0KeywordExclamationMark; }
 
-		// ^terminal = TerminalTokenElement
+		// ^terminal=TerminalTokenElement
 		public Assignment ele1AssignmentTerminal() { return c1AssignmentTerminal; }
 
 		// TerminalTokenElement
@@ -1143,16 +1143,16 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		private final Assignment c1AssignmentTerminal = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall c10ParserRuleCallTerminalTokenElement = (RuleCall)c1AssignmentTerminal.eContents().get(0);
 		
-		// UpToToken : "->" ^terminal = TerminalTokenElement ;
+		// UpToToken:   "->" ^terminal=TerminalTokenElement;
 		public ParserRule getRule() { return rule; }
 
-		// "->" ^terminal = TerminalTokenElement
+		// "->" ^terminal=TerminalTokenElement
 		public Group eleGroup() { return cGroup; }
 
 		// "->"
 		public Keyword ele0KeywordHyphenMinusGreaterThanSign() { return c0KeywordHyphenMinusGreaterThanSign; }
 
-		// ^terminal = TerminalTokenElement
+		// ^terminal=TerminalTokenElement
 		public Assignment ele1AssignmentTerminal() { return c1AssignmentTerminal; }
 
 		// TerminalTokenElement
@@ -1164,10 +1164,10 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		private final Assignment cAssignmentIsWildcard = (Assignment)rule.eContents().get(1);
 		private final Keyword c0KeywordFullStop = (Keyword)cAssignmentIsWildcard.eContents().get(0);
 		
-		// Wildcard : isWildcard ?= "." ;
+		// Wildcard:   isWildcard?=".";
 		public ParserRule getRule() { return rule; }
 
-		// isWildcard ?= "."
+		// isWildcard?="."
 		public Assignment eleAssignmentIsWildcard() { return cAssignmentIsWildcard; }
 
 		// "."
@@ -1185,28 +1185,28 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		private final Assignment c11AssignmentRight = (Assignment)c1Group.eContents().get(1);
 		private final RuleCall c110ParserRuleCallKeyword = (RuleCall)c11AssignmentRight.eContents().get(0);
 		
-		// CharacterRange returns AbstractElement : Keyword ( { current = CharacterRange . left = current } ".." right = Keyword ) ? ;
+		// CharacterRange returns AbstractElement:   Keyword ({current=CharacterRange.left=current} ".." right=Keyword)?;
 		public ParserRule getRule() { return rule; }
 
-		// Keyword ( { current = CharacterRange . left = current } ".." right = Keyword ) ?
+		// Keyword ({current=CharacterRange.left=current} ".." right=Keyword)?
 		public Group eleGroup() { return cGroup; }
 
 		// Keyword
 		public RuleCall ele0ParserRuleCallKeyword() { return c0ParserRuleCallKeyword; }
 
-		// ( { current = CharacterRange . left = current } ".." right = Keyword ) ?
+		// ({current=CharacterRange.left=current} ".." right=Keyword)?
 		public Group ele1Group() { return c1Group; }
 
-		// { current = CharacterRange . left = current } ".."
+		// {current=CharacterRange.left=current} ".."
 		public Group ele10Group() { return c10Group; }
 
-		// { current = CharacterRange . left = current }
+		// {current=CharacterRange.left=current}
 		public Action ele100ActionCharacterRangeleft() { return c100ActionCharacterRangeleft; }
 
 		// ".."
 		public Keyword ele101KeywordFullStopFullStop() { return c101KeywordFullStopFullStop; }
 
-		// right = Keyword
+		// right=Keyword
 		public Assignment ele11AssignmentRight() { return c11AssignmentRight; }
 
 		// Keyword
@@ -1227,37 +1227,37 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		private final CrossReference c0110CrossReferenceEStringAbstractRule = (CrossReference)c011AssignmentRule.eContents().get(0);
 		private final Keyword c1KeywordRightSquareBracket = (Keyword)cGroup.eContents().get(1);
 		
-		// CrossReference : "[" type = TypeRef ( "|" rule = [ AbstractRule ] ) ? "]" ;
+		// CrossReference:   "[" type=TypeRef ("|" rule=[AbstractRule])? "]";
 		public ParserRule getRule() { return rule; }
 
-		// "[" type = TypeRef ( "|" rule = [ AbstractRule ] ) ? "]"
+		// "[" type=TypeRef ("|" rule=[AbstractRule])? "]"
 		public Group eleGroup() { return cGroup; }
 
-		// "[" type = TypeRef ( "|" rule = [ AbstractRule ] ) ?
+		// "[" type=TypeRef ("|" rule=[AbstractRule])?
 		public Group ele0Group() { return c0Group; }
 
-		// "[" type = TypeRef
+		// "[" type=TypeRef
 		public Group ele00Group() { return c00Group; }
 
 		// "["
 		public Keyword ele000KeywordLeftSquareBracket() { return c000KeywordLeftSquareBracket; }
 
-		// type = TypeRef
+		// type=TypeRef
 		public Assignment ele001AssignmentType() { return c001AssignmentType; }
 
 		// TypeRef
 		public RuleCall ele0010ParserRuleCallTypeRef() { return c0010ParserRuleCallTypeRef; }
 
-		// ( "|" rule = [ AbstractRule ] ) ?
+		// ("|" rule=[AbstractRule])?
 		public Group ele01Group() { return c01Group; }
 
 		// "|"
 		public Keyword ele010KeywordVerticalLine() { return c010KeywordVerticalLine; }
 
-		// rule = [ AbstractRule ]
+		// rule=[AbstractRule]
 		public Assignment ele011AssignmentRule() { return c011AssignmentRule; }
 
-		// [ AbstractRule ]
+		// [AbstractRule]
 		public CrossReference ele0110CrossReferenceEStringAbstractRule() { return c0110CrossReferenceEStringAbstractRule; }
 
 		// "]"
@@ -1272,7 +1272,7 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		private final RuleCall c01ParserRuleCallAlternatives = (RuleCall)c0Group.eContents().get(1);
 		private final Keyword c1KeywordRightParenthesis = (Keyword)cGroup.eContents().get(1);
 		
-		// ParenthesizedElement returns AbstractElement : "(" Alternatives ")" ;
+		// ParenthesizedElement returns AbstractElement:   "(" Alternatives ")";
 		public ParserRule getRule() { return rule; }
 
 		// "(" Alternatives ")"
@@ -1299,7 +1299,7 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		private final RuleCall c01ParserRuleCallTerminalAlternatives = (RuleCall)c0Group.eContents().get(1);
 		private final Keyword c1KeywordRightParenthesis = (Keyword)cGroup.eContents().get(1);
 		
-		// ParenthesizedTerminalElement returns AbstractElement : "(" TerminalAlternatives ")" ;
+		// ParenthesizedTerminalElement returns AbstractElement:   "(" TerminalAlternatives ")";
 		public ParserRule getRule() { return rule; }
 
 		// "(" TerminalAlternatives ")"
@@ -1323,10 +1323,10 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		private final Assignment cAssignmentValue = (Assignment)rule.eContents().get(1);
 		private final RuleCall c0LexerRuleCallSTRING = (RuleCall)cAssignmentValue.eContents().get(0);
 		
-		// Keyword : value = STRING ;
+		// Keyword:   value=STRING;
 		public ParserRule getRule() { return rule; }
 
-		// value = STRING
+		// value=STRING
 		public Assignment eleAssignmentValue() { return cAssignmentValue; }
 
 		// STRING
@@ -1338,13 +1338,13 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		private final Assignment cAssignmentRule = (Assignment)rule.eContents().get(1);
 		private final CrossReference c0CrossReferenceEStringAbstractRule = (CrossReference)cAssignmentRule.eContents().get(0);
 		
-		// RuleCall : rule = [ AbstractRule ] ;
+		// RuleCall:   rule=[AbstractRule];
 		public ParserRule getRule() { return rule; }
 
-		// rule = [ AbstractRule ]
+		// rule=[AbstractRule]
 		public Assignment eleAssignmentRule() { return cAssignmentRule; }
 
-		// [ AbstractRule ]
+		// [AbstractRule]
 		public CrossReference ele0CrossReferenceEStringAbstractRule() { return c0CrossReferenceEStringAbstractRule; }
 	}
 	
@@ -1398,152 +1398,152 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 	}
 
 	
-	// Grammar : ( abstract ?= "abstract language" | "language" ) name = GrammarID ( "extends" superGrammarName = GrammarID ) ? ( definesHiddenTokens ?= "hidden" "(" ( hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ) ? ")" ) ? ( metamodelDeclarations += AbstractMetamodelDeclaration ) * ( rules += AbstractRule ) + ;
+	// Grammar:   (abstract?="abstract language"|"language") name=GrammarID ("extends" superGrammarName=GrammarID)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? (metamodelDeclarations+=AbstractMetamodelDeclaration)* (rules+=AbstractRule)+;
 	public GrammarElements prGrammar() {
 		return (pGrammar != null) ? pGrammar : (pGrammar = new GrammarElements());
 	} 
 
-	// GrammarID returns EString : ID ( "." ID ) * ;
+	// GrammarID returns EString:   ID ("." ID)*;
 	public GrammarIDElements prGrammarID() {
 		return (pGrammarID != null) ? pGrammarID : (pGrammarID = new GrammarIDElements());
 	} 
 
-	// AbstractRule : LexerRule | ParserRule | TerminalRule ;
+	// AbstractRule:   LexerRule|ParserRule|TerminalRule;
 	public AbstractRuleElements prAbstractRule() {
 		return (pAbstractRule != null) ? pAbstractRule : (pAbstractRule = new AbstractRuleElements());
 	} 
 
-	// AbstractMetamodelDeclaration : GeneratedMetamodel | ReferencedMetamodel ;
+	// AbstractMetamodelDeclaration:   GeneratedMetamodel|ReferencedMetamodel;
 	public AbstractMetamodelDeclarationElements prAbstractMetamodelDeclaration() {
 		return (pAbstractMetamodelDeclaration != null) ? pAbstractMetamodelDeclaration : (pAbstractMetamodelDeclaration = new AbstractMetamodelDeclarationElements());
 	} 
 
-	// GeneratedMetamodel : "generate" name = ID ePackage = [ EPackage | STRING ] ( "as" alias = ID ) ? ;
+	// GeneratedMetamodel:   "generate" name=ID ePackage=[EPackage|STRING] ("as" alias=ID)?;
 	public GeneratedMetamodelElements prGeneratedMetamodel() {
 		return (pGeneratedMetamodel != null) ? pGeneratedMetamodel : (pGeneratedMetamodel = new GeneratedMetamodelElements());
 	} 
 
-	// ReferencedMetamodel : "import" ePackage = [ EPackage | STRING ] ( "as" alias = ID ) ? ;
+	// ReferencedMetamodel:   "import" ePackage=[EPackage|STRING] ("as" alias=ID)?;
 	public ReferencedMetamodelElements prReferencedMetamodel() {
 		return (pReferencedMetamodel != null) ? pReferencedMetamodel : (pReferencedMetamodel = new ReferencedMetamodelElements());
 	} 
 
-	// LexerRule : ( "native" | "lexer" ) name = ID ( "returns" type = TypeRef ) ? ":" body = STRING ";" ;
+	// LexerRule:   ("native"|"lexer") name=ID ("returns" type=TypeRef)? ":" body=STRING ";";
 	public LexerRuleElements prLexerRule() {
 		return (pLexerRule != null) ? pLexerRule : (pLexerRule = new LexerRuleElements());
 	} 
 
-	// ParserRule : name = ID ( "returns" type = TypeRef ) ? ( definesHiddenTokens ?= "hidden" "(" ( hiddenTokens += [ AbstractRule ] ( "," hiddenTokens += [ AbstractRule ] ) * ) ? ")" ) ? ":" alternatives = Alternatives ";" ;
+	// ParserRule:   name=ID ("returns" type=TypeRef)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? ":" alternatives=Alternatives ";";
 	public ParserRuleElements prParserRule() {
 		return (pParserRule != null) ? pParserRule : (pParserRule = new ParserRuleElements());
 	} 
 
-	// TerminalRule returns ParserRule : ^terminal ?= "terminal" name = ID ( "returns" type = TypeRef ) ? ":" alternatives = TerminalAlternatives ";" ;
+	// TerminalRule returns ParserRule:   ^terminal?="terminal" name=ID ("returns" type=TypeRef)? ":" alternatives=TerminalAlternatives ";";
 	public TerminalRuleElements prTerminalRule() {
 		return (pTerminalRule != null) ? pTerminalRule : (pTerminalRule = new TerminalRuleElements());
 	} 
 
-	// TypeRef : ( metamodel = [ AbstractMetamodelDeclaration ] "::" ) ? type = [ EClassifier ] ;
+	// TypeRef:   (metamodel=[AbstractMetamodelDeclaration] "::")? type=[EClassifier];
 	public TypeRefElements prTypeRef() {
 		return (pTypeRef != null) ? pTypeRef : (pTypeRef = new TypeRefElements());
 	} 
 
-	// Alternatives returns AbstractElement : Group ( { current = Alternatives . groups += current } "|" groups += Group ) * ;
+	// Alternatives returns AbstractElement:   Group ({current=Alternatives.groups+=current} "|" groups+=Group)*;
 	public AlternativesElements prAlternatives() {
 		return (pAlternatives != null) ? pAlternatives : (pAlternatives = new AlternativesElements());
 	} 
 
-	// TerminalAlternatives returns AbstractElement : TerminalGroup ( { current = Alternatives . groups += current } "|" groups += TerminalGroup ) * ;
+	// TerminalAlternatives returns AbstractElement:   TerminalGroup ({current=Alternatives.groups+=current} "|" groups+=TerminalGroup)*;
 	public TerminalAlternativesElements prTerminalAlternatives() {
 		return (pTerminalAlternatives != null) ? pTerminalAlternatives : (pTerminalAlternatives = new TerminalAlternativesElements());
 	} 
 
-	// Group returns AbstractElement : AbstractToken ( { current = Group . abstractTokens += current } abstractTokens += AbstractToken ) * ;
+	// Group returns AbstractElement:   AbstractToken ({current=Group.abstractTokens+=current} abstractTokens+=AbstractToken)*;
 	public GroupElements prGroup() {
 		return (pGroup != null) ? pGroup : (pGroup = new GroupElements());
 	} 
 
-	// TerminalGroup returns AbstractElement : TerminalToken ( { current = Group . abstractTokens += current } abstractTokens += TerminalToken ) * ;
+	// TerminalGroup returns AbstractElement:   TerminalToken ({current=Group.abstractTokens+=current} abstractTokens+=TerminalToken)*;
 	public TerminalGroupElements prTerminalGroup() {
 		return (pTerminalGroup != null) ? pTerminalGroup : (pTerminalGroup = new TerminalGroupElements());
 	} 
 
-	// AbstractToken returns AbstractElement : ( Assignment | Action | AbstractTerminal ) ( cardinality = ( "?" | "*" | "+" ) ) ? ;
+	// AbstractToken returns AbstractElement:   (Assignment|Action|AbstractTerminal) (cardinality=("?"|"*"|"+"))?;
 	public AbstractTokenElements prAbstractToken() {
 		return (pAbstractToken != null) ? pAbstractToken : (pAbstractToken = new AbstractTokenElements());
 	} 
 
-	// TerminalToken returns AbstractElement : TerminalTokenElement ( cardinality = ( "?" | "*" | "+" ) ) ? ;
+	// TerminalToken returns AbstractElement:   TerminalTokenElement (cardinality=("?"|"*"|"+"))?;
 	public TerminalTokenElements prTerminalToken() {
 		return (pTerminalToken != null) ? pTerminalToken : (pTerminalToken = new TerminalTokenElements());
 	} 
 
-	// Assignment : feature = ID operator = ( "+=" | "=" | "?=" ) ^terminal = AbstractTerminal ;
+	// Assignment:   feature=ID operator=("+="|"="|"?=") ^terminal=AbstractTerminal;
 	public AssignmentElements prAssignment() {
 		return (pAssignment != null) ? pAssignment : (pAssignment = new AssignmentElements());
 	} 
 
-	// Action : "{" ( "current" "=" ) ? typeName = TypeRef "." feature = ID operator = ( "=" | "+=" ) "current" "}" ;
+	// Action:   "{" ("current" "=")? typeName=TypeRef "." feature=ID operator=("="|"+=") "current" "}";
 	public ActionElements prAction() {
 		return (pAction != null) ? pAction : (pAction = new ActionElements());
 	} 
 
-	// AbstractTerminal returns AbstractElement : Keyword | RuleCall | ParenthesizedElement | CrossReference ;
+	// AbstractTerminal returns AbstractElement:   Keyword|RuleCall|ParenthesizedElement|CrossReference;
 	public AbstractTerminalElements prAbstractTerminal() {
 		return (pAbstractTerminal != null) ? pAbstractTerminal : (pAbstractTerminal = new AbstractTerminalElements());
 	} 
 
-	// TerminalTokenElement returns AbstractElement : CharacterRange | RuleCall | ParenthesizedTerminalElement | AbstractNegatedToken | Wildcard ;
+	// TerminalTokenElement returns AbstractElement:   CharacterRange|RuleCall|ParenthesizedTerminalElement|AbstractNegatedToken|Wildcard;
 	public TerminalTokenElementElements prTerminalTokenElement() {
 		return (pTerminalTokenElement != null) ? pTerminalTokenElement : (pTerminalTokenElement = new TerminalTokenElementElements());
 	} 
 
-	// AbstractNegatedToken : NegatedToken | UpToToken ;
+	// AbstractNegatedToken:   NegatedToken|UpToToken;
 	public AbstractNegatedTokenElements prAbstractNegatedToken() {
 		return (pAbstractNegatedToken != null) ? pAbstractNegatedToken : (pAbstractNegatedToken = new AbstractNegatedTokenElements());
 	} 
 
-	// NegatedToken : "!" ^terminal = TerminalTokenElement ;
+	// NegatedToken:   "!" ^terminal=TerminalTokenElement;
 	public NegatedTokenElements prNegatedToken() {
 		return (pNegatedToken != null) ? pNegatedToken : (pNegatedToken = new NegatedTokenElements());
 	} 
 
-	// UpToToken : "->" ^terminal = TerminalTokenElement ;
+	// UpToToken:   "->" ^terminal=TerminalTokenElement;
 	public UpToTokenElements prUpToToken() {
 		return (pUpToToken != null) ? pUpToToken : (pUpToToken = new UpToTokenElements());
 	} 
 
-	// Wildcard : isWildcard ?= "." ;
+	// Wildcard:   isWildcard?=".";
 	public WildcardElements prWildcard() {
 		return (pWildcard != null) ? pWildcard : (pWildcard = new WildcardElements());
 	} 
 
-	// CharacterRange returns AbstractElement : Keyword ( { current = CharacterRange . left = current } ".." right = Keyword ) ? ;
+	// CharacterRange returns AbstractElement:   Keyword ({current=CharacterRange.left=current} ".." right=Keyword)?;
 	public CharacterRangeElements prCharacterRange() {
 		return (pCharacterRange != null) ? pCharacterRange : (pCharacterRange = new CharacterRangeElements());
 	} 
 
-	// CrossReference : "[" type = TypeRef ( "|" rule = [ AbstractRule ] ) ? "]" ;
+	// CrossReference:   "[" type=TypeRef ("|" rule=[AbstractRule])? "]";
 	public CrossReferenceElements prCrossReference() {
 		return (pCrossReference != null) ? pCrossReference : (pCrossReference = new CrossReferenceElements());
 	} 
 
-	// ParenthesizedElement returns AbstractElement : "(" Alternatives ")" ;
+	// ParenthesizedElement returns AbstractElement:   "(" Alternatives ")";
 	public ParenthesizedElementElements prParenthesizedElement() {
 		return (pParenthesizedElement != null) ? pParenthesizedElement : (pParenthesizedElement = new ParenthesizedElementElements());
 	} 
 
-	// ParenthesizedTerminalElement returns AbstractElement : "(" TerminalAlternatives ")" ;
+	// ParenthesizedTerminalElement returns AbstractElement:   "(" TerminalAlternatives ")";
 	public ParenthesizedTerminalElementElements prParenthesizedTerminalElement() {
 		return (pParenthesizedTerminalElement != null) ? pParenthesizedTerminalElement : (pParenthesizedTerminalElement = new ParenthesizedTerminalElementElements());
 	} 
 
-	// Keyword : value = STRING ;
+	// Keyword:   value=STRING;
 	public KeywordElements prKeyword() {
 		return (pKeyword != null) ? pKeyword : (pKeyword = new KeywordElements());
 	} 
 
-	// RuleCall : rule = [ AbstractRule ] ;
+	// RuleCall:   rule=[AbstractRule];
 	public RuleCallElements prRuleCall() {
 		return (pRuleCall != null) ? pRuleCall : (pRuleCall = new RuleCallElements());
 	} 

@@ -39,12 +39,12 @@ public class ComplexReconstrTestLanguageParseTreeConstructor extends AbstractPar
 
 /************ begin Rule Root ****************
  *
- * Root : Op | TrickyG ;
+ * Root:   Op|TrickyG;
  *
  **/
 
 
-// Op | TrickyG
+// Op|TrickyG
 protected class Root_Alternatives extends AlternativesToken {
 
 	public Root_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -107,12 +107,12 @@ protected class Root_1_RuleCall_TrickyG extends RuleCallToken {
 
 /************ begin Rule Op ****************
  *
- * Op returns Expression : Term ( { current = Add . addOperands += current } "+" addOperands += Term | { current = Minus . minusOperands += current } "-" minusOperands += Term ) * ;
+ * Op returns Expression:   Term ({current=Add.addOperands+=current} "+" addOperands+=Term|{current=Minus.minusOperands+=current} "-" minusOperands+=Term)*;
  *
  **/
 
 
-// Term ( { current = Add . addOperands += current } "+" addOperands += Term | { current = Minus . minusOperands += current } "-" minusOperands += Term ) *
+// Term ({current=Add.addOperands+=current} "+" addOperands+=Term|{current=Minus.minusOperands+=current} "-" minusOperands+=Term)*
 protected class Op_Group extends GroupToken {
 	
 	public Op_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -158,7 +158,7 @@ protected class Op_0_RuleCall_Term extends RuleCallToken {
 	}
 }
 
-// ( { current = Add . addOperands += current } "+" addOperands += Term | { current = Minus . minusOperands += current } "-" minusOperands += Term ) *
+// ({current=Add.addOperands+=current} "+" addOperands+=Term|{current=Minus.minusOperands+=current} "-" minusOperands+=Term)*
 protected class Op_1_Alternatives extends AlternativesToken {
 
 	public Op_1_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -179,7 +179,7 @@ protected class Op_1_Alternatives extends AlternativesToken {
 	}
 }
 
-// { current = Add . addOperands += current } "+" addOperands += Term
+// {current=Add.addOperands+=current} "+" addOperands+=Term
 protected class Op_1_0_Group extends GroupToken {
 	
 	public Op_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -207,7 +207,7 @@ protected class Op_1_0_Group extends GroupToken {
 	}
 }
 
-// { current = Add . addOperands += current } "+"
+// {current=Add.addOperands+=current} "+"
 protected class Op_1_0_0_Group extends GroupToken {
 	
 	public Op_1_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -235,7 +235,7 @@ protected class Op_1_0_0_Group extends GroupToken {
 	}
 }
 
-// { current = Add . addOperands += current }
+// {current=Add.addOperands+=current}
 protected class Op_1_0_0_0_Action_Add_addOperands extends ActionToken  {
 
 	public Op_1_0_0_0_Action_Add_addOperands(IInstanceDescription curr, AbstractToken pred) {
@@ -268,7 +268,7 @@ protected class Op_1_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-// addOperands += Term
+// addOperands+=Term
 protected class Op_1_0_1_Assignment_addOperands extends AssignmentToken  {
 	
 	public Op_1_0_1_Assignment_addOperands(IInstanceDescription curr, AbstractToken pred) {
@@ -300,7 +300,7 @@ protected class Op_1_0_1_Assignment_addOperands extends AssignmentToken  {
 }
 
 
-// { current = Minus . minusOperands += current } "-" minusOperands += Term
+// {current=Minus.minusOperands+=current} "-" minusOperands+=Term
 protected class Op_1_1_Group extends GroupToken {
 	
 	public Op_1_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -328,7 +328,7 @@ protected class Op_1_1_Group extends GroupToken {
 	}
 }
 
-// { current = Minus . minusOperands += current } "-"
+// {current=Minus.minusOperands+=current} "-"
 protected class Op_1_1_0_Group extends GroupToken {
 	
 	public Op_1_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -356,7 +356,7 @@ protected class Op_1_1_0_Group extends GroupToken {
 	}
 }
 
-// { current = Minus . minusOperands += current }
+// {current=Minus.minusOperands+=current}
 protected class Op_1_1_0_0_Action_Minus_minusOperands extends ActionToken  {
 
 	public Op_1_1_0_0_Action_Minus_minusOperands(IInstanceDescription curr, AbstractToken pred) {
@@ -389,7 +389,7 @@ protected class Op_1_1_0_1_Keyword extends KeywordToken  {
 }
 
 
-// minusOperands += Term
+// minusOperands+=Term
 protected class Op_1_1_1_Assignment_minusOperands extends AssignmentToken  {
 	
 	public Op_1_1_1_Assignment_minusOperands(IInstanceDescription curr, AbstractToken pred) {
@@ -428,12 +428,12 @@ protected class Op_1_1_1_Assignment_minusOperands extends AssignmentToken  {
 
 /************ begin Rule Term ****************
  *
- * Term returns Expression : Atom | Parens ;
+ * Term returns Expression:   Atom|Parens;
  *
  **/
 
 
-// Atom | Parens
+// Atom|Parens
 protected class Term_Alternatives extends AlternativesToken {
 
 	public Term_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -496,12 +496,12 @@ protected class Term_1_RuleCall_Parens extends RuleCallToken {
 
 /************ begin Rule Atom ****************
  *
- * Atom : name = ID ;
+ * Atom:   name=ID;
  *
  **/
 
 
-// name = ID
+// name=ID
 protected class Atom_Assignment_name extends AssignmentToken  {
 	
 	public Atom_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -529,12 +529,12 @@ protected class Atom_Assignment_name extends AssignmentToken  {
 
 /************ begin Rule Parens ****************
  *
- * Parens returns Expression : "(" Op ")" ( em = "!" ) ? ;
+ * Parens returns Expression:   "(" Op ")" (em="!")?;
  *
  **/
 
 
-// "(" Op ")" ( em = "!" ) ?
+// "(" Op ")" (em="!")?
 protected class Parens_Group extends GroupToken {
 	
 	public Parens_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -662,7 +662,7 @@ protected class Parens_0_1_Keyword extends KeywordToken  {
 }
 
 
-// ( em = "!" ) ?
+// (em="!")?
 protected class Parens_1_Assignment_em extends AssignmentToken  {
 	
 	public Parens_1_Assignment_em(IInstanceDescription curr, AbstractToken pred) {
@@ -693,12 +693,12 @@ protected class Parens_1_Assignment_em extends AssignmentToken  {
 
 /************ begin Rule TrickyA ****************
  *
- * TrickyA returns TypeA1 : "TA" TrickyA1 ( name += ID ) * ( { current = TypeB . x = current } "x" | { current = TypeC . x = current } "y" ) ? name += STRING ;
+ * TrickyA returns TypeA1:   "TA" TrickyA1 (name+=ID)* ({current=TypeB.x=current} "x"|{current=TypeC.x=current} "y")? name+=STRING;
  *
  **/
 
 
-// "TA" TrickyA1 ( name += ID ) * ( { current = TypeB . x = current } "x" | { current = TypeC . x = current } "y" ) ? name += STRING
+// "TA" TrickyA1 (name+=ID)* ({current=TypeB.x=current} "x"|{current=TypeC.x=current} "y")? name+=STRING
 protected class TrickyA_Group extends GroupToken {
 	
 	public TrickyA_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -726,7 +726,7 @@ protected class TrickyA_Group extends GroupToken {
 	}
 }
 
-// "TA" TrickyA1 ( name += ID ) * ( { current = TypeB . x = current } "x" | { current = TypeC . x = current } "y" ) ?
+// "TA" TrickyA1 (name+=ID)* ({current=TypeB.x=current} "x"|{current=TypeC.x=current} "y")?
 protected class TrickyA_0_Group extends GroupToken {
 	
 	public TrickyA_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -754,7 +754,7 @@ protected class TrickyA_0_Group extends GroupToken {
 	}
 }
 
-// "TA" TrickyA1 ( name += ID ) *
+// "TA" TrickyA1 (name+=ID)*
 protected class TrickyA_0_0_Group extends GroupToken {
 	
 	public TrickyA_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -841,7 +841,7 @@ protected class TrickyA_0_0_0_1_RuleCall_TrickyA1 extends RuleCallToken {
 }
 
 
-// ( name += ID ) *
+// (name+=ID)*
 protected class TrickyA_0_0_1_Assignment_name extends AssignmentToken  {
 	
 	public TrickyA_0_0_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -865,7 +865,7 @@ protected class TrickyA_0_0_1_Assignment_name extends AssignmentToken  {
 }
 
 
-// ( { current = TypeB . x = current } "x" | { current = TypeC . x = current } "y" ) ?
+// ({current=TypeB.x=current} "x"|{current=TypeC.x=current} "y")?
 protected class TrickyA_0_1_Alternatives extends AlternativesToken {
 
 	public TrickyA_0_1_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -886,7 +886,7 @@ protected class TrickyA_0_1_Alternatives extends AlternativesToken {
 	}
 }
 
-// { current = TypeB . x = current } "x"
+// {current=TypeB.x=current} "x"
 protected class TrickyA_0_1_0_Group extends GroupToken {
 	
 	public TrickyA_0_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -914,7 +914,7 @@ protected class TrickyA_0_1_0_Group extends GroupToken {
 	}
 }
 
-// { current = TypeB . x = current }
+// {current=TypeB.x=current}
 protected class TrickyA_0_1_0_0_Action_TypeB_x extends ActionToken  {
 
 	public TrickyA_0_1_0_0_Action_TypeB_x(IInstanceDescription curr, AbstractToken pred) {
@@ -947,7 +947,7 @@ protected class TrickyA_0_1_0_1_Keyword_x extends KeywordToken  {
 }
 
 
-// { current = TypeC . x = current } "y"
+// {current=TypeC.x=current} "y"
 protected class TrickyA_0_1_1_Group extends GroupToken {
 	
 	public TrickyA_0_1_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -975,7 +975,7 @@ protected class TrickyA_0_1_1_Group extends GroupToken {
 	}
 }
 
-// { current = TypeC . x = current }
+// {current=TypeC.x=current}
 protected class TrickyA_0_1_1_0_Action_TypeC_x extends ActionToken  {
 
 	public TrickyA_0_1_1_0_Action_TypeC_x(IInstanceDescription curr, AbstractToken pred) {
@@ -1010,7 +1010,7 @@ protected class TrickyA_0_1_1_1_Keyword_y extends KeywordToken  {
 
 
 
-// name += STRING
+// name+=STRING
 protected class TrickyA_1_Assignment_name extends AssignmentToken  {
 	
 	public TrickyA_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -1039,12 +1039,12 @@ protected class TrickyA_1_Assignment_name extends AssignmentToken  {
 
 /************ begin Rule TrickyA1 ****************
  *
- * TrickyA1 returns TypeD : name += ID ;
+ * TrickyA1 returns TypeD:   name+=ID;
  *
  **/
 
 
-// name += ID
+// name+=ID
 protected class TrickyA1_Assignment_name extends AssignmentToken  {
 	
 	public TrickyA1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -1072,12 +1072,12 @@ protected class TrickyA1_Assignment_name extends AssignmentToken  {
 
 /************ begin Rule TrickyB ****************
  *
- * TrickyB : "TB" ( name = ID type += INT ) ? ( type += INT ) * ;
+ * TrickyB:   "TB" (name=ID type+=INT)? (type+=INT)*;
  *
  **/
 
 
-// "TB" ( name = ID type += INT ) ? ( type += INT ) *
+// "TB" (name=ID type+=INT)? (type+=INT)*
 protected class TrickyB_Group extends GroupToken {
 	
 	public TrickyB_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1105,7 +1105,7 @@ protected class TrickyB_Group extends GroupToken {
 	}
 }
 
-// "TB" ( name = ID type += INT ) ?
+// "TB" (name=ID type+=INT)?
 protected class TrickyB_0_Group extends GroupToken {
 	
 	public TrickyB_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1145,7 +1145,7 @@ protected class TrickyB_0_0_Keyword_TB extends KeywordToken  {
 	}	
 }
 
-// ( name = ID type += INT ) ?
+// (name=ID type+=INT)?
 protected class TrickyB_0_1_Group extends GroupToken {
 	
 	public TrickyB_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1173,7 +1173,7 @@ protected class TrickyB_0_1_Group extends GroupToken {
 	}
 }
 
-// name = ID
+// name=ID
 protected class TrickyB_0_1_0_Assignment_name extends AssignmentToken  {
 	
 	public TrickyB_0_1_0_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -1196,7 +1196,7 @@ protected class TrickyB_0_1_0_Assignment_name extends AssignmentToken  {
 	}
 }
 
-// type += INT
+// type+=INT
 protected class TrickyB_0_1_1_Assignment_type extends AssignmentToken  {
 	
 	public TrickyB_0_1_1_Assignment_type(IInstanceDescription curr, AbstractToken pred) {
@@ -1221,7 +1221,7 @@ protected class TrickyB_0_1_1_Assignment_type extends AssignmentToken  {
 
 
 
-// ( type += INT ) *
+// (type+=INT)*
 protected class TrickyB_1_Assignment_type extends AssignmentToken  {
 	
 	public TrickyB_1_Assignment_type(IInstanceDescription curr, AbstractToken pred) {
@@ -1250,12 +1250,12 @@ protected class TrickyB_1_Assignment_type extends AssignmentToken  {
 
 /************ begin Rule TrickyC ****************
  *
- * TrickyC : "TC" name = ID ( { current = C1 . x = current } "x" ) ? ( { current = C2 . y = current } "y" ) ? ( { current = C3 . z = current } "z" ) ? ;
+ * TrickyC:   "TC" name=ID ({current=C1.x=current} "x")? ({current=C2.y=current} "y")? ({current=C3.z=current} "z")?;
  *
  **/
 
 
-// "TC" name = ID ( { current = C1 . x = current } "x" ) ? ( { current = C2 . y = current } "y" ) ? ( { current = C3 . z = current } "z" ) ?
+// "TC" name=ID ({current=C1.x=current} "x")? ({current=C2.y=current} "y")? ({current=C3.z=current} "z")?
 protected class TrickyC_Group extends GroupToken {
 	
 	public TrickyC_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1283,7 +1283,7 @@ protected class TrickyC_Group extends GroupToken {
 	}
 }
 
-// "TC" name = ID ( { current = C1 . x = current } "x" ) ? ( { current = C2 . y = current } "y" ) ?
+// "TC" name=ID ({current=C1.x=current} "x")? ({current=C2.y=current} "y")?
 protected class TrickyC_0_Group extends GroupToken {
 	
 	public TrickyC_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1311,7 +1311,7 @@ protected class TrickyC_0_Group extends GroupToken {
 	}
 }
 
-// "TC" name = ID ( { current = C1 . x = current } "x" ) ?
+// "TC" name=ID ({current=C1.x=current} "x")?
 protected class TrickyC_0_0_Group extends GroupToken {
 	
 	public TrickyC_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1339,7 +1339,7 @@ protected class TrickyC_0_0_Group extends GroupToken {
 	}
 }
 
-// "TC" name = ID
+// "TC" name=ID
 protected class TrickyC_0_0_0_Group extends GroupToken {
 	
 	public TrickyC_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1379,7 +1379,7 @@ protected class TrickyC_0_0_0_0_Keyword_TC extends KeywordToken  {
 	}	
 }
 
-// name = ID
+// name=ID
 protected class TrickyC_0_0_0_1_Assignment_name extends AssignmentToken  {
 	
 	public TrickyC_0_0_0_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -1403,7 +1403,7 @@ protected class TrickyC_0_0_0_1_Assignment_name extends AssignmentToken  {
 }
 
 
-// ( { current = C1 . x = current } "x" ) ?
+// ({current=C1.x=current} "x")?
 protected class TrickyC_0_0_1_Group extends GroupToken {
 	
 	public TrickyC_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1431,7 +1431,7 @@ protected class TrickyC_0_0_1_Group extends GroupToken {
 	}
 }
 
-// { current = C1 . x = current }
+// {current=C1.x=current}
 protected class TrickyC_0_0_1_0_Action_C1_x extends ActionToken  {
 
 	public TrickyC_0_0_1_0_Action_C1_x(IInstanceDescription curr, AbstractToken pred) {
@@ -1465,7 +1465,7 @@ protected class TrickyC_0_0_1_1_Keyword_x extends KeywordToken  {
 
 
 
-// ( { current = C2 . y = current } "y" ) ?
+// ({current=C2.y=current} "y")?
 protected class TrickyC_0_1_Group extends GroupToken {
 	
 	public TrickyC_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1493,7 +1493,7 @@ protected class TrickyC_0_1_Group extends GroupToken {
 	}
 }
 
-// { current = C2 . y = current }
+// {current=C2.y=current}
 protected class TrickyC_0_1_0_Action_C2_y extends ActionToken  {
 
 	public TrickyC_0_1_0_Action_C2_y(IInstanceDescription curr, AbstractToken pred) {
@@ -1527,7 +1527,7 @@ protected class TrickyC_0_1_1_Keyword_y extends KeywordToken  {
 
 
 
-// ( { current = C3 . z = current } "z" ) ?
+// ({current=C3.z=current} "z")?
 protected class TrickyC_1_Group extends GroupToken {
 	
 	public TrickyC_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1555,7 +1555,7 @@ protected class TrickyC_1_Group extends GroupToken {
 	}
 }
 
-// { current = C3 . z = current }
+// {current=C3.z=current}
 protected class TrickyC_1_0_Action_C3_z extends ActionToken  {
 
 	public TrickyC_1_0_Action_C3_z(IInstanceDescription curr, AbstractToken pred) {
@@ -1594,12 +1594,12 @@ protected class TrickyC_1_1_Keyword_z extends KeywordToken  {
 
 /************ begin Rule TrickyD ****************
  *
- * TrickyD : "TD" ( name += INT foo = STRING type += ID ) ? ( name += INT type += ID ) ? ( type += ID ) * ;
+ * TrickyD:   "TD" (name+=INT foo=STRING type+=ID)? (name+=INT type+=ID)? (type+=ID)*;
  *
  **/
 
 
-// "TD" ( name += INT foo = STRING type += ID ) ? ( name += INT type += ID ) ? ( type += ID ) *
+// "TD" (name+=INT foo=STRING type+=ID)? (name+=INT type+=ID)? (type+=ID)*
 protected class TrickyD_Group extends GroupToken {
 	
 	public TrickyD_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1627,7 +1627,7 @@ protected class TrickyD_Group extends GroupToken {
 	}
 }
 
-// "TD" ( name += INT foo = STRING type += ID ) ? ( name += INT type += ID ) ?
+// "TD" (name+=INT foo=STRING type+=ID)? (name+=INT type+=ID)?
 protected class TrickyD_0_Group extends GroupToken {
 	
 	public TrickyD_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1655,7 +1655,7 @@ protected class TrickyD_0_Group extends GroupToken {
 	}
 }
 
-// "TD" ( name += INT foo = STRING type += ID ) ?
+// "TD" (name+=INT foo=STRING type+=ID)?
 protected class TrickyD_0_0_Group extends GroupToken {
 	
 	public TrickyD_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1695,7 +1695,7 @@ protected class TrickyD_0_0_0_Keyword_TD extends KeywordToken  {
 	}	
 }
 
-// ( name += INT foo = STRING type += ID ) ?
+// (name+=INT foo=STRING type+=ID)?
 protected class TrickyD_0_0_1_Group extends GroupToken {
 	
 	public TrickyD_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1723,7 +1723,7 @@ protected class TrickyD_0_0_1_Group extends GroupToken {
 	}
 }
 
-// name += INT foo = STRING
+// name+=INT foo=STRING
 protected class TrickyD_0_0_1_0_Group extends GroupToken {
 	
 	public TrickyD_0_0_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1751,7 +1751,7 @@ protected class TrickyD_0_0_1_0_Group extends GroupToken {
 	}
 }
 
-// name += INT
+// name+=INT
 protected class TrickyD_0_0_1_0_0_Assignment_name extends AssignmentToken  {
 	
 	public TrickyD_0_0_1_0_0_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -1774,7 +1774,7 @@ protected class TrickyD_0_0_1_0_0_Assignment_name extends AssignmentToken  {
 	}
 }
 
-// foo = STRING
+// foo=STRING
 protected class TrickyD_0_0_1_0_1_Assignment_foo extends AssignmentToken  {
 	
 	public TrickyD_0_0_1_0_1_Assignment_foo(IInstanceDescription curr, AbstractToken pred) {
@@ -1798,7 +1798,7 @@ protected class TrickyD_0_0_1_0_1_Assignment_foo extends AssignmentToken  {
 }
 
 
-// type += ID
+// type+=ID
 protected class TrickyD_0_0_1_1_Assignment_type extends AssignmentToken  {
 	
 	public TrickyD_0_0_1_1_Assignment_type(IInstanceDescription curr, AbstractToken pred) {
@@ -1823,7 +1823,7 @@ protected class TrickyD_0_0_1_1_Assignment_type extends AssignmentToken  {
 
 
 
-// ( name += INT type += ID ) ?
+// (name+=INT type+=ID)?
 protected class TrickyD_0_1_Group extends GroupToken {
 	
 	public TrickyD_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1851,7 +1851,7 @@ protected class TrickyD_0_1_Group extends GroupToken {
 	}
 }
 
-// name += INT
+// name+=INT
 protected class TrickyD_0_1_0_Assignment_name extends AssignmentToken  {
 	
 	public TrickyD_0_1_0_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -1874,7 +1874,7 @@ protected class TrickyD_0_1_0_Assignment_name extends AssignmentToken  {
 	}
 }
 
-// type += ID
+// type+=ID
 protected class TrickyD_0_1_1_Assignment_type extends AssignmentToken  {
 	
 	public TrickyD_0_1_1_Assignment_type(IInstanceDescription curr, AbstractToken pred) {
@@ -1899,7 +1899,7 @@ protected class TrickyD_0_1_1_Assignment_type extends AssignmentToken  {
 
 
 
-// ( type += ID ) *
+// (type+=ID)*
 protected class TrickyD_1_Assignment_type extends AssignmentToken  {
 	
 	public TrickyD_1_Assignment_type(IInstanceDescription curr, AbstractToken pred) {
@@ -1928,12 +1928,12 @@ protected class TrickyD_1_Assignment_type extends AssignmentToken  {
 
 /************ begin Rule TrickyE ****************
  *
- * TrickyE : "TE" ( name += INT foo += STRING type += ID ) * "x" ( name += INT type += ID ) * ;
+ * TrickyE:   "TE" (name+=INT foo+=STRING type+=ID)* "x" (name+=INT type+=ID)*;
  *
  **/
 
 
-// "TE" ( name += INT foo += STRING type += ID ) * "x" ( name += INT type += ID ) *
+// "TE" (name+=INT foo+=STRING type+=ID)* "x" (name+=INT type+=ID)*
 protected class TrickyE_Group extends GroupToken {
 	
 	public TrickyE_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1961,7 +1961,7 @@ protected class TrickyE_Group extends GroupToken {
 	}
 }
 
-// "TE" ( name += INT foo += STRING type += ID ) * "x"
+// "TE" (name+=INT foo+=STRING type+=ID)* "x"
 protected class TrickyE_0_Group extends GroupToken {
 	
 	public TrickyE_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1989,7 +1989,7 @@ protected class TrickyE_0_Group extends GroupToken {
 	}
 }
 
-// "TE" ( name += INT foo += STRING type += ID ) *
+// "TE" (name+=INT foo+=STRING type+=ID)*
 protected class TrickyE_0_0_Group extends GroupToken {
 	
 	public TrickyE_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2029,7 +2029,7 @@ protected class TrickyE_0_0_0_Keyword_TE extends KeywordToken  {
 	}	
 }
 
-// ( name += INT foo += STRING type += ID ) *
+// (name+=INT foo+=STRING type+=ID)*
 protected class TrickyE_0_0_1_Group extends GroupToken {
 	
 	public TrickyE_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2057,7 +2057,7 @@ protected class TrickyE_0_0_1_Group extends GroupToken {
 	}
 }
 
-// name += INT foo += STRING
+// name+=INT foo+=STRING
 protected class TrickyE_0_0_1_0_Group extends GroupToken {
 	
 	public TrickyE_0_0_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2085,7 +2085,7 @@ protected class TrickyE_0_0_1_0_Group extends GroupToken {
 	}
 }
 
-// name += INT
+// name+=INT
 protected class TrickyE_0_0_1_0_0_Assignment_name extends AssignmentToken  {
 	
 	public TrickyE_0_0_1_0_0_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -2108,7 +2108,7 @@ protected class TrickyE_0_0_1_0_0_Assignment_name extends AssignmentToken  {
 	}
 }
 
-// foo += STRING
+// foo+=STRING
 protected class TrickyE_0_0_1_0_1_Assignment_foo extends AssignmentToken  {
 	
 	public TrickyE_0_0_1_0_1_Assignment_foo(IInstanceDescription curr, AbstractToken pred) {
@@ -2132,7 +2132,7 @@ protected class TrickyE_0_0_1_0_1_Assignment_foo extends AssignmentToken  {
 }
 
 
-// type += ID
+// type+=ID
 protected class TrickyE_0_0_1_1_Assignment_type extends AssignmentToken  {
 	
 	public TrickyE_0_0_1_1_Assignment_type(IInstanceDescription curr, AbstractToken pred) {
@@ -2170,7 +2170,7 @@ protected class TrickyE_0_1_Keyword_x extends KeywordToken  {
 }
 
 
-// ( name += INT type += ID ) *
+// (name+=INT type+=ID)*
 protected class TrickyE_1_Group extends GroupToken {
 	
 	public TrickyE_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2198,7 +2198,7 @@ protected class TrickyE_1_Group extends GroupToken {
 	}
 }
 
-// name += INT
+// name+=INT
 protected class TrickyE_1_0_Assignment_name extends AssignmentToken  {
 	
 	public TrickyE_1_0_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -2221,7 +2221,7 @@ protected class TrickyE_1_0_Assignment_name extends AssignmentToken  {
 	}
 }
 
-// type += ID
+// type+=ID
 protected class TrickyE_1_1_Assignment_type extends AssignmentToken  {
 	
 	public TrickyE_1_1_Assignment_type(IInstanceDescription curr, AbstractToken pred) {
@@ -2251,12 +2251,12 @@ protected class TrickyE_1_1_Assignment_type extends AssignmentToken  {
 
 /************ begin Rule TrickyF ****************
  *
- * TrickyF : "TF" ( name += ID type += INT ) * ( name += ID | type += INT ) ;
+ * TrickyF:   "TF" (name+=ID type+=INT)* (name+=ID|type+=INT);
  *
  **/
 
 
-// "TF" ( name += ID type += INT ) * ( name += ID | type += INT )
+// "TF" (name+=ID type+=INT)* (name+=ID|type+=INT)
 protected class TrickyF_Group extends GroupToken {
 	
 	public TrickyF_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2284,7 +2284,7 @@ protected class TrickyF_Group extends GroupToken {
 	}
 }
 
-// "TF" ( name += ID type += INT ) *
+// "TF" (name+=ID type+=INT)*
 protected class TrickyF_0_Group extends GroupToken {
 	
 	public TrickyF_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2324,7 +2324,7 @@ protected class TrickyF_0_0_Keyword_TF extends KeywordToken  {
 	}	
 }
 
-// ( name += ID type += INT ) *
+// (name+=ID type+=INT)*
 protected class TrickyF_0_1_Group extends GroupToken {
 	
 	public TrickyF_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2352,7 +2352,7 @@ protected class TrickyF_0_1_Group extends GroupToken {
 	}
 }
 
-// name += ID
+// name+=ID
 protected class TrickyF_0_1_0_Assignment_name extends AssignmentToken  {
 	
 	public TrickyF_0_1_0_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -2375,7 +2375,7 @@ protected class TrickyF_0_1_0_Assignment_name extends AssignmentToken  {
 	}
 }
 
-// type += INT
+// type+=INT
 protected class TrickyF_0_1_1_Assignment_type extends AssignmentToken  {
 	
 	public TrickyF_0_1_1_Assignment_type(IInstanceDescription curr, AbstractToken pred) {
@@ -2400,7 +2400,7 @@ protected class TrickyF_0_1_1_Assignment_type extends AssignmentToken  {
 
 
 
-// name += ID | type += INT
+// name+=ID|type+=INT
 protected class TrickyF_1_Alternatives extends AlternativesToken {
 
 	public TrickyF_1_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -2421,7 +2421,7 @@ protected class TrickyF_1_Alternatives extends AlternativesToken {
 	}
 }
 
-// name += ID
+// name+=ID
 protected class TrickyF_1_0_Assignment_name extends AssignmentToken  {
 	
 	public TrickyF_1_0_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -2444,7 +2444,7 @@ protected class TrickyF_1_0_Assignment_name extends AssignmentToken  {
 	}
 }
 
-// type += INT
+// type+=INT
 protected class TrickyF_1_1_Assignment_type extends AssignmentToken  {
 	
 	public TrickyF_1_1_Assignment_type(IInstanceDescription curr, AbstractToken pred) {
@@ -2474,12 +2474,12 @@ protected class TrickyF_1_1_Assignment_type extends AssignmentToken  {
 
 /************ begin Rule TrickyG ****************
  *
- * TrickyG : "TG" tree = TrickyG1 ;
+ * TrickyG:   "TG" tree=TrickyG1;
  *
  **/
 
 
-// "TG" tree = TrickyG1
+// "TG" tree=TrickyG1
 protected class TrickyG_Group extends GroupToken {
 	
 	public TrickyG_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2519,7 +2519,7 @@ protected class TrickyG_0_Keyword_TG extends KeywordToken  {
 	}	
 }
 
-// tree = TrickyG1
+// tree=TrickyG1
 protected class TrickyG_1_Assignment_tree extends AssignmentToken  {
 	
 	public TrickyG_1_Assignment_tree(IInstanceDescription curr, AbstractToken pred) {
@@ -2556,12 +2556,12 @@ protected class TrickyG_1_Assignment_tree extends AssignmentToken  {
 
 /************ begin Rule TrickyG1 ****************
  *
- * TrickyG1 : "[" ( vals += TrickyG2 ( "," vals += TrickyG2 ) * ) ? "]" ;
+ * TrickyG1:   "[" (vals+=TrickyG2 ("," vals+=TrickyG2)*)? "]";
  *
  **/
 
 
-// "[" ( vals += TrickyG2 ( "," vals += TrickyG2 ) * ) ? "]"
+// "[" (vals+=TrickyG2 ("," vals+=TrickyG2)*)? "]"
 protected class TrickyG1_Group extends GroupToken {
 	
 	public TrickyG1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2589,7 +2589,7 @@ protected class TrickyG1_Group extends GroupToken {
 	}
 }
 
-// "[" ( vals += TrickyG2 ( "," vals += TrickyG2 ) * ) ?
+// "[" (vals+=TrickyG2 ("," vals+=TrickyG2)*)?
 protected class TrickyG1_0_Group extends GroupToken {
 	
 	public TrickyG1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2629,7 +2629,7 @@ protected class TrickyG1_0_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// ( vals += TrickyG2 ( "," vals += TrickyG2 ) * ) ?
+// (vals+=TrickyG2 ("," vals+=TrickyG2)*)?
 protected class TrickyG1_0_1_Group extends GroupToken {
 	
 	public TrickyG1_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2657,7 +2657,7 @@ protected class TrickyG1_0_1_Group extends GroupToken {
 	}
 }
 
-// vals += TrickyG2
+// vals+=TrickyG2
 protected class TrickyG1_0_1_0_Assignment_vals extends AssignmentToken  {
 	
 	public TrickyG1_0_1_0_Assignment_vals(IInstanceDescription curr, AbstractToken pred) {
@@ -2688,7 +2688,7 @@ protected class TrickyG1_0_1_0_Assignment_vals extends AssignmentToken  {
 	}
 }
 
-// ( "," vals += TrickyG2 ) *
+// ("," vals+=TrickyG2)*
 protected class TrickyG1_0_1_1_Group extends GroupToken {
 	
 	public TrickyG1_0_1_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2728,7 +2728,7 @@ protected class TrickyG1_0_1_1_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// vals += TrickyG2
+// vals+=TrickyG2
 protected class TrickyG1_0_1_1_1_Assignment_vals extends AssignmentToken  {
 	
 	public TrickyG1_0_1_1_1_Assignment_vals(IInstanceDescription curr, AbstractToken pred) {
@@ -2780,12 +2780,12 @@ protected class TrickyG1_1_Keyword extends KeywordToken  {
 
 /************ begin Rule TrickyG2 ****************
  *
- * TrickyG2 : TrickyG1 | val = INT ;
+ * TrickyG2:   TrickyG1|val=INT;
  *
  **/
 
 
-// TrickyG1 | val = INT
+// TrickyG1|val=INT
 protected class TrickyG2_Alternatives extends AlternativesToken {
 
 	public TrickyG2_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -2824,7 +2824,7 @@ protected class TrickyG2_0_RuleCall_TrickyG1 extends RuleCallToken {
 	}
 }
 
-// val = INT
+// val=INT
 protected class TrickyG2_1_Assignment_val extends AssignmentToken  {
 	
 	public TrickyG2_1_Assignment_val(IInstanceDescription curr, AbstractToken pred) {

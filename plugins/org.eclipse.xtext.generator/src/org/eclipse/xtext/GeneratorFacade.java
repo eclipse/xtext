@@ -46,6 +46,7 @@ import org.eclipse.xtext.parsetree.reconstr.ICrossReferenceSerializer;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
 import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
+import org.eclipse.xtext.parsetree.reconstr.SerializerUtil;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.metamodel.Xtext2EcoreTransformer;
 import org.eclipse.xtext.util.Files;
@@ -54,6 +55,9 @@ import org.eclipse.xtext.xtextgen.GenService;
 import org.eclipse.xtext.xtextgen.PluginDependency;
 import org.eclipse.xtext.xtextgen.XtextgenFactory;
 import org.eclipse.xtext.xtextgen.XtextgenPackage;
+
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -68,6 +72,13 @@ public class GeneratorFacade {
 	private static String[] defaultExcludes = new String[] { "CVS", ".cvsignore", ".svn" };
 
 	private static boolean useDefaultExcludes = true;
+	
+	private final static Injector XTEXT_INJECTOR = Guice.createInjector(new XtextRuntimeModule());
+	//TODO rqfactor the whole generator, so that it is wired up using guice.
+	//We need to come up with a good idea, of how to use depenendencies from Xtend. 
+	public static SerializerUtil getSerializer() {
+		return XTEXT_INJECTOR.getInstance(SerializerUtil.class);
+	}
 
 	public static void generate(Grammar grammarModel, String runtimeProjectPath, String uiProjectPath,
 			String... modelFileExtensions) throws IOException {
@@ -230,21 +241,6 @@ public class GeneratorFacade {
 
 		if (!GrammarUtil.isAbstract(grammarModel)) {
 
-			GenService elementFactoryService = XtextgenFactory.eINSTANCE.createGenService();
-			elementFactoryService.setServiceInterfaceFQName(org.eclipse.xtext.parser.IAstFactory.class.getName());
-			elementFactoryService.setGenClassFQName("org.eclipse.xtext.parser.DefaultEcoreElementFactory");
-			// no template, as service is generic. Nevertheless, we need the
-			// individual registration to avoid conflicts
-			elementFactoryService.setExtensionPointID("org.eclipse.xtext.ui.aSTFactory");
-			genModel.getServices().add(elementFactoryService);
-
-			GenService resourceFactoryService = XtextgenFactory.eINSTANCE.createGenService();
-			resourceFactoryService.setServiceInterfaceFQName(IResourceFactory.class.getName());
-			resourceFactoryService.setGenClassFQName(namespace + ".services." + languageName + "ResourceFactory");
-			resourceFactoryService.setTemplatePath("org::eclipse::xtext::resourcefactory::ResourceFactory::root");
-			resourceFactoryService.setExtensionPointID("org.eclipse.xtext.ui.resourceFactory");
-			genModel.getServices().add(resourceFactoryService);
-
 			GenService parsetreeReconstructorService = XtextgenFactory.eINSTANCE.createGenService();
 			parsetreeReconstructorService.setServiceInterfaceFQName(IParseTreeConstructor.class.getName());
 			parsetreeReconstructorService.setGenClassFQName(namespace + ".parsetree.reconstr." + languageName
@@ -253,24 +249,6 @@ public class GeneratorFacade {
 					.setTemplatePath("org::eclipse::xtext::parsetree::reconstr::ParseTreeConstructor::root");
 			parsetreeReconstructorService.setExtensionPointID("org.eclipse.xtext.ui.parseTreeConstructor");
 			genModel.getServices().add(parsetreeReconstructorService);
-
-			GenService serializationStrategy = XtextgenFactory.eINSTANCE.createGenService();
-			serializationStrategy.setServiceInterfaceFQName(ITokenSerializer.class.getName());
-			serializationStrategy
-					.setGenClassFQName("org.eclipse.xtext.parsetree.reconstr.impl.WhitespacePreservingTokenSerializer");
-			genModel.getServices().add(serializationStrategy);
-
-			GenService crossRefSerializer = XtextgenFactory.eINSTANCE.createGenService();
-			crossRefSerializer.setServiceInterfaceFQName(ICrossReferenceSerializer.class.getName());
-			crossRefSerializer
-					.setGenClassFQName("org.eclipse.xtext.parsetree.reconstr.impl.SimpleCrossReferenceSerializer");
-			genModel.getServices().add(crossRefSerializer);
-
-			GenService transientValueService = XtextgenFactory.eINSTANCE.createGenService();
-			transientValueService.setServiceInterfaceFQName(ITransientValueService.class.getName());
-			transientValueService
-					.setGenClassFQName("org.eclipse.xtext.parsetree.reconstr.impl.SimpleTransientValueService");
-			genModel.getServices().add(transientValueService);
 
 			if(isGenerateXtendServices) {
 				GenService xtendScopeProvider = XtextgenFactory.eINSTANCE.createGenService();

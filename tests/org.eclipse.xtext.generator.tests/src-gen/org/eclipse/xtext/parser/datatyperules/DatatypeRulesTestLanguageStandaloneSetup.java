@@ -5,55 +5,58 @@ package org.eclipse.xtext.parser.datatyperules;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.ISetup;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.IResourceFactory;
-import org.eclipse.xtext.service.IServiceScope;
-import org.eclipse.xtext.service.ServiceRegistry;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
-import org.eclipse.xtext.parser.datatyperules.IDatatypeRulesTestLanguage;
+public class DatatypeRulesTestLanguageStandaloneSetup implements ISetup {
 
-public abstract class DatatypeRulesTestLanguageStandaloneSetup {
+	public static void doSetup() {
+		new DatatypeRulesTestLanguageStandaloneSetup().createInjectorAndDoEMFRegistration();
+	}
 
-	private static boolean isInitialized = false;
-
-	public synchronized static void doSetup() {
-		if(!isInitialized) {
+	public Injector createInjectorAndDoEMFRegistration() {
+			
+			new org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup().doSetup();
+			
+		    registerEPackages();
 		    
-		    Injector injector = Guice.createInjector(new org.eclipse.xtext.parser.datatyperules.DatatypeRulesTestLanguageRuntimeModule());
-			ServiceRegistry.registerInjector(org.eclipse.xtext.parser.datatyperules.IDatatypeRulesTestLanguage.SCOPE, injector);
-			
-			
-			
-			org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
-			
-			
-			// register resource factory to EMF
-			IResourceFactory resourceFactory = new org.eclipse.xtext.parser.datatyperules.services.DatatypeRulesTestLanguageResourceFactory();
-			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("datatyperulestestlanguage", resourceFactory);
-			
-			
-			// initialize EPackages
-			
-				if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/2008/tmf/xtext/DatatypeRulesTest")) {
-					EPackage DatatypeRulesTestLanguage = EcoreUtil2.loadEPackage(
-							"classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.ecore",
-							DatatypeRulesTestLanguageStandaloneSetup.class.getClassLoader());
-					if (DatatypeRulesTestLanguage == null)
-						throw new IllegalStateException(
-								"Couldn't load EPackage from 'classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.ecore'");
-					EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2008/tmf/xtext/DatatypeRulesTest", DatatypeRulesTestLanguage);
-				}
-			
-			isInitialized = true;
-		}
+		    Injector injector = createInjector();
+		    IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
+		    registerResourceFactory(resourceFactory);
+		    return injector;
+		    
 	}
 	
-	public static IServiceScope getServiceScope() {
-	   doSetup();
-	   return org.eclipse.xtext.parser.datatyperules.IDatatypeRulesTestLanguage.SCOPE;
+    
+	public Injector createInjector() {
+		return Guice.createInjector(new org.eclipse.xtext.parser.datatyperules.DatatypeRulesTestLanguageRuntimeModule());
+	}
+	
+	public void registerResourceFactory(IResourceFactory resourceFactory) {
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("datatyperulestestlanguage", resourceFactory);
+		
+	}
+    
+
+	/**
+	 * initializes all EPackages generated for this language and registers them at EPackage.Registry.INSTANCE
+	 */	
+	public void registerEPackages() {
+		
+			if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/2008/tmf/xtext/DatatypeRulesTest")) {
+				EPackage DatatypeRulesTestLanguage = EcoreUtil2.loadEPackage(
+						"classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.ecore",
+						DatatypeRulesTestLanguageStandaloneSetup.class.getClassLoader());
+				if (DatatypeRulesTestLanguage == null)
+					throw new IllegalStateException(
+							"Couldn't load EPackage from 'classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.ecore'");
+				EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2008/tmf/xtext/DatatypeRulesTest", DatatypeRulesTestLanguage);
+			}
+		
 	}
 	
 }

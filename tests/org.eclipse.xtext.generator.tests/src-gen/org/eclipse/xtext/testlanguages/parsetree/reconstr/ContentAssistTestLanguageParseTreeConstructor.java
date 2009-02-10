@@ -29,12 +29,12 @@ public class ContentAssistTestLanguageParseTreeConstructor extends AbstractParse
 
 /************ begin Rule Start ****************
  *
- * Start : "abstract rules" ( rules += AbstractRule ) + "end" ;
+ * Start:   "abstract rules" (rules+=AbstractRule)+ "end";
  *
  **/
 
 
-// "abstract rules" ( rules += AbstractRule ) + "end"
+// "abstract rules" (rules+=AbstractRule)+ "end"
 protected class Start_Group extends GroupToken {
 	
 	public Start_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -62,7 +62,7 @@ protected class Start_Group extends GroupToken {
 	}
 }
 
-// "abstract rules" ( rules += AbstractRule ) +
+// "abstract rules" (rules+=AbstractRule)+
 protected class Start_0_Group extends GroupToken {
 	
 	public Start_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -102,7 +102,7 @@ protected class Start_0_0_Keyword_abstractrules extends KeywordToken  {
 	}	
 }
 
-// ( rules += AbstractRule ) +
+// (rules+=AbstractRule)+
 protected class Start_0_1_Assignment_rules extends AssignmentToken  {
 	
 	public Start_0_1_Assignment_rules(IInstanceDescription curr, AbstractToken pred) {
@@ -152,12 +152,12 @@ protected class Start_1_Keyword_end extends KeywordToken  {
 
 /************ begin Rule AbstractRule ****************
  *
- * AbstractRule : FirstAbstractRuleChild | SecondAbstractRuleChild ;
+ * AbstractRule:   FirstAbstractRuleChild|SecondAbstractRuleChild;
  *
  **/
 
 
-// FirstAbstractRuleChild | SecondAbstractRuleChild
+// FirstAbstractRuleChild|SecondAbstractRuleChild
 protected class AbstractRule_Alternatives extends AlternativesToken {
 
 	public AbstractRule_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -220,12 +220,12 @@ protected class AbstractRule_1_RuleCall_SecondAbstractRuleChild extends RuleCall
 
 /************ begin Rule FirstAbstractRuleChild ****************
  *
- * FirstAbstractRuleChild : name = ID "(" ( elements += AbstractRule ) + ")" ";" ;
+ * FirstAbstractRuleChild:   name=ID "(" (elements+=AbstractRule)+ ")" ";";
  *
  **/
 
 
-// name = ID "(" ( elements += AbstractRule ) + ")" ";"
+// name=ID "(" (elements+=AbstractRule)+ ")" ";"
 protected class FirstAbstractRuleChild_Group extends GroupToken {
 	
 	public FirstAbstractRuleChild_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -253,7 +253,7 @@ protected class FirstAbstractRuleChild_Group extends GroupToken {
 	}
 }
 
-// name = ID "(" ( elements += AbstractRule ) + ")"
+// name=ID "(" (elements+=AbstractRule)+ ")"
 protected class FirstAbstractRuleChild_0_Group extends GroupToken {
 	
 	public FirstAbstractRuleChild_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -281,7 +281,7 @@ protected class FirstAbstractRuleChild_0_Group extends GroupToken {
 	}
 }
 
-// name = ID "(" ( elements += AbstractRule ) +
+// name=ID "(" (elements+=AbstractRule)+
 protected class FirstAbstractRuleChild_0_0_Group extends GroupToken {
 	
 	public FirstAbstractRuleChild_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -309,7 +309,7 @@ protected class FirstAbstractRuleChild_0_0_Group extends GroupToken {
 	}
 }
 
-// name = ID "("
+// name=ID "("
 protected class FirstAbstractRuleChild_0_0_0_Group extends GroupToken {
 	
 	public FirstAbstractRuleChild_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -337,7 +337,7 @@ protected class FirstAbstractRuleChild_0_0_0_Group extends GroupToken {
 	}
 }
 
-// name = ID
+// name=ID
 protected class FirstAbstractRuleChild_0_0_0_0_Assignment_name extends AssignmentToken  {
 	
 	public FirstAbstractRuleChild_0_0_0_0_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -373,7 +373,7 @@ protected class FirstAbstractRuleChild_0_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-// ( elements += AbstractRule ) +
+// (elements+=AbstractRule)+
 protected class FirstAbstractRuleChild_0_0_1_Assignment_elements extends AssignmentToken  {
 	
 	public FirstAbstractRuleChild_0_0_1_Assignment_elements(IInstanceDescription curr, AbstractToken pred) {
@@ -436,12 +436,12 @@ protected class FirstAbstractRuleChild_1_Keyword extends KeywordToken  {
 
 /************ begin Rule SecondAbstractRuleChild ****************
  *
- * SecondAbstractRuleChild : name = ID "rule" ":" rule = AbstractRuleCall ";" ;
+ * SecondAbstractRuleChild:   name=ID "rule" ":" rule=AbstractRuleCall ";";
  *
  **/
 
 
-// name = ID "rule" ":" rule = AbstractRuleCall ";"
+// name=ID "rule" ":" rule=AbstractRuleCall ";"
 protected class SecondAbstractRuleChild_Group extends GroupToken {
 	
 	public SecondAbstractRuleChild_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -469,7 +469,7 @@ protected class SecondAbstractRuleChild_Group extends GroupToken {
 	}
 }
 
-// name = ID "rule" ":" rule = AbstractRuleCall
+// name=ID "rule" ":" rule=AbstractRuleCall
 protected class SecondAbstractRuleChild_0_Group extends GroupToken {
 	
 	public SecondAbstractRuleChild_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -497,7 +497,7 @@ protected class SecondAbstractRuleChild_0_Group extends GroupToken {
 	}
 }
 
-// name = ID "rule" ":"
+// name=ID "rule" ":"
 protected class SecondAbstractRuleChild_0_0_Group extends GroupToken {
 	
 	public SecondAbstractRuleChild_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -525,7 +525,7 @@ protected class SecondAbstractRuleChild_0_0_Group extends GroupToken {
 	}
 }
 
-// name = ID "rule"
+// name=ID "rule"
 protected class SecondAbstractRuleChild_0_0_0_Group extends GroupToken {
 	
 	public SecondAbstractRuleChild_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -553,7 +553,7 @@ protected class SecondAbstractRuleChild_0_0_0_Group extends GroupToken {
 	}
 }
 
-// name = ID
+// name=ID
 protected class SecondAbstractRuleChild_0_0_0_0_Assignment_name extends AssignmentToken  {
 	
 	public SecondAbstractRuleChild_0_0_0_0_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -602,7 +602,7 @@ protected class SecondAbstractRuleChild_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-// rule = AbstractRuleCall
+// rule=AbstractRuleCall
 protected class SecondAbstractRuleChild_0_1_Assignment_rule extends AssignmentToken  {
 	
 	public SecondAbstractRuleChild_0_1_Assignment_rule(IInstanceDescription curr, AbstractToken pred) {
@@ -652,12 +652,12 @@ protected class SecondAbstractRuleChild_1_Keyword extends KeywordToken  {
 
 /************ begin Rule AbstractRuleCall ****************
  *
- * AbstractRuleCall : rule = [ AbstractRule ] ;
+ * AbstractRuleCall:   rule=[AbstractRule];
  *
  **/
 
 
-// rule = [ AbstractRule ]
+// rule=[AbstractRule]
 protected class AbstractRuleCall_Assignment_rule extends AssignmentToken  {
 	
 	public AbstractRuleCall_Assignment_rule(IInstanceDescription curr, AbstractToken pred) {

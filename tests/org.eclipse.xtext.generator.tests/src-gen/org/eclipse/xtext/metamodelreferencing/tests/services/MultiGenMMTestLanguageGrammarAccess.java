@@ -18,19 +18,19 @@ public class MultiGenMMTestLanguageGrammarAccess extends BaseEPackageAccess impl
 		private final Assignment c1AssignmentNameRefs = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall c10ParserRuleCallNameRef = (RuleCall)c1AssignmentNameRefs.eContents().get(0);
 		
-		// Foo : name = ID ( nameRefs += NameRef ) * ;
+		// Foo:   name=ID (nameRefs+=NameRef)*;
 		public ParserRule getRule() { return rule; }
 
-		// name = ID ( nameRefs += NameRef ) *
+		// name=ID (nameRefs+=NameRef)*
 		public Group eleGroup() { return cGroup; }
 
-		// name = ID
+		// name=ID
 		public Assignment ele0AssignmentName() { return c0AssignmentName; }
 
 		// ID
 		public RuleCall ele00LexerRuleCallID() { return c00LexerRuleCallID; }
 
-		// ( nameRefs += NameRef ) *
+		// (nameRefs+=NameRef)*
 		public Assignment ele1AssignmentNameRefs() { return c1AssignmentNameRefs; }
 
 		// NameRef
@@ -42,10 +42,10 @@ public class MultiGenMMTestLanguageGrammarAccess extends BaseEPackageAccess impl
 		private final Assignment cAssignmentName = (Assignment)rule.eContents().get(1);
 		private final RuleCall c0LexerRuleCallSTRING = (RuleCall)cAssignmentName.eContents().get(0);
 		
-		// NameRef returns other :: FooBar : name = STRING ;
+		// NameRef returns other :: FooBar:   name=STRING;
 		public ParserRule getRule() { return rule; }
 
-		// name = STRING
+		// name=STRING
 		public Assignment eleAssignmentName() { return cAssignmentName; }
 
 		// STRING
@@ -74,12 +74,12 @@ public class MultiGenMMTestLanguageGrammarAccess extends BaseEPackageAccess impl
 	}
 
 	
-	// Foo : name = ID ( nameRefs += NameRef ) * ;
+	// Foo:   name=ID (nameRefs+=NameRef)*;
 	public FooElements prFoo() {
 		return (pFoo != null) ? pFoo : (pFoo = new FooElements());
 	} 
 
-	// NameRef returns other :: FooBar : name = STRING ;
+	// NameRef returns other :: FooBar:   name=STRING;
 	public NameRefElements prNameRef() {
 		return (pNameRef != null) ? pNameRef : (pNameRef = new NameRefElements());
 	} 

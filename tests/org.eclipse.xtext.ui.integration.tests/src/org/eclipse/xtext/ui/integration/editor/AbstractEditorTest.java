@@ -15,7 +15,6 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.xtext.ui.core.editor.XtextEditor;
-import org.eclipse.xtext.ui.integration.ITestLanguage;
 import org.eclipse.xtext.ui.integration.workbench.AbstractWorkbenchTest;
 
 /**
@@ -25,9 +24,7 @@ public abstract class AbstractEditorTest extends AbstractWorkbenchTest {
 
 	static final long STEP_DELAY = 0;
 	
-	protected String getEditorId() {
-		return ITestLanguage.ID;
-	}
+	protected abstract String getEditorId();
 
 	public AbstractEditorTest() {
 		super();

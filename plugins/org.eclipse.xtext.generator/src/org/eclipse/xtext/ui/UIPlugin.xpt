@@ -17,13 +17,14 @@
 «EXTENSION org::eclipse::xtext::ui::UIProperties»
 
 «DEFINE root FOR GenModel»
+«IF !this.grammar.isAbstract()»
     «EXPAND Plugin::plugin_xml»
     «EXPAND ServiceConfig::root»
-    «EXPAND Setup::root»
     «EXPAND Manifest::manifest_mf»
+    «EXPAND GuiceInjector::root»
     «EXPAND activator»
-    «EXPAND editor»
     «copyFiles("org/eclipse/xtext/ui", outletPath("UI") + "/icons/", { "editor.gif" })»  
+«ENDIF»
 «ENDDEFINE»
 
  «DEFINE activator FOR GenModel»
@@ -33,26 +34,29 @@ package «activatorClassFQN().toJavaPackage()»;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+
 public class «activatorClassFQN().toSimpleName()» extends AbstractUIPlugin {
 
+	private Injector injector;
+	private static «activatorClassFQN().toSimpleName()» INSTANCE;
+
+	public Injector getInjector() {
+		return injector;
+	}
+	
 	@Override
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
-		«uiSetupClass(grammar)».doSetup();
+		INSTANCE = this;
+		this.injector = Guice.createInjector(new «runtimeModuleClass(grammar)»(), new «uiModuleClass(grammar)»());
+	}
+	
+	public static «activatorClassFQN().toSimpleName()» getInstance() {
+		return INSTANCE;
 	}
 	
 }
  «ENDFILE»
- «ENDDEFINE»
- 
-«DEFINE editor FOR GenModel»
- «IF !grammar().abstract-»
- «FILE editorClassFQN().toJavaFilePath() UI_SRC_GEN-»
-package «editorClassFQN().toJavaPackage()»;
-
-public class «editorClassFQN().toSimpleName()» extends org.eclipse.xtext.ui.core.editor.XtextEditor {
-
-}
- «ENDFILE»
- «ENDIF-» 
  «ENDDEFINE»

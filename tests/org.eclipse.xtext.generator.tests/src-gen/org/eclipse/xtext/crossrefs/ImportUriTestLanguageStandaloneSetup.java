@@ -5,55 +5,58 @@ package org.eclipse.xtext.crossrefs;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.ISetup;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.IResourceFactory;
-import org.eclipse.xtext.service.IServiceScope;
-import org.eclipse.xtext.service.ServiceRegistry;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
-import org.eclipse.xtext.crossrefs.IImportUriTestLanguage;
+public class ImportUriTestLanguageStandaloneSetup implements ISetup {
 
-public abstract class ImportUriTestLanguageStandaloneSetup {
+	public static void doSetup() {
+		new ImportUriTestLanguageStandaloneSetup().createInjectorAndDoEMFRegistration();
+	}
 
-	private static boolean isInitialized = false;
-
-	public synchronized static void doSetup() {
-		if(!isInitialized) {
+	public Injector createInjectorAndDoEMFRegistration() {
+			
+			new org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup().doSetup();
+			
+		    registerEPackages();
 		    
-		    Injector injector = Guice.createInjector(new org.eclipse.xtext.crossrefs.ImportUriTestLanguageRuntimeModule());
-			ServiceRegistry.registerInjector(org.eclipse.xtext.crossrefs.IImportUriTestLanguage.SCOPE, injector);
-			
-			
-			
-			org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
-			
-			
-			// register resource factory to EMF
-			IResourceFactory resourceFactory = new org.eclipse.xtext.crossrefs.services.ImportUriTestLanguageResourceFactory();
-			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("importuritestlanguage", resourceFactory);
-			
-			
-			// initialize EPackages
-			
-				if (!EPackage.Registry.INSTANCE.containsKey("http://eclipse.org/xtext/importUriTestLanguage")) {
-					EPackage importedURI = EcoreUtil2.loadEPackage(
-							"classpath:/org/eclipse/xtext/crossrefs/importedURI.ecore",
-							ImportUriTestLanguageStandaloneSetup.class.getClassLoader());
-					if (importedURI == null)
-						throw new IllegalStateException(
-								"Couldn't load EPackage from 'classpath:/org/eclipse/xtext/crossrefs/importedURI.ecore'");
-					EPackage.Registry.INSTANCE.put("http://eclipse.org/xtext/importUriTestLanguage", importedURI);
-				}
-			
-			isInitialized = true;
-		}
+		    Injector injector = createInjector();
+		    IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
+		    registerResourceFactory(resourceFactory);
+		    return injector;
+		    
 	}
 	
-	public static IServiceScope getServiceScope() {
-	   doSetup();
-	   return org.eclipse.xtext.crossrefs.IImportUriTestLanguage.SCOPE;
+    
+	public Injector createInjector() {
+		return Guice.createInjector(new org.eclipse.xtext.crossrefs.ImportUriTestLanguageRuntimeModule());
+	}
+	
+	public void registerResourceFactory(IResourceFactory resourceFactory) {
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("importuritestlanguage", resourceFactory);
+		
+	}
+    
+
+	/**
+	 * initializes all EPackages generated for this language and registers them at EPackage.Registry.INSTANCE
+	 */	
+	public void registerEPackages() {
+		
+			if (!EPackage.Registry.INSTANCE.containsKey("http://eclipse.org/xtext/importUriTestLanguage")) {
+				EPackage importedURI = EcoreUtil2.loadEPackage(
+						"classpath:/org/eclipse/xtext/crossrefs/importedURI.ecore",
+						ImportUriTestLanguageStandaloneSetup.class.getClassLoader());
+				if (importedURI == null)
+					throw new IllegalStateException(
+							"Couldn't load EPackage from 'classpath:/org/eclipse/xtext/crossrefs/importedURI.ecore'");
+				EPackage.Registry.INSTANCE.put("http://eclipse.org/xtext/importUriTestLanguage", importedURI);
+			}
+		
 	}
 	
 }

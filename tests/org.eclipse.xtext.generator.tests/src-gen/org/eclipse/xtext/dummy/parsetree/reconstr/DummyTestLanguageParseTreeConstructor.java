@@ -26,12 +26,12 @@ public class DummyTestLanguageParseTreeConstructor extends AbstractParseTreeCons
 
 /************ begin Rule Model ****************
  *
- * Model : ( elements += Element ) * ;
+ * Model:   (elements+=Element)*;
  *
  **/
 
 
-// ( elements += Element ) *
+// (elements+=Element)*
 protected class Model_Assignment_elements extends AssignmentToken  {
 	
 	public Model_Assignment_elements(IInstanceDescription curr, AbstractToken pred) {
@@ -67,12 +67,12 @@ protected class Model_Assignment_elements extends AssignmentToken  {
 
 /************ begin Rule Element ****************
  *
- * Element : ( optional ?= "optional" ) ? "element" name = ID ( descriptions += STRING ) * ";" ;
+ * Element:   (optional?="optional")? "element" name=ID (descriptions+=STRING)* ";";
  *
  **/
 
 
-// ( optional ?= "optional" ) ? "element" name = ID ( descriptions += STRING ) * ";"
+// (optional?="optional")? "element" name=ID (descriptions+=STRING)* ";"
 protected class Element_Group extends GroupToken {
 	
 	public Element_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -100,7 +100,7 @@ protected class Element_Group extends GroupToken {
 	}
 }
 
-// ( optional ?= "optional" ) ? "element" name = ID ( descriptions += STRING ) *
+// (optional?="optional")? "element" name=ID (descriptions+=STRING)*
 protected class Element_0_Group extends GroupToken {
 	
 	public Element_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -128,7 +128,7 @@ protected class Element_0_Group extends GroupToken {
 	}
 }
 
-// ( optional ?= "optional" ) ? "element" name = ID
+// (optional?="optional")? "element" name=ID
 protected class Element_0_0_Group extends GroupToken {
 	
 	public Element_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -156,7 +156,7 @@ protected class Element_0_0_Group extends GroupToken {
 	}
 }
 
-// ( optional ?= "optional" ) ? "element"
+// (optional?="optional")? "element"
 protected class Element_0_0_0_Group extends GroupToken {
 	
 	public Element_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -184,7 +184,7 @@ protected class Element_0_0_0_Group extends GroupToken {
 	}
 }
 
-// ( optional ?= "optional" ) ?
+// (optional?="optional")?
 protected class Element_0_0_0_0_Assignment_optional extends AssignmentToken  {
 	
 	public Element_0_0_0_0_Assignment_optional(IInstanceDescription curr, AbstractToken pred) {
@@ -222,7 +222,7 @@ protected class Element_0_0_0_1_Keyword_element extends KeywordToken  {
 }
 
 
-// name = ID
+// name=ID
 protected class Element_0_0_1_Assignment_name extends AssignmentToken  {
 	
 	public Element_0_0_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -246,7 +246,7 @@ protected class Element_0_0_1_Assignment_name extends AssignmentToken  {
 }
 
 
-// ( descriptions += STRING ) *
+// (descriptions+=STRING)*
 protected class Element_0_1_Assignment_descriptions extends AssignmentToken  {
 	
 	public Element_0_1_Assignment_descriptions(IInstanceDescription curr, AbstractToken pred) {

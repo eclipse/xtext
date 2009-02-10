@@ -27,12 +27,12 @@ public class ImportUriTestLanguageParseTreeConstructor extends AbstractParseTree
 
 /************ begin Rule Main ****************
  *
- * Main : ( imports += Import ) * ( types += Type ) * ;
+ * Main:   (imports+=Import)* (types+=Type)*;
  *
  **/
 
 
-// ( imports += Import ) * ( types += Type ) *
+// (imports+=Import)* (types+=Type)*
 protected class Main_Group extends GroupToken {
 	
 	public Main_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -60,7 +60,7 @@ protected class Main_Group extends GroupToken {
 	}
 }
 
-// ( imports += Import ) *
+// (imports+=Import)*
 protected class Main_0_Assignment_imports extends AssignmentToken  {
 	
 	public Main_0_Assignment_imports(IInstanceDescription curr, AbstractToken pred) {
@@ -91,7 +91,7 @@ protected class Main_0_Assignment_imports extends AssignmentToken  {
 	}
 }
 
-// ( types += Type ) *
+// (types+=Type)*
 protected class Main_1_Assignment_types extends AssignmentToken  {
 	
 	public Main_1_Assignment_types(IInstanceDescription curr, AbstractToken pred) {
@@ -128,12 +128,12 @@ protected class Main_1_Assignment_types extends AssignmentToken  {
 
 /************ begin Rule Import ****************
  *
- * Import : "import" importURI = STRING ;
+ * Import:   "import" importURI=STRING;
  *
  **/
 
 
-// "import" importURI = STRING
+// "import" importURI=STRING
 protected class Import_Group extends GroupToken {
 	
 	public Import_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -173,7 +173,7 @@ protected class Import_0_Keyword_import extends KeywordToken  {
 	}	
 }
 
-// importURI = STRING
+// importURI=STRING
 protected class Import_1_Assignment_importURI extends AssignmentToken  {
 	
 	public Import_1_Assignment_importURI(IInstanceDescription curr, AbstractToken pred) {
@@ -202,12 +202,12 @@ protected class Import_1_Assignment_importURI extends AssignmentToken  {
 
 /************ begin Rule Type ****************
  *
- * Type : "type" name = ID "extends" ^extends = [ Type ] ;
+ * Type:   "type" name=ID "extends" ^extends=[Type];
  *
  **/
 
 
-// "type" name = ID "extends" ^extends = [ Type ]
+// "type" name=ID "extends" ^extends=[Type]
 protected class Type_Group extends GroupToken {
 	
 	public Type_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -235,7 +235,7 @@ protected class Type_Group extends GroupToken {
 	}
 }
 
-// "type" name = ID "extends"
+// "type" name=ID "extends"
 protected class Type_0_Group extends GroupToken {
 	
 	public Type_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -263,7 +263,7 @@ protected class Type_0_Group extends GroupToken {
 	}
 }
 
-// "type" name = ID
+// "type" name=ID
 protected class Type_0_0_Group extends GroupToken {
 	
 	public Type_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -303,7 +303,7 @@ protected class Type_0_0_0_Keyword_type extends KeywordToken  {
 	}	
 }
 
-// name = ID
+// name=ID
 protected class Type_0_0_1_Assignment_name extends AssignmentToken  {
 	
 	public Type_0_0_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -340,7 +340,7 @@ protected class Type_0_1_Keyword_extends extends KeywordToken  {
 }
 
 
-// ^extends = [ Type ]
+// ^extends=[Type]
 protected class Type_1_Assignment_extends extends AssignmentToken  {
 	
 	public Type_1_Assignment_extends(IInstanceDescription curr, AbstractToken pred) {

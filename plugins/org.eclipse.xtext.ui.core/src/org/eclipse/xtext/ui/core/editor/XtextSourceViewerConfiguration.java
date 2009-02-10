@@ -30,6 +30,9 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 
 	@Inject(optional = true)
 	private ITokenScanner tokenScanner;
+	
+	@Inject
+	private IHyperlinkDetector detector;
 
 	@Override
 	public IContentAssistant getContentAssistant(ISourceViewer sourceViewer) {
@@ -85,7 +88,7 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 				});
 			}
 		}
-		detectors.add(new XtextHyperlinkDetector());
+		detectors.add(detector);
 		return detectors.toArray(new IHyperlinkDetector[detectors.size()]);
 	}
 

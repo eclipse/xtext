@@ -29,12 +29,12 @@ public class TestLanguageParseTreeConstructor extends AbstractParseTreeConstruct
 
 /************ begin Rule EntryRule ****************
  *
- * EntryRule returns Model : ( multiFeature += AbstractRule ) * ;
+ * EntryRule returns Model:   (multiFeature+=AbstractRule)*;
  *
  **/
 
 
-// ( multiFeature += AbstractRule ) *
+// (multiFeature+=AbstractRule)*
 protected class EntryRule_Assignment_multiFeature extends AssignmentToken  {
 	
 	public EntryRule_Assignment_multiFeature(IInstanceDescription curr, AbstractToken pred) {
@@ -70,12 +70,12 @@ protected class EntryRule_Assignment_multiFeature extends AssignmentToken  {
 
 /************ begin Rule AbstractRule ****************
  *
- * AbstractRule returns AbstractElement : ChoiceRule | ReducibleRule ;
+ * AbstractRule returns AbstractElement:   ChoiceRule|ReducibleRule;
  *
  **/
 
 
-// ChoiceRule | ReducibleRule
+// ChoiceRule|ReducibleRule
 protected class AbstractRule_Alternatives extends AlternativesToken {
 
 	public AbstractRule_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -138,12 +138,12 @@ protected class AbstractRule_1_RuleCall_ReducibleRule extends RuleCallToken {
 
 /************ begin Rule ChoiceRule ****************
  *
- * ChoiceRule returns ChoiceElement : "choice" ( optionalKeyword ?= "optional" ) ? name = ID ;
+ * ChoiceRule returns ChoiceElement:   "choice" (optionalKeyword?="optional")? name=ID;
  *
  **/
 
 
-// "choice" ( optionalKeyword ?= "optional" ) ? name = ID
+// "choice" (optionalKeyword?="optional")? name=ID
 protected class ChoiceRule_Group extends GroupToken {
 	
 	public ChoiceRule_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -171,7 +171,7 @@ protected class ChoiceRule_Group extends GroupToken {
 	}
 }
 
-// "choice" ( optionalKeyword ?= "optional" ) ?
+// "choice" (optionalKeyword?="optional")?
 protected class ChoiceRule_0_Group extends GroupToken {
 	
 	public ChoiceRule_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -211,7 +211,7 @@ protected class ChoiceRule_0_0_Keyword_choice extends KeywordToken  {
 	}	
 }
 
-// ( optionalKeyword ?= "optional" ) ?
+// (optionalKeyword?="optional")?
 protected class ChoiceRule_0_1_Assignment_optionalKeyword extends AssignmentToken  {
 	
 	public ChoiceRule_0_1_Assignment_optionalKeyword(IInstanceDescription curr, AbstractToken pred) {
@@ -237,7 +237,7 @@ protected class ChoiceRule_0_1_Assignment_optionalKeyword extends AssignmentToke
 }
 
 
-// name = ID
+// name=ID
 protected class ChoiceRule_1_Assignment_name extends AssignmentToken  {
 	
 	public ChoiceRule_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -266,12 +266,12 @@ protected class ChoiceRule_1_Assignment_name extends AssignmentToken  {
 
 /************ begin Rule ReducibleRule ****************
  *
- * ReducibleRule returns ReducibleElement : "reducible" TerminalRule ( { current = ReducibleComposite . actionFeature += current } actionFeature += TerminalRule ) ? ;
+ * ReducibleRule returns ReducibleElement:   "reducible" TerminalRule ({current=ReducibleComposite.actionFeature+=current} actionFeature+=TerminalRule)?;
  *
  **/
 
 
-// "reducible" TerminalRule ( { current = ReducibleComposite . actionFeature += current } actionFeature += TerminalRule ) ?
+// "reducible" TerminalRule ({current=ReducibleComposite.actionFeature+=current} actionFeature+=TerminalRule)?
 protected class ReducibleRule_Group extends GroupToken {
 	
 	public ReducibleRule_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -358,7 +358,7 @@ protected class ReducibleRule_0_1_RuleCall_TerminalRule extends RuleCallToken {
 }
 
 
-// ( { current = ReducibleComposite . actionFeature += current } actionFeature += TerminalRule ) ?
+// ({current=ReducibleComposite.actionFeature+=current} actionFeature+=TerminalRule)?
 protected class ReducibleRule_1_Group extends GroupToken {
 	
 	public ReducibleRule_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -386,7 +386,7 @@ protected class ReducibleRule_1_Group extends GroupToken {
 	}
 }
 
-// { current = ReducibleComposite . actionFeature += current }
+// {current=ReducibleComposite.actionFeature+=current}
 protected class ReducibleRule_1_0_Action_ReducibleComposite_actionFeature extends ActionToken  {
 
 	public ReducibleRule_1_0_Action_ReducibleComposite_actionFeature(IInstanceDescription curr, AbstractToken pred) {
@@ -406,7 +406,7 @@ protected class ReducibleRule_1_0_Action_ReducibleComposite_actionFeature extend
 	}
 }
 
-// actionFeature += TerminalRule
+// actionFeature+=TerminalRule
 protected class ReducibleRule_1_1_Assignment_actionFeature extends AssignmentToken  {
 	
 	public ReducibleRule_1_1_Assignment_actionFeature(IInstanceDescription curr, AbstractToken pred) {
@@ -444,12 +444,12 @@ protected class ReducibleRule_1_1_Assignment_actionFeature extends AssignmentTok
 
 /************ begin Rule TerminalRule ****************
  *
- * TerminalRule returns TerminalElement : stringFeature = STRING ;
+ * TerminalRule returns TerminalElement:   stringFeature=STRING;
  *
  **/
 
 
-// stringFeature = STRING
+// stringFeature=STRING
 protected class TerminalRule_Assignment_stringFeature extends AssignmentToken  {
 	
 	public TerminalRule_Assignment_stringFeature(IInstanceDescription curr, AbstractToken pred) {

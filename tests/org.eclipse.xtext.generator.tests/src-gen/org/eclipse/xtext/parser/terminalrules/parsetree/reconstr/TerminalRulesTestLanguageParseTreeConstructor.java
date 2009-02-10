@@ -24,12 +24,12 @@ public class TerminalRulesTestLanguageParseTreeConstructor extends AbstractParse
 
 /************ begin Rule Model ****************
  *
- * Model : idValue = ID | intValue = INT | stringValue = STRING | mlCommentValue = ML_COMMENT | slCommentValue = SL_COMMENT | wsValue = WS | anyValue = ANY_OTHER ;
+ * Model:   idValue=ID|intValue=INT|stringValue=STRING|mlCommentValue=ML_COMMENT|slCommentValue=SL_COMMENT|wsValue=WS|anyValue=ANY_OTHER;
  *
  **/
 
 
-// idValue = ID | intValue = INT | stringValue = STRING | mlCommentValue = ML_COMMENT | slCommentValue = SL_COMMENT | wsValue = WS | anyValue = ANY_OTHER
+// idValue=ID|intValue=INT|stringValue=STRING|mlCommentValue=ML_COMMENT|slCommentValue=SL_COMMENT|wsValue=WS|anyValue=ANY_OTHER
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -50,7 +50,7 @@ protected class Model_Alternatives extends AlternativesToken {
 	}
 }
 
-// idValue = ID | intValue = INT | stringValue = STRING | mlCommentValue = ML_COMMENT | slCommentValue = SL_COMMENT | wsValue = WS
+// idValue=ID|intValue=INT|stringValue=STRING|mlCommentValue=ML_COMMENT|slCommentValue=SL_COMMENT|wsValue=WS
 protected class Model_0_Alternatives extends AlternativesToken {
 
 	public Model_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -71,7 +71,7 @@ protected class Model_0_Alternatives extends AlternativesToken {
 	}
 }
 
-// idValue = ID | intValue = INT | stringValue = STRING | mlCommentValue = ML_COMMENT | slCommentValue = SL_COMMENT
+// idValue=ID|intValue=INT|stringValue=STRING|mlCommentValue=ML_COMMENT|slCommentValue=SL_COMMENT
 protected class Model_0_0_Alternatives extends AlternativesToken {
 
 	public Model_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -92,7 +92,7 @@ protected class Model_0_0_Alternatives extends AlternativesToken {
 	}
 }
 
-// idValue = ID | intValue = INT | stringValue = STRING | mlCommentValue = ML_COMMENT
+// idValue=ID|intValue=INT|stringValue=STRING|mlCommentValue=ML_COMMENT
 protected class Model_0_0_0_Alternatives extends AlternativesToken {
 
 	public Model_0_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -113,7 +113,7 @@ protected class Model_0_0_0_Alternatives extends AlternativesToken {
 	}
 }
 
-// idValue = ID | intValue = INT | stringValue = STRING
+// idValue=ID|intValue=INT|stringValue=STRING
 protected class Model_0_0_0_0_Alternatives extends AlternativesToken {
 
 	public Model_0_0_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -134,7 +134,7 @@ protected class Model_0_0_0_0_Alternatives extends AlternativesToken {
 	}
 }
 
-// idValue = ID | intValue = INT
+// idValue=ID|intValue=INT
 protected class Model_0_0_0_0_0_Alternatives extends AlternativesToken {
 
 	public Model_0_0_0_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -155,7 +155,7 @@ protected class Model_0_0_0_0_0_Alternatives extends AlternativesToken {
 	}
 }
 
-// idValue = ID
+// idValue=ID
 protected class Model_0_0_0_0_0_0_Assignment_idValue extends AssignmentToken  {
 	
 	public Model_0_0_0_0_0_0_Assignment_idValue(IInstanceDescription curr, AbstractToken pred) {
@@ -180,7 +180,7 @@ protected class Model_0_0_0_0_0_0_Assignment_idValue extends AssignmentToken  {
 	}
 }
 
-// intValue = INT
+// intValue=INT
 protected class Model_0_0_0_0_0_1_Assignment_intValue extends AssignmentToken  {
 	
 	public Model_0_0_0_0_0_1_Assignment_intValue(IInstanceDescription curr, AbstractToken pred) {
@@ -206,7 +206,7 @@ protected class Model_0_0_0_0_0_1_Assignment_intValue extends AssignmentToken  {
 }
 
 
-// stringValue = STRING
+// stringValue=STRING
 protected class Model_0_0_0_0_1_Assignment_stringValue extends AssignmentToken  {
 	
 	public Model_0_0_0_0_1_Assignment_stringValue(IInstanceDescription curr, AbstractToken pred) {
@@ -232,7 +232,7 @@ protected class Model_0_0_0_0_1_Assignment_stringValue extends AssignmentToken  
 }
 
 
-// mlCommentValue = ML_COMMENT
+// mlCommentValue=ML_COMMENT
 protected class Model_0_0_0_1_Assignment_mlCommentValue extends AssignmentToken  {
 	
 	public Model_0_0_0_1_Assignment_mlCommentValue(IInstanceDescription curr, AbstractToken pred) {
@@ -258,7 +258,7 @@ protected class Model_0_0_0_1_Assignment_mlCommentValue extends AssignmentToken 
 }
 
 
-// slCommentValue = SL_COMMENT
+// slCommentValue=SL_COMMENT
 protected class Model_0_0_1_Assignment_slCommentValue extends AssignmentToken  {
 	
 	public Model_0_0_1_Assignment_slCommentValue(IInstanceDescription curr, AbstractToken pred) {
@@ -284,7 +284,7 @@ protected class Model_0_0_1_Assignment_slCommentValue extends AssignmentToken  {
 }
 
 
-// wsValue = WS
+// wsValue=WS
 protected class Model_0_1_Assignment_wsValue extends AssignmentToken  {
 	
 	public Model_0_1_Assignment_wsValue(IInstanceDescription curr, AbstractToken pred) {
@@ -310,7 +310,7 @@ protected class Model_0_1_Assignment_wsValue extends AssignmentToken  {
 }
 
 
-// anyValue = ANY_OTHER
+// anyValue=ANY_OTHER
 protected class Model_1_Assignment_anyValue extends AssignmentToken  {
 	
 	public Model_1_Assignment_anyValue(IInstanceDescription curr, AbstractToken pred) {

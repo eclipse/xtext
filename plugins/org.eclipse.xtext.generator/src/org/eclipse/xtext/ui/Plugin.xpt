@@ -33,7 +33,7 @@
 <extension
          point="org.eclipse.ui.editors">
       <editor
-            class="«editorClassFQN()»"
+            class="«guiceInjectorClass()»:«editorClassFQN()»"
             contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
             default="true"
             extensions="«modelFileExtensions.toString(",")»"
@@ -44,7 +44,7 @@
  <extension
          point="org.eclipse.ui.preferencePages">
 		<page
-			class="org.eclipse.xtext.ui.core.util.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage/«languageId()»"
+			class="«guiceInjectorClass()»:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
 			id="«languageId()»"
 			name="«languageName()»">
 			<keywordReference
@@ -53,7 +53,7 @@
 		</page>
 		<page
 		    category="«languageId()»"
-		    class="org.eclipse.xtext.ui.core.util.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.EditorPreferencePage/«languageId()»"
+		    class="«guiceInjectorClass()»:org.eclipse.xtext.ui.core.editor.preferences.EditorPreferencePage"
 		    id="«languageId()».editor"
 		    name="Editor">
 		    	<keywordReference 
@@ -72,5 +72,15 @@
             label="Task Tags">
         </keyword>
 	</extension>
+	
+	«FOREACH modelFileExtensions() AS ext»
+	<extension
+         point="org.eclipse.emf.ecore.extension_parser">
+      <parser
+            class="«guiceInjectorClass()»:org.eclipse.xtext.resource.XtextResourceFactory"
+            type="«ext»">
+      </parser>
+   </extension>
+	«ENDFOREACH»
 «ENDIF-»
 «ENDDEFINE»

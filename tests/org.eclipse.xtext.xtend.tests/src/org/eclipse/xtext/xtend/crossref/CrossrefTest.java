@@ -7,8 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend.crossref;
 
-import static org.eclipse.xtext.util.CollectionUtils.list;
-import static org.eclipse.xtext.util.CollectionUtils.map;
+import static org.eclipse.xtext.util.CollectionUtils.*;
 
 import java.util.List;
 
@@ -18,14 +17,14 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.crossref.IScope;
 import org.eclipse.xtext.crossref.IScopeProvider;
 import org.eclipse.xtext.crossref.IScopedElement;
+import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.util.Function;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
-public class CrossrefTest extends AbstractGeneratorTest {
+public class CrossrefTest extends AbstractXtextTests {
 
 	public void testCrossRef() throws Exception {
 		with(ReferenceGrammarTestLanguageStandaloneSetup.class);

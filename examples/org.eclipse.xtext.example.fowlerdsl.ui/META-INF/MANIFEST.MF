@@ -10,7 +10,6 @@ Export-Package: org.eclipse.xtext.example
 Require-Bundle: org.eclipse.xtext.example.fowlerdsl,
  org.eclipse.xtext.ui.core,
  org.eclipse.xtext.ui.common,
- org.eclipse.xtext.service,
  org.eclipse.xtext.xtend;bundle-version="0.7.0";resolution:=optional
 Bundle-Activator: org.eclipse.xtext.example.Activator
 Bundle-ActivationPolicy: lazy

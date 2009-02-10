@@ -24,29 +24,22 @@ package «grammar().standaloneSetupClass().toJavaPackage()»;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.ISetup;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.IResourceFactory;
-import org.eclipse.xtext.service.IServiceScope;
-import org.eclipse.xtext.service.ServiceRegistry;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
-import «languageInterfaceFQName»;
+public class «grammar().standaloneSetupClass().toSimpleName()» implements ISetup {
 
-public abstract class «grammar().standaloneSetupClass().toSimpleName()» {
+	public static void doSetup() {
+		new «grammar().standaloneSetupClass().toSimpleName()»().createInjectorAndDoEMFRegistration();
+	}
 
-	private static boolean isInitialized = false;
-
-	public synchronized static void doSetup() {
-		if(!isInitialized) {
-		    «IF !grammar.isAbstract()»
-		    Injector injector = Guice.createInjector(new «grammar().runtimeModuleClass()»());
-			ServiceRegistry.registerInjector(«languageInterfaceFQName».SCOPE, injector);
-			«ENDIF»
-			
+	public Injector createInjectorAndDoEMFRegistration() {
 			«IF grammar.getSuperGrammar()!=null»
-			«grammar.getSuperGrammar().standaloneSetupClass()».doSetup();
+			new «grammar.getSuperGrammar().standaloneSetupClass()»().doSetup();
 			«ELSE-»
 			// register default ePackages
 			if (!Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("ecore"))
@@ -58,33 +51,44 @@ public abstract class «grammar().standaloneSetupClass().toSimpleName()» {
 			if (!EPackage.Registry.INSTANCE.containsKey(org.eclipse.xtext.XtextPackage.eNS_URI))
 				EPackage.Registry.INSTANCE.put(org.eclipse.xtext.XtextPackage.eNS_URI, org.eclipse.xtext.XtextPackage.eINSTANCE);
 			«ENDIF»
-			
-			«IF resourceFactoryService() != null-»
-			// register resource factory to EMF
-			IResourceFactory resourceFactory = new «resourceFactoryService().genClassFQName»();
-			«FOREACH modelFileExtensions() AS modelFileExtension-»
-			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("«modelFileExtension»", resourceFactory);
-			«ENDFOREACH»
+		    registerEPackages();
+		    «IF !grammar.isAbstract()»
+		    Injector injector = createInjector();
+		    IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
+		    registerResourceFactory(resourceFactory);
+		    return injector;
+		    «ELSE»
+		    return null;
 			«ENDIF»
-			// initialize EPackages
-			«FOREACH grammar().metamodelDeclarations.typeSelect(GeneratedMetamodel) AS mmd»
-				if (!EPackage.Registry.INSTANCE.containsKey("«mmd.ePackage.nsURI»")) {
-					EPackage «mmd.name» = EcoreUtil2.loadEPackage(
-							"«classPathURI(mmd)»",
-							«standaloneSetupClass(grammar()).toSimpleName()».class.getClassLoader());
-					if («mmd.name» == null)
-						throw new IllegalStateException(
-								"Couldn't load EPackage from '«classPathURI(mmd)»'");
-					EPackage.Registry.INSTANCE.put("«mmd.ePackage.nsURI»", «mmd.name»);
-				}
-			«ENDFOREACH»
-			isInitialized = true;
-		}
 	}
 	
-	public static IServiceScope getServiceScope() {
-	   doSetup();
-	   return «languageInterfaceFQName».SCOPE;
+    «IF !grammar.isAbstract()»
+	public Injector createInjector() {
+		return Guice.createInjector(new «grammar().runtimeModuleClass()»());
+	}
+	
+	public void registerResourceFactory(IResourceFactory resourceFactory) {
+		«FOREACH modelFileExtensions() AS modelFileExtension-»
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("«modelFileExtension»", resourceFactory);
+		«ENDFOREACH»
+	}
+    «ENDIF»
+
+	/**
+	 * initializes all EPackages generated for this language and registers them at EPackage.Registry.INSTANCE
+	 */	
+	public void registerEPackages() {
+		«FOREACH grammar().metamodelDeclarations.typeSelect(GeneratedMetamodel) AS mmd»
+			if (!EPackage.Registry.INSTANCE.containsKey("«mmd.ePackage.nsURI»")) {
+				EPackage «mmd.name» = EcoreUtil2.loadEPackage(
+						"«classPathURI(mmd)»",
+						«standaloneSetupClass(grammar()).toSimpleName()».class.getClassLoader());
+				if («mmd.name» == null)
+					throw new IllegalStateException(
+							"Couldn't load EPackage from '«classPathURI(mmd)»'");
+				EPackage.Registry.INSTANCE.put("«mmd.ePackage.nsURI»", «mmd.name»);
+			}
+		«ENDFOREACH»
 	}
 	
 }

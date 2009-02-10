@@ -40,13 +40,10 @@ import org.eclipse.ui.IWorkbenchPreferencePage;
 import org.eclipse.ui.IWorkbenchPropertyPage;
 import org.eclipse.ui.dialogs.PreferencesUtil;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
-import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.IGrammarAccess;
-import org.eclipse.xtext.service.IServiceScope;
-import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.ui.core.internal.Activator;
 
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
@@ -59,12 +56,8 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 
 	private static final String USE_PROJECT_SETTINGS = "useProjectSettings";
 
-	@Inject
-	private IServiceScope serviceScope;
-
 	private IWorkbench workbench;
 	private IProject project;
-	private String languageName;
 
 	private Button useProjectSettingsButton;
 	private List<FieldEditor> editors = new ArrayList<FieldEditor>();
@@ -122,13 +115,6 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 	 */
 	protected String getQualifier() {
 		return Activator.getDefault().getBundle().getSymbolicName();
-	}
-
-	/**
-	 * @return
-	 */
-	protected IServiceScope getServiceScope() {
-		return serviceScope;
 	}
 
 	/*
@@ -196,12 +182,11 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 			throw new IllegalStateException("Not a property page case, but current project was requested.");
 		return project;
 	}
+	
+	@Inject @Named("languageName")
+	private String languageName;
 
 	protected String getLanguageName() {
-		if (this.languageName == null) {
-			this.languageName = GrammarUtil.getName(ServiceRegistry.getInjector(getServiceScope()).getInstance(IGrammarAccess.class)
-					.getGrammar());
-		}
 		return this.languageName;
 	}
 

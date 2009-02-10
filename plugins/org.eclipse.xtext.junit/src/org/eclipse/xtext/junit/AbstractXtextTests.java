@@ -1,60 +1,178 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+
 package org.eclipse.xtext.junit;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 
 import junit.framework.TestCase;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtend.XtendFacade;
 import org.eclipse.xtend.expression.ExecutionContextImpl;
 import org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel;
-import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.IMetamodelAccess;
+import org.eclipse.xtext.ISetup;
+import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
+import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.crossref.IScopeProvider;
+import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParser;
-import org.eclipse.xtext.service.IServiceScope;
-import org.eclipse.xtext.service.ServiceRegistry;
+import org.eclipse.xtext.parser.ISwitchingParser;
+import org.eclipse.xtext.parser.antlr.IAntlrParser;
+import org.eclipse.xtext.parser.packrat.IPackratParser;
+import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
+import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
+import org.eclipse.xtext.parsetree.reconstr.SerializerUtil;
+import org.eclipse.xtext.resource.IResourceFactory;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import com.google.inject.Module;
+
+/**
+ * @author Sven Efftinge - Initial contribution and API
+ *
+ */
 public abstract class AbstractXtextTests extends TestCase {
 	
-	public AbstractXtextTests() {
-		super();
+	private Injector injector;
+
+	static {
+		new XtextBuiltinStandaloneSetup().doSetup();
+	}
+	
+	protected String serialize(EObject obj) {
+		return injector.getInstance(SerializerUtil.class).serialize(obj);
+	}
+	
+	/**
+	 * call this to set the language class to be used in the current test.
+	 */
+	protected void with(Module ... modules) throws Exception {
+		injector = Guice.createInjector(modules);
+	}
+	
+	protected void with(Class<? extends ISetup> setupClazz) throws Exception {
+		ISetup instance = setupClazz.newInstance();
+		injector = instance.createInjectorAndDoEMFRegistration();
+	}
+	
+	protected void with(ISetup setup) throws Exception {
+		injector = setup.createInjectorAndDoEMFRegistration();
+	}
+	
+	public<T> T get(Class<T> clazz) {
+		return injector.getInstance(clazz);
 	}
 
-	public AbstractXtextTests(String name) {
-		super(name);
+	protected IParser getParser() {
+		return injector.getInstance(ISwitchingParser.class);
 	}
 	
-	@com.google.inject.Inject
-	private IParser parser;
-	public IParser getParser() {
-		return parser;
+	protected IAntlrParser getAntlrParser() {
+		return injector.getInstance(IAntlrParser.class);
 	}
 	
-	protected void setCurrentLanguage(IServiceScope desc) {
-		ServiceRegistry.getInjector(desc).injectMembers(this);
+	protected IPackratParser getPackratParser() {
+		return injector.getInstance(IPackratParser.class);
+	}
+
+	protected IAstFactory getASTFactory() {
+		return injector.getInstance(IAstFactory.class);
 	}
 	
-	public EObject loadModel(URI uri, String model) throws Exception {
-		ResourceSet rs = new ResourceSetImpl();
-		Resource resource = rs.createResource(uri);
-		resource.load(new StringInputStream(model), null);
-		if (resource.getContents().isEmpty())
-			return null;
-		return resource.getContents().iterator().next();
+	protected IGrammarAccess getGrammarAccess() {
+		return injector.getInstance(IGrammarAccess.class);
+	}
+
+	protected IParseTreeConstructor getParseTreeConstructor() {
+		return injector.getInstance(IParseTreeConstructor.class);
 	}
 	
-	public IParseResult parse(InputStream model) throws Exception {
-		return getParser().parse(model);
+	protected IResourceFactory getResourceFactory()  {
+		return injector.getInstance(IResourceFactory.class);
 	}
 	
-	public IParseResult parse(String model) throws Exception {
-        return getParser().parse(new StringInputStream(model));
-    }
+	protected IValueConverterService getValueConverterService() {
+		return injector.getInstance(IValueConverterService.class);
+	}
 	
+	protected IMetamodelAccess getMetamodelAccess() {
+		return injector.getInstance(IMetamodelAccess.class);
+	}
+	
+	protected ITokenSerializer getTokenSerializer() {
+		return injector.getInstance(ITokenSerializer.class);
+	}
+
+	protected IScopeProvider getScopeProvider() {
+		return injector.getInstance(IScopeProvider.class);
+	}
+	// parse methods
+
+	public EObject getModel(String model) throws Exception {
+		return getModel(new org.eclipse.xtext.util.StringInputStream(model));
+	}
+
+	public EObject getModel(InputStream model) throws Exception {
+		XtextResource resource = getResource(model);
+		return getModel(resource);
+	}
+
+	protected EObject getModel(XtextResource resource) {
+		return resource.getParseResult().getRootASTElement();
+	}
+	
+	protected XtextResource getResourceFromString(String model) throws Exception {
+		return getResource(new org.eclipse.xtext.util.StringInputStream(model));
+	}
+
+	protected XtextResource getResource(InputStream in) throws Exception {
+		XtextResourceSet rs = new XtextResourceSet();
+		rs.setClasspathURIContext(getClass());
+		XtextResource resource = (XtextResource) getResourceFactory().createResource(URI.createURI("mytestmodel.test"));
+		rs.getResources().add(resource);
+		resource.load(in, null);
+		
+		for(Diagnostic d: resource.getErrors())
+			System.out.println("Resource Error: "+d);
+		
+		for(Diagnostic d: resource.getWarnings())
+			System.out.println("Resource Warning: "+d);
+		
+		return resource;
+	}
+
+	protected CompositeNode getRootNode(InputStream model) throws Exception {
+		XtextResource resource = getResource(model);
+		return getRootNode(resource);
+	}
+
+	protected CompositeNode getRootNode(XtextResource resource) {
+		return resource.getParseResult().getRootNode();
+	}
+
+	protected CompositeNode getRootNode(String model2) throws Exception {
+		return getRootNode(new StringInputStream(model2));
+	}
+
 	// Xtend helper methods
 
 	protected void assertWithXtend(String left, String right, Object _this) {
@@ -63,7 +181,7 @@ public abstract class AbstractXtextTests extends TestCase {
 
 	protected Object invokeWithXtend(String expression, Object _this) {
 		XtendFacade f = getXtendFacade();
-		f = f.cloneWithExtensions(getImportDeclarations()+"invoke(Object this) : " + expression + ";");
+		f = f.cloneWithExtensions(getImportDeclarations() + "invoke(Object this) : " + expression + ";");
 		return f.call("invoke", _this);
 	}
 
@@ -99,6 +217,32 @@ public abstract class AbstractXtextTests extends TestCase {
 		ExecutionContextImpl ctx = new ExecutionContextImpl();
 		ctx.registerMetaModel(new EmfRegistryMetaModel());
 		return XtendFacade.create(ctx);
+	}
+
+	protected String readFileIntoString(String filePath) throws IOException {
+		ClassLoader classLoader = getClass().getClassLoader();
+		URL url = classLoader.getResource(filePath);
+		if (url == null)
+			fail("Could not read resource: '" + filePath + "'. Is your file system case sensitive?");
+		if(!new File(url.getPath()).getCanonicalPath().endsWith(filePath))
+			throw new RuntimeException(filePath + ":\n" +
+					"The file does not exist exactly as it was named.\n" +
+					"The test is likely to cause trouble on the build server.\n" +
+					"Is your filesystem case insensitive? Please verify the spelling.");
+		
+		InputStream resourceAsStream = classLoader.getResourceAsStream(filePath);
+		if (resourceAsStream == null)
+			fail("Could not read resource: '" + filePath + "'. Is your file system case sensitive?");
+		byte[] buffer = new byte[2048];
+		int bytesRead = 0;
+		StringBuffer b = new StringBuffer();
+		do {
+			bytesRead = resourceAsStream.read(buffer);
+			if (bytesRead != -1)
+				b.append(new String(buffer, 0, bytesRead));
+		} while (bytesRead != -1);
+		String model = b.toString();
+		return model;
 	}
 	
 }

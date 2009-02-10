@@ -15,10 +15,10 @@ public class DatatypeRulesTestLanguageGrammarAccess extends BaseEPackageAccess i
 		private final Assignment cAssignmentModel = (Assignment)rule.eContents().get(1);
 		private final RuleCall c0ParserRuleCallModel = (RuleCall)cAssignmentModel.eContents().get(0);
 		
-		// CompositeModel : ( model += Model ) + ;
+		// CompositeModel:   (model+=Model)+;
 		public ParserRule getRule() { return rule; }
 
-		// ( model += Model ) +
+		// (model+=Model)+
 		public Assignment eleAssignmentModel() { return cAssignmentModel; }
 
 		// Model
@@ -47,58 +47,58 @@ public class DatatypeRulesTestLanguageGrammarAccess extends BaseEPackageAccess i
 		private final RuleCall c0110ParserRuleCallDots = (RuleCall)c011AssignmentDots.eContents().get(0);
 		private final Keyword c1KeywordSemicolon = (Keyword)cGroup.eContents().get(1);
 		
-		// Model : id = NestedModelId ( ":" value = Fraction ) ? ( "#" vector = Vector ) ? ( "+" dots = Dots ) ? ";" ;
+		// Model:   id=NestedModelId (":" value=Fraction)? ("#" vector=Vector)? ("+" dots=Dots)? ";";
 		public ParserRule getRule() { return rule; }
 
-		// id = NestedModelId ( ":" value = Fraction ) ? ( "#" vector = Vector ) ? ( "+" dots = Dots ) ? ";"
+		// id=NestedModelId (":" value=Fraction)? ("#" vector=Vector)? ("+" dots=Dots)? ";"
 		public Group eleGroup() { return cGroup; }
 
-		// id = NestedModelId ( ":" value = Fraction ) ? ( "#" vector = Vector ) ? ( "+" dots = Dots ) ?
+		// id=NestedModelId (":" value=Fraction)? ("#" vector=Vector)? ("+" dots=Dots)?
 		public Group ele0Group() { return c0Group; }
 
-		// id = NestedModelId ( ":" value = Fraction ) ? ( "#" vector = Vector ) ?
+		// id=NestedModelId (":" value=Fraction)? ("#" vector=Vector)?
 		public Group ele00Group() { return c00Group; }
 
-		// id = NestedModelId ( ":" value = Fraction ) ?
+		// id=NestedModelId (":" value=Fraction)?
 		public Group ele000Group() { return c000Group; }
 
-		// id = NestedModelId
+		// id=NestedModelId
 		public Assignment ele0000AssignmentId() { return c0000AssignmentId; }
 
 		// NestedModelId
 		public RuleCall ele00000ParserRuleCallNestedModelId() { return c00000ParserRuleCallNestedModelId; }
 
-		// ( ":" value = Fraction ) ?
+		// (":" value=Fraction)?
 		public Group ele0001Group() { return c0001Group; }
 
 		// ":"
 		public Keyword ele00010KeywordColon() { return c00010KeywordColon; }
 
-		// value = Fraction
+		// value=Fraction
 		public Assignment ele00011AssignmentValue() { return c00011AssignmentValue; }
 
 		// Fraction
 		public RuleCall ele000110ParserRuleCallFraction() { return c000110ParserRuleCallFraction; }
 
-		// ( "#" vector = Vector ) ?
+		// ("#" vector=Vector)?
 		public Group ele001Group() { return c001Group; }
 
 		// "#"
 		public Keyword ele0010KeywordNumberSign() { return c0010KeywordNumberSign; }
 
-		// vector = Vector
+		// vector=Vector
 		public Assignment ele0011AssignmentVector() { return c0011AssignmentVector; }
 
 		// Vector
 		public RuleCall ele00110ParserRuleCallVector() { return c00110ParserRuleCallVector; }
 
-		// ( "+" dots = Dots ) ?
+		// ("+" dots=Dots)?
 		public Group ele01Group() { return c01Group; }
 
 		// "+"
 		public Keyword ele010KeywordPlusSign() { return c010KeywordPlusSign; }
 
-		// dots = Dots
+		// dots=Dots
 		public Assignment ele011AssignmentDots() { return c011AssignmentDots; }
 
 		// Dots
@@ -116,7 +116,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends BaseEPackageAccess i
 		private final Keyword c01KeywordFullStop = (Keyword)c0Group.eContents().get(1);
 		private final RuleCall c1LexerRuleCallID = (RuleCall)cGroup.eContents().get(1);
 		
-		// ModelId returns EString : ID "." ID ;
+		// ModelId returns EString:   ID "." ID;
 		public ParserRule getRule() { return rule; }
 
 		// ID "." ID
@@ -143,7 +143,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends BaseEPackageAccess i
 		private final Keyword c01KeywordFullStop = (Keyword)c0Group.eContents().get(1);
 		private final RuleCall c1ParserRuleCallModelId = (RuleCall)cGroup.eContents().get(1);
 		
-		// NestedModelId returns EString : ModelId "." ModelId ;
+		// NestedModelId returns EString:   ModelId "." ModelId;
 		public ParserRule getRule() { return rule; }
 
 		// ModelId "." ModelId
@@ -170,16 +170,16 @@ public class DatatypeRulesTestLanguageGrammarAccess extends BaseEPackageAccess i
 		private final Keyword c10KeywordSolidus = (Keyword)c1Group.eContents().get(0);
 		private final RuleCall c11LexerRuleCallINT = (RuleCall)c1Group.eContents().get(1);
 		
-		// Fraction returns EBigDecimal : INT ( "/" INT ) ? ;
+		// Fraction returns EBigDecimal:   INT ("/" INT)?;
 		public ParserRule getRule() { return rule; }
 
-		// INT ( "/" INT ) ?
+		// INT ("/" INT)?
 		public Group eleGroup() { return cGroup; }
 
 		// INT
 		public RuleCall ele0LexerRuleCallINT() { return c0LexerRuleCallINT; }
 
-		// ( "/" INT ) ?
+		// ("/" INT)?
 		public Group ele1Group() { return c1Group; }
 
 		// "/"
@@ -199,7 +199,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends BaseEPackageAccess i
 		private final RuleCall c01LexerRuleCallINT = (RuleCall)c0Group.eContents().get(1);
 		private final Keyword c1KeywordRightParenthesis = (Keyword)cGroup.eContents().get(1);
 		
-		// Vector returns EString : "(" INT INT ")" ;
+		// Vector returns EString:   "(" INT INT ")";
 		public ParserRule getRule() { return rule; }
 
 		// "(" INT INT ")"
@@ -232,10 +232,10 @@ public class DatatypeRulesTestLanguageGrammarAccess extends BaseEPackageAccess i
 		private final Keyword c01KeywordFullStop = (Keyword)c0Group.eContents().get(1);
 		private final Keyword c1KeywordFullStopFullStop = (Keyword)cAlternatives.eContents().get(1);
 		
-		// Dots returns EString : "." "." | ".." ;
+		// Dots returns EString:   "." "."|"..";
 		public ParserRule getRule() { return rule; }
 
-		// "." "." | ".."
+		// "." "."|".."
 		public Alternatives eleAlternatives() { return cAlternatives; }
 
 		// "." "."
@@ -278,37 +278,37 @@ public class DatatypeRulesTestLanguageGrammarAccess extends BaseEPackageAccess i
 	}
 
 	
-	// CompositeModel : ( model += Model ) + ;
+	// CompositeModel:   (model+=Model)+;
 	public CompositeModelElements prCompositeModel() {
 		return (pCompositeModel != null) ? pCompositeModel : (pCompositeModel = new CompositeModelElements());
 	} 
 
-	// Model : id = NestedModelId ( ":" value = Fraction ) ? ( "#" vector = Vector ) ? ( "+" dots = Dots ) ? ";" ;
+	// Model:   id=NestedModelId (":" value=Fraction)? ("#" vector=Vector)? ("+" dots=Dots)? ";";
 	public ModelElements prModel() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	} 
 
-	// ModelId returns EString : ID "." ID ;
+	// ModelId returns EString:   ID "." ID;
 	public ModelIdElements prModelId() {
 		return (pModelId != null) ? pModelId : (pModelId = new ModelIdElements());
 	} 
 
-	// NestedModelId returns EString : ModelId "." ModelId ;
+	// NestedModelId returns EString:   ModelId "." ModelId;
 	public NestedModelIdElements prNestedModelId() {
 		return (pNestedModelId != null) ? pNestedModelId : (pNestedModelId = new NestedModelIdElements());
 	} 
 
-	// Fraction returns EBigDecimal : INT ( "/" INT ) ? ;
+	// Fraction returns EBigDecimal:   INT ("/" INT)?;
 	public FractionElements prFraction() {
 		return (pFraction != null) ? pFraction : (pFraction = new FractionElements());
 	} 
 
-	// Vector returns EString : "(" INT INT ")" ;
+	// Vector returns EString:   "(" INT INT ")";
 	public VectorElements prVector() {
 		return (pVector != null) ? pVector : (pVector = new VectorElements());
 	} 
 
-	// Dots returns EString : "." "." | ".." ;
+	// Dots returns EString:   "." "."|"..";
 	public DotsElements prDots() {
 		return (pDots != null) ? pDots : (pDots = new DotsElements());
 	} 

@@ -18,16 +18,16 @@ public class FormatterTestLanguageGrammarAccess extends BaseEPackageAccess imple
 		private final RuleCall c10ParserRuleCallTestLinewrap = (RuleCall)c1Alternatives.eContents().get(0);
 		private final RuleCall c11ParserRuleCallTestIndentation = (RuleCall)c1Alternatives.eContents().get(1);
 		
-		// Root : "test" ( TestLinewrap | TestIndentation ) ;
+		// Root:   "test" (TestLinewrap|TestIndentation);
 		public ParserRule getRule() { return rule; }
 
-		// "test" ( TestLinewrap | TestIndentation )
+		// "test" (TestLinewrap|TestIndentation)
 		public Group eleGroup() { return cGroup; }
 
 		// "test"
 		public Keyword ele0KeywordTest() { return c0KeywordTest; }
 
-		// TestLinewrap | TestIndentation
+		// TestLinewrap|TestIndentation
 		public Alternatives ele1Alternatives() { return c1Alternatives; }
 
 		// TestLinewrap
@@ -47,22 +47,22 @@ public class FormatterTestLanguageGrammarAccess extends BaseEPackageAccess imple
 		private final RuleCall c010LexerRuleCallID = (RuleCall)c01AssignmentName.eContents().get(0);
 		private final Keyword c1KeywordSemicolon = (Keyword)cGroup.eContents().get(1);
 		
-		// Line : type += ID name += ID ";" ;
+		// Line:   type+=ID name+=ID ";";
 		public ParserRule getRule() { return rule; }
 
-		// type += ID name += ID ";"
+		// type+=ID name+=ID ";"
 		public Group eleGroup() { return cGroup; }
 
-		// type += ID name += ID
+		// type+=ID name+=ID
 		public Group ele0Group() { return c0Group; }
 
-		// type += ID
+		// type+=ID
 		public Assignment ele00AssignmentType() { return c00AssignmentType; }
 
 		// ID
 		public RuleCall ele000LexerRuleCallID() { return c000LexerRuleCallID; }
 
-		// name += ID
+		// name+=ID
 		public Assignment ele01AssignmentName() { return c01AssignmentName; }
 
 		// ID
@@ -79,16 +79,16 @@ public class FormatterTestLanguageGrammarAccess extends BaseEPackageAccess imple
 		private final Assignment c1AssignmentItems = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall c10ParserRuleCallLine = (RuleCall)c1AssignmentItems.eContents().get(0);
 		
-		// TestLinewrap : "linewrap" ( items += Line ) * ;
+		// TestLinewrap:   "linewrap" (items+=Line)*;
 		public ParserRule getRule() { return rule; }
 
-		// "linewrap" ( items += Line ) *
+		// "linewrap" (items+=Line)*
 		public Group eleGroup() { return cGroup; }
 
 		// "linewrap"
 		public Keyword ele0KeywordLinewrap() { return c0KeywordLinewrap; }
 
-		// ( items += Line ) *
+		// (items+=Line)*
 		public Assignment ele1AssignmentItems() { return c1AssignmentItems; }
 
 		// Line
@@ -109,13 +109,13 @@ public class FormatterTestLanguageGrammarAccess extends BaseEPackageAccess imple
 		private final RuleCall c0110ParserRuleCallLine = (RuleCall)c011AssignmentItems.eContents().get(0);
 		private final Keyword c1KeywordRightCurlyBracket = (Keyword)cGroup.eContents().get(1);
 		
-		// TestIndentation : "indentation" "{" ( sub += TestIndentation | items += Line ) * "}" ;
+		// TestIndentation:   "indentation" "{" (sub+=TestIndentation|items+=Line)* "}";
 		public ParserRule getRule() { return rule; }
 
-		// "indentation" "{" ( sub += TestIndentation | items += Line ) * "}"
+		// "indentation" "{" (sub+=TestIndentation|items+=Line)* "}"
 		public Group eleGroup() { return cGroup; }
 
-		// "indentation" "{" ( sub += TestIndentation | items += Line ) *
+		// "indentation" "{" (sub+=TestIndentation|items+=Line)*
 		public Group ele0Group() { return c0Group; }
 
 		// "indentation" "{"
@@ -127,16 +127,16 @@ public class FormatterTestLanguageGrammarAccess extends BaseEPackageAccess imple
 		// "{"
 		public Keyword ele001KeywordLeftCurlyBracket() { return c001KeywordLeftCurlyBracket; }
 
-		// ( sub += TestIndentation | items += Line ) *
+		// (sub+=TestIndentation|items+=Line)*
 		public Alternatives ele01Alternatives() { return c01Alternatives; }
 
-		// sub += TestIndentation
+		// sub+=TestIndentation
 		public Assignment ele010AssignmentSub() { return c010AssignmentSub; }
 
 		// TestIndentation
 		public RuleCall ele0100ParserRuleCallTestIndentation() { return c0100ParserRuleCallTestIndentation; }
 
-		// items += Line
+		// items+=Line
 		public Assignment ele011AssignmentItems() { return c011AssignmentItems; }
 
 		// Line
@@ -170,22 +170,22 @@ public class FormatterTestLanguageGrammarAccess extends BaseEPackageAccess imple
 	}
 
 	
-	// Root : "test" ( TestLinewrap | TestIndentation ) ;
+	// Root:   "test" (TestLinewrap|TestIndentation);
 	public RootElements prRoot() {
 		return (pRoot != null) ? pRoot : (pRoot = new RootElements());
 	} 
 
-	// Line : type += ID name += ID ";" ;
+	// Line:   type+=ID name+=ID ";";
 	public LineElements prLine() {
 		return (pLine != null) ? pLine : (pLine = new LineElements());
 	} 
 
-	// TestLinewrap : "linewrap" ( items += Line ) * ;
+	// TestLinewrap:   "linewrap" (items+=Line)*;
 	public TestLinewrapElements prTestLinewrap() {
 		return (pTestLinewrap != null) ? pTestLinewrap : (pTestLinewrap = new TestLinewrapElements());
 	} 
 
-	// TestIndentation : "indentation" "{" ( sub += TestIndentation | items += Line ) * "}" ;
+	// TestIndentation:   "indentation" "{" (sub+=TestIndentation|items+=Line)* "}";
 	public TestIndentationElements prTestIndentation() {
 		return (pTestIndentation != null) ? pTestIndentation : (pTestIndentation = new TestIndentationElements());
 	} 

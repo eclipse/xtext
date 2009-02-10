@@ -13,12 +13,12 @@ import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.xtext.service.IServiceScope;
-import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.ui.common.editor.preferencepage.CommonPreferenceConstants;
 import org.eclipse.xtext.ui.core.editor.utils.TextStyle;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
+import com.google.inject.name.Named;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -29,22 +29,22 @@ public abstract class AbstractTokenScanner implements ITokenScanner {
 	private PreferenceStoreAccessor preferenceStoreAccessor;
 
 	@Inject
-	protected void setServiceScope(final IServiceScope scope) {
-		this.preferenceStoreAccessor = new PreferenceStoreAccessor(scope);
+	public AbstractTokenScanner(final @Named("languageName") String languageName,
+			final Provider<SyntaxColoringPreferencePage> preferencePageProvider, 
+			final PreferenceStoreAccessor accessor) {
+		this.preferenceStoreAccessor = accessor;
 		// XXX LITTLE HACK, adding PrefPage on the fly
-		String languageTag = PreferenceStoreAccessor.languageTag(scope);
 		String preferencePagePathSeparator = "/";
-		String parentPreferencePagePath = languageTag + preferencePagePathSeparator + languageTag
+		String parentPreferencePagePath = languageName + preferencePagePathSeparator + languageName
 				+ CommonPreferenceConstants.SEPARATOR + CommonPreferenceConstants.EDITOR_NODE_NAME;
-		String syntaxColorerPrefPageTag = PreferenceStoreAccessor.syntaxColorerTag(scope);
+		String syntaxColorerPrefPageTag = PreferenceStoreAccessor.syntaxColorerTag(languageName);
 		String preferencePagePath = parentPreferencePagePath + preferencePagePathSeparator + syntaxColorerPrefPageTag;
 		if (PlatformUI.getWorkbench().getPreferenceManager().find(preferencePagePath) == null) {
 			PreferenceNode node = new PreferenceNode(syntaxColorerPrefPageTag, "Syntax Colorer", null, null) {
 				@Override
 				public void createPage() {
-					SyntaxColoringPreferencePage page = new SyntaxColoringPreferencePage();
+					SyntaxColoringPreferencePage page = preferencePageProvider.get();
 					page.setTitle(getLabelText());
-					ServiceRegistry.getInjector(scope).injectMembers(page);
 					setPage(page);
 				}
 			};
@@ -64,8 +64,7 @@ public abstract class AbstractTokenScanner implements ITokenScanner {
 					return false;
 				}
 			};
-		}
-		else {
+		} else {
 			preferenceStoreAccessor.populateTextStyle(tokenStyle.getID(), textStyle, tokenStyle.getDefaultTextStyle());
 		}
 		int style = textStyle.getStyle();

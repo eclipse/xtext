@@ -15,10 +15,10 @@ public class ActionTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		private final Assignment cAssignmentChildren = (Assignment)rule.eContents().get(1);
 		private final RuleCall c0ParserRuleCallElement = (RuleCall)cAssignmentChildren.eContents().get(0);
 		
-		// Model : ( children += Element ) * ;
+		// Model:   (children+=Element)*;
 		public ParserRule getRule() { return rule; }
 
-		// ( children += Element ) *
+		// (children+=Element)*
 		public Assignment eleAssignmentChildren() { return cAssignmentChildren; }
 
 		// Element
@@ -34,22 +34,22 @@ public class ActionTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		private final Assignment c11AssignmentItems = (Assignment)c1Group.eContents().get(1);
 		private final RuleCall c110ParserRuleCallItem = (RuleCall)c11AssignmentItems.eContents().get(0);
 		
-		// Element returns Type : Item ( { current = Item . items += current } items += Item ) ;
+		// Element returns Type:   Item ({current=Item.items+=current} items+=Item);
 		public ParserRule getRule() { return rule; }
 
-		// Item ( { current = Item . items += current } items += Item )
+		// Item ({current=Item.items+=current} items+=Item)
 		public Group eleGroup() { return cGroup; }
 
 		// Item
 		public RuleCall ele0ParserRuleCallItem() { return c0ParserRuleCallItem; }
 
-		// { current = Item . items += current } items += Item
+		// {current=Item.items+=current} items+=Item
 		public Group ele1Group() { return c1Group; }
 
-		// { current = Item . items += current }
+		// {current=Item.items+=current}
 		public Action ele10ActionItemitems() { return c10ActionItemitems; }
 
-		// items += Item
+		// items+=Item
 		public Assignment ele11AssignmentItems() { return c11AssignmentItems; }
 
 		// Item
@@ -63,16 +63,16 @@ public class ActionTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		private final Assignment c1AssignmentName = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall c10LexerRuleCallID = (RuleCall)c1AssignmentName.eContents().get(0);
 		
-		// Item returns Type : { current = Thing . content = current } name = ID ;
+		// Item returns Type:   {current=Thing.content=current} name=ID;
 		public ParserRule getRule() { return rule; }
 
-		// { current = Thing . content = current } name = ID
+		// {current=Thing.content=current} name=ID
 		public Group eleGroup() { return cGroup; }
 
-		// { current = Thing . content = current }
+		// {current=Thing.content=current}
 		public Action ele0ActionThingcontent() { return c0ActionThingcontent; }
 
-		// name = ID
+		// name=ID
 		public Assignment ele1AssignmentName() { return c1AssignmentName; }
 
 		// ID
@@ -102,17 +102,17 @@ public class ActionTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 	}
 
 	
-	// Model : ( children += Element ) * ;
+	// Model:   (children+=Element)*;
 	public ModelElements prModel() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	} 
 
-	// Element returns Type : Item ( { current = Item . items += current } items += Item ) ;
+	// Element returns Type:   Item ({current=Item.items+=current} items+=Item);
 	public ElementElements prElement() {
 		return (pElement != null) ? pElement : (pElement = new ElementElements());
 	} 
 
-	// Item returns Type : { current = Thing . content = current } name = ID ;
+	// Item returns Type:   {current=Thing.content=current} name=ID;
 	public ItemElements prItem() {
 		return (pItem != null) ? pItem : (pItem = new ItemElements());
 	} 

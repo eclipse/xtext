@@ -15,10 +15,10 @@ public class DummyTestLanguageGrammarAccess extends BaseEPackageAccess implement
 		private final Assignment cAssignmentElements = (Assignment)rule.eContents().get(1);
 		private final RuleCall c0ParserRuleCallElement = (RuleCall)cAssignmentElements.eContents().get(0);
 		
-		// Model : ( elements += Element ) * ;
+		// Model:   (elements+=Element)*;
 		public ParserRule getRule() { return rule; }
 
-		// ( elements += Element ) *
+		// (elements+=Element)*
 		public Assignment eleAssignmentElements() { return cAssignmentElements; }
 
 		// Element
@@ -40,22 +40,22 @@ public class DummyTestLanguageGrammarAccess extends BaseEPackageAccess implement
 		private final RuleCall c010LexerRuleCallSTRING = (RuleCall)c01AssignmentDescriptions.eContents().get(0);
 		private final Keyword c1KeywordSemicolon = (Keyword)cGroup.eContents().get(1);
 		
-		// Element : ( optional ?= "optional" ) ? "element" name = ID ( descriptions += STRING ) * ";" ;
+		// Element:   (optional?="optional")? "element" name=ID (descriptions+=STRING)* ";";
 		public ParserRule getRule() { return rule; }
 
-		// ( optional ?= "optional" ) ? "element" name = ID ( descriptions += STRING ) * ";"
+		// (optional?="optional")? "element" name=ID (descriptions+=STRING)* ";"
 		public Group eleGroup() { return cGroup; }
 
-		// ( optional ?= "optional" ) ? "element" name = ID ( descriptions += STRING ) *
+		// (optional?="optional")? "element" name=ID (descriptions+=STRING)*
 		public Group ele0Group() { return c0Group; }
 
-		// ( optional ?= "optional" ) ? "element" name = ID
+		// (optional?="optional")? "element" name=ID
 		public Group ele00Group() { return c00Group; }
 
-		// ( optional ?= "optional" ) ? "element"
+		// (optional?="optional")? "element"
 		public Group ele000Group() { return c000Group; }
 
-		// ( optional ?= "optional" ) ?
+		// (optional?="optional")?
 		public Assignment ele0000AssignmentOptional() { return c0000AssignmentOptional; }
 
 		// "optional"
@@ -64,13 +64,13 @@ public class DummyTestLanguageGrammarAccess extends BaseEPackageAccess implement
 		// "element"
 		public Keyword ele0001KeywordElement() { return c0001KeywordElement; }
 
-		// name = ID
+		// name=ID
 		public Assignment ele001AssignmentName() { return c001AssignmentName; }
 
 		// ID
 		public RuleCall ele0010LexerRuleCallID() { return c0010LexerRuleCallID; }
 
-		// ( descriptions += STRING ) *
+		// (descriptions+=STRING)*
 		public Assignment ele01AssignmentDescriptions() { return c01AssignmentDescriptions; }
 
 		// STRING
@@ -102,12 +102,12 @@ public class DummyTestLanguageGrammarAccess extends BaseEPackageAccess implement
 	}
 
 	
-	// Model : ( elements += Element ) * ;
+	// Model:   (elements+=Element)*;
 	public ModelElements prModel() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	} 
 
-	// Element : ( optional ?= "optional" ) ? "element" name = ID ( descriptions += STRING ) * ";" ;
+	// Element:   (optional?="optional")? "element" name=ID (descriptions+=STRING)* ";";
 	public ElementElements prElement() {
 		return (pElement != null) ? pElement : (pElement = new ElementElements());
 	} 

@@ -11,8 +11,6 @@ package org.eclipse.xtext.ui.core.editor;
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IConfigurationElement;
-import org.eclipse.core.runtime.IExecutableExtension;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.IVerticalRuler;
@@ -28,9 +26,6 @@ import org.eclipse.ui.texteditor.ITextEditorActionConstants;
 import org.eclipse.ui.texteditor.SelectMarkerRulerAction;
 import org.eclipse.ui.texteditor.TextOperationAction;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
-import org.eclipse.xtext.service.IServiceScope;
-import org.eclipse.xtext.service.ServiceRegistry;
-import org.eclipse.xtext.service.ServiceScopeFactory;
 import org.eclipse.xtext.ui.core.XtextUIMessages;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocumentProvider;
@@ -44,7 +39,7 @@ import com.google.inject.Inject;
  * @author Peter Friese - Initial contribution and API
  * @author Sven Efftinge
  */
-public class XtextEditor extends TextEditor implements IExecutableExtension {
+public class XtextEditor extends TextEditor {
 
 	private static final Logger log = Logger.getLogger(XtextEditor.class);
 
@@ -56,27 +51,11 @@ public class XtextEditor extends TextEditor implements IExecutableExtension {
 	@Inject(optional = true)
 	private IContentOutlinePage outlinePage;
 
-	private IServiceScope scope;
-
 	// TODO private IFoldingUpdater foldingSupport;
 
 	public XtextEditor() {
 		if (log.isDebugEnabled())
 			log.debug("Creating Xtext Editor. Instance: [" + this.toString() + "]");
-	}
-
-	public void setInitializationData(IConfigurationElement config, String propertyName, Object data) {
-		super.setInitializationData(config, propertyName, data);
-		String id = config.getAttribute("id");
-		scope = ServiceScopeFactory.get(id);
-		if (scope == null) {
-			throw new IllegalStateException("scope " + data + " has not been registered.");
-		}
-		ServiceRegistry.getInjector(scope).injectMembers(this);
-	}
-
-	public IServiceScope getScope() {
-		return scope;
 	}
 
 	public IXtextDocument getDocument() {
@@ -125,9 +104,6 @@ public class XtextEditor extends TextEditor implements IExecutableExtension {
 	public Object getAdapter(Class adapter) {
 		if (adapter.equals(IContentOutlinePage.class)) {
 			return getContentOutlinePage();
-		}
-		else if (IServiceScope.class.equals(adapter)) {
-			return getScope();
 		}
 		return super.getAdapter(adapter);
 	}

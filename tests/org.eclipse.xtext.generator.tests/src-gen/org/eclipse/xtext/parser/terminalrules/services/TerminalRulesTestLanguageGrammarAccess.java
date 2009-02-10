@@ -32,64 +32,64 @@ public class TerminalRulesTestLanguageGrammarAccess extends BaseEPackageAccess i
 		private final Assignment c1AssignmentAnyValue = (Assignment)cAlternatives.eContents().get(1);
 		private final RuleCall c10ParserRuleCallANY_OTHER = (RuleCall)c1AssignmentAnyValue.eContents().get(0);
 		
-		// Model : idValue = ID | intValue = INT | stringValue = STRING | mlCommentValue = ML_COMMENT | slCommentValue = SL_COMMENT | wsValue = WS | anyValue = ANY_OTHER ;
+		// Model:   idValue=ID|intValue=INT|stringValue=STRING|mlCommentValue=ML_COMMENT|slCommentValue=SL_COMMENT|wsValue=WS|anyValue=ANY_OTHER;
 		public ParserRule getRule() { return rule; }
 
-		// idValue = ID | intValue = INT | stringValue = STRING | mlCommentValue = ML_COMMENT | slCommentValue = SL_COMMENT | wsValue = WS | anyValue = ANY_OTHER
+		// idValue=ID|intValue=INT|stringValue=STRING|mlCommentValue=ML_COMMENT|slCommentValue=SL_COMMENT|wsValue=WS|anyValue=ANY_OTHER
 		public Alternatives eleAlternatives() { return cAlternatives; }
 
-		// idValue = ID | intValue = INT | stringValue = STRING | mlCommentValue = ML_COMMENT | slCommentValue = SL_COMMENT | wsValue = WS
+		// idValue=ID|intValue=INT|stringValue=STRING|mlCommentValue=ML_COMMENT|slCommentValue=SL_COMMENT|wsValue=WS
 		public Alternatives ele0Alternatives() { return c0Alternatives; }
 
-		// idValue = ID | intValue = INT | stringValue = STRING | mlCommentValue = ML_COMMENT | slCommentValue = SL_COMMENT
+		// idValue=ID|intValue=INT|stringValue=STRING|mlCommentValue=ML_COMMENT|slCommentValue=SL_COMMENT
 		public Alternatives ele00Alternatives() { return c00Alternatives; }
 
-		// idValue = ID | intValue = INT | stringValue = STRING | mlCommentValue = ML_COMMENT
+		// idValue=ID|intValue=INT|stringValue=STRING|mlCommentValue=ML_COMMENT
 		public Alternatives ele000Alternatives() { return c000Alternatives; }
 
-		// idValue = ID | intValue = INT | stringValue = STRING
+		// idValue=ID|intValue=INT|stringValue=STRING
 		public Alternatives ele0000Alternatives() { return c0000Alternatives; }
 
-		// idValue = ID | intValue = INT
+		// idValue=ID|intValue=INT
 		public Alternatives ele00000Alternatives() { return c00000Alternatives; }
 
-		// idValue = ID
+		// idValue=ID
 		public Assignment ele000000AssignmentIdValue() { return c000000AssignmentIdValue; }
 
 		// ID
 		public RuleCall ele0000000ParserRuleCallID() { return c0000000ParserRuleCallID; }
 
-		// intValue = INT
+		// intValue=INT
 		public Assignment ele000001AssignmentIntValue() { return c000001AssignmentIntValue; }
 
 		// INT
 		public RuleCall ele0000010ParserRuleCallINT() { return c0000010ParserRuleCallINT; }
 
-		// stringValue = STRING
+		// stringValue=STRING
 		public Assignment ele00001AssignmentStringValue() { return c00001AssignmentStringValue; }
 
 		// STRING
 		public RuleCall ele000010ParserRuleCallSTRING() { return c000010ParserRuleCallSTRING; }
 
-		// mlCommentValue = ML_COMMENT
+		// mlCommentValue=ML_COMMENT
 		public Assignment ele0001AssignmentMlCommentValue() { return c0001AssignmentMlCommentValue; }
 
 		// ML_COMMENT
 		public RuleCall ele00010ParserRuleCallML_COMMENT() { return c00010ParserRuleCallML_COMMENT; }
 
-		// slCommentValue = SL_COMMENT
+		// slCommentValue=SL_COMMENT
 		public Assignment ele001AssignmentSlCommentValue() { return c001AssignmentSlCommentValue; }
 
 		// SL_COMMENT
 		public RuleCall ele0010ParserRuleCallSL_COMMENT() { return c0010ParserRuleCallSL_COMMENT; }
 
-		// wsValue = WS
+		// wsValue=WS
 		public Assignment ele01AssignmentWsValue() { return c01AssignmentWsValue; }
 
 		// WS
 		public RuleCall ele010ParserRuleCallWS() { return c010ParserRuleCallWS; }
 
-		// anyValue = ANY_OTHER
+		// anyValue=ANY_OTHER
 		public Assignment ele1AssignmentAnyValue() { return c1AssignmentAnyValue; }
 
 		// ANY_OTHER
@@ -133,7 +133,7 @@ public class TerminalRulesTestLanguageGrammarAccess extends BaseEPackageAccess i
 		// "^" ? ( "a" .. "z" | "A" .. "Z" | "_" )
 		public Group ele0Group() { return c0Group; }
 
-		// "^" ?
+		// "^"?
 		public Keyword ele00KeywordCircumflexAccent() { return c00KeywordCircumflexAccent; }
 
 		// "a" .. "z" | "A" .. "Z" | "_"
@@ -296,31 +296,31 @@ public class TerminalRulesTestLanguageGrammarAccess extends BaseEPackageAccess i
 		// ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) *
 		public Alternatives ele001Alternatives() { return c001Alternatives; }
 
-		// "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" )
+		// "\\" ("b"|"t"|"n"|"f"|"r"|"\""|"\'"|"\\")
 		public Group ele0010Group() { return c0010Group; }
 
 		// "\\"
 		public Keyword ele00100KeywordReverseSolidus() { return c00100KeywordReverseSolidus; }
 
-		// "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\"
+		// "b"|"t"|"n"|"f"|"r"|"\""|"\'"|"\\"
 		public Alternatives ele00101Alternatives() { return c00101Alternatives; }
 
-		// "b" | "t" | "n" | "f" | "r" | "\"" | "\'"
+		// "b"|"t"|"n"|"f"|"r"|"\""|"\'"
 		public Alternatives ele001010Alternatives() { return c001010Alternatives; }
 
-		// "b" | "t" | "n" | "f" | "r" | "\""
+		// "b"|"t"|"n"|"f"|"r"|"\""
 		public Alternatives ele0010100Alternatives() { return c0010100Alternatives; }
 
-		// "b" | "t" | "n" | "f" | "r"
+		// "b"|"t"|"n"|"f"|"r"
 		public Alternatives ele00101000Alternatives() { return c00101000Alternatives; }
 
-		// "b" | "t" | "n" | "f"
+		// "b"|"t"|"n"|"f"
 		public Alternatives ele001010000Alternatives() { return c001010000Alternatives; }
 
-		// "b" | "t" | "n"
+		// "b"|"t"|"n"
 		public Alternatives ele0010100000Alternatives() { return c0010100000Alternatives; }
 
-		// "b" | "t"
+		// "b"|"t"
 		public Alternatives ele00101000000Alternatives() { return c00101000000Alternatives; }
 
 		// "b"
@@ -350,7 +350,7 @@ public class TerminalRulesTestLanguageGrammarAccess extends BaseEPackageAccess i
 		// ! ( "\\" | "\"" )
 		public NegatedToken ele0011NegatedToken() { return c0011NegatedToken; }
 
-		// "\\" | "\""
+		// "\\"|"\""
 		public Alternatives ele00110Alternatives() { return c00110Alternatives; }
 
 		// "\\"
@@ -374,31 +374,31 @@ public class TerminalRulesTestLanguageGrammarAccess extends BaseEPackageAccess i
 		// ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) *
 		public Alternatives ele101Alternatives() { return c101Alternatives; }
 
-		// "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" )
+		// "\\" ("b"|"t"|"n"|"f"|"r"|"\""|"\'"|"\\")
 		public Group ele1010Group() { return c1010Group; }
 
 		// "\\"
 		public Keyword ele10100KeywordReverseSolidus() { return c10100KeywordReverseSolidus; }
 
-		// "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\"
+		// "b"|"t"|"n"|"f"|"r"|"\""|"\'"|"\\"
 		public Alternatives ele10101Alternatives() { return c10101Alternatives; }
 
-		// "b" | "t" | "n" | "f" | "r" | "\"" | "\'"
+		// "b"|"t"|"n"|"f"|"r"|"\""|"\'"
 		public Alternatives ele101010Alternatives() { return c101010Alternatives; }
 
-		// "b" | "t" | "n" | "f" | "r" | "\""
+		// "b"|"t"|"n"|"f"|"r"|"\""
 		public Alternatives ele1010100Alternatives() { return c1010100Alternatives; }
 
-		// "b" | "t" | "n" | "f" | "r"
+		// "b"|"t"|"n"|"f"|"r"
 		public Alternatives ele10101000Alternatives() { return c10101000Alternatives; }
 
-		// "b" | "t" | "n" | "f"
+		// "b"|"t"|"n"|"f"
 		public Alternatives ele101010000Alternatives() { return c101010000Alternatives; }
 
-		// "b" | "t" | "n"
+		// "b"|"t"|"n"
 		public Alternatives ele1010100000Alternatives() { return c1010100000Alternatives; }
 
-		// "b" | "t"
+		// "b"|"t"
 		public Alternatives ele10101000000Alternatives() { return c10101000000Alternatives; }
 
 		// "b"
@@ -428,7 +428,7 @@ public class TerminalRulesTestLanguageGrammarAccess extends BaseEPackageAccess i
 		// ! ( "\\" | "\'" )
 		public NegatedToken ele1011NegatedToken() { return c1011NegatedToken; }
 
-		// "\\" | "\'"
+		// "\\"|"\'"
 		public Alternatives ele10110Alternatives() { return c10110Alternatives; }
 
 		// "\\"
@@ -492,7 +492,7 @@ public class TerminalRulesTestLanguageGrammarAccess extends BaseEPackageAccess i
 		// ! ( "\n" | "\r" ) *
 		public NegatedToken ele01NegatedToken() { return c01NegatedToken; }
 
-		// "\n" | "\r"
+		// "\n"|"\r"
 		public Alternatives ele010Alternatives() { return c010Alternatives; }
 
 		// "\n"
@@ -501,10 +501,10 @@ public class TerminalRulesTestLanguageGrammarAccess extends BaseEPackageAccess i
 		// "\r"
 		public Keyword ele0101Keyword() { return c0101Keyword; }
 
-		// ( "\r" ? "\n" ) ?
+		// ("\r"? "\n")?
 		public Group ele1Group() { return c1Group; }
 
-		// "\r" ?
+		// "\r"?
 		public Keyword ele10Keyword() { return c10Keyword; }
 
 		// "\n"
@@ -524,13 +524,13 @@ public class TerminalRulesTestLanguageGrammarAccess extends BaseEPackageAccess i
 		// terminal WS returns EString : ( " " | "\t" | "\r" | "\n" ) + ;
 		public ParserRule getRule() { return rule; }
 
-		// ( " " | "\t" | "\r" | "\n" ) +
+		// (" "|"\t"|"\r"|"\n")+
 		public Alternatives eleAlternatives() { return cAlternatives; }
 
-		// " " | "\t" | "\r"
+		// " "|"\t"|"\r"
 		public Alternatives ele0Alternatives() { return c0Alternatives; }
 
-		// " " | "\t"
+		// " "|"\t"
 		public Alternatives ele00Alternatives() { return c00Alternatives; }
 
 		// " "
@@ -585,7 +585,7 @@ public class TerminalRulesTestLanguageGrammarAccess extends BaseEPackageAccess i
 	}
 
 	
-	// Model : idValue = ID | intValue = INT | stringValue = STRING | mlCommentValue = ML_COMMENT | slCommentValue = SL_COMMENT | wsValue = WS | anyValue = ANY_OTHER ;
+	// Model:   idValue=ID|intValue=INT|stringValue=STRING|mlCommentValue=ML_COMMENT|slCommentValue=SL_COMMENT|wsValue=WS|anyValue=ANY_OTHER;
 	public ModelElements prModel() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	} 

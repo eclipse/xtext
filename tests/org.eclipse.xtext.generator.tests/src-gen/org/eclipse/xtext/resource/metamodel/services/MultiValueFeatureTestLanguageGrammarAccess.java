@@ -15,10 +15,10 @@ public class MultiValueFeatureTestLanguageGrammarAccess extends BaseEPackageAcce
 		private final Assignment cAssignmentFeatureA = (Assignment)rule.eContents().get(1);
 		private final RuleCall c0LexerRuleCallID = (RuleCall)cAssignmentFeatureA.eContents().get(0);
 		
-		// Start : ( featureA += ID ) + ;
+		// Start:   (featureA+=ID)+;
 		public ParserRule getRule() { return rule; }
 
-		// ( featureA += ID ) +
+		// (featureA+=ID)+
 		public Assignment eleAssignmentFeatureA() { return cAssignmentFeatureA; }
 
 		// ID
@@ -46,7 +46,7 @@ public class MultiValueFeatureTestLanguageGrammarAccess extends BaseEPackageAcce
 	}
 
 	
-	// Start : ( featureA += ID ) + ;
+	// Start:   (featureA+=ID)+;
 	public StartElements prStart() {
 		return (pStart != null) ? pStart : (pStart = new StartElements());
 	} 

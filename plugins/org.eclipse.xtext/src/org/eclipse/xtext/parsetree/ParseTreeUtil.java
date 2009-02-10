@@ -52,6 +52,8 @@ import org.eclipse.xtext.util.XtextSwitch;
 public final class ParseTreeUtil {
 
 	private static final Logger logger = Logger.getLogger(ParseTreeUtil.class);
+	
+	
 	/**
 	 * @param rootNode	the root node of the tree
 	 * @param offset	the text position within the the current sentence

@@ -27,12 +27,12 @@ public class MetamodelRefTestLanguageParseTreeConstructor extends AbstractParseT
 
 /************ begin Rule Foo ****************
  *
- * Foo : name = ID ( nameRefs += NameRef ) * ;
+ * Foo:   name=ID (nameRefs+=NameRef)*;
  *
  **/
 
 
-// name = ID ( nameRefs += NameRef ) *
+// name=ID (nameRefs+=NameRef)*
 protected class Foo_Group extends GroupToken {
 	
 	public Foo_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -60,7 +60,7 @@ protected class Foo_Group extends GroupToken {
 	}
 }
 
-// name = ID
+// name=ID
 protected class Foo_0_Assignment_name extends AssignmentToken  {
 	
 	public Foo_0_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -83,7 +83,7 @@ protected class Foo_0_Assignment_name extends AssignmentToken  {
 	}
 }
 
-// ( nameRefs += NameRef ) *
+// (nameRefs+=NameRef)*
 protected class Foo_1_Assignment_nameRefs extends AssignmentToken  {
 	
 	public Foo_1_Assignment_nameRefs(IInstanceDescription curr, AbstractToken pred) {
@@ -120,12 +120,12 @@ protected class Foo_1_Assignment_nameRefs extends AssignmentToken  {
 
 /************ begin Rule NameRef ****************
  *
- * NameRef returns RuleCall : rule = [ ParserRule ] ;
+ * NameRef returns RuleCall:   rule=[ParserRule];
  *
  **/
 
 
-// rule = [ ParserRule ]
+// rule=[ParserRule]
 protected class NameRef_Assignment_rule extends AssignmentToken  {
 	
 	public NameRef_Assignment_rule(IInstanceDescription curr, AbstractToken pred) {
@@ -156,12 +156,12 @@ protected class NameRef_Assignment_rule extends AssignmentToken  {
 
 /************ begin Rule MyRule ****************
  *
- * MyRule returns ParserRule : name = ID ;
+ * MyRule returns ParserRule:   name=ID;
  *
  **/
 
 
-// name = ID
+// name=ID
 protected class MyRule_Assignment_name extends AssignmentToken  {
 	
 	public MyRule_Assignment_name(IInstanceDescription curr, AbstractToken pred) {

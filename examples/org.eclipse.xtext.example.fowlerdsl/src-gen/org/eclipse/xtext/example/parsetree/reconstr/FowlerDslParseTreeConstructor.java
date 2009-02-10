@@ -29,12 +29,12 @@ public class FowlerDslParseTreeConstructor extends AbstractParseTreeConstructor 
 
 /************ begin Rule Statemachine ****************
  *
- * Statemachine : "events" ( events += Event ) * "end" "commands" ( commands += Command ) * "end" ( states += State ) * ;
+ * Statemachine:   "events" (events+=Event)* "end" "commands" (commands+=Command)* "end" (states+=State)*;
  *
  **/
 
 
-// "events" ( events += Event ) * "end" "commands" ( commands += Command ) * "end" ( states += State ) *
+// "events" (events+=Event)* "end" "commands" (commands+=Command)* "end" (states+=State)*
 protected class Statemachine_Group extends GroupToken {
 	
 	public Statemachine_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -62,7 +62,7 @@ protected class Statemachine_Group extends GroupToken {
 	}
 }
 
-// "events" ( events += Event ) * "end" "commands" ( commands += Command ) * "end"
+// "events" (events+=Event)* "end" "commands" (commands+=Command)* "end"
 protected class Statemachine_0_Group extends GroupToken {
 	
 	public Statemachine_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -90,7 +90,7 @@ protected class Statemachine_0_Group extends GroupToken {
 	}
 }
 
-// "events" ( events += Event ) * "end" "commands" ( commands += Command ) *
+// "events" (events+=Event)* "end" "commands" (commands+=Command)*
 protected class Statemachine_0_0_Group extends GroupToken {
 	
 	public Statemachine_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -118,7 +118,7 @@ protected class Statemachine_0_0_Group extends GroupToken {
 	}
 }
 
-// "events" ( events += Event ) * "end" "commands"
+// "events" (events+=Event)* "end" "commands"
 protected class Statemachine_0_0_0_Group extends GroupToken {
 	
 	public Statemachine_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -146,7 +146,7 @@ protected class Statemachine_0_0_0_Group extends GroupToken {
 	}
 }
 
-// "events" ( events += Event ) * "end"
+// "events" (events+=Event)* "end"
 protected class Statemachine_0_0_0_0_Group extends GroupToken {
 	
 	public Statemachine_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -174,7 +174,7 @@ protected class Statemachine_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-// "events" ( events += Event ) *
+// "events" (events+=Event)*
 protected class Statemachine_0_0_0_0_0_Group extends GroupToken {
 	
 	public Statemachine_0_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -214,7 +214,7 @@ protected class Statemachine_0_0_0_0_0_0_Keyword_events extends KeywordToken  {
 	}	
 }
 
-// ( events += Event ) *
+// (events+=Event)*
 protected class Statemachine_0_0_0_0_0_1_Assignment_events extends AssignmentToken  {
 	
 	public Statemachine_0_0_0_0_0_1_Assignment_events(IInstanceDescription curr, AbstractToken pred) {
@@ -272,7 +272,7 @@ protected class Statemachine_0_0_0_1_Keyword_commands extends KeywordToken  {
 }
 
 
-// ( commands += Command ) *
+// (commands+=Command)*
 protected class Statemachine_0_0_1_Assignment_commands extends AssignmentToken  {
 	
 	public Statemachine_0_0_1_Assignment_commands(IInstanceDescription curr, AbstractToken pred) {
@@ -317,7 +317,7 @@ protected class Statemachine_0_1_Keyword_end extends KeywordToken  {
 }
 
 
-// ( states += State ) *
+// (states+=State)*
 protected class Statemachine_1_Assignment_states extends AssignmentToken  {
 	
 	public Statemachine_1_Assignment_states(IInstanceDescription curr, AbstractToken pred) {
@@ -354,12 +354,12 @@ protected class Statemachine_1_Assignment_states extends AssignmentToken  {
 
 /************ begin Rule Event ****************
  *
- * Event : ( resetting ?= "resetting" ) ? name = ID code = ID ;
+ * Event:   (resetting?="resetting")? name=ID code=ID;
  *
  **/
 
 
-// ( resetting ?= "resetting" ) ? name = ID code = ID
+// (resetting?="resetting")? name=ID code=ID
 protected class Event_Group extends GroupToken {
 	
 	public Event_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -387,7 +387,7 @@ protected class Event_Group extends GroupToken {
 	}
 }
 
-// ( resetting ?= "resetting" ) ? name = ID
+// (resetting?="resetting")? name=ID
 protected class Event_0_Group extends GroupToken {
 	
 	public Event_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -415,7 +415,7 @@ protected class Event_0_Group extends GroupToken {
 	}
 }
 
-// ( resetting ?= "resetting" ) ?
+// (resetting?="resetting")?
 protected class Event_0_0_Assignment_resetting extends AssignmentToken  {
 	
 	public Event_0_0_Assignment_resetting(IInstanceDescription curr, AbstractToken pred) {
@@ -440,7 +440,7 @@ protected class Event_0_0_Assignment_resetting extends AssignmentToken  {
 	}
 }
 
-// name = ID
+// name=ID
 protected class Event_0_1_Assignment_name extends AssignmentToken  {
 	
 	public Event_0_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -464,7 +464,7 @@ protected class Event_0_1_Assignment_name extends AssignmentToken  {
 }
 
 
-// code = ID
+// code=ID
 protected class Event_1_Assignment_code extends AssignmentToken  {
 	
 	public Event_1_Assignment_code(IInstanceDescription curr, AbstractToken pred) {
@@ -493,12 +493,12 @@ protected class Event_1_Assignment_code extends AssignmentToken  {
 
 /************ begin Rule Command ****************
  *
- * Command : name = ID code = ID ;
+ * Command:   name=ID code=ID;
  *
  **/
 
 
-// name = ID code = ID
+// name=ID code=ID
 protected class Command_Group extends GroupToken {
 	
 	public Command_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -526,7 +526,7 @@ protected class Command_Group extends GroupToken {
 	}
 }
 
-// name = ID
+// name=ID
 protected class Command_0_Assignment_name extends AssignmentToken  {
 	
 	public Command_0_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -549,7 +549,7 @@ protected class Command_0_Assignment_name extends AssignmentToken  {
 	}
 }
 
-// code = ID
+// code=ID
 protected class Command_1_Assignment_code extends AssignmentToken  {
 	
 	public Command_1_Assignment_code(IInstanceDescription curr, AbstractToken pred) {
@@ -578,12 +578,12 @@ protected class Command_1_Assignment_code extends AssignmentToken  {
 
 /************ begin Rule State ****************
  *
- * State : "state" name = ID ( "actions" "{" ( actions += [ Command ] ) + "}" ) ? ( transitions += Transition ) * "end" ;
+ * State:   "state" name=ID ("actions" "{" (actions+=[Command])+ "}")? (transitions+=Transition)* "end";
  *
  **/
 
 
-// "state" name = ID ( "actions" "{" ( actions += [ Command ] ) + "}" ) ? ( transitions += Transition ) * "end"
+// "state" name=ID ("actions" "{" (actions+=[Command])+ "}")? (transitions+=Transition)* "end"
 protected class State_Group extends GroupToken {
 	
 	public State_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -611,7 +611,7 @@ protected class State_Group extends GroupToken {
 	}
 }
 
-// "state" name = ID ( "actions" "{" ( actions += [ Command ] ) + "}" ) ? ( transitions += Transition ) *
+// "state" name=ID ("actions" "{" (actions+=[Command])+ "}")? (transitions+=Transition)*
 protected class State_0_Group extends GroupToken {
 	
 	public State_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -639,7 +639,7 @@ protected class State_0_Group extends GroupToken {
 	}
 }
 
-// "state" name = ID ( "actions" "{" ( actions += [ Command ] ) + "}" ) ?
+// "state" name=ID ("actions" "{" (actions+=[Command])+ "}")?
 protected class State_0_0_Group extends GroupToken {
 	
 	public State_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -667,7 +667,7 @@ protected class State_0_0_Group extends GroupToken {
 	}
 }
 
-// "state" name = ID
+// "state" name=ID
 protected class State_0_0_0_Group extends GroupToken {
 	
 	public State_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -707,7 +707,7 @@ protected class State_0_0_0_0_Keyword_state extends KeywordToken  {
 	}	
 }
 
-// name = ID
+// name=ID
 protected class State_0_0_0_1_Assignment_name extends AssignmentToken  {
 	
 	public State_0_0_0_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -731,7 +731,7 @@ protected class State_0_0_0_1_Assignment_name extends AssignmentToken  {
 }
 
 
-// ( "actions" "{" ( actions += [ Command ] ) + "}" ) ?
+// ("actions" "{" (actions+=[Command])+ "}")?
 protected class State_0_0_1_Group extends GroupToken {
 	
 	public State_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -759,7 +759,7 @@ protected class State_0_0_1_Group extends GroupToken {
 	}
 }
 
-// "actions" "{" ( actions += [ Command ] ) +
+// "actions" "{" (actions+=[Command])+
 protected class State_0_0_1_0_Group extends GroupToken {
 	
 	public State_0_0_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -840,7 +840,7 @@ protected class State_0_0_1_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-// ( actions += [ Command ] ) +
+// (actions+=[Command])+
 protected class State_0_0_1_0_1_Assignment_actions extends AssignmentToken  {
 	
 	public State_0_0_1_0_1_Assignment_actions(IInstanceDescription curr, AbstractToken pred) {
@@ -881,7 +881,7 @@ protected class State_0_0_1_1_Keyword extends KeywordToken  {
 
 
 
-// ( transitions += Transition ) *
+// (transitions+=Transition)*
 protected class State_0_1_Assignment_transitions extends AssignmentToken  {
 	
 	public State_0_1_Assignment_transitions(IInstanceDescription curr, AbstractToken pred) {
@@ -931,12 +931,12 @@ protected class State_1_Keyword_end extends KeywordToken  {
 
 /************ begin Rule Transition ****************
  *
- * Transition : event = [ Event ] "=>" state = [ State ] ;
+ * Transition:   event=[Event] "=>" state=[State];
  *
  **/
 
 
-// event = [ Event ] "=>" state = [ State ]
+// event=[Event] "=>" state=[State]
 protected class Transition_Group extends GroupToken {
 	
 	public Transition_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -964,7 +964,7 @@ protected class Transition_Group extends GroupToken {
 	}
 }
 
-// event = [ Event ] "=>"
+// event=[Event] "=>"
 protected class Transition_0_Group extends GroupToken {
 	
 	public Transition_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -992,7 +992,7 @@ protected class Transition_0_Group extends GroupToken {
 	}
 }
 
-// event = [ Event ]
+// event=[Event]
 protected class Transition_0_0_Assignment_event extends AssignmentToken  {
 	
 	public Transition_0_0_Assignment_event(IInstanceDescription curr, AbstractToken pred) {
@@ -1031,7 +1031,7 @@ protected class Transition_0_1_Keyword extends KeywordToken  {
 }
 
 
-// state = [ State ]
+// state=[State]
 protected class Transition_1_Assignment_state extends AssignmentToken  {
 	
 	public Transition_1_Assignment_state(IInstanceDescription curr, AbstractToken pred) {

@@ -33,7 +33,7 @@ public class ParserTestHelper {
 	public XtextResource getResourceFromStream(InputStream in) throws IOException {
 		XtextResourceSet rs = new XtextResourceSet();
 		rs.setClasspathURIContext(getClass());
-		URI uri = URI.createURI("mytestmodel." + factory.getModelFileExtensions()[0]);
+		URI uri = URI.createURI("mytestmodel.test");
 		XtextResource resource = createResource(uri);
 		rs.getResources().add(resource);
 		resource.load(in, null);

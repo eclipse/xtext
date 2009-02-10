@@ -15,10 +15,10 @@ public class TestLanguageGrammarAccess extends BaseEPackageAccess implements IGr
 		private final Assignment cAssignmentStuff = (Assignment)rule.eContents().get(1);
 		private final RuleCall c0ParserRuleCallStuff = (RuleCall)cAssignmentStuff.eContents().get(0);
 		
-		// File : ( stuff += Stuff ) * ;
+		// File:   (stuff+=Stuff)*;
 		public ParserRule getRule() { return rule; }
 
-		// ( stuff += Stuff ) *
+		// (stuff+=Stuff)*
 		public Assignment eleAssignmentStuff() { return cAssignmentStuff; }
 
 		// Stuff
@@ -32,16 +32,16 @@ public class TestLanguageGrammarAccess extends BaseEPackageAccess implements IGr
 		private final Assignment c1AssignmentName = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall c10LexerRuleCallID = (RuleCall)c1AssignmentName.eContents().get(0);
 		
-		// Stuff : "stuff" name = ID ;
+		// Stuff:   "stuff" name=ID;
 		public ParserRule getRule() { return rule; }
 
-		// "stuff" name = ID
+		// "stuff" name=ID
 		public Group eleGroup() { return cGroup; }
 
 		// "stuff"
 		public Keyword ele0KeywordStuff() { return c0KeywordStuff; }
 
-		// name = ID
+		// name=ID
 		public Assignment ele1AssignmentName() { return c1AssignmentName; }
 
 		// ID
@@ -70,12 +70,12 @@ public class TestLanguageGrammarAccess extends BaseEPackageAccess implements IGr
 	}
 
 	
-	// File : ( stuff += Stuff ) * ;
+	// File:   (stuff+=Stuff)*;
 	public FileElements prFile() {
 		return (pFile != null) ? pFile : (pFile = new FileElements());
 	} 
 
-	// Stuff : "stuff" name = ID ;
+	// Stuff:   "stuff" name=ID;
 	public StuffElements prStuff() {
 		return (pStuff != null) ? pStuff : (pStuff = new StuffElements());
 	} 

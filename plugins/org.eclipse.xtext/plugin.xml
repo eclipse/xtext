@@ -5,7 +5,7 @@
  <copyright>
  </copyright>
 
- $Id: plugin.xml,v 1.7 2009/01/30 14:12:47 sefftinge Exp $
+ $Id: plugin.xml,v 1.8 2009/02/10 11:46:10 sefftinge Exp $
 -->
 
 <plugin>
@@ -24,18 +24,4 @@
        genModel = "model/parsetree.genmodel" /> 
   </extension>
 
-     <extension
-         point="org.eclipse.emf.ecore.extension_parser">
-      <parser
-            class="org.eclipse.xtext.services.XtextResourceFactory"
-            type="xtext">
-      </parser>
-   </extension>
-   <extension
-         point="org.eclipse.emf.ecore.extension_parser">
-      <parser
-            class="org.eclipse.xtext.services.XtextResourceFactory"
-            type="xtext2">
-      </parser>
-   </extension>
 </plugin>

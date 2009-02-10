@@ -25,12 +25,12 @@ public class LowerCaseNamedTestLanguageParseTreeConstructor extends AbstractPars
 
 /************ begin Rule Model ****************
  *
- * Model : name = ID ;
+ * Model:   name=ID;
  *
  **/
 
 
-// name = ID
+// name=ID
 protected class Model_Assignment_name extends AssignmentToken  {
 	
 	public Model_Assignment_name(IInstanceDescription curr, AbstractToken pred) {

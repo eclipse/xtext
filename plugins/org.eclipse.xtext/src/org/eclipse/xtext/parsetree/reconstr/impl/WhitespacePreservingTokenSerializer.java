@@ -24,7 +24,7 @@ import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.IAbstractToken
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class WhitespacePreservingTokenSerializer extends SimpleTokenSerializer {
+public class WhitespacePreservingTokenSerializer extends DefaultTokenSerializer {
 
 	private List<LeafNode> allLeafs = null;
 

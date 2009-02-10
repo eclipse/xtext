@@ -15,10 +15,10 @@ public class LowerCaseNamedTestLanguageGrammarAccess extends BaseEPackageAccess 
 		private final Assignment cAssignmentName = (Assignment)rule.eContents().get(1);
 		private final RuleCall c0LexerRuleCallID = (RuleCall)cAssignmentName.eContents().get(0);
 		
-		// Model : name = ID ;
+		// Model:   name=ID;
 		public ParserRule getRule() { return rule; }
 
-		// name = ID
+		// name=ID
 		public Assignment eleAssignmentName() { return cAssignmentName; }
 
 		// ID
@@ -46,7 +46,7 @@ public class LowerCaseNamedTestLanguageGrammarAccess extends BaseEPackageAccess 
 	}
 
 	
-	// Model : name = ID ;
+	// Model:   name=ID;
 	public ModelElements prModel() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	} 

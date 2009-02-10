@@ -67,6 +67,10 @@ public class XtextResource extends ResourceImpl {
 	public XtextResource(URI uri) {
 		super(uri);
 	}
+	
+	public XtextResource() {
+		super();
+	}
 
 	public IParseResult getParseResult() {
 		return parseResult;

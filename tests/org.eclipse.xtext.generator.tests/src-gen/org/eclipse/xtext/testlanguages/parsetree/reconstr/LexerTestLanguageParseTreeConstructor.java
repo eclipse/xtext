@@ -26,12 +26,12 @@ public class LexerTestLanguageParseTreeConstructor extends AbstractParseTreeCons
 
 /************ begin Rule Model ****************
  *
- * Model : ( children += Element ) * ;
+ * Model:   (children+=Element)*;
  *
  **/
 
 
-// ( children += Element ) *
+// (children+=Element)*
 protected class Model_Assignment_children extends AssignmentToken  {
 	
 	public Model_Assignment_children(IInstanceDescription curr, AbstractToken pred) {
@@ -67,12 +67,12 @@ protected class Model_Assignment_children extends AssignmentToken  {
 
 /************ begin Rule Element ****************
  *
- * Element : name = ID h = STRING ;
+ * Element:   name=ID h=STRING;
  *
  **/
 
 
-// name = ID h = STRING
+// name=ID h=STRING
 protected class Element_Group extends GroupToken {
 	
 	public Element_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -100,7 +100,7 @@ protected class Element_Group extends GroupToken {
 	}
 }
 
-// name = ID
+// name=ID
 protected class Element_0_Assignment_name extends AssignmentToken  {
 	
 	public Element_0_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -123,7 +123,7 @@ protected class Element_0_Assignment_name extends AssignmentToken  {
 	}
 }
 
-// h = STRING
+// h=STRING
 protected class Element_1_Assignment_h extends AssignmentToken  {
 	
 	public Element_1_Assignment_h(IInstanceDescription curr, AbstractToken pred) {
