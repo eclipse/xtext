@@ -180,9 +180,9 @@ public class NewXtextProjectWizardPage extends WizardPage {
 	}
 
 	private void initializeDefaultValues() {
-		String dslName = findNextValidDSLName("org.xtext.example.My", "Dsl");
-		projectText.setText("org.xtext.example.my" + dslName.toLowerCase());
-		languageNameText.setText("org.xtext.example.My" + dslName);
+		String dslName = findNextValidDSLName("org.xtext.example", "MyDsl");
+		projectText.setText("org.xtext.example." + dslName.toLowerCase());
+		languageNameText.setText("org.xtext.example." + dslName);
 		fileExtensionText.setText(dslName.toLowerCase());
 		generateGenProject.setSelection(true);
 	}
@@ -190,7 +190,7 @@ public class NewXtextProjectWizardPage extends WizardPage {
 	private String findNextValidDSLName(String prefix, String name) {
 		String candidate = name;
 		int suffix = 1;
-		while (ResourcesPlugin.getWorkspace().getRoot().getProject(prefix + "." + candidate).exists()) {
+		while (ResourcesPlugin.getWorkspace().getRoot().getProject((prefix + "." + candidate).toLowerCase()).exists()) {
 			candidate = name + suffix;
 			suffix++;
 		}
