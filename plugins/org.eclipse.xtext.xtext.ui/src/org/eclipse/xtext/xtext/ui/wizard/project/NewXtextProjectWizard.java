@@ -207,7 +207,7 @@ public class NewXtextProjectWizard extends Wizard implements INewWizard {
 							"org.eclipse.xtext.ui.core", "org.eclipse.xtext.ui.common",
 							"org.eclipse.xtext.log4j;bundle-version=\"1.2.15\"",
 							"org.eclipse.ui.editors;bundle-version=\"3.4.0\"")), null, null, 
-							xtextProjectInfo.getBasePackage() + ".ui.Activator", monitor,
+							xtextProjectInfo.getBasePackage() + ".ui.internal."+xtextProjectInfo.getLanguageNameAbbreviation()+"Activator", monitor,
 					NewXtextProjectWizard.this.getShell());
 
 			if (dslUIProject == null) {
