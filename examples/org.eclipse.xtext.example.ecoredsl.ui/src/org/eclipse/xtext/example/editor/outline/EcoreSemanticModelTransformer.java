@@ -16,11 +16,14 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.ui.common.editor.outline.impl.DefaultSemanticModelTransformer;
 import org.eclipse.xtext.ui.core.ILocationInFileProvider;
 
+import com.google.inject.Inject;
+
 /**
  * @author Peter Friese - Initial contribution and API
  */
 public class EcoreSemanticModelTransformer extends DefaultSemanticModelTransformer {
 	
+	@Inject
 	public EcoreSemanticModelTransformer(ILocationInFileProvider locationProvider, ILabelProvider labelProvider) {
 		super(locationProvider,labelProvider);
 	}
