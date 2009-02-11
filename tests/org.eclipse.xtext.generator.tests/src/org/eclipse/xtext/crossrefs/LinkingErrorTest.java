@@ -12,7 +12,7 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
@@ -23,13 +23,13 @@ import org.eclipse.xtext.tests.AbstractGeneratorTest;
 public class LinkingErrorTest extends AbstractGeneratorTest {
 
 	private static final Logger logger = Logger.getLogger(CrossRefTest.class);
-	
+
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		with(LangATestLanguageStandaloneSetup.class);
 	}
-	
+
 	public void testNoErrors() throws Exception {
 		XtextResource resource = getResourceFromString(" type A extends B \n type B extends A");
 		EObject model = getModel(resource);
@@ -38,7 +38,7 @@ public class LinkingErrorTest extends AbstractGeneratorTest {
 		assertEquals(0, resource.getErrors().size());
 		assertEquals(0, resource.getWarnings().size());
 	}
-	
+
 	public void testLinkError() throws Exception {
 		XtextResource resource = getResourceFromString(" type A extends B \n type B extends C");
 		EObject model = getModel(resource);
@@ -46,15 +46,14 @@ public class LinkingErrorTest extends AbstractGeneratorTest {
 		assertWithXtend("2", "types.size", model);
 		assertEquals(1, resource.getErrors().size());
 		assertEquals(0, resource.getWarnings().size());
-		
+
 		Diagnostic error = (Diagnostic) resource.getErrors().get(0);
 		assertEquals(2, error.getLine());
-		assertTrue(error instanceof Diagnostic);
-		Diagnostic verboseError = (Diagnostic)error;
+		Diagnostic verboseError = error;
 		assertEquals(35, verboseError.getOffset());
 		assertEquals(1, verboseError.getLength());
 	}
-	
+
 	private int getTreeIteratorContentSize(TreeIterator<Object> iterator) {
 		int result = 0;
 		while(iterator.hasNext()) {
@@ -64,22 +63,22 @@ public class LinkingErrorTest extends AbstractGeneratorTest {
 		}
 		return result;
 	}
-	
+
 	private int getContentSize(EObject model) {
 		Resource resource = model.eResource();
 		assertNotNull(resource);
 		ResourceSet resourceSet = resource.getResourceSet();
 		assertNotNull(resourceSet);
-		TreeIterator<Object> iterator = EcoreUtil2.getAllProperContents(resourceSet, true);
+		TreeIterator<Object> iterator = EcoreUtil.getAllProperContents(resourceSet, true);
 		return getTreeIteratorContentSize(iterator);
 	}
-	
+
 	public void testReparse() throws Exception {
 		String modelText = " type A extends B \n type B extends C";
 		XtextResource resource = getResourceFromString(modelText);
 		EObject model = getModel(resource);
 		logger.debug(invokeWithXtend("types.collect(e|e.name+'->'+e.extends.name).toString(',')", model));
-		
+
 		assertWithXtend("2", "types.size", model);
 		assertEquals(4, getContentSize(model));
 
