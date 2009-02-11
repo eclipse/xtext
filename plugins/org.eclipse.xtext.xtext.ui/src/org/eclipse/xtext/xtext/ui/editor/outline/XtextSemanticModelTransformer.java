@@ -29,11 +29,14 @@ import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.XtextSwitch;
 import org.eclipse.xtext.xtext.ui.Activator;
 
+import com.google.inject.Inject;
+
 /**
  * @author Peter Friese - Initial contribution and API
  */
 public class XtextSemanticModelTransformer extends DefaultSemanticModelTransformer {
 
+	@Inject
 	public XtextSemanticModelTransformer(ILocationInFileProvider locationProvider, ILabelProvider labelProvider) {
 		super(locationProvider, labelProvider);
 	}
