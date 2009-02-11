@@ -52,10 +52,10 @@ import com.google.inject.Module;
  */
 public abstract class AbstractXtextTests extends TestCase {
 	
-	private Injector injector;
+	protected Injector injector;
 
 	static {
-		new XtextBuiltinStandaloneSetup().doSetup();
+		XtextBuiltinStandaloneSetup.doSetup();
 	}
 	
 	protected String serialize(EObject obj) {

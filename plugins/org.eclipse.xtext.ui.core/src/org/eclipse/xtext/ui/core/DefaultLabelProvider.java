@@ -9,11 +9,12 @@ import org.eclipse.jface.viewers.LabelProvider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- *
+ * @author Peter Friese - Implementation
  */
 public class DefaultLabelProvider extends LabelProvider implements org.eclipse.jface.viewers.ILabelProvider {
 	
-	public String getLabel(Object object) {
+	@Override
+	public String getText(Object object) {
 		if (object != null) {
 			EObject eObject = (EObject) object;
 			EClass eClass = eObject.eClass();
