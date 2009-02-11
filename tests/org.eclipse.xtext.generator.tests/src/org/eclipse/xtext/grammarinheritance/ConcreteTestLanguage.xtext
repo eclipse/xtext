@@ -2,12 +2,10 @@ language org.eclipse.xtext.grammarinheritance.ConcreteTestLanguage extends org.e
 
 generate foo "http://holla"
 
-//import "classpath:/org/eclipse/xtext/grammarinheritance/ametamodel.ecore" as mm
-
+import "classpath:/org/eclipse/xtext/grammarinheritance/ametamodel.ecore" as mm
 
 RootRule:
-//	ConcreteParserRule | CallOverridenParserRule | CallExtendedParserRule;
-	ConcreteParserRule;
+	ConcreteParserRule | CallOverridenParserRule | CallExtendedParserRule;
 
 // call InheritedParserRule
 ConcreteParserRule :
@@ -16,19 +14,13 @@ ConcreteParserRule :
 
 
 // override OverridableParserRule and call it
-
-/* TODO: make me work! (see https://bugs.eclipse.org/bugs/show_bug.cgi?id=263651)
 OverridableParserRule returns mm::AType:
 	'overriddenelement' name=ID;
 	
 CallOverridenParserRule:
 	call=AbstractCallOverridenParserRule;
-*/
-
 	
 // override and extend ExtendableParserRule and call it
-
-/* TODO: make me work! (see https://bugs.eclipse.org/bugs/show_bug.cgi?id=263651)
 ExtendableParserRule returns mm::AType:
 	Subrule1 | Subrule2 | Subrule3;
 	
@@ -43,4 +35,3 @@ Subrule3:
 	
 CallExtendedParserRule:
 	call=AbstractCallExtendedParserRule;
-*/
