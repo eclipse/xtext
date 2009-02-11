@@ -16,9 +16,12 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.FeatureMap;
+import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
 import org.eclipse.xtext.ui.common.editor.outline.ISemanticModelTransformer;
+
+import com.google.inject.Inject;
 
 /**
  * @author Peter Friese - Initial contribution and API
@@ -81,42 +84,12 @@ public abstract class AbstractSemanticModelTransformer implements ISemanticModel
 	protected abstract boolean consumeSemanticChildNodes(EObject semanticNode);
 
 	protected abstract boolean consumeSemanticNode(EObject semanticNode);
+	
+	@Inject
+	protected ILabelProvider labelProvider;
 
 	public String getText(EObject object) {
-		if (object != null) {
-			EObject eObject = (EObject) object;
-			EClass eClass = eObject.eClass();
-
-			EStructuralFeature feature = getLabelFeature(eClass);
-			if (feature != null) {
-				Object value = eObject.eGet(feature);
-				if (value != null) {
-					return value.toString();
-				}
-			}
-			return (object.getClass().getName());
-		}
-		return "<unknown>";
-	}
-
-	protected EStructuralFeature getLabelFeature(EClass eClass) {
-		EAttribute result = null;
-		for (EAttribute eAttribute : eClass.getEAllAttributes()) {
-			if (!eAttribute.isMany() && eAttribute.getEType().getInstanceClass() != FeatureMap.Entry.class) {
-				if ("name".equalsIgnoreCase(eAttribute.getName())) {
-					result = eAttribute;
-					break;
-				}
-				else if (result == null) {
-					result = eAttribute;
-				}
-				else if (eAttribute.getEAttributeType().getInstanceClass() == String.class
-						&& result.getEAttributeType().getInstanceClass() != String.class) {
-					result = eAttribute;
-				}
-			}
-		}
-		return result;
+		return labelProvider.getText(object);
 	}
 
 	public Image getImage(EObject object) {
