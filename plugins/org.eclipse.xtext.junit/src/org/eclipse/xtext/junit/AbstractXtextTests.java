@@ -52,7 +52,7 @@ import com.google.inject.Module;
  */
 public abstract class AbstractXtextTests extends TestCase {
 	
-	protected Injector injector;
+	private Injector injector;
 
 	static {
 		XtextBuiltinStandaloneSetup.doSetup();

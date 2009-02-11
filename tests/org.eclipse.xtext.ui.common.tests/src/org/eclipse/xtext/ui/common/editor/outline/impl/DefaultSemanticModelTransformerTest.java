@@ -34,7 +34,7 @@ public class DefaultSemanticModelTransformerTest extends AbstractXtextTests {
 	}
 	
 	protected ISemanticModelTransformer getSemanticModelTransformer() {
-		return injector.getInstance(ISemanticModelTransformer.class);
+		return get(ISemanticModelTransformer.class);
 	}
 	
 	public void testNullSafety() {
