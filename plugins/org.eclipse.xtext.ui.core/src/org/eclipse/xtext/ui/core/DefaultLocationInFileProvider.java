@@ -25,7 +25,6 @@ import org.eclipse.xtext.parsetree.NodeUtil;
 /**
  * @author Peter Friese - Implementation
  * @author Sven Efftinge - Initial contribution and API
- *
  */
 public class DefaultLocationInFileProvider implements ILocationInFileProvider {
 
