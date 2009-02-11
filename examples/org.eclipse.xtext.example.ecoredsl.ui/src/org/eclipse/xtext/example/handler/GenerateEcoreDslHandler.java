@@ -8,7 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.example.handler;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.eclipse.core.commands.AbstractHandler;
@@ -16,7 +15,6 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.expressions.EvaluationContext;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -55,13 +53,9 @@ public class GenerateEcoreDslHandler extends AbstractHandler {
 			poResource.save(null);
 			ecoreFile.getParent().refreshLocal(1, new NullProgressMonitor());
 		}
-		catch (IOException e) {
+		catch (Exception e) {
 			e.printStackTrace();
 		}
-		catch (CoreException e) {
-			e.printStackTrace();
-		}
-
 		return null;
 	}
 
