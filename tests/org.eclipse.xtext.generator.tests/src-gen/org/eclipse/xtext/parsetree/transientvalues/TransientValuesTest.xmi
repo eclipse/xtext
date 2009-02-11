@@ -1,78 +1,109 @@
 <?xml version="1.0" encoding="ASCII"?>
-<xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:xtext="http://www.eclipse.org/2008/Xtext" name="org.eclipse.xtext.parsetree.transientvalues.TransientValuesTest">
-  <superGrammar href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#/"/>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="transientvaluestest">
-    <ePackage href="http://simple/transientvaluestest#/"/>
-  </metamodelDeclarations>
-  <rules xsi:type="xtext:ParserRule" name="Root">
-    <type metamodel="//@metamodelDeclarations.0">
-      <type xsi:type="ecore:EClass" href="http://simple/transientvaluestest#//Root"/>
-    </type>
-    <alternatives xsi:type="xtext:Group">
-      <abstractTokens xsi:type="xtext:Keyword" value="test"/>
-      <abstractTokens xsi:type="xtext:Alternatives">
-        <groups xsi:type="xtext:Alternatives">
-          <groups xsi:type="xtext:RuleCall" rule="//@rules.1"/>
-          <groups xsi:type="xtext:RuleCall" rule="//@rules.2"/>
-        </groups>
-        <groups xsi:type="xtext:RuleCall" rule="//@rules.3"/>
-      </abstractTokens>
-    </alternatives>
-  </rules>
-  <rules xsi:type="xtext:ParserRule" name="TestRequired">
-    <type metamodel="//@metamodelDeclarations.0">
-      <type xsi:type="ecore:EClass" href="http://simple/transientvaluestest#//TestRequired"/>
-    </type>
-    <alternatives xsi:type="xtext:Group">
-      <abstractTokens xsi:type="xtext:Group">
-        <abstractTokens xsi:type="xtext:Keyword" value="required"/>
-        <abstractTokens xsi:type="xtext:Assignment" feature="required1" operator="=">
-          <terminal xsi:type="xtext:RuleCall">
-            <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.1"/>
-          </terminal>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
+  <xtext:Grammar name="org.eclipse.xtext.parsetree.transientvalues.TransientValuesTest" superGrammar="/1">
+    <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="transientvaluestest">
+      <ePackage href="http://simple/transientvaluestest#/"/>
+    </metamodelDeclarations>
+    <rules xsi:type="xtext:ParserRule" name="Root">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EClass" href="http://simple/transientvaluestest#//Root"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Keyword" value="test"/>
+        <abstractTokens xsi:type="xtext:Alternatives">
+          <groups xsi:type="xtext:Alternatives">
+            <groups xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+            <groups xsi:type="xtext:RuleCall" rule="/0/@rules.2"/>
+          </groups>
+          <groups xsi:type="xtext:RuleCall" rule="/0/@rules.3"/>
         </abstractTokens>
-      </abstractTokens>
-      <abstractTokens xsi:type="xtext:Assignment" feature="required2" operator="=">
-        <terminal xsi:type="xtext:RuleCall">
-          <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.1"/>
-        </terminal>
-      </abstractTokens>
-    </alternatives>
-  </rules>
-  <rules xsi:type="xtext:ParserRule" name="TestOptional">
-    <type metamodel="//@metamodelDeclarations.0">
-      <type xsi:type="ecore:EClass" href="http://simple/transientvaluestest#//TestOptional"/>
-    </type>
-    <alternatives xsi:type="xtext:Group">
-      <abstractTokens xsi:type="xtext:Group">
-        <abstractTokens xsi:type="xtext:Keyword" value="optional"/>
-        <abstractTokens xsi:type="xtext:Assignment" cardinality="?" feature="opt1" operator="=">
-          <terminal xsi:type="xtext:RuleCall">
-            <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.1"/>
-          </terminal>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="TestRequired">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EClass" href="http://simple/transientvaluestest#//TestRequired"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Keyword" value="required"/>
+          <abstractTokens xsi:type="xtext:Assignment" feature="required1" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
+          </abstractTokens>
         </abstractTokens>
-      </abstractTokens>
-      <abstractTokens xsi:type="xtext:Group" cardinality="?">
-        <abstractTokens xsi:type="xtext:Keyword" value=":"/>
-        <abstractTokens xsi:type="xtext:Assignment" feature="opt2" operator="=">
-          <terminal xsi:type="xtext:RuleCall">
-            <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.1"/>
-          </terminal>
+        <abstractTokens xsi:type="xtext:Assignment" feature="required2" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
         </abstractTokens>
-      </abstractTokens>
-    </alternatives>
-  </rules>
-  <rules xsi:type="xtext:ParserRule" name="TestList">
-    <type metamodel="//@metamodelDeclarations.0">
-      <type xsi:type="ecore:EClass" href="http://simple/transientvaluestest#//TestList"/>
-    </type>
-    <alternatives xsi:type="xtext:Group">
-      <abstractTokens xsi:type="xtext:Keyword" value="list"/>
-      <abstractTokens xsi:type="xtext:Assignment" cardinality="*" feature="item" operator="+=">
-        <terminal xsi:type="xtext:RuleCall">
-          <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.1"/>
-        </terminal>
-      </abstractTokens>
-    </alternatives>
-  </rules>
-</xtext:Grammar>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="TestOptional">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EClass" href="http://simple/transientvaluestest#//TestOptional"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Keyword" value="optional"/>
+          <abstractTokens xsi:type="xtext:Assignment" cardinality="?" feature="opt1" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
+          </abstractTokens>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Group" cardinality="?">
+          <abstractTokens xsi:type="xtext:Keyword" value=":"/>
+          <abstractTokens xsi:type="xtext:Assignment" feature="opt2" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
+          </abstractTokens>
+        </abstractTokens>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="TestList">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EClass" href="http://simple/transientvaluestest#//TestList"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Keyword" value="list"/>
+        <abstractTokens xsi:type="xtext:Assignment" cardinality="*" feature="item" operator="+=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
+        </abstractTokens>
+      </alternatives>
+    </rules>
+  </xtext:Grammar>
+  <xtext:Grammar abstract="true" name="org.eclipse.xtext.builtin.XtextBuiltin" definesHiddenTokens="true" hiddenTokens="/1/@rules.5 /1/@rules.3 /1/@rules.4">
+    <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="ecore">
+      <ePackage href="http://www.eclipse.org/emf/2002/Ecore#/"/>
+    </metamodelDeclarations>
+    <rules xsi:type="xtext:LexerRule" name="ID" body="('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+    </rules>
+    <rules xsi:type="xtext:LexerRule" name="INT" body="('0'..'9')+">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      </type>
+    </rules>
+    <rules xsi:type="xtext:LexerRule" name="STRING" body="&#xA;&#x9;&#x9;&#x9;  '&quot;' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\&quot;'|'\''|'\\') | ~('\\'|'&quot;') )* '&quot;' | &#xA;              '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\&quot;'|'\''|'\\') | ~('\\'|'\'') )* '\''&#xA;              ">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+    </rules>
+    <rules xsi:type="xtext:LexerRule" name="ML_COMMENT" body="'/*' ( options {greedy=false;} : . )* '*/'">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+    </rules>
+    <rules xsi:type="xtext:LexerRule" name="SL_COMMENT" body="'//' ~('\n'|'\r')* ('\r'? '\n')?">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+    </rules>
+    <rules xsi:type="xtext:LexerRule" name="WS" body="(' '|'\t'|'\r'|'\n')+">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+    </rules>
+    <rules xsi:type="xtext:LexerRule" name="ANY_OTHER" body=".">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+    </rules>
+  </xtext:Grammar>
+</xmi:XMI>

@@ -9,6 +9,8 @@ package org.eclipse.xtext.xtext;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -16,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Grammar;
@@ -89,19 +92,24 @@ public class XtextScopeProvider extends DefaultScopeProvider {
 		if (AbstractMetamodelDeclaration.class.isAssignableFrom(type.getInstanceClass()))
 			return new XtextMetamodelReferenceScope(resource, type);
 		
-		if (resource.getContents().size() != 1)
+		if (resource.getContents().size() < 1)
 			throw new IllegalArgumentException("resource is not as expected: contents.size == "
-					+ resource.getContents().size() + " but expected: 1");
+					+ resource.getContents().size() + " but expected: >= 1");
 		final EObject firstContent = resource.getContents().get(0);
 		if (!(firstContent instanceof Grammar))
 			throw new IllegalArgumentException("resource does not contain a grammar, but: " + firstContent);
 		return createScope((Grammar) firstContent, type);
 	}
 
-	protected IScope createScope(Grammar grammar, EClass type) {
+	protected IScope createScope(final Grammar grammar, EClass type) {
 		Grammar superGrammar = grammar.getSuperGrammar();
 		final IScope parent = superGrammar != null ? createScope(superGrammar, type): IScope.NULLSCOPE;
-		return new SimpleCachingScope(parent, grammar.eResource(), type);
+		return new SimpleCachingScope(parent, grammar.eResource(), type) {
+			@Override
+			protected Iterator<EObject> getRelevantContent(Resource resource) {
+				return CollectionUtils.join(Collections.singleton(grammar).iterator(), EcoreUtil.<EObject>getAllContents(grammar, true)).iterator();
+			}
+		};
 	}
-
+	
 }

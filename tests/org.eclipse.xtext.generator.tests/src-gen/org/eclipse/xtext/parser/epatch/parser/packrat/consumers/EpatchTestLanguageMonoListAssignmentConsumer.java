@@ -6,6 +6,7 @@ package org.eclipse.xtext.parser.epatch.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -21,8 +22,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer
 @SuppressWarnings("unused")
 public final class EpatchTestLanguageMonoListAssignmentConsumer extends NonTerminalConsumer {
 
-	private EpatchTestLanguageAssignmentValueConsumer assignmentValueConsumer;
-	private XtextBuiltinIDConsumer idConsumer;
+	private INonTerminalConsumer assignmentValueConsumer;
+	private ITerminalConsumer idConsumer;
 
 	private ICharacterClass keyword$8$Delimiter;
 	
@@ -265,6 +266,7 @@ public final class EpatchTestLanguageMonoListAssignmentConsumer extends NonTermi
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prMonoListAssignment();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -274,11 +276,11 @@ public final class EpatchTestLanguageMonoListAssignmentConsumer extends NonTermi
 		return "ListAssignment";
 	}
 	
-	public void setAssignmentValueConsumer(EpatchTestLanguageAssignmentValueConsumer assignmentValueConsumer) {
+	public void setAssignmentValueConsumer(INonTerminalConsumer assignmentValueConsumer) {
 		this.assignmentValueConsumer = assignmentValueConsumer;
 	}
 	
-	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
+	public void setIdConsumer(ITerminalConsumer idConsumer) {
 		this.idConsumer = idConsumer;
 	}
 	

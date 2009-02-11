@@ -9,6 +9,8 @@
 package org.eclipse.xtext.grammarinheritance;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 public class InheritanceTest extends AbstractGeneratorTest {
@@ -16,6 +18,15 @@ public class InheritanceTest extends AbstractGeneratorTest {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
+		if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/xtext/tests/grammarinheritance")) {
+			EPackage aMetamodel = EcoreUtil2.loadEPackage(
+					"classpath:/org/eclipse/xtext/grammarinheritance/ametamodel.ecore",
+					InheritanceTest.class.getClassLoader());
+			if (aMetamodel == null)
+				throw new IllegalStateException(
+						"Couldn't load EPackage from 'classpath:/org/eclipse/xtext/grammarinheritance/ametamodel.ecore'");
+			EPackage.Registry.INSTANCE.put("http://www.eclipse.org/xtext/tests/grammarinheritance", aMetamodel);
+		}
 		with(new ConcreteTestLanguageRuntimeModule());
 	}
 

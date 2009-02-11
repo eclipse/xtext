@@ -6,6 +6,7 @@ package org.eclipse.xtext.parser.epatch.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -24,11 +25,11 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGCons
 @SuppressWarnings("unused")
 public final class EpatchTestLanguageSingleAssignmentValueConsumer extends NonTerminalConsumer {
 
-	private EpatchTestLanguageCreatedObjectConsumer createdObjectConsumer;
-	private EpatchTestLanguageFRAGMENTConsumer fragmentConsumer;
-	private XtextBuiltinIDConsumer idConsumer;
-	private XtextBuiltinINTConsumer intConsumer;
-	private XtextBuiltinSTRINGConsumer stringConsumer;
+	private INonTerminalConsumer createdObjectConsumer;
+	private ITerminalConsumer fragmentConsumer;
+	private ITerminalConsumer idConsumer;
+	private ITerminalConsumer intConsumer;
+	private ITerminalConsumer stringConsumer;
 
 	private ISequenceMatcher crossReference$11$Delimiter;
 	
@@ -393,6 +394,7 @@ public final class EpatchTestLanguageSingleAssignmentValueConsumer extends NonTe
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prSingleAssignmentValue();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -402,23 +404,23 @@ public final class EpatchTestLanguageSingleAssignmentValueConsumer extends NonTe
 		return "AssignmentValue";
 	}
 	
-	public void setCreatedObjectConsumer(EpatchTestLanguageCreatedObjectConsumer createdObjectConsumer) {
+	public void setCreatedObjectConsumer(INonTerminalConsumer createdObjectConsumer) {
 		this.createdObjectConsumer = createdObjectConsumer;
 	}
 	
-	public void setFragmentConsumer(EpatchTestLanguageFRAGMENTConsumer fragmentConsumer) {
+	public void setFragmentConsumer(ITerminalConsumer fragmentConsumer) {
 		this.fragmentConsumer = fragmentConsumer;
 	}
 	
-	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
+	public void setIdConsumer(ITerminalConsumer idConsumer) {
 		this.idConsumer = idConsumer;
 	}
 	
-	public void setIntConsumer(XtextBuiltinINTConsumer intConsumer) {
+	public void setIntConsumer(ITerminalConsumer intConsumer) {
 		this.intConsumer = intConsumer;
 	}
 	
-	public void setStringConsumer(XtextBuiltinSTRINGConsumer stringConsumer) {
+	public void setStringConsumer(ITerminalConsumer stringConsumer) {
 		this.stringConsumer = stringConsumer;
 	}
 	

@@ -6,6 +6,7 @@ package org.eclipse.xtext.testlanguages.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -20,7 +21,7 @@ import org.eclipse.xtext.testlanguages.parser.packrat.consumers.SimpleExpression
 @SuppressWarnings("unused")
 public final class SimpleExpressionsTestLanguageSequenceConsumer extends NonTerminalConsumer {
 
-	private SimpleExpressionsTestLanguageAdditionConsumer additionConsumer;
+	private INonTerminalConsumer additionConsumer;
 
 	public SimpleExpressionsTestLanguageSequenceConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
@@ -128,6 +129,7 @@ public final class SimpleExpressionsTestLanguageSequenceConsumer extends NonTerm
 		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prSequence();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -137,7 +139,7 @@ public final class SimpleExpressionsTestLanguageSequenceConsumer extends NonTerm
 		return "Sequence";
 	}
 	
-	public void setAdditionConsumer(SimpleExpressionsTestLanguageAdditionConsumer additionConsumer) {
+	public void setAdditionConsumer(INonTerminalConsumer additionConsumer) {
 		this.additionConsumer = additionConsumer;
 	}
 	

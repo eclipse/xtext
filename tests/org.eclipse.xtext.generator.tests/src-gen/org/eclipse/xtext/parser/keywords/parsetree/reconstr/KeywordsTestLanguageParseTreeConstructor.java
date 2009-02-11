@@ -40,7 +40,8 @@ protected class Model_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return KeywordsTestLanguageGrammarAccess.INSTANCE.prModel().eleAlternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new Model_1_Assignment_forth(current, this) : new Model_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -61,7 +62,8 @@ protected class Model_0_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return KeywordsTestLanguageGrammarAccess.INSTANCE.prModel().ele0Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new Model_0_1_Assignment_third(current, this) : new Model_0_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -82,7 +84,8 @@ protected class Model_0_0_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return KeywordsTestLanguageGrammarAccess.INSTANCE.prModel().ele00Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new Model_0_0_1_Assignment_second(current, this) : new Model_0_0_0_Assignment_first(current, this);
 		Solution s = t.firstSolution();
@@ -104,6 +107,7 @@ protected class Model_0_0_0_Assignment_first extends AssignmentToken  {
 		return KeywordsTestLanguageGrammarAccess.INSTANCE.prModel().ele000AssignmentFirst();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("first",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("first");
@@ -129,6 +133,7 @@ protected class Model_0_0_1_Assignment_second extends AssignmentToken  {
 		return KeywordsTestLanguageGrammarAccess.INSTANCE.prModel().ele001AssignmentSecond();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("second",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("second");
@@ -155,6 +160,7 @@ protected class Model_0_1_Assignment_third extends AssignmentToken  {
 		return KeywordsTestLanguageGrammarAccess.INSTANCE.prModel().ele01AssignmentThird();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("third",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("third");
@@ -181,6 +187,7 @@ protected class Model_1_Assignment_forth extends AssignmentToken  {
 		return KeywordsTestLanguageGrammarAccess.INSTANCE.prModel().ele1AssignmentForth();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("forth",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("forth");

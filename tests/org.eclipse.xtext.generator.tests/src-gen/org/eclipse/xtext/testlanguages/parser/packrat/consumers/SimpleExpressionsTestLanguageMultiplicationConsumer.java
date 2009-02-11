@@ -6,6 +6,7 @@ package org.eclipse.xtext.testlanguages.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -20,7 +21,7 @@ import org.eclipse.xtext.testlanguages.parser.packrat.consumers.SimpleExpression
 @SuppressWarnings("unused")
 public final class SimpleExpressionsTestLanguageMultiplicationConsumer extends NonTerminalConsumer {
 
-	private SimpleExpressionsTestLanguageTermConsumer termConsumer;
+	private INonTerminalConsumer termConsumer;
 
 	private ICharacterClass keyword$9$Delimiter;
 	
@@ -168,6 +169,7 @@ public final class SimpleExpressionsTestLanguageMultiplicationConsumer extends N
 		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prMultiplication();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -177,7 +179,7 @@ public final class SimpleExpressionsTestLanguageMultiplicationConsumer extends N
 		return "Expression";
 	}
 	
-	public void setTermConsumer(SimpleExpressionsTestLanguageTermConsumer termConsumer) {
+	public void setTermConsumer(INonTerminalConsumer termConsumer) {
 		this.termConsumer = termConsumer;
 	}
 	

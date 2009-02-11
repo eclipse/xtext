@@ -45,6 +45,7 @@ protected class Start_Group extends GroupToken {
 		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prStart().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Start_1_Keyword_end(current, this).firstSolution();
 		while(s1 != null) {
@@ -73,6 +74,7 @@ protected class Start_0_Group extends GroupToken {
 		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prStart().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Start_0_1_Assignment_rules(current, this).firstSolution();
 		while(s1 != null) {
@@ -113,6 +115,7 @@ protected class Start_0_1_Assignment_rules extends AssignmentToken  {
 		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prStart().ele01AssignmentRules();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("rules",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("rules");
@@ -167,7 +170,8 @@ protected class AbstractRule_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prAbstractRule().eleAlternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new AbstractRule_1_RuleCall_SecondAbstractRuleChild(current, this) : new AbstractRule_0_RuleCall_FirstAbstractRuleChild(current, this);
 		Solution s = t.firstSolution();
@@ -189,6 +193,7 @@ protected class AbstractRule_0_RuleCall_FirstAbstractRuleChild extends RuleCallT
 		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prAbstractRule().ele0ParserRuleCallFirstAbstractRuleChild();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(FirstAbstractRuleChild_Group.class, current)) return null;
 		if(!current.isInstanceOf("FirstAbstractRuleChild")) return null;
@@ -207,6 +212,7 @@ protected class AbstractRule_1_RuleCall_SecondAbstractRuleChild extends RuleCall
 		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prAbstractRule().ele1ParserRuleCallSecondAbstractRuleChild();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(SecondAbstractRuleChild_Group.class, current)) return null;
 		if(!current.isInstanceOf("SecondAbstractRuleChild")) return null;
@@ -236,6 +242,7 @@ protected class FirstAbstractRuleChild_Group extends GroupToken {
 		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prFirstAbstractRuleChild().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new FirstAbstractRuleChild_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -264,6 +271,7 @@ protected class FirstAbstractRuleChild_0_Group extends GroupToken {
 		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prFirstAbstractRuleChild().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new FirstAbstractRuleChild_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -292,6 +300,7 @@ protected class FirstAbstractRuleChild_0_0_Group extends GroupToken {
 		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prFirstAbstractRuleChild().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new FirstAbstractRuleChild_0_0_1_Assignment_elements(current, this).firstSolution();
 		while(s1 != null) {
@@ -320,6 +329,7 @@ protected class FirstAbstractRuleChild_0_0_0_Group extends GroupToken {
 		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prFirstAbstractRuleChild().ele000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new FirstAbstractRuleChild_0_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -348,6 +358,7 @@ protected class FirstAbstractRuleChild_0_0_0_0_Assignment_name extends Assignmen
 		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prFirstAbstractRuleChild().ele0000AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -384,6 +395,7 @@ protected class FirstAbstractRuleChild_0_0_1_Assignment_elements extends Assignm
 		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prFirstAbstractRuleChild().ele001AssignmentElements();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("elements",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("elements");
@@ -452,6 +464,7 @@ protected class SecondAbstractRuleChild_Group extends GroupToken {
 		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prSecondAbstractRuleChild().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new SecondAbstractRuleChild_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -480,6 +493,7 @@ protected class SecondAbstractRuleChild_0_Group extends GroupToken {
 		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prSecondAbstractRuleChild().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new SecondAbstractRuleChild_0_1_Assignment_rule(current, this).firstSolution();
 		while(s1 != null) {
@@ -508,6 +522,7 @@ protected class SecondAbstractRuleChild_0_0_Group extends GroupToken {
 		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prSecondAbstractRuleChild().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new SecondAbstractRuleChild_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -536,6 +551,7 @@ protected class SecondAbstractRuleChild_0_0_0_Group extends GroupToken {
 		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prSecondAbstractRuleChild().ele000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new SecondAbstractRuleChild_0_0_0_1_Keyword_rule(current, this).firstSolution();
 		while(s1 != null) {
@@ -564,6 +580,7 @@ protected class SecondAbstractRuleChild_0_0_0_0_Assignment_name extends Assignme
 		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prSecondAbstractRuleChild().ele0000AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -613,6 +630,7 @@ protected class SecondAbstractRuleChild_0_1_Assignment_rule extends AssignmentTo
 		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prSecondAbstractRuleChild().ele01AssignmentRule();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("rule",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("rule");
@@ -668,6 +686,7 @@ protected class AbstractRuleCall_Assignment_rule extends AssignmentToken  {
 		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prAbstractRuleCall().eleAssignmentRule();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("rule",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("rule");

@@ -66,7 +66,7 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 
 // Entry rule entryRuleRef2
 entryRuleRef2 returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/valueconverter/Bug250313.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/valueconverter/Bug250313.xmi#/0/@rules.0" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleRef2=ruleRef2 
 	 { $current=$iv_ruleRef2.current; } 
 	 EOF 
@@ -80,23 +80,23 @@ ruleRef2 returns [EObject current=null]
     }:
 ('#2' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/valueconverter/Bug250313.xmi#//@rules.0/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/valueconverter/Bug250313.xmi#/0/@rules.0/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 (	
 	
 	    lv_ref2=(('mykeyword1' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/valueconverter/Bug250313.xmi#//@rules.0/@alternatives/@abstractTokens.1/@terminal/@groups.0/@groups.0" /* xtext::Keyword */, "ref2"); 
+        createLeafNode("classpath:/org/eclipse/xtext/valueconverter/Bug250313.xmi#/0/@rules.0/@alternatives/@abstractTokens.1/@terminal/@groups.0/@groups.0" /* xtext::Keyword */, "ref2"); 
     }
 
     |RULE_STRING
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/valueconverter/Bug250313.xmi#//@rules.0/@alternatives/@abstractTokens.1/@terminal/@groups.0/@groups.1" /* xtext::RuleCall */, "ref2"); 
+    createLeafNode("classpath:/org/eclipse/xtext/valueconverter/Bug250313.xmi#/0/@rules.0/@alternatives/@abstractTokens.1/@terminal/@groups.0/@groups.1" /* xtext::RuleCall */, "ref2"); 
     }
 )
     |RULE_ID
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/valueconverter/Bug250313.xmi#//@rules.0/@alternatives/@abstractTokens.1/@terminal/@groups.1" /* xtext::RuleCall */, "ref2"); 
+    createLeafNode("classpath:/org/eclipse/xtext/valueconverter/Bug250313.xmi#/0/@rules.0/@alternatives/@abstractTokens.1/@terminal/@groups.1" /* xtext::RuleCall */, "ref2"); 
     }
 ) 
 	    {

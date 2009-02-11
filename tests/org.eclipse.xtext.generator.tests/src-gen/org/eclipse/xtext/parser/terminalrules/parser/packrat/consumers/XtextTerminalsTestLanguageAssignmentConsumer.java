@@ -6,6 +6,7 @@ package org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -21,8 +22,8 @@ import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerm
 @SuppressWarnings("unused")
 public final class XtextTerminalsTestLanguageAssignmentConsumer extends NonTerminalConsumer {
 
-	private XtextTerminalsTestLanguageAbstractTerminalConsumer abstractTerminalConsumer;
-	private XtextTerminalsTestLanguageIDConsumer idConsumer;
+	private INonTerminalConsumer abstractTerminalConsumer;
+	private ITerminalConsumer idConsumer;
 
 	private ICharacterClass keyword$8$Delimiter;
 	
@@ -153,6 +154,7 @@ public final class XtextTerminalsTestLanguageAssignmentConsumer extends NonTermi
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAssignment();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -162,11 +164,11 @@ public final class XtextTerminalsTestLanguageAssignmentConsumer extends NonTermi
 		return "Assignment";
 	}
 	
-	public void setAbstractTerminalConsumer(XtextTerminalsTestLanguageAbstractTerminalConsumer abstractTerminalConsumer) {
+	public void setAbstractTerminalConsumer(INonTerminalConsumer abstractTerminalConsumer) {
 		this.abstractTerminalConsumer = abstractTerminalConsumer;
 	}
 	
-	public void setIdConsumer(XtextTerminalsTestLanguageIDConsumer idConsumer) {
+	public void setIdConsumer(ITerminalConsumer idConsumer) {
 		this.idConsumer = idConsumer;
 	}
 	

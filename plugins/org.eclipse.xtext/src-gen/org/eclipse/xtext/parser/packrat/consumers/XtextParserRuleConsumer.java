@@ -6,6 +6,7 @@ package org.eclipse.xtext.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -22,9 +23,9 @@ import org.eclipse.xtext.parser.packrat.consumers.XtextTypeRefConsumer;
 @SuppressWarnings("unused")
 public final class XtextParserRuleConsumer extends NonTerminalConsumer {
 
-	private XtextAlternativesConsumer alternativesConsumer;
-	private XtextBuiltinIDConsumer idConsumer;
-	private XtextTypeRefConsumer typeRefConsumer;
+	private INonTerminalConsumer alternativesConsumer;
+	private ITerminalConsumer idConsumer;
+	private INonTerminalConsumer typeRefConsumer;
 
 	private ISequenceMatcher crossReference$20$Delimiter;
 	
@@ -425,6 +426,7 @@ public final class XtextParserRuleConsumer extends NonTerminalConsumer {
 		return XtextGrammarAccess.INSTANCE.prParserRule();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -434,15 +436,15 @@ public final class XtextParserRuleConsumer extends NonTerminalConsumer {
 		return "ParserRule";
 	}
 	
-	public void setAlternativesConsumer(XtextAlternativesConsumer alternativesConsumer) {
+	public void setAlternativesConsumer(INonTerminalConsumer alternativesConsumer) {
 		this.alternativesConsumer = alternativesConsumer;
 	}
 	
-	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
+	public void setIdConsumer(ITerminalConsumer idConsumer) {
 		this.idConsumer = idConsumer;
 	}
 	
-	public void setTypeRefConsumer(XtextTypeRefConsumer typeRefConsumer) {
+	public void setTypeRefConsumer(INonTerminalConsumer typeRefConsumer) {
 		this.typeRefConsumer = typeRefConsumer;
 	}
 	

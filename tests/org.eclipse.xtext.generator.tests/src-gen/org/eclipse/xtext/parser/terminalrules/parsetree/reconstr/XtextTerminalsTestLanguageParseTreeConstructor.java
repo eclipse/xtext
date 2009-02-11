@@ -68,6 +68,7 @@ protected class Grammar_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGrammar().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Grammar_1_Assignment_rules(current, this).firstSolution();
 		while(s1 != null) {
@@ -96,6 +97,7 @@ protected class Grammar_0_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGrammar().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Grammar_0_1_Assignment_metamodelDeclarations(current, this).firstSolution();
 		while(s1 != null) {
@@ -124,6 +126,7 @@ protected class Grammar_0_0_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGrammar().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Grammar_0_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -152,6 +155,7 @@ protected class Grammar_0_0_0_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGrammar().ele000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Grammar_0_0_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -180,6 +184,7 @@ protected class Grammar_0_0_0_0_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGrammar().ele0000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Grammar_0_0_0_0_1_Assignment_idElements(current, this).firstSolution();
 		while(s1 != null) {
@@ -207,7 +212,8 @@ protected class Grammar_0_0_0_0_0_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGrammar().ele00000Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new Grammar_0_0_0_0_0_1_Keyword_language(current, this) : new Grammar_0_0_0_0_0_0_Assignment_abstract(current, this);
 		Solution s = t.firstSolution();
@@ -229,6 +235,7 @@ protected class Grammar_0_0_0_0_0_0_Assignment_abstract extends AssignmentToken 
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGrammar().ele000000AssignmentAbstract();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("abstract",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("abstract");
@@ -267,6 +274,7 @@ protected class Grammar_0_0_0_0_1_Assignment_idElements extends AssignmentToken 
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGrammar().ele00001AssignmentIdElements();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("idElements",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("idElements");
@@ -293,6 +301,7 @@ protected class Grammar_0_0_0_1_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGrammar().ele0001Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Grammar_0_0_0_1_1_Assignment_idElements(current, this).firstSolution();
 		while(s1 != null) {
@@ -333,6 +342,7 @@ protected class Grammar_0_0_0_1_1_Assignment_idElements extends AssignmentToken 
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGrammar().ele00011AssignmentIdElements();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("idElements",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("idElements");
@@ -360,6 +370,7 @@ protected class Grammar_0_0_1_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGrammar().ele001Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Grammar_0_0_1_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -388,6 +399,7 @@ protected class Grammar_0_0_1_0_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGrammar().ele0010Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Grammar_0_0_1_0_1_Assignment_superGrammarIdElements(current, this).firstSolution();
 		while(s1 != null) {
@@ -428,6 +440,7 @@ protected class Grammar_0_0_1_0_1_Assignment_superGrammarIdElements extends Assi
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGrammar().ele00101AssignmentSuperGrammarIdElements();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("superGrammarIdElements",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("superGrammarIdElements");
@@ -454,6 +467,7 @@ protected class Grammar_0_0_1_1_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGrammar().ele0011Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Grammar_0_0_1_1_1_Assignment_superGrammarIdElements(current, this).firstSolution();
 		while(s1 != null) {
@@ -494,6 +508,7 @@ protected class Grammar_0_0_1_1_1_Assignment_superGrammarIdElements extends Assi
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGrammar().ele00111AssignmentSuperGrammarIdElements();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("superGrammarIdElements",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("superGrammarIdElements");
@@ -522,6 +537,7 @@ protected class Grammar_0_1_Assignment_metamodelDeclarations extends AssignmentT
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGrammar().ele01AssignmentMetamodelDeclarations();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("metamodelDeclarations",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("metamodelDeclarations");
@@ -554,6 +570,7 @@ protected class Grammar_1_Assignment_rules extends AssignmentToken  {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGrammar().ele1AssignmentRules();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("rules",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("rules");
@@ -595,7 +612,8 @@ protected class AbstractRule_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAbstractRule().eleAlternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new AbstractRule_1_RuleCall_TerminalRule(current, this) : new AbstractRule_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -616,7 +634,8 @@ protected class AbstractRule_0_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAbstractRule().ele0Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new AbstractRule_0_1_RuleCall_ParserRule(current, this) : new AbstractRule_0_0_RuleCall_LexerRule(current, this);
 		Solution s = t.firstSolution();
@@ -638,6 +657,7 @@ protected class AbstractRule_0_0_RuleCall_LexerRule extends RuleCallToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAbstractRule().ele00ParserRuleCallLexerRule();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(LexerRule_Group.class, current)) return null;
 		if(!current.isInstanceOf("LexerRule")) return null;
@@ -656,6 +676,7 @@ protected class AbstractRule_0_1_RuleCall_ParserRule extends RuleCallToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAbstractRule().ele01ParserRuleCallParserRule();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(ParserRule_Group.class, current)) return null;
 		if(!current.isInstanceOf("ParserRule")) return null;
@@ -675,6 +696,7 @@ protected class AbstractRule_1_RuleCall_TerminalRule extends RuleCallToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAbstractRule().ele1ParserRuleCallTerminalRule();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(TerminalRule_Group.class, current)) return null;
 		if(!current.isInstanceOf("ParserRule")) return null;
@@ -703,7 +725,8 @@ protected class AbstractMetamodelDeclaration_Alternatives extends AlternativesTo
 	public Alternatives getGrammarElement() {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAbstractMetamodelDeclaration().eleAlternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new AbstractMetamodelDeclaration_1_RuleCall_ReferencedMetamodel(current, this) : new AbstractMetamodelDeclaration_0_RuleCall_GeneratedMetamodel(current, this);
 		Solution s = t.firstSolution();
@@ -725,6 +748,7 @@ protected class AbstractMetamodelDeclaration_0_RuleCall_GeneratedMetamodel exten
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAbstractMetamodelDeclaration().ele0ParserRuleCallGeneratedMetamodel();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(GeneratedMetamodel_Group.class, current)) return null;
 		if(!current.isInstanceOf("GeneratedMetamodel")) return null;
@@ -743,6 +767,7 @@ protected class AbstractMetamodelDeclaration_1_RuleCall_ReferencedMetamodel exte
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAbstractMetamodelDeclaration().ele1ParserRuleCallReferencedMetamodel();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(ReferencedMetamodel_Group.class, current)) return null;
 		if(!current.isInstanceOf("ReferencedMetamodel")) return null;
@@ -772,6 +797,7 @@ protected class GeneratedMetamodel_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGeneratedMetamodel().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new GeneratedMetamodel_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -800,6 +826,7 @@ protected class GeneratedMetamodel_0_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGeneratedMetamodel().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new GeneratedMetamodel_0_1_Assignment_ePackage(current, this).firstSolution();
 		while(s1 != null) {
@@ -828,6 +855,7 @@ protected class GeneratedMetamodel_0_0_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGeneratedMetamodel().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new GeneratedMetamodel_0_0_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
@@ -868,6 +896,7 @@ protected class GeneratedMetamodel_0_0_1_Assignment_name extends AssignmentToken
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGeneratedMetamodel().ele001AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -894,6 +923,7 @@ protected class GeneratedMetamodel_0_1_Assignment_ePackage extends AssignmentTok
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGeneratedMetamodel().ele01AssignmentEPackage();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("ePackage",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("ePackage");
@@ -921,6 +951,7 @@ protected class GeneratedMetamodel_1_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGeneratedMetamodel().ele1Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new GeneratedMetamodel_1_1_Assignment_alias(current, this).firstSolution();
 		while(s1 != null) {
@@ -961,6 +992,7 @@ protected class GeneratedMetamodel_1_1_Assignment_alias extends AssignmentToken 
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGeneratedMetamodel().ele11AssignmentAlias();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("alias",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("alias");
@@ -998,6 +1030,7 @@ protected class ReferencedMetamodel_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prReferencedMetamodel().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ReferencedMetamodel_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -1026,6 +1059,7 @@ protected class ReferencedMetamodel_0_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prReferencedMetamodel().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ReferencedMetamodel_0_1_Assignment_ePackage(current, this).firstSolution();
 		while(s1 != null) {
@@ -1066,6 +1100,7 @@ protected class ReferencedMetamodel_0_1_Assignment_ePackage extends AssignmentTo
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prReferencedMetamodel().ele01AssignmentEPackage();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("ePackage",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("ePackage");
@@ -1093,6 +1128,7 @@ protected class ReferencedMetamodel_1_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prReferencedMetamodel().ele1Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ReferencedMetamodel_1_1_Assignment_alias(current, this).firstSolution();
 		while(s1 != null) {
@@ -1133,6 +1169,7 @@ protected class ReferencedMetamodel_1_1_Assignment_alias extends AssignmentToken
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prReferencedMetamodel().ele11AssignmentAlias();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("alias",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("alias");
@@ -1170,6 +1207,7 @@ protected class LexerRule_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prLexerRule().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new LexerRule_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -1198,6 +1236,7 @@ protected class LexerRule_0_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prLexerRule().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new LexerRule_0_1_Assignment_body(current, this).firstSolution();
 		while(s1 != null) {
@@ -1226,6 +1265,7 @@ protected class LexerRule_0_0_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prLexerRule().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new LexerRule_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -1254,6 +1294,7 @@ protected class LexerRule_0_0_0_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prLexerRule().ele000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new LexerRule_0_0_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -1282,6 +1323,7 @@ protected class LexerRule_0_0_0_0_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prLexerRule().ele0000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new LexerRule_0_0_0_0_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
@@ -1309,7 +1351,8 @@ protected class LexerRule_0_0_0_0_0_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prLexerRule().ele00000Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new LexerRule_0_0_0_0_0_1_Keyword_lexer(current, this) : new LexerRule_0_0_0_0_0_0_Keyword_native(current, this);
 		Solution s = t.firstSolution();
@@ -1356,6 +1399,7 @@ protected class LexerRule_0_0_0_0_1_Assignment_name extends AssignmentToken  {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prLexerRule().ele00001AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -1382,6 +1426,7 @@ protected class LexerRule_0_0_0_1_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prLexerRule().ele0001Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new LexerRule_0_0_0_1_1_Assignment_type(current, this).firstSolution();
 		while(s1 != null) {
@@ -1422,6 +1467,7 @@ protected class LexerRule_0_0_0_1_1_Assignment_type extends AssignmentToken  {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prLexerRule().ele00011AssignmentType();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("type",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
@@ -1468,6 +1514,7 @@ protected class LexerRule_0_1_Assignment_body extends AssignmentToken  {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prLexerRule().ele01AssignmentBody();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("body",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("body");
@@ -1517,6 +1564,7 @@ protected class ParserRule_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prParserRule().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ParserRule_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -1545,6 +1593,7 @@ protected class ParserRule_0_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prParserRule().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ParserRule_0_1_Assignment_alternatives(current, this).firstSolution();
 		while(s1 != null) {
@@ -1573,6 +1622,7 @@ protected class ParserRule_0_0_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prParserRule().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ParserRule_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -1601,6 +1651,7 @@ protected class ParserRule_0_0_0_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prParserRule().ele000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ParserRule_0_0_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -1629,6 +1680,7 @@ protected class ParserRule_0_0_0_0_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prParserRule().ele0000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ParserRule_0_0_0_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -1657,6 +1709,7 @@ protected class ParserRule_0_0_0_0_0_Assignment_name extends AssignmentToken  {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prParserRule().ele00000AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -1682,6 +1735,7 @@ protected class ParserRule_0_0_0_0_1_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prParserRule().ele00001Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ParserRule_0_0_0_0_1_1_Assignment_type(current, this).firstSolution();
 		while(s1 != null) {
@@ -1722,6 +1776,7 @@ protected class ParserRule_0_0_0_0_1_1_Assignment_type extends AssignmentToken  
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prParserRule().ele000011AssignmentType();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("type",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
@@ -1755,6 +1810,7 @@ protected class ParserRule_0_0_0_1_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prParserRule().ele0001Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ParserRule_0_0_0_1_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -1783,6 +1839,7 @@ protected class ParserRule_0_0_0_1_0_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prParserRule().ele00010Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ParserRule_0_0_0_1_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -1811,6 +1868,7 @@ protected class ParserRule_0_0_0_1_0_0_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prParserRule().ele000100Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ParserRule_0_0_0_1_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -1839,6 +1897,7 @@ protected class ParserRule_0_0_0_1_0_0_0_Assignment_definesHiddenTokens extends 
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prParserRule().ele0001000AssignmentDefinesHiddenTokens();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("definesHiddenTokens",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("definesHiddenTokens");
@@ -1877,6 +1936,7 @@ protected class ParserRule_0_0_0_1_0_1_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prParserRule().ele000101Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ParserRule_0_0_0_1_0_1_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -1905,6 +1965,7 @@ protected class ParserRule_0_0_0_1_0_1_0_Assignment_hiddenTokens extends Assignm
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prParserRule().ele0001010AssignmentHiddenTokens();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("hiddenTokens",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("hiddenTokens");
@@ -1931,6 +1992,7 @@ protected class ParserRule_0_0_0_1_0_1_1_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prParserRule().ele0001011Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ParserRule_0_0_0_1_0_1_1_1_Assignment_hiddenTokens(current, this).firstSolution();
 		while(s1 != null) {
@@ -1971,6 +2033,7 @@ protected class ParserRule_0_0_0_1_0_1_1_1_Assignment_hiddenTokens extends Assig
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prParserRule().ele00010111AssignmentHiddenTokens();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("hiddenTokens",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("hiddenTokens");
@@ -2027,6 +2090,7 @@ protected class ParserRule_0_1_Assignment_alternatives extends AssignmentToken  
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prParserRule().ele01AssignmentAlternatives();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("alternatives",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("alternatives");
@@ -2082,6 +2146,7 @@ protected class TerminalRule_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prTerminalRule().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TerminalRule_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -2110,6 +2175,7 @@ protected class TerminalRule_0_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prTerminalRule().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TerminalRule_0_1_Assignment_alternatives(current, this).firstSolution();
 		while(s1 != null) {
@@ -2138,6 +2204,7 @@ protected class TerminalRule_0_0_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prTerminalRule().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TerminalRule_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -2166,6 +2233,7 @@ protected class TerminalRule_0_0_0_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prTerminalRule().ele000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TerminalRule_0_0_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -2194,6 +2262,7 @@ protected class TerminalRule_0_0_0_0_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prTerminalRule().ele0000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TerminalRule_0_0_0_0_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
@@ -2222,6 +2291,7 @@ protected class TerminalRule_0_0_0_0_0_Assignment_terminal extends AssignmentTok
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prTerminalRule().ele00000AssignmentTerminal();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("terminal",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("terminal");
@@ -2247,6 +2317,7 @@ protected class TerminalRule_0_0_0_0_1_Assignment_name extends AssignmentToken  
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prTerminalRule().ele00001AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -2273,6 +2344,7 @@ protected class TerminalRule_0_0_0_1_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prTerminalRule().ele0001Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TerminalRule_0_0_0_1_1_Assignment_type(current, this).firstSolution();
 		while(s1 != null) {
@@ -2313,6 +2385,7 @@ protected class TerminalRule_0_0_0_1_1_Assignment_type extends AssignmentToken  
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prTerminalRule().ele00011AssignmentType();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("type",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
@@ -2359,6 +2432,7 @@ protected class TerminalRule_0_1_Assignment_alternatives extends AssignmentToken
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prTerminalRule().ele01AssignmentAlternatives();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("alternatives",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("alternatives");
@@ -2414,6 +2488,7 @@ protected class TypeRef_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prTypeRef().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TypeRef_1_Assignment_type(current, this).firstSolution();
 		while(s1 != null) {
@@ -2442,6 +2517,7 @@ protected class TypeRef_0_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prTypeRef().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TypeRef_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -2470,6 +2546,7 @@ protected class TypeRef_0_0_Assignment_metamodel extends AssignmentToken  {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prTypeRef().ele00AssignmentMetamodel();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("metamodel",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("metamodel");
@@ -2509,6 +2586,7 @@ protected class TypeRef_1_Assignment_type extends AssignmentToken  {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prTypeRef().ele1AssignmentType();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("type",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
@@ -2546,6 +2624,7 @@ protected class Alternatives_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAlternatives().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Alternatives_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -2574,6 +2653,7 @@ protected class Alternatives_0_RuleCall_Group extends RuleCallToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAlternatives().ele0ParserRuleCallGroup();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Group_Group.class, current)) return null;
 		if(!current.isInstanceOf("AbstractElement")) return null;
@@ -2592,6 +2672,7 @@ protected class Alternatives_1_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAlternatives().ele1Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Alternatives_1_1_Assignment_groups(current, this).firstSolution();
 		while(s1 != null) {
@@ -2620,6 +2701,7 @@ protected class Alternatives_1_0_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAlternatives().ele10Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Alternatives_1_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -2648,6 +2730,7 @@ protected class Alternatives_1_0_0_Action_Alternatives_groups extends ActionToke
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAlternatives().ele100ActionAlternativesgroups();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(!current.isInstanceOf("Alternatives")) return null;
 		Object val = current.getConsumable("groups", false);
@@ -2681,6 +2764,7 @@ protected class Alternatives_1_1_Assignment_groups extends AssignmentToken  {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAlternatives().ele11AssignmentGroups();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("groups",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("groups");
@@ -2724,6 +2808,7 @@ protected class TerminalAlternatives_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prTerminalAlternatives().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TerminalAlternatives_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -2752,6 +2837,7 @@ protected class TerminalAlternatives_0_RuleCall_TerminalGroup extends RuleCallTo
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prTerminalAlternatives().ele0ParserRuleCallTerminalGroup();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(TerminalGroup_Group.class, current)) return null;
 		if(!current.isInstanceOf("AbstractElement")) return null;
@@ -2770,6 +2856,7 @@ protected class TerminalAlternatives_1_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prTerminalAlternatives().ele1Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TerminalAlternatives_1_1_Assignment_groups(current, this).firstSolution();
 		while(s1 != null) {
@@ -2798,6 +2885,7 @@ protected class TerminalAlternatives_1_0_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prTerminalAlternatives().ele10Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TerminalAlternatives_1_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -2826,6 +2914,7 @@ protected class TerminalAlternatives_1_0_0_Action_Alternatives_groups extends Ac
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prTerminalAlternatives().ele100ActionAlternativesgroups();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(!current.isInstanceOf("Alternatives")) return null;
 		Object val = current.getConsumable("groups", false);
@@ -2859,6 +2948,7 @@ protected class TerminalAlternatives_1_1_Assignment_groups extends AssignmentTok
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prTerminalAlternatives().ele11AssignmentGroups();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("groups",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("groups");
@@ -2902,6 +2992,7 @@ protected class Group_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGroup().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Group_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -2930,6 +3021,7 @@ protected class Group_0_RuleCall_AbstractToken extends RuleCallToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGroup().ele0ParserRuleCallAbstractToken();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(AbstractToken_Group.class, current)) return null;
 		if(!current.isInstanceOf("AbstractElement")) return null;
@@ -2948,6 +3040,7 @@ protected class Group_1_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGroup().ele1Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Group_1_1_Assignment_abstractTokens(current, this).firstSolution();
 		while(s1 != null) {
@@ -2976,6 +3069,7 @@ protected class Group_1_0_Action_Group_abstractTokens extends ActionToken  {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGroup().ele10ActionGroupabstractTokens();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(!current.isInstanceOf("Group")) return null;
 		Object val = current.getConsumable("abstractTokens", false);
@@ -2996,6 +3090,7 @@ protected class Group_1_1_Assignment_abstractTokens extends AssignmentToken  {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGroup().ele11AssignmentAbstractTokens();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("abstractTokens",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("abstractTokens");
@@ -3039,6 +3134,7 @@ protected class TerminalGroup_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prTerminalGroup().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TerminalGroup_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -3067,6 +3163,7 @@ protected class TerminalGroup_0_RuleCall_TerminalToken extends RuleCallToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prTerminalGroup().ele0ParserRuleCallTerminalToken();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(TerminalToken_Group.class, current)) return null;
 		if(!current.isInstanceOf("AbstractElement")) return null;
@@ -3085,6 +3182,7 @@ protected class TerminalGroup_1_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prTerminalGroup().ele1Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TerminalGroup_1_1_Assignment_abstractTokens(current, this).firstSolution();
 		while(s1 != null) {
@@ -3113,6 +3211,7 @@ protected class TerminalGroup_1_0_Action_Group_abstractTokens extends ActionToke
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prTerminalGroup().ele10ActionGroupabstractTokens();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(!current.isInstanceOf("Group")) return null;
 		Object val = current.getConsumable("abstractTokens", false);
@@ -3133,6 +3232,7 @@ protected class TerminalGroup_1_1_Assignment_abstractTokens extends AssignmentTo
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prTerminalGroup().ele11AssignmentAbstractTokens();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("abstractTokens",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("abstractTokens");
@@ -3176,6 +3276,7 @@ protected class AbstractToken_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAbstractToken().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new AbstractToken_1_Assignment_cardinality(current, this).firstSolution();
 		while(s1 != null) {
@@ -3203,7 +3304,8 @@ protected class AbstractToken_0_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAbstractToken().ele0Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new AbstractToken_0_1_RuleCall_AbstractTerminal(current, this) : new AbstractToken_0_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -3224,7 +3326,8 @@ protected class AbstractToken_0_0_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAbstractToken().ele00Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new AbstractToken_0_0_1_RuleCall_Action(current, this) : new AbstractToken_0_0_0_RuleCall_Assignment(current, this);
 		Solution s = t.firstSolution();
@@ -3246,6 +3349,7 @@ protected class AbstractToken_0_0_0_RuleCall_Assignment extends RuleCallToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAbstractToken().ele000ParserRuleCallAssignment();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Assignment_Group.class, current)) return null;
 		if(!current.isInstanceOf("Assignment")) return null;
@@ -3264,6 +3368,7 @@ protected class AbstractToken_0_0_1_RuleCall_Action extends RuleCallToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAbstractToken().ele001ParserRuleCallAction();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Action_Group.class, current)) return null;
 		if(!current.isInstanceOf("Action")) return null;
@@ -3283,6 +3388,7 @@ protected class AbstractToken_0_1_RuleCall_AbstractTerminal extends RuleCallToke
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAbstractToken().ele01ParserRuleCallAbstractTerminal();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(AbstractTerminal_Alternatives.class, current)) return null;
 		if(!current.isInstanceOf("AbstractElement")) return null;
@@ -3302,6 +3408,7 @@ protected class AbstractToken_1_Assignment_cardinality extends AssignmentToken  
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAbstractToken().ele1AssignmentCardinality();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("cardinality",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("cardinality");
@@ -3352,6 +3459,7 @@ protected class TerminalToken_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prTerminalToken().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TerminalToken_1_Assignment_cardinality(current, this).firstSolution();
 		while(s1 != null) {
@@ -3380,6 +3488,7 @@ protected class TerminalToken_0_RuleCall_TerminalTokenElement extends RuleCallTo
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prTerminalToken().ele0ParserRuleCallTerminalTokenElement();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(TerminalTokenElement_Alternatives.class, current)) return null;
 		if(!current.isInstanceOf("AbstractElement")) return null;
@@ -3398,6 +3507,7 @@ protected class TerminalToken_1_Assignment_cardinality extends AssignmentToken  
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prTerminalToken().ele1AssignmentCardinality();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("cardinality",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("cardinality");
@@ -3448,6 +3558,7 @@ protected class Assignment_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAssignment().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Assignment_1_Assignment_terminal(current, this).firstSolution();
 		while(s1 != null) {
@@ -3476,6 +3587,7 @@ protected class Assignment_0_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAssignment().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Assignment_0_1_Assignment_operator(current, this).firstSolution();
 		while(s1 != null) {
@@ -3504,6 +3616,7 @@ protected class Assignment_0_0_Assignment_feature extends AssignmentToken  {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAssignment().ele00AssignmentFeature();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("feature",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("feature");
@@ -3529,6 +3642,7 @@ protected class Assignment_0_1_Assignment_operator extends AssignmentToken  {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAssignment().ele01AssignmentOperator();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("operator",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("operator");
@@ -3569,6 +3683,7 @@ protected class Assignment_1_Assignment_terminal extends AssignmentToken  {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAssignment().ele1AssignmentTerminal();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("terminal",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("terminal");
@@ -3611,6 +3726,7 @@ protected class Action_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAction().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Action_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -3639,6 +3755,7 @@ protected class Action_0_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAction().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Action_0_1_Keyword_current(current, this).firstSolution();
 		while(s1 != null) {
@@ -3667,6 +3784,7 @@ protected class Action_0_0_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAction().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Action_0_0_1_Assignment_operator(current, this).firstSolution();
 		while(s1 != null) {
@@ -3695,6 +3813,7 @@ protected class Action_0_0_0_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAction().ele000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Action_0_0_0_1_Assignment_feature(current, this).firstSolution();
 		while(s1 != null) {
@@ -3723,6 +3842,7 @@ protected class Action_0_0_0_0_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAction().ele0000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Action_0_0_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -3751,6 +3871,7 @@ protected class Action_0_0_0_0_0_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAction().ele00000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Action_0_0_0_0_0_1_Assignment_typeName(current, this).firstSolution();
 		while(s1 != null) {
@@ -3779,6 +3900,7 @@ protected class Action_0_0_0_0_0_0_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAction().ele000000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Action_0_0_0_0_0_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -3819,6 +3941,7 @@ protected class Action_0_0_0_0_0_0_1_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAction().ele0000001Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Action_0_0_0_0_0_0_1_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -3873,6 +3996,7 @@ protected class Action_0_0_0_0_0_1_Assignment_typeName extends AssignmentToken  
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAction().ele000001AssignmentTypeName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("typeName",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("typeName");
@@ -3918,6 +4042,7 @@ protected class Action_0_0_0_1_Assignment_feature extends AssignmentToken  {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAction().ele0001AssignmentFeature();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("feature",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("feature");
@@ -3944,6 +4069,7 @@ protected class Action_0_0_1_Assignment_operator extends AssignmentToken  {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAction().ele001AssignmentOperator();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("operator",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("operator");
@@ -4012,7 +4138,8 @@ protected class AbstractTerminal_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAbstractTerminal().eleAlternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new AbstractTerminal_1_RuleCall_CrossReference(current, this) : new AbstractTerminal_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -4033,7 +4160,8 @@ protected class AbstractTerminal_0_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAbstractTerminal().ele0Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new AbstractTerminal_0_1_RuleCall_ParenthesizedElement(current, this) : new AbstractTerminal_0_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -4054,7 +4182,8 @@ protected class AbstractTerminal_0_0_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAbstractTerminal().ele00Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new AbstractTerminal_0_0_1_RuleCall_RuleCall(current, this) : new AbstractTerminal_0_0_0_RuleCall_Keyword(current, this);
 		Solution s = t.firstSolution();
@@ -4076,6 +4205,7 @@ protected class AbstractTerminal_0_0_0_RuleCall_Keyword extends RuleCallToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAbstractTerminal().ele000ParserRuleCallKeyword();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Keyword_Assignment_value.class, current)) return null;
 		if(!current.isInstanceOf("Keyword")) return null;
@@ -4094,6 +4224,7 @@ protected class AbstractTerminal_0_0_1_RuleCall_RuleCall extends RuleCallToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAbstractTerminal().ele001ParserRuleCallRuleCall();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(RuleCall_Assignment_rule.class, current)) return null;
 		if(!current.isInstanceOf("RuleCall")) return null;
@@ -4113,6 +4244,7 @@ protected class AbstractTerminal_0_1_RuleCall_ParenthesizedElement extends RuleC
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAbstractTerminal().ele01ParserRuleCallParenthesizedElement();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(ParenthesizedElement_Group.class, current)) return null;
 		if(!current.isInstanceOf("AbstractElement")) return null;
@@ -4132,6 +4264,7 @@ protected class AbstractTerminal_1_RuleCall_CrossReference extends RuleCallToken
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAbstractTerminal().ele1ParserRuleCallCrossReference();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(CrossReference_Group.class, current)) return null;
 		if(!current.isInstanceOf("CrossReference")) return null;
@@ -4160,7 +4293,8 @@ protected class TerminalTokenElement_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prTerminalTokenElement().eleAlternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new TerminalTokenElement_1_RuleCall_Wildcard(current, this) : new TerminalTokenElement_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -4181,7 +4315,8 @@ protected class TerminalTokenElement_0_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prTerminalTokenElement().ele0Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new TerminalTokenElement_0_1_RuleCall_AbstractNegatedToken(current, this) : new TerminalTokenElement_0_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -4202,7 +4337,8 @@ protected class TerminalTokenElement_0_0_Alternatives extends AlternativesToken 
 	public Alternatives getGrammarElement() {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prTerminalTokenElement().ele00Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new TerminalTokenElement_0_0_1_RuleCall_ParenthesizedTerminalElement(current, this) : new TerminalTokenElement_0_0_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -4223,7 +4359,8 @@ protected class TerminalTokenElement_0_0_0_Alternatives extends AlternativesToke
 	public Alternatives getGrammarElement() {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prTerminalTokenElement().ele000Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new TerminalTokenElement_0_0_0_1_RuleCall_RuleCall(current, this) : new TerminalTokenElement_0_0_0_0_RuleCall_CharacterRange(current, this);
 		Solution s = t.firstSolution();
@@ -4245,6 +4382,7 @@ protected class TerminalTokenElement_0_0_0_0_RuleCall_CharacterRange extends Rul
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prTerminalTokenElement().ele0000ParserRuleCallCharacterRange();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(CharacterRange_Group.class, current)) return null;
 		if(!current.isInstanceOf("AbstractElement")) return null;
@@ -4263,6 +4401,7 @@ protected class TerminalTokenElement_0_0_0_1_RuleCall_RuleCall extends RuleCallT
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prTerminalTokenElement().ele0001ParserRuleCallRuleCall();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(RuleCall_Assignment_rule.class, current)) return null;
 		if(!current.isInstanceOf("RuleCall")) return null;
@@ -4282,6 +4421,7 @@ protected class TerminalTokenElement_0_0_1_RuleCall_ParenthesizedTerminalElement
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prTerminalTokenElement().ele001ParserRuleCallParenthesizedTerminalElement();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(ParenthesizedTerminalElement_Group.class, current)) return null;
 		if(!current.isInstanceOf("AbstractElement")) return null;
@@ -4301,6 +4441,7 @@ protected class TerminalTokenElement_0_1_RuleCall_AbstractNegatedToken extends R
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prTerminalTokenElement().ele01ParserRuleCallAbstractNegatedToken();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(AbstractNegatedToken_Alternatives.class, current)) return null;
 		if(!current.isInstanceOf("AbstractNegatedToken")) return null;
@@ -4320,6 +4461,7 @@ protected class TerminalTokenElement_1_RuleCall_Wildcard extends RuleCallToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prTerminalTokenElement().ele1ParserRuleCallWildcard();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Wildcard_Assignment_isWildcard.class, current)) return null;
 		if(!current.isInstanceOf("Wildcard")) return null;
@@ -4348,7 +4490,8 @@ protected class AbstractNegatedToken_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAbstractNegatedToken().eleAlternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new AbstractNegatedToken_1_RuleCall_UpToToken(current, this) : new AbstractNegatedToken_0_RuleCall_NegatedToken(current, this);
 		Solution s = t.firstSolution();
@@ -4370,6 +4513,7 @@ protected class AbstractNegatedToken_0_RuleCall_NegatedToken extends RuleCallTok
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAbstractNegatedToken().ele0ParserRuleCallNegatedToken();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(NegatedToken_Group.class, current)) return null;
 		if(!current.isInstanceOf("NegatedToken")) return null;
@@ -4388,6 +4532,7 @@ protected class AbstractNegatedToken_1_RuleCall_UpToToken extends RuleCallToken 
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAbstractNegatedToken().ele1ParserRuleCallUpToToken();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(UpToToken_Group.class, current)) return null;
 		if(!current.isInstanceOf("UpToToken")) return null;
@@ -4417,6 +4562,7 @@ protected class NegatedToken_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prNegatedToken().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new NegatedToken_1_Assignment_terminal(current, this).firstSolution();
 		while(s1 != null) {
@@ -4457,6 +4603,7 @@ protected class NegatedToken_1_Assignment_terminal extends AssignmentToken  {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prNegatedToken().ele1AssignmentTerminal();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("terminal",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("terminal");
@@ -4499,6 +4646,7 @@ protected class UpToToken_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prUpToToken().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new UpToToken_1_Assignment_terminal(current, this).firstSolution();
 		while(s1 != null) {
@@ -4539,6 +4687,7 @@ protected class UpToToken_1_Assignment_terminal extends AssignmentToken  {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prUpToToken().ele1AssignmentTerminal();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("terminal",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("terminal");
@@ -4581,6 +4730,7 @@ protected class Wildcard_Assignment_isWildcard extends AssignmentToken  {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prWildcard().eleAssignmentIsWildcard();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("isWildcard",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("isWildcard");
@@ -4616,6 +4766,7 @@ protected class CharacterRange_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prCharacterRange().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new CharacterRange_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -4644,6 +4795,7 @@ protected class CharacterRange_0_RuleCall_Keyword extends RuleCallToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prCharacterRange().ele0ParserRuleCallKeyword();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Keyword_Assignment_value.class, current)) return null;
 		if(!current.isInstanceOf("Keyword")) return null;
@@ -4662,6 +4814,7 @@ protected class CharacterRange_1_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prCharacterRange().ele1Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new CharacterRange_1_1_Assignment_right(current, this).firstSolution();
 		while(s1 != null) {
@@ -4690,6 +4843,7 @@ protected class CharacterRange_1_0_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prCharacterRange().ele10Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new CharacterRange_1_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -4718,6 +4872,7 @@ protected class CharacterRange_1_0_0_Action_CharacterRange_left extends ActionTo
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prCharacterRange().ele100ActionCharacterRangeleft();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(!current.isInstanceOf("CharacterRange")) return null;
 		Object val = current.getConsumable("left", false);
@@ -4751,6 +4906,7 @@ protected class CharacterRange_1_1_Assignment_right extends AssignmentToken  {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prCharacterRange().ele11AssignmentRight();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("right",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("right");
@@ -4794,6 +4950,7 @@ protected class CrossReference_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prCrossReference().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new CrossReference_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -4822,6 +4979,7 @@ protected class CrossReference_0_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prCrossReference().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new CrossReference_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -4850,6 +5008,7 @@ protected class CrossReference_0_0_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prCrossReference().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new CrossReference_0_0_1_Assignment_type(current, this).firstSolution();
 		while(s1 != null) {
@@ -4890,6 +5049,7 @@ protected class CrossReference_0_0_1_Assignment_type extends AssignmentToken  {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prCrossReference().ele001AssignmentType();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("type",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
@@ -4922,6 +5082,7 @@ protected class CrossReference_0_1_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prCrossReference().ele01Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new CrossReference_0_1_1_Assignment_rule(current, this).firstSolution();
 		while(s1 != null) {
@@ -4962,6 +5123,7 @@ protected class CrossReference_0_1_1_Assignment_rule extends AssignmentToken  {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prCrossReference().ele011AssignmentRule();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("rule",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("rule");
@@ -5013,6 +5175,7 @@ protected class ParenthesizedElement_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prParenthesizedElement().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ParenthesizedElement_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -5041,6 +5204,7 @@ protected class ParenthesizedElement_0_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prParenthesizedElement().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ParenthesizedElement_0_1_RuleCall_Alternatives(current, this).firstSolution();
 		while(s1 != null) {
@@ -5081,6 +5245,7 @@ protected class ParenthesizedElement_0_1_RuleCall_Alternatives extends RuleCallT
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prParenthesizedElement().ele01ParserRuleCallAlternatives();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Alternatives_Group.class, current)) return null;
 		if(!current.isInstanceOf("AbstractElement")) return null;
@@ -5123,6 +5288,7 @@ protected class ParenthesizedTerminalElement_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prParenthesizedTerminalElement().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ParenthesizedTerminalElement_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -5151,6 +5317,7 @@ protected class ParenthesizedTerminalElement_0_Group extends GroupToken {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prParenthesizedTerminalElement().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ParenthesizedTerminalElement_0_1_RuleCall_TerminalAlternatives(current, this).firstSolution();
 		while(s1 != null) {
@@ -5191,6 +5358,7 @@ protected class ParenthesizedTerminalElement_0_1_RuleCall_TerminalAlternatives e
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prParenthesizedTerminalElement().ele01ParserRuleCallTerminalAlternatives();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(TerminalAlternatives_Group.class, current)) return null;
 		if(!current.isInstanceOf("AbstractElement")) return null;
@@ -5233,6 +5401,7 @@ protected class Keyword_Assignment_value extends AssignmentToken  {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prKeyword().eleAssignmentValue();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("value",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
@@ -5268,6 +5437,7 @@ protected class RuleCall_Assignment_rule extends AssignmentToken  {
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prRuleCall().eleAssignmentRule();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("rule",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("rule");

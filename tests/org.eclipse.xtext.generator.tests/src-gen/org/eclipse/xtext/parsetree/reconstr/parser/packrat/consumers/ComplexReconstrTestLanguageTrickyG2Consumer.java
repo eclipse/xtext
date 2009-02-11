@@ -6,6 +6,7 @@ package org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -21,8 +22,8 @@ import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.ComplexReco
 @SuppressWarnings("unused")
 public final class ComplexReconstrTestLanguageTrickyG2Consumer extends NonTerminalConsumer {
 
-	private XtextBuiltinINTConsumer intConsumer;
-	private ComplexReconstrTestLanguageTrickyG1Consumer trickyG1Consumer;
+	private ITerminalConsumer intConsumer;
+	private INonTerminalConsumer trickyG1Consumer;
 
 	private ISequenceMatcher ruleCall$4$Delimiter;
 	
@@ -77,6 +78,7 @@ public final class ComplexReconstrTestLanguageTrickyG2Consumer extends NonTermin
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyG2();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -86,11 +88,11 @@ public final class ComplexReconstrTestLanguageTrickyG2Consumer extends NonTermin
 		return "TrickyG2";
 	}
 	
-	public void setIntConsumer(XtextBuiltinINTConsumer intConsumer) {
+	public void setIntConsumer(ITerminalConsumer intConsumer) {
 		this.intConsumer = intConsumer;
 	}
 	
-	public void setTrickyG1Consumer(ComplexReconstrTestLanguageTrickyG1Consumer trickyG1Consumer) {
+	public void setTrickyG1Consumer(INonTerminalConsumer trickyG1Consumer) {
 		this.trickyG1Consumer = trickyG1Consumer;
 	}
 	

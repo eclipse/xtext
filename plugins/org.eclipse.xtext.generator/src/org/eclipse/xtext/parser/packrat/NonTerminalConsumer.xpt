@@ -30,6 +30,7 @@ package «this.consumerPackageName()»;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -47,7 +48,7 @@ import «calledRule.containingGrammar().getNamespace()».parser.packrat.consumers.
 public final class «this.consumerClassName()» extends NonTerminalConsumer {
 
 «FOREACH allCalledRules() AS calledRule-»
-	private «calledRule.consumerClassName()» «calledRule.consumerFieldName()»;
+	private «calledRule.consumerInterfaceName()» «calledRule.consumerFieldName()»;
 «ENDFOREACH-»
 
 «EXPAND delimiterField FOREACH allDelimited()-»
@@ -66,6 +67,7 @@ public final class «this.consumerClassName()» extends NonTerminalConsumer {
 		return «grammar().grammarAccess().toSimpleName()».INSTANCE.pr«this.name»();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -76,7 +78,7 @@ public final class «this.consumerClassName()» extends NonTerminalConsumer {
 	}
 	
 «FOREACH allCalledRules() AS calledRule-»
-	public void «calledRule.consumerSetterName()»(«calledRule.consumerClassName()» «calledRule.consumerFieldName()») {
+	public void «calledRule.consumerSetterName()»(«calledRule.consumerInterfaceName()» «calledRule.consumerFieldName()») {
 		this.«calledRule.consumerFieldName()» = «calledRule.consumerFieldName()»;
 	}
 	

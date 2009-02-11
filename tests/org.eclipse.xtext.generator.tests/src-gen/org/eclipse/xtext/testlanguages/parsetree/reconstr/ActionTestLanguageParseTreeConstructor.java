@@ -43,6 +43,7 @@ protected class Model_Assignment_children extends AssignmentToken  {
 		return ActionTestLanguageGrammarAccess.INSTANCE.prModel().eleAssignmentChildren();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("children",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("children");
@@ -84,6 +85,7 @@ protected class Element_Group extends GroupToken {
 		return ActionTestLanguageGrammarAccess.INSTANCE.prElement().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Element_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -112,6 +114,7 @@ protected class Element_0_RuleCall_Item extends RuleCallToken {
 		return ActionTestLanguageGrammarAccess.INSTANCE.prElement().ele0ParserRuleCallItem();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Item_Group.class, current)) return null;
 		if(!current.isInstanceOf("Type")) return null;
@@ -130,6 +133,7 @@ protected class Element_1_Group extends GroupToken {
 		return ActionTestLanguageGrammarAccess.INSTANCE.prElement().ele1Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Element_1_1_Assignment_items(current, this).firstSolution();
 		while(s1 != null) {
@@ -158,6 +162,7 @@ protected class Element_1_0_Action_Item_items extends ActionToken  {
 		return ActionTestLanguageGrammarAccess.INSTANCE.prElement().ele10ActionItemitems();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(!current.isInstanceOf("Item")) return null;
 		Object val = current.getConsumable("items", false);
@@ -178,6 +183,7 @@ protected class Element_1_1_Assignment_items extends AssignmentToken  {
 		return ActionTestLanguageGrammarAccess.INSTANCE.prElement().ele11AssignmentItems();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("items",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("items");
@@ -221,6 +227,7 @@ protected class Item_Group extends GroupToken {
 		return ActionTestLanguageGrammarAccess.INSTANCE.prItem().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Item_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
@@ -249,6 +256,7 @@ protected class Item_0_Action_Thing_content extends ActionToken  {
 		return ActionTestLanguageGrammarAccess.INSTANCE.prItem().ele0ActionThingcontent();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(!current.isInstanceOf("Thing")) return null;
 		Object val = current.getConsumable("content", false);
@@ -269,6 +277,7 @@ protected class Item_1_Assignment_name extends AssignmentToken  {
 		return ActionTestLanguageGrammarAccess.INSTANCE.prItem().ele1AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");

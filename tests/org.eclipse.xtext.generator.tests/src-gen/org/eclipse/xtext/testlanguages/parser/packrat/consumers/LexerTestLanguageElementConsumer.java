@@ -6,6 +6,7 @@ package org.eclipse.xtext.testlanguages.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -21,8 +22,8 @@ import org.eclipse.xtext.testlanguages.parser.packrat.consumers.LexerTestLanguag
 @SuppressWarnings("unused")
 public final class LexerTestLanguageElementConsumer extends NonTerminalConsumer {
 
-	private XtextBuiltinIDConsumer idConsumer;
-	private LexerTestLanguageSTRINGConsumer stringConsumer;
+	private ITerminalConsumer idConsumer;
+	private ITerminalConsumer stringConsumer;
 
 	private ISequenceMatcher ruleCall$5$Delimiter;
 	
@@ -102,6 +103,7 @@ public final class LexerTestLanguageElementConsumer extends NonTerminalConsumer 
 		return LexerTestLanguageGrammarAccess.INSTANCE.prElement();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -111,11 +113,11 @@ public final class LexerTestLanguageElementConsumer extends NonTerminalConsumer 
 		return "Element";
 	}
 	
-	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
+	public void setIdConsumer(ITerminalConsumer idConsumer) {
 		this.idConsumer = idConsumer;
 	}
 	
-	public void setStringConsumer(LexerTestLanguageSTRINGConsumer stringConsumer) {
+	public void setStringConsumer(ITerminalConsumer stringConsumer) {
 		this.stringConsumer = stringConsumer;
 	}
 	

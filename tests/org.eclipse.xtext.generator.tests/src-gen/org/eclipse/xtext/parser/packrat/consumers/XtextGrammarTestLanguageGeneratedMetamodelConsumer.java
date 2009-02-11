@@ -6,6 +6,7 @@ package org.eclipse.xtext.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -21,8 +22,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGCons
 @SuppressWarnings("unused")
 public final class XtextGrammarTestLanguageGeneratedMetamodelConsumer extends NonTerminalConsumer {
 
-	private XtextBuiltinIDConsumer idConsumer;
-	private XtextBuiltinSTRINGConsumer stringConsumer;
+	private ITerminalConsumer idConsumer;
+	private ITerminalConsumer stringConsumer;
 
 	private ISequenceMatcher crossReference$8$Delimiter;
 	
@@ -192,6 +193,7 @@ public final class XtextGrammarTestLanguageGeneratedMetamodelConsumer extends No
 		return XtextGrammarTestLanguageGrammarAccess.INSTANCE.prGeneratedMetamodel();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -201,11 +203,11 @@ public final class XtextGrammarTestLanguageGeneratedMetamodelConsumer extends No
 		return "GeneratedMetamodel";
 	}
 	
-	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
+	public void setIdConsumer(ITerminalConsumer idConsumer) {
 		this.idConsumer = idConsumer;
 	}
 	
-	public void setStringConsumer(XtextBuiltinSTRINGConsumer stringConsumer) {
+	public void setStringConsumer(ITerminalConsumer stringConsumer) {
 		this.stringConsumer = stringConsumer;
 	}
 	

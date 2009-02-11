@@ -6,6 +6,7 @@ package org.eclipse.xtext.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -21,8 +22,8 @@ import org.eclipse.xtext.parser.packrat.consumers.XtextUpToTokenConsumer;
 @SuppressWarnings("unused")
 public final class XtextAbstractNegatedTokenConsumer extends NonTerminalConsumer {
 
-	private XtextNegatedTokenConsumer negatedTokenConsumer;
-	private XtextUpToTokenConsumer upToTokenConsumer;
+	private INonTerminalConsumer negatedTokenConsumer;
+	private INonTerminalConsumer upToTokenConsumer;
 
 	public XtextAbstractNegatedTokenConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
@@ -64,6 +65,7 @@ public final class XtextAbstractNegatedTokenConsumer extends NonTerminalConsumer
 		return XtextGrammarAccess.INSTANCE.prAbstractNegatedToken();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -73,11 +75,11 @@ public final class XtextAbstractNegatedTokenConsumer extends NonTerminalConsumer
 		return "AbstractNegatedToken";
 	}
 	
-	public void setNegatedTokenConsumer(XtextNegatedTokenConsumer negatedTokenConsumer) {
+	public void setNegatedTokenConsumer(INonTerminalConsumer negatedTokenConsumer) {
 		this.negatedTokenConsumer = negatedTokenConsumer;
 	}
 	
-	public void setUpToTokenConsumer(XtextUpToTokenConsumer upToTokenConsumer) {
+	public void setUpToTokenConsumer(INonTerminalConsumer upToTokenConsumer) {
 		this.upToTokenConsumer = upToTokenConsumer;
 	}
 	

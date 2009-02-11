@@ -6,6 +6,7 @@ package org.eclipse.xtext.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -22,9 +23,9 @@ import org.eclipse.xtext.parser.packrat.consumers.XtextAssignmentConsumer;
 @SuppressWarnings("unused")
 public final class XtextAbstractTokenConsumer extends NonTerminalConsumer {
 
-	private XtextAbstractTerminalConsumer abstractTerminalConsumer;
-	private XtextActionConsumer actionConsumer;
-	private XtextAssignmentConsumer assignmentConsumer;
+	private INonTerminalConsumer abstractTerminalConsumer;
+	private INonTerminalConsumer actionConsumer;
+	private INonTerminalConsumer assignmentConsumer;
 
 	private ICharacterClass keyword$10$Delimiter;
 	
@@ -161,6 +162,7 @@ public final class XtextAbstractTokenConsumer extends NonTerminalConsumer {
 		return XtextGrammarAccess.INSTANCE.prAbstractToken();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -170,15 +172,15 @@ public final class XtextAbstractTokenConsumer extends NonTerminalConsumer {
 		return "AbstractElement";
 	}
 	
-	public void setAbstractTerminalConsumer(XtextAbstractTerminalConsumer abstractTerminalConsumer) {
+	public void setAbstractTerminalConsumer(INonTerminalConsumer abstractTerminalConsumer) {
 		this.abstractTerminalConsumer = abstractTerminalConsumer;
 	}
 	
-	public void setActionConsumer(XtextActionConsumer actionConsumer) {
+	public void setActionConsumer(INonTerminalConsumer actionConsumer) {
 		this.actionConsumer = actionConsumer;
 	}
 	
-	public void setAssignmentConsumer(XtextAssignmentConsumer assignmentConsumer) {
+	public void setAssignmentConsumer(INonTerminalConsumer assignmentConsumer) {
 		this.assignmentConsumer = assignmentConsumer;
 	}
 	

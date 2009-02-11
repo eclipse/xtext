@@ -6,6 +6,7 @@ package org.eclipse.xtext.parser.epatch.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -21,8 +22,8 @@ import org.eclipse.xtext.parser.epatch.parser.packrat.consumers.EpatchTestLangua
 @SuppressWarnings("unused")
 public final class EpatchTestLanguageBiListAssignmentConsumer extends NonTerminalConsumer {
 
-	private XtextBuiltinIDConsumer idConsumer;
-	private EpatchTestLanguageListAssignmentValueConsumer listAssignmentValueConsumer;
+	private ITerminalConsumer idConsumer;
+	private INonTerminalConsumer listAssignmentValueConsumer;
 
 	private ICharacterClass keyword$10$Delimiter;
 	
@@ -406,6 +407,7 @@ public final class EpatchTestLanguageBiListAssignmentConsumer extends NonTermina
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prBiListAssignment();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -415,11 +417,11 @@ public final class EpatchTestLanguageBiListAssignmentConsumer extends NonTermina
 		return "ListAssignment";
 	}
 	
-	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
+	public void setIdConsumer(ITerminalConsumer idConsumer) {
 		this.idConsumer = idConsumer;
 	}
 	
-	public void setListAssignmentValueConsumer(EpatchTestLanguageListAssignmentValueConsumer listAssignmentValueConsumer) {
+	public void setListAssignmentValueConsumer(INonTerminalConsumer listAssignmentValueConsumer) {
 		this.listAssignmentValueConsumer = listAssignmentValueConsumer;
 	}
 	

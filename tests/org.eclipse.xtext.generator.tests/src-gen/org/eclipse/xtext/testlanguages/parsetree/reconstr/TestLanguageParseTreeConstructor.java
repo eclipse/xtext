@@ -45,6 +45,7 @@ protected class EntryRule_Assignment_multiFeature extends AssignmentToken  {
 		return TestLanguageGrammarAccess.INSTANCE.prEntryRule().eleAssignmentMultiFeature();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("multiFeature",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("multiFeature");
@@ -85,7 +86,8 @@ protected class AbstractRule_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return TestLanguageGrammarAccess.INSTANCE.prAbstractRule().eleAlternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new AbstractRule_1_RuleCall_ReducibleRule(current, this) : new AbstractRule_0_RuleCall_ChoiceRule(current, this);
 		Solution s = t.firstSolution();
@@ -107,6 +109,7 @@ protected class AbstractRule_0_RuleCall_ChoiceRule extends RuleCallToken {
 		return TestLanguageGrammarAccess.INSTANCE.prAbstractRule().ele0ParserRuleCallChoiceRule();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(ChoiceRule_Group.class, current)) return null;
 		if(!current.isInstanceOf("ChoiceElement")) return null;
@@ -125,6 +128,7 @@ protected class AbstractRule_1_RuleCall_ReducibleRule extends RuleCallToken {
 		return TestLanguageGrammarAccess.INSTANCE.prAbstractRule().ele1ParserRuleCallReducibleRule();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(ReducibleRule_Group.class, current)) return null;
 		if(!current.isInstanceOf("ReducibleElement")) return null;
@@ -154,6 +158,7 @@ protected class ChoiceRule_Group extends GroupToken {
 		return TestLanguageGrammarAccess.INSTANCE.prChoiceRule().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ChoiceRule_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
@@ -182,6 +187,7 @@ protected class ChoiceRule_0_Group extends GroupToken {
 		return TestLanguageGrammarAccess.INSTANCE.prChoiceRule().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ChoiceRule_0_1_Assignment_optionalKeyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -222,6 +228,7 @@ protected class ChoiceRule_0_1_Assignment_optionalKeyword extends AssignmentToke
 		return TestLanguageGrammarAccess.INSTANCE.prChoiceRule().ele01AssignmentOptionalKeyword();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("optionalKeyword",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("optionalKeyword");
@@ -248,6 +255,7 @@ protected class ChoiceRule_1_Assignment_name extends AssignmentToken  {
 		return TestLanguageGrammarAccess.INSTANCE.prChoiceRule().ele1AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -282,6 +290,7 @@ protected class ReducibleRule_Group extends GroupToken {
 		return TestLanguageGrammarAccess.INSTANCE.prReducibleRule().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ReducibleRule_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -310,6 +319,7 @@ protected class ReducibleRule_0_Group extends GroupToken {
 		return TestLanguageGrammarAccess.INSTANCE.prReducibleRule().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ReducibleRule_0_1_RuleCall_TerminalRule(current, this).firstSolution();
 		while(s1 != null) {
@@ -350,6 +360,7 @@ protected class ReducibleRule_0_1_RuleCall_TerminalRule extends RuleCallToken {
 		return TestLanguageGrammarAccess.INSTANCE.prReducibleRule().ele01ParserRuleCallTerminalRule();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(TerminalRule_Assignment_stringFeature.class, current)) return null;
 		if(!current.isInstanceOf("TerminalElement")) return null;
@@ -369,6 +380,7 @@ protected class ReducibleRule_1_Group extends GroupToken {
 		return TestLanguageGrammarAccess.INSTANCE.prReducibleRule().ele1Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ReducibleRule_1_1_Assignment_actionFeature(current, this).firstSolution();
 		while(s1 != null) {
@@ -397,6 +409,7 @@ protected class ReducibleRule_1_0_Action_ReducibleComposite_actionFeature extend
 		return TestLanguageGrammarAccess.INSTANCE.prReducibleRule().ele10ActionReducibleCompositeactionFeature();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(!current.isInstanceOf("ReducibleComposite")) return null;
 		Object val = current.getConsumable("actionFeature", false);
@@ -417,6 +430,7 @@ protected class ReducibleRule_1_1_Assignment_actionFeature extends AssignmentTok
 		return TestLanguageGrammarAccess.INSTANCE.prReducibleRule().ele11AssignmentActionFeature();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("actionFeature",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("actionFeature");
@@ -460,6 +474,7 @@ protected class TerminalRule_Assignment_stringFeature extends AssignmentToken  {
 		return TestLanguageGrammarAccess.INSTANCE.prTerminalRule().eleAssignmentStringFeature();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("stringFeature",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("stringFeature");

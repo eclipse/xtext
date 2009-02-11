@@ -154,7 +154,11 @@ public class GeneratorFacade {
 		String xmiPath = GrammarUtil.getClasspathRelativePathToXmi(genModel.getGrammar());
 		Resource resource = setImpl.createResource(URI.createURI(GenExtensions.outletPath(genModel, "SRC_GEN") + "/"
 				+ xmiPath));
-		resource.getContents().add(genModel.getGrammar());
+		Grammar grammar = genModel.getGrammar();
+		while(grammar != null) {
+			resource.getContents().add(grammar);
+			grammar = grammar.getSuperGrammar();
+		}
 		resource.save(null);
 
 		// generate ecore java classes

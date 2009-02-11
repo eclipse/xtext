@@ -6,6 +6,7 @@ package org.eclipse.xtext.testlanguages.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -22,9 +23,9 @@ import org.eclipse.xtext.testlanguages.parser.packrat.consumers.FowlerDslTestLan
 @SuppressWarnings("unused")
 public final class FowlerDslTestLanguageStatemachineConsumer extends NonTerminalConsumer {
 
-	private FowlerDslTestLanguageCommandConsumer commandConsumer;
-	private FowlerDslTestLanguageEventConsumer eventConsumer;
-	private FowlerDslTestLanguageStateConsumer stateConsumer;
+	private INonTerminalConsumer commandConsumer;
+	private INonTerminalConsumer eventConsumer;
+	private INonTerminalConsumer stateConsumer;
 
 	private ICharacterClass keyword$10$Delimiter;
 	
@@ -212,6 +213,7 @@ public final class FowlerDslTestLanguageStatemachineConsumer extends NonTerminal
 		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prStatemachine();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -221,15 +223,15 @@ public final class FowlerDslTestLanguageStatemachineConsumer extends NonTerminal
 		return "Statemachine";
 	}
 	
-	public void setCommandConsumer(FowlerDslTestLanguageCommandConsumer commandConsumer) {
+	public void setCommandConsumer(INonTerminalConsumer commandConsumer) {
 		this.commandConsumer = commandConsumer;
 	}
 	
-	public void setEventConsumer(FowlerDslTestLanguageEventConsumer eventConsumer) {
+	public void setEventConsumer(INonTerminalConsumer eventConsumer) {
 		this.eventConsumer = eventConsumer;
 	}
 	
-	public void setStateConsumer(FowlerDslTestLanguageStateConsumer stateConsumer) {
+	public void setStateConsumer(INonTerminalConsumer stateConsumer) {
 		this.stateConsumer = stateConsumer;
 	}
 	

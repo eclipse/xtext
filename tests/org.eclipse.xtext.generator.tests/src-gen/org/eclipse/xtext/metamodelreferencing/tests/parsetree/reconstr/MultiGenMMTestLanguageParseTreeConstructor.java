@@ -42,6 +42,7 @@ protected class Foo_Group extends GroupToken {
 		return MultiGenMMTestLanguageGrammarAccess.INSTANCE.prFoo().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Foo_1_Assignment_nameRefs(current, this).firstSolution();
 		while(s1 != null) {
@@ -70,6 +71,7 @@ protected class Foo_0_Assignment_name extends AssignmentToken  {
 		return MultiGenMMTestLanguageGrammarAccess.INSTANCE.prFoo().ele0AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -93,6 +95,7 @@ protected class Foo_1_Assignment_nameRefs extends AssignmentToken  {
 		return MultiGenMMTestLanguageGrammarAccess.INSTANCE.prFoo().ele1AssignmentNameRefs();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("nameRefs",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("nameRefs");
@@ -135,6 +138,7 @@ protected class NameRef_Assignment_name extends AssignmentToken  {
 		return MultiGenMMTestLanguageGrammarAccess.INSTANCE.prNameRef().eleAssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");

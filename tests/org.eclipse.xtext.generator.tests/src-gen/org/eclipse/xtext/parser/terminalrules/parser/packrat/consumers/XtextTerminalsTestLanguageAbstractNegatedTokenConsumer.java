@@ -6,6 +6,7 @@ package org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -21,8 +22,8 @@ import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerm
 @SuppressWarnings("unused")
 public final class XtextTerminalsTestLanguageAbstractNegatedTokenConsumer extends NonTerminalConsumer {
 
-	private XtextTerminalsTestLanguageNegatedTokenConsumer negatedTokenConsumer;
-	private XtextTerminalsTestLanguageUpToTokenConsumer upToTokenConsumer;
+	private INonTerminalConsumer negatedTokenConsumer;
+	private INonTerminalConsumer upToTokenConsumer;
 
 	public XtextTerminalsTestLanguageAbstractNegatedTokenConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
@@ -64,6 +65,7 @@ public final class XtextTerminalsTestLanguageAbstractNegatedTokenConsumer extend
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAbstractNegatedToken();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -73,11 +75,11 @@ public final class XtextTerminalsTestLanguageAbstractNegatedTokenConsumer extend
 		return "AbstractNegatedToken";
 	}
 	
-	public void setNegatedTokenConsumer(XtextTerminalsTestLanguageNegatedTokenConsumer negatedTokenConsumer) {
+	public void setNegatedTokenConsumer(INonTerminalConsumer negatedTokenConsumer) {
 		this.negatedTokenConsumer = negatedTokenConsumer;
 	}
 	
-	public void setUpToTokenConsumer(XtextTerminalsTestLanguageUpToTokenConsumer upToTokenConsumer) {
+	public void setUpToTokenConsumer(INonTerminalConsumer upToTokenConsumer) {
 		this.upToTokenConsumer = upToTokenConsumer;
 	}
 	

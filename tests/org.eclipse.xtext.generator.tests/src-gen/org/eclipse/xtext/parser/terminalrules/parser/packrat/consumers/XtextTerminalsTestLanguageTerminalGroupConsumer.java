@@ -6,6 +6,7 @@ package org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -20,7 +21,7 @@ import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerm
 @SuppressWarnings("unused")
 public final class XtextTerminalsTestLanguageTerminalGroupConsumer extends NonTerminalConsumer {
 
-	private XtextTerminalsTestLanguageTerminalTokenConsumer terminalTokenConsumer;
+	private INonTerminalConsumer terminalTokenConsumer;
 
 	public XtextTerminalsTestLanguageTerminalGroupConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
@@ -128,6 +129,7 @@ public final class XtextTerminalsTestLanguageTerminalGroupConsumer extends NonTe
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prTerminalGroup();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -137,7 +139,7 @@ public final class XtextTerminalsTestLanguageTerminalGroupConsumer extends NonTe
 		return "AbstractElement";
 	}
 	
-	public void setTerminalTokenConsumer(XtextTerminalsTestLanguageTerminalTokenConsumer terminalTokenConsumer) {
+	public void setTerminalTokenConsumer(INonTerminalConsumer terminalTokenConsumer) {
 		this.terminalTokenConsumer = terminalTokenConsumer;
 	}
 	

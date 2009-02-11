@@ -6,6 +6,7 @@ package org.eclipse.xtext.example.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -26,13 +27,13 @@ import org.eclipse.xtext.example.parser.packrat.consumers.EcoreDslSTRING_OR_QIDC
 @SuppressWarnings("unused")
 public final class EcoreDslEClassDeclConsumer extends NonTerminalConsumer {
 
-	private EcoreDslEAnnotationDeclConsumer eAnnotationDeclConsumer;
-	private EcoreDslEGenericTypeReferenceDeclConsumer eGenericTypeReferenceDeclConsumer;
-	private EcoreDslEOperationDeclConsumer eOperationDeclConsumer;
-	private EcoreDslEStructuralFeatureDeclConsumer eStructuralFeatureDeclConsumer;
-	private EcoreDslETypeParameterDeclConsumer eTypeParameterDeclConsumer;
-	private XtextBuiltinIDConsumer idConsumer;
-	private EcoreDslSTRING_OR_QIDConsumer stringOrQidConsumer;
+	private INonTerminalConsumer eAnnotationDeclConsumer;
+	private INonTerminalConsumer eGenericTypeReferenceDeclConsumer;
+	private INonTerminalConsumer eOperationDeclConsumer;
+	private INonTerminalConsumer eStructuralFeatureDeclConsumer;
+	private INonTerminalConsumer eTypeParameterDeclConsumer;
+	private ITerminalConsumer idConsumer;
+	private INonTerminalConsumer stringOrQidConsumer;
 
 	private ICharacterClass keyword$13$Delimiter;
 	
@@ -672,6 +673,7 @@ public final class EcoreDslEClassDeclConsumer extends NonTerminalConsumer {
 		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -681,31 +683,31 @@ public final class EcoreDslEClassDeclConsumer extends NonTerminalConsumer {
 		return "EClass";
 	}
 	
-	public void setEAnnotationDeclConsumer(EcoreDslEAnnotationDeclConsumer eAnnotationDeclConsumer) {
+	public void setEAnnotationDeclConsumer(INonTerminalConsumer eAnnotationDeclConsumer) {
 		this.eAnnotationDeclConsumer = eAnnotationDeclConsumer;
 	}
 	
-	public void setEGenericTypeReferenceDeclConsumer(EcoreDslEGenericTypeReferenceDeclConsumer eGenericTypeReferenceDeclConsumer) {
+	public void setEGenericTypeReferenceDeclConsumer(INonTerminalConsumer eGenericTypeReferenceDeclConsumer) {
 		this.eGenericTypeReferenceDeclConsumer = eGenericTypeReferenceDeclConsumer;
 	}
 	
-	public void setEOperationDeclConsumer(EcoreDslEOperationDeclConsumer eOperationDeclConsumer) {
+	public void setEOperationDeclConsumer(INonTerminalConsumer eOperationDeclConsumer) {
 		this.eOperationDeclConsumer = eOperationDeclConsumer;
 	}
 	
-	public void setEStructuralFeatureDeclConsumer(EcoreDslEStructuralFeatureDeclConsumer eStructuralFeatureDeclConsumer) {
+	public void setEStructuralFeatureDeclConsumer(INonTerminalConsumer eStructuralFeatureDeclConsumer) {
 		this.eStructuralFeatureDeclConsumer = eStructuralFeatureDeclConsumer;
 	}
 	
-	public void setETypeParameterDeclConsumer(EcoreDslETypeParameterDeclConsumer eTypeParameterDeclConsumer) {
+	public void setETypeParameterDeclConsumer(INonTerminalConsumer eTypeParameterDeclConsumer) {
 		this.eTypeParameterDeclConsumer = eTypeParameterDeclConsumer;
 	}
 	
-	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
+	public void setIdConsumer(ITerminalConsumer idConsumer) {
 		this.idConsumer = idConsumer;
 	}
 	
-	public void setStringOrQidConsumer(EcoreDslSTRING_OR_QIDConsumer stringOrQidConsumer) {
+	public void setStringOrQidConsumer(INonTerminalConsumer stringOrQidConsumer) {
 		this.stringOrQidConsumer = stringOrQidConsumer;
 	}
 	

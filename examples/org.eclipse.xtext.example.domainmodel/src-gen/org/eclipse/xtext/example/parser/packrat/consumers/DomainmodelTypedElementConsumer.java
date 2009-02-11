@@ -6,6 +6,7 @@ package org.eclipse.xtext.example.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -21,8 +22,8 @@ import org.eclipse.xtext.example.parser.packrat.consumers.DomainmodelParameterCo
 @SuppressWarnings("unused")
 public final class DomainmodelTypedElementConsumer extends NonTerminalConsumer {
 
-	private DomainmodelFeatureConsumer featureConsumer;
-	private DomainmodelParameterConsumer parameterConsumer;
+	private INonTerminalConsumer featureConsumer;
+	private INonTerminalConsumer parameterConsumer;
 
 	public DomainmodelTypedElementConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
@@ -64,6 +65,7 @@ public final class DomainmodelTypedElementConsumer extends NonTerminalConsumer {
 		return DomainmodelGrammarAccess.INSTANCE.prTypedElement();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -73,11 +75,11 @@ public final class DomainmodelTypedElementConsumer extends NonTerminalConsumer {
 		return "TypedElement";
 	}
 	
-	public void setFeatureConsumer(DomainmodelFeatureConsumer featureConsumer) {
+	public void setFeatureConsumer(INonTerminalConsumer featureConsumer) {
 		this.featureConsumer = featureConsumer;
 	}
 	
-	public void setParameterConsumer(DomainmodelParameterConsumer parameterConsumer) {
+	public void setParameterConsumer(INonTerminalConsumer parameterConsumer) {
 		this.parameterConsumer = parameterConsumer;
 	}
 	

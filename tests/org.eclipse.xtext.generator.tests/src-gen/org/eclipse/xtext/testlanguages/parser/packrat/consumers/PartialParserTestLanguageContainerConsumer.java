@@ -6,6 +6,7 @@ package org.eclipse.xtext.testlanguages.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -22,9 +23,9 @@ import org.eclipse.xtext.testlanguages.parser.packrat.consumers.PartialParserTes
 @SuppressWarnings("unused")
 public final class PartialParserTestLanguageContainerConsumer extends NonTerminalConsumer {
 
-	private PartialParserTestLanguageContentConsumer contentConsumer;
-	private XtextBuiltinIDConsumer idConsumer;
-	private PartialParserTestLanguageNestedConsumer nestedConsumer;
+	private INonTerminalConsumer contentConsumer;
+	private ITerminalConsumer idConsumer;
+	private INonTerminalConsumer nestedConsumer;
 
 	private ICharacterClass keyword$8$Delimiter;
 	
@@ -191,6 +192,7 @@ public final class PartialParserTestLanguageContainerConsumer extends NonTermina
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prContainer();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -200,15 +202,15 @@ public final class PartialParserTestLanguageContainerConsumer extends NonTermina
 		return "Container";
 	}
 	
-	public void setContentConsumer(PartialParserTestLanguageContentConsumer contentConsumer) {
+	public void setContentConsumer(INonTerminalConsumer contentConsumer) {
 		this.contentConsumer = contentConsumer;
 	}
 	
-	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
+	public void setIdConsumer(ITerminalConsumer idConsumer) {
 		this.idConsumer = idConsumer;
 	}
 	
-	public void setNestedConsumer(PartialParserTestLanguageNestedConsumer nestedConsumer) {
+	public void setNestedConsumer(INonTerminalConsumer nestedConsumer) {
 		this.nestedConsumer = nestedConsumer;
 	}
 	

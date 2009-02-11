@@ -6,6 +6,7 @@ package org.eclipse.xtext.testlanguages.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -21,8 +22,8 @@ import org.eclipse.xtext.testlanguages.parser.packrat.consumers.PartialParserTes
 @SuppressWarnings("unused")
 public final class PartialParserTestLanguageContentConsumer extends NonTerminalConsumer {
 
-	private PartialParserTestLanguageAbstractChildrenConsumer abstractChildrenConsumer;
-	private PartialParserTestLanguageChildrenConsumer childrenConsumer;
+	private INonTerminalConsumer abstractChildrenConsumer;
+	private INonTerminalConsumer childrenConsumer;
 
 	public PartialParserTestLanguageContentConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
@@ -64,6 +65,7 @@ public final class PartialParserTestLanguageContentConsumer extends NonTerminalC
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prContent();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -73,11 +75,11 @@ public final class PartialParserTestLanguageContentConsumer extends NonTerminalC
 		return "Content";
 	}
 	
-	public void setAbstractChildrenConsumer(PartialParserTestLanguageAbstractChildrenConsumer abstractChildrenConsumer) {
+	public void setAbstractChildrenConsumer(INonTerminalConsumer abstractChildrenConsumer) {
 		this.abstractChildrenConsumer = abstractChildrenConsumer;
 	}
 	
-	public void setChildrenConsumer(PartialParserTestLanguageChildrenConsumer childrenConsumer) {
+	public void setChildrenConsumer(INonTerminalConsumer childrenConsumer) {
 		this.childrenConsumer = childrenConsumer;
 	}
 	

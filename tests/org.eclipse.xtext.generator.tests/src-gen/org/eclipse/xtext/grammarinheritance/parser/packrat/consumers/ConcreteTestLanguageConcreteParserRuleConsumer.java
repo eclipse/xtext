@@ -6,6 +6,7 @@ package org.eclipse.xtext.grammarinheritance.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -21,19 +22,19 @@ import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.AbstractTes
 @SuppressWarnings("unused")
 public final class ConcreteTestLanguageConcreteParserRuleConsumer extends NonTerminalConsumer {
 
-	private AbstractTestLanguageInheritedParserRuleConsumer inheritedParserRuleConsumer;
-	private AbstractTestLanguageREALConsumer realConsumer;
+	private INonTerminalConsumer inheritedParserRuleConsumer;
+	private ITerminalConsumer realConsumer;
 
-	private ICharacterClass keyword$7$Delimiter;
-	
 	private ICharacterClass keyword$4$Delimiter;
+	
+	private ICharacterClass keyword$7$Delimiter;
 	
 	private ISequenceMatcher ruleCall$6$Delimiter;
 	
 	public ConcreteTestLanguageConcreteParserRuleConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
-		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$4$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
 		ruleCall$6$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
@@ -140,6 +141,7 @@ public final class ConcreteTestLanguageConcreteParserRuleConsumer extends NonTer
 		return ConcreteTestLanguageGrammarAccess.INSTANCE.prConcreteParserRule();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -149,20 +151,12 @@ public final class ConcreteTestLanguageConcreteParserRuleConsumer extends NonTer
 		return "ConcreteParserRule";
 	}
 	
-	public void setInheritedParserRuleConsumer(AbstractTestLanguageInheritedParserRuleConsumer inheritedParserRuleConsumer) {
+	public void setInheritedParserRuleConsumer(INonTerminalConsumer inheritedParserRuleConsumer) {
 		this.inheritedParserRuleConsumer = inheritedParserRuleConsumer;
 	}
 	
-	public void setRealConsumer(AbstractTestLanguageREALConsumer realConsumer) {
+	public void setRealConsumer(ITerminalConsumer realConsumer) {
 		this.realConsumer = realConsumer;
-	}
-	
-	public ICharacterClass getKeyword$7$Delimiter() {
-		return keyword$7$Delimiter;
-	}
-	
-	public void setKeyword$7$Delimiter(ICharacterClass characterClass) {
-		keyword$7$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ICharacterClass getKeyword$4$Delimiter() {
@@ -171,6 +165,14 @@ public final class ConcreteTestLanguageConcreteParserRuleConsumer extends NonTer
 	
 	public void setKeyword$4$Delimiter(ICharacterClass characterClass) {
 		keyword$4$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$7$Delimiter() {
+		return keyword$7$Delimiter;
+	}
+	
+	public void setKeyword$7$Delimiter(ICharacterClass characterClass) {
+		keyword$7$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ISequenceMatcher getRuleCall$6$Delimiter() {

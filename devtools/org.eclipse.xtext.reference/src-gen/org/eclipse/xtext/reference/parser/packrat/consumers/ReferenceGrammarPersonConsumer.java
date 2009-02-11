@@ -6,6 +6,7 @@ package org.eclipse.xtext.reference.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -21,8 +22,8 @@ import org.eclipse.xtext.reference.parser.packrat.consumers.ReferenceGrammarKind
 @SuppressWarnings("unused")
 public final class ReferenceGrammarPersonConsumer extends NonTerminalConsumer {
 
-	private ReferenceGrammarErwachsenerConsumer erwachsenerConsumer;
-	private ReferenceGrammarKindConsumer kindConsumer;
+	private INonTerminalConsumer erwachsenerConsumer;
+	private INonTerminalConsumer kindConsumer;
 
 	public ReferenceGrammarPersonConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
@@ -64,6 +65,7 @@ public final class ReferenceGrammarPersonConsumer extends NonTerminalConsumer {
 		return ReferenceGrammarGrammarAccess.INSTANCE.prPerson();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -73,11 +75,11 @@ public final class ReferenceGrammarPersonConsumer extends NonTerminalConsumer {
 		return "Person";
 	}
 	
-	public void setErwachsenerConsumer(ReferenceGrammarErwachsenerConsumer erwachsenerConsumer) {
+	public void setErwachsenerConsumer(INonTerminalConsumer erwachsenerConsumer) {
 		this.erwachsenerConsumer = erwachsenerConsumer;
 	}
 	
-	public void setKindConsumer(ReferenceGrammarKindConsumer kindConsumer) {
+	public void setKindConsumer(INonTerminalConsumer kindConsumer) {
 		this.kindConsumer = kindConsumer;
 	}
 	

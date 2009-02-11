@@ -6,6 +6,7 @@ package org.eclipse.xtext.testlanguages.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -21,8 +22,8 @@ import org.eclipse.xtext.testlanguages.parser.packrat.consumers.TestLanguageRedu
 @SuppressWarnings("unused")
 public final class TestLanguageAbstractRuleConsumer extends NonTerminalConsumer {
 
-	private TestLanguageChoiceRuleConsumer choiceRuleConsumer;
-	private TestLanguageReducibleRuleConsumer reducibleRuleConsumer;
+	private INonTerminalConsumer choiceRuleConsumer;
+	private INonTerminalConsumer reducibleRuleConsumer;
 
 	public TestLanguageAbstractRuleConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
@@ -64,6 +65,7 @@ public final class TestLanguageAbstractRuleConsumer extends NonTerminalConsumer 
 		return TestLanguageGrammarAccess.INSTANCE.prAbstractRule();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -73,11 +75,11 @@ public final class TestLanguageAbstractRuleConsumer extends NonTerminalConsumer 
 		return "AbstractElement";
 	}
 	
-	public void setChoiceRuleConsumer(TestLanguageChoiceRuleConsumer choiceRuleConsumer) {
+	public void setChoiceRuleConsumer(INonTerminalConsumer choiceRuleConsumer) {
 		this.choiceRuleConsumer = choiceRuleConsumer;
 	}
 	
-	public void setReducibleRuleConsumer(TestLanguageReducibleRuleConsumer reducibleRuleConsumer) {
+	public void setReducibleRuleConsumer(INonTerminalConsumer reducibleRuleConsumer) {
 		this.reducibleRuleConsumer = reducibleRuleConsumer;
 	}
 	

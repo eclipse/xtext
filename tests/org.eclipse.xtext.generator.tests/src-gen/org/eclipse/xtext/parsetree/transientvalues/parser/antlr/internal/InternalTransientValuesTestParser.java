@@ -74,7 +74,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:68:46: (iv_ruleRoot= ruleRoot EOF )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:69:2: iv_ruleRoot= ruleRoot EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#/0/@rules.0" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleRoot_in_entryRuleRoot72);
             iv_ruleRoot=ruleRoot();
             _fsp--;
@@ -120,7 +120,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
             {
             match(input,11,FOLLOW_11_in_ruleRoot116); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#//@rules.0/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#/0/@rules.0/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:85:1: ( (this_TestRequired= ruleTestRequired | this_TestOptional= ruleTestOptional ) | this_TestList= ruleTestList )
             int alt2=2;
@@ -163,7 +163,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
                             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:86:5: this_TestRequired= ruleTestRequired
                             {
                              
-                                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#//@rules.0/@alternatives/@abstractTokens.1/@groups.0/@groups.0" /* xtext::RuleCall */, currentNode); 
+                                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#/0/@rules.0/@alternatives/@abstractTokens.1/@groups.0/@groups.0" /* xtext::RuleCall */, currentNode); 
                                 
                             pushFollow(FOLLOW_ruleTestRequired_in_ruleRoot140);
                             this_TestRequired=ruleTestRequired();
@@ -180,7 +180,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
                             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:96:5: this_TestOptional= ruleTestOptional
                             {
                              
-                                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#//@rules.0/@alternatives/@abstractTokens.1/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
+                                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#/0/@rules.0/@alternatives/@abstractTokens.1/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
                                 
                             pushFollow(FOLLOW_ruleTestOptional_in_ruleRoot167);
                             this_TestOptional=ruleTestOptional();
@@ -203,7 +203,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
                     // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:106:5: this_TestList= ruleTestList
                     {
                      
-                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#//@rules.0/@alternatives/@abstractTokens.1/@groups.1" /* xtext::RuleCall */, currentNode); 
+                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#/0/@rules.0/@alternatives/@abstractTokens.1/@groups.1" /* xtext::RuleCall */, currentNode); 
                         
                     pushFollow(FOLLOW_ruleTestList_in_ruleRoot195);
                     this_TestList=ruleTestList();
@@ -252,7 +252,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:123:54: (iv_ruleTestRequired= ruleTestRequired EOF )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:124:2: iv_ruleTestRequired= ruleTestRequired EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#//@rules.1" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#/0/@rules.1" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleTestRequired_in_entryRuleTestRequired230);
             iv_ruleTestRequired=ruleTestRequired();
             _fsp--;
@@ -297,7 +297,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
             {
             match(input,12,FOLLOW_12_in_ruleTestRequired275); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#/0/@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:140:1: (lv_required1= RULE_INT )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:142:6: lv_required1= RULE_INT
@@ -305,7 +305,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
             lv_required1=(Token)input.LT(1);
             match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleTestRequired296); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "required1"); 
+                createLeafNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#/0/@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "required1"); 
                 
 
             	        if (current==null) {
@@ -331,7 +331,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
             lv_required2=(Token)input.LT(1);
             match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleTestRequired329); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#//@rules.1/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "required2"); 
+                createLeafNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#/0/@rules.1/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "required2"); 
                 
 
             	        if (current==null) {
@@ -381,7 +381,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:189:54: (iv_ruleTestOptional= ruleTestOptional EOF )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:190:2: iv_ruleTestOptional= ruleTestOptional EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#//@rules.2" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#/0/@rules.2" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleTestOptional_in_entryRuleTestOptional375);
             iv_ruleTestOptional=ruleTestOptional();
             _fsp--;
@@ -426,7 +426,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
             {
             match(input,13,FOLLOW_13_in_ruleTestOptional420); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#/0/@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:206:1: (lv_opt1= RULE_INT )?
             int alt3=2;
@@ -442,7 +442,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
                     lv_opt1=(Token)input.LT(1);
                     match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleTestOptional441); 
                      
-                        createLeafNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "opt1"); 
+                        createLeafNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#/0/@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "opt1"); 
                         
 
                     	        if (current==null) {
@@ -478,7 +478,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
                     {
                     match(input,14,FOLLOW_14_in_ruleTestOptional464); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#//@rules.2/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#/0/@rules.2/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
                     // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:230:1: (lv_opt2= RULE_INT )
                     // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:232:6: lv_opt2= RULE_INT
@@ -486,7 +486,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
                     lv_opt2=(Token)input.LT(1);
                     match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleTestOptional485); 
                      
-                        createLeafNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#//@rules.2/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "opt2"); 
+                        createLeafNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#/0/@rules.2/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "opt2"); 
                         
 
                     	        if (current==null) {
@@ -542,7 +542,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:259:50: (iv_ruleTestList= ruleTestList EOF )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:260:2: iv_ruleTestList= ruleTestList EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#//@rules.3" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#/0/@rules.3" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleTestList_in_entryRuleTestList533);
             iv_ruleTestList=ruleTestList();
             _fsp--;
@@ -583,7 +583,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
             {
             match(input,15,FOLLOW_15_in_ruleTestList577); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#//@rules.3/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#/0/@rules.3/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:276:1: (lv_item= RULE_INT )*
             loop5:
@@ -603,7 +603,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
             	    lv_item=(Token)input.LT(1);
             	    match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleTestList598); 
             	     
-            	        createLeafNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#//@rules.3/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "item"); 
+            	        createLeafNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#/0/@rules.3/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "item"); 
             	        
 
             	    	        if (current==null) {

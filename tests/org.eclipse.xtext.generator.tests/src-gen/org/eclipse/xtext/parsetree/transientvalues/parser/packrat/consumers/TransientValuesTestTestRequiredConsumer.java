@@ -6,6 +6,7 @@ package org.eclipse.xtext.parsetree.transientvalues.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -20,7 +21,7 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinINTConsume
 @SuppressWarnings("unused")
 public final class TransientValuesTestTestRequiredConsumer extends NonTerminalConsumer {
 
-	private XtextBuiltinINTConsumer intConsumer;
+	private ITerminalConsumer intConsumer;
 
 	private ICharacterClass keyword$3$Delimiter;
 	
@@ -116,6 +117,7 @@ public final class TransientValuesTestTestRequiredConsumer extends NonTerminalCo
 		return TransientValuesTestGrammarAccess.INSTANCE.prTestRequired();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -125,7 +127,7 @@ public final class TransientValuesTestTestRequiredConsumer extends NonTerminalCo
 		return "TestRequired";
 	}
 	
-	public void setIntConsumer(XtextBuiltinINTConsumer intConsumer) {
+	public void setIntConsumer(ITerminalConsumer intConsumer) {
 		this.intConsumer = intConsumer;
 	}
 	

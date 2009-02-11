@@ -42,6 +42,7 @@ protected class Model_Assignment_child extends AssignmentToken  {
 		return OptionalEmptyTestLanguageGrammarAccess.INSTANCE.prModel().eleAssignmentChild();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("child",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("child");
@@ -83,6 +84,7 @@ protected class Greeting_Group extends GroupToken {
 		return OptionalEmptyTestLanguageGrammarAccess.INSTANCE.prGreeting().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Greeting_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
@@ -123,6 +125,7 @@ protected class Greeting_1_Assignment_name extends AssignmentToken  {
 		return OptionalEmptyTestLanguageGrammarAccess.INSTANCE.prGreeting().ele1AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");

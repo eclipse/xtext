@@ -25,9 +25,9 @@ List[CrossReference] allCrossReferences(Grammar this) :
 Collection[ecore::EReference] eReferencesFromCrossRefs(Grammar this):
 	allCrossReferences().eReference().toSet();
 
-qualifiedXtendName(Grammar this, EClassifier eClass) :
+String qualifiedXtendName(Grammar this, EClassifier eClass) :
 	metamodelDeclarations.select(m|m.ePackage==eClass.ePackage).first().aliasPrefix() + eClass.name;
 	
-aliasPrefix(AbstractMetamodelDeclaration this) :
+String aliasPrefix(AbstractMetamodelDeclaration this) :
 	alias == null ? "" : alias + "::";
  

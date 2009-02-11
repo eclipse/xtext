@@ -6,6 +6,7 @@ package org.eclipse.xtext.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -22,9 +23,9 @@ import org.eclipse.xtext.parser.packrat.consumers.XtextTypeRefConsumer;
 @SuppressWarnings("unused")
 public final class XtextTerminalRuleConsumer extends NonTerminalConsumer {
 
-	private XtextBuiltinIDConsumer idConsumer;
-	private XtextTerminalAlternativesConsumer terminalAlternativesConsumer;
-	private XtextTypeRefConsumer typeRefConsumer;
+	private ITerminalConsumer idConsumer;
+	private INonTerminalConsumer terminalAlternativesConsumer;
+	private INonTerminalConsumer typeRefConsumer;
 
 	private ICharacterClass keyword$7$Delimiter;
 	
@@ -230,6 +231,7 @@ public final class XtextTerminalRuleConsumer extends NonTerminalConsumer {
 		return XtextGrammarAccess.INSTANCE.prTerminalRule();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -239,15 +241,15 @@ public final class XtextTerminalRuleConsumer extends NonTerminalConsumer {
 		return "ParserRule";
 	}
 	
-	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
+	public void setIdConsumer(ITerminalConsumer idConsumer) {
 		this.idConsumer = idConsumer;
 	}
 	
-	public void setTerminalAlternativesConsumer(XtextTerminalAlternativesConsumer terminalAlternativesConsumer) {
+	public void setTerminalAlternativesConsumer(INonTerminalConsumer terminalAlternativesConsumer) {
 		this.terminalAlternativesConsumer = terminalAlternativesConsumer;
 	}
 	
-	public void setTypeRefConsumer(XtextTypeRefConsumer typeRefConsumer) {
+	public void setTypeRefConsumer(INonTerminalConsumer typeRefConsumer) {
 		this.typeRefConsumer = typeRefConsumer;
 	}
 	

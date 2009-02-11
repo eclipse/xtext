@@ -6,6 +6,7 @@ package org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -22,9 +23,9 @@ import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerm
 @SuppressWarnings("unused")
 public final class XtextTerminalsTestLanguageGrammarConsumer extends NonTerminalConsumer {
 
-	private XtextTerminalsTestLanguageAbstractMetamodelDeclarationConsumer abstractMetamodelDeclarationConsumer;
-	private XtextTerminalsTestLanguageAbstractRuleConsumer abstractRuleConsumer;
-	private XtextTerminalsTestLanguageIDConsumer idConsumer;
+	private INonTerminalConsumer abstractMetamodelDeclarationConsumer;
+	private INonTerminalConsumer abstractRuleConsumer;
+	private ITerminalConsumer idConsumer;
 
 	private ICharacterClass keyword$8$Delimiter;
 	
@@ -434,6 +435,7 @@ public final class XtextTerminalsTestLanguageGrammarConsumer extends NonTerminal
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGrammar();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -443,15 +445,15 @@ public final class XtextTerminalsTestLanguageGrammarConsumer extends NonTerminal
 		return "Grammar";
 	}
 	
-	public void setAbstractMetamodelDeclarationConsumer(XtextTerminalsTestLanguageAbstractMetamodelDeclarationConsumer abstractMetamodelDeclarationConsumer) {
+	public void setAbstractMetamodelDeclarationConsumer(INonTerminalConsumer abstractMetamodelDeclarationConsumer) {
 		this.abstractMetamodelDeclarationConsumer = abstractMetamodelDeclarationConsumer;
 	}
 	
-	public void setAbstractRuleConsumer(XtextTerminalsTestLanguageAbstractRuleConsumer abstractRuleConsumer) {
+	public void setAbstractRuleConsumer(INonTerminalConsumer abstractRuleConsumer) {
 		this.abstractRuleConsumer = abstractRuleConsumer;
 	}
 	
-	public void setIdConsumer(XtextTerminalsTestLanguageIDConsumer idConsumer) {
+	public void setIdConsumer(ITerminalConsumer idConsumer) {
 		this.idConsumer = idConsumer;
 	}
 	

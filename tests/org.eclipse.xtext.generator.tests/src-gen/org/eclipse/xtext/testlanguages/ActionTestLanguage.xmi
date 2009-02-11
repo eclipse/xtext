@@ -1,50 +1,89 @@
 <?xml version="1.0" encoding="ASCII"?>
-<xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:xtext="http://www.eclipse.org/2008/Xtext" name="org.eclipse.xtext.testlanguages.ActionTestLanguage">
-  <superGrammar href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#/"/>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="ActionLang">
-    <ePackage href="http://www.eclipse.org/2008/tmf/xtext/ActionLang#/"/>
-  </metamodelDeclarations>
-  <rules xsi:type="xtext:ParserRule" name="Model">
-    <type metamodel="//@metamodelDeclarations.0">
-      <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/tmf/xtext/ActionLang#//Model"/>
-    </type>
-    <alternatives xsi:type="xtext:Assignment" cardinality="*" feature="children" operator="+=">
-      <terminal xsi:type="xtext:RuleCall" rule="//@rules.1"/>
-    </alternatives>
-  </rules>
-  <rules xsi:type="xtext:ParserRule" name="Element">
-    <type metamodel="//@metamodelDeclarations.0">
-      <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/tmf/xtext/ActionLang#//Type"/>
-    </type>
-    <alternatives xsi:type="xtext:Group">
-      <abstractTokens xsi:type="xtext:RuleCall" rule="//@rules.2"/>
-      <abstractTokens xsi:type="xtext:Group">
-        <abstractTokens xsi:type="xtext:Action" feature="items" operator="+=">
-          <typeName metamodel="//@metamodelDeclarations.0">
-            <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/tmf/xtext/ActionLang#//Item"/>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
+  <xtext:Grammar name="org.eclipse.xtext.testlanguages.ActionTestLanguage" superGrammar="/1">
+    <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="ActionLang">
+      <ePackage href="http://www.eclipse.org/2008/tmf/xtext/ActionLang#/"/>
+    </metamodelDeclarations>
+    <rules xsi:type="xtext:ParserRule" name="Model">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/tmf/xtext/ActionLang#//Model"/>
+      </type>
+      <alternatives xsi:type="xtext:Assignment" cardinality="*" feature="children" operator="+=">
+        <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Element">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/tmf/xtext/ActionLang#//Type"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:RuleCall" rule="/0/@rules.2"/>
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Action" feature="items" operator="+=">
+            <typeName metamodel="/0/@metamodelDeclarations.0">
+              <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/tmf/xtext/ActionLang#//Item"/>
+            </typeName>
+          </abstractTokens>
+          <abstractTokens xsi:type="xtext:Assignment" feature="items" operator="+=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.2"/>
+          </abstractTokens>
+        </abstractTokens>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Item">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/tmf/xtext/ActionLang#//Type"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Action" feature="content" operator="=">
+          <typeName metamodel="/0/@metamodelDeclarations.0">
+            <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/tmf/xtext/ActionLang#//Thing"/>
           </typeName>
         </abstractTokens>
-        <abstractTokens xsi:type="xtext:Assignment" feature="items" operator="+=">
-          <terminal xsi:type="xtext:RuleCall" rule="//@rules.2"/>
+        <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
         </abstractTokens>
-      </abstractTokens>
-    </alternatives>
-  </rules>
-  <rules xsi:type="xtext:ParserRule" name="Item">
-    <type metamodel="//@metamodelDeclarations.0">
-      <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/tmf/xtext/ActionLang#//Type"/>
-    </type>
-    <alternatives xsi:type="xtext:Group">
-      <abstractTokens xsi:type="xtext:Action" feature="content" operator="=">
-        <typeName metamodel="//@metamodelDeclarations.0">
-          <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/tmf/xtext/ActionLang#//Thing"/>
-        </typeName>
-      </abstractTokens>
-      <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
-        <terminal xsi:type="xtext:RuleCall">
-          <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.0"/>
-        </terminal>
-      </abstractTokens>
-    </alternatives>
-  </rules>
-</xtext:Grammar>
+      </alternatives>
+    </rules>
+  </xtext:Grammar>
+  <xtext:Grammar abstract="true" name="org.eclipse.xtext.builtin.XtextBuiltin" definesHiddenTokens="true" hiddenTokens="/1/@rules.5 /1/@rules.3 /1/@rules.4">
+    <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="ecore">
+      <ePackage href="http://www.eclipse.org/emf/2002/Ecore#/"/>
+    </metamodelDeclarations>
+    <rules xsi:type="xtext:LexerRule" name="ID" body="('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+    </rules>
+    <rules xsi:type="xtext:LexerRule" name="INT" body="('0'..'9')+">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      </type>
+    </rules>
+    <rules xsi:type="xtext:LexerRule" name="STRING" body="&#xA;&#x9;&#x9;&#x9;  '&quot;' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\&quot;'|'\''|'\\') | ~('\\'|'&quot;') )* '&quot;' | &#xA;              '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\&quot;'|'\''|'\\') | ~('\\'|'\'') )* '\''&#xA;              ">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+    </rules>
+    <rules xsi:type="xtext:LexerRule" name="ML_COMMENT" body="'/*' ( options {greedy=false;} : . )* '*/'">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+    </rules>
+    <rules xsi:type="xtext:LexerRule" name="SL_COMMENT" body="'//' ~('\n'|'\r')* ('\r'? '\n')?">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+    </rules>
+    <rules xsi:type="xtext:LexerRule" name="WS" body="(' '|'\t'|'\r'|'\n')+">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+    </rules>
+    <rules xsi:type="xtext:LexerRule" name="ANY_OTHER" body=".">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+    </rules>
+  </xtext:Grammar>
+</xmi:XMI>

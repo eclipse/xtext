@@ -43,6 +43,7 @@ protected class Main_Group extends GroupToken {
 		return ImportUriTestLanguageGrammarAccess.INSTANCE.prMain().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Main_1_Assignment_types(current, this).firstSolution();
 		while(s1 != null) {
@@ -71,6 +72,7 @@ protected class Main_0_Assignment_imports extends AssignmentToken  {
 		return ImportUriTestLanguageGrammarAccess.INSTANCE.prMain().ele0AssignmentImports();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("imports",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("imports");
@@ -102,6 +104,7 @@ protected class Main_1_Assignment_types extends AssignmentToken  {
 		return ImportUriTestLanguageGrammarAccess.INSTANCE.prMain().ele1AssignmentTypes();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("types",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("types");
@@ -144,6 +147,7 @@ protected class Import_Group extends GroupToken {
 		return ImportUriTestLanguageGrammarAccess.INSTANCE.prImport().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Import_1_Assignment_importURI(current, this).firstSolution();
 		while(s1 != null) {
@@ -184,6 +188,7 @@ protected class Import_1_Assignment_importURI extends AssignmentToken  {
 		return ImportUriTestLanguageGrammarAccess.INSTANCE.prImport().ele1AssignmentImportURI();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("importURI",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("importURI");
@@ -218,6 +223,7 @@ protected class Type_Group extends GroupToken {
 		return ImportUriTestLanguageGrammarAccess.INSTANCE.prType().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Type_1_Assignment_extends(current, this).firstSolution();
 		while(s1 != null) {
@@ -246,6 +252,7 @@ protected class Type_0_Group extends GroupToken {
 		return ImportUriTestLanguageGrammarAccess.INSTANCE.prType().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Type_0_1_Keyword_extends(current, this).firstSolution();
 		while(s1 != null) {
@@ -274,6 +281,7 @@ protected class Type_0_0_Group extends GroupToken {
 		return ImportUriTestLanguageGrammarAccess.INSTANCE.prType().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Type_0_0_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
@@ -314,6 +322,7 @@ protected class Type_0_0_1_Assignment_name extends AssignmentToken  {
 		return ImportUriTestLanguageGrammarAccess.INSTANCE.prType().ele001AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -351,6 +360,7 @@ protected class Type_1_Assignment_extends extends AssignmentToken  {
 		return ImportUriTestLanguageGrammarAccess.INSTANCE.prType().ele1AssignmentExtends();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("extends",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("extends");

@@ -6,6 +6,7 @@ package org.eclipse.xtext.parser.epatch.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -23,10 +24,10 @@ import org.eclipse.xtext.parser.epatch.parser.packrat.consumers.EpatchTestLangua
 @SuppressWarnings("unused")
 public final class EpatchTestLanguageAssignmentConsumer extends NonTerminalConsumer {
 
-	private EpatchTestLanguageBiListAssignmentConsumer biListAssignmentConsumer;
-	private EpatchTestLanguageBiSingleAssignmentConsumer biSingleAssignmentConsumer;
-	private EpatchTestLanguageMonoListAssignmentConsumer monoListAssignmentConsumer;
-	private EpatchTestLanguageMonoSingleAssignmentConsumer monoSingleAssignmentConsumer;
+	private INonTerminalConsumer biListAssignmentConsumer;
+	private INonTerminalConsumer biSingleAssignmentConsumer;
+	private INonTerminalConsumer monoListAssignmentConsumer;
+	private INonTerminalConsumer monoSingleAssignmentConsumer;
 
 	public EpatchTestLanguageAssignmentConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
@@ -86,6 +87,7 @@ public final class EpatchTestLanguageAssignmentConsumer extends NonTerminalConsu
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prAssignment();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -95,19 +97,19 @@ public final class EpatchTestLanguageAssignmentConsumer extends NonTerminalConsu
 		return "Assignment";
 	}
 	
-	public void setBiListAssignmentConsumer(EpatchTestLanguageBiListAssignmentConsumer biListAssignmentConsumer) {
+	public void setBiListAssignmentConsumer(INonTerminalConsumer biListAssignmentConsumer) {
 		this.biListAssignmentConsumer = biListAssignmentConsumer;
 	}
 	
-	public void setBiSingleAssignmentConsumer(EpatchTestLanguageBiSingleAssignmentConsumer biSingleAssignmentConsumer) {
+	public void setBiSingleAssignmentConsumer(INonTerminalConsumer biSingleAssignmentConsumer) {
 		this.biSingleAssignmentConsumer = biSingleAssignmentConsumer;
 	}
 	
-	public void setMonoListAssignmentConsumer(EpatchTestLanguageMonoListAssignmentConsumer monoListAssignmentConsumer) {
+	public void setMonoListAssignmentConsumer(INonTerminalConsumer monoListAssignmentConsumer) {
 		this.monoListAssignmentConsumer = monoListAssignmentConsumer;
 	}
 	
-	public void setMonoSingleAssignmentConsumer(EpatchTestLanguageMonoSingleAssignmentConsumer monoSingleAssignmentConsumer) {
+	public void setMonoSingleAssignmentConsumer(INonTerminalConsumer monoSingleAssignmentConsumer) {
 		this.monoSingleAssignmentConsumer = monoSingleAssignmentConsumer;
 	}
 	

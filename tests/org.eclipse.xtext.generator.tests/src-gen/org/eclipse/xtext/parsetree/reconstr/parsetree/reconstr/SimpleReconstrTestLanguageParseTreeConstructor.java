@@ -50,6 +50,7 @@ protected class Op_Group extends GroupToken {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prOp().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Op_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -78,6 +79,7 @@ protected class Op_0_RuleCall_Term extends RuleCallToken {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prOp().ele0ParserRuleCallTerm();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Term_Alternatives.class, current)) return null;
 		if(!current.isInstanceOf("Expression")) return null;
@@ -96,6 +98,7 @@ protected class Op_1_Group extends GroupToken {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prOp().ele1Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Op_1_1_Assignment_values(current, this).firstSolution();
 		while(s1 != null) {
@@ -124,6 +127,7 @@ protected class Op_1_0_Action_Op_values extends ActionToken  {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prOp().ele10ActionOpvalues();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(!current.isInstanceOf("Op")) return null;
 		Object val = current.getConsumable("values", false);
@@ -144,6 +148,7 @@ protected class Op_1_1_Assignment_values extends AssignmentToken  {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prOp().ele11AssignmentValues();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("values",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("values");
@@ -186,7 +191,8 @@ protected class Term_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prTerm().eleAlternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new Term_1_RuleCall_Boolean(current, this) : new Term_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -207,7 +213,8 @@ protected class Term_0_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prTerm().ele0Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new Term_0_1_RuleCall_Spare(current, this) : new Term_0_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -228,7 +235,8 @@ protected class Term_0_0_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prTerm().ele00Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new Term_0_0_1_RuleCall_Ref2(current, this) : new Term_0_0_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -249,7 +257,8 @@ protected class Term_0_0_0_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prTerm().ele000Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new Term_0_0_0_1_RuleCall_Type(current, this) : new Term_0_0_0_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -270,7 +279,8 @@ protected class Term_0_0_0_0_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prTerm().ele0000Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new Term_0_0_0_0_1_RuleCall_Parens(current, this) : new Term_0_0_0_0_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -291,7 +301,8 @@ protected class Term_0_0_0_0_0_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prTerm().ele00000Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new Term_0_0_0_0_0_1_RuleCall_ManyStrings(current, this) : new Term_0_0_0_0_0_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -312,7 +323,8 @@ protected class Term_0_0_0_0_0_0_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prTerm().ele000000Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new Term_0_0_0_0_0_0_1_RuleCall_TwoNumbers(current, this) : new Term_0_0_0_0_0_0_0_RuleCall_Atom(current, this);
 		Solution s = t.firstSolution();
@@ -334,6 +346,7 @@ protected class Term_0_0_0_0_0_0_0_RuleCall_Atom extends RuleCallToken {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prTerm().ele0000000ParserRuleCallAtom();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Atom_Assignment_name.class, current)) return null;
 		if(!current.isInstanceOf("Atom")) return null;
@@ -352,6 +365,7 @@ protected class Term_0_0_0_0_0_0_1_RuleCall_TwoNumbers extends RuleCallToken {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prTerm().ele0000001ParserRuleCallTwoNumbers();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(TwoNumbers_Group.class, current)) return null;
 		if(!current.isInstanceOf("TwoNumbers")) return null;
@@ -371,6 +385,7 @@ protected class Term_0_0_0_0_0_1_RuleCall_ManyStrings extends RuleCallToken {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prTerm().ele000001ParserRuleCallManyStrings();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(ManyStrings_Group.class, current)) return null;
 		if(!current.isInstanceOf("ManyStrings")) return null;
@@ -390,6 +405,7 @@ protected class Term_0_0_0_0_1_RuleCall_Parens extends RuleCallToken {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prTerm().ele00001ParserRuleCallParens();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Parens_Group.class, current)) return null;
 		if(!current.isInstanceOf("Expression")) return null;
@@ -409,6 +425,7 @@ protected class Term_0_0_0_1_RuleCall_Type extends RuleCallToken {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prTerm().ele0001ParserRuleCallType();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Type_Group.class, current)) return null;
 		if(!current.isInstanceOf("Type")) return null;
@@ -428,6 +445,7 @@ protected class Term_0_0_1_RuleCall_Ref2 extends RuleCallToken {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prTerm().ele001ParserRuleCallRef2();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Ref2_Group.class, current)) return null;
 		if(!current.isInstanceOf("Ref2")) return null;
@@ -447,6 +465,7 @@ protected class Term_0_1_RuleCall_Spare extends RuleCallToken {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prTerm().ele01ParserRuleCallSpare();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Spare_Group.class, current)) return null;
 		if(!current.isInstanceOf("Spare")) return null;
@@ -466,6 +485,7 @@ protected class Term_1_RuleCall_Boolean extends RuleCallToken {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prTerm().ele1ParserRuleCallBoolean();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Boolean_Group.class, current)) return null;
 		if(!current.isInstanceOf("Boolean")) return null;
@@ -495,6 +515,7 @@ protected class Atom_Assignment_name extends AssignmentToken  {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prAtom().eleAssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -528,6 +549,7 @@ protected class Parens_Group extends GroupToken {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prParens().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Parens_1_Assignment_em(current, this).firstSolution();
 		while(s1 != null) {
@@ -556,6 +578,7 @@ protected class Parens_0_Group extends GroupToken {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prParens().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Parens_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -584,6 +607,7 @@ protected class Parens_0_0_Group extends GroupToken {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prParens().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Parens_0_0_1_RuleCall_Op(current, this).firstSolution();
 		while(s1 != null) {
@@ -624,6 +648,7 @@ protected class Parens_0_0_1_RuleCall_Op extends RuleCallToken {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prParens().ele001ParserRuleCallOp();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Op_Group.class, current)) return null;
 		if(!current.isInstanceOf("Expression")) return null;
@@ -656,6 +681,7 @@ protected class Parens_1_Assignment_em extends AssignmentToken  {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prParens().ele1AssignmentEm();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("em",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("em");
@@ -692,6 +718,7 @@ protected class TwoNumbers_Group extends GroupToken {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prTwoNumbers().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TwoNumbers_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -720,6 +747,7 @@ protected class TwoNumbers_0_Group extends GroupToken {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prTwoNumbers().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TwoNumbers_0_1_Assignment_num2(current, this).firstSolution();
 		while(s1 != null) {
@@ -748,6 +776,7 @@ protected class TwoNumbers_0_0_Assignment_num1 extends AssignmentToken  {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prTwoNumbers().ele00AssignmentNum1();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("num1",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("num1");
@@ -771,6 +800,7 @@ protected class TwoNumbers_0_1_Assignment_num2 extends AssignmentToken  {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prTwoNumbers().ele01AssignmentNum2();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("num2",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("num2");
@@ -795,6 +825,7 @@ protected class TwoNumbers_1_Group extends GroupToken {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prTwoNumbers().ele1Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TwoNumbers_1_1_Assignment_num3(current, this).firstSolution();
 		while(s1 != null) {
@@ -835,6 +866,7 @@ protected class TwoNumbers_1_1_Assignment_num3 extends AssignmentToken  {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prTwoNumbers().ele11AssignmentNum3();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("num3",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("num3");
@@ -870,6 +902,7 @@ protected class ManyStrings_Group extends GroupToken {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prManyStrings().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ManyStrings_1_Assignment_str2(current, this).firstSolution();
 		while(s1 != null) {
@@ -898,6 +931,7 @@ protected class ManyStrings_0_Group extends GroupToken {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prManyStrings().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ManyStrings_0_1_Assignment_str1(current, this).firstSolution();
 		while(s1 != null) {
@@ -938,6 +972,7 @@ protected class ManyStrings_0_1_Assignment_str1 extends AssignmentToken  {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prManyStrings().ele01AssignmentStr1();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("str1",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("str1");
@@ -962,6 +997,7 @@ protected class ManyStrings_1_Assignment_str2 extends AssignmentToken  {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prManyStrings().ele1AssignmentStr2();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("str2",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("str2");
@@ -996,6 +1032,7 @@ protected class Type_Group extends GroupToken {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prType().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Type_1_Assignment_extends(current, this).firstSolution();
 		while(s1 != null) {
@@ -1024,6 +1061,7 @@ protected class Type_0_Group extends GroupToken {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prType().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Type_0_1_Keyword_extends(current, this).firstSolution();
 		while(s1 != null) {
@@ -1052,6 +1090,7 @@ protected class Type_0_0_Group extends GroupToken {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prType().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Type_0_0_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
@@ -1092,6 +1131,7 @@ protected class Type_0_0_1_Assignment_name extends AssignmentToken  {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prType().ele001AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -1129,6 +1169,7 @@ protected class Type_1_Assignment_extends extends AssignmentToken  {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prType().ele1AssignmentExtends();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("extends",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("extends");
@@ -1166,6 +1207,7 @@ protected class Ref2_Group extends GroupToken {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prRef2().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Ref2_1_Assignment_ref2(current, this).firstSolution();
 		while(s1 != null) {
@@ -1206,6 +1248,7 @@ protected class Ref2_1_Assignment_ref2 extends AssignmentToken  {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prRef2().ele1AssignmentRef2();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("ref2",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("ref2");
@@ -1254,6 +1297,7 @@ protected class Spare_Group extends GroupToken {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prSpare().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Spare_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -1282,6 +1326,7 @@ protected class Spare_0_Group extends GroupToken {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prSpare().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Spare_0_1_Assignment_id(current, this).firstSolution();
 		while(s1 != null) {
@@ -1322,6 +1367,7 @@ protected class Spare_0_1_Assignment_id extends AssignmentToken  {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prSpare().ele01AssignmentId();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("id",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("id");
@@ -1346,6 +1392,7 @@ protected class Spare_1_Group extends GroupToken {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prSpare().ele1Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Spare_1_1_Assignment_id(current, this).firstSolution();
 		while(s1 != null) {
@@ -1386,6 +1433,7 @@ protected class Spare_1_1_Assignment_id extends AssignmentToken  {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prSpare().ele11AssignmentId();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("id",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("id");
@@ -1421,6 +1469,7 @@ protected class Boolean_Group extends GroupToken {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prBoolean().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Boolean_1_Assignment_value(current, this).firstSolution();
 		while(s1 != null) {
@@ -1449,6 +1498,7 @@ protected class Boolean_0_Group extends GroupToken {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prBoolean().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Boolean_0_1_Keyword_kw(current, this).firstSolution();
 		while(s1 != null) {
@@ -1477,6 +1527,7 @@ protected class Boolean_0_0_Group extends GroupToken {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prBoolean().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Boolean_0_0_1_Assignment_bool(current, this).firstSolution();
 		while(s1 != null) {
@@ -1517,6 +1568,7 @@ protected class Boolean_0_0_1_Assignment_bool extends AssignmentToken  {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prBoolean().ele001AssignmentBool();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("bool",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("bool");
@@ -1556,6 +1608,7 @@ protected class Boolean_1_Assignment_value extends AssignmentToken  {
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prBoolean().ele1AssignmentValue();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("value",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");

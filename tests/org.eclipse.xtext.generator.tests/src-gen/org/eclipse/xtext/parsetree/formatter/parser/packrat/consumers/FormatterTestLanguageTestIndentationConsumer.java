@@ -6,6 +6,7 @@ package org.eclipse.xtext.parsetree.formatter.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -21,8 +22,8 @@ import org.eclipse.xtext.parsetree.formatter.parser.packrat.consumers.FormatterT
 @SuppressWarnings("unused")
 public final class FormatterTestLanguageTestIndentationConsumer extends NonTerminalConsumer {
 
-	private FormatterTestLanguageLineConsumer lineConsumer;
-	private FormatterTestLanguageTestIndentationConsumer testIndentationConsumer;
+	private INonTerminalConsumer lineConsumer;
+	private INonTerminalConsumer testIndentationConsumer;
 
 	private ICharacterClass keyword$4$Delimiter;
 	
@@ -163,6 +164,7 @@ public final class FormatterTestLanguageTestIndentationConsumer extends NonTermi
 		return FormatterTestLanguageGrammarAccess.INSTANCE.prTestIndentation();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -172,11 +174,11 @@ public final class FormatterTestLanguageTestIndentationConsumer extends NonTermi
 		return "TestIndentation";
 	}
 	
-	public void setLineConsumer(FormatterTestLanguageLineConsumer lineConsumer) {
+	public void setLineConsumer(INonTerminalConsumer lineConsumer) {
 		this.lineConsumer = lineConsumer;
 	}
 	
-	public void setTestIndentationConsumer(FormatterTestLanguageTestIndentationConsumer testIndentationConsumer) {
+	public void setTestIndentationConsumer(INonTerminalConsumer testIndentationConsumer) {
 		this.testIndentationConsumer = testIndentationConsumer;
 	}
 	

@@ -66,7 +66,7 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 
 // Entry rule entryRuleFile
 entryRuleFile returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/ui/integration/TestLanguage.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/ui/integration/TestLanguage.xmi#/0/@rules.0" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleFile=ruleFile 
 	 { $current=$iv_ruleFile.current; } 
 	 EOF 
@@ -82,7 +82,7 @@ ruleFile returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/ui/integration/TestLanguage.xmi#//@rules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/ui/integration/TestLanguage.xmi#/0/@rules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_stuff=ruleStuff 
 	    {
@@ -109,7 +109,7 @@ ruleFile returns [EObject current=null]
 
 // Entry rule entryRuleStuff
 entryRuleStuff returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/ui/integration/TestLanguage.xmi#//@rules.1" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/ui/integration/TestLanguage.xmi#/0/@rules.1" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleStuff=ruleStuff 
 	 { $current=$iv_ruleStuff.current; } 
 	 EOF 
@@ -123,13 +123,13 @@ ruleStuff returns [EObject current=null]
     }:
 ('stuff' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/ui/integration/TestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/ui/integration/TestLanguage.xmi#/0/@rules.1/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 (	
 	
 	    lv_name=RULE_ID
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/ui/integration/TestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+    createLeafNode("classpath:/org/eclipse/xtext/ui/integration/TestLanguage.xmi#/0/@rules.1/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
     }
  
 	    {

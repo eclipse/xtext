@@ -6,6 +6,7 @@ package org.eclipse.xtext.example.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -21,8 +22,8 @@ import org.eclipse.xtext.example.parser.packrat.consumers.DomainmodelQualifiedNa
 @SuppressWarnings("unused")
 public final class DomainmodelPackageConsumer extends NonTerminalConsumer {
 
-	private DomainmodelNamedElementConsumer namedElementConsumer;
-	private DomainmodelQualifiedNameConsumer qualifiedNameConsumer;
+	private INonTerminalConsumer namedElementConsumer;
+	private INonTerminalConsumer qualifiedNameConsumer;
 
 	private ICharacterClass keyword$5$Delimiter;
 	
@@ -153,6 +154,7 @@ public final class DomainmodelPackageConsumer extends NonTerminalConsumer {
 		return DomainmodelGrammarAccess.INSTANCE.prPackage();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -162,11 +164,11 @@ public final class DomainmodelPackageConsumer extends NonTerminalConsumer {
 		return "Package";
 	}
 	
-	public void setNamedElementConsumer(DomainmodelNamedElementConsumer namedElementConsumer) {
+	public void setNamedElementConsumer(INonTerminalConsumer namedElementConsumer) {
 		this.namedElementConsumer = namedElementConsumer;
 	}
 	
-	public void setQualifiedNameConsumer(DomainmodelQualifiedNameConsumer qualifiedNameConsumer) {
+	public void setQualifiedNameConsumer(INonTerminalConsumer qualifiedNameConsumer) {
 		this.qualifiedNameConsumer = qualifiedNameConsumer;
 	}
 	

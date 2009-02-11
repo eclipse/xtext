@@ -6,6 +6,7 @@ package org.eclipse.xtext.example.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -21,8 +22,8 @@ import org.eclipse.xtext.example.parser.packrat.consumers.DomainmodelTypeConsume
 @SuppressWarnings("unused")
 public final class DomainmodelNamedElementConsumer extends NonTerminalConsumer {
 
-	private DomainmodelPackageConsumer packageConsumer;
-	private DomainmodelTypeConsumer typeConsumer;
+	private INonTerminalConsumer packageConsumer;
+	private INonTerminalConsumer typeConsumer;
 
 	public DomainmodelNamedElementConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
@@ -64,6 +65,7 @@ public final class DomainmodelNamedElementConsumer extends NonTerminalConsumer {
 		return DomainmodelGrammarAccess.INSTANCE.prNamedElement();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -73,11 +75,11 @@ public final class DomainmodelNamedElementConsumer extends NonTerminalConsumer {
 		return "NamedElement";
 	}
 	
-	public void setPackageConsumer(DomainmodelPackageConsumer packageConsumer) {
+	public void setPackageConsumer(INonTerminalConsumer packageConsumer) {
 		this.packageConsumer = packageConsumer;
 	}
 	
-	public void setTypeConsumer(DomainmodelTypeConsumer typeConsumer) {
+	public void setTypeConsumer(INonTerminalConsumer typeConsumer) {
 		this.typeConsumer = typeConsumer;
 	}
 	

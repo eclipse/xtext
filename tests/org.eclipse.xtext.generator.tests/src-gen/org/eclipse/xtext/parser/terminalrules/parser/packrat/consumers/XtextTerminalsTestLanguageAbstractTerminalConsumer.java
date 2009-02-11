@@ -6,6 +6,7 @@ package org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -23,10 +24,10 @@ import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerm
 @SuppressWarnings("unused")
 public final class XtextTerminalsTestLanguageAbstractTerminalConsumer extends NonTerminalConsumer {
 
-	private XtextTerminalsTestLanguageCrossReferenceConsumer crossReferenceConsumer;
-	private XtextTerminalsTestLanguageKeywordConsumer keywordConsumer;
-	private XtextTerminalsTestLanguageParenthesizedElementConsumer parenthesizedElementConsumer;
-	private XtextTerminalsTestLanguageRuleCallConsumer ruleCallConsumer;
+	private INonTerminalConsumer crossReferenceConsumer;
+	private INonTerminalConsumer keywordConsumer;
+	private INonTerminalConsumer parenthesizedElementConsumer;
+	private INonTerminalConsumer ruleCallConsumer;
 
 	public XtextTerminalsTestLanguageAbstractTerminalConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
@@ -86,6 +87,7 @@ public final class XtextTerminalsTestLanguageAbstractTerminalConsumer extends No
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAbstractTerminal();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -95,19 +97,19 @@ public final class XtextTerminalsTestLanguageAbstractTerminalConsumer extends No
 		return "AbstractElement";
 	}
 	
-	public void setCrossReferenceConsumer(XtextTerminalsTestLanguageCrossReferenceConsumer crossReferenceConsumer) {
+	public void setCrossReferenceConsumer(INonTerminalConsumer crossReferenceConsumer) {
 		this.crossReferenceConsumer = crossReferenceConsumer;
 	}
 	
-	public void setKeywordConsumer(XtextTerminalsTestLanguageKeywordConsumer keywordConsumer) {
+	public void setKeywordConsumer(INonTerminalConsumer keywordConsumer) {
 		this.keywordConsumer = keywordConsumer;
 	}
 	
-	public void setParenthesizedElementConsumer(XtextTerminalsTestLanguageParenthesizedElementConsumer parenthesizedElementConsumer) {
+	public void setParenthesizedElementConsumer(INonTerminalConsumer parenthesizedElementConsumer) {
 		this.parenthesizedElementConsumer = parenthesizedElementConsumer;
 	}
 	
-	public void setRuleCallConsumer(XtextTerminalsTestLanguageRuleCallConsumer ruleCallConsumer) {
+	public void setRuleCallConsumer(INonTerminalConsumer ruleCallConsumer) {
 		this.ruleCallConsumer = ruleCallConsumer;
 	}
 	

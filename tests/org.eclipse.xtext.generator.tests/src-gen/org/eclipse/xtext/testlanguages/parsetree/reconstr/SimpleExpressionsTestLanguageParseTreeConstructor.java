@@ -46,6 +46,7 @@ protected class Sequence_Group extends GroupToken {
 		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prSequence().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Sequence_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -74,6 +75,7 @@ protected class Sequence_0_RuleCall_Addition extends RuleCallToken {
 		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prSequence().ele0ParserRuleCallAddition();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Addition_Group.class, current)) return null;
 		if(!current.isInstanceOf("Expression")) return null;
@@ -92,6 +94,7 @@ protected class Sequence_1_Group extends GroupToken {
 		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prSequence().ele1Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Sequence_1_1_Assignment_expressions(current, this).firstSolution();
 		while(s1 != null) {
@@ -120,6 +123,7 @@ protected class Sequence_1_0_Action_Sequence_expressions extends ActionToken  {
 		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prSequence().ele10ActionSequenceexpressions();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(!current.isInstanceOf("Sequence")) return null;
 		Object val = current.getConsumable("expressions", false);
@@ -140,6 +144,7 @@ protected class Sequence_1_1_Assignment_expressions extends AssignmentToken  {
 		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prSequence().ele11AssignmentExpressions();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("expressions",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("expressions");
@@ -183,6 +188,7 @@ protected class Addition_Group extends GroupToken {
 		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prAddition().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Addition_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -211,6 +217,7 @@ protected class Addition_0_RuleCall_Multiplication extends RuleCallToken {
 		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prAddition().ele0ParserRuleCallMultiplication();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Multiplication_Group.class, current)) return null;
 		if(!current.isInstanceOf("Expression")) return null;
@@ -229,6 +236,7 @@ protected class Addition_1_Group extends GroupToken {
 		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prAddition().ele1Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Addition_1_1_Assignment_values(current, this).firstSolution();
 		while(s1 != null) {
@@ -257,6 +265,7 @@ protected class Addition_1_0_Group extends GroupToken {
 		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prAddition().ele10Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Addition_1_0_1_Assignment_operator(current, this).firstSolution();
 		while(s1 != null) {
@@ -285,6 +294,7 @@ protected class Addition_1_0_0_Action_Op_values extends ActionToken  {
 		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prAddition().ele100ActionOpvalues();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(!current.isInstanceOf("Op")) return null;
 		Object val = current.getConsumable("values", false);
@@ -305,6 +315,7 @@ protected class Addition_1_0_1_Assignment_operator extends AssignmentToken  {
 		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prAddition().ele101AssignmentOperator();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("operator",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("operator");
@@ -338,6 +349,7 @@ protected class Addition_1_1_Assignment_values extends AssignmentToken  {
 		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prAddition().ele11AssignmentValues();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("values",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("values");
@@ -381,6 +393,7 @@ protected class Multiplication_Group extends GroupToken {
 		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prMultiplication().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Multiplication_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -409,6 +422,7 @@ protected class Multiplication_0_RuleCall_Term extends RuleCallToken {
 		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prMultiplication().ele0ParserRuleCallTerm();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Term_Alternatives.class, current)) return null;
 		if(!current.isInstanceOf("Expression")) return null;
@@ -427,6 +441,7 @@ protected class Multiplication_1_Group extends GroupToken {
 		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prMultiplication().ele1Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Multiplication_1_1_Assignment_values(current, this).firstSolution();
 		while(s1 != null) {
@@ -455,6 +470,7 @@ protected class Multiplication_1_0_Group extends GroupToken {
 		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prMultiplication().ele10Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Multiplication_1_0_1_Assignment_operator(current, this).firstSolution();
 		while(s1 != null) {
@@ -483,6 +499,7 @@ protected class Multiplication_1_0_0_Action_Op_values extends ActionToken  {
 		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prMultiplication().ele100ActionOpvalues();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(!current.isInstanceOf("Op")) return null;
 		Object val = current.getConsumable("values", false);
@@ -503,6 +520,7 @@ protected class Multiplication_1_0_1_Assignment_operator extends AssignmentToken
 		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prMultiplication().ele101AssignmentOperator();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("operator",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("operator");
@@ -536,6 +554,7 @@ protected class Multiplication_1_1_Assignment_values extends AssignmentToken  {
 		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prMultiplication().ele11AssignmentValues();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("values",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("values");
@@ -578,7 +597,8 @@ protected class Term_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prTerm().eleAlternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new Term_1_RuleCall_Parens(current, this) : new Term_0_RuleCall_Atom(current, this);
 		Solution s = t.firstSolution();
@@ -600,6 +620,7 @@ protected class Term_0_RuleCall_Atom extends RuleCallToken {
 		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prTerm().ele0ParserRuleCallAtom();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Atom_Assignment_name.class, current)) return null;
 		if(!current.isInstanceOf("Atom")) return null;
@@ -618,6 +639,7 @@ protected class Term_1_RuleCall_Parens extends RuleCallToken {
 		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prTerm().ele1ParserRuleCallParens();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Parens_Group.class, current)) return null;
 		if(!current.isInstanceOf("Expression")) return null;
@@ -647,6 +669,7 @@ protected class Atom_Assignment_name extends AssignmentToken  {
 		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prAtom().eleAssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -680,6 +703,7 @@ protected class Parens_Group extends GroupToken {
 		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prParens().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Parens_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -708,6 +732,7 @@ protected class Parens_0_Group extends GroupToken {
 		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prParens().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Parens_0_1_RuleCall_Addition(current, this).firstSolution();
 		while(s1 != null) {
@@ -748,6 +773,7 @@ protected class Parens_0_1_RuleCall_Addition extends RuleCallToken {
 		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prParens().ele01ParserRuleCallAddition();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Addition_Group.class, current)) return null;
 		if(!current.isInstanceOf("Expression")) return null;

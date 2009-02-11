@@ -6,6 +6,7 @@ package org.eclipse.xtext.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -22,9 +23,9 @@ import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageTypeRe
 @SuppressWarnings("unused")
 public final class XtextGrammarTestLanguageParserRuleConsumer extends NonTerminalConsumer {
 
-	private XtextGrammarTestLanguageAlternativesConsumer alternativesConsumer;
-	private XtextBuiltinIDConsumer idConsumer;
-	private XtextGrammarTestLanguageTypeRefConsumer typeRefConsumer;
+	private INonTerminalConsumer alternativesConsumer;
+	private ITerminalConsumer idConsumer;
+	private INonTerminalConsumer typeRefConsumer;
 
 	private ISequenceMatcher crossReference$20$Delimiter;
 	
@@ -425,6 +426,7 @@ public final class XtextGrammarTestLanguageParserRuleConsumer extends NonTermina
 		return XtextGrammarTestLanguageGrammarAccess.INSTANCE.prParserRule();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -434,15 +436,15 @@ public final class XtextGrammarTestLanguageParserRuleConsumer extends NonTermina
 		return "ParserRule";
 	}
 	
-	public void setAlternativesConsumer(XtextGrammarTestLanguageAlternativesConsumer alternativesConsumer) {
+	public void setAlternativesConsumer(INonTerminalConsumer alternativesConsumer) {
 		this.alternativesConsumer = alternativesConsumer;
 	}
 	
-	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
+	public void setIdConsumer(ITerminalConsumer idConsumer) {
 		this.idConsumer = idConsumer;
 	}
 	
-	public void setTypeRefConsumer(XtextGrammarTestLanguageTypeRefConsumer typeRefConsumer) {
+	public void setTypeRefConsumer(INonTerminalConsumer typeRefConsumer) {
 		this.typeRefConsumer = typeRefConsumer;
 	}
 	

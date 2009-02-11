@@ -47,6 +47,7 @@ protected class Spielplatz_Group extends GroupToken {
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielplatz().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Spielplatz_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -75,6 +76,7 @@ protected class Spielplatz_0_Group extends GroupToken {
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielplatz().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Spielplatz_0_1_Alternatives(current, this).firstSolution();
 		while(s1 != null) {
@@ -103,6 +105,7 @@ protected class Spielplatz_0_0_Group extends GroupToken {
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielplatz().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Spielplatz_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -131,6 +134,7 @@ protected class Spielplatz_0_0_0_Group extends GroupToken {
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielplatz().ele000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Spielplatz_0_0_0_1_Assignment_beschreibung(current, this).firstSolution();
 		while(s1 != null) {
@@ -159,6 +163,7 @@ protected class Spielplatz_0_0_0_0_Group extends GroupToken {
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielplatz().ele0000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Spielplatz_0_0_0_0_1_Assignment_groesse(current, this).firstSolution();
 		while(s1 != null) {
@@ -199,6 +204,7 @@ protected class Spielplatz_0_0_0_0_1_Assignment_groesse extends AssignmentToken 
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielplatz().ele00001AssignmentGroesse();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("groesse",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("groesse");
@@ -223,6 +229,7 @@ protected class Spielplatz_0_0_0_1_Assignment_beschreibung extends AssignmentTok
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielplatz().ele0001AssignmentBeschreibung();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("beschreibung",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("beschreibung");
@@ -259,7 +266,8 @@ protected class Spielplatz_0_1_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielplatz().ele01Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new Spielplatz_0_1_1_Assignment_familie(current, this) : new Spielplatz_0_1_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -280,7 +288,8 @@ protected class Spielplatz_0_1_0_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielplatz().ele010Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new Spielplatz_0_1_0_1_Assignment_spielzeuge(current, this) : new Spielplatz_0_1_0_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -301,7 +310,8 @@ protected class Spielplatz_0_1_0_0_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielplatz().ele0100Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new Spielplatz_0_1_0_0_1_Assignment_erzieher(current, this) : new Spielplatz_0_1_0_0_0_Assignment_kinder(current, this);
 		Solution s = t.firstSolution();
@@ -323,6 +333,7 @@ protected class Spielplatz_0_1_0_0_0_Assignment_kinder extends AssignmentToken  
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielplatz().ele01000AssignmentKinder();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("kinder",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("kinder");
@@ -354,6 +365,7 @@ protected class Spielplatz_0_1_0_0_1_Assignment_erzieher extends AssignmentToken
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielplatz().ele01001AssignmentErzieher();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("erzieher",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("erzieher");
@@ -386,6 +398,7 @@ protected class Spielplatz_0_1_0_1_Assignment_spielzeuge extends AssignmentToken
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielplatz().ele0101AssignmentSpielzeuge();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("spielzeuge",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("spielzeuge");
@@ -418,6 +431,7 @@ protected class Spielplatz_0_1_1_Assignment_familie extends AssignmentToken  {
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielplatz().ele011AssignmentFamilie();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("familie",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("familie");
@@ -473,7 +487,8 @@ protected class Person_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prPerson().eleAlternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new Person_1_RuleCall_Erwachsener(current, this) : new Person_0_RuleCall_Kind(current, this);
 		Solution s = t.firstSolution();
@@ -495,6 +510,7 @@ protected class Person_0_RuleCall_Kind extends RuleCallToken {
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prPerson().ele0ParserRuleCallKind();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Kind_Group.class, current)) return null;
 		if(!current.isInstanceOf("Kind")) return null;
@@ -513,6 +529,7 @@ protected class Person_1_RuleCall_Erwachsener extends RuleCallToken {
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prPerson().ele1ParserRuleCallErwachsener();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Erwachsener_Group.class, current)) return null;
 		if(!current.isInstanceOf("Erwachsener")) return null;
@@ -542,6 +559,7 @@ protected class Kind_Group extends GroupToken {
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prKind().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Kind_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -570,6 +588,7 @@ protected class Kind_0_Group extends GroupToken {
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prKind().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Kind_0_1_Assignment_age(current, this).firstSolution();
 		while(s1 != null) {
@@ -598,6 +617,7 @@ protected class Kind_0_0_Group extends GroupToken {
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prKind().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Kind_0_0_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
@@ -626,6 +646,7 @@ protected class Kind_0_0_0_Group extends GroupToken {
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prKind().ele000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Kind_0_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -679,6 +700,7 @@ protected class Kind_0_0_1_Assignment_name extends AssignmentToken  {
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prKind().ele001AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -703,6 +725,7 @@ protected class Kind_0_1_Assignment_age extends AssignmentToken  {
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prKind().ele01AssignmentAge();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("age",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("age");
@@ -750,6 +773,7 @@ protected class Erwachsener_Group extends GroupToken {
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prErwachsener().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Erwachsener_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -778,6 +802,7 @@ protected class Erwachsener_0_Group extends GroupToken {
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prErwachsener().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Erwachsener_0_1_Assignment_age(current, this).firstSolution();
 		while(s1 != null) {
@@ -806,6 +831,7 @@ protected class Erwachsener_0_0_Group extends GroupToken {
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prErwachsener().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Erwachsener_0_0_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
@@ -834,6 +860,7 @@ protected class Erwachsener_0_0_0_Group extends GroupToken {
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prErwachsener().ele000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Erwachsener_0_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -887,6 +914,7 @@ protected class Erwachsener_0_0_1_Assignment_name extends AssignmentToken  {
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prErwachsener().ele001AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -911,6 +939,7 @@ protected class Erwachsener_0_1_Assignment_age extends AssignmentToken  {
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prErwachsener().ele01AssignmentAge();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("age",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("age");
@@ -958,6 +987,7 @@ protected class Spielzeug_Group extends GroupToken {
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielzeug().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Spielzeug_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -986,6 +1016,7 @@ protected class Spielzeug_0_Group extends GroupToken {
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielzeug().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Spielzeug_0_1_Assignment_farbe(current, this).firstSolution();
 		while(s1 != null) {
@@ -1014,6 +1045,7 @@ protected class Spielzeug_0_0_Group extends GroupToken {
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielzeug().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Spielzeug_0_0_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
@@ -1042,6 +1074,7 @@ protected class Spielzeug_0_0_0_Group extends GroupToken {
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielzeug().ele000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Spielzeug_0_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -1095,6 +1128,7 @@ protected class Spielzeug_0_0_1_Assignment_name extends AssignmentToken  {
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielzeug().ele001AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -1119,6 +1153,7 @@ protected class Spielzeug_0_1_Assignment_farbe extends AssignmentToken  {
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielzeug().ele01AssignmentFarbe();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("farbe",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("farbe");
@@ -1173,7 +1208,8 @@ protected class Farbe_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFarbe().eleAlternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new Farbe_1_Keyword_GRN(current, this) : new Farbe_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -1194,7 +1230,8 @@ protected class Farbe_0_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFarbe().ele0Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new Farbe_0_1_Keyword_GELB(current, this) : new Farbe_0_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -1215,7 +1252,8 @@ protected class Farbe_0_0_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFarbe().ele00Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new Farbe_0_0_1_Keyword_BLAU(current, this) : new Farbe_0_0_0_Keyword_ROT(current, this);
 		Solution s = t.firstSolution();
@@ -1298,6 +1336,7 @@ protected class Familie_Group extends GroupToken {
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFamilie().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Familie_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -1326,6 +1365,7 @@ protected class Familie_0_Group extends GroupToken {
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFamilie().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Familie_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -1354,6 +1394,7 @@ protected class Familie_0_0_Group extends GroupToken {
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFamilie().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Familie_0_0_1_Assignment_kinder(current, this).firstSolution();
 		while(s1 != null) {
@@ -1382,6 +1423,7 @@ protected class Familie_0_0_0_Group extends GroupToken {
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFamilie().ele000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Familie_0_0_0_1_Assignment_vater(current, this).firstSolution();
 		while(s1 != null) {
@@ -1410,6 +1452,7 @@ protected class Familie_0_0_0_0_Group extends GroupToken {
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFamilie().ele0000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Familie_0_0_0_0_1_Assignment_mutter(current, this).firstSolution();
 		while(s1 != null) {
@@ -1438,6 +1481,7 @@ protected class Familie_0_0_0_0_0_Group extends GroupToken {
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFamilie().ele00000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Familie_0_0_0_0_0_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
@@ -1466,6 +1510,7 @@ protected class Familie_0_0_0_0_0_0_Group extends GroupToken {
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFamilie().ele000000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Familie_0_0_0_0_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -1519,6 +1564,7 @@ protected class Familie_0_0_0_0_0_1_Assignment_name extends AssignmentToken  {
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFamilie().ele000001AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -1555,6 +1601,7 @@ protected class Familie_0_0_0_0_1_Assignment_mutter extends AssignmentToken  {
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFamilie().ele00001AssignmentMutter();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("mutter",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("mutter");
@@ -1582,6 +1629,7 @@ protected class Familie_0_0_0_1_Assignment_vater extends AssignmentToken  {
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFamilie().ele0001AssignmentVater();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("vater",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("vater");
@@ -1609,6 +1657,7 @@ protected class Familie_0_0_1_Assignment_kinder extends AssignmentToken  {
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFamilie().ele001AssignmentKinder();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("kinder",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("kinder");
@@ -1636,6 +1685,7 @@ protected class Familie_0_1_Group extends GroupToken {
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFamilie().ele01Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Familie_0_1_1_Assignment_kinder(current, this).firstSolution();
 		while(s1 != null) {
@@ -1676,6 +1726,7 @@ protected class Familie_0_1_1_Assignment_kinder extends AssignmentToken  {
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFamilie().ele011AssignmentKinder();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("kinder",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("kinder");

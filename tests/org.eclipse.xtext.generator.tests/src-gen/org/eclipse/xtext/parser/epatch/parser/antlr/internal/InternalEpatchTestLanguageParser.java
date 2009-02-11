@@ -75,7 +75,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:68:48: (iv_ruleEPatch= ruleEPatch EOF )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:69:2: iv_ruleEPatch= ruleEPatch EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.0" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleEPatch_in_entryRuleEPatch72);
             iv_ruleEPatch=ruleEPatch();
             _fsp--;
@@ -137,7 +137,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             {
             match(input,12,FOLLOW_12_in_ruleEPatch121); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:85:1: (lv_name= RULE_ID )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:87:6: lv_name= RULE_ID
@@ -145,7 +145,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEPatch142); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
                 
 
             	        if (current==null) {
@@ -167,7 +167,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             match(input,13,FOLLOW_13_in_ruleEPatch163); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -188,7 +188,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             	    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:112:6: lv_imports= ruleImport
             	    {
             	     
-            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleImport_in_ruleEPatch198);
             	    lv_imports=ruleImport();
@@ -235,7 +235,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             	    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:133:6: lv_resources= ruleNamedResource
             	    {
             	     
-            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleNamedResource_in_ruleEPatch238);
             	    lv_resources=ruleNamedResource();
@@ -282,7 +282,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             	    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:154:6: lv_objects= ruleObjectRef
             	    {
             	     
-            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleObjectRef_in_ruleEPatch278);
             	    lv_objects=ruleObjectRef();
@@ -315,7 +315,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             match(input,14,FOLLOW_14_in_ruleEPatch293); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.0/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -350,7 +350,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:185:48: (iv_ruleImport= ruleImport EOF )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:186:2: iv_ruleImport= ruleImport EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.1" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.1" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleImport_in_entryRuleImport328);
             iv_ruleImport=ruleImport();
             _fsp--;
@@ -452,7 +452,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:199:5: this_ModelImport= ruleModelImport
                             {
                              
-                                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.1/@alternatives/@groups.0/@groups.0" /* xtext::RuleCall */, currentNode); 
+                                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.1/@alternatives/@groups.0/@groups.0" /* xtext::RuleCall */, currentNode); 
                                 
                             pushFollow(FOLLOW_ruleModelImport_in_ruleImport386);
                             this_ModelImport=ruleModelImport();
@@ -469,7 +469,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:209:5: this_JavaImport= ruleJavaImport
                             {
                              
-                                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.1/@alternatives/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
+                                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.1/@alternatives/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
                                 
                             pushFollow(FOLLOW_ruleJavaImport_in_ruleImport413);
                             this_JavaImport=ruleJavaImport();
@@ -492,7 +492,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:219:5: this_ExtensionImport= ruleExtensionImport
                     {
                      
-                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.1/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
+                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.1/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
                         
                     pushFollow(FOLLOW_ruleExtensionImport_in_ruleImport441);
                     this_ExtensionImport=ruleExtensionImport();
@@ -538,7 +538,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:236:53: (iv_ruleModelImport= ruleModelImport EOF )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:237:2: iv_ruleModelImport= ruleModelImport EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.2" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.2" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleModelImport_in_entryRuleModelImport475);
             iv_ruleModelImport=ruleModelImport();
             _fsp--;
@@ -618,7 +618,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:250:5: this_ResourceImport= ruleResourceImport
                     {
                      
-                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.2/@alternatives/@groups.0" /* xtext::RuleCall */, currentNode); 
+                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.2/@alternatives/@groups.0" /* xtext::RuleCall */, currentNode); 
                         
                     pushFollow(FOLLOW_ruleResourceImport_in_ruleModelImport532);
                     this_ResourceImport=ruleResourceImport();
@@ -635,7 +635,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:260:5: this_EPackageImport= ruleEPackageImport
                     {
                      
-                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.2/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
+                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.2/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
                         
                     pushFollow(FOLLOW_ruleEPackageImport_in_ruleModelImport559);
                     this_EPackageImport=ruleEPackageImport();
@@ -681,7 +681,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:277:56: (iv_ruleResourceImport= ruleResourceImport EOF )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:278:2: iv_ruleResourceImport= ruleResourceImport EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.3" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.3" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleResourceImport_in_entryRuleResourceImport593);
             iv_ruleResourceImport=ruleResourceImport();
             _fsp--;
@@ -729,7 +729,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             {
             match(input,15,FOLLOW_15_in_ruleResourceImport639); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:294:1: (lv_name= RULE_ID )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:296:6: lv_name= RULE_ID
@@ -737,7 +737,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleResourceImport660); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
                 
 
             	        if (current==null) {
@@ -759,7 +759,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             match(input,16,FOLLOW_16_in_ruleResourceImport681); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -770,7 +770,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             lv_uri=(Token)input.LT(1);
             match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleResourceImport703); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "uri"); 
+                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.3/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "uri"); 
                 
 
             	        if (current==null) {
@@ -820,7 +820,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:347:56: (iv_ruleEPackageImport= ruleEPackageImport EOF )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:348:2: iv_ruleEPackageImport= ruleEPackageImport EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.4" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.4" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleEPackageImport_in_entryRuleEPackageImport749);
             iv_ruleEPackageImport=ruleEPackageImport();
             _fsp--;
@@ -868,7 +868,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             {
             match(input,15,FOLLOW_15_in_ruleEPackageImport795); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:364:1: (lv_name= RULE_ID )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:366:6: lv_name= RULE_ID
@@ -876,7 +876,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEPackageImport816); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
                 
 
             	        if (current==null) {
@@ -898,7 +898,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             match(input,17,FOLLOW_17_in_ruleEPackageImport837); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -909,7 +909,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             lv_nsURI=(Token)input.LT(1);
             match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleEPackageImport859); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "nsURI"); 
+                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.4/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "nsURI"); 
                 
 
             	        if (current==null) {
@@ -959,7 +959,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:417:52: (iv_ruleJavaImport= ruleJavaImport EOF )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:418:2: iv_ruleJavaImport= ruleJavaImport EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.5" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.5" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleJavaImport_in_entryRuleJavaImport905);
             iv_ruleJavaImport=ruleJavaImport();
             _fsp--;
@@ -1006,11 +1006,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             {
             match(input,15,FOLLOW_15_in_ruleJavaImport951); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
             match(input,18,FOLLOW_18_in_ruleJavaImport960); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -1021,7 +1021,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             lv_path=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleJavaImport982); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "path"); 
+                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "path"); 
                 
 
             	        if (current==null) {
@@ -1058,7 +1058,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             	    {
             	    match(input,19,FOLLOW_19_in_ruleJavaImport1004); 
 
-            	            createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+            	            createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.5/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
             	        
             	    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:462:1: (lv_path= RULE_ID )
             	    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:464:6: lv_path= RULE_ID
@@ -1066,7 +1066,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             	    lv_path=(Token)input.LT(1);
             	    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleJavaImport1025); 
             	     
-            	        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "path"); 
+            	        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.5/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "path"); 
             	        
 
             	    	        if (current==null) {
@@ -1125,7 +1125,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:491:57: (iv_ruleExtensionImport= ruleExtensionImport EOF )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:492:2: iv_ruleExtensionImport= ruleExtensionImport EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.6" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.6" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleExtensionImport_in_entryRuleExtensionImport1073);
             iv_ruleExtensionImport=ruleExtensionImport();
             _fsp--;
@@ -1172,11 +1172,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             {
             match(input,15,FOLLOW_15_in_ruleExtensionImport1119); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
             match(input,20,FOLLOW_20_in_ruleExtensionImport1128); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -1187,7 +1187,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             lv_path=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleExtensionImport1150); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "path"); 
+                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "path"); 
                 
 
             	        if (current==null) {
@@ -1224,7 +1224,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             	    {
             	    match(input,21,FOLLOW_21_in_ruleExtensionImport1172); 
 
-            	            createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.6/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+            	            createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.6/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
             	        
             	    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:536:1: (lv_path= RULE_ID )
             	    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:538:6: lv_path= RULE_ID
@@ -1232,7 +1232,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             	    lv_path=(Token)input.LT(1);
             	    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleExtensionImport1193); 
             	     
-            	        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.6/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "path"); 
+            	        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.6/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "path"); 
             	        
 
             	    	        if (current==null) {
@@ -1291,7 +1291,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:565:55: (iv_ruleNamedResource= ruleNamedResource EOF )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:566:2: iv_ruleNamedResource= ruleNamedResource EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.7" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.7" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleNamedResource_in_entryRuleNamedResource1241);
             iv_ruleNamedResource=ruleNamedResource();
             _fsp--;
@@ -1362,7 +1362,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             {
             match(input,22,FOLLOW_22_in_ruleNamedResource1293); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:582:1: (lv_name= RULE_ID )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:584:6: lv_name= RULE_ID
@@ -1370,7 +1370,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleNamedResource1314); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
                 
 
             	        if (current==null) {
@@ -1392,14 +1392,14 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             match(input,13,FOLLOW_13_in_ruleNamedResource1335); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
 
             match(input,23,FOLLOW_23_in_ruleNamedResource1345); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -1429,7 +1429,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     {
                     match(input,16,FOLLOW_16_in_ruleNamedResource1357); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
                     // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:614:1: (lv_leftUri= RULE_STRING )
                     // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:616:6: lv_leftUri= RULE_STRING
@@ -1437,7 +1437,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     lv_leftUri=(Token)input.LT(1);
                     match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleNamedResource1378); 
                      
-                        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "leftUri"); 
+                        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "leftUri"); 
                         
 
                     	        if (current==null) {
@@ -1467,7 +1467,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:638:6: lv_leftRoot= ruleCreatedObject
                     {
                      
-                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleCreatedObject_in_ruleNamedResource1430);
                     lv_leftRoot=ruleCreatedObject();
@@ -1500,14 +1500,14 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             match(input,24,FOLLOW_24_in_ruleNamedResource1445); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
 
             match(input,25,FOLLOW_25_in_ruleNamedResource1455); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -1537,7 +1537,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     {
                     match(input,16,FOLLOW_16_in_ruleNamedResource1467); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
                     // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:668:1: (lv_rightUri= RULE_STRING )
                     // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:670:6: lv_rightUri= RULE_STRING
@@ -1545,7 +1545,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     lv_rightUri=(Token)input.LT(1);
                     match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleNamedResource1488); 
                      
-                        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "rightUri"); 
+                        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "rightUri"); 
                         
 
                     	        if (current==null) {
@@ -1575,7 +1575,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:692:6: lv_rightRoot= ruleCreatedObject
                     {
                      
-                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleCreatedObject_in_ruleNamedResource1540);
                     lv_rightRoot=ruleCreatedObject();
@@ -1608,14 +1608,14 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             match(input,24,FOLLOW_24_in_ruleNamedResource1555); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
 
             match(input,14,FOLLOW_14_in_ruleNamedResource1565); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.7/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.7/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -1650,7 +1650,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:729:51: (iv_ruleObjectRef= ruleObjectRef EOF )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:730:2: iv_ruleObjectRef= ruleObjectRef EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.9" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.9" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleObjectRef_in_entryRuleObjectRef1602);
             iv_ruleObjectRef=ruleObjectRef();
             _fsp--;
@@ -1705,7 +1705,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             {
             match(input,26,FOLLOW_26_in_ruleObjectRef1648); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:746:1: (lv_name= RULE_ID )?
             int alt11=2;
@@ -1725,7 +1725,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     lv_name=(Token)input.LT(1);
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleObjectRef1669); 
                      
-                        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+                        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
                         
 
                     	        if (current==null) {
@@ -1785,7 +1785,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     {
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleObjectRef1708); 
                      
-                        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@abstractTokens.0/@terminal" /* xtext::CrossReference */, "leftRes"); 
+                        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@abstractTokens.0/@terminal" /* xtext::CrossReference */, "leftRes"); 
                         
 
                     }
@@ -1799,7 +1799,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     lv_leftFrag=(Token)input.LT(1);
                     match(input,RULE_FRAGMENT,FOLLOW_RULE_FRAGMENT_in_ruleObjectRef1733); 
                      
-                        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "leftFrag"); 
+                        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "leftFrag"); 
                         
 
                     	        if (current==null) {
@@ -1842,7 +1842,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     {
                     match(input,23,FOLLOW_23_in_ruleObjectRef1765); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
                     // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:806:1: ( ( RULE_ID ) )
                     // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:809:3: ( RULE_ID )
@@ -1858,7 +1858,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     {
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleObjectRef1789); 
                      
-                        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "leftRes"); 
+                        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "leftRes"); 
                         
 
                     }
@@ -1875,7 +1875,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     lv_leftFrag=(Token)input.LT(1);
                     match(input,RULE_FRAGMENT,FOLLOW_RULE_FRAGMENT_in_ruleObjectRef1815); 
                      
-                        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "leftFrag"); 
+                        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "leftFrag"); 
                         
 
                     	        if (current==null) {
@@ -1897,7 +1897,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
                     match(input,25,FOLLOW_25_in_ruleObjectRef1836); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                         
 
                     }
@@ -1916,7 +1916,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     {
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleObjectRef1861); 
                      
-                        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.1/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "rightRes"); 
+                        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.1/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "rightRes"); 
                         
 
                     }
@@ -1933,7 +1933,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     lv_rightFrag=(Token)input.LT(1);
                     match(input,RULE_FRAGMENT,FOLLOW_RULE_FRAGMENT_in_ruleObjectRef1887); 
                      
-                        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "rightFrag"); 
+                        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "rightFrag"); 
                         
 
                     	        if (current==null) {
@@ -1984,7 +1984,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     {
                     match(input,13,FOLLOW_13_in_ruleObjectRef1914); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.9/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.9/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
                     // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:884:1: ( (lv_assignments= ruleBiSingleAssignment ) | (lv_assignments= ruleBiListAssignment ) )+
                     int cnt13=0;
@@ -2021,7 +2021,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:887:6: lv_assignments= ruleBiSingleAssignment
                     	    {
                     	     
-                    	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.9/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@terminal" /* xtext::RuleCall */, currentNode); 
+                    	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.9/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@terminal" /* xtext::RuleCall */, currentNode); 
                     	    	    
                     	    pushFollow(FOLLOW_ruleBiSingleAssignment_in_ruleObjectRef1949);
                     	    lv_assignments=ruleBiSingleAssignment();
@@ -2053,7 +2053,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:909:6: lv_assignments= ruleBiListAssignment
                     	    {
                     	     
-                    	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.9/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                    	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.9/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
                     	    	    
                     	    pushFollow(FOLLOW_ruleBiListAssignment_in_ruleObjectRef1993);
                     	    lv_assignments=ruleBiListAssignment();
@@ -2104,13 +2104,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                             {
                             match(input,23,FOLLOW_23_in_ruleObjectRef2010); 
 
-                                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.9/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+                                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.9/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                                 
                             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:931:1: (lv_leftMig= ruleMigration )
                             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:934:6: lv_leftMig= ruleMigration
                             {
                              
-                            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.9/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.9/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
                             	    
                             pushFollow(FOLLOW_ruleMigration_in_ruleObjectRef2044);
                             lv_leftMig=ruleMigration();
@@ -2154,13 +2154,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                             {
                             match(input,25,FOLLOW_25_in_ruleObjectRef2061); 
 
-                                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.9/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+                                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.9/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                                 
                             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:956:1: (lv_rightMig= ruleMigration )
                             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:959:6: lv_rightMig= ruleMigration
                             {
                              
-                            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.9/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.9/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
                             	    
                             pushFollow(FOLLOW_ruleMigration_in_ruleObjectRef2095);
                             lv_rightMig=ruleMigration();
@@ -2193,7 +2193,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
                     match(input,14,FOLLOW_14_in_ruleObjectRef2111); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.9/@alternatives/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.9/@alternatives/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
                         
 
                     }
@@ -2234,7 +2234,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:992:60: (iv_ruleBiSingleAssignment= ruleBiSingleAssignment EOF )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:993:2: iv_ruleBiSingleAssignment= ruleBiSingleAssignment EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.11" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.11" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleBiSingleAssignment_in_entryRuleBiSingleAssignment2150);
             iv_ruleBiSingleAssignment=ruleBiSingleAssignment();
             _fsp--;
@@ -2295,7 +2295,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             lv_feature=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleBiSingleAssignment2210); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.11/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, "feature"); 
+                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.11/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, "feature"); 
                 
 
             	        if (current==null) {
@@ -2314,7 +2314,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             match(input,27,FOLLOW_27_in_ruleBiSingleAssignment2230); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.11/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.11/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -2323,7 +2323,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1032:6: lv_leftValue= ruleSingleAssignmentValue
             {
              
-            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.11/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.11/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
             	    
             pushFollow(FOLLOW_ruleSingleAssignmentValue_in_ruleBiSingleAssignment2265);
             lv_leftValue=ruleSingleAssignmentValue();
@@ -2350,7 +2350,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             match(input,28,FOLLOW_28_in_ruleBiSingleAssignment2279); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.11/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.11/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -2359,7 +2359,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1057:6: lv_rightValue= ruleSingleAssignmentValue
             {
              
-            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.11/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.11/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
             	    
             pushFollow(FOLLOW_ruleSingleAssignmentValue_in_ruleBiSingleAssignment2314);
             lv_rightValue=ruleSingleAssignmentValue();
@@ -2386,7 +2386,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             match(input,24,FOLLOW_24_in_ruleBiSingleAssignment2328); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.11/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.11/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -2421,7 +2421,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1088:58: (iv_ruleBiListAssignment= ruleBiListAssignment EOF )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1089:2: iv_ruleBiListAssignment= ruleBiListAssignment EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.12" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.12" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleBiListAssignment_in_entryRuleBiListAssignment2363);
             iv_ruleBiListAssignment=ruleBiListAssignment();
             _fsp--;
@@ -2488,7 +2488,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             lv_feature=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleBiListAssignment2425); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, "feature"); 
+                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, "feature"); 
                 
 
             	        if (current==null) {
@@ -2507,14 +2507,14 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             match(input,27,FOLLOW_27_in_ruleBiListAssignment2445); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
 
             match(input,29,FOLLOW_29_in_ruleBiListAssignment2455); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -2534,7 +2534,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1132:6: lv_leftValues= ruleListAssignmentValue
                     {
                      
-                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
+                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleListAssignmentValue_in_ruleBiListAssignment2491);
                     lv_leftValues=ruleListAssignmentValue();
@@ -2573,13 +2573,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	    {
                     	    match(input,30,FOLLOW_30_in_ruleBiListAssignment2505); 
 
-                    	            createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+                    	            createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                     	        
                     	    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1154:1: (lv_leftValues= ruleListAssignmentValue )
                     	    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1157:6: lv_leftValues= ruleListAssignmentValue
                     	    {
                     	     
-                    	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                    	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
                     	    	    
                     	    pushFollow(FOLLOW_ruleListAssignmentValue_in_ruleBiListAssignment2539);
                     	    lv_leftValues=ruleListAssignmentValue();
@@ -2621,7 +2621,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             match(input,28,FOLLOW_28_in_ruleBiListAssignment2557); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -2641,7 +2641,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1182:6: lv_rightValues= ruleListAssignmentValue
                     {
                      
-                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
+                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleListAssignmentValue_in_ruleBiListAssignment2593);
                     lv_rightValues=ruleListAssignmentValue();
@@ -2680,13 +2680,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	    {
                     	    match(input,30,FOLLOW_30_in_ruleBiListAssignment2607); 
 
-                    	            createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+                    	            createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                     	        
                     	    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1204:1: (lv_rightValues= ruleListAssignmentValue )
                     	    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1207:6: lv_rightValues= ruleListAssignmentValue
                     	    {
                     	     
-                    	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                    	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
                     	    	    
                     	    pushFollow(FOLLOW_ruleListAssignmentValue_in_ruleBiListAssignment2641);
                     	    lv_rightValues=ruleListAssignmentValue();
@@ -2728,14 +2728,14 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             match(input,31,FOLLOW_31_in_ruleBiListAssignment2659); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
 
             match(input,24,FOLLOW_24_in_ruleBiListAssignment2669); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.12/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.12/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -2770,7 +2770,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1242:62: (iv_ruleMonoSingleAssignment= ruleMonoSingleAssignment EOF )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1243:2: iv_ruleMonoSingleAssignment= ruleMonoSingleAssignment EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.13" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.13" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleMonoSingleAssignment_in_entryRuleMonoSingleAssignment2704);
             iv_ruleMonoSingleAssignment=ruleMonoSingleAssignment();
             _fsp--;
@@ -2823,7 +2823,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             lv_feature=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleMonoSingleAssignment2762); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.13/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, "feature"); 
+                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.13/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, "feature"); 
                 
 
             	        if (current==null) {
@@ -2842,7 +2842,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             match(input,27,FOLLOW_27_in_ruleMonoSingleAssignment2782); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.13/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.13/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -2851,7 +2851,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1282:6: lv_leftValue= ruleSingleAssignmentValue
             {
              
-            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.13/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.13/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
             	    
             pushFollow(FOLLOW_ruleSingleAssignmentValue_in_ruleMonoSingleAssignment2817);
             lv_leftValue=ruleSingleAssignmentValue();
@@ -2878,7 +2878,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             match(input,24,FOLLOW_24_in_ruleMonoSingleAssignment2831); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.13/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.13/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -2913,7 +2913,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1313:60: (iv_ruleMonoListAssignment= ruleMonoListAssignment EOF )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1314:2: iv_ruleMonoListAssignment= ruleMonoListAssignment EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.14" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.14" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleMonoListAssignment_in_entryRuleMonoListAssignment2866);
             iv_ruleMonoListAssignment=ruleMonoListAssignment();
             _fsp--;
@@ -2972,7 +2972,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             lv_feature=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleMonoListAssignment2926); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.14/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, "feature"); 
+                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.14/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, "feature"); 
                 
 
             	        if (current==null) {
@@ -2991,14 +2991,14 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             match(input,27,FOLLOW_27_in_ruleMonoListAssignment2946); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.14/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.14/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
 
             match(input,29,FOLLOW_29_in_ruleMonoListAssignment2956); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.14/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.14/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -3018,7 +3018,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1357:6: lv_leftValues= ruleAssignmentValue
                     {
                      
-                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.14/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
+                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.14/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleAssignmentValue_in_ruleMonoListAssignment2992);
                     lv_leftValues=ruleAssignmentValue();
@@ -3057,13 +3057,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	    {
                     	    match(input,30,FOLLOW_30_in_ruleMonoListAssignment3006); 
 
-                    	            createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.14/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+                    	            createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.14/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                     	        
                     	    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1379:1: (lv_leftValues= ruleAssignmentValue )
                     	    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1382:6: lv_leftValues= ruleAssignmentValue
                     	    {
                     	     
-                    	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.14/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                    	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.14/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
                     	    	    
                     	    pushFollow(FOLLOW_ruleAssignmentValue_in_ruleMonoListAssignment3040);
                     	    lv_leftValues=ruleAssignmentValue();
@@ -3105,14 +3105,14 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             match(input,31,FOLLOW_31_in_ruleMonoListAssignment3058); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.14/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.14/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
 
             match(input,24,FOLLOW_24_in_ruleMonoListAssignment3068); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.14/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.14/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -3147,7 +3147,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1417:57: (iv_ruleAssignmentValue= ruleAssignmentValue EOF )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1418:2: iv_ruleAssignmentValue= ruleAssignmentValue EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.15" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.15" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleAssignmentValue_in_entryRuleAssignmentValue3103);
             iv_ruleAssignmentValue=ruleAssignmentValue();
             _fsp--;
@@ -3267,7 +3267,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                                     lv_value=(Token)input.LT(1);
                                     match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleAssignmentValue3161); 
                                      
-                                        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.15/@alternatives/@groups.0/@groups.0/@groups.0/@terminal" /* xtext::RuleCall */, "value"); 
+                                        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.15/@alternatives/@groups.0/@groups.0/@groups.0/@terminal" /* xtext::RuleCall */, "value"); 
                                         
 
                                     	        if (current==null) {
@@ -3307,7 +3307,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                                     {
                                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAssignmentValue3203); 
                                      
-                                        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.15/@alternatives/@groups.0/@groups.0/@groups.1/@abstractTokens.0/@terminal" /* xtext::CrossReference */, "refObject"); 
+                                        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.15/@alternatives/@groups.0/@groups.0/@groups.1/@abstractTokens.0/@terminal" /* xtext::CrossReference */, "refObject"); 
                                         
 
                                     }
@@ -3331,7 +3331,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                                             {
                                             match(input,19,FOLLOW_19_in_ruleAssignmentValue3218); 
 
-                                                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.15/@alternatives/@groups.0/@groups.0/@groups.1/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                                                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.15/@alternatives/@groups.0/@groups.0/@groups.1/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                                                 
                                             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1470:1: (lv_refFeature= RULE_ID )
                                             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1472:6: lv_refFeature= RULE_ID
@@ -3339,7 +3339,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                                             lv_refFeature=(Token)input.LT(1);
                                             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAssignmentValue3239); 
                                              
-                                                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.15/@alternatives/@groups.0/@groups.0/@groups.1/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "refFeature"); 
+                                                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.15/@alternatives/@groups.0/@groups.0/@groups.1/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "refFeature"); 
                                                 
 
                                             	        if (current==null) {
@@ -3375,7 +3375,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                                                     {
                                                     match(input,29,FOLLOW_29_in_ruleAssignmentValue3262); 
 
-                                                            createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.15/@alternatives/@groups.0/@groups.0/@groups.1/@abstractTokens.1/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                                                            createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.15/@alternatives/@groups.0/@groups.0/@groups.1/@abstractTokens.1/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                                                         
                                                     // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1494:1: (lv_refIndex= RULE_INT )
                                                     // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1496:6: lv_refIndex= RULE_INT
@@ -3383,7 +3383,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                                                     lv_refIndex=(Token)input.LT(1);
                                                     match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleAssignmentValue3283); 
                                                      
-                                                        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.15/@alternatives/@groups.0/@groups.0/@groups.1/@abstractTokens.1/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "refIndex"); 
+                                                        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.15/@alternatives/@groups.0/@groups.0/@groups.1/@abstractTokens.1/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "refIndex"); 
                                                         
 
                                                     	        if (current==null) {
@@ -3405,7 +3405,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
                                                     match(input,31,FOLLOW_31_in_ruleAssignmentValue3304); 
 
-                                                            createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.15/@alternatives/@groups.0/@groups.0/@groups.1/@abstractTokens.1/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
+                                                            createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.15/@alternatives/@groups.0/@groups.0/@groups.1/@abstractTokens.1/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
                                                         
 
                                                     }
@@ -3438,7 +3438,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1522:6: lv_newObject= ruleCreatedObject
                             {
                              
-                            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.15/@alternatives/@groups.0/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.15/@alternatives/@groups.0/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
                             	    
                             pushFollow(FOLLOW_ruleCreatedObject_in_ruleAssignmentValue3350);
                             lv_newObject=ruleCreatedObject();
@@ -3489,7 +3489,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     {
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAssignmentValue3386); 
                      
-                        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.15/@alternatives/@groups.1/@abstractTokens.0/@terminal" /* xtext::CrossReference */, "import"); 
+                        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.15/@alternatives/@groups.1/@abstractTokens.0/@terminal" /* xtext::CrossReference */, "import"); 
                         
 
                     }
@@ -3503,7 +3503,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     lv_impFrag=(Token)input.LT(1);
                     match(input,RULE_FRAGMENT,FOLLOW_RULE_FRAGMENT_in_ruleAssignmentValue3411); 
                      
-                        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.15/@alternatives/@groups.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "impFrag"); 
+                        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.15/@alternatives/@groups.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "impFrag"); 
                         
 
                     	        if (current==null) {
@@ -3559,7 +3559,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1585:61: (iv_ruleListAssignmentValue= ruleListAssignmentValue EOF )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1586:2: iv_ruleListAssignmentValue= ruleListAssignmentValue EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.16" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.16" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleListAssignmentValue_in_entryRuleListAssignmentValue3458);
             iv_ruleListAssignmentValue=ruleListAssignmentValue();
             _fsp--;
@@ -3613,7 +3613,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             lv_index=(Token)input.LT(1);
             match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleListAssignmentValue3515); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, "index"); 
+                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, "index"); 
                 
 
             	        if (current==null) {
@@ -3632,7 +3632,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             match(input,32,FOLLOW_32_in_ruleListAssignmentValue3535); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -3738,7 +3738,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                                             {
                                             match(input,29,FOLLOW_29_in_ruleListAssignmentValue3551); 
 
-                                                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.16/@alternatives/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                                                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.16/@alternatives/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                                                 
                                             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1626:1: (lv_refIndex= RULE_INT )
                                             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1628:6: lv_refIndex= RULE_INT
@@ -3746,7 +3746,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                                             lv_refIndex=(Token)input.LT(1);
                                             match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleListAssignmentValue3572); 
                                              
-                                                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.16/@alternatives/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "refIndex"); 
+                                                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.16/@alternatives/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "refIndex"); 
                                                 
 
                                             	        if (current==null) {
@@ -3768,7 +3768,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
                                             match(input,31,FOLLOW_31_in_ruleListAssignmentValue3593); 
 
-                                                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.16/@alternatives/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                                                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.16/@alternatives/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                                                 
 
                                             }
@@ -3785,7 +3785,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                                             lv_value=(Token)input.LT(1);
                                             match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleListAssignmentValue3621); 
                                              
-                                                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.16/@alternatives/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::RuleCall */, "value"); 
+                                                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.16/@alternatives/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::RuleCall */, "value"); 
                                                 
 
                                             	        if (current==null) {
@@ -3831,7 +3831,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                                     {
                                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleListAssignmentValue3664); 
                                      
-                                        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.16/@alternatives/@abstractTokens.1/@groups.0/@groups.0/@groups.1/@abstractTokens.0/@terminal" /* xtext::CrossReference */, "refObject"); 
+                                        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.16/@alternatives/@abstractTokens.1/@groups.0/@groups.0/@groups.1/@abstractTokens.0/@terminal" /* xtext::CrossReference */, "refObject"); 
                                         
 
                                     }
@@ -3855,7 +3855,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                                             {
                                             match(input,19,FOLLOW_19_in_ruleListAssignmentValue3679); 
 
-                                                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.16/@alternatives/@abstractTokens.1/@groups.0/@groups.0/@groups.1/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                                                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.16/@alternatives/@abstractTokens.1/@groups.0/@groups.0/@groups.1/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                                                 
                                             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1691:1: (lv_refFeature= RULE_ID )
                                             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1693:6: lv_refFeature= RULE_ID
@@ -3863,7 +3863,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                                             lv_refFeature=(Token)input.LT(1);
                                             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleListAssignmentValue3700); 
                                              
-                                                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.16/@alternatives/@abstractTokens.1/@groups.0/@groups.0/@groups.1/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "refFeature"); 
+                                                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.16/@alternatives/@abstractTokens.1/@groups.0/@groups.0/@groups.1/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "refFeature"); 
                                                 
 
                                             	        if (current==null) {
@@ -3899,7 +3899,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                                                     {
                                                     match(input,29,FOLLOW_29_in_ruleListAssignmentValue3723); 
 
-                                                            createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.16/@alternatives/@abstractTokens.1/@groups.0/@groups.0/@groups.1/@abstractTokens.1/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                                                            createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.16/@alternatives/@abstractTokens.1/@groups.0/@groups.0/@groups.1/@abstractTokens.1/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                                                         
                                                     // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1715:1: (lv_refIndex= RULE_INT )
                                                     // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1717:6: lv_refIndex= RULE_INT
@@ -3907,7 +3907,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                                                     lv_refIndex=(Token)input.LT(1);
                                                     match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleListAssignmentValue3744); 
                                                      
-                                                        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.16/@alternatives/@abstractTokens.1/@groups.0/@groups.0/@groups.1/@abstractTokens.1/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "refIndex"); 
+                                                        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.16/@alternatives/@abstractTokens.1/@groups.0/@groups.0/@groups.1/@abstractTokens.1/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "refIndex"); 
                                                         
 
                                                     	        if (current==null) {
@@ -3929,7 +3929,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
                                                     match(input,31,FOLLOW_31_in_ruleListAssignmentValue3765); 
 
-                                                            createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.16/@alternatives/@abstractTokens.1/@groups.0/@groups.0/@groups.1/@abstractTokens.1/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
+                                                            createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.16/@alternatives/@abstractTokens.1/@groups.0/@groups.0/@groups.1/@abstractTokens.1/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
                                                         
 
                                                     }
@@ -3962,7 +3962,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1743:6: lv_newObject= ruleCreatedObject
                             {
                              
-                            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.16/@alternatives/@abstractTokens.1/@groups.0/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.16/@alternatives/@abstractTokens.1/@groups.0/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
                             	    
                             pushFollow(FOLLOW_ruleCreatedObject_in_ruleListAssignmentValue3811);
                             lv_newObject=ruleCreatedObject();
@@ -4013,7 +4013,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     {
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleListAssignmentValue3847); 
                      
-                        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.16/@alternatives/@abstractTokens.1/@groups.1/@abstractTokens.0/@terminal" /* xtext::CrossReference */, "import"); 
+                        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.16/@alternatives/@abstractTokens.1/@groups.1/@abstractTokens.0/@terminal" /* xtext::CrossReference */, "import"); 
                         
 
                     }
@@ -4027,7 +4027,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     lv_impFrag=(Token)input.LT(1);
                     match(input,RULE_FRAGMENT,FOLLOW_RULE_FRAGMENT_in_ruleListAssignmentValue3872); 
                      
-                        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.16/@alternatives/@abstractTokens.1/@groups.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "impFrag"); 
+                        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.16/@alternatives/@abstractTokens.1/@groups.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "impFrag"); 
                         
 
                     	        if (current==null) {
@@ -4086,7 +4086,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1806:63: (iv_ruleSingleAssignmentValue= ruleSingleAssignmentValue EOF )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1807:2: iv_ruleSingleAssignmentValue= ruleSingleAssignmentValue EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.17" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.17" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleSingleAssignmentValue_in_entryRuleSingleAssignmentValue3920);
             iv_ruleSingleAssignmentValue=ruleSingleAssignmentValue();
             _fsp--;
@@ -4227,7 +4227,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                                             lv_keyword=(Token)input.LT(1);
                                             match(input,33,FOLLOW_33_in_ruleSingleAssignmentValue3979); 
 
-                                                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.17/@alternatives/@groups.0/@groups.0/@groups.0/@groups.0/@terminal" /* xtext::Keyword */, "keyword"); 
+                                                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.17/@alternatives/@groups.0/@groups.0/@groups.0/@groups.0/@terminal" /* xtext::Keyword */, "keyword"); 
                                                 
 
                                             	        if (current==null) {
@@ -4256,7 +4256,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                                             lv_value=(Token)input.LT(1);
                                             match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleSingleAssignmentValue4018); 
                                              
-                                                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.17/@alternatives/@groups.0/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::RuleCall */, "value"); 
+                                                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.17/@alternatives/@groups.0/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::RuleCall */, "value"); 
                                                 
 
                                             	        if (current==null) {
@@ -4302,7 +4302,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                                     {
                                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSingleAssignmentValue4061); 
                                      
-                                        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.17/@alternatives/@groups.0/@groups.0/@groups.1/@abstractTokens.0/@terminal" /* xtext::CrossReference */, "refObject"); 
+                                        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.17/@alternatives/@groups.0/@groups.0/@groups.1/@abstractTokens.0/@terminal" /* xtext::CrossReference */, "refObject"); 
                                         
 
                                     }
@@ -4326,7 +4326,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                                             {
                                             match(input,19,FOLLOW_19_in_ruleSingleAssignmentValue4076); 
 
-                                                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.17/@alternatives/@groups.0/@groups.0/@groups.1/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                                                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.17/@alternatives/@groups.0/@groups.0/@groups.1/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                                                 
                                             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1880:1: (lv_refFeature= RULE_ID )
                                             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1882:6: lv_refFeature= RULE_ID
@@ -4334,7 +4334,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                                             lv_refFeature=(Token)input.LT(1);
                                             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSingleAssignmentValue4097); 
                                              
-                                                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.17/@alternatives/@groups.0/@groups.0/@groups.1/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "refFeature"); 
+                                                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.17/@alternatives/@groups.0/@groups.0/@groups.1/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "refFeature"); 
                                                 
 
                                             	        if (current==null) {
@@ -4370,7 +4370,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                                                     {
                                                     match(input,29,FOLLOW_29_in_ruleSingleAssignmentValue4120); 
 
-                                                            createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.17/@alternatives/@groups.0/@groups.0/@groups.1/@abstractTokens.1/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                                                            createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.17/@alternatives/@groups.0/@groups.0/@groups.1/@abstractTokens.1/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                                                         
                                                     // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1904:1: (lv_refIndex= RULE_INT )
                                                     // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1906:6: lv_refIndex= RULE_INT
@@ -4378,7 +4378,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                                                     lv_refIndex=(Token)input.LT(1);
                                                     match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleSingleAssignmentValue4141); 
                                                      
-                                                        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.17/@alternatives/@groups.0/@groups.0/@groups.1/@abstractTokens.1/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "refIndex"); 
+                                                        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.17/@alternatives/@groups.0/@groups.0/@groups.1/@abstractTokens.1/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "refIndex"); 
                                                         
 
                                                     	        if (current==null) {
@@ -4400,7 +4400,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
                                                     match(input,31,FOLLOW_31_in_ruleSingleAssignmentValue4162); 
 
-                                                            createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.17/@alternatives/@groups.0/@groups.0/@groups.1/@abstractTokens.1/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
+                                                            createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.17/@alternatives/@groups.0/@groups.0/@groups.1/@abstractTokens.1/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
                                                         
 
                                                     }
@@ -4433,7 +4433,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1932:6: lv_newObject= ruleCreatedObject
                             {
                              
-                            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.17/@alternatives/@groups.0/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.17/@alternatives/@groups.0/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
                             	    
                             pushFollow(FOLLOW_ruleCreatedObject_in_ruleSingleAssignmentValue4208);
                             lv_newObject=ruleCreatedObject();
@@ -4484,7 +4484,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     {
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSingleAssignmentValue4244); 
                      
-                        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.17/@alternatives/@groups.1/@abstractTokens.0/@terminal" /* xtext::CrossReference */, "import"); 
+                        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.17/@alternatives/@groups.1/@abstractTokens.0/@terminal" /* xtext::CrossReference */, "import"); 
                         
 
                     }
@@ -4498,7 +4498,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     lv_impFrag=(Token)input.LT(1);
                     match(input,RULE_FRAGMENT,FOLLOW_RULE_FRAGMENT_in_ruleSingleAssignmentValue4269); 
                      
-                        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.17/@alternatives/@groups.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "impFrag"); 
+                        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.17/@alternatives/@groups.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "impFrag"); 
                         
 
                     	        if (current==null) {
@@ -4554,7 +4554,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1995:55: (iv_ruleCreatedObject= ruleCreatedObject EOF )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1996:2: iv_ruleCreatedObject= ruleCreatedObject EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.18" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.18" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleCreatedObject_in_entryRuleCreatedObject4316);
             iv_ruleCreatedObject=ruleCreatedObject();
             _fsp--;
@@ -4625,7 +4625,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2009:5: this_ObjectNew= ruleObjectNew
                     {
                      
-                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.18/@alternatives/@abstractTokens.0/@abstractTokens.0/@groups.0" /* xtext::RuleCall */, currentNode); 
+                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.18/@alternatives/@abstractTokens.0/@abstractTokens.0/@groups.0" /* xtext::RuleCall */, currentNode); 
                         
                     pushFollow(FOLLOW_ruleObjectNew_in_ruleCreatedObject4375);
                     this_ObjectNew=ruleObjectNew();
@@ -4642,7 +4642,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2019:5: this_ObjectCopy= ruleObjectCopy
                     {
                      
-                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.18/@alternatives/@abstractTokens.0/@abstractTokens.0/@groups.1" /* xtext::RuleCall */, currentNode); 
+                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.18/@alternatives/@abstractTokens.0/@abstractTokens.0/@groups.1" /* xtext::RuleCall */, currentNode); 
                         
                     pushFollow(FOLLOW_ruleObjectCopy_in_ruleCreatedObject4402);
                     this_ObjectCopy=ruleObjectCopy();
@@ -4672,7 +4672,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     lv_name=(Token)input.LT(1);
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleCreatedObject4423); 
                      
-                        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.18/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+                        createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.18/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
                         
 
                     	        if (current==null) {
@@ -4714,7 +4714,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     {
                     match(input,13,FOLLOW_13_in_ruleCreatedObject4448); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.18/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.18/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
                     // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2051:1: ( (lv_assignments= ruleMonoSingleAssignment ) | (lv_assignments= ruleMonoListAssignment ) )+
                     int cnt42=0;
@@ -4751,7 +4751,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2054:6: lv_assignments= ruleMonoSingleAssignment
                     	    {
                     	     
-                    	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.18/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@terminal" /* xtext::RuleCall */, currentNode); 
+                    	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.18/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@terminal" /* xtext::RuleCall */, currentNode); 
                     	    	    
                     	    pushFollow(FOLLOW_ruleMonoSingleAssignment_in_ruleCreatedObject4483);
                     	    lv_assignments=ruleMonoSingleAssignment();
@@ -4783,7 +4783,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2076:6: lv_assignments= ruleMonoListAssignment
                     	    {
                     	     
-                    	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.18/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                    	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.18/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
                     	    	    
                     	    pushFollow(FOLLOW_ruleMonoListAssignment_in_ruleCreatedObject4527);
                     	    lv_assignments=ruleMonoListAssignment();
@@ -4833,7 +4833,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2097:6: lv_leftMig= ruleMigration
                             {
                              
-                            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.18/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.18/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
                             	    
                             pushFollow(FOLLOW_ruleMigration_in_ruleCreatedObject4568);
                             lv_leftMig=ruleMigration();
@@ -4863,7 +4863,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
                     match(input,14,FOLLOW_14_in_ruleCreatedObject4583); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.18/@alternatives/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.18/@alternatives/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
                         
 
                     }
@@ -4904,7 +4904,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2128:51: (iv_ruleObjectNew= ruleObjectNew EOF )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2129:2: iv_ruleObjectNew= ruleObjectNew EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.19" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.19" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleObjectNew_in_entryRuleObjectNew4620);
             iv_ruleObjectNew=ruleObjectNew();
             _fsp--;
@@ -4948,7 +4948,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             {
             match(input,34,FOLLOW_34_in_ruleObjectNew4665); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.19/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.19/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2145:1: ( ( RULE_ID ) )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2148:3: ( RULE_ID )
@@ -4964,7 +4964,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             {
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleObjectNew4689); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.19/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "import"); 
+                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.19/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "import"); 
                 
 
             }
@@ -4981,7 +4981,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             lv_impFrag=(Token)input.LT(1);
             match(input,RULE_FRAGMENT,FOLLOW_RULE_FRAGMENT_in_ruleObjectNew4715); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.19/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "impFrag"); 
+                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.19/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "impFrag"); 
                 
 
             	        if (current==null) {
@@ -5031,7 +5031,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2189:52: (iv_ruleObjectCopy= ruleObjectCopy EOF )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2190:2: iv_ruleObjectCopy= ruleObjectCopy EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.20" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.20" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleObjectCopy_in_entryRuleObjectCopy4761);
             iv_ruleObjectCopy=ruleObjectCopy();
             _fsp--;
@@ -5075,7 +5075,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             {
             match(input,35,FOLLOW_35_in_ruleObjectCopy4806); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.20/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.20/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2206:1: ( ( RULE_ID ) )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2209:3: ( RULE_ID )
@@ -5091,7 +5091,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             {
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleObjectCopy4830); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.20/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "resource"); 
+                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.20/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "resource"); 
                 
 
             }
@@ -5108,7 +5108,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             lv_fragment=(Token)input.LT(1);
             match(input,RULE_FRAGMENT,FOLLOW_RULE_FRAGMENT_in_ruleObjectCopy4856); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.20/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "fragment"); 
+                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.20/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "fragment"); 
                 
 
             	        if (current==null) {
@@ -5158,7 +5158,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2250:51: (iv_ruleMigration= ruleMigration EOF )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2251:2: iv_ruleMigration= ruleMigration EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.22" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.22" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleMigration_in_entryRuleMigration4902);
             iv_ruleMigration=ruleMigration();
             _fsp--;
@@ -5210,7 +5210,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             {
             match(input,36,FOLLOW_36_in_ruleMigration4948); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.22/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.22/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2267:1: (lv_first= ruleExecutable )?
             int alt45=2;
@@ -5224,7 +5224,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2270:6: lv_first= ruleExecutable
                     {
                      
-                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.22/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.22/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleExecutable_in_ruleMigration4982);
                     lv_first=ruleExecutable();
@@ -5271,13 +5271,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     {
                     match(input,37,FOLLOW_37_in_ruleMigration4999); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.22/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.22/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
                     // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2292:1: (lv_asOp= ruleExecutable )
                     // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2295:6: lv_asOp= ruleExecutable
                     {
                      
-                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.22/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.22/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleExecutable_in_ruleMigration5033);
                     lv_asOp=ruleExecutable();
@@ -5313,13 +5313,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     {
                     match(input,38,FOLLOW_38_in_ruleMigration5054); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.22/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.22/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
                     // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2318:1: (lv_eachOp= ruleExecutable )
                     // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2321:6: lv_eachOp= ruleExecutable
                     {
                      
-                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.22/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.22/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleExecutable_in_ruleMigration5088);
                     lv_eachOp=ruleExecutable();
@@ -5355,7 +5355,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             match(input,24,FOLLOW_24_in_ruleMigration5105); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.22/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.22/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -5390,7 +5390,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2352:52: (iv_ruleExecutable= ruleExecutable EOF )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2353:2: iv_ruleExecutable= ruleExecutable EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.23" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.23" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleExecutable_in_entryRuleExecutable5140);
             iv_ruleExecutable=ruleExecutable();
             _fsp--;
@@ -5450,7 +5450,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2366:5: this_JavaExecutable= ruleJavaExecutable
                     {
                      
-                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.23/@alternatives/@groups.0" /* xtext::RuleCall */, currentNode); 
+                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.23/@alternatives/@groups.0" /* xtext::RuleCall */, currentNode); 
                         
                     pushFollow(FOLLOW_ruleJavaExecutable_in_ruleExecutable5197);
                     this_JavaExecutable=ruleJavaExecutable();
@@ -5467,7 +5467,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2376:5: this_ExpressionExecutable= ruleExpressionExecutable
                     {
                      
-                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.23/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
+                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.23/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
                         
                     pushFollow(FOLLOW_ruleExpressionExecutable_in_ruleExecutable5224);
                     this_ExpressionExecutable=ruleExpressionExecutable();
@@ -5513,7 +5513,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2393:56: (iv_ruleJavaExecutable= ruleJavaExecutable EOF )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2394:2: iv_ruleJavaExecutable= ruleJavaExecutable EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.24" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.24" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleJavaExecutable_in_entryRuleJavaExecutable5258);
             iv_ruleJavaExecutable=ruleJavaExecutable();
             _fsp--;
@@ -5560,7 +5560,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             {
             match(input,18,FOLLOW_18_in_ruleJavaExecutable5304); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.24/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.24/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2410:1: (lv_method= RULE_ID )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2412:6: lv_method= RULE_ID
@@ -5568,7 +5568,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             lv_method=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleJavaExecutable5325); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.24/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "method"); 
+                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.24/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "method"); 
                 
 
             	        if (current==null) {
@@ -5590,14 +5590,14 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             match(input,39,FOLLOW_39_in_ruleJavaExecutable5346); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.24/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.24/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
 
             match(input,40,FOLLOW_40_in_ruleJavaExecutable5356); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.24/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.24/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -5632,7 +5632,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2447:62: (iv_ruleExpressionExecutable= ruleExpressionExecutable EOF )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2448:2: iv_ruleExpressionExecutable= ruleExpressionExecutable EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.25" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.25" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleExpressionExecutable_in_entryRuleExpressionExecutable5391);
             iv_ruleExpressionExecutable=ruleExpressionExecutable();
             _fsp--;
@@ -5674,7 +5674,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             lv_exprstr=(Token)input.LT(1);
             match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleExpressionExecutable5446); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#//@rules.25/@alternatives/@terminal" /* xtext::RuleCall */, "exprstr"); 
+                createLeafNode("classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi#/0/@rules.25/@alternatives/@terminal" /* xtext::RuleCall */, "exprstr"); 
                 
 
             	        if (current==null) {

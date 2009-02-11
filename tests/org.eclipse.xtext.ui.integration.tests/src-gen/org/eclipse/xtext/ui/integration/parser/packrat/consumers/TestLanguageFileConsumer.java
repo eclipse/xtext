@@ -6,6 +6,7 @@ package org.eclipse.xtext.ui.integration.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -20,7 +21,7 @@ import org.eclipse.xtext.ui.integration.parser.packrat.consumers.TestLanguageStu
 @SuppressWarnings("unused")
 public final class TestLanguageFileConsumer extends NonTerminalConsumer {
 
-	private TestLanguageStuffConsumer stuffConsumer;
+	private INonTerminalConsumer stuffConsumer;
 
 	public TestLanguageFileConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
@@ -58,6 +59,7 @@ public final class TestLanguageFileConsumer extends NonTerminalConsumer {
 		return TestLanguageGrammarAccess.INSTANCE.prFile();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -67,7 +69,7 @@ public final class TestLanguageFileConsumer extends NonTerminalConsumer {
 		return "File";
 	}
 	
-	public void setStuffConsumer(TestLanguageStuffConsumer stuffConsumer) {
+	public void setStuffConsumer(INonTerminalConsumer stuffConsumer) {
 		this.stuffConsumer = stuffConsumer;
 	}
 	

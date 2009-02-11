@@ -6,6 +6,7 @@ package org.eclipse.xtext.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -23,10 +24,10 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer
 @SuppressWarnings("unused")
 public final class XtextGrammarConsumer extends NonTerminalConsumer {
 
-	private XtextAbstractMetamodelDeclarationConsumer abstractMetamodelDeclarationConsumer;
-	private XtextAbstractRuleConsumer abstractRuleConsumer;
-	private XtextGrammarIDConsumer grammarIdConsumer;
-	private XtextBuiltinIDConsumer idConsumer;
+	private INonTerminalConsumer abstractMetamodelDeclarationConsumer;
+	private INonTerminalConsumer abstractRuleConsumer;
+	private INonTerminalConsumer grammarIdConsumer;
+	private ITerminalConsumer idConsumer;
 
 	private ISequenceMatcher crossReference$25$Delimiter;
 	
@@ -505,6 +506,7 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 		return XtextGrammarAccess.INSTANCE.prGrammar();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -514,19 +516,19 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 		return "Grammar";
 	}
 	
-	public void setAbstractMetamodelDeclarationConsumer(XtextAbstractMetamodelDeclarationConsumer abstractMetamodelDeclarationConsumer) {
+	public void setAbstractMetamodelDeclarationConsumer(INonTerminalConsumer abstractMetamodelDeclarationConsumer) {
 		this.abstractMetamodelDeclarationConsumer = abstractMetamodelDeclarationConsumer;
 	}
 	
-	public void setAbstractRuleConsumer(XtextAbstractRuleConsumer abstractRuleConsumer) {
+	public void setAbstractRuleConsumer(INonTerminalConsumer abstractRuleConsumer) {
 		this.abstractRuleConsumer = abstractRuleConsumer;
 	}
 	
-	public void setGrammarIdConsumer(XtextGrammarIDConsumer grammarIdConsumer) {
+	public void setGrammarIdConsumer(INonTerminalConsumer grammarIdConsumer) {
 		this.grammarIdConsumer = grammarIdConsumer;
 	}
 	
-	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
+	public void setIdConsumer(ITerminalConsumer idConsumer) {
 		this.idConsumer = idConsumer;
 	}
 	

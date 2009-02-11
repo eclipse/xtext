@@ -50,6 +50,7 @@ protected class Container_Group extends GroupToken {
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prContainer().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Container_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -78,6 +79,7 @@ protected class Container_0_Group extends GroupToken {
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prContainer().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Container_0_1_Alternatives(current, this).firstSolution();
 		while(s1 != null) {
@@ -106,6 +108,7 @@ protected class Container_0_0_Group extends GroupToken {
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prContainer().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Container_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -134,6 +137,7 @@ protected class Container_0_0_0_Group extends GroupToken {
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prContainer().ele000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Container_0_0_0_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
@@ -174,6 +178,7 @@ protected class Container_0_0_0_1_Assignment_name extends AssignmentToken  {
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prContainer().ele0001AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -210,7 +215,8 @@ protected class Container_0_1_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prContainer().ele01Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new Container_0_1_1_Assignment_content(current, this) : new Container_0_1_0_Assignment_nested(current, this);
 		Solution s = t.firstSolution();
@@ -232,6 +238,7 @@ protected class Container_0_1_0_Assignment_nested extends AssignmentToken  {
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prContainer().ele010AssignmentNested();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("nested",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("nested");
@@ -263,6 +270,7 @@ protected class Container_0_1_1_Assignment_content extends AssignmentToken  {
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prContainer().ele011AssignmentContent();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("content",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("content");
@@ -319,6 +327,7 @@ protected class Nested_Group extends GroupToken {
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prNested().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Nested_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -347,6 +356,7 @@ protected class Nested_0_Group extends GroupToken {
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prNested().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Nested_0_1_Assignment_nested(current, this).firstSolution();
 		while(s1 != null) {
@@ -375,6 +385,7 @@ protected class Nested_0_0_Group extends GroupToken {
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prNested().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Nested_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -428,6 +439,7 @@ protected class Nested_0_1_Assignment_nested extends AssignmentToken  {
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prNested().ele01AssignmentNested();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("nested",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("nested");
@@ -482,7 +494,8 @@ protected class Content_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prContent().eleAlternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new Content_1_RuleCall_AbstractChildren(current, this) : new Content_0_RuleCall_Children(current, this);
 		Solution s = t.firstSolution();
@@ -504,6 +517,7 @@ protected class Content_0_RuleCall_Children extends RuleCallToken {
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prContent().ele0ParserRuleCallChildren();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Children_Group.class, current)) return null;
 		if(!current.isInstanceOf("Children")) return null;
@@ -522,6 +536,7 @@ protected class Content_1_RuleCall_AbstractChildren extends RuleCallToken {
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prContent().ele1ParserRuleCallAbstractChildren();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(AbstractChildren_Group.class, current)) return null;
 		if(!current.isInstanceOf("AbstractChildren")) return null;
@@ -551,6 +566,7 @@ protected class Children_Group extends GroupToken {
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prChildren().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Children_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -579,6 +595,7 @@ protected class Children_0_Group extends GroupToken {
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prChildren().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Children_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -607,6 +624,7 @@ protected class Children_0_0_Group extends GroupToken {
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prChildren().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Children_0_0_1_Assignment_children(current, this).firstSolution();
 		while(s1 != null) {
@@ -635,6 +653,7 @@ protected class Children_0_0_0_Group extends GroupToken {
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prChildren().ele000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Children_0_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -688,6 +707,7 @@ protected class Children_0_0_1_Assignment_children extends AssignmentToken  {
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prChildren().ele001AssignmentChildren();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("children",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("children");
@@ -720,6 +740,7 @@ protected class Children_0_1_Group extends GroupToken {
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prChildren().ele01Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Children_0_1_1_Assignment_children(current, this).firstSolution();
 		while(s1 != null) {
@@ -760,6 +781,7 @@ protected class Children_0_1_1_Assignment_children extends AssignmentToken  {
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prChildren().ele011AssignmentChildren();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("children",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("children");
@@ -816,6 +838,7 @@ protected class Child_Group extends GroupToken {
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prChild().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Child_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -844,6 +867,7 @@ protected class Child_0_Group extends GroupToken {
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prChild().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Child_0_1_Assignment_value(current, this).firstSolution();
 		while(s1 != null) {
@@ -872,6 +896,7 @@ protected class Child_0_0_Group extends GroupToken {
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prChild().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Child_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -900,6 +925,7 @@ protected class Child_0_0_0_Group extends GroupToken {
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prChild().ele000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Child_0_0_0_1_Keyword_C(current, this).firstSolution();
 		while(s1 != null) {
@@ -966,6 +992,7 @@ protected class Child_0_1_Assignment_value extends AssignmentToken  {
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prChild().ele01AssignmentValue();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("value",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
@@ -1021,6 +1048,7 @@ protected class AbstractChildren_Group extends GroupToken {
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prAbstractChildren().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new AbstractChildren_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -1049,6 +1077,7 @@ protected class AbstractChildren_0_Group extends GroupToken {
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prAbstractChildren().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new AbstractChildren_0_1_Assignment_abstractChildren(current, this).firstSolution();
 		while(s1 != null) {
@@ -1077,6 +1106,7 @@ protected class AbstractChildren_0_0_Group extends GroupToken {
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prAbstractChildren().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new AbstractChildren_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -1130,6 +1160,7 @@ protected class AbstractChildren_0_1_Assignment_abstractChildren extends Assignm
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prAbstractChildren().ele01AssignmentAbstractChildren();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("abstractChildren",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("abstractChildren");
@@ -1184,7 +1215,8 @@ protected class AbstractChild_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prAbstractChild().eleAlternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new AbstractChild_1_RuleCall_SecondConcrete(current, this) : new AbstractChild_0_RuleCall_FirstConcrete(current, this);
 		Solution s = t.firstSolution();
@@ -1206,6 +1238,7 @@ protected class AbstractChild_0_RuleCall_FirstConcrete extends RuleCallToken {
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prAbstractChild().ele0ParserRuleCallFirstConcrete();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(FirstConcrete_Group.class, current)) return null;
 		if(!current.isInstanceOf("FirstConcrete")) return null;
@@ -1224,6 +1257,7 @@ protected class AbstractChild_1_RuleCall_SecondConcrete extends RuleCallToken {
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prAbstractChild().ele1ParserRuleCallSecondConcrete();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(SecondConcrete_Group.class, current)) return null;
 		if(!current.isInstanceOf("SecondConcrete")) return null;
@@ -1253,6 +1287,7 @@ protected class FirstConcrete_Group extends GroupToken {
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prFirstConcrete().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new FirstConcrete_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -1281,6 +1316,7 @@ protected class FirstConcrete_0_Group extends GroupToken {
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prFirstConcrete().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new FirstConcrete_0_1_Assignment_referencedContainer(current, this).firstSolution();
 		while(s1 != null) {
@@ -1309,6 +1345,7 @@ protected class FirstConcrete_0_0_Group extends GroupToken {
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prFirstConcrete().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new FirstConcrete_0_0_1_Assignment_value(current, this).firstSolution();
 		while(s1 != null) {
@@ -1337,6 +1374,7 @@ protected class FirstConcrete_0_0_0_Group extends GroupToken {
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prFirstConcrete().ele000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new FirstConcrete_0_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -1365,6 +1403,7 @@ protected class FirstConcrete_0_0_0_0_Group extends GroupToken {
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prFirstConcrete().ele0000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new FirstConcrete_0_0_0_0_1_Keyword_F(current, this).firstSolution();
 		while(s1 != null) {
@@ -1431,6 +1470,7 @@ protected class FirstConcrete_0_0_1_Assignment_value extends AssignmentToken  {
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prFirstConcrete().ele001AssignmentValue();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("value",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
@@ -1463,6 +1503,7 @@ protected class FirstConcrete_0_1_Assignment_referencedContainer extends Assignm
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prFirstConcrete().ele01AssignmentReferencedContainer();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("referencedContainer",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("referencedContainer");
@@ -1513,6 +1554,7 @@ protected class SecondConcrete_Group extends GroupToken {
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prSecondConcrete().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new SecondConcrete_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -1541,6 +1583,7 @@ protected class SecondConcrete_0_Group extends GroupToken {
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prSecondConcrete().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new SecondConcrete_0_1_Assignment_referencedChildren(current, this).firstSolution();
 		while(s1 != null) {
@@ -1569,6 +1612,7 @@ protected class SecondConcrete_0_0_Group extends GroupToken {
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prSecondConcrete().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new SecondConcrete_0_0_1_Assignment_value(current, this).firstSolution();
 		while(s1 != null) {
@@ -1597,6 +1641,7 @@ protected class SecondConcrete_0_0_0_Group extends GroupToken {
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prSecondConcrete().ele000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new SecondConcrete_0_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -1625,6 +1670,7 @@ protected class SecondConcrete_0_0_0_0_Group extends GroupToken {
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prSecondConcrete().ele0000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new SecondConcrete_0_0_0_0_1_Keyword_S(current, this).firstSolution();
 		while(s1 != null) {
@@ -1653,6 +1699,7 @@ protected class SecondConcrete_0_0_0_0_0_Group extends GroupToken {
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prSecondConcrete().ele00000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new SecondConcrete_0_0_0_0_0_1_Keyword_F(current, this).firstSolution();
 		while(s1 != null) {
@@ -1732,6 +1779,7 @@ protected class SecondConcrete_0_0_1_Assignment_value extends AssignmentToken  {
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prSecondConcrete().ele001AssignmentValue();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("value",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
@@ -1764,6 +1812,7 @@ protected class SecondConcrete_0_1_Assignment_referencedChildren extends Assignm
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prSecondConcrete().ele01AssignmentReferencedChildren();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("referencedChildren",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("referencedChildren");
@@ -1814,6 +1863,7 @@ protected class Named_Assignment_name extends AssignmentToken  {
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prNamed().eleAssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");

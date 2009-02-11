@@ -42,6 +42,7 @@ protected class Model_Assignment_children extends AssignmentToken  {
 		return TreeTestLanguageGrammarAccess.INSTANCE.prModel().eleAssignmentChildren();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("children",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("children");
@@ -83,6 +84,7 @@ protected class Node_Group extends GroupToken {
 		return TreeTestLanguageGrammarAccess.INSTANCE.prNode().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Node_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -111,6 +113,7 @@ protected class Node_0_Group extends GroupToken {
 		return TreeTestLanguageGrammarAccess.INSTANCE.prNode().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Node_0_1_Assignment_children(current, this).firstSolution();
 		while(s1 != null) {
@@ -139,6 +142,7 @@ protected class Node_0_0_Group extends GroupToken {
 		return TreeTestLanguageGrammarAccess.INSTANCE.prNode().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Node_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -167,6 +171,7 @@ protected class Node_0_0_0_Group extends GroupToken {
 		return TreeTestLanguageGrammarAccess.INSTANCE.prNode().ele000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Node_0_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -195,6 +200,7 @@ protected class Node_0_0_0_0_Group extends GroupToken {
 		return TreeTestLanguageGrammarAccess.INSTANCE.prNode().ele0000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Node_0_0_0_0_1_Assignment_attrib(current, this).firstSolution();
 		while(s1 != null) {
@@ -223,6 +229,7 @@ protected class Node_0_0_0_0_0_Group extends GroupToken {
 		return TreeTestLanguageGrammarAccess.INSTANCE.prNode().ele00000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Node_0_0_0_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -251,6 +258,7 @@ protected class Node_0_0_0_0_0_0_Assignment_name extends AssignmentToken  {
 		return TreeTestLanguageGrammarAccess.INSTANCE.prNode().ele000000AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -287,6 +295,7 @@ protected class Node_0_0_0_0_1_Assignment_attrib extends AssignmentToken  {
 		return TreeTestLanguageGrammarAccess.INSTANCE.prNode().ele00001AssignmentAttrib();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("attrib",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("attrib");
@@ -337,6 +346,7 @@ protected class Node_0_1_Assignment_children extends AssignmentToken  {
 		return TreeTestLanguageGrammarAccess.INSTANCE.prNode().ele01AssignmentChildren();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("children",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("children");

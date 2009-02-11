@@ -46,8 +46,8 @@ public abstract class BaseEPackageAccess {
 			throw new WrappedException(e);
 		}
 		EList<EObject> contents = resource.getContents();
-		if (contents.size() != 1) {
-			throw new IllegalStateException("loading classpath:" + string + " : Expected one root element but found "
+		if (contents.size() < 1) {
+			throw new IllegalStateException("loading classpath:" + string + " : Expected at least root element but found "
 					+ contents.size());
 		}
 		return resource;

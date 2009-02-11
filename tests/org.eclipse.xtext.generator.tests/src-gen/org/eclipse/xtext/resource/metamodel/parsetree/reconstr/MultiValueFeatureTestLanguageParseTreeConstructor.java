@@ -41,6 +41,7 @@ protected class Start_Assignment_featureA extends AssignmentToken  {
 		return MultiValueFeatureTestLanguageGrammarAccess.INSTANCE.prStart().eleAssignmentFeatureA();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("featureA",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("featureA");

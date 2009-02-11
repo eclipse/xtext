@@ -6,6 +6,7 @@ package org.eclipse.xtext.testlanguages.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -22,9 +23,9 @@ import org.eclipse.xtext.testlanguages.parser.packrat.consumers.LookaheadTestLan
 @SuppressWarnings("unused")
 public final class LookaheadTestLanguageAltsConsumer extends NonTerminalConsumer {
 
-	private LookaheadTestLanguageLookAhead0Consumer lookAhead0Consumer;
-	private LookaheadTestLanguageLookAhead1Consumer lookAhead1Consumer;
-	private LookaheadTestLanguageLookAhead3Consumer lookAhead3Consumer;
+	private INonTerminalConsumer lookAhead0Consumer;
+	private INonTerminalConsumer lookAhead1Consumer;
+	private INonTerminalConsumer lookAhead3Consumer;
 
 	public LookaheadTestLanguageAltsConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
@@ -75,6 +76,7 @@ public final class LookaheadTestLanguageAltsConsumer extends NonTerminalConsumer
 		return LookaheadTestLanguageGrammarAccess.INSTANCE.prAlts();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -84,15 +86,15 @@ public final class LookaheadTestLanguageAltsConsumer extends NonTerminalConsumer
 		return "Alts";
 	}
 	
-	public void setLookAhead0Consumer(LookaheadTestLanguageLookAhead0Consumer lookAhead0Consumer) {
+	public void setLookAhead0Consumer(INonTerminalConsumer lookAhead0Consumer) {
 		this.lookAhead0Consumer = lookAhead0Consumer;
 	}
 	
-	public void setLookAhead1Consumer(LookaheadTestLanguageLookAhead1Consumer lookAhead1Consumer) {
+	public void setLookAhead1Consumer(INonTerminalConsumer lookAhead1Consumer) {
 		this.lookAhead1Consumer = lookAhead1Consumer;
 	}
 	
-	public void setLookAhead3Consumer(LookaheadTestLanguageLookAhead3Consumer lookAhead3Consumer) {
+	public void setLookAhead3Consumer(INonTerminalConsumer lookAhead3Consumer) {
 		this.lookAhead3Consumer = lookAhead3Consumer;
 	}
 	

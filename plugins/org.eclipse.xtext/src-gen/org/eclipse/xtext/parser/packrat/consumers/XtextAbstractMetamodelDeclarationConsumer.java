@@ -6,6 +6,7 @@ package org.eclipse.xtext.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -21,8 +22,8 @@ import org.eclipse.xtext.parser.packrat.consumers.XtextReferencedMetamodelConsum
 @SuppressWarnings("unused")
 public final class XtextAbstractMetamodelDeclarationConsumer extends NonTerminalConsumer {
 
-	private XtextGeneratedMetamodelConsumer generatedMetamodelConsumer;
-	private XtextReferencedMetamodelConsumer referencedMetamodelConsumer;
+	private INonTerminalConsumer generatedMetamodelConsumer;
+	private INonTerminalConsumer referencedMetamodelConsumer;
 
 	public XtextAbstractMetamodelDeclarationConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
@@ -64,6 +65,7 @@ public final class XtextAbstractMetamodelDeclarationConsumer extends NonTerminal
 		return XtextGrammarAccess.INSTANCE.prAbstractMetamodelDeclaration();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -73,11 +75,11 @@ public final class XtextAbstractMetamodelDeclarationConsumer extends NonTerminal
 		return "AbstractMetamodelDeclaration";
 	}
 	
-	public void setGeneratedMetamodelConsumer(XtextGeneratedMetamodelConsumer generatedMetamodelConsumer) {
+	public void setGeneratedMetamodelConsumer(INonTerminalConsumer generatedMetamodelConsumer) {
 		this.generatedMetamodelConsumer = generatedMetamodelConsumer;
 	}
 	
-	public void setReferencedMetamodelConsumer(XtextReferencedMetamodelConsumer referencedMetamodelConsumer) {
+	public void setReferencedMetamodelConsumer(INonTerminalConsumer referencedMetamodelConsumer) {
 		this.referencedMetamodelConsumer = referencedMetamodelConsumer;
 	}
 	

@@ -74,7 +74,7 @@ public class InternalTestLanguageParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.ui.integration.tests/./src-gen/org/eclipse/xtext/ui/integration/parser/antlr/internal/InternalTestLanguage.g:68:46: (iv_ruleFile= ruleFile EOF )
             // ../org.eclipse.xtext.ui.integration.tests/./src-gen/org/eclipse/xtext/ui/integration/parser/antlr/internal/InternalTestLanguage.g:69:2: iv_ruleFile= ruleFile EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/ui/integration/TestLanguage.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/ui/integration/TestLanguage.xmi#/0/@rules.0" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleFile_in_entryRuleFile72);
             iv_ruleFile=ruleFile();
             _fsp--;
@@ -127,7 +127,7 @@ public class InternalTestLanguageParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.ui.integration.tests/./src-gen/org/eclipse/xtext/ui/integration/parser/antlr/internal/InternalTestLanguage.g:84:6: lv_stuff= ruleStuff
             	    {
             	     
-            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/ui/integration/TestLanguage.xmi#//@rules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
+            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/ui/integration/TestLanguage.xmi#/0/@rules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleStuff_in_ruleFile140);
             	    lv_stuff=ruleStuff();
@@ -185,7 +185,7 @@ public class InternalTestLanguageParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.ui.integration.tests/./src-gen/org/eclipse/xtext/ui/integration/parser/antlr/internal/InternalTestLanguage.g:111:47: (iv_ruleStuff= ruleStuff EOF )
             // ../org.eclipse.xtext.ui.integration.tests/./src-gen/org/eclipse/xtext/ui/integration/parser/antlr/internal/InternalTestLanguage.g:112:2: iv_ruleStuff= ruleStuff EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/ui/integration/TestLanguage.xmi#//@rules.1" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/ui/integration/TestLanguage.xmi#/0/@rules.1" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleStuff_in_entryRuleStuff179);
             iv_ruleStuff=ruleStuff();
             _fsp--;
@@ -226,7 +226,7 @@ public class InternalTestLanguageParser extends AbstractInternalAntlrParser {
             {
             match(input,11,FOLLOW_11_in_ruleStuff223); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/ui/integration/TestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/ui/integration/TestLanguage.xmi#/0/@rules.1/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
             // ../org.eclipse.xtext.ui.integration.tests/./src-gen/org/eclipse/xtext/ui/integration/parser/antlr/internal/InternalTestLanguage.g:128:1: (lv_name= RULE_ID )
             // ../org.eclipse.xtext.ui.integration.tests/./src-gen/org/eclipse/xtext/ui/integration/parser/antlr/internal/InternalTestLanguage.g:130:6: lv_name= RULE_ID
@@ -234,7 +234,7 @@ public class InternalTestLanguageParser extends AbstractInternalAntlrParser {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleStuff244); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/ui/integration/TestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+                createLeafNode("classpath:/org/eclipse/xtext/ui/integration/TestLanguage.xmi#/0/@rules.1/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
                 
 
             	        if (current==null) {

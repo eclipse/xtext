@@ -47,6 +47,7 @@ protected class Entry_Assignment_contents extends AssignmentToken  {
 		return LookaheadTestLanguageGrammarAccess.INSTANCE.prEntry().eleAssignmentContents();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("contents",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("contents");
@@ -87,7 +88,8 @@ protected class Alts_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return LookaheadTestLanguageGrammarAccess.INSTANCE.prAlts().eleAlternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new Alts_1_RuleCall_LookAhead3(current, this) : new Alts_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -108,7 +110,8 @@ protected class Alts_0_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return LookaheadTestLanguageGrammarAccess.INSTANCE.prAlts().ele0Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new Alts_0_1_RuleCall_LookAhead1(current, this) : new Alts_0_0_RuleCall_LookAhead0(current, this);
 		Solution s = t.firstSolution();
@@ -130,6 +133,7 @@ protected class Alts_0_0_RuleCall_LookAhead0 extends RuleCallToken {
 		return LookaheadTestLanguageGrammarAccess.INSTANCE.prAlts().ele00ParserRuleCallLookAhead0();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(LookAhead0_Group.class, current)) return null;
 		if(!current.isInstanceOf("LookAhead0")) return null;
@@ -148,6 +152,7 @@ protected class Alts_0_1_RuleCall_LookAhead1 extends RuleCallToken {
 		return LookaheadTestLanguageGrammarAccess.INSTANCE.prAlts().ele01ParserRuleCallLookAhead1();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(LookAhead1_Group.class, current)) return null;
 		if(!current.isInstanceOf("LookAhead1")) return null;
@@ -167,6 +172,7 @@ protected class Alts_1_RuleCall_LookAhead3 extends RuleCallToken {
 		return LookaheadTestLanguageGrammarAccess.INSTANCE.prAlts().ele1ParserRuleCallLookAhead3();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(LookAhead3_Group.class, current)) return null;
 		if(!current.isInstanceOf("LookAhead3")) return null;
@@ -196,6 +202,7 @@ protected class LookAhead0_Group extends GroupToken {
 		return LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead0().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new LookAhead0_1_Assignment_x(current, this).firstSolution();
 		while(s1 != null) {
@@ -236,6 +243,7 @@ protected class LookAhead0_1_Assignment_x extends AssignmentToken  {
 		return LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead0().ele1AssignmentX();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("x",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("x");
@@ -272,6 +280,7 @@ protected class LookAhead1_Group extends GroupToken {
 		return LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead1().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new LookAhead1_1_Assignment_x(current, this).firstSolution();
 		while(s1 != null) {
@@ -300,6 +309,7 @@ protected class LookAhead1_0_Group extends GroupToken {
 		return LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead1().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new LookAhead1_0_1_Assignment_x(current, this).firstSolution();
 		while(s1 != null) {
@@ -328,6 +338,7 @@ protected class LookAhead1_0_0_Group extends GroupToken {
 		return LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead1().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new LookAhead1_0_0_1_Assignment_y(current, this).firstSolution();
 		while(s1 != null) {
@@ -368,6 +379,7 @@ protected class LookAhead1_0_0_1_Assignment_y extends AssignmentToken  {
 		return LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead1().ele001AssignmentY();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("y",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("y");
@@ -400,6 +412,7 @@ protected class LookAhead1_0_1_Assignment_x extends AssignmentToken  {
 		return LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead1().ele01AssignmentX();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("x",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("x");
@@ -426,6 +439,7 @@ protected class LookAhead1_1_Assignment_x extends AssignmentToken  {
 		return LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead1().ele1AssignmentX();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("x",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("x");
@@ -462,6 +476,7 @@ protected class LookAhead2_Group extends GroupToken {
 		return LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead2().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new LookAhead2_1_Keyword_c(current, this).firstSolution();
 		while(s1 != null) {
@@ -489,7 +504,8 @@ protected class LookAhead2_0_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead2().ele0Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new LookAhead2_0_1_Assignment_z(current, this) : new LookAhead2_0_0_Assignment_z(current, this);
 		Solution s = t.firstSolution();
@@ -511,6 +527,7 @@ protected class LookAhead2_0_0_Assignment_z extends AssignmentToken  {
 		return LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead2().ele00AssignmentZ();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("z",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("z");
@@ -536,6 +553,7 @@ protected class LookAhead2_0_1_Assignment_z extends AssignmentToken  {
 		return LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead2().ele01AssignmentZ();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("z",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("z");
@@ -585,6 +603,7 @@ protected class LookAhead3_Group extends GroupToken {
 		return LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead3().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new LookAhead3_1_Assignment_z(current, this).firstSolution();
 		while(s1 != null) {
@@ -613,6 +632,7 @@ protected class LookAhead3_0_Group extends GroupToken {
 		return LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead3().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new LookAhead3_0_1_Assignment_x(current, this).firstSolution();
 		while(s1 != null) {
@@ -641,6 +661,7 @@ protected class LookAhead3_0_0_Group extends GroupToken {
 		return LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead3().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new LookAhead3_0_0_1_Keyword_bar(current, this).firstSolution();
 		while(s1 != null) {
@@ -694,6 +715,7 @@ protected class LookAhead3_0_1_Assignment_x extends AssignmentToken  {
 		return LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead3().ele01AssignmentX();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("x",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("x");
@@ -720,6 +742,7 @@ protected class LookAhead3_1_Assignment_z extends AssignmentToken  {
 		return LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead3().ele1AssignmentZ();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("z",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("z");
@@ -761,7 +784,8 @@ protected class LookAhead4_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead4().eleAlternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new LookAhead4_1_Assignment_x(current, this) : new LookAhead4_0_Assignment_x(current, this);
 		Solution s = t.firstSolution();
@@ -783,6 +807,7 @@ protected class LookAhead4_0_Assignment_x extends AssignmentToken  {
 		return LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead4().ele0AssignmentX();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("x",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("x");
@@ -808,6 +833,7 @@ protected class LookAhead4_1_Assignment_x extends AssignmentToken  {
 		return LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead4().ele1AssignmentX();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("x",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("x");

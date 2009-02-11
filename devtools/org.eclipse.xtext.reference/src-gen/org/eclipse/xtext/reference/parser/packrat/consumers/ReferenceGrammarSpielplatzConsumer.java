@@ -6,6 +6,7 @@ package org.eclipse.xtext.reference.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -26,13 +27,13 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGCons
 @SuppressWarnings("unused")
 public final class ReferenceGrammarSpielplatzConsumer extends NonTerminalConsumer {
 
-	private ReferenceGrammarCustomTypeParserRuleConsumer customTypeParserRuleConsumer;
-	private ReferenceGrammarErwachsenerConsumer erwachsenerConsumer;
-	private ReferenceGrammarFamilieConsumer familieConsumer;
-	private XtextBuiltinINTConsumer intConsumer;
-	private ReferenceGrammarKindConsumer kindConsumer;
-	private ReferenceGrammarSpielzeugConsumer spielzeugConsumer;
-	private XtextBuiltinSTRINGConsumer stringConsumer;
+	private INonTerminalConsumer customTypeParserRuleConsumer;
+	private INonTerminalConsumer erwachsenerConsumer;
+	private INonTerminalConsumer familieConsumer;
+	private ITerminalConsumer intConsumer;
+	private INonTerminalConsumer kindConsumer;
+	private INonTerminalConsumer spielzeugConsumer;
+	private ITerminalConsumer stringConsumer;
 
 	private ICharacterClass keyword$11$Delimiter;
 	
@@ -302,6 +303,7 @@ public final class ReferenceGrammarSpielplatzConsumer extends NonTerminalConsume
 		return ReferenceGrammarGrammarAccess.INSTANCE.prSpielplatz();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -311,31 +313,31 @@ public final class ReferenceGrammarSpielplatzConsumer extends NonTerminalConsume
 		return "Spielplatz";
 	}
 	
-	public void setCustomTypeParserRuleConsumer(ReferenceGrammarCustomTypeParserRuleConsumer customTypeParserRuleConsumer) {
+	public void setCustomTypeParserRuleConsumer(INonTerminalConsumer customTypeParserRuleConsumer) {
 		this.customTypeParserRuleConsumer = customTypeParserRuleConsumer;
 	}
 	
-	public void setErwachsenerConsumer(ReferenceGrammarErwachsenerConsumer erwachsenerConsumer) {
+	public void setErwachsenerConsumer(INonTerminalConsumer erwachsenerConsumer) {
 		this.erwachsenerConsumer = erwachsenerConsumer;
 	}
 	
-	public void setFamilieConsumer(ReferenceGrammarFamilieConsumer familieConsumer) {
+	public void setFamilieConsumer(INonTerminalConsumer familieConsumer) {
 		this.familieConsumer = familieConsumer;
 	}
 	
-	public void setIntConsumer(XtextBuiltinINTConsumer intConsumer) {
+	public void setIntConsumer(ITerminalConsumer intConsumer) {
 		this.intConsumer = intConsumer;
 	}
 	
-	public void setKindConsumer(ReferenceGrammarKindConsumer kindConsumer) {
+	public void setKindConsumer(INonTerminalConsumer kindConsumer) {
 		this.kindConsumer = kindConsumer;
 	}
 	
-	public void setSpielzeugConsumer(ReferenceGrammarSpielzeugConsumer spielzeugConsumer) {
+	public void setSpielzeugConsumer(INonTerminalConsumer spielzeugConsumer) {
 		this.spielzeugConsumer = spielzeugConsumer;
 	}
 	
-	public void setStringConsumer(XtextBuiltinSTRINGConsumer stringConsumer) {
+	public void setStringConsumer(ITerminalConsumer stringConsumer) {
 		this.stringConsumer = stringConsumer;
 	}
 	

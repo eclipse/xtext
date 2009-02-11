@@ -7,7 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
@@ -18,10 +20,14 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.builtin.IXtextBuiltin;
@@ -147,6 +153,7 @@ public class XtextLinker extends Linker {
 		final Xtext2EcoreTransformer transformer = createTransformer((Grammar) model, consumer);
 		transformer.removeGeneratedPackages();
 		super.linkModel(model, consumer);
+		updateOverriddenRules((Grammar) model);
 		try {
 			transformer.transform();
 		} catch(Exception e) {
@@ -155,6 +162,55 @@ public class XtextLinker extends Linker {
 		}
 	}
 	
+	protected void updateOverriddenRules(Grammar grammar) {
+		if (grammar.getSuperGrammar() == null)
+			return;
+		Map<String, AbstractRule> rulePerName = new HashMap<String, AbstractRule>(grammar.getRules().size());
+		for (AbstractRule rule: grammar.getRules())
+			rulePerName.put(rule.getName(), rule);
+		Grammar superGrammar = grammar.getSuperGrammar();
+		while(superGrammar != null) {
+			updateOverriddenRules(superGrammar, rulePerName);
+			superGrammar = superGrammar.getSuperGrammar();
+		}
+	}
+	
+	protected void updateOverriddenRules(Grammar grammar, Map<String, AbstractRule> rulePerName) {
+		if (grammar.isDefinesHiddenTokens()) {
+			updateHiddenTokens(grammar.getHiddenTokens(), rulePerName);
+		}
+		for (AbstractRule rule: grammar.getRules()) {
+			if (rule instanceof ParserRule && ((ParserRule)rule).isDefinesHiddenTokens()) {
+				updateHiddenTokens(((ParserRule) rule).getHiddenTokens(), rulePerName);
+			}
+		}
+		final List<RuleCall> allRuleCalls = EcoreUtil2.getAllContentsOfType(grammar, RuleCall.class);
+		for (RuleCall call: allRuleCalls) {
+			if (call.getRule() != null) {
+				AbstractRule rule = rulePerName.get(call.getRule().getName());
+				if (rule != null)
+					call.setRule(rule);
+			}
+		}
+		final List<CrossReference> allCrossRefs = EcoreUtil2.getAllContentsOfType(grammar, CrossReference.class);
+		for (CrossReference ref: allCrossRefs) {
+			if (ref.getRule() != null) {
+				AbstractRule rule = rulePerName.get(ref.getRule().getName());
+				if (rule != null)
+					ref.setRule(rule);
+			}
+		}
+	}
+	
+	private void updateHiddenTokens(List<AbstractRule> hiddenTokens, Map<String, AbstractRule> rulePerName) {
+		for(int i = 0; i < hiddenTokens.size(); i++) {
+			AbstractRule hidden = hiddenTokens.get(i);
+			AbstractRule overridden = rulePerName.get(hidden.getName());
+			if (overridden != null)
+				hiddenTokens.set(i, overridden);
+		}
+	}
+
 	/**
 	 * We add typeRefs without Nodes on the fly, so we should remove them before
 	 * relinking.

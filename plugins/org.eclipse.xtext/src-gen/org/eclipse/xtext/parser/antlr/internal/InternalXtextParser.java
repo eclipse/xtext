@@ -74,7 +74,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:68:49: (iv_ruleGrammar= ruleGrammar EOF )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:69:2: iv_ruleGrammar= ruleGrammar EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.0" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleGrammar_in_entryRuleGrammar72);
             iv_ruleGrammar=ruleGrammar();
             _fsp--;
@@ -158,7 +158,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                     lv_abstract=(Token)input.LT(1);
                     match(input,11,FOLLOW_11_in_ruleGrammar133); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@groups.0/@terminal" /* xtext::Keyword */, "abstract"); 
+                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@groups.0/@terminal" /* xtext::Keyword */, "abstract"); 
                         
 
                     	        if (current==null) {
@@ -183,7 +183,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                     {
                     match(input,12,FOLLOW_12_in_ruleGrammar160); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@groups.1" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@groups.1" /* xtext::Keyword */, null); 
                         
 
                     }
@@ -195,7 +195,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:109:6: lv_name= ruleGrammarID
             {
              
-            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
             	    
             pushFollow(FOLLOW_ruleGrammarID_in_ruleGrammar195);
             lv_name=ruleGrammarID();
@@ -233,7 +233,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                     {
                     match(input,13,FOLLOW_13_in_ruleGrammar210); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
                     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:131:1: ( ( ruleGrammarID ) )
                     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:134:3: ( ruleGrammarID )
@@ -248,7 +248,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:142:5: ruleGrammarID
                     {
                      
-                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::CrossReference */, currentNode); 
+                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::CrossReference */, currentNode); 
                         
                     pushFollow(FOLLOW_ruleGrammarID_in_ruleGrammar241);
                     ruleGrammarID();
@@ -295,7 +295,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                     lv_definesHiddenTokens=(Token)input.LT(1);
                     match(input,14,FOLLOW_14_in_ruleGrammar273); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::Keyword */, "definesHiddenTokens"); 
+                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::Keyword */, "definesHiddenTokens"); 
                         
 
                     	        if (current==null) {
@@ -314,7 +314,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
 
                     match(input,15,FOLLOW_15_in_ruleGrammar294); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                         
 
                     }
@@ -344,7 +344,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                             {
                             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleGrammar320); 
                              
-                                createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@terminal" /* xtext::CrossReference */, "hiddenTokens"); 
+                                createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@terminal" /* xtext::CrossReference */, "hiddenTokens"); 
                                 
 
                             }
@@ -369,7 +369,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                             	    {
                             	    match(input,16,FOLLOW_16_in_ruleGrammar334); 
 
-                            	            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+                            	            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                             	        
                             	    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:194:1: ( ( RULE_ID ) )
                             	    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:197:3: ( RULE_ID )
@@ -385,7 +385,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                             	    {
                             	    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleGrammar358); 
                             	     
-                            	        createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "hiddenTokens"); 
+                            	        createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "hiddenTokens"); 
                             	        
 
                             	    }
@@ -413,7 +413,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
 
                     match(input,17,FOLLOW_17_in_ruleGrammar376); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
                         
 
                     }
@@ -440,7 +440,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:216:6: lv_metamodelDeclarations= ruleAbstractMetamodelDeclaration
             	    {
             	     
-            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleAbstractMetamodelDeclaration_in_ruleGrammar413);
             	    lv_metamodelDeclarations=ruleAbstractMetamodelDeclaration();
@@ -488,7 +488,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:237:6: lv_rules= ruleAbstractRule
             	    {
             	     
-            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.0/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.0/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleAbstractRule_in_ruleGrammar453);
             	    lv_rules=ruleAbstractRule();
@@ -553,7 +553,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:264:50: (iv_ruleGrammarID= ruleGrammarID EOF )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:265:2: iv_ruleGrammarID= ruleGrammarID EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.1" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.1" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleGrammarID_in_entryRuleGrammarID494);
             iv_ruleGrammarID=ruleGrammarID();
             _fsp--;
@@ -599,7 +599,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             		current.merge(this_ID);
                 
              
-                createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.1/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, null); 
+                createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.1/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, null); 
                 
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:284:1: (kw= '.' this_ID= RULE_ID )*
             loop8:
@@ -620,7 +620,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             	    match(input,18,FOLLOW_18_in_ruleGrammarID564); 
 
             	            current.merge(kw);
-            	            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.1/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+            	            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.1/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
             	        
             	    this_ID=(Token)input.LT(1);
             	    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleGrammarID579); 
@@ -628,7 +628,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             	    		current.merge(this_ID);
             	        
             	     
-            	        createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.1/@alternatives/@abstractTokens.1/@abstractTokens.1" /* xtext::RuleCall */, null); 
+            	        createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.1/@alternatives/@abstractTokens.1/@abstractTokens.1" /* xtext::RuleCall */, null); 
             	        
 
             	    }
@@ -672,7 +672,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:307:54: (iv_ruleAbstractRule= ruleAbstractRule EOF )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:308:2: iv_ruleAbstractRule= ruleAbstractRule EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.2" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.2" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleAbstractRule_in_entryRuleAbstractRule626);
             iv_ruleAbstractRule=ruleAbstractRule();
             _fsp--;
@@ -754,7 +754,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:321:5: this_LexerRule= ruleLexerRule
                             {
                              
-                                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.2/@alternatives/@groups.0/@groups.0" /* xtext::RuleCall */, currentNode); 
+                                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.2/@alternatives/@groups.0/@groups.0" /* xtext::RuleCall */, currentNode); 
                                 
                             pushFollow(FOLLOW_ruleLexerRule_in_ruleAbstractRule684);
                             this_LexerRule=ruleLexerRule();
@@ -771,7 +771,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:331:5: this_ParserRule= ruleParserRule
                             {
                              
-                                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.2/@alternatives/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
+                                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.2/@alternatives/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
                                 
                             pushFollow(FOLLOW_ruleParserRule_in_ruleAbstractRule711);
                             this_ParserRule=ruleParserRule();
@@ -794,7 +794,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:341:5: this_TerminalRule= ruleTerminalRule
                     {
                      
-                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.2/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
+                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.2/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
                         
                     pushFollow(FOLLOW_ruleTerminalRule_in_ruleAbstractRule739);
                     this_TerminalRule=ruleTerminalRule();
@@ -840,7 +840,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:358:70: (iv_ruleAbstractMetamodelDeclaration= ruleAbstractMetamodelDeclaration EOF )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:359:2: iv_ruleAbstractMetamodelDeclaration= ruleAbstractMetamodelDeclaration EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.3" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.3" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleAbstractMetamodelDeclaration_in_entryRuleAbstractMetamodelDeclaration773);
             iv_ruleAbstractMetamodelDeclaration=ruleAbstractMetamodelDeclaration();
             _fsp--;
@@ -900,7 +900,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:372:5: this_GeneratedMetamodel= ruleGeneratedMetamodel
                     {
                      
-                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.3/@alternatives/@groups.0" /* xtext::RuleCall */, currentNode); 
+                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.3/@alternatives/@groups.0" /* xtext::RuleCall */, currentNode); 
                         
                     pushFollow(FOLLOW_ruleGeneratedMetamodel_in_ruleAbstractMetamodelDeclaration830);
                     this_GeneratedMetamodel=ruleGeneratedMetamodel();
@@ -917,7 +917,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:382:5: this_ReferencedMetamodel= ruleReferencedMetamodel
                     {
                      
-                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.3/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
+                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.3/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
                         
                     pushFollow(FOLLOW_ruleReferencedMetamodel_in_ruleAbstractMetamodelDeclaration857);
                     this_ReferencedMetamodel=ruleReferencedMetamodel();
@@ -963,7 +963,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:399:60: (iv_ruleGeneratedMetamodel= ruleGeneratedMetamodel EOF )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:400:2: iv_ruleGeneratedMetamodel= ruleGeneratedMetamodel EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.4" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.4" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleGeneratedMetamodel_in_entryRuleGeneratedMetamodel891);
             iv_ruleGeneratedMetamodel=ruleGeneratedMetamodel();
             _fsp--;
@@ -1011,7 +1011,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             {
             match(input,19,FOLLOW_19_in_ruleGeneratedMetamodel937); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:416:1: (lv_name= RULE_ID )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:418:6: lv_name= RULE_ID
@@ -1019,7 +1019,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleGeneratedMetamodel958); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+                createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
                 
 
             	        if (current==null) {
@@ -1053,7 +1053,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             {
             match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleGeneratedMetamodel994); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "ePackage"); 
+                createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "ePackage"); 
                 
 
             }
@@ -1077,7 +1077,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                     {
                     match(input,20,FOLLOW_20_in_ruleGeneratedMetamodel1009); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.4/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.4/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
                     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:455:1: (lv_alias= RULE_ID )
                     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:457:6: lv_alias= RULE_ID
@@ -1085,7 +1085,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                     lv_alias=(Token)input.LT(1);
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleGeneratedMetamodel1030); 
                      
-                        createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.4/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "alias"); 
+                        createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.4/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "alias"); 
                         
 
                     	        if (current==null) {
@@ -1141,7 +1141,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:484:61: (iv_ruleReferencedMetamodel= ruleReferencedMetamodel EOF )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:485:2: iv_ruleReferencedMetamodel= ruleReferencedMetamodel EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.5" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.5" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleReferencedMetamodel_in_entryRuleReferencedMetamodel1078);
             iv_ruleReferencedMetamodel=ruleReferencedMetamodel();
             _fsp--;
@@ -1185,7 +1185,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             {
             match(input,21,FOLLOW_21_in_ruleReferencedMetamodel1123); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:501:1: ( ( RULE_STRING ) )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:504:3: ( RULE_STRING )
@@ -1201,7 +1201,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             {
             match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleReferencedMetamodel1147); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "ePackage"); 
+                createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "ePackage"); 
                 
 
             }
@@ -1225,7 +1225,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                     {
                     match(input,20,FOLLOW_20_in_ruleReferencedMetamodel1162); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.5/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.5/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
                     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:520:1: (lv_alias= RULE_ID )
                     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:522:6: lv_alias= RULE_ID
@@ -1233,7 +1233,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                     lv_alias=(Token)input.LT(1);
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleReferencedMetamodel1183); 
                      
-                        createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.5/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "alias"); 
+                        createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.5/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "alias"); 
                         
 
                     	        if (current==null) {
@@ -1289,7 +1289,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:549:51: (iv_ruleLexerRule= ruleLexerRule EOF )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:550:2: iv_ruleLexerRule= ruleLexerRule EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.6" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.6" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleLexerRule_in_entryRuleLexerRule1231);
             iv_ruleLexerRule=ruleLexerRule();
             _fsp--;
@@ -1365,7 +1365,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                     {
                     match(input,22,FOLLOW_22_in_ruleLexerRule1280); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@groups.0" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@groups.0" /* xtext::Keyword */, null); 
                         
 
                     }
@@ -1375,7 +1375,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                     {
                     match(input,23,FOLLOW_23_in_ruleLexerRule1295); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@groups.1" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@groups.1" /* xtext::Keyword */, null); 
                         
 
                     }
@@ -1389,7 +1389,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleLexerRule1317); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+                createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
                 
 
             	        if (current==null) {
@@ -1422,13 +1422,13 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                     {
                     match(input,24,FOLLOW_24_in_ruleLexerRule1339); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
                     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:595:1: (lv_type= ruleTypeRef )
                     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:598:6: lv_type= ruleTypeRef
                     {
                      
-                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleTypeRef_in_ruleLexerRule1373);
                     lv_type=ruleTypeRef();
@@ -1461,7 +1461,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
 
             match(input,25,FOLLOW_25_in_ruleLexerRule1389); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -1472,7 +1472,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             lv_body=(Token)input.LT(1);
             match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleLexerRule1411); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "body"); 
+                createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "body"); 
                 
 
             	        if (current==null) {
@@ -1494,7 +1494,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
 
             match(input,26,FOLLOW_26_in_ruleLexerRule1432); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.6/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.6/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -1529,7 +1529,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:653:52: (iv_ruleParserRule= ruleParserRule EOF )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:654:2: iv_ruleParserRule= ruleParserRule EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.7" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.7" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleParserRule_in_entryRuleParserRule1467);
             iv_ruleParserRule=ruleParserRule();
             _fsp--;
@@ -1591,7 +1591,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleParserRule1527); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, "name"); 
+                createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, "name"); 
                 
 
             	        if (current==null) {
@@ -1621,13 +1621,13 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                     {
                     match(input,24,FOLLOW_24_in_ruleParserRule1548); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
                     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:690:1: (lv_type= ruleTypeRef )
                     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:693:6: lv_type= ruleTypeRef
                     {
                      
-                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleTypeRef_in_ruleParserRule1582);
                     lv_type=ruleTypeRef();
@@ -1681,7 +1681,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                     lv_definesHiddenTokens=(Token)input.LT(1);
                     match(input,14,FOLLOW_14_in_ruleParserRule1613); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::Keyword */, "definesHiddenTokens"); 
+                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::Keyword */, "definesHiddenTokens"); 
                         
 
                     	        if (current==null) {
@@ -1700,7 +1700,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
 
                     match(input,15,FOLLOW_15_in_ruleParserRule1634); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                         
 
                     }
@@ -1730,7 +1730,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                             {
                             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleParserRule1660); 
                              
-                                createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@terminal" /* xtext::CrossReference */, "hiddenTokens"); 
+                                createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@terminal" /* xtext::CrossReference */, "hiddenTokens"); 
                                 
 
                             }
@@ -1755,7 +1755,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                             	    {
                             	    match(input,16,FOLLOW_16_in_ruleParserRule1674); 
 
-                            	            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+                            	            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                             	        
                             	    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:754:1: ( ( RULE_ID ) )
                             	    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:757:3: ( RULE_ID )
@@ -1771,7 +1771,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                             	    {
                             	    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleParserRule1698); 
                             	     
-                            	        createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "hiddenTokens"); 
+                            	        createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "hiddenTokens"); 
                             	        
 
                             	    }
@@ -1799,7 +1799,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
 
                     match(input,17,FOLLOW_17_in_ruleParserRule1716); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
                         
 
                     }
@@ -1812,7 +1812,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
 
             match(input,25,FOLLOW_25_in_ruleParserRule1728); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -1821,7 +1821,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:780:6: lv_alternatives= ruleAlternatives
             {
              
-            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
             	    
             pushFollow(FOLLOW_ruleAlternatives_in_ruleParserRule1763);
             lv_alternatives=ruleAlternatives();
@@ -1848,7 +1848,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
 
             match(input,26,FOLLOW_26_in_ruleParserRule1777); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.7/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.7/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -1883,7 +1883,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:811:54: (iv_ruleTerminalRule= ruleTerminalRule EOF )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:812:2: iv_ruleTerminalRule= ruleTerminalRule EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.8" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.8" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleTerminalRule_in_entryRuleTerminalRule1812);
             iv_ruleTerminalRule=ruleTerminalRule();
             _fsp--;
@@ -1945,7 +1945,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             lv_terminal=(Token)input.LT(1);
             match(input,27,FOLLOW_27_in_ruleTerminalRule1872); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::Keyword */, "terminal"); 
+                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::Keyword */, "terminal"); 
                 
 
             	        if (current==null) {
@@ -1968,7 +1968,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleTerminalRule1905); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+                createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
                 
 
             	        if (current==null) {
@@ -2001,13 +2001,13 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                     {
                     match(input,24,FOLLOW_24_in_ruleTerminalRule1927); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
                     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:868:1: (lv_type= ruleTypeRef )
                     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:871:6: lv_type= ruleTypeRef
                     {
                      
-                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleTypeRef_in_ruleTerminalRule1961);
                     lv_type=ruleTypeRef();
@@ -2040,7 +2040,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
 
             match(input,25,FOLLOW_25_in_ruleTerminalRule1977); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -2049,7 +2049,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:896:6: lv_alternatives= ruleTerminalAlternatives
             {
              
-            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
             	    
             pushFollow(FOLLOW_ruleTerminalAlternatives_in_ruleTerminalRule2012);
             lv_alternatives=ruleTerminalAlternatives();
@@ -2076,7 +2076,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
 
             match(input,26,FOLLOW_26_in_ruleTerminalRule2026); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.8/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.8/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -2111,7 +2111,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:927:49: (iv_ruleTypeRef= ruleTypeRef EOF )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:928:2: iv_ruleTypeRef= ruleTypeRef EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.9" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.9" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleTypeRef_in_entryRuleTypeRef2061);
             iv_ruleTypeRef=ruleTypeRef();
             _fsp--;
@@ -2177,7 +2177,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                     {
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleTypeRef2121); 
                      
-                        createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::CrossReference */, "metamodel"); 
+                        createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::CrossReference */, "metamodel"); 
                         
 
                     }
@@ -2187,7 +2187,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
 
                     match(input,28,FOLLOW_28_in_ruleTypeRef2134); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                         
 
                     }
@@ -2209,7 +2209,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             {
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleTypeRef2160); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.9/@alternatives/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "type"); 
+                createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.9/@alternatives/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "type"); 
                 
 
             }
@@ -2250,7 +2250,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:983:54: (iv_ruleAlternatives= ruleAlternatives EOF )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:984:2: iv_ruleAlternatives= ruleAlternatives EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.10" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.10" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleAlternatives_in_entryRuleAlternatives2199);
             iv_ruleAlternatives=ruleAlternatives();
             _fsp--;
@@ -2293,7 +2293,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:997:5: this_Group= ruleGroup ( ( () '|' ) (lv_groups= ruleGroup ) )*
             {
              
-                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.10/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
+                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.10/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
                 
             pushFollow(FOLLOW_ruleGroup_in_ruleAlternatives2256);
             this_Group=ruleGroup();
@@ -2333,7 +2333,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             	            }
             	            current = temp; 
             	            temp = null;
-            	            CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.10/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
+            	            CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.10/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
             	        newNode.getChildren().add(currentNode);
             	        moveLookaheadInfo(currentNode, newNode);
             	        currentNode = newNode; 
@@ -2344,7 +2344,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
 
             	    match(input,29,FOLLOW_29_in_ruleAlternatives2275); 
 
-            	            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.10/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+            	            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.10/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
             	        
 
             	    }
@@ -2353,7 +2353,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1028:6: lv_groups= ruleGroup
             	    {
             	     
-            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.10/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.10/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleGroup_in_ruleAlternatives2310);
             	    lv_groups=ruleGroup();
@@ -2417,7 +2417,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1055:62: (iv_ruleTerminalAlternatives= ruleTerminalAlternatives EOF )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1056:2: iv_ruleTerminalAlternatives= ruleTerminalAlternatives EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.11" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.11" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleTerminalAlternatives_in_entryRuleTerminalAlternatives2351);
             iv_ruleTerminalAlternatives=ruleTerminalAlternatives();
             _fsp--;
@@ -2460,7 +2460,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1069:5: this_TerminalGroup= ruleTerminalGroup ( ( () '|' ) (lv_groups= ruleTerminalGroup ) )*
             {
              
-                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.11/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
+                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.11/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
                 
             pushFollow(FOLLOW_ruleTerminalGroup_in_ruleTerminalAlternatives2408);
             this_TerminalGroup=ruleTerminalGroup();
@@ -2500,7 +2500,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             	            }
             	            current = temp; 
             	            temp = null;
-            	            CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.11/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
+            	            CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.11/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
             	        newNode.getChildren().add(currentNode);
             	        moveLookaheadInfo(currentNode, newNode);
             	        currentNode = newNode; 
@@ -2511,7 +2511,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
 
             	    match(input,29,FOLLOW_29_in_ruleTerminalAlternatives2427); 
 
-            	            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.11/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+            	            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.11/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
             	        
 
             	    }
@@ -2520,7 +2520,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1100:6: lv_groups= ruleTerminalGroup
             	    {
             	     
-            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.11/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.11/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleTerminalGroup_in_ruleTerminalAlternatives2462);
             	    lv_groups=ruleTerminalGroup();
@@ -2584,7 +2584,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1127:47: (iv_ruleGroup= ruleGroup EOF )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1128:2: iv_ruleGroup= ruleGroup EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.12" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.12" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleGroup_in_entryRuleGroup2503);
             iv_ruleGroup=ruleGroup();
             _fsp--;
@@ -2627,7 +2627,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1141:5: this_AbstractToken= ruleAbstractToken ( () (lv_abstractTokens= ruleAbstractToken ) )*
             {
              
-                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.12/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
+                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.12/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
                 
             pushFollow(FOLLOW_ruleAbstractToken_in_ruleGroup2560);
             this_AbstractToken=ruleAbstractToken();
@@ -2664,7 +2664,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             	            }
             	            current = temp; 
             	            temp = null;
-            	            CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.12/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
+            	            CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.12/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
             	        newNode.getChildren().add(currentNode);
             	        moveLookaheadInfo(currentNode, newNode);
             	        currentNode = newNode; 
@@ -2677,7 +2677,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1168:6: lv_abstractTokens= ruleAbstractToken
             	    {
             	     
-            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.12/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.12/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleAbstractToken_in_ruleGroup2603);
             	    lv_abstractTokens=ruleAbstractToken();
@@ -2741,7 +2741,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1195:55: (iv_ruleTerminalGroup= ruleTerminalGroup EOF )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1196:2: iv_ruleTerminalGroup= ruleTerminalGroup EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.13" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.13" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleTerminalGroup_in_entryRuleTerminalGroup2644);
             iv_ruleTerminalGroup=ruleTerminalGroup();
             _fsp--;
@@ -2784,7 +2784,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1209:5: this_TerminalToken= ruleTerminalToken ( () (lv_abstractTokens= ruleTerminalToken ) )*
             {
              
-                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.13/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
+                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.13/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
                 
             pushFollow(FOLLOW_ruleTerminalToken_in_ruleTerminalGroup2701);
             this_TerminalToken=ruleTerminalToken();
@@ -2821,7 +2821,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             	            }
             	            current = temp; 
             	            temp = null;
-            	            CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.13/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
+            	            CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.13/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
             	        newNode.getChildren().add(currentNode);
             	        moveLookaheadInfo(currentNode, newNode);
             	        currentNode = newNode; 
@@ -2834,7 +2834,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1236:6: lv_abstractTokens= ruleTerminalToken
             	    {
             	     
-            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.13/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.13/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleTerminalToken_in_ruleTerminalGroup2744);
             	    lv_abstractTokens=ruleTerminalToken();
@@ -2898,7 +2898,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1263:55: (iv_ruleAbstractToken= ruleAbstractToken EOF )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1264:2: iv_ruleAbstractToken= ruleAbstractToken EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.14" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.14" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleAbstractToken_in_entryRuleAbstractToken2785);
             iv_ruleAbstractToken=ruleAbstractToken();
             _fsp--;
@@ -3008,7 +3008,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1277:5: this_Assignment= ruleAssignment
                             {
                              
-                                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.14/@alternatives/@abstractTokens.0/@groups.0/@groups.0" /* xtext::RuleCall */, currentNode); 
+                                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.14/@alternatives/@abstractTokens.0/@groups.0/@groups.0" /* xtext::RuleCall */, currentNode); 
                                 
                             pushFollow(FOLLOW_ruleAssignment_in_ruleAbstractToken2844);
                             this_Assignment=ruleAssignment();
@@ -3025,7 +3025,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1287:5: this_Action= ruleAction
                             {
                              
-                                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.14/@alternatives/@abstractTokens.0/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
+                                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.14/@alternatives/@abstractTokens.0/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
                                 
                             pushFollow(FOLLOW_ruleAction_in_ruleAbstractToken2871);
                             this_Action=ruleAction();
@@ -3048,7 +3048,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1297:5: this_AbstractTerminal= ruleAbstractTerminal
                     {
                      
-                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.14/@alternatives/@abstractTokens.0/@groups.1" /* xtext::RuleCall */, currentNode); 
+                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.14/@alternatives/@abstractTokens.0/@groups.1" /* xtext::RuleCall */, currentNode); 
                         
                     pushFollow(FOLLOW_ruleAbstractTerminal_in_ruleAbstractToken2899);
                     this_AbstractTerminal=ruleAbstractTerminal();
@@ -3117,7 +3117,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                                     {
                                     match(input,30,FOLLOW_30_in_ruleAbstractToken2922); 
 
-                                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.14/@alternatives/@abstractTokens.1/@terminal/@groups.0/@groups.0" /* xtext::Keyword */, "cardinality"); 
+                                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.14/@alternatives/@abstractTokens.1/@terminal/@groups.0/@groups.0" /* xtext::Keyword */, "cardinality"); 
                                         
 
                                     }
@@ -3127,7 +3127,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                                     {
                                     match(input,31,FOLLOW_31_in_ruleAbstractToken2937); 
 
-                                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.14/@alternatives/@abstractTokens.1/@terminal/@groups.0/@groups.1" /* xtext::Keyword */, "cardinality"); 
+                                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.14/@alternatives/@abstractTokens.1/@terminal/@groups.0/@groups.1" /* xtext::Keyword */, "cardinality"); 
                                         
 
                                     }
@@ -3143,7 +3143,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                             {
                             match(input,32,FOLLOW_32_in_ruleAbstractToken2953); 
 
-                                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.14/@alternatives/@abstractTokens.1/@terminal/@groups.1" /* xtext::Keyword */, "cardinality"); 
+                                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.14/@alternatives/@abstractTokens.1/@terminal/@groups.1" /* xtext::Keyword */, "cardinality"); 
                                 
 
                             }
@@ -3202,7 +3202,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1344:55: (iv_ruleTerminalToken= ruleTerminalToken EOF )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1345:2: iv_ruleTerminalToken= ruleTerminalToken EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.15" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.15" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleTerminalToken_in_entryRuleTerminalToken3002);
             iv_ruleTerminalToken=ruleTerminalToken();
             _fsp--;
@@ -3244,7 +3244,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1358:5: this_TerminalTokenElement= ruleTerminalTokenElement (lv_cardinality= ( ( '?' | '*' ) | '+' ) )?
             {
              
-                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.15/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
+                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.15/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
                 
             pushFollow(FOLLOW_ruleTerminalTokenElement_in_ruleTerminalToken3059);
             this_TerminalTokenElement=ruleTerminalTokenElement();
@@ -3307,7 +3307,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                                     {
                                     match(input,30,FOLLOW_30_in_ruleTerminalToken3081); 
 
-                                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.15/@alternatives/@abstractTokens.1/@terminal/@groups.0/@groups.0" /* xtext::Keyword */, "cardinality"); 
+                                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.15/@alternatives/@abstractTokens.1/@terminal/@groups.0/@groups.0" /* xtext::Keyword */, "cardinality"); 
                                         
 
                                     }
@@ -3317,7 +3317,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                                     {
                                     match(input,31,FOLLOW_31_in_ruleTerminalToken3096); 
 
-                                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.15/@alternatives/@abstractTokens.1/@terminal/@groups.0/@groups.1" /* xtext::Keyword */, "cardinality"); 
+                                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.15/@alternatives/@abstractTokens.1/@terminal/@groups.0/@groups.1" /* xtext::Keyword */, "cardinality"); 
                                         
 
                                     }
@@ -3333,7 +3333,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                             {
                             match(input,32,FOLLOW_32_in_ruleTerminalToken3112); 
 
-                                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.15/@alternatives/@abstractTokens.1/@terminal/@groups.1" /* xtext::Keyword */, "cardinality"); 
+                                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.15/@alternatives/@abstractTokens.1/@terminal/@groups.1" /* xtext::Keyword */, "cardinality"); 
                                 
 
                             }
@@ -3392,7 +3392,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1405:52: (iv_ruleAssignment= ruleAssignment EOF )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1406:2: iv_ruleAssignment= ruleAssignment EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.16" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.16" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleAssignment_in_entryRuleAssignment3161);
             iv_ruleAssignment=ruleAssignment();
             _fsp--;
@@ -3443,7 +3443,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             lv_feature=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAssignment3218); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, "feature"); 
+                createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, "feature"); 
                 
 
             	        if (current==null) {
@@ -3505,7 +3505,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                             {
                             match(input,33,FOLLOW_33_in_ruleAssignment3252); 
 
-                                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0/@groups.0" /* xtext::Keyword */, "operator"); 
+                                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0/@groups.0" /* xtext::Keyword */, "operator"); 
                                 
 
                             }
@@ -3515,7 +3515,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                             {
                             match(input,34,FOLLOW_34_in_ruleAssignment3267); 
 
-                                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0/@groups.1" /* xtext::Keyword */, "operator"); 
+                                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0/@groups.1" /* xtext::Keyword */, "operator"); 
                                 
 
                             }
@@ -3531,7 +3531,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                     {
                     match(input,35,FOLLOW_35_in_ruleAssignment3283); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.1" /* xtext::Keyword */, "operator"); 
+                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.1" /* xtext::Keyword */, "operator"); 
                         
 
                     }
@@ -3561,7 +3561,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1471:6: lv_terminal= ruleAbstractTerminal
             {
              
-            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.16/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.16/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
             	    
             pushFollow(FOLLOW_ruleAbstractTerminal_in_ruleAssignment3331);
             lv_terminal=ruleAbstractTerminal();
@@ -3616,7 +3616,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1498:48: (iv_ruleAction= ruleAction EOF )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1499:2: iv_ruleAction= ruleAction EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.17" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.17" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleAction_in_entryRuleAction3370);
             iv_ruleAction=ruleAction();
             _fsp--;
@@ -3678,7 +3678,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             {
             match(input,36,FOLLOW_36_in_ruleAction3420); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.17/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.17/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1515:1: ( 'current' '=' )?
             int alt36=2;
@@ -3693,11 +3693,11 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                     {
                     match(input,37,FOLLOW_37_in_ruleAction3430); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.17/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.17/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
                     match(input,34,FOLLOW_34_in_ruleAction3439); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.17/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.17/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
                         
 
                     }
@@ -3712,7 +3712,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1526:6: lv_typeName= ruleTypeRef
             {
              
-            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.17/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.17/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
             	    
             pushFollow(FOLLOW_ruleTypeRef_in_ruleAction3476);
             lv_typeName=ruleTypeRef();
@@ -3739,7 +3739,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
 
             match(input,18,FOLLOW_18_in_ruleAction3490); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.17/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.17/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -3750,7 +3750,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             lv_feature=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAction3512); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.17/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "feature"); 
+                createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.17/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "feature"); 
                 
 
             	        if (current==null) {
@@ -3795,7 +3795,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                     {
                     match(input,34,FOLLOW_34_in_ruleAction3546); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.17/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0" /* xtext::Keyword */, "operator"); 
+                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.17/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0" /* xtext::Keyword */, "operator"); 
                         
 
                     }
@@ -3805,7 +3805,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                     {
                     match(input,33,FOLLOW_33_in_ruleAction3561); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.17/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.1" /* xtext::Keyword */, "operator"); 
+                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.17/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.1" /* xtext::Keyword */, "operator"); 
                         
 
                     }
@@ -3833,14 +3833,14 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
 
             match(input,37,FOLLOW_37_in_ruleAction3584); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.17/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.17/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
 
             match(input,38,FOLLOW_38_in_ruleAction3594); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.17/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.17/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -3875,7 +3875,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1610:58: (iv_ruleAbstractTerminal= ruleAbstractTerminal EOF )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1611:2: iv_ruleAbstractTerminal= ruleAbstractTerminal EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.18" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.18" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleAbstractTerminal_in_entryRuleAbstractTerminal3629);
             iv_ruleAbstractTerminal=ruleAbstractTerminal();
             _fsp--;
@@ -3979,7 +3979,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                                     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1624:5: this_Keyword= ruleKeyword
                                     {
                                      
-                                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.18/@alternatives/@groups.0/@groups.0/@groups.0" /* xtext::RuleCall */, currentNode); 
+                                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.18/@alternatives/@groups.0/@groups.0/@groups.0" /* xtext::RuleCall */, currentNode); 
                                         
                                     pushFollow(FOLLOW_ruleKeyword_in_ruleAbstractTerminal3688);
                                     this_Keyword=ruleKeyword();
@@ -3996,7 +3996,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                                     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1634:5: this_RuleCall= ruleRuleCall
                                     {
                                      
-                                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.18/@alternatives/@groups.0/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
+                                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.18/@alternatives/@groups.0/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
                                         
                                     pushFollow(FOLLOW_ruleRuleCall_in_ruleAbstractTerminal3715);
                                     this_RuleCall=ruleRuleCall();
@@ -4019,7 +4019,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1644:5: this_ParenthesizedElement= ruleParenthesizedElement
                             {
                              
-                                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.18/@alternatives/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
+                                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.18/@alternatives/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
                                 
                             pushFollow(FOLLOW_ruleParenthesizedElement_in_ruleAbstractTerminal3743);
                             this_ParenthesizedElement=ruleParenthesizedElement();
@@ -4042,7 +4042,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1654:5: this_CrossReference= ruleCrossReference
                     {
                      
-                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.18/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
+                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.18/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
                         
                     pushFollow(FOLLOW_ruleCrossReference_in_ruleAbstractTerminal3771);
                     this_CrossReference=ruleCrossReference();
@@ -4088,7 +4088,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1671:62: (iv_ruleTerminalTokenElement= ruleTerminalTokenElement EOF )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1672:2: iv_ruleTerminalTokenElement= ruleTerminalTokenElement EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.19" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.19" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleTerminalTokenElement_in_entryRuleTerminalTokenElement3805);
             iv_ruleTerminalTokenElement=ruleTerminalTokenElement();
             _fsp--;
@@ -4214,7 +4214,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                                             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1685:5: this_CharacterRange= ruleCharacterRange
                                             {
                                              
-                                                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.19/@alternatives/@groups.0/@groups.0/@groups.0/@groups.0" /* xtext::RuleCall */, currentNode); 
+                                                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.19/@alternatives/@groups.0/@groups.0/@groups.0/@groups.0" /* xtext::RuleCall */, currentNode); 
                                                 
                                             pushFollow(FOLLOW_ruleCharacterRange_in_ruleTerminalTokenElement3865);
                                             this_CharacterRange=ruleCharacterRange();
@@ -4231,7 +4231,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                                             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1695:5: this_RuleCall= ruleRuleCall
                                             {
                                              
-                                                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.19/@alternatives/@groups.0/@groups.0/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
+                                                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.19/@alternatives/@groups.0/@groups.0/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
                                                 
                                             pushFollow(FOLLOW_ruleRuleCall_in_ruleTerminalTokenElement3892);
                                             this_RuleCall=ruleRuleCall();
@@ -4254,7 +4254,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                                     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1705:5: this_ParenthesizedTerminalElement= ruleParenthesizedTerminalElement
                                     {
                                      
-                                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.19/@alternatives/@groups.0/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
+                                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.19/@alternatives/@groups.0/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
                                         
                                     pushFollow(FOLLOW_ruleParenthesizedTerminalElement_in_ruleTerminalTokenElement3920);
                                     this_ParenthesizedTerminalElement=ruleParenthesizedTerminalElement();
@@ -4277,7 +4277,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1715:5: this_AbstractNegatedToken= ruleAbstractNegatedToken
                             {
                              
-                                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.19/@alternatives/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
+                                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.19/@alternatives/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
                                 
                             pushFollow(FOLLOW_ruleAbstractNegatedToken_in_ruleTerminalTokenElement3948);
                             this_AbstractNegatedToken=ruleAbstractNegatedToken();
@@ -4300,7 +4300,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1725:5: this_Wildcard= ruleWildcard
                     {
                      
-                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.19/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
+                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.19/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
                         
                     pushFollow(FOLLOW_ruleWildcard_in_ruleTerminalTokenElement3976);
                     this_Wildcard=ruleWildcard();
@@ -4346,7 +4346,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1742:62: (iv_ruleAbstractNegatedToken= ruleAbstractNegatedToken EOF )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1743:2: iv_ruleAbstractNegatedToken= ruleAbstractNegatedToken EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.20" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.20" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleAbstractNegatedToken_in_entryRuleAbstractNegatedToken4010);
             iv_ruleAbstractNegatedToken=ruleAbstractNegatedToken();
             _fsp--;
@@ -4406,7 +4406,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1756:5: this_NegatedToken= ruleNegatedToken
                     {
                      
-                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.20/@alternatives/@groups.0" /* xtext::RuleCall */, currentNode); 
+                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.20/@alternatives/@groups.0" /* xtext::RuleCall */, currentNode); 
                         
                     pushFollow(FOLLOW_ruleNegatedToken_in_ruleAbstractNegatedToken4067);
                     this_NegatedToken=ruleNegatedToken();
@@ -4423,7 +4423,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1766:5: this_UpToToken= ruleUpToToken
                     {
                      
-                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.20/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
+                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.20/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
                         
                     pushFollow(FOLLOW_ruleUpToToken_in_ruleAbstractNegatedToken4094);
                     this_UpToToken=ruleUpToToken();
@@ -4469,7 +4469,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1783:54: (iv_ruleNegatedToken= ruleNegatedToken EOF )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1784:2: iv_ruleNegatedToken= ruleNegatedToken EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.21" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.21" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleNegatedToken_in_entryRuleNegatedToken4128);
             iv_ruleNegatedToken=ruleNegatedToken();
             _fsp--;
@@ -4511,13 +4511,13 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             {
             match(input,39,FOLLOW_39_in_ruleNegatedToken4172); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.21/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.21/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1800:1: (lv_terminal= ruleTerminalTokenElement )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1803:6: lv_terminal= ruleTerminalTokenElement
             {
              
-            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.21/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.21/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
             	    
             pushFollow(FOLLOW_ruleTerminalTokenElement_in_ruleNegatedToken4206);
             lv_terminal=ruleTerminalTokenElement();
@@ -4572,7 +4572,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1830:51: (iv_ruleUpToToken= ruleUpToToken EOF )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1831:2: iv_ruleUpToToken= ruleUpToToken EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.22" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.22" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleUpToToken_in_entryRuleUpToToken4245);
             iv_ruleUpToToken=ruleUpToToken();
             _fsp--;
@@ -4614,13 +4614,13 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             {
             match(input,40,FOLLOW_40_in_ruleUpToToken4289); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.22/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.22/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1847:1: (lv_terminal= ruleTerminalTokenElement )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1850:6: lv_terminal= ruleTerminalTokenElement
             {
              
-            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.22/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.22/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
             	    
             pushFollow(FOLLOW_ruleTerminalTokenElement_in_ruleUpToToken4323);
             lv_terminal=ruleTerminalTokenElement();
@@ -4675,7 +4675,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1877:50: (iv_ruleWildcard= ruleWildcard EOF )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1878:2: iv_ruleWildcard= ruleWildcard EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.23" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.23" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleWildcard_in_entryRuleWildcard4362);
             iv_ruleWildcard=ruleWildcard();
             _fsp--;
@@ -4717,7 +4717,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             lv_isWildcard=(Token)input.LT(1);
             match(input,18,FOLLOW_18_in_ruleWildcard4417); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.23/@alternatives/@terminal" /* xtext::Keyword */, "isWildcard"); 
+                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.23/@alternatives/@terminal" /* xtext::Keyword */, "isWildcard"); 
                 
 
             	        if (current==null) {
@@ -4764,7 +4764,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1919:56: (iv_ruleCharacterRange= ruleCharacterRange EOF )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1920:2: iv_ruleCharacterRange= ruleCharacterRange EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.24" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.24" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleCharacterRange_in_entryRuleCharacterRange4463);
             iv_ruleCharacterRange=ruleCharacterRange();
             _fsp--;
@@ -4807,7 +4807,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1933:5: this_Keyword= ruleKeyword ( ( () '..' ) (lv_right= ruleKeyword ) )?
             {
              
-                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.24/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
+                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.24/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
                 
             pushFollow(FOLLOW_ruleKeyword_in_ruleCharacterRange4520);
             this_Keyword=ruleKeyword();
@@ -4843,7 +4843,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                             }
                             current = temp; 
                             temp = null;
-                            CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.24/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
+                            CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.24/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
                         newNode.getChildren().add(currentNode);
                         moveLookaheadInfo(currentNode, newNode);
                         currentNode = newNode; 
@@ -4854,7 +4854,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
 
                     match(input,41,FOLLOW_41_in_ruleCharacterRange4539); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.24/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.24/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                         
 
                     }
@@ -4863,7 +4863,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1964:6: lv_right= ruleKeyword
                     {
                      
-                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.24/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.24/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleKeyword_in_ruleCharacterRange4574);
                     lv_right=ruleKeyword();
@@ -4924,7 +4924,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1991:56: (iv_ruleCrossReference= ruleCrossReference EOF )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1992:2: iv_ruleCrossReference= ruleCrossReference EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.25" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.25" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleCrossReference_in_entryRuleCrossReference4615);
             iv_ruleCrossReference=ruleCrossReference();
             _fsp--;
@@ -4972,13 +4972,13 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             {
             match(input,42,FOLLOW_42_in_ruleCrossReference4661); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.25/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.25/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:2008:1: (lv_type= ruleTypeRef )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:2011:6: lv_type= ruleTypeRef
             {
              
-            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.25/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.25/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
             	    
             pushFollow(FOLLOW_ruleTypeRef_in_ruleCrossReference4695);
             lv_type=ruleTypeRef();
@@ -5016,7 +5016,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                     {
                     match(input,29,FOLLOW_29_in_ruleCrossReference4710); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.25/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.25/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
                     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:2033:1: ( ( RULE_ID ) )
                     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:2036:3: ( RULE_ID )
@@ -5032,7 +5032,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                     {
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleCrossReference4734); 
                      
-                        createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.25/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "rule"); 
+                        createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.25/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "rule"); 
                         
 
                     }
@@ -5051,7 +5051,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
 
             match(input,43,FOLLOW_43_in_ruleCrossReference4750); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.25/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.25/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -5086,7 +5086,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:2061:62: (iv_ruleParenthesizedElement= ruleParenthesizedElement EOF )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:2062:2: iv_ruleParenthesizedElement= ruleParenthesizedElement EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.26" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.26" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleParenthesizedElement_in_entryRuleParenthesizedElement4785);
             iv_ruleParenthesizedElement=ruleParenthesizedElement();
             _fsp--;
@@ -5131,10 +5131,10 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             {
             match(input,15,FOLLOW_15_in_ruleParenthesizedElement4830); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.26/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.26/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
              
-                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.26/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::RuleCall */, currentNode); 
+                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.26/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::RuleCall */, currentNode); 
                 
             pushFollow(FOLLOW_ruleAlternatives_in_ruleParenthesizedElement4852);
             this_Alternatives=ruleAlternatives();
@@ -5149,7 +5149,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
 
             match(input,17,FOLLOW_17_in_ruleParenthesizedElement4861); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.26/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.26/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -5184,7 +5184,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:2100:70: (iv_ruleParenthesizedTerminalElement= ruleParenthesizedTerminalElement EOF )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:2101:2: iv_ruleParenthesizedTerminalElement= ruleParenthesizedTerminalElement EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.27" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.27" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleParenthesizedTerminalElement_in_entryRuleParenthesizedTerminalElement4896);
             iv_ruleParenthesizedTerminalElement=ruleParenthesizedTerminalElement();
             _fsp--;
@@ -5229,10 +5229,10 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             {
             match(input,15,FOLLOW_15_in_ruleParenthesizedTerminalElement4941); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.27/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.27/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
              
-                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.27/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::RuleCall */, currentNode); 
+                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.27/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::RuleCall */, currentNode); 
                 
             pushFollow(FOLLOW_ruleTerminalAlternatives_in_ruleParenthesizedTerminalElement4963);
             this_TerminalAlternatives=ruleTerminalAlternatives();
@@ -5247,7 +5247,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
 
             match(input,17,FOLLOW_17_in_ruleParenthesizedTerminalElement4972); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.27/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.27/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -5282,7 +5282,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:2139:49: (iv_ruleKeyword= ruleKeyword EOF )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:2140:2: iv_ruleKeyword= ruleKeyword EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.28" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.28" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleKeyword_in_entryRuleKeyword5007);
             iv_ruleKeyword=ruleKeyword();
             _fsp--;
@@ -5324,7 +5324,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             lv_value=(Token)input.LT(1);
             match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleKeyword5062); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.28/@alternatives/@terminal" /* xtext::RuleCall */, "value"); 
+                createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.28/@alternatives/@terminal" /* xtext::RuleCall */, "value"); 
                 
 
             	        if (current==null) {
@@ -5371,7 +5371,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:2181:50: (iv_ruleRuleCall= ruleRuleCall EOF )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:2182:2: iv_ruleRuleCall= ruleRuleCall EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.29" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.29" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleRuleCall_in_entryRuleRuleCall5107);
             iv_ruleRuleCall=ruleRuleCall();
             _fsp--;
@@ -5419,7 +5419,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             {
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleRuleCall5165); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.29/@alternatives/@terminal" /* xtext::CrossReference */, "rule"); 
+                createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#/0/@rules.29/@alternatives/@terminal" /* xtext::CrossReference */, "rule"); 
                 
 
             }

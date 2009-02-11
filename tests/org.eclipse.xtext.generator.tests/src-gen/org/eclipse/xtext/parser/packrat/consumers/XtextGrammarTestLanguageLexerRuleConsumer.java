@@ -6,6 +6,7 @@ package org.eclipse.xtext.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -22,9 +23,9 @@ import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageTypeRe
 @SuppressWarnings("unused")
 public final class XtextGrammarTestLanguageLexerRuleConsumer extends NonTerminalConsumer {
 
-	private XtextBuiltinIDConsumer idConsumer;
-	private XtextBuiltinSTRINGConsumer stringConsumer;
-	private XtextGrammarTestLanguageTypeRefConsumer typeRefConsumer;
+	private ITerminalConsumer idConsumer;
+	private ITerminalConsumer stringConsumer;
+	private INonTerminalConsumer typeRefConsumer;
 
 	private ICharacterClass keyword$12$Delimiter;
 	
@@ -249,6 +250,7 @@ public final class XtextGrammarTestLanguageLexerRuleConsumer extends NonTerminal
 		return XtextGrammarTestLanguageGrammarAccess.INSTANCE.prLexerRule();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -258,15 +260,15 @@ public final class XtextGrammarTestLanguageLexerRuleConsumer extends NonTerminal
 		return "LexerRule";
 	}
 	
-	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
+	public void setIdConsumer(ITerminalConsumer idConsumer) {
 		this.idConsumer = idConsumer;
 	}
 	
-	public void setStringConsumer(XtextBuiltinSTRINGConsumer stringConsumer) {
+	public void setStringConsumer(ITerminalConsumer stringConsumer) {
 		this.stringConsumer = stringConsumer;
 	}
 	
-	public void setTypeRefConsumer(XtextGrammarTestLanguageTypeRefConsumer typeRefConsumer) {
+	public void setTypeRefConsumer(INonTerminalConsumer typeRefConsumer) {
 		this.typeRefConsumer = typeRefConsumer;
 	}
 	

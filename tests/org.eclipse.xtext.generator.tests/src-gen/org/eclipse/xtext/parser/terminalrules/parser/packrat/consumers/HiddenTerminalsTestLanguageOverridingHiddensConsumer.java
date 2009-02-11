@@ -6,6 +6,7 @@ package org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -20,7 +21,7 @@ import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.HiddenTer
 @SuppressWarnings("unused")
 public final class HiddenTerminalsTestLanguageOverridingHiddensConsumer extends NonTerminalConsumer {
 
-	private HiddenTerminalsTestLanguageOverridingHiddensCallConsumer overridingHiddensCallConsumer;
+	private INonTerminalConsumer overridingHiddensCallConsumer;
 
 	private ICharacterClass keyword$6$Delimiter;
 	
@@ -161,6 +162,7 @@ public final class HiddenTerminalsTestLanguageOverridingHiddensConsumer extends 
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prOverridingHiddens();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -170,7 +172,7 @@ public final class HiddenTerminalsTestLanguageOverridingHiddensConsumer extends 
 		return "OverridingHiddens";
 	}
 	
-	public void setOverridingHiddensCallConsumer(HiddenTerminalsTestLanguageOverridingHiddensCallConsumer overridingHiddensCallConsumer) {
+	public void setOverridingHiddensCallConsumer(INonTerminalConsumer overridingHiddensCallConsumer) {
 		this.overridingHiddensCallConsumer = overridingHiddensCallConsumer;
 	}
 	

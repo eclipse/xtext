@@ -6,6 +6,7 @@ package org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -22,9 +23,9 @@ import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerm
 @SuppressWarnings("unused")
 public final class XtextTerminalsTestLanguageAbstractRuleConsumer extends NonTerminalConsumer {
 
-	private XtextTerminalsTestLanguageLexerRuleConsumer lexerRuleConsumer;
-	private XtextTerminalsTestLanguageParserRuleConsumer parserRuleConsumer;
-	private XtextTerminalsTestLanguageTerminalRuleConsumer terminalRuleConsumer;
+	private INonTerminalConsumer lexerRuleConsumer;
+	private INonTerminalConsumer parserRuleConsumer;
+	private INonTerminalConsumer terminalRuleConsumer;
 
 	public XtextTerminalsTestLanguageAbstractRuleConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
@@ -75,6 +76,7 @@ public final class XtextTerminalsTestLanguageAbstractRuleConsumer extends NonTer
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAbstractRule();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -84,15 +86,15 @@ public final class XtextTerminalsTestLanguageAbstractRuleConsumer extends NonTer
 		return "AbstractRule";
 	}
 	
-	public void setLexerRuleConsumer(XtextTerminalsTestLanguageLexerRuleConsumer lexerRuleConsumer) {
+	public void setLexerRuleConsumer(INonTerminalConsumer lexerRuleConsumer) {
 		this.lexerRuleConsumer = lexerRuleConsumer;
 	}
 	
-	public void setParserRuleConsumer(XtextTerminalsTestLanguageParserRuleConsumer parserRuleConsumer) {
+	public void setParserRuleConsumer(INonTerminalConsumer parserRuleConsumer) {
 		this.parserRuleConsumer = parserRuleConsumer;
 	}
 	
-	public void setTerminalRuleConsumer(XtextTerminalsTestLanguageTerminalRuleConsumer terminalRuleConsumer) {
+	public void setTerminalRuleConsumer(INonTerminalConsumer terminalRuleConsumer) {
 		this.terminalRuleConsumer = terminalRuleConsumer;
 	}
 	

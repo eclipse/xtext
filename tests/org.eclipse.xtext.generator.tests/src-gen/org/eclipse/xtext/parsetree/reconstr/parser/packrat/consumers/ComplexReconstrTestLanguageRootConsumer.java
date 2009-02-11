@@ -6,6 +6,7 @@ package org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -21,8 +22,8 @@ import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.ComplexReco
 @SuppressWarnings("unused")
 public final class ComplexReconstrTestLanguageRootConsumer extends NonTerminalConsumer {
 
-	private ComplexReconstrTestLanguageOpConsumer opConsumer;
-	private ComplexReconstrTestLanguageTrickyGConsumer trickyGConsumer;
+	private INonTerminalConsumer opConsumer;
+	private INonTerminalConsumer trickyGConsumer;
 
 	public ComplexReconstrTestLanguageRootConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
@@ -64,6 +65,7 @@ public final class ComplexReconstrTestLanguageRootConsumer extends NonTerminalCo
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prRoot();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -73,11 +75,11 @@ public final class ComplexReconstrTestLanguageRootConsumer extends NonTerminalCo
 		return "Root";
 	}
 	
-	public void setOpConsumer(ComplexReconstrTestLanguageOpConsumer opConsumer) {
+	public void setOpConsumer(INonTerminalConsumer opConsumer) {
 		this.opConsumer = opConsumer;
 	}
 	
-	public void setTrickyGConsumer(ComplexReconstrTestLanguageTrickyGConsumer trickyGConsumer) {
+	public void setTrickyGConsumer(INonTerminalConsumer trickyGConsumer) {
 		this.trickyGConsumer = trickyGConsumer;
 	}
 	

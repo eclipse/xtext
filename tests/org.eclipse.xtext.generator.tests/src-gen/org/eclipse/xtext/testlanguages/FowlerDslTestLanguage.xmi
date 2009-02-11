@@ -1,142 +1,170 @@
 <?xml version="1.0" encoding="ASCII"?>
-<xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:xtext="http://www.eclipse.org/2008/Xtext" name="org.eclipse.xtext.testlanguages.FowlerDslTestLanguage">
-  <superGrammar href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#/"/>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="fowlerdsl">
-    <ePackage href="http://example.xtext.org/FowlerDslTestLanguage#/"/>
-  </metamodelDeclarations>
-  <rules xsi:type="xtext:ParserRule" name="Statemachine">
-    <type metamodel="//@metamodelDeclarations.0">
-      <type xsi:type="ecore:EClass" href="http://example.xtext.org/FowlerDslTestLanguage#//Statemachine"/>
-    </type>
-    <alternatives xsi:type="xtext:Group">
-      <abstractTokens xsi:type="xtext:Group">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
+  <xtext:Grammar name="org.eclipse.xtext.testlanguages.FowlerDslTestLanguage" superGrammar="/1">
+    <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="fowlerdsl">
+      <ePackage href="http://example.xtext.org/FowlerDslTestLanguage#/"/>
+    </metamodelDeclarations>
+    <rules xsi:type="xtext:ParserRule" name="Statemachine">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EClass" href="http://example.xtext.org/FowlerDslTestLanguage#//Statemachine"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
         <abstractTokens xsi:type="xtext:Group">
           <abstractTokens xsi:type="xtext:Group">
             <abstractTokens xsi:type="xtext:Group">
               <abstractTokens xsi:type="xtext:Group">
-                <abstractTokens xsi:type="xtext:Keyword" value="events"/>
-                <abstractTokens xsi:type="xtext:Assignment" cardinality="*" feature="events" operator="+=">
-                  <terminal xsi:type="xtext:RuleCall" rule="//@rules.1"/>
+                <abstractTokens xsi:type="xtext:Group">
+                  <abstractTokens xsi:type="xtext:Keyword" value="events"/>
+                  <abstractTokens xsi:type="xtext:Assignment" cardinality="*" feature="events" operator="+=">
+                    <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+                  </abstractTokens>
+                </abstractTokens>
+                <abstractTokens xsi:type="xtext:Keyword" value="end"/>
+              </abstractTokens>
+              <abstractTokens xsi:type="xtext:Keyword" value="commands"/>
+            </abstractTokens>
+            <abstractTokens xsi:type="xtext:Assignment" cardinality="*" feature="commands" operator="+=">
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.2"/>
+            </abstractTokens>
+          </abstractTokens>
+          <abstractTokens xsi:type="xtext:Keyword" value="end"/>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Assignment" cardinality="*" feature="states" operator="+=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.3"/>
+        </abstractTokens>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Event">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EClass" href="http://example.xtext.org/FowlerDslTestLanguage#//Event"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Assignment" cardinality="?" feature="resetting" operator="?=">
+            <terminal xsi:type="xtext:Keyword" value="resetting"/>
+          </abstractTokens>
+          <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+          </abstractTokens>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Assignment" feature="code" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+        </abstractTokens>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Command">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EClass" href="http://example.xtext.org/FowlerDslTestLanguage#//Command"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Assignment" feature="code" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+        </abstractTokens>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="State">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EClass" href="http://example.xtext.org/FowlerDslTestLanguage#//State"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Group">
+            <abstractTokens xsi:type="xtext:Group">
+              <abstractTokens xsi:type="xtext:Keyword" value="state"/>
+              <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
+                <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+              </abstractTokens>
+            </abstractTokens>
+            <abstractTokens xsi:type="xtext:Group" cardinality="?">
+              <abstractTokens xsi:type="xtext:Group">
+                <abstractTokens xsi:type="xtext:Group">
+                  <abstractTokens xsi:type="xtext:Keyword" value="actions"/>
+                  <abstractTokens xsi:type="xtext:Keyword" value="{"/>
+                </abstractTokens>
+                <abstractTokens xsi:type="xtext:Assignment" cardinality="+" feature="actions" operator="+=">
+                  <terminal xsi:type="xtext:CrossReference" rule="/1/@rules.0">
+                    <type metamodel="/0/@metamodelDeclarations.0">
+                      <type xsi:type="ecore:EClass" href="http://example.xtext.org/FowlerDslTestLanguage#//Command"/>
+                    </type>
+                  </terminal>
                 </abstractTokens>
               </abstractTokens>
-              <abstractTokens xsi:type="xtext:Keyword" value="end"/>
+              <abstractTokens xsi:type="xtext:Keyword" value="}"/>
             </abstractTokens>
-            <abstractTokens xsi:type="xtext:Keyword" value="commands"/>
           </abstractTokens>
-          <abstractTokens xsi:type="xtext:Assignment" cardinality="*" feature="commands" operator="+=">
-            <terminal xsi:type="xtext:RuleCall" rule="//@rules.2"/>
+          <abstractTokens xsi:type="xtext:Assignment" cardinality="*" feature="transitions" operator="+=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.4"/>
           </abstractTokens>
         </abstractTokens>
         <abstractTokens xsi:type="xtext:Keyword" value="end"/>
-      </abstractTokens>
-      <abstractTokens xsi:type="xtext:Assignment" cardinality="*" feature="states" operator="+=">
-        <terminal xsi:type="xtext:RuleCall" rule="//@rules.3"/>
-      </abstractTokens>
-    </alternatives>
-  </rules>
-  <rules xsi:type="xtext:ParserRule" name="Event">
-    <type metamodel="//@metamodelDeclarations.0">
-      <type xsi:type="ecore:EClass" href="http://example.xtext.org/FowlerDslTestLanguage#//Event"/>
-    </type>
-    <alternatives xsi:type="xtext:Group">
-      <abstractTokens xsi:type="xtext:Group">
-        <abstractTokens xsi:type="xtext:Assignment" cardinality="?" feature="resetting" operator="?=">
-          <terminal xsi:type="xtext:Keyword" value="resetting"/>
-        </abstractTokens>
-        <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
-          <terminal xsi:type="xtext:RuleCall">
-            <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.0"/>
-          </terminal>
-        </abstractTokens>
-      </abstractTokens>
-      <abstractTokens xsi:type="xtext:Assignment" feature="code" operator="=">
-        <terminal xsi:type="xtext:RuleCall">
-          <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.0"/>
-        </terminal>
-      </abstractTokens>
-    </alternatives>
-  </rules>
-  <rules xsi:type="xtext:ParserRule" name="Command">
-    <type metamodel="//@metamodelDeclarations.0">
-      <type xsi:type="ecore:EClass" href="http://example.xtext.org/FowlerDslTestLanguage#//Command"/>
-    </type>
-    <alternatives xsi:type="xtext:Group">
-      <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
-        <terminal xsi:type="xtext:RuleCall">
-          <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.0"/>
-        </terminal>
-      </abstractTokens>
-      <abstractTokens xsi:type="xtext:Assignment" feature="code" operator="=">
-        <terminal xsi:type="xtext:RuleCall">
-          <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.0"/>
-        </terminal>
-      </abstractTokens>
-    </alternatives>
-  </rules>
-  <rules xsi:type="xtext:ParserRule" name="State">
-    <type metamodel="//@metamodelDeclarations.0">
-      <type xsi:type="ecore:EClass" href="http://example.xtext.org/FowlerDslTestLanguage#//State"/>
-    </type>
-    <alternatives xsi:type="xtext:Group">
-      <abstractTokens xsi:type="xtext:Group">
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Transition">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EClass" href="http://example.xtext.org/FowlerDslTestLanguage#//Transition"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
         <abstractTokens xsi:type="xtext:Group">
-          <abstractTokens xsi:type="xtext:Group">
-            <abstractTokens xsi:type="xtext:Keyword" value="state"/>
-            <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
-              <terminal xsi:type="xtext:RuleCall">
-                <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.0"/>
-              </terminal>
-            </abstractTokens>
+          <abstractTokens xsi:type="xtext:Assignment" feature="event" operator="=">
+            <terminal xsi:type="xtext:CrossReference" rule="/1/@rules.0">
+              <type metamodel="/0/@metamodelDeclarations.0">
+                <type xsi:type="ecore:EClass" href="http://example.xtext.org/FowlerDslTestLanguage#//Event"/>
+              </type>
+            </terminal>
           </abstractTokens>
-          <abstractTokens xsi:type="xtext:Group" cardinality="?">
-            <abstractTokens xsi:type="xtext:Group">
-              <abstractTokens xsi:type="xtext:Group">
-                <abstractTokens xsi:type="xtext:Keyword" value="actions"/>
-                <abstractTokens xsi:type="xtext:Keyword" value="{"/>
-              </abstractTokens>
-              <abstractTokens xsi:type="xtext:Assignment" cardinality="+" feature="actions" operator="+=">
-                <terminal xsi:type="xtext:CrossReference">
-                  <type metamodel="//@metamodelDeclarations.0">
-                    <type xsi:type="ecore:EClass" href="http://example.xtext.org/FowlerDslTestLanguage#//Command"/>
-                  </type>
-                  <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.0"/>
-                </terminal>
-              </abstractTokens>
-            </abstractTokens>
-            <abstractTokens xsi:type="xtext:Keyword" value="}"/>
-          </abstractTokens>
+          <abstractTokens xsi:type="xtext:Keyword" value="=>"/>
         </abstractTokens>
-        <abstractTokens xsi:type="xtext:Assignment" cardinality="*" feature="transitions" operator="+=">
-          <terminal xsi:type="xtext:RuleCall" rule="//@rules.4"/>
-        </abstractTokens>
-      </abstractTokens>
-      <abstractTokens xsi:type="xtext:Keyword" value="end"/>
-    </alternatives>
-  </rules>
-  <rules xsi:type="xtext:ParserRule" name="Transition">
-    <type metamodel="//@metamodelDeclarations.0">
-      <type xsi:type="ecore:EClass" href="http://example.xtext.org/FowlerDslTestLanguage#//Transition"/>
-    </type>
-    <alternatives xsi:type="xtext:Group">
-      <abstractTokens xsi:type="xtext:Group">
-        <abstractTokens xsi:type="xtext:Assignment" feature="event" operator="=">
-          <terminal xsi:type="xtext:CrossReference">
-            <type metamodel="//@metamodelDeclarations.0">
-              <type xsi:type="ecore:EClass" href="http://example.xtext.org/FowlerDslTestLanguage#//Event"/>
+        <abstractTokens xsi:type="xtext:Assignment" feature="state" operator="=">
+          <terminal xsi:type="xtext:CrossReference" rule="/1/@rules.0">
+            <type metamodel="/0/@metamodelDeclarations.0">
+              <type xsi:type="ecore:EClass" href="http://example.xtext.org/FowlerDslTestLanguage#//State"/>
             </type>
-            <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.0"/>
           </terminal>
         </abstractTokens>
-        <abstractTokens xsi:type="xtext:Keyword" value="=>"/>
-      </abstractTokens>
-      <abstractTokens xsi:type="xtext:Assignment" feature="state" operator="=">
-        <terminal xsi:type="xtext:CrossReference">
-          <type metamodel="//@metamodelDeclarations.0">
-            <type xsi:type="ecore:EClass" href="http://example.xtext.org/FowlerDslTestLanguage#//State"/>
-          </type>
-          <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.0"/>
-        </terminal>
-      </abstractTokens>
-    </alternatives>
-  </rules>
-</xtext:Grammar>
+      </alternatives>
+    </rules>
+  </xtext:Grammar>
+  <xtext:Grammar abstract="true" name="org.eclipse.xtext.builtin.XtextBuiltin" definesHiddenTokens="true" hiddenTokens="/1/@rules.5 /1/@rules.3 /1/@rules.4">
+    <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="ecore">
+      <ePackage href="http://www.eclipse.org/emf/2002/Ecore#/"/>
+    </metamodelDeclarations>
+    <rules xsi:type="xtext:LexerRule" name="ID" body="('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+    </rules>
+    <rules xsi:type="xtext:LexerRule" name="INT" body="('0'..'9')+">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      </type>
+    </rules>
+    <rules xsi:type="xtext:LexerRule" name="STRING" body="&#xA;&#x9;&#x9;&#x9;  '&quot;' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\&quot;'|'\''|'\\') | ~('\\'|'&quot;') )* '&quot;' | &#xA;              '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\&quot;'|'\''|'\\') | ~('\\'|'\'') )* '\''&#xA;              ">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+    </rules>
+    <rules xsi:type="xtext:LexerRule" name="ML_COMMENT" body="'/*' ( options {greedy=false;} : . )* '*/'">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+    </rules>
+    <rules xsi:type="xtext:LexerRule" name="SL_COMMENT" body="'//' ~('\n'|'\r')* ('\r'? '\n')?">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+    </rules>
+    <rules xsi:type="xtext:LexerRule" name="WS" body="(' '|'\t'|'\r'|'\n')+">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+    </rules>
+    <rules xsi:type="xtext:LexerRule" name="ANY_OTHER" body=".">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+    </rules>
+  </xtext:Grammar>
+</xmi:XMI>

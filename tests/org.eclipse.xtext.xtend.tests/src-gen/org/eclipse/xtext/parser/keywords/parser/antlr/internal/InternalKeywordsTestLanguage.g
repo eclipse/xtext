@@ -66,7 +66,7 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 
 // Entry rule entryRuleModel
 entryRuleModel returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.xmi#/0/@rules.0" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
 	 EOF 
@@ -82,7 +82,7 @@ ruleModel returns [EObject current=null]
 	
 	    lv_first='foo\\bar' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.xmi#//@rules.0/@alternatives/@groups.0/@groups.0/@groups.0/@terminal" /* xtext::Keyword */, "first"); 
+        createLeafNode("classpath:/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.xmi#/0/@rules.0/@alternatives/@groups.0/@groups.0/@groups.0/@terminal" /* xtext::Keyword */, "first"); 
     }
  
 	    {
@@ -103,7 +103,7 @@ ruleModel returns [EObject current=null]
 	
 	    lv_second='foo\\' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.xmi#//@rules.0/@alternatives/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "second"); 
+        createLeafNode("classpath:/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.xmi#/0/@rules.0/@alternatives/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "second"); 
     }
  
 	    {
@@ -124,7 +124,7 @@ ruleModel returns [EObject current=null]
 	
 	    lv_third='\\bar' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.xmi#//@rules.0/@alternatives/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "third"); 
+        createLeafNode("classpath:/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.xmi#/0/@rules.0/@alternatives/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "third"); 
     }
  
 	    {
@@ -145,7 +145,7 @@ ruleModel returns [EObject current=null]
 	
 	    lv_forth='\\' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.xmi#//@rules.0/@alternatives/@groups.1/@terminal" /* xtext::Keyword */, "forth"); 
+        createLeafNode("classpath:/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.xmi#/0/@rules.0/@alternatives/@groups.1/@terminal" /* xtext::Keyword */, "forth"); 
     }
  
 	    {

@@ -6,6 +6,7 @@ package org.eclipse.xtext.reference.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -21,8 +22,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer
 @SuppressWarnings("unused")
 public final class ReferenceGrammarSpielzeugConsumer extends NonTerminalConsumer {
 
-	private ReferenceGrammarFarbeConsumer farbeConsumer;
-	private XtextBuiltinIDConsumer idConsumer;
+	private INonTerminalConsumer farbeConsumer;
+	private ITerminalConsumer idConsumer;
 
 	private ICharacterClass keyword$5$Delimiter;
 	
@@ -147,6 +148,7 @@ public final class ReferenceGrammarSpielzeugConsumer extends NonTerminalConsumer
 		return ReferenceGrammarGrammarAccess.INSTANCE.prSpielzeug();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -156,11 +158,11 @@ public final class ReferenceGrammarSpielzeugConsumer extends NonTerminalConsumer
 		return "Spielzeug";
 	}
 	
-	public void setFarbeConsumer(ReferenceGrammarFarbeConsumer farbeConsumer) {
+	public void setFarbeConsumer(INonTerminalConsumer farbeConsumer) {
 		this.farbeConsumer = farbeConsumer;
 	}
 	
-	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
+	public void setIdConsumer(ITerminalConsumer idConsumer) {
 		this.idConsumer = idConsumer;
 	}
 	

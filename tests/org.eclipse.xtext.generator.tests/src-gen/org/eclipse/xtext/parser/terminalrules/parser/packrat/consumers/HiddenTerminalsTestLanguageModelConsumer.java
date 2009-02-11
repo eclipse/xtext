@@ -6,6 +6,7 @@ package org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -24,11 +25,11 @@ import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.HiddenTer
 @SuppressWarnings("unused")
 public final class HiddenTerminalsTestLanguageModelConsumer extends NonTerminalConsumer {
 
-	private HiddenTerminalsTestLanguageDatatypeHiddensConsumer datatypeHiddensConsumer;
-	private HiddenTerminalsTestLanguageInheritingHiddensConsumer inheritingHiddensConsumer;
-	private HiddenTerminalsTestLanguageOverridingHiddensConsumer overridingHiddensConsumer;
-	private HiddenTerminalsTestLanguageWithHiddensConsumer withHiddensConsumer;
-	private HiddenTerminalsTestLanguageWithoutHiddensConsumer withoutHiddensConsumer;
+	private INonTerminalConsumer datatypeHiddensConsumer;
+	private INonTerminalConsumer inheritingHiddensConsumer;
+	private INonTerminalConsumer overridingHiddensConsumer;
+	private INonTerminalConsumer withHiddensConsumer;
+	private INonTerminalConsumer withoutHiddensConsumer;
 
 	public HiddenTerminalsTestLanguageModelConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
@@ -97,6 +98,7 @@ public final class HiddenTerminalsTestLanguageModelConsumer extends NonTerminalC
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prModel();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -106,23 +108,23 @@ public final class HiddenTerminalsTestLanguageModelConsumer extends NonTerminalC
 		return "Model";
 	}
 	
-	public void setDatatypeHiddensConsumer(HiddenTerminalsTestLanguageDatatypeHiddensConsumer datatypeHiddensConsumer) {
+	public void setDatatypeHiddensConsumer(INonTerminalConsumer datatypeHiddensConsumer) {
 		this.datatypeHiddensConsumer = datatypeHiddensConsumer;
 	}
 	
-	public void setInheritingHiddensConsumer(HiddenTerminalsTestLanguageInheritingHiddensConsumer inheritingHiddensConsumer) {
+	public void setInheritingHiddensConsumer(INonTerminalConsumer inheritingHiddensConsumer) {
 		this.inheritingHiddensConsumer = inheritingHiddensConsumer;
 	}
 	
-	public void setOverridingHiddensConsumer(HiddenTerminalsTestLanguageOverridingHiddensConsumer overridingHiddensConsumer) {
+	public void setOverridingHiddensConsumer(INonTerminalConsumer overridingHiddensConsumer) {
 		this.overridingHiddensConsumer = overridingHiddensConsumer;
 	}
 	
-	public void setWithHiddensConsumer(HiddenTerminalsTestLanguageWithHiddensConsumer withHiddensConsumer) {
+	public void setWithHiddensConsumer(INonTerminalConsumer withHiddensConsumer) {
 		this.withHiddensConsumer = withHiddensConsumer;
 	}
 	
-	public void setWithoutHiddensConsumer(HiddenTerminalsTestLanguageWithoutHiddensConsumer withoutHiddensConsumer) {
+	public void setWithoutHiddensConsumer(INonTerminalConsumer withoutHiddensConsumer) {
 		this.withoutHiddensConsumer = withoutHiddensConsumer;
 	}
 	

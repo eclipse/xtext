@@ -6,6 +6,7 @@ package org.eclipse.xtext.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -24,11 +25,11 @@ import org.eclipse.xtext.parser.packrat.consumers.XtextWildcardConsumer;
 @SuppressWarnings("unused")
 public final class XtextTerminalTokenElementConsumer extends NonTerminalConsumer {
 
-	private XtextAbstractNegatedTokenConsumer abstractNegatedTokenConsumer;
-	private XtextCharacterRangeConsumer characterRangeConsumer;
-	private XtextParenthesizedTerminalElementConsumer parenthesizedTerminalElementConsumer;
-	private XtextRuleCallConsumer ruleCallConsumer;
-	private XtextWildcardConsumer wildcardConsumer;
+	private INonTerminalConsumer abstractNegatedTokenConsumer;
+	private INonTerminalConsumer characterRangeConsumer;
+	private INonTerminalConsumer parenthesizedTerminalElementConsumer;
+	private INonTerminalConsumer ruleCallConsumer;
+	private INonTerminalConsumer wildcardConsumer;
 
 	public XtextTerminalTokenElementConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
@@ -97,6 +98,7 @@ public final class XtextTerminalTokenElementConsumer extends NonTerminalConsumer
 		return XtextGrammarAccess.INSTANCE.prTerminalTokenElement();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -106,23 +108,23 @@ public final class XtextTerminalTokenElementConsumer extends NonTerminalConsumer
 		return "AbstractElement";
 	}
 	
-	public void setAbstractNegatedTokenConsumer(XtextAbstractNegatedTokenConsumer abstractNegatedTokenConsumer) {
+	public void setAbstractNegatedTokenConsumer(INonTerminalConsumer abstractNegatedTokenConsumer) {
 		this.abstractNegatedTokenConsumer = abstractNegatedTokenConsumer;
 	}
 	
-	public void setCharacterRangeConsumer(XtextCharacterRangeConsumer characterRangeConsumer) {
+	public void setCharacterRangeConsumer(INonTerminalConsumer characterRangeConsumer) {
 		this.characterRangeConsumer = characterRangeConsumer;
 	}
 	
-	public void setParenthesizedTerminalElementConsumer(XtextParenthesizedTerminalElementConsumer parenthesizedTerminalElementConsumer) {
+	public void setParenthesizedTerminalElementConsumer(INonTerminalConsumer parenthesizedTerminalElementConsumer) {
 		this.parenthesizedTerminalElementConsumer = parenthesizedTerminalElementConsumer;
 	}
 	
-	public void setRuleCallConsumer(XtextRuleCallConsumer ruleCallConsumer) {
+	public void setRuleCallConsumer(INonTerminalConsumer ruleCallConsumer) {
 		this.ruleCallConsumer = ruleCallConsumer;
 	}
 	
-	public void setWildcardConsumer(XtextWildcardConsumer wildcardConsumer) {
+	public void setWildcardConsumer(INonTerminalConsumer wildcardConsumer) {
 		this.wildcardConsumer = wildcardConsumer;
 	}
 	

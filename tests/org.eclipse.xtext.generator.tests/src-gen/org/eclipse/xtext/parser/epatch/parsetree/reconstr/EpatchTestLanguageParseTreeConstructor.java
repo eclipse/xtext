@@ -65,6 +65,7 @@ protected class EPatch_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prEPatch().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EPatch_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -93,6 +94,7 @@ protected class EPatch_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prEPatch().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EPatch_0_1_Assignment_objects(current, this).firstSolution();
 		while(s1 != null) {
@@ -121,6 +123,7 @@ protected class EPatch_0_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prEPatch().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EPatch_0_0_1_Assignment_resources(current, this).firstSolution();
 		while(s1 != null) {
@@ -149,6 +152,7 @@ protected class EPatch_0_0_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prEPatch().ele000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EPatch_0_0_0_1_Assignment_imports(current, this).firstSolution();
 		while(s1 != null) {
@@ -177,6 +181,7 @@ protected class EPatch_0_0_0_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prEPatch().ele0000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EPatch_0_0_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -205,6 +210,7 @@ protected class EPatch_0_0_0_0_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prEPatch().ele00000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EPatch_0_0_0_0_0_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
@@ -245,6 +251,7 @@ protected class EPatch_0_0_0_0_0_1_Assignment_name extends AssignmentToken  {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prEPatch().ele000001AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -282,6 +289,7 @@ protected class EPatch_0_0_0_1_Assignment_imports extends AssignmentToken  {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prEPatch().ele0001AssignmentImports();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("imports",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("imports");
@@ -314,6 +322,7 @@ protected class EPatch_0_0_1_Assignment_resources extends AssignmentToken  {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prEPatch().ele001AssignmentResources();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("resources",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("resources");
@@ -346,6 +355,7 @@ protected class EPatch_0_1_Assignment_objects extends AssignmentToken  {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prEPatch().ele01AssignmentObjects();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("objects",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("objects");
@@ -400,7 +410,8 @@ protected class Import_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prImport().eleAlternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new Import_1_RuleCall_ExtensionImport(current, this) : new Import_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -421,7 +432,8 @@ protected class Import_0_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prImport().ele0Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new Import_0_1_RuleCall_JavaImport(current, this) : new Import_0_0_RuleCall_ModelImport(current, this);
 		Solution s = t.firstSolution();
@@ -443,6 +455,7 @@ protected class Import_0_0_RuleCall_ModelImport extends RuleCallToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prImport().ele00ParserRuleCallModelImport();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(ModelImport_Alternatives.class, current)) return null;
 		if(!current.isInstanceOf("ModelImport")) return null;
@@ -461,6 +474,7 @@ protected class Import_0_1_RuleCall_JavaImport extends RuleCallToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prImport().ele01ParserRuleCallJavaImport();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(JavaImport_Group.class, current)) return null;
 		if(!current.isInstanceOf("JavaImport")) return null;
@@ -480,6 +494,7 @@ protected class Import_1_RuleCall_ExtensionImport extends RuleCallToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prImport().ele1ParserRuleCallExtensionImport();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(ExtensionImport_Group.class, current)) return null;
 		if(!current.isInstanceOf("ExtensionImport")) return null;
@@ -508,7 +523,8 @@ protected class ModelImport_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prModelImport().eleAlternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new ModelImport_1_RuleCall_EPackageImport(current, this) : new ModelImport_0_RuleCall_ResourceImport(current, this);
 		Solution s = t.firstSolution();
@@ -530,6 +546,7 @@ protected class ModelImport_0_RuleCall_ResourceImport extends RuleCallToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prModelImport().ele0ParserRuleCallResourceImport();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(ResourceImport_Group.class, current)) return null;
 		if(!current.isInstanceOf("ResourceImport")) return null;
@@ -548,6 +565,7 @@ protected class ModelImport_1_RuleCall_EPackageImport extends RuleCallToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prModelImport().ele1ParserRuleCallEPackageImport();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(EPackageImport_Group.class, current)) return null;
 		if(!current.isInstanceOf("EPackageImport")) return null;
@@ -577,6 +595,7 @@ protected class ResourceImport_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prResourceImport().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ResourceImport_1_Assignment_uri(current, this).firstSolution();
 		while(s1 != null) {
@@ -605,6 +624,7 @@ protected class ResourceImport_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prResourceImport().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ResourceImport_0_1_Keyword_uri(current, this).firstSolution();
 		while(s1 != null) {
@@ -633,6 +653,7 @@ protected class ResourceImport_0_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prResourceImport().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ResourceImport_0_0_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
@@ -673,6 +694,7 @@ protected class ResourceImport_0_0_1_Assignment_name extends AssignmentToken  {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prResourceImport().ele001AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -710,6 +732,7 @@ protected class ResourceImport_1_Assignment_uri extends AssignmentToken  {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prResourceImport().ele1AssignmentUri();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("uri",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("uri");
@@ -744,6 +767,7 @@ protected class EPackageImport_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prEPackageImport().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EPackageImport_1_Assignment_nsURI(current, this).firstSolution();
 		while(s1 != null) {
@@ -772,6 +796,7 @@ protected class EPackageImport_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prEPackageImport().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EPackageImport_0_1_Keyword_ns(current, this).firstSolution();
 		while(s1 != null) {
@@ -800,6 +825,7 @@ protected class EPackageImport_0_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prEPackageImport().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EPackageImport_0_0_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
@@ -840,6 +866,7 @@ protected class EPackageImport_0_0_1_Assignment_name extends AssignmentToken  {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prEPackageImport().ele001AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -877,6 +904,7 @@ protected class EPackageImport_1_Assignment_nsURI extends AssignmentToken  {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prEPackageImport().ele1AssignmentNsURI();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("nsURI",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("nsURI");
@@ -911,6 +939,7 @@ protected class JavaImport_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prJavaImport().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new JavaImport_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -939,6 +968,7 @@ protected class JavaImport_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prJavaImport().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new JavaImport_0_1_Assignment_path(current, this).firstSolution();
 		while(s1 != null) {
@@ -967,6 +997,7 @@ protected class JavaImport_0_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prJavaImport().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new JavaImport_0_0_1_Keyword_java(current, this).firstSolution();
 		while(s1 != null) {
@@ -1020,6 +1051,7 @@ protected class JavaImport_0_1_Assignment_path extends AssignmentToken  {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prJavaImport().ele01AssignmentPath();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("path",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("path");
@@ -1044,6 +1076,7 @@ protected class JavaImport_1_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prJavaImport().ele1Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new JavaImport_1_1_Assignment_path(current, this).firstSolution();
 		while(s1 != null) {
@@ -1084,6 +1117,7 @@ protected class JavaImport_1_1_Assignment_path extends AssignmentToken  {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prJavaImport().ele11AssignmentPath();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("path",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("path");
@@ -1119,6 +1153,7 @@ protected class ExtensionImport_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prExtensionImport().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ExtensionImport_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -1147,6 +1182,7 @@ protected class ExtensionImport_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prExtensionImport().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ExtensionImport_0_1_Assignment_path(current, this).firstSolution();
 		while(s1 != null) {
@@ -1175,6 +1211,7 @@ protected class ExtensionImport_0_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prExtensionImport().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ExtensionImport_0_0_1_Keyword_extension(current, this).firstSolution();
 		while(s1 != null) {
@@ -1228,6 +1265,7 @@ protected class ExtensionImport_0_1_Assignment_path extends AssignmentToken  {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prExtensionImport().ele01AssignmentPath();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("path",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("path");
@@ -1252,6 +1290,7 @@ protected class ExtensionImport_1_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prExtensionImport().ele1Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ExtensionImport_1_1_Assignment_path(current, this).firstSolution();
 		while(s1 != null) {
@@ -1292,6 +1331,7 @@ protected class ExtensionImport_1_1_Assignment_path extends AssignmentToken  {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prExtensionImport().ele11AssignmentPath();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("path",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("path");
@@ -1327,6 +1367,7 @@ protected class NamedResource_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prNamedResource().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new NamedResource_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -1355,6 +1396,7 @@ protected class NamedResource_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prNamedResource().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new NamedResource_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -1383,6 +1425,7 @@ protected class NamedResource_0_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prNamedResource().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new NamedResource_0_0_1_Alternatives(current, this).firstSolution();
 		while(s1 != null) {
@@ -1411,6 +1454,7 @@ protected class NamedResource_0_0_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prNamedResource().ele000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new NamedResource_0_0_0_1_Keyword_right(current, this).firstSolution();
 		while(s1 != null) {
@@ -1439,6 +1483,7 @@ protected class NamedResource_0_0_0_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prNamedResource().ele0000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new NamedResource_0_0_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -1467,6 +1512,7 @@ protected class NamedResource_0_0_0_0_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prNamedResource().ele00000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new NamedResource_0_0_0_0_0_1_Alternatives(current, this).firstSolution();
 		while(s1 != null) {
@@ -1495,6 +1541,7 @@ protected class NamedResource_0_0_0_0_0_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prNamedResource().ele000000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new NamedResource_0_0_0_0_0_0_1_Keyword_left(current, this).firstSolution();
 		while(s1 != null) {
@@ -1523,6 +1570,7 @@ protected class NamedResource_0_0_0_0_0_0_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prNamedResource().ele0000000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new NamedResource_0_0_0_0_0_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -1551,6 +1599,7 @@ protected class NamedResource_0_0_0_0_0_0_0_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prNamedResource().ele00000000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new NamedResource_0_0_0_0_0_0_0_0_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
@@ -1591,6 +1640,7 @@ protected class NamedResource_0_0_0_0_0_0_0_0_1_Assignment_name extends Assignme
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prNamedResource().ele000000001AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -1640,7 +1690,8 @@ protected class NamedResource_0_0_0_0_0_1_Alternatives extends AlternativesToken
 	public Alternatives getGrammarElement() {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prNamedResource().ele000001Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new NamedResource_0_0_0_0_0_1_1_Assignment_leftRoot(current, this) : new NamedResource_0_0_0_0_0_1_0_Group(current, this);
 		Solution s = t.firstSolution();
@@ -1662,6 +1713,7 @@ protected class NamedResource_0_0_0_0_0_1_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prNamedResource().ele0000010Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new NamedResource_0_0_0_0_0_1_0_1_Assignment_leftUri(current, this).firstSolution();
 		while(s1 != null) {
@@ -1702,6 +1754,7 @@ protected class NamedResource_0_0_0_0_0_1_0_1_Assignment_leftUri extends Assignm
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prNamedResource().ele00000101AssignmentLeftUri();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("leftUri",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("leftUri");
@@ -1726,6 +1779,7 @@ protected class NamedResource_0_0_0_0_0_1_1_Assignment_leftRoot extends Assignme
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prNamedResource().ele0000011AssignmentLeftRoot();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("leftRoot",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("leftRoot");
@@ -1784,7 +1838,8 @@ protected class NamedResource_0_0_1_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prNamedResource().ele001Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new NamedResource_0_0_1_1_Assignment_rightRoot(current, this) : new NamedResource_0_0_1_0_Group(current, this);
 		Solution s = t.firstSolution();
@@ -1806,6 +1861,7 @@ protected class NamedResource_0_0_1_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prNamedResource().ele0010Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new NamedResource_0_0_1_0_1_Assignment_rightUri(current, this).firstSolution();
 		while(s1 != null) {
@@ -1846,6 +1902,7 @@ protected class NamedResource_0_0_1_0_1_Assignment_rightUri extends AssignmentTo
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prNamedResource().ele00101AssignmentRightUri();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("rightUri",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("rightUri");
@@ -1870,6 +1927,7 @@ protected class NamedResource_0_0_1_1_Assignment_rightRoot extends AssignmentTok
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prNamedResource().ele0011AssignmentRightRoot();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("rightRoot",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("rightRoot");
@@ -1938,7 +1996,8 @@ protected class NamedObject_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prNamedObject().eleAlternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new NamedObject_1_RuleCall_CreatedObject(current, this) : new NamedObject_0_RuleCall_ObjectRef(current, this);
 		Solution s = t.firstSolution();
@@ -1960,6 +2019,7 @@ protected class NamedObject_0_RuleCall_ObjectRef extends RuleCallToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prNamedObject().ele0ParserRuleCallObjectRef();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(ObjectRef_Group.class, current)) return null;
 		if(!current.isInstanceOf("ObjectRef")) return null;
@@ -1978,6 +2038,7 @@ protected class NamedObject_1_RuleCall_CreatedObject extends RuleCallToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prNamedObject().ele1ParserRuleCallCreatedObject();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(CreatedObject_Group.class, current)) return null;
 		if(!current.isInstanceOf("CreatedObject")) return null;
@@ -2007,6 +2068,7 @@ protected class ObjectRef_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prObjectRef().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ObjectRef_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -2035,6 +2097,7 @@ protected class ObjectRef_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prObjectRef().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ObjectRef_0_1_Alternatives(current, this).firstSolution();
 		while(s1 != null) {
@@ -2063,6 +2126,7 @@ protected class ObjectRef_0_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prObjectRef().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ObjectRef_0_0_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
@@ -2103,6 +2167,7 @@ protected class ObjectRef_0_0_1_Assignment_name extends AssignmentToken  {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prObjectRef().ele001AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -2126,7 +2191,8 @@ protected class ObjectRef_0_1_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prObjectRef().ele01Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new ObjectRef_0_1_1_Group(current, this) : new ObjectRef_0_1_0_Group(current, this);
 		Solution s = t.firstSolution();
@@ -2148,6 +2214,7 @@ protected class ObjectRef_0_1_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prObjectRef().ele010Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ObjectRef_0_1_0_1_Assignment_leftFrag(current, this).firstSolution();
 		while(s1 != null) {
@@ -2176,6 +2243,7 @@ protected class ObjectRef_0_1_0_0_Assignment_leftRes extends AssignmentToken  {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prObjectRef().ele0100AssignmentLeftRes();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("leftRes",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("leftRes");
@@ -2202,6 +2270,7 @@ protected class ObjectRef_0_1_0_1_Assignment_leftFrag extends AssignmentToken  {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prObjectRef().ele0101AssignmentLeftFrag();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("leftFrag",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("leftFrag");
@@ -2226,6 +2295,7 @@ protected class ObjectRef_0_1_1_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prObjectRef().ele011Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ObjectRef_0_1_1_1_Assignment_rightFrag(current, this).firstSolution();
 		while(s1 != null) {
@@ -2254,6 +2324,7 @@ protected class ObjectRef_0_1_1_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prObjectRef().ele0110Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ObjectRef_0_1_1_0_1_Assignment_rightRes(current, this).firstSolution();
 		while(s1 != null) {
@@ -2282,6 +2353,7 @@ protected class ObjectRef_0_1_1_0_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prObjectRef().ele01100Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ObjectRef_0_1_1_0_0_1_Keyword_right(current, this).firstSolution();
 		while(s1 != null) {
@@ -2310,6 +2382,7 @@ protected class ObjectRef_0_1_1_0_0_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prObjectRef().ele011000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ObjectRef_0_1_1_0_0_0_1_Assignment_leftFrag(current, this).firstSolution();
 		while(s1 != null) {
@@ -2338,6 +2411,7 @@ protected class ObjectRef_0_1_1_0_0_0_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prObjectRef().ele0110000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ObjectRef_0_1_1_0_0_0_0_1_Assignment_leftRes(current, this).firstSolution();
 		while(s1 != null) {
@@ -2378,6 +2452,7 @@ protected class ObjectRef_0_1_1_0_0_0_0_1_Assignment_leftRes extends AssignmentT
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prObjectRef().ele01100001AssignmentLeftRes();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("leftRes",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("leftRes");
@@ -2405,6 +2480,7 @@ protected class ObjectRef_0_1_1_0_0_0_1_Assignment_leftFrag extends AssignmentTo
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prObjectRef().ele0110001AssignmentLeftFrag();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("leftFrag",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("leftFrag");
@@ -2442,6 +2518,7 @@ protected class ObjectRef_0_1_1_0_1_Assignment_rightRes extends AssignmentToken 
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prObjectRef().ele01101AssignmentRightRes();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("rightRes",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("rightRes");
@@ -2469,6 +2546,7 @@ protected class ObjectRef_0_1_1_1_Assignment_rightFrag extends AssignmentToken  
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prObjectRef().ele0111AssignmentRightFrag();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("rightFrag",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("rightFrag");
@@ -2495,6 +2573,7 @@ protected class ObjectRef_1_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prObjectRef().ele1Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ObjectRef_1_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -2523,6 +2602,7 @@ protected class ObjectRef_1_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prObjectRef().ele10Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ObjectRef_1_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -2551,6 +2631,7 @@ protected class ObjectRef_1_0_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prObjectRef().ele100Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ObjectRef_1_0_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -2579,6 +2660,7 @@ protected class ObjectRef_1_0_0_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prObjectRef().ele1000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ObjectRef_1_0_0_0_1_Alternatives(current, this).firstSolution();
 		while(s1 != null) {
@@ -2618,7 +2700,8 @@ protected class ObjectRef_1_0_0_0_1_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prObjectRef().ele10001Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new ObjectRef_1_0_0_0_1_1_Assignment_assignments(current, this) : new ObjectRef_1_0_0_0_1_0_Assignment_assignments(current, this);
 		Solution s = t.firstSolution();
@@ -2640,6 +2723,7 @@ protected class ObjectRef_1_0_0_0_1_0_Assignment_assignments extends AssignmentT
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prObjectRef().ele100010AssignmentAssignments();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("assignments",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("assignments");
@@ -2671,6 +2755,7 @@ protected class ObjectRef_1_0_0_0_1_1_Assignment_assignments extends AssignmentT
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prObjectRef().ele100011AssignmentAssignments();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("assignments",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("assignments");
@@ -2704,6 +2789,7 @@ protected class ObjectRef_1_0_0_1_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prObjectRef().ele1001Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ObjectRef_1_0_0_1_1_Assignment_leftMig(current, this).firstSolution();
 		while(s1 != null) {
@@ -2744,6 +2830,7 @@ protected class ObjectRef_1_0_0_1_1_Assignment_leftMig extends AssignmentToken  
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prObjectRef().ele10011AssignmentLeftMig();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("leftMig",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("leftMig");
@@ -2777,6 +2864,7 @@ protected class ObjectRef_1_0_1_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prObjectRef().ele101Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ObjectRef_1_0_1_1_Assignment_rightMig(current, this).firstSolution();
 		while(s1 != null) {
@@ -2817,6 +2905,7 @@ protected class ObjectRef_1_0_1_1_Assignment_rightMig extends AssignmentToken  {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prObjectRef().ele1011AssignmentRightMig();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("rightMig",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("rightMig");
@@ -2873,7 +2962,8 @@ protected class Assignment_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prAssignment().eleAlternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new Assignment_1_RuleCall_MonoListAssignment(current, this) : new Assignment_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -2894,7 +2984,8 @@ protected class Assignment_0_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prAssignment().ele0Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new Assignment_0_1_RuleCall_MonoSingleAssignment(current, this) : new Assignment_0_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -2915,7 +3006,8 @@ protected class Assignment_0_0_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prAssignment().ele00Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new Assignment_0_0_1_RuleCall_BiListAssignment(current, this) : new Assignment_0_0_0_RuleCall_BiSingleAssignment(current, this);
 		Solution s = t.firstSolution();
@@ -2937,6 +3029,7 @@ protected class Assignment_0_0_0_RuleCall_BiSingleAssignment extends RuleCallTok
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prAssignment().ele000ParserRuleCallBiSingleAssignment();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(BiSingleAssignment_Group.class, current)) return null;
 		if(!current.isInstanceOf("SingleAssignment")) return null;
@@ -2955,6 +3048,7 @@ protected class Assignment_0_0_1_RuleCall_BiListAssignment extends RuleCallToken
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prAssignment().ele001ParserRuleCallBiListAssignment();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(BiListAssignment_Group.class, current)) return null;
 		if(!current.isInstanceOf("ListAssignment")) return null;
@@ -2974,6 +3068,7 @@ protected class Assignment_0_1_RuleCall_MonoSingleAssignment extends RuleCallTok
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prAssignment().ele01ParserRuleCallMonoSingleAssignment();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(MonoSingleAssignment_Group.class, current)) return null;
 		if(!current.isInstanceOf("SingleAssignment")) return null;
@@ -2993,6 +3088,7 @@ protected class Assignment_1_RuleCall_MonoListAssignment extends RuleCallToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prAssignment().ele1ParserRuleCallMonoListAssignment();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(MonoListAssignment_Group.class, current)) return null;
 		if(!current.isInstanceOf("ListAssignment")) return null;
@@ -3022,6 +3118,7 @@ protected class BiSingleAssignment_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prBiSingleAssignment().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new BiSingleAssignment_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -3050,6 +3147,7 @@ protected class BiSingleAssignment_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prBiSingleAssignment().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new BiSingleAssignment_0_1_Assignment_rightValue(current, this).firstSolution();
 		while(s1 != null) {
@@ -3078,6 +3176,7 @@ protected class BiSingleAssignment_0_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prBiSingleAssignment().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new BiSingleAssignment_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -3106,6 +3205,7 @@ protected class BiSingleAssignment_0_0_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prBiSingleAssignment().ele000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new BiSingleAssignment_0_0_0_1_Assignment_leftValue(current, this).firstSolution();
 		while(s1 != null) {
@@ -3134,6 +3234,7 @@ protected class BiSingleAssignment_0_0_0_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prBiSingleAssignment().ele0000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new BiSingleAssignment_0_0_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -3162,6 +3263,7 @@ protected class BiSingleAssignment_0_0_0_0_0_Assignment_feature extends Assignme
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prBiSingleAssignment().ele00000AssignmentFeature();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("feature",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("feature");
@@ -3198,6 +3300,7 @@ protected class BiSingleAssignment_0_0_0_1_Assignment_leftValue extends Assignme
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prBiSingleAssignment().ele0001AssignmentLeftValue();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("leftValue",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("leftValue");
@@ -3243,6 +3346,7 @@ protected class BiSingleAssignment_0_1_Assignment_rightValue extends AssignmentT
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prBiSingleAssignment().ele01AssignmentRightValue();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("rightValue",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("rightValue");
@@ -3298,6 +3402,7 @@ protected class BiListAssignment_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prBiListAssignment().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new BiListAssignment_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -3326,6 +3431,7 @@ protected class BiListAssignment_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prBiListAssignment().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new BiListAssignment_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -3354,6 +3460,7 @@ protected class BiListAssignment_0_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prBiListAssignment().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new BiListAssignment_0_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -3382,6 +3489,7 @@ protected class BiListAssignment_0_0_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prBiListAssignment().ele000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new BiListAssignment_0_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -3410,6 +3518,7 @@ protected class BiListAssignment_0_0_0_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prBiListAssignment().ele0000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new BiListAssignment_0_0_0_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -3438,6 +3547,7 @@ protected class BiListAssignment_0_0_0_0_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prBiListAssignment().ele00000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new BiListAssignment_0_0_0_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -3466,6 +3576,7 @@ protected class BiListAssignment_0_0_0_0_0_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prBiListAssignment().ele000000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new BiListAssignment_0_0_0_0_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -3494,6 +3605,7 @@ protected class BiListAssignment_0_0_0_0_0_0_0_Assignment_feature extends Assign
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prBiListAssignment().ele0000000AssignmentFeature();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("feature",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("feature");
@@ -3543,6 +3655,7 @@ protected class BiListAssignment_0_0_0_0_1_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prBiListAssignment().ele00001Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new BiListAssignment_0_0_0_0_1_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -3571,6 +3684,7 @@ protected class BiListAssignment_0_0_0_0_1_0_Assignment_leftValues extends Assig
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prBiListAssignment().ele000010AssignmentLeftValues();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("leftValues",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("leftValues");
@@ -3602,6 +3716,7 @@ protected class BiListAssignment_0_0_0_0_1_1_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prBiListAssignment().ele000011Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new BiListAssignment_0_0_0_0_1_1_1_Assignment_leftValues(current, this).firstSolution();
 		while(s1 != null) {
@@ -3642,6 +3757,7 @@ protected class BiListAssignment_0_0_0_0_1_1_1_Assignment_leftValues extends Ass
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prBiListAssignment().ele0000111AssignmentLeftValues();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("leftValues",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("leftValues");
@@ -3689,6 +3805,7 @@ protected class BiListAssignment_0_0_1_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prBiListAssignment().ele001Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new BiListAssignment_0_0_1_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -3717,6 +3834,7 @@ protected class BiListAssignment_0_0_1_0_Assignment_rightValues extends Assignme
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prBiListAssignment().ele0010AssignmentRightValues();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("rightValues",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("rightValues");
@@ -3748,6 +3866,7 @@ protected class BiListAssignment_0_0_1_1_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prBiListAssignment().ele0011Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new BiListAssignment_0_0_1_1_1_Assignment_rightValues(current, this).firstSolution();
 		while(s1 != null) {
@@ -3788,6 +3907,7 @@ protected class BiListAssignment_0_0_1_1_1_Assignment_rightValues extends Assign
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prBiListAssignment().ele00111AssignmentRightValues();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("rightValues",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("rightValues");
@@ -3858,6 +3978,7 @@ protected class MonoSingleAssignment_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prMonoSingleAssignment().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new MonoSingleAssignment_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -3886,6 +4007,7 @@ protected class MonoSingleAssignment_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prMonoSingleAssignment().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new MonoSingleAssignment_0_1_Assignment_leftValue(current, this).firstSolution();
 		while(s1 != null) {
@@ -3914,6 +4036,7 @@ protected class MonoSingleAssignment_0_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prMonoSingleAssignment().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new MonoSingleAssignment_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -3942,6 +4065,7 @@ protected class MonoSingleAssignment_0_0_0_Assignment_feature extends Assignment
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prMonoSingleAssignment().ele000AssignmentFeature();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("feature",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("feature");
@@ -3978,6 +4102,7 @@ protected class MonoSingleAssignment_0_1_Assignment_leftValue extends Assignment
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prMonoSingleAssignment().ele01AssignmentLeftValue();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("leftValue",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("leftValue");
@@ -4033,6 +4158,7 @@ protected class MonoListAssignment_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prMonoListAssignment().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new MonoListAssignment_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -4061,6 +4187,7 @@ protected class MonoListAssignment_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prMonoListAssignment().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new MonoListAssignment_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -4089,6 +4216,7 @@ protected class MonoListAssignment_0_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prMonoListAssignment().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new MonoListAssignment_0_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -4117,6 +4245,7 @@ protected class MonoListAssignment_0_0_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prMonoListAssignment().ele000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new MonoListAssignment_0_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -4145,6 +4274,7 @@ protected class MonoListAssignment_0_0_0_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prMonoListAssignment().ele0000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new MonoListAssignment_0_0_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -4173,6 +4303,7 @@ protected class MonoListAssignment_0_0_0_0_0_Assignment_feature extends Assignme
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prMonoListAssignment().ele00000AssignmentFeature();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("feature",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("feature");
@@ -4222,6 +4353,7 @@ protected class MonoListAssignment_0_0_1_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prMonoListAssignment().ele001Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new MonoListAssignment_0_0_1_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -4250,6 +4382,7 @@ protected class MonoListAssignment_0_0_1_0_Assignment_leftValues extends Assignm
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prMonoListAssignment().ele0010AssignmentLeftValues();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("leftValues",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("leftValues");
@@ -4281,6 +4414,7 @@ protected class MonoListAssignment_0_0_1_1_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prMonoListAssignment().ele0011Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new MonoListAssignment_0_0_1_1_1_Assignment_leftValues(current, this).firstSolution();
 		while(s1 != null) {
@@ -4321,6 +4455,7 @@ protected class MonoListAssignment_0_0_1_1_1_Assignment_leftValues extends Assig
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prMonoListAssignment().ele00111AssignmentLeftValues();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("leftValues",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("leftValues");
@@ -4390,7 +4525,8 @@ protected class AssignmentValue_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prAssignmentValue().eleAlternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new AssignmentValue_1_Group(current, this) : new AssignmentValue_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -4411,7 +4547,8 @@ protected class AssignmentValue_0_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prAssignmentValue().ele0Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new AssignmentValue_0_1_Assignment_newObject(current, this) : new AssignmentValue_0_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -4432,7 +4569,8 @@ protected class AssignmentValue_0_0_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prAssignmentValue().ele00Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new AssignmentValue_0_0_1_Group(current, this) : new AssignmentValue_0_0_0_Assignment_value(current, this);
 		Solution s = t.firstSolution();
@@ -4454,6 +4592,7 @@ protected class AssignmentValue_0_0_0_Assignment_value extends AssignmentToken  
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prAssignmentValue().ele000AssignmentValue();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("value",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
@@ -4477,6 +4616,7 @@ protected class AssignmentValue_0_0_1_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prAssignmentValue().ele001Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new AssignmentValue_0_0_1_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -4505,6 +4645,7 @@ protected class AssignmentValue_0_0_1_0_Assignment_refObject extends AssignmentT
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prAssignmentValue().ele0010AssignmentRefObject();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("refObject",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("refObject");
@@ -4531,6 +4672,7 @@ protected class AssignmentValue_0_0_1_1_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prAssignmentValue().ele0011Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new AssignmentValue_0_0_1_1_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -4559,6 +4701,7 @@ protected class AssignmentValue_0_0_1_1_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prAssignmentValue().ele00110Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new AssignmentValue_0_0_1_1_0_1_Assignment_refFeature(current, this).firstSolution();
 		while(s1 != null) {
@@ -4599,6 +4742,7 @@ protected class AssignmentValue_0_0_1_1_0_1_Assignment_refFeature extends Assign
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prAssignmentValue().ele001101AssignmentRefFeature();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("refFeature",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("refFeature");
@@ -4623,6 +4767,7 @@ protected class AssignmentValue_0_0_1_1_1_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prAssignmentValue().ele00111Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new AssignmentValue_0_0_1_1_1_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -4651,6 +4796,7 @@ protected class AssignmentValue_0_0_1_1_1_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prAssignmentValue().ele001110Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new AssignmentValue_0_0_1_1_1_0_1_Assignment_refIndex(current, this).firstSolution();
 		while(s1 != null) {
@@ -4691,6 +4837,7 @@ protected class AssignmentValue_0_0_1_1_1_0_1_Assignment_refIndex extends Assign
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prAssignmentValue().ele0011101AssignmentRefIndex();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("refIndex",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("refIndex");
@@ -4731,6 +4878,7 @@ protected class AssignmentValue_0_1_Assignment_newObject extends AssignmentToken
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prAssignmentValue().ele01AssignmentNewObject();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("newObject",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("newObject");
@@ -4763,6 +4911,7 @@ protected class AssignmentValue_1_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prAssignmentValue().ele1Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new AssignmentValue_1_1_Assignment_impFrag(current, this).firstSolution();
 		while(s1 != null) {
@@ -4791,6 +4940,7 @@ protected class AssignmentValue_1_0_Assignment_import extends AssignmentToken  {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prAssignmentValue().ele10AssignmentImport();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("import",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("import");
@@ -4817,6 +4967,7 @@ protected class AssignmentValue_1_1_Assignment_impFrag extends AssignmentToken  
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prAssignmentValue().ele11AssignmentImpFrag();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("impFrag",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("impFrag");
@@ -4852,6 +5003,7 @@ protected class ListAssignmentValue_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prListAssignmentValue().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ListAssignmentValue_1_Alternatives(current, this).firstSolution();
 		while(s1 != null) {
@@ -4880,6 +5032,7 @@ protected class ListAssignmentValue_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prListAssignmentValue().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ListAssignmentValue_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -4908,6 +5061,7 @@ protected class ListAssignmentValue_0_0_Assignment_index extends AssignmentToken
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prListAssignmentValue().ele00AssignmentIndex();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("index",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("index");
@@ -4943,7 +5097,8 @@ protected class ListAssignmentValue_1_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prListAssignmentValue().ele1Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new ListAssignmentValue_1_1_Group(current, this) : new ListAssignmentValue_1_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -4964,7 +5119,8 @@ protected class ListAssignmentValue_1_0_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prListAssignmentValue().ele10Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new ListAssignmentValue_1_0_1_Assignment_newObject(current, this) : new ListAssignmentValue_1_0_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -4985,7 +5141,8 @@ protected class ListAssignmentValue_1_0_0_Alternatives extends AlternativesToken
 	public Alternatives getGrammarElement() {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prListAssignmentValue().ele100Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new ListAssignmentValue_1_0_0_1_Group(current, this) : new ListAssignmentValue_1_0_0_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -5006,7 +5163,8 @@ protected class ListAssignmentValue_1_0_0_0_Alternatives extends AlternativesTok
 	public Alternatives getGrammarElement() {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prListAssignmentValue().ele1000Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new ListAssignmentValue_1_0_0_0_1_Assignment_value(current, this) : new ListAssignmentValue_1_0_0_0_0_Group(current, this);
 		Solution s = t.firstSolution();
@@ -5028,6 +5186,7 @@ protected class ListAssignmentValue_1_0_0_0_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prListAssignmentValue().ele10000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ListAssignmentValue_1_0_0_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -5056,6 +5215,7 @@ protected class ListAssignmentValue_1_0_0_0_0_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prListAssignmentValue().ele100000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ListAssignmentValue_1_0_0_0_0_0_1_Assignment_refIndex(current, this).firstSolution();
 		while(s1 != null) {
@@ -5096,6 +5256,7 @@ protected class ListAssignmentValue_1_0_0_0_0_0_1_Assignment_refIndex extends As
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prListAssignmentValue().ele1000001AssignmentRefIndex();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("refIndex",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("refIndex");
@@ -5133,6 +5294,7 @@ protected class ListAssignmentValue_1_0_0_0_1_Assignment_value extends Assignmen
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prListAssignmentValue().ele10001AssignmentValue();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("value",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
@@ -5157,6 +5319,7 @@ protected class ListAssignmentValue_1_0_0_1_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prListAssignmentValue().ele1001Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ListAssignmentValue_1_0_0_1_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -5185,6 +5348,7 @@ protected class ListAssignmentValue_1_0_0_1_0_Assignment_refObject extends Assig
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prListAssignmentValue().ele10010AssignmentRefObject();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("refObject",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("refObject");
@@ -5211,6 +5375,7 @@ protected class ListAssignmentValue_1_0_0_1_1_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prListAssignmentValue().ele10011Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ListAssignmentValue_1_0_0_1_1_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -5239,6 +5404,7 @@ protected class ListAssignmentValue_1_0_0_1_1_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prListAssignmentValue().ele100110Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ListAssignmentValue_1_0_0_1_1_0_1_Assignment_refFeature(current, this).firstSolution();
 		while(s1 != null) {
@@ -5279,6 +5445,7 @@ protected class ListAssignmentValue_1_0_0_1_1_0_1_Assignment_refFeature extends 
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prListAssignmentValue().ele1001101AssignmentRefFeature();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("refFeature",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("refFeature");
@@ -5303,6 +5470,7 @@ protected class ListAssignmentValue_1_0_0_1_1_1_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prListAssignmentValue().ele100111Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ListAssignmentValue_1_0_0_1_1_1_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -5331,6 +5499,7 @@ protected class ListAssignmentValue_1_0_0_1_1_1_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prListAssignmentValue().ele1001110Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ListAssignmentValue_1_0_0_1_1_1_0_1_Assignment_refIndex(current, this).firstSolution();
 		while(s1 != null) {
@@ -5371,6 +5540,7 @@ protected class ListAssignmentValue_1_0_0_1_1_1_0_1_Assignment_refIndex extends 
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prListAssignmentValue().ele10011101AssignmentRefIndex();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("refIndex",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("refIndex");
@@ -5411,6 +5581,7 @@ protected class ListAssignmentValue_1_0_1_Assignment_newObject extends Assignmen
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prListAssignmentValue().ele101AssignmentNewObject();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("newObject",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("newObject");
@@ -5443,6 +5614,7 @@ protected class ListAssignmentValue_1_1_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prListAssignmentValue().ele11Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ListAssignmentValue_1_1_1_Assignment_impFrag(current, this).firstSolution();
 		while(s1 != null) {
@@ -5471,6 +5643,7 @@ protected class ListAssignmentValue_1_1_0_Assignment_import extends AssignmentTo
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prListAssignmentValue().ele110AssignmentImport();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("import",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("import");
@@ -5497,6 +5670,7 @@ protected class ListAssignmentValue_1_1_1_Assignment_impFrag extends AssignmentT
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prListAssignmentValue().ele111AssignmentImpFrag();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("impFrag",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("impFrag");
@@ -5532,7 +5706,8 @@ protected class SingleAssignmentValue_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prSingleAssignmentValue().eleAlternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new SingleAssignmentValue_1_Group(current, this) : new SingleAssignmentValue_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -5553,7 +5728,8 @@ protected class SingleAssignmentValue_0_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prSingleAssignmentValue().ele0Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new SingleAssignmentValue_0_1_Assignment_newObject(current, this) : new SingleAssignmentValue_0_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -5574,7 +5750,8 @@ protected class SingleAssignmentValue_0_0_Alternatives extends AlternativesToken
 	public Alternatives getGrammarElement() {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prSingleAssignmentValue().ele00Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new SingleAssignmentValue_0_0_1_Group(current, this) : new SingleAssignmentValue_0_0_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -5595,7 +5772,8 @@ protected class SingleAssignmentValue_0_0_0_Alternatives extends AlternativesTok
 	public Alternatives getGrammarElement() {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prSingleAssignmentValue().ele000Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new SingleAssignmentValue_0_0_0_1_Assignment_value(current, this) : new SingleAssignmentValue_0_0_0_0_Assignment_keyword(current, this);
 		Solution s = t.firstSolution();
@@ -5617,6 +5795,7 @@ protected class SingleAssignmentValue_0_0_0_0_Assignment_keyword extends Assignm
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prSingleAssignmentValue().ele0000AssignmentKeyword();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("keyword",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("keyword");
@@ -5642,6 +5821,7 @@ protected class SingleAssignmentValue_0_0_0_1_Assignment_value extends Assignmen
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prSingleAssignmentValue().ele0001AssignmentValue();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("value",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
@@ -5666,6 +5846,7 @@ protected class SingleAssignmentValue_0_0_1_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prSingleAssignmentValue().ele001Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new SingleAssignmentValue_0_0_1_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -5694,6 +5875,7 @@ protected class SingleAssignmentValue_0_0_1_0_Assignment_refObject extends Assig
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prSingleAssignmentValue().ele0010AssignmentRefObject();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("refObject",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("refObject");
@@ -5720,6 +5902,7 @@ protected class SingleAssignmentValue_0_0_1_1_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prSingleAssignmentValue().ele0011Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new SingleAssignmentValue_0_0_1_1_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -5748,6 +5931,7 @@ protected class SingleAssignmentValue_0_0_1_1_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prSingleAssignmentValue().ele00110Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new SingleAssignmentValue_0_0_1_1_0_1_Assignment_refFeature(current, this).firstSolution();
 		while(s1 != null) {
@@ -5788,6 +5972,7 @@ protected class SingleAssignmentValue_0_0_1_1_0_1_Assignment_refFeature extends 
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prSingleAssignmentValue().ele001101AssignmentRefFeature();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("refFeature",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("refFeature");
@@ -5812,6 +5997,7 @@ protected class SingleAssignmentValue_0_0_1_1_1_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prSingleAssignmentValue().ele00111Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new SingleAssignmentValue_0_0_1_1_1_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -5840,6 +6026,7 @@ protected class SingleAssignmentValue_0_0_1_1_1_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prSingleAssignmentValue().ele001110Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new SingleAssignmentValue_0_0_1_1_1_0_1_Assignment_refIndex(current, this).firstSolution();
 		while(s1 != null) {
@@ -5880,6 +6067,7 @@ protected class SingleAssignmentValue_0_0_1_1_1_0_1_Assignment_refIndex extends 
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prSingleAssignmentValue().ele0011101AssignmentRefIndex();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("refIndex",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("refIndex");
@@ -5920,6 +6108,7 @@ protected class SingleAssignmentValue_0_1_Assignment_newObject extends Assignmen
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prSingleAssignmentValue().ele01AssignmentNewObject();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("newObject",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("newObject");
@@ -5952,6 +6141,7 @@ protected class SingleAssignmentValue_1_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prSingleAssignmentValue().ele1Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new SingleAssignmentValue_1_1_Assignment_impFrag(current, this).firstSolution();
 		while(s1 != null) {
@@ -5980,6 +6170,7 @@ protected class SingleAssignmentValue_1_0_Assignment_import extends AssignmentTo
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prSingleAssignmentValue().ele10AssignmentImport();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("import",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("import");
@@ -6006,6 +6197,7 @@ protected class SingleAssignmentValue_1_1_Assignment_impFrag extends AssignmentT
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prSingleAssignmentValue().ele11AssignmentImpFrag();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("impFrag",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("impFrag");
@@ -6041,6 +6233,7 @@ protected class CreatedObject_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prCreatedObject().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new CreatedObject_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -6069,6 +6262,7 @@ protected class CreatedObject_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prCreatedObject().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new CreatedObject_0_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
@@ -6096,7 +6290,8 @@ protected class CreatedObject_0_0_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prCreatedObject().ele00Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new CreatedObject_0_0_1_RuleCall_ObjectCopy(current, this) : new CreatedObject_0_0_0_RuleCall_ObjectNew(current, this);
 		Solution s = t.firstSolution();
@@ -6118,6 +6313,7 @@ protected class CreatedObject_0_0_0_RuleCall_ObjectNew extends RuleCallToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prCreatedObject().ele000ParserRuleCallObjectNew();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(ObjectNew_Group.class, current)) return null;
 		if(!current.isInstanceOf("ObjectNew")) return null;
@@ -6136,6 +6332,7 @@ protected class CreatedObject_0_0_1_RuleCall_ObjectCopy extends RuleCallToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prCreatedObject().ele001ParserRuleCallObjectCopy();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(ObjectCopy_Group.class, current)) return null;
 		if(!current.isInstanceOf("ObjectCopy")) return null;
@@ -6155,6 +6352,7 @@ protected class CreatedObject_0_1_Assignment_name extends AssignmentToken  {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prCreatedObject().ele01AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -6179,6 +6377,7 @@ protected class CreatedObject_1_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prCreatedObject().ele1Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new CreatedObject_1_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -6207,6 +6406,7 @@ protected class CreatedObject_1_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prCreatedObject().ele10Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new CreatedObject_1_0_1_Assignment_leftMig(current, this).firstSolution();
 		while(s1 != null) {
@@ -6235,6 +6435,7 @@ protected class CreatedObject_1_0_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prCreatedObject().ele100Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new CreatedObject_1_0_0_1_Alternatives(current, this).firstSolution();
 		while(s1 != null) {
@@ -6274,7 +6475,8 @@ protected class CreatedObject_1_0_0_1_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prCreatedObject().ele1001Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new CreatedObject_1_0_0_1_1_Assignment_assignments(current, this) : new CreatedObject_1_0_0_1_0_Assignment_assignments(current, this);
 		Solution s = t.firstSolution();
@@ -6296,6 +6498,7 @@ protected class CreatedObject_1_0_0_1_0_Assignment_assignments extends Assignmen
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prCreatedObject().ele10010AssignmentAssignments();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("assignments",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("assignments");
@@ -6327,6 +6530,7 @@ protected class CreatedObject_1_0_0_1_1_Assignment_assignments extends Assignmen
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prCreatedObject().ele10011AssignmentAssignments();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("assignments",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("assignments");
@@ -6360,6 +6564,7 @@ protected class CreatedObject_1_0_1_Assignment_leftMig extends AssignmentToken  
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prCreatedObject().ele101AssignmentLeftMig();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("leftMig",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("leftMig");
@@ -6416,6 +6621,7 @@ protected class ObjectNew_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prObjectNew().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ObjectNew_1_Assignment_impFrag(current, this).firstSolution();
 		while(s1 != null) {
@@ -6444,6 +6650,7 @@ protected class ObjectNew_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prObjectNew().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ObjectNew_0_1_Assignment_import(current, this).firstSolution();
 		while(s1 != null) {
@@ -6484,6 +6691,7 @@ protected class ObjectNew_0_1_Assignment_import extends AssignmentToken  {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prObjectNew().ele01AssignmentImport();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("import",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("import");
@@ -6511,6 +6719,7 @@ protected class ObjectNew_1_Assignment_impFrag extends AssignmentToken  {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prObjectNew().ele1AssignmentImpFrag();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("impFrag",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("impFrag");
@@ -6545,6 +6754,7 @@ protected class ObjectCopy_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prObjectCopy().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ObjectCopy_1_Assignment_fragment(current, this).firstSolution();
 		while(s1 != null) {
@@ -6573,6 +6783,7 @@ protected class ObjectCopy_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prObjectCopy().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ObjectCopy_0_1_Assignment_resource(current, this).firstSolution();
 		while(s1 != null) {
@@ -6613,6 +6824,7 @@ protected class ObjectCopy_0_1_Assignment_resource extends AssignmentToken  {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prObjectCopy().ele01AssignmentResource();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("resource",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("resource");
@@ -6640,6 +6852,7 @@ protected class ObjectCopy_1_Assignment_fragment extends AssignmentToken  {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prObjectCopy().ele1AssignmentFragment();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("fragment",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("fragment");
@@ -6674,6 +6887,7 @@ protected class Migration_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prMigration().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Migration_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -6702,6 +6916,7 @@ protected class Migration_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prMigration().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Migration_0_1_Alternatives(current, this).firstSolution();
 		while(s1 != null) {
@@ -6730,6 +6945,7 @@ protected class Migration_0_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prMigration().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Migration_0_0_1_Assignment_first(current, this).firstSolution();
 		while(s1 != null) {
@@ -6770,6 +6986,7 @@ protected class Migration_0_0_1_Assignment_first extends AssignmentToken  {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prMigration().ele001AssignmentFirst();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("first",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("first");
@@ -6801,7 +7018,8 @@ protected class Migration_0_1_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prMigration().ele01Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new Migration_0_1_1_Group(current, this) : new Migration_0_1_0_Group(current, this);
 		Solution s = t.firstSolution();
@@ -6823,6 +7041,7 @@ protected class Migration_0_1_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prMigration().ele010Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Migration_0_1_0_1_Assignment_asOp(current, this).firstSolution();
 		while(s1 != null) {
@@ -6863,6 +7082,7 @@ protected class Migration_0_1_0_1_Assignment_asOp extends AssignmentToken  {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prMigration().ele0101AssignmentAsOp();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("asOp",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("asOp");
@@ -6895,6 +7115,7 @@ protected class Migration_0_1_1_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prMigration().ele011Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Migration_0_1_1_1_Assignment_eachOp(current, this).firstSolution();
 		while(s1 != null) {
@@ -6935,6 +7156,7 @@ protected class Migration_0_1_1_1_Assignment_eachOp extends AssignmentToken  {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prMigration().ele0111AssignmentEachOp();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("eachOp",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("eachOp");
@@ -6991,7 +7213,8 @@ protected class Executable_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prExecutable().eleAlternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new Executable_1_RuleCall_ExpressionExecutable(current, this) : new Executable_0_RuleCall_JavaExecutable(current, this);
 		Solution s = t.firstSolution();
@@ -7013,6 +7236,7 @@ protected class Executable_0_RuleCall_JavaExecutable extends RuleCallToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prExecutable().ele0ParserRuleCallJavaExecutable();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(JavaExecutable_Group.class, current)) return null;
 		if(!current.isInstanceOf("JavaExecutable")) return null;
@@ -7031,6 +7255,7 @@ protected class Executable_1_RuleCall_ExpressionExecutable extends RuleCallToken
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prExecutable().ele1ParserRuleCallExpressionExecutable();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(ExpressionExecutable_Assignment_exprstr.class, current)) return null;
 		if(!current.isInstanceOf("ExpressionExecutable")) return null;
@@ -7060,6 +7285,7 @@ protected class JavaExecutable_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prJavaExecutable().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new JavaExecutable_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -7088,6 +7314,7 @@ protected class JavaExecutable_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prJavaExecutable().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new JavaExecutable_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -7116,6 +7343,7 @@ protected class JavaExecutable_0_0_Group extends GroupToken {
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prJavaExecutable().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new JavaExecutable_0_0_1_Assignment_method(current, this).firstSolution();
 		while(s1 != null) {
@@ -7156,6 +7384,7 @@ protected class JavaExecutable_0_0_1_Assignment_method extends AssignmentToken  
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prJavaExecutable().ele001AssignmentMethod();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("method",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("method");
@@ -7216,6 +7445,7 @@ protected class ExpressionExecutable_Assignment_exprstr extends AssignmentToken 
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prExpressionExecutable().eleAssignmentExprstr();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("exprstr",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("exprstr");

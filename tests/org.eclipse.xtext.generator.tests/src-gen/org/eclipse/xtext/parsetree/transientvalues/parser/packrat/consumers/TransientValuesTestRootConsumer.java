@@ -6,6 +6,7 @@ package org.eclipse.xtext.parsetree.transientvalues.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -22,9 +23,9 @@ import org.eclipse.xtext.parsetree.transientvalues.parser.packrat.consumers.Tran
 @SuppressWarnings("unused")
 public final class TransientValuesTestRootConsumer extends NonTerminalConsumer {
 
-	private TransientValuesTestTestListConsumer testListConsumer;
-	private TransientValuesTestTestOptionalConsumer testOptionalConsumer;
-	private TransientValuesTestTestRequiredConsumer testRequiredConsumer;
+	private INonTerminalConsumer testListConsumer;
+	private INonTerminalConsumer testOptionalConsumer;
+	private INonTerminalConsumer testRequiredConsumer;
 
 	private ICharacterClass keyword$2$Delimiter;
 	
@@ -113,6 +114,7 @@ public final class TransientValuesTestRootConsumer extends NonTerminalConsumer {
 		return TransientValuesTestGrammarAccess.INSTANCE.prRoot();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -122,15 +124,15 @@ public final class TransientValuesTestRootConsumer extends NonTerminalConsumer {
 		return "Root";
 	}
 	
-	public void setTestListConsumer(TransientValuesTestTestListConsumer testListConsumer) {
+	public void setTestListConsumer(INonTerminalConsumer testListConsumer) {
 		this.testListConsumer = testListConsumer;
 	}
 	
-	public void setTestOptionalConsumer(TransientValuesTestTestOptionalConsumer testOptionalConsumer) {
+	public void setTestOptionalConsumer(INonTerminalConsumer testOptionalConsumer) {
 		this.testOptionalConsumer = testOptionalConsumer;
 	}
 	
-	public void setTestRequiredConsumer(TransientValuesTestTestRequiredConsumer testRequiredConsumer) {
+	public void setTestRequiredConsumer(INonTerminalConsumer testRequiredConsumer) {
 		this.testRequiredConsumer = testRequiredConsumer;
 	}
 	

@@ -6,6 +6,7 @@ package org.eclipse.xtext.grammarinheritance.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -20,7 +21,7 @@ import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.AbstractTes
 @SuppressWarnings("unused")
 public final class AbstractTestLanguageOverridableParserRuleConsumer extends NonTerminalConsumer {
 
-	private AbstractTestLanguageIDConsumer idConsumer;
+	private ITerminalConsumer idConsumer;
 
 	private ICharacterClass keyword$2$Delimiter;
 	
@@ -90,6 +91,7 @@ public final class AbstractTestLanguageOverridableParserRuleConsumer extends Non
 		return AbstractTestLanguageGrammarAccess.INSTANCE.prOverridableParserRule();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -99,7 +101,7 @@ public final class AbstractTestLanguageOverridableParserRuleConsumer extends Non
 		return "AType";
 	}
 	
-	public void setIdConsumer(AbstractTestLanguageIDConsumer idConsumer) {
+	public void setIdConsumer(ITerminalConsumer idConsumer) {
 		this.idConsumer = idConsumer;
 	}
 	

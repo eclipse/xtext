@@ -6,6 +6,7 @@ package org.eclipse.xtext.example.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -21,8 +22,8 @@ import org.eclipse.xtext.example.parser.packrat.consumers.DomainmodelTypeRefCons
 @SuppressWarnings("unused")
 public final class DomainmodelReferenceConsumer extends NonTerminalConsumer {
 
-	private XtextBuiltinIDConsumer idConsumer;
-	private DomainmodelTypeRefConsumer typeRefConsumer;
+	private ITerminalConsumer idConsumer;
+	private INonTerminalConsumer typeRefConsumer;
 
 	private ISequenceMatcher crossReference$14$Delimiter;
 	
@@ -205,6 +206,7 @@ public final class DomainmodelReferenceConsumer extends NonTerminalConsumer {
 		return DomainmodelGrammarAccess.INSTANCE.prReference();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -214,11 +216,11 @@ public final class DomainmodelReferenceConsumer extends NonTerminalConsumer {
 		return "Reference";
 	}
 	
-	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
+	public void setIdConsumer(ITerminalConsumer idConsumer) {
 		this.idConsumer = idConsumer;
 	}
 	
-	public void setTypeRefConsumer(DomainmodelTypeRefConsumer typeRefConsumer) {
+	public void setTypeRefConsumer(INonTerminalConsumer typeRefConsumer) {
 		this.typeRefConsumer = typeRefConsumer;
 	}
 	

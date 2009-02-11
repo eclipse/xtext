@@ -6,6 +6,7 @@ package org.eclipse.xtext.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -23,10 +24,10 @@ import org.eclipse.xtext.parser.packrat.consumers.XtextRuleCallConsumer;
 @SuppressWarnings("unused")
 public final class XtextAbstractTerminalConsumer extends NonTerminalConsumer {
 
-	private XtextCrossReferenceConsumer crossReferenceConsumer;
-	private XtextKeywordConsumer keywordConsumer;
-	private XtextParenthesizedElementConsumer parenthesizedElementConsumer;
-	private XtextRuleCallConsumer ruleCallConsumer;
+	private INonTerminalConsumer crossReferenceConsumer;
+	private INonTerminalConsumer keywordConsumer;
+	private INonTerminalConsumer parenthesizedElementConsumer;
+	private INonTerminalConsumer ruleCallConsumer;
 
 	public XtextAbstractTerminalConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
@@ -86,6 +87,7 @@ public final class XtextAbstractTerminalConsumer extends NonTerminalConsumer {
 		return XtextGrammarAccess.INSTANCE.prAbstractTerminal();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -95,19 +97,19 @@ public final class XtextAbstractTerminalConsumer extends NonTerminalConsumer {
 		return "AbstractElement";
 	}
 	
-	public void setCrossReferenceConsumer(XtextCrossReferenceConsumer crossReferenceConsumer) {
+	public void setCrossReferenceConsumer(INonTerminalConsumer crossReferenceConsumer) {
 		this.crossReferenceConsumer = crossReferenceConsumer;
 	}
 	
-	public void setKeywordConsumer(XtextKeywordConsumer keywordConsumer) {
+	public void setKeywordConsumer(INonTerminalConsumer keywordConsumer) {
 		this.keywordConsumer = keywordConsumer;
 	}
 	
-	public void setParenthesizedElementConsumer(XtextParenthesizedElementConsumer parenthesizedElementConsumer) {
+	public void setParenthesizedElementConsumer(INonTerminalConsumer parenthesizedElementConsumer) {
 		this.parenthesizedElementConsumer = parenthesizedElementConsumer;
 	}
 	
-	public void setRuleCallConsumer(XtextRuleCallConsumer ruleCallConsumer) {
+	public void setRuleCallConsumer(INonTerminalConsumer ruleCallConsumer) {
 		this.ruleCallConsumer = ruleCallConsumer;
 	}
 	

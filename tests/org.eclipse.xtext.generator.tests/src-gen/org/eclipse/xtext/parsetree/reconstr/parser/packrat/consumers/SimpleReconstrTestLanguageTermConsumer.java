@@ -6,6 +6,7 @@ package org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -27,14 +28,14 @@ import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleRecon
 @SuppressWarnings("unused")
 public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalConsumer {
 
-	private SimpleReconstrTestLanguageAtomConsumer atomConsumer;
-	private SimpleReconstrTestLanguageBooleanConsumer booleanConsumer;
-	private SimpleReconstrTestLanguageManyStringsConsumer manyStringsConsumer;
-	private SimpleReconstrTestLanguageParensConsumer parensConsumer;
-	private SimpleReconstrTestLanguageRef2Consumer ref2Consumer;
-	private SimpleReconstrTestLanguageSpareConsumer spareConsumer;
-	private SimpleReconstrTestLanguageTwoNumbersConsumer twoNumbersConsumer;
-	private SimpleReconstrTestLanguageTypeConsumer typeConsumer;
+	private INonTerminalConsumer atomConsumer;
+	private INonTerminalConsumer booleanConsumer;
+	private INonTerminalConsumer manyStringsConsumer;
+	private INonTerminalConsumer parensConsumer;
+	private INonTerminalConsumer ref2Consumer;
+	private INonTerminalConsumer spareConsumer;
+	private INonTerminalConsumer twoNumbersConsumer;
+	private INonTerminalConsumer typeConsumer;
 
 	public SimpleReconstrTestLanguageTermConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
@@ -130,6 +131,7 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prTerm();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -139,35 +141,35 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 		return "Expression";
 	}
 	
-	public void setAtomConsumer(SimpleReconstrTestLanguageAtomConsumer atomConsumer) {
+	public void setAtomConsumer(INonTerminalConsumer atomConsumer) {
 		this.atomConsumer = atomConsumer;
 	}
 	
-	public void setBooleanConsumer(SimpleReconstrTestLanguageBooleanConsumer booleanConsumer) {
+	public void setBooleanConsumer(INonTerminalConsumer booleanConsumer) {
 		this.booleanConsumer = booleanConsumer;
 	}
 	
-	public void setManyStringsConsumer(SimpleReconstrTestLanguageManyStringsConsumer manyStringsConsumer) {
+	public void setManyStringsConsumer(INonTerminalConsumer manyStringsConsumer) {
 		this.manyStringsConsumer = manyStringsConsumer;
 	}
 	
-	public void setParensConsumer(SimpleReconstrTestLanguageParensConsumer parensConsumer) {
+	public void setParensConsumer(INonTerminalConsumer parensConsumer) {
 		this.parensConsumer = parensConsumer;
 	}
 	
-	public void setRef2Consumer(SimpleReconstrTestLanguageRef2Consumer ref2Consumer) {
+	public void setRef2Consumer(INonTerminalConsumer ref2Consumer) {
 		this.ref2Consumer = ref2Consumer;
 	}
 	
-	public void setSpareConsumer(SimpleReconstrTestLanguageSpareConsumer spareConsumer) {
+	public void setSpareConsumer(INonTerminalConsumer spareConsumer) {
 		this.spareConsumer = spareConsumer;
 	}
 	
-	public void setTwoNumbersConsumer(SimpleReconstrTestLanguageTwoNumbersConsumer twoNumbersConsumer) {
+	public void setTwoNumbersConsumer(INonTerminalConsumer twoNumbersConsumer) {
 		this.twoNumbersConsumer = twoNumbersConsumer;
 	}
 	
-	public void setTypeConsumer(SimpleReconstrTestLanguageTypeConsumer typeConsumer) {
+	public void setTypeConsumer(INonTerminalConsumer typeConsumer) {
 		this.typeConsumer = typeConsumer;
 	}
 	

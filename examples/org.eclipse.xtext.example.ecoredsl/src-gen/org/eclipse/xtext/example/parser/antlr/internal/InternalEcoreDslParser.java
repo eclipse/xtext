@@ -74,7 +74,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:68:50: (iv_ruleEcoreDsl= ruleEcoreDsl EOF )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:69:2: iv_ruleEcoreDsl= ruleEcoreDsl EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.0" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleEcoreDsl_in_entryRuleEcoreDsl72);
             iv_ruleEcoreDsl=ruleEcoreDsl();
             _fsp--;
@@ -132,7 +132,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:84:6: lv_imports= ruleImportStatementDecl
             	    {
             	     
-            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.0/@alternatives/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
+            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.0/@alternatives/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleImportStatementDecl_in_ruleEcoreDsl141);
             	    lv_imports=ruleImportStatementDecl();
@@ -164,7 +164,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:105:6: lv_package= ruleEPackageDecl
             {
              
-            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.0/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.0/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
             	    
             pushFollow(FOLLOW_ruleEPackageDecl_in_ruleEcoreDsl180);
             lv_package=ruleEPackageDecl();
@@ -219,7 +219,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:132:61: (iv_ruleImportStatementDecl= ruleImportStatementDecl EOF )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:133:2: iv_ruleImportStatementDecl= ruleImportStatementDecl EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.1" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.1" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleImportStatementDecl_in_entryRuleImportStatementDecl219);
             iv_ruleImportStatementDecl=ruleImportStatementDecl();
             _fsp--;
@@ -267,7 +267,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             {
             match(input,11,FOLLOW_11_in_ruleImportStatementDecl265); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:149:1: ( (lv_alias= RULE_ID ) '=' )?
             int alt2=2;
@@ -286,7 +286,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     lv_alias=(Token)input.LT(1);
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleImportStatementDecl287); 
                      
-                        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@terminal" /* xtext::RuleCall */, "alias"); 
+                        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@terminal" /* xtext::RuleCall */, "alias"); 
                         
 
                     	        if (current==null) {
@@ -305,7 +305,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                     match(input,12,FOLLOW_12_in_ruleImportStatementDecl307); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
                         
 
                     }
@@ -322,7 +322,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             lv_importURI=(Token)input.LT(1);
             match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleImportStatementDecl331); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "importURI"); 
+                createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "importURI"); 
                 
 
             	        if (current==null) {
@@ -344,7 +344,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             match(input,13,FOLLOW_13_in_ruleImportStatementDecl352); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.1/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.1/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -379,7 +379,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:206:54: (iv_ruleEPackageDecl= ruleEPackageDecl EOF )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:207:2: iv_ruleEPackageDecl= ruleEPackageDecl EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.2" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.2" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleEPackageDecl_in_entryRuleEPackageDecl387);
             iv_ruleEPackageDecl=ruleEPackageDecl();
             _fsp--;
@@ -474,7 +474,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:222:6: lv_eAnnotations= ruleEAnnotationDecl
             	    {
             	     
-            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
+            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleEAnnotationDecl_in_ruleEPackageDecl466);
             	    lv_eAnnotations=ruleEAnnotationDecl();
@@ -504,7 +504,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             match(input,14,FOLLOW_14_in_ruleEPackageDecl480); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -513,7 +513,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:247:6: lv_name= ruleQID
             {
              
-            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
             	    
             pushFollow(FOLLOW_ruleQID_in_ruleEPackageDecl515);
             lv_name=ruleQID();
@@ -540,14 +540,14 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             match(input,15,FOLLOW_15_in_ruleEPackageDecl529); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
 
             match(input,12,FOLLOW_12_in_ruleEPackageDecl539); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -558,7 +558,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             lv_nsURI=(Token)input.LT(1);
             match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleEPackageDecl561); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "nsURI"); 
+                createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "nsURI"); 
                 
 
             	        if (current==null) {
@@ -580,14 +580,14 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             match(input,16,FOLLOW_16_in_ruleEPackageDecl582); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
 
             match(input,12,FOLLOW_12_in_ruleEPackageDecl592); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -596,7 +596,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:304:6: lv_nsPrefix= ruleQID
             {
              
-            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
             	    
             pushFollow(FOLLOW_ruleQID_in_ruleEPackageDecl627);
             lv_nsPrefix=ruleQID();
@@ -623,7 +623,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             match(input,17,FOLLOW_17_in_ruleEPackageDecl641); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -641,7 +641,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:329:6: lv_eSubpackages= ruleSubEPackageDecl
             	    {
             	     
-            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@terminal" /* xtext::RuleCall */, currentNode); 
+            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@terminal" /* xtext::RuleCall */, currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleSubEPackageDecl_in_ruleEPackageDecl677);
             	    lv_eSubpackages=ruleSubEPackageDecl();
@@ -673,7 +673,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:351:6: lv_eClassifiers= ruleEClassifierDecl
             	    {
             	     
-            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
+            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleEClassifierDecl_in_ruleEPackageDecl721);
             	    lv_eClassifiers=ruleEClassifierDecl();
@@ -709,7 +709,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             match(input,18,FOLLOW_18_in_ruleEPackageDecl737); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.2/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.2/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -744,7 +744,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:382:57: (iv_ruleSubEPackageDecl= ruleSubEPackageDecl EOF )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:383:2: iv_ruleSubEPackageDecl= ruleSubEPackageDecl EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.3" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.3" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleSubEPackageDecl_in_entryRuleSubEPackageDecl772);
             iv_ruleSubEPackageDecl=ruleSubEPackageDecl();
             _fsp--;
@@ -817,7 +817,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:398:6: lv_eAnnotations= ruleEAnnotationDecl
             	    {
             	     
-            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
+            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleEAnnotationDecl_in_ruleSubEPackageDecl845);
             	    lv_eAnnotations=ruleEAnnotationDecl();
@@ -847,7 +847,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             match(input,14,FOLLOW_14_in_ruleSubEPackageDecl859); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -858,7 +858,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSubEPackageDecl881); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+                createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
                 
 
             	        if (current==null) {
@@ -880,7 +880,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             match(input,17,FOLLOW_17_in_ruleSubEPackageDecl902); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -898,7 +898,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:447:6: lv_eSubpackages= ruleSubEPackageDecl
             	    {
             	     
-            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@terminal" /* xtext::RuleCall */, currentNode); 
+            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@terminal" /* xtext::RuleCall */, currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleSubEPackageDecl_in_ruleSubEPackageDecl938);
             	    lv_eSubpackages=ruleSubEPackageDecl();
@@ -930,7 +930,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:469:6: lv_eClassifiers= ruleEClassifierDecl
             	    {
             	     
-            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
+            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleEClassifierDecl_in_ruleSubEPackageDecl982);
             	    lv_eClassifiers=ruleEClassifierDecl();
@@ -966,7 +966,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             match(input,18,FOLLOW_18_in_ruleSubEPackageDecl998); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.3/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.3/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -1001,7 +1001,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:500:57: (iv_ruleEClassifierDecl= ruleEClassifierDecl EOF )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:501:2: iv_ruleEClassifierDecl= ruleEClassifierDecl EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.4" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.4" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleEClassifierDecl_in_entryRuleEClassifierDecl1033);
             iv_ruleEClassifierDecl=ruleEClassifierDecl();
             _fsp--;
@@ -1048,7 +1048,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:514:5: this_EClassDecl= ruleEClassDecl
                     {
                      
-                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.4/@alternatives/@groups.0" /* xtext::RuleCall */, currentNode); 
+                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.4/@alternatives/@groups.0" /* xtext::RuleCall */, currentNode); 
                         
                     pushFollow(FOLLOW_ruleEClassDecl_in_ruleEClassifierDecl1090);
                     this_EClassDecl=ruleEClassDecl();
@@ -1065,7 +1065,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:524:5: this_EDataTypeDecl= ruleEDataTypeDecl
                     {
                      
-                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.4/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
+                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.4/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
                         
                     pushFollow(FOLLOW_ruleEDataTypeDecl_in_ruleEClassifierDecl1117);
                     this_EDataTypeDecl=ruleEDataTypeDecl();
@@ -1111,7 +1111,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:541:55: (iv_ruleEDataTypeDecl= ruleEDataTypeDecl EOF )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:542:2: iv_ruleEDataTypeDecl= ruleEDataTypeDecl EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.5" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.5" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleEDataTypeDecl_in_entryRuleEDataTypeDecl1151);
             iv_ruleEDataTypeDecl=ruleEDataTypeDecl();
             _fsp--;
@@ -1183,7 +1183,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:557:6: lv_eAnnotations= ruleEAnnotationDecl
                     	    {
                     	     
-                    	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.5/@alternatives/@groups.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
+                    	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.5/@alternatives/@groups.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
                     	    	    
                     	    pushFollow(FOLLOW_ruleEAnnotationDecl_in_ruleEDataTypeDecl1222);
                     	    lv_eAnnotations=ruleEAnnotationDecl();
@@ -1225,7 +1225,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                             lv_serializable=(Token)input.LT(1);
                             match(input,19,FOLLOW_19_in_ruleEDataTypeDecl1248); 
 
-                                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.5/@alternatives/@groups.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::Keyword */, "serializable"); 
+                                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.5/@alternatives/@groups.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::Keyword */, "serializable"); 
                                 
 
                             	        if (current==null) {
@@ -1262,7 +1262,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     {
                     match(input,20,FOLLOW_20_in_ruleEDataTypeDecl1275); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.5/@alternatives/@groups.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.5/@alternatives/@groups.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:599:1: (lv_name= RULE_ID )
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:601:6: lv_name= RULE_ID
@@ -1270,7 +1270,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     lv_name=(Token)input.LT(1);
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEDataTypeDecl1296); 
                      
-                        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.5/@alternatives/@groups.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+                        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.5/@alternatives/@groups.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
                         
 
                     	        if (current==null) {
@@ -1292,7 +1292,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                     match(input,21,FOLLOW_21_in_ruleEDataTypeDecl1317); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.5/@alternatives/@groups.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.5/@alternatives/@groups.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                         
 
                     }
@@ -1301,7 +1301,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:626:6: lv_instanceClassName= ruleSTRING_OR_QID
                     {
                      
-                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.5/@alternatives/@groups.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.5/@alternatives/@groups.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleSTRING_OR_QID_in_ruleEDataTypeDecl1352);
                     lv_instanceClassName=ruleSTRING_OR_QID();
@@ -1328,7 +1328,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                     match(input,13,FOLLOW_13_in_ruleEDataTypeDecl1366); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.5/@alternatives/@groups.0/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.5/@alternatives/@groups.0/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
                         
 
                     }
@@ -1343,7 +1343,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:650:5: this_EEnumDecl= ruleEEnumDecl
                     {
                      
-                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.5/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
+                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.5/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
                         
                     pushFollow(FOLLOW_ruleEEnumDecl_in_ruleEDataTypeDecl1396);
                     this_EEnumDecl=ruleEEnumDecl();
@@ -1389,7 +1389,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:667:57: (iv_ruleEAnnotationDecl= ruleEAnnotationDecl EOF )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:668:2: iv_ruleEAnnotationDecl= ruleEAnnotationDecl EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.6" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.6" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleEAnnotationDecl_in_entryRuleEAnnotationDecl1430);
             iv_ruleEAnnotationDecl=ruleEAnnotationDecl();
             _fsp--;
@@ -1447,7 +1447,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             {
             match(input,22,FOLLOW_22_in_ruleEAnnotationDecl1479); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:684:1: (lv_source= RULE_STRING )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:686:6: lv_source= RULE_STRING
@@ -1455,7 +1455,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             lv_source=(Token)input.LT(1);
             match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleEAnnotationDecl1500); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "source"); 
+                createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "source"); 
                 
 
             	        if (current==null) {
@@ -1497,7 +1497,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     {
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEAnnotationDecl1536); 
                      
-                        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "eModelElement"); 
+                        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "eModelElement"); 
                         
 
                     }
@@ -1513,7 +1513,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             match(input,23,FOLLOW_23_in_ruleEAnnotationDecl1551); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -1522,7 +1522,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:726:6: lv_contents= ruleMapEntrySuper
             {
              
-            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
             	    
             pushFollow(FOLLOW_ruleMapEntrySuper_in_ruleEAnnotationDecl1586);
             lv_contents=ruleMapEntrySuper();
@@ -1564,13 +1564,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    {
             	    match(input,24,FOLLOW_24_in_ruleEAnnotationDecl1601); 
 
-            	            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+            	            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
             	        
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:748:1: (lv_contents= ruleMapEntrySuper )
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:751:6: lv_contents= ruleMapEntrySuper
             	    {
             	     
-            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleMapEntrySuper_in_ruleEAnnotationDecl1635);
             	    lv_contents=ruleMapEntrySuper();
@@ -1606,7 +1606,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             match(input,25,FOLLOW_25_in_ruleEAnnotationDecl1651); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.6/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.6/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -1641,7 +1641,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:782:52: (iv_ruleEClassDecl= ruleEClassDecl EOF )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:783:2: iv_ruleEClassDecl= ruleEClassDecl EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.7" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.7" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleEClassDecl_in_entryRuleEClassDecl1686);
             iv_ruleEClassDecl=ruleEClassDecl();
             _fsp--;
@@ -1734,7 +1734,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:798:6: lv_eAnnotations= ruleEAnnotationDecl
             	    {
             	     
-            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
+            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleEAnnotationDecl_in_ruleEClassDecl1763);
             	    lv_eAnnotations=ruleEAnnotationDecl();
@@ -1776,7 +1776,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     lv_abstract=(Token)input.LT(1);
                     match(input,26,FOLLOW_26_in_ruleEClassDecl1789); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::Keyword */, "abstract"); 
+                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::Keyword */, "abstract"); 
                         
 
                     	        if (current==null) {
@@ -1825,7 +1825,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     lv_interface=(Token)input.LT(1);
                     match(input,27,FOLLOW_27_in_ruleEClassDecl1825); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@terminal" /* xtext::Keyword */, "interface"); 
+                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@terminal" /* xtext::Keyword */, "interface"); 
                         
 
                     	        if (current==null) {
@@ -1850,7 +1850,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     {
                     match(input,28,FOLLOW_28_in_ruleEClassDecl1852); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.1" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.1" /* xtext::Keyword */, null); 
                         
 
                     }
@@ -1867,7 +1867,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEClassDecl1875); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+                createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
                 
 
             	        if (current==null) {
@@ -1906,13 +1906,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     {
                     match(input,29,FOLLOW_29_in_ruleEClassDecl1899); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:885:1: (lv_eTypeParameters= ruleETypeParameterDecl )
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:888:6: lv_eTypeParameters= ruleETypeParameterDecl
                     {
                      
-                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleETypeParameterDecl_in_ruleEClassDecl1933);
                     lv_eTypeParameters=ruleETypeParameterDecl();
@@ -1954,13 +1954,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     	    {
                     	    match(input,24,FOLLOW_24_in_ruleEClassDecl1948); 
 
-                    	            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+                    	            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                     	        
                     	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:910:1: (lv_eTypeParameters= ruleETypeParameterDecl )
                     	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:913:6: lv_eTypeParameters= ruleETypeParameterDecl
                     	    {
                     	     
-                    	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                    	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
                     	    	    
                     	    pushFollow(FOLLOW_ruleETypeParameterDecl_in_ruleEClassDecl1982);
                     	    lv_eTypeParameters=ruleETypeParameterDecl();
@@ -1996,7 +1996,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                     match(input,30,FOLLOW_30_in_ruleEClassDecl1998); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
                         
 
                     }
@@ -2023,13 +2023,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     {
                     match(input,31,FOLLOW_31_in_ruleEClassDecl2012); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:939:1: (lv_eGenericSuperTypes= ruleEGenericTypeReferenceDecl )
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:942:6: lv_eGenericSuperTypes= ruleEGenericTypeReferenceDecl
                     {
                      
-                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleEGenericTypeReferenceDecl_in_ruleEClassDecl2046);
                     lv_eGenericSuperTypes=ruleEGenericTypeReferenceDecl();
@@ -2071,13 +2071,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     	    {
                     	    match(input,24,FOLLOW_24_in_ruleEClassDecl2061); 
 
-                    	            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+                    	            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                     	        
                     	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:964:1: (lv_eGenericSuperTypes= ruleEGenericTypeReferenceDecl )
                     	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:967:6: lv_eGenericSuperTypes= ruleEGenericTypeReferenceDecl
                     	    {
                     	     
-                    	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                    	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
                     	    	    
                     	    pushFollow(FOLLOW_ruleEGenericTypeReferenceDecl_in_ruleEClassDecl2095);
                     	    lv_eGenericSuperTypes=ruleEGenericTypeReferenceDecl();
@@ -2130,13 +2130,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     {
                     match(input,21,FOLLOW_21_in_ruleEClassDecl2114); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:989:1: (lv_instanceClassName= ruleSTRING_OR_QID )
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:992:6: lv_instanceClassName= ruleSTRING_OR_QID
                     {
                      
-                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleSTRING_OR_QID_in_ruleEClassDecl2148);
                     lv_instanceClassName=ruleSTRING_OR_QID();
@@ -2169,7 +2169,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             match(input,17,FOLLOW_17_in_ruleEClassDecl2164); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -2187,7 +2187,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1017:6: lv_eStructuralFeatures= ruleEStructuralFeatureDecl
             	    {
             	     
-            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@terminal" /* xtext::RuleCall */, currentNode); 
+            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@terminal" /* xtext::RuleCall */, currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleEStructuralFeatureDecl_in_ruleEClassDecl2200);
             	    lv_eStructuralFeatures=ruleEStructuralFeatureDecl();
@@ -2219,7 +2219,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1039:6: lv_eOperations= ruleEOperationDecl
             	    {
             	     
-            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
+            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleEOperationDecl_in_ruleEClassDecl2244);
             	    lv_eOperations=ruleEOperationDecl();
@@ -2255,7 +2255,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             match(input,18,FOLLOW_18_in_ruleEClassDecl2260); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.7/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.7/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -2290,7 +2290,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1070:64: (iv_ruleEStructuralFeatureDecl= ruleEStructuralFeatureDecl EOF )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1071:2: iv_ruleEStructuralFeatureDecl= ruleEStructuralFeatureDecl EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.8" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.8" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleEStructuralFeatureDecl_in_entryRuleEStructuralFeatureDecl2295);
             iv_ruleEStructuralFeatureDecl=ruleEStructuralFeatureDecl();
             _fsp--;
@@ -2337,7 +2337,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1084:5: this_EAttributeDecl= ruleEAttributeDecl
                     {
                      
-                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.8/@alternatives/@groups.0" /* xtext::RuleCall */, currentNode); 
+                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.8/@alternatives/@groups.0" /* xtext::RuleCall */, currentNode); 
                         
                     pushFollow(FOLLOW_ruleEAttributeDecl_in_ruleEStructuralFeatureDecl2352);
                     this_EAttributeDecl=ruleEAttributeDecl();
@@ -2354,7 +2354,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1094:5: this_EReferenceDecl= ruleEReferenceDecl
                     {
                      
-                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.8/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
+                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.8/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
                         
                     pushFollow(FOLLOW_ruleEReferenceDecl_in_ruleEStructuralFeatureDecl2379);
                     this_EReferenceDecl=ruleEReferenceDecl();
@@ -2400,7 +2400,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1111:56: (iv_ruleEAttributeDecl= ruleEAttributeDecl EOF )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1112:2: iv_ruleEAttributeDecl= ruleEAttributeDecl EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.9" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.9" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleEAttributeDecl_in_entryRuleEAttributeDecl2413);
             iv_ruleEAttributeDecl=ruleEAttributeDecl();
             _fsp--;
@@ -2489,7 +2489,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1127:6: lv_eAnnotations= ruleEAnnotationDecl
             	    {
             	     
-            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
+            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleEAnnotationDecl_in_ruleEAttributeDecl2488);
             	    lv_eAnnotations=ruleEAnnotationDecl();
@@ -2661,7 +2661,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	                                                    lv_iD=(Token)input.LT(1);
             	                                                    match(input,32,FOLLOW_32_in_ruleEAttributeDecl2521); 
 
-            	                                                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@terminal" /* xtext::Keyword */, "iD"); 
+            	                                                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@terminal" /* xtext::Keyword */, "iD"); 
             	                                                        
 
             	                                                    	        if (current==null) {
@@ -2690,7 +2690,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	                                                    lv_unique=(Token)input.LT(1);
             	                                                    match(input,33,FOLLOW_33_in_ruleEAttributeDecl2560); 
 
-            	                                                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "unique"); 
+            	                                                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "unique"); 
             	                                                        
 
             	                                                    	        if (current==null) {
@@ -2725,7 +2725,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	                                            lv_ordered=(Token)input.LT(1);
             	                                            match(input,34,FOLLOW_34_in_ruleEAttributeDecl2600); 
 
-            	                                                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "ordered"); 
+            	                                                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "ordered"); 
             	                                                
 
             	                                            	        if (current==null) {
@@ -2760,7 +2760,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	                                    lv_changeable=(Token)input.LT(1);
             	                                    match(input,35,FOLLOW_35_in_ruleEAttributeDecl2640); 
 
-            	                                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "changeable"); 
+            	                                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "changeable"); 
             	                                        
 
             	                                    	        if (current==null) {
@@ -2795,7 +2795,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	                            lv_volatile=(Token)input.LT(1);
             	                            match(input,36,FOLLOW_36_in_ruleEAttributeDecl2680); 
 
-            	                                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "volatile"); 
+            	                                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "volatile"); 
             	                                
 
             	                            	        if (current==null) {
@@ -2830,7 +2830,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	                    lv_transient=(Token)input.LT(1);
             	                    match(input,37,FOLLOW_37_in_ruleEAttributeDecl2720); 
 
-            	                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "transient"); 
+            	                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "transient"); 
             	                        
 
             	                    	        if (current==null) {
@@ -2865,7 +2865,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	            lv_unsettable=(Token)input.LT(1);
             	            match(input,38,FOLLOW_38_in_ruleEAttributeDecl2760); 
 
-            	                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "unsettable"); 
+            	                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "unsettable"); 
             	                
 
             	            	        if (current==null) {
@@ -2900,7 +2900,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    lv_derived=(Token)input.LT(1);
             	    match(input,39,FOLLOW_39_in_ruleEAttributeDecl2800); 
 
-            	            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.1/@terminal" /* xtext::Keyword */, "derived"); 
+            	            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.1/@terminal" /* xtext::Keyword */, "derived"); 
             	        
 
             	    	        if (current==null) {
@@ -2931,7 +2931,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             match(input,40,FOLLOW_40_in_ruleEAttributeDecl2824); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -2940,7 +2940,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1319:6: lv_eGenericType= ruleEGenericTypeReferenceDecl
             {
              
-            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
             	    
             pushFollow(FOLLOW_ruleEGenericTypeReferenceDecl_in_ruleEAttributeDecl2859);
             lv_eGenericType=ruleEGenericTypeReferenceDecl();
@@ -2984,7 +2984,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     {
                     match(input,41,FOLLOW_41_in_ruleEAttributeDecl2876); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1341:1: (lv_lowerBound= RULE_INT )
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1343:6: lv_lowerBound= RULE_INT
@@ -2992,7 +2992,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     lv_lowerBound=(Token)input.LT(1);
                     match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleEAttributeDecl2897); 
                      
-                        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "lowerBound"); 
+                        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "lowerBound"); 
                         
 
                     	        if (current==null) {
@@ -3025,13 +3025,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                             {
                             match(input,42,FOLLOW_42_in_ruleEAttributeDecl2919); 
 
-                                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+                                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                                 
                             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1365:1: (lv_upperBound= ruleSINT )
                             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1368:6: lv_upperBound= ruleSINT
                             {
                              
-                            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
                             	    
                             pushFollow(FOLLOW_ruleSINT_in_ruleEAttributeDecl2953);
                             lv_upperBound=ruleSINT();
@@ -3064,7 +3064,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                     match(input,43,FOLLOW_43_in_ruleEAttributeDecl2969); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
                         
 
                     }
@@ -3081,7 +3081,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEAttributeDecl2993); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+                createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
                 
 
             	        if (current==null) {
@@ -3114,7 +3114,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     {
                     match(input,12,FOLLOW_12_in_ruleEAttributeDecl3015); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1414:1: (lv_defaultValueLiteral= RULE_STRING )
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1416:6: lv_defaultValueLiteral= RULE_STRING
@@ -3122,7 +3122,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     lv_defaultValueLiteral=(Token)input.LT(1);
                     match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleEAttributeDecl3036); 
                      
-                        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "defaultValueLiteral"); 
+                        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "defaultValueLiteral"); 
                         
 
                     	        if (current==null) {
@@ -3150,7 +3150,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             match(input,13,FOLLOW_13_in_ruleEAttributeDecl3059); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.9/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.9/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -3185,7 +3185,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1447:56: (iv_ruleEReferenceDecl= ruleEReferenceDecl EOF )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1448:2: iv_ruleEReferenceDecl= ruleEReferenceDecl EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.10" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.10" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleEReferenceDecl_in_entryRuleEReferenceDecl3094);
             iv_ruleEReferenceDecl=ruleEReferenceDecl();
             _fsp--;
@@ -3274,7 +3274,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1463:6: lv_eAnnotations= ruleEAnnotationDecl
             	    {
             	     
-            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
+            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleEAnnotationDecl_in_ruleEReferenceDecl3169);
             	    lv_eAnnotations=ruleEAnnotationDecl();
@@ -3446,7 +3446,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	                                                    lv_resolveProxies=(Token)input.LT(1);
             	                                                    match(input,44,FOLLOW_44_in_ruleEReferenceDecl3202); 
 
-            	                                                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@terminal" /* xtext::Keyword */, "resolveProxies"); 
+            	                                                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@terminal" /* xtext::Keyword */, "resolveProxies"); 
             	                                                        
 
             	                                                    	        if (current==null) {
@@ -3475,7 +3475,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	                                                    lv_unique=(Token)input.LT(1);
             	                                                    match(input,33,FOLLOW_33_in_ruleEReferenceDecl3241); 
 
-            	                                                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "unique"); 
+            	                                                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "unique"); 
             	                                                        
 
             	                                                    	        if (current==null) {
@@ -3510,7 +3510,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	                                            lv_ordered=(Token)input.LT(1);
             	                                            match(input,34,FOLLOW_34_in_ruleEReferenceDecl3281); 
 
-            	                                                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "ordered"); 
+            	                                                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "ordered"); 
             	                                                
 
             	                                            	        if (current==null) {
@@ -3545,7 +3545,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	                                    lv_changeable=(Token)input.LT(1);
             	                                    match(input,35,FOLLOW_35_in_ruleEReferenceDecl3321); 
 
-            	                                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "changeable"); 
+            	                                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "changeable"); 
             	                                        
 
             	                                    	        if (current==null) {
@@ -3580,7 +3580,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	                            lv_volatile=(Token)input.LT(1);
             	                            match(input,36,FOLLOW_36_in_ruleEReferenceDecl3361); 
 
-            	                                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "volatile"); 
+            	                                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "volatile"); 
             	                                
 
             	                            	        if (current==null) {
@@ -3615,7 +3615,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	                    lv_transient=(Token)input.LT(1);
             	                    match(input,37,FOLLOW_37_in_ruleEReferenceDecl3401); 
 
-            	                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "transient"); 
+            	                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "transient"); 
             	                        
 
             	                    	        if (current==null) {
@@ -3650,7 +3650,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	            lv_unsettable=(Token)input.LT(1);
             	            match(input,38,FOLLOW_38_in_ruleEReferenceDecl3441); 
 
-            	                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "unsettable"); 
+            	                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "unsettable"); 
             	                
 
             	            	        if (current==null) {
@@ -3685,7 +3685,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    lv_derived=(Token)input.LT(1);
             	    match(input,39,FOLLOW_39_in_ruleEReferenceDecl3481); 
 
-            	            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.1/@terminal" /* xtext::Keyword */, "derived"); 
+            	            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.1/@terminal" /* xtext::Keyword */, "derived"); 
             	        
 
             	    	        if (current==null) {
@@ -3740,7 +3740,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     lv_containment=(Token)input.LT(1);
                     match(input,45,FOLLOW_45_in_ruleEReferenceDecl3518); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@terminal" /* xtext::Keyword */, "containment"); 
+                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@terminal" /* xtext::Keyword */, "containment"); 
                         
 
                     	        if (current==null) {
@@ -3765,7 +3765,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     {
                     match(input,46,FOLLOW_46_in_ruleEReferenceDecl3545); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.1" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.1" /* xtext::Keyword */, null); 
                         
 
                     }
@@ -3780,7 +3780,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1676:6: lv_eGenericType= ruleEGenericTypeReferenceDecl
             {
              
-            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
             	    
             pushFollow(FOLLOW_ruleEGenericTypeReferenceDecl_in_ruleEReferenceDecl3581);
             lv_eGenericType=ruleEGenericTypeReferenceDecl();
@@ -3824,7 +3824,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     {
                     match(input,41,FOLLOW_41_in_ruleEReferenceDecl3598); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1698:1: (lv_lowerBound= RULE_INT )
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1700:6: lv_lowerBound= RULE_INT
@@ -3832,7 +3832,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     lv_lowerBound=(Token)input.LT(1);
                     match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleEReferenceDecl3619); 
                      
-                        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "lowerBound"); 
+                        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "lowerBound"); 
                         
 
                     	        if (current==null) {
@@ -3865,13 +3865,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                             {
                             match(input,42,FOLLOW_42_in_ruleEReferenceDecl3641); 
 
-                                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+                                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                                 
                             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1722:1: (lv_upperBound= ruleSINT )
                             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1725:6: lv_upperBound= ruleSINT
                             {
                              
-                            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
                             	    
                             pushFollow(FOLLOW_ruleSINT_in_ruleEReferenceDecl3675);
                             lv_upperBound=ruleSINT();
@@ -3904,7 +3904,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                     match(input,43,FOLLOW_43_in_ruleEReferenceDecl3691); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
                         
 
                     }
@@ -3928,7 +3928,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     {
                     match(input,47,FOLLOW_47_in_ruleEReferenceDecl3704); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1751:1: ( ( RULE_ID ) )
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1754:3: ( RULE_ID )
@@ -3944,7 +3944,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     {
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEReferenceDecl3728); 
                      
-                        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "eOpposite"); 
+                        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "eOpposite"); 
                         
 
                     }
@@ -3967,7 +3967,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEReferenceDecl3756); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+                createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
                 
 
             	        if (current==null) {
@@ -3989,7 +3989,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             match(input,13,FOLLOW_13_in_ruleEReferenceDecl3777); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.10/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.10/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -4024,7 +4024,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1799:51: (iv_ruleEEnumDecl= ruleEEnumDecl EOF )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1800:2: iv_ruleEEnumDecl= ruleEEnumDecl EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.11" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.11" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleEEnumDecl_in_entryRuleEEnumDecl3812);
             iv_ruleEEnumDecl=ruleEEnumDecl();
             _fsp--;
@@ -4095,7 +4095,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1815:6: lv_eAnnotations= ruleEAnnotationDecl
             	    {
             	     
-            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.11/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
+            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.11/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleEAnnotationDecl_in_ruleEEnumDecl3885);
             	    lv_eAnnotations=ruleEAnnotationDecl();
@@ -4125,7 +4125,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             match(input,48,FOLLOW_48_in_ruleEEnumDecl3899); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.11/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.11/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -4136,7 +4136,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEEnumDecl3921); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.11/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+                createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.11/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
                 
 
             	        if (current==null) {
@@ -4158,7 +4158,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             match(input,17,FOLLOW_17_in_ruleEEnumDecl3942); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.11/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.11/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -4180,7 +4180,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1864:6: lv_eLiterals= ruleEEnumLiteralDecl
             	    {
             	     
-            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.11/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.11/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleEEnumLiteralDecl_in_ruleEEnumDecl3977);
             	    lv_eLiterals=ruleEEnumLiteralDecl();
@@ -4217,7 +4217,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             match(input,18,FOLLOW_18_in_ruleEEnumDecl3992); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.11/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.11/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -4252,7 +4252,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1895:58: (iv_ruleEEnumLiteralDecl= ruleEEnumLiteralDecl EOF )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1896:2: iv_ruleEEnumLiteralDecl= ruleEEnumLiteralDecl EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.12" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.12" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleEEnumLiteralDecl_in_entryRuleEEnumLiteralDecl4027);
             iv_ruleEEnumLiteralDecl=ruleEEnumLiteralDecl();
             _fsp--;
@@ -4320,7 +4320,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1911:6: lv_eAnnotations= ruleEAnnotationDecl
             	    {
             	     
-            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
+            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleEAnnotationDecl_in_ruleEEnumLiteralDecl4099);
             	    lv_eAnnotations=ruleEAnnotationDecl();
@@ -4354,7 +4354,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEEnumLiteralDecl4125); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+                createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
                 
 
             	        if (current==null) {
@@ -4387,7 +4387,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     {
                     match(input,12,FOLLOW_12_in_ruleEEnumLiteralDecl4147); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1953:1: (lv_value= RULE_INT )
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1955:6: lv_value= RULE_INT
@@ -4395,7 +4395,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     lv_value=(Token)input.LT(1);
                     match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleEEnumLiteralDecl4168); 
                      
-                        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "value"); 
+                        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "value"); 
                         
 
                     	        if (current==null) {
@@ -4435,7 +4435,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     lv_literal=(Token)input.LT(1);
                     match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleEEnumLiteralDecl4203); 
                      
-                        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "literal"); 
+                        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "literal"); 
                         
 
                     	        if (current==null) {
@@ -4460,7 +4460,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             match(input,13,FOLLOW_13_in_ruleEEnumLiteralDecl4225); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.12/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.12/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -4495,7 +4495,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2006:60: (iv_ruleETypeParameterDecl= ruleETypeParameterDecl EOF )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2007:2: iv_ruleETypeParameterDecl= ruleETypeParameterDecl EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.13" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.13" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleETypeParameterDecl_in_entryRuleETypeParameterDecl4260);
             iv_ruleETypeParameterDecl=ruleETypeParameterDecl();
             _fsp--;
@@ -4542,7 +4542,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleETypeParameterDecl4316); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.13/@alternatives/@abstractTokens.0/@terminal" /* xtext::RuleCall */, "name"); 
+                createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.13/@alternatives/@abstractTokens.0/@terminal" /* xtext::RuleCall */, "name"); 
                 
 
             	        if (current==null) {
@@ -4572,13 +4572,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     {
                     match(input,31,FOLLOW_31_in_ruleETypeParameterDecl4337); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.13/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.13/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2043:1: (lv_eBounds= ruleEGenericTypeDecl )
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2046:6: lv_eBounds= ruleEGenericTypeDecl
                     {
                      
-                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.13/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.13/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleEGenericTypeDecl_in_ruleETypeParameterDecl4371);
                     lv_eBounds=ruleEGenericTypeDecl();
@@ -4639,7 +4639,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2073:67: (iv_ruleEGenericTypeReferenceDecl= ruleEGenericTypeReferenceDecl EOF )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2074:2: iv_ruleEGenericTypeReferenceDecl= ruleEGenericTypeReferenceDecl EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.14" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.14" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleEGenericTypeReferenceDecl_in_entryRuleEGenericTypeReferenceDecl4412);
             iv_ruleEGenericTypeReferenceDecl=ruleEGenericTypeReferenceDecl();
             _fsp--;
@@ -4713,7 +4713,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     {
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEGenericTypeReferenceDecl4472); 
                      
-                        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.14/@alternatives/@groups.0/@abstractTokens.0/@terminal" /* xtext::CrossReference */, "eClassifier"); 
+                        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.14/@alternatives/@groups.0/@abstractTokens.0/@terminal" /* xtext::CrossReference */, "eClassifier"); 
                         
 
                     }
@@ -4740,13 +4740,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                             {
                             match(input,29,FOLLOW_29_in_ruleEGenericTypeReferenceDecl4488); 
 
-                                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.14/@alternatives/@groups.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.14/@alternatives/@groups.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                                 
                             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2105:1: (lv_eTypeArguments= ruleEGenericTypeDecl )
                             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2108:6: lv_eTypeArguments= ruleEGenericTypeDecl
                             {
                              
-                            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.14/@alternatives/@groups.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.14/@alternatives/@groups.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
                             	    
                             pushFollow(FOLLOW_ruleEGenericTypeDecl_in_ruleEGenericTypeReferenceDecl4522);
                             lv_eTypeArguments=ruleEGenericTypeDecl();
@@ -4788,13 +4788,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                             	    {
                             	    match(input,24,FOLLOW_24_in_ruleEGenericTypeReferenceDecl4537); 
 
-                            	            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.14/@alternatives/@groups.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+                            	            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.14/@alternatives/@groups.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                             	        
                             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2130:1: (lv_eTypeArguments= ruleEGenericTypeDecl )
                             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2133:6: lv_eTypeArguments= ruleEGenericTypeDecl
                             	    {
                             	     
-                            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.14/@alternatives/@groups.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.14/@alternatives/@groups.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
                             	    	    
                             	    pushFollow(FOLLOW_ruleEGenericTypeDecl_in_ruleEGenericTypeReferenceDecl4571);
                             	    lv_eTypeArguments=ruleEGenericTypeDecl();
@@ -4830,7 +4830,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                             match(input,30,FOLLOW_30_in_ruleEGenericTypeReferenceDecl4587); 
 
-                                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.14/@alternatives/@groups.0/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
+                                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.14/@alternatives/@groups.0/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
                                 
 
                             }
@@ -4852,7 +4852,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     {
                     match(input,47,FOLLOW_47_in_ruleEGenericTypeReferenceDecl4606); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.14/@alternatives/@groups.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.14/@alternatives/@groups.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2160:1: ( ( RULE_ID ) )
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2163:3: ( RULE_ID )
@@ -4868,7 +4868,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     {
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEGenericTypeReferenceDecl4630); 
                      
-                        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.14/@alternatives/@groups.1/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "eTypeParameter"); 
+                        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.14/@alternatives/@groups.1/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "eTypeParameter"); 
                         
 
                     }
@@ -4915,7 +4915,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2184:58: (iv_ruleEGenericTypeDecl= ruleEGenericTypeDecl EOF )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2185:2: iv_ruleEGenericTypeDecl= ruleEGenericTypeDecl EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.15" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.15" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleEGenericTypeDecl_in_entryRuleEGenericTypeDecl4670);
             iv_ruleEGenericTypeDecl=ruleEGenericTypeDecl();
             _fsp--;
@@ -5013,7 +5013,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                             {
                             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEGenericTypeDecl4731); 
                              
-                                createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.15/@alternatives/@groups.0/@groups.0/@abstractTokens.0/@terminal" /* xtext::CrossReference */, "eClassifier"); 
+                                createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.15/@alternatives/@groups.0/@groups.0/@abstractTokens.0/@terminal" /* xtext::CrossReference */, "eClassifier"); 
                                 
 
                             }
@@ -5040,13 +5040,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                                     {
                                     match(input,29,FOLLOW_29_in_ruleEGenericTypeDecl4747); 
 
-                                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.15/@alternatives/@groups.0/@groups.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.15/@alternatives/@groups.0/@groups.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                                         
                                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2216:1: (lv_eTypeArguments= ruleEGenericTypeDecl )
                                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2219:6: lv_eTypeArguments= ruleEGenericTypeDecl
                                     {
                                      
-                                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.15/@alternatives/@groups.0/@groups.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.15/@alternatives/@groups.0/@groups.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
                                     	    
                                     pushFollow(FOLLOW_ruleEGenericTypeDecl_in_ruleEGenericTypeDecl4781);
                                     lv_eTypeArguments=ruleEGenericTypeDecl();
@@ -5088,13 +5088,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                                     	    {
                                     	    match(input,24,FOLLOW_24_in_ruleEGenericTypeDecl4796); 
 
-                                    	            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.15/@alternatives/@groups.0/@groups.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+                                    	            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.15/@alternatives/@groups.0/@groups.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                                     	        
                                     	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2241:1: (lv_eTypeArguments= ruleEGenericTypeDecl )
                                     	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2244:6: lv_eTypeArguments= ruleEGenericTypeDecl
                                     	    {
                                     	     
-                                    	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.15/@alternatives/@groups.0/@groups.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                                    	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.15/@alternatives/@groups.0/@groups.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
                                     	    	    
                                     	    pushFollow(FOLLOW_ruleEGenericTypeDecl_in_ruleEGenericTypeDecl4830);
                                     	    lv_eTypeArguments=ruleEGenericTypeDecl();
@@ -5130,7 +5130,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                                     match(input,30,FOLLOW_30_in_ruleEGenericTypeDecl4846); 
 
-                                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.15/@alternatives/@groups.0/@groups.0/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
+                                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.15/@alternatives/@groups.0/@groups.0/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
                                         
 
                                     }
@@ -5152,7 +5152,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                             {
                             match(input,47,FOLLOW_47_in_ruleEGenericTypeDecl4865); 
 
-                                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.15/@alternatives/@groups.0/@groups.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+                                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.15/@alternatives/@groups.0/@groups.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                                 
                             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2271:1: ( ( RULE_ID ) )
                             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2274:3: ( RULE_ID )
@@ -5168,7 +5168,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                             {
                             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEGenericTypeDecl4889); 
                              
-                                createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.15/@alternatives/@groups.0/@groups.1/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "eTypeParameter"); 
+                                createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.15/@alternatives/@groups.0/@groups.1/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "eTypeParameter"); 
                                 
 
                             }
@@ -5196,7 +5196,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     {
                     match(input,49,FOLLOW_49_in_ruleEGenericTypeDecl4911); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.15/@alternatives/@groups.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.15/@alternatives/@groups.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2291:1: ( ( 'extends' (lv_eUpperBound= ruleEGenericTypeDecl ) ) | ( 'super' (lv_eLowerBound= ruleEGenericTypeDecl ) ) )
                     int alt58=2;
@@ -5223,13 +5223,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                             {
                             match(input,31,FOLLOW_31_in_ruleEGenericTypeDecl4922); 
 
-                                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.15/@alternatives/@groups.1/@abstractTokens.1/@groups.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.15/@alternatives/@groups.1/@abstractTokens.1/@groups.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                                 
                             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2295:1: (lv_eUpperBound= ruleEGenericTypeDecl )
                             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2298:6: lv_eUpperBound= ruleEGenericTypeDecl
                             {
                              
-                            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.15/@alternatives/@groups.1/@abstractTokens.1/@groups.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.15/@alternatives/@groups.1/@abstractTokens.1/@groups.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
                             	    
                             pushFollow(FOLLOW_ruleEGenericTypeDecl_in_ruleEGenericTypeDecl4956);
                             lv_eUpperBound=ruleEGenericTypeDecl();
@@ -5265,13 +5265,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                             {
                             match(input,50,FOLLOW_50_in_ruleEGenericTypeDecl4977); 
 
-                                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.15/@alternatives/@groups.1/@abstractTokens.1/@groups.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+                                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.15/@alternatives/@groups.1/@abstractTokens.1/@groups.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                                 
                             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2321:1: (lv_eLowerBound= ruleEGenericTypeDecl )
                             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2324:6: lv_eLowerBound= ruleEGenericTypeDecl
                             {
                              
-                            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.15/@alternatives/@groups.1/@abstractTokens.1/@groups.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.15/@alternatives/@groups.1/@abstractTokens.1/@groups.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
                             	    
                             pushFollow(FOLLOW_ruleEGenericTypeDecl_in_ruleEGenericTypeDecl5011);
                             lv_eLowerBound=ruleEGenericTypeDecl();
@@ -5341,7 +5341,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2351:56: (iv_ruleEOperationDecl= ruleEOperationDecl EOF )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2352:2: iv_ruleEOperationDecl= ruleEOperationDecl EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.16" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.16" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleEOperationDecl_in_entryRuleEOperationDecl5053);
             iv_ruleEOperationDecl=ruleEOperationDecl();
             _fsp--;
@@ -5435,7 +5435,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2367:6: lv_eAnnotations= ruleEAnnotationDecl
             	    {
             	     
-            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
+            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleEAnnotationDecl_in_ruleEOperationDecl5131);
             	    lv_eAnnotations=ruleEAnnotationDecl();
@@ -5487,7 +5487,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    lv_unique=(Token)input.LT(1);
             	    match(input,33,FOLLOW_33_in_ruleEOperationDecl5158); 
 
-            	            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@terminal" /* xtext::Keyword */, "unique"); 
+            	            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@terminal" /* xtext::Keyword */, "unique"); 
             	        
 
             	    	        if (current==null) {
@@ -5516,7 +5516,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    lv_ordered=(Token)input.LT(1);
             	    match(input,34,FOLLOW_34_in_ruleEOperationDecl5197); 
 
-            	            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.1/@terminal" /* xtext::Keyword */, "ordered"); 
+            	            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.1/@terminal" /* xtext::Keyword */, "ordered"); 
             	        
 
             	    	        if (current==null) {
@@ -5547,7 +5547,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             match(input,51,FOLLOW_51_in_ruleEOperationDecl5221); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -5576,7 +5576,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2433:6: lv_eGenericType= ruleEGenericTypeReferenceDecl
                     {
                      
-                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@terminal" /* xtext::RuleCall */, currentNode); 
+                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@terminal" /* xtext::RuleCall */, currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleEGenericTypeReferenceDecl_in_ruleEOperationDecl5257);
                     lv_eGenericType=ruleEGenericTypeReferenceDecl();
@@ -5606,7 +5606,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     {
                     match(input,52,FOLLOW_52_in_ruleEOperationDecl5276); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.1" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.1" /* xtext::Keyword */, null); 
                         
 
                     }
@@ -5623,7 +5623,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEOperationDecl5299); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+                createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
                 
 
             	        if (current==null) {
@@ -5662,13 +5662,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     {
                     match(input,29,FOLLOW_29_in_ruleEOperationDecl5323); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2480:1: (lv_eTypeParameters= ruleETypeParameterDecl )
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2483:6: lv_eTypeParameters= ruleETypeParameterDecl
                     {
                      
-                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleETypeParameterDecl_in_ruleEOperationDecl5357);
                     lv_eTypeParameters=ruleETypeParameterDecl();
@@ -5710,13 +5710,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     	    {
                     	    match(input,24,FOLLOW_24_in_ruleEOperationDecl5372); 
 
-                    	            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+                    	            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                     	        
                     	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2505:1: (lv_eTypeParameters= ruleETypeParameterDecl )
                     	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2508:6: lv_eTypeParameters= ruleETypeParameterDecl
                     	    {
                     	     
-                    	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                    	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
                     	    	    
                     	    pushFollow(FOLLOW_ruleETypeParameterDecl_in_ruleEOperationDecl5406);
                     	    lv_eTypeParameters=ruleETypeParameterDecl();
@@ -5752,7 +5752,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                     match(input,30,FOLLOW_30_in_ruleEOperationDecl5422); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
                         
 
                     }
@@ -5765,7 +5765,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             match(input,23,FOLLOW_23_in_ruleEOperationDecl5434); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -5785,7 +5785,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2537:6: lv_eParameters= ruleEParameterDecl
                     {
                      
-                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
+                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleEParameterDecl_in_ruleEOperationDecl5470);
                     lv_eParameters=ruleEParameterDecl();
@@ -5824,13 +5824,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     	    {
                     	    match(input,24,FOLLOW_24_in_ruleEOperationDecl5484); 
 
-                    	            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+                    	            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                     	        
                     	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2559:1: (lv_eParameters= ruleEParameterDecl )
                     	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2562:6: lv_eParameters= ruleEParameterDecl
                     	    {
                     	     
-                    	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                    	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
                     	    	    
                     	    pushFollow(FOLLOW_ruleEParameterDecl_in_ruleEOperationDecl5518);
                     	    lv_eParameters=ruleEParameterDecl();
@@ -5872,7 +5872,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             match(input,25,FOLLOW_25_in_ruleEOperationDecl5536); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -5893,13 +5893,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     {
                     match(input,53,FOLLOW_53_in_ruleEOperationDecl5548); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2588:1: (lv_eGenericExceptions= ruleEGenericTypeReferenceDecl )
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2591:6: lv_eGenericExceptions= ruleEGenericTypeReferenceDecl
                     {
                      
-                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleEGenericTypeReferenceDecl_in_ruleEOperationDecl5582);
                     lv_eGenericExceptions=ruleEGenericTypeReferenceDecl();
@@ -5941,13 +5941,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     	    {
                     	    match(input,24,FOLLOW_24_in_ruleEOperationDecl5597); 
 
-                    	            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+                    	            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                     	        
                     	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2613:1: (lv_eGenericExceptions= ruleEGenericTypeReferenceDecl )
                     	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2616:6: lv_eGenericExceptions= ruleEGenericTypeReferenceDecl
                     	    {
                     	     
-                    	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                    	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
                     	    	    
                     	    pushFollow(FOLLOW_ruleEGenericTypeReferenceDecl_in_ruleEOperationDecl5631);
                     	    lv_eGenericExceptions=ruleEGenericTypeReferenceDecl();
@@ -5989,7 +5989,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             match(input,13,FOLLOW_13_in_ruleEOperationDecl5649); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.16/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.16/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -6024,7 +6024,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2647:56: (iv_ruleEParameterDecl= ruleEParameterDecl EOF )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2648:2: iv_ruleEParameterDecl= ruleEParameterDecl EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.17" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.17" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleEParameterDecl_in_entryRuleEParameterDecl5684);
             iv_ruleEParameterDecl=ruleEParameterDecl();
             _fsp--;
@@ -6086,7 +6086,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2663:6: lv_eAnnotations= ruleEAnnotationDecl
             	    {
             	     
-            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.17/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
+            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.17/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleEAnnotationDecl_in_ruleEParameterDecl5754);
             	    lv_eAnnotations=ruleEAnnotationDecl();
@@ -6118,7 +6118,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2684:6: lv_eGenericType= ruleEGenericTypeReferenceDecl
             {
              
-            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.17/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.17/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
             	    
             pushFollow(FOLLOW_ruleEGenericTypeReferenceDecl_in_ruleEParameterDecl5793);
             lv_eGenericType=ruleEGenericTypeReferenceDecl();
@@ -6149,7 +6149,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEParameterDecl5819); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.17/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+                createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.17/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
                 
 
             	        if (current==null) {
@@ -6199,7 +6199,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2731:55: (iv_ruleMapEntrySuper= ruleMapEntrySuper EOF )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2732:2: iv_ruleMapEntrySuper= ruleMapEntrySuper EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.18" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.18" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleMapEntrySuper_in_entryRuleMapEntrySuper5865);
             iv_ruleMapEntrySuper=ruleMapEntrySuper();
             _fsp--;
@@ -6237,7 +6237,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2745:5: this_MapEntry= ruleMapEntry
             {
              
-                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.18/@alternatives" /* xtext::RuleCall */, currentNode); 
+                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.18/@alternatives" /* xtext::RuleCall */, currentNode); 
                 
             pushFollow(FOLLOW_ruleMapEntry_in_ruleMapEntrySuper5921);
             this_MapEntry=ruleMapEntry();
@@ -6277,7 +6277,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2762:50: (iv_ruleMapEntry= ruleMapEntry EOF )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2763:2: iv_ruleMapEntry= ruleMapEntry EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.19" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.19" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleMapEntry_in_entryRuleMapEntry5954);
             iv_ruleMapEntry=ruleMapEntry();
             _fsp--;
@@ -6326,7 +6326,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             lv_detailKey=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleMapEntry6011); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.19/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, "detailKey"); 
+                createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.19/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, "detailKey"); 
                 
 
             	        if (current==null) {
@@ -6345,7 +6345,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             match(input,12,FOLLOW_12_in_ruleMapEntry6031); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.19/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.19/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -6356,7 +6356,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             lv_detailValue=(Token)input.LT(1);
             match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleMapEntry6053); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.19/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "detailValue"); 
+                createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.19/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "detailValue"); 
                 
 
             	        if (current==null) {
@@ -6406,7 +6406,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2830:44: (iv_ruleQID= ruleQID EOF )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2831:2: iv_ruleQID= ruleQID EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.21" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.21" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleQID_in_entryRuleQID6102);
             iv_ruleQID=ruleQID();
             _fsp--;
@@ -6452,7 +6452,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             		current.merge(this_ID);
                 
              
-                createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.21/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, null); 
+                createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.21/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, null); 
                 
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2850:1: ( (kw= '.' | kw= '$' ) this_ID= RULE_ID )*
             loop71:
@@ -6493,7 +6493,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	            match(input,54,FOLLOW_54_in_ruleQID6173); 
 
             	                    current.merge(kw);
-            	                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.21/@alternatives/@abstractTokens.1/@abstractTokens.0/@groups.0" /* xtext::Keyword */, null); 
+            	                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.21/@alternatives/@abstractTokens.1/@abstractTokens.0/@groups.0" /* xtext::Keyword */, null); 
             	                
 
             	            }
@@ -6505,7 +6505,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	            match(input,55,FOLLOW_55_in_ruleQID6192); 
 
             	                    current.merge(kw);
-            	                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.21/@alternatives/@abstractTokens.1/@abstractTokens.0/@groups.1" /* xtext::Keyword */, null); 
+            	                    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.21/@alternatives/@abstractTokens.1/@abstractTokens.0/@groups.1" /* xtext::Keyword */, null); 
             	                
 
             	            }
@@ -6519,7 +6519,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    		current.merge(this_ID);
             	        
             	     
-            	        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.21/@alternatives/@abstractTokens.1/@abstractTokens.1" /* xtext::RuleCall */, null); 
+            	        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.21/@alternatives/@abstractTokens.1/@abstractTokens.1" /* xtext::RuleCall */, null); 
             	        
 
             	    }
@@ -6563,7 +6563,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2880:54: (iv_ruleSTRING_OR_QID= ruleSTRING_OR_QID EOF )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2881:2: iv_ruleSTRING_OR_QID= ruleSTRING_OR_QID EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.22" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.22" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleSTRING_OR_QID_in_entryRuleSTRING_OR_QID6256);
             iv_ruleSTRING_OR_QID=ruleSTRING_OR_QID();
             _fsp--;
@@ -6627,7 +6627,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     		current.merge(this_STRING);
                         
                      
-                        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.22/@alternatives/@groups.0" /* xtext::RuleCall */, null); 
+                        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.22/@alternatives/@groups.0" /* xtext::RuleCall */, null); 
                         
 
                     }
@@ -6636,7 +6636,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2902:5: this_QID= ruleQID
                     {
                      
-                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.22/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
+                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.22/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
                         
                     pushFollow(FOLLOW_ruleQID_in_ruleSTRING_OR_QID6340);
                     this_QID=ruleQID();
@@ -6684,7 +6684,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2922:45: (iv_ruleSINT= ruleSINT EOF )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2923:2: iv_ruleSINT= ruleSINT EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.23" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.23" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleSINT_in_entryRuleSINT6386);
             iv_ruleSINT=ruleSINT();
             _fsp--;
@@ -6739,7 +6739,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     match(input,56,FOLLOW_56_in_ruleSINT6436); 
 
                             current.merge(kw);
-                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.23/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.23/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
 
                     }
@@ -6753,7 +6753,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             		current.merge(this_INT);
                 
              
-                createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.23/@alternatives/@abstractTokens.1" /* xtext::RuleCall */, null); 
+                createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.23/@alternatives/@abstractTokens.1" /* xtext::RuleCall */, null); 
                 
 
             }

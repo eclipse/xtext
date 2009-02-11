@@ -66,7 +66,7 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 
 // Entry rule entryRuleStart
 entryRuleStart returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/resource/metamodel/MultiValueFeatureTestLanguage.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/resource/metamodel/MultiValueFeatureTestLanguage.xmi#/0/@rules.0" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleStart=ruleStart 
 	 { $current=$iv_ruleStart.current; } 
 	 EOF 
@@ -82,7 +82,7 @@ ruleStart returns [EObject current=null]
 	
 	    lv_featureA=RULE_ID
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/resource/metamodel/MultiValueFeatureTestLanguage.xmi#//@rules.0/@alternatives/@terminal" /* xtext::RuleCall */, "featureA"); 
+    createLeafNode("classpath:/org/eclipse/xtext/resource/metamodel/MultiValueFeatureTestLanguage.xmi#/0/@rules.0/@alternatives/@terminal" /* xtext::RuleCall */, "featureA"); 
     }
  
 	    {

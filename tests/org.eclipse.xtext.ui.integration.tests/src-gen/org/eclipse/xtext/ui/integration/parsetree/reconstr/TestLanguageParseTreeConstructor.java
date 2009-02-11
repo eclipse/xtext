@@ -42,6 +42,7 @@ protected class File_Assignment_stuff extends AssignmentToken  {
 		return TestLanguageGrammarAccess.INSTANCE.prFile().eleAssignmentStuff();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("stuff",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("stuff");
@@ -83,6 +84,7 @@ protected class Stuff_Group extends GroupToken {
 		return TestLanguageGrammarAccess.INSTANCE.prStuff().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Stuff_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
@@ -123,6 +125,7 @@ protected class Stuff_1_Assignment_name extends AssignmentToken  {
 		return TestLanguageGrammarAccess.INSTANCE.prStuff().ele1AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");

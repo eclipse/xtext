@@ -6,6 +6,7 @@ package org.eclipse.xtext.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -20,7 +21,7 @@ import org.eclipse.xtext.parser.packrat.consumers.XtextGroupConsumer;
 @SuppressWarnings("unused")
 public final class XtextAlternativesConsumer extends NonTerminalConsumer {
 
-	private XtextGroupConsumer groupConsumer;
+	private INonTerminalConsumer groupConsumer;
 
 	private ICharacterClass keyword$7$Delimiter;
 	
@@ -144,6 +145,7 @@ public final class XtextAlternativesConsumer extends NonTerminalConsumer {
 		return XtextGrammarAccess.INSTANCE.prAlternatives();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -153,7 +155,7 @@ public final class XtextAlternativesConsumer extends NonTerminalConsumer {
 		return "AbstractElement";
 	}
 	
-	public void setGroupConsumer(XtextGroupConsumer groupConsumer) {
+	public void setGroupConsumer(INonTerminalConsumer groupConsumer) {
 		this.groupConsumer = groupConsumer;
 	}
 	

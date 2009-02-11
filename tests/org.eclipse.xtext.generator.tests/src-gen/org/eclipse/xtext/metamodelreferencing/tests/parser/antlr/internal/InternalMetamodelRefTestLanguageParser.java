@@ -74,7 +74,7 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:68:45: (iv_ruleFoo= ruleFoo EOF )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:69:2: iv_ruleFoo= ruleFoo EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTestLanguage.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTestLanguage.xmi#/0/@rules.0" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleFoo_in_entryRuleFoo72);
             iv_ruleFoo=ruleFoo();
             _fsp--;
@@ -121,7 +121,7 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFoo128); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@terminal" /* xtext::RuleCall */, "name"); 
+                createLeafNode("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTestLanguage.xmi#/0/@rules.0/@alternatives/@abstractTokens.0/@terminal" /* xtext::RuleCall */, "name"); 
                 
 
             	        if (current==null) {
@@ -154,7 +154,7 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
             	    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:104:6: lv_nameRefs= ruleNameRef
             	    {
             	     
-            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTestLanguage.xmi#/0/@rules.0/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleNameRef_in_ruleFoo173);
             	    lv_nameRefs=ruleNameRef();
@@ -215,7 +215,7 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:131:49: (iv_ruleNameRef= ruleNameRef EOF )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:132:2: iv_ruleNameRef= ruleNameRef EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTestLanguage.xmi#//@rules.1" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTestLanguage.xmi#/0/@rules.1" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleNameRef_in_entryRuleNameRef213);
             iv_ruleNameRef=ruleNameRef();
             _fsp--;
@@ -263,7 +263,7 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
             {
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleNameRef271); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTestLanguage.xmi#//@rules.1/@alternatives/@terminal" /* xtext::CrossReference */, "rule"); 
+                createLeafNode("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTestLanguage.xmi#/0/@rules.1/@alternatives/@terminal" /* xtext::CrossReference */, "rule"); 
                 
 
             }

@@ -6,6 +6,7 @@ package org.eclipse.xtext.parser.epatch.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -21,8 +22,8 @@ import org.eclipse.xtext.parser.epatch.parser.packrat.consumers.EpatchTestLangua
 @SuppressWarnings("unused")
 public final class EpatchTestLanguageNamedObjectConsumer extends NonTerminalConsumer {
 
-	private EpatchTestLanguageCreatedObjectConsumer createdObjectConsumer;
-	private EpatchTestLanguageObjectRefConsumer objectRefConsumer;
+	private INonTerminalConsumer createdObjectConsumer;
+	private INonTerminalConsumer objectRefConsumer;
 
 	public EpatchTestLanguageNamedObjectConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
@@ -64,6 +65,7 @@ public final class EpatchTestLanguageNamedObjectConsumer extends NonTerminalCons
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prNamedObject();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -73,11 +75,11 @@ public final class EpatchTestLanguageNamedObjectConsumer extends NonTerminalCons
 		return "NamedObject";
 	}
 	
-	public void setCreatedObjectConsumer(EpatchTestLanguageCreatedObjectConsumer createdObjectConsumer) {
+	public void setCreatedObjectConsumer(INonTerminalConsumer createdObjectConsumer) {
 		this.createdObjectConsumer = createdObjectConsumer;
 	}
 	
-	public void setObjectRefConsumer(EpatchTestLanguageObjectRefConsumer objectRefConsumer) {
+	public void setObjectRefConsumer(INonTerminalConsumer objectRefConsumer) {
 		this.objectRefConsumer = objectRefConsumer;
 	}
 	

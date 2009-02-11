@@ -6,6 +6,7 @@ package org.eclipse.xtext.example.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -21,8 +22,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGCons
 @SuppressWarnings("unused")
 public final class EcoreDslSTRING_OR_QIDConsumer extends NonTerminalConsumer {
 
-	private EcoreDslQIDConsumer qidConsumer;
-	private XtextBuiltinSTRINGConsumer stringConsumer;
+	private INonTerminalConsumer qidConsumer;
+	private ITerminalConsumer stringConsumer;
 
 	private ISequenceMatcher ruleCall$2$Delimiter;
 	
@@ -67,6 +68,7 @@ public final class EcoreDslSTRING_OR_QIDConsumer extends NonTerminalConsumer {
 		return EcoreDslGrammarAccess.INSTANCE.prSTRING_OR_QID();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -76,11 +78,11 @@ public final class EcoreDslSTRING_OR_QIDConsumer extends NonTerminalConsumer {
 		return "EString";
 	}
 	
-	public void setQidConsumer(EcoreDslQIDConsumer qidConsumer) {
+	public void setQidConsumer(INonTerminalConsumer qidConsumer) {
 		this.qidConsumer = qidConsumer;
 	}
 	
-	public void setStringConsumer(XtextBuiltinSTRINGConsumer stringConsumer) {
+	public void setStringConsumer(ITerminalConsumer stringConsumer) {
 		this.stringConsumer = stringConsumer;
 	}
 	

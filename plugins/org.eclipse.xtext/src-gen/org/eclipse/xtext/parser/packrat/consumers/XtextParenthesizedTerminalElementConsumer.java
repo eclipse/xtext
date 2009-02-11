@@ -6,6 +6,7 @@ package org.eclipse.xtext.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -20,7 +21,7 @@ import org.eclipse.xtext.parser.packrat.consumers.XtextTerminalAlternativesConsu
 @SuppressWarnings("unused")
 public final class XtextParenthesizedTerminalElementConsumer extends NonTerminalConsumer {
 
-	private XtextTerminalAlternativesConsumer terminalAlternativesConsumer;
+	private INonTerminalConsumer terminalAlternativesConsumer;
 
 	private ICharacterClass keyword$3$Delimiter;
 	
@@ -93,6 +94,7 @@ public final class XtextParenthesizedTerminalElementConsumer extends NonTerminal
 		return XtextGrammarAccess.INSTANCE.prParenthesizedTerminalElement();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -102,7 +104,7 @@ public final class XtextParenthesizedTerminalElementConsumer extends NonTerminal
 		return "AbstractElement";
 	}
 	
-	public void setTerminalAlternativesConsumer(XtextTerminalAlternativesConsumer terminalAlternativesConsumer) {
+	public void setTerminalAlternativesConsumer(INonTerminalConsumer terminalAlternativesConsumer) {
 		this.terminalAlternativesConsumer = terminalAlternativesConsumer;
 	}
 	

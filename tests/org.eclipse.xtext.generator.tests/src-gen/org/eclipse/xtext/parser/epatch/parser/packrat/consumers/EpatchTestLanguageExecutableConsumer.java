@@ -6,6 +6,7 @@ package org.eclipse.xtext.parser.epatch.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -21,8 +22,8 @@ import org.eclipse.xtext.parser.epatch.parser.packrat.consumers.EpatchTestLangua
 @SuppressWarnings("unused")
 public final class EpatchTestLanguageExecutableConsumer extends NonTerminalConsumer {
 
-	private EpatchTestLanguageExpressionExecutableConsumer expressionExecutableConsumer;
-	private EpatchTestLanguageJavaExecutableConsumer javaExecutableConsumer;
+	private INonTerminalConsumer expressionExecutableConsumer;
+	private INonTerminalConsumer javaExecutableConsumer;
 
 	public EpatchTestLanguageExecutableConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
@@ -64,6 +65,7 @@ public final class EpatchTestLanguageExecutableConsumer extends NonTerminalConsu
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prExecutable();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -73,11 +75,11 @@ public final class EpatchTestLanguageExecutableConsumer extends NonTerminalConsu
 		return "Executable";
 	}
 	
-	public void setExpressionExecutableConsumer(EpatchTestLanguageExpressionExecutableConsumer expressionExecutableConsumer) {
+	public void setExpressionExecutableConsumer(INonTerminalConsumer expressionExecutableConsumer) {
 		this.expressionExecutableConsumer = expressionExecutableConsumer;
 	}
 	
-	public void setJavaExecutableConsumer(EpatchTestLanguageJavaExecutableConsumer javaExecutableConsumer) {
+	public void setJavaExecutableConsumer(INonTerminalConsumer javaExecutableConsumer) {
 		this.javaExecutableConsumer = javaExecutableConsumer;
 	}
 	

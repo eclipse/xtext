@@ -6,6 +6,7 @@ package org.eclipse.xtext.example.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -22,9 +23,9 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGCons
 @SuppressWarnings("unused")
 public final class EcoreDslEAnnotationDeclConsumer extends NonTerminalConsumer {
 
-	private XtextBuiltinIDConsumer idConsumer;
-	private EcoreDslMapEntrySuperConsumer mapEntrySuperConsumer;
-	private XtextBuiltinSTRINGConsumer stringConsumer;
+	private ITerminalConsumer idConsumer;
+	private INonTerminalConsumer mapEntrySuperConsumer;
+	private ITerminalConsumer stringConsumer;
 
 	private ISequenceMatcher crossReference$11$Delimiter;
 	
@@ -255,6 +256,7 @@ public final class EcoreDslEAnnotationDeclConsumer extends NonTerminalConsumer {
 		return EcoreDslGrammarAccess.INSTANCE.prEAnnotationDecl();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -264,15 +266,15 @@ public final class EcoreDslEAnnotationDeclConsumer extends NonTerminalConsumer {
 		return "EAnnotation";
 	}
 	
-	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
+	public void setIdConsumer(ITerminalConsumer idConsumer) {
 		this.idConsumer = idConsumer;
 	}
 	
-	public void setMapEntrySuperConsumer(EcoreDslMapEntrySuperConsumer mapEntrySuperConsumer) {
+	public void setMapEntrySuperConsumer(INonTerminalConsumer mapEntrySuperConsumer) {
 		this.mapEntrySuperConsumer = mapEntrySuperConsumer;
 	}
 	
-	public void setStringConsumer(XtextBuiltinSTRINGConsumer stringConsumer) {
+	public void setStringConsumer(ITerminalConsumer stringConsumer) {
 		this.stringConsumer = stringConsumer;
 	}
 	

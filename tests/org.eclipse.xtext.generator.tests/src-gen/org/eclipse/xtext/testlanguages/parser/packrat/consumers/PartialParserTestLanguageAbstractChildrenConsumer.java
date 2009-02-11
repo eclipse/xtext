@@ -6,6 +6,7 @@ package org.eclipse.xtext.testlanguages.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -20,7 +21,7 @@ import org.eclipse.xtext.testlanguages.parser.packrat.consumers.PartialParserTes
 @SuppressWarnings("unused")
 public final class PartialParserTestLanguageAbstractChildrenConsumer extends NonTerminalConsumer {
 
-	private PartialParserTestLanguageAbstractChildConsumer abstractChildConsumer;
+	private INonTerminalConsumer abstractChildConsumer;
 
 	private ICharacterClass keyword$4$Delimiter;
 	
@@ -148,6 +149,7 @@ public final class PartialParserTestLanguageAbstractChildrenConsumer extends Non
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prAbstractChildren();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -157,7 +159,7 @@ public final class PartialParserTestLanguageAbstractChildrenConsumer extends Non
 		return "AbstractChildren";
 	}
 	
-	public void setAbstractChildConsumer(PartialParserTestLanguageAbstractChildConsumer abstractChildConsumer) {
+	public void setAbstractChildConsumer(INonTerminalConsumer abstractChildConsumer) {
 		this.abstractChildConsumer = abstractChildConsumer;
 	}
 	

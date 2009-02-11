@@ -96,6 +96,7 @@ protected class «elementMethodName()» extends GroupToken {
 	
 «EXPAND constructor-»
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new «abstractTokens.get(1).elementMethodName()»(current, this).firstSolution();
 		while(s1 != null) {
@@ -124,7 +125,8 @@ protected class «elementMethodName()» extends GroupToken {
 protected class «elementMethodName()» extends AlternativesToken {
 
 «EXPAND constructor-»
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new «groups.get(1).elementMethodName()»(current, this) : new «groups.get(0).elementMethodName()»(current, this);
 		Solution s = t.firstSolution();
@@ -147,6 +149,7 @@ protected class «elementMethodName()» extends RuleCallToken {
 	
 «EXPAND constructor-»
 	
+	@Override
 	protected Solution createSolution() {
 «IF calledParserRule() != null-»
 		if(checkForRecursion(«calledParserRule().alternatives.elementMethodName()».class, current)) return null;
@@ -231,6 +234,7 @@ protected class «elementMethodName()» extends AssignmentToken  {
 	
 «EXPAND constructor-»
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("«feature»",«IF !isAssignmentRequired()»!«ENDIF»IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("«feature»");
@@ -250,6 +254,7 @@ protected class «elementMethodName()» extends ActionToken  {
 
 «EXPAND constructor-»
 	
+	@Override
 	protected Solution createSolution() {
 		if(!current.isInstanceOf("«typeName.type.name»")) return null;
 		Object val = current.getConsumable("«feature»", false);
@@ -287,6 +292,7 @@ protected class «elementMethodName()» extends AbstractToken  {
 
 «EXPAND constructor-»
 	
+	@Override
 	protected Solution createSolution() {
 		// FIXME: This class has been generated because there is an unassigned 
 		// CrossReference in your grammar. This means your grammar is invalid, 
