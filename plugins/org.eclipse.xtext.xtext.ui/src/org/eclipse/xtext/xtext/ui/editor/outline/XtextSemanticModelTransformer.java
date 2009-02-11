@@ -11,6 +11,7 @@ package org.eclipse.xtext.xtext.ui.editor.outline;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Grammar;
@@ -23,6 +24,7 @@ import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
 import org.eclipse.xtext.ui.common.editor.outline.impl.DefaultSemanticModelTransformer;
+import org.eclipse.xtext.ui.core.ILocationInFileProvider;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.XtextSwitch;
 import org.eclipse.xtext.xtext.ui.Activator;
@@ -31,6 +33,10 @@ import org.eclipse.xtext.xtext.ui.Activator;
  * @author Peter Friese - Initial contribution and API
  */
 public class XtextSemanticModelTransformer extends DefaultSemanticModelTransformer {
+
+	public XtextSemanticModelTransformer(ILocationInFileProvider locationProvider, ILabelProvider labelProvider) {
+		super(locationProvider, labelProvider);
+	}
 
 	@Override
 	public boolean consumeSemanticNode(EObject semanticNode) {
