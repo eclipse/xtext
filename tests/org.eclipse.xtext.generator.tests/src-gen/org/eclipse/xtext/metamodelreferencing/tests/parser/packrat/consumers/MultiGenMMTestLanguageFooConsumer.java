@@ -6,6 +6,7 @@ package org.eclipse.xtext.metamodelreferencing.tests.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -21,8 +22,8 @@ import org.eclipse.xtext.metamodelreferencing.tests.parser.packrat.consumers.Mul
 @SuppressWarnings("unused")
 public final class MultiGenMMTestLanguageFooConsumer extends NonTerminalConsumer {
 
-	private XtextBuiltinIDConsumer idConsumer;
-	private MultiGenMMTestLanguageNameRefConsumer nameRefConsumer;
+	private ITerminalConsumer idConsumer;
+	private INonTerminalConsumer nameRefConsumer;
 
 	private ISequenceMatcher ruleCall$3$Delimiter;
 	
@@ -108,6 +109,7 @@ public final class MultiGenMMTestLanguageFooConsumer extends NonTerminalConsumer
 		return MultiGenMMTestLanguageGrammarAccess.INSTANCE.prFoo();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -117,11 +119,11 @@ public final class MultiGenMMTestLanguageFooConsumer extends NonTerminalConsumer
 		return "Foo";
 	}
 	
-	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
+	public void setIdConsumer(ITerminalConsumer idConsumer) {
 		this.idConsumer = idConsumer;
 	}
 	
-	public void setNameRefConsumer(MultiGenMMTestLanguageNameRefConsumer nameRefConsumer) {
+	public void setNameRefConsumer(INonTerminalConsumer nameRefConsumer) {
 		this.nameRefConsumer = nameRefConsumer;
 	}
 	

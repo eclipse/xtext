@@ -6,6 +6,7 @@ package org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -22,9 +23,9 @@ import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerm
 @SuppressWarnings("unused")
 public final class XtextTerminalsTestLanguageAbstractTokenConsumer extends NonTerminalConsumer {
 
-	private XtextTerminalsTestLanguageAbstractTerminalConsumer abstractTerminalConsumer;
-	private XtextTerminalsTestLanguageActionConsumer actionConsumer;
-	private XtextTerminalsTestLanguageAssignmentConsumer assignmentConsumer;
+	private INonTerminalConsumer abstractTerminalConsumer;
+	private INonTerminalConsumer actionConsumer;
+	private INonTerminalConsumer assignmentConsumer;
 
 	private ICharacterClass keyword$10$Delimiter;
 	
@@ -161,6 +162,7 @@ public final class XtextTerminalsTestLanguageAbstractTokenConsumer extends NonTe
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAbstractToken();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -170,15 +172,15 @@ public final class XtextTerminalsTestLanguageAbstractTokenConsumer extends NonTe
 		return "AbstractElement";
 	}
 	
-	public void setAbstractTerminalConsumer(XtextTerminalsTestLanguageAbstractTerminalConsumer abstractTerminalConsumer) {
+	public void setAbstractTerminalConsumer(INonTerminalConsumer abstractTerminalConsumer) {
 		this.abstractTerminalConsumer = abstractTerminalConsumer;
 	}
 	
-	public void setActionConsumer(XtextTerminalsTestLanguageActionConsumer actionConsumer) {
+	public void setActionConsumer(INonTerminalConsumer actionConsumer) {
 		this.actionConsumer = actionConsumer;
 	}
 	
-	public void setAssignmentConsumer(XtextTerminalsTestLanguageAssignmentConsumer assignmentConsumer) {
+	public void setAssignmentConsumer(INonTerminalConsumer assignmentConsumer) {
 		this.assignmentConsumer = assignmentConsumer;
 	}
 	

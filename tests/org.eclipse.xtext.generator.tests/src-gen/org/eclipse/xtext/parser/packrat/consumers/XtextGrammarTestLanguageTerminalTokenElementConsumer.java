@@ -6,6 +6,7 @@ package org.eclipse.xtext.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -24,11 +25,11 @@ import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageWildca
 @SuppressWarnings("unused")
 public final class XtextGrammarTestLanguageTerminalTokenElementConsumer extends NonTerminalConsumer {
 
-	private XtextGrammarTestLanguageAbstractNegatedTokenConsumer abstractNegatedTokenConsumer;
-	private XtextGrammarTestLanguageCharacterRangeConsumer characterRangeConsumer;
-	private XtextGrammarTestLanguageParenthesizedTerminalElementConsumer parenthesizedTerminalElementConsumer;
-	private XtextGrammarTestLanguageRuleCallConsumer ruleCallConsumer;
-	private XtextGrammarTestLanguageWildcardConsumer wildcardConsumer;
+	private INonTerminalConsumer abstractNegatedTokenConsumer;
+	private INonTerminalConsumer characterRangeConsumer;
+	private INonTerminalConsumer parenthesizedTerminalElementConsumer;
+	private INonTerminalConsumer ruleCallConsumer;
+	private INonTerminalConsumer wildcardConsumer;
 
 	public XtextGrammarTestLanguageTerminalTokenElementConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
@@ -97,6 +98,7 @@ public final class XtextGrammarTestLanguageTerminalTokenElementConsumer extends 
 		return XtextGrammarTestLanguageGrammarAccess.INSTANCE.prTerminalTokenElement();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -106,23 +108,23 @@ public final class XtextGrammarTestLanguageTerminalTokenElementConsumer extends 
 		return "AbstractElement";
 	}
 	
-	public void setAbstractNegatedTokenConsumer(XtextGrammarTestLanguageAbstractNegatedTokenConsumer abstractNegatedTokenConsumer) {
+	public void setAbstractNegatedTokenConsumer(INonTerminalConsumer abstractNegatedTokenConsumer) {
 		this.abstractNegatedTokenConsumer = abstractNegatedTokenConsumer;
 	}
 	
-	public void setCharacterRangeConsumer(XtextGrammarTestLanguageCharacterRangeConsumer characterRangeConsumer) {
+	public void setCharacterRangeConsumer(INonTerminalConsumer characterRangeConsumer) {
 		this.characterRangeConsumer = characterRangeConsumer;
 	}
 	
-	public void setParenthesizedTerminalElementConsumer(XtextGrammarTestLanguageParenthesizedTerminalElementConsumer parenthesizedTerminalElementConsumer) {
+	public void setParenthesizedTerminalElementConsumer(INonTerminalConsumer parenthesizedTerminalElementConsumer) {
 		this.parenthesizedTerminalElementConsumer = parenthesizedTerminalElementConsumer;
 	}
 	
-	public void setRuleCallConsumer(XtextGrammarTestLanguageRuleCallConsumer ruleCallConsumer) {
+	public void setRuleCallConsumer(INonTerminalConsumer ruleCallConsumer) {
 		this.ruleCallConsumer = ruleCallConsumer;
 	}
 	
-	public void setWildcardConsumer(XtextGrammarTestLanguageWildcardConsumer wildcardConsumer) {
+	public void setWildcardConsumer(INonTerminalConsumer wildcardConsumer) {
 		this.wildcardConsumer = wildcardConsumer;
 	}
 	

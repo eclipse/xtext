@@ -1,171 +1,138 @@
 <?xml version="1.0" encoding="ASCII"?>
-<xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:xtext="http://www.eclipse.org/2008/Xtext" name="org.eclipse.xtext.testlanguages.PartialParserTestLanguage">
-  <superGrammar href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#/"/>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="partialParserTestLanguage">
-    <ePackage href="http://example.xtext.org/PartialParserTestLanguage#/"/>
-  </metamodelDeclarations>
-  <rules xsi:type="xtext:ParserRule" name="Container">
-    <type metamodel="//@metamodelDeclarations.0">
-      <type xsi:type="ecore:EClass" href="http://example.xtext.org/PartialParserTestLanguage#//Container"/>
-    </type>
-    <alternatives xsi:type="xtext:Group">
-      <abstractTokens xsi:type="xtext:Group">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
+  <xtext:Grammar name="org.eclipse.xtext.testlanguages.PartialParserTestLanguage" superGrammar="/1">
+    <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="partialParserTestLanguage">
+      <ePackage href="http://example.xtext.org/PartialParserTestLanguage#/"/>
+    </metamodelDeclarations>
+    <rules xsi:type="xtext:ParserRule" name="Container">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EClass" href="http://example.xtext.org/PartialParserTestLanguage#//Container"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
         <abstractTokens xsi:type="xtext:Group">
           <abstractTokens xsi:type="xtext:Group">
-            <abstractTokens xsi:type="xtext:Keyword" value="container"/>
-            <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
-              <terminal xsi:type="xtext:RuleCall">
-                <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.0"/>
-              </terminal>
+            <abstractTokens xsi:type="xtext:Group">
+              <abstractTokens xsi:type="xtext:Keyword" value="container"/>
+              <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
+                <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+              </abstractTokens>
             </abstractTokens>
-          </abstractTokens>
-          <abstractTokens xsi:type="xtext:Keyword" value="{"/>
-        </abstractTokens>
-        <abstractTokens xsi:type="xtext:Alternatives" cardinality="*">
-          <groups xsi:type="xtext:Assignment" feature="nested" operator="+=">
-            <terminal xsi:type="xtext:RuleCall" rule="//@rules.1"/>
-          </groups>
-          <groups xsi:type="xtext:Assignment" feature="content" operator="+=">
-            <terminal xsi:type="xtext:RuleCall" rule="//@rules.2"/>
-          </groups>
-        </abstractTokens>
-      </abstractTokens>
-      <abstractTokens xsi:type="xtext:Keyword" value="}"/>
-    </alternatives>
-  </rules>
-  <rules xsi:type="xtext:ParserRule" name="Nested">
-    <type metamodel="//@metamodelDeclarations.0">
-      <type xsi:type="ecore:EClass" href="http://example.xtext.org/PartialParserTestLanguage#//Nested"/>
-    </type>
-    <alternatives xsi:type="xtext:Group">
-      <abstractTokens xsi:type="xtext:Group">
-        <abstractTokens xsi:type="xtext:Group">
-          <abstractTokens xsi:type="xtext:Keyword" value="nested"/>
-          <abstractTokens xsi:type="xtext:Keyword" value="{"/>
-        </abstractTokens>
-        <abstractTokens xsi:type="xtext:Assignment" cardinality="+" feature="nested" operator="+=">
-          <terminal xsi:type="xtext:RuleCall" rule="//@rules.0"/>
-        </abstractTokens>
-      </abstractTokens>
-      <abstractTokens xsi:type="xtext:Keyword" value="}"/>
-    </alternatives>
-  </rules>
-  <rules xsi:type="xtext:ParserRule" name="Content">
-    <type metamodel="//@metamodelDeclarations.0">
-      <type xsi:type="ecore:EClass" href="http://example.xtext.org/PartialParserTestLanguage#//Content"/>
-    </type>
-    <alternatives xsi:type="xtext:Alternatives">
-      <groups xsi:type="xtext:RuleCall" rule="//@rules.3"/>
-      <groups xsi:type="xtext:RuleCall" rule="//@rules.5"/>
-    </alternatives>
-  </rules>
-  <rules xsi:type="xtext:ParserRule" name="Children">
-    <type metamodel="//@metamodelDeclarations.0">
-      <type xsi:type="ecore:EClass" href="http://example.xtext.org/PartialParserTestLanguage#//Children"/>
-    </type>
-    <alternatives xsi:type="xtext:Group">
-      <abstractTokens xsi:type="xtext:Group">
-        <abstractTokens xsi:type="xtext:Group">
-          <abstractTokens xsi:type="xtext:Group">
-            <abstractTokens xsi:type="xtext:Keyword" value="children"/>
             <abstractTokens xsi:type="xtext:Keyword" value="{"/>
           </abstractTokens>
-          <abstractTokens xsi:type="xtext:Assignment" feature="children" operator="+=">
-            <terminal xsi:type="xtext:RuleCall" rule="//@rules.4"/>
+          <abstractTokens xsi:type="xtext:Alternatives" cardinality="*">
+            <groups xsi:type="xtext:Assignment" feature="nested" operator="+=">
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+            </groups>
+            <groups xsi:type="xtext:Assignment" feature="content" operator="+=">
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.2"/>
+            </groups>
           </abstractTokens>
         </abstractTokens>
-        <abstractTokens xsi:type="xtext:Group" cardinality="*">
-          <abstractTokens xsi:type="xtext:Keyword" value=","/>
-          <abstractTokens xsi:type="xtext:Assignment" feature="children" operator="+=">
-            <terminal xsi:type="xtext:RuleCall" rule="//@rules.4"/>
-          </abstractTokens>
-        </abstractTokens>
-      </abstractTokens>
-      <abstractTokens xsi:type="xtext:Keyword" value="}"/>
-    </alternatives>
-  </rules>
-  <rules xsi:type="xtext:ParserRule" name="Child">
-    <type metamodel="//@metamodelDeclarations.0">
-      <type xsi:type="ecore:EClass" href="http://example.xtext.org/PartialParserTestLanguage#//Child"/>
-    </type>
-    <alternatives xsi:type="xtext:Group">
-      <abstractTokens xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Keyword" value="}"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Nested">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EClass" href="http://example.xtext.org/PartialParserTestLanguage#//Nested"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
         <abstractTokens xsi:type="xtext:Group">
           <abstractTokens xsi:type="xtext:Group">
-            <abstractTokens xsi:type="xtext:Keyword" value="->"/>
-            <abstractTokens xsi:type="xtext:Keyword" value="C"/>
+            <abstractTokens xsi:type="xtext:Keyword" value="nested"/>
+            <abstractTokens xsi:type="xtext:Keyword" value="{"/>
           </abstractTokens>
-          <abstractTokens xsi:type="xtext:Keyword" value="("/>
+          <abstractTokens xsi:type="xtext:Assignment" cardinality="+" feature="nested" operator="+=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+          </abstractTokens>
         </abstractTokens>
-        <abstractTokens xsi:type="xtext:Assignment" feature="value" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="//@rules.9"/>
-        </abstractTokens>
-      </abstractTokens>
-      <abstractTokens xsi:type="xtext:Keyword" value=")"/>
-    </alternatives>
-  </rules>
-  <rules xsi:type="xtext:ParserRule" name="AbstractChildren">
-    <type metamodel="//@metamodelDeclarations.0">
-      <type xsi:type="ecore:EClass" href="http://example.xtext.org/PartialParserTestLanguage#//AbstractChildren"/>
-    </type>
-    <alternatives xsi:type="xtext:Group">
-      <abstractTokens xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Keyword" value="}"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Content">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EClass" href="http://example.xtext.org/PartialParserTestLanguage#//Content"/>
+      </type>
+      <alternatives xsi:type="xtext:Alternatives">
+        <groups xsi:type="xtext:RuleCall" rule="/0/@rules.3"/>
+        <groups xsi:type="xtext:RuleCall" rule="/0/@rules.5"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Children">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EClass" href="http://example.xtext.org/PartialParserTestLanguage#//Children"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
         <abstractTokens xsi:type="xtext:Group">
-          <abstractTokens xsi:type="xtext:Keyword" value="abstract children"/>
-          <abstractTokens xsi:type="xtext:Keyword" value="{"/>
+          <abstractTokens xsi:type="xtext:Group">
+            <abstractTokens xsi:type="xtext:Group">
+              <abstractTokens xsi:type="xtext:Keyword" value="children"/>
+              <abstractTokens xsi:type="xtext:Keyword" value="{"/>
+            </abstractTokens>
+            <abstractTokens xsi:type="xtext:Assignment" feature="children" operator="+=">
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.4"/>
+            </abstractTokens>
+          </abstractTokens>
+          <abstractTokens xsi:type="xtext:Group" cardinality="*">
+            <abstractTokens xsi:type="xtext:Keyword" value=","/>
+            <abstractTokens xsi:type="xtext:Assignment" feature="children" operator="+=">
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.4"/>
+            </abstractTokens>
+          </abstractTokens>
         </abstractTokens>
-        <abstractTokens xsi:type="xtext:Assignment" cardinality="+" feature="abstractChildren" operator="+=">
-          <terminal xsi:type="xtext:RuleCall" rule="//@rules.6"/>
-        </abstractTokens>
-      </abstractTokens>
-      <abstractTokens xsi:type="xtext:Keyword" value="}"/>
-    </alternatives>
-  </rules>
-  <rules xsi:type="xtext:ParserRule" name="AbstractChild">
-    <type metamodel="//@metamodelDeclarations.0">
-      <type xsi:type="ecore:EClass" href="http://example.xtext.org/PartialParserTestLanguage#//AbstractChild"/>
-    </type>
-    <alternatives xsi:type="xtext:Alternatives">
-      <groups xsi:type="xtext:RuleCall" rule="//@rules.7"/>
-      <groups xsi:type="xtext:RuleCall" rule="//@rules.8"/>
-    </alternatives>
-  </rules>
-  <rules xsi:type="xtext:ParserRule" name="FirstConcrete">
-    <type metamodel="//@metamodelDeclarations.0">
-      <type xsi:type="ecore:EClass" href="http://example.xtext.org/PartialParserTestLanguage#//FirstConcrete"/>
-    </type>
-    <alternatives xsi:type="xtext:Group">
-      <abstractTokens xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Keyword" value="}"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Child">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EClass" href="http://example.xtext.org/PartialParserTestLanguage#//Child"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
         <abstractTokens xsi:type="xtext:Group">
           <abstractTokens xsi:type="xtext:Group">
             <abstractTokens xsi:type="xtext:Group">
               <abstractTokens xsi:type="xtext:Keyword" value="->"/>
-              <abstractTokens xsi:type="xtext:Keyword" value="F"/>
+              <abstractTokens xsi:type="xtext:Keyword" value="C"/>
             </abstractTokens>
             <abstractTokens xsi:type="xtext:Keyword" value="("/>
           </abstractTokens>
           <abstractTokens xsi:type="xtext:Assignment" feature="value" operator="=">
-            <terminal xsi:type="xtext:RuleCall" rule="//@rules.9"/>
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.9"/>
           </abstractTokens>
         </abstractTokens>
-        <abstractTokens xsi:type="xtext:Assignment" cardinality="?" feature="referencedContainer" operator="=">
-          <terminal xsi:type="xtext:CrossReference">
-            <type metamodel="//@metamodelDeclarations.0">
-              <type xsi:type="ecore:EClass" href="http://example.xtext.org/PartialParserTestLanguage#//Container"/>
-            </type>
-            <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.0"/>
-          </terminal>
+        <abstractTokens xsi:type="xtext:Keyword" value=")"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="AbstractChildren">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EClass" href="http://example.xtext.org/PartialParserTestLanguage#//AbstractChildren"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Group">
+            <abstractTokens xsi:type="xtext:Keyword" value="abstract children"/>
+            <abstractTokens xsi:type="xtext:Keyword" value="{"/>
+          </abstractTokens>
+          <abstractTokens xsi:type="xtext:Assignment" cardinality="+" feature="abstractChildren" operator="+=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.6"/>
+          </abstractTokens>
         </abstractTokens>
-      </abstractTokens>
-      <abstractTokens xsi:type="xtext:Keyword" value=")"/>
-    </alternatives>
-  </rules>
-  <rules xsi:type="xtext:ParserRule" name="SecondConcrete">
-    <type metamodel="//@metamodelDeclarations.0">
-      <type xsi:type="ecore:EClass" href="http://example.xtext.org/PartialParserTestLanguage#//SecondConcrete"/>
-    </type>
-    <alternatives xsi:type="xtext:Group">
-      <abstractTokens xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Keyword" value="}"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="AbstractChild">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EClass" href="http://example.xtext.org/PartialParserTestLanguage#//AbstractChild"/>
+      </type>
+      <alternatives xsi:type="xtext:Alternatives">
+        <groups xsi:type="xtext:RuleCall" rule="/0/@rules.7"/>
+        <groups xsi:type="xtext:RuleCall" rule="/0/@rules.8"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="FirstConcrete">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EClass" href="http://example.xtext.org/PartialParserTestLanguage#//FirstConcrete"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
         <abstractTokens xsi:type="xtext:Group">
           <abstractTokens xsi:type="xtext:Group">
             <abstractTokens xsi:type="xtext:Group">
@@ -173,34 +140,102 @@
                 <abstractTokens xsi:type="xtext:Keyword" value="->"/>
                 <abstractTokens xsi:type="xtext:Keyword" value="F"/>
               </abstractTokens>
-              <abstractTokens xsi:type="xtext:Keyword" value="S"/>
+              <abstractTokens xsi:type="xtext:Keyword" value="("/>
             </abstractTokens>
-            <abstractTokens xsi:type="xtext:Keyword" value="("/>
+            <abstractTokens xsi:type="xtext:Assignment" feature="value" operator="=">
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.9"/>
+            </abstractTokens>
           </abstractTokens>
-          <abstractTokens xsi:type="xtext:Assignment" feature="value" operator="=">
-            <terminal xsi:type="xtext:RuleCall" rule="//@rules.9"/>
+          <abstractTokens xsi:type="xtext:Assignment" cardinality="?" feature="referencedContainer" operator="=">
+            <terminal xsi:type="xtext:CrossReference" rule="/1/@rules.0">
+              <type metamodel="/0/@metamodelDeclarations.0">
+                <type xsi:type="ecore:EClass" href="http://example.xtext.org/PartialParserTestLanguage#//Container"/>
+              </type>
+            </terminal>
           </abstractTokens>
         </abstractTokens>
-        <abstractTokens xsi:type="xtext:Assignment" cardinality="?" feature="referencedChildren" operator="+=">
-          <terminal xsi:type="xtext:CrossReference">
-            <type metamodel="//@metamodelDeclarations.0">
-              <type xsi:type="ecore:EClass" href="http://example.xtext.org/PartialParserTestLanguage#//Child"/>
-            </type>
-            <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.0"/>
-          </terminal>
+        <abstractTokens xsi:type="xtext:Keyword" value=")"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="SecondConcrete">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EClass" href="http://example.xtext.org/PartialParserTestLanguage#//SecondConcrete"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Group">
+            <abstractTokens xsi:type="xtext:Group">
+              <abstractTokens xsi:type="xtext:Group">
+                <abstractTokens xsi:type="xtext:Group">
+                  <abstractTokens xsi:type="xtext:Keyword" value="->"/>
+                  <abstractTokens xsi:type="xtext:Keyword" value="F"/>
+                </abstractTokens>
+                <abstractTokens xsi:type="xtext:Keyword" value="S"/>
+              </abstractTokens>
+              <abstractTokens xsi:type="xtext:Keyword" value="("/>
+            </abstractTokens>
+            <abstractTokens xsi:type="xtext:Assignment" feature="value" operator="=">
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.9"/>
+            </abstractTokens>
+          </abstractTokens>
+          <abstractTokens xsi:type="xtext:Assignment" cardinality="?" feature="referencedChildren" operator="+=">
+            <terminal xsi:type="xtext:CrossReference" rule="/1/@rules.0">
+              <type metamodel="/0/@metamodelDeclarations.0">
+                <type xsi:type="ecore:EClass" href="http://example.xtext.org/PartialParserTestLanguage#//Child"/>
+              </type>
+            </terminal>
+          </abstractTokens>
         </abstractTokens>
-      </abstractTokens>
-      <abstractTokens xsi:type="xtext:Keyword" value=")"/>
-    </alternatives>
-  </rules>
-  <rules xsi:type="xtext:ParserRule" name="Named">
-    <type metamodel="//@metamodelDeclarations.0">
-      <type xsi:type="ecore:EClass" href="http://example.xtext.org/PartialParserTestLanguage#//Named"/>
-    </type>
-    <alternatives xsi:type="xtext:Assignment" feature="name" operator="=">
-      <terminal xsi:type="xtext:RuleCall">
-        <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#//@rules.0"/>
-      </terminal>
-    </alternatives>
-  </rules>
-</xtext:Grammar>
+        <abstractTokens xsi:type="xtext:Keyword" value=")"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Named">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EClass" href="http://example.xtext.org/PartialParserTestLanguage#//Named"/>
+      </type>
+      <alternatives xsi:type="xtext:Assignment" feature="name" operator="=">
+        <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+      </alternatives>
+    </rules>
+  </xtext:Grammar>
+  <xtext:Grammar abstract="true" name="org.eclipse.xtext.builtin.XtextBuiltin" definesHiddenTokens="true" hiddenTokens="/1/@rules.5 /1/@rules.3 /1/@rules.4">
+    <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="ecore">
+      <ePackage href="http://www.eclipse.org/emf/2002/Ecore#/"/>
+    </metamodelDeclarations>
+    <rules xsi:type="xtext:LexerRule" name="ID" body="('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+    </rules>
+    <rules xsi:type="xtext:LexerRule" name="INT" body="('0'..'9')+">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      </type>
+    </rules>
+    <rules xsi:type="xtext:LexerRule" name="STRING" body="&#xA;&#x9;&#x9;&#x9;  '&quot;' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\&quot;'|'\''|'\\') | ~('\\'|'&quot;') )* '&quot;' | &#xA;              '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\&quot;'|'\''|'\\') | ~('\\'|'\'') )* '\''&#xA;              ">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+    </rules>
+    <rules xsi:type="xtext:LexerRule" name="ML_COMMENT" body="'/*' ( options {greedy=false;} : . )* '*/'">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+    </rules>
+    <rules xsi:type="xtext:LexerRule" name="SL_COMMENT" body="'//' ~('\n'|'\r')* ('\r'? '\n')?">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+    </rules>
+    <rules xsi:type="xtext:LexerRule" name="WS" body="(' '|'\t'|'\r'|'\n')+">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+    </rules>
+    <rules xsi:type="xtext:LexerRule" name="ANY_OTHER" body=".">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+    </rules>
+  </xtext:Grammar>
+</xmi:XMI>

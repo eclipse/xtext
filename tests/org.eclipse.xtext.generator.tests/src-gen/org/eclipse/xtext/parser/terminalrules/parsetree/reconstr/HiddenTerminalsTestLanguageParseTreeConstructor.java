@@ -47,7 +47,8 @@ protected class Model_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prModel().eleAlternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new Model_1_RuleCall_DatatypeHiddens(current, this) : new Model_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -68,7 +69,8 @@ protected class Model_0_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prModel().ele0Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new Model_0_1_RuleCall_InheritingHiddens(current, this) : new Model_0_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -89,7 +91,8 @@ protected class Model_0_0_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prModel().ele00Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new Model_0_0_1_RuleCall_OverridingHiddens(current, this) : new Model_0_0_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -110,7 +113,8 @@ protected class Model_0_0_0_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prModel().ele000Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new Model_0_0_0_1_RuleCall_WithHiddens(current, this) : new Model_0_0_0_0_RuleCall_WithoutHiddens(current, this);
 		Solution s = t.firstSolution();
@@ -132,6 +136,7 @@ protected class Model_0_0_0_0_RuleCall_WithoutHiddens extends RuleCallToken {
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prModel().ele0000ParserRuleCallWithoutHiddens();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(WithoutHiddens_Group.class, current)) return null;
 		if(!current.isInstanceOf("WithoutHiddens")) return null;
@@ -150,6 +155,7 @@ protected class Model_0_0_0_1_RuleCall_WithHiddens extends RuleCallToken {
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prModel().ele0001ParserRuleCallWithHiddens();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(WithHiddens_Group.class, current)) return null;
 		if(!current.isInstanceOf("WithHiddens")) return null;
@@ -169,6 +175,7 @@ protected class Model_0_0_1_RuleCall_OverridingHiddens extends RuleCallToken {
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prModel().ele001ParserRuleCallOverridingHiddens();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(OverridingHiddens_Group.class, current)) return null;
 		if(!current.isInstanceOf("OverridingHiddens")) return null;
@@ -188,6 +195,7 @@ protected class Model_0_1_RuleCall_InheritingHiddens extends RuleCallToken {
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prModel().ele01ParserRuleCallInheritingHiddens();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(InheritingHiddens_Group.class, current)) return null;
 		if(!current.isInstanceOf("InheritingHiddens")) return null;
@@ -207,6 +215,7 @@ protected class Model_1_RuleCall_DatatypeHiddens extends RuleCallToken {
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prModel().ele1ParserRuleCallDatatypeHiddens();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(DatatypeHiddens_Group.class, current)) return null;
 		if(!current.isInstanceOf("DatatypeHiddens")) return null;
@@ -236,6 +245,7 @@ protected class WithoutHiddens_Group extends GroupToken {
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prWithoutHiddens().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new WithoutHiddens_1_Assignment_valid(current, this).firstSolution();
 		while(s1 != null) {
@@ -264,6 +274,7 @@ protected class WithoutHiddens_0_Group extends GroupToken {
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prWithoutHiddens().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new WithoutHiddens_0_1_Assignment_spaces(current, this).firstSolution();
 		while(s1 != null) {
@@ -292,6 +303,7 @@ protected class WithoutHiddens_0_0_Group extends GroupToken {
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prWithoutHiddens().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new WithoutHiddens_0_0_1_Keyword_hiddens(current, this).firstSolution();
 		while(s1 != null) {
@@ -320,6 +332,7 @@ protected class WithoutHiddens_0_0_0_Group extends GroupToken {
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prWithoutHiddens().ele000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new WithoutHiddens_0_0_0_1_Assignment_spaces(current, this).firstSolution();
 		while(s1 != null) {
@@ -360,6 +373,7 @@ protected class WithoutHiddens_0_0_0_1_Assignment_spaces extends AssignmentToken
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prWithoutHiddens().ele0001AssignmentSpaces();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("spaces",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("spaces");
@@ -399,6 +413,7 @@ protected class WithoutHiddens_0_1_Assignment_spaces extends AssignmentToken  {
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prWithoutHiddens().ele01AssignmentSpaces();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("spaces",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("spaces");
@@ -425,6 +440,7 @@ protected class WithoutHiddens_1_Assignment_valid extends AssignmentToken  {
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prWithoutHiddens().ele1AssignmentValid();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("valid",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("valid");
@@ -461,6 +477,7 @@ protected class WithHiddens_Group extends GroupToken {
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prWithHiddens().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new WithHiddens_1_Assignment_valid(current, this).firstSolution();
 		while(s1 != null) {
@@ -489,6 +506,7 @@ protected class WithHiddens_0_Group extends GroupToken {
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prWithHiddens().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new WithHiddens_0_1_Keyword_hiddens(current, this).firstSolution();
 		while(s1 != null) {
@@ -542,6 +560,7 @@ protected class WithHiddens_1_Assignment_valid extends AssignmentToken  {
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prWithHiddens().ele1AssignmentValid();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("valid",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("valid");
@@ -578,6 +597,7 @@ protected class OverridingHiddens_Group extends GroupToken {
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prOverridingHiddens().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new OverridingHiddens_1_Assignment_valid(current, this).firstSolution();
 		while(s1 != null) {
@@ -606,6 +626,7 @@ protected class OverridingHiddens_0_Group extends GroupToken {
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prOverridingHiddens().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new OverridingHiddens_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -634,6 +655,7 @@ protected class OverridingHiddens_0_0_Group extends GroupToken {
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prOverridingHiddens().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new OverridingHiddens_0_0_1_Assignment_called(current, this).firstSolution();
 		while(s1 != null) {
@@ -662,6 +684,7 @@ protected class OverridingHiddens_0_0_0_Group extends GroupToken {
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prOverridingHiddens().ele000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new OverridingHiddens_0_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -690,6 +713,7 @@ protected class OverridingHiddens_0_0_0_0_Group extends GroupToken {
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prOverridingHiddens().ele0000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new OverridingHiddens_0_0_0_0_1_Keyword_hiddens(current, this).firstSolution();
 		while(s1 != null) {
@@ -756,6 +780,7 @@ protected class OverridingHiddens_0_0_1_Assignment_called extends AssignmentToke
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prOverridingHiddens().ele001AssignmentCalled();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("called",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("called");
@@ -801,6 +826,7 @@ protected class OverridingHiddens_1_Assignment_valid extends AssignmentToken  {
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prOverridingHiddens().ele1AssignmentValid();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("valid",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("valid");
@@ -837,6 +863,7 @@ protected class OverridingHiddensCall_Group extends GroupToken {
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prOverridingHiddensCall().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new OverridingHiddensCall_1_Assignment_valid(current, this).firstSolution();
 		while(s1 != null) {
@@ -865,6 +892,7 @@ protected class OverridingHiddensCall_0_Group extends GroupToken {
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prOverridingHiddensCall().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new OverridingHiddensCall_0_1_Assignment_spaces(current, this).firstSolution();
 		while(s1 != null) {
@@ -905,6 +933,7 @@ protected class OverridingHiddensCall_0_1_Assignment_spaces extends AssignmentTo
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prOverridingHiddensCall().ele01AssignmentSpaces();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("spaces",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("spaces");
@@ -931,6 +960,7 @@ protected class OverridingHiddensCall_1_Assignment_valid extends AssignmentToken
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prOverridingHiddensCall().ele1AssignmentValid();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("valid",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("valid");
@@ -967,6 +997,7 @@ protected class InheritingHiddens_Group extends GroupToken {
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prInheritingHiddens().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new InheritingHiddens_1_Assignment_valid(current, this).firstSolution();
 		while(s1 != null) {
@@ -995,6 +1026,7 @@ protected class InheritingHiddens_0_Group extends GroupToken {
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prInheritingHiddens().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new InheritingHiddens_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -1023,6 +1055,7 @@ protected class InheritingHiddens_0_0_Group extends GroupToken {
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prInheritingHiddens().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new InheritingHiddens_0_0_1_Alternatives(current, this).firstSolution();
 		while(s1 != null) {
@@ -1051,6 +1084,7 @@ protected class InheritingHiddens_0_0_0_Group extends GroupToken {
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prInheritingHiddens().ele000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new InheritingHiddens_0_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -1079,6 +1113,7 @@ protected class InheritingHiddens_0_0_0_0_Group extends GroupToken {
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prInheritingHiddens().ele0000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new InheritingHiddens_0_0_0_0_1_Keyword_hiddens(current, this).firstSolution();
 		while(s1 != null) {
@@ -1144,7 +1179,8 @@ protected class InheritingHiddens_0_0_1_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prInheritingHiddens().ele001Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new InheritingHiddens_0_0_1_1_Assignment_hidingCalled(current, this) : new InheritingHiddens_0_0_1_0_Assignment_called(current, this);
 		Solution s = t.firstSolution();
@@ -1166,6 +1202,7 @@ protected class InheritingHiddens_0_0_1_0_Assignment_called extends AssignmentTo
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prInheritingHiddens().ele0010AssignmentCalled();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("called",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("called");
@@ -1197,6 +1234,7 @@ protected class InheritingHiddens_0_0_1_1_Assignment_hidingCalled extends Assign
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prInheritingHiddens().ele0011AssignmentHidingCalled();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("hidingCalled",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("hidingCalled");
@@ -1243,6 +1281,7 @@ protected class InheritingHiddens_1_Assignment_valid extends AssignmentToken  {
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prInheritingHiddens().ele1AssignmentValid();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("valid",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("valid");
@@ -1279,6 +1318,7 @@ protected class DatatypeHiddens_Group extends GroupToken {
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prDatatypeHiddens().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new DatatypeHiddens_1_Assignment_valid(current, this).firstSolution();
 		while(s1 != null) {
@@ -1319,6 +1359,7 @@ protected class DatatypeHiddens_1_Assignment_valid extends AssignmentToken  {
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prDatatypeHiddens().ele1AssignmentValid();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("valid",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("valid");
@@ -1356,6 +1397,7 @@ protected class HidingHiddens_Group extends GroupToken {
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prHidingHiddens().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new HidingHiddens_1_Assignment_called(current, this).firstSolution();
 		while(s1 != null) {
@@ -1384,6 +1426,7 @@ protected class HidingHiddens_0_Group extends GroupToken {
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prHidingHiddens().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new HidingHiddens_0_1_Assignment_space(current, this).firstSolution();
 		while(s1 != null) {
@@ -1424,6 +1467,7 @@ protected class HidingHiddens_0_1_Assignment_space extends AssignmentToken  {
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prHidingHiddens().ele01AssignmentSpace();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("space",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("space");
@@ -1450,6 +1494,7 @@ protected class HidingHiddens_1_Assignment_called extends AssignmentToken  {
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prHidingHiddens().ele1AssignmentCalled();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("called",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("called");
@@ -1492,6 +1537,7 @@ protected class InheritingHiddensCall_Group extends GroupToken {
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prInheritingHiddensCall().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new InheritingHiddensCall_1_Assignment_valid(current, this).firstSolution();
 		while(s1 != null) {
@@ -1532,6 +1578,7 @@ protected class InheritingHiddensCall_1_Assignment_valid extends AssignmentToken
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prInheritingHiddensCall().ele1AssignmentValid();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("valid",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("valid");

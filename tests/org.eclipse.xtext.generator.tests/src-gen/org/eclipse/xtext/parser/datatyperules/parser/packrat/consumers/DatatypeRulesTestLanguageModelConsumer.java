@@ -6,6 +6,7 @@ package org.eclipse.xtext.parser.datatyperules.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -23,10 +24,10 @@ import org.eclipse.xtext.parser.datatyperules.parser.packrat.consumers.DatatypeR
 @SuppressWarnings("unused")
 public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalConsumer {
 
-	private DatatypeRulesTestLanguageDotsConsumer dotsConsumer;
-	private DatatypeRulesTestLanguageFractionConsumer fractionConsumer;
-	private DatatypeRulesTestLanguageNestedModelIdConsumer nestedModelIdConsumer;
-	private DatatypeRulesTestLanguageVectorConsumer vectorConsumer;
+	private INonTerminalConsumer dotsConsumer;
+	private INonTerminalConsumer fractionConsumer;
+	private INonTerminalConsumer nestedModelIdConsumer;
+	private INonTerminalConsumer vectorConsumer;
 
 	private ICharacterClass keyword$8$Delimiter;
 	
@@ -306,6 +307,7 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 		return DatatypeRulesTestLanguageGrammarAccess.INSTANCE.prModel();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -315,19 +317,19 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 		return "Model";
 	}
 	
-	public void setDotsConsumer(DatatypeRulesTestLanguageDotsConsumer dotsConsumer) {
+	public void setDotsConsumer(INonTerminalConsumer dotsConsumer) {
 		this.dotsConsumer = dotsConsumer;
 	}
 	
-	public void setFractionConsumer(DatatypeRulesTestLanguageFractionConsumer fractionConsumer) {
+	public void setFractionConsumer(INonTerminalConsumer fractionConsumer) {
 		this.fractionConsumer = fractionConsumer;
 	}
 	
-	public void setNestedModelIdConsumer(DatatypeRulesTestLanguageNestedModelIdConsumer nestedModelIdConsumer) {
+	public void setNestedModelIdConsumer(INonTerminalConsumer nestedModelIdConsumer) {
 		this.nestedModelIdConsumer = nestedModelIdConsumer;
 	}
 	
-	public void setVectorConsumer(DatatypeRulesTestLanguageVectorConsumer vectorConsumer) {
+	public void setVectorConsumer(INonTerminalConsumer vectorConsumer) {
 		this.vectorConsumer = vectorConsumer;
 	}
 	

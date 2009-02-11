@@ -6,6 +6,7 @@ package org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -20,7 +21,7 @@ import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.ComplexReco
 @SuppressWarnings("unused")
 public final class ComplexReconstrTestLanguageTrickyGConsumer extends NonTerminalConsumer {
 
-	private ComplexReconstrTestLanguageTrickyG1Consumer trickyG1Consumer;
+	private INonTerminalConsumer trickyG1Consumer;
 
 	private ICharacterClass keyword$2$Delimiter;
 	
@@ -87,6 +88,7 @@ public final class ComplexReconstrTestLanguageTrickyGConsumer extends NonTermina
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyG();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -96,7 +98,7 @@ public final class ComplexReconstrTestLanguageTrickyGConsumer extends NonTermina
 		return "TrickyG";
 	}
 	
-	public void setTrickyG1Consumer(ComplexReconstrTestLanguageTrickyG1Consumer trickyG1Consumer) {
+	public void setTrickyG1Consumer(INonTerminalConsumer trickyG1Consumer) {
 		this.trickyG1Consumer = trickyG1Consumer;
 	}
 	

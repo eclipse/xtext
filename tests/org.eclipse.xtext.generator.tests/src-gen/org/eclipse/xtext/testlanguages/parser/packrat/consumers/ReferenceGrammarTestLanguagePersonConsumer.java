@@ -6,6 +6,7 @@ package org.eclipse.xtext.testlanguages.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -21,8 +22,8 @@ import org.eclipse.xtext.testlanguages.parser.packrat.consumers.ReferenceGrammar
 @SuppressWarnings("unused")
 public final class ReferenceGrammarTestLanguagePersonConsumer extends NonTerminalConsumer {
 
-	private ReferenceGrammarTestLanguageErwachsenerConsumer erwachsenerConsumer;
-	private ReferenceGrammarTestLanguageKindConsumer kindConsumer;
+	private INonTerminalConsumer erwachsenerConsumer;
+	private INonTerminalConsumer kindConsumer;
 
 	public ReferenceGrammarTestLanguagePersonConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
@@ -64,6 +65,7 @@ public final class ReferenceGrammarTestLanguagePersonConsumer extends NonTermina
 		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prPerson();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -73,11 +75,11 @@ public final class ReferenceGrammarTestLanguagePersonConsumer extends NonTermina
 		return "Person";
 	}
 	
-	public void setErwachsenerConsumer(ReferenceGrammarTestLanguageErwachsenerConsumer erwachsenerConsumer) {
+	public void setErwachsenerConsumer(INonTerminalConsumer erwachsenerConsumer) {
 		this.erwachsenerConsumer = erwachsenerConsumer;
 	}
 	
-	public void setKindConsumer(ReferenceGrammarTestLanguageKindConsumer kindConsumer) {
+	public void setKindConsumer(INonTerminalConsumer kindConsumer) {
 		this.kindConsumer = kindConsumer;
 	}
 	

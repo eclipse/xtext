@@ -6,6 +6,7 @@ package org.eclipse.xtext.testlanguages.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -20,7 +21,7 @@ import org.eclipse.xtext.testlanguages.parser.packrat.consumers.TreeTestLanguage
 @SuppressWarnings("unused")
 public final class TreeTestLanguageModelConsumer extends NonTerminalConsumer {
 
-	private TreeTestLanguageNodeConsumer nodeConsumer;
+	private INonTerminalConsumer nodeConsumer;
 
 	public TreeTestLanguageModelConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
@@ -58,6 +59,7 @@ public final class TreeTestLanguageModelConsumer extends NonTerminalConsumer {
 		return TreeTestLanguageGrammarAccess.INSTANCE.prModel();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -67,7 +69,7 @@ public final class TreeTestLanguageModelConsumer extends NonTerminalConsumer {
 		return "Model";
 	}
 	
-	public void setNodeConsumer(TreeTestLanguageNodeConsumer nodeConsumer) {
+	public void setNodeConsumer(INonTerminalConsumer nodeConsumer) {
 		this.nodeConsumer = nodeConsumer;
 	}
 	

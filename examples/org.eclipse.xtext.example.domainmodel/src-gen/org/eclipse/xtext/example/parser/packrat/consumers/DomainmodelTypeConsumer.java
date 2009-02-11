@@ -6,6 +6,7 @@ package org.eclipse.xtext.example.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -21,8 +22,8 @@ import org.eclipse.xtext.example.parser.packrat.consumers.DomainmodelEntityConsu
 @SuppressWarnings("unused")
 public final class DomainmodelTypeConsumer extends NonTerminalConsumer {
 
-	private DomainmodelDataTypeConsumer dataTypeConsumer;
-	private DomainmodelEntityConsumer entityConsumer;
+	private INonTerminalConsumer dataTypeConsumer;
+	private INonTerminalConsumer entityConsumer;
 
 	public DomainmodelTypeConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
@@ -64,6 +65,7 @@ public final class DomainmodelTypeConsumer extends NonTerminalConsumer {
 		return DomainmodelGrammarAccess.INSTANCE.prType();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -73,11 +75,11 @@ public final class DomainmodelTypeConsumer extends NonTerminalConsumer {
 		return "Type";
 	}
 	
-	public void setDataTypeConsumer(DomainmodelDataTypeConsumer dataTypeConsumer) {
+	public void setDataTypeConsumer(INonTerminalConsumer dataTypeConsumer) {
 		this.dataTypeConsumer = dataTypeConsumer;
 	}
 	
-	public void setEntityConsumer(DomainmodelEntityConsumer entityConsumer) {
+	public void setEntityConsumer(INonTerminalConsumer entityConsumer) {
 		this.entityConsumer = entityConsumer;
 	}
 	

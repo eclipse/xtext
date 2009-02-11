@@ -74,7 +74,7 @@ public class InternalLowerCaseNamedTestLanguageParser extends AbstractInternalAn
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/generator/parser/antlr/internal/InternalLowerCaseNamedTestLanguage.g:68:47: (iv_ruleModel= ruleModel EOF )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/generator/parser/antlr/internal/InternalLowerCaseNamedTestLanguage.g:69:2: iv_ruleModel= ruleModel EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/generator/lowerCaseNamedTestLanguage.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/generator/lowerCaseNamedTestLanguage.xmi#/0/@rules.0" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleModel_in_entryRuleModel72);
             iv_ruleModel=ruleModel();
             _fsp--;
@@ -116,7 +116,7 @@ public class InternalLowerCaseNamedTestLanguageParser extends AbstractInternalAn
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleModel127); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/generator/lowerCaseNamedTestLanguage.xmi#//@rules.0/@alternatives/@terminal" /* xtext::RuleCall */, "name"); 
+                createLeafNode("classpath:/org/eclipse/xtext/generator/lowerCaseNamedTestLanguage.xmi#/0/@rules.0/@alternatives/@terminal" /* xtext::RuleCall */, "name"); 
                 
 
             	        if (current==null) {

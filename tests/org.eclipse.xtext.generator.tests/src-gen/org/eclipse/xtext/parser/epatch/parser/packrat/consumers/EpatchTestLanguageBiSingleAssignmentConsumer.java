@@ -6,6 +6,7 @@ package org.eclipse.xtext.parser.epatch.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -21,8 +22,8 @@ import org.eclipse.xtext.parser.epatch.parser.packrat.consumers.EpatchTestLangua
 @SuppressWarnings("unused")
 public final class EpatchTestLanguageBiSingleAssignmentConsumer extends NonTerminalConsumer {
 
-	private XtextBuiltinIDConsumer idConsumer;
-	private EpatchTestLanguageSingleAssignmentValueConsumer singleAssignmentValueConsumer;
+	private ITerminalConsumer idConsumer;
+	private INonTerminalConsumer singleAssignmentValueConsumer;
 
 	private ICharacterClass keyword$8$Delimiter;
 	
@@ -170,6 +171,7 @@ public final class EpatchTestLanguageBiSingleAssignmentConsumer extends NonTermi
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prBiSingleAssignment();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -179,11 +181,11 @@ public final class EpatchTestLanguageBiSingleAssignmentConsumer extends NonTermi
 		return "SingleAssignment";
 	}
 	
-	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
+	public void setIdConsumer(ITerminalConsumer idConsumer) {
 		this.idConsumer = idConsumer;
 	}
 	
-	public void setSingleAssignmentValueConsumer(EpatchTestLanguageSingleAssignmentValueConsumer singleAssignmentValueConsumer) {
+	public void setSingleAssignmentValueConsumer(INonTerminalConsumer singleAssignmentValueConsumer) {
 		this.singleAssignmentValueConsumer = singleAssignmentValueConsumer;
 	}
 	

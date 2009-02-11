@@ -74,7 +74,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:68:56: (iv_ruleCompositeModel= ruleCompositeModel EOF )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:69:2: iv_ruleCompositeModel= ruleCompositeModel EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.0" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleCompositeModel_in_entryRuleCompositeModel72);
             iv_ruleCompositeModel=ruleCompositeModel();
             _fsp--;
@@ -128,7 +128,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             	    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:84:6: lv_model= ruleModel
             	    {
             	     
-            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
+            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleModel_in_ruleCompositeModel140);
             	    lv_model=ruleModel();
@@ -190,7 +190,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:111:47: (iv_ruleModel= ruleModel EOF )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:112:2: iv_ruleModel= ruleModel EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.1" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.1" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleModel_in_entryRuleModel179);
             iv_ruleModel=ruleModel();
             _fsp--;
@@ -249,7 +249,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:127:6: lv_id= ruleNestedModelId
             {
              
-            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
+            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
             	    
             pushFollow(FOLLOW_ruleNestedModelId_in_ruleModel251);
             lv_id=ruleNestedModelId();
@@ -284,13 +284,13 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
                     {
                     match(input,11,FOLLOW_11_in_ruleModel265); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
                     // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:149:1: (lv_value= ruleFraction )
                     // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:152:6: lv_value= ruleFraction
                     {
                      
-                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleFraction_in_ruleModel299);
                     lv_value=ruleFraction();
@@ -334,13 +334,13 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
                     {
                     match(input,12,FOLLOW_12_in_ruleModel316); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
                     // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:174:1: (lv_vector= ruleVector )
                     // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:177:6: lv_vector= ruleVector
                     {
                      
-                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleVector_in_ruleModel350);
                     lv_vector=ruleVector();
@@ -384,13 +384,13 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
                     {
                     match(input,13,FOLLOW_13_in_ruleModel367); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
                     // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:199:1: (lv_dots= ruleDots )
                     // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:202:6: lv_dots= ruleDots
                     {
                      
-                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleDots_in_ruleModel401);
                     lv_dots=ruleDots();
@@ -423,7 +423,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
             match(input,14,FOLLOW_14_in_ruleModel417); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.1/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -458,7 +458,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:233:48: (iv_ruleModelId= ruleModelId EOF )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:234:2: iv_ruleModelId= ruleModelId EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.2" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.2" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleModelId_in_entryRuleModelId453);
             iv_ruleModelId=ruleModelId();
             _fsp--;
@@ -507,13 +507,13 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             		current.merge(this_ID);
                 
              
-                createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::RuleCall */, null); 
+                createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::RuleCall */, null); 
                 
             kw=(Token)input.LT(1);
             match(input,15,FOLLOW_15_in_ruleModelId523); 
 
                     current.merge(kw);
-                    createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -524,7 +524,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             		current.merge(this_ID);
                 
              
-                createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.1" /* xtext::RuleCall */, null); 
+                createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.2/@alternatives/@abstractTokens.1" /* xtext::RuleCall */, null); 
                 
 
             }
@@ -559,7 +559,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:276:54: (iv_ruleNestedModelId= ruleNestedModelId EOF )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:277:2: iv_ruleNestedModelId= ruleNestedModelId EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.3" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.3" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleNestedModelId_in_entryRuleNestedModelId585);
             iv_ruleNestedModelId=ruleNestedModelId();
             _fsp--;
@@ -604,7 +604,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:290:5: this_ModelId= ruleModelId kw= '.'
             {
              
-                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
+                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
                 
             pushFollow(FOLLOW_ruleModelId_in_ruleNestedModelId644);
             this_ModelId=ruleModelId();
@@ -620,13 +620,13 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             match(input,15,FOLLOW_15_in_ruleNestedModelId662); 
 
                     current.merge(kw);
-                    createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
 
              
-                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.1" /* xtext::RuleCall */, currentNode); 
+                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.3/@alternatives/@abstractTokens.1" /* xtext::RuleCall */, currentNode); 
                 
             pushFollow(FOLLOW_ruleModelId_in_ruleNestedModelId685);
             this_ModelId=ruleModelId();
@@ -671,7 +671,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:327:49: (iv_ruleFraction= ruleFraction EOF )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:328:2: iv_ruleFraction= ruleFraction EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.4" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.4" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleFraction_in_entryRuleFraction731);
             iv_ruleFraction=ruleFraction();
             _fsp--;
@@ -717,7 +717,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             		current.merge(this_INT);
                 
              
-                createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, null); 
+                createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.4/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, null); 
                 
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:347:1: (kw= '/' this_INT= RULE_INT )?
             int alt5=2;
@@ -734,7 +734,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
                     match(input,16,FOLLOW_16_in_ruleFraction801); 
 
                             current.merge(kw);
-                            createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.4/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
                     this_INT=(Token)input.LT(1);
                     match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleFraction816); 
@@ -742,7 +742,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
                     		current.merge(this_INT);
                         
                      
-                        createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.1/@abstractTokens.1" /* xtext::RuleCall */, null); 
+                        createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.4/@alternatives/@abstractTokens.1/@abstractTokens.1" /* xtext::RuleCall */, null); 
                         
 
                     }
@@ -783,7 +783,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:370:47: (iv_ruleVector= ruleVector EOF )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:371:2: iv_ruleVector= ruleVector EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.5" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.5" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleVector_in_entryRuleVector864);
             iv_ruleVector=ruleVector();
             _fsp--;
@@ -833,7 +833,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             match(input,17,FOLLOW_17_in_ruleVector915); 
 
                     current.merge(kw);
-                    createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
             this_INT=(Token)input.LT(1);
             match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleVector930); 
@@ -841,7 +841,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             		current.merge(this_INT);
                 
              
-                createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::RuleCall */, null); 
+                createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::RuleCall */, null); 
                 
 
             }
@@ -852,7 +852,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             		current.merge(this_INT);
                 
              
-                createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::RuleCall */, null); 
+                createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::RuleCall */, null); 
                 
 
             }
@@ -861,7 +861,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             match(input,18,FOLLOW_18_in_ruleVector970); 
 
                     current.merge(kw);
-                    createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.5/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -896,7 +896,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:419:45: (iv_ruleDots= ruleDots EOF )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:420:2: iv_ruleDots= ruleDots EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.6" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.6" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleDots_in_entryRuleDots1011);
             iv_ruleDots=ruleDots();
             _fsp--;
@@ -959,13 +959,13 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
                     match(input,15,FOLLOW_15_in_ruleDots1061); 
 
                             current.merge(kw);
-                            createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.6/@alternatives/@groups.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.6/@alternatives/@groups.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
                     kw=(Token)input.LT(1);
                     match(input,15,FOLLOW_15_in_ruleDots1074); 
 
                             current.merge(kw);
-                            createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.6/@alternatives/@groups.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.6/@alternatives/@groups.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                         
 
                     }
@@ -980,7 +980,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
                     match(input,19,FOLLOW_19_in_ruleDots1094); 
 
                             current.merge(kw);
-                            createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.6/@alternatives/@groups.1" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.6/@alternatives/@groups.1" /* xtext::Keyword */, null); 
                         
 
                     }

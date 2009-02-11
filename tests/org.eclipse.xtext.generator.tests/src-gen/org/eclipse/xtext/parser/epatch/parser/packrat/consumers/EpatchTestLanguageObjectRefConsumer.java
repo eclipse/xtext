@@ -6,6 +6,7 @@ package org.eclipse.xtext.parser.epatch.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -24,11 +25,11 @@ import org.eclipse.xtext.parser.epatch.parser.packrat.consumers.EpatchTestLangua
 @SuppressWarnings("unused")
 public final class EpatchTestLanguageObjectRefConsumer extends NonTerminalConsumer {
 
-	private EpatchTestLanguageBiListAssignmentConsumer biListAssignmentConsumer;
-	private EpatchTestLanguageBiSingleAssignmentConsumer biSingleAssignmentConsumer;
-	private EpatchTestLanguageFRAGMENTConsumer fragmentConsumer;
-	private XtextBuiltinIDConsumer idConsumer;
-	private EpatchTestLanguageMigrationConsumer migrationConsumer;
+	private INonTerminalConsumer biListAssignmentConsumer;
+	private INonTerminalConsumer biSingleAssignmentConsumer;
+	private ITerminalConsumer fragmentConsumer;
+	private ITerminalConsumer idConsumer;
+	private INonTerminalConsumer migrationConsumer;
 
 	private ISequenceMatcher crossReference$10$Delimiter;
 	
@@ -641,6 +642,7 @@ public final class EpatchTestLanguageObjectRefConsumer extends NonTerminalConsum
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prObjectRef();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -650,23 +652,23 @@ public final class EpatchTestLanguageObjectRefConsumer extends NonTerminalConsum
 		return "ObjectRef";
 	}
 	
-	public void setBiListAssignmentConsumer(EpatchTestLanguageBiListAssignmentConsumer biListAssignmentConsumer) {
+	public void setBiListAssignmentConsumer(INonTerminalConsumer biListAssignmentConsumer) {
 		this.biListAssignmentConsumer = biListAssignmentConsumer;
 	}
 	
-	public void setBiSingleAssignmentConsumer(EpatchTestLanguageBiSingleAssignmentConsumer biSingleAssignmentConsumer) {
+	public void setBiSingleAssignmentConsumer(INonTerminalConsumer biSingleAssignmentConsumer) {
 		this.biSingleAssignmentConsumer = biSingleAssignmentConsumer;
 	}
 	
-	public void setFragmentConsumer(EpatchTestLanguageFRAGMENTConsumer fragmentConsumer) {
+	public void setFragmentConsumer(ITerminalConsumer fragmentConsumer) {
 		this.fragmentConsumer = fragmentConsumer;
 	}
 	
-	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
+	public void setIdConsumer(ITerminalConsumer idConsumer) {
 		this.idConsumer = idConsumer;
 	}
 	
-	public void setMigrationConsumer(EpatchTestLanguageMigrationConsumer migrationConsumer) {
+	public void setMigrationConsumer(INonTerminalConsumer migrationConsumer) {
 		this.migrationConsumer = migrationConsumer;
 	}
 	

@@ -61,6 +61,7 @@ protected class EcoreDsl_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEcoreDsl().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EcoreDsl_1_Assignment_package(current, this).firstSolution();
 		while(s1 != null) {
@@ -89,6 +90,7 @@ protected class EcoreDsl_0_Assignment_imports extends AssignmentToken  {
 		return EcoreDslGrammarAccess.INSTANCE.prEcoreDsl().ele0AssignmentImports();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("imports",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("imports");
@@ -120,6 +122,7 @@ protected class EcoreDsl_1_Assignment_package extends AssignmentToken  {
 		return EcoreDslGrammarAccess.INSTANCE.prEcoreDsl().ele1AssignmentPackage();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("package",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("package");
@@ -162,6 +165,7 @@ protected class ImportStatementDecl_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prImportStatementDecl().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ImportStatementDecl_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -190,6 +194,7 @@ protected class ImportStatementDecl_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prImportStatementDecl().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ImportStatementDecl_0_1_Assignment_importURI(current, this).firstSolution();
 		while(s1 != null) {
@@ -218,6 +223,7 @@ protected class ImportStatementDecl_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prImportStatementDecl().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ImportStatementDecl_0_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -258,6 +264,7 @@ protected class ImportStatementDecl_0_0_1_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prImportStatementDecl().ele001Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ImportStatementDecl_0_0_1_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -286,6 +293,7 @@ protected class ImportStatementDecl_0_0_1_0_Assignment_alias extends AssignmentT
 		return EcoreDslGrammarAccess.INSTANCE.prImportStatementDecl().ele0010AssignmentAlias();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("alias",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("alias");
@@ -323,6 +331,7 @@ protected class ImportStatementDecl_0_1_Assignment_importURI extends AssignmentT
 		return EcoreDslGrammarAccess.INSTANCE.prImportStatementDecl().ele01AssignmentImportURI();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("importURI",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("importURI");
@@ -370,6 +379,7 @@ protected class EPackageDecl_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEPackageDecl().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EPackageDecl_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -398,6 +408,7 @@ protected class EPackageDecl_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEPackageDecl().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EPackageDecl_0_1_Alternatives(current, this).firstSolution();
 		while(s1 != null) {
@@ -426,6 +437,7 @@ protected class EPackageDecl_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEPackageDecl().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EPackageDecl_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -454,6 +466,7 @@ protected class EPackageDecl_0_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEPackageDecl().ele000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EPackageDecl_0_0_0_1_Assignment_nsPrefix(current, this).firstSolution();
 		while(s1 != null) {
@@ -482,6 +495,7 @@ protected class EPackageDecl_0_0_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEPackageDecl().ele0000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EPackageDecl_0_0_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -510,6 +524,7 @@ protected class EPackageDecl_0_0_0_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEPackageDecl().ele00000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EPackageDecl_0_0_0_0_0_1_Keyword_nsPrefix(current, this).firstSolution();
 		while(s1 != null) {
@@ -538,6 +553,7 @@ protected class EPackageDecl_0_0_0_0_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEPackageDecl().ele000000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EPackageDecl_0_0_0_0_0_0_1_Assignment_nsURI(current, this).firstSolution();
 		while(s1 != null) {
@@ -566,6 +582,7 @@ protected class EPackageDecl_0_0_0_0_0_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEPackageDecl().ele0000000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EPackageDecl_0_0_0_0_0_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -594,6 +611,7 @@ protected class EPackageDecl_0_0_0_0_0_0_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEPackageDecl().ele00000000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EPackageDecl_0_0_0_0_0_0_0_0_1_Keyword_nsURI(current, this).firstSolution();
 		while(s1 != null) {
@@ -622,6 +640,7 @@ protected class EPackageDecl_0_0_0_0_0_0_0_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEPackageDecl().ele000000000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EPackageDecl_0_0_0_0_0_0_0_0_0_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
@@ -650,6 +669,7 @@ protected class EPackageDecl_0_0_0_0_0_0_0_0_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEPackageDecl().ele0000000000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EPackageDecl_0_0_0_0_0_0_0_0_0_0_1_Keyword_package(current, this).firstSolution();
 		while(s1 != null) {
@@ -678,6 +698,7 @@ protected class EPackageDecl_0_0_0_0_0_0_0_0_0_0_0_Assignment_eAnnotations exten
 		return EcoreDslGrammarAccess.INSTANCE.prEPackageDecl().ele00000000000AssignmentEAnnotations();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("eAnnotations",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("eAnnotations");
@@ -722,6 +743,7 @@ protected class EPackageDecl_0_0_0_0_0_0_0_0_0_1_Assignment_name extends Assignm
 		return EcoreDslGrammarAccess.INSTANCE.prEPackageDecl().ele0000000001AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -774,6 +796,7 @@ protected class EPackageDecl_0_0_0_0_0_0_1_Assignment_nsURI extends AssignmentTo
 		return EcoreDslGrammarAccess.INSTANCE.prEPackageDecl().ele0000001AssignmentNsURI();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("nsURI",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("nsURI");
@@ -824,6 +847,7 @@ protected class EPackageDecl_0_0_0_1_Assignment_nsPrefix extends AssignmentToken
 		return EcoreDslGrammarAccess.INSTANCE.prEPackageDecl().ele0001AssignmentNsPrefix();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("nsPrefix",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("nsPrefix");
@@ -862,7 +886,8 @@ protected class EPackageDecl_0_1_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return EcoreDslGrammarAccess.INSTANCE.prEPackageDecl().ele01Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new EPackageDecl_0_1_1_Assignment_eClassifiers(current, this) : new EPackageDecl_0_1_0_Assignment_eSubpackages(current, this);
 		Solution s = t.firstSolution();
@@ -884,6 +909,7 @@ protected class EPackageDecl_0_1_0_Assignment_eSubpackages extends AssignmentTok
 		return EcoreDslGrammarAccess.INSTANCE.prEPackageDecl().ele010AssignmentESubpackages();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("eSubpackages",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("eSubpackages");
@@ -915,6 +941,7 @@ protected class EPackageDecl_0_1_1_Assignment_eClassifiers extends AssignmentTok
 		return EcoreDslGrammarAccess.INSTANCE.prEPackageDecl().ele011AssignmentEClassifiers();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("eClassifiers",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("eClassifiers");
@@ -971,6 +998,7 @@ protected class SubEPackageDecl_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prSubEPackageDecl().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new SubEPackageDecl_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -999,6 +1027,7 @@ protected class SubEPackageDecl_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prSubEPackageDecl().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new SubEPackageDecl_0_1_Alternatives(current, this).firstSolution();
 		while(s1 != null) {
@@ -1027,6 +1056,7 @@ protected class SubEPackageDecl_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prSubEPackageDecl().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new SubEPackageDecl_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -1055,6 +1085,7 @@ protected class SubEPackageDecl_0_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prSubEPackageDecl().ele000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new SubEPackageDecl_0_0_0_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
@@ -1083,6 +1114,7 @@ protected class SubEPackageDecl_0_0_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prSubEPackageDecl().ele0000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new SubEPackageDecl_0_0_0_0_1_Keyword_package(current, this).firstSolution();
 		while(s1 != null) {
@@ -1111,6 +1143,7 @@ protected class SubEPackageDecl_0_0_0_0_0_Assignment_eAnnotations extends Assign
 		return EcoreDslGrammarAccess.INSTANCE.prSubEPackageDecl().ele00000AssignmentEAnnotations();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("eAnnotations",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("eAnnotations");
@@ -1155,6 +1188,7 @@ protected class SubEPackageDecl_0_0_0_1_Assignment_name extends AssignmentToken 
 		return EcoreDslGrammarAccess.INSTANCE.prSubEPackageDecl().ele0001AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -1191,7 +1225,8 @@ protected class SubEPackageDecl_0_1_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return EcoreDslGrammarAccess.INSTANCE.prSubEPackageDecl().ele01Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new SubEPackageDecl_0_1_1_Assignment_eClassifiers(current, this) : new SubEPackageDecl_0_1_0_Assignment_eSubpackages(current, this);
 		Solution s = t.firstSolution();
@@ -1213,6 +1248,7 @@ protected class SubEPackageDecl_0_1_0_Assignment_eSubpackages extends Assignment
 		return EcoreDslGrammarAccess.INSTANCE.prSubEPackageDecl().ele010AssignmentESubpackages();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("eSubpackages",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("eSubpackages");
@@ -1244,6 +1280,7 @@ protected class SubEPackageDecl_0_1_1_Assignment_eClassifiers extends Assignment
 		return EcoreDslGrammarAccess.INSTANCE.prSubEPackageDecl().ele011AssignmentEClassifiers();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("eClassifiers",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("eClassifiers");
@@ -1299,7 +1336,8 @@ protected class EClassifierDecl_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return EcoreDslGrammarAccess.INSTANCE.prEClassifierDecl().eleAlternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new EClassifierDecl_1_RuleCall_EDataTypeDecl(current, this) : new EClassifierDecl_0_RuleCall_EClassDecl(current, this);
 		Solution s = t.firstSolution();
@@ -1321,6 +1359,7 @@ protected class EClassifierDecl_0_RuleCall_EClassDecl extends RuleCallToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEClassifierDecl().ele0ParserRuleCallEClassDecl();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(EClassDecl_Group.class, current)) return null;
 		if(!current.isInstanceOf("EClass")) return null;
@@ -1339,6 +1378,7 @@ protected class EClassifierDecl_1_RuleCall_EDataTypeDecl extends RuleCallToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEClassifierDecl().ele1ParserRuleCallEDataTypeDecl();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(EDataTypeDecl_Alternatives.class, current)) return null;
 		if(!current.isInstanceOf("EDataType")) return null;
@@ -1367,7 +1407,8 @@ protected class EDataTypeDecl_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return EcoreDslGrammarAccess.INSTANCE.prEDataTypeDecl().eleAlternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new EDataTypeDecl_1_RuleCall_EEnumDecl(current, this) : new EDataTypeDecl_0_Group(current, this);
 		Solution s = t.firstSolution();
@@ -1389,6 +1430,7 @@ protected class EDataTypeDecl_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEDataTypeDecl().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EDataTypeDecl_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -1417,6 +1459,7 @@ protected class EDataTypeDecl_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEDataTypeDecl().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EDataTypeDecl_0_0_1_Assignment_serializable(current, this).firstSolution();
 		while(s1 != null) {
@@ -1445,6 +1488,7 @@ protected class EDataTypeDecl_0_0_0_Assignment_eAnnotations extends AssignmentTo
 		return EcoreDslGrammarAccess.INSTANCE.prEDataTypeDecl().ele000AssignmentEAnnotations();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("eAnnotations",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("eAnnotations");
@@ -1476,6 +1520,7 @@ protected class EDataTypeDecl_0_0_1_Assignment_serializable extends AssignmentTo
 		return EcoreDslGrammarAccess.INSTANCE.prEDataTypeDecl().ele001AssignmentSerializable();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("serializable",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("serializable");
@@ -1502,6 +1547,7 @@ protected class EDataTypeDecl_0_1_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEDataTypeDecl().ele01Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EDataTypeDecl_0_1_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -1530,6 +1576,7 @@ protected class EDataTypeDecl_0_1_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEDataTypeDecl().ele010Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EDataTypeDecl_0_1_0_1_Assignment_instanceClassName(current, this).firstSolution();
 		while(s1 != null) {
@@ -1558,6 +1605,7 @@ protected class EDataTypeDecl_0_1_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEDataTypeDecl().ele0100Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EDataTypeDecl_0_1_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -1586,6 +1634,7 @@ protected class EDataTypeDecl_0_1_0_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEDataTypeDecl().ele01000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EDataTypeDecl_0_1_0_0_0_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
@@ -1626,6 +1675,7 @@ protected class EDataTypeDecl_0_1_0_0_0_1_Assignment_name extends AssignmentToke
 		return EcoreDslGrammarAccess.INSTANCE.prEDataTypeDecl().ele010001AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -1663,6 +1713,7 @@ protected class EDataTypeDecl_0_1_0_1_Assignment_instanceClassName extends Assig
 		return EcoreDslGrammarAccess.INSTANCE.prEDataTypeDecl().ele0101AssignmentInstanceClassName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("instanceClassName",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("instanceClassName");
@@ -1703,6 +1754,7 @@ protected class EDataTypeDecl_1_RuleCall_EEnumDecl extends RuleCallToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEDataTypeDecl().ele1ParserRuleCallEEnumDecl();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(EEnumDecl_Group.class, current)) return null;
 		if(!current.isInstanceOf("EEnum")) return null;
@@ -1732,6 +1784,7 @@ protected class EAnnotationDecl_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEAnnotationDecl().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EAnnotationDecl_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -1760,6 +1813,7 @@ protected class EAnnotationDecl_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEAnnotationDecl().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EAnnotationDecl_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -1788,6 +1842,7 @@ protected class EAnnotationDecl_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEAnnotationDecl().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EAnnotationDecl_0_0_1_Assignment_contents(current, this).firstSolution();
 		while(s1 != null) {
@@ -1816,6 +1871,7 @@ protected class EAnnotationDecl_0_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEAnnotationDecl().ele000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EAnnotationDecl_0_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -1844,6 +1900,7 @@ protected class EAnnotationDecl_0_0_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEAnnotationDecl().ele0000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EAnnotationDecl_0_0_0_0_1_Assignment_eModelElement(current, this).firstSolution();
 		while(s1 != null) {
@@ -1872,6 +1929,7 @@ protected class EAnnotationDecl_0_0_0_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEAnnotationDecl().ele00000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EAnnotationDecl_0_0_0_0_0_1_Assignment_source(current, this).firstSolution();
 		while(s1 != null) {
@@ -1912,6 +1970,7 @@ protected class EAnnotationDecl_0_0_0_0_0_1_Assignment_source extends Assignment
 		return EcoreDslGrammarAccess.INSTANCE.prEAnnotationDecl().ele000001AssignmentSource();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("source",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("source");
@@ -1936,6 +1995,7 @@ protected class EAnnotationDecl_0_0_0_0_1_Assignment_eModelElement extends Assig
 		return EcoreDslGrammarAccess.INSTANCE.prEAnnotationDecl().ele00001AssignmentEModelElement();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("eModelElement",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("eModelElement");
@@ -1976,6 +2036,7 @@ protected class EAnnotationDecl_0_0_1_Assignment_contents extends AssignmentToke
 		return EcoreDslGrammarAccess.INSTANCE.prEAnnotationDecl().ele001AssignmentContents();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("contents",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("contents");
@@ -2008,6 +2069,7 @@ protected class EAnnotationDecl_0_1_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEAnnotationDecl().ele01Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EAnnotationDecl_0_1_1_Assignment_contents(current, this).firstSolution();
 		while(s1 != null) {
@@ -2048,6 +2110,7 @@ protected class EAnnotationDecl_0_1_1_Assignment_contents extends AssignmentToke
 		return EcoreDslGrammarAccess.INSTANCE.prEAnnotationDecl().ele011AssignmentContents();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("contents",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("contents");
@@ -2104,6 +2167,7 @@ protected class EClassDecl_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EClassDecl_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -2132,6 +2196,7 @@ protected class EClassDecl_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EClassDecl_0_1_Alternatives(current, this).firstSolution();
 		while(s1 != null) {
@@ -2160,6 +2225,7 @@ protected class EClassDecl_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EClassDecl_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -2188,6 +2254,7 @@ protected class EClassDecl_0_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EClassDecl_0_0_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -2216,6 +2283,7 @@ protected class EClassDecl_0_0_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele0000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EClassDecl_0_0_0_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -2244,6 +2312,7 @@ protected class EClassDecl_0_0_0_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele00000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EClassDecl_0_0_0_0_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -2272,6 +2341,7 @@ protected class EClassDecl_0_0_0_0_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele000000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EClassDecl_0_0_0_0_0_0_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
@@ -2300,6 +2370,7 @@ protected class EClassDecl_0_0_0_0_0_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele0000000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EClassDecl_0_0_0_0_0_0_0_1_Alternatives(current, this).firstSolution();
 		while(s1 != null) {
@@ -2328,6 +2399,7 @@ protected class EClassDecl_0_0_0_0_0_0_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele00000000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EClassDecl_0_0_0_0_0_0_0_0_1_Assignment_abstract(current, this).firstSolution();
 		while(s1 != null) {
@@ -2356,6 +2428,7 @@ protected class EClassDecl_0_0_0_0_0_0_0_0_0_Assignment_eAnnotations extends Ass
 		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele000000000AssignmentEAnnotations();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("eAnnotations",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("eAnnotations");
@@ -2387,6 +2460,7 @@ protected class EClassDecl_0_0_0_0_0_0_0_0_1_Assignment_abstract extends Assignm
 		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele000000001AssignmentAbstract();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("abstract",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("abstract");
@@ -2412,7 +2486,8 @@ protected class EClassDecl_0_0_0_0_0_0_0_1_Alternatives extends AlternativesToke
 	public Alternatives getGrammarElement() {
 		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele00000001Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new EClassDecl_0_0_0_0_0_0_0_1_1_Keyword_class(current, this) : new EClassDecl_0_0_0_0_0_0_0_1_0_Assignment_interface(current, this);
 		Solution s = t.firstSolution();
@@ -2434,6 +2509,7 @@ protected class EClassDecl_0_0_0_0_0_0_0_1_0_Assignment_interface extends Assign
 		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele000000010AssignmentInterface();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("interface",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("interface");
@@ -2473,6 +2549,7 @@ protected class EClassDecl_0_0_0_0_0_0_1_Assignment_name extends AssignmentToken
 		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele0000001AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -2497,6 +2574,7 @@ protected class EClassDecl_0_0_0_0_0_1_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele000001Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EClassDecl_0_0_0_0_0_1_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -2525,6 +2603,7 @@ protected class EClassDecl_0_0_0_0_0_1_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele0000010Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EClassDecl_0_0_0_0_0_1_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -2553,6 +2632,7 @@ protected class EClassDecl_0_0_0_0_0_1_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele00000100Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EClassDecl_0_0_0_0_0_1_0_0_1_Assignment_eTypeParameters(current, this).firstSolution();
 		while(s1 != null) {
@@ -2593,6 +2673,7 @@ protected class EClassDecl_0_0_0_0_0_1_0_0_1_Assignment_eTypeParameters extends 
 		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele000001001AssignmentETypeParameters();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("eTypeParameters",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("eTypeParameters");
@@ -2625,6 +2706,7 @@ protected class EClassDecl_0_0_0_0_0_1_0_1_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele00000101Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EClassDecl_0_0_0_0_0_1_0_1_1_Assignment_eTypeParameters(current, this).firstSolution();
 		while(s1 != null) {
@@ -2665,6 +2747,7 @@ protected class EClassDecl_0_0_0_0_0_1_0_1_1_Assignment_eTypeParameters extends 
 		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele000001011AssignmentETypeParameters();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("eTypeParameters",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("eTypeParameters");
@@ -2712,6 +2795,7 @@ protected class EClassDecl_0_0_0_0_1_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele00001Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EClassDecl_0_0_0_0_1_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -2740,6 +2824,7 @@ protected class EClassDecl_0_0_0_0_1_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele000010Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EClassDecl_0_0_0_0_1_0_1_Assignment_eGenericSuperTypes(current, this).firstSolution();
 		while(s1 != null) {
@@ -2780,6 +2865,7 @@ protected class EClassDecl_0_0_0_0_1_0_1_Assignment_eGenericSuperTypes extends A
 		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele0000101AssignmentEGenericSuperTypes();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("eGenericSuperTypes",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("eGenericSuperTypes");
@@ -2812,6 +2898,7 @@ protected class EClassDecl_0_0_0_0_1_1_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele000011Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EClassDecl_0_0_0_0_1_1_1_Assignment_eGenericSuperTypes(current, this).firstSolution();
 		while(s1 != null) {
@@ -2852,6 +2939,7 @@ protected class EClassDecl_0_0_0_0_1_1_1_Assignment_eGenericSuperTypes extends A
 		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele0000111AssignmentEGenericSuperTypes();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("eGenericSuperTypes",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("eGenericSuperTypes");
@@ -2886,6 +2974,7 @@ protected class EClassDecl_0_0_0_1_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele0001Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EClassDecl_0_0_0_1_1_Assignment_instanceClassName(current, this).firstSolution();
 		while(s1 != null) {
@@ -2926,6 +3015,7 @@ protected class EClassDecl_0_0_0_1_1_Assignment_instanceClassName extends Assign
 		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele00011AssignmentInstanceClassName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("instanceClassName",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("instanceClassName");
@@ -2965,7 +3055,8 @@ protected class EClassDecl_0_1_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele01Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new EClassDecl_0_1_1_Assignment_eOperations(current, this) : new EClassDecl_0_1_0_Assignment_eStructuralFeatures(current, this);
 		Solution s = t.firstSolution();
@@ -2987,6 +3078,7 @@ protected class EClassDecl_0_1_0_Assignment_eStructuralFeatures extends Assignme
 		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele010AssignmentEStructuralFeatures();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("eStructuralFeatures",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("eStructuralFeatures");
@@ -3018,6 +3110,7 @@ protected class EClassDecl_0_1_1_Assignment_eOperations extends AssignmentToken 
 		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele011AssignmentEOperations();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("eOperations",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("eOperations");
@@ -3073,7 +3166,8 @@ protected class EStructuralFeatureDecl_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return EcoreDslGrammarAccess.INSTANCE.prEStructuralFeatureDecl().eleAlternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new EStructuralFeatureDecl_1_RuleCall_EReferenceDecl(current, this) : new EStructuralFeatureDecl_0_RuleCall_EAttributeDecl(current, this);
 		Solution s = t.firstSolution();
@@ -3095,6 +3189,7 @@ protected class EStructuralFeatureDecl_0_RuleCall_EAttributeDecl extends RuleCal
 		return EcoreDslGrammarAccess.INSTANCE.prEStructuralFeatureDecl().ele0ParserRuleCallEAttributeDecl();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(EAttributeDecl_Group.class, current)) return null;
 		if(!current.isInstanceOf("EAttribute")) return null;
@@ -3113,6 +3208,7 @@ protected class EStructuralFeatureDecl_1_RuleCall_EReferenceDecl extends RuleCal
 		return EcoreDslGrammarAccess.INSTANCE.prEStructuralFeatureDecl().ele1ParserRuleCallEReferenceDecl();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(EReferenceDecl_Group.class, current)) return null;
 		if(!current.isInstanceOf("EReference")) return null;
@@ -3142,6 +3238,7 @@ protected class EAttributeDecl_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EAttributeDecl_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -3170,6 +3267,7 @@ protected class EAttributeDecl_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EAttributeDecl_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -3198,6 +3296,7 @@ protected class EAttributeDecl_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EAttributeDecl_0_0_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
@@ -3226,6 +3325,7 @@ protected class EAttributeDecl_0_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EAttributeDecl_0_0_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -3254,6 +3354,7 @@ protected class EAttributeDecl_0_0_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele0000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EAttributeDecl_0_0_0_0_1_Assignment_eGenericType(current, this).firstSolution();
 		while(s1 != null) {
@@ -3282,6 +3383,7 @@ protected class EAttributeDecl_0_0_0_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele00000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EAttributeDecl_0_0_0_0_0_1_Keyword_attr(current, this).firstSolution();
 		while(s1 != null) {
@@ -3310,6 +3412,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele000000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EAttributeDecl_0_0_0_0_0_0_1_Alternatives(current, this).firstSolution();
 		while(s1 != null) {
@@ -3338,6 +3441,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_0_Assignment_eAnnotations extends Ass
 		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele0000000AssignmentEAnnotations();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("eAnnotations",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("eAnnotations");
@@ -3368,7 +3472,8 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_Alternatives extends AlternativesTo
 	public Alternatives getGrammarElement() {
 		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele0000001Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new EAttributeDecl_0_0_0_0_0_0_1_1_Assignment_derived(current, this) : new EAttributeDecl_0_0_0_0_0_0_1_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -3389,7 +3494,8 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_0_Alternatives extends Alternatives
 	public Alternatives getGrammarElement() {
 		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele00000010Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new EAttributeDecl_0_0_0_0_0_0_1_0_1_Assignment_unsettable(current, this) : new EAttributeDecl_0_0_0_0_0_0_1_0_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -3410,7 +3516,8 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_Alternatives extends Alternativ
 	public Alternatives getGrammarElement() {
 		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele000000100Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new EAttributeDecl_0_0_0_0_0_0_1_0_0_1_Assignment_transient(current, this) : new EAttributeDecl_0_0_0_0_0_0_1_0_0_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -3431,7 +3538,8 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_0_Alternatives extends Alternat
 	public Alternatives getGrammarElement() {
 		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele0000001000Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new EAttributeDecl_0_0_0_0_0_0_1_0_0_0_1_Assignment_volatile(current, this) : new EAttributeDecl_0_0_0_0_0_0_1_0_0_0_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -3452,7 +3560,8 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_0_0_Alternatives extends Altern
 	public Alternatives getGrammarElement() {
 		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele00000010000Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new EAttributeDecl_0_0_0_0_0_0_1_0_0_0_0_1_Assignment_changeable(current, this) : new EAttributeDecl_0_0_0_0_0_0_1_0_0_0_0_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -3473,7 +3582,8 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_0_0_0_Alternatives extends Alte
 	public Alternatives getGrammarElement() {
 		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele000000100000Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new EAttributeDecl_0_0_0_0_0_0_1_0_0_0_0_0_1_Assignment_ordered(current, this) : new EAttributeDecl_0_0_0_0_0_0_1_0_0_0_0_0_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -3494,7 +3604,8 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_0_0_0_0_Alternatives extends Al
 	public Alternatives getGrammarElement() {
 		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele0000001000000Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new EAttributeDecl_0_0_0_0_0_0_1_0_0_0_0_0_0_1_Assignment_unique(current, this) : new EAttributeDecl_0_0_0_0_0_0_1_0_0_0_0_0_0_0_Assignment_iD(current, this);
 		Solution s = t.firstSolution();
@@ -3516,6 +3627,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_0_0_0_0_0_Assignment_iD extends
 		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele00000010000000AssignmentID();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("iD",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("iD");
@@ -3541,6 +3653,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_0_0_0_0_1_Assignment_unique ext
 		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele00000010000001AssignmentUnique();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("unique",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("unique");
@@ -3567,6 +3680,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_0_0_0_1_Assignment_ordered exte
 		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele0000001000001AssignmentOrdered();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("ordered",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("ordered");
@@ -3593,6 +3707,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_0_0_1_Assignment_changeable ext
 		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele000000100001AssignmentChangeable();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("changeable",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("changeable");
@@ -3619,6 +3734,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_0_1_Assignment_volatile extends
 		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele00000010001AssignmentVolatile();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("volatile",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("volatile");
@@ -3645,6 +3761,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_1_Assignment_transient extends 
 		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele0000001001AssignmentTransient();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("transient",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("transient");
@@ -3671,6 +3788,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_0_1_Assignment_unsettable extends A
 		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele000000101AssignmentUnsettable();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("unsettable",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("unsettable");
@@ -3697,6 +3815,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_1_Assignment_derived extends Assign
 		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele00000011AssignmentDerived();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("derived",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("derived");
@@ -3737,6 +3856,7 @@ protected class EAttributeDecl_0_0_0_0_1_Assignment_eGenericType extends Assignm
 		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele00001AssignmentEGenericType();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("eGenericType",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("eGenericType");
@@ -3769,6 +3889,7 @@ protected class EAttributeDecl_0_0_0_1_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele0001Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EAttributeDecl_0_0_0_1_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -3797,6 +3918,7 @@ protected class EAttributeDecl_0_0_0_1_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele00010Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EAttributeDecl_0_0_0_1_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -3825,6 +3947,7 @@ protected class EAttributeDecl_0_0_0_1_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele000100Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EAttributeDecl_0_0_0_1_0_0_1_Assignment_lowerBound(current, this).firstSolution();
 		while(s1 != null) {
@@ -3865,6 +3988,7 @@ protected class EAttributeDecl_0_0_0_1_0_0_1_Assignment_lowerBound extends Assig
 		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele0001001AssignmentLowerBound();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("lowerBound",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("lowerBound");
@@ -3889,6 +4013,7 @@ protected class EAttributeDecl_0_0_0_1_0_1_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele000101Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EAttributeDecl_0_0_0_1_0_1_1_Assignment_upperBound(current, this).firstSolution();
 		while(s1 != null) {
@@ -3929,6 +4054,7 @@ protected class EAttributeDecl_0_0_0_1_0_1_1_Assignment_upperBound extends Assig
 		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele0001011AssignmentUpperBound();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("upperBound",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("upperBound");
@@ -3970,6 +4096,7 @@ protected class EAttributeDecl_0_0_1_Assignment_name extends AssignmentToken  {
 		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele001AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -3994,6 +4121,7 @@ protected class EAttributeDecl_0_1_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele01Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EAttributeDecl_0_1_1_Assignment_defaultValueLiteral(current, this).firstSolution();
 		while(s1 != null) {
@@ -4034,6 +4162,7 @@ protected class EAttributeDecl_0_1_1_Assignment_defaultValueLiteral extends Assi
 		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele011AssignmentDefaultValueLiteral();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("defaultValueLiteral",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("defaultValueLiteral");
@@ -4082,6 +4211,7 @@ protected class EReferenceDecl_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EReferenceDecl_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -4110,6 +4240,7 @@ protected class EReferenceDecl_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EReferenceDecl_0_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
@@ -4138,6 +4269,7 @@ protected class EReferenceDecl_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EReferenceDecl_0_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -4166,6 +4298,7 @@ protected class EReferenceDecl_0_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EReferenceDecl_0_0_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -4194,6 +4327,7 @@ protected class EReferenceDecl_0_0_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele0000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EReferenceDecl_0_0_0_0_1_Assignment_eGenericType(current, this).firstSolution();
 		while(s1 != null) {
@@ -4222,6 +4356,7 @@ protected class EReferenceDecl_0_0_0_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele00000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EReferenceDecl_0_0_0_0_0_1_Alternatives(current, this).firstSolution();
 		while(s1 != null) {
@@ -4250,6 +4385,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele000000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EReferenceDecl_0_0_0_0_0_0_1_Alternatives(current, this).firstSolution();
 		while(s1 != null) {
@@ -4278,6 +4414,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_0_Assignment_eAnnotations extends Ass
 		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele0000000AssignmentEAnnotations();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("eAnnotations",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("eAnnotations");
@@ -4308,7 +4445,8 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_Alternatives extends AlternativesTo
 	public Alternatives getGrammarElement() {
 		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele0000001Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new EReferenceDecl_0_0_0_0_0_0_1_1_Assignment_derived(current, this) : new EReferenceDecl_0_0_0_0_0_0_1_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -4329,7 +4467,8 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_0_Alternatives extends Alternatives
 	public Alternatives getGrammarElement() {
 		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele00000010Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new EReferenceDecl_0_0_0_0_0_0_1_0_1_Assignment_unsettable(current, this) : new EReferenceDecl_0_0_0_0_0_0_1_0_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -4350,7 +4489,8 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_Alternatives extends Alternativ
 	public Alternatives getGrammarElement() {
 		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele000000100Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new EReferenceDecl_0_0_0_0_0_0_1_0_0_1_Assignment_transient(current, this) : new EReferenceDecl_0_0_0_0_0_0_1_0_0_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -4371,7 +4511,8 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_0_Alternatives extends Alternat
 	public Alternatives getGrammarElement() {
 		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele0000001000Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new EReferenceDecl_0_0_0_0_0_0_1_0_0_0_1_Assignment_volatile(current, this) : new EReferenceDecl_0_0_0_0_0_0_1_0_0_0_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -4392,7 +4533,8 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_0_0_Alternatives extends Altern
 	public Alternatives getGrammarElement() {
 		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele00000010000Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new EReferenceDecl_0_0_0_0_0_0_1_0_0_0_0_1_Assignment_changeable(current, this) : new EReferenceDecl_0_0_0_0_0_0_1_0_0_0_0_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -4413,7 +4555,8 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_0_0_0_Alternatives extends Alte
 	public Alternatives getGrammarElement() {
 		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele000000100000Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new EReferenceDecl_0_0_0_0_0_0_1_0_0_0_0_0_1_Assignment_ordered(current, this) : new EReferenceDecl_0_0_0_0_0_0_1_0_0_0_0_0_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -4434,7 +4577,8 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_0_0_0_0_Alternatives extends Al
 	public Alternatives getGrammarElement() {
 		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele0000001000000Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new EReferenceDecl_0_0_0_0_0_0_1_0_0_0_0_0_0_1_Assignment_unique(current, this) : new EReferenceDecl_0_0_0_0_0_0_1_0_0_0_0_0_0_0_Assignment_resolveProxies(current, this);
 		Solution s = t.firstSolution();
@@ -4456,6 +4600,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_0_0_0_0_0_Assignment_resolvePro
 		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele00000010000000AssignmentResolveProxies();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("resolveProxies",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("resolveProxies");
@@ -4481,6 +4626,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_0_0_0_0_1_Assignment_unique ext
 		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele00000010000001AssignmentUnique();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("unique",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("unique");
@@ -4507,6 +4653,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_0_0_0_1_Assignment_ordered exte
 		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele0000001000001AssignmentOrdered();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("ordered",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("ordered");
@@ -4533,6 +4680,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_0_0_1_Assignment_changeable ext
 		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele000000100001AssignmentChangeable();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("changeable",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("changeable");
@@ -4559,6 +4707,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_0_1_Assignment_volatile extends
 		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele00000010001AssignmentVolatile();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("volatile",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("volatile");
@@ -4585,6 +4734,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_1_Assignment_transient extends 
 		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele0000001001AssignmentTransient();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("transient",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("transient");
@@ -4611,6 +4761,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_0_1_Assignment_unsettable extends A
 		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele000000101AssignmentUnsettable();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("unsettable",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("unsettable");
@@ -4637,6 +4788,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_1_Assignment_derived extends Assign
 		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele00000011AssignmentDerived();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("derived",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("derived");
@@ -4663,7 +4815,8 @@ protected class EReferenceDecl_0_0_0_0_0_1_Alternatives extends AlternativesToke
 	public Alternatives getGrammarElement() {
 		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele000001Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new EReferenceDecl_0_0_0_0_0_1_1_Keyword_ref(current, this) : new EReferenceDecl_0_0_0_0_0_1_0_Assignment_containment(current, this);
 		Solution s = t.firstSolution();
@@ -4685,6 +4838,7 @@ protected class EReferenceDecl_0_0_0_0_0_1_0_Assignment_containment extends Assi
 		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele0000010AssignmentContainment();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("containment",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("containment");
@@ -4724,6 +4878,7 @@ protected class EReferenceDecl_0_0_0_0_1_Assignment_eGenericType extends Assignm
 		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele00001AssignmentEGenericType();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("eGenericType",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("eGenericType");
@@ -4756,6 +4911,7 @@ protected class EReferenceDecl_0_0_0_1_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele0001Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EReferenceDecl_0_0_0_1_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -4784,6 +4940,7 @@ protected class EReferenceDecl_0_0_0_1_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele00010Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EReferenceDecl_0_0_0_1_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -4812,6 +4969,7 @@ protected class EReferenceDecl_0_0_0_1_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele000100Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EReferenceDecl_0_0_0_1_0_0_1_Assignment_lowerBound(current, this).firstSolution();
 		while(s1 != null) {
@@ -4852,6 +5010,7 @@ protected class EReferenceDecl_0_0_0_1_0_0_1_Assignment_lowerBound extends Assig
 		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele0001001AssignmentLowerBound();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("lowerBound",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("lowerBound");
@@ -4876,6 +5035,7 @@ protected class EReferenceDecl_0_0_0_1_0_1_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele000101Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EReferenceDecl_0_0_0_1_0_1_1_Assignment_upperBound(current, this).firstSolution();
 		while(s1 != null) {
@@ -4916,6 +5076,7 @@ protected class EReferenceDecl_0_0_0_1_0_1_1_Assignment_upperBound extends Assig
 		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele0001011AssignmentUpperBound();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("upperBound",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("upperBound");
@@ -4957,6 +5118,7 @@ protected class EReferenceDecl_0_0_1_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele001Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EReferenceDecl_0_0_1_1_Assignment_eOpposite(current, this).firstSolution();
 		while(s1 != null) {
@@ -4997,6 +5159,7 @@ protected class EReferenceDecl_0_0_1_1_Assignment_eOpposite extends AssignmentTo
 		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele0011AssignmentEOpposite();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("eOpposite",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("eOpposite");
@@ -5025,6 +5188,7 @@ protected class EReferenceDecl_0_1_Assignment_name extends AssignmentToken  {
 		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele01AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -5072,6 +5236,7 @@ protected class EEnumDecl_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEEnumDecl().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EEnumDecl_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -5100,6 +5265,7 @@ protected class EEnumDecl_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEEnumDecl().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EEnumDecl_0_1_Assignment_eLiterals(current, this).firstSolution();
 		while(s1 != null) {
@@ -5128,6 +5294,7 @@ protected class EEnumDecl_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEEnumDecl().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EEnumDecl_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -5156,6 +5323,7 @@ protected class EEnumDecl_0_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEEnumDecl().ele000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EEnumDecl_0_0_0_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
@@ -5184,6 +5352,7 @@ protected class EEnumDecl_0_0_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEEnumDecl().ele0000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EEnumDecl_0_0_0_0_1_Keyword_enum(current, this).firstSolution();
 		while(s1 != null) {
@@ -5212,6 +5381,7 @@ protected class EEnumDecl_0_0_0_0_0_Assignment_eAnnotations extends AssignmentTo
 		return EcoreDslGrammarAccess.INSTANCE.prEEnumDecl().ele00000AssignmentEAnnotations();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("eAnnotations",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("eAnnotations");
@@ -5256,6 +5426,7 @@ protected class EEnumDecl_0_0_0_1_Assignment_name extends AssignmentToken  {
 		return EcoreDslGrammarAccess.INSTANCE.prEEnumDecl().ele0001AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -5293,6 +5464,7 @@ protected class EEnumDecl_0_1_Assignment_eLiterals extends AssignmentToken  {
 		return EcoreDslGrammarAccess.INSTANCE.prEEnumDecl().ele01AssignmentELiterals();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("eLiterals",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("eLiterals");
@@ -5348,6 +5520,7 @@ protected class EEnumLiteralDecl_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEEnumLiteralDecl().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EEnumLiteralDecl_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -5376,6 +5549,7 @@ protected class EEnumLiteralDecl_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEEnumLiteralDecl().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EEnumLiteralDecl_0_1_Assignment_literal(current, this).firstSolution();
 		while(s1 != null) {
@@ -5404,6 +5578,7 @@ protected class EEnumLiteralDecl_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEEnumLiteralDecl().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EEnumLiteralDecl_0_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -5432,6 +5607,7 @@ protected class EEnumLiteralDecl_0_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEEnumLiteralDecl().ele000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EEnumLiteralDecl_0_0_0_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
@@ -5460,6 +5636,7 @@ protected class EEnumLiteralDecl_0_0_0_0_Assignment_eAnnotations extends Assignm
 		return EcoreDslGrammarAccess.INSTANCE.prEEnumLiteralDecl().ele0000AssignmentEAnnotations();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("eAnnotations",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("eAnnotations");
@@ -5491,6 +5668,7 @@ protected class EEnumLiteralDecl_0_0_0_1_Assignment_name extends AssignmentToken
 		return EcoreDslGrammarAccess.INSTANCE.prEEnumLiteralDecl().ele0001AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -5515,6 +5693,7 @@ protected class EEnumLiteralDecl_0_0_1_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEEnumLiteralDecl().ele001Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EEnumLiteralDecl_0_0_1_1_Assignment_value(current, this).firstSolution();
 		while(s1 != null) {
@@ -5555,6 +5734,7 @@ protected class EEnumLiteralDecl_0_0_1_1_Assignment_value extends AssignmentToke
 		return EcoreDslGrammarAccess.INSTANCE.prEEnumLiteralDecl().ele0011AssignmentValue();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("value",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
@@ -5580,6 +5760,7 @@ protected class EEnumLiteralDecl_0_1_Assignment_literal extends AssignmentToken 
 		return EcoreDslGrammarAccess.INSTANCE.prEEnumLiteralDecl().ele01AssignmentLiteral();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("literal",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("literal");
@@ -5627,6 +5808,7 @@ protected class ETypeParameterDecl_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prETypeParameterDecl().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ETypeParameterDecl_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -5655,6 +5837,7 @@ protected class ETypeParameterDecl_0_Assignment_name extends AssignmentToken  {
 		return EcoreDslGrammarAccess.INSTANCE.prETypeParameterDecl().ele0AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -5678,6 +5861,7 @@ protected class ETypeParameterDecl_1_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prETypeParameterDecl().ele1Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ETypeParameterDecl_1_1_Assignment_eBounds(current, this).firstSolution();
 		while(s1 != null) {
@@ -5718,6 +5902,7 @@ protected class ETypeParameterDecl_1_1_Assignment_eBounds extends AssignmentToke
 		return EcoreDslGrammarAccess.INSTANCE.prETypeParameterDecl().ele11AssignmentEBounds();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("eBounds",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("eBounds");
@@ -5760,7 +5945,8 @@ protected class EGenericTypeReferenceDecl_Alternatives extends AlternativesToken
 	public Alternatives getGrammarElement() {
 		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeReferenceDecl().eleAlternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new EGenericTypeReferenceDecl_1_Group(current, this) : new EGenericTypeReferenceDecl_0_Group(current, this);
 		Solution s = t.firstSolution();
@@ -5782,6 +5968,7 @@ protected class EGenericTypeReferenceDecl_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeReferenceDecl().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EGenericTypeReferenceDecl_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -5810,6 +5997,7 @@ protected class EGenericTypeReferenceDecl_0_0_Assignment_eClassifier extends Ass
 		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeReferenceDecl().ele00AssignmentEClassifier();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("eClassifier",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("eClassifier");
@@ -5836,6 +6024,7 @@ protected class EGenericTypeReferenceDecl_0_1_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeReferenceDecl().ele01Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EGenericTypeReferenceDecl_0_1_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -5864,6 +6053,7 @@ protected class EGenericTypeReferenceDecl_0_1_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeReferenceDecl().ele010Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EGenericTypeReferenceDecl_0_1_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -5892,6 +6082,7 @@ protected class EGenericTypeReferenceDecl_0_1_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeReferenceDecl().ele0100Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EGenericTypeReferenceDecl_0_1_0_0_1_Assignment_eTypeArguments(current, this).firstSolution();
 		while(s1 != null) {
@@ -5932,6 +6123,7 @@ protected class EGenericTypeReferenceDecl_0_1_0_0_1_Assignment_eTypeArguments ex
 		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeReferenceDecl().ele01001AssignmentETypeArguments();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("eTypeArguments",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("eTypeArguments");
@@ -5964,6 +6156,7 @@ protected class EGenericTypeReferenceDecl_0_1_0_1_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeReferenceDecl().ele0101Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EGenericTypeReferenceDecl_0_1_0_1_1_Assignment_eTypeArguments(current, this).firstSolution();
 		while(s1 != null) {
@@ -6004,6 +6197,7 @@ protected class EGenericTypeReferenceDecl_0_1_0_1_1_Assignment_eTypeArguments ex
 		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeReferenceDecl().ele01011AssignmentETypeArguments();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("eTypeArguments",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("eTypeArguments");
@@ -6051,6 +6245,7 @@ protected class EGenericTypeReferenceDecl_1_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeReferenceDecl().ele1Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EGenericTypeReferenceDecl_1_1_Assignment_eTypeParameter(current, this).firstSolution();
 		while(s1 != null) {
@@ -6091,6 +6286,7 @@ protected class EGenericTypeReferenceDecl_1_1_Assignment_eTypeParameter extends 
 		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeReferenceDecl().ele11AssignmentETypeParameter();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("eTypeParameter",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("eTypeParameter");
@@ -6128,7 +6324,8 @@ protected class EGenericTypeDecl_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeDecl().eleAlternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new EGenericTypeDecl_1_Group(current, this) : new EGenericTypeDecl_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -6149,7 +6346,8 @@ protected class EGenericTypeDecl_0_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeDecl().ele0Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new EGenericTypeDecl_0_1_Group(current, this) : new EGenericTypeDecl_0_0_Group(current, this);
 		Solution s = t.firstSolution();
@@ -6171,6 +6369,7 @@ protected class EGenericTypeDecl_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeDecl().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EGenericTypeDecl_0_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -6199,6 +6398,7 @@ protected class EGenericTypeDecl_0_0_0_Assignment_eClassifier extends Assignment
 		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeDecl().ele000AssignmentEClassifier();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("eClassifier",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("eClassifier");
@@ -6225,6 +6425,7 @@ protected class EGenericTypeDecl_0_0_1_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeDecl().ele001Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EGenericTypeDecl_0_0_1_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -6253,6 +6454,7 @@ protected class EGenericTypeDecl_0_0_1_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeDecl().ele0010Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EGenericTypeDecl_0_0_1_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -6281,6 +6483,7 @@ protected class EGenericTypeDecl_0_0_1_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeDecl().ele00100Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EGenericTypeDecl_0_0_1_0_0_1_Assignment_eTypeArguments(current, this).firstSolution();
 		while(s1 != null) {
@@ -6321,6 +6524,7 @@ protected class EGenericTypeDecl_0_0_1_0_0_1_Assignment_eTypeArguments extends A
 		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeDecl().ele001001AssignmentETypeArguments();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("eTypeArguments",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("eTypeArguments");
@@ -6353,6 +6557,7 @@ protected class EGenericTypeDecl_0_0_1_0_1_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeDecl().ele00101Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EGenericTypeDecl_0_0_1_0_1_1_Assignment_eTypeArguments(current, this).firstSolution();
 		while(s1 != null) {
@@ -6393,6 +6598,7 @@ protected class EGenericTypeDecl_0_0_1_0_1_1_Assignment_eTypeArguments extends A
 		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeDecl().ele001011AssignmentETypeArguments();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("eTypeArguments",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("eTypeArguments");
@@ -6440,6 +6646,7 @@ protected class EGenericTypeDecl_0_1_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeDecl().ele01Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EGenericTypeDecl_0_1_1_Assignment_eTypeParameter(current, this).firstSolution();
 		while(s1 != null) {
@@ -6480,6 +6687,7 @@ protected class EGenericTypeDecl_0_1_1_Assignment_eTypeParameter extends Assignm
 		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeDecl().ele011AssignmentETypeParameter();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("eTypeParameter",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("eTypeParameter");
@@ -6508,6 +6716,7 @@ protected class EGenericTypeDecl_1_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeDecl().ele1Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EGenericTypeDecl_1_1_Alternatives(current, this).firstSolution();
 		while(s1 != null) {
@@ -6547,7 +6756,8 @@ protected class EGenericTypeDecl_1_1_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeDecl().ele11Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new EGenericTypeDecl_1_1_1_Group(current, this) : new EGenericTypeDecl_1_1_0_Group(current, this);
 		Solution s = t.firstSolution();
@@ -6569,6 +6779,7 @@ protected class EGenericTypeDecl_1_1_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeDecl().ele110Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EGenericTypeDecl_1_1_0_1_Assignment_eUpperBound(current, this).firstSolution();
 		while(s1 != null) {
@@ -6609,6 +6820,7 @@ protected class EGenericTypeDecl_1_1_0_1_Assignment_eUpperBound extends Assignme
 		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeDecl().ele1101AssignmentEUpperBound();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("eUpperBound",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("eUpperBound");
@@ -6641,6 +6853,7 @@ protected class EGenericTypeDecl_1_1_1_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeDecl().ele111Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EGenericTypeDecl_1_1_1_1_Assignment_eLowerBound(current, this).firstSolution();
 		while(s1 != null) {
@@ -6681,6 +6894,7 @@ protected class EGenericTypeDecl_1_1_1_1_Assignment_eLowerBound extends Assignme
 		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeDecl().ele1111AssignmentELowerBound();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("eLowerBound",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("eLowerBound");
@@ -6726,6 +6940,7 @@ protected class EOperationDecl_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EOperationDecl_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -6754,6 +6969,7 @@ protected class EOperationDecl_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EOperationDecl_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -6782,6 +6998,7 @@ protected class EOperationDecl_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EOperationDecl_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -6810,6 +7027,7 @@ protected class EOperationDecl_0_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EOperationDecl_0_0_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -6838,6 +7056,7 @@ protected class EOperationDecl_0_0_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele0000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EOperationDecl_0_0_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -6866,6 +7085,7 @@ protected class EOperationDecl_0_0_0_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele00000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EOperationDecl_0_0_0_0_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -6894,6 +7114,7 @@ protected class EOperationDecl_0_0_0_0_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele000000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EOperationDecl_0_0_0_0_0_0_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
@@ -6922,6 +7143,7 @@ protected class EOperationDecl_0_0_0_0_0_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele0000000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EOperationDecl_0_0_0_0_0_0_0_1_Alternatives(current, this).firstSolution();
 		while(s1 != null) {
@@ -6950,6 +7172,7 @@ protected class EOperationDecl_0_0_0_0_0_0_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele00000000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EOperationDecl_0_0_0_0_0_0_0_0_1_Keyword_op(current, this).firstSolution();
 		while(s1 != null) {
@@ -6978,6 +7201,7 @@ protected class EOperationDecl_0_0_0_0_0_0_0_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele000000000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EOperationDecl_0_0_0_0_0_0_0_0_0_1_Alternatives(current, this).firstSolution();
 		while(s1 != null) {
@@ -7006,6 +7230,7 @@ protected class EOperationDecl_0_0_0_0_0_0_0_0_0_0_Assignment_eAnnotations exten
 		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele0000000000AssignmentEAnnotations();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("eAnnotations",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("eAnnotations");
@@ -7036,7 +7261,8 @@ protected class EOperationDecl_0_0_0_0_0_0_0_0_0_1_Alternatives extends Alternat
 	public Alternatives getGrammarElement() {
 		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele0000000001Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new EOperationDecl_0_0_0_0_0_0_0_0_0_1_1_Assignment_ordered(current, this) : new EOperationDecl_0_0_0_0_0_0_0_0_0_1_0_Assignment_unique(current, this);
 		Solution s = t.firstSolution();
@@ -7058,6 +7284,7 @@ protected class EOperationDecl_0_0_0_0_0_0_0_0_0_1_0_Assignment_unique extends A
 		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele00000000010AssignmentUnique();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("unique",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("unique");
@@ -7083,6 +7310,7 @@ protected class EOperationDecl_0_0_0_0_0_0_0_0_0_1_1_Assignment_ordered extends 
 		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele00000000011AssignmentOrdered();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("ordered",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("ordered");
@@ -7122,7 +7350,8 @@ protected class EOperationDecl_0_0_0_0_0_0_0_1_Alternatives extends Alternatives
 	public Alternatives getGrammarElement() {
 		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele00000001Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new EOperationDecl_0_0_0_0_0_0_0_1_1_Keyword_void(current, this) : new EOperationDecl_0_0_0_0_0_0_0_1_0_Assignment_eGenericType(current, this);
 		Solution s = t.firstSolution();
@@ -7144,6 +7373,7 @@ protected class EOperationDecl_0_0_0_0_0_0_0_1_0_Assignment_eGenericType extends
 		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele000000010AssignmentEGenericType();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("eGenericType",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("eGenericType");
@@ -7189,6 +7419,7 @@ protected class EOperationDecl_0_0_0_0_0_0_1_Assignment_name extends AssignmentT
 		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele0000001AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -7213,6 +7444,7 @@ protected class EOperationDecl_0_0_0_0_0_1_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele000001Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EOperationDecl_0_0_0_0_0_1_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -7241,6 +7473,7 @@ protected class EOperationDecl_0_0_0_0_0_1_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele0000010Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EOperationDecl_0_0_0_0_0_1_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -7269,6 +7502,7 @@ protected class EOperationDecl_0_0_0_0_0_1_0_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele00000100Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EOperationDecl_0_0_0_0_0_1_0_0_1_Assignment_eTypeParameters(current, this).firstSolution();
 		while(s1 != null) {
@@ -7309,6 +7543,7 @@ protected class EOperationDecl_0_0_0_0_0_1_0_0_1_Assignment_eTypeParameters exte
 		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele000001001AssignmentETypeParameters();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("eTypeParameters",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("eTypeParameters");
@@ -7341,6 +7576,7 @@ protected class EOperationDecl_0_0_0_0_0_1_0_1_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele00000101Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EOperationDecl_0_0_0_0_0_1_0_1_1_Assignment_eTypeParameters(current, this).firstSolution();
 		while(s1 != null) {
@@ -7381,6 +7617,7 @@ protected class EOperationDecl_0_0_0_0_0_1_0_1_1_Assignment_eTypeParameters exte
 		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele000001011AssignmentETypeParameters();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("eTypeParameters",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("eTypeParameters");
@@ -7441,6 +7678,7 @@ protected class EOperationDecl_0_0_0_1_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele0001Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EOperationDecl_0_0_0_1_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -7469,6 +7707,7 @@ protected class EOperationDecl_0_0_0_1_0_Assignment_eParameters extends Assignme
 		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele00010AssignmentEParameters();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("eParameters",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("eParameters");
@@ -7500,6 +7739,7 @@ protected class EOperationDecl_0_0_0_1_1_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele00011Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EOperationDecl_0_0_0_1_1_1_Assignment_eParameters(current, this).firstSolution();
 		while(s1 != null) {
@@ -7540,6 +7780,7 @@ protected class EOperationDecl_0_0_0_1_1_1_Assignment_eParameters extends Assign
 		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele000111AssignmentEParameters();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("eParameters",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("eParameters");
@@ -7587,6 +7828,7 @@ protected class EOperationDecl_0_1_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele01Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EOperationDecl_0_1_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -7615,6 +7857,7 @@ protected class EOperationDecl_0_1_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele010Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EOperationDecl_0_1_0_1_Assignment_eGenericExceptions(current, this).firstSolution();
 		while(s1 != null) {
@@ -7655,6 +7898,7 @@ protected class EOperationDecl_0_1_0_1_Assignment_eGenericExceptions extends Ass
 		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele0101AssignmentEGenericExceptions();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("eGenericExceptions",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("eGenericExceptions");
@@ -7687,6 +7931,7 @@ protected class EOperationDecl_0_1_1_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele011Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EOperationDecl_0_1_1_1_Assignment_eGenericExceptions(current, this).firstSolution();
 		while(s1 != null) {
@@ -7727,6 +7972,7 @@ protected class EOperationDecl_0_1_1_1_Assignment_eGenericExceptions extends Ass
 		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele0111AssignmentEGenericExceptions();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("eGenericExceptions",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("eGenericExceptions");
@@ -7784,6 +8030,7 @@ protected class EParameterDecl_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEParameterDecl().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EParameterDecl_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
@@ -7812,6 +8059,7 @@ protected class EParameterDecl_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prEParameterDecl().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new EParameterDecl_0_1_Assignment_eGenericType(current, this).firstSolution();
 		while(s1 != null) {
@@ -7840,6 +8088,7 @@ protected class EParameterDecl_0_0_Assignment_eAnnotations extends AssignmentTok
 		return EcoreDslGrammarAccess.INSTANCE.prEParameterDecl().ele00AssignmentEAnnotations();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("eAnnotations",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("eAnnotations");
@@ -7871,6 +8120,7 @@ protected class EParameterDecl_0_1_Assignment_eGenericType extends AssignmentTok
 		return EcoreDslGrammarAccess.INSTANCE.prEParameterDecl().ele01AssignmentEGenericType();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("eGenericType",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("eGenericType");
@@ -7903,6 +8153,7 @@ protected class EParameterDecl_1_Assignment_name extends AssignmentToken  {
 		return EcoreDslGrammarAccess.INSTANCE.prEParameterDecl().ele1AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -7937,6 +8188,7 @@ protected class MapEntrySuper_RuleCall_MapEntry extends RuleCallToken {
 		return EcoreDslGrammarAccess.INSTANCE.prMapEntrySuper().eleParserRuleCallMapEntry();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(MapEntry_Group.class, current)) return null;
 		if(!current.isInstanceOf("MapEntry")) return null;
@@ -7965,6 +8217,7 @@ protected class MapEntry_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prMapEntry().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new MapEntry_1_Assignment_detailValue(current, this).firstSolution();
 		while(s1 != null) {
@@ -7993,6 +8246,7 @@ protected class MapEntry_0_Group extends GroupToken {
 		return EcoreDslGrammarAccess.INSTANCE.prMapEntry().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new MapEntry_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -8021,6 +8275,7 @@ protected class MapEntry_0_0_Assignment_detailKey extends AssignmentToken  {
 		return EcoreDslGrammarAccess.INSTANCE.prMapEntry().ele00AssignmentDetailKey();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("detailKey",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("detailKey");
@@ -8057,6 +8312,7 @@ protected class MapEntry_1_Assignment_detailValue extends AssignmentToken  {
 		return EcoreDslGrammarAccess.INSTANCE.prMapEntry().ele1AssignmentDetailValue();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("detailValue",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("detailValue");
@@ -8090,7 +8346,8 @@ protected class MultiplicityExpr_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return EcoreDslGrammarAccess.INSTANCE.prMultiplicityExpr().eleAlternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new MultiplicityExpr_1_Keyword(current, this) : new MultiplicityExpr_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -8111,7 +8368,8 @@ protected class MultiplicityExpr_0_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return EcoreDslGrammarAccess.INSTANCE.prMultiplicityExpr().ele0Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new MultiplicityExpr_0_1_Keyword(current, this) : new MultiplicityExpr_0_0_Keyword(current, this);
 		Solution s = t.firstSolution();

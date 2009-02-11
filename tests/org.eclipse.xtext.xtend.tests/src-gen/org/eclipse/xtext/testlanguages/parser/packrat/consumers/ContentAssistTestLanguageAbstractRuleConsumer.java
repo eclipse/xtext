@@ -6,6 +6,7 @@ package org.eclipse.xtext.testlanguages.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -21,8 +22,8 @@ import org.eclipse.xtext.testlanguages.parser.packrat.consumers.ContentAssistTes
 @SuppressWarnings("unused")
 public final class ContentAssistTestLanguageAbstractRuleConsumer extends NonTerminalConsumer {
 
-	private ContentAssistTestLanguageFirstAbstractRuleChildConsumer firstAbstractRuleChildConsumer;
-	private ContentAssistTestLanguageSecondAbstractRuleChildConsumer secondAbstractRuleChildConsumer;
+	private INonTerminalConsumer firstAbstractRuleChildConsumer;
+	private INonTerminalConsumer secondAbstractRuleChildConsumer;
 
 	public ContentAssistTestLanguageAbstractRuleConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
@@ -64,6 +65,7 @@ public final class ContentAssistTestLanguageAbstractRuleConsumer extends NonTerm
 		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prAbstractRule();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -73,11 +75,11 @@ public final class ContentAssistTestLanguageAbstractRuleConsumer extends NonTerm
 		return "AbstractRule";
 	}
 	
-	public void setFirstAbstractRuleChildConsumer(ContentAssistTestLanguageFirstAbstractRuleChildConsumer firstAbstractRuleChildConsumer) {
+	public void setFirstAbstractRuleChildConsumer(INonTerminalConsumer firstAbstractRuleChildConsumer) {
 		this.firstAbstractRuleChildConsumer = firstAbstractRuleChildConsumer;
 	}
 	
-	public void setSecondAbstractRuleChildConsumer(ContentAssistTestLanguageSecondAbstractRuleChildConsumer secondAbstractRuleChildConsumer) {
+	public void setSecondAbstractRuleChildConsumer(INonTerminalConsumer secondAbstractRuleChildConsumer) {
 		this.secondAbstractRuleChildConsumer = secondAbstractRuleChildConsumer;
 	}
 	

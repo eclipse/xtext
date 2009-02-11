@@ -6,6 +6,7 @@ package org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -20,7 +21,7 @@ import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleRecon
 @SuppressWarnings("unused")
 public final class SimpleReconstrTestLanguageOpConsumer extends NonTerminalConsumer {
 
-	private SimpleReconstrTestLanguageTermConsumer termConsumer;
+	private INonTerminalConsumer termConsumer;
 
 	public SimpleReconstrTestLanguageOpConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
@@ -128,6 +129,7 @@ public final class SimpleReconstrTestLanguageOpConsumer extends NonTerminalConsu
 		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prOp();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -137,7 +139,7 @@ public final class SimpleReconstrTestLanguageOpConsumer extends NonTerminalConsu
 		return "Expression";
 	}
 	
-	public void setTermConsumer(SimpleReconstrTestLanguageTermConsumer termConsumer) {
+	public void setTermConsumer(INonTerminalConsumer termConsumer) {
 		this.termConsumer = termConsumer;
 	}
 	

@@ -74,7 +74,7 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/dummy/parser/antlr/internal/InternalDummyTestLanguage.g:68:47: (iv_ruleModel= ruleModel EOF )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/dummy/parser/antlr/internal/InternalDummyTestLanguage.g:69:2: iv_ruleModel= ruleModel EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/dummy/DummyTestLanguage.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/dummy/DummyTestLanguage.xmi#/0/@rules.0" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleModel_in_entryRuleModel72);
             iv_ruleModel=ruleModel();
             _fsp--;
@@ -127,7 +127,7 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
             	    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/dummy/parser/antlr/internal/InternalDummyTestLanguage.g:84:6: lv_elements= ruleElement
             	    {
             	     
-            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/dummy/DummyTestLanguage.xmi#//@rules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
+            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/dummy/DummyTestLanguage.xmi#/0/@rules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleElement_in_ruleModel140);
             	    lv_elements=ruleElement();
@@ -185,7 +185,7 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/dummy/parser/antlr/internal/InternalDummyTestLanguage.g:111:49: (iv_ruleElement= ruleElement EOF )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/dummy/parser/antlr/internal/InternalDummyTestLanguage.g:112:2: iv_ruleElement= ruleElement EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/dummy/DummyTestLanguage.xmi#//@rules.1" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/dummy/DummyTestLanguage.xmi#/0/@rules.1" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleElement_in_entryRuleElement179);
             iv_ruleElement=ruleElement();
             _fsp--;
@@ -249,7 +249,7 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
                     lv_optional=(Token)input.LT(1);
                     match(input,11,FOLLOW_11_in_ruleElement238); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/dummy/DummyTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::Keyword */, "optional"); 
+                            createLeafNode("classpath:/org/eclipse/xtext/dummy/DummyTestLanguage.xmi#/0/@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::Keyword */, "optional"); 
                         
 
                     	        if (current==null) {
@@ -271,7 +271,7 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
 
             match(input,12,FOLLOW_12_in_ruleElement260); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/dummy/DummyTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/dummy/DummyTestLanguage.xmi#/0/@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -282,7 +282,7 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleElement282); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/dummy/DummyTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+                createLeafNode("classpath:/org/eclipse/xtext/dummy/DummyTestLanguage.xmi#/0/@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
                 
 
             	        if (current==null) {
@@ -320,7 +320,7 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
             	    lv_descriptions=(Token)input.LT(1);
             	    match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleElement315); 
             	     
-            	        createLeafNode("classpath:/org/eclipse/xtext/dummy/DummyTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "descriptions"); 
+            	        createLeafNode("classpath:/org/eclipse/xtext/dummy/DummyTestLanguage.xmi#/0/@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "descriptions"); 
             	        
 
             	    	        if (current==null) {
@@ -348,7 +348,7 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
 
             match(input,13,FOLLOW_13_in_ruleElement337); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/dummy/DummyTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/dummy/DummyTestLanguage.xmi#/0/@rules.1/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }

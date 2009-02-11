@@ -42,6 +42,7 @@ protected class CompositeModel_Assignment_model extends AssignmentToken  {
 		return DatatypeRulesTestLanguageGrammarAccess.INSTANCE.prCompositeModel().eleAssignmentModel();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("model",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("model");
@@ -83,6 +84,7 @@ protected class Model_Group extends GroupToken {
 		return DatatypeRulesTestLanguageGrammarAccess.INSTANCE.prModel().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Model_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -111,6 +113,7 @@ protected class Model_0_Group extends GroupToken {
 		return DatatypeRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Model_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -139,6 +142,7 @@ protected class Model_0_0_Group extends GroupToken {
 		return DatatypeRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Model_0_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -167,6 +171,7 @@ protected class Model_0_0_0_Group extends GroupToken {
 		return DatatypeRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Model_0_0_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -195,6 +200,7 @@ protected class Model_0_0_0_0_Assignment_id extends AssignmentToken  {
 		return DatatypeRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele0000AssignmentId();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("id",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("id");
@@ -220,6 +226,7 @@ protected class Model_0_0_0_1_Group extends GroupToken {
 		return DatatypeRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele0001Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Model_0_0_0_1_1_Assignment_value(current, this).firstSolution();
 		while(s1 != null) {
@@ -260,6 +267,7 @@ protected class Model_0_0_0_1_1_Assignment_value extends AssignmentToken  {
 		return DatatypeRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele00011AssignmentValue();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("value",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
@@ -287,6 +295,7 @@ protected class Model_0_0_1_Group extends GroupToken {
 		return DatatypeRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele001Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Model_0_0_1_1_Assignment_vector(current, this).firstSolution();
 		while(s1 != null) {
@@ -327,6 +336,7 @@ protected class Model_0_0_1_1_Assignment_vector extends AssignmentToken  {
 		return DatatypeRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele0011AssignmentVector();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("vector",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("vector");
@@ -354,6 +364,7 @@ protected class Model_0_1_Group extends GroupToken {
 		return DatatypeRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele01Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Model_0_1_1_Assignment_dots(current, this).firstSolution();
 		while(s1 != null) {
@@ -394,6 +405,7 @@ protected class Model_0_1_1_Assignment_dots extends AssignmentToken  {
 		return DatatypeRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele011AssignmentDots();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("dots",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("dots");

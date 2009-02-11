@@ -45,6 +45,7 @@ protected class Statemachine_Group extends GroupToken {
 		return FowlerDslGrammarAccess.INSTANCE.prStatemachine().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Statemachine_1_Assignment_states(current, this).firstSolution();
 		while(s1 != null) {
@@ -73,6 +74,7 @@ protected class Statemachine_0_Group extends GroupToken {
 		return FowlerDslGrammarAccess.INSTANCE.prStatemachine().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Statemachine_0_1_Keyword_end(current, this).firstSolution();
 		while(s1 != null) {
@@ -101,6 +103,7 @@ protected class Statemachine_0_0_Group extends GroupToken {
 		return FowlerDslGrammarAccess.INSTANCE.prStatemachine().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Statemachine_0_0_1_Assignment_commands(current, this).firstSolution();
 		while(s1 != null) {
@@ -129,6 +132,7 @@ protected class Statemachine_0_0_0_Group extends GroupToken {
 		return FowlerDslGrammarAccess.INSTANCE.prStatemachine().ele000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Statemachine_0_0_0_1_Keyword_commands(current, this).firstSolution();
 		while(s1 != null) {
@@ -157,6 +161,7 @@ protected class Statemachine_0_0_0_0_Group extends GroupToken {
 		return FowlerDslGrammarAccess.INSTANCE.prStatemachine().ele0000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Statemachine_0_0_0_0_1_Keyword_end(current, this).firstSolution();
 		while(s1 != null) {
@@ -185,6 +190,7 @@ protected class Statemachine_0_0_0_0_0_Group extends GroupToken {
 		return FowlerDslGrammarAccess.INSTANCE.prStatemachine().ele00000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Statemachine_0_0_0_0_0_1_Assignment_events(current, this).firstSolution();
 		while(s1 != null) {
@@ -225,6 +231,7 @@ protected class Statemachine_0_0_0_0_0_1_Assignment_events extends AssignmentTok
 		return FowlerDslGrammarAccess.INSTANCE.prStatemachine().ele000001AssignmentEvents();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("events",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("events");
@@ -283,6 +290,7 @@ protected class Statemachine_0_0_1_Assignment_commands extends AssignmentToken  
 		return FowlerDslGrammarAccess.INSTANCE.prStatemachine().ele001AssignmentCommands();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("commands",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("commands");
@@ -328,6 +336,7 @@ protected class Statemachine_1_Assignment_states extends AssignmentToken  {
 		return FowlerDslGrammarAccess.INSTANCE.prStatemachine().ele1AssignmentStates();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("states",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("states");
@@ -370,6 +379,7 @@ protected class Event_Group extends GroupToken {
 		return FowlerDslGrammarAccess.INSTANCE.prEvent().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Event_1_Assignment_code(current, this).firstSolution();
 		while(s1 != null) {
@@ -398,6 +408,7 @@ protected class Event_0_Group extends GroupToken {
 		return FowlerDslGrammarAccess.INSTANCE.prEvent().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Event_0_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
@@ -426,6 +437,7 @@ protected class Event_0_0_Assignment_resetting extends AssignmentToken  {
 		return FowlerDslGrammarAccess.INSTANCE.prEvent().ele00AssignmentResetting();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("resetting",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("resetting");
@@ -451,6 +463,7 @@ protected class Event_0_1_Assignment_name extends AssignmentToken  {
 		return FowlerDslGrammarAccess.INSTANCE.prEvent().ele01AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -475,6 +488,7 @@ protected class Event_1_Assignment_code extends AssignmentToken  {
 		return FowlerDslGrammarAccess.INSTANCE.prEvent().ele1AssignmentCode();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("code",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("code");
@@ -509,6 +523,7 @@ protected class Command_Group extends GroupToken {
 		return FowlerDslGrammarAccess.INSTANCE.prCommand().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Command_1_Assignment_code(current, this).firstSolution();
 		while(s1 != null) {
@@ -537,6 +552,7 @@ protected class Command_0_Assignment_name extends AssignmentToken  {
 		return FowlerDslGrammarAccess.INSTANCE.prCommand().ele0AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -560,6 +576,7 @@ protected class Command_1_Assignment_code extends AssignmentToken  {
 		return FowlerDslGrammarAccess.INSTANCE.prCommand().ele1AssignmentCode();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("code",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("code");
@@ -594,6 +611,7 @@ protected class State_Group extends GroupToken {
 		return FowlerDslGrammarAccess.INSTANCE.prState().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new State_1_Keyword_end(current, this).firstSolution();
 		while(s1 != null) {
@@ -622,6 +640,7 @@ protected class State_0_Group extends GroupToken {
 		return FowlerDslGrammarAccess.INSTANCE.prState().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new State_0_1_Assignment_transitions(current, this).firstSolution();
 		while(s1 != null) {
@@ -650,6 +669,7 @@ protected class State_0_0_Group extends GroupToken {
 		return FowlerDslGrammarAccess.INSTANCE.prState().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new State_0_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -678,6 +698,7 @@ protected class State_0_0_0_Group extends GroupToken {
 		return FowlerDslGrammarAccess.INSTANCE.prState().ele000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new State_0_0_0_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
@@ -718,6 +739,7 @@ protected class State_0_0_0_1_Assignment_name extends AssignmentToken  {
 		return FowlerDslGrammarAccess.INSTANCE.prState().ele0001AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -742,6 +764,7 @@ protected class State_0_0_1_Group extends GroupToken {
 		return FowlerDslGrammarAccess.INSTANCE.prState().ele001Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new State_0_0_1_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -770,6 +793,7 @@ protected class State_0_0_1_0_Group extends GroupToken {
 		return FowlerDslGrammarAccess.INSTANCE.prState().ele0010Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new State_0_0_1_0_1_Assignment_actions(current, this).firstSolution();
 		while(s1 != null) {
@@ -798,6 +822,7 @@ protected class State_0_0_1_0_0_Group extends GroupToken {
 		return FowlerDslGrammarAccess.INSTANCE.prState().ele00100Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new State_0_0_1_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -851,6 +876,7 @@ protected class State_0_0_1_0_1_Assignment_actions extends AssignmentToken  {
 		return FowlerDslGrammarAccess.INSTANCE.prState().ele00101AssignmentActions();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("actions",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("actions");
@@ -892,6 +918,7 @@ protected class State_0_1_Assignment_transitions extends AssignmentToken  {
 		return FowlerDslGrammarAccess.INSTANCE.prState().ele01AssignmentTransitions();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("transitions",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("transitions");
@@ -947,6 +974,7 @@ protected class Transition_Group extends GroupToken {
 		return FowlerDslGrammarAccess.INSTANCE.prTransition().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Transition_1_Assignment_state(current, this).firstSolution();
 		while(s1 != null) {
@@ -975,6 +1003,7 @@ protected class Transition_0_Group extends GroupToken {
 		return FowlerDslGrammarAccess.INSTANCE.prTransition().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Transition_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -1003,6 +1032,7 @@ protected class Transition_0_0_Assignment_event extends AssignmentToken  {
 		return FowlerDslGrammarAccess.INSTANCE.prTransition().ele00AssignmentEvent();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("event",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("event");
@@ -1042,6 +1072,7 @@ protected class Transition_1_Assignment_state extends AssignmentToken  {
 		return FowlerDslGrammarAccess.INSTANCE.prTransition().ele1AssignmentState();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("state",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("state");

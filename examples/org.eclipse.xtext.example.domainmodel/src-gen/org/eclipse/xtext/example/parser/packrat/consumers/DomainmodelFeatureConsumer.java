@@ -6,6 +6,7 @@ package org.eclipse.xtext.example.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -21,8 +22,8 @@ import org.eclipse.xtext.example.parser.packrat.consumers.DomainmodelStructuralF
 @SuppressWarnings("unused")
 public final class DomainmodelFeatureConsumer extends NonTerminalConsumer {
 
-	private DomainmodelOperationConsumer operationConsumer;
-	private DomainmodelStructuralFeatureConsumer structuralFeatureConsumer;
+	private INonTerminalConsumer operationConsumer;
+	private INonTerminalConsumer structuralFeatureConsumer;
 
 	public DomainmodelFeatureConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
@@ -64,6 +65,7 @@ public final class DomainmodelFeatureConsumer extends NonTerminalConsumer {
 		return DomainmodelGrammarAccess.INSTANCE.prFeature();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -73,11 +75,11 @@ public final class DomainmodelFeatureConsumer extends NonTerminalConsumer {
 		return "Feature";
 	}
 	
-	public void setOperationConsumer(DomainmodelOperationConsumer operationConsumer) {
+	public void setOperationConsumer(INonTerminalConsumer operationConsumer) {
 		this.operationConsumer = operationConsumer;
 	}
 	
-	public void setStructuralFeatureConsumer(DomainmodelStructuralFeatureConsumer structuralFeatureConsumer) {
+	public void setStructuralFeatureConsumer(INonTerminalConsumer structuralFeatureConsumer) {
 		this.structuralFeatureConsumer = structuralFeatureConsumer;
 	}
 	

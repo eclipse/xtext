@@ -6,6 +6,7 @@ package org.eclipse.xtext.testlanguages.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -21,8 +22,8 @@ import org.eclipse.xtext.testlanguages.parser.packrat.consumers.PartialParserTes
 @SuppressWarnings("unused")
 public final class PartialParserTestLanguageSecondConcreteConsumer extends NonTerminalConsumer {
 
-	private XtextBuiltinIDConsumer idConsumer;
-	private PartialParserTestLanguageNamedConsumer namedConsumer;
+	private ITerminalConsumer idConsumer;
+	private INonTerminalConsumer namedConsumer;
 
 	private ISequenceMatcher crossReference$14$Delimiter;
 	
@@ -189,6 +190,7 @@ public final class PartialParserTestLanguageSecondConcreteConsumer extends NonTe
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prSecondConcrete();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -198,11 +200,11 @@ public final class PartialParserTestLanguageSecondConcreteConsumer extends NonTe
 		return "SecondConcrete";
 	}
 	
-	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
+	public void setIdConsumer(ITerminalConsumer idConsumer) {
 		this.idConsumer = idConsumer;
 	}
 	
-	public void setNamedConsumer(PartialParserTestLanguageNamedConsumer namedConsumer) {
+	public void setNamedConsumer(INonTerminalConsumer namedConsumer) {
 		this.namedConsumer = namedConsumer;
 	}
 	

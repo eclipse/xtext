@@ -6,6 +6,7 @@ package org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -20,7 +21,7 @@ import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.HiddenTer
 @SuppressWarnings("unused")
 public final class HiddenTerminalsTestLanguageOverridingHiddensCallConsumer extends NonTerminalConsumer {
 
-	private HiddenTerminalsTestLanguageWSConsumer wsConsumer;
+	private ITerminalConsumer wsConsumer;
 
 	private ICharacterClass keyword$3$Delimiter;
 	
@@ -126,6 +127,7 @@ public final class HiddenTerminalsTestLanguageOverridingHiddensCallConsumer exte
 		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prOverridingHiddensCall();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -135,7 +137,7 @@ public final class HiddenTerminalsTestLanguageOverridingHiddensCallConsumer exte
 		return "OverridingHiddensCall";
 	}
 	
-	public void setWsConsumer(HiddenTerminalsTestLanguageWSConsumer wsConsumer) {
+	public void setWsConsumer(ITerminalConsumer wsConsumer) {
 		this.wsConsumer = wsConsumer;
 	}
 	

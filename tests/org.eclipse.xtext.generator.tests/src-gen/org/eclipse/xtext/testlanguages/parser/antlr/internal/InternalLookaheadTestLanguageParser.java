@@ -74,7 +74,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:68:47: (iv_ruleEntry= ruleEntry EOF )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:69:2: iv_ruleEntry= ruleEntry EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.0" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleEntry_in_entryRuleEntry72);
             iv_ruleEntry=ruleEntry();
             _fsp--;
@@ -127,7 +127,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
             	    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:84:6: lv_contents= ruleAlts
             	    {
             	     
-            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#//@rules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
+            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleAlts_in_ruleEntry140);
             	    lv_contents=ruleAlts();
@@ -185,7 +185,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:111:46: (iv_ruleAlts= ruleAlts EOF )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:112:2: iv_ruleAlts= ruleAlts EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#//@rules.1" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.1" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleAlts_in_entryRuleAlts179);
             iv_ruleAlts=ruleAlts();
             _fsp--;
@@ -293,7 +293,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
                             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:125:5: this_LookAhead0= ruleLookAhead0
                             {
                              
-                                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#//@rules.1/@alternatives/@groups.0/@groups.0" /* xtext::RuleCall */, currentNode); 
+                                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.1/@alternatives/@groups.0/@groups.0" /* xtext::RuleCall */, currentNode); 
                                 
                             pushFollow(FOLLOW_ruleLookAhead0_in_ruleAlts237);
                             this_LookAhead0=ruleLookAhead0();
@@ -310,7 +310,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
                             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:135:5: this_LookAhead1= ruleLookAhead1
                             {
                              
-                                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#//@rules.1/@alternatives/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
+                                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.1/@alternatives/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
                                 
                             pushFollow(FOLLOW_ruleLookAhead1_in_ruleAlts264);
                             this_LookAhead1=ruleLookAhead1();
@@ -333,7 +333,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
                     // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:145:5: this_LookAhead3= ruleLookAhead3
                     {
                      
-                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#//@rules.1/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
+                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.1/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
                         
                     pushFollow(FOLLOW_ruleLookAhead3_in_ruleAlts292);
                     this_LookAhead3=ruleLookAhead3();
@@ -379,7 +379,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:162:52: (iv_ruleLookAhead0= ruleLookAhead0 EOF )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:163:2: iv_ruleLookAhead0= ruleLookAhead0 EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#//@rules.2" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.2" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleLookAhead0_in_entryRuleLookAhead0326);
             iv_ruleLookAhead0=ruleLookAhead0();
             _fsp--;
@@ -420,7 +420,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
             {
             match(input,11,FOLLOW_11_in_ruleLookAhead0370); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.2/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:179:1: (lv_x= 'a' )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:181:6: lv_x= 'a'
@@ -428,7 +428,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
             lv_x=(Token)input.LT(1);
             match(input,12,FOLLOW_12_in_ruleLookAhead0391); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.1/@terminal" /* xtext::Keyword */, "x"); 
+                    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.2/@alternatives/@abstractTokens.1/@terminal" /* xtext::Keyword */, "x"); 
                 
 
             	        if (current==null) {
@@ -478,7 +478,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:208:52: (iv_ruleLookAhead1= ruleLookAhead1 EOF )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:209:2: iv_ruleLookAhead1= ruleLookAhead1 EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#//@rules.3" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.3" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleLookAhead1_in_entryRuleLookAhead1438);
             iv_ruleLookAhead1=ruleLookAhead1();
             _fsp--;
@@ -527,13 +527,13 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
             {
             match(input,13,FOLLOW_13_in_ruleLookAhead1484); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:225:1: (lv_y= ruleLookAhead2 )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:228:6: lv_y= ruleLookAhead2
             {
              
-            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
             	    
             pushFollow(FOLLOW_ruleLookAhead2_in_ruleLookAhead1518);
             lv_y=ruleLookAhead2();
@@ -564,7 +564,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
             lv_x=(Token)input.LT(1);
             match(input,14,FOLLOW_14_in_ruleLookAhead1544); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::Keyword */, "x"); 
+                    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::Keyword */, "x"); 
                 
 
             	        if (current==null) {
@@ -590,7 +590,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
             lv_x=(Token)input.LT(1);
             match(input,15,FOLLOW_15_in_ruleLookAhead1578); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.1/@terminal" /* xtext::Keyword */, "x"); 
+                    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.3/@alternatives/@abstractTokens.1/@terminal" /* xtext::Keyword */, "x"); 
                 
 
             	        if (current==null) {
@@ -640,7 +640,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:295:52: (iv_ruleLookAhead2= ruleLookAhead2 EOF )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:296:2: iv_ruleLookAhead2= ruleLookAhead2 EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#//@rules.4" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.4" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleLookAhead2_in_entryRuleLookAhead2625);
             iv_ruleLookAhead2=ruleLookAhead2();
             _fsp--;
@@ -705,7 +705,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
                     lv_z=(Token)input.LT(1);
                     match(input,13,FOLLOW_13_in_ruleLookAhead2682); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.0/@groups.0/@terminal" /* xtext::Keyword */, "z"); 
+                            createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.4/@alternatives/@abstractTokens.0/@groups.0/@terminal" /* xtext::Keyword */, "z"); 
                         
 
                     	        if (current==null) {
@@ -734,7 +734,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
                     lv_z=(Token)input.LT(1);
                     match(input,11,FOLLOW_11_in_ruleLookAhead2721); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.0/@groups.1/@terminal" /* xtext::Keyword */, "z"); 
+                            createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.4/@alternatives/@abstractTokens.0/@groups.1/@terminal" /* xtext::Keyword */, "z"); 
                         
 
                     	        if (current==null) {
@@ -759,7 +759,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
             match(input,16,FOLLOW_16_in_ruleLookAhead2743); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.4/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -794,7 +794,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:362:52: (iv_ruleLookAhead3= ruleLookAhead3 EOF )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:363:2: iv_ruleLookAhead3= ruleLookAhead3 EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#//@rules.5" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.5" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleLookAhead3_in_entryRuleLookAhead3778);
             iv_ruleLookAhead3=ruleLookAhead3();
             _fsp--;
@@ -843,11 +843,11 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
             {
             match(input,13,FOLLOW_13_in_ruleLookAhead3824); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
             match(input,11,FOLLOW_11_in_ruleLookAhead3833); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -858,7 +858,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
             lv_x=(Token)input.LT(1);
             match(input,14,FOLLOW_14_in_ruleLookAhead3855); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::Keyword */, "x"); 
+                    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::Keyword */, "x"); 
                 
 
             	        if (current==null) {
@@ -882,7 +882,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:406:6: lv_z= ruleLookAhead4
             {
              
-            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.5/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
             	    
             pushFollow(FOLLOW_ruleLookAhead4_in_ruleLookAhead3902);
             lv_z=ruleLookAhead4();
@@ -937,7 +937,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:433:52: (iv_ruleLookAhead4= ruleLookAhead4 EOF )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:434:2: iv_ruleLookAhead4= ruleLookAhead4 EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#//@rules.6" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.6" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleLookAhead4_in_entryRuleLookAhead4941);
             iv_ruleLookAhead4=ruleLookAhead4();
             _fsp--;
@@ -999,7 +999,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
                     lv_x=(Token)input.LT(1);
                     match(input,16,FOLLOW_16_in_ruleLookAhead4997); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#//@rules.6/@alternatives/@groups.0/@terminal" /* xtext::Keyword */, "x"); 
+                            createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.6/@alternatives/@groups.0/@terminal" /* xtext::Keyword */, "x"); 
                         
 
                     	        if (current==null) {
@@ -1028,7 +1028,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
                     lv_x=(Token)input.LT(1);
                     match(input,15,FOLLOW_15_in_ruleLookAhead41036); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#//@rules.6/@alternatives/@groups.1/@terminal" /* xtext::Keyword */, "x"); 
+                            createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.6/@alternatives/@groups.1/@terminal" /* xtext::Keyword */, "x"); 
                         
 
                     	        if (current==null) {

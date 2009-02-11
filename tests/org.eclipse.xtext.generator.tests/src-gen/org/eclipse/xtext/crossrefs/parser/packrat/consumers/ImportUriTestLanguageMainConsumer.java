@@ -6,6 +6,7 @@ package org.eclipse.xtext.crossrefs.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -21,8 +22,8 @@ import org.eclipse.xtext.crossrefs.parser.packrat.consumers.ImportUriTestLanguag
 @SuppressWarnings("unused")
 public final class ImportUriTestLanguageMainConsumer extends NonTerminalConsumer {
 
-	private ImportUriTestLanguageImportConsumer importConsumer;
-	private ImportUriTestLanguageTypeConsumer typeConsumer;
+	private INonTerminalConsumer importConsumer;
+	private INonTerminalConsumer typeConsumer;
 
 	public ImportUriTestLanguageMainConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
@@ -114,6 +115,7 @@ public final class ImportUriTestLanguageMainConsumer extends NonTerminalConsumer
 		return ImportUriTestLanguageGrammarAccess.INSTANCE.prMain();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -123,11 +125,11 @@ public final class ImportUriTestLanguageMainConsumer extends NonTerminalConsumer
 		return "Main";
 	}
 	
-	public void setImportConsumer(ImportUriTestLanguageImportConsumer importConsumer) {
+	public void setImportConsumer(INonTerminalConsumer importConsumer) {
 		this.importConsumer = importConsumer;
 	}
 	
-	public void setTypeConsumer(ImportUriTestLanguageTypeConsumer typeConsumer) {
+	public void setTypeConsumer(INonTerminalConsumer typeConsumer) {
 		this.typeConsumer = typeConsumer;
 	}
 	

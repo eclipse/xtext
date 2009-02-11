@@ -74,7 +74,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:68:46: (iv_ruleRef2= ruleRef2 EOF )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:69:2: iv_ruleRef2= ruleRef2 EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/valueconverter/Bug250313.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/valueconverter/Bug250313.xmi#/0/@rules.0" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleRef2_in_entryRuleRef272);
             iv_ruleRef2=ruleRef2();
             _fsp--;
@@ -115,7 +115,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
             {
             match(input,11,FOLLOW_11_in_ruleRef2116); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/valueconverter/Bug250313.xmi#//@rules.0/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/valueconverter/Bug250313.xmi#/0/@rules.0/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:85:1: (lv_ref2= ( ( 'mykeyword1' | RULE_STRING ) | RULE_ID ) )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:87:6: lv_ref2= ( ( 'mykeyword1' | RULE_STRING ) | RULE_ID )
@@ -162,7 +162,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                             {
                             match(input,12,FOLLOW_12_in_ruleRef2139); 
 
-                                    createLeafNode("classpath:/org/eclipse/xtext/valueconverter/Bug250313.xmi#//@rules.0/@alternatives/@abstractTokens.1/@terminal/@groups.0/@groups.0" /* xtext::Keyword */, "ref2"); 
+                                    createLeafNode("classpath:/org/eclipse/xtext/valueconverter/Bug250313.xmi#/0/@rules.0/@alternatives/@abstractTokens.1/@terminal/@groups.0/@groups.0" /* xtext::Keyword */, "ref2"); 
                                 
 
                             }
@@ -172,7 +172,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                             {
                             match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleRef2154); 
                              
-                                createLeafNode("classpath:/org/eclipse/xtext/valueconverter/Bug250313.xmi#//@rules.0/@alternatives/@abstractTokens.1/@terminal/@groups.0/@groups.1" /* xtext::RuleCall */, "ref2"); 
+                                createLeafNode("classpath:/org/eclipse/xtext/valueconverter/Bug250313.xmi#/0/@rules.0/@alternatives/@abstractTokens.1/@terminal/@groups.0/@groups.1" /* xtext::RuleCall */, "ref2"); 
                                 
 
                             }
@@ -188,7 +188,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                     {
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleRef2169); 
                      
-                        createLeafNode("classpath:/org/eclipse/xtext/valueconverter/Bug250313.xmi#//@rules.0/@alternatives/@abstractTokens.1/@terminal/@groups.1" /* xtext::RuleCall */, "ref2"); 
+                        createLeafNode("classpath:/org/eclipse/xtext/valueconverter/Bug250313.xmi#/0/@rules.0/@alternatives/@abstractTokens.1/@terminal/@groups.1" /* xtext::RuleCall */, "ref2"); 
                         
 
                     }

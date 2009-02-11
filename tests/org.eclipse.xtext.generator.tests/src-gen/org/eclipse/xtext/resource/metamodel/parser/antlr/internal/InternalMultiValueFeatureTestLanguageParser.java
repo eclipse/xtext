@@ -74,7 +74,7 @@ public class InternalMultiValueFeatureTestLanguageParser extends AbstractInterna
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/resource/metamodel/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.g:68:47: (iv_ruleStart= ruleStart EOF )
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/resource/metamodel/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.g:69:2: iv_ruleStart= ruleStart EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/resource/metamodel/MultiValueFeatureTestLanguage.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/resource/metamodel/MultiValueFeatureTestLanguage.xmi#/0/@rules.0" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleStart_in_entryRuleStart72);
             iv_ruleStart=ruleStart();
             _fsp--;
@@ -129,7 +129,7 @@ public class InternalMultiValueFeatureTestLanguageParser extends AbstractInterna
             	    lv_featureA=(Token)input.LT(1);
             	    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleStart127); 
             	     
-            	        createLeafNode("classpath:/org/eclipse/xtext/resource/metamodel/MultiValueFeatureTestLanguage.xmi#//@rules.0/@alternatives/@terminal" /* xtext::RuleCall */, "featureA"); 
+            	        createLeafNode("classpath:/org/eclipse/xtext/resource/metamodel/MultiValueFeatureTestLanguage.xmi#/0/@rules.0/@alternatives/@terminal" /* xtext::RuleCall */, "featureA"); 
             	        
 
             	    	        if (current==null) {

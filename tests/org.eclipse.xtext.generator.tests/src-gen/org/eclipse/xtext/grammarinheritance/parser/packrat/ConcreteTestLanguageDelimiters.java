@@ -14,25 +14,19 @@ public final class ConcreteTestLanguageDelimiters {
 		throw new UnsupportedOperationException("Utility classes may not be initialized");
 	}
 	
-	public static ICharacterClass keyword$12$Delimiter = ICharacterClass.Factory.nullClass();
-
     // TODO: remove hardcoded character class from template
-	public static ICharacterClass keyword$9$Delimiter = ICharacterClass.Factory.join(
+	public static ICharacterClass keyword$14$Delimiter = ICharacterClass.Factory.join(
 			ICharacterClass.Factory.createRange('a', 'z'),
 			ICharacterClass.Factory.createRange('A', 'Z'),
 			ICharacterClass.Factory.create('_'),
 			ICharacterClass.Factory.createRange('0', '9')
 	);
 
-	public static ISequenceMatcher ruleCall$11$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+	public static ICharacterClass keyword$17$Delimiter = ICharacterClass.Factory.nullClass();
 
-	public static ISequenceMatcher ruleCall$7$Delimiter = new SetBasedKeywordMatcher(
-		"model");
+	public static ISequenceMatcher ruleCall$16$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 
-	public static ISequenceMatcher ruleCall$19$Delimiter = new SetBasedKeywordMatcher(
-		"model");
-
-	public static ISequenceMatcher ruleCall$31$Delimiter = new SetBasedKeywordMatcher(
-		"model");
+	public static ISequenceMatcher ruleCall$25$Delimiter = new SetBasedKeywordMatcher(
+		"model", "overriddenelement", "subrule1", "subrule3");
 
 }

@@ -66,7 +66,7 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 
 // Entry rule entryRuleEcoreDsl
 entryRuleEcoreDsl returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.0" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleEcoreDsl=ruleEcoreDsl 
 	 { $current=$iv_ruleEcoreDsl.current; } 
 	 EOF 
@@ -82,7 +82,7 @@ ruleEcoreDsl returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.0/@alternatives/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.0/@alternatives/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_imports=ruleImportStatementDecl 
 	    {
@@ -103,7 +103,7 @@ ruleEcoreDsl returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.0/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.0/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_package=ruleEPackageDecl 
 	    {
@@ -130,7 +130,7 @@ ruleEcoreDsl returns [EObject current=null]
 
 // Entry rule entryRuleImportStatementDecl
 entryRuleImportStatementDecl returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.1" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.1" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleImportStatementDecl=ruleImportStatementDecl 
 	 { $current=$iv_ruleImportStatementDecl.current; } 
 	 EOF 
@@ -144,13 +144,13 @@ ruleImportStatementDecl returns [EObject current=null]
     }:
 ((('import' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 ((	
 	
 	    lv_alias=RULE_ID
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@terminal" /* xtext::RuleCall */, "alias"); 
+    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@terminal" /* xtext::RuleCall */, "alias"); 
     }
  
 	    {
@@ -168,13 +168,13 @@ ruleImportStatementDecl returns [EObject current=null]
 	
 )'=' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 )?)(	
 	
 	    lv_importURI=RULE_STRING
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "importURI"); 
+    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "importURI"); 
     }
  
 	    {
@@ -192,7 +192,7 @@ ruleImportStatementDecl returns [EObject current=null]
 	
 ))';' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.1/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.1/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 );
 
@@ -204,7 +204,7 @@ ruleImportStatementDecl returns [EObject current=null]
 
 // Entry rule entryRuleEPackageDecl
 entryRuleEPackageDecl returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.2" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.2" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleEPackageDecl=ruleEPackageDecl 
 	 { $current=$iv_ruleEPackageDecl.current; } 
 	 EOF 
@@ -220,7 +220,7 @@ ruleEPackageDecl returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_eAnnotations=ruleEAnnotationDecl 
 	    {
@@ -239,13 +239,13 @@ ruleEPackageDecl returns [EObject current=null]
 	
 )*'package' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 )(	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_name=ruleQID 
 	    {
@@ -264,17 +264,17 @@ ruleEPackageDecl returns [EObject current=null]
 	
 ))'nsURI' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 )'=' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 )(	
 	
 	    lv_nsURI=RULE_STRING
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "nsURI"); 
+    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "nsURI"); 
     }
  
 	    {
@@ -292,17 +292,17 @@ ruleEPackageDecl returns [EObject current=null]
 	
 ))'nsPrefix' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 )'=' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 )(	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_nsPrefix=ruleQID 
 	    {
@@ -321,13 +321,13 @@ ruleEPackageDecl returns [EObject current=null]
 	
 ))'{' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 )((	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_eSubpackages=ruleSubEPackageDecl 
 	    {
@@ -349,7 +349,7 @@ ruleEPackageDecl returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_eClassifiers=ruleEClassifierDecl 
 	    {
@@ -368,7 +368,7 @@ ruleEPackageDecl returns [EObject current=null]
 	
 ))*)'}' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.2/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.2/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 );
 
@@ -380,7 +380,7 @@ ruleEPackageDecl returns [EObject current=null]
 
 // Entry rule entryRuleSubEPackageDecl
 entryRuleSubEPackageDecl returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.3" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.3" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleSubEPackageDecl=ruleSubEPackageDecl 
 	 { $current=$iv_ruleSubEPackageDecl.current; } 
 	 EOF 
@@ -396,7 +396,7 @@ ruleSubEPackageDecl returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_eAnnotations=ruleEAnnotationDecl 
 	    {
@@ -415,13 +415,13 @@ ruleSubEPackageDecl returns [EObject current=null]
 	
 )*'package' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 )(	
 	
 	    lv_name=RULE_ID
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
     }
  
 	    {
@@ -439,13 +439,13 @@ ruleSubEPackageDecl returns [EObject current=null]
 	
 ))'{' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 )((	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_eSubpackages=ruleSubEPackageDecl 
 	    {
@@ -467,7 +467,7 @@ ruleSubEPackageDecl returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_eClassifiers=ruleEClassifierDecl 
 	    {
@@ -486,7 +486,7 @@ ruleSubEPackageDecl returns [EObject current=null]
 	
 ))*)'}' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.3/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.3/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 );
 
@@ -498,7 +498,7 @@ ruleSubEPackageDecl returns [EObject current=null]
 
 // Entry rule entryRuleEClassifierDecl
 entryRuleEClassifierDecl returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.4" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.4" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleEClassifierDecl=ruleEClassifierDecl 
 	 { $current=$iv_ruleEClassifierDecl.current; } 
 	 EOF 
@@ -512,7 +512,7 @@ ruleEClassifierDecl returns [EObject current=null]
     }:
 (
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.4/@alternatives/@groups.0" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.4/@alternatives/@groups.0" /* xtext::RuleCall */, currentNode); 
     }
     this_EClassDecl=ruleEClassDecl
     { 
@@ -522,7 +522,7 @@ ruleEClassifierDecl returns [EObject current=null]
 
     |
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.4/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.4/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
     }
     this_EDataTypeDecl=ruleEDataTypeDecl
     { 
@@ -539,7 +539,7 @@ ruleEClassifierDecl returns [EObject current=null]
 
 // Entry rule entryRuleEDataTypeDecl
 entryRuleEDataTypeDecl returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.5" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.5" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleEDataTypeDecl=ruleEDataTypeDecl 
 	 { $current=$iv_ruleEDataTypeDecl.current; } 
 	 EOF 
@@ -555,7 +555,7 @@ ruleEDataTypeDecl returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.5/@alternatives/@groups.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.5/@alternatives/@groups.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_eAnnotations=ruleEAnnotationDecl 
 	    {
@@ -576,7 +576,7 @@ ruleEDataTypeDecl returns [EObject current=null]
 	
 	    lv_serializable='!serializable' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.5/@alternatives/@groups.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::Keyword */, "serializable"); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.5/@alternatives/@groups.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::Keyword */, "serializable"); 
     }
  
 	    {
@@ -594,13 +594,13 @@ ruleEDataTypeDecl returns [EObject current=null]
 	
 )?)(((('datatype' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.5/@alternatives/@groups.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.5/@alternatives/@groups.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 (	
 	
 	    lv_name=RULE_ID
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.5/@alternatives/@groups.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.5/@alternatives/@groups.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
     }
  
 	    {
@@ -618,13 +618,13 @@ ruleEDataTypeDecl returns [EObject current=null]
 	
 ))':' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.5/@alternatives/@groups.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.5/@alternatives/@groups.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 )(	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.5/@alternatives/@groups.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.5/@alternatives/@groups.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_instanceClassName=ruleSTRING_OR_QID 
 	    {
@@ -643,12 +643,12 @@ ruleEDataTypeDecl returns [EObject current=null]
 	
 ))';' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.5/@alternatives/@groups.0/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.5/@alternatives/@groups.0/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 ))
     |
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.5/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.5/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
     }
     this_EEnumDecl=ruleEEnumDecl
     { 
@@ -665,7 +665,7 @@ ruleEDataTypeDecl returns [EObject current=null]
 
 // Entry rule entryRuleEAnnotationDecl
 entryRuleEAnnotationDecl returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.6" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.6" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleEAnnotationDecl=ruleEAnnotationDecl 
 	 { $current=$iv_ruleEAnnotationDecl.current; } 
 	 EOF 
@@ -679,13 +679,13 @@ ruleEAnnotationDecl returns [EObject current=null]
     }:
 (((((('@' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 (	
 	
 	    lv_source=RULE_STRING
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "source"); 
+    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "source"); 
     }
  
 	    {
@@ -712,19 +712,19 @@ ruleEAnnotationDecl returns [EObject current=null]
         }
 (
 	RULE_ID    { 
-    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "eModelElement"); 
+    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "eModelElement"); 
     }
 ) 
 	
 )?)'(' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 )(	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_contents=ruleMapEntrySuper 
 	    {
@@ -743,13 +743,13 @@ ruleEAnnotationDecl returns [EObject current=null]
 	
 ))(',' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_contents=ruleMapEntrySuper 
 	    {
@@ -768,7 +768,7 @@ ruleEAnnotationDecl returns [EObject current=null]
 	
 ))*)')' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.6/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.6/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 );
 
@@ -780,7 +780,7 @@ ruleEAnnotationDecl returns [EObject current=null]
 
 // Entry rule entryRuleEClassDecl
 entryRuleEClassDecl returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.7" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.7" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleEClassDecl=ruleEClassDecl 
 	 { $current=$iv_ruleEClassDecl.current; } 
 	 EOF 
@@ -796,7 +796,7 @@ ruleEClassDecl returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_eAnnotations=ruleEAnnotationDecl 
 	    {
@@ -817,7 +817,7 @@ ruleEClassDecl returns [EObject current=null]
 	
 	    lv_abstract='abstract' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::Keyword */, "abstract"); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::Keyword */, "abstract"); 
     }
  
 	    {
@@ -837,7 +837,7 @@ ruleEClassDecl returns [EObject current=null]
 	
 	    lv_interface='interface' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@terminal" /* xtext::Keyword */, "interface"); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@terminal" /* xtext::Keyword */, "interface"); 
     }
  
 	    {
@@ -856,13 +856,13 @@ ruleEClassDecl returns [EObject current=null]
 )
     |'class' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.1" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.1" /* xtext::Keyword */, null); 
     }
 ))(	
 	
 	    lv_name=RULE_ID
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
     }
  
 	    {
@@ -880,13 +880,13 @@ ruleEClassDecl returns [EObject current=null]
 	
 ))((('<' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_eTypeParameters=ruleETypeParameterDecl 
 	    {
@@ -905,13 +905,13 @@ ruleEClassDecl returns [EObject current=null]
 	
 ))(',' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_eTypeParameters=ruleETypeParameterDecl 
 	    {
@@ -930,17 +930,17 @@ ruleEClassDecl returns [EObject current=null]
 	
 ))*)'>' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 )?)(('extends' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_eGenericSuperTypes=ruleEGenericTypeReferenceDecl 
 	    {
@@ -959,13 +959,13 @@ ruleEClassDecl returns [EObject current=null]
 	
 ))(',' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_eGenericSuperTypes=ruleEGenericTypeReferenceDecl 
 	    {
@@ -984,13 +984,13 @@ ruleEClassDecl returns [EObject current=null]
 	
 ))*)?)(':' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_instanceClassName=ruleSTRING_OR_QID 
 	    {
@@ -1009,13 +1009,13 @@ ruleEClassDecl returns [EObject current=null]
 	
 ))?)'{' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 )((	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_eStructuralFeatures=ruleEStructuralFeatureDecl 
 	    {
@@ -1037,7 +1037,7 @@ ruleEClassDecl returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_eOperations=ruleEOperationDecl 
 	    {
@@ -1056,7 +1056,7 @@ ruleEClassDecl returns [EObject current=null]
 	
 ))*)'}' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.7/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.7/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 );
 
@@ -1068,7 +1068,7 @@ ruleEClassDecl returns [EObject current=null]
 
 // Entry rule entryRuleEStructuralFeatureDecl
 entryRuleEStructuralFeatureDecl returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.8" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.8" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleEStructuralFeatureDecl=ruleEStructuralFeatureDecl 
 	 { $current=$iv_ruleEStructuralFeatureDecl.current; } 
 	 EOF 
@@ -1082,7 +1082,7 @@ ruleEStructuralFeatureDecl returns [EObject current=null]
     }:
 (
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.8/@alternatives/@groups.0" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.8/@alternatives/@groups.0" /* xtext::RuleCall */, currentNode); 
     }
     this_EAttributeDecl=ruleEAttributeDecl
     { 
@@ -1092,7 +1092,7 @@ ruleEStructuralFeatureDecl returns [EObject current=null]
 
     |
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.8/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.8/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
     }
     this_EReferenceDecl=ruleEReferenceDecl
     { 
@@ -1109,7 +1109,7 @@ ruleEStructuralFeatureDecl returns [EObject current=null]
 
 // Entry rule entryRuleEAttributeDecl
 entryRuleEAttributeDecl returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.9" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.9" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleEAttributeDecl=ruleEAttributeDecl 
 	 { $current=$iv_ruleEAttributeDecl.current; } 
 	 EOF 
@@ -1125,7 +1125,7 @@ ruleEAttributeDecl returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_eAnnotations=ruleEAnnotationDecl 
 	    {
@@ -1146,7 +1146,7 @@ ruleEAttributeDecl returns [EObject current=null]
 	
 	    lv_iD='ID' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@terminal" /* xtext::Keyword */, "iD"); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@terminal" /* xtext::Keyword */, "iD"); 
     }
  
 	    {
@@ -1167,7 +1167,7 @@ ruleEAttributeDecl returns [EObject current=null]
 	
 	    lv_unique='bag' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "unique"); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "unique"); 
     }
  
 	    {
@@ -1188,7 +1188,7 @@ ruleEAttributeDecl returns [EObject current=null]
 	
 	    lv_ordered='random' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "ordered"); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "ordered"); 
     }
  
 	    {
@@ -1209,7 +1209,7 @@ ruleEAttributeDecl returns [EObject current=null]
 	
 	    lv_changeable='readonly' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "changeable"); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "changeable"); 
     }
  
 	    {
@@ -1230,7 +1230,7 @@ ruleEAttributeDecl returns [EObject current=null]
 	
 	    lv_volatile='volatile' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "volatile"); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "volatile"); 
     }
  
 	    {
@@ -1251,7 +1251,7 @@ ruleEAttributeDecl returns [EObject current=null]
 	
 	    lv_transient='transient' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "transient"); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "transient"); 
     }
  
 	    {
@@ -1272,7 +1272,7 @@ ruleEAttributeDecl returns [EObject current=null]
 	
 	    lv_unsettable='unsettable' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "unsettable"); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "unsettable"); 
     }
  
 	    {
@@ -1293,7 +1293,7 @@ ruleEAttributeDecl returns [EObject current=null]
 	
 	    lv_derived='derived' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.1/@terminal" /* xtext::Keyword */, "derived"); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.1/@terminal" /* xtext::Keyword */, "derived"); 
     }
  
 	    {
@@ -1311,13 +1311,13 @@ ruleEAttributeDecl returns [EObject current=null]
 	
 ))*)'attr' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 )(	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_eGenericType=ruleEGenericTypeReferenceDecl 
 	    {
@@ -1336,13 +1336,13 @@ ruleEAttributeDecl returns [EObject current=null]
 	
 ))((('[' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 (	
 	
 	    lv_lowerBound=RULE_INT
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "lowerBound"); 
+    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "lowerBound"); 
     }
  
 	    {
@@ -1360,13 +1360,13 @@ ruleEAttributeDecl returns [EObject current=null]
 	
 ))('..' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_upperBound=ruleSINT 
 	    {
@@ -1385,13 +1385,13 @@ ruleEAttributeDecl returns [EObject current=null]
 	
 ))?)']' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 )?)(	
 	
 	    lv_name=RULE_ID
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
     }
  
 	    {
@@ -1409,13 +1409,13 @@ ruleEAttributeDecl returns [EObject current=null]
 	
 ))('=' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 (	
 	
 	    lv_defaultValueLiteral=RULE_STRING
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "defaultValueLiteral"); 
+    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "defaultValueLiteral"); 
     }
  
 	    {
@@ -1433,7 +1433,7 @@ ruleEAttributeDecl returns [EObject current=null]
 	
 ))?)';' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.9/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.9/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 );
 
@@ -1445,7 +1445,7 @@ ruleEAttributeDecl returns [EObject current=null]
 
 // Entry rule entryRuleEReferenceDecl
 entryRuleEReferenceDecl returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.10" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.10" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleEReferenceDecl=ruleEReferenceDecl 
 	 { $current=$iv_ruleEReferenceDecl.current; } 
 	 EOF 
@@ -1461,7 +1461,7 @@ ruleEReferenceDecl returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_eAnnotations=ruleEAnnotationDecl 
 	    {
@@ -1482,7 +1482,7 @@ ruleEReferenceDecl returns [EObject current=null]
 	
 	    lv_resolveProxies='local' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@terminal" /* xtext::Keyword */, "resolveProxies"); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@terminal" /* xtext::Keyword */, "resolveProxies"); 
     }
  
 	    {
@@ -1503,7 +1503,7 @@ ruleEReferenceDecl returns [EObject current=null]
 	
 	    lv_unique='bag' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "unique"); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "unique"); 
     }
  
 	    {
@@ -1524,7 +1524,7 @@ ruleEReferenceDecl returns [EObject current=null]
 	
 	    lv_ordered='random' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "ordered"); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "ordered"); 
     }
  
 	    {
@@ -1545,7 +1545,7 @@ ruleEReferenceDecl returns [EObject current=null]
 	
 	    lv_changeable='readonly' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "changeable"); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "changeable"); 
     }
  
 	    {
@@ -1566,7 +1566,7 @@ ruleEReferenceDecl returns [EObject current=null]
 	
 	    lv_volatile='volatile' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "volatile"); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "volatile"); 
     }
  
 	    {
@@ -1587,7 +1587,7 @@ ruleEReferenceDecl returns [EObject current=null]
 	
 	    lv_transient='transient' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "transient"); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "transient"); 
     }
  
 	    {
@@ -1608,7 +1608,7 @@ ruleEReferenceDecl returns [EObject current=null]
 	
 	    lv_unsettable='unsettable' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "unsettable"); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "unsettable"); 
     }
  
 	    {
@@ -1629,7 +1629,7 @@ ruleEReferenceDecl returns [EObject current=null]
 	
 	    lv_derived='derived' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.1/@terminal" /* xtext::Keyword */, "derived"); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.1/@terminal" /* xtext::Keyword */, "derived"); 
     }
  
 	    {
@@ -1649,7 +1649,7 @@ ruleEReferenceDecl returns [EObject current=null]
 	
 	    lv_containment='val' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@terminal" /* xtext::Keyword */, "containment"); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@terminal" /* xtext::Keyword */, "containment"); 
     }
  
 	    {
@@ -1668,13 +1668,13 @@ ruleEReferenceDecl returns [EObject current=null]
 )
     |'ref' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.1" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.1" /* xtext::Keyword */, null); 
     }
 ))(	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_eGenericType=ruleEGenericTypeReferenceDecl 
 	    {
@@ -1693,13 +1693,13 @@ ruleEReferenceDecl returns [EObject current=null]
 	
 ))((('[' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 (	
 	
 	    lv_lowerBound=RULE_INT
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "lowerBound"); 
+    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "lowerBound"); 
     }
  
 	    {
@@ -1717,13 +1717,13 @@ ruleEReferenceDecl returns [EObject current=null]
 	
 ))('..' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_upperBound=ruleSINT 
 	    {
@@ -1742,11 +1742,11 @@ ruleEReferenceDecl returns [EObject current=null]
 	
 ))?)']' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 )?)('#' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 (	
 	
@@ -1759,7 +1759,7 @@ ruleEReferenceDecl returns [EObject current=null]
         }
 (
 	RULE_ID    { 
-    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "eOpposite"); 
+    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "eOpposite"); 
     }
 ) 
 	
@@ -1767,7 +1767,7 @@ ruleEReferenceDecl returns [EObject current=null]
 	
 	    lv_name=RULE_ID
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
     }
  
 	    {
@@ -1785,7 +1785,7 @@ ruleEReferenceDecl returns [EObject current=null]
 	
 ))';' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.10/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.10/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 );
 
@@ -1797,7 +1797,7 @@ ruleEReferenceDecl returns [EObject current=null]
 
 // Entry rule entryRuleEEnumDecl
 entryRuleEEnumDecl returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.11" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.11" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleEEnumDecl=ruleEEnumDecl 
 	 { $current=$iv_ruleEEnumDecl.current; } 
 	 EOF 
@@ -1813,7 +1813,7 @@ ruleEEnumDecl returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.11/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.11/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_eAnnotations=ruleEAnnotationDecl 
 	    {
@@ -1832,13 +1832,13 @@ ruleEEnumDecl returns [EObject current=null]
 	
 )*'enum' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.11/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.11/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 )(	
 	
 	    lv_name=RULE_ID
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.11/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.11/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
     }
  
 	    {
@@ -1856,13 +1856,13 @@ ruleEEnumDecl returns [EObject current=null]
 	
 ))'{' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.11/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.11/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 )(	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.11/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.11/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_eLiterals=ruleEEnumLiteralDecl 
 	    {
@@ -1881,7 +1881,7 @@ ruleEEnumDecl returns [EObject current=null]
 	
 )+)'}' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.11/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.11/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 );
 
@@ -1893,7 +1893,7 @@ ruleEEnumDecl returns [EObject current=null]
 
 // Entry rule entryRuleEEnumLiteralDecl
 entryRuleEEnumLiteralDecl returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.12" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.12" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleEEnumLiteralDecl=ruleEEnumLiteralDecl 
 	 { $current=$iv_ruleEEnumLiteralDecl.current; } 
 	 EOF 
@@ -1909,7 +1909,7 @@ ruleEEnumLiteralDecl returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_eAnnotations=ruleEAnnotationDecl 
 	    {
@@ -1930,7 +1930,7 @@ ruleEEnumLiteralDecl returns [EObject current=null]
 	
 	    lv_name=RULE_ID
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
     }
  
 	    {
@@ -1948,13 +1948,13 @@ ruleEEnumLiteralDecl returns [EObject current=null]
 	
 ))('=' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 (	
 	
 	    lv_value=RULE_INT
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "value"); 
+    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "value"); 
     }
  
 	    {
@@ -1974,7 +1974,7 @@ ruleEEnumLiteralDecl returns [EObject current=null]
 	
 	    lv_literal=RULE_STRING
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "literal"); 
+    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "literal"); 
     }
  
 	    {
@@ -1992,7 +1992,7 @@ ruleEEnumLiteralDecl returns [EObject current=null]
 	
 )?)';' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.12/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.12/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 );
 
@@ -2004,7 +2004,7 @@ ruleEEnumLiteralDecl returns [EObject current=null]
 
 // Entry rule entryRuleETypeParameterDecl
 entryRuleETypeParameterDecl returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.13" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.13" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleETypeParameterDecl=ruleETypeParameterDecl 
 	 { $current=$iv_ruleETypeParameterDecl.current; } 
 	 EOF 
@@ -2020,7 +2020,7 @@ ruleETypeParameterDecl returns [EObject current=null]
 	
 	    lv_name=RULE_ID
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.13/@alternatives/@abstractTokens.0/@terminal" /* xtext::RuleCall */, "name"); 
+    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.13/@alternatives/@abstractTokens.0/@terminal" /* xtext::RuleCall */, "name"); 
     }
  
 	    {
@@ -2038,13 +2038,13 @@ ruleETypeParameterDecl returns [EObject current=null]
 	
 )('extends' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.13/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.13/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.13/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.13/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_eBounds=ruleEGenericTypeDecl 
 	    {
@@ -2071,7 +2071,7 @@ ruleETypeParameterDecl returns [EObject current=null]
 
 // Entry rule entryRuleEGenericTypeReferenceDecl
 entryRuleEGenericTypeReferenceDecl returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.14" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.14" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleEGenericTypeReferenceDecl=ruleEGenericTypeReferenceDecl 
 	 { $current=$iv_ruleEGenericTypeReferenceDecl.current; } 
 	 EOF 
@@ -2094,19 +2094,19 @@ ruleEGenericTypeReferenceDecl returns [EObject current=null]
         }
 (
 	RULE_ID    { 
-    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.14/@alternatives/@groups.0/@abstractTokens.0/@terminal" /* xtext::CrossReference */, "eClassifier"); 
+    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.14/@alternatives/@groups.0/@abstractTokens.0/@terminal" /* xtext::CrossReference */, "eClassifier"); 
     }
 ) 
 	
 )((('<' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.14/@alternatives/@groups.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.14/@alternatives/@groups.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.14/@alternatives/@groups.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.14/@alternatives/@groups.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_eTypeArguments=ruleEGenericTypeDecl 
 	    {
@@ -2125,13 +2125,13 @@ ruleEGenericTypeReferenceDecl returns [EObject current=null]
 	
 ))(',' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.14/@alternatives/@groups.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.14/@alternatives/@groups.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.14/@alternatives/@groups.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.14/@alternatives/@groups.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_eTypeArguments=ruleEGenericTypeDecl 
 	    {
@@ -2150,12 +2150,12 @@ ruleEGenericTypeReferenceDecl returns [EObject current=null]
 	
 ))*)'>' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.14/@alternatives/@groups.0/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.14/@alternatives/@groups.0/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 )?)
     |('#' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.14/@alternatives/@groups.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.14/@alternatives/@groups.1/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 (	
 	
@@ -2168,7 +2168,7 @@ ruleEGenericTypeReferenceDecl returns [EObject current=null]
         }
 (
 	RULE_ID    { 
-    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.14/@alternatives/@groups.1/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "eTypeParameter"); 
+    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.14/@alternatives/@groups.1/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "eTypeParameter"); 
     }
 ) 
 	
@@ -2182,7 +2182,7 @@ ruleEGenericTypeReferenceDecl returns [EObject current=null]
 
 // Entry rule entryRuleEGenericTypeDecl
 entryRuleEGenericTypeDecl returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.15" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.15" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleEGenericTypeDecl=ruleEGenericTypeDecl 
 	 { $current=$iv_ruleEGenericTypeDecl.current; } 
 	 EOF 
@@ -2205,19 +2205,19 @@ ruleEGenericTypeDecl returns [EObject current=null]
         }
 (
 	RULE_ID    { 
-    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.15/@alternatives/@groups.0/@groups.0/@abstractTokens.0/@terminal" /* xtext::CrossReference */, "eClassifier"); 
+    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.15/@alternatives/@groups.0/@groups.0/@abstractTokens.0/@terminal" /* xtext::CrossReference */, "eClassifier"); 
     }
 ) 
 	
 )((('<' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.15/@alternatives/@groups.0/@groups.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.15/@alternatives/@groups.0/@groups.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.15/@alternatives/@groups.0/@groups.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.15/@alternatives/@groups.0/@groups.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_eTypeArguments=ruleEGenericTypeDecl 
 	    {
@@ -2236,13 +2236,13 @@ ruleEGenericTypeDecl returns [EObject current=null]
 	
 ))(',' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.15/@alternatives/@groups.0/@groups.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.15/@alternatives/@groups.0/@groups.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.15/@alternatives/@groups.0/@groups.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.15/@alternatives/@groups.0/@groups.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_eTypeArguments=ruleEGenericTypeDecl 
 	    {
@@ -2261,12 +2261,12 @@ ruleEGenericTypeDecl returns [EObject current=null]
 	
 ))*)'>' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.15/@alternatives/@groups.0/@groups.0/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.15/@alternatives/@groups.0/@groups.0/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 )?)
     |('#' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.15/@alternatives/@groups.0/@groups.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.15/@alternatives/@groups.0/@groups.1/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 (	
 	
@@ -2279,24 +2279,24 @@ ruleEGenericTypeDecl returns [EObject current=null]
         }
 (
 	RULE_ID    { 
-    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.15/@alternatives/@groups.0/@groups.1/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "eTypeParameter"); 
+    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.15/@alternatives/@groups.0/@groups.1/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "eTypeParameter"); 
     }
 ) 
 	
 )))
     |('?' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.15/@alternatives/@groups.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.15/@alternatives/@groups.1/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 (('extends' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.15/@alternatives/@groups.1/@abstractTokens.1/@groups.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.15/@alternatives/@groups.1/@abstractTokens.1/@groups.0/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.15/@alternatives/@groups.1/@abstractTokens.1/@groups.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.15/@alternatives/@groups.1/@abstractTokens.1/@groups.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_eUpperBound=ruleEGenericTypeDecl 
 	    {
@@ -2316,13 +2316,13 @@ ruleEGenericTypeDecl returns [EObject current=null]
 ))
     |('super' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.15/@alternatives/@groups.1/@abstractTokens.1/@groups.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.15/@alternatives/@groups.1/@abstractTokens.1/@groups.1/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.15/@alternatives/@groups.1/@abstractTokens.1/@groups.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.15/@alternatives/@groups.1/@abstractTokens.1/@groups.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_eLowerBound=ruleEGenericTypeDecl 
 	    {
@@ -2349,7 +2349,7 @@ ruleEGenericTypeDecl returns [EObject current=null]
 
 // Entry rule entryRuleEOperationDecl
 entryRuleEOperationDecl returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.16" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.16" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleEOperationDecl=ruleEOperationDecl 
 	 { $current=$iv_ruleEOperationDecl.current; } 
 	 EOF 
@@ -2365,7 +2365,7 @@ ruleEOperationDecl returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_eAnnotations=ruleEAnnotationDecl 
 	    {
@@ -2386,7 +2386,7 @@ ruleEOperationDecl returns [EObject current=null]
 	
 	    lv_unique='bag' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@terminal" /* xtext::Keyword */, "unique"); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@terminal" /* xtext::Keyword */, "unique"); 
     }
  
 	    {
@@ -2407,7 +2407,7 @@ ruleEOperationDecl returns [EObject current=null]
 	
 	    lv_ordered='random' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.1/@terminal" /* xtext::Keyword */, "ordered"); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.1/@terminal" /* xtext::Keyword */, "ordered"); 
     }
  
 	    {
@@ -2425,13 +2425,13 @@ ruleEOperationDecl returns [EObject current=null]
 	
 ))*)'op' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 )((	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_eGenericType=ruleEGenericTypeReferenceDecl 
 	    {
@@ -2451,13 +2451,13 @@ ruleEOperationDecl returns [EObject current=null]
 )
     |'void' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.1" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.1" /* xtext::Keyword */, null); 
     }
 ))(	
 	
 	    lv_name=RULE_ID
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
     }
  
 	    {
@@ -2475,13 +2475,13 @@ ruleEOperationDecl returns [EObject current=null]
 	
 ))((('<' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_eTypeParameters=ruleETypeParameterDecl 
 	    {
@@ -2500,13 +2500,13 @@ ruleEOperationDecl returns [EObject current=null]
 	
 ))(',' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_eTypeParameters=ruleETypeParameterDecl 
 	    {
@@ -2525,17 +2525,17 @@ ruleEOperationDecl returns [EObject current=null]
 	
 ))*)'>' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 )?)'(' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 )((	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_eParameters=ruleEParameterDecl 
 	    {
@@ -2554,13 +2554,13 @@ ruleEOperationDecl returns [EObject current=null]
 	
 )(',' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_eParameters=ruleEParameterDecl 
 	    {
@@ -2579,17 +2579,17 @@ ruleEOperationDecl returns [EObject current=null]
 	
 ))*)?)')' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 )(('throws' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_eGenericExceptions=ruleEGenericTypeReferenceDecl 
 	    {
@@ -2608,13 +2608,13 @@ ruleEOperationDecl returns [EObject current=null]
 	
 ))(',' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.16/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_eGenericExceptions=ruleEGenericTypeReferenceDecl 
 	    {
@@ -2633,7 +2633,7 @@ ruleEOperationDecl returns [EObject current=null]
 	
 ))*)?)';' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.16/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.16/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 );
 
@@ -2645,7 +2645,7 @@ ruleEOperationDecl returns [EObject current=null]
 
 // Entry rule entryRuleEParameterDecl
 entryRuleEParameterDecl returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.17" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.17" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleEParameterDecl=ruleEParameterDecl 
 	 { $current=$iv_ruleEParameterDecl.current; } 
 	 EOF 
@@ -2661,7 +2661,7 @@ ruleEParameterDecl returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.17/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.17/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_eAnnotations=ruleEAnnotationDecl 
 	    {
@@ -2682,7 +2682,7 @@ ruleEParameterDecl returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.17/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.17/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_eGenericType=ruleEGenericTypeReferenceDecl 
 	    {
@@ -2703,7 +2703,7 @@ ruleEParameterDecl returns [EObject current=null]
 	
 	    lv_name=RULE_ID
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.17/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.17/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
     }
  
 	    {
@@ -2729,7 +2729,7 @@ ruleEParameterDecl returns [EObject current=null]
 
 // Entry rule entryRuleMapEntrySuper
 entryRuleMapEntrySuper returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.18" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.18" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleMapEntrySuper=ruleMapEntrySuper 
 	 { $current=$iv_ruleMapEntrySuper.current; } 
 	 EOF 
@@ -2743,7 +2743,7 @@ ruleMapEntrySuper returns [EObject current=null]
     }:
 
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.18/@alternatives" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.18/@alternatives" /* xtext::RuleCall */, currentNode); 
     }
     this_MapEntry=ruleMapEntry
     { 
@@ -2760,7 +2760,7 @@ ruleMapEntrySuper returns [EObject current=null]
 
 // Entry rule entryRuleMapEntry
 entryRuleMapEntry returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.19" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.19" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleMapEntry=ruleMapEntry 
 	 { $current=$iv_ruleMapEntry.current; } 
 	 EOF 
@@ -2776,7 +2776,7 @@ ruleMapEntry returns [EObject current=null]
 	
 	    lv_detailKey=RULE_ID
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.19/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, "detailKey"); 
+    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.19/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, "detailKey"); 
     }
  
 	    {
@@ -2794,13 +2794,13 @@ ruleMapEntry returns [EObject current=null]
 	
 )'=' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.19/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.19/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 )(	
 	
 	    lv_detailValue=RULE_STRING
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.19/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "detailValue"); 
+    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.19/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "detailValue"); 
     }
  
 	    {
@@ -2828,7 +2828,7 @@ ruleMapEntry returns [EObject current=null]
 
 // Entry rule entryRuleQID
 entryRuleQID returns [String current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.21" /* xtext::ParserRule */, currentNode); } 
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.21" /* xtext::ParserRule */, currentNode); } 
 	 iv_ruleQID=ruleQID 
 	 { $current=$iv_ruleQID.current.getText(); }  
 	 EOF 
@@ -2845,27 +2845,27 @@ ruleQID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
     }
 
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.21/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, null); 
+    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.21/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, null); 
     }
 ((
 	kw='.' 
     {
         $current.merge(kw);
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.21/@alternatives/@abstractTokens.1/@abstractTokens.0/@groups.0" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.21/@alternatives/@abstractTokens.1/@abstractTokens.0/@groups.0" /* xtext::Keyword */, null); 
     }
 
     |
 	kw='$' 
     {
         $current.merge(kw);
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.21/@alternatives/@abstractTokens.1/@abstractTokens.0/@groups.1" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.21/@alternatives/@abstractTokens.1/@abstractTokens.0/@groups.1" /* xtext::Keyword */, null); 
     }
 )    this_ID=RULE_ID    {
 		$current.merge(this_ID);
     }
 
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.21/@alternatives/@abstractTokens.1/@abstractTokens.1" /* xtext::RuleCall */, null); 
+    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.21/@alternatives/@abstractTokens.1/@abstractTokens.1" /* xtext::RuleCall */, null); 
     }
 )*)
     ;
@@ -2878,7 +2878,7 @@ ruleQID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 
 // Entry rule entryRuleSTRING_OR_QID
 entryRuleSTRING_OR_QID returns [String current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.22" /* xtext::ParserRule */, currentNode); } 
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.22" /* xtext::ParserRule */, currentNode); } 
 	 iv_ruleSTRING_OR_QID=ruleSTRING_OR_QID 
 	 { $current=$iv_ruleSTRING_OR_QID.current.getText(); }  
 	 EOF 
@@ -2895,12 +2895,12 @@ ruleSTRING_OR_QID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleT
     }
 
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.22/@alternatives/@groups.0" /* xtext::RuleCall */, null); 
+    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.22/@alternatives/@groups.0" /* xtext::RuleCall */, null); 
     }
 
     |
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.22/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.22/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
     }
     this_QID=ruleQID    {
 		$current.merge(this_QID);
@@ -2920,7 +2920,7 @@ ruleSTRING_OR_QID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleT
 
 // Entry rule entryRuleSINT
 entryRuleSINT returns [String current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.23" /* xtext::ParserRule */, currentNode); } 
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.23" /* xtext::ParserRule */, currentNode); } 
 	 iv_ruleSINT=ruleSINT 
 	 { $current=$iv_ruleSINT.current.getText(); }  
 	 EOF 
@@ -2936,14 +2936,14 @@ ruleSINT returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 	kw='-' 
     {
         $current.merge(kw);
-        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.23/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.23/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 )?    this_INT=RULE_INT    {
 		$current.merge(this_INT);
     }
 
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#//@rules.23/@alternatives/@abstractTokens.1" /* xtext::RuleCall */, null); 
+    createLeafNode("classpath:/org/eclipse/xtext/example/EcoreDsl.xmi#/0/@rules.23/@alternatives/@abstractTokens.1" /* xtext::RuleCall */, null); 
     }
 )
     ;

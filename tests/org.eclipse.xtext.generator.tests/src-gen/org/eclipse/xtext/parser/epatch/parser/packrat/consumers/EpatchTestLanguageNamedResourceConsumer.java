@@ -6,6 +6,7 @@ package org.eclipse.xtext.parser.epatch.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -22,9 +23,9 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGCons
 @SuppressWarnings("unused")
 public final class EpatchTestLanguageNamedResourceConsumer extends NonTerminalConsumer {
 
-	private EpatchTestLanguageCreatedObjectConsumer createdObjectConsumer;
-	private XtextBuiltinIDConsumer idConsumer;
-	private XtextBuiltinSTRINGConsumer stringConsumer;
+	private INonTerminalConsumer createdObjectConsumer;
+	private ITerminalConsumer idConsumer;
+	private ITerminalConsumer stringConsumer;
 
 	private ICharacterClass keyword$22$Delimiter;
 	
@@ -384,6 +385,7 @@ public final class EpatchTestLanguageNamedResourceConsumer extends NonTerminalCo
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prNamedResource();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -393,15 +395,15 @@ public final class EpatchTestLanguageNamedResourceConsumer extends NonTerminalCo
 		return "NamedResource";
 	}
 	
-	public void setCreatedObjectConsumer(EpatchTestLanguageCreatedObjectConsumer createdObjectConsumer) {
+	public void setCreatedObjectConsumer(INonTerminalConsumer createdObjectConsumer) {
 		this.createdObjectConsumer = createdObjectConsumer;
 	}
 	
-	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
+	public void setIdConsumer(ITerminalConsumer idConsumer) {
 		this.idConsumer = idConsumer;
 	}
 	
-	public void setStringConsumer(XtextBuiltinSTRINGConsumer stringConsumer) {
+	public void setStringConsumer(ITerminalConsumer stringConsumer) {
 		this.stringConsumer = stringConsumer;
 	}
 	

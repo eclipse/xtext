@@ -6,6 +6,7 @@ package org.eclipse.xtext.example.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -21,8 +22,8 @@ import org.eclipse.xtext.example.parser.packrat.consumers.EcoreDslEReferenceDecl
 @SuppressWarnings("unused")
 public final class EcoreDslEStructuralFeatureDeclConsumer extends NonTerminalConsumer {
 
-	private EcoreDslEAttributeDeclConsumer eAttributeDeclConsumer;
-	private EcoreDslEReferenceDeclConsumer eReferenceDeclConsumer;
+	private INonTerminalConsumer eAttributeDeclConsumer;
+	private INonTerminalConsumer eReferenceDeclConsumer;
 
 	public EcoreDslEStructuralFeatureDeclConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
@@ -64,6 +65,7 @@ public final class EcoreDslEStructuralFeatureDeclConsumer extends NonTerminalCon
 		return EcoreDslGrammarAccess.INSTANCE.prEStructuralFeatureDecl();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -73,11 +75,11 @@ public final class EcoreDslEStructuralFeatureDeclConsumer extends NonTerminalCon
 		return "EStructuralFeature";
 	}
 	
-	public void setEAttributeDeclConsumer(EcoreDslEAttributeDeclConsumer eAttributeDeclConsumer) {
+	public void setEAttributeDeclConsumer(INonTerminalConsumer eAttributeDeclConsumer) {
 		this.eAttributeDeclConsumer = eAttributeDeclConsumer;
 	}
 	
-	public void setEReferenceDeclConsumer(EcoreDslEReferenceDeclConsumer eReferenceDeclConsumer) {
+	public void setEReferenceDeclConsumer(INonTerminalConsumer eReferenceDeclConsumer) {
 		this.eReferenceDeclConsumer = eReferenceDeclConsumer;
 	}
 	

@@ -6,6 +6,7 @@ package org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -26,13 +27,13 @@ import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.TerminalR
 @SuppressWarnings("unused")
 public final class TerminalRulesTestLanguageModelConsumer extends NonTerminalConsumer {
 
-	private TerminalRulesTestLanguageANY_OTHERConsumer anyOtherConsumer;
-	private TerminalRulesTestLanguageIDConsumer idConsumer;
-	private TerminalRulesTestLanguageINTConsumer intConsumer;
-	private TerminalRulesTestLanguageML_COMMENTConsumer mlCommentConsumer;
-	private TerminalRulesTestLanguageSL_COMMENTConsumer slCommentConsumer;
-	private TerminalRulesTestLanguageSTRINGConsumer stringConsumer;
-	private TerminalRulesTestLanguageWSConsumer wsConsumer;
+	private ITerminalConsumer anyOtherConsumer;
+	private ITerminalConsumer idConsumer;
+	private ITerminalConsumer intConsumer;
+	private ITerminalConsumer mlCommentConsumer;
+	private ITerminalConsumer slCommentConsumer;
+	private ITerminalConsumer stringConsumer;
+	private ITerminalConsumer wsConsumer;
 
 	private ISequenceMatcher ruleCall$8$Delimiter;
 	
@@ -210,6 +211,7 @@ public final class TerminalRulesTestLanguageModelConsumer extends NonTerminalCon
 		return TerminalRulesTestLanguageGrammarAccess.INSTANCE.prModel();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -219,31 +221,31 @@ public final class TerminalRulesTestLanguageModelConsumer extends NonTerminalCon
 		return "Model";
 	}
 	
-	public void setAnyOtherConsumer(TerminalRulesTestLanguageANY_OTHERConsumer anyOtherConsumer) {
+	public void setAnyOtherConsumer(ITerminalConsumer anyOtherConsumer) {
 		this.anyOtherConsumer = anyOtherConsumer;
 	}
 	
-	public void setIdConsumer(TerminalRulesTestLanguageIDConsumer idConsumer) {
+	public void setIdConsumer(ITerminalConsumer idConsumer) {
 		this.idConsumer = idConsumer;
 	}
 	
-	public void setIntConsumer(TerminalRulesTestLanguageINTConsumer intConsumer) {
+	public void setIntConsumer(ITerminalConsumer intConsumer) {
 		this.intConsumer = intConsumer;
 	}
 	
-	public void setMlCommentConsumer(TerminalRulesTestLanguageML_COMMENTConsumer mlCommentConsumer) {
+	public void setMlCommentConsumer(ITerminalConsumer mlCommentConsumer) {
 		this.mlCommentConsumer = mlCommentConsumer;
 	}
 	
-	public void setSlCommentConsumer(TerminalRulesTestLanguageSL_COMMENTConsumer slCommentConsumer) {
+	public void setSlCommentConsumer(ITerminalConsumer slCommentConsumer) {
 		this.slCommentConsumer = slCommentConsumer;
 	}
 	
-	public void setStringConsumer(TerminalRulesTestLanguageSTRINGConsumer stringConsumer) {
+	public void setStringConsumer(ITerminalConsumer stringConsumer) {
 		this.stringConsumer = stringConsumer;
 	}
 	
-	public void setWsConsumer(TerminalRulesTestLanguageWSConsumer wsConsumer) {
+	public void setWsConsumer(ITerminalConsumer wsConsumer) {
 		this.wsConsumer = wsConsumer;
 	}
 	

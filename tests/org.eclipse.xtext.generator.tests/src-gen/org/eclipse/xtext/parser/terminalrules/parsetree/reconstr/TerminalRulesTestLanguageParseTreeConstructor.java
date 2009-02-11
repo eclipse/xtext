@@ -39,7 +39,8 @@ protected class Model_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return TerminalRulesTestLanguageGrammarAccess.INSTANCE.prModel().eleAlternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new Model_1_Assignment_anyValue(current, this) : new Model_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -60,7 +61,8 @@ protected class Model_0_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return TerminalRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele0Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new Model_0_1_Assignment_wsValue(current, this) : new Model_0_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -81,7 +83,8 @@ protected class Model_0_0_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return TerminalRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele00Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new Model_0_0_1_Assignment_slCommentValue(current, this) : new Model_0_0_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -102,7 +105,8 @@ protected class Model_0_0_0_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return TerminalRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele000Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new Model_0_0_0_1_Assignment_mlCommentValue(current, this) : new Model_0_0_0_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -123,7 +127,8 @@ protected class Model_0_0_0_0_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return TerminalRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele0000Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new Model_0_0_0_0_1_Assignment_stringValue(current, this) : new Model_0_0_0_0_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
@@ -144,7 +149,8 @@ protected class Model_0_0_0_0_0_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return TerminalRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele00000Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new Model_0_0_0_0_0_1_Assignment_intValue(current, this) : new Model_0_0_0_0_0_0_Assignment_idValue(current, this);
 		Solution s = t.firstSolution();
@@ -166,6 +172,7 @@ protected class Model_0_0_0_0_0_0_Assignment_idValue extends AssignmentToken  {
 		return TerminalRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele000000AssignmentIdValue();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("idValue",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("idValue");
@@ -191,6 +198,7 @@ protected class Model_0_0_0_0_0_1_Assignment_intValue extends AssignmentToken  {
 		return TerminalRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele000001AssignmentIntValue();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("intValue",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("intValue");
@@ -217,6 +225,7 @@ protected class Model_0_0_0_0_1_Assignment_stringValue extends AssignmentToken  
 		return TerminalRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele00001AssignmentStringValue();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("stringValue",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("stringValue");
@@ -243,6 +252,7 @@ protected class Model_0_0_0_1_Assignment_mlCommentValue extends AssignmentToken 
 		return TerminalRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele0001AssignmentMlCommentValue();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("mlCommentValue",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("mlCommentValue");
@@ -269,6 +279,7 @@ protected class Model_0_0_1_Assignment_slCommentValue extends AssignmentToken  {
 		return TerminalRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele001AssignmentSlCommentValue();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("slCommentValue",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("slCommentValue");
@@ -295,6 +306,7 @@ protected class Model_0_1_Assignment_wsValue extends AssignmentToken  {
 		return TerminalRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele01AssignmentWsValue();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("wsValue",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("wsValue");
@@ -321,6 +333,7 @@ protected class Model_1_Assignment_anyValue extends AssignmentToken  {
 		return TerminalRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele1AssignmentAnyValue();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("anyValue",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("anyValue");

@@ -6,6 +6,7 @@ package org.eclipse.xtext.example.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -22,9 +23,9 @@ import org.eclipse.xtext.example.parser.packrat.consumers.FowlerDslStateConsumer
 @SuppressWarnings("unused")
 public final class FowlerDslStatemachineConsumer extends NonTerminalConsumer {
 
-	private FowlerDslCommandConsumer commandConsumer;
-	private FowlerDslEventConsumer eventConsumer;
-	private FowlerDslStateConsumer stateConsumer;
+	private INonTerminalConsumer commandConsumer;
+	private INonTerminalConsumer eventConsumer;
+	private INonTerminalConsumer stateConsumer;
 
 	private ICharacterClass keyword$10$Delimiter;
 	
@@ -212,6 +213,7 @@ public final class FowlerDslStatemachineConsumer extends NonTerminalConsumer {
 		return FowlerDslGrammarAccess.INSTANCE.prStatemachine();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -221,15 +223,15 @@ public final class FowlerDslStatemachineConsumer extends NonTerminalConsumer {
 		return "Statemachine";
 	}
 	
-	public void setCommandConsumer(FowlerDslCommandConsumer commandConsumer) {
+	public void setCommandConsumer(INonTerminalConsumer commandConsumer) {
 		this.commandConsumer = commandConsumer;
 	}
 	
-	public void setEventConsumer(FowlerDslEventConsumer eventConsumer) {
+	public void setEventConsumer(INonTerminalConsumer eventConsumer) {
 		this.eventConsumer = eventConsumer;
 	}
 	
-	public void setStateConsumer(FowlerDslStateConsumer stateConsumer) {
+	public void setStateConsumer(INonTerminalConsumer stateConsumer) {
 		this.stateConsumer = stateConsumer;
 	}
 	

@@ -41,6 +41,7 @@ protected class Ref2_Group extends GroupToken {
 		return Bug250313GrammarAccess.INSTANCE.prRef2().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Ref2_1_Assignment_ref2(current, this).firstSolution();
 		while(s1 != null) {
@@ -81,6 +82,7 @@ protected class Ref2_1_Assignment_ref2 extends AssignmentToken  {
 		return Bug250313GrammarAccess.INSTANCE.prRef2().ele1AssignmentRef2();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("ref2",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("ref2");

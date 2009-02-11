@@ -6,6 +6,7 @@ package org.eclipse.xtext.parser.datatyperules.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -20,7 +21,7 @@ import org.eclipse.xtext.parser.datatyperules.parser.packrat.consumers.DatatypeR
 @SuppressWarnings("unused")
 public final class DatatypeRulesTestLanguageCompositeModelConsumer extends NonTerminalConsumer {
 
-	private DatatypeRulesTestLanguageModelConsumer modelConsumer;
+	private INonTerminalConsumer modelConsumer;
 
 	public DatatypeRulesTestLanguageCompositeModelConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
@@ -78,6 +79,7 @@ public final class DatatypeRulesTestLanguageCompositeModelConsumer extends NonTe
 		return DatatypeRulesTestLanguageGrammarAccess.INSTANCE.prCompositeModel();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -87,7 +89,7 @@ public final class DatatypeRulesTestLanguageCompositeModelConsumer extends NonTe
 		return "CompositeModel";
 	}
 	
-	public void setModelConsumer(DatatypeRulesTestLanguageModelConsumer modelConsumer) {
+	public void setModelConsumer(INonTerminalConsumer modelConsumer) {
 		this.modelConsumer = modelConsumer;
 	}
 	

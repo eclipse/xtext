@@ -6,6 +6,7 @@ package org.eclipse.xtext.example.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -21,8 +22,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer
 @SuppressWarnings("unused")
 public final class DomainmodelEntityConsumer extends NonTerminalConsumer {
 
-	private DomainmodelFeatureConsumer featureConsumer;
-	private XtextBuiltinIDConsumer idConsumer;
+	private INonTerminalConsumer featureConsumer;
+	private ITerminalConsumer idConsumer;
 
 	private ISequenceMatcher crossReference$12$Delimiter;
 	
@@ -230,6 +231,7 @@ public final class DomainmodelEntityConsumer extends NonTerminalConsumer {
 		return DomainmodelGrammarAccess.INSTANCE.prEntity();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -239,11 +241,11 @@ public final class DomainmodelEntityConsumer extends NonTerminalConsumer {
 		return "Entity";
 	}
 	
-	public void setFeatureConsumer(DomainmodelFeatureConsumer featureConsumer) {
+	public void setFeatureConsumer(INonTerminalConsumer featureConsumer) {
 		this.featureConsumer = featureConsumer;
 	}
 	
-	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
+	public void setIdConsumer(ITerminalConsumer idConsumer) {
 		this.idConsumer = idConsumer;
 	}
 	

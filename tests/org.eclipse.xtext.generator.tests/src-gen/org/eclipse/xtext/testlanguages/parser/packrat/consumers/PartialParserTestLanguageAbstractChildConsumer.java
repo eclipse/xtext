@@ -6,6 +6,7 @@ package org.eclipse.xtext.testlanguages.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -21,8 +22,8 @@ import org.eclipse.xtext.testlanguages.parser.packrat.consumers.PartialParserTes
 @SuppressWarnings("unused")
 public final class PartialParserTestLanguageAbstractChildConsumer extends NonTerminalConsumer {
 
-	private PartialParserTestLanguageFirstConcreteConsumer firstConcreteConsumer;
-	private PartialParserTestLanguageSecondConcreteConsumer secondConcreteConsumer;
+	private INonTerminalConsumer firstConcreteConsumer;
+	private INonTerminalConsumer secondConcreteConsumer;
 
 	public PartialParserTestLanguageAbstractChildConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
@@ -64,6 +65,7 @@ public final class PartialParserTestLanguageAbstractChildConsumer extends NonTer
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prAbstractChild();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -73,11 +75,11 @@ public final class PartialParserTestLanguageAbstractChildConsumer extends NonTer
 		return "AbstractChild";
 	}
 	
-	public void setFirstConcreteConsumer(PartialParserTestLanguageFirstConcreteConsumer firstConcreteConsumer) {
+	public void setFirstConcreteConsumer(INonTerminalConsumer firstConcreteConsumer) {
 		this.firstConcreteConsumer = firstConcreteConsumer;
 	}
 	
-	public void setSecondConcreteConsumer(PartialParserTestLanguageSecondConcreteConsumer secondConcreteConsumer) {
+	public void setSecondConcreteConsumer(INonTerminalConsumer secondConcreteConsumer) {
 		this.secondConcreteConsumer = secondConcreteConsumer;
 	}
 	

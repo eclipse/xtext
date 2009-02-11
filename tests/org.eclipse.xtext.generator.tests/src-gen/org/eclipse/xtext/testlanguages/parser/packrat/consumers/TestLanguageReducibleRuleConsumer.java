@@ -6,6 +6,7 @@ package org.eclipse.xtext.testlanguages.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -20,7 +21,7 @@ import org.eclipse.xtext.testlanguages.parser.packrat.consumers.TestLanguageTerm
 @SuppressWarnings("unused")
 public final class TestLanguageReducibleRuleConsumer extends NonTerminalConsumer {
 
-	private TestLanguageTerminalRuleConsumer terminalRuleConsumer;
+	private INonTerminalConsumer terminalRuleConsumer;
 
 	private ICharacterClass keyword$3$Delimiter;
 	
@@ -145,6 +146,7 @@ public final class TestLanguageReducibleRuleConsumer extends NonTerminalConsumer
 		return TestLanguageGrammarAccess.INSTANCE.prReducibleRule();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -154,7 +156,7 @@ public final class TestLanguageReducibleRuleConsumer extends NonTerminalConsumer
 		return "ReducibleElement";
 	}
 	
-	public void setTerminalRuleConsumer(TestLanguageTerminalRuleConsumer terminalRuleConsumer) {
+	public void setTerminalRuleConsumer(INonTerminalConsumer terminalRuleConsumer) {
 		this.terminalRuleConsumer = terminalRuleConsumer;
 	}
 	

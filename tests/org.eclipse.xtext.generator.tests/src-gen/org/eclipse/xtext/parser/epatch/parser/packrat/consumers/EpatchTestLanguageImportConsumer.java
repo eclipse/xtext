@@ -6,6 +6,7 @@ package org.eclipse.xtext.parser.epatch.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -22,9 +23,9 @@ import org.eclipse.xtext.parser.epatch.parser.packrat.consumers.EpatchTestLangua
 @SuppressWarnings("unused")
 public final class EpatchTestLanguageImportConsumer extends NonTerminalConsumer {
 
-	private EpatchTestLanguageExtensionImportConsumer extensionImportConsumer;
-	private EpatchTestLanguageJavaImportConsumer javaImportConsumer;
-	private EpatchTestLanguageModelImportConsumer modelImportConsumer;
+	private INonTerminalConsumer extensionImportConsumer;
+	private INonTerminalConsumer javaImportConsumer;
+	private INonTerminalConsumer modelImportConsumer;
 
 	public EpatchTestLanguageImportConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
@@ -75,6 +76,7 @@ public final class EpatchTestLanguageImportConsumer extends NonTerminalConsumer 
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prImport();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -84,15 +86,15 @@ public final class EpatchTestLanguageImportConsumer extends NonTerminalConsumer 
 		return "Import";
 	}
 	
-	public void setExtensionImportConsumer(EpatchTestLanguageExtensionImportConsumer extensionImportConsumer) {
+	public void setExtensionImportConsumer(INonTerminalConsumer extensionImportConsumer) {
 		this.extensionImportConsumer = extensionImportConsumer;
 	}
 	
-	public void setJavaImportConsumer(EpatchTestLanguageJavaImportConsumer javaImportConsumer) {
+	public void setJavaImportConsumer(INonTerminalConsumer javaImportConsumer) {
 		this.javaImportConsumer = javaImportConsumer;
 	}
 	
-	public void setModelImportConsumer(EpatchTestLanguageModelImportConsumer modelImportConsumer) {
+	public void setModelImportConsumer(INonTerminalConsumer modelImportConsumer) {
 		this.modelImportConsumer = modelImportConsumer;
 	}
 	

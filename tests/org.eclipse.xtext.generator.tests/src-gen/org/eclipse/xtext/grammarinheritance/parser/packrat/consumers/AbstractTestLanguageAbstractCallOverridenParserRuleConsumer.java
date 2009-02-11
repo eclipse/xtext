@@ -6,6 +6,7 @@ package org.eclipse.xtext.grammarinheritance.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -20,7 +21,7 @@ import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.AbstractTes
 @SuppressWarnings("unused")
 public final class AbstractTestLanguageAbstractCallOverridenParserRuleConsumer extends NonTerminalConsumer {
 
-	private AbstractTestLanguageOverridableParserRuleConsumer overridableParserRuleConsumer;
+	private INonTerminalConsumer overridableParserRuleConsumer;
 
 	private ICharacterClass keyword$2$Delimiter;
 	
@@ -96,6 +97,7 @@ public final class AbstractTestLanguageAbstractCallOverridenParserRuleConsumer e
 		return AbstractTestLanguageGrammarAccess.INSTANCE.prAbstractCallOverridenParserRule();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -105,7 +107,7 @@ public final class AbstractTestLanguageAbstractCallOverridenParserRuleConsumer e
 		return "AModel";
 	}
 	
-	public void setOverridableParserRuleConsumer(AbstractTestLanguageOverridableParserRuleConsumer overridableParserRuleConsumer) {
+	public void setOverridableParserRuleConsumer(INonTerminalConsumer overridableParserRuleConsumer) {
 		this.overridableParserRuleConsumer = overridableParserRuleConsumer;
 	}
 	

@@ -42,6 +42,7 @@ protected class Model_Assignment_children extends AssignmentToken  {
 		return LexerTestLanguageGrammarAccess.INSTANCE.prModel().eleAssignmentChildren();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("children",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("children");
@@ -83,6 +84,7 @@ protected class Element_Group extends GroupToken {
 		return LexerTestLanguageGrammarAccess.INSTANCE.prElement().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Element_1_Assignment_h(current, this).firstSolution();
 		while(s1 != null) {
@@ -111,6 +113,7 @@ protected class Element_0_Assignment_name extends AssignmentToken  {
 		return LexerTestLanguageGrammarAccess.INSTANCE.prElement().ele0AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -134,6 +137,7 @@ protected class Element_1_Assignment_h extends AssignmentToken  {
 		return LexerTestLanguageGrammarAccess.INSTANCE.prElement().ele1AssignmentH();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("h",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("h");

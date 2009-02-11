@@ -42,6 +42,7 @@ protected class Model_Assignment_elements extends AssignmentToken  {
 		return DummyTestLanguageGrammarAccess.INSTANCE.prModel().eleAssignmentElements();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("elements",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("elements");
@@ -83,6 +84,7 @@ protected class Element_Group extends GroupToken {
 		return DummyTestLanguageGrammarAccess.INSTANCE.prElement().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Element_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -111,6 +113,7 @@ protected class Element_0_Group extends GroupToken {
 		return DummyTestLanguageGrammarAccess.INSTANCE.prElement().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Element_0_1_Assignment_descriptions(current, this).firstSolution();
 		while(s1 != null) {
@@ -139,6 +142,7 @@ protected class Element_0_0_Group extends GroupToken {
 		return DummyTestLanguageGrammarAccess.INSTANCE.prElement().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Element_0_0_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
@@ -167,6 +171,7 @@ protected class Element_0_0_0_Group extends GroupToken {
 		return DummyTestLanguageGrammarAccess.INSTANCE.prElement().ele000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Element_0_0_0_1_Keyword_element(current, this).firstSolution();
 		while(s1 != null) {
@@ -195,6 +200,7 @@ protected class Element_0_0_0_0_Assignment_optional extends AssignmentToken  {
 		return DummyTestLanguageGrammarAccess.INSTANCE.prElement().ele0000AssignmentOptional();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("optional",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("optional");
@@ -233,6 +239,7 @@ protected class Element_0_0_1_Assignment_name extends AssignmentToken  {
 		return DummyTestLanguageGrammarAccess.INSTANCE.prElement().ele001AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -257,6 +264,7 @@ protected class Element_0_1_Assignment_descriptions extends AssignmentToken  {
 		return DummyTestLanguageGrammarAccess.INSTANCE.prElement().ele01AssignmentDescriptions();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("descriptions",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("descriptions");

@@ -1,30 +1,71 @@
 <?xml version="1.0" encoding="ASCII"?>
-<xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:xtext="http://www.eclipse.org/2008/Xtext" name="org.eclipse.xtext.parser.keywords.KeywordsTestLanguage">
-  <superGrammar href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext#/"/>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="KeywordsTestLanguage">
-    <ePackage href="http://www.eclipse.org/2009/tmf/xtext/KeywordsTestLanguage#/"/>
-  </metamodelDeclarations>
-  <rules xsi:type="xtext:ParserRule" name="Model">
-    <type metamodel="//@metamodelDeclarations.0">
-      <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/KeywordsTestLanguage#//Model"/>
-    </type>
-    <alternatives xsi:type="xtext:Alternatives">
-      <groups xsi:type="xtext:Alternatives">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
+  <xtext:Grammar name="org.eclipse.xtext.parser.keywords.KeywordsTestLanguage" superGrammar="/1">
+    <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="KeywordsTestLanguage">
+      <ePackage href="http://www.eclipse.org/2009/tmf/xtext/KeywordsTestLanguage#/"/>
+    </metamodelDeclarations>
+    <rules xsi:type="xtext:ParserRule" name="Model">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/KeywordsTestLanguage#//Model"/>
+      </type>
+      <alternatives xsi:type="xtext:Alternatives">
         <groups xsi:type="xtext:Alternatives">
-          <groups xsi:type="xtext:Assignment" feature="first" operator="?=">
-            <terminal xsi:type="xtext:Keyword" value="foo\bar"/>
+          <groups xsi:type="xtext:Alternatives">
+            <groups xsi:type="xtext:Assignment" feature="first" operator="?=">
+              <terminal xsi:type="xtext:Keyword" value="foo\bar"/>
+            </groups>
+            <groups xsi:type="xtext:Assignment" feature="second" operator="?=">
+              <terminal xsi:type="xtext:Keyword" value="foo\"/>
+            </groups>
           </groups>
-          <groups xsi:type="xtext:Assignment" feature="second" operator="?=">
-            <terminal xsi:type="xtext:Keyword" value="foo\"/>
+          <groups xsi:type="xtext:Assignment" feature="third" operator="?=">
+            <terminal xsi:type="xtext:Keyword" value="\bar"/>
           </groups>
         </groups>
-        <groups xsi:type="xtext:Assignment" feature="third" operator="?=">
-          <terminal xsi:type="xtext:Keyword" value="\bar"/>
+        <groups xsi:type="xtext:Assignment" feature="forth" operator="?=">
+          <terminal xsi:type="xtext:Keyword" value="\"/>
         </groups>
-      </groups>
-      <groups xsi:type="xtext:Assignment" feature="forth" operator="?=">
-        <terminal xsi:type="xtext:Keyword" value="\"/>
-      </groups>
-    </alternatives>
-  </rules>
-</xtext:Grammar>
+      </alternatives>
+    </rules>
+  </xtext:Grammar>
+  <xtext:Grammar abstract="true" name="org.eclipse.xtext.builtin.XtextBuiltin" definesHiddenTokens="true" hiddenTokens="/1/@rules.5 /1/@rules.3 /1/@rules.4">
+    <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="ecore">
+      <ePackage href="http://www.eclipse.org/emf/2002/Ecore#/"/>
+    </metamodelDeclarations>
+    <rules xsi:type="xtext:LexerRule" name="ID" body="('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+    </rules>
+    <rules xsi:type="xtext:LexerRule" name="INT" body="('0'..'9')+">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      </type>
+    </rules>
+    <rules xsi:type="xtext:LexerRule" name="STRING" body="&#xA;&#x9;&#x9;&#x9;  '&quot;' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\&quot;'|'\''|'\\') | ~('\\'|'&quot;') )* '&quot;' | &#xA;              '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\&quot;'|'\''|'\\') | ~('\\'|'\'') )* '\''&#xA;              ">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+    </rules>
+    <rules xsi:type="xtext:LexerRule" name="ML_COMMENT" body="'/*' ( options {greedy=false;} : . )* '*/'">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+    </rules>
+    <rules xsi:type="xtext:LexerRule" name="SL_COMMENT" body="'//' ~('\n'|'\r')* ('\r'? '\n')?">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+    </rules>
+    <rules xsi:type="xtext:LexerRule" name="WS" body="(' '|'\t'|'\r'|'\n')+">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+    </rules>
+    <rules xsi:type="xtext:LexerRule" name="ANY_OTHER" body=".">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+    </rules>
+  </xtext:Grammar>
+</xmi:XMI>

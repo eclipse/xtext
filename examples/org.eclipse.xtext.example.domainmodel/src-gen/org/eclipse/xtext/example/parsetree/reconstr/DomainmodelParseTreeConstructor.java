@@ -55,6 +55,7 @@ protected class File_Group extends GroupToken {
 		return DomainmodelGrammarAccess.INSTANCE.prFile().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new File_1_Assignment_namedElements(current, this).firstSolution();
 		while(s1 != null) {
@@ -83,6 +84,7 @@ protected class File_0_Assignment_imports extends AssignmentToken  {
 		return DomainmodelGrammarAccess.INSTANCE.prFile().ele0AssignmentImports();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("imports",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("imports");
@@ -114,6 +116,7 @@ protected class File_1_Assignment_namedElements extends AssignmentToken  {
 		return DomainmodelGrammarAccess.INSTANCE.prFile().ele1AssignmentNamedElements();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("namedElements",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("namedElements");
@@ -156,6 +159,7 @@ protected class Import_Group extends GroupToken {
 		return DomainmodelGrammarAccess.INSTANCE.prImport().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Import_1_Assignment_importURI(current, this).firstSolution();
 		while(s1 != null) {
@@ -196,6 +200,7 @@ protected class Import_1_Assignment_importURI extends AssignmentToken  {
 		return DomainmodelGrammarAccess.INSTANCE.prImport().ele1AssignmentImportURI();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("importURI",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("importURI");
@@ -229,7 +234,8 @@ protected class NamedElement_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return DomainmodelGrammarAccess.INSTANCE.prNamedElement().eleAlternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new NamedElement_1_RuleCall_Type(current, this) : new NamedElement_0_RuleCall_Package(current, this);
 		Solution s = t.firstSolution();
@@ -251,6 +257,7 @@ protected class NamedElement_0_RuleCall_Package extends RuleCallToken {
 		return DomainmodelGrammarAccess.INSTANCE.prNamedElement().ele0ParserRuleCallPackage();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Package_Group.class, current)) return null;
 		if(!current.isInstanceOf("Package")) return null;
@@ -269,6 +276,7 @@ protected class NamedElement_1_RuleCall_Type extends RuleCallToken {
 		return DomainmodelGrammarAccess.INSTANCE.prNamedElement().ele1ParserRuleCallType();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Type_Alternatives.class, current)) return null;
 		if(!current.isInstanceOf("Type")) return null;
@@ -298,6 +306,7 @@ protected class Package_Group extends GroupToken {
 		return DomainmodelGrammarAccess.INSTANCE.prPackage().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Package_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -326,6 +335,7 @@ protected class Package_0_Group extends GroupToken {
 		return DomainmodelGrammarAccess.INSTANCE.prPackage().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Package_0_1_Assignment_namedElements(current, this).firstSolution();
 		while(s1 != null) {
@@ -354,6 +364,7 @@ protected class Package_0_0_Group extends GroupToken {
 		return DomainmodelGrammarAccess.INSTANCE.prPackage().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Package_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -382,6 +393,7 @@ protected class Package_0_0_0_Group extends GroupToken {
 		return DomainmodelGrammarAccess.INSTANCE.prPackage().ele000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Package_0_0_0_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
@@ -422,6 +434,7 @@ protected class Package_0_0_0_1_Assignment_name extends AssignmentToken  {
 		return DomainmodelGrammarAccess.INSTANCE.prPackage().ele0001AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -461,6 +474,7 @@ protected class Package_0_1_Assignment_namedElements extends AssignmentToken  {
 		return DomainmodelGrammarAccess.INSTANCE.prPackage().ele01AssignmentNamedElements();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("namedElements",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("namedElements");
@@ -515,7 +529,8 @@ protected class Type_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return DomainmodelGrammarAccess.INSTANCE.prType().eleAlternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new Type_1_RuleCall_DataType(current, this) : new Type_0_RuleCall_Entity(current, this);
 		Solution s = t.firstSolution();
@@ -537,6 +552,7 @@ protected class Type_0_RuleCall_Entity extends RuleCallToken {
 		return DomainmodelGrammarAccess.INSTANCE.prType().ele0ParserRuleCallEntity();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Entity_Group.class, current)) return null;
 		if(!current.isInstanceOf("Entity")) return null;
@@ -555,6 +571,7 @@ protected class Type_1_RuleCall_DataType extends RuleCallToken {
 		return DomainmodelGrammarAccess.INSTANCE.prType().ele1ParserRuleCallDataType();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(DataType_Group.class, current)) return null;
 		if(!current.isInstanceOf("DataType")) return null;
@@ -584,6 +601,7 @@ protected class DataType_Group extends GroupToken {
 		return DomainmodelGrammarAccess.INSTANCE.prDataType().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new DataType_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
@@ -624,6 +642,7 @@ protected class DataType_1_Assignment_name extends AssignmentToken  {
 		return DomainmodelGrammarAccess.INSTANCE.prDataType().ele1AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -658,6 +677,7 @@ protected class Entity_Group extends GroupToken {
 		return DomainmodelGrammarAccess.INSTANCE.prEntity().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Entity_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -686,6 +706,7 @@ protected class Entity_0_Group extends GroupToken {
 		return DomainmodelGrammarAccess.INSTANCE.prEntity().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Entity_0_1_Assignment_features(current, this).firstSolution();
 		while(s1 != null) {
@@ -714,6 +735,7 @@ protected class Entity_0_0_Group extends GroupToken {
 		return DomainmodelGrammarAccess.INSTANCE.prEntity().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Entity_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -742,6 +764,7 @@ protected class Entity_0_0_0_Group extends GroupToken {
 		return DomainmodelGrammarAccess.INSTANCE.prEntity().ele000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Entity_0_0_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -770,6 +793,7 @@ protected class Entity_0_0_0_0_Group extends GroupToken {
 		return DomainmodelGrammarAccess.INSTANCE.prEntity().ele0000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Entity_0_0_0_0_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
@@ -810,6 +834,7 @@ protected class Entity_0_0_0_0_1_Assignment_name extends AssignmentToken  {
 		return DomainmodelGrammarAccess.INSTANCE.prEntity().ele00001AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -834,6 +859,7 @@ protected class Entity_0_0_0_1_Group extends GroupToken {
 		return DomainmodelGrammarAccess.INSTANCE.prEntity().ele0001Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Entity_0_0_0_1_1_Assignment_superType(current, this).firstSolution();
 		while(s1 != null) {
@@ -874,6 +900,7 @@ protected class Entity_0_0_0_1_1_Assignment_superType extends AssignmentToken  {
 		return DomainmodelGrammarAccess.INSTANCE.prEntity().ele00011AssignmentSuperType();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("superType",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("superType");
@@ -915,6 +942,7 @@ protected class Entity_0_1_Assignment_features extends AssignmentToken  {
 		return DomainmodelGrammarAccess.INSTANCE.prEntity().ele01AssignmentFeatures();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("features",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("features");
@@ -969,7 +997,8 @@ protected class Feature_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return DomainmodelGrammarAccess.INSTANCE.prFeature().eleAlternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new Feature_1_RuleCall_Operation(current, this) : new Feature_0_RuleCall_StructuralFeature(current, this);
 		Solution s = t.firstSolution();
@@ -991,6 +1020,7 @@ protected class Feature_0_RuleCall_StructuralFeature extends RuleCallToken {
 		return DomainmodelGrammarAccess.INSTANCE.prFeature().ele0ParserRuleCallStructuralFeature();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(StructuralFeature_Alternatives.class, current)) return null;
 		if(!current.isInstanceOf("StructuralFeature")) return null;
@@ -1009,6 +1039,7 @@ protected class Feature_1_RuleCall_Operation extends RuleCallToken {
 		return DomainmodelGrammarAccess.INSTANCE.prFeature().ele1ParserRuleCallOperation();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Operation_Group.class, current)) return null;
 		if(!current.isInstanceOf("Operation")) return null;
@@ -1037,7 +1068,8 @@ protected class StructuralFeature_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return DomainmodelGrammarAccess.INSTANCE.prStructuralFeature().eleAlternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new StructuralFeature_1_RuleCall_Reference(current, this) : new StructuralFeature_0_RuleCall_Attribute(current, this);
 		Solution s = t.firstSolution();
@@ -1059,6 +1091,7 @@ protected class StructuralFeature_0_RuleCall_Attribute extends RuleCallToken {
 		return DomainmodelGrammarAccess.INSTANCE.prStructuralFeature().ele0ParserRuleCallAttribute();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Attribute_Group.class, current)) return null;
 		if(!current.isInstanceOf("Attribute")) return null;
@@ -1077,6 +1110,7 @@ protected class StructuralFeature_1_RuleCall_Reference extends RuleCallToken {
 		return DomainmodelGrammarAccess.INSTANCE.prStructuralFeature().ele1ParserRuleCallReference();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Reference_Group.class, current)) return null;
 		if(!current.isInstanceOf("Reference")) return null;
@@ -1106,6 +1140,7 @@ protected class Attribute_Group extends GroupToken {
 		return DomainmodelGrammarAccess.INSTANCE.prAttribute().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Attribute_1_Assignment_type(current, this).firstSolution();
 		while(s1 != null) {
@@ -1134,6 +1169,7 @@ protected class Attribute_0_Group extends GroupToken {
 		return DomainmodelGrammarAccess.INSTANCE.prAttribute().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Attribute_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -1162,6 +1198,7 @@ protected class Attribute_0_0_Group extends GroupToken {
 		return DomainmodelGrammarAccess.INSTANCE.prAttribute().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Attribute_0_0_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
@@ -1202,6 +1239,7 @@ protected class Attribute_0_0_1_Assignment_name extends AssignmentToken  {
 		return DomainmodelGrammarAccess.INSTANCE.prAttribute().ele001AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -1239,6 +1277,7 @@ protected class Attribute_1_Assignment_type extends AssignmentToken  {
 		return DomainmodelGrammarAccess.INSTANCE.prAttribute().ele1AssignmentType();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("type",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
@@ -1281,6 +1320,7 @@ protected class Reference_Group extends GroupToken {
 		return DomainmodelGrammarAccess.INSTANCE.prReference().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Reference_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -1309,6 +1349,7 @@ protected class Reference_0_Group extends GroupToken {
 		return DomainmodelGrammarAccess.INSTANCE.prReference().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Reference_0_1_Assignment_type(current, this).firstSolution();
 		while(s1 != null) {
@@ -1337,6 +1378,7 @@ protected class Reference_0_0_Group extends GroupToken {
 		return DomainmodelGrammarAccess.INSTANCE.prReference().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Reference_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -1365,6 +1407,7 @@ protected class Reference_0_0_0_Group extends GroupToken {
 		return DomainmodelGrammarAccess.INSTANCE.prReference().ele000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Reference_0_0_0_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
@@ -1405,6 +1448,7 @@ protected class Reference_0_0_0_1_Assignment_name extends AssignmentToken  {
 		return DomainmodelGrammarAccess.INSTANCE.prReference().ele0001AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -1442,6 +1486,7 @@ protected class Reference_0_1_Assignment_type extends AssignmentToken  {
 		return DomainmodelGrammarAccess.INSTANCE.prReference().ele01AssignmentType();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("type",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
@@ -1474,6 +1519,7 @@ protected class Reference_1_Group extends GroupToken {
 		return DomainmodelGrammarAccess.INSTANCE.prReference().ele1Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Reference_1_1_Assignment_opposite(current, this).firstSolution();
 		while(s1 != null) {
@@ -1514,6 +1560,7 @@ protected class Reference_1_1_Assignment_opposite extends AssignmentToken  {
 		return DomainmodelGrammarAccess.INSTANCE.prReference().ele11AssignmentOpposite();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("opposite",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("opposite");
@@ -1552,6 +1599,7 @@ protected class Operation_Group extends GroupToken {
 		return DomainmodelGrammarAccess.INSTANCE.prOperation().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Operation_1_Assignment_type(current, this).firstSolution();
 		while(s1 != null) {
@@ -1580,6 +1628,7 @@ protected class Operation_0_Group extends GroupToken {
 		return DomainmodelGrammarAccess.INSTANCE.prOperation().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Operation_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -1608,6 +1657,7 @@ protected class Operation_0_0_Group extends GroupToken {
 		return DomainmodelGrammarAccess.INSTANCE.prOperation().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Operation_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -1636,6 +1686,7 @@ protected class Operation_0_0_0_Group extends GroupToken {
 		return DomainmodelGrammarAccess.INSTANCE.prOperation().ele000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Operation_0_0_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -1664,6 +1715,7 @@ protected class Operation_0_0_0_0_Group extends GroupToken {
 		return DomainmodelGrammarAccess.INSTANCE.prOperation().ele0000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Operation_0_0_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -1692,6 +1744,7 @@ protected class Operation_0_0_0_0_0_Group extends GroupToken {
 		return DomainmodelGrammarAccess.INSTANCE.prOperation().ele00000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Operation_0_0_0_0_0_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
@@ -1732,6 +1785,7 @@ protected class Operation_0_0_0_0_0_1_Assignment_name extends AssignmentToken  {
 		return DomainmodelGrammarAccess.INSTANCE.prOperation().ele000001AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -1769,6 +1823,7 @@ protected class Operation_0_0_0_1_Group extends GroupToken {
 		return DomainmodelGrammarAccess.INSTANCE.prOperation().ele0001Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Operation_0_0_0_1_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -1797,6 +1852,7 @@ protected class Operation_0_0_0_1_0_Assignment_params extends AssignmentToken  {
 		return DomainmodelGrammarAccess.INSTANCE.prOperation().ele00010AssignmentParams();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("params",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("params");
@@ -1828,6 +1884,7 @@ protected class Operation_0_0_0_1_1_Group extends GroupToken {
 		return DomainmodelGrammarAccess.INSTANCE.prOperation().ele00011Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Operation_0_0_0_1_1_1_Assignment_params(current, this).firstSolution();
 		while(s1 != null) {
@@ -1868,6 +1925,7 @@ protected class Operation_0_0_0_1_1_1_Assignment_params extends AssignmentToken 
 		return DomainmodelGrammarAccess.INSTANCE.prOperation().ele000111AssignmentParams();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("params",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("params");
@@ -1928,6 +1986,7 @@ protected class Operation_1_Assignment_type extends AssignmentToken  {
 		return DomainmodelGrammarAccess.INSTANCE.prOperation().ele1AssignmentType();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("type",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
@@ -1970,6 +2029,7 @@ protected class Parameter_Group extends GroupToken {
 		return DomainmodelGrammarAccess.INSTANCE.prParameter().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Parameter_1_Assignment_type(current, this).firstSolution();
 		while(s1 != null) {
@@ -1998,6 +2058,7 @@ protected class Parameter_0_Assignment_name extends AssignmentToken  {
 		return DomainmodelGrammarAccess.INSTANCE.prParameter().ele0AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -2021,6 +2082,7 @@ protected class Parameter_1_Assignment_type extends AssignmentToken  {
 		return DomainmodelGrammarAccess.INSTANCE.prParameter().ele1AssignmentType();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("type",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
@@ -2062,7 +2124,8 @@ protected class TypedElement_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return DomainmodelGrammarAccess.INSTANCE.prTypedElement().eleAlternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new TypedElement_1_RuleCall_Parameter(current, this) : new TypedElement_0_RuleCall_Feature(current, this);
 		Solution s = t.firstSolution();
@@ -2084,6 +2147,7 @@ protected class TypedElement_0_RuleCall_Feature extends RuleCallToken {
 		return DomainmodelGrammarAccess.INSTANCE.prTypedElement().ele0ParserRuleCallFeature();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Feature_Alternatives.class, current)) return null;
 		if(!current.isInstanceOf("Feature")) return null;
@@ -2102,6 +2166,7 @@ protected class TypedElement_1_RuleCall_Parameter extends RuleCallToken {
 		return DomainmodelGrammarAccess.INSTANCE.prTypedElement().ele1ParserRuleCallParameter();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Parameter_Group.class, current)) return null;
 		if(!current.isInstanceOf("Parameter")) return null;
@@ -2131,6 +2196,7 @@ protected class TypeRef_Assignment_referenced extends AssignmentToken  {
 		return DomainmodelGrammarAccess.INSTANCE.prTypeRef().eleAssignmentReferenced();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("referenced",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("referenced");

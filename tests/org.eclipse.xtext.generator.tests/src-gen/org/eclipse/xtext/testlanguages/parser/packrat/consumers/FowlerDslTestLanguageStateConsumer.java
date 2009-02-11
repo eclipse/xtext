@@ -6,6 +6,7 @@ package org.eclipse.xtext.testlanguages.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -21,8 +22,8 @@ import org.eclipse.xtext.testlanguages.parser.packrat.consumers.FowlerDslTestLan
 @SuppressWarnings("unused")
 public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsumer {
 
-	private XtextBuiltinIDConsumer idConsumer;
-	private FowlerDslTestLanguageTransitionConsumer transitionConsumer;
+	private ITerminalConsumer idConsumer;
+	private INonTerminalConsumer transitionConsumer;
 
 	private ISequenceMatcher crossReference$14$Delimiter;
 	
@@ -275,6 +276,7 @@ public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsume
 		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prState();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -284,11 +286,11 @@ public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsume
 		return "State";
 	}
 	
-	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
+	public void setIdConsumer(ITerminalConsumer idConsumer) {
 		this.idConsumer = idConsumer;
 	}
 	
-	public void setTransitionConsumer(FowlerDslTestLanguageTransitionConsumer transitionConsumer) {
+	public void setTransitionConsumer(INonTerminalConsumer transitionConsumer) {
 		this.transitionConsumer = transitionConsumer;
 	}
 	

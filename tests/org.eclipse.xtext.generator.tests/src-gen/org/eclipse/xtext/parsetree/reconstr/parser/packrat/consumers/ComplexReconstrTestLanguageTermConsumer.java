@@ -6,6 +6,7 @@ package org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -21,8 +22,8 @@ import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.ComplexReco
 @SuppressWarnings("unused")
 public final class ComplexReconstrTestLanguageTermConsumer extends NonTerminalConsumer {
 
-	private ComplexReconstrTestLanguageAtomConsumer atomConsumer;
-	private ComplexReconstrTestLanguageParensConsumer parensConsumer;
+	private INonTerminalConsumer atomConsumer;
+	private INonTerminalConsumer parensConsumer;
 
 	public ComplexReconstrTestLanguageTermConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
@@ -64,6 +65,7 @@ public final class ComplexReconstrTestLanguageTermConsumer extends NonTerminalCo
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTerm();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -73,11 +75,11 @@ public final class ComplexReconstrTestLanguageTermConsumer extends NonTerminalCo
 		return "Expression";
 	}
 	
-	public void setAtomConsumer(ComplexReconstrTestLanguageAtomConsumer atomConsumer) {
+	public void setAtomConsumer(INonTerminalConsumer atomConsumer) {
 		this.atomConsumer = atomConsumer;
 	}
 	
-	public void setParensConsumer(ComplexReconstrTestLanguageParensConsumer parensConsumer) {
+	public void setParensConsumer(INonTerminalConsumer parensConsumer) {
 		this.parensConsumer = parensConsumer;
 	}
 	

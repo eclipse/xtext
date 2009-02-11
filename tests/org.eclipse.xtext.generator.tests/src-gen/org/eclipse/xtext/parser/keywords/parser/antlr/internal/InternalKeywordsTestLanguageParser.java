@@ -74,7 +74,7 @@ public class InternalKeywordsTestLanguageParser extends AbstractInternalAntlrPar
             // ../org.eclipse.xtext.ui.common.tests//../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:68:47: (iv_ruleModel= ruleModel EOF )
             // ../org.eclipse.xtext.ui.common.tests//../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:69:2: iv_ruleModel= ruleModel EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.xmi#/0/@rules.0" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleModel_in_entryRuleModel72);
             iv_ruleModel=ruleModel();
             _fsp--;
@@ -179,7 +179,7 @@ public class InternalKeywordsTestLanguageParser extends AbstractInternalAntlrPar
                                     lv_first=(Token)input.LT(1);
                                     match(input,11,FOLLOW_11_in_ruleModel130); 
 
-                                            createLeafNode("classpath:/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.xmi#//@rules.0/@alternatives/@groups.0/@groups.0/@groups.0/@terminal" /* xtext::Keyword */, "first"); 
+                                            createLeafNode("classpath:/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.xmi#/0/@rules.0/@alternatives/@groups.0/@groups.0/@groups.0/@terminal" /* xtext::Keyword */, "first"); 
                                         
 
                                     	        if (current==null) {
@@ -208,7 +208,7 @@ public class InternalKeywordsTestLanguageParser extends AbstractInternalAntlrPar
                                     lv_second=(Token)input.LT(1);
                                     match(input,12,FOLLOW_12_in_ruleModel169); 
 
-                                            createLeafNode("classpath:/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.xmi#//@rules.0/@alternatives/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "second"); 
+                                            createLeafNode("classpath:/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.xmi#/0/@rules.0/@alternatives/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "second"); 
                                         
 
                                     	        if (current==null) {
@@ -243,7 +243,7 @@ public class InternalKeywordsTestLanguageParser extends AbstractInternalAntlrPar
                             lv_third=(Token)input.LT(1);
                             match(input,13,FOLLOW_13_in_ruleModel209); 
 
-                                    createLeafNode("classpath:/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.xmi#//@rules.0/@alternatives/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "third"); 
+                                    createLeafNode("classpath:/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.xmi#/0/@rules.0/@alternatives/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "third"); 
                                 
 
                             	        if (current==null) {
@@ -278,7 +278,7 @@ public class InternalKeywordsTestLanguageParser extends AbstractInternalAntlrPar
                     lv_forth=(Token)input.LT(1);
                     match(input,14,FOLLOW_14_in_ruleModel249); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.xmi#//@rules.0/@alternatives/@groups.1/@terminal" /* xtext::Keyword */, "forth"); 
+                            createLeafNode("classpath:/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.xmi#/0/@rules.0/@alternatives/@groups.1/@terminal" /* xtext::Keyword */, "forth"); 
                         
 
                     	        if (current==null) {

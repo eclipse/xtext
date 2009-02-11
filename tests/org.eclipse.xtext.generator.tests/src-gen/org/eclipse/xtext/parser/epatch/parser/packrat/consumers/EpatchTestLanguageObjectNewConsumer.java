@@ -6,6 +6,7 @@ package org.eclipse.xtext.parser.epatch.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -21,8 +22,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer
 @SuppressWarnings("unused")
 public final class EpatchTestLanguageObjectNewConsumer extends NonTerminalConsumer {
 
-	private EpatchTestLanguageFRAGMENTConsumer fragmentConsumer;
-	private XtextBuiltinIDConsumer idConsumer;
+	private ITerminalConsumer fragmentConsumer;
+	private ITerminalConsumer idConsumer;
 
 	private ISequenceMatcher crossReference$5$Delimiter;
 	
@@ -118,6 +119,7 @@ public final class EpatchTestLanguageObjectNewConsumer extends NonTerminalConsum
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prObjectNew();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -127,11 +129,11 @@ public final class EpatchTestLanguageObjectNewConsumer extends NonTerminalConsum
 		return "ObjectNew";
 	}
 	
-	public void setFragmentConsumer(EpatchTestLanguageFRAGMENTConsumer fragmentConsumer) {
+	public void setFragmentConsumer(ITerminalConsumer fragmentConsumer) {
 		this.fragmentConsumer = fragmentConsumer;
 	}
 	
-	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
+	public void setIdConsumer(ITerminalConsumer idConsumer) {
 		this.idConsumer = idConsumer;
 	}
 	

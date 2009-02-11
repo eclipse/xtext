@@ -41,6 +41,7 @@ protected class Model_Assignment_name extends AssignmentToken  {
 		return LowerCaseNamedTestLanguageGrammarAccess.INSTANCE.prModel().eleAssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");

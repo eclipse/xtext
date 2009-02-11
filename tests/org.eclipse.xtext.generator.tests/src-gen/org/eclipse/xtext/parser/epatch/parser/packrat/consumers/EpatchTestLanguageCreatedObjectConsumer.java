@@ -6,6 +6,7 @@ package org.eclipse.xtext.parser.epatch.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -25,12 +26,12 @@ import org.eclipse.xtext.parser.epatch.parser.packrat.consumers.EpatchTestLangua
 @SuppressWarnings("unused")
 public final class EpatchTestLanguageCreatedObjectConsumer extends NonTerminalConsumer {
 
-	private XtextBuiltinIDConsumer idConsumer;
-	private EpatchTestLanguageMigrationConsumer migrationConsumer;
-	private EpatchTestLanguageMonoListAssignmentConsumer monoListAssignmentConsumer;
-	private EpatchTestLanguageMonoSingleAssignmentConsumer monoSingleAssignmentConsumer;
-	private EpatchTestLanguageObjectCopyConsumer objectCopyConsumer;
-	private EpatchTestLanguageObjectNewConsumer objectNewConsumer;
+	private ITerminalConsumer idConsumer;
+	private INonTerminalConsumer migrationConsumer;
+	private INonTerminalConsumer monoListAssignmentConsumer;
+	private INonTerminalConsumer monoSingleAssignmentConsumer;
+	private INonTerminalConsumer objectCopyConsumer;
+	private INonTerminalConsumer objectNewConsumer;
 
 	private ICharacterClass keyword$11$Delimiter;
 	
@@ -312,6 +313,7 @@ public final class EpatchTestLanguageCreatedObjectConsumer extends NonTerminalCo
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prCreatedObject();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -321,27 +323,27 @@ public final class EpatchTestLanguageCreatedObjectConsumer extends NonTerminalCo
 		return "CreatedObject";
 	}
 	
-	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
+	public void setIdConsumer(ITerminalConsumer idConsumer) {
 		this.idConsumer = idConsumer;
 	}
 	
-	public void setMigrationConsumer(EpatchTestLanguageMigrationConsumer migrationConsumer) {
+	public void setMigrationConsumer(INonTerminalConsumer migrationConsumer) {
 		this.migrationConsumer = migrationConsumer;
 	}
 	
-	public void setMonoListAssignmentConsumer(EpatchTestLanguageMonoListAssignmentConsumer monoListAssignmentConsumer) {
+	public void setMonoListAssignmentConsumer(INonTerminalConsumer monoListAssignmentConsumer) {
 		this.monoListAssignmentConsumer = monoListAssignmentConsumer;
 	}
 	
-	public void setMonoSingleAssignmentConsumer(EpatchTestLanguageMonoSingleAssignmentConsumer monoSingleAssignmentConsumer) {
+	public void setMonoSingleAssignmentConsumer(INonTerminalConsumer monoSingleAssignmentConsumer) {
 		this.monoSingleAssignmentConsumer = monoSingleAssignmentConsumer;
 	}
 	
-	public void setObjectCopyConsumer(EpatchTestLanguageObjectCopyConsumer objectCopyConsumer) {
+	public void setObjectCopyConsumer(INonTerminalConsumer objectCopyConsumer) {
 		this.objectCopyConsumer = objectCopyConsumer;
 	}
 	
-	public void setObjectNewConsumer(EpatchTestLanguageObjectNewConsumer objectNewConsumer) {
+	public void setObjectNewConsumer(INonTerminalConsumer objectNewConsumer) {
 		this.objectNewConsumer = objectNewConsumer;
 	}
 	

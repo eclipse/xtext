@@ -6,6 +6,7 @@ package org.eclipse.xtext.example.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -20,7 +21,7 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer
 @SuppressWarnings("unused")
 public final class FowlerDslEventConsumer extends NonTerminalConsumer {
 
-	private XtextBuiltinIDConsumer idConsumer;
+	private ITerminalConsumer idConsumer;
 
 	private ICharacterClass keyword$4$Delimiter;
 	
@@ -136,6 +137,7 @@ public final class FowlerDslEventConsumer extends NonTerminalConsumer {
 		return FowlerDslGrammarAccess.INSTANCE.prEvent();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -145,7 +147,7 @@ public final class FowlerDslEventConsumer extends NonTerminalConsumer {
 		return "Event";
 	}
 	
-	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
+	public void setIdConsumer(ITerminalConsumer idConsumer) {
 		this.idConsumer = idConsumer;
 	}
 	

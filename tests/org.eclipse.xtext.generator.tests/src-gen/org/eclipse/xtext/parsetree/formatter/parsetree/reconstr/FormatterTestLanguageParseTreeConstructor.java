@@ -44,6 +44,7 @@ protected class Root_Group extends GroupToken {
 		return FormatterTestLanguageGrammarAccess.INSTANCE.prRoot().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Root_1_Alternatives(current, this).firstSolution();
 		while(s1 != null) {
@@ -83,7 +84,8 @@ protected class Root_1_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return FormatterTestLanguageGrammarAccess.INSTANCE.prRoot().ele1Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new Root_1_1_RuleCall_TestIndentation(current, this) : new Root_1_0_RuleCall_TestLinewrap(current, this);
 		Solution s = t.firstSolution();
@@ -105,6 +107,7 @@ protected class Root_1_0_RuleCall_TestLinewrap extends RuleCallToken {
 		return FormatterTestLanguageGrammarAccess.INSTANCE.prRoot().ele10ParserRuleCallTestLinewrap();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(TestLinewrap_Group.class, current)) return null;
 		if(!current.isInstanceOf("TestLinewrap")) return null;
@@ -123,6 +126,7 @@ protected class Root_1_1_RuleCall_TestIndentation extends RuleCallToken {
 		return FormatterTestLanguageGrammarAccess.INSTANCE.prRoot().ele11ParserRuleCallTestIndentation();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(TestIndentation_Group.class, current)) return null;
 		if(!current.isInstanceOf("TestIndentation")) return null;
@@ -153,6 +157,7 @@ protected class Line_Group extends GroupToken {
 		return FormatterTestLanguageGrammarAccess.INSTANCE.prLine().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Line_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -181,6 +186,7 @@ protected class Line_0_Group extends GroupToken {
 		return FormatterTestLanguageGrammarAccess.INSTANCE.prLine().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Line_0_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
@@ -209,6 +215,7 @@ protected class Line_0_0_Assignment_type extends AssignmentToken  {
 		return FormatterTestLanguageGrammarAccess.INSTANCE.prLine().ele00AssignmentType();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("type",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
@@ -232,6 +239,7 @@ protected class Line_0_1_Assignment_name extends AssignmentToken  {
 		return FormatterTestLanguageGrammarAccess.INSTANCE.prLine().ele01AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -279,6 +287,7 @@ protected class TestLinewrap_Group extends GroupToken {
 		return FormatterTestLanguageGrammarAccess.INSTANCE.prTestLinewrap().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TestLinewrap_1_Assignment_items(current, this).firstSolution();
 		while(s1 != null) {
@@ -319,6 +328,7 @@ protected class TestLinewrap_1_Assignment_items extends AssignmentToken  {
 		return FormatterTestLanguageGrammarAccess.INSTANCE.prTestLinewrap().ele1AssignmentItems();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("items",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("items");
@@ -361,6 +371,7 @@ protected class TestIndentation_Group extends GroupToken {
 		return FormatterTestLanguageGrammarAccess.INSTANCE.prTestIndentation().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TestIndentation_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -389,6 +400,7 @@ protected class TestIndentation_0_Group extends GroupToken {
 		return FormatterTestLanguageGrammarAccess.INSTANCE.prTestIndentation().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TestIndentation_0_1_Alternatives(current, this).firstSolution();
 		while(s1 != null) {
@@ -417,6 +429,7 @@ protected class TestIndentation_0_0_Group extends GroupToken {
 		return FormatterTestLanguageGrammarAccess.INSTANCE.prTestIndentation().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TestIndentation_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -469,7 +482,8 @@ protected class TestIndentation_0_1_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return FormatterTestLanguageGrammarAccess.INSTANCE.prTestIndentation().ele01Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new TestIndentation_0_1_1_Assignment_items(current, this) : new TestIndentation_0_1_0_Assignment_sub(current, this);
 		Solution s = t.firstSolution();
@@ -491,6 +505,7 @@ protected class TestIndentation_0_1_0_Assignment_sub extends AssignmentToken  {
 		return FormatterTestLanguageGrammarAccess.INSTANCE.prTestIndentation().ele010AssignmentSub();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("sub",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("sub");
@@ -522,6 +537,7 @@ protected class TestIndentation_0_1_1_Assignment_items extends AssignmentToken  
 		return FormatterTestLanguageGrammarAccess.INSTANCE.prTestIndentation().ele011AssignmentItems();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("items",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("items");

@@ -1,0 +1,67 @@
+/*
+Generated with Xtext
+*/
+package org.eclipse.xtext.grammarinheritance.parser.packrat.consumers;
+
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
+import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
+import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
+
+import org.eclipse.xtext.grammarinheritance.services.ConcreteTestLanguageGrammarAccess;
+import org.eclipse.xtext.grammarinheritance.services.ConcreteTestLanguageGrammarAccess.CallExtendedParserRuleElements;
+
+import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.AbstractTestLanguageAbstractCallExtendedParserRuleConsumer;
+
+@SuppressWarnings("unused")
+public final class ConcreteTestLanguageCallExtendedParserRuleConsumer extends NonTerminalConsumer {
+
+	private INonTerminalConsumer abstractCallExtendedParserRuleConsumer;
+
+	public ConcreteTestLanguageCallExtendedParserRuleConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
+		super(configuration, hiddenTokens);
+	}
+	
+	@Override
+	protected int doConsume(int entryPoint) throws Exception {
+		return consumeAssignment$1(entryPoint);
+	}
+
+	protected int consumeAssignment$1(int entryPoint) throws Exception {
+		int result = ConsumeResult.EMPTY_MATCH;
+		int tempResult;
+		announceNextLevel();
+		tempResult = consumeNonTerminal(abstractCallExtendedParserRuleConsumer, "call", false, false, false, getRule().ele0ParserRuleCallAbstractCallExtendedParserRule());
+		if (tempResult == ConsumeResult.SUCCESS) {
+			announceLevelFinished();
+			return tempResult;
+		}
+		result = tempResult >= result ? tempResult : result; 
+		announceLevelFinished();
+		return result;
+	}
+
+	public CallExtendedParserRuleElements getRule() {
+		return ConcreteTestLanguageGrammarAccess.INSTANCE.prCallExtendedParserRule();
+	}
+	
+	@Override
+	protected EObject getGrammarElement() {
+		return getRule().getRule();
+	}
+
+	@Override
+	protected String getDefaultTypeName() {
+		return "CallExtendedParserRule";
+	}
+	
+	public void setAbstractCallExtendedParserRuleConsumer(INonTerminalConsumer abstractCallExtendedParserRuleConsumer) {
+		this.abstractCallExtendedParserRuleConsumer = abstractCallExtendedParserRuleConsumer;
+	}
+	
+}

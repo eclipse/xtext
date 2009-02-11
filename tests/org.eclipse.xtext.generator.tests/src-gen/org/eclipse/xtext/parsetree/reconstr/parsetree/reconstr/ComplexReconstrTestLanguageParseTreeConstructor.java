@@ -54,7 +54,8 @@ protected class Root_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prRoot().eleAlternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new Root_1_RuleCall_TrickyG(current, this) : new Root_0_RuleCall_Op(current, this);
 		Solution s = t.firstSolution();
@@ -76,6 +77,7 @@ protected class Root_0_RuleCall_Op extends RuleCallToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prRoot().ele0ParserRuleCallOp();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Op_Group.class, current)) return null;
 		if(!current.isInstanceOf("Expression")) return null;
@@ -94,6 +96,7 @@ protected class Root_1_RuleCall_TrickyG extends RuleCallToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prRoot().ele1ParserRuleCallTrickyG();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(TrickyG_Group.class, current)) return null;
 		if(!current.isInstanceOf("TrickyG")) return null;
@@ -123,6 +126,7 @@ protected class Op_Group extends GroupToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prOp().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Op_1_Alternatives(current, this).firstSolution();
 		while(s1 != null) {
@@ -151,6 +155,7 @@ protected class Op_0_RuleCall_Term extends RuleCallToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prOp().ele0ParserRuleCallTerm();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Term_Alternatives.class, current)) return null;
 		if(!current.isInstanceOf("Expression")) return null;
@@ -168,7 +173,8 @@ protected class Op_1_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prOp().ele1Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new Op_1_1_Group(current, this) : new Op_1_0_Group(current, this);
 		Solution s = t.firstSolution();
@@ -190,6 +196,7 @@ protected class Op_1_0_Group extends GroupToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prOp().ele10Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Op_1_0_1_Assignment_addOperands(current, this).firstSolution();
 		while(s1 != null) {
@@ -218,6 +225,7 @@ protected class Op_1_0_0_Group extends GroupToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prOp().ele100Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Op_1_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -246,6 +254,7 @@ protected class Op_1_0_0_0_Action_Add_addOperands extends ActionToken  {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prOp().ele1000ActionAddaddOperands();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(!current.isInstanceOf("Add")) return null;
 		Object val = current.getConsumable("addOperands", false);
@@ -279,6 +288,7 @@ protected class Op_1_0_1_Assignment_addOperands extends AssignmentToken  {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prOp().ele101AssignmentAddOperands();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("addOperands",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("addOperands");
@@ -311,6 +321,7 @@ protected class Op_1_1_Group extends GroupToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prOp().ele11Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Op_1_1_1_Assignment_minusOperands(current, this).firstSolution();
 		while(s1 != null) {
@@ -339,6 +350,7 @@ protected class Op_1_1_0_Group extends GroupToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prOp().ele110Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Op_1_1_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -367,6 +379,7 @@ protected class Op_1_1_0_0_Action_Minus_minusOperands extends ActionToken  {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prOp().ele1100ActionMinusminusOperands();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(!current.isInstanceOf("Minus")) return null;
 		Object val = current.getConsumable("minusOperands", false);
@@ -400,6 +413,7 @@ protected class Op_1_1_1_Assignment_minusOperands extends AssignmentToken  {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prOp().ele111AssignmentMinusOperands();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("minusOperands",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("minusOperands");
@@ -443,7 +457,8 @@ protected class Term_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTerm().eleAlternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new Term_1_RuleCall_Parens(current, this) : new Term_0_RuleCall_Atom(current, this);
 		Solution s = t.firstSolution();
@@ -465,6 +480,7 @@ protected class Term_0_RuleCall_Atom extends RuleCallToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTerm().ele0ParserRuleCallAtom();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Atom_Assignment_name.class, current)) return null;
 		if(!current.isInstanceOf("Atom")) return null;
@@ -483,6 +499,7 @@ protected class Term_1_RuleCall_Parens extends RuleCallToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTerm().ele1ParserRuleCallParens();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Parens_Group.class, current)) return null;
 		if(!current.isInstanceOf("Expression")) return null;
@@ -512,6 +529,7 @@ protected class Atom_Assignment_name extends AssignmentToken  {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prAtom().eleAssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -545,6 +563,7 @@ protected class Parens_Group extends GroupToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prParens().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Parens_1_Assignment_em(current, this).firstSolution();
 		while(s1 != null) {
@@ -573,6 +592,7 @@ protected class Parens_0_Group extends GroupToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prParens().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Parens_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -601,6 +621,7 @@ protected class Parens_0_0_Group extends GroupToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prParens().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Parens_0_0_1_RuleCall_Op(current, this).firstSolution();
 		while(s1 != null) {
@@ -641,6 +662,7 @@ protected class Parens_0_0_1_RuleCall_Op extends RuleCallToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prParens().ele001ParserRuleCallOp();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Op_Group.class, current)) return null;
 		if(!current.isInstanceOf("Expression")) return null;
@@ -673,6 +695,7 @@ protected class Parens_1_Assignment_em extends AssignmentToken  {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prParens().ele1AssignmentEm();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("em",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("em");
@@ -709,6 +732,7 @@ protected class TrickyA_Group extends GroupToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyA().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TrickyA_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
@@ -737,6 +761,7 @@ protected class TrickyA_0_Group extends GroupToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyA().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TrickyA_0_1_Alternatives(current, this).firstSolution();
 		while(s1 != null) {
@@ -765,6 +790,7 @@ protected class TrickyA_0_0_Group extends GroupToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyA().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TrickyA_0_0_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
@@ -793,6 +819,7 @@ protected class TrickyA_0_0_0_Group extends GroupToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyA().ele000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TrickyA_0_0_0_1_RuleCall_TrickyA1(current, this).firstSolution();
 		while(s1 != null) {
@@ -833,6 +860,7 @@ protected class TrickyA_0_0_0_1_RuleCall_TrickyA1 extends RuleCallToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyA().ele0001ParserRuleCallTrickyA1();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(TrickyA1_Assignment_name.class, current)) return null;
 		if(!current.isInstanceOf("TypeD")) return null;
@@ -852,6 +880,7 @@ protected class TrickyA_0_0_1_Assignment_name extends AssignmentToken  {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyA().ele001AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -875,7 +904,8 @@ protected class TrickyA_0_1_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyA().ele01Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new TrickyA_0_1_1_Group(current, this) : new TrickyA_0_1_0_Group(current, this);
 		Solution s = t.firstSolution();
@@ -897,6 +927,7 @@ protected class TrickyA_0_1_0_Group extends GroupToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyA().ele010Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TrickyA_0_1_0_1_Keyword_x(current, this).firstSolution();
 		while(s1 != null) {
@@ -925,6 +956,7 @@ protected class TrickyA_0_1_0_0_Action_TypeB_x extends ActionToken  {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyA().ele0100ActionTypeBx();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(!current.isInstanceOf("TypeB")) return null;
 		Object val = current.getConsumable("x", false);
@@ -958,6 +990,7 @@ protected class TrickyA_0_1_1_Group extends GroupToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyA().ele011Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TrickyA_0_1_1_1_Keyword_y(current, this).firstSolution();
 		while(s1 != null) {
@@ -986,6 +1019,7 @@ protected class TrickyA_0_1_1_0_Action_TypeC_x extends ActionToken  {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyA().ele0110ActionTypeCx();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(!current.isInstanceOf("TypeC")) return null;
 		Object val = current.getConsumable("x", false);
@@ -1021,6 +1055,7 @@ protected class TrickyA_1_Assignment_name extends AssignmentToken  {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyA().ele1AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -1055,6 +1090,7 @@ protected class TrickyA1_Assignment_name extends AssignmentToken  {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyA1().eleAssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -1088,6 +1124,7 @@ protected class TrickyB_Group extends GroupToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyB().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TrickyB_1_Assignment_type(current, this).firstSolution();
 		while(s1 != null) {
@@ -1116,6 +1153,7 @@ protected class TrickyB_0_Group extends GroupToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyB().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TrickyB_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -1156,6 +1194,7 @@ protected class TrickyB_0_1_Group extends GroupToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyB().ele01Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TrickyB_0_1_1_Assignment_type(current, this).firstSolution();
 		while(s1 != null) {
@@ -1184,6 +1223,7 @@ protected class TrickyB_0_1_0_Assignment_name extends AssignmentToken  {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyB().ele010AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -1207,6 +1247,7 @@ protected class TrickyB_0_1_1_Assignment_type extends AssignmentToken  {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyB().ele011AssignmentType();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("type",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
@@ -1232,6 +1273,7 @@ protected class TrickyB_1_Assignment_type extends AssignmentToken  {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyB().ele1AssignmentType();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("type",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
@@ -1266,6 +1308,7 @@ protected class TrickyC_Group extends GroupToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyC().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TrickyC_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -1294,6 +1337,7 @@ protected class TrickyC_0_Group extends GroupToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyC().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TrickyC_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -1322,6 +1366,7 @@ protected class TrickyC_0_0_Group extends GroupToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyC().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TrickyC_0_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -1350,6 +1395,7 @@ protected class TrickyC_0_0_0_Group extends GroupToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyC().ele000Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TrickyC_0_0_0_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
@@ -1390,6 +1436,7 @@ protected class TrickyC_0_0_0_1_Assignment_name extends AssignmentToken  {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyC().ele0001AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -1414,6 +1461,7 @@ protected class TrickyC_0_0_1_Group extends GroupToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyC().ele001Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TrickyC_0_0_1_1_Keyword_x(current, this).firstSolution();
 		while(s1 != null) {
@@ -1442,6 +1490,7 @@ protected class TrickyC_0_0_1_0_Action_C1_x extends ActionToken  {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyC().ele0010ActionC1x();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(!current.isInstanceOf("C1")) return null;
 		Object val = current.getConsumable("x", false);
@@ -1476,6 +1525,7 @@ protected class TrickyC_0_1_Group extends GroupToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyC().ele01Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TrickyC_0_1_1_Keyword_y(current, this).firstSolution();
 		while(s1 != null) {
@@ -1504,6 +1554,7 @@ protected class TrickyC_0_1_0_Action_C2_y extends ActionToken  {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyC().ele010ActionC2y();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(!current.isInstanceOf("C2")) return null;
 		Object val = current.getConsumable("y", false);
@@ -1538,6 +1589,7 @@ protected class TrickyC_1_Group extends GroupToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyC().ele1Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TrickyC_1_1_Keyword_z(current, this).firstSolution();
 		while(s1 != null) {
@@ -1566,6 +1618,7 @@ protected class TrickyC_1_0_Action_C3_z extends ActionToken  {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyC().ele10ActionC3z();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(!current.isInstanceOf("C3")) return null;
 		Object val = current.getConsumable("z", false);
@@ -1610,6 +1663,7 @@ protected class TrickyD_Group extends GroupToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyD().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TrickyD_1_Assignment_type(current, this).firstSolution();
 		while(s1 != null) {
@@ -1638,6 +1692,7 @@ protected class TrickyD_0_Group extends GroupToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyD().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TrickyD_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -1666,6 +1721,7 @@ protected class TrickyD_0_0_Group extends GroupToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyD().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TrickyD_0_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -1706,6 +1762,7 @@ protected class TrickyD_0_0_1_Group extends GroupToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyD().ele001Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TrickyD_0_0_1_1_Assignment_type(current, this).firstSolution();
 		while(s1 != null) {
@@ -1734,6 +1791,7 @@ protected class TrickyD_0_0_1_0_Group extends GroupToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyD().ele0010Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TrickyD_0_0_1_0_1_Assignment_foo(current, this).firstSolution();
 		while(s1 != null) {
@@ -1762,6 +1820,7 @@ protected class TrickyD_0_0_1_0_0_Assignment_name extends AssignmentToken  {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyD().ele00100AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -1785,6 +1844,7 @@ protected class TrickyD_0_0_1_0_1_Assignment_foo extends AssignmentToken  {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyD().ele00101AssignmentFoo();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("foo",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("foo");
@@ -1809,6 +1869,7 @@ protected class TrickyD_0_0_1_1_Assignment_type extends AssignmentToken  {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyD().ele0011AssignmentType();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("type",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
@@ -1834,6 +1895,7 @@ protected class TrickyD_0_1_Group extends GroupToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyD().ele01Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TrickyD_0_1_1_Assignment_type(current, this).firstSolution();
 		while(s1 != null) {
@@ -1862,6 +1924,7 @@ protected class TrickyD_0_1_0_Assignment_name extends AssignmentToken  {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyD().ele010AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -1885,6 +1948,7 @@ protected class TrickyD_0_1_1_Assignment_type extends AssignmentToken  {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyD().ele011AssignmentType();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("type",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
@@ -1910,6 +1974,7 @@ protected class TrickyD_1_Assignment_type extends AssignmentToken  {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyD().ele1AssignmentType();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("type",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
@@ -1944,6 +2009,7 @@ protected class TrickyE_Group extends GroupToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyE().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TrickyE_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -1972,6 +2038,7 @@ protected class TrickyE_0_Group extends GroupToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyE().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TrickyE_0_1_Keyword_x(current, this).firstSolution();
 		while(s1 != null) {
@@ -2000,6 +2067,7 @@ protected class TrickyE_0_0_Group extends GroupToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyE().ele00Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TrickyE_0_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -2040,6 +2108,7 @@ protected class TrickyE_0_0_1_Group extends GroupToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyE().ele001Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TrickyE_0_0_1_1_Assignment_type(current, this).firstSolution();
 		while(s1 != null) {
@@ -2068,6 +2137,7 @@ protected class TrickyE_0_0_1_0_Group extends GroupToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyE().ele0010Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TrickyE_0_0_1_0_1_Assignment_foo(current, this).firstSolution();
 		while(s1 != null) {
@@ -2096,6 +2166,7 @@ protected class TrickyE_0_0_1_0_0_Assignment_name extends AssignmentToken  {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyE().ele00100AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -2119,6 +2190,7 @@ protected class TrickyE_0_0_1_0_1_Assignment_foo extends AssignmentToken  {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyE().ele00101AssignmentFoo();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("foo",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("foo");
@@ -2143,6 +2215,7 @@ protected class TrickyE_0_0_1_1_Assignment_type extends AssignmentToken  {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyE().ele0011AssignmentType();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("type",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
@@ -2181,6 +2254,7 @@ protected class TrickyE_1_Group extends GroupToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyE().ele1Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TrickyE_1_1_Assignment_type(current, this).firstSolution();
 		while(s1 != null) {
@@ -2209,6 +2283,7 @@ protected class TrickyE_1_0_Assignment_name extends AssignmentToken  {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyE().ele10AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -2232,6 +2307,7 @@ protected class TrickyE_1_1_Assignment_type extends AssignmentToken  {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyE().ele11AssignmentType();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("type",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
@@ -2267,6 +2343,7 @@ protected class TrickyF_Group extends GroupToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyF().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TrickyF_1_Alternatives(current, this).firstSolution();
 		while(s1 != null) {
@@ -2295,6 +2372,7 @@ protected class TrickyF_0_Group extends GroupToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyF().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TrickyF_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -2335,6 +2413,7 @@ protected class TrickyF_0_1_Group extends GroupToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyF().ele01Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TrickyF_0_1_1_Assignment_type(current, this).firstSolution();
 		while(s1 != null) {
@@ -2363,6 +2442,7 @@ protected class TrickyF_0_1_0_Assignment_name extends AssignmentToken  {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyF().ele010AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -2386,6 +2466,7 @@ protected class TrickyF_0_1_1_Assignment_type extends AssignmentToken  {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyF().ele011AssignmentType();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("type",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
@@ -2410,7 +2491,8 @@ protected class TrickyF_1_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyF().ele1Alternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new TrickyF_1_1_Assignment_type(current, this) : new TrickyF_1_0_Assignment_name(current, this);
 		Solution s = t.firstSolution();
@@ -2432,6 +2514,7 @@ protected class TrickyF_1_0_Assignment_name extends AssignmentToken  {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyF().ele10AssignmentName();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -2455,6 +2538,7 @@ protected class TrickyF_1_1_Assignment_type extends AssignmentToken  {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyF().ele11AssignmentType();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("type",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
@@ -2490,6 +2574,7 @@ protected class TrickyG_Group extends GroupToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyG().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TrickyG_1_Assignment_tree(current, this).firstSolution();
 		while(s1 != null) {
@@ -2530,6 +2615,7 @@ protected class TrickyG_1_Assignment_tree extends AssignmentToken  {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyG().ele1AssignmentTree();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("tree",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("tree");
@@ -2572,6 +2658,7 @@ protected class TrickyG1_Group extends GroupToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyG1().eleGroup();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TrickyG1_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
@@ -2600,6 +2687,7 @@ protected class TrickyG1_0_Group extends GroupToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyG1().ele0Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TrickyG1_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -2640,6 +2728,7 @@ protected class TrickyG1_0_1_Group extends GroupToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyG1().ele01Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TrickyG1_0_1_1_Group(current, this).firstSolution();
 		while(s1 != null) {
@@ -2668,6 +2757,7 @@ protected class TrickyG1_0_1_0_Assignment_vals extends AssignmentToken  {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyG1().ele010AssignmentVals();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("vals",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("vals");
@@ -2699,6 +2789,7 @@ protected class TrickyG1_0_1_1_Group extends GroupToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyG1().ele011Group();
 	}
 		
+	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TrickyG1_0_1_1_1_Assignment_vals(current, this).firstSolution();
 		while(s1 != null) {
@@ -2739,6 +2830,7 @@ protected class TrickyG1_0_1_1_1_Assignment_vals extends AssignmentToken  {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyG1().ele0111AssignmentVals();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("vals",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("vals");
@@ -2795,7 +2887,8 @@ protected class TrickyG2_Alternatives extends AlternativesToken {
 	public Alternatives getGrammarElement() {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyG2().eleAlternatives();
 	}
-	
+
+	@Override	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new TrickyG2_1_Assignment_val(current, this) : new TrickyG2_0_RuleCall_TrickyG1(current, this);
 		Solution s = t.firstSolution();
@@ -2817,6 +2910,7 @@ protected class TrickyG2_0_RuleCall_TrickyG1 extends RuleCallToken {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyG2().ele0ParserRuleCallTrickyG1();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(TrickyG1_Group.class, current)) return null;
 		if(!current.isInstanceOf("TrickyG1")) return null;
@@ -2835,6 +2929,7 @@ protected class TrickyG2_1_Assignment_val extends AssignmentToken  {
 		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyG2().ele1AssignmentVal();
 	}
 	
+	@Override
 	protected Solution createSolution() {
 		if((value = current.getConsumable("val",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("val");

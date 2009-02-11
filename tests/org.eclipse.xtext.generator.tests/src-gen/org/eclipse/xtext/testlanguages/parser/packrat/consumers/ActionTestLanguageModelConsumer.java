@@ -6,6 +6,7 @@ package org.eclipse.xtext.testlanguages.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -20,7 +21,7 @@ import org.eclipse.xtext.testlanguages.parser.packrat.consumers.ActionTestLangua
 @SuppressWarnings("unused")
 public final class ActionTestLanguageModelConsumer extends NonTerminalConsumer {
 
-	private ActionTestLanguageElementConsumer elementConsumer;
+	private INonTerminalConsumer elementConsumer;
 
 	public ActionTestLanguageModelConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
@@ -58,6 +59,7 @@ public final class ActionTestLanguageModelConsumer extends NonTerminalConsumer {
 		return ActionTestLanguageGrammarAccess.INSTANCE.prModel();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -67,7 +69,7 @@ public final class ActionTestLanguageModelConsumer extends NonTerminalConsumer {
 		return "Model";
 	}
 	
-	public void setElementConsumer(ActionTestLanguageElementConsumer elementConsumer) {
+	public void setElementConsumer(INonTerminalConsumer elementConsumer) {
 		this.elementConsumer = elementConsumer;
 	}
 	

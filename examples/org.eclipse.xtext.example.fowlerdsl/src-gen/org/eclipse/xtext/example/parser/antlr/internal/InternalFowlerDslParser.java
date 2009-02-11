@@ -74,7 +74,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:68:54: (iv_ruleStatemachine= ruleStatemachine EOF )
             // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:69:2: iv_ruleStatemachine= ruleStatemachine EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.0" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleStatemachine_in_entryRuleStatemachine72);
             iv_ruleStatemachine=ruleStatemachine();
             _fsp--;
@@ -135,7 +135,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
             {
             match(input,11,FOLLOW_11_in_ruleStatemachine121); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
             // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:85:1: (lv_events= ruleEvent )*
             loop1:
@@ -153,7 +153,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:88:6: lv_events= ruleEvent
             	    {
             	     
-            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleEvent_in_ruleStatemachine155);
             	    lv_events=ruleEvent();
@@ -186,14 +186,14 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
 
             match(input,12,FOLLOW_12_in_ruleStatemachine170); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
 
             match(input,13,FOLLOW_13_in_ruleStatemachine180); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -214,7 +214,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:117:6: lv_commands= ruleCommand
             	    {
             	     
-            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleCommand_in_ruleStatemachine215);
             	    lv_commands=ruleCommand();
@@ -247,7 +247,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
 
             match(input,12,FOLLOW_12_in_ruleStatemachine230); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -268,7 +268,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:142:6: lv_states= ruleState
             	    {
             	     
-            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#//@rules.0/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.0/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleState_in_ruleStatemachine265);
             	    lv_states=ruleState();
@@ -329,7 +329,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:169:47: (iv_ruleEvent= ruleEvent EOF )
             // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:170:2: iv_ruleEvent= ruleEvent EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#//@rules.1" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.1" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleEvent_in_entryRuleEvent305);
             iv_ruleEvent=ruleEvent();
             _fsp--;
@@ -387,7 +387,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
                     lv_resetting=(Token)input.LT(1);
                     match(input,14,FOLLOW_14_in_ruleEvent362); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::Keyword */, "resetting"); 
+                            createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::Keyword */, "resetting"); 
                         
 
                     	        if (current==null) {
@@ -413,7 +413,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEvent396); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+                createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
                 
 
             	        if (current==null) {
@@ -439,7 +439,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
             lv_code=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEvent429); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#//@rules.1/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "code"); 
+                createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.1/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "code"); 
                 
 
             	        if (current==null) {
@@ -489,7 +489,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:251:49: (iv_ruleCommand= ruleCommand EOF )
             // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:252:2: iv_ruleCommand= ruleCommand EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#//@rules.2" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.2" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleCommand_in_entryRuleCommand475);
             iv_ruleCommand=ruleCommand();
             _fsp--;
@@ -535,7 +535,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleCommand531); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#//@rules.2/@alternatives/@abstractTokens.0/@terminal" /* xtext::RuleCall */, "name"); 
+                createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.2/@alternatives/@abstractTokens.0/@terminal" /* xtext::RuleCall */, "name"); 
                 
 
             	        if (current==null) {
@@ -558,7 +558,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
             lv_code=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleCommand563); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#//@rules.2/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "code"); 
+                createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.2/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "code"); 
                 
 
             	        if (current==null) {
@@ -608,7 +608,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:313:47: (iv_ruleState= ruleState EOF )
             // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:314:2: iv_ruleState= ruleState EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#//@rules.3" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.3" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleState_in_entryRuleState609);
             iv_ruleState=ruleState();
             _fsp--;
@@ -660,7 +660,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
             {
             match(input,15,FOLLOW_15_in_ruleState656); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
             // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:330:1: (lv_name= RULE_ID )
             // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:332:6: lv_name= RULE_ID
@@ -668,7 +668,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleState677); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+                createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
                 
 
             	        if (current==null) {
@@ -707,11 +707,11 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
                     {
                     match(input,16,FOLLOW_16_in_ruleState701); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
                     match(input,17,FOLLOW_17_in_ruleState710); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                         
 
                     }
@@ -743,7 +743,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
                     	    {
                     	    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleState735); 
                     	     
-                    	        createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "actions"); 
+                    	        createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "actions"); 
                     	        
 
                     	    }
@@ -766,7 +766,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
 
                     match(input,18,FOLLOW_18_in_ruleState750); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
+                            createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
                         
 
                     }
@@ -793,7 +793,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:380:6: lv_transitions= ruleTransition
             	    {
             	     
-            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleTransition_in_ruleState787);
             	    lv_transitions=ruleTransition();
@@ -826,7 +826,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
 
             match(input,12,FOLLOW_12_in_ruleState802); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#//@rules.3/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.3/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -861,7 +861,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:411:52: (iv_ruleTransition= ruleTransition EOF )
             // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:412:2: iv_ruleTransition= ruleTransition EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#//@rules.4" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.4" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleTransition_in_entryRuleTransition837);
             iv_ruleTransition=ruleTransition();
             _fsp--;
@@ -915,7 +915,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
             {
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleTransition897); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::CrossReference */, "event"); 
+                createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::CrossReference */, "event"); 
                 
 
             }
@@ -925,7 +925,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
 
             match(input,19,FOLLOW_19_in_ruleTransition910); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -944,7 +944,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
             {
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleTransition935); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#//@rules.4/@alternatives/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "state"); 
+                createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.4/@alternatives/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "state"); 
                 
 
             }

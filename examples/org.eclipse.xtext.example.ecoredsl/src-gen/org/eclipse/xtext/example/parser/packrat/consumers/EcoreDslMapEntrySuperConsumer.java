@@ -6,6 +6,7 @@ package org.eclipse.xtext.example.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -20,7 +21,7 @@ import org.eclipse.xtext.example.parser.packrat.consumers.EcoreDslMapEntryConsum
 @SuppressWarnings("unused")
 public final class EcoreDslMapEntrySuperConsumer extends NonTerminalConsumer {
 
-	private EcoreDslMapEntryConsumer mapEntryConsumer;
+	private INonTerminalConsumer mapEntryConsumer;
 
 	public EcoreDslMapEntrySuperConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
@@ -39,6 +40,7 @@ public final class EcoreDslMapEntrySuperConsumer extends NonTerminalConsumer {
 		return EcoreDslGrammarAccess.INSTANCE.prMapEntrySuper();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -48,7 +50,7 @@ public final class EcoreDslMapEntrySuperConsumer extends NonTerminalConsumer {
 		return "EObject";
 	}
 	
-	public void setMapEntryConsumer(EcoreDslMapEntryConsumer mapEntryConsumer) {
+	public void setMapEntryConsumer(INonTerminalConsumer mapEntryConsumer) {
 		this.mapEntryConsumer = mapEntryConsumer;
 	}
 	

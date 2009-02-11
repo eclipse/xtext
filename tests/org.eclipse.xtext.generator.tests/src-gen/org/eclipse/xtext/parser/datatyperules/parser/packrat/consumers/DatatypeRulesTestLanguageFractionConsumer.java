@@ -6,6 +6,7 @@ package org.eclipse.xtext.parser.datatyperules.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -20,7 +21,7 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinINTConsume
 @SuppressWarnings("unused")
 public final class DatatypeRulesTestLanguageFractionConsumer extends NonTerminalConsumer {
 
-	private XtextBuiltinINTConsumer intConsumer;
+	private ITerminalConsumer intConsumer;
 
 	private ICharacterClass keyword$4$Delimiter;
 	
@@ -128,6 +129,7 @@ public final class DatatypeRulesTestLanguageFractionConsumer extends NonTerminal
 		return DatatypeRulesTestLanguageGrammarAccess.INSTANCE.prFraction();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -137,7 +139,7 @@ public final class DatatypeRulesTestLanguageFractionConsumer extends NonTerminal
 		return "EBigDecimal";
 	}
 	
-	public void setIntConsumer(XtextBuiltinINTConsumer intConsumer) {
+	public void setIntConsumer(ITerminalConsumer intConsumer) {
 		this.intConsumer = intConsumer;
 	}
 	

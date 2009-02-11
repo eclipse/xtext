@@ -6,6 +6,7 @@ package org.eclipse.xtext.testlanguages.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -20,7 +21,7 @@ import org.eclipse.xtext.testlanguages.parser.packrat.consumers.PartialParserTes
 @SuppressWarnings("unused")
 public final class PartialParserTestLanguageNestedConsumer extends NonTerminalConsumer {
 
-	private PartialParserTestLanguageContainerConsumer containerConsumer;
+	private INonTerminalConsumer containerConsumer;
 
 	private ICharacterClass keyword$4$Delimiter;
 	
@@ -148,6 +149,7 @@ public final class PartialParserTestLanguageNestedConsumer extends NonTerminalCo
 		return PartialParserTestLanguageGrammarAccess.INSTANCE.prNested();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -157,7 +159,7 @@ public final class PartialParserTestLanguageNestedConsumer extends NonTerminalCo
 		return "Nested";
 	}
 	
-	public void setContainerConsumer(PartialParserTestLanguageContainerConsumer containerConsumer) {
+	public void setContainerConsumer(INonTerminalConsumer containerConsumer) {
 		this.containerConsumer = containerConsumer;
 	}
 	

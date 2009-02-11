@@ -28,13 +28,15 @@ public class ConcreteTestLanguageMetamodelAccess extends BaseEPackageAccess impl
 
 	private EPackage[] referenced = new EPackage[] {
 		
+		BaseEPackageAccess.getEPackageFromRegistry("http://www.eclipse.org/xtext/tests/grammarinheritance")
+		
 		};
 	public EPackage[] getReferencedEPackages() {
 		return referenced;
 	}
 	
 	private EPackage[] all = new EPackage[] {
-	    getFooEPackage()
+	    getFooEPackage(),BaseEPackageAccess.getEPackageFromRegistry("http://www.eclipse.org/xtext/tests/grammarinheritance")
 		};
 	
 	public EPackage[] getAllEPackages() {

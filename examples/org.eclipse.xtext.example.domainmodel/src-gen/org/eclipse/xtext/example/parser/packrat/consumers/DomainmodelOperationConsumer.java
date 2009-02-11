@@ -6,6 +6,7 @@ package org.eclipse.xtext.example.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -22,9 +23,9 @@ import org.eclipse.xtext.example.parser.packrat.consumers.DomainmodelTypeRefCons
 @SuppressWarnings("unused")
 public final class DomainmodelOperationConsumer extends NonTerminalConsumer {
 
-	private XtextBuiltinIDConsumer idConsumer;
-	private DomainmodelParameterConsumer parameterConsumer;
-	private DomainmodelTypeRefConsumer typeRefConsumer;
+	private ITerminalConsumer idConsumer;
+	private INonTerminalConsumer parameterConsumer;
+	private INonTerminalConsumer typeRefConsumer;
 
 	private ICharacterClass keyword$7$Delimiter;
 	
@@ -290,6 +291,7 @@ public final class DomainmodelOperationConsumer extends NonTerminalConsumer {
 		return DomainmodelGrammarAccess.INSTANCE.prOperation();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -299,15 +301,15 @@ public final class DomainmodelOperationConsumer extends NonTerminalConsumer {
 		return "Operation";
 	}
 	
-	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
+	public void setIdConsumer(ITerminalConsumer idConsumer) {
 		this.idConsumer = idConsumer;
 	}
 	
-	public void setParameterConsumer(DomainmodelParameterConsumer parameterConsumer) {
+	public void setParameterConsumer(INonTerminalConsumer parameterConsumer) {
 		this.parameterConsumer = parameterConsumer;
 	}
 	
-	public void setTypeRefConsumer(DomainmodelTypeRefConsumer typeRefConsumer) {
+	public void setTypeRefConsumer(INonTerminalConsumer typeRefConsumer) {
 		this.typeRefConsumer = typeRefConsumer;
 	}
 	

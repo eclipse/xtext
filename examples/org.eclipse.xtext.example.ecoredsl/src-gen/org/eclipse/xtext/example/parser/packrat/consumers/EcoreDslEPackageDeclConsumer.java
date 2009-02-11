@@ -6,6 +6,7 @@ package org.eclipse.xtext.example.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -24,11 +25,11 @@ import org.eclipse.xtext.example.parser.packrat.consumers.EcoreDslSubEPackageDec
 @SuppressWarnings("unused")
 public final class EcoreDslEPackageDeclConsumer extends NonTerminalConsumer {
 
-	private EcoreDslEAnnotationDeclConsumer eAnnotationDeclConsumer;
-	private EcoreDslEClassifierDeclConsumer eClassifierDeclConsumer;
-	private EcoreDslQIDConsumer qidConsumer;
-	private XtextBuiltinSTRINGConsumer stringConsumer;
-	private EcoreDslSubEPackageDeclConsumer subEPackageDeclConsumer;
+	private INonTerminalConsumer eAnnotationDeclConsumer;
+	private INonTerminalConsumer eClassifierDeclConsumer;
+	private INonTerminalConsumer qidConsumer;
+	private ITerminalConsumer stringConsumer;
+	private INonTerminalConsumer subEPackageDeclConsumer;
 
 	private ICharacterClass keyword$14$Delimiter;
 	
@@ -337,6 +338,7 @@ public final class EcoreDslEPackageDeclConsumer extends NonTerminalConsumer {
 		return EcoreDslGrammarAccess.INSTANCE.prEPackageDecl();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -346,23 +348,23 @@ public final class EcoreDslEPackageDeclConsumer extends NonTerminalConsumer {
 		return "EPackage";
 	}
 	
-	public void setEAnnotationDeclConsumer(EcoreDslEAnnotationDeclConsumer eAnnotationDeclConsumer) {
+	public void setEAnnotationDeclConsumer(INonTerminalConsumer eAnnotationDeclConsumer) {
 		this.eAnnotationDeclConsumer = eAnnotationDeclConsumer;
 	}
 	
-	public void setEClassifierDeclConsumer(EcoreDslEClassifierDeclConsumer eClassifierDeclConsumer) {
+	public void setEClassifierDeclConsumer(INonTerminalConsumer eClassifierDeclConsumer) {
 		this.eClassifierDeclConsumer = eClassifierDeclConsumer;
 	}
 	
-	public void setQidConsumer(EcoreDslQIDConsumer qidConsumer) {
+	public void setQidConsumer(INonTerminalConsumer qidConsumer) {
 		this.qidConsumer = qidConsumer;
 	}
 	
-	public void setStringConsumer(XtextBuiltinSTRINGConsumer stringConsumer) {
+	public void setStringConsumer(ITerminalConsumer stringConsumer) {
 		this.stringConsumer = stringConsumer;
 	}
 	
-	public void setSubEPackageDeclConsumer(EcoreDslSubEPackageDeclConsumer subEPackageDeclConsumer) {
+	public void setSubEPackageDeclConsumer(INonTerminalConsumer subEPackageDeclConsumer) {
 		this.subEPackageDeclConsumer = subEPackageDeclConsumer;
 	}
 	

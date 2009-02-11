@@ -6,6 +6,7 @@ package org.eclipse.xtext.example.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -23,10 +24,10 @@ import org.eclipse.xtext.example.parser.packrat.consumers.EcoreDslSTRING_OR_QIDC
 @SuppressWarnings("unused")
 public final class EcoreDslEDataTypeDeclConsumer extends NonTerminalConsumer {
 
-	private EcoreDslEAnnotationDeclConsumer eAnnotationDeclConsumer;
-	private EcoreDslEEnumDeclConsumer eEnumDeclConsumer;
-	private XtextBuiltinIDConsumer idConsumer;
-	private EcoreDslSTRING_OR_QIDConsumer stringOrQidConsumer;
+	private INonTerminalConsumer eAnnotationDeclConsumer;
+	private INonTerminalConsumer eEnumDeclConsumer;
+	private ITerminalConsumer idConsumer;
+	private INonTerminalConsumer stringOrQidConsumer;
 
 	private ICharacterClass keyword$7$Delimiter;
 	
@@ -242,6 +243,7 @@ public final class EcoreDslEDataTypeDeclConsumer extends NonTerminalConsumer {
 		return EcoreDslGrammarAccess.INSTANCE.prEDataTypeDecl();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -251,19 +253,19 @@ public final class EcoreDslEDataTypeDeclConsumer extends NonTerminalConsumer {
 		return "EDataType";
 	}
 	
-	public void setEAnnotationDeclConsumer(EcoreDslEAnnotationDeclConsumer eAnnotationDeclConsumer) {
+	public void setEAnnotationDeclConsumer(INonTerminalConsumer eAnnotationDeclConsumer) {
 		this.eAnnotationDeclConsumer = eAnnotationDeclConsumer;
 	}
 	
-	public void setEEnumDeclConsumer(EcoreDslEEnumDeclConsumer eEnumDeclConsumer) {
+	public void setEEnumDeclConsumer(INonTerminalConsumer eEnumDeclConsumer) {
 		this.eEnumDeclConsumer = eEnumDeclConsumer;
 	}
 	
-	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
+	public void setIdConsumer(ITerminalConsumer idConsumer) {
 		this.idConsumer = idConsumer;
 	}
 	
-	public void setStringOrQidConsumer(EcoreDslSTRING_OR_QIDConsumer stringOrQidConsumer) {
+	public void setStringOrQidConsumer(INonTerminalConsumer stringOrQidConsumer) {
 		this.stringOrQidConsumer = stringOrQidConsumer;
 	}
 	

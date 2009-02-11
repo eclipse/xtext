@@ -6,6 +6,7 @@ package org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -21,8 +22,8 @@ import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerm
 @SuppressWarnings("unused")
 public final class XtextTerminalsTestLanguageReferencedMetamodelConsumer extends NonTerminalConsumer {
 
-	private XtextTerminalsTestLanguageIDConsumer idConsumer;
-	private XtextTerminalsTestLanguageSTRINGConsumer stringConsumer;
+	private ITerminalConsumer idConsumer;
+	private ITerminalConsumer stringConsumer;
 
 	private ISequenceMatcher crossReference$5$Delimiter;
 	
@@ -166,6 +167,7 @@ public final class XtextTerminalsTestLanguageReferencedMetamodelConsumer extends
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prReferencedMetamodel();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -175,11 +177,11 @@ public final class XtextTerminalsTestLanguageReferencedMetamodelConsumer extends
 		return "ReferencedMetamodel";
 	}
 	
-	public void setIdConsumer(XtextTerminalsTestLanguageIDConsumer idConsumer) {
+	public void setIdConsumer(ITerminalConsumer idConsumer) {
 		this.idConsumer = idConsumer;
 	}
 	
-	public void setStringConsumer(XtextTerminalsTestLanguageSTRINGConsumer stringConsumer) {
+	public void setStringConsumer(ITerminalConsumer stringConsumer) {
 		this.stringConsumer = stringConsumer;
 	}
 	

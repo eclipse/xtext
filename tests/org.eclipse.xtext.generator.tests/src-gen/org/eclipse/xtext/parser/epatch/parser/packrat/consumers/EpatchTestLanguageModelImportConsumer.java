@@ -6,6 +6,7 @@ package org.eclipse.xtext.parser.epatch.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -21,8 +22,8 @@ import org.eclipse.xtext.parser.epatch.parser.packrat.consumers.EpatchTestLangua
 @SuppressWarnings("unused")
 public final class EpatchTestLanguageModelImportConsumer extends NonTerminalConsumer {
 
-	private EpatchTestLanguageEPackageImportConsumer ePackageImportConsumer;
-	private EpatchTestLanguageResourceImportConsumer resourceImportConsumer;
+	private INonTerminalConsumer ePackageImportConsumer;
+	private INonTerminalConsumer resourceImportConsumer;
 
 	public EpatchTestLanguageModelImportConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
@@ -64,6 +65,7 @@ public final class EpatchTestLanguageModelImportConsumer extends NonTerminalCons
 		return EpatchTestLanguageGrammarAccess.INSTANCE.prModelImport();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -73,11 +75,11 @@ public final class EpatchTestLanguageModelImportConsumer extends NonTerminalCons
 		return "ModelImport";
 	}
 	
-	public void setEPackageImportConsumer(EpatchTestLanguageEPackageImportConsumer ePackageImportConsumer) {
+	public void setEPackageImportConsumer(INonTerminalConsumer ePackageImportConsumer) {
 		this.ePackageImportConsumer = ePackageImportConsumer;
 	}
 	
-	public void setResourceImportConsumer(EpatchTestLanguageResourceImportConsumer resourceImportConsumer) {
+	public void setResourceImportConsumer(INonTerminalConsumer resourceImportConsumer) {
 		this.resourceImportConsumer = resourceImportConsumer;
 	}
 	

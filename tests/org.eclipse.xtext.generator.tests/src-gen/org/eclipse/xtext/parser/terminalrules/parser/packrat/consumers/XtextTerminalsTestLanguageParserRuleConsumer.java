@@ -6,6 +6,7 @@ package org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -22,9 +23,9 @@ import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerm
 @SuppressWarnings("unused")
 public final class XtextTerminalsTestLanguageParserRuleConsumer extends NonTerminalConsumer {
 
-	private XtextTerminalsTestLanguageAlternativesConsumer alternativesConsumer;
-	private XtextTerminalsTestLanguageIDConsumer idConsumer;
-	private XtextTerminalsTestLanguageTypeRefConsumer typeRefConsumer;
+	private INonTerminalConsumer alternativesConsumer;
+	private ITerminalConsumer idConsumer;
+	private INonTerminalConsumer typeRefConsumer;
 
 	private ISequenceMatcher crossReference$20$Delimiter;
 	
@@ -425,6 +426,7 @@ public final class XtextTerminalsTestLanguageParserRuleConsumer extends NonTermi
 		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prParserRule();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -434,15 +436,15 @@ public final class XtextTerminalsTestLanguageParserRuleConsumer extends NonTermi
 		return "ParserRule";
 	}
 	
-	public void setAlternativesConsumer(XtextTerminalsTestLanguageAlternativesConsumer alternativesConsumer) {
+	public void setAlternativesConsumer(INonTerminalConsumer alternativesConsumer) {
 		this.alternativesConsumer = alternativesConsumer;
 	}
 	
-	public void setIdConsumer(XtextTerminalsTestLanguageIDConsumer idConsumer) {
+	public void setIdConsumer(ITerminalConsumer idConsumer) {
 		this.idConsumer = idConsumer;
 	}
 	
-	public void setTypeRefConsumer(XtextTerminalsTestLanguageTypeRefConsumer typeRefConsumer) {
+	public void setTypeRefConsumer(INonTerminalConsumer typeRefConsumer) {
 		this.typeRefConsumer = typeRefConsumer;
 	}
 	

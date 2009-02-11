@@ -1,0 +1,101 @@
+/*
+Generated with Xtext
+*/
+package org.eclipse.xtext.grammarinheritance.parser.packrat.consumers;
+
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
+import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
+import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
+
+import org.eclipse.xtext.grammarinheritance.services.ConcreteTestLanguageGrammarAccess;
+import org.eclipse.xtext.grammarinheritance.services.ConcreteTestLanguageGrammarAccess.ExtendableParserRuleElements;
+
+import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.ConcreteTestLanguageSubrule1Consumer;
+import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.ConcreteTestLanguageSubrule2Consumer;
+import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.ConcreteTestLanguageSubrule3Consumer;
+
+@SuppressWarnings("unused")
+public final class ConcreteTestLanguageExtendableParserRuleConsumer extends NonTerminalConsumer {
+
+	private INonTerminalConsumer subrule1Consumer;
+	private INonTerminalConsumer subrule2Consumer;
+	private INonTerminalConsumer subrule3Consumer;
+
+	public ConcreteTestLanguageExtendableParserRuleConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
+		super(configuration, hiddenTokens);
+	}
+	
+	@Override
+	protected int doConsume(int entryPoint) throws Exception {
+		return consumeAlternatives$1(entryPoint);
+	}
+
+	protected int consumeAlternatives$1(int entryPoint) throws Exception {
+		AlternativesResult result = createAlternativesResult();
+		switch(entryPoint) {
+			case -1: // use fall through semantics of switch case
+				result.reset();
+			case 0:
+				result.nextAlternative();
+				if (result.isAlternativeDone(consumeRuleCall$3(nextEntryPoint()))) { 
+					return result.getResult(); 
+				}
+			case 1:
+				result.nextAlternative();
+				if (result.isAlternativeDone(consumeRuleCall$4(nextEntryPoint()))) { 
+					return result.getResult(); 
+				}
+			case 2:
+				result.nextAlternative();
+				if (result.isAlternativeDone(consumeRuleCall$5(nextEntryPoint()))) { 
+					return result.getResult(); 
+				}
+		}
+		return result.getResult();
+	}
+
+	protected int consumeRuleCall$3(int entryPoint) throws Exception {
+		return consumeNonTerminal(subrule1Consumer, null, false, false, false, getRule().ele00ParserRuleCallSubrule1());
+	}
+
+	protected int consumeRuleCall$4(int entryPoint) throws Exception {
+		return consumeNonTerminal(subrule2Consumer, null, false, false, false, getRule().ele01ParserRuleCallSubrule2());
+	}
+
+	protected int consumeRuleCall$5(int entryPoint) throws Exception {
+		return consumeNonTerminal(subrule3Consumer, null, false, false, false, getRule().ele1ParserRuleCallSubrule3());
+	}
+
+	public ExtendableParserRuleElements getRule() {
+		return ConcreteTestLanguageGrammarAccess.INSTANCE.prExtendableParserRule();
+	}
+	
+	@Override
+	protected EObject getGrammarElement() {
+		return getRule().getRule();
+	}
+
+	@Override
+	protected String getDefaultTypeName() {
+		return "AType";
+	}
+	
+	public void setSubrule1Consumer(INonTerminalConsumer subrule1Consumer) {
+		this.subrule1Consumer = subrule1Consumer;
+	}
+	
+	public void setSubrule2Consumer(INonTerminalConsumer subrule2Consumer) {
+		this.subrule2Consumer = subrule2Consumer;
+	}
+	
+	public void setSubrule3Consumer(INonTerminalConsumer subrule3Consumer) {
+		this.subrule3Consumer = subrule3Consumer;
+	}
+	
+}

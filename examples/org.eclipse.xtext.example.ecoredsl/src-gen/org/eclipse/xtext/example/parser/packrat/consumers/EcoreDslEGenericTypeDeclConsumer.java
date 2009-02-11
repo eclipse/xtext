@@ -6,6 +6,7 @@ package org.eclipse.xtext.example.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -21,8 +22,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer
 @SuppressWarnings("unused")
 public final class EcoreDslEGenericTypeDeclConsumer extends NonTerminalConsumer {
 
-	private EcoreDslEGenericTypeDeclConsumer eGenericTypeDeclConsumer;
-	private XtextBuiltinIDConsumer idConsumer;
+	private INonTerminalConsumer eGenericTypeDeclConsumer;
+	private ITerminalConsumer idConsumer;
 
 	private ISequenceMatcher crossReference$5$Delimiter;
 	
@@ -473,6 +474,7 @@ public final class EcoreDslEGenericTypeDeclConsumer extends NonTerminalConsumer 
 		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeDecl();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -482,11 +484,11 @@ public final class EcoreDslEGenericTypeDeclConsumer extends NonTerminalConsumer 
 		return "EGenericType";
 	}
 	
-	public void setEGenericTypeDeclConsumer(EcoreDslEGenericTypeDeclConsumer eGenericTypeDeclConsumer) {
+	public void setEGenericTypeDeclConsumer(INonTerminalConsumer eGenericTypeDeclConsumer) {
 		this.eGenericTypeDeclConsumer = eGenericTypeDeclConsumer;
 	}
 	
-	public void setIdConsumer(XtextBuiltinIDConsumer idConsumer) {
+	public void setIdConsumer(ITerminalConsumer idConsumer) {
 		this.idConsumer = idConsumer;
 	}
 	

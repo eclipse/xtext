@@ -6,6 +6,7 @@ package org.eclipse.xtext.testlanguages.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -20,7 +21,7 @@ import org.eclipse.xtext.testlanguages.parser.packrat.consumers.LookaheadTestLan
 @SuppressWarnings("unused")
 public final class LookaheadTestLanguageLookAhead1Consumer extends NonTerminalConsumer {
 
-	private LookaheadTestLanguageLookAhead2Consumer lookAhead2Consumer;
+	private INonTerminalConsumer lookAhead2Consumer;
 
 	private ICharacterClass keyword$4$Delimiter;
 	
@@ -139,6 +140,7 @@ public final class LookaheadTestLanguageLookAhead1Consumer extends NonTerminalCo
 		return LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead1();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -148,7 +150,7 @@ public final class LookaheadTestLanguageLookAhead1Consumer extends NonTerminalCo
 		return "LookAhead1";
 	}
 	
-	public void setLookAhead2Consumer(LookaheadTestLanguageLookAhead2Consumer lookAhead2Consumer) {
+	public void setLookAhead2Consumer(INonTerminalConsumer lookAhead2Consumer) {
 		this.lookAhead2Consumer = lookAhead2Consumer;
 	}
 	

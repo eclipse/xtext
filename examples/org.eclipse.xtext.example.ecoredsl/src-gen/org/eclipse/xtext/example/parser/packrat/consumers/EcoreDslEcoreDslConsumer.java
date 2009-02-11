@@ -6,6 +6,7 @@ package org.eclipse.xtext.example.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
@@ -21,8 +22,8 @@ import org.eclipse.xtext.example.parser.packrat.consumers.EcoreDslImportStatemen
 @SuppressWarnings("unused")
 public final class EcoreDslEcoreDslConsumer extends NonTerminalConsumer {
 
-	private EcoreDslEPackageDeclConsumer ePackageDeclConsumer;
-	private EcoreDslImportStatementDeclConsumer importStatementDeclConsumer;
+	private INonTerminalConsumer ePackageDeclConsumer;
+	private INonTerminalConsumer importStatementDeclConsumer;
 
 	public EcoreDslEcoreDslConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
@@ -105,6 +106,7 @@ public final class EcoreDslEcoreDslConsumer extends NonTerminalConsumer {
 		return EcoreDslGrammarAccess.INSTANCE.prEcoreDsl();
 	}
 	
+	@Override
 	protected EObject getGrammarElement() {
 		return getRule().getRule();
 	}
@@ -114,11 +116,11 @@ public final class EcoreDslEcoreDslConsumer extends NonTerminalConsumer {
 		return "EcoreDsl";
 	}
 	
-	public void setEPackageDeclConsumer(EcoreDslEPackageDeclConsumer ePackageDeclConsumer) {
+	public void setEPackageDeclConsumer(INonTerminalConsumer ePackageDeclConsumer) {
 		this.ePackageDeclConsumer = ePackageDeclConsumer;
 	}
 	
-	public void setImportStatementDeclConsumer(EcoreDslImportStatementDeclConsumer importStatementDeclConsumer) {
+	public void setImportStatementDeclConsumer(INonTerminalConsumer importStatementDeclConsumer) {
 		this.importStatementDeclConsumer = importStatementDeclConsumer;
 	}
 	
