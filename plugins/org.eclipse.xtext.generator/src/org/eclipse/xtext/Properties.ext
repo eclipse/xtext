@@ -29,9 +29,6 @@ fileHeader() :
 grammar() :
 	genModel().grammar;
 	
-objectURI(emf::EObject object) :
-	object.containingGrammar().grammarResourceURI()+'#'+getFragment(object);
-
 grammarResourceURI(Grammar this) :
 	'classpath:/'+getClasspathRelativePathToXmi(this);
 	

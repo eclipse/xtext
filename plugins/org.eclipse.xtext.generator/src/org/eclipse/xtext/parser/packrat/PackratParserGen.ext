@@ -27,7 +27,13 @@ cached String globalDelimiterFieldName(AbstractElement this):
 			
 cached String consumerClassName(AbstractRule this):
 	JAVA org.eclipse.xtext.parser.packrat.PackratParserGenUtil.getConsumerClassName(org.eclipse.xtext.AbstractRule);
-	
+
+cached String consumerInterfaceName(AbstractRule this):
+	"ITerminalConsumer";
+
+cached String consumerInterfaceName(ParserRule this):
+	if (terminal) then "ITerminalConsumer" else "INonTerminalConsumer";
+			
 cached String consumerFieldName(AbstractRule this):
 	JAVA org.eclipse.xtext.parser.packrat.PackratParserGenUtil.getConsumerFieldName(org.eclipse.xtext.AbstractRule);
 

@@ -93,7 +93,7 @@ public class ParseTreeConstructorUtil {
 			return trim;
 		}
 		catch (Throwable e) {
-			log.warn(e.getMessage());
+			log.warn(e.getMessage() + " - " + e.getStackTrace()[0].getClassName());
 			log.debug("Error serializing grammar fragment.", e);
 			return "(error)";
 		}
