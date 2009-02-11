@@ -11,9 +11,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -65,7 +65,7 @@ public abstract class AbstractCachingScope extends AbstractNestedScope {
 
 	protected void initElements(SimpleAttributeResolver<String> resolver, Resource resource,
 			ScopedElementProducer producer) {
-		final TreeIterator<EObject> iterator = resource.getAllContents();
+		final Iterator<EObject> iterator = getRelevantContent(resource);
 		while (iterator.hasNext()) {
 			final EObject object = iterator.next();
 			if (EcoreUtil2.isAssignableFrom(type, object.eClass())) {
@@ -73,6 +73,10 @@ public abstract class AbstractCachingScope extends AbstractNestedScope {
 				producer.produce(value, object);
 			}
 		}
+	}
+	
+	protected Iterator<EObject> getRelevantContent(Resource resource) {
+		return resource.getAllContents();
 	}
 
 	protected String getNameFeature(EClass type) {

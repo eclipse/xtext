@@ -165,16 +165,16 @@ public class GrammarUtil {
 		return null;
 	}
 
-	public static List<AbstractRule> allRules(Grammar _this) {
+	public static List<AbstractRule> allRules(Grammar grammar) {
 		List<AbstractRule> result = new ArrayList<AbstractRule>();
 		Set<String> names = new HashSet<String>();
-		for (AbstractRule rule : _this.getRules()) {
+		for (AbstractRule rule : grammar.getRules()) {
 			if (names.add(rule.getName())) {
 				result.add(rule);
 			}
 		}
 
-		Grammar superGrammar = getSuperGrammar(_this);
+		Grammar superGrammar = getSuperGrammar(grammar);
 		if (superGrammar != null) {
 			List<AbstractRule> superParserRules = allRules(superGrammar);
 			for (AbstractRule r : superParserRules) {
