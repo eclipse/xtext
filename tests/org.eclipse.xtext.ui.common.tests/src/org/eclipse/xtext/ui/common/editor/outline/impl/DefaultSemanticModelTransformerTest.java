@@ -1,16 +1,16 @@
 package org.eclipse.xtext.ui.common.editor.outline.impl;
 
+import junit.framework.TestCase;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.xtext.XtextGrammarTestLanguageRuntimeModule;
-import org.eclipse.xtext.XtextGrammarTestLanguageUIModule;
-import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.ui.common.editor.outline.ISemanticModelTransformer;
+import org.eclipse.xtext.ui.core.DefaultLabelProvider;
+import org.eclipse.xtext.ui.core.DefaultLocationInFileProvider;
 
-public class DefaultSemanticModelTransformerTest extends AbstractXtextTests {
+public class DefaultSemanticModelTransformerTest extends TestCase {
 
 	private EObject root;
 	private EObject a1;
@@ -19,8 +19,6 @@ public class DefaultSemanticModelTransformerTest extends AbstractXtextTests {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		with(new XtextGrammarTestLanguageUIModule(), new XtextGrammarTestLanguageRuntimeModule());
-		
 		XtextResourceSet resourceSet = new XtextResourceSet();
 		resourceSet.setClasspathURIContext(getClass());
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(
@@ -33,19 +31,19 @@ public class DefaultSemanticModelTransformerTest extends AbstractXtextTests {
 		a2 = root.eContents().get(1);
 	}
 	
-	protected ISemanticModelTransformer getSemanticModelTransformer() {
-		return get(ISemanticModelTransformer.class);
+	protected DefaultSemanticModelTransformer getSemanticModelTransformer() {
+		return new DefaultSemanticModelTransformer(new DefaultLocationInFileProvider(), new DefaultLabelProvider());
 	}
 	
 	public void testNullSafety() {
-		DefaultSemanticModelTransformer transformer = (DefaultSemanticModelTransformer) getSemanticModelTransformer();
+		DefaultSemanticModelTransformer transformer = getSemanticModelTransformer();
 		assertFalse(transformer.consumeSemanticChildNodes(null));
 		assertFalse(transformer.consumeSemanticNode(null));
 		assertEquals("<unknown>", transformer.getText(null));
 	}
 
 	public void testGetText() {
-		DefaultSemanticModelTransformer transformer = (DefaultSemanticModelTransformer) getSemanticModelTransformer();
+		DefaultSemanticModelTransformer transformer = getSemanticModelTransformer();
 		String a1Text = transformer.getText(a1);
 		assertEquals("A1", a1Text);
 		String a2Text = transformer.getText(a2);

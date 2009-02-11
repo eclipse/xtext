@@ -11,11 +11,7 @@ package org.eclipse.xtext.ui.common.editor.outline.impl;
 import java.util.Arrays;
 import java.util.Comparator;
 
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
@@ -85,8 +81,12 @@ public abstract class AbstractSemanticModelTransformer implements ISemanticModel
 
 	protected abstract boolean consumeSemanticNode(EObject semanticNode);
 	
-	@Inject
 	protected ILabelProvider labelProvider;
+	
+	@Inject
+	public AbstractSemanticModelTransformer(ILabelProvider labelProvider) {
+		this.labelProvider = labelProvider;
+	}
 
 	public String getText(EObject object) {
 		return labelProvider.getText(object);
