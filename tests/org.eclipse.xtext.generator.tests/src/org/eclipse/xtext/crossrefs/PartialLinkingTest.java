@@ -14,8 +14,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.crossref.IScope;
 import org.eclipse.xtext.crossref.IScopeProvider;
-import org.eclipse.xtext.crossref.impl.DefaultScopeProvider;
 import org.eclipse.xtext.crossref.impl.DefaultLinkingService;
+import org.eclipse.xtext.crossref.impl.DefaultScopeProvider;
 import org.eclipse.xtext.crossref.internal.Linker;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
@@ -27,7 +27,7 @@ import org.eclipse.xtext.tests.AbstractGeneratorTest;
 public class PartialLinkingTest extends AbstractGeneratorTest implements IScopeProvider {
 
 	private boolean doFakeScope;
-	
+
 	private EObject context;
 
 	private EObject model;
@@ -40,17 +40,18 @@ public class PartialLinkingTest extends AbstractGeneratorTest implements IScopeP
 
 	private EReference reference;
 
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
 		scopeProvider = new DefaultScopeProvider();
-		modelAsText = 
-			"spielplatz 1 {\n" + 
-			"  kind( Bommel1 1)\n" + 
-			"  kind( Bommel2 2)\n" + 
+		modelAsText =
+			"spielplatz 1 {\n" +
+			"  kind( Bommel1 1)\n" +
+			"  kind( Bommel2 2)\n" +
 			"  kind( Bommel3 3)\n" +
-			"  erwachsener( Bob 4)\n" + 
-			"  erwachsener( Joe 5)\n" + 
+			"  erwachsener( Bob 4)\n" +
+			"  erwachsener( Joe 5)\n" +
 			"  familie( Familienname Bob Joe Bommel2 )\n" +
 			"}";
 		resource = getResourceFromString(modelAsText);
@@ -65,7 +66,7 @@ public class PartialLinkingTest extends AbstractGeneratorTest implements IScopeP
 		}
 		reference = (EReference) context.eClass().getEStructuralFeature("kinder");
 	}
-	
+
 	/**
 	 * We try to emulate a changed scope after a partial parsing so we mock the ScopeService.
 	 */
@@ -82,7 +83,7 @@ public class PartialLinkingTest extends AbstractGeneratorTest implements IScopeP
 		EList<EObject> content = (EList<EObject>) context.eGet(reference);
 		assertEquals(1, content.size());
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public void testPartialLinkingTwice() {
 		int idx = modelAsText.indexOf("Bommel2 2");
@@ -98,13 +99,13 @@ public class PartialLinkingTest extends AbstractGeneratorTest implements IScopeP
 		assertTrue(resource.getErrors().isEmpty());
 		int idx = modelAsText.indexOf("Bommel2 2");
 		resource.update(idx + 1, 1, "o");
-		doFakeScope = true;;
+		doFakeScope = true;
 		resource.update(idx + 1, 1, "o");
 		EList<EObject> content = (EList<EObject>) context.eGet(reference);
 		assertEquals(0, content.size());
 		assertEquals(1, resource.getErrors().size());
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public void testLinking() {
 		EList<EObject> content = (EList<EObject>) context.eGet(reference);
@@ -115,6 +116,7 @@ public class PartialLinkingTest extends AbstractGeneratorTest implements IScopeP
 		Linker linker = new Linker();
 		DefaultLinkingService linkingService = new DefaultLinkingService();
 		linkingService.setScopeProvider(this);
+		linkingService.setValueConverter(getValueConverterService());
 		linker.setLinkingService(linkingService);
 		resource.setLinker(linker);
 	}
