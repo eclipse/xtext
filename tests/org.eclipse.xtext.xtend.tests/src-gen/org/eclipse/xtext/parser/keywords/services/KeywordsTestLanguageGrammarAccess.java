@@ -4,14 +4,15 @@ Generated with Xtext
 
 package org.eclipse.xtext.parser.keywords.services;
 
+import com.google.inject.Singleton;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.BaseEPackageAccess;
-import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
 
+@Singleton
 public class KeywordsTestLanguageGrammarAccess extends BaseEPackageAccess implements IGrammarAccess {
 	
 	public class ModelElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(1);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Alternatives c0Alternatives = (Alternatives)cAlternatives.eContents().get(0);
 		private final Alternatives c00Alternatives = (Alternatives)c0Alternatives.eContents().get(0);
@@ -66,6 +67,13 @@ public class KeywordsTestLanguageGrammarAccess extends BaseEPackageAccess implem
 	private static final String KEYWORDSTESTLANGUAGE_GRAMMAR_CP_URI = "classpath:/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.xmi";
 	private static Grammar GRAMMAR = null;
 	private static ModelElements pModel;
+	private static LexerRule lID;
+	private static LexerRule lINT;
+	private static LexerRule lSTRING;
+	private static LexerRule lML_COMMENT;
+	private static LexerRule lSL_COMMENT;
+	private static LexerRule lWS;
+	private static LexerRule lANY_OTHER;
 
 	@SuppressWarnings("unused")
 	public synchronized Grammar getGrammar() {	
@@ -76,14 +84,45 @@ public class KeywordsTestLanguageGrammarAccess extends BaseEPackageAccess implem
 		}
 		return GRAMMAR;
 	}
-	
-	public XtextBuiltinGrammarAccess getSuperGrammar() {
-		return XtextBuiltinGrammarAccess.INSTANCE;
-	}
 
 	
 	// Model:   first?="foo\\bar"|second?="foo\\"|third?="\\bar"|forth?="\\";
 	public ModelElements prModel() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
+	} 
+
+	// lexer ID:   "(\'^\')?(\'a\'..\'z\'|\'A\'..\'Z\'|\'_\') (\'a\'..\'z\'|\'A\'..\'Z\'|\'_\'|\'0\'..\'9\')*";
+	public LexerRule lrID() {
+		return (lID != null) ? lID : (lID = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "ID"));
+	} 
+
+	// lexer INT returns EInt:   "(\'0\'..\'9\')+";
+	public LexerRule lrINT() {
+		return (lINT != null) ? lINT : (lINT = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "INT"));
+	} 
+
+	// lexer STRING:   "\n\t\t\t  \'\"\' ( \'\\\\\' (\'b\'|\'t\'|\'n\'|\'f\'|\'r\'|\'\\\"\'|\'\\\'\'|\'\\\\\') | ~(\'\\\\\'|\'\"\') )* \'\"\' | \n              \'\\\'\' ( \'\\\\\' (\'b\'|\'t\'|\'n\'|\'f\'|\'r\'|\'\\\"\'|\'\\\'\'|\'\\\\\') | ~(\'\\\\\'|\'\\\'\') )* \'\\\'\'\n              ";
+	public LexerRule lrSTRING() {
+		return (lSTRING != null) ? lSTRING : (lSTRING = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "STRING"));
+	} 
+
+	// lexer ML_COMMENT:   "\'/*\' ( options {greedy=false;} : . )* \'*/\'";
+	public LexerRule lrML_COMMENT() {
+		return (lML_COMMENT != null) ? lML_COMMENT : (lML_COMMENT = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "ML_COMMENT"));
+	} 
+
+	// lexer SL_COMMENT:   "\'//\' ~(\'\\n\'|\'\\r\')* (\'\\r\'? \'\\n\')?";
+	public LexerRule lrSL_COMMENT() {
+		return (lSL_COMMENT != null) ? lSL_COMMENT : (lSL_COMMENT = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "SL_COMMENT"));
+	} 
+
+	// lexer WS:   "(\' \'|\'\\t\'|\'\\r\'|\'\\n\')+";
+	public LexerRule lrWS() {
+		return (lWS != null) ? lWS : (lWS = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "WS"));
+	} 
+
+	// lexer ANY_OTHER:   ".";
+	public LexerRule lrANY_OTHER() {
+		return (lANY_OTHER != null) ? lANY_OTHER : (lANY_OTHER = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "ANY_OTHER"));
 	} 
 }

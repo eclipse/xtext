@@ -4,14 +4,15 @@ Generated with Xtext
 
 package org.eclipse.xtext.example.services;
 
+import com.google.inject.Singleton;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.BaseEPackageAccess;
-import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
 
+@Singleton
 public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGrammarAccess {
 	
 	public class FileElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(2);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "File");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment c0AssignmentImports = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall c00ParserRuleCallImport = (RuleCall)c0AssignmentImports.eContents().get(0);
@@ -38,7 +39,7 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 	}
 
 	public class ImportElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(3);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Import");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword c0KeywordImport = (Keyword)cGroup.eContents().get(0);
 		private final Assignment c1AssignmentImportURI = (Assignment)cGroup.eContents().get(1);
@@ -61,7 +62,7 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 	}
 
 	public class NamedElementElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(4);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NamedElement");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall c0ParserRuleCallPackage = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall c1ParserRuleCallType = (RuleCall)cAlternatives.eContents().get(1);
@@ -80,7 +81,7 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 	}
 
 	public class PackageElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(5);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Package");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
@@ -131,7 +132,7 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 	}
 
 	public class TypeElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(6);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Type");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall c0ParserRuleCallEntity = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall c1ParserRuleCallDataType = (RuleCall)cAlternatives.eContents().get(1);
@@ -150,7 +151,7 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 	}
 
 	public class DataTypeElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(7);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DataType");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword c0KeywordDatatype = (Keyword)cGroup.eContents().get(0);
 		private final Assignment c1AssignmentName = (Assignment)cGroup.eContents().get(1);
@@ -173,7 +174,7 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 	}
 
 	public class EntityElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(8);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Entity");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
@@ -244,7 +245,7 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 	}
 
 	public class FeatureElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(9);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Feature");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall c0ParserRuleCallStructuralFeature = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall c1ParserRuleCallOperation = (RuleCall)cAlternatives.eContents().get(1);
@@ -263,7 +264,7 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 	}
 
 	public class StructuralFeatureElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(10);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "StructuralFeature");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall c0ParserRuleCallAttribute = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall c1ParserRuleCallReference = (RuleCall)cAlternatives.eContents().get(1);
@@ -282,7 +283,7 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 	}
 
 	public class AttributeElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(11);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Attribute");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
@@ -325,7 +326,7 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 	}
 
 	public class ReferenceElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(12);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Reference");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
@@ -388,7 +389,7 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 	}
 
 	public class OperationElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(13);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Operation");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
@@ -479,7 +480,7 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 	}
 
 	public class ParameterElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(14);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Parameter");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment c0AssignmentName = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall c00LexerRuleCallID = (RuleCall)c0AssignmentName.eContents().get(0);
@@ -506,7 +507,7 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 	}
 
 	public class TypedElementElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(15);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TypedElement");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall c0ParserRuleCallFeature = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall c1ParserRuleCallParameter = (RuleCall)cAlternatives.eContents().get(1);
@@ -525,7 +526,7 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 	}
 
 	public class TypeRefElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(16);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TypeRef");
 		private final Assignment cAssignmentReferenced = (Assignment)rule.eContents().get(1);
 		private final CrossReference c0CrossReferenceEStringType = (CrossReference)cAssignmentReferenced.eContents().get(0);
 		
@@ -540,7 +541,7 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 	}
 
 	public class QualifiedNameElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(17);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "QualifiedName");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall c0LexerRuleCallID = (RuleCall)cGroup.eContents().get(0);
 		private final Group c1Group = (Group)cGroup.eContents().get(1);
@@ -586,6 +587,13 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 	private static TypedElementElements pTypedElement;
 	private static TypeRefElements pTypeRef;
 	private static QualifiedNameElements pQualifiedName;
+	private static LexerRule lID;
+	private static LexerRule lINT;
+	private static LexerRule lSTRING;
+	private static LexerRule lML_COMMENT;
+	private static LexerRule lSL_COMMENT;
+	private static LexerRule lWS;
+	private static LexerRule lANY_OTHER;
 
 	@SuppressWarnings("unused")
 	public synchronized Grammar getGrammar() {	
@@ -595,10 +603,6 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 			GRAMMAR = (Grammar) loadGrammarFile(DomainmodelGrammarAccess.class.getClassLoader(),DOMAINMODEL_GRAMMAR_CP_URI);
 		}
 		return GRAMMAR;
-	}
-	
-	public XtextBuiltinGrammarAccess getSuperGrammar() {
-		return XtextBuiltinGrammarAccess.INSTANCE;
 	}
 
 	
@@ -680,5 +684,40 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 	// QualifiedName returns EString:   ID ("." ID)*;
 	public QualifiedNameElements prQualifiedName() {
 		return (pQualifiedName != null) ? pQualifiedName : (pQualifiedName = new QualifiedNameElements());
+	} 
+
+	// lexer ID:   "(\'^\')?(\'a\'..\'z\'|\'A\'..\'Z\'|\'_\') (\'a\'..\'z\'|\'A\'..\'Z\'|\'_\'|\'0\'..\'9\')*";
+	public LexerRule lrID() {
+		return (lID != null) ? lID : (lID = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "ID"));
+	} 
+
+	// lexer INT returns EInt:   "(\'0\'..\'9\')+";
+	public LexerRule lrINT() {
+		return (lINT != null) ? lINT : (lINT = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "INT"));
+	} 
+
+	// lexer STRING:   "\n\t\t\t  \'\"\' ( \'\\\\\' (\'b\'|\'t\'|\'n\'|\'f\'|\'r\'|\'\\\"\'|\'\\\'\'|\'\\\\\') | ~(\'\\\\\'|\'\"\') )* \'\"\' | \n              \'\\\'\' ( \'\\\\\' (\'b\'|\'t\'|\'n\'|\'f\'|\'r\'|\'\\\"\'|\'\\\'\'|\'\\\\\') | ~(\'\\\\\'|\'\\\'\') )* \'\\\'\'\n              ";
+	public LexerRule lrSTRING() {
+		return (lSTRING != null) ? lSTRING : (lSTRING = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "STRING"));
+	} 
+
+	// lexer ML_COMMENT:   "\'/*\' ( options {greedy=false;} : . )* \'*/\'";
+	public LexerRule lrML_COMMENT() {
+		return (lML_COMMENT != null) ? lML_COMMENT : (lML_COMMENT = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "ML_COMMENT"));
+	} 
+
+	// lexer SL_COMMENT:   "\'//\' ~(\'\\n\'|\'\\r\')* (\'\\r\'? \'\\n\')?";
+	public LexerRule lrSL_COMMENT() {
+		return (lSL_COMMENT != null) ? lSL_COMMENT : (lSL_COMMENT = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "SL_COMMENT"));
+	} 
+
+	// lexer WS:   "(\' \'|\'\\t\'|\'\\r\'|\'\\n\')+";
+	public LexerRule lrWS() {
+		return (lWS != null) ? lWS : (lWS = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "WS"));
+	} 
+
+	// lexer ANY_OTHER:   ".";
+	public LexerRule lrANY_OTHER() {
+		return (lANY_OTHER != null) ? lANY_OTHER : (lANY_OTHER = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "ANY_OTHER"));
 	} 
 }

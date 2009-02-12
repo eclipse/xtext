@@ -4,13 +4,15 @@ Generated with Xtext
 
 package org.eclipse.xtext.parser.terminalrules.services;
 
+import com.google.inject.Singleton;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.BaseEPackageAccess;
 
+@Singleton
 public class TerminalRulesTestLanguageGrammarAccess extends BaseEPackageAccess implements IGrammarAccess {
 	
 	public class ModelElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(2);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Alternatives c0Alternatives = (Alternatives)cAlternatives.eContents().get(0);
 		private final Alternatives c00Alternatives = (Alternatives)c0Alternatives.eContents().get(0);
@@ -97,7 +99,7 @@ public class TerminalRulesTestLanguageGrammarAccess extends BaseEPackageAccess i
 	}
 
 	public class IDElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(3);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ID");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Keyword c00KeywordCircumflexAccent = (Keyword)c0Group.eContents().get(0);
@@ -204,7 +206,7 @@ public class TerminalRulesTestLanguageGrammarAccess extends BaseEPackageAccess i
 	}
 
 	public class INTElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(4);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "INT");
 		private final CharacterRange cCharacterRange = (CharacterRange)rule.eContents().get(1);
 		private final Keyword c0KeywordDigitZero = (Keyword)cCharacterRange.eContents().get(0);
 		private final Keyword c1KeywordDigitNine = (Keyword)cCharacterRange.eContents().get(1);
@@ -223,7 +225,7 @@ public class TerminalRulesTestLanguageGrammarAccess extends BaseEPackageAccess i
 	}
 
 	public class STRINGElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(5);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "STRING");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Group c0Group = (Group)cAlternatives.eContents().get(0);
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
@@ -442,7 +444,7 @@ public class TerminalRulesTestLanguageGrammarAccess extends BaseEPackageAccess i
 	}
 
 	public class ML_COMMENTElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(6);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ML_COMMENT");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword c0KeywordSolidusAsterisk = (Keyword)cGroup.eContents().get(0);
 		private final UpToToken c1UpToToken = (UpToToken)cGroup.eContents().get(1);
@@ -465,7 +467,7 @@ public class TerminalRulesTestLanguageGrammarAccess extends BaseEPackageAccess i
 	}
 
 	public class SL_COMMENTElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(7);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SL_COMMENT");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Keyword c00KeywordSolidusSolidus = (Keyword)c0Group.eContents().get(0);
@@ -512,7 +514,7 @@ public class TerminalRulesTestLanguageGrammarAccess extends BaseEPackageAccess i
 	}
 
 	public class WSElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(8);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "WS");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Alternatives c0Alternatives = (Alternatives)cAlternatives.eContents().get(0);
 		private final Alternatives c00Alternatives = (Alternatives)c0Alternatives.eContents().get(0);
@@ -547,7 +549,7 @@ public class TerminalRulesTestLanguageGrammarAccess extends BaseEPackageAccess i
 	}
 
 	public class ANY_OTHERElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(9);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ANY_OTHER");
 		private final Wildcard cWildcard = (Wildcard)rule.eContents().get(1);
 		
 		// terminal ANY_OTHER returns EString : . ;
@@ -578,10 +580,6 @@ public class TerminalRulesTestLanguageGrammarAccess extends BaseEPackageAccess i
 			GRAMMAR = (Grammar) loadGrammarFile(TerminalRulesTestLanguageGrammarAccess.class.getClassLoader(),TERMINALRULESTESTLANGUAGE_GRAMMAR_CP_URI);
 		}
 		return GRAMMAR;
-	}
-	
-	public IGrammarAccess getSuperGrammar() {
-		return null;		
 	}
 
 	

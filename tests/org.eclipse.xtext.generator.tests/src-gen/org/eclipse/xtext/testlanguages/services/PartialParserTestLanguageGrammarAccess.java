@@ -4,14 +4,15 @@ Generated with Xtext
 
 package org.eclipse.xtext.testlanguages.services;
 
+import com.google.inject.Singleton;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.BaseEPackageAccess;
-import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
 
+@Singleton
 public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess implements IGrammarAccess {
 	
 	public class ContainerElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(1);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Container");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
@@ -74,7 +75,7 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 	}
 
 	public class NestedElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(2);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Nested");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
@@ -113,7 +114,7 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 	}
 
 	public class ContentElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(3);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Content");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall c0ParserRuleCallChildren = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall c1ParserRuleCallAbstractChildren = (RuleCall)cAlternatives.eContents().get(1);
@@ -132,7 +133,7 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 	}
 
 	public class ChildrenElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(4);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Children");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
@@ -191,7 +192,7 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 	}
 
 	public class ChildElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(5);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Child");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
@@ -238,7 +239,7 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 	}
 
 	public class AbstractChildrenElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(6);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AbstractChildren");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
@@ -277,7 +278,7 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 	}
 
 	public class AbstractChildElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(7);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AbstractChild");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall c0ParserRuleCallFirstConcrete = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall c1ParserRuleCallSecondConcrete = (RuleCall)cAlternatives.eContents().get(1);
@@ -296,7 +297,7 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 	}
 
 	public class FirstConcreteElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(8);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FirstConcrete");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
@@ -355,7 +356,7 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 	}
 
 	public class SecondConcreteElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(9);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SecondConcrete");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
@@ -422,7 +423,7 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 	}
 
 	public class NamedElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(10);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Named");
 		private final Assignment cAssignmentName = (Assignment)rule.eContents().get(1);
 		private final RuleCall c0LexerRuleCallID = (RuleCall)cAssignmentName.eContents().get(0);
 		
@@ -450,6 +451,13 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 	private static FirstConcreteElements pFirstConcrete;
 	private static SecondConcreteElements pSecondConcrete;
 	private static NamedElements pNamed;
+	private static LexerRule lID;
+	private static LexerRule lINT;
+	private static LexerRule lSTRING;
+	private static LexerRule lML_COMMENT;
+	private static LexerRule lSL_COMMENT;
+	private static LexerRule lWS;
+	private static LexerRule lANY_OTHER;
 
 	@SuppressWarnings("unused")
 	public synchronized Grammar getGrammar() {	
@@ -459,10 +467,6 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 			GRAMMAR = (Grammar) loadGrammarFile(PartialParserTestLanguageGrammarAccess.class.getClassLoader(),PARTIALPARSERTESTLANGUAGE_GRAMMAR_CP_URI);
 		}
 		return GRAMMAR;
-	}
-	
-	public XtextBuiltinGrammarAccess getSuperGrammar() {
-		return XtextBuiltinGrammarAccess.INSTANCE;
 	}
 
 	
@@ -514,5 +518,40 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 	// Named:   name=ID;
 	public NamedElements prNamed() {
 		return (pNamed != null) ? pNamed : (pNamed = new NamedElements());
+	} 
+
+	// lexer ID:   "(\'^\')?(\'a\'..\'z\'|\'A\'..\'Z\'|\'_\') (\'a\'..\'z\'|\'A\'..\'Z\'|\'_\'|\'0\'..\'9\')*";
+	public LexerRule lrID() {
+		return (lID != null) ? lID : (lID = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "ID"));
+	} 
+
+	// lexer INT returns EInt:   "(\'0\'..\'9\')+";
+	public LexerRule lrINT() {
+		return (lINT != null) ? lINT : (lINT = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "INT"));
+	} 
+
+	// lexer STRING:   "\n\t\t\t  \'\"\' ( \'\\\\\' (\'b\'|\'t\'|\'n\'|\'f\'|\'r\'|\'\\\"\'|\'\\\'\'|\'\\\\\') | ~(\'\\\\\'|\'\"\') )* \'\"\' | \n              \'\\\'\' ( \'\\\\\' (\'b\'|\'t\'|\'n\'|\'f\'|\'r\'|\'\\\"\'|\'\\\'\'|\'\\\\\') | ~(\'\\\\\'|\'\\\'\') )* \'\\\'\'\n              ";
+	public LexerRule lrSTRING() {
+		return (lSTRING != null) ? lSTRING : (lSTRING = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "STRING"));
+	} 
+
+	// lexer ML_COMMENT:   "\'/*\' ( options {greedy=false;} : . )* \'*/\'";
+	public LexerRule lrML_COMMENT() {
+		return (lML_COMMENT != null) ? lML_COMMENT : (lML_COMMENT = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "ML_COMMENT"));
+	} 
+
+	// lexer SL_COMMENT:   "\'//\' ~(\'\\n\'|\'\\r\')* (\'\\r\'? \'\\n\')?";
+	public LexerRule lrSL_COMMENT() {
+		return (lSL_COMMENT != null) ? lSL_COMMENT : (lSL_COMMENT = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "SL_COMMENT"));
+	} 
+
+	// lexer WS:   "(\' \'|\'\\t\'|\'\\r\'|\'\\n\')+";
+	public LexerRule lrWS() {
+		return (lWS != null) ? lWS : (lWS = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "WS"));
+	} 
+
+	// lexer ANY_OTHER:   ".";
+	public LexerRule lrANY_OTHER() {
+		return (lANY_OTHER != null) ? lANY_OTHER : (lANY_OTHER = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "ANY_OTHER"));
 	} 
 }
