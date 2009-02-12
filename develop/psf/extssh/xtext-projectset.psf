@@ -21,7 +21,6 @@
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf.mwe/features/org.eclipse.emf.mwe.ui-feature,org.eclipse.emf.mwe.ui-feature"/>
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf.mwe/plugins/org.eclipse.emf.mwe.ui.editor,org.eclipse.emf.mwe.ui.editor"/>
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf.mwe/tests/org.eclipse.emf.mwe.ui.editor.tests,org.eclipse.emf.mwe.ui.editor.tests"/>
-<project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf.mwe/plugins/org.eclipse.emf.mwe.ui.newEditor,org.eclipse.emf.mwe.ui.newEditor"/>
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf.mwe/plugins/org.eclipse.emf.mwe.ui.simpleEditor,org.eclipse.emf.mwe.ui.simpleEditor"/>
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf.mwe/plugins/org.eclipse.emf.mwe.utils,org.eclipse.emf.mwe.utils"/>
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf.mwe/plugins/org.eclipse.emf.mwe.di,org.eclipse.emf.mwe.di"/>
@@ -190,7 +189,6 @@
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.emf.mwe.doc-feature" type="4"/>
 </workingSets>
 <workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" label="MWE UI" name="MWE UI">
-<item elementID="=org.eclipse.emf.mwe.ui.newEditor" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.emf.mwe.ui-feature" type="4"/>
 <item elementID="=org.eclipse.emf.mwe.ui.editor.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.emf.mwe.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
