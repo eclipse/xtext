@@ -11,11 +11,17 @@ generate XtextTerminalsTestLanguage "http://www.eclipse.org/2008/tmf/xtext/Xtext
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 Grammar:
-    (abstract?='abstract language' | 'language') idElements+=ID ('.' idElements+=ID)* ('extends' superGrammarIdElements+=ID ('.' superGrammarIdElements+=ID)*)?
+    (abstract?='abstract language' | 'language') 
+    	name=GrammarID
+    	('extends' superGrammar=[Grammar|GrammarID])?
+	(definesHiddenTokens?='hidden' '(' (hiddenTokens+=[AbstractRule] (',' hiddenTokens+=[AbstractRule])*)? ')')?
 	metamodelDeclarations+=AbstractMetamodelDeclaration* 
     (rules+=AbstractRule)+
 ;
 
+GrammarID returns EString:
+  ID ('.' ID)*;
+  
 AbstractRule : LexerRule | ParserRule | TerminalRule;
 
 AbstractMetamodelDeclaration :
@@ -131,7 +137,6 @@ Keyword :
 RuleCall :
    rule=[AbstractRule]
 ;
-
  
 terminal ID  		: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 terminal INT 		: ('0'..'9')+;
