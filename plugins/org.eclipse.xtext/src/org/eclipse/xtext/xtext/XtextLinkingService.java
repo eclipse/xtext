@@ -74,6 +74,8 @@ public class XtextLinkingService extends DefaultLinkingService {
 	private List<EObject> getSuperGrammar(Grammar grammar, AbstractNode node) {
 		try {
 			String grammarName = (String) valueConverterService.toValue("", "GrammarID", node);
+			if ("NULL".equals(grammarName))
+				return Collections.emptyList();
 			final ResourceSet resourceSet = grammar.eResource().getResourceSet();
 			final Resource resource = resourceSet.getResource(URI.createURI(
 					ClasspathUriUtil.CLASSPATH_SCHEME + ":/" + grammarName.replace('.', '/') + ".xtext"), true);
