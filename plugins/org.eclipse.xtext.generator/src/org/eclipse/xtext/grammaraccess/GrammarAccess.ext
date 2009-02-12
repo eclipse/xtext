@@ -13,6 +13,7 @@ import emf;
  */
 
 extension org::eclipse::xtext::GrammarUtil;
+extension org::eclipse::xtend::util::stdlib::io;
 
 // ******************************************************************************
 // ***  this API can be used by other templates to generate code             ****
@@ -143,7 +144,7 @@ String gaElementAccessor(AbstractElement ele):
  */	
 String gaRuleElementAccessor(AbstractElement ele):
 	ele.containingParserRule().gaRuleAccessor() + "." + ele.gaElementAccessor();
-	
+		
 /**
  * Returns the invokation of the element accessor method as full qualified Java statement.
  * Example: return FowlerDslTestLanguageGrammarAccess.INSTANCE.prStatemachine().ele1AssignmentStates()
