@@ -24,6 +24,9 @@
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf.mwe/plugins/org.eclipse.emf.mwe.ui.newEditor,org.eclipse.emf.mwe.ui.newEditor"/>
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf.mwe/plugins/org.eclipse.emf.mwe.ui.simpleEditor,org.eclipse.emf.mwe.ui.simpleEditor"/>
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf.mwe/plugins/org.eclipse.emf.mwe.utils,org.eclipse.emf.mwe.utils"/>
+<project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf.mwe/plugins/org.eclipse.emf.mwe.di,org.eclipse.emf.mwe.di"/>
+<project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf.mwe/tests/org.eclipse.emf.mwe.di.tests,org.eclipse.emf.mwe.di.tests"/>
+<project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf.mwe/plugins/org.eclipse.emf.mwe.di.ui,org.eclipse.emf.mwe.di.ui"/>
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.m2t/org.eclipse.xpand/plugins/org.eclipse.xpand,org.eclipse.xpand"/>
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.m2t/org.eclipse.xpand/features/org.eclipse.xpand-feature,org.eclipse.xpand-feature"/>
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.m2t/org.eclipse.xpand/doc/org.eclipse.xpand.doc,org.eclipse.xpand.doc"/>
@@ -190,6 +193,11 @@
 <item elementID="=org.eclipse.emf.mwe.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.emf.mwe.ui.editor" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.emf.mwe.ui.simpleEditor" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+</workingSets>
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" label="MWE (the new one)" name="MWE (the new one)">
+<item elementID="=org.eclipse.emf.mwe.di.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.emf.mwe.di.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.emf.mwe.di" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 </workingSets>
 <workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" label="MWE-Brian" name="MWE-Brian">
 <item elementID="=org.eclipse.emf.mwe.ewm.launcher.core" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
