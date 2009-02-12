@@ -30,15 +30,17 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
 import org.eclipse.xtext.conversion.ValueConverterException;
+import org.eclipse.xtext.testlanguages.services.ReferenceGrammarTestLanguageGrammarAccess;
 
 }
 
 @parser::members {
  
-    public InternalReferenceGrammarTestLanguageParser(TokenStream input, IAstFactory factory, Grammar g) {
-        this(input);
-        this.factory = factory;
-		grammar = g;
+ 	private ReferenceGrammarTestLanguageGrammarAccess grammarAccess;
+ 	
+    public InternalReferenceGrammarTestLanguageParser(TokenStream input, IAstFactory factory, ReferenceGrammarTestLanguageGrammarAccess grammarAccess) {
+        super(input, factory, grammarAccess.getGrammar());
+        this.grammarAccess = grammarAccess;
     }
     
     @Override
@@ -66,7 +68,7 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 
 // Entry rule entryRuleSpielplatz
 entryRuleSpielplatz returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#/0/@rules.0" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prSpielplatz().getRule(), currentNode); }
 	 iv_ruleSpielplatz=ruleSpielplatz 
 	 { $current=$iv_ruleSpielplatz.current; } 
 	 EOF 
@@ -80,13 +82,13 @@ ruleSpielplatz returns [EObject current=null]
     }:
 ((((('spielplatz' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#/0/@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prSpielplatz().ele00000KeywordSpielplatz(), null); 
     }
 (	
 	
 	    lv_groesse=RULE_INT
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#/0/@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "groesse"); 
+    createLeafNode(grammarAccess.prSpielplatz().ele000010LexerRuleCallINT(), "groesse"); 
     }
  
 	    {
@@ -106,7 +108,7 @@ ruleSpielplatz returns [EObject current=null]
 	
 	    lv_beschreibung=RULE_STRING
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#/0/@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "beschreibung"); 
+    createLeafNode(grammarAccess.prSpielplatz().ele00010LexerRuleCallSTRING(), "beschreibung"); 
     }
  
 	    {
@@ -124,13 +126,13 @@ ruleSpielplatz returns [EObject current=null]
 	
 )?)'{' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#/0/@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prSpielplatz().ele001KeywordLeftCurlyBracket(), null); 
     }
 )((((	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#/0/@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prSpielplatz().ele010000ParserRuleCallKind(), currentNode); 
 	    }
 	    lv_kinder=ruleKind 
 	    {
@@ -152,7 +154,7 @@ ruleSpielplatz returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#/0/@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prSpielplatz().ele010010ParserRuleCallErwachsener(), currentNode); 
 	    }
 	    lv_erzieher=ruleErwachsener 
 	    {
@@ -174,7 +176,7 @@ ruleSpielplatz returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#/0/@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prSpielplatz().ele01010ParserRuleCallSpielzeug(), currentNode); 
 	    }
 	    lv_spielzeuge=ruleSpielzeug 
 	    {
@@ -196,7 +198,7 @@ ruleSpielplatz returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#/0/@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prSpielplatz().ele0110ParserRuleCallFamilie(), currentNode); 
 	    }
 	    lv_familie=ruleFamilie 
 	    {
@@ -215,7 +217,7 @@ ruleSpielplatz returns [EObject current=null]
 	
 ))*)'}' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#/0/@rules.0/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prSpielplatz().ele1KeywordRightCurlyBracket(), null); 
     }
 )?;
 
@@ -229,7 +231,7 @@ ruleSpielplatz returns [EObject current=null]
 
 // Entry rule entryRuleKind
 entryRuleKind returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#/0/@rules.2" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prKind().getRule(), currentNode); }
 	 iv_ruleKind=ruleKind 
 	 { $current=$iv_ruleKind.current; } 
 	 EOF 
@@ -243,17 +245,17 @@ ruleKind returns [EObject current=null]
     }:
 (((('kind' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#/0/@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prKind().ele0000KeywordKind(), null); 
     }
 '(' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#/0/@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prKind().ele0001KeywordLeftParenthesis(), null); 
     }
 )(	
 	
 	    lv_name=RULE_ID
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#/0/@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+    createLeafNode(grammarAccess.prKind().ele0010LexerRuleCallID(), "name"); 
     }
  
 	    {
@@ -273,7 +275,7 @@ ruleKind returns [EObject current=null]
 	
 	    lv_age=RULE_INT
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#/0/@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "age"); 
+    createLeafNode(grammarAccess.prKind().ele010LexerRuleCallINT(), "age"); 
     }
  
 	    {
@@ -291,7 +293,7 @@ ruleKind returns [EObject current=null]
 	
 ))')' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#/0/@rules.2/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prKind().ele1KeywordRightParenthesis(), null); 
     }
 );
 
@@ -303,7 +305,7 @@ ruleKind returns [EObject current=null]
 
 // Entry rule entryRuleErwachsener
 entryRuleErwachsener returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#/0/@rules.3" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prErwachsener().getRule(), currentNode); }
 	 iv_ruleErwachsener=ruleErwachsener 
 	 { $current=$iv_ruleErwachsener.current; } 
 	 EOF 
@@ -317,17 +319,17 @@ ruleErwachsener returns [EObject current=null]
     }:
 (((('erwachsener' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prErwachsener().ele0000KeywordErwachsener(), null); 
     }
 '(' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prErwachsener().ele0001KeywordLeftParenthesis(), null); 
     }
 )(	
 	
 	    lv_name=RULE_ID
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+    createLeafNode(grammarAccess.prErwachsener().ele0010LexerRuleCallID(), "name"); 
     }
  
 	    {
@@ -347,7 +349,7 @@ ruleErwachsener returns [EObject current=null]
 	
 	    lv_age=RULE_INT
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "age"); 
+    createLeafNode(grammarAccess.prErwachsener().ele010LexerRuleCallINT(), "age"); 
     }
  
 	    {
@@ -365,7 +367,7 @@ ruleErwachsener returns [EObject current=null]
 	
 ))')' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#/0/@rules.3/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prErwachsener().ele1KeywordRightParenthesis(), null); 
     }
 );
 
@@ -377,7 +379,7 @@ ruleErwachsener returns [EObject current=null]
 
 // Entry rule entryRuleSpielzeug
 entryRuleSpielzeug returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#/0/@rules.4" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prSpielzeug().getRule(), currentNode); }
 	 iv_ruleSpielzeug=ruleSpielzeug 
 	 { $current=$iv_ruleSpielzeug.current; } 
 	 EOF 
@@ -391,17 +393,17 @@ ruleSpielzeug returns [EObject current=null]
     }:
 (((('spielzeug' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#/0/@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prSpielzeug().ele0000KeywordSpielzeug(), null); 
     }
 '(' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#/0/@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prSpielzeug().ele0001KeywordLeftParenthesis(), null); 
     }
 )(	
 	
 	    lv_name=RULE_ID
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#/0/@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+    createLeafNode(grammarAccess.prSpielzeug().ele0010LexerRuleCallID(), "name"); 
     }
  
 	    {
@@ -421,7 +423,7 @@ ruleSpielzeug returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#/0/@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prSpielzeug().ele010ParserRuleCallFarbe(), currentNode); 
 	    }
 	    lv_farbe=ruleFarbe 
 	    {
@@ -440,7 +442,7 @@ ruleSpielzeug returns [EObject current=null]
 	
 ))')' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#/0/@rules.4/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prSpielzeug().ele1KeywordRightParenthesis(), null); 
     }
 );
 
@@ -452,7 +454,7 @@ ruleSpielzeug returns [EObject current=null]
 
 // Entry rule entryRuleFarbe
 entryRuleFarbe returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#/0/@rules.5" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prFarbe().getRule(), currentNode); }
 	 iv_ruleFarbe=ruleFarbe 
 	 { $current=$iv_ruleFarbe.current; } 
 	 EOF 
@@ -466,22 +468,22 @@ ruleFarbe returns [EObject current=null]
     }:
 ((('ROT' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#/0/@rules.5/@alternatives/@groups.0/@groups.0/@groups.0" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prFarbe().ele000KeywordROT(), null); 
     }
 
     |'BLAU' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#/0/@rules.5/@alternatives/@groups.0/@groups.0/@groups.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prFarbe().ele001KeywordBLAU(), null); 
     }
 )
     |'GELB' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#/0/@rules.5/@alternatives/@groups.0/@groups.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prFarbe().ele01KeywordGELB(), null); 
     }
 )
     |'GR\u00DCN' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#/0/@rules.5/@alternatives/@groups.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prFarbe().ele1KeywordGRÜN(), null); 
     }
 );
 
@@ -493,7 +495,7 @@ ruleFarbe returns [EObject current=null]
 
 // Entry rule entryRuleFamilie
 entryRuleFamilie returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#/0/@rules.6" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prFamilie().getRule(), currentNode); }
 	 iv_ruleFamilie=ruleFamilie 
 	 { $current=$iv_ruleFamilie.current; } 
 	 EOF 
@@ -507,27 +509,27 @@ ruleFamilie returns [EObject current=null]
     }:
 ((((((('familie' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#/0/@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prFamilie().ele0000000KeywordFamilie(), null); 
     }
 '(' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#/0/@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prFamilie().ele0000001KeywordLeftParenthesis(), null); 
     }
 )(	
 	
 	    lv_name=(('keyword' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#/0/@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0/@groups.0" /* xtext::Keyword */, "name"); 
+        createLeafNode(grammarAccess.prFamilie().ele000001000KeywordKeyword(), "name"); 
     }
 
     |RULE_STRING
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#/0/@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0/@groups.1" /* xtext::RuleCall */, "name"); 
+    createLeafNode(grammarAccess.prFamilie().ele000001001LexerRuleCallSTRING(), "name"); 
     }
 )
     |RULE_ID
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#/0/@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.1" /* xtext::RuleCall */, "name"); 
+    createLeafNode(grammarAccess.prFamilie().ele00000101LexerRuleCallID(), "name"); 
     }
 ) 
 	    {
@@ -554,7 +556,7 @@ ruleFamilie returns [EObject current=null]
         }
 (
 	RULE_ID    { 
-    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#/0/@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "mutter"); 
+    createLeafNode(grammarAccess.prFamilie().ele000010CrossReferenceEStringErwachsener(), "mutter"); 
     }
 ) 
 	
@@ -569,7 +571,7 @@ ruleFamilie returns [EObject current=null]
         }
 (
 	RULE_ID    { 
-    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#/0/@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "vater"); 
+    createLeafNode(grammarAccess.prFamilie().ele00010CrossReferenceEStringErwachsener(), "vater"); 
     }
 ) 
 	
@@ -584,13 +586,13 @@ ruleFamilie returns [EObject current=null]
         }
 (
 	RULE_ID    { 
-    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#/0/@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "kinder"); 
+    createLeafNode(grammarAccess.prFamilie().ele0010CrossReferenceEStringKind(), "kinder"); 
     }
 ) 
 	
 ))(',' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#/0/@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prFamilie().ele010KeywordComma(), null); 
     }
 (	
 	
@@ -603,13 +605,13 @@ ruleFamilie returns [EObject current=null]
         }
 (
 	RULE_ID    { 
-    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#/0/@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "kinder"); 
+    createLeafNode(grammarAccess.prFamilie().ele0110CrossReferenceEStringKind(), "kinder"); 
     }
 ) 
 	
 ))*)')' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#/0/@rules.6/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prFamilie().ele1KeywordRightParenthesis(), null); 
     }
 );
 

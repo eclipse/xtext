@@ -14,10 +14,15 @@ import com.google.inject.Inject;
 import org.eclipse.xtext.crossrefs.parser.antlr.internal.InternalLangATestLanguageLexer;
 import org.eclipse.xtext.crossrefs.parser.antlr.internal.InternalLangATestLanguageParser;
 
+import org.eclipse.xtext.crossrefs.services.LangATestLanguageGrammarAccess;
+
 public class LangATestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
 	
 	@Inject 
     protected ITokenDefProvider antlrTokenDefProvider;
+	
+	@Inject
+	private LangATestLanguageGrammarAccess grammarAccess;
 	
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
@@ -25,14 +30,12 @@ public class LangATestLanguageParser extends org.eclipse.xtext.parser.antlr.Abst
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 		InternalLangATestLanguageParser parser = new InternalLangATestLanguageParser(
-				stream, getElementFactory(), grammarAccess.getGrammar());
+				stream, getElementFactory(), grammarAccess);
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());
 		try {
-			if(ruleName != null) {
+			if(ruleName != null)
 				return parser.parse(ruleName);
-			} else {
-				return parser.parse();
-			}
+			return parser.parse();
 		} catch (Exception re) {
 			throw new ParseException(re.getMessage(),re);
 		}
@@ -41,5 +44,13 @@ public class LangATestLanguageParser extends org.eclipse.xtext.parser.antlr.Abst
 	@Override 
 	protected String getDefaultRuleName() {
 		return "Main";
+	}
+	
+	public LangATestLanguageGrammarAccess getGrammarAccess() {
+		return this.grammarAccess;
+	}
+	
+	public void setGrammarAccess(LangATestLanguageGrammarAccess grammarAccess) {
+		this.grammarAccess = grammarAccess;
 	}
 }

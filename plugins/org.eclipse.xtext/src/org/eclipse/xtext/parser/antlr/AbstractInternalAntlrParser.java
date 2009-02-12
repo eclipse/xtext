@@ -24,12 +24,11 @@ import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenStream;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParseResult;
@@ -45,21 +44,33 @@ import org.eclipse.xtext.parsetree.SyntaxError;
 import org.eclipse.xtext.util.MultiMap;
 import org.eclipse.xtext.util.Strings;
 
+/**
+ * TODO Javadoc
+ */
 public abstract class AbstractInternalAntlrParser extends Parser {
 
 	protected CompositeNode currentNode;
-
-	protected org.eclipse.xtext.Grammar grammar;
 
 	protected IAstFactory factory;
 
 	protected int lastConsumedIndex = -1;
 
-	private MultiMap<Token, CompositeNode> deferredLookaheadMap = new MultiMap<Token, CompositeNode>();
-	private Map<Token, LeafNode> token2NodeMap = new HashMap<Token, LeafNode>();
+	private final Map<String, AbstractRule> allRules;
+
+	private final MultiMap<Token, CompositeNode> deferredLookaheadMap = new MultiMap<Token, CompositeNode>();
+	private final Map<Token, LeafNode> token2NodeMap = new HashMap<Token, LeafNode>();
 
 	protected AbstractInternalAntlrParser(TokenStream input) {
 		super(input);
+		allRules = new HashMap<String, AbstractRule>();
+	}
+
+	protected AbstractInternalAntlrParser(TokenStream input, IAstFactory factory, Grammar grammar) {
+		this(input);
+		this.factory = factory;
+		for (AbstractRule rule: GrammarUtil.allRules(grammar)) {
+			allRules.put(rule.getName(), rule);
+		}
 	}
 
 	public TokenStream getInput() {
@@ -85,7 +96,7 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 		}
 	}
 
-	protected Object createLeafNode(String grammarElementID, String feature) {
+	protected Object createLeafNode(EObject grammarElement, String feature) {
 		Token token = input.LT(-1);
 		if (token != null && token.getTokenIndex() > lastConsumedIndex) {
 			int indexOfTokenBefore = lastConsumedIndex;
@@ -97,19 +108,13 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 				}
 			}
 			LeafNode leafNode = createLeafNode(token, false);
-			leafNode.setGrammarElement(getGrammarElement(grammarElementID));
+			leafNode.setGrammarElement(grammarElement);
 			leafNode.setFeature(feature);
 			lastConsumedIndex = token.getTokenIndex();
 			tokenConsumed(token, leafNode);
 			return leafNode;
 		}
 		return null;
-	}
-
-	private EObject getGrammarElement(String grammarElementID) {
-		URI uri = URI.createURI(grammarElementID);
-//		URI resolved = new ClassloaderClasspathUriResolver().resolve(getClass().getClassLoader(), uri);
-		return grammar.eResource().getResourceSet().getEObject(uri, true);
 	}
 
 	private Map<Integer, String> antlrTypeToLexerName = null;
@@ -126,18 +131,16 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 
 	protected void setLexerRule(LeafNode leafNode, Token hidden) {
 		String ruleName = antlrTypeToLexerName.get(hidden.getType());
-		AbstractRule rule = GrammarUtil.findRuleForName(grammar, ruleName);
-		if (rule instanceof LexerRule) {
+		AbstractRule rule = allRules.get(ruleName);
+		if (rule != null)
 			leafNode.setGrammarElement(rule);
-		}
 	}
 
-	protected CompositeNode createCompositeNode(String grammarElementID, CompositeNode parentNode) {
+	protected CompositeNode createCompositeNode(EObject grammarElement, CompositeNode parentNode) {
 		CompositeNode compositeNode = ParsetreeFactory.eINSTANCE.createCompositeNode();
 		if (parentNode != null)
 			parentNode.getChildren().add(compositeNode);
-		EObject grammarEle = getGrammarElement(grammarElementID);
-		compositeNode.setGrammarElement(grammarEle);
+		compositeNode.setGrammarElement(grammarElement);
 		return compositeNode;
 	}
 
@@ -232,7 +235,7 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 			currentError = getErrorMessage(re, getTokenNames());
 		super.recover(input, re);
 	}
-	
+
 	protected void handleValueConverterException(ValueConverterException vce) {
 		Exception cause = (Exception) vce.getCause();
 		if (vce != cause) {
@@ -323,7 +326,7 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 	/**
 	 * The current lookahead is the number of tokens that have been matched by
 	 * the parent rule to decide that the current rule has to be called.
-	 * 
+	 *
 	 * @return the currentLookahead
 	 */
 	protected void setCurrentLookahead() {
@@ -366,7 +369,7 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 	 * Match is called to consume unambiguous tokens. It calls input.LA() and
 	 * therefore increases the currentLookahead. We need to compensate. See
 	 * {@link AbstractInternalAntlrParser#setCurrentLookahead()}
-	 * 
+	 *
 	 * @see org.antlr.runtime.BaseRecognizer#match(org.antlr.runtime.IntStream,
 	 *      int, org.antlr.runtime.BitSet)
 	 */

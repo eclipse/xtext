@@ -30,15 +30,17 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
 import org.eclipse.xtext.conversion.ValueConverterException;
+import org.eclipse.xtext.testlanguages.services.LookaheadTestLanguageGrammarAccess;
 
 }
 
 @parser::members {
  
-    public InternalLookaheadTestLanguageParser(TokenStream input, IAstFactory factory, Grammar g) {
-        this(input);
-        this.factory = factory;
-		grammar = g;
+ 	private LookaheadTestLanguageGrammarAccess grammarAccess;
+ 	
+    public InternalLookaheadTestLanguageParser(TokenStream input, IAstFactory factory, LookaheadTestLanguageGrammarAccess grammarAccess) {
+        super(input, factory, grammarAccess.getGrammar());
+        this.grammarAccess = grammarAccess;
     }
     
     @Override
@@ -66,7 +68,7 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 
 // Entry rule entryRuleEntry
 entryRuleEntry returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.0" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prEntry().getRule(), currentNode); }
 	 iv_ruleEntry=ruleEntry 
 	 { $current=$iv_ruleEntry.current; } 
 	 EOF 
@@ -82,7 +84,7 @@ ruleEntry returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prEntry().ele0ParserRuleCallAlts(), currentNode); 
 	    }
 	    lv_contents=ruleAlts 
 	    {
@@ -109,7 +111,7 @@ ruleEntry returns [EObject current=null]
 
 // Entry rule entryRuleAlts
 entryRuleAlts returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.1" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prAlts().getRule(), currentNode); }
 	 iv_ruleAlts=ruleAlts 
 	 { $current=$iv_ruleAlts.current; } 
 	 EOF 
@@ -123,7 +125,7 @@ ruleAlts returns [EObject current=null]
     }:
 ((
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.1/@alternatives/@groups.0/@groups.0" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode(grammarAccess.prAlts().ele00ParserRuleCallLookAhead0(), currentNode); 
     }
     this_LookAhead0=ruleLookAhead0
     { 
@@ -133,7 +135,7 @@ ruleAlts returns [EObject current=null]
 
     |
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.1/@alternatives/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode(grammarAccess.prAlts().ele01ParserRuleCallLookAhead1(), currentNode); 
     }
     this_LookAhead1=ruleLookAhead1
     { 
@@ -143,7 +145,7 @@ ruleAlts returns [EObject current=null]
 )
     |
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.1/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode(grammarAccess.prAlts().ele1ParserRuleCallLookAhead3(), currentNode); 
     }
     this_LookAhead3=ruleLookAhead3
     { 
@@ -160,7 +162,7 @@ ruleAlts returns [EObject current=null]
 
 // Entry rule entryRuleLookAhead0
 entryRuleLookAhead0 returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.2" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prLookAhead0().getRule(), currentNode); }
 	 iv_ruleLookAhead0=ruleLookAhead0 
 	 { $current=$iv_ruleLookAhead0.current; } 
 	 EOF 
@@ -174,13 +176,13 @@ ruleLookAhead0 returns [EObject current=null]
     }:
 ('bar' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.2/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prLookAhead0().ele0KeywordBar(), null); 
     }
 (	
 	
 	    lv_x='a' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.2/@alternatives/@abstractTokens.1/@terminal" /* xtext::Keyword */, "x"); 
+        createLeafNode(grammarAccess.prLookAhead0().ele10KeywordA(), "x"); 
     }
  
 	    {
@@ -206,7 +208,7 @@ ruleLookAhead0 returns [EObject current=null]
 
 // Entry rule entryRuleLookAhead1
 entryRuleLookAhead1 returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.3" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prLookAhead1().getRule(), currentNode); }
 	 iv_ruleLookAhead1=ruleLookAhead1 
 	 { $current=$iv_ruleLookAhead1.current; } 
 	 EOF 
@@ -220,13 +222,13 @@ ruleLookAhead1 returns [EObject current=null]
     }:
 ((('foo' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prLookAhead1().ele000KeywordFoo(), null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prLookAhead1().ele0010ParserRuleCallLookAhead2(), currentNode); 
 	    }
 	    lv_y=ruleLookAhead2 
 	    {
@@ -247,7 +249,7 @@ ruleLookAhead1 returns [EObject current=null]
 	
 	    lv_x='b' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::Keyword */, "x"); 
+        createLeafNode(grammarAccess.prLookAhead1().ele010KeywordB(), "x"); 
     }
  
 	    {
@@ -267,7 +269,7 @@ ruleLookAhead1 returns [EObject current=null]
 	
 	    lv_x='d' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.3/@alternatives/@abstractTokens.1/@terminal" /* xtext::Keyword */, "x"); 
+        createLeafNode(grammarAccess.prLookAhead1().ele10KeywordD(), "x"); 
     }
  
 	    {
@@ -293,7 +295,7 @@ ruleLookAhead1 returns [EObject current=null]
 
 // Entry rule entryRuleLookAhead2
 entryRuleLookAhead2 returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.4" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prLookAhead2().getRule(), currentNode); }
 	 iv_ruleLookAhead2=ruleLookAhead2 
 	 { $current=$iv_ruleLookAhead2.current; } 
 	 EOF 
@@ -309,7 +311,7 @@ ruleLookAhead2 returns [EObject current=null]
 	
 	    lv_z='foo' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.4/@alternatives/@abstractTokens.0/@groups.0/@terminal" /* xtext::Keyword */, "z"); 
+        createLeafNode(grammarAccess.prLookAhead2().ele000KeywordFoo(), "z"); 
     }
  
 	    {
@@ -330,7 +332,7 @@ ruleLookAhead2 returns [EObject current=null]
 	
 	    lv_z='bar' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.4/@alternatives/@abstractTokens.0/@groups.1/@terminal" /* xtext::Keyword */, "z"); 
+        createLeafNode(grammarAccess.prLookAhead2().ele010KeywordBar(), "z"); 
     }
  
 	    {
@@ -348,7 +350,7 @@ ruleLookAhead2 returns [EObject current=null]
 	
 ))'c' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.4/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prLookAhead2().ele1KeywordC(), null); 
     }
 );
 
@@ -360,7 +362,7 @@ ruleLookAhead2 returns [EObject current=null]
 
 // Entry rule entryRuleLookAhead3
 entryRuleLookAhead3 returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.5" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prLookAhead3().getRule(), currentNode); }
 	 iv_ruleLookAhead3=ruleLookAhead3 
 	 { $current=$iv_ruleLookAhead3.current; } 
 	 EOF 
@@ -374,17 +376,17 @@ ruleLookAhead3 returns [EObject current=null]
     }:
 ((('foo' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prLookAhead3().ele000KeywordFoo(), null); 
     }
 'bar' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prLookAhead3().ele001KeywordBar(), null); 
     }
 )(	
 	
 	    lv_x='b' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::Keyword */, "x"); 
+        createLeafNode(grammarAccess.prLookAhead3().ele010KeywordB(), "x"); 
     }
  
 	    {
@@ -404,7 +406,7 @@ ruleLookAhead3 returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.5/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prLookAhead3().ele10ParserRuleCallLookAhead4(), currentNode); 
 	    }
 	    lv_z=ruleLookAhead4 
 	    {
@@ -431,7 +433,7 @@ ruleLookAhead3 returns [EObject current=null]
 
 // Entry rule entryRuleLookAhead4
 entryRuleLookAhead4 returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.6" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prLookAhead4().getRule(), currentNode); }
 	 iv_ruleLookAhead4=ruleLookAhead4 
 	 { $current=$iv_ruleLookAhead4.current; } 
 	 EOF 
@@ -447,7 +449,7 @@ ruleLookAhead4 returns [EObject current=null]
 	
 	    lv_x='c' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.6/@alternatives/@groups.0/@terminal" /* xtext::Keyword */, "x"); 
+        createLeafNode(grammarAccess.prLookAhead4().ele00KeywordC(), "x"); 
     }
  
 	    {
@@ -468,7 +470,7 @@ ruleLookAhead4 returns [EObject current=null]
 	
 	    lv_x='d' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#/0/@rules.6/@alternatives/@groups.1/@terminal" /* xtext::Keyword */, "x"); 
+        createLeafNode(grammarAccess.prLookAhead4().ele10KeywordD(), "x"); 
     }
  
 	    {

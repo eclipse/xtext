@@ -14,10 +14,15 @@ import com.google.inject.Inject;
 import org.eclipse.xtext.parsetree.transientvalues.parser.antlr.internal.InternalTransientValuesTestLexer;
 import org.eclipse.xtext.parsetree.transientvalues.parser.antlr.internal.InternalTransientValuesTestParser;
 
+import org.eclipse.xtext.parsetree.transientvalues.services.TransientValuesTestGrammarAccess;
+
 public class TransientValuesTestParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
 	
 	@Inject 
     protected ITokenDefProvider antlrTokenDefProvider;
+	
+	@Inject
+	private TransientValuesTestGrammarAccess grammarAccess;
 	
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
@@ -25,14 +30,12 @@ public class TransientValuesTestParser extends org.eclipse.xtext.parser.antlr.Ab
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 		InternalTransientValuesTestParser parser = new InternalTransientValuesTestParser(
-				stream, getElementFactory(), grammarAccess.getGrammar());
+				stream, getElementFactory(), grammarAccess);
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());
 		try {
-			if(ruleName != null) {
+			if(ruleName != null)
 				return parser.parse(ruleName);
-			} else {
-				return parser.parse();
-			}
+			return parser.parse();
 		} catch (Exception re) {
 			throw new ParseException(re.getMessage(),re);
 		}
@@ -41,5 +44,13 @@ public class TransientValuesTestParser extends org.eclipse.xtext.parser.antlr.Ab
 	@Override 
 	protected String getDefaultRuleName() {
 		return "Root";
+	}
+	
+	public TransientValuesTestGrammarAccess getGrammarAccess() {
+		return this.grammarAccess;
+	}
+	
+	public void setGrammarAccess(TransientValuesTestGrammarAccess grammarAccess) {
+		this.grammarAccess = grammarAccess;
 	}
 }

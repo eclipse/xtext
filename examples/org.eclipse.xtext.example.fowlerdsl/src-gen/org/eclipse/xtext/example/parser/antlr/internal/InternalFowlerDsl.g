@@ -30,15 +30,17 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
 import org.eclipse.xtext.conversion.ValueConverterException;
+import org.eclipse.xtext.example.services.FowlerDslGrammarAccess;
 
 }
 
 @parser::members {
  
-    public InternalFowlerDslParser(TokenStream input, IAstFactory factory, Grammar g) {
-        this(input);
-        this.factory = factory;
-		grammar = g;
+ 	private FowlerDslGrammarAccess grammarAccess;
+ 	
+    public InternalFowlerDslParser(TokenStream input, IAstFactory factory, FowlerDslGrammarAccess grammarAccess) {
+        super(input, factory, grammarAccess.getGrammar());
+        this.grammarAccess = grammarAccess;
     }
     
     @Override
@@ -66,7 +68,7 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 
 // Entry rule entryRuleStatemachine
 entryRuleStatemachine returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.0" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prStatemachine().getRule(), currentNode); }
 	 iv_ruleStatemachine=ruleStatemachine 
 	 { $current=$iv_ruleStatemachine.current; } 
 	 EOF 
@@ -80,13 +82,13 @@ ruleStatemachine returns [EObject current=null]
     }:
 (((((('events' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prStatemachine().ele000000KeywordEvents(), null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prStatemachine().ele0000010ParserRuleCallEvent(), currentNode); 
 	    }
 	    lv_events=ruleEvent 
 	    {
@@ -105,17 +107,17 @@ ruleStatemachine returns [EObject current=null]
 	
 )*)'end' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prStatemachine().ele00001KeywordEnd(), null); 
     }
 )'commands' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prStatemachine().ele0001KeywordCommands(), null); 
     }
 )(	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prStatemachine().ele0010ParserRuleCallCommand(), currentNode); 
 	    }
 	    lv_commands=ruleCommand 
 	    {
@@ -134,13 +136,13 @@ ruleStatemachine returns [EObject current=null]
 	
 )*)'end' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prStatemachine().ele01KeywordEnd(), null); 
     }
 )(	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.0/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prStatemachine().ele10ParserRuleCallState(), currentNode); 
 	    }
 	    lv_states=ruleState 
 	    {
@@ -167,7 +169,7 @@ ruleStatemachine returns [EObject current=null]
 
 // Entry rule entryRuleEvent
 entryRuleEvent returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.1" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prEvent().getRule(), currentNode); }
 	 iv_ruleEvent=ruleEvent 
 	 { $current=$iv_ruleEvent.current; } 
 	 EOF 
@@ -183,7 +185,7 @@ ruleEvent returns [EObject current=null]
 	
 	    lv_resetting='resetting' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::Keyword */, "resetting"); 
+        createLeafNode(grammarAccess.prEvent().ele000KeywordResetting(), "resetting"); 
     }
  
 	    {
@@ -203,7 +205,7 @@ ruleEvent returns [EObject current=null]
 	
 	    lv_name=RULE_ID
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+    createLeafNode(grammarAccess.prEvent().ele010LexerRuleCallID(), "name"); 
     }
  
 	    {
@@ -223,7 +225,7 @@ ruleEvent returns [EObject current=null]
 	
 	    lv_code=RULE_ID
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.1/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "code"); 
+    createLeafNode(grammarAccess.prEvent().ele10LexerRuleCallID(), "code"); 
     }
  
 	    {
@@ -249,7 +251,7 @@ ruleEvent returns [EObject current=null]
 
 // Entry rule entryRuleCommand
 entryRuleCommand returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.2" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prCommand().getRule(), currentNode); }
 	 iv_ruleCommand=ruleCommand 
 	 { $current=$iv_ruleCommand.current; } 
 	 EOF 
@@ -265,7 +267,7 @@ ruleCommand returns [EObject current=null]
 	
 	    lv_name=RULE_ID
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.2/@alternatives/@abstractTokens.0/@terminal" /* xtext::RuleCall */, "name"); 
+    createLeafNode(grammarAccess.prCommand().ele00LexerRuleCallID(), "name"); 
     }
  
 	    {
@@ -285,7 +287,7 @@ ruleCommand returns [EObject current=null]
 	
 	    lv_code=RULE_ID
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.2/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "code"); 
+    createLeafNode(grammarAccess.prCommand().ele10LexerRuleCallID(), "code"); 
     }
  
 	    {
@@ -311,7 +313,7 @@ ruleCommand returns [EObject current=null]
 
 // Entry rule entryRuleState
 entryRuleState returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.3" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prState().getRule(), currentNode); }
 	 iv_ruleState=ruleState 
 	 { $current=$iv_ruleState.current; } 
 	 EOF 
@@ -325,13 +327,13 @@ ruleState returns [EObject current=null]
     }:
 (((('state' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prState().ele0000KeywordState(), null); 
     }
 (	
 	
 	    lv_name=RULE_ID
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+    createLeafNode(grammarAccess.prState().ele00010LexerRuleCallID(), "name"); 
     }
  
 	    {
@@ -349,11 +351,11 @@ ruleState returns [EObject current=null]
 	
 ))((('actions' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prState().ele001000KeywordActions(), null); 
     }
 '{' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prState().ele001001KeywordLeftCurlyBracket(), null); 
     }
 )(	
 	
@@ -366,19 +368,19 @@ ruleState returns [EObject current=null]
         }
 (
 	RULE_ID    { 
-    createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "actions"); 
+    createLeafNode(grammarAccess.prState().ele001010CrossReferenceEStringCommand(), "actions"); 
     }
 ) 
 	
 )+)'}' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prState().ele0011KeywordRightCurlyBracket(), null); 
     }
 )?)(	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prState().ele010ParserRuleCallTransition(), currentNode); 
 	    }
 	    lv_transitions=ruleTransition 
 	    {
@@ -397,7 +399,7 @@ ruleState returns [EObject current=null]
 	
 )*)'end' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.3/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prState().ele1KeywordEnd(), null); 
     }
 );
 
@@ -409,7 +411,7 @@ ruleState returns [EObject current=null]
 
 // Entry rule entryRuleTransition
 entryRuleTransition returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.4" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prTransition().getRule(), currentNode); }
 	 iv_ruleTransition=ruleTransition 
 	 { $current=$iv_ruleTransition.current; } 
 	 EOF 
@@ -432,13 +434,13 @@ ruleTransition returns [EObject current=null]
         }
 (
 	RULE_ID    { 
-    createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::CrossReference */, "event"); 
+    createLeafNode(grammarAccess.prTransition().ele000CrossReferenceEStringEvent(), "event"); 
     }
 ) 
 	
 )'=>' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prTransition().ele01KeywordEqualsSignGreaterThanSign(), null); 
     }
 )(	
 	
@@ -451,7 +453,7 @@ ruleTransition returns [EObject current=null]
         }
 (
 	RULE_ID    { 
-    createLeafNode("classpath:/org/eclipse/xtext/example/FowlerDsl.xmi#/0/@rules.4/@alternatives/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "state"); 
+    createLeafNode(grammarAccess.prTransition().ele10CrossReferenceEStringState(), "state"); 
     }
 ) 
 	

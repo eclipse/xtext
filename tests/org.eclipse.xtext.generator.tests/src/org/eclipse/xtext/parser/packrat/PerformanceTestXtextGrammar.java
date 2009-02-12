@@ -19,14 +19,15 @@ import org.eclipse.xtext.util.StringInputStream;
  */
 public class PerformanceTestXtextGrammar extends AbstractGeneratorTest {
 
-	private int iterations = 20;
-	
+	private final int iterations = 20;
+
 	private String model;
 
 	private StringInputStream modelAsStream;
-	
+
 	private XtextTerminalsTestLanguagePackratParser packratParser;
-	
+
+	@Override
 	protected void setUp() throws Exception {
 		with(XtextTerminalsTestLanguageStandaloneSetup.class);
 		model = readFileIntoString("org/eclipse/xtext/Xtext.xtext");
@@ -34,7 +35,7 @@ public class PerformanceTestXtextGrammar extends AbstractGeneratorTest {
 		packratParser = new XtextTerminalsTestLanguagePackratParser();
 		setAstFactory(packratParser);
 	}
-	
+
 	public void testSetUp() throws InterruptedException {
 		assertNotNull(model);
 		IParseResult packratResult = packratParser.parse(model);
@@ -50,7 +51,7 @@ public class PerformanceTestXtextGrammar extends AbstractGeneratorTest {
 		EcoreModelComparator comparator = new EcoreModelComparator();
 		assertFalse(comparator.modelsDiffer(antlrResult.getRootASTElement(), packratResult.getRootASTElement()));
 	}
-	
+
 	public void testAntlr() {
 		for(int i = 0 ; i < iterations ; i++ ) {
 			modelAsStream.mark(0);
@@ -59,7 +60,7 @@ public class PerformanceTestXtextGrammar extends AbstractGeneratorTest {
 			modelAsStream.reset();
 		}
 	}
-	
+
 	public void testPackrat() {
 		for(int i = 0 ; i < iterations ; i++ ) {
 			IParseResult result = packratParser.parse(model);

@@ -14,10 +14,15 @@ import com.google.inject.Inject;
 import org.eclipse.xtext.parser.epatch.parser.antlr.internal.InternalEpatchTestLanguageLexer;
 import org.eclipse.xtext.parser.epatch.parser.antlr.internal.InternalEpatchTestLanguageParser;
 
+import org.eclipse.xtext.parser.epatch.services.EpatchTestLanguageGrammarAccess;
+
 public class EpatchTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
 	
 	@Inject 
     protected ITokenDefProvider antlrTokenDefProvider;
+	
+	@Inject
+	private EpatchTestLanguageGrammarAccess grammarAccess;
 	
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
@@ -25,14 +30,12 @@ public class EpatchTestLanguageParser extends org.eclipse.xtext.parser.antlr.Abs
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 		InternalEpatchTestLanguageParser parser = new InternalEpatchTestLanguageParser(
-				stream, getElementFactory(), grammarAccess.getGrammar());
+				stream, getElementFactory(), grammarAccess);
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());
 		try {
-			if(ruleName != null) {
+			if(ruleName != null)
 				return parser.parse(ruleName);
-			} else {
-				return parser.parse();
-			}
+			return parser.parse();
 		} catch (Exception re) {
 			throw new ParseException(re.getMessage(),re);
 		}
@@ -41,5 +44,13 @@ public class EpatchTestLanguageParser extends org.eclipse.xtext.parser.antlr.Abs
 	@Override 
 	protected String getDefaultRuleName() {
 		return "EPatch";
+	}
+	
+	public EpatchTestLanguageGrammarAccess getGrammarAccess() {
+		return this.grammarAccess;
+	}
+	
+	public void setGrammarAccess(EpatchTestLanguageGrammarAccess grammarAccess) {
+		this.grammarAccess = grammarAccess;
 	}
 }

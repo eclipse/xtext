@@ -30,15 +30,17 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
 import org.eclipse.xtext.conversion.ValueConverterException;
+import org.eclipse.xtext.parser.keywords.services.KeywordsTestLanguageGrammarAccess;
 
 }
 
 @parser::members {
  
-    public InternalKeywordsTestLanguageParser(TokenStream input, IAstFactory factory, Grammar g) {
-        this(input);
-        this.factory = factory;
-		grammar = g;
+ 	private KeywordsTestLanguageGrammarAccess grammarAccess;
+ 	
+    public InternalKeywordsTestLanguageParser(TokenStream input, IAstFactory factory, KeywordsTestLanguageGrammarAccess grammarAccess) {
+        super(input, factory, grammarAccess.getGrammar());
+        this.grammarAccess = grammarAccess;
     }
     
     @Override
@@ -66,7 +68,7 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 
 // Entry rule entryRuleModel
 entryRuleModel returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.xmi#/0/@rules.0" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prModel().getRule(), currentNode); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
 	 EOF 
@@ -82,7 +84,7 @@ ruleModel returns [EObject current=null]
 	
 	    lv_first='foo\\bar' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.xmi#/0/@rules.0/@alternatives/@groups.0/@groups.0/@groups.0/@terminal" /* xtext::Keyword */, "first"); 
+        createLeafNode(grammarAccess.prModel().ele0000KeywordFooBar(), "first"); 
     }
  
 	    {
@@ -103,7 +105,7 @@ ruleModel returns [EObject current=null]
 	
 	    lv_second='foo\\' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.xmi#/0/@rules.0/@alternatives/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "second"); 
+        createLeafNode(grammarAccess.prModel().ele0010KeywordFoo(), "second"); 
     }
  
 	    {
@@ -124,7 +126,7 @@ ruleModel returns [EObject current=null]
 	
 	    lv_third='\\bar' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.xmi#/0/@rules.0/@alternatives/@groups.0/@groups.1/@terminal" /* xtext::Keyword */, "third"); 
+        createLeafNode(grammarAccess.prModel().ele010KeywordBar(), "third"); 
     }
  
 	    {
@@ -145,7 +147,7 @@ ruleModel returns [EObject current=null]
 	
 	    lv_forth='\\' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.xmi#/0/@rules.0/@alternatives/@groups.1/@terminal" /* xtext::Keyword */, "forth"); 
+        createLeafNode(grammarAccess.prModel().ele10KeywordReverseSolidus(), "forth"); 
     }
  
 	    {

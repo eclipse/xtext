@@ -12,7 +12,6 @@ import java.io.InputStream;
 
 import org.antlr.runtime.ANTLRInputStream;
 import org.eclipse.emf.common.util.WrappedException;
-import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.parser.AbstractParser;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParseResult;
@@ -30,9 +29,6 @@ public abstract class AbstractAntlrParser extends AbstractParser<InputStream> im
 	@Inject
 	private IAstFactory elementFactory;
 
-	@Inject
-	protected IGrammarAccess grammarAccess;
-
 	@Override
 	public IParseResult doParse(InputStream in) {
 		return parse(getDefaultRuleName(), in);
@@ -41,23 +37,15 @@ public abstract class AbstractAntlrParser extends AbstractParser<InputStream> im
 	public IAstFactory getElementFactory() {
 		return elementFactory;
 	}
-	
-	public void setGrammarAccess(IGrammarAccess grammarAccess) {
-		this.grammarAccess = grammarAccess;
-	}
-
-	public IGrammarAccess getGrammarAccess() {
-		return grammarAccess;
-	}
 
 	public void setElementFactory(IAstFactory elementFactory) {
 		this.elementFactory = elementFactory;
-	}	
+	}
 
 	protected abstract String getDefaultRuleName();
 
 	protected abstract IParseResult parse(String ruleName, ANTLRInputStream in);
-	
+
 	public IParseResult parse(String ruleName, InputStream in) {
         try {
             IParseResult parseResult = parse(ruleName, new ANTLRInputStream(in));
@@ -86,5 +74,5 @@ public abstract class AbstractAntlrParser extends AbstractParser<InputStream> im
 	protected boolean isReparseSupported() {
 		return true;
 	}
-	
+
 }

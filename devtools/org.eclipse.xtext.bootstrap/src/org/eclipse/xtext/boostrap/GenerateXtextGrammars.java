@@ -23,20 +23,20 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- * 
+ *
  */
 public class GenerateXtextGrammars {
-	
+
 	private static final String[] xtextGrammars = new String[]{
 		"/src/org/eclipse/xtext/builtin/XtextBuiltin.xtext",
 		"/src/org/eclipse/xtext/Xtext.xtext"
 	};
-	
+
 	private static final String[][] extensions = new String[][] {
 		{},
 		{"xtext", "xtext2"}
 	};
-	
+
 	private static final String path = "../org.eclipse.xtext";
 	private static final String uiPath = "../org.eclipse.xtext.xtext.ui";
 	private static final Logger logger = Logger.getLogger(GenerateXtextGrammars.class);
@@ -46,18 +46,18 @@ public class GenerateXtextGrammars {
 			EcorePackage.eINSTANCE.eClass();
 			EcorePackage.eINSTANCE.getNsURI();
 			XtextStandaloneSetup.doSetup();
-			
+
 			GeneratorFacade.cleanFolder(path + "/src-gen");
 			GeneratorFacade.cleanFolder(uiPath + "/src-gen");
-			
-			System.out.println("Generating " + xtextGrammars.length + " Xtext Grammars.");
-			
+
+			logger.info("Generating " + xtextGrammars.length + " Xtext Grammars.");
+
 			for (int i = 0; i < xtextGrammars.length; i++) {
 				String xtextGrammar = xtextGrammars[i];
 				String filename = path + xtextGrammar;
 				logger.info("loading " + filename);
-	
-				
+
+
 				ResourceSet rs = new XtextResourceSet();
 				XtextResource resource = (XtextResource) rs.createResource(URI.createURI(filename));
 				resource.load(null);
@@ -68,8 +68,8 @@ public class GenerateXtextGrammars {
 				Grammar grammarModel = (Grammar) resource.getContents().iterator().next();
 				GeneratorFacade.generate(grammarModel, path, uiPath, extensions[i]);
 			}
-			
-			System.out.println("DONE.");
+
+			logger.info("DONE.");
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
