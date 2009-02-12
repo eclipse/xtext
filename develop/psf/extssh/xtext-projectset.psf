@@ -111,7 +111,10 @@
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf.mwe/plugins/org.eclipse.emf.mwe.ewm.launcher.core,org.eclipse.emf.mwe.ewm.launcher.core"/>
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf.mwe/tests/org.eclipse.emf.mwe.ewm.launcher.core.tests,org.eclipse.emf.mwe.ewm.launcher.core.tests"/>
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf.mwe/plugins/org.eclipse.emf.mwe.ewm.launcher.ui,org.eclipse.emf.mwe.ewm.launcher.ui"/>
-
+<project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/tools,org.eclipse.orbit/javax.xml,javax.xml,v1_3_4"/>
+<project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/tools,org.eclipse.orbit/org.apache.xerces,org.apache.xerces,v2_9_0"/>
+<project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/tools,org.eclipse.orbit/org.apache.xml.resolver,org.apache.xml.resolver,v1_2_0"/>
+<project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/tools,org.eclipse.orbit/org.apache.xml.serializer,org.apache.xml.serializer,v2_7_1"/>
 </provider>
 
 
@@ -205,6 +208,13 @@
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.emf.mwe.ewm.core.tests" type="4"/>
 <item elementID="=org.eclipse.emf.mwe.ewm.core" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.emf.mwe.ewm.launcher.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+</workingSets>
+
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" label="MWE 3rdParty" name="MWE 3rdParty">
+<item elementID="=org.apache.xml.serializer" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.apache.xml.resolver" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.apache.xerces" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=javax.xml" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 </workingSets>
 
 <workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" label="Xpand" name="Xpand">
