@@ -41,6 +41,7 @@ import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.resource.ClasspathUriResolutionException;
 import org.eclipse.xtext.resource.ClasspathUriUtil;
 import org.eclipse.xtext.resource.metamodel.TransformationDiagnosticsProducer;
 import org.eclipse.xtext.resource.metamodel.Xtext2EcoreTransformer;
@@ -53,10 +54,10 @@ import com.google.inject.Inject;
 public class XtextLinker extends Linker {
 
 	private static Logger log = Logger.getLogger(XtextLinker.class);
-	
+
 	@Inject
 	private IScopeProvider scopeProvider;
-	
+
 	public IScopeProvider getScopeProvider() {
 		return scopeProvider;
 	}
@@ -110,15 +111,20 @@ public class XtextLinker extends Linker {
 			final Grammar grammar = (Grammar) obj;
 			if (!IXtextBuiltin.ID.equals(grammar.getName())) {
 				final ResourceSet resourceSet = grammar.eResource().getResourceSet();
-				final Resource resource = resourceSet.getResource(URI.createURI(
-						ClasspathUriUtil.CLASSPATH_SCHEME + ":/" + IXtextBuiltin.ID.replace('.', '/') + ".xtext"), true);
-				grammar.setSuperGrammar((Grammar) resource.getContents().get(0));
+				try {
+					final Resource resource = resourceSet.getResource(URI.createURI(
+							ClasspathUriUtil.CLASSPATH_SCHEME + ":/" + IXtextBuiltin.ID.replace('.', '/') + ".xtext"), true);
+					grammar.setSuperGrammar((Grammar) resource.getContents().get(0));
+				} catch(ClasspathUriResolutionException ex) {
+					producer.addDiagnostic("Cannot find default super grammar '" + IXtextBuiltin.ID + "'. " +
+							"Maybe you are stumbling accross a pde bug. Reopening the editor might help.");
+				}
 			}
 		} else {
 			super.setDefaultValueImpl(obj, ref, producer);
 		}
 	}
-	
+
 	@Override
 	protected boolean isNullValidResult(EObject obj, EReference eRef, AbstractNode node) {
 		if (XtextPackage.eINSTANCE.getGrammar_SuperGrammar() == eRef) {
@@ -141,7 +147,7 @@ public class XtextLinker extends Linker {
 		} else
 			super.beforeEnsureIsLinked(obj, ref, producer);
 	}
-	
+
 	protected Xtext2EcoreTransformer createTransformer(Grammar grammar, IDiagnosticConsumer consumer) {
 		final Xtext2EcoreTransformer transformer = new Xtext2EcoreTransformer(grammar);
 		transformer.setErrorAcceptor(new TransformationDiagnosticsProducer(consumer));
@@ -161,7 +167,7 @@ public class XtextLinker extends Linker {
 			consumer.consume(new ExceptionDiagnostic(e));
 		}
 	}
-	
+
 	protected void updateOverriddenRules(Grammar grammar) {
 		if (grammar.getSuperGrammar() == null)
 			return;
@@ -174,7 +180,7 @@ public class XtextLinker extends Linker {
 			superGrammar = superGrammar.getSuperGrammar();
 		}
 	}
-	
+
 	protected void updateOverriddenRules(Grammar grammar, Map<String, AbstractRule> rulePerName) {
 		if (grammar.isDefinesHiddenTokens()) {
 			updateHiddenTokens(grammar.getHiddenTokens(), rulePerName);
@@ -201,7 +207,7 @@ public class XtextLinker extends Linker {
 			}
 		}
 	}
-	
+
 	private void updateHiddenTokens(List<AbstractRule> hiddenTokens, Map<String, AbstractRule> rulePerName) {
 		for(int i = 0; i < hiddenTokens.size(); i++) {
 			AbstractRule hidden = hiddenTokens.get(i);
@@ -228,5 +234,5 @@ public class XtextLinker extends Linker {
 				obj.eUnset(ref);
 		}
 	}
-	
+
 }
