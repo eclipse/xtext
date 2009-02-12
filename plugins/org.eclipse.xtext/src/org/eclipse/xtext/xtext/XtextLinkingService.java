@@ -47,17 +47,17 @@ import com.google.inject.Inject;
 public class XtextLinkingService extends DefaultLinkingService {
 
 	private static Logger log = Logger.getLogger(XtextLinkingService.class);
-	
+
 	private final SimpleAttributeResolver<String> aliasResolver;
-	
+
 	@Inject
 	private IValueConverterService valueConverterService;
-	
+
 	public XtextLinkingService() {
 		super();
 		aliasResolver = SimpleAttributeResolver.newResolver(String.class, "alias");
 	}
-	
+
 	@Override
 	public List<EObject> getLinkedObjects(EObject context, EReference ref, AbstractNode node) throws IllegalNodeException {
 		if (ref == XtextPackage.eINSTANCE.getGrammar_SuperGrammar())
@@ -70,7 +70,7 @@ public class XtextLinkingService extends DefaultLinkingService {
 			return getPackage((ReferencedMetamodel)context, (LeafNode) node);
 		return super.getLinkedObjects(context, ref, node);
 	}
-	
+
 	private List<EObject> getSuperGrammar(Grammar grammar, AbstractNode node) {
 		try {
 			String grammarName = (String) valueConverterService.toValue("", "GrammarID", node);
@@ -85,16 +85,14 @@ public class XtextLinkingService extends DefaultLinkingService {
 			return Collections.emptyList();
 		}
 	}
-	
+
 	private List<EObject> getPackage(ReferencedMetamodel context, LeafNode text) {
-		EPackage pack = loadEPackage(
-				getMetamodelNsURI(text), 
-				context.eResource().getResourceSet());
+		EPackage pack = loadEPackage(getMetamodelNsURI(text), context.eResource().getResourceSet());
 		if (pack != null)
 			return Collections.<EObject>singletonList(pack);
 		return Collections.emptyList();
 	}
-	
+
 	private String getMetamodelNsURI(LeafNode text) {
 		try {
 			return (String) valueConverterService.toValue(text.getText(),
@@ -104,7 +102,7 @@ public class XtextLinkingService extends DefaultLinkingService {
 			return null;
 		}
 	}
-	
+
 	private EPackage loadEPackage(String resourceOrNsURI, ResourceSet resourceSet) {
 		if (EPackage.Registry.INSTANCE.containsKey(resourceOrNsURI))
 			return EPackage.Registry.INSTANCE.getEPackage(resourceOrNsURI);
@@ -112,9 +110,12 @@ public class XtextLinkingService extends DefaultLinkingService {
 			URI uri = URI.createURI(resourceOrNsURI);
 			if (uri.fragment() == null) {
 				Resource resource = resourceSet.getResource(uri, true);
-				return (EPackage) resource.getContents().get(0);
+				EPackage result = (EPackage) resource.getContents().get(0);
+				return result;
 			}
-			return (EPackage) resourceSet.getEObject(uri, true);
+			EPackage result = (EPackage) resourceSet.getEObject(uri, true);
+			return result;
+
 		} catch(RuntimeException ex) {
 			log.trace("Cannot load package with URI '" + resourceOrNsURI + "'", ex);
 			return null;
@@ -167,11 +168,11 @@ public class XtextLinkingService extends DefaultLinkingService {
 					return XtextMetamodelReferenceHelper.findBestMetamodelForType(
 							context, text.getText(), leaf.getText(), getScope(context, ref));
 				}
-			}				
+			}
 		}
 		return Collections.emptyList();
 	}
-	
+
 	@Override
 	protected String getUnconvertedLinkText(EObject object, EReference reference, EObject context) {
 		if (reference == XtextPackage.eINSTANCE.getGrammar_SuperGrammar()) {
@@ -185,5 +186,5 @@ public class XtextLinkingService extends DefaultLinkingService {
 			return ((EPackage) object).getNsURI();
 		return super.getUnconvertedLinkText(object, reference, context);
 	}
-	
+
 }

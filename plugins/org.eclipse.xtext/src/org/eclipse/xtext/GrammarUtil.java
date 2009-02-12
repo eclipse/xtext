@@ -155,10 +155,12 @@ public class GrammarUtil {
 		return grammar.getSuperGrammar().getName();
 	}
 
-	public static AbstractRule findRuleForName(Grammar _this, String ruleName) {
-		List<AbstractRule> rules = allRules(_this);
+	public static AbstractRule findRuleForName(Grammar grammar, String ruleName) {
+		if (ruleName == null)
+			return null;
+		List<AbstractRule> rules = allRules(grammar);
 		for (AbstractRule abstractRule : rules) {
-			if (abstractRule.getName().equals(ruleName)) {
+			if (ruleName.equals(abstractRule.getName())) {
 				return abstractRule;
 			}
 		}

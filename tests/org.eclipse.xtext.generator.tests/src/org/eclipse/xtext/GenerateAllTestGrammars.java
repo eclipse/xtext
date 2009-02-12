@@ -50,46 +50,46 @@ import org.eclipse.xtext.valueconverter.Bug250313;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- * 
+ *
  */
 public class GenerateAllTestGrammars {
 	private static String path = ".";
 
 	private static Logger log = Logger.getLogger(GenerateAllTestGrammars.class);
 
-	public final static Class<?>[] testclasses = new Class[] { 
-			LangATestLanguage.class,
-			AbstractTestLanguage.class,
-			ConcreteTestLanguage.class,
-			XtextGrammarTestLanguage.class, 
-			MetamodelRefTestLanguage.class,
-			MultiGenMMTestLanguage.class,
-			DummyTestLanguage.class,
-			TestLanguage.class,
-			SimpleReconstrTestLanguage.class, 
-			ComplexReconstrTestLanguage.class, 
-			LexerTestLanguage.class,
-			SimpleExpressionsTestLanguage.class, 
-			ActionTestLanguage.class, 
-			OptionalEmptyTestLanguage.class, 
-			ReferenceGrammarTestLanguage.class,
-			LookaheadTestLanguage.class, 
-			Bug250313.class, 
-			FowlerDslTestLanguage.class, 
-			TreeTestLanguage.class, 
-			ImportUriTestLanguage.class,
-			PartialParserTestLanguage.class, 
-			ContentAssistTestLanguage.class, 
-			TransientValuesTest.class,
-			FormatterTestLanguage.class,
-			DatatypeRulesTestLanguage.class,
-			MultiValueFeatureTestLanguage.class,
-			TerminalRulesTestLanguage.class,
-			XtextTerminalsTestLanguage.class,
-			HiddenTerminalsTestLanguage.class,
-			EpatchTestLanguage.class,
-			KeywordsTestLanguage.class,
-			LowerCaseNamedTestLanguage.class
+	public final static Class<?>[] testclasses = new Class[] {
+		LangATestLanguage.class,
+		AbstractTestLanguage.class,
+		ConcreteTestLanguage.class,
+		XtextGrammarTestLanguage.class,
+		MetamodelRefTestLanguage.class,
+		MultiGenMMTestLanguage.class,
+		DummyTestLanguage.class,
+		TestLanguage.class,
+		SimpleReconstrTestLanguage.class,
+		ComplexReconstrTestLanguage.class,
+		LexerTestLanguage.class,
+		SimpleExpressionsTestLanguage.class,
+		ActionTestLanguage.class,
+		OptionalEmptyTestLanguage.class,
+		ReferenceGrammarTestLanguage.class,
+		LookaheadTestLanguage.class,
+		Bug250313.class,
+		FowlerDslTestLanguage.class,
+		TreeTestLanguage.class,
+		ImportUriTestLanguage.class,
+		PartialParserTestLanguage.class,
+		ContentAssistTestLanguage.class,
+		TransientValuesTest.class,
+		FormatterTestLanguage.class,
+		DatatypeRulesTestLanguage.class,
+		MultiValueFeatureTestLanguage.class,
+		TerminalRulesTestLanguage.class,
+		XtextTerminalsTestLanguage.class,
+		HiddenTerminalsTestLanguage.class,
+		EpatchTestLanguage.class,
+		KeywordsTestLanguage.class,
+		LowerCaseNamedTestLanguage.class
 	};
 
 	public static void main(String... args) throws Exception {
@@ -118,14 +118,14 @@ public class GenerateAllTestGrammars {
 		String filename = "classpath:/" + getGrammarFileName(c);
 		return filename;
 	}
-	
+
 	public static String getGrammarFileName(Class<?> c) {
 		try {
 			Method m = c.getMethod("getGrammarFileName");
 			if (m != null && Modifier.isStatic(m.getModifiers()) && String.class.equals(m.getReturnType()))
-			try {
-				return ((String) m.invoke(null)).replace('.', '/') + ".xtext";
-			}
+				try {
+					return ((String) m.invoke(null)).replace('.', '/') + ".xtext";
+				}
 			catch (Exception e) {
 				log.error("Cannot invoke 'getGrammarFileName'", e);
 			}

@@ -5,20 +5,22 @@ generate foo "http://holla"
 import "classpath:/org/eclipse/xtext/grammarinheritance/ametamodel.ecore" as mm
 
 RootRule:
-	ConcreteParserRule | CallOverridenParserRule | CallExtendedParserRule;
+	ConcreteParserRule | CallOverridenParserRule | CallExtendedParserRule | OverridableParserRule2;
 
 // call InheritedParserRule
 ConcreteParserRule :
 	'model' magicNumber=REAL ':' (elements+=InheritedParserRule)*;
 	
-
-
 // override OverridableParserRule and call it
 OverridableParserRule returns mm::AType:
 	'overriddenelement' name=ID;
 	
 CallOverridenParserRule:
 	call=AbstractCallOverridenParserRule;
+	
+// override parser rule and change return type
+OverridableParserRule2 returns AType2 :
+	'overridden other element' name=ID '-' age=INT;
 	
 // override and extend ExtendableParserRule and call it
 ExtendableParserRule returns mm::AType:
