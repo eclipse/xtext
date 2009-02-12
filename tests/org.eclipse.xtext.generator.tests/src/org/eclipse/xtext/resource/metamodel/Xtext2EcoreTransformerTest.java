@@ -63,14 +63,14 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 			this.first = first;
 			this.second = second;
 		}
-		
+
 		public void acceptError(TransformationErrorCode errorCode, String message, EObject element) {
 			first.acceptError(errorCode, message, element);
 			second.acceptError(errorCode, message, element);
 		}
-		
+
 	}
-	
+
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -86,7 +86,8 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 		assertNotNull(result);
 		return result;
 	}
-	
+
+	@Override
 	protected XtextResource getResource(InputStream in) throws Exception {
 		ResourceSet rs = new XtextResourceSet();
 		XtextResource resource = (XtextResource) getResourceFactory().createResource(URI.createURI("mytestmodel.test"));
@@ -103,13 +104,13 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 		linker.setLinkingService(((Linker) resource.getLinker()).getLinkingService());
 		resource.setLinker(linker);
 		resource.load(in, null);
-		
+
 		for(Diagnostic d: resource.getErrors())
 			System.out.println("Resource Error: "+d);
-		
+
 		for(Diagnostic d: resource.getWarnings())
 			System.out.println("Resource Warning: "+d);
-		
+
 		return resource;
 	}
 
@@ -406,7 +407,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 		assertAttributeConfiguration(ruleA, 0, "featureAS", "EString");
 		assertEquals(1, ruleA.getEReferences().size());
 		assertReferenceConfiguration(ruleA, 0, "a", "RuleA", true, 0, 1);
-		
+
 		assertEquals(0, add.getEAttributes().size());
 		assertEquals(0, add.getEReferences().size());
 
@@ -683,7 +684,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 		assertReferenceConfiguration(typeA, 0, "featureA2", "EObject", true, 0, 1);
 		assertReferenceConfiguration(typeA, 1, "featureA3", "RuleC", true, 0, 1);
 	}
-	
+
 	public void testUplift01() throws Exception {
 		String grammar = "language test generate test 'http://test'";
 		grammar += " RuleA: (RuleB|RuleC) featureA=ID;";
@@ -701,13 +702,13 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 
 		assertEquals(1, ruleA.getEAttributes().size());
 		assertAttributeConfiguration(ruleA, 0, "featureA", "EString");
-		
+
 		assertEquals(1, ruleB.getEAttributes().size());
 		assertAttributeConfiguration(ruleB, 0, "featureB", "EInt");
 
 		assertEquals(0, ruleC.getEAttributes().size());
 	}
-	
+
 	public void testCallOfUndeclaredRule() throws Exception {
 		String grammar = "language test generate test 'http://test'";
 		grammar += " RuleA: CallOfUndeclaredRule featureA=ID;";
@@ -717,18 +718,18 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 		assertEquals(1, ePackage.getEClassifiers().size());
 		assertEquals("RuleA", ePackage.getEClassifiers().get(0).getName());
 	}
-	
+
 	public void testCycleInTypeHierarchy() throws Exception {
 		String grammar = "language test generate test 'http://test'";
 		grammar += " RuleA: RuleB;";
 		grammar += " RuleB: RuleC;";
 		grammar += " RuleC: RuleA;";
 		grammar += " RuleD: RuleA;";
-		
+
 		errorAcceptorMock.acceptError(same(TransformationErrorCode.TypeWithCycleInHierarchy), (String) anyObject(),
 				(EObject) anyObject());
 		EasyMock.expectLastCall().times(3);
-		
+
 		EPackage ePackage = getEPackageFromGrammar(grammar);
 		assertEquals(4, ePackage.getEClassifiers().size());
 		EClass ruleA = (EClass) ePackage.getEClassifier("RuleA");
@@ -736,10 +737,10 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 		EClass ruleB = (EClass) ePackage.getEClassifier("RuleB");
 		assertNotNull(ruleB);
 		EClass ruleC = (EClass) ePackage.getEClassifier("RuleC");
-		assertNotNull(ruleC);	
+		assertNotNull(ruleC);
 		EClass ruleD = (EClass) ePackage.getEClassifier("RuleD");
-		assertNotNull(ruleD);	
-		
+		assertNotNull(ruleD);
+
 		assertEquals(2, ruleA.getESuperTypes().size());
 		assertSame(ruleC, ruleA.getESuperTypes().get(0));
 		assertSame(ruleD, ruleA.getESuperTypes().get(1));
@@ -749,7 +750,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 		assertSame(ruleB, ruleC.getESuperTypes().get(0));
 		assertEquals(0, ruleD.getESuperTypes().size());
 	}
-	
+
 	public void testExpressionLikeLangauge() throws Exception {
 		String grammar = "language test generate test 'http://test'";
 		grammar += " Ex :	Atom  ({ChainExpression.left+=current} operator=('+'|'-'|'*'|'/') right=Atom )*;" +
@@ -760,7 +761,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 		logger.debug(EmfFormater.objToStr(ePackage));
 		assertEquals(0,classifier.getEStructuralFeatures().size());
 	}
-	
+
 	public void testClassNameEString() throws Exception {
 		String grammar = "language test generate test 'http://test'";
 		grammar += "Start returns EString: id=ID;";
@@ -773,7 +774,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 		assertFalse(feature.getEType().equals(classifier));
 		assertEquals(EcorePackage.Literals.ESTRING, feature.getEType());
 	}
-	
+
 	public void testNoException_01() throws Exception {
 		String grammar = "language test import 'http://www.eclipse.org/emf/2002/Ecore' as ecore " +
 				"generate test 'http://test'\n" +
@@ -788,7 +789,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 			assertFalse(d instanceof ExceptionDiagnostic);
 		}
 	}
-	
+
 	public void testNoException_02() throws Exception {
 		String grammar = "language test generate test 'http://test'\n" +
 				"Model: (children+=Element)*;\n" +
@@ -799,7 +800,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 			assertFalse(d instanceof ExceptionDiagnostic);
 		}
 	}
-	
+
 	public void testNoException_03() throws Exception {
 		String grammar = "language test import 'http://www.eclipse.org/emf/2002/Ecore' as ecore " +
 				"generate test 'http://test'\n" +

@@ -28,13 +28,14 @@ import org.eclipse.xtext.tests.AbstractGeneratorTest;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class MetamodelTransformationErrorTest extends AbstractGeneratorTest {
-	
+
 	private String model;
 	private XtextResource resource;
 	private Xtext2EcoreTransformer transformer;
 	private ErrorAcceptor errorAcceptor;
 	private Grammar grammar;
 
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		with(XtextStandaloneSetup.class);
@@ -53,20 +54,20 @@ public class MetamodelTransformationErrorTest extends AbstractGeneratorTest {
 		errorAcceptor = EasyMock.createMock(ErrorAcceptor.class);
 		transformer.setErrorAcceptor(errorAcceptor);
 	}
-	
+
 	public void testSetUp() {
 		assertNotNull(resource);
 		assertNotNull(transformer);
 		assertNotNull(errorAcceptor);
 		assertEquals(2, resource.getErrors().size());
 	}
-	
+
 	public void testErrorMessages() throws Exception {
 		errorAcceptor.acceptError(same(TransformationErrorCode.InvalidDatatypeRule), (String) anyObject(), same(grammar.getRules().get(3)));
 		errorAcceptor.acceptError(same(TransformationErrorCode.InvalidDatatypeRule), (String) anyObject(), same(grammar.getRules().get(4)));
 		transform();
 	}
-	
+
 	private EPackage transform() throws Exception {
 		replay(errorAcceptor);
 		transformer.removeGeneratedPackages();
