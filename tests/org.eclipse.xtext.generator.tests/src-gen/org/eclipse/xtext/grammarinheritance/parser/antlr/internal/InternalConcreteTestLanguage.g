@@ -78,9 +78,9 @@ ruleRootRule returns [EObject current=null]
     }
     @after { resetLookahead(); 
     }:
-((
+(((
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/0/@rules.0/@alternatives/@groups.0/@groups.0" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/0/@rules.0/@alternatives/@groups.0/@groups.0/@groups.0" /* xtext::RuleCall */, currentNode); 
     }
     this_ConcreteParserRule=ruleConcreteParserRule
     { 
@@ -90,7 +90,7 @@ ruleRootRule returns [EObject current=null]
 
     |
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/0/@rules.0/@alternatives/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/0/@rules.0/@alternatives/@groups.0/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
     }
     this_CallOverridenParserRule=ruleCallOverridenParserRule
     { 
@@ -100,11 +100,21 @@ ruleRootRule returns [EObject current=null]
 )
     |
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/0/@rules.0/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/0/@rules.0/@alternatives/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
     }
     this_CallExtendedParserRule=ruleCallExtendedParserRule
     { 
         $current = $this_CallExtendedParserRule.current; 
+        currentNode = currentNode.getParent();
+    }
+)
+    |
+    { 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/0/@rules.0/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
+    }
+    this_OverridableParserRule2=ruleOverridableParserRule2
+    { 
+        $current = $this_OverridableParserRule2.current; 
         currentNode = currentNode.getParent();
     }
 );
@@ -275,9 +285,79 @@ ruleCallOverridenParserRule returns [EObject current=null]
 
 
 
+// Entry rule entryRuleOverridableParserRule2
+entryRuleOverridableParserRule2 returns [EObject current=null] :
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/0/@rules.4" /* xtext::ParserRule */, currentNode); }
+	 iv_ruleOverridableParserRule2=ruleOverridableParserRule2 
+	 { $current=$iv_ruleOverridableParserRule2.current; } 
+	 EOF 
+;
+
+// Rule OverridableParserRule2
+ruleOverridableParserRule2 returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    }:
+((('overridden other element' 
+    {
+        createLeafNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/0/@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+    }
+(	
+	
+	    lv_name=RULE_ID
+    { 
+    createLeafNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/0/@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create("AType2");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        try {
+	        	factory.set($current, "name", lv_name, "ID", currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+	
+))'-' 
+    {
+        createLeafNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/0/@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+    }
+)(	
+	
+	    lv_age=RULE_INT
+    { 
+    createLeafNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/0/@rules.4/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "age"); 
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create("AType2");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        try {
+	        	factory.set($current, "age", lv_age, "INT", currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+	
+));
+
+
+
+
+
+
+
 // Entry rule entryRuleExtendableParserRule
 entryRuleExtendableParserRule returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/0/@rules.4" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/0/@rules.5" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleExtendableParserRule=ruleExtendableParserRule 
 	 { $current=$iv_ruleExtendableParserRule.current; } 
 	 EOF 
@@ -291,7 +371,7 @@ ruleExtendableParserRule returns [EObject current=null]
     }:
 ((
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/0/@rules.4/@alternatives/@groups.0/@groups.0" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/0/@rules.5/@alternatives/@groups.0/@groups.0" /* xtext::RuleCall */, currentNode); 
     }
     this_Subrule1=ruleSubrule1
     { 
@@ -301,7 +381,7 @@ ruleExtendableParserRule returns [EObject current=null]
 
     |
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/0/@rules.4/@alternatives/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/0/@rules.5/@alternatives/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
     }
     this_Subrule2=ruleSubrule2
     { 
@@ -311,7 +391,7 @@ ruleExtendableParserRule returns [EObject current=null]
 )
     |
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/0/@rules.4/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/0/@rules.5/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
     }
     this_Subrule3=ruleSubrule3
     { 
@@ -328,7 +408,7 @@ ruleExtendableParserRule returns [EObject current=null]
 
 // Entry rule entryRuleSubrule1
 entryRuleSubrule1 returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/0/@rules.5" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/0/@rules.6" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleSubrule1=ruleSubrule1 
 	 { $current=$iv_ruleSubrule1.current; } 
 	 EOF 
@@ -342,13 +422,13 @@ ruleSubrule1 returns [EObject current=null]
     }:
 (('subrule1' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/0/@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/0/@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 (	
 	
 	    lv_name=RULE_ID
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/0/@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+    createLeafNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/0/@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
     }
  
 	    {
@@ -368,7 +448,7 @@ ruleSubrule1 returns [EObject current=null]
 	
 	    lv_sub1=RULE_ID
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/0/@rules.5/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "sub1"); 
+    createLeafNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/0/@rules.6/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "sub1"); 
     }
  
 	    {
@@ -394,7 +474,7 @@ ruleSubrule1 returns [EObject current=null]
 
 // Entry rule entryRuleSubrule2
 entryRuleSubrule2 returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/0/@rules.6" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/0/@rules.7" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleSubrule2=ruleSubrule2 
 	 { $current=$iv_ruleSubrule2.current; } 
 	 EOF 
@@ -408,13 +488,13 @@ ruleSubrule2 returns [EObject current=null]
     }:
 (('subrule3' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/0/@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 (	
 	
 	    lv_name=RULE_ID
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/0/@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+    createLeafNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
     }
  
 	    {
@@ -434,7 +514,7 @@ ruleSubrule2 returns [EObject current=null]
 	
 	    lv_sub2=RULE_STRING
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/0/@rules.6/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "sub2"); 
+    createLeafNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/0/@rules.7/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "sub2"); 
     }
  
 	    {
@@ -460,7 +540,7 @@ ruleSubrule2 returns [EObject current=null]
 
 // Entry rule entryRuleSubrule3
 entryRuleSubrule3 returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/0/@rules.7" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/0/@rules.8" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleSubrule3=ruleSubrule3 
 	 { $current=$iv_ruleSubrule3.current; } 
 	 EOF 
@@ -474,13 +554,13 @@ ruleSubrule3 returns [EObject current=null]
     }:
 (('subrule3' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/0/@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 (	
 	
 	    lv_name=RULE_ID
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/0/@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+    createLeafNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/0/@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
     }
  
 	    {
@@ -500,7 +580,7 @@ ruleSubrule3 returns [EObject current=null]
 	
 	    lv_sub1=RULE_INT
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/0/@rules.7/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "sub1"); 
+    createLeafNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/0/@rules.8/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "sub1"); 
     }
  
 	    {
@@ -526,7 +606,7 @@ ruleSubrule3 returns [EObject current=null]
 
 // Entry rule entryRuleCallExtendedParserRule
 entryRuleCallExtendedParserRule returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/0/@rules.8" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/0/@rules.9" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleCallExtendedParserRule=ruleCallExtendedParserRule 
 	 { $current=$iv_ruleCallExtendedParserRule.current; } 
 	 EOF 
@@ -542,7 +622,7 @@ ruleCallExtendedParserRule returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/0/@rules.8/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/0/@rules.9/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_call=ruleAbstractCallExtendedParserRule 
 	    {
@@ -662,7 +742,7 @@ ruleAbstractCallOverridenParserRule returns [EObject current=null]
 
 // Entry rule entryRuleAbstractCallExtendedParserRule
 entryRuleAbstractCallExtendedParserRule returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/1/@rules.3" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/1/@rules.4" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleAbstractCallExtendedParserRule=ruleAbstractCallExtendedParserRule 
 	 { $current=$iv_ruleAbstractCallExtendedParserRule.current; } 
 	 EOF 
@@ -676,13 +756,13 @@ ruleAbstractCallExtendedParserRule returns [EObject current=null]
     }:
 ('extendedmodel' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/1/@rules.3/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/1/@rules.4/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/1/@rules.3/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#/1/@rules.4/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_elements=ruleExtendableParserRule 
 	    {
@@ -700,6 +780,8 @@ ruleAbstractCallExtendedParserRule returns [EObject current=null]
 	    }
 	
 )*);
+
+
 
 
 

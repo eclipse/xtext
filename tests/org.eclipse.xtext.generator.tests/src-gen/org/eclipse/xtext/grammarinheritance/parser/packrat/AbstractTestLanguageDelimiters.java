@@ -23,6 +23,8 @@ public final class AbstractTestLanguageDelimiters {
 	);
 
 	public static ISequenceMatcher ruleCall$7$Delimiter = new SetBasedKeywordMatcher(
-		"element", "overridemodel", "extendedmodel");
+		"element", "overridemodel", "other element", "extendedmodel");
+
+	public static ISequenceMatcher ruleCall$25$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 
 }

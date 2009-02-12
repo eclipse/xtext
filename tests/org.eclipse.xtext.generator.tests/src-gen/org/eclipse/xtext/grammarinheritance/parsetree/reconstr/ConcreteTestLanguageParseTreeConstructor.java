@@ -23,6 +23,7 @@ public class ConcreteTestLanguageParseTreeConstructor extends AbstractParseTreeC
 		if(inst.isInstanceOf("ConcreteParserRule") && (s = new ConcreteParserRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		if(inst.isInstanceOf("AType") && (s = new OverridableParserRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		if(inst.isInstanceOf("CallOverridenParserRule") && (s = new CallOverridenParserRule_Assignment_call(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf("AType2") && (s = new OverridableParserRule2_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		if(inst.isInstanceOf("AType") && (s = new ExtendableParserRule_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		if(inst.isInstanceOf("Subrule1") && (s = new Subrule1_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		if(inst.isInstanceOf("Subrule2") && (s = new Subrule2_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
@@ -37,12 +38,12 @@ public class ConcreteTestLanguageParseTreeConstructor extends AbstractParseTreeC
 
 /************ begin Rule RootRule ****************
  *
- * RootRule:   ConcreteParserRule|CallOverridenParserRule|CallExtendedParserRule;
+ * RootRule:   ConcreteParserRule|CallOverridenParserRule|CallExtendedParserRule|OverridableParserRule2;
  *
  **/
 
 
-// ConcreteParserRule|CallOverridenParserRule|CallExtendedParserRule
+// ConcreteParserRule|CallOverridenParserRule|CallExtendedParserRule|OverridableParserRule2
 protected class RootRule_Alternatives extends AlternativesToken {
 
 	public RootRule_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -55,7 +56,7 @@ protected class RootRule_Alternatives extends AlternativesToken {
 
 	@Override	
 	protected Solution createSolution() {
-		AbstractToken t = (first) ? new RootRule_1_RuleCall_CallExtendedParserRule(current, this) : new RootRule_0_Alternatives(current, this);
+		AbstractToken t = (first) ? new RootRule_1_RuleCall_OverridableParserRule2(current, this) : new RootRule_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
 		if(s == null && activateNextSolution()) s = createSolution();
 		if(s == null) return null;
@@ -64,7 +65,7 @@ protected class RootRule_Alternatives extends AlternativesToken {
 	}
 }
 
-// ConcreteParserRule|CallOverridenParserRule
+// ConcreteParserRule|CallOverridenParserRule|CallExtendedParserRule
 protected class RootRule_0_Alternatives extends AlternativesToken {
 
 	public RootRule_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -77,7 +78,29 @@ protected class RootRule_0_Alternatives extends AlternativesToken {
 
 	@Override	
 	protected Solution createSolution() {
-		AbstractToken t = (first) ? new RootRule_0_1_RuleCall_CallOverridenParserRule(current, this) : new RootRule_0_0_RuleCall_ConcreteParserRule(current, this);
+		AbstractToken t = (first) ? new RootRule_0_1_RuleCall_CallExtendedParserRule(current, this) : new RootRule_0_0_Alternatives(current, this);
+		Solution s = t.firstSolution();
+		if(s == null && activateNextSolution()) s = createSolution();
+		if(s == null) return null;
+		last = s.getPredecessor();
+		return s; 
+	}
+}
+
+// ConcreteParserRule|CallOverridenParserRule
+protected class RootRule_0_0_Alternatives extends AlternativesToken {
+
+	public RootRule_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Alternatives getGrammarElement() {
+		return ConcreteTestLanguageGrammarAccess.INSTANCE.prRootRule().ele00Alternatives();
+	}
+
+	@Override	
+	protected Solution createSolution() {
+		AbstractToken t = (first) ? new RootRule_0_0_1_RuleCall_CallOverridenParserRule(current, this) : new RootRule_0_0_0_RuleCall_ConcreteParserRule(current, this);
 		Solution s = t.firstSolution();
 		if(s == null && activateNextSolution()) s = createSolution();
 		if(s == null) return null;
@@ -87,14 +110,14 @@ protected class RootRule_0_Alternatives extends AlternativesToken {
 }
 
 // ConcreteParserRule
-protected class RootRule_0_0_RuleCall_ConcreteParserRule extends RuleCallToken {
+protected class RootRule_0_0_0_RuleCall_ConcreteParserRule extends RuleCallToken {
 	
-	public RootRule_0_0_RuleCall_ConcreteParserRule(IInstanceDescription curr, AbstractToken pred) {
+	public RootRule_0_0_0_RuleCall_ConcreteParserRule(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public RuleCall getGrammarElement() {
-		return ConcreteTestLanguageGrammarAccess.INSTANCE.prRootRule().ele00ParserRuleCallConcreteParserRule();
+		return ConcreteTestLanguageGrammarAccess.INSTANCE.prRootRule().ele000ParserRuleCallConcreteParserRule();
 	}
 	
 	@Override
@@ -106,14 +129,14 @@ protected class RootRule_0_0_RuleCall_ConcreteParserRule extends RuleCallToken {
 }
 
 // CallOverridenParserRule
-protected class RootRule_0_1_RuleCall_CallOverridenParserRule extends RuleCallToken {
+protected class RootRule_0_0_1_RuleCall_CallOverridenParserRule extends RuleCallToken {
 	
-	public RootRule_0_1_RuleCall_CallOverridenParserRule(IInstanceDescription curr, AbstractToken pred) {
+	public RootRule_0_0_1_RuleCall_CallOverridenParserRule(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public RuleCall getGrammarElement() {
-		return ConcreteTestLanguageGrammarAccess.INSTANCE.prRootRule().ele01ParserRuleCallCallOverridenParserRule();
+		return ConcreteTestLanguageGrammarAccess.INSTANCE.prRootRule().ele001ParserRuleCallCallOverridenParserRule();
 	}
 	
 	@Override
@@ -126,14 +149,14 @@ protected class RootRule_0_1_RuleCall_CallOverridenParserRule extends RuleCallTo
 
 
 // CallExtendedParserRule
-protected class RootRule_1_RuleCall_CallExtendedParserRule extends RuleCallToken {
+protected class RootRule_0_1_RuleCall_CallExtendedParserRule extends RuleCallToken {
 	
-	public RootRule_1_RuleCall_CallExtendedParserRule(IInstanceDescription curr, AbstractToken pred) {
+	public RootRule_0_1_RuleCall_CallExtendedParserRule(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public RuleCall getGrammarElement() {
-		return ConcreteTestLanguageGrammarAccess.INSTANCE.prRootRule().ele1ParserRuleCallCallExtendedParserRule();
+		return ConcreteTestLanguageGrammarAccess.INSTANCE.prRootRule().ele01ParserRuleCallCallExtendedParserRule();
 	}
 	
 	@Override
@@ -141,6 +164,26 @@ protected class RootRule_1_RuleCall_CallExtendedParserRule extends RuleCallToken
 		if(checkForRecursion(CallExtendedParserRule_Assignment_call.class, current)) return null;
 		if(!current.isInstanceOf("CallExtendedParserRule")) return null;
 		return new CallExtendedParserRule_Assignment_call(current, this).firstSolution();
+	}
+}
+
+
+// OverridableParserRule2
+protected class RootRule_1_RuleCall_OverridableParserRule2 extends RuleCallToken {
+	
+	public RootRule_1_RuleCall_OverridableParserRule2(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public RuleCall getGrammarElement() {
+		return ConcreteTestLanguageGrammarAccess.INSTANCE.prRootRule().ele1ParserRuleCallOverridableParserRule2();
+	}
+	
+	@Override
+	protected Solution createSolution() {
+		if(checkForRecursion(OverridableParserRule2_Group.class, current)) return null;
+		if(!current.isInstanceOf("AType2")) return null;
+		return new OverridableParserRule2_Group(current, this).firstSolution();
 	}
 }
 
@@ -444,6 +487,178 @@ protected class CallOverridenParserRule_Assignment_call extends AssignmentToken 
 }
 
 /************ end Rule CallOverridenParserRule ****************/
+
+
+/************ begin Rule OverridableParserRule2 ****************
+ *
+ * OverridableParserRule2 returns AType2:   "overridden other element" name=ID "-" age=INT;
+ *
+ **/
+
+
+// "overridden other element" name=ID "-" age=INT
+protected class OverridableParserRule2_Group extends GroupToken {
+	
+	public OverridableParserRule2_Group(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Group getGrammarElement() {
+		return ConcreteTestLanguageGrammarAccess.INSTANCE.prOverridableParserRule2().eleGroup();
+	}
+		
+	@Override
+	protected Solution createSolution() {	
+		Solution s1 = new OverridableParserRule2_1_Assignment_age(current, this).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new OverridableParserRule2_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 == null) {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
+				if(s1 == null) return null;
+			} else {
+				last = s2.getPredecessor();
+				return s2;
+			}
+		}
+		return null;
+		
+	}
+}
+
+// "overridden other element" name=ID "-"
+protected class OverridableParserRule2_0_Group extends GroupToken {
+	
+	public OverridableParserRule2_0_Group(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Group getGrammarElement() {
+		return ConcreteTestLanguageGrammarAccess.INSTANCE.prOverridableParserRule2().ele0Group();
+	}
+		
+	@Override
+	protected Solution createSolution() {	
+		Solution s1 = new OverridableParserRule2_0_1_Keyword(current, this).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new OverridableParserRule2_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 == null) {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
+				if(s1 == null) return null;
+			} else {
+				last = s2.getPredecessor();
+				return s2;
+			}
+		}
+		return null;
+		
+	}
+}
+
+// "overridden other element" name=ID
+protected class OverridableParserRule2_0_0_Group extends GroupToken {
+	
+	public OverridableParserRule2_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Group getGrammarElement() {
+		return ConcreteTestLanguageGrammarAccess.INSTANCE.prOverridableParserRule2().ele00Group();
+	}
+		
+	@Override
+	protected Solution createSolution() {	
+		Solution s1 = new OverridableParserRule2_0_0_1_Assignment_name(current, this).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new OverridableParserRule2_0_0_0_Keyword_overriddenotherelement(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 == null) {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
+				if(s1 == null) return null;
+			} else {
+				last = s2.getPredecessor();
+				return s2;
+			}
+		}
+		return null;
+		
+	}
+}
+
+// "overridden other element"
+protected class OverridableParserRule2_0_0_0_Keyword_overriddenotherelement extends KeywordToken  {
+	
+	public OverridableParserRule2_0_0_0_Keyword_overriddenotherelement(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Keyword getGrammarElement() {
+		return ConcreteTestLanguageGrammarAccess.INSTANCE.prOverridableParserRule2().ele000KeywordOverriddenOtherElement();
+	}	
+}
+
+// name=ID
+protected class OverridableParserRule2_0_0_1_Assignment_name extends AssignmentToken  {
+	
+	public OverridableParserRule2_0_0_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Assignment getGrammarElement() {
+		return ConcreteTestLanguageGrammarAccess.INSTANCE.prOverridableParserRule2().ele001AssignmentName();
+	}
+	
+	@Override
+	protected Solution createSolution() {
+		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("name");
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = ConcreteTestLanguageGrammarAccess.INSTANCE.prOverridableParserRule2().ele0010LexerRuleCallID();
+			return new Solution(obj);
+		}
+		return null;
+	}
+}
+
+
+// "-"
+protected class OverridableParserRule2_0_1_Keyword extends KeywordToken  {
+	
+	public OverridableParserRule2_0_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Keyword getGrammarElement() {
+		return ConcreteTestLanguageGrammarAccess.INSTANCE.prOverridableParserRule2().ele01KeywordHyphenMinus();
+	}	
+}
+
+
+// age=INT
+protected class OverridableParserRule2_1_Assignment_age extends AssignmentToken  {
+	
+	public OverridableParserRule2_1_Assignment_age(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Assignment getGrammarElement() {
+		return ConcreteTestLanguageGrammarAccess.INSTANCE.prOverridableParserRule2().ele1AssignmentAge();
+	}
+	
+	@Override
+	protected Solution createSolution() {
+		if((value = current.getConsumable("age",IS_REQUIRED)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("age");
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = ConcreteTestLanguageGrammarAccess.INSTANCE.prOverridableParserRule2().ele10LexerRuleCallINT();
+			return new Solution(obj);
+		}
+		return null;
+	}
+}
+
+
+/************ end Rule OverridableParserRule2 ****************/
 
 
 /************ begin Rule ExtendableParserRule ****************

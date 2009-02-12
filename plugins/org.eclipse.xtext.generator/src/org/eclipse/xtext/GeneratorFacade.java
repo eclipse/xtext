@@ -57,7 +57,7 @@ import com.google.inject.Injector;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- * 
+ *
  */
 public class GeneratorFacade {
 
@@ -68,10 +68,10 @@ public class GeneratorFacade {
 	private static String[] defaultExcludes = new String[] { "CVS", ".cvsignore", ".svn" };
 
 	private static boolean useDefaultExcludes = true;
-	
+
 	private final static Injector XTEXT_INJECTOR = Guice.createInjector(new XtextRuntimeModule());
 	//TODO rqfactor the whole generator, so that it is wired up using guice.
-	//We need to come up with a good idea, of how to use depenendencies from Xtend. 
+	//We need to come up with a good idea, of how to use depenendencies from Xtend.
 	public static SerializerUtil getSerializer() {
 		return XTEXT_INJECTOR.getInstance(SerializerUtil.class);
 	}
@@ -157,6 +157,11 @@ public class GeneratorFacade {
 		Grammar grammar = genModel.getGrammar();
 		while(grammar != null) {
 			resource.getContents().add(grammar);
+			for(AbstractMetamodelDeclaration metamodelDecl: grammar.getMetamodelDeclarations()) {
+				EPackage generatedPackage = metamodelDecl.getEPackage();
+				Resource packResource = generatedPackage.eResource();
+				packResource.setURI(URI.createURI(generatedPackage.getNsURI()));
+			}
 			grammar = grammar.getSuperGrammar();
 		}
 		resource.save(null);
@@ -261,7 +266,7 @@ public class GeneratorFacade {
 				xtendScopeProvider.getPluginDependencies().add(anotherXtendPlugin);
 				genModel.getServices().add(xtendScopeProvider);
 			}
-			
+
 			if (uiProjectPath != null) {
 				if (isGenerateXtendServices) {
 					GenService xtendProposalProvider = XtextgenFactory.eINSTANCE.createGenService();
@@ -309,7 +314,7 @@ public class GeneratorFacade {
 		log.info("Cleaning folder " + f.getPath());
 		Files.cleanFolder(f, new FileFilter() {
 			private final Collection<String> excludes = new HashSet<String>(
-					useDefaultExcludes ? Arrays.asList(defaultExcludes) : GeneratorFacade.excludes); 
+					useDefaultExcludes ? Arrays.asList(defaultExcludes) : GeneratorFacade.excludes);
 			public boolean accept(File pathname) {
 				return !excludes.contains(pathname.getName());
 			}
@@ -318,7 +323,7 @@ public class GeneratorFacade {
 
 	/**
 	 * Returns if the default excludes are used.
-	 * 
+	 *
 	 * @return <code>true</code>, if the default excludes are used, otherwise
 	 *         <code>false</code>.
 	 */
@@ -328,7 +333,7 @@ public class GeneratorFacade {
 
 	/**
 	 * Sets if the default excludes are used.
-	 * 
+	 *
 	 * @param useDefaultExcludes
 	 *            If <code>true</code>, the default excludes are used, if
 	 *            <code>false</code>, the default excludes are ignored.
@@ -339,7 +344,7 @@ public class GeneratorFacade {
 
 	/**
 	 * Adds an exclude.
-	 * 
+	 *
 	 * @param exclude
 	 *            the exclude
 	 */

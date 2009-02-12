@@ -1,10 +1,10 @@
 /*******************************************************************************
- * __  ___            _   
+ * __  ___            _
  * \ \/ / |_ _____  __ |_
  *  \  /| __/ _ \ \/ / __|
  *  /  \| |_  __/>  <| |_
  * /_/\_\\__\___/_/\_\\__|
- * 
+ *
  * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -20,6 +20,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -36,9 +37,10 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.xmi.XMLResource;
+import org.eclipse.emf.ecore.xmi.impl.URIHandlerImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -90,7 +92,7 @@ public class EcoreUtil2 extends EcoreUtil {
 			result.add(iterator.next());
 		return result;
 	}
-	
+
 	public static List<EObject> eAllContentsAsList(Resource resource) {
 		List<EObject> result = new ArrayList<EObject>();
 		TreeIterator<EObject> iterator = resource.getAllContents();
@@ -100,8 +102,6 @@ public class EcoreUtil2 extends EcoreUtil {
 		return result;
 	}
 
-	/**
-     */
 	public static final EPackage loadEPackage(String uriAsString, ClassLoader classLoader) {
 		if (EPackage.Registry.INSTANCE.containsKey(uriAsString))
 			return EPackage.Registry.INSTANCE.getEPackage(uriAsString);
@@ -122,13 +122,29 @@ public class EcoreUtil2 extends EcoreUtil {
 		return null;
 	}
 
-	public static void saveEPackage(EPackage ePackage, String path) throws IOException {
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore", new XMIResourceFactoryImpl());
+	public static void saveEPackage(final EPackage ePackage, String path) throws IOException {
 		URI uri = URI.createFileURI(path + "/" + ePackage.getName() + ".ecore");
-		ResourceSet resourceSet = ePackage.eResource().getResourceSet();
-		Resource metaModelResource = resourceSet.createResource(uri);
+		Resource metaModelResource = new XMIResourceFactoryImpl().createResource(uri);
+		Map<?, ?> options = Collections.singletonMap(XMLResource.OPTION_URI_HANDLER, new URIHandlerImpl() {
+			URI originalBaseURI;
+			@Override
+			public void setBaseURI(URI uri) {
+				this.originalBaseURI = uri;
+				// fake the base uri
+			    super.setBaseURI(URI.createURI(ePackage.getNsURI()));
+			}
+
+			@Override
+			public URI deresolve(URI uri) {
+				if (uri.trimFragment().equals(baseURI))
+					return super.deresolve(uri);
+				if (uri.trimFragment().equals(originalBaseURI))
+					return deresolve(URI.createURI(baseURI.toString() + '#' + uri.fragment()));
+				return uri;
+			}
+		});
 		metaModelResource.getContents().add(ePackage);
-		metaModelResource.save(null);
+		metaModelResource.save(options);
 	}
 
 	public static String getURIFragment(EObject eObject) {

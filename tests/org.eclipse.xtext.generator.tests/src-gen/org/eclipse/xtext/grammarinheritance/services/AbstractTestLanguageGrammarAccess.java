@@ -79,8 +79,31 @@ public class AbstractTestLanguageGrammarAccess extends BaseEPackageAccess implem
 		public RuleCall ele10LexerRuleCallID() { return c10LexerRuleCallID; }
 	}
 
-	public class AbstractCallExtendedParserRuleElements implements IParserRuleAccess {
+	public class OverridableParserRule2Elements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(5);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword c0KeywordOtherElement = (Keyword)cGroup.eContents().get(0);
+		private final Assignment c1AssignmentName = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall c10LexerRuleCallSTRING = (RuleCall)c1AssignmentName.eContents().get(0);
+		
+		// OverridableParserRule2 returns AType:   "other element" name=STRING;
+		public ParserRule getRule() { return rule; }
+
+		// "other element" name=STRING
+		public Group eleGroup() { return cGroup; }
+
+		// "other element"
+		public Keyword ele0KeywordOtherElement() { return c0KeywordOtherElement; }
+
+		// name=STRING
+		public Assignment ele1AssignmentName() { return c1AssignmentName; }
+
+		// STRING
+		public RuleCall ele10LexerRuleCallSTRING() { return c10LexerRuleCallSTRING; }
+	}
+
+	public class AbstractCallExtendedParserRuleElements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(6);
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword c0KeywordExtendedmodel = (Keyword)cGroup.eContents().get(0);
 		private final Assignment c1AssignmentElements = (Assignment)cGroup.eContents().get(1);
@@ -103,7 +126,7 @@ public class AbstractTestLanguageGrammarAccess extends BaseEPackageAccess implem
 	}
 
 	public class ExtendableParserRuleElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(6);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(7);
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword c0KeywordElement = (Keyword)cGroup.eContents().get(0);
 		private final Assignment c1AssignmentName = (Assignment)cGroup.eContents().get(1);
@@ -132,6 +155,7 @@ public class AbstractTestLanguageGrammarAccess extends BaseEPackageAccess implem
 	private static InheritedParserRuleElements pInheritedParserRule;
 	private static AbstractCallOverridenParserRuleElements pAbstractCallOverridenParserRule;
 	private static OverridableParserRuleElements pOverridableParserRule;
+	private static OverridableParserRule2Elements pOverridableParserRule2;
 	private static AbstractCallExtendedParserRuleElements pAbstractCallExtendedParserRule;
 	private static ExtendableParserRuleElements pExtendableParserRule;
 	private static LexerRule lREAL;
@@ -167,6 +191,11 @@ public class AbstractTestLanguageGrammarAccess extends BaseEPackageAccess implem
 		return (pOverridableParserRule != null) ? pOverridableParserRule : (pOverridableParserRule = new OverridableParserRuleElements());
 	} 
 
+	// OverridableParserRule2 returns AType:   "other element" name=STRING;
+	public OverridableParserRule2Elements prOverridableParserRule2() {
+		return (pOverridableParserRule2 != null) ? pOverridableParserRule2 : (pOverridableParserRule2 = new OverridableParserRule2Elements());
+	} 
+
 	// AbstractCallExtendedParserRule returns AModel:   "extendedmodel" (elements+=ExtendableParserRule)*;
 	public AbstractCallExtendedParserRuleElements prAbstractCallExtendedParserRule() {
 		return (pAbstractCallExtendedParserRule != null) ? pAbstractCallExtendedParserRule : (pAbstractCallExtendedParserRule = new AbstractCallExtendedParserRuleElements());
@@ -179,11 +208,11 @@ public class AbstractTestLanguageGrammarAccess extends BaseEPackageAccess implem
 
 	// lexer REAL returns EDouble:   "RULE_INT \'.\' RULE_INT";
 	public LexerRule lrREAL() {
-		return (lREAL != null) ? lREAL : (lREAL = (LexerRule) getGrammar().eContents().get(7));
+		return (lREAL != null) ? lREAL : (lREAL = (LexerRule) getGrammar().eContents().get(8));
 	} 
 
 	// lexer ID:   "(\'^\')?(\'a\'..\'z\'|\'A\'..\'Z\'|\'\u00F6\'|\'\u00E4\'|\'\u00FC\'|\'_\') (\'a\'..\'z\'|\'A\'..\'Z\'|\'_\'|\'0\'..\'9\')*";
 	public LexerRule lrID() {
-		return (lID != null) ? lID : (lID = (LexerRule) getGrammar().eContents().get(8));
+		return (lID != null) ? lID : (lID = (LexerRule) getGrammar().eContents().get(9));
 	} 
 }

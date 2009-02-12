@@ -13,6 +13,9 @@ AbstractCallOverridenParserRule returns mm::AModel:
 OverridableParserRule returns mm::AType :
 	'element' name=ID;
 	
+OverridableParserRule2 returns mm::AType :
+    'other element' name=STRING;
+
 AbstractCallExtendedParserRule returns mm::AModel:
 	'extendedmodel' (elements+=ExtendableParserRule)*;
 

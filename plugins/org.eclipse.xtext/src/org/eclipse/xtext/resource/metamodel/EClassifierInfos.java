@@ -32,16 +32,16 @@ import org.eclipse.xtext.util.Tuples;
  * A possible extension would be to normalize the type hierarchy and remove
  * redundant supertype references. We currently don't think thats necessary as
  * EMF handles multiple inheritance gracefully.
- * 
+ *
  * @author Jan Köhnlein - Initial contribution and API
  * @author Sebastian Zarnekow
  */
 public class EClassifierInfos {
 
-	private Map<Pair<String, String>, EClassifierInfo> infoMap = new HashMap<Pair<String, String>, EClassifierInfo>();
-	
+	private final Map<Pair<String, String>, EClassifierInfo> infoMap = new HashMap<Pair<String, String>, EClassifierInfo>();
+
 	private EClassifierInfos parent;
-	
+
 	public EClassifierInfos getParent() {
 		return parent;
 	}
@@ -69,11 +69,9 @@ public class EClassifierInfos {
 	public EClassifierInfo getInfo(TypeRef typeRef) {
 		if (typeRef.getType() == null)
 			return null;
-		if (typeRef.getMetamodel() == null)
-			throw new NullPointerException();
 		return getInfo(typeRef.getMetamodel(), typeRef.getType().getName());
 	}
-	
+
 	public EClassifierInfo getInfo(AbstractMetamodelDeclaration alias, String name) {
 		return getInfo(getKey(alias, name));
 	}
@@ -96,7 +94,7 @@ public class EClassifierInfos {
 		}
 		return parent == null ? null : parent.getInfoOrNull(eClassifier);
 	}
-	
+
 	private EClassifierInfo getCompatibleType(EClassifierInfo infoA, EClassifierInfo infoB) {
 		if (infoA.equals(infoB))
 			return infoA;
@@ -107,7 +105,7 @@ public class EClassifierInfos {
 							+ infoB + ")");
 
 		EClassifier compatibleType = EcoreUtil2.getCompatibleType(infoA.getEClassifier(), infoB.getEClassifier());
-		
+
 		return getInfoOrNull(compatibleType);
 	}
 

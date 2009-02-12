@@ -30,7 +30,7 @@ import org.eclipse.xtext.util.XtextSwitch;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 final class ElementTypeCalculator extends XtextSwitch<EClassifier> implements Function<AbstractElement, EClassifier>{
-	
+
 	private final EClassifierInfos classifierInfos;
 
 	/**
@@ -48,6 +48,8 @@ final class ElementTypeCalculator extends XtextSwitch<EClassifier> implements Fu
 	@Override
 	public EClassifier caseTypeRef(TypeRef object) {
 		if (object.getType() == null) {
+			if (object.getMetamodel() == null || object.getMetamodel().getEPackage() == null)
+				return null;
 			String name = GrammarUtil.getTypeRefName(object);
 			if (Strings.isEmpty(name))
 				return null;
@@ -60,7 +62,9 @@ final class ElementTypeCalculator extends XtextSwitch<EClassifier> implements Fu
 
 	@Override
 	public EClassifier caseAbstractRule(AbstractRule object) {
-		return doSwitch(object.getType());	
+		if (object.getType() != null)
+			return doSwitch(object.getType());
+		return null;
 	}
 
 	@Override
