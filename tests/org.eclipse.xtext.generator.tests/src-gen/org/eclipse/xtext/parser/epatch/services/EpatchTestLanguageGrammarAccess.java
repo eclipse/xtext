@@ -4,14 +4,15 @@ Generated with Xtext
 
 package org.eclipse.xtext.parser.epatch.services;
 
+import com.google.inject.Singleton;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.BaseEPackageAccess;
-import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
 
+@Singleton
 public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implements IGrammarAccess {
 	
 	public class EPatchElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(1);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EPatch");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
@@ -86,7 +87,7 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 	}
 
 	public class ImportElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(2);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Import");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Alternatives c0Alternatives = (Alternatives)cAlternatives.eContents().get(0);
 		private final RuleCall c00ParserRuleCallModelImport = (RuleCall)c0Alternatives.eContents().get(0);
@@ -113,7 +114,7 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 	}
 
 	public class ModelImportElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(3);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ModelImport");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall c0ParserRuleCallResourceImport = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall c1ParserRuleCallEPackageImport = (RuleCall)cAlternatives.eContents().get(1);
@@ -132,7 +133,7 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 	}
 
 	public class ResourceImportElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(4);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ResourceImport");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
@@ -175,7 +176,7 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 	}
 
 	public class EPackageImportElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(5);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EPackageImport");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
@@ -218,7 +219,7 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 	}
 
 	public class JavaImportElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(6);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "JavaImport");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
@@ -269,7 +270,7 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 	}
 
 	public class ExtensionImportElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(7);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ExtensionImport");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
@@ -320,7 +321,7 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 	}
 
 	public class NamedResourceElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(8);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NamedResource");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
@@ -455,7 +456,7 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 	}
 
 	public class NamedObjectElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(9);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NamedObject");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall c0ParserRuleCallObjectRef = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall c1ParserRuleCallCreatedObject = (RuleCall)cAlternatives.eContents().get(1);
@@ -474,7 +475,7 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 	}
 
 	public class ObjectRefElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(10);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ObjectRef");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
@@ -665,7 +666,7 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 	}
 
 	public class AssignmentElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(11);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Assignment");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Alternatives c0Alternatives = (Alternatives)cAlternatives.eContents().get(0);
 		private final Alternatives c00Alternatives = (Alternatives)c0Alternatives.eContents().get(0);
@@ -700,7 +701,7 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 	}
 
 	public class BiSingleAssignmentElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(12);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "BiSingleAssignment");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
@@ -763,7 +764,7 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 	}
 
 	public class BiListAssignmentElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(13);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "BiListAssignment");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
@@ -882,7 +883,7 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 	}
 
 	public class MonoSingleAssignmentElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(14);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MonoSingleAssignment");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
@@ -925,7 +926,7 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 	}
 
 	public class MonoListAssignmentElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(15);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MonoListAssignment");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
@@ -1004,7 +1005,7 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 	}
 
 	public class AssignmentValueElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(16);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AssignmentValue");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Alternatives c0Alternatives = (Alternatives)cAlternatives.eContents().get(0);
 		private final Alternatives c00Alternatives = (Alternatives)c0Alternatives.eContents().get(0);
@@ -1115,7 +1116,7 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 	}
 
 	public class ListAssignmentValueElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(17);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ListAssignmentValue");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Assignment c00AssignmentIndex = (Assignment)c0Group.eContents().get(0);
@@ -1274,7 +1275,7 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 	}
 
 	public class SingleAssignmentValueElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(18);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SingleAssignmentValue");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Alternatives c0Alternatives = (Alternatives)cAlternatives.eContents().get(0);
 		private final Alternatives c00Alternatives = (Alternatives)c0Alternatives.eContents().get(0);
@@ -1397,7 +1398,7 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 	}
 
 	public class CreatedObjectElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(19);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "CreatedObject");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Alternatives c00Alternatives = (Alternatives)c0Group.eContents().get(0);
@@ -1480,7 +1481,7 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 	}
 
 	public class ObjectNewElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(20);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ObjectNew");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Keyword c00KeywordNew = (Keyword)c0Group.eContents().get(0);
@@ -1515,7 +1516,7 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 	}
 
 	public class ObjectCopyElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(21);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ObjectCopy");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Keyword c00KeywordCopy = (Keyword)c0Group.eContents().get(0);
@@ -1550,7 +1551,7 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 	}
 
 	public class MigrationElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(23);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Migration");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
@@ -1621,7 +1622,7 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 	}
 
 	public class ExecutableElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(24);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Executable");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall c0ParserRuleCallJavaExecutable = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall c1ParserRuleCallExpressionExecutable = (RuleCall)cAlternatives.eContents().get(1);
@@ -1640,7 +1641,7 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 	}
 
 	public class JavaExecutableElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(25);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "JavaExecutable");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
@@ -1679,7 +1680,7 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 	}
 
 	public class ExpressionExecutableElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(26);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ExpressionExecutable");
 		private final Assignment cAssignmentExprstr = (Assignment)rule.eContents().get(1);
 		private final RuleCall c0LexerRuleCallSTRING = (RuleCall)cAssignmentExprstr.eContents().get(0);
 		
@@ -1723,6 +1724,13 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 	private static ExecutableElements pExecutable;
 	private static JavaExecutableElements pJavaExecutable;
 	private static ExpressionExecutableElements pExpressionExecutable;
+	private static LexerRule lID;
+	private static LexerRule lINT;
+	private static LexerRule lSTRING;
+	private static LexerRule lML_COMMENT;
+	private static LexerRule lSL_COMMENT;
+	private static LexerRule lWS;
+	private static LexerRule lANY_OTHER;
 
 	@SuppressWarnings("unused")
 	public synchronized Grammar getGrammar() {	
@@ -1732,10 +1740,6 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 			GRAMMAR = (Grammar) loadGrammarFile(EpatchTestLanguageGrammarAccess.class.getClassLoader(),EPATCHTESTLANGUAGE_GRAMMAR_CP_URI);
 		}
 		return GRAMMAR;
-	}
-	
-	public XtextBuiltinGrammarAccess getSuperGrammar() {
-		return XtextBuiltinGrammarAccess.INSTANCE;
 	}
 
 	
@@ -1846,7 +1850,7 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 
 	// lexer FRAGMENT:   "\'#\' (\'a\'..\'z\'|\'A\'..\'Z\'|\'0\'..\'9\'|\'_\'|\'/\'|\'[\'|\']\'|\'{\'|\'}\'|\'.\'|\'@\')+";
 	public LexerRule lrFRAGMENT() {
-		return (lFRAGMENT != null) ? lFRAGMENT : (lFRAGMENT = (LexerRule) getGrammar().eContents().get(22));
+		return (lFRAGMENT != null) ? lFRAGMENT : (lFRAGMENT = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "FRAGMENT"));
 	} 
 
 	// Migration:   "migrate" (first=Executable)? ("as" asOp=Executable|"each" eachOp=Executable)? ";";
@@ -1867,5 +1871,40 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 	// ExpressionExecutable:   exprstr=STRING;
 	public ExpressionExecutableElements prExpressionExecutable() {
 		return (pExpressionExecutable != null) ? pExpressionExecutable : (pExpressionExecutable = new ExpressionExecutableElements());
+	} 
+
+	// lexer ID:   "(\'^\')?(\'a\'..\'z\'|\'A\'..\'Z\'|\'_\') (\'a\'..\'z\'|\'A\'..\'Z\'|\'_\'|\'0\'..\'9\')*";
+	public LexerRule lrID() {
+		return (lID != null) ? lID : (lID = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "ID"));
+	} 
+
+	// lexer INT returns EInt:   "(\'0\'..\'9\')+";
+	public LexerRule lrINT() {
+		return (lINT != null) ? lINT : (lINT = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "INT"));
+	} 
+
+	// lexer STRING:   "\n\t\t\t  \'\"\' ( \'\\\\\' (\'b\'|\'t\'|\'n\'|\'f\'|\'r\'|\'\\\"\'|\'\\\'\'|\'\\\\\') | ~(\'\\\\\'|\'\"\') )* \'\"\' | \n              \'\\\'\' ( \'\\\\\' (\'b\'|\'t\'|\'n\'|\'f\'|\'r\'|\'\\\"\'|\'\\\'\'|\'\\\\\') | ~(\'\\\\\'|\'\\\'\') )* \'\\\'\'\n              ";
+	public LexerRule lrSTRING() {
+		return (lSTRING != null) ? lSTRING : (lSTRING = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "STRING"));
+	} 
+
+	// lexer ML_COMMENT:   "\'/*\' ( options {greedy=false;} : . )* \'*/\'";
+	public LexerRule lrML_COMMENT() {
+		return (lML_COMMENT != null) ? lML_COMMENT : (lML_COMMENT = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "ML_COMMENT"));
+	} 
+
+	// lexer SL_COMMENT:   "\'//\' ~(\'\\n\'|\'\\r\')* (\'\\r\'? \'\\n\')?";
+	public LexerRule lrSL_COMMENT() {
+		return (lSL_COMMENT != null) ? lSL_COMMENT : (lSL_COMMENT = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "SL_COMMENT"));
+	} 
+
+	// lexer WS:   "(\' \'|\'\\t\'|\'\\r\'|\'\\n\')+";
+	public LexerRule lrWS() {
+		return (lWS != null) ? lWS : (lWS = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "WS"));
+	} 
+
+	// lexer ANY_OTHER:   ".";
+	public LexerRule lrANY_OTHER() {
+		return (lANY_OTHER != null) ? lANY_OTHER : (lANY_OTHER = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "ANY_OTHER"));
 	} 
 }

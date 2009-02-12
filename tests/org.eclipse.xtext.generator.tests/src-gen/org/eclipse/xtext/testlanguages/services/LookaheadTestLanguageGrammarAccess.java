@@ -4,14 +4,15 @@ Generated with Xtext
 
 package org.eclipse.xtext.testlanguages.services;
 
+import com.google.inject.Singleton;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.BaseEPackageAccess;
-import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
 
+@Singleton
 public class LookaheadTestLanguageGrammarAccess extends BaseEPackageAccess implements IGrammarAccess {
 	
 	public class EntryElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(1);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Entry");
 		private final Assignment cAssignmentContents = (Assignment)rule.eContents().get(1);
 		private final RuleCall c0ParserRuleCallAlts = (RuleCall)cAssignmentContents.eContents().get(0);
 		
@@ -26,7 +27,7 @@ public class LookaheadTestLanguageGrammarAccess extends BaseEPackageAccess imple
 	}
 
 	public class AltsElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(2);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Alts");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Alternatives c0Alternatives = (Alternatives)cAlternatives.eContents().get(0);
 		private final RuleCall c00ParserRuleCallLookAhead0 = (RuleCall)c0Alternatives.eContents().get(0);
@@ -53,7 +54,7 @@ public class LookaheadTestLanguageGrammarAccess extends BaseEPackageAccess imple
 	}
 
 	public class LookAhead0Elements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(3);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "LookAhead0");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword c0KeywordBar = (Keyword)cGroup.eContents().get(0);
 		private final Assignment c1AssignmentX = (Assignment)cGroup.eContents().get(1);
@@ -76,7 +77,7 @@ public class LookaheadTestLanguageGrammarAccess extends BaseEPackageAccess imple
 	}
 
 	public class LookAhead1Elements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(4);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "LookAhead1");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
@@ -123,7 +124,7 @@ public class LookaheadTestLanguageGrammarAccess extends BaseEPackageAccess imple
 	}
 
 	public class LookAhead2Elements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(5);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "LookAhead2");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Alternatives c0Alternatives = (Alternatives)cGroup.eContents().get(0);
 		private final Assignment c00AssignmentZ = (Assignment)c0Alternatives.eContents().get(0);
@@ -158,7 +159,7 @@ public class LookaheadTestLanguageGrammarAccess extends BaseEPackageAccess imple
 	}
 
 	public class LookAhead3Elements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(6);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "LookAhead3");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
@@ -201,7 +202,7 @@ public class LookaheadTestLanguageGrammarAccess extends BaseEPackageAccess imple
 	}
 
 	public class LookAhead4Elements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(7);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "LookAhead4");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Assignment c0AssignmentX = (Assignment)cAlternatives.eContents().get(0);
 		private final Keyword c00KeywordC = (Keyword)c0AssignmentX.eContents().get(0);
@@ -238,6 +239,13 @@ public class LookaheadTestLanguageGrammarAccess extends BaseEPackageAccess imple
 	private static LookAhead2Elements pLookAhead2;
 	private static LookAhead3Elements pLookAhead3;
 	private static LookAhead4Elements pLookAhead4;
+	private static LexerRule lID;
+	private static LexerRule lINT;
+	private static LexerRule lSTRING;
+	private static LexerRule lML_COMMENT;
+	private static LexerRule lSL_COMMENT;
+	private static LexerRule lWS;
+	private static LexerRule lANY_OTHER;
 
 	@SuppressWarnings("unused")
 	public synchronized Grammar getGrammar() {	
@@ -247,10 +255,6 @@ public class LookaheadTestLanguageGrammarAccess extends BaseEPackageAccess imple
 			GRAMMAR = (Grammar) loadGrammarFile(LookaheadTestLanguageGrammarAccess.class.getClassLoader(),LOOKAHEADTESTLANGUAGE_GRAMMAR_CP_URI);
 		}
 		return GRAMMAR;
-	}
-	
-	public XtextBuiltinGrammarAccess getSuperGrammar() {
-		return XtextBuiltinGrammarAccess.INSTANCE;
 	}
 
 	
@@ -287,5 +291,40 @@ public class LookaheadTestLanguageGrammarAccess extends BaseEPackageAccess imple
 	// LookAhead4:   x="c"|x="d";
 	public LookAhead4Elements prLookAhead4() {
 		return (pLookAhead4 != null) ? pLookAhead4 : (pLookAhead4 = new LookAhead4Elements());
+	} 
+
+	// lexer ID:   "(\'^\')?(\'a\'..\'z\'|\'A\'..\'Z\'|\'_\') (\'a\'..\'z\'|\'A\'..\'Z\'|\'_\'|\'0\'..\'9\')*";
+	public LexerRule lrID() {
+		return (lID != null) ? lID : (lID = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "ID"));
+	} 
+
+	// lexer INT returns EInt:   "(\'0\'..\'9\')+";
+	public LexerRule lrINT() {
+		return (lINT != null) ? lINT : (lINT = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "INT"));
+	} 
+
+	// lexer STRING:   "\n\t\t\t  \'\"\' ( \'\\\\\' (\'b\'|\'t\'|\'n\'|\'f\'|\'r\'|\'\\\"\'|\'\\\'\'|\'\\\\\') | ~(\'\\\\\'|\'\"\') )* \'\"\' | \n              \'\\\'\' ( \'\\\\\' (\'b\'|\'t\'|\'n\'|\'f\'|\'r\'|\'\\\"\'|\'\\\'\'|\'\\\\\') | ~(\'\\\\\'|\'\\\'\') )* \'\\\'\'\n              ";
+	public LexerRule lrSTRING() {
+		return (lSTRING != null) ? lSTRING : (lSTRING = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "STRING"));
+	} 
+
+	// lexer ML_COMMENT:   "\'/*\' ( options {greedy=false;} : . )* \'*/\'";
+	public LexerRule lrML_COMMENT() {
+		return (lML_COMMENT != null) ? lML_COMMENT : (lML_COMMENT = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "ML_COMMENT"));
+	} 
+
+	// lexer SL_COMMENT:   "\'//\' ~(\'\\n\'|\'\\r\')* (\'\\r\'? \'\\n\')?";
+	public LexerRule lrSL_COMMENT() {
+		return (lSL_COMMENT != null) ? lSL_COMMENT : (lSL_COMMENT = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "SL_COMMENT"));
+	} 
+
+	// lexer WS:   "(\' \'|\'\\t\'|\'\\r\'|\'\\n\')+";
+	public LexerRule lrWS() {
+		return (lWS != null) ? lWS : (lWS = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "WS"));
+	} 
+
+	// lexer ANY_OTHER:   ".";
+	public LexerRule lrANY_OTHER() {
+		return (lANY_OTHER != null) ? lANY_OTHER : (lANY_OTHER = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "ANY_OTHER"));
 	} 
 }

@@ -4,13 +4,15 @@ Generated with Xtext
 
 package org.eclipse.xtext.parser.terminalrules.services;
 
+import com.google.inject.Singleton;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.BaseEPackageAccess;
 
+@Singleton
 public class HiddenTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess implements IGrammarAccess {
 	
 	public class ModelElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(2);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Alternatives c0Alternatives = (Alternatives)cAlternatives.eContents().get(0);
 		private final Alternatives c00Alternatives = (Alternatives)c0Alternatives.eContents().get(0);
@@ -53,7 +55,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess
 	}
 
 	public class WithoutHiddensElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(3);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "WithoutHiddens");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
@@ -108,7 +110,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess
 	}
 
 	public class WithHiddensElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(4);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "WithHiddens");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Keyword c00KeywordWith = (Keyword)c0Group.eContents().get(0);
@@ -139,7 +141,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess
 	}
 
 	public class OverridingHiddensElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(5);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "OverridingHiddens");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
@@ -198,7 +200,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess
 	}
 
 	public class OverridingHiddensCallElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(6);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "OverridingHiddensCall");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Keyword c00KeywordCall = (Keyword)c0Group.eContents().get(0);
@@ -233,7 +235,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess
 	}
 
 	public class InheritingHiddensElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(7);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "InheritingHiddens");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
@@ -304,7 +306,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess
 	}
 
 	public class DatatypeHiddensElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(8);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DatatypeHiddens");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword c0KeywordDatatype = (Keyword)cGroup.eContents().get(0);
 		private final Assignment c1AssignmentValid = (Assignment)cGroup.eContents().get(1);
@@ -327,7 +329,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess
 	}
 
 	public class DatatypeRuleElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(9);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DatatypeRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword c0KeywordRule = (Keyword)cGroup.eContents().get(0);
 		private final Keyword c1KeywordSemicolon = (Keyword)cGroup.eContents().get(1);
@@ -346,7 +348,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess
 	}
 
 	public class HidingHiddensElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(10);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "HidingHiddens");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Keyword c00KeywordHiding = (Keyword)c0Group.eContents().get(0);
@@ -381,7 +383,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess
 	}
 
 	public class InheritingHiddensCallElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(11);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "InheritingHiddensCall");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword c0KeywordCall = (Keyword)cGroup.eContents().get(0);
 		private final Assignment c1AssignmentValid = (Assignment)cGroup.eContents().get(1);
@@ -404,7 +406,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess
 	}
 
 	public class ML_COMMENTElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(12);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ML_COMMENT");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword c0KeywordSolidusAsterisk = (Keyword)cGroup.eContents().get(0);
 		private final UpToToken c1UpToToken = (UpToToken)cGroup.eContents().get(1);
@@ -427,7 +429,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess
 	}
 
 	public class SL_COMMENTElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(13);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SL_COMMENT");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Keyword c00KeywordSolidusSolidus = (Keyword)c0Group.eContents().get(0);
@@ -474,7 +476,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess
 	}
 
 	public class WSElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(14);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "WS");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Alternatives c0Alternatives = (Alternatives)cAlternatives.eContents().get(0);
 		private final Alternatives c00Alternatives = (Alternatives)c0Alternatives.eContents().get(0);
@@ -509,7 +511,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess
 	}
 
 	public class ANY_OTHERElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(15);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ANY_OTHER");
 		private final Wildcard cWildcard = (Wildcard)rule.eContents().get(1);
 		
 		// terminal ANY_OTHER returns EString : . ;
@@ -546,10 +548,6 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess
 			GRAMMAR = (Grammar) loadGrammarFile(HiddenTerminalsTestLanguageGrammarAccess.class.getClassLoader(),HIDDENTERMINALSTESTLANGUAGE_GRAMMAR_CP_URI);
 		}
 		return GRAMMAR;
-	}
-	
-	public IGrammarAccess getSuperGrammar() {
-		return null;		
 	}
 
 	

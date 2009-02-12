@@ -1,6 +1,6 @@
 «REM»
 /*******************************************************************************
- * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2008, 2009 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -32,20 +32,19 @@
 
 package «grammar().gaFQName().toJavaPackage()»;
 
+import com.google.inject.Singleton;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.BaseEPackageAccess;
-«IF grammar().getSuperGrammar() != null-»
-import «grammar().getSuperGrammar().gaFQName()»;
-«ENDIF-»
 
+@Singleton
 public class «grammar().gaSimpleName()» extends BaseEPackageAccess implements IGrammarAccess {
-	«EXPAND parseRuleClasses FOREACH grammar().rules.typeSelect(ParserRule)-»
+	«EXPAND parseRuleClasses FOREACH grammar().allParserRules()-»
 	
 	public final static «grammar().gaSimpleName()» INSTANCE = new «grammar().gaSimpleName()»();
 
 	private static final String «languageName().toUpperCase()»_GRAMMAR_CP_URI = "«grammarResourceURI(grammar())»";
 	private static Grammar GRAMMAR = null;
-	«EXPAND cache FOREACH grammar().rules-»
+	«EXPAND cache FOREACH grammar().allRules()-»
 
 	@SuppressWarnings("unused")
 	public synchronized Grammar getGrammar() {	
@@ -56,17 +55,8 @@ public class «grammar().gaSimpleName()» extends BaseEPackageAccess implements IG
 		}
 		return GRAMMAR;
 	}
-	
-«IF grammar().getSuperGrammar() != null-»
-	public «grammar().getSuperGrammar().gaSimpleName()» getSuperGrammar() {
-		return «grammar().getSuperGrammar().gaSimpleName()».INSTANCE;
-«ELSE-»
-	public IGrammarAccess getSuperGrammar() {
-		return null;		
-«ENDIF-»
-	}
 
-	«EXPAND getter FOREACH grammar().rules-»
+	«EXPAND getter FOREACH grammar().allRules()-»
 }
 «ENDFILE»
 «ENDDEFINE»
@@ -75,7 +65,7 @@ public class «grammar().gaSimpleName()» extends BaseEPackageAccess implements IG
 
 «DEFINE parseRuleClasses FOR ParserRule»
 	public class «gaRuleAccesorClassName()» implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(«grammar().eContents.indexOf(this)»);
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "«name»");
 «FOREACH containedAbstractElements() AS e-»
 		private final «e.getClassName()» «e.gaElementAccessorLocalVarName()» = «e.loadElementStatement()»;
 «ENDFOREACH-»
@@ -119,6 +109,6 @@ public class «grammar().gaSimpleName()» extends BaseEPackageAccess implements IG
 «DEFINE getter FOR LexerRule»
 	// «grammarFragmentToStr()»
 	public LexerRule «gaRuleAccessMethodName()»() {
-		return («gaRuleAccessorLocalVarName()» != null) ? «gaRuleAccessorLocalVarName()» : («gaRuleAccessorLocalVarName()» = (LexerRule) getGrammar().eContents().get(«grammar().eContents.indexOf(this)»));
+		return («gaRuleAccessorLocalVarName()» != null) ? «gaRuleAccessorLocalVarName()» : («gaRuleAccessorLocalVarName()» = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "«name»"));
 	} 
 «ENDDEFINE»
