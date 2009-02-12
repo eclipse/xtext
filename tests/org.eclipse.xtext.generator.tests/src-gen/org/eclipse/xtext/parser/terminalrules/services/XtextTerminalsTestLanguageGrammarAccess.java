@@ -20,42 +20,47 @@ public class XtextTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess 
 		private final Assignment c000000AssignmentAbstract = (Assignment)c00000Alternatives.eContents().get(0);
 		private final Keyword c0000000KeywordAbstractLanguage = (Keyword)c000000AssignmentAbstract.eContents().get(0);
 		private final Keyword c000001KeywordLanguage = (Keyword)c00000Alternatives.eContents().get(1);
-		private final Assignment c00001AssignmentIdElements = (Assignment)c0000Group.eContents().get(1);
-		private final RuleCall c000010ParserRuleCallID = (RuleCall)c00001AssignmentIdElements.eContents().get(0);
+		private final Assignment c00001AssignmentName = (Assignment)c0000Group.eContents().get(1);
+		private final RuleCall c000010ParserRuleCallGrammarID = (RuleCall)c00001AssignmentName.eContents().get(0);
 		private final Group c0001Group = (Group)c000Group.eContents().get(1);
-		private final Keyword c00010KeywordFullStop = (Keyword)c0001Group.eContents().get(0);
-		private final Assignment c00011AssignmentIdElements = (Assignment)c0001Group.eContents().get(1);
-		private final RuleCall c000110ParserRuleCallID = (RuleCall)c00011AssignmentIdElements.eContents().get(0);
+		private final Keyword c00010KeywordExtends = (Keyword)c0001Group.eContents().get(0);
+		private final Assignment c00011AssignmentSuperGrammar = (Assignment)c0001Group.eContents().get(1);
+		private final CrossReference c000110CrossReferenceEStringGrammar = (CrossReference)c00011AssignmentSuperGrammar.eContents().get(0);
 		private final Group c001Group = (Group)c00Group.eContents().get(1);
 		private final Group c0010Group = (Group)c001Group.eContents().get(0);
-		private final Keyword c00100KeywordExtends = (Keyword)c0010Group.eContents().get(0);
-		private final Assignment c00101AssignmentSuperGrammarIdElements = (Assignment)c0010Group.eContents().get(1);
-		private final RuleCall c001010ParserRuleCallID = (RuleCall)c00101AssignmentSuperGrammarIdElements.eContents().get(0);
-		private final Group c0011Group = (Group)c001Group.eContents().get(1);
-		private final Keyword c00110KeywordFullStop = (Keyword)c0011Group.eContents().get(0);
-		private final Assignment c00111AssignmentSuperGrammarIdElements = (Assignment)c0011Group.eContents().get(1);
-		private final RuleCall c001110ParserRuleCallID = (RuleCall)c00111AssignmentSuperGrammarIdElements.eContents().get(0);
+		private final Group c00100Group = (Group)c0010Group.eContents().get(0);
+		private final Assignment c001000AssignmentDefinesHiddenTokens = (Assignment)c00100Group.eContents().get(0);
+		private final Keyword c0010000KeywordHidden = (Keyword)c001000AssignmentDefinesHiddenTokens.eContents().get(0);
+		private final Keyword c001001KeywordLeftParenthesis = (Keyword)c00100Group.eContents().get(1);
+		private final Group c00101Group = (Group)c0010Group.eContents().get(1);
+		private final Assignment c001010AssignmentHiddenTokens = (Assignment)c00101Group.eContents().get(0);
+		private final CrossReference c0010100CrossReferenceEStringAbstractRule = (CrossReference)c001010AssignmentHiddenTokens.eContents().get(0);
+		private final Group c001011Group = (Group)c00101Group.eContents().get(1);
+		private final Keyword c0010110KeywordComma = (Keyword)c001011Group.eContents().get(0);
+		private final Assignment c0010111AssignmentHiddenTokens = (Assignment)c001011Group.eContents().get(1);
+		private final CrossReference c00101110CrossReferenceEStringAbstractRule = (CrossReference)c0010111AssignmentHiddenTokens.eContents().get(0);
+		private final Keyword c0011KeywordRightParenthesis = (Keyword)c001Group.eContents().get(1);
 		private final Assignment c01AssignmentMetamodelDeclarations = (Assignment)c0Group.eContents().get(1);
 		private final RuleCall c010ParserRuleCallAbstractMetamodelDeclaration = (RuleCall)c01AssignmentMetamodelDeclarations.eContents().get(0);
 		private final Assignment c1AssignmentRules = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall c10ParserRuleCallAbstractRule = (RuleCall)c1AssignmentRules.eContents().get(0);
 		
-		// Grammar:   (abstract?="abstract language"|"language") idElements+=ID ("." idElements+=ID)* ("extends" superGrammarIdElements+=ID ("." superGrammarIdElements+=ID)*)? (metamodelDeclarations+=AbstractMetamodelDeclaration)* (rules+=AbstractRule)+;
+		// Grammar:   (abstract?="abstract language"|"language") name=GrammarID ("extends" superGrammar=[Grammar|GrammarID])? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? (metamodelDeclarations+=AbstractMetamodelDeclaration)* (rules+=AbstractRule)+;
 		public ParserRule getRule() { return rule; }
 
-		// (abstract?="abstract language"|"language") idElements+=ID ("." idElements+=ID)* ("extends" superGrammarIdElements+=ID ("." superGrammarIdElements+=ID)*)? (metamodelDeclarations+=AbstractMetamodelDeclaration)* (rules+=AbstractRule)+
+		// (abstract?="abstract language"|"language") name=GrammarID ("extends" superGrammar=[Grammar|GrammarID])? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? (metamodelDeclarations+=AbstractMetamodelDeclaration)* (rules+=AbstractRule)+
 		public Group eleGroup() { return cGroup; }
 
-		// (abstract?="abstract language"|"language") idElements+=ID ("." idElements+=ID)* ("extends" superGrammarIdElements+=ID ("." superGrammarIdElements+=ID)*)? (metamodelDeclarations+=AbstractMetamodelDeclaration)*
+		// (abstract?="abstract language"|"language") name=GrammarID ("extends" superGrammar=[Grammar|GrammarID])? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? (metamodelDeclarations+=AbstractMetamodelDeclaration)*
 		public Group ele0Group() { return c0Group; }
 
-		// (abstract?="abstract language"|"language") idElements+=ID ("." idElements+=ID)* ("extends" superGrammarIdElements+=ID ("." superGrammarIdElements+=ID)*)?
+		// (abstract?="abstract language"|"language") name=GrammarID ("extends" superGrammar=[Grammar|GrammarID])? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")?
 		public Group ele00Group() { return c00Group; }
 
-		// (abstract?="abstract language"|"language") idElements+=ID ("." idElements+=ID)*
+		// (abstract?="abstract language"|"language") name=GrammarID ("extends" superGrammar=[Grammar|GrammarID])?
 		public Group ele000Group() { return c000Group; }
 
-		// (abstract?="abstract language"|"language") idElements+=ID
+		// (abstract?="abstract language"|"language") name=GrammarID
 		public Group ele0000Group() { return c0000Group; }
 
 		// abstract?="abstract language"|"language"
@@ -70,50 +75,65 @@ public class XtextTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess 
 		// "language"
 		public Keyword ele000001KeywordLanguage() { return c000001KeywordLanguage; }
 
-		// idElements+=ID
-		public Assignment ele00001AssignmentIdElements() { return c00001AssignmentIdElements; }
+		// name=GrammarID
+		public Assignment ele00001AssignmentName() { return c00001AssignmentName; }
 
-		// ID
-		public RuleCall ele000010ParserRuleCallID() { return c000010ParserRuleCallID; }
+		// GrammarID
+		public RuleCall ele000010ParserRuleCallGrammarID() { return c000010ParserRuleCallGrammarID; }
 
-		// ("." idElements+=ID)*
+		// ("extends" superGrammar=[Grammar|GrammarID])?
 		public Group ele0001Group() { return c0001Group; }
 
-		// "."
-		public Keyword ele00010KeywordFullStop() { return c00010KeywordFullStop; }
+		// "extends"
+		public Keyword ele00010KeywordExtends() { return c00010KeywordExtends; }
 
-		// idElements+=ID
-		public Assignment ele00011AssignmentIdElements() { return c00011AssignmentIdElements; }
+		// superGrammar=[Grammar|GrammarID]
+		public Assignment ele00011AssignmentSuperGrammar() { return c00011AssignmentSuperGrammar; }
 
-		// ID
-		public RuleCall ele000110ParserRuleCallID() { return c000110ParserRuleCallID; }
+		// [Grammar|GrammarID]
+		public CrossReference ele000110CrossReferenceEStringGrammar() { return c000110CrossReferenceEStringGrammar; }
 
-		// ("extends" superGrammarIdElements+=ID ("." superGrammarIdElements+=ID)*)?
+		// (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")?
 		public Group ele001Group() { return c001Group; }
 
-		// "extends" superGrammarIdElements+=ID
+		// definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)?
 		public Group ele0010Group() { return c0010Group; }
 
-		// "extends"
-		public Keyword ele00100KeywordExtends() { return c00100KeywordExtends; }
+		// definesHiddenTokens?="hidden" "("
+		public Group ele00100Group() { return c00100Group; }
 
-		// superGrammarIdElements+=ID
-		public Assignment ele00101AssignmentSuperGrammarIdElements() { return c00101AssignmentSuperGrammarIdElements; }
+		// definesHiddenTokens?="hidden"
+		public Assignment ele001000AssignmentDefinesHiddenTokens() { return c001000AssignmentDefinesHiddenTokens; }
 
-		// ID
-		public RuleCall ele001010ParserRuleCallID() { return c001010ParserRuleCallID; }
+		// "hidden"
+		public Keyword ele0010000KeywordHidden() { return c0010000KeywordHidden; }
 
-		// ("." superGrammarIdElements+=ID)*
-		public Group ele0011Group() { return c0011Group; }
+		// "("
+		public Keyword ele001001KeywordLeftParenthesis() { return c001001KeywordLeftParenthesis; }
 
-		// "."
-		public Keyword ele00110KeywordFullStop() { return c00110KeywordFullStop; }
+		// (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)?
+		public Group ele00101Group() { return c00101Group; }
 
-		// superGrammarIdElements+=ID
-		public Assignment ele00111AssignmentSuperGrammarIdElements() { return c00111AssignmentSuperGrammarIdElements; }
+		// hiddenTokens+=[AbstractRule]
+		public Assignment ele001010AssignmentHiddenTokens() { return c001010AssignmentHiddenTokens; }
 
-		// ID
-		public RuleCall ele001110ParserRuleCallID() { return c001110ParserRuleCallID; }
+		// [AbstractRule]
+		public CrossReference ele0010100CrossReferenceEStringAbstractRule() { return c0010100CrossReferenceEStringAbstractRule; }
+
+		// ("," hiddenTokens+=[AbstractRule])*
+		public Group ele001011Group() { return c001011Group; }
+
+		// ","
+		public Keyword ele0010110KeywordComma() { return c0010110KeywordComma; }
+
+		// hiddenTokens+=[AbstractRule]
+		public Assignment ele0010111AssignmentHiddenTokens() { return c0010111AssignmentHiddenTokens; }
+
+		// [AbstractRule]
+		public CrossReference ele00101110CrossReferenceEStringAbstractRule() { return c00101110CrossReferenceEStringAbstractRule; }
+
+		// ")"
+		public Keyword ele0011KeywordRightParenthesis() { return c0011KeywordRightParenthesis; }
 
 		// (metamodelDeclarations+=AbstractMetamodelDeclaration)*
 		public Assignment ele01AssignmentMetamodelDeclarations() { return c01AssignmentMetamodelDeclarations; }
@@ -128,8 +148,35 @@ public class XtextTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess 
 		public RuleCall ele10ParserRuleCallAbstractRule() { return c10ParserRuleCallAbstractRule; }
 	}
 
-	public class AbstractRuleElements implements IParserRuleAccess {
+	public class GrammarIDElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(3);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall c0ParserRuleCallID = (RuleCall)cGroup.eContents().get(0);
+		private final Group c1Group = (Group)cGroup.eContents().get(1);
+		private final Keyword c10KeywordFullStop = (Keyword)c1Group.eContents().get(0);
+		private final RuleCall c11ParserRuleCallID = (RuleCall)c1Group.eContents().get(1);
+		
+		// GrammarID returns EString:   ID ("." ID)*;
+		public ParserRule getRule() { return rule; }
+
+		// ID ("." ID)*
+		public Group eleGroup() { return cGroup; }
+
+		// ID
+		public RuleCall ele0ParserRuleCallID() { return c0ParserRuleCallID; }
+
+		// ("." ID)*
+		public Group ele1Group() { return c1Group; }
+
+		// "."
+		public Keyword ele10KeywordFullStop() { return c10KeywordFullStop; }
+
+		// ID
+		public RuleCall ele11ParserRuleCallID() { return c11ParserRuleCallID; }
+	}
+
+	public class AbstractRuleElements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(4);
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Alternatives c0Alternatives = (Alternatives)cAlternatives.eContents().get(0);
 		private final RuleCall c00ParserRuleCallLexerRule = (RuleCall)c0Alternatives.eContents().get(0);
@@ -156,7 +203,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess 
 	}
 
 	public class AbstractMetamodelDeclarationElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(4);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(5);
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall c0ParserRuleCallGeneratedMetamodel = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall c1ParserRuleCallReferencedMetamodel = (RuleCall)cAlternatives.eContents().get(1);
@@ -175,7 +222,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess 
 	}
 
 	public class GeneratedMetamodelElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(5);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(6);
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
@@ -230,7 +277,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess 
 	}
 
 	public class ReferencedMetamodelElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(6);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(7);
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Keyword c00KeywordImport = (Keyword)c0Group.eContents().get(0);
@@ -273,7 +320,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess 
 	}
 
 	public class LexerRuleElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(7);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(8);
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
@@ -352,7 +399,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess 
 	}
 
 	public class ParserRuleElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(8);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(9);
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
@@ -475,7 +522,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess 
 	}
 
 	public class TerminalRuleElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(9);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(10);
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
@@ -550,7 +597,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess 
 	}
 
 	public class TypeRefElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(10);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(11);
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Assignment c00AssignmentMetamodel = (Assignment)c0Group.eContents().get(0);
@@ -585,7 +632,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess 
 	}
 
 	public class AlternativesElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(11);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(12);
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall c0ParserRuleCallGroup = (RuleCall)cGroup.eContents().get(0);
 		private final Group c1Group = (Group)cGroup.eContents().get(1);
@@ -624,7 +671,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess 
 	}
 
 	public class TerminalAlternativesElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(12);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(13);
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall c0ParserRuleCallTerminalGroup = (RuleCall)cGroup.eContents().get(0);
 		private final Group c1Group = (Group)cGroup.eContents().get(1);
@@ -663,7 +710,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess 
 	}
 
 	public class GroupElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(13);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(14);
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall c0ParserRuleCallAbstractToken = (RuleCall)cGroup.eContents().get(0);
 		private final Group c1Group = (Group)cGroup.eContents().get(1);
@@ -694,7 +741,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess 
 	}
 
 	public class TerminalGroupElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(14);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(15);
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall c0ParserRuleCallTerminalToken = (RuleCall)cGroup.eContents().get(0);
 		private final Group c1Group = (Group)cGroup.eContents().get(1);
@@ -725,7 +772,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess 
 	}
 
 	public class AbstractTokenElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(15);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(16);
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Alternatives c0Alternatives = (Alternatives)cGroup.eContents().get(0);
 		private final Alternatives c00Alternatives = (Alternatives)c0Alternatives.eContents().get(0);
@@ -780,7 +827,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess 
 	}
 
 	public class TerminalTokenElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(16);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(17);
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall c0ParserRuleCallTerminalTokenElement = (RuleCall)cGroup.eContents().get(0);
 		private final Assignment c1AssignmentCardinality = (Assignment)cGroup.eContents().get(1);
@@ -819,7 +866,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess 
 	}
 
 	public class AssignmentElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(17);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(18);
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Assignment c00AssignmentFeature = (Assignment)c0Group.eContents().get(0);
@@ -874,7 +921,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess 
 	}
 
 	public class ActionElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(18);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(19);
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
@@ -969,7 +1016,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess 
 	}
 
 	public class AbstractTerminalElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(19);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(20);
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Alternatives c0Alternatives = (Alternatives)cAlternatives.eContents().get(0);
 		private final Alternatives c00Alternatives = (Alternatives)c0Alternatives.eContents().get(0);
@@ -1004,7 +1051,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess 
 	}
 
 	public class TerminalTokenElementElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(20);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(21);
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Alternatives c0Alternatives = (Alternatives)cAlternatives.eContents().get(0);
 		private final Alternatives c00Alternatives = (Alternatives)c0Alternatives.eContents().get(0);
@@ -1047,7 +1094,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess 
 	}
 
 	public class AbstractNegatedTokenElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(21);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(22);
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall c0ParserRuleCallNegatedToken = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall c1ParserRuleCallUpToToken = (RuleCall)cAlternatives.eContents().get(1);
@@ -1066,7 +1113,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess 
 	}
 
 	public class NegatedTokenElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(22);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(23);
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword c0KeywordExclamationMark = (Keyword)cGroup.eContents().get(0);
 		private final Assignment c1AssignmentTerminal = (Assignment)cGroup.eContents().get(1);
@@ -1089,7 +1136,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess 
 	}
 
 	public class UpToTokenElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(23);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(24);
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword c0KeywordHyphenMinusGreaterThanSign = (Keyword)cGroup.eContents().get(0);
 		private final Assignment c1AssignmentTerminal = (Assignment)cGroup.eContents().get(1);
@@ -1112,7 +1159,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess 
 	}
 
 	public class WildcardElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(24);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(25);
 		private final Assignment cAssignmentIsWildcard = (Assignment)rule.eContents().get(1);
 		private final Keyword c0KeywordFullStop = (Keyword)cAssignmentIsWildcard.eContents().get(0);
 		
@@ -1127,7 +1174,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess 
 	}
 
 	public class CharacterRangeElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(25);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(26);
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall c0ParserRuleCallKeyword = (RuleCall)cGroup.eContents().get(0);
 		private final Group c1Group = (Group)cGroup.eContents().get(1);
@@ -1166,7 +1213,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess 
 	}
 
 	public class CrossReferenceElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(26);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(27);
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
@@ -1217,7 +1264,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess 
 	}
 
 	public class ParenthesizedElementElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(27);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(28);
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Keyword c00KeywordLeftParenthesis = (Keyword)c0Group.eContents().get(0);
@@ -1244,7 +1291,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess 
 	}
 
 	public class ParenthesizedTerminalElementElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(28);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(29);
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Keyword c00KeywordLeftParenthesis = (Keyword)c0Group.eContents().get(0);
@@ -1271,7 +1318,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess 
 	}
 
 	public class KeywordElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(29);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(30);
 		private final Assignment cAssignmentValue = (Assignment)rule.eContents().get(1);
 		private final RuleCall c0ParserRuleCallSTRING = (RuleCall)cAssignmentValue.eContents().get(0);
 		
@@ -1286,7 +1333,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess 
 	}
 
 	public class RuleCallElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(30);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(31);
 		private final Assignment cAssignmentRule = (Assignment)rule.eContents().get(1);
 		private final CrossReference c0CrossReferenceEStringAbstractRule = (CrossReference)cAssignmentRule.eContents().get(0);
 		
@@ -1301,7 +1348,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess 
 	}
 
 	public class IDElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(31);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(32);
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Keyword c00KeywordCircumflexAccent = (Keyword)c0Group.eContents().get(0);
@@ -1408,7 +1455,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess 
 	}
 
 	public class INTElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(32);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(33);
 		private final CharacterRange cCharacterRange = (CharacterRange)rule.eContents().get(1);
 		private final Keyword c0KeywordDigitZero = (Keyword)cCharacterRange.eContents().get(0);
 		private final Keyword c1KeywordDigitNine = (Keyword)cCharacterRange.eContents().get(1);
@@ -1427,7 +1474,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess 
 	}
 
 	public class STRINGElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(33);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(34);
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Group c0Group = (Group)cAlternatives.eContents().get(0);
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
@@ -1646,7 +1693,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess 
 	}
 
 	public class ML_COMMENTElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(34);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(35);
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword c0KeywordSolidusAsterisk = (Keyword)cGroup.eContents().get(0);
 		private final UpToToken c1UpToToken = (UpToToken)cGroup.eContents().get(1);
@@ -1669,7 +1716,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess 
 	}
 
 	public class SL_COMMENTElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(35);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(36);
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Keyword c00KeywordSolidusSolidus = (Keyword)c0Group.eContents().get(0);
@@ -1716,7 +1763,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess 
 	}
 
 	public class WSElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(36);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(37);
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Alternatives c0Alternatives = (Alternatives)cAlternatives.eContents().get(0);
 		private final Alternatives c00Alternatives = (Alternatives)c0Alternatives.eContents().get(0);
@@ -1751,7 +1798,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess 
 	}
 
 	public class ANY_OTHERElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(37);
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(38);
 		private final Wildcard cWildcard = (Wildcard)rule.eContents().get(1);
 		
 		// terminal ANY_OTHER returns EString : . ;
@@ -1766,6 +1813,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess 
 	private static final String XTEXTTERMINALSTESTLANGUAGE_GRAMMAR_CP_URI = "classpath:/org/eclipse/xtext/parser/terminalrules/XtextTerminalsTestLanguage.xmi";
 	private static Grammar GRAMMAR = null;
 	private static GrammarElements pGrammar;
+	private static GrammarIDElements pGrammarID;
 	private static AbstractRuleElements pAbstractRule;
 	private static AbstractMetamodelDeclarationElements pAbstractMetamodelDeclaration;
 	private static GeneratedMetamodelElements pGeneratedMetamodel;
@@ -1817,9 +1865,14 @@ public class XtextTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess 
 	}
 
 	
-	// Grammar:   (abstract?="abstract language"|"language") idElements+=ID ("." idElements+=ID)* ("extends" superGrammarIdElements+=ID ("." superGrammarIdElements+=ID)*)? (metamodelDeclarations+=AbstractMetamodelDeclaration)* (rules+=AbstractRule)+;
+	// Grammar:   (abstract?="abstract language"|"language") name=GrammarID ("extends" superGrammar=[Grammar|GrammarID])? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? (metamodelDeclarations+=AbstractMetamodelDeclaration)* (rules+=AbstractRule)+;
 	public GrammarElements prGrammar() {
 		return (pGrammar != null) ? pGrammar : (pGrammar = new GrammarElements());
+	} 
+
+	// GrammarID returns EString:   ID ("." ID)*;
+	public GrammarIDElements prGrammarID() {
+		return (pGrammarID != null) ? pGrammarID : (pGrammarID = new GrammarIDElements());
 	} 
 
 	// AbstractRule:   LexerRule|ParserRule|TerminalRule;
