@@ -37,16 +37,16 @@ public class DefaultEcoreElementFactory implements IAstFactory {
 	@SuppressWarnings("unused")
 	@Inject
 	private IMetamodelAccess metamodelAccess;
-	
+
 	@Inject
 	private IValueConverterService converterService;
 
 	@Inject
 	private IGrammarAccess grammarAccess;
-	
+
 	@Inject(optional=true)
 	private ITokenToStringConverter tokenConverter;
-	
+
 	public IValueConverterService getConverterService() {
 		return converterService;
 	}
@@ -76,10 +76,10 @@ public class DefaultEcoreElementFactory implements IAstFactory {
 	public void set(EObject object, String feature, Object value, String ruleName, AbstractNode node) throws ValueConverterException {
 		final EStructuralFeature structuralFeature = object.eClass().getEStructuralFeature(feature);
 		if (structuralFeature == null)
-			throw new IllegalArgumentException(feature);
+			throw new IllegalArgumentException(feature + " object was: " + object);
 		object.eSet(structuralFeature, getTokenValue(value, ruleName, node));
 	}
-	
+
 	private Object getTokenValue(Object tokenOrValue, String ruleName, AbstractNode node) throws ValueConverterException {
 		try {
 			Object value = getTokenAsStringIfPossible(tokenOrValue);
@@ -91,7 +91,7 @@ public class DefaultEcoreElementFactory implements IAstFactory {
 			throw e;
 		} catch(Exception e) {
 			throw new ValueConverterException(null, node, e);
-		}	
+		}
 	}
 
 	protected Object getTokenAsStringIfPossible(Object tokenOrValue) {
@@ -99,7 +99,7 @@ public class DefaultEcoreElementFactory implements IAstFactory {
 			return tokenConverter.getTokenAsStringIfPossible(tokenOrValue);
 		return tokenOrValue;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public void add(EObject object, String feature, Object value, String ruleName, AbstractNode node) throws ValueConverterException {
 		if (value == null)
@@ -117,7 +117,7 @@ public class DefaultEcoreElementFactory implements IAstFactory {
 			throw new NullPointerException("Cannot find package for declared model '" + metaModelDecl.getAlias() + "'");
 		return metaModelDecl.getEPackage();
 	}
-	
+
 	protected String getNsURI(AbstractMetamodelDeclaration metamodelDecl) {
 		if (metamodelDecl.getEPackage() != null)
 			return metamodelDecl.getEPackage().getNsURI();
@@ -127,7 +127,7 @@ public class DefaultEcoreElementFactory implements IAstFactory {
 	public EClass getEClass(String fullTypeName) {
 		return findEClassByName(grammarAccess.getGrammar(), fullTypeName);
 	}
-	
+
 	public EClass findEClassByName(Grammar grammar, String fullTypeName) {
 		final String[] splitted = fullTypeName.split("::");
 		String alias = "";
@@ -162,7 +162,7 @@ public class DefaultEcoreElementFactory implements IAstFactory {
 								}
 							}
 						}
-					} 
+					}
 				}
 			}
 		}

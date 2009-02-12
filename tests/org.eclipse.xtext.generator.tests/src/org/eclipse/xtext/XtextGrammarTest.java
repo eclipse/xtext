@@ -17,17 +17,17 @@ import org.eclipse.xtext.tests.AbstractGeneratorTest;
  *
  */
 public class XtextGrammarTest extends AbstractGeneratorTest {
-	
+
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		with(XtextGrammarTestLanguageStandaloneSetup.class);
 	}
-	
+
 	public void testInstantiate() throws Exception {
-		EObject grammar = (EObject) getModel("language foo generate foo 'bar' Foo : name=ID;");
+		EObject grammar = getModel("language foo generate foo 'bar' Foo : name=ID;");
 		assertWithXtend("'Foo'","rules.first().name",grammar);
 		assertWithXtend("'name'","rules.first().alternatives.feature",grammar);
 	}
-	
+
 }

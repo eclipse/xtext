@@ -19,15 +19,15 @@ import org.eclipse.xtext.util.StringInputStream;
 public class PerformanceTest extends AbstractGeneratorTest {
 
 	private XtextGrammarTestLanguagePackratParser generated;
-	
+
 	private XtextTerminalsTestLanguagePackratParser generatedWithTerminals;
 
 	private String model;
-	
+
 	private static int metamodelCount = 200;
-	
+
 	private static int lexerRuleCount = metamodelCount;
-	
+
 	private long startTime;
 
 	@Override
@@ -59,7 +59,8 @@ public class PerformanceTest extends AbstractGeneratorTest {
 		System.out.println("usage before:   " + (java.lang.Runtime.getRuntime().totalMemory() - java.lang.Runtime.getRuntime().freeMemory()));
 		startTime = System.currentTimeMillis();
 	}
-	
+
+	@Override
 	protected void tearDown() throws Exception {
 		long endTime = System.currentTimeMillis();
 		System.out.println("usage after:    " + (java.lang.Runtime.getRuntime().totalMemory() - java.lang.Runtime.getRuntime().freeMemory()));
@@ -73,55 +74,55 @@ public class PerformanceTest extends AbstractGeneratorTest {
 		assertNotNull(result.getRootASTElement());
 		assertNotNull(result.getRootNode());
 	}
-	
+
 //	public void testProfile() {
 //		testFirstGeneratedWithTerminalsPackrat();
 //		for (int i = 0; i < 10; i++)
 //			testGeneratedWithTerminalsPackratTwice();
 //	}
-	
+
 	public void testFirstGeneratedWithTerminalsPackrat() {
 		doTest(generatedWithTerminals);
 	}
-	
+
 	public void testSecondGeneratedWithTerminalsPackrat() {
 		doTest(generatedWithTerminals);
 	}
-	
+
 	public void testGeneratedWithTerminalsPackratTwice() {
 		for (int i = 0; i < 2; i++) {
 			doTest(generatedWithTerminals);
 		}
 	}
-	
+
 	public void testFirstGeneratedPackrat() {
 		doTest(generated);
 	}
-	
+
 	public void testSecondGeneratedPackrat() {
 		doTest(generated);
 	}
-	
+
 	public void testGeneratedPackratTwice() {
 		for (int i = 0; i < 2; i++) {
 			doTest(generated);
 		}
 	}
-	
+
 	public void testFirstAntlr() {
 		IParseResult result = getParser().parse(new StringInputStream(model));
 		assertNotNull(result);
 		assertNotNull(result.getRootASTElement());
 		assertNotNull(result.getRootNode());
 	}
-	
+
 	public void testSecondAntlr() {
 		IParseResult result = getParser().parse(new StringInputStream(model));
 		assertNotNull(result);
 		assertNotNull(result.getRootASTElement());
 		assertNotNull(result.getRootNode());
 	}
-	
+
 	public void testAntlrTwice() {
 		for (int i = 0; i < 2; i++) {
 			IParseResult result = getParser().parse(new StringInputStream(model));
