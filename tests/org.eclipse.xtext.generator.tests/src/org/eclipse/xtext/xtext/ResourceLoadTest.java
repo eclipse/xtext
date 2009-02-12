@@ -24,11 +24,12 @@ import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.util.CollectionUtils;
 import org.eclipse.xtext.util.Function;
 import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.Tuples;
 
 /**
  * Really long running smoke tests for the xtext grammar.
  * Uses all test grammars.
- * 
+ *
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @SuppressWarnings("unused")
@@ -37,7 +38,7 @@ public class ResourceLoadTest extends AbstractGeneratorTest {
 	private Class<?> clazz;
 
 	private String model;
-	
+
 	@Override
 	public int countTestCases() {
 		return super.countTestCases() * GenerateAllTestGrammars.testclasses.length;
@@ -72,7 +73,7 @@ public class ResourceLoadTest extends AbstractGeneratorTest {
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 //	public void testNoExceptionDiagnostics_01() throws Exception{
 //		for(int i = 0; i < model.length(); i++) {
 //			String model = this.model.substring(0, i);
@@ -80,7 +81,7 @@ public class ResourceLoadTest extends AbstractGeneratorTest {
 //			assertNoExceptionDiagnostic(r, model);
 //		}
 //	}
-//
+
 //	public void testNoExceptionDiagnostics_02() throws Exception{
 //		for(int i = 0; i < model.length(); i++) {
 //			String model = this.model.substring(i);
@@ -88,7 +89,7 @@ public class ResourceLoadTest extends AbstractGeneratorTest {
 //			assertNoExceptionDiagnostic(r, model);
 //		}
 //	}
-//	
+
 //	public void testNoExceptionDiagnostics_03() throws Exception{
 //		for(int i = 0; i < model.length() - 1; i++) {
 //			String model = this.model.substring(0, i) + this.model.substring(i + 1);
@@ -97,7 +98,7 @@ public class ResourceLoadTest extends AbstractGeneratorTest {
 //			assertNoExceptionDiagnostic(r, model);
 //		}
 //	}
-//	
+//
 //	public void testNoExceptionDiagnostics_04() throws Exception {
 //		XtextResource r = getResourceFromString(this.model);
 //		assertTrue(r.getErrors().isEmpty());
@@ -105,26 +106,26 @@ public class ResourceLoadTest extends AbstractGeneratorTest {
 //		Iterable<Pair<Integer, Integer>> nodeBounds = CollectionUtils.map(node.eAllContents(), new Function<EObject, Pair<Integer, Integer>>() {
 //			public Pair<Integer, Integer> exec(EObject param) {
 //				AbstractNode node = (AbstractNode) param;
-//				return new Pair<Integer, Integer>(node.getOffset(), node.getLength());
+//				return Tuples.create(node.getOffset(), node.getLength());
 //			}
 //		});
 //		for(Pair<Integer, Integer> bound: nodeBounds) {
-//			String model = this.model.substring(0, bound.getFirstElement()) + this.model.substring(bound.getFirstElement() + bound.getSecondElement());
+//			String model = this.model.substring(0, bound.getFirst()) + this.model.substring(bound.getFirst() + bound.getSecond());
 //			Resource res = getResourceFromString(model);
 //			assertNoExceptionDiagnostic(res, model);
 //		}
 //	}
-//	
-//	private void assertNoExceptionDiagnostic(Resource r, String model) throws Exception {
-//		for(Diagnostic d: r.getErrors()) {
-//			if (d instanceof ExceptionDiagnostic) {
-//				throw new Exception(model, ((ExceptionDiagnostic)d).getException());
-//			}
-//		}
-//	}
-	
+
+	private void assertNoExceptionDiagnostic(Resource r, String model) throws Exception {
+		for(Diagnostic d: r.getErrors()) {
+			if (d instanceof ExceptionDiagnostic) {
+				throw new Exception(model, ((ExceptionDiagnostic)d).getException());
+			}
+		}
+	}
+
 	public void testDummy() {
 		assertNotNull(clazz);
 	}
-	
+
 }

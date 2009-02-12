@@ -1,0 +1,188 @@
+/*
+Generated with Xtext
+*/
+package org.eclipse.xtext.grammarinheritance.parser.packrat.consumers;
+
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
+import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
+import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
+
+import org.eclipse.xtext.grammarinheritance.services.ConcreteTestLanguageGrammarAccess;
+import org.eclipse.xtext.grammarinheritance.services.ConcreteTestLanguageGrammarAccess.OverridableParserRule2Elements;
+
+import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.AbstractTestLanguageIDConsumer;
+import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinINTConsumer;
+
+@SuppressWarnings("unused")
+public final class ConcreteTestLanguageOverridableParserRule2Consumer extends NonTerminalConsumer {
+
+	private ITerminalConsumer idConsumer;
+	private ITerminalConsumer intConsumer;
+
+	private ICharacterClass keyword$4$Delimiter;
+	
+	private ICharacterClass keyword$7$Delimiter;
+	
+	private ISequenceMatcher ruleCall$6$Delimiter;
+	
+	private ISequenceMatcher ruleCall$9$Delimiter;
+	
+	public ConcreteTestLanguageOverridableParserRule2Consumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
+		super(configuration, hiddenTokens);
+		keyword$4$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
+		ruleCall$6$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		ruleCall$9$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+	}
+	
+	@Override
+	protected int doConsume(int entryPoint) throws Exception {
+		return consumeGroup$1(entryPoint);
+	}
+
+	protected int consumeGroup$1(int entryPoint) throws Exception {
+		announceNextLevel();
+		final IMarker marker = mark();
+		int result = ConsumeResult.SUCCESS;
+		switch(entryPoint) {
+			case -1: // use fall through semantics of switch case
+				result = ConsumeResult.EMPTY_MATCH;
+			case 0:
+				announceNextStep();
+				result = consumeKeyword$4(nextEntryPoint());
+				if (result!=ConsumeResult.SUCCESS) {
+					error("Another token expected.", getRule().ele000KeywordOverriddenOtherElement());
+					marker.commit();
+					announceLevelFinished();
+					return result;
+				}
+			case 1:
+				announceNextStep();
+				result = consumeAssignment$5(nextEntryPoint());
+				if (result!=ConsumeResult.SUCCESS) {
+					error("Another token expected.", getRule().ele001AssignmentName());
+					marker.commit();
+					announceLevelFinished();
+					return result;
+				}
+			case 2:
+				announceNextStep();
+				result = consumeKeyword$7(nextEntryPoint());
+				if (result!=ConsumeResult.SUCCESS) {
+					error("Another token expected.", getRule().ele01KeywordHyphenMinus());
+					marker.commit();
+					announceLevelFinished();
+					return result;
+				}
+			case 3:
+				announceNextStep();
+				result = consumeAssignment$8(nextEntryPoint());
+				if (result!=ConsumeResult.SUCCESS) {
+					error("Another token expected.", getRule().ele1AssignmentAge());
+					marker.commit();
+					announceLevelFinished();
+					return result;
+				}
+		}
+		marker.commit();
+		announceLevelFinished();
+		return result;
+	}
+
+	protected int consumeKeyword$4(int entryPoint) throws Exception {
+		return consumeKeyword(getRule().ele000KeywordOverriddenOtherElement(), null, false, false, getKeyword$4$Delimiter());
+	}
+
+	protected int consumeAssignment$5(int entryPoint) throws Exception {
+		int result = ConsumeResult.EMPTY_MATCH;
+		int tempResult;
+		announceNextLevel();
+		tempResult = consumeTerminal(idConsumer, "name", false, false, getRule().ele0010LexerRuleCallID(), getRuleCall$6$Delimiter());
+		if (tempResult == ConsumeResult.SUCCESS) {
+			announceLevelFinished();
+			return tempResult;
+		}
+		result = tempResult >= result ? tempResult : result; 
+		announceLevelFinished();
+		return result;
+	}
+
+	protected int consumeKeyword$7(int entryPoint) throws Exception {
+		return consumeKeyword(getRule().ele01KeywordHyphenMinus(), null, false, false, getKeyword$7$Delimiter());
+	}
+
+	protected int consumeAssignment$8(int entryPoint) throws Exception {
+		int result = ConsumeResult.EMPTY_MATCH;
+		int tempResult;
+		announceNextLevel();
+		tempResult = consumeTerminal(intConsumer, "age", false, false, getRule().ele10LexerRuleCallINT(), getRuleCall$9$Delimiter());
+		if (tempResult == ConsumeResult.SUCCESS) {
+			announceLevelFinished();
+			return tempResult;
+		}
+		result = tempResult >= result ? tempResult : result; 
+		announceLevelFinished();
+		return result;
+	}
+
+	public OverridableParserRule2Elements getRule() {
+		return ConcreteTestLanguageGrammarAccess.INSTANCE.prOverridableParserRule2();
+	}
+	
+	@Override
+	protected EObject getGrammarElement() {
+		return getRule().getRule();
+	}
+
+	@Override
+	protected String getDefaultTypeName() {
+		return "AType2";
+	}
+	
+	public void setIdConsumer(ITerminalConsumer idConsumer) {
+		this.idConsumer = idConsumer;
+	}
+	
+	public void setIntConsumer(ITerminalConsumer intConsumer) {
+		this.intConsumer = intConsumer;
+	}
+	
+	public ICharacterClass getKeyword$4$Delimiter() {
+		return keyword$4$Delimiter;
+	}
+	
+	public void setKeyword$4$Delimiter(ICharacterClass characterClass) {
+		keyword$4$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$7$Delimiter() {
+		return keyword$7$Delimiter;
+	}
+	
+	public void setKeyword$7$Delimiter(ICharacterClass characterClass) {
+		keyword$7$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ISequenceMatcher getRuleCall$6$Delimiter() {
+		return ruleCall$6$Delimiter;
+	}
+	
+	public void setRuleCall$6$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$6$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	}
+	
+	public ISequenceMatcher getRuleCall$9$Delimiter() {
+		return ruleCall$9$Delimiter;
+	}
+	
+	public void setRuleCall$9$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$9$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	}
+	
+}

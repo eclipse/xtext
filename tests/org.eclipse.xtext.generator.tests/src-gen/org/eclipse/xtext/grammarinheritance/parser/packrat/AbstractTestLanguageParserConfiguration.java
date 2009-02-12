@@ -12,6 +12,7 @@ import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration;
 import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.AbstractTestLanguageInheritedParserRuleConsumer;
 import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.AbstractTestLanguageAbstractCallOverridenParserRuleConsumer;
 import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.AbstractTestLanguageOverridableParserRuleConsumer;
+import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.AbstractTestLanguageOverridableParserRule2Consumer;
 import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.AbstractTestLanguageAbstractCallExtendedParserRuleConsumer;
 import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.AbstractTestLanguageExtendableParserRuleConsumer;
 import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.AbstractTestLanguageREALConsumer;
@@ -31,6 +32,7 @@ public class AbstractTestLanguageParserConfiguration extends AbstractParserConfi
     private AbstractTestLanguageInheritedParserRuleConsumer inheritedParserRuleConsumer;
     private AbstractTestLanguageAbstractCallOverridenParserRuleConsumer abstractCallOverridenParserRuleConsumer;
     private AbstractTestLanguageOverridableParserRuleConsumer overridableParserRuleConsumer;
+    private AbstractTestLanguageOverridableParserRule2Consumer overridableParserRule2Consumer;
     private AbstractTestLanguageAbstractCallExtendedParserRuleConsumer abstractCallExtendedParserRuleConsumer;
     private AbstractTestLanguageExtendableParserRuleConsumer extendableParserRuleConsumer;
     private AbstractTestLanguageREALConsumer realConsumer;
@@ -56,6 +58,9 @@ public class AbstractTestLanguageParserConfiguration extends AbstractParserConfi
 		overridableParserRuleConsumer = new AbstractTestLanguageOverridableParserRuleConsumer(
     		this, null
     	);
+		overridableParserRule2Consumer = new AbstractTestLanguageOverridableParserRule2Consumer(
+    		this, null
+    	);
 		abstractCallExtendedParserRuleConsumer = new AbstractTestLanguageAbstractCallExtendedParserRuleConsumer(
     		this, null
     	);
@@ -77,6 +82,8 @@ public class AbstractTestLanguageParserConfiguration extends AbstractParserConfi
 
 		getOverridableParserRuleConsumer().setIdConsumer(getIdConsumer());
 
+		getOverridableParserRule2Consumer().setStringConsumer(getStringConsumer());
+
 		getAbstractCallExtendedParserRuleConsumer().setExtendableParserRuleConsumer(getExtendableParserRuleConsumer());
 
 		getExtendableParserRuleConsumer().setIdConsumer(getIdConsumer());
@@ -86,6 +93,8 @@ public class AbstractTestLanguageParserConfiguration extends AbstractParserConfi
 		getAbstractCallOverridenParserRuleConsumer().setKeyword$2$Delimiter(AbstractTestLanguageDelimiters.keyword$5$Delimiter);
 		getOverridableParserRuleConsumer().setKeyword$2$Delimiter(AbstractTestLanguageDelimiters.keyword$5$Delimiter);
 		getOverridableParserRuleConsumer().setRuleCall$4$Delimiter(AbstractTestLanguageDelimiters.ruleCall$7$Delimiter);
+		getOverridableParserRule2Consumer().setKeyword$2$Delimiter(AbstractTestLanguageDelimiters.keyword$5$Delimiter);
+		getOverridableParserRule2Consumer().setRuleCall$4$Delimiter(AbstractTestLanguageDelimiters.ruleCall$25$Delimiter);
 		getAbstractCallExtendedParserRuleConsumer().setKeyword$2$Delimiter(AbstractTestLanguageDelimiters.keyword$5$Delimiter);
 		getExtendableParserRuleConsumer().setKeyword$2$Delimiter(AbstractTestLanguageDelimiters.keyword$5$Delimiter);
 		getExtendableParserRuleConsumer().setRuleCall$4$Delimiter(AbstractTestLanguageDelimiters.ruleCall$7$Delimiter);
@@ -106,6 +115,10 @@ public class AbstractTestLanguageParserConfiguration extends AbstractParserConfi
 
     public AbstractTestLanguageOverridableParserRuleConsumer getOverridableParserRuleConsumer() {
     	return overridableParserRuleConsumer;
+    }
+
+    public AbstractTestLanguageOverridableParserRule2Consumer getOverridableParserRule2Consumer() {
+    	return overridableParserRule2Consumer;
     }
 
     public AbstractTestLanguageAbstractCallExtendedParserRuleConsumer getAbstractCallExtendedParserRuleConsumer() {
