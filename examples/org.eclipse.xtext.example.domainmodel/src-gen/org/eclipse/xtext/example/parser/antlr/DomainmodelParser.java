@@ -14,10 +14,15 @@ import com.google.inject.Inject;
 import org.eclipse.xtext.example.parser.antlr.internal.InternalDomainmodelLexer;
 import org.eclipse.xtext.example.parser.antlr.internal.InternalDomainmodelParser;
 
+import org.eclipse.xtext.example.services.DomainmodelGrammarAccess;
+
 public class DomainmodelParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
 	
 	@Inject 
     protected ITokenDefProvider antlrTokenDefProvider;
+	
+	@Inject
+	private DomainmodelGrammarAccess grammarAccess;
 	
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
@@ -25,14 +30,12 @@ public class DomainmodelParser extends org.eclipse.xtext.parser.antlr.AbstractAn
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 		InternalDomainmodelParser parser = new InternalDomainmodelParser(
-				stream, getElementFactory(), grammarAccess.getGrammar());
+				stream, getElementFactory(), grammarAccess);
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());
 		try {
-			if(ruleName != null) {
+			if(ruleName != null)
 				return parser.parse(ruleName);
-			} else {
-				return parser.parse();
-			}
+			return parser.parse();
 		} catch (Exception re) {
 			throw new ParseException(re.getMessage(),re);
 		}
@@ -41,5 +44,13 @@ public class DomainmodelParser extends org.eclipse.xtext.parser.antlr.AbstractAn
 	@Override 
 	protected String getDefaultRuleName() {
 		return "File";
+	}
+	
+	public DomainmodelGrammarAccess getGrammarAccess() {
+		return this.grammarAccess;
+	}
+	
+	public void setGrammarAccess(DomainmodelGrammarAccess grammarAccess) {
+		this.grammarAccess = grammarAccess;
 	}
 }

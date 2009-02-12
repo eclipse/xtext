@@ -14,10 +14,15 @@ import com.google.inject.Inject;
 import org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalFowlerDslTestLanguageLexer;
 import org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalFowlerDslTestLanguageParser;
 
+import org.eclipse.xtext.testlanguages.services.FowlerDslTestLanguageGrammarAccess;
+
 public class FowlerDslTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
 	
 	@Inject 
     protected ITokenDefProvider antlrTokenDefProvider;
+	
+	@Inject
+	private FowlerDslTestLanguageGrammarAccess grammarAccess;
 	
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
@@ -25,14 +30,12 @@ public class FowlerDslTestLanguageParser extends org.eclipse.xtext.parser.antlr.
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 		InternalFowlerDslTestLanguageParser parser = new InternalFowlerDslTestLanguageParser(
-				stream, getElementFactory(), grammarAccess.getGrammar());
+				stream, getElementFactory(), grammarAccess);
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());
 		try {
-			if(ruleName != null) {
+			if(ruleName != null)
 				return parser.parse(ruleName);
-			} else {
-				return parser.parse();
-			}
+			return parser.parse();
 		} catch (Exception re) {
 			throw new ParseException(re.getMessage(),re);
 		}
@@ -41,5 +44,13 @@ public class FowlerDslTestLanguageParser extends org.eclipse.xtext.parser.antlr.
 	@Override 
 	protected String getDefaultRuleName() {
 		return "Statemachine";
+	}
+	
+	public FowlerDslTestLanguageGrammarAccess getGrammarAccess() {
+		return this.grammarAccess;
+	}
+	
+	public void setGrammarAccess(FowlerDslTestLanguageGrammarAccess grammarAccess) {
+		this.grammarAccess = grammarAccess;
 	}
 }

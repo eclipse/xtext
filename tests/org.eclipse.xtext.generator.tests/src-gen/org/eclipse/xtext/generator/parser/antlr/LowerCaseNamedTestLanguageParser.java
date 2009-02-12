@@ -14,10 +14,15 @@ import com.google.inject.Inject;
 import org.eclipse.xtext.generator.parser.antlr.internal.InternalLowerCaseNamedTestLanguageLexer;
 import org.eclipse.xtext.generator.parser.antlr.internal.InternalLowerCaseNamedTestLanguageParser;
 
+import org.eclipse.xtext.generator.services.LowerCaseNamedTestLanguageGrammarAccess;
+
 public class LowerCaseNamedTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
 	
 	@Inject 
     protected ITokenDefProvider antlrTokenDefProvider;
+	
+	@Inject
+	private LowerCaseNamedTestLanguageGrammarAccess grammarAccess;
 	
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
@@ -25,14 +30,12 @@ public class LowerCaseNamedTestLanguageParser extends org.eclipse.xtext.parser.a
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 		InternalLowerCaseNamedTestLanguageParser parser = new InternalLowerCaseNamedTestLanguageParser(
-				stream, getElementFactory(), grammarAccess.getGrammar());
+				stream, getElementFactory(), grammarAccess);
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());
 		try {
-			if(ruleName != null) {
+			if(ruleName != null)
 				return parser.parse(ruleName);
-			} else {
-				return parser.parse();
-			}
+			return parser.parse();
 		} catch (Exception re) {
 			throw new ParseException(re.getMessage(),re);
 		}
@@ -41,5 +44,13 @@ public class LowerCaseNamedTestLanguageParser extends org.eclipse.xtext.parser.a
 	@Override 
 	protected String getDefaultRuleName() {
 		return "Model";
+	}
+	
+	public LowerCaseNamedTestLanguageGrammarAccess getGrammarAccess() {
+		return this.grammarAccess;
+	}
+	
+	public void setGrammarAccess(LowerCaseNamedTestLanguageGrammarAccess grammarAccess) {
+		this.grammarAccess = grammarAccess;
 	}
 }

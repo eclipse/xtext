@@ -30,15 +30,17 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
 import org.eclipse.xtext.conversion.ValueConverterException;
+import org.eclipse.xtext.testlanguages.services.LexerTestLanguageGrammarAccess;
 
 }
 
 @parser::members {
  
-    public InternalLexerTestLanguageParser(TokenStream input, IAstFactory factory, Grammar g) {
-        this(input);
-        this.factory = factory;
-		grammar = g;
+ 	private LexerTestLanguageGrammarAccess grammarAccess;
+ 	
+    public InternalLexerTestLanguageParser(TokenStream input, IAstFactory factory, LexerTestLanguageGrammarAccess grammarAccess) {
+        super(input, factory, grammarAccess.getGrammar());
+        this.grammarAccess = grammarAccess;
     }
     
     @Override
@@ -66,7 +68,7 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 
 // Entry rule entryRuleModel
 entryRuleModel returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LexerTestLanguage.xmi#/0/@rules.0" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prModel().getRule(), currentNode); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
 	 EOF 
@@ -82,7 +84,7 @@ ruleModel returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LexerTestLanguage.xmi#/0/@rules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prModel().ele0ParserRuleCallElement(), currentNode); 
 	    }
 	    lv_children=ruleElement 
 	    {
@@ -109,7 +111,7 @@ ruleModel returns [EObject current=null]
 
 // Entry rule entryRuleElement
 entryRuleElement returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LexerTestLanguage.xmi#/0/@rules.1" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prElement().getRule(), currentNode); }
 	 iv_ruleElement=ruleElement 
 	 { $current=$iv_ruleElement.current; } 
 	 EOF 
@@ -125,7 +127,7 @@ ruleElement returns [EObject current=null]
 	
 	    lv_name=RULE_ID
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LexerTestLanguage.xmi#/0/@rules.1/@alternatives/@abstractTokens.0/@terminal" /* xtext::RuleCall */, "name"); 
+    createLeafNode(grammarAccess.prElement().ele00LexerRuleCallID(), "name"); 
     }
  
 	    {
@@ -145,7 +147,7 @@ ruleElement returns [EObject current=null]
 	
 	    lv_h=RULE_STRING
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LexerTestLanguage.xmi#/0/@rules.1/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "h"); 
+    createLeafNode(grammarAccess.prElement().ele10LexerRuleCallSTRING(), "h"); 
     }
  
 	    {

@@ -30,15 +30,17 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
 import org.eclipse.xtext.conversion.ValueConverterException;
+import org.eclipse.xtext.parser.terminalrules.services.TerminalRulesTestLanguageGrammarAccess;
 
 }
 
 @parser::members {
  
-    public InternalTerminalRulesTestLanguageParser(TokenStream input, IAstFactory factory, Grammar g) {
-        this(input);
-        this.factory = factory;
-		grammar = g;
+ 	private TerminalRulesTestLanguageGrammarAccess grammarAccess;
+ 	
+    public InternalTerminalRulesTestLanguageParser(TokenStream input, IAstFactory factory, TerminalRulesTestLanguageGrammarAccess grammarAccess) {
+        super(input, factory, grammarAccess.getGrammar());
+        this.grammarAccess = grammarAccess;
     }
     
     @Override
@@ -66,7 +68,7 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 
 // Entry rule entryRuleModel
 entryRuleModel returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prModel().getRule(), currentNode); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
 	 EOF 
@@ -82,7 +84,7 @@ ruleModel returns [EObject current=null]
 	
 	    lv_idValue=RULE_ID
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.xmi#//@rules.0/@alternatives/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@terminal" /* xtext::RuleCall */, "idValue"); 
+    createLeafNode(grammarAccess.prModel().ele0000000ParserRuleCallID(), "idValue"); 
     }
  
 	    {
@@ -103,7 +105,7 @@ ruleModel returns [EObject current=null]
 	
 	    lv_intValue=RULE_INT
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.xmi#//@rules.0/@alternatives/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::RuleCall */, "intValue"); 
+    createLeafNode(grammarAccess.prModel().ele0000010ParserRuleCallINT(), "intValue"); 
     }
  
 	    {
@@ -124,7 +126,7 @@ ruleModel returns [EObject current=null]
 	
 	    lv_stringValue=RULE_STRING
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.xmi#//@rules.0/@alternatives/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::RuleCall */, "stringValue"); 
+    createLeafNode(grammarAccess.prModel().ele000010ParserRuleCallSTRING(), "stringValue"); 
     }
  
 	    {
@@ -145,7 +147,7 @@ ruleModel returns [EObject current=null]
 	
 	    lv_mlCommentValue=RULE_ML_COMMENT
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.xmi#//@rules.0/@alternatives/@groups.0/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::RuleCall */, "mlCommentValue"); 
+    createLeafNode(grammarAccess.prModel().ele00010ParserRuleCallML_COMMENT(), "mlCommentValue"); 
     }
  
 	    {
@@ -166,7 +168,7 @@ ruleModel returns [EObject current=null]
 	
 	    lv_slCommentValue=RULE_SL_COMMENT
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.xmi#//@rules.0/@alternatives/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::RuleCall */, "slCommentValue"); 
+    createLeafNode(grammarAccess.prModel().ele0010ParserRuleCallSL_COMMENT(), "slCommentValue"); 
     }
  
 	    {
@@ -187,7 +189,7 @@ ruleModel returns [EObject current=null]
 	
 	    lv_wsValue=RULE_WS
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.xmi#//@rules.0/@alternatives/@groups.0/@groups.1/@terminal" /* xtext::RuleCall */, "wsValue"); 
+    createLeafNode(grammarAccess.prModel().ele010ParserRuleCallWS(), "wsValue"); 
     }
  
 	    {
@@ -208,7 +210,7 @@ ruleModel returns [EObject current=null]
 	
 	    lv_anyValue=RULE_ANY_OTHER
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.xmi#//@rules.0/@alternatives/@groups.1/@terminal" /* xtext::RuleCall */, "anyValue"); 
+    createLeafNode(grammarAccess.prModel().ele10ParserRuleCallANY_OTHER(), "anyValue"); 
     }
  
 	    {

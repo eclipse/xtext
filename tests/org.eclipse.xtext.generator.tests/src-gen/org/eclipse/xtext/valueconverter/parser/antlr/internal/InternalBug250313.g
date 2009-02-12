@@ -30,15 +30,17 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
 import org.eclipse.xtext.conversion.ValueConverterException;
+import org.eclipse.xtext.valueconverter.services.Bug250313GrammarAccess;
 
 }
 
 @parser::members {
  
-    public InternalBug250313Parser(TokenStream input, IAstFactory factory, Grammar g) {
-        this(input);
-        this.factory = factory;
-		grammar = g;
+ 	private Bug250313GrammarAccess grammarAccess;
+ 	
+    public InternalBug250313Parser(TokenStream input, IAstFactory factory, Bug250313GrammarAccess grammarAccess) {
+        super(input, factory, grammarAccess.getGrammar());
+        this.grammarAccess = grammarAccess;
     }
     
     @Override
@@ -66,7 +68,7 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 
 // Entry rule entryRuleRef2
 entryRuleRef2 returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/valueconverter/Bug250313.xmi#/0/@rules.0" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prRef2().getRule(), currentNode); }
 	 iv_ruleRef2=ruleRef2 
 	 { $current=$iv_ruleRef2.current; } 
 	 EOF 
@@ -80,23 +82,23 @@ ruleRef2 returns [EObject current=null]
     }:
 ('#2' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/valueconverter/Bug250313.xmi#/0/@rules.0/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prRef2().ele0KeywordNumberSignDigitTwo(), null); 
     }
 (	
 	
 	    lv_ref2=(('mykeyword1' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/valueconverter/Bug250313.xmi#/0/@rules.0/@alternatives/@abstractTokens.1/@terminal/@groups.0/@groups.0" /* xtext::Keyword */, "ref2"); 
+        createLeafNode(grammarAccess.prRef2().ele1000KeywordMykeyword1(), "ref2"); 
     }
 
     |RULE_STRING
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/valueconverter/Bug250313.xmi#/0/@rules.0/@alternatives/@abstractTokens.1/@terminal/@groups.0/@groups.1" /* xtext::RuleCall */, "ref2"); 
+    createLeafNode(grammarAccess.prRef2().ele1001LexerRuleCallSTRING(), "ref2"); 
     }
 )
     |RULE_ID
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/valueconverter/Bug250313.xmi#/0/@rules.0/@alternatives/@abstractTokens.1/@terminal/@groups.1" /* xtext::RuleCall */, "ref2"); 
+    createLeafNode(grammarAccess.prRef2().ele101LexerRuleCallID(), "ref2"); 
     }
 ) 
 	    {

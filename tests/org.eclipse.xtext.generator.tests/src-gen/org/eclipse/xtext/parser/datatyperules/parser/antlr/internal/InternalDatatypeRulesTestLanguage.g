@@ -30,15 +30,17 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
 import org.eclipse.xtext.conversion.ValueConverterException;
+import org.eclipse.xtext.parser.datatyperules.services.DatatypeRulesTestLanguageGrammarAccess;
 
 }
 
 @parser::members {
  
-    public InternalDatatypeRulesTestLanguageParser(TokenStream input, IAstFactory factory, Grammar g) {
-        this(input);
-        this.factory = factory;
-		grammar = g;
+ 	private DatatypeRulesTestLanguageGrammarAccess grammarAccess;
+ 	
+    public InternalDatatypeRulesTestLanguageParser(TokenStream input, IAstFactory factory, DatatypeRulesTestLanguageGrammarAccess grammarAccess) {
+        super(input, factory, grammarAccess.getGrammar());
+        this.grammarAccess = grammarAccess;
     }
     
     @Override
@@ -66,7 +68,7 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 
 // Entry rule entryRuleCompositeModel
 entryRuleCompositeModel returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.0" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prCompositeModel().getRule(), currentNode); }
 	 iv_ruleCompositeModel=ruleCompositeModel 
 	 { $current=$iv_ruleCompositeModel.current; } 
 	 EOF 
@@ -82,7 +84,7 @@ ruleCompositeModel returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prCompositeModel().ele0ParserRuleCallModel(), currentNode); 
 	    }
 	    lv_model=ruleModel 
 	    {
@@ -109,7 +111,7 @@ ruleCompositeModel returns [EObject current=null]
 
 // Entry rule entryRuleModel
 entryRuleModel returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.1" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prModel().getRule(), currentNode); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
 	 EOF 
@@ -125,7 +127,7 @@ ruleModel returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prModel().ele00000ParserRuleCallNestedModelId(), currentNode); 
 	    }
 	    lv_id=ruleNestedModelId 
 	    {
@@ -144,13 +146,13 @@ ruleModel returns [EObject current=null]
 	
 )(':' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prModel().ele00010KeywordColon(), null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prModel().ele000110ParserRuleCallFraction(), currentNode); 
 	    }
 	    lv_value=ruleFraction 
 	    {
@@ -169,13 +171,13 @@ ruleModel returns [EObject current=null]
 	
 ))?)('#' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prModel().ele0010KeywordNumberSign(), null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prModel().ele00110ParserRuleCallVector(), currentNode); 
 	    }
 	    lv_vector=ruleVector 
 	    {
@@ -194,13 +196,13 @@ ruleModel returns [EObject current=null]
 	
 ))?)('+' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prModel().ele010KeywordPlusSign(), null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prModel().ele0110ParserRuleCallDots(), currentNode); 
 	    }
 	    lv_dots=ruleDots 
 	    {
@@ -219,7 +221,7 @@ ruleModel returns [EObject current=null]
 	
 ))?)';' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.1/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prModel().ele1KeywordSemicolon(), null); 
     }
 );
 
@@ -231,7 +233,7 @@ ruleModel returns [EObject current=null]
 
 // Entry rule entryRuleModelId
 entryRuleModelId returns [String current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.2" /* xtext::ParserRule */, currentNode); } 
+	{ currentNode = createCompositeNode(grammarAccess.prModelId().getRule(), currentNode); } 
 	 iv_ruleModelId=ruleModelId 
 	 { $current=$iv_ruleModelId.current.getText(); }  
 	 EOF 
@@ -248,20 +250,20 @@ ruleModelId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()
     }
 
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::RuleCall */, null); 
+    createLeafNode(grammarAccess.prModelId().ele00LexerRuleCallID(), null); 
     }
 
 	kw='.' 
     {
         $current.merge(kw);
-        createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prModelId().ele01KeywordFullStop(), null); 
     }
 )    this_ID=RULE_ID    {
 		$current.merge(this_ID);
     }
 
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.2/@alternatives/@abstractTokens.1" /* xtext::RuleCall */, null); 
+    createLeafNode(grammarAccess.prModelId().ele1LexerRuleCallID(), null); 
     }
 )
     ;
@@ -274,7 +276,7 @@ ruleModelId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()
 
 // Entry rule entryRuleNestedModelId
 entryRuleNestedModelId returns [String current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.3" /* xtext::ParserRule */, currentNode); } 
+	{ currentNode = createCompositeNode(grammarAccess.prNestedModelId().getRule(), currentNode); } 
 	 iv_ruleNestedModelId=ruleNestedModelId 
 	 { $current=$iv_ruleNestedModelId.current.getText(); }  
 	 EOF 
@@ -288,7 +290,7 @@ ruleNestedModelId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleT
     }:
 ((
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode(grammarAccess.prNestedModelId().ele00ParserRuleCallModelId(), currentNode); 
     }
     this_ModelId=ruleModelId    {
 		$current.merge(this_ModelId);
@@ -301,11 +303,11 @@ ruleNestedModelId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleT
 	kw='.' 
     {
         $current.merge(kw);
-        createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prNestedModelId().ele01KeywordFullStop(), null); 
     }
 )
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.3/@alternatives/@abstractTokens.1" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode(grammarAccess.prNestedModelId().ele1ParserRuleCallModelId(), currentNode); 
     }
     this_ModelId=ruleModelId    {
 		$current.merge(this_ModelId);
@@ -325,7 +327,7 @@ ruleNestedModelId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleT
 
 // Entry rule entryRuleFraction
 entryRuleFraction returns [String current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.4" /* xtext::ParserRule */, currentNode); } 
+	{ currentNode = createCompositeNode(grammarAccess.prFraction().getRule(), currentNode); } 
 	 iv_ruleFraction=ruleFraction 
 	 { $current=$iv_ruleFraction.current.getText(); }  
 	 EOF 
@@ -342,20 +344,20 @@ ruleFraction returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken(
     }
 
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.4/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, null); 
+    createLeafNode(grammarAccess.prFraction().ele0LexerRuleCallINT(), null); 
     }
 (
 	kw='/' 
     {
         $current.merge(kw);
-        createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.4/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prFraction().ele10KeywordSolidus(), null); 
     }
     this_INT=RULE_INT    {
 		$current.merge(this_INT);
     }
 
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.4/@alternatives/@abstractTokens.1/@abstractTokens.1" /* xtext::RuleCall */, null); 
+    createLeafNode(grammarAccess.prFraction().ele11LexerRuleCallINT(), null); 
     }
 )?)
     ;
@@ -368,7 +370,7 @@ ruleFraction returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken(
 
 // Entry rule entryRuleVector
 entryRuleVector returns [String current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.5" /* xtext::ParserRule */, currentNode); } 
+	{ currentNode = createCompositeNode(grammarAccess.prVector().getRule(), currentNode); } 
 	 iv_ruleVector=ruleVector 
 	 { $current=$iv_ruleVector.current.getText(); }  
 	 EOF 
@@ -384,27 +386,27 @@ ruleVector returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 	kw='(' 
     {
         $current.merge(kw);
-        createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prVector().ele000KeywordLeftParenthesis(), null); 
     }
     this_INT=RULE_INT    {
 		$current.merge(this_INT);
     }
 
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::RuleCall */, null); 
+    createLeafNode(grammarAccess.prVector().ele001LexerRuleCallINT(), null); 
     }
 )    this_INT=RULE_INT    {
 		$current.merge(this_INT);
     }
 
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::RuleCall */, null); 
+    createLeafNode(grammarAccess.prVector().ele01LexerRuleCallINT(), null); 
     }
 )
 	kw=')' 
     {
         $current.merge(kw);
-        createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.5/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prVector().ele1KeywordRightParenthesis(), null); 
     }
 )
     ;
@@ -417,7 +419,7 @@ ruleVector returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 
 // Entry rule entryRuleDots
 entryRuleDots returns [String current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.6" /* xtext::ParserRule */, currentNode); } 
+	{ currentNode = createCompositeNode(grammarAccess.prDots().getRule(), currentNode); } 
 	 iv_ruleDots=ruleDots 
 	 { $current=$iv_ruleDots.current.getText(); }  
 	 EOF 
@@ -433,20 +435,20 @@ ruleDots returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 	kw='.' 
     {
         $current.merge(kw);
-        createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.6/@alternatives/@groups.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prDots().ele00KeywordFullStop(), null); 
     }
 
 	kw='.' 
     {
         $current.merge(kw);
-        createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.6/@alternatives/@groups.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prDots().ele01KeywordFullStop(), null); 
     }
 )
     |
 	kw='..' 
     {
         $current.merge(kw);
-        createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#/0/@rules.6/@alternatives/@groups.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prDots().ele1KeywordFullStopFullStop(), null); 
     }
 )
     ;

@@ -30,15 +30,17 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
 import org.eclipse.xtext.conversion.ValueConverterException;
+import org.eclipse.xtext.testlanguages.services.ContentAssistTestLanguageGrammarAccess;
 
 }
 
 @parser::members {
  
-    public InternalContentAssistTestLanguageParser(TokenStream input, IAstFactory factory, Grammar g) {
-        this(input);
-        this.factory = factory;
-		grammar = g;
+ 	private ContentAssistTestLanguageGrammarAccess grammarAccess;
+ 	
+    public InternalContentAssistTestLanguageParser(TokenStream input, IAstFactory factory, ContentAssistTestLanguageGrammarAccess grammarAccess) {
+        super(input, factory, grammarAccess.getGrammar());
+        this.grammarAccess = grammarAccess;
     }
     
     @Override
@@ -66,7 +68,7 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 
 // Entry rule entryRuleStart
 entryRuleStart returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#/0/@rules.0" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prStart().getRule(), currentNode); }
 	 iv_ruleStart=ruleStart 
 	 { $current=$iv_ruleStart.current; } 
 	 EOF 
@@ -80,13 +82,13 @@ ruleStart returns [EObject current=null]
     }:
 (('abstract rules' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#/0/@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prStart().ele00KeywordAbstractRules(), null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#/0/@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prStart().ele010ParserRuleCallAbstractRule(), currentNode); 
 	    }
 	    lv_rules=ruleAbstractRule 
 	    {
@@ -105,7 +107,7 @@ ruleStart returns [EObject current=null]
 	
 )+)'end' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#/0/@rules.0/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prStart().ele1KeywordEnd(), null); 
     }
 );
 
@@ -117,7 +119,7 @@ ruleStart returns [EObject current=null]
 
 // Entry rule entryRuleAbstractRule
 entryRuleAbstractRule returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#/0/@rules.1" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prAbstractRule().getRule(), currentNode); }
 	 iv_ruleAbstractRule=ruleAbstractRule 
 	 { $current=$iv_ruleAbstractRule.current; } 
 	 EOF 
@@ -131,7 +133,7 @@ ruleAbstractRule returns [EObject current=null]
     }:
 (
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#/0/@rules.1/@alternatives/@groups.0" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode(grammarAccess.prAbstractRule().ele0ParserRuleCallFirstAbstractRuleChild(), currentNode); 
     }
     this_FirstAbstractRuleChild=ruleFirstAbstractRuleChild
     { 
@@ -141,7 +143,7 @@ ruleAbstractRule returns [EObject current=null]
 
     |
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#/0/@rules.1/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode(grammarAccess.prAbstractRule().ele1ParserRuleCallSecondAbstractRuleChild(), currentNode); 
     }
     this_SecondAbstractRuleChild=ruleSecondAbstractRuleChild
     { 
@@ -158,7 +160,7 @@ ruleAbstractRule returns [EObject current=null]
 
 // Entry rule entryRuleFirstAbstractRuleChild
 entryRuleFirstAbstractRuleChild returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#/0/@rules.2" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prFirstAbstractRuleChild().getRule(), currentNode); }
 	 iv_ruleFirstAbstractRuleChild=ruleFirstAbstractRuleChild 
 	 { $current=$iv_ruleFirstAbstractRuleChild.current; } 
 	 EOF 
@@ -174,7 +176,7 @@ ruleFirstAbstractRuleChild returns [EObject current=null]
 	
 	    lv_name=RULE_ID
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#/0/@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, "name"); 
+    createLeafNode(grammarAccess.prFirstAbstractRuleChild().ele00000LexerRuleCallID(), "name"); 
     }
  
 	    {
@@ -192,13 +194,13 @@ ruleFirstAbstractRuleChild returns [EObject current=null]
 	
 )'(' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#/0/@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prFirstAbstractRuleChild().ele0001KeywordLeftParenthesis(), null); 
     }
 )(	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#/0/@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prFirstAbstractRuleChild().ele0010ParserRuleCallAbstractRule(), currentNode); 
 	    }
 	    lv_elements=ruleAbstractRule 
 	    {
@@ -217,11 +219,11 @@ ruleFirstAbstractRuleChild returns [EObject current=null]
 	
 )+)')' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#/0/@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prFirstAbstractRuleChild().ele01KeywordRightParenthesis(), null); 
     }
 )';' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#/0/@rules.2/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prFirstAbstractRuleChild().ele1KeywordSemicolon(), null); 
     }
 );
 
@@ -233,7 +235,7 @@ ruleFirstAbstractRuleChild returns [EObject current=null]
 
 // Entry rule entryRuleSecondAbstractRuleChild
 entryRuleSecondAbstractRuleChild returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#/0/@rules.3" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prSecondAbstractRuleChild().getRule(), currentNode); }
 	 iv_ruleSecondAbstractRuleChild=ruleSecondAbstractRuleChild 
 	 { $current=$iv_ruleSecondAbstractRuleChild.current; } 
 	 EOF 
@@ -249,7 +251,7 @@ ruleSecondAbstractRuleChild returns [EObject current=null]
 	
 	    lv_name=RULE_ID
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, "name"); 
+    createLeafNode(grammarAccess.prSecondAbstractRuleChild().ele00000LexerRuleCallID(), "name"); 
     }
  
 	    {
@@ -267,17 +269,17 @@ ruleSecondAbstractRuleChild returns [EObject current=null]
 	
 )'rule' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prSecondAbstractRuleChild().ele0001KeywordRule(), null); 
     }
 )':' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prSecondAbstractRuleChild().ele001KeywordColon(), null); 
     }
 )(	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prSecondAbstractRuleChild().ele010ParserRuleCallAbstractRuleCall(), currentNode); 
 	    }
 	    lv_rule=ruleAbstractRuleCall 
 	    {
@@ -296,7 +298,7 @@ ruleSecondAbstractRuleChild returns [EObject current=null]
 	
 ))';' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#/0/@rules.3/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prSecondAbstractRuleChild().ele1KeywordSemicolon(), null); 
     }
 );
 
@@ -308,7 +310,7 @@ ruleSecondAbstractRuleChild returns [EObject current=null]
 
 // Entry rule entryRuleAbstractRuleCall
 entryRuleAbstractRuleCall returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#/0/@rules.4" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prAbstractRuleCall().getRule(), currentNode); }
 	 iv_ruleAbstractRuleCall=ruleAbstractRuleCall 
 	 { $current=$iv_ruleAbstractRuleCall.current; } 
 	 EOF 
@@ -331,7 +333,7 @@ ruleAbstractRuleCall returns [EObject current=null]
         }
 (
 	RULE_ID    { 
-    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#/0/@rules.4/@alternatives/@terminal" /* xtext::CrossReference */, "rule"); 
+    createLeafNode(grammarAccess.prAbstractRuleCall().ele0CrossReferenceEStringAbstractRule(), "rule"); 
     }
 ) 
 	

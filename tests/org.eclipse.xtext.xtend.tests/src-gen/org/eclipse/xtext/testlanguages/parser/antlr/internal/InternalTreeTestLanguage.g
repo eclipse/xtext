@@ -30,15 +30,17 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
 import org.eclipse.xtext.conversion.ValueConverterException;
+import org.eclipse.xtext.testlanguages.services.TreeTestLanguageGrammarAccess;
 
 }
 
 @parser::members {
  
-    public InternalTreeTestLanguageParser(TokenStream input, IAstFactory factory, Grammar g) {
-        this(input);
-        this.factory = factory;
-		grammar = g;
+ 	private TreeTestLanguageGrammarAccess grammarAccess;
+ 	
+    public InternalTreeTestLanguageParser(TokenStream input, IAstFactory factory, TreeTestLanguageGrammarAccess grammarAccess) {
+        super(input, factory, grammarAccess.getGrammar());
+        this.grammarAccess = grammarAccess;
     }
     
     @Override
@@ -66,7 +68,7 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 
 // Entry rule entryRuleModel
 entryRuleModel returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TreeTestLanguage.xmi#/0/@rules.0" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prModel().getRule(), currentNode); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
 	 EOF 
@@ -82,7 +84,7 @@ ruleModel returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TreeTestLanguage.xmi#/0/@rules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prModel().ele0ParserRuleCallNode(), currentNode); 
 	    }
 	    lv_children=ruleNode 
 	    {
@@ -109,7 +111,7 @@ ruleModel returns [EObject current=null]
 
 // Entry rule entryRuleNode
 entryRuleNode returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TreeTestLanguage.xmi#/0/@rules.1" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prNode().getRule(), currentNode); }
 	 iv_ruleNode=ruleNode 
 	 { $current=$iv_ruleNode.current; } 
 	 EOF 
@@ -125,7 +127,7 @@ ruleNode returns [EObject current=null]
 	
 	    lv_name=RULE_ID
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/TreeTestLanguage.xmi#/0/@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, "name"); 
+    createLeafNode(grammarAccess.prNode().ele0000000LexerRuleCallID(), "name"); 
     }
  
 	    {
@@ -143,13 +145,13 @@ ruleNode returns [EObject current=null]
 	
 )'(' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/TreeTestLanguage.xmi#/0/@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prNode().ele000001KeywordLeftParenthesis(), null); 
     }
 )(	
 	
 	    lv_attrib=RULE_STRING
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/TreeTestLanguage.xmi#/0/@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "attrib"); 
+    createLeafNode(grammarAccess.prNode().ele000010LexerRuleCallSTRING(), "attrib"); 
     }
  
 	    {
@@ -167,17 +169,17 @@ ruleNode returns [EObject current=null]
 	
 ))')' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/TreeTestLanguage.xmi#/0/@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prNode().ele0001KeywordRightParenthesis(), null); 
     }
 )'{' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/TreeTestLanguage.xmi#/0/@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prNode().ele001KeywordLeftCurlyBracket(), null); 
     }
 )(	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TreeTestLanguage.xmi#/0/@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prNode().ele010ParserRuleCallNode(), currentNode); 
 	    }
 	    lv_children=ruleNode 
 	    {
@@ -196,7 +198,7 @@ ruleNode returns [EObject current=null]
 	
 )*)'};' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/TreeTestLanguage.xmi#/0/@rules.1/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prNode().ele1KeywordRightCurlyBracketSemicolon(), null); 
     }
 );
 

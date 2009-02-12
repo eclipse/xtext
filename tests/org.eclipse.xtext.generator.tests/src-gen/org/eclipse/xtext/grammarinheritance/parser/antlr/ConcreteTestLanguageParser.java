@@ -14,10 +14,15 @@ import com.google.inject.Inject;
 import org.eclipse.xtext.grammarinheritance.parser.antlr.internal.InternalConcreteTestLanguageLexer;
 import org.eclipse.xtext.grammarinheritance.parser.antlr.internal.InternalConcreteTestLanguageParser;
 
+import org.eclipse.xtext.grammarinheritance.services.ConcreteTestLanguageGrammarAccess;
+
 public class ConcreteTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
 	
 	@Inject 
     protected ITokenDefProvider antlrTokenDefProvider;
+	
+	@Inject
+	private ConcreteTestLanguageGrammarAccess grammarAccess;
 	
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
@@ -25,14 +30,12 @@ public class ConcreteTestLanguageParser extends org.eclipse.xtext.parser.antlr.A
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 		InternalConcreteTestLanguageParser parser = new InternalConcreteTestLanguageParser(
-				stream, getElementFactory(), grammarAccess.getGrammar());
+				stream, getElementFactory(), grammarAccess);
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());
 		try {
-			if(ruleName != null) {
+			if(ruleName != null)
 				return parser.parse(ruleName);
-			} else {
-				return parser.parse();
-			}
+			return parser.parse();
 		} catch (Exception re) {
 			throw new ParseException(re.getMessage(),re);
 		}
@@ -41,5 +44,13 @@ public class ConcreteTestLanguageParser extends org.eclipse.xtext.parser.antlr.A
 	@Override 
 	protected String getDefaultRuleName() {
 		return "RootRule";
+	}
+	
+	public ConcreteTestLanguageGrammarAccess getGrammarAccess() {
+		return this.grammarAccess;
+	}
+	
+	public void setGrammarAccess(ConcreteTestLanguageGrammarAccess grammarAccess) {
+		this.grammarAccess = grammarAccess;
 	}
 }

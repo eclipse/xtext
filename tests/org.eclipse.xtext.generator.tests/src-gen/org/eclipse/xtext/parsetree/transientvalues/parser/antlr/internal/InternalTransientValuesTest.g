@@ -30,15 +30,17 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
 import org.eclipse.xtext.conversion.ValueConverterException;
+import org.eclipse.xtext.parsetree.transientvalues.services.TransientValuesTestGrammarAccess;
 
 }
 
 @parser::members {
  
-    public InternalTransientValuesTestParser(TokenStream input, IAstFactory factory, Grammar g) {
-        this(input);
-        this.factory = factory;
-		grammar = g;
+ 	private TransientValuesTestGrammarAccess grammarAccess;
+ 	
+    public InternalTransientValuesTestParser(TokenStream input, IAstFactory factory, TransientValuesTestGrammarAccess grammarAccess) {
+        super(input, factory, grammarAccess.getGrammar());
+        this.grammarAccess = grammarAccess;
     }
     
     @Override
@@ -66,7 +68,7 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 
 // Entry rule entryRuleRoot
 entryRuleRoot returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#/0/@rules.0" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prRoot().getRule(), currentNode); }
 	 iv_ruleRoot=ruleRoot 
 	 { $current=$iv_ruleRoot.current; } 
 	 EOF 
@@ -80,11 +82,11 @@ ruleRoot returns [EObject current=null]
     }:
 ('test' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#/0/@rules.0/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prRoot().ele0KeywordTest(), null); 
     }
 ((
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#/0/@rules.0/@alternatives/@abstractTokens.1/@groups.0/@groups.0" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode(grammarAccess.prRoot().ele100ParserRuleCallTestRequired(), currentNode); 
     }
     this_TestRequired=ruleTestRequired
     { 
@@ -94,7 +96,7 @@ ruleRoot returns [EObject current=null]
 
     |
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#/0/@rules.0/@alternatives/@abstractTokens.1/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode(grammarAccess.prRoot().ele101ParserRuleCallTestOptional(), currentNode); 
     }
     this_TestOptional=ruleTestOptional
     { 
@@ -104,7 +106,7 @@ ruleRoot returns [EObject current=null]
 )
     |
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#/0/@rules.0/@alternatives/@abstractTokens.1/@groups.1" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode(grammarAccess.prRoot().ele11ParserRuleCallTestList(), currentNode); 
     }
     this_TestList=ruleTestList
     { 
@@ -121,7 +123,7 @@ ruleRoot returns [EObject current=null]
 
 // Entry rule entryRuleTestRequired
 entryRuleTestRequired returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#/0/@rules.1" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prTestRequired().getRule(), currentNode); }
 	 iv_ruleTestRequired=ruleTestRequired 
 	 { $current=$iv_ruleTestRequired.current; } 
 	 EOF 
@@ -135,13 +137,13 @@ ruleTestRequired returns [EObject current=null]
     }:
 (('required' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#/0/@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prTestRequired().ele00KeywordRequired(), null); 
     }
 (	
 	
 	    lv_required1=RULE_INT
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#/0/@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "required1"); 
+    createLeafNode(grammarAccess.prTestRequired().ele010LexerRuleCallINT(), "required1"); 
     }
  
 	    {
@@ -161,7 +163,7 @@ ruleTestRequired returns [EObject current=null]
 	
 	    lv_required2=RULE_INT
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#/0/@rules.1/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "required2"); 
+    createLeafNode(grammarAccess.prTestRequired().ele10LexerRuleCallINT(), "required2"); 
     }
  
 	    {
@@ -187,7 +189,7 @@ ruleTestRequired returns [EObject current=null]
 
 // Entry rule entryRuleTestOptional
 entryRuleTestOptional returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#/0/@rules.2" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prTestOptional().getRule(), currentNode); }
 	 iv_ruleTestOptional=ruleTestOptional 
 	 { $current=$iv_ruleTestOptional.current; } 
 	 EOF 
@@ -201,13 +203,13 @@ ruleTestOptional returns [EObject current=null]
     }:
 (('optional' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#/0/@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prTestOptional().ele00KeywordOptional(), null); 
     }
 (	
 	
 	    lv_opt1=RULE_INT
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#/0/@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "opt1"); 
+    createLeafNode(grammarAccess.prTestOptional().ele010LexerRuleCallINT(), "opt1"); 
     }
  
 	    {
@@ -225,13 +227,13 @@ ruleTestOptional returns [EObject current=null]
 	
 )?)(':' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#/0/@rules.2/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prTestOptional().ele10KeywordColon(), null); 
     }
 (	
 	
 	    lv_opt2=RULE_INT
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#/0/@rules.2/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "opt2"); 
+    createLeafNode(grammarAccess.prTestOptional().ele110LexerRuleCallINT(), "opt2"); 
     }
  
 	    {
@@ -257,7 +259,7 @@ ruleTestOptional returns [EObject current=null]
 
 // Entry rule entryRuleTestList
 entryRuleTestList returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#/0/@rules.3" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prTestList().getRule(), currentNode); }
 	 iv_ruleTestList=ruleTestList 
 	 { $current=$iv_ruleTestList.current; } 
 	 EOF 
@@ -271,13 +273,13 @@ ruleTestList returns [EObject current=null]
     }:
 ('list' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#/0/@rules.3/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prTestList().ele0KeywordList(), null); 
     }
 (	
 	
 	    lv_item=RULE_INT
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi#/0/@rules.3/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "item"); 
+    createLeafNode(grammarAccess.prTestList().ele10LexerRuleCallINT(), "item"); 
     }
  
 	    {

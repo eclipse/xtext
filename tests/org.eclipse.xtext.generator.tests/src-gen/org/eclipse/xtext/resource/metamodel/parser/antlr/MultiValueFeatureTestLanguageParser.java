@@ -14,10 +14,15 @@ import com.google.inject.Inject;
 import org.eclipse.xtext.resource.metamodel.parser.antlr.internal.InternalMultiValueFeatureTestLanguageLexer;
 import org.eclipse.xtext.resource.metamodel.parser.antlr.internal.InternalMultiValueFeatureTestLanguageParser;
 
+import org.eclipse.xtext.resource.metamodel.services.MultiValueFeatureTestLanguageGrammarAccess;
+
 public class MultiValueFeatureTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
 	
 	@Inject 
     protected ITokenDefProvider antlrTokenDefProvider;
+	
+	@Inject
+	private MultiValueFeatureTestLanguageGrammarAccess grammarAccess;
 	
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
@@ -25,14 +30,12 @@ public class MultiValueFeatureTestLanguageParser extends org.eclipse.xtext.parse
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 		InternalMultiValueFeatureTestLanguageParser parser = new InternalMultiValueFeatureTestLanguageParser(
-				stream, getElementFactory(), grammarAccess.getGrammar());
+				stream, getElementFactory(), grammarAccess);
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());
 		try {
-			if(ruleName != null) {
+			if(ruleName != null)
 				return parser.parse(ruleName);
-			} else {
-				return parser.parse();
-			}
+			return parser.parse();
 		} catch (Exception re) {
 			throw new ParseException(re.getMessage(),re);
 		}
@@ -41,5 +44,13 @@ public class MultiValueFeatureTestLanguageParser extends org.eclipse.xtext.parse
 	@Override 
 	protected String getDefaultRuleName() {
 		return "Start";
+	}
+	
+	public MultiValueFeatureTestLanguageGrammarAccess getGrammarAccess() {
+		return this.grammarAccess;
+	}
+	
+	public void setGrammarAccess(MultiValueFeatureTestLanguageGrammarAccess grammarAccess) {
+		this.grammarAccess = grammarAccess;
 	}
 }

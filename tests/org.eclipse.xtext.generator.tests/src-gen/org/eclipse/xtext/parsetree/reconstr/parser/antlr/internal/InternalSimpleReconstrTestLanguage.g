@@ -30,15 +30,17 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
 import org.eclipse.xtext.conversion.ValueConverterException;
+import org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestLanguageGrammarAccess;
 
 }
 
 @parser::members {
  
-    public InternalSimpleReconstrTestLanguageParser(TokenStream input, IAstFactory factory, Grammar g) {
-        this(input);
-        this.factory = factory;
-		grammar = g;
+ 	private SimpleReconstrTestLanguageGrammarAccess grammarAccess;
+ 	
+    public InternalSimpleReconstrTestLanguageParser(TokenStream input, IAstFactory factory, SimpleReconstrTestLanguageGrammarAccess grammarAccess) {
+        super(input, factory, grammarAccess.getGrammar());
+        this.grammarAccess = grammarAccess;
     }
     
     @Override
@@ -66,7 +68,7 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 
 // Entry rule entryRuleOp
 entryRuleOp returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.0" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prOp().getRule(), currentNode); }
 	 iv_ruleOp=ruleOp 
 	 { $current=$iv_ruleOp.current; } 
 	 EOF 
@@ -80,7 +82,7 @@ ruleOp returns [EObject current=null]
     }:
 (
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.0/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode(grammarAccess.prOp().ele0ParserRuleCallTerm(), currentNode); 
     }
     this_Term=ruleTerm
     { 
@@ -97,7 +99,7 @@ ruleOp returns [EObject current=null]
         }
         $current = temp; 
         temp = null;
-        CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.0/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
+        CompositeNode newNode = createCompositeNode(grammarAccess.prOp().ele10ActionOpvalues(), currentNode.getParent());
     newNode.getChildren().add(currentNode);
     moveLookaheadInfo(currentNode, newNode);
     currentNode = newNode; 
@@ -107,7 +109,7 @@ ruleOp returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.0/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prOp().ele110ParserRuleCallTerm(), currentNode); 
 	    }
 	    lv_values=ruleTerm 
 	    {
@@ -134,7 +136,7 @@ ruleOp returns [EObject current=null]
 
 // Entry rule entryRuleTerm
 entryRuleTerm returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.1" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prTerm().getRule(), currentNode); }
 	 iv_ruleTerm=ruleTerm 
 	 { $current=$iv_ruleTerm.current; } 
 	 EOF 
@@ -148,7 +150,7 @@ ruleTerm returns [EObject current=null]
     }:
 (((((((
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.1/@alternatives/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode(grammarAccess.prTerm().ele0000000ParserRuleCallAtom(), currentNode); 
     }
     this_Atom=ruleAtom
     { 
@@ -158,7 +160,7 @@ ruleTerm returns [EObject current=null]
 
     |
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.1/@alternatives/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode(grammarAccess.prTerm().ele0000001ParserRuleCallTwoNumbers(), currentNode); 
     }
     this_TwoNumbers=ruleTwoNumbers
     { 
@@ -168,7 +170,7 @@ ruleTerm returns [EObject current=null]
 )
     |
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.1/@alternatives/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode(grammarAccess.prTerm().ele000001ParserRuleCallManyStrings(), currentNode); 
     }
     this_ManyStrings=ruleManyStrings
     { 
@@ -178,7 +180,7 @@ ruleTerm returns [EObject current=null]
 )
     |
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.1/@alternatives/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode(grammarAccess.prTerm().ele00001ParserRuleCallParens(), currentNode); 
     }
     this_Parens=ruleParens
     { 
@@ -188,7 +190,7 @@ ruleTerm returns [EObject current=null]
 )
     |
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.1/@alternatives/@groups.0/@groups.0/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode(grammarAccess.prTerm().ele0001ParserRuleCallType(), currentNode); 
     }
     this_Type=ruleType
     { 
@@ -198,7 +200,7 @@ ruleTerm returns [EObject current=null]
 )
     |
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.1/@alternatives/@groups.0/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode(grammarAccess.prTerm().ele001ParserRuleCallRef2(), currentNode); 
     }
     this_Ref2=ruleRef2
     { 
@@ -208,7 +210,7 @@ ruleTerm returns [EObject current=null]
 )
     |
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.1/@alternatives/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode(grammarAccess.prTerm().ele01ParserRuleCallSpare(), currentNode); 
     }
     this_Spare=ruleSpare
     { 
@@ -218,7 +220,7 @@ ruleTerm returns [EObject current=null]
 )
     |
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.1/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode(grammarAccess.prTerm().ele1ParserRuleCallBoolean(), currentNode); 
     }
     this_Boolean=ruleBoolean
     { 
@@ -235,7 +237,7 @@ ruleTerm returns [EObject current=null]
 
 // Entry rule entryRuleAtom
 entryRuleAtom returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.2" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prAtom().getRule(), currentNode); }
 	 iv_ruleAtom=ruleAtom 
 	 { $current=$iv_ruleAtom.current; } 
 	 EOF 
@@ -251,7 +253,7 @@ ruleAtom returns [EObject current=null]
 	
 	    lv_name=RULE_ID
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.2/@alternatives/@terminal" /* xtext::RuleCall */, "name"); 
+    createLeafNode(grammarAccess.prAtom().ele0LexerRuleCallID(), "name"); 
     }
  
 	    {
@@ -277,7 +279,7 @@ ruleAtom returns [EObject current=null]
 
 // Entry rule entryRuleParens
 entryRuleParens returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.3" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prParens().getRule(), currentNode); }
 	 iv_ruleParens=ruleParens 
 	 { $current=$iv_ruleParens.current; } 
 	 EOF 
@@ -291,11 +293,11 @@ ruleParens returns [EObject current=null]
     }:
 ((('(' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prParens().ele000KeywordLeftParenthesis(), null); 
     }
 
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode(grammarAccess.prParens().ele001ParserRuleCallOp(), currentNode); 
     }
     this_Op=ruleOp
     { 
@@ -304,13 +306,13 @@ ruleParens returns [EObject current=null]
     }
 )')' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prParens().ele01KeywordRightParenthesis(), null); 
     }
 )(	
 	
 	    lv_em='!' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.3/@alternatives/@abstractTokens.1/@terminal" /* xtext::Keyword */, "em"); 
+        createLeafNode(grammarAccess.prParens().ele10KeywordExclamationMark(), "em"); 
     }
  
 	    {
@@ -336,7 +338,7 @@ ruleParens returns [EObject current=null]
 
 // Entry rule entryRuleTwoNumbers
 entryRuleTwoNumbers returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.4" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prTwoNumbers().getRule(), currentNode); }
 	 iv_ruleTwoNumbers=ruleTwoNumbers 
 	 { $current=$iv_ruleTwoNumbers.current; } 
 	 EOF 
@@ -352,7 +354,7 @@ ruleTwoNumbers returns [EObject current=null]
 	
 	    lv_num1=RULE_INT
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, "num1"); 
+    createLeafNode(grammarAccess.prTwoNumbers().ele000LexerRuleCallINT(), "num1"); 
     }
  
 	    {
@@ -372,7 +374,7 @@ ruleTwoNumbers returns [EObject current=null]
 	
 	    lv_num2=RULE_INT
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "num2"); 
+    createLeafNode(grammarAccess.prTwoNumbers().ele010LexerRuleCallINT(), "num2"); 
     }
  
 	    {
@@ -390,13 +392,13 @@ ruleTwoNumbers returns [EObject current=null]
 	
 ))('#' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.4/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prTwoNumbers().ele10KeywordNumberSign(), null); 
     }
 (	
 	
 	    lv_num3=RULE_INT
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.4/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "num3"); 
+    createLeafNode(grammarAccess.prTwoNumbers().ele110LexerRuleCallINT(), "num3"); 
     }
  
 	    {
@@ -422,7 +424,7 @@ ruleTwoNumbers returns [EObject current=null]
 
 // Entry rule entryRuleManyStrings
 entryRuleManyStrings returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.5" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prManyStrings().getRule(), currentNode); }
 	 iv_ruleManyStrings=ruleManyStrings 
 	 { $current=$iv_ruleManyStrings.current; } 
 	 EOF 
@@ -436,13 +438,13 @@ ruleManyStrings returns [EObject current=null]
     }:
 (('=' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prManyStrings().ele00KeywordEqualsSign(), null); 
     }
 (	
 	
 	    lv_str1=RULE_STRING
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "str1"); 
+    createLeafNode(grammarAccess.prManyStrings().ele010LexerRuleCallSTRING(), "str1"); 
     }
  
 	    {
@@ -462,7 +464,7 @@ ruleManyStrings returns [EObject current=null]
 	
 	    lv_str2=RULE_STRING
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.5/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "str2"); 
+    createLeafNode(grammarAccess.prManyStrings().ele10LexerRuleCallSTRING(), "str2"); 
     }
  
 	    {
@@ -488,7 +490,7 @@ ruleManyStrings returns [EObject current=null]
 
 // Entry rule entryRuleType
 entryRuleType returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.6" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prType().getRule(), currentNode); }
 	 iv_ruleType=ruleType 
 	 { $current=$iv_ruleType.current; } 
 	 EOF 
@@ -502,13 +504,13 @@ ruleType returns [EObject current=null]
     }:
 ((('type' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prType().ele000KeywordType(), null); 
     }
 (	
 	
 	    lv_name=RULE_ID
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+    createLeafNode(grammarAccess.prType().ele0010LexerRuleCallID(), "name"); 
     }
  
 	    {
@@ -526,7 +528,7 @@ ruleType returns [EObject current=null]
 	
 ))'extends' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prType().ele01KeywordExtends(), null); 
     }
 )(	
 	
@@ -539,7 +541,7 @@ ruleType returns [EObject current=null]
         }
 (
 	RULE_ID    { 
-    createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.6/@alternatives/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "extends"); 
+    createLeafNode(grammarAccess.prType().ele10CrossReferenceEStringType(), "extends"); 
     }
 ) 
 	
@@ -553,7 +555,7 @@ ruleType returns [EObject current=null]
 
 // Entry rule entryRuleRef2
 entryRuleRef2 returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.7" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prRef2().getRule(), currentNode); }
 	 iv_ruleRef2=ruleRef2 
 	 { $current=$iv_ruleRef2.current; } 
 	 EOF 
@@ -567,23 +569,23 @@ ruleRef2 returns [EObject current=null]
     }:
 ('#2' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.7/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prRef2().ele0KeywordNumberSignDigitTwo(), null); 
     }
 (	
 	
 	    lv_ref2=(('mykeyword1' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.7/@alternatives/@abstractTokens.1/@terminal/@groups.0/@groups.0" /* xtext::Keyword */, "ref2"); 
+        createLeafNode(grammarAccess.prRef2().ele1000KeywordMykeyword1(), "ref2"); 
     }
 
     |RULE_STRING
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.7/@alternatives/@abstractTokens.1/@terminal/@groups.0/@groups.1" /* xtext::RuleCall */, "ref2"); 
+    createLeafNode(grammarAccess.prRef2().ele1001LexerRuleCallSTRING(), "ref2"); 
     }
 )
     |'mykeyword2' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.7/@alternatives/@abstractTokens.1/@terminal/@groups.1" /* xtext::Keyword */, "ref2"); 
+        createLeafNode(grammarAccess.prRef2().ele101KeywordMykeyword2(), "ref2"); 
     }
 ) 
 	    {
@@ -609,7 +611,7 @@ ruleRef2 returns [EObject current=null]
 
 // Entry rule entryRuleSpare
 entryRuleSpare returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.8" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prSpare().getRule(), currentNode); }
 	 iv_ruleSpare=ruleSpare 
 	 { $current=$iv_ruleSpare.current; } 
 	 EOF 
@@ -623,13 +625,13 @@ ruleSpare returns [EObject current=null]
     }:
 (('#3' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prSpare().ele00KeywordNumberSignDigitThree(), null); 
     }
 (	
 	
 	    lv_id=RULE_ID
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "id"); 
+    createLeafNode(grammarAccess.prSpare().ele010LexerRuleCallID(), "id"); 
     }
  
 	    {
@@ -647,13 +649,13 @@ ruleSpare returns [EObject current=null]
 	
 ))('.' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.8/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prSpare().ele10KeywordFullStop(), null); 
     }
 (	
 	
 	    lv_id=RULE_ID
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.8/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "id"); 
+    createLeafNode(grammarAccess.prSpare().ele110LexerRuleCallID(), "id"); 
     }
  
 	    {
@@ -679,7 +681,7 @@ ruleSpare returns [EObject current=null]
 
 // Entry rule entryRuleBoolean
 entryRuleBoolean returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.9" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prBoolean().getRule(), currentNode); }
 	 iv_ruleBoolean=ruleBoolean 
 	 { $current=$iv_ruleBoolean.current; } 
 	 EOF 
@@ -693,13 +695,13 @@ ruleBoolean returns [EObject current=null]
     }:
 ((('#4' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prBoolean().ele000KeywordNumberSignDigitFour(), null); 
     }
 (	
 	
 	    lv_bool='myoption' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::Keyword */, "bool"); 
+        createLeafNode(grammarAccess.prBoolean().ele0010KeywordMyoption(), "bool"); 
     }
  
 	    {
@@ -717,13 +719,13 @@ ruleBoolean returns [EObject current=null]
 	
 )?)'kw' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prBoolean().ele01KeywordKw(), null); 
     }
 )(	
 	
 	    lv_value=RULE_ID
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xmi#/0/@rules.9/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "value"); 
+    createLeafNode(grammarAccess.prBoolean().ele10LexerRuleCallID(), "value"); 
     }
  
 	    {

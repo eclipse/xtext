@@ -30,15 +30,17 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
 import org.eclipse.xtext.conversion.ValueConverterException;
+import org.eclipse.xtext.parsetree.formatter.services.FormatterTestLanguageGrammarAccess;
 
 }
 
 @parser::members {
  
-    public InternalFormatterTestLanguageParser(TokenStream input, IAstFactory factory, Grammar g) {
-        this(input);
-        this.factory = factory;
-		grammar = g;
+ 	private FormatterTestLanguageGrammarAccess grammarAccess;
+ 	
+    public InternalFormatterTestLanguageParser(TokenStream input, IAstFactory factory, FormatterTestLanguageGrammarAccess grammarAccess) {
+        super(input, factory, grammarAccess.getGrammar());
+        this.grammarAccess = grammarAccess;
     }
     
     @Override
@@ -66,7 +68,7 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 
 // Entry rule entryRuleRoot
 entryRuleRoot returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.xmi#/0/@rules.0" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prRoot().getRule(), currentNode); }
 	 iv_ruleRoot=ruleRoot 
 	 { $current=$iv_ruleRoot.current; } 
 	 EOF 
@@ -80,11 +82,11 @@ ruleRoot returns [EObject current=null]
     }:
 ('test' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.xmi#/0/@rules.0/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prRoot().ele0KeywordTest(), null); 
     }
 (
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.xmi#/0/@rules.0/@alternatives/@abstractTokens.1/@groups.0" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode(grammarAccess.prRoot().ele10ParserRuleCallTestLinewrap(), currentNode); 
     }
     this_TestLinewrap=ruleTestLinewrap
     { 
@@ -94,7 +96,7 @@ ruleRoot returns [EObject current=null]
 
     |
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.xmi#/0/@rules.0/@alternatives/@abstractTokens.1/@groups.1" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode(grammarAccess.prRoot().ele11ParserRuleCallTestIndentation(), currentNode); 
     }
     this_TestIndentation=ruleTestIndentation
     { 
@@ -111,7 +113,7 @@ ruleRoot returns [EObject current=null]
 
 // Entry rule entryRuleLine
 entryRuleLine returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.xmi#/0/@rules.1" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prLine().getRule(), currentNode); }
 	 iv_ruleLine=ruleLine 
 	 { $current=$iv_ruleLine.current; } 
 	 EOF 
@@ -127,7 +129,7 @@ ruleLine returns [EObject current=null]
 	
 	    lv_type=RULE_ID
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.xmi#/0/@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, "type"); 
+    createLeafNode(grammarAccess.prLine().ele000LexerRuleCallID(), "type"); 
     }
  
 	    {
@@ -147,7 +149,7 @@ ruleLine returns [EObject current=null]
 	
 	    lv_name=RULE_ID
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.xmi#/0/@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+    createLeafNode(grammarAccess.prLine().ele010LexerRuleCallID(), "name"); 
     }
  
 	    {
@@ -165,7 +167,7 @@ ruleLine returns [EObject current=null]
 	
 ))';' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.xmi#/0/@rules.1/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prLine().ele1KeywordSemicolon(), null); 
     }
 );
 
@@ -177,7 +179,7 @@ ruleLine returns [EObject current=null]
 
 // Entry rule entryRuleTestLinewrap
 entryRuleTestLinewrap returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.xmi#/0/@rules.2" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prTestLinewrap().getRule(), currentNode); }
 	 iv_ruleTestLinewrap=ruleTestLinewrap 
 	 { $current=$iv_ruleTestLinewrap.current; } 
 	 EOF 
@@ -191,13 +193,13 @@ ruleTestLinewrap returns [EObject current=null]
     }:
 ('linewrap' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.xmi#/0/@rules.2/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prTestLinewrap().ele0KeywordLinewrap(), null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.xmi#/0/@rules.2/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prTestLinewrap().ele10ParserRuleCallLine(), currentNode); 
 	    }
 	    lv_items=ruleLine 
 	    {
@@ -224,7 +226,7 @@ ruleTestLinewrap returns [EObject current=null]
 
 // Entry rule entryRuleTestIndentation
 entryRuleTestIndentation returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.xmi#/0/@rules.3" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prTestIndentation().getRule(), currentNode); }
 	 iv_ruleTestIndentation=ruleTestIndentation 
 	 { $current=$iv_ruleTestIndentation.current; } 
 	 EOF 
@@ -238,17 +240,17 @@ ruleTestIndentation returns [EObject current=null]
     }:
 ((('indentation' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prTestIndentation().ele000KeywordIndentation(), null); 
     }
 '{' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prTestIndentation().ele001KeywordLeftCurlyBracket(), null); 
     }
 )((	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prTestIndentation().ele0100ParserRuleCallTestIndentation(), currentNode); 
 	    }
 	    lv_sub=ruleTestIndentation 
 	    {
@@ -270,7 +272,7 @@ ruleTestIndentation returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.xmi#/0/@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prTestIndentation().ele0110ParserRuleCallLine(), currentNode); 
 	    }
 	    lv_items=ruleLine 
 	    {
@@ -289,7 +291,7 @@ ruleTestIndentation returns [EObject current=null]
 	
 ))*)'}' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.xmi#/0/@rules.3/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prTestIndentation().ele1KeywordRightCurlyBracket(), null); 
     }
 );
 

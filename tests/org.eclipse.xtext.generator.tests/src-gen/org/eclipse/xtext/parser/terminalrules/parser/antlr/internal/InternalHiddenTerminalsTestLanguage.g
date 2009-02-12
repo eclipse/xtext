@@ -30,15 +30,17 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
 import org.eclipse.xtext.conversion.ValueConverterException;
+import org.eclipse.xtext.parser.terminalrules.services.HiddenTerminalsTestLanguageGrammarAccess;
 
 }
 
 @parser::members {
  
-    public InternalHiddenTerminalsTestLanguageParser(TokenStream input, IAstFactory factory, Grammar g) {
-        this(input);
-        this.factory = factory;
-		grammar = g;
+ 	private HiddenTerminalsTestLanguageGrammarAccess grammarAccess;
+ 	
+    public InternalHiddenTerminalsTestLanguageParser(TokenStream input, IAstFactory factory, HiddenTerminalsTestLanguageGrammarAccess grammarAccess) {
+        super(input, factory, grammarAccess.getGrammar());
+        this.grammarAccess = grammarAccess;
     }
     
     @Override
@@ -66,7 +68,7 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 
 // Entry rule entryRuleModel
 entryRuleModel returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prModel().getRule(), currentNode); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
 	 EOF 
@@ -80,7 +82,7 @@ ruleModel returns [EObject current=null]
     }:
 ((((
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi#//@rules.0/@alternatives/@groups.0/@groups.0/@groups.0/@groups.0" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode(grammarAccess.prModel().ele0000ParserRuleCallWithoutHiddens(), currentNode); 
     }
     this_WithoutHiddens=ruleWithoutHiddens
     { 
@@ -90,7 +92,7 @@ ruleModel returns [EObject current=null]
 
     |
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi#//@rules.0/@alternatives/@groups.0/@groups.0/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode(grammarAccess.prModel().ele0001ParserRuleCallWithHiddens(), currentNode); 
     }
     this_WithHiddens=ruleWithHiddens
     { 
@@ -100,7 +102,7 @@ ruleModel returns [EObject current=null]
 )
     |
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi#//@rules.0/@alternatives/@groups.0/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode(grammarAccess.prModel().ele001ParserRuleCallOverridingHiddens(), currentNode); 
     }
     this_OverridingHiddens=ruleOverridingHiddens
     { 
@@ -110,7 +112,7 @@ ruleModel returns [EObject current=null]
 )
     |
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi#//@rules.0/@alternatives/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode(grammarAccess.prModel().ele01ParserRuleCallInheritingHiddens(), currentNode); 
     }
     this_InheritingHiddens=ruleInheritingHiddens
     { 
@@ -120,7 +122,7 @@ ruleModel returns [EObject current=null]
 )
     |
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi#//@rules.0/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode(grammarAccess.prModel().ele1ParserRuleCallDatatypeHiddens(), currentNode); 
     }
     this_DatatypeHiddens=ruleDatatypeHiddens
     { 
@@ -137,7 +139,7 @@ ruleModel returns [EObject current=null]
 
 // Entry rule entryRuleWithoutHiddens
 entryRuleWithoutHiddens returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi#//@rules.1" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prWithoutHiddens().getRule(), currentNode); }
 	 iv_ruleWithoutHiddens=ruleWithoutHiddens 
 	 { $current=$iv_ruleWithoutHiddens.current; } 
 	 EOF 
@@ -151,13 +153,13 @@ ruleWithoutHiddens returns [EObject current=null]
     }:
 (((('without' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prWithoutHiddens().ele0000KeywordWithout(), null); 
     }
 (	
 	
 	    lv_spaces=RULE_WS
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "spaces"); 
+    createLeafNode(grammarAccess.prWithoutHiddens().ele00010ParserRuleCallWS(), "spaces"); 
     }
  
 	    {
@@ -175,13 +177,13 @@ ruleWithoutHiddens returns [EObject current=null]
 	
 ))'hiddens' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prWithoutHiddens().ele001KeywordHiddens(), null); 
     }
 )(	
 	
 	    lv_spaces=RULE_WS
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "spaces"); 
+    createLeafNode(grammarAccess.prWithoutHiddens().ele010ParserRuleCallWS(), "spaces"); 
     }
  
 	    {
@@ -201,7 +203,7 @@ ruleWithoutHiddens returns [EObject current=null]
 	
 	    lv_valid=';' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1/@terminal" /* xtext::Keyword */, "valid"); 
+        createLeafNode(grammarAccess.prWithoutHiddens().ele10KeywordSemicolon(), "valid"); 
     }
  
 	    {
@@ -227,7 +229,7 @@ ruleWithoutHiddens returns [EObject current=null]
 
 // Entry rule entryRuleWithHiddens
 entryRuleWithHiddens returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi#//@rules.2" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prWithHiddens().getRule(), currentNode); }
 	 iv_ruleWithHiddens=ruleWithHiddens 
 	 { $current=$iv_ruleWithHiddens.current; } 
 	 EOF 
@@ -243,17 +245,17 @@ ruleWithHiddens returns [EObject current=null]
     }:
 (('with' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prWithHiddens().ele00KeywordWith(), null); 
     }
 'hiddens' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prWithHiddens().ele01KeywordHiddens(), null); 
     }
 )(	
 	
 	    lv_valid=';' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.1/@terminal" /* xtext::Keyword */, "valid"); 
+        createLeafNode(grammarAccess.prWithHiddens().ele10KeywordSemicolon(), "valid"); 
     }
  
 	    {
@@ -279,7 +281,7 @@ ruleWithHiddens returns [EObject current=null]
 
 // Entry rule entryRuleOverridingHiddens
 entryRuleOverridingHiddens returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi#//@rules.3" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prOverridingHiddens().getRule(), currentNode); }
 	 iv_ruleOverridingHiddens=ruleOverridingHiddens 
 	 { $current=$iv_ruleOverridingHiddens.current; } 
 	 EOF 
@@ -295,21 +297,21 @@ ruleOverridingHiddens returns [EObject current=null]
     }:
 ((((('overriding' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prOverridingHiddens().ele00000KeywordOverriding(), null); 
     }
 'hiddens' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prOverridingHiddens().ele00001KeywordHiddens(), null); 
     }
 )'(' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prOverridingHiddens().ele0001KeywordLeftParenthesis(), null); 
     }
 )(	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prOverridingHiddens().ele0010ParserRuleCallOverridingHiddensCall(), currentNode); 
 	    }
 	    lv_called=ruleOverridingHiddensCall 
 	    {
@@ -328,13 +330,13 @@ ruleOverridingHiddens returns [EObject current=null]
 	
 ))')' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prOverridingHiddens().ele01KeywordRightParenthesis(), null); 
     }
 )(	
 	
 	    lv_valid=';' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.1/@terminal" /* xtext::Keyword */, "valid"); 
+        createLeafNode(grammarAccess.prOverridingHiddens().ele10KeywordSemicolon(), "valid"); 
     }
  
 	    {
@@ -360,7 +362,7 @@ ruleOverridingHiddens returns [EObject current=null]
 
 // Entry rule entryRuleOverridingHiddensCall
 entryRuleOverridingHiddensCall returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi#//@rules.4" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prOverridingHiddensCall().getRule(), currentNode); }
 	 iv_ruleOverridingHiddensCall=ruleOverridingHiddensCall 
 	 { $current=$iv_ruleOverridingHiddensCall.current; } 
 	 EOF 
@@ -376,13 +378,13 @@ ruleOverridingHiddensCall returns [EObject current=null]
     }:
 (('call' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prOverridingHiddensCall().ele00KeywordCall(), null); 
     }
 (	
 	
 	    lv_spaces=RULE_WS
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "spaces"); 
+    createLeafNode(grammarAccess.prOverridingHiddensCall().ele010ParserRuleCallWS(), "spaces"); 
     }
  
 	    {
@@ -402,7 +404,7 @@ ruleOverridingHiddensCall returns [EObject current=null]
 	
 	    lv_valid=';' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.1/@terminal" /* xtext::Keyword */, "valid"); 
+        createLeafNode(grammarAccess.prOverridingHiddensCall().ele10KeywordSemicolon(), "valid"); 
     }
  
 	    {
@@ -428,7 +430,7 @@ ruleOverridingHiddensCall returns [EObject current=null]
 
 // Entry rule entryRuleInheritingHiddens
 entryRuleInheritingHiddens returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi#//@rules.5" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prInheritingHiddens().getRule(), currentNode); }
 	 iv_ruleInheritingHiddens=ruleInheritingHiddens 
 	 { $current=$iv_ruleInheritingHiddens.current; } 
 	 EOF 
@@ -444,21 +446,21 @@ ruleInheritingHiddens returns [EObject current=null]
     }:
 ((((('inheriting' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prInheritingHiddens().ele00000KeywordInheriting(), null); 
     }
 'hiddens' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prInheritingHiddens().ele00001KeywordHiddens(), null); 
     }
 )'(' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prInheritingHiddens().ele0001KeywordLeftParenthesis(), null); 
     }
 )((	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.0/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prInheritingHiddens().ele00100ParserRuleCallInheritingHiddensCall(), currentNode); 
 	    }
 	    lv_called=ruleInheritingHiddensCall 
 	    {
@@ -480,7 +482,7 @@ ruleInheritingHiddens returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prInheritingHiddens().ele00110ParserRuleCallHidingHiddens(), currentNode); 
 	    }
 	    lv_hidingCalled=ruleHidingHiddens 
 	    {
@@ -499,13 +501,13 @@ ruleInheritingHiddens returns [EObject current=null]
 	
 )))')' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prInheritingHiddens().ele01KeywordRightParenthesis(), null); 
     }
 )(	
 	
 	    lv_valid=';' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.1/@terminal" /* xtext::Keyword */, "valid"); 
+        createLeafNode(grammarAccess.prInheritingHiddens().ele10KeywordSemicolon(), "valid"); 
     }
  
 	    {
@@ -531,7 +533,7 @@ ruleInheritingHiddens returns [EObject current=null]
 
 // Entry rule entryRuleDatatypeHiddens
 entryRuleDatatypeHiddens returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi#//@rules.6" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prDatatypeHiddens().getRule(), currentNode); }
 	 iv_ruleDatatypeHiddens=ruleDatatypeHiddens 
 	 { $current=$iv_ruleDatatypeHiddens.current; } 
 	 EOF 
@@ -545,13 +547,13 @@ ruleDatatypeHiddens returns [EObject current=null]
     }:
 ('datatype' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi#//@rules.6/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prDatatypeHiddens().ele0KeywordDatatype(), null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi#//@rules.6/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prDatatypeHiddens().ele10ParserRuleCallDatatypeRule(), currentNode); 
 	    }
 	    lv_valid=ruleDatatypeRule 
 	    {
@@ -578,7 +580,7 @@ ruleDatatypeHiddens returns [EObject current=null]
 
 // Entry rule entryRuleDatatypeRule
 entryRuleDatatypeRule returns [String current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi#//@rules.7" /* xtext::ParserRule */, currentNode); } 
+	{ currentNode = createCompositeNode(grammarAccess.prDatatypeRule().getRule(), currentNode); } 
 	 iv_ruleDatatypeRule=ruleDatatypeRule 
 	 { $current=$iv_ruleDatatypeRule.current.getText(); }  
 	 EOF 
@@ -596,13 +598,13 @@ ruleDatatypeRule returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleTo
 	kw='rule' 
     {
         $current.merge(kw);
-        createLeafNode("classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi#//@rules.7/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prDatatypeRule().ele0KeywordRule(), null); 
     }
 
 	kw=';' 
     {
         $current.merge(kw);
-        createLeafNode("classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi#//@rules.7/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prDatatypeRule().ele1KeywordSemicolon(), null); 
     }
 )
     ;
@@ -615,7 +617,7 @@ ruleDatatypeRule returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleTo
 
 // Entry rule entryRuleHidingHiddens
 entryRuleHidingHiddens returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi#//@rules.8" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prHidingHiddens().getRule(), currentNode); }
 	 iv_ruleHidingHiddens=ruleHidingHiddens 
 	 { $current=$iv_ruleHidingHiddens.current; } 
 	 EOF 
@@ -631,13 +633,13 @@ ruleHidingHiddens returns [EObject current=null]
     }:
 (('hiding' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi#//@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prHidingHiddens().ele00KeywordHiding(), null); 
     }
 (	
 	
 	    lv_space=RULE_WS
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi#//@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "space"); 
+    createLeafNode(grammarAccess.prHidingHiddens().ele010ParserRuleCallWS(), "space"); 
     }
  
 	    {
@@ -657,7 +659,7 @@ ruleHidingHiddens returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi#//@rules.8/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prHidingHiddens().ele10ParserRuleCallInheritingHiddensCall(), currentNode); 
 	    }
 	    lv_called=ruleInheritingHiddensCall 
 	    {
@@ -684,7 +686,7 @@ ruleHidingHiddens returns [EObject current=null]
 
 // Entry rule entryRuleInheritingHiddensCall
 entryRuleInheritingHiddensCall returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi#//@rules.9" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.prInheritingHiddensCall().getRule(), currentNode); }
 	 iv_ruleInheritingHiddensCall=ruleInheritingHiddensCall 
 	 { $current=$iv_ruleInheritingHiddensCall.current; } 
 	 EOF 
@@ -698,13 +700,13 @@ ruleInheritingHiddensCall returns [EObject current=null]
     }:
 ('call' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi#//@rules.9/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode(grammarAccess.prInheritingHiddensCall().ele0KeywordCall(), null); 
     }
 (	
 	
 	    lv_valid=';' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi#//@rules.9/@alternatives/@abstractTokens.1/@terminal" /* xtext::Keyword */, "valid"); 
+        createLeafNode(grammarAccess.prInheritingHiddensCall().ele10KeywordSemicolon(), "valid"); 
     }
  
 	    {
