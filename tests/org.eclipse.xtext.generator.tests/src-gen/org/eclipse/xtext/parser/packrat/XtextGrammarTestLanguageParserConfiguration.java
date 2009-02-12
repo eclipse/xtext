@@ -10,6 +10,7 @@ import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageGrammarConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageGrammarIDConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageAbstractRuleConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageAbstractMetamodelDeclarationConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageGeneratedMetamodelConsumer;
@@ -52,6 +53,7 @@ public class XtextGrammarTestLanguageParserConfiguration extends AbstractParserC
 	private XtextBuiltinParserConfiguration xtextBuiltinConfiguration; 
 
     private XtextGrammarTestLanguageGrammarConsumer grammarConsumer;
+    private XtextGrammarTestLanguageGrammarIDConsumer grammarIdConsumer;
     private XtextGrammarTestLanguageAbstractRuleConsumer abstractRuleConsumer;
     private XtextGrammarTestLanguageAbstractMetamodelDeclarationConsumer abstractMetamodelDeclarationConsumer;
     private XtextGrammarTestLanguageGeneratedMetamodelConsumer generatedMetamodelConsumer;
@@ -93,6 +95,9 @@ public class XtextGrammarTestLanguageParserConfiguration extends AbstractParserC
 	public void createNonTerminalConsumers() {
 		getXtextBuiltinConfiguration().createNonTerminalConsumers();
 		grammarConsumer = new XtextGrammarTestLanguageGrammarConsumer(
+    		this, null
+    	);
+		grammarIdConsumer = new XtextGrammarTestLanguageGrammarIDConsumer(
     		this, null
     	);
 		abstractRuleConsumer = new XtextGrammarTestLanguageAbstractRuleConsumer(
@@ -188,7 +193,10 @@ public class XtextGrammarTestLanguageParserConfiguration extends AbstractParserC
 	public void configureConsumers() {
 		getGrammarConsumer().setAbstractMetamodelDeclarationConsumer(getAbstractMetamodelDeclarationConsumer());
 		getGrammarConsumer().setAbstractRuleConsumer(getAbstractRuleConsumer());
+		getGrammarConsumer().setGrammarIdConsumer(getGrammarIdConsumer());
 		getGrammarConsumer().setIdConsumer(getIdConsumer());
+
+		getGrammarIdConsumer().setIdConsumer(getIdConsumer());
 
 		getAbstractRuleConsumer().setLexerRuleConsumer(getLexerRuleConsumer());
 		getAbstractRuleConsumer().setParserRuleConsumer(getParserRuleConsumer());
@@ -268,90 +276,87 @@ public class XtextGrammarTestLanguageParserConfiguration extends AbstractParserC
 
 		getRuleCallConsumer().setIdConsumer(getIdConsumer());
 
-		getGrammarConsumer().setCrossReference$34$Delimiter(XtextGrammarTestLanguageDelimiters.ruleCall$15$Delimiter);
-		getGrammarConsumer().setCrossReference$39$Delimiter(XtextGrammarTestLanguageDelimiters.ruleCall$15$Delimiter);
-		getGrammarConsumer().setKeyword$9$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$12$Delimiter);
-		getGrammarConsumer().setKeyword$10$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$12$Delimiter);
-		getGrammarConsumer().setKeyword$14$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$17$Delimiter);
-		getGrammarConsumer().setKeyword$19$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$12$Delimiter);
-		getGrammarConsumer().setKeyword$23$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$17$Delimiter);
-		getGrammarConsumer().setKeyword$30$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$12$Delimiter);
-		getGrammarConsumer().setKeyword$31$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$17$Delimiter);
-		getGrammarConsumer().setKeyword$37$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$17$Delimiter);
-		getGrammarConsumer().setKeyword$41$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$17$Delimiter);
-		getGrammarConsumer().setRuleCall$12$Delimiter(XtextGrammarTestLanguageDelimiters.ruleCall$15$Delimiter);
-		getGrammarConsumer().setRuleCall$16$Delimiter(XtextGrammarTestLanguageDelimiters.ruleCall$15$Delimiter);
-		getGrammarConsumer().setRuleCall$21$Delimiter(XtextGrammarTestLanguageDelimiters.ruleCall$15$Delimiter);
-		getGrammarConsumer().setRuleCall$25$Delimiter(XtextGrammarTestLanguageDelimiters.ruleCall$15$Delimiter);
-		getGeneratedMetamodelConsumer().setCrossReference$8$Delimiter(XtextGrammarTestLanguageDelimiters.crossReference$70$Delimiter);
-		getGeneratedMetamodelConsumer().setKeyword$4$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$12$Delimiter);
-		getGeneratedMetamodelConsumer().setKeyword$11$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$12$Delimiter);
-		getGeneratedMetamodelConsumer().setRuleCall$6$Delimiter(XtextGrammarTestLanguageDelimiters.ruleCall$15$Delimiter);
-		getGeneratedMetamodelConsumer().setRuleCall$13$Delimiter(XtextGrammarTestLanguageDelimiters.ruleCall$15$Delimiter);
-		getReferencedMetamodelConsumer().setCrossReference$5$Delimiter(XtextGrammarTestLanguageDelimiters.crossReference$70$Delimiter);
-		getReferencedMetamodelConsumer().setKeyword$3$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$12$Delimiter);
-		getReferencedMetamodelConsumer().setKeyword$8$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$12$Delimiter);
-		getReferencedMetamodelConsumer().setRuleCall$10$Delimiter(XtextGrammarTestLanguageDelimiters.ruleCall$15$Delimiter);
-		getLexerRuleConsumer().setKeyword$12$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$12$Delimiter);
-		getLexerRuleConsumer().setKeyword$15$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$17$Delimiter);
-		getLexerRuleConsumer().setKeyword$18$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$17$Delimiter);
-		getLexerRuleConsumer().setKeyword$7$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$12$Delimiter);
-		getLexerRuleConsumer().setKeyword$8$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$12$Delimiter);
-		getLexerRuleConsumer().setRuleCall$17$Delimiter(XtextGrammarTestLanguageDelimiters.crossReference$70$Delimiter);
-		getLexerRuleConsumer().setRuleCall$10$Delimiter(XtextGrammarTestLanguageDelimiters.ruleCall$15$Delimiter);
-		getParserRuleConsumer().setCrossReference$20$Delimiter(XtextGrammarTestLanguageDelimiters.ruleCall$15$Delimiter);
-		getParserRuleConsumer().setCrossReference$25$Delimiter(XtextGrammarTestLanguageDelimiters.ruleCall$15$Delimiter);
-		getParserRuleConsumer().setKeyword$9$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$12$Delimiter);
-		getParserRuleConsumer().setKeyword$16$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$12$Delimiter);
-		getParserRuleConsumer().setKeyword$17$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$17$Delimiter);
-		getParserRuleConsumer().setKeyword$23$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$17$Delimiter);
-		getParserRuleConsumer().setKeyword$27$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$17$Delimiter);
-		getParserRuleConsumer().setKeyword$28$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$17$Delimiter);
-		getParserRuleConsumer().setKeyword$31$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$17$Delimiter);
-		getParserRuleConsumer().setRuleCall$7$Delimiter(XtextGrammarTestLanguageDelimiters.ruleCall$15$Delimiter);
-		getTerminalRuleConsumer().setKeyword$7$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$12$Delimiter);
-		getTerminalRuleConsumer().setKeyword$11$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$12$Delimiter);
-		getTerminalRuleConsumer().setKeyword$14$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$17$Delimiter);
-		getTerminalRuleConsumer().setKeyword$17$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$17$Delimiter);
-		getTerminalRuleConsumer().setRuleCall$9$Delimiter(XtextGrammarTestLanguageDelimiters.ruleCall$15$Delimiter);
-		getTypeRefConsumer().setCrossReference$4$Delimiter(XtextGrammarTestLanguageDelimiters.ruleCall$15$Delimiter);
-		getTypeRefConsumer().setCrossReference$8$Delimiter(XtextGrammarTestLanguageDelimiters.ruleCall$15$Delimiter);
-		getTypeRefConsumer().setKeyword$6$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$17$Delimiter);
-		getAlternativesConsumer().setKeyword$7$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$17$Delimiter);
-		getTerminalAlternativesConsumer().setKeyword$7$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$17$Delimiter);
-		getAbstractTokenConsumer().setKeyword$10$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$17$Delimiter);
-		getAbstractTokenConsumer().setKeyword$11$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$17$Delimiter);
-		getAbstractTokenConsumer().setKeyword$12$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$17$Delimiter);
-		getTerminalTokenConsumer().setKeyword$6$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$17$Delimiter);
-		getTerminalTokenConsumer().setKeyword$7$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$17$Delimiter);
-		getTerminalTokenConsumer().setKeyword$8$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$17$Delimiter);
-		getAssignmentConsumer().setKeyword$8$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$17$Delimiter);
-		getAssignmentConsumer().setKeyword$9$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$17$Delimiter);
-		getAssignmentConsumer().setKeyword$10$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$17$Delimiter);
-		getAssignmentConsumer().setRuleCall$4$Delimiter(XtextGrammarTestLanguageDelimiters.ruleCall$15$Delimiter);
-		getActionConsumer().setKeyword$8$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$17$Delimiter);
-		getActionConsumer().setKeyword$10$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$12$Delimiter);
-		getActionConsumer().setKeyword$11$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$17$Delimiter);
-		getActionConsumer().setKeyword$14$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$17$Delimiter);
-		getActionConsumer().setKeyword$19$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$17$Delimiter);
-		getActionConsumer().setKeyword$20$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$17$Delimiter);
-		getActionConsumer().setKeyword$21$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$12$Delimiter);
-		getActionConsumer().setKeyword$22$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$17$Delimiter);
-		getActionConsumer().setRuleCall$16$Delimiter(XtextGrammarTestLanguageDelimiters.ruleCall$15$Delimiter);
-		getNegatedTokenConsumer().setKeyword$2$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$17$Delimiter);
-		getUpToTokenConsumer().setKeyword$2$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$17$Delimiter);
-		getWildcardConsumer().setKeyword$2$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$17$Delimiter);
-		getCharacterRangeConsumer().setKeyword$7$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$17$Delimiter);
-		getCrossReferenceConsumer().setCrossReference$10$Delimiter(XtextGrammarTestLanguageDelimiters.ruleCall$15$Delimiter);
-		getCrossReferenceConsumer().setKeyword$4$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$17$Delimiter);
-		getCrossReferenceConsumer().setKeyword$8$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$17$Delimiter);
-		getCrossReferenceConsumer().setKeyword$12$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$17$Delimiter);
-		getParenthesizedElementConsumer().setKeyword$3$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$17$Delimiter);
-		getParenthesizedElementConsumer().setKeyword$5$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$17$Delimiter);
-		getParenthesizedTerminalElementConsumer().setKeyword$3$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$17$Delimiter);
-		getParenthesizedTerminalElementConsumer().setKeyword$5$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$17$Delimiter);
-		getKeywordConsumer().setRuleCall$2$Delimiter(XtextGrammarTestLanguageDelimiters.crossReference$70$Delimiter);
-		getRuleCallConsumer().setCrossReference$2$Delimiter(XtextGrammarTestLanguageDelimiters.ruleCall$15$Delimiter);
+		getGrammarConsumer().setCrossReference$25$Delimiter(XtextGrammarTestLanguageDelimiters.crossReference$28$Delimiter);
+		getGrammarConsumer().setCrossReference$30$Delimiter(XtextGrammarTestLanguageDelimiters.crossReference$28$Delimiter);
+		getGrammarConsumer().setKeyword$8$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$11$Delimiter);
+		getGrammarConsumer().setKeyword$9$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$11$Delimiter);
+		getGrammarConsumer().setKeyword$13$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$11$Delimiter);
+		getGrammarConsumer().setKeyword$21$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$11$Delimiter);
+		getGrammarConsumer().setKeyword$22$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$25$Delimiter);
+		getGrammarConsumer().setKeyword$28$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$25$Delimiter);
+		getGrammarConsumer().setKeyword$32$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$25$Delimiter);
+		getGrammarIdConsumer().setKeyword$4$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$25$Delimiter);
+		getGrammarIdConsumer().setRuleCall$2$Delimiter(XtextGrammarTestLanguageDelimiters.crossReference$28$Delimiter);
+		getGrammarIdConsumer().setRuleCall$5$Delimiter(XtextGrammarTestLanguageDelimiters.crossReference$28$Delimiter);
+		getGeneratedMetamodelConsumer().setCrossReference$8$Delimiter(XtextGrammarTestLanguageDelimiters.crossReference$68$Delimiter);
+		getGeneratedMetamodelConsumer().setKeyword$4$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$11$Delimiter);
+		getGeneratedMetamodelConsumer().setKeyword$11$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$11$Delimiter);
+		getGeneratedMetamodelConsumer().setRuleCall$6$Delimiter(XtextGrammarTestLanguageDelimiters.crossReference$28$Delimiter);
+		getGeneratedMetamodelConsumer().setRuleCall$13$Delimiter(XtextGrammarTestLanguageDelimiters.crossReference$28$Delimiter);
+		getReferencedMetamodelConsumer().setCrossReference$5$Delimiter(XtextGrammarTestLanguageDelimiters.crossReference$68$Delimiter);
+		getReferencedMetamodelConsumer().setKeyword$3$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$11$Delimiter);
+		getReferencedMetamodelConsumer().setKeyword$8$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$11$Delimiter);
+		getReferencedMetamodelConsumer().setRuleCall$10$Delimiter(XtextGrammarTestLanguageDelimiters.crossReference$28$Delimiter);
+		getLexerRuleConsumer().setKeyword$15$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$25$Delimiter);
+		getLexerRuleConsumer().setKeyword$18$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$25$Delimiter);
+		getLexerRuleConsumer().setKeyword$7$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$11$Delimiter);
+		getLexerRuleConsumer().setKeyword$8$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$11$Delimiter);
+		getLexerRuleConsumer().setKeyword$12$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$11$Delimiter);
+		getLexerRuleConsumer().setRuleCall$17$Delimiter(XtextGrammarTestLanguageDelimiters.crossReference$68$Delimiter);
+		getLexerRuleConsumer().setRuleCall$10$Delimiter(XtextGrammarTestLanguageDelimiters.crossReference$28$Delimiter);
+		getParserRuleConsumer().setCrossReference$20$Delimiter(XtextGrammarTestLanguageDelimiters.crossReference$28$Delimiter);
+		getParserRuleConsumer().setCrossReference$25$Delimiter(XtextGrammarTestLanguageDelimiters.crossReference$28$Delimiter);
+		getParserRuleConsumer().setKeyword$9$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$11$Delimiter);
+		getParserRuleConsumer().setKeyword$16$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$11$Delimiter);
+		getParserRuleConsumer().setKeyword$17$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$25$Delimiter);
+		getParserRuleConsumer().setKeyword$23$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$25$Delimiter);
+		getParserRuleConsumer().setKeyword$27$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$25$Delimiter);
+		getParserRuleConsumer().setKeyword$28$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$25$Delimiter);
+		getParserRuleConsumer().setKeyword$31$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$25$Delimiter);
+		getParserRuleConsumer().setRuleCall$7$Delimiter(XtextGrammarTestLanguageDelimiters.crossReference$28$Delimiter);
+		getTerminalRuleConsumer().setKeyword$7$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$11$Delimiter);
+		getTerminalRuleConsumer().setKeyword$11$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$11$Delimiter);
+		getTerminalRuleConsumer().setKeyword$14$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$25$Delimiter);
+		getTerminalRuleConsumer().setKeyword$17$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$25$Delimiter);
+		getTerminalRuleConsumer().setRuleCall$9$Delimiter(XtextGrammarTestLanguageDelimiters.crossReference$28$Delimiter);
+		getTypeRefConsumer().setCrossReference$4$Delimiter(XtextGrammarTestLanguageDelimiters.crossReference$28$Delimiter);
+		getTypeRefConsumer().setCrossReference$8$Delimiter(XtextGrammarTestLanguageDelimiters.crossReference$28$Delimiter);
+		getTypeRefConsumer().setKeyword$6$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$25$Delimiter);
+		getAlternativesConsumer().setKeyword$7$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$25$Delimiter);
+		getTerminalAlternativesConsumer().setKeyword$7$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$25$Delimiter);
+		getAbstractTokenConsumer().setKeyword$10$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$25$Delimiter);
+		getAbstractTokenConsumer().setKeyword$11$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$25$Delimiter);
+		getAbstractTokenConsumer().setKeyword$12$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$25$Delimiter);
+		getTerminalTokenConsumer().setKeyword$6$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$25$Delimiter);
+		getTerminalTokenConsumer().setKeyword$7$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$25$Delimiter);
+		getTerminalTokenConsumer().setKeyword$8$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$25$Delimiter);
+		getAssignmentConsumer().setKeyword$8$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$25$Delimiter);
+		getAssignmentConsumer().setKeyword$9$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$25$Delimiter);
+		getAssignmentConsumer().setKeyword$10$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$25$Delimiter);
+		getAssignmentConsumer().setRuleCall$4$Delimiter(XtextGrammarTestLanguageDelimiters.crossReference$28$Delimiter);
+		getActionConsumer().setKeyword$8$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$25$Delimiter);
+		getActionConsumer().setKeyword$10$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$11$Delimiter);
+		getActionConsumer().setKeyword$11$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$25$Delimiter);
+		getActionConsumer().setKeyword$14$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$25$Delimiter);
+		getActionConsumer().setKeyword$19$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$25$Delimiter);
+		getActionConsumer().setKeyword$20$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$25$Delimiter);
+		getActionConsumer().setKeyword$21$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$11$Delimiter);
+		getActionConsumer().setKeyword$22$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$25$Delimiter);
+		getActionConsumer().setRuleCall$16$Delimiter(XtextGrammarTestLanguageDelimiters.crossReference$28$Delimiter);
+		getNegatedTokenConsumer().setKeyword$2$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$25$Delimiter);
+		getUpToTokenConsumer().setKeyword$2$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$25$Delimiter);
+		getWildcardConsumer().setKeyword$2$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$25$Delimiter);
+		getCharacterRangeConsumer().setKeyword$7$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$25$Delimiter);
+		getCrossReferenceConsumer().setCrossReference$10$Delimiter(XtextGrammarTestLanguageDelimiters.crossReference$28$Delimiter);
+		getCrossReferenceConsumer().setKeyword$4$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$25$Delimiter);
+		getCrossReferenceConsumer().setKeyword$8$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$25$Delimiter);
+		getCrossReferenceConsumer().setKeyword$12$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$25$Delimiter);
+		getParenthesizedElementConsumer().setKeyword$3$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$25$Delimiter);
+		getParenthesizedElementConsumer().setKeyword$5$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$25$Delimiter);
+		getParenthesizedTerminalElementConsumer().setKeyword$3$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$25$Delimiter);
+		getParenthesizedTerminalElementConsumer().setKeyword$5$Delimiter(XtextGrammarTestLanguageDelimiters.keyword$25$Delimiter);
+		getKeywordConsumer().setRuleCall$2$Delimiter(XtextGrammarTestLanguageDelimiters.crossReference$68$Delimiter);
+		getRuleCallConsumer().setCrossReference$2$Delimiter(XtextGrammarTestLanguageDelimiters.crossReference$28$Delimiter);
 	}
 	
 	// TODO collect superGrammars transitive
@@ -361,6 +366,10 @@ public class XtextGrammarTestLanguageParserConfiguration extends AbstractParserC
 	
     public XtextGrammarTestLanguageGrammarConsumer getGrammarConsumer() {
     	return grammarConsumer;
+    }
+
+    public XtextGrammarTestLanguageGrammarIDConsumer getGrammarIdConsumer() {
+    	return grammarIdConsumer;
     }
 
     public XtextGrammarTestLanguageAbstractRuleConsumer getAbstractRuleConsumer() {

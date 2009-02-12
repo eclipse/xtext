@@ -29,19 +29,17 @@ List[ICompletionProposal] completeGrammar_Abstract(Assignment assignment, IConte
 					+ contentAssistContext.matchString.trim() + "'") ->
 	{};
 	 
-List[ICompletionProposal] completeGrammar_IdElements(Assignment assignment, IContentAssistContext contentAssistContext) :
-	debug("completeGrammar_IdElements feature '" + assignment.feature + "' terminal '"
+List[ICompletionProposal] completeGrammar_Name(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeGrammar_Name feature '" + assignment.feature + "' terminal '"
 					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
 					+ contentAssistContext.matchString.trim() + "'") ->
-    { newProposal(assignment, "Grammar_IdElements", contentAssistContext) };
-
+	{};
 	 
-List[ICompletionProposal] completeGrammar_SuperGrammarIdElements(Assignment assignment, IContentAssistContext contentAssistContext) :
-	debug("completeGrammar_SuperGrammarIdElements feature '" + assignment.feature + "' terminal '"
+List[ICompletionProposal] completeGrammar_SuperGrammar(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeGrammar_SuperGrammar feature '" + assignment.feature + "' terminal '"
 					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
 					+ contentAssistContext.matchString.trim() + "'") ->
-    { newProposal(assignment, "Grammar_SuperGrammarIdElements", contentAssistContext) };
-
+	lookupCrossReference(((CrossReference)assignment.terminal), contentAssistContext);
 	 
 List[ICompletionProposal] completeGrammar_DefinesHiddenTokens(Assignment assignment, IContentAssistContext contentAssistContext) :
 	debug("completeGrammar_DefinesHiddenTokens feature '" + assignment.feature + "' terminal '"
@@ -304,6 +302,9 @@ List[ICompletionProposal] completeRuleCall_Rule(Assignment assignment, IContentA
 	lookupCrossReference(((CrossReference)assignment.terminal), contentAssistContext);
 	 	  
 List[ICompletionProposal] complete(RuleCall ruleCall, IContentAssistContext contentAssistContext) :
+	{};
+	 	  
+List[ICompletionProposal] completeEcore_EString(RuleCall ruleCall, IContentAssistContext contentAssistContext) :
 	{};
 
 /*

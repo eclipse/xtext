@@ -52,12 +52,12 @@ public class XtextTerminalsTestLanguageParseTreeConstructor extends AbstractPars
 
 /************ begin Rule Grammar ****************
  *
- * Grammar:   (abstract?="abstract language"|"language") idElements+=ID ("." idElements+=ID)* ("extends" superGrammarIdElements+=ID ("." superGrammarIdElements+=ID)*)? (metamodelDeclarations+=AbstractMetamodelDeclaration)* (rules+=AbstractRule)+;
+ * Grammar:   (abstract?="abstract language"|"language") name=GrammarID ("extends" superGrammar=[Grammar|GrammarID])? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? (metamodelDeclarations+=AbstractMetamodelDeclaration)* (rules+=AbstractRule)+;
  *
  **/
 
 
-// (abstract?="abstract language"|"language") idElements+=ID ("." idElements+=ID)* ("extends" superGrammarIdElements+=ID ("." superGrammarIdElements+=ID)*)? (metamodelDeclarations+=AbstractMetamodelDeclaration)* (rules+=AbstractRule)+
+// (abstract?="abstract language"|"language") name=GrammarID ("extends" superGrammar=[Grammar|GrammarID])? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? (metamodelDeclarations+=AbstractMetamodelDeclaration)* (rules+=AbstractRule)+
 protected class Grammar_Group extends GroupToken {
 	
 	public Grammar_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -86,7 +86,7 @@ protected class Grammar_Group extends GroupToken {
 	}
 }
 
-// (abstract?="abstract language"|"language") idElements+=ID ("." idElements+=ID)* ("extends" superGrammarIdElements+=ID ("." superGrammarIdElements+=ID)*)? (metamodelDeclarations+=AbstractMetamodelDeclaration)*
+// (abstract?="abstract language"|"language") name=GrammarID ("extends" superGrammar=[Grammar|GrammarID])? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? (metamodelDeclarations+=AbstractMetamodelDeclaration)*
 protected class Grammar_0_Group extends GroupToken {
 	
 	public Grammar_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -115,7 +115,7 @@ protected class Grammar_0_Group extends GroupToken {
 	}
 }
 
-// (abstract?="abstract language"|"language") idElements+=ID ("." idElements+=ID)* ("extends" superGrammarIdElements+=ID ("." superGrammarIdElements+=ID)*)?
+// (abstract?="abstract language"|"language") name=GrammarID ("extends" superGrammar=[Grammar|GrammarID])? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")?
 protected class Grammar_0_0_Group extends GroupToken {
 	
 	public Grammar_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -144,7 +144,7 @@ protected class Grammar_0_0_Group extends GroupToken {
 	}
 }
 
-// (abstract?="abstract language"|"language") idElements+=ID ("." idElements+=ID)*
+// (abstract?="abstract language"|"language") name=GrammarID ("extends" superGrammar=[Grammar|GrammarID])?
 protected class Grammar_0_0_0_Group extends GroupToken {
 	
 	public Grammar_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -173,7 +173,7 @@ protected class Grammar_0_0_0_Group extends GroupToken {
 	}
 }
 
-// (abstract?="abstract language"|"language") idElements+=ID
+// (abstract?="abstract language"|"language") name=GrammarID
 protected class Grammar_0_0_0_0_Group extends GroupToken {
 	
 	public Grammar_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -186,7 +186,7 @@ protected class Grammar_0_0_0_0_Group extends GroupToken {
 		
 	@Override
 	protected Solution createSolution() {	
-		Solution s1 = new Grammar_0_0_0_0_1_Assignment_idElements(current, this).firstSolution();
+		Solution s1 = new Grammar_0_0_0_0_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new Grammar_0_0_0_0_0_Alternatives(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
@@ -263,25 +263,25 @@ protected class Grammar_0_0_0_0_0_1_Keyword_language extends KeywordToken  {
 }
 
 
-// idElements+=ID
-protected class Grammar_0_0_0_0_1_Assignment_idElements extends AssignmentToken  {
+// name=GrammarID
+protected class Grammar_0_0_0_0_1_Assignment_name extends AssignmentToken  {
 	
-	public Grammar_0_0_0_0_1_Assignment_idElements(IInstanceDescription curr, AbstractToken pred) {
+	public Grammar_0_0_0_0_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public Assignment getGrammarElement() {
-		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGrammar().ele00001AssignmentIdElements();
+		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGrammar().ele00001AssignmentName();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if((value = current.getConsumable("idElements",IS_REQUIRED)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("idElements");
+		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("name");
 
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
 			type = AssignmentType.PRC;
-			element = XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGrammar().ele000010ParserRuleCallID();
+			element = XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGrammar().ele000010ParserRuleCallGrammarID();
 			return new Solution(obj);
 		}
 
@@ -290,11 +290,11 @@ protected class Grammar_0_0_0_0_1_Assignment_idElements extends AssignmentToken 
 }
 
 
-// ("." idElements+=ID)*
+// ("extends" superGrammar=[Grammar|GrammarID])?
 protected class Grammar_0_0_0_1_Group extends GroupToken {
 	
 	public Grammar_0_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, IS_MANY, !IS_REQUIRED);
+		super(curr, pred, !IS_MANY, !IS_REQUIRED);
 	}
 	
 	public Group getGrammarElement() {
@@ -303,9 +303,9 @@ protected class Grammar_0_0_0_1_Group extends GroupToken {
 		
 	@Override
 	protected Solution createSolution() {	
-		Solution s1 = new Grammar_0_0_0_1_1_Assignment_idElements(current, this).firstSolution();
+		Solution s1 = new Grammar_0_0_0_1_1_Assignment_superGrammar(current, this).firstSolution();
 		while(s1 != null) {
-			Solution s2 = new Grammar_0_0_0_1_0_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			Solution s2 = new Grammar_0_0_0_1_0_Keyword_extends(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
 				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
@@ -319,47 +319,48 @@ protected class Grammar_0_0_0_1_Group extends GroupToken {
 	}
 }
 
-// "."
-protected class Grammar_0_0_0_1_0_Keyword extends KeywordToken  {
+// "extends"
+protected class Grammar_0_0_0_1_0_Keyword_extends extends KeywordToken  {
 	
-	public Grammar_0_0_0_1_0_Keyword(IInstanceDescription curr, AbstractToken pred) {
+	public Grammar_0_0_0_1_0_Keyword_extends(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public Keyword getGrammarElement() {
-		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGrammar().ele00010KeywordFullStop();
+		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGrammar().ele00010KeywordExtends();
 	}	
 }
 
-// idElements+=ID
-protected class Grammar_0_0_0_1_1_Assignment_idElements extends AssignmentToken  {
+// superGrammar=[Grammar|GrammarID]
+protected class Grammar_0_0_0_1_1_Assignment_superGrammar extends AssignmentToken  {
 	
-	public Grammar_0_0_0_1_1_Assignment_idElements(IInstanceDescription curr, AbstractToken pred) {
+	public Grammar_0_0_0_1_1_Assignment_superGrammar(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public Assignment getGrammarElement() {
-		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGrammar().ele00011AssignmentIdElements();
+		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGrammar().ele00011AssignmentSuperGrammar();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if((value = current.getConsumable("idElements",!IS_REQUIRED)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("idElements");
-
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
-			element = XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGrammar().ele000110ParserRuleCallID();
-			return new Solution(obj);
+		if((value = current.getConsumable("superGrammar",!IS_REQUIRED)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("superGrammar");
+		if(value instanceof EObject) { // xtext::CrossReference
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf("Grammar")) {
+				type = AssignmentType.CR;
+				element = XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGrammar().ele000110CrossReferenceEStringGrammar(); 
+				return new Solution(obj);
+			}
 		}
-
 		return null;
 	}
 }
 
 
 
-// ("extends" superGrammarIdElements+=ID ("." superGrammarIdElements+=ID)*)?
+// (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")?
 protected class Grammar_0_0_1_Group extends GroupToken {
 	
 	public Grammar_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -372,7 +373,7 @@ protected class Grammar_0_0_1_Group extends GroupToken {
 		
 	@Override
 	protected Solution createSolution() {	
-		Solution s1 = new Grammar_0_0_1_1_Group(current, this).firstSolution();
+		Solution s1 = new Grammar_0_0_1_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new Grammar_0_0_1_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
@@ -388,7 +389,7 @@ protected class Grammar_0_0_1_Group extends GroupToken {
 	}
 }
 
-// "extends" superGrammarIdElements+=ID
+// definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)?
 protected class Grammar_0_0_1_0_Group extends GroupToken {
 	
 	public Grammar_0_0_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -401,9 +402,9 @@ protected class Grammar_0_0_1_0_Group extends GroupToken {
 		
 	@Override
 	protected Solution createSolution() {	
-		Solution s1 = new Grammar_0_0_1_0_1_Assignment_superGrammarIdElements(current, this).firstSolution();
+		Solution s1 = new Grammar_0_0_1_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
-			Solution s2 = new Grammar_0_0_1_0_0_Keyword_extends(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			Solution s2 = new Grammar_0_0_1_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
 				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
@@ -417,61 +418,22 @@ protected class Grammar_0_0_1_0_Group extends GroupToken {
 	}
 }
 
-// "extends"
-protected class Grammar_0_0_1_0_0_Keyword_extends extends KeywordToken  {
+// definesHiddenTokens?="hidden" "("
+protected class Grammar_0_0_1_0_0_Group extends GroupToken {
 	
-	public Grammar_0_0_1_0_0_Keyword_extends(IInstanceDescription curr, AbstractToken pred) {
+	public Grammar_0_0_1_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
-	}
-	
-	public Keyword getGrammarElement() {
-		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGrammar().ele00100KeywordExtends();
-	}	
-}
-
-// superGrammarIdElements+=ID
-protected class Grammar_0_0_1_0_1_Assignment_superGrammarIdElements extends AssignmentToken  {
-	
-	public Grammar_0_0_1_0_1_Assignment_superGrammarIdElements(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
-	}
-	
-	public Assignment getGrammarElement() {
-		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGrammar().ele00101AssignmentSuperGrammarIdElements();
-	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("superGrammarIdElements",IS_REQUIRED)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("superGrammarIdElements");
-
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
-			element = XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGrammar().ele001010ParserRuleCallID();
-			return new Solution(obj);
-		}
-
-		return null;
-	}
-}
-
-
-// ("." superGrammarIdElements+=ID)*
-protected class Grammar_0_0_1_1_Group extends GroupToken {
-	
-	public Grammar_0_0_1_1_Group(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 	
 	public Group getGrammarElement() {
-		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGrammar().ele0011Group();
+		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGrammar().ele00100Group();
 	}
 		
 	@Override
 	protected Solution createSolution() {	
-		Solution s1 = new Grammar_0_0_1_1_1_Assignment_superGrammarIdElements(current, this).firstSolution();
+		Solution s1 = new Grammar_0_0_1_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
-			Solution s2 = new Grammar_0_0_1_1_0_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			Solution s2 = new Grammar_0_0_1_0_0_0_Assignment_definesHiddenTokens(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
 				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
@@ -485,37 +447,25 @@ protected class Grammar_0_0_1_1_Group extends GroupToken {
 	}
 }
 
-// "."
-protected class Grammar_0_0_1_1_0_Keyword extends KeywordToken  {
+// definesHiddenTokens?="hidden"
+protected class Grammar_0_0_1_0_0_0_Assignment_definesHiddenTokens extends AssignmentToken  {
 	
-	public Grammar_0_0_1_1_0_Keyword(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
-	}
-	
-	public Keyword getGrammarElement() {
-		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGrammar().ele00110KeywordFullStop();
-	}	
-}
-
-// superGrammarIdElements+=ID
-protected class Grammar_0_0_1_1_1_Assignment_superGrammarIdElements extends AssignmentToken  {
-	
-	public Grammar_0_0_1_1_1_Assignment_superGrammarIdElements(IInstanceDescription curr, AbstractToken pred) {
+	public Grammar_0_0_1_0_0_0_Assignment_definesHiddenTokens(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public Assignment getGrammarElement() {
-		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGrammar().ele00111AssignmentSuperGrammarIdElements();
+		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGrammar().ele001000AssignmentDefinesHiddenTokens();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if((value = current.getConsumable("superGrammarIdElements",!IS_REQUIRED)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("superGrammarIdElements");
+		if((value = current.getConsumable("definesHiddenTokens",IS_REQUIRED)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("definesHiddenTokens");
 
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
-			element = XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGrammar().ele001110ParserRuleCallID();
+		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
+			type = AssignmentType.KW;
+			element = XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGrammar().ele0010000KeywordHidden();
 			return new Solution(obj);
 		}
 
@@ -523,6 +473,157 @@ protected class Grammar_0_0_1_1_1_Assignment_superGrammarIdElements extends Assi
 	}
 }
 
+// "("
+protected class Grammar_0_0_1_0_0_1_Keyword extends KeywordToken  {
+	
+	public Grammar_0_0_1_0_0_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Keyword getGrammarElement() {
+		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGrammar().ele001001KeywordLeftParenthesis();
+	}	
+}
+
+
+// (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)?
+protected class Grammar_0_0_1_0_1_Group extends GroupToken {
+	
+	public Grammar_0_0_1_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, !IS_REQUIRED);
+	}
+	
+	public Group getGrammarElement() {
+		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGrammar().ele00101Group();
+	}
+		
+	@Override
+	protected Solution createSolution() {	
+		Solution s1 = new Grammar_0_0_1_0_1_1_Group(current, this).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new Grammar_0_0_1_0_1_0_Assignment_hiddenTokens(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 == null) {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
+				if(s1 == null) return null;
+			} else {
+				last = s2.getPredecessor();
+				return s2;
+			}
+		}
+		return null;
+		
+	}
+}
+
+// hiddenTokens+=[AbstractRule]
+protected class Grammar_0_0_1_0_1_0_Assignment_hiddenTokens extends AssignmentToken  {
+	
+	public Grammar_0_0_1_0_1_0_Assignment_hiddenTokens(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Assignment getGrammarElement() {
+		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGrammar().ele001010AssignmentHiddenTokens();
+	}
+	
+	@Override
+	protected Solution createSolution() {
+		if((value = current.getConsumable("hiddenTokens",IS_REQUIRED)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("hiddenTokens");
+		if(value instanceof EObject) { // xtext::CrossReference
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf("AbstractRule")) {
+				type = AssignmentType.CR;
+				element = XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGrammar().ele0010100CrossReferenceEStringAbstractRule(); 
+				return new Solution(obj);
+			}
+		}
+		return null;
+	}
+}
+
+// ("," hiddenTokens+=[AbstractRule])*
+protected class Grammar_0_0_1_0_1_1_Group extends GroupToken {
+	
+	public Grammar_0_0_1_0_1_1_Group(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, IS_MANY, !IS_REQUIRED);
+	}
+	
+	public Group getGrammarElement() {
+		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGrammar().ele001011Group();
+	}
+		
+	@Override
+	protected Solution createSolution() {	
+		Solution s1 = new Grammar_0_0_1_0_1_1_1_Assignment_hiddenTokens(current, this).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new Grammar_0_0_1_0_1_1_0_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 == null) {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
+				if(s1 == null) return null;
+			} else {
+				last = s2.getPredecessor();
+				return s2;
+			}
+		}
+		return null;
+		
+	}
+}
+
+// ","
+protected class Grammar_0_0_1_0_1_1_0_Keyword extends KeywordToken  {
+	
+	public Grammar_0_0_1_0_1_1_0_Keyword(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Keyword getGrammarElement() {
+		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGrammar().ele0010110KeywordComma();
+	}	
+}
+
+// hiddenTokens+=[AbstractRule]
+protected class Grammar_0_0_1_0_1_1_1_Assignment_hiddenTokens extends AssignmentToken  {
+	
+	public Grammar_0_0_1_0_1_1_1_Assignment_hiddenTokens(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Assignment getGrammarElement() {
+		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGrammar().ele0010111AssignmentHiddenTokens();
+	}
+	
+	@Override
+	protected Solution createSolution() {
+		if((value = current.getConsumable("hiddenTokens",!IS_REQUIRED)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("hiddenTokens");
+		if(value instanceof EObject) { // xtext::CrossReference
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf("AbstractRule")) {
+				type = AssignmentType.CR;
+				element = XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGrammar().ele00101110CrossReferenceEStringAbstractRule(); 
+				return new Solution(obj);
+			}
+		}
+		return null;
+	}
+}
+
+
+
+
+// ")"
+protected class Grammar_0_0_1_1_Keyword extends KeywordToken  {
+	
+	public Grammar_0_0_1_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Keyword getGrammarElement() {
+		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prGrammar().ele0011KeywordRightParenthesis();
+	}	
+}
 
 
 
@@ -593,6 +694,7 @@ protected class Grammar_1_Assignment_rules extends AssignmentToken  {
 
 
 /************ end Rule Grammar ****************/
+
 
 
 /************ begin Rule AbstractRule ****************
