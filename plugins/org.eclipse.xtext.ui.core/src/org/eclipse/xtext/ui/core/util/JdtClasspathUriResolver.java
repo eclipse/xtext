@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.util;
 
+import java.io.File;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -14,6 +15,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJavaElement;
@@ -73,21 +75,34 @@ public class JdtClasspathUriResolver implements IClasspathUriResolver {
 				else {
 					// folder
 					IFolder rootFolder = null;
+					// path as fallback necessary due to jdt bug #264776
+					IPath path = null;
 					if (correspondingResource instanceof IFolder) {
 						rootFolder = (IFolder) correspondingResource;
 					}
 					else if (packageFragmentRoot instanceof ExternalPackageFragmentRoot) {
 						IResource resource = ((ExternalPackageFragmentRoot) packageFragmentRoot).resource();
+						path = ((ExternalPackageFragmentRoot) packageFragmentRoot).getPath();
 						if (resource instanceof IFolder) {
 							rootFolder = (IFolder) resource;
 						}
 					}
 					if (rootFolder != null) {
 						IResource modelFile = rootFolder.findMember(projectRelativePath);
+						// modelFile.exists() is sometimes false, even if it exists
 						if (modelFile != null && modelFile.exists() && modelFile instanceof IFile) {
 							URI platformResourceUri = URI.createPlatformResourceURI(modelFile.getFullPath().toString(),
 									true);
 							return platformResourceUri;
+						}
+					}
+					// fallback for jdt bug #264776
+					if (path != null) {
+						path = path.append(fullPath);
+						File f = path.toFile();
+						if (f.exists() && f.isFile()) {
+							URI fileUri = URI.createFileURI(f.getAbsolutePath());
+							return fileUri;
 						}
 					}
 				}
