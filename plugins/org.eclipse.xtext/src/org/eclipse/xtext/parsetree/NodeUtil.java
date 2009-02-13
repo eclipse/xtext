@@ -13,6 +13,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
@@ -185,4 +186,19 @@ public class NodeUtil {
 		return null;
 	}
 
+	public static String findTextForFeature(EObject astElement, String featureName) {
+		NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(astElement);
+		CompositeNode parserNode = nodeAdapter.getParserNode();
+		for(TreeIterator<EObject> children = parserNode.eAllContents(); children.hasNext();) {
+			EObject child = children.next();
+			if(child instanceof LeafNode) {
+				LeafNode childLeaf = (LeafNode) child;
+				if(featureName.equals(childLeaf.getFeature())){
+					return childLeaf.serialize();
+				}
+			}
+		}
+		return null;
+	}
+	
 }
