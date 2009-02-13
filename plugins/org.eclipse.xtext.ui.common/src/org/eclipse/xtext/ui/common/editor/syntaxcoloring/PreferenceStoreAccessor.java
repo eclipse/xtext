@@ -22,8 +22,8 @@ import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.editors.text.EditorsUI;
-import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
+import org.eclipse.ui.texteditor.AbstractTextEditor;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.ui.common.editor.preferencepage.CommonPreferenceConstants;
 import org.eclipse.xtext.ui.core.editor.utils.TextStyle;
@@ -34,10 +34,9 @@ import com.google.inject.name.Named;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
- * 
  */
 public class PreferenceStoreAccessor {
-	private String PREFERENCE_TAG;
+	private final String PREFERENCE_TAG;
 	private static ScopedPreferenceStore preferenceStore;
 
 	@Inject
@@ -61,13 +60,13 @@ public class PreferenceStoreAccessor {
 
 		// DefaultDefault
 		IPreferenceStore editorsStore = EditorsUI.getPreferenceStore();
-		RGB fontColorDefaultDefault = editorsStore.getBoolean(TextEditor.PREFERENCE_COLOR_FOREGROUND_SYSTEM_DEFAULT) ? getDisplay()
+		RGB fontColorDefaultDefault = editorsStore.getBoolean(AbstractTextEditor.PREFERENCE_COLOR_FOREGROUND_SYSTEM_DEFAULT) ? getDisplay()
 				.getSystemColor(SWT.COLOR_LIST_FOREGROUND).getRGB()
-				: PreferenceConverter.getColor(editorsStore, TextEditor.PREFERENCE_COLOR_FOREGROUND);
+				: PreferenceConverter.getColor(editorsStore, AbstractTextEditor.PREFERENCE_COLOR_FOREGROUND);
 		RGB backgrounColorDefaultDefault = editorsStore
-				.getBoolean(TextEditor.PREFERENCE_COLOR_BACKGROUND_SYSTEM_DEFAULT) ? getDisplay().getSystemColor(
+				.getBoolean(AbstractTextEditor.PREFERENCE_COLOR_BACKGROUND_SYSTEM_DEFAULT) ? getDisplay().getSystemColor(
 				SWT.COLOR_LIST_BACKGROUND).getRGB() : PreferenceConverter.getColor(editorsStore,
-				TextEditor.PREFERENCE_COLOR_BACKGROUND);
+				AbstractTextEditor.PREFERENCE_COLOR_BACKGROUND);
 		FontData[] fontDataDefaultDefault = JFaceResources.getTextFont().getFontData();
 
 		// set defaults

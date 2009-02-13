@@ -11,9 +11,9 @@ public class Activator extends AbstractUIPlugin {
 
 	// The plug-in ID
 	public static final String PLUGIN_ID = "org.eclipse.xtext.ui.common";
-	
+
 	private static Logger log = Logger.getLogger(Activator.class);
-	
+
 	// The shared instance
 	private static Activator plugin;
 
@@ -23,6 +23,7 @@ public class Activator extends AbstractUIPlugin {
 	public Activator() {
 	}
 
+	@Override
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		setDefault(this);
@@ -35,6 +36,7 @@ public class Activator extends AbstractUIPlugin {
 		plugin = activator;
 	}
 
+	@Override
 	public void stop(BundleContext context) throws Exception {
 		log.debug("Stopping Xtext UI Common bundle.");
 		setDefault(null);
@@ -43,7 +45,7 @@ public class Activator extends AbstractUIPlugin {
 
 	/**
 	 * Returns the shared instance
-	 * 
+	 *
 	 * @return the shared instance
 	 */
 	public static Activator getDefault() {
@@ -67,7 +69,7 @@ public class Activator extends AbstractUIPlugin {
 	public static IWorkbenchWindow getActiveWorkbenchWindow() {
 		return getDefault().getWorkbench().getActiveWorkbenchWindow();
 	}
-	
+
 	/**
 	 * Returns an image descriptor for the image file at the given
 	 * plug-in relative path

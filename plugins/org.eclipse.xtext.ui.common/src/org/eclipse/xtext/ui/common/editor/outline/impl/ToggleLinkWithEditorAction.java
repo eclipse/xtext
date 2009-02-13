@@ -4,7 +4,6 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.outline.impl;
 
@@ -29,15 +28,16 @@ public class ToggleLinkWithEditorAction extends Action {
 		setImageDescriptor(XtextPluginImages.DESC_LINK_WITH_EDITOR);
 		setDisabledImageDescriptor(XtextPluginImages.DESC_LINK_WITH_EDITOR_DISABLED);
 	}
-	
+
 	protected boolean isLinkingEnabled() {
 		return outlinePage.isLinkingEnabled();
 	}
-	
+
 	protected void setLinkingEnabled(boolean enabled) {
 		outlinePage.setLinkingEnabled(enabled);
 	}
 
+	@Override
 	public void run() {
 		setLinkingEnabled(isChecked());
 		if (isLinkingEnabled()) {

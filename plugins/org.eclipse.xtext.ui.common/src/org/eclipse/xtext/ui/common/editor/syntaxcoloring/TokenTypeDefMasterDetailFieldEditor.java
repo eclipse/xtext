@@ -17,7 +17,7 @@ import org.eclipse.xtext.ui.core.editor.preferences.fields.AbstractMasterDetails
 
 /**
  * @author Dennis Hübner - Initial contribution and API
- * 
+ *
  */
 public class TokenTypeDefMasterDetailFieldEditor extends AbstractMasterDetailsFieldEditor {
 
@@ -26,12 +26,14 @@ public class TokenTypeDefMasterDetailFieldEditor extends AbstractMasterDetailsFi
 		super(name, labelText, composite, preferenceStore, list);
 	}
 
+	@Override
 	protected String label(Object object) {
 		if (object instanceof ITokenStyle)
 			return ((ITokenStyle) object).getName();
 		return object.toString();
 	}
 
+	@Override
 	protected String identifier(Object object) {
 		if (object instanceof ITokenStyle)
 			return ((ITokenStyle) object).getID();

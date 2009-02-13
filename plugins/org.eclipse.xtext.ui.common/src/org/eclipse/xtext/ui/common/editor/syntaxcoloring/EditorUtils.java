@@ -20,10 +20,10 @@ import org.eclipse.swt.graphics.RGB;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
- * 
+ *
  */
 public class EditorUtils {
-	
+
 	private static final Logger log = Logger.getLogger(EditorUtils.class);
 
 	public static Font fontFromFontData(FontData[] fontDataArray) {
@@ -36,7 +36,6 @@ public class EditorUtils {
 			Font font = JFaceResources.getFontRegistry().get(fontData);
 			return font;
 		}
-		;
 		return null;
 	}
 

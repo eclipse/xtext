@@ -22,17 +22,18 @@ import com.google.inject.Inject;
  * @author Peter Friese - Initial contribution and API
  */
 public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransformer {
-	
+
 	final static Logger logger = Logger.getLogger(AbstractSemanticModelTransformer.class);
-	
-	private ILocationInFileProvider locationProvider;
-	
+
+	private final ILocationInFileProvider locationProvider;
+
 	@Inject
 	public DefaultSemanticModelTransformer(ILocationInFileProvider locationProvider, ILabelProvider labelProvider) {
 		super(labelProvider);
 		this.locationProvider = locationProvider;
 	}
 
+	@Override
 	public boolean consumeSemanticNode(EObject semanticNode) {
 		if (semanticNode != null) {
 			String name = semanticNode.eClass().getName();
@@ -41,11 +42,10 @@ public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransf
 			}
 			return true;
 		}
-		else {
-			return false;
-		}
+		return false;
 	}
 
+	@Override
 	public boolean consumeSemanticChildNodes(EObject semanticNode) {
 		if (semanticNode != null) {
 			String name = semanticNode.eClass().getName();
@@ -54,11 +54,9 @@ public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransf
 			}
 			return true;
 		}
-		else {
-			return false;
-		}
+		return false;
 	}
-	
+
 	@Override
 	protected boolean doSortChildren(EObject semanticNode) {
 		return false;
@@ -89,14 +87,14 @@ public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransf
 		 * able to get the corresponding ContentOutlineNode. This is needed e.g.
 		 * when we want to synch the outline with the currently selected editor
 		 * position.
-		 * 
+		 *
 		 * XXX SZ: is this feasible? What if I want to create more than one one outline node
 		 *         per semantic node? Can't we use the offset information of the outline node
 		 *         and the editor to synchronize them?
-		 *     PF: Reason for using an adapter was to not need to traverse a (more or less) 
+		 *     PF: Reason for using an adapter was to not need to traverse a (more or less)
 		 *         large part the outline model when syncing the outline to the editor selection.
-		 *         However, SZ and I agreed on leaving it as-is and look into a tree traversal 
-		 *         approach if we run into memory problems.  
+		 *         However, SZ and I agreed on leaving it as-is and look into a tree traversal
+		 *         approach if we run into memory problems.
 		 */
 		ContentOutlineNodeAdapter outlineAdapter = (ContentOutlineNodeAdapter) ContentOutlineNodeAdapterFactory.INSTANCE
 				.adapt(semanticNode, ContentOutlineNode.class);

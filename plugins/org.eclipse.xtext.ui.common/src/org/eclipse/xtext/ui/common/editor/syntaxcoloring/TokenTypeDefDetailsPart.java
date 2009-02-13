@@ -42,6 +42,7 @@ public class TokenTypeDefDetailsPart extends AbstractDetailsPart {
 					{ "Italic", String.valueOf(SWT.ITALIC) }, { "Bold", String.valueOf(SWT.BOLD) },
 					{ "Underline", String.valueOf(TextAttribute.UNDERLINE) },
 					{ "Strike through", String.valueOf(TextAttribute.STRIKETHROUGH) }, }, getFieldEditorParent(), true) {
+				@Override
 				protected String calculateResult(String[][] settings) {
 					int result = SWT.NORMAL;
 					for (int i = 0; i < settings.length; i++) {

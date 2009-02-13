@@ -48,7 +48,7 @@ import com.google.inject.Inject;
 
 /**
  * The default implementation of interface {@link IContentAssistProcessor} provided with Xtext.
- * 
+ *
  * @author Michael Clay - Initial contribution and API
  * @author Heiko Behrens
  * @author Jan K&ouml;hnlein
@@ -57,16 +57,16 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 
 	// logger available to subclasses
 	protected final Logger logger = Logger.getLogger(getClass());
-	
+
 	@Inject
 	protected ITemplateContentAssistProcessor templateContentAssistProcessor;
 
 	@Inject
 	protected IContentAssistCalculator contentAssistCalculator;
-	
+
 	@Inject
 	protected IProposalProvider proposalProvider;
-	
+
 	/**
 	 * Computes the possible grammar elements following the one at the given offset and calls the respective methods on
 	 * the proposal provider.
@@ -74,7 +74,7 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 	public ICompletionProposal[] computeCompletionProposals(final ITextViewer viewer, final int offset) {
 
 		IXtextDocument document = (IXtextDocument) viewer.getDocument();
-		
+
 		return document.readOnly(new UnitOfWork<ICompletionProposal[]>() {
 
 			public ICompletionProposal[] exec(XtextResource resource) throws Exception {
@@ -141,12 +141,12 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 	public IContextInformationValidator getContextInformationValidator() {
 		return new ContextInformationValidator(this);
 	}
-	
-	
-	
+
+
+
 	/**
 	 * adds templates to the list of proposals
-	 * 
+	 *
 	 * @param viewer the viewer whose document is used to compute the proposals
 	 * @param offset an offset within the document for which completions should be computed
 	 * @param contentAssistContext the current context of the content assist proposal request
@@ -162,7 +162,7 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 					viewer, offset)));
 		}
 	}
-	
+
 	protected List<ICompletionProposal> collectCompletionProposals(List<AbstractElement> computeProposalElements, IContentAssistContext contentAssistContext) {
 		List<ICompletionProposal> completionProposalList = new ArrayList<ICompletionProposal>();
 		for (AbstractElement computeProposalElement : computeProposalElements) {
@@ -184,7 +184,7 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 		}
 		return completionProposalList;
 	}
-	
+
 	protected List<TemplateContextType> collectTemplateContextTypes(List<AbstractElement> computeProposalElements,
 			IContentAssistContext contentAssistContext) {
 		List<TemplateContextType> templateContextTypes = new ArrayList<TemplateContextType>();
@@ -212,10 +212,10 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 		}
 		return templateContextTypes;
 	}
-	
+
 	/**
 	 * Creates a new <code>IContentAssistContext</code> with all required informations for the current CA request.
-	 * 
+	 *
 	 * @param resource the underlying EMF resource to read (parse) from
 	 * @param viewer the viewer whose document is used to compute the proposals
 	 * @param offset an offset within the document for which the context should be created
@@ -228,33 +228,32 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 		Assert.isNotNull(parseResult);
 
 		CompositeNode rootNode = parseResult.getRootNode();
-		
+
 		AbstractNode referenceNode = ParseTreeUtil.getLastCompleteNodeByOffset(rootNode, offset);
-		
-		EObject model = (referenceNode instanceof AbstractNode ? NodeUtil
-				.getNearestSemanticObject((AbstractNode) referenceNode) : referenceNode);
-		
+
+		EObject model = NodeUtil.getNearestSemanticObject(referenceNode);
+
 		AbstractNode node = ParseTreeUtil.getCurrentOrFollowingNodeByOffset(rootNode, offset);
 
 		String matchingString = node == null ? "" : calculateMatchString(viewer, offset, node);
 
 		/**
-		 * 
+		 *
 		 * if cursor is behind a complete keyword, accept any input => empty
-		 * 
+		 *
 		 * TODO: Find a way to distinguish between keywords like "+" or "-" and
 		 * "extends" or "class" in the latter case, the prefix "" would not
 		 * always be sufficient
-		 * 
+		 * XXX SZ: the formatter may help to answer this question
 		 */
-		if (node.getGrammarElement() instanceof Keyword
+		if (node != null && node.getGrammarElement() instanceof Keyword
 				&& (node instanceof LeafNode && ((LeafNode) node).getText().equals(matchingString))) {
 			matchingString = "";
 		}
 
 		return new ContentAssistContext(model, offset, matchingString, node, referenceNode, rootNode);
 	}
-	
+
 	/**
 	 * Calculates the match string of the current <code>IContentAssistContext</code> based on the
 	 * specified location within the text viewer.
@@ -278,7 +277,7 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 
 		return prefix;
 	}
-	
+
 
 
 }
