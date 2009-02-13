@@ -13,6 +13,7 @@ import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.ui.core.editor.preferences.PreferenceConstants;
 import org.eclipse.xtext.ui.core.editor.utils.TextStyle;
 
@@ -27,7 +28,8 @@ public abstract class AbstractTokenScanner implements ITokenScanner {
 
 	private final PreferenceStoreAccessor preferenceStoreAccessor;
 
-	protected AbstractTokenScanner(final @Named("languageName") String languageName,
+	protected AbstractTokenScanner(
+			final @Named(Constants.LANGUAGE_NAME) String languageName,
 			final Provider<SyntaxColoringPreferencePage> preferencePageProvider,
 			final PreferenceStoreAccessor accessor) {
 		this.preferenceStoreAccessor = accessor;

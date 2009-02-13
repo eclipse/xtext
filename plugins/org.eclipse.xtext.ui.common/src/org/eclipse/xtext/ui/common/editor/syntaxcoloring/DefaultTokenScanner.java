@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.common.editor.syntaxcoloring;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.Token;
+import org.eclipse.xtext.Constants;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -21,7 +22,8 @@ import com.google.inject.name.Named;
 public class DefaultTokenScanner extends AbstractTokenScanner {
 
 	@Inject
-	public DefaultTokenScanner(final @Named("languageName") String languageName,
+	public DefaultTokenScanner(
+			final @Named(Constants.LANGUAGE_NAME) String languageName,
 			final Provider<SyntaxColoringPreferencePage> preferencePageProvider,
 			final PreferenceStoreAccessor accessor) {
 		super(languageName, preferencePageProvider, accessor);

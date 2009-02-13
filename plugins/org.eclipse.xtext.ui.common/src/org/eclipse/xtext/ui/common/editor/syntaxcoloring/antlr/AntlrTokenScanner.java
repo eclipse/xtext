@@ -13,6 +13,7 @@ import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.Token;
+import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.ui.common.editor.syntaxcoloring.AbstractTokenScanner;
 import org.eclipse.xtext.ui.common.editor.syntaxcoloring.PreferenceStoreAccessor;
@@ -20,6 +21,7 @@ import org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferenc
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.inject.name.Named;
 
 /**
  * Default implementation for the ITokenScanner. Uses an AntLR based
@@ -29,19 +31,23 @@ import com.google.inject.Provider;
 public class AntlrTokenScanner extends AbstractTokenScanner {
 
 	@Inject
-	public AntlrTokenScanner(String languageName, Provider<SyntaxColoringPreferencePage> preferencePageProvider,
-			PreferenceStoreAccessor accessor,ITokenColorer tokenColorer,Lexer lexer) {
+	public AntlrTokenScanner(
+			final @Named(Constants.LANGUAGE_NAME) String languageName,
+			final Provider<SyntaxColoringPreferencePage> preferencePageProvider,
+			final PreferenceStoreAccessor accessor,
+			final ITokenColorer tokenColorer,
+			final Lexer lexer) {
 		super(languageName, preferencePageProvider, accessor);
 		this.tokenColorer = tokenColorer;
 		this.lexer = lexer;
 	}
 
-	private ITokenColorer tokenColorer;
-	
-	private Lexer lexer;
+	private final ITokenColorer tokenColorer;
+
+	private final Lexer lexer;
 
 	private int dirtyRegionOffset;
-	
+
 	private CommonToken currentAntlrToken;
 
 	public int getTokenLength() {
@@ -54,7 +60,7 @@ public class AntlrTokenScanner extends AbstractTokenScanner {
 
 	public IToken nextToken() {
 		currentAntlrToken = (CommonToken) lexer.nextToken();
-		if (currentAntlrToken.getType() == CommonToken.EOF) {
+		if (currentAntlrToken.getType() == org.antlr.runtime.Token.EOF) {
 			return Token.EOF;
 		}
 		return new Token(createTextAttribute(tokenColorer.getTokenStyle(Integer.toString(currentAntlrToken.getType()))));

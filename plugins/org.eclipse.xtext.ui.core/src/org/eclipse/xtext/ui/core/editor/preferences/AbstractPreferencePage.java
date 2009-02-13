@@ -47,7 +47,7 @@ import com.google.inject.name.Named;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
- * 
+ *
  */
 public abstract class AbstractPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage,
 		IWorkbenchPropertyPage {
@@ -60,7 +60,7 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 	private IProject project;
 
 	private Button useProjectSettingsButton;
-	private List<FieldEditor> editors = new ArrayList<FieldEditor>();
+	private final List<FieldEditor> editors = new ArrayList<FieldEditor>();
 
 	private Link link;
 
@@ -119,7 +119,7 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * org.eclipse.jface.preference.FieldEditorPreferencePage#createContents
 	 * (org.eclipse.swt.widgets.Composite)
@@ -155,6 +155,7 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 		link.setFont(projectSettingsParent.getFont());
 		link.setText("<A>" + "Configure Workspace Settings..." + "</A>"); //$NON-NLS-1$//$NON-NLS-3$
 		link.addSelectionListener(new SelectionAdapter() {
+			@Override
 			public void widgetSelected(SelectionEvent e) {
 				String id = qualifiedName();
 				PreferencesUtil.createPreferenceDialogOn(getShell(), id, new String[] { id }, null).open();
@@ -182,7 +183,7 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 			throw new IllegalStateException("Not a property page case, but current project was requested.");
 		return project;
 	}
-	
+
 	@Inject @Named("languageName")
 	private String languageName;
 
@@ -192,7 +193,7 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * org.eclipse.jface.preference.PreferencePage#createControl(org.eclipse
 	 * .swt.widgets.Composite)
@@ -204,6 +205,7 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 			handleUseProjectSettings();
 	}
 
+	@Override
 	protected void addField(FieldEditor editor) {
 		editor.setPreferenceName(qualifiedName() + "." + editor.getPreferenceName());
 		editors.add(editor);
@@ -230,7 +232,7 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 		Composite parent = getFieldEditorParent();
 		Iterator<FieldEditor> it = editors.iterator();
 		while (it.hasNext()) {
-			FieldEditor editor = (FieldEditor) it.next();
+			FieldEditor editor = it.next();
 			if (enabled)
 				editor.load();
 			else
@@ -241,7 +243,7 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.jface.preference.FieldEditorPreferencePage#performOk()
 	 */
 	@Override
