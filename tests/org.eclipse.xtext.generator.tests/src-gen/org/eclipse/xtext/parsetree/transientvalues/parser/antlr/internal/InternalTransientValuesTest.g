@@ -79,6 +79,7 @@ ruleRoot returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 ('test' 
     {
@@ -88,9 +89,9 @@ ruleRoot returns [EObject current=null]
     { 
         currentNode=createCompositeNode(grammarAccess.prRoot().ele100ParserRuleCallTestRequired(), currentNode); 
     }
-    this_TestRequired=ruleTestRequired
+    this_TestRequired_1=ruleTestRequired
     { 
-        $current = $this_TestRequired.current; 
+        $current = $this_TestRequired_1.current; 
         currentNode = currentNode.getParent();
     }
 
@@ -98,9 +99,9 @@ ruleRoot returns [EObject current=null]
     { 
         currentNode=createCompositeNode(grammarAccess.prRoot().ele101ParserRuleCallTestOptional(), currentNode); 
     }
-    this_TestOptional=ruleTestOptional
+    this_TestOptional_2=ruleTestOptional
     { 
-        $current = $this_TestOptional.current; 
+        $current = $this_TestOptional_2.current; 
         currentNode = currentNode.getParent();
     }
 )
@@ -108,9 +109,9 @@ ruleRoot returns [EObject current=null]
     { 
         currentNode=createCompositeNode(grammarAccess.prRoot().ele11ParserRuleCallTestList(), currentNode); 
     }
-    this_TestList=ruleTestList
+    this_TestList_3=ruleTestList
     { 
-        $current = $this_TestList.current; 
+        $current = $this_TestList_3.current; 
         currentNode = currentNode.getParent();
     }
 ));
@@ -134,6 +135,7 @@ ruleTestRequired returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 (('required' 
     {
@@ -141,10 +143,10 @@ ruleTestRequired returns [EObject current=null]
     }
 (	
 	
-	    lv_required1=RULE_INT
-    { 
-    createLeafNode(grammarAccess.prTestRequired().ele010LexerRuleCallINT(), "required1"); 
-    }
+	    lv_required1_1=	RULE_INT
+	{
+		createLeafNode(grammarAccess.prTestRequired().ele010LexerRuleCallINT(), "required1"); 
+	}
  
 	    {
 	        if ($current==null) {
@@ -153,7 +155,7 @@ ruleTestRequired returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "required1", lv_required1, "INT", currentNode);
+	       		set($current, "required1", lv_required1_1, "INT", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -161,10 +163,10 @@ ruleTestRequired returns [EObject current=null]
 	
 ))(	
 	
-	    lv_required2=RULE_INT
-    { 
-    createLeafNode(grammarAccess.prTestRequired().ele10LexerRuleCallINT(), "required2"); 
-    }
+	    lv_required2_2=	RULE_INT
+	{
+		createLeafNode(grammarAccess.prTestRequired().ele10LexerRuleCallINT(), "required2"); 
+	}
  
 	    {
 	        if ($current==null) {
@@ -173,7 +175,7 @@ ruleTestRequired returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "required2", lv_required2, "INT", currentNode);
+	       		set($current, "required2", lv_required2_2, "INT", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -200,6 +202,7 @@ ruleTestOptional returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 (('optional' 
     {
@@ -207,10 +210,10 @@ ruleTestOptional returns [EObject current=null]
     }
 (	
 	
-	    lv_opt1=RULE_INT
-    { 
-    createLeafNode(grammarAccess.prTestOptional().ele010LexerRuleCallINT(), "opt1"); 
-    }
+	    lv_opt1_1=	RULE_INT
+	{
+		createLeafNode(grammarAccess.prTestOptional().ele010LexerRuleCallINT(), "opt1"); 
+	}
  
 	    {
 	        if ($current==null) {
@@ -219,7 +222,7 @@ ruleTestOptional returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "opt1", lv_opt1, "INT", currentNode);
+	       		set($current, "opt1", lv_opt1_1, "INT", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -231,10 +234,10 @@ ruleTestOptional returns [EObject current=null]
     }
 (	
 	
-	    lv_opt2=RULE_INT
-    { 
-    createLeafNode(grammarAccess.prTestOptional().ele110LexerRuleCallINT(), "opt2"); 
-    }
+	    lv_opt2_3=	RULE_INT
+	{
+		createLeafNode(grammarAccess.prTestOptional().ele110LexerRuleCallINT(), "opt2"); 
+	}
  
 	    {
 	        if ($current==null) {
@@ -243,7 +246,7 @@ ruleTestOptional returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "opt2", lv_opt2, "INT", currentNode);
+	       		set($current, "opt2", lv_opt2_3, "INT", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -270,6 +273,7 @@ ruleTestList returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 ('list' 
     {
@@ -277,10 +281,10 @@ ruleTestList returns [EObject current=null]
     }
 (	
 	
-	    lv_item=RULE_INT
-    { 
-    createLeafNode(grammarAccess.prTestList().ele10LexerRuleCallINT(), "item"); 
-    }
+	    lv_item_1=	RULE_INT
+	{
+		createLeafNode(grammarAccess.prTestList().ele10LexerRuleCallINT(), "item"); 
+	}
  
 	    {
 	        if ($current==null) {
@@ -289,7 +293,7 @@ ruleTestList returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.add($current, "item", lv_item, "INT", currentNode);
+	       		add($current, "item", lv_item_1, "INT", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }

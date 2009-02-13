@@ -79,6 +79,7 @@ ruleRoot returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 ('test' 
     {
@@ -88,9 +89,9 @@ ruleRoot returns [EObject current=null]
     { 
         currentNode=createCompositeNode(grammarAccess.prRoot().ele10ParserRuleCallTestLinewrap(), currentNode); 
     }
-    this_TestLinewrap=ruleTestLinewrap
+    this_TestLinewrap_1=ruleTestLinewrap
     { 
-        $current = $this_TestLinewrap.current; 
+        $current = $this_TestLinewrap_1.current; 
         currentNode = currentNode.getParent();
     }
 
@@ -98,9 +99,9 @@ ruleRoot returns [EObject current=null]
     { 
         currentNode=createCompositeNode(grammarAccess.prRoot().ele11ParserRuleCallTestIndentation(), currentNode); 
     }
-    this_TestIndentation=ruleTestIndentation
+    this_TestIndentation_2=ruleTestIndentation
     { 
-        $current = $this_TestIndentation.current; 
+        $current = $this_TestIndentation_2.current; 
         currentNode = currentNode.getParent();
     }
 ));
@@ -124,13 +125,14 @@ ruleLine returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 (((	
 	
-	    lv_type=RULE_ID
-    { 
-    createLeafNode(grammarAccess.prLine().ele000LexerRuleCallID(), "type"); 
-    }
+	    lv_type_0=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prLine().ele000LexerRuleCallID(), "type"); 
+	}
  
 	    {
 	        if ($current==null) {
@@ -139,7 +141,7 @@ ruleLine returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.add($current, "type", lv_type, "ID", currentNode);
+	       		add($current, "type", lv_type_0, "ID", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -147,10 +149,10 @@ ruleLine returns [EObject current=null]
 	
 )(	
 	
-	    lv_name=RULE_ID
-    { 
-    createLeafNode(grammarAccess.prLine().ele010LexerRuleCallID(), "name"); 
-    }
+	    lv_name_1=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prLine().ele010LexerRuleCallID(), "name"); 
+	}
  
 	    {
 	        if ($current==null) {
@@ -159,7 +161,7 @@ ruleLine returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.add($current, "name", lv_name, "ID", currentNode);
+	       		add($current, "name", lv_name_1, "ID", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -190,6 +192,7 @@ ruleTestLinewrap returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 ('linewrap' 
     {
@@ -201,7 +204,7 @@ ruleTestLinewrap returns [EObject current=null]
 	    { 
 	        currentNode=createCompositeNode(grammarAccess.prTestLinewrap().ele10ParserRuleCallLine(), currentNode); 
 	    }
-	    lv_items=ruleLine 
+	    lv_items_1=ruleLine 
 	    {
 	        if ($current==null) {
 	            $current = factory.create("TestLinewrap");
@@ -209,7 +212,7 @@ ruleTestLinewrap returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.add($current, "items", lv_items, "Line", currentNode);
+	       		add($current, "items", lv_items_1, "Line", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -237,6 +240,7 @@ ruleTestIndentation returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 ((('indentation' 
     {
@@ -252,7 +256,7 @@ ruleTestIndentation returns [EObject current=null]
 	    { 
 	        currentNode=createCompositeNode(grammarAccess.prTestIndentation().ele0100ParserRuleCallTestIndentation(), currentNode); 
 	    }
-	    lv_sub=ruleTestIndentation 
+	    lv_sub_2=ruleTestIndentation 
 	    {
 	        if ($current==null) {
 	            $current = factory.create("TestIndentation");
@@ -260,7 +264,7 @@ ruleTestIndentation returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.add($current, "sub", lv_sub, "TestIndentation", currentNode);
+	       		add($current, "sub", lv_sub_2, "TestIndentation", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -274,7 +278,7 @@ ruleTestIndentation returns [EObject current=null]
 	    { 
 	        currentNode=createCompositeNode(grammarAccess.prTestIndentation().ele0110ParserRuleCallLine(), currentNode); 
 	    }
-	    lv_items=ruleLine 
+	    lv_items_3=ruleLine 
 	    {
 	        if ($current==null) {
 	            $current = factory.create("TestIndentation");
@@ -282,7 +286,7 @@ ruleTestIndentation returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.add($current, "items", lv_items, "Line", currentNode);
+	       		add($current, "items", lv_items_3, "Line", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }

@@ -77,7 +77,8 @@ public class DefaultEcoreElementFactory implements IAstFactory {
 		final EStructuralFeature structuralFeature = object.eClass().getEStructuralFeature(feature);
 		if (structuralFeature == null)
 			throw new IllegalArgumentException(feature + " object was: " + object);
-		object.eSet(structuralFeature, getTokenValue(value, ruleName, node));
+		final Object tokenValue = getTokenValue(value, ruleName, node);
+		object.eSet(structuralFeature, tokenValue);
 	}
 
 	private Object getTokenValue(Object tokenOrValue, String ruleName, AbstractNode node) throws ValueConverterException {

@@ -2,4 +2,22 @@ language org.eclipse.xtext.valueconverter.Bug250313
 
 generate bug250313 "http://org.eclipse.xtext.valueconverter.Bug250313"
 
-Ref2: '#2' ref2 = ('mykeyword1' | STRING | ID) ;
+Model: ('#'? value = ('mykeyword1' | STRING | Datatype | ID ) ) 
+		| ('!' value = STRING) 
+		| ('$' value = Datatype)
+		| 
+		  ('content' children = Child)
+		  ('ref' ref = ([Child1|STRING] | [Child2|ID]))?;
+
+Datatype: '>>' ID '-' ID;
+
+Child: Child1 | Child2;
+
+Child1: name=ID;
+
+Child2: name=STRING;
+
+// TODO add tests for multi value features
+// TODO add tests for nested datatype rules
+// TODO rename test language to ValueConverterTestLanguage
+// TODO add tests for features that are '+=' and '=' in the same type - should use add or add / exc if set - file bug

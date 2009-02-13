@@ -43,7 +43,7 @@ public class Bug250313Parser extends org.eclipse.xtext.parser.antlr.AbstractAntl
 	
 	@Override 
 	protected String getDefaultRuleName() {
-		return "Ref2";
+		return "Model";
 	}
 	
 	public Bug250313GrammarAccess getGrammarAccess() {

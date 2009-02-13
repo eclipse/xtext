@@ -79,6 +79,7 @@ ruleCompositeModel returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 (	
 	
@@ -86,7 +87,7 @@ ruleCompositeModel returns [EObject current=null]
 	    { 
 	        currentNode=createCompositeNode(grammarAccess.prCompositeModel().ele0ParserRuleCallModel(), currentNode); 
 	    }
-	    lv_model=ruleModel 
+	    lv_model_0=ruleModel 
 	    {
 	        if ($current==null) {
 	            $current = factory.create("CompositeModel");
@@ -94,7 +95,7 @@ ruleCompositeModel returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.add($current, "model", lv_model, "Model", currentNode);
+	       		add($current, "model", lv_model_0, "Model", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -122,6 +123,7 @@ ruleModel returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 (((((	
 	
@@ -129,7 +131,7 @@ ruleModel returns [EObject current=null]
 	    { 
 	        currentNode=createCompositeNode(grammarAccess.prModel().ele00000ParserRuleCallNestedModelId(), currentNode); 
 	    }
-	    lv_id=ruleNestedModelId 
+	    lv_id_0=ruleNestedModelId 
 	    {
 	        if ($current==null) {
 	            $current = factory.create("Model");
@@ -137,7 +139,7 @@ ruleModel returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "id", lv_id, "NestedModelId", currentNode);
+	       		set($current, "id", lv_id_0, "NestedModelId", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -154,7 +156,7 @@ ruleModel returns [EObject current=null]
 	    { 
 	        currentNode=createCompositeNode(grammarAccess.prModel().ele000110ParserRuleCallFraction(), currentNode); 
 	    }
-	    lv_value=ruleFraction 
+	    lv_value_2=ruleFraction 
 	    {
 	        if ($current==null) {
 	            $current = factory.create("Model");
@@ -162,7 +164,7 @@ ruleModel returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "value", lv_value, "Fraction", currentNode);
+	       		set($current, "value", lv_value_2, "Fraction", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -179,7 +181,7 @@ ruleModel returns [EObject current=null]
 	    { 
 	        currentNode=createCompositeNode(grammarAccess.prModel().ele00110ParserRuleCallVector(), currentNode); 
 	    }
-	    lv_vector=ruleVector 
+	    lv_vector_4=ruleVector 
 	    {
 	        if ($current==null) {
 	            $current = factory.create("Model");
@@ -187,7 +189,7 @@ ruleModel returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "vector", lv_vector, "Vector", currentNode);
+	       		set($current, "vector", lv_vector_4, "Vector", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -204,7 +206,7 @@ ruleModel returns [EObject current=null]
 	    { 
 	        currentNode=createCompositeNode(grammarAccess.prModel().ele0110ParserRuleCallDots(), currentNode); 
 	    }
-	    lv_dots=ruleDots 
+	    lv_dots_6=ruleDots 
 	    {
 	        if ($current==null) {
 	            $current = factory.create("Model");
@@ -212,7 +214,7 @@ ruleModel returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "dots", lv_dots, "Dots", currentNode);
+	       		set($current, "dots", lv_dots_6, "Dots", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -244,9 +246,11 @@ ruleModelId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()
     @init { setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+	    lastConsumedNode = currentNode;
+	    lastConsumedDatatypeToken = $current;
     }:
-((    this_ID=RULE_ID    {
-		$current.merge(this_ID);
+((    this_ID_0=RULE_ID    {
+		$current.merge(this_ID_0);
     }
 
     { 
@@ -258,8 +262,8 @@ ruleModelId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()
         $current.merge(kw);
         createLeafNode(grammarAccess.prModelId().ele01KeywordFullStop(), null); 
     }
-)    this_ID=RULE_ID    {
-		$current.merge(this_ID);
+)    this_ID_2=RULE_ID    {
+		$current.merge(this_ID_2);
     }
 
     { 
@@ -287,13 +291,15 @@ ruleNestedModelId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleT
     @init { setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+	    lastConsumedNode = currentNode;
+	    lastConsumedDatatypeToken = $current;
     }:
 ((
     { 
         currentNode=createCompositeNode(grammarAccess.prNestedModelId().ele00ParserRuleCallModelId(), currentNode); 
     }
-    this_ModelId=ruleModelId    {
-		$current.merge(this_ModelId);
+    this_ModelId_0=ruleModelId    {
+		$current.merge(this_ModelId_0);
     }
 
     { 
@@ -309,8 +315,8 @@ ruleNestedModelId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleT
     { 
         currentNode=createCompositeNode(grammarAccess.prNestedModelId().ele1ParserRuleCallModelId(), currentNode); 
     }
-    this_ModelId=ruleModelId    {
-		$current.merge(this_ModelId);
+    this_ModelId_2=ruleModelId    {
+		$current.merge(this_ModelId_2);
     }
 
     { 
@@ -338,9 +344,11 @@ ruleFraction returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken(
     @init { setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+	    lastConsumedNode = currentNode;
+	    lastConsumedDatatypeToken = $current;
     }:
-(    this_INT=RULE_INT    {
-		$current.merge(this_INT);
+(    this_INT_0=RULE_INT    {
+		$current.merge(this_INT_0);
     }
 
     { 
@@ -352,8 +360,8 @@ ruleFraction returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken(
         $current.merge(kw);
         createLeafNode(grammarAccess.prFraction().ele10KeywordSolidus(), null); 
     }
-    this_INT=RULE_INT    {
-		$current.merge(this_INT);
+    this_INT_2=RULE_INT    {
+		$current.merge(this_INT_2);
     }
 
     { 
@@ -381,6 +389,8 @@ ruleVector returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
     @init { setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+	    lastConsumedNode = currentNode;
+	    lastConsumedDatatypeToken = $current;
     }:
 (((
 	kw='(' 
@@ -388,15 +398,15 @@ ruleVector returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
         $current.merge(kw);
         createLeafNode(grammarAccess.prVector().ele000KeywordLeftParenthesis(), null); 
     }
-    this_INT=RULE_INT    {
-		$current.merge(this_INT);
+    this_INT_1=RULE_INT    {
+		$current.merge(this_INT_1);
     }
 
     { 
     createLeafNode(grammarAccess.prVector().ele001LexerRuleCallINT(), null); 
     }
-)    this_INT=RULE_INT    {
-		$current.merge(this_INT);
+)    this_INT_2=RULE_INT    {
+		$current.merge(this_INT_2);
     }
 
     { 
@@ -430,6 +440,8 @@ ruleDots returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
     @init { setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+	    lastConsumedNode = currentNode;
+	    lastConsumedDatatypeToken = $current;
     }:
 ((
 	kw='.' 

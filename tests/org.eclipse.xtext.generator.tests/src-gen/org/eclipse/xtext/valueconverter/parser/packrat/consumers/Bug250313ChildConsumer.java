@@ -1,0 +1,86 @@
+/*
+Generated with Xtext
+*/
+package org.eclipse.xtext.valueconverter.parser.packrat.consumers;
+
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
+import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
+import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
+
+import org.eclipse.xtext.valueconverter.services.Bug250313GrammarAccess;
+import org.eclipse.xtext.valueconverter.services.Bug250313GrammarAccess.ChildElements;
+
+import org.eclipse.xtext.valueconverter.parser.packrat.consumers.Bug250313Child1Consumer;
+import org.eclipse.xtext.valueconverter.parser.packrat.consumers.Bug250313Child2Consumer;
+
+@SuppressWarnings("unused")
+public final class Bug250313ChildConsumer extends NonTerminalConsumer {
+
+	private INonTerminalConsumer child1Consumer;
+	private INonTerminalConsumer child2Consumer;
+
+	public Bug250313ChildConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
+		super(configuration, hiddenTokens);
+	}
+	
+	@Override
+	protected int doConsume(int entryPoint) throws Exception {
+		return consumeAlternatives$1(entryPoint);
+	}
+
+	protected int consumeAlternatives$1(int entryPoint) throws Exception {
+		AlternativesResult result = createAlternativesResult();
+		switch(entryPoint) {
+			case -1: // use fall through semantics of switch case
+				result.reset();
+			case 0:
+				result.nextAlternative();
+				if (result.isAlternativeDone(consumeRuleCall$2(nextEntryPoint()))) { 
+					return result.getResult(); 
+				}
+			case 1:
+				result.nextAlternative();
+				if (result.isAlternativeDone(consumeRuleCall$3(nextEntryPoint()))) { 
+					return result.getResult(); 
+				}
+		}
+		return result.getResult();
+	}
+
+	protected int consumeRuleCall$2(int entryPoint) throws Exception {
+		return consumeNonTerminal(child1Consumer, null, false, false, false, getRule().ele0ParserRuleCallChild1());
+	}
+
+	protected int consumeRuleCall$3(int entryPoint) throws Exception {
+		return consumeNonTerminal(child2Consumer, null, false, false, false, getRule().ele1ParserRuleCallChild2());
+	}
+
+	public ChildElements getRule() {
+		return Bug250313GrammarAccess.INSTANCE.prChild();
+	}
+	
+	@Override
+	protected EObject getGrammarElement() {
+		return getRule().getRule();
+	}
+
+	@Override
+	protected String getDefaultTypeName() {
+		return "Child";
+	}
+	
+	public void setChild1Consumer(INonTerminalConsumer child1Consumer) {
+		this.child1Consumer = child1Consumer;
+	}
+	
+	public void setChild2Consumer(INonTerminalConsumer child2Consumer) {
+		this.child2Consumer = child2Consumer;
+	}
+	
+}

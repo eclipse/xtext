@@ -79,6 +79,7 @@ ruleModel returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 (	
 	
@@ -86,7 +87,7 @@ ruleModel returns [EObject current=null]
 	    { 
 	        currentNode=createCompositeNode(grammarAccess.prModel().ele0ParserRuleCallGreeting(), currentNode); 
 	    }
-	    lv_child=ruleGreeting 
+	    lv_child_0=ruleGreeting 
 	    {
 	        if ($current==null) {
 	            $current = factory.create("Model");
@@ -94,7 +95,7 @@ ruleModel returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "child", lv_child, "Greeting", currentNode);
+	       		set($current, "child", lv_child_0, "Greeting", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -122,6 +123,7 @@ ruleGreeting returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 ('hallo' 
     {
@@ -129,10 +131,10 @@ ruleGreeting returns [EObject current=null]
     }
 (	
 	
-	    lv_name=RULE_ID
-    { 
-    createLeafNode(grammarAccess.prGreeting().ele10LexerRuleCallID(), "name"); 
-    }
+	    lv_name_1=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prGreeting().ele10LexerRuleCallID(), "name"); 
+	}
  
 	    {
 	        if ($current==null) {
@@ -141,7 +143,7 @@ ruleGreeting returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "name", lv_name, "ID", currentNode);
+	       		set($current, "name", lv_name_1, "ID", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }

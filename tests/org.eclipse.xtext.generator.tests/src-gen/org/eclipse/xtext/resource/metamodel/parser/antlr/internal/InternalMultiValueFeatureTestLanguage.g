@@ -79,13 +79,14 @@ ruleStart returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 (	
 	
-	    lv_featureA=RULE_ID
-    { 
-    createLeafNode(grammarAccess.prStart().ele0LexerRuleCallID(), "featureA"); 
-    }
+	    lv_featureA_0=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prStart().ele0LexerRuleCallID(), "featureA"); 
+	}
  
 	    {
 	        if ($current==null) {
@@ -94,7 +95,7 @@ ruleStart returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.add($current, "featureA", lv_featureA, "ID", currentNode);
+	       		add($current, "featureA", lv_featureA_0, "ID", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }

@@ -79,13 +79,13 @@ ruleModel returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 (((((((	
 	
-	    lv_idValue=RULE_ID
-    { 
-    createLeafNode(grammarAccess.prModel().ele0000000ParserRuleCallID(), "idValue"); 
-    }
+	    lv_idValue_0=RULE_ID	{
+		createLeafNode(grammarAccess.prModel().ele0000000ParserRuleCallID(), "idValue"); 
+	}
  
 	    {
 	        if ($current==null) {
@@ -94,7 +94,7 @@ ruleModel returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "idValue", lv_idValue, "ID", currentNode);
+	       		set($current, "idValue", lv_idValue_0, "ID", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -103,10 +103,9 @@ ruleModel returns [EObject current=null]
 )
     |(	
 	
-	    lv_intValue=RULE_INT
-    { 
-    createLeafNode(grammarAccess.prModel().ele0000010ParserRuleCallINT(), "intValue"); 
-    }
+	    lv_intValue_1=RULE_INT	{
+		createLeafNode(grammarAccess.prModel().ele0000010ParserRuleCallINT(), "intValue"); 
+	}
  
 	    {
 	        if ($current==null) {
@@ -115,7 +114,7 @@ ruleModel returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "intValue", lv_intValue, "INT", currentNode);
+	       		set($current, "intValue", lv_intValue_1, "INT", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -124,10 +123,9 @@ ruleModel returns [EObject current=null]
 ))
     |(	
 	
-	    lv_stringValue=RULE_STRING
-    { 
-    createLeafNode(grammarAccess.prModel().ele000010ParserRuleCallSTRING(), "stringValue"); 
-    }
+	    lv_stringValue_2=RULE_STRING	{
+		createLeafNode(grammarAccess.prModel().ele000010ParserRuleCallSTRING(), "stringValue"); 
+	}
  
 	    {
 	        if ($current==null) {
@@ -136,7 +134,7 @@ ruleModel returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "stringValue", lv_stringValue, "STRING", currentNode);
+	       		set($current, "stringValue", lv_stringValue_2, "STRING", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -145,10 +143,9 @@ ruleModel returns [EObject current=null]
 ))
     |(	
 	
-	    lv_mlCommentValue=RULE_ML_COMMENT
-    { 
-    createLeafNode(grammarAccess.prModel().ele00010ParserRuleCallML_COMMENT(), "mlCommentValue"); 
-    }
+	    lv_mlCommentValue_3=RULE_ML_COMMENT	{
+		createLeafNode(grammarAccess.prModel().ele00010ParserRuleCallML_COMMENT(), "mlCommentValue"); 
+	}
  
 	    {
 	        if ($current==null) {
@@ -157,7 +154,7 @@ ruleModel returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "mlCommentValue", lv_mlCommentValue, "ML_COMMENT", currentNode);
+	       		set($current, "mlCommentValue", lv_mlCommentValue_3, "ML_COMMENT", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -166,10 +163,9 @@ ruleModel returns [EObject current=null]
 ))
     |(	
 	
-	    lv_slCommentValue=RULE_SL_COMMENT
-    { 
-    createLeafNode(grammarAccess.prModel().ele0010ParserRuleCallSL_COMMENT(), "slCommentValue"); 
-    }
+	    lv_slCommentValue_4=RULE_SL_COMMENT	{
+		createLeafNode(grammarAccess.prModel().ele0010ParserRuleCallSL_COMMENT(), "slCommentValue"); 
+	}
  
 	    {
 	        if ($current==null) {
@@ -178,7 +174,7 @@ ruleModel returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "slCommentValue", lv_slCommentValue, "SL_COMMENT", currentNode);
+	       		set($current, "slCommentValue", lv_slCommentValue_4, "SL_COMMENT", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -187,10 +183,9 @@ ruleModel returns [EObject current=null]
 ))
     |(	
 	
-	    lv_wsValue=RULE_WS
-    { 
-    createLeafNode(grammarAccess.prModel().ele010ParserRuleCallWS(), "wsValue"); 
-    }
+	    lv_wsValue_5=RULE_WS	{
+		createLeafNode(grammarAccess.prModel().ele010ParserRuleCallWS(), "wsValue"); 
+	}
  
 	    {
 	        if ($current==null) {
@@ -199,7 +194,7 @@ ruleModel returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "wsValue", lv_wsValue, "WS", currentNode);
+	       		set($current, "wsValue", lv_wsValue_5, "WS", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -208,10 +203,9 @@ ruleModel returns [EObject current=null]
 ))
     |(	
 	
-	    lv_anyValue=RULE_ANY_OTHER
-    { 
-    createLeafNode(grammarAccess.prModel().ele10ParserRuleCallANY_OTHER(), "anyValue"); 
-    }
+	    lv_anyValue_6=RULE_ANY_OTHER	{
+		createLeafNode(grammarAccess.prModel().ele10ParserRuleCallANY_OTHER(), "anyValue"); 
+	}
  
 	    {
 	        if ($current==null) {
@@ -220,7 +214,7 @@ ruleModel returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "anyValue", lv_anyValue, "ANY_OTHER", currentNode);
+	       		set($current, "anyValue", lv_anyValue_6, "ANY_OTHER", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
