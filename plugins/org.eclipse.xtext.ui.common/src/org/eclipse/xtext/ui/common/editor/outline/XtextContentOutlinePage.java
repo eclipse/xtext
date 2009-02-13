@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.source.ISourceViewer;
+import org.eclipse.jface.viewers.AbstractTreeViewer;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
@@ -45,16 +46,16 @@ import com.google.inject.Inject;
 
 /**
  * An outline page for Xtext resources.
- * 
+ *
  * This class is not intended to be subclassed. It is designed to be configured
  * with a domain specific combined label and content provider (which is
  * automatically injected to the {@link #provider} field).
- * 
+ *
  * The outline page can synchronize itself with the associated editor.
  * Selections made in the outline will be propagated to the editor at any time,
  * whereas the synchronization from the editor to the outline can be controlled
  * by the user using the "Link with Editor" button.
- * 
+ *
  * @author Peter Friese - Initial contribution and API
  */
 public class XtextContentOutlinePage extends LazyVirtualContentOutlinePage implements ISourceViewerAware {
@@ -78,7 +79,7 @@ public class XtextContentOutlinePage extends LazyVirtualContentOutlinePage imple
 
 	private void configureViewer() {
 		TreeViewer viewer = getTreeViewer();
-		viewer.setAutoExpandLevel(TreeViewer.ALL_LEVELS);
+		viewer.setAutoExpandLevel(AbstractTreeViewer.ALL_LEVELS);
 	}
 
 	protected void configureProviders() {
@@ -86,7 +87,7 @@ public class XtextContentOutlinePage extends LazyVirtualContentOutlinePage imple
 		getTreeViewer().setContentProvider(provider);
 		getTreeViewer().setLabelProvider(provider);
 	}
-	
+
 	private void configureDocument() {
 		if (sourceViewer != null) {
 			IDocument document = sourceViewer.getDocument();
@@ -128,7 +129,7 @@ public class XtextContentOutlinePage extends LazyVirtualContentOutlinePage imple
 		IToolBarManager toolBarManager = actionBars.getToolBarManager();
 		if (toolBarManager != null) {
 			toolBarManager.add(new ToggleLinkWithEditorAction(this));
-			
+
 			// sort button only available if provider offers sorting facilities
 			if (provider instanceof ISortableContentProvider) {
 				toolBarManager.add(new LexicalSortingAction(this));

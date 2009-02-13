@@ -23,9 +23,9 @@ import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.crossref.IScopedElement;
 
 /**
- * Provides a convenience base type for <code>TemplateContextType's</code> preconfigured with several handy 
- * Xtext <code>TemplateVariableResolver</code> . 
- * 
+ * Provides a convenience base type for <code>TemplateContextType's</code> preconfigured with several handy
+ * Xtext <code>TemplateVariableResolver</code> .
+ *
  * @author Michael Clay - Initial contribution and API
  */
 public class XtextTemplateContextType extends TemplateContextType {
@@ -41,13 +41,14 @@ public class XtextTemplateContextType extends TemplateContextType {
 		addResolver(new GlobalTemplateVariables.User());
 		addResolver(new GlobalTemplateVariables.Cursor());
 	}
-	
+
 	public static class CrossReferenceTemplateVariableResolver extends TemplateVariableResolver {
-		
+
 		public CrossReferenceTemplateVariableResolver() {
 			super("CrossReference", "TemplateVariableResolver for CrossReferences");
 		}
-		
+
+		@Override
 		public void resolve(TemplateVariable variable, TemplateContext context) {
 
 			XtextTemplateContext xtextTemplateContext = (XtextTemplateContext) context;
@@ -68,7 +69,7 @@ public class XtextTemplateContextType extends TemplateContextType {
 				names.add(scopedElement.name());
 			}
 
-			String[] bindings = (String[]) names.toArray(new String[] {});
+			String[] bindings = names.toArray(new String[names.size()]);
 
 			if (bindings.length != 0)
 				variable.setValues(bindings);

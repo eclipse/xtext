@@ -17,6 +17,7 @@ import org.eclipse.jface.text.ITextViewer;
  */
 public class XtextTextHover implements ITextHover {
 
+	@Deprecated
 	public String getHoverInfo(ITextViewer textViewer, IRegion hoverRegion) {
 		// TODO Auto-generated method stub
 		return null;

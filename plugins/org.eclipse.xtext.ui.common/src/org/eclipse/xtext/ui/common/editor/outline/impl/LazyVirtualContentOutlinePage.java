@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.outline.impl;
 
 import org.eclipse.core.runtime.ListenerList;
@@ -25,22 +32,22 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
  * This class should be subclassed.
  * </p>
  * <p>
- * Internally, each content outline page consists of a standard tree viewer; 
- * selections made in the tree viewer are reported as selection change events 
- * by the page (which is a selection provider). The tree viewer is not created 
+ * Internally, each content outline page consists of a standard tree viewer;
+ * selections made in the tree viewer are reported as selection change events
+ * by the page (which is a selection provider). The tree viewer is not created
  * until <code>createPage</code> is called; consequently, subclasses must extend
- * <code>createControl</code> to configure the tree viewer with a proper content 
+ * <code>createControl</code> to configure the tree viewer with a proper content
  * provider, label provider, and input element.
  * </p>
  * <p>
  * Note that those wanting to use a control other than internally created
- * <code>TreeViewer</code> will need to implement 
+ * <code>TreeViewer</code> will need to implement
  * <code>IContentOutlinePage</code> directly rather than subclassing this class.
- * </p> 
+ * </p>
  */
 public abstract class LazyVirtualContentOutlinePage extends Page implements
         IContentOutlinePage, ISelectionChangedListener {
-    private ListenerList selectionChangedListeners = new ListenerList();
+    private final ListenerList selectionChangedListeners = new ListenerList();
 
     private TreeViewer treeViewer;
 
@@ -59,13 +66,14 @@ public abstract class LazyVirtualContentOutlinePage extends Page implements
     }
 
     /**
-     * The <code>ContentOutlinePage</code> implementation of this 
+     * The <code>ContentOutlinePage</code> implementation of this
      * <code>IContentOutlinePage</code> method creates a tree viewer. Subclasses
-     * must extend this method configure the tree viewer with a proper content 
+     * must extend this method configure the tree viewer with a proper content
      * provider, label provider, and input element.
      * @param parent
      */
-    public void createControl(Composite parent) {
+    @Override
+	public void createControl(Composite parent) {
         treeViewer = new TreeViewer(parent, SWT.VIRTUAL | SWT.MULTI | SWT.H_SCROLL
                 | SWT.V_SCROLL);
         treeViewer.addSelectionChangedListener(this);
@@ -97,7 +105,8 @@ public abstract class LazyVirtualContentOutlinePage extends Page implements
     /* (non-Javadoc)
      * Method declared on IPage (and Page).
      */
-    public Control getControl() {
+    @Override
+	public Control getControl() {
         if (treeViewer == null) {
 			return null;
 		}
@@ -117,7 +126,7 @@ public abstract class LazyVirtualContentOutlinePage extends Page implements
     /**
      * Returns this page's tree viewer.
      *
-     * @return this page's tree viewer, or <code>null</code> if 
+     * @return this page's tree viewer, or <code>null</code> if
      *   <code>createControl</code> has not been called yet
      */
     protected TreeViewer getTreeViewer() {
@@ -128,7 +137,8 @@ public abstract class LazyVirtualContentOutlinePage extends Page implements
      *  (non-Javadoc)
      * @see org.eclipse.ui.part.IPageBookViewPage#init(org.eclipse.ui.part.IPageSite)
      */
-    public void init(IPageSite pageSite) {
+    @Override
+	public void init(IPageSite pageSite) {
         super.init(pageSite);
         pageSite.setSelectionProvider(this);
     }
@@ -152,7 +162,8 @@ public abstract class LazyVirtualContentOutlinePage extends Page implements
     /**
      * Sets focus to a part in the page.
      */
-    public void setFocus() {
+    @Override
+	public void setFocus() {
         treeViewer.getControl().setFocus();
     }
 

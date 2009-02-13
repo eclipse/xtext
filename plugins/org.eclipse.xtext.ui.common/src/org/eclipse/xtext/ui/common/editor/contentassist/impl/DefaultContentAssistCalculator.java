@@ -41,13 +41,13 @@ import org.eclipse.xtext.util.XtextSwitch;
 import com.google.inject.Inject;
 
 /**
- * Provides a default implementation of interface {@link IContentAssistContext} designed as <b>Switch</b> over the 
- * Xtext ecore inheritance hierarchy to calculate and resolve (or flatten) 'container' level elements like 
+ * Provides a default implementation of interface {@link IContentAssistContext} designed as <b>Switch</b> over the
+ * Xtext ecore inheritance hierarchy to calculate and resolve (or flatten) 'container' level elements like
  * <code>Group</code> or <code>Alternatives</code> to gather potential completion proposal candidates.
- * 
+ *
  * It supports the call {@link #doSwitch(EObject) doSwitch(object)} instead of
  * typical <code>if (x instanceof y)</code> code blocks.
- * 
+ *
  * @author Michael Clay - Initial contribution and API
  * @see org.eclipse.xtext.util.XtextSwitch
  */
@@ -55,13 +55,13 @@ public class DefaultContentAssistCalculator extends XtextSwitch<List<AbstractEle
 
 	@Inject
 	private ILinkingService linkingService;
-	
+
 	public List<AbstractElement> computeProposalElements(IContentAssistContext contentAssistContext) {
-		
+
 		List<AbstractElement> computedElementList = new ArrayList<AbstractElement>();
-		
+
 		Set<AbstractElement> nextValidElementSet = new LinkedHashSet<AbstractElement>();
-		
+
 		AbstractNode referenceNode=contentAssistContext.getReferenceNode();
 		/**
 		 * in case of a cross reference which isn't linked properly we evaluate or
@@ -71,14 +71,14 @@ public class DefaultContentAssistCalculator extends XtextSwitch<List<AbstractEle
 			nextValidElementSet.add(getAbstractElement(referenceNode));
 			nextValidElementSet.addAll(ParseTreeUtil.getElementSetValidFromOffset(contentAssistContext.getRootNode(),
 					referenceNode, contentAssistContext.getOffSet()));
-		}
-		/**
-		 * in case of 'at-the-end' of the previous,completed element we evaluate
-		 * it again for 'right-to-left-backtracking' cases (e.g. for keyword
-		 * 'kind' kind>|< |=cursorpos)
-		 */
-		else if (referenceNode == contentAssistContext.getNode()) {
-
+		} else if (referenceNode == contentAssistContext.getNode()) {
+			if (referenceNode == null)
+				throw new NullPointerException("Unexpected: referenceNode is null.");
+			/**
+			 * in case of 'at-the-end' of the previous,completed element we evaluate
+			 * it again for 'right-to-left-backtracking' cases (e.g. for keyword
+			 * 'kind' kind>|< |=cursorpos)
+			 */
 			Assignment containingAssignment = GrammarUtil.containingAssignment(referenceNode.getGrammarElement());
 
 			if (referenceNode.getGrammarElement() instanceof RuleCall && containingAssignment != null) {
@@ -101,10 +101,10 @@ public class DefaultContentAssistCalculator extends XtextSwitch<List<AbstractEle
 			AbstractElement abstractElement = iterator.next();
 			computedElementList.addAll(doSwitch(abstractElement));
 		}
-		
+
 		return computedElementList;
 	}
-	
+
 
 	@Override
 	public List<AbstractElement> caseAlternatives(Alternatives alternatives) {
@@ -145,7 +145,7 @@ public class DefaultContentAssistCalculator extends XtextSwitch<List<AbstractEle
 	@Override
 	public List<AbstractElement> caseRuleCall(RuleCall ruleCall) {
 		List<AbstractElement> elementList = new ArrayList<AbstractElement>();
-		
+
 		elementList.add(ruleCall);
 
 		AbstractRule abstractRule = ruleCall.getRule();
@@ -155,7 +155,7 @@ public class DefaultContentAssistCalculator extends XtextSwitch<List<AbstractEle
 		}
 		return elementList;
 	}
-	
+
 	@Override
 	public List<AbstractElement> caseCrossReference(CrossReference crossReference) {
 		return Collections.singletonList(((AbstractElement)crossReference.eContainer()));
@@ -171,12 +171,12 @@ public class DefaultContentAssistCalculator extends XtextSwitch<List<AbstractEle
 			source.addAll(list);
 		}
 	}
-	
+
 	private AbstractElement getAbstractElement(AbstractNode lastCompleteNode) {
 		return (AbstractElement) (lastCompleteNode.getGrammarElement() instanceof ParserRule ?
 				((ParserRule)lastCompleteNode.getGrammarElement()).getAlternatives(): lastCompleteNode.getGrammarElement());
 	}
-	
+
 	private boolean isLinked(AbstractNode lastCompleteNode) {
 		EObject semanticModel = NodeUtil.getNearestSemanticObject(lastCompleteNode);
 		CrossReference crossReference = (CrossReference) lastCompleteNode.getGrammarElement();
@@ -193,10 +193,10 @@ public class DefaultContentAssistCalculator extends XtextSwitch<List<AbstractEle
 			return false;
 		}
 	}
-	
+
 	private boolean isOptional(AbstractElement groupElement) {
 		boolean isOptional = true;
-		
+
 		if ((groupElement instanceof Group || groupElement instanceof Alternatives) && !GrammarUtil.isOptionalCardinality(groupElement)) {
 
 			EList<AbstractElement> abstractTokens = groupElement instanceof Group ? ((Group) groupElement)
@@ -213,5 +213,5 @@ public class DefaultContentAssistCalculator extends XtextSwitch<List<AbstractEle
 		return isOptional;
 	}
 
-	
+
 }
