@@ -132,8 +132,8 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 					AbstractElement terminal = object.getTerminal();
 					if (terminal instanceof RuleCall) {
 						RuleCall ruleCall = (RuleCall) terminal;
-						String name = ruleCall.getRule().getName();
-						label.append(name);
+						String string = NodeUtil.getNodeAdapter(ruleCall).getParserNode().serialize();
+						label.append(string);
 					}
 					else if (terminal instanceof Keyword) {
 						Keyword keyword = (Keyword) terminal;
