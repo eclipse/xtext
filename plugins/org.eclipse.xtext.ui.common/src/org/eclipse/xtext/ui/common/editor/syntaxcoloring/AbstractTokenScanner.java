@@ -13,10 +13,9 @@ import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.xtext.ui.common.editor.preferencepage.CommonPreferenceConstants;
+import org.eclipse.xtext.ui.core.editor.preferences.PreferenceConstants;
 import org.eclipse.xtext.ui.core.editor.utils.TextStyle;
 
-import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.name.Named;
 
@@ -26,17 +25,16 @@ import com.google.inject.name.Named;
  */
 public abstract class AbstractTokenScanner implements ITokenScanner {
 
-	private PreferenceStoreAccessor preferenceStoreAccessor;
+	private final PreferenceStoreAccessor preferenceStoreAccessor;
 
-	@Inject
-	public AbstractTokenScanner(final @Named("languageName") String languageName,
-			final Provider<SyntaxColoringPreferencePage> preferencePageProvider, 
+	protected AbstractTokenScanner(final @Named("languageName") String languageName,
+			final Provider<SyntaxColoringPreferencePage> preferencePageProvider,
 			final PreferenceStoreAccessor accessor) {
 		this.preferenceStoreAccessor = accessor;
 		// XXX LITTLE HACK, adding PrefPage on the fly
 		String preferencePagePathSeparator = "/";
 		String parentPreferencePagePath = languageName + preferencePagePathSeparator + languageName
-				+ CommonPreferenceConstants.SEPARATOR + CommonPreferenceConstants.EDITOR_NODE_NAME;
+				+ PreferenceConstants.SEPARATOR + PreferenceConstants.EDITOR_NODE_NAME;
 		String syntaxColorerPrefPageTag = PreferenceStoreAccessor.syntaxColorerTag(languageName);
 		String preferencePagePath = parentPreferencePagePath + preferencePagePathSeparator + syntaxColorerPrefPageTag;
 		if (PlatformUI.getWorkbench().getPreferenceManager().find(preferencePagePath) == null) {
@@ -64,9 +62,8 @@ public abstract class AbstractTokenScanner implements ITokenScanner {
 					return false;
 				}
 			};
-		} else {
-			preferenceStoreAccessor.populateTextStyle(tokenStyle.getID(), textStyle, tokenStyle.getDefaultTextStyle());
 		}
+		preferenceStoreAccessor.populateTextStyle(tokenStyle.getID(), textStyle, tokenStyle.getDefaultTextStyle());
 		int style = textStyle.getStyle();
 		Font fontFromFontData = null;
 		if (style == SWT.NORMAL) {
