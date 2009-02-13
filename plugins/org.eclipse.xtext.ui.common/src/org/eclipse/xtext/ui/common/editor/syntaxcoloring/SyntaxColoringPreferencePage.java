@@ -11,13 +11,11 @@ package org.eclipse.xtext.ui.common.editor.syntaxcoloring;
 import java.util.Arrays;
 import java.util.List;
 
-import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.ui.common.editor.preferencepage.CommonPreferenceConstants;
 import org.eclipse.xtext.ui.core.editor.preferences.AbstractPreferencePage;
 import org.eclipse.xtext.ui.core.editor.utils.TextStyle;
 
 import com.google.inject.Inject;
-import com.google.inject.name.Named;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
@@ -27,16 +25,13 @@ public class SyntaxColoringPreferencePage extends AbstractPreferencePage {
 
 	@Inject
 	private ITokenStyleProvider tokenStyleProvider;
-	
+
 	@Inject
 	private PreferenceStoreAccessor preferenceStoreAccessor;
-	
-	@Inject @Named(Constants.LANGUAGE_NAME)
-	private String languageName;
 
 	@Override
 	protected String qualifiedName() {
-		return PreferenceStoreAccessor.syntaxColorerTag(languageName);
+		return PreferenceStoreAccessor.syntaxColorerTag(getLanguageName());
 	}
 
 	@Override
