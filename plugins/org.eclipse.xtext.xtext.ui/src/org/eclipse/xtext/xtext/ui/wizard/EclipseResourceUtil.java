@@ -122,7 +122,7 @@ public class EclipseResourceUtil {
 					srcContainer.create(false, true, new SubProgressMonitor(progressMonitor, 1));
 				}
 				final IClasspathEntry srcClasspathEntry = JavaCore.newSourceEntry(srcContainer.getFullPath());
-				classpathEntries.add(0, srcClasspathEntry);
+				classpathEntries.add(srcClasspathEntry);
 			}
 
 			classpathEntries.add(JavaCore.newContainerEntry(new Path("org.eclipse.jdt.launching.JRE_CONTAINER")));
