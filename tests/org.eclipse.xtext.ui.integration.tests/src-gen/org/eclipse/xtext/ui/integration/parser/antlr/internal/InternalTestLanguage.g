@@ -79,6 +79,7 @@ ruleFile returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 (	
 	
@@ -86,7 +87,7 @@ ruleFile returns [EObject current=null]
 	    { 
 	        currentNode=createCompositeNode(grammarAccess.prFile().ele0ParserRuleCallStuff(), currentNode); 
 	    }
-	    lv_stuff=ruleStuff 
+	    lv_stuff_0=ruleStuff 
 	    {
 	        if ($current==null) {
 	            $current = factory.create("File");
@@ -94,7 +95,7 @@ ruleFile returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.add($current, "stuff", lv_stuff, "Stuff", currentNode);
+	       		add($current, "stuff", lv_stuff_0, "Stuff", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -122,6 +123,7 @@ ruleStuff returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 ('stuff' 
     {
@@ -129,10 +131,10 @@ ruleStuff returns [EObject current=null]
     }
 (	
 	
-	    lv_name=RULE_ID
-    { 
-    createLeafNode(grammarAccess.prStuff().ele10LexerRuleCallID(), "name"); 
-    }
+	    lv_name_1=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prStuff().ele10LexerRuleCallID(), "name"); 
+	}
  
 	    {
 	        if ($current==null) {
@@ -141,7 +143,7 @@ ruleStuff returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "name", lv_name, "ID", currentNode);
+	       		set($current, "name", lv_name_1, "ID", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }

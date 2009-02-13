@@ -4,21 +4,107 @@
     <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="bug250313">
       <ePackage href="http://org.eclipse.xtext.valueconverter.Bug250313#/"/>
     </metamodelDeclarations>
-    <rules xsi:type="xtext:ParserRule" name="Ref2">
+    <rules xsi:type="xtext:ParserRule" name="Model">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <type xsi:type="ecore:EClass" href="http://org.eclipse.xtext.valueconverter.Bug250313#//Ref2"/>
+        <type xsi:type="ecore:EClass" href="http://org.eclipse.xtext.valueconverter.Bug250313#//Model"/>
+      </type>
+      <alternatives xsi:type="xtext:Alternatives">
+        <groups xsi:type="xtext:Alternatives">
+          <groups xsi:type="xtext:Alternatives">
+            <groups xsi:type="xtext:Group">
+              <abstractTokens xsi:type="xtext:Keyword" cardinality="?" value="#"/>
+              <abstractTokens xsi:type="xtext:Assignment" feature="value" operator="=">
+                <terminal xsi:type="xtext:Alternatives">
+                  <groups xsi:type="xtext:Alternatives">
+                    <groups xsi:type="xtext:Alternatives">
+                      <groups xsi:type="xtext:Keyword" value="mykeyword1"/>
+                      <groups xsi:type="xtext:RuleCall" rule="/1/@rules.2"/>
+                    </groups>
+                    <groups xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+                  </groups>
+                  <groups xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+                </terminal>
+              </abstractTokens>
+            </groups>
+            <groups xsi:type="xtext:Group">
+              <abstractTokens xsi:type="xtext:Keyword" value="!"/>
+              <abstractTokens xsi:type="xtext:Assignment" feature="value" operator="=">
+                <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.2"/>
+              </abstractTokens>
+            </groups>
+          </groups>
+          <groups xsi:type="xtext:Group">
+            <abstractTokens xsi:type="xtext:Keyword" value="$"/>
+            <abstractTokens xsi:type="xtext:Assignment" feature="value" operator="=">
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+            </abstractTokens>
+          </groups>
+        </groups>
+        <groups xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Group">
+            <abstractTokens xsi:type="xtext:Keyword" value="content"/>
+            <abstractTokens xsi:type="xtext:Assignment" feature="children" operator="=">
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.2"/>
+            </abstractTokens>
+          </abstractTokens>
+          <abstractTokens xsi:type="xtext:Group" cardinality="?">
+            <abstractTokens xsi:type="xtext:Keyword" value="ref"/>
+            <abstractTokens xsi:type="xtext:Assignment" feature="ref" operator="=">
+              <terminal xsi:type="xtext:Alternatives">
+                <groups xsi:type="xtext:CrossReference" rule="/1/@rules.2">
+                  <type metamodel="/0/@metamodelDeclarations.0">
+                    <type xsi:type="ecore:EClass" href="http://org.eclipse.xtext.valueconverter.Bug250313#//Child1"/>
+                  </type>
+                </groups>
+                <groups xsi:type="xtext:CrossReference" rule="/1/@rules.0">
+                  <type metamodel="/0/@metamodelDeclarations.0">
+                    <type xsi:type="ecore:EClass" href="http://org.eclipse.xtext.valueconverter.Bug250313#//Child2"/>
+                  </type>
+                </groups>
+              </terminal>
+            </abstractTokens>
+          </abstractTokens>
+        </groups>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Datatype">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <abstractTokens xsi:type="xtext:Keyword" value="#2"/>
-        <abstractTokens xsi:type="xtext:Assignment" feature="ref2" operator="=">
-          <terminal xsi:type="xtext:Alternatives">
-            <groups xsi:type="xtext:Alternatives">
-              <groups xsi:type="xtext:Keyword" value="mykeyword1"/>
-              <groups xsi:type="xtext:RuleCall" rule="/1/@rules.2"/>
-            </groups>
-            <groups xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-          </terminal>
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Group">
+            <abstractTokens xsi:type="xtext:Keyword" value=">>"/>
+            <abstractTokens xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+          </abstractTokens>
+          <abstractTokens xsi:type="xtext:Keyword" value="-"/>
         </abstractTokens>
+        <abstractTokens xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Child">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EClass" href="http://org.eclipse.xtext.valueconverter.Bug250313#//Child"/>
+      </type>
+      <alternatives xsi:type="xtext:Alternatives">
+        <groups xsi:type="xtext:RuleCall" rule="/0/@rules.3"/>
+        <groups xsi:type="xtext:RuleCall" rule="/0/@rules.4"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Child1">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EClass" href="http://org.eclipse.xtext.valueconverter.Bug250313#//Child1"/>
+      </type>
+      <alternatives xsi:type="xtext:Assignment" feature="name" operator="=">
+        <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Child2">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <type xsi:type="ecore:EClass" href="http://org.eclipse.xtext.valueconverter.Bug250313#//Child2"/>
+      </type>
+      <alternatives xsi:type="xtext:Assignment" feature="name" operator="=">
+        <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.2"/>
       </alternatives>
     </rules>
   </xtext:Grammar>

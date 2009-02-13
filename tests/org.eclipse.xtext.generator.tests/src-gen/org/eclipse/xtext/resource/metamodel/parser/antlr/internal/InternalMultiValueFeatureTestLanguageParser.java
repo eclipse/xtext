@@ -100,19 +100,19 @@ public class InternalMultiValueFeatureTestLanguageParser extends AbstractInterna
 
 
     // $ANTLR start ruleStart
-    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/resource/metamodel/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.g:78:1: ruleStart returns [EObject current=null] : (lv_featureA= RULE_ID )+ ;
+    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/resource/metamodel/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.g:78:1: ruleStart returns [EObject current=null] : (lv_featureA_0= RULE_ID )+ ;
     public final EObject ruleStart() throws RecognitionException {
         EObject current = null;
 
-        Token lv_featureA=null;
+        Token lv_featureA_0=null;
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/resource/metamodel/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.g:82:6: ( (lv_featureA= RULE_ID )+ )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/resource/metamodel/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.g:83:1: (lv_featureA= RULE_ID )+
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/resource/metamodel/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.g:83:6: ( (lv_featureA_0= RULE_ID )+ )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/resource/metamodel/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.g:84:1: (lv_featureA_0= RULE_ID )+
             {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/resource/metamodel/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.g:83:1: (lv_featureA= RULE_ID )+
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/resource/metamodel/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.g:84:1: (lv_featureA_0= RULE_ID )+
             int cnt1=0;
             loop1:
             do {
@@ -126,13 +126,13 @@ public class InternalMultiValueFeatureTestLanguageParser extends AbstractInterna
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/resource/metamodel/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.g:85:6: lv_featureA= RULE_ID
+            	    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/resource/metamodel/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.g:86:6: lv_featureA_0= RULE_ID
             	    {
-            	    lv_featureA=(Token)input.LT(1);
-            	    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleStart127); 
-            	     
-            	        createLeafNode(grammarAccess.prStart().ele0LexerRuleCallID(), "featureA"); 
-            	        
+            	    lv_featureA_0=(Token)input.LT(1);
+            	    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleStart128); 
+
+            	    		createLeafNode(grammarAccess.prStart().ele0LexerRuleCallID(), "featureA"); 
+            	    	
 
             	    	        if (current==null) {
             	    	            current = factory.create("Start");
@@ -140,7 +140,7 @@ public class InternalMultiValueFeatureTestLanguageParser extends AbstractInterna
             	    	        }
             	    	        
             	    	        try {
-            	    	        	factory.add(current, "featureA", lv_featureA, "ID", currentNode);
+            	    	       		add(current, "featureA", lv_featureA_0, "ID", lastConsumedNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }
@@ -162,6 +162,7 @@ public class InternalMultiValueFeatureTestLanguageParser extends AbstractInterna
             }
 
              resetLookahead(); 
+                	lastConsumedNode = currentNode;
                 
         }
          
@@ -180,6 +181,6 @@ public class InternalMultiValueFeatureTestLanguageParser extends AbstractInterna
 
     public static final BitSet FOLLOW_ruleStart_in_entryRuleStart72 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleStart82 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleStart127 = new BitSet(new long[]{0x0000000000000012L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleStart128 = new BitSet(new long[]{0x0000000000000012L});
 
 }

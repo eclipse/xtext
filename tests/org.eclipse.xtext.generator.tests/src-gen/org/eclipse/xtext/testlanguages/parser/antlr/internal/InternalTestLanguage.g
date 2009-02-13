@@ -79,6 +79,7 @@ ruleEntryRule returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 (	
 	
@@ -86,7 +87,7 @@ ruleEntryRule returns [EObject current=null]
 	    { 
 	        currentNode=createCompositeNode(grammarAccess.prEntryRule().ele0ParserRuleCallAbstractRule(), currentNode); 
 	    }
-	    lv_multiFeature=ruleAbstractRule 
+	    lv_multiFeature_0=ruleAbstractRule 
 	    {
 	        if ($current==null) {
 	            $current = factory.create("Model");
@@ -94,7 +95,7 @@ ruleEntryRule returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.add($current, "multiFeature", lv_multiFeature, "AbstractRule", currentNode);
+	       		add($current, "multiFeature", lv_multiFeature_0, "AbstractRule", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -122,14 +123,15 @@ ruleAbstractRule returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 (
     { 
         currentNode=createCompositeNode(grammarAccess.prAbstractRule().ele0ParserRuleCallChoiceRule(), currentNode); 
     }
-    this_ChoiceRule=ruleChoiceRule
+    this_ChoiceRule_0=ruleChoiceRule
     { 
-        $current = $this_ChoiceRule.current; 
+        $current = $this_ChoiceRule_0.current; 
         currentNode = currentNode.getParent();
     }
 
@@ -137,9 +139,9 @@ ruleAbstractRule returns [EObject current=null]
     { 
         currentNode=createCompositeNode(grammarAccess.prAbstractRule().ele1ParserRuleCallReducibleRule(), currentNode); 
     }
-    this_ReducibleRule=ruleReducibleRule
+    this_ReducibleRule_1=ruleReducibleRule
     { 
-        $current = $this_ReducibleRule.current; 
+        $current = $this_ReducibleRule_1.current; 
         currentNode = currentNode.getParent();
     }
 );
@@ -163,6 +165,7 @@ ruleChoiceRule returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 (('choice' 
     {
@@ -170,10 +173,11 @@ ruleChoiceRule returns [EObject current=null]
     }
 (	
 	
-	    lv_optionalKeyword='optional' 
+	    lv_optionalKeyword_1='optional' 
     {
         createLeafNode(grammarAccess.prChoiceRule().ele010KeywordOptional(), "optionalKeyword"); 
     }
+
  
 	    {
 	        if ($current==null) {
@@ -182,7 +186,7 @@ ruleChoiceRule returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "optionalKeyword", true, "optional", currentNode);
+	       		set($current, "optionalKeyword", true, "optional", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -190,10 +194,10 @@ ruleChoiceRule returns [EObject current=null]
 	
 )?)(	
 	
-	    lv_name=RULE_ID
-    { 
-    createLeafNode(grammarAccess.prChoiceRule().ele10LexerRuleCallID(), "name"); 
-    }
+	    lv_name_2=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prChoiceRule().ele10LexerRuleCallID(), "name"); 
+	}
  
 	    {
 	        if ($current==null) {
@@ -202,7 +206,7 @@ ruleChoiceRule returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "name", lv_name, "ID", currentNode);
+	       		set($current, "name", lv_name_2, "ID", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -229,6 +233,7 @@ ruleReducibleRule returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 (('reducible' 
     {
@@ -238,9 +243,9 @@ ruleReducibleRule returns [EObject current=null]
     { 
         currentNode=createCompositeNode(grammarAccess.prReducibleRule().ele01ParserRuleCallTerminalRule(), currentNode); 
     }
-    this_TerminalRule=ruleTerminalRule
+    this_TerminalRule_1=ruleTerminalRule
     { 
-        $current = $this_TerminalRule.current; 
+        $current = $this_TerminalRule_1.current; 
         currentNode = currentNode.getParent();
     }
 )((
@@ -265,7 +270,7 @@ ruleReducibleRule returns [EObject current=null]
 	    { 
 	        currentNode=createCompositeNode(grammarAccess.prReducibleRule().ele110ParserRuleCallTerminalRule(), currentNode); 
 	    }
-	    lv_actionFeature=ruleTerminalRule 
+	    lv_actionFeature_3=ruleTerminalRule 
 	    {
 	        if ($current==null) {
 	            $current = factory.create("ReducibleElement");
@@ -273,7 +278,7 @@ ruleReducibleRule returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.add($current, "actionFeature", lv_actionFeature, "TerminalRule", currentNode);
+	       		add($current, "actionFeature", lv_actionFeature_3, "TerminalRule", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -301,13 +306,14 @@ ruleTerminalRule returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 (	
 	
-	    lv_stringFeature=RULE_STRING
-    { 
-    createLeafNode(grammarAccess.prTerminalRule().ele0LexerRuleCallSTRING(), "stringFeature"); 
-    }
+	    lv_stringFeature_0=	RULE_STRING
+	{
+		createLeafNode(grammarAccess.prTerminalRule().ele0LexerRuleCallSTRING(), "stringFeature"); 
+	}
  
 	    {
 	        if ($current==null) {
@@ -316,7 +322,7 @@ ruleTerminalRule returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "stringFeature", lv_stringFeature, "STRING", currentNode);
+	       		set($current, "stringFeature", lv_stringFeature_0, "STRING", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }

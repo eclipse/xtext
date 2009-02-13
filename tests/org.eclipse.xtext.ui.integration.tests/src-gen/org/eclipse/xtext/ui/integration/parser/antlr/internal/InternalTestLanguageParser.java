@@ -100,20 +100,20 @@ public class InternalTestLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleFile
-    // ../org.eclipse.xtext.ui.integration.tests/./src-gen/org/eclipse/xtext/ui/integration/parser/antlr/internal/InternalTestLanguage.g:78:1: ruleFile returns [EObject current=null] : (lv_stuff= ruleStuff )* ;
+    // ../org.eclipse.xtext.ui.integration.tests/./src-gen/org/eclipse/xtext/ui/integration/parser/antlr/internal/InternalTestLanguage.g:78:1: ruleFile returns [EObject current=null] : (lv_stuff_0= ruleStuff )* ;
     public final EObject ruleFile() throws RecognitionException {
         EObject current = null;
 
-        EObject lv_stuff = null;
+        EObject lv_stuff_0 = null;
 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.ui.integration.tests/./src-gen/org/eclipse/xtext/ui/integration/parser/antlr/internal/InternalTestLanguage.g:82:6: ( (lv_stuff= ruleStuff )* )
-            // ../org.eclipse.xtext.ui.integration.tests/./src-gen/org/eclipse/xtext/ui/integration/parser/antlr/internal/InternalTestLanguage.g:83:1: (lv_stuff= ruleStuff )*
+            // ../org.eclipse.xtext.ui.integration.tests/./src-gen/org/eclipse/xtext/ui/integration/parser/antlr/internal/InternalTestLanguage.g:83:6: ( (lv_stuff_0= ruleStuff )* )
+            // ../org.eclipse.xtext.ui.integration.tests/./src-gen/org/eclipse/xtext/ui/integration/parser/antlr/internal/InternalTestLanguage.g:84:1: (lv_stuff_0= ruleStuff )*
             {
-            // ../org.eclipse.xtext.ui.integration.tests/./src-gen/org/eclipse/xtext/ui/integration/parser/antlr/internal/InternalTestLanguage.g:83:1: (lv_stuff= ruleStuff )*
+            // ../org.eclipse.xtext.ui.integration.tests/./src-gen/org/eclipse/xtext/ui/integration/parser/antlr/internal/InternalTestLanguage.g:84:1: (lv_stuff_0= ruleStuff )*
             loop1:
             do {
                 int alt1=2;
@@ -126,13 +126,13 @@ public class InternalTestLanguageParser extends AbstractInternalAntlrParser {
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.integration.tests/./src-gen/org/eclipse/xtext/ui/integration/parser/antlr/internal/InternalTestLanguage.g:86:6: lv_stuff= ruleStuff
+            	    // ../org.eclipse.xtext.ui.integration.tests/./src-gen/org/eclipse/xtext/ui/integration/parser/antlr/internal/InternalTestLanguage.g:87:6: lv_stuff_0= ruleStuff
             	    {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.prFile().ele0ParserRuleCallStuff(), currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleStuff_in_ruleFile140);
-            	    lv_stuff=ruleStuff();
+            	    lv_stuff_0=ruleStuff();
             	    _fsp--;
 
 
@@ -142,7 +142,7 @@ public class InternalTestLanguageParser extends AbstractInternalAntlrParser {
             	    	        }
             	    	        
             	    	        try {
-            	    	        	factory.add(current, "stuff", lv_stuff, "Stuff", currentNode);
+            	    	       		add(current, "stuff", lv_stuff_0, "Stuff", currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }
@@ -161,6 +161,7 @@ public class InternalTestLanguageParser extends AbstractInternalAntlrParser {
             }
 
              resetLookahead(); 
+                	lastConsumedNode = currentNode;
                 
         }
          
@@ -176,7 +177,7 @@ public class InternalTestLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRuleStuff
-    // ../org.eclipse.xtext.ui.integration.tests/./src-gen/org/eclipse/xtext/ui/integration/parser/antlr/internal/InternalTestLanguage.g:113:1: entryRuleStuff returns [EObject current=null] : iv_ruleStuff= ruleStuff EOF ;
+    // ../org.eclipse.xtext.ui.integration.tests/./src-gen/org/eclipse/xtext/ui/integration/parser/antlr/internal/InternalTestLanguage.g:114:1: entryRuleStuff returns [EObject current=null] : iv_ruleStuff= ruleStuff EOF ;
     public final EObject entryRuleStuff() throws RecognitionException {
         EObject current = null;
 
@@ -184,8 +185,8 @@ public class InternalTestLanguageParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.ui.integration.tests/./src-gen/org/eclipse/xtext/ui/integration/parser/antlr/internal/InternalTestLanguage.g:113:47: (iv_ruleStuff= ruleStuff EOF )
-            // ../org.eclipse.xtext.ui.integration.tests/./src-gen/org/eclipse/xtext/ui/integration/parser/antlr/internal/InternalTestLanguage.g:114:2: iv_ruleStuff= ruleStuff EOF
+            // ../org.eclipse.xtext.ui.integration.tests/./src-gen/org/eclipse/xtext/ui/integration/parser/antlr/internal/InternalTestLanguage.g:114:47: (iv_ruleStuff= ruleStuff EOF )
+            // ../org.eclipse.xtext.ui.integration.tests/./src-gen/org/eclipse/xtext/ui/integration/parser/antlr/internal/InternalTestLanguage.g:115:2: iv_ruleStuff= ruleStuff EOF
             {
              currentNode = createCompositeNode(grammarAccess.prStuff().getRule(), currentNode); 
             pushFollow(FOLLOW_ruleStuff_in_entryRuleStuff179);
@@ -211,33 +212,33 @@ public class InternalTestLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleStuff
-    // ../org.eclipse.xtext.ui.integration.tests/./src-gen/org/eclipse/xtext/ui/integration/parser/antlr/internal/InternalTestLanguage.g:121:1: ruleStuff returns [EObject current=null] : ( 'stuff' (lv_name= RULE_ID ) ) ;
+    // ../org.eclipse.xtext.ui.integration.tests/./src-gen/org/eclipse/xtext/ui/integration/parser/antlr/internal/InternalTestLanguage.g:122:1: ruleStuff returns [EObject current=null] : ( 'stuff' (lv_name_1= RULE_ID ) ) ;
     public final EObject ruleStuff() throws RecognitionException {
         EObject current = null;
 
-        Token lv_name=null;
+        Token lv_name_1=null;
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.ui.integration.tests/./src-gen/org/eclipse/xtext/ui/integration/parser/antlr/internal/InternalTestLanguage.g:125:6: ( ( 'stuff' (lv_name= RULE_ID ) ) )
-            // ../org.eclipse.xtext.ui.integration.tests/./src-gen/org/eclipse/xtext/ui/integration/parser/antlr/internal/InternalTestLanguage.g:126:1: ( 'stuff' (lv_name= RULE_ID ) )
+            // ../org.eclipse.xtext.ui.integration.tests/./src-gen/org/eclipse/xtext/ui/integration/parser/antlr/internal/InternalTestLanguage.g:127:6: ( ( 'stuff' (lv_name_1= RULE_ID ) ) )
+            // ../org.eclipse.xtext.ui.integration.tests/./src-gen/org/eclipse/xtext/ui/integration/parser/antlr/internal/InternalTestLanguage.g:128:1: ( 'stuff' (lv_name_1= RULE_ID ) )
             {
-            // ../org.eclipse.xtext.ui.integration.tests/./src-gen/org/eclipse/xtext/ui/integration/parser/antlr/internal/InternalTestLanguage.g:126:1: ( 'stuff' (lv_name= RULE_ID ) )
-            // ../org.eclipse.xtext.ui.integration.tests/./src-gen/org/eclipse/xtext/ui/integration/parser/antlr/internal/InternalTestLanguage.g:126:2: 'stuff' (lv_name= RULE_ID )
+            // ../org.eclipse.xtext.ui.integration.tests/./src-gen/org/eclipse/xtext/ui/integration/parser/antlr/internal/InternalTestLanguage.g:128:1: ( 'stuff' (lv_name_1= RULE_ID ) )
+            // ../org.eclipse.xtext.ui.integration.tests/./src-gen/org/eclipse/xtext/ui/integration/parser/antlr/internal/InternalTestLanguage.g:128:2: 'stuff' (lv_name_1= RULE_ID )
             {
             match(input,11,FOLLOW_11_in_ruleStuff223); 
 
                     createLeafNode(grammarAccess.prStuff().ele0KeywordStuff(), null); 
                 
-            // ../org.eclipse.xtext.ui.integration.tests/./src-gen/org/eclipse/xtext/ui/integration/parser/antlr/internal/InternalTestLanguage.g:130:1: (lv_name= RULE_ID )
-            // ../org.eclipse.xtext.ui.integration.tests/./src-gen/org/eclipse/xtext/ui/integration/parser/antlr/internal/InternalTestLanguage.g:132:6: lv_name= RULE_ID
+            // ../org.eclipse.xtext.ui.integration.tests/./src-gen/org/eclipse/xtext/ui/integration/parser/antlr/internal/InternalTestLanguage.g:132:1: (lv_name_1= RULE_ID )
+            // ../org.eclipse.xtext.ui.integration.tests/./src-gen/org/eclipse/xtext/ui/integration/parser/antlr/internal/InternalTestLanguage.g:134:6: lv_name_1= RULE_ID
             {
-            lv_name=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleStuff244); 
-             
-                createLeafNode(grammarAccess.prStuff().ele10LexerRuleCallID(), "name"); 
-                
+            lv_name_1=(Token)input.LT(1);
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleStuff245); 
+
+            		createLeafNode(grammarAccess.prStuff().ele10LexerRuleCallID(), "name"); 
+            	
 
             	        if (current==null) {
             	            current = factory.create("Stuff");
@@ -245,7 +246,7 @@ public class InternalTestLanguageParser extends AbstractInternalAntlrParser {
             	        }
             	        
             	        try {
-            	        	factory.set(current, "name", lv_name, "ID", currentNode);
+            	       		set(current, "name", lv_name_1, "ID", lastConsumedNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -260,6 +261,7 @@ public class InternalTestLanguageParser extends AbstractInternalAntlrParser {
             }
 
              resetLookahead(); 
+                	lastConsumedNode = currentNode;
                 
         }
          
@@ -282,6 +284,6 @@ public class InternalTestLanguageParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_ruleStuff_in_entryRuleStuff179 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleStuff189 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_11_in_ruleStuff223 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleStuff244 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleStuff245 = new BitSet(new long[]{0x0000000000000002L});
 
 }

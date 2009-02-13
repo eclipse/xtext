@@ -79,6 +79,7 @@ ruleModel returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 (	
 	
@@ -86,7 +87,7 @@ ruleModel returns [EObject current=null]
 	    { 
 	        currentNode=createCompositeNode(grammarAccess.prModel().ele0ParserRuleCallElement(), currentNode); 
 	    }
-	    lv_elements=ruleElement 
+	    lv_elements_0=ruleElement 
 	    {
 	        if ($current==null) {
 	            $current = factory.create("Model");
@@ -94,7 +95,7 @@ ruleModel returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.add($current, "elements", lv_elements, "Element", currentNode);
+	       		add($current, "elements", lv_elements_0, "Element", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -122,13 +123,15 @@ ruleElement returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 (((((	
 	
-	    lv_optional='optional' 
+	    lv_optional_0='optional' 
     {
         createLeafNode(grammarAccess.prElement().ele00000KeywordOptional(), "optional"); 
     }
+
  
 	    {
 	        if ($current==null) {
@@ -137,7 +140,7 @@ ruleElement returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "optional", true, "optional", currentNode);
+	       		set($current, "optional", true, "optional", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -149,10 +152,10 @@ ruleElement returns [EObject current=null]
     }
 )(	
 	
-	    lv_name=RULE_ID
-    { 
-    createLeafNode(grammarAccess.prElement().ele0010LexerRuleCallID(), "name"); 
-    }
+	    lv_name_2=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prElement().ele0010LexerRuleCallID(), "name"); 
+	}
  
 	    {
 	        if ($current==null) {
@@ -161,7 +164,7 @@ ruleElement returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "name", lv_name, "ID", currentNode);
+	       		set($current, "name", lv_name_2, "ID", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -169,10 +172,10 @@ ruleElement returns [EObject current=null]
 	
 ))(	
 	
-	    lv_descriptions=RULE_STRING
-    { 
-    createLeafNode(grammarAccess.prElement().ele010LexerRuleCallSTRING(), "descriptions"); 
-    }
+	    lv_descriptions_3=	RULE_STRING
+	{
+		createLeafNode(grammarAccess.prElement().ele010LexerRuleCallSTRING(), "descriptions"); 
+	}
  
 	    {
 	        if ($current==null) {
@@ -181,7 +184,7 @@ ruleElement returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.add($current, "descriptions", lv_descriptions, "STRING", currentNode);
+	       		add($current, "descriptions", lv_descriptions_3, "STRING", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }

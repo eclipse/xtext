@@ -79,14 +79,15 @@ ruleSequence returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 (
     { 
         currentNode=createCompositeNode(grammarAccess.prSequence().ele0ParserRuleCallAddition(), currentNode); 
     }
-    this_Addition=ruleAddition
+    this_Addition_0=ruleAddition
     { 
-        $current = $this_Addition.current; 
+        $current = $this_Addition_0.current; 
         currentNode = currentNode.getParent();
     }
 ((
@@ -111,7 +112,7 @@ ruleSequence returns [EObject current=null]
 	    { 
 	        currentNode=createCompositeNode(grammarAccess.prSequence().ele110ParserRuleCallAddition(), currentNode); 
 	    }
-	    lv_expressions=ruleAddition 
+	    lv_expressions_2=ruleAddition 
 	    {
 	        if ($current==null) {
 	            $current = factory.create("Sequence");
@@ -119,7 +120,7 @@ ruleSequence returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.add($current, "expressions", lv_expressions, "Addition", currentNode);
+	       		add($current, "expressions", lv_expressions_2, "Addition", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -147,14 +148,15 @@ ruleAddition returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 (
     { 
         currentNode=createCompositeNode(grammarAccess.prAddition().ele0ParserRuleCallMultiplication(), currentNode); 
     }
-    this_Multiplication=ruleMultiplication
+    this_Multiplication_0=ruleMultiplication
     { 
-        $current = $this_Multiplication.current; 
+        $current = $this_Multiplication_0.current; 
         currentNode = currentNode.getParent();
     }
 (((
@@ -175,16 +177,19 @@ ruleAddition returns [EObject current=null]
     }
 )(	
 	
-	    lv_operator=('+' 
+	    lv_operator_2=('+' 
     {
         createLeafNode(grammarAccess.prAddition().ele10100KeywordPlusSign(), "operator"); 
     }
+
 
     |'-' 
     {
         createLeafNode(grammarAccess.prAddition().ele10101KeywordHyphenMinus(), "operator"); 
     }
-) 
+
+)
+ 
 	    {
 	        if ($current==null) {
 	            $current = factory.create("Expression");
@@ -192,7 +197,7 @@ ruleAddition returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "operator", input.LT(-1), null, currentNode);
+	       		set($current, "operator", /* lv_operator_2 */ input.LT(-1), null, lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -204,7 +209,7 @@ ruleAddition returns [EObject current=null]
 	    { 
 	        currentNode=createCompositeNode(grammarAccess.prAddition().ele110ParserRuleCallMultiplication(), currentNode); 
 	    }
-	    lv_values=ruleMultiplication 
+	    lv_values_3=ruleMultiplication 
 	    {
 	        if ($current==null) {
 	            $current = factory.create("Expression");
@@ -212,7 +217,7 @@ ruleAddition returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.add($current, "values", lv_values, "Multiplication", currentNode);
+	       		add($current, "values", lv_values_3, "Multiplication", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -240,14 +245,15 @@ ruleMultiplication returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 (
     { 
         currentNode=createCompositeNode(grammarAccess.prMultiplication().ele0ParserRuleCallTerm(), currentNode); 
     }
-    this_Term=ruleTerm
+    this_Term_0=ruleTerm
     { 
-        $current = $this_Term.current; 
+        $current = $this_Term_0.current; 
         currentNode = currentNode.getParent();
     }
 (((
@@ -268,16 +274,19 @@ ruleMultiplication returns [EObject current=null]
     }
 )(	
 	
-	    lv_operator=('*' 
+	    lv_operator_2=('*' 
     {
         createLeafNode(grammarAccess.prMultiplication().ele10100KeywordAsterisk(), "operator"); 
     }
+
 
     |'/' 
     {
         createLeafNode(grammarAccess.prMultiplication().ele10101KeywordSolidus(), "operator"); 
     }
-) 
+
+)
+ 
 	    {
 	        if ($current==null) {
 	            $current = factory.create("Expression");
@@ -285,7 +294,7 @@ ruleMultiplication returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "operator", input.LT(-1), null, currentNode);
+	       		set($current, "operator", /* lv_operator_2 */ input.LT(-1), null, lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -297,7 +306,7 @@ ruleMultiplication returns [EObject current=null]
 	    { 
 	        currentNode=createCompositeNode(grammarAccess.prMultiplication().ele110ParserRuleCallTerm(), currentNode); 
 	    }
-	    lv_values=ruleTerm 
+	    lv_values_3=ruleTerm 
 	    {
 	        if ($current==null) {
 	            $current = factory.create("Expression");
@@ -305,7 +314,7 @@ ruleMultiplication returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.add($current, "values", lv_values, "Term", currentNode);
+	       		add($current, "values", lv_values_3, "Term", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -333,14 +342,15 @@ ruleTerm returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 (
     { 
         currentNode=createCompositeNode(grammarAccess.prTerm().ele0ParserRuleCallAtom(), currentNode); 
     }
-    this_Atom=ruleAtom
+    this_Atom_0=ruleAtom
     { 
-        $current = $this_Atom.current; 
+        $current = $this_Atom_0.current; 
         currentNode = currentNode.getParent();
     }
 
@@ -348,9 +358,9 @@ ruleTerm returns [EObject current=null]
     { 
         currentNode=createCompositeNode(grammarAccess.prTerm().ele1ParserRuleCallParens(), currentNode); 
     }
-    this_Parens=ruleParens
+    this_Parens_1=ruleParens
     { 
-        $current = $this_Parens.current; 
+        $current = $this_Parens_1.current; 
         currentNode = currentNode.getParent();
     }
 );
@@ -374,13 +384,14 @@ ruleAtom returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 (	
 	
-	    lv_name=RULE_ID
-    { 
-    createLeafNode(grammarAccess.prAtom().ele0LexerRuleCallID(), "name"); 
-    }
+	    lv_name_0=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prAtom().ele0LexerRuleCallID(), "name"); 
+	}
  
 	    {
 	        if ($current==null) {
@@ -389,7 +400,7 @@ ruleAtom returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "name", lv_name, "ID", currentNode);
+	       		set($current, "name", lv_name_0, "ID", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -416,6 +427,7 @@ ruleParens returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 (('(' 
     {
@@ -425,9 +437,9 @@ ruleParens returns [EObject current=null]
     { 
         currentNode=createCompositeNode(grammarAccess.prParens().ele01ParserRuleCallAddition(), currentNode); 
     }
-    this_Addition=ruleAddition
+    this_Addition_1=ruleAddition
     { 
-        $current = $this_Addition.current; 
+        $current = $this_Addition_1.current; 
         currentNode = currentNode.getParent();
     }
 )')' 

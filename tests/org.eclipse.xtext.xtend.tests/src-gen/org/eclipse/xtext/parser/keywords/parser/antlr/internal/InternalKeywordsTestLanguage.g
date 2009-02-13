@@ -79,13 +79,15 @@ ruleModel returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 ((((	
 	
-	    lv_first='foo\\bar' 
+	    lv_first_0='foo\\bar' 
     {
         createLeafNode(grammarAccess.prModel().ele0000KeywordFooBar(), "first"); 
     }
+
  
 	    {
 	        if ($current==null) {
@@ -94,7 +96,7 @@ ruleModel returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "first", true, "foo\\bar", currentNode);
+	       		set($current, "first", true, "foo\\bar", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -103,10 +105,11 @@ ruleModel returns [EObject current=null]
 )
     |(	
 	
-	    lv_second='foo\\' 
+	    lv_second_1='foo\\' 
     {
         createLeafNode(grammarAccess.prModel().ele0010KeywordFoo(), "second"); 
     }
+
  
 	    {
 	        if ($current==null) {
@@ -115,7 +118,7 @@ ruleModel returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "second", true, "foo\\", currentNode);
+	       		set($current, "second", true, "foo\\", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -124,10 +127,11 @@ ruleModel returns [EObject current=null]
 ))
     |(	
 	
-	    lv_third='\\bar' 
+	    lv_third_2='\\bar' 
     {
         createLeafNode(grammarAccess.prModel().ele010KeywordBar(), "third"); 
     }
+
  
 	    {
 	        if ($current==null) {
@@ -136,7 +140,7 @@ ruleModel returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "third", true, "\\bar", currentNode);
+	       		set($current, "third", true, "\\bar", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -145,10 +149,11 @@ ruleModel returns [EObject current=null]
 ))
     |(	
 	
-	    lv_forth='\\' 
+	    lv_forth_3='\\' 
     {
         createLeafNode(grammarAccess.prModel().ele10KeywordReverseSolidus(), "forth"); 
     }
+
  
 	    {
 	        if ($current==null) {
@@ -157,7 +162,7 @@ ruleModel returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "forth", true, "\\", currentNode);
+	       		set($current, "forth", true, "\\", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }

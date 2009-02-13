@@ -79,14 +79,15 @@ ruleModel returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 ((((
     { 
         currentNode=createCompositeNode(grammarAccess.prModel().ele0000ParserRuleCallWithoutHiddens(), currentNode); 
     }
-    this_WithoutHiddens=ruleWithoutHiddens
+    this_WithoutHiddens_0=ruleWithoutHiddens
     { 
-        $current = $this_WithoutHiddens.current; 
+        $current = $this_WithoutHiddens_0.current; 
         currentNode = currentNode.getParent();
     }
 
@@ -94,9 +95,9 @@ ruleModel returns [EObject current=null]
     { 
         currentNode=createCompositeNode(grammarAccess.prModel().ele0001ParserRuleCallWithHiddens(), currentNode); 
     }
-    this_WithHiddens=ruleWithHiddens
+    this_WithHiddens_1=ruleWithHiddens
     { 
-        $current = $this_WithHiddens.current; 
+        $current = $this_WithHiddens_1.current; 
         currentNode = currentNode.getParent();
     }
 )
@@ -104,9 +105,9 @@ ruleModel returns [EObject current=null]
     { 
         currentNode=createCompositeNode(grammarAccess.prModel().ele001ParserRuleCallOverridingHiddens(), currentNode); 
     }
-    this_OverridingHiddens=ruleOverridingHiddens
+    this_OverridingHiddens_2=ruleOverridingHiddens
     { 
-        $current = $this_OverridingHiddens.current; 
+        $current = $this_OverridingHiddens_2.current; 
         currentNode = currentNode.getParent();
     }
 )
@@ -114,9 +115,9 @@ ruleModel returns [EObject current=null]
     { 
         currentNode=createCompositeNode(grammarAccess.prModel().ele01ParserRuleCallInheritingHiddens(), currentNode); 
     }
-    this_InheritingHiddens=ruleInheritingHiddens
+    this_InheritingHiddens_3=ruleInheritingHiddens
     { 
-        $current = $this_InheritingHiddens.current; 
+        $current = $this_InheritingHiddens_3.current; 
         currentNode = currentNode.getParent();
     }
 )
@@ -124,9 +125,9 @@ ruleModel returns [EObject current=null]
     { 
         currentNode=createCompositeNode(grammarAccess.prModel().ele1ParserRuleCallDatatypeHiddens(), currentNode); 
     }
-    this_DatatypeHiddens=ruleDatatypeHiddens
+    this_DatatypeHiddens_4=ruleDatatypeHiddens
     { 
-        $current = $this_DatatypeHiddens.current; 
+        $current = $this_DatatypeHiddens_4.current; 
         currentNode = currentNode.getParent();
     }
 );
@@ -150,6 +151,7 @@ ruleWithoutHiddens returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 (((('without' 
     {
@@ -157,10 +159,9 @@ ruleWithoutHiddens returns [EObject current=null]
     }
 (	
 	
-	    lv_spaces=RULE_WS
-    { 
-    createLeafNode(grammarAccess.prWithoutHiddens().ele00010ParserRuleCallWS(), "spaces"); 
-    }
+	    lv_spaces_1=RULE_WS	{
+		createLeafNode(grammarAccess.prWithoutHiddens().ele00010ParserRuleCallWS(), "spaces"); 
+	}
  
 	    {
 	        if ($current==null) {
@@ -169,7 +170,7 @@ ruleWithoutHiddens returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.add($current, "spaces", lv_spaces, "WS", currentNode);
+	       		add($current, "spaces", lv_spaces_1, "WS", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -181,10 +182,9 @@ ruleWithoutHiddens returns [EObject current=null]
     }
 )(	
 	
-	    lv_spaces=RULE_WS
-    { 
-    createLeafNode(grammarAccess.prWithoutHiddens().ele010ParserRuleCallWS(), "spaces"); 
-    }
+	    lv_spaces_3=RULE_WS	{
+		createLeafNode(grammarAccess.prWithoutHiddens().ele010ParserRuleCallWS(), "spaces"); 
+	}
  
 	    {
 	        if ($current==null) {
@@ -193,7 +193,7 @@ ruleWithoutHiddens returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.add($current, "spaces", lv_spaces, "WS", currentNode);
+	       		add($current, "spaces", lv_spaces_3, "WS", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -201,10 +201,11 @@ ruleWithoutHiddens returns [EObject current=null]
 	
 )?)(	
 	
-	    lv_valid=';' 
+	    lv_valid_4=';' 
     {
         createLeafNode(grammarAccess.prWithoutHiddens().ele10KeywordSemicolon(), "valid"); 
     }
+
  
 	    {
 	        if ($current==null) {
@@ -213,7 +214,7 @@ ruleWithoutHiddens returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "valid", true, ";", currentNode);
+	       		set($current, "valid", true, ";", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -241,6 +242,7 @@ ruleWithHiddens returns [EObject current=null]
 		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
 		myHiddenTokenState.restore();
     }:
 (('with' 
@@ -253,10 +255,11 @@ ruleWithHiddens returns [EObject current=null]
     }
 )(	
 	
-	    lv_valid=';' 
+	    lv_valid_2=';' 
     {
         createLeafNode(grammarAccess.prWithHiddens().ele10KeywordSemicolon(), "valid"); 
     }
+
  
 	    {
 	        if ($current==null) {
@@ -265,7 +268,7 @@ ruleWithHiddens returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "valid", true, ";", currentNode);
+	       		set($current, "valid", true, ";", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -293,6 +296,7 @@ ruleOverridingHiddens returns [EObject current=null]
 		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
 		myHiddenTokenState.restore();
     }:
 ((((('overriding' 
@@ -313,7 +317,7 @@ ruleOverridingHiddens returns [EObject current=null]
 	    { 
 	        currentNode=createCompositeNode(grammarAccess.prOverridingHiddens().ele0010ParserRuleCallOverridingHiddensCall(), currentNode); 
 	    }
-	    lv_called=ruleOverridingHiddensCall 
+	    lv_called_3=ruleOverridingHiddensCall 
 	    {
 	        if ($current==null) {
 	            $current = factory.create("OverridingHiddens");
@@ -321,7 +325,7 @@ ruleOverridingHiddens returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "called", lv_called, "OverridingHiddensCall", currentNode);
+	       		set($current, "called", lv_called_3, "OverridingHiddensCall", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -334,10 +338,11 @@ ruleOverridingHiddens returns [EObject current=null]
     }
 )(	
 	
-	    lv_valid=';' 
+	    lv_valid_5=';' 
     {
         createLeafNode(grammarAccess.prOverridingHiddens().ele10KeywordSemicolon(), "valid"); 
     }
+
  
 	    {
 	        if ($current==null) {
@@ -346,7 +351,7 @@ ruleOverridingHiddens returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "valid", true, ";", currentNode);
+	       		set($current, "valid", true, ";", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -374,6 +379,7 @@ ruleOverridingHiddensCall returns [EObject current=null]
 		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
 		myHiddenTokenState.restore();
     }:
 (('call' 
@@ -382,10 +388,9 @@ ruleOverridingHiddensCall returns [EObject current=null]
     }
 (	
 	
-	    lv_spaces=RULE_WS
-    { 
-    createLeafNode(grammarAccess.prOverridingHiddensCall().ele010ParserRuleCallWS(), "spaces"); 
-    }
+	    lv_spaces_1=RULE_WS	{
+		createLeafNode(grammarAccess.prOverridingHiddensCall().ele010ParserRuleCallWS(), "spaces"); 
+	}
  
 	    {
 	        if ($current==null) {
@@ -394,7 +399,7 @@ ruleOverridingHiddensCall returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.add($current, "spaces", lv_spaces, "WS", currentNode);
+	       		add($current, "spaces", lv_spaces_1, "WS", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -402,10 +407,11 @@ ruleOverridingHiddensCall returns [EObject current=null]
 	
 )?)(	
 	
-	    lv_valid=';' 
+	    lv_valid_2=';' 
     {
         createLeafNode(grammarAccess.prOverridingHiddensCall().ele10KeywordSemicolon(), "valid"); 
     }
+
  
 	    {
 	        if ($current==null) {
@@ -414,7 +420,7 @@ ruleOverridingHiddensCall returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "valid", true, ";", currentNode);
+	       		set($current, "valid", true, ";", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -442,6 +448,7 @@ ruleInheritingHiddens returns [EObject current=null]
 		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
 		myHiddenTokenState.restore();
     }:
 ((((('inheriting' 
@@ -462,7 +469,7 @@ ruleInheritingHiddens returns [EObject current=null]
 	    { 
 	        currentNode=createCompositeNode(grammarAccess.prInheritingHiddens().ele00100ParserRuleCallInheritingHiddensCall(), currentNode); 
 	    }
-	    lv_called=ruleInheritingHiddensCall 
+	    lv_called_3=ruleInheritingHiddensCall 
 	    {
 	        if ($current==null) {
 	            $current = factory.create("InheritingHiddens");
@@ -470,7 +477,7 @@ ruleInheritingHiddens returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "called", lv_called, "InheritingHiddensCall", currentNode);
+	       		set($current, "called", lv_called_3, "InheritingHiddensCall", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -484,7 +491,7 @@ ruleInheritingHiddens returns [EObject current=null]
 	    { 
 	        currentNode=createCompositeNode(grammarAccess.prInheritingHiddens().ele00110ParserRuleCallHidingHiddens(), currentNode); 
 	    }
-	    lv_hidingCalled=ruleHidingHiddens 
+	    lv_hidingCalled_4=ruleHidingHiddens 
 	    {
 	        if ($current==null) {
 	            $current = factory.create("InheritingHiddens");
@@ -492,7 +499,7 @@ ruleInheritingHiddens returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "hidingCalled", lv_hidingCalled, "HidingHiddens", currentNode);
+	       		set($current, "hidingCalled", lv_hidingCalled_4, "HidingHiddens", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -505,10 +512,11 @@ ruleInheritingHiddens returns [EObject current=null]
     }
 )(	
 	
-	    lv_valid=';' 
+	    lv_valid_6=';' 
     {
         createLeafNode(grammarAccess.prInheritingHiddens().ele10KeywordSemicolon(), "valid"); 
     }
+
  
 	    {
 	        if ($current==null) {
@@ -517,7 +525,7 @@ ruleInheritingHiddens returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "valid", true, ";", currentNode);
+	       		set($current, "valid", true, ";", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -544,6 +552,7 @@ ruleDatatypeHiddens returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 ('datatype' 
     {
@@ -555,7 +564,7 @@ ruleDatatypeHiddens returns [EObject current=null]
 	    { 
 	        currentNode=createCompositeNode(grammarAccess.prDatatypeHiddens().ele10ParserRuleCallDatatypeRule(), currentNode); 
 	    }
-	    lv_valid=ruleDatatypeRule 
+	    lv_valid_1=ruleDatatypeRule 
 	    {
 	        if ($current==null) {
 	            $current = factory.create("DatatypeHiddens");
@@ -563,7 +572,7 @@ ruleDatatypeHiddens returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "valid", true, "DatatypeRule", currentNode);
+	       		set($current, "valid", true, "DatatypeRule", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -592,6 +601,8 @@ ruleDatatypeRule returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleTo
 		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
     }
     @after { resetLookahead(); 
+	    lastConsumedNode = currentNode;
+	    lastConsumedDatatypeToken = $current;
 		myHiddenTokenState.restore();
     }:
 (
@@ -629,6 +640,7 @@ ruleHidingHiddens returns [EObject current=null]
 		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
 		myHiddenTokenState.restore();
     }:
 (('hiding' 
@@ -637,10 +649,9 @@ ruleHidingHiddens returns [EObject current=null]
     }
 (	
 	
-	    lv_space=RULE_WS
-    { 
-    createLeafNode(grammarAccess.prHidingHiddens().ele010ParserRuleCallWS(), "space"); 
-    }
+	    lv_space_1=RULE_WS	{
+		createLeafNode(grammarAccess.prHidingHiddens().ele010ParserRuleCallWS(), "space"); 
+	}
  
 	    {
 	        if ($current==null) {
@@ -649,7 +660,7 @@ ruleHidingHiddens returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "space", lv_space, "WS", currentNode);
+	       		set($current, "space", lv_space_1, "WS", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -661,7 +672,7 @@ ruleHidingHiddens returns [EObject current=null]
 	    { 
 	        currentNode=createCompositeNode(grammarAccess.prHidingHiddens().ele10ParserRuleCallInheritingHiddensCall(), currentNode); 
 	    }
-	    lv_called=ruleInheritingHiddensCall 
+	    lv_called_2=ruleInheritingHiddensCall 
 	    {
 	        if ($current==null) {
 	            $current = factory.create("HidingHiddens");
@@ -669,7 +680,7 @@ ruleHidingHiddens returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "called", lv_called, "InheritingHiddensCall", currentNode);
+	       		set($current, "called", lv_called_2, "InheritingHiddensCall", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -697,6 +708,7 @@ ruleInheritingHiddensCall returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 ('call' 
     {
@@ -704,10 +716,11 @@ ruleInheritingHiddensCall returns [EObject current=null]
     }
 (	
 	
-	    lv_valid=';' 
+	    lv_valid_1=';' 
     {
         createLeafNode(grammarAccess.prInheritingHiddensCall().ele10KeywordSemicolon(), "valid"); 
     }
+
  
 	    {
 	        if ($current==null) {
@@ -716,7 +729,7 @@ ruleInheritingHiddensCall returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "valid", true, ";", currentNode);
+	       		set($current, "valid", true, ";", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }

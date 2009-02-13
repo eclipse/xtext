@@ -1,19 +1,262 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtext.valueconverter;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.conversion.ValueConverterException;
+import org.eclipse.xtext.parser.IParser;
+import org.eclipse.xtext.parser.ParserTestHelper;
+import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
+import org.eclipse.xtext.valueconverter.Bug250313RuntimeModule.Converters;
 
-@SuppressWarnings("unused")
-public class Bug250313 extends AbstractGeneratorTest {
+import com.google.inject.Binder;
+import com.google.inject.Guice;
+import com.google.inject.Inject;
+import com.google.inject.Injector;
+
+public abstract class Bug250313 extends AbstractGeneratorTest {
+
+	private ParserTestHelper helper;
+	private AbstractNode node;
+	private String lexerRule;
+	private int convertCallCount;
+	private String string;
+
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		Bug250313StandaloneSetup.doSetup();
-		with(Bug250313StandaloneSetup.class);
+		with(new Bug250313StandaloneSetup() {
+			@Override
+			public Injector createInjector() {
+				return Guice.createInjector(new MyBug250313RuntimeModule(Bug250313.this));
+			}
+		});
+		helper = new ParserTestHelper(getResourceFactory(), getParserUnderTest());
 	}
-	public void testCheckValueConversion() throws Exception {
-		//TODO fix bug 250131
-//		EObject model = getModel("#2 'str'");
-//		assertWithXtend("'str'", "this.ref2", model);
+
+
+
+	@Override
+	protected void tearDown() throws Exception {
+		string = null;
+		node = null;
+		lexerRule = null;
+		convertCallCount = 0;
+		super.tearDown();
+	}
+
+
+
+	public static class MyBug250313RuntimeModule extends Bug250313RuntimeModule {
+
+		private final Bug250313 test;
+
+		public MyBug250313RuntimeModule(Bug250313 test) {
+			this.test = test;
+		}
+
+		@Override
+		public void configure(Binder binder) {
+			super.configure(binder);
+			binder.bind(Bug250313.class).toInstance(test);
+		}
+
+		@Override
+		public Class<? extends IValueConverterService> bindIValueConverterService() {
+			return MyConverterService.class;
+		}
+
+	}
+
+	public static class MyConverterService implements IValueConverterService {
+
+		@Inject
+		private Converters delegate;
+
+		@Inject
+		private Bug250313 test;
+
+		public String toString(Object value, String lexerRule) {
+			return delegate.toString(value, lexerRule);
+		}
+
+		public Object toValue(String string, String lexerRule, AbstractNode node) throws ValueConverterException {
+			test.toValueCalled(string, lexerRule, node);
+			return delegate.toValue(string, lexerRule, node);
+		}
+
+	}
+
+	protected abstract IParser getParserUnderTest();
+
+	public void toValueCalled(String string, String lexerRule, AbstractNode node) {
+		this.string = string;
+		this.node = node;
+		this.lexerRule = lexerRule;
+		this.convertCallCount++;
+	}
+
+	@Override
+	public EObject getModel(String model) throws Exception {
+		return helper.getResourceFromString(model).getParseResult().getRootASTElement();
+	}
+
+	public void testSTRINGConversion_01() throws Exception {
+		EObject model = getModel("# 'str'");
+		assertWithXtend("'str'", "this.value", model);
+		assertNotNull(lexerRule);
+		assertEquals("STRING", lexerRule);
+		assertTrue(node instanceof LeafNode);
+		assertEquals("'str'", string);
+		assertEquals(1, convertCallCount);
+	}
+
+	public void testSTRINGConversion_02() throws Exception {
+		EObject model = getModel("'str'");
+		assertWithXtend("'str'", "this.value", model);
+		assertEquals("STRING", lexerRule);
+		assertTrue(node instanceof LeafNode);
+		assertEquals("'str'", string);
+		assertEquals(1, convertCallCount);
+	}
+
+	public void testSTRINGConversion_03() throws Exception {
+		EObject model = getModel("! 'str'");
+		assertWithXtend("'str'", "this.value", model);
+		assertEquals("STRING", lexerRule);
+		assertTrue(node instanceof LeafNode);
+		assertEquals("'str'", string);
+		assertEquals(1, convertCallCount);
+	}
+
+	public void testIDConversion_01() throws Exception {
+		EObject model = getModel("# str");
+		assertWithXtend("'str'", "this.value", model);
+		assertEquals("ID", lexerRule);
+		assertTrue(node instanceof LeafNode);
+		assertEquals("str", string);
+		assertEquals(1, convertCallCount);
+	}
+
+	public void testIDConversion_02() throws Exception {
+		EObject model = getModel("# ^str");
+		assertWithXtend("'str'", "this.value", model);
+		assertEquals("ID", lexerRule);
+		assertTrue(node instanceof LeafNode);
+		assertEquals("^str", string);
+		assertEquals(1, convertCallCount);
+	}
+
+	public void testIDConversion_03() throws Exception {
+		EObject model = getModel("str");
+		assertWithXtend("'str'", "this.value", model);
+		assertEquals("ID", lexerRule);
+		assertTrue(node instanceof LeafNode);
+		assertEquals("str", string);
+		assertEquals(1, convertCallCount);
+	}
+
+	public void testIDConversion_04() throws Exception {
+		EObject model = getModel("^str");
+		assertWithXtend("'str'", "this.value", model);
+		assertEquals("ID", lexerRule);
+		assertTrue(node instanceof LeafNode);
+		assertEquals("^str", string);
+		assertEquals(1, convertCallCount);
+	}
+
+	public void testDatatypeConversion_01() throws Exception {
+		EObject model = getModel("# >> foo - bar");
+		assertWithXtend("'str'", "this.value", model);
+		assertEquals("Datatype", lexerRule);
+		assertTrue(node instanceof CompositeNode);
+		assertEquals(8, ((CompositeNode)node).getChildren().size());
+		// XXX fixme
+		assertEquals(">> foo - bar", string);
+		assertEquals(1, convertCallCount);
+	}
+
+	public void testDatatypeConversion_02() throws Exception {
+		EObject model = getModel(">> foo - bar");
+		assertWithXtend("'str'", "this.value", model);
+		assertEquals("Datatype", lexerRule);
+		assertTrue(node instanceof CompositeNode);
+		assertEquals(7, ((CompositeNode)node).getChildren().size());
+		// XXX fixme
+		assertEquals(">> foo - bar", string);
+		assertEquals(1, convertCallCount);
+	}
+
+	public void testDatatypeConversion_03() throws Exception {
+		EObject model = getModel("$ >> foo - bar");
+		assertWithXtend("'str'", "this.value", model);
+		assertEquals("Datatype", lexerRule);
+		assertTrue(node instanceof CompositeNode);
+		assertEquals(8, ((CompositeNode)node).getChildren().size());
+		assertEquals(">> foo - bar", string);
+		assertEquals(1, convertCallCount);
+	}
+
+	public void testKeywordConversion_01() throws Exception {
+		EObject model = getModel("# mykeyword1");
+		assertWithXtend("'mykeyword1'", "this.value", model);
+		// XXX value converter is not called for keywords?
+		// if this is a bug, all assertions 'assertEquals(1, convertCallCount)' have to be increased
+		assertEquals(0, convertCallCount);
+	}
+
+	public void testKeywordConversion_02() throws Exception {
+		EObject model = getModel("mykeyword1");
+		assertWithXtend("'mykeyword1'", "this.value", model);
+		assertEquals(0, convertCallCount);
+	}
+
+	public void testChild1_01() throws Exception {
+		// tests only, if crossrefs in alternatives work
+		EObject model = getModel("content str ref 'str'");
+		assertWithXtend("bug250313::Child1", "this.ref.metaType", model);
+		assertWithXtend("bug250313::Child1", "this.children.metaType", model);
+		assertWithXtend("'str'", "this.ref.name", model);
+	}
+
+	public void testChild2_01() throws Exception {
+		// tests only, if crossrefs in alternatives work
+		EObject model = getModel("content 'str' ref str");
+		assertWithXtend("bug250313::Child2", "this.ref.metaType", model);
+		assertWithXtend("bug250313::Child2", "this.children.metaType", model);
+		assertWithXtend("'str'", "this.ref.name", model);
+	}
+
+	public static class Antlr extends Bug250313 {
+
+		@Override
+		protected IParser getParserUnderTest() {
+			return getAntlrParser();
+		}
+
+	}
+
+	public static class Packrat extends Bug250313 {
+
+		@Override
+		protected IParser getParserUnderTest() {
+			return getAntlrParser();
+		}
+
+		// XXX fixme
+//		@Override
+//		protected IParser getParserUnderTest() {
+//			return getPackratParser();
+//		}
+
 	}
 }

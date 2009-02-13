@@ -79,6 +79,7 @@ ruleModel returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 (	
 	
@@ -86,7 +87,7 @@ ruleModel returns [EObject current=null]
 	    { 
 	        currentNode=createCompositeNode(grammarAccess.prModel().ele0ParserRuleCallElement(), currentNode); 
 	    }
-	    lv_children=ruleElement 
+	    lv_children_0=ruleElement 
 	    {
 	        if ($current==null) {
 	            $current = factory.create("Model");
@@ -94,7 +95,7 @@ ruleModel returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.add($current, "children", lv_children, "Element", currentNode);
+	       		add($current, "children", lv_children_0, "Element", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -122,13 +123,14 @@ ruleElement returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 ((	
 	
-	    lv_name=RULE_ID
-    { 
-    createLeafNode(grammarAccess.prElement().ele00LexerRuleCallID(), "name"); 
-    }
+	    lv_name_0=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prElement().ele00LexerRuleCallID(), "name"); 
+	}
  
 	    {
 	        if ($current==null) {
@@ -137,7 +139,7 @@ ruleElement returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "name", lv_name, "ID", currentNode);
+	       		set($current, "name", lv_name_0, "ID", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -145,10 +147,10 @@ ruleElement returns [EObject current=null]
 	
 )(	
 	
-	    lv_h=RULE_STRING
-    { 
-    createLeafNode(grammarAccess.prElement().ele10LexerRuleCallSTRING(), "h"); 
-    }
+	    lv_h_1=	RULE_STRING
+	{
+		createLeafNode(grammarAccess.prElement().ele10LexerRuleCallSTRING(), "h"); 
+	}
  
 	    {
 	        if ($current==null) {
@@ -157,7 +159,7 @@ ruleElement returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "h", lv_h, "STRING", currentNode);
+	       		set($current, "h", lv_h_1, "STRING", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }

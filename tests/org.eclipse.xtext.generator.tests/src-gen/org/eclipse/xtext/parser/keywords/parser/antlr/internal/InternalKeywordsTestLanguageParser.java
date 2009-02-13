@@ -100,22 +100,22 @@ public class InternalKeywordsTestLanguageParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start ruleModel
-    // ../org.eclipse.xtext.ui.common.tests//../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:78:1: ruleModel returns [EObject current=null] : ( ( ( (lv_first= 'foo\\\\bar' ) | (lv_second= 'foo\\\\' ) ) | (lv_third= '\\\\bar' ) ) | (lv_forth= '\\\\' ) ) ;
+    // ../org.eclipse.xtext.ui.common.tests//../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:78:1: ruleModel returns [EObject current=null] : ( ( ( (lv_first_0= 'foo\\\\bar' ) | (lv_second_1= 'foo\\\\' ) ) | (lv_third_2= '\\\\bar' ) ) | (lv_forth_3= '\\\\' ) ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
-        Token lv_first=null;
-        Token lv_second=null;
-        Token lv_third=null;
-        Token lv_forth=null;
+        Token lv_first_0=null;
+        Token lv_second_1=null;
+        Token lv_third_2=null;
+        Token lv_forth_3=null;
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests//../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:82:6: ( ( ( ( (lv_first= 'foo\\\\bar' ) | (lv_second= 'foo\\\\' ) ) | (lv_third= '\\\\bar' ) ) | (lv_forth= '\\\\' ) ) )
-            // ../org.eclipse.xtext.ui.common.tests//../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:83:1: ( ( ( (lv_first= 'foo\\\\bar' ) | (lv_second= 'foo\\\\' ) ) | (lv_third= '\\\\bar' ) ) | (lv_forth= '\\\\' ) )
+            // ../org.eclipse.xtext.ui.common.tests//../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:83:6: ( ( ( ( (lv_first_0= 'foo\\\\bar' ) | (lv_second_1= 'foo\\\\' ) ) | (lv_third_2= '\\\\bar' ) ) | (lv_forth_3= '\\\\' ) ) )
+            // ../org.eclipse.xtext.ui.common.tests//../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:84:1: ( ( ( (lv_first_0= 'foo\\\\bar' ) | (lv_second_1= 'foo\\\\' ) ) | (lv_third_2= '\\\\bar' ) ) | (lv_forth_3= '\\\\' ) )
             {
-            // ../org.eclipse.xtext.ui.common.tests//../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:83:1: ( ( ( (lv_first= 'foo\\\\bar' ) | (lv_second= 'foo\\\\' ) ) | (lv_third= '\\\\bar' ) ) | (lv_forth= '\\\\' ) )
+            // ../org.eclipse.xtext.ui.common.tests//../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:84:1: ( ( ( (lv_first_0= 'foo\\\\bar' ) | (lv_second_1= 'foo\\\\' ) ) | (lv_third_2= '\\\\bar' ) ) | (lv_forth_3= '\\\\' ) )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -127,15 +127,15 @@ public class InternalKeywordsTestLanguageParser extends AbstractInternalAntlrPar
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("83:1: ( ( ( (lv_first= 'foo\\\\bar' ) | (lv_second= 'foo\\\\' ) ) | (lv_third= '\\\\bar' ) ) | (lv_forth= '\\\\' ) )", 3, 0, input);
+                    new NoViableAltException("84:1: ( ( ( (lv_first_0= 'foo\\\\bar' ) | (lv_second_1= 'foo\\\\' ) ) | (lv_third_2= '\\\\bar' ) ) | (lv_forth_3= '\\\\' ) )", 3, 0, input);
 
                 throw nvae;
             }
             switch (alt3) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.common.tests//../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:83:2: ( ( (lv_first= 'foo\\\\bar' ) | (lv_second= 'foo\\\\' ) ) | (lv_third= '\\\\bar' ) )
+                    // ../org.eclipse.xtext.ui.common.tests//../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:84:2: ( ( (lv_first_0= 'foo\\\\bar' ) | (lv_second_1= 'foo\\\\' ) ) | (lv_third_2= '\\\\bar' ) )
                     {
-                    // ../org.eclipse.xtext.ui.common.tests//../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:83:2: ( ( (lv_first= 'foo\\\\bar' ) | (lv_second= 'foo\\\\' ) ) | (lv_third= '\\\\bar' ) )
+                    // ../org.eclipse.xtext.ui.common.tests//../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:84:2: ( ( (lv_first_0= 'foo\\\\bar' ) | (lv_second_1= 'foo\\\\' ) ) | (lv_third_2= '\\\\bar' ) )
                     int alt2=2;
                     int LA2_0 = input.LA(1);
 
@@ -147,15 +147,15 @@ public class InternalKeywordsTestLanguageParser extends AbstractInternalAntlrPar
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("83:2: ( ( (lv_first= 'foo\\\\bar' ) | (lv_second= 'foo\\\\' ) ) | (lv_third= '\\\\bar' ) )", 2, 0, input);
+                            new NoViableAltException("84:2: ( ( (lv_first_0= 'foo\\\\bar' ) | (lv_second_1= 'foo\\\\' ) ) | (lv_third_2= '\\\\bar' ) )", 2, 0, input);
 
                         throw nvae;
                     }
                     switch (alt2) {
                         case 1 :
-                            // ../org.eclipse.xtext.ui.common.tests//../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:83:3: ( (lv_first= 'foo\\\\bar' ) | (lv_second= 'foo\\\\' ) )
+                            // ../org.eclipse.xtext.ui.common.tests//../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:84:3: ( (lv_first_0= 'foo\\\\bar' ) | (lv_second_1= 'foo\\\\' ) )
                             {
-                            // ../org.eclipse.xtext.ui.common.tests//../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:83:3: ( (lv_first= 'foo\\\\bar' ) | (lv_second= 'foo\\\\' ) )
+                            // ../org.eclipse.xtext.ui.common.tests//../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:84:3: ( (lv_first_0= 'foo\\\\bar' ) | (lv_second_1= 'foo\\\\' ) )
                             int alt1=2;
                             int LA1_0 = input.LA(1);
 
@@ -167,18 +167,18 @@ public class InternalKeywordsTestLanguageParser extends AbstractInternalAntlrPar
                             }
                             else {
                                 NoViableAltException nvae =
-                                    new NoViableAltException("83:3: ( (lv_first= 'foo\\\\bar' ) | (lv_second= 'foo\\\\' ) )", 1, 0, input);
+                                    new NoViableAltException("84:3: ( (lv_first_0= 'foo\\\\bar' ) | (lv_second_1= 'foo\\\\' ) )", 1, 0, input);
 
                                 throw nvae;
                             }
                             switch (alt1) {
                                 case 1 :
-                                    // ../org.eclipse.xtext.ui.common.tests//../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:83:4: (lv_first= 'foo\\\\bar' )
+                                    // ../org.eclipse.xtext.ui.common.tests//../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:84:4: (lv_first_0= 'foo\\\\bar' )
                                     {
-                                    // ../org.eclipse.xtext.ui.common.tests//../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:83:4: (lv_first= 'foo\\\\bar' )
-                                    // ../org.eclipse.xtext.ui.common.tests//../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:85:6: lv_first= 'foo\\\\bar'
+                                    // ../org.eclipse.xtext.ui.common.tests//../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:84:4: (lv_first_0= 'foo\\\\bar' )
+                                    // ../org.eclipse.xtext.ui.common.tests//../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:86:6: lv_first_0= 'foo\\\\bar'
                                     {
-                                    lv_first=(Token)input.LT(1);
+                                    lv_first_0=(Token)input.LT(1);
                                     match(input,11,FOLLOW_11_in_ruleModel130); 
 
                                             createLeafNode(grammarAccess.prModel().ele0000KeywordFooBar(), "first"); 
@@ -190,7 +190,7 @@ public class InternalKeywordsTestLanguageParser extends AbstractInternalAntlrPar
                                     	        }
                                     	        
                                     	        try {
-                                    	        	factory.set(current, "first", true, "foo\\bar", currentNode);
+                                    	       		set(current, "first", true, "foo\\bar", lastConsumedNode);
                                     	        } catch (ValueConverterException vce) {
                                     				handleValueConverterException(vce);
                                     	        }
@@ -202,13 +202,13 @@ public class InternalKeywordsTestLanguageParser extends AbstractInternalAntlrPar
                                     }
                                     break;
                                 case 2 :
-                                    // ../org.eclipse.xtext.ui.common.tests//../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:104:6: (lv_second= 'foo\\\\' )
+                                    // ../org.eclipse.xtext.ui.common.tests//../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:106:6: (lv_second_1= 'foo\\\\' )
                                     {
-                                    // ../org.eclipse.xtext.ui.common.tests//../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:104:6: (lv_second= 'foo\\\\' )
-                                    // ../org.eclipse.xtext.ui.common.tests//../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:106:6: lv_second= 'foo\\\\'
+                                    // ../org.eclipse.xtext.ui.common.tests//../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:106:6: (lv_second_1= 'foo\\\\' )
+                                    // ../org.eclipse.xtext.ui.common.tests//../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:108:6: lv_second_1= 'foo\\\\'
                                     {
-                                    lv_second=(Token)input.LT(1);
-                                    match(input,12,FOLLOW_12_in_ruleModel169); 
+                                    lv_second_1=(Token)input.LT(1);
+                                    match(input,12,FOLLOW_12_in_ruleModel170); 
 
                                             createLeafNode(grammarAccess.prModel().ele0010KeywordFoo(), "second"); 
                                         
@@ -219,7 +219,7 @@ public class InternalKeywordsTestLanguageParser extends AbstractInternalAntlrPar
                                     	        }
                                     	        
                                     	        try {
-                                    	        	factory.set(current, "second", true, "foo\\", currentNode);
+                                    	       		set(current, "second", true, "foo\\", lastConsumedNode);
                                     	        } catch (ValueConverterException vce) {
                                     				handleValueConverterException(vce);
                                     	        }
@@ -237,13 +237,13 @@ public class InternalKeywordsTestLanguageParser extends AbstractInternalAntlrPar
                             }
                             break;
                         case 2 :
-                            // ../org.eclipse.xtext.ui.common.tests//../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:125:6: (lv_third= '\\\\bar' )
+                            // ../org.eclipse.xtext.ui.common.tests//../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:128:6: (lv_third_2= '\\\\bar' )
                             {
-                            // ../org.eclipse.xtext.ui.common.tests//../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:125:6: (lv_third= '\\\\bar' )
-                            // ../org.eclipse.xtext.ui.common.tests//../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:127:6: lv_third= '\\\\bar'
+                            // ../org.eclipse.xtext.ui.common.tests//../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:128:6: (lv_third_2= '\\\\bar' )
+                            // ../org.eclipse.xtext.ui.common.tests//../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:130:6: lv_third_2= '\\\\bar'
                             {
-                            lv_third=(Token)input.LT(1);
-                            match(input,13,FOLLOW_13_in_ruleModel209); 
+                            lv_third_2=(Token)input.LT(1);
+                            match(input,13,FOLLOW_13_in_ruleModel211); 
 
                                     createLeafNode(grammarAccess.prModel().ele010KeywordBar(), "third"); 
                                 
@@ -254,7 +254,7 @@ public class InternalKeywordsTestLanguageParser extends AbstractInternalAntlrPar
                             	        }
                             	        
                             	        try {
-                            	        	factory.set(current, "third", true, "\\bar", currentNode);
+                            	       		set(current, "third", true, "\\bar", lastConsumedNode);
                             	        } catch (ValueConverterException vce) {
                             				handleValueConverterException(vce);
                             	        }
@@ -272,13 +272,13 @@ public class InternalKeywordsTestLanguageParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.common.tests//../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:146:6: (lv_forth= '\\\\' )
+                    // ../org.eclipse.xtext.ui.common.tests//../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:150:6: (lv_forth_3= '\\\\' )
                     {
-                    // ../org.eclipse.xtext.ui.common.tests//../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:146:6: (lv_forth= '\\\\' )
-                    // ../org.eclipse.xtext.ui.common.tests//../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:148:6: lv_forth= '\\\\'
+                    // ../org.eclipse.xtext.ui.common.tests//../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:150:6: (lv_forth_3= '\\\\' )
+                    // ../org.eclipse.xtext.ui.common.tests//../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:152:6: lv_forth_3= '\\\\'
                     {
-                    lv_forth=(Token)input.LT(1);
-                    match(input,14,FOLLOW_14_in_ruleModel249); 
+                    lv_forth_3=(Token)input.LT(1);
+                    match(input,14,FOLLOW_14_in_ruleModel252); 
 
                             createLeafNode(grammarAccess.prModel().ele10KeywordReverseSolidus(), "forth"); 
                         
@@ -289,7 +289,7 @@ public class InternalKeywordsTestLanguageParser extends AbstractInternalAntlrPar
                     	        }
                     	        
                     	        try {
-                    	        	factory.set(current, "forth", true, "\\", currentNode);
+                    	       		set(current, "forth", true, "\\", lastConsumedNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
@@ -307,6 +307,7 @@ public class InternalKeywordsTestLanguageParser extends AbstractInternalAntlrPar
             }
 
              resetLookahead(); 
+                	lastConsumedNode = currentNode;
                 
         }
          
@@ -326,8 +327,8 @@ public class InternalKeywordsTestLanguageParser extends AbstractInternalAntlrPar
     public static final BitSet FOLLOW_ruleModel_in_entryRuleModel72 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleModel82 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_11_in_ruleModel130 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_ruleModel169 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_ruleModel209 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_ruleModel249 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_12_in_ruleModel170 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_13_in_ruleModel211 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_14_in_ruleModel252 = new BitSet(new long[]{0x0000000000000002L});
 
 }

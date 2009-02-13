@@ -79,6 +79,7 @@ ruleEntry returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 (	
 	
@@ -86,7 +87,7 @@ ruleEntry returns [EObject current=null]
 	    { 
 	        currentNode=createCompositeNode(grammarAccess.prEntry().ele0ParserRuleCallAlts(), currentNode); 
 	    }
-	    lv_contents=ruleAlts 
+	    lv_contents_0=ruleAlts 
 	    {
 	        if ($current==null) {
 	            $current = factory.create("Entry");
@@ -94,7 +95,7 @@ ruleEntry returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.add($current, "contents", lv_contents, "Alts", currentNode);
+	       		add($current, "contents", lv_contents_0, "Alts", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -122,14 +123,15 @@ ruleAlts returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 ((
     { 
         currentNode=createCompositeNode(grammarAccess.prAlts().ele00ParserRuleCallLookAhead0(), currentNode); 
     }
-    this_LookAhead0=ruleLookAhead0
+    this_LookAhead0_0=ruleLookAhead0
     { 
-        $current = $this_LookAhead0.current; 
+        $current = $this_LookAhead0_0.current; 
         currentNode = currentNode.getParent();
     }
 
@@ -137,9 +139,9 @@ ruleAlts returns [EObject current=null]
     { 
         currentNode=createCompositeNode(grammarAccess.prAlts().ele01ParserRuleCallLookAhead1(), currentNode); 
     }
-    this_LookAhead1=ruleLookAhead1
+    this_LookAhead1_1=ruleLookAhead1
     { 
-        $current = $this_LookAhead1.current; 
+        $current = $this_LookAhead1_1.current; 
         currentNode = currentNode.getParent();
     }
 )
@@ -147,9 +149,9 @@ ruleAlts returns [EObject current=null]
     { 
         currentNode=createCompositeNode(grammarAccess.prAlts().ele1ParserRuleCallLookAhead3(), currentNode); 
     }
-    this_LookAhead3=ruleLookAhead3
+    this_LookAhead3_2=ruleLookAhead3
     { 
-        $current = $this_LookAhead3.current; 
+        $current = $this_LookAhead3_2.current; 
         currentNode = currentNode.getParent();
     }
 );
@@ -173,6 +175,7 @@ ruleLookAhead0 returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 ('bar' 
     {
@@ -180,10 +183,11 @@ ruleLookAhead0 returns [EObject current=null]
     }
 (	
 	
-	    lv_x='a' 
+	    lv_x_1='a' 
     {
         createLeafNode(grammarAccess.prLookAhead0().ele10KeywordA(), "x"); 
     }
+
  
 	    {
 	        if ($current==null) {
@@ -192,7 +196,7 @@ ruleLookAhead0 returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "x", input.LT(-1), "a", currentNode);
+	       		set($current, "x", /* lv_x_1 */ input.LT(-1), "a", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -219,6 +223,7 @@ ruleLookAhead1 returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 ((('foo' 
     {
@@ -230,7 +235,7 @@ ruleLookAhead1 returns [EObject current=null]
 	    { 
 	        currentNode=createCompositeNode(grammarAccess.prLookAhead1().ele0010ParserRuleCallLookAhead2(), currentNode); 
 	    }
-	    lv_y=ruleLookAhead2 
+	    lv_y_1=ruleLookAhead2 
 	    {
 	        if ($current==null) {
 	            $current = factory.create("LookAhead1");
@@ -238,7 +243,7 @@ ruleLookAhead1 returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "y", lv_y, "LookAhead2", currentNode);
+	       		set($current, "y", lv_y_1, "LookAhead2", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -247,10 +252,11 @@ ruleLookAhead1 returns [EObject current=null]
 	
 ))(	
 	
-	    lv_x='b' 
+	    lv_x_2='b' 
     {
         createLeafNode(grammarAccess.prLookAhead1().ele010KeywordB(), "x"); 
     }
+
  
 	    {
 	        if ($current==null) {
@@ -259,7 +265,7 @@ ruleLookAhead1 returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "x", input.LT(-1), "b", currentNode);
+	       		set($current, "x", /* lv_x_2 */ input.LT(-1), "b", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -267,10 +273,11 @@ ruleLookAhead1 returns [EObject current=null]
 	
 ))(	
 	
-	    lv_x='d' 
+	    lv_x_3='d' 
     {
         createLeafNode(grammarAccess.prLookAhead1().ele10KeywordD(), "x"); 
     }
+
  
 	    {
 	        if ($current==null) {
@@ -279,7 +286,7 @@ ruleLookAhead1 returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "x", input.LT(-1), "d", currentNode);
+	       		set($current, "x", /* lv_x_3 */ input.LT(-1), "d", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -306,13 +313,15 @@ ruleLookAhead2 returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 (((	
 	
-	    lv_z='foo' 
+	    lv_z_0='foo' 
     {
         createLeafNode(grammarAccess.prLookAhead2().ele000KeywordFoo(), "z"); 
     }
+
  
 	    {
 	        if ($current==null) {
@@ -321,7 +330,7 @@ ruleLookAhead2 returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "z", input.LT(-1), "foo", currentNode);
+	       		set($current, "z", /* lv_z_0 */ input.LT(-1), "foo", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -330,10 +339,11 @@ ruleLookAhead2 returns [EObject current=null]
 )
     |(	
 	
-	    lv_z='bar' 
+	    lv_z_1='bar' 
     {
         createLeafNode(grammarAccess.prLookAhead2().ele010KeywordBar(), "z"); 
     }
+
  
 	    {
 	        if ($current==null) {
@@ -342,7 +352,7 @@ ruleLookAhead2 returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "z", input.LT(-1), "bar", currentNode);
+	       		set($current, "z", /* lv_z_1 */ input.LT(-1), "bar", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -373,6 +383,7 @@ ruleLookAhead3 returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 ((('foo' 
     {
@@ -384,10 +395,11 @@ ruleLookAhead3 returns [EObject current=null]
     }
 )(	
 	
-	    lv_x='b' 
+	    lv_x_2='b' 
     {
         createLeafNode(grammarAccess.prLookAhead3().ele010KeywordB(), "x"); 
     }
+
  
 	    {
 	        if ($current==null) {
@@ -396,7 +408,7 @@ ruleLookAhead3 returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "x", input.LT(-1), "b", currentNode);
+	       		set($current, "x", /* lv_x_2 */ input.LT(-1), "b", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -408,7 +420,7 @@ ruleLookAhead3 returns [EObject current=null]
 	    { 
 	        currentNode=createCompositeNode(grammarAccess.prLookAhead3().ele10ParserRuleCallLookAhead4(), currentNode); 
 	    }
-	    lv_z=ruleLookAhead4 
+	    lv_z_3=ruleLookAhead4 
 	    {
 	        if ($current==null) {
 	            $current = factory.create("LookAhead3");
@@ -416,7 +428,7 @@ ruleLookAhead3 returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "z", lv_z, "LookAhead4", currentNode);
+	       		set($current, "z", lv_z_3, "LookAhead4", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -444,13 +456,15 @@ ruleLookAhead4 returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 ((	
 	
-	    lv_x='c' 
+	    lv_x_0='c' 
     {
         createLeafNode(grammarAccess.prLookAhead4().ele00KeywordC(), "x"); 
     }
+
  
 	    {
 	        if ($current==null) {
@@ -459,7 +473,7 @@ ruleLookAhead4 returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "x", input.LT(-1), "c", currentNode);
+	       		set($current, "x", /* lv_x_0 */ input.LT(-1), "c", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -468,10 +482,11 @@ ruleLookAhead4 returns [EObject current=null]
 )
     |(	
 	
-	    lv_x='d' 
+	    lv_x_1='d' 
     {
         createLeafNode(grammarAccess.prLookAhead4().ele10KeywordD(), "x"); 
     }
+
  
 	    {
 	        if ($current==null) {
@@ -480,7 +495,7 @@ ruleLookAhead4 returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "x", input.LT(-1), "d", currentNode);
+	       		set($current, "x", /* lv_x_1 */ input.LT(-1), "d", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }

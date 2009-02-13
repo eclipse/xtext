@@ -100,20 +100,20 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start ruleModel
-    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalOptionalEmptyTestLanguage.g:78:1: ruleModel returns [EObject current=null] : (lv_child= ruleGreeting )? ;
+    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalOptionalEmptyTestLanguage.g:78:1: ruleModel returns [EObject current=null] : (lv_child_0= ruleGreeting )? ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
-        EObject lv_child = null;
+        EObject lv_child_0 = null;
 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalOptionalEmptyTestLanguage.g:82:6: ( (lv_child= ruleGreeting )? )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalOptionalEmptyTestLanguage.g:83:1: (lv_child= ruleGreeting )?
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalOptionalEmptyTestLanguage.g:83:6: ( (lv_child_0= ruleGreeting )? )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalOptionalEmptyTestLanguage.g:84:1: (lv_child_0= ruleGreeting )?
             {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalOptionalEmptyTestLanguage.g:83:1: (lv_child= ruleGreeting )?
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalOptionalEmptyTestLanguage.g:84:1: (lv_child_0= ruleGreeting )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -122,13 +122,13 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalOptionalEmptyTestLanguage.g:86:6: lv_child= ruleGreeting
+                    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalOptionalEmptyTestLanguage.g:87:6: lv_child_0= ruleGreeting
                     {
                      
                     	        currentNode=createCompositeNode(grammarAccess.prModel().ele0ParserRuleCallGreeting(), currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleGreeting_in_ruleModel140);
-                    lv_child=ruleGreeting();
+                    lv_child_0=ruleGreeting();
                     _fsp--;
 
 
@@ -138,7 +138,7 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
                     	        }
                     	        
                     	        try {
-                    	        	factory.set(current, "child", lv_child, "Greeting", currentNode);
+                    	       		set(current, "child", lv_child_0, "Greeting", currentNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
@@ -154,6 +154,7 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
             }
 
              resetLookahead(); 
+                	lastConsumedNode = currentNode;
                 
         }
          
@@ -169,7 +170,7 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start entryRuleGreeting
-    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalOptionalEmptyTestLanguage.g:113:1: entryRuleGreeting returns [EObject current=null] : iv_ruleGreeting= ruleGreeting EOF ;
+    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalOptionalEmptyTestLanguage.g:114:1: entryRuleGreeting returns [EObject current=null] : iv_ruleGreeting= ruleGreeting EOF ;
     public final EObject entryRuleGreeting() throws RecognitionException {
         EObject current = null;
 
@@ -177,8 +178,8 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalOptionalEmptyTestLanguage.g:113:50: (iv_ruleGreeting= ruleGreeting EOF )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalOptionalEmptyTestLanguage.g:114:2: iv_ruleGreeting= ruleGreeting EOF
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalOptionalEmptyTestLanguage.g:114:50: (iv_ruleGreeting= ruleGreeting EOF )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalOptionalEmptyTestLanguage.g:115:2: iv_ruleGreeting= ruleGreeting EOF
             {
              currentNode = createCompositeNode(grammarAccess.prGreeting().getRule(), currentNode); 
             pushFollow(FOLLOW_ruleGreeting_in_entryRuleGreeting179);
@@ -204,33 +205,33 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start ruleGreeting
-    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalOptionalEmptyTestLanguage.g:121:1: ruleGreeting returns [EObject current=null] : ( 'hallo' (lv_name= RULE_ID ) ) ;
+    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalOptionalEmptyTestLanguage.g:122:1: ruleGreeting returns [EObject current=null] : ( 'hallo' (lv_name_1= RULE_ID ) ) ;
     public final EObject ruleGreeting() throws RecognitionException {
         EObject current = null;
 
-        Token lv_name=null;
+        Token lv_name_1=null;
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalOptionalEmptyTestLanguage.g:125:6: ( ( 'hallo' (lv_name= RULE_ID ) ) )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalOptionalEmptyTestLanguage.g:126:1: ( 'hallo' (lv_name= RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalOptionalEmptyTestLanguage.g:127:6: ( ( 'hallo' (lv_name_1= RULE_ID ) ) )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalOptionalEmptyTestLanguage.g:128:1: ( 'hallo' (lv_name_1= RULE_ID ) )
             {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalOptionalEmptyTestLanguage.g:126:1: ( 'hallo' (lv_name= RULE_ID ) )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalOptionalEmptyTestLanguage.g:126:2: 'hallo' (lv_name= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalOptionalEmptyTestLanguage.g:128:1: ( 'hallo' (lv_name_1= RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalOptionalEmptyTestLanguage.g:128:2: 'hallo' (lv_name_1= RULE_ID )
             {
             match(input,11,FOLLOW_11_in_ruleGreeting223); 
 
                     createLeafNode(grammarAccess.prGreeting().ele0KeywordHallo(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalOptionalEmptyTestLanguage.g:130:1: (lv_name= RULE_ID )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalOptionalEmptyTestLanguage.g:132:6: lv_name= RULE_ID
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalOptionalEmptyTestLanguage.g:132:1: (lv_name_1= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalOptionalEmptyTestLanguage.g:134:6: lv_name_1= RULE_ID
             {
-            lv_name=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleGreeting244); 
-             
-                createLeafNode(grammarAccess.prGreeting().ele10LexerRuleCallID(), "name"); 
-                
+            lv_name_1=(Token)input.LT(1);
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleGreeting245); 
+
+            		createLeafNode(grammarAccess.prGreeting().ele10LexerRuleCallID(), "name"); 
+            	
 
             	        if (current==null) {
             	            current = factory.create("Greeting");
@@ -238,7 +239,7 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
             	        }
             	        
             	        try {
-            	        	factory.set(current, "name", lv_name, "ID", currentNode);
+            	       		set(current, "name", lv_name_1, "ID", lastConsumedNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -253,6 +254,7 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
             }
 
              resetLookahead(); 
+                	lastConsumedNode = currentNode;
                 
         }
          
@@ -275,6 +277,6 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
     public static final BitSet FOLLOW_ruleGreeting_in_entryRuleGreeting179 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleGreeting189 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_11_in_ruleGreeting223 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleGreeting244 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleGreeting245 = new BitSet(new long[]{0x0000000000000002L});
 
 }

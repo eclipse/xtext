@@ -79,6 +79,7 @@ ruleStatemachine returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 (((((('events' 
     {
@@ -90,7 +91,7 @@ ruleStatemachine returns [EObject current=null]
 	    { 
 	        currentNode=createCompositeNode(grammarAccess.prStatemachine().ele0000010ParserRuleCallEvent(), currentNode); 
 	    }
-	    lv_events=ruleEvent 
+	    lv_events_1=ruleEvent 
 	    {
 	        if ($current==null) {
 	            $current = factory.create("Statemachine");
@@ -98,7 +99,7 @@ ruleStatemachine returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.add($current, "events", lv_events, "Event", currentNode);
+	       		add($current, "events", lv_events_1, "Event", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -119,7 +120,7 @@ ruleStatemachine returns [EObject current=null]
 	    { 
 	        currentNode=createCompositeNode(grammarAccess.prStatemachine().ele0010ParserRuleCallCommand(), currentNode); 
 	    }
-	    lv_commands=ruleCommand 
+	    lv_commands_4=ruleCommand 
 	    {
 	        if ($current==null) {
 	            $current = factory.create("Statemachine");
@@ -127,7 +128,7 @@ ruleStatemachine returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.add($current, "commands", lv_commands, "Command", currentNode);
+	       		add($current, "commands", lv_commands_4, "Command", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -144,7 +145,7 @@ ruleStatemachine returns [EObject current=null]
 	    { 
 	        currentNode=createCompositeNode(grammarAccess.prStatemachine().ele10ParserRuleCallState(), currentNode); 
 	    }
-	    lv_states=ruleState 
+	    lv_states_6=ruleState 
 	    {
 	        if ($current==null) {
 	            $current = factory.create("Statemachine");
@@ -152,7 +153,7 @@ ruleStatemachine returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.add($current, "states", lv_states, "State", currentNode);
+	       		add($current, "states", lv_states_6, "State", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -180,13 +181,15 @@ ruleEvent returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 (((	
 	
-	    lv_resetting='resetting' 
+	    lv_resetting_0='resetting' 
     {
         createLeafNode(grammarAccess.prEvent().ele000KeywordResetting(), "resetting"); 
     }
+
  
 	    {
 	        if ($current==null) {
@@ -195,7 +198,7 @@ ruleEvent returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "resetting", true, "resetting", currentNode);
+	       		set($current, "resetting", true, "resetting", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -203,10 +206,10 @@ ruleEvent returns [EObject current=null]
 	
 )?(	
 	
-	    lv_name=RULE_ID
-    { 
-    createLeafNode(grammarAccess.prEvent().ele010LexerRuleCallID(), "name"); 
-    }
+	    lv_name_1=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prEvent().ele010LexerRuleCallID(), "name"); 
+	}
  
 	    {
 	        if ($current==null) {
@@ -215,7 +218,7 @@ ruleEvent returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "name", lv_name, "ID", currentNode);
+	       		set($current, "name", lv_name_1, "ID", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -223,10 +226,10 @@ ruleEvent returns [EObject current=null]
 	
 ))(	
 	
-	    lv_code=RULE_ID
-    { 
-    createLeafNode(grammarAccess.prEvent().ele10LexerRuleCallID(), "code"); 
-    }
+	    lv_code_2=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prEvent().ele10LexerRuleCallID(), "code"); 
+	}
  
 	    {
 	        if ($current==null) {
@@ -235,7 +238,7 @@ ruleEvent returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "code", lv_code, "ID", currentNode);
+	       		set($current, "code", lv_code_2, "ID", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -262,13 +265,14 @@ ruleCommand returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 ((	
 	
-	    lv_name=RULE_ID
-    { 
-    createLeafNode(grammarAccess.prCommand().ele00LexerRuleCallID(), "name"); 
-    }
+	    lv_name_0=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prCommand().ele00LexerRuleCallID(), "name"); 
+	}
  
 	    {
 	        if ($current==null) {
@@ -277,7 +281,7 @@ ruleCommand returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "name", lv_name, "ID", currentNode);
+	       		set($current, "name", lv_name_0, "ID", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -285,10 +289,10 @@ ruleCommand returns [EObject current=null]
 	
 )(	
 	
-	    lv_code=RULE_ID
-    { 
-    createLeafNode(grammarAccess.prCommand().ele10LexerRuleCallID(), "code"); 
-    }
+	    lv_code_1=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prCommand().ele10LexerRuleCallID(), "code"); 
+	}
  
 	    {
 	        if ($current==null) {
@@ -297,7 +301,7 @@ ruleCommand returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "code", lv_code, "ID", currentNode);
+	       		set($current, "code", lv_code_1, "ID", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -324,6 +328,7 @@ ruleState returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 (((('state' 
     {
@@ -331,10 +336,10 @@ ruleState returns [EObject current=null]
     }
 (	
 	
-	    lv_name=RULE_ID
-    { 
-    createLeafNode(grammarAccess.prState().ele00010LexerRuleCallID(), "name"); 
-    }
+	    lv_name_1=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prState().ele00010LexerRuleCallID(), "name"); 
+	}
  
 	    {
 	        if ($current==null) {
@@ -343,7 +348,7 @@ ruleState returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "name", lv_name, "ID", currentNode);
+	       		set($current, "name", lv_name_1, "ID", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -366,11 +371,12 @@ ruleState returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
-(
-	RULE_ID    { 
-    createLeafNode(grammarAccess.prState().ele001010CrossReferenceEStringCommand(), "actions"); 
-    }
-) 
+	RULE_ID
+	{
+		createLeafNode(grammarAccess.prState().ele001010CrossReferenceEStringCommand(), "actions"); 
+	}
+
+		// TODO assign feature to currentNode
 	
 )+)'}' 
     {
@@ -382,7 +388,7 @@ ruleState returns [EObject current=null]
 	    { 
 	        currentNode=createCompositeNode(grammarAccess.prState().ele010ParserRuleCallTransition(), currentNode); 
 	    }
-	    lv_transitions=ruleTransition 
+	    lv_transitions_6=ruleTransition 
 	    {
 	        if ($current==null) {
 	            $current = factory.create("State");
@@ -390,7 +396,7 @@ ruleState returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.add($current, "transitions", lv_transitions, "Transition", currentNode);
+	       		add($current, "transitions", lv_transitions_6, "Transition", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -422,6 +428,7 @@ ruleTransition returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 (((	
 	
@@ -432,11 +439,12 @@ ruleTransition returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
-(
-	RULE_ID    { 
-    createLeafNode(grammarAccess.prTransition().ele000CrossReferenceEStringEvent(), "event"); 
-    }
-) 
+	RULE_ID
+	{
+		createLeafNode(grammarAccess.prTransition().ele000CrossReferenceEStringEvent(), "event"); 
+	}
+
+		// TODO assign feature to currentNode
 	
 )'=>' 
     {
@@ -451,11 +459,12 @@ ruleTransition returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
-(
-	RULE_ID    { 
-    createLeafNode(grammarAccess.prTransition().ele10CrossReferenceEStringState(), "state"); 
-    }
-) 
+	RULE_ID
+	{
+		createLeafNode(grammarAccess.prTransition().ele10CrossReferenceEStringState(), "state"); 
+	}
+
+		// TODO assign feature to currentNode
 	
 ));
 

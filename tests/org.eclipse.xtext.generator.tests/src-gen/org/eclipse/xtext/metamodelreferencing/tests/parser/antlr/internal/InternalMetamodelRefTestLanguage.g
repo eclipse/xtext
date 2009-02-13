@@ -79,13 +79,14 @@ ruleFoo returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 ((	
 	
-	    lv_name=RULE_ID
-    { 
-    createLeafNode(grammarAccess.prFoo().ele00LexerRuleCallID(), "name"); 
-    }
+	    lv_name_0=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prFoo().ele00LexerRuleCallID(), "name"); 
+	}
  
 	    {
 	        if ($current==null) {
@@ -94,7 +95,7 @@ ruleFoo returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.set($current, "name", lv_name, "ID", currentNode);
+	       		set($current, "name", lv_name_0, "ID", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -106,7 +107,7 @@ ruleFoo returns [EObject current=null]
 	    { 
 	        currentNode=createCompositeNode(grammarAccess.prFoo().ele10ParserRuleCallNameRef(), currentNode); 
 	    }
-	    lv_nameRefs=ruleNameRef 
+	    lv_nameRefs_1=ruleNameRef 
 	    {
 	        if ($current==null) {
 	            $current = factory.create("Foo");
@@ -114,7 +115,7 @@ ruleFoo returns [EObject current=null]
 	        }
 	        
 	        try {
-	        	factory.add($current, "nameRefs", lv_nameRefs, "NameRef", currentNode);
+	       		add($current, "nameRefs", lv_nameRefs_1, "NameRef", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -142,6 +143,7 @@ ruleNameRef returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
     }:
 (	
 	
@@ -152,11 +154,12 @@ ruleNameRef returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
-(
-	RULE_ID    { 
-    createLeafNode(grammarAccess.prNameRef().ele0CrossReferenceEStringParserRule(), "rule"); 
-    }
-) 
+	RULE_ID
+	{
+		createLeafNode(grammarAccess.prNameRef().ele0CrossReferenceEStringParserRule(), "rule"); 
+	}
+
+		// TODO assign feature to currentNode
 	
 );
 

@@ -100,29 +100,29 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start ruleRoot
-    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:78:1: ruleRoot returns [EObject current=null] : ( 'test' (this_TestLinewrap= ruleTestLinewrap | this_TestIndentation= ruleTestIndentation ) ) ;
+    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:78:1: ruleRoot returns [EObject current=null] : ( 'test' (this_TestLinewrap_1= ruleTestLinewrap | this_TestIndentation_2= ruleTestIndentation ) ) ;
     public final EObject ruleRoot() throws RecognitionException {
         EObject current = null;
 
-        EObject this_TestLinewrap = null;
+        EObject this_TestLinewrap_1 = null;
 
-        EObject this_TestIndentation = null;
+        EObject this_TestIndentation_2 = null;
 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:82:6: ( ( 'test' (this_TestLinewrap= ruleTestLinewrap | this_TestIndentation= ruleTestIndentation ) ) )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:83:1: ( 'test' (this_TestLinewrap= ruleTestLinewrap | this_TestIndentation= ruleTestIndentation ) )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:83:6: ( ( 'test' (this_TestLinewrap_1= ruleTestLinewrap | this_TestIndentation_2= ruleTestIndentation ) ) )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:84:1: ( 'test' (this_TestLinewrap_1= ruleTestLinewrap | this_TestIndentation_2= ruleTestIndentation ) )
             {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:83:1: ( 'test' (this_TestLinewrap= ruleTestLinewrap | this_TestIndentation= ruleTestIndentation ) )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:83:2: 'test' (this_TestLinewrap= ruleTestLinewrap | this_TestIndentation= ruleTestIndentation )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:84:1: ( 'test' (this_TestLinewrap_1= ruleTestLinewrap | this_TestIndentation_2= ruleTestIndentation ) )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:84:2: 'test' (this_TestLinewrap_1= ruleTestLinewrap | this_TestIndentation_2= ruleTestIndentation )
             {
             match(input,11,FOLLOW_11_in_ruleRoot116); 
 
                     createLeafNode(grammarAccess.prRoot().ele0KeywordTest(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:87:1: (this_TestLinewrap= ruleTestLinewrap | this_TestIndentation= ruleTestIndentation )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:88:1: (this_TestLinewrap_1= ruleTestLinewrap | this_TestIndentation_2= ruleTestIndentation )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -134,40 +134,40 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("87:1: (this_TestLinewrap= ruleTestLinewrap | this_TestIndentation= ruleTestIndentation )", 1, 0, input);
+                    new NoViableAltException("88:1: (this_TestLinewrap_1= ruleTestLinewrap | this_TestIndentation_2= ruleTestIndentation )", 1, 0, input);
 
                 throw nvae;
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:88:5: this_TestLinewrap= ruleTestLinewrap
+                    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:89:5: this_TestLinewrap_1= ruleTestLinewrap
                     {
                      
                             currentNode=createCompositeNode(grammarAccess.prRoot().ele10ParserRuleCallTestLinewrap(), currentNode); 
                         
                     pushFollow(FOLLOW_ruleTestLinewrap_in_ruleRoot139);
-                    this_TestLinewrap=ruleTestLinewrap();
+                    this_TestLinewrap_1=ruleTestLinewrap();
                     _fsp--;
 
                      
-                            current = this_TestLinewrap; 
+                            current = this_TestLinewrap_1; 
                             currentNode = currentNode.getParent();
                         
 
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:98:5: this_TestIndentation= ruleTestIndentation
+                    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:99:5: this_TestIndentation_2= ruleTestIndentation
                     {
                      
                             currentNode=createCompositeNode(grammarAccess.prRoot().ele11ParserRuleCallTestIndentation(), currentNode); 
                         
                     pushFollow(FOLLOW_ruleTestIndentation_in_ruleRoot166);
-                    this_TestIndentation=ruleTestIndentation();
+                    this_TestIndentation_2=ruleTestIndentation();
                     _fsp--;
 
                      
-                            current = this_TestIndentation; 
+                            current = this_TestIndentation_2; 
                             currentNode = currentNode.getParent();
                         
 
@@ -183,6 +183,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             }
 
              resetLookahead(); 
+                	lastConsumedNode = currentNode;
                 
         }
          
@@ -198,7 +199,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start entryRuleLine
-    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:115:1: entryRuleLine returns [EObject current=null] : iv_ruleLine= ruleLine EOF ;
+    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:116:1: entryRuleLine returns [EObject current=null] : iv_ruleLine= ruleLine EOF ;
     public final EObject entryRuleLine() throws RecognitionException {
         EObject current = null;
 
@@ -206,8 +207,8 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:115:46: (iv_ruleLine= ruleLine EOF )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:116:2: iv_ruleLine= ruleLine EOF
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:116:46: (iv_ruleLine= ruleLine EOF )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:117:2: iv_ruleLine= ruleLine EOF
             {
              currentNode = createCompositeNode(grammarAccess.prLine().getRule(), currentNode); 
             pushFollow(FOLLOW_ruleLine_in_entryRuleLine201);
@@ -233,33 +234,33 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start ruleLine
-    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:123:1: ruleLine returns [EObject current=null] : ( ( (lv_type= RULE_ID ) (lv_name= RULE_ID ) ) ';' ) ;
+    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:124:1: ruleLine returns [EObject current=null] : ( ( (lv_type_0= RULE_ID ) (lv_name_1= RULE_ID ) ) ';' ) ;
     public final EObject ruleLine() throws RecognitionException {
         EObject current = null;
 
-        Token lv_type=null;
-        Token lv_name=null;
+        Token lv_type_0=null;
+        Token lv_name_1=null;
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:127:6: ( ( ( (lv_type= RULE_ID ) (lv_name= RULE_ID ) ) ';' ) )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:128:1: ( ( (lv_type= RULE_ID ) (lv_name= RULE_ID ) ) ';' )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:129:6: ( ( ( (lv_type_0= RULE_ID ) (lv_name_1= RULE_ID ) ) ';' ) )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:130:1: ( ( (lv_type_0= RULE_ID ) (lv_name_1= RULE_ID ) ) ';' )
             {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:128:1: ( ( (lv_type= RULE_ID ) (lv_name= RULE_ID ) ) ';' )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:128:2: ( (lv_type= RULE_ID ) (lv_name= RULE_ID ) ) ';'
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:130:1: ( ( (lv_type_0= RULE_ID ) (lv_name_1= RULE_ID ) ) ';' )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:130:2: ( (lv_type_0= RULE_ID ) (lv_name_1= RULE_ID ) ) ';'
             {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:128:2: ( (lv_type= RULE_ID ) (lv_name= RULE_ID ) )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:128:3: (lv_type= RULE_ID ) (lv_name= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:130:2: ( (lv_type_0= RULE_ID ) (lv_name_1= RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:130:3: (lv_type_0= RULE_ID ) (lv_name_1= RULE_ID )
             {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:128:3: (lv_type= RULE_ID )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:130:6: lv_type= RULE_ID
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:130:3: (lv_type_0= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:132:6: lv_type_0= RULE_ID
             {
-            lv_type=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleLine258); 
-             
-                createLeafNode(grammarAccess.prLine().ele000LexerRuleCallID(), "type"); 
-                
+            lv_type_0=(Token)input.LT(1);
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleLine259); 
+
+            		createLeafNode(grammarAccess.prLine().ele000LexerRuleCallID(), "type"); 
+            	
 
             	        if (current==null) {
             	            current = factory.create("Line");
@@ -267,7 +268,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             	        }
             	        
             	        try {
-            	        	factory.add(current, "type", lv_type, "ID", currentNode);
+            	       		add(current, "type", lv_type_0, "ID", lastConsumedNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -275,14 +276,14 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:148:2: (lv_name= RULE_ID )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:150:6: lv_name= RULE_ID
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:150:2: (lv_name_1= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:152:6: lv_name_1= RULE_ID
             {
-            lv_name=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleLine290); 
-             
-                createLeafNode(grammarAccess.prLine().ele010LexerRuleCallID(), "name"); 
-                
+            lv_name_1=(Token)input.LT(1);
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleLine289); 
+
+            		createLeafNode(grammarAccess.prLine().ele010LexerRuleCallID(), "name"); 
+            	
 
             	        if (current==null) {
             	            current = factory.create("Line");
@@ -290,7 +291,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             	        }
             	        
             	        try {
-            	        	factory.add(current, "name", lv_name, "ID", currentNode);
+            	       		add(current, "name", lv_name_1, "ID", lastConsumedNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -301,7 +302,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            match(input,12,FOLLOW_12_in_ruleLine311); 
+            match(input,12,FOLLOW_12_in_ruleLine307); 
 
                     createLeafNode(grammarAccess.prLine().ele1KeywordSemicolon(), null); 
                 
@@ -312,6 +313,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             }
 
              resetLookahead(); 
+                	lastConsumedNode = currentNode;
                 
         }
          
@@ -327,7 +329,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start entryRuleTestLinewrap
-    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:181:1: entryRuleTestLinewrap returns [EObject current=null] : iv_ruleTestLinewrap= ruleTestLinewrap EOF ;
+    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:183:1: entryRuleTestLinewrap returns [EObject current=null] : iv_ruleTestLinewrap= ruleTestLinewrap EOF ;
     public final EObject entryRuleTestLinewrap() throws RecognitionException {
         EObject current = null;
 
@@ -335,16 +337,16 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:181:54: (iv_ruleTestLinewrap= ruleTestLinewrap EOF )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:182:2: iv_ruleTestLinewrap= ruleTestLinewrap EOF
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:183:54: (iv_ruleTestLinewrap= ruleTestLinewrap EOF )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:184:2: iv_ruleTestLinewrap= ruleTestLinewrap EOF
             {
              currentNode = createCompositeNode(grammarAccess.prTestLinewrap().getRule(), currentNode); 
-            pushFollow(FOLLOW_ruleTestLinewrap_in_entryRuleTestLinewrap346);
+            pushFollow(FOLLOW_ruleTestLinewrap_in_entryRuleTestLinewrap342);
             iv_ruleTestLinewrap=ruleTestLinewrap();
             _fsp--;
 
              current =iv_ruleTestLinewrap; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTestLinewrap356); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleTestLinewrap352); 
 
             }
 
@@ -362,27 +364,27 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start ruleTestLinewrap
-    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:189:1: ruleTestLinewrap returns [EObject current=null] : ( 'linewrap' (lv_items= ruleLine )* ) ;
+    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:191:1: ruleTestLinewrap returns [EObject current=null] : ( 'linewrap' (lv_items_1= ruleLine )* ) ;
     public final EObject ruleTestLinewrap() throws RecognitionException {
         EObject current = null;
 
-        EObject lv_items = null;
+        EObject lv_items_1 = null;
 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:193:6: ( ( 'linewrap' (lv_items= ruleLine )* ) )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:194:1: ( 'linewrap' (lv_items= ruleLine )* )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:196:6: ( ( 'linewrap' (lv_items_1= ruleLine )* ) )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:197:1: ( 'linewrap' (lv_items_1= ruleLine )* )
             {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:194:1: ( 'linewrap' (lv_items= ruleLine )* )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:194:2: 'linewrap' (lv_items= ruleLine )*
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:197:1: ( 'linewrap' (lv_items_1= ruleLine )* )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:197:2: 'linewrap' (lv_items_1= ruleLine )*
             {
-            match(input,13,FOLLOW_13_in_ruleTestLinewrap390); 
+            match(input,13,FOLLOW_13_in_ruleTestLinewrap386); 
 
                     createLeafNode(grammarAccess.prTestLinewrap().ele0KeywordLinewrap(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:198:1: (lv_items= ruleLine )*
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:201:1: (lv_items_1= ruleLine )*
             loop2:
             do {
                 int alt2=2;
@@ -395,13 +397,13 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
                 switch (alt2) {
             	case 1 :
-            	    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:201:6: lv_items= ruleLine
+            	    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:204:6: lv_items_1= ruleLine
             	    {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.prTestLinewrap().ele10ParserRuleCallLine(), currentNode); 
             	    	    
-            	    pushFollow(FOLLOW_ruleLine_in_ruleTestLinewrap424);
-            	    lv_items=ruleLine();
+            	    pushFollow(FOLLOW_ruleLine_in_ruleTestLinewrap420);
+            	    lv_items_1=ruleLine();
             	    _fsp--;
 
 
@@ -411,7 +413,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             	    	        }
             	    	        
             	    	        try {
-            	    	        	factory.add(current, "items", lv_items, "Line", currentNode);
+            	    	       		add(current, "items", lv_items_1, "Line", currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }
@@ -433,6 +435,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             }
 
              resetLookahead(); 
+                	lastConsumedNode = currentNode;
                 
         }
          
@@ -448,7 +451,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start entryRuleTestIndentation
-    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:228:1: entryRuleTestIndentation returns [EObject current=null] : iv_ruleTestIndentation= ruleTestIndentation EOF ;
+    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:231:1: entryRuleTestIndentation returns [EObject current=null] : iv_ruleTestIndentation= ruleTestIndentation EOF ;
     public final EObject entryRuleTestIndentation() throws RecognitionException {
         EObject current = null;
 
@@ -456,16 +459,16 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:228:57: (iv_ruleTestIndentation= ruleTestIndentation EOF )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:229:2: iv_ruleTestIndentation= ruleTestIndentation EOF
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:231:57: (iv_ruleTestIndentation= ruleTestIndentation EOF )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:232:2: iv_ruleTestIndentation= ruleTestIndentation EOF
             {
              currentNode = createCompositeNode(grammarAccess.prTestIndentation().getRule(), currentNode); 
-            pushFollow(FOLLOW_ruleTestIndentation_in_entryRuleTestIndentation464);
+            pushFollow(FOLLOW_ruleTestIndentation_in_entryRuleTestIndentation460);
             iv_ruleTestIndentation=ruleTestIndentation();
             _fsp--;
 
              current =iv_ruleTestIndentation; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTestIndentation474); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleTestIndentation470); 
 
             }
 
@@ -483,42 +486,42 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start ruleTestIndentation
-    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:236:1: ruleTestIndentation returns [EObject current=null] : ( ( ( 'indentation' '{' ) ( (lv_sub= ruleTestIndentation ) | (lv_items= ruleLine ) )* ) '}' ) ;
+    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:239:1: ruleTestIndentation returns [EObject current=null] : ( ( ( 'indentation' '{' ) ( (lv_sub_2= ruleTestIndentation ) | (lv_items_3= ruleLine ) )* ) '}' ) ;
     public final EObject ruleTestIndentation() throws RecognitionException {
         EObject current = null;
 
-        EObject lv_sub = null;
+        EObject lv_sub_2 = null;
 
-        EObject lv_items = null;
+        EObject lv_items_3 = null;
 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:240:6: ( ( ( ( 'indentation' '{' ) ( (lv_sub= ruleTestIndentation ) | (lv_items= ruleLine ) )* ) '}' ) )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:241:1: ( ( ( 'indentation' '{' ) ( (lv_sub= ruleTestIndentation ) | (lv_items= ruleLine ) )* ) '}' )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:244:6: ( ( ( ( 'indentation' '{' ) ( (lv_sub_2= ruleTestIndentation ) | (lv_items_3= ruleLine ) )* ) '}' ) )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:245:1: ( ( ( 'indentation' '{' ) ( (lv_sub_2= ruleTestIndentation ) | (lv_items_3= ruleLine ) )* ) '}' )
             {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:241:1: ( ( ( 'indentation' '{' ) ( (lv_sub= ruleTestIndentation ) | (lv_items= ruleLine ) )* ) '}' )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:241:2: ( ( 'indentation' '{' ) ( (lv_sub= ruleTestIndentation ) | (lv_items= ruleLine ) )* ) '}'
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:245:1: ( ( ( 'indentation' '{' ) ( (lv_sub_2= ruleTestIndentation ) | (lv_items_3= ruleLine ) )* ) '}' )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:245:2: ( ( 'indentation' '{' ) ( (lv_sub_2= ruleTestIndentation ) | (lv_items_3= ruleLine ) )* ) '}'
             {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:241:2: ( ( 'indentation' '{' ) ( (lv_sub= ruleTestIndentation ) | (lv_items= ruleLine ) )* )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:241:3: ( 'indentation' '{' ) ( (lv_sub= ruleTestIndentation ) | (lv_items= ruleLine ) )*
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:245:2: ( ( 'indentation' '{' ) ( (lv_sub_2= ruleTestIndentation ) | (lv_items_3= ruleLine ) )* )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:245:3: ( 'indentation' '{' ) ( (lv_sub_2= ruleTestIndentation ) | (lv_items_3= ruleLine ) )*
             {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:241:3: ( 'indentation' '{' )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:241:4: 'indentation' '{'
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:245:3: ( 'indentation' '{' )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:245:4: 'indentation' '{'
             {
-            match(input,14,FOLLOW_14_in_ruleTestIndentation510); 
+            match(input,14,FOLLOW_14_in_ruleTestIndentation506); 
 
                     createLeafNode(grammarAccess.prTestIndentation().ele000KeywordIndentation(), null); 
                 
-            match(input,15,FOLLOW_15_in_ruleTestIndentation519); 
+            match(input,15,FOLLOW_15_in_ruleTestIndentation515); 
 
                     createLeafNode(grammarAccess.prTestIndentation().ele001KeywordLeftCurlyBracket(), null); 
                 
 
             }
 
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:249:2: ( (lv_sub= ruleTestIndentation ) | (lv_items= ruleLine ) )*
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:253:2: ( (lv_sub_2= ruleTestIndentation ) | (lv_items_3= ruleLine ) )*
             loop3:
             do {
                 int alt3=3;
@@ -534,16 +537,16 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:249:3: (lv_sub= ruleTestIndentation )
+            	    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:253:3: (lv_sub_2= ruleTestIndentation )
             	    {
-            	    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:249:3: (lv_sub= ruleTestIndentation )
-            	    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:252:6: lv_sub= ruleTestIndentation
+            	    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:253:3: (lv_sub_2= ruleTestIndentation )
+            	    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:256:6: lv_sub_2= ruleTestIndentation
             	    {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.prTestIndentation().ele0100ParserRuleCallTestIndentation(), currentNode); 
             	    	    
-            	    pushFollow(FOLLOW_ruleTestIndentation_in_ruleTestIndentation555);
-            	    lv_sub=ruleTestIndentation();
+            	    pushFollow(FOLLOW_ruleTestIndentation_in_ruleTestIndentation551);
+            	    lv_sub_2=ruleTestIndentation();
             	    _fsp--;
 
 
@@ -553,7 +556,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             	    	        }
             	    	        
             	    	        try {
-            	    	        	factory.add(current, "sub", lv_sub, "TestIndentation", currentNode);
+            	    	       		add(current, "sub", lv_sub_2, "TestIndentation", currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }
@@ -566,16 +569,16 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             	    }
             	    break;
             	case 2 :
-            	    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:271:6: (lv_items= ruleLine )
+            	    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:275:6: (lv_items_3= ruleLine )
             	    {
-            	    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:271:6: (lv_items= ruleLine )
-            	    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:274:6: lv_items= ruleLine
+            	    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:275:6: (lv_items_3= ruleLine )
+            	    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:278:6: lv_items_3= ruleLine
             	    {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.prTestIndentation().ele0110ParserRuleCallLine(), currentNode); 
             	    	    
-            	    pushFollow(FOLLOW_ruleLine_in_ruleTestIndentation599);
-            	    lv_items=ruleLine();
+            	    pushFollow(FOLLOW_ruleLine_in_ruleTestIndentation595);
+            	    lv_items_3=ruleLine();
             	    _fsp--;
 
 
@@ -585,7 +588,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             	    	        }
             	    	        
             	    	        try {
-            	    	        	factory.add(current, "items", lv_items, "Line", currentNode);
+            	    	       		add(current, "items", lv_items_3, "Line", currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }
@@ -606,7 +609,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            match(input,16,FOLLOW_16_in_ruleTestIndentation615); 
+            match(input,16,FOLLOW_16_in_ruleTestIndentation611); 
 
                     createLeafNode(grammarAccess.prTestIndentation().ele1KeywordRightCurlyBracket(), null); 
                 
@@ -617,6 +620,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             }
 
              resetLookahead(); 
+                	lastConsumedNode = currentNode;
                 
         }
          
@@ -640,19 +644,19 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
     public static final BitSet FOLLOW_ruleTestIndentation_in_ruleRoot166 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleLine_in_entryRuleLine201 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleLine211 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleLine258 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleLine290 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_ruleLine311 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTestLinewrap_in_entryRuleTestLinewrap346 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTestLinewrap356 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_ruleTestLinewrap390 = new BitSet(new long[]{0x0000000000000012L});
-    public static final BitSet FOLLOW_ruleLine_in_ruleTestLinewrap424 = new BitSet(new long[]{0x0000000000000012L});
-    public static final BitSet FOLLOW_ruleTestIndentation_in_entryRuleTestIndentation464 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTestIndentation474 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_ruleTestIndentation510 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_15_in_ruleTestIndentation519 = new BitSet(new long[]{0x0000000000014010L});
-    public static final BitSet FOLLOW_ruleTestIndentation_in_ruleTestIndentation555 = new BitSet(new long[]{0x0000000000014010L});
-    public static final BitSet FOLLOW_ruleLine_in_ruleTestIndentation599 = new BitSet(new long[]{0x0000000000014010L});
-    public static final BitSet FOLLOW_16_in_ruleTestIndentation615 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleLine259 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleLine289 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_12_in_ruleLine307 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTestLinewrap_in_entryRuleTestLinewrap342 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleTestLinewrap352 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_13_in_ruleTestLinewrap386 = new BitSet(new long[]{0x0000000000000012L});
+    public static final BitSet FOLLOW_ruleLine_in_ruleTestLinewrap420 = new BitSet(new long[]{0x0000000000000012L});
+    public static final BitSet FOLLOW_ruleTestIndentation_in_entryRuleTestIndentation460 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleTestIndentation470 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_14_in_ruleTestIndentation506 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_15_in_ruleTestIndentation515 = new BitSet(new long[]{0x0000000000014010L});
+    public static final BitSet FOLLOW_ruleTestIndentation_in_ruleTestIndentation551 = new BitSet(new long[]{0x0000000000014010L});
+    public static final BitSet FOLLOW_ruleLine_in_ruleTestIndentation595 = new BitSet(new long[]{0x0000000000014010L});
+    public static final BitSet FOLLOW_16_in_ruleTestIndentation611 = new BitSet(new long[]{0x0000000000000002L});
 
 }

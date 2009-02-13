@@ -100,31 +100,31 @@ public class InternalMultiGenMMTestLanguageParser extends AbstractInternalAntlrP
 
 
     // $ANTLR start ruleFoo
-    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMultiGenMMTestLanguage.g:78:1: ruleFoo returns [EObject current=null] : ( (lv_name= RULE_ID ) (lv_nameRefs= ruleNameRef )* ) ;
+    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMultiGenMMTestLanguage.g:78:1: ruleFoo returns [EObject current=null] : ( (lv_name_0= RULE_ID ) (lv_nameRefs_1= ruleNameRef )* ) ;
     public final EObject ruleFoo() throws RecognitionException {
         EObject current = null;
 
-        Token lv_name=null;
-        EObject lv_nameRefs = null;
+        Token lv_name_0=null;
+        EObject lv_nameRefs_1 = null;
 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMultiGenMMTestLanguage.g:82:6: ( ( (lv_name= RULE_ID ) (lv_nameRefs= ruleNameRef )* ) )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMultiGenMMTestLanguage.g:83:1: ( (lv_name= RULE_ID ) (lv_nameRefs= ruleNameRef )* )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMultiGenMMTestLanguage.g:83:6: ( ( (lv_name_0= RULE_ID ) (lv_nameRefs_1= ruleNameRef )* ) )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMultiGenMMTestLanguage.g:84:1: ( (lv_name_0= RULE_ID ) (lv_nameRefs_1= ruleNameRef )* )
             {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMultiGenMMTestLanguage.g:83:1: ( (lv_name= RULE_ID ) (lv_nameRefs= ruleNameRef )* )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMultiGenMMTestLanguage.g:83:2: (lv_name= RULE_ID ) (lv_nameRefs= ruleNameRef )*
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMultiGenMMTestLanguage.g:84:1: ( (lv_name_0= RULE_ID ) (lv_nameRefs_1= ruleNameRef )* )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMultiGenMMTestLanguage.g:84:2: (lv_name_0= RULE_ID ) (lv_nameRefs_1= ruleNameRef )*
             {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMultiGenMMTestLanguage.g:83:2: (lv_name= RULE_ID )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMultiGenMMTestLanguage.g:85:6: lv_name= RULE_ID
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMultiGenMMTestLanguage.g:84:2: (lv_name_0= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMultiGenMMTestLanguage.g:86:6: lv_name_0= RULE_ID
             {
-            lv_name=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFoo128); 
-             
-                createLeafNode(grammarAccess.prFoo().ele00LexerRuleCallID(), "name"); 
-                
+            lv_name_0=(Token)input.LT(1);
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFoo129); 
+
+            		createLeafNode(grammarAccess.prFoo().ele00LexerRuleCallID(), "name"); 
+            	
 
             	        if (current==null) {
             	            current = factory.create("Foo");
@@ -132,7 +132,7 @@ public class InternalMultiGenMMTestLanguageParser extends AbstractInternalAntlrP
             	        }
             	        
             	        try {
-            	        	factory.set(current, "name", lv_name, "ID", currentNode);
+            	       		set(current, "name", lv_name_0, "ID", lastConsumedNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -140,7 +140,7 @@ public class InternalMultiGenMMTestLanguageParser extends AbstractInternalAntlrP
 
             }
 
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMultiGenMMTestLanguage.g:103:2: (lv_nameRefs= ruleNameRef )*
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMultiGenMMTestLanguage.g:104:2: (lv_nameRefs_1= ruleNameRef )*
             loop1:
             do {
                 int alt1=2;
@@ -153,13 +153,13 @@ public class InternalMultiGenMMTestLanguageParser extends AbstractInternalAntlrP
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMultiGenMMTestLanguage.g:106:6: lv_nameRefs= ruleNameRef
+            	    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMultiGenMMTestLanguage.g:107:6: lv_nameRefs_1= ruleNameRef
             	    {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.prFoo().ele10ParserRuleCallNameRef(), currentNode); 
             	    	    
-            	    pushFollow(FOLLOW_ruleNameRef_in_ruleFoo173);
-            	    lv_nameRefs=ruleNameRef();
+            	    pushFollow(FOLLOW_ruleNameRef_in_ruleFoo171);
+            	    lv_nameRefs_1=ruleNameRef();
             	    _fsp--;
 
 
@@ -169,7 +169,7 @@ public class InternalMultiGenMMTestLanguageParser extends AbstractInternalAntlrP
             	    	        }
             	    	        
             	    	        try {
-            	    	        	factory.add(current, "nameRefs", lv_nameRefs, "NameRef", currentNode);
+            	    	       		add(current, "nameRefs", lv_nameRefs_1, "NameRef", currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }
@@ -191,6 +191,7 @@ public class InternalMultiGenMMTestLanguageParser extends AbstractInternalAntlrP
             }
 
              resetLookahead(); 
+                	lastConsumedNode = currentNode;
                 
         }
          
@@ -206,7 +207,7 @@ public class InternalMultiGenMMTestLanguageParser extends AbstractInternalAntlrP
 
 
     // $ANTLR start entryRuleNameRef
-    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMultiGenMMTestLanguage.g:133:1: entryRuleNameRef returns [EObject current=null] : iv_ruleNameRef= ruleNameRef EOF ;
+    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMultiGenMMTestLanguage.g:134:1: entryRuleNameRef returns [EObject current=null] : iv_ruleNameRef= ruleNameRef EOF ;
     public final EObject entryRuleNameRef() throws RecognitionException {
         EObject current = null;
 
@@ -214,16 +215,16 @@ public class InternalMultiGenMMTestLanguageParser extends AbstractInternalAntlrP
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMultiGenMMTestLanguage.g:133:49: (iv_ruleNameRef= ruleNameRef EOF )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMultiGenMMTestLanguage.g:134:2: iv_ruleNameRef= ruleNameRef EOF
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMultiGenMMTestLanguage.g:134:49: (iv_ruleNameRef= ruleNameRef EOF )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMultiGenMMTestLanguage.g:135:2: iv_ruleNameRef= ruleNameRef EOF
             {
              currentNode = createCompositeNode(grammarAccess.prNameRef().getRule(), currentNode); 
-            pushFollow(FOLLOW_ruleNameRef_in_entryRuleNameRef213);
+            pushFollow(FOLLOW_ruleNameRef_in_entryRuleNameRef211);
             iv_ruleNameRef=ruleNameRef();
             _fsp--;
 
              current =iv_ruleNameRef; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleNameRef223); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleNameRef221); 
 
             }
 
@@ -241,26 +242,26 @@ public class InternalMultiGenMMTestLanguageParser extends AbstractInternalAntlrP
 
 
     // $ANTLR start ruleNameRef
-    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMultiGenMMTestLanguage.g:141:1: ruleNameRef returns [EObject current=null] : (lv_name= RULE_STRING ) ;
+    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMultiGenMMTestLanguage.g:142:1: ruleNameRef returns [EObject current=null] : (lv_name_0= RULE_STRING ) ;
     public final EObject ruleNameRef() throws RecognitionException {
         EObject current = null;
 
-        Token lv_name=null;
+        Token lv_name_0=null;
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMultiGenMMTestLanguage.g:145:6: ( (lv_name= RULE_STRING ) )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMultiGenMMTestLanguage.g:146:1: (lv_name= RULE_STRING )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMultiGenMMTestLanguage.g:147:6: ( (lv_name_0= RULE_STRING ) )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMultiGenMMTestLanguage.g:148:1: (lv_name_0= RULE_STRING )
             {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMultiGenMMTestLanguage.g:146:1: (lv_name= RULE_STRING )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMultiGenMMTestLanguage.g:148:6: lv_name= RULE_STRING
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMultiGenMMTestLanguage.g:148:1: (lv_name_0= RULE_STRING )
+            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMultiGenMMTestLanguage.g:150:6: lv_name_0= RULE_STRING
             {
-            lv_name=(Token)input.LT(1);
-            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleNameRef268); 
-             
-                createLeafNode(grammarAccess.prNameRef().ele0LexerRuleCallSTRING(), "name"); 
-                
+            lv_name_0=(Token)input.LT(1);
+            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleNameRef267); 
+
+            		createLeafNode(grammarAccess.prNameRef().ele0LexerRuleCallSTRING(), "name"); 
+            	
 
             	        if (current==null) {
             	            current = factory.create("FooBar");
@@ -268,7 +269,7 @@ public class InternalMultiGenMMTestLanguageParser extends AbstractInternalAntlrP
             	        }
             	        
             	        try {
-            	        	factory.set(current, "name", lv_name, "STRING", currentNode);
+            	       		set(current, "name", lv_name_0, "STRING", lastConsumedNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -280,6 +281,7 @@ public class InternalMultiGenMMTestLanguageParser extends AbstractInternalAntlrP
             }
 
              resetLookahead(); 
+                	lastConsumedNode = currentNode;
                 
         }
          
@@ -298,10 +300,10 @@ public class InternalMultiGenMMTestLanguageParser extends AbstractInternalAntlrP
 
     public static final BitSet FOLLOW_ruleFoo_in_entryRuleFoo72 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleFoo82 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleFoo128 = new BitSet(new long[]{0x0000000000000022L});
-    public static final BitSet FOLLOW_ruleNameRef_in_ruleFoo173 = new BitSet(new long[]{0x0000000000000022L});
-    public static final BitSet FOLLOW_ruleNameRef_in_entryRuleNameRef213 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleNameRef223 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleNameRef268 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleFoo129 = new BitSet(new long[]{0x0000000000000022L});
+    public static final BitSet FOLLOW_ruleNameRef_in_ruleFoo171 = new BitSet(new long[]{0x0000000000000022L});
+    public static final BitSet FOLLOW_ruleNameRef_in_entryRuleNameRef211 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleNameRef221 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleNameRef267 = new BitSet(new long[]{0x0000000000000002L});
 
 }
