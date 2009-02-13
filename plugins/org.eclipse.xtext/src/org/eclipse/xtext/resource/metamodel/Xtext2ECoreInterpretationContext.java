@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
@@ -24,21 +25,22 @@ import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.util.Function;
+import org.eclipse.xtext.util.XtextSwitch;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
  * @author Sebastian Zarnekow
- * 
+ *
  * @see http://wiki.eclipse.org/Xtext/Documentation#Meta-Model_Inference
  */
 public class Xtext2ECoreInterpretationContext {
-	
+
 	private final EClassifierInfos eClassifierInfos;
-	
+
 	private final Function<AbstractElement, EClassifier> classifierCalculator;
 
-	private Set<EClassifierInfo> currentTypes = new HashSet<EClassifierInfo>();
-	
+	private final Set<EClassifierInfo> currentTypes = new HashSet<EClassifierInfo>();
+
 	boolean isRuleCallAllowed = true;
 
 	private Xtext2ECoreInterpretationContext(EClassifierInfos classifierInfos) {
@@ -84,10 +86,35 @@ public class Xtext2ECoreInterpretationContext {
 				throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable, "Cannot derive type from incomplete assignment.", assignment);
 			}
 			EClassifier type = getTerminalType(terminal);
-			isContainment = !(terminal instanceof CrossReference);
+			isContainment = isContainmentAssignment(assignment);
 			featureTypeInfo = getEClassifierInfoOrThrowException(type, assignment);
 		}
 		addFeature(featureName, featureTypeInfo, isMultivalue, isContainment, assignment);
+	}
+
+	public boolean isContainmentAssignment(Assignment assignment) {
+		// TODO throw TransformationException in case of unexpected terminal
+		return new XtextSwitch<Boolean>() {
+
+			@Override
+			public Boolean caseAlternatives(Alternatives object) {
+				for (AbstractElement group: object.getGroups())
+					if (doSwitch(group))
+						return true;
+				return false;
+			}
+
+			@Override
+			public Boolean caseCrossReference(CrossReference object) {
+				return false;
+			}
+
+			@Override
+			public Boolean caseAbstractElement(AbstractElement object) {
+				return true;
+			}
+
+		}.doSwitch(assignment.getTerminal());
 	}
 
 	public void addFeature(String featureName, EClassifierInfo featureTypeInfo, boolean isMultivalue,
