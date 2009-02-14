@@ -41,11 +41,11 @@ public abstract class AbstractParserComparingTest extends AbstractGeneratorTest 
 
 	protected abstract IParser createFirstParser();
 	protected abstract IParser createSecondParser();
-	
+
 	protected abstract Iterable<Pair<String, String>> getAllModels();
-	
+
 	public void testCompareAllModels() throws Exception {
-		final Wrapper<String> modelName = Wrapper.forType(String.class); 
+		final Wrapper<String> modelName = Wrapper.forType(String.class);
 		EmfStructureComparator comparator = new EmfStructureComparator() {
 			@Override
 			protected String getErrorMessage() {
@@ -62,14 +62,14 @@ public abstract class AbstractParserComparingTest extends AbstractGeneratorTest 
 				checkResource(pair.getFirst() + " - " + getSecondParserName(), secondResult);
 				comparator.assertSameStructure(firstResult.getParseResult().getRootASTElement(), secondResult.getParseResult().getRootASTElement());
 				comparator.assertSameStructure(firstResult.getParseResult().getRootNode(), secondResult.getParseResult().getRootNode());
-				
+
 				String firstNodeResultAsString = EmfFormater.objToStr(firstResult.getParseResult().getRootNode(), getIgnoredFeatures());
 				String secondNodeResultAsString = EmfFormater.objToStr(secondResult.getParseResult().getRootNode(), getIgnoredFeatures());
-				assertEquals(firstNodeResultAsString, secondNodeResultAsString);
-				
+				assertEquals(modelName.get(), firstNodeResultAsString, secondNodeResultAsString);
+
 				String firstResultAsString = EmfFormater.objToStr(firstResult.getParseResult().getRootASTElement());
 				String secondResultAsString = EmfFormater.objToStr(secondResult.getParseResult().getRootASTElement());
-				assertEquals(firstResultAsString, secondResultAsString);
+				assertEquals(modelName.get(), firstResultAsString, secondResultAsString);
 			} catch (Exception e) {
 				throw new RuntimeException(modelName.get(), e);
 			}
@@ -79,11 +79,11 @@ public abstract class AbstractParserComparingTest extends AbstractGeneratorTest 
 	protected EStructuralFeature[] getIgnoredFeatures() {
 		return new EStructuralFeature[]{ ParsetreePackage.eINSTANCE.getCompositeNode_LookaheadLeafNodes() };
 	}
-	
+
 	protected String getFirstParserName() {
 		return firstParser.getClass().getSimpleName();
 	}
-	
+
 	protected String getSecondParserName() {
 		return secondParser.getClass().getSimpleName();
 	}

@@ -2,14 +2,21 @@ language org.eclipse.xtext.valueconverter.Bug250313
 
 generate bug250313 "http://org.eclipse.xtext.valueconverter.Bug250313"
 
-Model: ('#'? value = ('mykeyword1' | STRING | Datatype | ID ) ) 
-		| ('!' value = STRING) 
-		| ('$' value = Datatype)
-		| 
+Model:    ('1'? value = ('mykeyword1' | STRING | NestedDatatype | Datatype | ID ) ) 
+		| ('1+' multiValue += ('mykeyword1' | STRING | NestedDatatype | Datatype | ID ) )
+		| ('2' value = STRING) 
+		| ('2+' multiValue += STRING) 
+		| ('3' value = Datatype)
+		| ('3+' multiValue += Datatype)
+		| ('4' value = NestedDatatype)
+		| ('4+' multiValue += NestedDatatype)
+		|
 		  ('content' children = Child)
 		  ('ref' ref = ([Child1|STRING] | [Child2|ID]))?;
 
-Datatype: '>>' ID '-' ID;
+Datatype: ID '-' ID;
+
+NestedDatatype: ID '+' Datatype?;
 
 Child: Child1 | Child2;
 
@@ -17,7 +24,5 @@ Child1: name=ID;
 
 Child2: name=STRING;
 
-// TODO add tests for multi value features
-// TODO add tests for nested datatype rules
 // TODO rename test language to ValueConverterTestLanguage
 // TODO add tests for features that are '+=' and '=' in the same type - should use add or add / exc if set - file bug

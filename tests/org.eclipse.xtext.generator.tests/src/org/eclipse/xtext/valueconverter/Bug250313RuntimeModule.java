@@ -44,6 +44,21 @@ public class Bug250313RuntimeModule extends AbstractBug250313RuntimeModule {
 			};
 		}
 
+		@ValueConverter(rule = "NestedDatatype")
+		public IValueConverter<String> NestedDatatype() {
+			return new AbstractNullSafeConverter<String>() {
+				@Override
+				protected String internalToValue(String string, AbstractNode node) {
+					return "str";
+				}
+
+				@Override
+				protected String internalToString(String value) {
+					throw new UnsupportedOperationException();
+				}
+			};
+		}
+
 	}
 
 }
