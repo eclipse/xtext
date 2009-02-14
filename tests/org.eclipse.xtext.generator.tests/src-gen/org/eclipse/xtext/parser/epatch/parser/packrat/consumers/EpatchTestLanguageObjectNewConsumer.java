@@ -88,31 +88,19 @@ public final class EpatchTestLanguageObjectNewConsumer extends NonTerminalConsum
 	}
 
 	protected int consumeAssignment$4(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "import", false, false, getRule().ele010CrossReferenceEStringImport(), getCrossReference$5$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeCrossReference$5(entryPoint);
+	}
+
+	protected int consumeCrossReference$5(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "import", false, false, getRule().ele010CrossReferenceEStringImport(), getCrossReference$5$Delimiter());
 	}
 
 	protected int consumeAssignment$7(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(fragmentConsumer, "impFrag", false, false, getRule().ele10LexerRuleCallFRAGMENT(), getRuleCall$8$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$8(entryPoint);
+	}
+
+	protected int consumeRuleCall$8(int entryPoint) throws Exception {
+		return consumeTerminal(fragmentConsumer, "impFrag", false, false, getRule().ele10LexerRuleCallFRAGMENT(), getRuleCall$8$Delimiter());
 	}
 
 	public ObjectNewElements getRule() {

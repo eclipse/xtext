@@ -92,45 +92,27 @@ public final class FowlerDslTestLanguageEventConsumer extends NonTerminalConsume
 	}
 
 	protected int doConsumeAssignment$3(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeKeyword(getRule().ele000KeywordResetting(), "resetting", false, true, getKeyword$4$Delimiter()); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeKeyword$4(entryPoint);
+	}
+
+	protected int consumeKeyword$4(int entryPoint) throws Exception {
+		return consumeKeyword(getRule().ele000KeywordResetting(), "resetting", false, true, getKeyword$4$Delimiter());
 	}
 
 	protected int consumeAssignment$5(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "name", false, false, getRule().ele010LexerRuleCallID(), getRuleCall$6$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$6(entryPoint);
+	}
+
+	protected int consumeRuleCall$6(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "name", false, false, getRule().ele010LexerRuleCallID(), getRuleCall$6$Delimiter());
 	}
 
 	protected int consumeAssignment$7(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "code", false, false, getRule().ele10LexerRuleCallID(), getRuleCall$8$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$8(entryPoint);
+	}
+
+	protected int consumeRuleCall$8(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "code", false, false, getRule().ele10LexerRuleCallID(), getRuleCall$8$Delimiter());
 	}
 
 	public EventElements getRule() {

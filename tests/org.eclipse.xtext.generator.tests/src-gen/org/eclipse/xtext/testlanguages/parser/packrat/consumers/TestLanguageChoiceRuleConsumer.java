@@ -96,31 +96,19 @@ public final class TestLanguageChoiceRuleConsumer extends NonTerminalConsumer {
 	}
 
 	protected int doConsumeAssignment$4(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeKeyword(getRule().ele010KeywordOptional(), "optionalKeyword", false, true, getKeyword$5$Delimiter()); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeKeyword$5(entryPoint);
+	}
+
+	protected int consumeKeyword$5(int entryPoint) throws Exception {
+		return consumeKeyword(getRule().ele010KeywordOptional(), "optionalKeyword", false, true, getKeyword$5$Delimiter());
 	}
 
 	protected int consumeAssignment$6(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "name", false, false, getRule().ele10LexerRuleCallID(), getRuleCall$7$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$7(entryPoint);
+	}
+
+	protected int consumeRuleCall$7(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "name", false, false, getRule().ele10LexerRuleCallID(), getRuleCall$7$Delimiter());
 	}
 
 	public ChoiceRuleElements getRule() {

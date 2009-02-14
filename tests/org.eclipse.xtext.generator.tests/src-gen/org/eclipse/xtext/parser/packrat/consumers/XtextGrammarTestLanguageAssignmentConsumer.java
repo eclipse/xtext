@@ -87,67 +87,59 @@ public final class XtextGrammarTestLanguageAssignmentConsumer extends NonTermina
 	}
 
 	protected int consumeAssignment$3(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "feature", false, false, getRule().ele000LexerRuleCallID(), getRuleCall$4$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$4(entryPoint);
+	}
+
+	protected int consumeRuleCall$4(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "feature", false, false, getRule().ele000LexerRuleCallID(), getRuleCall$4$Delimiter());
 	}
 
 	protected int consumeAssignment$5(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		// TODO use markers in assignments of alternatives to recover
-		announceNextPath();
-		// TODO use markers in assignments of alternatives to recover
-		announceNextPath();
-		tempResult = consumeKeyword(getRule().ele01000KeywordPlusSignEqualsSign(), "operator", false, false, getKeyword$8$Delimiter()); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
+		return consumeAlternatives$6(entryPoint);
+	}
+	protected int consumeAlternatives$6(int entryPoint) throws Exception {
+		AlternativesResult result = createAlternativesResult();
+		switch(entryPoint) {
+			case -1: // use fall through semantics of switch case
+				result.reset();
+			case 0:
+				result.nextAlternative();
+				if (result.isAlternativeDone(consumeKeyword$8(nextEntryPoint()))) { 
+					return result.getResult(); 
+				}
+			case 1:
+				result.nextAlternative();
+				if (result.isAlternativeDone(consumeKeyword$9(nextEntryPoint()))) { 
+					return result.getResult(); 
+				}
+			case 2:
+				result.nextAlternative();
+				if (result.isAlternativeDone(consumeKeyword$10(nextEntryPoint()))) { 
+					return result.getResult(); 
+				}
 		}
-		result = tempResult >= result ? tempResult : result; 
+		return result.getResult();
+	}
+	
 
-		announceNextPath();
-		tempResult = consumeKeyword(getRule().ele01001KeywordEqualsSign(), "operator", false, false, getKeyword$9$Delimiter()); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
+	protected int consumeKeyword$8(int entryPoint) throws Exception {
+		return consumeKeyword(getRule().ele01000KeywordPlusSignEqualsSign(), "operator", false, false, getKeyword$8$Delimiter());
+	}
 
+	protected int consumeKeyword$9(int entryPoint) throws Exception {
+		return consumeKeyword(getRule().ele01001KeywordEqualsSign(), "operator", false, false, getKeyword$9$Delimiter());
+	}
 
-		announceNextPath();
-		tempResult = consumeKeyword(getRule().ele0101KeywordQuestionMarkEqualsSign(), "operator", false, false, getKeyword$10$Delimiter()); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-
-		announceLevelFinished();
-		return result;
+	protected int consumeKeyword$10(int entryPoint) throws Exception {
+		return consumeKeyword(getRule().ele0101KeywordQuestionMarkEqualsSign(), "operator", false, false, getKeyword$10$Delimiter());
 	}
 
 	protected int consumeAssignment$11(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(abstractTerminalConsumer, "terminal", false, false, false, getRule().ele10ParserRuleCallAbstractTerminal());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$12(entryPoint);
+	}
+
+	protected int consumeRuleCall$12(int entryPoint) throws Exception {
+		return consumeNonTerminal(abstractTerminalConsumer, "terminal", false, false, false, getRule().ele10ParserRuleCallAbstractTerminal());
 	}
 
 	public AssignmentElements getRule() {

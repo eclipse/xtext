@@ -28,12 +28,12 @@ public class Bug250313ParseTreeConstructor extends AbstractParseTreeConstructor 
 
 /************ begin Rule Model ****************
  *
- * Model:   "#"? value=("mykeyword1"|STRING|Datatype|ID)|"!" value=STRING|"$" value=Datatype|"content" children=Child ("ref" ref=([Child1|STRING]|[Child2]))?;
+ * Model:   "1"? value=("mykeyword1"|STRING|NestedDatatype|Datatype|ID)|"1+" multiValue+=("mykeyword1"|STRING|NestedDatatype|Datatype|ID)|"2" value=STRING|"2+" multiValue+=STRING|"3" value=Datatype|"3+" multiValue+=Datatype|"4" value=NestedDatatype|"4+" multiValue+=NestedDatatype|"content" children=Child ("ref" ref=([Child1|STRING]|[Child2]))?;
  *
  **/
 
 
-// "#"? value=("mykeyword1"|STRING|Datatype|ID)|"!" value=STRING|"$" value=Datatype|"content" children=Child ("ref" ref=([Child1|STRING]|[Child2]))?
+// "1"? value=("mykeyword1"|STRING|NestedDatatype|Datatype|ID)|"1+" multiValue+=("mykeyword1"|STRING|NestedDatatype|Datatype|ID)|"2" value=STRING|"2+" multiValue+=STRING|"3" value=Datatype|"3+" multiValue+=Datatype|"4" value=NestedDatatype|"4+" multiValue+=NestedDatatype|"content" children=Child ("ref" ref=([Child1|STRING]|[Child2]))?
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -55,7 +55,7 @@ protected class Model_Alternatives extends AlternativesToken {
 	}
 }
 
-// "#"? value=("mykeyword1"|STRING|Datatype|ID)|"!" value=STRING|"$" value=Datatype
+// "1"? value=("mykeyword1"|STRING|NestedDatatype|Datatype|ID)|"1+" multiValue+=("mykeyword1"|STRING|NestedDatatype|Datatype|ID)|"2" value=STRING|"2+" multiValue+=STRING|"3" value=Datatype|"3+" multiValue+=Datatype|"4" value=NestedDatatype|"4+" multiValue+=NestedDatatype
 protected class Model_0_Alternatives extends AlternativesToken {
 
 	public Model_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -77,7 +77,7 @@ protected class Model_0_Alternatives extends AlternativesToken {
 	}
 }
 
-// "#"? value=("mykeyword1"|STRING|Datatype|ID)|"!" value=STRING
+// "1"? value=("mykeyword1"|STRING|NestedDatatype|Datatype|ID)|"1+" multiValue+=("mykeyword1"|STRING|NestedDatatype|Datatype|ID)|"2" value=STRING|"2+" multiValue+=STRING|"3" value=Datatype|"3+" multiValue+=Datatype|"4" value=NestedDatatype
 protected class Model_0_0_Alternatives extends AlternativesToken {
 
 	public Model_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -90,7 +90,7 @@ protected class Model_0_0_Alternatives extends AlternativesToken {
 
 	@Override	
 	protected Solution createSolution() {
-		AbstractToken t = (first) ? new Model_0_0_1_Group(current, this) : new Model_0_0_0_Group(current, this);
+		AbstractToken t = (first) ? new Model_0_0_1_Group(current, this) : new Model_0_0_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
 		if(s == null && activateNextSolution()) s = createSolution();
 		if(s == null) return null;
@@ -99,22 +99,132 @@ protected class Model_0_0_Alternatives extends AlternativesToken {
 	}
 }
 
-// "#"? value=("mykeyword1"|STRING|Datatype|ID)
-protected class Model_0_0_0_Group extends GroupToken {
+// "1"? value=("mykeyword1"|STRING|NestedDatatype|Datatype|ID)|"1+" multiValue+=("mykeyword1"|STRING|NestedDatatype|Datatype|ID)|"2" value=STRING|"2+" multiValue+=STRING|"3" value=Datatype|"3+" multiValue+=Datatype
+protected class Model_0_0_0_Alternatives extends AlternativesToken {
+
+	public Model_0_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
 	
-	public Model_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
+	public Alternatives getGrammarElement() {
+		return Bug250313GrammarAccess.INSTANCE.prModel().ele000Alternatives();
+	}
+
+	@Override	
+	protected Solution createSolution() {
+		AbstractToken t = (first) ? new Model_0_0_0_1_Group(current, this) : new Model_0_0_0_0_Alternatives(current, this);
+		Solution s = t.firstSolution();
+		if(s == null && activateNextSolution()) s = createSolution();
+		if(s == null) return null;
+		last = s.getPredecessor();
+		return s; 
+	}
+}
+
+// "1"? value=("mykeyword1"|STRING|NestedDatatype|Datatype|ID)|"1+" multiValue+=("mykeyword1"|STRING|NestedDatatype|Datatype|ID)|"2" value=STRING|"2+" multiValue+=STRING|"3" value=Datatype
+protected class Model_0_0_0_0_Alternatives extends AlternativesToken {
+
+	public Model_0_0_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Alternatives getGrammarElement() {
+		return Bug250313GrammarAccess.INSTANCE.prModel().ele0000Alternatives();
+	}
+
+	@Override	
+	protected Solution createSolution() {
+		AbstractToken t = (first) ? new Model_0_0_0_0_1_Group(current, this) : new Model_0_0_0_0_0_Alternatives(current, this);
+		Solution s = t.firstSolution();
+		if(s == null && activateNextSolution()) s = createSolution();
+		if(s == null) return null;
+		last = s.getPredecessor();
+		return s; 
+	}
+}
+
+// "1"? value=("mykeyword1"|STRING|NestedDatatype|Datatype|ID)|"1+" multiValue+=("mykeyword1"|STRING|NestedDatatype|Datatype|ID)|"2" value=STRING|"2+" multiValue+=STRING
+protected class Model_0_0_0_0_0_Alternatives extends AlternativesToken {
+
+	public Model_0_0_0_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Alternatives getGrammarElement() {
+		return Bug250313GrammarAccess.INSTANCE.prModel().ele00000Alternatives();
+	}
+
+	@Override	
+	protected Solution createSolution() {
+		AbstractToken t = (first) ? new Model_0_0_0_0_0_1_Group(current, this) : new Model_0_0_0_0_0_0_Alternatives(current, this);
+		Solution s = t.firstSolution();
+		if(s == null && activateNextSolution()) s = createSolution();
+		if(s == null) return null;
+		last = s.getPredecessor();
+		return s; 
+	}
+}
+
+// "1"? value=("mykeyword1"|STRING|NestedDatatype|Datatype|ID)|"1+" multiValue+=("mykeyword1"|STRING|NestedDatatype|Datatype|ID)|"2" value=STRING
+protected class Model_0_0_0_0_0_0_Alternatives extends AlternativesToken {
+
+	public Model_0_0_0_0_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Alternatives getGrammarElement() {
+		return Bug250313GrammarAccess.INSTANCE.prModel().ele000000Alternatives();
+	}
+
+	@Override	
+	protected Solution createSolution() {
+		AbstractToken t = (first) ? new Model_0_0_0_0_0_0_1_Group(current, this) : new Model_0_0_0_0_0_0_0_Alternatives(current, this);
+		Solution s = t.firstSolution();
+		if(s == null && activateNextSolution()) s = createSolution();
+		if(s == null) return null;
+		last = s.getPredecessor();
+		return s; 
+	}
+}
+
+// "1"? value=("mykeyword1"|STRING|NestedDatatype|Datatype|ID)|"1+" multiValue+=("mykeyword1"|STRING|NestedDatatype|Datatype|ID)
+protected class Model_0_0_0_0_0_0_0_Alternatives extends AlternativesToken {
+
+	public Model_0_0_0_0_0_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Alternatives getGrammarElement() {
+		return Bug250313GrammarAccess.INSTANCE.prModel().ele0000000Alternatives();
+	}
+
+	@Override	
+	protected Solution createSolution() {
+		AbstractToken t = (first) ? new Model_0_0_0_0_0_0_0_1_Group(current, this) : new Model_0_0_0_0_0_0_0_0_Group(current, this);
+		Solution s = t.firstSolution();
+		if(s == null && activateNextSolution()) s = createSolution();
+		if(s == null) return null;
+		last = s.getPredecessor();
+		return s; 
+	}
+}
+
+// "1"? value=("mykeyword1"|STRING|NestedDatatype|Datatype|ID)
+protected class Model_0_0_0_0_0_0_0_0_Group extends GroupToken {
+	
+	public Model_0_0_0_0_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public Group getGrammarElement() {
-		return Bug250313GrammarAccess.INSTANCE.prModel().ele000Group();
+		return Bug250313GrammarAccess.INSTANCE.prModel().ele00000000Group();
 	}
 		
 	@Override
 	protected Solution createSolution() {	
-		Solution s1 = new Model_0_0_0_1_Assignment_value(current, this).firstSolution();
+		Solution s1 = new Model_0_0_0_0_0_0_0_0_1_Assignment_value(current, this).firstSolution();
 		while(s1 != null) {
-			Solution s2 = new Model_0_0_0_0_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			Solution s2 = new Model_0_0_0_0_0_0_0_0_0_Keyword_1(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
 				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
@@ -128,27 +238,27 @@ protected class Model_0_0_0_Group extends GroupToken {
 	}
 }
 
-// "#"?
-protected class Model_0_0_0_0_Keyword extends KeywordToken  {
+// "1"?
+protected class Model_0_0_0_0_0_0_0_0_0_Keyword_1 extends KeywordToken  {
 	
-	public Model_0_0_0_0_Keyword(IInstanceDescription curr, AbstractToken pred) {
+	public Model_0_0_0_0_0_0_0_0_0_Keyword_1(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, !IS_REQUIRED);
 	}
 	
 	public Keyword getGrammarElement() {
-		return Bug250313GrammarAccess.INSTANCE.prModel().ele0000KeywordNumberSign();
+		return Bug250313GrammarAccess.INSTANCE.prModel().ele000000000KeywordDigitOne();
 	}	
 }
 
-// value=("mykeyword1"|STRING|Datatype|ID)
-protected class Model_0_0_0_1_Assignment_value extends AssignmentToken  {
+// value=("mykeyword1"|STRING|NestedDatatype|Datatype|ID)
+protected class Model_0_0_0_0_0_0_0_0_1_Assignment_value extends AssignmentToken  {
 	
-	public Model_0_0_0_1_Assignment_value(IInstanceDescription curr, AbstractToken pred) {
+	public Model_0_0_0_0_0_0_0_0_1_Assignment_value(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public Assignment getGrammarElement() {
-		return Bug250313GrammarAccess.INSTANCE.prModel().ele0001AssignmentValue();
+		return Bug250313GrammarAccess.INSTANCE.prModel().ele000000001AssignmentValue();
 	}
 	
 	@Override
@@ -158,25 +268,32 @@ protected class Model_0_0_0_1_Assignment_value extends AssignmentToken  {
 
 		if("mykeyword1".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = Bug250313GrammarAccess.INSTANCE.prModel().ele00010000KeywordMykeyword1();
+			element = Bug250313GrammarAccess.INSTANCE.prModel().ele00000000100000KeywordMykeyword1();
 			return new Solution(obj);
 		}
 
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = Bug250313GrammarAccess.INSTANCE.prModel().ele00010001LexerRuleCallSTRING();
+			element = Bug250313GrammarAccess.INSTANCE.prModel().ele00000000100001LexerRuleCallSTRING();
 			return new Solution(obj);
 		}
 
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
 			type = AssignmentType.PRC;
-			element = Bug250313GrammarAccess.INSTANCE.prModel().ele0001001ParserRuleCallDatatype();
+			element = Bug250313GrammarAccess.INSTANCE.prModel().ele0000000010001ParserRuleCallNestedDatatype();
+			return new Solution(obj);
+		}
+
+
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
+			type = AssignmentType.PRC;
+			element = Bug250313GrammarAccess.INSTANCE.prModel().ele000000001001ParserRuleCallDatatype();
 			return new Solution(obj);
 		}
 
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = Bug250313GrammarAccess.INSTANCE.prModel().ele000101LexerRuleCallID();
+			element = Bug250313GrammarAccess.INSTANCE.prModel().ele00000000101LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -184,7 +301,372 @@ protected class Model_0_0_0_1_Assignment_value extends AssignmentToken  {
 }
 
 
-// "!" value=STRING
+// "1+" multiValue+=("mykeyword1"|STRING|NestedDatatype|Datatype|ID)
+protected class Model_0_0_0_0_0_0_0_1_Group extends GroupToken {
+	
+	public Model_0_0_0_0_0_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Group getGrammarElement() {
+		return Bug250313GrammarAccess.INSTANCE.prModel().ele00000001Group();
+	}
+		
+	@Override
+	protected Solution createSolution() {	
+		Solution s1 = new Model_0_0_0_0_0_0_0_1_1_Assignment_multiValue(current, this).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new Model_0_0_0_0_0_0_0_1_0_Keyword_1(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 == null) {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
+				if(s1 == null) return null;
+			} else {
+				last = s2.getPredecessor();
+				return s2;
+			}
+		}
+		return null;
+		
+	}
+}
+
+// "1+"
+protected class Model_0_0_0_0_0_0_0_1_0_Keyword_1 extends KeywordToken  {
+	
+	public Model_0_0_0_0_0_0_0_1_0_Keyword_1(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Keyword getGrammarElement() {
+		return Bug250313GrammarAccess.INSTANCE.prModel().ele000000010KeywordDigitOnePlusSign();
+	}	
+}
+
+// multiValue+=("mykeyword1"|STRING|NestedDatatype|Datatype|ID)
+protected class Model_0_0_0_0_0_0_0_1_1_Assignment_multiValue extends AssignmentToken  {
+	
+	public Model_0_0_0_0_0_0_0_1_1_Assignment_multiValue(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Assignment getGrammarElement() {
+		return Bug250313GrammarAccess.INSTANCE.prModel().ele000000011AssignmentMultiValue();
+	}
+	
+	@Override
+	protected Solution createSolution() {
+		if((value = current.getConsumable("multiValue",IS_REQUIRED)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("multiValue");
+
+		if("mykeyword1".equals(value)) { // xtext::Keyword
+			type = AssignmentType.KW;
+			element = Bug250313GrammarAccess.INSTANCE.prModel().ele00000001100000KeywordMykeyword1();
+			return new Solution(obj);
+		}
+
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = Bug250313GrammarAccess.INSTANCE.prModel().ele00000001100001LexerRuleCallSTRING();
+			return new Solution(obj);
+		}
+
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
+			type = AssignmentType.PRC;
+			element = Bug250313GrammarAccess.INSTANCE.prModel().ele0000000110001ParserRuleCallNestedDatatype();
+			return new Solution(obj);
+		}
+
+
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
+			type = AssignmentType.PRC;
+			element = Bug250313GrammarAccess.INSTANCE.prModel().ele000000011001ParserRuleCallDatatype();
+			return new Solution(obj);
+		}
+
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = Bug250313GrammarAccess.INSTANCE.prModel().ele00000001101LexerRuleCallID();
+			return new Solution(obj);
+		}
+		return null;
+	}
+}
+
+
+
+// "2" value=STRING
+protected class Model_0_0_0_0_0_0_1_Group extends GroupToken {
+	
+	public Model_0_0_0_0_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Group getGrammarElement() {
+		return Bug250313GrammarAccess.INSTANCE.prModel().ele0000001Group();
+	}
+		
+	@Override
+	protected Solution createSolution() {	
+		Solution s1 = new Model_0_0_0_0_0_0_1_1_Assignment_value(current, this).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new Model_0_0_0_0_0_0_1_0_Keyword_2(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 == null) {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
+				if(s1 == null) return null;
+			} else {
+				last = s2.getPredecessor();
+				return s2;
+			}
+		}
+		return null;
+		
+	}
+}
+
+// "2"
+protected class Model_0_0_0_0_0_0_1_0_Keyword_2 extends KeywordToken  {
+	
+	public Model_0_0_0_0_0_0_1_0_Keyword_2(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Keyword getGrammarElement() {
+		return Bug250313GrammarAccess.INSTANCE.prModel().ele00000010KeywordDigitTwo();
+	}	
+}
+
+// value=STRING
+protected class Model_0_0_0_0_0_0_1_1_Assignment_value extends AssignmentToken  {
+	
+	public Model_0_0_0_0_0_0_1_1_Assignment_value(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Assignment getGrammarElement() {
+		return Bug250313GrammarAccess.INSTANCE.prModel().ele00000011AssignmentValue();
+	}
+	
+	@Override
+	protected Solution createSolution() {
+		if((value = current.getConsumable("value",IS_REQUIRED)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("value");
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = Bug250313GrammarAccess.INSTANCE.prModel().ele000000110LexerRuleCallSTRING();
+			return new Solution(obj);
+		}
+		return null;
+	}
+}
+
+
+
+// "2+" multiValue+=STRING
+protected class Model_0_0_0_0_0_1_Group extends GroupToken {
+	
+	public Model_0_0_0_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Group getGrammarElement() {
+		return Bug250313GrammarAccess.INSTANCE.prModel().ele000001Group();
+	}
+		
+	@Override
+	protected Solution createSolution() {	
+		Solution s1 = new Model_0_0_0_0_0_1_1_Assignment_multiValue(current, this).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new Model_0_0_0_0_0_1_0_Keyword_2(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 == null) {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
+				if(s1 == null) return null;
+			} else {
+				last = s2.getPredecessor();
+				return s2;
+			}
+		}
+		return null;
+		
+	}
+}
+
+// "2+"
+protected class Model_0_0_0_0_0_1_0_Keyword_2 extends KeywordToken  {
+	
+	public Model_0_0_0_0_0_1_0_Keyword_2(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Keyword getGrammarElement() {
+		return Bug250313GrammarAccess.INSTANCE.prModel().ele0000010KeywordDigitTwoPlusSign();
+	}	
+}
+
+// multiValue+=STRING
+protected class Model_0_0_0_0_0_1_1_Assignment_multiValue extends AssignmentToken  {
+	
+	public Model_0_0_0_0_0_1_1_Assignment_multiValue(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Assignment getGrammarElement() {
+		return Bug250313GrammarAccess.INSTANCE.prModel().ele0000011AssignmentMultiValue();
+	}
+	
+	@Override
+	protected Solution createSolution() {
+		if((value = current.getConsumable("multiValue",IS_REQUIRED)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("multiValue");
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = Bug250313GrammarAccess.INSTANCE.prModel().ele00000110LexerRuleCallSTRING();
+			return new Solution(obj);
+		}
+		return null;
+	}
+}
+
+
+
+// "3" value=Datatype
+protected class Model_0_0_0_0_1_Group extends GroupToken {
+	
+	public Model_0_0_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Group getGrammarElement() {
+		return Bug250313GrammarAccess.INSTANCE.prModel().ele00001Group();
+	}
+		
+	@Override
+	protected Solution createSolution() {	
+		Solution s1 = new Model_0_0_0_0_1_1_Assignment_value(current, this).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new Model_0_0_0_0_1_0_Keyword_3(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 == null) {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
+				if(s1 == null) return null;
+			} else {
+				last = s2.getPredecessor();
+				return s2;
+			}
+		}
+		return null;
+		
+	}
+}
+
+// "3"
+protected class Model_0_0_0_0_1_0_Keyword_3 extends KeywordToken  {
+	
+	public Model_0_0_0_0_1_0_Keyword_3(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Keyword getGrammarElement() {
+		return Bug250313GrammarAccess.INSTANCE.prModel().ele000010KeywordDigitThree();
+	}	
+}
+
+// value=Datatype
+protected class Model_0_0_0_0_1_1_Assignment_value extends AssignmentToken  {
+	
+	public Model_0_0_0_0_1_1_Assignment_value(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Assignment getGrammarElement() {
+		return Bug250313GrammarAccess.INSTANCE.prModel().ele000011AssignmentValue();
+	}
+	
+	@Override
+	protected Solution createSolution() {
+		if((value = current.getConsumable("value",IS_REQUIRED)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("value");
+
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
+			type = AssignmentType.PRC;
+			element = Bug250313GrammarAccess.INSTANCE.prModel().ele0000110ParserRuleCallDatatype();
+			return new Solution(obj);
+		}
+
+		return null;
+	}
+}
+
+
+
+// "3+" multiValue+=Datatype
+protected class Model_0_0_0_1_Group extends GroupToken {
+	
+	public Model_0_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Group getGrammarElement() {
+		return Bug250313GrammarAccess.INSTANCE.prModel().ele0001Group();
+	}
+		
+	@Override
+	protected Solution createSolution() {	
+		Solution s1 = new Model_0_0_0_1_1_Assignment_multiValue(current, this).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new Model_0_0_0_1_0_Keyword_3(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 == null) {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
+				if(s1 == null) return null;
+			} else {
+				last = s2.getPredecessor();
+				return s2;
+			}
+		}
+		return null;
+		
+	}
+}
+
+// "3+"
+protected class Model_0_0_0_1_0_Keyword_3 extends KeywordToken  {
+	
+	public Model_0_0_0_1_0_Keyword_3(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Keyword getGrammarElement() {
+		return Bug250313GrammarAccess.INSTANCE.prModel().ele00010KeywordDigitThreePlusSign();
+	}	
+}
+
+// multiValue+=Datatype
+protected class Model_0_0_0_1_1_Assignment_multiValue extends AssignmentToken  {
+	
+	public Model_0_0_0_1_1_Assignment_multiValue(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Assignment getGrammarElement() {
+		return Bug250313GrammarAccess.INSTANCE.prModel().ele00011AssignmentMultiValue();
+	}
+	
+	@Override
+	protected Solution createSolution() {
+		if((value = current.getConsumable("multiValue",IS_REQUIRED)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("multiValue");
+
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
+			type = AssignmentType.PRC;
+			element = Bug250313GrammarAccess.INSTANCE.prModel().ele000110ParserRuleCallDatatype();
+			return new Solution(obj);
+		}
+
+		return null;
+	}
+}
+
+
+
+// "4" value=NestedDatatype
 protected class Model_0_0_1_Group extends GroupToken {
 	
 	public Model_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -199,7 +681,7 @@ protected class Model_0_0_1_Group extends GroupToken {
 	protected Solution createSolution() {	
 		Solution s1 = new Model_0_0_1_1_Assignment_value(current, this).firstSolution();
 		while(s1 != null) {
-			Solution s2 = new Model_0_0_1_0_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			Solution s2 = new Model_0_0_1_0_Keyword_4(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
 				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
@@ -213,19 +695,19 @@ protected class Model_0_0_1_Group extends GroupToken {
 	}
 }
 
-// "!"
-protected class Model_0_0_1_0_Keyword extends KeywordToken  {
+// "4"
+protected class Model_0_0_1_0_Keyword_4 extends KeywordToken  {
 	
-	public Model_0_0_1_0_Keyword(IInstanceDescription curr, AbstractToken pred) {
+	public Model_0_0_1_0_Keyword_4(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public Keyword getGrammarElement() {
-		return Bug250313GrammarAccess.INSTANCE.prModel().ele0010KeywordExclamationMark();
+		return Bug250313GrammarAccess.INSTANCE.prModel().ele0010KeywordDigitFour();
 	}	
 }
 
-// value=STRING
+// value=NestedDatatype
 protected class Model_0_0_1_1_Assignment_value extends AssignmentToken  {
 	
 	public Model_0_0_1_1_Assignment_value(IInstanceDescription curr, AbstractToken pred) {
@@ -240,18 +722,20 @@ protected class Model_0_0_1_1_Assignment_value extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("value",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
-			type = AssignmentType.LRC;
-			element = Bug250313GrammarAccess.INSTANCE.prModel().ele00110LexerRuleCallSTRING();
+
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
+			type = AssignmentType.PRC;
+			element = Bug250313GrammarAccess.INSTANCE.prModel().ele00110ParserRuleCallNestedDatatype();
 			return new Solution(obj);
 		}
+
 		return null;
 	}
 }
 
 
 
-// "$" value=Datatype
+// "4+" multiValue+=NestedDatatype
 protected class Model_0_1_Group extends GroupToken {
 	
 	public Model_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -264,9 +748,9 @@ protected class Model_0_1_Group extends GroupToken {
 		
 	@Override
 	protected Solution createSolution() {	
-		Solution s1 = new Model_0_1_1_Assignment_value(current, this).firstSolution();
+		Solution s1 = new Model_0_1_1_Assignment_multiValue(current, this).firstSolution();
 		while(s1 != null) {
-			Solution s2 = new Model_0_1_0_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			Solution s2 = new Model_0_1_0_Keyword_4(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
 				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
@@ -280,37 +764,37 @@ protected class Model_0_1_Group extends GroupToken {
 	}
 }
 
-// "$"
-protected class Model_0_1_0_Keyword extends KeywordToken  {
+// "4+"
+protected class Model_0_1_0_Keyword_4 extends KeywordToken  {
 	
-	public Model_0_1_0_Keyword(IInstanceDescription curr, AbstractToken pred) {
+	public Model_0_1_0_Keyword_4(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public Keyword getGrammarElement() {
-		return Bug250313GrammarAccess.INSTANCE.prModel().ele010Keyword$();
+		return Bug250313GrammarAccess.INSTANCE.prModel().ele010KeywordDigitFourPlusSign();
 	}	
 }
 
-// value=Datatype
-protected class Model_0_1_1_Assignment_value extends AssignmentToken  {
+// multiValue+=NestedDatatype
+protected class Model_0_1_1_Assignment_multiValue extends AssignmentToken  {
 	
-	public Model_0_1_1_Assignment_value(IInstanceDescription curr, AbstractToken pred) {
+	public Model_0_1_1_Assignment_multiValue(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public Assignment getGrammarElement() {
-		return Bug250313GrammarAccess.INSTANCE.prModel().ele011AssignmentValue();
+		return Bug250313GrammarAccess.INSTANCE.prModel().ele011AssignmentMultiValue();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if((value = current.getConsumable("value",IS_REQUIRED)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("value");
+		if((value = current.getConsumable("multiValue",IS_REQUIRED)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("multiValue");
 
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
 			type = AssignmentType.PRC;
-			element = Bug250313GrammarAccess.INSTANCE.prModel().ele0110ParserRuleCallDatatype();
+			element = Bug250313GrammarAccess.INSTANCE.prModel().ele0110ParserRuleCallNestedDatatype();
 			return new Solution(obj);
 		}
 
@@ -503,6 +987,7 @@ protected class Model_1_1_1_Assignment_ref extends AssignmentToken  {
 
 
 /************ end Rule Model ****************/
+
 
 
 

@@ -161,45 +161,27 @@ public final class ComplexReconstrTestLanguageTrickyDConsumer extends NonTermina
 	}
 
 	protected int consumeAssignment$7(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(intConsumer, "name", true, false, getRule().ele001000LexerRuleCallINT(), getRuleCall$8$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$8(entryPoint);
+	}
+
+	protected int consumeRuleCall$8(int entryPoint) throws Exception {
+		return consumeTerminal(intConsumer, "name", true, false, getRule().ele001000LexerRuleCallINT(), getRuleCall$8$Delimiter());
 	}
 
 	protected int consumeAssignment$9(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(stringConsumer, "foo", false, false, getRule().ele001010LexerRuleCallSTRING(), getRuleCall$10$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$10(entryPoint);
+	}
+
+	protected int consumeRuleCall$10(int entryPoint) throws Exception {
+		return consumeTerminal(stringConsumer, "foo", false, false, getRule().ele001010LexerRuleCallSTRING(), getRuleCall$10$Delimiter());
 	}
 
 	protected int consumeAssignment$11(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "type", true, false, getRule().ele00110LexerRuleCallID(), getRuleCall$12$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$12(entryPoint);
+	}
+
+	protected int consumeRuleCall$12(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "type", true, false, getRule().ele00110LexerRuleCallID(), getRuleCall$12$Delimiter());
 	}
 
 	protected int consumeGroup$13(int entryPoint) throws Exception {
@@ -244,31 +226,19 @@ public final class ComplexReconstrTestLanguageTrickyDConsumer extends NonTermina
 	}
 
 	protected int consumeAssignment$14(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(intConsumer, "name", true, false, getRule().ele0100LexerRuleCallINT(), getRuleCall$15$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$15(entryPoint);
+	}
+
+	protected int consumeRuleCall$15(int entryPoint) throws Exception {
+		return consumeTerminal(intConsumer, "name", true, false, getRule().ele0100LexerRuleCallINT(), getRuleCall$15$Delimiter());
 	}
 
 	protected int consumeAssignment$16(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "type", true, false, getRule().ele0110LexerRuleCallID(), getRuleCall$17$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$17(entryPoint);
+	}
+
+	protected int consumeRuleCall$17(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "type", true, false, getRule().ele0110LexerRuleCallID(), getRuleCall$17$Delimiter());
 	}
 
 	protected int consumeAssignment$18(int entryPoint) throws Exception {
@@ -281,17 +251,11 @@ public final class ComplexReconstrTestLanguageTrickyDConsumer extends NonTermina
 	}
 
 	protected int doConsumeAssignment$18(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "type", true, false, getRule().ele10LexerRuleCallID(), getRuleCall$19$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$19(entryPoint);
+	}
+
+	protected int consumeRuleCall$19(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "type", true, false, getRule().ele10LexerRuleCallID(), getRuleCall$19$Delimiter());
 	}
 
 	public TrickyDElements getRule() {

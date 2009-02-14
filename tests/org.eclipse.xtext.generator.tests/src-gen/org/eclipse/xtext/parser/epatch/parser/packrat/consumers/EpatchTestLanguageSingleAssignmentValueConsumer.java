@@ -105,31 +105,19 @@ public final class EpatchTestLanguageSingleAssignmentValueConsumer extends NonTe
 	}
 
 	protected int consumeAssignment$5(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeKeyword(getRule().ele00000KeywordNull(), "keyword", false, false, getKeyword$6$Delimiter()); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeKeyword$6(entryPoint);
+	}
+
+	protected int consumeKeyword$6(int entryPoint) throws Exception {
+		return consumeKeyword(getRule().ele00000KeywordNull(), "keyword", false, false, getKeyword$6$Delimiter());
 	}
 
 	protected int consumeAssignment$7(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(stringConsumer, "value", false, false, getRule().ele00010LexerRuleCallSTRING(), getRuleCall$8$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$8(entryPoint);
+	}
+
+	protected int consumeRuleCall$8(int entryPoint) throws Exception {
+		return consumeTerminal(stringConsumer, "value", false, false, getRule().ele00010LexerRuleCallSTRING(), getRuleCall$8$Delimiter());
 	}
 
 	protected int consumeGroup$9(int entryPoint) throws Exception {
@@ -164,17 +152,11 @@ public final class EpatchTestLanguageSingleAssignmentValueConsumer extends NonTe
 	}
 
 	protected int consumeAssignment$10(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "refObject", false, false, getRule().ele00100CrossReferenceEStringNamedObject(), getCrossReference$11$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeCrossReference$11(entryPoint);
+	}
+
+	protected int consumeCrossReference$11(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "refObject", false, false, getRule().ele00100CrossReferenceEStringNamedObject(), getCrossReference$11$Delimiter());
 	}
 
 	protected int consumeGroup$13(int entryPoint) throws Exception {
@@ -232,17 +214,11 @@ public final class EpatchTestLanguageSingleAssignmentValueConsumer extends NonTe
 	}
 
 	protected int consumeAssignment$16(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "refFeature", false, false, getRule().ele0011010LexerRuleCallID(), getRuleCall$17$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$17(entryPoint);
+	}
+
+	protected int consumeRuleCall$17(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "refFeature", false, false, getRule().ele0011010LexerRuleCallID(), getRuleCall$17$Delimiter());
 	}
 
 	protected int consumeGroup$18(int entryPoint) throws Exception {
@@ -300,17 +276,11 @@ public final class EpatchTestLanguageSingleAssignmentValueConsumer extends NonTe
 	}
 
 	protected int consumeAssignment$21(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(intConsumer, "refIndex", false, false, getRule().ele00111010LexerRuleCallINT(), getRuleCall$22$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$22(entryPoint);
+	}
+
+	protected int consumeRuleCall$22(int entryPoint) throws Exception {
+		return consumeTerminal(intConsumer, "refIndex", false, false, getRule().ele00111010LexerRuleCallINT(), getRuleCall$22$Delimiter());
 	}
 
 	protected int consumeKeyword$23(int entryPoint) throws Exception {
@@ -318,17 +288,11 @@ public final class EpatchTestLanguageSingleAssignmentValueConsumer extends NonTe
 	}
 
 	protected int consumeAssignment$24(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(createdObjectConsumer, "newObject", false, false, false, getRule().ele010ParserRuleCallCreatedObject());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$25(entryPoint);
+	}
+
+	protected int consumeRuleCall$25(int entryPoint) throws Exception {
+		return consumeNonTerminal(createdObjectConsumer, "newObject", false, false, false, getRule().ele010ParserRuleCallCreatedObject());
 	}
 
 	protected int consumeGroup$26(int entryPoint) throws Exception {
@@ -363,31 +327,19 @@ public final class EpatchTestLanguageSingleAssignmentValueConsumer extends NonTe
 	}
 
 	protected int consumeAssignment$27(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "import", false, false, getRule().ele100CrossReferenceEStringImport(), getCrossReference$28$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeCrossReference$28(entryPoint);
+	}
+
+	protected int consumeCrossReference$28(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "import", false, false, getRule().ele100CrossReferenceEStringImport(), getCrossReference$28$Delimiter());
 	}
 
 	protected int consumeAssignment$30(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(fragmentConsumer, "impFrag", false, false, getRule().ele110LexerRuleCallFRAGMENT(), getRuleCall$31$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$31(entryPoint);
+	}
+
+	protected int consumeRuleCall$31(int entryPoint) throws Exception {
+		return consumeTerminal(fragmentConsumer, "impFrag", false, false, getRule().ele110LexerRuleCallFRAGMENT(), getRuleCall$31$Delimiter());
 	}
 
 	public SingleAssignmentValueElements getRule() {

@@ -138,17 +138,11 @@ public final class FowlerDslTestLanguageStatemachineConsumer extends NonTerminal
 	}
 
 	protected int doConsumeAssignment$8(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(eventConsumer, "events", true, false, false, getRule().ele0000010ParserRuleCallEvent());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$9(entryPoint);
+	}
+
+	protected int consumeRuleCall$9(int entryPoint) throws Exception {
+		return consumeNonTerminal(eventConsumer, "events", true, false, false, getRule().ele0000010ParserRuleCallEvent());
 	}
 
 	protected int consumeKeyword$10(int entryPoint) throws Exception {
@@ -169,17 +163,11 @@ public final class FowlerDslTestLanguageStatemachineConsumer extends NonTerminal
 	}
 
 	protected int doConsumeAssignment$12(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(commandConsumer, "commands", true, false, false, getRule().ele0010ParserRuleCallCommand());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$13(entryPoint);
+	}
+
+	protected int consumeRuleCall$13(int entryPoint) throws Exception {
+		return consumeNonTerminal(commandConsumer, "commands", true, false, false, getRule().ele0010ParserRuleCallCommand());
 	}
 
 	protected int consumeKeyword$14(int entryPoint) throws Exception {
@@ -196,17 +184,11 @@ public final class FowlerDslTestLanguageStatemachineConsumer extends NonTerminal
 	}
 
 	protected int doConsumeAssignment$15(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(stateConsumer, "states", true, false, false, getRule().ele10ParserRuleCallState());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$16(entryPoint);
+	}
+
+	protected int consumeRuleCall$16(int entryPoint) throws Exception {
+		return consumeNonTerminal(stateConsumer, "states", true, false, false, getRule().ele10ParserRuleCallState());
 	}
 
 	public StatemachineElements getRule() {

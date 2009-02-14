@@ -14,26 +14,25 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.valueconverter.services.Bug250313GrammarAccess;
-import org.eclipse.xtext.valueconverter.services.Bug250313GrammarAccess.DatatypeElements;
+import org.eclipse.xtext.valueconverter.services.Bug250313GrammarAccess.NestedDatatypeElements;
 
+import org.eclipse.xtext.valueconverter.parser.packrat.consumers.Bug250313DatatypeConsumer;
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 
 @SuppressWarnings("unused")
-public final class Bug250313DatatypeConsumer extends NonTerminalConsumer {
+public final class Bug250313NestedDatatypeConsumer extends NonTerminalConsumer {
 
+	private INonTerminalConsumer datatypeConsumer;
 	private ITerminalConsumer idConsumer;
 
 	private ICharacterClass keyword$4$Delimiter;
 	
 	private ISequenceMatcher ruleCall$3$Delimiter;
 	
-	private ISequenceMatcher ruleCall$5$Delimiter;
-	
-	public Bug250313DatatypeConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
+	public Bug250313NestedDatatypeConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 		keyword$4$Delimiter = ICharacterClass.Factory.nullClass();
 		ruleCall$3$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-		ruleCall$5$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	@Override
@@ -61,7 +60,7 @@ public final class Bug250313DatatypeConsumer extends NonTerminalConsumer {
 				announceNextStep();
 				result = consumeKeyword$4(nextEntryPoint());
 				if (result!=ConsumeResult.SUCCESS) {
-					error("Another token expected.", getRule().ele01KeywordHyphenMinus());
+					error("Another token expected.", getRule().ele01KeywordPlusSign());
 					marker.commit();
 					announceLevelFinished();
 					return result;
@@ -70,7 +69,7 @@ public final class Bug250313DatatypeConsumer extends NonTerminalConsumer {
 				announceNextStep();
 				result = consumeRuleCall$5(nextEntryPoint());
 				if (result!=ConsumeResult.SUCCESS) {
-					error("Another token expected.", getRule().ele1LexerRuleCallID());
+					error("Another token expected.", getRule().ele1ParserRuleCallDatatype());
 					marker.commit();
 					announceLevelFinished();
 					return result;
@@ -86,15 +85,25 @@ public final class Bug250313DatatypeConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeKeyword$4(int entryPoint) throws Exception {
-		return consumeKeyword(getRule().ele01KeywordHyphenMinus(), null, false, false, getKeyword$4$Delimiter());
+		return consumeKeyword(getRule().ele01KeywordPlusSign(), null, false, false, getKeyword$4$Delimiter());
 	}
 
 	protected int consumeRuleCall$5(int entryPoint) throws Exception {
-		return consumeTerminal(idConsumer, null, false, false, getRule().ele1LexerRuleCallID(), getRuleCall$5$Delimiter());
+		IMarker marker = mark();
+		int result = doConsumeRuleCall$5(entryPoint);
+		if (result != ConsumeResult.SUCCESS)
+			marker.rollback();
+		else
+			marker.commit();
+		return ConsumeResult.SUCCESS;
 	}
 
-	public DatatypeElements getRule() {
-		return Bug250313GrammarAccess.INSTANCE.prDatatype();
+	protected int doConsumeRuleCall$5(int entryPoint) throws Exception {
+		return consumeNonTerminal(datatypeConsumer, null, false, true, false, getRule().ele1ParserRuleCallDatatype());
+	}
+
+	public NestedDatatypeElements getRule() {
+		return Bug250313GrammarAccess.INSTANCE.prNestedDatatype();
 	}
 	
 	@Override
@@ -105,6 +114,10 @@ public final class Bug250313DatatypeConsumer extends NonTerminalConsumer {
 	@Override
 	protected String getDefaultTypeName() {
 		return "EString";
+	}
+	
+	public void setDatatypeConsumer(INonTerminalConsumer datatypeConsumer) {
+		this.datatypeConsumer = datatypeConsumer;
 	}
 	
 	public void setIdConsumer(ITerminalConsumer idConsumer) {
@@ -125,14 +138,6 @@ public final class Bug250313DatatypeConsumer extends NonTerminalConsumer {
 	
 	public void setRuleCall$3$Delimiter(ISequenceMatcher matcher) {
 		ruleCall$3$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
-	}
-	
-	public ISequenceMatcher getRuleCall$5$Delimiter() {
-		return ruleCall$5$Delimiter;
-	}
-	
-	public void setRuleCall$5$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$5$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 }

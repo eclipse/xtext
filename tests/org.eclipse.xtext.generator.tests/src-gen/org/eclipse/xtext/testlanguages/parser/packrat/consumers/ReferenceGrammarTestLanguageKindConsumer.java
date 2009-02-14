@@ -116,31 +116,19 @@ public final class ReferenceGrammarTestLanguageKindConsumer extends NonTerminalC
 	}
 
 	protected int consumeAssignment$7(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "name", false, false, getRule().ele0010LexerRuleCallID(), getRuleCall$8$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$8(entryPoint);
+	}
+
+	protected int consumeRuleCall$8(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "name", false, false, getRule().ele0010LexerRuleCallID(), getRuleCall$8$Delimiter());
 	}
 
 	protected int consumeAssignment$9(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(intConsumer, "age", false, false, getRule().ele010LexerRuleCallINT(), getRuleCall$10$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$10(entryPoint);
+	}
+
+	protected int consumeRuleCall$10(int entryPoint) throws Exception {
+		return consumeTerminal(intConsumer, "age", false, false, getRule().ele010LexerRuleCallINT(), getRuleCall$10$Delimiter());
 	}
 
 	protected int consumeKeyword$11(int entryPoint) throws Exception {

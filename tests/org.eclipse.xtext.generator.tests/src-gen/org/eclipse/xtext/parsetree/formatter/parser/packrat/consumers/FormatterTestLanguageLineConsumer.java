@@ -82,31 +82,19 @@ public final class FormatterTestLanguageLineConsumer extends NonTerminalConsumer
 	}
 
 	protected int consumeAssignment$3(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "type", true, false, getRule().ele000LexerRuleCallID(), getRuleCall$4$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$4(entryPoint);
+	}
+
+	protected int consumeRuleCall$4(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "type", true, false, getRule().ele000LexerRuleCallID(), getRuleCall$4$Delimiter());
 	}
 
 	protected int consumeAssignment$5(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "name", true, false, getRule().ele010LexerRuleCallID(), getRuleCall$6$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$6(entryPoint);
+	}
+
+	protected int consumeRuleCall$6(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "name", true, false, getRule().ele010LexerRuleCallID(), getRuleCall$6$Delimiter());
 	}
 
 	protected int consumeKeyword$7(int entryPoint) throws Exception {

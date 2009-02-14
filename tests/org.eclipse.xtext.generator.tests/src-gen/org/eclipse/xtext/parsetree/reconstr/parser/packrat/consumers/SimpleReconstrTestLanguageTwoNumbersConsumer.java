@@ -85,31 +85,19 @@ public final class SimpleReconstrTestLanguageTwoNumbersConsumer extends NonTermi
 	}
 
 	protected int consumeAssignment$3(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(intConsumer, "num1", false, false, getRule().ele000LexerRuleCallINT(), getRuleCall$4$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$4(entryPoint);
+	}
+
+	protected int consumeRuleCall$4(int entryPoint) throws Exception {
+		return consumeTerminal(intConsumer, "num1", false, false, getRule().ele000LexerRuleCallINT(), getRuleCall$4$Delimiter());
 	}
 
 	protected int consumeAssignment$5(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(intConsumer, "num2", false, false, getRule().ele010LexerRuleCallINT(), getRuleCall$6$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$6(entryPoint);
+	}
+
+	protected int consumeRuleCall$6(int entryPoint) throws Exception {
+		return consumeTerminal(intConsumer, "num2", false, false, getRule().ele010LexerRuleCallINT(), getRuleCall$6$Delimiter());
 	}
 
 	protected int consumeGroup$7(int entryPoint) throws Exception {
@@ -157,17 +145,11 @@ public final class SimpleReconstrTestLanguageTwoNumbersConsumer extends NonTermi
 	}
 
 	protected int consumeAssignment$9(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(intConsumer, "num3", true, false, getRule().ele110LexerRuleCallINT(), getRuleCall$10$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$10(entryPoint);
+	}
+
+	protected int consumeRuleCall$10(int entryPoint) throws Exception {
+		return consumeTerminal(intConsumer, "num3", true, false, getRule().ele110LexerRuleCallINT(), getRuleCall$10$Delimiter());
 	}
 
 	public TwoNumbersElements getRule() {

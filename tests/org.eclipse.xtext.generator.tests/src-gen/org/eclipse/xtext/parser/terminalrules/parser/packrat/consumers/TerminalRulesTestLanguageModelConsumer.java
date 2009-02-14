@@ -110,101 +110,59 @@ public final class TerminalRulesTestLanguageModelConsumer extends NonTerminalCon
 	}
 
 	protected int consumeAssignment$7(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "idValue", false, false, getRule().ele0000000ParserRuleCallID(), getRuleCall$8$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$8(entryPoint);
+	}
+
+	protected int consumeRuleCall$8(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "idValue", false, false, getRule().ele0000000ParserRuleCallID(), getRuleCall$8$Delimiter());
 	}
 
 	protected int consumeAssignment$9(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(intConsumer, "intValue", false, false, getRule().ele0000010ParserRuleCallINT(), getRuleCall$10$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$10(entryPoint);
+	}
+
+	protected int consumeRuleCall$10(int entryPoint) throws Exception {
+		return consumeTerminal(intConsumer, "intValue", false, false, getRule().ele0000010ParserRuleCallINT(), getRuleCall$10$Delimiter());
 	}
 
 	protected int consumeAssignment$11(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(stringConsumer, "stringValue", false, false, getRule().ele000010ParserRuleCallSTRING(), getRuleCall$12$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$12(entryPoint);
+	}
+
+	protected int consumeRuleCall$12(int entryPoint) throws Exception {
+		return consumeTerminal(stringConsumer, "stringValue", false, false, getRule().ele000010ParserRuleCallSTRING(), getRuleCall$12$Delimiter());
 	}
 
 	protected int consumeAssignment$13(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(mlCommentConsumer, "mlCommentValue", false, false, getRule().ele00010ParserRuleCallML_COMMENT(), getRuleCall$14$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$14(entryPoint);
+	}
+
+	protected int consumeRuleCall$14(int entryPoint) throws Exception {
+		return consumeTerminal(mlCommentConsumer, "mlCommentValue", false, false, getRule().ele00010ParserRuleCallML_COMMENT(), getRuleCall$14$Delimiter());
 	}
 
 	protected int consumeAssignment$15(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(slCommentConsumer, "slCommentValue", false, false, getRule().ele0010ParserRuleCallSL_COMMENT(), getRuleCall$16$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$16(entryPoint);
+	}
+
+	protected int consumeRuleCall$16(int entryPoint) throws Exception {
+		return consumeTerminal(slCommentConsumer, "slCommentValue", false, false, getRule().ele0010ParserRuleCallSL_COMMENT(), getRuleCall$16$Delimiter());
 	}
 
 	protected int consumeAssignment$17(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(wsConsumer, "wsValue", false, false, getRule().ele010ParserRuleCallWS(), getRuleCall$18$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$18(entryPoint);
+	}
+
+	protected int consumeRuleCall$18(int entryPoint) throws Exception {
+		return consumeTerminal(wsConsumer, "wsValue", false, false, getRule().ele010ParserRuleCallWS(), getRuleCall$18$Delimiter());
 	}
 
 	protected int consumeAssignment$19(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(anyOtherConsumer, "anyValue", false, false, getRule().ele10ParserRuleCallANY_OTHER(), getRuleCall$20$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$20(entryPoint);
+	}
+
+	protected int consumeRuleCall$20(int entryPoint) throws Exception {
+		return consumeTerminal(anyOtherConsumer, "anyValue", false, false, getRule().ele10ParserRuleCallANY_OTHER(), getRuleCall$20$Delimiter());
 	}
 
 	public ModelElements getRule() {

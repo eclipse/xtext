@@ -74,17 +74,11 @@ public final class LangATestLanguageImportConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$3(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(stringConsumer, "uri", false, false, getRule().ele10LexerRuleCallSTRING(), getRuleCall$4$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$4(entryPoint);
+	}
+
+	protected int consumeRuleCall$4(int entryPoint) throws Exception {
+		return consumeTerminal(stringConsumer, "uri", false, false, getRule().ele10LexerRuleCallSTRING(), getRuleCall$4$Delimiter());
 	}
 
 	public ImportElements getRule() {

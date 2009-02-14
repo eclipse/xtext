@@ -112,17 +112,11 @@ public final class SimpleExpressionsTestLanguageSequenceConsumer extends NonTerm
 	}
 
 	protected int consumeAssignment$6(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(additionConsumer, "expressions", true, false, false, getRule().ele110ParserRuleCallAddition());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$7(entryPoint);
+	}
+
+	protected int consumeRuleCall$7(int entryPoint) throws Exception {
+		return consumeNonTerminal(additionConsumer, "expressions", true, false, false, getRule().ele110ParserRuleCallAddition());
 	}
 
 	public SequenceElements getRule() {

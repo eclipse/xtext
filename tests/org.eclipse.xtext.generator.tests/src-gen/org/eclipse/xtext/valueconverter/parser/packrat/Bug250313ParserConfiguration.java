@@ -11,6 +11,7 @@ import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration;
 
 import org.eclipse.xtext.valueconverter.parser.packrat.consumers.Bug250313ModelConsumer;
 import org.eclipse.xtext.valueconverter.parser.packrat.consumers.Bug250313DatatypeConsumer;
+import org.eclipse.xtext.valueconverter.parser.packrat.consumers.Bug250313NestedDatatypeConsumer;
 import org.eclipse.xtext.valueconverter.parser.packrat.consumers.Bug250313ChildConsumer;
 import org.eclipse.xtext.valueconverter.parser.packrat.consumers.Bug250313Child1Consumer;
 import org.eclipse.xtext.valueconverter.parser.packrat.consumers.Bug250313Child2Consumer;
@@ -29,6 +30,7 @@ public class Bug250313ParserConfiguration extends AbstractParserConfiguration {
 
     private Bug250313ModelConsumer modelConsumer;
     private Bug250313DatatypeConsumer datatypeConsumer;
+    private Bug250313NestedDatatypeConsumer nestedDatatypeConsumer;
     private Bug250313ChildConsumer childConsumer;
     private Bug250313Child1Consumer child1Consumer;
     private Bug250313Child2Consumer child2Consumer;
@@ -50,6 +52,9 @@ public class Bug250313ParserConfiguration extends AbstractParserConfiguration {
 		datatypeConsumer = new Bug250313DatatypeConsumer(
     		this, null
     	);
+		nestedDatatypeConsumer = new Bug250313NestedDatatypeConsumer(
+    		this, null
+    	);
 		childConsumer = new Bug250313ChildConsumer(
     		this, null
     	);
@@ -69,9 +74,13 @@ public class Bug250313ParserConfiguration extends AbstractParserConfiguration {
 		getModelConsumer().setChildConsumer(getChildConsumer());
 		getModelConsumer().setDatatypeConsumer(getDatatypeConsumer());
 		getModelConsumer().setIdConsumer(getIdConsumer());
+		getModelConsumer().setNestedDatatypeConsumer(getNestedDatatypeConsumer());
 		getModelConsumer().setStringConsumer(getStringConsumer());
 
 		getDatatypeConsumer().setIdConsumer(getIdConsumer());
+
+		getNestedDatatypeConsumer().setDatatypeConsumer(getDatatypeConsumer());
+		getNestedDatatypeConsumer().setIdConsumer(getIdConsumer());
 
 		getChildConsumer().setChild1Consumer(getChild1Consumer());
 		getChildConsumer().setChild2Consumer(getChild2Consumer());
@@ -80,23 +89,33 @@ public class Bug250313ParserConfiguration extends AbstractParserConfiguration {
 
 		getChild2Consumer().setStringConsumer(getStringConsumer());
 
-		getModelConsumer().setCrossReference$31$Delimiter(Bug250313Delimiters.ruleCall$13$Delimiter);
-		getModelConsumer().setCrossReference$33$Delimiter(Bug250313Delimiters.ruleCall$15$Delimiter);
+		getModelConsumer().setCrossReference$66$Delimiter(Bug250313Delimiters.ruleCall$19$Delimiter);
+		getModelConsumer().setCrossReference$68$Delimiter(Bug250313Delimiters.ruleCall$22$Delimiter);
 		getModelConsumer().setKeyword$10$Delimiter(Bug250313Delimiters.keyword$12$Delimiter);
-		getModelConsumer().setKeyword$15$Delimiter(Bug250313Delimiters.keyword$7$Delimiter);
-		getModelConsumer().setKeyword$19$Delimiter(Bug250313Delimiters.keyword$7$Delimiter);
-		getModelConsumer().setKeyword$24$Delimiter(Bug250313Delimiters.keyword$12$Delimiter);
-		getModelConsumer().setKeyword$28$Delimiter(Bug250313Delimiters.keyword$12$Delimiter);
-		getModelConsumer().setKeyword$5$Delimiter(Bug250313Delimiters.keyword$7$Delimiter);
-		getModelConsumer().setRuleCall$11$Delimiter(Bug250313Delimiters.ruleCall$13$Delimiter);
-		getModelConsumer().setRuleCall$13$Delimiter(Bug250313Delimiters.ruleCall$15$Delimiter);
-		getModelConsumer().setRuleCall$17$Delimiter(Bug250313Delimiters.ruleCall$13$Delimiter);
-		getDatatypeConsumer().setKeyword$4$Delimiter(Bug250313Delimiters.keyword$7$Delimiter);
-		getDatatypeConsumer().setKeyword$6$Delimiter(Bug250313Delimiters.keyword$7$Delimiter);
-		getDatatypeConsumer().setRuleCall$5$Delimiter(Bug250313Delimiters.ruleCall$15$Delimiter);
-		getDatatypeConsumer().setRuleCall$7$Delimiter(Bug250313Delimiters.ruleCall$15$Delimiter);
-		getChild1Consumer().setRuleCall$2$Delimiter(Bug250313Delimiters.ruleCall$15$Delimiter);
-		getChild2Consumer().setRuleCall$2$Delimiter(Bug250313Delimiters.ruleCall$13$Delimiter);
+		getModelConsumer().setKeyword$16$Delimiter(Bug250313Delimiters.keyword$18$Delimiter);
+		getModelConsumer().setKeyword$22$Delimiter(Bug250313Delimiters.keyword$12$Delimiter);
+		getModelConsumer().setKeyword$28$Delimiter(Bug250313Delimiters.keyword$18$Delimiter);
+		getModelConsumer().setKeyword$34$Delimiter(Bug250313Delimiters.keyword$12$Delimiter);
+		getModelConsumer().setKeyword$38$Delimiter(Bug250313Delimiters.keyword$12$Delimiter);
+		getModelConsumer().setKeyword$42$Delimiter(Bug250313Delimiters.keyword$12$Delimiter);
+		getModelConsumer().setKeyword$46$Delimiter(Bug250313Delimiters.keyword$12$Delimiter);
+		getModelConsumer().setKeyword$50$Delimiter(Bug250313Delimiters.keyword$12$Delimiter);
+		getModelConsumer().setKeyword$54$Delimiter(Bug250313Delimiters.keyword$12$Delimiter);
+		getModelConsumer().setKeyword$59$Delimiter(Bug250313Delimiters.keyword$18$Delimiter);
+		getModelConsumer().setKeyword$63$Delimiter(Bug250313Delimiters.keyword$18$Delimiter);
+		getModelConsumer().setRuleCall$17$Delimiter(Bug250313Delimiters.ruleCall$19$Delimiter);
+		getModelConsumer().setRuleCall$20$Delimiter(Bug250313Delimiters.ruleCall$22$Delimiter);
+		getModelConsumer().setRuleCall$29$Delimiter(Bug250313Delimiters.ruleCall$19$Delimiter);
+		getModelConsumer().setRuleCall$32$Delimiter(Bug250313Delimiters.ruleCall$22$Delimiter);
+		getModelConsumer().setRuleCall$36$Delimiter(Bug250313Delimiters.ruleCall$19$Delimiter);
+		getModelConsumer().setRuleCall$40$Delimiter(Bug250313Delimiters.ruleCall$19$Delimiter);
+		getDatatypeConsumer().setKeyword$4$Delimiter(Bug250313Delimiters.keyword$12$Delimiter);
+		getDatatypeConsumer().setRuleCall$3$Delimiter(Bug250313Delimiters.ruleCall$22$Delimiter);
+		getDatatypeConsumer().setRuleCall$5$Delimiter(Bug250313Delimiters.ruleCall$22$Delimiter);
+		getNestedDatatypeConsumer().setKeyword$4$Delimiter(Bug250313Delimiters.keyword$12$Delimiter);
+		getNestedDatatypeConsumer().setRuleCall$3$Delimiter(Bug250313Delimiters.ruleCall$22$Delimiter);
+		getChild1Consumer().setRuleCall$2$Delimiter(Bug250313Delimiters.ruleCall$22$Delimiter);
+		getChild2Consumer().setRuleCall$2$Delimiter(Bug250313Delimiters.ruleCall$19$Delimiter);
 	}
 	
 	// TODO collect superGrammars transitive
@@ -110,6 +129,10 @@ public class Bug250313ParserConfiguration extends AbstractParserConfiguration {
 
     public Bug250313DatatypeConsumer getDatatypeConsumer() {
     	return datatypeConsumer;
+    }
+
+    public Bug250313NestedDatatypeConsumer getNestedDatatypeConsumer() {
+    	return nestedDatatypeConsumer;
     }
 
     public Bug250313ChildConsumer getChildConsumer() {

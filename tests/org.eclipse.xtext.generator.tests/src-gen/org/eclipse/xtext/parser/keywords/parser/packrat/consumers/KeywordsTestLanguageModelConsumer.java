@@ -72,59 +72,35 @@ public final class KeywordsTestLanguageModelConsumer extends NonTerminalConsumer
 	}
 
 	protected int consumeAssignment$4(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeKeyword(getRule().ele0000KeywordFooBar(), "first", false, true, getKeyword$5$Delimiter()); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeKeyword$5(entryPoint);
+	}
+
+	protected int consumeKeyword$5(int entryPoint) throws Exception {
+		return consumeKeyword(getRule().ele0000KeywordFooBar(), "first", false, true, getKeyword$5$Delimiter());
 	}
 
 	protected int consumeAssignment$6(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeKeyword(getRule().ele0010KeywordFoo(), "second", false, true, getKeyword$7$Delimiter()); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeKeyword$7(entryPoint);
+	}
+
+	protected int consumeKeyword$7(int entryPoint) throws Exception {
+		return consumeKeyword(getRule().ele0010KeywordFoo(), "second", false, true, getKeyword$7$Delimiter());
 	}
 
 	protected int consumeAssignment$8(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeKeyword(getRule().ele010KeywordBar(), "third", false, true, getKeyword$9$Delimiter()); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeKeyword$9(entryPoint);
+	}
+
+	protected int consumeKeyword$9(int entryPoint) throws Exception {
+		return consumeKeyword(getRule().ele010KeywordBar(), "third", false, true, getKeyword$9$Delimiter());
 	}
 
 	protected int consumeAssignment$10(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeKeyword(getRule().ele10KeywordReverseSolidus(), "forth", false, true, getKeyword$11$Delimiter()); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeKeyword$11(entryPoint);
+	}
+
+	protected int consumeKeyword$11(int entryPoint) throws Exception {
+		return consumeKeyword(getRule().ele10KeywordReverseSolidus(), "forth", false, true, getKeyword$11$Delimiter());
 	}
 
 	public ModelElements getRule() {

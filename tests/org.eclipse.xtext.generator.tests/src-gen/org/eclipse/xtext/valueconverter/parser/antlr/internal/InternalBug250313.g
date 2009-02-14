@@ -81,26 +81,34 @@ ruleModel returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-((((('#' 
+(((((((((('1' 
     {
-        createLeafNode(grammarAccess.prModel().ele0000KeywordNumberSign(), null); 
+        createLeafNode(grammarAccess.prModel().ele000000000KeywordDigitOne(), null); 
     }
 )?(	
 	
-	    lv_value_1=((('mykeyword1' 
+	    lv_value_1=(((('mykeyword1' 
     {
-        createLeafNode(grammarAccess.prModel().ele00010000KeywordMykeyword1(), "value"); 
+        createLeafNode(grammarAccess.prModel().ele00000000100000KeywordMykeyword1(), "value"); 
     }
 
 
     |	RULE_STRING
 	{
-		createLeafNode(grammarAccess.prModel().ele00010001LexerRuleCallSTRING(), "value"); 
+		createLeafNode(grammarAccess.prModel().ele00000000100001LexerRuleCallSTRING(), "value"); 
 	}
 )
 
     |		{ 
-	        currentNode=createCompositeNode(grammarAccess.prModel().ele0001001ParserRuleCallDatatype(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prModel().ele0000000010001ParserRuleCallNestedDatatype(), currentNode); 
+	    }
+		ruleNestedDatatype		{ 
+	        currentNode = currentNode.getParent();
+	    }
+)
+
+    |		{ 
+	        currentNode=createCompositeNode(grammarAccess.prModel().ele000000001001ParserRuleCallDatatype(), currentNode); 
 	    }
 		ruleDatatype		{ 
 	        currentNode = currentNode.getParent();
@@ -109,7 +117,7 @@ ruleModel returns [EObject current=null]
 
     |	RULE_ID
 	{
-		createLeafNode(grammarAccess.prModel().ele000101LexerRuleCallID(), "value"); 
+		createLeafNode(grammarAccess.prModel().ele00000000101LexerRuleCallID(), "value"); 
 	}
 )
  
@@ -127,15 +135,69 @@ ruleModel returns [EObject current=null]
 	    }
 	
 ))
-    |('!' 
+    |('1+' 
     {
-        createLeafNode(grammarAccess.prModel().ele0010KeywordExclamationMark(), null); 
+        createLeafNode(grammarAccess.prModel().ele000000010KeywordDigitOnePlusSign(), null); 
     }
 (	
 	
-	    lv_value_3=	RULE_STRING
+	    lv_multiValue_3=(((('mykeyword1' 
+    {
+        createLeafNode(grammarAccess.prModel().ele00000001100000KeywordMykeyword1(), "multiValue"); 
+    }
+
+
+    |	RULE_STRING
 	{
-		createLeafNode(grammarAccess.prModel().ele00110LexerRuleCallSTRING(), "value"); 
+		createLeafNode(grammarAccess.prModel().ele00000001100001LexerRuleCallSTRING(), "multiValue"); 
+	}
+)
+
+    |		{ 
+	        currentNode=createCompositeNode(grammarAccess.prModel().ele0000000110001ParserRuleCallNestedDatatype(), currentNode); 
+	    }
+		ruleNestedDatatype		{ 
+	        currentNode = currentNode.getParent();
+	    }
+)
+
+    |		{ 
+	        currentNode=createCompositeNode(grammarAccess.prModel().ele000000011001ParserRuleCallDatatype(), currentNode); 
+	    }
+		ruleDatatype		{ 
+	        currentNode = currentNode.getParent();
+	    }
+)
+
+    |	RULE_ID
+	{
+		createLeafNode(grammarAccess.prModel().ele00000001101LexerRuleCallID(), "multiValue"); 
+	}
+)
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create("Model");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        try {
+	       		add($current, "multiValue", /* lv_multiValue_3 */ input.LT(-1), null, lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+	
+)))
+    |('2' 
+    {
+        createLeafNode(grammarAccess.prModel().ele00000010KeywordDigitTwo(), null); 
+    }
+(	
+	
+	    lv_value_5=	RULE_STRING
+	{
+		createLeafNode(grammarAccess.prModel().ele000000110LexerRuleCallSTRING(), "value"); 
 	}
  
 	    {
@@ -145,24 +207,49 @@ ruleModel returns [EObject current=null]
 	        }
 	        
 	        try {
-	       		set($current, "value", lv_value_3, "STRING", lastConsumedNode);
+	       		set($current, "value", lv_value_5, "STRING", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	    }
 	
 )))
-    |('$' 
+    |('2+' 
     {
-        createLeafNode(grammarAccess.prModel().ele010Keyword$(), null); 
+        createLeafNode(grammarAccess.prModel().ele0000010KeywordDigitTwoPlusSign(), null); 
+    }
+(	
+	
+	    lv_multiValue_7=	RULE_STRING
+	{
+		createLeafNode(grammarAccess.prModel().ele00000110LexerRuleCallSTRING(), "multiValue"); 
+	}
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create("Model");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        try {
+	       		add($current, "multiValue", lv_multiValue_7, "STRING", lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+	
+)))
+    |('3' 
+    {
+        createLeafNode(grammarAccess.prModel().ele000010KeywordDigitThree(), null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prModel().ele0110ParserRuleCallDatatype(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prModel().ele0000110ParserRuleCallDatatype(), currentNode); 
 	    }
-	    lv_value_5=ruleDatatype 
+	    lv_value_9=ruleDatatype 
 	    {
 	        if ($current==null) {
 	            $current = factory.create("Model");
@@ -170,7 +257,85 @@ ruleModel returns [EObject current=null]
 	        }
 	        
 	        try {
-	       		set($current, "value", lv_value_5, "Datatype", currentNode);
+	       		set($current, "value", lv_value_9, "Datatype", currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+	
+)))
+    |('3+' 
+    {
+        createLeafNode(grammarAccess.prModel().ele00010KeywordDigitThreePlusSign(), null); 
+    }
+(	
+	
+	    
+	    { 
+	        currentNode=createCompositeNode(grammarAccess.prModel().ele000110ParserRuleCallDatatype(), currentNode); 
+	    }
+	    lv_multiValue_11=ruleDatatype 
+	    {
+	        if ($current==null) {
+	            $current = factory.create("Model");
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        
+	        try {
+	       		add($current, "multiValue", lv_multiValue_11, "Datatype", currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+	
+)))
+    |('4' 
+    {
+        createLeafNode(grammarAccess.prModel().ele0010KeywordDigitFour(), null); 
+    }
+(	
+	
+	    
+	    { 
+	        currentNode=createCompositeNode(grammarAccess.prModel().ele00110ParserRuleCallNestedDatatype(), currentNode); 
+	    }
+	    lv_value_13=ruleNestedDatatype 
+	    {
+	        if ($current==null) {
+	            $current = factory.create("Model");
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        
+	        try {
+	       		set($current, "value", lv_value_13, "NestedDatatype", currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+	
+)))
+    |('4+' 
+    {
+        createLeafNode(grammarAccess.prModel().ele010KeywordDigitFourPlusSign(), null); 
+    }
+(	
+	
+	    
+	    { 
+	        currentNode=createCompositeNode(grammarAccess.prModel().ele0110ParserRuleCallNestedDatatype(), currentNode); 
+	    }
+	    lv_multiValue_15=ruleNestedDatatype 
+	    {
+	        if ($current==null) {
+	            $current = factory.create("Model");
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        
+	        try {
+	       		add($current, "multiValue", lv_multiValue_15, "NestedDatatype", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -188,7 +353,7 @@ ruleModel returns [EObject current=null]
 	    { 
 	        currentNode=createCompositeNode(grammarAccess.prModel().ele1010ParserRuleCallChild(), currentNode); 
 	    }
-	    lv_children_7=ruleChild 
+	    lv_children_17=ruleChild 
 	    {
 	        if ($current==null) {
 	            $current = factory.create("Model");
@@ -196,7 +361,7 @@ ruleModel returns [EObject current=null]
 	        }
 	        
 	        try {
-	       		set($current, "children", lv_children_7, "Child", currentNode);
+	       		set($current, "children", lv_children_17, "Child", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -253,33 +418,76 @@ ruleDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken(
 	    lastConsumedNode = currentNode;
 	    lastConsumedDatatypeToken = $current;
     }:
-(((
-	kw='>>' 
-    {
-        $current.merge(kw);
-        createLeafNode(grammarAccess.prDatatype().ele000KeywordGreaterThanSignGreaterThanSign(), null); 
-    }
-    this_ID_1=RULE_ID    {
-		$current.merge(this_ID_1);
+((    this_ID_0=RULE_ID    {
+		$current.merge(this_ID_0);
     }
 
     { 
-    createLeafNode(grammarAccess.prDatatype().ele001LexerRuleCallID(), null); 
+    createLeafNode(grammarAccess.prDatatype().ele00LexerRuleCallID(), null); 
     }
-)
+
 	kw='-' 
     {
         $current.merge(kw);
         createLeafNode(grammarAccess.prDatatype().ele01KeywordHyphenMinus(), null); 
     }
-)    this_ID_3=RULE_ID    {
-		$current.merge(this_ID_3);
+)    this_ID_2=RULE_ID    {
+		$current.merge(this_ID_2);
     }
 
     { 
     createLeafNode(grammarAccess.prDatatype().ele1LexerRuleCallID(), null); 
     }
 )
+    ;
+
+
+
+
+
+
+
+// Entry rule entryRuleNestedDatatype
+entryRuleNestedDatatype returns [String current=null] :
+	{ currentNode = createCompositeNode(grammarAccess.prNestedDatatype().getRule(), currentNode); } 
+	 iv_ruleNestedDatatype=ruleNestedDatatype 
+	 { $current=$iv_ruleNestedDatatype.current.getText(); }  
+	 EOF 
+;
+
+// Rule NestedDatatype
+ruleNestedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
+    @init { setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+	    lastConsumedNode = currentNode;
+	    lastConsumedDatatypeToken = $current;
+    }:
+((    this_ID_0=RULE_ID    {
+		$current.merge(this_ID_0);
+    }
+
+    { 
+    createLeafNode(grammarAccess.prNestedDatatype().ele00LexerRuleCallID(), null); 
+    }
+
+	kw='+' 
+    {
+        $current.merge(kw);
+        createLeafNode(grammarAccess.prNestedDatatype().ele01KeywordPlusSign(), null); 
+    }
+)(
+    { 
+        currentNode=createCompositeNode(grammarAccess.prNestedDatatype().ele1ParserRuleCallDatatype(), currentNode); 
+    }
+    this_Datatype_2=ruleDatatype    {
+		$current.merge(this_Datatype_2);
+    }
+
+    { 
+        currentNode = currentNode.getParent();
+    }
+)?)
     ;
 
 
@@ -409,6 +617,8 @@ ruleChild2 returns [EObject current=null]
 	    }
 	
 );
+
+
 
 
 

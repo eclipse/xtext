@@ -129,17 +129,11 @@ public final class TestLanguageReducibleRuleConsumer extends NonTerminalConsumer
 	}
 
 	protected int consumeAssignment$8(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(terminalRuleConsumer, "actionFeature", true, false, false, getRule().ele110ParserRuleCallTerminalRule());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$9(entryPoint);
+	}
+
+	protected int consumeRuleCall$9(int entryPoint) throws Exception {
+		return consumeNonTerminal(terminalRuleConsumer, "actionFeature", true, false, false, getRule().ele110ParserRuleCallTerminalRule());
 	}
 
 	public ReducibleRuleElements getRule() {

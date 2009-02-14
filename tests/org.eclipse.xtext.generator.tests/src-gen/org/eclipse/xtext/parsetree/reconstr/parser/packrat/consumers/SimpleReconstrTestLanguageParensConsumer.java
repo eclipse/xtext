@@ -113,17 +113,11 @@ public final class SimpleReconstrTestLanguageParensConsumer extends NonTerminalC
 	}
 
 	protected int doConsumeAssignment$7(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeKeyword(getRule().ele10KeywordExclamationMark(), "em", false, false, getKeyword$8$Delimiter()); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeKeyword$8(entryPoint);
+	}
+
+	protected int consumeKeyword$8(int entryPoint) throws Exception {
+		return consumeKeyword(getRule().ele10KeywordExclamationMark(), "em", false, false, getKeyword$8$Delimiter());
 	}
 
 	public ParensElements getRule() {

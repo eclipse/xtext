@@ -69,17 +69,11 @@ public final class MetamodelRefTestLanguageFooConsumer extends NonTerminalConsum
 	}
 
 	protected int consumeAssignment$2(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "name", false, false, getRule().ele00LexerRuleCallID(), getRuleCall$3$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$3(entryPoint);
+	}
+
+	protected int consumeRuleCall$3(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "name", false, false, getRule().ele00LexerRuleCallID(), getRuleCall$3$Delimiter());
 	}
 
 	protected int consumeAssignment$4(int entryPoint) throws Exception {
@@ -92,17 +86,11 @@ public final class MetamodelRefTestLanguageFooConsumer extends NonTerminalConsum
 	}
 
 	protected int doConsumeAssignment$4(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(nameRefConsumer, "nameRefs", true, false, false, getRule().ele10ParserRuleCallNameRef());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$5(entryPoint);
+	}
+
+	protected int consumeRuleCall$5(int entryPoint) throws Exception {
+		return consumeNonTerminal(nameRefConsumer, "nameRefs", true, false, false, getRule().ele10ParserRuleCallNameRef());
 	}
 
 	public FooElements getRule() {

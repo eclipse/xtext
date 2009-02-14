@@ -89,17 +89,11 @@ public final class SimpleReconstrTestLanguageSpareConsumer extends NonTerminalCo
 	}
 
 	protected int consumeAssignment$4(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "id", true, false, getRule().ele010LexerRuleCallID(), getRuleCall$5$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$5(entryPoint);
+	}
+
+	protected int consumeRuleCall$5(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "id", true, false, getRule().ele010LexerRuleCallID(), getRuleCall$5$Delimiter());
 	}
 
 	protected int consumeGroup$6(int entryPoint) throws Exception {
@@ -147,17 +141,11 @@ public final class SimpleReconstrTestLanguageSpareConsumer extends NonTerminalCo
 	}
 
 	protected int consumeAssignment$8(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "id", true, false, getRule().ele110LexerRuleCallID(), getRuleCall$9$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$9(entryPoint);
+	}
+
+	protected int consumeRuleCall$9(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "id", true, false, getRule().ele110LexerRuleCallID(), getRuleCall$9$Delimiter());
 	}
 
 	public SpareElements getRule() {

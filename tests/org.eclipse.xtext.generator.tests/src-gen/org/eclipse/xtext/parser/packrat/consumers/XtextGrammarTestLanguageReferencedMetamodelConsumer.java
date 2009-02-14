@@ -91,17 +91,11 @@ public final class XtextGrammarTestLanguageReferencedMetamodelConsumer extends N
 	}
 
 	protected int consumeAssignment$4(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(stringConsumer, "ePackage", false, false, getRule().ele010CrossReferenceEStringEPackage(), getCrossReference$5$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeCrossReference$5(entryPoint);
+	}
+
+	protected int consumeCrossReference$5(int entryPoint) throws Exception {
+		return consumeTerminal(stringConsumer, "ePackage", false, false, getRule().ele010CrossReferenceEStringEPackage(), getCrossReference$5$Delimiter());
 	}
 
 	protected int consumeGroup$7(int entryPoint) throws Exception {
@@ -150,17 +144,11 @@ public final class XtextGrammarTestLanguageReferencedMetamodelConsumer extends N
 	}
 
 	protected int consumeAssignment$9(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "alias", false, false, getRule().ele110LexerRuleCallID(), getRuleCall$10$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$10(entryPoint);
+	}
+
+	protected int consumeRuleCall$10(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "alias", false, false, getRule().ele110LexerRuleCallID(), getRuleCall$10$Delimiter());
 	}
 
 	public ReferencedMetamodelElements getRule() {

@@ -105,17 +105,11 @@ public final class EpatchTestLanguageJavaImportConsumer extends NonTerminalConsu
 	}
 
 	protected int consumeAssignment$6(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "path", true, false, getRule().ele010LexerRuleCallID(), getRuleCall$7$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$7(entryPoint);
+	}
+
+	protected int consumeRuleCall$7(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "path", true, false, getRule().ele010LexerRuleCallID(), getRuleCall$7$Delimiter());
 	}
 
 	protected int consumeGroup$8(int entryPoint) throws Exception {
@@ -163,17 +157,11 @@ public final class EpatchTestLanguageJavaImportConsumer extends NonTerminalConsu
 	}
 
 	protected int consumeAssignment$10(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "path", true, false, getRule().ele110LexerRuleCallID(), getRuleCall$11$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$11(entryPoint);
+	}
+
+	protected int consumeRuleCall$11(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "path", true, false, getRule().ele110LexerRuleCallID(), getRuleCall$11$Delimiter());
 	}
 
 	public JavaImportElements getRule() {

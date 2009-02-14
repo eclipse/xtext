@@ -33,17 +33,11 @@ public final class ConcreteTestLanguageCallOverridenParserRuleConsumer extends N
 	}
 
 	protected int consumeAssignment$1(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(abstractCallOverridenParserRuleConsumer, "call", false, false, false, getRule().ele0ParserRuleCallAbstractCallOverridenParserRule());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$2(entryPoint);
+	}
+
+	protected int consumeRuleCall$2(int entryPoint) throws Exception {
+		return consumeNonTerminal(abstractCallOverridenParserRuleConsumer, "call", false, false, false, getRule().ele0ParserRuleCallAbstractCallOverridenParserRule());
 	}
 
 	public CallOverridenParserRuleElements getRule() {

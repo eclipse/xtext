@@ -148,31 +148,19 @@ public final class HiddenTerminalsTestLanguageInheritingHiddensConsumer extends 
 	}
 
 	protected int consumeAssignment$10(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(inheritingHiddensCallConsumer, "called", false, false, false, getRule().ele00100ParserRuleCallInheritingHiddensCall());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$11(entryPoint);
+	}
+
+	protected int consumeRuleCall$11(int entryPoint) throws Exception {
+		return consumeNonTerminal(inheritingHiddensCallConsumer, "called", false, false, false, getRule().ele00100ParserRuleCallInheritingHiddensCall());
 	}
 
 	protected int consumeAssignment$12(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(hidingHiddensConsumer, "hidingCalled", false, false, false, getRule().ele00110ParserRuleCallHidingHiddens());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$13(entryPoint);
+	}
+
+	protected int consumeRuleCall$13(int entryPoint) throws Exception {
+		return consumeNonTerminal(hidingHiddensConsumer, "hidingCalled", false, false, false, getRule().ele00110ParserRuleCallHidingHiddens());
 	}
 
 	protected int consumeKeyword$14(int entryPoint) throws Exception {
@@ -180,17 +168,11 @@ public final class HiddenTerminalsTestLanguageInheritingHiddensConsumer extends 
 	}
 
 	protected int consumeAssignment$15(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeKeyword(getRule().ele10KeywordSemicolon(), "valid", false, true, getKeyword$16$Delimiter()); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeKeyword$16(entryPoint);
+	}
+
+	protected int consumeKeyword$16(int entryPoint) throws Exception {
+		return consumeKeyword(getRule().ele10KeywordSemicolon(), "valid", false, true, getKeyword$16$Delimiter());
 	}
 
 	public InheritingHiddensElements getRule() {

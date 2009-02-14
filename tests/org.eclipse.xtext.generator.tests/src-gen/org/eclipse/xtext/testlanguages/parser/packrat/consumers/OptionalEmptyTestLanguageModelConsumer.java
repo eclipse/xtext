@@ -43,17 +43,11 @@ public final class OptionalEmptyTestLanguageModelConsumer extends NonTerminalCon
 	}
 
 	protected int doConsumeAssignment$1(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(greetingConsumer, "child", false, false, false, getRule().ele0ParserRuleCallGreeting());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$2(entryPoint);
+	}
+
+	protected int consumeRuleCall$2(int entryPoint) throws Exception {
+		return consumeNonTerminal(greetingConsumer, "child", false, false, false, getRule().ele0ParserRuleCallGreeting());
 	}
 
 	public ModelElements getRule() {

@@ -36,17 +36,11 @@ public final class SimpleExpressionsTestLanguageAtomConsumer extends NonTerminal
 	}
 
 	protected int consumeAssignment$1(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "name", false, false, getRule().ele0LexerRuleCallID(), getRuleCall$2$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$2(entryPoint);
+	}
+
+	protected int consumeRuleCall$2(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "name", false, false, getRule().ele0LexerRuleCallID(), getRuleCall$2$Delimiter());
 	}
 
 	public AtomElements getRule() {

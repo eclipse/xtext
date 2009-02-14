@@ -129,17 +129,11 @@ public final class PartialParserTestLanguageFirstConcreteConsumer extends NonTer
 	}
 
 	protected int consumeAssignment$9(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(namedConsumer, "value", false, false, false, getRule().ele0010ParserRuleCallNamed());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$10(entryPoint);
+	}
+
+	protected int consumeRuleCall$10(int entryPoint) throws Exception {
+		return consumeNonTerminal(namedConsumer, "value", false, false, false, getRule().ele0010ParserRuleCallNamed());
 	}
 
 	protected int consumeAssignment$11(int entryPoint) throws Exception {
@@ -153,17 +147,11 @@ public final class PartialParserTestLanguageFirstConcreteConsumer extends NonTer
 	}
 
 	protected int doConsumeAssignment$11(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "referencedContainer", false, false, getRule().ele010CrossReferenceEStringContainer(), getCrossReference$12$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeCrossReference$12(entryPoint);
+	}
+
+	protected int consumeCrossReference$12(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "referencedContainer", false, false, getRule().ele010CrossReferenceEStringContainer(), getCrossReference$12$Delimiter());
 	}
 
 	protected int consumeKeyword$14(int entryPoint) throws Exception {

@@ -105,17 +105,11 @@ public final class ContentAssistTestLanguageFirstAbstractRuleChildConsumer exten
 	}
 
 	protected int consumeAssignment$5(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "name", false, false, getRule().ele00000LexerRuleCallID(), getRuleCall$6$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$6(entryPoint);
+	}
+
+	protected int consumeRuleCall$6(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "name", false, false, getRule().ele00000LexerRuleCallID(), getRuleCall$6$Delimiter());
 	}
 
 	protected int consumeKeyword$7(int entryPoint) throws Exception {
@@ -152,17 +146,11 @@ public final class ContentAssistTestLanguageFirstAbstractRuleChildConsumer exten
 	}
 
 	protected int doConsumeAssignment$8(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(abstractRuleConsumer, "elements", true, false, false, getRule().ele0010ParserRuleCallAbstractRule());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$9(entryPoint);
+	}
+
+	protected int consumeRuleCall$9(int entryPoint) throws Exception {
+		return consumeNonTerminal(abstractRuleConsumer, "elements", true, false, false, getRule().ele0010ParserRuleCallAbstractRule());
 	}
 
 	protected int consumeKeyword$10(int entryPoint) throws Exception {

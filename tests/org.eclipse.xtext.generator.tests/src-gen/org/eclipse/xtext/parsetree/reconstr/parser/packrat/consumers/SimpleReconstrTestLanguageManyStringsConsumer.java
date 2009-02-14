@@ -95,31 +95,19 @@ public final class SimpleReconstrTestLanguageManyStringsConsumer extends NonTerm
 	}
 
 	protected int doConsumeAssignment$4(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(stringConsumer, "str1", true, false, getRule().ele010LexerRuleCallSTRING(), getRuleCall$5$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$5(entryPoint);
+	}
+
+	protected int consumeRuleCall$5(int entryPoint) throws Exception {
+		return consumeTerminal(stringConsumer, "str1", true, false, getRule().ele010LexerRuleCallSTRING(), getRuleCall$5$Delimiter());
 	}
 
 	protected int consumeAssignment$6(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(stringConsumer, "str2", true, false, getRule().ele10LexerRuleCallSTRING(), getRuleCall$7$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$7(entryPoint);
+	}
+
+	protected int consumeRuleCall$7(int entryPoint) throws Exception {
+		return consumeTerminal(stringConsumer, "str2", true, false, getRule().ele10LexerRuleCallSTRING(), getRuleCall$7$Delimiter());
 	}
 
 	public ManyStringsElements getRule() {
