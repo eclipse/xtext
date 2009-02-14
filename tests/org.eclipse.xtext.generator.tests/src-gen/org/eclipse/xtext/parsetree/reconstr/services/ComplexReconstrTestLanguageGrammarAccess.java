@@ -5,11 +5,17 @@ Generated with Xtext
 package org.eclipse.xtext.parsetree.reconstr.services;
 
 import com.google.inject.Singleton;
+import com.google.inject.Inject;
+
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parser.BaseEPackageAccess;
+
+import org.eclipse.xtext.service.GrammarProvider;
+
+import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
 
 @Singleton
-public class ComplexReconstrTestLanguageGrammarAccess extends BaseEPackageAccess implements IGrammarAccess {
+public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess {
+	
 	
 	public class RootElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Root");
@@ -696,41 +702,39 @@ public class ComplexReconstrTestLanguageGrammarAccess extends BaseEPackageAccess
 		public RuleCall ele10LexerRuleCallINT() { return c10LexerRuleCallINT; }
 	}
 	
-	public final static ComplexReconstrTestLanguageGrammarAccess INSTANCE = new ComplexReconstrTestLanguageGrammarAccess();
+	private RootElements pRoot;
+	private OpElements pOp;
+	private TermElements pTerm;
+	private AtomElements pAtom;
+	private ParensElements pParens;
+	private TrickyAElements pTrickyA;
+	private TrickyA1Elements pTrickyA1;
+	private TrickyBElements pTrickyB;
+	private TrickyCElements pTrickyC;
+	private TrickyDElements pTrickyD;
+	private TrickyEElements pTrickyE;
+	private TrickyFElements pTrickyF;
+	private TrickyGElements pTrickyG;
+	private TrickyG1Elements pTrickyG1;
+	private TrickyG2Elements pTrickyG2;
+	
+	private final GrammarProvider grammarProvider;
 
-	private static final String COMPLEXRECONSTRTESTLANGUAGE_GRAMMAR_CP_URI = "classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.xmi";
-	private static Grammar GRAMMAR = null;
-	private static RootElements pRoot;
-	private static OpElements pOp;
-	private static TermElements pTerm;
-	private static AtomElements pAtom;
-	private static ParensElements pParens;
-	private static TrickyAElements pTrickyA;
-	private static TrickyA1Elements pTrickyA1;
-	private static TrickyBElements pTrickyB;
-	private static TrickyCElements pTrickyC;
-	private static TrickyDElements pTrickyD;
-	private static TrickyEElements pTrickyE;
-	private static TrickyFElements pTrickyF;
-	private static TrickyGElements pTrickyG;
-	private static TrickyG1Elements pTrickyG1;
-	private static TrickyG2Elements pTrickyG2;
-	private static LexerRule lID;
-	private static LexerRule lINT;
-	private static LexerRule lSTRING;
-	private static LexerRule lML_COMMENT;
-	private static LexerRule lSL_COMMENT;
-	private static LexerRule lWS;
-	private static LexerRule lANY_OTHER;
+	private XtextBuiltinGrammarAccess superGrammarAccess;
 
-	@SuppressWarnings("unused")
-	public synchronized Grammar getGrammar() {	
-		if (GRAMMAR==null) {
-			// assert the XtextPackage implementation is loaded
-			XtextPackage xtextPackage = XtextPackage.eINSTANCE;
-			GRAMMAR = (Grammar) loadGrammarFile(ComplexReconstrTestLanguageGrammarAccess.class.getClassLoader(),COMPLEXRECONSTRTESTLANGUAGE_GRAMMAR_CP_URI);
-		}
-		return GRAMMAR;
+	@Inject
+	public ComplexReconstrTestLanguageGrammarAccess(GrammarProvider grammarProvider, XtextBuiltinGrammarAccess superGrammarAccess) {
+		this.grammarProvider = grammarProvider;
+		this.superGrammarAccess = superGrammarAccess;
+	}
+	
+	public Grammar getGrammar() {	
+		return grammarProvider.getGrammar(this);
+	}
+	
+
+	public XtextBuiltinGrammarAccess getSuperGrammarAccess() {
+		return superGrammarAccess;
 	}
 
 	
@@ -811,36 +815,36 @@ public class ComplexReconstrTestLanguageGrammarAccess extends BaseEPackageAccess
 
 	// lexer ID:   "(\'^\')?(\'a\'..\'z\'|\'A\'..\'Z\'|\'_\') (\'a\'..\'z\'|\'A\'..\'Z\'|\'_\'|\'0\'..\'9\')*";
 	public LexerRule lrID() {
-		return (lID != null) ? lID : (lID = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "ID"));
+		return superGrammarAccess.lrID();
 	} 
 
 	// lexer INT returns EInt:   "(\'0\'..\'9\')+";
 	public LexerRule lrINT() {
-		return (lINT != null) ? lINT : (lINT = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "INT"));
+		return superGrammarAccess.lrINT();
 	} 
 
 	// lexer STRING:   "\n\t\t\t  \'\"\' ( \'\\\\\' (\'b\'|\'t\'|\'n\'|\'f\'|\'r\'|\'\\\"\'|\'\\\'\'|\'\\\\\') | ~(\'\\\\\'|\'\"\') )* \'\"\' | \n              \'\\\'\' ( \'\\\\\' (\'b\'|\'t\'|\'n\'|\'f\'|\'r\'|\'\\\"\'|\'\\\'\'|\'\\\\\') | ~(\'\\\\\'|\'\\\'\') )* \'\\\'\'\n              ";
 	public LexerRule lrSTRING() {
-		return (lSTRING != null) ? lSTRING : (lSTRING = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "STRING"));
+		return superGrammarAccess.lrSTRING();
 	} 
 
 	// lexer ML_COMMENT:   "\'/*\' ( options {greedy=false;} : . )* \'*/\'";
 	public LexerRule lrML_COMMENT() {
-		return (lML_COMMENT != null) ? lML_COMMENT : (lML_COMMENT = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "ML_COMMENT"));
+		return superGrammarAccess.lrML_COMMENT();
 	} 
 
 	// lexer SL_COMMENT:   "\'//\' ~(\'\\n\'|\'\\r\')* (\'\\r\'? \'\\n\')?";
 	public LexerRule lrSL_COMMENT() {
-		return (lSL_COMMENT != null) ? lSL_COMMENT : (lSL_COMMENT = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "SL_COMMENT"));
+		return superGrammarAccess.lrSL_COMMENT();
 	} 
 
 	// lexer WS:   "(\' \'|\'\\t\'|\'\\r\'|\'\\n\')+";
 	public LexerRule lrWS() {
-		return (lWS != null) ? lWS : (lWS = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "WS"));
+		return superGrammarAccess.lrWS();
 	} 
 
 	// lexer ANY_OTHER:   ".";
 	public LexerRule lrANY_OTHER() {
-		return (lANY_OTHER != null) ? lANY_OTHER : (lANY_OTHER = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "ANY_OTHER"));
+		return superGrammarAccess.lrANY_OTHER();
 	} 
 }

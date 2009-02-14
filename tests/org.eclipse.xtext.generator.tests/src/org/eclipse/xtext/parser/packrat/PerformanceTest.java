@@ -18,8 +18,6 @@ import org.eclipse.xtext.util.StringInputStream;
  */
 public class PerformanceTest extends AbstractGeneratorTest {
 
-	private XtextGrammarTestLanguagePackratParser generated;
-
 	private XtextTerminalsTestLanguagePackratParser generatedWithTerminals;
 
 	private String model;
@@ -33,10 +31,7 @@ public class PerformanceTest extends AbstractGeneratorTest {
 	@Override
 	protected void setUp() throws Exception {
 		with(XtextTerminalsTestLanguageStandaloneSetup.class);
-		this.generated = new XtextGrammarTestLanguagePackratParser();
-		setAstFactory(generated);
-		this.generatedWithTerminals = new XtextTerminalsTestLanguagePackratParser();
-		setAstFactory(generatedWithTerminals);
+		this.generatedWithTerminals = get(XtextTerminalsTestLanguagePackratParser.class);
 		StringBuilder modelBuilder = new StringBuilder("language a.bc.def.ghi extends e.fh.ijk\n");
 		for(int i = 0; i < metamodelCount; i++) {
 			if (i % 2 == 0)
@@ -92,20 +87,6 @@ public class PerformanceTest extends AbstractGeneratorTest {
 	public void testGeneratedWithTerminalsPackratTwice() {
 		for (int i = 0; i < 2; i++) {
 			doTest(generatedWithTerminals);
-		}
-	}
-
-	public void testFirstGeneratedPackrat() {
-		doTest(generated);
-	}
-
-	public void testSecondGeneratedPackrat() {
-		doTest(generated);
-	}
-
-	public void testGeneratedPackratTwice() {
-		for (int i = 0; i < 2; i++) {
-			doTest(generated);
 		}
 	}
 

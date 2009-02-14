@@ -21,6 +21,8 @@ import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerm
 @SuppressWarnings("unused")
 public final class XtextTerminalsTestLanguageTerminalGroupConsumer extends NonTerminalConsumer {
 
+	private TerminalGroupElements rule;
+	
 	private INonTerminalConsumer terminalTokenConsumer;
 
 	public XtextTerminalsTestLanguageTerminalGroupConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
@@ -120,7 +122,12 @@ public final class XtextTerminalsTestLanguageTerminalGroupConsumer extends NonTe
 	}
 
 	public TerminalGroupElements getRule() {
-		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prTerminalGroup();
+	// XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prTerminalGroup()
+		return rule;
+	}
+	
+	public void setRule(TerminalGroupElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

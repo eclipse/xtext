@@ -21,6 +21,8 @@ import org.eclipse.xtext.parser.datatyperules.parser.packrat.consumers.DatatypeR
 @SuppressWarnings("unused")
 public final class DatatypeRulesTestLanguageCompositeModelConsumer extends NonTerminalConsumer {
 
+	private CompositeModelElements rule;
+	
 	private INonTerminalConsumer modelConsumer;
 
 	public DatatypeRulesTestLanguageCompositeModelConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
@@ -52,9 +54,8 @@ public final class DatatypeRulesTestLanguageCompositeModelConsumer extends NonTe
 					marker.rollback();
 					announceLevelFinished();
 					return ConsumeResult.SUCCESS;
-				} else {
-					error("Could not find token.", getRule().eleAssignmentModel());
 				}
+				error("Could not find token.", getRule().eleAssignmentModel());
 		}
 		announceLevelFinished();
 		marker.commit();
@@ -70,7 +71,12 @@ public final class DatatypeRulesTestLanguageCompositeModelConsumer extends NonTe
 	}
 
 	public CompositeModelElements getRule() {
-		return DatatypeRulesTestLanguageGrammarAccess.INSTANCE.prCompositeModel();
+	// DatatypeRulesTestLanguageGrammarAccess.INSTANCE.prCompositeModel()
+		return rule;
+	}
+	
+	public void setRule(CompositeModelElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

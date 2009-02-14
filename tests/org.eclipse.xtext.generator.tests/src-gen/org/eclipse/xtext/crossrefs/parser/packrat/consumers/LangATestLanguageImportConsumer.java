@@ -21,6 +21,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGCons
 @SuppressWarnings("unused")
 public final class LangATestLanguageImportConsumer extends NonTerminalConsumer {
 
+	private ImportElements rule;
+	
 	private ITerminalConsumer stringConsumer;
 
 	private ICharacterClass keyword$2$Delimiter;
@@ -82,7 +84,12 @@ public final class LangATestLanguageImportConsumer extends NonTerminalConsumer {
 	}
 
 	public ImportElements getRule() {
-		return LangATestLanguageGrammarAccess.INSTANCE.prImport();
+	// LangATestLanguageGrammarAccess.INSTANCE.prImport()
+		return rule;
+	}
+	
+	public void setRule(ImportElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

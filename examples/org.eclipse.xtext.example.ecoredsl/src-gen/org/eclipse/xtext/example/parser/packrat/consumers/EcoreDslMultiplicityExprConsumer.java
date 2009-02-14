@@ -20,6 +20,8 @@ import org.eclipse.xtext.example.services.EcoreDslGrammarAccess.MultiplicityExpr
 @SuppressWarnings("unused")
 public final class EcoreDslMultiplicityExprConsumer extends NonTerminalConsumer {
 
+	private MultiplicityExprElements rule;
+	
 
 	private ICharacterClass keyword$3$Delimiter;
 	
@@ -76,7 +78,12 @@ public final class EcoreDslMultiplicityExprConsumer extends NonTerminalConsumer 
 	}
 
 	public MultiplicityExprElements getRule() {
-		return EcoreDslGrammarAccess.INSTANCE.prMultiplicityExpr();
+	// EcoreDslGrammarAccess.INSTANCE.prMultiplicityExpr()
+		return rule;
+	}
+	
+	public void setRule(MultiplicityExprElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

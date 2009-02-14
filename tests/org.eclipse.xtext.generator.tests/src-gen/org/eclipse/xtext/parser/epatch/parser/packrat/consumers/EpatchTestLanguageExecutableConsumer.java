@@ -22,6 +22,8 @@ import org.eclipse.xtext.parser.epatch.parser.packrat.consumers.EpatchTestLangua
 @SuppressWarnings("unused")
 public final class EpatchTestLanguageExecutableConsumer extends NonTerminalConsumer {
 
+	private ExecutableElements rule;
+	
 	private INonTerminalConsumer expressionExecutableConsumer;
 	private INonTerminalConsumer javaExecutableConsumer;
 
@@ -62,7 +64,12 @@ public final class EpatchTestLanguageExecutableConsumer extends NonTerminalConsu
 	}
 
 	public ExecutableElements getRule() {
-		return EpatchTestLanguageGrammarAccess.INSTANCE.prExecutable();
+	// EpatchTestLanguageGrammarAccess.INSTANCE.prExecutable()
+		return rule;
+	}
+	
+	public void setRule(ExecutableElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

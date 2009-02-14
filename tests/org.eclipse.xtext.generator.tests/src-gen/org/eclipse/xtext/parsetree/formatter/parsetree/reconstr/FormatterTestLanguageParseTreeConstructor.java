@@ -9,12 +9,15 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
-import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
 import org.eclipse.xtext.parsetree.formatter.services.FormatterTestLanguageGrammarAccess;
 
+import com.google.inject.Inject;
 
 public class FormatterTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 		
+	@Inject
+	private FormatterTestLanguageGrammarAccess grammarAccess;
+	
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
@@ -41,7 +44,7 @@ protected class Root_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return FormatterTestLanguageGrammarAccess.INSTANCE.prRoot().eleGroup();
+		return grammarAccess.prRoot().eleGroup();
 	}
 		
 	@Override
@@ -70,7 +73,7 @@ protected class Root_0_Keyword_test extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return FormatterTestLanguageGrammarAccess.INSTANCE.prRoot().ele0KeywordTest();
+		return grammarAccess.prRoot().ele0KeywordTest();
 	}	
 }
 
@@ -82,7 +85,7 @@ protected class Root_1_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return FormatterTestLanguageGrammarAccess.INSTANCE.prRoot().ele1Alternatives();
+		return grammarAccess.prRoot().ele1Alternatives();
 	}
 
 	@Override	
@@ -104,7 +107,7 @@ protected class Root_1_0_RuleCall_TestLinewrap extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return FormatterTestLanguageGrammarAccess.INSTANCE.prRoot().ele10ParserRuleCallTestLinewrap();
+		return grammarAccess.prRoot().ele10ParserRuleCallTestLinewrap();
 	}
 	
 	@Override
@@ -123,7 +126,7 @@ protected class Root_1_1_RuleCall_TestIndentation extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return FormatterTestLanguageGrammarAccess.INSTANCE.prRoot().ele11ParserRuleCallTestIndentation();
+		return grammarAccess.prRoot().ele11ParserRuleCallTestIndentation();
 	}
 	
 	@Override
@@ -154,7 +157,7 @@ protected class Line_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return FormatterTestLanguageGrammarAccess.INSTANCE.prLine().eleGroup();
+		return grammarAccess.prLine().eleGroup();
 	}
 		
 	@Override
@@ -183,7 +186,7 @@ protected class Line_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return FormatterTestLanguageGrammarAccess.INSTANCE.prLine().ele0Group();
+		return grammarAccess.prLine().ele0Group();
 	}
 		
 	@Override
@@ -212,7 +215,7 @@ protected class Line_0_0_Assignment_type extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return FormatterTestLanguageGrammarAccess.INSTANCE.prLine().ele00AssignmentType();
+		return grammarAccess.prLine().ele00AssignmentType();
 	}
 	
 	@Override
@@ -221,7 +224,7 @@ protected class Line_0_0_Assignment_type extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("type");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = FormatterTestLanguageGrammarAccess.INSTANCE.prLine().ele000LexerRuleCallID();
+			element = grammarAccess.prLine().ele000LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -236,7 +239,7 @@ protected class Line_0_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return FormatterTestLanguageGrammarAccess.INSTANCE.prLine().ele01AssignmentName();
+		return grammarAccess.prLine().ele01AssignmentName();
 	}
 	
 	@Override
@@ -245,7 +248,7 @@ protected class Line_0_1_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = FormatterTestLanguageGrammarAccess.INSTANCE.prLine().ele010LexerRuleCallID();
+			element = grammarAccess.prLine().ele010LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -261,7 +264,7 @@ protected class Line_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return FormatterTestLanguageGrammarAccess.INSTANCE.prLine().ele1KeywordSemicolon();
+		return grammarAccess.prLine().ele1KeywordSemicolon();
 	}	
 }
 
@@ -284,7 +287,7 @@ protected class TestLinewrap_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return FormatterTestLanguageGrammarAccess.INSTANCE.prTestLinewrap().eleGroup();
+		return grammarAccess.prTestLinewrap().eleGroup();
 	}
 		
 	@Override
@@ -313,7 +316,7 @@ protected class TestLinewrap_0_Keyword_linewrap extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return FormatterTestLanguageGrammarAccess.INSTANCE.prTestLinewrap().ele0KeywordLinewrap();
+		return grammarAccess.prTestLinewrap().ele0KeywordLinewrap();
 	}	
 }
 
@@ -325,7 +328,7 @@ protected class TestLinewrap_1_Assignment_items extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return FormatterTestLanguageGrammarAccess.INSTANCE.prTestLinewrap().ele1AssignmentItems();
+		return grammarAccess.prTestLinewrap().ele1AssignmentItems();
 	}
 	
 	@Override
@@ -368,7 +371,7 @@ protected class TestIndentation_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return FormatterTestLanguageGrammarAccess.INSTANCE.prTestIndentation().eleGroup();
+		return grammarAccess.prTestIndentation().eleGroup();
 	}
 		
 	@Override
@@ -397,7 +400,7 @@ protected class TestIndentation_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return FormatterTestLanguageGrammarAccess.INSTANCE.prTestIndentation().ele0Group();
+		return grammarAccess.prTestIndentation().ele0Group();
 	}
 		
 	@Override
@@ -426,7 +429,7 @@ protected class TestIndentation_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return FormatterTestLanguageGrammarAccess.INSTANCE.prTestIndentation().ele00Group();
+		return grammarAccess.prTestIndentation().ele00Group();
 	}
 		
 	@Override
@@ -455,7 +458,7 @@ protected class TestIndentation_0_0_0_Keyword_indentation extends KeywordToken  
 	}
 	
 	public Keyword getGrammarElement() {
-		return FormatterTestLanguageGrammarAccess.INSTANCE.prTestIndentation().ele000KeywordIndentation();
+		return grammarAccess.prTestIndentation().ele000KeywordIndentation();
 	}	
 }
 
@@ -467,7 +470,7 @@ protected class TestIndentation_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return FormatterTestLanguageGrammarAccess.INSTANCE.prTestIndentation().ele001KeywordLeftCurlyBracket();
+		return grammarAccess.prTestIndentation().ele001KeywordLeftCurlyBracket();
 	}	
 }
 
@@ -480,7 +483,7 @@ protected class TestIndentation_0_1_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return FormatterTestLanguageGrammarAccess.INSTANCE.prTestIndentation().ele01Alternatives();
+		return grammarAccess.prTestIndentation().ele01Alternatives();
 	}
 
 	@Override	
@@ -502,7 +505,7 @@ protected class TestIndentation_0_1_0_Assignment_sub extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return FormatterTestLanguageGrammarAccess.INSTANCE.prTestIndentation().ele010AssignmentSub();
+		return grammarAccess.prTestIndentation().ele010AssignmentSub();
 	}
 	
 	@Override
@@ -534,7 +537,7 @@ protected class TestIndentation_0_1_1_Assignment_items extends AssignmentToken  
 	}
 	
 	public Assignment getGrammarElement() {
-		return FormatterTestLanguageGrammarAccess.INSTANCE.prTestIndentation().ele011AssignmentItems();
+		return grammarAccess.prTestIndentation().ele011AssignmentItems();
 	}
 	
 	@Override
@@ -568,7 +571,7 @@ protected class TestIndentation_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return FormatterTestLanguageGrammarAccess.INSTANCE.prTestIndentation().ele1KeywordRightCurlyBracket();
+		return grammarAccess.prTestIndentation().ele1KeywordRightCurlyBracket();
 	}	
 }
 

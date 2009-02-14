@@ -9,12 +9,15 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
-import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
 import org.eclipse.xtext.example.services.EcoreDslGrammarAccess;
 
+import com.google.inject.Inject;
 
 public class EcoreDslParseTreeConstructor extends AbstractParseTreeConstructor {
 		
+	@Inject
+	private EcoreDslGrammarAccess grammarAccess;
+	
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
@@ -58,7 +61,7 @@ protected class EcoreDsl_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEcoreDsl().eleGroup();
+		return grammarAccess.prEcoreDsl().eleGroup();
 	}
 		
 	@Override
@@ -87,7 +90,7 @@ protected class EcoreDsl_0_Assignment_imports extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEcoreDsl().ele0AssignmentImports();
+		return grammarAccess.prEcoreDsl().ele0AssignmentImports();
 	}
 	
 	@Override
@@ -119,7 +122,7 @@ protected class EcoreDsl_1_Assignment_package extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEcoreDsl().ele1AssignmentPackage();
+		return grammarAccess.prEcoreDsl().ele1AssignmentPackage();
 	}
 	
 	@Override
@@ -162,7 +165,7 @@ protected class ImportStatementDecl_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prImportStatementDecl().eleGroup();
+		return grammarAccess.prImportStatementDecl().eleGroup();
 	}
 		
 	@Override
@@ -191,7 +194,7 @@ protected class ImportStatementDecl_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prImportStatementDecl().ele0Group();
+		return grammarAccess.prImportStatementDecl().ele0Group();
 	}
 		
 	@Override
@@ -220,7 +223,7 @@ protected class ImportStatementDecl_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prImportStatementDecl().ele00Group();
+		return grammarAccess.prImportStatementDecl().ele00Group();
 	}
 		
 	@Override
@@ -249,7 +252,7 @@ protected class ImportStatementDecl_0_0_0_Keyword_import extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prImportStatementDecl().ele000KeywordImport();
+		return grammarAccess.prImportStatementDecl().ele000KeywordImport();
 	}	
 }
 
@@ -261,7 +264,7 @@ protected class ImportStatementDecl_0_0_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prImportStatementDecl().ele001Group();
+		return grammarAccess.prImportStatementDecl().ele001Group();
 	}
 		
 	@Override
@@ -290,7 +293,7 @@ protected class ImportStatementDecl_0_0_1_0_Assignment_alias extends AssignmentT
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prImportStatementDecl().ele0010AssignmentAlias();
+		return grammarAccess.prImportStatementDecl().ele0010AssignmentAlias();
 	}
 	
 	@Override
@@ -299,7 +302,7 @@ protected class ImportStatementDecl_0_0_1_0_Assignment_alias extends AssignmentT
 		IInstanceDescription obj = current.cloneAndConsume("alias");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = EcoreDslGrammarAccess.INSTANCE.prImportStatementDecl().ele00100LexerRuleCallID();
+			element = grammarAccess.prImportStatementDecl().ele00100LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -314,7 +317,7 @@ protected class ImportStatementDecl_0_0_1_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prImportStatementDecl().ele0011KeywordEqualsSign();
+		return grammarAccess.prImportStatementDecl().ele0011KeywordEqualsSign();
 	}	
 }
 
@@ -328,7 +331,7 @@ protected class ImportStatementDecl_0_1_Assignment_importURI extends AssignmentT
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prImportStatementDecl().ele01AssignmentImportURI();
+		return grammarAccess.prImportStatementDecl().ele01AssignmentImportURI();
 	}
 	
 	@Override
@@ -337,7 +340,7 @@ protected class ImportStatementDecl_0_1_Assignment_importURI extends AssignmentT
 		IInstanceDescription obj = current.cloneAndConsume("importURI");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = EcoreDslGrammarAccess.INSTANCE.prImportStatementDecl().ele010LexerRuleCallSTRING();
+			element = grammarAccess.prImportStatementDecl().ele010LexerRuleCallSTRING();
 			return new Solution(obj);
 		}
 		return null;
@@ -353,7 +356,7 @@ protected class ImportStatementDecl_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prImportStatementDecl().ele1KeywordSemicolon();
+		return grammarAccess.prImportStatementDecl().ele1KeywordSemicolon();
 	}	
 }
 
@@ -376,7 +379,7 @@ protected class EPackageDecl_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEPackageDecl().eleGroup();
+		return grammarAccess.prEPackageDecl().eleGroup();
 	}
 		
 	@Override
@@ -405,7 +408,7 @@ protected class EPackageDecl_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEPackageDecl().ele0Group();
+		return grammarAccess.prEPackageDecl().ele0Group();
 	}
 		
 	@Override
@@ -434,7 +437,7 @@ protected class EPackageDecl_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEPackageDecl().ele00Group();
+		return grammarAccess.prEPackageDecl().ele00Group();
 	}
 		
 	@Override
@@ -463,7 +466,7 @@ protected class EPackageDecl_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEPackageDecl().ele000Group();
+		return grammarAccess.prEPackageDecl().ele000Group();
 	}
 		
 	@Override
@@ -492,7 +495,7 @@ protected class EPackageDecl_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEPackageDecl().ele0000Group();
+		return grammarAccess.prEPackageDecl().ele0000Group();
 	}
 		
 	@Override
@@ -521,7 +524,7 @@ protected class EPackageDecl_0_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEPackageDecl().ele00000Group();
+		return grammarAccess.prEPackageDecl().ele00000Group();
 	}
 		
 	@Override
@@ -550,7 +553,7 @@ protected class EPackageDecl_0_0_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEPackageDecl().ele000000Group();
+		return grammarAccess.prEPackageDecl().ele000000Group();
 	}
 		
 	@Override
@@ -579,7 +582,7 @@ protected class EPackageDecl_0_0_0_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEPackageDecl().ele0000000Group();
+		return grammarAccess.prEPackageDecl().ele0000000Group();
 	}
 		
 	@Override
@@ -608,7 +611,7 @@ protected class EPackageDecl_0_0_0_0_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEPackageDecl().ele00000000Group();
+		return grammarAccess.prEPackageDecl().ele00000000Group();
 	}
 		
 	@Override
@@ -637,7 +640,7 @@ protected class EPackageDecl_0_0_0_0_0_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEPackageDecl().ele000000000Group();
+		return grammarAccess.prEPackageDecl().ele000000000Group();
 	}
 		
 	@Override
@@ -666,7 +669,7 @@ protected class EPackageDecl_0_0_0_0_0_0_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEPackageDecl().ele0000000000Group();
+		return grammarAccess.prEPackageDecl().ele0000000000Group();
 	}
 		
 	@Override
@@ -695,7 +698,7 @@ protected class EPackageDecl_0_0_0_0_0_0_0_0_0_0_0_Assignment_eAnnotations exten
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEPackageDecl().ele00000000000AssignmentEAnnotations();
+		return grammarAccess.prEPackageDecl().ele00000000000AssignmentEAnnotations();
 	}
 	
 	@Override
@@ -727,7 +730,7 @@ protected class EPackageDecl_0_0_0_0_0_0_0_0_0_0_1_Keyword_package extends Keywo
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEPackageDecl().ele00000000001KeywordPackage();
+		return grammarAccess.prEPackageDecl().ele00000000001KeywordPackage();
 	}	
 }
 
@@ -740,7 +743,7 @@ protected class EPackageDecl_0_0_0_0_0_0_0_0_0_1_Assignment_name extends Assignm
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEPackageDecl().ele0000000001AssignmentName();
+		return grammarAccess.prEPackageDecl().ele0000000001AssignmentName();
 	}
 	
 	@Override
@@ -750,7 +753,7 @@ protected class EPackageDecl_0_0_0_0_0_0_0_0_0_1_Assignment_name extends Assignm
 
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
 			type = AssignmentType.PRC;
-			element = EcoreDslGrammarAccess.INSTANCE.prEPackageDecl().ele00000000010ParserRuleCallQID();
+			element = grammarAccess.prEPackageDecl().ele00000000010ParserRuleCallQID();
 			return new Solution(obj);
 		}
 
@@ -767,7 +770,7 @@ protected class EPackageDecl_0_0_0_0_0_0_0_0_1_Keyword_nsURI extends KeywordToke
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEPackageDecl().ele000000001KeywordNsURI();
+		return grammarAccess.prEPackageDecl().ele000000001KeywordNsURI();
 	}	
 }
 
@@ -780,7 +783,7 @@ protected class EPackageDecl_0_0_0_0_0_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEPackageDecl().ele00000001KeywordEqualsSign();
+		return grammarAccess.prEPackageDecl().ele00000001KeywordEqualsSign();
 	}	
 }
 
@@ -793,7 +796,7 @@ protected class EPackageDecl_0_0_0_0_0_0_1_Assignment_nsURI extends AssignmentTo
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEPackageDecl().ele0000001AssignmentNsURI();
+		return grammarAccess.prEPackageDecl().ele0000001AssignmentNsURI();
 	}
 	
 	@Override
@@ -802,7 +805,7 @@ protected class EPackageDecl_0_0_0_0_0_0_1_Assignment_nsURI extends AssignmentTo
 		IInstanceDescription obj = current.cloneAndConsume("nsURI");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = EcoreDslGrammarAccess.INSTANCE.prEPackageDecl().ele00000010LexerRuleCallSTRING();
+			element = grammarAccess.prEPackageDecl().ele00000010LexerRuleCallSTRING();
 			return new Solution(obj);
 		}
 		return null;
@@ -818,7 +821,7 @@ protected class EPackageDecl_0_0_0_0_0_1_Keyword_nsPrefix extends KeywordToken  
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEPackageDecl().ele000001KeywordNsPrefix();
+		return grammarAccess.prEPackageDecl().ele000001KeywordNsPrefix();
 	}	
 }
 
@@ -831,7 +834,7 @@ protected class EPackageDecl_0_0_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEPackageDecl().ele00001KeywordEqualsSign();
+		return grammarAccess.prEPackageDecl().ele00001KeywordEqualsSign();
 	}	
 }
 
@@ -844,7 +847,7 @@ protected class EPackageDecl_0_0_0_1_Assignment_nsPrefix extends AssignmentToken
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEPackageDecl().ele0001AssignmentNsPrefix();
+		return grammarAccess.prEPackageDecl().ele0001AssignmentNsPrefix();
 	}
 	
 	@Override
@@ -854,7 +857,7 @@ protected class EPackageDecl_0_0_0_1_Assignment_nsPrefix extends AssignmentToken
 
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
 			type = AssignmentType.PRC;
-			element = EcoreDslGrammarAccess.INSTANCE.prEPackageDecl().ele00010ParserRuleCallQID();
+			element = grammarAccess.prEPackageDecl().ele00010ParserRuleCallQID();
 			return new Solution(obj);
 		}
 
@@ -871,7 +874,7 @@ protected class EPackageDecl_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEPackageDecl().ele001KeywordLeftCurlyBracket();
+		return grammarAccess.prEPackageDecl().ele001KeywordLeftCurlyBracket();
 	}	
 }
 
@@ -884,7 +887,7 @@ protected class EPackageDecl_0_1_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEPackageDecl().ele01Alternatives();
+		return grammarAccess.prEPackageDecl().ele01Alternatives();
 	}
 
 	@Override	
@@ -906,7 +909,7 @@ protected class EPackageDecl_0_1_0_Assignment_eSubpackages extends AssignmentTok
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEPackageDecl().ele010AssignmentESubpackages();
+		return grammarAccess.prEPackageDecl().ele010AssignmentESubpackages();
 	}
 	
 	@Override
@@ -938,7 +941,7 @@ protected class EPackageDecl_0_1_1_Assignment_eClassifiers extends AssignmentTok
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEPackageDecl().ele011AssignmentEClassifiers();
+		return grammarAccess.prEPackageDecl().ele011AssignmentEClassifiers();
 	}
 	
 	@Override
@@ -972,7 +975,7 @@ protected class EPackageDecl_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEPackageDecl().ele1KeywordRightCurlyBracket();
+		return grammarAccess.prEPackageDecl().ele1KeywordRightCurlyBracket();
 	}	
 }
 
@@ -995,7 +998,7 @@ protected class SubEPackageDecl_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prSubEPackageDecl().eleGroup();
+		return grammarAccess.prSubEPackageDecl().eleGroup();
 	}
 		
 	@Override
@@ -1024,7 +1027,7 @@ protected class SubEPackageDecl_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prSubEPackageDecl().ele0Group();
+		return grammarAccess.prSubEPackageDecl().ele0Group();
 	}
 		
 	@Override
@@ -1053,7 +1056,7 @@ protected class SubEPackageDecl_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prSubEPackageDecl().ele00Group();
+		return grammarAccess.prSubEPackageDecl().ele00Group();
 	}
 		
 	@Override
@@ -1082,7 +1085,7 @@ protected class SubEPackageDecl_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prSubEPackageDecl().ele000Group();
+		return grammarAccess.prSubEPackageDecl().ele000Group();
 	}
 		
 	@Override
@@ -1111,7 +1114,7 @@ protected class SubEPackageDecl_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prSubEPackageDecl().ele0000Group();
+		return grammarAccess.prSubEPackageDecl().ele0000Group();
 	}
 		
 	@Override
@@ -1140,7 +1143,7 @@ protected class SubEPackageDecl_0_0_0_0_0_Assignment_eAnnotations extends Assign
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prSubEPackageDecl().ele00000AssignmentEAnnotations();
+		return grammarAccess.prSubEPackageDecl().ele00000AssignmentEAnnotations();
 	}
 	
 	@Override
@@ -1172,7 +1175,7 @@ protected class SubEPackageDecl_0_0_0_0_1_Keyword_package extends KeywordToken  
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prSubEPackageDecl().ele00001KeywordPackage();
+		return grammarAccess.prSubEPackageDecl().ele00001KeywordPackage();
 	}	
 }
 
@@ -1185,7 +1188,7 @@ protected class SubEPackageDecl_0_0_0_1_Assignment_name extends AssignmentToken 
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prSubEPackageDecl().ele0001AssignmentName();
+		return grammarAccess.prSubEPackageDecl().ele0001AssignmentName();
 	}
 	
 	@Override
@@ -1194,7 +1197,7 @@ protected class SubEPackageDecl_0_0_0_1_Assignment_name extends AssignmentToken 
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = EcoreDslGrammarAccess.INSTANCE.prSubEPackageDecl().ele00010LexerRuleCallID();
+			element = grammarAccess.prSubEPackageDecl().ele00010LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -1210,7 +1213,7 @@ protected class SubEPackageDecl_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prSubEPackageDecl().ele001KeywordLeftCurlyBracket();
+		return grammarAccess.prSubEPackageDecl().ele001KeywordLeftCurlyBracket();
 	}	
 }
 
@@ -1223,7 +1226,7 @@ protected class SubEPackageDecl_0_1_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prSubEPackageDecl().ele01Alternatives();
+		return grammarAccess.prSubEPackageDecl().ele01Alternatives();
 	}
 
 	@Override	
@@ -1245,7 +1248,7 @@ protected class SubEPackageDecl_0_1_0_Assignment_eSubpackages extends Assignment
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prSubEPackageDecl().ele010AssignmentESubpackages();
+		return grammarAccess.prSubEPackageDecl().ele010AssignmentESubpackages();
 	}
 	
 	@Override
@@ -1277,7 +1280,7 @@ protected class SubEPackageDecl_0_1_1_Assignment_eClassifiers extends Assignment
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prSubEPackageDecl().ele011AssignmentEClassifiers();
+		return grammarAccess.prSubEPackageDecl().ele011AssignmentEClassifiers();
 	}
 	
 	@Override
@@ -1311,7 +1314,7 @@ protected class SubEPackageDecl_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prSubEPackageDecl().ele1KeywordRightCurlyBracket();
+		return grammarAccess.prSubEPackageDecl().ele1KeywordRightCurlyBracket();
 	}	
 }
 
@@ -1334,7 +1337,7 @@ protected class EClassifierDecl_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEClassifierDecl().eleAlternatives();
+		return grammarAccess.prEClassifierDecl().eleAlternatives();
 	}
 
 	@Override	
@@ -1356,7 +1359,7 @@ protected class EClassifierDecl_0_RuleCall_EClassDecl extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEClassifierDecl().ele0ParserRuleCallEClassDecl();
+		return grammarAccess.prEClassifierDecl().ele0ParserRuleCallEClassDecl();
 	}
 	
 	@Override
@@ -1375,7 +1378,7 @@ protected class EClassifierDecl_1_RuleCall_EDataTypeDecl extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEClassifierDecl().ele1ParserRuleCallEDataTypeDecl();
+		return grammarAccess.prEClassifierDecl().ele1ParserRuleCallEDataTypeDecl();
 	}
 	
 	@Override
@@ -1405,7 +1408,7 @@ protected class EDataTypeDecl_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEDataTypeDecl().eleAlternatives();
+		return grammarAccess.prEDataTypeDecl().eleAlternatives();
 	}
 
 	@Override	
@@ -1427,7 +1430,7 @@ protected class EDataTypeDecl_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEDataTypeDecl().ele0Group();
+		return grammarAccess.prEDataTypeDecl().ele0Group();
 	}
 		
 	@Override
@@ -1456,7 +1459,7 @@ protected class EDataTypeDecl_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEDataTypeDecl().ele00Group();
+		return grammarAccess.prEDataTypeDecl().ele00Group();
 	}
 		
 	@Override
@@ -1485,7 +1488,7 @@ protected class EDataTypeDecl_0_0_0_Assignment_eAnnotations extends AssignmentTo
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEDataTypeDecl().ele000AssignmentEAnnotations();
+		return grammarAccess.prEDataTypeDecl().ele000AssignmentEAnnotations();
 	}
 	
 	@Override
@@ -1517,7 +1520,7 @@ protected class EDataTypeDecl_0_0_1_Assignment_serializable extends AssignmentTo
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEDataTypeDecl().ele001AssignmentSerializable();
+		return grammarAccess.prEDataTypeDecl().ele001AssignmentSerializable();
 	}
 	
 	@Override
@@ -1527,7 +1530,7 @@ protected class EDataTypeDecl_0_0_1_Assignment_serializable extends AssignmentTo
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = EcoreDslGrammarAccess.INSTANCE.prEDataTypeDecl().ele0010KeywordSerializable();
+			element = grammarAccess.prEDataTypeDecl().ele0010KeywordSerializable();
 			return new Solution(obj);
 		}
 
@@ -1544,7 +1547,7 @@ protected class EDataTypeDecl_0_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEDataTypeDecl().ele01Group();
+		return grammarAccess.prEDataTypeDecl().ele01Group();
 	}
 		
 	@Override
@@ -1573,7 +1576,7 @@ protected class EDataTypeDecl_0_1_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEDataTypeDecl().ele010Group();
+		return grammarAccess.prEDataTypeDecl().ele010Group();
 	}
 		
 	@Override
@@ -1602,7 +1605,7 @@ protected class EDataTypeDecl_0_1_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEDataTypeDecl().ele0100Group();
+		return grammarAccess.prEDataTypeDecl().ele0100Group();
 	}
 		
 	@Override
@@ -1631,7 +1634,7 @@ protected class EDataTypeDecl_0_1_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEDataTypeDecl().ele01000Group();
+		return grammarAccess.prEDataTypeDecl().ele01000Group();
 	}
 		
 	@Override
@@ -1660,7 +1663,7 @@ protected class EDataTypeDecl_0_1_0_0_0_0_Keyword_datatype extends KeywordToken 
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEDataTypeDecl().ele010000KeywordDatatype();
+		return grammarAccess.prEDataTypeDecl().ele010000KeywordDatatype();
 	}	
 }
 
@@ -1672,7 +1675,7 @@ protected class EDataTypeDecl_0_1_0_0_0_1_Assignment_name extends AssignmentToke
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEDataTypeDecl().ele010001AssignmentName();
+		return grammarAccess.prEDataTypeDecl().ele010001AssignmentName();
 	}
 	
 	@Override
@@ -1681,7 +1684,7 @@ protected class EDataTypeDecl_0_1_0_0_0_1_Assignment_name extends AssignmentToke
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = EcoreDslGrammarAccess.INSTANCE.prEDataTypeDecl().ele0100010LexerRuleCallID();
+			element = grammarAccess.prEDataTypeDecl().ele0100010LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -1697,7 +1700,7 @@ protected class EDataTypeDecl_0_1_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEDataTypeDecl().ele01001KeywordColon();
+		return grammarAccess.prEDataTypeDecl().ele01001KeywordColon();
 	}	
 }
 
@@ -1710,7 +1713,7 @@ protected class EDataTypeDecl_0_1_0_1_Assignment_instanceClassName extends Assig
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEDataTypeDecl().ele0101AssignmentInstanceClassName();
+		return grammarAccess.prEDataTypeDecl().ele0101AssignmentInstanceClassName();
 	}
 	
 	@Override
@@ -1720,7 +1723,7 @@ protected class EDataTypeDecl_0_1_0_1_Assignment_instanceClassName extends Assig
 
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
 			type = AssignmentType.PRC;
-			element = EcoreDslGrammarAccess.INSTANCE.prEDataTypeDecl().ele01010ParserRuleCallSTRING_OR_QID();
+			element = grammarAccess.prEDataTypeDecl().ele01010ParserRuleCallSTRING_OR_QID();
 			return new Solution(obj);
 		}
 
@@ -1737,7 +1740,7 @@ protected class EDataTypeDecl_0_1_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEDataTypeDecl().ele011KeywordSemicolon();
+		return grammarAccess.prEDataTypeDecl().ele011KeywordSemicolon();
 	}	
 }
 
@@ -1751,7 +1754,7 @@ protected class EDataTypeDecl_1_RuleCall_EEnumDecl extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEDataTypeDecl().ele1ParserRuleCallEEnumDecl();
+		return grammarAccess.prEDataTypeDecl().ele1ParserRuleCallEEnumDecl();
 	}
 	
 	@Override
@@ -1781,7 +1784,7 @@ protected class EAnnotationDecl_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAnnotationDecl().eleGroup();
+		return grammarAccess.prEAnnotationDecl().eleGroup();
 	}
 		
 	@Override
@@ -1810,7 +1813,7 @@ protected class EAnnotationDecl_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAnnotationDecl().ele0Group();
+		return grammarAccess.prEAnnotationDecl().ele0Group();
 	}
 		
 	@Override
@@ -1839,7 +1842,7 @@ protected class EAnnotationDecl_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAnnotationDecl().ele00Group();
+		return grammarAccess.prEAnnotationDecl().ele00Group();
 	}
 		
 	@Override
@@ -1868,7 +1871,7 @@ protected class EAnnotationDecl_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAnnotationDecl().ele000Group();
+		return grammarAccess.prEAnnotationDecl().ele000Group();
 	}
 		
 	@Override
@@ -1897,7 +1900,7 @@ protected class EAnnotationDecl_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAnnotationDecl().ele0000Group();
+		return grammarAccess.prEAnnotationDecl().ele0000Group();
 	}
 		
 	@Override
@@ -1926,7 +1929,7 @@ protected class EAnnotationDecl_0_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAnnotationDecl().ele00000Group();
+		return grammarAccess.prEAnnotationDecl().ele00000Group();
 	}
 		
 	@Override
@@ -1955,7 +1958,7 @@ protected class EAnnotationDecl_0_0_0_0_0_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAnnotationDecl().ele000000KeywordCommercialAt();
+		return grammarAccess.prEAnnotationDecl().ele000000KeywordCommercialAt();
 	}	
 }
 
@@ -1967,7 +1970,7 @@ protected class EAnnotationDecl_0_0_0_0_0_1_Assignment_source extends Assignment
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAnnotationDecl().ele000001AssignmentSource();
+		return grammarAccess.prEAnnotationDecl().ele000001AssignmentSource();
 	}
 	
 	@Override
@@ -1976,7 +1979,7 @@ protected class EAnnotationDecl_0_0_0_0_0_1_Assignment_source extends Assignment
 		IInstanceDescription obj = current.cloneAndConsume("source");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = EcoreDslGrammarAccess.INSTANCE.prEAnnotationDecl().ele0000010LexerRuleCallSTRING();
+			element = grammarAccess.prEAnnotationDecl().ele0000010LexerRuleCallSTRING();
 			return new Solution(obj);
 		}
 		return null;
@@ -1992,7 +1995,7 @@ protected class EAnnotationDecl_0_0_0_0_1_Assignment_eModelElement extends Assig
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAnnotationDecl().ele00001AssignmentEModelElement();
+		return grammarAccess.prEAnnotationDecl().ele00001AssignmentEModelElement();
 	}
 	
 	@Override
@@ -2003,7 +2006,7 @@ protected class EAnnotationDecl_0_0_0_0_1_Assignment_eModelElement extends Assig
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("EModelElement")) {
 				type = AssignmentType.CR;
-				element = EcoreDslGrammarAccess.INSTANCE.prEAnnotationDecl().ele000010CrossReferenceEStringEModelElement(); 
+				element = grammarAccess.prEAnnotationDecl().ele000010CrossReferenceEStringEModelElement(); 
 				return new Solution(obj);
 			}
 		}
@@ -2020,7 +2023,7 @@ protected class EAnnotationDecl_0_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAnnotationDecl().ele0001KeywordLeftParenthesis();
+		return grammarAccess.prEAnnotationDecl().ele0001KeywordLeftParenthesis();
 	}	
 }
 
@@ -2033,7 +2036,7 @@ protected class EAnnotationDecl_0_0_1_Assignment_contents extends AssignmentToke
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAnnotationDecl().ele001AssignmentContents();
+		return grammarAccess.prEAnnotationDecl().ele001AssignmentContents();
 	}
 	
 	@Override
@@ -2066,7 +2069,7 @@ protected class EAnnotationDecl_0_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAnnotationDecl().ele01Group();
+		return grammarAccess.prEAnnotationDecl().ele01Group();
 	}
 		
 	@Override
@@ -2095,7 +2098,7 @@ protected class EAnnotationDecl_0_1_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAnnotationDecl().ele010KeywordComma();
+		return grammarAccess.prEAnnotationDecl().ele010KeywordComma();
 	}	
 }
 
@@ -2107,7 +2110,7 @@ protected class EAnnotationDecl_0_1_1_Assignment_contents extends AssignmentToke
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAnnotationDecl().ele011AssignmentContents();
+		return grammarAccess.prEAnnotationDecl().ele011AssignmentContents();
 	}
 	
 	@Override
@@ -2141,7 +2144,7 @@ protected class EAnnotationDecl_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAnnotationDecl().ele1KeywordRightParenthesis();
+		return grammarAccess.prEAnnotationDecl().ele1KeywordRightParenthesis();
 	}	
 }
 
@@ -2164,7 +2167,7 @@ protected class EClassDecl_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().eleGroup();
+		return grammarAccess.prEClassDecl().eleGroup();
 	}
 		
 	@Override
@@ -2193,7 +2196,7 @@ protected class EClassDecl_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele0Group();
+		return grammarAccess.prEClassDecl().ele0Group();
 	}
 		
 	@Override
@@ -2222,7 +2225,7 @@ protected class EClassDecl_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele00Group();
+		return grammarAccess.prEClassDecl().ele00Group();
 	}
 		
 	@Override
@@ -2251,7 +2254,7 @@ protected class EClassDecl_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele000Group();
+		return grammarAccess.prEClassDecl().ele000Group();
 	}
 		
 	@Override
@@ -2280,7 +2283,7 @@ protected class EClassDecl_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele0000Group();
+		return grammarAccess.prEClassDecl().ele0000Group();
 	}
 		
 	@Override
@@ -2309,7 +2312,7 @@ protected class EClassDecl_0_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele00000Group();
+		return grammarAccess.prEClassDecl().ele00000Group();
 	}
 		
 	@Override
@@ -2338,7 +2341,7 @@ protected class EClassDecl_0_0_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele000000Group();
+		return grammarAccess.prEClassDecl().ele000000Group();
 	}
 		
 	@Override
@@ -2367,7 +2370,7 @@ protected class EClassDecl_0_0_0_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele0000000Group();
+		return grammarAccess.prEClassDecl().ele0000000Group();
 	}
 		
 	@Override
@@ -2396,7 +2399,7 @@ protected class EClassDecl_0_0_0_0_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele00000000Group();
+		return grammarAccess.prEClassDecl().ele00000000Group();
 	}
 		
 	@Override
@@ -2425,7 +2428,7 @@ protected class EClassDecl_0_0_0_0_0_0_0_0_0_Assignment_eAnnotations extends Ass
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele000000000AssignmentEAnnotations();
+		return grammarAccess.prEClassDecl().ele000000000AssignmentEAnnotations();
 	}
 	
 	@Override
@@ -2457,7 +2460,7 @@ protected class EClassDecl_0_0_0_0_0_0_0_0_1_Assignment_abstract extends Assignm
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele000000001AssignmentAbstract();
+		return grammarAccess.prEClassDecl().ele000000001AssignmentAbstract();
 	}
 	
 	@Override
@@ -2467,7 +2470,7 @@ protected class EClassDecl_0_0_0_0_0_0_0_0_1_Assignment_abstract extends Assignm
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele0000000010KeywordAbstract();
+			element = grammarAccess.prEClassDecl().ele0000000010KeywordAbstract();
 			return new Solution(obj);
 		}
 
@@ -2484,7 +2487,7 @@ protected class EClassDecl_0_0_0_0_0_0_0_1_Alternatives extends AlternativesToke
 	}
 	
 	public Alternatives getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele00000001Alternatives();
+		return grammarAccess.prEClassDecl().ele00000001Alternatives();
 	}
 
 	@Override	
@@ -2506,7 +2509,7 @@ protected class EClassDecl_0_0_0_0_0_0_0_1_0_Assignment_interface extends Assign
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele000000010AssignmentInterface();
+		return grammarAccess.prEClassDecl().ele000000010AssignmentInterface();
 	}
 	
 	@Override
@@ -2516,7 +2519,7 @@ protected class EClassDecl_0_0_0_0_0_0_0_1_0_Assignment_interface extends Assign
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele0000000100KeywordInterface();
+			element = grammarAccess.prEClassDecl().ele0000000100KeywordInterface();
 			return new Solution(obj);
 		}
 
@@ -2532,7 +2535,7 @@ protected class EClassDecl_0_0_0_0_0_0_0_1_1_Keyword_class extends KeywordToken 
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele000000011KeywordClass();
+		return grammarAccess.prEClassDecl().ele000000011KeywordClass();
 	}	
 }
 
@@ -2546,7 +2549,7 @@ protected class EClassDecl_0_0_0_0_0_0_1_Assignment_name extends AssignmentToken
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele0000001AssignmentName();
+		return grammarAccess.prEClassDecl().ele0000001AssignmentName();
 	}
 	
 	@Override
@@ -2555,7 +2558,7 @@ protected class EClassDecl_0_0_0_0_0_0_1_Assignment_name extends AssignmentToken
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele00000010LexerRuleCallID();
+			element = grammarAccess.prEClassDecl().ele00000010LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -2571,7 +2574,7 @@ protected class EClassDecl_0_0_0_0_0_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele000001Group();
+		return grammarAccess.prEClassDecl().ele000001Group();
 	}
 		
 	@Override
@@ -2600,7 +2603,7 @@ protected class EClassDecl_0_0_0_0_0_1_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele0000010Group();
+		return grammarAccess.prEClassDecl().ele0000010Group();
 	}
 		
 	@Override
@@ -2629,7 +2632,7 @@ protected class EClassDecl_0_0_0_0_0_1_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele00000100Group();
+		return grammarAccess.prEClassDecl().ele00000100Group();
 	}
 		
 	@Override
@@ -2658,7 +2661,7 @@ protected class EClassDecl_0_0_0_0_0_1_0_0_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele000001000KeywordLessThanSign();
+		return grammarAccess.prEClassDecl().ele000001000KeywordLessThanSign();
 	}	
 }
 
@@ -2670,7 +2673,7 @@ protected class EClassDecl_0_0_0_0_0_1_0_0_1_Assignment_eTypeParameters extends 
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele000001001AssignmentETypeParameters();
+		return grammarAccess.prEClassDecl().ele000001001AssignmentETypeParameters();
 	}
 	
 	@Override
@@ -2703,7 +2706,7 @@ protected class EClassDecl_0_0_0_0_0_1_0_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele00000101Group();
+		return grammarAccess.prEClassDecl().ele00000101Group();
 	}
 		
 	@Override
@@ -2732,7 +2735,7 @@ protected class EClassDecl_0_0_0_0_0_1_0_1_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele000001010KeywordComma();
+		return grammarAccess.prEClassDecl().ele000001010KeywordComma();
 	}	
 }
 
@@ -2744,7 +2747,7 @@ protected class EClassDecl_0_0_0_0_0_1_0_1_1_Assignment_eTypeParameters extends 
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele000001011AssignmentETypeParameters();
+		return grammarAccess.prEClassDecl().ele000001011AssignmentETypeParameters();
 	}
 	
 	@Override
@@ -2778,7 +2781,7 @@ protected class EClassDecl_0_0_0_0_0_1_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele0000011KeywordGreaterThanSign();
+		return grammarAccess.prEClassDecl().ele0000011KeywordGreaterThanSign();
 	}	
 }
 
@@ -2792,7 +2795,7 @@ protected class EClassDecl_0_0_0_0_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele00001Group();
+		return grammarAccess.prEClassDecl().ele00001Group();
 	}
 		
 	@Override
@@ -2821,7 +2824,7 @@ protected class EClassDecl_0_0_0_0_1_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele000010Group();
+		return grammarAccess.prEClassDecl().ele000010Group();
 	}
 		
 	@Override
@@ -2850,7 +2853,7 @@ protected class EClassDecl_0_0_0_0_1_0_0_Keyword_extends extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele0000100KeywordExtends();
+		return grammarAccess.prEClassDecl().ele0000100KeywordExtends();
 	}	
 }
 
@@ -2862,7 +2865,7 @@ protected class EClassDecl_0_0_0_0_1_0_1_Assignment_eGenericSuperTypes extends A
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele0000101AssignmentEGenericSuperTypes();
+		return grammarAccess.prEClassDecl().ele0000101AssignmentEGenericSuperTypes();
 	}
 	
 	@Override
@@ -2895,7 +2898,7 @@ protected class EClassDecl_0_0_0_0_1_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele000011Group();
+		return grammarAccess.prEClassDecl().ele000011Group();
 	}
 		
 	@Override
@@ -2924,7 +2927,7 @@ protected class EClassDecl_0_0_0_0_1_1_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele0000110KeywordComma();
+		return grammarAccess.prEClassDecl().ele0000110KeywordComma();
 	}	
 }
 
@@ -2936,7 +2939,7 @@ protected class EClassDecl_0_0_0_0_1_1_1_Assignment_eGenericSuperTypes extends A
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele0000111AssignmentEGenericSuperTypes();
+		return grammarAccess.prEClassDecl().ele0000111AssignmentEGenericSuperTypes();
 	}
 	
 	@Override
@@ -2971,7 +2974,7 @@ protected class EClassDecl_0_0_0_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele0001Group();
+		return grammarAccess.prEClassDecl().ele0001Group();
 	}
 		
 	@Override
@@ -3000,7 +3003,7 @@ protected class EClassDecl_0_0_0_1_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele00010KeywordColon();
+		return grammarAccess.prEClassDecl().ele00010KeywordColon();
 	}	
 }
 
@@ -3012,7 +3015,7 @@ protected class EClassDecl_0_0_0_1_1_Assignment_instanceClassName extends Assign
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele00011AssignmentInstanceClassName();
+		return grammarAccess.prEClassDecl().ele00011AssignmentInstanceClassName();
 	}
 	
 	@Override
@@ -3022,7 +3025,7 @@ protected class EClassDecl_0_0_0_1_1_Assignment_instanceClassName extends Assign
 
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
 			type = AssignmentType.PRC;
-			element = EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele000110ParserRuleCallSTRING_OR_QID();
+			element = grammarAccess.prEClassDecl().ele000110ParserRuleCallSTRING_OR_QID();
 			return new Solution(obj);
 		}
 
@@ -3040,7 +3043,7 @@ protected class EClassDecl_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele001KeywordLeftCurlyBracket();
+		return grammarAccess.prEClassDecl().ele001KeywordLeftCurlyBracket();
 	}	
 }
 
@@ -3053,7 +3056,7 @@ protected class EClassDecl_0_1_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele01Alternatives();
+		return grammarAccess.prEClassDecl().ele01Alternatives();
 	}
 
 	@Override	
@@ -3075,7 +3078,7 @@ protected class EClassDecl_0_1_0_Assignment_eStructuralFeatures extends Assignme
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele010AssignmentEStructuralFeatures();
+		return grammarAccess.prEClassDecl().ele010AssignmentEStructuralFeatures();
 	}
 	
 	@Override
@@ -3107,7 +3110,7 @@ protected class EClassDecl_0_1_1_Assignment_eOperations extends AssignmentToken 
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele011AssignmentEOperations();
+		return grammarAccess.prEClassDecl().ele011AssignmentEOperations();
 	}
 	
 	@Override
@@ -3141,7 +3144,7 @@ protected class EClassDecl_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEClassDecl().ele1KeywordRightCurlyBracket();
+		return grammarAccess.prEClassDecl().ele1KeywordRightCurlyBracket();
 	}	
 }
 
@@ -3164,7 +3167,7 @@ protected class EStructuralFeatureDecl_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEStructuralFeatureDecl().eleAlternatives();
+		return grammarAccess.prEStructuralFeatureDecl().eleAlternatives();
 	}
 
 	@Override	
@@ -3186,7 +3189,7 @@ protected class EStructuralFeatureDecl_0_RuleCall_EAttributeDecl extends RuleCal
 	}
 	
 	public RuleCall getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEStructuralFeatureDecl().ele0ParserRuleCallEAttributeDecl();
+		return grammarAccess.prEStructuralFeatureDecl().ele0ParserRuleCallEAttributeDecl();
 	}
 	
 	@Override
@@ -3205,7 +3208,7 @@ protected class EStructuralFeatureDecl_1_RuleCall_EReferenceDecl extends RuleCal
 	}
 	
 	public RuleCall getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEStructuralFeatureDecl().ele1ParserRuleCallEReferenceDecl();
+		return grammarAccess.prEStructuralFeatureDecl().ele1ParserRuleCallEReferenceDecl();
 	}
 	
 	@Override
@@ -3235,7 +3238,7 @@ protected class EAttributeDecl_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().eleGroup();
+		return grammarAccess.prEAttributeDecl().eleGroup();
 	}
 		
 	@Override
@@ -3264,7 +3267,7 @@ protected class EAttributeDecl_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele0Group();
+		return grammarAccess.prEAttributeDecl().ele0Group();
 	}
 		
 	@Override
@@ -3293,7 +3296,7 @@ protected class EAttributeDecl_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele00Group();
+		return grammarAccess.prEAttributeDecl().ele00Group();
 	}
 		
 	@Override
@@ -3322,7 +3325,7 @@ protected class EAttributeDecl_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele000Group();
+		return grammarAccess.prEAttributeDecl().ele000Group();
 	}
 		
 	@Override
@@ -3351,7 +3354,7 @@ protected class EAttributeDecl_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele0000Group();
+		return grammarAccess.prEAttributeDecl().ele0000Group();
 	}
 		
 	@Override
@@ -3380,7 +3383,7 @@ protected class EAttributeDecl_0_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele00000Group();
+		return grammarAccess.prEAttributeDecl().ele00000Group();
 	}
 		
 	@Override
@@ -3409,7 +3412,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele000000Group();
+		return grammarAccess.prEAttributeDecl().ele000000Group();
 	}
 		
 	@Override
@@ -3438,7 +3441,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_0_Assignment_eAnnotations extends Ass
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele0000000AssignmentEAnnotations();
+		return grammarAccess.prEAttributeDecl().ele0000000AssignmentEAnnotations();
 	}
 	
 	@Override
@@ -3470,7 +3473,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_Alternatives extends AlternativesTo
 	}
 	
 	public Alternatives getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele0000001Alternatives();
+		return grammarAccess.prEAttributeDecl().ele0000001Alternatives();
 	}
 
 	@Override	
@@ -3492,7 +3495,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_0_Alternatives extends Alternatives
 	}
 	
 	public Alternatives getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele00000010Alternatives();
+		return grammarAccess.prEAttributeDecl().ele00000010Alternatives();
 	}
 
 	@Override	
@@ -3514,7 +3517,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_Alternatives extends Alternativ
 	}
 	
 	public Alternatives getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele000000100Alternatives();
+		return grammarAccess.prEAttributeDecl().ele000000100Alternatives();
 	}
 
 	@Override	
@@ -3536,7 +3539,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_0_Alternatives extends Alternat
 	}
 	
 	public Alternatives getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele0000001000Alternatives();
+		return grammarAccess.prEAttributeDecl().ele0000001000Alternatives();
 	}
 
 	@Override	
@@ -3558,7 +3561,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_0_0_Alternatives extends Altern
 	}
 	
 	public Alternatives getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele00000010000Alternatives();
+		return grammarAccess.prEAttributeDecl().ele00000010000Alternatives();
 	}
 
 	@Override	
@@ -3580,7 +3583,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_0_0_0_Alternatives extends Alte
 	}
 	
 	public Alternatives getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele000000100000Alternatives();
+		return grammarAccess.prEAttributeDecl().ele000000100000Alternatives();
 	}
 
 	@Override	
@@ -3602,7 +3605,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_0_0_0_0_Alternatives extends Al
 	}
 	
 	public Alternatives getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele0000001000000Alternatives();
+		return grammarAccess.prEAttributeDecl().ele0000001000000Alternatives();
 	}
 
 	@Override	
@@ -3624,7 +3627,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_0_0_0_0_0_Assignment_iD extends
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele00000010000000AssignmentID();
+		return grammarAccess.prEAttributeDecl().ele00000010000000AssignmentID();
 	}
 	
 	@Override
@@ -3634,7 +3637,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_0_0_0_0_0_Assignment_iD extends
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele000000100000000KeywordID();
+			element = grammarAccess.prEAttributeDecl().ele000000100000000KeywordID();
 			return new Solution(obj);
 		}
 
@@ -3650,7 +3653,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_0_0_0_0_1_Assignment_unique ext
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele00000010000001AssignmentUnique();
+		return grammarAccess.prEAttributeDecl().ele00000010000001AssignmentUnique();
 	}
 	
 	@Override
@@ -3660,7 +3663,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_0_0_0_0_1_Assignment_unique ext
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele000000100000010KeywordBag();
+			element = grammarAccess.prEAttributeDecl().ele000000100000010KeywordBag();
 			return new Solution(obj);
 		}
 
@@ -3677,7 +3680,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_0_0_0_1_Assignment_ordered exte
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele0000001000001AssignmentOrdered();
+		return grammarAccess.prEAttributeDecl().ele0000001000001AssignmentOrdered();
 	}
 	
 	@Override
@@ -3687,7 +3690,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_0_0_0_1_Assignment_ordered exte
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele00000010000010KeywordRandom();
+			element = grammarAccess.prEAttributeDecl().ele00000010000010KeywordRandom();
 			return new Solution(obj);
 		}
 
@@ -3704,7 +3707,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_0_0_1_Assignment_changeable ext
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele000000100001AssignmentChangeable();
+		return grammarAccess.prEAttributeDecl().ele000000100001AssignmentChangeable();
 	}
 	
 	@Override
@@ -3714,7 +3717,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_0_0_1_Assignment_changeable ext
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele0000001000010KeywordReadonly();
+			element = grammarAccess.prEAttributeDecl().ele0000001000010KeywordReadonly();
 			return new Solution(obj);
 		}
 
@@ -3731,7 +3734,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_0_1_Assignment_volatile extends
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele00000010001AssignmentVolatile();
+		return grammarAccess.prEAttributeDecl().ele00000010001AssignmentVolatile();
 	}
 	
 	@Override
@@ -3741,7 +3744,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_0_1_Assignment_volatile extends
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele000000100010KeywordVolatile();
+			element = grammarAccess.prEAttributeDecl().ele000000100010KeywordVolatile();
 			return new Solution(obj);
 		}
 
@@ -3758,7 +3761,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_1_Assignment_transient extends 
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele0000001001AssignmentTransient();
+		return grammarAccess.prEAttributeDecl().ele0000001001AssignmentTransient();
 	}
 	
 	@Override
@@ -3768,7 +3771,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_0_0_1_Assignment_transient extends 
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele00000010010KeywordTransient();
+			element = grammarAccess.prEAttributeDecl().ele00000010010KeywordTransient();
 			return new Solution(obj);
 		}
 
@@ -3785,7 +3788,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_0_1_Assignment_unsettable extends A
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele000000101AssignmentUnsettable();
+		return grammarAccess.prEAttributeDecl().ele000000101AssignmentUnsettable();
 	}
 	
 	@Override
@@ -3795,7 +3798,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_0_1_Assignment_unsettable extends A
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele0000001010KeywordUnsettable();
+			element = grammarAccess.prEAttributeDecl().ele0000001010KeywordUnsettable();
 			return new Solution(obj);
 		}
 
@@ -3812,7 +3815,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_1_Assignment_derived extends Assign
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele00000011AssignmentDerived();
+		return grammarAccess.prEAttributeDecl().ele00000011AssignmentDerived();
 	}
 	
 	@Override
@@ -3822,7 +3825,7 @@ protected class EAttributeDecl_0_0_0_0_0_0_1_1_Assignment_derived extends Assign
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele000000110KeywordDerived();
+			element = grammarAccess.prEAttributeDecl().ele000000110KeywordDerived();
 			return new Solution(obj);
 		}
 
@@ -3840,7 +3843,7 @@ protected class EAttributeDecl_0_0_0_0_0_1_Keyword_attr extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele000001KeywordAttr();
+		return grammarAccess.prEAttributeDecl().ele000001KeywordAttr();
 	}	
 }
 
@@ -3853,7 +3856,7 @@ protected class EAttributeDecl_0_0_0_0_1_Assignment_eGenericType extends Assignm
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele00001AssignmentEGenericType();
+		return grammarAccess.prEAttributeDecl().ele00001AssignmentEGenericType();
 	}
 	
 	@Override
@@ -3886,7 +3889,7 @@ protected class EAttributeDecl_0_0_0_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele0001Group();
+		return grammarAccess.prEAttributeDecl().ele0001Group();
 	}
 		
 	@Override
@@ -3915,7 +3918,7 @@ protected class EAttributeDecl_0_0_0_1_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele00010Group();
+		return grammarAccess.prEAttributeDecl().ele00010Group();
 	}
 		
 	@Override
@@ -3944,7 +3947,7 @@ protected class EAttributeDecl_0_0_0_1_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele000100Group();
+		return grammarAccess.prEAttributeDecl().ele000100Group();
 	}
 		
 	@Override
@@ -3973,7 +3976,7 @@ protected class EAttributeDecl_0_0_0_1_0_0_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele0001000KeywordLeftSquareBracket();
+		return grammarAccess.prEAttributeDecl().ele0001000KeywordLeftSquareBracket();
 	}	
 }
 
@@ -3985,7 +3988,7 @@ protected class EAttributeDecl_0_0_0_1_0_0_1_Assignment_lowerBound extends Assig
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele0001001AssignmentLowerBound();
+		return grammarAccess.prEAttributeDecl().ele0001001AssignmentLowerBound();
 	}
 	
 	@Override
@@ -3994,7 +3997,7 @@ protected class EAttributeDecl_0_0_0_1_0_0_1_Assignment_lowerBound extends Assig
 		IInstanceDescription obj = current.cloneAndConsume("lowerBound");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele00010010LexerRuleCallINT();
+			element = grammarAccess.prEAttributeDecl().ele00010010LexerRuleCallINT();
 			return new Solution(obj);
 		}
 		return null;
@@ -4010,7 +4013,7 @@ protected class EAttributeDecl_0_0_0_1_0_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele000101Group();
+		return grammarAccess.prEAttributeDecl().ele000101Group();
 	}
 		
 	@Override
@@ -4039,7 +4042,7 @@ protected class EAttributeDecl_0_0_0_1_0_1_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele0001010KeywordFullStopFullStop();
+		return grammarAccess.prEAttributeDecl().ele0001010KeywordFullStopFullStop();
 	}	
 }
 
@@ -4051,7 +4054,7 @@ protected class EAttributeDecl_0_0_0_1_0_1_1_Assignment_upperBound extends Assig
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele0001011AssignmentUpperBound();
+		return grammarAccess.prEAttributeDecl().ele0001011AssignmentUpperBound();
 	}
 	
 	@Override
@@ -4061,7 +4064,7 @@ protected class EAttributeDecl_0_0_0_1_0_1_1_Assignment_upperBound extends Assig
 
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
 			type = AssignmentType.PRC;
-			element = EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele00010110ParserRuleCallSINT();
+			element = grammarAccess.prEAttributeDecl().ele00010110ParserRuleCallSINT();
 			return new Solution(obj);
 		}
 
@@ -4079,7 +4082,7 @@ protected class EAttributeDecl_0_0_0_1_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele00011KeywordRightSquareBracket();
+		return grammarAccess.prEAttributeDecl().ele00011KeywordRightSquareBracket();
 	}	
 }
 
@@ -4093,7 +4096,7 @@ protected class EAttributeDecl_0_0_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele001AssignmentName();
+		return grammarAccess.prEAttributeDecl().ele001AssignmentName();
 	}
 	
 	@Override
@@ -4102,7 +4105,7 @@ protected class EAttributeDecl_0_0_1_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele0010LexerRuleCallID();
+			element = grammarAccess.prEAttributeDecl().ele0010LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -4118,7 +4121,7 @@ protected class EAttributeDecl_0_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele01Group();
+		return grammarAccess.prEAttributeDecl().ele01Group();
 	}
 		
 	@Override
@@ -4147,7 +4150,7 @@ protected class EAttributeDecl_0_1_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele010KeywordEqualsSign();
+		return grammarAccess.prEAttributeDecl().ele010KeywordEqualsSign();
 	}	
 }
 
@@ -4159,7 +4162,7 @@ protected class EAttributeDecl_0_1_1_Assignment_defaultValueLiteral extends Assi
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele011AssignmentDefaultValueLiteral();
+		return grammarAccess.prEAttributeDecl().ele011AssignmentDefaultValueLiteral();
 	}
 	
 	@Override
@@ -4168,7 +4171,7 @@ protected class EAttributeDecl_0_1_1_Assignment_defaultValueLiteral extends Assi
 		IInstanceDescription obj = current.cloneAndConsume("defaultValueLiteral");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele0110LexerRuleCallSTRING();
+			element = grammarAccess.prEAttributeDecl().ele0110LexerRuleCallSTRING();
 			return new Solution(obj);
 		}
 		return null;
@@ -4185,7 +4188,7 @@ protected class EAttributeDecl_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAttributeDecl().ele1KeywordSemicolon();
+		return grammarAccess.prEAttributeDecl().ele1KeywordSemicolon();
 	}	
 }
 
@@ -4208,7 +4211,7 @@ protected class EReferenceDecl_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().eleGroup();
+		return grammarAccess.prEReferenceDecl().eleGroup();
 	}
 		
 	@Override
@@ -4237,7 +4240,7 @@ protected class EReferenceDecl_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele0Group();
+		return grammarAccess.prEReferenceDecl().ele0Group();
 	}
 		
 	@Override
@@ -4266,7 +4269,7 @@ protected class EReferenceDecl_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele00Group();
+		return grammarAccess.prEReferenceDecl().ele00Group();
 	}
 		
 	@Override
@@ -4295,7 +4298,7 @@ protected class EReferenceDecl_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele000Group();
+		return grammarAccess.prEReferenceDecl().ele000Group();
 	}
 		
 	@Override
@@ -4324,7 +4327,7 @@ protected class EReferenceDecl_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele0000Group();
+		return grammarAccess.prEReferenceDecl().ele0000Group();
 	}
 		
 	@Override
@@ -4353,7 +4356,7 @@ protected class EReferenceDecl_0_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele00000Group();
+		return grammarAccess.prEReferenceDecl().ele00000Group();
 	}
 		
 	@Override
@@ -4382,7 +4385,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele000000Group();
+		return grammarAccess.prEReferenceDecl().ele000000Group();
 	}
 		
 	@Override
@@ -4411,7 +4414,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_0_Assignment_eAnnotations extends Ass
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele0000000AssignmentEAnnotations();
+		return grammarAccess.prEReferenceDecl().ele0000000AssignmentEAnnotations();
 	}
 	
 	@Override
@@ -4443,7 +4446,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_Alternatives extends AlternativesTo
 	}
 	
 	public Alternatives getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele0000001Alternatives();
+		return grammarAccess.prEReferenceDecl().ele0000001Alternatives();
 	}
 
 	@Override	
@@ -4465,7 +4468,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_0_Alternatives extends Alternatives
 	}
 	
 	public Alternatives getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele00000010Alternatives();
+		return grammarAccess.prEReferenceDecl().ele00000010Alternatives();
 	}
 
 	@Override	
@@ -4487,7 +4490,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_Alternatives extends Alternativ
 	}
 	
 	public Alternatives getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele000000100Alternatives();
+		return grammarAccess.prEReferenceDecl().ele000000100Alternatives();
 	}
 
 	@Override	
@@ -4509,7 +4512,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_0_Alternatives extends Alternat
 	}
 	
 	public Alternatives getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele0000001000Alternatives();
+		return grammarAccess.prEReferenceDecl().ele0000001000Alternatives();
 	}
 
 	@Override	
@@ -4531,7 +4534,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_0_0_Alternatives extends Altern
 	}
 	
 	public Alternatives getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele00000010000Alternatives();
+		return grammarAccess.prEReferenceDecl().ele00000010000Alternatives();
 	}
 
 	@Override	
@@ -4553,7 +4556,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_0_0_0_Alternatives extends Alte
 	}
 	
 	public Alternatives getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele000000100000Alternatives();
+		return grammarAccess.prEReferenceDecl().ele000000100000Alternatives();
 	}
 
 	@Override	
@@ -4575,7 +4578,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_0_0_0_0_Alternatives extends Al
 	}
 	
 	public Alternatives getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele0000001000000Alternatives();
+		return grammarAccess.prEReferenceDecl().ele0000001000000Alternatives();
 	}
 
 	@Override	
@@ -4597,7 +4600,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_0_0_0_0_0_Assignment_resolvePro
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele00000010000000AssignmentResolveProxies();
+		return grammarAccess.prEReferenceDecl().ele00000010000000AssignmentResolveProxies();
 	}
 	
 	@Override
@@ -4607,7 +4610,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_0_0_0_0_0_Assignment_resolvePro
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele000000100000000KeywordLocal();
+			element = grammarAccess.prEReferenceDecl().ele000000100000000KeywordLocal();
 			return new Solution(obj);
 		}
 
@@ -4623,7 +4626,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_0_0_0_0_1_Assignment_unique ext
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele00000010000001AssignmentUnique();
+		return grammarAccess.prEReferenceDecl().ele00000010000001AssignmentUnique();
 	}
 	
 	@Override
@@ -4633,7 +4636,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_0_0_0_0_1_Assignment_unique ext
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele000000100000010KeywordBag();
+			element = grammarAccess.prEReferenceDecl().ele000000100000010KeywordBag();
 			return new Solution(obj);
 		}
 
@@ -4650,7 +4653,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_0_0_0_1_Assignment_ordered exte
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele0000001000001AssignmentOrdered();
+		return grammarAccess.prEReferenceDecl().ele0000001000001AssignmentOrdered();
 	}
 	
 	@Override
@@ -4660,7 +4663,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_0_0_0_1_Assignment_ordered exte
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele00000010000010KeywordRandom();
+			element = grammarAccess.prEReferenceDecl().ele00000010000010KeywordRandom();
 			return new Solution(obj);
 		}
 
@@ -4677,7 +4680,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_0_0_1_Assignment_changeable ext
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele000000100001AssignmentChangeable();
+		return grammarAccess.prEReferenceDecl().ele000000100001AssignmentChangeable();
 	}
 	
 	@Override
@@ -4687,7 +4690,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_0_0_1_Assignment_changeable ext
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele0000001000010KeywordReadonly();
+			element = grammarAccess.prEReferenceDecl().ele0000001000010KeywordReadonly();
 			return new Solution(obj);
 		}
 
@@ -4704,7 +4707,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_0_1_Assignment_volatile extends
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele00000010001AssignmentVolatile();
+		return grammarAccess.prEReferenceDecl().ele00000010001AssignmentVolatile();
 	}
 	
 	@Override
@@ -4714,7 +4717,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_0_1_Assignment_volatile extends
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele000000100010KeywordVolatile();
+			element = grammarAccess.prEReferenceDecl().ele000000100010KeywordVolatile();
 			return new Solution(obj);
 		}
 
@@ -4731,7 +4734,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_1_Assignment_transient extends 
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele0000001001AssignmentTransient();
+		return grammarAccess.prEReferenceDecl().ele0000001001AssignmentTransient();
 	}
 	
 	@Override
@@ -4741,7 +4744,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_0_0_1_Assignment_transient extends 
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele00000010010KeywordTransient();
+			element = grammarAccess.prEReferenceDecl().ele00000010010KeywordTransient();
 			return new Solution(obj);
 		}
 
@@ -4758,7 +4761,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_0_1_Assignment_unsettable extends A
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele000000101AssignmentUnsettable();
+		return grammarAccess.prEReferenceDecl().ele000000101AssignmentUnsettable();
 	}
 	
 	@Override
@@ -4768,7 +4771,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_0_1_Assignment_unsettable extends A
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele0000001010KeywordUnsettable();
+			element = grammarAccess.prEReferenceDecl().ele0000001010KeywordUnsettable();
 			return new Solution(obj);
 		}
 
@@ -4785,7 +4788,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_1_Assignment_derived extends Assign
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele00000011AssignmentDerived();
+		return grammarAccess.prEReferenceDecl().ele00000011AssignmentDerived();
 	}
 	
 	@Override
@@ -4795,7 +4798,7 @@ protected class EReferenceDecl_0_0_0_0_0_0_1_1_Assignment_derived extends Assign
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele000000110KeywordDerived();
+			element = grammarAccess.prEReferenceDecl().ele000000110KeywordDerived();
 			return new Solution(obj);
 		}
 
@@ -4813,7 +4816,7 @@ protected class EReferenceDecl_0_0_0_0_0_1_Alternatives extends AlternativesToke
 	}
 	
 	public Alternatives getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele000001Alternatives();
+		return grammarAccess.prEReferenceDecl().ele000001Alternatives();
 	}
 
 	@Override	
@@ -4835,7 +4838,7 @@ protected class EReferenceDecl_0_0_0_0_0_1_0_Assignment_containment extends Assi
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele0000010AssignmentContainment();
+		return grammarAccess.prEReferenceDecl().ele0000010AssignmentContainment();
 	}
 	
 	@Override
@@ -4845,7 +4848,7 @@ protected class EReferenceDecl_0_0_0_0_0_1_0_Assignment_containment extends Assi
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele00000100KeywordVal();
+			element = grammarAccess.prEReferenceDecl().ele00000100KeywordVal();
 			return new Solution(obj);
 		}
 
@@ -4861,7 +4864,7 @@ protected class EReferenceDecl_0_0_0_0_0_1_1_Keyword_ref extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele0000011KeywordRef();
+		return grammarAccess.prEReferenceDecl().ele0000011KeywordRef();
 	}	
 }
 
@@ -4875,7 +4878,7 @@ protected class EReferenceDecl_0_0_0_0_1_Assignment_eGenericType extends Assignm
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele00001AssignmentEGenericType();
+		return grammarAccess.prEReferenceDecl().ele00001AssignmentEGenericType();
 	}
 	
 	@Override
@@ -4908,7 +4911,7 @@ protected class EReferenceDecl_0_0_0_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele0001Group();
+		return grammarAccess.prEReferenceDecl().ele0001Group();
 	}
 		
 	@Override
@@ -4937,7 +4940,7 @@ protected class EReferenceDecl_0_0_0_1_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele00010Group();
+		return grammarAccess.prEReferenceDecl().ele00010Group();
 	}
 		
 	@Override
@@ -4966,7 +4969,7 @@ protected class EReferenceDecl_0_0_0_1_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele000100Group();
+		return grammarAccess.prEReferenceDecl().ele000100Group();
 	}
 		
 	@Override
@@ -4995,7 +4998,7 @@ protected class EReferenceDecl_0_0_0_1_0_0_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele0001000KeywordLeftSquareBracket();
+		return grammarAccess.prEReferenceDecl().ele0001000KeywordLeftSquareBracket();
 	}	
 }
 
@@ -5007,7 +5010,7 @@ protected class EReferenceDecl_0_0_0_1_0_0_1_Assignment_lowerBound extends Assig
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele0001001AssignmentLowerBound();
+		return grammarAccess.prEReferenceDecl().ele0001001AssignmentLowerBound();
 	}
 	
 	@Override
@@ -5016,7 +5019,7 @@ protected class EReferenceDecl_0_0_0_1_0_0_1_Assignment_lowerBound extends Assig
 		IInstanceDescription obj = current.cloneAndConsume("lowerBound");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele00010010LexerRuleCallINT();
+			element = grammarAccess.prEReferenceDecl().ele00010010LexerRuleCallINT();
 			return new Solution(obj);
 		}
 		return null;
@@ -5032,7 +5035,7 @@ protected class EReferenceDecl_0_0_0_1_0_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele000101Group();
+		return grammarAccess.prEReferenceDecl().ele000101Group();
 	}
 		
 	@Override
@@ -5061,7 +5064,7 @@ protected class EReferenceDecl_0_0_0_1_0_1_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele0001010KeywordFullStopFullStop();
+		return grammarAccess.prEReferenceDecl().ele0001010KeywordFullStopFullStop();
 	}	
 }
 
@@ -5073,7 +5076,7 @@ protected class EReferenceDecl_0_0_0_1_0_1_1_Assignment_upperBound extends Assig
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele0001011AssignmentUpperBound();
+		return grammarAccess.prEReferenceDecl().ele0001011AssignmentUpperBound();
 	}
 	
 	@Override
@@ -5083,7 +5086,7 @@ protected class EReferenceDecl_0_0_0_1_0_1_1_Assignment_upperBound extends Assig
 
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
 			type = AssignmentType.PRC;
-			element = EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele00010110ParserRuleCallSINT();
+			element = grammarAccess.prEReferenceDecl().ele00010110ParserRuleCallSINT();
 			return new Solution(obj);
 		}
 
@@ -5101,7 +5104,7 @@ protected class EReferenceDecl_0_0_0_1_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele00011KeywordRightSquareBracket();
+		return grammarAccess.prEReferenceDecl().ele00011KeywordRightSquareBracket();
 	}	
 }
 
@@ -5115,7 +5118,7 @@ protected class EReferenceDecl_0_0_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele001Group();
+		return grammarAccess.prEReferenceDecl().ele001Group();
 	}
 		
 	@Override
@@ -5144,7 +5147,7 @@ protected class EReferenceDecl_0_0_1_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele0010KeywordNumberSign();
+		return grammarAccess.prEReferenceDecl().ele0010KeywordNumberSign();
 	}	
 }
 
@@ -5156,7 +5159,7 @@ protected class EReferenceDecl_0_0_1_1_Assignment_eOpposite extends AssignmentTo
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele0011AssignmentEOpposite();
+		return grammarAccess.prEReferenceDecl().ele0011AssignmentEOpposite();
 	}
 	
 	@Override
@@ -5167,7 +5170,7 @@ protected class EReferenceDecl_0_0_1_1_Assignment_eOpposite extends AssignmentTo
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("EReference")) {
 				type = AssignmentType.CR;
-				element = EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele00110CrossReferenceEStringEReference(); 
+				element = grammarAccess.prEReferenceDecl().ele00110CrossReferenceEStringEReference(); 
 				return new Solution(obj);
 			}
 		}
@@ -5185,7 +5188,7 @@ protected class EReferenceDecl_0_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele01AssignmentName();
+		return grammarAccess.prEReferenceDecl().ele01AssignmentName();
 	}
 	
 	@Override
@@ -5194,7 +5197,7 @@ protected class EReferenceDecl_0_1_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele010LexerRuleCallID();
+			element = grammarAccess.prEReferenceDecl().ele010LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -5210,7 +5213,7 @@ protected class EReferenceDecl_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEReferenceDecl().ele1KeywordSemicolon();
+		return grammarAccess.prEReferenceDecl().ele1KeywordSemicolon();
 	}	
 }
 
@@ -5233,7 +5236,7 @@ protected class EEnumDecl_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEEnumDecl().eleGroup();
+		return grammarAccess.prEEnumDecl().eleGroup();
 	}
 		
 	@Override
@@ -5262,7 +5265,7 @@ protected class EEnumDecl_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEEnumDecl().ele0Group();
+		return grammarAccess.prEEnumDecl().ele0Group();
 	}
 		
 	@Override
@@ -5291,7 +5294,7 @@ protected class EEnumDecl_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEEnumDecl().ele00Group();
+		return grammarAccess.prEEnumDecl().ele00Group();
 	}
 		
 	@Override
@@ -5320,7 +5323,7 @@ protected class EEnumDecl_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEEnumDecl().ele000Group();
+		return grammarAccess.prEEnumDecl().ele000Group();
 	}
 		
 	@Override
@@ -5349,7 +5352,7 @@ protected class EEnumDecl_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEEnumDecl().ele0000Group();
+		return grammarAccess.prEEnumDecl().ele0000Group();
 	}
 		
 	@Override
@@ -5378,7 +5381,7 @@ protected class EEnumDecl_0_0_0_0_0_Assignment_eAnnotations extends AssignmentTo
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEEnumDecl().ele00000AssignmentEAnnotations();
+		return grammarAccess.prEEnumDecl().ele00000AssignmentEAnnotations();
 	}
 	
 	@Override
@@ -5410,7 +5413,7 @@ protected class EEnumDecl_0_0_0_0_1_Keyword_enum extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEEnumDecl().ele00001KeywordEnum();
+		return grammarAccess.prEEnumDecl().ele00001KeywordEnum();
 	}	
 }
 
@@ -5423,7 +5426,7 @@ protected class EEnumDecl_0_0_0_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEEnumDecl().ele0001AssignmentName();
+		return grammarAccess.prEEnumDecl().ele0001AssignmentName();
 	}
 	
 	@Override
@@ -5432,7 +5435,7 @@ protected class EEnumDecl_0_0_0_1_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = EcoreDslGrammarAccess.INSTANCE.prEEnumDecl().ele00010LexerRuleCallID();
+			element = grammarAccess.prEEnumDecl().ele00010LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -5448,7 +5451,7 @@ protected class EEnumDecl_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEEnumDecl().ele001KeywordLeftCurlyBracket();
+		return grammarAccess.prEEnumDecl().ele001KeywordLeftCurlyBracket();
 	}	
 }
 
@@ -5461,7 +5464,7 @@ protected class EEnumDecl_0_1_Assignment_eLiterals extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEEnumDecl().ele01AssignmentELiterals();
+		return grammarAccess.prEEnumDecl().ele01AssignmentELiterals();
 	}
 	
 	@Override
@@ -5494,7 +5497,7 @@ protected class EEnumDecl_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEEnumDecl().ele1KeywordRightCurlyBracket();
+		return grammarAccess.prEEnumDecl().ele1KeywordRightCurlyBracket();
 	}	
 }
 
@@ -5517,7 +5520,7 @@ protected class EEnumLiteralDecl_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEEnumLiteralDecl().eleGroup();
+		return grammarAccess.prEEnumLiteralDecl().eleGroup();
 	}
 		
 	@Override
@@ -5546,7 +5549,7 @@ protected class EEnumLiteralDecl_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEEnumLiteralDecl().ele0Group();
+		return grammarAccess.prEEnumLiteralDecl().ele0Group();
 	}
 		
 	@Override
@@ -5575,7 +5578,7 @@ protected class EEnumLiteralDecl_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEEnumLiteralDecl().ele00Group();
+		return grammarAccess.prEEnumLiteralDecl().ele00Group();
 	}
 		
 	@Override
@@ -5604,7 +5607,7 @@ protected class EEnumLiteralDecl_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEEnumLiteralDecl().ele000Group();
+		return grammarAccess.prEEnumLiteralDecl().ele000Group();
 	}
 		
 	@Override
@@ -5633,7 +5636,7 @@ protected class EEnumLiteralDecl_0_0_0_0_Assignment_eAnnotations extends Assignm
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEEnumLiteralDecl().ele0000AssignmentEAnnotations();
+		return grammarAccess.prEEnumLiteralDecl().ele0000AssignmentEAnnotations();
 	}
 	
 	@Override
@@ -5665,7 +5668,7 @@ protected class EEnumLiteralDecl_0_0_0_1_Assignment_name extends AssignmentToken
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEEnumLiteralDecl().ele0001AssignmentName();
+		return grammarAccess.prEEnumLiteralDecl().ele0001AssignmentName();
 	}
 	
 	@Override
@@ -5674,7 +5677,7 @@ protected class EEnumLiteralDecl_0_0_0_1_Assignment_name extends AssignmentToken
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = EcoreDslGrammarAccess.INSTANCE.prEEnumLiteralDecl().ele00010LexerRuleCallID();
+			element = grammarAccess.prEEnumLiteralDecl().ele00010LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -5690,7 +5693,7 @@ protected class EEnumLiteralDecl_0_0_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEEnumLiteralDecl().ele001Group();
+		return grammarAccess.prEEnumLiteralDecl().ele001Group();
 	}
 		
 	@Override
@@ -5719,7 +5722,7 @@ protected class EEnumLiteralDecl_0_0_1_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEEnumLiteralDecl().ele0010KeywordEqualsSign();
+		return grammarAccess.prEEnumLiteralDecl().ele0010KeywordEqualsSign();
 	}	
 }
 
@@ -5731,7 +5734,7 @@ protected class EEnumLiteralDecl_0_0_1_1_Assignment_value extends AssignmentToke
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEEnumLiteralDecl().ele0011AssignmentValue();
+		return grammarAccess.prEEnumLiteralDecl().ele0011AssignmentValue();
 	}
 	
 	@Override
@@ -5740,7 +5743,7 @@ protected class EEnumLiteralDecl_0_0_1_1_Assignment_value extends AssignmentToke
 		IInstanceDescription obj = current.cloneAndConsume("value");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = EcoreDslGrammarAccess.INSTANCE.prEEnumLiteralDecl().ele00110LexerRuleCallINT();
+			element = grammarAccess.prEEnumLiteralDecl().ele00110LexerRuleCallINT();
 			return new Solution(obj);
 		}
 		return null;
@@ -5757,7 +5760,7 @@ protected class EEnumLiteralDecl_0_1_Assignment_literal extends AssignmentToken 
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEEnumLiteralDecl().ele01AssignmentLiteral();
+		return grammarAccess.prEEnumLiteralDecl().ele01AssignmentLiteral();
 	}
 	
 	@Override
@@ -5766,7 +5769,7 @@ protected class EEnumLiteralDecl_0_1_Assignment_literal extends AssignmentToken 
 		IInstanceDescription obj = current.cloneAndConsume("literal");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = EcoreDslGrammarAccess.INSTANCE.prEEnumLiteralDecl().ele010LexerRuleCallSTRING();
+			element = grammarAccess.prEEnumLiteralDecl().ele010LexerRuleCallSTRING();
 			return new Solution(obj);
 		}
 		return null;
@@ -5782,7 +5785,7 @@ protected class EEnumLiteralDecl_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEEnumLiteralDecl().ele1KeywordSemicolon();
+		return grammarAccess.prEEnumLiteralDecl().ele1KeywordSemicolon();
 	}	
 }
 
@@ -5805,7 +5808,7 @@ protected class ETypeParameterDecl_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prETypeParameterDecl().eleGroup();
+		return grammarAccess.prETypeParameterDecl().eleGroup();
 	}
 		
 	@Override
@@ -5834,7 +5837,7 @@ protected class ETypeParameterDecl_0_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prETypeParameterDecl().ele0AssignmentName();
+		return grammarAccess.prETypeParameterDecl().ele0AssignmentName();
 	}
 	
 	@Override
@@ -5843,7 +5846,7 @@ protected class ETypeParameterDecl_0_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = EcoreDslGrammarAccess.INSTANCE.prETypeParameterDecl().ele00LexerRuleCallID();
+			element = grammarAccess.prETypeParameterDecl().ele00LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -5858,7 +5861,7 @@ protected class ETypeParameterDecl_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prETypeParameterDecl().ele1Group();
+		return grammarAccess.prETypeParameterDecl().ele1Group();
 	}
 		
 	@Override
@@ -5887,7 +5890,7 @@ protected class ETypeParameterDecl_1_0_Keyword_extends extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prETypeParameterDecl().ele10KeywordExtends();
+		return grammarAccess.prETypeParameterDecl().ele10KeywordExtends();
 	}	
 }
 
@@ -5899,7 +5902,7 @@ protected class ETypeParameterDecl_1_1_Assignment_eBounds extends AssignmentToke
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prETypeParameterDecl().ele11AssignmentEBounds();
+		return grammarAccess.prETypeParameterDecl().ele11AssignmentEBounds();
 	}
 	
 	@Override
@@ -5943,7 +5946,7 @@ protected class EGenericTypeReferenceDecl_Alternatives extends AlternativesToken
 	}
 	
 	public Alternatives getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeReferenceDecl().eleAlternatives();
+		return grammarAccess.prEGenericTypeReferenceDecl().eleAlternatives();
 	}
 
 	@Override	
@@ -5965,7 +5968,7 @@ protected class EGenericTypeReferenceDecl_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeReferenceDecl().ele0Group();
+		return grammarAccess.prEGenericTypeReferenceDecl().ele0Group();
 	}
 		
 	@Override
@@ -5994,7 +5997,7 @@ protected class EGenericTypeReferenceDecl_0_0_Assignment_eClassifier extends Ass
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeReferenceDecl().ele00AssignmentEClassifier();
+		return grammarAccess.prEGenericTypeReferenceDecl().ele00AssignmentEClassifier();
 	}
 	
 	@Override
@@ -6005,7 +6008,7 @@ protected class EGenericTypeReferenceDecl_0_0_Assignment_eClassifier extends Ass
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("EClassifier")) {
 				type = AssignmentType.CR;
-				element = EcoreDslGrammarAccess.INSTANCE.prEGenericTypeReferenceDecl().ele000CrossReferenceEStringEClassifier(); 
+				element = grammarAccess.prEGenericTypeReferenceDecl().ele000CrossReferenceEStringEClassifier(); 
 				return new Solution(obj);
 			}
 		}
@@ -6021,7 +6024,7 @@ protected class EGenericTypeReferenceDecl_0_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeReferenceDecl().ele01Group();
+		return grammarAccess.prEGenericTypeReferenceDecl().ele01Group();
 	}
 		
 	@Override
@@ -6050,7 +6053,7 @@ protected class EGenericTypeReferenceDecl_0_1_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeReferenceDecl().ele010Group();
+		return grammarAccess.prEGenericTypeReferenceDecl().ele010Group();
 	}
 		
 	@Override
@@ -6079,7 +6082,7 @@ protected class EGenericTypeReferenceDecl_0_1_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeReferenceDecl().ele0100Group();
+		return grammarAccess.prEGenericTypeReferenceDecl().ele0100Group();
 	}
 		
 	@Override
@@ -6108,7 +6111,7 @@ protected class EGenericTypeReferenceDecl_0_1_0_0_0_Keyword extends KeywordToken
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeReferenceDecl().ele01000KeywordLessThanSign();
+		return grammarAccess.prEGenericTypeReferenceDecl().ele01000KeywordLessThanSign();
 	}	
 }
 
@@ -6120,7 +6123,7 @@ protected class EGenericTypeReferenceDecl_0_1_0_0_1_Assignment_eTypeArguments ex
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeReferenceDecl().ele01001AssignmentETypeArguments();
+		return grammarAccess.prEGenericTypeReferenceDecl().ele01001AssignmentETypeArguments();
 	}
 	
 	@Override
@@ -6153,7 +6156,7 @@ protected class EGenericTypeReferenceDecl_0_1_0_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeReferenceDecl().ele0101Group();
+		return grammarAccess.prEGenericTypeReferenceDecl().ele0101Group();
 	}
 		
 	@Override
@@ -6182,7 +6185,7 @@ protected class EGenericTypeReferenceDecl_0_1_0_1_0_Keyword extends KeywordToken
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeReferenceDecl().ele01010KeywordComma();
+		return grammarAccess.prEGenericTypeReferenceDecl().ele01010KeywordComma();
 	}	
 }
 
@@ -6194,7 +6197,7 @@ protected class EGenericTypeReferenceDecl_0_1_0_1_1_Assignment_eTypeArguments ex
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeReferenceDecl().ele01011AssignmentETypeArguments();
+		return grammarAccess.prEGenericTypeReferenceDecl().ele01011AssignmentETypeArguments();
 	}
 	
 	@Override
@@ -6228,7 +6231,7 @@ protected class EGenericTypeReferenceDecl_0_1_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeReferenceDecl().ele011KeywordGreaterThanSign();
+		return grammarAccess.prEGenericTypeReferenceDecl().ele011KeywordGreaterThanSign();
 	}	
 }
 
@@ -6242,7 +6245,7 @@ protected class EGenericTypeReferenceDecl_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeReferenceDecl().ele1Group();
+		return grammarAccess.prEGenericTypeReferenceDecl().ele1Group();
 	}
 		
 	@Override
@@ -6271,7 +6274,7 @@ protected class EGenericTypeReferenceDecl_1_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeReferenceDecl().ele10KeywordNumberSign();
+		return grammarAccess.prEGenericTypeReferenceDecl().ele10KeywordNumberSign();
 	}	
 }
 
@@ -6283,7 +6286,7 @@ protected class EGenericTypeReferenceDecl_1_1_Assignment_eTypeParameter extends 
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeReferenceDecl().ele11AssignmentETypeParameter();
+		return grammarAccess.prEGenericTypeReferenceDecl().ele11AssignmentETypeParameter();
 	}
 	
 	@Override
@@ -6294,7 +6297,7 @@ protected class EGenericTypeReferenceDecl_1_1_Assignment_eTypeParameter extends 
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("ETypeParameter")) {
 				type = AssignmentType.CR;
-				element = EcoreDslGrammarAccess.INSTANCE.prEGenericTypeReferenceDecl().ele110CrossReferenceEStringETypeParameter(); 
+				element = grammarAccess.prEGenericTypeReferenceDecl().ele110CrossReferenceEStringETypeParameter(); 
 				return new Solution(obj);
 			}
 		}
@@ -6322,7 +6325,7 @@ protected class EGenericTypeDecl_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeDecl().eleAlternatives();
+		return grammarAccess.prEGenericTypeDecl().eleAlternatives();
 	}
 
 	@Override	
@@ -6344,7 +6347,7 @@ protected class EGenericTypeDecl_0_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeDecl().ele0Alternatives();
+		return grammarAccess.prEGenericTypeDecl().ele0Alternatives();
 	}
 
 	@Override	
@@ -6366,7 +6369,7 @@ protected class EGenericTypeDecl_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeDecl().ele00Group();
+		return grammarAccess.prEGenericTypeDecl().ele00Group();
 	}
 		
 	@Override
@@ -6395,7 +6398,7 @@ protected class EGenericTypeDecl_0_0_0_Assignment_eClassifier extends Assignment
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeDecl().ele000AssignmentEClassifier();
+		return grammarAccess.prEGenericTypeDecl().ele000AssignmentEClassifier();
 	}
 	
 	@Override
@@ -6406,7 +6409,7 @@ protected class EGenericTypeDecl_0_0_0_Assignment_eClassifier extends Assignment
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("EClassifier")) {
 				type = AssignmentType.CR;
-				element = EcoreDslGrammarAccess.INSTANCE.prEGenericTypeDecl().ele0000CrossReferenceEStringEClassifier(); 
+				element = grammarAccess.prEGenericTypeDecl().ele0000CrossReferenceEStringEClassifier(); 
 				return new Solution(obj);
 			}
 		}
@@ -6422,7 +6425,7 @@ protected class EGenericTypeDecl_0_0_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeDecl().ele001Group();
+		return grammarAccess.prEGenericTypeDecl().ele001Group();
 	}
 		
 	@Override
@@ -6451,7 +6454,7 @@ protected class EGenericTypeDecl_0_0_1_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeDecl().ele0010Group();
+		return grammarAccess.prEGenericTypeDecl().ele0010Group();
 	}
 		
 	@Override
@@ -6480,7 +6483,7 @@ protected class EGenericTypeDecl_0_0_1_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeDecl().ele00100Group();
+		return grammarAccess.prEGenericTypeDecl().ele00100Group();
 	}
 		
 	@Override
@@ -6509,7 +6512,7 @@ protected class EGenericTypeDecl_0_0_1_0_0_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeDecl().ele001000KeywordLessThanSign();
+		return grammarAccess.prEGenericTypeDecl().ele001000KeywordLessThanSign();
 	}	
 }
 
@@ -6521,7 +6524,7 @@ protected class EGenericTypeDecl_0_0_1_0_0_1_Assignment_eTypeArguments extends A
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeDecl().ele001001AssignmentETypeArguments();
+		return grammarAccess.prEGenericTypeDecl().ele001001AssignmentETypeArguments();
 	}
 	
 	@Override
@@ -6554,7 +6557,7 @@ protected class EGenericTypeDecl_0_0_1_0_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeDecl().ele00101Group();
+		return grammarAccess.prEGenericTypeDecl().ele00101Group();
 	}
 		
 	@Override
@@ -6583,7 +6586,7 @@ protected class EGenericTypeDecl_0_0_1_0_1_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeDecl().ele001010KeywordComma();
+		return grammarAccess.prEGenericTypeDecl().ele001010KeywordComma();
 	}	
 }
 
@@ -6595,7 +6598,7 @@ protected class EGenericTypeDecl_0_0_1_0_1_1_Assignment_eTypeArguments extends A
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeDecl().ele001011AssignmentETypeArguments();
+		return grammarAccess.prEGenericTypeDecl().ele001011AssignmentETypeArguments();
 	}
 	
 	@Override
@@ -6629,7 +6632,7 @@ protected class EGenericTypeDecl_0_0_1_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeDecl().ele0011KeywordGreaterThanSign();
+		return grammarAccess.prEGenericTypeDecl().ele0011KeywordGreaterThanSign();
 	}	
 }
 
@@ -6643,7 +6646,7 @@ protected class EGenericTypeDecl_0_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeDecl().ele01Group();
+		return grammarAccess.prEGenericTypeDecl().ele01Group();
 	}
 		
 	@Override
@@ -6672,7 +6675,7 @@ protected class EGenericTypeDecl_0_1_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeDecl().ele010KeywordNumberSign();
+		return grammarAccess.prEGenericTypeDecl().ele010KeywordNumberSign();
 	}	
 }
 
@@ -6684,7 +6687,7 @@ protected class EGenericTypeDecl_0_1_1_Assignment_eTypeParameter extends Assignm
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeDecl().ele011AssignmentETypeParameter();
+		return grammarAccess.prEGenericTypeDecl().ele011AssignmentETypeParameter();
 	}
 	
 	@Override
@@ -6695,7 +6698,7 @@ protected class EGenericTypeDecl_0_1_1_Assignment_eTypeParameter extends Assignm
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("ETypeParameter")) {
 				type = AssignmentType.CR;
-				element = EcoreDslGrammarAccess.INSTANCE.prEGenericTypeDecl().ele0110CrossReferenceEStringETypeParameter(); 
+				element = grammarAccess.prEGenericTypeDecl().ele0110CrossReferenceEStringETypeParameter(); 
 				return new Solution(obj);
 			}
 		}
@@ -6713,7 +6716,7 @@ protected class EGenericTypeDecl_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeDecl().ele1Group();
+		return grammarAccess.prEGenericTypeDecl().ele1Group();
 	}
 		
 	@Override
@@ -6742,7 +6745,7 @@ protected class EGenericTypeDecl_1_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeDecl().ele10KeywordQuestionMark();
+		return grammarAccess.prEGenericTypeDecl().ele10KeywordQuestionMark();
 	}	
 }
 
@@ -6754,7 +6757,7 @@ protected class EGenericTypeDecl_1_1_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeDecl().ele11Alternatives();
+		return grammarAccess.prEGenericTypeDecl().ele11Alternatives();
 	}
 
 	@Override	
@@ -6776,7 +6779,7 @@ protected class EGenericTypeDecl_1_1_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeDecl().ele110Group();
+		return grammarAccess.prEGenericTypeDecl().ele110Group();
 	}
 		
 	@Override
@@ -6805,7 +6808,7 @@ protected class EGenericTypeDecl_1_1_0_0_Keyword_extends extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeDecl().ele1100KeywordExtends();
+		return grammarAccess.prEGenericTypeDecl().ele1100KeywordExtends();
 	}	
 }
 
@@ -6817,7 +6820,7 @@ protected class EGenericTypeDecl_1_1_0_1_Assignment_eUpperBound extends Assignme
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeDecl().ele1101AssignmentEUpperBound();
+		return grammarAccess.prEGenericTypeDecl().ele1101AssignmentEUpperBound();
 	}
 	
 	@Override
@@ -6850,7 +6853,7 @@ protected class EGenericTypeDecl_1_1_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeDecl().ele111Group();
+		return grammarAccess.prEGenericTypeDecl().ele111Group();
 	}
 		
 	@Override
@@ -6879,7 +6882,7 @@ protected class EGenericTypeDecl_1_1_1_0_Keyword_super extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeDecl().ele1110KeywordSuper();
+		return grammarAccess.prEGenericTypeDecl().ele1110KeywordSuper();
 	}	
 }
 
@@ -6891,7 +6894,7 @@ protected class EGenericTypeDecl_1_1_1_1_Assignment_eLowerBound extends Assignme
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeDecl().ele1111AssignmentELowerBound();
+		return grammarAccess.prEGenericTypeDecl().ele1111AssignmentELowerBound();
 	}
 	
 	@Override
@@ -6937,7 +6940,7 @@ protected class EOperationDecl_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().eleGroup();
+		return grammarAccess.prEOperationDecl().eleGroup();
 	}
 		
 	@Override
@@ -6966,7 +6969,7 @@ protected class EOperationDecl_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele0Group();
+		return grammarAccess.prEOperationDecl().ele0Group();
 	}
 		
 	@Override
@@ -6995,7 +6998,7 @@ protected class EOperationDecl_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele00Group();
+		return grammarAccess.prEOperationDecl().ele00Group();
 	}
 		
 	@Override
@@ -7024,7 +7027,7 @@ protected class EOperationDecl_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele000Group();
+		return grammarAccess.prEOperationDecl().ele000Group();
 	}
 		
 	@Override
@@ -7053,7 +7056,7 @@ protected class EOperationDecl_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele0000Group();
+		return grammarAccess.prEOperationDecl().ele0000Group();
 	}
 		
 	@Override
@@ -7082,7 +7085,7 @@ protected class EOperationDecl_0_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele00000Group();
+		return grammarAccess.prEOperationDecl().ele00000Group();
 	}
 		
 	@Override
@@ -7111,7 +7114,7 @@ protected class EOperationDecl_0_0_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele000000Group();
+		return grammarAccess.prEOperationDecl().ele000000Group();
 	}
 		
 	@Override
@@ -7140,7 +7143,7 @@ protected class EOperationDecl_0_0_0_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele0000000Group();
+		return grammarAccess.prEOperationDecl().ele0000000Group();
 	}
 		
 	@Override
@@ -7169,7 +7172,7 @@ protected class EOperationDecl_0_0_0_0_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele00000000Group();
+		return grammarAccess.prEOperationDecl().ele00000000Group();
 	}
 		
 	@Override
@@ -7198,7 +7201,7 @@ protected class EOperationDecl_0_0_0_0_0_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele000000000Group();
+		return grammarAccess.prEOperationDecl().ele000000000Group();
 	}
 		
 	@Override
@@ -7227,7 +7230,7 @@ protected class EOperationDecl_0_0_0_0_0_0_0_0_0_0_Assignment_eAnnotations exten
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele0000000000AssignmentEAnnotations();
+		return grammarAccess.prEOperationDecl().ele0000000000AssignmentEAnnotations();
 	}
 	
 	@Override
@@ -7259,7 +7262,7 @@ protected class EOperationDecl_0_0_0_0_0_0_0_0_0_1_Alternatives extends Alternat
 	}
 	
 	public Alternatives getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele0000000001Alternatives();
+		return grammarAccess.prEOperationDecl().ele0000000001Alternatives();
 	}
 
 	@Override	
@@ -7281,7 +7284,7 @@ protected class EOperationDecl_0_0_0_0_0_0_0_0_0_1_0_Assignment_unique extends A
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele00000000010AssignmentUnique();
+		return grammarAccess.prEOperationDecl().ele00000000010AssignmentUnique();
 	}
 	
 	@Override
@@ -7291,7 +7294,7 @@ protected class EOperationDecl_0_0_0_0_0_0_0_0_0_1_0_Assignment_unique extends A
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele000000000100KeywordBag();
+			element = grammarAccess.prEOperationDecl().ele000000000100KeywordBag();
 			return new Solution(obj);
 		}
 
@@ -7307,7 +7310,7 @@ protected class EOperationDecl_0_0_0_0_0_0_0_0_0_1_1_Assignment_ordered extends 
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele00000000011AssignmentOrdered();
+		return grammarAccess.prEOperationDecl().ele00000000011AssignmentOrdered();
 	}
 	
 	@Override
@@ -7317,7 +7320,7 @@ protected class EOperationDecl_0_0_0_0_0_0_0_0_0_1_1_Assignment_ordered extends 
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele000000000110KeywordRandom();
+			element = grammarAccess.prEOperationDecl().ele000000000110KeywordRandom();
 			return new Solution(obj);
 		}
 
@@ -7335,7 +7338,7 @@ protected class EOperationDecl_0_0_0_0_0_0_0_0_1_Keyword_op extends KeywordToken
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele000000001KeywordOp();
+		return grammarAccess.prEOperationDecl().ele000000001KeywordOp();
 	}	
 }
 
@@ -7348,7 +7351,7 @@ protected class EOperationDecl_0_0_0_0_0_0_0_1_Alternatives extends Alternatives
 	}
 	
 	public Alternatives getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele00000001Alternatives();
+		return grammarAccess.prEOperationDecl().ele00000001Alternatives();
 	}
 
 	@Override	
@@ -7370,7 +7373,7 @@ protected class EOperationDecl_0_0_0_0_0_0_0_1_0_Assignment_eGenericType extends
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele000000010AssignmentEGenericType();
+		return grammarAccess.prEOperationDecl().ele000000010AssignmentEGenericType();
 	}
 	
 	@Override
@@ -7402,7 +7405,7 @@ protected class EOperationDecl_0_0_0_0_0_0_0_1_1_Keyword_void extends KeywordTok
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele000000011KeywordVoid();
+		return grammarAccess.prEOperationDecl().ele000000011KeywordVoid();
 	}	
 }
 
@@ -7416,7 +7419,7 @@ protected class EOperationDecl_0_0_0_0_0_0_1_Assignment_name extends AssignmentT
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele0000001AssignmentName();
+		return grammarAccess.prEOperationDecl().ele0000001AssignmentName();
 	}
 	
 	@Override
@@ -7425,7 +7428,7 @@ protected class EOperationDecl_0_0_0_0_0_0_1_Assignment_name extends AssignmentT
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele00000010LexerRuleCallID();
+			element = grammarAccess.prEOperationDecl().ele00000010LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -7441,7 +7444,7 @@ protected class EOperationDecl_0_0_0_0_0_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele000001Group();
+		return grammarAccess.prEOperationDecl().ele000001Group();
 	}
 		
 	@Override
@@ -7470,7 +7473,7 @@ protected class EOperationDecl_0_0_0_0_0_1_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele0000010Group();
+		return grammarAccess.prEOperationDecl().ele0000010Group();
 	}
 		
 	@Override
@@ -7499,7 +7502,7 @@ protected class EOperationDecl_0_0_0_0_0_1_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele00000100Group();
+		return grammarAccess.prEOperationDecl().ele00000100Group();
 	}
 		
 	@Override
@@ -7528,7 +7531,7 @@ protected class EOperationDecl_0_0_0_0_0_1_0_0_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele000001000KeywordLessThanSign();
+		return grammarAccess.prEOperationDecl().ele000001000KeywordLessThanSign();
 	}	
 }
 
@@ -7540,7 +7543,7 @@ protected class EOperationDecl_0_0_0_0_0_1_0_0_1_Assignment_eTypeParameters exte
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele000001001AssignmentETypeParameters();
+		return grammarAccess.prEOperationDecl().ele000001001AssignmentETypeParameters();
 	}
 	
 	@Override
@@ -7573,7 +7576,7 @@ protected class EOperationDecl_0_0_0_0_0_1_0_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele00000101Group();
+		return grammarAccess.prEOperationDecl().ele00000101Group();
 	}
 		
 	@Override
@@ -7602,7 +7605,7 @@ protected class EOperationDecl_0_0_0_0_0_1_0_1_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele000001010KeywordComma();
+		return grammarAccess.prEOperationDecl().ele000001010KeywordComma();
 	}	
 }
 
@@ -7614,7 +7617,7 @@ protected class EOperationDecl_0_0_0_0_0_1_0_1_1_Assignment_eTypeParameters exte
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele000001011AssignmentETypeParameters();
+		return grammarAccess.prEOperationDecl().ele000001011AssignmentETypeParameters();
 	}
 	
 	@Override
@@ -7648,7 +7651,7 @@ protected class EOperationDecl_0_0_0_0_0_1_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele0000011KeywordGreaterThanSign();
+		return grammarAccess.prEOperationDecl().ele0000011KeywordGreaterThanSign();
 	}	
 }
 
@@ -7662,7 +7665,7 @@ protected class EOperationDecl_0_0_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele00001KeywordLeftParenthesis();
+		return grammarAccess.prEOperationDecl().ele00001KeywordLeftParenthesis();
 	}	
 }
 
@@ -7675,7 +7678,7 @@ protected class EOperationDecl_0_0_0_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele0001Group();
+		return grammarAccess.prEOperationDecl().ele0001Group();
 	}
 		
 	@Override
@@ -7704,7 +7707,7 @@ protected class EOperationDecl_0_0_0_1_0_Assignment_eParameters extends Assignme
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele00010AssignmentEParameters();
+		return grammarAccess.prEOperationDecl().ele00010AssignmentEParameters();
 	}
 	
 	@Override
@@ -7736,7 +7739,7 @@ protected class EOperationDecl_0_0_0_1_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele00011Group();
+		return grammarAccess.prEOperationDecl().ele00011Group();
 	}
 		
 	@Override
@@ -7765,7 +7768,7 @@ protected class EOperationDecl_0_0_0_1_1_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele000110KeywordComma();
+		return grammarAccess.prEOperationDecl().ele000110KeywordComma();
 	}	
 }
 
@@ -7777,7 +7780,7 @@ protected class EOperationDecl_0_0_0_1_1_1_Assignment_eParameters extends Assign
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele000111AssignmentEParameters();
+		return grammarAccess.prEOperationDecl().ele000111AssignmentEParameters();
 	}
 	
 	@Override
@@ -7812,7 +7815,7 @@ protected class EOperationDecl_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele001KeywordRightParenthesis();
+		return grammarAccess.prEOperationDecl().ele001KeywordRightParenthesis();
 	}	
 }
 
@@ -7825,7 +7828,7 @@ protected class EOperationDecl_0_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele01Group();
+		return grammarAccess.prEOperationDecl().ele01Group();
 	}
 		
 	@Override
@@ -7854,7 +7857,7 @@ protected class EOperationDecl_0_1_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele010Group();
+		return grammarAccess.prEOperationDecl().ele010Group();
 	}
 		
 	@Override
@@ -7883,7 +7886,7 @@ protected class EOperationDecl_0_1_0_0_Keyword_throws extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele0100KeywordThrows();
+		return grammarAccess.prEOperationDecl().ele0100KeywordThrows();
 	}	
 }
 
@@ -7895,7 +7898,7 @@ protected class EOperationDecl_0_1_0_1_Assignment_eGenericExceptions extends Ass
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele0101AssignmentEGenericExceptions();
+		return grammarAccess.prEOperationDecl().ele0101AssignmentEGenericExceptions();
 	}
 	
 	@Override
@@ -7928,7 +7931,7 @@ protected class EOperationDecl_0_1_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele011Group();
+		return grammarAccess.prEOperationDecl().ele011Group();
 	}
 		
 	@Override
@@ -7957,7 +7960,7 @@ protected class EOperationDecl_0_1_1_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele0110KeywordComma();
+		return grammarAccess.prEOperationDecl().ele0110KeywordComma();
 	}	
 }
 
@@ -7969,7 +7972,7 @@ protected class EOperationDecl_0_1_1_1_Assignment_eGenericExceptions extends Ass
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele0111AssignmentEGenericExceptions();
+		return grammarAccess.prEOperationDecl().ele0111AssignmentEGenericExceptions();
 	}
 	
 	@Override
@@ -8004,7 +8007,7 @@ protected class EOperationDecl_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl().ele1KeywordSemicolon();
+		return grammarAccess.prEOperationDecl().ele1KeywordSemicolon();
 	}	
 }
 
@@ -8027,7 +8030,7 @@ protected class EParameterDecl_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEParameterDecl().eleGroup();
+		return grammarAccess.prEParameterDecl().eleGroup();
 	}
 		
 	@Override
@@ -8056,7 +8059,7 @@ protected class EParameterDecl_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEParameterDecl().ele0Group();
+		return grammarAccess.prEParameterDecl().ele0Group();
 	}
 		
 	@Override
@@ -8085,7 +8088,7 @@ protected class EParameterDecl_0_0_Assignment_eAnnotations extends AssignmentTok
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEParameterDecl().ele00AssignmentEAnnotations();
+		return grammarAccess.prEParameterDecl().ele00AssignmentEAnnotations();
 	}
 	
 	@Override
@@ -8117,7 +8120,7 @@ protected class EParameterDecl_0_1_Assignment_eGenericType extends AssignmentTok
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEParameterDecl().ele01AssignmentEGenericType();
+		return grammarAccess.prEParameterDecl().ele01AssignmentEGenericType();
 	}
 	
 	@Override
@@ -8150,7 +8153,7 @@ protected class EParameterDecl_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prEParameterDecl().ele1AssignmentName();
+		return grammarAccess.prEParameterDecl().ele1AssignmentName();
 	}
 	
 	@Override
@@ -8159,7 +8162,7 @@ protected class EParameterDecl_1_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = EcoreDslGrammarAccess.INSTANCE.prEParameterDecl().ele10LexerRuleCallID();
+			element = grammarAccess.prEParameterDecl().ele10LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -8185,7 +8188,7 @@ protected class MapEntrySuper_RuleCall_MapEntry extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prMapEntrySuper().eleParserRuleCallMapEntry();
+		return grammarAccess.prMapEntrySuper().eleParserRuleCallMapEntry();
 	}
 	
 	@Override
@@ -8214,7 +8217,7 @@ protected class MapEntry_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prMapEntry().eleGroup();
+		return grammarAccess.prMapEntry().eleGroup();
 	}
 		
 	@Override
@@ -8243,7 +8246,7 @@ protected class MapEntry_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prMapEntry().ele0Group();
+		return grammarAccess.prMapEntry().ele0Group();
 	}
 		
 	@Override
@@ -8272,7 +8275,7 @@ protected class MapEntry_0_0_Assignment_detailKey extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prMapEntry().ele00AssignmentDetailKey();
+		return grammarAccess.prMapEntry().ele00AssignmentDetailKey();
 	}
 	
 	@Override
@@ -8281,7 +8284,7 @@ protected class MapEntry_0_0_Assignment_detailKey extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("detailKey");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = EcoreDslGrammarAccess.INSTANCE.prMapEntry().ele000LexerRuleCallID();
+			element = grammarAccess.prMapEntry().ele000LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -8296,7 +8299,7 @@ protected class MapEntry_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prMapEntry().ele01KeywordEqualsSign();
+		return grammarAccess.prMapEntry().ele01KeywordEqualsSign();
 	}	
 }
 
@@ -8309,7 +8312,7 @@ protected class MapEntry_1_Assignment_detailValue extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prMapEntry().ele1AssignmentDetailValue();
+		return grammarAccess.prMapEntry().ele1AssignmentDetailValue();
 	}
 	
 	@Override
@@ -8318,7 +8321,7 @@ protected class MapEntry_1_Assignment_detailValue extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("detailValue");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = EcoreDslGrammarAccess.INSTANCE.prMapEntry().ele10LexerRuleCallSTRING();
+			element = grammarAccess.prMapEntry().ele10LexerRuleCallSTRING();
 			return new Solution(obj);
 		}
 		return null;
@@ -8344,7 +8347,7 @@ protected class MultiplicityExpr_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prMultiplicityExpr().eleAlternatives();
+		return grammarAccess.prMultiplicityExpr().eleAlternatives();
 	}
 
 	@Override	
@@ -8366,7 +8369,7 @@ protected class MultiplicityExpr_0_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prMultiplicityExpr().ele0Alternatives();
+		return grammarAccess.prMultiplicityExpr().ele0Alternatives();
 	}
 
 	@Override	
@@ -8388,7 +8391,7 @@ protected class MultiplicityExpr_0_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prMultiplicityExpr().ele00KeywordPlusSign();
+		return grammarAccess.prMultiplicityExpr().ele00KeywordPlusSign();
 	}	
 }
 
@@ -8400,7 +8403,7 @@ protected class MultiplicityExpr_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prMultiplicityExpr().ele01KeywordQuestionMark();
+		return grammarAccess.prMultiplicityExpr().ele01KeywordQuestionMark();
 	}	
 }
 
@@ -8413,7 +8416,7 @@ protected class MultiplicityExpr_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return EcoreDslGrammarAccess.INSTANCE.prMultiplicityExpr().ele1KeywordAsterisk();
+		return grammarAccess.prMultiplicityExpr().ele1KeywordAsterisk();
 	}	
 }
 

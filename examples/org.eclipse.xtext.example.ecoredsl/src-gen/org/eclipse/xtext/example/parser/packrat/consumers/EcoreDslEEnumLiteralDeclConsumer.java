@@ -24,6 +24,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGCons
 @SuppressWarnings("unused")
 public final class EcoreDslEEnumLiteralDeclConsumer extends NonTerminalConsumer {
 
+	private EEnumLiteralDeclElements rule;
+	
 	private INonTerminalConsumer eAnnotationDeclConsumer;
 	private ITerminalConsumer idConsumer;
 	private ITerminalConsumer intConsumer;
@@ -121,31 +123,19 @@ public final class EcoreDslEEnumLiteralDeclConsumer extends NonTerminalConsumer 
 	}
 
 	protected int doConsumeAssignment$5(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(eAnnotationDeclConsumer, "eAnnotations", true, false, false, getRule().ele00000ParserRuleCallEAnnotationDecl());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$6(entryPoint);
+	}
+
+	protected int consumeRuleCall$6(int entryPoint) throws Exception {
+		return consumeNonTerminal(eAnnotationDeclConsumer, "eAnnotations", true, false, false, getRule().ele00000ParserRuleCallEAnnotationDecl());
 	}
 
 	protected int consumeAssignment$7(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "name", false, false, getRule().ele00010LexerRuleCallID(), getRuleCall$8$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$8(entryPoint);
+	}
+
+	protected int consumeRuleCall$8(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "name", false, false, getRule().ele00010LexerRuleCallID(), getRuleCall$8$Delimiter());
 	}
 
 	protected int consumeGroup$9(int entryPoint) throws Exception {
@@ -194,17 +184,11 @@ public final class EcoreDslEEnumLiteralDeclConsumer extends NonTerminalConsumer 
 	}
 
 	protected int consumeAssignment$11(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(intConsumer, "value", false, false, getRule().ele00110LexerRuleCallINT(), getRuleCall$12$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$12(entryPoint);
+	}
+
+	protected int consumeRuleCall$12(int entryPoint) throws Exception {
+		return consumeTerminal(intConsumer, "value", false, false, getRule().ele00110LexerRuleCallINT(), getRuleCall$12$Delimiter());
 	}
 
 	protected int consumeAssignment$13(int entryPoint) throws Exception {
@@ -218,17 +202,11 @@ public final class EcoreDslEEnumLiteralDeclConsumer extends NonTerminalConsumer 
 	}
 
 	protected int doConsumeAssignment$13(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(stringConsumer, "literal", false, false, getRule().ele010LexerRuleCallSTRING(), getRuleCall$14$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$14(entryPoint);
+	}
+
+	protected int consumeRuleCall$14(int entryPoint) throws Exception {
+		return consumeTerminal(stringConsumer, "literal", false, false, getRule().ele010LexerRuleCallSTRING(), getRuleCall$14$Delimiter());
 	}
 
 	protected int consumeKeyword$15(int entryPoint) throws Exception {
@@ -236,7 +214,12 @@ public final class EcoreDslEEnumLiteralDeclConsumer extends NonTerminalConsumer 
 	}
 
 	public EEnumLiteralDeclElements getRule() {
-		return EcoreDslGrammarAccess.INSTANCE.prEEnumLiteralDecl();
+	// EcoreDslGrammarAccess.INSTANCE.prEEnumLiteralDecl()
+		return rule;
+	}
+	
+	public void setRule(EEnumLiteralDeclElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

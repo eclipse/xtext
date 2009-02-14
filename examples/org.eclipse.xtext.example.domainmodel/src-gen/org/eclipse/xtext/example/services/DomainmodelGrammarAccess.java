@@ -5,11 +5,17 @@ Generated with Xtext
 package org.eclipse.xtext.example.services;
 
 import com.google.inject.Singleton;
+import com.google.inject.Inject;
+
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parser.BaseEPackageAccess;
+
+import org.eclipse.xtext.service.GrammarProvider;
+
+import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
 
 @Singleton
-public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGrammarAccess {
+public class DomainmodelGrammarAccess implements IGrammarAccess {
+	
 	
 	public class FileElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "File");
@@ -567,42 +573,40 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 		public RuleCall ele11LexerRuleCallID() { return c11LexerRuleCallID; }
 	}
 	
-	public final static DomainmodelGrammarAccess INSTANCE = new DomainmodelGrammarAccess();
+	private FileElements pFile;
+	private ImportElements pImport;
+	private NamedElementElements pNamedElement;
+	private PackageElements pPackage;
+	private TypeElements pType;
+	private DataTypeElements pDataType;
+	private EntityElements pEntity;
+	private FeatureElements pFeature;
+	private StructuralFeatureElements pStructuralFeature;
+	private AttributeElements pAttribute;
+	private ReferenceElements pReference;
+	private OperationElements pOperation;
+	private ParameterElements pParameter;
+	private TypedElementElements pTypedElement;
+	private TypeRefElements pTypeRef;
+	private QualifiedNameElements pQualifiedName;
+	
+	private final GrammarProvider grammarProvider;
 
-	private static final String DOMAINMODEL_GRAMMAR_CP_URI = "classpath:/org/eclipse/xtext/example/Domainmodel.xmi";
-	private static Grammar GRAMMAR = null;
-	private static FileElements pFile;
-	private static ImportElements pImport;
-	private static NamedElementElements pNamedElement;
-	private static PackageElements pPackage;
-	private static TypeElements pType;
-	private static DataTypeElements pDataType;
-	private static EntityElements pEntity;
-	private static FeatureElements pFeature;
-	private static StructuralFeatureElements pStructuralFeature;
-	private static AttributeElements pAttribute;
-	private static ReferenceElements pReference;
-	private static OperationElements pOperation;
-	private static ParameterElements pParameter;
-	private static TypedElementElements pTypedElement;
-	private static TypeRefElements pTypeRef;
-	private static QualifiedNameElements pQualifiedName;
-	private static LexerRule lID;
-	private static LexerRule lINT;
-	private static LexerRule lSTRING;
-	private static LexerRule lML_COMMENT;
-	private static LexerRule lSL_COMMENT;
-	private static LexerRule lWS;
-	private static LexerRule lANY_OTHER;
+	private XtextBuiltinGrammarAccess superGrammarAccess;
 
-	@SuppressWarnings("unused")
-	public synchronized Grammar getGrammar() {	
-		if (GRAMMAR==null) {
-			// assert the XtextPackage implementation is loaded
-			XtextPackage xtextPackage = XtextPackage.eINSTANCE;
-			GRAMMAR = (Grammar) loadGrammarFile(DomainmodelGrammarAccess.class.getClassLoader(),DOMAINMODEL_GRAMMAR_CP_URI);
-		}
-		return GRAMMAR;
+	@Inject
+	public DomainmodelGrammarAccess(GrammarProvider grammarProvider, XtextBuiltinGrammarAccess superGrammarAccess) {
+		this.grammarProvider = grammarProvider;
+		this.superGrammarAccess = superGrammarAccess;
+	}
+	
+	public Grammar getGrammar() {	
+		return grammarProvider.getGrammar(this);
+	}
+	
+
+	public XtextBuiltinGrammarAccess getSuperGrammarAccess() {
+		return superGrammarAccess;
 	}
 
 	
@@ -688,36 +692,36 @@ public class DomainmodelGrammarAccess extends BaseEPackageAccess implements IGra
 
 	// lexer ID:   "(\'^\')?(\'a\'..\'z\'|\'A\'..\'Z\'|\'_\') (\'a\'..\'z\'|\'A\'..\'Z\'|\'_\'|\'0\'..\'9\')*";
 	public LexerRule lrID() {
-		return (lID != null) ? lID : (lID = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "ID"));
+		return superGrammarAccess.lrID();
 	} 
 
 	// lexer INT returns EInt:   "(\'0\'..\'9\')+";
 	public LexerRule lrINT() {
-		return (lINT != null) ? lINT : (lINT = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "INT"));
+		return superGrammarAccess.lrINT();
 	} 
 
 	// lexer STRING:   "\n\t\t\t  \'\"\' ( \'\\\\\' (\'b\'|\'t\'|\'n\'|\'f\'|\'r\'|\'\\\"\'|\'\\\'\'|\'\\\\\') | ~(\'\\\\\'|\'\"\') )* \'\"\' | \n              \'\\\'\' ( \'\\\\\' (\'b\'|\'t\'|\'n\'|\'f\'|\'r\'|\'\\\"\'|\'\\\'\'|\'\\\\\') | ~(\'\\\\\'|\'\\\'\') )* \'\\\'\'\n              ";
 	public LexerRule lrSTRING() {
-		return (lSTRING != null) ? lSTRING : (lSTRING = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "STRING"));
+		return superGrammarAccess.lrSTRING();
 	} 
 
 	// lexer ML_COMMENT:   "\'/*\' ( options {greedy=false;} : . )* \'*/\'";
 	public LexerRule lrML_COMMENT() {
-		return (lML_COMMENT != null) ? lML_COMMENT : (lML_COMMENT = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "ML_COMMENT"));
+		return superGrammarAccess.lrML_COMMENT();
 	} 
 
 	// lexer SL_COMMENT:   "\'//\' ~(\'\\n\'|\'\\r\')* (\'\\r\'? \'\\n\')?";
 	public LexerRule lrSL_COMMENT() {
-		return (lSL_COMMENT != null) ? lSL_COMMENT : (lSL_COMMENT = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "SL_COMMENT"));
+		return superGrammarAccess.lrSL_COMMENT();
 	} 
 
 	// lexer WS:   "(\' \'|\'\\t\'|\'\\r\'|\'\\n\')+";
 	public LexerRule lrWS() {
-		return (lWS != null) ? lWS : (lWS = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "WS"));
+		return superGrammarAccess.lrWS();
 	} 
 
 	// lexer ANY_OTHER:   ".";
 	public LexerRule lrANY_OTHER() {
-		return (lANY_OTHER != null) ? lANY_OTHER : (lANY_OTHER = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "ANY_OTHER"));
+		return superGrammarAccess.lrANY_OTHER();
 	} 
 }

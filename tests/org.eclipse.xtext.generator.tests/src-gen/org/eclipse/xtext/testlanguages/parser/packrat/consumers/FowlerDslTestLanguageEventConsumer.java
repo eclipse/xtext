@@ -21,6 +21,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer
 @SuppressWarnings("unused")
 public final class FowlerDslTestLanguageEventConsumer extends NonTerminalConsumer {
 
+	private EventElements rule;
+	
 	private ITerminalConsumer idConsumer;
 
 	private ICharacterClass keyword$4$Delimiter;
@@ -116,7 +118,12 @@ public final class FowlerDslTestLanguageEventConsumer extends NonTerminalConsume
 	}
 
 	public EventElements getRule() {
-		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prEvent();
+	// FowlerDslTestLanguageGrammarAccess.INSTANCE.prEvent()
+		return rule;
+	}
+	
+	public void setRule(EventElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

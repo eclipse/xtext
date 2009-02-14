@@ -22,6 +22,8 @@ import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageTypeRe
 @SuppressWarnings("unused")
 public final class XtextGrammarTestLanguageCrossReferenceConsumer extends NonTerminalConsumer {
 
+	private CrossReferenceElements rule;
+	
 	private ITerminalConsumer idConsumer;
 	private INonTerminalConsumer typeRefConsumer;
 
@@ -165,7 +167,12 @@ public final class XtextGrammarTestLanguageCrossReferenceConsumer extends NonTer
 	}
 
 	public CrossReferenceElements getRule() {
-		return XtextGrammarTestLanguageGrammarAccess.INSTANCE.prCrossReference();
+	// XtextGrammarTestLanguageGrammarAccess.INSTANCE.prCrossReference()
+		return rule;
+	}
+	
+	public void setRule(CrossReferenceElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

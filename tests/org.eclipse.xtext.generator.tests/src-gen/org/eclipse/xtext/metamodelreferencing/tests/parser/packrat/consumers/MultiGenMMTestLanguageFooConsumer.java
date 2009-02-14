@@ -22,6 +22,8 @@ import org.eclipse.xtext.metamodelreferencing.tests.parser.packrat.consumers.Mul
 @SuppressWarnings("unused")
 public final class MultiGenMMTestLanguageFooConsumer extends NonTerminalConsumer {
 
+	private FooElements rule;
+	
 	private ITerminalConsumer idConsumer;
 	private INonTerminalConsumer nameRefConsumer;
 
@@ -94,7 +96,12 @@ public final class MultiGenMMTestLanguageFooConsumer extends NonTerminalConsumer
 	}
 
 	public FooElements getRule() {
-		return MultiGenMMTestLanguageGrammarAccess.INSTANCE.prFoo();
+	// MultiGenMMTestLanguageGrammarAccess.INSTANCE.prFoo()
+		return rule;
+	}
+	
+	public void setRule(FooElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

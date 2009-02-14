@@ -7,6 +7,8 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
+import org.eclipse.xtext.parser.terminalrules.services.HiddenTerminalsTestLanguageGrammarAccess;
+
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.HiddenTerminalsTestLanguageModelConsumer;
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.HiddenTerminalsTestLanguageWithoutHiddensConsumer;
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.HiddenTerminalsTestLanguageWithHiddensConsumer;
@@ -40,8 +42,11 @@ public class HiddenTerminalsTestLanguageParserConfiguration extends AbstractPars
     private HiddenTerminalsTestLanguageWSConsumer wsConsumer;
     private HiddenTerminalsTestLanguageANY_OTHERConsumer anyOtherConsumer;
 
-	public HiddenTerminalsTestLanguageParserConfiguration(IInternalParserConfiguration configuration) {
+	private HiddenTerminalsTestLanguageGrammarAccess grammarAccess;
+
+	public HiddenTerminalsTestLanguageParserConfiguration(IInternalParserConfiguration configuration, HiddenTerminalsTestLanguageGrammarAccess grammarAccess) {
 		super(configuration);
+		this.grammarAccess = grammarAccess;
 	}
 
 	public HiddenTerminalsTestLanguageModelConsumer getRootConsumer() {
@@ -89,6 +94,24 @@ public class HiddenTerminalsTestLanguageParserConfiguration extends AbstractPars
 	}
 	
 	public void configureConsumers() {
+		if (grammarAccess == null)
+			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+		getModelConsumer().setRule(grammarAccess.prModel());
+		getWithoutHiddensConsumer().setRule(grammarAccess.prWithoutHiddens());
+		getWithHiddensConsumer().setRule(grammarAccess.prWithHiddens());
+		getOverridingHiddensConsumer().setRule(grammarAccess.prOverridingHiddens());
+		getOverridingHiddensCallConsumer().setRule(grammarAccess.prOverridingHiddensCall());
+		getInheritingHiddensConsumer().setRule(grammarAccess.prInheritingHiddens());
+		getDatatypeHiddensConsumer().setRule(grammarAccess.prDatatypeHiddens());
+		getDatatypeRuleConsumer().setRule(grammarAccess.prDatatypeRule());
+		getHidingHiddensConsumer().setRule(grammarAccess.prHidingHiddens());
+		getInheritingHiddensCallConsumer().setRule(grammarAccess.prInheritingHiddensCall());
+		getMlCommentConsumer().setRule(grammarAccess.prML_COMMENT());
+		getSlCommentConsumer().setRule(grammarAccess.prSL_COMMENT());
+		getWsConsumer().setRule(grammarAccess.prWS());
+		getAnyOtherConsumer().setRule(grammarAccess.prANY_OTHER());
+
+
 		getModelConsumer().setDatatypeHiddensConsumer(getDatatypeHiddensConsumer());
 		getModelConsumer().setInheritingHiddensConsumer(getInheritingHiddensConsumer());
 		getModelConsumer().setOverridingHiddensConsumer(getOverridingHiddensConsumer());

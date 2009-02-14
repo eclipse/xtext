@@ -21,6 +21,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGCons
 @SuppressWarnings("unused")
 public final class SimpleReconstrTestLanguageRef2Consumer extends NonTerminalConsumer {
 
+	private Ref2Elements rule;
+	
 	private ITerminalConsumer stringConsumer;
 
 	private ICharacterClass keyword$2$Delimiter;
@@ -120,7 +122,12 @@ public final class SimpleReconstrTestLanguageRef2Consumer extends NonTerminalCon
 	}
 
 	public Ref2Elements getRule() {
-		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prRef2();
+	// SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prRef2()
+		return rule;
+	}
+	
+	public void setRule(Ref2Elements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

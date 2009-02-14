@@ -22,6 +22,8 @@ import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerm
 @SuppressWarnings("unused")
 public final class XtextTerminalsTestLanguageActionConsumer extends NonTerminalConsumer {
 
+	private ActionElements rule;
+	
 	private ITerminalConsumer idConsumer;
 	private INonTerminalConsumer typeRefConsumer;
 
@@ -259,7 +261,12 @@ public final class XtextTerminalsTestLanguageActionConsumer extends NonTerminalC
 	}
 
 	public ActionElements getRule() {
-		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAction();
+	// XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAction()
+		return rule;
+	}
+	
+	public void setRule(ActionElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

@@ -21,6 +21,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer
 @SuppressWarnings("unused")
 public final class DomainmodelQualifiedNameConsumer extends NonTerminalConsumer {
 
+	private QualifiedNameElements rule;
+	
 	private ITerminalConsumer idConsumer;
 
 	private ICharacterClass keyword$4$Delimiter;
@@ -125,7 +127,12 @@ public final class DomainmodelQualifiedNameConsumer extends NonTerminalConsumer 
 	}
 
 	public QualifiedNameElements getRule() {
-		return DomainmodelGrammarAccess.INSTANCE.prQualifiedName();
+	// DomainmodelGrammarAccess.INSTANCE.prQualifiedName()
+		return rule;
+	}
+	
+	public void setRule(QualifiedNameElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

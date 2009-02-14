@@ -22,6 +22,8 @@ import org.eclipse.xtext.example.parser.packrat.consumers.EcoreDslEReferenceDecl
 @SuppressWarnings("unused")
 public final class EcoreDslEStructuralFeatureDeclConsumer extends NonTerminalConsumer {
 
+	private EStructuralFeatureDeclElements rule;
+	
 	private INonTerminalConsumer eAttributeDeclConsumer;
 	private INonTerminalConsumer eReferenceDeclConsumer;
 
@@ -62,7 +64,12 @@ public final class EcoreDslEStructuralFeatureDeclConsumer extends NonTerminalCon
 	}
 
 	public EStructuralFeatureDeclElements getRule() {
-		return EcoreDslGrammarAccess.INSTANCE.prEStructuralFeatureDecl();
+	// EcoreDslGrammarAccess.INSTANCE.prEStructuralFeatureDecl()
+		return rule;
+	}
+	
+	public void setRule(EStructuralFeatureDeclElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

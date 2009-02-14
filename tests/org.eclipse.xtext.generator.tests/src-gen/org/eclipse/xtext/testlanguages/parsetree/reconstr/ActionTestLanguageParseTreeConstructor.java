@@ -9,12 +9,15 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
-import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.ActionTestLanguageGrammarAccess;
 
+import com.google.inject.Inject;
 
 public class ActionTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 		
+	@Inject
+	private ActionTestLanguageGrammarAccess grammarAccess;
+	
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
@@ -40,7 +43,7 @@ protected class Model_Assignment_children extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return ActionTestLanguageGrammarAccess.INSTANCE.prModel().eleAssignmentChildren();
+		return grammarAccess.prModel().eleAssignmentChildren();
 	}
 	
 	@Override
@@ -82,7 +85,7 @@ protected class Element_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ActionTestLanguageGrammarAccess.INSTANCE.prElement().eleGroup();
+		return grammarAccess.prElement().eleGroup();
 	}
 		
 	@Override
@@ -111,7 +114,7 @@ protected class Element_0_RuleCall_Item extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return ActionTestLanguageGrammarAccess.INSTANCE.prElement().ele0ParserRuleCallItem();
+		return grammarAccess.prElement().ele0ParserRuleCallItem();
 	}
 	
 	@Override
@@ -130,7 +133,7 @@ protected class Element_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ActionTestLanguageGrammarAccess.INSTANCE.prElement().ele1Group();
+		return grammarAccess.prElement().ele1Group();
 	}
 		
 	@Override
@@ -159,7 +162,7 @@ protected class Element_1_0_Action_Item_items extends ActionToken  {
 	}
 	
 	public Action getGrammarElement() {
-		return ActionTestLanguageGrammarAccess.INSTANCE.prElement().ele10ActionItemitems();
+		return grammarAccess.prElement().ele10ActionItemitems();
 	}
 	
 	@Override
@@ -180,7 +183,7 @@ protected class Element_1_1_Assignment_items extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return ActionTestLanguageGrammarAccess.INSTANCE.prElement().ele11AssignmentItems();
+		return grammarAccess.prElement().ele11AssignmentItems();
 	}
 	
 	@Override
@@ -224,7 +227,7 @@ protected class Item_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ActionTestLanguageGrammarAccess.INSTANCE.prItem().eleGroup();
+		return grammarAccess.prItem().eleGroup();
 	}
 		
 	@Override
@@ -253,7 +256,7 @@ protected class Item_0_Action_Thing_content extends ActionToken  {
 	}
 	
 	public Action getGrammarElement() {
-		return ActionTestLanguageGrammarAccess.INSTANCE.prItem().ele0ActionThingcontent();
+		return grammarAccess.prItem().ele0ActionThingcontent();
 	}
 	
 	@Override
@@ -274,7 +277,7 @@ protected class Item_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return ActionTestLanguageGrammarAccess.INSTANCE.prItem().ele1AssignmentName();
+		return grammarAccess.prItem().ele1AssignmentName();
 	}
 	
 	@Override
@@ -283,7 +286,7 @@ protected class Item_1_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = ActionTestLanguageGrammarAccess.INSTANCE.prItem().ele10LexerRuleCallID();
+			element = grammarAccess.prItem().ele10LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;

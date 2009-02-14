@@ -23,6 +23,8 @@ import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageTypeRe
 @SuppressWarnings("unused")
 public final class XtextGrammarTestLanguageTerminalRuleConsumer extends NonTerminalConsumer {
 
+	private TerminalRuleElements rule;
+	
 	private ITerminalConsumer idConsumer;
 	private INonTerminalConsumer terminalAlternativesConsumer;
 	private INonTerminalConsumer typeRefConsumer;
@@ -204,7 +206,12 @@ public final class XtextGrammarTestLanguageTerminalRuleConsumer extends NonTermi
 	}
 
 	public TerminalRuleElements getRule() {
-		return XtextGrammarTestLanguageGrammarAccess.INSTANCE.prTerminalRule();
+	// XtextGrammarTestLanguageGrammarAccess.INSTANCE.prTerminalRule()
+		return rule;
+	}
+	
+	public void setRule(TerminalRuleElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

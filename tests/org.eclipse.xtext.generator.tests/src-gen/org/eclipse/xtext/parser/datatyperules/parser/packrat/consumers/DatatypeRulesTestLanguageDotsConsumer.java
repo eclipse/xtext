@@ -20,6 +20,8 @@ import org.eclipse.xtext.parser.datatyperules.services.DatatypeRulesTestLanguage
 @SuppressWarnings("unused")
 public final class DatatypeRulesTestLanguageDotsConsumer extends NonTerminalConsumer {
 
+	private DotsElements rule;
+	
 
 	private ICharacterClass keyword$3$Delimiter;
 	
@@ -102,7 +104,12 @@ public final class DatatypeRulesTestLanguageDotsConsumer extends NonTerminalCons
 	}
 
 	public DotsElements getRule() {
-		return DatatypeRulesTestLanguageGrammarAccess.INSTANCE.prDots();
+	// DatatypeRulesTestLanguageGrammarAccess.INSTANCE.prDots()
+		return rule;
+	}
+	
+	public void setRule(DotsElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

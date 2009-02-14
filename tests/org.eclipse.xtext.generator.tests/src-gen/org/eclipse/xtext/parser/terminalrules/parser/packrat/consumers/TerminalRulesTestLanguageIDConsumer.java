@@ -3,13 +3,11 @@ Generated with Xtext
 */
 package org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers;
 
-import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
-import org.eclipse.xtext.parser.terminalrules.services.TerminalRulesTestLanguageGrammarAccess;
 
 
 @SuppressWarnings("unused")
@@ -20,6 +18,7 @@ public final class TerminalRulesTestLanguageIDConsumer extends AbstractRuleAware
 		super(configuration);
 	}
 	
+	@Override
 	protected int doConsume() {
 		return consumeGroup$1() ? ConsumeResult.SUCCESS : ConsumeResult.EMPTY_MATCH;
 	}
@@ -103,10 +102,6 @@ public final class TerminalRulesTestLanguageIDConsumer extends AbstractRuleAware
 
 	protected boolean consumeCharacterRange$23() {
 		return readCharBetween('0', '9');
-	}
-
-	public AbstractRule doGetRule() {
-		return TerminalRulesTestLanguageGrammarAccess.INSTANCE.prID().getRule();
 	}
 	
 }

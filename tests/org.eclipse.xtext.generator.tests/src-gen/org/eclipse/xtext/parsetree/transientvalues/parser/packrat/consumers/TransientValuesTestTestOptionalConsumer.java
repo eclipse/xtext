@@ -21,6 +21,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinINTConsume
 @SuppressWarnings("unused")
 public final class TransientValuesTestTestOptionalConsumer extends NonTerminalConsumer {
 
+	private TestOptionalElements rule;
+	
 	private ITerminalConsumer intConsumer;
 
 	private ICharacterClass keyword$3$Delimiter;
@@ -160,7 +162,12 @@ public final class TransientValuesTestTestOptionalConsumer extends NonTerminalCo
 	}
 
 	public TestOptionalElements getRule() {
-		return TransientValuesTestGrammarAccess.INSTANCE.prTestOptional();
+	// TransientValuesTestGrammarAccess.INSTANCE.prTestOptional()
+		return rule;
+	}
+	
+	public void setRule(TestOptionalElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

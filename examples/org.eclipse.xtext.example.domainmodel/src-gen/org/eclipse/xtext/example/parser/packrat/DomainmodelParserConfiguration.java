@@ -7,6 +7,8 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
+import org.eclipse.xtext.example.services.DomainmodelGrammarAccess;
+
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 
 import org.eclipse.xtext.example.parser.packrat.consumers.DomainmodelFileConsumer;
@@ -55,9 +57,12 @@ public class DomainmodelParserConfiguration extends AbstractParserConfiguration 
     private DomainmodelTypeRefConsumer typeRefConsumer;
     private DomainmodelQualifiedNameConsumer qualifiedNameConsumer;
 
-	public DomainmodelParserConfiguration(IInternalParserConfiguration configuration) {
+	private DomainmodelGrammarAccess grammarAccess;
+
+	public DomainmodelParserConfiguration(IInternalParserConfiguration configuration, DomainmodelGrammarAccess grammarAccess) {
 		super(configuration);
-		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration);
+		this.grammarAccess = grammarAccess;
+		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration, null);
 	}
 
 	public DomainmodelFileConsumer getRootConsumer() {
@@ -121,6 +126,33 @@ public class DomainmodelParserConfiguration extends AbstractParserConfiguration 
 	}
 	
 	public void configureConsumers() {
+		if (grammarAccess == null)
+			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+		getFileConsumer().setRule(grammarAccess.prFile());
+		getImportConsumer().setRule(grammarAccess.prImport());
+		getNamedElementConsumer().setRule(grammarAccess.prNamedElement());
+		getPackageConsumer().setRule(grammarAccess.prPackage());
+		getTypeConsumer().setRule(grammarAccess.prType());
+		getDataTypeConsumer().setRule(grammarAccess.prDataType());
+		getEntityConsumer().setRule(grammarAccess.prEntity());
+		getFeatureConsumer().setRule(grammarAccess.prFeature());
+		getStructuralFeatureConsumer().setRule(grammarAccess.prStructuralFeature());
+		getAttributeConsumer().setRule(grammarAccess.prAttribute());
+		getReferenceConsumer().setRule(grammarAccess.prReference());
+		getOperationConsumer().setRule(grammarAccess.prOperation());
+		getParameterConsumer().setRule(grammarAccess.prParameter());
+		getTypedElementConsumer().setRule(grammarAccess.prTypedElement());
+		getTypeRefConsumer().setRule(grammarAccess.prTypeRef());
+		getQualifiedNameConsumer().setRule(grammarAccess.prQualifiedName());
+		getIdConsumer().setRule(grammarAccess.lrID());
+		getIntConsumer().setRule(grammarAccess.lrINT());
+		getStringConsumer().setRule(grammarAccess.lrSTRING());
+		getMlCommentConsumer().setRule(grammarAccess.lrML_COMMENT());
+		getSlCommentConsumer().setRule(grammarAccess.lrSL_COMMENT());
+		getWsConsumer().setRule(grammarAccess.lrWS());
+		getAnyOtherConsumer().setRule(grammarAccess.lrANY_OTHER());
+
+
 		getFileConsumer().setImportConsumer(getImportConsumer());
 		getFileConsumer().setNamedElementConsumer(getNamedElementConsumer());
 

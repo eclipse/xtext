@@ -21,6 +21,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer
 @SuppressWarnings("unused")
 public final class EpatchTestLanguageJavaExecutableConsumer extends NonTerminalConsumer {
 
+	private JavaExecutableElements rule;
+	
 	private ITerminalConsumer idConsumer;
 
 	private ICharacterClass keyword$4$Delimiter;
@@ -114,7 +116,12 @@ public final class EpatchTestLanguageJavaExecutableConsumer extends NonTerminalC
 	}
 
 	public JavaExecutableElements getRule() {
-		return EpatchTestLanguageGrammarAccess.INSTANCE.prJavaExecutable();
+	// EpatchTestLanguageGrammarAccess.INSTANCE.prJavaExecutable()
+		return rule;
+	}
+	
+	public void setRule(JavaExecutableElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

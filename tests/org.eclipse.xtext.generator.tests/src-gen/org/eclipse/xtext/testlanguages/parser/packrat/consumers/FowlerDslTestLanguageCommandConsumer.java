@@ -21,6 +21,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer
 @SuppressWarnings("unused")
 public final class FowlerDslTestLanguageCommandConsumer extends NonTerminalConsumer {
 
+	private CommandElements rule;
+	
 	private ITerminalConsumer idConsumer;
 
 	private ISequenceMatcher ruleCall$3$Delimiter;
@@ -86,7 +88,12 @@ public final class FowlerDslTestLanguageCommandConsumer extends NonTerminalConsu
 	}
 
 	public CommandElements getRule() {
-		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prCommand();
+	// FowlerDslTestLanguageGrammarAccess.INSTANCE.prCommand()
+		return rule;
+	}
+	
+	public void setRule(CommandElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

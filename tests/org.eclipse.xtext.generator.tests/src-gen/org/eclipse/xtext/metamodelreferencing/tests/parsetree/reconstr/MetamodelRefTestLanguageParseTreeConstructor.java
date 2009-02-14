@@ -9,12 +9,15 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
-import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
 import org.eclipse.xtext.metamodelreferencing.tests.services.MetamodelRefTestLanguageGrammarAccess;
 
+import com.google.inject.Inject;
 
 public class MetamodelRefTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 		
+	@Inject
+	private MetamodelRefTestLanguageGrammarAccess grammarAccess;
+	
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
@@ -40,7 +43,7 @@ protected class Foo_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return MetamodelRefTestLanguageGrammarAccess.INSTANCE.prFoo().eleGroup();
+		return grammarAccess.prFoo().eleGroup();
 	}
 		
 	@Override
@@ -69,7 +72,7 @@ protected class Foo_0_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return MetamodelRefTestLanguageGrammarAccess.INSTANCE.prFoo().ele0AssignmentName();
+		return grammarAccess.prFoo().ele0AssignmentName();
 	}
 	
 	@Override
@@ -78,7 +81,7 @@ protected class Foo_0_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = MetamodelRefTestLanguageGrammarAccess.INSTANCE.prFoo().ele00LexerRuleCallID();
+			element = grammarAccess.prFoo().ele00LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -93,7 +96,7 @@ protected class Foo_1_Assignment_nameRefs extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return MetamodelRefTestLanguageGrammarAccess.INSTANCE.prFoo().ele1AssignmentNameRefs();
+		return grammarAccess.prFoo().ele1AssignmentNameRefs();
 	}
 	
 	@Override
@@ -136,7 +139,7 @@ protected class NameRef_Assignment_rule extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return MetamodelRefTestLanguageGrammarAccess.INSTANCE.prNameRef().eleAssignmentRule();
+		return grammarAccess.prNameRef().eleAssignmentRule();
 	}
 	
 	@Override
@@ -147,7 +150,7 @@ protected class NameRef_Assignment_rule extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("ParserRule")) {
 				type = AssignmentType.CR;
-				element = MetamodelRefTestLanguageGrammarAccess.INSTANCE.prNameRef().ele0CrossReferenceEStringParserRule(); 
+				element = grammarAccess.prNameRef().ele0CrossReferenceEStringParserRule(); 
 				return new Solution(obj);
 			}
 		}
@@ -173,7 +176,7 @@ protected class MyRule_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return MetamodelRefTestLanguageGrammarAccess.INSTANCE.prMyRule().eleAssignmentName();
+		return grammarAccess.prMyRule().eleAssignmentName();
 	}
 	
 	@Override
@@ -182,7 +185,7 @@ protected class MyRule_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = MetamodelRefTestLanguageGrammarAccess.INSTANCE.prMyRule().ele0LexerRuleCallID();
+			element = grammarAccess.prMyRule().ele0LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;

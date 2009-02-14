@@ -24,6 +24,8 @@ import org.eclipse.xtext.example.parser.packrat.consumers.EcoreDslSTRING_OR_QIDC
 @SuppressWarnings("unused")
 public final class EcoreDslEDataTypeDeclConsumer extends NonTerminalConsumer {
 
+	private EDataTypeDeclElements rule;
+	
 	private INonTerminalConsumer eAnnotationDeclConsumer;
 	private INonTerminalConsumer eEnumDeclConsumer;
 	private ITerminalConsumer idConsumer;
@@ -158,17 +160,11 @@ public final class EcoreDslEDataTypeDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int doConsumeAssignment$4(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(eAnnotationDeclConsumer, "eAnnotations", true, false, false, getRule().ele0000ParserRuleCallEAnnotationDecl());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$5(entryPoint);
+	}
+
+	protected int consumeRuleCall$5(int entryPoint) throws Exception {
+		return consumeNonTerminal(eAnnotationDeclConsumer, "eAnnotations", true, false, false, getRule().ele0000ParserRuleCallEAnnotationDecl());
 	}
 
 	protected int consumeAssignment$6(int entryPoint) throws Exception {
@@ -182,17 +178,11 @@ public final class EcoreDslEDataTypeDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int doConsumeAssignment$6(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeKeyword(getRule().ele0010KeywordSerializable(), "serializable", false, true, getKeyword$7$Delimiter()); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeKeyword$7(entryPoint);
+	}
+
+	protected int consumeKeyword$7(int entryPoint) throws Exception {
+		return consumeKeyword(getRule().ele0010KeywordSerializable(), "serializable", false, true, getKeyword$7$Delimiter());
 	}
 
 	protected int consumeKeyword$12(int entryPoint) throws Exception {
@@ -200,17 +190,11 @@ public final class EcoreDslEDataTypeDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$13(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "name", false, false, getRule().ele0100010LexerRuleCallID(), getRuleCall$14$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$14(entryPoint);
+	}
+
+	protected int consumeRuleCall$14(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "name", false, false, getRule().ele0100010LexerRuleCallID(), getRuleCall$14$Delimiter());
 	}
 
 	protected int consumeKeyword$15(int entryPoint) throws Exception {
@@ -218,17 +202,11 @@ public final class EcoreDslEDataTypeDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$16(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(stringOrQidConsumer, "instanceClassName", false, true, false, getRule().ele01010ParserRuleCallSTRING_OR_QID());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$17(entryPoint);
+	}
+
+	protected int consumeRuleCall$17(int entryPoint) throws Exception {
+		return consumeNonTerminal(stringOrQidConsumer, "instanceClassName", false, true, false, getRule().ele01010ParserRuleCallSTRING_OR_QID());
 	}
 
 	protected int consumeKeyword$18(int entryPoint) throws Exception {
@@ -240,7 +218,12 @@ public final class EcoreDslEDataTypeDeclConsumer extends NonTerminalConsumer {
 	}
 
 	public EDataTypeDeclElements getRule() {
-		return EcoreDslGrammarAccess.INSTANCE.prEDataTypeDecl();
+	// EcoreDslGrammarAccess.INSTANCE.prEDataTypeDecl()
+		return rule;
+	}
+	
+	public void setRule(EDataTypeDeclElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

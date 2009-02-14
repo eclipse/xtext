@@ -22,6 +22,8 @@ import org.eclipse.xtext.parsetree.formatter.parser.packrat.consumers.FormatterT
 @SuppressWarnings("unused")
 public final class FormatterTestLanguageRootConsumer extends NonTerminalConsumer {
 
+	private RootElements rule;
+	
 	private INonTerminalConsumer testIndentationConsumer;
 	private INonTerminalConsumer testLinewrapConsumer;
 
@@ -100,7 +102,12 @@ public final class FormatterTestLanguageRootConsumer extends NonTerminalConsumer
 	}
 
 	public RootElements getRule() {
-		return FormatterTestLanguageGrammarAccess.INSTANCE.prRoot();
+	// FormatterTestLanguageGrammarAccess.INSTANCE.prRoot()
+		return rule;
+	}
+	
+	public void setRule(RootElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

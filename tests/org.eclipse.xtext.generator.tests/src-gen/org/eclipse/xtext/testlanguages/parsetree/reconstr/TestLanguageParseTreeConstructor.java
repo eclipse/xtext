@@ -9,12 +9,15 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
-import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.TestLanguageGrammarAccess;
 
+import com.google.inject.Inject;
 
 public class TestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 		
+	@Inject
+	private TestLanguageGrammarAccess grammarAccess;
+	
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
@@ -42,7 +45,7 @@ protected class EntryRule_Assignment_multiFeature extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return TestLanguageGrammarAccess.INSTANCE.prEntryRule().eleAssignmentMultiFeature();
+		return grammarAccess.prEntryRule().eleAssignmentMultiFeature();
 	}
 	
 	@Override
@@ -84,7 +87,7 @@ protected class AbstractRule_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return TestLanguageGrammarAccess.INSTANCE.prAbstractRule().eleAlternatives();
+		return grammarAccess.prAbstractRule().eleAlternatives();
 	}
 
 	@Override	
@@ -106,7 +109,7 @@ protected class AbstractRule_0_RuleCall_ChoiceRule extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return TestLanguageGrammarAccess.INSTANCE.prAbstractRule().ele0ParserRuleCallChoiceRule();
+		return grammarAccess.prAbstractRule().ele0ParserRuleCallChoiceRule();
 	}
 	
 	@Override
@@ -125,7 +128,7 @@ protected class AbstractRule_1_RuleCall_ReducibleRule extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return TestLanguageGrammarAccess.INSTANCE.prAbstractRule().ele1ParserRuleCallReducibleRule();
+		return grammarAccess.prAbstractRule().ele1ParserRuleCallReducibleRule();
 	}
 	
 	@Override
@@ -155,7 +158,7 @@ protected class ChoiceRule_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return TestLanguageGrammarAccess.INSTANCE.prChoiceRule().eleGroup();
+		return grammarAccess.prChoiceRule().eleGroup();
 	}
 		
 	@Override
@@ -184,7 +187,7 @@ protected class ChoiceRule_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return TestLanguageGrammarAccess.INSTANCE.prChoiceRule().ele0Group();
+		return grammarAccess.prChoiceRule().ele0Group();
 	}
 		
 	@Override
@@ -213,7 +216,7 @@ protected class ChoiceRule_0_0_Keyword_choice extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return TestLanguageGrammarAccess.INSTANCE.prChoiceRule().ele00KeywordChoice();
+		return grammarAccess.prChoiceRule().ele00KeywordChoice();
 	}	
 }
 
@@ -225,7 +228,7 @@ protected class ChoiceRule_0_1_Assignment_optionalKeyword extends AssignmentToke
 	}
 	
 	public Assignment getGrammarElement() {
-		return TestLanguageGrammarAccess.INSTANCE.prChoiceRule().ele01AssignmentOptionalKeyword();
+		return grammarAccess.prChoiceRule().ele01AssignmentOptionalKeyword();
 	}
 	
 	@Override
@@ -235,7 +238,7 @@ protected class ChoiceRule_0_1_Assignment_optionalKeyword extends AssignmentToke
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = TestLanguageGrammarAccess.INSTANCE.prChoiceRule().ele010KeywordOptional();
+			element = grammarAccess.prChoiceRule().ele010KeywordOptional();
 			return new Solution(obj);
 		}
 
@@ -252,7 +255,7 @@ protected class ChoiceRule_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return TestLanguageGrammarAccess.INSTANCE.prChoiceRule().ele1AssignmentName();
+		return grammarAccess.prChoiceRule().ele1AssignmentName();
 	}
 	
 	@Override
@@ -261,7 +264,7 @@ protected class ChoiceRule_1_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = TestLanguageGrammarAccess.INSTANCE.prChoiceRule().ele10LexerRuleCallID();
+			element = grammarAccess.prChoiceRule().ele10LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -287,7 +290,7 @@ protected class ReducibleRule_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return TestLanguageGrammarAccess.INSTANCE.prReducibleRule().eleGroup();
+		return grammarAccess.prReducibleRule().eleGroup();
 	}
 		
 	@Override
@@ -316,7 +319,7 @@ protected class ReducibleRule_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return TestLanguageGrammarAccess.INSTANCE.prReducibleRule().ele0Group();
+		return grammarAccess.prReducibleRule().ele0Group();
 	}
 		
 	@Override
@@ -345,7 +348,7 @@ protected class ReducibleRule_0_0_Keyword_reducible extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return TestLanguageGrammarAccess.INSTANCE.prReducibleRule().ele00KeywordReducible();
+		return grammarAccess.prReducibleRule().ele00KeywordReducible();
 	}	
 }
 
@@ -357,7 +360,7 @@ protected class ReducibleRule_0_1_RuleCall_TerminalRule extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return TestLanguageGrammarAccess.INSTANCE.prReducibleRule().ele01ParserRuleCallTerminalRule();
+		return grammarAccess.prReducibleRule().ele01ParserRuleCallTerminalRule();
 	}
 	
 	@Override
@@ -377,7 +380,7 @@ protected class ReducibleRule_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return TestLanguageGrammarAccess.INSTANCE.prReducibleRule().ele1Group();
+		return grammarAccess.prReducibleRule().ele1Group();
 	}
 		
 	@Override
@@ -406,7 +409,7 @@ protected class ReducibleRule_1_0_Action_ReducibleComposite_actionFeature extend
 	}
 	
 	public Action getGrammarElement() {
-		return TestLanguageGrammarAccess.INSTANCE.prReducibleRule().ele10ActionReducibleCompositeactionFeature();
+		return grammarAccess.prReducibleRule().ele10ActionReducibleCompositeactionFeature();
 	}
 	
 	@Override
@@ -427,7 +430,7 @@ protected class ReducibleRule_1_1_Assignment_actionFeature extends AssignmentTok
 	}
 	
 	public Assignment getGrammarElement() {
-		return TestLanguageGrammarAccess.INSTANCE.prReducibleRule().ele11AssignmentActionFeature();
+		return grammarAccess.prReducibleRule().ele11AssignmentActionFeature();
 	}
 	
 	@Override
@@ -471,7 +474,7 @@ protected class TerminalRule_Assignment_stringFeature extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return TestLanguageGrammarAccess.INSTANCE.prTerminalRule().eleAssignmentStringFeature();
+		return grammarAccess.prTerminalRule().eleAssignmentStringFeature();
 	}
 	
 	@Override
@@ -480,7 +483,7 @@ protected class TerminalRule_Assignment_stringFeature extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("stringFeature");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = TestLanguageGrammarAccess.INSTANCE.prTerminalRule().ele0LexerRuleCallSTRING();
+			element = grammarAccess.prTerminalRule().ele0LexerRuleCallSTRING();
 			return new Solution(obj);
 		}
 		return null;

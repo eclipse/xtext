@@ -5,11 +5,16 @@ Generated with Xtext
 package org.eclipse.xtext.parser.terminalrules.services;
 
 import com.google.inject.Singleton;
+import com.google.inject.Inject;
+
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parser.BaseEPackageAccess;
+
+import org.eclipse.xtext.service.GrammarProvider;
+
 
 @Singleton
-public class XtextTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess implements IGrammarAccess {
+public class XtextTerminalsTestLanguageGrammarAccess implements IGrammarAccess {
+	
 	
 	public class GrammarElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Grammar");
@@ -1810,57 +1815,55 @@ public class XtextTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess 
 		public Wildcard eleWildcard() { return cWildcard; }
 	}
 	
-	public final static XtextTerminalsTestLanguageGrammarAccess INSTANCE = new XtextTerminalsTestLanguageGrammarAccess();
+	private GrammarElements pGrammar;
+	private GrammarIDElements pGrammarID;
+	private AbstractRuleElements pAbstractRule;
+	private AbstractMetamodelDeclarationElements pAbstractMetamodelDeclaration;
+	private GeneratedMetamodelElements pGeneratedMetamodel;
+	private ReferencedMetamodelElements pReferencedMetamodel;
+	private LexerRuleElements pLexerRule;
+	private ParserRuleElements pParserRule;
+	private TerminalRuleElements pTerminalRule;
+	private TypeRefElements pTypeRef;
+	private AlternativesElements pAlternatives;
+	private TerminalAlternativesElements pTerminalAlternatives;
+	private GroupElements pGroup;
+	private TerminalGroupElements pTerminalGroup;
+	private AbstractTokenElements pAbstractToken;
+	private TerminalTokenElements pTerminalToken;
+	private AssignmentElements pAssignment;
+	private ActionElements pAction;
+	private AbstractTerminalElements pAbstractTerminal;
+	private TerminalTokenElementElements pTerminalTokenElement;
+	private AbstractNegatedTokenElements pAbstractNegatedToken;
+	private NegatedTokenElements pNegatedToken;
+	private UpToTokenElements pUpToToken;
+	private WildcardElements pWildcard;
+	private CharacterRangeElements pCharacterRange;
+	private CrossReferenceElements pCrossReference;
+	private ParenthesizedElementElements pParenthesizedElement;
+	private ParenthesizedTerminalElementElements pParenthesizedTerminalElement;
+	private KeywordElements pKeyword;
+	private RuleCallElements pRuleCall;
+	private IDElements pID;
+	private INTElements pINT;
+	private STRINGElements pSTRING;
+	private ML_COMMENTElements pML_COMMENT;
+	private SL_COMMENTElements pSL_COMMENT;
+	private WSElements pWS;
+	private ANY_OTHERElements pANY_OTHER;
+	
+	private final GrammarProvider grammarProvider;
 
-	private static final String XTEXTTERMINALSTESTLANGUAGE_GRAMMAR_CP_URI = "classpath:/org/eclipse/xtext/parser/terminalrules/XtextTerminalsTestLanguage.xmi";
-	private static Grammar GRAMMAR = null;
-	private static GrammarElements pGrammar;
-	private static GrammarIDElements pGrammarID;
-	private static AbstractRuleElements pAbstractRule;
-	private static AbstractMetamodelDeclarationElements pAbstractMetamodelDeclaration;
-	private static GeneratedMetamodelElements pGeneratedMetamodel;
-	private static ReferencedMetamodelElements pReferencedMetamodel;
-	private static LexerRuleElements pLexerRule;
-	private static ParserRuleElements pParserRule;
-	private static TerminalRuleElements pTerminalRule;
-	private static TypeRefElements pTypeRef;
-	private static AlternativesElements pAlternatives;
-	private static TerminalAlternativesElements pTerminalAlternatives;
-	private static GroupElements pGroup;
-	private static TerminalGroupElements pTerminalGroup;
-	private static AbstractTokenElements pAbstractToken;
-	private static TerminalTokenElements pTerminalToken;
-	private static AssignmentElements pAssignment;
-	private static ActionElements pAction;
-	private static AbstractTerminalElements pAbstractTerminal;
-	private static TerminalTokenElementElements pTerminalTokenElement;
-	private static AbstractNegatedTokenElements pAbstractNegatedToken;
-	private static NegatedTokenElements pNegatedToken;
-	private static UpToTokenElements pUpToToken;
-	private static WildcardElements pWildcard;
-	private static CharacterRangeElements pCharacterRange;
-	private static CrossReferenceElements pCrossReference;
-	private static ParenthesizedElementElements pParenthesizedElement;
-	private static ParenthesizedTerminalElementElements pParenthesizedTerminalElement;
-	private static KeywordElements pKeyword;
-	private static RuleCallElements pRuleCall;
-	private static IDElements pID;
-	private static INTElements pINT;
-	private static STRINGElements pSTRING;
-	private static ML_COMMENTElements pML_COMMENT;
-	private static SL_COMMENTElements pSL_COMMENT;
-	private static WSElements pWS;
-	private static ANY_OTHERElements pANY_OTHER;
-
-	@SuppressWarnings("unused")
-	public synchronized Grammar getGrammar() {	
-		if (GRAMMAR==null) {
-			// assert the XtextPackage implementation is loaded
-			XtextPackage xtextPackage = XtextPackage.eINSTANCE;
-			GRAMMAR = (Grammar) loadGrammarFile(XtextTerminalsTestLanguageGrammarAccess.class.getClassLoader(),XTEXTTERMINALSTESTLANGUAGE_GRAMMAR_CP_URI);
-		}
-		return GRAMMAR;
+	@Inject
+	public XtextTerminalsTestLanguageGrammarAccess(GrammarProvider grammarProvider) {
+		this.grammarProvider = grammarProvider;
 	}
+	
+	public Grammar getGrammar() {	
+		return grammarProvider.getGrammar(this);
+	}
+	
 
 	
 	// Grammar:   (abstract?="abstract language"|"language") name=GrammarID ("extends" superGrammar=[Grammar|GrammarID])? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? (metamodelDeclarations+=AbstractMetamodelDeclaration)* (rules+=AbstractRule)+;

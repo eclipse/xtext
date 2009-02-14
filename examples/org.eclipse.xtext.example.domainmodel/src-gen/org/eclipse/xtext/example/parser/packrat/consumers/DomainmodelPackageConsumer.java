@@ -22,6 +22,8 @@ import org.eclipse.xtext.example.parser.packrat.consumers.DomainmodelQualifiedNa
 @SuppressWarnings("unused")
 public final class DomainmodelPackageConsumer extends NonTerminalConsumer {
 
+	private PackageElements rule;
+	
 	private INonTerminalConsumer namedElementConsumer;
 	private INonTerminalConsumer qualifiedNameConsumer;
 
@@ -106,17 +108,11 @@ public final class DomainmodelPackageConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$6(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(qualifiedNameConsumer, "name", false, true, false, getRule().ele00010ParserRuleCallQualifiedName());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$7(entryPoint);
+	}
+
+	protected int consumeRuleCall$7(int entryPoint) throws Exception {
+		return consumeNonTerminal(qualifiedNameConsumer, "name", false, true, false, getRule().ele00010ParserRuleCallQualifiedName());
 	}
 
 	protected int consumeKeyword$8(int entryPoint) throws Exception {
@@ -133,17 +129,11 @@ public final class DomainmodelPackageConsumer extends NonTerminalConsumer {
 	}
 
 	protected int doConsumeAssignment$9(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(namedElementConsumer, "namedElements", true, false, false, getRule().ele010ParserRuleCallNamedElement());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$10(entryPoint);
+	}
+
+	protected int consumeRuleCall$10(int entryPoint) throws Exception {
+		return consumeNonTerminal(namedElementConsumer, "namedElements", true, false, false, getRule().ele010ParserRuleCallNamedElement());
 	}
 
 	protected int consumeKeyword$11(int entryPoint) throws Exception {
@@ -151,7 +141,12 @@ public final class DomainmodelPackageConsumer extends NonTerminalConsumer {
 	}
 
 	public PackageElements getRule() {
-		return DomainmodelGrammarAccess.INSTANCE.prPackage();
+	// DomainmodelGrammarAccess.INSTANCE.prPackage()
+		return rule;
+	}
+	
+	public void setRule(PackageElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

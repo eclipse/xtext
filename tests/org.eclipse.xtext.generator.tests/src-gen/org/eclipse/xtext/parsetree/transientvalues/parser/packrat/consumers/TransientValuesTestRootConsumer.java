@@ -23,6 +23,8 @@ import org.eclipse.xtext.parsetree.transientvalues.parser.packrat.consumers.Tran
 @SuppressWarnings("unused")
 public final class TransientValuesTestRootConsumer extends NonTerminalConsumer {
 
+	private RootElements rule;
+	
 	private INonTerminalConsumer testListConsumer;
 	private INonTerminalConsumer testOptionalConsumer;
 	private INonTerminalConsumer testRequiredConsumer;
@@ -111,7 +113,12 @@ public final class TransientValuesTestRootConsumer extends NonTerminalConsumer {
 	}
 
 	public RootElements getRule() {
-		return TransientValuesTestGrammarAccess.INSTANCE.prRoot();
+	// TransientValuesTestGrammarAccess.INSTANCE.prRoot()
+		return rule;
+	}
+	
+	public void setRule(RootElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

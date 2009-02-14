@@ -22,6 +22,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGCons
 @SuppressWarnings("unused")
 public final class EcoreDslImportStatementDeclConsumer extends NonTerminalConsumer {
 
+	private ImportStatementDeclElements rule;
+	
 	private ITerminalConsumer idConsumer;
 	private ITerminalConsumer stringConsumer;
 
@@ -144,17 +146,11 @@ public final class EcoreDslImportStatementDeclConsumer extends NonTerminalConsum
 	}
 
 	protected int consumeAssignment$6(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "alias", false, false, getRule().ele00100LexerRuleCallID(), getRuleCall$7$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$7(entryPoint);
+	}
+
+	protected int consumeRuleCall$7(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "alias", false, false, getRule().ele00100LexerRuleCallID(), getRuleCall$7$Delimiter());
 	}
 
 	protected int consumeKeyword$8(int entryPoint) throws Exception {
@@ -162,17 +158,11 @@ public final class EcoreDslImportStatementDeclConsumer extends NonTerminalConsum
 	}
 
 	protected int consumeAssignment$9(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(stringConsumer, "importURI", false, false, getRule().ele010LexerRuleCallSTRING(), getRuleCall$10$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$10(entryPoint);
+	}
+
+	protected int consumeRuleCall$10(int entryPoint) throws Exception {
+		return consumeTerminal(stringConsumer, "importURI", false, false, getRule().ele010LexerRuleCallSTRING(), getRuleCall$10$Delimiter());
 	}
 
 	protected int consumeKeyword$11(int entryPoint) throws Exception {
@@ -180,7 +170,12 @@ public final class EcoreDslImportStatementDeclConsumer extends NonTerminalConsum
 	}
 
 	public ImportStatementDeclElements getRule() {
-		return EcoreDslGrammarAccess.INSTANCE.prImportStatementDecl();
+	// EcoreDslGrammarAccess.INSTANCE.prImportStatementDecl()
+		return rule;
+	}
+	
+	public void setRule(ImportStatementDeclElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

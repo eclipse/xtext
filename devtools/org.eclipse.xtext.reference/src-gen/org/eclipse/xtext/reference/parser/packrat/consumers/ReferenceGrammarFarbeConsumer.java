@@ -20,6 +20,8 @@ import org.eclipse.xtext.reference.services.ReferenceGrammarGrammarAccess.FarbeE
 @SuppressWarnings("unused")
 public final class ReferenceGrammarFarbeConsumer extends NonTerminalConsumer {
 
+	private FarbeElements rule;
+	
 
 	private ICharacterClass keyword$5$Delimiter;
 	
@@ -43,54 +45,61 @@ public final class ReferenceGrammarFarbeConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$1(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		// TODO use markers in assignments of alternatives to recover
-		announceNextPath();
-		// TODO use markers in assignments of alternatives to recover
-		announceNextPath();
-		// TODO use markers in assignments of alternatives to recover
-		announceNextPath();
-		tempResult = consumeKeyword(getRule().ele0000KeywordROT(), "wert", false, false, getKeyword$5$Delimiter()); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
+		return consumeAlternatives$2(entryPoint);
+	}
+	protected int consumeAlternatives$2(int entryPoint) throws Exception {
+		AlternativesResult result = createAlternativesResult();
+		switch(entryPoint) {
+			case -1: // use fall through semantics of switch case
+				result.reset();
+			case 0:
+				result.nextAlternative();
+				if (result.isAlternativeDone(consumeKeyword$5(nextEntryPoint()))) { 
+					return result.getResult(); 
+				}
+			case 1:
+				result.nextAlternative();
+				if (result.isAlternativeDone(consumeKeyword$6(nextEntryPoint()))) { 
+					return result.getResult(); 
+				}
+			case 2:
+				result.nextAlternative();
+				if (result.isAlternativeDone(consumeKeyword$7(nextEntryPoint()))) { 
+					return result.getResult(); 
+				}
+			case 3:
+				result.nextAlternative();
+				if (result.isAlternativeDone(consumeKeyword$8(nextEntryPoint()))) { 
+					return result.getResult(); 
+				}
 		}
-		result = tempResult >= result ? tempResult : result; 
+		return result.getResult();
+	}
+	
 
-		announceNextPath();
-		tempResult = consumeKeyword(getRule().ele0001KeywordBLAU(), "wert", false, false, getKeyword$6$Delimiter()); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
+	protected int consumeKeyword$5(int entryPoint) throws Exception {
+		return consumeKeyword(getRule().ele0000KeywordROT(), "wert", false, false, getKeyword$5$Delimiter());
+	}
 
+	protected int consumeKeyword$6(int entryPoint) throws Exception {
+		return consumeKeyword(getRule().ele0001KeywordBLAU(), "wert", false, false, getKeyword$6$Delimiter());
+	}
 
-		announceNextPath();
-		tempResult = consumeKeyword(getRule().ele001KeywordGELB(), "wert", false, false, getKeyword$7$Delimiter()); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
+	protected int consumeKeyword$7(int entryPoint) throws Exception {
+		return consumeKeyword(getRule().ele001KeywordGELB(), "wert", false, false, getKeyword$7$Delimiter());
+	}
 
-
-		announceNextPath();
-		tempResult = consumeKeyword(getRule().ele01KeywordGRÜN(), "wert", false, false, getKeyword$8$Delimiter()); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-
-		announceLevelFinished();
-		return result;
+	protected int consumeKeyword$8(int entryPoint) throws Exception {
+		return consumeKeyword(getRule().ele01KeywordGRÜN(), "wert", false, false, getKeyword$8$Delimiter());
 	}
 
 	public FarbeElements getRule() {
-		return ReferenceGrammarGrammarAccess.INSTANCE.prFarbe();
+	// ReferenceGrammarGrammarAccess.INSTANCE.prFarbe()
+		return rule;
+	}
+	
+	public void setRule(FarbeElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

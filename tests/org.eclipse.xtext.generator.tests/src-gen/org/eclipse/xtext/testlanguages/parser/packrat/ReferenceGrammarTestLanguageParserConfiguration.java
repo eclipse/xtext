@@ -7,6 +7,8 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
+import org.eclipse.xtext.testlanguages.services.ReferenceGrammarTestLanguageGrammarAccess;
+
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.ReferenceGrammarTestLanguageSpielplatzConsumer;
@@ -37,9 +39,12 @@ public class ReferenceGrammarTestLanguageParserConfiguration extends AbstractPar
     private ReferenceGrammarTestLanguageFarbeConsumer farbeConsumer;
     private ReferenceGrammarTestLanguageFamilieConsumer familieConsumer;
 
-	public ReferenceGrammarTestLanguageParserConfiguration(IInternalParserConfiguration configuration) {
+	private ReferenceGrammarTestLanguageGrammarAccess grammarAccess;
+
+	public ReferenceGrammarTestLanguageParserConfiguration(IInternalParserConfiguration configuration, ReferenceGrammarTestLanguageGrammarAccess grammarAccess) {
 		super(configuration);
-		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration);
+		this.grammarAccess = grammarAccess;
+		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration, null);
 	}
 
 	public ReferenceGrammarTestLanguageSpielplatzConsumer getRootConsumer() {
@@ -76,6 +81,24 @@ public class ReferenceGrammarTestLanguageParserConfiguration extends AbstractPar
 	}
 	
 	public void configureConsumers() {
+		if (grammarAccess == null)
+			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+		getSpielplatzConsumer().setRule(grammarAccess.prSpielplatz());
+		getPersonConsumer().setRule(grammarAccess.prPerson());
+		getKindConsumer().setRule(grammarAccess.prKind());
+		getErwachsenerConsumer().setRule(grammarAccess.prErwachsener());
+		getSpielzeugConsumer().setRule(grammarAccess.prSpielzeug());
+		getFarbeConsumer().setRule(grammarAccess.prFarbe());
+		getFamilieConsumer().setRule(grammarAccess.prFamilie());
+		getIdConsumer().setRule(grammarAccess.lrID());
+		getIntConsumer().setRule(grammarAccess.lrINT());
+		getStringConsumer().setRule(grammarAccess.lrSTRING());
+		getMlCommentConsumer().setRule(grammarAccess.lrML_COMMENT());
+		getSlCommentConsumer().setRule(grammarAccess.lrSL_COMMENT());
+		getWsConsumer().setRule(grammarAccess.lrWS());
+		getAnyOtherConsumer().setRule(grammarAccess.lrANY_OTHER());
+
+
 		getSpielplatzConsumer().setErwachsenerConsumer(getErwachsenerConsumer());
 		getSpielplatzConsumer().setFamilieConsumer(getFamilieConsumer());
 		getSpielplatzConsumer().setIntConsumer(getIntConsumer());

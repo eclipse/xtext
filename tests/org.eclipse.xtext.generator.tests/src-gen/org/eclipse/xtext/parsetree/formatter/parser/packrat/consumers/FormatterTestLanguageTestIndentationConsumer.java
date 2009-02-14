@@ -22,6 +22,8 @@ import org.eclipse.xtext.parsetree.formatter.parser.packrat.consumers.FormatterT
 @SuppressWarnings("unused")
 public final class FormatterTestLanguageTestIndentationConsumer extends NonTerminalConsumer {
 
+	private TestIndentationElements rule;
+	
 	private INonTerminalConsumer lineConsumer;
 	private INonTerminalConsumer testIndentationConsumer;
 
@@ -149,7 +151,12 @@ public final class FormatterTestLanguageTestIndentationConsumer extends NonTermi
 	}
 
 	public TestIndentationElements getRule() {
-		return FormatterTestLanguageGrammarAccess.INSTANCE.prTestIndentation();
+	// FormatterTestLanguageGrammarAccess.INSTANCE.prTestIndentation()
+		return rule;
+	}
+	
+	public void setRule(TestIndentationElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

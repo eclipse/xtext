@@ -22,6 +22,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer
 @SuppressWarnings("unused")
 public final class ReferenceGrammarTestLanguageSpielzeugConsumer extends NonTerminalConsumer {
 
+	private SpielzeugElements rule;
+	
 	private INonTerminalConsumer farbeConsumer;
 	private ITerminalConsumer idConsumer;
 
@@ -133,7 +135,12 @@ public final class ReferenceGrammarTestLanguageSpielzeugConsumer extends NonTerm
 	}
 
 	public SpielzeugElements getRule() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielzeug();
+	// ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielzeug()
+		return rule;
+	}
+	
+	public void setRule(SpielzeugElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

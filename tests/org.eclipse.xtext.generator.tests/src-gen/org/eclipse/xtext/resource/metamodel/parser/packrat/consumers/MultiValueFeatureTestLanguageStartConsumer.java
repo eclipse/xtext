@@ -21,6 +21,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer
 @SuppressWarnings("unused")
 public final class MultiValueFeatureTestLanguageStartConsumer extends NonTerminalConsumer {
 
+	private StartElements rule;
+	
 	private ITerminalConsumer idConsumer;
 
 	private ISequenceMatcher ruleCall$2$Delimiter;
@@ -55,9 +57,8 @@ public final class MultiValueFeatureTestLanguageStartConsumer extends NonTermina
 					marker.rollback();
 					announceLevelFinished();
 					return ConsumeResult.SUCCESS;
-				} else {
-					error("Could not find token.", getRule().eleAssignmentFeatureA());
 				}
+				error("Could not find token.", getRule().eleAssignmentFeatureA());
 		}
 		announceLevelFinished();
 		marker.commit();
@@ -73,7 +74,12 @@ public final class MultiValueFeatureTestLanguageStartConsumer extends NonTermina
 	}
 
 	public StartElements getRule() {
-		return MultiValueFeatureTestLanguageGrammarAccess.INSTANCE.prStart();
+	// MultiValueFeatureTestLanguageGrammarAccess.INSTANCE.prStart()
+		return rule;
+	}
+	
+	public void setRule(StartElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

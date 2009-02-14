@@ -26,6 +26,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGCons
 @SuppressWarnings("unused")
 public final class ReferenceGrammarTestLanguageSpielplatzConsumer extends NonTerminalConsumer {
 
+	private SpielplatzElements rule;
+	
 	private INonTerminalConsumer erwachsenerConsumer;
 	private INonTerminalConsumer familieConsumer;
 	private ITerminalConsumer intConsumer;
@@ -243,7 +245,12 @@ public final class ReferenceGrammarTestLanguageSpielplatzConsumer extends NonTer
 	}
 
 	public SpielplatzElements getRule() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielplatz();
+	// ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielplatz()
+		return rule;
+	}
+	
+	public void setRule(SpielplatzElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

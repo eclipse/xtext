@@ -22,6 +22,8 @@ import org.eclipse.xtext.testlanguages.parser.packrat.consumers.ReferenceGrammar
 @SuppressWarnings("unused")
 public final class ReferenceGrammarTestLanguagePersonConsumer extends NonTerminalConsumer {
 
+	private PersonElements rule;
+	
 	private INonTerminalConsumer erwachsenerConsumer;
 	private INonTerminalConsumer kindConsumer;
 
@@ -62,7 +64,12 @@ public final class ReferenceGrammarTestLanguagePersonConsumer extends NonTermina
 	}
 
 	public PersonElements getRule() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prPerson();
+	// ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prPerson()
+		return rule;
+	}
+	
+	public void setRule(PersonElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

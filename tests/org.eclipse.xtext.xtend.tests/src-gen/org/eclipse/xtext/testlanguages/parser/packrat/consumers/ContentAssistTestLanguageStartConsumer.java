@@ -21,6 +21,8 @@ import org.eclipse.xtext.testlanguages.parser.packrat.consumers.ContentAssistTes
 @SuppressWarnings("unused")
 public final class ContentAssistTestLanguageStartConsumer extends NonTerminalConsumer {
 
+	private StartElements rule;
+	
 	private INonTerminalConsumer abstractRuleConsumer;
 
 	private ICharacterClass keyword$3$Delimiter;
@@ -102,9 +104,8 @@ public final class ContentAssistTestLanguageStartConsumer extends NonTerminalCon
 					marker.rollback();
 					announceLevelFinished();
 					return ConsumeResult.SUCCESS;
-				} else {
-					error("Could not find token.", getRule().ele01AssignmentRules());
 				}
+				error("Could not find token.", getRule().ele01AssignmentRules());
 		}
 		announceLevelFinished();
 		marker.commit();
@@ -112,17 +113,11 @@ public final class ContentAssistTestLanguageStartConsumer extends NonTerminalCon
 	}
 
 	protected int doConsumeAssignment$4(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(abstractRuleConsumer, "rules", true, false, false, getRule().ele010ParserRuleCallAbstractRule());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$5(entryPoint);
+	}
+
+	protected int consumeRuleCall$5(int entryPoint) throws Exception {
+		return consumeNonTerminal(abstractRuleConsumer, "rules", true, false, false, getRule().ele010ParserRuleCallAbstractRule());
 	}
 
 	protected int consumeKeyword$6(int entryPoint) throws Exception {
@@ -130,7 +125,12 @@ public final class ContentAssistTestLanguageStartConsumer extends NonTerminalCon
 	}
 
 	public StartElements getRule() {
-		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prStart();
+	// ContentAssistTestLanguageGrammarAccess.INSTANCE.prStart()
+		return rule;
+	}
+	
+	public void setRule(StartElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

@@ -20,6 +20,8 @@ import org.eclipse.xtext.parser.keywords.services.KeywordsTestLanguageGrammarAcc
 @SuppressWarnings("unused")
 public final class KeywordsTestLanguageModelConsumer extends NonTerminalConsumer {
 
+	private ModelElements rule;
+	
 
 	private ICharacterClass keyword$9$Delimiter;
 	
@@ -104,7 +106,12 @@ public final class KeywordsTestLanguageModelConsumer extends NonTerminalConsumer
 	}
 
 	public ModelElements getRule() {
-		return KeywordsTestLanguageGrammarAccess.INSTANCE.prModel();
+	// KeywordsTestLanguageGrammarAccess.INSTANCE.prModel()
+		return rule;
+	}
+	
+	public void setRule(ModelElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

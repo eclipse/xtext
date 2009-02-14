@@ -21,6 +21,8 @@ import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageTermin
 @SuppressWarnings("unused")
 public final class XtextGrammarTestLanguageTerminalGroupConsumer extends NonTerminalConsumer {
 
+	private TerminalGroupElements rule;
+	
 	private INonTerminalConsumer terminalTokenConsumer;
 
 	public XtextGrammarTestLanguageTerminalGroupConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
@@ -112,21 +114,20 @@ public final class XtextGrammarTestLanguageTerminalGroupConsumer extends NonTerm
 	}
 
 	protected int consumeAssignment$6(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(terminalTokenConsumer, "abstractTokens", true, false, false, getRule().ele110ParserRuleCallTerminalToken());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$7(entryPoint);
+	}
+
+	protected int consumeRuleCall$7(int entryPoint) throws Exception {
+		return consumeNonTerminal(terminalTokenConsumer, "abstractTokens", true, false, false, getRule().ele110ParserRuleCallTerminalToken());
 	}
 
 	public TerminalGroupElements getRule() {
-		return XtextGrammarTestLanguageGrammarAccess.INSTANCE.prTerminalGroup();
+	// XtextGrammarTestLanguageGrammarAccess.INSTANCE.prTerminalGroup()
+		return rule;
+	}
+	
+	public void setRule(TerminalGroupElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

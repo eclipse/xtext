@@ -20,6 +20,8 @@ import org.eclipse.xtext.parser.terminalrules.services.XtextTerminalsTestLanguag
 @SuppressWarnings("unused")
 public final class XtextTerminalsTestLanguageWildcardConsumer extends NonTerminalConsumer {
 
+	private WildcardElements rule;
+	
 
 	private ICharacterClass keyword$2$Delimiter;
 	
@@ -42,7 +44,12 @@ public final class XtextTerminalsTestLanguageWildcardConsumer extends NonTermina
 	}
 
 	public WildcardElements getRule() {
-		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prWildcard();
+	// XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prWildcard()
+		return rule;
+	}
+	
+	public void setRule(WildcardElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

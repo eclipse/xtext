@@ -22,6 +22,8 @@ import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.ComplexReco
 @SuppressWarnings("unused")
 public final class ComplexReconstrTestLanguageRootConsumer extends NonTerminalConsumer {
 
+	private RootElements rule;
+	
 	private INonTerminalConsumer opConsumer;
 	private INonTerminalConsumer trickyGConsumer;
 
@@ -62,7 +64,12 @@ public final class ComplexReconstrTestLanguageRootConsumer extends NonTerminalCo
 	}
 
 	public RootElements getRule() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prRoot();
+	// ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prRoot()
+		return rule;
+	}
+	
+	public void setRule(RootElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

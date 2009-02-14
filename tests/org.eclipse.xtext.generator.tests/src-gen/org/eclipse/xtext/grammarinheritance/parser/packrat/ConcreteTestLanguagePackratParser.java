@@ -3,14 +3,29 @@ Generated with Xtext
 */
 package org.eclipse.xtext.grammarinheritance.parser.packrat;
 
+import com.google.inject.Inject;
+
 import org.eclipse.xtext.parser.packrat.AbstractPackratParser;
+import org.eclipse.xtext.parser.packrat.IParseResultFactory;
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration.IInternalParserConfiguration;
 
-public class ConcreteTestLanguagePackratParser extends AbstractPackratParser {
+import org.eclipse.xtext.grammarinheritance.services.ConcreteTestLanguageGrammarAccess;
 
+public class ConcreteTestLanguagePackratParser extends AbstractPackratParser {
+	
+	@Inject
+	public ConcreteTestLanguagePackratParser(IParseResultFactory parseResultFactory, ConcreteTestLanguageGrammarAccess grammarAccess) {
+		super(parseResultFactory, grammarAccess);
+	}
+	
 	@Override
 	protected ConcreteTestLanguageParserConfiguration createParserConfiguration(IInternalParserConfiguration configuration) {
-		return new ConcreteTestLanguageParserConfiguration(configuration);
+		return new ConcreteTestLanguageParserConfiguration(configuration, getGrammarAccess());
+	}
+	
+	@Override
+	protected ConcreteTestLanguageGrammarAccess getGrammarAccess() {
+		return (ConcreteTestLanguageGrammarAccess)super.getGrammarAccess();
 	}
 	
 }

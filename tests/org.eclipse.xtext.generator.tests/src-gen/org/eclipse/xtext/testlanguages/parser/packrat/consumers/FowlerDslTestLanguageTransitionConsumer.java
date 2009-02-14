@@ -21,6 +21,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer
 @SuppressWarnings("unused")
 public final class FowlerDslTestLanguageTransitionConsumer extends NonTerminalConsumer {
 
+	private TransitionElements rule;
+	
 	private ITerminalConsumer idConsumer;
 
 	private ISequenceMatcher crossReference$4$Delimiter;
@@ -102,7 +104,12 @@ public final class FowlerDslTestLanguageTransitionConsumer extends NonTerminalCo
 	}
 
 	public TransitionElements getRule() {
-		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prTransition();
+	// FowlerDslTestLanguageGrammarAccess.INSTANCE.prTransition()
+		return rule;
+	}
+	
+	public void setRule(TransitionElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

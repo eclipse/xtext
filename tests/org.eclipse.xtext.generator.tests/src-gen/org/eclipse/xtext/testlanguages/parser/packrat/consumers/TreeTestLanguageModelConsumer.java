@@ -21,6 +21,8 @@ import org.eclipse.xtext.testlanguages.parser.packrat.consumers.TreeTestLanguage
 @SuppressWarnings("unused")
 public final class TreeTestLanguageModelConsumer extends NonTerminalConsumer {
 
+	private ModelElements rule;
+	
 	private INonTerminalConsumer nodeConsumer;
 
 	public TreeTestLanguageModelConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
@@ -50,7 +52,12 @@ public final class TreeTestLanguageModelConsumer extends NonTerminalConsumer {
 	}
 
 	public ModelElements getRule() {
-		return TreeTestLanguageGrammarAccess.INSTANCE.prModel();
+	// TreeTestLanguageGrammarAccess.INSTANCE.prModel()
+		return rule;
+	}
+	
+	public void setRule(ModelElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

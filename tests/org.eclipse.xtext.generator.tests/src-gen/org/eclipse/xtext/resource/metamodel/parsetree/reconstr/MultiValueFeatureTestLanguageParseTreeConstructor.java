@@ -9,12 +9,15 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
-import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
 import org.eclipse.xtext.resource.metamodel.services.MultiValueFeatureTestLanguageGrammarAccess;
 
+import com.google.inject.Inject;
 
 public class MultiValueFeatureTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 		
+	@Inject
+	private MultiValueFeatureTestLanguageGrammarAccess grammarAccess;
+	
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
@@ -38,7 +41,7 @@ protected class Start_Assignment_featureA extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return MultiValueFeatureTestLanguageGrammarAccess.INSTANCE.prStart().eleAssignmentFeatureA();
+		return grammarAccess.prStart().eleAssignmentFeatureA();
 	}
 	
 	@Override
@@ -47,7 +50,7 @@ protected class Start_Assignment_featureA extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("featureA");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = MultiValueFeatureTestLanguageGrammarAccess.INSTANCE.prStart().ele0LexerRuleCallID();
+			element = grammarAccess.prStart().ele0LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;

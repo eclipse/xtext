@@ -3,14 +3,29 @@ Generated with Xtext
 */
 package org.eclipse.xtext.parsetree.transientvalues.parser.packrat;
 
+import com.google.inject.Inject;
+
 import org.eclipse.xtext.parser.packrat.AbstractPackratParser;
+import org.eclipse.xtext.parser.packrat.IParseResultFactory;
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration.IInternalParserConfiguration;
 
-public class TransientValuesTestPackratParser extends AbstractPackratParser {
+import org.eclipse.xtext.parsetree.transientvalues.services.TransientValuesTestGrammarAccess;
 
+public class TransientValuesTestPackratParser extends AbstractPackratParser {
+	
+	@Inject
+	public TransientValuesTestPackratParser(IParseResultFactory parseResultFactory, TransientValuesTestGrammarAccess grammarAccess) {
+		super(parseResultFactory, grammarAccess);
+	}
+	
 	@Override
 	protected TransientValuesTestParserConfiguration createParserConfiguration(IInternalParserConfiguration configuration) {
-		return new TransientValuesTestParserConfiguration(configuration);
+		return new TransientValuesTestParserConfiguration(configuration, getGrammarAccess());
+	}
+	
+	@Override
+	protected TransientValuesTestGrammarAccess getGrammarAccess() {
+		return (TransientValuesTestGrammarAccess)super.getGrammarAccess();
 	}
 	
 }

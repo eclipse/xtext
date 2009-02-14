@@ -5,11 +5,17 @@ Generated with Xtext
 package org.eclipse.xtext.parsetree.transientvalues.services;
 
 import com.google.inject.Singleton;
+import com.google.inject.Inject;
+
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parser.BaseEPackageAccess;
+
+import org.eclipse.xtext.service.GrammarProvider;
+
+import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
 
 @Singleton
-public class TransientValuesTestGrammarAccess extends BaseEPackageAccess implements IGrammarAccess {
+public class TransientValuesTestGrammarAccess implements IGrammarAccess {
+	
 	
 	public class RootElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Root");
@@ -147,30 +153,28 @@ public class TransientValuesTestGrammarAccess extends BaseEPackageAccess impleme
 		public RuleCall ele10LexerRuleCallINT() { return c10LexerRuleCallINT; }
 	}
 	
-	public final static TransientValuesTestGrammarAccess INSTANCE = new TransientValuesTestGrammarAccess();
+	private RootElements pRoot;
+	private TestRequiredElements pTestRequired;
+	private TestOptionalElements pTestOptional;
+	private TestListElements pTestList;
+	
+	private final GrammarProvider grammarProvider;
 
-	private static final String TRANSIENTVALUESTEST_GRAMMAR_CP_URI = "classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xmi";
-	private static Grammar GRAMMAR = null;
-	private static RootElements pRoot;
-	private static TestRequiredElements pTestRequired;
-	private static TestOptionalElements pTestOptional;
-	private static TestListElements pTestList;
-	private static LexerRule lID;
-	private static LexerRule lINT;
-	private static LexerRule lSTRING;
-	private static LexerRule lML_COMMENT;
-	private static LexerRule lSL_COMMENT;
-	private static LexerRule lWS;
-	private static LexerRule lANY_OTHER;
+	private XtextBuiltinGrammarAccess superGrammarAccess;
 
-	@SuppressWarnings("unused")
-	public synchronized Grammar getGrammar() {	
-		if (GRAMMAR==null) {
-			// assert the XtextPackage implementation is loaded
-			XtextPackage xtextPackage = XtextPackage.eINSTANCE;
-			GRAMMAR = (Grammar) loadGrammarFile(TransientValuesTestGrammarAccess.class.getClassLoader(),TRANSIENTVALUESTEST_GRAMMAR_CP_URI);
-		}
-		return GRAMMAR;
+	@Inject
+	public TransientValuesTestGrammarAccess(GrammarProvider grammarProvider, XtextBuiltinGrammarAccess superGrammarAccess) {
+		this.grammarProvider = grammarProvider;
+		this.superGrammarAccess = superGrammarAccess;
+	}
+	
+	public Grammar getGrammar() {	
+		return grammarProvider.getGrammar(this);
+	}
+	
+
+	public XtextBuiltinGrammarAccess getSuperGrammarAccess() {
+		return superGrammarAccess;
 	}
 
 	
@@ -196,36 +200,36 @@ public class TransientValuesTestGrammarAccess extends BaseEPackageAccess impleme
 
 	// lexer ID:   "(\'^\')?(\'a\'..\'z\'|\'A\'..\'Z\'|\'_\') (\'a\'..\'z\'|\'A\'..\'Z\'|\'_\'|\'0\'..\'9\')*";
 	public LexerRule lrID() {
-		return (lID != null) ? lID : (lID = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "ID"));
+		return superGrammarAccess.lrID();
 	} 
 
 	// lexer INT returns EInt:   "(\'0\'..\'9\')+";
 	public LexerRule lrINT() {
-		return (lINT != null) ? lINT : (lINT = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "INT"));
+		return superGrammarAccess.lrINT();
 	} 
 
 	// lexer STRING:   "\n\t\t\t  \'\"\' ( \'\\\\\' (\'b\'|\'t\'|\'n\'|\'f\'|\'r\'|\'\\\"\'|\'\\\'\'|\'\\\\\') | ~(\'\\\\\'|\'\"\') )* \'\"\' | \n              \'\\\'\' ( \'\\\\\' (\'b\'|\'t\'|\'n\'|\'f\'|\'r\'|\'\\\"\'|\'\\\'\'|\'\\\\\') | ~(\'\\\\\'|\'\\\'\') )* \'\\\'\'\n              ";
 	public LexerRule lrSTRING() {
-		return (lSTRING != null) ? lSTRING : (lSTRING = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "STRING"));
+		return superGrammarAccess.lrSTRING();
 	} 
 
 	// lexer ML_COMMENT:   "\'/*\' ( options {greedy=false;} : . )* \'*/\'";
 	public LexerRule lrML_COMMENT() {
-		return (lML_COMMENT != null) ? lML_COMMENT : (lML_COMMENT = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "ML_COMMENT"));
+		return superGrammarAccess.lrML_COMMENT();
 	} 
 
 	// lexer SL_COMMENT:   "\'//\' ~(\'\\n\'|\'\\r\')* (\'\\r\'? \'\\n\')?";
 	public LexerRule lrSL_COMMENT() {
-		return (lSL_COMMENT != null) ? lSL_COMMENT : (lSL_COMMENT = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "SL_COMMENT"));
+		return superGrammarAccess.lrSL_COMMENT();
 	} 
 
 	// lexer WS:   "(\' \'|\'\\t\'|\'\\r\'|\'\\n\')+";
 	public LexerRule lrWS() {
-		return (lWS != null) ? lWS : (lWS = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "WS"));
+		return superGrammarAccess.lrWS();
 	} 
 
 	// lexer ANY_OTHER:   ".";
 	public LexerRule lrANY_OTHER() {
-		return (lANY_OTHER != null) ? lANY_OTHER : (lANY_OTHER = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "ANY_OTHER"));
+		return superGrammarAccess.lrANY_OTHER();
 	} 
 }

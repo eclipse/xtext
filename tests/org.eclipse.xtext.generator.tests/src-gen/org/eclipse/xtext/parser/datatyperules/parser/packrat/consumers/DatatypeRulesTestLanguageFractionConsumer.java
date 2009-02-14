@@ -21,6 +21,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinINTConsume
 @SuppressWarnings("unused")
 public final class DatatypeRulesTestLanguageFractionConsumer extends NonTerminalConsumer {
 
+	private FractionElements rule;
+	
 	private ITerminalConsumer intConsumer;
 
 	private ICharacterClass keyword$4$Delimiter;
@@ -126,7 +128,12 @@ public final class DatatypeRulesTestLanguageFractionConsumer extends NonTerminal
 	}
 
 	public FractionElements getRule() {
-		return DatatypeRulesTestLanguageGrammarAccess.INSTANCE.prFraction();
+	// DatatypeRulesTestLanguageGrammarAccess.INSTANCE.prFraction()
+		return rule;
+	}
+	
+	public void setRule(FractionElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

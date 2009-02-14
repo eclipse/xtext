@@ -21,6 +21,8 @@ import org.eclipse.xtext.testlanguages.parser.packrat.consumers.TestLanguageTerm
 @SuppressWarnings("unused")
 public final class TestLanguageReducibleRuleConsumer extends NonTerminalConsumer {
 
+	private ReducibleRuleElements rule;
+	
 	private INonTerminalConsumer terminalRuleConsumer;
 
 	private ICharacterClass keyword$3$Delimiter;
@@ -137,7 +139,12 @@ public final class TestLanguageReducibleRuleConsumer extends NonTerminalConsumer
 	}
 
 	public ReducibleRuleElements getRule() {
-		return TestLanguageGrammarAccess.INSTANCE.prReducibleRule();
+	// TestLanguageGrammarAccess.INSTANCE.prReducibleRule()
+		return rule;
+	}
+	
+	public void setRule(ReducibleRuleElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

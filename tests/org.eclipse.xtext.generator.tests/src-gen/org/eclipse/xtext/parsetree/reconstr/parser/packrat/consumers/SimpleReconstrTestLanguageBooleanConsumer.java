@@ -21,6 +21,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer
 @SuppressWarnings("unused")
 public final class SimpleReconstrTestLanguageBooleanConsumer extends NonTerminalConsumer {
 
+	private BooleanElements rule;
+	
 	private ITerminalConsumer idConsumer;
 
 	private ICharacterClass keyword$4$Delimiter;
@@ -128,7 +130,12 @@ public final class SimpleReconstrTestLanguageBooleanConsumer extends NonTerminal
 	}
 
 	public BooleanElements getRule() {
-		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prBoolean();
+	// SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prBoolean()
+		return rule;
+	}
+	
+	public void setRule(BooleanElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

@@ -7,6 +7,8 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
+import org.eclipse.xtext.parser.epatch.services.EpatchTestLanguageGrammarAccess;
+
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 
 import org.eclipse.xtext.parser.epatch.parser.packrat.consumers.EpatchTestLanguageEPatchConsumer;
@@ -75,9 +77,12 @@ public class EpatchTestLanguageParserConfiguration extends AbstractParserConfigu
     private EpatchTestLanguageJavaExecutableConsumer javaExecutableConsumer;
     private EpatchTestLanguageExpressionExecutableConsumer expressionExecutableConsumer;
 
-	public EpatchTestLanguageParserConfiguration(IInternalParserConfiguration configuration) {
+	private EpatchTestLanguageGrammarAccess grammarAccess;
+
+	public EpatchTestLanguageParserConfiguration(IInternalParserConfiguration configuration, EpatchTestLanguageGrammarAccess grammarAccess) {
 		super(configuration);
-		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration);
+		this.grammarAccess = grammarAccess;
+		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration, null);
 	}
 
 	public EpatchTestLanguageEPatchConsumer getRootConsumer() {
@@ -169,6 +174,43 @@ public class EpatchTestLanguageParserConfiguration extends AbstractParserConfigu
 	}
 	
 	public void configureConsumers() {
+		if (grammarAccess == null)
+			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+		getEPatchConsumer().setRule(grammarAccess.prEPatch());
+		getImportConsumer().setRule(grammarAccess.prImport());
+		getModelImportConsumer().setRule(grammarAccess.prModelImport());
+		getResourceImportConsumer().setRule(grammarAccess.prResourceImport());
+		getEPackageImportConsumer().setRule(grammarAccess.prEPackageImport());
+		getJavaImportConsumer().setRule(grammarAccess.prJavaImport());
+		getExtensionImportConsumer().setRule(grammarAccess.prExtensionImport());
+		getNamedResourceConsumer().setRule(grammarAccess.prNamedResource());
+		getNamedObjectConsumer().setRule(grammarAccess.prNamedObject());
+		getObjectRefConsumer().setRule(grammarAccess.prObjectRef());
+		getAssignmentConsumer().setRule(grammarAccess.prAssignment());
+		getBiSingleAssignmentConsumer().setRule(grammarAccess.prBiSingleAssignment());
+		getBiListAssignmentConsumer().setRule(grammarAccess.prBiListAssignment());
+		getMonoSingleAssignmentConsumer().setRule(grammarAccess.prMonoSingleAssignment());
+		getMonoListAssignmentConsumer().setRule(grammarAccess.prMonoListAssignment());
+		getAssignmentValueConsumer().setRule(grammarAccess.prAssignmentValue());
+		getListAssignmentValueConsumer().setRule(grammarAccess.prListAssignmentValue());
+		getSingleAssignmentValueConsumer().setRule(grammarAccess.prSingleAssignmentValue());
+		getCreatedObjectConsumer().setRule(grammarAccess.prCreatedObject());
+		getObjectNewConsumer().setRule(grammarAccess.prObjectNew());
+		getObjectCopyConsumer().setRule(grammarAccess.prObjectCopy());
+		getFragmentConsumer().setRule(grammarAccess.lrFRAGMENT());
+		getMigrationConsumer().setRule(grammarAccess.prMigration());
+		getExecutableConsumer().setRule(grammarAccess.prExecutable());
+		getJavaExecutableConsumer().setRule(grammarAccess.prJavaExecutable());
+		getExpressionExecutableConsumer().setRule(grammarAccess.prExpressionExecutable());
+		getIdConsumer().setRule(grammarAccess.lrID());
+		getIntConsumer().setRule(grammarAccess.lrINT());
+		getStringConsumer().setRule(grammarAccess.lrSTRING());
+		getMlCommentConsumer().setRule(grammarAccess.lrML_COMMENT());
+		getSlCommentConsumer().setRule(grammarAccess.lrSL_COMMENT());
+		getWsConsumer().setRule(grammarAccess.lrWS());
+		getAnyOtherConsumer().setRule(grammarAccess.lrANY_OTHER());
+
+
 		getEPatchConsumer().setIdConsumer(getIdConsumer());
 		getEPatchConsumer().setImportConsumer(getImportConsumer());
 		getEPatchConsumer().setNamedResourceConsumer(getNamedResourceConsumer());

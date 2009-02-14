@@ -5,11 +5,17 @@ Generated with Xtext
 package org.eclipse.xtext.example.services;
 
 import com.google.inject.Singleton;
+import com.google.inject.Inject;
+
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parser.BaseEPackageAccess;
+
+import org.eclipse.xtext.service.GrammarProvider;
+
+import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
 
 @Singleton
-public class EcoreDslGrammarAccess extends BaseEPackageAccess implements IGrammarAccess {
+public class EcoreDslGrammarAccess implements IGrammarAccess {
+	
 	
 	public class EcoreDslElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EcoreDsl");
@@ -1943,50 +1949,48 @@ public class EcoreDslGrammarAccess extends BaseEPackageAccess implements IGramma
 		public RuleCall ele1LexerRuleCallINT() { return c1LexerRuleCallINT; }
 	}
 	
-	public final static EcoreDslGrammarAccess INSTANCE = new EcoreDslGrammarAccess();
+	private EcoreDslElements pEcoreDsl;
+	private ImportStatementDeclElements pImportStatementDecl;
+	private EPackageDeclElements pEPackageDecl;
+	private SubEPackageDeclElements pSubEPackageDecl;
+	private EClassifierDeclElements pEClassifierDecl;
+	private EDataTypeDeclElements pEDataTypeDecl;
+	private EAnnotationDeclElements pEAnnotationDecl;
+	private EClassDeclElements pEClassDecl;
+	private EStructuralFeatureDeclElements pEStructuralFeatureDecl;
+	private EAttributeDeclElements pEAttributeDecl;
+	private EReferenceDeclElements pEReferenceDecl;
+	private EEnumDeclElements pEEnumDecl;
+	private EEnumLiteralDeclElements pEEnumLiteralDecl;
+	private ETypeParameterDeclElements pETypeParameterDecl;
+	private EGenericTypeReferenceDeclElements pEGenericTypeReferenceDecl;
+	private EGenericTypeDeclElements pEGenericTypeDecl;
+	private EOperationDeclElements pEOperationDecl;
+	private EParameterDeclElements pEParameterDecl;
+	private MapEntrySuperElements pMapEntrySuper;
+	private MapEntryElements pMapEntry;
+	private MultiplicityExprElements pMultiplicityExpr;
+	private QIDElements pQID;
+	private STRING_OR_QIDElements pSTRING_OR_QID;
+	private SINTElements pSINT;
+	
+	private final GrammarProvider grammarProvider;
 
-	private static final String ECOREDSL_GRAMMAR_CP_URI = "classpath:/org/eclipse/xtext/example/EcoreDsl.xmi";
-	private static Grammar GRAMMAR = null;
-	private static EcoreDslElements pEcoreDsl;
-	private static ImportStatementDeclElements pImportStatementDecl;
-	private static EPackageDeclElements pEPackageDecl;
-	private static SubEPackageDeclElements pSubEPackageDecl;
-	private static EClassifierDeclElements pEClassifierDecl;
-	private static EDataTypeDeclElements pEDataTypeDecl;
-	private static EAnnotationDeclElements pEAnnotationDecl;
-	private static EClassDeclElements pEClassDecl;
-	private static EStructuralFeatureDeclElements pEStructuralFeatureDecl;
-	private static EAttributeDeclElements pEAttributeDecl;
-	private static EReferenceDeclElements pEReferenceDecl;
-	private static EEnumDeclElements pEEnumDecl;
-	private static EEnumLiteralDeclElements pEEnumLiteralDecl;
-	private static ETypeParameterDeclElements pETypeParameterDecl;
-	private static EGenericTypeReferenceDeclElements pEGenericTypeReferenceDecl;
-	private static EGenericTypeDeclElements pEGenericTypeDecl;
-	private static EOperationDeclElements pEOperationDecl;
-	private static EParameterDeclElements pEParameterDecl;
-	private static MapEntrySuperElements pMapEntrySuper;
-	private static MapEntryElements pMapEntry;
-	private static MultiplicityExprElements pMultiplicityExpr;
-	private static QIDElements pQID;
-	private static STRING_OR_QIDElements pSTRING_OR_QID;
-	private static SINTElements pSINT;
-	private static LexerRule lID;
-	private static LexerRule lINT;
-	private static LexerRule lSTRING;
-	private static LexerRule lML_COMMENT;
-	private static LexerRule lSL_COMMENT;
-	private static LexerRule lWS;
-	private static LexerRule lANY_OTHER;
+	private XtextBuiltinGrammarAccess superGrammarAccess;
 
-	@SuppressWarnings("unused")
-	public synchronized Grammar getGrammar() {	
-		if (GRAMMAR==null) {
-			// assert the XtextPackage implementation is loaded
-			XtextPackage xtextPackage = XtextPackage.eINSTANCE;
-			GRAMMAR = (Grammar) loadGrammarFile(EcoreDslGrammarAccess.class.getClassLoader(),ECOREDSL_GRAMMAR_CP_URI);
-		}
-		return GRAMMAR;
+	@Inject
+	public EcoreDslGrammarAccess(GrammarProvider grammarProvider, XtextBuiltinGrammarAccess superGrammarAccess) {
+		this.grammarProvider = grammarProvider;
+		this.superGrammarAccess = superGrammarAccess;
+	}
+	
+	public Grammar getGrammar() {	
+		return grammarProvider.getGrammar(this);
+	}
+	
+
+	public XtextBuiltinGrammarAccess getSuperGrammarAccess() {
+		return superGrammarAccess;
 	}
 
 	
@@ -2112,36 +2116,36 @@ public class EcoreDslGrammarAccess extends BaseEPackageAccess implements IGramma
 
 	// lexer ID:   "(\'^\')?(\'a\'..\'z\'|\'A\'..\'Z\'|\'_\') (\'a\'..\'z\'|\'A\'..\'Z\'|\'_\'|\'0\'..\'9\')*";
 	public LexerRule lrID() {
-		return (lID != null) ? lID : (lID = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "ID"));
+		return superGrammarAccess.lrID();
 	} 
 
 	// lexer INT returns EInt:   "(\'0\'..\'9\')+";
 	public LexerRule lrINT() {
-		return (lINT != null) ? lINT : (lINT = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "INT"));
+		return superGrammarAccess.lrINT();
 	} 
 
 	// lexer STRING:   "\n\t\t\t  \'\"\' ( \'\\\\\' (\'b\'|\'t\'|\'n\'|\'f\'|\'r\'|\'\\\"\'|\'\\\'\'|\'\\\\\') | ~(\'\\\\\'|\'\"\') )* \'\"\' | \n              \'\\\'\' ( \'\\\\\' (\'b\'|\'t\'|\'n\'|\'f\'|\'r\'|\'\\\"\'|\'\\\'\'|\'\\\\\') | ~(\'\\\\\'|\'\\\'\') )* \'\\\'\'\n              ";
 	public LexerRule lrSTRING() {
-		return (lSTRING != null) ? lSTRING : (lSTRING = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "STRING"));
+		return superGrammarAccess.lrSTRING();
 	} 
 
 	// lexer ML_COMMENT:   "\'/*\' ( options {greedy=false;} : . )* \'*/\'";
 	public LexerRule lrML_COMMENT() {
-		return (lML_COMMENT != null) ? lML_COMMENT : (lML_COMMENT = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "ML_COMMENT"));
+		return superGrammarAccess.lrML_COMMENT();
 	} 
 
 	// lexer SL_COMMENT:   "\'//\' ~(\'\\n\'|\'\\r\')* (\'\\r\'? \'\\n\')?";
 	public LexerRule lrSL_COMMENT() {
-		return (lSL_COMMENT != null) ? lSL_COMMENT : (lSL_COMMENT = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "SL_COMMENT"));
+		return superGrammarAccess.lrSL_COMMENT();
 	} 
 
 	// lexer WS:   "(\' \'|\'\\t\'|\'\\r\'|\'\\n\')+";
 	public LexerRule lrWS() {
-		return (lWS != null) ? lWS : (lWS = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "WS"));
+		return superGrammarAccess.lrWS();
 	} 
 
 	// lexer ANY_OTHER:   ".";
 	public LexerRule lrANY_OTHER() {
-		return (lANY_OTHER != null) ? lANY_OTHER : (lANY_OTHER = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "ANY_OTHER"));
+		return superGrammarAccess.lrANY_OTHER();
 	} 
 }

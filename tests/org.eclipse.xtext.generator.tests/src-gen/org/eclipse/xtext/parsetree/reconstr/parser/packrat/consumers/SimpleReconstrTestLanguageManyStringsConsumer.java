@@ -21,6 +21,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGCons
 @SuppressWarnings("unused")
 public final class SimpleReconstrTestLanguageManyStringsConsumer extends NonTerminalConsumer {
 
+	private ManyStringsElements rule;
+	
 	private ITerminalConsumer stringConsumer;
 
 	private ICharacterClass keyword$3$Delimiter;
@@ -111,7 +113,12 @@ public final class SimpleReconstrTestLanguageManyStringsConsumer extends NonTerm
 	}
 
 	public ManyStringsElements getRule() {
-		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prManyStrings();
+	// SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prManyStrings()
+		return rule;
+	}
+	
+	public void setRule(ManyStringsElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

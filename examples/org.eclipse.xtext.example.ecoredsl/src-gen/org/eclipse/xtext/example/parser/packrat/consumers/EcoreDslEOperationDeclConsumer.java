@@ -25,6 +25,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer
 @SuppressWarnings("unused")
 public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 
+	private EOperationDeclElements rule;
+	
 	private INonTerminalConsumer eAnnotationDeclConsumer;
 	private INonTerminalConsumer eGenericTypeReferenceDeclConsumer;
 	private INonTerminalConsumer eParameterDeclConsumer;
@@ -204,17 +206,11 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int doConsumeAssignment$11(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(eAnnotationDeclConsumer, "eAnnotations", true, false, false, getRule().ele00000000000ParserRuleCallEAnnotationDecl());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$12(entryPoint);
+	}
+
+	protected int consumeRuleCall$12(int entryPoint) throws Exception {
+		return consumeNonTerminal(eAnnotationDeclConsumer, "eAnnotations", true, false, false, getRule().ele00000000000ParserRuleCallEAnnotationDecl());
 	}
 
 	protected int consumeAlternatives$13(int entryPoint) throws Exception {
@@ -246,31 +242,19 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$14(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeKeyword(getRule().ele000000000100KeywordBag(), "unique", false, true, getKeyword$15$Delimiter()); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeKeyword$15(entryPoint);
+	}
+
+	protected int consumeKeyword$15(int entryPoint) throws Exception {
+		return consumeKeyword(getRule().ele000000000100KeywordBag(), "unique", false, true, getKeyword$15$Delimiter());
 	}
 
 	protected int consumeAssignment$16(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeKeyword(getRule().ele000000000110KeywordRandom(), "ordered", false, true, getKeyword$17$Delimiter()); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeKeyword$17(entryPoint);
+	}
+
+	protected int consumeKeyword$17(int entryPoint) throws Exception {
+		return consumeKeyword(getRule().ele000000000110KeywordRandom(), "ordered", false, true, getKeyword$17$Delimiter());
 	}
 
 	protected int consumeKeyword$18(int entryPoint) throws Exception {
@@ -297,17 +281,11 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$20(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(eGenericTypeReferenceDeclConsumer, "eGenericType", false, false, false, getRule().ele0000000100ParserRuleCallEGenericTypeReferenceDecl());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$21(entryPoint);
+	}
+
+	protected int consumeRuleCall$21(int entryPoint) throws Exception {
+		return consumeNonTerminal(eGenericTypeReferenceDeclConsumer, "eGenericType", false, false, false, getRule().ele0000000100ParserRuleCallEGenericTypeReferenceDecl());
 	}
 
 	protected int consumeKeyword$22(int entryPoint) throws Exception {
@@ -315,17 +293,11 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$23(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "name", false, false, getRule().ele00000010LexerRuleCallID(), getRuleCall$24$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$24(entryPoint);
+	}
+
+	protected int consumeRuleCall$24(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "name", false, false, getRule().ele00000010LexerRuleCallID(), getRuleCall$24$Delimiter());
 	}
 
 	protected int consumeGroup$25(int entryPoint) throws Exception {
@@ -392,17 +364,11 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$29(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(eTypeParameterDeclConsumer, "eTypeParameters", true, false, false, getRule().ele0000010010ParserRuleCallETypeParameterDecl());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$30(entryPoint);
+	}
+
+	protected int consumeRuleCall$30(int entryPoint) throws Exception {
+		return consumeNonTerminal(eTypeParameterDeclConsumer, "eTypeParameters", true, false, false, getRule().ele0000010010ParserRuleCallETypeParameterDecl());
 	}
 
 	protected int consumeGroup$31(int entryPoint) throws Exception {
@@ -450,17 +416,11 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$33(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(eTypeParameterDeclConsumer, "eTypeParameters", true, false, false, getRule().ele0000010110ParserRuleCallETypeParameterDecl());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$34(entryPoint);
+	}
+
+	protected int consumeRuleCall$34(int entryPoint) throws Exception {
+		return consumeNonTerminal(eTypeParameterDeclConsumer, "eTypeParameters", true, false, false, getRule().ele0000010110ParserRuleCallETypeParameterDecl());
 	}
 
 	protected int consumeKeyword$35(int entryPoint) throws Exception {
@@ -513,17 +473,11 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$38(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(eParameterDeclConsumer, "eParameters", true, false, false, getRule().ele000100ParserRuleCallEParameterDecl());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$39(entryPoint);
+	}
+
+	protected int consumeRuleCall$39(int entryPoint) throws Exception {
+		return consumeNonTerminal(eParameterDeclConsumer, "eParameters", true, false, false, getRule().ele000100ParserRuleCallEParameterDecl());
 	}
 
 	protected int consumeGroup$40(int entryPoint) throws Exception {
@@ -571,17 +525,11 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$42(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(eParameterDeclConsumer, "eParameters", true, false, false, getRule().ele0001110ParserRuleCallEParameterDecl());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$43(entryPoint);
+	}
+
+	protected int consumeRuleCall$43(int entryPoint) throws Exception {
+		return consumeNonTerminal(eParameterDeclConsumer, "eParameters", true, false, false, getRule().ele0001110ParserRuleCallEParameterDecl());
 	}
 
 	protected int consumeKeyword$44(int entryPoint) throws Exception {
@@ -643,17 +591,11 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$48(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(eGenericTypeReferenceDeclConsumer, "eGenericExceptions", true, false, false, getRule().ele01010ParserRuleCallEGenericTypeReferenceDecl());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$49(entryPoint);
+	}
+
+	protected int consumeRuleCall$49(int entryPoint) throws Exception {
+		return consumeNonTerminal(eGenericTypeReferenceDeclConsumer, "eGenericExceptions", true, false, false, getRule().ele01010ParserRuleCallEGenericTypeReferenceDecl());
 	}
 
 	protected int consumeGroup$50(int entryPoint) throws Exception {
@@ -701,17 +643,11 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$52(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(eGenericTypeReferenceDeclConsumer, "eGenericExceptions", true, false, false, getRule().ele01110ParserRuleCallEGenericTypeReferenceDecl());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$53(entryPoint);
+	}
+
+	protected int consumeRuleCall$53(int entryPoint) throws Exception {
+		return consumeNonTerminal(eGenericTypeReferenceDeclConsumer, "eGenericExceptions", true, false, false, getRule().ele01110ParserRuleCallEGenericTypeReferenceDecl());
 	}
 
 	protected int consumeKeyword$54(int entryPoint) throws Exception {
@@ -719,7 +655,12 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 	}
 
 	public EOperationDeclElements getRule() {
-		return EcoreDslGrammarAccess.INSTANCE.prEOperationDecl();
+	// EcoreDslGrammarAccess.INSTANCE.prEOperationDecl()
+		return rule;
+	}
+	
+	public void setRule(EOperationDeclElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

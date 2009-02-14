@@ -24,6 +24,8 @@ import org.eclipse.xtext.parser.datatyperules.parser.packrat.consumers.DatatypeR
 @SuppressWarnings("unused")
 public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalConsumer {
 
+	private ModelElements rule;
+	
 	private INonTerminalConsumer dotsConsumer;
 	private INonTerminalConsumer fractionConsumer;
 	private INonTerminalConsumer nestedModelIdConsumer;
@@ -280,7 +282,12 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 	}
 
 	public ModelElements getRule() {
-		return DatatypeRulesTestLanguageGrammarAccess.INSTANCE.prModel();
+	// DatatypeRulesTestLanguageGrammarAccess.INSTANCE.prModel()
+		return rule;
+	}
+	
+	public void setRule(ModelElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

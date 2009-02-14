@@ -22,6 +22,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer
 @SuppressWarnings("unused")
 public final class DomainmodelEntityConsumer extends NonTerminalConsumer {
 
+	private EntityElements rule;
+	
 	private INonTerminalConsumer featureConsumer;
 	private ITerminalConsumer idConsumer;
 
@@ -124,17 +126,11 @@ public final class DomainmodelEntityConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$7(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "name", false, false, getRule().ele000010LexerRuleCallID(), getRuleCall$8$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$8(entryPoint);
+	}
+
+	protected int consumeRuleCall$8(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "name", false, false, getRule().ele000010LexerRuleCallID(), getRuleCall$8$Delimiter());
 	}
 
 	protected int consumeGroup$9(int entryPoint) throws Exception {
@@ -183,17 +179,11 @@ public final class DomainmodelEntityConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$11(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "superType", false, false, getRule().ele000110CrossReferenceEStringEntity(), getCrossReference$12$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeCrossReference$12(entryPoint);
+	}
+
+	protected int consumeCrossReference$12(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "superType", false, false, getRule().ele000110CrossReferenceEStringEntity(), getCrossReference$12$Delimiter());
 	}
 
 	protected int consumeKeyword$14(int entryPoint) throws Exception {
@@ -210,17 +200,11 @@ public final class DomainmodelEntityConsumer extends NonTerminalConsumer {
 	}
 
 	protected int doConsumeAssignment$15(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(featureConsumer, "features", true, false, false, getRule().ele010ParserRuleCallFeature());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$16(entryPoint);
+	}
+
+	protected int consumeRuleCall$16(int entryPoint) throws Exception {
+		return consumeNonTerminal(featureConsumer, "features", true, false, false, getRule().ele010ParserRuleCallFeature());
 	}
 
 	protected int consumeKeyword$17(int entryPoint) throws Exception {
@@ -228,7 +212,12 @@ public final class DomainmodelEntityConsumer extends NonTerminalConsumer {
 	}
 
 	public EntityElements getRule() {
-		return DomainmodelGrammarAccess.INSTANCE.prEntity();
+	// DomainmodelGrammarAccess.INSTANCE.prEntity()
+		return rule;
+	}
+	
+	public void setRule(EntityElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

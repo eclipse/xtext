@@ -21,6 +21,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer
 @SuppressWarnings("unused")
 public final class PartialParserTestLanguageNamedConsumer extends NonTerminalConsumer {
 
+	private NamedElements rule;
+	
 	private ITerminalConsumer idConsumer;
 
 	private ISequenceMatcher ruleCall$2$Delimiter;
@@ -44,7 +46,12 @@ public final class PartialParserTestLanguageNamedConsumer extends NonTerminalCon
 	}
 
 	public NamedElements getRule() {
-		return PartialParserTestLanguageGrammarAccess.INSTANCE.prNamed();
+	// PartialParserTestLanguageGrammarAccess.INSTANCE.prNamed()
+		return rule;
+	}
+	
+	public void setRule(NamedElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

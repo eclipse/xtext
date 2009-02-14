@@ -7,6 +7,8 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
+import org.eclipse.xtext.metamodelreferencing.tests.services.MetamodelRefTestLanguageGrammarAccess;
+
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 
 import org.eclipse.xtext.metamodelreferencing.tests.parser.packrat.consumers.MetamodelRefTestLanguageFooConsumer;
@@ -29,9 +31,12 @@ public class MetamodelRefTestLanguageParserConfiguration extends AbstractParserC
     private MetamodelRefTestLanguageNameRefConsumer nameRefConsumer;
     private MetamodelRefTestLanguageMyRuleConsumer myRuleConsumer;
 
-	public MetamodelRefTestLanguageParserConfiguration(IInternalParserConfiguration configuration) {
+	private MetamodelRefTestLanguageGrammarAccess grammarAccess;
+
+	public MetamodelRefTestLanguageParserConfiguration(IInternalParserConfiguration configuration, MetamodelRefTestLanguageGrammarAccess grammarAccess) {
 		super(configuration);
-		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration);
+		this.grammarAccess = grammarAccess;
+		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration, null);
 	}
 
 	public MetamodelRefTestLanguageFooConsumer getRootConsumer() {
@@ -56,6 +61,20 @@ public class MetamodelRefTestLanguageParserConfiguration extends AbstractParserC
 	}
 	
 	public void configureConsumers() {
+		if (grammarAccess == null)
+			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+		getFooConsumer().setRule(grammarAccess.prFoo());
+		getNameRefConsumer().setRule(grammarAccess.prNameRef());
+		getMyRuleConsumer().setRule(grammarAccess.prMyRule());
+		getIdConsumer().setRule(grammarAccess.lrID());
+		getIntConsumer().setRule(grammarAccess.lrINT());
+		getStringConsumer().setRule(grammarAccess.lrSTRING());
+		getMlCommentConsumer().setRule(grammarAccess.lrML_COMMENT());
+		getSlCommentConsumer().setRule(grammarAccess.lrSL_COMMENT());
+		getWsConsumer().setRule(grammarAccess.lrWS());
+		getAnyOtherConsumer().setRule(grammarAccess.lrANY_OTHER());
+
+
 		getFooConsumer().setIdConsumer(getIdConsumer());
 		getFooConsumer().setNameRefConsumer(getNameRefConsumer());
 

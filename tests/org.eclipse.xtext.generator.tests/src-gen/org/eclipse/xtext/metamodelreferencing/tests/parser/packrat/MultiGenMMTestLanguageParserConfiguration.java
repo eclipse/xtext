@@ -7,6 +7,8 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
+import org.eclipse.xtext.metamodelreferencing.tests.services.MultiGenMMTestLanguageGrammarAccess;
+
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 
 import org.eclipse.xtext.metamodelreferencing.tests.parser.packrat.consumers.MultiGenMMTestLanguageFooConsumer;
@@ -27,9 +29,12 @@ public class MultiGenMMTestLanguageParserConfiguration extends AbstractParserCon
     private MultiGenMMTestLanguageFooConsumer fooConsumer;
     private MultiGenMMTestLanguageNameRefConsumer nameRefConsumer;
 
-	public MultiGenMMTestLanguageParserConfiguration(IInternalParserConfiguration configuration) {
+	private MultiGenMMTestLanguageGrammarAccess grammarAccess;
+
+	public MultiGenMMTestLanguageParserConfiguration(IInternalParserConfiguration configuration, MultiGenMMTestLanguageGrammarAccess grammarAccess) {
 		super(configuration);
-		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration);
+		this.grammarAccess = grammarAccess;
+		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration, null);
 	}
 
 	public MultiGenMMTestLanguageFooConsumer getRootConsumer() {
@@ -51,6 +56,19 @@ public class MultiGenMMTestLanguageParserConfiguration extends AbstractParserCon
 	}
 	
 	public void configureConsumers() {
+		if (grammarAccess == null)
+			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+		getFooConsumer().setRule(grammarAccess.prFoo());
+		getNameRefConsumer().setRule(grammarAccess.prNameRef());
+		getIdConsumer().setRule(grammarAccess.lrID());
+		getIntConsumer().setRule(grammarAccess.lrINT());
+		getStringConsumer().setRule(grammarAccess.lrSTRING());
+		getMlCommentConsumer().setRule(grammarAccess.lrML_COMMENT());
+		getSlCommentConsumer().setRule(grammarAccess.lrSL_COMMENT());
+		getWsConsumer().setRule(grammarAccess.lrWS());
+		getAnyOtherConsumer().setRule(grammarAccess.lrANY_OTHER());
+
+
 		getFooConsumer().setIdConsumer(getIdConsumer());
 		getFooConsumer().setNameRefConsumer(getNameRefConsumer());
 

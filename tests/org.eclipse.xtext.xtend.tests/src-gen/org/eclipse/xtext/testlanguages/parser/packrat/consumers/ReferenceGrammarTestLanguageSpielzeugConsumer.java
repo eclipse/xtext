@@ -22,6 +22,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer
 @SuppressWarnings("unused")
 public final class ReferenceGrammarTestLanguageSpielzeugConsumer extends NonTerminalConsumer {
 
+	private SpielzeugElements rule;
+	
 	private INonTerminalConsumer farbeConsumer;
 	private ITerminalConsumer idConsumer;
 
@@ -113,31 +115,19 @@ public final class ReferenceGrammarTestLanguageSpielzeugConsumer extends NonTerm
 	}
 
 	protected int consumeAssignment$7(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "name", false, false, getRule().ele0010LexerRuleCallID(), getRuleCall$8$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$8(entryPoint);
+	}
+
+	protected int consumeRuleCall$8(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "name", false, false, getRule().ele0010LexerRuleCallID(), getRuleCall$8$Delimiter());
 	}
 
 	protected int consumeAssignment$9(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(farbeConsumer, "farbe", false, false, false, getRule().ele010ParserRuleCallFarbe());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$10(entryPoint);
+	}
+
+	protected int consumeRuleCall$10(int entryPoint) throws Exception {
+		return consumeNonTerminal(farbeConsumer, "farbe", false, false, false, getRule().ele010ParserRuleCallFarbe());
 	}
 
 	protected int consumeKeyword$11(int entryPoint) throws Exception {
@@ -145,7 +135,12 @@ public final class ReferenceGrammarTestLanguageSpielzeugConsumer extends NonTerm
 	}
 
 	public SpielzeugElements getRule() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielzeug();
+	// ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielzeug()
+		return rule;
+	}
+	
+	public void setRule(SpielzeugElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

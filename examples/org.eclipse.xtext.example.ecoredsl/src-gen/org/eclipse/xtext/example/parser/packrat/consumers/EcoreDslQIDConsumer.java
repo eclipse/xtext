@@ -21,6 +21,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer
 @SuppressWarnings("unused")
 public final class EcoreDslQIDConsumer extends NonTerminalConsumer {
 
+	private QIDElements rule;
+	
 	private ITerminalConsumer idConsumer;
 
 	private ICharacterClass keyword$5$Delimiter;
@@ -151,7 +153,12 @@ public final class EcoreDslQIDConsumer extends NonTerminalConsumer {
 	}
 
 	public QIDElements getRule() {
-		return EcoreDslGrammarAccess.INSTANCE.prQID();
+	// EcoreDslGrammarAccess.INSTANCE.prQID()
+		return rule;
+	}
+	
+	public void setRule(QIDElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

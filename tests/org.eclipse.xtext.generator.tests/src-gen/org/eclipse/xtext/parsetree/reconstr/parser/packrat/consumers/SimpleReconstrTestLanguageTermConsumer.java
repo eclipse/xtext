@@ -28,6 +28,8 @@ import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleRecon
 @SuppressWarnings("unused")
 public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalConsumer {
 
+	private TermElements rule;
+	
 	private INonTerminalConsumer atomConsumer;
 	private INonTerminalConsumer booleanConsumer;
 	private INonTerminalConsumer manyStringsConsumer;
@@ -128,7 +130,12 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 	}
 
 	public TermElements getRule() {
-		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prTerm();
+	// SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prTerm()
+		return rule;
+	}
+	
+	public void setRule(TermElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

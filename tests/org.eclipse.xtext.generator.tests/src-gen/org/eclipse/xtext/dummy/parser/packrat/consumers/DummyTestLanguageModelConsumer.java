@@ -21,6 +21,8 @@ import org.eclipse.xtext.dummy.parser.packrat.consumers.DummyTestLanguageElement
 @SuppressWarnings("unused")
 public final class DummyTestLanguageModelConsumer extends NonTerminalConsumer {
 
+	private ModelElements rule;
+	
 	private INonTerminalConsumer elementConsumer;
 
 	public DummyTestLanguageModelConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
@@ -50,7 +52,12 @@ public final class DummyTestLanguageModelConsumer extends NonTerminalConsumer {
 	}
 
 	public ModelElements getRule() {
-		return DummyTestLanguageGrammarAccess.INSTANCE.prModel();
+	// DummyTestLanguageGrammarAccess.INSTANCE.prModel()
+		return rule;
+	}
+	
+	public void setRule(ModelElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

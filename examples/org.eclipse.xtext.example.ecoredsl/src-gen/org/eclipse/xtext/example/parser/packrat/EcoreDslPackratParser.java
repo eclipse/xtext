@@ -3,14 +3,29 @@ Generated with Xtext
 */
 package org.eclipse.xtext.example.parser.packrat;
 
+import com.google.inject.Inject;
+
 import org.eclipse.xtext.parser.packrat.AbstractPackratParser;
+import org.eclipse.xtext.parser.packrat.IParseResultFactory;
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration.IInternalParserConfiguration;
 
-public class EcoreDslPackratParser extends AbstractPackratParser {
+import org.eclipse.xtext.example.services.EcoreDslGrammarAccess;
 
+public class EcoreDslPackratParser extends AbstractPackratParser {
+	
+	@Inject
+	public EcoreDslPackratParser(IParseResultFactory parseResultFactory, EcoreDslGrammarAccess grammarAccess) {
+		super(parseResultFactory, grammarAccess);
+	}
+	
 	@Override
 	protected EcoreDslParserConfiguration createParserConfiguration(IInternalParserConfiguration configuration) {
-		return new EcoreDslParserConfiguration(configuration);
+		return new EcoreDslParserConfiguration(configuration, getGrammarAccess());
+	}
+	
+	@Override
+	protected EcoreDslGrammarAccess getGrammarAccess() {
+		return (EcoreDslGrammarAccess)super.getGrammarAccess();
 	}
 	
 }

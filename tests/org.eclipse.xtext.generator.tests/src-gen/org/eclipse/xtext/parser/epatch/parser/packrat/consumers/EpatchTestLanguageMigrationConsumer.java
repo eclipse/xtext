@@ -21,6 +21,8 @@ import org.eclipse.xtext.parser.epatch.parser.packrat.consumers.EpatchTestLangua
 @SuppressWarnings("unused")
 public final class EpatchTestLanguageMigrationConsumer extends NonTerminalConsumer {
 
+	private MigrationElements rule;
+	
 	private INonTerminalConsumer executableConsumer;
 
 	private ICharacterClass keyword$4$Delimiter;
@@ -235,7 +237,12 @@ public final class EpatchTestLanguageMigrationConsumer extends NonTerminalConsum
 	}
 
 	public MigrationElements getRule() {
-		return EpatchTestLanguageGrammarAccess.INSTANCE.prMigration();
+	// EpatchTestLanguageGrammarAccess.INSTANCE.prMigration()
+		return rule;
+	}
+	
+	public void setRule(MigrationElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

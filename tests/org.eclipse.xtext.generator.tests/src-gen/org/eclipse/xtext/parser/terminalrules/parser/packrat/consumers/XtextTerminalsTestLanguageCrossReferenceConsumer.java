@@ -22,6 +22,8 @@ import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerm
 @SuppressWarnings("unused")
 public final class XtextTerminalsTestLanguageCrossReferenceConsumer extends NonTerminalConsumer {
 
+	private CrossReferenceElements rule;
+	
 	private ITerminalConsumer idConsumer;
 	private INonTerminalConsumer typeRefConsumer;
 
@@ -165,7 +167,12 @@ public final class XtextTerminalsTestLanguageCrossReferenceConsumer extends NonT
 	}
 
 	public CrossReferenceElements getRule() {
-		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prCrossReference();
+	// XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prCrossReference()
+		return rule;
+	}
+	
+	public void setRule(CrossReferenceElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

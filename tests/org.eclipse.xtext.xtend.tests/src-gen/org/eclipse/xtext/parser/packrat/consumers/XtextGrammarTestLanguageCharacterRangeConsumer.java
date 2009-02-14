@@ -21,6 +21,8 @@ import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageKeywor
 @SuppressWarnings("unused")
 public final class XtextGrammarTestLanguageCharacterRangeConsumer extends NonTerminalConsumer {
 
+	private CharacterRangeElements rule;
+	
 	private INonTerminalConsumer keywordConsumer;
 
 	private ICharacterClass keyword$7$Delimiter;
@@ -129,21 +131,20 @@ public final class XtextGrammarTestLanguageCharacterRangeConsumer extends NonTer
 	}
 
 	protected int consumeAssignment$8(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(keywordConsumer, "right", false, false, false, getRule().ele110ParserRuleCallKeyword());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$9(entryPoint);
+	}
+
+	protected int consumeRuleCall$9(int entryPoint) throws Exception {
+		return consumeNonTerminal(keywordConsumer, "right", false, false, false, getRule().ele110ParserRuleCallKeyword());
 	}
 
 	public CharacterRangeElements getRule() {
-		return XtextGrammarTestLanguageGrammarAccess.INSTANCE.prCharacterRange();
+	// XtextGrammarTestLanguageGrammarAccess.INSTANCE.prCharacterRange()
+		return rule;
+	}
+	
+	public void setRule(CharacterRangeElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

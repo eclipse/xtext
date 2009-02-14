@@ -22,6 +22,8 @@ import org.eclipse.xtext.valueconverter.parser.packrat.consumers.Bug250313Child2
 @SuppressWarnings("unused")
 public final class Bug250313ChildConsumer extends NonTerminalConsumer {
 
+	private ChildElements rule;
+	
 	private INonTerminalConsumer child1Consumer;
 	private INonTerminalConsumer child2Consumer;
 
@@ -62,7 +64,12 @@ public final class Bug250313ChildConsumer extends NonTerminalConsumer {
 	}
 
 	public ChildElements getRule() {
-		return Bug250313GrammarAccess.INSTANCE.prChild();
+	// Bug250313GrammarAccess.INSTANCE.prChild()
+		return rule;
+	}
+	
+	public void setRule(ChildElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

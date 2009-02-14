@@ -7,6 +7,8 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
+import org.eclipse.xtext.crossrefs.services.LangATestLanguageGrammarAccess;
+
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 
 import org.eclipse.xtext.crossrefs.parser.packrat.consumers.LangATestLanguageMainConsumer;
@@ -29,9 +31,12 @@ public class LangATestLanguageParserConfiguration extends AbstractParserConfigur
     private LangATestLanguageImportConsumer importConsumer;
     private LangATestLanguageTypeConsumer typeConsumer;
 
-	public LangATestLanguageParserConfiguration(IInternalParserConfiguration configuration) {
+	private LangATestLanguageGrammarAccess grammarAccess;
+
+	public LangATestLanguageParserConfiguration(IInternalParserConfiguration configuration, LangATestLanguageGrammarAccess grammarAccess) {
 		super(configuration);
-		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration);
+		this.grammarAccess = grammarAccess;
+		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration, null);
 	}
 
 	public LangATestLanguageMainConsumer getRootConsumer() {
@@ -56,6 +61,20 @@ public class LangATestLanguageParserConfiguration extends AbstractParserConfigur
 	}
 	
 	public void configureConsumers() {
+		if (grammarAccess == null)
+			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+		getMainConsumer().setRule(grammarAccess.prMain());
+		getImportConsumer().setRule(grammarAccess.prImport());
+		getTypeConsumer().setRule(grammarAccess.prType());
+		getIdConsumer().setRule(grammarAccess.lrID());
+		getIntConsumer().setRule(grammarAccess.lrINT());
+		getStringConsumer().setRule(grammarAccess.lrSTRING());
+		getMlCommentConsumer().setRule(grammarAccess.lrML_COMMENT());
+		getSlCommentConsumer().setRule(grammarAccess.lrSL_COMMENT());
+		getWsConsumer().setRule(grammarAccess.lrWS());
+		getAnyOtherConsumer().setRule(grammarAccess.lrANY_OTHER());
+
+
 		getMainConsumer().setImportConsumer(getImportConsumer());
 		getMainConsumer().setTypeConsumer(getTypeConsumer());
 

@@ -21,6 +21,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer
 @SuppressWarnings("unused")
 public final class ReferenceGrammarCustomTypeParserRuleConsumer extends NonTerminalConsumer {
 
+	private CustomTypeParserRuleElements rule;
+	
 	private ITerminalConsumer idConsumer;
 
 	private ICharacterClass keyword$2$Delimiter;
@@ -74,21 +76,20 @@ public final class ReferenceGrammarCustomTypeParserRuleConsumer extends NonTermi
 	}
 
 	protected int consumeAssignment$3(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "name", false, false, getRule().ele10LexerRuleCallID(), getRuleCall$4$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$4(entryPoint);
+	}
+
+	protected int consumeRuleCall$4(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "name", false, false, getRule().ele10LexerRuleCallID(), getRuleCall$4$Delimiter());
 	}
 
 	public CustomTypeParserRuleElements getRule() {
-		return ReferenceGrammarGrammarAccess.INSTANCE.prCustomTypeParserRule();
+	// ReferenceGrammarGrammarAccess.INSTANCE.prCustomTypeParserRule()
+		return rule;
+	}
+	
+	public void setRule(CustomTypeParserRuleElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

@@ -22,6 +22,8 @@ import org.eclipse.xtext.reference.parser.packrat.consumers.ReferenceGrammarKind
 @SuppressWarnings("unused")
 public final class ReferenceGrammarPersonConsumer extends NonTerminalConsumer {
 
+	private PersonElements rule;
+	
 	private INonTerminalConsumer erwachsenerConsumer;
 	private INonTerminalConsumer kindConsumer;
 
@@ -62,7 +64,12 @@ public final class ReferenceGrammarPersonConsumer extends NonTerminalConsumer {
 	}
 
 	public PersonElements getRule() {
-		return ReferenceGrammarGrammarAccess.INSTANCE.prPerson();
+	// ReferenceGrammarGrammarAccess.INSTANCE.prPerson()
+		return rule;
+	}
+	
+	public void setRule(PersonElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

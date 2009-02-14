@@ -7,6 +7,8 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
+import org.eclipse.xtext.example.services.EcoreDslGrammarAccess;
+
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 
 import org.eclipse.xtext.example.parser.packrat.consumers.EcoreDslEcoreDslConsumer;
@@ -71,9 +73,12 @@ public class EcoreDslParserConfiguration extends AbstractParserConfiguration {
     private EcoreDslSTRING_OR_QIDConsumer stringOrQidConsumer;
     private EcoreDslSINTConsumer sintConsumer;
 
-	public EcoreDslParserConfiguration(IInternalParserConfiguration configuration) {
+	private EcoreDslGrammarAccess grammarAccess;
+
+	public EcoreDslParserConfiguration(IInternalParserConfiguration configuration, EcoreDslGrammarAccess grammarAccess) {
 		super(configuration);
-		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration);
+		this.grammarAccess = grammarAccess;
+		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration, null);
 	}
 
 	public EcoreDslEcoreDslConsumer getRootConsumer() {
@@ -161,6 +166,41 @@ public class EcoreDslParserConfiguration extends AbstractParserConfiguration {
 	}
 	
 	public void configureConsumers() {
+		if (grammarAccess == null)
+			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+		getEcoreDslConsumer().setRule(grammarAccess.prEcoreDsl());
+		getImportStatementDeclConsumer().setRule(grammarAccess.prImportStatementDecl());
+		getEPackageDeclConsumer().setRule(grammarAccess.prEPackageDecl());
+		getSubEPackageDeclConsumer().setRule(grammarAccess.prSubEPackageDecl());
+		getEClassifierDeclConsumer().setRule(grammarAccess.prEClassifierDecl());
+		getEDataTypeDeclConsumer().setRule(grammarAccess.prEDataTypeDecl());
+		getEAnnotationDeclConsumer().setRule(grammarAccess.prEAnnotationDecl());
+		getEClassDeclConsumer().setRule(grammarAccess.prEClassDecl());
+		getEStructuralFeatureDeclConsumer().setRule(grammarAccess.prEStructuralFeatureDecl());
+		getEAttributeDeclConsumer().setRule(grammarAccess.prEAttributeDecl());
+		getEReferenceDeclConsumer().setRule(grammarAccess.prEReferenceDecl());
+		getEEnumDeclConsumer().setRule(grammarAccess.prEEnumDecl());
+		getEEnumLiteralDeclConsumer().setRule(grammarAccess.prEEnumLiteralDecl());
+		getETypeParameterDeclConsumer().setRule(grammarAccess.prETypeParameterDecl());
+		getEGenericTypeReferenceDeclConsumer().setRule(grammarAccess.prEGenericTypeReferenceDecl());
+		getEGenericTypeDeclConsumer().setRule(grammarAccess.prEGenericTypeDecl());
+		getEOperationDeclConsumer().setRule(grammarAccess.prEOperationDecl());
+		getEParameterDeclConsumer().setRule(grammarAccess.prEParameterDecl());
+		getMapEntrySuperConsumer().setRule(grammarAccess.prMapEntrySuper());
+		getMapEntryConsumer().setRule(grammarAccess.prMapEntry());
+		getMultiplicityExprConsumer().setRule(grammarAccess.prMultiplicityExpr());
+		getQidConsumer().setRule(grammarAccess.prQID());
+		getStringOrQidConsumer().setRule(grammarAccess.prSTRING_OR_QID());
+		getSintConsumer().setRule(grammarAccess.prSINT());
+		getIdConsumer().setRule(grammarAccess.lrID());
+		getIntConsumer().setRule(grammarAccess.lrINT());
+		getStringConsumer().setRule(grammarAccess.lrSTRING());
+		getMlCommentConsumer().setRule(grammarAccess.lrML_COMMENT());
+		getSlCommentConsumer().setRule(grammarAccess.lrSL_COMMENT());
+		getWsConsumer().setRule(grammarAccess.lrWS());
+		getAnyOtherConsumer().setRule(grammarAccess.lrANY_OTHER());
+
+
 		getEcoreDslConsumer().setEPackageDeclConsumer(getEPackageDeclConsumer());
 		getEcoreDslConsumer().setImportStatementDeclConsumer(getImportStatementDeclConsumer());
 

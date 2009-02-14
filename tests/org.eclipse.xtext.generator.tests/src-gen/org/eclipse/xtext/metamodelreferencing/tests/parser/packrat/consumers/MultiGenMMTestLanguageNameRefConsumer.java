@@ -21,6 +21,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGCons
 @SuppressWarnings("unused")
 public final class MultiGenMMTestLanguageNameRefConsumer extends NonTerminalConsumer {
 
+	private NameRefElements rule;
+	
 	private ITerminalConsumer stringConsumer;
 
 	private ISequenceMatcher ruleCall$2$Delimiter;
@@ -44,7 +46,12 @@ public final class MultiGenMMTestLanguageNameRefConsumer extends NonTerminalCons
 	}
 
 	public NameRefElements getRule() {
-		return MultiGenMMTestLanguageGrammarAccess.INSTANCE.prNameRef();
+	// MultiGenMMTestLanguageGrammarAccess.INSTANCE.prNameRef()
+		return rule;
+	}
+	
+	public void setRule(NameRefElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

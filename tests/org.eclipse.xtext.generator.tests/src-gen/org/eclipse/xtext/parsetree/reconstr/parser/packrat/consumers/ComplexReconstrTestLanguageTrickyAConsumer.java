@@ -23,6 +23,8 @@ import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.ComplexReco
 @SuppressWarnings("unused")
 public final class ComplexReconstrTestLanguageTrickyAConsumer extends NonTerminalConsumer {
 
+	private TrickyAElements rule;
+	
 	private ITerminalConsumer idConsumer;
 	private ITerminalConsumer stringConsumer;
 	private INonTerminalConsumer trickyA1Consumer;
@@ -250,7 +252,12 @@ public final class ComplexReconstrTestLanguageTrickyAConsumer extends NonTermina
 	}
 
 	public TrickyAElements getRule() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyA();
+	// ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyA()
+		return rule;
+	}
+	
+	public void setRule(TrickyAElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

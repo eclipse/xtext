@@ -17,105 +17,109 @@ import org.eclipse.xtext.tests.AbstractGeneratorTest;
  */
 public class InterpreterTest extends AbstractGeneratorTest {
 
+	private TerminalRulesTestLanguageGrammarAccess grammarAccess;
+
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		with(TerminalRulesTestLanguageStandaloneSetup.class);
+		grammarAccess = get(TerminalRulesTestLanguageGrammarAccess.class);
 	}
-	
+
 	private void doTest(boolean expected, String model, ParserRule rule) throws Exception {
 		TerminalRuleInterpreter interpreter = new TerminalRuleInterpreter(model);
 		assertEquals(rule.getName(), expected, interpreter.matches(rule));
 	}
-	
+
 	public void testId_01() throws Exception {
-		doTest(true, "abc", TerminalRulesTestLanguageGrammarAccess.INSTANCE.prID().getRule());
+		doTest(true, "abc", grammarAccess.prID().getRule());
 	}
-	
+
 	public void testId_02() throws Exception {
-		doTest(true, "^abc", TerminalRulesTestLanguageGrammarAccess.INSTANCE.prID().getRule());
+		doTest(true, "^abc", grammarAccess.prID().getRule());
 	}
-	
+
 	public void testId_03() throws Exception {
-		doTest(true, "abc1", TerminalRulesTestLanguageGrammarAccess.INSTANCE.prID().getRule());
+		doTest(true, "abc1", grammarAccess.prID().getRule());
 	}
 
 	public void testId_04() throws Exception {
-		doTest(true, "^abc1", TerminalRulesTestLanguageGrammarAccess.INSTANCE.prID().getRule());
+		doTest(true, "^abc1", grammarAccess.prID().getRule());
 	}
-	
+
 	public void testId_05() throws Exception {
-		doTest(false, "^1abc1", TerminalRulesTestLanguageGrammarAccess.INSTANCE.prID().getRule());
+		doTest(false, "^1abc1", grammarAccess.prID().getRule());
 	}
-	
+
 	public void testId_06() throws Exception {
-		doTest(false, "abc ", TerminalRulesTestLanguageGrammarAccess.INSTANCE.prID().getRule());
+		doTest(false, "abc ", grammarAccess.prID().getRule());
 	}
-	
+
 	public void testInt_01() throws Exception {
-		doTest(true, "0", TerminalRulesTestLanguageGrammarAccess.INSTANCE.prINT().getRule());
+		doTest(true, "0", grammarAccess.prINT().getRule());
 	}
-	
+
 	public void testInt_02() throws Exception {
-		doTest(true, "111", TerminalRulesTestLanguageGrammarAccess.INSTANCE.prINT().getRule());
+		doTest(true, "111", grammarAccess.prINT().getRule());
 	}
-	
+
 	public void testString_01() throws Exception {
-		doTest(true, "'abc'", TerminalRulesTestLanguageGrammarAccess.INSTANCE.prSTRING().getRule());
+		doTest(true, "'abc'", grammarAccess.prSTRING().getRule());
 	}
-	
+
 	public void testString_02() throws Exception {
-		doTest(true, "\"abc\"", TerminalRulesTestLanguageGrammarAccess.INSTANCE.prSTRING().getRule());
+		doTest(true, "\"abc\"", grammarAccess.prSTRING().getRule());
 	}
-	
+
 	public void testString_03() throws Exception {
-		doTest(true, "'ab cd'", TerminalRulesTestLanguageGrammarAccess.INSTANCE.prSTRING().getRule());
+		doTest(true, "'ab cd'", grammarAccess.prSTRING().getRule());
 	}
-	
+
 	public void testMlComment_01() throws Exception {
-		doTest(true, "/* abc */", TerminalRulesTestLanguageGrammarAccess.INSTANCE.prML_COMMENT().getRule());
+		doTest(true, "/* abc */", grammarAccess.prML_COMMENT().getRule());
 	}
-	
+
 	public void testMlComment_02() throws Exception {
-		doTest(true, "/* ab\nc */", TerminalRulesTestLanguageGrammarAccess.INSTANCE.prML_COMMENT().getRule());
+		doTest(true, "/* ab\nc */", grammarAccess.prML_COMMENT().getRule());
 	}
-	
+
 	public void testSlComment_01() throws Exception {
-		doTest(true , "// abc", TerminalRulesTestLanguageGrammarAccess.INSTANCE.prSL_COMMENT().getRule());
+		doTest(true , "// abc", grammarAccess.prSL_COMMENT().getRule());
 	}
-	
+
 	public void testSlComment_02() throws Exception {
-		doTest(true , "// abc\n", TerminalRulesTestLanguageGrammarAccess.INSTANCE.prSL_COMMENT().getRule());
+		doTest(true , "// abc\n", grammarAccess.prSL_COMMENT().getRule());
 	}
-	
+
 	public void testSlComment_03() throws Exception {
-		doTest(true , "// abc\r\n", TerminalRulesTestLanguageGrammarAccess.INSTANCE.prSL_COMMENT().getRule());
+		doTest(true , "// abc\r\n", grammarAccess.prSL_COMMENT().getRule());
 	}
-	
+
 	public void testSlComment_04() throws Exception {
-		doTest(true , "// abc", TerminalRulesTestLanguageGrammarAccess.INSTANCE.prSL_COMMENT().getRule());
+		doTest(true , "// abc", grammarAccess.prSL_COMMENT().getRule());
 	}
-	
+
 	public void testWs_01() throws Exception {
-		doTest(true, "  ", TerminalRulesTestLanguageGrammarAccess.INSTANCE.prWS().getRule());
+		doTest(true, "  ", grammarAccess.prWS().getRule());
 	}
-	
+
 	public void testWs_02() throws Exception {
-		doTest(true, "\t", TerminalRulesTestLanguageGrammarAccess.INSTANCE.prWS().getRule());
+		doTest(true, "\t", grammarAccess.prWS().getRule());
 	}
-	
+
 	public void testWs_03() throws Exception {
-		doTest(true, " \n ", TerminalRulesTestLanguageGrammarAccess.INSTANCE.prWS().getRule());
+		doTest(true, " \n ", grammarAccess.prWS().getRule());
 	}
-	
+
 	public void testAnyOther_01() throws Exception {
-		doTest(true, "'", TerminalRulesTestLanguageGrammarAccess.INSTANCE.prANY_OTHER().getRule());
+		doTest(true, "'", grammarAccess.prANY_OTHER().getRule());
 	}
-	
+
 	public void testAnyOther_02() throws Exception {
-		doTest(true, ".", TerminalRulesTestLanguageGrammarAccess.INSTANCE.prANY_OTHER().getRule());
+		doTest(true, ".", grammarAccess.prANY_OTHER().getRule());
 	}
-	
+
 	public void testAnyOther_03() throws Exception {
-		doTest(true, "\b", TerminalRulesTestLanguageGrammarAccess.INSTANCE.prANY_OTHER().getRule());
+		doTest(true, "\b", grammarAccess.prANY_OTHER().getRule());
 	}
 }

@@ -7,6 +7,8 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
+import org.eclipse.xtext.parsetree.formatter.services.FormatterTestLanguageGrammarAccess;
+
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 
 import org.eclipse.xtext.parsetree.formatter.parser.packrat.consumers.FormatterTestLanguageRootConsumer;
@@ -31,9 +33,12 @@ public class FormatterTestLanguageParserConfiguration extends AbstractParserConf
     private FormatterTestLanguageTestLinewrapConsumer testLinewrapConsumer;
     private FormatterTestLanguageTestIndentationConsumer testIndentationConsumer;
 
-	public FormatterTestLanguageParserConfiguration(IInternalParserConfiguration configuration) {
+	private FormatterTestLanguageGrammarAccess grammarAccess;
+
+	public FormatterTestLanguageParserConfiguration(IInternalParserConfiguration configuration, FormatterTestLanguageGrammarAccess grammarAccess) {
 		super(configuration);
-		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration);
+		this.grammarAccess = grammarAccess;
+		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration, null);
 	}
 
 	public FormatterTestLanguageRootConsumer getRootConsumer() {
@@ -61,6 +66,21 @@ public class FormatterTestLanguageParserConfiguration extends AbstractParserConf
 	}
 	
 	public void configureConsumers() {
+		if (grammarAccess == null)
+			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+		getRootConsumer().setRule(grammarAccess.prRoot());
+		getLineConsumer().setRule(grammarAccess.prLine());
+		getTestLinewrapConsumer().setRule(grammarAccess.prTestLinewrap());
+		getTestIndentationConsumer().setRule(grammarAccess.prTestIndentation());
+		getIdConsumer().setRule(grammarAccess.lrID());
+		getIntConsumer().setRule(grammarAccess.lrINT());
+		getStringConsumer().setRule(grammarAccess.lrSTRING());
+		getMlCommentConsumer().setRule(grammarAccess.lrML_COMMENT());
+		getSlCommentConsumer().setRule(grammarAccess.lrSL_COMMENT());
+		getWsConsumer().setRule(grammarAccess.lrWS());
+		getAnyOtherConsumer().setRule(grammarAccess.lrANY_OTHER());
+
+
 		getRootConsumer$().setTestIndentationConsumer(getTestIndentationConsumer());
 		getRootConsumer$().setTestLinewrapConsumer(getTestLinewrapConsumer());
 

@@ -22,6 +22,8 @@ import org.eclipse.xtext.example.parser.packrat.consumers.DomainmodelEntityConsu
 @SuppressWarnings("unused")
 public final class DomainmodelTypeConsumer extends NonTerminalConsumer {
 
+	private TypeElements rule;
+	
 	private INonTerminalConsumer dataTypeConsumer;
 	private INonTerminalConsumer entityConsumer;
 
@@ -62,7 +64,12 @@ public final class DomainmodelTypeConsumer extends NonTerminalConsumer {
 	}
 
 	public TypeElements getRule() {
-		return DomainmodelGrammarAccess.INSTANCE.prType();
+	// DomainmodelGrammarAccess.INSTANCE.prType()
+		return rule;
+	}
+	
+	public void setRule(TypeElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

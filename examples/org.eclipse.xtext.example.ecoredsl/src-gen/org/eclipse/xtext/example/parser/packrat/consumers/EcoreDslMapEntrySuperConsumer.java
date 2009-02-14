@@ -21,6 +21,8 @@ import org.eclipse.xtext.example.parser.packrat.consumers.EcoreDslMapEntryConsum
 @SuppressWarnings("unused")
 public final class EcoreDslMapEntrySuperConsumer extends NonTerminalConsumer {
 
+	private MapEntrySuperElements rule;
+	
 	private INonTerminalConsumer mapEntryConsumer;
 
 	public EcoreDslMapEntrySuperConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
@@ -37,7 +39,12 @@ public final class EcoreDslMapEntrySuperConsumer extends NonTerminalConsumer {
 	}
 
 	public MapEntrySuperElements getRule() {
-		return EcoreDslGrammarAccess.INSTANCE.prMapEntrySuper();
+	// EcoreDslGrammarAccess.INSTANCE.prMapEntrySuper()
+		return rule;
+	}
+	
+	public void setRule(MapEntrySuperElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

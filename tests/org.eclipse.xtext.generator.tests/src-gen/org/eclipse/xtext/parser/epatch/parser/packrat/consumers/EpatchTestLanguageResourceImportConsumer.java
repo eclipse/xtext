@@ -22,6 +22,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGCons
 @SuppressWarnings("unused")
 public final class EpatchTestLanguageResourceImportConsumer extends NonTerminalConsumer {
 
+	private ResourceImportElements rule;
+	
 	private ITerminalConsumer idConsumer;
 	private ITerminalConsumer stringConsumer;
 
@@ -120,7 +122,12 @@ public final class EpatchTestLanguageResourceImportConsumer extends NonTerminalC
 	}
 
 	public ResourceImportElements getRule() {
-		return EpatchTestLanguageGrammarAccess.INSTANCE.prResourceImport();
+	// EpatchTestLanguageGrammarAccess.INSTANCE.prResourceImport()
+		return rule;
+	}
+	
+	public void setRule(ResourceImportElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

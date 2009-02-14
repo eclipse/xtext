@@ -9,12 +9,15 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
-import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
 import org.eclipse.xtext.parser.keywords.services.KeywordsTestLanguageGrammarAccess;
 
+import com.google.inject.Inject;
 
 public class KeywordsTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 		
+	@Inject
+	private KeywordsTestLanguageGrammarAccess grammarAccess;
+	
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
@@ -38,7 +41,7 @@ protected class Model_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return KeywordsTestLanguageGrammarAccess.INSTANCE.prModel().eleAlternatives();
+		return grammarAccess.prModel().eleAlternatives();
 	}
 
 	@Override	
@@ -60,7 +63,7 @@ protected class Model_0_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return KeywordsTestLanguageGrammarAccess.INSTANCE.prModel().ele0Alternatives();
+		return grammarAccess.prModel().ele0Alternatives();
 	}
 
 	@Override	
@@ -82,7 +85,7 @@ protected class Model_0_0_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return KeywordsTestLanguageGrammarAccess.INSTANCE.prModel().ele00Alternatives();
+		return grammarAccess.prModel().ele00Alternatives();
 	}
 
 	@Override	
@@ -104,7 +107,7 @@ protected class Model_0_0_0_Assignment_first extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return KeywordsTestLanguageGrammarAccess.INSTANCE.prModel().ele000AssignmentFirst();
+		return grammarAccess.prModel().ele000AssignmentFirst();
 	}
 	
 	@Override
@@ -114,7 +117,7 @@ protected class Model_0_0_0_Assignment_first extends AssignmentToken  {
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = KeywordsTestLanguageGrammarAccess.INSTANCE.prModel().ele0000KeywordFooBar();
+			element = grammarAccess.prModel().ele0000KeywordFooBar();
 			return new Solution(obj);
 		}
 
@@ -130,7 +133,7 @@ protected class Model_0_0_1_Assignment_second extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return KeywordsTestLanguageGrammarAccess.INSTANCE.prModel().ele001AssignmentSecond();
+		return grammarAccess.prModel().ele001AssignmentSecond();
 	}
 	
 	@Override
@@ -140,7 +143,7 @@ protected class Model_0_0_1_Assignment_second extends AssignmentToken  {
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = KeywordsTestLanguageGrammarAccess.INSTANCE.prModel().ele0010KeywordFoo();
+			element = grammarAccess.prModel().ele0010KeywordFoo();
 			return new Solution(obj);
 		}
 
@@ -157,7 +160,7 @@ protected class Model_0_1_Assignment_third extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return KeywordsTestLanguageGrammarAccess.INSTANCE.prModel().ele01AssignmentThird();
+		return grammarAccess.prModel().ele01AssignmentThird();
 	}
 	
 	@Override
@@ -167,7 +170,7 @@ protected class Model_0_1_Assignment_third extends AssignmentToken  {
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = KeywordsTestLanguageGrammarAccess.INSTANCE.prModel().ele010KeywordBar();
+			element = grammarAccess.prModel().ele010KeywordBar();
 			return new Solution(obj);
 		}
 
@@ -184,7 +187,7 @@ protected class Model_1_Assignment_forth extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return KeywordsTestLanguageGrammarAccess.INSTANCE.prModel().ele1AssignmentForth();
+		return grammarAccess.prModel().ele1AssignmentForth();
 	}
 	
 	@Override
@@ -194,7 +197,7 @@ protected class Model_1_Assignment_forth extends AssignmentToken  {
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = KeywordsTestLanguageGrammarAccess.INSTANCE.prModel().ele10KeywordReverseSolidus();
+			element = grammarAccess.prModel().ele10KeywordReverseSolidus();
 			return new Solution(obj);
 		}
 

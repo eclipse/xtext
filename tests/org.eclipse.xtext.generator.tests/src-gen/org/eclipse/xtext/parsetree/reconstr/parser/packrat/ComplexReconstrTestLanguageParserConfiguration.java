@@ -7,6 +7,8 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
+import org.eclipse.xtext.parsetree.reconstr.services.ComplexReconstrTestLanguageGrammarAccess;
+
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 
 import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.ComplexReconstrTestLanguageRootConsumer;
@@ -53,9 +55,12 @@ public class ComplexReconstrTestLanguageParserConfiguration extends AbstractPars
     private ComplexReconstrTestLanguageTrickyG1Consumer trickyG1Consumer;
     private ComplexReconstrTestLanguageTrickyG2Consumer trickyG2Consumer;
 
-	public ComplexReconstrTestLanguageParserConfiguration(IInternalParserConfiguration configuration) {
+	private ComplexReconstrTestLanguageGrammarAccess grammarAccess;
+
+	public ComplexReconstrTestLanguageParserConfiguration(IInternalParserConfiguration configuration, ComplexReconstrTestLanguageGrammarAccess grammarAccess) {
 		super(configuration);
-		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration);
+		this.grammarAccess = grammarAccess;
+		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration, null);
 	}
 
 	public ComplexReconstrTestLanguageRootConsumer getRootConsumer() {
@@ -116,6 +121,32 @@ public class ComplexReconstrTestLanguageParserConfiguration extends AbstractPars
 	}
 	
 	public void configureConsumers() {
+		if (grammarAccess == null)
+			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+		getRootConsumer().setRule(grammarAccess.prRoot());
+		getOpConsumer().setRule(grammarAccess.prOp());
+		getTermConsumer().setRule(grammarAccess.prTerm());
+		getAtomConsumer().setRule(grammarAccess.prAtom());
+		getParensConsumer().setRule(grammarAccess.prParens());
+		getTrickyAConsumer().setRule(grammarAccess.prTrickyA());
+		getTrickyA1Consumer().setRule(grammarAccess.prTrickyA1());
+		getTrickyBConsumer().setRule(grammarAccess.prTrickyB());
+		getTrickyCConsumer().setRule(grammarAccess.prTrickyC());
+		getTrickyDConsumer().setRule(grammarAccess.prTrickyD());
+		getTrickyEConsumer().setRule(grammarAccess.prTrickyE());
+		getTrickyFConsumer().setRule(grammarAccess.prTrickyF());
+		getTrickyGConsumer().setRule(grammarAccess.prTrickyG());
+		getTrickyG1Consumer().setRule(grammarAccess.prTrickyG1());
+		getTrickyG2Consumer().setRule(grammarAccess.prTrickyG2());
+		getIdConsumer().setRule(grammarAccess.lrID());
+		getIntConsumer().setRule(grammarAccess.lrINT());
+		getStringConsumer().setRule(grammarAccess.lrSTRING());
+		getMlCommentConsumer().setRule(grammarAccess.lrML_COMMENT());
+		getSlCommentConsumer().setRule(grammarAccess.lrSL_COMMENT());
+		getWsConsumer().setRule(grammarAccess.lrWS());
+		getAnyOtherConsumer().setRule(grammarAccess.lrANY_OTHER());
+
+
 		getRootConsumer$().setOpConsumer(getOpConsumer());
 		getRootConsumer$().setTrickyGConsumer(getTrickyGConsumer());
 

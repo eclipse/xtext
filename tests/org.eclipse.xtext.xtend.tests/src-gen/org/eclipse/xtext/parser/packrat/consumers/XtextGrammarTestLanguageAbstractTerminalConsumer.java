@@ -24,6 +24,8 @@ import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageRuleCa
 @SuppressWarnings("unused")
 public final class XtextGrammarTestLanguageAbstractTerminalConsumer extends NonTerminalConsumer {
 
+	private AbstractTerminalElements rule;
+	
 	private INonTerminalConsumer crossReferenceConsumer;
 	private INonTerminalConsumer keywordConsumer;
 	private INonTerminalConsumer parenthesizedElementConsumer;
@@ -84,7 +86,12 @@ public final class XtextGrammarTestLanguageAbstractTerminalConsumer extends NonT
 	}
 
 	public AbstractTerminalElements getRule() {
-		return XtextGrammarTestLanguageGrammarAccess.INSTANCE.prAbstractTerminal();
+	// XtextGrammarTestLanguageGrammarAccess.INSTANCE.prAbstractTerminal()
+		return rule;
+	}
+	
+	public void setRule(AbstractTerminalElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

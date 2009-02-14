@@ -7,6 +7,8 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
+import org.eclipse.xtext.parser.terminalrules.services.TerminalRulesTestLanguageGrammarAccess;
+
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.TerminalRulesTestLanguageModelConsumer;
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.TerminalRulesTestLanguageIDConsumer;
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.TerminalRulesTestLanguageINTConsumer;
@@ -28,8 +30,11 @@ public class TerminalRulesTestLanguageParserConfiguration extends AbstractParser
     private TerminalRulesTestLanguageWSConsumer wsConsumer;
     private TerminalRulesTestLanguageANY_OTHERConsumer anyOtherConsumer;
 
-	public TerminalRulesTestLanguageParserConfiguration(IInternalParserConfiguration configuration) {
+	private TerminalRulesTestLanguageGrammarAccess grammarAccess;
+
+	public TerminalRulesTestLanguageParserConfiguration(IInternalParserConfiguration configuration, TerminalRulesTestLanguageGrammarAccess grammarAccess) {
 		super(configuration);
+		this.grammarAccess = grammarAccess;
 	}
 
 	public TerminalRulesTestLanguageModelConsumer getRootConsumer() {
@@ -53,6 +58,18 @@ public class TerminalRulesTestLanguageParserConfiguration extends AbstractParser
 	}
 	
 	public void configureConsumers() {
+		if (grammarAccess == null)
+			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+		getModelConsumer().setRule(grammarAccess.prModel());
+		getIdConsumer().setRule(grammarAccess.prID());
+		getIntConsumer().setRule(grammarAccess.prINT());
+		getStringConsumer().setRule(grammarAccess.prSTRING());
+		getMlCommentConsumer().setRule(grammarAccess.prML_COMMENT());
+		getSlCommentConsumer().setRule(grammarAccess.prSL_COMMENT());
+		getWsConsumer().setRule(grammarAccess.prWS());
+		getAnyOtherConsumer().setRule(grammarAccess.prANY_OTHER());
+
+
 		getModelConsumer().setAnyOtherConsumer(getAnyOtherConsumer());
 		getModelConsumer().setIdConsumer(getIdConsumer());
 		getModelConsumer().setIntConsumer(getIntConsumer());

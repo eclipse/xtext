@@ -7,6 +7,8 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
+import org.eclipse.xtext.example.services.FowlerDslGrammarAccess;
+
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 
 import org.eclipse.xtext.example.parser.packrat.consumers.FowlerDslStatemachineConsumer;
@@ -33,9 +35,12 @@ public class FowlerDslParserConfiguration extends AbstractParserConfiguration {
     private FowlerDslStateConsumer stateConsumer;
     private FowlerDslTransitionConsumer transitionConsumer;
 
-	public FowlerDslParserConfiguration(IInternalParserConfiguration configuration) {
+	private FowlerDslGrammarAccess grammarAccess;
+
+	public FowlerDslParserConfiguration(IInternalParserConfiguration configuration, FowlerDslGrammarAccess grammarAccess) {
 		super(configuration);
-		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration);
+		this.grammarAccess = grammarAccess;
+		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration, null);
 	}
 
 	public FowlerDslStatemachineConsumer getRootConsumer() {
@@ -66,6 +71,22 @@ public class FowlerDslParserConfiguration extends AbstractParserConfiguration {
 	}
 	
 	public void configureConsumers() {
+		if (grammarAccess == null)
+			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+		getStatemachineConsumer().setRule(grammarAccess.prStatemachine());
+		getEventConsumer().setRule(grammarAccess.prEvent());
+		getCommandConsumer().setRule(grammarAccess.prCommand());
+		getStateConsumer().setRule(grammarAccess.prState());
+		getTransitionConsumer().setRule(grammarAccess.prTransition());
+		getIdConsumer().setRule(grammarAccess.lrID());
+		getIntConsumer().setRule(grammarAccess.lrINT());
+		getStringConsumer().setRule(grammarAccess.lrSTRING());
+		getMlCommentConsumer().setRule(grammarAccess.lrML_COMMENT());
+		getSlCommentConsumer().setRule(grammarAccess.lrSL_COMMENT());
+		getWsConsumer().setRule(grammarAccess.lrWS());
+		getAnyOtherConsumer().setRule(grammarAccess.lrANY_OTHER());
+
+
 		getStatemachineConsumer().setCommandConsumer(getCommandConsumer());
 		getStatemachineConsumer().setEventConsumer(getEventConsumer());
 		getStatemachineConsumer().setStateConsumer(getStateConsumer());

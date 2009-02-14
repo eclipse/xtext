@@ -21,6 +21,8 @@ import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.HiddenTer
 @SuppressWarnings("unused")
 public final class HiddenTerminalsTestLanguageOverridingHiddensCallConsumer extends NonTerminalConsumer {
 
+	private OverridingHiddensCallElements rule;
+	
 	private ITerminalConsumer wsConsumer;
 
 	private ICharacterClass keyword$3$Delimiter;
@@ -112,7 +114,12 @@ public final class HiddenTerminalsTestLanguageOverridingHiddensCallConsumer exte
 	}
 
 	public OverridingHiddensCallElements getRule() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prOverridingHiddensCall();
+	// HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prOverridingHiddensCall()
+		return rule;
+	}
+	
+	public void setRule(OverridingHiddensCallElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

@@ -21,6 +21,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGCons
 @SuppressWarnings("unused")
 public final class DomainmodelImportConsumer extends NonTerminalConsumer {
 
+	private ImportElements rule;
+	
 	private ITerminalConsumer stringConsumer;
 
 	private ICharacterClass keyword$2$Delimiter;
@@ -74,21 +76,20 @@ public final class DomainmodelImportConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$3(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(stringConsumer, "importURI", false, false, getRule().ele10LexerRuleCallSTRING(), getRuleCall$4$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$4(entryPoint);
+	}
+
+	protected int consumeRuleCall$4(int entryPoint) throws Exception {
+		return consumeTerminal(stringConsumer, "importURI", false, false, getRule().ele10LexerRuleCallSTRING(), getRuleCall$4$Delimiter());
 	}
 
 	public ImportElements getRule() {
-		return DomainmodelGrammarAccess.INSTANCE.prImport();
+	// DomainmodelGrammarAccess.INSTANCE.prImport()
+		return rule;
+	}
+	
+	public void setRule(ImportElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

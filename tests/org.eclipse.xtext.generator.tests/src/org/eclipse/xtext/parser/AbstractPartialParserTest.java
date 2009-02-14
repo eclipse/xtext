@@ -29,14 +29,9 @@ public abstract class AbstractPartialParserTest extends AbstractGeneratorTest {
 		comparator = new EmfStructureComparator() {
 			@Override
 			protected boolean isRelevantChild(EObject container, EObject child) {
-				return !(child instanceof LeafNode) || !((LeafNode)child).isHidden(); 
+				return !(child instanceof LeafNode) || !((LeafNode)child).isHidden();
 			}
 		};
-	}
-	
-	protected IAntlrParser getAntlrParser() {
-		SwitchingParser switchingParser = (SwitchingParser) getParser();
-		return switchingParser.getAntlrParser();
 	}
 
 }

@@ -7,24 +7,24 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.keywords;
 
+import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parser.keywords.services.KeywordsTestLanguageGrammarAccess;
-
-import junit.framework.TestCase;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class GrammarAccessTest extends TestCase {
+public class GrammarAccessTest extends AbstractXtextTests {
 
 	private KeywordsTestLanguageGrammarAccess grammarAccess;
-	
+
 	private KeywordsTestLanguageGrammarAccess.ModelElements modelElements;
 	@Override
-	protected void setUp() {
-		this.grammarAccess = KeywordsTestLanguageGrammarAccess.INSTANCE;
+	protected void setUp() throws Exception {
+		with(KeywordsTestLanguageStandaloneSetup.class);
+		this.grammarAccess = get(KeywordsTestLanguageGrammarAccess.class);
 		this.modelElements = grammarAccess.prModel();
 	}
-	
+
 	public void testKeywordValues() {
 		assertEquals("foo\\bar", modelElements.ele0000KeywordFooBar().getValue());
 		assertEquals("foo\\", modelElements.ele0010KeywordFoo().getValue());

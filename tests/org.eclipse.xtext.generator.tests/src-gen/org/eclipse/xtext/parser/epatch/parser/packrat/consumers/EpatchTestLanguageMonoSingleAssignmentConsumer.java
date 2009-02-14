@@ -22,6 +22,8 @@ import org.eclipse.xtext.parser.epatch.parser.packrat.consumers.EpatchTestLangua
 @SuppressWarnings("unused")
 public final class EpatchTestLanguageMonoSingleAssignmentConsumer extends NonTerminalConsumer {
 
+	private MonoSingleAssignmentElements rule;
+	
 	private ITerminalConsumer idConsumer;
 	private INonTerminalConsumer singleAssignmentValueConsumer;
 
@@ -117,7 +119,12 @@ public final class EpatchTestLanguageMonoSingleAssignmentConsumer extends NonTer
 	}
 
 	public MonoSingleAssignmentElements getRule() {
-		return EpatchTestLanguageGrammarAccess.INSTANCE.prMonoSingleAssignment();
+	// EpatchTestLanguageGrammarAccess.INSTANCE.prMonoSingleAssignment()
+		return rule;
+	}
+	
+	public void setRule(MonoSingleAssignmentElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

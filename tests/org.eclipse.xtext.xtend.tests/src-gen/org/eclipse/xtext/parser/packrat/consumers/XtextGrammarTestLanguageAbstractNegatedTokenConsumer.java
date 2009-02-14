@@ -22,6 +22,8 @@ import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageUpToTo
 @SuppressWarnings("unused")
 public final class XtextGrammarTestLanguageAbstractNegatedTokenConsumer extends NonTerminalConsumer {
 
+	private AbstractNegatedTokenElements rule;
+	
 	private INonTerminalConsumer negatedTokenConsumer;
 	private INonTerminalConsumer upToTokenConsumer;
 
@@ -62,7 +64,12 @@ public final class XtextGrammarTestLanguageAbstractNegatedTokenConsumer extends 
 	}
 
 	public AbstractNegatedTokenElements getRule() {
-		return XtextGrammarTestLanguageGrammarAccess.INSTANCE.prAbstractNegatedToken();
+	// XtextGrammarTestLanguageGrammarAccess.INSTANCE.prAbstractNegatedToken()
+		return rule;
+	}
+	
+	public void setRule(AbstractNegatedTokenElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

@@ -5,11 +5,17 @@ Generated with Xtext
 package org.eclipse.xtext.testlanguages.services;
 
 import com.google.inject.Singleton;
+import com.google.inject.Inject;
+
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parser.BaseEPackageAccess;
+
+import org.eclipse.xtext.service.GrammarProvider;
+
+import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
 
 @Singleton
-public class LexerTestLanguageGrammarAccess extends BaseEPackageAccess implements IGrammarAccess {
+public class LexerTestLanguageGrammarAccess implements IGrammarAccess {
+	
 	
 	public class ModelElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
@@ -53,28 +59,27 @@ public class LexerTestLanguageGrammarAccess extends BaseEPackageAccess implement
 		public RuleCall ele10LexerRuleCallSTRING() { return c10LexerRuleCallSTRING; }
 	}
 	
-	public final static LexerTestLanguageGrammarAccess INSTANCE = new LexerTestLanguageGrammarAccess();
+	private ModelElements pModel;
+	private ElementElements pElement;
+	private LexerRule lSTRING;
+	
+	private final GrammarProvider grammarProvider;
 
-	private static final String LEXERTESTLANGUAGE_GRAMMAR_CP_URI = "classpath:/org/eclipse/xtext/testlanguages/LexerTestLanguage.xmi";
-	private static Grammar GRAMMAR = null;
-	private static ModelElements pModel;
-	private static ElementElements pElement;
-	private static LexerRule lSTRING;
-	private static LexerRule lID;
-	private static LexerRule lINT;
-	private static LexerRule lML_COMMENT;
-	private static LexerRule lSL_COMMENT;
-	private static LexerRule lWS;
-	private static LexerRule lANY_OTHER;
+	private XtextBuiltinGrammarAccess superGrammarAccess;
 
-	@SuppressWarnings("unused")
-	public synchronized Grammar getGrammar() {	
-		if (GRAMMAR==null) {
-			// assert the XtextPackage implementation is loaded
-			XtextPackage xtextPackage = XtextPackage.eINSTANCE;
-			GRAMMAR = (Grammar) loadGrammarFile(LexerTestLanguageGrammarAccess.class.getClassLoader(),LEXERTESTLANGUAGE_GRAMMAR_CP_URI);
-		}
-		return GRAMMAR;
+	@Inject
+	public LexerTestLanguageGrammarAccess(GrammarProvider grammarProvider, XtextBuiltinGrammarAccess superGrammarAccess) {
+		this.grammarProvider = grammarProvider;
+		this.superGrammarAccess = superGrammarAccess;
+	}
+	
+	public Grammar getGrammar() {	
+		return grammarProvider.getGrammar(this);
+	}
+	
+
+	public XtextBuiltinGrammarAccess getSuperGrammarAccess() {
+		return superGrammarAccess;
 	}
 
 	
@@ -95,31 +100,31 @@ public class LexerTestLanguageGrammarAccess extends BaseEPackageAccess implement
 
 	// lexer ID:   "(\'^\')?(\'a\'..\'z\'|\'A\'..\'Z\'|\'_\') (\'a\'..\'z\'|\'A\'..\'Z\'|\'_\'|\'0\'..\'9\')*";
 	public LexerRule lrID() {
-		return (lID != null) ? lID : (lID = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "ID"));
+		return superGrammarAccess.lrID();
 	} 
 
 	// lexer INT returns EInt:   "(\'0\'..\'9\')+";
 	public LexerRule lrINT() {
-		return (lINT != null) ? lINT : (lINT = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "INT"));
+		return superGrammarAccess.lrINT();
 	} 
 
 	// lexer ML_COMMENT:   "\'/*\' ( options {greedy=false;} : . )* \'*/\'";
 	public LexerRule lrML_COMMENT() {
-		return (lML_COMMENT != null) ? lML_COMMENT : (lML_COMMENT = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "ML_COMMENT"));
+		return superGrammarAccess.lrML_COMMENT();
 	} 
 
 	// lexer SL_COMMENT:   "\'//\' ~(\'\\n\'|\'\\r\')* (\'\\r\'? \'\\n\')?";
 	public LexerRule lrSL_COMMENT() {
-		return (lSL_COMMENT != null) ? lSL_COMMENT : (lSL_COMMENT = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "SL_COMMENT"));
+		return superGrammarAccess.lrSL_COMMENT();
 	} 
 
 	// lexer WS:   "(\' \'|\'\\t\'|\'\\r\'|\'\\n\')+";
 	public LexerRule lrWS() {
-		return (lWS != null) ? lWS : (lWS = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "WS"));
+		return superGrammarAccess.lrWS();
 	} 
 
 	// lexer ANY_OTHER:   ".";
 	public LexerRule lrANY_OTHER() {
-		return (lANY_OTHER != null) ? lANY_OTHER : (lANY_OTHER = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "ANY_OTHER"));
+		return superGrammarAccess.lrANY_OTHER();
 	} 
 }

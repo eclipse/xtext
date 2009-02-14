@@ -7,6 +7,8 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
+import org.eclipse.xtext.testlanguages.services.ContentAssistTestLanguageGrammarAccess;
+
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.ContentAssistTestLanguageStartConsumer;
@@ -33,9 +35,12 @@ public class ContentAssistTestLanguageParserConfiguration extends AbstractParser
     private ContentAssistTestLanguageSecondAbstractRuleChildConsumer secondAbstractRuleChildConsumer;
     private ContentAssistTestLanguageAbstractRuleCallConsumer abstractRuleCallConsumer;
 
-	public ContentAssistTestLanguageParserConfiguration(IInternalParserConfiguration configuration) {
+	private ContentAssistTestLanguageGrammarAccess grammarAccess;
+
+	public ContentAssistTestLanguageParserConfiguration(IInternalParserConfiguration configuration, ContentAssistTestLanguageGrammarAccess grammarAccess) {
 		super(configuration);
-		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration);
+		this.grammarAccess = grammarAccess;
+		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration, null);
 	}
 
 	public ContentAssistTestLanguageStartConsumer getRootConsumer() {
@@ -66,6 +71,22 @@ public class ContentAssistTestLanguageParserConfiguration extends AbstractParser
 	}
 	
 	public void configureConsumers() {
+		if (grammarAccess == null)
+			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+		getStartConsumer().setRule(grammarAccess.prStart());
+		getAbstractRuleConsumer().setRule(grammarAccess.prAbstractRule());
+		getFirstAbstractRuleChildConsumer().setRule(grammarAccess.prFirstAbstractRuleChild());
+		getSecondAbstractRuleChildConsumer().setRule(grammarAccess.prSecondAbstractRuleChild());
+		getAbstractRuleCallConsumer().setRule(grammarAccess.prAbstractRuleCall());
+		getIdConsumer().setRule(grammarAccess.lrID());
+		getIntConsumer().setRule(grammarAccess.lrINT());
+		getStringConsumer().setRule(grammarAccess.lrSTRING());
+		getMlCommentConsumer().setRule(grammarAccess.lrML_COMMENT());
+		getSlCommentConsumer().setRule(grammarAccess.lrSL_COMMENT());
+		getWsConsumer().setRule(grammarAccess.lrWS());
+		getAnyOtherConsumer().setRule(grammarAccess.lrANY_OTHER());
+
+
 		getStartConsumer().setAbstractRuleConsumer(getAbstractRuleConsumer());
 
 		getAbstractRuleConsumer().setFirstAbstractRuleChildConsumer(getFirstAbstractRuleChildConsumer());

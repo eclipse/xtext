@@ -23,6 +23,8 @@ import org.eclipse.xtext.testlanguages.parser.packrat.consumers.LookaheadTestLan
 @SuppressWarnings("unused")
 public final class LookaheadTestLanguageAltsConsumer extends NonTerminalConsumer {
 
+	private AltsElements rule;
+	
 	private INonTerminalConsumer lookAhead0Consumer;
 	private INonTerminalConsumer lookAhead1Consumer;
 	private INonTerminalConsumer lookAhead3Consumer;
@@ -73,7 +75,12 @@ public final class LookaheadTestLanguageAltsConsumer extends NonTerminalConsumer
 	}
 
 	public AltsElements getRule() {
-		return LookaheadTestLanguageGrammarAccess.INSTANCE.prAlts();
+	// LookaheadTestLanguageGrammarAccess.INSTANCE.prAlts()
+		return rule;
+	}
+	
+	public void setRule(AltsElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

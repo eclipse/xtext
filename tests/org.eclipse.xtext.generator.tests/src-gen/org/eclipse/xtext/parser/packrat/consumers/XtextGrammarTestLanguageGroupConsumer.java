@@ -21,6 +21,8 @@ import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageAbstra
 @SuppressWarnings("unused")
 public final class XtextGrammarTestLanguageGroupConsumer extends NonTerminalConsumer {
 
+	private GroupElements rule;
+	
 	private INonTerminalConsumer abstractTokenConsumer;
 
 	public XtextGrammarTestLanguageGroupConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
@@ -120,7 +122,12 @@ public final class XtextGrammarTestLanguageGroupConsumer extends NonTerminalCons
 	}
 
 	public GroupElements getRule() {
-		return XtextGrammarTestLanguageGrammarAccess.INSTANCE.prGroup();
+	// XtextGrammarTestLanguageGrammarAccess.INSTANCE.prGroup()
+		return rule;
+	}
+	
+	public void setRule(GroupElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

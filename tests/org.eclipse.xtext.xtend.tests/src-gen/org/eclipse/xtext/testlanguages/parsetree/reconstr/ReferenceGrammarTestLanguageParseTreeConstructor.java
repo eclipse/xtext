@@ -9,12 +9,15 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
-import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.ReferenceGrammarTestLanguageGrammarAccess;
 
+import com.google.inject.Inject;
 
 public class ReferenceGrammarTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 		
+	@Inject
+	private ReferenceGrammarTestLanguageGrammarAccess grammarAccess;
+	
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
@@ -44,7 +47,7 @@ protected class Spielplatz_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielplatz().eleGroup();
+		return grammarAccess.prSpielplatz().eleGroup();
 	}
 		
 	@Override
@@ -73,7 +76,7 @@ protected class Spielplatz_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielplatz().ele0Group();
+		return grammarAccess.prSpielplatz().ele0Group();
 	}
 		
 	@Override
@@ -102,7 +105,7 @@ protected class Spielplatz_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielplatz().ele00Group();
+		return grammarAccess.prSpielplatz().ele00Group();
 	}
 		
 	@Override
@@ -131,7 +134,7 @@ protected class Spielplatz_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielplatz().ele000Group();
+		return grammarAccess.prSpielplatz().ele000Group();
 	}
 		
 	@Override
@@ -160,7 +163,7 @@ protected class Spielplatz_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielplatz().ele0000Group();
+		return grammarAccess.prSpielplatz().ele0000Group();
 	}
 		
 	@Override
@@ -189,7 +192,7 @@ protected class Spielplatz_0_0_0_0_0_Keyword_spielplatz extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielplatz().ele00000KeywordSpielplatz();
+		return grammarAccess.prSpielplatz().ele00000KeywordSpielplatz();
 	}	
 }
 
@@ -201,7 +204,7 @@ protected class Spielplatz_0_0_0_0_1_Assignment_groesse extends AssignmentToken 
 	}
 	
 	public Assignment getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielplatz().ele00001AssignmentGroesse();
+		return grammarAccess.prSpielplatz().ele00001AssignmentGroesse();
 	}
 	
 	@Override
@@ -210,7 +213,7 @@ protected class Spielplatz_0_0_0_0_1_Assignment_groesse extends AssignmentToken 
 		IInstanceDescription obj = current.cloneAndConsume("groesse");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielplatz().ele000010LexerRuleCallINT();
+			element = grammarAccess.prSpielplatz().ele000010LexerRuleCallINT();
 			return new Solution(obj);
 		}
 		return null;
@@ -226,7 +229,7 @@ protected class Spielplatz_0_0_0_1_Assignment_beschreibung extends AssignmentTok
 	}
 	
 	public Assignment getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielplatz().ele0001AssignmentBeschreibung();
+		return grammarAccess.prSpielplatz().ele0001AssignmentBeschreibung();
 	}
 	
 	@Override
@@ -235,7 +238,7 @@ protected class Spielplatz_0_0_0_1_Assignment_beschreibung extends AssignmentTok
 		IInstanceDescription obj = current.cloneAndConsume("beschreibung");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielplatz().ele00010LexerRuleCallSTRING();
+			element = grammarAccess.prSpielplatz().ele00010LexerRuleCallSTRING();
 			return new Solution(obj);
 		}
 		return null;
@@ -251,7 +254,7 @@ protected class Spielplatz_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielplatz().ele001KeywordLeftCurlyBracket();
+		return grammarAccess.prSpielplatz().ele001KeywordLeftCurlyBracket();
 	}	
 }
 
@@ -264,7 +267,7 @@ protected class Spielplatz_0_1_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielplatz().ele01Alternatives();
+		return grammarAccess.prSpielplatz().ele01Alternatives();
 	}
 
 	@Override	
@@ -286,7 +289,7 @@ protected class Spielplatz_0_1_0_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielplatz().ele010Alternatives();
+		return grammarAccess.prSpielplatz().ele010Alternatives();
 	}
 
 	@Override	
@@ -308,7 +311,7 @@ protected class Spielplatz_0_1_0_0_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielplatz().ele0100Alternatives();
+		return grammarAccess.prSpielplatz().ele0100Alternatives();
 	}
 
 	@Override	
@@ -330,7 +333,7 @@ protected class Spielplatz_0_1_0_0_0_Assignment_kinder extends AssignmentToken  
 	}
 	
 	public Assignment getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielplatz().ele01000AssignmentKinder();
+		return grammarAccess.prSpielplatz().ele01000AssignmentKinder();
 	}
 	
 	@Override
@@ -362,7 +365,7 @@ protected class Spielplatz_0_1_0_0_1_Assignment_erzieher extends AssignmentToken
 	}
 	
 	public Assignment getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielplatz().ele01001AssignmentErzieher();
+		return grammarAccess.prSpielplatz().ele01001AssignmentErzieher();
 	}
 	
 	@Override
@@ -395,7 +398,7 @@ protected class Spielplatz_0_1_0_1_Assignment_spielzeuge extends AssignmentToken
 	}
 	
 	public Assignment getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielplatz().ele0101AssignmentSpielzeuge();
+		return grammarAccess.prSpielplatz().ele0101AssignmentSpielzeuge();
 	}
 	
 	@Override
@@ -428,7 +431,7 @@ protected class Spielplatz_0_1_1_Assignment_familie extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielplatz().ele011AssignmentFamilie();
+		return grammarAccess.prSpielplatz().ele011AssignmentFamilie();
 	}
 	
 	@Override
@@ -462,7 +465,7 @@ protected class Spielplatz_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielplatz().ele1KeywordRightCurlyBracket();
+		return grammarAccess.prSpielplatz().ele1KeywordRightCurlyBracket();
 	}	
 }
 
@@ -485,7 +488,7 @@ protected class Person_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prPerson().eleAlternatives();
+		return grammarAccess.prPerson().eleAlternatives();
 	}
 
 	@Override	
@@ -507,7 +510,7 @@ protected class Person_0_RuleCall_Kind extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prPerson().ele0ParserRuleCallKind();
+		return grammarAccess.prPerson().ele0ParserRuleCallKind();
 	}
 	
 	@Override
@@ -526,7 +529,7 @@ protected class Person_1_RuleCall_Erwachsener extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prPerson().ele1ParserRuleCallErwachsener();
+		return grammarAccess.prPerson().ele1ParserRuleCallErwachsener();
 	}
 	
 	@Override
@@ -556,7 +559,7 @@ protected class Kind_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prKind().eleGroup();
+		return grammarAccess.prKind().eleGroup();
 	}
 		
 	@Override
@@ -585,7 +588,7 @@ protected class Kind_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prKind().ele0Group();
+		return grammarAccess.prKind().ele0Group();
 	}
 		
 	@Override
@@ -614,7 +617,7 @@ protected class Kind_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prKind().ele00Group();
+		return grammarAccess.prKind().ele00Group();
 	}
 		
 	@Override
@@ -643,7 +646,7 @@ protected class Kind_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prKind().ele000Group();
+		return grammarAccess.prKind().ele000Group();
 	}
 		
 	@Override
@@ -672,7 +675,7 @@ protected class Kind_0_0_0_0_Keyword_kind extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prKind().ele0000KeywordKind();
+		return grammarAccess.prKind().ele0000KeywordKind();
 	}	
 }
 
@@ -684,7 +687,7 @@ protected class Kind_0_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prKind().ele0001KeywordLeftParenthesis();
+		return grammarAccess.prKind().ele0001KeywordLeftParenthesis();
 	}	
 }
 
@@ -697,7 +700,7 @@ protected class Kind_0_0_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prKind().ele001AssignmentName();
+		return grammarAccess.prKind().ele001AssignmentName();
 	}
 	
 	@Override
@@ -706,7 +709,7 @@ protected class Kind_0_0_1_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prKind().ele0010LexerRuleCallID();
+			element = grammarAccess.prKind().ele0010LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -722,7 +725,7 @@ protected class Kind_0_1_Assignment_age extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prKind().ele01AssignmentAge();
+		return grammarAccess.prKind().ele01AssignmentAge();
 	}
 	
 	@Override
@@ -731,7 +734,7 @@ protected class Kind_0_1_Assignment_age extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("age");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prKind().ele010LexerRuleCallINT();
+			element = grammarAccess.prKind().ele010LexerRuleCallINT();
 			return new Solution(obj);
 		}
 		return null;
@@ -747,7 +750,7 @@ protected class Kind_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prKind().ele1KeywordRightParenthesis();
+		return grammarAccess.prKind().ele1KeywordRightParenthesis();
 	}	
 }
 
@@ -770,7 +773,7 @@ protected class Erwachsener_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prErwachsener().eleGroup();
+		return grammarAccess.prErwachsener().eleGroup();
 	}
 		
 	@Override
@@ -799,7 +802,7 @@ protected class Erwachsener_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prErwachsener().ele0Group();
+		return grammarAccess.prErwachsener().ele0Group();
 	}
 		
 	@Override
@@ -828,7 +831,7 @@ protected class Erwachsener_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prErwachsener().ele00Group();
+		return grammarAccess.prErwachsener().ele00Group();
 	}
 		
 	@Override
@@ -857,7 +860,7 @@ protected class Erwachsener_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prErwachsener().ele000Group();
+		return grammarAccess.prErwachsener().ele000Group();
 	}
 		
 	@Override
@@ -886,7 +889,7 @@ protected class Erwachsener_0_0_0_0_Keyword_erwachsener extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prErwachsener().ele0000KeywordErwachsener();
+		return grammarAccess.prErwachsener().ele0000KeywordErwachsener();
 	}	
 }
 
@@ -898,7 +901,7 @@ protected class Erwachsener_0_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prErwachsener().ele0001KeywordLeftParenthesis();
+		return grammarAccess.prErwachsener().ele0001KeywordLeftParenthesis();
 	}	
 }
 
@@ -911,7 +914,7 @@ protected class Erwachsener_0_0_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prErwachsener().ele001AssignmentName();
+		return grammarAccess.prErwachsener().ele001AssignmentName();
 	}
 	
 	@Override
@@ -920,7 +923,7 @@ protected class Erwachsener_0_0_1_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prErwachsener().ele0010LexerRuleCallID();
+			element = grammarAccess.prErwachsener().ele0010LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -936,7 +939,7 @@ protected class Erwachsener_0_1_Assignment_age extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prErwachsener().ele01AssignmentAge();
+		return grammarAccess.prErwachsener().ele01AssignmentAge();
 	}
 	
 	@Override
@@ -945,7 +948,7 @@ protected class Erwachsener_0_1_Assignment_age extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("age");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prErwachsener().ele010LexerRuleCallINT();
+			element = grammarAccess.prErwachsener().ele010LexerRuleCallINT();
 			return new Solution(obj);
 		}
 		return null;
@@ -961,7 +964,7 @@ protected class Erwachsener_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prErwachsener().ele1KeywordRightParenthesis();
+		return grammarAccess.prErwachsener().ele1KeywordRightParenthesis();
 	}	
 }
 
@@ -984,7 +987,7 @@ protected class Spielzeug_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielzeug().eleGroup();
+		return grammarAccess.prSpielzeug().eleGroup();
 	}
 		
 	@Override
@@ -1013,7 +1016,7 @@ protected class Spielzeug_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielzeug().ele0Group();
+		return grammarAccess.prSpielzeug().ele0Group();
 	}
 		
 	@Override
@@ -1042,7 +1045,7 @@ protected class Spielzeug_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielzeug().ele00Group();
+		return grammarAccess.prSpielzeug().ele00Group();
 	}
 		
 	@Override
@@ -1071,7 +1074,7 @@ protected class Spielzeug_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielzeug().ele000Group();
+		return grammarAccess.prSpielzeug().ele000Group();
 	}
 		
 	@Override
@@ -1100,7 +1103,7 @@ protected class Spielzeug_0_0_0_0_Keyword_spielzeug extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielzeug().ele0000KeywordSpielzeug();
+		return grammarAccess.prSpielzeug().ele0000KeywordSpielzeug();
 	}	
 }
 
@@ -1112,7 +1115,7 @@ protected class Spielzeug_0_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielzeug().ele0001KeywordLeftParenthesis();
+		return grammarAccess.prSpielzeug().ele0001KeywordLeftParenthesis();
 	}	
 }
 
@@ -1125,7 +1128,7 @@ protected class Spielzeug_0_0_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielzeug().ele001AssignmentName();
+		return grammarAccess.prSpielzeug().ele001AssignmentName();
 	}
 	
 	@Override
@@ -1134,7 +1137,7 @@ protected class Spielzeug_0_0_1_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielzeug().ele0010LexerRuleCallID();
+			element = grammarAccess.prSpielzeug().ele0010LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -1150,7 +1153,7 @@ protected class Spielzeug_0_1_Assignment_farbe extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielzeug().ele01AssignmentFarbe();
+		return grammarAccess.prSpielzeug().ele01AssignmentFarbe();
 	}
 	
 	@Override
@@ -1183,7 +1186,7 @@ protected class Spielzeug_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielzeug().ele1KeywordRightParenthesis();
+		return grammarAccess.prSpielzeug().ele1KeywordRightParenthesis();
 	}	
 }
 
@@ -1206,7 +1209,7 @@ protected class Farbe_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFarbe().eleAlternatives();
+		return grammarAccess.prFarbe().eleAlternatives();
 	}
 
 	@Override	
@@ -1228,7 +1231,7 @@ protected class Farbe_0_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFarbe().ele0Alternatives();
+		return grammarAccess.prFarbe().ele0Alternatives();
 	}
 
 	@Override	
@@ -1250,7 +1253,7 @@ protected class Farbe_0_0_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFarbe().ele00Alternatives();
+		return grammarAccess.prFarbe().ele00Alternatives();
 	}
 
 	@Override	
@@ -1272,7 +1275,7 @@ protected class Farbe_0_0_0_Keyword_ROT extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFarbe().ele000KeywordROT();
+		return grammarAccess.prFarbe().ele000KeywordROT();
 	}	
 }
 
@@ -1284,7 +1287,7 @@ protected class Farbe_0_0_1_Keyword_BLAU extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFarbe().ele001KeywordBLAU();
+		return grammarAccess.prFarbe().ele001KeywordBLAU();
 	}	
 }
 
@@ -1297,7 +1300,7 @@ protected class Farbe_0_1_Keyword_GELB extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFarbe().ele01KeywordGELB();
+		return grammarAccess.prFarbe().ele01KeywordGELB();
 	}	
 }
 
@@ -1310,7 +1313,7 @@ protected class Farbe_1_Keyword_GRN extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFarbe().ele1KeywordGRÜN();
+		return grammarAccess.prFarbe().ele1KeywordGRÜN();
 	}	
 }
 
@@ -1333,7 +1336,7 @@ protected class Familie_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFamilie().eleGroup();
+		return grammarAccess.prFamilie().eleGroup();
 	}
 		
 	@Override
@@ -1362,7 +1365,7 @@ protected class Familie_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFamilie().ele0Group();
+		return grammarAccess.prFamilie().ele0Group();
 	}
 		
 	@Override
@@ -1391,7 +1394,7 @@ protected class Familie_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFamilie().ele00Group();
+		return grammarAccess.prFamilie().ele00Group();
 	}
 		
 	@Override
@@ -1420,7 +1423,7 @@ protected class Familie_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFamilie().ele000Group();
+		return grammarAccess.prFamilie().ele000Group();
 	}
 		
 	@Override
@@ -1449,7 +1452,7 @@ protected class Familie_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFamilie().ele0000Group();
+		return grammarAccess.prFamilie().ele0000Group();
 	}
 		
 	@Override
@@ -1478,7 +1481,7 @@ protected class Familie_0_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFamilie().ele00000Group();
+		return grammarAccess.prFamilie().ele00000Group();
 	}
 		
 	@Override
@@ -1507,7 +1510,7 @@ protected class Familie_0_0_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFamilie().ele000000Group();
+		return grammarAccess.prFamilie().ele000000Group();
 	}
 		
 	@Override
@@ -1536,7 +1539,7 @@ protected class Familie_0_0_0_0_0_0_0_Keyword_familie extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFamilie().ele0000000KeywordFamilie();
+		return grammarAccess.prFamilie().ele0000000KeywordFamilie();
 	}	
 }
 
@@ -1548,7 +1551,7 @@ protected class Familie_0_0_0_0_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFamilie().ele0000001KeywordLeftParenthesis();
+		return grammarAccess.prFamilie().ele0000001KeywordLeftParenthesis();
 	}	
 }
 
@@ -1561,7 +1564,7 @@ protected class Familie_0_0_0_0_0_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFamilie().ele000001AssignmentName();
+		return grammarAccess.prFamilie().ele000001AssignmentName();
 	}
 	
 	@Override
@@ -1571,18 +1574,18 @@ protected class Familie_0_0_0_0_0_1_Assignment_name extends AssignmentToken  {
 
 		if("keyword".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFamilie().ele000001000KeywordKeyword();
+			element = grammarAccess.prFamilie().ele000001000KeywordKeyword();
 			return new Solution(obj);
 		}
 
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFamilie().ele000001001LexerRuleCallSTRING();
+			element = grammarAccess.prFamilie().ele000001001LexerRuleCallSTRING();
 			return new Solution(obj);
 		}
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFamilie().ele00000101LexerRuleCallID();
+			element = grammarAccess.prFamilie().ele00000101LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -1598,7 +1601,7 @@ protected class Familie_0_0_0_0_1_Assignment_mutter extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFamilie().ele00001AssignmentMutter();
+		return grammarAccess.prFamilie().ele00001AssignmentMutter();
 	}
 	
 	@Override
@@ -1609,7 +1612,7 @@ protected class Familie_0_0_0_0_1_Assignment_mutter extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Erwachsener")) {
 				type = AssignmentType.CR;
-				element = ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFamilie().ele000010CrossReferenceEStringErwachsener(); 
+				element = grammarAccess.prFamilie().ele000010CrossReferenceEStringErwachsener(); 
 				return new Solution(obj);
 			}
 		}
@@ -1626,7 +1629,7 @@ protected class Familie_0_0_0_1_Assignment_vater extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFamilie().ele0001AssignmentVater();
+		return grammarAccess.prFamilie().ele0001AssignmentVater();
 	}
 	
 	@Override
@@ -1637,7 +1640,7 @@ protected class Familie_0_0_0_1_Assignment_vater extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Erwachsener")) {
 				type = AssignmentType.CR;
-				element = ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFamilie().ele00010CrossReferenceEStringErwachsener(); 
+				element = grammarAccess.prFamilie().ele00010CrossReferenceEStringErwachsener(); 
 				return new Solution(obj);
 			}
 		}
@@ -1654,7 +1657,7 @@ protected class Familie_0_0_1_Assignment_kinder extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFamilie().ele001AssignmentKinder();
+		return grammarAccess.prFamilie().ele001AssignmentKinder();
 	}
 	
 	@Override
@@ -1665,7 +1668,7 @@ protected class Familie_0_0_1_Assignment_kinder extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Kind")) {
 				type = AssignmentType.CR;
-				element = ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFamilie().ele0010CrossReferenceEStringKind(); 
+				element = grammarAccess.prFamilie().ele0010CrossReferenceEStringKind(); 
 				return new Solution(obj);
 			}
 		}
@@ -1682,7 +1685,7 @@ protected class Familie_0_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFamilie().ele01Group();
+		return grammarAccess.prFamilie().ele01Group();
 	}
 		
 	@Override
@@ -1711,7 +1714,7 @@ protected class Familie_0_1_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFamilie().ele010KeywordComma();
+		return grammarAccess.prFamilie().ele010KeywordComma();
 	}	
 }
 
@@ -1723,7 +1726,7 @@ protected class Familie_0_1_1_Assignment_kinder extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFamilie().ele011AssignmentKinder();
+		return grammarAccess.prFamilie().ele011AssignmentKinder();
 	}
 	
 	@Override
@@ -1734,7 +1737,7 @@ protected class Familie_0_1_1_Assignment_kinder extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Kind")) {
 				type = AssignmentType.CR;
-				element = ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFamilie().ele0110CrossReferenceEStringKind(); 
+				element = grammarAccess.prFamilie().ele0110CrossReferenceEStringKind(); 
 				return new Solution(obj);
 			}
 		}
@@ -1752,7 +1755,7 @@ protected class Familie_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFamilie().ele1KeywordRightParenthesis();
+		return grammarAccess.prFamilie().ele1KeywordRightParenthesis();
 	}	
 }
 

@@ -23,6 +23,8 @@ import org.eclipse.xtext.example.parser.packrat.consumers.DomainmodelTypeRefCons
 @SuppressWarnings("unused")
 public final class DomainmodelOperationConsumer extends NonTerminalConsumer {
 
+	private OperationElements rule;
+	
 	private ITerminalConsumer idConsumer;
 	private INonTerminalConsumer parameterConsumer;
 	private INonTerminalConsumer typeRefConsumer;
@@ -135,17 +137,11 @@ public final class DomainmodelOperationConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$8(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "name", false, false, getRule().ele0000010LexerRuleCallID(), getRuleCall$9$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$9(entryPoint);
+	}
+
+	protected int consumeRuleCall$9(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "name", false, false, getRule().ele0000010LexerRuleCallID(), getRuleCall$9$Delimiter());
 	}
 
 	protected int consumeKeyword$10(int entryPoint) throws Exception {
@@ -194,17 +190,11 @@ public final class DomainmodelOperationConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$12(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(parameterConsumer, "params", true, false, false, getRule().ele000100ParserRuleCallParameter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$13(entryPoint);
+	}
+
+	protected int consumeRuleCall$13(int entryPoint) throws Exception {
+		return consumeNonTerminal(parameterConsumer, "params", true, false, false, getRule().ele000100ParserRuleCallParameter());
 	}
 
 	protected int consumeGroup$14(int entryPoint) throws Exception {
@@ -252,17 +242,11 @@ public final class DomainmodelOperationConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$16(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(parameterConsumer, "params", true, false, false, getRule().ele0001110ParserRuleCallParameter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$17(entryPoint);
+	}
+
+	protected int consumeRuleCall$17(int entryPoint) throws Exception {
+		return consumeNonTerminal(parameterConsumer, "params", true, false, false, getRule().ele0001110ParserRuleCallParameter());
 	}
 
 	protected int consumeKeyword$18(int entryPoint) throws Exception {
@@ -274,21 +258,20 @@ public final class DomainmodelOperationConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$20(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(typeRefConsumer, "type", false, false, false, getRule().ele10ParserRuleCallTypeRef());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$21(entryPoint);
+	}
+
+	protected int consumeRuleCall$21(int entryPoint) throws Exception {
+		return consumeNonTerminal(typeRefConsumer, "type", false, false, false, getRule().ele10ParserRuleCallTypeRef());
 	}
 
 	public OperationElements getRule() {
-		return DomainmodelGrammarAccess.INSTANCE.prOperation();
+	// DomainmodelGrammarAccess.INSTANCE.prOperation()
+		return rule;
+	}
+	
+	public void setRule(OperationElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

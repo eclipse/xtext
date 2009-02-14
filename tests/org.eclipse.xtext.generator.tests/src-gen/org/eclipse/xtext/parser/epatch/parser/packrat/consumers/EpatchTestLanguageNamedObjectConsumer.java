@@ -22,6 +22,8 @@ import org.eclipse.xtext.parser.epatch.parser.packrat.consumers.EpatchTestLangua
 @SuppressWarnings("unused")
 public final class EpatchTestLanguageNamedObjectConsumer extends NonTerminalConsumer {
 
+	private NamedObjectElements rule;
+	
 	private INonTerminalConsumer createdObjectConsumer;
 	private INonTerminalConsumer objectRefConsumer;
 
@@ -62,7 +64,12 @@ public final class EpatchTestLanguageNamedObjectConsumer extends NonTerminalCons
 	}
 
 	public NamedObjectElements getRule() {
-		return EpatchTestLanguageGrammarAccess.INSTANCE.prNamedObject();
+	// EpatchTestLanguageGrammarAccess.INSTANCE.prNamedObject()
+		return rule;
+	}
+	
+	public void setRule(NamedObjectElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

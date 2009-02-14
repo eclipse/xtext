@@ -21,6 +21,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer
 @SuppressWarnings("unused")
 public final class MetamodelRefTestLanguageMyRuleConsumer extends NonTerminalConsumer {
 
+	private MyRuleElements rule;
+	
 	private ITerminalConsumer idConsumer;
 
 	private ISequenceMatcher ruleCall$2$Delimiter;
@@ -44,7 +46,12 @@ public final class MetamodelRefTestLanguageMyRuleConsumer extends NonTerminalCon
 	}
 
 	public MyRuleElements getRule() {
-		return MetamodelRefTestLanguageGrammarAccess.INSTANCE.prMyRule();
+	// MetamodelRefTestLanguageGrammarAccess.INSTANCE.prMyRule()
+		return rule;
+	}
+	
+	public void setRule(MyRuleElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

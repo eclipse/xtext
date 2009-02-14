@@ -20,6 +20,8 @@ import org.eclipse.xtext.testlanguages.services.ReferenceGrammarTestLanguageGram
 @SuppressWarnings("unused")
 public final class ReferenceGrammarTestLanguageFarbeConsumer extends NonTerminalConsumer {
 
+	private FarbeElements rule;
+	
 
 	private ICharacterClass keyword$4$Delimiter;
 	
@@ -88,7 +90,12 @@ public final class ReferenceGrammarTestLanguageFarbeConsumer extends NonTerminal
 	}
 
 	public FarbeElements getRule() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFarbe();
+	// ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFarbe()
+		return rule;
+	}
+	
+	public void setRule(FarbeElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

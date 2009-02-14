@@ -24,6 +24,8 @@ import org.eclipse.xtext.parser.epatch.parser.packrat.consumers.EpatchTestLangua
 @SuppressWarnings("unused")
 public final class EpatchTestLanguageAssignmentConsumer extends NonTerminalConsumer {
 
+	private AssignmentElements rule;
+	
 	private INonTerminalConsumer biListAssignmentConsumer;
 	private INonTerminalConsumer biSingleAssignmentConsumer;
 	private INonTerminalConsumer monoListAssignmentConsumer;
@@ -84,7 +86,12 @@ public final class EpatchTestLanguageAssignmentConsumer extends NonTerminalConsu
 	}
 
 	public AssignmentElements getRule() {
-		return EpatchTestLanguageGrammarAccess.INSTANCE.prAssignment();
+	// EpatchTestLanguageGrammarAccess.INSTANCE.prAssignment()
+		return rule;
+	}
+	
+	public void setRule(AssignmentElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

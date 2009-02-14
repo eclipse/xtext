@@ -11,9 +11,13 @@ import org.eclipse.xtext.parsetree.reconstr.impl.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
 import org.eclipse.xtext.parser.terminalrules.services.TerminalRulesTestLanguageGrammarAccess;
 
+import com.google.inject.Inject;
 
 public class TerminalRulesTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 		
+	@Inject
+	private TerminalRulesTestLanguageGrammarAccess grammarAccess;
+	
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
@@ -37,7 +41,7 @@ protected class Model_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return TerminalRulesTestLanguageGrammarAccess.INSTANCE.prModel().eleAlternatives();
+		return grammarAccess.prModel().eleAlternatives();
 	}
 
 	@Override	
@@ -59,7 +63,7 @@ protected class Model_0_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return TerminalRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele0Alternatives();
+		return grammarAccess.prModel().ele0Alternatives();
 	}
 
 	@Override	
@@ -81,7 +85,7 @@ protected class Model_0_0_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return TerminalRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele00Alternatives();
+		return grammarAccess.prModel().ele00Alternatives();
 	}
 
 	@Override	
@@ -103,7 +107,7 @@ protected class Model_0_0_0_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return TerminalRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele000Alternatives();
+		return grammarAccess.prModel().ele000Alternatives();
 	}
 
 	@Override	
@@ -125,7 +129,7 @@ protected class Model_0_0_0_0_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return TerminalRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele0000Alternatives();
+		return grammarAccess.prModel().ele0000Alternatives();
 	}
 
 	@Override	
@@ -147,7 +151,7 @@ protected class Model_0_0_0_0_0_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return TerminalRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele00000Alternatives();
+		return grammarAccess.prModel().ele00000Alternatives();
 	}
 
 	@Override	
@@ -169,7 +173,7 @@ protected class Model_0_0_0_0_0_0_Assignment_idValue extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return TerminalRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele000000AssignmentIdValue();
+		return grammarAccess.prModel().ele000000AssignmentIdValue();
 	}
 	
 	@Override
@@ -179,7 +183,7 @@ protected class Model_0_0_0_0_0_0_Assignment_idValue extends AssignmentToken  {
 
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
 			type = AssignmentType.PRC;
-			element = TerminalRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele0000000ParserRuleCallID();
+			element = grammarAccess.prModel().ele0000000ParserRuleCallID();
 			return new Solution(obj);
 		}
 
@@ -195,7 +199,7 @@ protected class Model_0_0_0_0_0_1_Assignment_intValue extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return TerminalRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele000001AssignmentIntValue();
+		return grammarAccess.prModel().ele000001AssignmentIntValue();
 	}
 	
 	@Override
@@ -205,7 +209,7 @@ protected class Model_0_0_0_0_0_1_Assignment_intValue extends AssignmentToken  {
 
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
 			type = AssignmentType.PRC;
-			element = TerminalRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele0000010ParserRuleCallINT();
+			element = grammarAccess.prModel().ele0000010ParserRuleCallINT();
 			return new Solution(obj);
 		}
 
@@ -222,7 +226,7 @@ protected class Model_0_0_0_0_1_Assignment_stringValue extends AssignmentToken  
 	}
 	
 	public Assignment getGrammarElement() {
-		return TerminalRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele00001AssignmentStringValue();
+		return grammarAccess.prModel().ele00001AssignmentStringValue();
 	}
 	
 	@Override
@@ -232,7 +236,7 @@ protected class Model_0_0_0_0_1_Assignment_stringValue extends AssignmentToken  
 
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
 			type = AssignmentType.PRC;
-			element = TerminalRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele000010ParserRuleCallSTRING();
+			element = grammarAccess.prModel().ele000010ParserRuleCallSTRING();
 			return new Solution(obj);
 		}
 
@@ -249,7 +253,7 @@ protected class Model_0_0_0_1_Assignment_mlCommentValue extends AssignmentToken 
 	}
 	
 	public Assignment getGrammarElement() {
-		return TerminalRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele0001AssignmentMlCommentValue();
+		return grammarAccess.prModel().ele0001AssignmentMlCommentValue();
 	}
 	
 	@Override
@@ -259,7 +263,7 @@ protected class Model_0_0_0_1_Assignment_mlCommentValue extends AssignmentToken 
 
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
 			type = AssignmentType.PRC;
-			element = TerminalRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele00010ParserRuleCallML_COMMENT();
+			element = grammarAccess.prModel().ele00010ParserRuleCallML_COMMENT();
 			return new Solution(obj);
 		}
 
@@ -276,7 +280,7 @@ protected class Model_0_0_1_Assignment_slCommentValue extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return TerminalRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele001AssignmentSlCommentValue();
+		return grammarAccess.prModel().ele001AssignmentSlCommentValue();
 	}
 	
 	@Override
@@ -286,7 +290,7 @@ protected class Model_0_0_1_Assignment_slCommentValue extends AssignmentToken  {
 
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
 			type = AssignmentType.PRC;
-			element = TerminalRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele0010ParserRuleCallSL_COMMENT();
+			element = grammarAccess.prModel().ele0010ParserRuleCallSL_COMMENT();
 			return new Solution(obj);
 		}
 
@@ -303,7 +307,7 @@ protected class Model_0_1_Assignment_wsValue extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return TerminalRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele01AssignmentWsValue();
+		return grammarAccess.prModel().ele01AssignmentWsValue();
 	}
 	
 	@Override
@@ -313,7 +317,7 @@ protected class Model_0_1_Assignment_wsValue extends AssignmentToken  {
 
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
 			type = AssignmentType.PRC;
-			element = TerminalRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele010ParserRuleCallWS();
+			element = grammarAccess.prModel().ele010ParserRuleCallWS();
 			return new Solution(obj);
 		}
 
@@ -330,7 +334,7 @@ protected class Model_1_Assignment_anyValue extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return TerminalRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele1AssignmentAnyValue();
+		return grammarAccess.prModel().ele1AssignmentAnyValue();
 	}
 	
 	@Override
@@ -340,7 +344,7 @@ protected class Model_1_Assignment_anyValue extends AssignmentToken  {
 
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
 			type = AssignmentType.PRC;
-			element = TerminalRulesTestLanguageGrammarAccess.INSTANCE.prModel().ele10ParserRuleCallANY_OTHER();
+			element = grammarAccess.prModel().ele10ParserRuleCallANY_OTHER();
 			return new Solution(obj);
 		}
 

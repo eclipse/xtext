@@ -22,6 +22,8 @@ import org.eclipse.xtext.example.parser.packrat.consumers.EcoreDslImportStatemen
 @SuppressWarnings("unused")
 public final class EcoreDslEcoreDslConsumer extends NonTerminalConsumer {
 
+	private EcoreDslElements rule;
+	
 	private INonTerminalConsumer ePackageDeclConsumer;
 	private INonTerminalConsumer importStatementDeclConsumer;
 
@@ -75,35 +77,28 @@ public final class EcoreDslEcoreDslConsumer extends NonTerminalConsumer {
 	}
 
 	protected int doConsumeAssignment$2(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(importStatementDeclConsumer, "imports", true, false, false, getRule().ele00ParserRuleCallImportStatementDecl());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$3(entryPoint);
+	}
+
+	protected int consumeRuleCall$3(int entryPoint) throws Exception {
+		return consumeNonTerminal(importStatementDeclConsumer, "imports", true, false, false, getRule().ele00ParserRuleCallImportStatementDecl());
 	}
 
 	protected int consumeAssignment$4(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(ePackageDeclConsumer, "package", false, false, false, getRule().ele10ParserRuleCallEPackageDecl());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$5(entryPoint);
+	}
+
+	protected int consumeRuleCall$5(int entryPoint) throws Exception {
+		return consumeNonTerminal(ePackageDeclConsumer, "package", false, false, false, getRule().ele10ParserRuleCallEPackageDecl());
 	}
 
 	public EcoreDslElements getRule() {
-		return EcoreDslGrammarAccess.INSTANCE.prEcoreDsl();
+	// EcoreDslGrammarAccess.INSTANCE.prEcoreDsl()
+		return rule;
+	}
+	
+	public void setRule(EcoreDslElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

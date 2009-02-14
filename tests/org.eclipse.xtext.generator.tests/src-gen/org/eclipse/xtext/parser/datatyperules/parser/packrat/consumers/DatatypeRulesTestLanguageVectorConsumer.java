@@ -21,6 +21,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinINTConsume
 @SuppressWarnings("unused")
 public final class DatatypeRulesTestLanguageVectorConsumer extends NonTerminalConsumer {
 
+	private VectorElements rule;
+	
 	private ITerminalConsumer intConsumer;
 
 	private ICharacterClass keyword$4$Delimiter;
@@ -110,7 +112,12 @@ public final class DatatypeRulesTestLanguageVectorConsumer extends NonTerminalCo
 	}
 
 	public VectorElements getRule() {
-		return DatatypeRulesTestLanguageGrammarAccess.INSTANCE.prVector();
+	// DatatypeRulesTestLanguageGrammarAccess.INSTANCE.prVector()
+		return rule;
+	}
+	
+	public void setRule(VectorElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

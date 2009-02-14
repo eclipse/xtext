@@ -22,6 +22,8 @@ import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerm
 @SuppressWarnings("unused")
 public final class XtextTerminalsTestLanguageAbstractMetamodelDeclarationConsumer extends NonTerminalConsumer {
 
+	private AbstractMetamodelDeclarationElements rule;
+	
 	private INonTerminalConsumer generatedMetamodelConsumer;
 	private INonTerminalConsumer referencedMetamodelConsumer;
 
@@ -62,7 +64,12 @@ public final class XtextTerminalsTestLanguageAbstractMetamodelDeclarationConsume
 	}
 
 	public AbstractMetamodelDeclarationElements getRule() {
-		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAbstractMetamodelDeclaration();
+	// XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAbstractMetamodelDeclaration()
+		return rule;
+	}
+	
+	public void setRule(AbstractMetamodelDeclarationElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

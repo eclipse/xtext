@@ -22,6 +22,8 @@ import org.eclipse.xtext.testlanguages.parser.packrat.consumers.PartialParserTes
 @SuppressWarnings("unused")
 public final class PartialParserTestLanguageSecondConcreteConsumer extends NonTerminalConsumer {
 
+	private SecondConcreteElements rule;
+	
 	private ITerminalConsumer idConsumer;
 	private INonTerminalConsumer namedConsumer;
 
@@ -175,7 +177,12 @@ public final class PartialParserTestLanguageSecondConcreteConsumer extends NonTe
 	}
 
 	public SecondConcreteElements getRule() {
-		return PartialParserTestLanguageGrammarAccess.INSTANCE.prSecondConcrete();
+	// PartialParserTestLanguageGrammarAccess.INSTANCE.prSecondConcrete()
+		return rule;
+	}
+	
+	public void setRule(SecondConcreteElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

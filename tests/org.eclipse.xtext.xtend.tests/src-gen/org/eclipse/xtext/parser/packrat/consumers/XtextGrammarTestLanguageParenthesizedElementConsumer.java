@@ -21,6 +21,8 @@ import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageAltern
 @SuppressWarnings("unused")
 public final class XtextGrammarTestLanguageParenthesizedElementConsumer extends NonTerminalConsumer {
 
+	private ParenthesizedElementElements rule;
+	
 	private INonTerminalConsumer alternativesConsumer;
 
 	private ICharacterClass keyword$3$Delimiter;
@@ -91,7 +93,12 @@ public final class XtextGrammarTestLanguageParenthesizedElementConsumer extends 
 	}
 
 	public ParenthesizedElementElements getRule() {
-		return XtextGrammarTestLanguageGrammarAccess.INSTANCE.prParenthesizedElement();
+	// XtextGrammarTestLanguageGrammarAccess.INSTANCE.prParenthesizedElement()
+		return rule;
+	}
+	
+	public void setRule(ParenthesizedElementElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

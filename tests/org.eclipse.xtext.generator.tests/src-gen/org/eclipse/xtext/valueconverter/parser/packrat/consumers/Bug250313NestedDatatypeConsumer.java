@@ -22,6 +22,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer
 @SuppressWarnings("unused")
 public final class Bug250313NestedDatatypeConsumer extends NonTerminalConsumer {
 
+	private NestedDatatypeElements rule;
+	
 	private INonTerminalConsumer datatypeConsumer;
 	private ITerminalConsumer idConsumer;
 
@@ -103,7 +105,12 @@ public final class Bug250313NestedDatatypeConsumer extends NonTerminalConsumer {
 	}
 
 	public NestedDatatypeElements getRule() {
-		return Bug250313GrammarAccess.INSTANCE.prNestedDatatype();
+	// Bug250313GrammarAccess.INSTANCE.prNestedDatatype()
+		return rule;
+	}
+	
+	public void setRule(NestedDatatypeElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

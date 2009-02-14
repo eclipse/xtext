@@ -22,6 +22,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer
 @SuppressWarnings("unused")
 public final class ContentAssistTestLanguageSecondAbstractRuleChildConsumer extends NonTerminalConsumer {
 
+	private SecondAbstractRuleChildElements rule;
+	
 	private INonTerminalConsumer abstractRuleCallConsumer;
 	private ITerminalConsumer idConsumer;
 
@@ -133,7 +135,12 @@ public final class ContentAssistTestLanguageSecondAbstractRuleChildConsumer exte
 	}
 
 	public SecondAbstractRuleChildElements getRule() {
-		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prSecondAbstractRuleChild();
+	// ContentAssistTestLanguageGrammarAccess.INSTANCE.prSecondAbstractRuleChild()
+		return rule;
+	}
+	
+	public void setRule(SecondAbstractRuleChildElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

@@ -21,6 +21,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGCons
 @SuppressWarnings("unused")
 public final class Bug250313Child2Consumer extends NonTerminalConsumer {
 
+	private Child2Elements rule;
+	
 	private ITerminalConsumer stringConsumer;
 
 	private ISequenceMatcher ruleCall$2$Delimiter;
@@ -44,7 +46,12 @@ public final class Bug250313Child2Consumer extends NonTerminalConsumer {
 	}
 
 	public Child2Elements getRule() {
-		return Bug250313GrammarAccess.INSTANCE.prChild2();
+	// Bug250313GrammarAccess.INSTANCE.prChild2()
+		return rule;
+	}
+	
+	public void setRule(Child2Elements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

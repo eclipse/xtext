@@ -25,6 +25,8 @@ import org.eclipse.xtext.parser.epatch.parser.packrat.consumers.EpatchTestLangua
 @SuppressWarnings("unused")
 public final class EpatchTestLanguageObjectRefConsumer extends NonTerminalConsumer {
 
+	private ObjectRefElements rule;
+	
 	private INonTerminalConsumer biListAssignmentConsumer;
 	private INonTerminalConsumer biSingleAssignmentConsumer;
 	private ITerminalConsumer fragmentConsumer;
@@ -418,9 +420,8 @@ public final class EpatchTestLanguageObjectRefConsumer extends NonTerminalConsum
 					marker.rollback();
 					announceLevelFinished();
 					return ConsumeResult.SUCCESS;
-				} else {
-					error("Could not find token.", getRule().ele10001Alternatives());
 				}
+				error("Could not find token.", getRule().ele10001Alternatives());
 		}
 		announceLevelFinished();
 		marker.commit();
@@ -573,7 +574,12 @@ public final class EpatchTestLanguageObjectRefConsumer extends NonTerminalConsum
 	}
 
 	public ObjectRefElements getRule() {
-		return EpatchTestLanguageGrammarAccess.INSTANCE.prObjectRef();
+	// EpatchTestLanguageGrammarAccess.INSTANCE.prObjectRef()
+		return rule;
+	}
+	
+	public void setRule(ObjectRefElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

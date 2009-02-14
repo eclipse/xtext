@@ -25,6 +25,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGCons
 @SuppressWarnings("unused")
 public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 
+	private ModelElements rule;
+	
 	private INonTerminalConsumer childConsumer;
 	private INonTerminalConsumer datatypeConsumer;
 	private ITerminalConsumer idConsumer;
@@ -737,7 +739,12 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 	}
 
 	public ModelElements getRule() {
-		return Bug250313GrammarAccess.INSTANCE.prModel();
+	// Bug250313GrammarAccess.INSTANCE.prModel()
+		return rule;
+	}
+	
+	public void setRule(ModelElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

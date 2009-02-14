@@ -23,6 +23,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGCons
 @SuppressWarnings("unused")
 public final class EcoreDslEAnnotationDeclConsumer extends NonTerminalConsumer {
 
+	private EAnnotationDeclElements rule;
+	
 	private ITerminalConsumer idConsumer;
 	private INonTerminalConsumer mapEntrySuperConsumer;
 	private ITerminalConsumer stringConsumer;
@@ -135,17 +137,11 @@ public final class EcoreDslEAnnotationDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$8(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(stringConsumer, "source", false, false, getRule().ele0000010LexerRuleCallSTRING(), getRuleCall$9$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$9(entryPoint);
+	}
+
+	protected int consumeRuleCall$9(int entryPoint) throws Exception {
+		return consumeTerminal(stringConsumer, "source", false, false, getRule().ele0000010LexerRuleCallSTRING(), getRuleCall$9$Delimiter());
 	}
 
 	protected int consumeAssignment$10(int entryPoint) throws Exception {
@@ -159,17 +155,11 @@ public final class EcoreDslEAnnotationDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int doConsumeAssignment$10(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "eModelElement", false, false, getRule().ele000010CrossReferenceEStringEModelElement(), getCrossReference$11$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeCrossReference$11(entryPoint);
+	}
+
+	protected int consumeCrossReference$11(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "eModelElement", false, false, getRule().ele000010CrossReferenceEStringEModelElement(), getCrossReference$11$Delimiter());
 	}
 
 	protected int consumeKeyword$13(int entryPoint) throws Exception {
@@ -177,17 +167,11 @@ public final class EcoreDslEAnnotationDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$14(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(mapEntrySuperConsumer, "contents", true, false, false, getRule().ele0010ParserRuleCallMapEntrySuper());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$15(entryPoint);
+	}
+
+	protected int consumeRuleCall$15(int entryPoint) throws Exception {
+		return consumeNonTerminal(mapEntrySuperConsumer, "contents", true, false, false, getRule().ele0010ParserRuleCallMapEntrySuper());
 	}
 
 	protected int consumeGroup$16(int entryPoint) throws Exception {
@@ -235,17 +219,11 @@ public final class EcoreDslEAnnotationDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$18(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(mapEntrySuperConsumer, "contents", true, false, false, getRule().ele0110ParserRuleCallMapEntrySuper());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$19(entryPoint);
+	}
+
+	protected int consumeRuleCall$19(int entryPoint) throws Exception {
+		return consumeNonTerminal(mapEntrySuperConsumer, "contents", true, false, false, getRule().ele0110ParserRuleCallMapEntrySuper());
 	}
 
 	protected int consumeKeyword$20(int entryPoint) throws Exception {
@@ -253,7 +231,12 @@ public final class EcoreDslEAnnotationDeclConsumer extends NonTerminalConsumer {
 	}
 
 	public EAnnotationDeclElements getRule() {
-		return EcoreDslGrammarAccess.INSTANCE.prEAnnotationDecl();
+	// EcoreDslGrammarAccess.INSTANCE.prEAnnotationDecl()
+		return rule;
+	}
+	
+	public void setRule(EAnnotationDeclElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

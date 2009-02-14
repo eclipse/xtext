@@ -5,11 +5,16 @@ Generated with Xtext
 package org.eclipse.xtext.parser.terminalrules.services;
 
 import com.google.inject.Singleton;
+import com.google.inject.Inject;
+
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parser.BaseEPackageAccess;
+
+import org.eclipse.xtext.service.GrammarProvider;
+
 
 @Singleton
-public class HiddenTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess implements IGrammarAccess {
+public class HiddenTerminalsTestLanguageGrammarAccess implements IGrammarAccess {
+	
 	
 	public class ModelElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
@@ -521,34 +526,32 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends BaseEPackageAccess
 		public Wildcard eleWildcard() { return cWildcard; }
 	}
 	
-	public final static HiddenTerminalsTestLanguageGrammarAccess INSTANCE = new HiddenTerminalsTestLanguageGrammarAccess();
+	private ModelElements pModel;
+	private WithoutHiddensElements pWithoutHiddens;
+	private WithHiddensElements pWithHiddens;
+	private OverridingHiddensElements pOverridingHiddens;
+	private OverridingHiddensCallElements pOverridingHiddensCall;
+	private InheritingHiddensElements pInheritingHiddens;
+	private DatatypeHiddensElements pDatatypeHiddens;
+	private DatatypeRuleElements pDatatypeRule;
+	private HidingHiddensElements pHidingHiddens;
+	private InheritingHiddensCallElements pInheritingHiddensCall;
+	private ML_COMMENTElements pML_COMMENT;
+	private SL_COMMENTElements pSL_COMMENT;
+	private WSElements pWS;
+	private ANY_OTHERElements pANY_OTHER;
+	
+	private final GrammarProvider grammarProvider;
 
-	private static final String HIDDENTERMINALSTESTLANGUAGE_GRAMMAR_CP_URI = "classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xmi";
-	private static Grammar GRAMMAR = null;
-	private static ModelElements pModel;
-	private static WithoutHiddensElements pWithoutHiddens;
-	private static WithHiddensElements pWithHiddens;
-	private static OverridingHiddensElements pOverridingHiddens;
-	private static OverridingHiddensCallElements pOverridingHiddensCall;
-	private static InheritingHiddensElements pInheritingHiddens;
-	private static DatatypeHiddensElements pDatatypeHiddens;
-	private static DatatypeRuleElements pDatatypeRule;
-	private static HidingHiddensElements pHidingHiddens;
-	private static InheritingHiddensCallElements pInheritingHiddensCall;
-	private static ML_COMMENTElements pML_COMMENT;
-	private static SL_COMMENTElements pSL_COMMENT;
-	private static WSElements pWS;
-	private static ANY_OTHERElements pANY_OTHER;
-
-	@SuppressWarnings("unused")
-	public synchronized Grammar getGrammar() {	
-		if (GRAMMAR==null) {
-			// assert the XtextPackage implementation is loaded
-			XtextPackage xtextPackage = XtextPackage.eINSTANCE;
-			GRAMMAR = (Grammar) loadGrammarFile(HiddenTerminalsTestLanguageGrammarAccess.class.getClassLoader(),HIDDENTERMINALSTESTLANGUAGE_GRAMMAR_CP_URI);
-		}
-		return GRAMMAR;
+	@Inject
+	public HiddenTerminalsTestLanguageGrammarAccess(GrammarProvider grammarProvider) {
+		this.grammarProvider = grammarProvider;
 	}
+	
+	public Grammar getGrammar() {	
+		return grammarProvider.getGrammar(this);
+	}
+	
 
 	
 	// Model:   WithoutHiddens|WithHiddens|OverridingHiddens|InheritingHiddens|DatatypeHiddens;

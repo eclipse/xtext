@@ -7,6 +7,8 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
+import org.eclipse.xtext.parser.keywords.services.KeywordsTestLanguageGrammarAccess;
+
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 
 import org.eclipse.xtext.parser.keywords.parser.packrat.consumers.KeywordsTestLanguageModelConsumer;
@@ -25,9 +27,12 @@ public class KeywordsTestLanguageParserConfiguration extends AbstractParserConfi
 
     private KeywordsTestLanguageModelConsumer modelConsumer;
 
-	public KeywordsTestLanguageParserConfiguration(IInternalParserConfiguration configuration) {
+	private KeywordsTestLanguageGrammarAccess grammarAccess;
+
+	public KeywordsTestLanguageParserConfiguration(IInternalParserConfiguration configuration, KeywordsTestLanguageGrammarAccess grammarAccess) {
 		super(configuration);
-		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration);
+		this.grammarAccess = grammarAccess;
+		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration, null);
 	}
 
 	public KeywordsTestLanguageModelConsumer getRootConsumer() {
@@ -46,6 +51,18 @@ public class KeywordsTestLanguageParserConfiguration extends AbstractParserConfi
 	}
 	
 	public void configureConsumers() {
+		if (grammarAccess == null)
+			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+		getModelConsumer().setRule(grammarAccess.prModel());
+		getIdConsumer().setRule(grammarAccess.lrID());
+		getIntConsumer().setRule(grammarAccess.lrINT());
+		getStringConsumer().setRule(grammarAccess.lrSTRING());
+		getMlCommentConsumer().setRule(grammarAccess.lrML_COMMENT());
+		getSlCommentConsumer().setRule(grammarAccess.lrSL_COMMENT());
+		getWsConsumer().setRule(grammarAccess.lrWS());
+		getAnyOtherConsumer().setRule(grammarAccess.lrANY_OTHER());
+
+
 		getModelConsumer().setKeyword$9$Delimiter(KeywordsTestLanguageDelimiters.keyword$11$Delimiter);
 		getModelConsumer().setKeyword$11$Delimiter(KeywordsTestLanguageDelimiters.keyword$11$Delimiter);
 		getModelConsumer().setKeyword$5$Delimiter(KeywordsTestLanguageDelimiters.keyword$7$Delimiter);

@@ -9,12 +9,15 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
-import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
 import org.eclipse.xtext.metamodelreferencing.tests.services.MultiGenMMTestLanguageGrammarAccess;
 
+import com.google.inject.Inject;
 
 public class MultiGenMMTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 		
+	@Inject
+	private MultiGenMMTestLanguageGrammarAccess grammarAccess;
+	
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
@@ -39,7 +42,7 @@ protected class Foo_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return MultiGenMMTestLanguageGrammarAccess.INSTANCE.prFoo().eleGroup();
+		return grammarAccess.prFoo().eleGroup();
 	}
 		
 	@Override
@@ -68,7 +71,7 @@ protected class Foo_0_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return MultiGenMMTestLanguageGrammarAccess.INSTANCE.prFoo().ele0AssignmentName();
+		return grammarAccess.prFoo().ele0AssignmentName();
 	}
 	
 	@Override
@@ -77,7 +80,7 @@ protected class Foo_0_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = MultiGenMMTestLanguageGrammarAccess.INSTANCE.prFoo().ele00LexerRuleCallID();
+			element = grammarAccess.prFoo().ele00LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -92,7 +95,7 @@ protected class Foo_1_Assignment_nameRefs extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return MultiGenMMTestLanguageGrammarAccess.INSTANCE.prFoo().ele1AssignmentNameRefs();
+		return grammarAccess.prFoo().ele1AssignmentNameRefs();
 	}
 	
 	@Override
@@ -135,7 +138,7 @@ protected class NameRef_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return MultiGenMMTestLanguageGrammarAccess.INSTANCE.prNameRef().eleAssignmentName();
+		return grammarAccess.prNameRef().eleAssignmentName();
 	}
 	
 	@Override
@@ -144,7 +147,7 @@ protected class NameRef_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = MultiGenMMTestLanguageGrammarAccess.INSTANCE.prNameRef().ele0LexerRuleCallSTRING();
+			element = grammarAccess.prNameRef().ele0LexerRuleCallSTRING();
 			return new Solution(obj);
 		}
 		return null;

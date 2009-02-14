@@ -23,6 +23,8 @@ import org.eclipse.xtext.testlanguages.parser.packrat.consumers.FowlerDslTestLan
 @SuppressWarnings("unused")
 public final class FowlerDslTestLanguageStatemachineConsumer extends NonTerminalConsumer {
 
+	private StatemachineElements rule;
+	
 	private INonTerminalConsumer commandConsumer;
 	private INonTerminalConsumer eventConsumer;
 	private INonTerminalConsumer stateConsumer;
@@ -192,7 +194,12 @@ public final class FowlerDslTestLanguageStatemachineConsumer extends NonTerminal
 	}
 
 	public StatemachineElements getRule() {
-		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prStatemachine();
+	// FowlerDslTestLanguageGrammarAccess.INSTANCE.prStatemachine()
+		return rule;
+	}
+	
+	public void setRule(StatemachineElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

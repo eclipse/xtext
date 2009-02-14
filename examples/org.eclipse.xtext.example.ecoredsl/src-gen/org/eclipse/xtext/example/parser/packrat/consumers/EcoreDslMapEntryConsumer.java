@@ -22,6 +22,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGCons
 @SuppressWarnings("unused")
 public final class EcoreDslMapEntryConsumer extends NonTerminalConsumer {
 
+	private MapEntryElements rule;
+	
 	private ITerminalConsumer idConsumer;
 	private ITerminalConsumer stringConsumer;
 
@@ -84,17 +86,11 @@ public final class EcoreDslMapEntryConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$3(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "detailKey", false, false, getRule().ele000LexerRuleCallID(), getRuleCall$4$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$4(entryPoint);
+	}
+
+	protected int consumeRuleCall$4(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "detailKey", false, false, getRule().ele000LexerRuleCallID(), getRuleCall$4$Delimiter());
 	}
 
 	protected int consumeKeyword$5(int entryPoint) throws Exception {
@@ -102,21 +98,20 @@ public final class EcoreDslMapEntryConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$6(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(stringConsumer, "detailValue", false, false, getRule().ele10LexerRuleCallSTRING(), getRuleCall$7$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$7(entryPoint);
+	}
+
+	protected int consumeRuleCall$7(int entryPoint) throws Exception {
+		return consumeTerminal(stringConsumer, "detailValue", false, false, getRule().ele10LexerRuleCallSTRING(), getRuleCall$7$Delimiter());
 	}
 
 	public MapEntryElements getRule() {
-		return EcoreDslGrammarAccess.INSTANCE.prMapEntry();
+	// EcoreDslGrammarAccess.INSTANCE.prMapEntry()
+		return rule;
+	}
+	
+	public void setRule(MapEntryElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

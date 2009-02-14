@@ -22,6 +22,8 @@ import org.eclipse.xtext.crossrefs.parser.packrat.consumers.LangATestLanguageTyp
 @SuppressWarnings("unused")
 public final class LangATestLanguageMainConsumer extends NonTerminalConsumer {
 
+	private MainElements rule;
+	
 	private INonTerminalConsumer importConsumer;
 	private INonTerminalConsumer typeConsumer;
 
@@ -100,7 +102,12 @@ public final class LangATestLanguageMainConsumer extends NonTerminalConsumer {
 	}
 
 	public MainElements getRule() {
-		return LangATestLanguageGrammarAccess.INSTANCE.prMain();
+	// LangATestLanguageGrammarAccess.INSTANCE.prMain()
+		return rule;
+	}
+	
+	public void setRule(MainElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

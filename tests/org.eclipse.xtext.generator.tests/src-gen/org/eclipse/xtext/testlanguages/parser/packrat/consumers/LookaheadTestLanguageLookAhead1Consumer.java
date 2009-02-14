@@ -21,6 +21,8 @@ import org.eclipse.xtext.testlanguages.parser.packrat.consumers.LookaheadTestLan
 @SuppressWarnings("unused")
 public final class LookaheadTestLanguageLookAhead1Consumer extends NonTerminalConsumer {
 
+	private LookAhead1Elements rule;
+	
 	private INonTerminalConsumer lookAhead2Consumer;
 
 	private ICharacterClass keyword$4$Delimiter;
@@ -119,7 +121,12 @@ public final class LookaheadTestLanguageLookAhead1Consumer extends NonTerminalCo
 	}
 
 	public LookAhead1Elements getRule() {
-		return LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead1();
+	// LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead1()
+		return rule;
+	}
+	
+	public void setRule(LookAhead1Elements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

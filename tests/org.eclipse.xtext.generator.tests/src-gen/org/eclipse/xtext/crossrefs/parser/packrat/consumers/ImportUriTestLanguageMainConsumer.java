@@ -22,6 +22,8 @@ import org.eclipse.xtext.crossrefs.parser.packrat.consumers.ImportUriTestLanguag
 @SuppressWarnings("unused")
 public final class ImportUriTestLanguageMainConsumer extends NonTerminalConsumer {
 
+	private MainElements rule;
+	
 	private INonTerminalConsumer importConsumer;
 	private INonTerminalConsumer typeConsumer;
 
@@ -100,7 +102,12 @@ public final class ImportUriTestLanguageMainConsumer extends NonTerminalConsumer
 	}
 
 	public MainElements getRule() {
-		return ImportUriTestLanguageGrammarAccess.INSTANCE.prMain();
+	// ImportUriTestLanguageGrammarAccess.INSTANCE.prMain()
+		return rule;
+	}
+	
+	public void setRule(MainElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

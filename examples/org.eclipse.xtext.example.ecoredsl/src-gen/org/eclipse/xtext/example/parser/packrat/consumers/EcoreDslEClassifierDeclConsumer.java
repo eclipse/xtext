@@ -22,6 +22,8 @@ import org.eclipse.xtext.example.parser.packrat.consumers.EcoreDslEDataTypeDeclC
 @SuppressWarnings("unused")
 public final class EcoreDslEClassifierDeclConsumer extends NonTerminalConsumer {
 
+	private EClassifierDeclElements rule;
+	
 	private INonTerminalConsumer eClassDeclConsumer;
 	private INonTerminalConsumer eDataTypeDeclConsumer;
 
@@ -62,7 +64,12 @@ public final class EcoreDslEClassifierDeclConsumer extends NonTerminalConsumer {
 	}
 
 	public EClassifierDeclElements getRule() {
-		return EcoreDslGrammarAccess.INSTANCE.prEClassifierDecl();
+	// EcoreDslGrammarAccess.INSTANCE.prEClassifierDecl()
+		return rule;
+	}
+	
+	public void setRule(EClassifierDeclElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

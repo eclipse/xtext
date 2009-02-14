@@ -21,6 +21,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer
 @SuppressWarnings("unused")
 public final class ComplexReconstrTestLanguageTrickyCConsumer extends NonTerminalConsumer {
 
+	private TrickyCElements rule;
+	
 	private ITerminalConsumer idConsumer;
 
 	private ICharacterClass keyword$19$Delimiter;
@@ -265,7 +267,12 @@ public final class ComplexReconstrTestLanguageTrickyCConsumer extends NonTermina
 	}
 
 	public TrickyCElements getRule() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyC();
+	// ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyC()
+		return rule;
+	}
+	
+	public void setRule(TrickyCElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

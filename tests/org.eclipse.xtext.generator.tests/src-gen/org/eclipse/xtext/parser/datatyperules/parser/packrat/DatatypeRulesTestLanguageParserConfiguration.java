@@ -7,6 +7,8 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
+import org.eclipse.xtext.parser.datatyperules.services.DatatypeRulesTestLanguageGrammarAccess;
+
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 
 import org.eclipse.xtext.parser.datatyperules.parser.packrat.consumers.DatatypeRulesTestLanguageCompositeModelConsumer;
@@ -37,9 +39,12 @@ public class DatatypeRulesTestLanguageParserConfiguration extends AbstractParser
     private DatatypeRulesTestLanguageVectorConsumer vectorConsumer;
     private DatatypeRulesTestLanguageDotsConsumer dotsConsumer;
 
-	public DatatypeRulesTestLanguageParserConfiguration(IInternalParserConfiguration configuration) {
+	private DatatypeRulesTestLanguageGrammarAccess grammarAccess;
+
+	public DatatypeRulesTestLanguageParserConfiguration(IInternalParserConfiguration configuration, DatatypeRulesTestLanguageGrammarAccess grammarAccess) {
 		super(configuration);
-		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration);
+		this.grammarAccess = grammarAccess;
+		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration, null);
 	}
 
 	public DatatypeRulesTestLanguageCompositeModelConsumer getRootConsumer() {
@@ -76,6 +81,24 @@ public class DatatypeRulesTestLanguageParserConfiguration extends AbstractParser
 	}
 	
 	public void configureConsumers() {
+		if (grammarAccess == null)
+			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+		getCompositeModelConsumer().setRule(grammarAccess.prCompositeModel());
+		getModelConsumer().setRule(grammarAccess.prModel());
+		getModelIdConsumer().setRule(grammarAccess.prModelId());
+		getNestedModelIdConsumer().setRule(grammarAccess.prNestedModelId());
+		getFractionConsumer().setRule(grammarAccess.prFraction());
+		getVectorConsumer().setRule(grammarAccess.prVector());
+		getDotsConsumer().setRule(grammarAccess.prDots());
+		getIdConsumer().setRule(grammarAccess.lrID());
+		getIntConsumer().setRule(grammarAccess.lrINT());
+		getStringConsumer().setRule(grammarAccess.lrSTRING());
+		getMlCommentConsumer().setRule(grammarAccess.lrML_COMMENT());
+		getSlCommentConsumer().setRule(grammarAccess.lrSL_COMMENT());
+		getWsConsumer().setRule(grammarAccess.lrWS());
+		getAnyOtherConsumer().setRule(grammarAccess.lrANY_OTHER());
+
+
 		getCompositeModelConsumer().setModelConsumer(getModelConsumer());
 
 		getModelConsumer().setDotsConsumer(getDotsConsumer());

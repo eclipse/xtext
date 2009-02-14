@@ -21,6 +21,8 @@ import org.eclipse.xtext.testlanguages.parser.packrat.consumers.ActionTestLangua
 @SuppressWarnings("unused")
 public final class ActionTestLanguageElementConsumer extends NonTerminalConsumer {
 
+	private ElementElements rule;
+	
 	private INonTerminalConsumer itemConsumer;
 
 	public ActionTestLanguageElementConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
@@ -89,7 +91,12 @@ public final class ActionTestLanguageElementConsumer extends NonTerminalConsumer
 	}
 
 	public ElementElements getRule() {
-		return ActionTestLanguageGrammarAccess.INSTANCE.prElement();
+	// ActionTestLanguageGrammarAccess.INSTANCE.prElement()
+		return rule;
+	}
+	
+	public void setRule(ElementElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

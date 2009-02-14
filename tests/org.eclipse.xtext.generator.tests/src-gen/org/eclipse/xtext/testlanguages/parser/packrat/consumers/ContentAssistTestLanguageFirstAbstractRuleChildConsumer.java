@@ -22,6 +22,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer
 @SuppressWarnings("unused")
 public final class ContentAssistTestLanguageFirstAbstractRuleChildConsumer extends NonTerminalConsumer {
 
+	private FirstAbstractRuleChildElements rule;
+	
 	private INonTerminalConsumer abstractRuleConsumer;
 	private ITerminalConsumer idConsumer;
 
@@ -136,9 +138,8 @@ public final class ContentAssistTestLanguageFirstAbstractRuleChildConsumer exten
 					marker.rollback();
 					announceLevelFinished();
 					return ConsumeResult.SUCCESS;
-				} else {
-					error("Could not find token.", getRule().ele001AssignmentElements());
 				}
+				error("Could not find token.", getRule().ele001AssignmentElements());
 		}
 		announceLevelFinished();
 		marker.commit();
@@ -162,7 +163,12 @@ public final class ContentAssistTestLanguageFirstAbstractRuleChildConsumer exten
 	}
 
 	public FirstAbstractRuleChildElements getRule() {
-		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prFirstAbstractRuleChild();
+	// ContentAssistTestLanguageGrammarAccess.INSTANCE.prFirstAbstractRuleChild()
+		return rule;
+	}
+	
+	public void setRule(FirstAbstractRuleChildElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

@@ -21,6 +21,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGCons
 @SuppressWarnings("unused")
 public final class EpatchTestLanguageExpressionExecutableConsumer extends NonTerminalConsumer {
 
+	private ExpressionExecutableElements rule;
+	
 	private ITerminalConsumer stringConsumer;
 
 	private ISequenceMatcher ruleCall$2$Delimiter;
@@ -44,7 +46,12 @@ public final class EpatchTestLanguageExpressionExecutableConsumer extends NonTer
 	}
 
 	public ExpressionExecutableElements getRule() {
-		return EpatchTestLanguageGrammarAccess.INSTANCE.prExpressionExecutable();
+	// EpatchTestLanguageGrammarAccess.INSTANCE.prExpressionExecutable()
+		return rule;
+	}
+	
+	public void setRule(ExpressionExecutableElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

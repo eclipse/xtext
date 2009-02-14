@@ -9,12 +9,15 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
-import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
 import org.eclipse.xtext.ui.integration.services.TestLanguageGrammarAccess;
 
+import com.google.inject.Inject;
 
 public class TestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 		
+	@Inject
+	private TestLanguageGrammarAccess grammarAccess;
+	
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
@@ -39,7 +42,7 @@ protected class File_Assignment_stuff extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return TestLanguageGrammarAccess.INSTANCE.prFile().eleAssignmentStuff();
+		return grammarAccess.prFile().eleAssignmentStuff();
 	}
 	
 	@Override
@@ -81,7 +84,7 @@ protected class Stuff_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return TestLanguageGrammarAccess.INSTANCE.prStuff().eleGroup();
+		return grammarAccess.prStuff().eleGroup();
 	}
 		
 	@Override
@@ -110,7 +113,7 @@ protected class Stuff_0_Keyword_stuff extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return TestLanguageGrammarAccess.INSTANCE.prStuff().ele0KeywordStuff();
+		return grammarAccess.prStuff().ele0KeywordStuff();
 	}	
 }
 
@@ -122,7 +125,7 @@ protected class Stuff_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return TestLanguageGrammarAccess.INSTANCE.prStuff().ele1AssignmentName();
+		return grammarAccess.prStuff().ele1AssignmentName();
 	}
 	
 	@Override
@@ -131,7 +134,7 @@ protected class Stuff_1_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = TestLanguageGrammarAccess.INSTANCE.prStuff().ele10LexerRuleCallID();
+			element = grammarAccess.prStuff().ele10LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;

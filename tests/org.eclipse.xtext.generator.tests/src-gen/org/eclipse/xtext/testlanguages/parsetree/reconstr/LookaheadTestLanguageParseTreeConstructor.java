@@ -9,12 +9,15 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
-import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.LookaheadTestLanguageGrammarAccess;
 
+import com.google.inject.Inject;
 
 public class LookaheadTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 		
+	@Inject
+	private LookaheadTestLanguageGrammarAccess grammarAccess;
+	
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
@@ -44,7 +47,7 @@ protected class Entry_Assignment_contents extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return LookaheadTestLanguageGrammarAccess.INSTANCE.prEntry().eleAssignmentContents();
+		return grammarAccess.prEntry().eleAssignmentContents();
 	}
 	
 	@Override
@@ -86,7 +89,7 @@ protected class Alts_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return LookaheadTestLanguageGrammarAccess.INSTANCE.prAlts().eleAlternatives();
+		return grammarAccess.prAlts().eleAlternatives();
 	}
 
 	@Override	
@@ -108,7 +111,7 @@ protected class Alts_0_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return LookaheadTestLanguageGrammarAccess.INSTANCE.prAlts().ele0Alternatives();
+		return grammarAccess.prAlts().ele0Alternatives();
 	}
 
 	@Override	
@@ -130,7 +133,7 @@ protected class Alts_0_0_RuleCall_LookAhead0 extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return LookaheadTestLanguageGrammarAccess.INSTANCE.prAlts().ele00ParserRuleCallLookAhead0();
+		return grammarAccess.prAlts().ele00ParserRuleCallLookAhead0();
 	}
 	
 	@Override
@@ -149,7 +152,7 @@ protected class Alts_0_1_RuleCall_LookAhead1 extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return LookaheadTestLanguageGrammarAccess.INSTANCE.prAlts().ele01ParserRuleCallLookAhead1();
+		return grammarAccess.prAlts().ele01ParserRuleCallLookAhead1();
 	}
 	
 	@Override
@@ -169,7 +172,7 @@ protected class Alts_1_RuleCall_LookAhead3 extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return LookaheadTestLanguageGrammarAccess.INSTANCE.prAlts().ele1ParserRuleCallLookAhead3();
+		return grammarAccess.prAlts().ele1ParserRuleCallLookAhead3();
 	}
 	
 	@Override
@@ -199,7 +202,7 @@ protected class LookAhead0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead0().eleGroup();
+		return grammarAccess.prLookAhead0().eleGroup();
 	}
 		
 	@Override
@@ -228,7 +231,7 @@ protected class LookAhead0_0_Keyword_bar extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead0().ele0KeywordBar();
+		return grammarAccess.prLookAhead0().ele0KeywordBar();
 	}	
 }
 
@@ -240,7 +243,7 @@ protected class LookAhead0_1_Assignment_x extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead0().ele1AssignmentX();
+		return grammarAccess.prLookAhead0().ele1AssignmentX();
 	}
 	
 	@Override
@@ -250,7 +253,7 @@ protected class LookAhead0_1_Assignment_x extends AssignmentToken  {
 
 		if("a".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead0().ele10KeywordA();
+			element = grammarAccess.prLookAhead0().ele10KeywordA();
 			return new Solution(obj);
 		}
 
@@ -277,7 +280,7 @@ protected class LookAhead1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead1().eleGroup();
+		return grammarAccess.prLookAhead1().eleGroup();
 	}
 		
 	@Override
@@ -306,7 +309,7 @@ protected class LookAhead1_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead1().ele0Group();
+		return grammarAccess.prLookAhead1().ele0Group();
 	}
 		
 	@Override
@@ -335,7 +338,7 @@ protected class LookAhead1_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead1().ele00Group();
+		return grammarAccess.prLookAhead1().ele00Group();
 	}
 		
 	@Override
@@ -364,7 +367,7 @@ protected class LookAhead1_0_0_0_Keyword_foo extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead1().ele000KeywordFoo();
+		return grammarAccess.prLookAhead1().ele000KeywordFoo();
 	}	
 }
 
@@ -376,7 +379,7 @@ protected class LookAhead1_0_0_1_Assignment_y extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead1().ele001AssignmentY();
+		return grammarAccess.prLookAhead1().ele001AssignmentY();
 	}
 	
 	@Override
@@ -409,7 +412,7 @@ protected class LookAhead1_0_1_Assignment_x extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead1().ele01AssignmentX();
+		return grammarAccess.prLookAhead1().ele01AssignmentX();
 	}
 	
 	@Override
@@ -419,7 +422,7 @@ protected class LookAhead1_0_1_Assignment_x extends AssignmentToken  {
 
 		if("b".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead1().ele010KeywordB();
+			element = grammarAccess.prLookAhead1().ele010KeywordB();
 			return new Solution(obj);
 		}
 
@@ -436,7 +439,7 @@ protected class LookAhead1_1_Assignment_x extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead1().ele1AssignmentX();
+		return grammarAccess.prLookAhead1().ele1AssignmentX();
 	}
 	
 	@Override
@@ -446,7 +449,7 @@ protected class LookAhead1_1_Assignment_x extends AssignmentToken  {
 
 		if("d".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead1().ele10KeywordD();
+			element = grammarAccess.prLookAhead1().ele10KeywordD();
 			return new Solution(obj);
 		}
 
@@ -473,7 +476,7 @@ protected class LookAhead2_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead2().eleGroup();
+		return grammarAccess.prLookAhead2().eleGroup();
 	}
 		
 	@Override
@@ -502,7 +505,7 @@ protected class LookAhead2_0_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead2().ele0Alternatives();
+		return grammarAccess.prLookAhead2().ele0Alternatives();
 	}
 
 	@Override	
@@ -524,7 +527,7 @@ protected class LookAhead2_0_0_Assignment_z extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead2().ele00AssignmentZ();
+		return grammarAccess.prLookAhead2().ele00AssignmentZ();
 	}
 	
 	@Override
@@ -534,7 +537,7 @@ protected class LookAhead2_0_0_Assignment_z extends AssignmentToken  {
 
 		if("foo".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead2().ele000KeywordFoo();
+			element = grammarAccess.prLookAhead2().ele000KeywordFoo();
 			return new Solution(obj);
 		}
 
@@ -550,7 +553,7 @@ protected class LookAhead2_0_1_Assignment_z extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead2().ele01AssignmentZ();
+		return grammarAccess.prLookAhead2().ele01AssignmentZ();
 	}
 	
 	@Override
@@ -560,7 +563,7 @@ protected class LookAhead2_0_1_Assignment_z extends AssignmentToken  {
 
 		if("bar".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead2().ele010KeywordBar();
+			element = grammarAccess.prLookAhead2().ele010KeywordBar();
 			return new Solution(obj);
 		}
 
@@ -577,7 +580,7 @@ protected class LookAhead2_1_Keyword_c extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead2().ele1KeywordC();
+		return grammarAccess.prLookAhead2().ele1KeywordC();
 	}	
 }
 
@@ -600,7 +603,7 @@ protected class LookAhead3_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead3().eleGroup();
+		return grammarAccess.prLookAhead3().eleGroup();
 	}
 		
 	@Override
@@ -629,7 +632,7 @@ protected class LookAhead3_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead3().ele0Group();
+		return grammarAccess.prLookAhead3().ele0Group();
 	}
 		
 	@Override
@@ -658,7 +661,7 @@ protected class LookAhead3_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead3().ele00Group();
+		return grammarAccess.prLookAhead3().ele00Group();
 	}
 		
 	@Override
@@ -687,7 +690,7 @@ protected class LookAhead3_0_0_0_Keyword_foo extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead3().ele000KeywordFoo();
+		return grammarAccess.prLookAhead3().ele000KeywordFoo();
 	}	
 }
 
@@ -699,7 +702,7 @@ protected class LookAhead3_0_0_1_Keyword_bar extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead3().ele001KeywordBar();
+		return grammarAccess.prLookAhead3().ele001KeywordBar();
 	}	
 }
 
@@ -712,7 +715,7 @@ protected class LookAhead3_0_1_Assignment_x extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead3().ele01AssignmentX();
+		return grammarAccess.prLookAhead3().ele01AssignmentX();
 	}
 	
 	@Override
@@ -722,7 +725,7 @@ protected class LookAhead3_0_1_Assignment_x extends AssignmentToken  {
 
 		if("b".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead3().ele010KeywordB();
+			element = grammarAccess.prLookAhead3().ele010KeywordB();
 			return new Solution(obj);
 		}
 
@@ -739,7 +742,7 @@ protected class LookAhead3_1_Assignment_z extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead3().ele1AssignmentZ();
+		return grammarAccess.prLookAhead3().ele1AssignmentZ();
 	}
 	
 	@Override
@@ -782,7 +785,7 @@ protected class LookAhead4_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead4().eleAlternatives();
+		return grammarAccess.prLookAhead4().eleAlternatives();
 	}
 
 	@Override	
@@ -804,7 +807,7 @@ protected class LookAhead4_0_Assignment_x extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead4().ele0AssignmentX();
+		return grammarAccess.prLookAhead4().ele0AssignmentX();
 	}
 	
 	@Override
@@ -814,7 +817,7 @@ protected class LookAhead4_0_Assignment_x extends AssignmentToken  {
 
 		if("c".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead4().ele00KeywordC();
+			element = grammarAccess.prLookAhead4().ele00KeywordC();
 			return new Solution(obj);
 		}
 
@@ -830,7 +833,7 @@ protected class LookAhead4_1_Assignment_x extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead4().ele1AssignmentX();
+		return grammarAccess.prLookAhead4().ele1AssignmentX();
 	}
 	
 	@Override
@@ -840,7 +843,7 @@ protected class LookAhead4_1_Assignment_x extends AssignmentToken  {
 
 		if("d".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead4().ele10KeywordD();
+			element = grammarAccess.prLookAhead4().ele10KeywordD();
 			return new Solution(obj);
 		}
 

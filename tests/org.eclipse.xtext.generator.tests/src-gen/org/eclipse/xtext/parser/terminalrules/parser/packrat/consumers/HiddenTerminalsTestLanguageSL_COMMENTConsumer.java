@@ -3,13 +3,11 @@ Generated with Xtext
 */
 package org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers;
 
-import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
-import org.eclipse.xtext.parser.terminalrules.services.HiddenTerminalsTestLanguageGrammarAccess;
 
 
 @SuppressWarnings("unused")
@@ -20,6 +18,7 @@ public final class HiddenTerminalsTestLanguageSL_COMMENTConsumer extends Abstrac
 		super(configuration);
 	}
 	
+	@Override
 	protected int doConsume() {
 		return consumeGroup$1() ? ConsumeResult.SUCCESS : ConsumeResult.EMPTY_MATCH;
 	}
@@ -105,10 +104,6 @@ public final class HiddenTerminalsTestLanguageSL_COMMENTConsumer extends Abstrac
 
 	protected boolean consumeKeyword$10() {
 		return readChar('\n');
-	}
-
-	public AbstractRule doGetRule() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prSL_COMMENT().getRule();
 	}
 	
 }

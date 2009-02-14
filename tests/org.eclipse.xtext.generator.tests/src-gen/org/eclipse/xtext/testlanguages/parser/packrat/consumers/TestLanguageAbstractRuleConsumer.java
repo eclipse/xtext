@@ -22,6 +22,8 @@ import org.eclipse.xtext.testlanguages.parser.packrat.consumers.TestLanguageRedu
 @SuppressWarnings("unused")
 public final class TestLanguageAbstractRuleConsumer extends NonTerminalConsumer {
 
+	private AbstractRuleElements rule;
+	
 	private INonTerminalConsumer choiceRuleConsumer;
 	private INonTerminalConsumer reducibleRuleConsumer;
 
@@ -62,7 +64,12 @@ public final class TestLanguageAbstractRuleConsumer extends NonTerminalConsumer 
 	}
 
 	public AbstractRuleElements getRule() {
-		return TestLanguageGrammarAccess.INSTANCE.prAbstractRule();
+	// TestLanguageGrammarAccess.INSTANCE.prAbstractRule()
+		return rule;
+	}
+	
+	public void setRule(AbstractRuleElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

@@ -23,6 +23,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGCons
 @SuppressWarnings("unused")
 public final class TreeTestLanguageNodeConsumer extends NonTerminalConsumer {
 
+	private NodeElements rule;
+	
 	private ITerminalConsumer idConsumer;
 	private INonTerminalConsumer nodeConsumer;
 	private ITerminalConsumer stringConsumer;
@@ -180,7 +182,12 @@ public final class TreeTestLanguageNodeConsumer extends NonTerminalConsumer {
 	}
 
 	public NodeElements getRule() {
-		return TreeTestLanguageGrammarAccess.INSTANCE.prNode();
+	// TreeTestLanguageGrammarAccess.INSTANCE.prNode()
+		return rule;
+	}
+	
+	public void setRule(NodeElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

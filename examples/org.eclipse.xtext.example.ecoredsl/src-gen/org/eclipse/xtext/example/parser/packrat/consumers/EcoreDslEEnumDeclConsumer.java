@@ -23,6 +23,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer
 @SuppressWarnings("unused")
 public final class EcoreDslEEnumDeclConsumer extends NonTerminalConsumer {
 
+	private EEnumDeclElements rule;
+	
 	private INonTerminalConsumer eAnnotationDeclConsumer;
 	private INonTerminalConsumer eEnumLiteralDeclConsumer;
 	private ITerminalConsumer idConsumer;
@@ -125,17 +127,11 @@ public final class EcoreDslEEnumDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int doConsumeAssignment$6(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(eAnnotationDeclConsumer, "eAnnotations", true, false, false, getRule().ele000000ParserRuleCallEAnnotationDecl());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$7(entryPoint);
+	}
+
+	protected int consumeRuleCall$7(int entryPoint) throws Exception {
+		return consumeNonTerminal(eAnnotationDeclConsumer, "eAnnotations", true, false, false, getRule().ele000000ParserRuleCallEAnnotationDecl());
 	}
 
 	protected int consumeKeyword$8(int entryPoint) throws Exception {
@@ -143,17 +139,11 @@ public final class EcoreDslEEnumDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$9(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "name", false, false, getRule().ele00010LexerRuleCallID(), getRuleCall$10$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$10(entryPoint);
+	}
+
+	protected int consumeRuleCall$10(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "name", false, false, getRule().ele00010LexerRuleCallID(), getRuleCall$10$Delimiter());
 	}
 
 	protected int consumeKeyword$11(int entryPoint) throws Exception {
@@ -180,9 +170,8 @@ public final class EcoreDslEEnumDeclConsumer extends NonTerminalConsumer {
 					marker.rollback();
 					announceLevelFinished();
 					return ConsumeResult.SUCCESS;
-				} else {
-					error("Could not find token.", getRule().ele01AssignmentELiterals());
 				}
+				error("Could not find token.", getRule().ele01AssignmentELiterals());
 		}
 		announceLevelFinished();
 		marker.commit();
@@ -190,17 +179,11 @@ public final class EcoreDslEEnumDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int doConsumeAssignment$12(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(eEnumLiteralDeclConsumer, "eLiterals", true, false, false, getRule().ele010ParserRuleCallEEnumLiteralDecl());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$13(entryPoint);
+	}
+
+	protected int consumeRuleCall$13(int entryPoint) throws Exception {
+		return consumeNonTerminal(eEnumLiteralDeclConsumer, "eLiterals", true, false, false, getRule().ele010ParserRuleCallEEnumLiteralDecl());
 	}
 
 	protected int consumeKeyword$14(int entryPoint) throws Exception {
@@ -208,7 +191,12 @@ public final class EcoreDslEEnumDeclConsumer extends NonTerminalConsumer {
 	}
 
 	public EEnumDeclElements getRule() {
-		return EcoreDslGrammarAccess.INSTANCE.prEEnumDecl();
+	// EcoreDslGrammarAccess.INSTANCE.prEEnumDecl()
+		return rule;
+	}
+	
+	public void setRule(EEnumDeclElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

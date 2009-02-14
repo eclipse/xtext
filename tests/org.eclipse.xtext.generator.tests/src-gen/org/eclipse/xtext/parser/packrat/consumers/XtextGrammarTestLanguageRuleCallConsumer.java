@@ -21,6 +21,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer
 @SuppressWarnings("unused")
 public final class XtextGrammarTestLanguageRuleCallConsumer extends NonTerminalConsumer {
 
+	private RuleCallElements rule;
+	
 	private ITerminalConsumer idConsumer;
 
 	private ISequenceMatcher crossReference$2$Delimiter;
@@ -44,7 +46,12 @@ public final class XtextGrammarTestLanguageRuleCallConsumer extends NonTerminalC
 	}
 
 	public RuleCallElements getRule() {
-		return XtextGrammarTestLanguageGrammarAccess.INSTANCE.prRuleCall();
+	// XtextGrammarTestLanguageGrammarAccess.INSTANCE.prRuleCall()
+		return rule;
+	}
+	
+	public void setRule(RuleCallElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override
