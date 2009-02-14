@@ -172,10 +172,10 @@ public abstract class AbstractParseTreeConstructor implements
 				b.append(" ");
 			return b.toString();
 		}
-		
+
 		@Inject
 		protected ITokenSerializer tokenSerializer;
-		
+
 		private String dsl(AbstractToken ele) {
 			ByteArrayOutputStream out = new ByteArrayOutputStream();
 			try {
@@ -202,7 +202,7 @@ public abstract class AbstractParseTreeConstructor implements
 
 			if (t1 == null)
 				return required ? null : new Solution(current, predecessor);
-			
+
 			otherSolution = required ? null : new Solution(current,	predecessor);
 			if (many) {
 				AbstractToken t = newInstance(t1.getCurrent(), t1

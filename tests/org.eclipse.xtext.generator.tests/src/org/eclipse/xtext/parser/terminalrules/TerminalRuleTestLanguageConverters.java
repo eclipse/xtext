@@ -24,14 +24,14 @@ import com.google.inject.Inject;
  */
 public class TerminalRuleTestLanguageConverters extends AbstractAnnotationBasedValueConverterService {
 
-	// copied from XtextBuiltIn but without rule for int 
+	// copied from XtextBuiltIn but without rule for int
 	private Grammar g;
-	
+
 	@Inject
 	public void setGrammar(IGrammarAccess ga) {
 		this.g = ga.getGrammar();
 	}
-	
+
 	@ValueConverter(rule = "ID")
 	public IValueConverter<String> ID() {
 		return new AbstractNullSafeConverter<String>() {
@@ -45,7 +45,7 @@ public class TerminalRuleTestLanguageConverters extends AbstractAnnotationBasedV
 				if (GrammarUtil.getAllKeywords(g).contains(value)) {
 					return "^"+value;
 				}
-				return (String) value;
+				return value;
 			}
 		};
 	}
@@ -53,6 +53,7 @@ public class TerminalRuleTestLanguageConverters extends AbstractAnnotationBasedV
 	@ValueConverter(rule = "STRING")
 	public IValueConverter<String> STRING() {
 		return new AbstractNullSafeConverter<String>() {
+			@Override
 			protected String internalToValue(String string, AbstractNode node) {
 				return Strings.convertFromJavaString(string.substring(1, string.length() - 1));
 			}

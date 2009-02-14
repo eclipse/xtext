@@ -9,11 +9,9 @@ package org.eclipse.xtext.valueconverter;
 
 import java.util.Arrays;
 
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.parser.AbstractParserComparingTest;
 import org.eclipse.xtext.parser.IParser;
-import org.eclipse.xtext.parsetree.ParsetreePackage;
 import org.eclipse.xtext.util.CollectionUtils;
 import org.eclipse.xtext.util.Function;
 import org.eclipse.xtext.util.Pair;
@@ -75,15 +73,6 @@ public class ParserComparingTest extends AbstractParserComparingTest {
 				return Tuples.create(param, param);
 			}
 		});
-	}
-
-	// XXX FixMe: GrammarAccess has to modularized and used in NonTerminals in a non static way
-	@Override
-	protected EStructuralFeature[] getIgnoredFeatures() {
-		return new EStructuralFeature[]{
-				ParsetreePackage.eINSTANCE.getCompositeNode_LookaheadLeafNodes(),
-				ParsetreePackage.eINSTANCE.getAbstractNode_GrammarElement()
-		};
 	}
 
 	@Override

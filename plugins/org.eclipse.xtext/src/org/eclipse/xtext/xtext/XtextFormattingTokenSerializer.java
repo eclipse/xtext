@@ -20,14 +20,21 @@ import org.eclipse.xtext.services.XtextGrammarAccess.LexerRuleElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.ParenthesizedElementElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.ParserRuleElements;
 
+import com.google.inject.Inject;
+
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class XtextFormattingTokenSerializer extends FormattingTokenSerializer {
 
+	@Inject
+	public XtextFormattingTokenSerializer(XtextGrammarAccess grammarAccess) {
+		super(grammarAccess);
+	}
+
 	@Override
 	protected void configureFormatting(FormattingConfig cfg) {
-		XtextGrammarAccess g = XtextGrammarAccess.INSTANCE;
+		XtextGrammarAccess g = (XtextGrammarAccess) getGrammarAccess();
 
 		// Grammar
 		GrammarElements gr = g.prGrammar();
@@ -61,17 +68,17 @@ public class XtextFormattingTokenSerializer extends FormattingTokenSerializer {
 		ParenthesizedElementElements pe = g.prParenthesizedElement();
 		cfg.setNoSpace().after(pe.ele00KeywordLeftParenthesis());
 		cfg.setNoSpace().before(pe.ele1KeywordRightParenthesis());
-		
+
 		// CrossReference
 		CrossReferenceElements cr = g.prCrossReference();
 		cfg.setNoSpace().after(cr.ele000KeywordLeftSquareBracket());
 		cfg.setNoSpace().before(cr.ele1KeywordRightSquareBracket());
 		cfg.setNoSpace().around(cr.ele010KeywordVerticalLine());
-		
+
 		// Alternatives
 		AlternativesElements al = g.prAlternatives();
 		cfg.setNoSpace().around(al.ele101KeywordVerticalLine());
-		
+
 		// Action
 		ActionElements ac = g.prAction();
 		cfg.setNoSpace().around(ac.ele001AssignmentOperator());

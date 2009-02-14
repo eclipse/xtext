@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.grammarinheritance.parser.packrat.consumers;
 
-import org.eclipse.xtext.LexerRule;
-import org.eclipse.xtext.grammarinheritance.services.AbstractTestLanguageGrammarAccess;
 import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumerConfiguration;
@@ -33,11 +31,12 @@ public class AbstractTestLanguageIDConsumer extends AbstractRuleAwareTerminalCon
 			ICharacterClass.Factory.create('_'),
 			ICharacterClass.Factory.createRange('0', '9')
 	);
-	
+
 	public AbstractTestLanguageIDConsumer(ITerminalConsumerConfiguration configuration) {
 		super(configuration);
 	}
 
+	@Override
 	public int doConsume() {
 		boolean result = true;
 		readChar('^');
@@ -48,11 +47,6 @@ public class AbstractTestLanguageIDConsumer extends AbstractRuleAwareTerminalCon
 			}
 		}
 		return result ? ConsumeResult.SUCCESS : ConsumeResult.EMPTY_MATCH;
-	}
-
-	@Override
-	protected LexerRule doGetRule() {
-		return AbstractTestLanguageGrammarAccess.INSTANCE.lrID();
 	}
 
 }

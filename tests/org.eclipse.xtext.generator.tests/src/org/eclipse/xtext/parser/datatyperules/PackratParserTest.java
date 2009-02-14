@@ -24,17 +24,16 @@ public class PackratParserTest extends ParserTest {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		this.parser = new DatatypeRulesTestLanguagePackratParser();
+		this.parser = get(DatatypeRulesTestLanguagePackratParser.class);
 		ParseResultFactory factory = new ParseResultFactory();
 		factory.setFactory(getASTFactory());
-		this.parser.setParseResultFactory(factory);
 	}
-	
+
 	@Override
 	public void testParseWithFractionErrorAndSyntaxError() {
 		assertTrue("TODO SZ", true);
 	}
-	
+
 	@Override
 	public void testParseErrors_01() throws Exception {
 		assertTrue("TODO SZ", true);

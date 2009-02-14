@@ -22,13 +22,14 @@ import org.eclipse.xtext.tests.AbstractGeneratorTest;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class ParserTest extends AbstractGeneratorTest {
-	
+
 	private EStructuralFeature idFeature;
 	private EStructuralFeature valueFeature;
 	private EStructuralFeature modelFeature;
 	private EStructuralFeature dotsFeature;
 	private EStructuralFeature vectorFeature;
 
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		with(DatatypeRulesTestLanguageStandaloneSetup.class);
@@ -41,7 +42,7 @@ public class ParserTest extends AbstractGeneratorTest {
 		EClass compositeModel = (EClass) pack.getEClassifier("CompositeModel");
 		modelFeature = compositeModel.getEStructuralFeature("model");
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public void testParseSimple() throws Exception {
 		String model = "a.b.c.d;";
@@ -54,7 +55,7 @@ public class ParserTest extends AbstractGeneratorTest {
 		assertEquals("a.b.c.d", id);
 		assertFalse(firstModel.eIsSet(valueFeature));
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public void testParseSimpleWithSpaces() throws Exception {
 		String model = " a . b . c . d ;";
@@ -66,7 +67,7 @@ public class ParserTest extends AbstractGeneratorTest {
 		assertEquals("a . b . c . d", id);
 		assertFalse(firstModel.eIsSet(valueFeature));
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public void testParseSimpleWithMultipleSpaces() throws Exception {
 		String model = "  a  .  b  .  c  .  d  ;";
@@ -78,7 +79,7 @@ public class ParserTest extends AbstractGeneratorTest {
 		assertEquals("a . b . c . d", id);
 		assertFalse(firstModel.eIsSet(valueFeature));
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public void testParseWithFraction() throws Exception {
 		String model = "a.b.c.d: 1/2;";
@@ -90,7 +91,7 @@ public class ParserTest extends AbstractGeneratorTest {
 		assertNotNull(bd);
 		assertEquals(new BigDecimal("0.5"), bd);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public void testParseWithFractionError() throws Exception {
 		String model = "a.b.c.d: 1/0;";
@@ -104,7 +105,7 @@ public class ParserTest extends AbstractGeneratorTest {
 		assertEquals(model.indexOf("1/0"), diag.getOffset());
 		assertEquals(3, diag.getLength());
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public void testParseWithFractionErrorAndSpaces() throws Exception {
 		String model = "a.b.c.d:  1 / 0 ; ";
@@ -118,7 +119,7 @@ public class ParserTest extends AbstractGeneratorTest {
 		assertEquals(model.indexOf("1 / 0"), diag.getOffset());
 		assertEquals(5, diag.getLength());
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public void testParseWithFractionErrorAndSyntaxError() throws Exception {
 		String model = "a.b.c.d: 1/0 ";
@@ -135,7 +136,7 @@ public class ParserTest extends AbstractGeneratorTest {
 		assertEquals(model.length() - 1, diag.getOffset());
 		assertEquals(1, diag.getLength());
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public void testParseWithVector() throws Exception {
 		String model = "a.b.c.d # (1 2);";
@@ -147,7 +148,7 @@ public class ParserTest extends AbstractGeneratorTest {
 		assertNotNull(vector);
 		assertEquals("(1 2)", vector);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public void testParseWithVectorAndComment() throws Exception {
 		String model = "a.b.c.d # (1/*comment*/2);";
@@ -159,7 +160,7 @@ public class ParserTest extends AbstractGeneratorTest {
 		assertNotNull(vector);
 		assertEquals("(1 2)", vector);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public void testParseWithDots() throws Exception {
 		String model = "a.b.c.d + . .;";
@@ -171,7 +172,7 @@ public class ParserTest extends AbstractGeneratorTest {
 		assertNotNull(vector);
 		assertEquals(". .", vector);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public void testParseWithDotsAndLinebreak() throws Exception {
 		String model = "a.b.c.d + .\n.;";
@@ -183,7 +184,7 @@ public class ParserTest extends AbstractGeneratorTest {
 		assertNotNull(vector);
 		assertEquals(". .", vector);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public void testParseWithDotsAndComments() throws Exception {
 		String model = "a.b.c.d + ./*comment*/.;";
@@ -195,7 +196,7 @@ public class ParserTest extends AbstractGeneratorTest {
 		assertNotNull(vector);
 		assertEquals(". .", vector);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public void testParseWithDoubleDots() throws Exception {
 		String model = "a.b.c.d + ..;";
@@ -221,7 +222,7 @@ public class ParserTest extends AbstractGeneratorTest {
 		assertNotNull(id);
 		assertEquals("a.b.c.d", id);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public void testParseErrors_02() throws Exception {
 		String model = "a.b.c.";
@@ -235,7 +236,7 @@ public class ParserTest extends AbstractGeneratorTest {
 		assertNotNull(id);
 		assertEquals("a.b.c.", id);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public void testParseErrors_03() throws Exception {
 		String model = "a.b.c. ;";
@@ -249,7 +250,7 @@ public class ParserTest extends AbstractGeneratorTest {
 		assertNotNull(id);
 		assertEquals("a.b.c. ;", id);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public void testParseErrors_04() throws Exception {
 		String model = "a.b.c";
