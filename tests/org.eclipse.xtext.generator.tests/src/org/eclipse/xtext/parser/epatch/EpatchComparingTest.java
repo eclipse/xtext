@@ -11,8 +11,8 @@ import java.io.IOException;
 import java.util.Iterator;
 
 import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.parser.AbstractPackratAntlrComparingTest;
-import org.eclipse.xtext.parser.epatch.parser.packrat.EpatchTestLanguagePackratParser;
+import org.eclipse.xtext.parser.AbstractParserComparingTest;
+import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.util.CollectionUtils;
 import org.eclipse.xtext.util.Function;
 import org.eclipse.xtext.util.Pair;
@@ -21,14 +21,7 @@ import org.eclipse.xtext.util.Tuples;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class EpatchComparingTest extends AbstractPackratAntlrComparingTest {
-
-	@Override
-	protected EpatchTestLanguagePackratParser createPackratParser() {
-		EpatchTestLanguagePackratParser result = new EpatchTestLanguagePackratParser();
-		setAstFactory(result);
-		return result;
-	}
+public class EpatchComparingTest extends AbstractParserComparingTest {
 
 	@Override
 	protected Iterable<Pair<String, String>> getAllModels() {
@@ -43,7 +36,7 @@ public class EpatchComparingTest extends AbstractPackratAntlrComparingTest {
 					throw new RuntimeException(e);
 				}
 				System.out.println(filename);
-				return Tuples.create(filename.substring(filename.lastIndexOf('/') + 1), model);				
+				return Tuples.create(filename.substring(filename.lastIndexOf('/') + 1), model);
 			}
 		});
 	}
@@ -54,13 +47,13 @@ public class EpatchComparingTest extends AbstractPackratAntlrComparingTest {
 		final String root = (getClass().getPackage().getName() + ".testcases.").replace('.', '/');
 		return new Iterator<String>() {
 			private int current = 1;
-			
+
 			private String getCurrentAsString() {
 				if (current < 10)
 					return "0" + Integer.toString(current);
 				return Integer.toString(current);
 			}
-			
+
 			public boolean hasNext() {
 				return false;
 				// TODO: uncomment if packrat parser can backtrack optional elements in groups
@@ -76,7 +69,7 @@ public class EpatchComparingTest extends AbstractPackratAntlrComparingTest {
 			public void remove() {
 				throw new UnsupportedOperationException();
 			}
-			
+
 		};
 	}
 
@@ -84,5 +77,17 @@ public class EpatchComparingTest extends AbstractPackratAntlrComparingTest {
 	protected Class<? extends ISetup> getStandaloneSetupClass() {
 		return EpatchTestLanguageStandaloneSetup.class;
 	}
+
+	@Override
+	protected IParser createFirstParser() {
+		return getAntlrParser();
+	}
+
+	@Override
+	protected IParser createSecondParser() {
+		return getPackratParser();
+	}
+
+
 
 }
