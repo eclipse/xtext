@@ -7,11 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.testlanguages.parser.packrat.consumers;
 
-import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumerConfiguration;
-import org.eclipse.xtext.testlanguages.services.LexerTestLanguageGrammarAccess;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -29,12 +27,5 @@ public class LexerTestLanguageSTRINGConsumer extends AbstractRuleAwareTerminalCo
 		readChars('B');
  		return ConsumeResult.SUCCESS;
 	}
-
-	@Override
-	protected LexerRule doGetRule() {
-		return LexerTestLanguageGrammarAccess.INSTANCE.lrSTRING();
-	}
-
-	
 
 }

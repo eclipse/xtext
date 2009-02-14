@@ -12,6 +12,7 @@
 «REM»
 /**
  * @author Moritz Eysholdt
+ * @author Sebastian Zarnekow
  */
  «ENDREM»
 
@@ -33,28 +34,47 @@
 package «grammar().gaFQName().toJavaPackage()»;
 
 import com.google.inject.Singleton;
+import com.google.inject.Inject;
+
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parser.BaseEPackageAccess;
+
+import org.eclipse.xtext.service.GrammarProvider;
+
+«IF grammar().getSuperGrammar() != null-»
+import «grammar().getSuperGrammar().gaFQName()»;
+«ENDIF-»
 
 @Singleton
-public class «grammar().gaSimpleName()» extends BaseEPackageAccess implements IGrammarAccess {
-	«EXPAND parseRuleClasses FOREACH grammar().allParserRules()-»
+public class «grammar().gaSimpleName()» implements IGrammarAccess {
 	
-	public final static «grammar().gaSimpleName()» INSTANCE = new «grammar().gaSimpleName()»();
+	«EXPAND parseRuleClasses FOREACH grammar().rules.typeSelect(ParserRule)-»
+	
+	«EXPAND cache FOREACH grammar().rules-»
+	
+	private final GrammarProvider grammarProvider;
+«IF grammar().getSuperGrammar() != null-»
 
-	private static final String «languageName().toUpperCase()»_GRAMMAR_CP_URI = "«grammarResourceURI(grammar())»";
-	private static Grammar GRAMMAR = null;
-	«EXPAND cache FOREACH grammar().allRules()-»
+	private «grammar().getSuperGrammar().gaSimpleName()» superGrammarAccess;
+«ENDIF-»
 
-	@SuppressWarnings("unused")
-	public synchronized Grammar getGrammar() {	
-		if (GRAMMAR==null) {
-			// assert the XtextPackage implementation is loaded
-			XtextPackage xtextPackage = XtextPackage.eINSTANCE;
-			GRAMMAR = (Grammar) loadGrammarFile(«genClassFQName.toSimpleName()».class.getClassLoader(),«languageName().toUpperCase()»_GRAMMAR_CP_URI);
-		}
-		return GRAMMAR;
+	@Inject
+	public «grammar().gaSimpleName()»(GrammarProvider grammarProvider«IF grammar().getSuperGrammar() != null», «grammar().getSuperGrammar().gaSimpleName()» superGrammarAccess«ENDIF») {
+		this.grammarProvider = grammarProvider;
+«IF grammar().getSuperGrammar() != null-»
+		this.superGrammarAccess = superGrammarAccess;
+«ENDIF-»
 	}
+	
+	public Grammar getGrammar() {	
+		return grammarProvider.getGrammar(this);
+	}
+	
+«IF grammar().getSuperGrammar() != null-»
+
+	public «grammar().getSuperGrammar().gaSimpleName()» getSuperGrammarAccess() {
+		return superGrammarAccess;
+	}
+«ENDIF-»
 
 	«EXPAND getter FOREACH grammar().allRules()-»
 }
@@ -82,15 +102,15 @@ public class «grammar().gaSimpleName()» extends BaseEPackageAccess implements IG
 	
 
 «DEFINE cache FOR AbstractRule»
-	// FIXME: unknown rule type «metaType»
+«ERROR "unknown rule type " + metaType»
 «ENDDEFINE»
 
 «DEFINE cache FOR ParserRule-»
-	private static «gaRuleAccesorClassName()» «gaRuleAccessorLocalVarName()»;
+	private «gaRuleAccesorClassName()» «gaRuleAccessorLocalVarName()»;
 «ENDDEFINE»
 
 «DEFINE cache FOR LexerRule-»
-	private static LexerRule «gaRuleAccessorLocalVarName()»;
+	private LexerRule «gaRuleAccessorLocalVarName()»;
 «ENDDEFINE»
 
 
@@ -101,14 +121,22 @@ public class «grammar().gaSimpleName()» extends BaseEPackageAccess implements IG
 
 «DEFINE getter FOR ParserRule»
 	// «grammarFragmentToStr()»
-	public «gaRuleAccesorClassName()» «gaRuleAccessMethodName()»() {
+	public «IF containingGrammar() != grammar()»«containingGrammar().gaFQName()».«ENDIF»«gaRuleAccesorClassName()» «gaRuleAccessMethodName()»() {
+«IF containingGrammar() == grammar()-»
 		return («gaRuleAccessorLocalVarName()» != null) ? «gaRuleAccessorLocalVarName()» : («gaRuleAccessorLocalVarName()» = new «gaRuleAccesorClassName()»());
+«ELSE-»
+		return superGrammarAccess.«gaRuleAccessMethodName()»();
+«ENDIF-»
 	} 
 «ENDDEFINE»
 
 «DEFINE getter FOR LexerRule»
 	// «grammarFragmentToStr()»
 	public LexerRule «gaRuleAccessMethodName()»() {
+«IF containingGrammar() == grammar()-»
 		return («gaRuleAccessorLocalVarName()» != null) ? «gaRuleAccessorLocalVarName()» : («gaRuleAccessorLocalVarName()» = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "«name»"));
+«ELSE-»
+		return superGrammarAccess.«gaRuleAccessMethodName()»();
+«ENDIF-»
 	} 
 «ENDDEFINE»

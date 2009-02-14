@@ -47,6 +47,8 @@ import «calledRule.containingGrammar().getNamespace()».parser.packrat.consumers.
 @SuppressWarnings("unused")
 public final class «this.consumerClassName()» extends NonTerminalConsumer {
 
+	private «this.name»Elements rule;
+	
 «FOREACH allCalledRules() AS calledRule-»
 	private «calledRule.consumerInterfaceName()» «calledRule.consumerFieldName()»;
 «ENDFOREACH-»
@@ -64,7 +66,12 @@ public final class «this.consumerClassName()» extends NonTerminalConsumer {
 «EXPAND defineConsume FOR alternatives-»
 
 	public «this.name»Elements getRule() {
-		return «grammar().grammarAccess().toSimpleName()».INSTANCE.pr«this.name»();
+	// «grammar().grammarAccess().toSimpleName()».INSTANCE.pr«this.name»()
+		return rule;
+	}
+	
+	public void setRule(«this.name»Elements rule) {
+		this.rule = rule;
 	}
 	
 	@Override
@@ -284,9 +291,8 @@ public final class «this.consumerClassName()» extends NonTerminalConsumer {
 					marker.rollback();
 					announceLevelFinished();
 					return ConsumeResult.SUCCESS;
-				} else {
-					error("Could not find token.", getRule().«gaElementAccessMethodeName()»());
 				}
+				error("Could not find token.", getRule().«gaElementAccessMethodeName()»());
 		}
 		announceLevelFinished();
 		marker.commit();

@@ -29,13 +29,10 @@
 */
 package «this.consumerPackageName()»;
 
-import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
-
-import «this.containingGrammar().grammarAccess()»;
 
 @SuppressWarnings("unused")
 public final class «this.consumerClassName()» extends AbstractRuleAwareTerminalConsumer {
@@ -44,14 +41,12 @@ public final class «this.consumerClassName()» extends AbstractRuleAwareTerminalC
 		super(configuration);
 	}
 	
+	@Override
 	protected int doConsume() {
 		throw new UnsupportedOperationException("TerminalConsumers for lexer rules have to be implemented by hand.\n" +
 		   "Maybe you should try to use terminal rules or datatype rules instead.");
 	}
-
-	public AbstractRule doGetRule() {
-		return «grammar().grammarAccess().toSimpleName()».INSTANCE.lr«this.name»();
-	}
+	
 }
 «ENDFILE»
 «ENDDEFINE»
@@ -63,13 +58,11 @@ public final class «this.consumerClassName()» extends AbstractRuleAwareTerminalC
 */
 package «this.consumerPackageName()»;
 
-import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
-import «this.containingGrammar().grammarAccess()»;
 
 «FOREACH allCalledRules() AS calledRule-»
 import «calledRule.containingGrammar().getNamespace()».parser.packrat.consumers.«calledRule.consumerClassName()»;
@@ -86,14 +79,11 @@ public final class «this.consumerClassName()» extends AbstractRuleAwareTerminalC
 		super(configuration);
 	}
 	
+	@Override
 	protected int doConsume() {
 		return «alternatives.consumeMethodName()»() ? ConsumeResult.SUCCESS : ConsumeResult.EMPTY_MATCH;
 	}
 «EXPAND defineConsume FOR alternatives-»
-
-	public AbstractRule doGetRule() {
-		return «grammar().grammarAccess().toSimpleName()».INSTANCE.pr«this.name»().getRule();
-	}
 	
 «FOREACH allCalledRules() AS calledRule-»
 	public void «calledRule.consumerSetterName()»(«calledRule.consumerClassName()» «calledRule.consumerFieldName()») {

@@ -18,11 +18,12 @@ import org.eclipse.xtext.tests.AbstractGeneratorTest;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class MetamodelTransformationTest extends AbstractGeneratorTest {
-	
+
 	private String model;
 	private Grammar grammar;
 	private EPackage pack;
 
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		with(XtextStandaloneSetup.class);
@@ -38,34 +39,34 @@ public class MetamodelTransformationTest extends AbstractGeneratorTest {
 		grammar = (Grammar) getModel(model);
 		pack = grammar.getMetamodelDeclarations().get(1).getEPackage();
 	}
-	
+
 	public void testSetUp() {
 		assertEquals(2, grammar.getMetamodelDeclarations().size());
 		assertEquals(5, grammar.getRules().size());
 		assertNotNull(pack);
 	}
-	
+
 	public void testRuleStartId() {
 		ParserRule rule = (ParserRule) grammar.getRules().get(1);
 		assertNotNull(rule);
 		assertEquals("StartId", rule.getName());
 		assertEquals(EcorePackage.Literals.EINT, rule.getType().getType());
 	}
-	
+
 	public void testRuleRecursiveId() {
 		ParserRule rule = (ParserRule) grammar.getRules().get(2);
 		assertNotNull(rule);
 		assertEquals("RecursiveId", rule.getName());
 		assertEquals(EcorePackage.Literals.ESTRING, rule.getType().getType());
 	}
-	
+
 	public void testRuleCalledId() {
 		ParserRule rule = (ParserRule) grammar.getRules().get(3);
 		assertNotNull(rule);
 		assertEquals("CalledId", rule.getName());
 		assertEquals(EcorePackage.Literals.ESTRING, rule.getType().getType());
 	}
-	
+
 	public void testRuleValue() {
 		ParserRule rule = (ParserRule) grammar.getRules().get(4);
 		assertNotNull(rule);

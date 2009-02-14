@@ -9,25 +9,12 @@
 package org.eclipse.xtext.tests;
 
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.parser.DefaultEcoreElementFactory;
-import org.eclipse.xtext.parser.packrat.AbstractPackratParser;
-import org.eclipse.xtext.parser.packrat.ParseResultFactory;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @author Heiko Behrens
- * 
+ * TODO remove this class
  */
 public abstract class AbstractGeneratorTest extends AbstractXtextTests {
-
-	protected void setAstFactory(AbstractPackratParser parser) {
-		ParseResultFactory factory = new ParseResultFactory();
-		DefaultEcoreElementFactory astFactory = new DefaultEcoreElementFactory();
-		astFactory.setConverterService(getValueConverterService());
-		astFactory.setGrammarAccess(getGrammarAccess());
-		factory.setFactory(astFactory);
-		parser.setParseResultFactory(factory);
-//		parser.setParseResultFactory(IParseResultFactory.NullParseResultFactory.INSTANCE);
-	}
 
 }

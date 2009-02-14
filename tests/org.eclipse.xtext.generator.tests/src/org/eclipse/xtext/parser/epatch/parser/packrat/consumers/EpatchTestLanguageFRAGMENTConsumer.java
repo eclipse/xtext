@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.epatch.parser.packrat.consumers;
 
-import org.eclipse.xtext.AbstractRule;
-import org.eclipse.xtext.parser.epatch.services.EpatchTestLanguageGrammarAccess;
 import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumerConfiguration;
@@ -23,15 +21,10 @@ public class EpatchTestLanguageFRAGMENTConsumer extends AbstractRuleAwareTermina
 			ICharacterClass.Factory.createRange('a', 'z'),
 			ICharacterClass.Factory.createRange('A', 'Z'),
 			ICharacterClass.Factory.createRange('0', '9'),
-			ICharacterClass.Factory.create('_', '/', '[', ']', '{', '}', '.', '@')	
+			ICharacterClass.Factory.create('_', '/', '[', ']', '{', '}', '.', '@')
 	);
 	public EpatchTestLanguageFRAGMENTConsumer(ITerminalConsumerConfiguration configuration) {
 		super(configuration);
-	}
-
-	@Override
-	protected AbstractRule doGetRule() {
-		return EpatchTestLanguageGrammarAccess.INSTANCE.lrFRAGMENT();
 	}
 
 	@Override
@@ -42,7 +35,7 @@ public class EpatchTestLanguageFRAGMENTConsumer extends AbstractRuleAwareTermina
 				readChars(fragmentPart);
 				return ConsumeResult.SUCCESS;
 			}
-		} 
+		}
 		return ConsumeResult.EMPTY_MATCH;
 	}
 
