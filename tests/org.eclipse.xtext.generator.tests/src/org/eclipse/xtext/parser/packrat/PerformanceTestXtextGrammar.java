@@ -32,8 +32,7 @@ public class PerformanceTestXtextGrammar extends AbstractGeneratorTest {
 		with(XtextTerminalsTestLanguageStandaloneSetup.class);
 		model = readFileIntoString("org/eclipse/xtext/Xtext.xtext");
 		modelAsStream = new StringInputStream(model);
-		packratParser = new XtextTerminalsTestLanguagePackratParser();
-		setAstFactory(packratParser);
+		packratParser = get(XtextTerminalsTestLanguagePackratParser.class);
 	}
 
 	public void testSetUp() throws InterruptedException {

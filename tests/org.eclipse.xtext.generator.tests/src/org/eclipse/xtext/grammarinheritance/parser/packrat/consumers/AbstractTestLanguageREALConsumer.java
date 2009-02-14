@@ -7,9 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.grammarinheritance.parser.packrat.consumers;
 
-import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinINTConsumer;
-import org.eclipse.xtext.grammarinheritance.services.AbstractTestLanguageGrammarAccess;
 import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumerConfiguration;
@@ -20,14 +18,9 @@ import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumerConfiguration
 public class AbstractTestLanguageREALConsumer extends AbstractRuleAwareTerminalConsumer {
 
 	private XtextBuiltinINTConsumer intConsumer;
-	
+
 	public AbstractTestLanguageREALConsumer(ITerminalConsumerConfiguration configuration) {
 		super(configuration);
-	}
-
-	@Override
-	protected LexerRule doGetRule() {
-		return AbstractTestLanguageGrammarAccess.INSTANCE.lrREAL();
 	}
 
 	@Override

@@ -9,7 +9,6 @@ package org.eclipse.xtext.xtext.parser.packrat;
 
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.parser.IParseResult;
-import org.eclipse.xtext.parser.packrat.ParseResultFactory;
 import org.eclipse.xtext.parser.packrat.XtextPackratParser;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.util.EmfFormater;
@@ -19,16 +18,13 @@ import org.eclipse.xtext.util.StringInputStream;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class XtextPackratParserTest extends AbstractGeneratorTest {
-	
+
 	private XtextPackratParser parser;
 
 	@Override
 	protected void setUp() throws Exception {
 		with(XtextStandaloneSetup.class);
-		this.parser = new XtextPackratParser();
-		ParseResultFactory factory = new ParseResultFactory();
-		factory.setFactory(getASTFactory());
-		this.parser.setParseResultFactory(factory);
+		this.parser = get(XtextPackratParser.class);
 	}
 
 	public void testParse_01() throws Exception {
@@ -53,39 +49,39 @@ public class XtextPackratParserTest extends AbstractGeneratorTest {
 //		System.out.println(EmfFormater.objToStr(parseResult.getRootNode(), "  "));
 //		System.out.println(EmfFormater.objToStr(parseResult.getRootASTElement(), "  "));
 //	}
-	
+
 	public void testParse_02() throws Exception {
 		String model = "/* comment */ abstract language a native c returns d: \"xy\";";
 		parseAndCompareToAntlr(model);
 	}
-	
+
 	public void testParse_03() throws Exception {
 		String model = "language test generate test 'test' as test lexer a: 'b'; lexer c: 'd';";
 		parseAndCompareToAntlr(model);
 	}
-	
+
 	public void testParse_04() throws Exception {
 		String model = "language test generate test 'test' as test generate test2 'test2' " +
 				"lexer asdbdferdsfae00011 returns asdfaefadfaefdasefasdfasf: 'asdfkja akljsdfl kajlsjdf lajsdlfjlakjdfkl ';";
 		parseAndCompareToAntlr(model);
 	}
-	
+
 	public void testParse_05() throws Exception {
 		String model = "language a1 lexer a1: 'b1';";
 		parseAndCompareToAntlr(model);
 	}
-	
+
 	public void testParse_06() throws Exception {
 		String model = "language a lexer a: 'b';";
 		parseAndCompareToAntlr(model);
 	}
-	
+
 	public void testXtextGrammar() throws Exception {
 		String filename = "org/eclipse/xtext/Xtext.xtext";
 		String model = readFileIntoString(filename);
 		parseAndCompareToAntlr(model);
 	}
-	
+
 	public void _testXtextGrammarPerformance() throws Exception {
 		String filename = "org/eclipse/xtext/Xtext.xtext";
 		String model = readFileIntoString(filename);
@@ -96,7 +92,7 @@ public class XtextPackratParserTest extends AbstractGeneratorTest {
 			assertNotNull(parseResult.getRootASTElement());
 		}
 	}
-	
+
 	public void _testXtextGrammarPerformanceAntlr() throws Exception {
 		String filename = "org/eclipse/xtext/Xtext.xtext";
 		String model = readFileIntoString(filename);

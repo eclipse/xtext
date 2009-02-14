@@ -19,7 +19,7 @@ import org.eclipse.xtext.parsetree.AbstractNode;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class DatatypeRulesTestLanguageValueConverters extends XtextBuiltInConverters {
-	
+
 	@ValueConverter(rule = "Fraction")
 	public IValueConverter<BigDecimal> Fraction() {
 		return new AbstractNullSafeConverter<BigDecimal>(){
@@ -28,21 +28,19 @@ public class DatatypeRulesTestLanguageValueConverters extends XtextBuiltInConver
 				String[] splitted = string.split("/");
 				if (splitted.length > 1) {
 					return new BigDecimal(splitted[0].trim()).divide(new BigDecimal(splitted[1].trim()));
-				} else {
-					return new BigDecimal(string);
 				}
+				return new BigDecimal(string);
 			}
 
 			@Override
 			protected String internalToString(BigDecimal value) {
-				BigDecimal bd = (BigDecimal) value;
+				BigDecimal bd = value;
 				int scale = bd.scale();
 				if (scale <= 0) {
 					return bd.toPlainString();
-				} else {
-					bd = bd.multiply(BigDecimal.valueOf(1, -1 * scale));
-					return bd.toPlainString() + '/' + BigDecimal.valueOf(1, -1 * scale).toPlainString();
-				}				
+				}
+				bd = bd.multiply(BigDecimal.valueOf(1, -1 * scale));
+				return bd.toPlainString() + '/' + BigDecimal.valueOf(1, -1 * scale).toPlainString();
 			}};
 	}
 

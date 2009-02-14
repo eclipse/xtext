@@ -45,7 +45,7 @@ public class GrammarUtilTest extends AbstractGeneratorTest {
 		assertNotNull(decl.getEPackage());
 		assertEquals("http://3", decl.getEPackage().getNsURI());
 	}
-	
+
 	public void testAllMetamodelDeclarations_02() throws Exception {
 		with(XtextStandaloneSetup.class);
 		String model = "language foo import 'http://www.eclipse.org/emf/2002/Ecore' as bar " +
@@ -73,12 +73,12 @@ public class GrammarUtilTest extends AbstractGeneratorTest {
 		assertEquals("http://www.eclipse.org/emf/2002/Ecore", decl.getEPackage().getNsURI());
 		assertEquals("ecore", decl.getAlias());
 	}
-	
+
 	public void testGetReference() throws Exception {
 		with(LangATestLanguageStandaloneSetup.class);
 		XtextResource resource = getResourceFromString("type A extends B");
-		
-		ParserRule prType = (new LangATestLanguageGrammarAccess()).prType().getRule();
+
+		ParserRule prType = get(LangATestLanguageGrammarAccess.class).prType().getRule();
 		Assignment asExtends = (Assignment)((Group)prType.getAlternatives()).getAbstractTokens().get(1);
 		CrossReference xref = (CrossReference) asExtends.getTerminal();
 		EObject model = getModel(resource);
