@@ -9,12 +9,15 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
-import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.SimpleExpressionsTestLanguageGrammarAccess;
 
+import com.google.inject.Inject;
 
 public class SimpleExpressionsTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 		
+	@Inject
+	private SimpleExpressionsTestLanguageGrammarAccess grammarAccess;
+	
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
@@ -43,7 +46,7 @@ protected class Sequence_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prSequence().eleGroup();
+		return grammarAccess.prSequence().eleGroup();
 	}
 		
 	@Override
@@ -72,7 +75,7 @@ protected class Sequence_0_RuleCall_Addition extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prSequence().ele0ParserRuleCallAddition();
+		return grammarAccess.prSequence().ele0ParserRuleCallAddition();
 	}
 	
 	@Override
@@ -91,7 +94,7 @@ protected class Sequence_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prSequence().ele1Group();
+		return grammarAccess.prSequence().ele1Group();
 	}
 		
 	@Override
@@ -120,7 +123,7 @@ protected class Sequence_1_0_Action_Sequence_expressions extends ActionToken  {
 	}
 	
 	public Action getGrammarElement() {
-		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prSequence().ele10ActionSequenceexpressions();
+		return grammarAccess.prSequence().ele10ActionSequenceexpressions();
 	}
 	
 	@Override
@@ -141,7 +144,7 @@ protected class Sequence_1_1_Assignment_expressions extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prSequence().ele11AssignmentExpressions();
+		return grammarAccess.prSequence().ele11AssignmentExpressions();
 	}
 	
 	@Override
@@ -185,7 +188,7 @@ protected class Addition_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prAddition().eleGroup();
+		return grammarAccess.prAddition().eleGroup();
 	}
 		
 	@Override
@@ -214,7 +217,7 @@ protected class Addition_0_RuleCall_Multiplication extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prAddition().ele0ParserRuleCallMultiplication();
+		return grammarAccess.prAddition().ele0ParserRuleCallMultiplication();
 	}
 	
 	@Override
@@ -233,7 +236,7 @@ protected class Addition_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prAddition().ele1Group();
+		return grammarAccess.prAddition().ele1Group();
 	}
 		
 	@Override
@@ -262,7 +265,7 @@ protected class Addition_1_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prAddition().ele10Group();
+		return grammarAccess.prAddition().ele10Group();
 	}
 		
 	@Override
@@ -291,7 +294,7 @@ protected class Addition_1_0_0_Action_Op_values extends ActionToken  {
 	}
 	
 	public Action getGrammarElement() {
-		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prAddition().ele100ActionOpvalues();
+		return grammarAccess.prAddition().ele100ActionOpvalues();
 	}
 	
 	@Override
@@ -312,7 +315,7 @@ protected class Addition_1_0_1_Assignment_operator extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prAddition().ele101AssignmentOperator();
+		return grammarAccess.prAddition().ele101AssignmentOperator();
 	}
 	
 	@Override
@@ -322,14 +325,14 @@ protected class Addition_1_0_1_Assignment_operator extends AssignmentToken  {
 
 		if("+".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prAddition().ele10100KeywordPlusSign();
+			element = grammarAccess.prAddition().ele10100KeywordPlusSign();
 			return new Solution(obj);
 		}
 
 
 		if("-".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prAddition().ele10101KeywordHyphenMinus();
+			element = grammarAccess.prAddition().ele10101KeywordHyphenMinus();
 			return new Solution(obj);
 		}
 
@@ -346,7 +349,7 @@ protected class Addition_1_1_Assignment_values extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prAddition().ele11AssignmentValues();
+		return grammarAccess.prAddition().ele11AssignmentValues();
 	}
 	
 	@Override
@@ -390,7 +393,7 @@ protected class Multiplication_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prMultiplication().eleGroup();
+		return grammarAccess.prMultiplication().eleGroup();
 	}
 		
 	@Override
@@ -419,7 +422,7 @@ protected class Multiplication_0_RuleCall_Term extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prMultiplication().ele0ParserRuleCallTerm();
+		return grammarAccess.prMultiplication().ele0ParserRuleCallTerm();
 	}
 	
 	@Override
@@ -438,7 +441,7 @@ protected class Multiplication_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prMultiplication().ele1Group();
+		return grammarAccess.prMultiplication().ele1Group();
 	}
 		
 	@Override
@@ -467,7 +470,7 @@ protected class Multiplication_1_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prMultiplication().ele10Group();
+		return grammarAccess.prMultiplication().ele10Group();
 	}
 		
 	@Override
@@ -496,7 +499,7 @@ protected class Multiplication_1_0_0_Action_Op_values extends ActionToken  {
 	}
 	
 	public Action getGrammarElement() {
-		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prMultiplication().ele100ActionOpvalues();
+		return grammarAccess.prMultiplication().ele100ActionOpvalues();
 	}
 	
 	@Override
@@ -517,7 +520,7 @@ protected class Multiplication_1_0_1_Assignment_operator extends AssignmentToken
 	}
 	
 	public Assignment getGrammarElement() {
-		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prMultiplication().ele101AssignmentOperator();
+		return grammarAccess.prMultiplication().ele101AssignmentOperator();
 	}
 	
 	@Override
@@ -527,14 +530,14 @@ protected class Multiplication_1_0_1_Assignment_operator extends AssignmentToken
 
 		if("*".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prMultiplication().ele10100KeywordAsterisk();
+			element = grammarAccess.prMultiplication().ele10100KeywordAsterisk();
 			return new Solution(obj);
 		}
 
 
 		if("/".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prMultiplication().ele10101KeywordSolidus();
+			element = grammarAccess.prMultiplication().ele10101KeywordSolidus();
 			return new Solution(obj);
 		}
 
@@ -551,7 +554,7 @@ protected class Multiplication_1_1_Assignment_values extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prMultiplication().ele11AssignmentValues();
+		return grammarAccess.prMultiplication().ele11AssignmentValues();
 	}
 	
 	@Override
@@ -595,7 +598,7 @@ protected class Term_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prTerm().eleAlternatives();
+		return grammarAccess.prTerm().eleAlternatives();
 	}
 
 	@Override	
@@ -617,7 +620,7 @@ protected class Term_0_RuleCall_Atom extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prTerm().ele0ParserRuleCallAtom();
+		return grammarAccess.prTerm().ele0ParserRuleCallAtom();
 	}
 	
 	@Override
@@ -636,7 +639,7 @@ protected class Term_1_RuleCall_Parens extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prTerm().ele1ParserRuleCallParens();
+		return grammarAccess.prTerm().ele1ParserRuleCallParens();
 	}
 	
 	@Override
@@ -666,7 +669,7 @@ protected class Atom_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prAtom().eleAssignmentName();
+		return grammarAccess.prAtom().eleAssignmentName();
 	}
 	
 	@Override
@@ -675,7 +678,7 @@ protected class Atom_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prAtom().ele0LexerRuleCallID();
+			element = grammarAccess.prAtom().ele0LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -700,7 +703,7 @@ protected class Parens_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prParens().eleGroup();
+		return grammarAccess.prParens().eleGroup();
 	}
 		
 	@Override
@@ -729,7 +732,7 @@ protected class Parens_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prParens().ele0Group();
+		return grammarAccess.prParens().ele0Group();
 	}
 		
 	@Override
@@ -758,7 +761,7 @@ protected class Parens_0_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prParens().ele00KeywordLeftParenthesis();
+		return grammarAccess.prParens().ele00KeywordLeftParenthesis();
 	}	
 }
 
@@ -770,7 +773,7 @@ protected class Parens_0_1_RuleCall_Addition extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prParens().ele01ParserRuleCallAddition();
+		return grammarAccess.prParens().ele01ParserRuleCallAddition();
 	}
 	
 	@Override
@@ -790,7 +793,7 @@ protected class Parens_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prParens().ele1KeywordRightParenthesis();
+		return grammarAccess.prParens().ele1KeywordRightParenthesis();
 	}	
 }
 

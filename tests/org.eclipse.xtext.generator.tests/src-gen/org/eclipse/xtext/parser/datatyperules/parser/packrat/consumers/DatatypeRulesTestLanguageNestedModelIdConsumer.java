@@ -21,6 +21,8 @@ import org.eclipse.xtext.parser.datatyperules.parser.packrat.consumers.DatatypeR
 @SuppressWarnings("unused")
 public final class DatatypeRulesTestLanguageNestedModelIdConsumer extends NonTerminalConsumer {
 
+	private NestedModelIdElements rule;
+	
 	private INonTerminalConsumer modelIdConsumer;
 
 	private ICharacterClass keyword$4$Delimiter;
@@ -88,7 +90,12 @@ public final class DatatypeRulesTestLanguageNestedModelIdConsumer extends NonTer
 	}
 
 	public NestedModelIdElements getRule() {
-		return DatatypeRulesTestLanguageGrammarAccess.INSTANCE.prNestedModelId();
+	// DatatypeRulesTestLanguageGrammarAccess.INSTANCE.prNestedModelId()
+		return rule;
+	}
+	
+	public void setRule(NestedModelIdElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

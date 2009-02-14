@@ -9,12 +9,15 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
-import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
 import org.eclipse.xtext.example.services.DomainmodelGrammarAccess;
 
+import com.google.inject.Inject;
 
 public class DomainmodelParseTreeConstructor extends AbstractParseTreeConstructor {
 		
+	@Inject
+	private DomainmodelGrammarAccess grammarAccess;
+	
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
@@ -52,7 +55,7 @@ protected class File_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prFile().eleGroup();
+		return grammarAccess.prFile().eleGroup();
 	}
 		
 	@Override
@@ -81,7 +84,7 @@ protected class File_0_Assignment_imports extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prFile().ele0AssignmentImports();
+		return grammarAccess.prFile().ele0AssignmentImports();
 	}
 	
 	@Override
@@ -113,7 +116,7 @@ protected class File_1_Assignment_namedElements extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prFile().ele1AssignmentNamedElements();
+		return grammarAccess.prFile().ele1AssignmentNamedElements();
 	}
 	
 	@Override
@@ -156,7 +159,7 @@ protected class Import_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prImport().eleGroup();
+		return grammarAccess.prImport().eleGroup();
 	}
 		
 	@Override
@@ -185,7 +188,7 @@ protected class Import_0_Keyword_import extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prImport().ele0KeywordImport();
+		return grammarAccess.prImport().ele0KeywordImport();
 	}	
 }
 
@@ -197,7 +200,7 @@ protected class Import_1_Assignment_importURI extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prImport().ele1AssignmentImportURI();
+		return grammarAccess.prImport().ele1AssignmentImportURI();
 	}
 	
 	@Override
@@ -206,7 +209,7 @@ protected class Import_1_Assignment_importURI extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("importURI");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = DomainmodelGrammarAccess.INSTANCE.prImport().ele10LexerRuleCallSTRING();
+			element = grammarAccess.prImport().ele10LexerRuleCallSTRING();
 			return new Solution(obj);
 		}
 		return null;
@@ -232,7 +235,7 @@ protected class NamedElement_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prNamedElement().eleAlternatives();
+		return grammarAccess.prNamedElement().eleAlternatives();
 	}
 
 	@Override	
@@ -254,7 +257,7 @@ protected class NamedElement_0_RuleCall_Package extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prNamedElement().ele0ParserRuleCallPackage();
+		return grammarAccess.prNamedElement().ele0ParserRuleCallPackage();
 	}
 	
 	@Override
@@ -273,7 +276,7 @@ protected class NamedElement_1_RuleCall_Type extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prNamedElement().ele1ParserRuleCallType();
+		return grammarAccess.prNamedElement().ele1ParserRuleCallType();
 	}
 	
 	@Override
@@ -303,7 +306,7 @@ protected class Package_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prPackage().eleGroup();
+		return grammarAccess.prPackage().eleGroup();
 	}
 		
 	@Override
@@ -332,7 +335,7 @@ protected class Package_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prPackage().ele0Group();
+		return grammarAccess.prPackage().ele0Group();
 	}
 		
 	@Override
@@ -361,7 +364,7 @@ protected class Package_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prPackage().ele00Group();
+		return grammarAccess.prPackage().ele00Group();
 	}
 		
 	@Override
@@ -390,7 +393,7 @@ protected class Package_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prPackage().ele000Group();
+		return grammarAccess.prPackage().ele000Group();
 	}
 		
 	@Override
@@ -419,7 +422,7 @@ protected class Package_0_0_0_0_Keyword_package extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prPackage().ele0000KeywordPackage();
+		return grammarAccess.prPackage().ele0000KeywordPackage();
 	}	
 }
 
@@ -431,7 +434,7 @@ protected class Package_0_0_0_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prPackage().ele0001AssignmentName();
+		return grammarAccess.prPackage().ele0001AssignmentName();
 	}
 	
 	@Override
@@ -441,7 +444,7 @@ protected class Package_0_0_0_1_Assignment_name extends AssignmentToken  {
 
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
 			type = AssignmentType.PRC;
-			element = DomainmodelGrammarAccess.INSTANCE.prPackage().ele00010ParserRuleCallQualifiedName();
+			element = grammarAccess.prPackage().ele00010ParserRuleCallQualifiedName();
 			return new Solution(obj);
 		}
 
@@ -458,7 +461,7 @@ protected class Package_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prPackage().ele001KeywordLeftCurlyBracket();
+		return grammarAccess.prPackage().ele001KeywordLeftCurlyBracket();
 	}	
 }
 
@@ -471,7 +474,7 @@ protected class Package_0_1_Assignment_namedElements extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prPackage().ele01AssignmentNamedElements();
+		return grammarAccess.prPackage().ele01AssignmentNamedElements();
 	}
 	
 	@Override
@@ -504,7 +507,7 @@ protected class Package_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prPackage().ele1KeywordRightCurlyBracket();
+		return grammarAccess.prPackage().ele1KeywordRightCurlyBracket();
 	}	
 }
 
@@ -527,7 +530,7 @@ protected class Type_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prType().eleAlternatives();
+		return grammarAccess.prType().eleAlternatives();
 	}
 
 	@Override	
@@ -549,7 +552,7 @@ protected class Type_0_RuleCall_Entity extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prType().ele0ParserRuleCallEntity();
+		return grammarAccess.prType().ele0ParserRuleCallEntity();
 	}
 	
 	@Override
@@ -568,7 +571,7 @@ protected class Type_1_RuleCall_DataType extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prType().ele1ParserRuleCallDataType();
+		return grammarAccess.prType().ele1ParserRuleCallDataType();
 	}
 	
 	@Override
@@ -598,7 +601,7 @@ protected class DataType_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prDataType().eleGroup();
+		return grammarAccess.prDataType().eleGroup();
 	}
 		
 	@Override
@@ -627,7 +630,7 @@ protected class DataType_0_Keyword_datatype extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prDataType().ele0KeywordDatatype();
+		return grammarAccess.prDataType().ele0KeywordDatatype();
 	}	
 }
 
@@ -639,7 +642,7 @@ protected class DataType_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prDataType().ele1AssignmentName();
+		return grammarAccess.prDataType().ele1AssignmentName();
 	}
 	
 	@Override
@@ -648,7 +651,7 @@ protected class DataType_1_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = DomainmodelGrammarAccess.INSTANCE.prDataType().ele10LexerRuleCallID();
+			element = grammarAccess.prDataType().ele10LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -674,7 +677,7 @@ protected class Entity_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prEntity().eleGroup();
+		return grammarAccess.prEntity().eleGroup();
 	}
 		
 	@Override
@@ -703,7 +706,7 @@ protected class Entity_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prEntity().ele0Group();
+		return grammarAccess.prEntity().ele0Group();
 	}
 		
 	@Override
@@ -732,7 +735,7 @@ protected class Entity_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prEntity().ele00Group();
+		return grammarAccess.prEntity().ele00Group();
 	}
 		
 	@Override
@@ -761,7 +764,7 @@ protected class Entity_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prEntity().ele000Group();
+		return grammarAccess.prEntity().ele000Group();
 	}
 		
 	@Override
@@ -790,7 +793,7 @@ protected class Entity_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prEntity().ele0000Group();
+		return grammarAccess.prEntity().ele0000Group();
 	}
 		
 	@Override
@@ -819,7 +822,7 @@ protected class Entity_0_0_0_0_0_Keyword_entity extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prEntity().ele00000KeywordEntity();
+		return grammarAccess.prEntity().ele00000KeywordEntity();
 	}	
 }
 
@@ -831,7 +834,7 @@ protected class Entity_0_0_0_0_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prEntity().ele00001AssignmentName();
+		return grammarAccess.prEntity().ele00001AssignmentName();
 	}
 	
 	@Override
@@ -840,7 +843,7 @@ protected class Entity_0_0_0_0_1_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = DomainmodelGrammarAccess.INSTANCE.prEntity().ele000010LexerRuleCallID();
+			element = grammarAccess.prEntity().ele000010LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -856,7 +859,7 @@ protected class Entity_0_0_0_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prEntity().ele0001Group();
+		return grammarAccess.prEntity().ele0001Group();
 	}
 		
 	@Override
@@ -885,7 +888,7 @@ protected class Entity_0_0_0_1_0_Keyword_extends extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prEntity().ele00010KeywordExtends();
+		return grammarAccess.prEntity().ele00010KeywordExtends();
 	}	
 }
 
@@ -897,7 +900,7 @@ protected class Entity_0_0_0_1_1_Assignment_superType extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prEntity().ele00011AssignmentSuperType();
+		return grammarAccess.prEntity().ele00011AssignmentSuperType();
 	}
 	
 	@Override
@@ -908,7 +911,7 @@ protected class Entity_0_0_0_1_1_Assignment_superType extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Entity")) {
 				type = AssignmentType.CR;
-				element = DomainmodelGrammarAccess.INSTANCE.prEntity().ele000110CrossReferenceEStringEntity(); 
+				element = grammarAccess.prEntity().ele000110CrossReferenceEStringEntity(); 
 				return new Solution(obj);
 			}
 		}
@@ -926,7 +929,7 @@ protected class Entity_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prEntity().ele001KeywordLeftCurlyBracket();
+		return grammarAccess.prEntity().ele001KeywordLeftCurlyBracket();
 	}	
 }
 
@@ -939,7 +942,7 @@ protected class Entity_0_1_Assignment_features extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prEntity().ele01AssignmentFeatures();
+		return grammarAccess.prEntity().ele01AssignmentFeatures();
 	}
 	
 	@Override
@@ -972,7 +975,7 @@ protected class Entity_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prEntity().ele1KeywordRightCurlyBracket();
+		return grammarAccess.prEntity().ele1KeywordRightCurlyBracket();
 	}	
 }
 
@@ -995,7 +998,7 @@ protected class Feature_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prFeature().eleAlternatives();
+		return grammarAccess.prFeature().eleAlternatives();
 	}
 
 	@Override	
@@ -1017,7 +1020,7 @@ protected class Feature_0_RuleCall_StructuralFeature extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prFeature().ele0ParserRuleCallStructuralFeature();
+		return grammarAccess.prFeature().ele0ParserRuleCallStructuralFeature();
 	}
 	
 	@Override
@@ -1036,7 +1039,7 @@ protected class Feature_1_RuleCall_Operation extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prFeature().ele1ParserRuleCallOperation();
+		return grammarAccess.prFeature().ele1ParserRuleCallOperation();
 	}
 	
 	@Override
@@ -1066,7 +1069,7 @@ protected class StructuralFeature_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prStructuralFeature().eleAlternatives();
+		return grammarAccess.prStructuralFeature().eleAlternatives();
 	}
 
 	@Override	
@@ -1088,7 +1091,7 @@ protected class StructuralFeature_0_RuleCall_Attribute extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prStructuralFeature().ele0ParserRuleCallAttribute();
+		return grammarAccess.prStructuralFeature().ele0ParserRuleCallAttribute();
 	}
 	
 	@Override
@@ -1107,7 +1110,7 @@ protected class StructuralFeature_1_RuleCall_Reference extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prStructuralFeature().ele1ParserRuleCallReference();
+		return grammarAccess.prStructuralFeature().ele1ParserRuleCallReference();
 	}
 	
 	@Override
@@ -1137,7 +1140,7 @@ protected class Attribute_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prAttribute().eleGroup();
+		return grammarAccess.prAttribute().eleGroup();
 	}
 		
 	@Override
@@ -1166,7 +1169,7 @@ protected class Attribute_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prAttribute().ele0Group();
+		return grammarAccess.prAttribute().ele0Group();
 	}
 		
 	@Override
@@ -1195,7 +1198,7 @@ protected class Attribute_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prAttribute().ele00Group();
+		return grammarAccess.prAttribute().ele00Group();
 	}
 		
 	@Override
@@ -1224,7 +1227,7 @@ protected class Attribute_0_0_0_Keyword_attr extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prAttribute().ele000KeywordAttr();
+		return grammarAccess.prAttribute().ele000KeywordAttr();
 	}	
 }
 
@@ -1236,7 +1239,7 @@ protected class Attribute_0_0_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prAttribute().ele001AssignmentName();
+		return grammarAccess.prAttribute().ele001AssignmentName();
 	}
 	
 	@Override
@@ -1245,7 +1248,7 @@ protected class Attribute_0_0_1_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = DomainmodelGrammarAccess.INSTANCE.prAttribute().ele0010LexerRuleCallID();
+			element = grammarAccess.prAttribute().ele0010LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -1261,7 +1264,7 @@ protected class Attribute_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prAttribute().ele01KeywordColon();
+		return grammarAccess.prAttribute().ele01KeywordColon();
 	}	
 }
 
@@ -1274,7 +1277,7 @@ protected class Attribute_1_Assignment_type extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prAttribute().ele1AssignmentType();
+		return grammarAccess.prAttribute().ele1AssignmentType();
 	}
 	
 	@Override
@@ -1317,7 +1320,7 @@ protected class Reference_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prReference().eleGroup();
+		return grammarAccess.prReference().eleGroup();
 	}
 		
 	@Override
@@ -1346,7 +1349,7 @@ protected class Reference_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prReference().ele0Group();
+		return grammarAccess.prReference().ele0Group();
 	}
 		
 	@Override
@@ -1375,7 +1378,7 @@ protected class Reference_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prReference().ele00Group();
+		return grammarAccess.prReference().ele00Group();
 	}
 		
 	@Override
@@ -1404,7 +1407,7 @@ protected class Reference_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prReference().ele000Group();
+		return grammarAccess.prReference().ele000Group();
 	}
 		
 	@Override
@@ -1433,7 +1436,7 @@ protected class Reference_0_0_0_0_Keyword_ref extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prReference().ele0000KeywordRef();
+		return grammarAccess.prReference().ele0000KeywordRef();
 	}	
 }
 
@@ -1445,7 +1448,7 @@ protected class Reference_0_0_0_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prReference().ele0001AssignmentName();
+		return grammarAccess.prReference().ele0001AssignmentName();
 	}
 	
 	@Override
@@ -1454,7 +1457,7 @@ protected class Reference_0_0_0_1_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = DomainmodelGrammarAccess.INSTANCE.prReference().ele00010LexerRuleCallID();
+			element = grammarAccess.prReference().ele00010LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -1470,7 +1473,7 @@ protected class Reference_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prReference().ele001KeywordColon();
+		return grammarAccess.prReference().ele001KeywordColon();
 	}	
 }
 
@@ -1483,7 +1486,7 @@ protected class Reference_0_1_Assignment_type extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prReference().ele01AssignmentType();
+		return grammarAccess.prReference().ele01AssignmentType();
 	}
 	
 	@Override
@@ -1516,7 +1519,7 @@ protected class Reference_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prReference().ele1Group();
+		return grammarAccess.prReference().ele1Group();
 	}
 		
 	@Override
@@ -1545,7 +1548,7 @@ protected class Reference_1_0_Keyword_opposite extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prReference().ele10KeywordOpposite();
+		return grammarAccess.prReference().ele10KeywordOpposite();
 	}	
 }
 
@@ -1557,7 +1560,7 @@ protected class Reference_1_1_Assignment_opposite extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prReference().ele11AssignmentOpposite();
+		return grammarAccess.prReference().ele11AssignmentOpposite();
 	}
 	
 	@Override
@@ -1568,7 +1571,7 @@ protected class Reference_1_1_Assignment_opposite extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Reference")) {
 				type = AssignmentType.CR;
-				element = DomainmodelGrammarAccess.INSTANCE.prReference().ele110CrossReferenceEStringReference(); 
+				element = grammarAccess.prReference().ele110CrossReferenceEStringReference(); 
 				return new Solution(obj);
 			}
 		}
@@ -1596,7 +1599,7 @@ protected class Operation_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prOperation().eleGroup();
+		return grammarAccess.prOperation().eleGroup();
 	}
 		
 	@Override
@@ -1625,7 +1628,7 @@ protected class Operation_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prOperation().ele0Group();
+		return grammarAccess.prOperation().ele0Group();
 	}
 		
 	@Override
@@ -1654,7 +1657,7 @@ protected class Operation_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prOperation().ele00Group();
+		return grammarAccess.prOperation().ele00Group();
 	}
 		
 	@Override
@@ -1683,7 +1686,7 @@ protected class Operation_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prOperation().ele000Group();
+		return grammarAccess.prOperation().ele000Group();
 	}
 		
 	@Override
@@ -1712,7 +1715,7 @@ protected class Operation_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prOperation().ele0000Group();
+		return grammarAccess.prOperation().ele0000Group();
 	}
 		
 	@Override
@@ -1741,7 +1744,7 @@ protected class Operation_0_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prOperation().ele00000Group();
+		return grammarAccess.prOperation().ele00000Group();
 	}
 		
 	@Override
@@ -1770,7 +1773,7 @@ protected class Operation_0_0_0_0_0_0_Keyword_op extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prOperation().ele000000KeywordOp();
+		return grammarAccess.prOperation().ele000000KeywordOp();
 	}	
 }
 
@@ -1782,7 +1785,7 @@ protected class Operation_0_0_0_0_0_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prOperation().ele000001AssignmentName();
+		return grammarAccess.prOperation().ele000001AssignmentName();
 	}
 	
 	@Override
@@ -1791,7 +1794,7 @@ protected class Operation_0_0_0_0_0_1_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = DomainmodelGrammarAccess.INSTANCE.prOperation().ele0000010LexerRuleCallID();
+			element = grammarAccess.prOperation().ele0000010LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -1807,7 +1810,7 @@ protected class Operation_0_0_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prOperation().ele00001KeywordLeftParenthesis();
+		return grammarAccess.prOperation().ele00001KeywordLeftParenthesis();
 	}	
 }
 
@@ -1820,7 +1823,7 @@ protected class Operation_0_0_0_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prOperation().ele0001Group();
+		return grammarAccess.prOperation().ele0001Group();
 	}
 		
 	@Override
@@ -1849,7 +1852,7 @@ protected class Operation_0_0_0_1_0_Assignment_params extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prOperation().ele00010AssignmentParams();
+		return grammarAccess.prOperation().ele00010AssignmentParams();
 	}
 	
 	@Override
@@ -1881,7 +1884,7 @@ protected class Operation_0_0_0_1_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prOperation().ele00011Group();
+		return grammarAccess.prOperation().ele00011Group();
 	}
 		
 	@Override
@@ -1910,7 +1913,7 @@ protected class Operation_0_0_0_1_1_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prOperation().ele000110KeywordComma();
+		return grammarAccess.prOperation().ele000110KeywordComma();
 	}	
 }
 
@@ -1922,7 +1925,7 @@ protected class Operation_0_0_0_1_1_1_Assignment_params extends AssignmentToken 
 	}
 	
 	public Assignment getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prOperation().ele000111AssignmentParams();
+		return grammarAccess.prOperation().ele000111AssignmentParams();
 	}
 	
 	@Override
@@ -1957,7 +1960,7 @@ protected class Operation_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prOperation().ele001KeywordRightParenthesis();
+		return grammarAccess.prOperation().ele001KeywordRightParenthesis();
 	}	
 }
 
@@ -1970,7 +1973,7 @@ protected class Operation_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prOperation().ele01KeywordColon();
+		return grammarAccess.prOperation().ele01KeywordColon();
 	}	
 }
 
@@ -1983,7 +1986,7 @@ protected class Operation_1_Assignment_type extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prOperation().ele1AssignmentType();
+		return grammarAccess.prOperation().ele1AssignmentType();
 	}
 	
 	@Override
@@ -2026,7 +2029,7 @@ protected class Parameter_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prParameter().eleGroup();
+		return grammarAccess.prParameter().eleGroup();
 	}
 		
 	@Override
@@ -2055,7 +2058,7 @@ protected class Parameter_0_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prParameter().ele0AssignmentName();
+		return grammarAccess.prParameter().ele0AssignmentName();
 	}
 	
 	@Override
@@ -2064,7 +2067,7 @@ protected class Parameter_0_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = DomainmodelGrammarAccess.INSTANCE.prParameter().ele00LexerRuleCallID();
+			element = grammarAccess.prParameter().ele00LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -2079,7 +2082,7 @@ protected class Parameter_1_Assignment_type extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prParameter().ele1AssignmentType();
+		return grammarAccess.prParameter().ele1AssignmentType();
 	}
 	
 	@Override
@@ -2122,7 +2125,7 @@ protected class TypedElement_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prTypedElement().eleAlternatives();
+		return grammarAccess.prTypedElement().eleAlternatives();
 	}
 
 	@Override	
@@ -2144,7 +2147,7 @@ protected class TypedElement_0_RuleCall_Feature extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prTypedElement().ele0ParserRuleCallFeature();
+		return grammarAccess.prTypedElement().ele0ParserRuleCallFeature();
 	}
 	
 	@Override
@@ -2163,7 +2166,7 @@ protected class TypedElement_1_RuleCall_Parameter extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prTypedElement().ele1ParserRuleCallParameter();
+		return grammarAccess.prTypedElement().ele1ParserRuleCallParameter();
 	}
 	
 	@Override
@@ -2193,7 +2196,7 @@ protected class TypeRef_Assignment_referenced extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return DomainmodelGrammarAccess.INSTANCE.prTypeRef().eleAssignmentReferenced();
+		return grammarAccess.prTypeRef().eleAssignmentReferenced();
 	}
 	
 	@Override
@@ -2204,7 +2207,7 @@ protected class TypeRef_Assignment_referenced extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Type")) {
 				type = AssignmentType.CR;
-				element = DomainmodelGrammarAccess.INSTANCE.prTypeRef().ele0CrossReferenceEStringType(); 
+				element = grammarAccess.prTypeRef().ele0CrossReferenceEStringType(); 
 				return new Solution(obj);
 			}
 		}

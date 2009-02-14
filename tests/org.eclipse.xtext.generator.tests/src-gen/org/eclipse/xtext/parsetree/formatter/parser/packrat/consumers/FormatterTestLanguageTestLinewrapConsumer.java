@@ -21,6 +21,8 @@ import org.eclipse.xtext.parsetree.formatter.parser.packrat.consumers.FormatterT
 @SuppressWarnings("unused")
 public final class FormatterTestLanguageTestLinewrapConsumer extends NonTerminalConsumer {
 
+	private TestLinewrapElements rule;
+	
 	private INonTerminalConsumer lineConsumer;
 
 	private ICharacterClass keyword$2$Delimiter;
@@ -88,7 +90,12 @@ public final class FormatterTestLanguageTestLinewrapConsumer extends NonTerminal
 	}
 
 	public TestLinewrapElements getRule() {
-		return FormatterTestLanguageGrammarAccess.INSTANCE.prTestLinewrap();
+	// FormatterTestLanguageGrammarAccess.INSTANCE.prTestLinewrap()
+		return rule;
+	}
+	
+	public void setRule(TestLinewrapElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

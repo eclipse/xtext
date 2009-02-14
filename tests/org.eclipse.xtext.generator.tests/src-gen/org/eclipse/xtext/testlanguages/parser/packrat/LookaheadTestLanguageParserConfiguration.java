@@ -7,6 +7,8 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
+import org.eclipse.xtext.testlanguages.services.LookaheadTestLanguageGrammarAccess;
+
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.LookaheadTestLanguageEntryConsumer;
@@ -37,9 +39,12 @@ public class LookaheadTestLanguageParserConfiguration extends AbstractParserConf
     private LookaheadTestLanguageLookAhead3Consumer lookAhead3Consumer;
     private LookaheadTestLanguageLookAhead4Consumer lookAhead4Consumer;
 
-	public LookaheadTestLanguageParserConfiguration(IInternalParserConfiguration configuration) {
+	private LookaheadTestLanguageGrammarAccess grammarAccess;
+
+	public LookaheadTestLanguageParserConfiguration(IInternalParserConfiguration configuration, LookaheadTestLanguageGrammarAccess grammarAccess) {
 		super(configuration);
-		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration);
+		this.grammarAccess = grammarAccess;
+		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration, null);
 	}
 
 	public LookaheadTestLanguageEntryConsumer getRootConsumer() {
@@ -76,6 +81,24 @@ public class LookaheadTestLanguageParserConfiguration extends AbstractParserConf
 	}
 	
 	public void configureConsumers() {
+		if (grammarAccess == null)
+			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+		getEntryConsumer().setRule(grammarAccess.prEntry());
+		getAltsConsumer().setRule(grammarAccess.prAlts());
+		getLookAhead0Consumer().setRule(grammarAccess.prLookAhead0());
+		getLookAhead1Consumer().setRule(grammarAccess.prLookAhead1());
+		getLookAhead2Consumer().setRule(grammarAccess.prLookAhead2());
+		getLookAhead3Consumer().setRule(grammarAccess.prLookAhead3());
+		getLookAhead4Consumer().setRule(grammarAccess.prLookAhead4());
+		getIdConsumer().setRule(grammarAccess.lrID());
+		getIntConsumer().setRule(grammarAccess.lrINT());
+		getStringConsumer().setRule(grammarAccess.lrSTRING());
+		getMlCommentConsumer().setRule(grammarAccess.lrML_COMMENT());
+		getSlCommentConsumer().setRule(grammarAccess.lrSL_COMMENT());
+		getWsConsumer().setRule(grammarAccess.lrWS());
+		getAnyOtherConsumer().setRule(grammarAccess.lrANY_OTHER());
+
+
 		getEntryConsumer().setAltsConsumer(getAltsConsumer());
 
 		getAltsConsumer().setLookAhead0Consumer(getLookAhead0Consumer());

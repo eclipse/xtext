@@ -21,6 +21,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGCons
 @SuppressWarnings("unused")
 public final class XtextGrammarTestLanguageKeywordConsumer extends NonTerminalConsumer {
 
+	private KeywordElements rule;
+	
 	private ITerminalConsumer stringConsumer;
 
 	private ISequenceMatcher ruleCall$2$Delimiter;
@@ -44,7 +46,12 @@ public final class XtextGrammarTestLanguageKeywordConsumer extends NonTerminalCo
 	}
 
 	public KeywordElements getRule() {
-		return XtextGrammarTestLanguageGrammarAccess.INSTANCE.prKeyword();
+	// XtextGrammarTestLanguageGrammarAccess.INSTANCE.prKeyword()
+		return rule;
+	}
+	
+	public void setRule(KeywordElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

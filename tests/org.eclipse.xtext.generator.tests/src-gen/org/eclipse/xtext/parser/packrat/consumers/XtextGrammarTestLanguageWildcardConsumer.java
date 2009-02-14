@@ -20,6 +20,8 @@ import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess.Wildcard
 @SuppressWarnings("unused")
 public final class XtextGrammarTestLanguageWildcardConsumer extends NonTerminalConsumer {
 
+	private WildcardElements rule;
+	
 
 	private ICharacterClass keyword$2$Delimiter;
 	
@@ -42,7 +44,12 @@ public final class XtextGrammarTestLanguageWildcardConsumer extends NonTerminalC
 	}
 
 	public WildcardElements getRule() {
-		return XtextGrammarTestLanguageGrammarAccess.INSTANCE.prWildcard();
+	// XtextGrammarTestLanguageGrammarAccess.INSTANCE.prWildcard()
+		return rule;
+	}
+	
+	public void setRule(WildcardElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

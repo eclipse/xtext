@@ -21,6 +21,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer
 @SuppressWarnings("unused")
 public final class Bug250313DatatypeConsumer extends NonTerminalConsumer {
 
+	private DatatypeElements rule;
+	
 	private ITerminalConsumer idConsumer;
 
 	private ICharacterClass keyword$4$Delimiter;
@@ -94,7 +96,12 @@ public final class Bug250313DatatypeConsumer extends NonTerminalConsumer {
 	}
 
 	public DatatypeElements getRule() {
-		return Bug250313GrammarAccess.INSTANCE.prDatatype();
+	// Bug250313GrammarAccess.INSTANCE.prDatatype()
+		return rule;
+	}
+	
+	public void setRule(DatatypeElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

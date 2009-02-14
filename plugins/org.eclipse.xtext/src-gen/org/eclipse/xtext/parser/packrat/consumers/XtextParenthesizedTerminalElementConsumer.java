@@ -21,6 +21,8 @@ import org.eclipse.xtext.parser.packrat.consumers.XtextTerminalAlternativesConsu
 @SuppressWarnings("unused")
 public final class XtextParenthesizedTerminalElementConsumer extends NonTerminalConsumer {
 
+	private ParenthesizedTerminalElementElements rule;
+	
 	private INonTerminalConsumer terminalAlternativesConsumer;
 
 	private ICharacterClass keyword$3$Delimiter;
@@ -91,7 +93,12 @@ public final class XtextParenthesizedTerminalElementConsumer extends NonTerminal
 	}
 
 	public ParenthesizedTerminalElementElements getRule() {
-		return XtextGrammarAccess.INSTANCE.prParenthesizedTerminalElement();
+	// XtextGrammarAccess.INSTANCE.prParenthesizedTerminalElement()
+		return rule;
+	}
+	
+	public void setRule(ParenthesizedTerminalElementElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

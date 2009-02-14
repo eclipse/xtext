@@ -22,6 +22,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGCons
 @SuppressWarnings("unused")
 public final class ConcreteTestLanguageSubrule2Consumer extends NonTerminalConsumer {
 
+	private Subrule2Elements rule;
+	
 	private ITerminalConsumer idConsumer;
 	private ITerminalConsumer stringConsumer;
 
@@ -104,7 +106,12 @@ public final class ConcreteTestLanguageSubrule2Consumer extends NonTerminalConsu
 	}
 
 	public Subrule2Elements getRule() {
-		return ConcreteTestLanguageGrammarAccess.INSTANCE.prSubrule2();
+	// ConcreteTestLanguageGrammarAccess.INSTANCE.prSubrule2()
+		return rule;
+	}
+	
+	public void setRule(Subrule2Elements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

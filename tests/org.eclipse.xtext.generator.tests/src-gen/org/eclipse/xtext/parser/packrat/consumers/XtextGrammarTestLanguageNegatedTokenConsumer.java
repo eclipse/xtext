@@ -21,6 +21,8 @@ import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageTermin
 @SuppressWarnings("unused")
 public final class XtextGrammarTestLanguageNegatedTokenConsumer extends NonTerminalConsumer {
 
+	private NegatedTokenElements rule;
+	
 	private INonTerminalConsumer terminalTokenElementConsumer;
 
 	private ICharacterClass keyword$2$Delimiter;
@@ -79,7 +81,12 @@ public final class XtextGrammarTestLanguageNegatedTokenConsumer extends NonTermi
 	}
 
 	public NegatedTokenElements getRule() {
-		return XtextGrammarTestLanguageGrammarAccess.INSTANCE.prNegatedToken();
+	// XtextGrammarTestLanguageGrammarAccess.INSTANCE.prNegatedToken()
+		return rule;
+	}
+	
+	public void setRule(NegatedTokenElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

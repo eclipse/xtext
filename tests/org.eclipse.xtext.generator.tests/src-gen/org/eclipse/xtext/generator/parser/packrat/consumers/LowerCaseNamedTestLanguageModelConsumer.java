@@ -21,6 +21,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer
 @SuppressWarnings("unused")
 public final class LowerCaseNamedTestLanguageModelConsumer extends NonTerminalConsumer {
 
+	private ModelElements rule;
+	
 	private ITerminalConsumer idConsumer;
 
 	private ISequenceMatcher ruleCall$2$Delimiter;
@@ -44,7 +46,12 @@ public final class LowerCaseNamedTestLanguageModelConsumer extends NonTerminalCo
 	}
 
 	public ModelElements getRule() {
-		return LowerCaseNamedTestLanguageGrammarAccess.INSTANCE.prModel();
+	// LowerCaseNamedTestLanguageGrammarAccess.INSTANCE.prModel()
+		return rule;
+	}
+	
+	public void setRule(ModelElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

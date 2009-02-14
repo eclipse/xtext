@@ -22,6 +22,8 @@ import org.eclipse.xtext.example.parser.packrat.consumers.DomainmodelTypeConsume
 @SuppressWarnings("unused")
 public final class DomainmodelNamedElementConsumer extends NonTerminalConsumer {
 
+	private NamedElementElements rule;
+	
 	private INonTerminalConsumer packageConsumer;
 	private INonTerminalConsumer typeConsumer;
 
@@ -62,7 +64,12 @@ public final class DomainmodelNamedElementConsumer extends NonTerminalConsumer {
 	}
 
 	public NamedElementElements getRule() {
-		return DomainmodelGrammarAccess.INSTANCE.prNamedElement();
+	// DomainmodelGrammarAccess.INSTANCE.prNamedElement()
+		return rule;
+	}
+	
+	public void setRule(NamedElementElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

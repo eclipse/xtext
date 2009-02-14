@@ -21,6 +21,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer
 @SuppressWarnings("unused")
 public final class EpatchTestLanguageExtensionImportConsumer extends NonTerminalConsumer {
 
+	private ExtensionImportElements rule;
+	
 	private ITerminalConsumer idConsumer;
 
 	private ICharacterClass keyword$4$Delimiter;
@@ -165,7 +167,12 @@ public final class EpatchTestLanguageExtensionImportConsumer extends NonTerminal
 	}
 
 	public ExtensionImportElements getRule() {
-		return EpatchTestLanguageGrammarAccess.INSTANCE.prExtensionImport();
+	// EpatchTestLanguageGrammarAccess.INSTANCE.prExtensionImport()
+		return rule;
+	}
+	
+	public void setRule(ExtensionImportElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

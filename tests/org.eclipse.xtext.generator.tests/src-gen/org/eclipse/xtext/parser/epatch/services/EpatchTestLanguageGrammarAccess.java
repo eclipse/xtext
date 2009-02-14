@@ -5,11 +5,17 @@ Generated with Xtext
 package org.eclipse.xtext.parser.epatch.services;
 
 import com.google.inject.Singleton;
+import com.google.inject.Inject;
+
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parser.BaseEPackageAccess;
+
+import org.eclipse.xtext.service.GrammarProvider;
+
+import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
 
 @Singleton
-public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implements IGrammarAccess {
+public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
+	
 	
 	public class EPatchElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EPatch");
@@ -1694,52 +1700,50 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		public RuleCall ele0LexerRuleCallSTRING() { return c0LexerRuleCallSTRING; }
 	}
 	
-	public final static EpatchTestLanguageGrammarAccess INSTANCE = new EpatchTestLanguageGrammarAccess();
+	private EPatchElements pEPatch;
+	private ImportElements pImport;
+	private ModelImportElements pModelImport;
+	private ResourceImportElements pResourceImport;
+	private EPackageImportElements pEPackageImport;
+	private JavaImportElements pJavaImport;
+	private ExtensionImportElements pExtensionImport;
+	private NamedResourceElements pNamedResource;
+	private NamedObjectElements pNamedObject;
+	private ObjectRefElements pObjectRef;
+	private AssignmentElements pAssignment;
+	private BiSingleAssignmentElements pBiSingleAssignment;
+	private BiListAssignmentElements pBiListAssignment;
+	private MonoSingleAssignmentElements pMonoSingleAssignment;
+	private MonoListAssignmentElements pMonoListAssignment;
+	private AssignmentValueElements pAssignmentValue;
+	private ListAssignmentValueElements pListAssignmentValue;
+	private SingleAssignmentValueElements pSingleAssignmentValue;
+	private CreatedObjectElements pCreatedObject;
+	private ObjectNewElements pObjectNew;
+	private ObjectCopyElements pObjectCopy;
+	private LexerRule lFRAGMENT;
+	private MigrationElements pMigration;
+	private ExecutableElements pExecutable;
+	private JavaExecutableElements pJavaExecutable;
+	private ExpressionExecutableElements pExpressionExecutable;
+	
+	private final GrammarProvider grammarProvider;
 
-	private static final String EPATCHTESTLANGUAGE_GRAMMAR_CP_URI = "classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xmi";
-	private static Grammar GRAMMAR = null;
-	private static EPatchElements pEPatch;
-	private static ImportElements pImport;
-	private static ModelImportElements pModelImport;
-	private static ResourceImportElements pResourceImport;
-	private static EPackageImportElements pEPackageImport;
-	private static JavaImportElements pJavaImport;
-	private static ExtensionImportElements pExtensionImport;
-	private static NamedResourceElements pNamedResource;
-	private static NamedObjectElements pNamedObject;
-	private static ObjectRefElements pObjectRef;
-	private static AssignmentElements pAssignment;
-	private static BiSingleAssignmentElements pBiSingleAssignment;
-	private static BiListAssignmentElements pBiListAssignment;
-	private static MonoSingleAssignmentElements pMonoSingleAssignment;
-	private static MonoListAssignmentElements pMonoListAssignment;
-	private static AssignmentValueElements pAssignmentValue;
-	private static ListAssignmentValueElements pListAssignmentValue;
-	private static SingleAssignmentValueElements pSingleAssignmentValue;
-	private static CreatedObjectElements pCreatedObject;
-	private static ObjectNewElements pObjectNew;
-	private static ObjectCopyElements pObjectCopy;
-	private static LexerRule lFRAGMENT;
-	private static MigrationElements pMigration;
-	private static ExecutableElements pExecutable;
-	private static JavaExecutableElements pJavaExecutable;
-	private static ExpressionExecutableElements pExpressionExecutable;
-	private static LexerRule lID;
-	private static LexerRule lINT;
-	private static LexerRule lSTRING;
-	private static LexerRule lML_COMMENT;
-	private static LexerRule lSL_COMMENT;
-	private static LexerRule lWS;
-	private static LexerRule lANY_OTHER;
+	private XtextBuiltinGrammarAccess superGrammarAccess;
 
-	@SuppressWarnings("unused")
-	public synchronized Grammar getGrammar() {	
-		if (GRAMMAR==null) {
-			// assert the XtextPackage implementation is loaded
-			XtextPackage xtextPackage = XtextPackage.eINSTANCE;
-			GRAMMAR = (Grammar) loadGrammarFile(EpatchTestLanguageGrammarAccess.class.getClassLoader(),EPATCHTESTLANGUAGE_GRAMMAR_CP_URI);
-		}
-		return GRAMMAR;
+	@Inject
+	public EpatchTestLanguageGrammarAccess(GrammarProvider grammarProvider, XtextBuiltinGrammarAccess superGrammarAccess) {
+		this.grammarProvider = grammarProvider;
+		this.superGrammarAccess = superGrammarAccess;
+	}
+	
+	public Grammar getGrammar() {	
+		return grammarProvider.getGrammar(this);
+	}
+	
+
+	public XtextBuiltinGrammarAccess getSuperGrammarAccess() {
+		return superGrammarAccess;
 	}
 
 	
@@ -1875,36 +1879,36 @@ public class EpatchTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 
 	// lexer ID:   "(\'^\')?(\'a\'..\'z\'|\'A\'..\'Z\'|\'_\') (\'a\'..\'z\'|\'A\'..\'Z\'|\'_\'|\'0\'..\'9\')*";
 	public LexerRule lrID() {
-		return (lID != null) ? lID : (lID = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "ID"));
+		return superGrammarAccess.lrID();
 	} 
 
 	// lexer INT returns EInt:   "(\'0\'..\'9\')+";
 	public LexerRule lrINT() {
-		return (lINT != null) ? lINT : (lINT = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "INT"));
+		return superGrammarAccess.lrINT();
 	} 
 
 	// lexer STRING:   "\n\t\t\t  \'\"\' ( \'\\\\\' (\'b\'|\'t\'|\'n\'|\'f\'|\'r\'|\'\\\"\'|\'\\\'\'|\'\\\\\') | ~(\'\\\\\'|\'\"\') )* \'\"\' | \n              \'\\\'\' ( \'\\\\\' (\'b\'|\'t\'|\'n\'|\'f\'|\'r\'|\'\\\"\'|\'\\\'\'|\'\\\\\') | ~(\'\\\\\'|\'\\\'\') )* \'\\\'\'\n              ";
 	public LexerRule lrSTRING() {
-		return (lSTRING != null) ? lSTRING : (lSTRING = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "STRING"));
+		return superGrammarAccess.lrSTRING();
 	} 
 
 	// lexer ML_COMMENT:   "\'/*\' ( options {greedy=false;} : . )* \'*/\'";
 	public LexerRule lrML_COMMENT() {
-		return (lML_COMMENT != null) ? lML_COMMENT : (lML_COMMENT = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "ML_COMMENT"));
+		return superGrammarAccess.lrML_COMMENT();
 	} 
 
 	// lexer SL_COMMENT:   "\'//\' ~(\'\\n\'|\'\\r\')* (\'\\r\'? \'\\n\')?";
 	public LexerRule lrSL_COMMENT() {
-		return (lSL_COMMENT != null) ? lSL_COMMENT : (lSL_COMMENT = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "SL_COMMENT"));
+		return superGrammarAccess.lrSL_COMMENT();
 	} 
 
 	// lexer WS:   "(\' \'|\'\\t\'|\'\\r\'|\'\\n\')+";
 	public LexerRule lrWS() {
-		return (lWS != null) ? lWS : (lWS = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "WS"));
+		return superGrammarAccess.lrWS();
 	} 
 
 	// lexer ANY_OTHER:   ".";
 	public LexerRule lrANY_OTHER() {
-		return (lANY_OTHER != null) ? lANY_OTHER : (lANY_OTHER = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "ANY_OTHER"));
+		return superGrammarAccess.lrANY_OTHER();
 	} 
 }

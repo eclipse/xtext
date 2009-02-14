@@ -5,11 +5,16 @@ Generated with Xtext
 package org.eclipse.xtext.parser.terminalrules.services;
 
 import com.google.inject.Singleton;
+import com.google.inject.Inject;
+
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parser.BaseEPackageAccess;
+
+import org.eclipse.xtext.service.GrammarProvider;
+
 
 @Singleton
-public class TerminalRulesTestLanguageGrammarAccess extends BaseEPackageAccess implements IGrammarAccess {
+public class TerminalRulesTestLanguageGrammarAccess implements IGrammarAccess {
+	
 	
 	public class ModelElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
@@ -559,28 +564,26 @@ public class TerminalRulesTestLanguageGrammarAccess extends BaseEPackageAccess i
 		public Wildcard eleWildcard() { return cWildcard; }
 	}
 	
-	public final static TerminalRulesTestLanguageGrammarAccess INSTANCE = new TerminalRulesTestLanguageGrammarAccess();
+	private ModelElements pModel;
+	private IDElements pID;
+	private INTElements pINT;
+	private STRINGElements pSTRING;
+	private ML_COMMENTElements pML_COMMENT;
+	private SL_COMMENTElements pSL_COMMENT;
+	private WSElements pWS;
+	private ANY_OTHERElements pANY_OTHER;
+	
+	private final GrammarProvider grammarProvider;
 
-	private static final String TERMINALRULESTESTLANGUAGE_GRAMMAR_CP_URI = "classpath:/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.xmi";
-	private static Grammar GRAMMAR = null;
-	private static ModelElements pModel;
-	private static IDElements pID;
-	private static INTElements pINT;
-	private static STRINGElements pSTRING;
-	private static ML_COMMENTElements pML_COMMENT;
-	private static SL_COMMENTElements pSL_COMMENT;
-	private static WSElements pWS;
-	private static ANY_OTHERElements pANY_OTHER;
-
-	@SuppressWarnings("unused")
-	public synchronized Grammar getGrammar() {	
-		if (GRAMMAR==null) {
-			// assert the XtextPackage implementation is loaded
-			XtextPackage xtextPackage = XtextPackage.eINSTANCE;
-			GRAMMAR = (Grammar) loadGrammarFile(TerminalRulesTestLanguageGrammarAccess.class.getClassLoader(),TERMINALRULESTESTLANGUAGE_GRAMMAR_CP_URI);
-		}
-		return GRAMMAR;
+	@Inject
+	public TerminalRulesTestLanguageGrammarAccess(GrammarProvider grammarProvider) {
+		this.grammarProvider = grammarProvider;
 	}
+	
+	public Grammar getGrammar() {	
+		return grammarProvider.getGrammar(this);
+	}
+	
 
 	
 	// Model:   idValue=ID|intValue=INT|stringValue=STRING|mlCommentValue=ML_COMMENT|slCommentValue=SL_COMMENT|wsValue=WS|anyValue=ANY_OTHER;

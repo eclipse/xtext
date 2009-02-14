@@ -22,6 +22,8 @@ import org.eclipse.xtext.example.parser.packrat.consumers.DomainmodelTypeRefCons
 @SuppressWarnings("unused")
 public final class DomainmodelReferenceConsumer extends NonTerminalConsumer {
 
+	private ReferenceElements rule;
+	
 	private ITerminalConsumer idConsumer;
 	private INonTerminalConsumer typeRefConsumer;
 
@@ -112,17 +114,11 @@ public final class DomainmodelReferenceConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$6(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "name", false, false, getRule().ele00010LexerRuleCallID(), getRuleCall$7$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$7(entryPoint);
+	}
+
+	protected int consumeRuleCall$7(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "name", false, false, getRule().ele00010LexerRuleCallID(), getRuleCall$7$Delimiter());
 	}
 
 	protected int consumeKeyword$8(int entryPoint) throws Exception {
@@ -130,17 +126,11 @@ public final class DomainmodelReferenceConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$9(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(typeRefConsumer, "type", false, false, false, getRule().ele010ParserRuleCallTypeRef());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$10(entryPoint);
+	}
+
+	protected int consumeRuleCall$10(int entryPoint) throws Exception {
+		return consumeNonTerminal(typeRefConsumer, "type", false, false, false, getRule().ele010ParserRuleCallTypeRef());
 	}
 
 	protected int consumeGroup$11(int entryPoint) throws Exception {
@@ -189,21 +179,20 @@ public final class DomainmodelReferenceConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$13(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "opposite", false, false, getRule().ele110CrossReferenceEStringReference(), getCrossReference$14$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeCrossReference$14(entryPoint);
+	}
+
+	protected int consumeCrossReference$14(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "opposite", false, false, getRule().ele110CrossReferenceEStringReference(), getCrossReference$14$Delimiter());
 	}
 
 	public ReferenceElements getRule() {
-		return DomainmodelGrammarAccess.INSTANCE.prReference();
+	// DomainmodelGrammarAccess.INSTANCE.prReference()
+		return rule;
+	}
+	
+	public void setRule(ReferenceElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

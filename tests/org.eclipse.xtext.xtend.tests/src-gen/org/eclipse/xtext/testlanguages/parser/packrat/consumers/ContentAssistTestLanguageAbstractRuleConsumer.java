@@ -22,6 +22,8 @@ import org.eclipse.xtext.testlanguages.parser.packrat.consumers.ContentAssistTes
 @SuppressWarnings("unused")
 public final class ContentAssistTestLanguageAbstractRuleConsumer extends NonTerminalConsumer {
 
+	private AbstractRuleElements rule;
+	
 	private INonTerminalConsumer firstAbstractRuleChildConsumer;
 	private INonTerminalConsumer secondAbstractRuleChildConsumer;
 
@@ -62,7 +64,12 @@ public final class ContentAssistTestLanguageAbstractRuleConsumer extends NonTerm
 	}
 
 	public AbstractRuleElements getRule() {
-		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prAbstractRule();
+	// ContentAssistTestLanguageGrammarAccess.INSTANCE.prAbstractRule()
+		return rule;
+	}
+	
+	public void setRule(AbstractRuleElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

@@ -13,7 +13,7 @@ public final class XtextDelimiters {
 	private XtextDelimiters() {
 		throw new UnsupportedOperationException("Utility classes may not be initialized");
 	}
-	
+
 	public static ISequenceMatcher crossReference$28$Delimiter = new SetBasedKeywordMatcher(
 		"abstract language", "language", "extends", "hidden", "generate", "as", "import", "native", "lexer", "returns", "terminal", "current");
 

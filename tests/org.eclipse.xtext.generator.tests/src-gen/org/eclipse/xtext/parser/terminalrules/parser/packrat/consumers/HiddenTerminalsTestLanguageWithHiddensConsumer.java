@@ -20,6 +20,8 @@ import org.eclipse.xtext.parser.terminalrules.services.HiddenTerminalsTestLangua
 @SuppressWarnings("unused")
 public final class HiddenTerminalsTestLanguageWithHiddensConsumer extends NonTerminalConsumer {
 
+	private WithHiddensElements rule;
+	
 
 	private ICharacterClass keyword$3$Delimiter;
 	
@@ -96,7 +98,12 @@ public final class HiddenTerminalsTestLanguageWithHiddensConsumer extends NonTer
 	}
 
 	public WithHiddensElements getRule() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prWithHiddens();
+	// HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prWithHiddens()
+		return rule;
+	}
+	
+	public void setRule(WithHiddensElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

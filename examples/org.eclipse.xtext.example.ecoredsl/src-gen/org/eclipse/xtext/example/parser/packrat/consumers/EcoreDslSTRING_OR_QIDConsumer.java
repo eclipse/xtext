@@ -22,6 +22,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGCons
 @SuppressWarnings("unused")
 public final class EcoreDslSTRING_OR_QIDConsumer extends NonTerminalConsumer {
 
+	private STRING_OR_QIDElements rule;
+	
 	private INonTerminalConsumer qidConsumer;
 	private ITerminalConsumer stringConsumer;
 
@@ -65,7 +67,12 @@ public final class EcoreDslSTRING_OR_QIDConsumer extends NonTerminalConsumer {
 	}
 
 	public STRING_OR_QIDElements getRule() {
-		return EcoreDslGrammarAccess.INSTANCE.prSTRING_OR_QID();
+	// EcoreDslGrammarAccess.INSTANCE.prSTRING_OR_QID()
+		return rule;
+	}
+	
+	public void setRule(STRING_OR_QIDElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

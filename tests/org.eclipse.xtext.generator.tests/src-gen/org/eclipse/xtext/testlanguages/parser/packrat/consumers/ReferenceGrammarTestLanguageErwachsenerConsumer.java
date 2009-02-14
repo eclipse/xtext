@@ -22,6 +22,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinINTConsume
 @SuppressWarnings("unused")
 public final class ReferenceGrammarTestLanguageErwachsenerConsumer extends NonTerminalConsumer {
 
+	private ErwachsenerElements rule;
+	
 	private ITerminalConsumer idConsumer;
 	private ITerminalConsumer intConsumer;
 
@@ -136,7 +138,12 @@ public final class ReferenceGrammarTestLanguageErwachsenerConsumer extends NonTe
 	}
 
 	public ErwachsenerElements getRule() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prErwachsener();
+	// ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prErwachsener()
+		return rule;
+	}
+	
+	public void setRule(ErwachsenerElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

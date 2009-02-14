@@ -22,6 +22,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer
 @SuppressWarnings("unused")
 public final class EpatchTestLanguageObjectNewConsumer extends NonTerminalConsumer {
 
+	private ObjectNewElements rule;
+	
 	private ITerminalConsumer fragmentConsumer;
 	private ITerminalConsumer idConsumer;
 
@@ -104,7 +106,12 @@ public final class EpatchTestLanguageObjectNewConsumer extends NonTerminalConsum
 	}
 
 	public ObjectNewElements getRule() {
-		return EpatchTestLanguageGrammarAccess.INSTANCE.prObjectNew();
+	// EpatchTestLanguageGrammarAccess.INSTANCE.prObjectNew()
+		return rule;
+	}
+	
+	public void setRule(ObjectNewElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

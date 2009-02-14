@@ -5,33 +5,36 @@ Generated with Xtext
 package org.eclipse.xtext.builtin;
 
 import com.google.inject.Singleton;
+import com.google.inject.Inject;
+
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parser.BaseEPackageAccess;
+
+import org.eclipse.xtext.service.GrammarProvider;
+
 
 @Singleton
-public class XtextBuiltinGrammarAccess extends BaseEPackageAccess implements IGrammarAccess {
+public class XtextBuiltinGrammarAccess implements IGrammarAccess {
 	
-	public final static XtextBuiltinGrammarAccess INSTANCE = new XtextBuiltinGrammarAccess();
+	
+	private LexerRule lID;
+	private LexerRule lINT;
+	private LexerRule lSTRING;
+	private LexerRule lML_COMMENT;
+	private LexerRule lSL_COMMENT;
+	private LexerRule lWS;
+	private LexerRule lANY_OTHER;
+	
+	private final GrammarProvider grammarProvider;
 
-	private static final String XTEXTBUILTIN_GRAMMAR_CP_URI = "classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi";
-	private static Grammar GRAMMAR = null;
-	private static LexerRule lID;
-	private static LexerRule lINT;
-	private static LexerRule lSTRING;
-	private static LexerRule lML_COMMENT;
-	private static LexerRule lSL_COMMENT;
-	private static LexerRule lWS;
-	private static LexerRule lANY_OTHER;
-
-	@SuppressWarnings("unused")
-	public synchronized Grammar getGrammar() {	
-		if (GRAMMAR==null) {
-			// assert the XtextPackage implementation is loaded
-			XtextPackage xtextPackage = XtextPackage.eINSTANCE;
-			GRAMMAR = (Grammar) loadGrammarFile(XtextBuiltinGrammarAccess.class.getClassLoader(),XTEXTBUILTIN_GRAMMAR_CP_URI);
-		}
-		return GRAMMAR;
+	@Inject
+	public XtextBuiltinGrammarAccess(GrammarProvider grammarProvider) {
+		this.grammarProvider = grammarProvider;
 	}
+	
+	public Grammar getGrammar() {	
+		return grammarProvider.getGrammar(this);
+	}
+	
 
 	
 	// lexer ID:   "(\'^\')?(\'a\'..\'z\'|\'A\'..\'Z\'|\'_\') (\'a\'..\'z\'|\'A\'..\'Z\'|\'_\'|\'0\'..\'9\')*";

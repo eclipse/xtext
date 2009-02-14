@@ -21,6 +21,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer
 @SuppressWarnings("unused")
 public final class FormatterTestLanguageLineConsumer extends NonTerminalConsumer {
 
+	private LineElements rule;
+	
 	private ITerminalConsumer idConsumer;
 
 	private ICharacterClass keyword$7$Delimiter;
@@ -102,7 +104,12 @@ public final class FormatterTestLanguageLineConsumer extends NonTerminalConsumer
 	}
 
 	public LineElements getRule() {
-		return FormatterTestLanguageGrammarAccess.INSTANCE.prLine();
+	// FormatterTestLanguageGrammarAccess.INSTANCE.prLine()
+		return rule;
+	}
+	
+	public void setRule(LineElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

@@ -22,6 +22,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer
 @SuppressWarnings("unused")
 public final class XtextGrammarTestLanguageAssignmentConsumer extends NonTerminalConsumer {
 
+	private AssignmentElements rule;
+	
 	private INonTerminalConsumer abstractTerminalConsumer;
 	private ITerminalConsumer idConsumer;
 
@@ -143,7 +145,12 @@ public final class XtextGrammarTestLanguageAssignmentConsumer extends NonTermina
 	}
 
 	public AssignmentElements getRule() {
-		return XtextGrammarTestLanguageGrammarAccess.INSTANCE.prAssignment();
+	// XtextGrammarTestLanguageGrammarAccess.INSTANCE.prAssignment()
+		return rule;
+	}
+	
+	public void setRule(AssignmentElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

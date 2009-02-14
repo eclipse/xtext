@@ -22,6 +22,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer
 @SuppressWarnings("unused")
 public final class EcoreDslEGenericTypeReferenceDeclConsumer extends NonTerminalConsumer {
 
+	private EGenericTypeReferenceDeclElements rule;
+	
 	private INonTerminalConsumer eGenericTypeDeclConsumer;
 	private ITerminalConsumer idConsumer;
 
@@ -103,17 +105,11 @@ public final class EcoreDslEGenericTypeReferenceDeclConsumer extends NonTerminal
 	}
 
 	protected int consumeAssignment$3(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "eClassifier", false, false, getRule().ele000CrossReferenceEStringEClassifier(), getCrossReference$4$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeCrossReference$4(entryPoint);
+	}
+
+	protected int consumeCrossReference$4(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "eClassifier", false, false, getRule().ele000CrossReferenceEStringEClassifier(), getCrossReference$4$Delimiter());
 	}
 
 	protected int consumeGroup$6(int entryPoint) throws Exception {
@@ -180,17 +176,11 @@ public final class EcoreDslEGenericTypeReferenceDeclConsumer extends NonTerminal
 	}
 
 	protected int consumeAssignment$10(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(eGenericTypeDeclConsumer, "eTypeArguments", true, false, false, getRule().ele010010ParserRuleCallEGenericTypeDecl());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$11(entryPoint);
+	}
+
+	protected int consumeRuleCall$11(int entryPoint) throws Exception {
+		return consumeNonTerminal(eGenericTypeDeclConsumer, "eTypeArguments", true, false, false, getRule().ele010010ParserRuleCallEGenericTypeDecl());
 	}
 
 	protected int consumeGroup$12(int entryPoint) throws Exception {
@@ -238,17 +228,11 @@ public final class EcoreDslEGenericTypeReferenceDeclConsumer extends NonTerminal
 	}
 
 	protected int consumeAssignment$14(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(eGenericTypeDeclConsumer, "eTypeArguments", true, false, false, getRule().ele010110ParserRuleCallEGenericTypeDecl());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$15(entryPoint);
+	}
+
+	protected int consumeRuleCall$15(int entryPoint) throws Exception {
+		return consumeNonTerminal(eGenericTypeDeclConsumer, "eTypeArguments", true, false, false, getRule().ele010110ParserRuleCallEGenericTypeDecl());
 	}
 
 	protected int consumeKeyword$16(int entryPoint) throws Exception {
@@ -291,21 +275,20 @@ public final class EcoreDslEGenericTypeReferenceDeclConsumer extends NonTerminal
 	}
 
 	protected int consumeAssignment$19(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "eTypeParameter", false, false, getRule().ele110CrossReferenceEStringETypeParameter(), getCrossReference$20$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeCrossReference$20(entryPoint);
+	}
+
+	protected int consumeCrossReference$20(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "eTypeParameter", false, false, getRule().ele110CrossReferenceEStringETypeParameter(), getCrossReference$20$Delimiter());
 	}
 
 	public EGenericTypeReferenceDeclElements getRule() {
-		return EcoreDslGrammarAccess.INSTANCE.prEGenericTypeReferenceDecl();
+	// EcoreDslGrammarAccess.INSTANCE.prEGenericTypeReferenceDecl()
+		return rule;
+	}
+	
+	public void setRule(EGenericTypeReferenceDeclElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

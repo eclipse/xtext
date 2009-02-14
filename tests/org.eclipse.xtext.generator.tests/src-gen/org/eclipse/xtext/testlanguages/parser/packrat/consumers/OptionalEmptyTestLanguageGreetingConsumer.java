@@ -21,6 +21,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer
 @SuppressWarnings("unused")
 public final class OptionalEmptyTestLanguageGreetingConsumer extends NonTerminalConsumer {
 
+	private GreetingElements rule;
+	
 	private ITerminalConsumer idConsumer;
 
 	private ICharacterClass keyword$2$Delimiter;
@@ -82,7 +84,12 @@ public final class OptionalEmptyTestLanguageGreetingConsumer extends NonTerminal
 	}
 
 	public GreetingElements getRule() {
-		return OptionalEmptyTestLanguageGrammarAccess.INSTANCE.prGreeting();
+	// OptionalEmptyTestLanguageGrammarAccess.INSTANCE.prGreeting()
+		return rule;
+	}
+	
+	public void setRule(GreetingElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

@@ -21,6 +21,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer
 @SuppressWarnings("unused")
 public final class ComplexReconstrTestLanguageAtomConsumer extends NonTerminalConsumer {
 
+	private AtomElements rule;
+	
 	private ITerminalConsumer idConsumer;
 
 	private ISequenceMatcher ruleCall$2$Delimiter;
@@ -44,7 +46,12 @@ public final class ComplexReconstrTestLanguageAtomConsumer extends NonTerminalCo
 	}
 
 	public AtomElements getRule() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prAtom();
+	// ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prAtom()
+		return rule;
+	}
+	
+	public void setRule(AtomElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

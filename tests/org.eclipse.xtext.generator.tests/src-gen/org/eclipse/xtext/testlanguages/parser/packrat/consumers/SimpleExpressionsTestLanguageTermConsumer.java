@@ -22,6 +22,8 @@ import org.eclipse.xtext.testlanguages.parser.packrat.consumers.SimpleExpression
 @SuppressWarnings("unused")
 public final class SimpleExpressionsTestLanguageTermConsumer extends NonTerminalConsumer {
 
+	private TermElements rule;
+	
 	private INonTerminalConsumer atomConsumer;
 	private INonTerminalConsumer parensConsumer;
 
@@ -62,7 +64,12 @@ public final class SimpleExpressionsTestLanguageTermConsumer extends NonTerminal
 	}
 
 	public TermElements getRule() {
-		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prTerm();
+	// SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prTerm()
+		return rule;
+	}
+	
+	public void setRule(TermElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

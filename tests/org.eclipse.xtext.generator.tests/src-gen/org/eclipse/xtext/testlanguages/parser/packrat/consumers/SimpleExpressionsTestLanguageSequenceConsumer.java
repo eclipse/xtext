@@ -21,6 +21,8 @@ import org.eclipse.xtext.testlanguages.parser.packrat.consumers.SimpleExpression
 @SuppressWarnings("unused")
 public final class SimpleExpressionsTestLanguageSequenceConsumer extends NonTerminalConsumer {
 
+	private SequenceElements rule;
+	
 	private INonTerminalConsumer additionConsumer;
 
 	public SimpleExpressionsTestLanguageSequenceConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
@@ -120,7 +122,12 @@ public final class SimpleExpressionsTestLanguageSequenceConsumer extends NonTerm
 	}
 
 	public SequenceElements getRule() {
-		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prSequence();
+	// SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prSequence()
+		return rule;
+	}
+	
+	public void setRule(SequenceElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

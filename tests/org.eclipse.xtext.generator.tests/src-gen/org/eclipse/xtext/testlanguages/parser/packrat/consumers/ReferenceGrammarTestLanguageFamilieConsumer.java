@@ -22,6 +22,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGCons
 @SuppressWarnings("unused")
 public final class ReferenceGrammarTestLanguageFamilieConsumer extends NonTerminalConsumer {
 
+	private FamilieElements rule;
+	
 	private ITerminalConsumer idConsumer;
 	private ITerminalConsumer stringConsumer;
 
@@ -281,7 +283,12 @@ public final class ReferenceGrammarTestLanguageFamilieConsumer extends NonTermin
 	}
 
 	public FamilieElements getRule() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFamilie();
+	// ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFamilie()
+		return rule;
+	}
+	
+	public void setRule(FamilieElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

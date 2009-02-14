@@ -22,6 +22,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer
 @SuppressWarnings("unused")
 public final class EpatchTestLanguageMonoListAssignmentConsumer extends NonTerminalConsumer {
 
+	private MonoListAssignmentElements rule;
+	
 	private INonTerminalConsumer assignmentValueConsumer;
 	private ITerminalConsumer idConsumer;
 
@@ -245,7 +247,12 @@ public final class EpatchTestLanguageMonoListAssignmentConsumer extends NonTermi
 	}
 
 	public MonoListAssignmentElements getRule() {
-		return EpatchTestLanguageGrammarAccess.INSTANCE.prMonoListAssignment();
+	// EpatchTestLanguageGrammarAccess.INSTANCE.prMonoListAssignment()
+		return rule;
+	}
+	
+	public void setRule(MonoListAssignmentElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

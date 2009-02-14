@@ -21,6 +21,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGCons
 @SuppressWarnings("unused")
 public final class AbstractTestLanguageOverridableParserRule2Consumer extends NonTerminalConsumer {
 
+	private OverridableParserRule2Elements rule;
+	
 	private ITerminalConsumer stringConsumer;
 
 	private ICharacterClass keyword$2$Delimiter;
@@ -82,7 +84,12 @@ public final class AbstractTestLanguageOverridableParserRule2Consumer extends No
 	}
 
 	public OverridableParserRule2Elements getRule() {
-		return AbstractTestLanguageGrammarAccess.INSTANCE.prOverridableParserRule2();
+	// AbstractTestLanguageGrammarAccess.INSTANCE.prOverridableParserRule2()
+		return rule;
+	}
+	
+	public void setRule(OverridableParserRule2Elements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

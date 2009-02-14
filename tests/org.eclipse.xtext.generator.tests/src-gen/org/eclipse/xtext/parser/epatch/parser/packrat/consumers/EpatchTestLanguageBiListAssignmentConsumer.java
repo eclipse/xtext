@@ -22,6 +22,8 @@ import org.eclipse.xtext.parser.epatch.parser.packrat.consumers.EpatchTestLangua
 @SuppressWarnings("unused")
 public final class EpatchTestLanguageBiListAssignmentConsumer extends NonTerminalConsumer {
 
+	private BiListAssignmentElements rule;
+	
 	private ITerminalConsumer idConsumer;
 	private INonTerminalConsumer listAssignmentValueConsumer;
 
@@ -374,7 +376,12 @@ public final class EpatchTestLanguageBiListAssignmentConsumer extends NonTermina
 	}
 
 	public BiListAssignmentElements getRule() {
-		return EpatchTestLanguageGrammarAccess.INSTANCE.prBiListAssignment();
+	// EpatchTestLanguageGrammarAccess.INSTANCE.prBiListAssignment()
+		return rule;
+	}
+	
+	public void setRule(BiListAssignmentElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

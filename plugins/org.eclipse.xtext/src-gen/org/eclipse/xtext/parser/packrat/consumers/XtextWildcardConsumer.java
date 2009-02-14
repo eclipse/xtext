@@ -20,6 +20,8 @@ import org.eclipse.xtext.services.XtextGrammarAccess.WildcardElements;
 @SuppressWarnings("unused")
 public final class XtextWildcardConsumer extends NonTerminalConsumer {
 
+	private WildcardElements rule;
+	
 
 	private ICharacterClass keyword$2$Delimiter;
 	
@@ -34,21 +36,20 @@ public final class XtextWildcardConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$1(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeKeyword(getRule().ele0KeywordFullStop(), "isWildcard", false, true, getKeyword$2$Delimiter()); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeKeyword$2(entryPoint);
+	}
+
+	protected int consumeKeyword$2(int entryPoint) throws Exception {
+		return consumeKeyword(getRule().ele0KeywordFullStop(), "isWildcard", false, true, getKeyword$2$Delimiter());
 	}
 
 	public WildcardElements getRule() {
-		return XtextGrammarAccess.INSTANCE.prWildcard();
+	// XtextGrammarAccess.INSTANCE.prWildcard()
+		return rule;
+	}
+	
+	public void setRule(WildcardElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

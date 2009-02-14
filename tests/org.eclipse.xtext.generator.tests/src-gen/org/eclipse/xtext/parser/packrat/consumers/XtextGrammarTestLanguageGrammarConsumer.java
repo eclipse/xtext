@@ -24,6 +24,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer
 @SuppressWarnings("unused")
 public final class XtextGrammarTestLanguageGrammarConsumer extends NonTerminalConsumer {
 
+	private GrammarElements rule;
+	
 	private INonTerminalConsumer abstractMetamodelDeclarationConsumer;
 	private INonTerminalConsumer abstractRuleConsumer;
 	private INonTerminalConsumer grammarIdConsumer;
@@ -437,9 +439,8 @@ public final class XtextGrammarTestLanguageGrammarConsumer extends NonTerminalCo
 					marker.rollback();
 					announceLevelFinished();
 					return ConsumeResult.SUCCESS;
-				} else {
-					error("Could not find token.", getRule().ele1AssignmentRules());
 				}
+				error("Could not find token.", getRule().ele1AssignmentRules());
 		}
 		announceLevelFinished();
 		marker.commit();
@@ -455,7 +456,12 @@ public final class XtextGrammarTestLanguageGrammarConsumer extends NonTerminalCo
 	}
 
 	public GrammarElements getRule() {
-		return XtextGrammarTestLanguageGrammarAccess.INSTANCE.prGrammar();
+	// XtextGrammarTestLanguageGrammarAccess.INSTANCE.prGrammar()
+		return rule;
+	}
+	
+	public void setRule(GrammarElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

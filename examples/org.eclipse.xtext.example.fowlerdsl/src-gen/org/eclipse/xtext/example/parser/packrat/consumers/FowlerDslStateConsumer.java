@@ -22,6 +22,8 @@ import org.eclipse.xtext.example.parser.packrat.consumers.FowlerDslTransitionCon
 @SuppressWarnings("unused")
 public final class FowlerDslStateConsumer extends NonTerminalConsumer {
 
+	private StateElements rule;
+	
 	private ITerminalConsumer idConsumer;
 	private INonTerminalConsumer transitionConsumer;
 
@@ -118,17 +120,11 @@ public final class FowlerDslStateConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$6(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "name", false, false, getRule().ele00010LexerRuleCallID(), getRuleCall$7$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$7(entryPoint);
+	}
+
+	protected int consumeRuleCall$7(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "name", false, false, getRule().ele00010LexerRuleCallID(), getRuleCall$7$Delimiter());
 	}
 
 	protected int consumeGroup$8(int entryPoint) throws Exception {
@@ -218,9 +214,8 @@ public final class FowlerDslStateConsumer extends NonTerminalConsumer {
 					marker.rollback();
 					announceLevelFinished();
 					return ConsumeResult.SUCCESS;
-				} else {
-					error("Could not find token.", getRule().ele00101AssignmentActions());
 				}
+				error("Could not find token.", getRule().ele00101AssignmentActions());
 		}
 		announceLevelFinished();
 		marker.commit();
@@ -228,17 +223,11 @@ public final class FowlerDslStateConsumer extends NonTerminalConsumer {
 	}
 
 	protected int doConsumeAssignment$13(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "actions", true, false, getRule().ele001010CrossReferenceEStringCommand(), getCrossReference$14$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeCrossReference$14(entryPoint);
+	}
+
+	protected int consumeCrossReference$14(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "actions", true, false, getRule().ele001010CrossReferenceEStringCommand(), getCrossReference$14$Delimiter());
 	}
 
 	protected int consumeKeyword$16(int entryPoint) throws Exception {
@@ -255,17 +244,11 @@ public final class FowlerDslStateConsumer extends NonTerminalConsumer {
 	}
 
 	protected int doConsumeAssignment$17(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(transitionConsumer, "transitions", true, false, false, getRule().ele010ParserRuleCallTransition());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$18(entryPoint);
+	}
+
+	protected int consumeRuleCall$18(int entryPoint) throws Exception {
+		return consumeNonTerminal(transitionConsumer, "transitions", true, false, false, getRule().ele010ParserRuleCallTransition());
 	}
 
 	protected int consumeKeyword$19(int entryPoint) throws Exception {
@@ -273,7 +256,12 @@ public final class FowlerDslStateConsumer extends NonTerminalConsumer {
 	}
 
 	public StateElements getRule() {
-		return FowlerDslGrammarAccess.INSTANCE.prState();
+	// FowlerDslGrammarAccess.INSTANCE.prState()
+		return rule;
+	}
+	
+	public void setRule(StateElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

@@ -7,6 +7,8 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
+import org.eclipse.xtext.testlanguages.services.TestLanguageGrammarAccess;
+
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.TestLanguageEntryRuleConsumer;
@@ -33,9 +35,12 @@ public class TestLanguageParserConfiguration extends AbstractParserConfiguration
     private TestLanguageReducibleRuleConsumer reducibleRuleConsumer;
     private TestLanguageTerminalRuleConsumer terminalRuleConsumer;
 
-	public TestLanguageParserConfiguration(IInternalParserConfiguration configuration) {
+	private TestLanguageGrammarAccess grammarAccess;
+
+	public TestLanguageParserConfiguration(IInternalParserConfiguration configuration, TestLanguageGrammarAccess grammarAccess) {
 		super(configuration);
-		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration);
+		this.grammarAccess = grammarAccess;
+		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration, null);
 	}
 
 	public TestLanguageEntryRuleConsumer getRootConsumer() {
@@ -66,6 +71,22 @@ public class TestLanguageParserConfiguration extends AbstractParserConfiguration
 	}
 	
 	public void configureConsumers() {
+		if (grammarAccess == null)
+			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+		getEntryRuleConsumer().setRule(grammarAccess.prEntryRule());
+		getAbstractRuleConsumer().setRule(grammarAccess.prAbstractRule());
+		getChoiceRuleConsumer().setRule(grammarAccess.prChoiceRule());
+		getReducibleRuleConsumer().setRule(grammarAccess.prReducibleRule());
+		getTerminalRuleConsumer().setRule(grammarAccess.prTerminalRule());
+		getIdConsumer().setRule(grammarAccess.lrID());
+		getIntConsumer().setRule(grammarAccess.lrINT());
+		getStringConsumer().setRule(grammarAccess.lrSTRING());
+		getMlCommentConsumer().setRule(grammarAccess.lrML_COMMENT());
+		getSlCommentConsumer().setRule(grammarAccess.lrSL_COMMENT());
+		getWsConsumer().setRule(grammarAccess.lrWS());
+		getAnyOtherConsumer().setRule(grammarAccess.lrANY_OTHER());
+
+
 		getEntryRuleConsumer().setAbstractRuleConsumer(getAbstractRuleConsumer());
 
 		getAbstractRuleConsumer().setChoiceRuleConsumer(getChoiceRuleConsumer());

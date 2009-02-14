@@ -9,12 +9,15 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
-import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
 import org.eclipse.xtext.parsetree.transientvalues.services.TransientValuesTestGrammarAccess;
 
+import com.google.inject.Inject;
 
 public class TransientValuesTestParseTreeConstructor extends AbstractParseTreeConstructor {
 		
+	@Inject
+	private TransientValuesTestGrammarAccess grammarAccess;
+	
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
@@ -41,7 +44,7 @@ protected class Root_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return TransientValuesTestGrammarAccess.INSTANCE.prRoot().eleGroup();
+		return grammarAccess.prRoot().eleGroup();
 	}
 		
 	@Override
@@ -70,7 +73,7 @@ protected class Root_0_Keyword_test extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return TransientValuesTestGrammarAccess.INSTANCE.prRoot().ele0KeywordTest();
+		return grammarAccess.prRoot().ele0KeywordTest();
 	}	
 }
 
@@ -82,7 +85,7 @@ protected class Root_1_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return TransientValuesTestGrammarAccess.INSTANCE.prRoot().ele1Alternatives();
+		return grammarAccess.prRoot().ele1Alternatives();
 	}
 
 	@Override	
@@ -104,7 +107,7 @@ protected class Root_1_0_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return TransientValuesTestGrammarAccess.INSTANCE.prRoot().ele10Alternatives();
+		return grammarAccess.prRoot().ele10Alternatives();
 	}
 
 	@Override	
@@ -126,7 +129,7 @@ protected class Root_1_0_0_RuleCall_TestRequired extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return TransientValuesTestGrammarAccess.INSTANCE.prRoot().ele100ParserRuleCallTestRequired();
+		return grammarAccess.prRoot().ele100ParserRuleCallTestRequired();
 	}
 	
 	@Override
@@ -145,7 +148,7 @@ protected class Root_1_0_1_RuleCall_TestOptional extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return TransientValuesTestGrammarAccess.INSTANCE.prRoot().ele101ParserRuleCallTestOptional();
+		return grammarAccess.prRoot().ele101ParserRuleCallTestOptional();
 	}
 	
 	@Override
@@ -165,7 +168,7 @@ protected class Root_1_1_RuleCall_TestList extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return TransientValuesTestGrammarAccess.INSTANCE.prRoot().ele11ParserRuleCallTestList();
+		return grammarAccess.prRoot().ele11ParserRuleCallTestList();
 	}
 	
 	@Override
@@ -196,7 +199,7 @@ protected class TestRequired_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return TransientValuesTestGrammarAccess.INSTANCE.prTestRequired().eleGroup();
+		return grammarAccess.prTestRequired().eleGroup();
 	}
 		
 	@Override
@@ -225,7 +228,7 @@ protected class TestRequired_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return TransientValuesTestGrammarAccess.INSTANCE.prTestRequired().ele0Group();
+		return grammarAccess.prTestRequired().ele0Group();
 	}
 		
 	@Override
@@ -254,7 +257,7 @@ protected class TestRequired_0_0_Keyword_required extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return TransientValuesTestGrammarAccess.INSTANCE.prTestRequired().ele00KeywordRequired();
+		return grammarAccess.prTestRequired().ele00KeywordRequired();
 	}	
 }
 
@@ -266,7 +269,7 @@ protected class TestRequired_0_1_Assignment_required1 extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return TransientValuesTestGrammarAccess.INSTANCE.prTestRequired().ele01AssignmentRequired1();
+		return grammarAccess.prTestRequired().ele01AssignmentRequired1();
 	}
 	
 	@Override
@@ -275,7 +278,7 @@ protected class TestRequired_0_1_Assignment_required1 extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("required1");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = TransientValuesTestGrammarAccess.INSTANCE.prTestRequired().ele010LexerRuleCallINT();
+			element = grammarAccess.prTestRequired().ele010LexerRuleCallINT();
 			return new Solution(obj);
 		}
 		return null;
@@ -291,7 +294,7 @@ protected class TestRequired_1_Assignment_required2 extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return TransientValuesTestGrammarAccess.INSTANCE.prTestRequired().ele1AssignmentRequired2();
+		return grammarAccess.prTestRequired().ele1AssignmentRequired2();
 	}
 	
 	@Override
@@ -300,7 +303,7 @@ protected class TestRequired_1_Assignment_required2 extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("required2");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = TransientValuesTestGrammarAccess.INSTANCE.prTestRequired().ele10LexerRuleCallINT();
+			element = grammarAccess.prTestRequired().ele10LexerRuleCallINT();
 			return new Solution(obj);
 		}
 		return null;
@@ -326,7 +329,7 @@ protected class TestOptional_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return TransientValuesTestGrammarAccess.INSTANCE.prTestOptional().eleGroup();
+		return grammarAccess.prTestOptional().eleGroup();
 	}
 		
 	@Override
@@ -355,7 +358,7 @@ protected class TestOptional_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return TransientValuesTestGrammarAccess.INSTANCE.prTestOptional().ele0Group();
+		return grammarAccess.prTestOptional().ele0Group();
 	}
 		
 	@Override
@@ -384,7 +387,7 @@ protected class TestOptional_0_0_Keyword_optional extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return TransientValuesTestGrammarAccess.INSTANCE.prTestOptional().ele00KeywordOptional();
+		return grammarAccess.prTestOptional().ele00KeywordOptional();
 	}	
 }
 
@@ -396,7 +399,7 @@ protected class TestOptional_0_1_Assignment_opt1 extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return TransientValuesTestGrammarAccess.INSTANCE.prTestOptional().ele01AssignmentOpt1();
+		return grammarAccess.prTestOptional().ele01AssignmentOpt1();
 	}
 	
 	@Override
@@ -405,7 +408,7 @@ protected class TestOptional_0_1_Assignment_opt1 extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("opt1");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = TransientValuesTestGrammarAccess.INSTANCE.prTestOptional().ele010LexerRuleCallINT();
+			element = grammarAccess.prTestOptional().ele010LexerRuleCallINT();
 			return new Solution(obj);
 		}
 		return null;
@@ -421,7 +424,7 @@ protected class TestOptional_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return TransientValuesTestGrammarAccess.INSTANCE.prTestOptional().ele1Group();
+		return grammarAccess.prTestOptional().ele1Group();
 	}
 		
 	@Override
@@ -450,7 +453,7 @@ protected class TestOptional_1_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return TransientValuesTestGrammarAccess.INSTANCE.prTestOptional().ele10KeywordColon();
+		return grammarAccess.prTestOptional().ele10KeywordColon();
 	}	
 }
 
@@ -462,7 +465,7 @@ protected class TestOptional_1_1_Assignment_opt2 extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return TransientValuesTestGrammarAccess.INSTANCE.prTestOptional().ele11AssignmentOpt2();
+		return grammarAccess.prTestOptional().ele11AssignmentOpt2();
 	}
 	
 	@Override
@@ -471,7 +474,7 @@ protected class TestOptional_1_1_Assignment_opt2 extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("opt2");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = TransientValuesTestGrammarAccess.INSTANCE.prTestOptional().ele110LexerRuleCallINT();
+			element = grammarAccess.prTestOptional().ele110LexerRuleCallINT();
 			return new Solution(obj);
 		}
 		return null;
@@ -498,7 +501,7 @@ protected class TestList_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return TransientValuesTestGrammarAccess.INSTANCE.prTestList().eleGroup();
+		return grammarAccess.prTestList().eleGroup();
 	}
 		
 	@Override
@@ -527,7 +530,7 @@ protected class TestList_0_Keyword_list extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return TransientValuesTestGrammarAccess.INSTANCE.prTestList().ele0KeywordList();
+		return grammarAccess.prTestList().ele0KeywordList();
 	}	
 }
 
@@ -539,7 +542,7 @@ protected class TestList_1_Assignment_item extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return TransientValuesTestGrammarAccess.INSTANCE.prTestList().ele1AssignmentItem();
+		return grammarAccess.prTestList().ele1AssignmentItem();
 	}
 	
 	@Override
@@ -548,7 +551,7 @@ protected class TestList_1_Assignment_item extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("item");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = TransientValuesTestGrammarAccess.INSTANCE.prTestList().ele10LexerRuleCallINT();
+			element = grammarAccess.prTestList().ele10LexerRuleCallINT();
 			return new Solution(obj);
 		}
 		return null;

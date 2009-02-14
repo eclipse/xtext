@@ -21,6 +21,8 @@ import org.eclipse.xtext.testlanguages.parser.packrat.consumers.PartialParserTes
 @SuppressWarnings("unused")
 public final class PartialParserTestLanguageAbstractChildrenConsumer extends NonTerminalConsumer {
 
+	private AbstractChildrenElements rule;
+	
 	private INonTerminalConsumer abstractChildConsumer;
 
 	private ICharacterClass keyword$4$Delimiter;
@@ -118,9 +120,8 @@ public final class PartialParserTestLanguageAbstractChildrenConsumer extends Non
 					marker.rollback();
 					announceLevelFinished();
 					return ConsumeResult.SUCCESS;
-				} else {
-					error("Could not find token.", getRule().ele01AssignmentAbstractChildren());
 				}
+				error("Could not find token.", getRule().ele01AssignmentAbstractChildren());
 		}
 		announceLevelFinished();
 		marker.commit();
@@ -140,7 +141,12 @@ public final class PartialParserTestLanguageAbstractChildrenConsumer extends Non
 	}
 
 	public AbstractChildrenElements getRule() {
-		return PartialParserTestLanguageGrammarAccess.INSTANCE.prAbstractChildren();
+	// PartialParserTestLanguageGrammarAccess.INSTANCE.prAbstractChildren()
+		return rule;
+	}
+	
+	public void setRule(AbstractChildrenElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

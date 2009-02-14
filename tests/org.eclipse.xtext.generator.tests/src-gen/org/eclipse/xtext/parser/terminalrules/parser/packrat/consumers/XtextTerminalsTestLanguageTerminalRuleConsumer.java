@@ -23,6 +23,8 @@ import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerm
 @SuppressWarnings("unused")
 public final class XtextTerminalsTestLanguageTerminalRuleConsumer extends NonTerminalConsumer {
 
+	private TerminalRuleElements rule;
+	
 	private ITerminalConsumer idConsumer;
 	private INonTerminalConsumer terminalAlternativesConsumer;
 	private INonTerminalConsumer typeRefConsumer;
@@ -204,7 +206,12 @@ public final class XtextTerminalsTestLanguageTerminalRuleConsumer extends NonTer
 	}
 
 	public TerminalRuleElements getRule() {
-		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prTerminalRule();
+	// XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prTerminalRule()
+		return rule;
+	}
+	
+	public void setRule(TerminalRuleElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

@@ -14,6 +14,7 @@
 
 «EXTENSION org::eclipse::xtext::Extensions»
 «EXTENSION org::eclipse::xtext::Properties»
+«EXTENSION org::eclipse::xtext::grammaraccess::GrammarAccess»
 «EXTENSION org::eclipse::xtext::parser::packrat::PackratParserGen»
 
 «DEFINE root FOR GenService»
@@ -31,14 +32,29 @@
 */
 package «genClassFQName.toJavaPackage()»;
 
+import com.google.inject.Inject;
+
 import org.eclipse.xtext.parser.packrat.AbstractPackratParser;
+import org.eclipse.xtext.parser.packrat.IParseResultFactory;
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration.IInternalParserConfiguration;
 
-public class «genClassFQName.toSimpleName()» extends AbstractPackratParser {
+import «grammar().gaFQName()»;
 
+public class «genClassFQName.toSimpleName()» extends AbstractPackratParser {
+	
+	@Inject
+	public «genClassFQName.toSimpleName()»(IParseResultFactory parseResultFactory, «grammar().gaSimpleName()» grammarAccess) {
+		super(parseResultFactory, grammarAccess);
+	}
+	
 	@Override
 	protected «languageName().toFirstUpper()»ParserConfiguration createParserConfiguration(IInternalParserConfiguration configuration) {
-		return new «languageName().toFirstUpper()»ParserConfiguration(configuration);
+		return new «languageName().toFirstUpper()»ParserConfiguration(configuration, getGrammarAccess());
+	}
+	
+	@Override
+	protected «grammar().gaSimpleName()» getGrammarAccess() {
+		return («grammar().gaSimpleName()»)super.getGrammarAccess();
 	}
 	
 }
@@ -55,6 +71,8 @@ package «genClassFQName.toJavaPackage()»;
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
+
+import «grammar().gaFQName()»;
 
 «LET grammar().getSuperGrammar() AS superGrammar-»
 «IF superGrammar != null-»
@@ -79,11 +97,14 @@ public class «languageName().toFirstUpper()»ParserConfiguration extends Abstract
     private «rule.consumerClassName()» «rule.consumerFieldName()»;
 «ENDFOREACH-»
 
-	public «languageName().toFirstUpper()»ParserConfiguration(IInternalParserConfiguration configuration) {
+	private «grammar().gaSimpleName()» grammarAccess;
+
+	public «languageName().toFirstUpper()»ParserConfiguration(IInternalParserConfiguration configuration, «grammar().gaSimpleName()» grammarAccess) {
 		super(configuration);
+		this.grammarAccess = grammarAccess;
 «LET grammar().getSuperGrammar() AS superGrammar-»
 «IF superGrammar != null-»
-		this.«superGrammar.getName().replaceAll("\\s","_").toFirstLower()»Configuration = new «superGrammar.getName().replaceAll("\\s","_").toFirstUpper()»ParserConfiguration(configuration);
+		this.«superGrammar.getName().replaceAll("\\s","_").toFirstLower()»Configuration = new «superGrammar.getName().replaceAll("\\s","_").toFirstUpper()»ParserConfiguration(configuration, null);
 «ENDIF-»
 «ENDLET-»
 	}
@@ -129,6 +150,12 @@ public class «languageName().toFirstUpper()»ParserConfiguration extends Abstract
 	}
 	
 	public void configureConsumers() {
+		if (grammarAccess == null)
+			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+«FOREACH grammar().allRules() AS rule-»
+		«rule.consumerGetterName()»().setRule(grammarAccess.«rule.gaRuleAccessor()»);
+«ENDFOREACH»
+
 «FOREACH grammar().allParserRules() AS rule-»
 «LET rule.allCalledRules() AS calledRules-»
 «IF !calledRules.isEmpty-»

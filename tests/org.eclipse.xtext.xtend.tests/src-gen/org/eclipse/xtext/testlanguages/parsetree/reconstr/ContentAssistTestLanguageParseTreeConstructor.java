@@ -9,12 +9,15 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
-import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.ContentAssistTestLanguageGrammarAccess;
 
+import com.google.inject.Inject;
 
 public class ContentAssistTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 		
+	@Inject
+	private ContentAssistTestLanguageGrammarAccess grammarAccess;
+	
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
@@ -42,7 +45,7 @@ protected class Start_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prStart().eleGroup();
+		return grammarAccess.prStart().eleGroup();
 	}
 		
 	@Override
@@ -71,7 +74,7 @@ protected class Start_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prStart().ele0Group();
+		return grammarAccess.prStart().ele0Group();
 	}
 		
 	@Override
@@ -100,7 +103,7 @@ protected class Start_0_0_Keyword_abstractrules extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prStart().ele00KeywordAbstractRules();
+		return grammarAccess.prStart().ele00KeywordAbstractRules();
 	}	
 }
 
@@ -112,7 +115,7 @@ protected class Start_0_1_Assignment_rules extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prStart().ele01AssignmentRules();
+		return grammarAccess.prStart().ele01AssignmentRules();
 	}
 	
 	@Override
@@ -145,7 +148,7 @@ protected class Start_1_Keyword_end extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prStart().ele1KeywordEnd();
+		return grammarAccess.prStart().ele1KeywordEnd();
 	}	
 }
 
@@ -168,7 +171,7 @@ protected class AbstractRule_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prAbstractRule().eleAlternatives();
+		return grammarAccess.prAbstractRule().eleAlternatives();
 	}
 
 	@Override	
@@ -190,7 +193,7 @@ protected class AbstractRule_0_RuleCall_FirstAbstractRuleChild extends RuleCallT
 	}
 	
 	public RuleCall getGrammarElement() {
-		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prAbstractRule().ele0ParserRuleCallFirstAbstractRuleChild();
+		return grammarAccess.prAbstractRule().ele0ParserRuleCallFirstAbstractRuleChild();
 	}
 	
 	@Override
@@ -209,7 +212,7 @@ protected class AbstractRule_1_RuleCall_SecondAbstractRuleChild extends RuleCall
 	}
 	
 	public RuleCall getGrammarElement() {
-		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prAbstractRule().ele1ParserRuleCallSecondAbstractRuleChild();
+		return grammarAccess.prAbstractRule().ele1ParserRuleCallSecondAbstractRuleChild();
 	}
 	
 	@Override
@@ -239,7 +242,7 @@ protected class FirstAbstractRuleChild_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prFirstAbstractRuleChild().eleGroup();
+		return grammarAccess.prFirstAbstractRuleChild().eleGroup();
 	}
 		
 	@Override
@@ -268,7 +271,7 @@ protected class FirstAbstractRuleChild_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prFirstAbstractRuleChild().ele0Group();
+		return grammarAccess.prFirstAbstractRuleChild().ele0Group();
 	}
 		
 	@Override
@@ -297,7 +300,7 @@ protected class FirstAbstractRuleChild_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prFirstAbstractRuleChild().ele00Group();
+		return grammarAccess.prFirstAbstractRuleChild().ele00Group();
 	}
 		
 	@Override
@@ -326,7 +329,7 @@ protected class FirstAbstractRuleChild_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prFirstAbstractRuleChild().ele000Group();
+		return grammarAccess.prFirstAbstractRuleChild().ele000Group();
 	}
 		
 	@Override
@@ -355,7 +358,7 @@ protected class FirstAbstractRuleChild_0_0_0_0_Assignment_name extends Assignmen
 	}
 	
 	public Assignment getGrammarElement() {
-		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prFirstAbstractRuleChild().ele0000AssignmentName();
+		return grammarAccess.prFirstAbstractRuleChild().ele0000AssignmentName();
 	}
 	
 	@Override
@@ -364,7 +367,7 @@ protected class FirstAbstractRuleChild_0_0_0_0_Assignment_name extends Assignmen
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = ContentAssistTestLanguageGrammarAccess.INSTANCE.prFirstAbstractRuleChild().ele00000LexerRuleCallID();
+			element = grammarAccess.prFirstAbstractRuleChild().ele00000LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -379,7 +382,7 @@ protected class FirstAbstractRuleChild_0_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prFirstAbstractRuleChild().ele0001KeywordLeftParenthesis();
+		return grammarAccess.prFirstAbstractRuleChild().ele0001KeywordLeftParenthesis();
 	}	
 }
 
@@ -392,7 +395,7 @@ protected class FirstAbstractRuleChild_0_0_1_Assignment_elements extends Assignm
 	}
 	
 	public Assignment getGrammarElement() {
-		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prFirstAbstractRuleChild().ele001AssignmentElements();
+		return grammarAccess.prFirstAbstractRuleChild().ele001AssignmentElements();
 	}
 	
 	@Override
@@ -425,7 +428,7 @@ protected class FirstAbstractRuleChild_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prFirstAbstractRuleChild().ele01KeywordRightParenthesis();
+		return grammarAccess.prFirstAbstractRuleChild().ele01KeywordRightParenthesis();
 	}	
 }
 
@@ -438,7 +441,7 @@ protected class FirstAbstractRuleChild_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prFirstAbstractRuleChild().ele1KeywordSemicolon();
+		return grammarAccess.prFirstAbstractRuleChild().ele1KeywordSemicolon();
 	}	
 }
 
@@ -461,7 +464,7 @@ protected class SecondAbstractRuleChild_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prSecondAbstractRuleChild().eleGroup();
+		return grammarAccess.prSecondAbstractRuleChild().eleGroup();
 	}
 		
 	@Override
@@ -490,7 +493,7 @@ protected class SecondAbstractRuleChild_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prSecondAbstractRuleChild().ele0Group();
+		return grammarAccess.prSecondAbstractRuleChild().ele0Group();
 	}
 		
 	@Override
@@ -519,7 +522,7 @@ protected class SecondAbstractRuleChild_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prSecondAbstractRuleChild().ele00Group();
+		return grammarAccess.prSecondAbstractRuleChild().ele00Group();
 	}
 		
 	@Override
@@ -548,7 +551,7 @@ protected class SecondAbstractRuleChild_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prSecondAbstractRuleChild().ele000Group();
+		return grammarAccess.prSecondAbstractRuleChild().ele000Group();
 	}
 		
 	@Override
@@ -577,7 +580,7 @@ protected class SecondAbstractRuleChild_0_0_0_0_Assignment_name extends Assignme
 	}
 	
 	public Assignment getGrammarElement() {
-		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prSecondAbstractRuleChild().ele0000AssignmentName();
+		return grammarAccess.prSecondAbstractRuleChild().ele0000AssignmentName();
 	}
 	
 	@Override
@@ -586,7 +589,7 @@ protected class SecondAbstractRuleChild_0_0_0_0_Assignment_name extends Assignme
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = ContentAssistTestLanguageGrammarAccess.INSTANCE.prSecondAbstractRuleChild().ele00000LexerRuleCallID();
+			element = grammarAccess.prSecondAbstractRuleChild().ele00000LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -601,7 +604,7 @@ protected class SecondAbstractRuleChild_0_0_0_1_Keyword_rule extends KeywordToke
 	}
 	
 	public Keyword getGrammarElement() {
-		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prSecondAbstractRuleChild().ele0001KeywordRule();
+		return grammarAccess.prSecondAbstractRuleChild().ele0001KeywordRule();
 	}	
 }
 
@@ -614,7 +617,7 @@ protected class SecondAbstractRuleChild_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prSecondAbstractRuleChild().ele001KeywordColon();
+		return grammarAccess.prSecondAbstractRuleChild().ele001KeywordColon();
 	}	
 }
 
@@ -627,7 +630,7 @@ protected class SecondAbstractRuleChild_0_1_Assignment_rule extends AssignmentTo
 	}
 	
 	public Assignment getGrammarElement() {
-		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prSecondAbstractRuleChild().ele01AssignmentRule();
+		return grammarAccess.prSecondAbstractRuleChild().ele01AssignmentRule();
 	}
 	
 	@Override
@@ -660,7 +663,7 @@ protected class SecondAbstractRuleChild_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prSecondAbstractRuleChild().ele1KeywordSemicolon();
+		return grammarAccess.prSecondAbstractRuleChild().ele1KeywordSemicolon();
 	}	
 }
 
@@ -683,7 +686,7 @@ protected class AbstractRuleCall_Assignment_rule extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prAbstractRuleCall().eleAssignmentRule();
+		return grammarAccess.prAbstractRuleCall().eleAssignmentRule();
 	}
 	
 	@Override
@@ -694,7 +697,7 @@ protected class AbstractRuleCall_Assignment_rule extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("AbstractRule")) {
 				type = AssignmentType.CR;
-				element = ContentAssistTestLanguageGrammarAccess.INSTANCE.prAbstractRuleCall().ele0CrossReferenceEStringAbstractRule(); 
+				element = grammarAccess.prAbstractRuleCall().ele0CrossReferenceEStringAbstractRule(); 
 				return new Solution(obj);
 			}
 		}

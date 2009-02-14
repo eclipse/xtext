@@ -9,12 +9,15 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
-import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.LexerTestLanguageGrammarAccess;
 
+import com.google.inject.Inject;
 
 public class LexerTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 		
+	@Inject
+	private LexerTestLanguageGrammarAccess grammarAccess;
+	
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
@@ -39,7 +42,7 @@ protected class Model_Assignment_children extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return LexerTestLanguageGrammarAccess.INSTANCE.prModel().eleAssignmentChildren();
+		return grammarAccess.prModel().eleAssignmentChildren();
 	}
 	
 	@Override
@@ -81,7 +84,7 @@ protected class Element_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return LexerTestLanguageGrammarAccess.INSTANCE.prElement().eleGroup();
+		return grammarAccess.prElement().eleGroup();
 	}
 		
 	@Override
@@ -110,7 +113,7 @@ protected class Element_0_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return LexerTestLanguageGrammarAccess.INSTANCE.prElement().ele0AssignmentName();
+		return grammarAccess.prElement().ele0AssignmentName();
 	}
 	
 	@Override
@@ -119,7 +122,7 @@ protected class Element_0_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = LexerTestLanguageGrammarAccess.INSTANCE.prElement().ele00LexerRuleCallID();
+			element = grammarAccess.prElement().ele00LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -134,7 +137,7 @@ protected class Element_1_Assignment_h extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return LexerTestLanguageGrammarAccess.INSTANCE.prElement().ele1AssignmentH();
+		return grammarAccess.prElement().ele1AssignmentH();
 	}
 	
 	@Override
@@ -143,7 +146,7 @@ protected class Element_1_Assignment_h extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("h");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = LexerTestLanguageGrammarAccess.INSTANCE.prElement().ele10LexerRuleCallSTRING();
+			element = grammarAccess.prElement().ele10LexerRuleCallSTRING();
 			return new Solution(obj);
 		}
 		return null;

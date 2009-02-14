@@ -45,27 +45,25 @@ import org.eclipse.xtext.parser.packrat.tokens.ErrorToken;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedAction;
 
-import com.google.inject.Inject;
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public abstract class AbstractPackratParser extends AbstractParser<CharSequence> implements
 	IPackratParser,
-	IMarkerFactory, 
+	IMarkerFactory,
 	IMarkerClient,
-	ICharSequenceWithOffset, 
+	ICharSequenceWithOffset,
 	IParsedTokenAcceptor,
-	IHiddenTokenHandler, 
+	IHiddenTokenHandler,
 	IConsumerUtility {
-	
+
 	private class HiddenTokenState implements IHiddenTokenHandler.IHiddenTokenState {
-		private ITerminalConsumer[] hiddens;
-		
+		private final ITerminalConsumer[] hiddens;
+
 		public HiddenTokenState(ITerminalConsumer[] previousHiddens) {
 			this.hiddens = previousHiddens;
 		}
-		
+
 		public void restore() {
 			setHiddens(this.hiddens);
 		}
@@ -75,39 +73,39 @@ public abstract class AbstractPackratParser extends AbstractParser<CharSequence>
 			return "HiddenTokenState holding " + Arrays.toString(hiddens);
 		}
 	}
-	
+
 	private static final IHiddenTokenState NULL_HIDDEN_TOKEN_STATE = new IHiddenTokenState() {
 		public void restore() {
 		}
 	};
-	
-	@Inject
-	private IGrammarAccess grammarAccess;
-	
-	@Inject
-	private IParseResultFactory parseResultFactory;
-	
+
+	private final IParseResultFactory parseResultFactory;
+
+	private final IGrammarAccess grammarAccess;
+
 	private CharSequence input;
-	
+
 	private ITerminalConsumer[] hiddens;
-	
+
 	private int offset;
-	
+
 	private final KeywordConsumer keywordConsumer;
-	
+
 	private final IParserConfiguration parserConfiguration;
-	
+
 	private static final int MARKER_BUFFER_SIZE = 100;
-	
+
 	private final Marker[] markerBuffer;
-	
+
 	private int markerBufferSize;
-	
+
 	private Marker activeMarker;
-	
+
 	private final RecoveryStateHolder recoveryStateHolder;
-	
-	protected AbstractPackratParser() {
+
+	protected AbstractPackratParser(IParseResultFactory parseResultFactory, IGrammarAccess grammarAccess) {
+		this.grammarAccess = grammarAccess;
+		this.parseResultFactory = parseResultFactory;
 		recoveryStateHolder = new RecoveryStateHolder();
 		parserConfiguration = createParserConfiguration();
 		keywordConsumer = createKeywordConsumer();
@@ -116,14 +114,14 @@ public abstract class AbstractPackratParser extends AbstractParser<CharSequence>
 		for(ITerminalConsumer hidden: this.hiddens)
 			hidden.setHidden(true);
 	}
-	
+
 	private IParserConfiguration createParserConfiguration() {
 		final ICharSequenceWithOffset localInput = DebugUtil.INPUT_DEBUG ? new DebugCharSequenceWithOffset(this) : this;
 		final IMarkerFactory localMarkerFactory = DebugUtil.MARKER_FACTORY_DEBUG ? new DebugMarkerFactory(this) : this;
 		final IParsedTokenAcceptor localTokenAcceptor = DebugUtil.TOKEN_ACCEPTOR_DEBUG ? new DebugParsedTokenAcceptor(this) : this;
 		final IHiddenTokenHandler localHiddenTokenHandler = DebugUtil.HIDDEN_TOKEN_HANDLER_DEBUG ? new DebugHiddenTokenHandler(this) : this;
 		final IConsumerUtility localConsumerUtil = DebugUtil.CONSUMER_UTIL_DEBUG ? new DebugConsumerUtility(this) : this;
-		
+
 		IParserConfiguration result = createParserConfiguration(new IInternalParserConfiguration() {
 			public IConsumerUtility getConsumerUtil() {
 				return localConsumerUtil;
@@ -156,14 +154,6 @@ public abstract class AbstractPackratParser extends AbstractParser<CharSequence>
 		return parserConfiguration.createKeywordConsumer();
 	}
 
-	public IGrammarAccess getGrammarAccess() {
-		return grammarAccess;
-	}
-
-	public void setGrammarAccess(IGrammarAccess grammarAccess) {
-		this.grammarAccess = grammarAccess;
-	}
-
 	public CharSequence getInput() {
 		return input;
 	}
@@ -171,7 +161,7 @@ public abstract class AbstractPackratParser extends AbstractParser<CharSequence>
 	public final IParseResult parse(CharSequence input) {
 		return parse(input, getRootConsumer());
 	}
-	
+
 	public final IParseResult parse(CharSequence input, INonTerminalConsumer consumer) {
 		this.input = input;
 		this.offset = 0;
@@ -199,7 +189,7 @@ public abstract class AbstractPackratParser extends AbstractParser<CharSequence>
 			offset = length();
 		}
 	}
-	
+
 	protected final IParseResult parse(INonTerminalConsumer consumer) {
 		if (activeMarker != null)
 			throw new IllegalStateException("cannot parse now. Active marker is already assigned.");
@@ -217,13 +207,13 @@ public abstract class AbstractPackratParser extends AbstractParser<CharSequence>
 			return result;
 		} catch(Exception e) {
 			throw new WrappedException(e);
-		} 
+		}
 	}
-	
+
 	protected INonTerminalConsumer getRootConsumer() {
 		return parserConfiguration.getRootConsumer();
 	}
-	
+
 	protected void consumeHiddens() {
 		boolean anySuccess = true;
 		while(anySuccess) {
@@ -236,25 +226,25 @@ public abstract class AbstractPackratParser extends AbstractParser<CharSequence>
 			}
 		}
 	}
-	
+
 	public IMarker mark() {
 		return getNextMarker(activeMarker, offset);
 	}
-	
+
 	public Marker getActiveMarker() {
 		return activeMarker;
 	}
 
 	public Marker getNextMarker(Marker parent, int offset) {
-		return markerBufferSize > 0 ? 
-				markerBuffer[--markerBufferSize].reInit(offset, parent, this, this) : 
+		return markerBufferSize > 0 ?
+				markerBuffer[--markerBufferSize].reInit(offset, parent, this, this) :
 				new Marker(parent, offset, this, this);
 	}
 
 	public void setActiveMarker(Marker marker) {
 		this.activeMarker = marker;
 	}
-	
+
 	public void releaseMarker(Marker marker) {
 		if (markerBufferSize < MARKER_BUFFER_SIZE)
 			markerBuffer[markerBufferSize++] = marker;
@@ -264,7 +254,7 @@ public abstract class AbstractPackratParser extends AbstractParser<CharSequence>
 		keywordConsumer.configure(keyword, notFollowedBy);
 		return consumeTerminal(keywordConsumer, feature, isMany, isBoolean, keyword, ISequenceMatcher.Factory.nullMatcher());
 	}
-	
+
 	public int consumeTerminal(ITerminalConsumer consumer, String feature, boolean isMany, boolean isBoolean, AbstractElement grammarElement, ISequenceMatcher notMatching) {
 		IMarker marker = mark();
 		consumeHiddens();
@@ -272,16 +262,16 @@ public abstract class AbstractPackratParser extends AbstractParser<CharSequence>
 		if (result == ConsumeResult.SUCCESS) {
 			marker.commit();
 			return result;
-		} 
+		}
 		marker.rollback();
 		return result;
 	}
-	
-	public int consumeNonTerminal(INonTerminalConsumer consumer, String feature, boolean isMany, 
+
+	public int consumeNonTerminal(INonTerminalConsumer consumer, String feature, boolean isMany,
 			boolean isDatatype, boolean isBoolean, AbstractElement grammarElement) throws Exception {
 		if (!consumer.isDefiningHiddens())
 			return consumer.consume(feature, isMany, isDatatype, isBoolean, grammarElement);
-		
+
 		// either consume hiddens and have success or leave them and try again
 		// TODO: rollback hidden tokens step by step
 		IMarker marker = mark();
@@ -301,7 +291,7 @@ public abstract class AbstractPackratParser extends AbstractParser<CharSequence>
 			marker = currentMarker.join(marker);
 			marker.commit();
 			return nextResult;
-		} 
+		}
 		// keep better result
 		if (nextResult > result) {
 			marker = currentMarker.join(marker);
@@ -313,17 +303,17 @@ public abstract class AbstractPackratParser extends AbstractParser<CharSequence>
 		marker.commit();
 		return result;
 	}
-	
+
 	public void consumeAction(Action action, String typeName, boolean isMany) {
 		accept(new ParsedAction(offset, action, typeName, isMany));
 	}
-	
-	public void setParseResultFactory(IParseResultFactory parseResultFactory) {
-		this.parseResultFactory = parseResultFactory;
+
+	protected IParseResultFactory getParseResultFactory() {
+		return parseResultFactory;
 	}
 
-	public IParseResultFactory getParseResultFactory() {
-		return parseResultFactory;
+	protected IGrammarAccess getGrammarAccess() {
+		return grammarAccess;
 	}
 
 	public int getOffset() {
@@ -400,5 +390,5 @@ public abstract class AbstractPackratParser extends AbstractParser<CharSequence>
 	protected IParseResult doParse(CharSequence sequence) {
 		return parse(sequence);
 	}
-	
+
 }

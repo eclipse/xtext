@@ -7,19 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.builtin.parser.packrat.consumers;
 
-import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
-import org.eclipse.xtext.services.XtextGrammarAccess;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public final class XtextBuiltinIDConsumer extends AbstractRuleAwareTerminalConsumer {
-	
+
 	// ('a'..'z'|'A'..'Z'|'_')
 	public static final ICharacterClass IDConsumer$$1 = ICharacterClass.Factory.join(
 			ICharacterClass.Factory.createRange('a', 'z'),
@@ -33,7 +30,7 @@ public final class XtextBuiltinIDConsumer extends AbstractRuleAwareTerminalConsu
 			ICharacterClass.Factory.create('_'),
 			ICharacterClass.Factory.createRange('0', '9')
 	);
-	
+
 	public XtextBuiltinIDConsumer(ITerminalConsumerConfiguration configuration) {
 		super(configuration);
 	}
@@ -57,8 +54,4 @@ public final class XtextBuiltinIDConsumer extends AbstractRuleAwareTerminalConsu
 		return result ? ConsumeResult.SUCCESS : ConsumeResult.EMPTY_MATCH;
 	}
 
-	@Override
-	protected LexerRule doGetRule() {
-		return (LexerRule) GrammarUtil.findRuleForName(XtextGrammarAccess.INSTANCE.getGrammar(), "ID");
-	}
 }

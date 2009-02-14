@@ -8,36 +8,40 @@
 package org.eclipse.xtext.parser.packrat.consumers;
 
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.IGrammarAccess.IParserRuleAccess;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public abstract class AbstractRuleAwareTerminalConsumer extends TerminalConsumer {
-	
+
 	private AbstractRule rule;
-	
+
 	protected AbstractRuleAwareTerminalConsumer(ITerminalConsumerConfiguration configuration) {
 		super(configuration);
 	}
-	
+
 	@Override
 	public final AbstractRule getGrammarElement() {
-		if (rule == null) {
-			rule = doGetRule();
-		}
 		return rule;
 	}
-	
+
+	public void setRule(AbstractRule rule) {
+		this.rule = rule;
+	}
+
+	public void setRule(IParserRuleAccess ruleAccess) {
+		this.rule = ruleAccess.getRule();
+	}
+
 	@Override
 	protected String getRuleName() {
 		return getGrammarElement().getName();
 	}
-	
-	protected abstract AbstractRule doGetRule();
-	
+
 	@Override
 	public String toString() {
 		return super.toString() + " for rule " + getGrammarElement().getName();
 	}
-	
+
 }

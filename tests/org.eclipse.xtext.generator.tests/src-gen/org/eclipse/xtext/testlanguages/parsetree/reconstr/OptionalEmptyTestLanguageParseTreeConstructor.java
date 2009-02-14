@@ -9,12 +9,15 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
-import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.OptionalEmptyTestLanguageGrammarAccess;
 
+import com.google.inject.Inject;
 
 public class OptionalEmptyTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 		
+	@Inject
+	private OptionalEmptyTestLanguageGrammarAccess grammarAccess;
+	
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
@@ -39,7 +42,7 @@ protected class Model_Assignment_child extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return OptionalEmptyTestLanguageGrammarAccess.INSTANCE.prModel().eleAssignmentChild();
+		return grammarAccess.prModel().eleAssignmentChild();
 	}
 	
 	@Override
@@ -81,7 +84,7 @@ protected class Greeting_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return OptionalEmptyTestLanguageGrammarAccess.INSTANCE.prGreeting().eleGroup();
+		return grammarAccess.prGreeting().eleGroup();
 	}
 		
 	@Override
@@ -110,7 +113,7 @@ protected class Greeting_0_Keyword_hallo extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return OptionalEmptyTestLanguageGrammarAccess.INSTANCE.prGreeting().ele0KeywordHallo();
+		return grammarAccess.prGreeting().ele0KeywordHallo();
 	}	
 }
 
@@ -122,7 +125,7 @@ protected class Greeting_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return OptionalEmptyTestLanguageGrammarAccess.INSTANCE.prGreeting().ele1AssignmentName();
+		return grammarAccess.prGreeting().ele1AssignmentName();
 	}
 	
 	@Override
@@ -131,7 +134,7 @@ protected class Greeting_1_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = OptionalEmptyTestLanguageGrammarAccess.INSTANCE.prGreeting().ele10LexerRuleCallID();
+			element = grammarAccess.prGreeting().ele10LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;

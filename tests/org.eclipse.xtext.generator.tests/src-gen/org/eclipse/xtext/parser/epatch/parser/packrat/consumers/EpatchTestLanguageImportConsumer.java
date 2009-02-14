@@ -23,6 +23,8 @@ import org.eclipse.xtext.parser.epatch.parser.packrat.consumers.EpatchTestLangua
 @SuppressWarnings("unused")
 public final class EpatchTestLanguageImportConsumer extends NonTerminalConsumer {
 
+	private ImportElements rule;
+	
 	private INonTerminalConsumer extensionImportConsumer;
 	private INonTerminalConsumer javaImportConsumer;
 	private INonTerminalConsumer modelImportConsumer;
@@ -73,7 +75,12 @@ public final class EpatchTestLanguageImportConsumer extends NonTerminalConsumer 
 	}
 
 	public ImportElements getRule() {
-		return EpatchTestLanguageGrammarAccess.INSTANCE.prImport();
+	// EpatchTestLanguageGrammarAccess.INSTANCE.prImport()
+		return rule;
+	}
+	
+	public void setRule(ImportElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

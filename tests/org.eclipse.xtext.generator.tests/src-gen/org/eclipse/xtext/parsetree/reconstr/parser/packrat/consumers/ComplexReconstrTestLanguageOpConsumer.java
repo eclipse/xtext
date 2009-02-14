@@ -21,6 +21,8 @@ import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.ComplexReco
 @SuppressWarnings("unused")
 public final class ComplexReconstrTestLanguageOpConsumer extends NonTerminalConsumer {
 
+	private OpElements rule;
+	
 	private INonTerminalConsumer termConsumer;
 
 	private ICharacterClass keyword$8$Delimiter;
@@ -214,7 +216,12 @@ public final class ComplexReconstrTestLanguageOpConsumer extends NonTerminalCons
 	}
 
 	public OpElements getRule() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prOp();
+	// ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prOp()
+		return rule;
+	}
+	
+	public void setRule(OpElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

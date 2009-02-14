@@ -21,6 +21,8 @@ import org.eclipse.xtext.parser.packrat.consumers.XtextGroupConsumer;
 @SuppressWarnings("unused")
 public final class XtextAlternativesConsumer extends NonTerminalConsumer {
 
+	private AlternativesElements rule;
+	
 	private INonTerminalConsumer groupConsumer;
 
 	private ICharacterClass keyword$7$Delimiter;
@@ -128,21 +130,20 @@ public final class XtextAlternativesConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$8(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(groupConsumer, "groups", true, false, false, getRule().ele110ParserRuleCallGroup());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$9(entryPoint);
+	}
+
+	protected int consumeRuleCall$9(int entryPoint) throws Exception {
+		return consumeNonTerminal(groupConsumer, "groups", true, false, false, getRule().ele110ParserRuleCallGroup());
 	}
 
 	public AlternativesElements getRule() {
-		return XtextGrammarAccess.INSTANCE.prAlternatives();
+	// XtextGrammarAccess.INSTANCE.prAlternatives()
+		return rule;
+	}
+	
+	public void setRule(AlternativesElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

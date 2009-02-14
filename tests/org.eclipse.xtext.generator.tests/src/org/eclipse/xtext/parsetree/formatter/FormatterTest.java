@@ -5,6 +5,7 @@ import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 public class FormatterTest extends AbstractGeneratorTest {
 
+	@Override
 	protected void setUp() throws Exception {
 		with(FormatterTestLanguageStandaloneSetup.class);
 		super.setUp();

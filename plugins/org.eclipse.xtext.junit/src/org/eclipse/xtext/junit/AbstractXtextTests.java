@@ -51,33 +51,40 @@ import com.google.inject.Module;
  *
  */
 public abstract class AbstractXtextTests extends TestCase {
-	
+
 	private Injector injector;
 
 	static {
+		// XXX Why is this necessary?
 		XtextBuiltinStandaloneSetup.doSetup();
 	}
-	
+
+	@Override
+	protected void tearDown() throws Exception {
+		injector = null;
+		super.tearDown();
+	}
+
 	protected String serialize(EObject obj) {
 		return injector.getInstance(SerializerUtil.class).serialize(obj);
 	}
-	
+
 	/**
 	 * call this to set the language class to be used in the current test.
 	 */
 	protected void with(Module ... modules) throws Exception {
 		injector = Guice.createInjector(modules);
 	}
-	
+
 	protected void with(Class<? extends ISetup> setupClazz) throws Exception {
 		ISetup instance = setupClazz.newInstance();
 		injector = instance.createInjectorAndDoEMFRegistration();
 	}
-	
+
 	protected void with(ISetup setup) throws Exception {
 		injector = setup.createInjectorAndDoEMFRegistration();
 	}
-	
+
 	public<T> T get(Class<T> clazz) {
 		return injector.getInstance(clazz);
 	}
@@ -85,11 +92,11 @@ public abstract class AbstractXtextTests extends TestCase {
 	protected IParser getParser() {
 		return injector.getInstance(ISwitchingParser.class);
 	}
-	
+
 	protected IAntlrParser getAntlrParser() {
 		return injector.getInstance(IAntlrParser.class);
 	}
-	
+
 	protected IPackratParser getPackratParser() {
 		return injector.getInstance(IPackratParser.class);
 	}
@@ -97,7 +104,7 @@ public abstract class AbstractXtextTests extends TestCase {
 	protected IAstFactory getASTFactory() {
 		return injector.getInstance(IAstFactory.class);
 	}
-	
+
 	protected IGrammarAccess getGrammarAccess() {
 		return injector.getInstance(IGrammarAccess.class);
 	}
@@ -105,19 +112,19 @@ public abstract class AbstractXtextTests extends TestCase {
 	protected IParseTreeConstructor getParseTreeConstructor() {
 		return injector.getInstance(IParseTreeConstructor.class);
 	}
-	
+
 	protected IResourceFactory getResourceFactory()  {
 		return injector.getInstance(IResourceFactory.class);
 	}
-	
+
 	protected IValueConverterService getValueConverterService() {
 		return injector.getInstance(IValueConverterService.class);
 	}
-	
+
 	protected IMetamodelAccess getMetamodelAccess() {
 		return injector.getInstance(IMetamodelAccess.class);
 	}
-	
+
 	protected ITokenSerializer getTokenSerializer() {
 		return injector.getInstance(ITokenSerializer.class);
 	}
@@ -139,7 +146,7 @@ public abstract class AbstractXtextTests extends TestCase {
 	protected EObject getModel(XtextResource resource) {
 		return resource.getParseResult().getRootASTElement();
 	}
-	
+
 	protected XtextResource getResourceFromString(String model) throws Exception {
 		return getResource(new org.eclipse.xtext.util.StringInputStream(model));
 	}
@@ -150,13 +157,13 @@ public abstract class AbstractXtextTests extends TestCase {
 		XtextResource resource = (XtextResource) getResourceFactory().createResource(URI.createURI("mytestmodel.test"));
 		rs.getResources().add(resource);
 		resource.load(in, null);
-		
+
 		for(Diagnostic d: resource.getErrors())
 			System.out.println("Resource Error: "+d);
-		
+
 		for(Diagnostic d: resource.getWarnings())
 			System.out.println("Resource Warning: "+d);
-		
+
 		return resource;
 	}
 
@@ -229,7 +236,7 @@ public abstract class AbstractXtextTests extends TestCase {
 					"The file does not exist exactly as it was named.\n" +
 					"The test is likely to cause trouble on the build server.\n" +
 					"Is your filesystem case insensitive? Please verify the spelling.");
-		
+
 		InputStream resourceAsStream = classLoader.getResourceAsStream(filePath);
 		if (resourceAsStream == null)
 			fail("Could not read resource: '" + filePath + "'. Is your file system case sensitive?");
@@ -244,5 +251,5 @@ public abstract class AbstractXtextTests extends TestCase {
 		String model = b.toString();
 		return model;
 	}
-	
+
 }

@@ -23,6 +23,8 @@ import org.eclipse.xtext.parser.packrat.consumers.XtextTypeRefConsumer;
 @SuppressWarnings("unused")
 public final class XtextParserRuleConsumer extends NonTerminalConsumer {
 
+	private ParserRuleElements rule;
+	
 	private INonTerminalConsumer alternativesConsumer;
 	private ITerminalConsumer idConsumer;
 	private INonTerminalConsumer typeRefConsumer;
@@ -134,17 +136,11 @@ public final class XtextParserRuleConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$6(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "name", false, false, getRule().ele000000LexerRuleCallID(), getRuleCall$7$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$7(entryPoint);
+	}
+
+	protected int consumeRuleCall$7(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "name", false, false, getRule().ele000000LexerRuleCallID(), getRuleCall$7$Delimiter());
 	}
 
 	protected int consumeGroup$8(int entryPoint) throws Exception {
@@ -193,17 +189,11 @@ public final class XtextParserRuleConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$10(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(typeRefConsumer, "type", false, false, false, getRule().ele0000110ParserRuleCallTypeRef());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$11(entryPoint);
+	}
+
+	protected int consumeRuleCall$11(int entryPoint) throws Exception {
+		return consumeNonTerminal(typeRefConsumer, "type", false, false, false, getRule().ele0000110ParserRuleCallTypeRef());
 	}
 
 	protected int consumeGroup$12(int entryPoint) throws Exception {
@@ -266,17 +256,11 @@ public final class XtextParserRuleConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$15(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeKeyword(getRule().ele00010000KeywordHidden(), "definesHiddenTokens", false, true, getKeyword$16$Delimiter()); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeKeyword$16(entryPoint);
+	}
+
+	protected int consumeKeyword$16(int entryPoint) throws Exception {
+		return consumeKeyword(getRule().ele00010000KeywordHidden(), "definesHiddenTokens", false, true, getKeyword$16$Delimiter());
 	}
 
 	protected int consumeKeyword$17(int entryPoint) throws Exception {
@@ -325,17 +309,11 @@ public final class XtextParserRuleConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$19(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "hiddenTokens", true, false, getRule().ele00010100CrossReferenceEStringAbstractRule(), getCrossReference$20$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeCrossReference$20(entryPoint);
+	}
+
+	protected int consumeCrossReference$20(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "hiddenTokens", true, false, getRule().ele00010100CrossReferenceEStringAbstractRule(), getCrossReference$20$Delimiter());
 	}
 
 	protected int consumeGroup$22(int entryPoint) throws Exception {
@@ -383,17 +361,11 @@ public final class XtextParserRuleConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$24(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "hiddenTokens", true, false, getRule().ele000101110CrossReferenceEStringAbstractRule(), getCrossReference$25$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeCrossReference$25(entryPoint);
+	}
+
+	protected int consumeCrossReference$25(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "hiddenTokens", true, false, getRule().ele000101110CrossReferenceEStringAbstractRule(), getCrossReference$25$Delimiter());
 	}
 
 	protected int consumeKeyword$27(int entryPoint) throws Exception {
@@ -405,17 +377,11 @@ public final class XtextParserRuleConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$29(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(alternativesConsumer, "alternatives", false, false, false, getRule().ele010ParserRuleCallAlternatives());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$30(entryPoint);
+	}
+
+	protected int consumeRuleCall$30(int entryPoint) throws Exception {
+		return consumeNonTerminal(alternativesConsumer, "alternatives", false, false, false, getRule().ele010ParserRuleCallAlternatives());
 	}
 
 	protected int consumeKeyword$31(int entryPoint) throws Exception {
@@ -423,7 +389,12 @@ public final class XtextParserRuleConsumer extends NonTerminalConsumer {
 	}
 
 	public ParserRuleElements getRule() {
-		return XtextGrammarAccess.INSTANCE.prParserRule();
+	// XtextGrammarAccess.INSTANCE.prParserRule()
+		return rule;
+	}
+	
+	public void setRule(ParserRuleElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

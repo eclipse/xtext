@@ -21,6 +21,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer
 @SuppressWarnings("unused")
 public final class FowlerDslTransitionConsumer extends NonTerminalConsumer {
 
+	private TransitionElements rule;
+	
 	private ITerminalConsumer idConsumer;
 
 	private ISequenceMatcher crossReference$4$Delimiter;
@@ -82,17 +84,11 @@ public final class FowlerDslTransitionConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$3(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "event", false, false, getRule().ele000CrossReferenceEStringEvent(), getCrossReference$4$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeCrossReference$4(entryPoint);
+	}
+
+	protected int consumeCrossReference$4(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "event", false, false, getRule().ele000CrossReferenceEStringEvent(), getCrossReference$4$Delimiter());
 	}
 
 	protected int consumeKeyword$6(int entryPoint) throws Exception {
@@ -100,21 +96,20 @@ public final class FowlerDslTransitionConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$7(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "state", false, false, getRule().ele10CrossReferenceEStringState(), getCrossReference$8$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeCrossReference$8(entryPoint);
+	}
+
+	protected int consumeCrossReference$8(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "state", false, false, getRule().ele10CrossReferenceEStringState(), getCrossReference$8$Delimiter());
 	}
 
 	public TransitionElements getRule() {
-		return FowlerDslGrammarAccess.INSTANCE.prTransition();
+	// FowlerDslGrammarAccess.INSTANCE.prTransition()
+		return rule;
+	}
+	
+	public void setRule(TransitionElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

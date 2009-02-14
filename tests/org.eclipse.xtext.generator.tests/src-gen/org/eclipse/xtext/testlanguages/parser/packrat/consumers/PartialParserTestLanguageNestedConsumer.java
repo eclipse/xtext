@@ -21,6 +21,8 @@ import org.eclipse.xtext.testlanguages.parser.packrat.consumers.PartialParserTes
 @SuppressWarnings("unused")
 public final class PartialParserTestLanguageNestedConsumer extends NonTerminalConsumer {
 
+	private NestedElements rule;
+	
 	private INonTerminalConsumer containerConsumer;
 
 	private ICharacterClass keyword$4$Delimiter;
@@ -118,9 +120,8 @@ public final class PartialParserTestLanguageNestedConsumer extends NonTerminalCo
 					marker.rollback();
 					announceLevelFinished();
 					return ConsumeResult.SUCCESS;
-				} else {
-					error("Could not find token.", getRule().ele01AssignmentNested());
 				}
+				error("Could not find token.", getRule().ele01AssignmentNested());
 		}
 		announceLevelFinished();
 		marker.commit();
@@ -140,7 +141,12 @@ public final class PartialParserTestLanguageNestedConsumer extends NonTerminalCo
 	}
 
 	public NestedElements getRule() {
-		return PartialParserTestLanguageGrammarAccess.INSTANCE.prNested();
+	// PartialParserTestLanguageGrammarAccess.INSTANCE.prNested()
+		return rule;
+	}
+	
+	public void setRule(NestedElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

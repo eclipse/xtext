@@ -21,6 +21,8 @@ import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleRecon
 @SuppressWarnings("unused")
 public final class SimpleReconstrTestLanguageOpConsumer extends NonTerminalConsumer {
 
+	private OpElements rule;
+	
 	private INonTerminalConsumer termConsumer;
 
 	public SimpleReconstrTestLanguageOpConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
@@ -120,7 +122,12 @@ public final class SimpleReconstrTestLanguageOpConsumer extends NonTerminalConsu
 	}
 
 	public OpElements getRule() {
-		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prOp();
+	// SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prOp()
+		return rule;
+	}
+	
+	public void setRule(OpElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

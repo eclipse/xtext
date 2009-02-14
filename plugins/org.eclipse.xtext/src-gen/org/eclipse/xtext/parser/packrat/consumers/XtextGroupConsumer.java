@@ -21,6 +21,8 @@ import org.eclipse.xtext.parser.packrat.consumers.XtextAbstractTokenConsumer;
 @SuppressWarnings("unused")
 public final class XtextGroupConsumer extends NonTerminalConsumer {
 
+	private GroupElements rule;
+	
 	private INonTerminalConsumer abstractTokenConsumer;
 
 	public XtextGroupConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
@@ -112,21 +114,20 @@ public final class XtextGroupConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$6(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(abstractTokenConsumer, "abstractTokens", true, false, false, getRule().ele110ParserRuleCallAbstractToken());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$7(entryPoint);
+	}
+
+	protected int consumeRuleCall$7(int entryPoint) throws Exception {
+		return consumeNonTerminal(abstractTokenConsumer, "abstractTokens", true, false, false, getRule().ele110ParserRuleCallAbstractToken());
 	}
 
 	public GroupElements getRule() {
-		return XtextGrammarAccess.INSTANCE.prGroup();
+	// XtextGrammarAccess.INSTANCE.prGroup()
+		return rule;
+	}
+	
+	public void setRule(GroupElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

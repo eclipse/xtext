@@ -21,6 +21,8 @@ import org.eclipse.xtext.testlanguages.parser.packrat.consumers.LexerTestLanguag
 @SuppressWarnings("unused")
 public final class LexerTestLanguageModelConsumer extends NonTerminalConsumer {
 
+	private ModelElements rule;
+	
 	private INonTerminalConsumer elementConsumer;
 
 	public LexerTestLanguageModelConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
@@ -50,7 +52,12 @@ public final class LexerTestLanguageModelConsumer extends NonTerminalConsumer {
 	}
 
 	public ModelElements getRule() {
-		return LexerTestLanguageGrammarAccess.INSTANCE.prModel();
+	// LexerTestLanguageGrammarAccess.INSTANCE.prModel()
+		return rule;
+	}
+	
+	public void setRule(ModelElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

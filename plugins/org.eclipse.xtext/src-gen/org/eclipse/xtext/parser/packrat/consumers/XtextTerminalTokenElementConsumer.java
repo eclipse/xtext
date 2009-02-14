@@ -25,6 +25,8 @@ import org.eclipse.xtext.parser.packrat.consumers.XtextWildcardConsumer;
 @SuppressWarnings("unused")
 public final class XtextTerminalTokenElementConsumer extends NonTerminalConsumer {
 
+	private TerminalTokenElementElements rule;
+	
 	private INonTerminalConsumer abstractNegatedTokenConsumer;
 	private INonTerminalConsumer characterRangeConsumer;
 	private INonTerminalConsumer parenthesizedTerminalElementConsumer;
@@ -95,7 +97,12 @@ public final class XtextTerminalTokenElementConsumer extends NonTerminalConsumer
 	}
 
 	public TerminalTokenElementElements getRule() {
-		return XtextGrammarAccess.INSTANCE.prTerminalTokenElement();
+	// XtextGrammarAccess.INSTANCE.prTerminalTokenElement()
+		return rule;
+	}
+	
+	public void setRule(TerminalTokenElementElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

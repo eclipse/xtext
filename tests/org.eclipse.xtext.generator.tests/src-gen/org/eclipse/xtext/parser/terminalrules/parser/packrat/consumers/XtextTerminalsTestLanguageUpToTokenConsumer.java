@@ -21,6 +21,8 @@ import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerm
 @SuppressWarnings("unused")
 public final class XtextTerminalsTestLanguageUpToTokenConsumer extends NonTerminalConsumer {
 
+	private UpToTokenElements rule;
+	
 	private INonTerminalConsumer terminalTokenElementConsumer;
 
 	private ICharacterClass keyword$2$Delimiter;
@@ -79,7 +81,12 @@ public final class XtextTerminalsTestLanguageUpToTokenConsumer extends NonTermin
 	}
 
 	public UpToTokenElements getRule() {
-		return XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prUpToToken();
+	// XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prUpToToken()
+		return rule;
+	}
+	
+	public void setRule(UpToTokenElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

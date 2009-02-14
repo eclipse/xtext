@@ -7,24 +7,21 @@
  *******************************************************************************/
 package org.eclipse.xtext.builtin.parser.packrat.consumers;
 
-import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
-import org.eclipse.xtext.services.XtextGrammarAccess;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public final class XtextBuiltinSTRINGConsumer extends AbstractRuleAwareTerminalConsumer {
-	
+
 	// ~('\\\\'|'\"')
 	static final ICharacterClass STRINGConsumer$$1 = ICharacterClass.Factory.invert(ICharacterClass.Factory.create('\\', '"'));
 	// ~('\\\\'|'\\'')
 	static final ICharacterClass STRINGConsumer$$2 = ICharacterClass.Factory.invert(ICharacterClass.Factory.create('\\', '\''));
-	
+
 	public XtextBuiltinSTRINGConsumer(ITerminalConsumerConfiguration configuration) {
 		super(configuration);
 	}
@@ -32,7 +29,7 @@ public final class XtextBuiltinSTRINGConsumer extends AbstractRuleAwareTerminalC
 	@Override
 	public int doConsume() {
 		boolean result = true;
-		// '\"' ( '\\\\' ('b'|'t'|'n'|'f'|'r'|'\\\"'|'\\''|'\\\\') | ~('\\\\'|'\"') )* '\"' | 
+		// '\"' ( '\\\\' ('b'|'t'|'n'|'f'|'r'|'\\\"'|'\\''|'\\\\') | ~('\\\\'|'\"') )* '\"' |
 		// '\\'' ( '\\\\' ('b'|'t'|'n'|'f'|'r'|'\\\"'|'\\''|'\\\\') | ~('\\\\'|'\\'') )* '\\''
 		// alternative 1:
 		// '\"' ( '\\\\' ('b'|'t'|'n'|'f'|'r'|'\\\"'|'\\''|'\\\\') | ~('\\\\'|'\"') )* '\"'
@@ -53,7 +50,7 @@ public final class XtextBuiltinSTRINGConsumer extends AbstractRuleAwareTerminalC
 						int marker$1 = mark(); // first part of alternative is sequence, so mark the position before the sequence
 						// '\\\\'
 						if (!readChar('\\')) break ALTERNATIVE$3;
-						if (!readAnyChar('b', 't', 'n', 'f', 'r', '"', '\'', '\\')) { 
+						if (!readAnyChar('b', 't', 'n', 'f', 'r', '"', '\'', '\\')) {
 							rollbackTo(marker$1);
 							break ALTERNATIVE$3;
 						}
@@ -61,7 +58,7 @@ public final class XtextBuiltinSTRINGConsumer extends AbstractRuleAwareTerminalC
 					}
 					ALTERNATIVE$3: {
 						if (!readChar(STRINGConsumer$$1)) {
-							break ALTERNATIVE$3; 
+							break ALTERNATIVE$3;
 						}
 						continue ALTERNATIVE$2;
 					}
@@ -71,7 +68,7 @@ public final class XtextBuiltinSTRINGConsumer extends AbstractRuleAwareTerminalC
 				if (!readChar('"')) {
 					rollbackTo(marker);
 					break SEQUENCE$1;
-				} 
+				}
 				break ALTERNATIVE$0;
 			}
 			// alternative 2:
@@ -104,7 +101,7 @@ public final class XtextBuiltinSTRINGConsumer extends AbstractRuleAwareTerminalC
 							result$1 = readChar(STRINGConsumer$$2);
 							if (!result$1) rollbackTo(marker$$1);
 						}
-					} 
+					}
 					// '\''
 					result = readChar('\'');
 					if (!result) rollbackTo(marker);
@@ -114,8 +111,4 @@ public final class XtextBuiltinSTRINGConsumer extends AbstractRuleAwareTerminalC
 		return result ? ConsumeResult.SUCCESS : ConsumeResult.EMPTY_MATCH;
 	}
 
-	@Override
-	protected LexerRule doGetRule() {
-		return (LexerRule) GrammarUtil.findRuleForName(XtextGrammarAccess.INSTANCE.getGrammar(), "STRING");
-	}
 }

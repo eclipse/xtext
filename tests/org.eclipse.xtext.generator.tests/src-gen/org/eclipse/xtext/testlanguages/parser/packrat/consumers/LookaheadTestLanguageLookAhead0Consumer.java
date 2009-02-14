@@ -20,6 +20,8 @@ import org.eclipse.xtext.testlanguages.services.LookaheadTestLanguageGrammarAcce
 @SuppressWarnings("unused")
 public final class LookaheadTestLanguageLookAhead0Consumer extends NonTerminalConsumer {
 
+	private LookAhead0Elements rule;
+	
 
 	private ICharacterClass keyword$2$Delimiter;
 	
@@ -80,7 +82,12 @@ public final class LookaheadTestLanguageLookAhead0Consumer extends NonTerminalCo
 	}
 
 	public LookAhead0Elements getRule() {
-		return LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead0();
+	// LookaheadTestLanguageGrammarAccess.INSTANCE.prLookAhead0()
+		return rule;
+	}
+	
+	public void setRule(LookAhead0Elements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

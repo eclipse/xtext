@@ -26,6 +26,8 @@ import org.eclipse.xtext.parser.epatch.parser.packrat.consumers.EpatchTestLangua
 @SuppressWarnings("unused")
 public final class EpatchTestLanguageCreatedObjectConsumer extends NonTerminalConsumer {
 
+	private CreatedObjectElements rule;
+	
 	private ITerminalConsumer idConsumer;
 	private INonTerminalConsumer migrationConsumer;
 	private INonTerminalConsumer monoListAssignmentConsumer;
@@ -219,9 +221,8 @@ public final class EpatchTestLanguageCreatedObjectConsumer extends NonTerminalCo
 					marker.rollback();
 					announceLevelFinished();
 					return ConsumeResult.SUCCESS;
-				} else {
-					error("Could not find token.", getRule().ele1001Alternatives());
 				}
+				error("Could not find token.", getRule().ele1001Alternatives());
 		}
 		announceLevelFinished();
 		marker.commit();
@@ -286,7 +287,12 @@ public final class EpatchTestLanguageCreatedObjectConsumer extends NonTerminalCo
 	}
 
 	public CreatedObjectElements getRule() {
-		return EpatchTestLanguageGrammarAccess.INSTANCE.prCreatedObject();
+	// EpatchTestLanguageGrammarAccess.INSTANCE.prCreatedObject()
+		return rule;
+	}
+	
+	public void setRule(CreatedObjectElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

@@ -17,13 +17,13 @@ import org.eclipse.xtext.parser.antlr.internal.InternalXtextParser;
 import org.eclipse.xtext.services.XtextGrammarAccess;
 
 public class XtextParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
-
-	@Inject
+	
+	@Inject 
     protected ITokenDefProvider antlrTokenDefProvider;
-
+	
 	@Inject
 	private XtextGrammarAccess grammarAccess;
-
+	
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
 		InternalXtextLexer lexer = new InternalXtextLexer(in);
@@ -40,16 +40,16 @@ public class XtextParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrPar
 			throw new ParseException(re.getMessage(),re);
 		}
 	}
-
-	@Override
+	
+	@Override 
 	protected String getDefaultRuleName() {
 		return "Grammar";
 	}
-
+	
 	public XtextGrammarAccess getGrammarAccess() {
 		return this.grammarAccess;
 	}
-
+	
 	public void setGrammarAccess(XtextGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
 	}

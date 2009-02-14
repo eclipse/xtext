@@ -21,6 +21,8 @@ import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageKeywor
 @SuppressWarnings("unused")
 public final class XtextGrammarTestLanguageCharacterRangeConsumer extends NonTerminalConsumer {
 
+	private CharacterRangeElements rule;
+	
 	private INonTerminalConsumer keywordConsumer;
 
 	private ICharacterClass keyword$7$Delimiter;
@@ -137,7 +139,12 @@ public final class XtextGrammarTestLanguageCharacterRangeConsumer extends NonTer
 	}
 
 	public CharacterRangeElements getRule() {
-		return XtextGrammarTestLanguageGrammarAccess.INSTANCE.prCharacterRange();
+	// XtextGrammarTestLanguageGrammarAccess.INSTANCE.prCharacterRange()
+		return rule;
+	}
+	
+	public void setRule(CharacterRangeElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

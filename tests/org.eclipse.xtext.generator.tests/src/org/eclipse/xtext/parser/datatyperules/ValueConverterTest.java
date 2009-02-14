@@ -21,24 +21,25 @@ public class ValueConverterTest extends TestCase {
 
 	private IValueConverter<BigDecimal> valueConverter;
 
+	@Override
 	protected void setUp() throws Exception {
 		valueConverter = new DatatypeRulesTestLanguageValueConverters().Fraction();
 	}
-	
+
 	public void testSimpleToObject() throws ValueConverterException {
 		String s = "123";
 		BigDecimal bd = valueConverter.toValue(s, null);
 		BigDecimal expected = new BigDecimal("123");
 		assertEquals(expected, bd);
 	}
-	
+
 	public void testFractionObject() throws ValueConverterException {
 		String s = "123/246";
 		BigDecimal bd = valueConverter.toValue(s, null);
 		BigDecimal expected = new BigDecimal("0.5");
 		assertEquals(expected, bd);
 	}
-	
+
 	public void testZeroDenominator() throws ValueConverterException {
 		String s = "123/0";
 		try {
@@ -48,19 +49,19 @@ public class ValueConverterTest extends TestCase {
 			// expected
 		}
 	}
-	
+
 	public void testSimpleToString() throws ValueConverterException {
 		String expected = "123";
 		BigDecimal bd = BigDecimal.valueOf(123);
 		assertEquals(expected, valueConverter.toString(bd));
 	}
-	
+
 	public void testFractionToString_01() {
 		String expected = "5/10";
 		BigDecimal bd = new BigDecimal("0.5");
 		assertEquals(expected, valueConverter.toString(bd));
 	}
-	
+
 	public void testFractionToString_02() {
 		String expected = "1557/1000";
 		BigDecimal bd = new BigDecimal("1.557");

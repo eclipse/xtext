@@ -24,6 +24,8 @@ import org.eclipse.xtext.parser.packrat.consumers.XtextRuleCallConsumer;
 @SuppressWarnings("unused")
 public final class XtextAbstractTerminalConsumer extends NonTerminalConsumer {
 
+	private AbstractTerminalElements rule;
+	
 	private INonTerminalConsumer crossReferenceConsumer;
 	private INonTerminalConsumer keywordConsumer;
 	private INonTerminalConsumer parenthesizedElementConsumer;
@@ -84,7 +86,12 @@ public final class XtextAbstractTerminalConsumer extends NonTerminalConsumer {
 	}
 
 	public AbstractTerminalElements getRule() {
-		return XtextGrammarAccess.INSTANCE.prAbstractTerminal();
+	// XtextGrammarAccess.INSTANCE.prAbstractTerminal()
+		return rule;
+	}
+	
+	public void setRule(AbstractTerminalElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

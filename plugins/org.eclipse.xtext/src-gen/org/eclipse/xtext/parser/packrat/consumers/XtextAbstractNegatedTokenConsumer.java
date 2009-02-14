@@ -22,6 +22,8 @@ import org.eclipse.xtext.parser.packrat.consumers.XtextUpToTokenConsumer;
 @SuppressWarnings("unused")
 public final class XtextAbstractNegatedTokenConsumer extends NonTerminalConsumer {
 
+	private AbstractNegatedTokenElements rule;
+	
 	private INonTerminalConsumer negatedTokenConsumer;
 	private INonTerminalConsumer upToTokenConsumer;
 
@@ -62,7 +64,12 @@ public final class XtextAbstractNegatedTokenConsumer extends NonTerminalConsumer
 	}
 
 	public AbstractNegatedTokenElements getRule() {
-		return XtextGrammarAccess.INSTANCE.prAbstractNegatedToken();
+	// XtextGrammarAccess.INSTANCE.prAbstractNegatedToken()
+		return rule;
+	}
+	
+	public void setRule(AbstractNegatedTokenElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

@@ -7,6 +7,8 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
+import org.eclipse.xtext.testlanguages.services.TreeTestLanguageGrammarAccess;
+
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.TreeTestLanguageModelConsumer;
@@ -27,9 +29,12 @@ public class TreeTestLanguageParserConfiguration extends AbstractParserConfigura
     private TreeTestLanguageModelConsumer modelConsumer;
     private TreeTestLanguageNodeConsumer nodeConsumer;
 
-	public TreeTestLanguageParserConfiguration(IInternalParserConfiguration configuration) {
+	private TreeTestLanguageGrammarAccess grammarAccess;
+
+	public TreeTestLanguageParserConfiguration(IInternalParserConfiguration configuration, TreeTestLanguageGrammarAccess grammarAccess) {
 		super(configuration);
-		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration);
+		this.grammarAccess = grammarAccess;
+		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration, null);
 	}
 
 	public TreeTestLanguageModelConsumer getRootConsumer() {
@@ -51,6 +56,19 @@ public class TreeTestLanguageParserConfiguration extends AbstractParserConfigura
 	}
 	
 	public void configureConsumers() {
+		if (grammarAccess == null)
+			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+		getModelConsumer().setRule(grammarAccess.prModel());
+		getNodeConsumer().setRule(grammarAccess.prNode());
+		getIdConsumer().setRule(grammarAccess.lrID());
+		getIntConsumer().setRule(grammarAccess.lrINT());
+		getStringConsumer().setRule(grammarAccess.lrSTRING());
+		getMlCommentConsumer().setRule(grammarAccess.lrML_COMMENT());
+		getSlCommentConsumer().setRule(grammarAccess.lrSL_COMMENT());
+		getWsConsumer().setRule(grammarAccess.lrWS());
+		getAnyOtherConsumer().setRule(grammarAccess.lrANY_OTHER());
+
+
 		getModelConsumer().setNodeConsumer(getNodeConsumer());
 
 		getNodeConsumer().setIdConsumer(getIdConsumer());

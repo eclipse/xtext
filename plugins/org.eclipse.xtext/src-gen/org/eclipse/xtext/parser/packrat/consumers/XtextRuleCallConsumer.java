@@ -21,6 +21,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer
 @SuppressWarnings("unused")
 public final class XtextRuleCallConsumer extends NonTerminalConsumer {
 
+	private RuleCallElements rule;
+	
 	private ITerminalConsumer idConsumer;
 
 	private ISequenceMatcher crossReference$2$Delimiter;
@@ -36,21 +38,20 @@ public final class XtextRuleCallConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$1(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "rule", false, false, getRule().ele0CrossReferenceEStringAbstractRule(), getCrossReference$2$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeCrossReference$2(entryPoint);
+	}
+
+	protected int consumeCrossReference$2(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "rule", false, false, getRule().ele0CrossReferenceEStringAbstractRule(), getCrossReference$2$Delimiter());
 	}
 
 	public RuleCallElements getRule() {
-		return XtextGrammarAccess.INSTANCE.prRuleCall();
+	// XtextGrammarAccess.INSTANCE.prRuleCall()
+		return rule;
+	}
+	
+	public void setRule(RuleCallElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

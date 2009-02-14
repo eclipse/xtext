@@ -22,6 +22,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer
 @SuppressWarnings("unused")
 public final class EcoreDslETypeParameterDeclConsumer extends NonTerminalConsumer {
 
+	private ETypeParameterDeclElements rule;
+	
 	private INonTerminalConsumer eGenericTypeDeclConsumer;
 	private ITerminalConsumer idConsumer;
 
@@ -72,17 +74,11 @@ public final class EcoreDslETypeParameterDeclConsumer extends NonTerminalConsume
 	}
 
 	protected int consumeAssignment$2(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "name", false, false, getRule().ele00LexerRuleCallID(), getRuleCall$3$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$3(entryPoint);
+	}
+
+	protected int consumeRuleCall$3(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "name", false, false, getRule().ele00LexerRuleCallID(), getRuleCall$3$Delimiter());
 	}
 
 	protected int consumeGroup$4(int entryPoint) throws Exception {
@@ -131,21 +127,20 @@ public final class EcoreDslETypeParameterDeclConsumer extends NonTerminalConsume
 	}
 
 	protected int consumeAssignment$6(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(eGenericTypeDeclConsumer, "eBounds", true, false, false, getRule().ele110ParserRuleCallEGenericTypeDecl());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$7(entryPoint);
+	}
+
+	protected int consumeRuleCall$7(int entryPoint) throws Exception {
+		return consumeNonTerminal(eGenericTypeDeclConsumer, "eBounds", true, false, false, getRule().ele110ParserRuleCallEGenericTypeDecl());
 	}
 
 	public ETypeParameterDeclElements getRule() {
-		return EcoreDslGrammarAccess.INSTANCE.prETypeParameterDecl();
+	// EcoreDslGrammarAccess.INSTANCE.prETypeParameterDecl()
+		return rule;
+	}
+	
+	public void setRule(ETypeParameterDeclElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

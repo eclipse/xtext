@@ -21,6 +21,8 @@ import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageGroupC
 @SuppressWarnings("unused")
 public final class XtextGrammarTestLanguageAlternativesConsumer extends NonTerminalConsumer {
 
+	private AlternativesElements rule;
+	
 	private INonTerminalConsumer groupConsumer;
 
 	private ICharacterClass keyword$7$Delimiter;
@@ -136,7 +138,12 @@ public final class XtextGrammarTestLanguageAlternativesConsumer extends NonTermi
 	}
 
 	public AlternativesElements getRule() {
-		return XtextGrammarTestLanguageGrammarAccess.INSTANCE.prAlternatives();
+	// XtextGrammarTestLanguageGrammarAccess.INSTANCE.prAlternatives()
+		return rule;
+	}
+	
+	public void setRule(AlternativesElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

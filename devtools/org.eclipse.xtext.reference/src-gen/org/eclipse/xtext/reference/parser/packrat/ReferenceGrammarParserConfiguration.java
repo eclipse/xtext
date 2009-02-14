@@ -7,6 +7,8 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
+import org.eclipse.xtext.reference.services.ReferenceGrammarGrammarAccess;
+
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 
 import org.eclipse.xtext.reference.parser.packrat.consumers.ReferenceGrammarSpielplatzConsumer;
@@ -39,9 +41,12 @@ public class ReferenceGrammarParserConfiguration extends AbstractParserConfigura
     private ReferenceGrammarFarbeConsumer farbeConsumer;
     private ReferenceGrammarCustomTypeParserRuleConsumer customTypeParserRuleConsumer;
 
-	public ReferenceGrammarParserConfiguration(IInternalParserConfiguration configuration) {
+	private ReferenceGrammarGrammarAccess grammarAccess;
+
+	public ReferenceGrammarParserConfiguration(IInternalParserConfiguration configuration, ReferenceGrammarGrammarAccess grammarAccess) {
 		super(configuration);
-		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration);
+		this.grammarAccess = grammarAccess;
+		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration, null);
 	}
 
 	public ReferenceGrammarSpielplatzConsumer getRootConsumer() {
@@ -81,6 +86,25 @@ public class ReferenceGrammarParserConfiguration extends AbstractParserConfigura
 	}
 	
 	public void configureConsumers() {
+		if (grammarAccess == null)
+			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+		getSpielplatzConsumer().setRule(grammarAccess.prSpielplatz());
+		getPersonConsumer().setRule(grammarAccess.prPerson());
+		getKindConsumer().setRule(grammarAccess.prKind());
+		getErwachsenerConsumer().setRule(grammarAccess.prErwachsener());
+		getSpielzeugConsumer().setRule(grammarAccess.prSpielzeug());
+		getFamilieConsumer().setRule(grammarAccess.prFamilie());
+		getFarbeConsumer().setRule(grammarAccess.prFarbe());
+		getCustomTypeParserRuleConsumer().setRule(grammarAccess.prCustomTypeParserRule());
+		getIdConsumer().setRule(grammarAccess.lrID());
+		getIntConsumer().setRule(grammarAccess.lrINT());
+		getStringConsumer().setRule(grammarAccess.lrSTRING());
+		getMlCommentConsumer().setRule(grammarAccess.lrML_COMMENT());
+		getSlCommentConsumer().setRule(grammarAccess.lrSL_COMMENT());
+		getWsConsumer().setRule(grammarAccess.lrWS());
+		getAnyOtherConsumer().setRule(grammarAccess.lrANY_OTHER());
+
+
 		getSpielplatzConsumer().setCustomTypeParserRuleConsumer(getCustomTypeParserRuleConsumer());
 		getSpielplatzConsumer().setErwachsenerConsumer(getErwachsenerConsumer());
 		getSpielplatzConsumer().setFamilieConsumer(getFamilieConsumer());

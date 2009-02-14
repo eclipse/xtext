@@ -48,11 +48,11 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="rightRoot" eType="//CreatedObject" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NamedObject">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="assignments" upperBound="-1" eType="//Assignment" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="leftMig" eType="//Migration" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="assignments" upperBound="-1" eType="//Assignment" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ObjectRef" eSuperTypes="//NamedObject">
     <eStructuralFeatures xsi:type="ecore:EReference" name="leftRes" eType="//NamedResource"/>

@@ -7,12 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.builtin.parser.packrat.consumers;
 
-import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumerConfiguration;
-import org.eclipse.xtext.services.XtextGrammarAccess;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -35,8 +32,4 @@ public final class XtextBuiltinINTConsumer extends AbstractRuleAwareTerminalCons
 		return result ? ConsumeResult.SUCCESS : ConsumeResult.EMPTY_MATCH;
 	}
 
-	@Override
-	protected LexerRule doGetRule() {
-		return (LexerRule) GrammarUtil.findRuleForName(XtextGrammarAccess.INSTANCE.getGrammar(), "INT");
-	}
 }

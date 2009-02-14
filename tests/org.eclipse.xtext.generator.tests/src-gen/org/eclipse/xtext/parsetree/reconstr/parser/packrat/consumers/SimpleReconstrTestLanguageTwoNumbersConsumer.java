@@ -21,6 +21,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinINTConsume
 @SuppressWarnings("unused")
 public final class SimpleReconstrTestLanguageTwoNumbersConsumer extends NonTerminalConsumer {
 
+	private TwoNumbersElements rule;
+	
 	private ITerminalConsumer intConsumer;
 
 	private ICharacterClass keyword$8$Delimiter;
@@ -153,7 +155,12 @@ public final class SimpleReconstrTestLanguageTwoNumbersConsumer extends NonTermi
 	}
 
 	public TwoNumbersElements getRule() {
-		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prTwoNumbers();
+	// SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prTwoNumbers()
+		return rule;
+	}
+	
+	public void setRule(TwoNumbersElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

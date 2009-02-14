@@ -21,6 +21,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer
 @SuppressWarnings("unused")
 public final class XtextGrammarTestLanguageTypeRefConsumer extends NonTerminalConsumer {
 
+	private TypeRefElements rule;
+	
 	private ITerminalConsumer idConsumer;
 
 	private ISequenceMatcher crossReference$4$Delimiter;
@@ -114,17 +116,11 @@ public final class XtextGrammarTestLanguageTypeRefConsumer extends NonTerminalCo
 	}
 
 	protected int consumeAssignment$3(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "metamodel", false, false, getRule().ele000CrossReferenceEStringAbstractMetamodelDeclaration(), getCrossReference$4$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeCrossReference$4(entryPoint);
+	}
+
+	protected int consumeCrossReference$4(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "metamodel", false, false, getRule().ele000CrossReferenceEStringAbstractMetamodelDeclaration(), getCrossReference$4$Delimiter());
 	}
 
 	protected int consumeKeyword$6(int entryPoint) throws Exception {
@@ -132,21 +128,20 @@ public final class XtextGrammarTestLanguageTypeRefConsumer extends NonTerminalCo
 	}
 
 	protected int consumeAssignment$7(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "type", false, false, getRule().ele10CrossReferenceEStringEClassifier(), getCrossReference$8$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeCrossReference$8(entryPoint);
+	}
+
+	protected int consumeCrossReference$8(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "type", false, false, getRule().ele10CrossReferenceEStringEClassifier(), getCrossReference$8$Delimiter());
 	}
 
 	public TypeRefElements getRule() {
-		return XtextGrammarTestLanguageGrammarAccess.INSTANCE.prTypeRef();
+	// XtextGrammarTestLanguageGrammarAccess.INSTANCE.prTypeRef()
+		return rule;
+	}
+	
+	public void setRule(TypeRefElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

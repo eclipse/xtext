@@ -21,6 +21,8 @@ import org.eclipse.xtext.testlanguages.parser.packrat.consumers.OptionalEmptyTes
 @SuppressWarnings("unused")
 public final class OptionalEmptyTestLanguageModelConsumer extends NonTerminalConsumer {
 
+	private ModelElements rule;
+	
 	private INonTerminalConsumer greetingConsumer;
 
 	public OptionalEmptyTestLanguageModelConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
@@ -51,7 +53,12 @@ public final class OptionalEmptyTestLanguageModelConsumer extends NonTerminalCon
 	}
 
 	public ModelElements getRule() {
-		return OptionalEmptyTestLanguageGrammarAccess.INSTANCE.prModel();
+	// OptionalEmptyTestLanguageGrammarAccess.INSTANCE.prModel()
+		return rule;
+	}
+	
+	public void setRule(ModelElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

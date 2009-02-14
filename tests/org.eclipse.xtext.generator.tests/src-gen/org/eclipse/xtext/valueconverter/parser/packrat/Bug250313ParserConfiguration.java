@@ -7,6 +7,8 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
+import org.eclipse.xtext.valueconverter.services.Bug250313GrammarAccess;
+
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 
 import org.eclipse.xtext.valueconverter.parser.packrat.consumers.Bug250313ModelConsumer;
@@ -35,9 +37,12 @@ public class Bug250313ParserConfiguration extends AbstractParserConfiguration {
     private Bug250313Child1Consumer child1Consumer;
     private Bug250313Child2Consumer child2Consumer;
 
-	public Bug250313ParserConfiguration(IInternalParserConfiguration configuration) {
+	private Bug250313GrammarAccess grammarAccess;
+
+	public Bug250313ParserConfiguration(IInternalParserConfiguration configuration, Bug250313GrammarAccess grammarAccess) {
 		super(configuration);
-		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration);
+		this.grammarAccess = grammarAccess;
+		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration, null);
 	}
 
 	public Bug250313ModelConsumer getRootConsumer() {
@@ -71,6 +76,23 @@ public class Bug250313ParserConfiguration extends AbstractParserConfiguration {
 	}
 	
 	public void configureConsumers() {
+		if (grammarAccess == null)
+			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+		getModelConsumer().setRule(grammarAccess.prModel());
+		getDatatypeConsumer().setRule(grammarAccess.prDatatype());
+		getNestedDatatypeConsumer().setRule(grammarAccess.prNestedDatatype());
+		getChildConsumer().setRule(grammarAccess.prChild());
+		getChild1Consumer().setRule(grammarAccess.prChild1());
+		getChild2Consumer().setRule(grammarAccess.prChild2());
+		getIdConsumer().setRule(grammarAccess.lrID());
+		getIntConsumer().setRule(grammarAccess.lrINT());
+		getStringConsumer().setRule(grammarAccess.lrSTRING());
+		getMlCommentConsumer().setRule(grammarAccess.lrML_COMMENT());
+		getSlCommentConsumer().setRule(grammarAccess.lrSL_COMMENT());
+		getWsConsumer().setRule(grammarAccess.lrWS());
+		getAnyOtherConsumer().setRule(grammarAccess.lrANY_OTHER());
+
+
 		getModelConsumer().setChildConsumer(getChildConsumer());
 		getModelConsumer().setDatatypeConsumer(getDatatypeConsumer());
 		getModelConsumer().setIdConsumer(getIdConsumer());

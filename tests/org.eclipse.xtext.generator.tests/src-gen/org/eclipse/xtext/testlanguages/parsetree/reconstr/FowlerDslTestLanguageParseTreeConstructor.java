@@ -9,12 +9,15 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
-import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.FowlerDslTestLanguageGrammarAccess;
 
+import com.google.inject.Inject;
 
 public class FowlerDslTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 		
+	@Inject
+	private FowlerDslTestLanguageGrammarAccess grammarAccess;
+	
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
@@ -42,7 +45,7 @@ protected class Statemachine_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prStatemachine().eleGroup();
+		return grammarAccess.prStatemachine().eleGroup();
 	}
 		
 	@Override
@@ -71,7 +74,7 @@ protected class Statemachine_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prStatemachine().ele0Group();
+		return grammarAccess.prStatemachine().ele0Group();
 	}
 		
 	@Override
@@ -100,7 +103,7 @@ protected class Statemachine_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prStatemachine().ele00Group();
+		return grammarAccess.prStatemachine().ele00Group();
 	}
 		
 	@Override
@@ -129,7 +132,7 @@ protected class Statemachine_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prStatemachine().ele000Group();
+		return grammarAccess.prStatemachine().ele000Group();
 	}
 		
 	@Override
@@ -158,7 +161,7 @@ protected class Statemachine_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prStatemachine().ele0000Group();
+		return grammarAccess.prStatemachine().ele0000Group();
 	}
 		
 	@Override
@@ -187,7 +190,7 @@ protected class Statemachine_0_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prStatemachine().ele00000Group();
+		return grammarAccess.prStatemachine().ele00000Group();
 	}
 		
 	@Override
@@ -216,7 +219,7 @@ protected class Statemachine_0_0_0_0_0_0_Keyword_events extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prStatemachine().ele000000KeywordEvents();
+		return grammarAccess.prStatemachine().ele000000KeywordEvents();
 	}	
 }
 
@@ -228,7 +231,7 @@ protected class Statemachine_0_0_0_0_0_1_Assignment_events extends AssignmentTok
 	}
 	
 	public Assignment getGrammarElement() {
-		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prStatemachine().ele000001AssignmentEvents();
+		return grammarAccess.prStatemachine().ele000001AssignmentEvents();
 	}
 	
 	@Override
@@ -261,7 +264,7 @@ protected class Statemachine_0_0_0_0_1_Keyword_end extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prStatemachine().ele00001KeywordEnd();
+		return grammarAccess.prStatemachine().ele00001KeywordEnd();
 	}	
 }
 
@@ -274,7 +277,7 @@ protected class Statemachine_0_0_0_1_Keyword_commands extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prStatemachine().ele0001KeywordCommands();
+		return grammarAccess.prStatemachine().ele0001KeywordCommands();
 	}	
 }
 
@@ -287,7 +290,7 @@ protected class Statemachine_0_0_1_Assignment_commands extends AssignmentToken  
 	}
 	
 	public Assignment getGrammarElement() {
-		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prStatemachine().ele001AssignmentCommands();
+		return grammarAccess.prStatemachine().ele001AssignmentCommands();
 	}
 	
 	@Override
@@ -320,7 +323,7 @@ protected class Statemachine_0_1_Keyword_end extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prStatemachine().ele01KeywordEnd();
+		return grammarAccess.prStatemachine().ele01KeywordEnd();
 	}	
 }
 
@@ -333,7 +336,7 @@ protected class Statemachine_1_Assignment_states extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prStatemachine().ele1AssignmentStates();
+		return grammarAccess.prStatemachine().ele1AssignmentStates();
 	}
 	
 	@Override
@@ -376,7 +379,7 @@ protected class Event_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prEvent().eleGroup();
+		return grammarAccess.prEvent().eleGroup();
 	}
 		
 	@Override
@@ -405,7 +408,7 @@ protected class Event_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prEvent().ele0Group();
+		return grammarAccess.prEvent().ele0Group();
 	}
 		
 	@Override
@@ -434,7 +437,7 @@ protected class Event_0_0_Assignment_resetting extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prEvent().ele00AssignmentResetting();
+		return grammarAccess.prEvent().ele00AssignmentResetting();
 	}
 	
 	@Override
@@ -444,7 +447,7 @@ protected class Event_0_0_Assignment_resetting extends AssignmentToken  {
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = FowlerDslTestLanguageGrammarAccess.INSTANCE.prEvent().ele000KeywordResetting();
+			element = grammarAccess.prEvent().ele000KeywordResetting();
 			return new Solution(obj);
 		}
 
@@ -460,7 +463,7 @@ protected class Event_0_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prEvent().ele01AssignmentName();
+		return grammarAccess.prEvent().ele01AssignmentName();
 	}
 	
 	@Override
@@ -469,7 +472,7 @@ protected class Event_0_1_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = FowlerDslTestLanguageGrammarAccess.INSTANCE.prEvent().ele010LexerRuleCallID();
+			element = grammarAccess.prEvent().ele010LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -485,7 +488,7 @@ protected class Event_1_Assignment_code extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prEvent().ele1AssignmentCode();
+		return grammarAccess.prEvent().ele1AssignmentCode();
 	}
 	
 	@Override
@@ -494,7 +497,7 @@ protected class Event_1_Assignment_code extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("code");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = FowlerDslTestLanguageGrammarAccess.INSTANCE.prEvent().ele10LexerRuleCallID();
+			element = grammarAccess.prEvent().ele10LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -520,7 +523,7 @@ protected class Command_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prCommand().eleGroup();
+		return grammarAccess.prCommand().eleGroup();
 	}
 		
 	@Override
@@ -549,7 +552,7 @@ protected class Command_0_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prCommand().ele0AssignmentName();
+		return grammarAccess.prCommand().ele0AssignmentName();
 	}
 	
 	@Override
@@ -558,7 +561,7 @@ protected class Command_0_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = FowlerDslTestLanguageGrammarAccess.INSTANCE.prCommand().ele00LexerRuleCallID();
+			element = grammarAccess.prCommand().ele00LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -573,7 +576,7 @@ protected class Command_1_Assignment_code extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prCommand().ele1AssignmentCode();
+		return grammarAccess.prCommand().ele1AssignmentCode();
 	}
 	
 	@Override
@@ -582,7 +585,7 @@ protected class Command_1_Assignment_code extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("code");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = FowlerDslTestLanguageGrammarAccess.INSTANCE.prCommand().ele10LexerRuleCallID();
+			element = grammarAccess.prCommand().ele10LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -608,7 +611,7 @@ protected class State_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prState().eleGroup();
+		return grammarAccess.prState().eleGroup();
 	}
 		
 	@Override
@@ -637,7 +640,7 @@ protected class State_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prState().ele0Group();
+		return grammarAccess.prState().ele0Group();
 	}
 		
 	@Override
@@ -666,7 +669,7 @@ protected class State_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prState().ele00Group();
+		return grammarAccess.prState().ele00Group();
 	}
 		
 	@Override
@@ -695,7 +698,7 @@ protected class State_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prState().ele000Group();
+		return grammarAccess.prState().ele000Group();
 	}
 		
 	@Override
@@ -724,7 +727,7 @@ protected class State_0_0_0_0_Keyword_state extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prState().ele0000KeywordState();
+		return grammarAccess.prState().ele0000KeywordState();
 	}	
 }
 
@@ -736,7 +739,7 @@ protected class State_0_0_0_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prState().ele0001AssignmentName();
+		return grammarAccess.prState().ele0001AssignmentName();
 	}
 	
 	@Override
@@ -745,7 +748,7 @@ protected class State_0_0_0_1_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = FowlerDslTestLanguageGrammarAccess.INSTANCE.prState().ele00010LexerRuleCallID();
+			element = grammarAccess.prState().ele00010LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -761,7 +764,7 @@ protected class State_0_0_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prState().ele001Group();
+		return grammarAccess.prState().ele001Group();
 	}
 		
 	@Override
@@ -790,7 +793,7 @@ protected class State_0_0_1_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prState().ele0010Group();
+		return grammarAccess.prState().ele0010Group();
 	}
 		
 	@Override
@@ -819,7 +822,7 @@ protected class State_0_0_1_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prState().ele00100Group();
+		return grammarAccess.prState().ele00100Group();
 	}
 		
 	@Override
@@ -848,7 +851,7 @@ protected class State_0_0_1_0_0_0_Keyword_actions extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prState().ele001000KeywordActions();
+		return grammarAccess.prState().ele001000KeywordActions();
 	}	
 }
 
@@ -860,7 +863,7 @@ protected class State_0_0_1_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prState().ele001001KeywordLeftCurlyBracket();
+		return grammarAccess.prState().ele001001KeywordLeftCurlyBracket();
 	}	
 }
 
@@ -873,7 +876,7 @@ protected class State_0_0_1_0_1_Assignment_actions extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prState().ele00101AssignmentActions();
+		return grammarAccess.prState().ele00101AssignmentActions();
 	}
 	
 	@Override
@@ -884,7 +887,7 @@ protected class State_0_0_1_0_1_Assignment_actions extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Command")) {
 				type = AssignmentType.CR;
-				element = FowlerDslTestLanguageGrammarAccess.INSTANCE.prState().ele001010CrossReferenceEStringCommand(); 
+				element = grammarAccess.prState().ele001010CrossReferenceEStringCommand(); 
 				return new Solution(obj);
 			}
 		}
@@ -901,7 +904,7 @@ protected class State_0_0_1_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prState().ele0011KeywordRightCurlyBracket();
+		return grammarAccess.prState().ele0011KeywordRightCurlyBracket();
 	}	
 }
 
@@ -915,7 +918,7 @@ protected class State_0_1_Assignment_transitions extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prState().ele01AssignmentTransitions();
+		return grammarAccess.prState().ele01AssignmentTransitions();
 	}
 	
 	@Override
@@ -948,7 +951,7 @@ protected class State_1_Keyword_end extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prState().ele1KeywordEnd();
+		return grammarAccess.prState().ele1KeywordEnd();
 	}	
 }
 
@@ -971,7 +974,7 @@ protected class Transition_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prTransition().eleGroup();
+		return grammarAccess.prTransition().eleGroup();
 	}
 		
 	@Override
@@ -1000,7 +1003,7 @@ protected class Transition_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prTransition().ele0Group();
+		return grammarAccess.prTransition().ele0Group();
 	}
 		
 	@Override
@@ -1029,7 +1032,7 @@ protected class Transition_0_0_Assignment_event extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prTransition().ele00AssignmentEvent();
+		return grammarAccess.prTransition().ele00AssignmentEvent();
 	}
 	
 	@Override
@@ -1040,7 +1043,7 @@ protected class Transition_0_0_Assignment_event extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Event")) {
 				type = AssignmentType.CR;
-				element = FowlerDslTestLanguageGrammarAccess.INSTANCE.prTransition().ele000CrossReferenceEStringEvent(); 
+				element = grammarAccess.prTransition().ele000CrossReferenceEStringEvent(); 
 				return new Solution(obj);
 			}
 		}
@@ -1056,7 +1059,7 @@ protected class Transition_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prTransition().ele01KeywordEqualsSignGreaterThanSign();
+		return grammarAccess.prTransition().ele01KeywordEqualsSignGreaterThanSign();
 	}	
 }
 
@@ -1069,7 +1072,7 @@ protected class Transition_1_Assignment_state extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prTransition().ele1AssignmentState();
+		return grammarAccess.prTransition().ele1AssignmentState();
 	}
 	
 	@Override
@@ -1080,7 +1083,7 @@ protected class Transition_1_Assignment_state extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("State")) {
 				type = AssignmentType.CR;
-				element = FowlerDslTestLanguageGrammarAccess.INSTANCE.prTransition().ele10CrossReferenceEStringState(); 
+				element = grammarAccess.prTransition().ele10CrossReferenceEStringState(); 
 				return new Solution(obj);
 			}
 		}

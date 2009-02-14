@@ -51,9 +51,9 @@ public class XtextGrammarSerializationTest extends AbstractGeneratorTest {
 		final String serializedModel = outputStream.toString();
 		assertEquals(expectedModel, serializedModel);
 	}
-	
+
 	public void testMetamodelRefSerialization() throws Exception {
-		final String model = "language foo\n" 
+		final String model = "language foo\n"
 			+ "import \"http://www.eclipse.org/2008/Xtext\" as xtext\n"
 			+ "generate mm \"http://bar\" as fooMM\n"
 			+ "Foo : name=ID (nameRefs+=NameRef)*;\n"
@@ -71,7 +71,7 @@ public class XtextGrammarSerializationTest extends AbstractGeneratorTest {
 	public void _testXtestSerializationSelfTest() throws Exception {
 		Resource res = new XtextResourceSet().createResource(URI
 				.createURI("myfile.xtext"));
-		res.getContents().add(XtextGrammarAccess.INSTANCE.getGrammar());
+		res.getContents().add(get(XtextGrammarAccess.class).getGrammar());
 		OutputStream outputStream = new ByteArrayOutputStream();
 		res.save(outputStream, Collections.emptyMap());
 	}

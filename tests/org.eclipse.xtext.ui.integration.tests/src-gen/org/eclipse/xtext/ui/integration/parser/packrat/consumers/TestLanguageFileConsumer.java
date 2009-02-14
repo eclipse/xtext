@@ -21,6 +21,8 @@ import org.eclipse.xtext.ui.integration.parser.packrat.consumers.TestLanguageStu
 @SuppressWarnings("unused")
 public final class TestLanguageFileConsumer extends NonTerminalConsumer {
 
+	private FileElements rule;
+	
 	private INonTerminalConsumer stuffConsumer;
 
 	public TestLanguageFileConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
@@ -42,21 +44,20 @@ public final class TestLanguageFileConsumer extends NonTerminalConsumer {
 	}
 
 	protected int doConsumeAssignment$1(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(stuffConsumer, "stuff", true, false, false, getRule().ele0ParserRuleCallStuff());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$2(entryPoint);
+	}
+
+	protected int consumeRuleCall$2(int entryPoint) throws Exception {
+		return consumeNonTerminal(stuffConsumer, "stuff", true, false, false, getRule().ele0ParserRuleCallStuff());
 	}
 
 	public FileElements getRule() {
-		return TestLanguageGrammarAccess.INSTANCE.prFile();
+	// TestLanguageGrammarAccess.INSTANCE.prFile()
+		return rule;
+	}
+	
+	public void setRule(FileElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

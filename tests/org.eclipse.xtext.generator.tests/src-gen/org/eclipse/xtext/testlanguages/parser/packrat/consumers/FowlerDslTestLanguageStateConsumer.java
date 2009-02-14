@@ -22,6 +22,8 @@ import org.eclipse.xtext.testlanguages.parser.packrat.consumers.FowlerDslTestLan
 @SuppressWarnings("unused")
 public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsumer {
 
+	private StateElements rule;
+	
 	private ITerminalConsumer idConsumer;
 	private INonTerminalConsumer transitionConsumer;
 
@@ -212,9 +214,8 @@ public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsume
 					marker.rollback();
 					announceLevelFinished();
 					return ConsumeResult.SUCCESS;
-				} else {
-					error("Could not find token.", getRule().ele00101AssignmentActions());
 				}
+				error("Could not find token.", getRule().ele00101AssignmentActions());
 		}
 		announceLevelFinished();
 		marker.commit();
@@ -255,7 +256,12 @@ public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsume
 	}
 
 	public StateElements getRule() {
-		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prState();
+	// FowlerDslTestLanguageGrammarAccess.INSTANCE.prState()
+		return rule;
+	}
+	
+	public void setRule(StateElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

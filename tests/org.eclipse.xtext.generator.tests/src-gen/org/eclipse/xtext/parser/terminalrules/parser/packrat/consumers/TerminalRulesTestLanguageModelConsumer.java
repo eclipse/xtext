@@ -27,6 +27,8 @@ import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.TerminalR
 @SuppressWarnings("unused")
 public final class TerminalRulesTestLanguageModelConsumer extends NonTerminalConsumer {
 
+	private ModelElements rule;
+	
 	private ITerminalConsumer anyOtherConsumer;
 	private ITerminalConsumer idConsumer;
 	private ITerminalConsumer intConsumer;
@@ -166,7 +168,12 @@ public final class TerminalRulesTestLanguageModelConsumer extends NonTerminalCon
 	}
 
 	public ModelElements getRule() {
-		return TerminalRulesTestLanguageGrammarAccess.INSTANCE.prModel();
+	// TerminalRulesTestLanguageGrammarAccess.INSTANCE.prModel()
+		return rule;
+	}
+	
+	public void setRule(ModelElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

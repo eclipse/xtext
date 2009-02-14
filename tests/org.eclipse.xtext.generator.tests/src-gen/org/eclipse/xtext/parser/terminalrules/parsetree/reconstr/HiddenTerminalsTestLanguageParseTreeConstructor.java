@@ -11,9 +11,13 @@ import org.eclipse.xtext.parsetree.reconstr.impl.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
 import org.eclipse.xtext.parser.terminalrules.services.HiddenTerminalsTestLanguageGrammarAccess;
 
+import com.google.inject.Inject;
 
 public class HiddenTerminalsTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 		
+	@Inject
+	private HiddenTerminalsTestLanguageGrammarAccess grammarAccess;
+	
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
@@ -45,7 +49,7 @@ protected class Model_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prModel().eleAlternatives();
+		return grammarAccess.prModel().eleAlternatives();
 	}
 
 	@Override	
@@ -67,7 +71,7 @@ protected class Model_0_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prModel().ele0Alternatives();
+		return grammarAccess.prModel().ele0Alternatives();
 	}
 
 	@Override	
@@ -89,7 +93,7 @@ protected class Model_0_0_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prModel().ele00Alternatives();
+		return grammarAccess.prModel().ele00Alternatives();
 	}
 
 	@Override	
@@ -111,7 +115,7 @@ protected class Model_0_0_0_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prModel().ele000Alternatives();
+		return grammarAccess.prModel().ele000Alternatives();
 	}
 
 	@Override	
@@ -133,7 +137,7 @@ protected class Model_0_0_0_0_RuleCall_WithoutHiddens extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prModel().ele0000ParserRuleCallWithoutHiddens();
+		return grammarAccess.prModel().ele0000ParserRuleCallWithoutHiddens();
 	}
 	
 	@Override
@@ -152,7 +156,7 @@ protected class Model_0_0_0_1_RuleCall_WithHiddens extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prModel().ele0001ParserRuleCallWithHiddens();
+		return grammarAccess.prModel().ele0001ParserRuleCallWithHiddens();
 	}
 	
 	@Override
@@ -172,7 +176,7 @@ protected class Model_0_0_1_RuleCall_OverridingHiddens extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prModel().ele001ParserRuleCallOverridingHiddens();
+		return grammarAccess.prModel().ele001ParserRuleCallOverridingHiddens();
 	}
 	
 	@Override
@@ -192,7 +196,7 @@ protected class Model_0_1_RuleCall_InheritingHiddens extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prModel().ele01ParserRuleCallInheritingHiddens();
+		return grammarAccess.prModel().ele01ParserRuleCallInheritingHiddens();
 	}
 	
 	@Override
@@ -212,7 +216,7 @@ protected class Model_1_RuleCall_DatatypeHiddens extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prModel().ele1ParserRuleCallDatatypeHiddens();
+		return grammarAccess.prModel().ele1ParserRuleCallDatatypeHiddens();
 	}
 	
 	@Override
@@ -242,7 +246,7 @@ protected class WithoutHiddens_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prWithoutHiddens().eleGroup();
+		return grammarAccess.prWithoutHiddens().eleGroup();
 	}
 		
 	@Override
@@ -271,7 +275,7 @@ protected class WithoutHiddens_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prWithoutHiddens().ele0Group();
+		return grammarAccess.prWithoutHiddens().ele0Group();
 	}
 		
 	@Override
@@ -300,7 +304,7 @@ protected class WithoutHiddens_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prWithoutHiddens().ele00Group();
+		return grammarAccess.prWithoutHiddens().ele00Group();
 	}
 		
 	@Override
@@ -329,7 +333,7 @@ protected class WithoutHiddens_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prWithoutHiddens().ele000Group();
+		return grammarAccess.prWithoutHiddens().ele000Group();
 	}
 		
 	@Override
@@ -358,7 +362,7 @@ protected class WithoutHiddens_0_0_0_0_Keyword_without extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prWithoutHiddens().ele0000KeywordWithout();
+		return grammarAccess.prWithoutHiddens().ele0000KeywordWithout();
 	}	
 }
 
@@ -370,7 +374,7 @@ protected class WithoutHiddens_0_0_0_1_Assignment_spaces extends AssignmentToken
 	}
 	
 	public Assignment getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prWithoutHiddens().ele0001AssignmentSpaces();
+		return grammarAccess.prWithoutHiddens().ele0001AssignmentSpaces();
 	}
 	
 	@Override
@@ -380,7 +384,7 @@ protected class WithoutHiddens_0_0_0_1_Assignment_spaces extends AssignmentToken
 
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
 			type = AssignmentType.PRC;
-			element = HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prWithoutHiddens().ele00010ParserRuleCallWS();
+			element = grammarAccess.prWithoutHiddens().ele00010ParserRuleCallWS();
 			return new Solution(obj);
 		}
 
@@ -397,7 +401,7 @@ protected class WithoutHiddens_0_0_1_Keyword_hiddens extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prWithoutHiddens().ele001KeywordHiddens();
+		return grammarAccess.prWithoutHiddens().ele001KeywordHiddens();
 	}	
 }
 
@@ -410,7 +414,7 @@ protected class WithoutHiddens_0_1_Assignment_spaces extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prWithoutHiddens().ele01AssignmentSpaces();
+		return grammarAccess.prWithoutHiddens().ele01AssignmentSpaces();
 	}
 	
 	@Override
@@ -420,7 +424,7 @@ protected class WithoutHiddens_0_1_Assignment_spaces extends AssignmentToken  {
 
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
 			type = AssignmentType.PRC;
-			element = HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prWithoutHiddens().ele010ParserRuleCallWS();
+			element = grammarAccess.prWithoutHiddens().ele010ParserRuleCallWS();
 			return new Solution(obj);
 		}
 
@@ -437,7 +441,7 @@ protected class WithoutHiddens_1_Assignment_valid extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prWithoutHiddens().ele1AssignmentValid();
+		return grammarAccess.prWithoutHiddens().ele1AssignmentValid();
 	}
 	
 	@Override
@@ -447,7 +451,7 @@ protected class WithoutHiddens_1_Assignment_valid extends AssignmentToken  {
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prWithoutHiddens().ele10KeywordSemicolon();
+			element = grammarAccess.prWithoutHiddens().ele10KeywordSemicolon();
 			return new Solution(obj);
 		}
 
@@ -474,7 +478,7 @@ protected class WithHiddens_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prWithHiddens().eleGroup();
+		return grammarAccess.prWithHiddens().eleGroup();
 	}
 		
 	@Override
@@ -503,7 +507,7 @@ protected class WithHiddens_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prWithHiddens().ele0Group();
+		return grammarAccess.prWithHiddens().ele0Group();
 	}
 		
 	@Override
@@ -532,7 +536,7 @@ protected class WithHiddens_0_0_Keyword_with extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prWithHiddens().ele00KeywordWith();
+		return grammarAccess.prWithHiddens().ele00KeywordWith();
 	}	
 }
 
@@ -544,7 +548,7 @@ protected class WithHiddens_0_1_Keyword_hiddens extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prWithHiddens().ele01KeywordHiddens();
+		return grammarAccess.prWithHiddens().ele01KeywordHiddens();
 	}	
 }
 
@@ -557,7 +561,7 @@ protected class WithHiddens_1_Assignment_valid extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prWithHiddens().ele1AssignmentValid();
+		return grammarAccess.prWithHiddens().ele1AssignmentValid();
 	}
 	
 	@Override
@@ -567,7 +571,7 @@ protected class WithHiddens_1_Assignment_valid extends AssignmentToken  {
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prWithHiddens().ele10KeywordSemicolon();
+			element = grammarAccess.prWithHiddens().ele10KeywordSemicolon();
 			return new Solution(obj);
 		}
 
@@ -594,7 +598,7 @@ protected class OverridingHiddens_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prOverridingHiddens().eleGroup();
+		return grammarAccess.prOverridingHiddens().eleGroup();
 	}
 		
 	@Override
@@ -623,7 +627,7 @@ protected class OverridingHiddens_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prOverridingHiddens().ele0Group();
+		return grammarAccess.prOverridingHiddens().ele0Group();
 	}
 		
 	@Override
@@ -652,7 +656,7 @@ protected class OverridingHiddens_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prOverridingHiddens().ele00Group();
+		return grammarAccess.prOverridingHiddens().ele00Group();
 	}
 		
 	@Override
@@ -681,7 +685,7 @@ protected class OverridingHiddens_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prOverridingHiddens().ele000Group();
+		return grammarAccess.prOverridingHiddens().ele000Group();
 	}
 		
 	@Override
@@ -710,7 +714,7 @@ protected class OverridingHiddens_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prOverridingHiddens().ele0000Group();
+		return grammarAccess.prOverridingHiddens().ele0000Group();
 	}
 		
 	@Override
@@ -739,7 +743,7 @@ protected class OverridingHiddens_0_0_0_0_0_Keyword_overriding extends KeywordTo
 	}
 	
 	public Keyword getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prOverridingHiddens().ele00000KeywordOverriding();
+		return grammarAccess.prOverridingHiddens().ele00000KeywordOverriding();
 	}	
 }
 
@@ -751,7 +755,7 @@ protected class OverridingHiddens_0_0_0_0_1_Keyword_hiddens extends KeywordToken
 	}
 	
 	public Keyword getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prOverridingHiddens().ele00001KeywordHiddens();
+		return grammarAccess.prOverridingHiddens().ele00001KeywordHiddens();
 	}	
 }
 
@@ -764,7 +768,7 @@ protected class OverridingHiddens_0_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prOverridingHiddens().ele0001KeywordLeftParenthesis();
+		return grammarAccess.prOverridingHiddens().ele0001KeywordLeftParenthesis();
 	}	
 }
 
@@ -777,7 +781,7 @@ protected class OverridingHiddens_0_0_1_Assignment_called extends AssignmentToke
 	}
 	
 	public Assignment getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prOverridingHiddens().ele001AssignmentCalled();
+		return grammarAccess.prOverridingHiddens().ele001AssignmentCalled();
 	}
 	
 	@Override
@@ -810,7 +814,7 @@ protected class OverridingHiddens_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prOverridingHiddens().ele01KeywordRightParenthesis();
+		return grammarAccess.prOverridingHiddens().ele01KeywordRightParenthesis();
 	}	
 }
 
@@ -823,7 +827,7 @@ protected class OverridingHiddens_1_Assignment_valid extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prOverridingHiddens().ele1AssignmentValid();
+		return grammarAccess.prOverridingHiddens().ele1AssignmentValid();
 	}
 	
 	@Override
@@ -833,7 +837,7 @@ protected class OverridingHiddens_1_Assignment_valid extends AssignmentToken  {
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prOverridingHiddens().ele10KeywordSemicolon();
+			element = grammarAccess.prOverridingHiddens().ele10KeywordSemicolon();
 			return new Solution(obj);
 		}
 
@@ -860,7 +864,7 @@ protected class OverridingHiddensCall_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prOverridingHiddensCall().eleGroup();
+		return grammarAccess.prOverridingHiddensCall().eleGroup();
 	}
 		
 	@Override
@@ -889,7 +893,7 @@ protected class OverridingHiddensCall_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prOverridingHiddensCall().ele0Group();
+		return grammarAccess.prOverridingHiddensCall().ele0Group();
 	}
 		
 	@Override
@@ -918,7 +922,7 @@ protected class OverridingHiddensCall_0_0_Keyword_call extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prOverridingHiddensCall().ele00KeywordCall();
+		return grammarAccess.prOverridingHiddensCall().ele00KeywordCall();
 	}	
 }
 
@@ -930,7 +934,7 @@ protected class OverridingHiddensCall_0_1_Assignment_spaces extends AssignmentTo
 	}
 	
 	public Assignment getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prOverridingHiddensCall().ele01AssignmentSpaces();
+		return grammarAccess.prOverridingHiddensCall().ele01AssignmentSpaces();
 	}
 	
 	@Override
@@ -940,7 +944,7 @@ protected class OverridingHiddensCall_0_1_Assignment_spaces extends AssignmentTo
 
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
 			type = AssignmentType.PRC;
-			element = HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prOverridingHiddensCall().ele010ParserRuleCallWS();
+			element = grammarAccess.prOverridingHiddensCall().ele010ParserRuleCallWS();
 			return new Solution(obj);
 		}
 
@@ -957,7 +961,7 @@ protected class OverridingHiddensCall_1_Assignment_valid extends AssignmentToken
 	}
 	
 	public Assignment getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prOverridingHiddensCall().ele1AssignmentValid();
+		return grammarAccess.prOverridingHiddensCall().ele1AssignmentValid();
 	}
 	
 	@Override
@@ -967,7 +971,7 @@ protected class OverridingHiddensCall_1_Assignment_valid extends AssignmentToken
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prOverridingHiddensCall().ele10KeywordSemicolon();
+			element = grammarAccess.prOverridingHiddensCall().ele10KeywordSemicolon();
 			return new Solution(obj);
 		}
 
@@ -994,7 +998,7 @@ protected class InheritingHiddens_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prInheritingHiddens().eleGroup();
+		return grammarAccess.prInheritingHiddens().eleGroup();
 	}
 		
 	@Override
@@ -1023,7 +1027,7 @@ protected class InheritingHiddens_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prInheritingHiddens().ele0Group();
+		return grammarAccess.prInheritingHiddens().ele0Group();
 	}
 		
 	@Override
@@ -1052,7 +1056,7 @@ protected class InheritingHiddens_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prInheritingHiddens().ele00Group();
+		return grammarAccess.prInheritingHiddens().ele00Group();
 	}
 		
 	@Override
@@ -1081,7 +1085,7 @@ protected class InheritingHiddens_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prInheritingHiddens().ele000Group();
+		return grammarAccess.prInheritingHiddens().ele000Group();
 	}
 		
 	@Override
@@ -1110,7 +1114,7 @@ protected class InheritingHiddens_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prInheritingHiddens().ele0000Group();
+		return grammarAccess.prInheritingHiddens().ele0000Group();
 	}
 		
 	@Override
@@ -1139,7 +1143,7 @@ protected class InheritingHiddens_0_0_0_0_0_Keyword_inheriting extends KeywordTo
 	}
 	
 	public Keyword getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prInheritingHiddens().ele00000KeywordInheriting();
+		return grammarAccess.prInheritingHiddens().ele00000KeywordInheriting();
 	}	
 }
 
@@ -1151,7 +1155,7 @@ protected class InheritingHiddens_0_0_0_0_1_Keyword_hiddens extends KeywordToken
 	}
 	
 	public Keyword getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prInheritingHiddens().ele00001KeywordHiddens();
+		return grammarAccess.prInheritingHiddens().ele00001KeywordHiddens();
 	}	
 }
 
@@ -1164,7 +1168,7 @@ protected class InheritingHiddens_0_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prInheritingHiddens().ele0001KeywordLeftParenthesis();
+		return grammarAccess.prInheritingHiddens().ele0001KeywordLeftParenthesis();
 	}	
 }
 
@@ -1177,7 +1181,7 @@ protected class InheritingHiddens_0_0_1_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prInheritingHiddens().ele001Alternatives();
+		return grammarAccess.prInheritingHiddens().ele001Alternatives();
 	}
 
 	@Override	
@@ -1199,7 +1203,7 @@ protected class InheritingHiddens_0_0_1_0_Assignment_called extends AssignmentTo
 	}
 	
 	public Assignment getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prInheritingHiddens().ele0010AssignmentCalled();
+		return grammarAccess.prInheritingHiddens().ele0010AssignmentCalled();
 	}
 	
 	@Override
@@ -1231,7 +1235,7 @@ protected class InheritingHiddens_0_0_1_1_Assignment_hidingCalled extends Assign
 	}
 	
 	public Assignment getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prInheritingHiddens().ele0011AssignmentHidingCalled();
+		return grammarAccess.prInheritingHiddens().ele0011AssignmentHidingCalled();
 	}
 	
 	@Override
@@ -1265,7 +1269,7 @@ protected class InheritingHiddens_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prInheritingHiddens().ele01KeywordRightParenthesis();
+		return grammarAccess.prInheritingHiddens().ele01KeywordRightParenthesis();
 	}	
 }
 
@@ -1278,7 +1282,7 @@ protected class InheritingHiddens_1_Assignment_valid extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prInheritingHiddens().ele1AssignmentValid();
+		return grammarAccess.prInheritingHiddens().ele1AssignmentValid();
 	}
 	
 	@Override
@@ -1288,7 +1292,7 @@ protected class InheritingHiddens_1_Assignment_valid extends AssignmentToken  {
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prInheritingHiddens().ele10KeywordSemicolon();
+			element = grammarAccess.prInheritingHiddens().ele10KeywordSemicolon();
 			return new Solution(obj);
 		}
 
@@ -1315,7 +1319,7 @@ protected class DatatypeHiddens_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prDatatypeHiddens().eleGroup();
+		return grammarAccess.prDatatypeHiddens().eleGroup();
 	}
 		
 	@Override
@@ -1344,7 +1348,7 @@ protected class DatatypeHiddens_0_Keyword_datatype extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prDatatypeHiddens().ele0KeywordDatatype();
+		return grammarAccess.prDatatypeHiddens().ele0KeywordDatatype();
 	}	
 }
 
@@ -1356,7 +1360,7 @@ protected class DatatypeHiddens_1_Assignment_valid extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prDatatypeHiddens().ele1AssignmentValid();
+		return grammarAccess.prDatatypeHiddens().ele1AssignmentValid();
 	}
 	
 	@Override
@@ -1366,7 +1370,7 @@ protected class DatatypeHiddens_1_Assignment_valid extends AssignmentToken  {
 
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
 			type = AssignmentType.PRC;
-			element = HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prDatatypeHiddens().ele10ParserRuleCallDatatypeRule();
+			element = grammarAccess.prDatatypeHiddens().ele10ParserRuleCallDatatypeRule();
 			return new Solution(obj);
 		}
 
@@ -1394,7 +1398,7 @@ protected class HidingHiddens_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prHidingHiddens().eleGroup();
+		return grammarAccess.prHidingHiddens().eleGroup();
 	}
 		
 	@Override
@@ -1423,7 +1427,7 @@ protected class HidingHiddens_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prHidingHiddens().ele0Group();
+		return grammarAccess.prHidingHiddens().ele0Group();
 	}
 		
 	@Override
@@ -1452,7 +1456,7 @@ protected class HidingHiddens_0_0_Keyword_hiding extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prHidingHiddens().ele00KeywordHiding();
+		return grammarAccess.prHidingHiddens().ele00KeywordHiding();
 	}	
 }
 
@@ -1464,7 +1468,7 @@ protected class HidingHiddens_0_1_Assignment_space extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prHidingHiddens().ele01AssignmentSpace();
+		return grammarAccess.prHidingHiddens().ele01AssignmentSpace();
 	}
 	
 	@Override
@@ -1474,7 +1478,7 @@ protected class HidingHiddens_0_1_Assignment_space extends AssignmentToken  {
 
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
 			type = AssignmentType.PRC;
-			element = HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prHidingHiddens().ele010ParserRuleCallWS();
+			element = grammarAccess.prHidingHiddens().ele010ParserRuleCallWS();
 			return new Solution(obj);
 		}
 
@@ -1491,7 +1495,7 @@ protected class HidingHiddens_1_Assignment_called extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prHidingHiddens().ele1AssignmentCalled();
+		return grammarAccess.prHidingHiddens().ele1AssignmentCalled();
 	}
 	
 	@Override
@@ -1534,7 +1538,7 @@ protected class InheritingHiddensCall_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prInheritingHiddensCall().eleGroup();
+		return grammarAccess.prInheritingHiddensCall().eleGroup();
 	}
 		
 	@Override
@@ -1563,7 +1567,7 @@ protected class InheritingHiddensCall_0_Keyword_call extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prInheritingHiddensCall().ele0KeywordCall();
+		return grammarAccess.prInheritingHiddensCall().ele0KeywordCall();
 	}	
 }
 
@@ -1575,7 +1579,7 @@ protected class InheritingHiddensCall_1_Assignment_valid extends AssignmentToken
 	}
 	
 	public Assignment getGrammarElement() {
-		return HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prInheritingHiddensCall().ele1AssignmentValid();
+		return grammarAccess.prInheritingHiddensCall().ele1AssignmentValid();
 	}
 	
 	@Override
@@ -1585,7 +1589,7 @@ protected class InheritingHiddensCall_1_Assignment_valid extends AssignmentToken
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prInheritingHiddensCall().ele10KeywordSemicolon();
+			element = grammarAccess.prInheritingHiddensCall().ele10KeywordSemicolon();
 			return new Solution(obj);
 		}
 

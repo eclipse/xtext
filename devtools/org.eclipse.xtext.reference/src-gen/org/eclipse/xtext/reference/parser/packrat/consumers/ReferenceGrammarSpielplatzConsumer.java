@@ -27,6 +27,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGCons
 @SuppressWarnings("unused")
 public final class ReferenceGrammarSpielplatzConsumer extends NonTerminalConsumer {
 
+	private SpielplatzElements rule;
+	
 	private INonTerminalConsumer customTypeParserRuleConsumer;
 	private INonTerminalConsumer erwachsenerConsumer;
 	private INonTerminalConsumer familieConsumer;
@@ -141,17 +143,11 @@ public final class ReferenceGrammarSpielplatzConsumer extends NonTerminalConsume
 	}
 
 	protected int consumeAssignment$7(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(intConsumer, "groesse", false, false, getRule().ele000010LexerRuleCallINT(), getRuleCall$8$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$8(entryPoint);
+	}
+
+	protected int consumeRuleCall$8(int entryPoint) throws Exception {
+		return consumeTerminal(intConsumer, "groesse", false, false, getRule().ele000010LexerRuleCallINT(), getRuleCall$8$Delimiter());
 	}
 
 	protected int consumeAssignment$9(int entryPoint) throws Exception {
@@ -165,17 +161,11 @@ public final class ReferenceGrammarSpielplatzConsumer extends NonTerminalConsume
 	}
 
 	protected int doConsumeAssignment$9(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(stringConsumer, "beschreibung", false, false, getRule().ele00010LexerRuleCallSTRING(), getRuleCall$10$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$10(entryPoint);
+	}
+
+	protected int consumeRuleCall$10(int entryPoint) throws Exception {
+		return consumeTerminal(stringConsumer, "beschreibung", false, false, getRule().ele00010LexerRuleCallSTRING(), getRuleCall$10$Delimiter());
 	}
 
 	protected int consumeKeyword$11(int entryPoint) throws Exception {
@@ -226,73 +216,43 @@ public final class ReferenceGrammarSpielplatzConsumer extends NonTerminalConsume
 	}
 
 	protected int consumeAssignment$16(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(kindConsumer, "kinder", true, false, false, getRule().ele0100000ParserRuleCallKind());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$17(entryPoint);
+	}
+
+	protected int consumeRuleCall$17(int entryPoint) throws Exception {
+		return consumeNonTerminal(kindConsumer, "kinder", true, false, false, getRule().ele0100000ParserRuleCallKind());
 	}
 
 	protected int consumeAssignment$18(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(erwachsenerConsumer, "erzieher", true, false, false, getRule().ele0100010ParserRuleCallErwachsener());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$19(entryPoint);
+	}
+
+	protected int consumeRuleCall$19(int entryPoint) throws Exception {
+		return consumeNonTerminal(erwachsenerConsumer, "erzieher", true, false, false, getRule().ele0100010ParserRuleCallErwachsener());
 	}
 
 	protected int consumeAssignment$20(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(spielzeugConsumer, "spielzeuge", true, false, false, getRule().ele010010ParserRuleCallSpielzeug());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$21(entryPoint);
+	}
+
+	protected int consumeRuleCall$21(int entryPoint) throws Exception {
+		return consumeNonTerminal(spielzeugConsumer, "spielzeuge", true, false, false, getRule().ele010010ParserRuleCallSpielzeug());
 	}
 
 	protected int consumeAssignment$22(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(familieConsumer, "familie", true, false, false, getRule().ele01010ParserRuleCallFamilie());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$23(entryPoint);
+	}
+
+	protected int consumeRuleCall$23(int entryPoint) throws Exception {
+		return consumeNonTerminal(familieConsumer, "familie", true, false, false, getRule().ele01010ParserRuleCallFamilie());
 	}
 
 	protected int consumeAssignment$24(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(customTypeParserRuleConsumer, "types", true, false, false, getRule().ele0110ParserRuleCallCustomTypeParserRule());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$25(entryPoint);
+	}
+
+	protected int consumeRuleCall$25(int entryPoint) throws Exception {
+		return consumeNonTerminal(customTypeParserRuleConsumer, "types", true, false, false, getRule().ele0110ParserRuleCallCustomTypeParserRule());
 	}
 
 	protected int consumeKeyword$26(int entryPoint) throws Exception {
@@ -300,7 +260,12 @@ public final class ReferenceGrammarSpielplatzConsumer extends NonTerminalConsume
 	}
 
 	public SpielplatzElements getRule() {
-		return ReferenceGrammarGrammarAccess.INSTANCE.prSpielplatz();
+	// ReferenceGrammarGrammarAccess.INSTANCE.prSpielplatz()
+		return rule;
+	}
+	
+	public void setRule(SpielplatzElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

@@ -4,11 +4,18 @@ import org.eclipse.xtext.parsetree.formatter.services.FormatterTestLanguageGramm
 import org.eclipse.xtext.parsetree.reconstr.impl.FormattingConfig;
 import org.eclipse.xtext.parsetree.reconstr.impl.FormattingTokenSerializer;
 
-public class FormattingTokenSerializerTestImpl extends
-		FormattingTokenSerializer {
+import com.google.inject.Inject;
 
+public class FormattingTokenSerializerTestImpl extends FormattingTokenSerializer {
+
+	@Inject
+	public FormattingTokenSerializerTestImpl(FormatterTestLanguageGrammarAccess grammarAccess) {
+		super(grammarAccess);
+	}
+
+	@Override
 	protected void configureFormatting(FormattingConfig c) {
-		FormatterTestLanguageGrammarAccess f = FormatterTestLanguageGrammarAccess.INSTANCE;
+		FormatterTestLanguageGrammarAccess f = (FormatterTestLanguageGrammarAccess) getGrammarAccess();
 
 		c.setLinewrap().after(f.prTestLinewrap().ele0KeywordLinewrap());
 		c.setLinewrap().after(f.prLine().ele1KeywordSemicolon());

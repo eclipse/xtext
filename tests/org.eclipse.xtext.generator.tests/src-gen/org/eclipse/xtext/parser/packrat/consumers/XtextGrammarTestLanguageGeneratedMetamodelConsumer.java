@@ -22,6 +22,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGCons
 @SuppressWarnings("unused")
 public final class XtextGrammarTestLanguageGeneratedMetamodelConsumer extends NonTerminalConsumer {
 
+	private GeneratedMetamodelElements rule;
+	
 	private ITerminalConsumer idConsumer;
 	private ITerminalConsumer stringConsumer;
 
@@ -172,7 +174,12 @@ public final class XtextGrammarTestLanguageGeneratedMetamodelConsumer extends No
 	}
 
 	public GeneratedMetamodelElements getRule() {
-		return XtextGrammarTestLanguageGrammarAccess.INSTANCE.prGeneratedMetamodel();
+	// XtextGrammarTestLanguageGrammarAccess.INSTANCE.prGeneratedMetamodel()
+		return rule;
+	}
+	
+	public void setRule(GeneratedMetamodelElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

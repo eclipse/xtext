@@ -21,6 +21,8 @@ import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.AbstractTes
 @SuppressWarnings("unused")
 public final class AbstractTestLanguageAbstractCallOverridenParserRuleConsumer extends NonTerminalConsumer {
 
+	private AbstractCallOverridenParserRuleElements rule;
+	
 	private INonTerminalConsumer overridableParserRuleConsumer;
 
 	private ICharacterClass keyword$2$Delimiter;
@@ -88,7 +90,12 @@ public final class AbstractTestLanguageAbstractCallOverridenParserRuleConsumer e
 	}
 
 	public AbstractCallOverridenParserRuleElements getRule() {
-		return AbstractTestLanguageGrammarAccess.INSTANCE.prAbstractCallOverridenParserRule();
+	// AbstractTestLanguageGrammarAccess.INSTANCE.prAbstractCallOverridenParserRule()
+		return rule;
+	}
+	
+	public void setRule(AbstractCallOverridenParserRuleElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

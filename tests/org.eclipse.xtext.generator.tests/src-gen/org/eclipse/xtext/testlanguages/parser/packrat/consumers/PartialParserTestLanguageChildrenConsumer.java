@@ -21,6 +21,8 @@ import org.eclipse.xtext.testlanguages.parser.packrat.consumers.PartialParserTes
 @SuppressWarnings("unused")
 public final class PartialParserTestLanguageChildrenConsumer extends NonTerminalConsumer {
 
+	private ChildrenElements rule;
+	
 	private INonTerminalConsumer childConsumer;
 
 	private ICharacterClass keyword$5$Delimiter;
@@ -175,7 +177,12 @@ public final class PartialParserTestLanguageChildrenConsumer extends NonTerminal
 	}
 
 	public ChildrenElements getRule() {
-		return PartialParserTestLanguageGrammarAccess.INSTANCE.prChildren();
+	// PartialParserTestLanguageGrammarAccess.INSTANCE.prChildren()
+		return rule;
+	}
+	
+	public void setRule(ChildrenElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

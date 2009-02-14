@@ -22,6 +22,8 @@ import org.eclipse.xtext.parser.packrat.consumers.XtextTypeRefConsumer;
 @SuppressWarnings("unused")
 public final class XtextCrossReferenceConsumer extends NonTerminalConsumer {
 
+	private CrossReferenceElements rule;
+	
 	private ITerminalConsumer idConsumer;
 	private INonTerminalConsumer typeRefConsumer;
 
@@ -100,17 +102,11 @@ public final class XtextCrossReferenceConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$5(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(typeRefConsumer, "type", false, false, false, getRule().ele0010ParserRuleCallTypeRef());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$6(entryPoint);
+	}
+
+	protected int consumeRuleCall$6(int entryPoint) throws Exception {
+		return consumeNonTerminal(typeRefConsumer, "type", false, false, false, getRule().ele0010ParserRuleCallTypeRef());
 	}
 
 	protected int consumeGroup$7(int entryPoint) throws Exception {
@@ -159,17 +155,11 @@ public final class XtextCrossReferenceConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$9(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "rule", false, false, getRule().ele0110CrossReferenceEStringAbstractRule(), getCrossReference$10$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeCrossReference$10(entryPoint);
+	}
+
+	protected int consumeCrossReference$10(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "rule", false, false, getRule().ele0110CrossReferenceEStringAbstractRule(), getCrossReference$10$Delimiter());
 	}
 
 	protected int consumeKeyword$12(int entryPoint) throws Exception {
@@ -177,7 +167,12 @@ public final class XtextCrossReferenceConsumer extends NonTerminalConsumer {
 	}
 
 	public CrossReferenceElements getRule() {
-		return XtextGrammarAccess.INSTANCE.prCrossReference();
+	// XtextGrammarAccess.INSTANCE.prCrossReference()
+		return rule;
+	}
+	
+	public void setRule(CrossReferenceElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

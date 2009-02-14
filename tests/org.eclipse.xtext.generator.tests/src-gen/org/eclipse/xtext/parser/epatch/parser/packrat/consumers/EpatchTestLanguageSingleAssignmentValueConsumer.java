@@ -25,6 +25,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGCons
 @SuppressWarnings("unused")
 public final class EpatchTestLanguageSingleAssignmentValueConsumer extends NonTerminalConsumer {
 
+	private SingleAssignmentValueElements rule;
+	
 	private INonTerminalConsumer createdObjectConsumer;
 	private ITerminalConsumer fragmentConsumer;
 	private ITerminalConsumer idConsumer;
@@ -343,7 +345,12 @@ public final class EpatchTestLanguageSingleAssignmentValueConsumer extends NonTe
 	}
 
 	public SingleAssignmentValueElements getRule() {
-		return EpatchTestLanguageGrammarAccess.INSTANCE.prSingleAssignmentValue();
+	// EpatchTestLanguageGrammarAccess.INSTANCE.prSingleAssignmentValue()
+		return rule;
+	}
+	
+	public void setRule(SingleAssignmentValueElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

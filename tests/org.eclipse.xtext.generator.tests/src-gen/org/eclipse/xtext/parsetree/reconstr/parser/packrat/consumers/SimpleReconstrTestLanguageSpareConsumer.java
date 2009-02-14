@@ -21,6 +21,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer
 @SuppressWarnings("unused")
 public final class SimpleReconstrTestLanguageSpareConsumer extends NonTerminalConsumer {
 
+	private SpareElements rule;
+	
 	private ITerminalConsumer idConsumer;
 
 	private ICharacterClass keyword$3$Delimiter;
@@ -149,7 +151,12 @@ public final class SimpleReconstrTestLanguageSpareConsumer extends NonTerminalCo
 	}
 
 	public SpareElements getRule() {
-		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prSpare();
+	// SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prSpare()
+		return rule;
+	}
+	
+	public void setRule(SpareElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

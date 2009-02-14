@@ -22,6 +22,8 @@ import org.eclipse.xtext.example.parser.packrat.consumers.DomainmodelStructuralF
 @SuppressWarnings("unused")
 public final class DomainmodelFeatureConsumer extends NonTerminalConsumer {
 
+	private FeatureElements rule;
+	
 	private INonTerminalConsumer operationConsumer;
 	private INonTerminalConsumer structuralFeatureConsumer;
 
@@ -62,7 +64,12 @@ public final class DomainmodelFeatureConsumer extends NonTerminalConsumer {
 	}
 
 	public FeatureElements getRule() {
-		return DomainmodelGrammarAccess.INSTANCE.prFeature();
+	// DomainmodelGrammarAccess.INSTANCE.prFeature()
+		return rule;
+	}
+	
+	public void setRule(FeatureElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.IAbstractToken;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractFormattingConfig.ConfigRunner;
@@ -24,10 +25,17 @@ public abstract class FormattingTokenSerializer extends DefaultTokenSerializer {
 
 	protected ConfigRunner formatter;
 
-	public FormattingTokenSerializer() {
+	private final IGrammarAccess grammarAccess;
+
+	protected FormattingTokenSerializer(IGrammarAccess grammarAccess) {
 		super();
+		this.grammarAccess = grammarAccess;
 		config = createFormattingConfig();
 		configureFormatting(config);
+	}
+
+	protected IGrammarAccess getGrammarAccess() {
+		return grammarAccess;
 	}
 
 	@Override

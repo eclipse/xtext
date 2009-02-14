@@ -7,6 +7,8 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
+import org.eclipse.xtext.testlanguages.services.SimpleExpressionsTestLanguageGrammarAccess;
+
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.SimpleExpressionsTestLanguageSequenceConsumer;
@@ -35,9 +37,12 @@ public class SimpleExpressionsTestLanguageParserConfiguration extends AbstractPa
     private SimpleExpressionsTestLanguageAtomConsumer atomConsumer;
     private SimpleExpressionsTestLanguageParensConsumer parensConsumer;
 
-	public SimpleExpressionsTestLanguageParserConfiguration(IInternalParserConfiguration configuration) {
+	private SimpleExpressionsTestLanguageGrammarAccess grammarAccess;
+
+	public SimpleExpressionsTestLanguageParserConfiguration(IInternalParserConfiguration configuration, SimpleExpressionsTestLanguageGrammarAccess grammarAccess) {
 		super(configuration);
-		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration);
+		this.grammarAccess = grammarAccess;
+		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration, null);
 	}
 
 	public SimpleExpressionsTestLanguageSequenceConsumer getRootConsumer() {
@@ -71,6 +76,23 @@ public class SimpleExpressionsTestLanguageParserConfiguration extends AbstractPa
 	}
 	
 	public void configureConsumers() {
+		if (grammarAccess == null)
+			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+		getSequenceConsumer().setRule(grammarAccess.prSequence());
+		getAdditionConsumer().setRule(grammarAccess.prAddition());
+		getMultiplicationConsumer().setRule(grammarAccess.prMultiplication());
+		getTermConsumer().setRule(grammarAccess.prTerm());
+		getAtomConsumer().setRule(grammarAccess.prAtom());
+		getParensConsumer().setRule(grammarAccess.prParens());
+		getIdConsumer().setRule(grammarAccess.lrID());
+		getIntConsumer().setRule(grammarAccess.lrINT());
+		getStringConsumer().setRule(grammarAccess.lrSTRING());
+		getMlCommentConsumer().setRule(grammarAccess.lrML_COMMENT());
+		getSlCommentConsumer().setRule(grammarAccess.lrSL_COMMENT());
+		getWsConsumer().setRule(grammarAccess.lrWS());
+		getAnyOtherConsumer().setRule(grammarAccess.lrANY_OTHER());
+
+
 		getSequenceConsumer().setAdditionConsumer(getAdditionConsumer());
 
 		getAdditionConsumer().setMultiplicationConsumer(getMultiplicationConsumer());

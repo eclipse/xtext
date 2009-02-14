@@ -7,6 +7,8 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
+import org.eclipse.xtext.generator.services.LowerCaseNamedTestLanguageGrammarAccess;
+
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 
 import org.eclipse.xtext.generator.parser.packrat.consumers.LowerCaseNamedTestLanguageModelConsumer;
@@ -25,9 +27,12 @@ public class LowerCaseNamedTestLanguageParserConfiguration extends AbstractParse
 
     private LowerCaseNamedTestLanguageModelConsumer modelConsumer;
 
-	public LowerCaseNamedTestLanguageParserConfiguration(IInternalParserConfiguration configuration) {
+	private LowerCaseNamedTestLanguageGrammarAccess grammarAccess;
+
+	public LowerCaseNamedTestLanguageParserConfiguration(IInternalParserConfiguration configuration, LowerCaseNamedTestLanguageGrammarAccess grammarAccess) {
 		super(configuration);
-		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration);
+		this.grammarAccess = grammarAccess;
+		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration, null);
 	}
 
 	public LowerCaseNamedTestLanguageModelConsumer getRootConsumer() {
@@ -46,6 +51,18 @@ public class LowerCaseNamedTestLanguageParserConfiguration extends AbstractParse
 	}
 	
 	public void configureConsumers() {
+		if (grammarAccess == null)
+			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+		getModelConsumer().setRule(grammarAccess.prModel());
+		getIdConsumer().setRule(grammarAccess.lrID());
+		getIntConsumer().setRule(grammarAccess.lrINT());
+		getStringConsumer().setRule(grammarAccess.lrSTRING());
+		getMlCommentConsumer().setRule(grammarAccess.lrML_COMMENT());
+		getSlCommentConsumer().setRule(grammarAccess.lrSL_COMMENT());
+		getWsConsumer().setRule(grammarAccess.lrWS());
+		getAnyOtherConsumer().setRule(grammarAccess.lrANY_OTHER());
+
+
 		getModelConsumer().setIdConsumer(getIdConsumer());
 
 		getModelConsumer().setRuleCall$2$Delimiter(LowerCaseNamedTestLanguageDelimiters.ruleCall$4$Delimiter);

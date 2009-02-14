@@ -9,12 +9,15 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
-import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
 import org.eclipse.xtext.parsetree.reconstr.services.ComplexReconstrTestLanguageGrammarAccess;
 
+import com.google.inject.Inject;
 
 public class ComplexReconstrTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 		
+	@Inject
+	private ComplexReconstrTestLanguageGrammarAccess grammarAccess;
+	
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
@@ -52,7 +55,7 @@ protected class Root_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prRoot().eleAlternatives();
+		return grammarAccess.prRoot().eleAlternatives();
 	}
 
 	@Override	
@@ -74,7 +77,7 @@ protected class Root_0_RuleCall_Op extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prRoot().ele0ParserRuleCallOp();
+		return grammarAccess.prRoot().ele0ParserRuleCallOp();
 	}
 	
 	@Override
@@ -93,7 +96,7 @@ protected class Root_1_RuleCall_TrickyG extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prRoot().ele1ParserRuleCallTrickyG();
+		return grammarAccess.prRoot().ele1ParserRuleCallTrickyG();
 	}
 	
 	@Override
@@ -123,7 +126,7 @@ protected class Op_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prOp().eleGroup();
+		return grammarAccess.prOp().eleGroup();
 	}
 		
 	@Override
@@ -152,7 +155,7 @@ protected class Op_0_RuleCall_Term extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prOp().ele0ParserRuleCallTerm();
+		return grammarAccess.prOp().ele0ParserRuleCallTerm();
 	}
 	
 	@Override
@@ -171,7 +174,7 @@ protected class Op_1_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prOp().ele1Alternatives();
+		return grammarAccess.prOp().ele1Alternatives();
 	}
 
 	@Override	
@@ -193,7 +196,7 @@ protected class Op_1_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prOp().ele10Group();
+		return grammarAccess.prOp().ele10Group();
 	}
 		
 	@Override
@@ -222,7 +225,7 @@ protected class Op_1_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prOp().ele100Group();
+		return grammarAccess.prOp().ele100Group();
 	}
 		
 	@Override
@@ -251,7 +254,7 @@ protected class Op_1_0_0_0_Action_Add_addOperands extends ActionToken  {
 	}
 	
 	public Action getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prOp().ele1000ActionAddaddOperands();
+		return grammarAccess.prOp().ele1000ActionAddaddOperands();
 	}
 	
 	@Override
@@ -272,7 +275,7 @@ protected class Op_1_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prOp().ele1001KeywordPlusSign();
+		return grammarAccess.prOp().ele1001KeywordPlusSign();
 	}	
 }
 
@@ -285,7 +288,7 @@ protected class Op_1_0_1_Assignment_addOperands extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prOp().ele101AssignmentAddOperands();
+		return grammarAccess.prOp().ele101AssignmentAddOperands();
 	}
 	
 	@Override
@@ -318,7 +321,7 @@ protected class Op_1_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prOp().ele11Group();
+		return grammarAccess.prOp().ele11Group();
 	}
 		
 	@Override
@@ -347,7 +350,7 @@ protected class Op_1_1_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prOp().ele110Group();
+		return grammarAccess.prOp().ele110Group();
 	}
 		
 	@Override
@@ -376,7 +379,7 @@ protected class Op_1_1_0_0_Action_Minus_minusOperands extends ActionToken  {
 	}
 	
 	public Action getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prOp().ele1100ActionMinusminusOperands();
+		return grammarAccess.prOp().ele1100ActionMinusminusOperands();
 	}
 	
 	@Override
@@ -397,7 +400,7 @@ protected class Op_1_1_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prOp().ele1101KeywordHyphenMinus();
+		return grammarAccess.prOp().ele1101KeywordHyphenMinus();
 	}	
 }
 
@@ -410,7 +413,7 @@ protected class Op_1_1_1_Assignment_minusOperands extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prOp().ele111AssignmentMinusOperands();
+		return grammarAccess.prOp().ele111AssignmentMinusOperands();
 	}
 	
 	@Override
@@ -455,7 +458,7 @@ protected class Term_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTerm().eleAlternatives();
+		return grammarAccess.prTerm().eleAlternatives();
 	}
 
 	@Override	
@@ -477,7 +480,7 @@ protected class Term_0_RuleCall_Atom extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTerm().ele0ParserRuleCallAtom();
+		return grammarAccess.prTerm().ele0ParserRuleCallAtom();
 	}
 	
 	@Override
@@ -496,7 +499,7 @@ protected class Term_1_RuleCall_Parens extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTerm().ele1ParserRuleCallParens();
+		return grammarAccess.prTerm().ele1ParserRuleCallParens();
 	}
 	
 	@Override
@@ -526,7 +529,7 @@ protected class Atom_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prAtom().eleAssignmentName();
+		return grammarAccess.prAtom().eleAssignmentName();
 	}
 	
 	@Override
@@ -535,7 +538,7 @@ protected class Atom_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prAtom().ele0LexerRuleCallID();
+			element = grammarAccess.prAtom().ele0LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -560,7 +563,7 @@ protected class Parens_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prParens().eleGroup();
+		return grammarAccess.prParens().eleGroup();
 	}
 		
 	@Override
@@ -589,7 +592,7 @@ protected class Parens_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prParens().ele0Group();
+		return grammarAccess.prParens().ele0Group();
 	}
 		
 	@Override
@@ -618,7 +621,7 @@ protected class Parens_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prParens().ele00Group();
+		return grammarAccess.prParens().ele00Group();
 	}
 		
 	@Override
@@ -647,7 +650,7 @@ protected class Parens_0_0_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prParens().ele000KeywordLeftParenthesis();
+		return grammarAccess.prParens().ele000KeywordLeftParenthesis();
 	}	
 }
 
@@ -659,7 +662,7 @@ protected class Parens_0_0_1_RuleCall_Op extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prParens().ele001ParserRuleCallOp();
+		return grammarAccess.prParens().ele001ParserRuleCallOp();
 	}
 	
 	@Override
@@ -679,7 +682,7 @@ protected class Parens_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prParens().ele01KeywordRightParenthesis();
+		return grammarAccess.prParens().ele01KeywordRightParenthesis();
 	}	
 }
 
@@ -692,7 +695,7 @@ protected class Parens_1_Assignment_em extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prParens().ele1AssignmentEm();
+		return grammarAccess.prParens().ele1AssignmentEm();
 	}
 	
 	@Override
@@ -702,7 +705,7 @@ protected class Parens_1_Assignment_em extends AssignmentToken  {
 
 		if("!".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prParens().ele10KeywordExclamationMark();
+			element = grammarAccess.prParens().ele10KeywordExclamationMark();
 			return new Solution(obj);
 		}
 
@@ -729,7 +732,7 @@ protected class TrickyA_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyA().eleGroup();
+		return grammarAccess.prTrickyA().eleGroup();
 	}
 		
 	@Override
@@ -758,7 +761,7 @@ protected class TrickyA_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyA().ele0Group();
+		return grammarAccess.prTrickyA().ele0Group();
 	}
 		
 	@Override
@@ -787,7 +790,7 @@ protected class TrickyA_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyA().ele00Group();
+		return grammarAccess.prTrickyA().ele00Group();
 	}
 		
 	@Override
@@ -816,7 +819,7 @@ protected class TrickyA_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyA().ele000Group();
+		return grammarAccess.prTrickyA().ele000Group();
 	}
 		
 	@Override
@@ -845,7 +848,7 @@ protected class TrickyA_0_0_0_0_Keyword_TA extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyA().ele0000KeywordTA();
+		return grammarAccess.prTrickyA().ele0000KeywordTA();
 	}	
 }
 
@@ -857,7 +860,7 @@ protected class TrickyA_0_0_0_1_RuleCall_TrickyA1 extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyA().ele0001ParserRuleCallTrickyA1();
+		return grammarAccess.prTrickyA().ele0001ParserRuleCallTrickyA1();
 	}
 	
 	@Override
@@ -877,7 +880,7 @@ protected class TrickyA_0_0_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyA().ele001AssignmentName();
+		return grammarAccess.prTrickyA().ele001AssignmentName();
 	}
 	
 	@Override
@@ -886,7 +889,7 @@ protected class TrickyA_0_0_1_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyA().ele0010LexerRuleCallID();
+			element = grammarAccess.prTrickyA().ele0010LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -902,7 +905,7 @@ protected class TrickyA_0_1_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyA().ele01Alternatives();
+		return grammarAccess.prTrickyA().ele01Alternatives();
 	}
 
 	@Override	
@@ -924,7 +927,7 @@ protected class TrickyA_0_1_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyA().ele010Group();
+		return grammarAccess.prTrickyA().ele010Group();
 	}
 		
 	@Override
@@ -953,7 +956,7 @@ protected class TrickyA_0_1_0_0_Action_TypeB_x extends ActionToken  {
 	}
 	
 	public Action getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyA().ele0100ActionTypeBx();
+		return grammarAccess.prTrickyA().ele0100ActionTypeBx();
 	}
 	
 	@Override
@@ -974,7 +977,7 @@ protected class TrickyA_0_1_0_1_Keyword_x extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyA().ele0101KeywordX();
+		return grammarAccess.prTrickyA().ele0101KeywordX();
 	}	
 }
 
@@ -987,7 +990,7 @@ protected class TrickyA_0_1_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyA().ele011Group();
+		return grammarAccess.prTrickyA().ele011Group();
 	}
 		
 	@Override
@@ -1016,7 +1019,7 @@ protected class TrickyA_0_1_1_0_Action_TypeC_x extends ActionToken  {
 	}
 	
 	public Action getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyA().ele0110ActionTypeCx();
+		return grammarAccess.prTrickyA().ele0110ActionTypeCx();
 	}
 	
 	@Override
@@ -1037,7 +1040,7 @@ protected class TrickyA_0_1_1_1_Keyword_y extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyA().ele0111KeywordY();
+		return grammarAccess.prTrickyA().ele0111KeywordY();
 	}	
 }
 
@@ -1052,7 +1055,7 @@ protected class TrickyA_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyA().ele1AssignmentName();
+		return grammarAccess.prTrickyA().ele1AssignmentName();
 	}
 	
 	@Override
@@ -1061,7 +1064,7 @@ protected class TrickyA_1_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyA().ele10LexerRuleCallSTRING();
+			element = grammarAccess.prTrickyA().ele10LexerRuleCallSTRING();
 			return new Solution(obj);
 		}
 		return null;
@@ -1087,7 +1090,7 @@ protected class TrickyA1_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyA1().eleAssignmentName();
+		return grammarAccess.prTrickyA1().eleAssignmentName();
 	}
 	
 	@Override
@@ -1096,7 +1099,7 @@ protected class TrickyA1_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyA1().ele0LexerRuleCallID();
+			element = grammarAccess.prTrickyA1().ele0LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -1121,7 +1124,7 @@ protected class TrickyB_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyB().eleGroup();
+		return grammarAccess.prTrickyB().eleGroup();
 	}
 		
 	@Override
@@ -1150,7 +1153,7 @@ protected class TrickyB_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyB().ele0Group();
+		return grammarAccess.prTrickyB().ele0Group();
 	}
 		
 	@Override
@@ -1179,7 +1182,7 @@ protected class TrickyB_0_0_Keyword_TB extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyB().ele00KeywordTB();
+		return grammarAccess.prTrickyB().ele00KeywordTB();
 	}	
 }
 
@@ -1191,7 +1194,7 @@ protected class TrickyB_0_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyB().ele01Group();
+		return grammarAccess.prTrickyB().ele01Group();
 	}
 		
 	@Override
@@ -1220,7 +1223,7 @@ protected class TrickyB_0_1_0_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyB().ele010AssignmentName();
+		return grammarAccess.prTrickyB().ele010AssignmentName();
 	}
 	
 	@Override
@@ -1229,7 +1232,7 @@ protected class TrickyB_0_1_0_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyB().ele0100LexerRuleCallID();
+			element = grammarAccess.prTrickyB().ele0100LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -1244,7 +1247,7 @@ protected class TrickyB_0_1_1_Assignment_type extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyB().ele011AssignmentType();
+		return grammarAccess.prTrickyB().ele011AssignmentType();
 	}
 	
 	@Override
@@ -1253,7 +1256,7 @@ protected class TrickyB_0_1_1_Assignment_type extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("type");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyB().ele0110LexerRuleCallINT();
+			element = grammarAccess.prTrickyB().ele0110LexerRuleCallINT();
 			return new Solution(obj);
 		}
 		return null;
@@ -1270,7 +1273,7 @@ protected class TrickyB_1_Assignment_type extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyB().ele1AssignmentType();
+		return grammarAccess.prTrickyB().ele1AssignmentType();
 	}
 	
 	@Override
@@ -1279,7 +1282,7 @@ protected class TrickyB_1_Assignment_type extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("type");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyB().ele10LexerRuleCallINT();
+			element = grammarAccess.prTrickyB().ele10LexerRuleCallINT();
 			return new Solution(obj);
 		}
 		return null;
@@ -1305,7 +1308,7 @@ protected class TrickyC_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyC().eleGroup();
+		return grammarAccess.prTrickyC().eleGroup();
 	}
 		
 	@Override
@@ -1334,7 +1337,7 @@ protected class TrickyC_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyC().ele0Group();
+		return grammarAccess.prTrickyC().ele0Group();
 	}
 		
 	@Override
@@ -1363,7 +1366,7 @@ protected class TrickyC_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyC().ele00Group();
+		return grammarAccess.prTrickyC().ele00Group();
 	}
 		
 	@Override
@@ -1392,7 +1395,7 @@ protected class TrickyC_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyC().ele000Group();
+		return grammarAccess.prTrickyC().ele000Group();
 	}
 		
 	@Override
@@ -1421,7 +1424,7 @@ protected class TrickyC_0_0_0_0_Keyword_TC extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyC().ele0000KeywordTC();
+		return grammarAccess.prTrickyC().ele0000KeywordTC();
 	}	
 }
 
@@ -1433,7 +1436,7 @@ protected class TrickyC_0_0_0_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyC().ele0001AssignmentName();
+		return grammarAccess.prTrickyC().ele0001AssignmentName();
 	}
 	
 	@Override
@@ -1442,7 +1445,7 @@ protected class TrickyC_0_0_0_1_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyC().ele00010LexerRuleCallID();
+			element = grammarAccess.prTrickyC().ele00010LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -1458,7 +1461,7 @@ protected class TrickyC_0_0_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyC().ele001Group();
+		return grammarAccess.prTrickyC().ele001Group();
 	}
 		
 	@Override
@@ -1487,7 +1490,7 @@ protected class TrickyC_0_0_1_0_Action_C1_x extends ActionToken  {
 	}
 	
 	public Action getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyC().ele0010ActionC1x();
+		return grammarAccess.prTrickyC().ele0010ActionC1x();
 	}
 	
 	@Override
@@ -1508,7 +1511,7 @@ protected class TrickyC_0_0_1_1_Keyword_x extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyC().ele0011KeywordX();
+		return grammarAccess.prTrickyC().ele0011KeywordX();
 	}	
 }
 
@@ -1522,7 +1525,7 @@ protected class TrickyC_0_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyC().ele01Group();
+		return grammarAccess.prTrickyC().ele01Group();
 	}
 		
 	@Override
@@ -1551,7 +1554,7 @@ protected class TrickyC_0_1_0_Action_C2_y extends ActionToken  {
 	}
 	
 	public Action getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyC().ele010ActionC2y();
+		return grammarAccess.prTrickyC().ele010ActionC2y();
 	}
 	
 	@Override
@@ -1572,7 +1575,7 @@ protected class TrickyC_0_1_1_Keyword_y extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyC().ele011KeywordY();
+		return grammarAccess.prTrickyC().ele011KeywordY();
 	}	
 }
 
@@ -1586,7 +1589,7 @@ protected class TrickyC_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyC().ele1Group();
+		return grammarAccess.prTrickyC().ele1Group();
 	}
 		
 	@Override
@@ -1615,7 +1618,7 @@ protected class TrickyC_1_0_Action_C3_z extends ActionToken  {
 	}
 	
 	public Action getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyC().ele10ActionC3z();
+		return grammarAccess.prTrickyC().ele10ActionC3z();
 	}
 	
 	@Override
@@ -1636,7 +1639,7 @@ protected class TrickyC_1_1_Keyword_z extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyC().ele11KeywordZ();
+		return grammarAccess.prTrickyC().ele11KeywordZ();
 	}	
 }
 
@@ -1660,7 +1663,7 @@ protected class TrickyD_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyD().eleGroup();
+		return grammarAccess.prTrickyD().eleGroup();
 	}
 		
 	@Override
@@ -1689,7 +1692,7 @@ protected class TrickyD_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyD().ele0Group();
+		return grammarAccess.prTrickyD().ele0Group();
 	}
 		
 	@Override
@@ -1718,7 +1721,7 @@ protected class TrickyD_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyD().ele00Group();
+		return grammarAccess.prTrickyD().ele00Group();
 	}
 		
 	@Override
@@ -1747,7 +1750,7 @@ protected class TrickyD_0_0_0_Keyword_TD extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyD().ele000KeywordTD();
+		return grammarAccess.prTrickyD().ele000KeywordTD();
 	}	
 }
 
@@ -1759,7 +1762,7 @@ protected class TrickyD_0_0_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyD().ele001Group();
+		return grammarAccess.prTrickyD().ele001Group();
 	}
 		
 	@Override
@@ -1788,7 +1791,7 @@ protected class TrickyD_0_0_1_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyD().ele0010Group();
+		return grammarAccess.prTrickyD().ele0010Group();
 	}
 		
 	@Override
@@ -1817,7 +1820,7 @@ protected class TrickyD_0_0_1_0_0_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyD().ele00100AssignmentName();
+		return grammarAccess.prTrickyD().ele00100AssignmentName();
 	}
 	
 	@Override
@@ -1826,7 +1829,7 @@ protected class TrickyD_0_0_1_0_0_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyD().ele001000LexerRuleCallINT();
+			element = grammarAccess.prTrickyD().ele001000LexerRuleCallINT();
 			return new Solution(obj);
 		}
 		return null;
@@ -1841,7 +1844,7 @@ protected class TrickyD_0_0_1_0_1_Assignment_foo extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyD().ele00101AssignmentFoo();
+		return grammarAccess.prTrickyD().ele00101AssignmentFoo();
 	}
 	
 	@Override
@@ -1850,7 +1853,7 @@ protected class TrickyD_0_0_1_0_1_Assignment_foo extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("foo");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyD().ele001010LexerRuleCallSTRING();
+			element = grammarAccess.prTrickyD().ele001010LexerRuleCallSTRING();
 			return new Solution(obj);
 		}
 		return null;
@@ -1866,7 +1869,7 @@ protected class TrickyD_0_0_1_1_Assignment_type extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyD().ele0011AssignmentType();
+		return grammarAccess.prTrickyD().ele0011AssignmentType();
 	}
 	
 	@Override
@@ -1875,7 +1878,7 @@ protected class TrickyD_0_0_1_1_Assignment_type extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("type");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyD().ele00110LexerRuleCallID();
+			element = grammarAccess.prTrickyD().ele00110LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -1892,7 +1895,7 @@ protected class TrickyD_0_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyD().ele01Group();
+		return grammarAccess.prTrickyD().ele01Group();
 	}
 		
 	@Override
@@ -1921,7 +1924,7 @@ protected class TrickyD_0_1_0_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyD().ele010AssignmentName();
+		return grammarAccess.prTrickyD().ele010AssignmentName();
 	}
 	
 	@Override
@@ -1930,7 +1933,7 @@ protected class TrickyD_0_1_0_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyD().ele0100LexerRuleCallINT();
+			element = grammarAccess.prTrickyD().ele0100LexerRuleCallINT();
 			return new Solution(obj);
 		}
 		return null;
@@ -1945,7 +1948,7 @@ protected class TrickyD_0_1_1_Assignment_type extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyD().ele011AssignmentType();
+		return grammarAccess.prTrickyD().ele011AssignmentType();
 	}
 	
 	@Override
@@ -1954,7 +1957,7 @@ protected class TrickyD_0_1_1_Assignment_type extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("type");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyD().ele0110LexerRuleCallID();
+			element = grammarAccess.prTrickyD().ele0110LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -1971,7 +1974,7 @@ protected class TrickyD_1_Assignment_type extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyD().ele1AssignmentType();
+		return grammarAccess.prTrickyD().ele1AssignmentType();
 	}
 	
 	@Override
@@ -1980,7 +1983,7 @@ protected class TrickyD_1_Assignment_type extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("type");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyD().ele10LexerRuleCallID();
+			element = grammarAccess.prTrickyD().ele10LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -2006,7 +2009,7 @@ protected class TrickyE_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyE().eleGroup();
+		return grammarAccess.prTrickyE().eleGroup();
 	}
 		
 	@Override
@@ -2035,7 +2038,7 @@ protected class TrickyE_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyE().ele0Group();
+		return grammarAccess.prTrickyE().ele0Group();
 	}
 		
 	@Override
@@ -2064,7 +2067,7 @@ protected class TrickyE_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyE().ele00Group();
+		return grammarAccess.prTrickyE().ele00Group();
 	}
 		
 	@Override
@@ -2093,7 +2096,7 @@ protected class TrickyE_0_0_0_Keyword_TE extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyE().ele000KeywordTE();
+		return grammarAccess.prTrickyE().ele000KeywordTE();
 	}	
 }
 
@@ -2105,7 +2108,7 @@ protected class TrickyE_0_0_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyE().ele001Group();
+		return grammarAccess.prTrickyE().ele001Group();
 	}
 		
 	@Override
@@ -2134,7 +2137,7 @@ protected class TrickyE_0_0_1_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyE().ele0010Group();
+		return grammarAccess.prTrickyE().ele0010Group();
 	}
 		
 	@Override
@@ -2163,7 +2166,7 @@ protected class TrickyE_0_0_1_0_0_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyE().ele00100AssignmentName();
+		return grammarAccess.prTrickyE().ele00100AssignmentName();
 	}
 	
 	@Override
@@ -2172,7 +2175,7 @@ protected class TrickyE_0_0_1_0_0_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyE().ele001000LexerRuleCallINT();
+			element = grammarAccess.prTrickyE().ele001000LexerRuleCallINT();
 			return new Solution(obj);
 		}
 		return null;
@@ -2187,7 +2190,7 @@ protected class TrickyE_0_0_1_0_1_Assignment_foo extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyE().ele00101AssignmentFoo();
+		return grammarAccess.prTrickyE().ele00101AssignmentFoo();
 	}
 	
 	@Override
@@ -2196,7 +2199,7 @@ protected class TrickyE_0_0_1_0_1_Assignment_foo extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("foo");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyE().ele001010LexerRuleCallSTRING();
+			element = grammarAccess.prTrickyE().ele001010LexerRuleCallSTRING();
 			return new Solution(obj);
 		}
 		return null;
@@ -2212,7 +2215,7 @@ protected class TrickyE_0_0_1_1_Assignment_type extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyE().ele0011AssignmentType();
+		return grammarAccess.prTrickyE().ele0011AssignmentType();
 	}
 	
 	@Override
@@ -2221,7 +2224,7 @@ protected class TrickyE_0_0_1_1_Assignment_type extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("type");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyE().ele00110LexerRuleCallID();
+			element = grammarAccess.prTrickyE().ele00110LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -2238,7 +2241,7 @@ protected class TrickyE_0_1_Keyword_x extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyE().ele01KeywordX();
+		return grammarAccess.prTrickyE().ele01KeywordX();
 	}	
 }
 
@@ -2251,7 +2254,7 @@ protected class TrickyE_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyE().ele1Group();
+		return grammarAccess.prTrickyE().ele1Group();
 	}
 		
 	@Override
@@ -2280,7 +2283,7 @@ protected class TrickyE_1_0_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyE().ele10AssignmentName();
+		return grammarAccess.prTrickyE().ele10AssignmentName();
 	}
 	
 	@Override
@@ -2289,7 +2292,7 @@ protected class TrickyE_1_0_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyE().ele100LexerRuleCallINT();
+			element = grammarAccess.prTrickyE().ele100LexerRuleCallINT();
 			return new Solution(obj);
 		}
 		return null;
@@ -2304,7 +2307,7 @@ protected class TrickyE_1_1_Assignment_type extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyE().ele11AssignmentType();
+		return grammarAccess.prTrickyE().ele11AssignmentType();
 	}
 	
 	@Override
@@ -2313,7 +2316,7 @@ protected class TrickyE_1_1_Assignment_type extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("type");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyE().ele110LexerRuleCallID();
+			element = grammarAccess.prTrickyE().ele110LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -2340,7 +2343,7 @@ protected class TrickyF_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyF().eleGroup();
+		return grammarAccess.prTrickyF().eleGroup();
 	}
 		
 	@Override
@@ -2369,7 +2372,7 @@ protected class TrickyF_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyF().ele0Group();
+		return grammarAccess.prTrickyF().ele0Group();
 	}
 		
 	@Override
@@ -2398,7 +2401,7 @@ protected class TrickyF_0_0_Keyword_TF extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyF().ele00KeywordTF();
+		return grammarAccess.prTrickyF().ele00KeywordTF();
 	}	
 }
 
@@ -2410,7 +2413,7 @@ protected class TrickyF_0_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyF().ele01Group();
+		return grammarAccess.prTrickyF().ele01Group();
 	}
 		
 	@Override
@@ -2439,7 +2442,7 @@ protected class TrickyF_0_1_0_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyF().ele010AssignmentName();
+		return grammarAccess.prTrickyF().ele010AssignmentName();
 	}
 	
 	@Override
@@ -2448,7 +2451,7 @@ protected class TrickyF_0_1_0_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyF().ele0100LexerRuleCallID();
+			element = grammarAccess.prTrickyF().ele0100LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -2463,7 +2466,7 @@ protected class TrickyF_0_1_1_Assignment_type extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyF().ele011AssignmentType();
+		return grammarAccess.prTrickyF().ele011AssignmentType();
 	}
 	
 	@Override
@@ -2472,7 +2475,7 @@ protected class TrickyF_0_1_1_Assignment_type extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("type");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyF().ele0110LexerRuleCallINT();
+			element = grammarAccess.prTrickyF().ele0110LexerRuleCallINT();
 			return new Solution(obj);
 		}
 		return null;
@@ -2489,7 +2492,7 @@ protected class TrickyF_1_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyF().ele1Alternatives();
+		return grammarAccess.prTrickyF().ele1Alternatives();
 	}
 
 	@Override	
@@ -2511,7 +2514,7 @@ protected class TrickyF_1_0_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyF().ele10AssignmentName();
+		return grammarAccess.prTrickyF().ele10AssignmentName();
 	}
 	
 	@Override
@@ -2520,7 +2523,7 @@ protected class TrickyF_1_0_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyF().ele100LexerRuleCallID();
+			element = grammarAccess.prTrickyF().ele100LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -2535,7 +2538,7 @@ protected class TrickyF_1_1_Assignment_type extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyF().ele11AssignmentType();
+		return grammarAccess.prTrickyF().ele11AssignmentType();
 	}
 	
 	@Override
@@ -2544,7 +2547,7 @@ protected class TrickyF_1_1_Assignment_type extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("type");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyF().ele110LexerRuleCallINT();
+			element = grammarAccess.prTrickyF().ele110LexerRuleCallINT();
 			return new Solution(obj);
 		}
 		return null;
@@ -2571,7 +2574,7 @@ protected class TrickyG_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyG().eleGroup();
+		return grammarAccess.prTrickyG().eleGroup();
 	}
 		
 	@Override
@@ -2600,7 +2603,7 @@ protected class TrickyG_0_Keyword_TG extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyG().ele0KeywordTG();
+		return grammarAccess.prTrickyG().ele0KeywordTG();
 	}	
 }
 
@@ -2612,7 +2615,7 @@ protected class TrickyG_1_Assignment_tree extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyG().ele1AssignmentTree();
+		return grammarAccess.prTrickyG().ele1AssignmentTree();
 	}
 	
 	@Override
@@ -2655,7 +2658,7 @@ protected class TrickyG1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyG1().eleGroup();
+		return grammarAccess.prTrickyG1().eleGroup();
 	}
 		
 	@Override
@@ -2684,7 +2687,7 @@ protected class TrickyG1_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyG1().ele0Group();
+		return grammarAccess.prTrickyG1().ele0Group();
 	}
 		
 	@Override
@@ -2713,7 +2716,7 @@ protected class TrickyG1_0_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyG1().ele00KeywordLeftSquareBracket();
+		return grammarAccess.prTrickyG1().ele00KeywordLeftSquareBracket();
 	}	
 }
 
@@ -2725,7 +2728,7 @@ protected class TrickyG1_0_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyG1().ele01Group();
+		return grammarAccess.prTrickyG1().ele01Group();
 	}
 		
 	@Override
@@ -2754,7 +2757,7 @@ protected class TrickyG1_0_1_0_Assignment_vals extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyG1().ele010AssignmentVals();
+		return grammarAccess.prTrickyG1().ele010AssignmentVals();
 	}
 	
 	@Override
@@ -2786,7 +2789,7 @@ protected class TrickyG1_0_1_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyG1().ele011Group();
+		return grammarAccess.prTrickyG1().ele011Group();
 	}
 		
 	@Override
@@ -2815,7 +2818,7 @@ protected class TrickyG1_0_1_1_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyG1().ele0110KeywordComma();
+		return grammarAccess.prTrickyG1().ele0110KeywordComma();
 	}	
 }
 
@@ -2827,7 +2830,7 @@ protected class TrickyG1_0_1_1_1_Assignment_vals extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyG1().ele0111AssignmentVals();
+		return grammarAccess.prTrickyG1().ele0111AssignmentVals();
 	}
 	
 	@Override
@@ -2862,7 +2865,7 @@ protected class TrickyG1_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyG1().ele1KeywordRightSquareBracket();
+		return grammarAccess.prTrickyG1().ele1KeywordRightSquareBracket();
 	}	
 }
 
@@ -2885,7 +2888,7 @@ protected class TrickyG2_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyG2().eleAlternatives();
+		return grammarAccess.prTrickyG2().eleAlternatives();
 	}
 
 	@Override	
@@ -2907,7 +2910,7 @@ protected class TrickyG2_0_RuleCall_TrickyG1 extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyG2().ele0ParserRuleCallTrickyG1();
+		return grammarAccess.prTrickyG2().ele0ParserRuleCallTrickyG1();
 	}
 	
 	@Override
@@ -2926,7 +2929,7 @@ protected class TrickyG2_1_Assignment_val extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyG2().ele1AssignmentVal();
+		return grammarAccess.prTrickyG2().ele1AssignmentVal();
 	}
 	
 	@Override
@@ -2935,7 +2938,7 @@ protected class TrickyG2_1_Assignment_val extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("val");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyG2().ele10LexerRuleCallINT();
+			element = grammarAccess.prTrickyG2().ele10LexerRuleCallINT();
 			return new Solution(obj);
 		}
 		return null;

@@ -3,14 +3,29 @@ Generated with Xtext
 */
 package org.eclipse.xtext.metamodelreferencing.tests.parser.packrat;
 
+import com.google.inject.Inject;
+
 import org.eclipse.xtext.parser.packrat.AbstractPackratParser;
+import org.eclipse.xtext.parser.packrat.IParseResultFactory;
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration.IInternalParserConfiguration;
 
-public class MultiGenMMTestLanguagePackratParser extends AbstractPackratParser {
+import org.eclipse.xtext.metamodelreferencing.tests.services.MultiGenMMTestLanguageGrammarAccess;
 
+public class MultiGenMMTestLanguagePackratParser extends AbstractPackratParser {
+	
+	@Inject
+	public MultiGenMMTestLanguagePackratParser(IParseResultFactory parseResultFactory, MultiGenMMTestLanguageGrammarAccess grammarAccess) {
+		super(parseResultFactory, grammarAccess);
+	}
+	
 	@Override
 	protected MultiGenMMTestLanguageParserConfiguration createParserConfiguration(IInternalParserConfiguration configuration) {
-		return new MultiGenMMTestLanguageParserConfiguration(configuration);
+		return new MultiGenMMTestLanguageParserConfiguration(configuration, getGrammarAccess());
+	}
+	
+	@Override
+	protected MultiGenMMTestLanguageGrammarAccess getGrammarAccess() {
+		return (MultiGenMMTestLanguageGrammarAccess)super.getGrammarAccess();
 	}
 	
 }

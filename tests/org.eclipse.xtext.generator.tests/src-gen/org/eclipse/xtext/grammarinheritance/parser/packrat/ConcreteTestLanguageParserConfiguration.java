@@ -7,6 +7,8 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
+import org.eclipse.xtext.grammarinheritance.services.ConcreteTestLanguageGrammarAccess;
+
 import org.eclipse.xtext.grammarinheritance.parser.packrat.AbstractTestLanguageParserConfiguration; 
 
 import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.ConcreteTestLanguageRootRuleConsumer;
@@ -47,9 +49,12 @@ public class ConcreteTestLanguageParserConfiguration extends AbstractParserConfi
     private ConcreteTestLanguageSubrule3Consumer subrule3Consumer;
     private ConcreteTestLanguageCallExtendedParserRuleConsumer callExtendedParserRuleConsumer;
 
-	public ConcreteTestLanguageParserConfiguration(IInternalParserConfiguration configuration) {
+	private ConcreteTestLanguageGrammarAccess grammarAccess;
+
+	public ConcreteTestLanguageParserConfiguration(IInternalParserConfiguration configuration, ConcreteTestLanguageGrammarAccess grammarAccess) {
 		super(configuration);
-		this.abstractTestLanguageConfiguration = new AbstractTestLanguageParserConfiguration(configuration);
+		this.grammarAccess = grammarAccess;
+		this.abstractTestLanguageConfiguration = new AbstractTestLanguageParserConfiguration(configuration, null);
 	}
 
 	public ConcreteTestLanguageRootRuleConsumer getRootConsumer() {
@@ -95,6 +100,31 @@ public class ConcreteTestLanguageParserConfiguration extends AbstractParserConfi
 	}
 	
 	public void configureConsumers() {
+		if (grammarAccess == null)
+			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+		getRootRuleConsumer().setRule(grammarAccess.prRootRule());
+		getConcreteParserRuleConsumer().setRule(grammarAccess.prConcreteParserRule());
+		getOverridableParserRuleConsumer().setRule(grammarAccess.prOverridableParserRule());
+		getCallOverridenParserRuleConsumer().setRule(grammarAccess.prCallOverridenParserRule());
+		getOverridableParserRule2Consumer().setRule(grammarAccess.prOverridableParserRule2());
+		getExtendableParserRuleConsumer().setRule(grammarAccess.prExtendableParserRule());
+		getSubrule1Consumer().setRule(grammarAccess.prSubrule1());
+		getSubrule2Consumer().setRule(grammarAccess.prSubrule2());
+		getSubrule3Consumer().setRule(grammarAccess.prSubrule3());
+		getCallExtendedParserRuleConsumer().setRule(grammarAccess.prCallExtendedParserRule());
+		getInheritedParserRuleConsumer().setRule(grammarAccess.prInheritedParserRule());
+		getAbstractCallOverridenParserRuleConsumer().setRule(grammarAccess.prAbstractCallOverridenParserRule());
+		getAbstractCallExtendedParserRuleConsumer().setRule(grammarAccess.prAbstractCallExtendedParserRule());
+		getRealConsumer().setRule(grammarAccess.lrREAL());
+		getIdConsumer().setRule(grammarAccess.lrID());
+		getIntConsumer().setRule(grammarAccess.lrINT());
+		getStringConsumer().setRule(grammarAccess.lrSTRING());
+		getMlCommentConsumer().setRule(grammarAccess.lrML_COMMENT());
+		getSlCommentConsumer().setRule(grammarAccess.lrSL_COMMENT());
+		getWsConsumer().setRule(grammarAccess.lrWS());
+		getAnyOtherConsumer().setRule(grammarAccess.lrANY_OTHER());
+
+
 		getRootRuleConsumer().setCallExtendedParserRuleConsumer(getCallExtendedParserRuleConsumer());
 		getRootRuleConsumer().setCallOverridenParserRuleConsumer(getCallOverridenParserRuleConsumer());
 		getRootRuleConsumer().setConcreteParserRuleConsumer(getConcreteParserRuleConsumer());

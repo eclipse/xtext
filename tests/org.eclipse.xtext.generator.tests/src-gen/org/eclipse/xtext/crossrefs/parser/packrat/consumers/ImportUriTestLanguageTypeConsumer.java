@@ -21,6 +21,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer
 @SuppressWarnings("unused")
 public final class ImportUriTestLanguageTypeConsumer extends NonTerminalConsumer {
 
+	private TypeElements rule;
+	
 	private ITerminalConsumer idConsumer;
 
 	private ISequenceMatcher crossReference$9$Delimiter;
@@ -118,7 +120,12 @@ public final class ImportUriTestLanguageTypeConsumer extends NonTerminalConsumer
 	}
 
 	public TypeElements getRule() {
-		return ImportUriTestLanguageGrammarAccess.INSTANCE.prType();
+	// ImportUriTestLanguageGrammarAccess.INSTANCE.prType()
+		return rule;
+	}
+	
+	public void setRule(TypeElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

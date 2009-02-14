@@ -21,6 +21,8 @@ import org.eclipse.xtext.testlanguages.parser.packrat.consumers.TestLanguageAbst
 @SuppressWarnings("unused")
 public final class TestLanguageEntryRuleConsumer extends NonTerminalConsumer {
 
+	private EntryRuleElements rule;
+	
 	private INonTerminalConsumer abstractRuleConsumer;
 
 	public TestLanguageEntryRuleConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
@@ -50,7 +52,12 @@ public final class TestLanguageEntryRuleConsumer extends NonTerminalConsumer {
 	}
 
 	public EntryRuleElements getRule() {
-		return TestLanguageGrammarAccess.INSTANCE.prEntryRule();
+	// TestLanguageGrammarAccess.INSTANCE.prEntryRule()
+		return rule;
+	}
+	
+	public void setRule(EntryRuleElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

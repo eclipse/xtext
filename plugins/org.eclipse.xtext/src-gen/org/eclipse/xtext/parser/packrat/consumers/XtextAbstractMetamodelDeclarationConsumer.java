@@ -22,6 +22,8 @@ import org.eclipse.xtext.parser.packrat.consumers.XtextReferencedMetamodelConsum
 @SuppressWarnings("unused")
 public final class XtextAbstractMetamodelDeclarationConsumer extends NonTerminalConsumer {
 
+	private AbstractMetamodelDeclarationElements rule;
+	
 	private INonTerminalConsumer generatedMetamodelConsumer;
 	private INonTerminalConsumer referencedMetamodelConsumer;
 
@@ -62,7 +64,12 @@ public final class XtextAbstractMetamodelDeclarationConsumer extends NonTerminal
 	}
 
 	public AbstractMetamodelDeclarationElements getRule() {
-		return XtextGrammarAccess.INSTANCE.prAbstractMetamodelDeclaration();
+	// XtextGrammarAccess.INSTANCE.prAbstractMetamodelDeclaration()
+		return rule;
+	}
+	
+	public void setRule(AbstractMetamodelDeclarationElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

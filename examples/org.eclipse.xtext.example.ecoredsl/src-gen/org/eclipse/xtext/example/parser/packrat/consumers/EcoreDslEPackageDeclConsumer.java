@@ -25,6 +25,8 @@ import org.eclipse.xtext.example.parser.packrat.consumers.EcoreDslSubEPackageDec
 @SuppressWarnings("unused")
 public final class EcoreDslEPackageDeclConsumer extends NonTerminalConsumer {
 
+	private EPackageDeclElements rule;
+	
 	private INonTerminalConsumer eAnnotationDeclConsumer;
 	private INonTerminalConsumer eClassifierDeclConsumer;
 	private INonTerminalConsumer qidConsumer;
@@ -195,17 +197,11 @@ public final class EcoreDslEPackageDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int doConsumeAssignment$12(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(eAnnotationDeclConsumer, "eAnnotations", true, false, false, getRule().ele000000000000ParserRuleCallEAnnotationDecl());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$13(entryPoint);
+	}
+
+	protected int consumeRuleCall$13(int entryPoint) throws Exception {
+		return consumeNonTerminal(eAnnotationDeclConsumer, "eAnnotations", true, false, false, getRule().ele000000000000ParserRuleCallEAnnotationDecl());
 	}
 
 	protected int consumeKeyword$14(int entryPoint) throws Exception {
@@ -213,17 +209,11 @@ public final class EcoreDslEPackageDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$15(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(qidConsumer, "name", false, true, false, getRule().ele00000000010ParserRuleCallQID());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$16(entryPoint);
+	}
+
+	protected int consumeRuleCall$16(int entryPoint) throws Exception {
+		return consumeNonTerminal(qidConsumer, "name", false, true, false, getRule().ele00000000010ParserRuleCallQID());
 	}
 
 	protected int consumeKeyword$17(int entryPoint) throws Exception {
@@ -235,17 +225,11 @@ public final class EcoreDslEPackageDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$19(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(stringConsumer, "nsURI", false, false, getRule().ele00000010LexerRuleCallSTRING(), getRuleCall$20$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$20(entryPoint);
+	}
+
+	protected int consumeRuleCall$20(int entryPoint) throws Exception {
+		return consumeTerminal(stringConsumer, "nsURI", false, false, getRule().ele00000010LexerRuleCallSTRING(), getRuleCall$20$Delimiter());
 	}
 
 	protected int consumeKeyword$21(int entryPoint) throws Exception {
@@ -257,17 +241,11 @@ public final class EcoreDslEPackageDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$23(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(qidConsumer, "nsPrefix", false, true, false, getRule().ele00010ParserRuleCallQID());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$24(entryPoint);
+	}
+
+	protected int consumeRuleCall$24(int entryPoint) throws Exception {
+		return consumeNonTerminal(qidConsumer, "nsPrefix", false, true, false, getRule().ele00010ParserRuleCallQID());
 	}
 
 	protected int consumeKeyword$25(int entryPoint) throws Exception {
@@ -303,31 +281,19 @@ public final class EcoreDslEPackageDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$27(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(subEPackageDeclConsumer, "eSubpackages", true, false, false, getRule().ele0100ParserRuleCallSubEPackageDecl());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$28(entryPoint);
+	}
+
+	protected int consumeRuleCall$28(int entryPoint) throws Exception {
+		return consumeNonTerminal(subEPackageDeclConsumer, "eSubpackages", true, false, false, getRule().ele0100ParserRuleCallSubEPackageDecl());
 	}
 
 	protected int consumeAssignment$29(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(eClassifierDeclConsumer, "eClassifiers", true, false, false, getRule().ele0110ParserRuleCallEClassifierDecl());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$30(entryPoint);
+	}
+
+	protected int consumeRuleCall$30(int entryPoint) throws Exception {
+		return consumeNonTerminal(eClassifierDeclConsumer, "eClassifiers", true, false, false, getRule().ele0110ParserRuleCallEClassifierDecl());
 	}
 
 	protected int consumeKeyword$31(int entryPoint) throws Exception {
@@ -335,7 +301,12 @@ public final class EcoreDslEPackageDeclConsumer extends NonTerminalConsumer {
 	}
 
 	public EPackageDeclElements getRule() {
-		return EcoreDslGrammarAccess.INSTANCE.prEPackageDecl();
+	// EcoreDslGrammarAccess.INSTANCE.prEPackageDecl()
+		return rule;
+	}
+	
+	public void setRule(EPackageDeclElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

@@ -23,6 +23,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGCons
 @SuppressWarnings("unused")
 public final class ComplexReconstrTestLanguageTrickyDConsumer extends NonTerminalConsumer {
 
+	private TrickyDElements rule;
+	
 	private ITerminalConsumer idConsumer;
 	private ITerminalConsumer intConsumer;
 	private ITerminalConsumer stringConsumer;
@@ -259,7 +261,12 @@ public final class ComplexReconstrTestLanguageTrickyDConsumer extends NonTermina
 	}
 
 	public TrickyDElements getRule() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyD();
+	// ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyD()
+		return rule;
+	}
+	
+	public void setRule(TrickyDElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

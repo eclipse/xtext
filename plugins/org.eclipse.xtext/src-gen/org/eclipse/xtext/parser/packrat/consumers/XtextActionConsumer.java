@@ -22,6 +22,8 @@ import org.eclipse.xtext.parser.packrat.consumers.XtextTypeRefConsumer;
 @SuppressWarnings("unused")
 public final class XtextActionConsumer extends NonTerminalConsumer {
 
+	private ActionElements rule;
+	
 	private ITerminalConsumer idConsumer;
 	private INonTerminalConsumer typeRefConsumer;
 
@@ -200,17 +202,11 @@ public final class XtextActionConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$12(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(typeRefConsumer, "typeName", false, false, false, getRule().ele0000010ParserRuleCallTypeRef());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$13(entryPoint);
+	}
+
+	protected int consumeRuleCall$13(int entryPoint) throws Exception {
+		return consumeNonTerminal(typeRefConsumer, "typeName", false, false, false, getRule().ele0000010ParserRuleCallTypeRef());
 	}
 
 	protected int consumeKeyword$14(int entryPoint) throws Exception {
@@ -218,42 +214,42 @@ public final class XtextActionConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$15(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "feature", false, false, getRule().ele00010LexerRuleCallID(), getRuleCall$16$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$16(entryPoint);
+	}
+
+	protected int consumeRuleCall$16(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "feature", false, false, getRule().ele00010LexerRuleCallID(), getRuleCall$16$Delimiter());
 	}
 
 	protected int consumeAssignment$17(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		// TODO use markers in assignments of alternatives to recover
-		announceNextPath();
-		tempResult = consumeKeyword(getRule().ele00100KeywordEqualsSign(), "operator", false, false, getKeyword$19$Delimiter()); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
+		return consumeAlternatives$18(entryPoint);
+	}
+	protected int consumeAlternatives$18(int entryPoint) throws Exception {
+		AlternativesResult result = createAlternativesResult();
+		switch(entryPoint) {
+			case -1: // use fall through semantics of switch case
+				result.reset();
+			case 0:
+				result.nextAlternative();
+				if (result.isAlternativeDone(consumeKeyword$19(nextEntryPoint()))) { 
+					return result.getResult(); 
+				}
+			case 1:
+				result.nextAlternative();
+				if (result.isAlternativeDone(consumeKeyword$20(nextEntryPoint()))) { 
+					return result.getResult(); 
+				}
 		}
-		result = tempResult >= result ? tempResult : result; 
+		return result.getResult();
+	}
+	
 
-		announceNextPath();
-		tempResult = consumeKeyword(getRule().ele00101KeywordPlusSignEqualsSign(), "operator", false, false, getKeyword$20$Delimiter()); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
+	protected int consumeKeyword$19(int entryPoint) throws Exception {
+		return consumeKeyword(getRule().ele00100KeywordEqualsSign(), "operator", false, false, getKeyword$19$Delimiter());
+	}
 
-		announceLevelFinished();
-		return result;
+	protected int consumeKeyword$20(int entryPoint) throws Exception {
+		return consumeKeyword(getRule().ele00101KeywordPlusSignEqualsSign(), "operator", false, false, getKeyword$20$Delimiter());
 	}
 
 	protected int consumeKeyword$21(int entryPoint) throws Exception {
@@ -265,7 +261,12 @@ public final class XtextActionConsumer extends NonTerminalConsumer {
 	}
 
 	public ActionElements getRule() {
-		return XtextGrammarAccess.INSTANCE.prAction();
+	// XtextGrammarAccess.INSTANCE.prAction()
+		return rule;
+	}
+	
+	public void setRule(ActionElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

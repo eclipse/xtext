@@ -23,6 +23,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGCons
 @SuppressWarnings("unused")
 public final class TreeTestLanguageNodeConsumer extends NonTerminalConsumer {
 
+	private NodeElements rule;
+	
 	private ITerminalConsumer idConsumer;
 	private INonTerminalConsumer nodeConsumer;
 	private ITerminalConsumer stringConsumer;
@@ -131,17 +133,11 @@ public final class TreeTestLanguageNodeConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$7(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "name", false, false, getRule().ele0000000LexerRuleCallID(), getRuleCall$8$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$8(entryPoint);
+	}
+
+	protected int consumeRuleCall$8(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "name", false, false, getRule().ele0000000LexerRuleCallID(), getRuleCall$8$Delimiter());
 	}
 
 	protected int consumeKeyword$9(int entryPoint) throws Exception {
@@ -149,17 +145,11 @@ public final class TreeTestLanguageNodeConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$10(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(stringConsumer, "attrib", false, false, getRule().ele000010LexerRuleCallSTRING(), getRuleCall$11$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$11(entryPoint);
+	}
+
+	protected int consumeRuleCall$11(int entryPoint) throws Exception {
+		return consumeTerminal(stringConsumer, "attrib", false, false, getRule().ele000010LexerRuleCallSTRING(), getRuleCall$11$Delimiter());
 	}
 
 	protected int consumeKeyword$12(int entryPoint) throws Exception {
@@ -180,17 +170,11 @@ public final class TreeTestLanguageNodeConsumer extends NonTerminalConsumer {
 	}
 
 	protected int doConsumeAssignment$14(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(nodeConsumer, "children", true, false, false, getRule().ele010ParserRuleCallNode());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$15(entryPoint);
+	}
+
+	protected int consumeRuleCall$15(int entryPoint) throws Exception {
+		return consumeNonTerminal(nodeConsumer, "children", true, false, false, getRule().ele010ParserRuleCallNode());
 	}
 
 	protected int consumeKeyword$16(int entryPoint) throws Exception {
@@ -198,7 +182,12 @@ public final class TreeTestLanguageNodeConsumer extends NonTerminalConsumer {
 	}
 
 	public NodeElements getRule() {
-		return TreeTestLanguageGrammarAccess.INSTANCE.prNode();
+	// TreeTestLanguageGrammarAccess.INSTANCE.prNode()
+		return rule;
+	}
+	
+	public void setRule(NodeElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

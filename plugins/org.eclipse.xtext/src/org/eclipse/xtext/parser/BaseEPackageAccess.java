@@ -21,7 +21,7 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- * 
+ *
  */
 public abstract class BaseEPackageAccess {
 
@@ -32,7 +32,7 @@ public abstract class BaseEPackageAccess {
 		return ePackage;
 	}
 
-	protected static Resource loadResource(ClassLoader loader, String string) {
+	public static Resource loadResource(ClassLoader loader, String string) {
 		URI uri = URI.createURI(string);
 		XtextResourceSet resourceSet = new XtextResourceSet();
 		resourceSet.setClasspathURIContext(loader);
@@ -53,7 +53,7 @@ public abstract class BaseEPackageAccess {
 		return resource;
 	}
 
-	protected static EPackage loadEcoreFile(ClassLoader loader, String string) {
+	public static EPackage loadEcoreFile(ClassLoader loader, String string) {
 		URI uri = URI.createURI(string);
 		if (!uri.hasFragment())
 			uri = uri.appendFragment("/");
@@ -61,7 +61,7 @@ public abstract class BaseEPackageAccess {
 		return (EPackage) new ResourceSetImpl().getEObject(normalized, true);
 	}
 
-	protected static Object loadGrammarFile(ClassLoader loader, String string) {
+	public static Object loadGrammarFile(ClassLoader loader, String string) {
 		Resource resource = loadResource(loader, string);
 		return resource.getContents().get(0);
 	}

@@ -7,6 +7,8 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
+import org.eclipse.xtext.parsetree.transientvalues.services.TransientValuesTestGrammarAccess;
+
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 
 import org.eclipse.xtext.parsetree.transientvalues.parser.packrat.consumers.TransientValuesTestRootConsumer;
@@ -31,9 +33,12 @@ public class TransientValuesTestParserConfiguration extends AbstractParserConfig
     private TransientValuesTestTestOptionalConsumer testOptionalConsumer;
     private TransientValuesTestTestListConsumer testListConsumer;
 
-	public TransientValuesTestParserConfiguration(IInternalParserConfiguration configuration) {
+	private TransientValuesTestGrammarAccess grammarAccess;
+
+	public TransientValuesTestParserConfiguration(IInternalParserConfiguration configuration, TransientValuesTestGrammarAccess grammarAccess) {
 		super(configuration);
-		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration);
+		this.grammarAccess = grammarAccess;
+		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration, null);
 	}
 
 	public TransientValuesTestRootConsumer getRootConsumer() {
@@ -61,6 +66,21 @@ public class TransientValuesTestParserConfiguration extends AbstractParserConfig
 	}
 	
 	public void configureConsumers() {
+		if (grammarAccess == null)
+			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+		getRootConsumer().setRule(grammarAccess.prRoot());
+		getTestRequiredConsumer().setRule(grammarAccess.prTestRequired());
+		getTestOptionalConsumer().setRule(grammarAccess.prTestOptional());
+		getTestListConsumer().setRule(grammarAccess.prTestList());
+		getIdConsumer().setRule(grammarAccess.lrID());
+		getIntConsumer().setRule(grammarAccess.lrINT());
+		getStringConsumer().setRule(grammarAccess.lrSTRING());
+		getMlCommentConsumer().setRule(grammarAccess.lrML_COMMENT());
+		getSlCommentConsumer().setRule(grammarAccess.lrSL_COMMENT());
+		getWsConsumer().setRule(grammarAccess.lrWS());
+		getAnyOtherConsumer().setRule(grammarAccess.lrANY_OTHER());
+
+
 		getRootConsumer$().setTestListConsumer(getTestListConsumer());
 		getRootConsumer$().setTestOptionalConsumer(getTestOptionalConsumer());
 		getRootConsumer$().setTestRequiredConsumer(getTestRequiredConsumer());

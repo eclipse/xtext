@@ -26,6 +26,7 @@ public class ParserTest extends AbstractGeneratorTest {
 	private EStructuralFeature wsFeature;
 	private EStructuralFeature anyOtherFeature;
 
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		with(TerminalRulesTestLanguageStandaloneSetup.class);
@@ -39,7 +40,7 @@ public class ParserTest extends AbstractGeneratorTest {
 		wsFeature = model.getEStructuralFeature("wsValue");
 		anyOtherFeature = model.getEStructuralFeature("anyValue");
 	}
-	
+
 	private void doTest(String expected, String model, EStructuralFeature feature) throws Exception {
 		EObject parsedModel = getModel(model);
 		assertNotNull(parsedModel);
@@ -48,15 +49,15 @@ public class ParserTest extends AbstractGeneratorTest {
 		assertNotNull(value);
 		assertEquals(expected, value);
 	}
-	
+
 	public void testId_01() throws Exception {
 		doTest("abc", "abc", idFeature);
 	}
-	
+
 	public void testId_02() throws Exception {
 		doTest("abc", "^abc", idFeature);
 	}
-	
+
 	public void testId_03() throws Exception {
 		doTest("abc1", "abc1", idFeature);
 	}
@@ -64,71 +65,71 @@ public class ParserTest extends AbstractGeneratorTest {
 	public void testId_04() throws Exception {
 		doTest("abc1", "^abc1", idFeature);
 	}
-	
+
 	public void testInt_01() throws Exception {
 		doTest("0", "0", intFeature);
 	}
-	
+
 	public void testInt_02() throws Exception {
 		doTest("111", "111", intFeature);
 	}
-	
+
 	public void testString_01() throws Exception {
 		doTest("abc", "'abc'", stringFeature);
 	}
-	
+
 	public void testString_02() throws Exception {
 		doTest("abc", "\"abc\"", stringFeature);
 	}
-	
+
 	public void testString_03() throws Exception {
 		doTest("ab cd", "'ab cd'", stringFeature);
 	}
-	
+
 	public void testMlComment_01() throws Exception {
 		doTest("/* abc */", "/* abc */", mlCommentFeature);
 	}
-	
+
 	public void testMlComment_02() throws Exception {
 		doTest("/* ab\nc */", "/* ab\nc */", mlCommentFeature);
 	}
-	
+
 	public void testSlComment_01() throws Exception {
 		doTest("// abc" , "// abc", slCommentFeature);
 	}
-	
+
 	public void testSlComment_02() throws Exception {
 		doTest("// abc\n" , "// abc\n", slCommentFeature);
 	}
-	
+
 	public void testSlComment_03() throws Exception {
 		doTest("// abc\r\n" , "// abc\r\n", slCommentFeature);
 	}
-	
+
 	public void testSlComment_04() throws Exception {
 		doTest("// abc" , "// abc", slCommentFeature);
 	}
-	
+
 	public void testWs_01() throws Exception {
 		doTest("  ", "  ", wsFeature);
 	}
-	
+
 	public void testWs_02() throws Exception {
 		doTest("\t", "\t", wsFeature);
 	}
-	
+
 	public void testWs_03() throws Exception {
 		doTest(" \n ", " \n ", wsFeature);
 	}
-	
+
 	public void testAnyOther_01() throws Exception {
 		doTest("'", "'", anyOtherFeature);
 	}
-	
+
 	public void testAnyOther_02() throws Exception {
 		doTest(".", ".", anyOtherFeature);
 	}
-	
+
 	public void testAnyOther_03() throws Exception {
 		doTest("\b", "\b", anyOtherFeature);
 	}

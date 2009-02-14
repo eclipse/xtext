@@ -22,6 +22,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinINTConsume
 @SuppressWarnings("unused")
 public final class ConcreteTestLanguageOverridableParserRule2Consumer extends NonTerminalConsumer {
 
+	private OverridableParserRule2Elements rule;
+	
 	private ITerminalConsumer idConsumer;
 	private ITerminalConsumer intConsumer;
 
@@ -120,7 +122,12 @@ public final class ConcreteTestLanguageOverridableParserRule2Consumer extends No
 	}
 
 	public OverridableParserRule2Elements getRule() {
-		return ConcreteTestLanguageGrammarAccess.INSTANCE.prOverridableParserRule2();
+	// ConcreteTestLanguageGrammarAccess.INSTANCE.prOverridableParserRule2()
+		return rule;
+	}
+	
+	public void setRule(OverridableParserRule2Elements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

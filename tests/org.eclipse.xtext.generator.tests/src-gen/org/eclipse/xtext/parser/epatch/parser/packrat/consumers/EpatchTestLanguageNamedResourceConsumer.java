@@ -23,6 +23,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGCons
 @SuppressWarnings("unused")
 public final class EpatchTestLanguageNamedResourceConsumer extends NonTerminalConsumer {
 
+	private NamedResourceElements rule;
+	
 	private INonTerminalConsumer createdObjectConsumer;
 	private ITerminalConsumer idConsumer;
 	private ITerminalConsumer stringConsumer;
@@ -352,7 +354,12 @@ public final class EpatchTestLanguageNamedResourceConsumer extends NonTerminalCo
 	}
 
 	public NamedResourceElements getRule() {
-		return EpatchTestLanguageGrammarAccess.INSTANCE.prNamedResource();
+	// EpatchTestLanguageGrammarAccess.INSTANCE.prNamedResource()
+		return rule;
+	}
+	
+	public void setRule(NamedResourceElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

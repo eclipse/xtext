@@ -25,6 +25,8 @@ import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageWildca
 @SuppressWarnings("unused")
 public final class XtextGrammarTestLanguageTerminalTokenElementConsumer extends NonTerminalConsumer {
 
+	private TerminalTokenElementElements rule;
+	
 	private INonTerminalConsumer abstractNegatedTokenConsumer;
 	private INonTerminalConsumer characterRangeConsumer;
 	private INonTerminalConsumer parenthesizedTerminalElementConsumer;
@@ -95,7 +97,12 @@ public final class XtextGrammarTestLanguageTerminalTokenElementConsumer extends 
 	}
 
 	public TerminalTokenElementElements getRule() {
-		return XtextGrammarTestLanguageGrammarAccess.INSTANCE.prTerminalTokenElement();
+	// XtextGrammarTestLanguageGrammarAccess.INSTANCE.prTerminalTokenElement()
+		return rule;
+	}
+	
+	public void setRule(TerminalTokenElementElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

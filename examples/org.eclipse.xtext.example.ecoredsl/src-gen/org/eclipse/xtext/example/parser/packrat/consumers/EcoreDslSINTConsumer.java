@@ -21,6 +21,8 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinINTConsume
 @SuppressWarnings("unused")
 public final class EcoreDslSINTConsumer extends NonTerminalConsumer {
 
+	private SINTElements rule;
+	
 	private ITerminalConsumer intConsumer;
 
 	private ICharacterClass keyword$2$Delimiter;
@@ -88,7 +90,12 @@ public final class EcoreDslSINTConsumer extends NonTerminalConsumer {
 	}
 
 	public SINTElements getRule() {
-		return EcoreDslGrammarAccess.INSTANCE.prSINT();
+	// EcoreDslGrammarAccess.INSTANCE.prSINT()
+		return rule;
+	}
+	
+	public void setRule(SINTElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

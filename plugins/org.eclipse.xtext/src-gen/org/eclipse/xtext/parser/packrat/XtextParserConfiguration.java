@@ -7,6 +7,8 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
+import org.eclipse.xtext.services.XtextGrammarAccess;
+
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarConsumer;
@@ -83,9 +85,12 @@ public class XtextParserConfiguration extends AbstractParserConfiguration {
     private XtextKeywordConsumer keywordConsumer;
     private XtextRuleCallConsumer ruleCallConsumer;
 
-	public XtextParserConfiguration(IInternalParserConfiguration configuration) {
+	private XtextGrammarAccess grammarAccess;
+
+	public XtextParserConfiguration(IInternalParserConfiguration configuration, XtextGrammarAccess grammarAccess) {
 		super(configuration);
-		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration);
+		this.grammarAccess = grammarAccess;
+		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration, null);
 	}
 
 	public XtextGrammarConsumer getRootConsumer() {
@@ -191,6 +196,47 @@ public class XtextParserConfiguration extends AbstractParserConfiguration {
 	}
 	
 	public void configureConsumers() {
+		if (grammarAccess == null)
+			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+		getGrammarConsumer().setRule(grammarAccess.prGrammar());
+		getGrammarIdConsumer().setRule(grammarAccess.prGrammarID());
+		getAbstractRuleConsumer().setRule(grammarAccess.prAbstractRule());
+		getAbstractMetamodelDeclarationConsumer().setRule(grammarAccess.prAbstractMetamodelDeclaration());
+		getGeneratedMetamodelConsumer().setRule(grammarAccess.prGeneratedMetamodel());
+		getReferencedMetamodelConsumer().setRule(grammarAccess.prReferencedMetamodel());
+		getLexerRuleConsumer().setRule(grammarAccess.prLexerRule());
+		getParserRuleConsumer().setRule(grammarAccess.prParserRule());
+		getTerminalRuleConsumer().setRule(grammarAccess.prTerminalRule());
+		getTypeRefConsumer().setRule(grammarAccess.prTypeRef());
+		getAlternativesConsumer().setRule(grammarAccess.prAlternatives());
+		getTerminalAlternativesConsumer().setRule(grammarAccess.prTerminalAlternatives());
+		getGroupConsumer().setRule(grammarAccess.prGroup());
+		getTerminalGroupConsumer().setRule(grammarAccess.prTerminalGroup());
+		getAbstractTokenConsumer().setRule(grammarAccess.prAbstractToken());
+		getTerminalTokenConsumer().setRule(grammarAccess.prTerminalToken());
+		getAssignmentConsumer().setRule(grammarAccess.prAssignment());
+		getActionConsumer().setRule(grammarAccess.prAction());
+		getAbstractTerminalConsumer().setRule(grammarAccess.prAbstractTerminal());
+		getTerminalTokenElementConsumer().setRule(grammarAccess.prTerminalTokenElement());
+		getAbstractNegatedTokenConsumer().setRule(grammarAccess.prAbstractNegatedToken());
+		getNegatedTokenConsumer().setRule(grammarAccess.prNegatedToken());
+		getUpToTokenConsumer().setRule(grammarAccess.prUpToToken());
+		getWildcardConsumer().setRule(grammarAccess.prWildcard());
+		getCharacterRangeConsumer().setRule(grammarAccess.prCharacterRange());
+		getCrossReferenceConsumer().setRule(grammarAccess.prCrossReference());
+		getParenthesizedElementConsumer().setRule(grammarAccess.prParenthesizedElement());
+		getParenthesizedTerminalElementConsumer().setRule(grammarAccess.prParenthesizedTerminalElement());
+		getKeywordConsumer().setRule(grammarAccess.prKeyword());
+		getRuleCallConsumer().setRule(grammarAccess.prRuleCall());
+		getIdConsumer().setRule(grammarAccess.lrID());
+		getIntConsumer().setRule(grammarAccess.lrINT());
+		getStringConsumer().setRule(grammarAccess.lrSTRING());
+		getMlCommentConsumer().setRule(grammarAccess.lrML_COMMENT());
+		getSlCommentConsumer().setRule(grammarAccess.lrSL_COMMENT());
+		getWsConsumer().setRule(grammarAccess.lrWS());
+		getAnyOtherConsumer().setRule(grammarAccess.lrANY_OTHER());
+
+
 		getGrammarConsumer().setAbstractMetamodelDeclarationConsumer(getAbstractMetamodelDeclarationConsumer());
 		getGrammarConsumer().setAbstractRuleConsumer(getAbstractRuleConsumer());
 		getGrammarConsumer().setGrammarIdConsumer(getGrammarIdConsumer());

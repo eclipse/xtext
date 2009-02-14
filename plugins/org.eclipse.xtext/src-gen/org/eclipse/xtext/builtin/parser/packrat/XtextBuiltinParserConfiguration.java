@@ -7,6 +7,8 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
+import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
+
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinINTConsumer;
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGConsumer;
@@ -26,8 +28,11 @@ public class XtextBuiltinParserConfiguration extends AbstractParserConfiguration
     private XtextBuiltinWSConsumer wsConsumer;
     private XtextBuiltinANY_OTHERConsumer anyOtherConsumer;
 
-	public XtextBuiltinParserConfiguration(IInternalParserConfiguration configuration) {
+	private XtextBuiltinGrammarAccess grammarAccess;
+
+	public XtextBuiltinParserConfiguration(IInternalParserConfiguration configuration, XtextBuiltinGrammarAccess grammarAccess) {
 		super(configuration);
+		this.grammarAccess = grammarAccess;
 	}
 
 	public INonTerminalConsumer getRootConsumer() {
@@ -48,6 +53,17 @@ public class XtextBuiltinParserConfiguration extends AbstractParserConfiguration
 	}
 	
 	public void configureConsumers() {
+		if (grammarAccess == null)
+			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+		getIdConsumer().setRule(grammarAccess.lrID());
+		getIntConsumer().setRule(grammarAccess.lrINT());
+		getStringConsumer().setRule(grammarAccess.lrSTRING());
+		getMlCommentConsumer().setRule(grammarAccess.lrML_COMMENT());
+		getSlCommentConsumer().setRule(grammarAccess.lrSL_COMMENT());
+		getWsConsumer().setRule(grammarAccess.lrWS());
+		getAnyOtherConsumer().setRule(grammarAccess.lrANY_OTHER());
+
+
 	}
 	
     public XtextBuiltinIDConsumer getIdConsumer() {

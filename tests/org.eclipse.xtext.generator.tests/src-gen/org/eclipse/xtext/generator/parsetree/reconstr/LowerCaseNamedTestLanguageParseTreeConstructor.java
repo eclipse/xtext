@@ -9,12 +9,15 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
-import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
 import org.eclipse.xtext.generator.services.LowerCaseNamedTestLanguageGrammarAccess;
 
+import com.google.inject.Inject;
 
 public class LowerCaseNamedTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 		
+	@Inject
+	private LowerCaseNamedTestLanguageGrammarAccess grammarAccess;
+	
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
@@ -38,7 +41,7 @@ protected class Model_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return LowerCaseNamedTestLanguageGrammarAccess.INSTANCE.prModel().eleAssignmentName();
+		return grammarAccess.prModel().eleAssignmentName();
 	}
 	
 	@Override
@@ -47,7 +50,7 @@ protected class Model_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = LowerCaseNamedTestLanguageGrammarAccess.INSTANCE.prModel().ele0LexerRuleCallID();
+			element = grammarAccess.prModel().ele0LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;

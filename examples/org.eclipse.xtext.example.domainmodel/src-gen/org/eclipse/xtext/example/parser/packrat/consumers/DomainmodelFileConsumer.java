@@ -22,6 +22,8 @@ import org.eclipse.xtext.example.parser.packrat.consumers.DomainmodelNamedElemen
 @SuppressWarnings("unused")
 public final class DomainmodelFileConsumer extends NonTerminalConsumer {
 
+	private FileElements rule;
+	
 	private INonTerminalConsumer importConsumer;
 	private INonTerminalConsumer namedElementConsumer;
 
@@ -75,17 +77,11 @@ public final class DomainmodelFileConsumer extends NonTerminalConsumer {
 	}
 
 	protected int doConsumeAssignment$2(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(importConsumer, "imports", true, false, false, getRule().ele00ParserRuleCallImport());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$3(entryPoint);
+	}
+
+	protected int consumeRuleCall$3(int entryPoint) throws Exception {
+		return consumeNonTerminal(importConsumer, "imports", true, false, false, getRule().ele00ParserRuleCallImport());
 	}
 
 	protected int consumeAssignment$4(int entryPoint) throws Exception {
@@ -98,21 +94,20 @@ public final class DomainmodelFileConsumer extends NonTerminalConsumer {
 	}
 
 	protected int doConsumeAssignment$4(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(namedElementConsumer, "namedElements", true, false, false, getRule().ele10ParserRuleCallNamedElement());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$5(entryPoint);
+	}
+
+	protected int consumeRuleCall$5(int entryPoint) throws Exception {
+		return consumeNonTerminal(namedElementConsumer, "namedElements", true, false, false, getRule().ele10ParserRuleCallNamedElement());
 	}
 
 	public FileElements getRule() {
-		return DomainmodelGrammarAccess.INSTANCE.prFile();
+	// DomainmodelGrammarAccess.INSTANCE.prFile()
+		return rule;
+	}
+	
+	public void setRule(FileElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

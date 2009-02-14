@@ -21,6 +21,8 @@ import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.AbstractTes
 @SuppressWarnings("unused")
 public final class ConcreteTestLanguageCallExtendedParserRuleConsumer extends NonTerminalConsumer {
 
+	private CallExtendedParserRuleElements rule;
+	
 	private INonTerminalConsumer abstractCallExtendedParserRuleConsumer;
 
 	public ConcreteTestLanguageCallExtendedParserRuleConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
@@ -41,7 +43,12 @@ public final class ConcreteTestLanguageCallExtendedParserRuleConsumer extends No
 	}
 
 	public CallExtendedParserRuleElements getRule() {
-		return ConcreteTestLanguageGrammarAccess.INSTANCE.prCallExtendedParserRule();
+	// ConcreteTestLanguageGrammarAccess.INSTANCE.prCallExtendedParserRule()
+		return rule;
+	}
+	
+	public void setRule(CallExtendedParserRuleElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override

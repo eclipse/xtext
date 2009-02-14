@@ -33,12 +33,15 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
-«FOREACH grammar().includedGrammars() AS g-»
-import «g.gaFQName()»;
-«ENDFOREACH»
+import «grammar().gaFQName()»;
+
+import com.google.inject.Inject;
 
 public class «genClassFQName.toSimpleName()» extends AbstractParseTreeConstructor {
 		
+	@Inject
+	private «grammar().gaSimpleName()» grammarAccess;
+	
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
@@ -75,7 +78,7 @@ public class «genClassFQName.toSimpleName()» extends AbstractParseTreeConstructo
 	}
 	
 	public «metaType.simpleName()» getGrammarElement() {
-		return «gaFullAccessor()»;
+		return grammarAccess.«gaRuleElementAccessor()»;
 	}
 «ENDDEFINE»
 
@@ -174,13 +177,13 @@ protected class «elementMethodName()» extends RuleCallToken {
 «IF containingAssignment().operator == '?='»
 		if(Boolean.TRUE.equals(value)) { // «metaType.name»
 			type = AssignmentType.KW;
-			element = «gaFullAccessor()»;
+			element = grammarAccess.«gaRuleElementAccessor()»;
 			return new Solution(obj);
 		}
 «ELSE»
 		if("«value.replaceAll("\\\\","\\\\\\\\").replaceAll("\\\"","\\\\\\\"")»".equals(value)) { // «metaType.name»
 			type = AssignmentType.KW;
-			element = «gaFullAccessor()»;
+			element = grammarAccess.«gaRuleElementAccessor()»;
 			return new Solution(obj);
 		}
 «ENDIF»
@@ -191,7 +194,7 @@ protected class «elementMethodName()» extends RuleCallToken {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("«type.type.name»")) {
 				type = AssignmentType.CR;
-				element = «gaFullAccessor()»; 
+				element = grammarAccess.«gaRuleElementAccessor()»; 
 				return new Solution(obj);
 			}
 		}
@@ -214,14 +217,14 @@ protected class «elementMethodName()» extends RuleCallToken {
 «ELSE»
 		if(Boolean.TRUE.booleanValue()) { // «metaType.name» FIXME: check if value is valid for datatype rule
 			type = AssignmentType.PRC;
-			element = «gaFullAccessor()»;
+			element = grammarAccess.«gaRuleElementAccessor()»;
 			return new Solution(obj);
 		}
 «ENDIF»
 «ELSE-»
 		if(Boolean.TRUE.booleanValue()) { // «metaType.name» FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = «gaFullAccessor()»;
+			element = grammarAccess.«gaRuleElementAccessor()»;
 			return new Solution(obj);
 		}
 «ENDIF-»
@@ -278,7 +281,7 @@ protected class «elementMethodName()» extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return «gaFullAccessor()»;
+		return grammarAccess.«gaRuleElementAccessor()»;
 	}	
 }
 «ENDDEFINE»

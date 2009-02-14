@@ -21,6 +21,8 @@ import org.eclipse.xtext.parser.packrat.consumers.XtextTerminalTokenElementConsu
 @SuppressWarnings("unused")
 public final class XtextUpToTokenConsumer extends NonTerminalConsumer {
 
+	private UpToTokenElements rule;
+	
 	private INonTerminalConsumer terminalTokenElementConsumer;
 
 	private ICharacterClass keyword$2$Delimiter;
@@ -71,21 +73,20 @@ public final class XtextUpToTokenConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$3(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(terminalTokenElementConsumer, "terminal", false, false, false, getRule().ele10ParserRuleCallTerminalTokenElement());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$4(entryPoint);
+	}
+
+	protected int consumeRuleCall$4(int entryPoint) throws Exception {
+		return consumeNonTerminal(terminalTokenElementConsumer, "terminal", false, false, false, getRule().ele10ParserRuleCallTerminalTokenElement());
 	}
 
 	public UpToTokenElements getRule() {
-		return XtextGrammarAccess.INSTANCE.prUpToToken();
+	// XtextGrammarAccess.INSTANCE.prUpToToken()
+		return rule;
+	}
+	
+	public void setRule(UpToTokenElements rule) {
+		this.rule = rule;
 	}
 	
 	@Override
