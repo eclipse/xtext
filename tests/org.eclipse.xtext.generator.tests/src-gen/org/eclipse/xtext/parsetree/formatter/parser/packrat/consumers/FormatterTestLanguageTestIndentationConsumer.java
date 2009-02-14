@@ -129,31 +129,19 @@ public final class FormatterTestLanguageTestIndentationConsumer extends NonTermi
 	}
 
 	protected int consumeAssignment$7(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(testIndentationConsumer, "sub", true, false, false, getRule().ele0100ParserRuleCallTestIndentation());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$8(entryPoint);
+	}
+
+	protected int consumeRuleCall$8(int entryPoint) throws Exception {
+		return consumeNonTerminal(testIndentationConsumer, "sub", true, false, false, getRule().ele0100ParserRuleCallTestIndentation());
 	}
 
 	protected int consumeAssignment$9(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(lineConsumer, "items", true, false, false, getRule().ele0110ParserRuleCallLine());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$10(entryPoint);
+	}
+
+	protected int consumeRuleCall$10(int entryPoint) throws Exception {
+		return consumeNonTerminal(lineConsumer, "items", true, false, false, getRule().ele0110ParserRuleCallLine());
 	}
 
 	protected int consumeKeyword$11(int entryPoint) throws Exception {

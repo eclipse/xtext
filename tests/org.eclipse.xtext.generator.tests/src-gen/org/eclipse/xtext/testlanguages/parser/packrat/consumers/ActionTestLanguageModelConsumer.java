@@ -42,17 +42,11 @@ public final class ActionTestLanguageModelConsumer extends NonTerminalConsumer {
 	}
 
 	protected int doConsumeAssignment$1(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(elementConsumer, "children", true, false, false, getRule().ele0ParserRuleCallElement());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$2(entryPoint);
+	}
+
+	protected int consumeRuleCall$2(int entryPoint) throws Exception {
+		return consumeNonTerminal(elementConsumer, "children", true, false, false, getRule().ele0ParserRuleCallElement());
 	}
 
 	public ModelElements getRule() {

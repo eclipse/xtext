@@ -129,17 +129,11 @@ public final class EpatchTestLanguageCreatedObjectConsumer extends NonTerminalCo
 	}
 
 	protected int doConsumeAssignment$6(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "name", false, false, getRule().ele010LexerRuleCallID(), getRuleCall$7$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$7(entryPoint);
+	}
+
+	protected int consumeRuleCall$7(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "name", false, false, getRule().ele010LexerRuleCallID(), getRuleCall$7$Delimiter());
 	}
 
 	protected int consumeGroup$8(int entryPoint) throws Exception {
@@ -254,31 +248,19 @@ public final class EpatchTestLanguageCreatedObjectConsumer extends NonTerminalCo
 	}
 
 	protected int consumeAssignment$13(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(monoSingleAssignmentConsumer, "assignments", true, false, false, getRule().ele100100ParserRuleCallMonoSingleAssignment());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$14(entryPoint);
+	}
+
+	protected int consumeRuleCall$14(int entryPoint) throws Exception {
+		return consumeNonTerminal(monoSingleAssignmentConsumer, "assignments", true, false, false, getRule().ele100100ParserRuleCallMonoSingleAssignment());
 	}
 
 	protected int consumeAssignment$15(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(monoListAssignmentConsumer, "assignments", true, false, false, getRule().ele100110ParserRuleCallMonoListAssignment());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$16(entryPoint);
+	}
+
+	protected int consumeRuleCall$16(int entryPoint) throws Exception {
+		return consumeNonTerminal(monoListAssignmentConsumer, "assignments", true, false, false, getRule().ele100110ParserRuleCallMonoListAssignment());
 	}
 
 	protected int consumeAssignment$17(int entryPoint) throws Exception {
@@ -292,17 +274,11 @@ public final class EpatchTestLanguageCreatedObjectConsumer extends NonTerminalCo
 	}
 
 	protected int doConsumeAssignment$17(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(migrationConsumer, "leftMig", false, false, false, getRule().ele1010ParserRuleCallMigration());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$18(entryPoint);
+	}
+
+	protected int consumeRuleCall$18(int entryPoint) throws Exception {
+		return consumeNonTerminal(migrationConsumer, "leftMig", false, false, false, getRule().ele1010ParserRuleCallMigration());
 	}
 
 	protected int consumeKeyword$19(int entryPoint) throws Exception {

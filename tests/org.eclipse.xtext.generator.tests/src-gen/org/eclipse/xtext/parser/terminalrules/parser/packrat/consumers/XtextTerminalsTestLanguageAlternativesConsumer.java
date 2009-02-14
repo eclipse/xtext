@@ -128,17 +128,11 @@ public final class XtextTerminalsTestLanguageAlternativesConsumer extends NonTer
 	}
 
 	protected int consumeAssignment$8(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(groupConsumer, "groups", true, false, false, getRule().ele110ParserRuleCallGroup());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$9(entryPoint);
+	}
+
+	protected int consumeRuleCall$9(int entryPoint) throws Exception {
+		return consumeNonTerminal(groupConsumer, "groups", true, false, false, getRule().ele110ParserRuleCallGroup());
 	}
 
 	public AlternativesElements getRule() {

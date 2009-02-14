@@ -103,31 +103,19 @@ public final class XtextGrammarTestLanguageGeneratedMetamodelConsumer extends No
 	}
 
 	protected int consumeAssignment$5(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "name", false, false, getRule().ele0010LexerRuleCallID(), getRuleCall$6$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$6(entryPoint);
+	}
+
+	protected int consumeRuleCall$6(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "name", false, false, getRule().ele0010LexerRuleCallID(), getRuleCall$6$Delimiter());
 	}
 
 	protected int consumeAssignment$7(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(stringConsumer, "ePackage", false, false, getRule().ele010CrossReferenceEStringEPackage(), getCrossReference$8$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeCrossReference$8(entryPoint);
+	}
+
+	protected int consumeCrossReference$8(int entryPoint) throws Exception {
+		return consumeTerminal(stringConsumer, "ePackage", false, false, getRule().ele010CrossReferenceEStringEPackage(), getCrossReference$8$Delimiter());
 	}
 
 	protected int consumeGroup$10(int entryPoint) throws Exception {
@@ -176,17 +164,11 @@ public final class XtextGrammarTestLanguageGeneratedMetamodelConsumer extends No
 	}
 
 	protected int consumeAssignment$12(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "alias", false, false, getRule().ele110LexerRuleCallID(), getRuleCall$13$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$13(entryPoint);
+	}
+
+	protected int consumeRuleCall$13(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "alias", false, false, getRule().ele110LexerRuleCallID(), getRuleCall$13$Delimiter());
 	}
 
 	public GeneratedMetamodelElements getRule() {

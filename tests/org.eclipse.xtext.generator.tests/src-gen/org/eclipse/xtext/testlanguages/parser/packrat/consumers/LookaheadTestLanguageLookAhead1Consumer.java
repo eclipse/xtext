@@ -95,45 +95,27 @@ public final class LookaheadTestLanguageLookAhead1Consumer extends NonTerminalCo
 	}
 
 	protected int consumeAssignment$5(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(lookAhead2Consumer, "y", false, false, false, getRule().ele0010ParserRuleCallLookAhead2());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$6(entryPoint);
+	}
+
+	protected int consumeRuleCall$6(int entryPoint) throws Exception {
+		return consumeNonTerminal(lookAhead2Consumer, "y", false, false, false, getRule().ele0010ParserRuleCallLookAhead2());
 	}
 
 	protected int consumeAssignment$7(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeKeyword(getRule().ele010KeywordB(), "x", false, false, getKeyword$8$Delimiter()); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeKeyword$8(entryPoint);
+	}
+
+	protected int consumeKeyword$8(int entryPoint) throws Exception {
+		return consumeKeyword(getRule().ele010KeywordB(), "x", false, false, getKeyword$8$Delimiter());
 	}
 
 	protected int consumeAssignment$9(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeKeyword(getRule().ele10KeywordD(), "x", false, false, getKeyword$10$Delimiter()); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeKeyword$10(entryPoint);
+	}
+
+	protected int consumeKeyword$10(int entryPoint) throws Exception {
+		return consumeKeyword(getRule().ele10KeywordD(), "x", false, false, getKeyword$10$Delimiter());
 	}
 
 	public LookAhead1Elements getRule() {

@@ -85,31 +85,19 @@ public final class HiddenTerminalsTestLanguageHidingHiddensConsumer extends NonT
 	}
 
 	protected int consumeAssignment$4(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(wsConsumer, "space", false, false, getRule().ele010ParserRuleCallWS(), getRuleCall$5$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$5(entryPoint);
+	}
+
+	protected int consumeRuleCall$5(int entryPoint) throws Exception {
+		return consumeTerminal(wsConsumer, "space", false, false, getRule().ele010ParserRuleCallWS(), getRuleCall$5$Delimiter());
 	}
 
 	protected int consumeAssignment$6(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(inheritingHiddensCallConsumer, "called", false, false, false, getRule().ele10ParserRuleCallInheritingHiddensCall());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$7(entryPoint);
+	}
+
+	protected int consumeRuleCall$7(int entryPoint) throws Exception {
+		return consumeNonTerminal(inheritingHiddensCallConsumer, "called", false, false, false, getRule().ele10ParserRuleCallInheritingHiddensCall());
 	}
 
 	public HidingHiddensElements getRule() {

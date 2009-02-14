@@ -119,31 +119,19 @@ public final class XtextGrammarTestLanguageTerminalRuleConsumer extends NonTermi
 	}
 
 	protected int consumeAssignment$6(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeKeyword(getRule().ele000000KeywordTerminal(), "terminal", false, true, getKeyword$7$Delimiter()); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeKeyword$7(entryPoint);
+	}
+
+	protected int consumeKeyword$7(int entryPoint) throws Exception {
+		return consumeKeyword(getRule().ele000000KeywordTerminal(), "terminal", false, true, getKeyword$7$Delimiter());
 	}
 
 	protected int consumeAssignment$8(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "name", false, false, getRule().ele000010LexerRuleCallID(), getRuleCall$9$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$9(entryPoint);
+	}
+
+	protected int consumeRuleCall$9(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "name", false, false, getRule().ele000010LexerRuleCallID(), getRuleCall$9$Delimiter());
 	}
 
 	protected int consumeGroup$10(int entryPoint) throws Exception {
@@ -192,17 +180,11 @@ public final class XtextGrammarTestLanguageTerminalRuleConsumer extends NonTermi
 	}
 
 	protected int consumeAssignment$12(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(typeRefConsumer, "type", false, false, false, getRule().ele000110ParserRuleCallTypeRef());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$13(entryPoint);
+	}
+
+	protected int consumeRuleCall$13(int entryPoint) throws Exception {
+		return consumeNonTerminal(typeRefConsumer, "type", false, false, false, getRule().ele000110ParserRuleCallTypeRef());
 	}
 
 	protected int consumeKeyword$14(int entryPoint) throws Exception {
@@ -210,17 +192,11 @@ public final class XtextGrammarTestLanguageTerminalRuleConsumer extends NonTermi
 	}
 
 	protected int consumeAssignment$15(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(terminalAlternativesConsumer, "alternatives", false, false, false, getRule().ele010ParserRuleCallTerminalAlternatives());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$16(entryPoint);
+	}
+
+	protected int consumeRuleCall$16(int entryPoint) throws Exception {
+		return consumeNonTerminal(terminalAlternativesConsumer, "alternatives", false, false, false, getRule().ele010ParserRuleCallTerminalAlternatives());
 	}
 
 	protected int consumeKeyword$17(int entryPoint) throws Exception {

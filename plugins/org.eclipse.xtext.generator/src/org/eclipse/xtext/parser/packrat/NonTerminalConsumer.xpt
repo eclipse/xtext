@@ -198,6 +198,54 @@ public final class «this.consumerClassName()» extends NonTerminalConsumer {
 «ENDIF-»
 «ENDDEFINE»
 
+«DEFINE defineConsume FOR Assignment-»
+«EXPAND defineConsumeDeclaration FOR this-»
+«EXPAND defineConsume(this) FOR terminal-»
+«ENDDEFINE»
+
+«DEFINE defineConsume(Assignment assignment) FOR AbstractElement-»
+«IF isQuestionMark() || isStar() || isPlus()-»
+«ERROR "multiplicities are not supported in assignments"»
+«ENDIF-»
+
+	protected int «consumeMethodName()»(int entryPoint) throws Exception {
+«EXPAND defineConsumeBody(assignment) FOR this-»
+	}
+«ENDDEFINE»
+
+«DEFINE defineConsume(Assignment assignment) FOR Alternatives-»
+«IF isQuestionMark() || isStar() || isPlus()-»
+«ERROR "multiplicities are not supported in assignments"»
+«ENDIF-»
+	protected int «consumeMethodName()»(int entryPoint) throws Exception {
+«EXPAND defineConsumeBody(assignment) FOR this-»
+	}
+	
+«EXPAND defineConsume(assignment, this) FOREACH groups-»
+«ENDDEFINE»
+
+«DEFINE defineConsume(Assignment assignment, Alternatives parent) FOR AbstractElement-»
+«IF isQuestionMark() || isStar() || isPlus()-»
+«ERROR "multiplicities are not supported in assignments"»
+«ENDIF-»
+«EXPAND defineConsume(assignment) FOR this-»
+«ENDDEFINE»
+
+«DEFINE defineConsume(Assignment assignment, Alternatives parent) FOR Alternatives-»
+«IF isQuestionMark() || isStar() || isPlus()-»
+«ERROR "multiplicities are not supported in assignments"»
+«ENDIF-»
+«EXPAND defineConsume(assignment, this) FOREACH groups-»
+«ENDDEFINE»
+
+«DEFINE defineConsume(Assignment assignment) FOR Action-»
+«ERROR "actions are not supported in assignments"»
+«ENDDEFINE»
+
+«DEFINE defineConsume(Assignment assignment) FOR Group-»
+«ERROR "groups are not supported in assignments"»
+«ENDDEFINE»
+
 «DEFINE defineConsumeDeclaration FOR AbstractElement-»
 
 	protected int «consumeMethodName()»(int entryPoint) throws Exception {
@@ -329,15 +377,6 @@ public final class «this.consumerClassName()» extends NonTerminalConsumer {
 «ENDFOREACH-»
 «ENDDEFINE»
 
-«DEFINE defineConsumeBody FOR Assignment-»
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-«EXPAND defineConsumeAssignmentBody(this) FOR terminal-»
-		announceLevelFinished();
-		return result;
-«ENDDEFINE»
-
 «DEFINE defineConsumeBody FOR Keyword-»
 		return consumeKeyword(getRule().«gaElementAccessMethodeName()»(), null, false, false, get«delimiterFieldName().toFirstUpper()»());
 «ENDDEFINE»
@@ -362,96 +401,81 @@ public final class «this.consumerClassName()» extends NonTerminalConsumer {
 «ENDIF-»
 «ENDDEFINE»
 
-«DEFINE defineConsumeAssignmentBody(Assignment assignment) FOR AbstractElement-»
-«ERROR "defineConsumeAssignmentBody for " + metaType.name»
+«DEFINE defineConsumeBody FOR Assignment-»
+		return «terminal.consumeMethodName()»(entryPoint);
 «ENDDEFINE»
 
-«DEFINE defineConsumeAssignmentBody(Assignment assignment) FOR Keyword-»
-		tempResult = consumeKeyword(getRule().«gaElementAccessMethodeName()»(), "«assignment.feature»", «assignment.isMultiple()», «assignment.isBoolean()», get«delimiterFieldName().toFirstUpper()»()); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
+«DEFINE defineConsumeBody(Assignment assignment) FOR AbstractElement-»
+«ERROR "defineConsumeBody(Assignment) for " + metaType.name»
 «ENDDEFINE»
 
-«DEFINE defineConsumeAssignmentBody(Assignment assignment) FOR CrossReference-»
-«EXPAND defineConsumeCrossReferenceAssignmentBody(assignment, this) FOR rule-»
+«DEFINE defineConsumeBody(Assignment assignment) FOR Keyword-»
+		return consumeKeyword(getRule().«gaElementAccessMethodeName()»(), "«assignment.feature»", «assignment.isMultiple()», «assignment.isBoolean()», get«delimiterFieldName().toFirstUpper()»());
 «ENDDEFINE»
 
-«DEFINE defineConsumeCrossReferenceAssignmentBody(Assignment assignment, CrossReference reference) FOR AbstractRule-»
-«ERROR "defineConsumeAssignmentBody for " + metaType.name»
+«DEFINE defineConsumeBody(Assignment assignment) FOR CrossReference-»
+«EXPAND defineConsumeBody(assignment, this) FOR rule-»
 «ENDDEFINE»
 
-«DEFINE defineConsumeCrossReferenceAssignmentBody(Assignment assignment, CrossReference reference) FOR LexerRule-»
-		tempResult = consumeTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «assignment.isBoolean()», getRule().«reference.gaElementAccessMethodeName()»(), get«reference.delimiterFieldName().toFirstUpper()»());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
+«DEFINE defineConsumeBody(Assignment assignment, CrossReference reference) FOR AbstractRule-»
+«ERROR "defineConsumeBody(Assignment, CrossReference) for " + metaType.name»
 «ENDDEFINE»
 
-«DEFINE defineConsumeCrossReferenceAssignmentBody(Assignment assignment, CrossReference reference) FOR ParserRule-»
+«DEFINE defineConsumeBody(Assignment assignment, CrossReference reference) FOR LexerRule-»
+		return consumeTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «assignment.isBoolean()», getRule().«reference.gaElementAccessMethodeName()»(), get«reference.delimiterFieldName().toFirstUpper()»());
+«ENDDEFINE»
+
+«DEFINE defineConsumeBody(Assignment assignment, CrossReference reference) FOR ParserRule-»
 «IF !terminal-»
-		tempResult = consumeNonTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «isDatatypeRule()», «assignment.isBoolean()», getRule().«reference.gaElementAccessMethodeName()»());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
+		return consumeNonTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «isDatatypeRule()», «assignment.isBoolean()», getRule().«reference.gaElementAccessMethodeName()»());
 «ELSE-»
-		tempResult = consumeTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «assignment.isBoolean()», getRule().«reference.gaElementAccessMethodeName()»(), get«reference.delimiterFieldName().toFirstUpper()»());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
+		return consumeTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «assignment.isBoolean()», getRule().«reference.gaElementAccessMethodeName()»(), get«reference.delimiterFieldName().toFirstUpper()»());
 «ENDIF-»
 «ENDDEFINE»
 
-«DEFINE defineConsumeAssignmentBody(Assignment assignment) FOR RuleCall-»
-«EXPAND defineConsumeAssignmentBody(assignment, this) FOR rule-»
+«DEFINE defineConsumeBody(Assignment assignment) FOR RuleCall-»
+«EXPAND defineConsumeBody(assignment, this) FOR rule-»
 «ENDDEFINE»
 
-«DEFINE defineConsumeAssignmentBody(Assignment assignment, RuleCall call) FOR AbstractRule-»
-«ERROR "defineConsumeAssignmentBody for " + metaType.name»
+«DEFINE defineConsumeBody(Assignment assignment, RuleCall call) FOR AbstractRule-»
+«ERROR "defineConsumeBody(Assignment, RuleCall) for " + metaType.name»
 «ENDDEFINE»
 
-«DEFINE defineConsumeAssignmentBody(Assignment assignment, RuleCall call) FOR LexerRule-»
-		tempResult = consumeTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «assignment.isBoolean()», getRule().«call.gaElementAccessMethodeName()»(), get«call.delimiterFieldName().toFirstUpper()»());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
+«DEFINE defineConsumeBody(Assignment assignment, RuleCall call) FOR LexerRule-»
+		return consumeTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «assignment.isBoolean()», getRule().«call.gaElementAccessMethodeName()»(), get«call.delimiterFieldName().toFirstUpper()»());
 «ENDDEFINE»
 
-«DEFINE defineConsumeAssignmentBody(Assignment assignment, RuleCall call) FOR ParserRule-»
+«DEFINE defineConsumeBody(Assignment assignment, RuleCall call) FOR ParserRule-»
 «IF !terminal-»
-		tempResult = consumeNonTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «isDatatypeRule()», «assignment.isBoolean()», getRule().«call.gaElementAccessMethodeName()»());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
+		return consumeNonTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «isDatatypeRule()», «assignment.isBoolean()», getRule().«call.gaElementAccessMethodeName()»());
 «ELSE-»
-		tempResult = consumeTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «assignment.isBoolean()», getRule().«call.gaElementAccessMethodeName()»(), get«call.delimiterFieldName().toFirstUpper()»());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
+		return consumeTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «assignment.isBoolean()», getRule().«call.gaElementAccessMethodeName()»(), get«call.delimiterFieldName().toFirstUpper()»());
 «ENDIF-»
 «ENDDEFINE»
 
-«DEFINE defineConsumeAssignmentBody(Assignment assignment) FOR Alternatives-»
+«DEFINE defineConsumeBody(Assignment assignment) FOR Alternatives-»
 «IF isQuestionMark() || isStar() || isPlus()-»
-«ERROR "multiplicity is not supported for actions"»
+«ERROR "multiplicity is not supported for alternatives in assignments"»
 «ENDIF-»
-		// TODO use markers in assignments of alternatives to recover
-«FOREACH groups AS group-»
-		announceNextPath();
-«EXPAND defineConsumeAssignmentBody(assignment) FOR group»
+		AlternativesResult result = createAlternativesResult();
+		switch(entryPoint) {
+			case -1: // use fall through semantics of switch case
+				result.reset();
+«EXPAND defineConsumeBodyInternal(assignment, this) FOR this-»
+		}
+		return result.getResult();
+«ENDDEFINE»
+
+«DEFINE defineConsumeBodyInternal(Assignment assignment, Alternatives start) FOR Alternatives-»
+«FOREACH groups AS g-»
+«IF g.metaType == Alternatives && !g.isOptional() && !g.isMultipleCardinality()-»
+«EXPAND defineConsumeBodyInternal(assignment, start) FOR (Alternatives)g-»
+«ELSE-»
+			case «g.indexInAlternatives(start)»:
+				result.nextAlternative();
+				if (result.isAlternativeDone(«g.consumeMethodName()»(nextEntryPoint()))) { 
+					return result.getResult(); 
+				}
+«ENDIF-»
 «ENDFOREACH-»
 «ENDDEFINE»

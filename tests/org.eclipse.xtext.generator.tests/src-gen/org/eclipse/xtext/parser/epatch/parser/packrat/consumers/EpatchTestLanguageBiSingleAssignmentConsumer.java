@@ -114,17 +114,11 @@ public final class EpatchTestLanguageBiSingleAssignmentConsumer extends NonTermi
 	}
 
 	protected int consumeAssignment$6(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "feature", false, false, getRule().ele000000LexerRuleCallID(), getRuleCall$7$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$7(entryPoint);
+	}
+
+	protected int consumeRuleCall$7(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "feature", false, false, getRule().ele000000LexerRuleCallID(), getRuleCall$7$Delimiter());
 	}
 
 	protected int consumeKeyword$8(int entryPoint) throws Exception {
@@ -132,17 +126,11 @@ public final class EpatchTestLanguageBiSingleAssignmentConsumer extends NonTermi
 	}
 
 	protected int consumeAssignment$9(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(singleAssignmentValueConsumer, "leftValue", false, false, false, getRule().ele00010ParserRuleCallSingleAssignmentValue());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$10(entryPoint);
+	}
+
+	protected int consumeRuleCall$10(int entryPoint) throws Exception {
+		return consumeNonTerminal(singleAssignmentValueConsumer, "leftValue", false, false, false, getRule().ele00010ParserRuleCallSingleAssignmentValue());
 	}
 
 	protected int consumeKeyword$11(int entryPoint) throws Exception {
@@ -150,17 +138,11 @@ public final class EpatchTestLanguageBiSingleAssignmentConsumer extends NonTermi
 	}
 
 	protected int consumeAssignment$12(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(singleAssignmentValueConsumer, "rightValue", false, false, false, getRule().ele010ParserRuleCallSingleAssignmentValue());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$13(entryPoint);
+	}
+
+	protected int consumeRuleCall$13(int entryPoint) throws Exception {
+		return consumeNonTerminal(singleAssignmentValueConsumer, "rightValue", false, false, false, getRule().ele010ParserRuleCallSingleAssignmentValue());
 	}
 
 	protected int consumeKeyword$14(int entryPoint) throws Exception {

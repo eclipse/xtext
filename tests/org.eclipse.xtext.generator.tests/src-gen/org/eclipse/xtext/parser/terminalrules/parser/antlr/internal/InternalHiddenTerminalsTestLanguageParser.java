@@ -37,7 +37,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
         
 
     public String[] getTokenNames() { return tokenNames; }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g"; }
+    public String getGrammarFileName() { return "./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g"; }
 
 
      
@@ -62,7 +62,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start entryRuleModel
-    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:70:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:70:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -70,8 +70,8 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:70:47: (iv_ruleModel= ruleModel EOF )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:71:2: iv_ruleModel= ruleModel EOF
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:70:47: (iv_ruleModel= ruleModel EOF )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:71:2: iv_ruleModel= ruleModel EOF
             {
              currentNode = createCompositeNode(grammarAccess.prModel().getRule(), currentNode); 
             pushFollow(FOLLOW_ruleModel_in_entryRuleModel72);
@@ -97,7 +97,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start ruleModel
-    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:78:1: ruleModel returns [EObject current=null] : ( ( ( (this_WithoutHiddens_0= ruleWithoutHiddens | this_WithHiddens_1= ruleWithHiddens ) | this_OverridingHiddens_2= ruleOverridingHiddens ) | this_InheritingHiddens_3= ruleInheritingHiddens ) | this_DatatypeHiddens_4= ruleDatatypeHiddens ) ;
+    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:78:1: ruleModel returns [EObject current=null] : ( ( ( (this_WithoutHiddens_0= ruleWithoutHiddens | this_WithHiddens_1= ruleWithHiddens ) | this_OverridingHiddens_2= ruleOverridingHiddens ) | this_InheritingHiddens_3= ruleInheritingHiddens ) | this_DatatypeHiddens_4= ruleDatatypeHiddens ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -115,10 +115,10 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:83:6: ( ( ( ( (this_WithoutHiddens_0= ruleWithoutHiddens | this_WithHiddens_1= ruleWithHiddens ) | this_OverridingHiddens_2= ruleOverridingHiddens ) | this_InheritingHiddens_3= ruleInheritingHiddens ) | this_DatatypeHiddens_4= ruleDatatypeHiddens ) )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:84:1: ( ( ( (this_WithoutHiddens_0= ruleWithoutHiddens | this_WithHiddens_1= ruleWithHiddens ) | this_OverridingHiddens_2= ruleOverridingHiddens ) | this_InheritingHiddens_3= ruleInheritingHiddens ) | this_DatatypeHiddens_4= ruleDatatypeHiddens )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:83:6: ( ( ( ( (this_WithoutHiddens_0= ruleWithoutHiddens | this_WithHiddens_1= ruleWithHiddens ) | this_OverridingHiddens_2= ruleOverridingHiddens ) | this_InheritingHiddens_3= ruleInheritingHiddens ) | this_DatatypeHiddens_4= ruleDatatypeHiddens ) )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:84:1: ( ( ( (this_WithoutHiddens_0= ruleWithoutHiddens | this_WithHiddens_1= ruleWithHiddens ) | this_OverridingHiddens_2= ruleOverridingHiddens ) | this_InheritingHiddens_3= ruleInheritingHiddens ) | this_DatatypeHiddens_4= ruleDatatypeHiddens )
             {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:84:1: ( ( ( (this_WithoutHiddens_0= ruleWithoutHiddens | this_WithHiddens_1= ruleWithHiddens ) | this_OverridingHiddens_2= ruleOverridingHiddens ) | this_InheritingHiddens_3= ruleInheritingHiddens ) | this_DatatypeHiddens_4= ruleDatatypeHiddens )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:84:1: ( ( ( (this_WithoutHiddens_0= ruleWithoutHiddens | this_WithHiddens_1= ruleWithHiddens ) | this_OverridingHiddens_2= ruleOverridingHiddens ) | this_InheritingHiddens_3= ruleInheritingHiddens ) | this_DatatypeHiddens_4= ruleDatatypeHiddens )
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -136,9 +136,9 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
             }
             switch (alt4) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:84:2: ( ( (this_WithoutHiddens_0= ruleWithoutHiddens | this_WithHiddens_1= ruleWithHiddens ) | this_OverridingHiddens_2= ruleOverridingHiddens ) | this_InheritingHiddens_3= ruleInheritingHiddens )
+                    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:84:2: ( ( (this_WithoutHiddens_0= ruleWithoutHiddens | this_WithHiddens_1= ruleWithHiddens ) | this_OverridingHiddens_2= ruleOverridingHiddens ) | this_InheritingHiddens_3= ruleInheritingHiddens )
                     {
-                    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:84:2: ( ( (this_WithoutHiddens_0= ruleWithoutHiddens | this_WithHiddens_1= ruleWithHiddens ) | this_OverridingHiddens_2= ruleOverridingHiddens ) | this_InheritingHiddens_3= ruleInheritingHiddens )
+                    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:84:2: ( ( (this_WithoutHiddens_0= ruleWithoutHiddens | this_WithHiddens_1= ruleWithHiddens ) | this_OverridingHiddens_2= ruleOverridingHiddens ) | this_InheritingHiddens_3= ruleInheritingHiddens )
                     int alt3=2;
                     int LA3_0 = input.LA(1);
 
@@ -156,9 +156,9 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
                     }
                     switch (alt3) {
                         case 1 :
-                            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:84:3: ( (this_WithoutHiddens_0= ruleWithoutHiddens | this_WithHiddens_1= ruleWithHiddens ) | this_OverridingHiddens_2= ruleOverridingHiddens )
+                            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:84:3: ( (this_WithoutHiddens_0= ruleWithoutHiddens | this_WithHiddens_1= ruleWithHiddens ) | this_OverridingHiddens_2= ruleOverridingHiddens )
                             {
-                            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:84:3: ( (this_WithoutHiddens_0= ruleWithoutHiddens | this_WithHiddens_1= ruleWithHiddens ) | this_OverridingHiddens_2= ruleOverridingHiddens )
+                            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:84:3: ( (this_WithoutHiddens_0= ruleWithoutHiddens | this_WithHiddens_1= ruleWithHiddens ) | this_OverridingHiddens_2= ruleOverridingHiddens )
                             int alt2=2;
                             int LA2_0 = input.LA(1);
 
@@ -176,9 +176,9 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
                             }
                             switch (alt2) {
                                 case 1 :
-                                    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:84:4: (this_WithoutHiddens_0= ruleWithoutHiddens | this_WithHiddens_1= ruleWithHiddens )
+                                    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:84:4: (this_WithoutHiddens_0= ruleWithoutHiddens | this_WithHiddens_1= ruleWithHiddens )
                                     {
-                                    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:84:4: (this_WithoutHiddens_0= ruleWithoutHiddens | this_WithHiddens_1= ruleWithHiddens )
+                                    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:84:4: (this_WithoutHiddens_0= ruleWithoutHiddens | this_WithHiddens_1= ruleWithHiddens )
                                     int alt1=2;
                                     int LA1_0 = input.LA(1);
 
@@ -196,7 +196,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
                                     }
                                     switch (alt1) {
                                         case 1 :
-                                            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:85:5: this_WithoutHiddens_0= ruleWithoutHiddens
+                                            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:85:5: this_WithoutHiddens_0= ruleWithoutHiddens
                                             {
                                              
                                                     currentNode=createCompositeNode(grammarAccess.prModel().ele0000ParserRuleCallWithoutHiddens(), currentNode); 
@@ -213,7 +213,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
                                             }
                                             break;
                                         case 2 :
-                                            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:95:5: this_WithHiddens_1= ruleWithHiddens
+                                            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:95:5: this_WithHiddens_1= ruleWithHiddens
                                             {
                                              
                                                     currentNode=createCompositeNode(grammarAccess.prModel().ele0001ParserRuleCallWithHiddens(), currentNode); 
@@ -236,7 +236,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
                                     }
                                     break;
                                 case 2 :
-                                    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:105:5: this_OverridingHiddens_2= ruleOverridingHiddens
+                                    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:105:5: this_OverridingHiddens_2= ruleOverridingHiddens
                                     {
                                      
                                             currentNode=createCompositeNode(grammarAccess.prModel().ele001ParserRuleCallOverridingHiddens(), currentNode); 
@@ -259,7 +259,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
                             }
                             break;
                         case 2 :
-                            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:115:5: this_InheritingHiddens_3= ruleInheritingHiddens
+                            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:115:5: this_InheritingHiddens_3= ruleInheritingHiddens
                             {
                              
                                     currentNode=createCompositeNode(grammarAccess.prModel().ele01ParserRuleCallInheritingHiddens(), currentNode); 
@@ -282,7 +282,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:125:5: this_DatatypeHiddens_4= ruleDatatypeHiddens
+                    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:125:5: this_DatatypeHiddens_4= ruleDatatypeHiddens
                     {
                      
                             currentNode=createCompositeNode(grammarAccess.prModel().ele1ParserRuleCallDatatypeHiddens(), currentNode); 
@@ -321,7 +321,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start entryRuleWithoutHiddens
-    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:142:1: entryRuleWithoutHiddens returns [EObject current=null] : iv_ruleWithoutHiddens= ruleWithoutHiddens EOF ;
+    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:142:1: entryRuleWithoutHiddens returns [EObject current=null] : iv_ruleWithoutHiddens= ruleWithoutHiddens EOF ;
     public final EObject entryRuleWithoutHiddens() throws RecognitionException {
         EObject current = null;
 
@@ -329,8 +329,8 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:142:56: (iv_ruleWithoutHiddens= ruleWithoutHiddens EOF )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:143:2: iv_ruleWithoutHiddens= ruleWithoutHiddens EOF
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:142:56: (iv_ruleWithoutHiddens= ruleWithoutHiddens EOF )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:143:2: iv_ruleWithoutHiddens= ruleWithoutHiddens EOF
             {
              currentNode = createCompositeNode(grammarAccess.prWithoutHiddens().getRule(), currentNode); 
             pushFollow(FOLLOW_ruleWithoutHiddens_in_entryRuleWithoutHiddens277);
@@ -356,7 +356,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start ruleWithoutHiddens
-    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:150:1: ruleWithoutHiddens returns [EObject current=null] : ( ( ( ( 'without' (lv_spaces_1= RULE_WS ) ) 'hiddens' ) (lv_spaces_3= RULE_WS )? ) (lv_valid_4= ';' ) ) ;
+    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:150:1: ruleWithoutHiddens returns [EObject current=null] : ( ( ( ( 'without' (lv_spaces_1= RULE_WS ) ) 'hiddens' ) (lv_spaces_3= RULE_WS )? ) (lv_valid_4= ';' ) ) ;
     public final EObject ruleWithoutHiddens() throws RecognitionException {
         EObject current = null;
 
@@ -367,27 +367,27 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:155:6: ( ( ( ( ( 'without' (lv_spaces_1= RULE_WS ) ) 'hiddens' ) (lv_spaces_3= RULE_WS )? ) (lv_valid_4= ';' ) ) )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:156:1: ( ( ( ( 'without' (lv_spaces_1= RULE_WS ) ) 'hiddens' ) (lv_spaces_3= RULE_WS )? ) (lv_valid_4= ';' ) )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:155:6: ( ( ( ( ( 'without' (lv_spaces_1= RULE_WS ) ) 'hiddens' ) (lv_spaces_3= RULE_WS )? ) (lv_valid_4= ';' ) ) )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:156:1: ( ( ( ( 'without' (lv_spaces_1= RULE_WS ) ) 'hiddens' ) (lv_spaces_3= RULE_WS )? ) (lv_valid_4= ';' ) )
             {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:156:1: ( ( ( ( 'without' (lv_spaces_1= RULE_WS ) ) 'hiddens' ) (lv_spaces_3= RULE_WS )? ) (lv_valid_4= ';' ) )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:156:2: ( ( ( 'without' (lv_spaces_1= RULE_WS ) ) 'hiddens' ) (lv_spaces_3= RULE_WS )? ) (lv_valid_4= ';' )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:156:1: ( ( ( ( 'without' (lv_spaces_1= RULE_WS ) ) 'hiddens' ) (lv_spaces_3= RULE_WS )? ) (lv_valid_4= ';' ) )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:156:2: ( ( ( 'without' (lv_spaces_1= RULE_WS ) ) 'hiddens' ) (lv_spaces_3= RULE_WS )? ) (lv_valid_4= ';' )
             {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:156:2: ( ( ( 'without' (lv_spaces_1= RULE_WS ) ) 'hiddens' ) (lv_spaces_3= RULE_WS )? )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:156:3: ( ( 'without' (lv_spaces_1= RULE_WS ) ) 'hiddens' ) (lv_spaces_3= RULE_WS )?
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:156:2: ( ( ( 'without' (lv_spaces_1= RULE_WS ) ) 'hiddens' ) (lv_spaces_3= RULE_WS )? )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:156:3: ( ( 'without' (lv_spaces_1= RULE_WS ) ) 'hiddens' ) (lv_spaces_3= RULE_WS )?
             {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:156:3: ( ( 'without' (lv_spaces_1= RULE_WS ) ) 'hiddens' )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:156:4: ( 'without' (lv_spaces_1= RULE_WS ) ) 'hiddens'
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:156:3: ( ( 'without' (lv_spaces_1= RULE_WS ) ) 'hiddens' )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:156:4: ( 'without' (lv_spaces_1= RULE_WS ) ) 'hiddens'
             {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:156:4: ( 'without' (lv_spaces_1= RULE_WS ) )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:156:5: 'without' (lv_spaces_1= RULE_WS )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:156:4: ( 'without' (lv_spaces_1= RULE_WS ) )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:156:5: 'without' (lv_spaces_1= RULE_WS )
             {
             match(input,8,FOLLOW_8_in_ruleWithoutHiddens324); 
 
                     createLeafNode(grammarAccess.prWithoutHiddens().ele0000KeywordWithout(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:160:1: (lv_spaces_1= RULE_WS )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:162:6: lv_spaces_1= RULE_WS
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:160:1: (lv_spaces_1= RULE_WS )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:162:6: lv_spaces_1= RULE_WS
             {
             lv_spaces_1=(Token)input.LT(1);
             match(input,RULE_WS,FOLLOW_RULE_WS_in_ruleWithoutHiddens345); 
@@ -419,7 +419,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
             }
 
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:183:2: (lv_spaces_3= RULE_WS )?
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:183:2: (lv_spaces_3= RULE_WS )?
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -428,7 +428,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
             }
             switch (alt5) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:185:6: lv_spaces_3= RULE_WS
+                    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:185:6: lv_spaces_3= RULE_WS
                     {
                     lv_spaces_3=(Token)input.LT(1);
                     match(input,RULE_WS,FOLLOW_RULE_WS_in_ruleWithoutHiddens384); 
@@ -456,8 +456,8 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
             }
 
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:202:4: (lv_valid_4= ';' )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:204:6: lv_valid_4= ';'
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:202:4: (lv_valid_4= ';' )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:204:6: lv_valid_4= ';'
             {
             lv_valid_4=(Token)input.LT(1);
             match(input,10,FOLLOW_10_in_ruleWithoutHiddens414); 
@@ -502,7 +502,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start entryRuleWithHiddens
-    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:232:1: entryRuleWithHiddens returns [EObject current=null] : iv_ruleWithHiddens= ruleWithHiddens EOF ;
+    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:232:1: entryRuleWithHiddens returns [EObject current=null] : iv_ruleWithHiddens= ruleWithHiddens EOF ;
     public final EObject entryRuleWithHiddens() throws RecognitionException {
         EObject current = null;
 
@@ -510,8 +510,8 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:232:53: (iv_ruleWithHiddens= ruleWithHiddens EOF )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:233:2: iv_ruleWithHiddens= ruleWithHiddens EOF
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:232:53: (iv_ruleWithHiddens= ruleWithHiddens EOF )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:233:2: iv_ruleWithHiddens= ruleWithHiddens EOF
             {
              currentNode = createCompositeNode(grammarAccess.prWithHiddens().getRule(), currentNode); 
             pushFollow(FOLLOW_ruleWithHiddens_in_entryRuleWithHiddens462);
@@ -537,7 +537,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start ruleWithHiddens
-    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:240:1: ruleWithHiddens returns [EObject current=null] : ( ( 'with' 'hiddens' ) (lv_valid_2= ';' ) ) ;
+    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:240:1: ruleWithHiddens returns [EObject current=null] : ( ( 'with' 'hiddens' ) (lv_valid_2= ';' ) ) ;
     public final EObject ruleWithHiddens() throws RecognitionException {
         EObject current = null;
 
@@ -547,14 +547,14 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
             
         try {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:247:6: ( ( ( 'with' 'hiddens' ) (lv_valid_2= ';' ) ) )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:248:1: ( ( 'with' 'hiddens' ) (lv_valid_2= ';' ) )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:247:6: ( ( ( 'with' 'hiddens' ) (lv_valid_2= ';' ) ) )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:248:1: ( ( 'with' 'hiddens' ) (lv_valid_2= ';' ) )
             {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:248:1: ( ( 'with' 'hiddens' ) (lv_valid_2= ';' ) )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:248:2: ( 'with' 'hiddens' ) (lv_valid_2= ';' )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:248:1: ( ( 'with' 'hiddens' ) (lv_valid_2= ';' ) )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:248:2: ( 'with' 'hiddens' ) (lv_valid_2= ';' )
             {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:248:2: ( 'with' 'hiddens' )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:248:3: 'with' 'hiddens'
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:248:2: ( 'with' 'hiddens' )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:248:3: 'with' 'hiddens'
             {
             match(input,11,FOLLOW_11_in_ruleWithHiddens507); 
 
@@ -567,8 +567,8 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
             }
 
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:256:2: (lv_valid_2= ';' )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:258:6: lv_valid_2= ';'
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:256:2: (lv_valid_2= ';' )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:258:6: lv_valid_2= ';'
             {
             lv_valid_2=(Token)input.LT(1);
             match(input,10,FOLLOW_10_in_ruleWithHiddens538); 
@@ -614,7 +614,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start entryRuleOverridingHiddens
-    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:286:1: entryRuleOverridingHiddens returns [EObject current=null] : iv_ruleOverridingHiddens= ruleOverridingHiddens EOF ;
+    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:286:1: entryRuleOverridingHiddens returns [EObject current=null] : iv_ruleOverridingHiddens= ruleOverridingHiddens EOF ;
     public final EObject entryRuleOverridingHiddens() throws RecognitionException {
         EObject current = null;
 
@@ -622,8 +622,8 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:286:59: (iv_ruleOverridingHiddens= ruleOverridingHiddens EOF )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:287:2: iv_ruleOverridingHiddens= ruleOverridingHiddens EOF
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:286:59: (iv_ruleOverridingHiddens= ruleOverridingHiddens EOF )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:287:2: iv_ruleOverridingHiddens= ruleOverridingHiddens EOF
             {
              currentNode = createCompositeNode(grammarAccess.prOverridingHiddens().getRule(), currentNode); 
             pushFollow(FOLLOW_ruleOverridingHiddens_in_entryRuleOverridingHiddens586);
@@ -649,7 +649,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start ruleOverridingHiddens
-    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:294:1: ruleOverridingHiddens returns [EObject current=null] : ( ( ( ( ( 'overriding' 'hiddens' ) '(' ) (lv_called_3= ruleOverridingHiddensCall ) ) ')' ) (lv_valid_5= ';' ) ) ;
+    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:294:1: ruleOverridingHiddens returns [EObject current=null] : ( ( ( ( ( 'overriding' 'hiddens' ) '(' ) (lv_called_3= ruleOverridingHiddensCall ) ) ')' ) (lv_valid_5= ';' ) ) ;
     public final EObject ruleOverridingHiddens() throws RecognitionException {
         EObject current = null;
 
@@ -661,23 +661,23 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
             
         try {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:301:6: ( ( ( ( ( ( 'overriding' 'hiddens' ) '(' ) (lv_called_3= ruleOverridingHiddensCall ) ) ')' ) (lv_valid_5= ';' ) ) )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:302:1: ( ( ( ( ( 'overriding' 'hiddens' ) '(' ) (lv_called_3= ruleOverridingHiddensCall ) ) ')' ) (lv_valid_5= ';' ) )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:301:6: ( ( ( ( ( ( 'overriding' 'hiddens' ) '(' ) (lv_called_3= ruleOverridingHiddensCall ) ) ')' ) (lv_valid_5= ';' ) ) )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:302:1: ( ( ( ( ( 'overriding' 'hiddens' ) '(' ) (lv_called_3= ruleOverridingHiddensCall ) ) ')' ) (lv_valid_5= ';' ) )
             {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:302:1: ( ( ( ( ( 'overriding' 'hiddens' ) '(' ) (lv_called_3= ruleOverridingHiddensCall ) ) ')' ) (lv_valid_5= ';' ) )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:302:2: ( ( ( ( 'overriding' 'hiddens' ) '(' ) (lv_called_3= ruleOverridingHiddensCall ) ) ')' ) (lv_valid_5= ';' )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:302:1: ( ( ( ( ( 'overriding' 'hiddens' ) '(' ) (lv_called_3= ruleOverridingHiddensCall ) ) ')' ) (lv_valid_5= ';' ) )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:302:2: ( ( ( ( 'overriding' 'hiddens' ) '(' ) (lv_called_3= ruleOverridingHiddensCall ) ) ')' ) (lv_valid_5= ';' )
             {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:302:2: ( ( ( ( 'overriding' 'hiddens' ) '(' ) (lv_called_3= ruleOverridingHiddensCall ) ) ')' )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:302:3: ( ( ( 'overriding' 'hiddens' ) '(' ) (lv_called_3= ruleOverridingHiddensCall ) ) ')'
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:302:2: ( ( ( ( 'overriding' 'hiddens' ) '(' ) (lv_called_3= ruleOverridingHiddensCall ) ) ')' )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:302:3: ( ( ( 'overriding' 'hiddens' ) '(' ) (lv_called_3= ruleOverridingHiddensCall ) ) ')'
             {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:302:3: ( ( ( 'overriding' 'hiddens' ) '(' ) (lv_called_3= ruleOverridingHiddensCall ) )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:302:4: ( ( 'overriding' 'hiddens' ) '(' ) (lv_called_3= ruleOverridingHiddensCall )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:302:3: ( ( ( 'overriding' 'hiddens' ) '(' ) (lv_called_3= ruleOverridingHiddensCall ) )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:302:4: ( ( 'overriding' 'hiddens' ) '(' ) (lv_called_3= ruleOverridingHiddensCall )
             {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:302:4: ( ( 'overriding' 'hiddens' ) '(' )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:302:5: ( 'overriding' 'hiddens' ) '('
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:302:4: ( ( 'overriding' 'hiddens' ) '(' )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:302:5: ( 'overriding' 'hiddens' ) '('
             {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:302:5: ( 'overriding' 'hiddens' )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:302:6: 'overriding' 'hiddens'
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:302:5: ( 'overriding' 'hiddens' )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:302:6: 'overriding' 'hiddens'
             {
             match(input,12,FOLLOW_12_in_ruleOverridingHiddens634); 
 
@@ -697,8 +697,8 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
             }
 
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:314:2: (lv_called_3= ruleOverridingHiddensCall )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:317:6: lv_called_3= ruleOverridingHiddensCall
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:314:2: (lv_called_3= ruleOverridingHiddensCall )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:317:6: lv_called_3= ruleOverridingHiddensCall
             {
              
             	        currentNode=createCompositeNode(grammarAccess.prOverridingHiddens().ele0010ParserRuleCallOverridingHiddensCall(), currentNode); 
@@ -733,8 +733,8 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
             }
 
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:339:2: (lv_valid_5= ';' )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:341:6: lv_valid_5= ';'
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:339:2: (lv_valid_5= ';' )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:341:6: lv_valid_5= ';'
             {
             lv_valid_5=(Token)input.LT(1);
             match(input,10,FOLLOW_10_in_ruleOverridingHiddens724); 
@@ -780,7 +780,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start entryRuleOverridingHiddensCall
-    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:369:1: entryRuleOverridingHiddensCall returns [EObject current=null] : iv_ruleOverridingHiddensCall= ruleOverridingHiddensCall EOF ;
+    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:369:1: entryRuleOverridingHiddensCall returns [EObject current=null] : iv_ruleOverridingHiddensCall= ruleOverridingHiddensCall EOF ;
     public final EObject entryRuleOverridingHiddensCall() throws RecognitionException {
         EObject current = null;
 
@@ -788,8 +788,8 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:369:63: (iv_ruleOverridingHiddensCall= ruleOverridingHiddensCall EOF )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:370:2: iv_ruleOverridingHiddensCall= ruleOverridingHiddensCall EOF
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:369:63: (iv_ruleOverridingHiddensCall= ruleOverridingHiddensCall EOF )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:370:2: iv_ruleOverridingHiddensCall= ruleOverridingHiddensCall EOF
             {
              currentNode = createCompositeNode(grammarAccess.prOverridingHiddensCall().getRule(), currentNode); 
             pushFollow(FOLLOW_ruleOverridingHiddensCall_in_entryRuleOverridingHiddensCall772);
@@ -815,7 +815,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start ruleOverridingHiddensCall
-    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:377:1: ruleOverridingHiddensCall returns [EObject current=null] : ( ( 'call' (lv_spaces_1= RULE_WS )? ) (lv_valid_2= ';' ) ) ;
+    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:377:1: ruleOverridingHiddensCall returns [EObject current=null] : ( ( 'call' (lv_spaces_1= RULE_WS )? ) (lv_valid_2= ';' ) ) ;
     public final EObject ruleOverridingHiddensCall() throws RecognitionException {
         EObject current = null;
 
@@ -826,20 +826,20 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
             
         try {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:384:6: ( ( ( 'call' (lv_spaces_1= RULE_WS )? ) (lv_valid_2= ';' ) ) )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:385:1: ( ( 'call' (lv_spaces_1= RULE_WS )? ) (lv_valid_2= ';' ) )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:384:6: ( ( ( 'call' (lv_spaces_1= RULE_WS )? ) (lv_valid_2= ';' ) ) )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:385:1: ( ( 'call' (lv_spaces_1= RULE_WS )? ) (lv_valid_2= ';' ) )
             {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:385:1: ( ( 'call' (lv_spaces_1= RULE_WS )? ) (lv_valid_2= ';' ) )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:385:2: ( 'call' (lv_spaces_1= RULE_WS )? ) (lv_valid_2= ';' )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:385:1: ( ( 'call' (lv_spaces_1= RULE_WS )? ) (lv_valid_2= ';' ) )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:385:2: ( 'call' (lv_spaces_1= RULE_WS )? ) (lv_valid_2= ';' )
             {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:385:2: ( 'call' (lv_spaces_1= RULE_WS )? )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:385:3: 'call' (lv_spaces_1= RULE_WS )?
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:385:2: ( 'call' (lv_spaces_1= RULE_WS )? )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:385:3: 'call' (lv_spaces_1= RULE_WS )?
             {
             match(input,15,FOLLOW_15_in_ruleOverridingHiddensCall817); 
 
                     createLeafNode(grammarAccess.prOverridingHiddensCall().ele00KeywordCall(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:389:1: (lv_spaces_1= RULE_WS )?
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:389:1: (lv_spaces_1= RULE_WS )?
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -848,7 +848,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:391:6: lv_spaces_1= RULE_WS
+                    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:391:6: lv_spaces_1= RULE_WS
                     {
                     lv_spaces_1=(Token)input.LT(1);
                     match(input,RULE_WS,FOLLOW_RULE_WS_in_ruleOverridingHiddensCall838); 
@@ -876,8 +876,8 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
             }
 
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:408:4: (lv_valid_2= ';' )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:410:6: lv_valid_2= ';'
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:408:4: (lv_valid_2= ';' )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:410:6: lv_valid_2= ';'
             {
             lv_valid_2=(Token)input.LT(1);
             match(input,10,FOLLOW_10_in_ruleOverridingHiddensCall868); 
@@ -923,7 +923,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start entryRuleInheritingHiddens
-    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:438:1: entryRuleInheritingHiddens returns [EObject current=null] : iv_ruleInheritingHiddens= ruleInheritingHiddens EOF ;
+    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:438:1: entryRuleInheritingHiddens returns [EObject current=null] : iv_ruleInheritingHiddens= ruleInheritingHiddens EOF ;
     public final EObject entryRuleInheritingHiddens() throws RecognitionException {
         EObject current = null;
 
@@ -931,8 +931,8 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:438:59: (iv_ruleInheritingHiddens= ruleInheritingHiddens EOF )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:439:2: iv_ruleInheritingHiddens= ruleInheritingHiddens EOF
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:438:59: (iv_ruleInheritingHiddens= ruleInheritingHiddens EOF )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:439:2: iv_ruleInheritingHiddens= ruleInheritingHiddens EOF
             {
              currentNode = createCompositeNode(grammarAccess.prInheritingHiddens().getRule(), currentNode); 
             pushFollow(FOLLOW_ruleInheritingHiddens_in_entryRuleInheritingHiddens916);
@@ -958,7 +958,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start ruleInheritingHiddens
-    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:446:1: ruleInheritingHiddens returns [EObject current=null] : ( ( ( ( ( 'inheriting' 'hiddens' ) '(' ) ( (lv_called_3= ruleInheritingHiddensCall ) | (lv_hidingCalled_4= ruleHidingHiddens ) ) ) ')' ) (lv_valid_6= ';' ) ) ;
+    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:446:1: ruleInheritingHiddens returns [EObject current=null] : ( ( ( ( ( 'inheriting' 'hiddens' ) '(' ) ( (lv_called_3= ruleInheritingHiddensCall ) | (lv_hidingCalled_4= ruleHidingHiddens ) ) ) ')' ) (lv_valid_6= ';' ) ) ;
     public final EObject ruleInheritingHiddens() throws RecognitionException {
         EObject current = null;
 
@@ -972,23 +972,23 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
             
         try {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:453:6: ( ( ( ( ( ( 'inheriting' 'hiddens' ) '(' ) ( (lv_called_3= ruleInheritingHiddensCall ) | (lv_hidingCalled_4= ruleHidingHiddens ) ) ) ')' ) (lv_valid_6= ';' ) ) )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:454:1: ( ( ( ( ( 'inheriting' 'hiddens' ) '(' ) ( (lv_called_3= ruleInheritingHiddensCall ) | (lv_hidingCalled_4= ruleHidingHiddens ) ) ) ')' ) (lv_valid_6= ';' ) )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:453:6: ( ( ( ( ( ( 'inheriting' 'hiddens' ) '(' ) ( (lv_called_3= ruleInheritingHiddensCall ) | (lv_hidingCalled_4= ruleHidingHiddens ) ) ) ')' ) (lv_valid_6= ';' ) ) )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:454:1: ( ( ( ( ( 'inheriting' 'hiddens' ) '(' ) ( (lv_called_3= ruleInheritingHiddensCall ) | (lv_hidingCalled_4= ruleHidingHiddens ) ) ) ')' ) (lv_valid_6= ';' ) )
             {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:454:1: ( ( ( ( ( 'inheriting' 'hiddens' ) '(' ) ( (lv_called_3= ruleInheritingHiddensCall ) | (lv_hidingCalled_4= ruleHidingHiddens ) ) ) ')' ) (lv_valid_6= ';' ) )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:454:2: ( ( ( ( 'inheriting' 'hiddens' ) '(' ) ( (lv_called_3= ruleInheritingHiddensCall ) | (lv_hidingCalled_4= ruleHidingHiddens ) ) ) ')' ) (lv_valid_6= ';' )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:454:1: ( ( ( ( ( 'inheriting' 'hiddens' ) '(' ) ( (lv_called_3= ruleInheritingHiddensCall ) | (lv_hidingCalled_4= ruleHidingHiddens ) ) ) ')' ) (lv_valid_6= ';' ) )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:454:2: ( ( ( ( 'inheriting' 'hiddens' ) '(' ) ( (lv_called_3= ruleInheritingHiddensCall ) | (lv_hidingCalled_4= ruleHidingHiddens ) ) ) ')' ) (lv_valid_6= ';' )
             {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:454:2: ( ( ( ( 'inheriting' 'hiddens' ) '(' ) ( (lv_called_3= ruleInheritingHiddensCall ) | (lv_hidingCalled_4= ruleHidingHiddens ) ) ) ')' )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:454:3: ( ( ( 'inheriting' 'hiddens' ) '(' ) ( (lv_called_3= ruleInheritingHiddensCall ) | (lv_hidingCalled_4= ruleHidingHiddens ) ) ) ')'
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:454:2: ( ( ( ( 'inheriting' 'hiddens' ) '(' ) ( (lv_called_3= ruleInheritingHiddensCall ) | (lv_hidingCalled_4= ruleHidingHiddens ) ) ) ')' )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:454:3: ( ( ( 'inheriting' 'hiddens' ) '(' ) ( (lv_called_3= ruleInheritingHiddensCall ) | (lv_hidingCalled_4= ruleHidingHiddens ) ) ) ')'
             {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:454:3: ( ( ( 'inheriting' 'hiddens' ) '(' ) ( (lv_called_3= ruleInheritingHiddensCall ) | (lv_hidingCalled_4= ruleHidingHiddens ) ) )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:454:4: ( ( 'inheriting' 'hiddens' ) '(' ) ( (lv_called_3= ruleInheritingHiddensCall ) | (lv_hidingCalled_4= ruleHidingHiddens ) )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:454:3: ( ( ( 'inheriting' 'hiddens' ) '(' ) ( (lv_called_3= ruleInheritingHiddensCall ) | (lv_hidingCalled_4= ruleHidingHiddens ) ) )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:454:4: ( ( 'inheriting' 'hiddens' ) '(' ) ( (lv_called_3= ruleInheritingHiddensCall ) | (lv_hidingCalled_4= ruleHidingHiddens ) )
             {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:454:4: ( ( 'inheriting' 'hiddens' ) '(' )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:454:5: ( 'inheriting' 'hiddens' ) '('
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:454:4: ( ( 'inheriting' 'hiddens' ) '(' )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:454:5: ( 'inheriting' 'hiddens' ) '('
             {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:454:5: ( 'inheriting' 'hiddens' )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:454:6: 'inheriting' 'hiddens'
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:454:5: ( 'inheriting' 'hiddens' )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:454:6: 'inheriting' 'hiddens'
             {
             match(input,16,FOLLOW_16_in_ruleInheritingHiddens964); 
 
@@ -1008,7 +1008,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
             }
 
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:466:2: ( (lv_called_3= ruleInheritingHiddensCall ) | (lv_hidingCalled_4= ruleHidingHiddens ) )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:466:2: ( (lv_called_3= ruleInheritingHiddensCall ) | (lv_hidingCalled_4= ruleHidingHiddens ) )
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -1026,10 +1026,10 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
             }
             switch (alt7) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:466:3: (lv_called_3= ruleInheritingHiddensCall )
+                    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:466:3: (lv_called_3= ruleInheritingHiddensCall )
                     {
-                    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:466:3: (lv_called_3= ruleInheritingHiddensCall )
-                    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:469:6: lv_called_3= ruleInheritingHiddensCall
+                    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:466:3: (lv_called_3= ruleInheritingHiddensCall )
+                    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:469:6: lv_called_3= ruleInheritingHiddensCall
                     {
                      
                     	        currentNode=createCompositeNode(grammarAccess.prInheritingHiddens().ele00100ParserRuleCallInheritingHiddensCall(), currentNode); 
@@ -1058,10 +1058,10 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:488:6: (lv_hidingCalled_4= ruleHidingHiddens )
+                    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:488:6: (lv_hidingCalled_4= ruleHidingHiddens )
                     {
-                    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:488:6: (lv_hidingCalled_4= ruleHidingHiddens )
-                    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:491:6: lv_hidingCalled_4= ruleHidingHiddens
+                    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:488:6: (lv_hidingCalled_4= ruleHidingHiddens )
+                    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:491:6: lv_hidingCalled_4= ruleHidingHiddens
                     {
                      
                     	        currentNode=createCompositeNode(grammarAccess.prInheritingHiddens().ele00110ParserRuleCallHidingHiddens(), currentNode); 
@@ -1102,8 +1102,8 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
             }
 
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:513:2: (lv_valid_6= ';' )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:515:6: lv_valid_6= ';'
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:513:2: (lv_valid_6= ';' )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:515:6: lv_valid_6= ';'
             {
             lv_valid_6=(Token)input.LT(1);
             match(input,10,FOLLOW_10_in_ruleInheritingHiddens1100); 
@@ -1149,7 +1149,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start entryRuleDatatypeHiddens
-    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:543:1: entryRuleDatatypeHiddens returns [EObject current=null] : iv_ruleDatatypeHiddens= ruleDatatypeHiddens EOF ;
+    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:543:1: entryRuleDatatypeHiddens returns [EObject current=null] : iv_ruleDatatypeHiddens= ruleDatatypeHiddens EOF ;
     public final EObject entryRuleDatatypeHiddens() throws RecognitionException {
         EObject current = null;
 
@@ -1157,8 +1157,8 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:543:57: (iv_ruleDatatypeHiddens= ruleDatatypeHiddens EOF )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:544:2: iv_ruleDatatypeHiddens= ruleDatatypeHiddens EOF
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:543:57: (iv_ruleDatatypeHiddens= ruleDatatypeHiddens EOF )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:544:2: iv_ruleDatatypeHiddens= ruleDatatypeHiddens EOF
             {
              currentNode = createCompositeNode(grammarAccess.prDatatypeHiddens().getRule(), currentNode); 
             pushFollow(FOLLOW_ruleDatatypeHiddens_in_entryRuleDatatypeHiddens1148);
@@ -1184,7 +1184,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start ruleDatatypeHiddens
-    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:551:1: ruleDatatypeHiddens returns [EObject current=null] : ( 'datatype' (lv_valid_1= ruleDatatypeRule ) ) ;
+    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:551:1: ruleDatatypeHiddens returns [EObject current=null] : ( 'datatype' (lv_valid_1= ruleDatatypeRule ) ) ;
     public final EObject ruleDatatypeHiddens() throws RecognitionException {
         EObject current = null;
 
@@ -1194,18 +1194,18 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:556:6: ( ( 'datatype' (lv_valid_1= ruleDatatypeRule ) ) )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:557:1: ( 'datatype' (lv_valid_1= ruleDatatypeRule ) )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:556:6: ( ( 'datatype' (lv_valid_1= ruleDatatypeRule ) ) )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:557:1: ( 'datatype' (lv_valid_1= ruleDatatypeRule ) )
             {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:557:1: ( 'datatype' (lv_valid_1= ruleDatatypeRule ) )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:557:2: 'datatype' (lv_valid_1= ruleDatatypeRule )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:557:1: ( 'datatype' (lv_valid_1= ruleDatatypeRule ) )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:557:2: 'datatype' (lv_valid_1= ruleDatatypeRule )
             {
             match(input,17,FOLLOW_17_in_ruleDatatypeHiddens1192); 
 
                     createLeafNode(grammarAccess.prDatatypeHiddens().ele0KeywordDatatype(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:561:1: (lv_valid_1= ruleDatatypeRule )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:564:6: lv_valid_1= ruleDatatypeRule
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:561:1: (lv_valid_1= ruleDatatypeRule )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:564:6: lv_valid_1= ruleDatatypeRule
             {
              
             	        currentNode=createCompositeNode(grammarAccess.prDatatypeHiddens().ele10ParserRuleCallDatatypeRule(), currentNode); 
@@ -1253,7 +1253,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start entryRuleDatatypeRule
-    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:591:1: entryRuleDatatypeRule returns [String current=null] : iv_ruleDatatypeRule= ruleDatatypeRule EOF ;
+    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:591:1: entryRuleDatatypeRule returns [String current=null] : iv_ruleDatatypeRule= ruleDatatypeRule EOF ;
     public final String entryRuleDatatypeRule() throws RecognitionException {
         String current = null;
 
@@ -1261,8 +1261,8 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:591:53: (iv_ruleDatatypeRule= ruleDatatypeRule EOF )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:592:2: iv_ruleDatatypeRule= ruleDatatypeRule EOF
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:591:53: (iv_ruleDatatypeRule= ruleDatatypeRule EOF )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:592:2: iv_ruleDatatypeRule= ruleDatatypeRule EOF
             {
              currentNode = createCompositeNode(grammarAccess.prDatatypeRule().getRule(), currentNode); 
             pushFollow(FOLLOW_ruleDatatypeRule_in_entryRuleDatatypeRule1266);
@@ -1288,7 +1288,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start ruleDatatypeRule
-    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:599:1: ruleDatatypeRule returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'rule' kw= ';' ) ;
+    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:599:1: ruleDatatypeRule returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'rule' kw= ';' ) ;
     public final AntlrDatatypeRuleToken ruleDatatypeRule() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -1298,11 +1298,11 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
             
         try {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:607:6: ( (kw= 'rule' kw= ';' ) )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:608:1: (kw= 'rule' kw= ';' )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:607:6: ( (kw= 'rule' kw= ';' ) )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:608:1: (kw= 'rule' kw= ';' )
             {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:608:1: (kw= 'rule' kw= ';' )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:609:2: kw= 'rule' kw= ';'
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:608:1: (kw= 'rule' kw= ';' )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:609:2: kw= 'rule' kw= ';'
             {
             kw=(Token)input.LT(1);
             match(input,18,FOLLOW_18_in_ruleDatatypeRule1315); 
@@ -1341,7 +1341,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start entryRuleHidingHiddens
-    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:630:1: entryRuleHidingHiddens returns [EObject current=null] : iv_ruleHidingHiddens= ruleHidingHiddens EOF ;
+    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:630:1: entryRuleHidingHiddens returns [EObject current=null] : iv_ruleHidingHiddens= ruleHidingHiddens EOF ;
     public final EObject entryRuleHidingHiddens() throws RecognitionException {
         EObject current = null;
 
@@ -1349,8 +1349,8 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:630:55: (iv_ruleHidingHiddens= ruleHidingHiddens EOF )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:631:2: iv_ruleHidingHiddens= ruleHidingHiddens EOF
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:630:55: (iv_ruleHidingHiddens= ruleHidingHiddens EOF )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:631:2: iv_ruleHidingHiddens= ruleHidingHiddens EOF
             {
              currentNode = createCompositeNode(grammarAccess.prHidingHiddens().getRule(), currentNode); 
             pushFollow(FOLLOW_ruleHidingHiddens_in_entryRuleHidingHiddens1368);
@@ -1376,7 +1376,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start ruleHidingHiddens
-    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:638:1: ruleHidingHiddens returns [EObject current=null] : ( ( 'hiding' (lv_space_1= RULE_WS ) ) (lv_called_2= ruleInheritingHiddensCall ) ) ;
+    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:638:1: ruleHidingHiddens returns [EObject current=null] : ( ( 'hiding' (lv_space_1= RULE_WS ) ) (lv_called_2= ruleInheritingHiddensCall ) ) ;
     public final EObject ruleHidingHiddens() throws RecognitionException {
         EObject current = null;
 
@@ -1388,21 +1388,21 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
             
         try {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:645:6: ( ( ( 'hiding' (lv_space_1= RULE_WS ) ) (lv_called_2= ruleInheritingHiddensCall ) ) )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:646:1: ( ( 'hiding' (lv_space_1= RULE_WS ) ) (lv_called_2= ruleInheritingHiddensCall ) )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:645:6: ( ( ( 'hiding' (lv_space_1= RULE_WS ) ) (lv_called_2= ruleInheritingHiddensCall ) ) )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:646:1: ( ( 'hiding' (lv_space_1= RULE_WS ) ) (lv_called_2= ruleInheritingHiddensCall ) )
             {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:646:1: ( ( 'hiding' (lv_space_1= RULE_WS ) ) (lv_called_2= ruleInheritingHiddensCall ) )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:646:2: ( 'hiding' (lv_space_1= RULE_WS ) ) (lv_called_2= ruleInheritingHiddensCall )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:646:1: ( ( 'hiding' (lv_space_1= RULE_WS ) ) (lv_called_2= ruleInheritingHiddensCall ) )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:646:2: ( 'hiding' (lv_space_1= RULE_WS ) ) (lv_called_2= ruleInheritingHiddensCall )
             {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:646:2: ( 'hiding' (lv_space_1= RULE_WS ) )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:646:3: 'hiding' (lv_space_1= RULE_WS )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:646:2: ( 'hiding' (lv_space_1= RULE_WS ) )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:646:3: 'hiding' (lv_space_1= RULE_WS )
             {
             match(input,19,FOLLOW_19_in_ruleHidingHiddens1413); 
 
                     createLeafNode(grammarAccess.prHidingHiddens().ele00KeywordHiding(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:650:1: (lv_space_1= RULE_WS )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:652:6: lv_space_1= RULE_WS
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:650:1: (lv_space_1= RULE_WS )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:652:6: lv_space_1= RULE_WS
             {
             lv_space_1=(Token)input.LT(1);
             match(input,RULE_WS,FOLLOW_RULE_WS_in_ruleHidingHiddens1434); 
@@ -1427,8 +1427,8 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
             }
 
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:669:3: (lv_called_2= ruleInheritingHiddensCall )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:672:6: lv_called_2= ruleInheritingHiddensCall
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:669:3: (lv_called_2= ruleInheritingHiddensCall )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:672:6: lv_called_2= ruleInheritingHiddensCall
             {
              
             	        currentNode=createCompositeNode(grammarAccess.prHidingHiddens().ele10ParserRuleCallInheritingHiddensCall(), currentNode); 
@@ -1477,7 +1477,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start entryRuleInheritingHiddensCall
-    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:699:1: entryRuleInheritingHiddensCall returns [EObject current=null] : iv_ruleInheritingHiddensCall= ruleInheritingHiddensCall EOF ;
+    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:699:1: entryRuleInheritingHiddensCall returns [EObject current=null] : iv_ruleInheritingHiddensCall= ruleInheritingHiddensCall EOF ;
     public final EObject entryRuleInheritingHiddensCall() throws RecognitionException {
         EObject current = null;
 
@@ -1485,8 +1485,8 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:699:63: (iv_ruleInheritingHiddensCall= ruleInheritingHiddensCall EOF )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:700:2: iv_ruleInheritingHiddensCall= ruleInheritingHiddensCall EOF
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:699:63: (iv_ruleInheritingHiddensCall= ruleInheritingHiddensCall EOF )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:700:2: iv_ruleInheritingHiddensCall= ruleInheritingHiddensCall EOF
             {
              currentNode = createCompositeNode(grammarAccess.prInheritingHiddensCall().getRule(), currentNode); 
             pushFollow(FOLLOW_ruleInheritingHiddensCall_in_entryRuleInheritingHiddensCall1515);
@@ -1512,7 +1512,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start ruleInheritingHiddensCall
-    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:707:1: ruleInheritingHiddensCall returns [EObject current=null] : ( 'call' (lv_valid_1= ';' ) ) ;
+    // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:707:1: ruleInheritingHiddensCall returns [EObject current=null] : ( 'call' (lv_valid_1= ';' ) ) ;
     public final EObject ruleInheritingHiddensCall() throws RecognitionException {
         EObject current = null;
 
@@ -1521,18 +1521,18 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:712:6: ( ( 'call' (lv_valid_1= ';' ) ) )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:713:1: ( 'call' (lv_valid_1= ';' ) )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:712:6: ( ( 'call' (lv_valid_1= ';' ) ) )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:713:1: ( 'call' (lv_valid_1= ';' ) )
             {
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:713:1: ( 'call' (lv_valid_1= ';' ) )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:713:2: 'call' (lv_valid_1= ';' )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:713:1: ( 'call' (lv_valid_1= ';' ) )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:713:2: 'call' (lv_valid_1= ';' )
             {
             match(input,15,FOLLOW_15_in_ruleInheritingHiddensCall1559); 
 
                     createLeafNode(grammarAccess.prInheritingHiddensCall().ele0KeywordCall(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:717:1: (lv_valid_1= ';' )
-            // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:719:6: lv_valid_1= ';'
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:717:1: (lv_valid_1= ';' )
+            // ./src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:719:6: lv_valid_1= ';'
             {
             lv_valid_1=(Token)input.LT(1);
             match(input,10,FOLLOW_10_in_ruleInheritingHiddensCall1580); 

@@ -150,17 +150,11 @@ public final class ComplexReconstrTestLanguageOpConsumer extends NonTerminalCons
 	}
 
 	protected int consumeAssignment$9(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(termConsumer, "addOperands", true, false, false, getRule().ele1010ParserRuleCallTerm());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$10(entryPoint);
+	}
+
+	protected int consumeRuleCall$10(int entryPoint) throws Exception {
+		return consumeNonTerminal(termConsumer, "addOperands", true, false, false, getRule().ele1010ParserRuleCallTerm());
 	}
 
 	protected int consumeGroup$11(int entryPoint) throws Exception {
@@ -212,17 +206,11 @@ public final class ComplexReconstrTestLanguageOpConsumer extends NonTerminalCons
 	}
 
 	protected int consumeAssignment$16(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(termConsumer, "minusOperands", true, false, false, getRule().ele1110ParserRuleCallTerm());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$17(entryPoint);
+	}
+
+	protected int consumeRuleCall$17(int entryPoint) throws Exception {
+		return consumeNonTerminal(termConsumer, "minusOperands", true, false, false, getRule().ele1110ParserRuleCallTerm());
 	}
 
 	public OpElements getRule() {

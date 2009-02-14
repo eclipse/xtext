@@ -36,17 +36,11 @@ public final class MetamodelRefTestLanguageNameRefConsumer extends NonTerminalCo
 	}
 
 	protected int consumeAssignment$1(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "rule", false, false, getRule().ele0CrossReferenceEStringParserRule(), getCrossReference$2$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeCrossReference$2(entryPoint);
+	}
+
+	protected int consumeCrossReference$2(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "rule", false, false, getRule().ele0CrossReferenceEStringParserRule(), getCrossReference$2$Delimiter());
 	}
 
 	public NameRefElements getRule() {

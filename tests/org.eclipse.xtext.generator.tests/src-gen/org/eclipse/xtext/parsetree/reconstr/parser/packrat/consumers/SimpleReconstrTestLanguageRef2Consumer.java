@@ -80,39 +80,43 @@ public final class SimpleReconstrTestLanguageRef2Consumer extends NonTerminalCon
 	}
 
 	protected int consumeAssignment$3(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		// TODO use markers in assignments of alternatives to recover
-		announceNextPath();
-		// TODO use markers in assignments of alternatives to recover
-		announceNextPath();
-		tempResult = consumeKeyword(getRule().ele1000KeywordMykeyword1(), "ref2", false, false, getKeyword$6$Delimiter()); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
+		return consumeAlternatives$4(entryPoint);
+	}
+	protected int consumeAlternatives$4(int entryPoint) throws Exception {
+		AlternativesResult result = createAlternativesResult();
+		switch(entryPoint) {
+			case -1: // use fall through semantics of switch case
+				result.reset();
+			case 0:
+				result.nextAlternative();
+				if (result.isAlternativeDone(consumeKeyword$6(nextEntryPoint()))) { 
+					return result.getResult(); 
+				}
+			case 1:
+				result.nextAlternative();
+				if (result.isAlternativeDone(consumeRuleCall$7(nextEntryPoint()))) { 
+					return result.getResult(); 
+				}
+			case 2:
+				result.nextAlternative();
+				if (result.isAlternativeDone(consumeKeyword$8(nextEntryPoint()))) { 
+					return result.getResult(); 
+				}
 		}
-		result = tempResult >= result ? tempResult : result; 
+		return result.getResult();
+	}
+	
 
-		announceNextPath();
-		tempResult = consumeTerminal(stringConsumer, "ref2", false, false, getRule().ele1001LexerRuleCallSTRING(), getRuleCall$7$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
+	protected int consumeKeyword$6(int entryPoint) throws Exception {
+		return consumeKeyword(getRule().ele1000KeywordMykeyword1(), "ref2", false, false, getKeyword$6$Delimiter());
+	}
 
+	protected int consumeRuleCall$7(int entryPoint) throws Exception {
+		return consumeTerminal(stringConsumer, "ref2", false, false, getRule().ele1001LexerRuleCallSTRING(), getRuleCall$7$Delimiter());
+	}
 
-		announceNextPath();
-		tempResult = consumeKeyword(getRule().ele101KeywordMykeyword2(), "ref2", false, false, getKeyword$8$Delimiter()); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-
-		announceLevelFinished();
-		return result;
+	protected int consumeKeyword$8(int entryPoint) throws Exception {
+		return consumeKeyword(getRule().ele101KeywordMykeyword2(), "ref2", false, false, getKeyword$8$Delimiter());
 	}
 
 	public Ref2Elements getRule() {

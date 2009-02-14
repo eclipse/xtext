@@ -42,17 +42,11 @@ public final class TestLanguageEntryRuleConsumer extends NonTerminalConsumer {
 	}
 
 	protected int doConsumeAssignment$1(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(abstractRuleConsumer, "multiFeature", true, false, false, getRule().ele0ParserRuleCallAbstractRule());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$2(entryPoint);
+	}
+
+	protected int consumeRuleCall$2(int entryPoint) throws Exception {
+		return consumeNonTerminal(abstractRuleConsumer, "multiFeature", true, false, false, getRule().ele0ParserRuleCallAbstractRule());
 	}
 
 	public EntryRuleElements getRule() {

@@ -88,17 +88,11 @@ public final class HiddenTerminalsTestLanguageWithHiddensConsumer extends NonTer
 	}
 
 	protected int consumeAssignment$5(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeKeyword(getRule().ele10KeywordSemicolon(), "valid", false, true, getKeyword$6$Delimiter()); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeKeyword$6(entryPoint);
+	}
+
+	protected int consumeKeyword$6(int entryPoint) throws Exception {
+		return consumeKeyword(getRule().ele10KeywordSemicolon(), "valid", false, true, getKeyword$6$Delimiter());
 	}
 
 	public WithHiddensElements getRule() {

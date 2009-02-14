@@ -111,17 +111,11 @@ public final class PartialParserTestLanguageChildrenConsumer extends NonTerminal
 	}
 
 	protected int consumeAssignment$7(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(childConsumer, "children", true, false, false, getRule().ele0010ParserRuleCallChild());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$8(entryPoint);
+	}
+
+	protected int consumeRuleCall$8(int entryPoint) throws Exception {
+		return consumeNonTerminal(childConsumer, "children", true, false, false, getRule().ele0010ParserRuleCallChild());
 	}
 
 	protected int consumeGroup$9(int entryPoint) throws Exception {
@@ -169,17 +163,11 @@ public final class PartialParserTestLanguageChildrenConsumer extends NonTerminal
 	}
 
 	protected int consumeAssignment$11(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(childConsumer, "children", true, false, false, getRule().ele0110ParserRuleCallChild());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$12(entryPoint);
+	}
+
+	protected int consumeRuleCall$12(int entryPoint) throws Exception {
+		return consumeNonTerminal(childConsumer, "children", true, false, false, getRule().ele0110ParserRuleCallChild());
 	}
 
 	protected int consumeKeyword$13(int entryPoint) throws Exception {

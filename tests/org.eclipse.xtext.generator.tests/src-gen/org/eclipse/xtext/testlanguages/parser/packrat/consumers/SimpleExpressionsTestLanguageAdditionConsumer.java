@@ -127,42 +127,42 @@ public final class SimpleExpressionsTestLanguageAdditionConsumer extends NonTerm
 	}
 
 	protected int consumeAssignment$7(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		// TODO use markers in assignments of alternatives to recover
-		announceNextPath();
-		tempResult = consumeKeyword(getRule().ele10100KeywordPlusSign(), "operator", false, false, getKeyword$9$Delimiter()); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
+		return consumeAlternatives$8(entryPoint);
+	}
+	protected int consumeAlternatives$8(int entryPoint) throws Exception {
+		AlternativesResult result = createAlternativesResult();
+		switch(entryPoint) {
+			case -1: // use fall through semantics of switch case
+				result.reset();
+			case 0:
+				result.nextAlternative();
+				if (result.isAlternativeDone(consumeKeyword$9(nextEntryPoint()))) { 
+					return result.getResult(); 
+				}
+			case 1:
+				result.nextAlternative();
+				if (result.isAlternativeDone(consumeKeyword$10(nextEntryPoint()))) { 
+					return result.getResult(); 
+				}
 		}
-		result = tempResult >= result ? tempResult : result; 
+		return result.getResult();
+	}
+	
 
-		announceNextPath();
-		tempResult = consumeKeyword(getRule().ele10101KeywordHyphenMinus(), "operator", false, false, getKeyword$10$Delimiter()); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
+	protected int consumeKeyword$9(int entryPoint) throws Exception {
+		return consumeKeyword(getRule().ele10100KeywordPlusSign(), "operator", false, false, getKeyword$9$Delimiter());
+	}
 
-		announceLevelFinished();
-		return result;
+	protected int consumeKeyword$10(int entryPoint) throws Exception {
+		return consumeKeyword(getRule().ele10101KeywordHyphenMinus(), "operator", false, false, getKeyword$10$Delimiter());
 	}
 
 	protected int consumeAssignment$11(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(multiplicationConsumer, "values", true, false, false, getRule().ele110ParserRuleCallMultiplication());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$12(entryPoint);
+	}
+
+	protected int consumeRuleCall$12(int entryPoint) throws Exception {
+		return consumeNonTerminal(multiplicationConsumer, "values", true, false, false, getRule().ele110ParserRuleCallMultiplication());
 	}
 
 	public AdditionElements getRule() {

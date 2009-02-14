@@ -81,17 +81,11 @@ public final class ActionTestLanguageElementConsumer extends NonTerminalConsumer
 	}
 
 	protected int consumeAssignment$6(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(itemConsumer, "items", true, false, false, getRule().ele110ParserRuleCallItem());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$7(entryPoint);
+	}
+
+	protected int consumeRuleCall$7(int entryPoint) throws Exception {
+		return consumeNonTerminal(itemConsumer, "items", true, false, false, getRule().ele110ParserRuleCallItem());
 	}
 
 	public ElementElements getRule() {

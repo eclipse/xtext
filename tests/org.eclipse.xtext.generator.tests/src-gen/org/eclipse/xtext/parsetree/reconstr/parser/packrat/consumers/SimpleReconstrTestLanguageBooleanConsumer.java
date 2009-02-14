@@ -108,17 +108,11 @@ public final class SimpleReconstrTestLanguageBooleanConsumer extends NonTerminal
 	}
 
 	protected int doConsumeAssignment$5(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeKeyword(getRule().ele0010KeywordMyoption(), "bool", false, true, getKeyword$6$Delimiter()); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeKeyword$6(entryPoint);
+	}
+
+	protected int consumeKeyword$6(int entryPoint) throws Exception {
+		return consumeKeyword(getRule().ele0010KeywordMyoption(), "bool", false, true, getKeyword$6$Delimiter());
 	}
 
 	protected int consumeKeyword$7(int entryPoint) throws Exception {
@@ -126,17 +120,11 @@ public final class SimpleReconstrTestLanguageBooleanConsumer extends NonTerminal
 	}
 
 	protected int consumeAssignment$8(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "value", false, false, getRule().ele10LexerRuleCallID(), getRuleCall$9$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$9(entryPoint);
+	}
+
+	protected int consumeRuleCall$9(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "value", false, false, getRule().ele10LexerRuleCallID(), getRuleCall$9$Delimiter());
 	}
 
 	public BooleanElements getRule() {

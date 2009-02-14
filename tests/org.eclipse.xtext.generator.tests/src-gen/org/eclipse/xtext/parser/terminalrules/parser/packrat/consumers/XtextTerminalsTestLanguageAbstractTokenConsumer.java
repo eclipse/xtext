@@ -123,39 +123,43 @@ public final class XtextTerminalsTestLanguageAbstractTokenConsumer extends NonTe
 	}
 
 	protected int doConsumeAssignment$7(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		// TODO use markers in assignments of alternatives to recover
-		announceNextPath();
-		// TODO use markers in assignments of alternatives to recover
-		announceNextPath();
-		tempResult = consumeKeyword(getRule().ele1000KeywordQuestionMark(), "cardinality", false, false, getKeyword$10$Delimiter()); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
+		return consumeAlternatives$8(entryPoint);
+	}
+	protected int consumeAlternatives$8(int entryPoint) throws Exception {
+		AlternativesResult result = createAlternativesResult();
+		switch(entryPoint) {
+			case -1: // use fall through semantics of switch case
+				result.reset();
+			case 0:
+				result.nextAlternative();
+				if (result.isAlternativeDone(consumeKeyword$10(nextEntryPoint()))) { 
+					return result.getResult(); 
+				}
+			case 1:
+				result.nextAlternative();
+				if (result.isAlternativeDone(consumeKeyword$11(nextEntryPoint()))) { 
+					return result.getResult(); 
+				}
+			case 2:
+				result.nextAlternative();
+				if (result.isAlternativeDone(consumeKeyword$12(nextEntryPoint()))) { 
+					return result.getResult(); 
+				}
 		}
-		result = tempResult >= result ? tempResult : result; 
+		return result.getResult();
+	}
+	
 
-		announceNextPath();
-		tempResult = consumeKeyword(getRule().ele1001KeywordAsterisk(), "cardinality", false, false, getKeyword$11$Delimiter()); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
+	protected int consumeKeyword$10(int entryPoint) throws Exception {
+		return consumeKeyword(getRule().ele1000KeywordQuestionMark(), "cardinality", false, false, getKeyword$10$Delimiter());
+	}
 
+	protected int consumeKeyword$11(int entryPoint) throws Exception {
+		return consumeKeyword(getRule().ele1001KeywordAsterisk(), "cardinality", false, false, getKeyword$11$Delimiter());
+	}
 
-		announceNextPath();
-		tempResult = consumeKeyword(getRule().ele101KeywordPlusSign(), "cardinality", false, false, getKeyword$12$Delimiter()); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-
-		announceLevelFinished();
-		return result;
+	protected int consumeKeyword$12(int entryPoint) throws Exception {
+		return consumeKeyword(getRule().ele101KeywordPlusSign(), "cardinality", false, false, getKeyword$12$Delimiter());
 	}
 
 	public AbstractTokenElements getRule() {

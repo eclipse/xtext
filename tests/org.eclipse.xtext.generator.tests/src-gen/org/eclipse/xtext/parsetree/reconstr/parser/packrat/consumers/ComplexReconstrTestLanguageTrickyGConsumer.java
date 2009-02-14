@@ -71,17 +71,11 @@ public final class ComplexReconstrTestLanguageTrickyGConsumer extends NonTermina
 	}
 
 	protected int consumeAssignment$3(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(trickyG1Consumer, "tree", false, false, false, getRule().ele10ParserRuleCallTrickyG1());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$4(entryPoint);
+	}
+
+	protected int consumeRuleCall$4(int entryPoint) throws Exception {
+		return consumeNonTerminal(trickyG1Consumer, "tree", false, false, false, getRule().ele10ParserRuleCallTrickyG1());
 	}
 
 	public TrickyGElements getRule() {

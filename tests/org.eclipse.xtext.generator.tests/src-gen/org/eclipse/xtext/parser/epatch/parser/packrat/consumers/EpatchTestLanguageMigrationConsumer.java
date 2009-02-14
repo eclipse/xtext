@@ -108,17 +108,11 @@ public final class EpatchTestLanguageMigrationConsumer extends NonTerminalConsum
 	}
 
 	protected int doConsumeAssignment$5(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(executableConsumer, "first", false, false, false, getRule().ele0010ParserRuleCallExecutable());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$6(entryPoint);
+	}
+
+	protected int consumeRuleCall$6(int entryPoint) throws Exception {
+		return consumeNonTerminal(executableConsumer, "first", false, false, false, getRule().ele0010ParserRuleCallExecutable());
 	}
 
 	protected int consumeAlternatives$7(int entryPoint) throws Exception {
@@ -186,17 +180,11 @@ public final class EpatchTestLanguageMigrationConsumer extends NonTerminalConsum
 	}
 
 	protected int consumeAssignment$10(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(executableConsumer, "asOp", false, false, false, getRule().ele01010ParserRuleCallExecutable());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$11(entryPoint);
+	}
+
+	protected int consumeRuleCall$11(int entryPoint) throws Exception {
+		return consumeNonTerminal(executableConsumer, "asOp", false, false, false, getRule().ele01010ParserRuleCallExecutable());
 	}
 
 	protected int consumeGroup$12(int entryPoint) throws Exception {
@@ -235,17 +223,11 @@ public final class EpatchTestLanguageMigrationConsumer extends NonTerminalConsum
 	}
 
 	protected int consumeAssignment$14(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(executableConsumer, "eachOp", false, false, false, getRule().ele01110ParserRuleCallExecutable());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$15(entryPoint);
+	}
+
+	protected int consumeRuleCall$15(int entryPoint) throws Exception {
+		return consumeNonTerminal(executableConsumer, "eachOp", false, false, false, getRule().ele01110ParserRuleCallExecutable());
 	}
 
 	protected int consumeKeyword$16(int entryPoint) throws Exception {

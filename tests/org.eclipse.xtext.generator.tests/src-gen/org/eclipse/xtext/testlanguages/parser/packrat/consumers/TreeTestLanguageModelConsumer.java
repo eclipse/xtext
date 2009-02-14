@@ -42,17 +42,11 @@ public final class TreeTestLanguageModelConsumer extends NonTerminalConsumer {
 	}
 
 	protected int doConsumeAssignment$1(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(nodeConsumer, "children", true, false, false, getRule().ele0ParserRuleCallNode());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$2(entryPoint);
+	}
+
+	protected int consumeRuleCall$2(int entryPoint) throws Exception {
+		return consumeNonTerminal(nodeConsumer, "children", true, false, false, getRule().ele0ParserRuleCallNode());
 	}
 
 	public ModelElements getRule() {

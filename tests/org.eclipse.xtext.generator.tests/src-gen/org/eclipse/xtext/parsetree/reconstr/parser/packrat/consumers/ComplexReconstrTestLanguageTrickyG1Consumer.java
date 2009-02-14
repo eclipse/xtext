@@ -127,17 +127,11 @@ public final class ComplexReconstrTestLanguageTrickyG1Consumer extends NonTermin
 	}
 
 	protected int consumeAssignment$5(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(trickyG2Consumer, "vals", true, false, false, getRule().ele0100ParserRuleCallTrickyG2());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$6(entryPoint);
+	}
+
+	protected int consumeRuleCall$6(int entryPoint) throws Exception {
+		return consumeNonTerminal(trickyG2Consumer, "vals", true, false, false, getRule().ele0100ParserRuleCallTrickyG2());
 	}
 
 	protected int consumeGroup$7(int entryPoint) throws Exception {
@@ -185,17 +179,11 @@ public final class ComplexReconstrTestLanguageTrickyG1Consumer extends NonTermin
 	}
 
 	protected int consumeAssignment$9(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(trickyG2Consumer, "vals", true, false, false, getRule().ele01110ParserRuleCallTrickyG2());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$10(entryPoint);
+	}
+
+	protected int consumeRuleCall$10(int entryPoint) throws Exception {
+		return consumeNonTerminal(trickyG2Consumer, "vals", true, false, false, getRule().ele01110ParserRuleCallTrickyG2());
 	}
 
 	protected int consumeKeyword$11(int entryPoint) throws Exception {

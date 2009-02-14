@@ -109,17 +109,11 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 	}
 
 	protected int consumeAssignment$5(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(nestedModelIdConsumer, "id", false, true, false, getRule().ele00000ParserRuleCallNestedModelId());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$6(entryPoint);
+	}
+
+	protected int consumeRuleCall$6(int entryPoint) throws Exception {
+		return consumeNonTerminal(nestedModelIdConsumer, "id", false, true, false, getRule().ele00000ParserRuleCallNestedModelId());
 	}
 
 	protected int consumeGroup$7(int entryPoint) throws Exception {
@@ -168,17 +162,11 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 	}
 
 	protected int consumeAssignment$9(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(fractionConsumer, "value", false, true, false, getRule().ele000110ParserRuleCallFraction());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$10(entryPoint);
+	}
+
+	protected int consumeRuleCall$10(int entryPoint) throws Exception {
+		return consumeNonTerminal(fractionConsumer, "value", false, true, false, getRule().ele000110ParserRuleCallFraction());
 	}
 
 	protected int consumeGroup$11(int entryPoint) throws Exception {
@@ -227,17 +215,11 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 	}
 
 	protected int consumeAssignment$13(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(vectorConsumer, "vector", false, true, false, getRule().ele00110ParserRuleCallVector());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$14(entryPoint);
+	}
+
+	protected int consumeRuleCall$14(int entryPoint) throws Exception {
+		return consumeNonTerminal(vectorConsumer, "vector", false, true, false, getRule().ele00110ParserRuleCallVector());
 	}
 
 	protected int consumeGroup$15(int entryPoint) throws Exception {
@@ -286,17 +268,11 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 	}
 
 	protected int consumeAssignment$17(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(dotsConsumer, "dots", false, true, false, getRule().ele0110ParserRuleCallDots());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$18(entryPoint);
+	}
+
+	protected int consumeRuleCall$18(int entryPoint) throws Exception {
+		return consumeNonTerminal(dotsConsumer, "dots", false, true, false, getRule().ele0110ParserRuleCallDots());
 	}
 
 	protected int consumeKeyword$19(int entryPoint) throws Exception {

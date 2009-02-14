@@ -62,17 +62,11 @@ public final class DatatypeRulesTestLanguageCompositeModelConsumer extends NonTe
 	}
 
 	protected int doConsumeAssignment$1(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(modelConsumer, "model", true, false, false, getRule().ele0ParserRuleCallModel());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$2(entryPoint);
+	}
+
+	protected int consumeRuleCall$2(int entryPoint) throws Exception {
+		return consumeNonTerminal(modelConsumer, "model", true, false, false, getRule().ele0ParserRuleCallModel());
 	}
 
 	public CompositeModelElements getRule() {

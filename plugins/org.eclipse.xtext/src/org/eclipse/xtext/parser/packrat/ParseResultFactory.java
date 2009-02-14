@@ -13,6 +13,7 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.parser.IAstFactory;
@@ -46,21 +47,21 @@ import org.eclipse.xtext.parsetree.SyntaxError;
 public class ParseResultFactory extends AbstractParsedTokenVisitor implements IParseResultFactory {
 
 	private CompositeNode currentNode;
-	
+
 	private final LinkedList<EObject> currentStack;
-	
+
 	@com.google.inject.Inject
 	private IAstFactory factory;
-	
+
 	private final LinkedList<ParsedNonTerminal> nonterminalStack;
 
 	private CharSequence input;
-	
+
 	public ParseResultFactory() {
 		this.currentStack = new LinkedList<EObject>();
 		this.nonterminalStack = new LinkedList<ParsedNonTerminal>();
 	}
-	
+
 	public IParseResult createParseResult(AbstractParsedToken token, CharSequence input) {
 		currentNode = null;
 		currentStack.clear();
@@ -75,7 +76,7 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 		this.input = null;
 		return new ParseResult(currentStack.isEmpty() ? null : currentStack.getLast(), currentNode);
 	}
-	
+
 	private LeafNode createLeafNode(AbstractParsedToken parsedToken) {
 		LeafNode result = ParsetreeFactory.eINSTANCE.createLeafNode();
 		enhanceNode(parsedToken, result);
@@ -88,13 +89,13 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 		node.setTotalOffset(parsedToken.getOffset());
 		node.setTotalLength(parsedToken.getLength());
 	}
-	
+
 	protected CompositeNode createCompositeNode(AbstractParsedToken parsedToken) {
 		CompositeNode compositeNode = ParsetreeFactory.eINSTANCE.createCompositeNode();
 		enhanceNode(parsedToken, compositeNode);
 		return compositeNode;
 	}
-	
+
 	protected void associateNodeWithAstElement(CompositeNode node, EObject astElement) {
 		if (node.getElement() != null && node.getElement() != astElement) {
 			throw new RuntimeException("Reassignment of astElement in parse tree node");
@@ -105,7 +106,7 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 			adapter.setParserNode(node);
 		}
 	}
-	
+
 	@Override
 	public void visitAbstractParsedToken(AbstractParsedToken token) {
 		// no exception for now
@@ -130,7 +131,7 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 	public void visitParsedNonTerminal(ParsedNonTerminal token) {
 		nonterminalStack.add(token);
 		currentStack.add(null);
-		
+
 		CompositeNode node = createCompositeNode(token);
 		node.setGrammarElement(token.getGrammarElement());
 		if (currentNode != null)
@@ -214,7 +215,7 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 			throw new RuntimeException(ex);
 		}
 	}
-	
+
 	private void getDatatypeValue(AbstractNode node, StringBuilder builder, boolean[] wasHidden) {
 		 if (node instanceof LeafNode) {
 			 LeafNode leaf = (LeafNode) node;
@@ -250,14 +251,14 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 		} else
 			throw new RuntimeException(ex);
 	}
-	
+
 	@Override
 	public void visitParsedTerminal(ParsedTerminal token) {
 		LeafNode node = createLeafNode(token);
 		node.setGrammarElement(token.getGrammarElement());
 		node.setHidden(token.isHidden());
 	}
-	
+
 	@Override
 	public void visitParsedTerminalWithFeatureInfo(ParsedTerminalWithFeatureInfo token) {
 		LeafNode node = createLeafNode(token);
@@ -272,7 +273,7 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 		node.setGrammarElement(token.getGrammarElement());
 		node.setFeature(token.getFeature());
 		node.setHidden(token.isHidden());
-		
+
 		EObject current = null;
 		if (currentStack.isEmpty()) {
 			throw new RuntimeException("Unexpected empty stack");
@@ -285,11 +286,11 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 		}
 		try {
 			if (token.isMany()) {
-				factory.add(current, token.getFeature(), token.isBoolean() ? true : token.getText(input), 
-						token.getRuleName(), currentNode);
+				factory.add(current, token.getFeature(), token.isBoolean() ? true : token.getText(input),
+						token.getGrammarElement() instanceof Keyword ? null : token.getRuleName(), node);
 			} else {
-				factory.set(current, token.getFeature(), token.isBoolean() ? true : token.getText(input), 
-						token.getRuleName(), currentNode);
+				factory.set(current, token.getFeature(), token.isBoolean() ? true : token.getText(input),
+						token.getGrammarElement() instanceof Keyword ? null : token.getRuleName(), node);
 			}
 		} catch(ValueConverterException ex) {
 			handleValueConverterException(ex);
@@ -297,13 +298,13 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 			throw new RuntimeException(ex);
 		}
 	}
-	
+
 	@Override
 	public void visitParsedAction(ParsedAction token) {
 		EObject newCurrent = factory.create(token.getTypeName());
 		EObject prevCurrent = currentStack.removeLast();
 		currentStack.add(newCurrent);
-		
+
 		try {
 			if (token.isMany())
 				factory.add(newCurrent, token.getFeature(), prevCurrent, null, null);
@@ -314,7 +315,7 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 		} catch(Exception ex) {
 			throw new RuntimeException(ex);
 		}
-		
+
 		CompositeNode prevCurrentNode = currentNode;
         currentNode = prevCurrentNode.getParent();
         CompositeNode newCurrentNode = createCompositeNode(token);
@@ -337,5 +338,5 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 	public IAstFactory getFactory() {
 		return factory;
 	}
-	
+
 }

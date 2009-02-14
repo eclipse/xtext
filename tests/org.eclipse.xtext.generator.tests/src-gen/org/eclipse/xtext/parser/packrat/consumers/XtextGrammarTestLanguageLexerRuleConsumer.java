@@ -152,17 +152,11 @@ public final class XtextGrammarTestLanguageLexerRuleConsumer extends NonTerminal
 	}
 
 	protected int consumeAssignment$9(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(idConsumer, "name", false, false, getRule().ele000010LexerRuleCallID(), getRuleCall$10$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$10(entryPoint);
+	}
+
+	protected int consumeRuleCall$10(int entryPoint) throws Exception {
+		return consumeTerminal(idConsumer, "name", false, false, getRule().ele000010LexerRuleCallID(), getRuleCall$10$Delimiter());
 	}
 
 	protected int consumeGroup$11(int entryPoint) throws Exception {
@@ -211,17 +205,11 @@ public final class XtextGrammarTestLanguageLexerRuleConsumer extends NonTerminal
 	}
 
 	protected int consumeAssignment$13(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(typeRefConsumer, "type", false, false, false, getRule().ele000110ParserRuleCallTypeRef());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$14(entryPoint);
+	}
+
+	protected int consumeRuleCall$14(int entryPoint) throws Exception {
+		return consumeNonTerminal(typeRefConsumer, "type", false, false, false, getRule().ele000110ParserRuleCallTypeRef());
 	}
 
 	protected int consumeKeyword$15(int entryPoint) throws Exception {
@@ -229,17 +217,11 @@ public final class XtextGrammarTestLanguageLexerRuleConsumer extends NonTerminal
 	}
 
 	protected int consumeAssignment$16(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(stringConsumer, "body", false, false, getRule().ele010LexerRuleCallSTRING(), getRuleCall$17$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$17(entryPoint);
+	}
+
+	protected int consumeRuleCall$17(int entryPoint) throws Exception {
+		return consumeTerminal(stringConsumer, "body", false, false, getRule().ele010LexerRuleCallSTRING(), getRuleCall$17$Delimiter());
 	}
 
 	protected int consumeKeyword$18(int entryPoint) throws Exception {

@@ -71,17 +71,11 @@ public final class XtextGrammarTestLanguageUpToTokenConsumer extends NonTerminal
 	}
 
 	protected int consumeAssignment$3(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(terminalTokenElementConsumer, "terminal", false, false, false, getRule().ele10ParserRuleCallTerminalTokenElement());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$4(entryPoint);
+	}
+
+	protected int consumeRuleCall$4(int entryPoint) throws Exception {
+		return consumeNonTerminal(terminalTokenElementConsumer, "terminal", false, false, false, getRule().ele10ParserRuleCallTerminalTokenElement());
 	}
 
 	public UpToTokenElements getRule() {

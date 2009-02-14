@@ -8,6 +8,7 @@
 package org.eclipse.xtext.parser.packrat.tokens;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.parser.packrat.IParsedTokenVisitor;
 
 /**
@@ -29,6 +30,14 @@ public class ParsedTerminal extends ParsedToken {
 	@Override
 	public void accept(IParsedTokenVisitor visitor) {
 		visitor.visitParsedTerminal(this);
+	}
+
+	@Override
+	public CharSequence getText(CharSequence input) {
+		CharSequence result = super.getText(input);
+		if (getGrammarElement() instanceof Keyword)
+			return result.toString();
+		return result;
 	}
 
 }

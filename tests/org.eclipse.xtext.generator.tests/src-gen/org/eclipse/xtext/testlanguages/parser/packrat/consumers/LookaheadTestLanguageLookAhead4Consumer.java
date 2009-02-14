@@ -56,31 +56,19 @@ public final class LookaheadTestLanguageLookAhead4Consumer extends NonTerminalCo
 	}
 
 	protected int consumeAssignment$2(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeKeyword(getRule().ele00KeywordC(), "x", false, false, getKeyword$3$Delimiter()); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeKeyword$3(entryPoint);
+	}
+
+	protected int consumeKeyword$3(int entryPoint) throws Exception {
+		return consumeKeyword(getRule().ele00KeywordC(), "x", false, false, getKeyword$3$Delimiter());
 	}
 
 	protected int consumeAssignment$4(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeKeyword(getRule().ele10KeywordD(), "x", false, false, getKeyword$5$Delimiter()); 
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeKeyword$5(entryPoint);
+	}
+
+	protected int consumeKeyword$5(int entryPoint) throws Exception {
+		return consumeKeyword(getRule().ele10KeywordD(), "x", false, false, getKeyword$5$Delimiter());
 	}
 
 	public LookAhead4Elements getRule() {

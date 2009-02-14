@@ -97,17 +97,11 @@ public final class ConcreteTestLanguageConcreteParserRuleConsumer extends NonTer
 	}
 
 	protected int consumeAssignment$5(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeTerminal(realConsumer, "magicNumber", false, false, getRule().ele0010LexerRuleCallREAL(), getRuleCall$6$Delimiter());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$6(entryPoint);
+	}
+
+	protected int consumeRuleCall$6(int entryPoint) throws Exception {
+		return consumeTerminal(realConsumer, "magicNumber", false, false, getRule().ele0010LexerRuleCallREAL(), getRuleCall$6$Delimiter());
 	}
 
 	protected int consumeKeyword$7(int entryPoint) throws Exception {
@@ -124,17 +118,11 @@ public final class ConcreteTestLanguageConcreteParserRuleConsumer extends NonTer
 	}
 
 	protected int doConsumeAssignment$8(int entryPoint) throws Exception {
-		int result = ConsumeResult.EMPTY_MATCH;
-		int tempResult;
-		announceNextLevel();
-		tempResult = consumeNonTerminal(inheritedParserRuleConsumer, "elements", true, false, false, getRule().ele10ParserRuleCallInheritedParserRule());
-		if (tempResult == ConsumeResult.SUCCESS) {
-			announceLevelFinished();
-			return tempResult;
-		}
-		result = tempResult >= result ? tempResult : result; 
-		announceLevelFinished();
-		return result;
+		return consumeRuleCall$9(entryPoint);
+	}
+
+	protected int consumeRuleCall$9(int entryPoint) throws Exception {
+		return consumeNonTerminal(inheritedParserRuleConsumer, "elements", true, false, false, getRule().ele10ParserRuleCallInheritedParserRule());
 	}
 
 	public ConcreteParserRuleElements getRule() {
