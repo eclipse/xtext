@@ -18,7 +18,7 @@ public class LengthOffsetLineTest extends AbstractGeneratorTest {
 
 	public void testOffset() throws Exception {
 		String model = "element foo;\nelement bar;";
-		CompositeNode node = (CompositeNode) getRootNode(model);
+		CompositeNode node = getRootNode(model);
 		EList<LeafNode> leafNodes = node.getLeafNodes();
 		Iterator<LeafNode> iter = leafNodes.iterator();
 		assertEquals(0,iter.next().getTotalOffset());
@@ -31,10 +31,10 @@ public class LengthOffsetLineTest extends AbstractGeneratorTest {
 		assertEquals(21,iter.next().getTotalOffset());
 		assertEquals(24,iter.next().getTotalOffset());
 	}
-	
+
 	public void testOffset2() throws Exception {
 		String model = "element foo;\nelement bar;";
-		CompositeNode node = (CompositeNode) getRootNode(model);
+		CompositeNode node = getRootNode(model);
 		Iterator<AbstractNode> iter = node.getChildren().iterator();
 		assertEquals(0,iter.next().getTotalOffset());
 		assertEquals(12,iter.next().getTotalOffset());
@@ -43,7 +43,7 @@ public class LengthOffsetLineTest extends AbstractGeneratorTest {
 
 	public void testLineForLeafnodes() throws Exception {
 		String model = "element foo;\nelement bar;";
-		CompositeNode node = (CompositeNode) getRootNode(model);
+		CompositeNode node = getRootNode(model);
 		EList<LeafNode> leafNodes = node.getLeafNodes();
 		Iterator<LeafNode> iter = leafNodes.iterator();
 		assertEquals(1,iter.next().getTotalLine());
@@ -57,10 +57,10 @@ public class LengthOffsetLineTest extends AbstractGeneratorTest {
 		assertEquals(2,iter.next().getTotalLine());
 		assertFalse(iter.hasNext());
 	}
-	
+
 	public void testLineForCompositeNodes() throws Exception {
 		String model = "element foo;\nelement bar;\nelement bar;\nelement bar;";
-		CompositeNode node = (CompositeNode) getRootNode(model);
+		CompositeNode node = getRootNode(model);
 		Iterator<AbstractNode> iter = node.getChildren().iterator();
 		assertEquals(1,iter.next().getTotalLine());
 		//Note: because preceding whitespace is added to the following node,
@@ -70,11 +70,11 @@ public class LengthOffsetLineTest extends AbstractGeneratorTest {
 		assertEquals(3,iter.next().getTotalLine());
 		assertFalse(iter.hasNext());
 	}
-	
-	
+
+
 	public void testErrors1() throws Exception {
 		String model = "element # ;";
-		CompositeNode node = (CompositeNode) getRootNode(model);
+		CompositeNode node = getRootNode(model);
 		assertEquals(model, node.serialize());
 		EList<LeafNode> nodes = node.getLeafNodes();
 		assertEquals(5,nodes.size());
@@ -84,7 +84,7 @@ public class LengthOffsetLineTest extends AbstractGeneratorTest {
 			offset += leafNode.getTotalLength();
 		}
 	}
-	
+
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();

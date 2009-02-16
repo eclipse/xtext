@@ -53,7 +53,7 @@ public class ComplexReconstrTest extends AbstractGeneratorTest {
 	}
 
 	private String parseAndSerialize(String model) throws Exception {
-		EObject result = (EObject) getModel(model);
+		EObject result = getModel(model);
 		if (logger.isTraceEnabled())
 			logger.trace(EmfFormater.objToStr(result));
 		return serialize(result);
@@ -63,17 +63,17 @@ public class ComplexReconstrTest extends AbstractGeneratorTest {
 		reconstructAndCompare("a");
 		reconstructAndCompare("a + b");
 	}
-	
+
 	public void testTrickyGSimple() throws Exception {
 		String model = "TG [[2]]";
 		assertEquals(model, parseAndSerialize(model));
 	}
-	
+
 	public void testTrickyGWithNull() throws Exception {
 		String model = "TG [0,[2,0],3,4,0]";
 		assertEquals(model, parseAndSerialize(model));
 	}
-	
+
 	public void testTrickyGComplex() throws Exception {
 		String model = "TG [2, [2,3,45,6],242,[23423,[34,34,[242343],234]]]";
 		assertEquals(model, parseAndSerialize(model));

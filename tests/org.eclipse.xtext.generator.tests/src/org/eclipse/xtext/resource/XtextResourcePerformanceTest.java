@@ -18,6 +18,7 @@ public class XtextResourcePerformanceTest extends AbstractGeneratorTest {
 	private static final int NUM_ELEMENTS = 190;
 	private String model;
 
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
