@@ -16,7 +16,6 @@ import static org.easymock.EasyMock.verify;
 import java.io.InputStream;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.easymock.EasyMock;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -42,7 +41,6 @@ import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
-import org.eclipse.xtext.util.EmfFormater;
 import org.eclipse.xtext.xtext.XtextLinker;
 
 /**
@@ -51,7 +49,7 @@ import org.eclipse.xtext.xtext.XtextLinker;
  * @see http://wiki.eclipse.org/Xtext/Documentation#Meta-Model_Inference
  */
 public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
-	private static final Logger logger = Logger.getLogger(Xtext2EcoreTransformerTest.class);
+
 	private ErrorAcceptor errorAcceptorMock;
 
 	public static class MyErrorAcceptor implements ErrorAcceptor {
@@ -76,6 +74,12 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 		super.setUp();
 		errorAcceptorMock = createMock(ErrorAcceptor.class);
 		with(XtextStandaloneSetup.class);
+	}
+
+	@Override
+	protected void tearDown() throws Exception {
+		errorAcceptorMock = null;
+		super.tearDown();
 	}
 
 	private EPackage getEPackageFromGrammar(String xtextGrammar) throws Exception {
@@ -105,11 +109,11 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 		resource.setLinker(linker);
 		resource.load(in, null);
 
-		for(Diagnostic d: resource.getErrors())
-			System.out.println("Resource Error: "+d);
-
-		for(Diagnostic d: resource.getWarnings())
-			System.out.println("Resource Warning: "+d);
+//		for(Diagnostic d: resource.getErrors())
+//			System.out.println("Resource Error: "+d);
+//
+//		for(Diagnostic d: resource.getWarnings())
+//			System.out.println("Resource Warning: "+d);
 
 		return resource;
 	}
@@ -207,6 +211,68 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 		assertEquals(1, ruleB.getESuperTypes().size());
 		EClass superClass = ruleB.getESuperTypes().get(0);
 		assertEquals(ruleA, superClass);
+	}
+
+	public void testDiamondHierarchy() throws Exception {
+		final String grammar = "language test generate test 'http://test' " +
+				"Model: name=ID value=SubNamed1 otherValue=SubNamed2 thirdValue=SubNamed3;" +
+				"Named: SubNamed1 | SubNamed2 | SubNamed3;" +
+				"SubNamed1: ConcreteNamed1 | ConcreteNamed2;" +
+				"SubNamed2: ConcreteNamed2 | ConcreteNamed3;" +
+				"SubNamed3: ConcreteNamed1 | ConcreteNamed3;" +
+				"ConcreteNamed1: name=ID bar=ID foo=ID a=ID;" +
+				"ConcreteNamed2: name=ID bar=ID zonk=ID b=ID;" +
+				"ConcreteNamed3: name=ID foo=ID zonk=ID c=ID;";
+		EPackage ePackage = getEPackageFromGrammar(grammar);
+		assertEquals(8, ePackage.getEClassifiers().size());
+		EClassifier classifier = ePackage.getEClassifier("Named");
+		assertNotNull(classifier);
+		EClass named = (EClass) classifier;
+		EStructuralFeature feature = named.getEStructuralFeature("name");
+		assertNotNull("name", feature);
+		assertEquals("named", 1, named.getEStructuralFeatures().size());
+
+		EClass subNamed1 = (EClass) ePackage.getEClassifier("SubNamed1");
+		assertNotNull("subNamed1", subNamed1);
+		assertEquals(1, subNamed1.getESuperTypes().size());
+		assertNotNull("bar", subNamed1.getEStructuralFeature("bar"));
+		assertEquals("subNamed1", 1, subNamed1.getEStructuralFeatures().size());
+
+		EClass subNamed2 = (EClass) ePackage.getEClassifier("SubNamed2");
+		assertNotNull("subNamed2", subNamed2);
+		assertEquals(1, subNamed2.getESuperTypes().size());
+		assertNotNull("bar", subNamed2.getEStructuralFeature("zonk"));
+		assertEquals("subNamed2", 1, subNamed2.getEStructuralFeatures().size());
+
+		EClass subNamed3 = (EClass) ePackage.getEClassifier("SubNamed3");
+		assertNotNull("subNamed3", subNamed3);
+		assertEquals(1, subNamed3.getESuperTypes().size());
+		assertNotNull("bar", subNamed3.getEStructuralFeature("foo"));
+		assertEquals("subNamed3", 1, subNamed3.getEStructuralFeatures().size());
+
+		EClass concreteNamed1 = (EClass) ePackage.getEClassifier("ConcreteNamed1");
+		assertNotNull("concreteNamed1", concreteNamed1);
+		assertEquals("concreteNamed1", 2, concreteNamed1.getESuperTypes().size());
+		assertTrue(concreteNamed1.getESuperTypes().contains(subNamed1));
+		assertTrue(concreteNamed1.getESuperTypes().contains(subNamed3));
+		assertNotNull("a", concreteNamed1.getEStructuralFeature("a"));
+		assertEquals("concreteNamed1", 1, concreteNamed1.getEStructuralFeatures().size());
+
+		EClass concreteNamed2 = (EClass) ePackage.getEClassifier("ConcreteNamed2");
+		assertNotNull("concreteNamed2", concreteNamed2);
+		assertEquals("concreteNamed2", 2, concreteNamed2.getESuperTypes().size());
+		assertTrue(concreteNamed2.getESuperTypes().contains(subNamed1));
+		assertTrue(concreteNamed2.getESuperTypes().contains(subNamed2));
+		assertNotNull("b", concreteNamed2.getEStructuralFeature("b"));
+		assertEquals("concreteNamed2", 1, concreteNamed2.getEStructuralFeatures().size());
+
+		EClass concreteNamed3 = (EClass) ePackage.getEClassifier("ConcreteNamed3");
+		assertNotNull("concreteNamed3", concreteNamed3);
+		assertEquals("concreteNamed3", 2, concreteNamed3.getESuperTypes().size());
+		assertTrue(concreteNamed3.getESuperTypes().contains(subNamed2));
+		assertTrue(concreteNamed3.getESuperTypes().contains(subNamed3));
+		assertNotNull("c", concreteNamed3.getEStructuralFeature("c"));
+		assertEquals("concreteNamed3", 1, concreteNamed3.getEStructuralFeatures().size());
 	}
 
 	public void testSingleFeatures() throws Exception {
@@ -758,7 +824,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 				"Number : value=INT;";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
 		EClass classifier = (EClass) ePackage.getEClassifier("Ex");
-		logger.debug(EmfFormater.objToStr(ePackage));
+//		logger.debug(EmfFormater.objToStr(ePackage));
 		assertEquals(0,classifier.getEStructuralFeatures().size());
 	}
 

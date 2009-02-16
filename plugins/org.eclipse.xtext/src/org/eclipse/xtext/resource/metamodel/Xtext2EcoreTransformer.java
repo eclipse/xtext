@@ -533,25 +533,23 @@ public class Xtext2EcoreTransformer {
 
 	private void addSuperType(ParserRule rule, TypeRef subTypeRef, EClassifierInfo superTypeInfo) throws TransformationException {
 		final EClassifier subType = subTypeRef.getType();
-		final EClassifierInfo subTypeInfo = subType == null ?
-				findOrCreateEClassifierInfo(subTypeRef, null) :
-					eClassifierInfos.getInfoOrNull(subType);
-				if (subTypeInfo == null)
-					throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable,
-							"Type '" + superTypeInfo.getEClassifier().getName() + "' is not available.", rule.getType());
-				if (superTypeInfo.isAssignableFrom(subTypeInfo))
-					return;
-				if (subTypeInfo.getEClassifier() instanceof EDataType)
-					throw new TransformationException(TransformationErrorCode.InvalidSupertype,
-							"Cannot add supertype '"
-							+ superTypeInfo.getEClassifier().getName() + "' to simple datatype '"
+		final EClassifierInfo subTypeInfo = subType == null
+		        ? findOrCreateEClassifierInfo(subTypeRef, null)
+				: eClassifierInfos.getInfoOrNull(subType);
+		if (subTypeInfo == null)
+			throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable, "Type '"
+					+ superTypeInfo.getEClassifier().getName() + "' is not available.", rule.getType());
+		if (superTypeInfo.isAssignableFrom(subTypeInfo))
+			return;
+		if (subTypeInfo.getEClassifier() instanceof EDataType)
+			throw new TransformationException(TransformationErrorCode.InvalidSupertype, "Cannot add supertype '"
+					+ superTypeInfo.getEClassifier().getName() + "' to simple datatype '"
+					+ subTypeInfo.getEClassifier().getName() + "'.", rule.getType());
+		if (!subTypeInfo.isGenerated())
+			throw new TransformationException(TransformationErrorCode.CannotCreateTypeInSealedMetamodel,
+					"Cannot add supertype '" + superTypeInfo.getEClassifier().getName() + "' to sealed type '"
 							+ subTypeInfo.getEClassifier().getName() + "'.", rule.getType());
-				if (!subTypeInfo.isGenerated())
-					throw new TransformationException(TransformationErrorCode.CannotCreateTypeInSealedMetamodel,
-							"Cannot add supertype '"
-							+ superTypeInfo.getEClassifier().getName() + "' to sealed type '"
-							+ subTypeInfo.getEClassifier().getName() + "'.", rule.getType());
-				subTypeInfo.addSupertype(superTypeInfo);
+		subTypeInfo.addSupertype(superTypeInfo);
 	}
 
 	private void collectEPackages() {
