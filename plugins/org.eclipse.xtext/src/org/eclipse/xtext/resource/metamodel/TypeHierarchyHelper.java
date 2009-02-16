@@ -1,10 +1,9 @@
 /*******************************************************************************
- * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2008, 2009 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
  *******************************************************************************/
 package org.eclipse.xtext.resource.metamodel;
 
@@ -73,15 +72,15 @@ public class TypeHierarchyHelper {
 		return result;
 	}
 
-	public void liftUpFeaturesRecursively(Collection<EClassInfo> infos) {
+	public void liftUpFeaturesRecursively(Collection<EClassInfo> infos, Map<EClass, Collection<EStructuralFeature>> featuresToRemove) {
 		traversedTypes.clear();
 		for (EClassInfo info : infos)
-			liftUpFeaturesInto(info);
+			liftUpFeaturesInto(info, featuresToRemove);
 	}
 
 	// TODO has multiple inheritance been taken into account?
 	@SuppressWarnings("unchecked")
-	public void liftUpFeaturesInto(EClassInfo superType) {
+	public void liftUpFeaturesInto(EClassInfo superType, Map<EClass, Collection<EStructuralFeature>> featuresToRemove) {
 		// do not look at types twice (might happen due to multiple inheritance)
 		if (!traversedTypes.add(superType))
 			return;
@@ -92,7 +91,7 @@ public class TypeHierarchyHelper {
 
 		// lift up features recursively, deepest first
 		for (EClassInfo subType : subTypes) {
-			liftUpFeaturesInto(subType);
+			liftUpFeaturesInto(subType, featuresToRemove);
 		}
 
 		// do not modify sealed types
@@ -108,15 +107,27 @@ public class TypeHierarchyHelper {
 			for (EClassInfo subClassInfo : subTypes)
 				// XXX: we may not remove features at this point, because a subtype may have many supertypes
 				//      and a feature may be lifted up into more than supertype
-				removeFeatures(subClassInfo, liftedFeatures);
+				removeFeatures(subClassInfo, liftedFeatures, featuresToRemove);
 		}
 	}
 
-	private void removeFeatures(EClassInfo info, Collection<EStructuralFeature> features) {
-		Collection<EStructuralFeature> featuresToBeModified = info.getEClass().getEStructuralFeatures();
-		for (Iterator<EStructuralFeature> iterator = featuresToBeModified.iterator(); iterator.hasNext();)
-			if (EcoreUtil2.containsSemanticallyEqualFeature(features, iterator.next()) == FindResult.FeatureExists)
-				iterator.remove();
+	private void removeFeatures(EClassInfo info, Collection<EStructuralFeature> features, Map<EClass, Collection<EStructuralFeature>> featuresToRemove) {
+		EClass clazz = info.getEClass();
+		Collection<EStructuralFeature> featuresToBeModified = clazz.getEStructuralFeatures();
+		Collection<EStructuralFeature> removeUs = new HashSet<EStructuralFeature>();
+		for (Iterator<EStructuralFeature> iterator = featuresToBeModified.iterator(); iterator.hasNext();) {
+			EStructuralFeature feature = iterator.next();
+			if (EcoreUtil2.containsSemanticallyEqualFeature(features, feature) == FindResult.FeatureExists)
+				removeUs.add(feature);
+		}
+		if (!removeUs.isEmpty() ) {
+			Collection<EStructuralFeature> prevRemoveUs = featuresToRemove.get(clazz);
+			if (prevRemoveUs == null) {
+				featuresToRemove.put(clazz, removeUs);
+			} else {
+				prevRemoveUs.addAll(removeUs);
+			}
+		}
 
 	}
 
@@ -163,7 +174,11 @@ public class TypeHierarchyHelper {
 
 	public void liftUpFeaturesRecursively() {
 		traversedTypes.clear();
-		liftUpFeaturesRecursively(rootInfos);
+		final Map<EClass, Collection<EStructuralFeature>> featuresToRemove = new HashMap<EClass, Collection<EStructuralFeature>>();
+		liftUpFeaturesRecursively(rootInfos, featuresToRemove);
+		for(Map.Entry<EClass, Collection<EStructuralFeature>> entry: featuresToRemove.entrySet()) {
+			entry.getKey().getEStructuralFeatures().removeAll(entry.getValue());
+		}
 	}
 
 	public void removeDuplicateDerivedFeatures() {
