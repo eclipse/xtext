@@ -23,24 +23,25 @@ import junit.framework.TestCase;
 public class FilteringIteratorTest extends TestCase implements Filter<String> {
 
 	private String matchMe;
-	
+
 	private List<String> list;
-	
+
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		matchMe = "matchMe";
 		list = new ArrayList<String>();
 	}
-	
+
 	public boolean matches(String param) {
 		return param.equals(matchMe);
 	}
-	
+
 	public void testEmptyList() {
 		Iterator<String> iter = new FilteringIterator<String>(list, this);
 		assertFalse(iter.hasNext());
 	}
-	
+
 	public void testConcurrentModificationException() {
 		Iterator<String> iter = new FilteringIterator<String>(list, this);
 		list.add("null");
@@ -50,7 +51,7 @@ public class FilteringIteratorTest extends TestCase implements Filter<String> {
 		} catch (ConcurrentModificationException ex) {
 		}
 	}
-	
+
 	public void testRemove() {
 		list.add(matchMe);
 		Iterator<String> iter = new FilteringIterator<String>(list, this);
@@ -61,7 +62,7 @@ public class FilteringIteratorTest extends TestCase implements Filter<String> {
 		} catch (UnsupportedOperationException ex) {
 		}
 	}
-	
+
 	public void testHasNext() {
 		list.add("null");
 		list.add(matchMe);
@@ -72,7 +73,7 @@ public class FilteringIteratorTest extends TestCase implements Filter<String> {
 		assertEquals(matchMe, iter.next());
 		assertFalse(iter.hasNext());
 	}
-	
+
 	public void testNext() {
 		list.add("null");
 		list.add(matchMe);
@@ -85,7 +86,7 @@ public class FilteringIteratorTest extends TestCase implements Filter<String> {
 		assertEquals(matchMe, iter.next());
 		assertFalse(iter.hasNext());
 	}
-	
+
 	public void testNextCallsHasNext() {
 		list.add("null");
 		list.add(matchMe);

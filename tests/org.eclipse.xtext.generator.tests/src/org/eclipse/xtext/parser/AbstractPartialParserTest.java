@@ -9,14 +9,12 @@
 package org.eclipse.xtext.parser;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.parser.antlr.IAntlrParser;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.util.EmfStructureComparator;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
- *
  */
 public abstract class AbstractPartialParserTest extends AbstractGeneratorTest {
 

@@ -24,17 +24,18 @@ import org.eclipse.emf.ecore.EcorePackage;
  *
  */
 public class AbstractDeclarativeValidatorTest extends TestCase {
-	
+
 	public void testSimpleDispatch() throws Exception {
-		
+
 		AbstractDeclarativeValidator test = new TestValidator();
 		TestChain chain = chain();
 		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, null);
 		assertMatch(chain, 1, 3);
 	}
-	
+
 	public void testDeeperHierarchyWithOverwrittenJavaMethods() throws Exception {
 		AbstractDeclarativeValidator test = new TestValidator() {
+			@Override
 			@Check
 			public void foo(Object x) {
 				error("fooObject",5);
@@ -44,9 +45,10 @@ public class AbstractDeclarativeValidatorTest extends TestCase {
 		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, null);
 		assertMatch(chain, 1, 5);
 	}
-	
+
 	public void testSkipExpensive() throws Exception {
 		AbstractDeclarativeValidator test = new TestValidator() {
+			@SuppressWarnings("unused")
 			@Check(CheckType.EXPENSIVE)
 			public void bar(Object x) {
 				error("fooObject",27);
@@ -55,11 +57,11 @@ public class AbstractDeclarativeValidatorTest extends TestCase {
 		TestChain chain = chain();
 		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, Collections.singletonMap((Object)CheckMode.KEY, (Object)CheckMode.FAST));
 		assertMatch(chain, 1, 3);
-		
+
 		chain = chain();
 		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, Collections.singletonMap((Object)CheckMode.KEY, (Object)CheckMode.ALL));
 		assertMatch(chain, 1, 3, 27);
-		
+
 		chain = chain();
 		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, null);
 		assertMatch(chain, 1, 3, 27);
@@ -75,7 +77,7 @@ public class AbstractDeclarativeValidatorTest extends TestCase {
 	private TestChain chain() {
 		return new TestChain();
 	}
-	
+
 	@SuppressWarnings("unused")
 	private class TestValidator extends AbstractDeclarativeValidator {
 		@Check

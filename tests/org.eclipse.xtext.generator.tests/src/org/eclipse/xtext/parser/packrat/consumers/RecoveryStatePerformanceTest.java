@@ -19,21 +19,22 @@ import junit.framework.TestCase;
 public class RecoveryStatePerformanceTest extends TestCase {
 
 	private static int ITEMS = 75;
-	
+
 	private static int LOOPS = 10000;
 
 	private static int COPY_LOOPS = LOOPS * 5;
-	
+
 	private static int STEPS = 5;
-	
+
 	private ArrayList<Integer> stack;
 	private RecoveryState recoveryState;
-	
+
+	@Override
 	protected void setUp() {
 		recoveryState = new RecoveryState();
 		stack = new ArrayList<Integer>();
 	}
-	
+
 	public void testStack() {
 		for (int l = 0; l < LOOPS; l++) {
 			for (int i = 0; i < ITEMS; i++) {
@@ -50,7 +51,7 @@ public class RecoveryStatePerformanceTest extends TestCase {
 			}
 		}
 	}
-	
+
 	public void testCopyStack() {
 		for (int i = 0; i < ITEMS; i++) {
 			stack.add(-1);
@@ -65,7 +66,7 @@ public class RecoveryStatePerformanceTest extends TestCase {
 			}
 		}
 	}
-	
+
 	public void testRecoveryState() {
 		for (int l = 0; l < LOOPS; l++) {
 			for (int i = 0; i < ITEMS; i++) {
@@ -82,7 +83,7 @@ public class RecoveryStatePerformanceTest extends TestCase {
 			}
 		}
 	}
-	
+
 	public void testCopyRecoveryState() {
 		for (int i = 0; i < ITEMS; i++) {
 			recoveryState.announceNextLevel();
