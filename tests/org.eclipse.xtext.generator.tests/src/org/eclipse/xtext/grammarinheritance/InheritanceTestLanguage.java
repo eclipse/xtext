@@ -5,9 +5,11 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-language org.eclipse.xtext.generator.lowerCaseNamedTestLanguage
+package org.eclipse.xtext.grammarinheritance;
 
-generate lowerCaseNamedTestLanguage "http://www.eclipse.org/2009/tmf/xtext/lowerCaseNamedTestLanguage"
- 
-Model:
-  name=ID;
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
+public class InheritanceTestLanguage {
+
+}
