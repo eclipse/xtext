@@ -9,9 +9,8 @@
 package org.eclipse.xtext.resource.metamodel;
 
 import java.util.Collection;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
@@ -39,7 +38,7 @@ public class Xtext2ECoreInterpretationContext {
 
 	private final Function<AbstractElement, EClassifier> classifierCalculator;
 
-	private final Set<EClassifierInfo> currentTypes = new HashSet<EClassifierInfo>();
+	private final Collection<EClassifierInfo> currentTypes = new LinkedHashSet<EClassifierInfo>();
 
 	boolean isRuleCallAllowed = true;
 

@@ -13,6 +13,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -30,11 +31,11 @@ import org.eclipse.xtext.resource.metamodel.EClassifierInfo.EClassInfo;
  * @author Heiko Behrens - Initial contribution and API
  */
 public class TypeHierarchyHelper {
-	private EClassifierInfos infos;
-	private Map<EClassInfo, Set<EClassInfo>> subTypesMap = new HashMap<EClassInfo, Set<EClassInfo>>();
-	private Set<EClassInfo> rootInfos = new HashSet<EClassInfo>();
-	private Set<EClassInfo> traversedTypes = new HashSet<EClassInfo>();
-	private ErrorAcceptor errorAcceptor;
+	private final EClassifierInfos infos;
+	private final Map<EClassInfo, Set<EClassInfo>> subTypesMap = new HashMap<EClassInfo, Set<EClassInfo>>();
+	private final Set<EClassInfo> rootInfos = new LinkedHashSet<EClassInfo>();
+	private final Set<EClassInfo> traversedTypes = new HashSet<EClassInfo>();
+	private final ErrorAcceptor errorAcceptor;
 	private final Grammar grammar;
 
 	public TypeHierarchyHelper(Grammar grammar, EClassifierInfos infos, ErrorAcceptor errorAcceptor) {
@@ -78,12 +79,12 @@ public class TypeHierarchyHelper {
 			liftUpFeaturesInto(info);
 	}
 
+	// TODO has multiple inheritance been taken into account?
 	@SuppressWarnings("unchecked")
 	public void liftUpFeaturesInto(EClassInfo superType) {
 		// do not look at types twice (might happen due to multiple inheritance)
-		if (traversedTypes.contains(superType))
+		if (!traversedTypes.add(superType))
 			return;
-		traversedTypes.add(superType);
 
 		Collection<EClassInfo> subTypes = getSubTypesOf(superType);
 		if (subTypes.isEmpty())
@@ -105,6 +106,8 @@ public class TypeHierarchyHelper {
 			Collection<EStructuralFeature> commonFeatures = getCommonDirectFeatures(subTypes);
 			Collection<EStructuralFeature> liftedFeatures = joinFeaturesInto(commonFeatures, superType);
 			for (EClassInfo subClassInfo : subTypes)
+				// XXX: we may not remove features at this point, because a subtype may have many supertypes
+				//      and a feature may be lifted up into more than supertype
 				removeFeatures(subClassInfo, liftedFeatures);
 		}
 	}
@@ -119,7 +122,7 @@ public class TypeHierarchyHelper {
 
 	private Collection<EStructuralFeature> joinFeaturesInto(Collection<EStructuralFeature> commonFeatures,
 			EClassInfo info) {
-		Collection<EStructuralFeature> result = new HashSet<EStructuralFeature>();
+		Collection<EStructuralFeature> result = new LinkedHashSet<EStructuralFeature>();
 		for (EStructuralFeature feature : commonFeatures) {
 			switch (EcoreUtil2.containsSemanticallyEqualFeature(info.getEClass(), feature)) {
 				case FeatureDoesNotExist:
@@ -134,7 +137,7 @@ public class TypeHierarchyHelper {
 	}
 
 	private Collection<EStructuralFeature> getCommonDirectFeatures(Collection<EClassInfo> infos) {
-		Collection<EStructuralFeature> result = new HashSet<EStructuralFeature>();
+		Collection<EStructuralFeature> result = new LinkedHashSet<EStructuralFeature>();
 
 		Iterator<EClassInfo> iterator = infos.iterator();
 		if (iterator.hasNext()) {
@@ -149,7 +152,7 @@ public class TypeHierarchyHelper {
 	}
 
 	public Collection<EStructuralFeature> getCommonFeatures(EClassInfo info, Collection<EStructuralFeature> features) {
-		Collection<EStructuralFeature> result = new HashSet<EStructuralFeature>();
+		Collection<EStructuralFeature> result = new LinkedHashSet<EStructuralFeature>();
 
 		for (EStructuralFeature f : features)
 			if (EcoreUtil2.containsSemanticallyEqualFeature(info.getEClass(), f) == FindResult.FeatureExists)
@@ -185,7 +188,7 @@ public class TypeHierarchyHelper {
 	}
 
 	private boolean anySuperTypeContainsSemanticallyEqualFeature(EClass eClass, EStructuralFeature feature) {
-		Collection<EStructuralFeature> allSupertypesFeatures = new HashSet<EStructuralFeature>();
+		Collection<EStructuralFeature> allSupertypesFeatures = new LinkedHashSet<EStructuralFeature>();
 		for (EClass superType : eClass.getEAllSuperTypes())
 			allSupertypesFeatures.addAll(superType.getEAllStructuralFeatures());
 
