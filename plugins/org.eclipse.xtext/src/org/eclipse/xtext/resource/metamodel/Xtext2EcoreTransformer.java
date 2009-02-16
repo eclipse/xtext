@@ -134,8 +134,8 @@ public class Xtext2EcoreTransformer {
 	}
 
 	public void removeGeneratedPackages() {
-		if (superGrammar != null) {
-			final Xtext2EcoreTransformer transformer = new Xtext2EcoreTransformer(superGrammar);
+		if (grammar.getSuperGrammar() != null) {
+			final Xtext2EcoreTransformer transformer = new Xtext2EcoreTransformer(grammar.getSuperGrammar());
 			transformer.removeGeneratedPackages();
 		}
 
@@ -520,7 +520,7 @@ public class Xtext2EcoreTransformer {
 				if (parentRule.getType().getType() instanceof EDataType)
 					throw new TransformationException(TransformationErrorCode.InvalidSupertype,
 							"Cannot inherit from datatype rule and return another type.", rule.getType());
-				EClassifierInfo parentTypeInfo = eClassifierInfos.getInfo(parentRule.getType());
+				EClassifierInfo parentTypeInfo = eClassifierInfos.getInfoOrNull(parentRule.getType());
 				if (parentTypeInfo == null)
 					throw new TransformationException(TransformationErrorCode.InvalidSupertype,
 							"Cannot determine return type of overridden rule.", rule.getType());
@@ -611,12 +611,12 @@ public class Xtext2EcoreTransformer {
 		for (EClassifier eClassifier : referencedEPackage.getEClassifiers()) {
 			if (eClassifier instanceof EClass) {
 				EClass eClass = (EClass) eClassifier;
-				EClassifierInfo info = EClassifierInfo.createEClassInfo(eClass, false);
+				EClassifierInfo info = EClassifierInfo.createEClassInfo(eClass, metaModel instanceof GeneratedMetamodel);
 				eClassifierInfos.addInfo(metaModel, eClassifier.getName(), info);
 			}
 			else if (eClassifier instanceof EDataType) {
 				EDataType eDataType = (EDataType) eClassifier;
-				EClassifierInfo info = EClassifierInfo.createEDataTypeInfo(eDataType, false);
+				EClassifierInfo info = EClassifierInfo.createEDataTypeInfo(eDataType, metaModel instanceof GeneratedMetamodel);
 				eClassifierInfos.addInfo(metaModel, eClassifier.getName(), info);
 			}
 			// TODO: Enums
@@ -656,11 +656,7 @@ public class Xtext2EcoreTransformer {
 			// we assumend EString for lexer rules and datatype rules, so
 			// we have to do a look up in super grammar
 			if (typeRef.getType() == EcorePackage.Literals.ESTRING) {
-				EClassifierInfos parent = eClassifierInfos.getParent();
-				while(parent != null && info == null) {
-					info = parent.getInfo(typeRef);
-					parent = parent.getParent();
-				}
+				info = eClassifierInfos.getInfoOrNull(typeRef);
 				if (info != null)
 					return info;
 			}
@@ -727,6 +723,7 @@ public class Xtext2EcoreTransformer {
 		// instantiate EPackages for generated metamodel
 		EPackage generatedEPackage = generatedMetamodel.getEPackage();
 		generatedEPackages.put(alias, generatedEPackage);
+		collectClassInfosOf(generatedEPackage, generatedMetamodel);
 	}
 
 	private EPackage getGeneratedEPackage(AbstractMetamodelDeclaration metaModel) {

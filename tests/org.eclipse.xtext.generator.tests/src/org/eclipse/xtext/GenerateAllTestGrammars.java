@@ -20,7 +20,9 @@ import org.eclipse.xtext.crossrefs.LangATestLanguage;
 import org.eclipse.xtext.dummy.DummyTestLanguage;
 import org.eclipse.xtext.generator.LowerCaseNamedTestLanguage;
 import org.eclipse.xtext.grammarinheritance.AbstractTestLanguage;
+import org.eclipse.xtext.grammarinheritance.BaseInheritanceTestLanguage;
 import org.eclipse.xtext.grammarinheritance.ConcreteTestLanguage;
+import org.eclipse.xtext.grammarinheritance.InheritanceTestLanguage;
 import org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTestLanguage;
 import org.eclipse.xtext.metamodelreferencing.tests.MultiGenMMTestLanguage;
 import org.eclipse.xtext.parser.datatyperules.DatatypeRulesTestLanguage;
@@ -89,7 +91,9 @@ public class GenerateAllTestGrammars {
 		HiddenTerminalsTestLanguage.class,
 		EpatchTestLanguage.class,
 		KeywordsTestLanguage.class,
-		LowerCaseNamedTestLanguage.class
+		LowerCaseNamedTestLanguage.class,
+		BaseInheritanceTestLanguage.class,
+		InheritanceTestLanguage.class
 	};
 
 	public static void main(String... args) throws Exception {
