@@ -13,7 +13,6 @@
 <project reference="1.0,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf.mwe/doc/org.eclipse.emf.mwe.doc-feature,org.eclipse.emf.mwe.doc-feature"/>
 <project reference="1.0,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf.mwe/examples/org.eclipse.emf.mwe.examples,org.eclipse.emf.mwe.examples"/>
 <project reference="1.0,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf.mwe/examples/org.eclipse.emf.mwe.examples-feature,org.eclipse.emf.mwe.examples-feature"/>
-<project reference="1.0,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf.mwe/plugins/org.eclipse.emf.mwe.runtime,org.eclipse.emf.mwe.runtime"/>
 <project reference="1.0,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf.mwe/features/org.eclipse.emf.mwe.sdk-feature,org.eclipse.emf.mwe.sdk-feature"/>
 <project reference="1.0,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf.mwe/tests/org.eclipse.emf.mwe.tests,org.eclipse.emf.mwe.tests"/>
 <project reference="1.0,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf.mwe/tests/org.eclipse.emf.mwe.tests-feature,org.eclipse.emf.mwe.tests-feature"/>
