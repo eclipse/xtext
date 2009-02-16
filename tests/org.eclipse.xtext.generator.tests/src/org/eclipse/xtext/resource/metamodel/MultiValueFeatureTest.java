@@ -19,12 +19,13 @@ import org.eclipse.xtext.tests.AbstractGeneratorTest;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class MultiValueFeatureTest extends AbstractGeneratorTest {
-	
+
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		with(MultiValueFeatureTestLanguageStandaloneSetup.class);
 	}
-	
+
 	public void testMetamodel() {
 		EPackage generated = getMetamodelAccess().getGeneratedEPackages()[0];
 		assertEquals("MultiValueFeatureTestLanguage", generated.getName());
@@ -35,16 +36,16 @@ public class MultiValueFeatureTest extends AbstractGeneratorTest {
 		assertTrue(feature.isMany());
 		assertFalse(feature.isUnique());
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public void testModel() throws Exception {
 		String model = "idA idB idA";
 		EObject parsedModel = getModel(model);
 		List<String> values = (List<String>) parsedModel.eGet(parsedModel.eClass().getEStructuralFeature("featureA"));
 		assertEquals(3, values.size());
-		assertEquals("idA", values.get(0));		
-		assertEquals("idB", values.get(1));		
-		assertEquals("idA", values.get(2));		
+		assertEquals("idA", values.get(0));
+		assertEquals("idB", values.get(1));
+		assertEquals("idA", values.get(2));
 	}
 
 }

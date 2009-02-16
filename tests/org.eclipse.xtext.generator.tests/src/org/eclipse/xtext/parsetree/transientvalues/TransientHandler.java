@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package org.eclipse.xtext.parsetree.transientvalues;
 
@@ -14,8 +14,8 @@ import org.eclipse.xtext.parsetree.reconstr.impl.DefaultTransientValueService;
  */
 public class TransientHandler extends DefaultTransientValueService {
 
-	public boolean isTransient(EObject owner, EStructuralFeature feature,
-			int index) {
+	@Override
+	public boolean isTransient(EObject owner, EStructuralFeature feature, int index) {
 		// System.out.println("isTransient " + feature.getName()
 		// + ((index >= 0) ? "[" + index + "]" : ""));
 		final String n = feature.getName();
@@ -30,6 +30,7 @@ public class TransientHandler extends DefaultTransientValueService {
 		return super.isTransient(owner, feature, index);
 	}
 
+	@Override
 	public boolean isMixedList(EObject owner, EStructuralFeature feature) {
 		// System.out.println("isMixedList " + feature.getName());
 		if ("TestList".equals(owner.eClass().getName()))
