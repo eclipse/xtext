@@ -40,7 +40,7 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 	}
 
 	private String parseAndSerialize(String model) throws Exception {
-		EObject result = (EObject) getModel(model);
+		EObject result = getModel(model);
 		if (logger.isTraceEnabled()) {
 			logger.trace(EmfFormater.objToStr(result));
 			logger.trace(EmfFormater.objToStr(NodeUtil.getRootNode(result)));

@@ -20,25 +20,26 @@ public class SimpleCacheTest extends TestCase implements Function<String, String
 	private SimpleCache<String, String> cache;
 
 	private String expectedParam;
-	
+
 	private int callCount;
-	
+
+	@Override
 	protected void setUp() throws Exception {
 		this.cache = new SimpleCache<String, String>(this);
 		expectedParam = null;
 		callCount = 0;
 	}
-	
+
 	public String exec(String param) {
 		assertEquals(expectedParam, param);
 		callCount++;
 		return param + param;
 	}
-	
+
 	public void testInitial() {
 		assertEquals(0, cache.getSize());
 	}
-	
+
 	public void testGet() {
 		expectedParam = new String("param"); // is not interned
 		String cached = cache.get(expectedParam);
@@ -49,20 +50,20 @@ public class SimpleCacheTest extends TestCase implements Function<String, String
 		assertEquals(1, callCount);
 		assertEquals(1, cache.getSize());
 	}
-	
+
 	public void testDiscard() {
 		String first = new String("first"); // is not interned
 		expectedParam = first;
 		cache.get(expectedParam);
 		String second = new String("second"); // is not interned
-		expectedParam = second; 
+		expectedParam = second;
 		cache.get(expectedParam);
 		assertEquals(2, cache.getSize());
 		cache.discard(expectedParam);
 		assertEquals(1, cache.getSize());
 		assertFalse(cache.hasCachedValue(expectedParam));
 	}
-	
+
 	public void testClear() {
 		expectedParam = new String("param"); // is not interned
 		cache.get(expectedParam);

@@ -17,13 +17,14 @@ import junit.framework.TestCase;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public abstract class RecoveryStateTest extends TestCase {
-	
+
 	private RecoveryState recoveryState;
 
+	@Override
 	protected void setUp() {
 		recoveryState = createRecoveryState();
 	}
-	
+
 	protected abstract RecoveryState createRecoveryState();
 
 	public void testSimple_01() {
@@ -34,7 +35,7 @@ public abstract class RecoveryStateTest extends TestCase {
 		// no exception
 		recoveryState.assertLevelIsReset();
 	}
-	
+
 	public void testSimple_02() {
 		for (int i = 0; i < 100; i++) {
 			recoveryState.announceNextLevel();
@@ -49,7 +50,7 @@ public abstract class RecoveryStateTest extends TestCase {
 		// no exception
 		recoveryState.assertLevelIsReset();
 	}
-	
+
 	public void testAnnounceNextLevel() {
 		recoveryState.announceNextLevel();
 		assertEquals(-1, recoveryState.getCurrentValue());
@@ -64,7 +65,7 @@ public abstract class RecoveryStateTest extends TestCase {
 		recoveryState.announceNextStep();
 		assertEquals(1, recoveryState.getCurrentValue());
 	}
-	
+
 	public void testAnnounceNextPath() {
 		recoveryState.announceNextLevel();
 		recoveryState.announceNextPath();
@@ -80,7 +81,7 @@ public abstract class RecoveryStateTest extends TestCase {
 		recoveryState.announceLevelFinished();
 		assertEquals(5, recoveryState.getCurrentValue());
 	}
-	
+
 	public void testOrder() {
 		for (int i = 0; i < 100; i++) {
 			recoveryState.announceNextLevel();
@@ -95,7 +96,7 @@ public abstract class RecoveryStateTest extends TestCase {
 		}
 		assertEquals(100, i);
 	}
-	
+
 	public void testCopyAndOrder() {
 		for (int i = 0; i < 100; i++) {
 			recoveryState.announceNextLevel();
@@ -111,12 +112,12 @@ public abstract class RecoveryStateTest extends TestCase {
 		}
 		assertEquals(100, i);
 	}
-	
+
 	public void testCopyEmpty() {
 		RecoveryState copy = recoveryState.copy();
 		assertEquals(0, copy.size());
 	}
-	
+
 	public void testException_01() {
 		try {
 			recoveryState.announceNextPath();
@@ -125,7 +126,7 @@ public abstract class RecoveryStateTest extends TestCase {
 			// nothing to do
 		}
 	}
-	
+
 	public void testException_02() {
 		try {
 			recoveryState.announceNextStep();
@@ -134,21 +135,21 @@ public abstract class RecoveryStateTest extends TestCase {
 			// nothing to do
 		}
 	}
-	
+
 	public static class Simple extends RecoveryStateTest {
 		@Override
 		protected RecoveryState createRecoveryState() {
 			return new RecoveryState();
 		}
 	}
-	
+
 	public static class CopyEmpty extends RecoveryStateTest {
 		@Override
 		protected RecoveryState createRecoveryState() {
 			return new RecoveryState().copy();
 		}
 	}
-	
+
 	public static class CopyFilled extends RecoveryStateTest {
 		@Override
 		protected RecoveryState createRecoveryState() {
@@ -162,7 +163,7 @@ public abstract class RecoveryStateTest extends TestCase {
 			return result.copy();
 		}
 	}
-	
+
 	public static class CopyFilledWithOne extends RecoveryStateTest {
 		@Override
 		protected RecoveryState createRecoveryState() {

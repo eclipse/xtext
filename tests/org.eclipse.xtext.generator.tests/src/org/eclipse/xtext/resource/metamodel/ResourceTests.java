@@ -16,11 +16,12 @@ import org.eclipse.xtext.tests.AbstractGeneratorTest;
  */
 public class ResourceTests extends AbstractGeneratorTest {
 
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		with(LangATestLanguageStandaloneSetup.class);
 	}
-	
+
 	public void testFragmentsWorkInBothDirections() throws Exception {
 		EObject model = getModel("type A extends B type B extends A");
 		EObject typeA1 = (EObject) invokeWithXtend("types.first()", model);
