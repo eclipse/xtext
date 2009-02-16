@@ -82,7 +82,7 @@ public class ReferenceGrammarTestLanguageParserConfiguration extends AbstractPar
 	
 	public void configureConsumers() {
 		if (grammarAccess == null)
-			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+			throw new NullPointerException("grammarAccess may not be null, if you call configureConsumers");
 		getSpielplatzConsumer().setRule(grammarAccess.prSpielplatz());
 		getPersonConsumer().setRule(grammarAccess.prPerson());
 		getKindConsumer().setRule(grammarAccess.prKind());
@@ -117,6 +117,7 @@ public class ReferenceGrammarTestLanguageParserConfiguration extends AbstractPar
 
 		getSpielzeugConsumer().setFarbeConsumer(getFarbeConsumer());
 		getSpielzeugConsumer().setIdConsumer(getIdConsumer());
+
 
 		getFamilieConsumer().setIdConsumer(getIdConsumer());
 		getFamilieConsumer().setStringConsumer(getStringConsumer());
@@ -217,7 +218,6 @@ public class ReferenceGrammarTestLanguageParserConfiguration extends AbstractPar
     public XtextBuiltinANY_OTHERConsumer getAnyOtherConsumer() {
     	return getXtextBuiltinConfiguration().getAnyOtherConsumer();
     }
-
 
 	@Override
 	public ITerminalConsumer[] getInitialHiddenTerminals() {

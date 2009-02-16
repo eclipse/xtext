@@ -175,7 +175,7 @@ public class EpatchTestLanguageParserConfiguration extends AbstractParserConfigu
 	
 	public void configureConsumers() {
 		if (grammarAccess == null)
-			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+			throw new NullPointerException("grammarAccess may not be null, if you call configureConsumers");
 		getEPatchConsumer().setRule(grammarAccess.prEPatch());
 		getImportConsumer().setRule(grammarAccess.prImport());
 		getModelImportConsumer().setRule(grammarAccess.prModelImport());
@@ -561,7 +561,6 @@ public class EpatchTestLanguageParserConfiguration extends AbstractParserConfigu
     public XtextBuiltinANY_OTHERConsumer getAnyOtherConsumer() {
     	return getXtextBuiltinConfiguration().getAnyOtherConsumer();
     }
-
 
 	@Override
 	public ITerminalConsumer[] getInitialHiddenTerminals() {

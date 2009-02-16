@@ -167,7 +167,7 @@ public class EcoreDslParserConfiguration extends AbstractParserConfiguration {
 	
 	public void configureConsumers() {
 		if (grammarAccess == null)
-			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+			throw new NullPointerException("grammarAccess may not be null, if you call configureConsumers");
 		getEcoreDslConsumer().setRule(grammarAccess.prEcoreDsl());
 		getImportStatementDeclConsumer().setRule(grammarAccess.prImportStatementDecl());
 		getEPackageDeclConsumer().setRule(grammarAccess.prEPackageDecl());
@@ -286,6 +286,7 @@ public class EcoreDslParserConfiguration extends AbstractParserConfiguration {
 
 		getMapEntryConsumer().setIdConsumer(getIdConsumer());
 		getMapEntryConsumer().setStringConsumer(getStringConsumer());
+
 
 		getQidConsumer().setIdConsumer(getIdConsumer());
 
@@ -553,7 +554,6 @@ public class EcoreDslParserConfiguration extends AbstractParserConfiguration {
     public XtextBuiltinANY_OTHERConsumer getAnyOtherConsumer() {
     	return getXtextBuiltinConfiguration().getAnyOtherConsumer();
     }
-
 
 	@Override
 	public ITerminalConsumer[] getInitialHiddenTerminals() {

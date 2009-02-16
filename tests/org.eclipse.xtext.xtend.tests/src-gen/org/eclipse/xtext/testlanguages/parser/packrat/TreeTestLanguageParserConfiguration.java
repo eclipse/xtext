@@ -57,7 +57,7 @@ public class TreeTestLanguageParserConfiguration extends AbstractParserConfigura
 	
 	public void configureConsumers() {
 		if (grammarAccess == null)
-			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+			throw new NullPointerException("grammarAccess may not be null, if you call configureConsumers");
 		getModelConsumer().setRule(grammarAccess.prModel());
 		getNodeConsumer().setRule(grammarAccess.prNode());
 		getIdConsumer().setRule(grammarAccess.lrID());
@@ -123,7 +123,6 @@ public class TreeTestLanguageParserConfiguration extends AbstractParserConfigura
     public XtextBuiltinANY_OTHERConsumer getAnyOtherConsumer() {
     	return getXtextBuiltinConfiguration().getAnyOtherConsumer();
     }
-
 
 	@Override
 	public ITerminalConsumer[] getInitialHiddenTerminals() {

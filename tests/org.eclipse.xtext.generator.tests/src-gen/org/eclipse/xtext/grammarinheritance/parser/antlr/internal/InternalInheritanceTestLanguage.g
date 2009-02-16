@@ -1,0 +1,213 @@
+/*
+Generated with Xtext
+*/
+grammar InternalInheritanceTestLanguage;
+
+options {
+	superClass=AbstractInternalAntlrParser;
+}
+
+@lexer::header {
+package org.eclipse.xtext.grammarinheritance.parser.antlr.internal;
+
+// Hack: Use our own Lexer superclass by means of import. 
+// Currently there is no other way to specify the superclass for the lexer.
+import org.eclipse.xtext.parser.antlr.Lexer;
+}
+
+@parser::header {
+package org.eclipse.xtext.grammarinheritance.parser.antlr.internal; 
+
+import java.io.InputStream;
+import org.eclipse.xtext.*;
+import org.eclipse.xtext.parser.*;
+import org.eclipse.xtext.parser.impl.*;
+import org.eclipse.xtext.parsetree.*;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
+import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
+import org.eclipse.xtext.conversion.ValueConverterException;
+import org.eclipse.xtext.grammarinheritance.services.InheritanceTestLanguageGrammarAccess;
+
+}
+
+@parser::members {
+ 
+ 	private InheritanceTestLanguageGrammarAccess grammarAccess;
+ 	
+    public InternalInheritanceTestLanguageParser(TokenStream input, IAstFactory factory, InheritanceTestLanguageGrammarAccess grammarAccess) {
+        super(input, factory, grammarAccess.getGrammar());
+        this.grammarAccess = grammarAccess;
+    }
+    
+    @Override
+    protected InputStream getTokenFile() {
+    	ClassLoader classLoader = InternalInheritanceTestLanguageParser.class.getClassLoader();
+    	return classLoader.getResourceAsStream("org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalInheritanceTestLanguage.tokens");
+    }
+    
+    @Override
+    protected String getFirstRuleName() {
+    	return "Model";	
+   	} 
+}
+
+@rulecatch { 
+    catch (RecognitionException re) { 
+        recover(input,re); 
+        appendSkippedTokens();
+    } 
+}
+
+
+
+
+
+// Entry rule entryRuleModel
+entryRuleModel returns [EObject current=null] :
+	{ currentNode = createCompositeNode(grammarAccess.prModel().getRule(), currentNode); }
+	 iv_ruleModel=ruleModel 
+	 { $current=$iv_ruleModel.current; } 
+	 EOF 
+;
+
+// Rule Model
+ruleModel returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+(((('model' 
+    {
+        createLeafNode(grammarAccess.prModel().ele0000KeywordModel(), null); 
+    }
+(	
+	
+	    lv_name_1=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prModel().ele00010LexerRuleCallID(), "name"); 
+	}
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create("Model");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        try {
+	       		set($current, "name", lv_name_1, "ID", lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+	
+))'{' 
+    {
+        createLeafNode(grammarAccess.prModel().ele001KeywordLeftCurlyBracket(), null); 
+    }
+)(	
+	
+	    
+	    { 
+	        currentNode=createCompositeNode(grammarAccess.prModel().ele010ParserRuleCallElement(), currentNode); 
+	    }
+	    lv_elements_3=ruleElement 
+	    {
+	        if ($current==null) {
+	            $current = factory.create("Model");
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        
+	        try {
+	       		add($current, "elements", lv_elements_3, "Element", currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+	
+)*)'}' 
+    {
+        createLeafNode(grammarAccess.prModel().ele1KeywordRightCurlyBracket(), null); 
+    }
+);
+
+
+
+
+
+
+
+// Entry rule entryRuleElement
+entryRuleElement returns [EObject current=null] :
+	{ currentNode = createCompositeNode(grammarAccess.prElement().getRule(), currentNode); }
+	 iv_ruleElement=ruleElement 
+	 { $current=$iv_ruleElement.current; } 
+	 EOF 
+;
+
+// Rule Element
+ruleElement returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+('element' 
+    {
+        createLeafNode(grammarAccess.prElement().ele0KeywordElement(), null); 
+    }
+(	
+	
+	    lv_name_1=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prElement().ele10LexerRuleCallID(), "name"); 
+	}
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create("Element");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        try {
+	       		set($current, "name", lv_name_1, "ID", lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+	
+));
+
+
+
+
+
+
+
+
+
+
+
+RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+
+RULE_INT : ('0'..'9')+;
+
+RULE_STRING : 
+			  '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' | 
+              '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\''
+              ;
+
+RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/';
+
+RULE_SL_COMMENT : '//' ~('\n'|'\r')* ('\r'? '\n')?;
+
+RULE_WS : (' '|'\t'|'\r'|'\n')+;
+
+RULE_ANY_OTHER : .;
+
+

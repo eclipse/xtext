@@ -77,7 +77,7 @@ public class Bug250313ParserConfiguration extends AbstractParserConfiguration {
 	
 	public void configureConsumers() {
 		if (grammarAccess == null)
-			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+			throw new NullPointerException("grammarAccess may not be null, if you call configureConsumers");
 		getModelConsumer().setRule(grammarAccess.prModel());
 		getDatatypeConsumer().setRule(grammarAccess.prDatatype());
 		getNestedDatatypeConsumer().setRule(grammarAccess.prNestedDatatype());
@@ -196,7 +196,6 @@ public class Bug250313ParserConfiguration extends AbstractParserConfiguration {
     public XtextBuiltinANY_OTHERConsumer getAnyOtherConsumer() {
     	return getXtextBuiltinConfiguration().getAnyOtherConsumer();
     }
-
 
 	@Override
 	public ITerminalConsumer[] getInitialHiddenTerminals() {

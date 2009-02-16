@@ -67,7 +67,7 @@ public class TransientValuesTestParserConfiguration extends AbstractParserConfig
 	
 	public void configureConsumers() {
 		if (grammarAccess == null)
-			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+			throw new NullPointerException("grammarAccess may not be null, if you call configureConsumers");
 		getRootConsumer().setRule(grammarAccess.prRoot());
 		getTestRequiredConsumer().setRule(grammarAccess.prTestRequired());
 		getTestOptionalConsumer().setRule(grammarAccess.prTestOptional());
@@ -151,7 +151,6 @@ public class TransientValuesTestParserConfiguration extends AbstractParserConfig
     public XtextBuiltinANY_OTHERConsumer getAnyOtherConsumer() {
     	return getXtextBuiltinConfiguration().getAnyOtherConsumer();
     }
-
 
 	@Override
 	public ITerminalConsumer[] getInitialHiddenTerminals() {

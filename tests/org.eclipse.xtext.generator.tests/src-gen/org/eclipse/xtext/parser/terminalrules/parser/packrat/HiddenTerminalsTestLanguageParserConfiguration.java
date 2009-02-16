@@ -95,7 +95,7 @@ public class HiddenTerminalsTestLanguageParserConfiguration extends AbstractPars
 	
 	public void configureConsumers() {
 		if (grammarAccess == null)
-			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+			throw new NullPointerException("grammarAccess may not be null, if you call configureConsumers");
 		getModelConsumer().setRule(grammarAccess.prModel());
 		getWithoutHiddensConsumer().setRule(grammarAccess.prWithoutHiddens());
 		getWithHiddensConsumer().setRule(grammarAccess.prWithHiddens());
@@ -120,6 +120,7 @@ public class HiddenTerminalsTestLanguageParserConfiguration extends AbstractPars
 
 		getWithoutHiddensConsumer().setWsConsumer(getWsConsumer());
 
+
 		getOverridingHiddensConsumer().setOverridingHiddensCallConsumer(getOverridingHiddensCallConsumer());
 
 		getOverridingHiddensCallConsumer().setWsConsumer(getWsConsumer());
@@ -129,8 +130,14 @@ public class HiddenTerminalsTestLanguageParserConfiguration extends AbstractPars
 
 		getDatatypeHiddensConsumer().setDatatypeRuleConsumer(getDatatypeRuleConsumer());
 
+
 		getHidingHiddensConsumer().setInheritingHiddensCallConsumer(getInheritingHiddensCallConsumer());
 		getHidingHiddensConsumer().setWsConsumer(getWsConsumer());
+
+
+
+
+
 
 		getWithoutHiddensConsumer().setKeyword$5$Delimiter(HiddenTerminalsTestLanguageDelimiters.keyword$19$Delimiter);
 		getWithoutHiddensConsumer().setKeyword$8$Delimiter(HiddenTerminalsTestLanguageDelimiters.keyword$19$Delimiter);
@@ -217,6 +224,5 @@ public class HiddenTerminalsTestLanguageParserConfiguration extends AbstractPars
     public HiddenTerminalsTestLanguageANY_OTHERConsumer getAnyOtherConsumer() {
     	return anyOtherConsumer;
     }
-
 
 }

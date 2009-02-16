@@ -1,0 +1,56 @@
+/*
+Generated with Xtext
+*/
+package org.eclipse.xtext.grammarinheritance.parser.antlr;
+
+import org.antlr.runtime.ANTLRInputStream;
+import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
+import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.parser.ParseException;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+
+import com.google.inject.Inject;
+
+import org.eclipse.xtext.grammarinheritance.parser.antlr.internal.InternalInheritanceTestLanguageLexer;
+import org.eclipse.xtext.grammarinheritance.parser.antlr.internal.InternalInheritanceTestLanguageParser;
+
+import org.eclipse.xtext.grammarinheritance.services.InheritanceTestLanguageGrammarAccess;
+
+public class InheritanceTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
+	
+	@Inject 
+    protected ITokenDefProvider antlrTokenDefProvider;
+	
+	@Inject
+	private InheritanceTestLanguageGrammarAccess grammarAccess;
+	
+	@Override
+	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
+		InternalInheritanceTestLanguageLexer lexer = new InternalInheritanceTestLanguageLexer(in);
+		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
+		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
+		InternalInheritanceTestLanguageParser parser = new InternalInheritanceTestLanguageParser(
+				stream, getElementFactory(), grammarAccess);
+		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());
+		try {
+			if(ruleName != null)
+				return parser.parse(ruleName);
+			return parser.parse();
+		} catch (Exception re) {
+			throw new ParseException(re.getMessage(),re);
+		}
+	}
+	
+	@Override 
+	protected String getDefaultRuleName() {
+		return "Model";
+	}
+	
+	public InheritanceTestLanguageGrammarAccess getGrammarAccess() {
+		return this.grammarAccess;
+	}
+	
+	public void setGrammarAccess(InheritanceTestLanguageGrammarAccess grammarAccess) {
+		this.grammarAccess = grammarAccess;
+	}
+}

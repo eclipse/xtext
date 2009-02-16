@@ -52,7 +52,7 @@ public class KeywordsTestLanguageParserConfiguration extends AbstractParserConfi
 	
 	public void configureConsumers() {
 		if (grammarAccess == null)
-			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+			throw new NullPointerException("grammarAccess may not be null, if you call configureConsumers");
 		getModelConsumer().setRule(grammarAccess.prModel());
 		getIdConsumer().setRule(grammarAccess.lrID());
 		getIntConsumer().setRule(grammarAccess.lrINT());
@@ -61,6 +61,7 @@ public class KeywordsTestLanguageParserConfiguration extends AbstractParserConfi
 		getSlCommentConsumer().setRule(grammarAccess.lrSL_COMMENT());
 		getWsConsumer().setRule(grammarAccess.lrWS());
 		getAnyOtherConsumer().setRule(grammarAccess.lrANY_OTHER());
+
 
 
 		getModelConsumer().setKeyword$9$Delimiter(KeywordsTestLanguageDelimiters.keyword$11$Delimiter);
@@ -105,7 +106,6 @@ public class KeywordsTestLanguageParserConfiguration extends AbstractParserConfi
     public XtextBuiltinANY_OTHERConsumer getAnyOtherConsumer() {
     	return getXtextBuiltinConfiguration().getAnyOtherConsumer();
     }
-
 
 	@Override
 	public ITerminalConsumer[] getInitialHiddenTerminals() {

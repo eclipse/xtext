@@ -82,7 +82,7 @@ public class LookaheadTestLanguageParserConfiguration extends AbstractParserConf
 	
 	public void configureConsumers() {
 		if (grammarAccess == null)
-			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+			throw new NullPointerException("grammarAccess may not be null, if you call configureConsumers");
 		getEntryConsumer().setRule(grammarAccess.prEntry());
 		getAltsConsumer().setRule(grammarAccess.prAlts());
 		getLookAhead0Consumer().setRule(grammarAccess.prLookAhead0());
@@ -105,9 +105,12 @@ public class LookaheadTestLanguageParserConfiguration extends AbstractParserConf
 		getAltsConsumer().setLookAhead1Consumer(getLookAhead1Consumer());
 		getAltsConsumer().setLookAhead3Consumer(getLookAhead3Consumer());
 
+
 		getLookAhead1Consumer().setLookAhead2Consumer(getLookAhead2Consumer());
 
+
 		getLookAhead3Consumer().setLookAhead4Consumer(getLookAhead4Consumer());
+
 
 		getLookAhead0Consumer().setKeyword$2$Delimiter(LookaheadTestLanguageDelimiters.keyword$15$Delimiter);
 		getLookAhead0Consumer().setKeyword$4$Delimiter(LookaheadTestLanguageDelimiters.keyword$15$Delimiter);
@@ -184,7 +187,6 @@ public class LookaheadTestLanguageParserConfiguration extends AbstractParserConf
     public XtextBuiltinANY_OTHERConsumer getAnyOtherConsumer() {
     	return getXtextBuiltinConfiguration().getAnyOtherConsumer();
     }
-
 
 	@Override
 	public ITerminalConsumer[] getInitialHiddenTerminals() {

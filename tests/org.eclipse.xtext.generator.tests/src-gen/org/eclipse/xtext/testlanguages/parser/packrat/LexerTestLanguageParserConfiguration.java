@@ -59,7 +59,7 @@ public class LexerTestLanguageParserConfiguration extends AbstractParserConfigur
 	
 	public void configureConsumers() {
 		if (grammarAccess == null)
-			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+			throw new NullPointerException("grammarAccess may not be null, if you call configureConsumers");
 		getModelConsumer().setRule(grammarAccess.prModel());
 		getElementConsumer().setRule(grammarAccess.prElement());
 		getStringConsumer().setRule(grammarAccess.lrSTRING());
@@ -120,7 +120,6 @@ public class LexerTestLanguageParserConfiguration extends AbstractParserConfigur
     public XtextBuiltinANY_OTHERConsumer getAnyOtherConsumer() {
     	return getXtextBuiltinConfiguration().getAnyOtherConsumer();
     }
-
 
 	@Override
 	public ITerminalConsumer[] getInitialHiddenTerminals() {

@@ -59,7 +59,7 @@ public class TerminalRulesTestLanguageParserConfiguration extends AbstractParser
 	
 	public void configureConsumers() {
 		if (grammarAccess == null)
-			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+			throw new NullPointerException("grammarAccess may not be null, if you call configureConsumers");
 		getModelConsumer().setRule(grammarAccess.prModel());
 		getIdConsumer().setRule(grammarAccess.prID());
 		getIntConsumer().setRule(grammarAccess.prINT());
@@ -77,6 +77,13 @@ public class TerminalRulesTestLanguageParserConfiguration extends AbstractParser
 		getModelConsumer().setSlCommentConsumer(getSlCommentConsumer());
 		getModelConsumer().setStringConsumer(getStringConsumer());
 		getModelConsumer().setWsConsumer(getWsConsumer());
+
+
+
+
+
+
+
 
 		getModelConsumer().setRuleCall$8$Delimiter(TerminalRulesTestLanguageDelimiters.ruleCall$11$Delimiter);
 		getModelConsumer().setRuleCall$10$Delimiter(TerminalRulesTestLanguageDelimiters.ruleCall$11$Delimiter);
@@ -118,6 +125,5 @@ public class TerminalRulesTestLanguageParserConfiguration extends AbstractParser
     public TerminalRulesTestLanguageANY_OTHERConsumer getAnyOtherConsumer() {
     	return anyOtherConsumer;
     }
-
 
 }
