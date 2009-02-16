@@ -4,7 +4,6 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
  *******************************************************************************/
 package org.eclipse.xtext.resource.metamodel;
 
@@ -18,6 +17,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -557,7 +557,7 @@ public class Xtext2EcoreTransformer {
 	private void collectEPackages() {
 		// TODO derive alias configuration from supergrammar
 		final List<AbstractMetamodelDeclaration> metamodelDeclarations = grammar.getMetamodelDeclarations();
-		final Map<String, GeneratedMetamodel> generateUs = new HashMap<String, GeneratedMetamodel>();
+		final Map<String, GeneratedMetamodel> generateUs = new LinkedHashMap<String, GeneratedMetamodel>();
 
 		for (AbstractMetamodelDeclaration metamodelDeclaration : metamodelDeclarations) {
 			try {

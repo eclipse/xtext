@@ -11,9 +11,9 @@ package org.eclipse.xtext.resource.metamodel;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -38,7 +38,7 @@ import org.eclipse.xtext.util.Tuples;
  */
 public class EClassifierInfos {
 
-	private final Map<Pair<String, String>, EClassifierInfo> infoMap = new HashMap<Pair<String, String>, EClassifierInfo>();
+	private final Map<Pair<String, String>, EClassifierInfo> infoMap = new LinkedHashMap<Pair<String, String>, EClassifierInfo>();
 
 	private EClassifierInfos parent;
 
