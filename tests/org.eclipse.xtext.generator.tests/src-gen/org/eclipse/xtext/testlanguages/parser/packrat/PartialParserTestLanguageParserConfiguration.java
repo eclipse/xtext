@@ -97,7 +97,7 @@ public class PartialParserTestLanguageParserConfiguration extends AbstractParser
 	
 	public void configureConsumers() {
 		if (grammarAccess == null)
-			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+			throw new NullPointerException("grammarAccess may not be null, if you call configureConsumers");
 		getContainerConsumer().setRule(grammarAccess.prContainer());
 		getNestedConsumer().setRule(grammarAccess.prNested());
 		getContentConsumer().setRule(grammarAccess.prContent());
@@ -247,7 +247,6 @@ public class PartialParserTestLanguageParserConfiguration extends AbstractParser
     public XtextBuiltinANY_OTHERConsumer getAnyOtherConsumer() {
     	return getXtextBuiltinConfiguration().getAnyOtherConsumer();
     }
-
 
 	@Override
 	public ITerminalConsumer[] getInitialHiddenTerminals() {

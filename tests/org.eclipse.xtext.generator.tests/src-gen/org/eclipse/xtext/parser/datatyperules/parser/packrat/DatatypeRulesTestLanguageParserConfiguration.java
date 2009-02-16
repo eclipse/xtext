@@ -82,7 +82,7 @@ public class DatatypeRulesTestLanguageParserConfiguration extends AbstractParser
 	
 	public void configureConsumers() {
 		if (grammarAccess == null)
-			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+			throw new NullPointerException("grammarAccess may not be null, if you call configureConsumers");
 		getCompositeModelConsumer().setRule(grammarAccess.prCompositeModel());
 		getModelConsumer().setRule(grammarAccess.prModel());
 		getModelIdConsumer().setRule(grammarAccess.prModelId());
@@ -113,6 +113,7 @@ public class DatatypeRulesTestLanguageParserConfiguration extends AbstractParser
 		getFractionConsumer().setIntConsumer(getIntConsumer());
 
 		getVectorConsumer().setIntConsumer(getIntConsumer());
+
 
 		getModelConsumer().setKeyword$8$Delimiter(DatatypeRulesTestLanguageDelimiters.keyword$15$Delimiter);
 		getModelConsumer().setKeyword$12$Delimiter(DatatypeRulesTestLanguageDelimiters.keyword$15$Delimiter);
@@ -194,7 +195,6 @@ public class DatatypeRulesTestLanguageParserConfiguration extends AbstractParser
     public XtextBuiltinANY_OTHERConsumer getAnyOtherConsumer() {
     	return getXtextBuiltinConfiguration().getAnyOtherConsumer();
     }
-
 
 	@Override
 	public ITerminalConsumer[] getInitialHiddenTerminals() {

@@ -52,7 +52,7 @@ public class MultiValueFeatureTestLanguageParserConfiguration extends AbstractPa
 	
 	public void configureConsumers() {
 		if (grammarAccess == null)
-			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+			throw new NullPointerException("grammarAccess may not be null, if you call configureConsumers");
 		getStartConsumer().setRule(grammarAccess.prStart());
 		getIdConsumer().setRule(grammarAccess.lrID());
 		getIntConsumer().setRule(grammarAccess.lrINT());
@@ -104,7 +104,6 @@ public class MultiValueFeatureTestLanguageParserConfiguration extends AbstractPa
     public XtextBuiltinANY_OTHERConsumer getAnyOtherConsumer() {
     	return getXtextBuiltinConfiguration().getAnyOtherConsumer();
     }
-
 
 	@Override
 	public ITerminalConsumer[] getInitialHiddenTerminals() {

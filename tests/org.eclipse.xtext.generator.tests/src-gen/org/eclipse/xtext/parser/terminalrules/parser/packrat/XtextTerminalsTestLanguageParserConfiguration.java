@@ -204,7 +204,7 @@ public class XtextTerminalsTestLanguageParserConfiguration extends AbstractParse
 	
 	public void configureConsumers() {
 		if (grammarAccess == null)
-			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+			throw new NullPointerException("grammarAccess may not be null, if you call configureConsumers");
 		getGrammarConsumer().setRule(grammarAccess.prGrammar());
 		getGrammarIdConsumer().setRule(grammarAccess.prGrammarID());
 		getAbstractRuleConsumer().setRule(grammarAccess.prAbstractRule());
@@ -316,6 +316,7 @@ public class XtextTerminalsTestLanguageParserConfiguration extends AbstractParse
 
 		getUpToTokenConsumer().setTerminalTokenElementConsumer(getTerminalTokenElementConsumer());
 
+
 		getCharacterRangeConsumer().setKeywordConsumer(getKeywordConsumer());
 
 		getCrossReferenceConsumer().setIdConsumer(getIdConsumer());
@@ -328,6 +329,13 @@ public class XtextTerminalsTestLanguageParserConfiguration extends AbstractParse
 		getKeywordConsumer().setStringConsumer(getStringConsumer());
 
 		getRuleCallConsumer().setIdConsumer(getIdConsumer());
+
+
+
+
+
+
+
 
 		getGrammarConsumer().setCrossReference$25$Delimiter(XtextTerminalsTestLanguageDelimiters.crossReference$28$Delimiter);
 		getGrammarConsumer().setCrossReference$30$Delimiter(XtextTerminalsTestLanguageDelimiters.crossReference$28$Delimiter);
@@ -559,7 +567,6 @@ public class XtextTerminalsTestLanguageParserConfiguration extends AbstractParse
     public XtextTerminalsTestLanguageANY_OTHERConsumer getAnyOtherConsumer() {
     	return anyOtherConsumer;
     }
-
 
 	@Override
 	public ITerminalConsumer[] getInitialHiddenTerminals() {

@@ -62,7 +62,7 @@ public class MetamodelRefTestLanguageParserConfiguration extends AbstractParserC
 	
 	public void configureConsumers() {
 		if (grammarAccess == null)
-			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+			throw new NullPointerException("grammarAccess may not be null, if you call configureConsumers");
 		getFooConsumer().setRule(grammarAccess.prFoo());
 		getNameRefConsumer().setRule(grammarAccess.prNameRef());
 		getMyRuleConsumer().setRule(grammarAccess.prMyRule());
@@ -131,7 +131,6 @@ public class MetamodelRefTestLanguageParserConfiguration extends AbstractParserC
     public XtextBuiltinANY_OTHERConsumer getAnyOtherConsumer() {
     	return getXtextBuiltinConfiguration().getAnyOtherConsumer();
     }
-
 
 	@Override
 	public ITerminalConsumer[] getInitialHiddenTerminals() {

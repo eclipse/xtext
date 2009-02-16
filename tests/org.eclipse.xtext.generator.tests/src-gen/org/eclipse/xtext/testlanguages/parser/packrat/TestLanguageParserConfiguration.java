@@ -72,7 +72,7 @@ public class TestLanguageParserConfiguration extends AbstractParserConfiguration
 	
 	public void configureConsumers() {
 		if (grammarAccess == null)
-			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+			throw new NullPointerException("grammarAccess may not be null, if you call configureConsumers");
 		getEntryRuleConsumer().setRule(grammarAccess.prEntryRule());
 		getAbstractRuleConsumer().setRule(grammarAccess.prAbstractRule());
 		getChoiceRuleConsumer().setRule(grammarAccess.prChoiceRule());
@@ -157,7 +157,6 @@ public class TestLanguageParserConfiguration extends AbstractParserConfiguration
     public XtextBuiltinANY_OTHERConsumer getAnyOtherConsumer() {
     	return getXtextBuiltinConfiguration().getAnyOtherConsumer();
     }
-
 
 	@Override
 	public ITerminalConsumer[] getInitialHiddenTerminals() {

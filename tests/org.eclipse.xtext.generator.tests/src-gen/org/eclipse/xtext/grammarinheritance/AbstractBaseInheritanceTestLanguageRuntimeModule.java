@@ -1,0 +1,59 @@
+/*
+Generated with Xtext
+*/
+package org.eclipse.xtext.grammarinheritance;
+
+import org.eclipse.xtext.Constants;
+import org.eclipse.xtext.service.DefaultRuntimeModule;
+
+import com.google.inject.Binder;
+import com.google.inject.name.Names;
+
+/**
+ * Generated from ServiceConfig.xpt! 
+ * Manual modifications go to BaseInheritanceTestLanguageRuntimeModule
+ */
+public abstract class AbstractBaseInheritanceTestLanguageRuntimeModule extends DefaultRuntimeModule {
+	
+	@Override
+	public void configure(Binder binder) {
+		super.configure(binder);
+		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance(
+			"org.eclipse.xtext.grammarinheritance.BaseInheritanceTestLanguage");
+	}
+	
+	public Class<? extends org.eclipse.xtext.IMetamodelAccess> bindIMetamodelAccess() {
+		return org.eclipse.xtext.grammarinheritance.services.BaseInheritanceTestLanguageMetamodelAccess.class;
+	}
+	public Class<? extends org.eclipse.xtext.IGrammarAccess> bindIGrammarAccess() {
+		return org.eclipse.xtext.grammarinheritance.services.BaseInheritanceTestLanguageGrammarAccess.class;
+	}
+	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
+		return org.eclipse.xtext.grammarinheritance.parsetree.reconstr.BaseInheritanceTestLanguageParseTreeConstructor.class;
+	}
+	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrParser> bindIAntlrParser() {
+		return org.eclipse.xtext.grammarinheritance.parser.antlr.BaseInheritanceTestLanguageParser.class;
+	}
+	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
+		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
+	}
+	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider> bindIAntlrTokenFileProvider() {
+		return org.eclipse.xtext.grammarinheritance.parser.antlr.BaseInheritanceTestLanguageAntlrTokenFileProvider.class;
+	}
+	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
+		return org.eclipse.xtext.grammarinheritance.parser.antlr.internal.InternalBaseInheritanceTestLanguageLexer.class;
+	}
+	public Class<? extends org.eclipse.xtext.parser.antlr.ITokenDefProvider> bindITokenDefProvider() {
+		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
+	}
+	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
+		return org.eclipse.xtext.grammarinheritance.parser.packrat.BaseInheritanceTestLanguagePackratParser.class;
+	}
+	public Class<? extends org.eclipse.xtext.parser.packrat.IParseResultFactory> bindIParseResultFactory() {
+		return org.eclipse.xtext.parser.packrat.ParseResultFactory.class;
+	}
+	public Class<? extends org.eclipse.xtext.parser.ISwitchingParser> bindISwitchingParser() {
+		return org.eclipse.xtext.parser.SwitchingParser.class;
+	}
+	
+}

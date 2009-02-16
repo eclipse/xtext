@@ -72,6 +72,13 @@ public class EClassifierInfos {
 		return getInfo(typeRef.getMetamodel(), typeRef.getType().getName());
 	}
 
+	public EClassifierInfo getInfoOrNull(TypeRef typeRef) {
+		EClassifierInfo result = getInfo(typeRef);
+		if (result != null)
+			return result;
+		return parent == null ? null : parent.getInfoOrNull(typeRef);
+	}
+
 	public EClassifierInfo getInfo(AbstractMetamodelDeclaration alias, String name) {
 		return getInfo(getKey(alias, name));
 	}
@@ -149,9 +156,9 @@ public class EClassifierInfos {
 	public List<EClassInfo> getSuperTypeInfos(EClassInfo subTypeInfo) throws UnexpectedClassInfoException {
 		List<EClassInfo> result = new ArrayList<EClassInfo>();
 		for (EClass superType : subTypeInfo.getEClass().getESuperTypes()) {
-			EClassifierInfo info = getInfo(superType);
-			if (info instanceof EClassInfo)
-				result.add((EClassInfo) this.getInfo(superType));
+			EClassifierInfo info = getInfoOrNull(superType);
+			if (info != null && info instanceof EClassInfo)
+				result.add((EClassInfo) info);
 			else
 				throw new UnexpectedClassInfoException(TransformationErrorCode.InvalidSupertype, subTypeInfo, info, null);
 		}

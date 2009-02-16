@@ -57,7 +57,7 @@ public class MultiGenMMTestLanguageParserConfiguration extends AbstractParserCon
 	
 	public void configureConsumers() {
 		if (grammarAccess == null)
-			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+			throw new NullPointerException("grammarAccess may not be null, if you call configureConsumers");
 		getFooConsumer().setRule(grammarAccess.prFoo());
 		getNameRefConsumer().setRule(grammarAccess.prNameRef());
 		getIdConsumer().setRule(grammarAccess.lrID());
@@ -118,7 +118,6 @@ public class MultiGenMMTestLanguageParserConfiguration extends AbstractParserCon
     public XtextBuiltinANY_OTHERConsumer getAnyOtherConsumer() {
     	return getXtextBuiltinConfiguration().getAnyOtherConsumer();
     }
-
 
 	@Override
 	public ITerminalConsumer[] getInitialHiddenTerminals() {

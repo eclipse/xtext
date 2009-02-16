@@ -72,7 +72,7 @@ public class ContentAssistTestLanguageParserConfiguration extends AbstractParser
 	
 	public void configureConsumers() {
 		if (grammarAccess == null)
-			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+			throw new NullPointerException("grammarAccess may not be null, if you call configureConsumers");
 		getStartConsumer().setRule(grammarAccess.prStart());
 		getAbstractRuleConsumer().setRule(grammarAccess.prAbstractRule());
 		getFirstAbstractRuleChildConsumer().setRule(grammarAccess.prFirstAbstractRuleChild());
@@ -165,7 +165,6 @@ public class ContentAssistTestLanguageParserConfiguration extends AbstractParser
     public XtextBuiltinANY_OTHERConsumer getAnyOtherConsumer() {
     	return getXtextBuiltinConfiguration().getAnyOtherConsumer();
     }
-
 
 	@Override
 	public ITerminalConsumer[] getInitialHiddenTerminals() {

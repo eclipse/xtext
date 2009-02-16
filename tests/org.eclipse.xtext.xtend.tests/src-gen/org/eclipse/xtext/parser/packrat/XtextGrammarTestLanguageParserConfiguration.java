@@ -197,7 +197,7 @@ public class XtextGrammarTestLanguageParserConfiguration extends AbstractParserC
 	
 	public void configureConsumers() {
 		if (grammarAccess == null)
-			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+			throw new NullPointerException("grammarAccess may not be null, if you call configureConsumers");
 		getGrammarConsumer().setRule(grammarAccess.prGrammar());
 		getGrammarIdConsumer().setRule(grammarAccess.prGrammarID());
 		getAbstractRuleConsumer().setRule(grammarAccess.prAbstractRule());
@@ -308,6 +308,7 @@ public class XtextGrammarTestLanguageParserConfiguration extends AbstractParserC
 		getNegatedTokenConsumer().setTerminalTokenElementConsumer(getTerminalTokenElementConsumer());
 
 		getUpToTokenConsumer().setTerminalTokenElementConsumer(getTerminalTokenElementConsumer());
+
 
 		getCharacterRangeConsumer().setKeywordConsumer(getKeywordConsumer());
 
@@ -557,7 +558,6 @@ public class XtextGrammarTestLanguageParserConfiguration extends AbstractParserC
     public XtextBuiltinANY_OTHERConsumer getAnyOtherConsumer() {
     	return getXtextBuiltinConfiguration().getAnyOtherConsumer();
     }
-
 
 	@Override
 	public ITerminalConsumer[] getInitialHiddenTerminals() {

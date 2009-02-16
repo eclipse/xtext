@@ -151,7 +151,7 @@ public class «languageName().toFirstUpper()»ParserConfiguration extends Abstract
 	
 	public void configureConsumers() {
 		if (grammarAccess == null)
-			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+			throw new NullPointerException("grammarAccess may not be null, if you call configureConsumers");
 «FOREACH grammar().allRules() AS rule-»
 		«rule.consumerGetterName()»().setRule(grammarAccess.«rule.gaRuleAccessor()»);
 «ENDFOREACH»
@@ -174,8 +174,8 @@ public class «languageName().toFirstUpper()»ParserConfiguration extends Abstract
 «ENDIF-»
 «ENDIF-»
 «ENDFOREACH-»
-
 «ENDIF-»
+
 «ENDLET-»
 «ENDFOREACH-»
 «EXPAND setDelimiters(grammar()) FOREACH grammar().allParserRules().select(e|!e.terminal)-»
@@ -214,7 +214,6 @@ public class «languageName().toFirstUpper()»ParserConfiguration extends Abstract
 
 «ENDFOREACH-»
 «ENDLET-»
-
 «LET grammar().getSuperGrammar() AS superGrammar-»
 «IF grammar().definesHiddenTokens || superGrammar != null-»
 	@Override

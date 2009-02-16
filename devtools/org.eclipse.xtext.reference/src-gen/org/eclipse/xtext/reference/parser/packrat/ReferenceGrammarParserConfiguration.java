@@ -87,7 +87,7 @@ public class ReferenceGrammarParserConfiguration extends AbstractParserConfigura
 	
 	public void configureConsumers() {
 		if (grammarAccess == null)
-			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+			throw new NullPointerException("grammarAccess may not be null, if you call configureConsumers");
 		getSpielplatzConsumer().setRule(grammarAccess.prSpielplatz());
 		getPersonConsumer().setRule(grammarAccess.prPerson());
 		getKindConsumer().setRule(grammarAccess.prKind());
@@ -127,6 +127,7 @@ public class ReferenceGrammarParserConfiguration extends AbstractParserConfigura
 
 		getFamilieConsumer().setIdConsumer(getIdConsumer());
 		getFamilieConsumer().setStringConsumer(getStringConsumer());
+
 
 		getCustomTypeParserRuleConsumer().setIdConsumer(getIdConsumer());
 
@@ -232,7 +233,6 @@ public class ReferenceGrammarParserConfiguration extends AbstractParserConfigura
     public XtextBuiltinANY_OTHERConsumer getAnyOtherConsumer() {
     	return getXtextBuiltinConfiguration().getAnyOtherConsumer();
     }
-
 
 	@Override
 	public ITerminalConsumer[] getInitialHiddenTerminals() {
