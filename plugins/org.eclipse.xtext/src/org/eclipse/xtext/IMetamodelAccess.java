@@ -12,26 +12,26 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.service.ILanguageService;
 
 /**
+ * TODO document me!
+ * XXX is this still necessary?
  * @author Jan Köhnlein - Initial contribution and API
- *
  */
 public interface IMetamodelAccess extends ILanguageService {
-	
+
 	/**
 	 * @return
 	 */
 	EPackage[] getGeneratedEPackages();
-	
+
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	EPackage[] getReferencedEPackages();
-	
+
 	/**
 	 * @return
 	 */
 	EPackage[] getAllEPackages();
-	
-	
+
 }
