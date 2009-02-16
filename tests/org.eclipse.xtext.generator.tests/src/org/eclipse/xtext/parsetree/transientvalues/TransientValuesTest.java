@@ -8,6 +8,7 @@ import org.eclipse.xtext.tests.AbstractGeneratorTest;
  */
 public class TransientValuesTest extends AbstractGeneratorTest {
 
+	@Override
 	protected void setUp() throws Exception {
 		with(TransientValuesTestStandaloneSetup.class);
 		super.setUp();

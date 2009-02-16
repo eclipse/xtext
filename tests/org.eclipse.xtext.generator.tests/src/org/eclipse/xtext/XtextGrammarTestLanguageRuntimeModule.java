@@ -3,8 +3,6 @@ Generated with Xtext
 */
 package org.eclipse.xtext;
 
-import org.eclipse.xtext.parser.IParser;
-
 import com.google.inject.Binder;
 
 /**
@@ -15,7 +13,7 @@ public class XtextGrammarTestLanguageRuntimeModule extends AbstractXtextGrammarT
 	@Override
 	public void configure(Binder binder) {
 		super.configure(binder);
-		
+
 		// extend configuration here
 	}
 

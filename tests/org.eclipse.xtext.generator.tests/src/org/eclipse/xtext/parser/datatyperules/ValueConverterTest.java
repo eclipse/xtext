@@ -50,7 +50,7 @@ public class ValueConverterTest extends TestCase {
 		}
 	}
 
-	public void testSimpleToString() throws ValueConverterException {
+	public void testSimpleToString() {
 		String expected = "123";
 		BigDecimal bd = BigDecimal.valueOf(123);
 		assertEquals(expected, valueConverter.toString(bd));
