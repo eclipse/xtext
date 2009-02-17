@@ -84,6 +84,17 @@ public class EcoreUtil2 extends EcoreUtil {
 		}
 		return result;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public static <T> List<T> collect(List<? extends EObject> list, int generatedMetamodelEpackage, Class<T> class1) {
+		List<T> result = new ArrayList<T>();
+		for (EObject obj : list) {
+			Object object = obj.eGet(obj.eClass().getEStructuralFeature(generatedMetamodelEpackage));
+			if (obj!=null)
+				result.add((T) object);
+		}
+		return result;
+	}
 
 	public static List<EObject> eAllContentsAsList(EObject ele) {
 		List<EObject> result = new ArrayList<EObject>();
