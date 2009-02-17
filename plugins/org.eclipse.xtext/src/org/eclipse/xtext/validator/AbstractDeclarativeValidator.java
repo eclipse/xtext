@@ -149,6 +149,9 @@ public abstract class AbstractDeclarativeValidator implements EValidator {
 					method.setAccessible(true);
 					method.invoke(this, currentObject);
 				}
+				catch (GuardException e) {
+					// ignore, check is just not evaluated if guard is false
+				}
 				catch (NullPointerException e) {
 					// ignore, as not having to check for NPEs all the time is a convenience feature
 				}
@@ -233,6 +236,16 @@ public abstract class AbstractDeclarativeValidator implements EValidator {
 				error(message, feature);
 			}
 		}
+	}
+	
+	protected void guard(boolean guardExpression) throws GuardException {
+		if(!guardExpression) {
+			throw new GuardException();
+		}
+	}
+	
+	static class GuardException extends RuntimeException {
+		private static final long serialVersionUID = 4534156048507490673L;
 	}
 
 	static class DiagnosticImpl implements Diagnostic {
