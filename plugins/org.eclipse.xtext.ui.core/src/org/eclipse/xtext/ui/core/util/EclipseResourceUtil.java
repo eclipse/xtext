@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.xtext.ui.wizard;
+package org.eclipse.xtext.ui.core.util;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -47,7 +47,6 @@ import org.eclipse.ui.ide.IDE;
  * this code was copied from the last version 4.3.x of openArchitectureWare.
  * 
  * @author Michael Clay
- * 
  */
 public class EclipseResourceUtil {
 

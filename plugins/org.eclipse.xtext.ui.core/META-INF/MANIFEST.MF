@@ -29,7 +29,8 @@ Export-Package: org.eclipse.xtext.ui.core,
  org.eclipse.xtext.ui.core.editor.reconciler,
  org.eclipse.xtext.ui.core.editor.utils,
  org.eclipse.xtext.ui.core.internal,
- org.eclipse.xtext.ui.core.util
+ org.eclipse.xtext.ui.core.util,
+ org.eclipse.xtext.ui.core.wizard
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Eclipse-RegisterBuddy: org.eclipse.xtext.log4j

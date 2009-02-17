@@ -10,15 +10,16 @@ package org.eclipse.xtext.xtext.ui.wizard.project;
 
 import java.util.StringTokenizer;
 
+import org.eclipse.xtext.ui.core.wizard.IProjectInfo;
 import org.eclipse.xtext.util.Strings;
 
 /**
- * Simple valueobject class containing all relevant attributes necessary for the
+ * Simple value object class containing all relevant attributes necessary for the
  * creation of new Xtext projects.
  * 
  * @author Michael Clay - Initial contribution and API
  */
-public class XtextProjectInfo {
+public class XtextProjectInfo implements IProjectInfo{
 
 	private String projectName;
 	private String languageName;
