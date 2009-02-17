@@ -11,6 +11,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +24,8 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.crossref.IScope;
+import org.eclipse.xtext.crossref.IScopedElement;
 import org.eclipse.xtext.util.Function;
 import org.eclipse.xtext.util.SimpleCache;
 
@@ -33,14 +36,15 @@ import org.eclipse.xtext.util.SimpleCache;
  *         Allows subclasses to specify invariants in a declarative manner using
  *         {@link Check} annotation.
  * 
- *         Example: 
- * <pre>
- * @Check 
- * void checkName(ParserRule rule) { 
- *    if (!toFirstUpper(rule.getName()).equals(rule.getName())) {
- *        	warning("Name should start with a capital.", XtextPackage.ABSTRACT_RULE__NAME);
- *         }
- *    }
+ *         Example:
+ * 
+ *         <pre>
+ * &#064;Check
+ * void checkName(ParserRule rule) {
+ * 	if (!toFirstUpper(rule.getName()).equals(rule.getName())) {
+ * 		warning(&quot;Name should start with a capital.&quot;, XtextPackage.ABSTRACT_RULE__NAME);
+ * 	}
+ * }
  * </pre>
  */
 public abstract class AbstractDeclarativeValidator implements EValidator {
@@ -106,21 +110,30 @@ public abstract class AbstractDeclarativeValidator implements EValidator {
 
 	private DiagnosticChain chain = null;
 	private EObject currentObject = null;
-
+	private Method currentMethod = null;
 	private Logger log = Logger.getLogger(getClass());
 
 	private boolean hasErrors;
 
-	public final boolean validate(EClass class1, EObject object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+	protected EObject getCurrentObject() {
+		return this.currentObject;
+	}
+
+	protected Method getCurrentMethod() {
+		return this.currentMethod;
+	}
+
+	public final boolean validate(EClass class1, EObject object, DiagnosticChain diagnostics,
+			Map<Object, Object> context) {
 		this.hasErrors = false;
 		boolean skipExpensive = false;
-		if (context!=null) {
+		if (context != null) {
 			Object object2 = context.get(CheckMode.KEY);
 			if (object2 instanceof Integer) {
-				skipExpensive = CheckMode.FAST ==(Integer) object2;
+				skipExpensive = CheckMode.FAST == (Integer) object2;
 			}
 		}
-		
+
 		try {
 			this.chain = diagnostics;
 			this.currentObject = object;
@@ -128,24 +141,33 @@ public abstract class AbstractDeclarativeValidator implements EValidator {
 			for (Method method : list) {
 				if (skipExpensive) {
 					Check annotation = method.getAnnotation(Check.class);
-					if (annotation.value()==CheckType.EXPENSIVE)
+					if (annotation.value() == CheckType.EXPENSIVE)
 						continue;
 				}
 				try {
+					this.currentMethod = method;
 					method.setAccessible(true);
 					method.invoke(this, currentObject);
-				} catch (IllegalArgumentException e) {
+				}
+				catch (NullPointerException e) {
+					// ignore, as not having to check for NPEs all the time is a convenience feature
+				}
+				catch (IllegalArgumentException e) {
 					log.error(e.getMessage(), e);
-				} catch (IllegalAccessException e) {
+				}
+				catch (IllegalAccessException e) {
 					log.error(e.getMessage(), e);
-				} catch (InvocationTargetException e) {
+				}
+				catch (InvocationTargetException e) {
 					log.error(e.getMessage(), e.getTargetException());
-				} finally {
+				}
+				finally {
 					method.setAccessible(false);
 				}
 			}
 			return hasErrors;
-		} finally {
+		}
+		finally {
 			this.currentObject = null;
 			this.chain = null;
 		}
@@ -164,14 +186,53 @@ public abstract class AbstractDeclarativeValidator implements EValidator {
 		chain.add(new DiagnosticImpl(Diagnostic.ERROR, string, currentObject, feature));
 	}
 
-	protected void assertTrue(String string, int feature, boolean executedPredicate) {
+	protected void assertTrue(String message, int feature, boolean executedPredicate) {
 		if (!executedPredicate)
-			error(string, feature);
+			error(message, feature);
 	}
 
-	protected void assertEquals(String string, int feature, Object expected, Object actual) {
+	protected void assertFalse(String message, int feature, boolean executedPredicate) {
+		if (executedPredicate)
+			error(message, feature);
+	}
+
+	protected void assertNull(String message, int feature, Object object) {
+		if (object != null)
+			error(message, feature);
+	}
+
+	protected void assertNotNull(String message, int feature, Object object) {
+		if (object == null)
+			error(message, feature);
+	}
+
+	protected void assertEquals(String message, int feature, Object expected, Object actual) {
 		if (!expected.equals(actual))
-			error(string, feature);
+			error(message, feature);
+	}
+
+	protected void assertNotEquals(String message, int feature, Object expected, Object actual) {
+		if (expected.equals(actual))
+			error(message, feature);
+	}
+
+	protected void assertEmpty(String message, int feature, String string) {
+		if (string != null && string.trim().length() > 0)
+			error(message, feature);
+	}
+
+	protected void assertNotEmpty(String message, int feature, String string) {
+		if (string == null || string.trim().length() == 0)
+			error(message, feature);
+	}
+
+	protected void assertNameIsUniqueInScope(String message, int feature, EObject object, String name, IScope scope) {
+		for(Iterator<IScopedElement> i=scope.getContents().iterator(); i.hasNext(); ) {
+			IScopedElement scopedElement = i.next();
+			if(!object.equals(scopedElement.element()) && !name.equals(scopedElement.name())) {
+				error(message, feature);
+			}
+		}
 	}
 
 	static class DiagnosticImpl implements Diagnostic {
