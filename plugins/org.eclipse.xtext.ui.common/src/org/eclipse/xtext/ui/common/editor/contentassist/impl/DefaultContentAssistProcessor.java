@@ -142,8 +142,6 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 		return new ContextInformationValidator(this);
 	}
 
-
-
 	/**
 	 * adds templates to the list of proposals
 	 *
