@@ -10,6 +10,7 @@ package org.eclipse.xtext.grammarinheritance;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.grammarinheritance.services.InheritanceTestLanguageGrammarAccess;
 import org.eclipse.xtext.junit.AbstractXtextTests;
@@ -49,5 +50,11 @@ public class Inheritance2Test extends AbstractXtextTests {
 		EPackage pack = classifier.getEPackage();
 		assertNotNull(pack);
 		assertEquals(grammarAccess.getGrammar().getMetamodelDeclarations().get(0).getEPackage(), pack);
+	}
+
+	public void testParse_01() throws Exception {
+		String model = "model foo { element bar }";
+		Resource resource = getResourceFromString(model);
+		assertTrue(resource.getErrors().isEmpty());
 	}
 }
