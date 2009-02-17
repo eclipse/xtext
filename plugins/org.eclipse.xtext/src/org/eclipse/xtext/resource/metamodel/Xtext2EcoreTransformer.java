@@ -134,11 +134,6 @@ public class Xtext2EcoreTransformer {
 	}
 
 	public void removeGeneratedPackages() {
-		if (grammar.getSuperGrammar() != null) {
-			final Xtext2EcoreTransformer transformer = new Xtext2EcoreTransformer(grammar.getSuperGrammar());
-			transformer.removeGeneratedPackages();
-		}
-
 		final ResourceSet resourceSet = grammar.eResource().getResourceSet();
 		final Iterator<Resource> resourceIter = resourceSet.getResources().iterator();
 		final Collection<EPackage> packages = getGeneratedPackages();
@@ -259,12 +254,6 @@ public class Xtext2EcoreTransformer {
 		return result;
 	}
 
-	private void collectEClassInfosOfSuperGrammar() {
-		Xtext2EcoreTransformer transformer = new Xtext2EcoreTransformer(superGrammar);
-		transformer.transform();
-		this.getEClassifierInfos().setParent(transformer.getEClassifierInfos());
-	}
-
 	private Xtext2ECoreInterpretationContext deriveFeatures(final Xtext2ECoreInterpretationContext context,
 			AbstractElement element) {
 		XtextSwitch<Xtext2ECoreInterpretationContext> visitor = new XtextSwitch<Xtext2ECoreInterpretationContext>() {
@@ -304,9 +293,9 @@ public class Xtext2EcoreTransformer {
 						try {
 							return context.spawnContextWithCalledRule(findOrCreateEClassifierInfo(calledRule), object);
 						}
-					catch (TransformationException e) {
-						reportError(e);
-					}
+						catch (TransformationException e) {
+							reportError(e);
+						}
 				}
 				return context;
 			}
@@ -317,7 +306,7 @@ public class Xtext2EcoreTransformer {
 					if (object.getFeature() == null)
 						throw new TransformationException(TransformationErrorCode.InvalidFeature, "Name of the feature is not assigned.", object);
 					TypeRef actionTypeRef = object.getTypeName();
-					EClassifierInfo actionType = findOrCreateEClassifierInfo(actionTypeRef, null);
+					EClassifierInfo actionType = findOrCreateEClassifierInfo(actionTypeRef, null, true);
 					EClassifierInfo currentCompatibleType = context.getCurrentCompatibleType();
 					Xtext2ECoreInterpretationContext ctx = context.spawnContextWithReferencedType(actionType, object);
 					ctx.addFeature(object.getFeature(), currentCompatibleType,
@@ -534,7 +523,7 @@ public class Xtext2EcoreTransformer {
 	private void addSuperType(ParserRule rule, TypeRef subTypeRef, EClassifierInfo superTypeInfo) throws TransformationException {
 		final EClassifier subType = subTypeRef.getType();
 		final EClassifierInfo subTypeInfo = subType == null
-		        ? findOrCreateEClassifierInfo(subTypeRef, null)
+		        ? findOrCreateEClassifierInfo(subTypeRef, null, true)
 				: eClassifierInfos.getInfoOrNull(subType);
 		if (subTypeInfo == null)
 			throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable, "Type '"
@@ -605,19 +594,43 @@ public class Xtext2EcoreTransformer {
 		}
 	}
 
+	private void collectEClassInfosOfSuperGrammar() {
+		this.getEClassifierInfos().setParent(createClassifierInfosFor(grammar.getSuperGrammar()));
+	}
+
+	private EClassifierInfos createClassifierInfosFor(Grammar grammar) {
+		if (grammar == null)
+			return null;
+		EClassifierInfos result = new EClassifierInfos();
+		for(AbstractMetamodelDeclaration declaration: grammar.getMetamodelDeclarations()) {
+			EPackage referencedEPackage = declaration.getEPackage();
+			if (referencedEPackage != null) {
+				collectClassInfosOf(result, referencedEPackage, declaration, false);
+			}
+		}
+		result.setParent(createClassifierInfosFor(grammar.getSuperGrammar()));
+		return result;
+	}
+
 	private void collectClassInfosOf(EPackage referencedEPackage, AbstractMetamodelDeclaration metaModel) {
+		collectClassInfosOf(eClassifierInfos, referencedEPackage,
+				metaModel, metaModel instanceof GeneratedMetamodel);
+	}
+
+	private void collectClassInfosOf(EClassifierInfos target, EPackage referencedEPackage,
+			AbstractMetamodelDeclaration metaModel, boolean generated) {
 		for (EClassifier eClassifier : referencedEPackage.getEClassifiers()) {
 			if (eClassifier instanceof EClass) {
 				EClass eClass = (EClass) eClassifier;
-				EClassifierInfo info = EClassifierInfo.createEClassInfo(eClass, metaModel instanceof GeneratedMetamodel);
-				eClassifierInfos.addInfo(metaModel, eClassifier.getName(), info);
+				EClassifierInfo info = EClassifierInfo.createEClassInfo(eClass, generated);
+				target.addInfo(metaModel, eClassifier.getName(), info);
 			}
 			else if (eClassifier instanceof EDataType) {
 				EDataType eDataType = (EDataType) eClassifier;
-				EClassifierInfo info = EClassifierInfo.createEDataTypeInfo(eDataType, metaModel instanceof GeneratedMetamodel);
-				eClassifierInfos.addInfo(metaModel, eClassifier.getName(), info);
+				// TODO: Enums
+				EClassifierInfo info = EClassifierInfo.createEDataTypeInfo(eDataType, generated);
+				target.addInfo(metaModel, eClassifier.getName(), info);
 			}
-			// TODO: Enums
 		}
 	}
 
@@ -636,7 +649,7 @@ public class Xtext2EcoreTransformer {
 			throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable, "Cannot create type for unnamed rule.", rule);
 		if (typeRef.getMetamodel() != null && typeRef.getMetamodel().getEPackage() == null)
 			throw new TransformationException(TransformationErrorCode.UnknownMetaModelAlias, "Cannot create type without declared package.", typeRef);
-		return findOrCreateEClassifierInfo(typeRef, rule.getName());
+		return findOrCreateEClassifierInfo(typeRef, rule.getName(), grammar.getRules().contains(rule));
 	}
 
 	private EClassifierInfo findEClassifierInfo(AbstractRule rule) {
@@ -648,7 +661,7 @@ public class Xtext2EcoreTransformer {
 		return eClassifierInfos.getInfo(typeRef);
 	}
 
-	private EClassifierInfo findOrCreateEClassifierInfo(TypeRef typeRef, String name) throws TransformationException {
+	private EClassifierInfo findOrCreateEClassifierInfo(TypeRef typeRef, String name, boolean createIfMissing) throws TransformationException {
 		EClassifierInfo info = eClassifierInfos.getInfo(typeRef);
 		if (info == null) {
 			// we assumend EString for lexer rules and datatype rules, so
@@ -658,7 +671,8 @@ public class Xtext2EcoreTransformer {
 				if (info != null)
 					return info;
 			}
-			info = createEClassifierInfo(typeRef, name);
+			if (createIfMissing)
+				info = createEClassifierInfo(typeRef, name);
 		}
 		return info;
 	}

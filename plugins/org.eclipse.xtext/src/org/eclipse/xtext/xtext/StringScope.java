@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.crossref.IScope;
 import org.eclipse.xtext.crossref.IScopedElement;
@@ -20,36 +19,16 @@ import org.eclipse.xtext.util.Function;
  */
 class StringScope extends AbstractNestedScope {
 
-	private static class StringScopeElement implements IScopedElement {
-		
-		private final String name;
-		
-		public StringScopeElement(String name) {
-			this.name = name;
-		}
-
-		public Object additionalInformation() {
-			return null;
-		}
-
-		public EObject element() {
-			return null;
-		}
-
-		public String name() {
-			return name;
-		}
-		
-	}
-	
-	public StringScope(Iterable<? extends Object> content, final IValueConverterService valueConverterService) {
-		super(IScope.NULLSCOPE, CollectionUtils.map(content, new Function<Object, IScopedElement>() {
+	public StringScope(IScope parentScope, Iterable<? extends Object> content, final IValueConverterService valueConverterService) {
+		super(parentScope, CollectionUtils.map(content, new Function<Object, IScopedElement>() {
 			public IScopedElement exec(Object param) {
-				// TODO use value converter that produces double quotes
-//				return new StringScopeElement(valueConverterService.toString(param, "STRING"));
-				return new StringScopeElement('"' + param.toString() + '"');
+				return new StringScopeElement(valueConverterService.toString(param, "STRING"));
 			}
 		}));
+	}
+
+	public StringScope(Iterable<? extends Object> content, final IValueConverterService valueConverterService) {
+		this(IScope.NULLSCOPE, content, valueConverterService);
 	}
 
 }

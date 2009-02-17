@@ -17,10 +17,12 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ParserRule;
@@ -45,7 +47,7 @@ public class XtextScopeProvider extends DefaultScopeProvider {
 
 	@Inject
 	private IValueConverterService valueConverterService;
-	
+
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
 		if (reference == XtextPackage.eINSTANCE.getTypeRef_Type()) {
@@ -61,23 +63,21 @@ public class XtextScopeProvider extends DefaultScopeProvider {
 				}
 			} else if (context instanceof CrossReference || context instanceof ParserRule) {
 				return createReferencedPackagesScope(GrammarUtil.getGrammar(context));
-			} 
+			}
 			return IScope.NULLSCOPE;
-		} else if (reference == XtextPackage.eINSTANCE.getAbstractMetamodelDeclaration_EPackage()) {
-			return new StringScope(EPackage.Registry.INSTANCE.keySet(), valueConverterService);
-		} else
-			return super.getScope(context, reference);
+		}
+		return super.getScope(context, reference);
 	}
 
 	private SimpleScope createClassifierScope(Iterable<EClassifier> classifiers) {
-		return new SimpleScope(IScope.NULLSCOPE, 
+		return new SimpleScope(IScope.NULLSCOPE,
 				CollectionUtils.map(classifiers, new Function<EClassifier, IScopedElement>() {
 					public IScopedElement exec(EClassifier param) {
 						return ScopedElement.create(param.getName(), param);
 					}
 				}));
 	}
-	
+
 	protected IScope createReferencedPackagesScope(Grammar g) {
 		final Collection<EClassifier> allClassifiers = new ArrayList<EClassifier>();
 		for(AbstractMetamodelDeclaration decl: g.getMetamodelDeclarations()) {
@@ -86,12 +86,12 @@ public class XtextScopeProvider extends DefaultScopeProvider {
 		}
 		return createClassifierScope(allClassifiers);
 	}
-	
+
 	@Override
 	protected IScope createScope(Resource resource, EClass type) {
 		if (AbstractMetamodelDeclaration.class.isAssignableFrom(type.getInstanceClass()))
 			return new XtextMetamodelReferenceScope(resource, type);
-		
+
 		if (resource.getContents().size() < 1)
 			throw new IllegalArgumentException("resource is not as expected: contents.size == "
 					+ resource.getContents().size() + " but expected: >= 1");
@@ -102,7 +102,10 @@ public class XtextScopeProvider extends DefaultScopeProvider {
 	}
 
 	protected IScope createScope(final Grammar grammar, EClass type) {
-		Grammar superGrammar = grammar.getSuperGrammar();
+		if (EcorePackage.Literals.EPACKAGE == type) {
+			return createEPackageScope(grammar.getSuperGrammar());
+		}
+		final Grammar superGrammar = grammar.getSuperGrammar();
 		final IScope parent = superGrammar != null ? createScope(superGrammar, type): IScope.NULLSCOPE;
 		return new SimpleCachingScope(parent, grammar.eResource(), type) {
 			@Override
@@ -111,5 +114,28 @@ public class XtextScopeProvider extends DefaultScopeProvider {
 			}
 		};
 	}
-	
+
+	private IScope createEPackageScope(final Grammar grammar) {
+		final Grammar superGrammar = grammar.getSuperGrammar();
+		final IScope parent = superGrammar != null ? createEPackageScope(superGrammar):
+			new StringScope(EPackage.Registry.INSTANCE.keySet(), valueConverterService);
+		return new SimpleCachingScope(parent, grammar.eResource(), EcorePackage.Literals.EPACKAGE) {
+			@Override
+			protected Iterator<EObject> getRelevantContent(Resource resource) {
+				return EcoreUtil2.collect(grammar.getMetamodelDeclarations(), XtextPackage.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE, EObject.class).iterator();
+			}
+
+			@Override
+			protected String convertValue(String value, EObject object) {
+				return valueConverterService.toString(value, "STRING");
+			}
+
+			@Override
+			protected String getNameFeature(EClass type) {
+				return EcorePackage.Literals.EPACKAGE__NS_URI.getName();
+			}
+
+		};
+	}
+
 }
