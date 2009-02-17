@@ -25,24 +25,24 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.editors.text.FileDocumentProvider;
-import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.xtext.resource.XtextResource;
 
 /**
  * @author Peter Friese - Initial contribution and API
  * @author Sven Efftinge
  */
-public class XtextDocumentProvider extends FileDocumentProvider implements IDocumentProvider {
+public class XtextDocumentProvider extends FileDocumentProvider {
 
 	private static final Logger log = Logger.getLogger(XtextDocumentProvider.class);
-	
+
 	/**
 	 * @author Sven Efftinge - Initial contribution and API
 	 *
-	 * updates referenced EMF Resources on IResourceChangeEvent 
+	 * updates referenced EMF Resources on IResourceChangeEvent
 	 */
 	private final class ReferencedResourcesUpdater implements IResourceChangeListener {
 		private final XtextDocument document;
@@ -50,32 +50,33 @@ public class XtextDocumentProvider extends FileDocumentProvider implements IDocu
 		private ReferencedResourcesUpdater(XtextDocument document) {
 			this.document = document;
 		}
-		
+
 		public void resourceChanged(final IResourceChangeEvent event) {
-			
+
 			final ResourceDeltaVisitor visitor = new ResourceDeltaVisitor(document);
 			try {
 				event.getDelta().accept(visitor);
-			} catch (CoreException e1) {
-				log.error(e1.getMessage(), e1);
+			} catch (CoreException e) {
+				log.error(e.getMessage(), e);
 			}
 			if (!visitor.deltas.isEmpty()) {
 			new Job("updating resourceset"){
 				@Override
 				protected IStatus run(IProgressMonitor monitor) {
 					document.modify(new UnitOfWork<Object>() {
-						
+
 						public Object exec(XtextResource arg) throws Exception {
 							for (IResourceDelta delta : visitor.deltas) {
 								IResource res = delta.getResource();
 								String string = res.getFullPath().lastSegment();
-								for (final Resource emfResource : arg.getResourceSet().getResources()) {
+								ResourceSet set = arg.getResourceSet();
+								for(int i = 0; i < set.getResources().size(); ) {
+									final Resource emfResource = set.getResources().get(i);
 									if (emfResource.getURI().lastSegment().equals(string)) {
 										switch (delta.getKind()) {
 										case IResourceDelta.REMOVED:
 											// UNLOAD
 											document.modify(new UnitOfWork<Object>() {
-												
 												public Object exec(XtextResource arg) throws Exception {
 													emfResource.unload();
 													return null;
@@ -98,6 +99,8 @@ public class XtextDocumentProvider extends FileDocumentProvider implements IDocu
 											break;
 										}
 									}
+									if (set.getResources().get(i) == emfResource)
+										i++;
 								}
 							}
 							arg.reparse(document.get());
@@ -107,7 +110,6 @@ public class XtextDocumentProvider extends FileDocumentProvider implements IDocu
 					return Status.OK_STATUS;
 				}}.schedule();
 			}
-
 		}
 	}
 
@@ -121,15 +123,15 @@ public class XtextDocumentProvider extends FileDocumentProvider implements IDocu
 		private ResourceDeltaVisitor(XtextDocument document) {
 			this.document = document;
 		}
-		
+
 		public final List<IResourceDelta> deltas = new ArrayList<IResourceDelta>();
 
 		public boolean visit(IResourceDelta delta) throws CoreException {
 			IResource res = delta.getResource();
 			int kind = delta.getKind();
 			int flags = delta.getFlags();
-			if ((kind == IResourceDelta.REMOVED ||  
-					(kind == IResourceDelta.CHANGED && ((IResourceDelta.CONTENT & flags) != 0))) 
+			if ((kind == IResourceDelta.REMOVED ||
+					(kind == IResourceDelta.CHANGED && ((IResourceDelta.CONTENT & flags) != 0)))
 					&& document.isReferenced(res)) {
 				deltas.add(delta);
 			}

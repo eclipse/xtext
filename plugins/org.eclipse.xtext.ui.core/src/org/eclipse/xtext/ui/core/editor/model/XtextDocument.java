@@ -33,8 +33,8 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
+import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jface.text.Document;
@@ -84,7 +84,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 			}
 		}
 	}
-	
+
 	public boolean isReferenced(IResource anIResource) {
 		if (!(anIResource instanceof IFile))
 			return false;
@@ -96,7 +96,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 				uriToRes.put(uri.lastSegment(), res);
 			}
 		}
-		
+
 		return uriToRes.containsKey(anIResource.getFullPath().lastSegment());
 	}
 
@@ -107,16 +107,16 @@ public class XtextDocument extends Document implements IXtextDocument {
 		return null;
 	}
 
-	private ReentrantReadWriteLock rwLock = new ReentrantReadWriteLock();
-	private Lock writeLock = rwLock.writeLock();
-	private Lock readLock = rwLock.readLock();
+	private final ReentrantReadWriteLock rwLock = new ReentrantReadWriteLock();
+	private final Lock writeLock = rwLock.writeLock();
+	private final Lock readLock = rwLock.readLock();
 
 	public <T> T readOnly(UnitOfWork<T> work) {
 		readLock.lock();
 		try {
 			updateContentBeforeRead();
 			T exec = work.exec(resource);
-			ensureThatStateIsNotReturned((Object) exec, work);
+			ensureThatStateIsNotReturned(exec, work);
 			return exec;
 		} catch (RuntimeException e) {
 			throw e;
@@ -131,7 +131,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 		writeLock.lock();
 		try {
 			T exec = work.exec(resource);
-			ensureThatStateIsNotReturned((Object) exec, work);
+			ensureThatStateIsNotReturned(exec, work);
 			notifyModelListeners(resource);
 			// TODO track modifications and serialize back to the text buffer
 			return exec;
@@ -176,7 +176,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 		}
 	}
 
-	private ListenerList xtextDocumentObservers = new ListenerList(ListenerList.IDENTITY);
+	private final ListenerList xtextDocumentObservers = new ListenerList(ListenerList.IDENTITY);
 
 	public void addXtextDocumentContentObserver(IXtextDocumentContentObserver observer) {
 		addDocumentListener(observer);
@@ -256,16 +256,16 @@ public class XtextDocument extends Document implements IXtextDocument {
 					readLock.lock();
 					writeLock.unlock();
 				}
-			} else
-				return null;
+			}
+			return null;
 		}
 
 	}
 
 	private static final Logger log = Logger.getLogger(XtextDocument.class);
-	private static final String MARKER_ID = Diagnostician.MARKER;
+	private static final String MARKER_ID = EValidator.MARKER;
 //	private static final String XTEXT_PARSEERROR_MARKER_TYPE = Activator.PLUGIN_ID + ".problemmarker";
-	private UpdateMarkerJob updateMarkerJob = new UpdateMarkerJob("updateMarkers");
+	private final UpdateMarkerJob updateMarkerJob = new UpdateMarkerJob("updateMarkers");
 
 	private void checkAndUpdateMarkers() {
 		updateMarkerJob.schedule();
@@ -276,9 +276,8 @@ public class XtextDocument extends Document implements IXtextDocument {
 		URI uri = resource.getURI();
 		if ((adapterType == IFile.class || adapterType == IResource.class) && uri.isPlatformResource()) {
 			return (T) ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(uri.toPlatformString(true)));
-		} else {
-			return null;
 		}
+		return null;
 	}
 
 }
