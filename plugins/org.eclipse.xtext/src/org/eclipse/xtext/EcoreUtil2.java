@@ -74,24 +74,27 @@ public class EcoreUtil2 extends EcoreUtil {
 		return result;
 	}
 
-	@SuppressWarnings("unchecked")
 	public static <T> List<T> typeSelect(List<?> elements, Class<T> clazz) {
 		List<T> result = new ArrayList<T>();
 		for (Object ele : elements) {
 			if (ele != null && clazz.isAssignableFrom(ele.getClass())) {
-				result.add((T) ele);
+				result.add(clazz.cast(ele));
 			}
 		}
 		return result;
 	}
-	
-	@SuppressWarnings("unchecked")
-	public static <T> List<T> collect(List<? extends EObject> list, int generatedMetamodelEpackage, Class<T> class1) {
-		List<T> result = new ArrayList<T>();
-		for (EObject obj : list) {
-			Object object = obj.eGet(obj.eClass().getEStructuralFeature(generatedMetamodelEpackage));
-			if (obj!=null)
-				result.add((T) object);
+
+	public static <T> List<T> collect(Collection<? extends EObject> instances, int featureId, Class<T> type) {
+		final List<T> result = new ArrayList<T>(instances.size());
+		for (EObject obj : instances) {
+			if (obj == null)
+				throw new NullPointerException("obj may not be null");
+			final EStructuralFeature feature = obj.eClass().getEStructuralFeature(featureId);
+			if (feature == null)
+				throw new NullPointerException("feature may not be null");
+			final Object object = obj.eGet(feature);
+			if (object!=null)
+				result.add(type.cast(object));
 		}
 		return result;
 	}
