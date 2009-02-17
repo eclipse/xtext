@@ -14,6 +14,8 @@ import org.eclipse.xtext.parsetree.AbstractNode;
  */
 public class IllegalNodeException extends Exception {
 
+	private static final long serialVersionUID = -5736024053937205L;
+
 	private final AbstractNode node;
 
 	public IllegalNodeException(AbstractNode node) {
