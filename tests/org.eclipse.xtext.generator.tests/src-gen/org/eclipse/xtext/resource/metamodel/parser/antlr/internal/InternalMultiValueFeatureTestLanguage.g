@@ -90,7 +90,7 @@ ruleStart returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Start");
+	            $current = factory.create(grammarAccess.prStart().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        

@@ -3,7 +3,11 @@ Generated with Xtext
 */
 package org.eclipse.xtext.grammarinheritance.parser.packrat.consumers;
 
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+
+import org.eclipse.xtext.AbstractRule;
+
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
@@ -13,7 +17,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
-import org.eclipse.xtext.grammarinheritance.services.InheritanceTestLanguageGrammarAccess;
 import org.eclipse.xtext.grammarinheritance.services.InheritanceTestLanguageGrammarAccess.ElementElements;
 
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
@@ -84,7 +87,6 @@ public final class InheritanceTestLanguageElementConsumer extends NonTerminalCon
 	}
 
 	public ElementElements getRule() {
-	// InheritanceTestLanguageGrammarAccess.INSTANCE.prElement()
 		return rule;
 	}
 	
@@ -93,13 +95,13 @@ public final class InheritanceTestLanguageElementConsumer extends NonTerminalCon
 	}
 	
 	@Override
-	protected EObject getGrammarElement() {
+	protected AbstractRule getGrammarElement() {
 		return getRule().getRule();
 	}
 
 	@Override
-	protected String getDefaultTypeName() {
-		return "Element";
+	protected EClassifier getDefaultType() {
+		return getGrammarElement().getType().getType();
 	}
 	
 	public void setIdConsumer(ITerminalConsumer idConsumer) {

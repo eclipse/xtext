@@ -17,6 +17,7 @@ import java.util.Map.Entry;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
@@ -27,13 +28,13 @@ import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
  */
 public class InstanceDescription implements IInstanceDescription {
 
-	private AbstractParseTreeConstructor astSer;
+	private final AbstractParseTreeConstructor astSer;
 
-	private EObject described;
+	private final EObject described;
 
 	private BitSet multiFeatures;
 
-	private int[] next;
+	private final int[] next;
 
 	public InstanceDescription(AbstractParseTreeConstructor astSerializer,
 			EObject desc) {
@@ -133,9 +134,10 @@ public class InstanceDescription implements IInstanceDescription {
 		return true;
 	}
 
-	public boolean isInstanceOf(String string) {
-		EClass class1 = this.astSer.getFactory().getEClass(string);
-		return class1 != null && class1.isSuperTypeOf(getDelegate().eClass());
+	public boolean isInstanceOf(EClassifier classifier) {
+		if (!(classifier instanceof EClass))
+			return false;
+		return ((EClass) classifier).isSuperTypeOf(getDelegate().eClass());
 	}
 
 	private int nextID(EStructuralFeature f, int lastId) {

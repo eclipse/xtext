@@ -142,7 +142,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create("File");
+            	    	            current = factory.create(grammarAccess.prFile().getRule().getType().getType());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -186,7 +186,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create("File");
+            	    	            current = factory.create(grammarAccess.prFile().getRule().getType().getType());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -293,7 +293,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             	
 
             	        if (current==null) {
-            	            current = factory.create("Import");
+            	            current = factory.create(grammarAccess.prImport().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -531,7 +531,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
             	        if (current==null) {
-            	            current = factory.create("Package");
+            	            current = factory.create(grammarAccess.prPackage().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -579,7 +579,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create("Package");
+            	    	            current = factory.create(grammarAccess.prPackage().getRule().getType().getType());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -817,7 +817,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             	
 
             	        if (current==null) {
-            	            current = factory.create("DataType");
+            	            current = factory.create(grammarAccess.prDataType().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -931,7 +931,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             	
 
             	        if (current==null) {
-            	            current = factory.create("Entity");
+            	            current = factory.create(grammarAccess.prEntity().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -967,7 +967,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                     {
 
                     			if (current==null) {
-                    	            current = factory.create("Entity");
+                    	            current = factory.create(grammarAccess.prEntity().getRule().getType().getType());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
@@ -1018,7 +1018,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create("Entity");
+            	    	            current = factory.create(grammarAccess.prEntity().getRule().getType().getType());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -1388,7 +1388,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             	
 
             	        if (current==null) {
-            	            current = factory.create("Attribute");
+            	            current = factory.create(grammarAccess.prAttribute().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -1423,7 +1423,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
             	        if (current==null) {
-            	            current = factory.create("Attribute");
+            	            current = factory.create(grammarAccess.prAttribute().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -1535,7 +1535,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             	
 
             	        if (current==null) {
-            	            current = factory.create("Reference");
+            	            current = factory.create(grammarAccess.prReference().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -1570,7 +1570,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
             	        if (current==null) {
-            	            current = factory.create("Reference");
+            	            current = factory.create(grammarAccess.prReference().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -1607,7 +1607,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                     {
 
                     			if (current==null) {
-                    	            current = factory.create("Reference");
+                    	            current = factory.create(grammarAccess.prReference().getRule().getType().getType());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
@@ -1732,7 +1732,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             	
 
             	        if (current==null) {
-            	            current = factory.create("Operation");
+            	            current = factory.create(grammarAccess.prOperation().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -1778,7 +1778,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
                     	        if (current==null) {
-                    	            current = factory.create("Operation");
+                    	            current = factory.create(grammarAccess.prOperation().getRule().getType().getType());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -1823,7 +1823,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create("Operation");
+                    	    	            current = factory.create(grammarAccess.prOperation().getRule().getType().getType());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
                     	    	        
@@ -1881,7 +1881,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
             	        if (current==null) {
-            	            current = factory.create("Operation");
+            	            current = factory.create(grammarAccess.prOperation().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -1980,7 +1980,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             	
 
             	        if (current==null) {
-            	            current = factory.create("Parameter");
+            	            current = factory.create(grammarAccess.prParameter().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -2005,7 +2005,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
             	        if (current==null) {
-            	            current = factory.create("Parameter");
+            	            current = factory.create(grammarAccess.prParameter().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -2092,7 +2092,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             {
 
             			if (current==null) {
-            	            current = factory.create("TypeRef");
+            	            current = factory.create(grammarAccess.prTypeRef().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     

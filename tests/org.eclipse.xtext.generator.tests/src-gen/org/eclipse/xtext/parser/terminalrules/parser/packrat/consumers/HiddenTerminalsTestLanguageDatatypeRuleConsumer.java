@@ -3,7 +3,11 @@ Generated with Xtext
 */
 package org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers;
 
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+
+import org.eclipse.xtext.AbstractRule;
+
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
@@ -13,7 +17,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
-import org.eclipse.xtext.parser.terminalrules.services.HiddenTerminalsTestLanguageGrammarAccess;
 import org.eclipse.xtext.parser.terminalrules.services.HiddenTerminalsTestLanguageGrammarAccess.DatatypeRuleElements;
 
 
@@ -78,7 +81,6 @@ public final class HiddenTerminalsTestLanguageDatatypeRuleConsumer extends NonTe
 	}
 
 	public DatatypeRuleElements getRule() {
-	// HiddenTerminalsTestLanguageGrammarAccess.INSTANCE.prDatatypeRule()
 		return rule;
 	}
 	
@@ -87,13 +89,13 @@ public final class HiddenTerminalsTestLanguageDatatypeRuleConsumer extends NonTe
 	}
 	
 	@Override
-	protected EObject getGrammarElement() {
+	protected AbstractRule getGrammarElement() {
 		return getRule().getRule();
 	}
 
 	@Override
-	protected String getDefaultTypeName() {
-		return "EString";
+	protected EClassifier getDefaultType() {
+		return getGrammarElement().getType().getType();
 	}
 	
 	public ICharacterClass getKeyword$2$Delimiter() {

@@ -94,7 +94,7 @@ ruleStatemachine returns [EObject current=null]
 	    lv_events_1=ruleEvent 
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Statemachine");
+	            $current = factory.create(grammarAccess.prStatemachine().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -123,7 +123,7 @@ ruleStatemachine returns [EObject current=null]
 	    lv_commands_4=ruleCommand 
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Statemachine");
+	            $current = factory.create(grammarAccess.prStatemachine().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -148,7 +148,7 @@ ruleStatemachine returns [EObject current=null]
 	    lv_states_6=ruleState 
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Statemachine");
+	            $current = factory.create(grammarAccess.prStatemachine().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -193,7 +193,7 @@ ruleEvent returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Event");
+	            $current = factory.create(grammarAccess.prEvent().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -213,7 +213,7 @@ ruleEvent returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Event");
+	            $current = factory.create(grammarAccess.prEvent().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -233,7 +233,7 @@ ruleEvent returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Event");
+	            $current = factory.create(grammarAccess.prEvent().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -276,7 +276,7 @@ ruleCommand returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Command");
+	            $current = factory.create(grammarAccess.prCommand().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -296,7 +296,7 @@ ruleCommand returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Command");
+	            $current = factory.create(grammarAccess.prCommand().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -343,7 +343,7 @@ ruleState returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("State");
+	            $current = factory.create(grammarAccess.prState().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -367,7 +367,7 @@ ruleState returns [EObject current=null]
 		
 		{
 			if ($current==null) {
-	            $current = factory.create("State");
+	            $current = factory.create(grammarAccess.prState().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
@@ -391,7 +391,7 @@ ruleState returns [EObject current=null]
 	    lv_transitions_6=ruleTransition 
 	    {
 	        if ($current==null) {
-	            $current = factory.create("State");
+	            $current = factory.create(grammarAccess.prState().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -435,7 +435,7 @@ ruleTransition returns [EObject current=null]
 		
 		{
 			if ($current==null) {
-	            $current = factory.create("Transition");
+	            $current = factory.create(grammarAccess.prTransition().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
@@ -455,7 +455,7 @@ ruleTransition returns [EObject current=null]
 		
 		{
 			if ($current==null) {
-	            $current = factory.create("Transition");
+	            $current = factory.create(grammarAccess.prTransition().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }

@@ -3,7 +3,11 @@ Generated with Xtext
 */
 package org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers;
 
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+
+import org.eclipse.xtext.AbstractRule;
+
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
@@ -13,7 +17,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
-import org.eclipse.xtext.parsetree.reconstr.services.ComplexReconstrTestLanguageGrammarAccess;
 import org.eclipse.xtext.parsetree.reconstr.services.ComplexReconstrTestLanguageGrammarAccess.TrickyBElements;
 
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
@@ -167,7 +170,6 @@ public final class ComplexReconstrTestLanguageTrickyBConsumer extends NonTermina
 	}
 
 	public TrickyBElements getRule() {
-	// ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyB()
 		return rule;
 	}
 	
@@ -176,13 +178,13 @@ public final class ComplexReconstrTestLanguageTrickyBConsumer extends NonTermina
 	}
 	
 	@Override
-	protected EObject getGrammarElement() {
+	protected AbstractRule getGrammarElement() {
 		return getRule().getRule();
 	}
 
 	@Override
-	protected String getDefaultTypeName() {
-		return "TrickyB";
+	protected EClassifier getDefaultType() {
+		return getGrammarElement().getType().getType();
 	}
 	
 	public void setIdConsumer(ITerminalConsumer idConsumer) {

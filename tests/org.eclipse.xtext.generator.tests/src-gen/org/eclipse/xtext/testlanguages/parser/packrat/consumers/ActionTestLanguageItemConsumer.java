@@ -3,7 +3,11 @@ Generated with Xtext
 */
 package org.eclipse.xtext.testlanguages.parser.packrat.consumers;
 
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+
+import org.eclipse.xtext.AbstractRule;
+
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
@@ -13,7 +17,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
-import org.eclipse.xtext.testlanguages.services.ActionTestLanguageGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.ActionTestLanguageGrammarAccess.ItemElements;
 
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
@@ -68,7 +71,7 @@ public final class ActionTestLanguageItemConsumer extends NonTerminalConsumer {
 		return result;
 	}
 	protected int consumeAction$2(int entryPoint) {
-		consumeAction(getRule().ele0ActionThingcontent(), "Thing", false);
+		consumeAction(getRule().ele0ActionThingcontent(), false);
 		return ConsumeResult.SUCCESS;	
 	}
 
@@ -81,7 +84,6 @@ public final class ActionTestLanguageItemConsumer extends NonTerminalConsumer {
 	}
 
 	public ItemElements getRule() {
-	// ActionTestLanguageGrammarAccess.INSTANCE.prItem()
 		return rule;
 	}
 	
@@ -90,13 +92,13 @@ public final class ActionTestLanguageItemConsumer extends NonTerminalConsumer {
 	}
 	
 	@Override
-	protected EObject getGrammarElement() {
+	protected AbstractRule getGrammarElement() {
 		return getRule().getRule();
 	}
 
 	@Override
-	protected String getDefaultTypeName() {
-		return "Type";
+	protected EClassifier getDefaultType() {
+		return getGrammarElement().getType().getType();
 	}
 	
 	public void setIdConsumer(ITerminalConsumer idConsumer) {

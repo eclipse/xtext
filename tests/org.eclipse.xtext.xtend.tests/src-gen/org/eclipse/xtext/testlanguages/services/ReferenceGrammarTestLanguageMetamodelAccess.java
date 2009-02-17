@@ -9,40 +9,41 @@ import org.eclipse.xtext.parser.BaseEPackageAccess;
 
 public class ReferenceGrammarTestLanguageMetamodelAccess extends BaseEPackageAccess implements IMetamodelAccess {
 
-{
-
+	protected static final String REFERENCEGRAMMAR_NS_URI = "http://eclipse.org/xtext/reference/ReferenceGrammar";
+	
+	
+	public static void init() {
 		if (!EPackage.Registry.INSTANCE.containsKey(REFERENCEGRAMMAR_NS_URI))
-			EPackage.Registry.INSTANCE.put(REFERENCEGRAMMAR_NS_URI, loadEcoreFile(getClass().getClassLoader(), "classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.ecore"));
+			EPackage.Registry.INSTANCE.put(REFERENCEGRAMMAR_NS_URI, loadEcoreFile(ReferenceGrammarTestLanguageMetamodelAccess.class.getClassLoader(), "classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.ecore"));
+	}
 
-}
+	static {
+		org.eclipse.xtext.builtin.services.XtextBuiltinMetamodelAccess.init();
+		init();
+	}
 
 	private EPackage[] generated = new EPackage[] {
-		
 		getReferenceGrammarEPackage()
-		
-		};
+	};
 
 	public EPackage[] getGeneratedEPackages() {
 		return generated;
 	}
 
 	private EPackage[] referenced = new EPackage[] {
-		
-		};
+	};
+	
 	public EPackage[] getReferencedEPackages() {
 		return referenced;
 	}
 	
 	private EPackage[] all = new EPackage[] {
 	    getReferenceGrammarEPackage()
-		};
+	};
 	
 	public EPackage[] getAllEPackages() {
 		return all;
 	}
-
-	
-	protected static final String REFERENCEGRAMMAR_NS_URI = "http://eclipse.org/xtext/reference/ReferenceGrammar";
 	
 	protected EPackage getReferenceGrammarEPackage() {	
 		return EPackage.Registry.INSTANCE.getEPackage(REFERENCEGRAMMAR_NS_URI);

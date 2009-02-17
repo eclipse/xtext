@@ -6,8 +6,8 @@ package org.eclipse.xtext.testlanguages.parsetree.reconstr;
 //import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parsetree.reconstr.*;
-import org.eclipse.xtext.parsetree.reconstr.impl.*;
+import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
 import org.eclipse.xtext.testlanguages.services.ActionTestLanguageGrammarAccess;
 
@@ -18,12 +18,13 @@ public class ActionTestLanguageParseTreeConstructor extends AbstractParseTreeCon
 	@Inject
 	private ActionTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf("Model") && (s = new Model_Assignment_children(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("Type") && (s = new Element_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("Type") && (s = new Item_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prModel().getRule().getType().getType()) && (s = new Model_Assignment_children(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prElement().getRule().getType().getType()) && (s = new Element_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prItem().getRule().getType().getType()) && (s = new Item_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
@@ -42,6 +43,7 @@ protected class Model_Assignment_children extends AssignmentToken  {
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prModel().eleAssignmentChildren();
 	}
@@ -53,7 +55,7 @@ protected class Model_Assignment_children extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("Type")) {
+			if(param.isInstanceOf(grammarAccess.prElement().getRule().getType().getType())) {
 				Solution s = new Element_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -84,6 +86,7 @@ protected class Element_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prElement().eleGroup();
 	}
@@ -113,6 +116,7 @@ protected class Element_0_RuleCall_Item extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prElement().ele0ParserRuleCallItem();
 	}
@@ -120,7 +124,7 @@ protected class Element_0_RuleCall_Item extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Item_Group.class, current)) return null;
-		if(!current.isInstanceOf("Type")) return null;
+		if(!current.isInstanceOf(grammarAccess.prItem().getRule().getType().getType())) return null;
 		return new Item_Group(current, this).firstSolution();
 	}
 }
@@ -132,6 +136,7 @@ protected class Element_1_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prElement().ele1Group();
 	}
@@ -161,13 +166,14 @@ protected class Element_1_0_Action_Item_items extends ActionToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Action getGrammarElement() {
 		return grammarAccess.prElement().ele10ActionItemitems();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf("Item")) return null;
+		if(!current.isInstanceOf(grammarAccess.prElement().ele10ActionItemitems().getTypeName().getType())) return null;
 		Object val = current.getConsumable("items", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("items")) return null;
@@ -182,6 +188,7 @@ protected class Element_1_1_Assignment_items extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prElement().ele11AssignmentItems();
 	}
@@ -193,7 +200,7 @@ protected class Element_1_1_Assignment_items extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("Type")) {
+			if(param.isInstanceOf(grammarAccess.prItem().getRule().getType().getType())) {
 				Solution s = new Item_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -226,6 +233,7 @@ protected class Item_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prItem().eleGroup();
 	}
@@ -255,13 +263,14 @@ protected class Item_0_Action_Thing_content extends ActionToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Action getGrammarElement() {
 		return grammarAccess.prItem().ele0ActionThingcontent();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf("Thing")) return null;
+		if(!current.isInstanceOf(grammarAccess.prItem().ele0ActionThingcontent().getTypeName().getType())) return null;
 		Object val = current.getConsumable("content", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("content")) return null;
@@ -276,6 +285,7 @@ protected class Item_1_Assignment_name extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prItem().ele1AssignmentName();
 	}

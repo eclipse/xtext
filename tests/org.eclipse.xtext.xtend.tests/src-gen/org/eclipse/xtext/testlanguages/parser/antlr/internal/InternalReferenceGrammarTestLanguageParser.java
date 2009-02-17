@@ -158,7 +158,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create("Spielplatz");
+                    	            current = factory.create(grammarAccess.prSpielplatz().getRule().getType().getType());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -192,7 +192,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
                             	
 
                             	        if (current==null) {
-                            	            current = factory.create("Spielplatz");
+                            	            current = factory.create(grammarAccess.prSpielplatz().getRule().getType().getType());
                             	            associateNodeWithAstElement(currentNode, current);
                             	        }
                             	        
@@ -288,7 +288,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
 
 
                     	                    	        if (current==null) {
-                    	                    	            current = factory.create("Spielplatz");
+                    	                    	            current = factory.create(grammarAccess.prSpielplatz().getRule().getType().getType());
                     	                    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	                    	        }
                     	                    	        
@@ -320,7 +320,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
 
 
                     	                    	        if (current==null) {
-                    	                    	            current = factory.create("Spielplatz");
+                    	                    	            current = factory.create(grammarAccess.prSpielplatz().getRule().getType().getType());
                     	                    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	                    	        }
                     	                    	        
@@ -358,7 +358,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
 
 
                     	            	        if (current==null) {
-                    	            	            current = factory.create("Spielplatz");
+                    	            	            current = factory.create(grammarAccess.prSpielplatz().getRule().getType().getType());
                     	            	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	            	        }
                     	            	        
@@ -396,7 +396,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
 
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create("Spielplatz");
+                    	    	            current = factory.create(grammarAccess.prSpielplatz().getRule().getType().getType());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
                     	    	        
@@ -533,7 +533,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
             	
 
             	        if (current==null) {
-            	            current = factory.create("Kind");
+            	            current = factory.create(grammarAccess.prKind().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -559,7 +559,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
             	
 
             	        if (current==null) {
-            	            current = factory.create("Kind");
+            	            current = factory.create(grammarAccess.prKind().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -683,7 +683,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
             	
 
             	        if (current==null) {
-            	            current = factory.create("Erwachsener");
+            	            current = factory.create(grammarAccess.prErwachsener().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -709,7 +709,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
             	
 
             	        if (current==null) {
-            	            current = factory.create("Erwachsener");
+            	            current = factory.create(grammarAccess.prErwachsener().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -834,7 +834,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
             	
 
             	        if (current==null) {
-            	            current = factory.create("Spielzeug");
+            	            current = factory.create(grammarAccess.prSpielzeug().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -862,7 +862,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
 
 
             	        if (current==null) {
-            	            current = factory.create("Spielzeug");
+            	            current = factory.create(grammarAccess.prSpielzeug().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -1243,7 +1243,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
 
 
             	        if (current==null) {
-            	            current = factory.create("Familie");
+            	            current = factory.create(grammarAccess.prFamilie().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -1264,7 +1264,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
             {
 
             			if (current==null) {
-            	            current = factory.create("Familie");
+            	            current = factory.create(grammarAccess.prFamilie().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
@@ -1283,7 +1283,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
             {
 
             			if (current==null) {
-            	            current = factory.create("Familie");
+            	            current = factory.create(grammarAccess.prFamilie().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
@@ -1302,7 +1302,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
             {
 
             			if (current==null) {
-            	            current = factory.create("Familie");
+            	            current = factory.create(grammarAccess.prFamilie().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
@@ -1340,7 +1340,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
             	    {
 
             	    			if (current==null) {
-            	    	            current = factory.create("Familie");
+            	    	            current = factory.create(grammarAccess.prFamilie().getRule().getType().getType());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	            

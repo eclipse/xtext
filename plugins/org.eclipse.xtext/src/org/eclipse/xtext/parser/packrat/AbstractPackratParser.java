@@ -304,8 +304,8 @@ public abstract class AbstractPackratParser extends AbstractParser<CharSequence>
 		return result;
 	}
 
-	public void consumeAction(Action action, String typeName, boolean isMany) {
-		accept(new ParsedAction(offset, action, typeName, isMany));
+	public void consumeAction(Action action, boolean isMany) {
+		accept(new ParsedAction(offset, action, isMany));
 	}
 
 	protected IParseResultFactory getParseResultFactory() {

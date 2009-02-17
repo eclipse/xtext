@@ -6,8 +6,8 @@ package org.eclipse.xtext.testlanguages.parsetree.reconstr;
 //import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parsetree.reconstr.*;
-import org.eclipse.xtext.parsetree.reconstr.impl.*;
+import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
 import org.eclipse.xtext.testlanguages.services.TreeTestLanguageGrammarAccess;
 
@@ -18,11 +18,12 @@ public class TreeTestLanguageParseTreeConstructor extends AbstractParseTreeConst
 	@Inject
 	private TreeTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf("Model") && (s = new Model_Assignment_children(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("Node") && (s = new Node_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prModel().getRule().getType().getType()) && (s = new Model_Assignment_children(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prNode().getRule().getType().getType()) && (s = new Node_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
@@ -41,6 +42,7 @@ protected class Model_Assignment_children extends AssignmentToken  {
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prModel().eleAssignmentChildren();
 	}
@@ -52,7 +54,7 @@ protected class Model_Assignment_children extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("Node")) {
+			if(param.isInstanceOf(grammarAccess.prNode().getRule().getType().getType())) {
 				Solution s = new Node_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -83,6 +85,7 @@ protected class Node_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prNode().eleGroup();
 	}
@@ -112,6 +115,7 @@ protected class Node_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prNode().ele0Group();
 	}
@@ -141,6 +145,7 @@ protected class Node_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prNode().ele00Group();
 	}
@@ -170,6 +175,7 @@ protected class Node_0_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prNode().ele000Group();
 	}
@@ -199,6 +205,7 @@ protected class Node_0_0_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prNode().ele0000Group();
 	}
@@ -228,6 +235,7 @@ protected class Node_0_0_0_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prNode().ele00000Group();
 	}
@@ -257,6 +265,7 @@ protected class Node_0_0_0_0_0_0_Assignment_name extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prNode().ele000000AssignmentName();
 	}
@@ -281,6 +290,7 @@ protected class Node_0_0_0_0_0_1_Keyword extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prNode().ele000001KeywordLeftParenthesis();
 	}	
@@ -294,6 +304,7 @@ protected class Node_0_0_0_0_1_Assignment_attrib extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prNode().ele00001AssignmentAttrib();
 	}
@@ -319,6 +330,7 @@ protected class Node_0_0_0_1_Keyword extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prNode().ele0001KeywordRightParenthesis();
 	}	
@@ -332,6 +344,7 @@ protected class Node_0_0_1_Keyword extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prNode().ele001KeywordLeftCurlyBracket();
 	}	
@@ -345,6 +358,7 @@ protected class Node_0_1_Assignment_children extends AssignmentToken  {
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prNode().ele01AssignmentChildren();
 	}
@@ -356,7 +370,7 @@ protected class Node_0_1_Assignment_children extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("Node")) {
+			if(param.isInstanceOf(grammarAccess.prNode().getRule().getType().getType())) {
 				Solution s = new Node_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -378,6 +392,7 @@ protected class Node_1_Keyword extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prNode().ele1KeywordRightCurlyBracketSemicolon();
 	}	

@@ -94,7 +94,7 @@ ruleContainer returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Container");
+	            $current = factory.create(grammarAccess.prContainer().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -118,7 +118,7 @@ ruleContainer returns [EObject current=null]
 	    lv_nested_3=ruleNested 
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Container");
+	            $current = factory.create(grammarAccess.prContainer().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -140,7 +140,7 @@ ruleContainer returns [EObject current=null]
 	    lv_content_4=ruleContent 
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Container");
+	            $current = factory.create(grammarAccess.prContainer().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -196,7 +196,7 @@ ruleNested returns [EObject current=null]
 	    lv_nested_2=ruleContainer 
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Nested");
+	            $current = factory.create(grammarAccess.prNested().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -294,7 +294,7 @@ ruleChildren returns [EObject current=null]
 	    lv_children_2=ruleChild 
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Children");
+	            $current = factory.create(grammarAccess.prChildren().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -319,7 +319,7 @@ ruleChildren returns [EObject current=null]
 	    lv_children_4=ruleChild 
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Children");
+	            $current = factory.create(grammarAccess.prChildren().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -379,7 +379,7 @@ ruleChild returns [EObject current=null]
 	    lv_value_3=ruleNamed 
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Child");
+	            $current = factory.create(grammarAccess.prChild().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -435,7 +435,7 @@ ruleAbstractChildren returns [EObject current=null]
 	    lv_abstractChildren_2=ruleAbstractChild 
 	    {
 	        if ($current==null) {
-	            $current = factory.create("AbstractChildren");
+	            $current = factory.create(grammarAccess.prAbstractChildren().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -537,7 +537,7 @@ ruleFirstConcrete returns [EObject current=null]
 	    lv_value_3=ruleNamed 
 	    {
 	        if ($current==null) {
-	            $current = factory.create("FirstConcrete");
+	            $current = factory.create(grammarAccess.prFirstConcrete().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -554,7 +554,7 @@ ruleFirstConcrete returns [EObject current=null]
 		
 		{
 			if ($current==null) {
-	            $current = factory.create("FirstConcrete");
+	            $current = factory.create(grammarAccess.prFirstConcrete().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
@@ -617,7 +617,7 @@ ruleSecondConcrete returns [EObject current=null]
 	    lv_value_4=ruleNamed 
 	    {
 	        if ($current==null) {
-	            $current = factory.create("SecondConcrete");
+	            $current = factory.create(grammarAccess.prSecondConcrete().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -634,7 +634,7 @@ ruleSecondConcrete returns [EObject current=null]
 		
 		{
 			if ($current==null) {
-	            $current = factory.create("SecondConcrete");
+	            $current = factory.create(grammarAccess.prSecondConcrete().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
@@ -681,7 +681,7 @@ ruleNamed returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Named");
+	            $current = factory.create(grammarAccess.prNamed().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        

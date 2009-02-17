@@ -147,7 +147,7 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 		if (!token.isDatatype()) {
 			if (created == null) {
 				if (!token.isBoolean()) {
-					created = factory.create(nonTerminal.getTypeName());
+					created = factory.create(nonTerminal.getType());
 					associateNodeWithAstElement(currentNode, created);
 				}
 			}
@@ -197,7 +197,7 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 		if (currentStack.isEmpty()) {
 			throw new RuntimeException("Unexpected empty stack");
 		} else if (currentStack.getLast() == null) {
-			current = factory.create(nonterminalStack.getLast().getTypeName());
+			current = factory.create(nonterminalStack.getLast().getType());
 			associateNodeWithAstElement(currentNode.getParent(), current);
 			currentStack.set(currentStack.size() - 1, current);
 		} else {
@@ -278,7 +278,7 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 		if (currentStack.isEmpty()) {
 			throw new RuntimeException("Unexpected empty stack");
 		} else if (currentStack.getLast() == null) {
-			current = factory.create(nonterminalStack.getLast().getTypeName());
+			current = factory.create(nonterminalStack.getLast().getType());
 			associateNodeWithAstElement(currentNode, current);
 			currentStack.set(currentStack.size() - 1, current);
 		} else {
@@ -301,7 +301,7 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 
 	@Override
 	public void visitParsedAction(ParsedAction token) {
-		EObject newCurrent = factory.create(token.getTypeName());
+		EObject newCurrent = factory.create(token.getType());
 		EObject prevCurrent = currentStack.removeLast();
 		currentStack.add(newCurrent);
 

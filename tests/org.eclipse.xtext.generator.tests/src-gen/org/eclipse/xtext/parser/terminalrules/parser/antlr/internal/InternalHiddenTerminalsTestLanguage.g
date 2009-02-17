@@ -165,7 +165,7 @@ ruleWithoutHiddens returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("WithoutHiddens");
+	            $current = factory.create(grammarAccess.prWithoutHiddens().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -188,7 +188,7 @@ ruleWithoutHiddens returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("WithoutHiddens");
+	            $current = factory.create(grammarAccess.prWithoutHiddens().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -209,7 +209,7 @@ ruleWithoutHiddens returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("WithoutHiddens");
+	            $current = factory.create(grammarAccess.prWithoutHiddens().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -263,7 +263,7 @@ ruleWithHiddens returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("WithHiddens");
+	            $current = factory.create(grammarAccess.prWithHiddens().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -320,7 +320,7 @@ ruleOverridingHiddens returns [EObject current=null]
 	    lv_called_3=ruleOverridingHiddensCall 
 	    {
 	        if ($current==null) {
-	            $current = factory.create("OverridingHiddens");
+	            $current = factory.create(grammarAccess.prOverridingHiddens().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -346,7 +346,7 @@ ruleOverridingHiddens returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("OverridingHiddens");
+	            $current = factory.create(grammarAccess.prOverridingHiddens().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -394,7 +394,7 @@ ruleOverridingHiddensCall returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("OverridingHiddensCall");
+	            $current = factory.create(grammarAccess.prOverridingHiddensCall().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -415,7 +415,7 @@ ruleOverridingHiddensCall returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("OverridingHiddensCall");
+	            $current = factory.create(grammarAccess.prOverridingHiddensCall().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -472,7 +472,7 @@ ruleInheritingHiddens returns [EObject current=null]
 	    lv_called_3=ruleInheritingHiddensCall 
 	    {
 	        if ($current==null) {
-	            $current = factory.create("InheritingHiddens");
+	            $current = factory.create(grammarAccess.prInheritingHiddens().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -494,7 +494,7 @@ ruleInheritingHiddens returns [EObject current=null]
 	    lv_hidingCalled_4=ruleHidingHiddens 
 	    {
 	        if ($current==null) {
-	            $current = factory.create("InheritingHiddens");
+	            $current = factory.create(grammarAccess.prInheritingHiddens().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -520,7 +520,7 @@ ruleInheritingHiddens returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("InheritingHiddens");
+	            $current = factory.create(grammarAccess.prInheritingHiddens().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -567,7 +567,7 @@ ruleDatatypeHiddens returns [EObject current=null]
 	    lv_valid_1=ruleDatatypeRule 
 	    {
 	        if ($current==null) {
-	            $current = factory.create("DatatypeHiddens");
+	            $current = factory.create(grammarAccess.prDatatypeHiddens().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -655,7 +655,7 @@ ruleHidingHiddens returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("HidingHiddens");
+	            $current = factory.create(grammarAccess.prHidingHiddens().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -675,7 +675,7 @@ ruleHidingHiddens returns [EObject current=null]
 	    lv_called_2=ruleInheritingHiddensCall 
 	    {
 	        if ($current==null) {
-	            $current = factory.create("HidingHiddens");
+	            $current = factory.create(grammarAccess.prHidingHiddens().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -724,7 +724,7 @@ ruleInheritingHiddensCall returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("InheritingHiddensCall");
+	            $current = factory.create(grammarAccess.prInheritingHiddensCall().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        

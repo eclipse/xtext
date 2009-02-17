@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.packrat.consumers;
 
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Action;
@@ -25,34 +26,34 @@ import org.eclipse.xtext.parser.packrat.tokens.ParsedNonTerminalEnd;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public abstract class NonTerminalConsumer extends AbstractConsumer implements INonTerminalConsumer, INonTerminalConsumerConfiguration {
-	
+
 	private final IHiddenTokenHandler hiddenTokenHandler;
-	
+
 	private final IMarkerFactory markerFactory;
-	
+
 	private final ITerminalConsumer[] hiddenTokens;
-	
+
 	private final IConsumerUtility consumerUtil;
-	
+
 	protected class AlternativesResult {
 		private int bestResult;
 		private IMarker bestMarker;
 		private IMarker currentMarker;
-		
+
 		protected AlternativesResult() {
 			bestResult = ConsumeResult.SUCCESS;
 			bestMarker = mark();
 		}
-		
+
 		public void nextAlternative() {
 			announceNextPath();
 			currentMarker = bestMarker.fork();
 		}
-		
+
 		public void reset() {
 			bestResult = ConsumeResult.EMPTY_MATCH;
 		}
-		
+
 		public int getResult() {
 			bestMarker.commit();
 			announceLevelFinished();
@@ -83,22 +84,22 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 		IHiddenTokenState prevState = hiddenTokenHandler.replaceHiddenTokens(hiddenTokens);
 		IMarker marker = mark();
 		int prevOffset = getOffset();
-		acceptor.accept(new ParsedNonTerminal(input.getOffset(), grammarElement != null ? grammarElement : getGrammarElement(), getDefaultTypeName()));
+		acceptor.accept(new ParsedNonTerminal(input.getOffset(), grammarElement != null ? grammarElement : getGrammarElement(), getDefaultType()));
 		int result = doConsume(-1);
 		if (result != ConsumeResult.SUCCESS) {
-			acceptor.accept(new ErrorToken(prevOffset, 0, null, "Expected " + getDefaultTypeName() + ", but could not find."));
+			acceptor.accept(new ErrorToken(prevOffset, 0, null, "Expected " + getDefaultType() + ", but could not find."));
 		}
 		acceptor.accept(new ParsedNonTerminalEnd(input.getOffset(), feature, isMany, isDatatype, isBoolean));
 		marker.commit();
 		prevState.restore();
 		return result;
 	}
-	
+
 	public AlternativesResult createAlternativesResult() {
 		announceNextLevel();
 		return new AlternativesResult();
 	}
-	
+
 	public boolean isDefiningHiddens() {
 		return hiddenTokens != null;
 	}
@@ -106,7 +107,7 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 	public void consumeAsRoot(IRootConsumerListener listener) {
 		IHiddenTokenState prevState = hiddenTokenHandler.replaceHiddenTokens(hiddenTokens);
 		IMarker marker = mark();
-		acceptor.accept(new ParsedNonTerminal(input.getOffset(), getGrammarElement(), getDefaultTypeName()));
+		acceptor.accept(new ParsedNonTerminal(input.getOffset(), getGrammarElement(), getDefaultType()));
 		listener.afterNonTerminalBegin(this, this);
 		int result;
 		try {
@@ -120,36 +121,36 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 		marker.commit();
 		prevState.restore();
 	}
-	
+
 	protected final IMarker mark() {
 		return markerFactory.mark();
 	}
-	
+
 	protected final void error(String message, AbstractElement grammarElement) {
 		acceptor.accept(new ErrorToken(getOffset(), 0, grammarElement, message));
 	}
-	
+
 	protected final int consumeKeyword(Keyword keyword, String feature, boolean isMany, boolean isBoolean, ICharacterClass notFollowedBy) {
 		return consumerUtil.consumeKeyword(keyword, feature, isMany, isBoolean, notFollowedBy);
 	}
-	
+
 	protected final int consumeTerminal(ITerminalConsumer consumer, String feature, boolean isMany, boolean isBoolean, AbstractElement grammarElement, ISequenceMatcher notMatching) {
 		return consumerUtil.consumeTerminal(consumer, feature, isMany, isBoolean, grammarElement, notMatching);
 	}
-	
+
 	protected final int consumeNonTerminal(INonTerminalConsumer consumer, String feature, boolean isMany, boolean isDatatype, boolean isBoolean, AbstractElement grammarElement) throws Exception {
 		return consumerUtil.consumeNonTerminal(consumer, feature, isMany, isDatatype, isBoolean, grammarElement);
 	}
-	
-	protected final void consumeAction(Action action, String typeName, boolean isMany) {
-		consumerUtil.consumeAction(action, typeName, isMany);
+
+	protected final void consumeAction(Action action, boolean isMany) {
+		consumerUtil.consumeAction(action, isMany);
 	}
-	
+
 	protected abstract int doConsume(int entryPoint) throws Exception;
-	
+
 	// TODO: replace by getDefaultType: EClassifier
-	protected abstract String getDefaultTypeName(); 
-	
+	protected abstract EClassifier getDefaultType();
+
 	protected abstract EObject getGrammarElement();
 
 	public IConsumerUtility getConsumerUtil() {
@@ -166,6 +167,6 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 
 	@Override
 	public String toString() {
-		return "NonTerminalConsumer " + getClass().getSimpleName() + " for type '" + getDefaultTypeName()  + "'";
+		return "NonTerminalConsumer " + getClass().getSimpleName() + " for type '" + getDefaultType()  + "'";
 	}
 }

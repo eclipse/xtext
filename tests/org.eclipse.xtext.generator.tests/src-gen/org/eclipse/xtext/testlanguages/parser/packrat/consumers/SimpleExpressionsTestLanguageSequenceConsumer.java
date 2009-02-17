@@ -3,7 +3,11 @@ Generated with Xtext
 */
 package org.eclipse.xtext.testlanguages.parser.packrat.consumers;
 
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+
+import org.eclipse.xtext.AbstractRule;
+
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
@@ -13,7 +17,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
-import org.eclipse.xtext.testlanguages.services.SimpleExpressionsTestLanguageGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.SimpleExpressionsTestLanguageGrammarAccess.SequenceElements;
 
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.SimpleExpressionsTestLanguageAdditionConsumer;
@@ -109,7 +112,7 @@ public final class SimpleExpressionsTestLanguageSequenceConsumer extends NonTerm
 		return result;
 	}
 	protected int consumeAction$4(int entryPoint) {
-		consumeAction(getRule().ele10ActionSequenceexpressions(), "Sequence", true);
+		consumeAction(getRule().ele10ActionSequenceexpressions(), true);
 		return ConsumeResult.SUCCESS;	
 	}
 
@@ -122,7 +125,6 @@ public final class SimpleExpressionsTestLanguageSequenceConsumer extends NonTerm
 	}
 
 	public SequenceElements getRule() {
-	// SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prSequence()
 		return rule;
 	}
 	
@@ -131,13 +133,13 @@ public final class SimpleExpressionsTestLanguageSequenceConsumer extends NonTerm
 	}
 	
 	@Override
-	protected EObject getGrammarElement() {
+	protected AbstractRule getGrammarElement() {
 		return getRule().getRule();
 	}
 
 	@Override
-	protected String getDefaultTypeName() {
-		return "Sequence";
+	protected EClassifier getDefaultType() {
+		return getGrammarElement().getType().getType();
 	}
 	
 	public void setAdditionConsumer(INonTerminalConsumer additionConsumer) {

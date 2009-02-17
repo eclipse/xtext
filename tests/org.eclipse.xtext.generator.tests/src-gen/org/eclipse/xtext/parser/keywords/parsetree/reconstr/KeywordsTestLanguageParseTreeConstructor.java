@@ -6,8 +6,8 @@ package org.eclipse.xtext.parser.keywords.parsetree.reconstr;
 //import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parsetree.reconstr.*;
-import org.eclipse.xtext.parsetree.reconstr.impl.*;
+import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
 import org.eclipse.xtext.parser.keywords.services.KeywordsTestLanguageGrammarAccess;
 
@@ -18,10 +18,11 @@ public class KeywordsTestLanguageParseTreeConstructor extends AbstractParseTreeC
 	@Inject
 	private KeywordsTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf("Model") && (s = new Model_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prModel().getRule().getType().getType()) && (s = new Model_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
@@ -40,6 +41,7 @@ protected class Model_Alternatives extends AlternativesToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.prModel().eleAlternatives();
 	}
@@ -62,6 +64,7 @@ protected class Model_0_Alternatives extends AlternativesToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.prModel().ele0Alternatives();
 	}
@@ -84,6 +87,7 @@ protected class Model_0_0_Alternatives extends AlternativesToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.prModel().ele00Alternatives();
 	}
@@ -106,6 +110,7 @@ protected class Model_0_0_0_Assignment_first extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prModel().ele000AssignmentFirst();
 	}
@@ -132,6 +137,7 @@ protected class Model_0_0_1_Assignment_second extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prModel().ele001AssignmentSecond();
 	}
@@ -159,6 +165,7 @@ protected class Model_0_1_Assignment_third extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prModel().ele01AssignmentThird();
 	}
@@ -186,6 +193,7 @@ protected class Model_1_Assignment_forth extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prModel().ele1AssignmentForth();
 	}

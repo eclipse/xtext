@@ -3,7 +3,11 @@ Generated with Xtext
 */
 package org.eclipse.xtext.parser.packrat.consumers;
 
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+
+import org.eclipse.xtext.AbstractRule;
+
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
@@ -13,7 +17,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
-import org.eclipse.xtext.services.XtextGrammarAccess;
 import org.eclipse.xtext.services.XtextGrammarAccess.NegatedTokenElements;
 
 import org.eclipse.xtext.parser.packrat.consumers.XtextTerminalTokenElementConsumer;
@@ -81,7 +84,6 @@ public final class XtextNegatedTokenConsumer extends NonTerminalConsumer {
 	}
 
 	public NegatedTokenElements getRule() {
-	// XtextGrammarAccess.INSTANCE.prNegatedToken()
 		return rule;
 	}
 	
@@ -90,13 +92,13 @@ public final class XtextNegatedTokenConsumer extends NonTerminalConsumer {
 	}
 	
 	@Override
-	protected EObject getGrammarElement() {
+	protected AbstractRule getGrammarElement() {
 		return getRule().getRule();
 	}
 
 	@Override
-	protected String getDefaultTypeName() {
-		return "NegatedToken";
+	protected EClassifier getDefaultType() {
+		return getGrammarElement().getType().getType();
 	}
 	
 	public void setTerminalTokenElementConsumer(INonTerminalConsumer terminalTokenElementConsumer) {

@@ -3,7 +3,11 @@ Generated with Xtext
 */
 package org.eclipse.xtext.testlanguages.parser.packrat.consumers;
 
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+
+import org.eclipse.xtext.AbstractRule;
+
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
@@ -13,7 +17,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
-import org.eclipse.xtext.testlanguages.services.ReferenceGrammarTestLanguageGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.ReferenceGrammarTestLanguageGrammarAccess.SpielzeugElements;
 
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.ReferenceGrammarTestLanguageFarbeConsumer;
@@ -135,7 +138,6 @@ public final class ReferenceGrammarTestLanguageSpielzeugConsumer extends NonTerm
 	}
 
 	public SpielzeugElements getRule() {
-	// ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielzeug()
 		return rule;
 	}
 	
@@ -144,13 +146,13 @@ public final class ReferenceGrammarTestLanguageSpielzeugConsumer extends NonTerm
 	}
 	
 	@Override
-	protected EObject getGrammarElement() {
+	protected AbstractRule getGrammarElement() {
 		return getRule().getRule();
 	}
 
 	@Override
-	protected String getDefaultTypeName() {
-		return "Spielzeug";
+	protected EClassifier getDefaultType() {
+		return getGrammarElement().getType().getType();
 	}
 	
 	public void setFarbeConsumer(INonTerminalConsumer farbeConsumer) {

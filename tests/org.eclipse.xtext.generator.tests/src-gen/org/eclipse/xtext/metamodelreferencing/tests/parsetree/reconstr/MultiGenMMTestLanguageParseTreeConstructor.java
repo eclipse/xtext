@@ -6,8 +6,8 @@ package org.eclipse.xtext.metamodelreferencing.tests.parsetree.reconstr;
 //import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parsetree.reconstr.*;
-import org.eclipse.xtext.parsetree.reconstr.impl.*;
+import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
 import org.eclipse.xtext.metamodelreferencing.tests.services.MultiGenMMTestLanguageGrammarAccess;
 
@@ -18,11 +18,12 @@ public class MultiGenMMTestLanguageParseTreeConstructor extends AbstractParseTre
 	@Inject
 	private MultiGenMMTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf("Foo") && (s = new Foo_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("FooBar") && (s = new NameRef_Assignment_name(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prFoo().getRule().getType().getType()) && (s = new Foo_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prNameRef().getRule().getType().getType()) && (s = new NameRef_Assignment_name(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
@@ -41,6 +42,7 @@ protected class Foo_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prFoo().eleGroup();
 	}
@@ -70,6 +72,7 @@ protected class Foo_0_Assignment_name extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prFoo().ele0AssignmentName();
 	}
@@ -94,6 +97,7 @@ protected class Foo_1_Assignment_nameRefs extends AssignmentToken  {
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prFoo().ele1AssignmentNameRefs();
 	}
@@ -105,7 +109,7 @@ protected class Foo_1_Assignment_nameRefs extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("FooBar")) {
+			if(param.isInstanceOf(grammarAccess.prNameRef().getRule().getType().getType())) {
 				Solution s = new NameRef_Assignment_name(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -137,6 +141,7 @@ protected class NameRef_Assignment_name extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prNameRef().eleAssignmentName();
 	}

@@ -6,8 +6,8 @@ package org.eclipse.xtext.parsetree.formatter.parsetree.reconstr;
 //import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parsetree.reconstr.*;
-import org.eclipse.xtext.parsetree.reconstr.impl.*;
+import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
 import org.eclipse.xtext.parsetree.formatter.services.FormatterTestLanguageGrammarAccess;
 
@@ -18,13 +18,14 @@ public class FormatterTestLanguageParseTreeConstructor extends AbstractParseTree
 	@Inject
 	private FormatterTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf("Root") && (s = new Root_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("Line") && (s = new Line_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("TestLinewrap") && (s = new TestLinewrap_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("TestIndentation") && (s = new TestIndentation_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prRoot().getRule().getType().getType()) && (s = new Root_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prLine().getRule().getType().getType()) && (s = new Line_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prTestLinewrap().getRule().getType().getType()) && (s = new TestLinewrap_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prTestIndentation().getRule().getType().getType()) && (s = new TestIndentation_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
@@ -43,6 +44,7 @@ protected class Root_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prRoot().eleGroup();
 	}
@@ -72,6 +74,7 @@ protected class Root_0_Keyword_test extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prRoot().ele0KeywordTest();
 	}	
@@ -84,6 +87,7 @@ protected class Root_1_Alternatives extends AlternativesToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.prRoot().ele1Alternatives();
 	}
@@ -106,6 +110,7 @@ protected class Root_1_0_RuleCall_TestLinewrap extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prRoot().ele10ParserRuleCallTestLinewrap();
 	}
@@ -113,7 +118,7 @@ protected class Root_1_0_RuleCall_TestLinewrap extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(TestLinewrap_Group.class, current)) return null;
-		if(!current.isInstanceOf("TestLinewrap")) return null;
+		if(!current.isInstanceOf(grammarAccess.prTestLinewrap().getRule().getType().getType())) return null;
 		return new TestLinewrap_Group(current, this).firstSolution();
 	}
 }
@@ -125,6 +130,7 @@ protected class Root_1_1_RuleCall_TestIndentation extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prRoot().ele11ParserRuleCallTestIndentation();
 	}
@@ -132,7 +138,7 @@ protected class Root_1_1_RuleCall_TestIndentation extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(TestIndentation_Group.class, current)) return null;
-		if(!current.isInstanceOf("TestIndentation")) return null;
+		if(!current.isInstanceOf(grammarAccess.prTestIndentation().getRule().getType().getType())) return null;
 		return new TestIndentation_Group(current, this).firstSolution();
 	}
 }
@@ -156,6 +162,7 @@ protected class Line_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prLine().eleGroup();
 	}
@@ -185,6 +192,7 @@ protected class Line_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prLine().ele0Group();
 	}
@@ -214,6 +222,7 @@ protected class Line_0_0_Assignment_type extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prLine().ele00AssignmentType();
 	}
@@ -238,6 +247,7 @@ protected class Line_0_1_Assignment_name extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prLine().ele01AssignmentName();
 	}
@@ -263,6 +273,7 @@ protected class Line_1_Keyword extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prLine().ele1KeywordSemicolon();
 	}	
@@ -286,6 +297,7 @@ protected class TestLinewrap_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTestLinewrap().eleGroup();
 	}
@@ -315,6 +327,7 @@ protected class TestLinewrap_0_Keyword_linewrap extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prTestLinewrap().ele0KeywordLinewrap();
 	}	
@@ -327,6 +340,7 @@ protected class TestLinewrap_1_Assignment_items extends AssignmentToken  {
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prTestLinewrap().ele1AssignmentItems();
 	}
@@ -338,7 +352,7 @@ protected class TestLinewrap_1_Assignment_items extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("Line")) {
+			if(param.isInstanceOf(grammarAccess.prLine().getRule().getType().getType())) {
 				Solution s = new Line_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -370,6 +384,7 @@ protected class TestIndentation_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTestIndentation().eleGroup();
 	}
@@ -399,6 +414,7 @@ protected class TestIndentation_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTestIndentation().ele0Group();
 	}
@@ -428,6 +444,7 @@ protected class TestIndentation_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTestIndentation().ele00Group();
 	}
@@ -457,6 +474,7 @@ protected class TestIndentation_0_0_0_Keyword_indentation extends KeywordToken  
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prTestIndentation().ele000KeywordIndentation();
 	}	
@@ -469,6 +487,7 @@ protected class TestIndentation_0_0_1_Keyword extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prTestIndentation().ele001KeywordLeftCurlyBracket();
 	}	
@@ -482,6 +501,7 @@ protected class TestIndentation_0_1_Alternatives extends AlternativesToken {
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.prTestIndentation().ele01Alternatives();
 	}
@@ -504,6 +524,7 @@ protected class TestIndentation_0_1_0_Assignment_sub extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prTestIndentation().ele010AssignmentSub();
 	}
@@ -515,7 +536,7 @@ protected class TestIndentation_0_1_0_Assignment_sub extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("TestIndentation")) {
+			if(param.isInstanceOf(grammarAccess.prTestIndentation().getRule().getType().getType())) {
 				Solution s = new TestIndentation_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -536,6 +557,7 @@ protected class TestIndentation_0_1_1_Assignment_items extends AssignmentToken  
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prTestIndentation().ele011AssignmentItems();
 	}
@@ -547,7 +569,7 @@ protected class TestIndentation_0_1_1_Assignment_items extends AssignmentToken  
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("Line")) {
+			if(param.isInstanceOf(grammarAccess.prLine().getRule().getType().getType())) {
 				Solution s = new Line_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -570,6 +592,7 @@ protected class TestIndentation_1_Keyword extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prTestIndentation().ele1KeywordRightCurlyBracket();
 	}	

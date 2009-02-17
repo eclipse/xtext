@@ -3,7 +3,11 @@ Generated with Xtext
 */
 package org.eclipse.xtext.testlanguages.parser.packrat.consumers;
 
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+
+import org.eclipse.xtext.AbstractRule;
+
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
@@ -13,7 +17,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
-import org.eclipse.xtext.testlanguages.services.FowlerDslTestLanguageGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.FowlerDslTestLanguageGrammarAccess.StatemachineElements;
 
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.FowlerDslTestLanguageCommandConsumer;
@@ -194,7 +197,6 @@ public final class FowlerDslTestLanguageStatemachineConsumer extends NonTerminal
 	}
 
 	public StatemachineElements getRule() {
-	// FowlerDslTestLanguageGrammarAccess.INSTANCE.prStatemachine()
 		return rule;
 	}
 	
@@ -203,13 +205,13 @@ public final class FowlerDslTestLanguageStatemachineConsumer extends NonTerminal
 	}
 	
 	@Override
-	protected EObject getGrammarElement() {
+	protected AbstractRule getGrammarElement() {
 		return getRule().getRule();
 	}
 
 	@Override
-	protected String getDefaultTypeName() {
-		return "Statemachine";
+	protected EClassifier getDefaultType() {
+		return getGrammarElement().getType().getType();
 	}
 	
 	public void setCommandConsumer(INonTerminalConsumer commandConsumer) {

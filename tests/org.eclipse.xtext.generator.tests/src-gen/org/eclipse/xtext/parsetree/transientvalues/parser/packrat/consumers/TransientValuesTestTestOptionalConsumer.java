@@ -3,7 +3,11 @@ Generated with Xtext
 */
 package org.eclipse.xtext.parsetree.transientvalues.parser.packrat.consumers;
 
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+
+import org.eclipse.xtext.AbstractRule;
+
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
@@ -13,7 +17,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
-import org.eclipse.xtext.parsetree.transientvalues.services.TransientValuesTestGrammarAccess;
 import org.eclipse.xtext.parsetree.transientvalues.services.TransientValuesTestGrammarAccess.TestOptionalElements;
 
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinINTConsumer;
@@ -162,7 +165,6 @@ public final class TransientValuesTestTestOptionalConsumer extends NonTerminalCo
 	}
 
 	public TestOptionalElements getRule() {
-	// TransientValuesTestGrammarAccess.INSTANCE.prTestOptional()
 		return rule;
 	}
 	
@@ -171,13 +173,13 @@ public final class TransientValuesTestTestOptionalConsumer extends NonTerminalCo
 	}
 	
 	@Override
-	protected EObject getGrammarElement() {
+	protected AbstractRule getGrammarElement() {
 		return getRule().getRule();
 	}
 
 	@Override
-	protected String getDefaultTypeName() {
-		return "TestOptional";
+	protected EClassifier getDefaultType() {
+		return getGrammarElement().getType().getType();
 	}
 	
 	public void setIntConsumer(ITerminalConsumer intConsumer) {

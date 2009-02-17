@@ -127,7 +127,7 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
             	
 
             	        if (current==null) {
-            	            current = factory.create("Foo");
+            	            current = factory.create(grammarAccess.prFoo().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -164,7 +164,7 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create("Foo");
+            	    	            current = factory.create(grammarAccess.prFoo().getRule().getType().getType());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -257,7 +257,7 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
             {
 
             			if (current==null) {
-            	            current = factory.create("RuleCall");
+            	            current = factory.create(grammarAccess.prNameRef().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     

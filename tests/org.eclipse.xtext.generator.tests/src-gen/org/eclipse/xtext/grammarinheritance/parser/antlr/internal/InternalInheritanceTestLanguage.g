@@ -94,7 +94,7 @@ ruleModel returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Model");
+	            $current = factory.create(grammarAccess.prModel().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -118,7 +118,7 @@ ruleModel returns [EObject current=null]
 	    lv_elements_3=ruleElement 
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Model");
+	            $current = factory.create(grammarAccess.prModel().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -170,7 +170,7 @@ ruleElement returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Element");
+	            $current = factory.create(grammarAccess.prElement().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        

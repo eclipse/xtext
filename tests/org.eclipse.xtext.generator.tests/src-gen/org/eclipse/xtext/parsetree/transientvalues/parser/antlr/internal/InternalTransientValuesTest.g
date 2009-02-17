@@ -150,7 +150,7 @@ ruleTestRequired returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("TestRequired");
+	            $current = factory.create(grammarAccess.prTestRequired().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -170,7 +170,7 @@ ruleTestRequired returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("TestRequired");
+	            $current = factory.create(grammarAccess.prTestRequired().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -217,7 +217,7 @@ ruleTestOptional returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("TestOptional");
+	            $current = factory.create(grammarAccess.prTestOptional().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -241,7 +241,7 @@ ruleTestOptional returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("TestOptional");
+	            $current = factory.create(grammarAccess.prTestOptional().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -288,7 +288,7 @@ ruleTestList returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("TestList");
+	            $current = factory.create(grammarAccess.prTestList().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        

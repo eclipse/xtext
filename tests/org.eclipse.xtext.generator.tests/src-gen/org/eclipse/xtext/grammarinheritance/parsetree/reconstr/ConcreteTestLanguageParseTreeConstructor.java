@@ -6,8 +6,8 @@ package org.eclipse.xtext.grammarinheritance.parsetree.reconstr;
 //import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parsetree.reconstr.*;
-import org.eclipse.xtext.parsetree.reconstr.impl.*;
+import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
 import org.eclipse.xtext.grammarinheritance.services.ConcreteTestLanguageGrammarAccess;
 
@@ -18,22 +18,23 @@ public class ConcreteTestLanguageParseTreeConstructor extends AbstractParseTreeC
 	@Inject
 	private ConcreteTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf("RootRule") && (s = new RootRule_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("ConcreteParserRule") && (s = new ConcreteParserRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("AType") && (s = new OverridableParserRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("CallOverridenParserRule") && (s = new CallOverridenParserRule_Assignment_call(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("AType2") && (s = new OverridableParserRule2_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("AType") && (s = new ExtendableParserRule_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("Subrule1") && (s = new Subrule1_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("Subrule2") && (s = new Subrule2_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("Subrule3") && (s = new Subrule3_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("CallExtendedParserRule") && (s = new CallExtendedParserRule_Assignment_call(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("AType") && (s = new InheritedParserRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("AModel") && (s = new AbstractCallOverridenParserRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("AModel") && (s = new AbstractCallExtendedParserRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prRootRule().getRule().getType().getType()) && (s = new RootRule_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prConcreteParserRule().getRule().getType().getType()) && (s = new ConcreteParserRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prOverridableParserRule().getRule().getType().getType()) && (s = new OverridableParserRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prCallOverridenParserRule().getRule().getType().getType()) && (s = new CallOverridenParserRule_Assignment_call(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prOverridableParserRule2().getRule().getType().getType()) && (s = new OverridableParserRule2_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prExtendableParserRule().getRule().getType().getType()) && (s = new ExtendableParserRule_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prSubrule1().getRule().getType().getType()) && (s = new Subrule1_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prSubrule2().getRule().getType().getType()) && (s = new Subrule2_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prSubrule3().getRule().getType().getType()) && (s = new Subrule3_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prCallExtendedParserRule().getRule().getType().getType()) && (s = new CallExtendedParserRule_Assignment_call(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prInheritedParserRule().getRule().getType().getType()) && (s = new InheritedParserRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prAbstractCallOverridenParserRule().getRule().getType().getType()) && (s = new AbstractCallOverridenParserRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prAbstractCallExtendedParserRule().getRule().getType().getType()) && (s = new AbstractCallExtendedParserRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
@@ -52,6 +53,7 @@ protected class RootRule_Alternatives extends AlternativesToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.prRootRule().eleAlternatives();
 	}
@@ -74,6 +76,7 @@ protected class RootRule_0_Alternatives extends AlternativesToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.prRootRule().ele0Alternatives();
 	}
@@ -96,6 +99,7 @@ protected class RootRule_0_0_Alternatives extends AlternativesToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.prRootRule().ele00Alternatives();
 	}
@@ -118,6 +122,7 @@ protected class RootRule_0_0_0_RuleCall_ConcreteParserRule extends RuleCallToken
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prRootRule().ele000ParserRuleCallConcreteParserRule();
 	}
@@ -125,7 +130,7 @@ protected class RootRule_0_0_0_RuleCall_ConcreteParserRule extends RuleCallToken
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(ConcreteParserRule_Group.class, current)) return null;
-		if(!current.isInstanceOf("ConcreteParserRule")) return null;
+		if(!current.isInstanceOf(grammarAccess.prConcreteParserRule().getRule().getType().getType())) return null;
 		return new ConcreteParserRule_Group(current, this).firstSolution();
 	}
 }
@@ -137,6 +142,7 @@ protected class RootRule_0_0_1_RuleCall_CallOverridenParserRule extends RuleCall
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prRootRule().ele001ParserRuleCallCallOverridenParserRule();
 	}
@@ -144,7 +150,7 @@ protected class RootRule_0_0_1_RuleCall_CallOverridenParserRule extends RuleCall
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(CallOverridenParserRule_Assignment_call.class, current)) return null;
-		if(!current.isInstanceOf("CallOverridenParserRule")) return null;
+		if(!current.isInstanceOf(grammarAccess.prCallOverridenParserRule().getRule().getType().getType())) return null;
 		return new CallOverridenParserRule_Assignment_call(current, this).firstSolution();
 	}
 }
@@ -157,6 +163,7 @@ protected class RootRule_0_1_RuleCall_CallExtendedParserRule extends RuleCallTok
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prRootRule().ele01ParserRuleCallCallExtendedParserRule();
 	}
@@ -164,7 +171,7 @@ protected class RootRule_0_1_RuleCall_CallExtendedParserRule extends RuleCallTok
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(CallExtendedParserRule_Assignment_call.class, current)) return null;
-		if(!current.isInstanceOf("CallExtendedParserRule")) return null;
+		if(!current.isInstanceOf(grammarAccess.prCallExtendedParserRule().getRule().getType().getType())) return null;
 		return new CallExtendedParserRule_Assignment_call(current, this).firstSolution();
 	}
 }
@@ -177,6 +184,7 @@ protected class RootRule_1_RuleCall_OverridableParserRule2 extends RuleCallToken
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prRootRule().ele1ParserRuleCallOverridableParserRule2();
 	}
@@ -184,7 +192,7 @@ protected class RootRule_1_RuleCall_OverridableParserRule2 extends RuleCallToken
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(OverridableParserRule2_Group.class, current)) return null;
-		if(!current.isInstanceOf("AType2")) return null;
+		if(!current.isInstanceOf(grammarAccess.prOverridableParserRule2().getRule().getType().getType())) return null;
 		return new OverridableParserRule2_Group(current, this).firstSolution();
 	}
 }
@@ -207,6 +215,7 @@ protected class ConcreteParserRule_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prConcreteParserRule().eleGroup();
 	}
@@ -236,6 +245,7 @@ protected class ConcreteParserRule_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prConcreteParserRule().ele0Group();
 	}
@@ -265,6 +275,7 @@ protected class ConcreteParserRule_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prConcreteParserRule().ele00Group();
 	}
@@ -294,6 +305,7 @@ protected class ConcreteParserRule_0_0_0_Keyword_model extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prConcreteParserRule().ele000KeywordModel();
 	}	
@@ -306,6 +318,7 @@ protected class ConcreteParserRule_0_0_1_Assignment_magicNumber extends Assignme
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prConcreteParserRule().ele001AssignmentMagicNumber();
 	}
@@ -331,6 +344,7 @@ protected class ConcreteParserRule_0_1_Keyword extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prConcreteParserRule().ele01KeywordColon();
 	}	
@@ -344,6 +358,7 @@ protected class ConcreteParserRule_1_Assignment_elements extends AssignmentToken
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prConcreteParserRule().ele1AssignmentElements();
 	}
@@ -355,7 +370,7 @@ protected class ConcreteParserRule_1_Assignment_elements extends AssignmentToken
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("AType")) {
+			if(param.isInstanceOf(grammarAccess.prInheritedParserRule().getRule().getType().getType())) {
 				Solution s = new InheritedParserRule_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -387,6 +402,7 @@ protected class OverridableParserRule_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prOverridableParserRule().eleGroup();
 	}
@@ -416,6 +432,7 @@ protected class OverridableParserRule_0_Keyword_overriddenelement extends Keywor
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prOverridableParserRule().ele0KeywordOverriddenelement();
 	}	
@@ -428,6 +445,7 @@ protected class OverridableParserRule_1_Assignment_name extends AssignmentToken 
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prOverridableParserRule().ele1AssignmentName();
 	}
@@ -463,6 +481,7 @@ protected class CallOverridenParserRule_Assignment_call extends AssignmentToken 
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prCallOverridenParserRule().eleAssignmentCall();
 	}
@@ -474,7 +493,7 @@ protected class CallOverridenParserRule_Assignment_call extends AssignmentToken 
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("AModel")) {
+			if(param.isInstanceOf(grammarAccess.prAbstractCallOverridenParserRule().getRule().getType().getType())) {
 				Solution s = new AbstractCallOverridenParserRule_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -505,6 +524,7 @@ protected class OverridableParserRule2_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prOverridableParserRule2().eleGroup();
 	}
@@ -534,6 +554,7 @@ protected class OverridableParserRule2_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prOverridableParserRule2().ele0Group();
 	}
@@ -563,6 +584,7 @@ protected class OverridableParserRule2_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prOverridableParserRule2().ele00Group();
 	}
@@ -592,6 +614,7 @@ protected class OverridableParserRule2_0_0_0_Keyword_overriddenotherelement exte
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prOverridableParserRule2().ele000KeywordOverriddenOtherElement();
 	}	
@@ -604,6 +627,7 @@ protected class OverridableParserRule2_0_0_1_Assignment_name extends AssignmentT
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prOverridableParserRule2().ele001AssignmentName();
 	}
@@ -629,6 +653,7 @@ protected class OverridableParserRule2_0_1_Keyword extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prOverridableParserRule2().ele01KeywordHyphenMinus();
 	}	
@@ -642,6 +667,7 @@ protected class OverridableParserRule2_1_Assignment_age extends AssignmentToken 
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prOverridableParserRule2().ele1AssignmentAge();
 	}
@@ -677,6 +703,7 @@ protected class ExtendableParserRule_Alternatives extends AlternativesToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.prExtendableParserRule().eleAlternatives();
 	}
@@ -699,6 +726,7 @@ protected class ExtendableParserRule_0_Alternatives extends AlternativesToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.prExtendableParserRule().ele0Alternatives();
 	}
@@ -721,6 +749,7 @@ protected class ExtendableParserRule_0_0_RuleCall_Subrule1 extends RuleCallToken
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prExtendableParserRule().ele00ParserRuleCallSubrule1();
 	}
@@ -728,7 +757,7 @@ protected class ExtendableParserRule_0_0_RuleCall_Subrule1 extends RuleCallToken
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Subrule1_Group.class, current)) return null;
-		if(!current.isInstanceOf("Subrule1")) return null;
+		if(!current.isInstanceOf(grammarAccess.prSubrule1().getRule().getType().getType())) return null;
 		return new Subrule1_Group(current, this).firstSolution();
 	}
 }
@@ -740,6 +769,7 @@ protected class ExtendableParserRule_0_1_RuleCall_Subrule2 extends RuleCallToken
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prExtendableParserRule().ele01ParserRuleCallSubrule2();
 	}
@@ -747,7 +777,7 @@ protected class ExtendableParserRule_0_1_RuleCall_Subrule2 extends RuleCallToken
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Subrule2_Group.class, current)) return null;
-		if(!current.isInstanceOf("Subrule2")) return null;
+		if(!current.isInstanceOf(grammarAccess.prSubrule2().getRule().getType().getType())) return null;
 		return new Subrule2_Group(current, this).firstSolution();
 	}
 }
@@ -760,6 +790,7 @@ protected class ExtendableParserRule_1_RuleCall_Subrule3 extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prExtendableParserRule().ele1ParserRuleCallSubrule3();
 	}
@@ -767,7 +798,7 @@ protected class ExtendableParserRule_1_RuleCall_Subrule3 extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Subrule3_Group.class, current)) return null;
-		if(!current.isInstanceOf("Subrule3")) return null;
+		if(!current.isInstanceOf(grammarAccess.prSubrule3().getRule().getType().getType())) return null;
 		return new Subrule3_Group(current, this).firstSolution();
 	}
 }
@@ -790,6 +821,7 @@ protected class Subrule1_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prSubrule1().eleGroup();
 	}
@@ -819,6 +851,7 @@ protected class Subrule1_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prSubrule1().ele0Group();
 	}
@@ -848,6 +881,7 @@ protected class Subrule1_0_0_Keyword_subrule1 extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prSubrule1().ele00KeywordSubrule1();
 	}	
@@ -860,6 +894,7 @@ protected class Subrule1_0_1_Assignment_name extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prSubrule1().ele01AssignmentName();
 	}
@@ -885,6 +920,7 @@ protected class Subrule1_1_Assignment_sub1 extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prSubrule1().ele1AssignmentSub1();
 	}
@@ -920,6 +956,7 @@ protected class Subrule2_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prSubrule2().eleGroup();
 	}
@@ -949,6 +986,7 @@ protected class Subrule2_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prSubrule2().ele0Group();
 	}
@@ -978,6 +1016,7 @@ protected class Subrule2_0_0_Keyword_subrule3 extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prSubrule2().ele00KeywordSubrule3();
 	}	
@@ -990,6 +1029,7 @@ protected class Subrule2_0_1_Assignment_name extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prSubrule2().ele01AssignmentName();
 	}
@@ -1015,6 +1055,7 @@ protected class Subrule2_1_Assignment_sub2 extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prSubrule2().ele1AssignmentSub2();
 	}
@@ -1050,6 +1091,7 @@ protected class Subrule3_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prSubrule3().eleGroup();
 	}
@@ -1079,6 +1121,7 @@ protected class Subrule3_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prSubrule3().ele0Group();
 	}
@@ -1108,6 +1151,7 @@ protected class Subrule3_0_0_Keyword_subrule3 extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prSubrule3().ele00KeywordSubrule3();
 	}	
@@ -1120,6 +1164,7 @@ protected class Subrule3_0_1_Assignment_name extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prSubrule3().ele01AssignmentName();
 	}
@@ -1145,6 +1190,7 @@ protected class Subrule3_1_Assignment_sub1 extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prSubrule3().ele1AssignmentSub1();
 	}
@@ -1180,6 +1226,7 @@ protected class CallExtendedParserRule_Assignment_call extends AssignmentToken  
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prCallExtendedParserRule().eleAssignmentCall();
 	}
@@ -1191,7 +1238,7 @@ protected class CallExtendedParserRule_Assignment_call extends AssignmentToken  
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("AModel")) {
+			if(param.isInstanceOf(grammarAccess.prAbstractCallExtendedParserRule().getRule().getType().getType())) {
 				Solution s = new AbstractCallExtendedParserRule_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -1222,6 +1269,7 @@ protected class InheritedParserRule_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prInheritedParserRule().eleGroup();
 	}
@@ -1251,6 +1299,7 @@ protected class InheritedParserRule_0_Keyword_element extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prInheritedParserRule().ele0KeywordElement();
 	}	
@@ -1263,6 +1312,7 @@ protected class InheritedParserRule_1_Assignment_name extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prInheritedParserRule().ele1AssignmentName();
 	}
@@ -1298,6 +1348,7 @@ protected class AbstractCallOverridenParserRule_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prAbstractCallOverridenParserRule().eleGroup();
 	}
@@ -1327,6 +1378,7 @@ protected class AbstractCallOverridenParserRule_0_Keyword_overridemodel extends 
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prAbstractCallOverridenParserRule().ele0KeywordOverridemodel();
 	}	
@@ -1339,6 +1391,7 @@ protected class AbstractCallOverridenParserRule_1_Assignment_elements extends As
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prAbstractCallOverridenParserRule().ele1AssignmentElements();
 	}
@@ -1350,7 +1403,7 @@ protected class AbstractCallOverridenParserRule_1_Assignment_elements extends As
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("AType")) {
+			if(param.isInstanceOf(grammarAccess.prOverridableParserRule().getRule().getType().getType())) {
 				Solution s = new OverridableParserRule_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -1382,6 +1435,7 @@ protected class AbstractCallExtendedParserRule_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prAbstractCallExtendedParserRule().eleGroup();
 	}
@@ -1411,6 +1465,7 @@ protected class AbstractCallExtendedParserRule_0_Keyword_extendedmodel extends K
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prAbstractCallExtendedParserRule().ele0KeywordExtendedmodel();
 	}	
@@ -1423,6 +1478,7 @@ protected class AbstractCallExtendedParserRule_1_Assignment_elements extends Ass
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prAbstractCallExtendedParserRule().ele1AssignmentElements();
 	}
@@ -1434,7 +1490,7 @@ protected class AbstractCallExtendedParserRule_1_Assignment_elements extends Ass
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("AType")) {
+			if(param.isInstanceOf(grammarAccess.prExtendableParserRule().getRule().getType().getType())) {
 				Solution s = new ExtendableParserRule_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {

@@ -27,7 +27,11 @@
 */
 package «this.consumerPackageName()»;
 
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+
+import org.eclipse.xtext.AbstractRule;
+
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
@@ -37,7 +41,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
-import «this.containingGrammar().grammarAccess()»;
 import «this.containingGrammar().grammarAccess()».«name»Elements;
 
 «FOREACH allCalledRules() AS calledRule-»
@@ -66,7 +69,6 @@ public final class «this.consumerClassName()» extends NonTerminalConsumer {
 «EXPAND defineConsume FOR alternatives-»
 
 	public «this.name»Elements getRule() {
-	// «grammar().grammarAccess().toSimpleName()».INSTANCE.pr«this.name»()
 		return rule;
 	}
 	
@@ -75,13 +77,13 @@ public final class «this.consumerClassName()» extends NonTerminalConsumer {
 	}
 	
 	@Override
-	protected EObject getGrammarElement() {
+	protected AbstractRule getGrammarElement() {
 		return getRule().getRule();
 	}
 
 	@Override
-	protected String getDefaultTypeName() {
-		return "«this.type.type.name»";
+	protected EClassifier getDefaultType() {
+		return getGrammarElement().getType().getType();
 	}
 	
 «FOREACH allCalledRules() AS calledRule-»
@@ -323,7 +325,7 @@ public final class «this.consumerClassName()» extends NonTerminalConsumer {
 «ENDDEFINE»
 
 «DEFINE defineConsumeBody FOR Action-»
-		consumeAction(getRule().«gaElementAccessMethodeName()»(), "«typeName.type.name»", «operator == "+="»);
+		consumeAction(getRule().«gaElementAccessMethodeName()»(), «operator == "+="»);
 		return ConsumeResult.SUCCESS;	
 «ENDDEFINE»
 

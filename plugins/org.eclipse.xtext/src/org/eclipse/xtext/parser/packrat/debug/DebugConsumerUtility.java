@@ -23,18 +23,18 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 public class DebugConsumerUtility implements IConsumerUtility {
 
 	private static final Logger log = Logger.getLogger(DebugConsumerUtility.class);
-	
+
 	private final IConsumerUtility delegate;
-	
+
 	public DebugConsumerUtility(IConsumerUtility delegate) {
 		this.delegate = delegate;
 	}
-	
-	public void consumeAction(Action action, String typeName, boolean isMany) {
+
+	public void consumeAction(Action action, boolean isMany) {
 		if (log.isDebugEnabled()) {
-			log.debug("consumeAction(typeName = " + typeName + ", feature = " + action.getFeature() + ", isMany = " + isMany + ")"); 
+			log.debug("consumeAction(type = " + action.getTypeName().getType().getName() + ", feature = " + action.getFeature() + ", isMany = " + isMany + ")");
 		}
-		delegate.consumeAction(action, typeName, isMany);
+		delegate.consumeAction(action, isMany);
 	}
 
 	public int consumeKeyword(Keyword keyword, String feature, boolean isMany, boolean isBoolean,
@@ -44,11 +44,11 @@ public class DebugConsumerUtility implements IConsumerUtility {
 					"feature = " + feature + ", " +
 					"isMany = " + isMany + ", " +
 					"isBoolean = " + isBoolean + ", " +
-					"notFollowedBy = " + notFollowedBy + ")"); 
+					"notFollowedBy = " + notFollowedBy + ")");
 		}
 		int result = delegate.consumeKeyword(keyword, feature, isMany, isBoolean, notFollowedBy);
 		if (log.isDebugEnabled()) {
-			log.debug("consumeKeyword('" + keyword.getValue() + "') = " + result); 
+			log.debug("consumeKeyword('" + keyword.getValue() + "') = " + result);
 		}
 		return result;
 	}
@@ -61,11 +61,11 @@ public class DebugConsumerUtility implements IConsumerUtility {
 					"isMany = " + isMany + ", " +
 					"isDatatype = " + isDatatype + ", " +
 					"isBoolean = " + isBoolean + ", " +
-					"grammarElement = " + grammarElement.eClass().getName() + ")"); 
+					"grammarElement = " + grammarElement.eClass().getName() + ")");
 		}
 		int result = delegate.consumeNonTerminal(consumer, feature, isMany, isDatatype, isBoolean, grammarElement);
 		if (log.isDebugEnabled()) {
-			log.debug("consumeNonTerminal(" + consumer + ") = " + result); 
+			log.debug("consumeNonTerminal(" + consumer + ") = " + result);
 		}
 		return result;
 	}
@@ -78,11 +78,11 @@ public class DebugConsumerUtility implements IConsumerUtility {
 					"isMany = " + isMany + ", " +
 					"isBoolean = " + isBoolean + ", " +
 					"grammarElement = " + grammarElement.eClass().getName() + ", " +
-					"notMatching = " + notMatching + ")"); 
+					"notMatching = " + notMatching + ")");
 		}
 		int result = delegate.consumeTerminal(consumer, feature, isMany, isBoolean, grammarElement, notMatching);
 		if (log.isDebugEnabled()) {
-			log.debug("consumeTerminal(" + consumer + ") = " + result); 
+			log.debug("consumeTerminal(" + consumer + ") = " + result);
 		}
 		return result;
 	}

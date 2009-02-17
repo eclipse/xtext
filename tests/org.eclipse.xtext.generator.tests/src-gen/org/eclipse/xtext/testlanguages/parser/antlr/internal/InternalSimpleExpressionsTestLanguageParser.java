@@ -148,7 +148,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
             	    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalSimpleExpressionsTestLanguage.g:94:5: 
             	    {
             	     
-            	            temp=factory.create("Sequence");
+            	            temp=factory.create(grammarAccess.prSequence().ele10ActionSequenceexpressions().getTypeName().getType());
             	            try {
             	            	factory.add(temp, "expressions", current, null /*ParserRule*/, currentNode);
             	            } catch(ValueConverterException vce) {
@@ -177,7 +177,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create("Sequence");
+            	    	            current = factory.create(grammarAccess.prSequence().getRule().getType().getType());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -310,7 +310,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
             	    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalSimpleExpressionsTestLanguage.g:163:5: 
             	    {
             	     
-            	            temp=factory.create("Op");
+            	            temp=factory.create(grammarAccess.prAddition().ele100ActionOpvalues().getTypeName().getType());
             	            try {
             	            	factory.add(temp, "values", current, null /*ParserRule*/, currentNode);
             	            } catch(ValueConverterException vce) {
@@ -372,7 +372,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create("Expression");
+            	    	            current = factory.create(grammarAccess.prAddition().getRule().getType().getType());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        
@@ -400,7 +400,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create("Expression");
+            	    	            current = factory.create(grammarAccess.prAddition().getRule().getType().getType());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -533,7 +533,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
             	    // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalSimpleExpressionsTestLanguage.g:260:5: 
             	    {
             	     
-            	            temp=factory.create("Op");
+            	            temp=factory.create(grammarAccess.prMultiplication().ele100ActionOpvalues().getTypeName().getType());
             	            try {
             	            	factory.add(temp, "values", current, null /*ParserRule*/, currentNode);
             	            } catch(ValueConverterException vce) {
@@ -595,7 +595,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create("Expression");
+            	    	            current = factory.create(grammarAccess.prMultiplication().getRule().getType().getType());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        
@@ -623,7 +623,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create("Expression");
+            	    	            current = factory.create(grammarAccess.prMultiplication().getRule().getType().getType());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -850,7 +850,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
             	
 
             	        if (current==null) {
-            	            current = factory.create("Atom");
+            	            current = factory.create(grammarAccess.prAtom().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        

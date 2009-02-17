@@ -6,8 +6,8 @@ package org.eclipse.xtext.parsetree.reconstr.parsetree.reconstr;
 //import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parsetree.reconstr.*;
-import org.eclipse.xtext.parsetree.reconstr.impl.*;
+import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
 import org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestLanguageGrammarAccess;
 
@@ -18,19 +18,20 @@ public class SimpleReconstrTestLanguageParseTreeConstructor extends AbstractPars
 	@Inject
 	private SimpleReconstrTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf("Expression") && (s = new Op_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("Expression") && (s = new Term_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("Atom") && (s = new Atom_Assignment_name(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("Expression") && (s = new Parens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("TwoNumbers") && (s = new TwoNumbers_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("ManyStrings") && (s = new ManyStrings_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("Type") && (s = new Type_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("Ref2") && (s = new Ref2_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("Spare") && (s = new Spare_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("Boolean") && (s = new Boolean_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prOp().getRule().getType().getType()) && (s = new Op_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prTerm().getRule().getType().getType()) && (s = new Term_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prAtom().getRule().getType().getType()) && (s = new Atom_Assignment_name(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prParens().getRule().getType().getType()) && (s = new Parens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prTwoNumbers().getRule().getType().getType()) && (s = new TwoNumbers_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prManyStrings().getRule().getType().getType()) && (s = new ManyStrings_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prType().getRule().getType().getType()) && (s = new Type_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prRef2().getRule().getType().getType()) && (s = new Ref2_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prSpare().getRule().getType().getType()) && (s = new Spare_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prBoolean().getRule().getType().getType()) && (s = new Boolean_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
@@ -49,6 +50,7 @@ protected class Op_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prOp().eleGroup();
 	}
@@ -78,6 +80,7 @@ protected class Op_0_RuleCall_Term extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prOp().ele0ParserRuleCallTerm();
 	}
@@ -85,7 +88,7 @@ protected class Op_0_RuleCall_Term extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Term_Alternatives.class, current)) return null;
-		if(!current.isInstanceOf("Expression")) return null;
+		if(!current.isInstanceOf(grammarAccess.prTerm().getRule().getType().getType())) return null;
 		return new Term_Alternatives(current, this).firstSolution();
 	}
 }
@@ -97,6 +100,7 @@ protected class Op_1_Group extends GroupToken {
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prOp().ele1Group();
 	}
@@ -126,13 +130,14 @@ protected class Op_1_0_Action_Op_values extends ActionToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Action getGrammarElement() {
 		return grammarAccess.prOp().ele10ActionOpvalues();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf("Op")) return null;
+		if(!current.isInstanceOf(grammarAccess.prOp().ele10ActionOpvalues().getTypeName().getType())) return null;
 		Object val = current.getConsumable("values", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("values")) return null;
@@ -147,6 +152,7 @@ protected class Op_1_1_Assignment_values extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prOp().ele11AssignmentValues();
 	}
@@ -158,7 +164,7 @@ protected class Op_1_1_Assignment_values extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("Expression")) {
+			if(param.isInstanceOf(grammarAccess.prTerm().getRule().getType().getType())) {
 				Solution s = new Term_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -191,6 +197,7 @@ protected class Term_Alternatives extends AlternativesToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.prTerm().eleAlternatives();
 	}
@@ -213,6 +220,7 @@ protected class Term_0_Alternatives extends AlternativesToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.prTerm().ele0Alternatives();
 	}
@@ -235,6 +243,7 @@ protected class Term_0_0_Alternatives extends AlternativesToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.prTerm().ele00Alternatives();
 	}
@@ -257,6 +266,7 @@ protected class Term_0_0_0_Alternatives extends AlternativesToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.prTerm().ele000Alternatives();
 	}
@@ -279,6 +289,7 @@ protected class Term_0_0_0_0_Alternatives extends AlternativesToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.prTerm().ele0000Alternatives();
 	}
@@ -301,6 +312,7 @@ protected class Term_0_0_0_0_0_Alternatives extends AlternativesToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.prTerm().ele00000Alternatives();
 	}
@@ -323,6 +335,7 @@ protected class Term_0_0_0_0_0_0_Alternatives extends AlternativesToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.prTerm().ele000000Alternatives();
 	}
@@ -345,6 +358,7 @@ protected class Term_0_0_0_0_0_0_0_RuleCall_Atom extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prTerm().ele0000000ParserRuleCallAtom();
 	}
@@ -352,7 +366,7 @@ protected class Term_0_0_0_0_0_0_0_RuleCall_Atom extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Atom_Assignment_name.class, current)) return null;
-		if(!current.isInstanceOf("Atom")) return null;
+		if(!current.isInstanceOf(grammarAccess.prAtom().getRule().getType().getType())) return null;
 		return new Atom_Assignment_name(current, this).firstSolution();
 	}
 }
@@ -364,6 +378,7 @@ protected class Term_0_0_0_0_0_0_1_RuleCall_TwoNumbers extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prTerm().ele0000001ParserRuleCallTwoNumbers();
 	}
@@ -371,7 +386,7 @@ protected class Term_0_0_0_0_0_0_1_RuleCall_TwoNumbers extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(TwoNumbers_Group.class, current)) return null;
-		if(!current.isInstanceOf("TwoNumbers")) return null;
+		if(!current.isInstanceOf(grammarAccess.prTwoNumbers().getRule().getType().getType())) return null;
 		return new TwoNumbers_Group(current, this).firstSolution();
 	}
 }
@@ -384,6 +399,7 @@ protected class Term_0_0_0_0_0_1_RuleCall_ManyStrings extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prTerm().ele000001ParserRuleCallManyStrings();
 	}
@@ -391,7 +407,7 @@ protected class Term_0_0_0_0_0_1_RuleCall_ManyStrings extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(ManyStrings_Group.class, current)) return null;
-		if(!current.isInstanceOf("ManyStrings")) return null;
+		if(!current.isInstanceOf(grammarAccess.prManyStrings().getRule().getType().getType())) return null;
 		return new ManyStrings_Group(current, this).firstSolution();
 	}
 }
@@ -404,6 +420,7 @@ protected class Term_0_0_0_0_1_RuleCall_Parens extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prTerm().ele00001ParserRuleCallParens();
 	}
@@ -411,7 +428,7 @@ protected class Term_0_0_0_0_1_RuleCall_Parens extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Parens_Group.class, current)) return null;
-		if(!current.isInstanceOf("Expression")) return null;
+		if(!current.isInstanceOf(grammarAccess.prParens().getRule().getType().getType())) return null;
 		return new Parens_Group(current, this).firstSolution();
 	}
 }
@@ -424,6 +441,7 @@ protected class Term_0_0_0_1_RuleCall_Type extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prTerm().ele0001ParserRuleCallType();
 	}
@@ -431,7 +449,7 @@ protected class Term_0_0_0_1_RuleCall_Type extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Type_Group.class, current)) return null;
-		if(!current.isInstanceOf("Type")) return null;
+		if(!current.isInstanceOf(grammarAccess.prType().getRule().getType().getType())) return null;
 		return new Type_Group(current, this).firstSolution();
 	}
 }
@@ -444,6 +462,7 @@ protected class Term_0_0_1_RuleCall_Ref2 extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prTerm().ele001ParserRuleCallRef2();
 	}
@@ -451,7 +470,7 @@ protected class Term_0_0_1_RuleCall_Ref2 extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Ref2_Group.class, current)) return null;
-		if(!current.isInstanceOf("Ref2")) return null;
+		if(!current.isInstanceOf(grammarAccess.prRef2().getRule().getType().getType())) return null;
 		return new Ref2_Group(current, this).firstSolution();
 	}
 }
@@ -464,6 +483,7 @@ protected class Term_0_1_RuleCall_Spare extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prTerm().ele01ParserRuleCallSpare();
 	}
@@ -471,7 +491,7 @@ protected class Term_0_1_RuleCall_Spare extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Spare_Group.class, current)) return null;
-		if(!current.isInstanceOf("Spare")) return null;
+		if(!current.isInstanceOf(grammarAccess.prSpare().getRule().getType().getType())) return null;
 		return new Spare_Group(current, this).firstSolution();
 	}
 }
@@ -484,6 +504,7 @@ protected class Term_1_RuleCall_Boolean extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prTerm().ele1ParserRuleCallBoolean();
 	}
@@ -491,7 +512,7 @@ protected class Term_1_RuleCall_Boolean extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Boolean_Group.class, current)) return null;
-		if(!current.isInstanceOf("Boolean")) return null;
+		if(!current.isInstanceOf(grammarAccess.prBoolean().getRule().getType().getType())) return null;
 		return new Boolean_Group(current, this).firstSolution();
 	}
 }
@@ -514,6 +535,7 @@ protected class Atom_Assignment_name extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prAtom().eleAssignmentName();
 	}
@@ -548,6 +570,7 @@ protected class Parens_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prParens().eleGroup();
 	}
@@ -577,6 +600,7 @@ protected class Parens_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prParens().ele0Group();
 	}
@@ -606,6 +630,7 @@ protected class Parens_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prParens().ele00Group();
 	}
@@ -635,6 +660,7 @@ protected class Parens_0_0_0_Keyword extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prParens().ele000KeywordLeftParenthesis();
 	}	
@@ -647,6 +673,7 @@ protected class Parens_0_0_1_RuleCall_Op extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prParens().ele001ParserRuleCallOp();
 	}
@@ -654,7 +681,7 @@ protected class Parens_0_0_1_RuleCall_Op extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Op_Group.class, current)) return null;
-		if(!current.isInstanceOf("Expression")) return null;
+		if(!current.isInstanceOf(grammarAccess.prOp().getRule().getType().getType())) return null;
 		return new Op_Group(current, this).firstSolution();
 	}
 }
@@ -667,6 +694,7 @@ protected class Parens_0_1_Keyword extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prParens().ele01KeywordRightParenthesis();
 	}	
@@ -680,6 +708,7 @@ protected class Parens_1_Assignment_em extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prParens().ele1AssignmentEm();
 	}
@@ -717,6 +746,7 @@ protected class TwoNumbers_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTwoNumbers().eleGroup();
 	}
@@ -746,6 +776,7 @@ protected class TwoNumbers_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTwoNumbers().ele0Group();
 	}
@@ -775,6 +806,7 @@ protected class TwoNumbers_0_0_Assignment_num1 extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prTwoNumbers().ele00AssignmentNum1();
 	}
@@ -799,6 +831,7 @@ protected class TwoNumbers_0_1_Assignment_num2 extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prTwoNumbers().ele01AssignmentNum2();
 	}
@@ -824,6 +857,7 @@ protected class TwoNumbers_1_Group extends GroupToken {
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTwoNumbers().ele1Group();
 	}
@@ -853,6 +887,7 @@ protected class TwoNumbers_1_0_Keyword extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prTwoNumbers().ele10KeywordNumberSign();
 	}	
@@ -865,6 +900,7 @@ protected class TwoNumbers_1_1_Assignment_num3 extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prTwoNumbers().ele11AssignmentNum3();
 	}
@@ -901,6 +937,7 @@ protected class ManyStrings_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prManyStrings().eleGroup();
 	}
@@ -930,6 +967,7 @@ protected class ManyStrings_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prManyStrings().ele0Group();
 	}
@@ -959,6 +997,7 @@ protected class ManyStrings_0_0_Keyword extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prManyStrings().ele00KeywordEqualsSign();
 	}	
@@ -971,6 +1010,7 @@ protected class ManyStrings_0_1_Assignment_str1 extends AssignmentToken  {
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prManyStrings().ele01AssignmentStr1();
 	}
@@ -996,6 +1036,7 @@ protected class ManyStrings_1_Assignment_str2 extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prManyStrings().ele1AssignmentStr2();
 	}
@@ -1031,6 +1072,7 @@ protected class Type_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prType().eleGroup();
 	}
@@ -1060,6 +1102,7 @@ protected class Type_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prType().ele0Group();
 	}
@@ -1089,6 +1132,7 @@ protected class Type_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prType().ele00Group();
 	}
@@ -1118,6 +1162,7 @@ protected class Type_0_0_0_Keyword_type extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prType().ele000KeywordType();
 	}	
@@ -1130,6 +1175,7 @@ protected class Type_0_0_1_Assignment_name extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prType().ele001AssignmentName();
 	}
@@ -1155,6 +1201,7 @@ protected class Type_0_1_Keyword_extends extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prType().ele01KeywordExtends();
 	}	
@@ -1168,6 +1215,7 @@ protected class Type_1_Assignment_extends extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prType().ele1AssignmentExtends();
 	}
@@ -1178,7 +1226,7 @@ protected class Type_1_Assignment_extends extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("extends");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("Type")) {
+			if(param.isInstanceOf(grammarAccess.prType().ele10CrossReferenceEStringType().getType().getType())) {
 				type = AssignmentType.CR;
 				element = grammarAccess.prType().ele10CrossReferenceEStringType(); 
 				return new Solution(obj);
@@ -1206,6 +1254,7 @@ protected class Ref2_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prRef2().eleGroup();
 	}
@@ -1235,6 +1284,7 @@ protected class Ref2_0_Keyword_2 extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prRef2().ele0KeywordNumberSignDigitTwo();
 	}	
@@ -1247,6 +1297,7 @@ protected class Ref2_1_Assignment_ref2 extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prRef2().ele1AssignmentRef2();
 	}
@@ -1296,6 +1347,7 @@ protected class Spare_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prSpare().eleGroup();
 	}
@@ -1325,6 +1377,7 @@ protected class Spare_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prSpare().ele0Group();
 	}
@@ -1354,6 +1407,7 @@ protected class Spare_0_0_Keyword_3 extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prSpare().ele00KeywordNumberSignDigitThree();
 	}	
@@ -1366,6 +1420,7 @@ protected class Spare_0_1_Assignment_id extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prSpare().ele01AssignmentId();
 	}
@@ -1391,6 +1446,7 @@ protected class Spare_1_Group extends GroupToken {
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prSpare().ele1Group();
 	}
@@ -1420,6 +1476,7 @@ protected class Spare_1_0_Keyword extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prSpare().ele10KeywordFullStop();
 	}	
@@ -1432,6 +1489,7 @@ protected class Spare_1_1_Assignment_id extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prSpare().ele11AssignmentId();
 	}
@@ -1468,6 +1526,7 @@ protected class Boolean_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prBoolean().eleGroup();
 	}
@@ -1497,6 +1556,7 @@ protected class Boolean_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prBoolean().ele0Group();
 	}
@@ -1526,6 +1586,7 @@ protected class Boolean_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prBoolean().ele00Group();
 	}
@@ -1555,6 +1616,7 @@ protected class Boolean_0_0_0_Keyword_4 extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prBoolean().ele000KeywordNumberSignDigitFour();
 	}	
@@ -1567,6 +1629,7 @@ protected class Boolean_0_0_1_Assignment_bool extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prBoolean().ele001AssignmentBool();
 	}
@@ -1594,6 +1657,7 @@ protected class Boolean_0_1_Keyword_kw extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prBoolean().ele01KeywordKw();
 	}	
@@ -1607,6 +1671,7 @@ protected class Boolean_1_Assignment_value extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prBoolean().ele1AssignmentValue();
 	}

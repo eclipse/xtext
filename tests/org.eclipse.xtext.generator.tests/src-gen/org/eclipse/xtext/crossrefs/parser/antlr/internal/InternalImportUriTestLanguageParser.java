@@ -142,7 +142,7 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create("Main");
+            	    	            current = factory.create(grammarAccess.prMain().getRule().getType().getType());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -186,7 +186,7 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create("Main");
+            	    	            current = factory.create(grammarAccess.prMain().getRule().getType().getType());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -293,7 +293,7 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
             	
 
             	        if (current==null) {
-            	            current = factory.create("Import");
+            	            current = factory.create(grammarAccess.prImport().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -399,7 +399,7 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
             	
 
             	        if (current==null) {
-            	            current = factory.create("Type");
+            	            current = factory.create(grammarAccess.prType().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -427,7 +427,7 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
             {
 
             			if (current==null) {
-            	            current = factory.create("Type");
+            	            current = factory.create(grammarAccess.prType().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     

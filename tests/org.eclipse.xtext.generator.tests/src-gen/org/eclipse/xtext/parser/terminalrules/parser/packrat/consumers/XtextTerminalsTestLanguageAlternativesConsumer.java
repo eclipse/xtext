@@ -3,7 +3,11 @@ Generated with Xtext
 */
 package org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers;
 
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+
+import org.eclipse.xtext.AbstractRule;
+
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
@@ -13,7 +17,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
-import org.eclipse.xtext.parser.terminalrules.services.XtextTerminalsTestLanguageGrammarAccess;
 import org.eclipse.xtext.parser.terminalrules.services.XtextTerminalsTestLanguageGrammarAccess.AlternativesElements;
 
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerminalsTestLanguageGroupConsumer;
@@ -121,7 +124,7 @@ public final class XtextTerminalsTestLanguageAlternativesConsumer extends NonTer
 		return result;
 	}
 	protected int consumeAction$5(int entryPoint) {
-		consumeAction(getRule().ele100ActionAlternativesgroups(), "Alternatives", true);
+		consumeAction(getRule().ele100ActionAlternativesgroups(), true);
 		return ConsumeResult.SUCCESS;	
 	}
 
@@ -138,7 +141,6 @@ public final class XtextTerminalsTestLanguageAlternativesConsumer extends NonTer
 	}
 
 	public AlternativesElements getRule() {
-	// XtextTerminalsTestLanguageGrammarAccess.INSTANCE.prAlternatives()
 		return rule;
 	}
 	
@@ -147,13 +149,13 @@ public final class XtextTerminalsTestLanguageAlternativesConsumer extends NonTer
 	}
 	
 	@Override
-	protected EObject getGrammarElement() {
+	protected AbstractRule getGrammarElement() {
 		return getRule().getRule();
 	}
 
 	@Override
-	protected String getDefaultTypeName() {
-		return "AbstractElement";
+	protected EClassifier getDefaultType() {
+		return getGrammarElement().getType().getType();
 	}
 	
 	public void setGroupConsumer(INonTerminalConsumer groupConsumer) {

@@ -92,7 +92,7 @@ ruleSequence returns [EObject current=null]
     }
 ((
     { 
-        temp=factory.create("Sequence");
+        temp=factory.create(grammarAccess.prSequence().ele10ActionSequenceexpressions().getTypeName().getType());
         try {
         	factory.add(temp, "expressions", $current, null /*ParserRule*/, currentNode);
         } catch(ValueConverterException vce) {
@@ -115,7 +115,7 @@ ruleSequence returns [EObject current=null]
 	    lv_expressions_2=ruleAddition 
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Sequence");
+	            $current = factory.create(grammarAccess.prSequence().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -161,7 +161,7 @@ ruleAddition returns [EObject current=null]
     }
 (((
     { 
-        temp=factory.create("Op");
+        temp=factory.create(grammarAccess.prAddition().ele100ActionOpvalues().getTypeName().getType());
         try {
         	factory.add(temp, "values", $current, null /*ParserRule*/, currentNode);
         } catch(ValueConverterException vce) {
@@ -192,7 +192,7 @@ ruleAddition returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Expression");
+	            $current = factory.create(grammarAccess.prAddition().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -212,7 +212,7 @@ ruleAddition returns [EObject current=null]
 	    lv_values_3=ruleMultiplication 
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Expression");
+	            $current = factory.create(grammarAccess.prAddition().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -258,7 +258,7 @@ ruleMultiplication returns [EObject current=null]
     }
 (((
     { 
-        temp=factory.create("Op");
+        temp=factory.create(grammarAccess.prMultiplication().ele100ActionOpvalues().getTypeName().getType());
         try {
         	factory.add(temp, "values", $current, null /*ParserRule*/, currentNode);
         } catch(ValueConverterException vce) {
@@ -289,7 +289,7 @@ ruleMultiplication returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Expression");
+	            $current = factory.create(grammarAccess.prMultiplication().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -309,7 +309,7 @@ ruleMultiplication returns [EObject current=null]
 	    lv_values_3=ruleTerm 
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Expression");
+	            $current = factory.create(grammarAccess.prMultiplication().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -395,7 +395,7 @@ ruleAtom returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Atom");
+	            $current = factory.create(grammarAccess.prAtom().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        

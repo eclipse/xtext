@@ -3,7 +3,11 @@ Generated with Xtext
 */
 package org.eclipse.xtext.testlanguages.parser.packrat.consumers;
 
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+
+import org.eclipse.xtext.AbstractRule;
+
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
@@ -13,7 +17,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
-import org.eclipse.xtext.testlanguages.services.SimpleExpressionsTestLanguageGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.SimpleExpressionsTestLanguageGrammarAccess.TermElements;
 
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.SimpleExpressionsTestLanguageAtomConsumer;
@@ -64,7 +67,6 @@ public final class SimpleExpressionsTestLanguageTermConsumer extends NonTerminal
 	}
 
 	public TermElements getRule() {
-	// SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prTerm()
 		return rule;
 	}
 	
@@ -73,13 +75,13 @@ public final class SimpleExpressionsTestLanguageTermConsumer extends NonTerminal
 	}
 	
 	@Override
-	protected EObject getGrammarElement() {
+	protected AbstractRule getGrammarElement() {
 		return getRule().getRule();
 	}
 
 	@Override
-	protected String getDefaultTypeName() {
-		return "Expression";
+	protected EClassifier getDefaultType() {
+		return getGrammarElement().getType().getType();
 	}
 	
 	public void setAtomConsumer(INonTerminalConsumer atomConsumer) {

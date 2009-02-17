@@ -3,7 +3,11 @@ Generated with Xtext
 */
 package org.eclipse.xtext.example.parser.packrat.consumers;
 
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+
+import org.eclipse.xtext.AbstractRule;
+
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
@@ -13,7 +17,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
-import org.eclipse.xtext.example.services.DomainmodelGrammarAccess;
 import org.eclipse.xtext.example.services.DomainmodelGrammarAccess.EntityElements;
 
 import org.eclipse.xtext.example.parser.packrat.consumers.DomainmodelFeatureConsumer;
@@ -212,7 +215,6 @@ public final class DomainmodelEntityConsumer extends NonTerminalConsumer {
 	}
 
 	public EntityElements getRule() {
-	// DomainmodelGrammarAccess.INSTANCE.prEntity()
 		return rule;
 	}
 	
@@ -221,13 +223,13 @@ public final class DomainmodelEntityConsumer extends NonTerminalConsumer {
 	}
 	
 	@Override
-	protected EObject getGrammarElement() {
+	protected AbstractRule getGrammarElement() {
 		return getRule().getRule();
 	}
 
 	@Override
-	protected String getDefaultTypeName() {
-		return "Entity";
+	protected EClassifier getDefaultType() {
+		return getGrammarElement().getType().getType();
 	}
 	
 	public void setFeatureConsumer(INonTerminalConsumer featureConsumer) {

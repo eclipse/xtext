@@ -263,7 +263,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             	
 
             	        if (current==null) {
-            	            current = factory.create("Line");
+            	            current = factory.create(grammarAccess.prLine().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -286,7 +286,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             	
 
             	        if (current==null) {
-            	            current = factory.create("Line");
+            	            current = factory.create(grammarAccess.prLine().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -408,7 +408,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create("TestLinewrap");
+            	    	            current = factory.create(grammarAccess.prTestLinewrap().getRule().getType().getType());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -551,7 +551,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create("TestIndentation");
+            	    	            current = factory.create(grammarAccess.prTestIndentation().getRule().getType().getType());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -583,7 +583,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create("TestIndentation");
+            	    	            current = factory.create(grammarAccess.prTestIndentation().getRule().getType().getType());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        

@@ -137,7 +137,7 @@ public class InternalTestLanguageParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create("File");
+            	    	            current = factory.create(grammarAccess.prFile().getRule().getType().getType());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -241,7 +241,7 @@ public class InternalTestLanguageParser extends AbstractInternalAntlrParser {
             	
 
             	        if (current==null) {
-            	            current = factory.create("Stuff");
+            	            current = factory.create(grammarAccess.prStuff().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        

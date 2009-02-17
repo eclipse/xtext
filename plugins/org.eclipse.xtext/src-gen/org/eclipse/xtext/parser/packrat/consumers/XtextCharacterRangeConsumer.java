@@ -3,7 +3,11 @@ Generated with Xtext
 */
 package org.eclipse.xtext.parser.packrat.consumers;
 
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+
+import org.eclipse.xtext.AbstractRule;
+
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
@@ -13,7 +17,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
-import org.eclipse.xtext.services.XtextGrammarAccess;
 import org.eclipse.xtext.services.XtextGrammarAccess.CharacterRangeElements;
 
 import org.eclipse.xtext.parser.packrat.consumers.XtextKeywordConsumer;
@@ -122,7 +125,7 @@ public final class XtextCharacterRangeConsumer extends NonTerminalConsumer {
 		return result;
 	}
 	protected int consumeAction$5(int entryPoint) {
-		consumeAction(getRule().ele100ActionCharacterRangeleft(), "CharacterRange", false);
+		consumeAction(getRule().ele100ActionCharacterRangeleft(), false);
 		return ConsumeResult.SUCCESS;	
 	}
 
@@ -139,7 +142,6 @@ public final class XtextCharacterRangeConsumer extends NonTerminalConsumer {
 	}
 
 	public CharacterRangeElements getRule() {
-	// XtextGrammarAccess.INSTANCE.prCharacterRange()
 		return rule;
 	}
 	
@@ -148,13 +150,13 @@ public final class XtextCharacterRangeConsumer extends NonTerminalConsumer {
 	}
 	
 	@Override
-	protected EObject getGrammarElement() {
+	protected AbstractRule getGrammarElement() {
 		return getRule().getRule();
 	}
 
 	@Override
-	protected String getDefaultTypeName() {
-		return "AbstractElement";
+	protected EClassifier getDefaultType() {
+		return getGrammarElement().getType().getType();
 	}
 	
 	public void setKeywordConsumer(INonTerminalConsumer keywordConsumer) {

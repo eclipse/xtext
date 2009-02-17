@@ -94,7 +94,7 @@ ruleSpielplatz returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Spielplatz");
+	            $current = factory.create(grammarAccess.prSpielplatz().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -114,7 +114,7 @@ ruleSpielplatz returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Spielplatz");
+	            $current = factory.create(grammarAccess.prSpielplatz().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -138,7 +138,7 @@ ruleSpielplatz returns [EObject current=null]
 	    lv_kinder_4=ruleKind 
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Spielplatz");
+	            $current = factory.create(grammarAccess.prSpielplatz().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -160,7 +160,7 @@ ruleSpielplatz returns [EObject current=null]
 	    lv_erzieher_5=ruleErwachsener 
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Spielplatz");
+	            $current = factory.create(grammarAccess.prSpielplatz().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -182,7 +182,7 @@ ruleSpielplatz returns [EObject current=null]
 	    lv_spielzeuge_6=ruleSpielzeug 
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Spielplatz");
+	            $current = factory.create(grammarAccess.prSpielplatz().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -204,7 +204,7 @@ ruleSpielplatz returns [EObject current=null]
 	    lv_familie_7=ruleFamilie 
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Spielplatz");
+	            $current = factory.create(grammarAccess.prSpielplatz().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -262,7 +262,7 @@ ruleKind returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Kind");
+	            $current = factory.create(grammarAccess.prKind().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -282,7 +282,7 @@ ruleKind returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Kind");
+	            $current = factory.create(grammarAccess.prKind().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -337,7 +337,7 @@ ruleErwachsener returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Erwachsener");
+	            $current = factory.create(grammarAccess.prErwachsener().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -357,7 +357,7 @@ ruleErwachsener returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Erwachsener");
+	            $current = factory.create(grammarAccess.prErwachsener().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -412,7 +412,7 @@ ruleSpielzeug returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Spielzeug");
+	            $current = factory.create(grammarAccess.prSpielzeug().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -432,7 +432,7 @@ ruleSpielzeug returns [EObject current=null]
 	    lv_farbe_3=ruleFarbe 
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Spielzeug");
+	            $current = factory.create(grammarAccess.prSpielzeug().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -543,7 +543,7 @@ ruleFamilie returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Familie");
+	            $current = factory.create(grammarAccess.prFamilie().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -559,7 +559,7 @@ ruleFamilie returns [EObject current=null]
 		
 		{
 			if ($current==null) {
-	            $current = factory.create("Familie");
+	            $current = factory.create(grammarAccess.prFamilie().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
@@ -575,7 +575,7 @@ ruleFamilie returns [EObject current=null]
 		
 		{
 			if ($current==null) {
-	            $current = factory.create("Familie");
+	            $current = factory.create(grammarAccess.prFamilie().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
@@ -591,7 +591,7 @@ ruleFamilie returns [EObject current=null]
 		
 		{
 			if ($current==null) {
-	            $current = factory.create("Familie");
+	            $current = factory.create(grammarAccess.prFamilie().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
@@ -611,7 +611,7 @@ ruleFamilie returns [EObject current=null]
 		
 		{
 			if ($current==null) {
-	            $current = factory.create("Familie");
+	            $current = factory.create(grammarAccess.prFamilie().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }

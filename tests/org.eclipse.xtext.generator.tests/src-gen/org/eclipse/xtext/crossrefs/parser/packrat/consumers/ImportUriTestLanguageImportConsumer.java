@@ -3,7 +3,11 @@ Generated with Xtext
 */
 package org.eclipse.xtext.crossrefs.parser.packrat.consumers;
 
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+
+import org.eclipse.xtext.AbstractRule;
+
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
@@ -13,7 +17,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
-import org.eclipse.xtext.crossrefs.services.ImportUriTestLanguageGrammarAccess;
 import org.eclipse.xtext.crossrefs.services.ImportUriTestLanguageGrammarAccess.ImportElements;
 
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGConsumer;
@@ -84,7 +87,6 @@ public final class ImportUriTestLanguageImportConsumer extends NonTerminalConsum
 	}
 
 	public ImportElements getRule() {
-	// ImportUriTestLanguageGrammarAccess.INSTANCE.prImport()
 		return rule;
 	}
 	
@@ -93,13 +95,13 @@ public final class ImportUriTestLanguageImportConsumer extends NonTerminalConsum
 	}
 	
 	@Override
-	protected EObject getGrammarElement() {
+	protected AbstractRule getGrammarElement() {
 		return getRule().getRule();
 	}
 
 	@Override
-	protected String getDefaultTypeName() {
-		return "Import";
+	protected EClassifier getDefaultType() {
+		return getGrammarElement().getType().getType();
 	}
 	
 	public void setStringConsumer(ITerminalConsumer stringConsumer) {

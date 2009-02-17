@@ -3,7 +3,11 @@ Generated with Xtext
 */
 package org.eclipse.xtext.testlanguages.parser.packrat.consumers;
 
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+
+import org.eclipse.xtext.AbstractRule;
+
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
@@ -13,7 +17,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
-import org.eclipse.xtext.testlanguages.services.SimpleExpressionsTestLanguageGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.SimpleExpressionsTestLanguageGrammarAccess.MultiplicationElements;
 
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.SimpleExpressionsTestLanguageTermConsumer;
@@ -124,7 +127,7 @@ public final class SimpleExpressionsTestLanguageMultiplicationConsumer extends N
 		return result;
 	}
 	protected int consumeAction$5(int entryPoint) {
-		consumeAction(getRule().ele100ActionOpvalues(), "Op", true);
+		consumeAction(getRule().ele100ActionOpvalues(), true);
 		return ConsumeResult.SUCCESS;	
 	}
 
@@ -168,7 +171,6 @@ public final class SimpleExpressionsTestLanguageMultiplicationConsumer extends N
 	}
 
 	public MultiplicationElements getRule() {
-	// SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prMultiplication()
 		return rule;
 	}
 	
@@ -177,13 +179,13 @@ public final class SimpleExpressionsTestLanguageMultiplicationConsumer extends N
 	}
 	
 	@Override
-	protected EObject getGrammarElement() {
+	protected AbstractRule getGrammarElement() {
 		return getRule().getRule();
 	}
 
 	@Override
-	protected String getDefaultTypeName() {
-		return "Expression";
+	protected EClassifier getDefaultType() {
+		return getGrammarElement().getType().getType();
 	}
 	
 	public void setTermConsumer(INonTerminalConsumer termConsumer) {

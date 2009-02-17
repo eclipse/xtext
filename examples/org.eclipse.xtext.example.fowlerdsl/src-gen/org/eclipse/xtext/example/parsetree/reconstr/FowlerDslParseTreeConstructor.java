@@ -6,8 +6,8 @@ package org.eclipse.xtext.example.parsetree.reconstr;
 //import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parsetree.reconstr.*;
-import org.eclipse.xtext.parsetree.reconstr.impl.*;
+import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
 import org.eclipse.xtext.example.services.FowlerDslGrammarAccess;
 
@@ -18,14 +18,15 @@ public class FowlerDslParseTreeConstructor extends AbstractParseTreeConstructor 
 	@Inject
 	private FowlerDslGrammarAccess grammarAccess;
 	
+	@Override
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf("Statemachine") && (s = new Statemachine_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("Event") && (s = new Event_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("Command") && (s = new Command_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("State") && (s = new State_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("Transition") && (s = new Transition_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prStatemachine().getRule().getType().getType()) && (s = new Statemachine_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prEvent().getRule().getType().getType()) && (s = new Event_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prCommand().getRule().getType().getType()) && (s = new Command_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prState().getRule().getType().getType()) && (s = new State_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prTransition().getRule().getType().getType()) && (s = new Transition_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
@@ -44,6 +45,7 @@ protected class Statemachine_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prStatemachine().eleGroup();
 	}
@@ -73,6 +75,7 @@ protected class Statemachine_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prStatemachine().ele0Group();
 	}
@@ -102,6 +105,7 @@ protected class Statemachine_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prStatemachine().ele00Group();
 	}
@@ -131,6 +135,7 @@ protected class Statemachine_0_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prStatemachine().ele000Group();
 	}
@@ -160,6 +165,7 @@ protected class Statemachine_0_0_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prStatemachine().ele0000Group();
 	}
@@ -189,6 +195,7 @@ protected class Statemachine_0_0_0_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prStatemachine().ele00000Group();
 	}
@@ -218,6 +225,7 @@ protected class Statemachine_0_0_0_0_0_0_Keyword_events extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prStatemachine().ele000000KeywordEvents();
 	}	
@@ -230,6 +238,7 @@ protected class Statemachine_0_0_0_0_0_1_Assignment_events extends AssignmentTok
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prStatemachine().ele000001AssignmentEvents();
 	}
@@ -241,7 +250,7 @@ protected class Statemachine_0_0_0_0_0_1_Assignment_events extends AssignmentTok
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("Event")) {
+			if(param.isInstanceOf(grammarAccess.prEvent().getRule().getType().getType())) {
 				Solution s = new Event_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -263,6 +272,7 @@ protected class Statemachine_0_0_0_0_1_Keyword_end extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prStatemachine().ele00001KeywordEnd();
 	}	
@@ -276,6 +286,7 @@ protected class Statemachine_0_0_0_1_Keyword_commands extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prStatemachine().ele0001KeywordCommands();
 	}	
@@ -289,6 +300,7 @@ protected class Statemachine_0_0_1_Assignment_commands extends AssignmentToken  
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prStatemachine().ele001AssignmentCommands();
 	}
@@ -300,7 +312,7 @@ protected class Statemachine_0_0_1_Assignment_commands extends AssignmentToken  
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("Command")) {
+			if(param.isInstanceOf(grammarAccess.prCommand().getRule().getType().getType())) {
 				Solution s = new Command_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -322,6 +334,7 @@ protected class Statemachine_0_1_Keyword_end extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prStatemachine().ele01KeywordEnd();
 	}	
@@ -335,6 +348,7 @@ protected class Statemachine_1_Assignment_states extends AssignmentToken  {
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prStatemachine().ele1AssignmentStates();
 	}
@@ -346,7 +360,7 @@ protected class Statemachine_1_Assignment_states extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("State")) {
+			if(param.isInstanceOf(grammarAccess.prState().getRule().getType().getType())) {
 				Solution s = new State_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -378,6 +392,7 @@ protected class Event_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prEvent().eleGroup();
 	}
@@ -407,6 +422,7 @@ protected class Event_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prEvent().ele0Group();
 	}
@@ -436,6 +452,7 @@ protected class Event_0_0_Assignment_resetting extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prEvent().ele00AssignmentResetting();
 	}
@@ -462,6 +479,7 @@ protected class Event_0_1_Assignment_name extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prEvent().ele01AssignmentName();
 	}
@@ -487,6 +505,7 @@ protected class Event_1_Assignment_code extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prEvent().ele1AssignmentCode();
 	}
@@ -522,6 +541,7 @@ protected class Command_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prCommand().eleGroup();
 	}
@@ -551,6 +571,7 @@ protected class Command_0_Assignment_name extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prCommand().ele0AssignmentName();
 	}
@@ -575,6 +596,7 @@ protected class Command_1_Assignment_code extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prCommand().ele1AssignmentCode();
 	}
@@ -610,6 +632,7 @@ protected class State_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prState().eleGroup();
 	}
@@ -639,6 +662,7 @@ protected class State_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prState().ele0Group();
 	}
@@ -668,6 +692,7 @@ protected class State_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prState().ele00Group();
 	}
@@ -697,6 +722,7 @@ protected class State_0_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prState().ele000Group();
 	}
@@ -726,6 +752,7 @@ protected class State_0_0_0_0_Keyword_state extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prState().ele0000KeywordState();
 	}	
@@ -738,6 +765,7 @@ protected class State_0_0_0_1_Assignment_name extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prState().ele0001AssignmentName();
 	}
@@ -763,6 +791,7 @@ protected class State_0_0_1_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prState().ele001Group();
 	}
@@ -792,6 +821,7 @@ protected class State_0_0_1_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prState().ele0010Group();
 	}
@@ -821,6 +851,7 @@ protected class State_0_0_1_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prState().ele00100Group();
 	}
@@ -850,6 +881,7 @@ protected class State_0_0_1_0_0_0_Keyword_actions extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prState().ele001000KeywordActions();
 	}	
@@ -862,6 +894,7 @@ protected class State_0_0_1_0_0_1_Keyword extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prState().ele001001KeywordLeftCurlyBracket();
 	}	
@@ -875,6 +908,7 @@ protected class State_0_0_1_0_1_Assignment_actions extends AssignmentToken  {
 		super(curr, pred, IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prState().ele00101AssignmentActions();
 	}
@@ -885,7 +919,7 @@ protected class State_0_0_1_0_1_Assignment_actions extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("actions");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("Command")) {
+			if(param.isInstanceOf(grammarAccess.prState().ele001010CrossReferenceEStringCommand().getType().getType())) {
 				type = AssignmentType.CR;
 				element = grammarAccess.prState().ele001010CrossReferenceEStringCommand(); 
 				return new Solution(obj);
@@ -903,6 +937,7 @@ protected class State_0_0_1_1_Keyword extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prState().ele0011KeywordRightCurlyBracket();
 	}	
@@ -917,6 +952,7 @@ protected class State_0_1_Assignment_transitions extends AssignmentToken  {
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prState().ele01AssignmentTransitions();
 	}
@@ -928,7 +964,7 @@ protected class State_0_1_Assignment_transitions extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("Transition")) {
+			if(param.isInstanceOf(grammarAccess.prTransition().getRule().getType().getType())) {
 				Solution s = new Transition_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -950,6 +986,7 @@ protected class State_1_Keyword_end extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prState().ele1KeywordEnd();
 	}	
@@ -973,6 +1010,7 @@ protected class Transition_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTransition().eleGroup();
 	}
@@ -1002,6 +1040,7 @@ protected class Transition_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTransition().ele0Group();
 	}
@@ -1031,6 +1070,7 @@ protected class Transition_0_0_Assignment_event extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prTransition().ele00AssignmentEvent();
 	}
@@ -1041,7 +1081,7 @@ protected class Transition_0_0_Assignment_event extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("event");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("Event")) {
+			if(param.isInstanceOf(grammarAccess.prTransition().ele000CrossReferenceEStringEvent().getType().getType())) {
 				type = AssignmentType.CR;
 				element = grammarAccess.prTransition().ele000CrossReferenceEStringEvent(); 
 				return new Solution(obj);
@@ -1058,6 +1098,7 @@ protected class Transition_0_1_Keyword extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prTransition().ele01KeywordEqualsSignGreaterThanSign();
 	}	
@@ -1071,6 +1112,7 @@ protected class Transition_1_Assignment_state extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prTransition().ele1AssignmentState();
 	}
@@ -1081,7 +1123,7 @@ protected class Transition_1_Assignment_state extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("state");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("State")) {
+			if(param.isInstanceOf(grammarAccess.prTransition().ele10CrossReferenceEStringState().getType().getType())) {
 				type = AssignmentType.CR;
 				element = grammarAccess.prTransition().ele10CrossReferenceEStringState(); 
 				return new Solution(obj);

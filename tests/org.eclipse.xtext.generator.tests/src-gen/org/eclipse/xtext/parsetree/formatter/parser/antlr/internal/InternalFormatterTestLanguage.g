@@ -136,7 +136,7 @@ ruleLine returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Line");
+	            $current = factory.create(grammarAccess.prLine().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -156,7 +156,7 @@ ruleLine returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Line");
+	            $current = factory.create(grammarAccess.prLine().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -207,7 +207,7 @@ ruleTestLinewrap returns [EObject current=null]
 	    lv_items_1=ruleLine 
 	    {
 	        if ($current==null) {
-	            $current = factory.create("TestLinewrap");
+	            $current = factory.create(grammarAccess.prTestLinewrap().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -259,7 +259,7 @@ ruleTestIndentation returns [EObject current=null]
 	    lv_sub_2=ruleTestIndentation 
 	    {
 	        if ($current==null) {
-	            $current = factory.create("TestIndentation");
+	            $current = factory.create(grammarAccess.prTestIndentation().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -281,7 +281,7 @@ ruleTestIndentation returns [EObject current=null]
 	    lv_items_3=ruleLine 
 	    {
 	        if ($current==null) {
-	            $current = factory.create("TestIndentation");
+	            $current = factory.create(grammarAccess.prTestIndentation().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        

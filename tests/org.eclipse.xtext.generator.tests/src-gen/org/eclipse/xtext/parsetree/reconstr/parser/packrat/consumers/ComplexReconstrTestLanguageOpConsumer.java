@@ -3,7 +3,11 @@ Generated with Xtext
 */
 package org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers;
 
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+
+import org.eclipse.xtext.AbstractRule;
+
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
@@ -13,7 +17,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
-import org.eclipse.xtext.parsetree.reconstr.services.ComplexReconstrTestLanguageGrammarAccess;
 import org.eclipse.xtext.parsetree.reconstr.services.ComplexReconstrTestLanguageGrammarAccess.OpElements;
 
 import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.ComplexReconstrTestLanguageTermConsumer;
@@ -143,7 +146,7 @@ public final class ComplexReconstrTestLanguageOpConsumer extends NonTerminalCons
 		return result;
 	}
 	protected int consumeAction$6(int entryPoint) {
-		consumeAction(getRule().ele1000ActionAddaddOperands(), "Add", true);
+		consumeAction(getRule().ele1000ActionAddaddOperands(), true);
 		return ConsumeResult.SUCCESS;	
 	}
 
@@ -199,7 +202,7 @@ public final class ComplexReconstrTestLanguageOpConsumer extends NonTerminalCons
 		return result;
 	}
 	protected int consumeAction$13(int entryPoint) {
-		consumeAction(getRule().ele1100ActionMinusminusOperands(), "Minus", true);
+		consumeAction(getRule().ele1100ActionMinusminusOperands(), true);
 		return ConsumeResult.SUCCESS;	
 	}
 
@@ -216,7 +219,6 @@ public final class ComplexReconstrTestLanguageOpConsumer extends NonTerminalCons
 	}
 
 	public OpElements getRule() {
-	// ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prOp()
 		return rule;
 	}
 	
@@ -225,13 +227,13 @@ public final class ComplexReconstrTestLanguageOpConsumer extends NonTerminalCons
 	}
 	
 	@Override
-	protected EObject getGrammarElement() {
+	protected AbstractRule getGrammarElement() {
 		return getRule().getRule();
 	}
 
 	@Override
-	protected String getDefaultTypeName() {
-		return "Expression";
+	protected EClassifier getDefaultType() {
+		return getGrammarElement().getType().getType();
 	}
 	
 	public void setTermConsumer(INonTerminalConsumer termConsumer) {

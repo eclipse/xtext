@@ -123,7 +123,7 @@ ruleModel returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Model");
+	            $current = factory.create(grammarAccess.prModel().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -177,7 +177,7 @@ ruleModel returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Model");
+	            $current = factory.create(grammarAccess.prModel().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -202,7 +202,7 @@ ruleModel returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Model");
+	            $current = factory.create(grammarAccess.prModel().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -227,7 +227,7 @@ ruleModel returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Model");
+	            $current = factory.create(grammarAccess.prModel().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -252,7 +252,7 @@ ruleModel returns [EObject current=null]
 	    lv_value_9=ruleDatatype 
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Model");
+	            $current = factory.create(grammarAccess.prModel().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -278,7 +278,7 @@ ruleModel returns [EObject current=null]
 	    lv_multiValue_11=ruleDatatype 
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Model");
+	            $current = factory.create(grammarAccess.prModel().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -304,7 +304,7 @@ ruleModel returns [EObject current=null]
 	    lv_value_13=ruleNestedDatatype 
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Model");
+	            $current = factory.create(grammarAccess.prModel().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -330,7 +330,7 @@ ruleModel returns [EObject current=null]
 	    lv_multiValue_15=ruleNestedDatatype 
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Model");
+	            $current = factory.create(grammarAccess.prModel().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -356,7 +356,7 @@ ruleModel returns [EObject current=null]
 	    lv_children_17=ruleChild 
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Model");
+	            $current = factory.create(grammarAccess.prModel().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -377,7 +377,7 @@ ruleModel returns [EObject current=null]
 		
 		{
 			if ($current==null) {
-	            $current = factory.create("Model");
+	            $current = factory.create(grammarAccess.prModel().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
@@ -562,7 +562,7 @@ ruleChild1 returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Child1");
+	            $current = factory.create(grammarAccess.prChild1().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -605,7 +605,7 @@ ruleChild2 returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Child2");
+	            $current = factory.create(grammarAccess.prChild2().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        

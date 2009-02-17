@@ -163,7 +163,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create("Statemachine");
+            	    	            current = factory.create(grammarAccess.prStatemachine().getRule().getType().getType());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -224,7 +224,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create("Statemachine");
+            	    	            current = factory.create(grammarAccess.prStatemachine().getRule().getType().getType());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -278,7 +278,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create("Statemachine");
+            	    	            current = factory.create(grammarAccess.prStatemachine().getRule().getType().getType());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -394,7 +394,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
                         
 
                     	        if (current==null) {
-                    	            current = factory.create("Event");
+                    	            current = factory.create(grammarAccess.prEvent().getRule().getType().getType());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -420,7 +420,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
             	
 
             	        if (current==null) {
-            	            current = factory.create("Event");
+            	            current = factory.create(grammarAccess.prEvent().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -446,7 +446,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
             	
 
             	        if (current==null) {
-            	            current = factory.create("Event");
+            	            current = factory.create(grammarAccess.prEvent().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -543,7 +543,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
             	
 
             	        if (current==null) {
-            	            current = factory.create("Command");
+            	            current = factory.create(grammarAccess.prCommand().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -566,7 +566,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
             	
 
             	        if (current==null) {
-            	            current = factory.create("Command");
+            	            current = factory.create(grammarAccess.prCommand().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -677,7 +677,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
             	
 
             	        if (current==null) {
-            	            current = factory.create("State");
+            	            current = factory.create(grammarAccess.prState().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -739,7 +739,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
                     	    {
 
                     	    			if (current==null) {
-                    	    	            current = factory.create("State");
+                    	    	            current = factory.create(grammarAccess.prState().getRule().getType().getType());
                     	    	            associateNodeWithAstElement(currentNode, current);
                     	    	        }
                     	            
@@ -800,7 +800,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create("State");
+            	    	            current = factory.create(grammarAccess.prState().getRule().getType().getType());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -906,7 +906,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
             {
 
             			if (current==null) {
-            	            current = factory.create("Transition");
+            	            current = factory.create(grammarAccess.prTransition().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
@@ -929,7 +929,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
             {
 
             			if (current==null) {
-            	            current = factory.create("Transition");
+            	            current = factory.create(grammarAccess.prTransition().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     

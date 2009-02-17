@@ -145,17 +145,6 @@ String gaElementAccessor(AbstractElement ele):
 String gaRuleElementAccessor(AbstractElement ele):
 	ele.containingParserRule().gaRuleAccessor() + "." + ele.gaElementAccessor();
 		
-/**
- * Returns the invokation of the element accessor method as full qualified Java statement.
- * Example: return FowlerDslTestLanguageGrammarAccess.INSTANCE.prStatemachine().ele1AssignmentStates()
- * @param ele the element
- * @return The java statement
- */	
-String gaFullAccessor(AbstractElement ele):
-	ele.containingGrammar().gaSimpleName() + ".INSTANCE." + ele.gaRuleElementAccessor();
-	
-
-
 
 // ******************************************************************************
 // ***  the API below is private. Only GrammarAccess.xpt is allowed to use it ***
