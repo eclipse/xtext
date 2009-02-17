@@ -8,15 +8,29 @@
  *******************************************************************************/
 package org.eclipse.xtext.util;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public final class Tuples {
 	private Tuples(){}
 	
+	public static <A,B> Pair<A,B> pair(A a, B b) {
+		return create(a,b);
+	}
 	public static <A,B> Pair<A,B> create(A a, B b) {
 		return new Pair<A, B>(a,b);
 	}
 	
 	public static <A,B,C> Triple<A,B,C> create(A a, B b, C c) {
 		return new Triple<A, B, C>(a,b,c);
+	}
+	
+	public static <A,B> Map<A,B> toMap(Pair<A,B>...pairs) {
+		Map<A, B> result = new HashMap<A, B>();
+		for (Pair<A, B> pair : pairs) {
+			result.put(pair.getFirst(), pair.getSecond());
+		}
+		return result;
 	}
 
 }
