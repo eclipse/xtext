@@ -29,17 +29,17 @@ import org.eclipse.xtext.util.Filter;
 public abstract class AbstractCachingScope extends AbstractNestedScope {
 
 	private Iterable<IScopedElement> elements;
-	
+
 	private boolean refuseDuplicates;
-	
+
 	private final EClass type;
-	
+
 	protected AbstractCachingScope(IScope parent, Iterable<IScopedElement> elements, EClass type) {
 		super(parent, elements);
 		this.refuseDuplicates = true;
 		this.type = type;
 	}
-	
+
 	protected AbstractCachingScope(IScope parent, EClass type, boolean refuseDuplicates) {
 		this(parent, null, type);
 		this.refuseDuplicates = refuseDuplicates;
@@ -54,13 +54,13 @@ public abstract class AbstractCachingScope extends AbstractNestedScope {
 		}
 		return filter(elements, type);
 	}
-	
+
 	protected void initElements(Resource resource) {
 		ScopedElementProducer producer = new ScopedElementProducer(refuseDuplicates);
 		initElements(SimpleAttributeResolver.newResolver(String.class, getNameFeature(type)), resource, producer);
 		this.elements = producer.getProducedElements();
 	}
-	
+
 	protected abstract void initElements(SimpleAttributeResolver<String> resolver, ScopedElementProducer producer);
 
 	protected void initElements(SimpleAttributeResolver<String> resolver, Resource resource,
@@ -70,19 +70,24 @@ public abstract class AbstractCachingScope extends AbstractNestedScope {
 			final EObject object = iterator.next();
 			if (EcoreUtil2.isAssignableFrom(type, object.eClass())) {
 				String value = resolver.getValue(object);
+				value = convertValue(value, object);
 				producer.produce(value, object);
 			}
 		}
 	}
-	
+
+	protected String convertValue(String value, EObject object) {
+		return value;
+	}
+
 	protected Iterator<EObject> getRelevantContent(Resource resource) {
 		return resource.getAllContents();
 	}
 
 	protected String getNameFeature(EClass type) {
-		return "name";	
+		return "name";
 	}
-	
+
 	public void setRefuseDuplicates(boolean refuseDuplicates) {
 		this.refuseDuplicates = refuseDuplicates;
 	}
@@ -90,7 +95,7 @@ public abstract class AbstractCachingScope extends AbstractNestedScope {
 	public boolean isRefuseDuplicates() {
 		return refuseDuplicates;
 	}
-	
+
 	protected Iterable<IScopedElement> filter(final Iterable<IScopedElement> elements, final EClass type) {
 		return CollectionUtils.filter(elements.iterator(), new Filter<IScopedElement>() {
 			public boolean matches(IScopedElement param) {
@@ -98,20 +103,20 @@ public abstract class AbstractCachingScope extends AbstractNestedScope {
 			}
 		});
 	}
-	
+
 	protected static class ScopedElementProducer {
-		private Map<String, Collection<IScopedElement>> elements;
-		private boolean refuseDuplicates;
+		private final Map<String, Collection<IScopedElement>> elements;
+		private final boolean refuseDuplicates;
 
 		protected ScopedElementProducer(boolean refuseDuplicateNames) {
 			this.elements = new HashMap<String, Collection<IScopedElement>>();
 			this.refuseDuplicates = refuseDuplicateNames;
 		}
-		
+
 		public void produce(String name, EObject object) {
 			produce(name, object, null);
 		}
-		
+
 		public void produce(String name, EObject object, Object additionalInfo) {
 			Collection<IScopedElement> current = elements.get(name);
 			if (current==null) {
@@ -128,9 +133,9 @@ public abstract class AbstractCachingScope extends AbstractNestedScope {
 				else
 					current.add(ScopedElement.create(name, object, additionalInfo));
 			}
-				
+
 		}
-		
+
 		public Iterable<IScopedElement> getProducedElements() {
 			return CollectionUtils.flatten(elements.values());
 		}

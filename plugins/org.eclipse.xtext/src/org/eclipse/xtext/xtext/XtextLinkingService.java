@@ -89,7 +89,19 @@ public class XtextLinkingService extends DefaultLinkingService {
 	}
 
 	private List<EObject> getPackage(ReferencedMetamodel context, LeafNode text) {
-		EPackage pack = loadEPackage(getMetamodelNsURI(text), context.eResource().getResourceSet());
+		String nsUri = getMetamodelNsURI(text);
+		if (nsUri == null)
+			return Collections.emptyList();
+		Grammar grammar = GrammarUtil.getGrammar(context).getSuperGrammar();
+		while(grammar != null) {
+			for(AbstractMetamodelDeclaration declaration: grammar.getMetamodelDeclarations()) {
+				EPackage pack = declaration.getEPackage();
+				if (pack != null && nsUri.equals(pack.getNsURI()))
+					return Collections.<EObject>singletonList(pack);
+			}
+			grammar = grammar.getSuperGrammar();
+		}
+		EPackage pack = loadEPackage(nsUri, context.eResource().getResourceSet());
 		if (pack != null)
 			return Collections.<EObject>singletonList(pack);
 		return Collections.emptyList();
