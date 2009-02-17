@@ -133,7 +133,7 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
 
 
                     	        if (current==null) {
-                    	            current = factory.create("Model");
+                    	            current = factory.create(grammarAccess.prModel().getRule().getType().getType());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -234,7 +234,7 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
             	
 
             	        if (current==null) {
-            	            current = factory.create("Greeting");
+            	            current = factory.create(grammarAccess.prGreeting().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        

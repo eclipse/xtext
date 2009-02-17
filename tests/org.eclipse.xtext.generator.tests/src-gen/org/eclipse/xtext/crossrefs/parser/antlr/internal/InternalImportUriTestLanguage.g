@@ -90,7 +90,7 @@ ruleMain returns [EObject current=null]
 	    lv_imports_0=ruleImport 
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Main");
+	            $current = factory.create(grammarAccess.prMain().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -111,7 +111,7 @@ ruleMain returns [EObject current=null]
 	    lv_types_1=ruleType 
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Main");
+	            $current = factory.create(grammarAccess.prMain().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -159,7 +159,7 @@ ruleImport returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Import");
+	            $current = factory.create(grammarAccess.prImport().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -206,7 +206,7 @@ ruleType returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Type");
+	            $current = factory.create(grammarAccess.prType().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -226,7 +226,7 @@ ruleType returns [EObject current=null]
 		
 		{
 			if ($current==null) {
-	            $current = factory.create("Type");
+	            $current = factory.create(grammarAccess.prType().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }

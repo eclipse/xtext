@@ -6,8 +6,8 @@ package org.eclipse.xtext.example.parsetree.reconstr;
 //import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parsetree.reconstr.*;
-import org.eclipse.xtext.parsetree.reconstr.impl.*;
+import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
 import org.eclipse.xtext.example.services.DomainmodelGrammarAccess;
 
@@ -18,24 +18,25 @@ public class DomainmodelParseTreeConstructor extends AbstractParseTreeConstructo
 	@Inject
 	private DomainmodelGrammarAccess grammarAccess;
 	
+	@Override
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf("File") && (s = new File_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("Import") && (s = new Import_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("NamedElement") && (s = new NamedElement_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("Package") && (s = new Package_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("Type") && (s = new Type_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("DataType") && (s = new DataType_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("Entity") && (s = new Entity_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("Feature") && (s = new Feature_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("StructuralFeature") && (s = new StructuralFeature_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("Attribute") && (s = new Attribute_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("Reference") && (s = new Reference_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("Operation") && (s = new Operation_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("Parameter") && (s = new Parameter_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("TypedElement") && (s = new TypedElement_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("TypeRef") && (s = new TypeRef_Assignment_referenced(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prFile().getRule().getType().getType()) && (s = new File_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prImport().getRule().getType().getType()) && (s = new Import_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prNamedElement().getRule().getType().getType()) && (s = new NamedElement_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prPackage().getRule().getType().getType()) && (s = new Package_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prType().getRule().getType().getType()) && (s = new Type_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prDataType().getRule().getType().getType()) && (s = new DataType_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prEntity().getRule().getType().getType()) && (s = new Entity_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prFeature().getRule().getType().getType()) && (s = new Feature_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prStructuralFeature().getRule().getType().getType()) && (s = new StructuralFeature_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prAttribute().getRule().getType().getType()) && (s = new Attribute_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prReference().getRule().getType().getType()) && (s = new Reference_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prOperation().getRule().getType().getType()) && (s = new Operation_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prParameter().getRule().getType().getType()) && (s = new Parameter_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prTypedElement().getRule().getType().getType()) && (s = new TypedElement_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prTypeRef().getRule().getType().getType()) && (s = new TypeRef_Assignment_referenced(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
@@ -54,6 +55,7 @@ protected class File_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prFile().eleGroup();
 	}
@@ -83,6 +85,7 @@ protected class File_0_Assignment_imports extends AssignmentToken  {
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prFile().ele0AssignmentImports();
 	}
@@ -94,7 +97,7 @@ protected class File_0_Assignment_imports extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("Import")) {
+			if(param.isInstanceOf(grammarAccess.prImport().getRule().getType().getType())) {
 				Solution s = new Import_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -115,6 +118,7 @@ protected class File_1_Assignment_namedElements extends AssignmentToken  {
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prFile().ele1AssignmentNamedElements();
 	}
@@ -126,7 +130,7 @@ protected class File_1_Assignment_namedElements extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("NamedElement")) {
+			if(param.isInstanceOf(grammarAccess.prNamedElement().getRule().getType().getType())) {
 				Solution s = new NamedElement_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -158,6 +162,7 @@ protected class Import_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prImport().eleGroup();
 	}
@@ -187,6 +192,7 @@ protected class Import_0_Keyword_import extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prImport().ele0KeywordImport();
 	}	
@@ -199,6 +205,7 @@ protected class Import_1_Assignment_importURI extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prImport().ele1AssignmentImportURI();
 	}
@@ -234,6 +241,7 @@ protected class NamedElement_Alternatives extends AlternativesToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.prNamedElement().eleAlternatives();
 	}
@@ -256,6 +264,7 @@ protected class NamedElement_0_RuleCall_Package extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prNamedElement().ele0ParserRuleCallPackage();
 	}
@@ -263,7 +272,7 @@ protected class NamedElement_0_RuleCall_Package extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Package_Group.class, current)) return null;
-		if(!current.isInstanceOf("Package")) return null;
+		if(!current.isInstanceOf(grammarAccess.prPackage().getRule().getType().getType())) return null;
 		return new Package_Group(current, this).firstSolution();
 	}
 }
@@ -275,6 +284,7 @@ protected class NamedElement_1_RuleCall_Type extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prNamedElement().ele1ParserRuleCallType();
 	}
@@ -282,7 +292,7 @@ protected class NamedElement_1_RuleCall_Type extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Type_Alternatives.class, current)) return null;
-		if(!current.isInstanceOf("Type")) return null;
+		if(!current.isInstanceOf(grammarAccess.prType().getRule().getType().getType())) return null;
 		return new Type_Alternatives(current, this).firstSolution();
 	}
 }
@@ -305,6 +315,7 @@ protected class Package_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prPackage().eleGroup();
 	}
@@ -334,6 +345,7 @@ protected class Package_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prPackage().ele0Group();
 	}
@@ -363,6 +375,7 @@ protected class Package_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prPackage().ele00Group();
 	}
@@ -392,6 +405,7 @@ protected class Package_0_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prPackage().ele000Group();
 	}
@@ -421,6 +435,7 @@ protected class Package_0_0_0_0_Keyword_package extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prPackage().ele0000KeywordPackage();
 	}	
@@ -433,6 +448,7 @@ protected class Package_0_0_0_1_Assignment_name extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prPackage().ele0001AssignmentName();
 	}
@@ -460,6 +476,7 @@ protected class Package_0_0_1_Keyword extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prPackage().ele001KeywordLeftCurlyBracket();
 	}	
@@ -473,6 +490,7 @@ protected class Package_0_1_Assignment_namedElements extends AssignmentToken  {
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prPackage().ele01AssignmentNamedElements();
 	}
@@ -484,7 +502,7 @@ protected class Package_0_1_Assignment_namedElements extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("NamedElement")) {
+			if(param.isInstanceOf(grammarAccess.prNamedElement().getRule().getType().getType())) {
 				Solution s = new NamedElement_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -506,6 +524,7 @@ protected class Package_1_Keyword extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prPackage().ele1KeywordRightCurlyBracket();
 	}	
@@ -529,6 +548,7 @@ protected class Type_Alternatives extends AlternativesToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.prType().eleAlternatives();
 	}
@@ -551,6 +571,7 @@ protected class Type_0_RuleCall_Entity extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prType().ele0ParserRuleCallEntity();
 	}
@@ -558,7 +579,7 @@ protected class Type_0_RuleCall_Entity extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Entity_Group.class, current)) return null;
-		if(!current.isInstanceOf("Entity")) return null;
+		if(!current.isInstanceOf(grammarAccess.prEntity().getRule().getType().getType())) return null;
 		return new Entity_Group(current, this).firstSolution();
 	}
 }
@@ -570,6 +591,7 @@ protected class Type_1_RuleCall_DataType extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prType().ele1ParserRuleCallDataType();
 	}
@@ -577,7 +599,7 @@ protected class Type_1_RuleCall_DataType extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(DataType_Group.class, current)) return null;
-		if(!current.isInstanceOf("DataType")) return null;
+		if(!current.isInstanceOf(grammarAccess.prDataType().getRule().getType().getType())) return null;
 		return new DataType_Group(current, this).firstSolution();
 	}
 }
@@ -600,6 +622,7 @@ protected class DataType_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prDataType().eleGroup();
 	}
@@ -629,6 +652,7 @@ protected class DataType_0_Keyword_datatype extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prDataType().ele0KeywordDatatype();
 	}	
@@ -641,6 +665,7 @@ protected class DataType_1_Assignment_name extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prDataType().ele1AssignmentName();
 	}
@@ -676,6 +701,7 @@ protected class Entity_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prEntity().eleGroup();
 	}
@@ -705,6 +731,7 @@ protected class Entity_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prEntity().ele0Group();
 	}
@@ -734,6 +761,7 @@ protected class Entity_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prEntity().ele00Group();
 	}
@@ -763,6 +791,7 @@ protected class Entity_0_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prEntity().ele000Group();
 	}
@@ -792,6 +821,7 @@ protected class Entity_0_0_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prEntity().ele0000Group();
 	}
@@ -821,6 +851,7 @@ protected class Entity_0_0_0_0_0_Keyword_entity extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prEntity().ele00000KeywordEntity();
 	}	
@@ -833,6 +864,7 @@ protected class Entity_0_0_0_0_1_Assignment_name extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prEntity().ele00001AssignmentName();
 	}
@@ -858,6 +890,7 @@ protected class Entity_0_0_0_1_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prEntity().ele0001Group();
 	}
@@ -887,6 +920,7 @@ protected class Entity_0_0_0_1_0_Keyword_extends extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prEntity().ele00010KeywordExtends();
 	}	
@@ -899,6 +933,7 @@ protected class Entity_0_0_0_1_1_Assignment_superType extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prEntity().ele00011AssignmentSuperType();
 	}
@@ -909,7 +944,7 @@ protected class Entity_0_0_0_1_1_Assignment_superType extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("superType");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("Entity")) {
+			if(param.isInstanceOf(grammarAccess.prEntity().ele000110CrossReferenceEStringEntity().getType().getType())) {
 				type = AssignmentType.CR;
 				element = grammarAccess.prEntity().ele000110CrossReferenceEStringEntity(); 
 				return new Solution(obj);
@@ -928,6 +963,7 @@ protected class Entity_0_0_1_Keyword extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prEntity().ele001KeywordLeftCurlyBracket();
 	}	
@@ -941,6 +977,7 @@ protected class Entity_0_1_Assignment_features extends AssignmentToken  {
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prEntity().ele01AssignmentFeatures();
 	}
@@ -952,7 +989,7 @@ protected class Entity_0_1_Assignment_features extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("Feature")) {
+			if(param.isInstanceOf(grammarAccess.prFeature().getRule().getType().getType())) {
 				Solution s = new Feature_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -974,6 +1011,7 @@ protected class Entity_1_Keyword extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prEntity().ele1KeywordRightCurlyBracket();
 	}	
@@ -997,6 +1035,7 @@ protected class Feature_Alternatives extends AlternativesToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.prFeature().eleAlternatives();
 	}
@@ -1019,6 +1058,7 @@ protected class Feature_0_RuleCall_StructuralFeature extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prFeature().ele0ParserRuleCallStructuralFeature();
 	}
@@ -1026,7 +1066,7 @@ protected class Feature_0_RuleCall_StructuralFeature extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(StructuralFeature_Alternatives.class, current)) return null;
-		if(!current.isInstanceOf("StructuralFeature")) return null;
+		if(!current.isInstanceOf(grammarAccess.prStructuralFeature().getRule().getType().getType())) return null;
 		return new StructuralFeature_Alternatives(current, this).firstSolution();
 	}
 }
@@ -1038,6 +1078,7 @@ protected class Feature_1_RuleCall_Operation extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prFeature().ele1ParserRuleCallOperation();
 	}
@@ -1045,7 +1086,7 @@ protected class Feature_1_RuleCall_Operation extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Operation_Group.class, current)) return null;
-		if(!current.isInstanceOf("Operation")) return null;
+		if(!current.isInstanceOf(grammarAccess.prOperation().getRule().getType().getType())) return null;
 		return new Operation_Group(current, this).firstSolution();
 	}
 }
@@ -1068,6 +1109,7 @@ protected class StructuralFeature_Alternatives extends AlternativesToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.prStructuralFeature().eleAlternatives();
 	}
@@ -1090,6 +1132,7 @@ protected class StructuralFeature_0_RuleCall_Attribute extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prStructuralFeature().ele0ParserRuleCallAttribute();
 	}
@@ -1097,7 +1140,7 @@ protected class StructuralFeature_0_RuleCall_Attribute extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Attribute_Group.class, current)) return null;
-		if(!current.isInstanceOf("Attribute")) return null;
+		if(!current.isInstanceOf(grammarAccess.prAttribute().getRule().getType().getType())) return null;
 		return new Attribute_Group(current, this).firstSolution();
 	}
 }
@@ -1109,6 +1152,7 @@ protected class StructuralFeature_1_RuleCall_Reference extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prStructuralFeature().ele1ParserRuleCallReference();
 	}
@@ -1116,7 +1160,7 @@ protected class StructuralFeature_1_RuleCall_Reference extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Reference_Group.class, current)) return null;
-		if(!current.isInstanceOf("Reference")) return null;
+		if(!current.isInstanceOf(grammarAccess.prReference().getRule().getType().getType())) return null;
 		return new Reference_Group(current, this).firstSolution();
 	}
 }
@@ -1139,6 +1183,7 @@ protected class Attribute_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prAttribute().eleGroup();
 	}
@@ -1168,6 +1213,7 @@ protected class Attribute_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prAttribute().ele0Group();
 	}
@@ -1197,6 +1243,7 @@ protected class Attribute_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prAttribute().ele00Group();
 	}
@@ -1226,6 +1273,7 @@ protected class Attribute_0_0_0_Keyword_attr extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prAttribute().ele000KeywordAttr();
 	}	
@@ -1238,6 +1286,7 @@ protected class Attribute_0_0_1_Assignment_name extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prAttribute().ele001AssignmentName();
 	}
@@ -1263,6 +1312,7 @@ protected class Attribute_0_1_Keyword extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prAttribute().ele01KeywordColon();
 	}	
@@ -1276,6 +1326,7 @@ protected class Attribute_1_Assignment_type extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prAttribute().ele1AssignmentType();
 	}
@@ -1287,7 +1338,7 @@ protected class Attribute_1_Assignment_type extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("TypeRef")) {
+			if(param.isInstanceOf(grammarAccess.prTypeRef().getRule().getType().getType())) {
 				Solution s = new TypeRef_Assignment_referenced(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -1319,6 +1370,7 @@ protected class Reference_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prReference().eleGroup();
 	}
@@ -1348,6 +1400,7 @@ protected class Reference_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prReference().ele0Group();
 	}
@@ -1377,6 +1430,7 @@ protected class Reference_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prReference().ele00Group();
 	}
@@ -1406,6 +1460,7 @@ protected class Reference_0_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prReference().ele000Group();
 	}
@@ -1435,6 +1490,7 @@ protected class Reference_0_0_0_0_Keyword_ref extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prReference().ele0000KeywordRef();
 	}	
@@ -1447,6 +1503,7 @@ protected class Reference_0_0_0_1_Assignment_name extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prReference().ele0001AssignmentName();
 	}
@@ -1472,6 +1529,7 @@ protected class Reference_0_0_1_Keyword extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prReference().ele001KeywordColon();
 	}	
@@ -1485,6 +1543,7 @@ protected class Reference_0_1_Assignment_type extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prReference().ele01AssignmentType();
 	}
@@ -1496,7 +1555,7 @@ protected class Reference_0_1_Assignment_type extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("TypeRef")) {
+			if(param.isInstanceOf(grammarAccess.prTypeRef().getRule().getType().getType())) {
 				Solution s = new TypeRef_Assignment_referenced(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -1518,6 +1577,7 @@ protected class Reference_1_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prReference().ele1Group();
 	}
@@ -1547,6 +1607,7 @@ protected class Reference_1_0_Keyword_opposite extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prReference().ele10KeywordOpposite();
 	}	
@@ -1559,6 +1620,7 @@ protected class Reference_1_1_Assignment_opposite extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prReference().ele11AssignmentOpposite();
 	}
@@ -1569,7 +1631,7 @@ protected class Reference_1_1_Assignment_opposite extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("opposite");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("Reference")) {
+			if(param.isInstanceOf(grammarAccess.prReference().ele110CrossReferenceEStringReference().getType().getType())) {
 				type = AssignmentType.CR;
 				element = grammarAccess.prReference().ele110CrossReferenceEStringReference(); 
 				return new Solution(obj);
@@ -1598,6 +1660,7 @@ protected class Operation_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prOperation().eleGroup();
 	}
@@ -1627,6 +1690,7 @@ protected class Operation_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prOperation().ele0Group();
 	}
@@ -1656,6 +1720,7 @@ protected class Operation_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prOperation().ele00Group();
 	}
@@ -1685,6 +1750,7 @@ protected class Operation_0_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prOperation().ele000Group();
 	}
@@ -1714,6 +1780,7 @@ protected class Operation_0_0_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prOperation().ele0000Group();
 	}
@@ -1743,6 +1810,7 @@ protected class Operation_0_0_0_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prOperation().ele00000Group();
 	}
@@ -1772,6 +1840,7 @@ protected class Operation_0_0_0_0_0_0_Keyword_op extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prOperation().ele000000KeywordOp();
 	}	
@@ -1784,6 +1853,7 @@ protected class Operation_0_0_0_0_0_1_Assignment_name extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prOperation().ele000001AssignmentName();
 	}
@@ -1809,6 +1879,7 @@ protected class Operation_0_0_0_0_1_Keyword extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prOperation().ele00001KeywordLeftParenthesis();
 	}	
@@ -1822,6 +1893,7 @@ protected class Operation_0_0_0_1_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prOperation().ele0001Group();
 	}
@@ -1851,6 +1923,7 @@ protected class Operation_0_0_0_1_0_Assignment_params extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prOperation().ele00010AssignmentParams();
 	}
@@ -1862,7 +1935,7 @@ protected class Operation_0_0_0_1_0_Assignment_params extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("Parameter")) {
+			if(param.isInstanceOf(grammarAccess.prParameter().getRule().getType().getType())) {
 				Solution s = new Parameter_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -1883,6 +1956,7 @@ protected class Operation_0_0_0_1_1_Group extends GroupToken {
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prOperation().ele00011Group();
 	}
@@ -1912,6 +1986,7 @@ protected class Operation_0_0_0_1_1_0_Keyword extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prOperation().ele000110KeywordComma();
 	}	
@@ -1924,6 +1999,7 @@ protected class Operation_0_0_0_1_1_1_Assignment_params extends AssignmentToken 
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prOperation().ele000111AssignmentParams();
 	}
@@ -1935,7 +2011,7 @@ protected class Operation_0_0_0_1_1_1_Assignment_params extends AssignmentToken 
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("Parameter")) {
+			if(param.isInstanceOf(grammarAccess.prParameter().getRule().getType().getType())) {
 				Solution s = new Parameter_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -1959,6 +2035,7 @@ protected class Operation_0_0_1_Keyword extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prOperation().ele001KeywordRightParenthesis();
 	}	
@@ -1972,6 +2049,7 @@ protected class Operation_0_1_Keyword extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prOperation().ele01KeywordColon();
 	}	
@@ -1985,6 +2063,7 @@ protected class Operation_1_Assignment_type extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prOperation().ele1AssignmentType();
 	}
@@ -1996,7 +2075,7 @@ protected class Operation_1_Assignment_type extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("TypeRef")) {
+			if(param.isInstanceOf(grammarAccess.prTypeRef().getRule().getType().getType())) {
 				Solution s = new TypeRef_Assignment_referenced(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -2028,6 +2107,7 @@ protected class Parameter_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prParameter().eleGroup();
 	}
@@ -2057,6 +2137,7 @@ protected class Parameter_0_Assignment_name extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prParameter().ele0AssignmentName();
 	}
@@ -2081,6 +2162,7 @@ protected class Parameter_1_Assignment_type extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prParameter().ele1AssignmentType();
 	}
@@ -2092,7 +2174,7 @@ protected class Parameter_1_Assignment_type extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("TypeRef")) {
+			if(param.isInstanceOf(grammarAccess.prTypeRef().getRule().getType().getType())) {
 				Solution s = new TypeRef_Assignment_referenced(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -2124,6 +2206,7 @@ protected class TypedElement_Alternatives extends AlternativesToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.prTypedElement().eleAlternatives();
 	}
@@ -2146,6 +2229,7 @@ protected class TypedElement_0_RuleCall_Feature extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prTypedElement().ele0ParserRuleCallFeature();
 	}
@@ -2153,7 +2237,7 @@ protected class TypedElement_0_RuleCall_Feature extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Feature_Alternatives.class, current)) return null;
-		if(!current.isInstanceOf("Feature")) return null;
+		if(!current.isInstanceOf(grammarAccess.prFeature().getRule().getType().getType())) return null;
 		return new Feature_Alternatives(current, this).firstSolution();
 	}
 }
@@ -2165,6 +2249,7 @@ protected class TypedElement_1_RuleCall_Parameter extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prTypedElement().ele1ParserRuleCallParameter();
 	}
@@ -2172,7 +2257,7 @@ protected class TypedElement_1_RuleCall_Parameter extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Parameter_Group.class, current)) return null;
-		if(!current.isInstanceOf("Parameter")) return null;
+		if(!current.isInstanceOf(grammarAccess.prParameter().getRule().getType().getType())) return null;
 		return new Parameter_Group(current, this).firstSolution();
 	}
 }
@@ -2195,6 +2280,7 @@ protected class TypeRef_Assignment_referenced extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prTypeRef().eleAssignmentReferenced();
 	}
@@ -2205,7 +2291,7 @@ protected class TypeRef_Assignment_referenced extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("referenced");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("Type")) {
+			if(param.isInstanceOf(grammarAccess.prTypeRef().ele0CrossReferenceEStringType().getType().getType())) {
 				type = AssignmentType.CR;
 				element = grammarAccess.prTypeRef().ele0CrossReferenceEStringType(); 
 				return new Solution(obj);

@@ -3,7 +3,11 @@ Generated with Xtext
 */
 package org.eclipse.xtext.valueconverter.parser.packrat.consumers;
 
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+
+import org.eclipse.xtext.AbstractRule;
+
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
@@ -13,7 +17,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
-import org.eclipse.xtext.valueconverter.services.Bug250313GrammarAccess;
 import org.eclipse.xtext.valueconverter.services.Bug250313GrammarAccess.ChildElements;
 
 import org.eclipse.xtext.valueconverter.parser.packrat.consumers.Bug250313Child1Consumer;
@@ -64,7 +67,6 @@ public final class Bug250313ChildConsumer extends NonTerminalConsumer {
 	}
 
 	public ChildElements getRule() {
-	// Bug250313GrammarAccess.INSTANCE.prChild()
 		return rule;
 	}
 	
@@ -73,13 +75,13 @@ public final class Bug250313ChildConsumer extends NonTerminalConsumer {
 	}
 	
 	@Override
-	protected EObject getGrammarElement() {
+	protected AbstractRule getGrammarElement() {
 		return getRule().getRule();
 	}
 
 	@Override
-	protected String getDefaultTypeName() {
-		return "Child";
+	protected EClassifier getDefaultType() {
+		return getGrammarElement().getType().getType();
 	}
 	
 	public void setChild1Consumer(INonTerminalConsumer child1Consumer) {

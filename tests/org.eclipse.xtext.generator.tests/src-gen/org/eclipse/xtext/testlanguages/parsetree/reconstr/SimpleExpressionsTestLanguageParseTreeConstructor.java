@@ -6,8 +6,8 @@ package org.eclipse.xtext.testlanguages.parsetree.reconstr;
 //import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parsetree.reconstr.*;
-import org.eclipse.xtext.parsetree.reconstr.impl.*;
+import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
 import org.eclipse.xtext.testlanguages.services.SimpleExpressionsTestLanguageGrammarAccess;
 
@@ -18,15 +18,16 @@ public class SimpleExpressionsTestLanguageParseTreeConstructor extends AbstractP
 	@Inject
 	private SimpleExpressionsTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf("Sequence") && (s = new Sequence_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("Expression") && (s = new Addition_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("Expression") && (s = new Multiplication_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("Expression") && (s = new Term_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("Atom") && (s = new Atom_Assignment_name(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("Expression") && (s = new Parens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prSequence().getRule().getType().getType()) && (s = new Sequence_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prAddition().getRule().getType().getType()) && (s = new Addition_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prMultiplication().getRule().getType().getType()) && (s = new Multiplication_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prTerm().getRule().getType().getType()) && (s = new Term_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prAtom().getRule().getType().getType()) && (s = new Atom_Assignment_name(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prParens().getRule().getType().getType()) && (s = new Parens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
@@ -45,6 +46,7 @@ protected class Sequence_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prSequence().eleGroup();
 	}
@@ -74,6 +76,7 @@ protected class Sequence_0_RuleCall_Addition extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prSequence().ele0ParserRuleCallAddition();
 	}
@@ -81,7 +84,7 @@ protected class Sequence_0_RuleCall_Addition extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Addition_Group.class, current)) return null;
-		if(!current.isInstanceOf("Expression")) return null;
+		if(!current.isInstanceOf(grammarAccess.prAddition().getRule().getType().getType())) return null;
 		return new Addition_Group(current, this).firstSolution();
 	}
 }
@@ -93,6 +96,7 @@ protected class Sequence_1_Group extends GroupToken {
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prSequence().ele1Group();
 	}
@@ -122,13 +126,14 @@ protected class Sequence_1_0_Action_Sequence_expressions extends ActionToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Action getGrammarElement() {
 		return grammarAccess.prSequence().ele10ActionSequenceexpressions();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf("Sequence")) return null;
+		if(!current.isInstanceOf(grammarAccess.prSequence().ele10ActionSequenceexpressions().getTypeName().getType())) return null;
 		Object val = current.getConsumable("expressions", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("expressions")) return null;
@@ -143,6 +148,7 @@ protected class Sequence_1_1_Assignment_expressions extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prSequence().ele11AssignmentExpressions();
 	}
@@ -154,7 +160,7 @@ protected class Sequence_1_1_Assignment_expressions extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("Expression")) {
+			if(param.isInstanceOf(grammarAccess.prAddition().getRule().getType().getType())) {
 				Solution s = new Addition_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -187,6 +193,7 @@ protected class Addition_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prAddition().eleGroup();
 	}
@@ -216,6 +223,7 @@ protected class Addition_0_RuleCall_Multiplication extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prAddition().ele0ParserRuleCallMultiplication();
 	}
@@ -223,7 +231,7 @@ protected class Addition_0_RuleCall_Multiplication extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Multiplication_Group.class, current)) return null;
-		if(!current.isInstanceOf("Expression")) return null;
+		if(!current.isInstanceOf(grammarAccess.prMultiplication().getRule().getType().getType())) return null;
 		return new Multiplication_Group(current, this).firstSolution();
 	}
 }
@@ -235,6 +243,7 @@ protected class Addition_1_Group extends GroupToken {
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prAddition().ele1Group();
 	}
@@ -264,6 +273,7 @@ protected class Addition_1_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prAddition().ele10Group();
 	}
@@ -293,13 +303,14 @@ protected class Addition_1_0_0_Action_Op_values extends ActionToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Action getGrammarElement() {
 		return grammarAccess.prAddition().ele100ActionOpvalues();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf("Op")) return null;
+		if(!current.isInstanceOf(grammarAccess.prAddition().ele100ActionOpvalues().getTypeName().getType())) return null;
 		Object val = current.getConsumable("values", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("values")) return null;
@@ -314,6 +325,7 @@ protected class Addition_1_0_1_Assignment_operator extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prAddition().ele101AssignmentOperator();
 	}
@@ -348,6 +360,7 @@ protected class Addition_1_1_Assignment_values extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prAddition().ele11AssignmentValues();
 	}
@@ -359,7 +372,7 @@ protected class Addition_1_1_Assignment_values extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("Expression")) {
+			if(param.isInstanceOf(grammarAccess.prMultiplication().getRule().getType().getType())) {
 				Solution s = new Multiplication_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -392,6 +405,7 @@ protected class Multiplication_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prMultiplication().eleGroup();
 	}
@@ -421,6 +435,7 @@ protected class Multiplication_0_RuleCall_Term extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prMultiplication().ele0ParserRuleCallTerm();
 	}
@@ -428,7 +443,7 @@ protected class Multiplication_0_RuleCall_Term extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Term_Alternatives.class, current)) return null;
-		if(!current.isInstanceOf("Expression")) return null;
+		if(!current.isInstanceOf(grammarAccess.prTerm().getRule().getType().getType())) return null;
 		return new Term_Alternatives(current, this).firstSolution();
 	}
 }
@@ -440,6 +455,7 @@ protected class Multiplication_1_Group extends GroupToken {
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prMultiplication().ele1Group();
 	}
@@ -469,6 +485,7 @@ protected class Multiplication_1_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prMultiplication().ele10Group();
 	}
@@ -498,13 +515,14 @@ protected class Multiplication_1_0_0_Action_Op_values extends ActionToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Action getGrammarElement() {
 		return grammarAccess.prMultiplication().ele100ActionOpvalues();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf("Op")) return null;
+		if(!current.isInstanceOf(grammarAccess.prMultiplication().ele100ActionOpvalues().getTypeName().getType())) return null;
 		Object val = current.getConsumable("values", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("values")) return null;
@@ -519,6 +537,7 @@ protected class Multiplication_1_0_1_Assignment_operator extends AssignmentToken
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prMultiplication().ele101AssignmentOperator();
 	}
@@ -553,6 +572,7 @@ protected class Multiplication_1_1_Assignment_values extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prMultiplication().ele11AssignmentValues();
 	}
@@ -564,7 +584,7 @@ protected class Multiplication_1_1_Assignment_values extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("Expression")) {
+			if(param.isInstanceOf(grammarAccess.prTerm().getRule().getType().getType())) {
 				Solution s = new Term_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -597,6 +617,7 @@ protected class Term_Alternatives extends AlternativesToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.prTerm().eleAlternatives();
 	}
@@ -619,6 +640,7 @@ protected class Term_0_RuleCall_Atom extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prTerm().ele0ParserRuleCallAtom();
 	}
@@ -626,7 +648,7 @@ protected class Term_0_RuleCall_Atom extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Atom_Assignment_name.class, current)) return null;
-		if(!current.isInstanceOf("Atom")) return null;
+		if(!current.isInstanceOf(grammarAccess.prAtom().getRule().getType().getType())) return null;
 		return new Atom_Assignment_name(current, this).firstSolution();
 	}
 }
@@ -638,6 +660,7 @@ protected class Term_1_RuleCall_Parens extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prTerm().ele1ParserRuleCallParens();
 	}
@@ -645,7 +668,7 @@ protected class Term_1_RuleCall_Parens extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Parens_Group.class, current)) return null;
-		if(!current.isInstanceOf("Expression")) return null;
+		if(!current.isInstanceOf(grammarAccess.prParens().getRule().getType().getType())) return null;
 		return new Parens_Group(current, this).firstSolution();
 	}
 }
@@ -668,6 +691,7 @@ protected class Atom_Assignment_name extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prAtom().eleAssignmentName();
 	}
@@ -702,6 +726,7 @@ protected class Parens_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prParens().eleGroup();
 	}
@@ -731,6 +756,7 @@ protected class Parens_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prParens().ele0Group();
 	}
@@ -760,6 +786,7 @@ protected class Parens_0_0_Keyword extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prParens().ele00KeywordLeftParenthesis();
 	}	
@@ -772,6 +799,7 @@ protected class Parens_0_1_RuleCall_Addition extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prParens().ele01ParserRuleCallAddition();
 	}
@@ -779,7 +807,7 @@ protected class Parens_0_1_RuleCall_Addition extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Addition_Group.class, current)) return null;
-		if(!current.isInstanceOf("Expression")) return null;
+		if(!current.isInstanceOf(grammarAccess.prAddition().getRule().getType().getType())) return null;
 		return new Addition_Group(current, this).firstSolution();
 	}
 }
@@ -792,6 +820,7 @@ protected class Parens_1_Keyword extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prParens().ele1KeywordRightParenthesis();
 	}	

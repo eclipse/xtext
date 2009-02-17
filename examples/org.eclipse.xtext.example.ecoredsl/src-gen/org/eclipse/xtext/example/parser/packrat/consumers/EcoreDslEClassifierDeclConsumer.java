@@ -3,7 +3,11 @@ Generated with Xtext
 */
 package org.eclipse.xtext.example.parser.packrat.consumers;
 
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+
+import org.eclipse.xtext.AbstractRule;
+
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
@@ -13,7 +17,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
-import org.eclipse.xtext.example.services.EcoreDslGrammarAccess;
 import org.eclipse.xtext.example.services.EcoreDslGrammarAccess.EClassifierDeclElements;
 
 import org.eclipse.xtext.example.parser.packrat.consumers.EcoreDslEClassDeclConsumer;
@@ -64,7 +67,6 @@ public final class EcoreDslEClassifierDeclConsumer extends NonTerminalConsumer {
 	}
 
 	public EClassifierDeclElements getRule() {
-	// EcoreDslGrammarAccess.INSTANCE.prEClassifierDecl()
 		return rule;
 	}
 	
@@ -73,13 +75,13 @@ public final class EcoreDslEClassifierDeclConsumer extends NonTerminalConsumer {
 	}
 	
 	@Override
-	protected EObject getGrammarElement() {
+	protected AbstractRule getGrammarElement() {
 		return getRule().getRule();
 	}
 
 	@Override
-	protected String getDefaultTypeName() {
-		return "EClassifier";
+	protected EClassifier getDefaultType() {
+		return getGrammarElement().getType().getType();
 	}
 	
 	public void setEClassDeclConsumer(INonTerminalConsumer eClassDeclConsumer) {

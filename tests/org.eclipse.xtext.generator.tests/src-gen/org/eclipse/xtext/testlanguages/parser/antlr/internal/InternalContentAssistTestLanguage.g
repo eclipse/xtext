@@ -94,7 +94,7 @@ ruleStart returns [EObject current=null]
 	    lv_rules_1=ruleAbstractRule 
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Start");
+	            $current = factory.create(grammarAccess.prStart().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -184,7 +184,7 @@ ruleFirstAbstractRuleChild returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("FirstAbstractRuleChild");
+	            $current = factory.create(grammarAccess.prFirstAbstractRuleChild().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -208,7 +208,7 @@ ruleFirstAbstractRuleChild returns [EObject current=null]
 	    lv_elements_2=ruleAbstractRule 
 	    {
 	        if ($current==null) {
-	            $current = factory.create("FirstAbstractRuleChild");
+	            $current = factory.create(grammarAccess.prFirstAbstractRuleChild().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -260,7 +260,7 @@ ruleSecondAbstractRuleChild returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("SecondAbstractRuleChild");
+	            $current = factory.create(grammarAccess.prSecondAbstractRuleChild().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -288,7 +288,7 @@ ruleSecondAbstractRuleChild returns [EObject current=null]
 	    lv_rule_3=ruleAbstractRuleCall 
 	    {
 	        if ($current==null) {
-	            $current = factory.create("SecondAbstractRuleChild");
+	            $current = factory.create(grammarAccess.prSecondAbstractRuleChild().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -332,7 +332,7 @@ ruleAbstractRuleCall returns [EObject current=null]
 		
 		{
 			if ($current==null) {
-	            $current = factory.create("AbstractRuleCall");
+	            $current = factory.create(grammarAccess.prAbstractRuleCall().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }

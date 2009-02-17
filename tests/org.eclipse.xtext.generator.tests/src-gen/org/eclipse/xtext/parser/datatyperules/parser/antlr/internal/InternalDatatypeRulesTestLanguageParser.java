@@ -138,7 +138,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create("CompositeModel");
+            	    	            current = factory.create(grammarAccess.prCompositeModel().getRule().getType().getType());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -260,7 +260,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
 
             	        if (current==null) {
-            	            current = factory.create("Model");
+            	            current = factory.create(grammarAccess.prModel().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -301,7 +301,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
 
                     	        if (current==null) {
-                    	            current = factory.create("Model");
+                    	            current = factory.create(grammarAccess.prModel().getRule().getType().getType());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -351,7 +351,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
 
                     	        if (current==null) {
-                    	            current = factory.create("Model");
+                    	            current = factory.create(grammarAccess.prModel().getRule().getType().getType());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -401,7 +401,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
 
                     	        if (current==null) {
-                    	            current = factory.create("Model");
+                    	            current = factory.create(grammarAccess.prModel().getRule().getType().getType());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        

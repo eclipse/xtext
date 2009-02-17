@@ -6,8 +6,8 @@ package org.eclipse.xtext.testlanguages.parsetree.reconstr;
 //import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parsetree.reconstr.*;
-import org.eclipse.xtext.parsetree.reconstr.impl.*;
+import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
 import org.eclipse.xtext.testlanguages.services.ContentAssistTestLanguageGrammarAccess;
 
@@ -18,14 +18,15 @@ public class ContentAssistTestLanguageParseTreeConstructor extends AbstractParse
 	@Inject
 	private ContentAssistTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf("Start") && (s = new Start_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("AbstractRule") && (s = new AbstractRule_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("FirstAbstractRuleChild") && (s = new FirstAbstractRuleChild_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("SecondAbstractRuleChild") && (s = new SecondAbstractRuleChild_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("AbstractRuleCall") && (s = new AbstractRuleCall_Assignment_rule(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prStart().getRule().getType().getType()) && (s = new Start_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prAbstractRule().getRule().getType().getType()) && (s = new AbstractRule_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prFirstAbstractRuleChild().getRule().getType().getType()) && (s = new FirstAbstractRuleChild_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prSecondAbstractRuleChild().getRule().getType().getType()) && (s = new SecondAbstractRuleChild_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prAbstractRuleCall().getRule().getType().getType()) && (s = new AbstractRuleCall_Assignment_rule(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
@@ -44,6 +45,7 @@ protected class Start_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prStart().eleGroup();
 	}
@@ -73,6 +75,7 @@ protected class Start_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prStart().ele0Group();
 	}
@@ -102,6 +105,7 @@ protected class Start_0_0_Keyword_abstractrules extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prStart().ele00KeywordAbstractRules();
 	}	
@@ -114,6 +118,7 @@ protected class Start_0_1_Assignment_rules extends AssignmentToken  {
 		super(curr, pred, IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prStart().ele01AssignmentRules();
 	}
@@ -125,7 +130,7 @@ protected class Start_0_1_Assignment_rules extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("AbstractRule")) {
+			if(param.isInstanceOf(grammarAccess.prAbstractRule().getRule().getType().getType())) {
 				Solution s = new AbstractRule_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -147,6 +152,7 @@ protected class Start_1_Keyword_end extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prStart().ele1KeywordEnd();
 	}	
@@ -170,6 +176,7 @@ protected class AbstractRule_Alternatives extends AlternativesToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.prAbstractRule().eleAlternatives();
 	}
@@ -192,6 +199,7 @@ protected class AbstractRule_0_RuleCall_FirstAbstractRuleChild extends RuleCallT
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prAbstractRule().ele0ParserRuleCallFirstAbstractRuleChild();
 	}
@@ -199,7 +207,7 @@ protected class AbstractRule_0_RuleCall_FirstAbstractRuleChild extends RuleCallT
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(FirstAbstractRuleChild_Group.class, current)) return null;
-		if(!current.isInstanceOf("FirstAbstractRuleChild")) return null;
+		if(!current.isInstanceOf(grammarAccess.prFirstAbstractRuleChild().getRule().getType().getType())) return null;
 		return new FirstAbstractRuleChild_Group(current, this).firstSolution();
 	}
 }
@@ -211,6 +219,7 @@ protected class AbstractRule_1_RuleCall_SecondAbstractRuleChild extends RuleCall
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prAbstractRule().ele1ParserRuleCallSecondAbstractRuleChild();
 	}
@@ -218,7 +227,7 @@ protected class AbstractRule_1_RuleCall_SecondAbstractRuleChild extends RuleCall
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(SecondAbstractRuleChild_Group.class, current)) return null;
-		if(!current.isInstanceOf("SecondAbstractRuleChild")) return null;
+		if(!current.isInstanceOf(grammarAccess.prSecondAbstractRuleChild().getRule().getType().getType())) return null;
 		return new SecondAbstractRuleChild_Group(current, this).firstSolution();
 	}
 }
@@ -241,6 +250,7 @@ protected class FirstAbstractRuleChild_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prFirstAbstractRuleChild().eleGroup();
 	}
@@ -270,6 +280,7 @@ protected class FirstAbstractRuleChild_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prFirstAbstractRuleChild().ele0Group();
 	}
@@ -299,6 +310,7 @@ protected class FirstAbstractRuleChild_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prFirstAbstractRuleChild().ele00Group();
 	}
@@ -328,6 +340,7 @@ protected class FirstAbstractRuleChild_0_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prFirstAbstractRuleChild().ele000Group();
 	}
@@ -357,6 +370,7 @@ protected class FirstAbstractRuleChild_0_0_0_0_Assignment_name extends Assignmen
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prFirstAbstractRuleChild().ele0000AssignmentName();
 	}
@@ -381,6 +395,7 @@ protected class FirstAbstractRuleChild_0_0_0_1_Keyword extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prFirstAbstractRuleChild().ele0001KeywordLeftParenthesis();
 	}	
@@ -394,6 +409,7 @@ protected class FirstAbstractRuleChild_0_0_1_Assignment_elements extends Assignm
 		super(curr, pred, IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prFirstAbstractRuleChild().ele001AssignmentElements();
 	}
@@ -405,7 +421,7 @@ protected class FirstAbstractRuleChild_0_0_1_Assignment_elements extends Assignm
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("AbstractRule")) {
+			if(param.isInstanceOf(grammarAccess.prAbstractRule().getRule().getType().getType())) {
 				Solution s = new AbstractRule_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -427,6 +443,7 @@ protected class FirstAbstractRuleChild_0_1_Keyword extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prFirstAbstractRuleChild().ele01KeywordRightParenthesis();
 	}	
@@ -440,6 +457,7 @@ protected class FirstAbstractRuleChild_1_Keyword extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prFirstAbstractRuleChild().ele1KeywordSemicolon();
 	}	
@@ -463,6 +481,7 @@ protected class SecondAbstractRuleChild_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prSecondAbstractRuleChild().eleGroup();
 	}
@@ -492,6 +511,7 @@ protected class SecondAbstractRuleChild_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prSecondAbstractRuleChild().ele0Group();
 	}
@@ -521,6 +541,7 @@ protected class SecondAbstractRuleChild_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prSecondAbstractRuleChild().ele00Group();
 	}
@@ -550,6 +571,7 @@ protected class SecondAbstractRuleChild_0_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prSecondAbstractRuleChild().ele000Group();
 	}
@@ -579,6 +601,7 @@ protected class SecondAbstractRuleChild_0_0_0_0_Assignment_name extends Assignme
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prSecondAbstractRuleChild().ele0000AssignmentName();
 	}
@@ -603,6 +626,7 @@ protected class SecondAbstractRuleChild_0_0_0_1_Keyword_rule extends KeywordToke
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prSecondAbstractRuleChild().ele0001KeywordRule();
 	}	
@@ -616,6 +640,7 @@ protected class SecondAbstractRuleChild_0_0_1_Keyword extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prSecondAbstractRuleChild().ele001KeywordColon();
 	}	
@@ -629,6 +654,7 @@ protected class SecondAbstractRuleChild_0_1_Assignment_rule extends AssignmentTo
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prSecondAbstractRuleChild().ele01AssignmentRule();
 	}
@@ -640,7 +666,7 @@ protected class SecondAbstractRuleChild_0_1_Assignment_rule extends AssignmentTo
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("AbstractRuleCall")) {
+			if(param.isInstanceOf(grammarAccess.prAbstractRuleCall().getRule().getType().getType())) {
 				Solution s = new AbstractRuleCall_Assignment_rule(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -662,6 +688,7 @@ protected class SecondAbstractRuleChild_1_Keyword extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prSecondAbstractRuleChild().ele1KeywordSemicolon();
 	}	
@@ -685,6 +712,7 @@ protected class AbstractRuleCall_Assignment_rule extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prAbstractRuleCall().eleAssignmentRule();
 	}
@@ -695,7 +723,7 @@ protected class AbstractRuleCall_Assignment_rule extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("rule");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("AbstractRule")) {
+			if(param.isInstanceOf(grammarAccess.prAbstractRuleCall().ele0CrossReferenceEStringAbstractRule().getType().getType())) {
 				type = AssignmentType.CR;
 				element = grammarAccess.prAbstractRuleCall().ele0CrossReferenceEStringAbstractRule(); 
 				return new Solution(obj);

@@ -137,7 +137,7 @@ public class InternalTreeTestLanguageParser extends AbstractInternalAntlrParser 
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create("Model");
+            	    	            current = factory.create(grammarAccess.prModel().getRule().getType().getType());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -255,7 +255,7 @@ public class InternalTreeTestLanguageParser extends AbstractInternalAntlrParser 
             	
 
             	        if (current==null) {
-            	            current = factory.create("Node");
+            	            current = factory.create(grammarAccess.prNode().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -285,7 +285,7 @@ public class InternalTreeTestLanguageParser extends AbstractInternalAntlrParser 
             	
 
             	        if (current==null) {
-            	            current = factory.create("Node");
+            	            current = factory.create(grammarAccess.prNode().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -339,7 +339,7 @@ public class InternalTreeTestLanguageParser extends AbstractInternalAntlrParser 
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create("Node");
+            	    	            current = factory.create(grammarAccess.prNode().getRule().getType().getType());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        

@@ -3,7 +3,11 @@ Generated with Xtext
 */
 package org.eclipse.xtext.grammarinheritance.parser.packrat.consumers;
 
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+
+import org.eclipse.xtext.AbstractRule;
+
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
@@ -13,7 +17,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
-import org.eclipse.xtext.grammarinheritance.services.ConcreteTestLanguageGrammarAccess;
 import org.eclipse.xtext.grammarinheritance.services.ConcreteTestLanguageGrammarAccess.ConcreteParserRuleElements;
 
 import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.AbstractTestLanguageInheritedParserRuleConsumer;
@@ -128,7 +131,6 @@ public final class ConcreteTestLanguageConcreteParserRuleConsumer extends NonTer
 	}
 
 	public ConcreteParserRuleElements getRule() {
-	// ConcreteTestLanguageGrammarAccess.INSTANCE.prConcreteParserRule()
 		return rule;
 	}
 	
@@ -137,13 +139,13 @@ public final class ConcreteTestLanguageConcreteParserRuleConsumer extends NonTer
 	}
 	
 	@Override
-	protected EObject getGrammarElement() {
+	protected AbstractRule getGrammarElement() {
 		return getRule().getRule();
 	}
 
 	@Override
-	protected String getDefaultTypeName() {
-		return "ConcreteParserRule";
+	protected EClassifier getDefaultType() {
+		return getGrammarElement().getType().getType();
 	}
 	
 	public void setInheritedParserRuleConsumer(INonTerminalConsumer inheritedParserRuleConsumer) {

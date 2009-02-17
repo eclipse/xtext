@@ -148,7 +148,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create("Start");
+            	    	            current = factory.create(grammarAccess.prStart().getRule().getType().getType());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -407,7 +407,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
             	
 
             	        if (current==null) {
-            	            current = factory.create("FirstAbstractRuleChild");
+            	            current = factory.create(grammarAccess.prFirstAbstractRuleChild().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -452,7 +452,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create("FirstAbstractRuleChild");
+            	    	            current = factory.create(grammarAccess.prFirstAbstractRuleChild().getRule().getType().getType());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -584,7 +584,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
             	
 
             	        if (current==null) {
-            	            current = factory.create("SecondAbstractRuleChild");
+            	            current = factory.create(grammarAccess.prSecondAbstractRuleChild().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -623,7 +623,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
 
 
             	        if (current==null) {
-            	            current = factory.create("SecondAbstractRuleChild");
+            	            current = factory.create(grammarAccess.prSecondAbstractRuleChild().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -717,7 +717,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
             {
 
             			if (current==null) {
-            	            current = factory.create("AbstractRuleCall");
+            	            current = factory.create(grammarAccess.prAbstractRuleCall().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     

@@ -3,7 +3,11 @@ Generated with Xtext
 */
 package org.eclipse.xtext.parser.keywords.parser.packrat.consumers;
 
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+
+import org.eclipse.xtext.AbstractRule;
+
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
@@ -13,7 +17,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
-import org.eclipse.xtext.parser.keywords.services.KeywordsTestLanguageGrammarAccess;
 import org.eclipse.xtext.parser.keywords.services.KeywordsTestLanguageGrammarAccess.ModelElements;
 
 
@@ -106,7 +109,6 @@ public final class KeywordsTestLanguageModelConsumer extends NonTerminalConsumer
 	}
 
 	public ModelElements getRule() {
-	// KeywordsTestLanguageGrammarAccess.INSTANCE.prModel()
 		return rule;
 	}
 	
@@ -115,13 +117,13 @@ public final class KeywordsTestLanguageModelConsumer extends NonTerminalConsumer
 	}
 	
 	@Override
-	protected EObject getGrammarElement() {
+	protected AbstractRule getGrammarElement() {
 		return getRule().getRule();
 	}
 
 	@Override
-	protected String getDefaultTypeName() {
-		return "Model";
+	protected EClassifier getDefaultType() {
+		return getGrammarElement().getType().getType();
 	}
 	
 	public ICharacterClass getKeyword$9$Delimiter() {

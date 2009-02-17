@@ -6,8 +6,8 @@ package org.eclipse.xtext.parsetree.reconstr.parsetree.reconstr;
 //import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parsetree.reconstr.*;
-import org.eclipse.xtext.parsetree.reconstr.impl.*;
+import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
 import org.eclipse.xtext.parsetree.reconstr.services.ComplexReconstrTestLanguageGrammarAccess;
 
@@ -18,24 +18,25 @@ public class ComplexReconstrTestLanguageParseTreeConstructor extends AbstractPar
 	@Inject
 	private ComplexReconstrTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf("Root") && (s = new Root_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("Expression") && (s = new Op_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("Expression") && (s = new Term_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("Atom") && (s = new Atom_Assignment_name(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("Expression") && (s = new Parens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("TypeA1") && (s = new TrickyA_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("TypeD") && (s = new TrickyA1_Assignment_name(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("TrickyB") && (s = new TrickyB_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("TrickyC") && (s = new TrickyC_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("TrickyD") && (s = new TrickyD_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("TrickyE") && (s = new TrickyE_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("TrickyF") && (s = new TrickyF_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("TrickyG") && (s = new TrickyG_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("TrickyG1") && (s = new TrickyG1_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("TrickyG2") && (s = new TrickyG2_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prRoot().getRule().getType().getType()) && (s = new Root_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prOp().getRule().getType().getType()) && (s = new Op_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prTerm().getRule().getType().getType()) && (s = new Term_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prAtom().getRule().getType().getType()) && (s = new Atom_Assignment_name(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prParens().getRule().getType().getType()) && (s = new Parens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prTrickyA().getRule().getType().getType()) && (s = new TrickyA_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prTrickyA1().getRule().getType().getType()) && (s = new TrickyA1_Assignment_name(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prTrickyB().getRule().getType().getType()) && (s = new TrickyB_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prTrickyC().getRule().getType().getType()) && (s = new TrickyC_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prTrickyD().getRule().getType().getType()) && (s = new TrickyD_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prTrickyE().getRule().getType().getType()) && (s = new TrickyE_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prTrickyF().getRule().getType().getType()) && (s = new TrickyF_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prTrickyG().getRule().getType().getType()) && (s = new TrickyG_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prTrickyG1().getRule().getType().getType()) && (s = new TrickyG1_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prTrickyG2().getRule().getType().getType()) && (s = new TrickyG2_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
@@ -54,6 +55,7 @@ protected class Root_Alternatives extends AlternativesToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.prRoot().eleAlternatives();
 	}
@@ -76,6 +78,7 @@ protected class Root_0_RuleCall_Op extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prRoot().ele0ParserRuleCallOp();
 	}
@@ -83,7 +86,7 @@ protected class Root_0_RuleCall_Op extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Op_Group.class, current)) return null;
-		if(!current.isInstanceOf("Expression")) return null;
+		if(!current.isInstanceOf(grammarAccess.prOp().getRule().getType().getType())) return null;
 		return new Op_Group(current, this).firstSolution();
 	}
 }
@@ -95,6 +98,7 @@ protected class Root_1_RuleCall_TrickyG extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prRoot().ele1ParserRuleCallTrickyG();
 	}
@@ -102,7 +106,7 @@ protected class Root_1_RuleCall_TrickyG extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(TrickyG_Group.class, current)) return null;
-		if(!current.isInstanceOf("TrickyG")) return null;
+		if(!current.isInstanceOf(grammarAccess.prTrickyG().getRule().getType().getType())) return null;
 		return new TrickyG_Group(current, this).firstSolution();
 	}
 }
@@ -125,6 +129,7 @@ protected class Op_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prOp().eleGroup();
 	}
@@ -154,6 +159,7 @@ protected class Op_0_RuleCall_Term extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prOp().ele0ParserRuleCallTerm();
 	}
@@ -161,7 +167,7 @@ protected class Op_0_RuleCall_Term extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Term_Alternatives.class, current)) return null;
-		if(!current.isInstanceOf("Expression")) return null;
+		if(!current.isInstanceOf(grammarAccess.prTerm().getRule().getType().getType())) return null;
 		return new Term_Alternatives(current, this).firstSolution();
 	}
 }
@@ -173,6 +179,7 @@ protected class Op_1_Alternatives extends AlternativesToken {
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.prOp().ele1Alternatives();
 	}
@@ -195,6 +202,7 @@ protected class Op_1_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prOp().ele10Group();
 	}
@@ -224,6 +232,7 @@ protected class Op_1_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prOp().ele100Group();
 	}
@@ -253,13 +262,14 @@ protected class Op_1_0_0_0_Action_Add_addOperands extends ActionToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Action getGrammarElement() {
 		return grammarAccess.prOp().ele1000ActionAddaddOperands();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf("Add")) return null;
+		if(!current.isInstanceOf(grammarAccess.prOp().ele1000ActionAddaddOperands().getTypeName().getType())) return null;
 		Object val = current.getConsumable("addOperands", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("addOperands")) return null;
@@ -274,6 +284,7 @@ protected class Op_1_0_0_1_Keyword extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prOp().ele1001KeywordPlusSign();
 	}	
@@ -287,6 +298,7 @@ protected class Op_1_0_1_Assignment_addOperands extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prOp().ele101AssignmentAddOperands();
 	}
@@ -298,7 +310,7 @@ protected class Op_1_0_1_Assignment_addOperands extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("Expression")) {
+			if(param.isInstanceOf(grammarAccess.prTerm().getRule().getType().getType())) {
 				Solution s = new Term_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -320,6 +332,7 @@ protected class Op_1_1_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prOp().ele11Group();
 	}
@@ -349,6 +362,7 @@ protected class Op_1_1_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prOp().ele110Group();
 	}
@@ -378,13 +392,14 @@ protected class Op_1_1_0_0_Action_Minus_minusOperands extends ActionToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Action getGrammarElement() {
 		return grammarAccess.prOp().ele1100ActionMinusminusOperands();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf("Minus")) return null;
+		if(!current.isInstanceOf(grammarAccess.prOp().ele1100ActionMinusminusOperands().getTypeName().getType())) return null;
 		Object val = current.getConsumable("minusOperands", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("minusOperands")) return null;
@@ -399,6 +414,7 @@ protected class Op_1_1_0_1_Keyword extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prOp().ele1101KeywordHyphenMinus();
 	}	
@@ -412,6 +428,7 @@ protected class Op_1_1_1_Assignment_minusOperands extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prOp().ele111AssignmentMinusOperands();
 	}
@@ -423,7 +440,7 @@ protected class Op_1_1_1_Assignment_minusOperands extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("Expression")) {
+			if(param.isInstanceOf(grammarAccess.prTerm().getRule().getType().getType())) {
 				Solution s = new Term_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -457,6 +474,7 @@ protected class Term_Alternatives extends AlternativesToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.prTerm().eleAlternatives();
 	}
@@ -479,6 +497,7 @@ protected class Term_0_RuleCall_Atom extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prTerm().ele0ParserRuleCallAtom();
 	}
@@ -486,7 +505,7 @@ protected class Term_0_RuleCall_Atom extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Atom_Assignment_name.class, current)) return null;
-		if(!current.isInstanceOf("Atom")) return null;
+		if(!current.isInstanceOf(grammarAccess.prAtom().getRule().getType().getType())) return null;
 		return new Atom_Assignment_name(current, this).firstSolution();
 	}
 }
@@ -498,6 +517,7 @@ protected class Term_1_RuleCall_Parens extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prTerm().ele1ParserRuleCallParens();
 	}
@@ -505,7 +525,7 @@ protected class Term_1_RuleCall_Parens extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Parens_Group.class, current)) return null;
-		if(!current.isInstanceOf("Expression")) return null;
+		if(!current.isInstanceOf(grammarAccess.prParens().getRule().getType().getType())) return null;
 		return new Parens_Group(current, this).firstSolution();
 	}
 }
@@ -528,6 +548,7 @@ protected class Atom_Assignment_name extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prAtom().eleAssignmentName();
 	}
@@ -562,6 +583,7 @@ protected class Parens_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prParens().eleGroup();
 	}
@@ -591,6 +613,7 @@ protected class Parens_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prParens().ele0Group();
 	}
@@ -620,6 +643,7 @@ protected class Parens_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prParens().ele00Group();
 	}
@@ -649,6 +673,7 @@ protected class Parens_0_0_0_Keyword extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prParens().ele000KeywordLeftParenthesis();
 	}	
@@ -661,6 +686,7 @@ protected class Parens_0_0_1_RuleCall_Op extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prParens().ele001ParserRuleCallOp();
 	}
@@ -668,7 +694,7 @@ protected class Parens_0_0_1_RuleCall_Op extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Op_Group.class, current)) return null;
-		if(!current.isInstanceOf("Expression")) return null;
+		if(!current.isInstanceOf(grammarAccess.prOp().getRule().getType().getType())) return null;
 		return new Op_Group(current, this).firstSolution();
 	}
 }
@@ -681,6 +707,7 @@ protected class Parens_0_1_Keyword extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prParens().ele01KeywordRightParenthesis();
 	}	
@@ -694,6 +721,7 @@ protected class Parens_1_Assignment_em extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prParens().ele1AssignmentEm();
 	}
@@ -731,6 +759,7 @@ protected class TrickyA_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTrickyA().eleGroup();
 	}
@@ -760,6 +789,7 @@ protected class TrickyA_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTrickyA().ele0Group();
 	}
@@ -789,6 +819,7 @@ protected class TrickyA_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTrickyA().ele00Group();
 	}
@@ -818,6 +849,7 @@ protected class TrickyA_0_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTrickyA().ele000Group();
 	}
@@ -847,6 +879,7 @@ protected class TrickyA_0_0_0_0_Keyword_TA extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prTrickyA().ele0000KeywordTA();
 	}	
@@ -859,6 +892,7 @@ protected class TrickyA_0_0_0_1_RuleCall_TrickyA1 extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prTrickyA().ele0001ParserRuleCallTrickyA1();
 	}
@@ -866,7 +900,7 @@ protected class TrickyA_0_0_0_1_RuleCall_TrickyA1 extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(TrickyA1_Assignment_name.class, current)) return null;
-		if(!current.isInstanceOf("TypeD")) return null;
+		if(!current.isInstanceOf(grammarAccess.prTrickyA1().getRule().getType().getType())) return null;
 		return new TrickyA1_Assignment_name(current, this).firstSolution();
 	}
 }
@@ -879,6 +913,7 @@ protected class TrickyA_0_0_1_Assignment_name extends AssignmentToken  {
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prTrickyA().ele001AssignmentName();
 	}
@@ -904,6 +939,7 @@ protected class TrickyA_0_1_Alternatives extends AlternativesToken {
 		super(curr, pred, !IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.prTrickyA().ele01Alternatives();
 	}
@@ -926,6 +962,7 @@ protected class TrickyA_0_1_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTrickyA().ele010Group();
 	}
@@ -955,13 +992,14 @@ protected class TrickyA_0_1_0_0_Action_TypeB_x extends ActionToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Action getGrammarElement() {
 		return grammarAccess.prTrickyA().ele0100ActionTypeBx();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf("TypeB")) return null;
+		if(!current.isInstanceOf(grammarAccess.prTrickyA().ele0100ActionTypeBx().getTypeName().getType())) return null;
 		Object val = current.getConsumable("x", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("x")) return null;
@@ -976,6 +1014,7 @@ protected class TrickyA_0_1_0_1_Keyword_x extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prTrickyA().ele0101KeywordX();
 	}	
@@ -989,6 +1028,7 @@ protected class TrickyA_0_1_1_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTrickyA().ele011Group();
 	}
@@ -1018,13 +1058,14 @@ protected class TrickyA_0_1_1_0_Action_TypeC_x extends ActionToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Action getGrammarElement() {
 		return grammarAccess.prTrickyA().ele0110ActionTypeCx();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf("TypeC")) return null;
+		if(!current.isInstanceOf(grammarAccess.prTrickyA().ele0110ActionTypeCx().getTypeName().getType())) return null;
 		Object val = current.getConsumable("x", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("x")) return null;
@@ -1039,6 +1080,7 @@ protected class TrickyA_0_1_1_1_Keyword_y extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prTrickyA().ele0111KeywordY();
 	}	
@@ -1054,6 +1096,7 @@ protected class TrickyA_1_Assignment_name extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prTrickyA().ele1AssignmentName();
 	}
@@ -1089,6 +1132,7 @@ protected class TrickyA1_Assignment_name extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prTrickyA1().eleAssignmentName();
 	}
@@ -1123,6 +1167,7 @@ protected class TrickyB_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTrickyB().eleGroup();
 	}
@@ -1152,6 +1197,7 @@ protected class TrickyB_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTrickyB().ele0Group();
 	}
@@ -1181,6 +1227,7 @@ protected class TrickyB_0_0_Keyword_TB extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prTrickyB().ele00KeywordTB();
 	}	
@@ -1193,6 +1240,7 @@ protected class TrickyB_0_1_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTrickyB().ele01Group();
 	}
@@ -1222,6 +1270,7 @@ protected class TrickyB_0_1_0_Assignment_name extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prTrickyB().ele010AssignmentName();
 	}
@@ -1246,6 +1295,7 @@ protected class TrickyB_0_1_1_Assignment_type extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prTrickyB().ele011AssignmentType();
 	}
@@ -1272,6 +1322,7 @@ protected class TrickyB_1_Assignment_type extends AssignmentToken  {
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prTrickyB().ele1AssignmentType();
 	}
@@ -1307,6 +1358,7 @@ protected class TrickyC_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTrickyC().eleGroup();
 	}
@@ -1336,6 +1388,7 @@ protected class TrickyC_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTrickyC().ele0Group();
 	}
@@ -1365,6 +1418,7 @@ protected class TrickyC_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTrickyC().ele00Group();
 	}
@@ -1394,6 +1448,7 @@ protected class TrickyC_0_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTrickyC().ele000Group();
 	}
@@ -1423,6 +1478,7 @@ protected class TrickyC_0_0_0_0_Keyword_TC extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prTrickyC().ele0000KeywordTC();
 	}	
@@ -1435,6 +1491,7 @@ protected class TrickyC_0_0_0_1_Assignment_name extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prTrickyC().ele0001AssignmentName();
 	}
@@ -1460,6 +1517,7 @@ protected class TrickyC_0_0_1_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTrickyC().ele001Group();
 	}
@@ -1489,13 +1547,14 @@ protected class TrickyC_0_0_1_0_Action_C1_x extends ActionToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Action getGrammarElement() {
 		return grammarAccess.prTrickyC().ele0010ActionC1x();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf("C1")) return null;
+		if(!current.isInstanceOf(grammarAccess.prTrickyC().ele0010ActionC1x().getTypeName().getType())) return null;
 		Object val = current.getConsumable("x", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("x")) return null;
@@ -1510,6 +1569,7 @@ protected class TrickyC_0_0_1_1_Keyword_x extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prTrickyC().ele0011KeywordX();
 	}	
@@ -1524,6 +1584,7 @@ protected class TrickyC_0_1_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTrickyC().ele01Group();
 	}
@@ -1553,13 +1614,14 @@ protected class TrickyC_0_1_0_Action_C2_y extends ActionToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Action getGrammarElement() {
 		return grammarAccess.prTrickyC().ele010ActionC2y();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf("C2")) return null;
+		if(!current.isInstanceOf(grammarAccess.prTrickyC().ele010ActionC2y().getTypeName().getType())) return null;
 		Object val = current.getConsumable("y", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("y")) return null;
@@ -1574,6 +1636,7 @@ protected class TrickyC_0_1_1_Keyword_y extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prTrickyC().ele011KeywordY();
 	}	
@@ -1588,6 +1651,7 @@ protected class TrickyC_1_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTrickyC().ele1Group();
 	}
@@ -1617,13 +1681,14 @@ protected class TrickyC_1_0_Action_C3_z extends ActionToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Action getGrammarElement() {
 		return grammarAccess.prTrickyC().ele10ActionC3z();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf("C3")) return null;
+		if(!current.isInstanceOf(grammarAccess.prTrickyC().ele10ActionC3z().getTypeName().getType())) return null;
 		Object val = current.getConsumable("z", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("z")) return null;
@@ -1638,6 +1703,7 @@ protected class TrickyC_1_1_Keyword_z extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prTrickyC().ele11KeywordZ();
 	}	
@@ -1662,6 +1728,7 @@ protected class TrickyD_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTrickyD().eleGroup();
 	}
@@ -1691,6 +1758,7 @@ protected class TrickyD_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTrickyD().ele0Group();
 	}
@@ -1720,6 +1788,7 @@ protected class TrickyD_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTrickyD().ele00Group();
 	}
@@ -1749,6 +1818,7 @@ protected class TrickyD_0_0_0_Keyword_TD extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prTrickyD().ele000KeywordTD();
 	}	
@@ -1761,6 +1831,7 @@ protected class TrickyD_0_0_1_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTrickyD().ele001Group();
 	}
@@ -1790,6 +1861,7 @@ protected class TrickyD_0_0_1_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTrickyD().ele0010Group();
 	}
@@ -1819,6 +1891,7 @@ protected class TrickyD_0_0_1_0_0_Assignment_name extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prTrickyD().ele00100AssignmentName();
 	}
@@ -1843,6 +1916,7 @@ protected class TrickyD_0_0_1_0_1_Assignment_foo extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prTrickyD().ele00101AssignmentFoo();
 	}
@@ -1868,6 +1942,7 @@ protected class TrickyD_0_0_1_1_Assignment_type extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prTrickyD().ele0011AssignmentType();
 	}
@@ -1894,6 +1969,7 @@ protected class TrickyD_0_1_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTrickyD().ele01Group();
 	}
@@ -1923,6 +1999,7 @@ protected class TrickyD_0_1_0_Assignment_name extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prTrickyD().ele010AssignmentName();
 	}
@@ -1947,6 +2024,7 @@ protected class TrickyD_0_1_1_Assignment_type extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prTrickyD().ele011AssignmentType();
 	}
@@ -1973,6 +2051,7 @@ protected class TrickyD_1_Assignment_type extends AssignmentToken  {
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prTrickyD().ele1AssignmentType();
 	}
@@ -2008,6 +2087,7 @@ protected class TrickyE_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTrickyE().eleGroup();
 	}
@@ -2037,6 +2117,7 @@ protected class TrickyE_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTrickyE().ele0Group();
 	}
@@ -2066,6 +2147,7 @@ protected class TrickyE_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTrickyE().ele00Group();
 	}
@@ -2095,6 +2177,7 @@ protected class TrickyE_0_0_0_Keyword_TE extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prTrickyE().ele000KeywordTE();
 	}	
@@ -2107,6 +2190,7 @@ protected class TrickyE_0_0_1_Group extends GroupToken {
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTrickyE().ele001Group();
 	}
@@ -2136,6 +2220,7 @@ protected class TrickyE_0_0_1_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTrickyE().ele0010Group();
 	}
@@ -2165,6 +2250,7 @@ protected class TrickyE_0_0_1_0_0_Assignment_name extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prTrickyE().ele00100AssignmentName();
 	}
@@ -2189,6 +2275,7 @@ protected class TrickyE_0_0_1_0_1_Assignment_foo extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prTrickyE().ele00101AssignmentFoo();
 	}
@@ -2214,6 +2301,7 @@ protected class TrickyE_0_0_1_1_Assignment_type extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prTrickyE().ele0011AssignmentType();
 	}
@@ -2240,6 +2328,7 @@ protected class TrickyE_0_1_Keyword_x extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prTrickyE().ele01KeywordX();
 	}	
@@ -2253,6 +2342,7 @@ protected class TrickyE_1_Group extends GroupToken {
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTrickyE().ele1Group();
 	}
@@ -2282,6 +2372,7 @@ protected class TrickyE_1_0_Assignment_name extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prTrickyE().ele10AssignmentName();
 	}
@@ -2306,6 +2397,7 @@ protected class TrickyE_1_1_Assignment_type extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prTrickyE().ele11AssignmentType();
 	}
@@ -2342,6 +2434,7 @@ protected class TrickyF_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTrickyF().eleGroup();
 	}
@@ -2371,6 +2464,7 @@ protected class TrickyF_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTrickyF().ele0Group();
 	}
@@ -2400,6 +2494,7 @@ protected class TrickyF_0_0_Keyword_TF extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prTrickyF().ele00KeywordTF();
 	}	
@@ -2412,6 +2507,7 @@ protected class TrickyF_0_1_Group extends GroupToken {
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTrickyF().ele01Group();
 	}
@@ -2441,6 +2537,7 @@ protected class TrickyF_0_1_0_Assignment_name extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prTrickyF().ele010AssignmentName();
 	}
@@ -2465,6 +2562,7 @@ protected class TrickyF_0_1_1_Assignment_type extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prTrickyF().ele011AssignmentType();
 	}
@@ -2491,6 +2589,7 @@ protected class TrickyF_1_Alternatives extends AlternativesToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.prTrickyF().ele1Alternatives();
 	}
@@ -2513,6 +2612,7 @@ protected class TrickyF_1_0_Assignment_name extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prTrickyF().ele10AssignmentName();
 	}
@@ -2537,6 +2637,7 @@ protected class TrickyF_1_1_Assignment_type extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prTrickyF().ele11AssignmentType();
 	}
@@ -2573,6 +2674,7 @@ protected class TrickyG_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTrickyG().eleGroup();
 	}
@@ -2602,6 +2704,7 @@ protected class TrickyG_0_Keyword_TG extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prTrickyG().ele0KeywordTG();
 	}	
@@ -2614,6 +2717,7 @@ protected class TrickyG_1_Assignment_tree extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prTrickyG().ele1AssignmentTree();
 	}
@@ -2625,7 +2729,7 @@ protected class TrickyG_1_Assignment_tree extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("TrickyG1")) {
+			if(param.isInstanceOf(grammarAccess.prTrickyG1().getRule().getType().getType())) {
 				Solution s = new TrickyG1_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -2657,6 +2761,7 @@ protected class TrickyG1_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTrickyG1().eleGroup();
 	}
@@ -2686,6 +2791,7 @@ protected class TrickyG1_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTrickyG1().ele0Group();
 	}
@@ -2715,6 +2821,7 @@ protected class TrickyG1_0_0_Keyword extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prTrickyG1().ele00KeywordLeftSquareBracket();
 	}	
@@ -2727,6 +2834,7 @@ protected class TrickyG1_0_1_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTrickyG1().ele01Group();
 	}
@@ -2756,6 +2864,7 @@ protected class TrickyG1_0_1_0_Assignment_vals extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prTrickyG1().ele010AssignmentVals();
 	}
@@ -2767,7 +2876,7 @@ protected class TrickyG1_0_1_0_Assignment_vals extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("TrickyG2")) {
+			if(param.isInstanceOf(grammarAccess.prTrickyG2().getRule().getType().getType())) {
 				Solution s = new TrickyG2_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -2788,6 +2897,7 @@ protected class TrickyG1_0_1_1_Group extends GroupToken {
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTrickyG1().ele011Group();
 	}
@@ -2817,6 +2927,7 @@ protected class TrickyG1_0_1_1_0_Keyword extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prTrickyG1().ele0110KeywordComma();
 	}	
@@ -2829,6 +2940,7 @@ protected class TrickyG1_0_1_1_1_Assignment_vals extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prTrickyG1().ele0111AssignmentVals();
 	}
@@ -2840,7 +2952,7 @@ protected class TrickyG1_0_1_1_1_Assignment_vals extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("TrickyG2")) {
+			if(param.isInstanceOf(grammarAccess.prTrickyG2().getRule().getType().getType())) {
 				Solution s = new TrickyG2_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -2864,6 +2976,7 @@ protected class TrickyG1_1_Keyword extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prTrickyG1().ele1KeywordRightSquareBracket();
 	}	
@@ -2887,6 +3000,7 @@ protected class TrickyG2_Alternatives extends AlternativesToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.prTrickyG2().eleAlternatives();
 	}
@@ -2909,6 +3023,7 @@ protected class TrickyG2_0_RuleCall_TrickyG1 extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prTrickyG2().ele0ParserRuleCallTrickyG1();
 	}
@@ -2916,7 +3031,7 @@ protected class TrickyG2_0_RuleCall_TrickyG1 extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(TrickyG1_Group.class, current)) return null;
-		if(!current.isInstanceOf("TrickyG1")) return null;
+		if(!current.isInstanceOf(grammarAccess.prTrickyG1().getRule().getType().getType())) return null;
 		return new TrickyG1_Group(current, this).firstSolution();
 	}
 }
@@ -2928,6 +3043,7 @@ protected class TrickyG2_1_Assignment_val extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prTrickyG2().ele1AssignmentVal();
 	}

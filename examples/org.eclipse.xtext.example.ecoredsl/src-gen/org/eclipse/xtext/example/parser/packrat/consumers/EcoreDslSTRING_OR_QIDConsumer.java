@@ -3,7 +3,11 @@ Generated with Xtext
 */
 package org.eclipse.xtext.example.parser.packrat.consumers;
 
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+
+import org.eclipse.xtext.AbstractRule;
+
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
@@ -13,7 +17,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
-import org.eclipse.xtext.example.services.EcoreDslGrammarAccess;
 import org.eclipse.xtext.example.services.EcoreDslGrammarAccess.STRING_OR_QIDElements;
 
 import org.eclipse.xtext.example.parser.packrat.consumers.EcoreDslQIDConsumer;
@@ -67,7 +70,6 @@ public final class EcoreDslSTRING_OR_QIDConsumer extends NonTerminalConsumer {
 	}
 
 	public STRING_OR_QIDElements getRule() {
-	// EcoreDslGrammarAccess.INSTANCE.prSTRING_OR_QID()
 		return rule;
 	}
 	
@@ -76,13 +78,13 @@ public final class EcoreDslSTRING_OR_QIDConsumer extends NonTerminalConsumer {
 	}
 	
 	@Override
-	protected EObject getGrammarElement() {
+	protected AbstractRule getGrammarElement() {
 		return getRule().getRule();
 	}
 
 	@Override
-	protected String getDefaultTypeName() {
-		return "EString";
+	protected EClassifier getDefaultType() {
+		return getGrammarElement().getType().getType();
 	}
 	
 	public void setQidConsumer(INonTerminalConsumer qidConsumer) {

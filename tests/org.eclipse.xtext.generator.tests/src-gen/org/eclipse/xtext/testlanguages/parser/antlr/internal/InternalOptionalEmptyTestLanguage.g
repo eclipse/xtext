@@ -90,7 +90,7 @@ ruleModel returns [EObject current=null]
 	    lv_child_0=ruleGreeting 
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Model");
+	            $current = factory.create(grammarAccess.prModel().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -138,7 +138,7 @@ ruleGreeting returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Greeting");
+	            $current = factory.create(grammarAccess.prGreeting().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        

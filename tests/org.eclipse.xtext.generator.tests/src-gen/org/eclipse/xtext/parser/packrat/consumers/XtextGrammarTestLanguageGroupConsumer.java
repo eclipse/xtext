@@ -3,7 +3,11 @@ Generated with Xtext
 */
 package org.eclipse.xtext.parser.packrat.consumers;
 
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+
+import org.eclipse.xtext.AbstractRule;
+
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
@@ -13,7 +17,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
-import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess;
 import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess.GroupElements;
 
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageAbstractTokenConsumer;
@@ -109,7 +112,7 @@ public final class XtextGrammarTestLanguageGroupConsumer extends NonTerminalCons
 		return result;
 	}
 	protected int consumeAction$4(int entryPoint) {
-		consumeAction(getRule().ele10ActionGroupabstractTokens(), "Group", true);
+		consumeAction(getRule().ele10ActionGroupabstractTokens(), true);
 		return ConsumeResult.SUCCESS;	
 	}
 
@@ -122,7 +125,6 @@ public final class XtextGrammarTestLanguageGroupConsumer extends NonTerminalCons
 	}
 
 	public GroupElements getRule() {
-	// XtextGrammarTestLanguageGrammarAccess.INSTANCE.prGroup()
 		return rule;
 	}
 	
@@ -131,13 +133,13 @@ public final class XtextGrammarTestLanguageGroupConsumer extends NonTerminalCons
 	}
 	
 	@Override
-	protected EObject getGrammarElement() {
+	protected AbstractRule getGrammarElement() {
 		return getRule().getRule();
 	}
 
 	@Override
-	protected String getDefaultTypeName() {
-		return "AbstractElement";
+	protected EClassifier getDefaultType() {
+		return getGrammarElement().getType().getType();
 	}
 	
 	public void setAbstractTokenConsumer(INonTerminalConsumer abstractTokenConsumer) {

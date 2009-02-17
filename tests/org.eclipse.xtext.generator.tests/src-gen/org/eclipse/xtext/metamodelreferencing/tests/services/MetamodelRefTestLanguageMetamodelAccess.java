@@ -9,42 +9,42 @@ import org.eclipse.xtext.parser.BaseEPackageAccess;
 
 public class MetamodelRefTestLanguageMetamodelAccess extends BaseEPackageAccess implements IMetamodelAccess {
 
-{
-
+	protected static final String SIMPLETEST_NS_URI = "http://eclipse.org/xtext/tests/SimpleTest";
+	
+	
+	public static void init() {
 		if (!EPackage.Registry.INSTANCE.containsKey(SIMPLETEST_NS_URI))
-			EPackage.Registry.INSTANCE.put(SIMPLETEST_NS_URI, loadEcoreFile(getClass().getClassLoader(), "classpath:/org/eclipse/xtext/metamodelreferencing/tests/SimpleTest.ecore"));
+			EPackage.Registry.INSTANCE.put(SIMPLETEST_NS_URI, loadEcoreFile(MetamodelRefTestLanguageMetamodelAccess.class.getClassLoader(), "classpath:/org/eclipse/xtext/metamodelreferencing/tests/SimpleTest.ecore"));
+	}
 
-}
+	static {
+		org.eclipse.xtext.builtin.services.XtextBuiltinMetamodelAccess.init();
+		init();
+	}
 
 	private EPackage[] generated = new EPackage[] {
-		
 		getSimpleTestEPackage()
-		
-		};
+	};
 
 	public EPackage[] getGeneratedEPackages() {
 		return generated;
 	}
 
 	private EPackage[] referenced = new EPackage[] {
-		
 		BaseEPackageAccess.getEPackageFromRegistry("http://www.eclipse.org/2008/Xtext")
-		
-		};
+	};
+	
 	public EPackage[] getReferencedEPackages() {
 		return referenced;
 	}
 	
 	private EPackage[] all = new EPackage[] {
 	    BaseEPackageAccess.getEPackageFromRegistry("http://www.eclipse.org/2008/Xtext"),getSimpleTestEPackage()
-		};
+	};
 	
 	public EPackage[] getAllEPackages() {
 		return all;
 	}
-
-	
-	protected static final String SIMPLETEST_NS_URI = "http://eclipse.org/xtext/tests/SimpleTest";
 	
 	protected EPackage getSimpleTestEPackage() {	
 		return EPackage.Registry.INSTANCE.getEPackage(SIMPLETEST_NS_URI);

@@ -137,7 +137,7 @@ public class InternalActionTestLanguageParser extends AbstractInternalAntlrParse
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create("Model");
+            	    	            current = factory.create(grammarAccess.prModel().getRule().getType().getType());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -248,7 +248,7 @@ public class InternalActionTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalActionTestLanguage.g:138:5: 
             {
              
-                    temp=factory.create("Item");
+                    temp=factory.create(grammarAccess.prElement().ele10ActionItemitems().getTypeName().getType());
                     try {
                     	factory.add(temp, "items", current, null /*ParserRule*/, currentNode);
                     } catch(ValueConverterException vce) {
@@ -277,7 +277,7 @@ public class InternalActionTestLanguageParser extends AbstractInternalAntlrParse
 
 
             	        if (current==null) {
-            	            current = factory.create("Type");
+            	            current = factory.create(grammarAccess.prElement().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -371,7 +371,7 @@ public class InternalActionTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests//src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalActionTestLanguage.g:198:5: 
             {
              
-                    temp=factory.create("Thing");
+                    temp=factory.create(grammarAccess.prItem().ele0ActionThingcontent().getTypeName().getType());
                     try {
                     	factory.set(temp, "content", current, null /*ParserRule*/, currentNode);
                     } catch(ValueConverterException vce) {
@@ -398,7 +398,7 @@ public class InternalActionTestLanguageParser extends AbstractInternalAntlrParse
             	
 
             	        if (current==null) {
-            	            current = factory.create("Type");
+            	            current = factory.create(grammarAccess.prItem().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        

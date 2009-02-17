@@ -90,7 +90,7 @@ ruleEntryRule returns [EObject current=null]
 	    lv_multiFeature_0=ruleAbstractRule 
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Model");
+	            $current = factory.create(grammarAccess.prEntryRule().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -181,7 +181,7 @@ ruleChoiceRule returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("ChoiceElement");
+	            $current = factory.create(grammarAccess.prChoiceRule().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -201,7 +201,7 @@ ruleChoiceRule returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("ChoiceElement");
+	            $current = factory.create(grammarAccess.prChoiceRule().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -250,7 +250,7 @@ ruleReducibleRule returns [EObject current=null]
     }
 )((
     { 
-        temp=factory.create("ReducibleComposite");
+        temp=factory.create(grammarAccess.prReducibleRule().ele10ActionReducibleCompositeactionFeature().getTypeName().getType());
         try {
         	factory.add(temp, "actionFeature", $current, null /*ParserRule*/, currentNode);
         } catch(ValueConverterException vce) {
@@ -273,7 +273,7 @@ ruleReducibleRule returns [EObject current=null]
 	    lv_actionFeature_3=ruleTerminalRule 
 	    {
 	        if ($current==null) {
-	            $current = factory.create("ReducibleElement");
+	            $current = factory.create(grammarAccess.prReducibleRule().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -317,7 +317,7 @@ ruleTerminalRule returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("TerminalElement");
+	            $current = factory.create(grammarAccess.prTerminalRule().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        

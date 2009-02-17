@@ -160,7 +160,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create("Spielplatz");
+                    	            current = factory.create(grammarAccess.prSpielplatz().getRule().getType().getType());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -194,7 +194,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
                             	
 
                             	        if (current==null) {
-                            	            current = factory.create("Spielplatz");
+                            	            current = factory.create(grammarAccess.prSpielplatz().getRule().getType().getType());
                             	            associateNodeWithAstElement(currentNode, current);
                             	        }
                             	        
@@ -310,7 +310,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
 
 
                     	                            	        if (current==null) {
-                    	                            	            current = factory.create("Spielplatz");
+                    	                            	            current = factory.create(grammarAccess.prSpielplatz().getRule().getType().getType());
                     	                            	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	                            	        }
                     	                            	        
@@ -342,7 +342,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
 
 
                     	                            	        if (current==null) {
-                    	                            	            current = factory.create("Spielplatz");
+                    	                            	            current = factory.create(grammarAccess.prSpielplatz().getRule().getType().getType());
                     	                            	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	                            	        }
                     	                            	        
@@ -380,7 +380,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
 
 
                     	                    	        if (current==null) {
-                    	                    	            current = factory.create("Spielplatz");
+                    	                    	            current = factory.create(grammarAccess.prSpielplatz().getRule().getType().getType());
                     	                    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	                    	        }
                     	                    	        
@@ -418,7 +418,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
 
 
                     	            	        if (current==null) {
-                    	            	            current = factory.create("Spielplatz");
+                    	            	            current = factory.create(grammarAccess.prSpielplatz().getRule().getType().getType());
                     	            	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	            	        }
                     	            	        
@@ -456,7 +456,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
 
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create("Spielplatz");
+                    	    	            current = factory.create(grammarAccess.prSpielplatz().getRule().getType().getType());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
                     	    	        
@@ -593,7 +593,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
             	
 
             	        if (current==null) {
-            	            current = factory.create("Kind");
+            	            current = factory.create(grammarAccess.prKind().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -619,7 +619,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
             	
 
             	        if (current==null) {
-            	            current = factory.create("Kind");
+            	            current = factory.create(grammarAccess.prKind().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -743,7 +743,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
             	
 
             	        if (current==null) {
-            	            current = factory.create("Erwachsener");
+            	            current = factory.create(grammarAccess.prErwachsener().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -769,7 +769,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
             	
 
             	        if (current==null) {
-            	            current = factory.create("Erwachsener");
+            	            current = factory.create(grammarAccess.prErwachsener().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -894,7 +894,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
             	
 
             	        if (current==null) {
-            	            current = factory.create("Spielzeug");
+            	            current = factory.create(grammarAccess.prSpielzeug().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -922,7 +922,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
 
 
             	        if (current==null) {
-            	            current = factory.create("Spielzeug");
+            	            current = factory.create(grammarAccess.prSpielzeug().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -1126,7 +1126,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
 
 
             	        if (current==null) {
-            	            current = factory.create("Familie");
+            	            current = factory.create(grammarAccess.prFamilie().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -1147,7 +1147,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
             {
 
             			if (current==null) {
-            	            current = factory.create("Familie");
+            	            current = factory.create(grammarAccess.prFamilie().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
@@ -1166,7 +1166,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
             {
 
             			if (current==null) {
-            	            current = factory.create("Familie");
+            	            current = factory.create(grammarAccess.prFamilie().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
@@ -1185,7 +1185,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
             {
 
             			if (current==null) {
-            	            current = factory.create("Familie");
+            	            current = factory.create(grammarAccess.prFamilie().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
@@ -1223,7 +1223,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
             	    {
 
             	    			if (current==null) {
-            	    	            current = factory.create("Familie");
+            	    	            current = factory.create(grammarAccess.prFamilie().getRule().getType().getType());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	            
@@ -1437,7 +1437,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
 
 
             	        if (current==null) {
-            	            current = factory.create("Farbe");
+            	            current = factory.create(grammarAccess.prFarbe().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -1534,7 +1534,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
             	
 
             	        if (current==null) {
-            	            current = factory.create("CustomType");
+            	            current = factory.create(grammarAccess.prCustomTypeParserRule().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        

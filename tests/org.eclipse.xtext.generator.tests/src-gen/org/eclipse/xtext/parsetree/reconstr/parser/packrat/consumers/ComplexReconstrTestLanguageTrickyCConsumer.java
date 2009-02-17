@@ -3,7 +3,11 @@ Generated with Xtext
 */
 package org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers;
 
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+
+import org.eclipse.xtext.AbstractRule;
+
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
@@ -13,7 +17,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
-import org.eclipse.xtext.parsetree.reconstr.services.ComplexReconstrTestLanguageGrammarAccess;
 import org.eclipse.xtext.parsetree.reconstr.services.ComplexReconstrTestLanguageGrammarAccess.TrickyCElements;
 
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
@@ -160,7 +163,7 @@ public final class ComplexReconstrTestLanguageTrickyCConsumer extends NonTermina
 		return result;
 	}
 	protected int consumeAction$9(int entryPoint) {
-		consumeAction(getRule().ele0010ActionC1x(), "C1", false);
+		consumeAction(getRule().ele0010ActionC1x(), false);
 		return ConsumeResult.SUCCESS;	
 	}
 
@@ -209,7 +212,7 @@ public final class ComplexReconstrTestLanguageTrickyCConsumer extends NonTermina
 		return result;
 	}
 	protected int consumeAction$13(int entryPoint) {
-		consumeAction(getRule().ele010ActionC2y(), "C2", false);
+		consumeAction(getRule().ele010ActionC2y(), false);
 		return ConsumeResult.SUCCESS;	
 	}
 
@@ -258,7 +261,7 @@ public final class ComplexReconstrTestLanguageTrickyCConsumer extends NonTermina
 		return result;
 	}
 	protected int consumeAction$17(int entryPoint) {
-		consumeAction(getRule().ele10ActionC3z(), "C3", false);
+		consumeAction(getRule().ele10ActionC3z(), false);
 		return ConsumeResult.SUCCESS;	
 	}
 
@@ -267,7 +270,6 @@ public final class ComplexReconstrTestLanguageTrickyCConsumer extends NonTermina
 	}
 
 	public TrickyCElements getRule() {
-	// ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyC()
 		return rule;
 	}
 	
@@ -276,13 +278,13 @@ public final class ComplexReconstrTestLanguageTrickyCConsumer extends NonTermina
 	}
 	
 	@Override
-	protected EObject getGrammarElement() {
+	protected AbstractRule getGrammarElement() {
 		return getRule().getRule();
 	}
 
 	@Override
-	protected String getDefaultTypeName() {
-		return "TrickyC";
+	protected EClassifier getDefaultType() {
+		return getGrammarElement().getType().getType();
 	}
 	
 	public void setIdConsumer(ITerminalConsumer idConsumer) {

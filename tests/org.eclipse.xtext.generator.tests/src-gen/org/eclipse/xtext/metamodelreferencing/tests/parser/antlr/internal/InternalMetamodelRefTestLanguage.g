@@ -90,7 +90,7 @@ ruleFoo returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Foo");
+	            $current = factory.create(grammarAccess.prFoo().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -110,7 +110,7 @@ ruleFoo returns [EObject current=null]
 	    lv_nameRefs_1=ruleNameRef 
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Foo");
+	            $current = factory.create(grammarAccess.prFoo().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -150,7 +150,7 @@ ruleNameRef returns [EObject current=null]
 		
 		{
 			if ($current==null) {
-	            $current = factory.create("RuleCall");
+	            $current = factory.create(grammarAccess.prNameRef().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }

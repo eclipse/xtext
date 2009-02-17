@@ -3,7 +3,11 @@ Generated with Xtext
 */
 package org.eclipse.xtext.grammarinheritance.parser.packrat.consumers;
 
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+
+import org.eclipse.xtext.AbstractRule;
+
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
@@ -13,7 +17,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
-import org.eclipse.xtext.grammarinheritance.services.ConcreteTestLanguageGrammarAccess;
 import org.eclipse.xtext.grammarinheritance.services.ConcreteTestLanguageGrammarAccess.CallExtendedParserRuleElements;
 
 import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.AbstractTestLanguageAbstractCallExtendedParserRuleConsumer;
@@ -43,7 +46,6 @@ public final class ConcreteTestLanguageCallExtendedParserRuleConsumer extends No
 	}
 
 	public CallExtendedParserRuleElements getRule() {
-	// ConcreteTestLanguageGrammarAccess.INSTANCE.prCallExtendedParserRule()
 		return rule;
 	}
 	
@@ -52,13 +54,13 @@ public final class ConcreteTestLanguageCallExtendedParserRuleConsumer extends No
 	}
 	
 	@Override
-	protected EObject getGrammarElement() {
+	protected AbstractRule getGrammarElement() {
 		return getRule().getRule();
 	}
 
 	@Override
-	protected String getDefaultTypeName() {
-		return "CallExtendedParserRule";
+	protected EClassifier getDefaultType() {
+		return getGrammarElement().getType().getType();
 	}
 	
 	public void setAbstractCallExtendedParserRuleConsumer(INonTerminalConsumer abstractCallExtendedParserRuleConsumer) {

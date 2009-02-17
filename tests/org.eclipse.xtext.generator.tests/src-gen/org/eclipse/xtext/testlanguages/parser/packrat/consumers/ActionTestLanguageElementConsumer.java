@@ -3,7 +3,11 @@ Generated with Xtext
 */
 package org.eclipse.xtext.testlanguages.parser.packrat.consumers;
 
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+
+import org.eclipse.xtext.AbstractRule;
+
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
@@ -13,7 +17,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
-import org.eclipse.xtext.testlanguages.services.ActionTestLanguageGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.ActionTestLanguageGrammarAccess.ElementElements;
 
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.ActionTestLanguageItemConsumer;
@@ -78,7 +81,7 @@ public final class ActionTestLanguageElementConsumer extends NonTerminalConsumer
 		return consumeNonTerminal(itemConsumer, null, false, false, false, getRule().ele0ParserRuleCallItem());
 	}
 	protected int consumeAction$4(int entryPoint) {
-		consumeAction(getRule().ele10ActionItemitems(), "Item", true);
+		consumeAction(getRule().ele10ActionItemitems(), true);
 		return ConsumeResult.SUCCESS;	
 	}
 
@@ -91,7 +94,6 @@ public final class ActionTestLanguageElementConsumer extends NonTerminalConsumer
 	}
 
 	public ElementElements getRule() {
-	// ActionTestLanguageGrammarAccess.INSTANCE.prElement()
 		return rule;
 	}
 	
@@ -100,13 +102,13 @@ public final class ActionTestLanguageElementConsumer extends NonTerminalConsumer
 	}
 	
 	@Override
-	protected EObject getGrammarElement() {
+	protected AbstractRule getGrammarElement() {
 		return getRule().getRule();
 	}
 
 	@Override
-	protected String getDefaultTypeName() {
-		return "Type";
+	protected EClassifier getDefaultType() {
+		return getGrammarElement().getType().getType();
 	}
 	
 	public void setItemConsumer(INonTerminalConsumer itemConsumer) {

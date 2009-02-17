@@ -90,7 +90,7 @@ ruleFile returns [EObject current=null]
 	    lv_stuff_0=ruleStuff 
 	    {
 	        if ($current==null) {
-	            $current = factory.create("File");
+	            $current = factory.create(grammarAccess.prFile().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -138,7 +138,7 @@ ruleStuff returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Stuff");
+	            $current = factory.create(grammarAccess.prStuff().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        

@@ -3,7 +3,11 @@ Generated with Xtext
 */
 package org.eclipse.xtext.parser.epatch.parser.packrat.consumers;
 
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+
+import org.eclipse.xtext.AbstractRule;
+
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
@@ -13,7 +17,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
-import org.eclipse.xtext.parser.epatch.services.EpatchTestLanguageGrammarAccess;
 import org.eclipse.xtext.parser.epatch.services.EpatchTestLanguageGrammarAccess.BiSingleAssignmentElements;
 
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
@@ -152,7 +155,6 @@ public final class EpatchTestLanguageBiSingleAssignmentConsumer extends NonTermi
 	}
 
 	public BiSingleAssignmentElements getRule() {
-	// EpatchTestLanguageGrammarAccess.INSTANCE.prBiSingleAssignment()
 		return rule;
 	}
 	
@@ -161,13 +163,13 @@ public final class EpatchTestLanguageBiSingleAssignmentConsumer extends NonTermi
 	}
 	
 	@Override
-	protected EObject getGrammarElement() {
+	protected AbstractRule getGrammarElement() {
 		return getRule().getRule();
 	}
 
 	@Override
-	protected String getDefaultTypeName() {
-		return "SingleAssignment";
+	protected EClassifier getDefaultType() {
+		return getGrammarElement().getType().getType();
 	}
 	
 	public void setIdConsumer(ITerminalConsumer idConsumer) {

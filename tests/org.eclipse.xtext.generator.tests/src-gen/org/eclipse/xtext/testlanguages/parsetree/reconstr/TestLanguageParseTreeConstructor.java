@@ -6,8 +6,8 @@ package org.eclipse.xtext.testlanguages.parsetree.reconstr;
 //import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parsetree.reconstr.*;
-import org.eclipse.xtext.parsetree.reconstr.impl.*;
+import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
 import org.eclipse.xtext.testlanguages.services.TestLanguageGrammarAccess;
 
@@ -18,14 +18,15 @@ public class TestLanguageParseTreeConstructor extends AbstractParseTreeConstruct
 	@Inject
 	private TestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf("Model") && (s = new EntryRule_Assignment_multiFeature(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("AbstractElement") && (s = new AbstractRule_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("ChoiceElement") && (s = new ChoiceRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("ReducibleElement") && (s = new ReducibleRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("TerminalElement") && (s = new TerminalRule_Assignment_stringFeature(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prEntryRule().getRule().getType().getType()) && (s = new EntryRule_Assignment_multiFeature(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prAbstractRule().getRule().getType().getType()) && (s = new AbstractRule_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prChoiceRule().getRule().getType().getType()) && (s = new ChoiceRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prReducibleRule().getRule().getType().getType()) && (s = new ReducibleRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prTerminalRule().getRule().getType().getType()) && (s = new TerminalRule_Assignment_stringFeature(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
@@ -44,6 +45,7 @@ protected class EntryRule_Assignment_multiFeature extends AssignmentToken  {
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prEntryRule().eleAssignmentMultiFeature();
 	}
@@ -55,7 +57,7 @@ protected class EntryRule_Assignment_multiFeature extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("AbstractElement")) {
+			if(param.isInstanceOf(grammarAccess.prAbstractRule().getRule().getType().getType())) {
 				Solution s = new AbstractRule_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -86,6 +88,7 @@ protected class AbstractRule_Alternatives extends AlternativesToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.prAbstractRule().eleAlternatives();
 	}
@@ -108,6 +111,7 @@ protected class AbstractRule_0_RuleCall_ChoiceRule extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prAbstractRule().ele0ParserRuleCallChoiceRule();
 	}
@@ -115,7 +119,7 @@ protected class AbstractRule_0_RuleCall_ChoiceRule extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(ChoiceRule_Group.class, current)) return null;
-		if(!current.isInstanceOf("ChoiceElement")) return null;
+		if(!current.isInstanceOf(grammarAccess.prChoiceRule().getRule().getType().getType())) return null;
 		return new ChoiceRule_Group(current, this).firstSolution();
 	}
 }
@@ -127,6 +131,7 @@ protected class AbstractRule_1_RuleCall_ReducibleRule extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prAbstractRule().ele1ParserRuleCallReducibleRule();
 	}
@@ -134,7 +139,7 @@ protected class AbstractRule_1_RuleCall_ReducibleRule extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(ReducibleRule_Group.class, current)) return null;
-		if(!current.isInstanceOf("ReducibleElement")) return null;
+		if(!current.isInstanceOf(grammarAccess.prReducibleRule().getRule().getType().getType())) return null;
 		return new ReducibleRule_Group(current, this).firstSolution();
 	}
 }
@@ -157,6 +162,7 @@ protected class ChoiceRule_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prChoiceRule().eleGroup();
 	}
@@ -186,6 +192,7 @@ protected class ChoiceRule_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prChoiceRule().ele0Group();
 	}
@@ -215,6 +222,7 @@ protected class ChoiceRule_0_0_Keyword_choice extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prChoiceRule().ele00KeywordChoice();
 	}	
@@ -227,6 +235,7 @@ protected class ChoiceRule_0_1_Assignment_optionalKeyword extends AssignmentToke
 		super(curr, pred, !IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prChoiceRule().ele01AssignmentOptionalKeyword();
 	}
@@ -254,6 +263,7 @@ protected class ChoiceRule_1_Assignment_name extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prChoiceRule().ele1AssignmentName();
 	}
@@ -289,6 +299,7 @@ protected class ReducibleRule_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prReducibleRule().eleGroup();
 	}
@@ -318,6 +329,7 @@ protected class ReducibleRule_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prReducibleRule().ele0Group();
 	}
@@ -347,6 +359,7 @@ protected class ReducibleRule_0_0_Keyword_reducible extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prReducibleRule().ele00KeywordReducible();
 	}	
@@ -359,6 +372,7 @@ protected class ReducibleRule_0_1_RuleCall_TerminalRule extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prReducibleRule().ele01ParserRuleCallTerminalRule();
 	}
@@ -366,7 +380,7 @@ protected class ReducibleRule_0_1_RuleCall_TerminalRule extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(TerminalRule_Assignment_stringFeature.class, current)) return null;
-		if(!current.isInstanceOf("TerminalElement")) return null;
+		if(!current.isInstanceOf(grammarAccess.prTerminalRule().getRule().getType().getType())) return null;
 		return new TerminalRule_Assignment_stringFeature(current, this).firstSolution();
 	}
 }
@@ -379,6 +393,7 @@ protected class ReducibleRule_1_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prReducibleRule().ele1Group();
 	}
@@ -408,13 +423,14 @@ protected class ReducibleRule_1_0_Action_ReducibleComposite_actionFeature extend
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Action getGrammarElement() {
 		return grammarAccess.prReducibleRule().ele10ActionReducibleCompositeactionFeature();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf("ReducibleComposite")) return null;
+		if(!current.isInstanceOf(grammarAccess.prReducibleRule().ele10ActionReducibleCompositeactionFeature().getTypeName().getType())) return null;
 		Object val = current.getConsumable("actionFeature", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("actionFeature")) return null;
@@ -429,6 +445,7 @@ protected class ReducibleRule_1_1_Assignment_actionFeature extends AssignmentTok
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prReducibleRule().ele11AssignmentActionFeature();
 	}
@@ -440,7 +457,7 @@ protected class ReducibleRule_1_1_Assignment_actionFeature extends AssignmentTok
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("TerminalElement")) {
+			if(param.isInstanceOf(grammarAccess.prTerminalRule().getRule().getType().getType())) {
 				Solution s = new TerminalRule_Assignment_stringFeature(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -473,6 +490,7 @@ protected class TerminalRule_Assignment_stringFeature extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prTerminalRule().eleAssignmentStringFeature();
 	}

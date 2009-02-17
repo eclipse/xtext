@@ -6,8 +6,8 @@ package org.eclipse.xtext.parser.terminalrules.parsetree.reconstr;
 //import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parsetree.reconstr.*;
-import org.eclipse.xtext.parsetree.reconstr.impl.*;
+import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
 import org.eclipse.xtext.parser.terminalrules.services.HiddenTerminalsTestLanguageGrammarAccess;
 
@@ -18,18 +18,19 @@ public class HiddenTerminalsTestLanguageParseTreeConstructor extends AbstractPar
 	@Inject
 	private HiddenTerminalsTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf("Model") && (s = new Model_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("WithoutHiddens") && (s = new WithoutHiddens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("WithHiddens") && (s = new WithHiddens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("OverridingHiddens") && (s = new OverridingHiddens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("OverridingHiddensCall") && (s = new OverridingHiddensCall_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("InheritingHiddens") && (s = new InheritingHiddens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("DatatypeHiddens") && (s = new DatatypeHiddens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("HidingHiddens") && (s = new HidingHiddens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("InheritingHiddensCall") && (s = new InheritingHiddensCall_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prModel().getRule().getType().getType()) && (s = new Model_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prWithoutHiddens().getRule().getType().getType()) && (s = new WithoutHiddens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prWithHiddens().getRule().getType().getType()) && (s = new WithHiddens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prOverridingHiddens().getRule().getType().getType()) && (s = new OverridingHiddens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prOverridingHiddensCall().getRule().getType().getType()) && (s = new OverridingHiddensCall_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prInheritingHiddens().getRule().getType().getType()) && (s = new InheritingHiddens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prDatatypeHiddens().getRule().getType().getType()) && (s = new DatatypeHiddens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prHidingHiddens().getRule().getType().getType()) && (s = new HidingHiddens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prInheritingHiddensCall().getRule().getType().getType()) && (s = new InheritingHiddensCall_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
@@ -48,6 +49,7 @@ protected class Model_Alternatives extends AlternativesToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.prModel().eleAlternatives();
 	}
@@ -70,6 +72,7 @@ protected class Model_0_Alternatives extends AlternativesToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.prModel().ele0Alternatives();
 	}
@@ -92,6 +95,7 @@ protected class Model_0_0_Alternatives extends AlternativesToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.prModel().ele00Alternatives();
 	}
@@ -114,6 +118,7 @@ protected class Model_0_0_0_Alternatives extends AlternativesToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.prModel().ele000Alternatives();
 	}
@@ -136,6 +141,7 @@ protected class Model_0_0_0_0_RuleCall_WithoutHiddens extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prModel().ele0000ParserRuleCallWithoutHiddens();
 	}
@@ -143,7 +149,7 @@ protected class Model_0_0_0_0_RuleCall_WithoutHiddens extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(WithoutHiddens_Group.class, current)) return null;
-		if(!current.isInstanceOf("WithoutHiddens")) return null;
+		if(!current.isInstanceOf(grammarAccess.prWithoutHiddens().getRule().getType().getType())) return null;
 		return new WithoutHiddens_Group(current, this).firstSolution();
 	}
 }
@@ -155,6 +161,7 @@ protected class Model_0_0_0_1_RuleCall_WithHiddens extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prModel().ele0001ParserRuleCallWithHiddens();
 	}
@@ -162,7 +169,7 @@ protected class Model_0_0_0_1_RuleCall_WithHiddens extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(WithHiddens_Group.class, current)) return null;
-		if(!current.isInstanceOf("WithHiddens")) return null;
+		if(!current.isInstanceOf(grammarAccess.prWithHiddens().getRule().getType().getType())) return null;
 		return new WithHiddens_Group(current, this).firstSolution();
 	}
 }
@@ -175,6 +182,7 @@ protected class Model_0_0_1_RuleCall_OverridingHiddens extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prModel().ele001ParserRuleCallOverridingHiddens();
 	}
@@ -182,7 +190,7 @@ protected class Model_0_0_1_RuleCall_OverridingHiddens extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(OverridingHiddens_Group.class, current)) return null;
-		if(!current.isInstanceOf("OverridingHiddens")) return null;
+		if(!current.isInstanceOf(grammarAccess.prOverridingHiddens().getRule().getType().getType())) return null;
 		return new OverridingHiddens_Group(current, this).firstSolution();
 	}
 }
@@ -195,6 +203,7 @@ protected class Model_0_1_RuleCall_InheritingHiddens extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prModel().ele01ParserRuleCallInheritingHiddens();
 	}
@@ -202,7 +211,7 @@ protected class Model_0_1_RuleCall_InheritingHiddens extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(InheritingHiddens_Group.class, current)) return null;
-		if(!current.isInstanceOf("InheritingHiddens")) return null;
+		if(!current.isInstanceOf(grammarAccess.prInheritingHiddens().getRule().getType().getType())) return null;
 		return new InheritingHiddens_Group(current, this).firstSolution();
 	}
 }
@@ -215,6 +224,7 @@ protected class Model_1_RuleCall_DatatypeHiddens extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prModel().ele1ParserRuleCallDatatypeHiddens();
 	}
@@ -222,7 +232,7 @@ protected class Model_1_RuleCall_DatatypeHiddens extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(DatatypeHiddens_Group.class, current)) return null;
-		if(!current.isInstanceOf("DatatypeHiddens")) return null;
+		if(!current.isInstanceOf(grammarAccess.prDatatypeHiddens().getRule().getType().getType())) return null;
 		return new DatatypeHiddens_Group(current, this).firstSolution();
 	}
 }
@@ -245,6 +255,7 @@ protected class WithoutHiddens_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prWithoutHiddens().eleGroup();
 	}
@@ -274,6 +285,7 @@ protected class WithoutHiddens_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prWithoutHiddens().ele0Group();
 	}
@@ -303,6 +315,7 @@ protected class WithoutHiddens_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prWithoutHiddens().ele00Group();
 	}
@@ -332,6 +345,7 @@ protected class WithoutHiddens_0_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prWithoutHiddens().ele000Group();
 	}
@@ -361,6 +375,7 @@ protected class WithoutHiddens_0_0_0_0_Keyword_without extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prWithoutHiddens().ele0000KeywordWithout();
 	}	
@@ -373,6 +388,7 @@ protected class WithoutHiddens_0_0_0_1_Assignment_spaces extends AssignmentToken
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prWithoutHiddens().ele0001AssignmentSpaces();
 	}
@@ -400,6 +416,7 @@ protected class WithoutHiddens_0_0_1_Keyword_hiddens extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prWithoutHiddens().ele001KeywordHiddens();
 	}	
@@ -413,6 +430,7 @@ protected class WithoutHiddens_0_1_Assignment_spaces extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prWithoutHiddens().ele01AssignmentSpaces();
 	}
@@ -440,6 +458,7 @@ protected class WithoutHiddens_1_Assignment_valid extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prWithoutHiddens().ele1AssignmentValid();
 	}
@@ -477,6 +496,7 @@ protected class WithHiddens_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prWithHiddens().eleGroup();
 	}
@@ -506,6 +526,7 @@ protected class WithHiddens_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prWithHiddens().ele0Group();
 	}
@@ -535,6 +556,7 @@ protected class WithHiddens_0_0_Keyword_with extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prWithHiddens().ele00KeywordWith();
 	}	
@@ -547,6 +569,7 @@ protected class WithHiddens_0_1_Keyword_hiddens extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prWithHiddens().ele01KeywordHiddens();
 	}	
@@ -560,6 +583,7 @@ protected class WithHiddens_1_Assignment_valid extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prWithHiddens().ele1AssignmentValid();
 	}
@@ -597,6 +621,7 @@ protected class OverridingHiddens_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prOverridingHiddens().eleGroup();
 	}
@@ -626,6 +651,7 @@ protected class OverridingHiddens_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prOverridingHiddens().ele0Group();
 	}
@@ -655,6 +681,7 @@ protected class OverridingHiddens_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prOverridingHiddens().ele00Group();
 	}
@@ -684,6 +711,7 @@ protected class OverridingHiddens_0_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prOverridingHiddens().ele000Group();
 	}
@@ -713,6 +741,7 @@ protected class OverridingHiddens_0_0_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prOverridingHiddens().ele0000Group();
 	}
@@ -742,6 +771,7 @@ protected class OverridingHiddens_0_0_0_0_0_Keyword_overriding extends KeywordTo
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prOverridingHiddens().ele00000KeywordOverriding();
 	}	
@@ -754,6 +784,7 @@ protected class OverridingHiddens_0_0_0_0_1_Keyword_hiddens extends KeywordToken
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prOverridingHiddens().ele00001KeywordHiddens();
 	}	
@@ -767,6 +798,7 @@ protected class OverridingHiddens_0_0_0_1_Keyword extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prOverridingHiddens().ele0001KeywordLeftParenthesis();
 	}	
@@ -780,6 +812,7 @@ protected class OverridingHiddens_0_0_1_Assignment_called extends AssignmentToke
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prOverridingHiddens().ele001AssignmentCalled();
 	}
@@ -791,7 +824,7 @@ protected class OverridingHiddens_0_0_1_Assignment_called extends AssignmentToke
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("OverridingHiddensCall")) {
+			if(param.isInstanceOf(grammarAccess.prOverridingHiddensCall().getRule().getType().getType())) {
 				Solution s = new OverridingHiddensCall_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -813,6 +846,7 @@ protected class OverridingHiddens_0_1_Keyword extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prOverridingHiddens().ele01KeywordRightParenthesis();
 	}	
@@ -826,6 +860,7 @@ protected class OverridingHiddens_1_Assignment_valid extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prOverridingHiddens().ele1AssignmentValid();
 	}
@@ -863,6 +898,7 @@ protected class OverridingHiddensCall_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prOverridingHiddensCall().eleGroup();
 	}
@@ -892,6 +928,7 @@ protected class OverridingHiddensCall_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prOverridingHiddensCall().ele0Group();
 	}
@@ -921,6 +958,7 @@ protected class OverridingHiddensCall_0_0_Keyword_call extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prOverridingHiddensCall().ele00KeywordCall();
 	}	
@@ -933,6 +971,7 @@ protected class OverridingHiddensCall_0_1_Assignment_spaces extends AssignmentTo
 		super(curr, pred, !IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prOverridingHiddensCall().ele01AssignmentSpaces();
 	}
@@ -960,6 +999,7 @@ protected class OverridingHiddensCall_1_Assignment_valid extends AssignmentToken
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prOverridingHiddensCall().ele1AssignmentValid();
 	}
@@ -997,6 +1037,7 @@ protected class InheritingHiddens_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prInheritingHiddens().eleGroup();
 	}
@@ -1026,6 +1067,7 @@ protected class InheritingHiddens_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prInheritingHiddens().ele0Group();
 	}
@@ -1055,6 +1097,7 @@ protected class InheritingHiddens_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prInheritingHiddens().ele00Group();
 	}
@@ -1084,6 +1127,7 @@ protected class InheritingHiddens_0_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prInheritingHiddens().ele000Group();
 	}
@@ -1113,6 +1157,7 @@ protected class InheritingHiddens_0_0_0_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prInheritingHiddens().ele0000Group();
 	}
@@ -1142,6 +1187,7 @@ protected class InheritingHiddens_0_0_0_0_0_Keyword_inheriting extends KeywordTo
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prInheritingHiddens().ele00000KeywordInheriting();
 	}	
@@ -1154,6 +1200,7 @@ protected class InheritingHiddens_0_0_0_0_1_Keyword_hiddens extends KeywordToken
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prInheritingHiddens().ele00001KeywordHiddens();
 	}	
@@ -1167,6 +1214,7 @@ protected class InheritingHiddens_0_0_0_1_Keyword extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prInheritingHiddens().ele0001KeywordLeftParenthesis();
 	}	
@@ -1180,6 +1228,7 @@ protected class InheritingHiddens_0_0_1_Alternatives extends AlternativesToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.prInheritingHiddens().ele001Alternatives();
 	}
@@ -1202,6 +1251,7 @@ protected class InheritingHiddens_0_0_1_0_Assignment_called extends AssignmentTo
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prInheritingHiddens().ele0010AssignmentCalled();
 	}
@@ -1213,7 +1263,7 @@ protected class InheritingHiddens_0_0_1_0_Assignment_called extends AssignmentTo
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("InheritingHiddensCall")) {
+			if(param.isInstanceOf(grammarAccess.prInheritingHiddensCall().getRule().getType().getType())) {
 				Solution s = new InheritingHiddensCall_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -1234,6 +1284,7 @@ protected class InheritingHiddens_0_0_1_1_Assignment_hidingCalled extends Assign
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prInheritingHiddens().ele0011AssignmentHidingCalled();
 	}
@@ -1245,7 +1296,7 @@ protected class InheritingHiddens_0_0_1_1_Assignment_hidingCalled extends Assign
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("HidingHiddens")) {
+			if(param.isInstanceOf(grammarAccess.prHidingHiddens().getRule().getType().getType())) {
 				Solution s = new HidingHiddens_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -1268,6 +1319,7 @@ protected class InheritingHiddens_0_1_Keyword extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prInheritingHiddens().ele01KeywordRightParenthesis();
 	}	
@@ -1281,6 +1333,7 @@ protected class InheritingHiddens_1_Assignment_valid extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prInheritingHiddens().ele1AssignmentValid();
 	}
@@ -1318,6 +1371,7 @@ protected class DatatypeHiddens_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prDatatypeHiddens().eleGroup();
 	}
@@ -1347,6 +1401,7 @@ protected class DatatypeHiddens_0_Keyword_datatype extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prDatatypeHiddens().ele0KeywordDatatype();
 	}	
@@ -1359,6 +1414,7 @@ protected class DatatypeHiddens_1_Assignment_valid extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prDatatypeHiddens().ele1AssignmentValid();
 	}
@@ -1397,6 +1453,7 @@ protected class HidingHiddens_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prHidingHiddens().eleGroup();
 	}
@@ -1426,6 +1483,7 @@ protected class HidingHiddens_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prHidingHiddens().ele0Group();
 	}
@@ -1455,6 +1513,7 @@ protected class HidingHiddens_0_0_Keyword_hiding extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prHidingHiddens().ele00KeywordHiding();
 	}	
@@ -1467,6 +1526,7 @@ protected class HidingHiddens_0_1_Assignment_space extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prHidingHiddens().ele01AssignmentSpace();
 	}
@@ -1494,6 +1554,7 @@ protected class HidingHiddens_1_Assignment_called extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prHidingHiddens().ele1AssignmentCalled();
 	}
@@ -1505,7 +1566,7 @@ protected class HidingHiddens_1_Assignment_called extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("InheritingHiddensCall")) {
+			if(param.isInstanceOf(grammarAccess.prInheritingHiddensCall().getRule().getType().getType())) {
 				Solution s = new InheritingHiddensCall_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -1537,6 +1598,7 @@ protected class InheritingHiddensCall_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prInheritingHiddensCall().eleGroup();
 	}
@@ -1566,6 +1628,7 @@ protected class InheritingHiddensCall_0_Keyword_call extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prInheritingHiddensCall().ele0KeywordCall();
 	}	
@@ -1578,6 +1641,7 @@ protected class InheritingHiddensCall_1_Assignment_valid extends AssignmentToken
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prInheritingHiddensCall().ele1AssignmentValid();
 	}

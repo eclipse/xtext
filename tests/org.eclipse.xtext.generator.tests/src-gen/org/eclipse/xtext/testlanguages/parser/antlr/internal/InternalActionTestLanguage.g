@@ -90,7 +90,7 @@ ruleModel returns [EObject current=null]
 	    lv_children_0=ruleElement 
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Model");
+	            $current = factory.create(grammarAccess.prModel().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -136,7 +136,7 @@ ruleElement returns [EObject current=null]
     }
 ((
     { 
-        temp=factory.create("Item");
+        temp=factory.create(grammarAccess.prElement().ele10ActionItemitems().getTypeName().getType());
         try {
         	factory.add(temp, "items", $current, null /*ParserRule*/, currentNode);
         } catch(ValueConverterException vce) {
@@ -159,7 +159,7 @@ ruleElement returns [EObject current=null]
 	    lv_items_2=ruleItem 
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Type");
+	            $current = factory.create(grammarAccess.prElement().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -196,7 +196,7 @@ ruleItem returns [EObject current=null]
     }:
 ((
     { 
-        temp=factory.create("Thing");
+        temp=factory.create(grammarAccess.prItem().ele0ActionThingcontent().getTypeName().getType());
         try {
         	factory.set(temp, "content", $current, null /*ParserRule*/, currentNode);
         } catch(ValueConverterException vce) {
@@ -219,7 +219,7 @@ ruleItem returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("Type");
+	            $current = factory.create(grammarAccess.prItem().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        

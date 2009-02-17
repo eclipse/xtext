@@ -6,8 +6,8 @@ package org.eclipse.xtext.parsetree.transientvalues.parsetree.reconstr;
 //import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parsetree.reconstr.*;
-import org.eclipse.xtext.parsetree.reconstr.impl.*;
+import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
 import org.eclipse.xtext.parsetree.transientvalues.services.TransientValuesTestGrammarAccess;
 
@@ -18,13 +18,14 @@ public class TransientValuesTestParseTreeConstructor extends AbstractParseTreeCo
 	@Inject
 	private TransientValuesTestGrammarAccess grammarAccess;
 	
+	@Override
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf("Root") && (s = new Root_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("TestRequired") && (s = new TestRequired_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("TestOptional") && (s = new TestOptional_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf("TestList") && (s = new TestList_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prRoot().getRule().getType().getType()) && (s = new Root_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prTestRequired().getRule().getType().getType()) && (s = new TestRequired_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prTestOptional().getRule().getType().getType()) && (s = new TestOptional_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prTestList().getRule().getType().getType()) && (s = new TestList_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
@@ -43,6 +44,7 @@ protected class Root_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prRoot().eleGroup();
 	}
@@ -72,6 +74,7 @@ protected class Root_0_Keyword_test extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prRoot().ele0KeywordTest();
 	}	
@@ -84,6 +87,7 @@ protected class Root_1_Alternatives extends AlternativesToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.prRoot().ele1Alternatives();
 	}
@@ -106,6 +110,7 @@ protected class Root_1_0_Alternatives extends AlternativesToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.prRoot().ele10Alternatives();
 	}
@@ -128,6 +133,7 @@ protected class Root_1_0_0_RuleCall_TestRequired extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prRoot().ele100ParserRuleCallTestRequired();
 	}
@@ -135,7 +141,7 @@ protected class Root_1_0_0_RuleCall_TestRequired extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(TestRequired_Group.class, current)) return null;
-		if(!current.isInstanceOf("TestRequired")) return null;
+		if(!current.isInstanceOf(grammarAccess.prTestRequired().getRule().getType().getType())) return null;
 		return new TestRequired_Group(current, this).firstSolution();
 	}
 }
@@ -147,6 +153,7 @@ protected class Root_1_0_1_RuleCall_TestOptional extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prRoot().ele101ParserRuleCallTestOptional();
 	}
@@ -154,7 +161,7 @@ protected class Root_1_0_1_RuleCall_TestOptional extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(TestOptional_Group.class, current)) return null;
-		if(!current.isInstanceOf("TestOptional")) return null;
+		if(!current.isInstanceOf(grammarAccess.prTestOptional().getRule().getType().getType())) return null;
 		return new TestOptional_Group(current, this).firstSolution();
 	}
 }
@@ -167,6 +174,7 @@ protected class Root_1_1_RuleCall_TestList extends RuleCallToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.prRoot().ele11ParserRuleCallTestList();
 	}
@@ -174,7 +182,7 @@ protected class Root_1_1_RuleCall_TestList extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(TestList_Group.class, current)) return null;
-		if(!current.isInstanceOf("TestList")) return null;
+		if(!current.isInstanceOf(grammarAccess.prTestList().getRule().getType().getType())) return null;
 		return new TestList_Group(current, this).firstSolution();
 	}
 }
@@ -198,6 +206,7 @@ protected class TestRequired_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTestRequired().eleGroup();
 	}
@@ -227,6 +236,7 @@ protected class TestRequired_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTestRequired().ele0Group();
 	}
@@ -256,6 +266,7 @@ protected class TestRequired_0_0_Keyword_required extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prTestRequired().ele00KeywordRequired();
 	}	
@@ -268,6 +279,7 @@ protected class TestRequired_0_1_Assignment_required1 extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prTestRequired().ele01AssignmentRequired1();
 	}
@@ -293,6 +305,7 @@ protected class TestRequired_1_Assignment_required2 extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prTestRequired().ele1AssignmentRequired2();
 	}
@@ -328,6 +341,7 @@ protected class TestOptional_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTestOptional().eleGroup();
 	}
@@ -357,6 +371,7 @@ protected class TestOptional_0_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTestOptional().ele0Group();
 	}
@@ -386,6 +401,7 @@ protected class TestOptional_0_0_Keyword_optional extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prTestOptional().ele00KeywordOptional();
 	}	
@@ -398,6 +414,7 @@ protected class TestOptional_0_1_Assignment_opt1 extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prTestOptional().ele01AssignmentOpt1();
 	}
@@ -423,6 +440,7 @@ protected class TestOptional_1_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTestOptional().ele1Group();
 	}
@@ -452,6 +470,7 @@ protected class TestOptional_1_0_Keyword extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prTestOptional().ele10KeywordColon();
 	}	
@@ -464,6 +483,7 @@ protected class TestOptional_1_1_Assignment_opt2 extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prTestOptional().ele11AssignmentOpt2();
 	}
@@ -500,6 +520,7 @@ protected class TestList_Group extends GroupToken {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.prTestList().eleGroup();
 	}
@@ -529,6 +550,7 @@ protected class TestList_0_Keyword_list extends KeywordToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.prTestList().ele0KeywordList();
 	}	
@@ -541,6 +563,7 @@ protected class TestList_1_Assignment_item extends AssignmentToken  {
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.prTestList().ele1AssignmentItem();
 	}

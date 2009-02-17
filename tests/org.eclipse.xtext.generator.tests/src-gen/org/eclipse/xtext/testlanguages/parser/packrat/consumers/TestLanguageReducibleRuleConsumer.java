@@ -3,7 +3,11 @@ Generated with Xtext
 */
 package org.eclipse.xtext.testlanguages.parser.packrat.consumers;
 
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+
+import org.eclipse.xtext.AbstractRule;
+
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
@@ -13,7 +17,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
-import org.eclipse.xtext.testlanguages.services.TestLanguageGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.TestLanguageGrammarAccess.ReducibleRuleElements;
 
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.TestLanguageTerminalRuleConsumer;
@@ -126,7 +129,7 @@ public final class TestLanguageReducibleRuleConsumer extends NonTerminalConsumer
 		return result;
 	}
 	protected int consumeAction$6(int entryPoint) {
-		consumeAction(getRule().ele10ActionReducibleCompositeactionFeature(), "ReducibleComposite", true);
+		consumeAction(getRule().ele10ActionReducibleCompositeactionFeature(), true);
 		return ConsumeResult.SUCCESS;	
 	}
 
@@ -139,7 +142,6 @@ public final class TestLanguageReducibleRuleConsumer extends NonTerminalConsumer
 	}
 
 	public ReducibleRuleElements getRule() {
-	// TestLanguageGrammarAccess.INSTANCE.prReducibleRule()
 		return rule;
 	}
 	
@@ -148,13 +150,13 @@ public final class TestLanguageReducibleRuleConsumer extends NonTerminalConsumer
 	}
 	
 	@Override
-	protected EObject getGrammarElement() {
+	protected AbstractRule getGrammarElement() {
 		return getRule().getRule();
 	}
 
 	@Override
-	protected String getDefaultTypeName() {
-		return "ReducibleElement";
+	protected EClassifier getDefaultType() {
+		return getGrammarElement().getType().getType();
 	}
 	
 	public void setTerminalRuleConsumer(INonTerminalConsumer terminalRuleConsumer) {

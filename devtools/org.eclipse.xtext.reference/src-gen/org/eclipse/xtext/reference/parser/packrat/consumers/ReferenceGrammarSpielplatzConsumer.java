@@ -3,7 +3,11 @@ Generated with Xtext
 */
 package org.eclipse.xtext.reference.parser.packrat.consumers;
 
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+
+import org.eclipse.xtext.AbstractRule;
+
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
@@ -13,7 +17,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
-import org.eclipse.xtext.reference.services.ReferenceGrammarGrammarAccess;
 import org.eclipse.xtext.reference.services.ReferenceGrammarGrammarAccess.SpielplatzElements;
 
 import org.eclipse.xtext.reference.parser.packrat.consumers.ReferenceGrammarCustomTypeParserRuleConsumer;
@@ -260,7 +263,6 @@ public final class ReferenceGrammarSpielplatzConsumer extends NonTerminalConsume
 	}
 
 	public SpielplatzElements getRule() {
-	// ReferenceGrammarGrammarAccess.INSTANCE.prSpielplatz()
 		return rule;
 	}
 	
@@ -269,13 +271,13 @@ public final class ReferenceGrammarSpielplatzConsumer extends NonTerminalConsume
 	}
 	
 	@Override
-	protected EObject getGrammarElement() {
+	protected AbstractRule getGrammarElement() {
 		return getRule().getRule();
 	}
 
 	@Override
-	protected String getDefaultTypeName() {
-		return "Spielplatz";
+	protected EClassifier getDefaultType() {
+		return getGrammarElement().getType().getType();
 	}
 	
 	public void setCustomTypeParserRuleConsumer(INonTerminalConsumer customTypeParserRuleConsumer) {

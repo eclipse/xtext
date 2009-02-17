@@ -3,7 +3,11 @@ Generated with Xtext
 */
 package org.eclipse.xtext.ui.integration.parser.packrat.consumers;
 
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+
+import org.eclipse.xtext.AbstractRule;
+
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
@@ -13,7 +17,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
-import org.eclipse.xtext.ui.integration.services.TestLanguageGrammarAccess;
 import org.eclipse.xtext.ui.integration.services.TestLanguageGrammarAccess.FileElements;
 
 import org.eclipse.xtext.ui.integration.parser.packrat.consumers.TestLanguageStuffConsumer;
@@ -52,7 +55,6 @@ public final class TestLanguageFileConsumer extends NonTerminalConsumer {
 	}
 
 	public FileElements getRule() {
-	// TestLanguageGrammarAccess.INSTANCE.prFile()
 		return rule;
 	}
 	
@@ -61,13 +63,13 @@ public final class TestLanguageFileConsumer extends NonTerminalConsumer {
 	}
 	
 	@Override
-	protected EObject getGrammarElement() {
+	protected AbstractRule getGrammarElement() {
 		return getRule().getRule();
 	}
 
 	@Override
-	protected String getDefaultTypeName() {
-		return "File";
+	protected EClassifier getDefaultType() {
+		return getGrammarElement().getType().getType();
 	}
 	
 	public void setStuffConsumer(INonTerminalConsumer stuffConsumer) {
