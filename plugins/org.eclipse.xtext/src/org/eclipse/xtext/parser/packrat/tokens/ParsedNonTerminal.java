@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.packrat.tokens;
 
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.packrat.IParsedTokenVisitor;
 
@@ -15,23 +16,20 @@ import org.eclipse.xtext.parser.packrat.IParsedTokenVisitor;
  */
 public class ParsedNonTerminal extends ParsedToken {
 
-	/**
-	 * TODO: use EClass instead
-	 */
-	private final String typeName;
+	private final EClassifier type;
 
-	public ParsedNonTerminal(int offset, EObject grammarElement, String typeName) {
+	public ParsedNonTerminal(int offset, EObject grammarElement, EClassifier type) {
 		super(offset, 0, grammarElement);
-		this.typeName = typeName;
+		this.type = type;
 	}
 
 	@Override
 	public void accept(IParsedTokenVisitor visitor) {
 		visitor.visitParsedNonTerminal(this);
 	}
-	
-	public String getTypeName() {
-		return typeName;
+
+	public EClassifier getType() {
+		return type;
 	}
 
 }

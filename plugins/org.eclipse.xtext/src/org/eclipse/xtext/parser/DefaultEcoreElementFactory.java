@@ -9,22 +9,15 @@
 package org.eclipse.xtext.parser;
 
 import java.util.Collection;
-import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.xtext.AbstractMetamodelDeclaration;
-import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.util.Strings;
 
 import com.google.inject.Inject;
 
@@ -41,9 +34,6 @@ public class DefaultEcoreElementFactory implements IAstFactory {
 	@Inject
 	private IValueConverterService converterService;
 
-	@Inject
-	private IGrammarAccess grammarAccess;
-
 	@Inject(optional=true)
 	private ITokenToStringConverter tokenConverter;
 
@@ -55,21 +45,14 @@ public class DefaultEcoreElementFactory implements IAstFactory {
 		this.converterService = converterService;
 	}
 
-	public IGrammarAccess getGrammarAccess() {
-		return grammarAccess;
-	}
-
-	public void setGrammarAccess(IGrammarAccess grammarAccess) {
-		this.grammarAccess = grammarAccess;
-	}
-
-	public EObject create(String fullTypeName) {
-		EClass clazz = getEClass(fullTypeName);
-		if (clazz == null)
-			throw new IllegalArgumentException("Couldn't find EClass for name " + fullTypeName);
-
+	public EObject create(EClassifier classifier) {
+		if (classifier == null)
+			throw new NullPointerException("Classifier may not be null.");
+		if (!(classifier instanceof EClass))
+			throw new IllegalArgumentException("Cannot create instance of datatype '" + classifier.getName() + "'");
+		EClass clazz = (EClass) classifier;
 		if (clazz.isAbstract() || clazz.isInterface())
-			throw new IllegalArgumentException("Can't create instance of abstract type " + fullTypeName);
+			throw new IllegalArgumentException("Cannot create instance of abstract class '" + clazz.getName() + "'");
 		return clazz.getEPackage().getEFactoryInstance().create(clazz);
 	}
 
@@ -109,67 +92,6 @@ public class DefaultEcoreElementFactory implements IAstFactory {
 		if (structuralFeature == null)
 			throw new IllegalArgumentException(feature);
 		((Collection<Object>) object.eGet(structuralFeature)).add(getTokenValue(value, ruleName, node));
-	}
-
-	protected EPackage getEPackage(AbstractMetamodelDeclaration metaModelDecl) {
-		if (metaModelDecl == null)
-			throw new NullPointerException();
-		if (metaModelDecl.getEPackage() == null)
-			throw new NullPointerException("Cannot find package for declared model '" + metaModelDecl.getAlias() + "'");
-		return metaModelDecl.getEPackage();
-	}
-
-	protected String getNsURI(AbstractMetamodelDeclaration metamodelDecl) {
-		if (metamodelDecl.getEPackage() != null)
-			return metamodelDecl.getEPackage().getNsURI();
-		return null;
-	}
-
-	public EClass getEClass(String fullTypeName) {
-		return findEClassByName(grammarAccess.getGrammar(), fullTypeName);
-	}
-
-	public EClass findEClassByName(Grammar grammar, String fullTypeName) {
-		final String[] splitted = fullTypeName.split("::");
-		String alias = "";
-		String type = fullTypeName;
-		if (splitted.length > 1) {
-			alias = splitted[0];
-			type = splitted[1];
-		}
-		final List<AbstractMetamodelDeclaration> declarations = GrammarUtil.allMetamodelDeclarations(grammar);
-		AbstractMetamodelDeclaration resultMetaModel = null;
-		EClassifier result = null;
-		for (AbstractMetamodelDeclaration decl : declarations) {
-			if (Strings.isEmpty(alias) || GrammarUtil.isSameAlias(decl.getAlias(), alias)) {
-				EPackage pack = getEPackage(decl);
-				if (pack != null) {
-					EClassifier candidate = pack.getEClassifier(type);
-					if (candidate != null) {
-						if (resultMetaModel == null) {
-							resultMetaModel = decl;
-							result = candidate;
-						} else {
-							if (GrammarUtil.isSameAlias(resultMetaModel.getAlias(), alias)) {
-								if (GrammarUtil.isSameAlias(decl.getAlias(), alias)) {
-									return null;
-								}
-							} else {
-								if (GrammarUtil.isSameAlias(decl.getAlias(), alias)) {
-									resultMetaModel = decl;
-									result = candidate;
-								} else {
-									result = null;
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-		if (!(result instanceof EClass))
-			return null;
-		return (EClass) result;
 	}
 
 }

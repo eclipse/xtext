@@ -22,7 +22,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
@@ -257,6 +256,8 @@ public abstract class AbstractParseTreeConstructor implements
 			}
 		}
 
+		public abstract AbstractElement getGrammarElement();
+
 		public Solution nextSolution(AbstractToken limit, Solution last) {
 			if (log.isTraceEnabled())
 				log.trace("--" + depth(limit)
@@ -352,6 +353,7 @@ public abstract class AbstractParseTreeConstructor implements
 			return element;
 		}
 
+		@Override
 		public Assignment getGrammarElement() {
 			return GrammarUtil.containingAssignment(element);
 		}
@@ -432,12 +434,9 @@ public abstract class AbstractParseTreeConstructor implements
 
 	protected List<AbstractSerializationDiagnostic> diagnostic = new ArrayList<AbstractSerializationDiagnostic>();
 
-	@Inject
-	private IAstFactory factory;
+	private final Logger log = Logger.getLogger(AbstractParseTreeConstructor.class);
 
-	protected Logger log = Logger.getLogger(AbstractParseTreeConstructor.class);
-
-	protected EObject rootObject;
+	private EObject rootObject;
 
 	@Inject
 	private ITransientValueService tvService;
@@ -448,10 +447,6 @@ public abstract class AbstractParseTreeConstructor implements
 
 	protected final IInstanceDescription getDescr(IInstanceDescription obj) {
 		return obj;
-	}
-
-	public IAstFactory getFactory() {
-		return factory;
 	}
 
 	protected String getPath(EObject obj) {

@@ -18,14 +18,14 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
  */
 public interface IConsumerUtility {
 
-	int consumeKeyword(Keyword keyword, String feature, boolean isMany, 
+	int consumeKeyword(Keyword keyword, String feature, boolean isMany,
 			boolean isBoolean, ICharacterClass notFolledBy);
-	
-	int consumeTerminal(ITerminalConsumer consumer, String feature, 
+
+	int consumeTerminal(ITerminalConsumer consumer, String feature,
 			boolean isMany, boolean isBoolean, AbstractElement grammarElement, ISequenceMatcher notMatching);
-	
-	int consumeNonTerminal(INonTerminalConsumer consumer, String feature, 
+
+	int consumeNonTerminal(INonTerminalConsumer consumer, String feature,
 			boolean isMany, boolean isDatatype, boolean isBoolean, AbstractElement grammarElement) throws Exception;
-	
-	void consumeAction(Action action, String typeName, boolean isMany);
+
+	void consumeAction(Action action, boolean isMany);
 }
