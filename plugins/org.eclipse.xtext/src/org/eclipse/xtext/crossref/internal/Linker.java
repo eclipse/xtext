@@ -15,10 +15,13 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.crossref.ILinker;
@@ -37,7 +40,7 @@ import org.eclipse.xtext.parsetree.NodeUtil;
 public class Linker implements ILinker {
 
 	private static Logger log = Logger.getLogger(Linker.class);
-	
+
 	@com.google.inject.Inject
 	private ILinkingService linkingService;
 
@@ -58,7 +61,7 @@ public class Linker implements ILinker {
 		producer.setNode(node);
 		setDefaultValues(obj, handledReferences, producer);
 	}
-	
+
 	protected IDiagnosticProducer createDiagnosticProducer(IDiagnosticConsumer consumer) {
 		return new LinkingDiagnosticProducer(consumer);
 	}
@@ -67,12 +70,12 @@ public class Linker implements ILinker {
 		for(EReference ref: obj.eClass().getEAllReferences())
 			clearReference(obj, ref);
 	}
-	
+
 	protected void clearReference(EObject obj, EReference ref) {
 		if (!ref.isContainment() && !ref.isContainer() && !ref.isDerived())
 			obj.eUnset(ref);
 	}
-	
+
 	private void setDefaultValues(EObject obj, Set<EReference> references, IDiagnosticProducer producer) {
 		for(EReference ref: obj.eClass().getEAllReferences())
 			if (!ref.isContainment() && !ref.isContainer() && !references.contains(ref) && !obj.eIsSet(ref) && !ref.isDerived()) {
@@ -80,22 +83,22 @@ public class Linker implements ILinker {
 				setDefaultValue(obj, ref, producer);
 			}
 	}
-	
+
 	protected final void setDefaultValue(EObject obj, EReference ref, IDiagnosticProducer producer) {
 		producer.setTarget(obj, ref);
 		setDefaultValueImpl(obj, ref, producer);
 	}
-	
+
 	protected void setDefaultValueImpl(EObject obj, EReference ref, IDiagnosticProducer producer) {
-		// may be overridden by clients		
+		// may be overridden by clients
 	}
 
 	protected void beforeEnsureIsLinked(EObject obj, EReference ref, IDiagnosticProducer producer) {
 		// may be overridden by clients
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	protected void ensureIsLinked(EObject obj, AbstractNode node, CrossReference ref, 
+	protected void ensureIsLinked(EObject obj, AbstractNode node, CrossReference ref,
 			Set<EReference> handledReferences, IDiagnosticProducer producer) {
 		final EReference eRef = GrammarUtil.getReference(ref, obj.eClass());
 		if (eRef == null) {
@@ -116,7 +119,7 @@ public class Linker implements ILinker {
 			if (eRef.getUpperBound() >= 0 && links.size() > eRef.getUpperBound()) {
 				producer.addDiagnostic("Too many matches for reference to '"
 						+ node.serialize() + "'. Feature " + eRef.getName() + " can only hold " + eRef.getUpperBound()
-						+ " reference" + (eRef.getUpperBound() != 1 ? "s" : "") + " but found " + links.size() + " candidates" + 
+						+ " reference" + (eRef.getUpperBound() != 1 ? "s" : "") + " but found " + links.size() + " candidates" +
 						(links.size()!=1 ? "s" : ""));
 				return;
 			}
@@ -124,7 +127,7 @@ public class Linker implements ILinker {
 			if (eRef.getUpperBound() == 1) {
 				obj.eSet(eRef, links.get(0));
 			}
-			else { // eRef.getUpperBound() == -1 || 
+			else { // eRef.getUpperBound() == -1 ||
 				// eRef.getUpperBound() < links.size
 				// TODO extract and check weather equals or identity is used by list
 				final List<EObject> list = (List<EObject>) obj.eGet(eRef);
@@ -147,7 +150,7 @@ public class Linker implements ILinker {
 			}
 		}
 	}
-	
+
 	protected List<EObject> getLinkedObject(EObject obj, EReference eRef, AbstractNode node) throws IllegalNodeException {
 		return linkingService.getLinkedObjects(obj, eRef, node);
 	}
@@ -171,12 +174,50 @@ public class Linker implements ILinker {
 		final Iterator<EObject> allContents = model.eAllContents();
 		while (allContents.hasNext())
 			ensureLinked(allContents.next(), producer);
+		model.eResource().eAdapters().add(new Clearer());
 	}
-	
+
 	private void clearAllReferences(EObject model) {
 		final Iterator<EObject> iter = model.eAllContents();
 		while (iter.hasNext())
-			clearReferences(iter.next());	
+			clearReferences(iter.next());
 	}
-	
+
+	private class Clearer extends EContentAdapter {
+
+		@Override
+		public void notifyChanged(Notification msg) {
+			super.notifyChanged(msg);
+			if (!msg.isTouch() && msg.getOldValue() != null) {
+				if (!(msg.getNotifier() instanceof Resource)) {
+					Object feature = msg.getFeature();
+					if (!(feature instanceof EReference))
+						return;
+					EReference ref = (EReference) feature;
+					if (!ref.isContainment())
+						return;
+				}
+				switch (msg.getEventType()) {
+					case Notification.REMOVE_MANY:
+					case Notification.REMOVE:
+					case Notification.SET:
+						Object oldValue = msg.getOldValue();
+						if (oldValue instanceof EList<?>) {
+							EList<?> list = (EList<?>) oldValue;
+							for (Object obj: list) {
+								if (obj instanceof EObject)
+									clearAllReferences((EObject) obj);
+							}
+						} else if (oldValue instanceof EObject) {
+							clearAllReferences((EObject) oldValue);
+						}
+						break;
+					default:
+						break;
+				}
+			}
+		}
+
+	}
+
 }
