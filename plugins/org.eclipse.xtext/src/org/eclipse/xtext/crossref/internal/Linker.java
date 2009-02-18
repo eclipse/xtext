@@ -15,13 +15,10 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.crossref.ILinker;
@@ -174,50 +171,13 @@ public class Linker implements ILinker {
 		final Iterator<EObject> allContents = model.eAllContents();
 		while (allContents.hasNext())
 			ensureLinked(allContents.next(), producer);
-		model.eResource().eAdapters().add(new Clearer());
+
 	}
 
 	private void clearAllReferences(EObject model) {
 		final Iterator<EObject> iter = model.eAllContents();
 		while (iter.hasNext())
 			clearReferences(iter.next());
-	}
-
-	private class Clearer extends EContentAdapter {
-
-		@Override
-		public void notifyChanged(Notification msg) {
-			super.notifyChanged(msg);
-			if (!msg.isTouch() && msg.getOldValue() != null) {
-				if (!(msg.getNotifier() instanceof Resource)) {
-					Object feature = msg.getFeature();
-					if (!(feature instanceof EReference))
-						return;
-					EReference ref = (EReference) feature;
-					if (!ref.isContainment())
-						return;
-				}
-				switch (msg.getEventType()) {
-					case Notification.REMOVE_MANY:
-					case Notification.REMOVE:
-					case Notification.SET:
-						Object oldValue = msg.getOldValue();
-						if (oldValue instanceof EList<?>) {
-							EList<?> list = (EList<?>) oldValue;
-							for (Object obj: list) {
-								if (obj instanceof EObject)
-									clearAllReferences((EObject) obj);
-							}
-						} else if (oldValue instanceof EObject) {
-							clearAllReferences((EObject) oldValue);
-						}
-						break;
-					default:
-						break;
-				}
-			}
-		}
-
 	}
 
 }
