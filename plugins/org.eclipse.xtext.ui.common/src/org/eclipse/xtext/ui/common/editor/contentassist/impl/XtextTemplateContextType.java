@@ -11,6 +11,7 @@ package org.eclipse.xtext.ui.common.editor.contentassist.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -19,7 +20,9 @@ import org.eclipse.jface.text.templates.TemplateContext;
 import org.eclipse.jface.text.templates.TemplateContextType;
 import org.eclipse.jface.text.templates.TemplateVariable;
 import org.eclipse.jface.text.templates.TemplateVariableResolver;
+import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.crossref.IScopedElement;
 
 /**
@@ -57,7 +60,7 @@ public class XtextTemplateContextType extends TemplateContextType {
 
 			String[] classReferencePair = abbreviatedCrossReference.split("\\.");
 
-			EReference reference = null;// getReference(classReferencePair[0], classReferencePair[1], getGrammar(xtextTemplateContext));
+			EReference reference = getReference(classReferencePair[0], classReferencePair[1], getGrammar(xtextTemplateContext));
 
 			Iterable<IScopedElement> linkingCandidates = xtextTemplateContext.getScopeProvider()
 					.getScope(xtextTemplateContext.getContentAssistContext().getModel(), reference).getAllContents();
@@ -85,18 +88,16 @@ public class XtextTemplateContextType extends TemplateContextType {
 			Grammar g = (Grammar) EcoreUtil.getRootContainer(grammarElement);
 			return g;
 		}
-//TODO get rid of IMetamodelAccess
-//		private EReference getReference(String eClassName, String eReferenceName) {
-//			EPackage[] allEPackages = metamodelAccess.getAllEPackages();
-//			for (int i = 0; i < allEPackages.length; i++) {
-//				EPackage ePackage = allEPackages[i];
-//				EClass eClass = (EClass) ePackage.getEClassifier(eClassName);
-//				if (eClass != null) {
-//					return (EReference) eClass.getEStructuralFeature(eReferenceName);
-//				}
-//			}
-//			return null;
-//		}
+		private EReference getReference(String eClassName, String eReferenceName, Grammar g) {
+			List<AbstractMetamodelDeclaration> allMetamodelDeclarations = GrammarUtil.allMetamodelDeclarations(g);
+			for (AbstractMetamodelDeclaration decl : allMetamodelDeclarations) {
+				EClass eClass = (EClass) decl.getEPackage().getEClassifier(eClassName);
+				if (eClass != null) {
+					return (EReference) eClass.getEStructuralFeature(eReferenceName);
+				}
+			}
+			return null;
+		}
 	}
 
 }
