@@ -17,7 +17,6 @@ import org.eclipse.jface.text.templates.TemplateCompletionProcessor;
 import org.eclipse.jface.text.templates.TemplateContext;
 import org.eclipse.jface.text.templates.TemplateContextType;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.crossref.IScopeProvider;
 import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
 import org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider;
@@ -37,9 +36,6 @@ public class DefaultTemplateContentAssistProcessor extends TemplateCompletionPro
 
 	@Inject 
 	private IScopeProvider scopeProvider;
-	
-	@Inject 
-	private IMetamodelAccess metamodelAccess;
 	
 	private TemplateContextType contextType;
 
@@ -75,8 +71,7 @@ public class DefaultTemplateContentAssistProcessor extends TemplateCompletionPro
 			return new XtextTemplateContext(contextType, viewer.getDocument(), 
 					new Position(region.getOffset(), region.getLength()), 
 					this.contentAssistContext,
-					this.scopeProvider,
-					this.metamodelAccess);
+					this.scopeProvider);
 		}
 		return null;
 	}

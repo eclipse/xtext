@@ -53,7 +53,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
         
         @Override
         protected InputStream getTokenFile() {
-        	ClassLoader classLoader = InternalDomainmodelParser.class.getClassLoader();
+        	ClassLoader classLoader = getClass().getClassLoader();
         	return classLoader.getResourceAsStream("org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.tokens");
         }
         

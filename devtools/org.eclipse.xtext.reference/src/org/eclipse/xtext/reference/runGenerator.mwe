@@ -1,0 +1,21 @@
+<workflow>
+	<property name="grammarURI" value="classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xtext"/>
+	<property name="runtimeProject" value="."/>
+	<property name="uiProject" value="../org.eclipse.xtext.reference.ui"/>
+	<property name="file.extensions" value="xtest,tst"/>
+	
+	<bean class="org.eclipse.emf.mwe.utils.StandaloneSetup">	
+		<registerGeneratedEPackage value="ReferenceModel.ReferenceModelPackage"/>
+		<platformUri value=".."/>
+	</bean>
+	
+	<component class="org.eclipse.xtext.generator.Generator">
+		<grammarURI value="${grammarURI}"/>
+		<pathRtProject value="${runtimeProject}"/>
+		<pathUiProject value="${uiProject}"/>
+		<fragments file="org/eclipse/xtext/ui/generator/standardUiAndRuntime.mwe">
+			<file.extensions value="${file.extensions}"/>
+			<genmodels value="platform:/resource/org.eclipse.xtext.reference/src/org/eclipse/xtext/reference/ReferenceModel.genmodel"/>
+		</fragments>
+	</component>
+</workflow>

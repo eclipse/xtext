@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<plugin>
+
+    <extension
+			point="org.eclipse.ui.editors">
+		<editor
+			class="guice.Aware:org.eclipse.xtext.ui.core.editor.XtextEditor"
+			contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+			default="true"
+			extensions="dmodel"
+			id="org.eclipse.xtext.example.Domainmodel"
+			name="Domainmodel Editor">
+		</editor>
+	</extension>
+	 <extension
+			point="org.eclipse.ui.preferencePages">
+		<page
+			class="guice.Aware:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
+			id="org.eclipse.xtext.example.Domainmodel"
+			name="Domainmodel">
+			<keywordReference
+				id="org.eclipse.xtext.example.ui.keyword_Domainmodel">
+			</keywordReference>
+		</page>
+		<page
+			category="org.eclipse.xtext.example.Domainmodel"
+			class="guice.Aware:org.eclipse.xtext.ui.core.editor.preferences.EditorPreferencePage"
+			id="org.eclipse.xtext.example.Domainmodel.editor"
+			name="Editor">
+			<keywordReference 
+				id="org.eclipse.xtext.keyword.editor">
+			</keywordReference>
+		</page>
+	</extension>
+	<extension
+		point="org.eclipse.ui.keywords">
+		<keyword
+			id="org.eclipse.xtext.example.ui.keyword_Domainmodel"
+			label="Domainmodel">
+		</keyword>
+		<keyword
+			id="org.eclipse.xtext.example.Domainmodel.tasktags"
+			label="Task Tags">
+		</keyword>
+	</extension>
+
+</plugin>

@@ -11,7 +11,6 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.Position;
 import org.eclipse.jface.text.templates.DocumentTemplateContext;
 import org.eclipse.jface.text.templates.TemplateContextType;
-import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.crossref.IScopeProvider;
 import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
 
@@ -27,15 +26,11 @@ public class XtextTemplateContext extends DocumentTemplateContext {
 
 	private IScopeProvider scopeProvider;
 
-	private IMetamodelAccess metamodelAccess;
-
 	public XtextTemplateContext(TemplateContextType type, IDocument document, Position position,
-			IContentAssistContext contentAssistContext, IScopeProvider scopeProvider,
-			IMetamodelAccess metamodelAccess) {
+			IContentAssistContext contentAssistContext, IScopeProvider scopeProvider) {
 		super(type, document, position);
 		this.contentAssistContext = contentAssistContext;
 		this.scopeProvider = scopeProvider;
-		this.metamodelAccess = metamodelAccess;
 	}
 
 	/**
@@ -52,11 +47,5 @@ public class XtextTemplateContext extends DocumentTemplateContext {
 		return scopeProvider;
 	}
 
-	/**
-	 * @return the metamodelAccess
-	 */
-	public IMetamodelAccess getMetamodelAccess() {
-		return metamodelAccess;
-	}
 
 }

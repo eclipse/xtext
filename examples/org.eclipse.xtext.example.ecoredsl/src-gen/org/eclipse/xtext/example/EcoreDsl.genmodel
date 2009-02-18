@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ASCII"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="./src-gen" forceOverwrite="true" bundleManifest="false" complianceLevel="5.0" copyrightFields="false">
+  <genPackages prefix="Ecoredsl" basePackage="org.eclipse.xtext.example" disposableProviderFactory="true">
+    <ecorePackage href="http://example.xtext.org/EcoreDsl#/"/>
+    <genClasses>
+      <ecoreClass href="http://example.xtext.org/EcoreDsl#//EcoreDsl"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="http://example.xtext.org/EcoreDsl#//EcoreDsl/imports"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="http://example.xtext.org/EcoreDsl#//EcoreDsl/package"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="http://example.xtext.org/EcoreDsl#//ImportStatementDecl"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="http://example.xtext.org/EcoreDsl#//ImportStatementDecl/alias"/>
+      </genFeatures>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="http://example.xtext.org/EcoreDsl#//ImportStatementDecl/importURI"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="http://example.xtext.org/EcoreDsl#//MapEntry"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="http://example.xtext.org/EcoreDsl#//MapEntry/detailKey"/>
+      </genFeatures>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="http://example.xtext.org/EcoreDsl#//MapEntry/detailValue"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="http://example.xtext.org/EcoreDsl#//MultiplicityExpr"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
