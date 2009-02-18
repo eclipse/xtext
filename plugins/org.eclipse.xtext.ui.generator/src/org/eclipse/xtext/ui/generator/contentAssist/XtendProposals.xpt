@@ -1,0 +1,161 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT xtext»
+
+«EXTENSION org::eclipse::xtext::GrammarUtil»
+«EXTENSION org::eclipse::xtext::generator::Naming»
+«EXTENSION org::eclipse::xtext::ui::generator::contentAssist::ContentAssist»
+
+«DEFINE file FOR Grammar»
+	«EXPAND proposalProvider»
+	«EXPAND genXtendProposals»
+	«EXPAND xtendProposals»
+	«EXPAND Settings::root»
+«ENDDEFINE»
+
+«DEFINE genXtendProposals FOR Grammar»
+«FILE getGenProposalProvider().asPath()+".ext" SRC_GEN_UI-»
+/*
+«fileHeader()»
+*/
+
+import xtext;
+
+import org::eclipse::emf::ecore;
+import org::eclipse::jface::text::contentassist;
+import org::eclipse::xtext::crossref;
+import org::eclipse::xtext::ui::common::editor::contentassist;
+import org::eclipse::xtext::ui::common::xtend::contentassist;
+
+«FOREACH metamodelDeclarations AS mm-»
+import «mm.ePackage.name»;
+«ENDFOREACH-»
+
+extension org::eclipse::xtext::xtend::contentassist::ContentAssist reexport;
+extension org::eclipse::xtend::util::stdlib::io;
+
+/**
+ * Represents a generated, default implementation of interface {@link IProposalProvider}.
+ * 
+ * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider
+ */
+«LET {} AS processedFqnFeatureNames»«
+	FOREACH containedAssignments() AS assignment»«
+		LET getFqFeatureName(assignment) AS fqnFeatureName»«
+			IF !processedFqnFeatureNames.contains(fqnFeatureName)»«
+				processedFqnFeatureNames.add(fqnFeatureName)->""»	 
+List[ICompletionProposal] complete«fqnFeatureName»(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("complete«fqnFeatureName» feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->«
+				IF CrossReference.isInstance(assignment.terminal)»
+	lookupCrossReference(((CrossReference)assignment.terminal), contentAssistContext);«
+				ELSEIF RuleCall.isInstance(assignment.terminal) && ((RuleCall)assignment.terminal).rule.name=="ID" »
+    { newProposal(assignment, "«fqnFeatureName»", contentAssistContext) };«
+   				ELSEIF RuleCall.isInstance(assignment.terminal) && ((RuleCall)assignment.terminal).rule.name=="INT" »
+	{ newProposal(assignment, "1", contentAssistContext) };« 
+				ELSEIF RuleCall.isInstance(assignment.terminal) && ((RuleCall)assignment.terminal).rule.name=="STRING" »
+	{ newProposal(assignment, "\"«fqnFeatureName»\"", contentAssistContext) };«
+				ELSE»
+	{};«				
+				ENDIF»«
+			ENDIF»
+«		ENDLET»«
+	ENDFOREACH-»    
+«   FOREACH getParserRulesWithType() AS parserRule»«
+		LET getFqFeatureName(parserRule) AS fqnFeatureName»«
+			IF !processedFqnFeatureNames.contains(fqnFeatureName)»«
+				processedFqnFeatureNames.add(fqnFeatureName)->""»	 	  
+List[ICompletionProposal] complete«fqnFeatureName»(RuleCall ruleCall, IContentAssistContext contentAssistContext) :
+	{};
+«			ENDIF»«
+		ENDLET»«
+	ENDFOREACH»«
+ENDLET»
+/*
+	// TODO 
+    @Override
+	protected String getDefaultImageFilePath() {
+		return "icons/editor.gif";
+	}
+
+	@Override
+	protected String getPluginId() {
+		return UI_PLUGIN_ID;
+	}
+*/
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE xtendProposals FOR Grammar»
+«FILE getProposalProvider().asPath()+".ext" SRC_UI-»
+/*
+«fileHeader()»
+*/
+
+import xtext;
+
+import org::eclipse::jface::text::contentassist;
+import org::eclipse::xtext::crossref;
+import org::eclipse::xtext::ui::common::editor::contentassist;
+import org::eclipse::xtext::ui::common::xtend::contentassist;
+
+«FOREACH metamodelDeclarations AS mm-»
+import «mm.ePackage.name»;
+«ENDFOREACH-»
+
+extension «getGenProposalProvider().replaceAll('\\.','::')» reexport;
+
+/**
+ * Override functions defined in «getGenProposalProvider().replaceAll('\\.','::')» here.
+ */
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE proposalProvider FOR Grammar»
+«FILE getProposalProvider().asPath()+".java" SRC_GEN_UI-»
+/*
+«fileHeader()»
+*/
+
+package «getProposalProvider().toJavaPackage()»;
+
+import org.eclipse.xtext.xtend.contentassist.AbstractXtendProposalProvider;
+
+/**
+ * A {@link IProposalProvider} that calls Xtend extensions.
+ */
+public class «getProposalProvider().toSimpleName()» extends AbstractXtendProposalProvider {
+
+	//TODO get rid of the UI_PLUGIN field 
+	
+	private static final String UI_PLUGIN_ID = "TODO";
+		
+	@Override
+	protected String getPluginId() {
+		return UI_PLUGIN_ID;
+	}
+	
+	@Override
+	protected ClassLoader getClassLoader() {
+		return this.getClass().getClassLoader();
+	}
+
+	@Override
+	protected String getMasterXtendFileName() {
+		return "«getProposalProvider().replaceAll('\\.','::')»";	
+	}
+	
+	
+}
+«ENDFILE»
+«ENDDEFINE»

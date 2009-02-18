@@ -1,0 +1,4 @@
+<component class="org.eclipse.xtext.generator.CompositeGeneratorFragment">
+	<fragment file="org/eclipse/xtext/generator/standardRuntimeFragments.mwe" inheritAll="true"/>
+	<fragment file="org/eclipse/xtext/ui/generator/standardUiFragments.mwe" inheritAll="true"/>
+</component>
