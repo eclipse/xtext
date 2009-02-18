@@ -85,7 +85,7 @@ public class ToEcoreTrafoTest extends AbstractGeneratorTest {
 	}
 
 	private XtextResource getResource(String uri) {
-		XtextResourceSet set = new XtextResourceSet();
+		XtextResourceSet set = get(XtextResourceSet.class);
 		set.setClasspathURIContext(getClass().getClassLoader());
 		// if(AllTests.isPluginContext) {
 		// set.setClasspathUriResolver(new BundleClasspathUriResolver());
