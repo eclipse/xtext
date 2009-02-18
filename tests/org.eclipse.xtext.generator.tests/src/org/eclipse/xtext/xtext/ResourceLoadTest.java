@@ -14,6 +14,7 @@ import junit.framework.TestResult;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
+import org.eclipse.xtext.AbstractTestGrammarGenerator;
 import org.eclipse.xtext.GenerateAllTestGrammars;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
@@ -41,7 +42,11 @@ public class ResourceLoadTest extends AbstractGeneratorTest {
 
 	@Override
 	public int countTestCases() {
-		return super.countTestCases() * GenerateAllTestGrammars.testclasses.length;
+		return super.countTestCases() * getTestClasses().length;
+	}
+
+	private Class<?>[] getTestClasses() {
+		return new GenerateAllTestGrammars(null).getTestGrammarClasses();
 	}
 
 	@Override
@@ -51,9 +56,9 @@ public class ResourceLoadTest extends AbstractGeneratorTest {
 
 	@Override
 	public void run(TestResult result) {
-		for(int i = 0; i < GenerateAllTestGrammars.testclasses.length; i++) {
+		for(int i = 0; i < getTestClasses().length; i++) {
 //		for(int i = GenerateAllTestGrammars.testclasses.length - 1; i >= 0; i--) {
-			this.clazz = GenerateAllTestGrammars.testclasses[i];
+			this.clazz = getTestClasses()[i];
 //			this.clazz = GenerateAllTestGrammars.testclasses[8];
 			initModel();
 			super.run(result);

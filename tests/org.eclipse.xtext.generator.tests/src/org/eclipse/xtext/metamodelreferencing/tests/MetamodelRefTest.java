@@ -8,7 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.metamodelreferencing.tests;
 
-import org.eclipse.xtext.XtextPackage;
+import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 public class MetamodelRefTest extends AbstractGeneratorTest {
@@ -17,13 +17,13 @@ public class MetamodelRefTest extends AbstractGeneratorTest {
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        XtextPackage.eINSTANCE.getAbstractElement(); // initialize EPackage
-        with(MetamodelRefTestLanguageStandaloneSetup.class);
+        with(new XtextStandaloneSetup());
+        with(new MetamodelRefTestLanguageStandaloneSetup());
     }
 
     public void testStuff() throws Exception {
         Object parse = getModel("foo bar");
-        assertWithXtend("'SimpleTest::Foo'", "metaType.name", parse);
+        assertWithXtend("'anotherSimpleTest::Foo'", "metaType.name", parse);
         assertWithXtend("'xtext::RuleCall'", "nameRefs.first().metaType.name", parse);
     }
 

@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.resource.metamodel.multiValueFeatureTestLanguage.MultiValueFeatureTestLanguagePackage;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 /**
@@ -27,8 +28,8 @@ public class MultiValueFeatureTest extends AbstractGeneratorTest {
 	}
 
 	public void testMetamodel() {
-		EPackage generated = getMetamodelAccess().getGeneratedEPackages()[0];
-		assertEquals("MultiValueFeatureTestLanguage", generated.getName());
+		EPackage generated = MultiValueFeatureTestLanguagePackage.eINSTANCE;
+		assertEquals("multiValueFeatureTestLanguage", generated.getName());
 		EClass clazz = (EClass) generated.getEClassifier("Start");
 		assertNotNull(clazz);
 		EStructuralFeature feature = clazz.getEStructuralFeature("featureA");

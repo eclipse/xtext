@@ -11,6 +11,7 @@ import junit.framework.TestCase;
 
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.XtextFactory;
+import org.eclipse.xtext.generator.parser.PackratParserGenUtil;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

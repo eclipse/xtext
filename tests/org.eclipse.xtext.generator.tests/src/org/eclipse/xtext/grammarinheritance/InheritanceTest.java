@@ -22,6 +22,7 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.TypeRef;
+import org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.util.Function;
 
@@ -30,11 +31,9 @@ public class InheritanceTest extends AbstractGeneratorTest {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		EPackage aMetamodel = EcoreUtil2.loadEPackage(
-				"classpath:/org/eclipse/xtext/grammarinheritance/ametamodel.ecore",
-				InheritanceTest.class.getClassLoader());
-		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/xtext/tests/grammarinheritance", aMetamodel);
-		with(ConcreteTestLanguageStandaloneSetup.class);
+		EPackage aMetamodel = AmetamodelPackage.eINSTANCE;
+		EPackage.Registry.INSTANCE.put(aMetamodel.getNsURI(), aMetamodel);
+		with(new ConcreteTestLanguageStandaloneSetup());
 	}
 
 	public void testSimple() throws Exception {

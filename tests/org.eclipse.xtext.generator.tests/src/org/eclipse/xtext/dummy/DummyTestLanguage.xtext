@@ -8,7 +8,7 @@
  *******************************************************************************/
 language org.eclipse.xtext.dummy.DummyTestLanguage
 
-generate DummyLang "http://www.eclipse.org/2008/xtext/DummyLang"
+generate dummyLang "http://www.eclipse.org/2008/xtext/DummyLang"
 
 Model :
 	(elements+=Element)*;
