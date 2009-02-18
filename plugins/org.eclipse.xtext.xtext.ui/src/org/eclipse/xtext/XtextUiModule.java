@@ -11,7 +11,7 @@ import org.eclipse.xtext.xtext.ui.wizard.project.XtextProjectCreator;
 /**
  * used to register components to be used within the IDE.
  */
-public class XtextUIModule extends AbstractXtextUiModule {
+public class XtextUiModule extends AbstractXtextUiModule {
 
 	@Override
 	public Class<? extends ISemanticModelTransformer> bindISemanticModelTransformer() {
