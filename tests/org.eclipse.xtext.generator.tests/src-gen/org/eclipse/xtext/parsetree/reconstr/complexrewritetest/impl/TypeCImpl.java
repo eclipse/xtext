@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeCImpl.java,v 1.1 2009/02/18 19:42:21 sefftinge Exp $
+ * $Id: TypeCImpl.java,v 1.2 2009/02/18 21:22:23 sefftinge Exp $
  */
 package org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl;
 

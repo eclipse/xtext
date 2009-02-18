@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelImpl.java,v 1.1 2009/02/18 19:37:10 sefftinge Exp $
+ * $Id: ModelImpl.java,v 1.2 2009/02/18 21:20:41 sefftinge Exp $
  */
 package org.eclipse.xtext.parser.keywords.keywordsTestLanguage.impl;
 

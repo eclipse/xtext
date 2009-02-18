@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeRefImpl.java,v 1.1 2009/02/18 19:42:10 sefftinge Exp $
+ * $Id: TypeRefImpl.java,v 1.2 2009/02/18 21:22:18 sefftinge Exp $
  */
 package org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.impl;
 

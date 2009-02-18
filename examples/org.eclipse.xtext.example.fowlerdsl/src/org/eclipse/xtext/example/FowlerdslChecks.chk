@@ -5,3 +5,5 @@ import fowlerdsl;
  * context Entity WARNING "Entity names should start with a capital" :
  *    name.toFirstUpper() == name;
  */
+context State ERROR "No transitions" :
+	transitions.size>0;

@@ -54,28 +54,28 @@ T54 : '.' ;
 T55 : '$' ;
 T56 : '-' ;
 
-// $ANTLR src "../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g" 3061
+// $ANTLR src "./src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g" 3061
 RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
-// $ANTLR src "../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g" 3063
+// $ANTLR src "./src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g" 3063
 RULE_INT : ('0'..'9')+;
 
-// $ANTLR src "../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g" 3065
+// $ANTLR src "./src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g" 3065
 RULE_STRING : 
 			  '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' | 
               '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\''
               ;
 
-// $ANTLR src "../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g" 3070
+// $ANTLR src "./src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g" 3070
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/';
 
-// $ANTLR src "../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g" 3072
+// $ANTLR src "./src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g" 3072
 RULE_SL_COMMENT : '//' ~('\n'|'\r')* ('\r'? '\n')?;
 
-// $ANTLR src "../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g" 3074
+// $ANTLR src "./src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g" 3074
 RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
-// $ANTLR src "../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g" 3076
+// $ANTLR src "./src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g" 3076
 RULE_ANY_OTHER : .;
 
 

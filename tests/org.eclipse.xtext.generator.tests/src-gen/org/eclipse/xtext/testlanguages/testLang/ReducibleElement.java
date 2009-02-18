@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ReducibleElement.java,v 1.1 2009/02/18 19:43:24 sefftinge Exp $
+ * $Id: ReducibleElement.java,v 1.2 2009/02/18 21:22:41 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.testLang;
 

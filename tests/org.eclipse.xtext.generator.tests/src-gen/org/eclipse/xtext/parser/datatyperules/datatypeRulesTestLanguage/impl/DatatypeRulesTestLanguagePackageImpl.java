@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DatatypeRulesTestLanguagePackageImpl.java,v 1.1 2009/02/18 19:45:05 sefftinge Exp $
+ * $Id: DatatypeRulesTestLanguagePackageImpl.java,v 1.2 2009/02/18 21:22:50 sefftinge Exp $
  */
 package org.eclipse.xtext.parser.datatyperules.datatypeRulesTestLanguage.impl;
 

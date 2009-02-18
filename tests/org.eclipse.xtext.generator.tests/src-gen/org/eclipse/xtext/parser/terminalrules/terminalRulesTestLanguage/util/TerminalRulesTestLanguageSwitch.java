@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TerminalRulesTestLanguageSwitch.java,v 1.1 2009/02/18 19:45:57 sefftinge Exp $
+ * $Id: TerminalRulesTestLanguageSwitch.java,v 1.2 2009/02/18 21:22:56 sefftinge Exp $
  */
 package org.eclipse.xtext.parser.terminalrules.terminalRulesTestLanguage.util;
 

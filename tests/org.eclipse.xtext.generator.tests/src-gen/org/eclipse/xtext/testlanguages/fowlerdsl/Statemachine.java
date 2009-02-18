@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Statemachine.java,v 1.1 2009/02/18 19:44:47 sefftinge Exp $
+ * $Id: Statemachine.java,v 1.2 2009/02/18 21:22:49 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.fowlerdsl;
 

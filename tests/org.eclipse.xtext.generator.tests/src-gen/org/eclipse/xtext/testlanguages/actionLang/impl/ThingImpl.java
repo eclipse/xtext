@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ThingImpl.java,v 1.1 2009/02/18 19:43:58 sefftinge Exp $
+ * $Id: ThingImpl.java,v 1.2 2009/02/18 21:22:25 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.actionLang.impl;
 

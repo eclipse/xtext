@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Erwachsener.java,v 1.1 2009/02/18 19:34:51 sefftinge Exp $
+ * $Id: Erwachsener.java,v 1.2 2009/02/18 21:20:03 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.referenceGrammar;
 

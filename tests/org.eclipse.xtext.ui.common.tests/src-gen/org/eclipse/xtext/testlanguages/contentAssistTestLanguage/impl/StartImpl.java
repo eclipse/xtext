@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StartImpl.java,v 1.1 2009/02/18 19:36:13 sefftinge Exp $
+ * $Id: StartImpl.java,v 1.2 2009/02/18 21:20:36 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.contentAssistTestLanguage.impl;
 
