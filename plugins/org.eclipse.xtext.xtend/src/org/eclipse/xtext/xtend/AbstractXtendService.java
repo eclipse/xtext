@@ -22,7 +22,6 @@ import org.eclipse.xtend.expression.TypeSystemImpl;
 import org.eclipse.xtend.expression.Variable;
 import org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel;
 import org.eclipse.xtext.IGrammarAccess;
-import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.crossref.IScopeProvider;
 
 import com.google.inject.Inject;
@@ -39,13 +38,10 @@ public abstract class AbstractXtendService {
 	protected IGrammarAccess grammarAccess;
 
 	@Inject
-	protected IMetamodelAccess metamodelAccess;
-
-	@Inject
 	protected IScopeProvider scopeProvider;
 
 	private static final String GRAMMAR_ACCESS_VAR_NAME = "grammarAccess";
-	private static final String METAMODEL_ACCESS_VAR_NAME = "metamodelAccess";
+//	private static final String METAMODEL_ACCESS_VAR_NAME = "metamodelAccess";
 	private static final String SCOPE_PROVIDER_VAR_NAME = "scopeProvider";
 
 	protected ExecutionContext createExecutionContext() {
@@ -59,7 +55,7 @@ public abstract class AbstractXtendService {
 	protected Map<String, Variable> createGlobalVars() {
 		Map<String, Variable> globalVars = new HashMap<String, Variable>();
 		addServiceGlobalVar(globalVars, GRAMMAR_ACCESS_VAR_NAME, grammarAccess);
-		addServiceGlobalVar(globalVars, METAMODEL_ACCESS_VAR_NAME, metamodelAccess);
+//		addServiceGlobalVar(globalVars, METAMODEL_ACCESS_VAR_NAME, metamodelAccess);
 		addServiceGlobalVar(globalVars, SCOPE_PROVIDER_VAR_NAME, scopeProvider);
 		return globalVars;
 	}

@@ -1,0 +1,70 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT xtext»
+«IMPORT xtextgen»
+
+«EXTENSION org::eclipse::xtext::generator::Naming»
+
+«DEFINE generate(List[String] bindings) FOR Grammar»
+«EXPAND guiceModuleRt»
+
+«FILE guiceModuleRtGenerated().asPath()+".java" SRC_GEN»
+/*
+ «fileHeader()»
+ */
+package «guiceModuleRtGenerated().toJavaPackage()»;
+
+import org.eclipse.xtext.Constants;
+import org.eclipse.xtext.service.DefaultRuntimeModule;
+
+import com.google.inject.Binder;
+import com.google.inject.name.Names;
+
+/**
+ * Manual modifications go to {«guiceModuleRt()»}
+ */
+public abstract class «guiceModuleRtGenerated().toSimpleName()» extends DefaultRuntimeModule {
+	
+	@Override
+	public void configure(Binder binder) {
+		super.configure(binder);
+		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance(
+			"«name»");
+	}
+	«FOREACH bindings AS b-»
+	«LET b.split("::") AS binding-»
+
+	public Class<? extends «binding.get(0)»> bind«binding.get(0).toSimpleName()»() {
+		return «binding.get(1)».class;
+	}
+	«ENDLET-»
+	«ENDFOREACH-»
+}
+«ENDFILE»	
+«ENDDEFINE»
+
+	
+«DEFINE guiceModuleRt FOR Grammar»
+«FILE guiceModuleRt().asPath()+'.java' SRC -»
+/*
+ «fileHeader()»
+ */
+package «guiceModuleRt().toJavaPackage()»;
+
+/**
+ * Use this class to register components to be used within the IDE.
+ */
+public class «guiceModuleRt().toSimpleName()» extends «guiceModuleRtGenerated()» {
+
+}
+«ENDFILE»
+«ENDDEFINE»

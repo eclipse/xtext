@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<plugin>
+
+
+<!-- adding resource factories -->
+
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="guice.Aware:org.eclipse.xtext.resource.XtextResourceFactory"
+			type="xtest">
+		</parser>
+	</extension>
+
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="guice.Aware:org.eclipse.xtext.resource.XtextResourceFactory"
+			type="tst">
+		</parser>
+	</extension>
+
+
+
+    <extension
+			point="org.eclipse.ui.editors">
+		<editor
+			class="guice.Aware:org.eclipse.xtext.ui.core.editor.XtextEditor"
+			contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+			default="true"
+			extensions="xtest,tst"
+			id="org.eclipse.xtext.reference.ReferenceGrammar"
+			name="ReferenceGrammar Editor">
+		</editor>
+	</extension>
+	 <extension
+			point="org.eclipse.ui.preferencePages">
+		<page
+			class="guice.Aware:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
+			id="org.eclipse.xtext.reference.ReferenceGrammar"
+			name="ReferenceGrammar">
+			<keywordReference
+				id="org.eclipse.xtext.reference.ui.keyword_ReferenceGrammar">
+			</keywordReference>
+		</page>
+		<page
+			category="org.eclipse.xtext.reference.ReferenceGrammar"
+			class="guice.Aware:org.eclipse.xtext.ui.core.editor.preferences.EditorPreferencePage"
+			id="org.eclipse.xtext.reference.ReferenceGrammar.editor"
+			name="Editor">
+			<keywordReference 
+				id="org.eclipse.xtext.keyword.editor">
+			</keywordReference>
+		</page>
+	</extension>
+	<extension
+		point="org.eclipse.ui.keywords">
+		<keyword
+			id="org.eclipse.xtext.reference.ui.keyword_ReferenceGrammar"
+			label="ReferenceGrammar">
+		</keyword>
+		<keyword
+			id="org.eclipse.xtext.reference.ReferenceGrammar.tasktags"
+			label="Task Tags">
+		</keyword>
+	</extension>
+
+</plugin>

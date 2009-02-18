@@ -1,0 +1,138 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2008, 2009 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«REM»
+/**
+ * @author Moritz Eysholdt
+ * @author Sebastian Zarnekow
+ */
+ «ENDREM»
+
+«IMPORT xtext»
+
+«EXTENSION org::eclipse::xtext::generator::Naming»
+«EXTENSION org::eclipse::xtext::generator::grammarAccess::GrammarAccess»
+«EXTENSION org::eclipse::xtext::GrammarUtil»
+
+«DEFINE root FOR Grammar»
+«FILE gaFQName().asPath()+".java" SRC_GEN-»
+/*
+«fileHeader()»
+*/
+
+package «gaFQName().toJavaPackage()»;
+
+import com.google.inject.Singleton;
+import com.google.inject.Inject;
+
+import org.eclipse.xtext.*;
+
+import org.eclipse.xtext.service.GrammarProvider;
+
+«IF getSuperGrammar() != null-»
+import «getSuperGrammar().gaFQName()»;
+«ENDIF-»
+
+@Singleton
+public class «gaSimpleName()» implements IGrammarAccess {
+	
+	«EXPAND parseRuleClasses FOREACH rules.typeSelect(ParserRule)-»
+	
+	«EXPAND cache FOREACH rules-»
+	
+	private final GrammarProvider grammarProvider;
+«IF getSuperGrammar() != null-»
+
+	private «getSuperGrammar().gaSimpleName()» superGrammarAccess;
+«ENDIF-»
+
+	@Inject
+	public «gaSimpleName()»(GrammarProvider grammarProvider«IF getSuperGrammar() != null», «getSuperGrammar().gaSimpleName()» superGrammarAccess«ENDIF») {
+		this.grammarProvider = grammarProvider;
+«IF getSuperGrammar() != null-»
+		this.superGrammarAccess = superGrammarAccess;
+«ENDIF-»
+	}
+	
+	public Grammar getGrammar() {	
+		return grammarProvider.getGrammar(this);
+	}
+	
+«IF getSuperGrammar() != null-»
+
+	public «getSuperGrammar().gaSimpleName()» getSuperGrammarAccess() {
+		return superGrammarAccess;
+	}
+«ENDIF-»
+
+	«EXPAND getter(this) FOREACH allRules()-»
+}
+«ENDFILE»
+«ENDDEFINE»
+
+
+
+«DEFINE parseRuleClasses FOR ParserRule»
+	public class «gaRuleAccesorClassName()» implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "«name»");
+«FOREACH containedAbstractElements() AS e-»
+		private final «e.getClassName()» «e.gaElementAccessorLocalVarName()» = «e.loadElementStatement()»;
+«ENDFOREACH-»
+		
+		// «grammarFragmentToStr()»
+		public ParserRule getRule() { return rule; }
+«FOREACH containedAbstractElements() AS e»
+		// «e.grammarFragmentToStr()»
+		public «e.getClassName()» «e.gaElementAccessMethodeName()»() { return «e.gaElementAccessorLocalVarName()»; }
+«ENDFOREACH-»
+	}
+«ENDDEFINE»
+
+	
+
+«DEFINE cache FOR AbstractRule»
+«ERROR "unknown rule type " + metaType»
+«ENDDEFINE»
+
+«DEFINE cache FOR ParserRule-»
+	private «gaRuleAccesorClassName()» «gaRuleAccessorLocalVarName()»;
+«ENDDEFINE»
+
+«DEFINE cache FOR LexerRule-»
+	private LexerRule «gaRuleAccessorLocalVarName()»;
+«ENDDEFINE»
+
+
+«DEFINE getter(Grammar original) FOR AbstractRule»
+	// FIXME: unknown rule type «metaType»
+«ENDDEFINE»
+
+«DEFINE getter(Grammar original) FOR ParserRule»
+	// «grammarFragmentToStr()»
+	public «IF containingGrammar() != original»«containingGrammar().gaFQName()».«ENDIF»«gaRuleAccesorClassName()» «gaRuleAccessMethodName()»() {
+«IF containingGrammar() == original-»
+		return («gaRuleAccessorLocalVarName()» != null) ? «gaRuleAccessorLocalVarName()» : («gaRuleAccessorLocalVarName()» = new «gaRuleAccesorClassName()»());
+«ELSE-»
+		return superGrammarAccess.«gaRuleAccessMethodName()»();
+«ENDIF-»
+	} 
+«ENDDEFINE»
+
+«DEFINE getter(Grammar original) FOR LexerRule»
+	// «grammarFragmentToStr()»
+	public LexerRule «gaRuleAccessMethodName()»() {
+«IF containingGrammar() == original-»
+		return («gaRuleAccessorLocalVarName()» != null) ? «gaRuleAccessorLocalVarName()» : («gaRuleAccessorLocalVarName()» = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "«name»"));
+«ELSE-»
+		return superGrammarAccess.«gaRuleAccessMethodName()»();
+«ENDIF-»
+	} 
+«ENDDEFINE»

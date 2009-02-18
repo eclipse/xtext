@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ReferenceGrammar" nsURI="http://eclipse.org/xtext/reference/ReferenceGrammar" nsPrefix="ReferenceGrammar">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="referenceGrammar" nsURI="http://eclipse.org/xtext/reference/ReferenceGrammar" nsPrefix="referenceGrammar">
   <eClassifiers xsi:type="ecore:EClass" name="Spielplatz">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="groesse">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>

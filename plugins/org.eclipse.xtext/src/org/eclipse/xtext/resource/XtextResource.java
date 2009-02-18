@@ -145,7 +145,7 @@ public class XtextResource extends ResourceImpl {
 
 	@Override
 	protected void doLoad(InputStream inputStream, Map<?, ?> options) throws IOException {
-		parseResult = parser.parse(inputStream);
+			parseResult = parser.parse(inputStream);
 		if (parseResult != null) {
 			getErrors().addAll(createDiagnostics(parseResult));
 			EObject rootElement = parseResult.getRootASTElement();

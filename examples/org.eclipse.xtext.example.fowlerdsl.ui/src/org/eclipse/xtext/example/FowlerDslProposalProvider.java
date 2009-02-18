@@ -10,19 +10,19 @@ public class FowlerDslProposalProvider extends GenFowlerDslProposalProvider {
 
 	@Override
 	public Template[] getTemplates(String contextTypeId) {
-		return Activator.getDefault().getTemplateStore().getTemplates(contextTypeId);
+		return FowlerDslActivator.getDefault().getTemplateStore().getTemplates(contextTypeId);
 	}
 
 	@Override
 	public TemplateContextType getTemplateContextType(Keyword keyword, IContentAssistContext contentAssistContext) {
-		return Activator.getDefault().getTemplateContextRegistry()
-				.getContextType(Activator.PREFIX + keyword.getValue());
+		return FowlerDslActivator.getDefault().getTemplateContextRegistry()
+				.getContextType(FowlerDslActivator.PREFIX + keyword.getValue());
 	}
 
 	@Override
 	public TemplateContextType getTemplateContextType(RuleCall ruleCall, IContentAssistContext contentAssistContext) {
-		return Activator.getDefault().getTemplateContextRegistry().getContextType(
-				Activator.PREFIX + ruleCall.getRule().getName());
+		return FowlerDslActivator.getDefault().getTemplateContextRegistry().getContextType(
+				FowlerDslActivator.PREFIX + ruleCall.getRule().getName());
 	}
 
 }

@@ -22,7 +22,7 @@ public class ReferenceGrammarActivator extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		INSTANCE = this;
-		this.injector = Guice.createInjector(new org.eclipse.xtext.reference.ReferenceGrammarRuntimeModule(), new org.eclipse.xtext.reference.ReferenceGrammarUIModule());
+		this.injector = Guice.createInjector(new org.eclipse.xtext.reference.ReferenceGrammarRuntimeModule(), new org.eclipse.xtext.reference.ReferenceGrammarUiModule());
 	}
 	
 	public static ReferenceGrammarActivator getInstance() {

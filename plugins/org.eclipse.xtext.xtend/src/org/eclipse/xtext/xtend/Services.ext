@@ -13,9 +13,6 @@ import java::lang;
 IGrammarAccess grammarAccess():
 	GLOBALVAR grammarAccess;
 	
-IMetamodelAccess metamodelAccess():
-	GLOBALVAR metamodelAccess;
-
 IScopeProvider scopeProvider():
 	GLOBALVAR scopeProvider;
 

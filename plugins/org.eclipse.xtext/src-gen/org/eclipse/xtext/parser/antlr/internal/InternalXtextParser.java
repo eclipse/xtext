@@ -53,7 +53,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
         
         @Override
         protected InputStream getTokenFile() {
-        	ClassLoader classLoader = InternalXtextParser.class.getClassLoader();
+        	ClassLoader classLoader = getClass().getClassLoader();
         	return classLoader.getResourceAsStream("org/eclipse/xtext/parser/antlr/internal/InternalXtext.tokens");
         }
         

@@ -24,23 +24,23 @@ public class EcoreDslProposalProvider extends GenEcoreDslProposalProvider {
 
 	@Override
 	public Template[] getTemplates(String contextTypeId) {
-		return Activator.getDefault().getTemplateStore().getTemplates(contextTypeId);
+		return EcoreDslActivator.getDefault().getTemplateStore().getTemplates(contextTypeId);
 	}
 
 	@Override
 	public TemplateContextType getTemplateContextType(Keyword keyword, IContentAssistContext contentAssistContext) {
-		return Activator.getDefault().getTemplateContextRegistry()
-				.getContextType(Activator.PREFIX + keyword.getValue());
+		return EcoreDslActivator.getDefault().getTemplateContextRegistry()
+				.getContextType(EcoreDslActivator.PREFIX + keyword.getValue());
 	}
 
 	@Override
 	public TemplateContextType getTemplateContextType(RuleCall ruleCall, IContentAssistContext contentAssistContext) {
 		if (ruleCall.eContainer() instanceof Assignment
 				&& ((Assignment) ruleCall.eContainer()).getFeature().equals("lowerBound")) {
-			return Activator.getDefault().getTemplateContextRegistry().getContextType(Activator.PREFIX + "lowerBound");
+			return EcoreDslActivator.getDefault().getTemplateContextRegistry().getContextType(EcoreDslActivator.PREFIX + "lowerBound");
 		}
-		return Activator.getDefault().getTemplateContextRegistry().getContextType(
-				Activator.PREFIX + ruleCall.getRule().getName());
+		return EcoreDslActivator.getDefault().getTemplateContextRegistry().getContextType(
+				EcoreDslActivator.PREFIX + ruleCall.getRule().getName());
 	}
 
 }

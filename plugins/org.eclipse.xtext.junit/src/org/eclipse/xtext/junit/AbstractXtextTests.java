@@ -18,14 +18,14 @@ import junit.framework.TestCase;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtend.XtendFacade;
 import org.eclipse.xtend.expression.ExecutionContextImpl;
 import org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel;
 import org.eclipse.xtext.IGrammarAccess;
-import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.crossref.IScopeProvider;
 import org.eclipse.xtext.parser.IAstFactory;
@@ -58,8 +58,15 @@ public abstract class AbstractXtextTests extends TestCase {
 	private Injector injector;
 
 	static {
-		// XXX Why is this necessary?
-		XtextBuiltinStandaloneSetup.doSetup();
+		//EMF Standalone setup
+		if (!Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("ecore"))
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+				"ecore", new org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl());
+		if (!Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("xmi"))
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+				"xmi", new org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl());
+		if (!EPackage.Registry.INSTANCE.containsKey(org.eclipse.xtext.XtextPackage.eNS_URI))
+			EPackage.Registry.INSTANCE.put(org.eclipse.xtext.XtextPackage.eNS_URI, org.eclipse.xtext.XtextPackage.eINSTANCE);
 	}
 
 	@Override
@@ -130,10 +137,6 @@ public abstract class AbstractXtextTests extends TestCase {
 
 	protected IValueConverterService getValueConverterService() {
 		return injector.getInstance(IValueConverterService.class);
-	}
-
-	protected IMetamodelAccess getMetamodelAccess() {
-		return injector.getInstance(IMetamodelAccess.class);
 	}
 
 	protected ITokenSerializer getTokenSerializer() {

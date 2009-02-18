@@ -1,0 +1,117 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT xtext»
+«IMPORT xtextgen»
+
+«EXTENSION org::eclipse::xtext::generator::scoping::Crossref»
+«EXTENSION org::eclipse::xtext::generator::Naming»
+
+
+«DEFINE addToPluginXmlRt FOR Grammar»«ENDDEFINE»
+
+«DEFINE addToPluginXmlUi FOR Grammar»«ENDDEFINE»
+
+«DEFINE addToStandaloneSetup FOR Grammar»«ENDDEFINE»
+
+«DEFINE generate FOR Grammar»
+	«EXPAND XtendScopeProvider»
+	«EXPAND GenXtendScopeProvider»
+	«EXPAND JavaXtendScopeProvider»
+«ENDDEFINE»
+
+«DEFINE GenXtendScopeProvider FOR Grammar»
+«FILE xtendGenScopeProvider().asPath()+".ext" SRC_GEN-»
+/*
+«fileHeader()»
+*/
+
+import org::eclipse::xtext::crossref;
+
+«FOREACH metamodelDeclarations AS mm-»
+import «mm.ePackage.name»;
+«ENDFOREACH-»
+
+extension org::eclipse::xtext::xtend::crossref::ScopeProvider reexport;
+extension org::eclipse::xtend::util::stdlib::io;
+
+/**
+ * Represents a generated, default implementation of interface {@link IScopeProvider}.
+ * 
+ * @see org.eclipse.xtext.ui.common.editor.contentassist.IScopeProvider
+ */
+
+«LET {} AS processedFqnFeatureNames»«
+	FOREACH eReferencesFromCrossRefs() AS eReference»
+List[IScopedElement] scope_«eReference.name»(«qualifiedXtendName(eReference.eContainingClass)» this):
+	allElements().typeSelect(«qualifiedXtendName(eReference.eType)»).collect(x | createScopedElement(x.referenceName(), x));
+	
+List[IScopedElement] scope_«eReference.name»(emf::EObject this) :
+	allElements().collect(x | createScopedElement(x.referenceName(), x));
+«	ENDFOREACH»«
+ENDLET»
+«ENDFILE»
+«ENDDEFINE»
+
+
+«DEFINE XtendScopeProvider FOR Grammar»
+«FILE xtendScopeProvider().asPath()+".ext" SRC-»
+/*
+«fileHeader()»
+*/
+
+import xtext;
+
+import org::eclipse::jface::text::contentassist;
+import org::eclipse::xtext::crossref;
+
+«FOREACH metamodelDeclarations AS mm-»
+import «mm.ePackage.name»;
+«ENDFOREACH-»
+
+extension «xtendGenScopeProvider().toXtendFqName()» reexport;
+
+/**
+ * Customize functions defined in «xtendGenScopeProvider().toXtendFqName()» here.
+ */
+
+«ENDFILE»
+«ENDDEFINE»
+
+
+«DEFINE JavaXtendScopeProvider FOR Grammar»
+«FILE javaXtendScopeProvider().asPath()+".java" SRC_GEN-»
+/*
+«fileHeader()»
+*/
+
+package «javaXtendScopeProvider().toJavaPackage()»;
+
+import org.eclipse.xtext.xtend.crossref.AbstractXtendScopeProvider;
+
+/**
+ * An {@link IScopeProvider} that calls Xtend extensions.
+ */
+public class «javaXtendScopeProvider().toSimpleName()» extends AbstractXtendScopeProvider {
+
+	@Override
+	protected ClassLoader getClassLoader() {
+		return this.getClass().getClassLoader();
+	}
+
+	@Override
+	protected String getMasterXtendFileName() {
+		return "«xtendScopeProvider().toXtendFqName()»";	
+	}
+	
+}
+«ENDFILE»
+«ENDDEFINE»

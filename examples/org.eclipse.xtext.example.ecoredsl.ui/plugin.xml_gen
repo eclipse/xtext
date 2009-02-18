@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<plugin>
+
+    <extension
+			point="org.eclipse.ui.editors">
+		<editor
+			class="guice.Aware:org.eclipse.xtext.ui.core.editor.XtextEditor"
+			contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+			default="true"
+			extensions="ecoredsl"
+			id="org.eclipse.xtext.example.EcoreDsl"
+			name="EcoreDsl Editor">
+		</editor>
+	</extension>
+	 <extension
+			point="org.eclipse.ui.preferencePages">
+		<page
+			class="guice.Aware:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
+			id="org.eclipse.xtext.example.EcoreDsl"
+			name="EcoreDsl">
+			<keywordReference
+				id="org.eclipse.xtext.example.ui.keyword_EcoreDsl">
+			</keywordReference>
+		</page>
+		<page
+			category="org.eclipse.xtext.example.EcoreDsl"
+			class="guice.Aware:org.eclipse.xtext.ui.core.editor.preferences.EditorPreferencePage"
+			id="org.eclipse.xtext.example.EcoreDsl.editor"
+			name="Editor">
+			<keywordReference 
+				id="org.eclipse.xtext.keyword.editor">
+			</keywordReference>
+		</page>
+	</extension>
+	<extension
+		point="org.eclipse.ui.keywords">
+		<keyword
+			id="org.eclipse.xtext.example.ui.keyword_EcoreDsl"
+			label="EcoreDsl">
+		</keyword>
+		<keyword
+			id="org.eclipse.xtext.example.EcoreDsl.tasktags"
+			label="Task Tags">
+		</keyword>
+	</extension>
+
+</plugin>

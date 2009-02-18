@@ -22,7 +22,7 @@ public class DomainmodelActivator extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		INSTANCE = this;
-		this.injector = Guice.createInjector(new org.eclipse.xtext.example.DomainmodelRuntimeModule(), new org.eclipse.xtext.example.DomainmodelUIModule());
+		this.injector = Guice.createInjector(new org.eclipse.xtext.example.DomainmodelRuntimeModule(), new org.eclipse.xtext.example.DomainmodelUiModule());
 	}
 	
 	public static DomainmodelActivator getInstance() {

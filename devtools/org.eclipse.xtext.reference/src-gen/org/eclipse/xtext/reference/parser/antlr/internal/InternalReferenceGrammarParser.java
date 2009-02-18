@@ -53,7 +53,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
         
         @Override
         protected InputStream getTokenFile() {
-        	ClassLoader classLoader = InternalReferenceGrammarParser.class.getClassLoader();
+        	ClassLoader classLoader = getClass().getClassLoader();
         	return classLoader.getResourceAsStream("org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.tokens");
         }
         
