@@ -74,8 +74,8 @@ public class Generator extends AbstractWorkflowComponent2 {
 		try {
 			XpandExecutionContext exeCtx = createExecutionContext();
 			generate(grammar, exeCtx);
-			generatePluginXmlRt(grammar, exeCtx);
 			addToStandaloneSetup(grammar, exeCtx);
+			generatePluginXmlRt(grammar, exeCtx);
 			generatePluginXmlUi(grammar, exeCtx);
 			generateManifestRt(grammar, exeCtx);
 			generateManifestUi(grammar, exeCtx);
@@ -153,10 +153,10 @@ public class Generator extends AbstractWorkflowComponent2 {
 	}
 
 	public void generatePluginXmlRt(Grammar grammar, XpandExecutionContext ctx) {
+		String filePath = "plugin.xml_gen";
+		deleteFile(ctx, filePath, PLUGIN_RT);
 		try {
-			String filePath = "plugin.xml_gen";
 			ctx.getOutput().openFile(filePath, PLUGIN_RT);
-			deleteFile(ctx, filePath, PLUGIN_RT);
 			XpandFacade facade = XpandFacade.create(ctx);
 			facade.evaluate("org::eclipse::xtext::generator::Plugin::pre", grammar);
 			fragments.addToPluginXmlRt(grammar, ctx);
@@ -171,10 +171,10 @@ public class Generator extends AbstractWorkflowComponent2 {
 
 	public void generatePluginXmlUi(Grammar grammar, XpandExecutionContext ctx) {
 		if (isUi() && !isMergedProjects()) {
+			String filePath = "plugin.xml_gen";
+			deleteFile(ctx, filePath, PLUGIN_UI);
 			try {
-				String filePath = "plugin.xml_gen";
 				ctx.getOutput().openFile(filePath, PLUGIN_UI);
-				deleteFile(ctx, filePath, PLUGIN_RT);
 				XpandFacade facade = XpandFacade.create(ctx);
 				facade.evaluate("org::eclipse::xtext::generator::Plugin::pre", grammar);
 				fragments.addToPluginXmlUi(grammar, ctx);
