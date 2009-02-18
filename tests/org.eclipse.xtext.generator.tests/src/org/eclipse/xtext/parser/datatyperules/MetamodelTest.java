@@ -13,30 +13,26 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.xtext.IMetamodelAccess;
-import org.eclipse.xtext.parser.datatyperules.services.DatatypeRulesTestLanguageMetamodelAccess;
+import org.eclipse.xtext.parser.datatyperules.datatypeRulesTestLanguage.DatatypeRulesTestLanguagePackage;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class MetamodelTest extends TestCase {
 	
-	private IMetamodelAccess metamodelAccess;
-
 	@Override
 	protected void setUp() throws Exception {
 		DatatypeRulesTestLanguageStandaloneSetup.doSetup();
-		metamodelAccess = new DatatypeRulesTestLanguageMetamodelAccess();
 	}
 	
 	public void testDerivedPackage() {
-		EPackage pack = metamodelAccess.getGeneratedEPackages()[0];
+		EPackage pack = DatatypeRulesTestLanguagePackage.eINSTANCE;
 		assertNotNull(pack);
 		assertEquals(2, pack.getEClassifiers().size());
 	}
 
 	public void testDerivedModel() {
-		EPackage pack = metamodelAccess.getGeneratedEPackages()[0];
+		EPackage pack = DatatypeRulesTestLanguagePackage.eINSTANCE;
 		EClass model = (EClass) pack.getEClassifier("Model");
 		assertNotNull(model);
 		EStructuralFeature feature = model.getEStructuralFeature("id");
@@ -54,18 +50,12 @@ public class MetamodelTest extends TestCase {
 	}
 	
 	public void testDerivedCompositeModel() {
-		EPackage pack = metamodelAccess.getGeneratedEPackages()[0];
+		EPackage pack = DatatypeRulesTestLanguagePackage.eINSTANCE;
 		EClass model = (EClass) pack.getEClassifier("CompositeModel");
 		assertNotNull(model);
 		EStructuralFeature feature = model.getEStructuralFeature("model");
 		assertEquals("Model", feature.getEType().getName());
 		assertTrue(feature.isMany());
-	}
-	
-	public void testPackageCount() {
-		assertEquals(2, metamodelAccess.getAllEPackages().length);
-		assertEquals(1, metamodelAccess.getGeneratedEPackages().length);
-		assertEquals(1, metamodelAccess.getReferencedEPackages().length);
 	}
 	
 }

@@ -9,7 +9,7 @@
 language org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTestLanguage
 
 import 				"http://www.eclipse.org/2008/Xtext" 		as xtext
-generate SimpleTest "http://eclipse.org/xtext/tests/SimpleTest"
+generate anotherSimpleTest "http://eclipse.org/xtext/tests/AnotherSimpleTest"
 
 Foo : 
 	name=ID (nameRefs+=NameRef)*;

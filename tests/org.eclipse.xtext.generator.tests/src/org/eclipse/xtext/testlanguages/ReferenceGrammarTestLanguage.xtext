@@ -7,7 +7,7 @@
 *
 *******************************************************************************/
 language org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage
-generate ReferenceGrammar "http://eclipse.org/xtext/reference/ReferenceGrammar"
+generate referenceGrammar "http://eclipse.org/xtext/reference/ReferenceGrammar"
 	
 	Spielplatz :
 		 ( "spielplatz" groesse = INT ( beschreibung = STRING ) ? "{" ( kinder += Kind | erzieher += Erwachsener | spielzeuge += Spielzeug | familie += Familie ) * "}" ) ? ;

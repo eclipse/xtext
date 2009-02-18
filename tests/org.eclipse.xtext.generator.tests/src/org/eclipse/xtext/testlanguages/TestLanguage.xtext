@@ -7,7 +7,7 @@
  *
  *******************************************************************************/
 language org.eclipse.xtext.testlanguages.TestLanguage
-generate TestLang "http://www.eclipse.org/2008/xtext/TestLang"
+generate testLang "http://www.eclipse.org/2008/xtext/TestLang"
 
 EntryRule returns Model :
 	(multiFeature+=AbstractRule)*;

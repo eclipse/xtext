@@ -26,7 +26,7 @@ public class XtextGrammarComparingTest extends AbstractParserComparingTest {
 
 	@Override
 	protected Iterable<Pair<String, String>> getAllModels() {
-		List<Class<?>> classes = Arrays.asList(GenerateAllTestGrammars.testclasses);
+		List<Class<?>> classes = Arrays.asList(new GenerateAllTestGrammars(null).getTestGrammarClasses());
 		return CollectionUtils.map(classes, new Function<Class<?>, Pair<String, String>>() {
 			public Pair<String, String> exec(Class<?> param) {
 				String filename = GenerateAllTestGrammars.getGrammarFileName(param);

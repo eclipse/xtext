@@ -7,7 +7,7 @@
  *
  *******************************************************************************/
 language org.eclipse.xtext.resource.metamodel.MultiValueFeatureTestLanguage
-generate MultiValueFeatureTestLanguage "http://www.eclipse.org/2008/xtext/MultiValueFeatureTestLanguage"
+generate multiValueFeatureTestLanguage "http://www.eclipse.org/2008/xtext/MultiValueFeatureTestLanguage"
 
 Start:
 	featureA+=ID+;

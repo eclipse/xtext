@@ -8,8 +8,8 @@
  *******************************************************************************/
 language org.eclipse.xtext.metamodelreferencing.tests.MultiGenMMTestLanguage
 
-generate SimpleTest "http://eclipse.org/xtext/tests/SimpleTest"
-generate OtherTest "http://eclipse.org/xtext/tests/OtherTest" as other
+generate simpleTest "http://eclipse.org/xtext/tests/SimpleTest"
+generate otherTest "http://eclipse.org/xtext/tests/OtherTest" as other
 
 Foo : 
 	name=ID (nameRefs+=NameRef)*;

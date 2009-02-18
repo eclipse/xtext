@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.parser.datatyperules.datatypeRulesTestLanguage.DatatypeRulesTestLanguagePackage;
 import org.eclipse.xtext.resource.XtextSyntaxDiagnostic;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
@@ -33,7 +34,7 @@ public class ParserTest extends AbstractGeneratorTest {
 	protected void setUp() throws Exception {
 		super.setUp();
 		with(DatatypeRulesTestLanguageStandaloneSetup.class);
-		EPackage pack = getMetamodelAccess().getGeneratedEPackages()[0];
+		EPackage pack = DatatypeRulesTestLanguagePackage.eINSTANCE;
 		EClass model = (EClass) pack.getEClassifier("Model");
 		idFeature = model.getEStructuralFeature("id");
 		valueFeature = model.getEStructuralFeature("value");
