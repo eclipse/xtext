@@ -414,15 +414,38 @@ public class Xtext2EcoreTransformer {
 		String[] split = qualifiedName.split("::");
 		String name = qualifiedName;
 		if (split.length > 1) {
-			result.setMetamodel(GrammarUtil.findMetamodel(grammar, split[0], true));
+			result.setMetamodel(findMetamodel(grammar, split[0]));
 			name = split[1];
 		} else {
-			result.setMetamodel(GrammarUtil.findDefaultMetamodel(grammar, true));
+			result.setMetamodel(findDefaultMetamodel(grammar));
 		}
 		if (result.getMetamodel() instanceof ReferencedMetamodel && result.getMetamodel().getEPackage() != null) {
 			result.setType(result.getMetamodel().getEPackage().getEClassifier(name));
 		}
 		return result;
+	}
+
+	public AbstractMetamodelDeclaration findDefaultMetamodel(Grammar grammar) {
+		return findMetamodel(grammar, "");
+	}
+
+	public AbstractMetamodelDeclaration findMetamodel(Grammar grammar, String alias) {
+		final List<AbstractMetamodelDeclaration> declarations = grammar.getMetamodelDeclarations();
+		if (declarations.size() == 1 && Strings.isEmpty(alias))
+			return declarations.get(0);
+		AbstractMetamodelDeclaration result = null;
+		for (AbstractMetamodelDeclaration decl : declarations) {
+			if (isSameAlias(decl.getAlias(), alias)) {
+				if (result != null)
+					return null;
+				result = decl;
+			}
+		}
+		return result;
+	}
+
+	public boolean isSameAlias(String alias, String alias2) {
+		return Strings.isEmpty(alias) ? Strings.isEmpty(alias2) : alias.equals(alias2);
 	}
 
 	private void normalizeAndValidateGeneratedPackages() {

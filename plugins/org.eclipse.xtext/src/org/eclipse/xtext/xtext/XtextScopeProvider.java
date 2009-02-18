@@ -89,9 +89,6 @@ public class XtextScopeProvider extends DefaultScopeProvider {
 
 	@Override
 	protected IScope createScope(Resource resource, EClass type) {
-		if (AbstractMetamodelDeclaration.class.isAssignableFrom(type.getInstanceClass()))
-			return new XtextMetamodelReferenceScope(resource, type);
-
 		if (resource.getContents().size() < 1)
 			throw new IllegalArgumentException("resource is not as expected: contents.size == "
 					+ resource.getContents().size() + " but expected: >= 1");
@@ -103,7 +100,22 @@ public class XtextScopeProvider extends DefaultScopeProvider {
 
 	protected IScope createScope(final Grammar grammar, EClass type) {
 		if (EcorePackage.Literals.EPACKAGE == type) {
-			return createEPackageScope(grammar.getSuperGrammar());
+			return createEPackageScope(grammar);
+		} else if (AbstractMetamodelDeclaration.class.isAssignableFrom(type.getInstanceClass())) {
+			return new SimpleCachingScope(IScope.NULLSCOPE, grammar.eResource(), type) {
+				@Override
+				protected Iterator<AbstractMetamodelDeclaration> getRelevantContent(Resource resource) {
+					return grammar.getMetamodelDeclarations().iterator();
+				}
+
+				@Override
+				protected String getNameFeature(EClass type) {
+					if (AbstractMetamodelDeclaration.class.isAssignableFrom(type.getInstanceClass())) {
+						return XtextPackage.eINSTANCE.getAbstractMetamodelDeclaration_Alias().getName();
+					}
+					return super.getNameFeature(type);
+				}
+			};
 		}
 		final Grammar superGrammar = grammar.getSuperGrammar();
 		final IScope parent = superGrammar != null ? createScope(superGrammar, type): IScope.NULLSCOPE;
@@ -121,8 +133,8 @@ public class XtextScopeProvider extends DefaultScopeProvider {
 			new StringScope(EPackage.Registry.INSTANCE.keySet(), valueConverterService);
 		return new SimpleCachingScope(parent, grammar.eResource(), EcorePackage.Literals.EPACKAGE) {
 			@Override
-			protected Iterator<EObject> getRelevantContent(Resource resource) {
-				return EcoreUtil2.collect(grammar.getMetamodelDeclarations(), XtextPackage.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE, EObject.class).iterator();
+			protected Iterator<EPackage> getRelevantContent(Resource resource) {
+				return EcoreUtil2.collect(grammar.getMetamodelDeclarations(), XtextPackage.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE, EPackage.class).iterator();
 			}
 
 			@Override

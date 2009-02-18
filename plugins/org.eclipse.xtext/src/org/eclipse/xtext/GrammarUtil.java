@@ -21,7 +21,6 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -226,20 +225,6 @@ public class GrammarUtil {
 		return grammarModel.isAbstract();
 	}
 
-	public static String getQualifiedName(AbstractMetamodelDeclaration metamodel, String name) {
-		return (metamodel != null && !Strings.isEmpty(metamodel.getAlias()) ? metamodel.getAlias() + "::" : "") + name;
-	}
-
-	public static String getQualifiedName(AbstractMetamodelDeclaration metamodel, EClassifier type) {
-		return getQualifiedName(metamodel, type.getName());
-	}
-
-	public static String getQualifiedName(TypeRef type) {
-		if (type.getType() == null)
-			throw new NullPointerException();
-		return getQualifiedName(type.getMetamodel(), type.getType());
-	}
-
 	public static String getTypeRefName(TypeRef typeRef) {
 		if (typeRef.getType() != null)
 			return typeRef.getType().getName();
@@ -312,30 +297,6 @@ public class GrammarUtil {
 		if (ref.getRule() != null)
 			return ref.getRule();
 		return findRuleForName(getGrammar(ref), "ID");
-	}
-
-	public static boolean isSameAlias(String alias, String alias2) {
-		return Strings.isEmpty(alias) ? Strings.isEmpty(alias2) : alias.equals(alias2);
-	}
-
-	public static AbstractMetamodelDeclaration findDefaultMetamodel(Grammar grammar, boolean useInherited) {
-		return findMetamodel(grammar, "", useInherited);
-	}
-
-	public static AbstractMetamodelDeclaration findMetamodel(Grammar grammar, String alias, boolean useInherited) {
-		final List<AbstractMetamodelDeclaration> declarations = useInherited ? allMetamodelDeclarations(grammar)
-				: grammar.getMetamodelDeclarations();
-		if (declarations.size() == 1 && Strings.isEmpty(alias))
-			return declarations.get(0);
-		AbstractMetamodelDeclaration result = null;
-		for (AbstractMetamodelDeclaration decl : declarations) {
-			if (isSameAlias(decl.getAlias(), alias)) {
-				if (result != null)
-					return null;
-				result = decl;
-			}
-		}
-		return result;
 	}
 
 	// TODO replace me by compiled grammar model

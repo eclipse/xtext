@@ -119,5 +119,5 @@ class XtextMetamodelReferenceHelper {
 	private static boolean metamodelAliasMatches(AbstractMetamodelDeclaration metamodelDeclaration, String text) {
 		return Strings.isEmpty(text) || text.equals(metamodelDeclaration.getAlias());
 	}
-	
+
 }
