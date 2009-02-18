@@ -12,8 +12,10 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.parser.BaseEPackageAccess;
 import org.eclipse.xtext.resource.ClasspathUriUtil;
+import org.eclipse.xtext.resource.XtextResourceSet;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.google.inject.name.Named;
 
@@ -27,9 +29,12 @@ public class GrammarProvider {
 
 	private volatile Grammar grammar;
 
+	private final Provider<XtextResourceSet> resourceSetProvider;
+
 	@Inject
-	public GrammarProvider(@Named(Constants.LANGUAGE_NAME) String languageName) {
+	public GrammarProvider(@Named(Constants.LANGUAGE_NAME) String languageName, Provider<XtextResourceSet> resourceSetProvider) {
 		this.languageName = languageName;
+		this.resourceSetProvider = resourceSetProvider;
 	}
 
 	public Grammar getGrammar(Object requestor) {
@@ -39,9 +44,11 @@ public class GrammarProvider {
 			// DCL on a volatile is safe as of Java 5, which we obviously require.
 			synchronized(this) {
 				if (grammar == null) {
+					XtextResourceSet resourceSet = resourceSetProvider.get();
+					resourceSet.setClasspathURIContext(requestor == null ? getClass().getClassLoader() : requestor.getClass().getClassLoader());
 					grammar = (Grammar) BaseEPackageAccess.loadGrammarFile(
-							requestor == null ? getClass().getClassLoader() : requestor.getClass().getClassLoader(),
-							ClasspathUriUtil.CLASSPATH_SCHEME + ":/" + languageName.replace('.', '/') + ".xmi");
+							ClasspathUriUtil.CLASSPATH_SCHEME + ":/" + languageName.replace('.', '/') + ".xmi",
+							resourceSet);
 				}
 			}
 		}

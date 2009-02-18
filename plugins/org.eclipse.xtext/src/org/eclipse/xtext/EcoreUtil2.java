@@ -24,7 +24,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
@@ -43,7 +42,6 @@ import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.URIHandlerImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
-import org.eclipse.xtext.resource.XtextResourceSet;
 
 /**
  * @author Heiko Behrens
@@ -165,14 +163,6 @@ public class EcoreUtil2 extends EcoreUtil {
 		Resource resource = eObject.eResource();
 		String fragment = resource.getURIFragment(eObject);
 		return fragment;
-	}
-
-	public static EList<EObject> loadModel(String string, ClassLoader classLoader) {
-		URI uri = URI.createURI(string);
-		XtextResourceSet xtextResourceSet = new XtextResourceSet();
-		xtextResourceSet.setClasspathURIContext(classLoader);
-		Resource resource = xtextResourceSet.getResource(uri, true);
-		return resource.getContents();
 	}
 
 	public static EClassifier getCompatibleType(EClassifier typeA, EClassifier typeB) {
