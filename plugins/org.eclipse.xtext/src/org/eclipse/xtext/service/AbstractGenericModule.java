@@ -55,7 +55,7 @@ public abstract class AbstractGenericModule implements Module {
 								Class<?> key = (Class<Object>) wct.getUpperBounds()[0];
 								Class<?> invoke = (Class<?>) method.invoke(this, (Object[]) null);
 								if (LOG.isDebugEnabled())
-									LOG.debug("Adding binding from " + key.getName() + " to " + invoke.getName() + ".");
+									LOG.debug("Adding binding from " + key.getName() + " to " + invoke.getName() + ". Declaring Method was '"+method.toGenericString()+"' in Module "+this.getClass().getName());
 								result.add(new Binding(key, invoke));
 							}
 						}

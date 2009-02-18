@@ -10,6 +10,8 @@
 import ecore;
 import xtext;
 
+extension org::eclipse::xtext::Extensions reexport;
+
 Boolean isAbstract(Grammar this) :
 	JAVA org.eclipse.xtext.GrammarUtil.isAbstract(org.eclipse.xtext.Grammar);
 
@@ -92,3 +94,8 @@ Grammar getSuperGrammar(Grammar this) :
 ecore::EReference eReference(CrossReference this) :
 	JAVA org.eclipse.xtext.GrammarUtil.getReference(org.eclipse.xtext.CrossReference);
 
+Boolean isMultipleCardinality(AbstractElement e) :
+	JAVA org.eclipse.xtext.GrammarUtil.isMultipleCardinality(org.eclipse.xtext.AbstractElement);
+	
+Boolean isOptionalCardinality(AbstractElement e) :
+	JAVA org.eclipse.xtext.GrammarUtil.isOptionalCardinality(org.eclipse.xtext.AbstractElement);
