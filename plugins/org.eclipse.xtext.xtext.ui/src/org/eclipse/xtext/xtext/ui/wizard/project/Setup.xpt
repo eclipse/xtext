@@ -25,9 +25,11 @@
 «FILE this.languageNameAbbreviation + "StandaloneSetup.java" SETUP_OUTLET-»
 package «this.basePackage»;
 
+import com.google.inject.Injector;
+
 public class «this.languageNameAbbreviation»StandaloneSetup {
 
-	public synchronized static void doSetup() {
+	public Injector createInjectorAndDoEMFRegistration() {
 		throw new UnsupportedOperationException("You never executed «this.languageNameAbbreviation»Generator.main()");
 	}
 	

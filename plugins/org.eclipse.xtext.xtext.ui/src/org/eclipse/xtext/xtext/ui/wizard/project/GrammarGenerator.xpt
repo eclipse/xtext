@@ -28,6 +28,8 @@ import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
+import com.google.inject.Injector;
+
 /**
  * Run this class in order to generate the language '«this.languageNameAbbreviation»'.
  */
@@ -38,14 +40,14 @@ public class  «this.languageNameAbbreviation»Generator {
 	private static final String UI_PATH = "../«this.projectName».ui";
 
 	public void generate() throws IOException {
-		XtextStandaloneSetup.doSetup();
+		Injector injector = new XtextStandaloneSetup().createInjectorAndDoEMFRegistration();
 
 		GeneratorFacade.cleanFolder(PATH + "/src-gen");
 		GeneratorFacade.cleanFolder(UI_PATH + "/src-gen");
 
 		String classpathUri = "classpath:/«this.basePackagePath»/«this.languageNameAbbreviation».xtext";
 		log.info("loading " + classpathUri);
-		ResourceSet rs = new XtextResourceSet();
+		ResourceSet rs = injector.getInstance(XtextResourceSet.class);
 		Resource resource = rs.createResource(
 		  new ClassloaderClasspathUriResolver().resolve(null, URI.createURI(classpathUri)));
 		resource.load(null);
@@ -55,7 +57,7 @@ public class  «this.languageNameAbbreviation»Generator {
 	}
 
 	public static void main(String[] args) throws IOException {
-		 «this.languageNameAbbreviation»Generator generator = new «this.languageNameAbbreviation»Generator();
+		«this.languageNameAbbreviation»Generator generator = new «this.languageNameAbbreviation»Generator();
 		generator.generate();
 	}
 
