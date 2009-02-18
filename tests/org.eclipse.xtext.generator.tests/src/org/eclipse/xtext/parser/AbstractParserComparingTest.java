@@ -33,8 +33,8 @@ public abstract class AbstractParserComparingTest extends AbstractGeneratorTest 
 		with(getStandaloneSetupClass());
 		firstParser = createFirstParser();
 		secondParser = createSecondParser();
-		firstHelper = new ParserTestHelper(getResourceFactory(), firstParser);
-		secondHelper = new ParserTestHelper(getResourceFactory(), secondParser);
+		firstHelper = new ParserTestHelper(getResourceFactory(), firstParser, get(Keys.RESOURCE_SET_KEY));
+		secondHelper = new ParserTestHelper(getResourceFactory(), secondParser, get(Keys.RESOURCE_SET_KEY));
 	}
 
 	protected abstract Class<? extends ISetup> getStandaloneSetupClass();

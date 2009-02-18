@@ -28,7 +28,7 @@ public class ComplexReconstrTest extends AbstractGeneratorTest {
 	}
 
 	public void testPrintGrammar() {
-		XtextResourceSet rs = new XtextResourceSet();
+		XtextResourceSet rs = get(XtextResourceSet.class);
 		rs.setClasspathURIContext(getClass());
 		URI u = URI.createURI("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.xmi");
 		EObject o = rs.getResource(u, true).getContents().get(0);
