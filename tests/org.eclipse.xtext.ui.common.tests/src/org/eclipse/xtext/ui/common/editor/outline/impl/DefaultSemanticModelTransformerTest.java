@@ -1,16 +1,15 @@
 package org.eclipse.xtext.ui.common.editor.outline.impl;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.core.DefaultLabelProvider;
 import org.eclipse.xtext.ui.core.DefaultLocationInFileProvider;
 
-public class DefaultSemanticModelTransformerTest extends TestCase {
+public class DefaultSemanticModelTransformerTest extends AbstractXtextTests {
 
 	private EObject root;
 	private EObject a1;
@@ -19,7 +18,7 @@ public class DefaultSemanticModelTransformerTest extends TestCase {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		XtextResourceSet resourceSet = new XtextResourceSet();
+		XtextResourceSet resourceSet = get(XtextResourceSet.class);
 		resourceSet.setClasspathURIContext(getClass());
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(
 				Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
@@ -30,11 +29,11 @@ public class DefaultSemanticModelTransformerTest extends TestCase {
 		a1 = root.eContents().get(0);
 		a2 = root.eContents().get(1);
 	}
-	
+
 	protected DefaultSemanticModelTransformer getSemanticModelTransformer() {
 		return new DefaultSemanticModelTransformer(new DefaultLocationInFileProvider(), new DefaultLabelProvider());
 	}
-	
+
 	public void testNullSafety() {
 		DefaultSemanticModelTransformer transformer = getSemanticModelTransformer();
 		assertFalse(transformer.consumeSemanticChildNodes(null));

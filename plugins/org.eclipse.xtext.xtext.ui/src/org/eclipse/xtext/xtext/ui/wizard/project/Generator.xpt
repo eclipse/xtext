@@ -28,6 +28,8 @@ import org.eclipse.xtext.GeneratorFacade;
 import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
+import com.google.inject.Injector;
+
 /**
  * Run this class to start the Generator<br>
  * generated with: <br>
@@ -38,12 +40,12 @@ public class Generator {
 	private static final String SRC_GEN_PATH = "src-gen";
 
 	public void generate() throws IOException {
-		«this.languageNameAbbreviation»StandaloneSetup.doSetup();
+		Injector injector = new «this.languageNameAbbreviation»StandaloneSetup().createInjectorAndDoEMFRegistration();
 	
 		GeneratorFacade.cleanFolder(SRC_GEN_PATH);
 
 		String classpathUri = "classpath:/model/Model.«this.firstFileExtension»";
-		ResourceSet rs = new XtextResourceSet();
+		ResourceSet rs = injector.getInstance(XtextResourceSet.class);
 		Resource resource = rs.createResource(
 		  new ClassloaderClasspathUriResolver().resolve(null, URI.createURI(classpathUri)));
 		resource.load(null);

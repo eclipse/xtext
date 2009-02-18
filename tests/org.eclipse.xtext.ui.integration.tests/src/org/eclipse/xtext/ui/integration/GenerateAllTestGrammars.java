@@ -17,9 +17,11 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
+import com.google.inject.Injector;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
- * 
+ *
  */
 public class GenerateAllTestGrammars {
 	private static String path = ".";
@@ -31,7 +33,7 @@ public class GenerateAllTestGrammars {
 	public static void main(String... args) throws Exception {
 		try {
 			log.info(Thread.currentThread().getContextClassLoader());
-			XtextStandaloneSetup.doSetup();
+			Injector injector = new XtextStandaloneSetup().createInjectorAndDoEMFRegistration();
 			if (args.length > 0) {
 				path = args[0] + "/" + path;
 			}
@@ -39,7 +41,7 @@ public class GenerateAllTestGrammars {
 			for (Class<?> c : testclasses) {
 				String filename = "classpath:/" + c.getName().replace('.', '/') + ".xtext";
 				log.info("loading " + filename);
-				ResourceSetImpl rs = new XtextResourceSet();
+				ResourceSetImpl rs = injector.getInstance(XtextResourceSet.class);
 				URI uri = URI.createURI(filename);
 				Resource resource = rs.createResource(uri);
 				resource.load(null);

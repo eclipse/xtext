@@ -44,7 +44,10 @@ import org.eclipse.xtext.util.StringInputStream;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.Key;
 import com.google.inject.Module;
+import com.google.inject.Provider;
+import com.google.inject.TypeLiteral;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -86,7 +89,15 @@ public abstract class AbstractXtextTests extends TestCase {
 	}
 
 	public<T> T get(Class<T> clazz) {
+		if (injector == null)
+			injector = Guice.createInjector();
 		return injector.getInstance(clazz);
+	}
+
+	public<T> T get(Key<T> key) {
+		if (injector == null)
+			injector = Guice.createInjector();
+		return injector.getInstance(key);
 	}
 
 	protected IParser getParser() {
@@ -152,7 +163,7 @@ public abstract class AbstractXtextTests extends TestCase {
 	}
 
 	protected XtextResource getResource(InputStream in) throws Exception {
-		XtextResourceSet rs = new XtextResourceSet();
+		XtextResourceSet rs = get(XtextResourceSet.class);
 		rs.setClasspathURIContext(getClass());
 		XtextResource resource = (XtextResource) getResourceFactory().createResource(URI.createURI("mytestmodel.test"));
 		rs.getResources().add(resource);
@@ -226,6 +237,7 @@ public abstract class AbstractXtextTests extends TestCase {
 		return XtendFacade.create(ctx);
 	}
 
+	@SuppressWarnings("null")
 	protected String readFileIntoString(String filePath) throws IOException {
 		ClassLoader classLoader = getClass().getClassLoader();
 		URL url = classLoader.getResource(filePath);
@@ -252,4 +264,10 @@ public abstract class AbstractXtextTests extends TestCase {
 		return model;
 	}
 
+	public static final class Keys {
+		private static final TypeLiteral<Provider<XtextResourceSet>> resourceSetLiteral = new TypeLiteral<Provider<XtextResourceSet>>(){
+		};
+
+		public static final Key<Provider<XtextResourceSet>> RESOURCE_SET_KEY = Key.get(resourceSetLiteral);
+	}
 }

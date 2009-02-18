@@ -97,11 +97,11 @@
    <extension
          point="org.eclipse.ui.handlers">
       <handler
-            class="org.eclipse.xtext.example.handler.GenerateEcoreDslHandler"
+            class="guice.Aware:org.eclipse.xtext.example.handler.GenerateEcoreDslHandler"
             commandId="org.eclipse.xtext.ecore.dsl.GenerateEcoreDsl">
       </handler>
       <handler
-            class="org.eclipse.xtext.example.handler.GenerateEcoreHandler"
+            class="guice.Aware:org.eclipse.xtext.example.handler.GenerateEcoreHandler"
             commandId="org.eclipse.xtext.ecore.dsl.GenerateEcore">
       </handler>
    </extension>

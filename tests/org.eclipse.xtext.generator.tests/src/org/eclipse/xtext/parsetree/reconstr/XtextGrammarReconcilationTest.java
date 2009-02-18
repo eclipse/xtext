@@ -23,7 +23,7 @@ public class XtextGrammarReconcilationTest extends AbstractGeneratorTest {
 		String model = "language foo Honolulu : name=ID;";
 
 		// load grammar model
-		XtextResourceSet rs = new XtextResourceSet();
+		XtextResourceSet rs = get(XtextResourceSet.class);
 		Resource resource = rs.createResource(URI.createURI("foo.xtext"));
 		resource.load(new StringInputStream(model), null);
 		Grammar object = (Grammar) resource.getContents().get(0);

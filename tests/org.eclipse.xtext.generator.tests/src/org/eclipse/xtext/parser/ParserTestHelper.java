@@ -17,6 +17,8 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
 
+import com.google.inject.Provider;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -24,14 +26,16 @@ public class ParserTestHelper {
 
 	private final IResourceFactory factory;
 	private final IParser parser;
+	private final Provider<XtextResourceSet> resourceSet;
 
-	public ParserTestHelper(IResourceFactory factory, IParser parser) {
+	public ParserTestHelper(IResourceFactory factory, IParser parser, Provider<XtextResourceSet> resourceSet) {
 		this.factory = factory;
 		this.parser = parser;
+		this.resourceSet = resourceSet;
 	}
-	
+
 	public XtextResource getResourceFromStream(InputStream in) throws IOException {
-		XtextResourceSet rs = new XtextResourceSet();
+		XtextResourceSet rs = resourceSet.get();
 		rs.setClasspathURIContext(getClass());
 		URI uri = URI.createURI("mytestmodel.test");
 		XtextResource resource = createResource(uri);
@@ -46,7 +50,7 @@ public class ParserTestHelper {
 
 		return resource;
 	}
-	
+
 	public XtextResource getResourceFromString(String in) throws IOException {
 		return getResourceFromStream(new StringInputStream(in));
 	}

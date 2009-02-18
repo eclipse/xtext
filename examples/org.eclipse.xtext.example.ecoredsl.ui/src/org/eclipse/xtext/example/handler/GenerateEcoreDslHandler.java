@@ -20,29 +20,34 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
+
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 /**
  * Experimental to test the serialization from .ecore to .dsl
- * 
- * TODO: pls clean up and doc me 
+ *
+ * TODO: pls clean up and doc me
  * @author Michael Clay - Initial contribution and API
- * 
+ *
  */
 public class GenerateEcoreDslHandler extends AbstractHandler {
+
+	@Inject
+	private Provider<XtextResourceSet> resourceSetProvider;
 
 	@SuppressWarnings( { "unchecked" })
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		EvaluationContext applicationContext = (EvaluationContext) event.getApplicationContext();
 		List fileList = (List) applicationContext.getDefaultVariable();
 		IFile ecoreFile = (IFile) fileList.get(0);
-		ResourceSet xtextResourceSet = new ResourceSetImpl();
+		ResourceSet xtextResourceSet = resourceSetProvider.get();
 		Resource ecoreResource = xtextResourceSet.getResource(URI.createFileURI(ecoreFile.getLocation().toFile()
 				.getAbsolutePath()), true);
-		EObject ecorePackage = (EObject) ecoreResource.getContents().get(0);
+		EObject ecorePackage = ecoreResource.getContents().get(0);
 
-		XtextResourceSet resourceSet = new XtextResourceSet();
+		XtextResourceSet resourceSet = resourceSetProvider.get();
 		String fileNameWithExtension = ecoreFile.getName();
 		URI fileURI = URI.createFileURI(new java.io.File(ecoreFile.getParent().getLocation().toFile(),
 				fileNameWithExtension.substring(0, fileNameWithExtension.indexOf(".")) + "_test.ecoredsl")

@@ -39,7 +39,7 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 	private static final String SRC_GEN_ROOT = "src-gen";
 	private static final String SRC_ROOT = "src";
 	private final List<String> SRC_FOLDER_LIST = Collections.unmodifiableList(Arrays.asList(SRC_ROOT, SRC_GEN_ROOT));
-	
+
 	protected XtextProjectInfo getXtextProjectInfo() {
 		return (XtextProjectInfo) getProjectInfo();
 	}
@@ -54,11 +54,11 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 		List<String> exportedPackages = Arrays.asList(basePackage, basePackage + ".parsetree.reconstr", basePackage + ".services");
 		final IProject dslProject = EclipseResourceUtil.createProject(getXtextProjectInfo().getProjectName(),
 				SRC_FOLDER_LIST, Collections.<IProject> emptyList(), new LinkedHashSet<String>(Arrays.asList(
-						"org.eclipse.xtext.log4j;bundle-version=\"1.2.15\"", 
+						"org.eclipse.xtext.log4j;bundle-version=\"1.2.15\"",
 						"org.eclipse.xtext",
-						"org.eclipse.xtext.generator", 
+						"org.eclipse.xtext.generator",
 						"org.eclipse.xtend",
-						"org.eclipse.xtend.typesystem.emf", 
+						"org.eclipse.xtend.typesystem.emf",
 						"org.eclipse.xpand",
 						"org.apache.commons.logging",
 						"de.itemis.xtext.antlr;resolution:=optional",
@@ -69,7 +69,7 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 
 		if (dslProject == null) {
 			return;
-		} 
+		}
 
 		EclipseResourceUtil.createPackagesWithDummyClasses(dslProject, "src-gen", exportedPackages);
 		monitor.worked(1);
@@ -80,13 +80,13 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 						getXtextProjectInfo().getProjectName().toLowerCase() + ";visibility:=reexport",
 						"org.eclipse.xtext.ui.core", "org.eclipse.xtext.ui.common",
 						"org.eclipse.xtext.log4j;bundle-version=\"1.2.15\"",
-						"org.eclipse.ui.editors;bundle-version=\"3.4.0\"")), null, null, 
+						"org.eclipse.ui.editors;bundle-version=\"3.4.0\"")), null, null,
 						getXtextProjectInfo().getBasePackage() + ".ui.internal." + getXtextProjectInfo().getLanguageNameAbbreviation() + "Activator", monitor,
 				null);
 
 		if (dslUIProject == null) {
 			return;
-		} 
+		}
 		monitor.worked(1);
 
 		// Generator Project
@@ -109,7 +109,7 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 
 		OutputImpl output = new OutputImpl();
 		String defaultEncoding = System.getProperty("file.encoding");
-		output.addOutlet(new Outlet(false, defaultEncoding, "GRAMMAR_GENERATOR_OUTLET", true, 
+		output.addOutlet(new Outlet(false, defaultEncoding, "GRAMMAR_GENERATOR_OUTLET", true,
 				basePackageFolder.getLocation().makeAbsolute().toOSString()));
 		if (dslGeneratorProject != null) {
 			output.addOutlet(new Outlet(false, defaultEncoding, "GENERATOR_OUTLET", true, createSubPackages(
@@ -124,19 +124,19 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 							+ "«FOREACH this.elements AS e»\n" + "«e.name» («e.metaType»)\n" + "«ENDFOREACH»\n"
 							+ "«ENDFILE»\n" + "«ENDDEFINE»\n", monitor);
 		}
-		output.addOutlet(new Outlet(false, defaultEncoding, "ACTIVATOR_OUTLET", true, 
+		output.addOutlet(new Outlet(false, defaultEncoding, "ACTIVATOR_OUTLET", true,
 				dslUIProject.getFolder(
 						SRC_ROOT + IPath.SEPARATOR + getXtextProjectInfo().getBasePackagePath() + IPath.SEPARATOR + "ui"
 				).getLocation().makeAbsolute().toOSString()));
-		output.addOutlet(new Outlet(false, defaultEncoding, "ACTIVATOR_GEN_OUTLET", true, 
+		output.addOutlet(new Outlet(false, defaultEncoding, "ACTIVATOR_GEN_OUTLET", true,
 				dslUIProject.getFolder(
 						SRC_GEN_ROOT + IPath.SEPARATOR + getXtextProjectInfo().getBasePackagePath() + IPath.SEPARATOR + "ui" + IPath.SEPARATOR + "internal"
 				).getLocation().makeAbsolute().toOSString()));
-		output.addOutlet(new Outlet(false, defaultEncoding, "SETUP_OUTLET", true, 
+		output.addOutlet(new Outlet(false, defaultEncoding, "SETUP_OUTLET", true,
 				dslProject.getFolder(
 						SRC_GEN_ROOT + IPath.SEPARATOR + getXtextProjectInfo().getBasePackagePath()
 				).getLocation().makeAbsolute().toOSString()));
-		output.addOutlet(new Outlet(false, defaultEncoding, "SETUP_UI_OUTLET", true, 
+		output.addOutlet(new Outlet(false, defaultEncoding, "SETUP_UI_OUTLET", true,
 				dslUIProject.getFolder(
 						SRC_GEN_ROOT + IPath.SEPARATOR + getXtextProjectInfo().getBasePackagePath()
 				).getLocation().makeAbsolute().toOSString()));
@@ -156,15 +156,14 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 		monitor.worked(1);
 
 		// refresh folder and select file to edit
-		if (dslProject != null) {
-			dslProject.refreshLocal(IResource.DEPTH_INFINITE, monitor);
-		}
+		dslProject.refreshLocal(IResource.DEPTH_INFINITE, monitor);
+
 		if (dslGeneratorProject != null) {
 			dslGeneratorProject.refreshLocal(IResource.DEPTH_INFINITE, monitor);
 		}
-		if (dslUIProject != null) {
-			dslUIProject.refreshLocal(IResource.DEPTH_INFINITE, monitor);
-		}
+
+		dslUIProject.refreshLocal(IResource.DEPTH_INFINITE, monitor);
+
 		IFile dslGrammarFile = getDslGrammarFile(basePackageFolder);
 		BasicNewResourceWizard.selectAndReveal(dslGrammarFile, PlatformUI.getWorkbench().getActiveWorkbenchWindow());
 		setResult(dslGrammarFile);
@@ -180,14 +179,15 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 		throw new IllegalStateException("No xtext file was found in folder '" + folder.toString() + "'!");
 	}
 
-	private IFolder createSubPackages(String basePackage, final IProject project, IFolder srcFolder,
+	private IFolder createSubPackages(String basePackage, final IProject project, final IFolder srcFolder,
 			final IProgressMonitor monitor) throws CoreException {
+		IFolder srcFolderToUse = srcFolder;
 		for (String packageName : basePackage.split("\\.")) {
-			srcFolder = (IFolder) project.getFolder(srcFolder.getProjectRelativePath().toString() + IPath.SEPARATOR
+			srcFolderToUse = project.getFolder(srcFolderToUse.getProjectRelativePath().toString() + IPath.SEPARATOR
 					+ packageName);
-			srcFolder.create(true, true, new SubProgressMonitor(monitor, 1));
+			srcFolderToUse.create(true, true, new SubProgressMonitor(monitor, 1));
 		}
-		return srcFolder;
+		return srcFolderToUse;
 	}
 
 }

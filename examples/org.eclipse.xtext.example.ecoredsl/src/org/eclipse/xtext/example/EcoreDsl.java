@@ -20,36 +20,39 @@ import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
+import com.google.inject.Injector;
+
 /**
  * Run this class in order to generate the EmfaticDsl grammar.
- * 
+ *
  * @author Michael Clay - Initial contribution and API
  */
 public class EcoreDsl {
-	private Logger log = Logger.getLogger(EcoreDsl.class);
+	private final Logger log = Logger.getLogger(EcoreDsl.class);
 
 	private static final String RUNTIME_PATH = ".";
 	private static final String UI_PATH = "../org.eclipse.xtext.example.ecoredsl.ui";
 
 	private String uiPath = UI_PATH;
 	private String runtimePath = RUNTIME_PATH;
-	
+
 	private EcoreDsl(String... args) {
 		if (args.length > 0) {
 			runtimePath = args[0];
 			uiPath = args[0] + "/" + UI_PATH;
 		}
 	}
-	
+
 	public void generate() throws IOException {
-		XtextStandaloneSetup.doSetup();
+		Injector injector = new XtextStandaloneSetup().createInjectorAndDoEMFRegistration();
+
 
 		GeneratorFacade.cleanFolder(runtimePath + "/src-gen");
 		GeneratorFacade.cleanFolder(uiPath + "/src-gen");
 
 		String classpathUri = "classpath:/org/eclipse/xtext/example/EcoreDsl.xtext";
 		log.info("loading " + classpathUri);
-		ResourceSet rs = new XtextResourceSet();
+		ResourceSet rs = injector.getInstance(XtextResourceSet.class);
 		Resource resource = rs.createResource(
 				new ClassloaderClasspathUriResolver().resolve(null, URI.createURI(classpathUri)));
 		resource.load(null);

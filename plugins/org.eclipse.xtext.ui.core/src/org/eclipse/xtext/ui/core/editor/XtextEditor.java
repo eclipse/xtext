@@ -33,6 +33,7 @@ import org.eclipse.xtext.ui.core.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.ui.core.internal.Activator;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Dennis Huebner - Initial contribution and API
@@ -50,6 +51,9 @@ public class XtextEditor extends TextEditor {
 
 	@Inject(optional = true)
 	private IContentOutlinePage outlinePage;
+
+	@Inject
+	private Provider<XtextDocumentProvider> documentProvider;
 
 	// TODO private IFoldingUpdater foldingSupport;
 
@@ -75,12 +79,12 @@ public class XtextEditor extends TextEditor {
 	public void init(IEditorSite site, IEditorInput input) throws PartInitException {
 		if (log.isDebugEnabled())
 			log.debug("init:" + input);
-		
+
 		if (!(input instanceof IURIEditorInput))
 			throw new IllegalArgumentException("Can only handle IURIEditorInputs");
 
 		// do document provider setup
-		setDocumentProvider(new XtextDocumentProvider());
+		setDocumentProvider(documentProvider.get());
 
 		// source viewer setup
 		setSourceViewerConfiguration(sourceViewerConfiguration);
@@ -138,7 +142,7 @@ public class XtextEditor extends TextEditor {
 
 	/**
 	 * @return true if content assist is available
-	 * 
+	 *
 	 */
 	public boolean isContentAssistAvailable() {
 		return getSourceViewerConfiguration().getContentAssistant(getSourceViewer()) != null;
@@ -148,7 +152,7 @@ public class XtextEditor extends TextEditor {
 	protected ISourceViewer createSourceViewer(Composite parent, IVerticalRuler ruler, int styles) {
 		if (log.isDebugEnabled())
 			log.debug("Creating Xtext source viewer.");
-		
+
 		// overwrite superclass implementation to allow folding
 		fAnnotationAccess = createAnnotationAccess();
 		fOverviewRuler = createOverviewRuler(getSharedColors());

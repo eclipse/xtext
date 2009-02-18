@@ -59,10 +59,6 @@ List[String] internalCheckPath(AbstractElement this) :
 List[String] checkPath(AbstractElement this) : {"true"};
  
 List[String] checkPath(Keyword this) : if isAssigned() then {'value.equals("'+value+'")'} else {'true'}; 
-
-List[String] checkPath(Action this) : 
-	{'obj.isOfType("'+typeName.getQualifiedName()+'") && 
-	obj.checkConsume("'+feature+'") && obj.isConsumed()'};
 	
 List[String] checkPath(Assignment this) : 
 	{'obj.checkConsume("'+feature+'")'};

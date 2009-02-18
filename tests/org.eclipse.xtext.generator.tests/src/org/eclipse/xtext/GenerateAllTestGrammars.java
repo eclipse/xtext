@@ -50,6 +50,8 @@ import org.eclipse.xtext.testlanguages.TestLanguage;
 import org.eclipse.xtext.testlanguages.TreeTestLanguage;
 import org.eclipse.xtext.valueconverter.Bug250313;
 
+import com.google.inject.Injector;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  *
@@ -98,7 +100,7 @@ public class GenerateAllTestGrammars {
 
 	public static void main(String... args) throws Exception {
 		try {
-			new XtextStandaloneSetup().createInjectorAndDoEMFRegistration();
+			Injector injector = new XtextStandaloneSetup().createInjectorAndDoEMFRegistration();
 			if (args.length > 0) {
 				path = args[0];
 			}
@@ -106,7 +108,7 @@ public class GenerateAllTestGrammars {
 			for (Class<?> c : testclasses) {
 				String filename = getGrammarFileNameAsURI(c);
 				log.info("loading " + filename);
-				ResourceSetImpl rs = new XtextResourceSet();
+				ResourceSetImpl rs = injector.getInstance(XtextResourceSet.class);
 				URI uri = URI.createURI(filename);
 				Resource resource = rs.createResource(uri);
 				resource.load(null);

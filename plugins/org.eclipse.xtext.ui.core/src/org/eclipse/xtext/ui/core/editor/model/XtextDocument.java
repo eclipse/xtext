@@ -48,6 +48,9 @@ import org.eclipse.xtext.ui.core.editor.model.IXtextDocumentContentObserver.Proc
 import org.eclipse.xtext.ui.core.util.JdtClasspathUriResolver;
 import org.eclipse.xtext.util.StringInputStream;
 
+import com.google.inject.Inject;
+import com.google.inject.Provider;
+
 public class XtextDocument extends Document implements IXtextDocument {
 
 	private XtextResourceSet resourceSet = null;
@@ -55,13 +58,16 @@ public class XtextDocument extends Document implements IXtextDocument {
 	private IEditorInput editorInput;
 	private IFile file;
 
+	@Inject
+	private Provider<XtextResourceSet> resourceSetProvider;
+
 	public void setInput(IEditorInput editorInput) {
 		file = ResourceUtil.getFile(editorInput);
 		Assert.isTrue(file != null && this.editorInput == null || this.editorInput.equals(editorInput));
 		if (this.editorInput != null)
 			return;
 		this.editorInput = editorInput;
-		resourceSet = new XtextResourceSet();
+		resourceSet = resourceSetProvider.get();
 
 		IJavaProject javaProject = getIJavaProject(file);
 		if (javaProject != null) {

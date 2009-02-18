@@ -32,10 +32,21 @@ public abstract class BaseEPackageAccess {
 		return ePackage;
 	}
 
-	public static Resource loadResource(ClassLoader loader, String string) {
+	public static EPackage loadEcoreFile(ClassLoader loader, String string) {
 		URI uri = URI.createURI(string);
-		XtextResourceSet resourceSet = new XtextResourceSet();
-		resourceSet.setClasspathURIContext(loader);
+		if (!uri.hasFragment())
+			uri = uri.appendFragment("/");
+		URI normalized = new ClassloaderClasspathUriResolver().resolve(loader, uri);
+		return (EPackage) new ResourceSetImpl().getEObject(normalized, true);
+	}
+
+	public static Object loadGrammarFile(String string, XtextResourceSet resourceSet) {
+		Resource resource = loadResource(string, resourceSet);
+		return resource.getContents().get(0);
+	}
+
+	public static Resource loadResource(String string, XtextResourceSet resourceSet) {
+		URI uri = URI.createURI(string);
 		Resource resource;
 		try {
 			resource = resourceSet.getResource(uri, true);
@@ -51,19 +62,6 @@ public abstract class BaseEPackageAccess {
 					+ contents.size());
 		}
 		return resource;
-	}
-
-	public static EPackage loadEcoreFile(ClassLoader loader, String string) {
-		URI uri = URI.createURI(string);
-		if (!uri.hasFragment())
-			uri = uri.appendFragment("/");
-		URI normalized = new ClassloaderClasspathUriResolver().resolve(loader, uri);
-		return (EPackage) new ResourceSetImpl().getEObject(normalized, true);
-	}
-
-	public static Object loadGrammarFile(ClassLoader loader, String string) {
-		Resource resource = loadResource(loader, string);
-		return resource.getContents().get(0);
 	}
 
 }
