@@ -3,6 +3,19 @@
 
 <plugin>
 
+
+<!-- adding resource factories -->
+
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="guice.Aware:org.eclipse.xtext.resource.XtextResourceFactory"
+			type="dmodel">
+		</parser>
+	</extension>
+
+
+
     <extension
 			point="org.eclipse.ui.editors">
 		<editor

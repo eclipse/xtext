@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextTestAdapterFactory.java,v 1.1 2009/02/18 19:36:28 sefftinge Exp $
+ * $Id: XtextTestAdapterFactory.java,v 1.2 2009/02/18 21:20:36 sefftinge Exp $
  */
 package org.eclipse.xtext.xtextTest.util;
 

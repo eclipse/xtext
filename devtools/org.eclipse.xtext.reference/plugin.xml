@@ -6,16 +6,25 @@
             class="ReferenceModel.ReferenceModelPackage">
       </package>
    </extension>
-    <extension
-         point="org.eclipse.xtend.typesystem.emf.checks">
-      
-      <metaModel
-            nsURI="http://eclipse.org/xtext/reference/ReferenceGrammar">
-         <checkFile
-               path="org/eclipse/xtext/reference/Checks.chk">
-         </checkFile>
-      </metaModel>
-      
-   </extension>
+   
+     <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://eclipse.org/xtext/reference/ReferenceGrammar" 
+       class = "org.eclipse.xtext.reference.referenceGrammar.ReferenceGrammarPackage"
+       genModel = "org/eclipse/xtext/reference/ReferenceGrammar.genmodel" /> 
+	
+  </extension>
+
+
+  <extension
+		point="org.eclipse.xtend.typesystem.emf.checks">
+		<metaModel
+			nsURI="http://eclipse.org/xtext/reference/ReferenceGrammar">
+			<checkFile
+				path="org/eclipse/xtext/reference/ReferenceGrammarChecks.chk">
+			</checkFile>
+		</metaModel>
+	
+	</extension>
 
 </plugin>

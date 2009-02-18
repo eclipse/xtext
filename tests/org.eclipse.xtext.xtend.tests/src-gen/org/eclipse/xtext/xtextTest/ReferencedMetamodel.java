@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ReferencedMetamodel.java,v 1.1 2009/02/18 19:34:38 sefftinge Exp $
+ * $Id: ReferencedMetamodel.java,v 1.2 2009/02/18 21:20:04 sefftinge Exp $
  */
 package org.eclipse.xtext.xtextTest;
 

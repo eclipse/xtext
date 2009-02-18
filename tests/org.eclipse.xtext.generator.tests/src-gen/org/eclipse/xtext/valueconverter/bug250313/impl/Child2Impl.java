@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Child2Impl.java,v 1.1 2009/02/18 19:44:18 sefftinge Exp $
+ * $Id: Child2Impl.java,v 1.2 2009/02/18 21:22:37 sefftinge Exp $
  */
 package org.eclipse.xtext.valueconverter.bug250313.impl;
 

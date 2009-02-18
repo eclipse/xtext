@@ -4,6 +4,8 @@
 	<property name="uiProject" value="../org.eclipse.xtext.example.ecoredsl.ui"/>
 	<property name="file.extensions" value="ecoredsl"/>
 	
+	<component class="org.eclipse.emf.mwe.utils.DirectoryCleaner" directory="${runtimeProject}/src-gen"/>
+	
 	<component class="org.eclipse.xtext.generator.Generator">
 		<grammarURI value="${grammarURI}"/>
 		<pathRtProject value="${runtimeProject}"/>

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Ref2.java,v 1.1 2009/02/18 19:41:49 sefftinge Exp $
+ * $Id: Ref2.java,v 1.2 2009/02/18 21:22:16 sefftinge Exp $
  */
 package org.eclipse.xtext.parsetree.reconstr.simplerewritetest;
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FowlerdslAdapterFactory.java,v 1.1 2009/02/18 19:38:53 sefftinge Exp $
+ * $Id: FowlerdslAdapterFactory.java,v 1.2 2009/02/18 21:21:31 sefftinge Exp $
  */
 package org.eclipse.xtext.example.fowlerdsl.util;
 

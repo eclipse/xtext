@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Wildcard.java,v 1.1 2009/02/18 19:33:49 sefftinge Exp $
+ * $Id: Wildcard.java,v 1.2 2009/02/18 21:19:46 sefftinge Exp $
  */
 package org.eclipse.xtext.xtext;
 

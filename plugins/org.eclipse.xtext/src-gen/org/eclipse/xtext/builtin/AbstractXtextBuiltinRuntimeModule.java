@@ -30,26 +30,6 @@ public abstract class AbstractXtextBuiltinRuntimeModule extends DefaultRuntimeMo
 		return org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinPackratParser.class;
 	}
 
-	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
-		return org.eclipse.xtext.builtin.parser.antlr.internal.InternalXtextBuiltinLexer.class;
-	}
-
-	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrParser> bindIAntlrParser() {
-		return org.eclipse.xtext.builtin.parser.antlr.XtextBuiltinParser.class;
-	}
-
-	public Class<? extends org.eclipse.xtext.parser.antlr.ITokenDefProvider> bindITokenDefProvider() {
-		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
-	}
-
-	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider> bindIAntlrTokenFileProvider() {
-		return org.eclipse.xtext.builtin.parser.antlr.XtextBuiltinAntlrTokenFileProvider.class;
-	}
-
-	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
-		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
-	}
-
 	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
 		return org.eclipse.xtext.builtin.parseTreeConstruction.XtextBuiltinParsetreeConstructor.class;
 	}

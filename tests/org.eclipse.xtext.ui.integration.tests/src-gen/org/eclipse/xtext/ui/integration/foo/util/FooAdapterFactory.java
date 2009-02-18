@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FooAdapterFactory.java,v 1.1 2009/02/18 19:39:03 sefftinge Exp $
+ * $Id: FooAdapterFactory.java,v 1.2 2009/02/18 21:21:36 sefftinge Exp $
  */
 package org.eclipse.xtext.ui.integration.foo.util;
 

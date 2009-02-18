@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ActionLangFactory.java,v 1.1 2009/02/18 19:44:59 sefftinge Exp $
+ * $Id: ActionLangFactory.java,v 1.2 2009/02/18 21:22:39 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.actionLang;
 

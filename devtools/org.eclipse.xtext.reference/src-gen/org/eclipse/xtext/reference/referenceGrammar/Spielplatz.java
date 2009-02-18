@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Spielplatz.java,v 1.1 2009/02/18 19:35:18 sefftinge Exp $
+ * $Id: Spielplatz.java,v 1.2 2009/02/18 21:20:23 sefftinge Exp $
  */
 package org.eclipse.xtext.reference.referenceGrammar;
 

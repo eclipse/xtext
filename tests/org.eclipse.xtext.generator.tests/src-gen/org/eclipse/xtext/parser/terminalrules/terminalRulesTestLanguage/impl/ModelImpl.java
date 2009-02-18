@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelImpl.java,v 1.1 2009/02/18 19:45:02 sefftinge Exp $
+ * $Id: ModelImpl.java,v 1.2 2009/02/18 21:22:50 sefftinge Exp $
  */
 package org.eclipse.xtext.parser.terminalrules.terminalRulesTestLanguage.impl;
 

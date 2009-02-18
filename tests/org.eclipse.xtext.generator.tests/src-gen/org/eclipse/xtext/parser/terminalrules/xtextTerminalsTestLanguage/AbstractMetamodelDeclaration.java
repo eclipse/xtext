@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractMetamodelDeclaration.java,v 1.1 2009/02/18 19:43:01 sefftinge Exp $
+ * $Id: AbstractMetamodelDeclaration.java,v 1.2 2009/02/18 21:22:17 sefftinge Exp $
  */
 package org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage;
 

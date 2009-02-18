@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelImpl.java,v 1.1 2009/02/18 19:45:15 sefftinge Exp $
+ * $Id: ModelImpl.java,v 1.2 2009/02/18 21:22:42 sefftinge Exp $
  */
 package org.eclipse.xtext.generator.lowerCaseNamedTestLanguage.impl;
 

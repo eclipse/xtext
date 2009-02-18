@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BaseInheritanceTestFactory.java,v 1.1 2009/02/18 19:43:02 sefftinge Exp $
+ * $Id: BaseInheritanceTestFactory.java,v 1.2 2009/02/18 21:22:32 sefftinge Exp $
  */
 package baseInheritanceTest;
 

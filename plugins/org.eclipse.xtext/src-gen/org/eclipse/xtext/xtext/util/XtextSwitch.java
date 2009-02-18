@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextSwitch.java,v 1.1 2009/02/18 19:33:50 sefftinge Exp $
+ * $Id: XtextSwitch.java,v 1.2 2009/02/18 21:19:47 sefftinge Exp $
  */
 package org.eclipse.xtext.xtext.util;
 

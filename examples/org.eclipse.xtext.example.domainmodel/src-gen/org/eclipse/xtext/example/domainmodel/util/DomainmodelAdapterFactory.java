@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DomainmodelAdapterFactory.java,v 1.1 2009/02/18 19:34:07 sefftinge Exp $
+ * $Id: DomainmodelAdapterFactory.java,v 1.2 2009/02/18 21:20:17 sefftinge Exp $
  */
 package org.eclipse.xtext.example.domainmodel.util;
 

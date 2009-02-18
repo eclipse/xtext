@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FooBarImpl.java,v 1.1 2009/02/18 19:45:26 sefftinge Exp $
+ * $Id: FooBarImpl.java,v 1.2 2009/02/18 21:22:44 sefftinge Exp $
  */
 package org.eclipse.xtext.metamodelreferencing.tests.otherTest.impl;
 

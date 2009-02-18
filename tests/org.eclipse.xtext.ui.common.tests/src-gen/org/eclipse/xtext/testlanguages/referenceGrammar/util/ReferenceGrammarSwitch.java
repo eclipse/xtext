@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ReferenceGrammarSwitch.java,v 1.1 2009/02/18 19:37:14 sefftinge Exp $
+ * $Id: ReferenceGrammarSwitch.java,v 1.2 2009/02/18 21:20:41 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.referenceGrammar.util;
 
