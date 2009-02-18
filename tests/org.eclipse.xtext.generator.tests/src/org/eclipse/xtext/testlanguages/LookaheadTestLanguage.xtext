@@ -7,7 +7,7 @@
  *
  *******************************************************************************/
 language org.eclipse.xtext.testlanguages.LookaheadTestLanguage
-generate LookaheadLang "http://www.eclipse.org/2008/xtext/LookaheadLang"
+generate lookaheadLang "http://www.eclipse.org/2008/xtext/LookaheadLang"
 
 Entry: (contents+=Alts)*;
 

@@ -53,7 +53,7 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
         
         @Override
         protected InputStream getTokenFile() {
-        	ClassLoader classLoader = InternalPartialParserTestLanguageParser.class.getClassLoader();
+        	ClassLoader classLoader = getClass().getClassLoader();
         	return classLoader.getResourceAsStream("org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalPartialParserTestLanguage.tokens");
         }
         

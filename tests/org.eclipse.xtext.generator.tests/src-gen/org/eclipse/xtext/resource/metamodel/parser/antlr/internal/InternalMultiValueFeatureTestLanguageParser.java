@@ -53,7 +53,7 @@ public class InternalMultiValueFeatureTestLanguageParser extends AbstractInterna
         
         @Override
         protected InputStream getTokenFile() {
-        	ClassLoader classLoader = InternalMultiValueFeatureTestLanguageParser.class.getClassLoader();
+        	ClassLoader classLoader = getClass().getClassLoader();
         	return classLoader.getResourceAsStream("org/eclipse/xtext/resource/metamodel/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.tokens");
         }
         

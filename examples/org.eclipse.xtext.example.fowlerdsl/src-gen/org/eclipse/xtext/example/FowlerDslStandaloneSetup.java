@@ -1,5 +1,5 @@
+
 /*
-Generated with Xtext
 */
 package org.eclipse.xtext.example;
 
@@ -24,10 +24,8 @@ public class FowlerDslStandaloneSetup implements ISetup {
 	public Injector createInjectorAndDoEMFRegistration() {
 		
 		org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
-		registerEPackages();
 		Injector injector = createInjector();
-		IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
-		registerResourceFactory(resourceFactory);
+		register(injector);
 		return injector;
 	}
 	
@@ -35,24 +33,17 @@ public class FowlerDslStandaloneSetup implements ISetup {
 		return Guice.createInjector(new org.eclipse.xtext.example.FowlerDslRuntimeModule());
 	}
 	
-	public void registerResourceFactory(IResourceFactory resourceFactory) {
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("fowlerdsl", resourceFactory);
-		
+	public void register(Injector injector) {
+	if (!EPackage.Registry.INSTANCE.containsKey("http://example.xtext.org/FowlerDsl")) {
+		EPackage.Registry.INSTANCE.put("http://example.xtext.org/FowlerDsl", org.eclipse.xtext.example.fowlerdsl.FowlerdslPackage.eINSTANCE);
 	}
 
-	/**
-	 * Initializes all EPackages generated for this language and registers them with EPackage.Registry.INSTANCE
-	 */	
-	public void registerEPackages() {
-		if (!EPackage.Registry.INSTANCE.containsKey("http://example.xtext.org/FowlerDsl")) {
-			EPackage fowlerdsl = EcoreUtil2.loadEPackage(
-				"classpath:/org/eclipse/xtext/example/fowlerdsl.ecore",
-				FowlerDslStandaloneSetup.class.getClassLoader());
-			if (fowlerdsl == null)
-				throw new IllegalStateException(
-					"Couldn't load EPackage from 'classpath:/org/eclipse/xtext/example/fowlerdsl.ecore'");
-			EPackage.Registry.INSTANCE.put("http://example.xtext.org/FowlerDsl", fowlerdsl);
-		}
+
+		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("fowlerdsl", resourceFactory);
+		
+
+	//TODO registration of EValidators should be added here, too
+
 	}
-	
 }

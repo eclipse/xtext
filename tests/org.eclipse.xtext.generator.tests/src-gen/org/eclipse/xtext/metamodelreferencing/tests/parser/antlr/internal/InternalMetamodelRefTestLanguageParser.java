@@ -53,7 +53,7 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
         
         @Override
         protected InputStream getTokenFile() {
-        	ClassLoader classLoader = InternalMetamodelRefTestLanguageParser.class.getClassLoader();
+        	ClassLoader classLoader = getClass().getClassLoader();
         	return classLoader.getResourceAsStream("org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.tokens");
         }
         

@@ -53,7 +53,7 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
         
         @Override
         protected InputStream getTokenFile() {
-        	ClassLoader classLoader = InternalOptionalEmptyTestLanguageParser.class.getClassLoader();
+        	ClassLoader classLoader = getClass().getClassLoader();
         	return classLoader.getResourceAsStream("org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalOptionalEmptyTestLanguage.tokens");
         }
         

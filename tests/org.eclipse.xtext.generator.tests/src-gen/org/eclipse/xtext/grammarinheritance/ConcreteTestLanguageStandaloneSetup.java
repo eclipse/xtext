@@ -1,5 +1,5 @@
+
 /*
-Generated with Xtext
 */
 package org.eclipse.xtext.grammarinheritance;
 
@@ -24,10 +24,8 @@ public class ConcreteTestLanguageStandaloneSetup implements ISetup {
 	public Injector createInjectorAndDoEMFRegistration() {
 		
 		org.eclipse.xtext.grammarinheritance.AbstractTestLanguageStandaloneSetup.doSetup();
-		registerEPackages();
 		Injector injector = createInjector();
-		IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
-		registerResourceFactory(resourceFactory);
+		register(injector);
 		return injector;
 	}
 	
@@ -35,24 +33,17 @@ public class ConcreteTestLanguageStandaloneSetup implements ISetup {
 		return Guice.createInjector(new org.eclipse.xtext.grammarinheritance.ConcreteTestLanguageRuntimeModule());
 	}
 	
-	public void registerResourceFactory(IResourceFactory resourceFactory) {
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("concretetestlanguage", resourceFactory);
-		
+	public void register(Injector injector) {
+	if (!EPackage.Registry.INSTANCE.containsKey("http://holla")) {
+		EPackage.Registry.INSTANCE.put("http://holla", org.eclipse.xtext.grammarinheritance.foo.FooPackage.eINSTANCE);
 	}
 
-	/**
-	 * Initializes all EPackages generated for this language and registers them with EPackage.Registry.INSTANCE
-	 */	
-	public void registerEPackages() {
-		if (!EPackage.Registry.INSTANCE.containsKey("http://holla")) {
-			EPackage foo = EcoreUtil2.loadEPackage(
-				"classpath:/org/eclipse/xtext/grammarinheritance/foo.ecore",
-				ConcreteTestLanguageStandaloneSetup.class.getClassLoader());
-			if (foo == null)
-				throw new IllegalStateException(
-					"Couldn't load EPackage from 'classpath:/org/eclipse/xtext/grammarinheritance/foo.ecore'");
-			EPackage.Registry.INSTANCE.put("http://holla", foo);
-		}
+
+		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("concretetestlanguage", resourceFactory);
+		
+
+	//TODO registration of EValidators should be added here, too
+
 	}
-	
 }

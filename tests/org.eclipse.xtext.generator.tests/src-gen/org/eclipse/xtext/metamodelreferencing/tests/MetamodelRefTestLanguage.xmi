@@ -4,12 +4,12 @@
     <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="xtext">
       <ePackage href="http://www.eclipse.org/2008/Xtext#/"/>
     </metamodelDeclarations>
-    <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="SimpleTest">
-      <ePackage href="http://eclipse.org/xtext/tests/SimpleTest#/"/>
+    <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="anotherSimpleTest">
+      <ePackage href="http://eclipse.org/xtext/tests/AnotherSimpleTest#/"/>
     </metamodelDeclarations>
     <rules xsi:type="xtext:ParserRule" name="Foo">
       <type metamodel="/0/@metamodelDeclarations.1">
-        <type xsi:type="ecore:EClass" href="http://eclipse.org/xtext/tests/SimpleTest#//Foo"/>
+        <type xsi:type="ecore:EClass" href="http://eclipse.org/xtext/tests/AnotherSimpleTest#//Foo"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">

@@ -1,5 +1,5 @@
+
 /*
-Generated with Xtext
 */
 package org.eclipse.xtext.grammarinheritance;
 
@@ -24,10 +24,8 @@ public class BaseInheritanceTestLanguageStandaloneSetup implements ISetup {
 	public Injector createInjectorAndDoEMFRegistration() {
 		
 		org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
-		registerEPackages();
 		Injector injector = createInjector();
-		IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
-		registerResourceFactory(resourceFactory);
+		register(injector);
 		return injector;
 	}
 	
@@ -35,24 +33,17 @@ public class BaseInheritanceTestLanguageStandaloneSetup implements ISetup {
 		return Guice.createInjector(new org.eclipse.xtext.grammarinheritance.BaseInheritanceTestLanguageRuntimeModule());
 	}
 	
-	public void registerResourceFactory(IResourceFactory resourceFactory) {
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("baseinheritancetestlanguage", resourceFactory);
-		
+	public void register(Injector injector) {
+	if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/2009/tmf/xtext/BaseInheritanceTestLanguage")) {
+		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2009/tmf/xtext/BaseInheritanceTestLanguage", org.eclipse.xtext.grammarinheritance.baseInheritanceTest.BaseInheritanceTestPackage.eINSTANCE);
 	}
 
-	/**
-	 * Initializes all EPackages generated for this language and registers them with EPackage.Registry.INSTANCE
-	 */	
-	public void registerEPackages() {
-		if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/2009/tmf/xtext/BaseInheritanceTestLanguage")) {
-			EPackage baseInheritanceTest = EcoreUtil2.loadEPackage(
-				"classpath:/org/eclipse/xtext/grammarinheritance/baseInheritanceTest.ecore",
-				BaseInheritanceTestLanguageStandaloneSetup.class.getClassLoader());
-			if (baseInheritanceTest == null)
-				throw new IllegalStateException(
-					"Couldn't load EPackage from 'classpath:/org/eclipse/xtext/grammarinheritance/baseInheritanceTest.ecore'");
-			EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2009/tmf/xtext/BaseInheritanceTestLanguage", baseInheritanceTest);
-		}
+
+		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("baseinheritancetestlanguage", resourceFactory);
+		
+
+	//TODO registration of EValidators should be added here, too
+
 	}
-	
 }

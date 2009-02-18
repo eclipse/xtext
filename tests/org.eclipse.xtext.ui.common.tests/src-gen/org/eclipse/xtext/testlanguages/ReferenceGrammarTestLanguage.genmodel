@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="ASCII"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="../org.eclipse.xtext.ui.common.tests//src-gen" forceOverwrite="true" bundleManifest="false" complianceLevel="5.0" copyrightFields="false">
+  <genPackages prefix="ReferenceGrammar" basePackage="org.eclipse.xtext.testlanguages" disposableProviderFactory="true">
+    <ecorePackage href="http://eclipse.org/xtext/reference/ReferenceGrammar#/"/>
+    <genClasses>
+      <ecoreClass href="http://eclipse.org/xtext/reference/ReferenceGrammar#//Spielplatz"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="http://eclipse.org/xtext/reference/ReferenceGrammar#//Spielplatz/groesse"/>
+      </genFeatures>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="http://eclipse.org/xtext/reference/ReferenceGrammar#//Spielplatz/beschreibung"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="http://eclipse.org/xtext/reference/ReferenceGrammar#//Spielplatz/kinder"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="http://eclipse.org/xtext/reference/ReferenceGrammar#//Spielplatz/erzieher"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="http://eclipse.org/xtext/reference/ReferenceGrammar#//Spielplatz/spielzeuge"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="http://eclipse.org/xtext/reference/ReferenceGrammar#//Spielplatz/familie"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="http://eclipse.org/xtext/reference/ReferenceGrammar#//Person"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="http://eclipse.org/xtext/reference/ReferenceGrammar#//Person/name"/>
+      </genFeatures>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="http://eclipse.org/xtext/reference/ReferenceGrammar#//Person/age"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="http://eclipse.org/xtext/reference/ReferenceGrammar#//Kind"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="http://eclipse.org/xtext/reference/ReferenceGrammar#//Erwachsener"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="http://eclipse.org/xtext/reference/ReferenceGrammar#//Spielzeug"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="http://eclipse.org/xtext/reference/ReferenceGrammar#//Spielzeug/name"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="http://eclipse.org/xtext/reference/ReferenceGrammar#//Spielzeug/farbe"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="http://eclipse.org/xtext/reference/ReferenceGrammar#//Farbe"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="http://eclipse.org/xtext/reference/ReferenceGrammar#//Familie"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="http://eclipse.org/xtext/reference/ReferenceGrammar#//Familie/name"/>
+      </genFeatures>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="http://eclipse.org/xtext/reference/ReferenceGrammar#//Familie/mutter"/>
+      </genFeatures>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="http://eclipse.org/xtext/reference/ReferenceGrammar#//Familie/vater"/>
+      </genFeatures>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="http://eclipse.org/xtext/reference/ReferenceGrammar#//Familie/kinder"/>
+      </genFeatures>
+    </genClasses>
+  </genPackages>
+  <usedGenPackages href="platform:/resource/org.eclipse.xtext/model/xtext.genmodel#//xtext"/>
+  <usedGenPackages href="platform:/resource/org.eclipse.xtext.generator.tests/src/org/eclipse/xtext/grammarinheritance/ametamodel.genmodel#//ametamodel"/>
+</genmodel:GenModel>

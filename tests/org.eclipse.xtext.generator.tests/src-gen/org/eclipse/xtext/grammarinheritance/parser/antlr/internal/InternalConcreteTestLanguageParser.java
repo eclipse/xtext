@@ -54,7 +54,7 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
         
         @Override
         protected InputStream getTokenFile() {
-        	ClassLoader classLoader = InternalConcreteTestLanguageParser.class.getClassLoader();
+        	ClassLoader classLoader = getClass().getClassLoader();
         	return classLoader.getResourceAsStream("org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.tokens");
         }
         

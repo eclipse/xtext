@@ -29,7 +29,7 @@ public class CrossrefTest extends AbstractXtextTests {
 	public void testCrossRef() throws Exception {
 		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
 		EObject spielplatz = getModel("spielplatz 1 \"SpielplatzBeschreibung\" { kind(k1 0) kind(k2 0) erwachsener(v1 1) erwachsener(m1 1) }");
-		EObject familie = getASTFactory().create(spielplatz.eClass().getEPackage().getEClassifier("familie"));
+		EObject familie = getASTFactory().create(spielplatz.eClass().getEPackage().getEClassifier("Familie"));
 		getASTFactory().add(spielplatz, "familie", familie, null, null);
 
 		assertInScope(familie, familie.eClass().getEStructuralFeature("kinder"), "k1", "k2");

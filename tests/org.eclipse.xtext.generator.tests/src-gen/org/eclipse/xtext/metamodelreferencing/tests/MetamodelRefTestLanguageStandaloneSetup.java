@@ -1,5 +1,5 @@
+
 /*
-Generated with Xtext
 */
 package org.eclipse.xtext.metamodelreferencing.tests;
 
@@ -24,10 +24,8 @@ public class MetamodelRefTestLanguageStandaloneSetup implements ISetup {
 	public Injector createInjectorAndDoEMFRegistration() {
 		
 		org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
-		registerEPackages();
 		Injector injector = createInjector();
-		IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
-		registerResourceFactory(resourceFactory);
+		register(injector);
 		return injector;
 	}
 	
@@ -35,24 +33,17 @@ public class MetamodelRefTestLanguageStandaloneSetup implements ISetup {
 		return Guice.createInjector(new org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTestLanguageRuntimeModule());
 	}
 	
-	public void registerResourceFactory(IResourceFactory resourceFactory) {
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("metamodelreftestlanguage", resourceFactory);
-		
+	public void register(Injector injector) {
+	if (!EPackage.Registry.INSTANCE.containsKey("http://eclipse.org/xtext/tests/AnotherSimpleTest")) {
+		EPackage.Registry.INSTANCE.put("http://eclipse.org/xtext/tests/AnotherSimpleTest", org.eclipse.xtext.metamodelreferencing.tests.anotherSimpleTest.AnotherSimpleTestPackage.eINSTANCE);
 	}
 
-	/**
-	 * Initializes all EPackages generated for this language and registers them with EPackage.Registry.INSTANCE
-	 */	
-	public void registerEPackages() {
-		if (!EPackage.Registry.INSTANCE.containsKey("http://eclipse.org/xtext/tests/SimpleTest")) {
-			EPackage SimpleTest = EcoreUtil2.loadEPackage(
-				"classpath:/org/eclipse/xtext/metamodelreferencing/tests/SimpleTest.ecore",
-				MetamodelRefTestLanguageStandaloneSetup.class.getClassLoader());
-			if (SimpleTest == null)
-				throw new IllegalStateException(
-					"Couldn't load EPackage from 'classpath:/org/eclipse/xtext/metamodelreferencing/tests/SimpleTest.ecore'");
-			EPackage.Registry.INSTANCE.put("http://eclipse.org/xtext/tests/SimpleTest", SimpleTest);
-		}
+
+		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("metamodelreftestlanguage", resourceFactory);
+		
+
+	//TODO registration of EValidators should be added here, too
+
 	}
-	
 }

@@ -53,7 +53,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
         
         @Override
         protected InputStream getTokenFile() {
-        	ClassLoader classLoader = InternalDatatypeRulesTestLanguageParser.class.getClassLoader();
+        	ClassLoader classLoader = getClass().getClassLoader();
         	return classLoader.getResourceAsStream("org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.tokens");
         }
         

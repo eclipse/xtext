@@ -1,5 +1,5 @@
+
 /*
-Generated with Xtext
 */
 package org.eclipse.xtext.ui.integration;
 
@@ -24,10 +24,8 @@ public class TestLanguageStandaloneSetup implements ISetup {
 	public Injector createInjectorAndDoEMFRegistration() {
 		
 		org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
-		registerEPackages();
 		Injector injector = createInjector();
-		IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
-		registerResourceFactory(resourceFactory);
+		register(injector);
 		return injector;
 	}
 	
@@ -35,24 +33,17 @@ public class TestLanguageStandaloneSetup implements ISetup {
 		return Guice.createInjector(new org.eclipse.xtext.ui.integration.TestLanguageRuntimeModule());
 	}
 	
-	public void registerResourceFactory(IResourceFactory resourceFactory) {
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("xtext_integration", resourceFactory);
-		
+	public void register(Injector injector) {
+	if (!EPackage.Registry.INSTANCE.containsKey("http://foo")) {
+		EPackage.Registry.INSTANCE.put("http://foo", org.eclipse.xtext.ui.integration.foo.FooPackage.eINSTANCE);
 	}
 
-	/**
-	 * Initializes all EPackages generated for this language and registers them with EPackage.Registry.INSTANCE
-	 */	
-	public void registerEPackages() {
-		if (!EPackage.Registry.INSTANCE.containsKey("http://foo")) {
-			EPackage foo = EcoreUtil2.loadEPackage(
-				"classpath:/org/eclipse/xtext/ui/integration/foo.ecore",
-				TestLanguageStandaloneSetup.class.getClassLoader());
-			if (foo == null)
-				throw new IllegalStateException(
-					"Couldn't load EPackage from 'classpath:/org/eclipse/xtext/ui/integration/foo.ecore'");
-			EPackage.Registry.INSTANCE.put("http://foo", foo);
-		}
+
+		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("testlanguage", resourceFactory);
+		
+
+	//TODO registration of EValidators should be added here, too
+
 	}
-	
 }

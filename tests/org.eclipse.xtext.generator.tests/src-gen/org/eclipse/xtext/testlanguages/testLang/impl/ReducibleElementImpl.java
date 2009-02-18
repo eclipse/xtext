@@ -1,0 +1,46 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * $Id: ReducibleElementImpl.java,v 1.1 2009/02/18 19:44:59 sefftinge Exp $
+ */
+package org.eclipse.xtext.testlanguages.testLang.impl;
+
+import org.eclipse.emf.ecore.EClass;
+
+import org.eclipse.xtext.testlanguages.testLang.ReducibleElement;
+import org.eclipse.xtext.testlanguages.testLang.TestLangPackage;
+
+/**
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Reducible Element</b></em>'.
+ * <!-- end-user-doc -->
+ * <p>
+ * </p>
+ *
+ * @generated
+ */
+public class ReducibleElementImpl extends AbstractElementImpl implements ReducibleElement
+{
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  protected ReducibleElementImpl()
+  {
+    super();
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  protected EClass eStaticClass()
+  {
+    return TestLangPackage.Literals.REDUCIBLE_ELEMENT;
+  }
+
+} //ReducibleElementImpl

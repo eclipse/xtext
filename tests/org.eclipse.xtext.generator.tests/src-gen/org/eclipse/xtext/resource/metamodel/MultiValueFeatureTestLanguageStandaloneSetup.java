@@ -1,5 +1,5 @@
+
 /*
-Generated with Xtext
 */
 package org.eclipse.xtext.resource.metamodel;
 
@@ -24,10 +24,8 @@ public class MultiValueFeatureTestLanguageStandaloneSetup implements ISetup {
 	public Injector createInjectorAndDoEMFRegistration() {
 		
 		org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
-		registerEPackages();
 		Injector injector = createInjector();
-		IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
-		registerResourceFactory(resourceFactory);
+		register(injector);
 		return injector;
 	}
 	
@@ -35,24 +33,17 @@ public class MultiValueFeatureTestLanguageStandaloneSetup implements ISetup {
 		return Guice.createInjector(new org.eclipse.xtext.resource.metamodel.MultiValueFeatureTestLanguageRuntimeModule());
 	}
 	
-	public void registerResourceFactory(IResourceFactory resourceFactory) {
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("multivaluefeaturetestlanguage", resourceFactory);
-		
+	public void register(Injector injector) {
+	if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/2008/xtext/MultiValueFeatureTestLanguage")) {
+		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2008/xtext/MultiValueFeatureTestLanguage", org.eclipse.xtext.resource.metamodel.multiValueFeatureTestLanguage.MultiValueFeatureTestLanguagePackage.eINSTANCE);
 	}
 
-	/**
-	 * Initializes all EPackages generated for this language and registers them with EPackage.Registry.INSTANCE
-	 */	
-	public void registerEPackages() {
-		if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/2008/xtext/MultiValueFeatureTestLanguage")) {
-			EPackage MultiValueFeatureTestLanguage = EcoreUtil2.loadEPackage(
-				"classpath:/org/eclipse/xtext/resource/metamodel/MultiValueFeatureTestLanguage.ecore",
-				MultiValueFeatureTestLanguageStandaloneSetup.class.getClassLoader());
-			if (MultiValueFeatureTestLanguage == null)
-				throw new IllegalStateException(
-					"Couldn't load EPackage from 'classpath:/org/eclipse/xtext/resource/metamodel/MultiValueFeatureTestLanguage.ecore'");
-			EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2008/xtext/MultiValueFeatureTestLanguage", MultiValueFeatureTestLanguage);
-		}
+
+		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("multivaluefeaturetestlanguage", resourceFactory);
+		
+
+	//TODO registration of EValidators should be added here, too
+
 	}
-	
 }

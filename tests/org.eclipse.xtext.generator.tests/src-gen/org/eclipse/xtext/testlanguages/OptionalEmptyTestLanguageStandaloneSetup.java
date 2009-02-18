@@ -1,5 +1,5 @@
+
 /*
-Generated with Xtext
 */
 package org.eclipse.xtext.testlanguages;
 
@@ -24,10 +24,8 @@ public class OptionalEmptyTestLanguageStandaloneSetup implements ISetup {
 	public Injector createInjectorAndDoEMFRegistration() {
 		
 		org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
-		registerEPackages();
 		Injector injector = createInjector();
-		IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
-		registerResourceFactory(resourceFactory);
+		register(injector);
 		return injector;
 	}
 	
@@ -35,24 +33,17 @@ public class OptionalEmptyTestLanguageStandaloneSetup implements ISetup {
 		return Guice.createInjector(new org.eclipse.xtext.testlanguages.OptionalEmptyTestLanguageRuntimeModule());
 	}
 	
-	public void registerResourceFactory(IResourceFactory resourceFactory) {
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("optionalemptytestlanguage", resourceFactory);
-		
+	public void register(Injector injector) {
+	if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/2008/tmf/xtext/OptionalEmpty")) {
+		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2008/tmf/xtext/OptionalEmpty", org.eclipse.xtext.testlanguages.optionalEmpty.OptionalEmptyPackage.eINSTANCE);
 	}
 
-	/**
-	 * Initializes all EPackages generated for this language and registers them with EPackage.Registry.INSTANCE
-	 */	
-	public void registerEPackages() {
-		if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/2008/tmf/xtext/OptionalEmpty")) {
-			EPackage OptionalEmpty = EcoreUtil2.loadEPackage(
-				"classpath:/org/eclipse/xtext/testlanguages/OptionalEmpty.ecore",
-				OptionalEmptyTestLanguageStandaloneSetup.class.getClassLoader());
-			if (OptionalEmpty == null)
-				throw new IllegalStateException(
-					"Couldn't load EPackage from 'classpath:/org/eclipse/xtext/testlanguages/OptionalEmpty.ecore'");
-			EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2008/tmf/xtext/OptionalEmpty", OptionalEmpty);
-		}
+
+		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("optionalemptytestlanguage", resourceFactory);
+		
+
+	//TODO registration of EValidators should be added here, too
+
 	}
-	
 }

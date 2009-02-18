@@ -53,7 +53,7 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
         
         @Override
         protected InputStream getTokenFile() {
-        	ClassLoader classLoader = InternalDummyTestLanguageParser.class.getClassLoader();
+        	ClassLoader classLoader = getClass().getClassLoader();
         	return classLoader.getResourceAsStream("org/eclipse/xtext/dummy/parser/antlr/internal/InternalDummyTestLanguage.tokens");
         }
         

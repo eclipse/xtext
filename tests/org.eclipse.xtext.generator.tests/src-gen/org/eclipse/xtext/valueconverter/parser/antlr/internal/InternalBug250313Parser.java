@@ -53,7 +53,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
         
         @Override
         protected InputStream getTokenFile() {
-        	ClassLoader classLoader = InternalBug250313Parser.class.getClassLoader();
+        	ClassLoader classLoader = getClass().getClassLoader();
         	return classLoader.getResourceAsStream("org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.tokens");
         }
         

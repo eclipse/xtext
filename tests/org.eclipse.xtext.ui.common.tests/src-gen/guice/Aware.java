@@ -1,3 +1,4 @@
+
 package guice;
 
 import org.apache.log4j.Logger;
@@ -22,15 +23,15 @@ public class Aware implements IExecutableExtensionFactory, IExecutableExtension 
 			clazzName = (String) data;
 		}
 		else {
-			throw new IllegalArgumentException("couldn't hanlde passed data : "+data);
+			throw new IllegalArgumentException("couldn't handle passed data : "+data);
 		}
 	}
 	
 	public Object create() throws CoreException {
-		Bundle bundle = org.eclipse.xtext.parser.keywords.ui.internal.KeywordsTestLanguageActivator.getInstance().getBundle();
+		Bundle bundle = org.eclipse.xtext.parser.keywords.Activator.getInstance().getBundle();
 		try {
 			Class<?> class1 = bundle.loadClass(clazzName);
-			return org.eclipse.xtext.parser.keywords.ui.internal.KeywordsTestLanguageActivator.getInstance().getInjector().getInstance(class1);
+			return org.eclipse.xtext.parser.keywords.Activator.getInstance().getInjector().getInstance(class1);
 		}
 		catch (Exception e) {
 			log.error(e);
@@ -38,4 +39,3 @@ public class Aware implements IExecutableExtensionFactory, IExecutableExtension 
 		}
 	}
 }
- 

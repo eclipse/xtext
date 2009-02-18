@@ -7,7 +7,7 @@
  *
  *******************************************************************************/
  language org.eclipse.xtext.testlanguages.ActionTestLanguage
- generate ActionLang "http://www.eclipse.org/2008/tmf/xtext/ActionLang" 
+ generate actionLang "http://www.eclipse.org/2008/tmf/xtext/ActionLang" 
  
  Model:
  	(children+=Element)*;

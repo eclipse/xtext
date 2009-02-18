@@ -7,7 +7,7 @@
  *
  *******************************************************************************/
 language org.eclipse.xtext.testlanguages.LexerTestLanguage
-generate LexerLang "http://www.eclipse.org/2008/xtext/LexerLang"
+generate lexerLang "http://www.eclipse.org/2008/xtext/LexerLang"
 
 Model :
 	(children+=Element)*;

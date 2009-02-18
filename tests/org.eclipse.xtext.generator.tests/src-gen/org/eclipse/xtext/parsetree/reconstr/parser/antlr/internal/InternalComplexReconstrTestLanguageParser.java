@@ -53,7 +53,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
         
         @Override
         protected InputStream getTokenFile() {
-        	ClassLoader classLoader = InternalComplexReconstrTestLanguageParser.class.getClassLoader();
+        	ClassLoader classLoader = getClass().getClassLoader();
         	return classLoader.getResourceAsStream("org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.tokens");
         }
         

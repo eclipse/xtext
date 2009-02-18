@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<plugin>
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://www.eclipse.org/2009/tmf/xtext/KeywordsTestLanguage" 
+       class = "org.eclipse.xtext.parser.keywords.keywordsTestLanguage.KeywordsTestLanguagePackage"
+       genModel = "org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+  <extension
+		point="org.eclipse.xtend.typesystem.emf.checks">
+		<metaModel
+			nsURI="http://www.eclipse.org/2009/tmf/xtext/KeywordsTestLanguage">
+			<checkFile
+				path="org/eclipse/xtext/parser/keywords/KeywordsTestLanguageChecks.chk">
+			</checkFile>
+		</metaModel>
+	
+	</extension>
+
+
+
+<!-- adding resource factories -->
+
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="guice.Aware:org.eclipse.xtext.resource.XtextResourceFactory"
+			type="keywordstestlanguage">
+		</parser>
+	</extension>
+
+
+
+    <extension
+			point="org.eclipse.ui.editors">
+		<editor
+			class="guice.Aware:org.eclipse.xtext.ui.core.editor.XtextEditor"
+			contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+			default="true"
+			extensions="keywordstestlanguage"
+			id="org.eclipse.xtext.parser.keywords.KeywordsTestLanguage"
+			name="KeywordsTestLanguage Editor">
+		</editor>
+	</extension>
+	 <extension
+			point="org.eclipse.ui.preferencePages">
+		<page
+			class="guice.Aware:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
+			id="org.eclipse.xtext.parser.keywords.KeywordsTestLanguage"
+			name="KeywordsTestLanguage">
+			<keywordReference
+				id="org.eclipse.xtext.parser.keywords.ui.keyword_KeywordsTestLanguage">
+			</keywordReference>
+		</page>
+		<page
+			category="org.eclipse.xtext.parser.keywords.KeywordsTestLanguage"
+			class="guice.Aware:org.eclipse.xtext.ui.core.editor.preferences.EditorPreferencePage"
+			id="org.eclipse.xtext.parser.keywords.KeywordsTestLanguage.editor"
+			name="Editor">
+			<keywordReference 
+				id="org.eclipse.xtext.keyword.editor">
+			</keywordReference>
+		</page>
+	</extension>
+	<extension
+		point="org.eclipse.ui.keywords">
+		<keyword
+			id="org.eclipse.xtext.parser.keywords.ui.keyword_KeywordsTestLanguage"
+			label="KeywordsTestLanguage">
+		</keyword>
+		<keyword
+			id="org.eclipse.xtext.parser.keywords.KeywordsTestLanguage.tasktags"
+			label="Task Tags">
+		</keyword>
+	</extension>
+
+</plugin>

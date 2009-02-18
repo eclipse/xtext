@@ -53,7 +53,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
         
         @Override
         protected InputStream getTokenFile() {
-        	ClassLoader classLoader = InternalTransientValuesTestParser.class.getClassLoader();
+        	ClassLoader classLoader = getClass().getClassLoader();
         	return classLoader.getResourceAsStream("org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.tokens");
         }
         

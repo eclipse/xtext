@@ -1,0 +1,25 @@
+<workflow>
+
+	<component class="org.eclipse.xtext.generator.Generator">
+		<grammarURI value="${grammarURI}"/>
+		<pathRtProject value="${runtimeProject}"/>
+		<pathUiProject value="${uiProject}"/>
+		<fragment class="org.eclipse.xtext.generator.BasicRuntimeFragment"/>
+		<fragment class="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment">
+			<genModel value="platform:/resource/org.eclipse.xtext/model/xtext.genmodel"/>
+			<genModel value="platform:/resource/org.eclipse.xtext.generator.tests/src/org/eclipse/xtext/grammarinheritance/ametamodel.genmodel"/>
+			<genModel value="platform:/resource/org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/BaseInheritanceTestLanguage.genmodel"/>
+		</fragment>
+		<fragment class="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment"/>
+		<fragment class="org.eclipse.xtext.generator.parser.PackratParserFragment"/>
+		<fragment class="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment"/>
+		<fragment class="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment" 
+			fileExtensions="${file.extensions}"/>
+		<fragment class="org.eclipse.xtext.generator.validator.CheckFragment"/>
+		<fragment class="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment"/>
+		<fragment class="org.eclipse.xtext.generator.scoping.XtendScopingFragment"/>
+		<fragment class="org.eclipse.xtext.ui.generator.BasicUiGeneratorFragment"
+			  fileExtensions="${file.extensions}"/>
+		<fragment class="org.eclipse.xtext.ui.generator.contentAssist.XtendBasedContentAssistFragment"/>
+	</component>
+</workflow>

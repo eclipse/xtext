@@ -54,7 +54,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
         
         @Override
         protected InputStream getTokenFile() {
-        	ClassLoader classLoader = InternalEpatchTestLanguageParser.class.getClassLoader();
+        	ClassLoader classLoader = getClass().getClassLoader();
         	return classLoader.getResourceAsStream("org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.tokens");
         }
         

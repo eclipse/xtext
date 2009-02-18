@@ -1,5 +1,5 @@
+
 /*
-Generated with Xtext
 */
 package org.eclipse.xtext.crossrefs;
 
@@ -24,10 +24,8 @@ public class ImportUriTestLanguageStandaloneSetup implements ISetup {
 	public Injector createInjectorAndDoEMFRegistration() {
 		
 		org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
-		registerEPackages();
 		Injector injector = createInjector();
-		IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
-		registerResourceFactory(resourceFactory);
+		register(injector);
 		return injector;
 	}
 	
@@ -35,24 +33,17 @@ public class ImportUriTestLanguageStandaloneSetup implements ISetup {
 		return Guice.createInjector(new org.eclipse.xtext.crossrefs.ImportUriTestLanguageRuntimeModule());
 	}
 	
-	public void registerResourceFactory(IResourceFactory resourceFactory) {
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("importuritestlanguage", resourceFactory);
-		
+	public void register(Injector injector) {
+	if (!EPackage.Registry.INSTANCE.containsKey("http://eclipse.org/xtext/importUriTestLanguage")) {
+		EPackage.Registry.INSTANCE.put("http://eclipse.org/xtext/importUriTestLanguage", org.eclipse.xtext.crossrefs.importedURI.ImportedURIPackage.eINSTANCE);
 	}
 
-	/**
-	 * Initializes all EPackages generated for this language and registers them with EPackage.Registry.INSTANCE
-	 */	
-	public void registerEPackages() {
-		if (!EPackage.Registry.INSTANCE.containsKey("http://eclipse.org/xtext/importUriTestLanguage")) {
-			EPackage importedURI = EcoreUtil2.loadEPackage(
-				"classpath:/org/eclipse/xtext/crossrefs/importedURI.ecore",
-				ImportUriTestLanguageStandaloneSetup.class.getClassLoader());
-			if (importedURI == null)
-				throw new IllegalStateException(
-					"Couldn't load EPackage from 'classpath:/org/eclipse/xtext/crossrefs/importedURI.ecore'");
-			EPackage.Registry.INSTANCE.put("http://eclipse.org/xtext/importUriTestLanguage", importedURI);
-		}
+
+		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("importuritestlanguage", resourceFactory);
+		
+
+	//TODO registration of EValidators should be added here, too
+
 	}
-	
 }

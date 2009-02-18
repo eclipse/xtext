@@ -53,7 +53,7 @@ public class InternalMultiGenMMTestLanguageParser extends AbstractInternalAntlrP
         
         @Override
         protected InputStream getTokenFile() {
-        	ClassLoader classLoader = InternalMultiGenMMTestLanguageParser.class.getClassLoader();
+        	ClassLoader classLoader = getClass().getClassLoader();
         	return classLoader.getResourceAsStream("org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMultiGenMMTestLanguage.tokens");
         }
         

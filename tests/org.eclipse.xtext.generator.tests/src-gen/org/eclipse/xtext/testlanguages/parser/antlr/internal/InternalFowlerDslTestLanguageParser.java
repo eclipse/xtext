@@ -53,7 +53,7 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
         
         @Override
         protected InputStream getTokenFile() {
-        	ClassLoader classLoader = InternalFowlerDslTestLanguageParser.class.getClassLoader();
+        	ClassLoader classLoader = getClass().getClassLoader();
         	return classLoader.getResourceAsStream("org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.tokens");
         }
         
