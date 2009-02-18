@@ -10,7 +10,15 @@
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
 			class="guice.Aware:org.eclipse.xtext.resource.XtextResourceFactory"
-			type="dmodel">
+			type="xtext">
+		</parser>
+	</extension>
+
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="guice.Aware:org.eclipse.xtext.resource.XtextResourceFactory"
+			type="xtext2">
 		</parser>
 	</extension>
 
@@ -22,7 +30,7 @@
 			class="guice.Aware:org.eclipse.xtext.ui.core.editor.XtextEditor"
 			contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
 			default="true"
-			extensions="dmodel"
+			extensions="xtext,xtext2"
 			id="org.eclipse.xtext.Xtext"
 			name="Xtext Editor">
 		</editor>
