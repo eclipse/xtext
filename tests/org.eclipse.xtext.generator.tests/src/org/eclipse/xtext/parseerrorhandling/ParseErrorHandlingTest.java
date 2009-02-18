@@ -52,20 +52,20 @@ public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 	
 	public void testParseError2() throws Exception {
 		Object object = getModel("language a import 'holla' foo returns y::Z : name=foo #;");
-		assertWithXtend("'foo'", "rules.first().eAllContents.typeSelect(XtextTest::RuleCall).first().rule.name", object);
+		assertWithXtend("'foo'", "rules.first().eAllContents.typeSelect(xtextTest::RuleCall).first().rule.name", object);
 	}
 	
 	public void testParseError3() throws Exception {
 		Object object = getModel("language a import 'holla' foo returns y::Z : name=foo #############");
-		assertWithXtend("'foo'", "rules.first().eAllContents.typeSelect(XtextTest::RuleCall).first().rule.name", object);
+		assertWithXtend("'foo'", "rules.first().eAllContents.typeSelect(xtextTest::RuleCall).first().rule.name", object);
 	}
 	
 	public void testParseError4() throws Exception {
 		Object object = getModel("language a import 'holla' foo returns y::Z : name=foo # 'foo'; bar : 'stuff'");
 		//logger.debug(errors);
-		assertWithXtend("'foo'", "rules.first().eAllContents.typeSelect(XtextTest::RuleCall).first().rule.name", object);
-		assertWithXtend("null", "rules.first().eAllContents.typeSelect(XtextTest::Keyword).first().name", object);
-		assertWithXtend("'stuff'", "rules.get(1).eAllContents.typeSelect(XtextTest::Keyword).first().value", object);
+		assertWithXtend("'foo'", "rules.first().eAllContents.typeSelect(xtextTest::RuleCall).first().rule.name", object);
+		assertWithXtend("null", "rules.first().eAllContents.typeSelect(xtextTest::Keyword).first().name", object);
+		assertWithXtend("'stuff'", "rules.get(1).eAllContents.typeSelect(xtextTest::Keyword).first().value", object);
 	}
 	
 	

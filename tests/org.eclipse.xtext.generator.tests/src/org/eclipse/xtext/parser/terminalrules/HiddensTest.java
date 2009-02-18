@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.parser.terminalrules.hiddenTerminalsTestLanguage.HiddenTerminalsTestLanguagePackage;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 /**
@@ -37,7 +38,7 @@ public class HiddensTest extends AbstractGeneratorTest {
 	@Override
 	protected void setUp() throws Exception {
 		with(HiddenTerminalsTestLanguageStandaloneSetup.class);
-		EPackage pack = getMetamodelAccess().getGeneratedEPackages()[0];
+		EPackage pack = HiddenTerminalsTestLanguagePackage.eINSTANCE;
 		withoutHiddens = (EClass) pack.getEClassifier("WithoutHiddens");
 		withHiddens = (EClass) pack.getEClassifier("WithHiddens");
 		datatypeHiddens = (EClass) pack.getEClassifier("DatatypeHiddens");

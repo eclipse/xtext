@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.parser.datatyperules.datatypeRulesTestLanguage.DatatypeRulesTestLanguagePackage;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 /**
@@ -34,7 +35,7 @@ public class SerializationTest extends AbstractGeneratorTest {
 	protected void setUp() throws Exception {
 		super.setUp();
 		with(DatatypeRulesTestLanguageStandaloneSetup.class);
-		pack = getMetamodelAccess().getGeneratedEPackages()[0];
+		pack = DatatypeRulesTestLanguagePackage.eINSTANCE;
 		factory = pack.getEFactoryInstance();
 		compositeModelClass = (EClass) pack.getEClassifier("CompositeModel");
 		modelClass = (EClass) pack.getEClassifier("Model");
