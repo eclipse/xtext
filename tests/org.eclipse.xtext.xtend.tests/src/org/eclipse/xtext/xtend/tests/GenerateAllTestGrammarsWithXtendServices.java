@@ -1,10 +1,10 @@
 /*******************************************************************************
- * __  ___            _   
+ * __  ___            _
  * \ \/ / |_ _____  __ |_
  *  \  /| __/ _ \ \/ / __|
  *  /  \| |_  __/>  <| |_
  * /_/\_\\__\___/_/\_\\__|
- * 
+ *
  * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -28,17 +28,19 @@ import org.eclipse.xtext.testlanguages.ContentAssistTestLanguage;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage;
 import org.eclipse.xtext.testlanguages.TreeTestLanguage;
 
+import com.google.inject.Injector;
+
 /**
  * Generates all required testgrammars with xtend services for this test
  * project.
- * 
+ *
  * This code was copied from class
  * <code>org.eclipse.xtext.ui.common.GenerateAllTestGrammarsWithUiConfig</code>
  * within project 'org.eclipse.xtext.ui.common.tests'. <p/>
- * 
+ *
  * The duplication of this class was required because we need a language setup
  * with xtend services. services.
- * 
+ *
  * @author Michael Clay - Initial contribution and API
  * @author Jan Koehnlein
  */
@@ -65,12 +67,12 @@ public class GenerateAllTestGrammarsWithXtendServices {
 			String uiPath = (args.length > 0) ? args[0] : UI_PATH;
 			String runtimePath = ((args.length > 0) ? args[0] + "/" : "") + RUNTIME_PATH;
 
-			XtextStandaloneSetup.doSetup();
+			Injector injector = new XtextStandaloneSetup().createInjectorAndDoEMFRegistration();
 			GeneratorFacade.cleanFolder(uiPath + "/src-gen");
 			for (Class<?> clazz : testClasses) {
 				String filename = GenerateAllTestGrammars.getGrammarFileNameAsURI(clazz);
 				logger.info("loading " + filename);
-				ResourceSetImpl rs = new XtextResourceSet();
+				ResourceSetImpl rs = injector.getInstance(XtextResourceSet.class);
 				URI uri = URI.createURI(filename);
 				Resource resource = rs.createResource(uri);
 				resource.load(null);

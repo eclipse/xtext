@@ -31,6 +31,9 @@ import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.editors.text.FileDocumentProvider;
 import org.eclipse.xtext.resource.XtextResource;
 
+import com.google.inject.Inject;
+import com.google.inject.Provider;
+
 /**
  * @author Peter Friese - Initial contribution and API
  * @author Sven Efftinge
@@ -38,6 +41,9 @@ import org.eclipse.xtext.resource.XtextResource;
 public class XtextDocumentProvider extends FileDocumentProvider {
 
 	private static final Logger log = Logger.getLogger(XtextDocumentProvider.class);
+
+	@Inject
+	private Provider<XtextDocument> document;
 
 	/**
 	 * @author Sven Efftinge - Initial contribution and API
@@ -143,7 +149,7 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 
 	@Override
 	protected IDocument createEmptyDocument() {
-		return new XtextDocument();
+		return document.get();
 	}
 
 	@Override

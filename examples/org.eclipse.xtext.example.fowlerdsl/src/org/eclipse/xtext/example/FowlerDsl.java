@@ -15,11 +15,13 @@ import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
+import com.google.inject.Injector;
+
 /**
  * Run this class in order to generate the MyDsl grammar.
  */
 public class FowlerDsl {
-	private Logger log = Logger.getLogger(FowlerDsl.class);
+	private final Logger log = Logger.getLogger(FowlerDsl.class);
 
 	private static final String RUNTIME_PATH = ".";
 	private static final String UI_PATH = "../org.eclipse.xtext.example.fowlerdsl.ui";
@@ -35,14 +37,14 @@ public class FowlerDsl {
 	}
 
 	public void generate() throws IOException {
-		XtextStandaloneSetup.doSetup();
+		Injector injector = new XtextStandaloneSetup().createInjectorAndDoEMFRegistration();
 
 		GeneratorFacade.cleanFolder(runtimePath + "/src-gen");
 		GeneratorFacade.cleanFolder(uiPath + "/src-gen");
 
 		String classpathUri = "classpath:/org/eclipse/xtext/example/FowlerDsl.xtext";
 		log.info("loading " + classpathUri);
-		ResourceSet rs = new XtextResourceSet();
+		ResourceSet rs = injector.getInstance(XtextResourceSet.class);
 		Resource resource = rs.createResource(new ClassloaderClasspathUriResolver().resolve(null, URI
 				.createURI(classpathUri)));
 		resource.load(null);

@@ -40,7 +40,7 @@ public abstract class Bug250313 extends AbstractGeneratorTest {
 				return Guice.createInjector(new MyBug250313RuntimeModule(Bug250313.this));
 			}
 		});
-		helper = new ParserTestHelper(getResourceFactory(), getParserUnderTest());
+		helper = new ParserTestHelper(getResourceFactory(), getParserUnderTest(), get(Keys.RESOURCE_SET_KEY));
 	}
 
 	@Override

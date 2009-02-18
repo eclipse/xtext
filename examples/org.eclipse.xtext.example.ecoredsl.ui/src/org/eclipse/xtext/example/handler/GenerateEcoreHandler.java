@@ -31,16 +31,22 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.core.util.JdtClasspathUriResolver;
 
+import com.google.inject.Inject;
+import com.google.inject.Provider;
+
 /**
  * Execution handler used to generate an ecore model file based on an existing ecore dsl file.
- * 
+ *
  * @author Michael Clay - Initial contribution and API
- * 
+ *
  */
 public class GenerateEcoreHandler extends AbstractHandler {
 	// logger available to subclasses
 	protected final Logger logger = Logger.getLogger(getClass());
-	
+
+	@Inject
+	private Provider<XtextResourceSet> resourceSetProvider;
+
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		IFile ecoreDslFile = getEcoreDslFileName(event);
 		EPackage ePackage  = loadRootEPackage(ecoreDslFile);
@@ -61,17 +67,17 @@ public class GenerateEcoreHandler extends AbstractHandler {
 	}
 
 	private EPackage loadRootEPackage(IFile ecoreDslFile) {
-		XtextResourceSet xtextResourceSet = new XtextResourceSet();
+		XtextResourceSet xtextResourceSet = resourceSetProvider.get();
 		xtextResourceSet.setClasspathUriResolver(new JdtClasspathUriResolver());
 		xtextResourceSet.setClasspathURIContext(JavaCore.create(ecoreDslFile.getProject()));
 		Resource ecoreResource = xtextResourceSet.getResource(URI.createFileURI(ecoreDslFile.getLocation().toFile()
 				.getAbsolutePath()), true);
-		EObject ecoreDsl = (EObject) ecoreResource.getContents().get(0);
+		EObject ecoreDsl = ecoreResource.getContents().get(0);
 		EList<EReference> references = ecoreDsl.eClass().getEReferences();
 		EPackage ePackage = (EPackage) ecoreDsl.eGet(references.get(1));
 		return ePackage;
 	}
-	
+
 	private void createAndSaveNewEcoreResource(IFile ecoreDslFile, EPackage ePackage) throws ExecutionException {
 		Resource ecoreModelResource = newEcoreResource(ecoreDslFile);
 		ecoreModelResource.getContents().add(ePackage);

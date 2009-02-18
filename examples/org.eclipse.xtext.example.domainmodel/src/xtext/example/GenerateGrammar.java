@@ -12,11 +12,13 @@ import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
+import com.google.inject.Injector;
+
 /**
  * Run this class in order to generate the domain model grammar.
  */
 public class  GenerateGrammar {
-	private Logger log = Logger.getLogger( GenerateGrammar.class);
+	private final Logger log = Logger.getLogger(GenerateGrammar.class);
 
 	private static final String RUNTIME_PATH = ".";
 	private static final String UI_PATH = "../org.eclipse.xtext.example.domainmodel.ui";
@@ -31,16 +33,16 @@ public class  GenerateGrammar {
 			uiPath = args[0] + "/" + UI_PATH;
 		}
 	}
-	
+
 	public void generate() throws IOException {
-		XtextStandaloneSetup.doSetup();
+		Injector injector = new XtextStandaloneSetup().createInjectorAndDoEMFRegistration();
 
 		GeneratorFacade.cleanFolder(runtimePath + "/src-gen");
 		GeneratorFacade.cleanFolder(uiPath + "/src-gen");
 
 		String classpathUri = "classpath:/xtext/example/Domainmodel.xtext";
 		log.info("loading " + classpathUri);
-		ResourceSet rs = new XtextResourceSet();
+		ResourceSet rs = injector.getInstance(XtextResourceSet.class);
 		Resource resource = rs
 				.createResource(new ClassloaderClasspathUriResolver().resolve(
 						null, URI.createURI(classpathUri)));

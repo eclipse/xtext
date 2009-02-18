@@ -69,7 +69,7 @@ public class XtextGrammarSerializationTest extends AbstractGeneratorTest {
 	}
 
 	public void _testXtestSerializationSelfTest() throws Exception {
-		Resource res = new XtextResourceSet().createResource(URI
+		Resource res = get(XtextResourceSet.class).createResource(URI
 				.createURI("myfile.xtext"));
 		res.getContents().add(get(XtextGrammarAccess.class).getGrammar());
 		OutputStream outputStream = new ByteArrayOutputStream();
