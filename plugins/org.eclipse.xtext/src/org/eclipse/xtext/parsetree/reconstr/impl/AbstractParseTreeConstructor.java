@@ -20,8 +20,13 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
@@ -301,6 +306,8 @@ public abstract class AbstractParseTreeConstructor implements
 
 	public abstract class ActionToken extends AbstractToken implements
 			IActionToken {
+		@Override
+		public abstract Action getGrammarElement();
 
 		public ActionToken(IInstanceDescription curr, AbstractToken pred,
 				boolean many, boolean required) {
@@ -311,6 +318,9 @@ public abstract class AbstractParseTreeConstructor implements
 
 	public abstract class AlternativesToken extends AbstractToken implements
 			IAlternativeesToken {
+		
+		@Override
+		public abstract Alternatives getGrammarElement();
 
 		protected boolean first = true;
 
@@ -394,6 +404,9 @@ public abstract class AbstractParseTreeConstructor implements
 
 	public abstract class GroupToken extends AbstractToken implements
 			IGroupToken {
+		
+		@Override
+		public abstract Group getGrammarElement();
 
 		protected AbstractToken last;
 
@@ -410,6 +423,9 @@ public abstract class AbstractParseTreeConstructor implements
 
 	public abstract class KeywordToken extends AbstractToken implements
 			IKeywordToken {
+		
+		@Override
+		public abstract Keyword getGrammarElement();
 
 		public KeywordToken(IInstanceDescription curr, AbstractToken pred,
 				boolean many, boolean required) {
@@ -424,6 +440,9 @@ public abstract class AbstractParseTreeConstructor implements
 
 	public abstract class RuleCallToken extends AbstractToken implements
 			IRuleCallToken {
+		
+		@Override
+		public abstract RuleCall getGrammarElement();
 
 		public RuleCallToken(IInstanceDescription curr, AbstractToken pred,
 				boolean many, boolean required) {
