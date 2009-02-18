@@ -37,7 +37,7 @@ public class NodeModelTest extends AbstractGeneratorTest {
 	public void testNavigabilityNode2Ast() throws Exception {
 		EObject object = getModel(MODEL);
 		EList<Adapter> adapters = object.eAdapters();
-		assertEquals(1 /* nodeAdapter */ + 1 /* clearer */, adapters.size());
+		assertEquals(1 /* nodeAdapter */, adapters.size());
 		NodeAdapter adapter = (NodeAdapter) adapters.get(0);
 		CompositeNode rootNode = adapter.getParserNode();
 		assertTrue(rootNode.eContainer() == null);
@@ -68,7 +68,7 @@ public class NodeModelTest extends AbstractGeneratorTest {
 
 	private void checkNavigabilityAst2Node(EObject object) {
 		EList<Adapter> adapters = object.eAdapters();
-		assertEquals(1 /* nodeAdapter */ + 1 /* clearer */, adapters.size());
+		assertEquals(1 /* nodeAdapter */, adapters.size());
 		NodeAdapter adapter = (NodeAdapter) adapters.get(0);
 		AbstractNode parsetreeNode = adapter.getParserNode();
 		assertEquals(object, parsetreeNode.getElement());
@@ -78,7 +78,7 @@ public class NodeModelTest extends AbstractGeneratorTest {
 		EObject astElement = node.getElement();
 		if (astElement != null) {
 			EList<Adapter> adapters = astElement.eAdapters();
-			assertEquals(1 /* nodeAdapter */ + 1 /* clearer */, adapters.size());
+			assertEquals(1 /* nodeAdapter */, adapters.size());
 			NodeAdapter adapter = (NodeAdapter) adapters.get(0);
 			assertEquals(node, adapter.getParserNode());
 		} else {
