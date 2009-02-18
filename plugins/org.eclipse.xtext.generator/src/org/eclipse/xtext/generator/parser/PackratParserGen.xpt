@@ -1,0 +1,317 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT xtext»
+«IMPORT xtextgen»
+
+«EXTENSION org::eclipse::xtext::GrammarUtil»
+«EXTENSION org::eclipse::xtext::generator::Naming»
+«EXTENSION org::eclipse::xtext::generator::parser::PackratParserGen»
+«EXTENSION org::eclipse::xtext::generator::grammarAccess::GrammarAccess»
+
+«DEFINE root FOR Grammar»
+	«EXPAND NonTerminalConsumer::root»
+	«EXPAND TerminalConsumer::root»
+	«EXPAND parser»
+	«EXPAND parserConfiguration»
+	«EXPAND delimiters»
+«ENDDEFINE»
+
+«DEFINE parser FOR Grammar»
+«FILE getParserClassName().asPath()+".java" SRC_GEN-»
+/*
+«fileHeader()»
+*/
+package «getParserClassName().toJavaPackage()»;
+
+import com.google.inject.Inject;
+
+import org.eclipse.xtext.parser.packrat.AbstractPackratParser;
+import org.eclipse.xtext.parser.packrat.IParseResultFactory;
+import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration.IInternalParserConfiguration;
+
+import «gaFQName()»;
+
+public class «getParserClassName().toSimpleName()» extends AbstractPackratParser {
+	
+	@Inject
+	public «getParserClassName().toSimpleName()»(IParseResultFactory parseResultFactory, «gaSimpleName()» grammarAccess) {
+		super(parseResultFactory, grammarAccess);
+	}
+	
+	@Override
+	protected «getParserConfigurationClassName()» createParserConfiguration(IInternalParserConfiguration configuration) {
+		return new «getParserConfigurationClassName()»(configuration, getGrammarAccess());
+	}
+	
+	@Override
+	protected «gaSimpleName()» getGrammarAccess() {
+		return («gaSimpleName()»)super.getGrammarAccess();
+	}
+	
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE parserConfiguration FOR Grammar»
+«FILE getParserConfigurationClassName().asPath()+".java" SRC_GEN-»
+/*
+«fileHeader()»
+*/
+package «getParserConfigurationClassName().toJavaPackage()»;
+
+import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
+import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
+
+import «gaFQName()»;
+
+«LET getSuperGrammar() AS superGrammar-»
+«IF superGrammar != null-»
+import «superGrammar.getNamespace()».parser.packrat.«superGrammar.getName().toFirstUpper().replaceAll("\\s","_")»ParserConfiguration; 
+
+«ENDIF-»
+«ENDLET-»
+«FOREACH allRules() AS rule-»
+import «rule.containingGrammar().getNamespace()».parser.packrat.consumers.«rule.consumerClassName()»;
+«ENDFOREACH-»
+
+@SuppressWarnings("unused")
+public class «getParserConfigurationClassName().toSimpleName()» extends AbstractParserConfiguration {
+
+«LET getSuperGrammar() AS superGrammar-»
+«IF superGrammar != null-»
+	private «superGrammar.getName().replaceAll("\\s","_").toFirstUpper()»ParserConfiguration «superGrammar.getName().replaceAll("\\s","_").toFirstLower()»Configuration; 
+
+«ENDIF-»
+«ENDLET-»
+«FOREACH rules AS rule-»
+    private «rule.consumerClassName()» «rule.consumerFieldName()»;
+«ENDFOREACH-»
+
+	private «gaSimpleName()» grammarAccess;
+
+	public «getParserConfigurationClassName().toSimpleName()»(IInternalParserConfiguration configuration, «gaSimpleName()» grammarAccess) {
+		super(configuration);
+		this.grammarAccess = grammarAccess;
+«LET getSuperGrammar() AS superGrammar-»
+«IF superGrammar != null-»
+		this.«superGrammar.getName().replaceAll("\\s","_").toFirstLower()»Configuration = new «superGrammar.getName().replaceAll("\\s","_").toFirstUpper()»ParserConfiguration(configuration, null);
+«ENDIF-»
+«ENDLET-»
+	}
+
+«IF !allParserRules().isEmpty-»
+	public «allParserRules().first().consumerClassName()» getRootConsumer() {
+		return «allParserRules().first().consumerFieldName()»;
+«ELSE-»
+	public INonTerminalConsumer getRootConsumer() {
+		return null;
+«ENDIF-»
+	} 
+
+	public void createNonTerminalConsumers() {
+«LET getSuperGrammar() AS superGrammar-»
+«IF superGrammar != null-»
+		get«superGrammar.getName().replaceAll("\\s","_").toFirstUpper()»Configuration().createNonTerminalConsumers();
+«ENDIF-»
+«ENDLET-»
+«FOREACH rules.typeSelect(ParserRule).select(e|!e.terminal) AS rule-»
+		«rule.consumerFieldName()» = new «rule.consumerClassName()»(
+«IF rule.definesHiddenTokens-»
+    		this, new ITerminalConsumer[]{ «FOREACH rule.hiddenTokens AS hidden SEPARATOR ", "»«hidden.consumerGetterName()»()«ENDFOREACH-» }
+«ELSE-»
+    		this, null
+«ENDIF-»
+    	);
+«ENDFOREACH-»
+	}
+	
+	public void createTerminalConsumers() {
+«LET getSuperGrammar() AS superGrammar-»
+«IF superGrammar != null-»
+		get«superGrammar.getName().replaceAll("\\s","_").toFirstUpper()»Configuration().createTerminalConsumers();
+«ENDIF-»
+«ENDLET-»
+«FOREACH rules.typeSelect(ParserRule).select(e|e.terminal) AS rule-»
+		«rule.consumerFieldName()» = new «rule.consumerClassName()»(this);
+«ENDFOREACH-»
+«FOREACH rules.typeSelect(LexerRule) AS rule-»
+		«rule.consumerFieldName()» = new «rule.consumerClassName()»(this);
+«ENDFOREACH-»
+	}
+	
+	public void configureConsumers() {
+		if (grammarAccess == null)
+			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+«FOREACH allRules() AS rule-»
+		«rule.consumerGetterName()»().setRule(grammarAccess.«rule.gaRuleAccessor()»);
+«ENDFOREACH»
+
+«FOREACH allParserRules() AS rule-»
+«LET rule.allCalledRules() AS calledRules-»
+«IF !calledRules.isEmpty-»
+«FOREACH calledRules AS calledRule-»
+«IF rule.consumerGetterName() != "getRootConsumer"-»
+«IF calledRule.consumerGetterName() != "getRootConsumer"-»
+		«rule.consumerGetterName()»().«calledRule.consumerSetterName()»(«calledRule.consumerGetterName()»());
+«ELSE-»
+		«rule.consumerGetterName()»().«calledRule.consumerSetterName()»(getRootConsumer$());
+«ENDIF-»
+«ELSE-»
+«IF calledRule.consumerGetterName() != "getRootConsumer"-»
+		getRootConsumer$().«calledRule.consumerSetterName()»(«calledRule.consumerGetterName()»());
+«ELSE-»
+		getRootConsumer$().«calledRule.consumerSetterName()»(getRootConsumer$());
+«ENDIF-»
+«ENDIF-»
+«ENDFOREACH-»
+
+«ENDIF-»
+«ENDLET-»
+«ENDFOREACH-»
+«EXPAND setDelimiters(this) FOREACH allParserRules().select(e|!e.terminal)-»
+	}
+	
+«LET getSuperGrammar() AS superGrammar-»
+«IF superGrammar != null-»
+	// TODO collect superGrammars transitive
+	public «superGrammar.getName().replaceAll("\\s","_").toFirstUpper()»ParserConfiguration get«superGrammar.getName().replaceAll("\\s","_").toFirstUpper()»Configuration() {
+		return «superGrammar.getName().replaceAll("\\s","_").toFirstLower()»Configuration;
+	} 
+	
+«ENDIF-»
+«FOREACH allRules() AS rule-»
+«IF rule.containingGrammar() == this-»
+«IF rule.consumerGetterName() != "getRootConsumer"-»
+    public «rule.consumerClassName()» «rule.consumerGetterName()»() {
+    	return «rule.consumerFieldName()»;
+    }
+«ELSE-»
+	public «rule.consumerClassName()» getRootConsumer$() {
+    	return «rule.consumerFieldName()»;
+    }
+«ENDIF-»
+«ELSE-»
+«IF rule.consumerGetterName() != "getRootConsumer"-»
+    public «rule.consumerClassName()» «rule.consumerGetterName()»() {
+    	return get«superGrammar.getName().replaceAll("\\s","_").toFirstUpper()»Configuration().«rule.consumerGetterName()»();
+    }
+«ELSE-»
+	public «rule.consumerClassName()» getRootConsumer$() {
+    	return get«superGrammar.getName().replaceAll("\\s","_").toFirstUpper()»Configuration().getRootConsumer$();
+    }
+«ENDIF-»
+«ENDIF-»
+
+«ENDFOREACH-»
+«ENDLET-»
+
+«LET getSuperGrammar() AS superGrammar-»
+«IF definesHiddenTokens || superGrammar != null-»
+	@Override
+	public ITerminalConsumer[] getInitialHiddenTerminals() {
+«IF definesHiddenTokens-»
+«IF hiddenTokens.isEmpty-»
+		return EMPTY_HIDDENS;
+«ELSE-»
+		return new ITerminalConsumer[]{ «FOREACH hiddenTokens AS hidden SEPARATOR ", "»«hidden.consumerGetterName()»()«ENDFOREACH-» };
+«ENDIF-»
+«ELSE-»
+		return get«superGrammar.getName().replaceAll("\\s","_").toFirstUpper()»Configuration().getInitialHiddenTerminals();
+«ENDIF-»
+	}
+	
+«ENDIF-»
+«ENDLET-»
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE setDelimiters(Grammar grammar) FOR ParserRule-»
+«EXPAND setDelimiters(this, grammar) FOREACH allDelimited()-»
+«ENDDEFINE»
+
+«DEFINE setDelimiters(ParserRule rule, Grammar grammar) FOR AbstractElement-»
+		«rule.consumerGetterName()»().set«delimiterFieldName().toFirstUpper()»(«getDelimiterClassName(grammar)».«sameConflicts(grammar).globalDelimiterFieldName()»);
+«ENDDEFINE»
+
+«DEFINE delimiters FOR Grammar»
+«FILE getDelimiterClassName().asPath()+".java" SRC_GEN-»
+/*
+«fileHeader()»
+*/
+package «getDelimiterClassName().toJavaPackage()»;
+
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
+import org.eclipse.xtext.parser.packrat.matching.SetBasedKeywordMatcher;
+
+@SuppressWarnings("unused")
+public final class «getDelimiterClassName().toSimpleName()» {
+
+	private «getDelimiterClassName().toSimpleName()»() {
+		throw new UnsupportedOperationException("Utility classes may not be initialized");
+	}
+	
+	«EXPAND createDelimiters(this) FOREACH allParserRules().select(e|!e.terminal).allDelimited()-»
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE createDelimiters(Grammar grammar) FOR AbstractElement-»
+«ERROR "createDelimiters for " + metaType.name»
+«ENDDEFINE»
+
+«DEFINE createDelimitersImpl(Grammar grammar, AbstractRule rule) FOR AbstractElement-»
+«LET sameConflicts(grammar) AS first-»
+«IF first == this-»
+«LET conflictingKeywords(grammar) AS conflicting-»
+«IF !conflicting.isEmpty-»
+	public static ISequenceMatcher «globalDelimiterFieldName()» = new SetBasedKeywordMatcher(
+		«FOREACH conflicting AS c SEPARATOR ", "»"«c»"«ENDFOREACH»);
+«ELSE-»
+	public static ISequenceMatcher «globalDelimiterFieldName()» = ISequenceMatcher.Factory.nullMatcher();
+«ENDIF-»
+
+«ENDLET-»
+«ENDIF-»
+«ENDLET-»
+«ENDDEFINE»
+
+«DEFINE createDelimiters(Grammar grammar) FOR CrossReference-»
+«EXPAND createDelimitersImpl(grammar, rule) FOR this-»
+«ENDDEFINE»
+
+«DEFINE createDelimiters(Grammar grammar) FOR RuleCall-»
+«EXPAND createDelimitersImpl(grammar, rule) FOR this-»
+«ENDDEFINE»
+
+«DEFINE createDelimiters(Grammar grammar) FOR Keyword-»
+«LET sameConflicts(grammar) AS first-»
+«IF first == this-»
+«LET conflictingLexerRules(grammar) AS conflicting-»
+«IF !conflicting.isEmpty-»
+    // TODO: remove hardcoded character class from template
+	public static ICharacterClass «globalDelimiterFieldName()» = ICharacterClass.Factory.join(
+			ICharacterClass.Factory.createRange('a', 'z'),
+			ICharacterClass.Factory.createRange('A', 'Z'),
+			ICharacterClass.Factory.create('_'),
+			ICharacterClass.Factory.createRange('0', '9')
+	);
+«ELSE-»
+	public static ICharacterClass «globalDelimiterFieldName()» = ICharacterClass.Factory.nullClass();
+«ENDIF-»
+
+«ENDLET-»
+«ENDIF-»
+«ENDLET-»
+«ENDDEFINE»

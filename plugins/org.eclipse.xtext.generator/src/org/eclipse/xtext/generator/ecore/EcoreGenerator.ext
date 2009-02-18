@@ -1,0 +1,3 @@
+
+String getGeneratedEPackageName(xtext::Grammar grammar, ecore::EPackage p):
+	JAVA org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment.getGeneratedEPackageName(org.eclipse.xtext.Grammar,org.eclipse.emf.ecore.EPackage);

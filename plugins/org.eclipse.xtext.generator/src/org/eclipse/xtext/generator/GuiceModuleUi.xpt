@@ -1,0 +1,139 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT xtext»
+«IMPORT xtextgen»
+
+«EXTENSION org::eclipse::xtext::generator::Naming»
+
+«DEFINE generate(List[String] bindings) FOR Grammar»
+«EXPAND guiceModuleUi»
+
+«FILE guiceModuleUiGenerated().asPath()+".java" SRC_GEN_UI»
+/*
+ «fileHeader()»
+ */
+package «guiceModuleRtGenerated().toJavaPackage()»;
+
+import org.eclipse.xtext.ui.common.service.DefaultUIModule;
+
+/**
+ * Manual modifications go to {«guiceModuleUi()»}
+ */
+public abstract class «guiceModuleUiGenerated().toSimpleName()» extends DefaultUIModule {
+	
+	«FOREACH bindings AS b-»
+	«LET b.split("::") AS binding-»
+
+	public Class<? extends «binding.get(0)»> bind«binding.get(0).toSimpleName()»() {
+		return «binding.get(1)».class;
+	}
+	«ENDLET-»
+	«ENDFOREACH-»
+}
+«ENDFILE»	
+
+
+«FILE executableExtensionFactory().asPath()+".java" SRC_GEN_UI»
+package «executableExtensionFactory().toJavaPackage()»;
+
+import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IExecutableExtension;
+import org.eclipse.core.runtime.IExecutableExtensionFactory;
+import org.eclipse.core.runtime.Status;
+import org.osgi.framework.Bundle;
+
+/**
+ * Generated from GuiceInjector.xpt
+ */
+public class «executableExtensionFactory().toSimpleName()» implements IExecutableExtensionFactory, IExecutableExtension {
+
+	private Logger log = Logger.getLogger(Aware.class);
+	private String clazzName;
+
+	public void setInitializationData(IConfigurationElement config, String propertyName, Object data)
+		throws CoreException {
+		if (data instanceof String) {
+			clazzName = (String) data;
+		}
+		else {
+			throw new IllegalArgumentException("couldn't handle passed data : "+data);
+		}
+	}
+	
+	public Object create() throws CoreException {
+		Bundle bundle = «activator()».getInstance().getBundle();
+		try {
+			Class<?> class1 = bundle.loadClass(clazzName);
+			return «activator()».getInstance().getInjector().getInstance(class1);
+		}
+		catch (Exception e) {
+			log.error(e);
+			throw new CoreException(new Status(Status.ERROR, bundle.getSymbolicName(), e.getMessage(),e));
+		}
+	}
+}
+«ENDFILE»
+
+«FILE activator().asPath()+".java" SRC_GEN_UI»
+package «activator().toJavaPackage()»;
+
+import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.osgi.framework.BundleContext;
+
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+
+/**
+ * Generated from UIPlugin.xpt
+ */
+public class «activator().toSimpleName()» extends AbstractUIPlugin {
+
+	private Injector injector;
+	private static «activator().toSimpleName()» INSTANCE;
+
+	public Injector getInjector() {
+		return injector;
+	}
+	
+	@Override
+	public void start(BundleContext context) throws Exception {
+		super.start(context);
+		INSTANCE = this;
+		this.injector = Guice.createInjector(new «guiceModuleRt()»(), new «guiceModuleUi()»());
+	}
+	
+	public static «activator().toSimpleName()» getInstance() {
+		return INSTANCE;
+	}
+	
+}
+«ENDFILE»
+«ENDDEFINE»
+
+	
+«DEFINE guiceModuleUi FOR Grammar»
+«FILE guiceModuleUi().asPath()+'.java' SRC_UI -»
+/*
+ «fileHeader()»
+ */
+package «guiceModuleUi().toJavaPackage()»;
+
+/**
+ * Use this class to register components to be used within the IDE.
+ */
+public class «guiceModuleUi().toSimpleName()» extends «guiceModuleUiGenerated()» {
+
+}
+«ENDFILE»
+«ENDDEFINE»
