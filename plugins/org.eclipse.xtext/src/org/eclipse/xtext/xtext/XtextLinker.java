@@ -7,11 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -19,6 +23,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.CrossReference;
@@ -165,6 +170,94 @@ public class XtextLinker extends Linker {
 		} catch(Exception e) {
 			log.error(e.getMessage(), e);
 			consumer.consume(new ExceptionDiagnostic(e));
+		}
+		if (!model.eResource().eAdapters().contains(packageRemover))
+			model.eResource().eAdapters().add(packageRemover);
+	}
+
+	private final PackageRemover packageRemover = new PackageRemover();
+
+	private static class PackageRemover extends EContentAdapter {
+
+		@SuppressWarnings("unchecked")
+		@Override
+		public void notifyChanged(Notification msg) {
+			super.notifyChanged(msg);
+			if (!msg.isTouch() && msg.getOldValue() != null) {
+				ResourceSet set;
+				if (!(msg.getNotifier() instanceof Resource)) {
+					Object feature = msg.getFeature();
+					if (!(feature instanceof EReference))
+						return;
+					EReference ref = (EReference) feature;
+					if (!ref.isContainment())
+						return;
+					set = ((EObject) msg.getNotifier()).eResource().getResourceSet();
+				} else {
+					set = ((Resource) msg.getNotifier()).getResourceSet();
+				}
+				if (set == null)
+					return;
+				switch (msg.getEventType()) {
+					case Notification.REMOVE_MANY:
+					case Notification.REMOVE:
+					case Notification.SET:
+						Object oldValue = msg.getOldValue();
+						Collection<Resource> referencedResources = new HashSet<Resource>();
+						Collection<Resource> resourcesToRemove = new HashSet<Resource>();
+						if (oldValue instanceof Grammar) {
+							for(AbstractMetamodelDeclaration declaration: ((Grammar)oldValue).getMetamodelDeclarations()) {
+								EPackage pack = declaration.getEPackage();
+								if (pack != null && pack.eResource() != null) {
+									resourcesToRemove.add(pack.eResource());
+									if (isPackageReferenced(set, pack, ((Grammar)oldValue).getMetamodelDeclarations())) {
+										referencedResources.add(pack.eResource());
+									}
+								}
+							}
+						} else if (oldValue instanceof AbstractMetamodelDeclaration) {
+							EPackage pack = ((AbstractMetamodelDeclaration) oldValue).getEPackage();
+							if (pack != null && pack.eResource() != null) {
+								resourcesToRemove.add(pack.eResource());
+								if (!isPackageReferenced(set, pack, Collections.singletonList((AbstractMetamodelDeclaration)oldValue))) {
+									referencedResources.add(pack.eResource());
+								}
+							}
+						} else if (oldValue instanceof Collection<?>) {
+							if (XtextPackage.Literals.GRAMMAR__METAMODEL_DECLARATIONS == msg.getFeature()) {
+								Collection<AbstractMetamodelDeclaration> metamodelDeclarations = (Collection<AbstractMetamodelDeclaration>) oldValue;
+								for(AbstractMetamodelDeclaration declaration: metamodelDeclarations) {
+									EPackage pack =declaration.getEPackage();
+									if (pack != null && pack.eResource() != null) {
+										resourcesToRemove.add(pack.eResource());
+										if (!isPackageReferenced(set, pack, metamodelDeclarations)) {
+											referencedResources.add(pack.eResource());
+										}
+									}
+								}
+							}
+						}
+						resourcesToRemove.removeAll(referencedResources);
+						set.getResources().removeAll(resourcesToRemove);
+						break;
+					default:
+						break;
+				}
+			}
+		}
+
+		public boolean isPackageReferenced(ResourceSet set, EPackage pack, Collection<AbstractMetamodelDeclaration> knownReferences) {
+			for(Resource resource: set.getResources()) {
+				for(EObject content: resource.getContents()) {
+					if (content instanceof Grammar) {
+						for (AbstractMetamodelDeclaration decl: ((Grammar) content).getMetamodelDeclarations()) {
+							if (pack.equals(decl.getEPackage()) && !knownReferences.contains(decl))
+								return true;
+						}
+					}
+				}
+			}
+			return false;
 		}
 	}
 

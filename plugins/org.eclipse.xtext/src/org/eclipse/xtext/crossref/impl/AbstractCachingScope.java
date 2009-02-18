@@ -65,7 +65,7 @@ public abstract class AbstractCachingScope extends AbstractNestedScope {
 
 	protected void initElements(SimpleAttributeResolver<String> resolver, Resource resource,
 			ScopedElementProducer producer) {
-		final Iterator<EObject> iterator = getRelevantContent(resource);
+		final Iterator<? extends EObject> iterator = getRelevantContent(resource);
 		while (iterator.hasNext()) {
 			final EObject object = iterator.next();
 			if (EcoreUtil2.isAssignableFrom(type, object.eClass())) {
@@ -80,7 +80,7 @@ public abstract class AbstractCachingScope extends AbstractNestedScope {
 		return value;
 	}
 
-	protected Iterator<EObject> getRelevantContent(Resource resource) {
+	protected Iterator<? extends EObject> getRelevantContent(Resource resource) {
 		return resource.getAllContents();
 	}
 
