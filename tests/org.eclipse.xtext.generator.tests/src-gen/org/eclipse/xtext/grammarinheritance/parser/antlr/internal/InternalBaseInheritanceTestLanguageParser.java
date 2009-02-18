@@ -53,7 +53,7 @@ public class InternalBaseInheritanceTestLanguageParser extends AbstractInternalA
         
         @Override
         protected InputStream getTokenFile() {
-        	ClassLoader classLoader = InternalBaseInheritanceTestLanguageParser.class.getClassLoader();
+        	ClassLoader classLoader = getClass().getClassLoader();
         	return classLoader.getResourceAsStream("org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalBaseInheritanceTestLanguage.tokens");
         }
         

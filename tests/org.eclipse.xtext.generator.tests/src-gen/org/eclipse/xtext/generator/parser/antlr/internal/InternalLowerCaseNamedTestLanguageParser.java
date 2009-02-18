@@ -53,7 +53,7 @@ public class InternalLowerCaseNamedTestLanguageParser extends AbstractInternalAn
         
         @Override
         protected InputStream getTokenFile() {
-        	ClassLoader classLoader = InternalLowerCaseNamedTestLanguageParser.class.getClassLoader();
+        	ClassLoader classLoader = getClass().getClassLoader();
         	return classLoader.getResourceAsStream("org/eclipse/xtext/generator/parser/antlr/internal/InternalLowerCaseNamedTestLanguage.tokens");
         }
         

@@ -17,17 +17,17 @@ package org.eclipse.xtext.ui.common.editor.contentassist.impl;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.XtextGrammarTestLanguageRuntimeModule;
 import org.eclipse.xtext.XtextGrammarTestLanguageStandaloneSetup;
-import org.eclipse.xtext.XtextGrammarTestLanguageUIModule;
+import org.eclipse.xtext.XtextGrammarTestLanguageUiModule;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parser.keywords.KeywordsTestLanguageRuntimeModule;
 import org.eclipse.xtext.parser.keywords.KeywordsTestLanguageStandaloneSetup;
-import org.eclipse.xtext.parser.keywords.KeywordsTestLanguageUIModule;
+import org.eclipse.xtext.parser.keywords.KeywordsTestLanguageUiModule;
 import org.eclipse.xtext.testlanguages.ContentAssistTestLanguageRuntimeModule;
 import org.eclipse.xtext.testlanguages.ContentAssistTestLanguageStandaloneSetup;
-import org.eclipse.xtext.testlanguages.ContentAssistTestLanguageUIModule;
+import org.eclipse.xtext.testlanguages.ContentAssistTestLanguageUiModule;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageRuntimeModule;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
-import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageUIModule;
+import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageUiModule;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -47,7 +47,7 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests
 		return new ReferenceGrammarTestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(new ReferenceGrammarTestLanguageRuntimeModule(), new ReferenceGrammarTestLanguageUIModule());
+				return Guice.createInjector(new ReferenceGrammarTestLanguageRuntimeModule(), new ReferenceGrammarTestLanguageUiModule());
 			}
 		};
 	}
@@ -56,7 +56,7 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests
 		return new XtextGrammarTestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(new XtextGrammarTestLanguageRuntimeModule(), new XtextGrammarTestLanguageUIModule());
+				return Guice.createInjector(new XtextGrammarTestLanguageRuntimeModule(), new XtextGrammarTestLanguageUiModule());
 			}
 		};
 	}
@@ -65,7 +65,7 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests
 		return new ContentAssistTestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(new ContentAssistTestLanguageRuntimeModule(), new ContentAssistTestLanguageUIModule());
+				return Guice.createInjector(new ContentAssistTestLanguageRuntimeModule(), new ContentAssistTestLanguageUiModule());
 			}
 		};
 	}
@@ -74,7 +74,7 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests
 		return new KeywordsTestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(new KeywordsTestLanguageRuntimeModule(), new KeywordsTestLanguageUIModule());
+				return Guice.createInjector(new KeywordsTestLanguageRuntimeModule(), new KeywordsTestLanguageUiModule());
 			}
 		};
 	}

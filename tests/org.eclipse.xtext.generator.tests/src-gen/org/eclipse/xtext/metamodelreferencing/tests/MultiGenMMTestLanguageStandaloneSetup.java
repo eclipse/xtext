@@ -1,5 +1,5 @@
+
 /*
-Generated with Xtext
 */
 package org.eclipse.xtext.metamodelreferencing.tests;
 
@@ -24,10 +24,8 @@ public class MultiGenMMTestLanguageStandaloneSetup implements ISetup {
 	public Injector createInjectorAndDoEMFRegistration() {
 		
 		org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
-		registerEPackages();
 		Injector injector = createInjector();
-		IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
-		registerResourceFactory(resourceFactory);
+		register(injector);
 		return injector;
 	}
 	
@@ -35,33 +33,20 @@ public class MultiGenMMTestLanguageStandaloneSetup implements ISetup {
 		return Guice.createInjector(new org.eclipse.xtext.metamodelreferencing.tests.MultiGenMMTestLanguageRuntimeModule());
 	}
 	
-	public void registerResourceFactory(IResourceFactory resourceFactory) {
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("multigenmmtestlanguage", resourceFactory);
-		
+	public void register(Injector injector) {
+	if (!EPackage.Registry.INSTANCE.containsKey("http://eclipse.org/xtext/tests/SimpleTest")) {
+		EPackage.Registry.INSTANCE.put("http://eclipse.org/xtext/tests/SimpleTest", org.eclipse.xtext.metamodelreferencing.tests.simpleTest.SimpleTestPackage.eINSTANCE);
+	}
+	if (!EPackage.Registry.INSTANCE.containsKey("http://eclipse.org/xtext/tests/OtherTest")) {
+		EPackage.Registry.INSTANCE.put("http://eclipse.org/xtext/tests/OtherTest", org.eclipse.xtext.metamodelreferencing.tests.otherTest.OtherTestPackage.eINSTANCE);
 	}
 
-	/**
-	 * Initializes all EPackages generated for this language and registers them with EPackage.Registry.INSTANCE
-	 */	
-	public void registerEPackages() {
-		if (!EPackage.Registry.INSTANCE.containsKey("http://eclipse.org/xtext/tests/SimpleTest")) {
-			EPackage SimpleTest = EcoreUtil2.loadEPackage(
-				"classpath:/org/eclipse/xtext/metamodelreferencing/tests/SimpleTest.ecore",
-				MultiGenMMTestLanguageStandaloneSetup.class.getClassLoader());
-			if (SimpleTest == null)
-				throw new IllegalStateException(
-					"Couldn't load EPackage from 'classpath:/org/eclipse/xtext/metamodelreferencing/tests/SimpleTest.ecore'");
-			EPackage.Registry.INSTANCE.put("http://eclipse.org/xtext/tests/SimpleTest", SimpleTest);
-		}
-		if (!EPackage.Registry.INSTANCE.containsKey("http://eclipse.org/xtext/tests/OtherTest")) {
-			EPackage OtherTest = EcoreUtil2.loadEPackage(
-				"classpath:/org/eclipse/xtext/metamodelreferencing/tests/OtherTest.ecore",
-				MultiGenMMTestLanguageStandaloneSetup.class.getClassLoader());
-			if (OtherTest == null)
-				throw new IllegalStateException(
-					"Couldn't load EPackage from 'classpath:/org/eclipse/xtext/metamodelreferencing/tests/OtherTest.ecore'");
-			EPackage.Registry.INSTANCE.put("http://eclipse.org/xtext/tests/OtherTest", OtherTest);
-		}
+
+		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("multigenmmtestlanguage", resourceFactory);
+		
+
+	//TODO registration of EValidators should be added here, too
+
 	}
-	
 }

@@ -63,6 +63,7 @@
 <project reference="1.0,:extssh:proxy.eclipse.org:443:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/examples/org.eclipse.xtext.example.fowlerdsl.ui,org.eclipse.xtext.example.fowlerdsl.ui"/>
 <project reference="1.0,:extssh:proxy.eclipse.org:443:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/features/org.eclipse.xtext.examples.feature,org.eclipse.xtext.examples.feature"/>
 <project reference="1.0,:extssh:proxy.eclipse.org:443:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator,org.eclipse.xtext.generator"/>
+<project reference="1.0,:extssh:proxy.eclipse.org:443:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.generator,org.eclipse.xtext.ui.generator"/>
 <project reference="1.0,:extssh:proxy.eclipse.org:443:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/tests/org.eclipse.xtext.generator.tests,org.eclipse.xtext.generator.tests"/>
 <project reference="1.0,:extssh:proxy.eclipse.org:443:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.junit,org.eclipse.xtext.junit"/>
 <project reference="1.0,:extssh:proxy.eclipse.org:443:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.log4j,org.eclipse.xtext.log4j"/>
@@ -137,6 +138,7 @@
 <item elementID="=org.eclipse.xtext.ui.core" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.xtext.ui.integration.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.xtext.ui.common" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.ui.generator" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.xtext.xtend.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 </workingSets>
 <workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" label="Xtext Samples" name="Xtext Samples">

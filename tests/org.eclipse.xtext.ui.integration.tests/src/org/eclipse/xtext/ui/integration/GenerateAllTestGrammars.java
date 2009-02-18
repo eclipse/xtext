@@ -8,49 +8,34 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.integration;
 
-import org.apache.log4j.Logger;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.xtext.GeneratorFacade;
-import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.resource.XtextResourceSet;
-
-import com.google.inject.Injector;
+import org.eclipse.xtext.AbstractTestGrammarGenerator;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- *
+ * 
  */
-public class GenerateAllTestGrammars {
-	private static String path = ".";
+public class GenerateAllTestGrammars extends AbstractTestGrammarGenerator {
 
-	private static Logger log = Logger.getLogger(GenerateAllTestGrammars.class);
-
-	public final static Class<?>[] testclasses = new Class[] { TestLanguage.class };
-
-	public static void main(String... args) throws Exception {
-		try {
-			log.info(Thread.currentThread().getContextClassLoader());
-			Injector injector = new XtextStandaloneSetup().createInjectorAndDoEMFRegistration();
-			if (args.length > 0) {
-				path = args[0] + "/" + path;
-			}
-			GeneratorFacade.cleanFolder(path + "/src-gen");
-			for (Class<?> c : testclasses) {
-				String filename = "classpath:/" + c.getName().replace('.', '/') + ".xtext";
-				log.info("loading " + filename);
-				ResourceSetImpl rs = injector.getInstance(XtextResourceSet.class);
-				URI uri = URI.createURI(filename);
-				Resource resource = rs.createResource(uri);
-				resource.load(null);
-				Grammar grammarModel = (Grammar) resource.getContents().iterator().next();
-				GeneratorFacade.generate(grammarModel, path, path, TestLanguage.fileExtension);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public GenerateAllTestGrammars(String[] args) {
+		super(args);
 	}
 
+	public static void main(String... args) {
+		new GenerateAllTestGrammars(args).generateAll();
+	}
+	
+	@Override
+	public Class<?>[] getTestGrammarClasses() {
+		return new Class[] { TestLanguage.class };
+	}
+
+	@Override
+	protected String getWorkflow() {
+		return "org/eclipse/xtext/ui/integration/testLanguage.mwe";
+	}
+
+	@Override
+	protected String getUiProject() {
+		return getRuntimeProject();
+	}
 }

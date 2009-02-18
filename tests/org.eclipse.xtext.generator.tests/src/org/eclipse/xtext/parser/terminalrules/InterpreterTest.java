@@ -8,7 +8,7 @@
 package org.eclipse.xtext.parser.terminalrules;
 
 import org.eclipse.xtext.ParserRule;
-import org.eclipse.xtext.parser.packrat.TerminalRuleInterpreter;
+import org.eclipse.xtext.generator.parser.TerminalRuleInterpreter;
 import org.eclipse.xtext.parser.terminalrules.services.TerminalRulesTestLanguageGrammarAccess;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 

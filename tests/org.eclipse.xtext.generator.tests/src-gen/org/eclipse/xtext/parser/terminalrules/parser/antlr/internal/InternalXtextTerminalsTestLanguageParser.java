@@ -53,7 +53,7 @@ public class InternalXtextTerminalsTestLanguageParser extends AbstractInternalAn
         
         @Override
         protected InputStream getTokenFile() {
-        	ClassLoader classLoader = InternalXtextTerminalsTestLanguageParser.class.getClassLoader();
+        	ClassLoader classLoader = getClass().getClassLoader();
         	return classLoader.getResourceAsStream("org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalXtextTerminalsTestLanguage.tokens");
         }
         

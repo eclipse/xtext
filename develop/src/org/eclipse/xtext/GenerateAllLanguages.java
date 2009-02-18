@@ -22,15 +22,16 @@ public class GenerateAllLanguages {
 		try {
 			logger.info("Generating all test and example languages.");
 
+			
 			org.eclipse.xtext.GenerateAllTestGrammars.main("../org.eclipse.xtext.generator.tests/");
 			org.eclipse.xtext.ui.common.GenerateAllTestGrammarsWithUiConfig.main("../org.eclipse.xtext.ui.common.tests/");
 			org.eclipse.xtext.ui.integration.GenerateAllTestGrammars.main("../org.eclipse.xtext.ui.integration.tests");
 			// MWE DI is currently not in our workspace 
 			//org.eclipse.emf.mwe.di.mwe.main("../org.eclipse.emf.mwe.di");
 			xtext.example.GenerateGrammar.main("../org.eclipse.xtext.example.domainmodel");
-			org.eclipse.xtext.example.FowlerDsl.main("../org.eclipse.xtext.example.fowlerdsl");
-			org.eclipse.xtext.reference.ReferenceGrammar.main("../org.eclipse.xtext.reference");
-			org.eclipse.xtext.example.EcoreDsl.main("../org.eclipse.xtext.example.ecoredsl");
+			org.eclipse.xtext.example.GenerateGrammar.main("../org.eclipse.xtext.example.fowlerdsl");
+			org.eclipse.xtext.reference.GenerateGrammar.main("../org.eclipse.xtext.reference");
+			org.eclipse.xtext.example.GenerateGrammar.main("../org.eclipse.xtext.example.ecoredsl");
 			org.eclipse.xtext.xtend.tests.GenerateAllTestGrammarsWithXtendServices.main("../org.eclipse.xtext.xtend.tests");
 
 			logger.info("DONE.");

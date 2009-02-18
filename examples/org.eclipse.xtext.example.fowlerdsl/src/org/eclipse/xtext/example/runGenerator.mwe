@@ -1,0 +1,15 @@
+<workflow>
+	<property name="grammarURI" value="classpath:/org/eclipse/xtext/example/FowlerDsl.xtext"/>
+	<property name="runtimeProject" value="."/>
+	<property name="uiProject" value="../org.eclipse.xtext.example.fowlerdsl.ui"/>
+	<property name="file.extensions" value="fowlerdsl"/>
+	
+	<component class="org.eclipse.xtext.generator.Generator">
+		<grammarURI value="${grammarURI}"/>
+		<pathRtProject value="${runtimeProject}"/>
+		<pathUiProject value="${uiProject}"/>
+		<fragments file="org/eclipse/xtext/ui/generator/standardUiAndRuntime.mwe">
+			<file.extensions value="${file.extensions}"/>
+		</fragments>
+	</component>
+</workflow>

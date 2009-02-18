@@ -1,5 +1,5 @@
+
 /*
-Generated with Xtext
 */
 package org.eclipse.xtext.parser.terminalrules;
 
@@ -31,10 +31,8 @@ public class XtextTerminalsTestLanguageStandaloneSetup implements ISetup {
 				"xmi", new org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl());
 		if (!EPackage.Registry.INSTANCE.containsKey(org.eclipse.xtext.XtextPackage.eNS_URI))
 			EPackage.Registry.INSTANCE.put(org.eclipse.xtext.XtextPackage.eNS_URI, org.eclipse.xtext.XtextPackage.eINSTANCE);
-		registerEPackages();
 		Injector injector = createInjector();
-		IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
-		registerResourceFactory(resourceFactory);
+		register(injector);
 		return injector;
 	}
 	
@@ -42,24 +40,17 @@ public class XtextTerminalsTestLanguageStandaloneSetup implements ISetup {
 		return Guice.createInjector(new org.eclipse.xtext.parser.terminalrules.XtextTerminalsTestLanguageRuntimeModule());
 	}
 	
-	public void registerResourceFactory(IResourceFactory resourceFactory) {
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("xtextterminalstestlanguage", resourceFactory);
-		
+	public void register(Injector injector) {
+	if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/2008/tmf/xtext/XtextTerminalsTestLanguage")) {
+		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2008/tmf/xtext/XtextTerminalsTestLanguage", org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.XtextTerminalsTestLanguagePackage.eINSTANCE);
 	}
 
-	/**
-	 * Initializes all EPackages generated for this language and registers them with EPackage.Registry.INSTANCE
-	 */	
-	public void registerEPackages() {
-		if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/2008/tmf/xtext/XtextTerminalsTestLanguage")) {
-			EPackage XtextTerminalsTestLanguage = EcoreUtil2.loadEPackage(
-				"classpath:/org/eclipse/xtext/parser/terminalrules/XtextTerminalsTestLanguage.ecore",
-				XtextTerminalsTestLanguageStandaloneSetup.class.getClassLoader());
-			if (XtextTerminalsTestLanguage == null)
-				throw new IllegalStateException(
-					"Couldn't load EPackage from 'classpath:/org/eclipse/xtext/parser/terminalrules/XtextTerminalsTestLanguage.ecore'");
-			EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2008/tmf/xtext/XtextTerminalsTestLanguage", XtextTerminalsTestLanguage);
-		}
+
+		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("xtextterminalstestlanguage", resourceFactory);
+		
+
+	//TODO registration of EValidators should be added here, too
+
 	}
-	
 }

@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.parser.terminalrules.terminalRulesTestLanguage.TerminalRulesTestLanguagePackage;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 /**
@@ -30,7 +31,7 @@ public class ParserTest extends AbstractGeneratorTest {
 	protected void setUp() throws Exception {
 		super.setUp();
 		with(TerminalRulesTestLanguageStandaloneSetup.class);
-		EPackage pack = getMetamodelAccess().getGeneratedEPackages()[0];
+		EPackage pack = TerminalRulesTestLanguagePackage.eINSTANCE;
 		EClass model = (EClass) pack.getEClassifier("Model");
 		idFeature = model.getEStructuralFeature("idValue");
 		intFeature = model.getEStructuralFeature("intValue");

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<plugin>
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://www.eclipse.org/2009/tmf/xtext/InheritanceTestLanguage" 
+       class = "org.eclipse.xtext.grammarinheritance.inheritanceTest.InheritanceTestPackage"
+       genModel = "org/eclipse/xtext/grammarinheritance/InheritanceTestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+  <extension
+		point="org.eclipse.xtend.typesystem.emf.checks">
+		<metaModel
+			nsURI="http://www.eclipse.org/2009/tmf/xtext/InheritanceTestLanguage">
+			<checkFile
+				path="org/eclipse/xtext/grammarinheritance/InheritanceTestChecks.chk">
+			</checkFile>
+		</metaModel>
+	
+	</extension>
+
+
+</plugin>

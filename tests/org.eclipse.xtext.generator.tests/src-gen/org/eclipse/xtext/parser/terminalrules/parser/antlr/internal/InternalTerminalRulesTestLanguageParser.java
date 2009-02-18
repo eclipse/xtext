@@ -53,7 +53,7 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
         
         @Override
         protected InputStream getTokenFile() {
-        	ClassLoader classLoader = InternalTerminalRulesTestLanguageParser.class.getClassLoader();
+        	ClassLoader classLoader = getClass().getClassLoader();
         	return classLoader.getResourceAsStream("org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.tokens");
         }
         

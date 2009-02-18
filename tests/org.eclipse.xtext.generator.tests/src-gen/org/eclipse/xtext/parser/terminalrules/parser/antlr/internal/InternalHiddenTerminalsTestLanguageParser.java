@@ -50,7 +50,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
         
         @Override
         protected InputStream getTokenFile() {
-        	ClassLoader classLoader = InternalHiddenTerminalsTestLanguageParser.class.getClassLoader();
+        	ClassLoader classLoader = getClass().getClassLoader();
         	return classLoader.getResourceAsStream("org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.tokens");
         }
         

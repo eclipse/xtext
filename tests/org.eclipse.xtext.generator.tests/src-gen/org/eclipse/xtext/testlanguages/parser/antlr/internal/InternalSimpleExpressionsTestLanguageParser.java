@@ -53,7 +53,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
         
         @Override
         protected InputStream getTokenFile() {
-        	ClassLoader classLoader = InternalSimpleExpressionsTestLanguageParser.class.getClassLoader();
+        	ClassLoader classLoader = getClass().getClassLoader();
         	return classLoader.getResourceAsStream("org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalSimpleExpressionsTestLanguage.tokens");
         }
         

@@ -1,10 +1,10 @@
 /*******************************************************************************
- * __  ___            _
+ * __  ___            _   
  * \ \/ / |_ _____  __ |_
  *  \  /| __/ _ \ \/ / __|
  *  /  \| |_  __/>  <| |_
  * /_/\_\\__\___/_/\_\\__|
- *
+ * 
  * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -13,77 +13,53 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend.tests;
 
-import org.apache.log4j.Logger;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.xtext.AbstractTestGrammarGenerator;
 import org.eclipse.xtext.GenerateAllTestGrammars;
-import org.eclipse.xtext.GeneratorFacade;
-import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextGrammarTestLanguage;
-import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.parser.keywords.KeywordsTestLanguage;
-import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.testlanguages.ContentAssistTestLanguage;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage;
 import org.eclipse.xtext.testlanguages.TreeTestLanguage;
 
-import com.google.inject.Injector;
-
 /**
  * Generates all required testgrammars with xtend services for this test
  * project.
- *
+ * 
  * This code was copied from class
  * <code>org.eclipse.xtext.ui.common.GenerateAllTestGrammarsWithUiConfig</code>
  * within project 'org.eclipse.xtext.ui.common.tests'. <p/>
- *
+ * 
  * The duplication of this class was required because we need a language setup
  * with xtend services. services.
- *
+ * 
  * @author Michael Clay - Initial contribution and API
  * @author Jan Koehnlein
  */
-public class GenerateAllTestGrammarsWithXtendServices {
-
-	private static final String RUNTIME_PATH = ".";
-	private static final String UI_PATH = ".";
-
-	private static Logger logger = Logger.getLogger(GenerateAllTestGrammarsWithXtendServices.class);
-
-	private final static Class<?>[] testClasses = new Class[] { ReferenceGrammarTestLanguage.class,
-			TreeTestLanguage.class, XtextGrammarTestLanguage.class, ContentAssistTestLanguage.class,
-			KeywordsTestLanguage.class };
-
-	/**
-	 * @return the testclasses
-	 */
-	public static Class<?>[] getTestClasses() {
-		return testClasses;
+public class GenerateAllTestGrammarsWithXtendServices extends AbstractTestGrammarGenerator {
+	
+	public GenerateAllTestGrammarsWithXtendServices(String[] args) {
+		super(args);
 	}
 
 	public static void main(String... args) throws Exception {
-		try {
-			String uiPath = (args.length > 0) ? args[0] : UI_PATH;
-			String runtimePath = ((args.length > 0) ? args[0] + "/" : "") + RUNTIME_PATH;
+		new GenerateAllTestGrammarsWithXtendServices(args).generateAll();
+	}
+	
+	@Override
+	protected String getUiProject() {
+		return getRuntimeProject();
+	}
+	
+	@Override
+	public Class<?>[] getTestGrammarClasses() {
+		return new Class[] { ReferenceGrammarTestLanguage.class,
+				TreeTestLanguage.class, XtextGrammarTestLanguage.class, ContentAssistTestLanguage.class,
+				KeywordsTestLanguage.class };
+	}
 
-			Injector injector = new XtextStandaloneSetup().createInjectorAndDoEMFRegistration();
-			GeneratorFacade.cleanFolder(uiPath + "/src-gen");
-			for (Class<?> clazz : testClasses) {
-				String filename = GenerateAllTestGrammars.getGrammarFileNameAsURI(clazz);
-				logger.info("loading " + filename);
-				ResourceSetImpl rs = injector.getInstance(XtextResourceSet.class);
-				URI uri = URI.createURI(filename);
-				Resource resource = rs.createResource(uri);
-				resource.load(null);
-				Grammar grammarModel = (Grammar) resource.getContents().iterator().next();
-				GeneratorFacade.generate(grammarModel, runtimePath, uiPath, true, false, false, clazz.getSimpleName()
-						.toLowerCase());
-			}
-		}
-		catch (Exception e) {
-			logger.error("Error while generating test grammars", e);
-		}
+	@Override
+	protected String getWorkflow() {
+		return "org/eclipse/xtext/xtend/tests/testLanguage.mwe";
 	}
 
 }

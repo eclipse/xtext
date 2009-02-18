@@ -1,5 +1,5 @@
+
 /*
-Generated with Xtext
 */
 package org.eclipse.xtext.valueconverter;
 
@@ -24,10 +24,8 @@ public class Bug250313StandaloneSetup implements ISetup {
 	public Injector createInjectorAndDoEMFRegistration() {
 		
 		org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
-		registerEPackages();
 		Injector injector = createInjector();
-		IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
-		registerResourceFactory(resourceFactory);
+		register(injector);
 		return injector;
 	}
 	
@@ -35,24 +33,17 @@ public class Bug250313StandaloneSetup implements ISetup {
 		return Guice.createInjector(new org.eclipse.xtext.valueconverter.Bug250313RuntimeModule());
 	}
 	
-	public void registerResourceFactory(IResourceFactory resourceFactory) {
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("bug250313", resourceFactory);
-		
+	public void register(Injector injector) {
+	if (!EPackage.Registry.INSTANCE.containsKey("http://org.eclipse.xtext.valueconverter.Bug250313")) {
+		EPackage.Registry.INSTANCE.put("http://org.eclipse.xtext.valueconverter.Bug250313", org.eclipse.xtext.valueconverter.bug250313.Bug250313Package.eINSTANCE);
 	}
 
-	/**
-	 * Initializes all EPackages generated for this language and registers them with EPackage.Registry.INSTANCE
-	 */	
-	public void registerEPackages() {
-		if (!EPackage.Registry.INSTANCE.containsKey("http://org.eclipse.xtext.valueconverter.Bug250313")) {
-			EPackage bug250313 = EcoreUtil2.loadEPackage(
-				"classpath:/org/eclipse/xtext/valueconverter/bug250313.ecore",
-				Bug250313StandaloneSetup.class.getClassLoader());
-			if (bug250313 == null)
-				throw new IllegalStateException(
-					"Couldn't load EPackage from 'classpath:/org/eclipse/xtext/valueconverter/bug250313.ecore'");
-			EPackage.Registry.INSTANCE.put("http://org.eclipse.xtext.valueconverter.Bug250313", bug250313);
-		}
+
+		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("bug250313", resourceFactory);
+		
+
+	//TODO registration of EValidators should be added here, too
+
 	}
-	
 }

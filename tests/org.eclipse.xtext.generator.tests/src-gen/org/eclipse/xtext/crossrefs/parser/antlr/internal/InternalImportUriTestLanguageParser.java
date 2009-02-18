@@ -53,7 +53,7 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
         
         @Override
         protected InputStream getTokenFile() {
-        	ClassLoader classLoader = InternalImportUriTestLanguageParser.class.getClassLoader();
+        	ClassLoader classLoader = getClass().getClassLoader();
         	return classLoader.getResourceAsStream("org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.tokens");
         }
         
