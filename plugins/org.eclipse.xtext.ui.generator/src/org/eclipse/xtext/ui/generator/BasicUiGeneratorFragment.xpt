@@ -1,0 +1,65 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT xtext»
+
+«EXTENSION org::eclipse::xtext::generator::Naming»
+
+«DEFINE generate(List[String] modelFileExtensions) FOR Grammar»«ENDDEFINE»
+
+«DEFINE addToPluginXmlRt(List[String] modelFileExtensions) FOR Grammar»«ENDDEFINE»
+
+«DEFINE addToPluginXmlUi(List[String] modelFileExtensions) FOR Grammar»
+    <extension
+			point="org.eclipse.ui.editors">
+		<editor
+			class="«executableExtensionFactory()»:org.eclipse.xtext.ui.core.editor.XtextEditor"
+			contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+			default="true"
+			extensions="«modelFileExtensions.toString(",")»"
+			id="«name»"
+			name="«name.toSimpleName()» Editor">
+		</editor>
+	</extension>
+	 <extension
+			point="org.eclipse.ui.preferencePages">
+		<page
+			class="«executableExtensionFactory()»:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
+			id="«name»"
+			name="«name.toSimpleName()»">
+			<keywordReference
+				id="«name.toJavaPackage() + ".ui.keyword_"+name.toSimpleName()»">
+			</keywordReference>
+		</page>
+		<page
+			category="«name»"
+			class="«executableExtensionFactory()»:org.eclipse.xtext.ui.core.editor.preferences.EditorPreferencePage"
+			id="«name».editor"
+			name="Editor">
+			<keywordReference 
+				id="org.eclipse.xtext.keyword.editor">
+			</keywordReference>
+		</page>
+	</extension>
+	<extension
+		point="org.eclipse.ui.keywords">
+		<keyword
+			id="«name.toJavaPackage() + ".ui.keyword_"+name.toSimpleName()»"
+			label="«name.toSimpleName()»">
+		</keyword>
+		<keyword
+			id="«name».tasktags"
+			label="Task Tags">
+		</keyword>
+	</extension>
+«ENDDEFINE»
+
+«DEFINE addToStandaloneSetup(List[String] modelFileExtensions) FOR Grammar»«ENDDEFINE»

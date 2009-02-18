@@ -1,0 +1,115 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT xtext»
+
+«EXTENSION org::eclipse::xtext::ui::generator::contentAssist::ContentAssist»
+«EXTENSION org::eclipse::xtext::GrammarUtil»
+«EXTENSION org::eclipse::xtext::generator::Naming»
+
+«DEFINE generate FOR Grammar»
+«FILE getGenProposalProvider().asPath()+".java" SRC_GEN_UI -»
+/*
+«fileHeader()»
+*/
+package «getGenProposalProvider().toJavaPackage()»;
+
+import java.util.Collections;
+import java.util.List;
+
+import org.eclipse.jface.text.contentassist.ICompletionProposal;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.ui.common.editor.contentassist.impl.AbstractJavaProposalProvider;
+import org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider;
+import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
+
+/**
+ * Represents a generated, default implementation of interface {@link IProposalProvider}.
+ * 
+ * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider
+ */
+public class «getGenProposalProvider().toSimpleName()» extends AbstractJavaProposalProvider {
+	//TODO remove this from template
+	private static final String UI_PLUGIN_ID  = "ERROR_REMOVE_ME_FROM_TEMPLATE";
+	
+	@Override
+	protected String getPluginId() {
+		return UI_PLUGIN_ID;
+	}
+	
+	«LET {} AS processedFqnFeatureNames»
+		«FOREACH containedAssignments() AS assignment-»
+			«LET getFqFeatureName(assignment) AS fqnFeatureName»
+				«IF !processedFqnFeatureNames.contains(fqnFeatureName)-»
+					«processedFqnFeatureNames.add(fqnFeatureName)->""-»	 
+	public List<? extends ICompletionProposal> complete«fqnFeatureName»(Assignment assignment, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("complete«fqnFeatureName» feature '" + assignment.getFeature() + "' terminal '"
+					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
+					+ contentAssistContext.getMatchString().trim() + "'");
+		}
+					«IF CrossReference.isInstance(assignment.terminal)-»
+		return lookupCrossReference(((CrossReference)assignment.getTerminal()), contentAssistContext);
+					«ELSEIF RuleCall.isInstance(assignment.terminal) && ((RuleCall)assignment.terminal).rule.name=="ID" -»
+		return Collections.singletonList(createCompletionProposal(assignment, "«fqnFeatureName»", contentAssistContext));
+					«ELSEIF RuleCall.isInstance(assignment.terminal) && ((RuleCall)assignment.terminal).rule.name=="INT" -»
+		return Collections.singletonList(createCompletionProposal(assignment, "1", contentAssistContext));		
+					«ELSEIF RuleCall.isInstance(assignment.terminal) && ((RuleCall)assignment.terminal).rule.name=="STRING" -»
+		return Collections.singletonList(createCompletionProposal(assignment, "\"«fqnFeatureName»\"", contentAssistContext));		
+					«ELSE-»
+		return Collections.emptyList();
+					«ENDIF-»
+	}
+				«ENDIF-»
+			«ENDLET-»
+  	  «ENDFOREACH-»
+    
+  	  «FOREACH getParserRulesWithType() AS parserRule-»
+			«LET getFqFeatureName(parserRule) AS fqnFeatureName»
+				«IF !processedFqnFeatureNames.contains(fqnFeatureName)-»
+					«processedFqnFeatureNames.add(fqnFeatureName)->""-»	 	 
+	public List<? extends ICompletionProposal> complete«fqnFeatureName»(RuleCall ruleCall, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("complete«fqnFeatureName» '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
+					+ "' for model '" + contentAssistContext.getModel() + "' and prefix '" + contentAssistContext.getMatchString() + "'");
+		}
+		return Collections.emptyList();
+	}
+				«ENDIF-»
+			«ENDLET-»
+    	«ENDFOREACH-»
+	«ENDLET-»
+    
+    @Override
+	protected String getDefaultImageFilePath() {
+		return "icons/editor.gif";
+	}
+
+
+}
+«ENDFILE»
+
+«FILE getProposalProvider().asPath()+".java" SRC_UI»
+package «getProposalProvider().toJavaPackage()»;
+
+public class «getProposalProvider().toSimpleName()» extends «getGenProposalProvider()» {
+
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE addToPluginXmlRt FOR Grammar»«ENDDEFINE»
+
+«DEFINE addToPluginXmlUi FOR Grammar»«ENDDEFINE»
+
+«DEFINE addToStandaloneSetup FOR Grammar»«ENDDEFINE»
