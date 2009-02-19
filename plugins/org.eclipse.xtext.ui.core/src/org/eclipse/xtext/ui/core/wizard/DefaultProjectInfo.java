@@ -11,10 +11,16 @@ package org.eclipse.xtext.ui.core.wizard;
 /**
  * @author Peter Friese - Initial contribution and API
  */
-public interface IProjectInfo {
-	
-	void setProjectName(String projectName);
-	
-	String getProjectName();
+public class DefaultProjectInfo implements IProjectInfo {
+
+	private String projectName;
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
+
+	public String getProjectName() {
+		return projectName;
+	}
 
 }
