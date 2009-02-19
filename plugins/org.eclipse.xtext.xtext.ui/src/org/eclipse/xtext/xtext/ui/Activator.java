@@ -15,7 +15,7 @@ import org.osgi.framework.BundleContext;
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public class Activator extends org.eclipse.xtext.Activator {
+public class Activator extends org.eclipse.xtext.xtext.ui.internal.Activator {
 	// The plug-in ID
 	public static final String PLUGIN_ID = "org.eclipse.xtext.xtext.ui";
 
