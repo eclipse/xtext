@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: RootRule.java,v 1.2 2009/02/18 21:22:19 sefftinge Exp $
+ * $Id: RootRule.java,v 1.3 2009/02/19 14:39:56 sefftinge Exp $
  */
 package org.eclipse.xtext.grammarinheritance.foo;
 

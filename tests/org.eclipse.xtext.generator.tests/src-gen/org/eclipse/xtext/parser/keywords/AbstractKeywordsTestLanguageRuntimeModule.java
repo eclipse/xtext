@@ -30,10 +30,6 @@ public abstract class AbstractKeywordsTestLanguageRuntimeModule extends DefaultR
 		return org.eclipse.xtext.parser.keywords.parser.packrat.KeywordsTestLanguagePackratParser.class;
 	}
 
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
-		return org.eclipse.xtext.parser.keywords.parseTreeConstruction.KeywordsTestLanguageParsetreeConstructor.class;
-	}
-
 	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
 		return org.eclipse.xtext.parser.keywords.parser.antlr.internal.InternalKeywordsTestLanguageLexer.class;
 	}
@@ -52,5 +48,9 @@ public abstract class AbstractKeywordsTestLanguageRuntimeModule extends DefaultR
 
 	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
+	}
+
+	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
+		return org.eclipse.xtext.parser.keywords.parseTreeConstruction.KeywordsTestLanguageParsetreeConstructor.class;
 	}
 }

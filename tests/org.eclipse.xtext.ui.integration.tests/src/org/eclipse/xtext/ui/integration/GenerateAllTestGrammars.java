@@ -8,34 +8,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.integration;
 
-import org.eclipse.xtext.AbstractTestGrammarGenerator;
+import org.eclipse.emf.mwe.core.WorkflowFacade;
+
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  * 
  */
-public class GenerateAllTestGrammars extends AbstractTestGrammarGenerator {
+public class GenerateAllTestGrammars {
 
-	public GenerateAllTestGrammars(String[] args) {
-		super(args);
-	}
-
-	public static void main(String... args) {
-		new GenerateAllTestGrammars(args).generateAll();
-	}
-	
-	@Override
-	public Class<?>[] getTestGrammarClasses() {
-		return new Class[] { TestLanguage.class };
-	}
-
-	@Override
-	protected String getWorkflow() {
-		return "org/eclipse/xtext/ui/integration/testLanguage.mwe";
-	}
-
-	@Override
-	protected String getUiProject() {
-		return getRuntimeProject();
+	public static void main(String... args) throws Exception {
+		try {
+			new WorkflowFacade("org/eclipse/xtext/ui/integration/testLanguage.mwe").run();
+		} catch (Throwable t) {
+			t.printStackTrace();
+		}
 	}
 }

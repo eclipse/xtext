@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LexerLangFactory.java,v 1.2 2009/02/18 21:22:48 sefftinge Exp $
+ * $Id: LexerLangFactory.java,v 1.3 2009/02/19 14:39:51 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.lexerLang;
 

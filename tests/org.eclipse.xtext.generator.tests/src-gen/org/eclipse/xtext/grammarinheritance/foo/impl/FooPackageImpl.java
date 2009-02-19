@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FooPackageImpl.java,v 1.2 2009/02/18 21:22:30 sefftinge Exp $
+ * $Id: FooPackageImpl.java,v 1.3 2009/02/19 14:39:59 sefftinge Exp $
  */
 package org.eclipse.xtext.grammarinheritance.foo.impl;
 
@@ -12,8 +12,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
-import org.eclipse.xtext.XtextPackage;
 
 import org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage;
 
@@ -151,7 +149,6 @@ public class FooPackageImpl extends EPackageImpl implements FooPackage
     isInited = true;
 
     // Initialize simple dependencies
-    XtextPackage.eINSTANCE.eClass();
     AmetamodelPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects

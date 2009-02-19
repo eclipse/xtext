@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KeywordsTestLanguagePackageImpl.java,v 1.2 2009/02/18 21:22:51 sefftinge Exp $
+ * $Id: KeywordsTestLanguagePackageImpl.java,v 1.3 2009/02/19 14:40:05 sefftinge Exp $
  */
 package org.eclipse.xtext.parser.keywords.keywordsTestLanguage.impl;
 
@@ -11,10 +11,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
-import org.eclipse.xtext.XtextPackage;
-
-import org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage;
 
 import org.eclipse.xtext.parser.keywords.keywordsTestLanguage.KeywordsTestLanguageFactory;
 import org.eclipse.xtext.parser.keywords.keywordsTestLanguage.KeywordsTestLanguagePackage;
@@ -92,10 +88,6 @@ public class KeywordsTestLanguagePackageImpl extends EPackageImpl implements Key
     KeywordsTestLanguagePackageImpl theKeywordsTestLanguagePackage = (KeywordsTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof KeywordsTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new KeywordsTestLanguagePackageImpl());
 
     isInited = true;
-
-    // Initialize simple dependencies
-    XtextPackage.eINSTANCE.eClass();
-    AmetamodelPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theKeywordsTestLanguagePackage.createPackageContents();

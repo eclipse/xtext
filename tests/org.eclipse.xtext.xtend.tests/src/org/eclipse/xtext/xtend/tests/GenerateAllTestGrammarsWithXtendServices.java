@@ -13,13 +13,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend.tests;
 
-import org.eclipse.xtext.AbstractTestGrammarGenerator;
-import org.eclipse.xtext.GenerateAllTestGrammars;
-import org.eclipse.xtext.XtextGrammarTestLanguage;
-import org.eclipse.xtext.parser.keywords.KeywordsTestLanguage;
-import org.eclipse.xtext.testlanguages.ContentAssistTestLanguage;
-import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage;
-import org.eclipse.xtext.testlanguages.TreeTestLanguage;
+import org.eclipse.emf.mwe.core.WorkflowFacade;
 
 /**
  * Generates all required testgrammars with xtend services for this test
@@ -27,7 +21,8 @@ import org.eclipse.xtext.testlanguages.TreeTestLanguage;
  * 
  * This code was copied from class
  * <code>org.eclipse.xtext.ui.common.GenerateAllTestGrammarsWithUiConfig</code>
- * within project 'org.eclipse.xtext.ui.common.tests'. <p/>
+ * within project 'org.eclipse.xtext.ui.common.tests'.
+ * <p/>
  * 
  * The duplication of this class was required because we need a language setup
  * with xtend services. services.
@@ -35,31 +30,14 @@ import org.eclipse.xtext.testlanguages.TreeTestLanguage;
  * @author Michael Clay - Initial contribution and API
  * @author Jan Koehnlein
  */
-public class GenerateAllTestGrammarsWithXtendServices extends AbstractTestGrammarGenerator {
-	
-	public GenerateAllTestGrammarsWithXtendServices(String[] args) {
-		super(args);
-	}
+public class GenerateAllTestGrammarsWithXtendServices {
 
 	public static void main(String... args) throws Exception {
-		new GenerateAllTestGrammarsWithXtendServices(args).generateAll();
-	}
-	
-	@Override
-	protected String getUiProject() {
-		return getRuntimeProject();
-	}
-	
-	@Override
-	public Class<?>[] getTestGrammarClasses() {
-		return new Class[] { ReferenceGrammarTestLanguage.class,
-				TreeTestLanguage.class, XtextGrammarTestLanguage.class, ContentAssistTestLanguage.class,
-				KeywordsTestLanguage.class };
-	}
-
-	@Override
-	protected String getWorkflow() {
-		return "org/eclipse/xtext/xtend/tests/testLanguage.mwe";
+		try {
+			new WorkflowFacade("org/eclipse/xtext/xtend/tests/GenerateXtendTestLanguages.mwe").run();
+		} catch (Throwable t) {
+			t.printStackTrace();
+		}
 	}
 
 }

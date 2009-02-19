@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Named.java,v 1.2 2009/02/18 21:22:32 sefftinge Exp $
+ * $Id: Named.java,v 1.3 2009/02/19 14:39:52 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.partialParserTestLanguage;
 

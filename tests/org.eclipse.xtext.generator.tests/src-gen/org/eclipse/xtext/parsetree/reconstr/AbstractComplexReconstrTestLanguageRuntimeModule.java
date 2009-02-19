@@ -30,10 +30,6 @@ public abstract class AbstractComplexReconstrTestLanguageRuntimeModule extends D
 		return org.eclipse.xtext.parsetree.reconstr.parser.packrat.ComplexReconstrTestLanguagePackratParser.class;
 	}
 
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
-		return org.eclipse.xtext.parsetree.reconstr.parseTreeConstruction.ComplexReconstrTestLanguageParsetreeConstructor.class;
-	}
-
 	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
 		return org.eclipse.xtext.parsetree.reconstr.parser.antlr.internal.InternalComplexReconstrTestLanguageLexer.class;
 	}
@@ -52,5 +48,9 @@ public abstract class AbstractComplexReconstrTestLanguageRuntimeModule extends D
 
 	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
+	}
+
+	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
+		return org.eclipse.xtext.parsetree.reconstr.parseTreeConstruction.ComplexReconstrTestLanguageParsetreeConstructor.class;
 	}
 }

@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: org.eclipse.xtext.reference.ReferenceGrammar.ui
-Bundle-SymbolicName: org.eclipse.xtext.reference.ReferenceGrammar.ui
+Bundle-Name: org.eclipse.xtext.reference.ui
+Bundle-SymbolicName: org.eclipse.xtext.reference.ui
 Bundle-Version: 0.0.1
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 
@@ -9,4 +9,4 @@ Require-Bundle: org.eclipse.xtext.ui.core,
  org.eclipse.xtext.ui.common,
  org.eclipse.ui.editors,
  org.eclipse.ui
-Bundle-Activator: org.eclipse.xtext.reference.Activator
+Bundle-Activator: org.eclipse.xtext.reference.internal.ReferenceGrammarActivator

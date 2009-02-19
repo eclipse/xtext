@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MultiplicityExprImpl.java,v 1.3 2009/02/19 08:18:41 sefftinge Exp $
+ * $Id: MultiplicityExprImpl.java,v 1.4 2009/02/19 14:38:38 sefftinge Exp $
  */
 package org.eclipse.xtext.example.ecoredsl.impl;
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MultiValueFeatureTestLanguagePackageImpl.java,v 1.2 2009/02/18 21:22:30 sefftinge Exp $
+ * $Id: MultiValueFeatureTestLanguagePackageImpl.java,v 1.3 2009/02/19 14:39:36 sefftinge Exp $
  */
 package org.eclipse.xtext.resource.metamodel.multiValueFeatureTestLanguage.impl;
 
@@ -11,10 +11,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
-import org.eclipse.xtext.XtextPackage;
-
-import org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage;
 
 import org.eclipse.xtext.resource.metamodel.multiValueFeatureTestLanguage.MultiValueFeatureTestLanguageFactory;
 import org.eclipse.xtext.resource.metamodel.multiValueFeatureTestLanguage.MultiValueFeatureTestLanguagePackage;
@@ -92,10 +88,6 @@ public class MultiValueFeatureTestLanguagePackageImpl extends EPackageImpl imple
     MultiValueFeatureTestLanguagePackageImpl theMultiValueFeatureTestLanguagePackage = (MultiValueFeatureTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof MultiValueFeatureTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new MultiValueFeatureTestLanguagePackageImpl());
 
     isInited = true;
-
-    // Initialize simple dependencies
-    XtextPackage.eINSTANCE.eClass();
-    AmetamodelPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theMultiValueFeatureTestLanguagePackage.createPackageContents();

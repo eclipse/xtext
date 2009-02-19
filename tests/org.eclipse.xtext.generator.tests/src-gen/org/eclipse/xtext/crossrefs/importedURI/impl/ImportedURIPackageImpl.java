@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ImportedURIPackageImpl.java,v 1.2 2009/02/18 21:22:45 sefftinge Exp $
+ * $Id: ImportedURIPackageImpl.java,v 1.3 2009/02/19 14:39:50 sefftinge Exp $
  */
 package org.eclipse.xtext.crossrefs.importedURI.impl;
 
@@ -13,15 +13,11 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import org.eclipse.xtext.XtextPackage;
-
 import org.eclipse.xtext.crossrefs.importedURI.Import;
 import org.eclipse.xtext.crossrefs.importedURI.ImportedURIFactory;
 import org.eclipse.xtext.crossrefs.importedURI.ImportedURIPackage;
 import org.eclipse.xtext.crossrefs.importedURI.Main;
 import org.eclipse.xtext.crossrefs.importedURI.Type;
-
-import org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -109,10 +105,6 @@ public class ImportedURIPackageImpl extends EPackageImpl implements ImportedURIP
     ImportedURIPackageImpl theImportedURIPackage = (ImportedURIPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof ImportedURIPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new ImportedURIPackageImpl());
 
     isInited = true;
-
-    // Initialize simple dependencies
-    XtextPackage.eINSTANCE.eClass();
-    AmetamodelPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theImportedURIPackage.createPackageContents();

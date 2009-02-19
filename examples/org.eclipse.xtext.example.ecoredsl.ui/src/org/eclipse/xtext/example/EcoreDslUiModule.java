@@ -19,7 +19,7 @@ import org.eclipse.xtext.example.editor.outline.EcoreSemanticModelTransformer;
 public class EcoreDslUiModule extends AbstractEcoreDslUiModule {
 
 	public Class<? extends org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider> bindIProposalProvider() {
-		return org.eclipse.xtext.example.EcoreDslProposalProvider.class;
+		return org.eclipse.xtext.example.EcoreDslProposals.class;
 	}
 	
 	public Class<? extends org.eclipse.xtext.ui.common.editor.outline.ISemanticModelTransformer> bindISemanticModelTransformer() {

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeImpl.java,v 1.2 2009/02/18 21:22:15 sefftinge Exp $
+ * $Id: TypeImpl.java,v 1.3 2009/02/19 14:39:35 sefftinge Exp $
  */
 package org.eclipse.xtext.crossrefs.langATestLanguage.impl;
 

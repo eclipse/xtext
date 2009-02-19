@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KeywordsTestLanguageSwitch.java,v 1.2 2009/02/18 21:20:05 sefftinge Exp $
+ * $Id: KeywordsTestLanguageSwitch.java,v 1.3 2009/02/19 14:37:11 sefftinge Exp $
  */
 package org.eclipse.xtext.parser.keywords.keywordsTestLanguage.util;
 

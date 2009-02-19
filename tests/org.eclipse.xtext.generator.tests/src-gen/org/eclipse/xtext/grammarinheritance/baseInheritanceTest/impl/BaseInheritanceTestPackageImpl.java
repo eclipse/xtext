@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BaseInheritanceTestPackageImpl.java,v 1.2 2009/02/18 21:22:48 sefftinge Exp $
+ * $Id: BaseInheritanceTestPackageImpl.java,v 1.3 2009/02/19 14:39:50 sefftinge Exp $
  */
 package org.eclipse.xtext.grammarinheritance.baseInheritanceTest.impl;
 
@@ -11,10 +11,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
-import org.eclipse.xtext.XtextPackage;
-
-import org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage;
 
 import org.eclipse.xtext.grammarinheritance.baseInheritanceTest.BaseInheritanceTestFactory;
 import org.eclipse.xtext.grammarinheritance.baseInheritanceTest.BaseInheritanceTestPackage;
@@ -92,10 +88,6 @@ public class BaseInheritanceTestPackageImpl extends EPackageImpl implements Base
     BaseInheritanceTestPackageImpl theBaseInheritanceTestPackage = (BaseInheritanceTestPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof BaseInheritanceTestPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new BaseInheritanceTestPackageImpl());
 
     isInited = true;
-
-    // Initialize simple dependencies
-    XtextPackage.eINSTANCE.eClass();
-    AmetamodelPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theBaseInheritanceTestPackage.createPackageContents();

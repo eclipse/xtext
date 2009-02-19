@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: InheritanceTestSwitch.java,v 1.2 2009/02/18 21:22:51 sefftinge Exp $
+ * $Id: InheritanceTestSwitch.java,v 1.3 2009/02/19 14:39:57 sefftinge Exp $
  */
 package org.eclipse.xtext.grammarinheritance.inheritanceTest.util;
 
@@ -158,7 +158,7 @@ public class InheritanceTestSwitch<T>
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseModel_1(baseInheritanceTest.Model object)
+  public T caseModel_1(org.eclipse.xtext.grammarinheritance.baseInheritanceTest.Model object)
   {
     return null;
   }

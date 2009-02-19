@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Bug250313PackageImpl.java,v 1.2 2009/02/18 21:22:37 sefftinge Exp $
+ * $Id: Bug250313PackageImpl.java,v 1.3 2009/02/19 14:39:50 sefftinge Exp $
  */
 package org.eclipse.xtext.valueconverter.bug250313.impl;
 
@@ -12,10 +12,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
-import org.eclipse.xtext.XtextPackage;
-
-import org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage;
 
 import org.eclipse.xtext.valueconverter.bug250313.Bug250313Factory;
 import org.eclipse.xtext.valueconverter.bug250313.Bug250313Package;
@@ -117,10 +113,6 @@ public class Bug250313PackageImpl extends EPackageImpl implements Bug250313Packa
     Bug250313PackageImpl theBug250313Package = (Bug250313PackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof Bug250313PackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new Bug250313PackageImpl());
 
     isInited = true;
-
-    // Initialize simple dependencies
-    XtextPackage.eINSTANCE.eClass();
-    AmetamodelPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theBug250313Package.createPackageContents();

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DummyLangPackageImpl.java,v 1.2 2009/02/18 21:22:50 sefftinge Exp $
+ * $Id: DummyLangPackageImpl.java,v 1.3 2009/02/19 14:39:57 sefftinge Exp $
  */
 package org.eclipse.xtext.dummy.dummyLang.impl;
 
@@ -13,14 +13,10 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import org.eclipse.xtext.XtextPackage;
-
 import org.eclipse.xtext.dummy.dummyLang.DummyLangFactory;
 import org.eclipse.xtext.dummy.dummyLang.DummyLangPackage;
 import org.eclipse.xtext.dummy.dummyLang.Element;
 import org.eclipse.xtext.dummy.dummyLang.Model;
-
-import org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -101,10 +97,6 @@ public class DummyLangPackageImpl extends EPackageImpl implements DummyLangPacka
     DummyLangPackageImpl theDummyLangPackage = (DummyLangPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof DummyLangPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new DummyLangPackageImpl());
 
     isInited = true;
-
-    // Initialize simple dependencies
-    XtextPackage.eINSTANCE.eClass();
-    AmetamodelPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theDummyLangPackage.createPackageContents();

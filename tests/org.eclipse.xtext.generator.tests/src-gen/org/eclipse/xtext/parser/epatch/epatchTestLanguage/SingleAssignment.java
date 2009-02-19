@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SingleAssignment.java,v 1.2 2009/02/18 21:22:16 sefftinge Exp $
+ * $Id: SingleAssignment.java,v 1.3 2009/02/19 14:39:34 sefftinge Exp $
  */
 package org.eclipse.xtext.parser.epatch.epatchTestLanguage;
 

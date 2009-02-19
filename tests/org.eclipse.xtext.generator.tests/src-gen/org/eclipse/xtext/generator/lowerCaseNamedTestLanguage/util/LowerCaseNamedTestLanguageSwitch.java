@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LowerCaseNamedTestLanguageSwitch.java,v 1.2 2009/02/18 21:22:49 sefftinge Exp $
+ * $Id: LowerCaseNamedTestLanguageSwitch.java,v 1.3 2009/02/19 14:39:52 sefftinge Exp $
  */
 package org.eclipse.xtext.generator.lowerCaseNamedTestLanguage.util;
 

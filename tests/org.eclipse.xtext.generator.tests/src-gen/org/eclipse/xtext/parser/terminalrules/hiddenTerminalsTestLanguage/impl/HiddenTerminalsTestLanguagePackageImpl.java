@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: HiddenTerminalsTestLanguagePackageImpl.java,v 1.2 2009/02/18 21:22:39 sefftinge Exp $
+ * $Id: HiddenTerminalsTestLanguagePackageImpl.java,v 1.3 2009/02/19 14:39:44 sefftinge Exp $
  */
 package org.eclipse.xtext.parser.terminalrules.hiddenTerminalsTestLanguage.impl;
 
@@ -12,10 +12,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
-import org.eclipse.xtext.XtextPackage;
-
-import org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage;
 
 import org.eclipse.xtext.parser.terminalrules.hiddenTerminalsTestLanguage.DatatypeHiddens;
 import org.eclipse.xtext.parser.terminalrules.hiddenTerminalsTestLanguage.HiddenTerminalsTestLanguageFactory;
@@ -157,10 +153,6 @@ public class HiddenTerminalsTestLanguagePackageImpl extends EPackageImpl impleme
     HiddenTerminalsTestLanguagePackageImpl theHiddenTerminalsTestLanguagePackage = (HiddenTerminalsTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof HiddenTerminalsTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new HiddenTerminalsTestLanguagePackageImpl());
 
     isInited = true;
-
-    // Initialize simple dependencies
-    XtextPackage.eINSTANCE.eClass();
-    AmetamodelPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theHiddenTerminalsTestLanguagePackage.createPackageContents();

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FileImpl.java,v 1.2 2009/02/18 21:21:36 sefftinge Exp $
+ * $Id: FileImpl.java,v 1.3 2009/02/19 14:38:44 sefftinge Exp $
  */
 package org.eclipse.xtext.ui.integration.foo.impl;
 

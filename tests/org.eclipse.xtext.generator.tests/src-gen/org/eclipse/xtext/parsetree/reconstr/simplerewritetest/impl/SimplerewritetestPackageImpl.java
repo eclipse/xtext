@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SimplerewritetestPackageImpl.java,v 1.2 2009/02/18 21:22:25 sefftinge Exp $
+ * $Id: SimplerewritetestPackageImpl.java,v 1.3 2009/02/19 14:39:36 sefftinge Exp $
  */
 package org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl;
 
@@ -12,10 +12,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
-import org.eclipse.xtext.XtextPackage;
-
-import org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage;
 
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Atom;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Expression;
@@ -156,10 +152,6 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
     SimplerewritetestPackageImpl theSimplerewritetestPackage = (SimplerewritetestPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof SimplerewritetestPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new SimplerewritetestPackageImpl());
 
     isInited = true;
-
-    // Initialize simple dependencies
-    XtextPackage.eINSTANCE.eClass();
-    AmetamodelPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theSimplerewritetestPackage.createPackageContents();

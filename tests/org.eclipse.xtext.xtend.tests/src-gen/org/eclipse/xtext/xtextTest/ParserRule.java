@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParserRule.java,v 1.2 2009/02/18 21:20:03 sefftinge Exp $
+ * $Id: ParserRule.java,v 1.3 2009/02/19 14:37:02 sefftinge Exp $
  */
 package org.eclipse.xtext.xtextTest;
 

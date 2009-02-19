@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LexerLangPackageImpl.java,v 1.2 2009/02/18 21:22:49 sefftinge Exp $
+ * $Id: LexerLangPackageImpl.java,v 1.3 2009/02/19 14:39:57 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.lexerLang.impl;
 
@@ -12,10 +12,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
-import org.eclipse.xtext.XtextPackage;
-
-import org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage;
 
 import org.eclipse.xtext.testlanguages.lexerLang.Element;
 import org.eclipse.xtext.testlanguages.lexerLang.LexerLangFactory;
@@ -101,10 +97,6 @@ public class LexerLangPackageImpl extends EPackageImpl implements LexerLangPacka
     LexerLangPackageImpl theLexerLangPackage = (LexerLangPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof LexerLangPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new LexerLangPackageImpl());
 
     isInited = true;
-
-    // Initialize simple dependencies
-    XtextPackage.eINSTANCE.eClass();
-    AmetamodelPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theLexerLangPackage.createPackageContents();

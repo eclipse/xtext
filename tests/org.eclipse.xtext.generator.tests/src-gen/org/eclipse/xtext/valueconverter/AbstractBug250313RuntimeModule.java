@@ -30,10 +30,6 @@ public abstract class AbstractBug250313RuntimeModule extends DefaultRuntimeModul
 		return org.eclipse.xtext.valueconverter.parser.packrat.Bug250313PackratParser.class;
 	}
 
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
-		return org.eclipse.xtext.valueconverter.parseTreeConstruction.Bug250313ParsetreeConstructor.class;
-	}
-
 	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
 		return org.eclipse.xtext.valueconverter.parser.antlr.internal.InternalBug250313Lexer.class;
 	}
@@ -52,5 +48,9 @@ public abstract class AbstractBug250313RuntimeModule extends DefaultRuntimeModul
 
 	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
+	}
+
+	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
+		return org.eclipse.xtext.valueconverter.parseTreeConstruction.Bug250313ParsetreeConstructor.class;
 	}
 }

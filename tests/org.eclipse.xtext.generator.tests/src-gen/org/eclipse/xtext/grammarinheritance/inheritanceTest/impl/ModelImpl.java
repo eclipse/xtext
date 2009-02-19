@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelImpl.java,v 1.2 2009/02/18 21:22:51 sefftinge Exp $
+ * $Id: ModelImpl.java,v 1.3 2009/02/19 14:39:58 sefftinge Exp $
  */
 package org.eclipse.xtext.grammarinheritance.inheritanceTest.impl;
 
@@ -35,7 +35,7 @@ import org.eclipse.xtext.grammarinheritance.inheritanceTest.Model;
  *
  * @generated
  */
-public class ModelImpl extends baseInheritanceTest.impl.ModelImpl implements Model
+public class ModelImpl extends org.eclipse.xtext.grammarinheritance.baseInheritanceTest.impl.ModelImpl implements Model
 {
   /**
    * The cached value of the '{@link #getElements() <em>Elements</em>}' containment reference list.

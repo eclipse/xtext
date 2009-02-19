@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Kind.java,v 1.2 2009/02/18 21:22:43 sefftinge Exp $
+ * $Id: Kind.java,v 1.3 2009/02/19 14:39:57 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.referenceGrammar;
 

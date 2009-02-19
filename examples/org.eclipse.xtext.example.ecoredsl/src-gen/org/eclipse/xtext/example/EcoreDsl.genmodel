@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="ASCII"?>
-<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="./src-gen" forceOverwrite="true" bundleManifest="false" complianceLevel="5.0" copyrightFields="false">
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="../org.eclipse.xtext.example.ecoredsl/src-gen" forceOverwrite="true" bundleManifest="false" complianceLevel="5.0" copyrightFields="false">
   <genPackages prefix="Ecoredsl" basePackage="org.eclipse.xtext.example" disposableProviderFactory="true">
-    <ecorePackage href="http://example.xtext.org/EcoreDsl#/"/>
+    <ecorePackage href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/EcoreDsl.ecore#/"/>
     <genClasses>
-      <ecoreClass href="http://example.xtext.org/EcoreDsl#//EcoreDsl"/>
+      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/EcoreDsl.ecore#//EcoreDsl"/>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="http://example.xtext.org/EcoreDsl#//EcoreDsl/imports"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/EcoreDsl.ecore#//EcoreDsl/imports"/>
       </genFeatures>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="http://example.xtext.org/EcoreDsl#//EcoreDsl/package"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/EcoreDsl.ecore#//EcoreDsl/package"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="http://example.xtext.org/EcoreDsl#//ImportStatementDecl"/>
+      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/EcoreDsl.ecore#//ImportStatementDecl"/>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="http://example.xtext.org/EcoreDsl#//ImportStatementDecl/alias"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/EcoreDsl.ecore#//ImportStatementDecl/alias"/>
       </genFeatures>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="http://example.xtext.org/EcoreDsl#//ImportStatementDecl/importURI"/>
-      </genFeatures>
-    </genClasses>
-    <genClasses>
-      <ecoreClass href="http://example.xtext.org/EcoreDsl#//MapEntry"/>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="http://example.xtext.org/EcoreDsl#//MapEntry/detailKey"/>
-      </genFeatures>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="http://example.xtext.org/EcoreDsl#//MapEntry/detailValue"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/EcoreDsl.ecore#//ImportStatementDecl/importURI"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="http://example.xtext.org/EcoreDsl#//MultiplicityExpr"/>
+      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/EcoreDsl.ecore#//MapEntry"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/EcoreDsl.ecore#//MapEntry/detailKey"/>
+      </genFeatures>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/EcoreDsl.ecore#//MapEntry/detailValue"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/EcoreDsl.ecore#//MultiplicityExpr"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

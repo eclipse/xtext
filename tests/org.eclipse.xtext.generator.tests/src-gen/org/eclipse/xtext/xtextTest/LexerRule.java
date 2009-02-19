@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LexerRule.java,v 1.2 2009/02/18 21:22:36 sefftinge Exp $
+ * $Id: LexerRule.java,v 1.3 2009/02/19 14:39:38 sefftinge Exp $
  */
 package org.eclipse.xtext.xtextTest;
 

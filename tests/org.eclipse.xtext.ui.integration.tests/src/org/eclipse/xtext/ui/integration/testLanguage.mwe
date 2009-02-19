@@ -1,22 +1,26 @@
 <workflow>
+	<property name="projectName" value="org.eclipse.xtext.ui.integration.tests"/>
+	<property name="runtimeProject" value="../${projectName}"/>
+	
+	<bean class="org.eclipse.emf.mwe.utils.StandaloneSetup" platformUri="${runtimeProject}/.."/>
+	<component class="org.eclipse.emf.mwe.utils.DirectoryCleaner" directory="${runtimeProject}/src-gen"/>
+	
 	<component class="org.eclipse.xtext.generator.Generator">
-		<grammarURI value="${grammarURI}"/>
 		<pathRtProject value="${runtimeProject}"/>
-		<pathUiProject value="${uiProject}"/>
-		<fragment class="org.eclipse.xtext.generator.BasicRuntimeFragment"/>
-		<fragment class="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment">
-			<genModel value="platform:/resource/org.eclipse.xtext/model/xtext.genmodel"/>
-			<genModel value="platform:/resource/org.eclipse.xtext.generator.tests/src/org/eclipse/xtext/grammarinheritance/ametamodel.genmodel"/>
-			<genModel value="platform:/resource/org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/BaseInheritanceTestLanguage.genmodel"/>
-		</fragment>
-		<fragment class="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment"/>
-		<fragment class="org.eclipse.xtext.generator.parser.PackratParserFragment"/>
-		<fragment class="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment"/>
-		<fragment class="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment" 
-			fileExtensions="${file.extensions}"/>
-		<fragment class="org.eclipse.xtext.generator.validator.CheckFragment"/>
-		<fragment class="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment"/>
-		<fragment file="org/eclipse/xtext/ui/generator/standardUiFragments.mwe"
-			  inheritAll="true"/>
+		<pathUiProject value="${runtimeProject}"/>
+		<projectNameRt value="${projectName}"/>
+		<activator value="org.eclipse.xtext.ui.integration.Activator"/>
+		<language uri="classpath:/org/eclipse/xtext/ui/integration/TestLanguage.xtext">
+			<fragment class="org.eclipse.xtext.generator.BasicRuntimeFragment"/>
+			<fragment class="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment"/>
+			<fragment class="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment"/>
+			<fragment class="org.eclipse.xtext.generator.parser.PackratParserFragment"/>
+			<fragment class="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment"/>
+			<fragment class="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment"/>
+			<fragment class="org.eclipse.xtext.generator.validator.CheckFragment"/>
+			<fragment class="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment"/>
+			<fragment file="org/eclipse/xtext/ui/generator/standardUiFragments.mwe"
+				  inheritAll="true"/>
+		</language>
 	</component>
 </workflow>

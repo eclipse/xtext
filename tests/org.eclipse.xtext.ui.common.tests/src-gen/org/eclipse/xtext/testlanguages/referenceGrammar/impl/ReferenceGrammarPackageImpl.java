@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ReferenceGrammarPackageImpl.java,v 1.2 2009/02/18 21:20:37 sefftinge Exp $
+ * $Id: ReferenceGrammarPackageImpl.java,v 1.3 2009/02/19 14:37:48 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.referenceGrammar.impl;
 
@@ -12,10 +12,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
-import org.eclipse.xtext.XtextPackage;
-
-import org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage;
 
 import org.eclipse.xtext.testlanguages.referenceGrammar.Erwachsener;
 import org.eclipse.xtext.testlanguages.referenceGrammar.Familie;
@@ -141,10 +137,6 @@ public class ReferenceGrammarPackageImpl extends EPackageImpl implements Referen
     ReferenceGrammarPackageImpl theReferenceGrammarPackage = (ReferenceGrammarPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof ReferenceGrammarPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new ReferenceGrammarPackageImpl());
 
     isInited = true;
-
-    // Initialize simple dependencies
-    XtextPackage.eINSTANCE.eClass();
-    AmetamodelPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theReferenceGrammarPackage.createPackageContents();

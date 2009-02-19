@@ -1,10 +1,14 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: org.eclipse.xtext.parser.keywords.KeywordsTestLanguage
-Bundle-SymbolicName: org.eclipse.xtext.parser.keywords.KeywordsTestLanguage
+Bundle-Name: org.eclipse.xtext.xtend.tests
+Bundle-SymbolicName: org.eclipse.xtext.xtend.tests
 Bundle-Version: 0.0.1
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: org.eclipse.xtext.parser.keywords.keywordsTestLanguage
+Export-Package: org.eclipse.xtext.xtextTest,
+ org.eclipse.xtext.parser.keywords.keywordsTestLanguage,
+ org.eclipse.xtext.testlanguages.contentAssistTestLanguage,
+ org.eclipse.xtext.testlanguages.referenceGrammar,
+ org.eclipse.xtext.testlanguages.treeTestLanguage
 Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtext.util,
  org.eclipse.emf.ecore,
@@ -16,4 +20,4 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtext.ui.common,
  org.eclipse.ui.editors,
  org.eclipse.ui
-Bundle-Activator: org.eclipse.xtext.parser.keywords.Activator
+Bundle-Activator: org.eclipse.xtext.xtend.XtendTestsActivator

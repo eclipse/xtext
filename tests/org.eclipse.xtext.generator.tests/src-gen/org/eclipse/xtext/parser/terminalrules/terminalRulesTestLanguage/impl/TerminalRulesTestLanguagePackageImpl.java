@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TerminalRulesTestLanguagePackageImpl.java,v 1.2 2009/02/18 21:22:50 sefftinge Exp $
+ * $Id: TerminalRulesTestLanguagePackageImpl.java,v 1.3 2009/02/19 14:39:57 sefftinge Exp $
  */
 package org.eclipse.xtext.parser.terminalrules.terminalRulesTestLanguage.impl;
 
@@ -11,10 +11,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
-import org.eclipse.xtext.XtextPackage;
-
-import org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage;
 
 import org.eclipse.xtext.parser.terminalrules.terminalRulesTestLanguage.Model;
 import org.eclipse.xtext.parser.terminalrules.terminalRulesTestLanguage.TerminalRulesTestLanguageFactory;
@@ -92,10 +88,6 @@ public class TerminalRulesTestLanguagePackageImpl extends EPackageImpl implement
     TerminalRulesTestLanguagePackageImpl theTerminalRulesTestLanguagePackage = (TerminalRulesTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof TerminalRulesTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new TerminalRulesTestLanguagePackageImpl());
 
     isInited = true;
-
-    // Initialize simple dependencies
-    XtextPackage.eINSTANCE.eClass();
-    AmetamodelPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theTerminalRulesTestLanguagePackage.createPackageContents();

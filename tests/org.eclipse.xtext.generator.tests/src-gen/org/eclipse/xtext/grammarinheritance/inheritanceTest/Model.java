@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Model.java,v 1.2 2009/02/18 21:22:49 sefftinge Exp $
+ * $Id: Model.java,v 1.3 2009/02/19 14:39:57 sefftinge Exp $
  */
 package org.eclipse.xtext.grammarinheritance.inheritanceTest;
 
@@ -24,7 +24,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Model extends baseInheritanceTest.Model
+public interface Model extends org.eclipse.xtext.grammarinheritance.baseInheritanceTest.Model
 {
   /**
    * Returns the value of the '<em><b>Elements</b></em>' containment reference list.

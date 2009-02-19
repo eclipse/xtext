@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SimpleExpressionsPackageImpl.java,v 1.2 2009/02/18 21:22:44 sefftinge Exp $
+ * $Id: SimpleExpressionsPackageImpl.java,v 1.3 2009/02/19 14:39:49 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.simpleExpressions.impl;
 
@@ -12,10 +12,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
-import org.eclipse.xtext.XtextPackage;
-
-import org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage;
 
 import org.eclipse.xtext.testlanguages.simpleExpressions.Atom;
 import org.eclipse.xtext.testlanguages.simpleExpressions.Expression;
@@ -117,10 +113,6 @@ public class SimpleExpressionsPackageImpl extends EPackageImpl implements Simple
     SimpleExpressionsPackageImpl theSimpleExpressionsPackage = (SimpleExpressionsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof SimpleExpressionsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new SimpleExpressionsPackageImpl());
 
     isInited = true;
-
-    // Initialize simple dependencies
-    XtextPackage.eINSTANCE.eClass();
-    AmetamodelPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theSimpleExpressionsPackage.createPackageContents();

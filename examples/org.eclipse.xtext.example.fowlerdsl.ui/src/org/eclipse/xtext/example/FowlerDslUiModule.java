@@ -11,9 +11,4 @@ import org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider;
  */
 public class FowlerDslUiModule extends AbstractFowlerDslUiModule {
 
-	@Override
-	public Class<? extends IProposalProvider> bindIProposalProvider() {
-		return FowlerDslProposalProvider.class;
-	}
-	
 }

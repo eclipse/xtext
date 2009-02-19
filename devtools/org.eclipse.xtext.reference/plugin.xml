@@ -7,7 +7,7 @@
       </package>
    </extension>
    
-     <extension point="org.eclipse.emf.ecore.generated_package">
+   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://eclipse.org/xtext/reference/ReferenceGrammar" 
        class = "org.eclipse.xtext.reference.referenceGrammar.ReferenceGrammarPackage"
