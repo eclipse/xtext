@@ -1,6 +1,11 @@
+/*******************************************************************************
+ * Copyright (c) 2008, 2009 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtext.boostrap;
-
-import java.io.IOException;
 
 import org.eclipse.emf.mwe.core.WorkflowFacade;
 
@@ -9,7 +14,7 @@ import org.eclipse.emf.mwe.core.WorkflowFacade;
  */
 public class  GenerateXtextGrammars {
 
-	public static void main(String... args) throws IOException {
+	public static void main(String... args) {
 		try {
 			new WorkflowFacade("org/eclipse/xtext/boostrap/generateXtext.mwe").run();
 			new WorkflowFacade("org/eclipse/xtext/boostrap/generateXtextBuiltin.mwe").run();
