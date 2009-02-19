@@ -24,9 +24,10 @@ import org.eclipse.xpand2.XpandFacade;
 import org.eclipse.xpand2.output.Outlet;
 import org.eclipse.xpand2.output.OutputImpl;
 import org.eclipse.xtend.typesystem.emf.EmfMetaModel;
-import org.eclipse.xtext.GeneratorFacade;
+import org.eclipse.xtext.generator.GeneratorUtil;
 import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
 import org.eclipse.xtext.resource.XtextResourceSet;
+
 
 import com.google.inject.Injector;
 
@@ -38,13 +39,20 @@ import com.google.inject.Injector;
  */
 public class Generator {
 	private static final String SRC_GEN_PATH = "src-gen";
+	private final String modelPath;
+	private String rootTemplate;
+	
+	public Generator(String modelPath, String rootTemplate) {
+		this.modelPath = modelPath;
+		this.rootTemplate = rootTemplate;
+	}
 
 	public void generate() throws IOException {
 		Injector injector = new «this.languageNameAbbreviation»StandaloneSetup().createInjectorAndDoEMFRegistration();
 	
-		GeneratorFacade.cleanFolder(SRC_GEN_PATH);
+		GeneratorUtil.cleanFolder(SRC_GEN_PATH);
 
-		String classpathUri = "classpath:/model/Model.«this.firstFileExtension»";
+		String classpathUri = "classpath:/" + modelPath;
 		ResourceSet rs = injector.getInstance(XtextResourceSet.class);
 		Resource resource = rs.createResource(
 		  new ClassloaderClasspathUriResolver().resolve(null, URI.createURI(classpathUri)));
@@ -61,16 +69,14 @@ public class Generator {
 
 		// generate
 		XpandFacade facade = XpandFacade.create(execCtx);
-		facade.evaluate("templates::Template::root", model);
+		facade.evaluate(rootTemplate, model);
 	}
 
 	public static void main(String[] args) throws IOException {
-		Generator generator = new Generator();
+		Generator generator = new Generator("model/Model.«this.firstFileExtension»", "templates::Template::root");
 		generator.generate();
 	}
 
 }
 «ENDFILE»
 «ENDDEFINE»
-
-

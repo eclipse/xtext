@@ -57,6 +57,14 @@ public class XtextProjectInfo implements IProjectInfo{
 	public void setProjectName(String projectName) {
 		this.projectName = projectName;
 	}
+	
+	public String getGeneratorProjectName() {
+		return getProjectName() + ".generator";
+	}
+	
+	public String getUiProjectName() {
+		return getProjectName() + ".ui";
+	}
 
 //	public String getGrammarName() {
 //		return getLanguageName().replaceAll("\\s", "_") + ".xtxt";
