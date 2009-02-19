@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelImpl.java,v 1.5 2009/02/19 21:08:46 sefftinge Exp $
  */
 package org.eclipse.xtext.parser.keywords.keywordsTestLanguage.impl;
 
@@ -238,13 +237,13 @@ public class ModelImpl extends EObjectImpl implements Model
     switch (featureID)
     {
       case KeywordsTestLanguagePackage.MODEL__FIRST:
-        return isFirst();
+        return isFirst() ? Boolean.TRUE : Boolean.FALSE;
       case KeywordsTestLanguagePackage.MODEL__SECOND:
-        return isSecond();
+        return isSecond() ? Boolean.TRUE : Boolean.FALSE;
       case KeywordsTestLanguagePackage.MODEL__THIRD:
-        return isThird();
+        return isThird() ? Boolean.TRUE : Boolean.FALSE;
       case KeywordsTestLanguagePackage.MODEL__FORTH:
-        return isForth();
+        return isForth() ? Boolean.TRUE : Boolean.FALSE;
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -260,16 +259,16 @@ public class ModelImpl extends EObjectImpl implements Model
     switch (featureID)
     {
       case KeywordsTestLanguagePackage.MODEL__FIRST:
-        setFirst((Boolean)newValue);
+        setFirst(((Boolean)newValue).booleanValue());
         return;
       case KeywordsTestLanguagePackage.MODEL__SECOND:
-        setSecond((Boolean)newValue);
+        setSecond(((Boolean)newValue).booleanValue());
         return;
       case KeywordsTestLanguagePackage.MODEL__THIRD:
-        setThird((Boolean)newValue);
+        setThird(((Boolean)newValue).booleanValue());
         return;
       case KeywordsTestLanguagePackage.MODEL__FORTH:
-        setForth((Boolean)newValue);
+        setForth(((Boolean)newValue).booleanValue());
         return;
     }
     super.eSet(featureID, newValue);

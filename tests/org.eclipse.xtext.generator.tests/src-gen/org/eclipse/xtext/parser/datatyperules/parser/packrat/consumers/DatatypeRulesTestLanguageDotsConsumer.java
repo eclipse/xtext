@@ -45,7 +45,7 @@ public final class DatatypeRulesTestLanguageDotsConsumer extends NonTerminalCons
 	}
 
 	protected int consumeAlternatives$1(int entryPoint) throws Exception {
-		AlternativesResult result = createAlternativesResult();
+		AlternativesResult result = createAlternativesResult(getRule().eleAlternatives());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -64,34 +64,26 @@ public final class DatatypeRulesTestLanguageDotsConsumer extends NonTerminalCons
 	}
 
 	protected int consumeGroup$2(int entryPoint) throws Exception {
-		announceNextLevel();
-		final IMarker marker = mark();
-		int result = ConsumeResult.SUCCESS;
+		GroupResult result = createGroupResult(getRule().ele0Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
-				result = ConsumeResult.EMPTY_MATCH;
+				result.reset();
 			case 0:
-				announceNextStep();
-				result = consumeKeyword$3(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(consumeKeyword$3(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().ele00KeywordFullStop());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 			case 1:
-				announceNextStep();
-				result = consumeKeyword$4(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(consumeKeyword$4(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().ele01KeywordFullStop());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 		}
-		marker.commit();
-		announceLevelFinished();
-		return result;
+		return result.getResult();
 	}
 
 	protected int consumeKeyword$3(int entryPoint) throws Exception {

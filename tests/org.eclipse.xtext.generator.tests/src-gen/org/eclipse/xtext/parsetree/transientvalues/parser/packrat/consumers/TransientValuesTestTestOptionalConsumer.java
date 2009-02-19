@@ -50,43 +50,33 @@ public final class TransientValuesTestTestOptionalConsumer extends NonTerminalCo
 	}
 
 	protected int consumeGroup$1(int entryPoint) throws Exception {
-		announceNextLevel();
-		final IMarker marker = mark();
-		int result = ConsumeResult.SUCCESS;
+		GroupResult result = createGroupResult(getRule().eleGroup());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
-				result = ConsumeResult.EMPTY_MATCH;
+				result.reset();
 			case 0:
-				announceNextStep();
-				result = consumeKeyword$3(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(consumeKeyword$3(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().ele00KeywordOptional());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 			case 1:
-				announceNextStep();
-				result = consumeAssignment$4(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(consumeAssignment$4(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().ele01AssignmentOpt1());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 			case 2:
-				announceNextStep();
-				result = consumeGroup$6(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(consumeGroup$6(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().ele1Group());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 		}
-		marker.commit();
-		announceLevelFinished();
-		return result;
+		return result.getResult();
 	}
 
 	protected int consumeKeyword$3(int entryPoint) throws Exception {
@@ -96,9 +86,10 @@ public final class TransientValuesTestTestOptionalConsumer extends NonTerminalCo
 	protected int consumeAssignment$4(int entryPoint) throws Exception {
 		IMarker marker = mark();
 		int result = doConsumeAssignment$4(entryPoint);
-		if (result != ConsumeResult.SUCCESS)
+		if (result != ConsumeResult.SUCCESS) {
 			marker.rollback();
-		else
+			skipped(getRule().ele01AssignmentOpt1());
+		} else
 			marker.commit();
 		return ConsumeResult.SUCCESS;
 	}
@@ -114,42 +105,35 @@ public final class TransientValuesTestTestOptionalConsumer extends NonTerminalCo
 	protected int consumeGroup$6(int entryPoint) throws Exception {
 		IMarker marker = mark();
 		int result = doConsumeGroup$6(entryPoint);
-		if (result != ConsumeResult.SUCCESS)
+		if (result != ConsumeResult.SUCCESS) {
 			marker.rollback();
-		else
+			skipped(getRule().ele1Group());
+		} else
 			marker.commit();
 		return ConsumeResult.SUCCESS;
 	}
 
 	protected int doConsumeGroup$6(int entryPoint) throws Exception {
-		announceNextLevel();
-		final IMarker marker = mark();
-		int result = ConsumeResult.SUCCESS;
+		GroupResult result = createGroupResult(getRule().ele1Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
-				result = ConsumeResult.EMPTY_MATCH;
+				result.reset();
 			case 0:
-				announceNextStep();
-				result = consumeKeyword$7(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(consumeKeyword$7(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().ele10KeywordColon());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 			case 1:
-				announceNextStep();
-				result = consumeAssignment$8(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(consumeAssignment$8(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().ele11AssignmentOpt2());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 		}
-		marker.commit();
-		announceLevelFinished();
-		return result;
+		return result.getResult();
 	}
 
 	protected int consumeKeyword$7(int entryPoint) throws Exception {

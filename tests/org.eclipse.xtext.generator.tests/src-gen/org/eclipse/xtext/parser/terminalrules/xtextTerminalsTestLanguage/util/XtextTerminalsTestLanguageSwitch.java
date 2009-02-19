@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextTerminalsTestLanguageSwitch.java,v 1.5 2009/02/19 21:10:13 sefftinge Exp $
  */
 package org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.util;
 

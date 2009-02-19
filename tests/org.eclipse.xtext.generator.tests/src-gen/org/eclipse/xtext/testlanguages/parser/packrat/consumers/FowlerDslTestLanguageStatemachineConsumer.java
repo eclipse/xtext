@@ -54,79 +54,61 @@ public final class FowlerDslTestLanguageStatemachineConsumer extends NonTerminal
 	}
 
 	protected int consumeGroup$1(int entryPoint) throws Exception {
-		announceNextLevel();
-		final IMarker marker = mark();
-		int result = ConsumeResult.SUCCESS;
+		GroupResult result = createGroupResult(getRule().eleGroup());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
-				result = ConsumeResult.EMPTY_MATCH;
+				result.reset();
 			case 0:
-				announceNextStep();
-				result = consumeKeyword$7(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(consumeKeyword$7(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().ele000000KeywordEvents());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 			case 1:
-				announceNextStep();
-				result = consumeAssignment$8(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(consumeAssignment$8(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().ele000001AssignmentEvents());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 			case 2:
-				announceNextStep();
-				result = consumeKeyword$10(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(consumeKeyword$10(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().ele00001KeywordEnd());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 			case 3:
-				announceNextStep();
-				result = consumeKeyword$11(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(consumeKeyword$11(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().ele0001KeywordCommands());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 			case 4:
-				announceNextStep();
-				result = consumeAssignment$12(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(consumeAssignment$12(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().ele001AssignmentCommands());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 			case 5:
-				announceNextStep();
-				result = consumeKeyword$14(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(consumeKeyword$14(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().ele01KeywordEnd());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 			case 6:
-				announceNextStep();
-				result = consumeAssignment$15(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(consumeAssignment$15(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().ele1AssignmentStates());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 		}
-		marker.commit();
-		announceLevelFinished();
-		return result;
+		return result.getResult();
 	}
 
 	protected int consumeKeyword$7(int entryPoint) throws Exception {
@@ -139,6 +121,7 @@ public final class FowlerDslTestLanguageStatemachineConsumer extends NonTerminal
 			marker.flush();
 		}
 		marker.rollback();
+		skipped(getRule().ele000001AssignmentEvents());
 		return ConsumeResult.SUCCESS;
 	}
 
@@ -164,6 +147,7 @@ public final class FowlerDslTestLanguageStatemachineConsumer extends NonTerminal
 			marker.flush();
 		}
 		marker.rollback();
+		skipped(getRule().ele001AssignmentCommands());
 		return ConsumeResult.SUCCESS;
 	}
 
@@ -185,6 +169,7 @@ public final class FowlerDslTestLanguageStatemachineConsumer extends NonTerminal
 			marker.flush();
 		}
 		marker.rollback();
+		skipped(getRule().ele1AssignmentStates());
 		return ConsumeResult.SUCCESS;
 	}
 

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="ASCII"?>
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="../org.eclipse.xtext.ui.integration.tests/src-gen" forceOverwrite="true" bundleManifest="false" complianceLevel="5.0" copyrightFields="false">
   <genPackages prefix="Foo" basePackage="org.eclipse.xtext.ui.integration" disposableProviderFactory="true">
-    <ecorePackage href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.ui.integration.tests/src-gen/org/eclipse/xtext/ui/integration/TestLanguage.ecore#/"/>
+    <ecorePackage href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.integration.tests/src-gen/org/eclipse/xtext/ui/integration/TestLanguage.ecore#/"/>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.ui.integration.tests/src-gen/org/eclipse/xtext/ui/integration/TestLanguage.ecore#//File"/>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.integration.tests/src-gen/org/eclipse/xtext/ui/integration/TestLanguage.ecore#//File"/>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.ui.integration.tests/src-gen/org/eclipse/xtext/ui/integration/TestLanguage.ecore#//File/stuff"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.integration.tests/src-gen/org/eclipse/xtext/ui/integration/TestLanguage.ecore#//File/stuff"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.ui.integration.tests/src-gen/org/eclipse/xtext/ui/integration/TestLanguage.ecore#//Stuff"/>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.integration.tests/src-gen/org/eclipse/xtext/ui/integration/TestLanguage.ecore#//Stuff"/>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.ui.integration.tests/src-gen/org/eclipse/xtext/ui/integration/TestLanguage.ecore#//Stuff/name"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.integration.tests/src-gen/org/eclipse/xtext/ui/integration/TestLanguage.ecore#//Stuff/name"/>
       </genFeatures>
     </genClasses>
   </genPackages>

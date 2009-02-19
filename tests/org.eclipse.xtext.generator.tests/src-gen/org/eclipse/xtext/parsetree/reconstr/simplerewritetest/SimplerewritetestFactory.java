@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SimplerewritetestFactory.java,v 1.5 2009/02/19 21:09:37 sefftinge Exp $
  */
 package org.eclipse.xtext.parsetree.reconstr.simplerewritetest;
 
@@ -96,7 +95,7 @@ public interface SimplerewritetestFactory extends EFactory
    * @return a new object of class '<em>Boolean</em>'.
    * @generated
    */
-  Boolean createBoolean();
+  org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Boolean createBoolean();
 
   /**
    * Returns a new object of class '<em>Op</em>'.

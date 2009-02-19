@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ActionLangSwitch.java,v 1.5 2009/02/19 21:10:15 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.actionLang.util;
 

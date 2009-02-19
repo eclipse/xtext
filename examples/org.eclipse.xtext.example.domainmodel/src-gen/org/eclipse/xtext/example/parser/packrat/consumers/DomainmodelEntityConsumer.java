@@ -58,70 +58,54 @@ public final class DomainmodelEntityConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeGroup$1(int entryPoint) throws Exception {
-		announceNextLevel();
-		final IMarker marker = mark();
-		int result = ConsumeResult.SUCCESS;
+		GroupResult result = createGroupResult(getRule().eleGroup());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
-				result = ConsumeResult.EMPTY_MATCH;
+				result.reset();
 			case 0:
-				announceNextStep();
-				result = consumeKeyword$6(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(consumeKeyword$6(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().ele00000KeywordEntity());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 			case 1:
-				announceNextStep();
-				result = consumeAssignment$7(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(consumeAssignment$7(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().ele00001AssignmentName());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 			case 2:
-				announceNextStep();
-				result = consumeGroup$9(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(consumeGroup$9(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().ele0001Group());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 			case 3:
-				announceNextStep();
-				result = consumeKeyword$14(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(consumeKeyword$14(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().ele001KeywordLeftCurlyBracket());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 			case 4:
-				announceNextStep();
-				result = consumeAssignment$15(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(consumeAssignment$15(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().ele01AssignmentFeatures());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 			case 5:
-				announceNextStep();
-				result = consumeKeyword$17(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(consumeKeyword$17(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().ele1KeywordRightCurlyBracket());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 		}
-		marker.commit();
-		announceLevelFinished();
-		return result;
+		return result.getResult();
 	}
 
 	protected int consumeKeyword$6(int entryPoint) throws Exception {
@@ -139,42 +123,35 @@ public final class DomainmodelEntityConsumer extends NonTerminalConsumer {
 	protected int consumeGroup$9(int entryPoint) throws Exception {
 		IMarker marker = mark();
 		int result = doConsumeGroup$9(entryPoint);
-		if (result != ConsumeResult.SUCCESS)
+		if (result != ConsumeResult.SUCCESS) {
 			marker.rollback();
-		else
+			skipped(getRule().ele0001Group());
+		} else
 			marker.commit();
 		return ConsumeResult.SUCCESS;
 	}
 
 	protected int doConsumeGroup$9(int entryPoint) throws Exception {
-		announceNextLevel();
-		final IMarker marker = mark();
-		int result = ConsumeResult.SUCCESS;
+		GroupResult result = createGroupResult(getRule().ele0001Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
-				result = ConsumeResult.EMPTY_MATCH;
+				result.reset();
 			case 0:
-				announceNextStep();
-				result = consumeKeyword$10(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(consumeKeyword$10(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().ele00010KeywordExtends());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 			case 1:
-				announceNextStep();
-				result = consumeAssignment$11(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(consumeAssignment$11(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().ele00011AssignmentSuperType());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 		}
-		marker.commit();
-		announceLevelFinished();
-		return result;
+		return result.getResult();
 	}
 
 	protected int consumeKeyword$10(int entryPoint) throws Exception {
@@ -199,6 +176,7 @@ public final class DomainmodelEntityConsumer extends NonTerminalConsumer {
 			marker.flush();
 		}
 		marker.rollback();
+		skipped(getRule().ele01AssignmentFeatures());
 		return ConsumeResult.SUCCESS;
 	}
 

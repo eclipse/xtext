@@ -51,38 +51,30 @@ public final class XtextAbstractTokenConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeGroup$1(int entryPoint) throws Exception {
-		announceNextLevel();
-		final IMarker marker = mark();
-		int result = ConsumeResult.SUCCESS;
+		GroupResult result = createGroupResult(getRule().eleGroup());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
-				result = ConsumeResult.EMPTY_MATCH;
+				result.reset();
 			case 0:
-				announceNextStep();
-				result = consumeAlternatives$2(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(consumeAlternatives$2(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().ele0Alternatives());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 			case 1:
-				announceNextStep();
-				result = consumeAssignment$7(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(consumeAssignment$7(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().ele1AssignmentCardinality());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 		}
-		marker.commit();
-		announceLevelFinished();
-		return result;
+		return result.getResult();
 	}
 
 	protected int consumeAlternatives$2(int entryPoint) throws Exception {
-		AlternativesResult result = createAlternativesResult();
+		AlternativesResult result = createAlternativesResult(getRule().ele0Alternatives());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -120,9 +112,10 @@ public final class XtextAbstractTokenConsumer extends NonTerminalConsumer {
 	protected int consumeAssignment$7(int entryPoint) throws Exception {
 		IMarker marker = mark();
 		int result = doConsumeAssignment$7(entryPoint);
-		if (result != ConsumeResult.SUCCESS)
+		if (result != ConsumeResult.SUCCESS) {
 			marker.rollback();
-		else
+			skipped(getRule().ele1AssignmentCardinality());
+		} else
 			marker.commit();
 		return ConsumeResult.SUCCESS;
 	}

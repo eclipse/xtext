@@ -55,52 +55,40 @@ public final class XtextGeneratedMetamodelConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeGroup$1(int entryPoint) throws Exception {
-		announceNextLevel();
-		final IMarker marker = mark();
-		int result = ConsumeResult.SUCCESS;
+		GroupResult result = createGroupResult(getRule().eleGroup());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
-				result = ConsumeResult.EMPTY_MATCH;
+				result.reset();
 			case 0:
-				announceNextStep();
-				result = consumeKeyword$4(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(consumeKeyword$4(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().ele000KeywordGenerate());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 			case 1:
-				announceNextStep();
-				result = consumeAssignment$5(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(consumeAssignment$5(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().ele001AssignmentName());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 			case 2:
-				announceNextStep();
-				result = consumeAssignment$7(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(consumeAssignment$7(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().ele01AssignmentEPackage());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 			case 3:
-				announceNextStep();
-				result = consumeGroup$10(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(consumeGroup$10(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().ele1Group());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 		}
-		marker.commit();
-		announceLevelFinished();
-		return result;
+		return result.getResult();
 	}
 
 	protected int consumeKeyword$4(int entryPoint) throws Exception {
@@ -126,42 +114,35 @@ public final class XtextGeneratedMetamodelConsumer extends NonTerminalConsumer {
 	protected int consumeGroup$10(int entryPoint) throws Exception {
 		IMarker marker = mark();
 		int result = doConsumeGroup$10(entryPoint);
-		if (result != ConsumeResult.SUCCESS)
+		if (result != ConsumeResult.SUCCESS) {
 			marker.rollback();
-		else
+			skipped(getRule().ele1Group());
+		} else
 			marker.commit();
 		return ConsumeResult.SUCCESS;
 	}
 
 	protected int doConsumeGroup$10(int entryPoint) throws Exception {
-		announceNextLevel();
-		final IMarker marker = mark();
-		int result = ConsumeResult.SUCCESS;
+		GroupResult result = createGroupResult(getRule().ele1Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
-				result = ConsumeResult.EMPTY_MATCH;
+				result.reset();
 			case 0:
-				announceNextStep();
-				result = consumeKeyword$11(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(consumeKeyword$11(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().ele10KeywordAs());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 			case 1:
-				announceNextStep();
-				result = consumeAssignment$12(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(consumeAssignment$12(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().ele11AssignmentAlias());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 		}
-		marker.commit();
-		announceLevelFinished();
-		return result;
+		return result.getResult();
 	}
 
 	protected int consumeKeyword$11(int entryPoint) throws Exception {

@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AssignmentValueImpl.java,v 1.5 2009/02/19 21:09:43 sefftinge Exp $
  */
 package org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl;
 
@@ -521,7 +520,7 @@ public class AssignmentValueImpl extends EObjectImpl implements AssignmentValue
       case EpatchTestLanguagePackage.ASSIGNMENT_VALUE__REF_FEATURE:
         return getRefFeature();
       case EpatchTestLanguagePackage.ASSIGNMENT_VALUE__REF_INDEX:
-        return getRefIndex();
+        return new Integer(getRefIndex());
       case EpatchTestLanguagePackage.ASSIGNMENT_VALUE__NEW_OBJECT:
         return getNewObject();
       case EpatchTestLanguagePackage.ASSIGNMENT_VALUE__IMPORT:
@@ -530,7 +529,7 @@ public class AssignmentValueImpl extends EObjectImpl implements AssignmentValue
       case EpatchTestLanguagePackage.ASSIGNMENT_VALUE__IMP_FRAG:
         return getImpFrag();
       case EpatchTestLanguagePackage.ASSIGNMENT_VALUE__INDEX:
-        return getIndex();
+        return new Integer(getIndex());
       case EpatchTestLanguagePackage.ASSIGNMENT_VALUE__KEYWORD:
         return getKeyword();
     }
@@ -557,7 +556,7 @@ public class AssignmentValueImpl extends EObjectImpl implements AssignmentValue
         setRefFeature((String)newValue);
         return;
       case EpatchTestLanguagePackage.ASSIGNMENT_VALUE__REF_INDEX:
-        setRefIndex((Integer)newValue);
+        setRefIndex(((Integer)newValue).intValue());
         return;
       case EpatchTestLanguagePackage.ASSIGNMENT_VALUE__NEW_OBJECT:
         setNewObject((CreatedObject)newValue);
@@ -569,7 +568,7 @@ public class AssignmentValueImpl extends EObjectImpl implements AssignmentValue
         setImpFrag((String)newValue);
         return;
       case EpatchTestLanguagePackage.ASSIGNMENT_VALUE__INDEX:
-        setIndex((Integer)newValue);
+        setIndex(((Integer)newValue).intValue());
         return;
       case EpatchTestLanguagePackage.ASSIGNMENT_VALUE__KEYWORD:
         setKeyword((String)newValue);

@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextAdapterFactory.java,v 1.3 2009/02/19 14:36:25 sefftinge Exp $
  */
 package org.eclipse.xtext.xtext.util;
 

@@ -17,13 +17,8 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.XtextRuntimeModule;
 import org.eclipse.xtext.builtin.IXtextBuiltin;
 import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
-import org.eclipse.xtext.parsetree.reconstr.SerializerUtil;
-
-import com.google.inject.Guice;
-import com.google.inject.Injector;
 
 /**
  * @author Moritz Eysholdt
@@ -53,14 +48,14 @@ public class GrammarAccessUtil {
 		}
 		return "";
 	}
-	
+
 	public static String serialize(EObject obj) {
 		return "not supported";
 //		Injector injector = Guice.createInjector(new XtextRuntimeModule());
 //		SerializerUtil serializer = injector.getInstance(SerializerUtil.class);
 //		return serializer.serialize(obj);
 	}
- 
+
 	private static String getElementJavaDescription(AbstractElement ele) {
 		String name = getElementDescription(ele);
 		if (name == null || "".equals(name))

@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KeywordsTestLanguageFactoryImpl.java,v 1.5 2009/02/19 21:07:59 sefftinge Exp $
  */
 package org.eclipse.xtext.parser.keywords.keywordsTestLanguage.impl;
 

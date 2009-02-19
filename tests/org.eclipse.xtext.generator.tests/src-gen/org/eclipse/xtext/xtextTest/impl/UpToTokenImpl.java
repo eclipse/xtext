@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UpToTokenImpl.java,v 1.5 2009/02/19 21:09:45 sefftinge Exp $
  */
 package org.eclipse.xtext.xtextTest.impl;
 

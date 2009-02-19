@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Type.java,v 1.5 2009/02/19 21:10:07 sefftinge Exp $
  */
 package org.eclipse.xtext.crossrefs.langATestLanguage;
 

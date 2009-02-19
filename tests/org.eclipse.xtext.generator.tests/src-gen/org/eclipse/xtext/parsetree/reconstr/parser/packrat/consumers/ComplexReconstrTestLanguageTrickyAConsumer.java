@@ -57,61 +57,47 @@ public final class ComplexReconstrTestLanguageTrickyAConsumer extends NonTermina
 	}
 
 	protected int consumeGroup$1(int entryPoint) throws Exception {
-		announceNextLevel();
-		final IMarker marker = mark();
-		int result = ConsumeResult.SUCCESS;
+		GroupResult result = createGroupResult(getRule().eleGroup());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
-				result = ConsumeResult.EMPTY_MATCH;
+				result.reset();
 			case 0:
-				announceNextStep();
-				result = consumeKeyword$5(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(consumeKeyword$5(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().ele0000KeywordTA());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 			case 1:
-				announceNextStep();
-				result = consumeRuleCall$6(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(consumeRuleCall$6(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().ele0001ParserRuleCallTrickyA1());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 			case 2:
-				announceNextStep();
-				result = consumeAssignment$7(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(consumeAssignment$7(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().ele001AssignmentName());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 			case 3:
-				announceNextStep();
-				result = consumeAlternatives$9(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(consumeAlternatives$9(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().ele01Alternatives());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 			case 4:
-				announceNextStep();
-				result = consumeAssignment$18(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(consumeAssignment$18(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().ele1AssignmentName());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 		}
-		marker.commit();
-		announceLevelFinished();
-		return result;
+		return result.getResult();
 	}
 
 	protected int consumeKeyword$5(int entryPoint) throws Exception {
@@ -128,6 +114,7 @@ public final class ComplexReconstrTestLanguageTrickyAConsumer extends NonTermina
 			marker.flush();
 		}
 		marker.rollback();
+		skipped(getRule().ele001AssignmentName());
 		return ConsumeResult.SUCCESS;
 	}
 
@@ -142,15 +129,16 @@ public final class ComplexReconstrTestLanguageTrickyAConsumer extends NonTermina
 	protected int consumeAlternatives$9(int entryPoint) throws Exception {
 		IMarker marker = mark();
 		int result = doConsumeAlternatives$9(entryPoint);
-		if (result != ConsumeResult.SUCCESS)
+		if (result != ConsumeResult.SUCCESS) {
 			marker.rollback();
-		else
+			skipped(getRule().ele01Alternatives());
+		} else
 			marker.commit();
 		return ConsumeResult.SUCCESS;
 	}
 
 	protected int doConsumeAlternatives$9(int entryPoint) throws Exception {
-		AlternativesResult result = createAlternativesResult();
+		AlternativesResult result = createAlternativesResult(getRule().ele01Alternatives());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -169,34 +157,26 @@ public final class ComplexReconstrTestLanguageTrickyAConsumer extends NonTermina
 	}
 
 	protected int consumeGroup$10(int entryPoint) throws Exception {
-		announceNextLevel();
-		final IMarker marker = mark();
-		int result = ConsumeResult.SUCCESS;
+		GroupResult result = createGroupResult(getRule().ele010Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
-				result = ConsumeResult.EMPTY_MATCH;
+				result.reset();
 			case 0:
-				announceNextStep();
-				result = consumeAction$11(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(consumeAction$11(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().ele0100ActionTypeBx());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 			case 1:
-				announceNextStep();
-				result = consumeKeyword$13(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(consumeKeyword$13(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().ele0101KeywordX());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 		}
-		marker.commit();
-		announceLevelFinished();
-		return result;
+		return result.getResult();
 	}
 	protected int consumeAction$11(int entryPoint) {
 		consumeAction(getRule().ele0100ActionTypeBx(), false);
@@ -208,34 +188,26 @@ public final class ComplexReconstrTestLanguageTrickyAConsumer extends NonTermina
 	}
 
 	protected int consumeGroup$14(int entryPoint) throws Exception {
-		announceNextLevel();
-		final IMarker marker = mark();
-		int result = ConsumeResult.SUCCESS;
+		GroupResult result = createGroupResult(getRule().ele011Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
-				result = ConsumeResult.EMPTY_MATCH;
+				result.reset();
 			case 0:
-				announceNextStep();
-				result = consumeAction$15(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(consumeAction$15(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().ele0110ActionTypeCx());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 			case 1:
-				announceNextStep();
-				result = consumeKeyword$17(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(consumeKeyword$17(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().ele0111KeywordY());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 		}
-		marker.commit();
-		announceLevelFinished();
-		return result;
+		return result.getResult();
 	}
 	protected int consumeAction$15(int entryPoint) {
 		consumeAction(getRule().ele0110ActionTypeCx(), false);

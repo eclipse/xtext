@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ChoiceElementImpl.java,v 1.5 2009/02/19 21:09:57 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.testLang.impl;
 
@@ -149,7 +148,7 @@ public class ChoiceElementImpl extends AbstractElementImpl implements ChoiceElem
     switch (featureID)
     {
       case TestLangPackage.CHOICE_ELEMENT__OPTIONAL_KEYWORD:
-        return isOptionalKeyword();
+        return isOptionalKeyword() ? Boolean.TRUE : Boolean.FALSE;
       case TestLangPackage.CHOICE_ELEMENT__NAME:
         return getName();
     }
@@ -167,7 +166,7 @@ public class ChoiceElementImpl extends AbstractElementImpl implements ChoiceElem
     switch (featureID)
     {
       case TestLangPackage.CHOICE_ELEMENT__OPTIONAL_KEYWORD:
-        setOptionalKeyword((Boolean)newValue);
+        setOptionalKeyword(((Boolean)newValue).booleanValue());
         return;
       case TestLangPackage.CHOICE_ELEMENT__NAME:
         setName((String)newValue);

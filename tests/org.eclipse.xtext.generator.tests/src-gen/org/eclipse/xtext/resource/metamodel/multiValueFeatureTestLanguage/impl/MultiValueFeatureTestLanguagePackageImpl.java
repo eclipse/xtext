@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MultiValueFeatureTestLanguagePackageImpl.java,v 1.5 2009/02/19 21:09:46 sefftinge Exp $
  */
 package org.eclipse.xtext.resource.metamodel.multiValueFeatureTestLanguage.impl;
 

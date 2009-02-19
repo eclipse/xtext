@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ReferenceGrammarFactory.java,v 1.5 2009/02/19 21:08:39 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.referenceGrammar;
 

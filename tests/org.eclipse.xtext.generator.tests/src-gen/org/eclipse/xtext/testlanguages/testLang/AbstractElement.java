@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractElement.java,v 1.5 2009/02/19 21:09:55 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.testLang;
 

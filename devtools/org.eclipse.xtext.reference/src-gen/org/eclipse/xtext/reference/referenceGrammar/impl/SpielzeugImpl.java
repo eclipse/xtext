@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SpielzeugImpl.java,v 1.5 2009/02/19 21:08:18 sefftinge Exp $
  */
 package org.eclipse.xtext.reference.referenceGrammar.impl;
 

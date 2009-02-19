@@ -48,13 +48,14 @@ public final class DatatypeRulesTestLanguageCompositeModelConsumer extends NonTe
 				announceNextStep();
 				result = doConsumeAssignment$1(nextEntryPoint());
 			case 1:
-				announceNextStep();
 				if (result == ConsumeResult.SUCCESS) {
 					marker.flush();
+					announceNextStep();
 					while(doConsumeAssignment$1(nextEntryPoint())==ConsumeResult.SUCCESS) {
 						marker.flush();
 					}
 					marker.rollback();
+					skipped(getRule().eleAssignmentModel());
 					announceLevelFinished();
 					return ConsumeResult.SUCCESS;
 				}

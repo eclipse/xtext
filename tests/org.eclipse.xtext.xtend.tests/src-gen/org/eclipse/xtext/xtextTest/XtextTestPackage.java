@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextTestPackage.java,v 1.5 2009/02/19 21:07:53 sefftinge Exp $
  */
 package org.eclipse.xtext.xtextTest;
 

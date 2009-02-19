@@ -1,176 +1,176 @@
 <?xml version="1.0" encoding="ASCII"?>
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="../org.eclipse.xtext/src-gen" forceOverwrite="true" bundleManifest="false" complianceLevel="5.0" copyrightFields="false">
   <genPackages prefix="Xtext" basePackage="org.eclipse.xtext" disposableProviderFactory="true">
-    <ecorePackage href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#/"/>
+    <ecorePackage href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#/"/>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//Grammar"/>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//Grammar"/>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//Grammar/abstract"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//Grammar/abstract"/>
       </genFeatures>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//Grammar/name"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//Grammar/name"/>
       </genFeatures>
       <genFeatures notify="false" createChild="false" propertySortChoices="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//Grammar/superGrammar"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//Grammar/superGrammar"/>
       </genFeatures>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//Grammar/definesHiddenTokens"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//Grammar/definesHiddenTokens"/>
       </genFeatures>
       <genFeatures notify="false" createChild="false" propertySortChoices="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//Grammar/hiddenTokens"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//Grammar/hiddenTokens"/>
       </genFeatures>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//Grammar/metamodelDeclarations"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//Grammar/metamodelDeclarations"/>
       </genFeatures>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//Grammar/rules"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//Grammar/rules"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//AbstractRule"/>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//AbstractRule"/>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//AbstractRule/name"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//AbstractRule/name"/>
       </genFeatures>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//AbstractRule/type"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//AbstractRule/type"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//AbstractMetamodelDeclaration"/>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//AbstractMetamodelDeclaration"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//AbstractMetamodelDeclaration/ePackage"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//AbstractMetamodelDeclaration/ePackage"/>
       </genFeatures>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//AbstractMetamodelDeclaration/alias"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//AbstractMetamodelDeclaration/alias"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//GeneratedMetamodel"/>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//GeneratedMetamodel"/>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//GeneratedMetamodel/name"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//GeneratedMetamodel/name"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//ReferencedMetamodel"/>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//ReferencedMetamodel"/>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//LexerRule"/>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//LexerRule"/>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//LexerRule/body"/>
-      </genFeatures>
-    </genClasses>
-    <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//ParserRule"/>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//ParserRule/definesHiddenTokens"/>
-      </genFeatures>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//ParserRule/hiddenTokens"/>
-      </genFeatures>
-      <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//ParserRule/alternatives"/>
-      </genFeatures>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//ParserRule/terminal"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//LexerRule/body"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//TypeRef"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//TypeRef/metamodel"/>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//ParserRule"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//ParserRule/definesHiddenTokens"/>
       </genFeatures>
       <genFeatures notify="false" createChild="false" propertySortChoices="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//TypeRef/type"/>
-      </genFeatures>
-    </genClasses>
-    <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//AbstractElement"/>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//AbstractElement/cardinality"/>
-      </genFeatures>
-    </genClasses>
-    <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//Assignment"/>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//Assignment/feature"/>
-      </genFeatures>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//Assignment/operator"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//ParserRule/hiddenTokens"/>
       </genFeatures>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//Assignment/terminal"/>
-      </genFeatures>
-    </genClasses>
-    <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//Action"/>
-      <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//Action/typeName"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//ParserRule/alternatives"/>
       </genFeatures>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//Action/feature"/>
-      </genFeatures>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//Action/operator"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//ParserRule/terminal"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//AbstractNegatedToken"/>
-      <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//AbstractNegatedToken/terminal"/>
-      </genFeatures>
-    </genClasses>
-    <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//NegatedToken"/>
-    </genClasses>
-    <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//UpToToken"/>
-    </genClasses>
-    <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//Wildcard"/>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//Wildcard/isWildcard"/>
-      </genFeatures>
-    </genClasses>
-    <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//CrossReference"/>
-      <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//CrossReference/type"/>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//TypeRef"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//TypeRef/metamodel"/>
       </genFeatures>
       <genFeatures notify="false" createChild="false" propertySortChoices="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//CrossReference/rule"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//TypeRef/type"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//Keyword"/>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//AbstractElement"/>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//Keyword/value"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//AbstractElement/cardinality"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//RuleCall"/>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//Assignment"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//Assignment/feature"/>
+      </genFeatures>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//Assignment/operator"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//Assignment/terminal"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//Action"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//Action/typeName"/>
+      </genFeatures>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//Action/feature"/>
+      </genFeatures>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//Action/operator"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//AbstractNegatedToken"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//AbstractNegatedToken/terminal"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//NegatedToken"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//UpToToken"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//Wildcard"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//Wildcard/isWildcard"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//CrossReference"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//CrossReference/type"/>
+      </genFeatures>
       <genFeatures notify="false" createChild="false" propertySortChoices="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//RuleCall/rule"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//CrossReference/rule"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//Alternatives"/>
-      <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//Alternatives/groups"/>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//Keyword"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//Keyword/value"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//Group"/>
-      <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//Group/abstractTokens"/>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//RuleCall"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//RuleCall/rule"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//CharacterRange"/>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//Alternatives"/>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//CharacterRange/left"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//Alternatives/groups"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//Group"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//Group/abstractTokens"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//CharacterRange"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//CharacterRange/left"/>
       </genFeatures>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//CharacterRange/right"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/org.eclipse.xtext.bootstrap/../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.ecore#//CharacterRange/right"/>
       </genFeatures>
     </genClasses>
   </genPackages>

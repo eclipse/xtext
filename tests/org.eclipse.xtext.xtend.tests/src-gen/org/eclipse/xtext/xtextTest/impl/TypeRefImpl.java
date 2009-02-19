@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeRefImpl.java,v 1.5 2009/02/19 21:07:35 sefftinge Exp $
  */
 package org.eclipse.xtext.xtextTest.impl;
 

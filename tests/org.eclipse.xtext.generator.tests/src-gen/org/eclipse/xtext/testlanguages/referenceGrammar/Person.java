@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Person.java,v 1.5 2009/02/19 21:09:56 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.referenceGrammar;
 

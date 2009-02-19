@@ -47,34 +47,26 @@ public final class XtextTerminalTokenConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeGroup$1(int entryPoint) throws Exception {
-		announceNextLevel();
-		final IMarker marker = mark();
-		int result = ConsumeResult.SUCCESS;
+		GroupResult result = createGroupResult(getRule().eleGroup());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
-				result = ConsumeResult.EMPTY_MATCH;
+				result.reset();
 			case 0:
-				announceNextStep();
-				result = consumeRuleCall$2(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(consumeRuleCall$2(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().ele0ParserRuleCallTerminalTokenElement());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 			case 1:
-				announceNextStep();
-				result = consumeAssignment$3(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(consumeAssignment$3(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().ele1AssignmentCardinality());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 		}
-		marker.commit();
-		announceLevelFinished();
-		return result;
+		return result.getResult();
 	}
 
 	protected int consumeRuleCall$2(int entryPoint) throws Exception {
@@ -84,9 +76,10 @@ public final class XtextTerminalTokenConsumer extends NonTerminalConsumer {
 	protected int consumeAssignment$3(int entryPoint) throws Exception {
 		IMarker marker = mark();
 		int result = doConsumeAssignment$3(entryPoint);
-		if (result != ConsumeResult.SUCCESS)
+		if (result != ConsumeResult.SUCCESS) {
 			marker.rollback();
-		else
+			skipped(getRule().ele1AssignmentCardinality());
+		} else
 			marker.commit();
 		return ConsumeResult.SUCCESS;
 	}

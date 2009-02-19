@@ -43,6 +43,7 @@ public final class ActionTestLanguageModelConsumer extends NonTerminalConsumer {
 			marker.flush();
 		}
 		marker.rollback();
+		skipped(getRule().eleAssignmentChildren());
 		return ConsumeResult.SUCCESS;
 	}
 

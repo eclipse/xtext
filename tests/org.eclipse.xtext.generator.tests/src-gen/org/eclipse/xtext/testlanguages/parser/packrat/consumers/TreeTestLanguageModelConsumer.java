@@ -43,6 +43,7 @@ public final class TreeTestLanguageModelConsumer extends NonTerminalConsumer {
 			marker.flush();
 		}
 		marker.rollback();
+		skipped(getRule().eleAssignmentChildren());
 		return ConsumeResult.SUCCESS;
 	}
 

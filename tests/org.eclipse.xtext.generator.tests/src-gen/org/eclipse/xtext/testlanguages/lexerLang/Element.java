@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Element.java,v 1.5 2009/02/19 21:10:01 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.lexerLang;
 

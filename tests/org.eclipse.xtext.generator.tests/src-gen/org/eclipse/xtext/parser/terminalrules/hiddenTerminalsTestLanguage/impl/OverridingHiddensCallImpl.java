@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: OverridingHiddensCallImpl.java,v 1.5 2009/02/19 21:09:55 sefftinge Exp $
  */
 package org.eclipse.xtext.parser.terminalrules.hiddenTerminalsTestLanguage.impl;
 
@@ -139,7 +138,7 @@ public class OverridingHiddensCallImpl extends EObjectImpl implements Overriding
       case HiddenTerminalsTestLanguagePackage.OVERRIDING_HIDDENS_CALL__SPACES:
         return getSpaces();
       case HiddenTerminalsTestLanguagePackage.OVERRIDING_HIDDENS_CALL__VALID:
-        return isValid();
+        return isValid() ? Boolean.TRUE : Boolean.FALSE;
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -160,7 +159,7 @@ public class OverridingHiddensCallImpl extends EObjectImpl implements Overriding
         getSpaces().addAll((Collection<? extends String>)newValue);
         return;
       case HiddenTerminalsTestLanguagePackage.OVERRIDING_HIDDENS_CALL__VALID:
-        setValid((Boolean)newValue);
+        setValid(((Boolean)newValue).booleanValue());
         return;
     }
     super.eSet(featureID, newValue);

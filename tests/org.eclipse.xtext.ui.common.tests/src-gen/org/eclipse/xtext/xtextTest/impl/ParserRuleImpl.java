@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParserRuleImpl.java,v 1.5 2009/02/19 21:08:45 sefftinge Exp $
  */
 package org.eclipse.xtext.xtextTest.impl;
 
@@ -259,13 +258,13 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
     switch (featureID)
     {
       case XtextTestPackage.PARSER_RULE__DEFINES_HIDDEN_TOKENS:
-        return isDefinesHiddenTokens();
+        return isDefinesHiddenTokens() ? Boolean.TRUE : Boolean.FALSE;
       case XtextTestPackage.PARSER_RULE__HIDDEN_TOKENS:
         return getHiddenTokens();
       case XtextTestPackage.PARSER_RULE__ALTERNATIVES:
         return getAlternatives();
       case XtextTestPackage.PARSER_RULE__TERMINAL:
-        return isTerminal();
+        return isTerminal() ? Boolean.TRUE : Boolean.FALSE;
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -282,7 +281,7 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
     switch (featureID)
     {
       case XtextTestPackage.PARSER_RULE__DEFINES_HIDDEN_TOKENS:
-        setDefinesHiddenTokens((Boolean)newValue);
+        setDefinesHiddenTokens(((Boolean)newValue).booleanValue());
         return;
       case XtextTestPackage.PARSER_RULE__HIDDEN_TOKENS:
         getHiddenTokens().clear();
@@ -292,7 +291,7 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
         setAlternatives((AbstractElement)newValue);
         return;
       case XtextTestPackage.PARSER_RULE__TERMINAL:
-        setTerminal((Boolean)newValue);
+        setTerminal(((Boolean)newValue).booleanValue());
         return;
     }
     super.eSet(featureID, newValue);

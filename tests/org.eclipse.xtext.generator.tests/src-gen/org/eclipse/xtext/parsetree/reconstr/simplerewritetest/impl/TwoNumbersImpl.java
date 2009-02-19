@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TwoNumbersImpl.java,v 1.5 2009/02/19 21:09:46 sefftinge Exp $
  */
 package org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl;
 
@@ -180,9 +179,9 @@ public class TwoNumbersImpl extends ExpressionImpl implements TwoNumbers
     switch (featureID)
     {
       case SimplerewritetestPackage.TWO_NUMBERS__NUM1:
-        return getNum1();
+        return new Integer(getNum1());
       case SimplerewritetestPackage.TWO_NUMBERS__NUM2:
-        return getNum2();
+        return new Integer(getNum2());
       case SimplerewritetestPackage.TWO_NUMBERS__NUM3:
         return getNum3();
     }
@@ -201,10 +200,10 @@ public class TwoNumbersImpl extends ExpressionImpl implements TwoNumbers
     switch (featureID)
     {
       case SimplerewritetestPackage.TWO_NUMBERS__NUM1:
-        setNum1((Integer)newValue);
+        setNum1(((Integer)newValue).intValue());
         return;
       case SimplerewritetestPackage.TWO_NUMBERS__NUM2:
-        setNum2((Integer)newValue);
+        setNum2(((Integer)newValue).intValue());
         return;
       case SimplerewritetestPackage.TWO_NUMBERS__NUM3:
         getNum3().clear();

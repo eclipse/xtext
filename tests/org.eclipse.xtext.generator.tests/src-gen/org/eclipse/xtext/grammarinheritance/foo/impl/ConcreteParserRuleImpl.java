@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ConcreteParserRuleImpl.java,v 1.5 2009/02/19 21:09:46 sefftinge Exp $
  */
 package org.eclipse.xtext.grammarinheritance.foo.impl;
 
@@ -157,7 +156,7 @@ public class ConcreteParserRuleImpl extends RootRuleImpl implements ConcretePars
     switch (featureID)
     {
       case FooPackage.CONCRETE_PARSER_RULE__MAGIC_NUMBER:
-        return getMagicNumber();
+        return new Double(getMagicNumber());
       case FooPackage.CONCRETE_PARSER_RULE__ELEMENTS:
         return getElements();
     }
@@ -176,7 +175,7 @@ public class ConcreteParserRuleImpl extends RootRuleImpl implements ConcretePars
     switch (featureID)
     {
       case FooPackage.CONCRETE_PARSER_RULE__MAGIC_NUMBER:
-        setMagicNumber((Double)newValue);
+        setMagicNumber(((Double)newValue).doubleValue());
         return;
       case FooPackage.CONCRETE_PARSER_RULE__ELEMENTS:
         getElements().clear();

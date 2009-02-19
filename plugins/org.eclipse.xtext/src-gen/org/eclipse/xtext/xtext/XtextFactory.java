@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextFactory.java,v 1.3 2009/02/19 14:36:24 sefftinge Exp $
  */
 package org.eclipse.xtext.xtext;
 

@@ -43,6 +43,7 @@ public final class TestLanguageEntryRuleConsumer extends NonTerminalConsumer {
 			marker.flush();
 		}
 		marker.rollback();
+		skipped(getRule().eleAssignmentMultiFeature());
 		return ConsumeResult.SUCCESS;
 	}
 

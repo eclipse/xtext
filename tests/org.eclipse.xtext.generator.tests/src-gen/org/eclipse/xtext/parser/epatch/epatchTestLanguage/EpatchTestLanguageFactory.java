@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EpatchTestLanguageFactory.java,v 1.5 2009/02/19 21:09:38 sefftinge Exp $
  */
 package org.eclipse.xtext.parser.epatch.epatchTestLanguage;
 
