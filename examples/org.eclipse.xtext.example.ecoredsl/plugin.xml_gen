@@ -5,9 +5,9 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
-       uri = "http://example.xtext.org/FowlerDsl" 
-       class = "org.eclipse.xtext.example.fowlerdsl.FowlerdslPackage"
-       genModel = "org/eclipse/xtext/example/FowlerDsl.genmodel" /> 
+       uri = "http://example.xtext.org/EcoreDsl" 
+       class = "org.eclipse.xtext.example.ecoredsl.EcoredslPackage"
+       genModel = "org/eclipse/xtext/example/EcoreDsl.genmodel" /> 
 	
   </extension>
 
@@ -15,9 +15,9 @@
   <extension
 		point="org.eclipse.xtend.typesystem.emf.checks">
 		<metaModel
-			nsURI="http://example.xtext.org/FowlerDsl">
+			nsURI="http://example.xtext.org/EcoreDsl">
 			<checkFile
-				path="org/eclipse/xtext/example/FowlerdslChecks.chk">
+				path="org/eclipse/xtext/example/EcoredslChecks.chk">
 			</checkFile>
 		</metaModel>
 	
