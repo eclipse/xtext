@@ -19,14 +19,14 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.testlanguages.services.PartialParserTestLanguageGrammarAccess.NestedElements;
 
-import org.eclipse.xtext.testlanguages.parser.packrat.consumers.PartialParserTestLanguageContainerConsumer;
+import org.eclipse.xtext.testlanguages.parser.packrat.consumers.PartialParserTestLanguageSomeContainerConsumer;
 
 @SuppressWarnings("unused")
 public final class PartialParserTestLanguageNestedConsumer extends NonTerminalConsumer {
 
 	private NestedElements rule;
 	
-	private INonTerminalConsumer containerConsumer;
+	private INonTerminalConsumer someContainerConsumer;
 
 	private ICharacterClass keyword$4$Delimiter;
 	
@@ -136,7 +136,7 @@ public final class PartialParserTestLanguageNestedConsumer extends NonTerminalCo
 	}
 
 	protected int consumeRuleCall$7(int entryPoint) throws Exception {
-		return consumeNonTerminal(containerConsumer, "nested", true, false, false, getRule().ele010ParserRuleCallContainer());
+		return consumeNonTerminal(someContainerConsumer, "nested", true, false, false, getRule().ele010ParserRuleCallSomeContainer());
 	}
 
 	protected int consumeKeyword$8(int entryPoint) throws Exception {
@@ -161,8 +161,8 @@ public final class PartialParserTestLanguageNestedConsumer extends NonTerminalCo
 		return getGrammarElement().getType().getType();
 	}
 	
-	public void setContainerConsumer(INonTerminalConsumer containerConsumer) {
-		this.containerConsumer = containerConsumer;
+	public void setSomeContainerConsumer(INonTerminalConsumer someContainerConsumer) {
+		this.someContainerConsumer = someContainerConsumer;
 	}
 	
 	public ICharacterClass getKeyword$4$Delimiter() {

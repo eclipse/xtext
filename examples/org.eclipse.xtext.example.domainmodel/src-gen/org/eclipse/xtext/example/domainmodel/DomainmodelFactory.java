@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DomainmodelFactory.java,v 1.4 2009/02/19 16:25:14 sefftinge Exp $
+ * $Id: DomainmodelFactory.java,v 1.5 2009/02/19 21:06:42 sefftinge Exp $
  */
 package org.eclipse.xtext.example.domainmodel;
 
@@ -60,7 +60,7 @@ public interface DomainmodelFactory extends EFactory
    * @return a new object of class '<em>Package</em>'.
    * @generated
    */
-  org.eclipse.xtext.example.domainmodel.Package createPackage();
+  Package createPackage();
 
   /**
    * Returns a new object of class '<em>Type</em>'.

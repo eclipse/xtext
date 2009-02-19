@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StatemachineImpl.java,v 1.4 2009/02/19 16:28:37 sefftinge Exp $
+ * $Id: StatemachineImpl.java,v 1.5 2009/02/19 21:11:07 sefftinge Exp $
  */
 package org.eclipse.xtext.example.fowlerdsl.impl;
 

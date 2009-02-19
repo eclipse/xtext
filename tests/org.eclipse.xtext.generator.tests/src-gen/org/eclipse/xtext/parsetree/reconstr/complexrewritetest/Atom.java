@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Atom.java,v 1.4 2009/02/19 16:26:55 sefftinge Exp $
+ * $Id: Atom.java,v 1.5 2009/02/19 21:09:47 sefftinge Exp $
  */
 package org.eclipse.xtext.parsetree.reconstr.complexrewritetest;
 

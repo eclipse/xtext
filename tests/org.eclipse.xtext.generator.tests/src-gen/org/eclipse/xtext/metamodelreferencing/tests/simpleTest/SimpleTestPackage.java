@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SimpleTestPackage.java,v 1.4 2009/02/19 16:26:58 sefftinge Exp $
+ * $Id: SimpleTestPackage.java,v 1.5 2009/02/19 21:09:52 sefftinge Exp $
  */
 package org.eclipse.xtext.metamodelreferencing.tests.simpleTest;
 

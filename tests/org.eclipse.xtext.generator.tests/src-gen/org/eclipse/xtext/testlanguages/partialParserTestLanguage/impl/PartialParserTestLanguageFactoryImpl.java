@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PartialParserTestLanguageFactoryImpl.java,v 1.4 2009/02/19 16:26:57 sefftinge Exp $
+ * $Id: PartialParserTestLanguageFactoryImpl.java,v 1.5 2009/02/19 21:09:50 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.partialParserTestLanguage.impl;
 
@@ -68,7 +68,7 @@ public class PartialParserTestLanguageFactoryImpl extends EFactoryImpl implement
   {
     switch (eClass.getClassifierID())
     {
-      case PartialParserTestLanguagePackage.CONTAINER: return createContainer();
+      case PartialParserTestLanguagePackage.SOME_CONTAINER: return createSomeContainer();
       case PartialParserTestLanguagePackage.NESTED: return createNested();
       case PartialParserTestLanguagePackage.CONTENT: return createContent();
       case PartialParserTestLanguagePackage.CHILDREN: return createChildren();
@@ -88,10 +88,10 @@ public class PartialParserTestLanguageFactoryImpl extends EFactoryImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public Container createContainer()
+  public SomeContainer createSomeContainer()
   {
-    ContainerImpl container = new ContainerImpl();
-    return container;
+    SomeContainerImpl someContainer = new SomeContainerImpl();
+    return someContainer;
   }
 
   /**

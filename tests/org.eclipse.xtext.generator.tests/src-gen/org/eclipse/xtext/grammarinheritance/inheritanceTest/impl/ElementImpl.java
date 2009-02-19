@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ElementImpl.java,v 1.4 2009/02/19 16:27:15 sefftinge Exp $
+ * $Id: ElementImpl.java,v 1.5 2009/02/19 21:10:08 sefftinge Exp $
  */
 package org.eclipse.xtext.grammarinheritance.inheritanceTest.impl;
 

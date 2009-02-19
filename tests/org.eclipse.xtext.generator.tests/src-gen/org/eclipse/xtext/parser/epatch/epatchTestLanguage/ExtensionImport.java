@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ExtensionImport.java,v 1.4 2009/02/19 16:26:43 sefftinge Exp $
+ * $Id: ExtensionImport.java,v 1.5 2009/02/19 21:09:38 sefftinge Exp $
  */
 package org.eclipse.xtext.parser.epatch.epatchTestLanguage;
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ContainerImpl.java,v 1.4 2009/02/19 16:26:57 sefftinge Exp $
+ * $Id: SomeContainerImpl.java,v 1.1 2009/02/19 21:09:50 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.partialParserTestLanguage.impl;
 
@@ -22,27 +22,27 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.eclipse.xtext.testlanguages.partialParserTestLanguage.Container;
 import org.eclipse.xtext.testlanguages.partialParserTestLanguage.Content;
 import org.eclipse.xtext.testlanguages.partialParserTestLanguage.Nested;
 import org.eclipse.xtext.testlanguages.partialParserTestLanguage.PartialParserTestLanguagePackage;
+import org.eclipse.xtext.testlanguages.partialParserTestLanguage.SomeContainer;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Container</b></em>'.
+ * An implementation of the model object '<em><b>Some Container</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.testlanguages.partialParserTestLanguage.impl.ContainerImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.xtext.testlanguages.partialParserTestLanguage.impl.ContainerImpl#getNested <em>Nested</em>}</li>
- *   <li>{@link org.eclipse.xtext.testlanguages.partialParserTestLanguage.impl.ContainerImpl#getContent <em>Content</em>}</li>
+ *   <li>{@link org.eclipse.xtext.testlanguages.partialParserTestLanguage.impl.SomeContainerImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.testlanguages.partialParserTestLanguage.impl.SomeContainerImpl#getNested <em>Nested</em>}</li>
+ *   <li>{@link org.eclipse.xtext.testlanguages.partialParserTestLanguage.impl.SomeContainerImpl#getContent <em>Content</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ContainerImpl extends EObjectImpl implements Container
+public class SomeContainerImpl extends EObjectImpl implements SomeContainer
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -89,7 +89,7 @@ public class ContainerImpl extends EObjectImpl implements Container
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ContainerImpl()
+  protected SomeContainerImpl()
   {
     super();
   }
@@ -102,7 +102,7 @@ public class ContainerImpl extends EObjectImpl implements Container
   @Override
   protected EClass eStaticClass()
   {
-    return PartialParserTestLanguagePackage.Literals.CONTAINER;
+    return PartialParserTestLanguagePackage.Literals.SOME_CONTAINER;
   }
 
   /**
@@ -125,7 +125,7 @@ public class ContainerImpl extends EObjectImpl implements Container
     String oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, PartialParserTestLanguagePackage.CONTAINER__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, PartialParserTestLanguagePackage.SOME_CONTAINER__NAME, oldName, name));
   }
 
   /**
@@ -137,7 +137,7 @@ public class ContainerImpl extends EObjectImpl implements Container
   {
     if (nested == null)
     {
-      nested = new EObjectContainmentEList<Nested>(Nested.class, this, PartialParserTestLanguagePackage.CONTAINER__NESTED);
+      nested = new EObjectContainmentEList<Nested>(Nested.class, this, PartialParserTestLanguagePackage.SOME_CONTAINER__NESTED);
     }
     return nested;
   }
@@ -151,7 +151,7 @@ public class ContainerImpl extends EObjectImpl implements Container
   {
     if (content == null)
     {
-      content = new EObjectContainmentEList<Content>(Content.class, this, PartialParserTestLanguagePackage.CONTAINER__CONTENT);
+      content = new EObjectContainmentEList<Content>(Content.class, this, PartialParserTestLanguagePackage.SOME_CONTAINER__CONTENT);
     }
     return content;
   }
@@ -166,9 +166,9 @@ public class ContainerImpl extends EObjectImpl implements Container
   {
     switch (featureID)
     {
-      case PartialParserTestLanguagePackage.CONTAINER__NESTED:
+      case PartialParserTestLanguagePackage.SOME_CONTAINER__NESTED:
         return ((InternalEList<?>)getNested()).basicRemove(otherEnd, msgs);
-      case PartialParserTestLanguagePackage.CONTAINER__CONTENT:
+      case PartialParserTestLanguagePackage.SOME_CONTAINER__CONTENT:
         return ((InternalEList<?>)getContent()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -184,11 +184,11 @@ public class ContainerImpl extends EObjectImpl implements Container
   {
     switch (featureID)
     {
-      case PartialParserTestLanguagePackage.CONTAINER__NAME:
+      case PartialParserTestLanguagePackage.SOME_CONTAINER__NAME:
         return getName();
-      case PartialParserTestLanguagePackage.CONTAINER__NESTED:
+      case PartialParserTestLanguagePackage.SOME_CONTAINER__NESTED:
         return getNested();
-      case PartialParserTestLanguagePackage.CONTAINER__CONTENT:
+      case PartialParserTestLanguagePackage.SOME_CONTAINER__CONTENT:
         return getContent();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -205,14 +205,14 @@ public class ContainerImpl extends EObjectImpl implements Container
   {
     switch (featureID)
     {
-      case PartialParserTestLanguagePackage.CONTAINER__NAME:
+      case PartialParserTestLanguagePackage.SOME_CONTAINER__NAME:
         setName((String)newValue);
         return;
-      case PartialParserTestLanguagePackage.CONTAINER__NESTED:
+      case PartialParserTestLanguagePackage.SOME_CONTAINER__NESTED:
         getNested().clear();
         getNested().addAll((Collection<? extends Nested>)newValue);
         return;
-      case PartialParserTestLanguagePackage.CONTAINER__CONTENT:
+      case PartialParserTestLanguagePackage.SOME_CONTAINER__CONTENT:
         getContent().clear();
         getContent().addAll((Collection<? extends Content>)newValue);
         return;
@@ -230,13 +230,13 @@ public class ContainerImpl extends EObjectImpl implements Container
   {
     switch (featureID)
     {
-      case PartialParserTestLanguagePackage.CONTAINER__NAME:
+      case PartialParserTestLanguagePackage.SOME_CONTAINER__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case PartialParserTestLanguagePackage.CONTAINER__NESTED:
+      case PartialParserTestLanguagePackage.SOME_CONTAINER__NESTED:
         getNested().clear();
         return;
-      case PartialParserTestLanguagePackage.CONTAINER__CONTENT:
+      case PartialParserTestLanguagePackage.SOME_CONTAINER__CONTENT:
         getContent().clear();
         return;
     }
@@ -253,11 +253,11 @@ public class ContainerImpl extends EObjectImpl implements Container
   {
     switch (featureID)
     {
-      case PartialParserTestLanguagePackage.CONTAINER__NAME:
+      case PartialParserTestLanguagePackage.SOME_CONTAINER__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case PartialParserTestLanguagePackage.CONTAINER__NESTED:
+      case PartialParserTestLanguagePackage.SOME_CONTAINER__NESTED:
         return nested != null && !nested.isEmpty();
-      case PartialParserTestLanguagePackage.CONTAINER__CONTENT:
+      case PartialParserTestLanguagePackage.SOME_CONTAINER__CONTENT:
         return content != null && !content.isEmpty();
     }
     return super.eIsSet(featureID);
@@ -280,4 +280,4 @@ public class ContainerImpl extends EObjectImpl implements Container
     return result.toString();
   }
 
-} //ContainerImpl
+} //SomeContainerImpl

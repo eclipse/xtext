@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AssignmentValue.java,v 1.4 2009/02/19 16:26:44 sefftinge Exp $
+ * $Id: AssignmentValue.java,v 1.5 2009/02/19 21:09:39 sefftinge Exp $
  */
 package org.eclipse.xtext.parser.epatch.epatchTestLanguage;
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StartImpl.java,v 1.4 2009/02/19 16:26:54 sefftinge Exp $
+ * $Id: StartImpl.java,v 1.5 2009/02/19 21:09:46 sefftinge Exp $
  */
 package org.eclipse.xtext.resource.metamodel.multiValueFeatureTestLanguage.impl;
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PartialParserTestLanguagePackageImpl.java,v 1.4 2009/02/19 16:26:57 sefftinge Exp $
+ * $Id: PartialParserTestLanguagePackageImpl.java,v 1.5 2009/02/19 21:09:50 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.partialParserTestLanguage.impl;
 
@@ -17,7 +17,6 @@ import org.eclipse.xtext.testlanguages.partialParserTestLanguage.AbstractChild;
 import org.eclipse.xtext.testlanguages.partialParserTestLanguage.AbstractChildren;
 import org.eclipse.xtext.testlanguages.partialParserTestLanguage.Child;
 import org.eclipse.xtext.testlanguages.partialParserTestLanguage.Children;
-import org.eclipse.xtext.testlanguages.partialParserTestLanguage.Container;
 import org.eclipse.xtext.testlanguages.partialParserTestLanguage.Content;
 import org.eclipse.xtext.testlanguages.partialParserTestLanguage.FirstConcrete;
 import org.eclipse.xtext.testlanguages.partialParserTestLanguage.Named;
@@ -25,6 +24,7 @@ import org.eclipse.xtext.testlanguages.partialParserTestLanguage.Nested;
 import org.eclipse.xtext.testlanguages.partialParserTestLanguage.PartialParserTestLanguageFactory;
 import org.eclipse.xtext.testlanguages.partialParserTestLanguage.PartialParserTestLanguagePackage;
 import org.eclipse.xtext.testlanguages.partialParserTestLanguage.SecondConcrete;
+import org.eclipse.xtext.testlanguages.partialParserTestLanguage.SomeContainer;
 
 /**
  * <!-- begin-user-doc -->
@@ -39,7 +39,7 @@ public class PartialParserTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass containerEClass = null;
+  private EClass someContainerEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -179,9 +179,9 @@ public class PartialParserTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getContainer()
+  public EClass getSomeContainer()
   {
-    return containerEClass;
+    return someContainerEClass;
   }
 
   /**
@@ -189,9 +189,9 @@ public class PartialParserTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getContainer_Name()
+  public EAttribute getSomeContainer_Name()
   {
-    return (EAttribute)containerEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)someContainerEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -199,9 +199,9 @@ public class PartialParserTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getContainer_Nested()
+  public EReference getSomeContainer_Nested()
   {
-    return (EReference)containerEClass.getEStructuralFeatures().get(1);
+    return (EReference)someContainerEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -209,9 +209,9 @@ public class PartialParserTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getContainer_Content()
+  public EReference getSomeContainer_Content()
   {
-    return (EReference)containerEClass.getEStructuralFeatures().get(2);
+    return (EReference)someContainerEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -414,10 +414,10 @@ public class PartialParserTestLanguagePackageImpl extends EPackageImpl implement
     isCreated = true;
 
     // Create classes and their features
-    containerEClass = createEClass(CONTAINER);
-    createEAttribute(containerEClass, CONTAINER__NAME);
-    createEReference(containerEClass, CONTAINER__NESTED);
-    createEReference(containerEClass, CONTAINER__CONTENT);
+    someContainerEClass = createEClass(SOME_CONTAINER);
+    createEAttribute(someContainerEClass, SOME_CONTAINER__NAME);
+    createEReference(someContainerEClass, SOME_CONTAINER__NESTED);
+    createEReference(someContainerEClass, SOME_CONTAINER__CONTENT);
 
     nestedEClass = createEClass(NESTED);
     createEReference(nestedEClass, NESTED__NESTED);
@@ -481,13 +481,13 @@ public class PartialParserTestLanguagePackageImpl extends EPackageImpl implement
     secondConcreteEClass.getESuperTypes().add(this.getAbstractChild());
 
     // Initialize classes and features; add operations and parameters
-    initEClass(containerEClass, Container.class, "Container", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getContainer_Name(), ecorePackage.getEString(), "name", null, 0, 1, Container.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getContainer_Nested(), this.getNested(), null, "nested", null, 0, -1, Container.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getContainer_Content(), this.getContent(), null, "content", null, 0, -1, Container.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(someContainerEClass, SomeContainer.class, "SomeContainer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getSomeContainer_Name(), ecorePackage.getEString(), "name", null, 0, 1, SomeContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getSomeContainer_Nested(), this.getNested(), null, "nested", null, 0, -1, SomeContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getSomeContainer_Content(), this.getContent(), null, "content", null, 0, -1, SomeContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(nestedEClass, Nested.class, "Nested", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getNested_Nested(), this.getContainer(), null, "nested", null, 0, -1, Nested.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getNested_Nested(), this.getSomeContainer(), null, "nested", null, 0, -1, Nested.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(contentEClass, Content.class, "Content", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -504,7 +504,7 @@ public class PartialParserTestLanguagePackageImpl extends EPackageImpl implement
     initEReference(getAbstractChild_Value(), this.getNamed(), null, "value", null, 0, 1, AbstractChild.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(firstConcreteEClass, FirstConcrete.class, "FirstConcrete", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getFirstConcrete_ReferencedContainer(), this.getContainer(), null, "referencedContainer", null, 0, 1, FirstConcrete.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getFirstConcrete_ReferencedContainer(), this.getSomeContainer(), null, "referencedContainer", null, 0, 1, FirstConcrete.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(secondConcreteEClass, SecondConcrete.class, "SecondConcrete", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getSecondConcrete_ReferencedChildren(), this.getChild(), null, "referencedChildren", null, 0, -1, SecondConcrete.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

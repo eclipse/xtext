@@ -4,9 +4,9 @@
     <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="partialParserTestLanguage">
       <ePackage href="http://example.xtext.org/PartialParserTestLanguage#/"/>
     </metamodelDeclarations>
-    <rules xsi:type="xtext:ParserRule" name="Container">
+    <rules xsi:type="xtext:ParserRule" name="SomeContainer">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <type xsi:type="ecore:EClass" href="http://example.xtext.org/PartialParserTestLanguage#//Container"/>
+        <type xsi:type="ecore:EClass" href="http://example.xtext.org/PartialParserTestLanguage#//SomeContainer"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <abstractTokens xsi:type="xtext:Group">
@@ -149,7 +149,7 @@
           <abstractTokens xsi:type="xtext:Assignment" cardinality="?" feature="referencedContainer" operator="=">
             <terminal xsi:type="xtext:CrossReference" rule="/1/@rules.0">
               <type metamodel="/0/@metamodelDeclarations.0">
-                <type xsi:type="ecore:EClass" href="http://example.xtext.org/PartialParserTestLanguage#//Container"/>
+                <type xsi:type="ecore:EClass" href="http://example.xtext.org/PartialParserTestLanguage#//SomeContainer"/>
               </type>
             </terminal>
           </abstractTokens>

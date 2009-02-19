@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractRule.java,v 1.4 2009/02/19 16:25:24 sefftinge Exp $
+ * $Id: AbstractRule.java,v 1.5 2009/02/19 21:07:20 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.contentAssistTestLanguage;
 

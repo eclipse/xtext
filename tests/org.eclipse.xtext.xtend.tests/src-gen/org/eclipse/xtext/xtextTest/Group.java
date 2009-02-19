@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Group.java,v 1.4 2009/02/19 16:25:26 sefftinge Exp $
+ * $Id: Group.java,v 1.5 2009/02/19 21:07:54 sefftinge Exp $
  */
 package org.eclipse.xtext.xtextTest;
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AssignmentValueImpl.java,v 1.4 2009/02/19 16:26:51 sefftinge Exp $
+ * $Id: AssignmentValueImpl.java,v 1.5 2009/02/19 21:09:43 sefftinge Exp $
  */
 package org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl;
 
@@ -521,7 +521,7 @@ public class AssignmentValueImpl extends EObjectImpl implements AssignmentValue
       case EpatchTestLanguagePackage.ASSIGNMENT_VALUE__REF_FEATURE:
         return getRefFeature();
       case EpatchTestLanguagePackage.ASSIGNMENT_VALUE__REF_INDEX:
-        return new Integer(getRefIndex());
+        return getRefIndex();
       case EpatchTestLanguagePackage.ASSIGNMENT_VALUE__NEW_OBJECT:
         return getNewObject();
       case EpatchTestLanguagePackage.ASSIGNMENT_VALUE__IMPORT:
@@ -530,7 +530,7 @@ public class AssignmentValueImpl extends EObjectImpl implements AssignmentValue
       case EpatchTestLanguagePackage.ASSIGNMENT_VALUE__IMP_FRAG:
         return getImpFrag();
       case EpatchTestLanguagePackage.ASSIGNMENT_VALUE__INDEX:
-        return new Integer(getIndex());
+        return getIndex();
       case EpatchTestLanguagePackage.ASSIGNMENT_VALUE__KEYWORD:
         return getKeyword();
     }
@@ -557,7 +557,7 @@ public class AssignmentValueImpl extends EObjectImpl implements AssignmentValue
         setRefFeature((String)newValue);
         return;
       case EpatchTestLanguagePackage.ASSIGNMENT_VALUE__REF_INDEX:
-        setRefIndex(((Integer)newValue).intValue());
+        setRefIndex((Integer)newValue);
         return;
       case EpatchTestLanguagePackage.ASSIGNMENT_VALUE__NEW_OBJECT:
         setNewObject((CreatedObject)newValue);
@@ -569,7 +569,7 @@ public class AssignmentValueImpl extends EObjectImpl implements AssignmentValue
         setImpFrag((String)newValue);
         return;
       case EpatchTestLanguagePackage.ASSIGNMENT_VALUE__INDEX:
-        setIndex(((Integer)newValue).intValue());
+        setIndex((Integer)newValue);
         return;
       case EpatchTestLanguagePackage.ASSIGNMENT_VALUE__KEYWORD:
         setKeyword((String)newValue);

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FirstConcreteImpl.java,v 1.4 2009/02/19 16:26:57 sefftinge Exp $
+ * $Id: FirstConcreteImpl.java,v 1.5 2009/02/19 21:09:50 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.partialParserTestLanguage.impl;
 
@@ -13,9 +13,9 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.xtext.testlanguages.partialParserTestLanguage.Container;
 import org.eclipse.xtext.testlanguages.partialParserTestLanguage.FirstConcrete;
 import org.eclipse.xtext.testlanguages.partialParserTestLanguage.PartialParserTestLanguagePackage;
+import org.eclipse.xtext.testlanguages.partialParserTestLanguage.SomeContainer;
 
 /**
  * <!-- begin-user-doc -->
@@ -40,7 +40,7 @@ public class FirstConcreteImpl extends AbstractChildImpl implements FirstConcret
    * @generated
    * @ordered
    */
-  protected Container referencedContainer;
+  protected SomeContainer referencedContainer;
 
   /**
    * <!-- begin-user-doc -->
@@ -68,12 +68,12 @@ public class FirstConcreteImpl extends AbstractChildImpl implements FirstConcret
    * <!-- end-user-doc -->
    * @generated
    */
-  public Container getReferencedContainer()
+  public SomeContainer getReferencedContainer()
   {
     if (referencedContainer != null && referencedContainer.eIsProxy())
     {
       InternalEObject oldReferencedContainer = (InternalEObject)referencedContainer;
-      referencedContainer = (Container)eResolveProxy(oldReferencedContainer);
+      referencedContainer = (SomeContainer)eResolveProxy(oldReferencedContainer);
       if (referencedContainer != oldReferencedContainer)
       {
         if (eNotificationRequired())
@@ -88,7 +88,7 @@ public class FirstConcreteImpl extends AbstractChildImpl implements FirstConcret
    * <!-- end-user-doc -->
    * @generated
    */
-  public Container basicGetReferencedContainer()
+  public SomeContainer basicGetReferencedContainer()
   {
     return referencedContainer;
   }
@@ -98,9 +98,9 @@ public class FirstConcreteImpl extends AbstractChildImpl implements FirstConcret
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setReferencedContainer(Container newReferencedContainer)
+  public void setReferencedContainer(SomeContainer newReferencedContainer)
   {
-    Container oldReferencedContainer = referencedContainer;
+    SomeContainer oldReferencedContainer = referencedContainer;
     referencedContainer = newReferencedContainer;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, PartialParserTestLanguagePackage.FIRST_CONCRETE__REFERENCED_CONTAINER, oldReferencedContainer, referencedContainer));
@@ -134,7 +134,7 @@ public class FirstConcreteImpl extends AbstractChildImpl implements FirstConcret
     switch (featureID)
     {
       case PartialParserTestLanguagePackage.FIRST_CONCRETE__REFERENCED_CONTAINER:
-        setReferencedContainer((Container)newValue);
+        setReferencedContainer((SomeContainer)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -151,7 +151,7 @@ public class FirstConcreteImpl extends AbstractChildImpl implements FirstConcret
     switch (featureID)
     {
       case PartialParserTestLanguagePackage.FIRST_CONCRETE__REFERENCED_CONTAINER:
-        setReferencedContainer((Container)null);
+        setReferencedContainer((SomeContainer)null);
         return;
     }
     super.eUnset(featureID);

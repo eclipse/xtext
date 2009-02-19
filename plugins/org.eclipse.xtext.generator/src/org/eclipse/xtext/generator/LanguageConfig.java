@@ -8,14 +8,21 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator;
 
+import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.common.util.DiagnosticChain;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- *
+ * 
  */
 public class LanguageConfig extends CompositeGeneratorFragment {
 
@@ -28,6 +35,28 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 			throw new IllegalArgumentException("Couldn't load grammar for '" + uri + "'.");
 		}
 		grammar = (Grammar) resource.getContents().get(0);
+		EValidator validator = EValidator.Registry.INSTANCE.getEValidator(XtextPackage.eINSTANCE);
+		if (validator != null) {
+			DiagnosticChain chain = new DiagnosticChain() {
+
+				public void add(Diagnostic diagnostic) {
+					if (diagnostic.getSeverity() == Diagnostic.ERROR)
+						throw new IllegalStateException(diagnostic.getMessage());
+				}
+
+				public void addAll(Diagnostic diagnostic) {
+					add(diagnostic);
+				}
+
+				public void merge(Diagnostic diagnostic) {
+					throw new UnsupportedOperationException();
+				}
+			};
+			validator.validate(grammar, chain, null);
+			TreeIterator<EObject> iterator = grammar.eAllContents();
+			while (iterator.hasNext())
+				validator.validate(iterator.next(), chain, null);
+		}
 	}
 
 	/**
@@ -36,5 +65,5 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 	public Grammar getGrammar() {
 		return grammar;
 	}
-	
+
 }

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Container.java,v 1.4 2009/02/19 16:26:56 sefftinge Exp $
+ * $Id: SomeContainer.java,v 1.1 2009/02/19 21:09:49 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.partialParserTestLanguage;
 
@@ -12,23 +12,23 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Container</b></em>'.
+ * A representation of the model object '<em><b>Some Container</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.xtext.testlanguages.partialParserTestLanguage.Container#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.xtext.testlanguages.partialParserTestLanguage.Container#getNested <em>Nested</em>}</li>
- *   <li>{@link org.eclipse.xtext.testlanguages.partialParserTestLanguage.Container#getContent <em>Content</em>}</li>
+ *   <li>{@link org.eclipse.xtext.testlanguages.partialParserTestLanguage.SomeContainer#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.testlanguages.partialParserTestLanguage.SomeContainer#getNested <em>Nested</em>}</li>
+ *   <li>{@link org.eclipse.xtext.testlanguages.partialParserTestLanguage.SomeContainer#getContent <em>Content</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipse.xtext.testlanguages.partialParserTestLanguage.PartialParserTestLanguagePackage#getContainer()
+ * @see org.eclipse.xtext.testlanguages.partialParserTestLanguage.PartialParserTestLanguagePackage#getSomeContainer()
  * @model
  * @generated
  */
-public interface Container extends EObject
+public interface SomeContainer extends EObject
 {
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
@@ -40,14 +40,14 @@ public interface Container extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
-   * @see org.eclipse.xtext.testlanguages.partialParserTestLanguage.PartialParserTestLanguagePackage#getContainer_Name()
+   * @see org.eclipse.xtext.testlanguages.partialParserTestLanguage.PartialParserTestLanguagePackage#getSomeContainer_Name()
    * @model
    * @generated
    */
   String getName();
 
   /**
-   * Sets the value of the '{@link org.eclipse.xtext.testlanguages.partialParserTestLanguage.Container#getName <em>Name</em>}' attribute.
+   * Sets the value of the '{@link org.eclipse.xtext.testlanguages.partialParserTestLanguage.SomeContainer#getName <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Name</em>' attribute.
@@ -66,7 +66,7 @@ public interface Container extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Nested</em>' containment reference list.
-   * @see org.eclipse.xtext.testlanguages.partialParserTestLanguage.PartialParserTestLanguagePackage#getContainer_Nested()
+   * @see org.eclipse.xtext.testlanguages.partialParserTestLanguage.PartialParserTestLanguagePackage#getSomeContainer_Nested()
    * @model containment="true"
    * @generated
    */
@@ -82,10 +82,10 @@ public interface Container extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Content</em>' containment reference list.
-   * @see org.eclipse.xtext.testlanguages.partialParserTestLanguage.PartialParserTestLanguagePackage#getContainer_Content()
+   * @see org.eclipse.xtext.testlanguages.partialParserTestLanguage.PartialParserTestLanguagePackage#getSomeContainer_Content()
    * @model containment="true"
    * @generated
    */
   EList<Content> getContent();
 
-} // Container
+} // SomeContainer
