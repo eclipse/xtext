@@ -34,19 +34,19 @@ public abstract class AbstractGeneratorFragment implements IGeneratorFragment {
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
 		if (log.isInfoEnabled())
 			log.info("executing generate for "+getClass().getName());
-		XpandFacade.create(ctx).evaluate2(getTemplate()+"::generate", grammar, getParameters());
+		XpandFacade.create(ctx).evaluate2(getTemplate()+"::generate", grammar, getParameters(grammar));
 	}
 
 	public void addToPluginXmlRt(Grammar grammar, XpandExecutionContext ctx) {
-		XpandFacade.create(ctx).evaluate2(getTemplate()+"::addToPluginXmlRt", grammar, getParameters());
+		XpandFacade.create(ctx).evaluate2(getTemplate()+"::addToPluginXmlRt", grammar, getParameters(grammar));
 	}
 	
 	public void addToPluginXmlUi(Grammar grammar, XpandExecutionContext ctx) {
-		XpandFacade.create(ctx).evaluate2(getTemplate()+"::addToPluginXmlUi", grammar, getParameters());
+		XpandFacade.create(ctx).evaluate2(getTemplate()+"::addToPluginXmlUi", grammar, getParameters(grammar));
 	}
 
 	public void addToStandaloneSetup(Grammar grammar, XpandExecutionContext ctx) {
-		XpandFacade.create(ctx).evaluate2(getTemplate()+"::addToStandaloneSetup", grammar, getParameters());
+		XpandFacade.create(ctx).evaluate2(getTemplate()+"::addToStandaloneSetup", grammar, getParameters(grammar));
 	}
 	
 	public String[] getExportedPackagesRt(Grammar grammar) {
@@ -73,7 +73,7 @@ public abstract class AbstractGeneratorFragment implements IGeneratorFragment {
 		return null;
 	}
 
-	protected List<Object> getParameters() {
+	protected List<Object> getParameters(Grammar grammar) {
 		return Collections.emptyList();
 	}
 

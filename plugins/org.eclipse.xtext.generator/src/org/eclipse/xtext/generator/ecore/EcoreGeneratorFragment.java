@@ -1,10 +1,3 @@
-/*******************************************************************************
- * Copyright (c) 2008, 2009 itemis AG (http://www.itemis.eu) and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *******************************************************************************/
 package org.eclipse.xtext.generator.ecore;
 
 import static org.eclipse.xtext.EcoreUtil2.*;
@@ -14,7 +7,6 @@ import static org.eclipse.xtext.XtextPackage.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -34,7 +26,7 @@ import org.eclipse.emf.codegen.ecore.genmodel.generator.GenPackageGeneratorAdapt
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.Diagnostic;
-import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -48,6 +40,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.util.EmfFormater;
 import org.eclipse.xtext.util.Strings;
 
 public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
@@ -63,15 +56,17 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 
 	@Override
 	public String[] getRequiredBundlesRt(Grammar grammar) {
-		return new String[] {"org.eclipse.emf.ecore", "org.eclipse.emf.common"};
+		return new String[] { "org.eclipse.emf.ecore", "org.eclipse.emf.common" };
 	}
 
 	@Override
 	public String[] getExportedPackagesRt(Grammar grammar) {
-		List<GeneratedMetamodel> typeSelect = org.eclipse.xtext.EcoreUtil2.typeSelect(grammar.getMetamodelDeclarations(), GeneratedMetamodel.class);
+		List<GeneratedMetamodel> typeSelect = org.eclipse.xtext.EcoreUtil2.typeSelect(grammar
+				.getMetamodelDeclarations(), GeneratedMetamodel.class);
 		Set<String> exportedPackages = new LinkedHashSet<String>();
 		for (GeneratedMetamodel generatedMetamodel : typeSelect) {
-			exportedPackages.add(Strings.skipLastToken(getGeneratedEPackageName(grammar, generatedMetamodel.getEPackage()),"."));
+			exportedPackages.add(Strings.skipLastToken(getGeneratedEPackageName(grammar, generatedMetamodel
+					.getEPackage()), "."));
 		}
 		return exportedPackages.toArray(new String[exportedPackages.size()]);
 	}
@@ -85,47 +80,49 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		generateEcoreJavaClasses(packs, getNamespace(grammar), path, grammar);
 	}
 
-	private final XtextResourceSet rs = new XtextResourceSet();
-
-	public void setGenModel(String uri) {
-		try {
-			rs.getResource(URI.createURI(uri), true);
-		} catch (Exception e) {
-			log.error("Couldn't find genmodel for uri '"+uri+"'");
-			throw new RuntimeException(e);
-		}
-	}
+	private String urisString;
 
 	public void setGenModels(String uris) {
 		if ("".equals(uris))
 			return;
-		String[] strings = uris.split(",");
-		for (String string : strings) {
-			setGenModel(string.trim());
-		}
+		this.urisString = uris;
 	}
 
 	private Collection<? extends GenPackage> getUsedGenPackages() {
-		List<GenPackage> result = new ArrayList<GenPackage>();
-		TreeIterator<Object> iterator = EcoreUtil.getAllContents(rs, true);
-		while (iterator.hasNext()) {
-			Object next = iterator.next();
-			if (next instanceof GenPackage)
-				result.add((GenPackage) next);
+		XtextResourceSet rs = new XtextResourceSet();
+		Set<GenPackage> result = new LinkedHashSet<GenPackage>();
+		if (urisString != null) {
+			for (String uri : urisString.split(",")) {
+				try {
+					Resource resource = rs.getResource(URI.createURI(uri.trim()), true);
+					GenModel genmodel = (GenModel) resource.getContents().get(0);
+					EList<GenPackage> genPackages = genmodel.getGenPackages();
+					for (GenPackage genPackage : genPackages) {
+						genPackage.getEcorePackage().getEClassifiers();
+						result.add(genPackage);
+					}
+				} catch (Exception e) {
+					log.error("Couldn't find genmodel for uri '" + uri + "'");
+					throw new RuntimeException(e);
+				}
+			}
 		}
 		return result;
 	}
 
-	public void generateEcoreJavaClasses(Collection<? extends EPackage> packs, String basePackage, final String uri,
+	public void generateEcoreJavaClasses(Collection<? extends EPackage> ps, String basePackage, final String uri,
 			final Grammar grammar) throws ConfigurationException {
 
+		Collection<? extends EPackage> packs2 = EcoreUtil.copyAll(ps);
+		
 		ResourceSet rs = new ResourceSetImpl();
-		Resource res2 = rs.createResource(URI.createFileURI(new File(uri + "/" + grammar.getName().replace('.', '/') + ".ecore").getAbsolutePath()));
+		Resource res2 = rs.createResource(URI.createFileURI(new File(uri + "/" + grammar.getName().replace('.', '/')
+				+ ".ecore").getAbsolutePath()));
+		Resource res = rs.createResource(URI.createFileURI(new File(uri + "/" + grammar.getName().replace('.', '/')
+				+ ".genmodel").getAbsolutePath()));
 
 		GenModel genModel = GenModelPackage.eINSTANCE.getGenModelFactory().createGenModel();
-		Resource res = rs.createResource(URI.createFileURI(new File(uri + "/" + grammar.getName().replace('.', '/') + ".genmodel").getAbsolutePath()));
-		genModel.initialize(packs);
-
+		genModel.initialize(packs2);
 		genModel.setModelDirectory(uri);
 
 		// genModel.setModelDirectory(modelProjectName);
@@ -142,7 +139,34 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		}
 		genModel.getUsedGenPackages().addAll(getUsedGenPackages());
 
+//		List<EPackage> missingPackages = genModel.getMissingPackages();
+//		if (!missingPackages.isEmpty()) {
+//			StringBuffer buff = new StringBuffer();
+//			int i = 0;
+//			for (EPackage pack : missingPackages) {
+//				i++;
+//				buff.append("'" + pack.getName() + "' (nsUri='" + pack.getNsURI() + "')");
+//				if (i < missingPackages.size()) {
+//					buff.append(",");
+//				}
+//			}
+//			throw new IllegalStateException("Couldn't generate EMF code for Grammar " + grammar.getName()
+//					+ ". Missing genmodels for " + buff + ". Was configured with '" + urisString + "'.");
+//		}
+//
+		
+		// write genmodel
+		res.getContents().add(genModel);
+		res2.getContents().addAll(packs2);
+		try {
+			res2.save(null);
+			res.save(null);
+		} catch (IOException e) {
+			log.error(e.getMessage(), e);
+		}
+		
 		genModel.reconcile();
+		
 		Generator generator = new Generator();
 		generator.getAdapterFactoryDescriptorRegistry().addDescriptor(GenModelPackage.eNS_URI,
 				new GeneratorAdapterFactory.Descriptor() {
@@ -187,18 +211,10 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		Diagnostic diagnostic = generator.generate(genModel, GenBaseGeneratorAdapter.MODEL_PROJECT_TYPE,
 				new BasicMonitor());
 
-		// write genmodel
-		res.getContents().add(genModel);
-		res2.getContents().addAll(EcoreUtil.copyAll(packs));
-		try {
-			res2.save(null);
-			res.save(null);
-		} catch (IOException e) {
-			log.error(e.getMessage(), e);
-		}
-		if (diagnostic.getSeverity() != Diagnostic.OK)
-			// TODO choose loglevel that matches the severity of the diagnostic
-			log.info(diagnostic);
+		
+
+		if (log.isInfoEnabled())
+			log.info(EmfFormater.objToStr(diagnostic));
 	}
 
 	public static String getGeneratedEPackageName(Grammar g, EPackage pack) {

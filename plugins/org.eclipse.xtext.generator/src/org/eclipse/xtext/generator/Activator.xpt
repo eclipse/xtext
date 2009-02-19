@@ -1,0 +1,48 @@
+«IMPORT xtext»
+
+«EXTENSION org::eclipse::xtext::generator::Naming»
+
+«DEFINE file(String activatorName) FOR List[Grammar]»
+«FILE activatorName.asPath()+".java" SRC_GEN_UI»
+/*
+ «fileHeader()»
+ */
+package «activatorName.toJavaPackage()»;
+
+import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.osgi.framework.BundleContext;
+
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+
+import java.util.Map;
+import java.util.HashMap;
+
+/**
+ * Generated
+ */
+public class «activatorName.toSimpleName()» extends AbstractUIPlugin {
+
+	private Map<String,Injector> injectors = new HashMap<String,Injector>();
+	private static «activatorName.toSimpleName()» INSTANCE;
+
+	public Injector getInjector(String languageName) {
+		return injectors.get(languageName);
+	}
+	
+	@Override
+	public void start(BundleContext context) throws Exception {
+		super.start(context);
+		INSTANCE = this;
+		«FOREACH this AS grammar»
+		injectors.put("«grammar.name»",Guice.createInjector(new «guiceModuleRt(grammar)»(), new «guiceModuleUi(grammar)»()));
+		«ENDFOREACH»
+	}
+	
+	public static «activatorName.toSimpleName()» getInstance() {
+		return INSTANCE;
+	}
+	
+}
+«ENDFILE»
+«ENDDEFINE»

@@ -11,13 +11,13 @@
 
 «IMPORT xtext»
 
-«DEFINE pre FOR Grammar-»
+«DEFINE pre FOR List[Grammar]-»
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
 
 <plugin>
 «ENDDEFINE»
 
-«DEFINE post FOR Grammar»
+«DEFINE post FOR List[Grammar]»
 </plugin>
 «ENDDEFINE»

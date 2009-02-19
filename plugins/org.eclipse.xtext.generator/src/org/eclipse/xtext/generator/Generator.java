@@ -19,10 +19,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.mwe.core.WorkflowContext;
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent2;
@@ -34,9 +32,9 @@ import org.eclipse.xpand2.output.Outlet;
 import org.eclipse.xpand2.output.OutputImpl;
 import org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel;
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.resource.XtextResourceSet;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -55,44 +53,47 @@ public class Generator extends AbstractWorkflowComponent2 {
 	public static final String SRC = "SRC";
 	public static final String SRC_GEN = "SRC_GEN";
 	public static final String PLUGIN_RT = "PLUGIN";
+	
+	public Generator() {
+		new XtextStandaloneSetup().createInjectorAndDoEMFRegistration();
+	}
 
 	@Override
 	protected void checkConfigurationInternal(Issues issues) {
-	}
-
-	private String grammarURI;
-
-	public void setGrammarURI(String grammarURI) {
-		this.grammarURI = grammarURI;
+		for (LanguageConfig config : languageConfigs) {
+			if (config.getGrammar() ==null) {
+				issues.addError("property 'uri' is mandatory for element 'language'.");
+			}
+		}
+		if (getProjectNameRt()==null)
+			issues.addError("The property 'projectNameRt' is mandatory");
 	}
 
 	@Override
 	protected void invokeInternal(WorkflowContext ctx, ProgressMonitor monitor, Issues issues) {
 		new XtextStandaloneSetup().createInjectorAndDoEMFRegistration();
-		Grammar grammar = loadGrammar();
 
 		try {
 			XpandExecutionContext exeCtx = createExecutionContext();
-			generate(grammar, exeCtx);
-			addToStandaloneSetup(grammar, exeCtx);
-			generatePluginXmlRt(grammar, exeCtx);
-			generatePluginXmlUi(grammar, exeCtx);
-			generateManifestRt(grammar, exeCtx);
-			generateManifestUi(grammar, exeCtx);
-			generateGuiceModuleRt(grammar, exeCtx);
-			generateGuiceModuleUi(grammar, exeCtx);
+			for (LanguageConfig config : languageConfigs) {
+				generate(config, exeCtx);
+				addToStandaloneSetup(config, exeCtx);
+				generateGuiceModuleRt(config, exeCtx);
+				if (isUi()) {
+					generateGuiceModuleUi(config, exeCtx);
+					generateExecutableExtensionsFactory(config, exeCtx);
+				}
+			}
+			generatePluginXmlRt(languageConfigs, exeCtx);
+			generateManifestRt(languageConfigs, exeCtx);
+			if (isUi()) {
+				generatePluginXmlUi(languageConfigs, exeCtx);
+				generateManifestUi(languageConfigs, exeCtx);
+				generateActivator(languageConfigs, exeCtx);
+			}
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 		}
-	}
-
-	private Grammar loadGrammar() {
-		XtextResourceSet rs = new XtextResourceSet();
-		Resource resource = rs.getResource(URI.createURI(grammarURI), true);
-		if (resource.getContents().isEmpty()) {
-			throw new IllegalArgumentException("Couldn't load file '" + grammarURI + "'.");
-		}
-		return (Grammar) resource.getContents().get(0);
 	}
 
 	private String pathRtProject = ".";
@@ -125,6 +126,10 @@ public class Generator extends AbstractWorkflowComponent2 {
 			output.addOutlet(new Outlet(false, getEncoding(), PLUGIN_UI, false, getPathUiProject()));
 			output.addOutlet(new Outlet(false, getEncoding(), SRC_UI, false, getPathUiProject() + "/src"));
 			output.addOutlet(new Outlet(false, getEncoding(), SRC_GEN_UI, true, getPathUiProject() + "/src-gen"));
+		} else {
+			output.addOutlet(new Outlet(false, getEncoding(), PLUGIN_UI, false, getPathRtProject()));
+			output.addOutlet(new Outlet(false, getEncoding(), SRC_UI, false, getPathRtProject() + "/src"));
+			output.addOutlet(new Outlet(false, getEncoding(), SRC_GEN_UI, true, getPathRtProject() + "/src-gen"));
 		}
 		// create execution context
 		XpandExecutionContextImpl execCtx = new XpandExecutionContextImpl(output, null);
@@ -142,72 +147,92 @@ public class Generator extends AbstractWorkflowComponent2 {
 		return System.getProperty("file.encoding");
 	}
 
-	private CompositeGeneratorFragment fragments = new CompositeGeneratorFragment();
-
-	public void addFragment(IGeneratorFragment fragment) {
-		this.fragments.addFragment(fragment);
+	private List<LanguageConfig> languageConfigs = new ArrayList<LanguageConfig>();
+	
+	public void addLanguage(LanguageConfig langConfig) {
+		this.languageConfigs.add(langConfig);
 	}
-
-	public void addFragments(CompositeGeneratorFragment fragments) {
-		this.fragments.addFragments(fragments);
+	
+	private List<Grammar> getGrammars(List<LanguageConfig> configs) {
+		List<Grammar> grammars = new ArrayList<Grammar>();
+		for (LanguageConfig conf : configs) {
+			grammars.add(conf.getGrammar());
+		}
+		return grammars;
 	}
-
-	public void generatePluginXmlRt(Grammar grammar, XpandExecutionContext ctx) {
+	
+	private void generatePluginXmlRt(List<LanguageConfig> configs, XpandExecutionContext ctx) {
 		String filePath = "plugin.xml_gen";
 		deleteFile(ctx, filePath, PLUGIN_RT);
 		try {
 			ctx.getOutput().openFile(filePath, PLUGIN_RT);
 			XpandFacade facade = XpandFacade.create(ctx);
-			facade.evaluate("org::eclipse::xtext::generator::Plugin::pre", grammar);
-			fragments.addToPluginXmlRt(grammar, ctx);
-			if (isMergedProjects()) {
-				fragments.addToPluginXmlUi(grammar, ctx);
+			List<Grammar> grammars = getGrammars(configs);
+			facade.evaluate("org::eclipse::xtext::generator::Plugin::pre", grammars);
+			for (LanguageConfig conf: languageConfigs) {
+				conf.addToPluginXmlRt(conf.getGrammar(), ctx);
+				if (isMergedProjects()) {
+					conf.addToPluginXmlUi(conf.getGrammar(), ctx);
+				}
 			}
-			facade.evaluate("org::eclipse::xtext::generator::Plugin::post", grammar);
+			facade.evaluate("org::eclipse::xtext::generator::Plugin::post", grammars);
 		} finally {
 			ctx.getOutput().closeFile();
 		}
 	}
+	
+	private void generateExecutableExtensionsFactory(LanguageConfig config, XpandExecutionContext exeCtx) {
+		XpandFacade facade = XpandFacade.create(exeCtx);
+		facade.evaluate("org::eclipse::xtext::generator::ExecutableExtensionFactory::file", config.getGrammar(), getActivator());
+	}
 
-	public void generatePluginXmlUi(Grammar grammar, XpandExecutionContext ctx) {
+	private void generateActivator(List<LanguageConfig> configs, XpandExecutionContext exeCtx) {
+		XpandFacade facade = XpandFacade.create(exeCtx);
+		facade.evaluate("org::eclipse::xtext::generator::Activator::file", getGrammars(configs), getActivator());
+	}
+
+	private void generatePluginXmlUi(List<LanguageConfig> configs, XpandExecutionContext ctx) {
 		if (isUi() && !isMergedProjects()) {
 			String filePath = "plugin.xml_gen";
 			deleteFile(ctx, filePath, PLUGIN_UI);
 			try {
 				ctx.getOutput().openFile(filePath, PLUGIN_UI);
 				XpandFacade facade = XpandFacade.create(ctx);
-				facade.evaluate("org::eclipse::xtext::generator::Plugin::pre", grammar);
-				fragments.addToPluginXmlUi(grammar, ctx);
-				facade.evaluate("org::eclipse::xtext::generator::Plugin::post", grammar);
+				List<Grammar> grammars = getGrammars(configs);
+				facade.evaluate("org::eclipse::xtext::generator::Plugin::pre", grammars);
+				for (LanguageConfig conf: languageConfigs) {
+					conf.addToPluginXmlUi(conf.getGrammar(), ctx);
+				}
+				facade.evaluate("org::eclipse::xtext::generator::Plugin::post", grammars);
 			} finally {
 				ctx.getOutput().closeFile();
 			}
 		}
 	}
 
-	public void addToStandaloneSetup(Grammar grammar, XpandExecutionContext ctx) {
+	private void addToStandaloneSetup(LanguageConfig config, XpandExecutionContext ctx) {
 		try {
-			ctx.getOutput().openFile(asPath(setup(grammar)) + ".java", SRC_GEN);
+			ctx.getOutput().openFile(asPath(setup(config.getGrammar())) + ".java", SRC_GEN);
 			XpandFacade facade = XpandFacade.create(ctx);
-			facade.evaluate("org::eclipse::xtext::generator::StandaloneSetup::pre", grammar);
-			fragments.addToStandaloneSetup(grammar, ctx);
-			facade.evaluate("org::eclipse::xtext::generator::StandaloneSetup::post", grammar);
+			facade.evaluate("org::eclipse::xtext::generator::StandaloneSetup::pre", config.getGrammar());
+			config.addToStandaloneSetup(config.getGrammar(), ctx);
+			facade.evaluate("org::eclipse::xtext::generator::StandaloneSetup::post", config.getGrammar());
 		} finally {
 			ctx.getOutput().closeFile();
 		}
 	}
 
-	public void generateGuiceModuleRt(Grammar grammar, XpandExecutionContext ctx) {
+	private void generateGuiceModuleRt(LanguageConfig config, XpandExecutionContext ctx) {
 		XpandFacade facade = XpandFacade.create(ctx);
-		Map<String, String> bindings = fragments.getGuiceBindingsRt(grammar);
-		facade.evaluate("org::eclipse::xtext::generator::GuiceModuleRt::generate", grammar, xpandify(bindings));
+		Map<String, String> bindings = config.getGuiceBindingsRt(config.getGrammar());
+		facade.evaluate("org::eclipse::xtext::generator::GuiceModuleRt::generate", config.getGrammar(), xpandify(bindings));
 	}
 
-	public void generateGuiceModuleUi(Grammar grammar, XpandExecutionContext ctx) {
+	private void generateGuiceModuleUi(LanguageConfig config, XpandExecutionContext ctx) {
 		if (isUi()) {
 			XpandFacade facade = XpandFacade.create(ctx);
-			Map<String, String> bindings = fragments.getGuiceBindingsUi(grammar);
-			facade.evaluate("org::eclipse::xtext::generator::GuiceModuleUi::generate", grammar, xpandify(bindings));
+			Map<String, String> bindings = config.getGuiceBindingsUi(config.getGrammar());
+			facade.evaluate("org::eclipse::xtext::generator::GuiceModuleUi::generate", config.getGrammar(), xpandify(bindings));
 		}
 	}
 
@@ -223,38 +248,58 @@ public class Generator extends AbstractWorkflowComponent2 {
 		return result;
 	}
 
-	public void generate(Grammar grammar, XpandExecutionContext ctx) {
-		fragments.generate(grammar, ctx);
+	private void generate(LanguageConfig config, XpandExecutionContext ctx) {
+		config.generate(config.getGrammar(), ctx);
 	}
 
-	public void generateManifestRt(Grammar grammar, XpandExecutionContext ctx) {
+	private void generateManifestRt(List<LanguageConfig> configs, XpandExecutionContext ctx) {
 		String manifestPath = "META-INF/MANIFEST.MF_gen";
 		deleteFile(ctx, manifestPath, PLUGIN_RT);
 		try {
 			ctx.getOutput().openFile(manifestPath, PLUGIN_RT);
 			XpandFacade facade = XpandFacade.create(ctx);
-			String[] exported = fragments.getExportedPackagesRt(grammar);
-			String[] requiredBundles = fragments.getRequiredBundlesRt(grammar);
+			Set<String> exported = new LinkedHashSet<String>();
+			Set<String> requiredBundles = new LinkedHashSet<String>();
 			String activator = null;
-			if (isMergedProjects()) {
-				String[] exportedUi = fragments.getExportedPackagesUi(grammar);
-				String[] requiredBundlesUi = fragments.getRequiredBundlesUi(grammar);
-				activator = Naming.activator(grammar);
-
-				Set<String> exportedSet = new LinkedHashSet<String>(Arrays.asList(exported));
-				exportedSet.addAll(Arrays.asList(exportedUi));
-				exported = exportedSet.toArray(new String[exportedSet.size()]);
-
-				Set<String> reqBundSet = new LinkedHashSet<String>(Arrays.asList(requiredBundles));
-				reqBundSet.addAll(Arrays.asList(requiredBundlesUi));
-				requiredBundles = reqBundSet.toArray(new String[reqBundSet.size()]);
+			if (isMergedProjects())
+				activator = getActivator();
+			for (LanguageConfig config : configs) {
+				exported.addAll(Arrays.asList(config.getExportedPackagesRt(config.getGrammar())));
+				requiredBundles.addAll(Arrays.asList(config.getRequiredBundlesRt(config.getGrammar())));
+				if (isMergedProjects()) {
+					exported.addAll(Arrays.asList(config.getExportedPackagesUi(config.getGrammar())));
+					requiredBundles.addAll(Arrays.asList(config.getRequiredBundlesUi(config.getGrammar())));
+				}
 			}
-			generateManifest(grammar, facade, getProjectNameRt(grammar), getProjectNameRt(grammar), getBundleVersion(),
-					exported, requiredBundles, activator);
+			generateManifest(facade, getProjectNameRt(), getProjectNameRt(), getBundleVersion(), exported,
+					requiredBundles, activator);
 		} finally {
 			ctx.getOutput().closeFile();
 		}
 	}
+	
+	private void generateManifestUi(List<LanguageConfig> configs, XpandExecutionContext ctx) {
+		if (isUi() && !isMergedProjects()) {
+			String manifestPath = "META-INF/MANIFEST.MF_gen";
+			deleteFile(ctx, manifestPath, PLUGIN_UI);
+			try {
+				ctx.getOutput().openFile(manifestPath, PLUGIN_UI);
+				XpandFacade facade = XpandFacade.create(ctx);
+				Set<String> exported = new LinkedHashSet<String>();
+				Set<String> requiredBundles = new LinkedHashSet<String>();
+				for (LanguageConfig config : languageConfigs) {
+					exported.addAll(Arrays.asList(config.getExportedPackagesUi(config.getGrammar())));
+					requiredBundles.addAll(Arrays.asList(config.getRequiredBundlesUi(config.getGrammar())));
+				}
+				generateManifest(facade, getProjectNameUi(), getProjectNameUi(), getBundleVersion(), exported,
+						requiredBundles, getActivator());
+			} finally {
+				ctx.getOutput().closeFile();
+			}
+		}
+	}
+
+	private String activator;
 
 	private void deleteFile(XpandExecutionContext ctx, String filePath, String outlet) {
 		String pathname = ctx.getOutput().getOutlet(outlet).getPath() + "/" + filePath;
@@ -274,35 +319,44 @@ public class Generator extends AbstractWorkflowComponent2 {
 		return "0.0.1";
 	}
 
-	private String getProjectNameRt(Grammar grammar) {
-		return grammar.getName();
+	private String projectNameRt;
+
+	public void setProjectNameRt(String projectNameRt) {
+		this.projectNameRt = projectNameRt;
 	}
 
-	private String getProjectNameUi(Grammar grammar) {
-		return grammar.getName() + ".ui";
+	private String getProjectNameRt() {
+		return projectNameRt;
 	}
 
-	private void generateManifest(Grammar grammar, XpandFacade facade, String name, String symbolicName,
-			String version, String[] exported, String[] requiredBundles, String activator) {
-		facade.evaluate("org::eclipse::xtext::generator::Manifest::file", grammar, name, symbolicName, version, Arrays
-				.asList(exported), Arrays.asList(requiredBundles), activator);
+	private String projectNameUi;
+
+	public void setProjectNameUi(String projectNameUi) {
+		this.projectNameUi = projectNameUi;
 	}
 
-	public void generateManifestUi(Grammar grammar, XpandExecutionContext ctx) {
-		if (isUi() && !isMergedProjects()) {
-			String manifestPath = "META-INF/MANIFEST.MF_gen";
-			deleteFile(ctx, manifestPath, PLUGIN_UI);
-			try {
-				ctx.getOutput().openFile(manifestPath, PLUGIN_UI);
-				XpandFacade facade = XpandFacade.create(ctx);
-				String[] exported = fragments.getExportedPackagesUi(grammar);
-				String[] requiredBundles = fragments.getRequiredBundlesUi(grammar);
-				generateManifest(grammar, facade, getProjectNameUi(grammar), getProjectNameUi(grammar),
-						getBundleVersion(), exported, requiredBundles, Naming.activator(grammar));
-			} finally {
-				ctx.getOutput().closeFile();
-			}
+	private String getProjectNameUi() {
+		if (projectNameUi == null)
+			return getProjectNameRt() + ".ui";
+		return projectNameUi;
+	}
+
+	private void generateManifest(XpandFacade facade, String name, String symbolicName, String version,
+			Set<String> exported, Set<String> requiredBundles, String activator) {
+		facade.evaluate("org::eclipse::xtext::generator::Manifest::file", name, symbolicName, version, exported,
+				requiredBundles, activator);
+	}
+
+	public void setActivator(String activator) {
+		this.activator = activator;
+	}
+
+	private String getActivator() {
+		if (activator == null) {
+			Grammar grammar = languageConfigs.get(0).getGrammar();
+			return GrammarUtil.getNamespace(grammar) + ".internal."+ GrammarUtil.getName(grammar)+"Activator";
 		}
+		return activator;
 	}
 
 }
