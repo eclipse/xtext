@@ -9,14 +9,14 @@
 language org.eclipse.xtext.testlanguages.PartialParserTestLanguage
 generate partialParserTestLanguage "http://example.xtext.org/PartialParserTestLanguage"
 
-Container :
+SomeContainer :
   'container' name=ID '{'
      ( nested+=Nested | content+=Content )*
   '}';
 
 Nested:
 	'nested' '{' 
-     	(nested+=Container)+ 
+     	(nested+=SomeContainer)+ 
     '}'; 
 
 Content:
@@ -39,7 +39,7 @@ AbstractChild :
   FirstConcrete | SecondConcrete;
   
 FirstConcrete :
-  '->' 'F' '(' value=Named referencedContainer=[Container]? ')';
+  '->' 'F' '(' value=Named referencedContainer=[SomeContainer]? ')';
   
 SecondConcrete :
   '->' 'F' 'S' '(' value=Named referencedChildren+=[Child]? ')';
