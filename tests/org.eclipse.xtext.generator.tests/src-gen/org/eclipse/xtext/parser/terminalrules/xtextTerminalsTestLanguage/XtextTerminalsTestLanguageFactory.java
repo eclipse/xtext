@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextTerminalsTestLanguageFactory.java,v 1.3 2009/02/19 14:39:37 sefftinge Exp $
+ * $Id: XtextTerminalsTestLanguageFactory.java,v 1.4 2009/02/19 16:26:45 sefftinge Exp $
  */
 package org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage;
 

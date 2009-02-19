@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: GrammarImpl.java,v 1.3 2009/02/19 14:37:48 sefftinge Exp $
+ * $Id: GrammarImpl.java,v 1.4 2009/02/19 16:26:03 sefftinge Exp $
  */
 package org.eclipse.xtext.xtextTest.impl;
 

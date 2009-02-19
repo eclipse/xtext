@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Import.java,v 1.3 2009/02/19 14:39:56 sefftinge Exp $
+ * $Id: Import.java,v 1.4 2009/02/19 16:27:09 sefftinge Exp $
  */
 package org.eclipse.xtext.crossrefs.importedURI;
 

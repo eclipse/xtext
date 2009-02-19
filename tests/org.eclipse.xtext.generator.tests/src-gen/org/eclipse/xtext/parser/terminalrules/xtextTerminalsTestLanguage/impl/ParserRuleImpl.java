@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParserRuleImpl.java,v 1.3 2009/02/19 14:39:35 sefftinge Exp $
+ * $Id: ParserRuleImpl.java,v 1.4 2009/02/19 16:26:49 sefftinge Exp $
  */
 package org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.impl;
 

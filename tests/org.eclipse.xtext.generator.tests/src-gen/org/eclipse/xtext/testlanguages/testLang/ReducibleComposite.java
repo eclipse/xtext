@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ReducibleComposite.java,v 1.3 2009/02/19 14:39:44 sefftinge Exp $
+ * $Id: ReducibleComposite.java,v 1.4 2009/02/19 16:27:02 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.testLang;
 

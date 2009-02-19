@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SimpleExpressionsSwitch.java,v 1.3 2009/02/19 14:39:33 sefftinge Exp $
+ * $Id: SimpleExpressionsSwitch.java,v 1.4 2009/02/19 16:26:42 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.simpleExpressions.util;
 

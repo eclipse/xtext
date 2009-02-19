@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractElementImpl.java,v 1.3 2009/02/19 14:37:53 sefftinge Exp $
+ * $Id: AbstractElementImpl.java,v 1.4 2009/02/19 16:26:03 sefftinge Exp $
  */
 package org.eclipse.xtext.xtextTest.impl;
 

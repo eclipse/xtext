@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelImpl.java,v 1.3 2009/02/19 14:39:49 sefftinge Exp $
+ * $Id: ModelImpl.java,v 1.4 2009/02/19 16:26:52 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.actionLang.impl;
 

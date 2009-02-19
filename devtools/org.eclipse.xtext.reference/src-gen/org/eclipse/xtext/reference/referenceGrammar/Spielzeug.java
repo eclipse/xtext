@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Spielzeug.java,v 1.3 2009/02/19 14:37:25 sefftinge Exp $
+ * $Id: Spielzeug.java,v 1.4 2009/02/19 16:25:45 sefftinge Exp $
  */
 package org.eclipse.xtext.reference.referenceGrammar;
 

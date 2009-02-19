@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LookAhead0.java,v 1.3 2009/02/19 14:39:50 sefftinge Exp $
+ * $Id: LookAhead0.java,v 1.4 2009/02/19 16:27:03 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.lookaheadLang;
 

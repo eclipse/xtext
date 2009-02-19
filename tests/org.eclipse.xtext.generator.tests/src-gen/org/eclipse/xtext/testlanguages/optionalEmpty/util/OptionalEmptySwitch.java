@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: OptionalEmptySwitch.java,v 1.3 2009/02/19 14:40:05 sefftinge Exp $
+ * $Id: OptionalEmptySwitch.java,v 1.4 2009/02/19 16:27:16 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.optionalEmpty.util;
 

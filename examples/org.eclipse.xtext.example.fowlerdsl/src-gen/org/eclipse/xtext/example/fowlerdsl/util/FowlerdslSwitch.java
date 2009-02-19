@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FowlerdslSwitch.java,v 1.3 2009/02/19 14:40:12 sefftinge Exp $
+ * $Id: FowlerdslSwitch.java,v 1.4 2009/02/19 16:28:37 sefftinge Exp $
  */
 package org.eclipse.xtext.example.fowlerdsl.util;
 

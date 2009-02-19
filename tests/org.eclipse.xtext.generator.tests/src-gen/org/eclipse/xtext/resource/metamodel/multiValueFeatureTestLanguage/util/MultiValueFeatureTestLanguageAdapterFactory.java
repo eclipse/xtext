@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MultiValueFeatureTestLanguageAdapterFactory.java,v 1.3 2009/02/19 14:39:57 sefftinge Exp $
+ * $Id: MultiValueFeatureTestLanguageAdapterFactory.java,v 1.4 2009/02/19 16:27:11 sefftinge Exp $
  */
 package org.eclipse.xtext.resource.metamodel.multiValueFeatureTestLanguage.util;
 
