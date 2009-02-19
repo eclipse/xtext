@@ -1,62 +1,60 @@
 <?xml version="1.0" encoding="ASCII"?>
-<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="../org.eclipse.xtext.generator.tests//src-gen" forceOverwrite="true" bundleManifest="false" complianceLevel="5.0" copyrightFields="false">
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="../org.eclipse.xtext.generator.tests/src-gen" forceOverwrite="true" bundleManifest="false" complianceLevel="5.0" copyrightFields="false">
   <genPackages prefix="Fowlerdsl" basePackage="org.eclipse.xtext.testlanguages" disposableProviderFactory="true">
-    <ecorePackage href="http://example.xtext.org/FowlerDslTestLanguage#/"/>
+    <ecorePackage href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.ecore#/"/>
     <genClasses>
-      <ecoreClass href="http://example.xtext.org/FowlerDslTestLanguage#//Statemachine"/>
+      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.ecore#//Statemachine"/>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="http://example.xtext.org/FowlerDslTestLanguage#//Statemachine/events"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.ecore#//Statemachine/events"/>
       </genFeatures>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="http://example.xtext.org/FowlerDslTestLanguage#//Statemachine/commands"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.ecore#//Statemachine/commands"/>
       </genFeatures>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="http://example.xtext.org/FowlerDslTestLanguage#//Statemachine/states"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.ecore#//Statemachine/states"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="http://example.xtext.org/FowlerDslTestLanguage#//Event"/>
+      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.ecore#//Event"/>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="http://example.xtext.org/FowlerDslTestLanguage#//Event/resetting"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.ecore#//Event/resetting"/>
       </genFeatures>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="http://example.xtext.org/FowlerDslTestLanguage#//Event/name"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.ecore#//Event/name"/>
       </genFeatures>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="http://example.xtext.org/FowlerDslTestLanguage#//Event/code"/>
-      </genFeatures>
-    </genClasses>
-    <genClasses>
-      <ecoreClass href="http://example.xtext.org/FowlerDslTestLanguage#//Command"/>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="http://example.xtext.org/FowlerDslTestLanguage#//Command/name"/>
-      </genFeatures>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="http://example.xtext.org/FowlerDslTestLanguage#//Command/code"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.ecore#//Event/code"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="http://example.xtext.org/FowlerDslTestLanguage#//State"/>
+      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.ecore#//Command"/>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="http://example.xtext.org/FowlerDslTestLanguage#//State/name"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.ecore#//Command/name"/>
+      </genFeatures>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.ecore#//Command/code"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.ecore#//State"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.ecore#//State/name"/>
       </genFeatures>
       <genFeatures notify="false" createChild="false" propertySortChoices="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="http://example.xtext.org/FowlerDslTestLanguage#//State/actions"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.ecore#//State/actions"/>
       </genFeatures>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="http://example.xtext.org/FowlerDslTestLanguage#//State/transitions"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.ecore#//State/transitions"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="http://example.xtext.org/FowlerDslTestLanguage#//Transition"/>
+      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.ecore#//Transition"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="http://example.xtext.org/FowlerDslTestLanguage#//Transition/event"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.ecore#//Transition/event"/>
       </genFeatures>
       <genFeatures notify="false" createChild="false" propertySortChoices="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="http://example.xtext.org/FowlerDslTestLanguage#//Transition/state"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.ecore#//Transition/state"/>
       </genFeatures>
     </genClasses>
   </genPackages>
-  <usedGenPackages href="platform:/resource/org.eclipse.xtext/model/xtext.genmodel#//xtext"/>
-  <usedGenPackages href="platform:/resource/org.eclipse.xtext.generator.tests/src/org/eclipse/xtext/grammarinheritance/ametamodel.genmodel#//ametamodel"/>
 </genmodel:GenModel>

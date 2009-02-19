@@ -2,13 +2,9 @@
  * <copyright>
  * </copyright>
  *
- * $Id: InheritanceTestPackageImpl.java,v 1.2 2009/02/18 21:22:51 sefftinge Exp $
+ * $Id: InheritanceTestPackageImpl.java,v 1.3 2009/02/19 14:39:57 sefftinge Exp $
  */
 package org.eclipse.xtext.grammarinheritance.inheritanceTest.impl;
-
-import baseInheritanceTest.BaseInheritanceTestPackage;
-
-import baseInheritanceTest.impl.BaseInheritanceTestPackageImpl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -17,9 +13,7 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import org.eclipse.xtext.XtextPackage;
-
-import org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage;
+import org.eclipse.xtext.grammarinheritance.baseInheritanceTest.BaseInheritanceTestPackage;
 
 import org.eclipse.xtext.grammarinheritance.inheritanceTest.Element;
 import org.eclipse.xtext.grammarinheritance.inheritanceTest.InheritanceTestFactory;
@@ -107,19 +101,13 @@ public class InheritanceTestPackageImpl extends EPackageImpl implements Inherita
     isInited = true;
 
     // Initialize simple dependencies
-    XtextPackage.eINSTANCE.eClass();
-    AmetamodelPackage.eINSTANCE.eClass();
-
-    // Obtain or create and register interdependencies
-    BaseInheritanceTestPackageImpl theBaseInheritanceTestPackage = (BaseInheritanceTestPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(BaseInheritanceTestPackage.eNS_URI) instanceof BaseInheritanceTestPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(BaseInheritanceTestPackage.eNS_URI) : BaseInheritanceTestPackage.eINSTANCE);
+    BaseInheritanceTestPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theInheritanceTestPackage.createPackageContents();
-    theBaseInheritanceTestPackage.createPackageContents();
 
     // Initialize created meta-data
     theInheritanceTestPackage.initializePackageContents();
-    theBaseInheritanceTestPackage.initializePackageContents();
 
     // Mark meta-data to indicate it can't be changed
     theInheritanceTestPackage.freeze();

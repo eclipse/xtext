@@ -9,7 +9,7 @@
 package org.eclipse.xtext.reference.ui;
 
 import org.apache.log4j.Logger;
-import org.eclipse.xtext.reference.ui.internal.ReferenceGrammarActivator;
+import org.eclipse.xtext.reference.internal.ReferenceGrammarActivator;
 import org.osgi.framework.BundleContext;
 
 /**

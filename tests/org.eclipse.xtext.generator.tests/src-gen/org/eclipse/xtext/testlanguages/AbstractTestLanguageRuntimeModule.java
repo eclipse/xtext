@@ -30,10 +30,6 @@ public abstract class AbstractTestLanguageRuntimeModule extends DefaultRuntimeMo
 		return org.eclipse.xtext.testlanguages.parser.packrat.TestLanguagePackratParser.class;
 	}
 
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
-		return org.eclipse.xtext.testlanguages.parseTreeConstruction.TestLanguageParsetreeConstructor.class;
-	}
-
 	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
 		return org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalTestLanguageLexer.class;
 	}
@@ -52,5 +48,9 @@ public abstract class AbstractTestLanguageRuntimeModule extends DefaultRuntimeMo
 
 	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
+	}
+
+	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
+		return org.eclipse.xtext.testlanguages.parseTreeConstruction.TestLanguageParsetreeConstructor.class;
 	}
 }

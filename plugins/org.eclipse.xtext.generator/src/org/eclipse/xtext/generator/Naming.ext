@@ -23,9 +23,6 @@ String guiceModuleUi(Grammar g) :
 String setup(Grammar g) :
 	JAVA org.eclipse.xtext.generator.Naming.setup(org.eclipse.xtext.Grammar);
 	
-String activator(Grammar g) :
-	JAVA org.eclipse.xtext.generator.Naming.activator(org.eclipse.xtext.Grammar);
-	
 String executableExtensionFactory(Grammar g) :
 	JAVA org.eclipse.xtext.generator.Naming.executableExtensionFactory(org.eclipse.xtext.Grammar);
 	

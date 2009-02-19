@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AnotherSimpleTestPackageImpl.java,v 1.2 2009/02/18 21:22:56 sefftinge Exp $
+ * $Id: AnotherSimpleTestPackageImpl.java,v 1.3 2009/02/19 14:40:05 sefftinge Exp $
  */
 package org.eclipse.xtext.metamodelreferencing.tests.anotherSimpleTest.impl;
 
@@ -14,8 +14,6 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.eclipse.xtext.XtextPackage;
-
-import org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage;
 
 import org.eclipse.xtext.metamodelreferencing.tests.anotherSimpleTest.AnotherSimpleTestFactory;
 import org.eclipse.xtext.metamodelreferencing.tests.anotherSimpleTest.AnotherSimpleTestPackage;
@@ -96,7 +94,6 @@ public class AnotherSimpleTestPackageImpl extends EPackageImpl implements Anothe
 
     // Initialize simple dependencies
     XtextPackage.eINSTANCE.eClass();
-    AmetamodelPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theAnotherSimpleTestPackage.createPackageContents();

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BooleanImpl.java,v 1.2 2009/02/18 21:22:25 sefftinge Exp $
+ * $Id: BooleanImpl.java,v 1.3 2009/02/19 14:39:36 sefftinge Exp $
  */
 package org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl;
 

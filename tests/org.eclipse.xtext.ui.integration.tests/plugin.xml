@@ -30,7 +30,7 @@
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="guice.Aware:org.eclipse.xtext.resource.XtextResourceFactory"
+			class="org.eclipse.xtext.ui.integration.TestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
 			type="testlanguage">
 		</parser>
 	</extension>
@@ -40,7 +40,7 @@
     <extension
 			point="org.eclipse.ui.editors">
 		<editor
-			class="guice.Aware:org.eclipse.xtext.ui.core.editor.XtextEditor"
+			class="org.eclipse.xtext.ui.integration.TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.XtextEditor"
 			contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
 			default="true"
 			extensions="testlanguage"
@@ -51,7 +51,7 @@
 	 <extension
 			point="org.eclipse.ui.preferencePages">
 		<page
-			class="guice.Aware:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
+			class="org.eclipse.xtext.ui.integration.TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
 			id="org.eclipse.xtext.ui.integration.TestLanguage"
 			name="TestLanguage">
 			<keywordReference
@@ -60,7 +60,7 @@
 		</page>
 		<page
 			category="org.eclipse.xtext.ui.integration.TestLanguage"
-			class="guice.Aware:org.eclipse.xtext.ui.core.editor.preferences.EditorPreferencePage"
+			class="org.eclipse.xtext.ui.integration.TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.EditorPreferencePage"
 			id="org.eclipse.xtext.ui.integration.TestLanguage.editor"
 			name="Editor">
 			<keywordReference 

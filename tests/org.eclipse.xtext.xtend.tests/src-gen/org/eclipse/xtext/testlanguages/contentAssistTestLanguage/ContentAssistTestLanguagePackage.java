@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ContentAssistTestLanguagePackage.java,v 1.2 2009/02/18 21:20:01 sefftinge Exp $
+ * $Id: ContentAssistTestLanguagePackage.java,v 1.3 2009/02/19 14:37:01 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.contentAssistTestLanguage;
 

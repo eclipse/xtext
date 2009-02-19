@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: org.eclipse.xtext.example.Domainmodel
-Bundle-SymbolicName: org.eclipse.xtext.example.Domainmodel
+Bundle-Name: org.eclipse.xtext.example.domainmodel
+Bundle-SymbolicName: org.eclipse.xtext.example.domainmodel
 Bundle-Version: 0.0.1
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.xtext.example.domainmodel

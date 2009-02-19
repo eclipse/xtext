@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PartialParserTestLanguagePackageImpl.java,v 1.2 2009/02/18 21:22:33 sefftinge Exp $
+ * $Id: PartialParserTestLanguagePackageImpl.java,v 1.3 2009/02/19 14:39:38 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.partialParserTestLanguage.impl;
 
@@ -12,10 +12,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
-import org.eclipse.xtext.XtextPackage;
-
-import org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage;
 
 import org.eclipse.xtext.testlanguages.partialParserTestLanguage.AbstractChild;
 import org.eclipse.xtext.testlanguages.partialParserTestLanguage.AbstractChildren;
@@ -165,10 +161,6 @@ public class PartialParserTestLanguagePackageImpl extends EPackageImpl implement
     PartialParserTestLanguagePackageImpl thePartialParserTestLanguagePackage = (PartialParserTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof PartialParserTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new PartialParserTestLanguagePackageImpl());
 
     isInited = true;
-
-    // Initialize simple dependencies
-    XtextPackage.eINSTANCE.eClass();
-    AmetamodelPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     thePartialParserTestLanguagePackage.createPackageContents();

@@ -30,10 +30,6 @@ public abstract class AbstractXtextTerminalsTestLanguageRuntimeModule extends De
 		return org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguagePackratParser.class;
 	}
 
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
-		return org.eclipse.xtext.parser.terminalrules.parseTreeConstruction.XtextTerminalsTestLanguageParsetreeConstructor.class;
-	}
-
 	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
 		return org.eclipse.xtext.parser.terminalrules.parser.antlr.internal.InternalXtextTerminalsTestLanguageLexer.class;
 	}
@@ -52,5 +48,9 @@ public abstract class AbstractXtextTerminalsTestLanguageRuntimeModule extends De
 
 	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
+	}
+
+	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
+		return org.eclipse.xtext.parser.terminalrules.parseTreeConstruction.XtextTerminalsTestLanguageParsetreeConstructor.class;
 	}
 }

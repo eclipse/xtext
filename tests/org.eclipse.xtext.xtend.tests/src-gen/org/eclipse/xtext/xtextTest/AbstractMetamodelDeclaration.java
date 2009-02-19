@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractMetamodelDeclaration.java,v 1.2 2009/02/18 21:20:04 sefftinge Exp $
+ * $Id: AbstractMetamodelDeclaration.java,v 1.3 2009/02/19 14:37:03 sefftinge Exp $
  */
 package org.eclipse.xtext.xtextTest;
 

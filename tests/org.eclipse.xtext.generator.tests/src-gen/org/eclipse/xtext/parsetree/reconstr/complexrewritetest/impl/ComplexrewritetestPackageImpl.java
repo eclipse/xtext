@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ComplexrewritetestPackageImpl.java,v 1.2 2009/02/18 21:22:22 sefftinge Exp $
+ * $Id: ComplexrewritetestPackageImpl.java,v 1.3 2009/02/19 14:39:35 sefftinge Exp $
  */
 package org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl;
 
@@ -12,10 +12,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
-import org.eclipse.xtext.XtextPackage;
-
-import org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage;
 
 import org.eclipse.xtext.parsetree.reconstr.complexrewritetest.Add;
 import org.eclipse.xtext.parsetree.reconstr.complexrewritetest.Atom;
@@ -242,10 +238,6 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
     ComplexrewritetestPackageImpl theComplexrewritetestPackage = (ComplexrewritetestPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof ComplexrewritetestPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new ComplexrewritetestPackageImpl());
 
     isInited = true;
-
-    // Initialize simple dependencies
-    XtextPackage.eINSTANCE.eClass();
-    AmetamodelPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theComplexrewritetestPackage.createPackageContents();

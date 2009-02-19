@@ -24,7 +24,7 @@ import org.osgi.framework.BundleContext;
 /**
  * The activator class controls the plug-in life cycle
  */
-public class FowlerDslActivator extends Activator {
+public class FowlerDslActivator extends org.eclipse.xtext.example.internal.FowlerDslActivator {
 
 	Logger logger = Logger.getLogger(FowlerDslActivator.class);
 

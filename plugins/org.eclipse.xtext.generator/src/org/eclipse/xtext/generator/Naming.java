@@ -47,7 +47,7 @@ public final class Naming {
 	}
 	
 	public static String executableExtensionFactory(Grammar g) {
-		return "guice.Aware";
+		return g.getName()+"ExecutableExtensionFactory";
 	}
 	
 	public static String asPath(String s) {

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FarbeImpl.java,v 1.2 2009/02/18 21:20:37 sefftinge Exp $
+ * $Id: FarbeImpl.java,v 1.3 2009/02/19 14:37:48 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.referenceGrammar.impl;
 

@@ -3,6 +3,27 @@
 
 <plugin>
 
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://www.eclipse.org/2008/Xtext" 
+       class = "org.eclipse.xtext.xtext.XtextPackage"
+       genModel = "org/eclipse/xtext/Xtext.genmodel" /> 
+	
+  </extension>
+
+
+  <extension
+		point="org.eclipse.xtend.typesystem.emf.checks">
+		<metaModel
+			nsURI="http://www.eclipse.org/2008/Xtext">
+			<checkFile
+				path="org/eclipse/xtext/XtextChecks.chk">
+			</checkFile>
+		</metaModel>
+	
+	</extension>
+
+
 
 
 </plugin>

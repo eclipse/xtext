@@ -1,4 +1,5 @@
 <compose class="org.eclipse.xtext.generator.CompositeGeneratorFragment">
+	<property name="file.extensions" value=""/>
 	<fragment class="org.eclipse.xtext.ui.generator.BasicUiGeneratorFragment"
 			  fileExtensions="${file.extensions}"/>
 	<fragment class="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment"/>

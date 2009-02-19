@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FowlerdslPackageImpl.java,v 1.2 2009/02/18 21:22:37 sefftinge Exp $
+ * $Id: FowlerdslPackageImpl.java,v 1.3 2009/02/19 14:40:04 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.fowlerdsl.impl;
 
@@ -12,10 +12,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
-import org.eclipse.xtext.XtextPackage;
-
-import org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage;
 
 import org.eclipse.xtext.testlanguages.fowlerdsl.Command;
 import org.eclipse.xtext.testlanguages.fowlerdsl.Event;
@@ -125,10 +121,6 @@ public class FowlerdslPackageImpl extends EPackageImpl implements FowlerdslPacka
     FowlerdslPackageImpl theFowlerdslPackage = (FowlerdslPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof FowlerdslPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new FowlerdslPackageImpl());
 
     isInited = true;
-
-    // Initialize simple dependencies
-    XtextPackage.eINSTANCE.eClass();
-    AmetamodelPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theFowlerdslPackage.createPackageContents();

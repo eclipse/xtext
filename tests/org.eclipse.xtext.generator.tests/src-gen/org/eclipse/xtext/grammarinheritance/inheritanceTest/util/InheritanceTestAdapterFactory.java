@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: InheritanceTestAdapterFactory.java,v 1.2 2009/02/18 21:22:51 sefftinge Exp $
+ * $Id: InheritanceTestAdapterFactory.java,v 1.3 2009/02/19 14:39:57 sefftinge Exp $
  */
 package org.eclipse.xtext.grammarinheritance.inheritanceTest.util;
 
@@ -89,7 +89,7 @@ public class InheritanceTestAdapterFactory extends AdapterFactoryImpl
         return createElementAdapter();
       }
       @Override
-      public Adapter caseModel_1(baseInheritanceTest.Model object)
+      public Adapter caseModel_1(org.eclipse.xtext.grammarinheritance.baseInheritanceTest.Model object)
       {
         return createModel_1Adapter();
       }
@@ -146,13 +146,13 @@ public class InheritanceTestAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link baseInheritanceTest.Model <em>Model</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.grammarinheritance.baseInheritanceTest.Model <em>Model</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see baseInheritanceTest.Model
+   * @see org.eclipse.xtext.grammarinheritance.baseInheritanceTest.Model
    * @generated
    */
   public Adapter createModel_1Adapter()

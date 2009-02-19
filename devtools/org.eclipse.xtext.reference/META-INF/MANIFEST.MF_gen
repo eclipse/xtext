@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: org.eclipse.xtext.reference.ReferenceGrammar
-Bundle-SymbolicName: org.eclipse.xtext.reference.ReferenceGrammar
+Bundle-Name: org.eclipse.xtext.reference
+Bundle-SymbolicName: org.eclipse.xtext.reference
 Bundle-Version: 0.0.1
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.xtext.reference.referenceGrammar

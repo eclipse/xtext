@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TreeTestLanguageSwitch.java,v 1.2 2009/02/18 21:20:04 sefftinge Exp $
+ * $Id: TreeTestLanguageSwitch.java,v 1.3 2009/02/19 14:37:05 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.treeTestLanguage.util;
 

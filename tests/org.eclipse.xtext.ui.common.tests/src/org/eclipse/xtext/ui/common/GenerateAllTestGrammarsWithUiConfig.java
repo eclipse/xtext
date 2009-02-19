@@ -13,50 +13,21 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common;
 
-import org.eclipse.xtext.AbstractTestGrammarGenerator;
-import org.eclipse.xtext.XtextGrammarTestLanguage;
-import org.eclipse.xtext.grammarinheritance.AbstractTestLanguage;
-import org.eclipse.xtext.parser.keywords.KeywordsTestLanguage;
-import org.eclipse.xtext.testlanguages.ContentAssistTestLanguage;
-import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage;
-import org.eclipse.xtext.testlanguages.TreeTestLanguage;
+import org.eclipse.emf.mwe.core.WorkflowFacade;
 
 /**
  * Generates all required test grammars with UI configuration for this test project.
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
-public class GenerateAllTestGrammarsWithUiConfig extends AbstractTestGrammarGenerator {
+public class GenerateAllTestGrammarsWithUiConfig {
 
-	public GenerateAllTestGrammarsWithUiConfig(String[] args) {
-		super(args);
-	}
-
-	public static void main(String... args) {
-		new GenerateAllTestGrammarsWithUiConfig(args).generateAll();
-	}
-	
-	@Override
-	public Class<?>[] getTestGrammarClasses() {
-		return new Class[] { 
-				AbstractTestLanguage.class,
-				ReferenceGrammarTestLanguage.class, 
-				TreeTestLanguage.class,
-				XtextGrammarTestLanguage.class, 
-				ContentAssistTestLanguage.class,
-				KeywordsTestLanguage.class 
-			};
-	}
-	
-	
-	@Override
-	protected String getUiProject() {
-		return getRuntimeProject();
-	}
-
-	@Override
-	protected String getWorkflow() {
-		return "org/eclipse/xtext/ui/common/testLanguage.mwe";
+	public static void main(String... args) throws Exception {
+		try {
+			new WorkflowFacade("org/eclipse/xtext/ui/common/GenerateTestLanguages.mwe").run();
+		} catch (Throwable t) {
+			t.printStackTrace();
+		}
 	}
 
 }

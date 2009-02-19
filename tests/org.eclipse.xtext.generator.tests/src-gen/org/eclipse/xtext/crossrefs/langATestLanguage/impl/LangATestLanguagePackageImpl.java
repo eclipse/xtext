@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LangATestLanguagePackageImpl.java,v 1.2 2009/02/18 21:22:15 sefftinge Exp $
+ * $Id: LangATestLanguagePackageImpl.java,v 1.3 2009/02/19 14:39:35 sefftinge Exp $
  */
 package org.eclipse.xtext.crossrefs.langATestLanguage.impl;
 
@@ -13,15 +13,11 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import org.eclipse.xtext.XtextPackage;
-
 import org.eclipse.xtext.crossrefs.langATestLanguage.Import;
 import org.eclipse.xtext.crossrefs.langATestLanguage.LangATestLanguageFactory;
 import org.eclipse.xtext.crossrefs.langATestLanguage.LangATestLanguagePackage;
 import org.eclipse.xtext.crossrefs.langATestLanguage.Main;
 import org.eclipse.xtext.crossrefs.langATestLanguage.Type;
-
-import org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -109,10 +105,6 @@ public class LangATestLanguagePackageImpl extends EPackageImpl implements LangAT
     LangATestLanguagePackageImpl theLangATestLanguagePackage = (LangATestLanguagePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof LangATestLanguagePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new LangATestLanguagePackageImpl());
 
     isInited = true;
-
-    // Initialize simple dependencies
-    XtextPackage.eINSTANCE.eClass();
-    AmetamodelPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theLangATestLanguagePackage.createPackageContents();

@@ -2,6 +2,7 @@
 <?eclipse version="3.0"?>
 
 <plugin>
+
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://example.xtext.org/FowlerDsl" 
@@ -21,5 +22,6 @@
 		</metaModel>
 	
 	</extension>
+
 
 </plugin>

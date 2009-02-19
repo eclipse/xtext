@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: NodeImpl.java,v 1.2 2009/02/18 21:22:42 sefftinge Exp $
+ * $Id: NodeImpl.java,v 1.3 2009/02/19 14:39:44 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.treeTestLanguage.impl;
 

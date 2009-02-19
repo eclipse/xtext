@@ -30,10 +30,6 @@ public abstract class AbstractHiddenTerminalsTestLanguageRuntimeModule extends D
 		return org.eclipse.xtext.parser.terminalrules.parser.packrat.HiddenTerminalsTestLanguagePackratParser.class;
 	}
 
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
-		return org.eclipse.xtext.parser.terminalrules.parseTreeConstruction.HiddenTerminalsTestLanguageParsetreeConstructor.class;
-	}
-
 	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
 		return org.eclipse.xtext.parser.terminalrules.parser.antlr.internal.InternalHiddenTerminalsTestLanguageLexer.class;
 	}
@@ -52,5 +48,9 @@ public abstract class AbstractHiddenTerminalsTestLanguageRuntimeModule extends D
 
 	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
+	}
+
+	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
+		return org.eclipse.xtext.parser.terminalrules.parseTreeConstruction.HiddenTerminalsTestLanguageParsetreeConstructor.class;
 	}
 }

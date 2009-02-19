@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EpatchTestLanguagePackageImpl.java,v 1.2 2009/02/18 21:22:19 sefftinge Exp $
+ * $Id: EpatchTestLanguagePackageImpl.java,v 1.3 2009/02/19 14:39:50 sefftinge Exp $
  */
 package org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl;
 
@@ -12,10 +12,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
-import org.eclipse.xtext.XtextPackage;
-
-import org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage;
 
 import org.eclipse.xtext.parser.epatch.epatchTestLanguage.Assignment;
 import org.eclipse.xtext.parser.epatch.epatchTestLanguage.AssignmentValue;
@@ -253,10 +249,6 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
     EpatchTestLanguagePackageImpl theEpatchTestLanguagePackage = (EpatchTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof EpatchTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new EpatchTestLanguagePackageImpl());
 
     isInited = true;
-
-    // Initialize simple dependencies
-    XtextPackage.eINSTANCE.eClass();
-    AmetamodelPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theEpatchTestLanguagePackage.createPackageContents();

@@ -30,10 +30,6 @@ public abstract class AbstractInheritanceTestLanguageRuntimeModule extends Defau
 		return org.eclipse.xtext.grammarinheritance.parser.packrat.InheritanceTestLanguagePackratParser.class;
 	}
 
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
-		return org.eclipse.xtext.grammarinheritance.parseTreeConstruction.InheritanceTestLanguageParsetreeConstructor.class;
-	}
-
 	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
 		return org.eclipse.xtext.grammarinheritance.parser.antlr.internal.InternalInheritanceTestLanguageLexer.class;
 	}
@@ -52,5 +48,9 @@ public abstract class AbstractInheritanceTestLanguageRuntimeModule extends Defau
 
 	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
+	}
+
+	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
+		return org.eclipse.xtext.grammarinheritance.parseTreeConstruction.InheritanceTestLanguageParsetreeConstructor.class;
 	}
 }

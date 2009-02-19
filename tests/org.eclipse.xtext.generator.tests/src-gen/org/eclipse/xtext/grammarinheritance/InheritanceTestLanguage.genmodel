@@ -1,29 +1,19 @@
 <?xml version="1.0" encoding="ASCII"?>
-<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="../org.eclipse.xtext.generator.tests//src-gen" forceOverwrite="true" bundleManifest="false" complianceLevel="5.0" copyrightFields="false">
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="../org.eclipse.xtext.generator.tests/src-gen" forceOverwrite="true" bundleManifest="false" complianceLevel="5.0" copyrightFields="false">
   <genPackages prefix="InheritanceTest" basePackage="org.eclipse.xtext.grammarinheritance" disposableProviderFactory="true">
-    <ecorePackage href="http://www.eclipse.org/2009/tmf/xtext/InheritanceTestLanguage#/"/>
+    <ecorePackage href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/InheritanceTestLanguage.ecore#/"/>
     <genClasses>
-      <ecoreClass href="http://www.eclipse.org/2009/tmf/xtext/InheritanceTestLanguage#//Model"/>
+      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/InheritanceTestLanguage.ecore#//Model"/>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="http://www.eclipse.org/2009/tmf/xtext/InheritanceTestLanguage#//Model/elements"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/InheritanceTestLanguage.ecore#//Model/elements"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="http://www.eclipse.org/2009/tmf/xtext/InheritanceTestLanguage#//Element"/>
+      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/InheritanceTestLanguage.ecore#//Element"/>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="http://www.eclipse.org/2009/tmf/xtext/InheritanceTestLanguage#//Element/name"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/InheritanceTestLanguage.ecore#//Element/name"/>
       </genFeatures>
     </genClasses>
   </genPackages>
-  <genPackages prefix="BaseInheritanceTest">
-    <ecorePackage href="http://www.eclipse.org/2009/tmf/xtext/BaseInheritanceTestLanguage#/"/>
-    <genClasses>
-      <ecoreClass href="http://www.eclipse.org/2009/tmf/xtext/BaseInheritanceTestLanguage#//Model"/>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="http://www.eclipse.org/2009/tmf/xtext/BaseInheritanceTestLanguage#//Model/name"/>
-      </genFeatures>
-    </genClasses>
-  </genPackages>
-  <usedGenPackages href="platform:/resource/org.eclipse.xtext/model/xtext.genmodel#//xtext"/>
-  <usedGenPackages href="platform:/resource/org.eclipse.xtext.generator.tests/src/org/eclipse/xtext/grammarinheritance/ametamodel.genmodel#//ametamodel"/>
+  <usedGenPackages href="platform:/resource/org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/BaseInheritanceTestLanguage.genmodel#//baseInheritanceTest"/>
 </genmodel:GenModel>

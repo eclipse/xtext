@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SimpleTestPackageImpl.java,v 1.2 2009/02/18 21:22:52 sefftinge Exp $
+ * $Id: SimpleTestPackageImpl.java,v 1.3 2009/02/19 14:40:05 sefftinge Exp $
  */
 package org.eclipse.xtext.metamodelreferencing.tests.simpleTest.impl;
 
@@ -12,10 +12,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
-import org.eclipse.xtext.XtextPackage;
-
-import org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage;
 
 import org.eclipse.xtext.metamodelreferencing.tests.otherTest.OtherTestPackage;
 
@@ -97,10 +93,6 @@ public class SimpleTestPackageImpl extends EPackageImpl implements SimpleTestPac
     SimpleTestPackageImpl theSimpleTestPackage = (SimpleTestPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof SimpleTestPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new SimpleTestPackageImpl());
 
     isInited = true;
-
-    // Initialize simple dependencies
-    XtextPackage.eINSTANCE.eClass();
-    AmetamodelPackage.eINSTANCE.eClass();
 
     // Obtain or create and register interdependencies
     OtherTestPackageImpl theOtherTestPackage = (OtherTestPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(OtherTestPackage.eNS_URI) instanceof OtherTestPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(OtherTestPackage.eNS_URI) : OtherTestPackage.eINSTANCE);

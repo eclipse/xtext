@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: org.eclipse.xtext.ui.integration.TestLanguage
-Bundle-SymbolicName: org.eclipse.xtext.ui.integration.TestLanguage
+Bundle-Name: org.eclipse.xtext.ui.integration.tests
+Bundle-SymbolicName: org.eclipse.xtext.ui.integration.tests
 Bundle-Version: 0.0.1
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.xtext.ui.integration.foo

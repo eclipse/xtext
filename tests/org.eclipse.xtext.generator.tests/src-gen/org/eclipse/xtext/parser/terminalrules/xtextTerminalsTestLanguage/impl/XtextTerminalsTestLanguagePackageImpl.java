@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextTerminalsTestLanguagePackageImpl.java,v 1.2 2009/02/18 21:22:18 sefftinge Exp $
+ * $Id: XtextTerminalsTestLanguagePackageImpl.java,v 1.3 2009/02/19 14:39:34 sefftinge Exp $
  */
 package org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.impl;
 
@@ -12,10 +12,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
-import org.eclipse.xtext.XtextPackage;
-
-import org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage;
 
 import org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.AbstractElement;
 import org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.AbstractMetamodelDeclaration;
@@ -253,10 +249,6 @@ public class XtextTerminalsTestLanguagePackageImpl extends EPackageImpl implemen
     XtextTerminalsTestLanguagePackageImpl theXtextTerminalsTestLanguagePackage = (XtextTerminalsTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof XtextTerminalsTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new XtextTerminalsTestLanguagePackageImpl());
 
     isInited = true;
-
-    // Initialize simple dependencies
-    XtextPackage.eINSTANCE.eClass();
-    AmetamodelPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theXtextTerminalsTestLanguagePackage.createPackageContents();

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TransitionImpl.java,v 1.2 2009/02/18 21:22:37 sefftinge Exp $
+ * $Id: TransitionImpl.java,v 1.3 2009/02/19 14:40:04 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.fowlerdsl.impl;
 

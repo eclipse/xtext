@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TestLangPackageImpl.java,v 1.2 2009/02/18 21:22:44 sefftinge Exp $
+ * $Id: TestLangPackageImpl.java,v 1.3 2009/02/19 14:39:53 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.testLang.impl;
 
@@ -12,10 +12,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
-import org.eclipse.xtext.XtextPackage;
-
-import org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage;
 
 import org.eclipse.xtext.testlanguages.testLang.AbstractElement;
 import org.eclipse.xtext.testlanguages.testLang.ChoiceElement;
@@ -133,10 +129,6 @@ public class TestLangPackageImpl extends EPackageImpl implements TestLangPackage
     TestLangPackageImpl theTestLangPackage = (TestLangPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof TestLangPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new TestLangPackageImpl());
 
     isInited = true;
-
-    // Initialize simple dependencies
-    XtextPackage.eINSTANCE.eClass();
-    AmetamodelPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theTestLangPackage.createPackageContents();

@@ -30,10 +30,6 @@ public abstract class AbstractContentAssistTestLanguageRuntimeModule extends Def
 		return org.eclipse.xtext.testlanguages.parser.packrat.ContentAssistTestLanguagePackratParser.class;
 	}
 
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
-		return org.eclipse.xtext.testlanguages.parseTreeConstruction.ContentAssistTestLanguageParsetreeConstructor.class;
-	}
-
 	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
 		return org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalContentAssistTestLanguageLexer.class;
 	}
@@ -52,5 +48,9 @@ public abstract class AbstractContentAssistTestLanguageRuntimeModule extends Def
 
 	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
+	}
+
+	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
+		return org.eclipse.xtext.testlanguages.parseTreeConstruction.ContentAssistTestLanguageParsetreeConstructor.class;
 	}
 }

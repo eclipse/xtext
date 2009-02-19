@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TransientvaluestestPackageImpl.java,v 1.2 2009/02/18 21:22:44 sefftinge Exp $
+ * $Id: TransientvaluestestPackageImpl.java,v 1.3 2009/02/19 14:39:49 sefftinge Exp $
  */
 package org.eclipse.xtext.parsetree.transientvalues.transientvaluestest.impl;
 
@@ -11,10 +11,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
-import org.eclipse.xtext.XtextPackage;
-
-import org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage;
 
 import org.eclipse.xtext.parsetree.transientvalues.transientvaluestest.Root;
 import org.eclipse.xtext.parsetree.transientvalues.transientvaluestest.TestList;
@@ -116,10 +112,6 @@ public class TransientvaluestestPackageImpl extends EPackageImpl implements Tran
     TransientvaluestestPackageImpl theTransientvaluestestPackage = (TransientvaluestestPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof TransientvaluestestPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new TransientvaluestestPackageImpl());
 
     isInited = true;
-
-    // Initialize simple dependencies
-    XtextPackage.eINSTANCE.eClass();
-    AmetamodelPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theTransientvaluestestPackage.createPackageContents();

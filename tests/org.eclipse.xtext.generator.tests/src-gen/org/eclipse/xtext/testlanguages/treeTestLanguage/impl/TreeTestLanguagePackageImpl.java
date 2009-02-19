@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TreeTestLanguagePackageImpl.java,v 1.2 2009/02/18 21:22:42 sefftinge Exp $
+ * $Id: TreeTestLanguagePackageImpl.java,v 1.3 2009/02/19 14:39:44 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.treeTestLanguage.impl;
 
@@ -12,10 +12,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
-import org.eclipse.xtext.XtextPackage;
-
-import org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage;
 
 import org.eclipse.xtext.testlanguages.treeTestLanguage.Model;
 import org.eclipse.xtext.testlanguages.treeTestLanguage.Node;
@@ -101,10 +97,6 @@ public class TreeTestLanguagePackageImpl extends EPackageImpl implements TreeTes
     TreeTestLanguagePackageImpl theTreeTestLanguagePackage = (TreeTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof TreeTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new TreeTestLanguagePackageImpl());
 
     isInited = true;
-
-    // Initialize simple dependencies
-    XtextPackage.eINSTANCE.eClass();
-    AmetamodelPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theTreeTestLanguagePackage.createPackageContents();

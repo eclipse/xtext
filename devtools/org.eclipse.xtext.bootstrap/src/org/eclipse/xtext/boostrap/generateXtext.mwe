@@ -1,18 +1,26 @@
 <workflow>
-	<property name="grammarURI" value="classpath:/org/eclipse/xtext/Xtext.xtext"/>
-	<property name="runtimeProject" value="../org.eclipse.xtext"/>
-	<property name="uiProject" value="../org.eclipse.xtext.xtext.ui"/>
+	<property name="runtimeProjectName" value="org.eclipse.xtext"/>
+	<property name="uiProjectName" value="org.eclipse.xtext.xtext.ui"/>
+	<property name="runtimeProject" value="../${runtimeProjectName}"/>
+	<property name="uiProject" value="../${uiProjectName}"/>
 	<property name="file.extensions" value="xtext,xtext2"/>
 	
 	<component class="org.eclipse.emf.mwe.utils.DirectoryCleaner" directory="${runtimeProject}/src-gen"/>
 	<component class="org.eclipse.emf.mwe.utils.DirectoryCleaner" directory="${uiProject}/src-gen"/>
 		
 	<component class="org.eclipse.xtext.generator.Generator">
-		<grammarURI value="${grammarURI}"/>
 		<pathRtProject value="${runtimeProject}"/>
 		<pathUiProject value="${uiProject}"/>
-		<fragments file="org/eclipse/xtext/ui/generator/standardUiAndRuntime.mwe">
-			<file.extensions value="${file.extensions}"/>
-		</fragments>
+		<projectNameRt value="${runtimeProjectName}"/>
+		<projectNameUi value="${uiProjectName}"/>
+		<activator value="org.eclipse.xtext.xtext.ui.internal.Activator"/>		
+		<language uri="classpath:/org/eclipse/xtext/Xtext.xtext">
+			<fragments file="org/eclipse/xtext/ui/generator/standardUiAndRuntime.mwe">
+				<file.extensions value="${file.extensions}"/>
+			</fragments>
+		</language>
+		<language uri="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext">
+			<fragments file="org/eclipse/xtext/generator/standardRuntimeFragments.mwe"/>
+		</language>
 	</component>
 </workflow>

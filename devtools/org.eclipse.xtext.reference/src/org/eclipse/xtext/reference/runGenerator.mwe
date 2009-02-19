@@ -1,21 +1,29 @@
 <workflow>
 	<property name="grammarURI" value="classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xtext"/>
-	<property name="runtimeProject" value="."/>
-	<property name="uiProject" value="../org.eclipse.xtext.reference.ui"/>
 	<property name="file.extensions" value="xtest,tst"/>
+	<property name="projectName" value="org.eclipse.xtext.reference"/>
+	
+	<property name="runtimeProject" value="../${projectName}"/>
 	
 	<bean class="org.eclipse.emf.mwe.utils.StandaloneSetup">	
 		<registerGeneratedEPackage value="ReferenceModel.ReferenceModelPackage"/>
-		<platformUri value=".."/>
+		<platformUri value="${runtimeProject}/.."/>
 	</bean>
 	
+	<component class="org.eclipse.emf.mwe.utils.DirectoryCleaner" directory="${runtimeProject}/src-gen"/>
+	<component class="org.eclipse.emf.mwe.utils.DirectoryCleaner" directory="${runtimeProject}.ui/src-gen"/>
+	
 	<component class="org.eclipse.xtext.generator.Generator">
-		<grammarURI value="${grammarURI}"/>
 		<pathRtProject value="${runtimeProject}"/>
-		<pathUiProject value="${uiProject}"/>
-		<fragments file="org/eclipse/xtext/ui/generator/standardUiAndRuntime.mwe">
-			<file.extensions value="${file.extensions}"/>
-			<genmodels value="platform:/resource/org.eclipse.xtext.reference/src/org/eclipse/xtext/reference/ReferenceModel.genmodel"/>
-		</fragments>
+		<pathUiProject value="${runtimeProject}.ui"/>
+		<projectNameRt value="${projectName}"/>
+		<projectNameUi value="${projectName}.ui"/>
+		
+		<language uri="${grammarURI}">
+			<fragments file="org/eclipse/xtext/ui/generator/standardUiAndRuntime.mwe">
+				<file.extensions value="${file.extensions}"/>
+				<genmodels value="platform:/resource/org.eclipse.xtext.reference/src/org/eclipse/xtext/reference/ReferenceModel.genmodel"/>
+			</fragments>
+		</language>
 	</component>
 </workflow>

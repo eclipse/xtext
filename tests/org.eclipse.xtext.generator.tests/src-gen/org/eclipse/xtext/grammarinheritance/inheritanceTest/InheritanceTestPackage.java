@@ -2,16 +2,16 @@
  * <copyright>
  * </copyright>
  *
- * $Id: InheritanceTestPackage.java,v 1.2 2009/02/18 21:22:49 sefftinge Exp $
+ * $Id: InheritanceTestPackage.java,v 1.3 2009/02/19 14:39:57 sefftinge Exp $
  */
 package org.eclipse.xtext.grammarinheritance.inheritanceTest;
-
-import baseInheritanceTest.BaseInheritanceTestPackage;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+
+import org.eclipse.xtext.grammarinheritance.baseInheritanceTest.BaseInheritanceTestPackage;
 
 /**
  * <!-- begin-user-doc -->

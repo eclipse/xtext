@@ -30,10 +30,6 @@ public abstract class AbstractXtextGrammarTestLanguageRuntimeModule extends Defa
 		return org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguagePackratParser.class;
 	}
 
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
-		return org.eclipse.xtext.parseTreeConstruction.XtextGrammarTestLanguageParsetreeConstructor.class;
-	}
-
 	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
 		return org.eclipse.xtext.parser.antlr.internal.InternalXtextGrammarTestLanguageLexer.class;
 	}
@@ -52,5 +48,9 @@ public abstract class AbstractXtextGrammarTestLanguageRuntimeModule extends Defa
 
 	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
+	}
+
+	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
+		return org.eclipse.xtext.parseTreeConstruction.XtextGrammarTestLanguageParsetreeConstructor.class;
 	}
 }
