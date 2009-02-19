@@ -31,7 +31,7 @@ public class GenerateAllLanguages {
 			xtext.example.GenerateGrammar.main("../org.eclipse.xtext.example.domainmodel");
 			org.eclipse.xtext.example.GenerateGrammar.main("../org.eclipse.xtext.example.fowlerdsl");
 			org.eclipse.xtext.reference.GenerateGrammar.main("../org.eclipse.xtext.reference");
-			org.eclipse.xtext.example.GenerateGrammar.main("../org.eclipse.xtext.example.ecoredsl");
+			org.eclipse.xtext.example.GenerateEcoreDsl.main("../org.eclipse.xtext.example.ecoredsl");
 			org.eclipse.xtext.xtend.tests.GenerateAllTestGrammarsWithXtendServices.main("../org.eclipse.xtext.xtend.tests");
 
 			logger.info("DONE.");

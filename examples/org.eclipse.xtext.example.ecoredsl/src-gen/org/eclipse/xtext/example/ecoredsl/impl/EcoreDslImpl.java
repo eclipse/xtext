@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EcoreDslImpl.java,v 1.2 2009/02/18 21:21:31 sefftinge Exp $
+ * $Id: EcoreDslImpl.java,v 1.3 2009/02/19 08:18:41 sefftinge Exp $
  */
 package org.eclipse.xtext.example.ecoredsl.impl;
 

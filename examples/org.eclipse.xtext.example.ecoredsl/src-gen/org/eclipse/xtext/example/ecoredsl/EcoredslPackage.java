@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EcoredslPackage.java,v 1.2 2009/02/18 21:21:32 sefftinge Exp $
+ * $Id: EcoredslPackage.java,v 1.3 2009/02/19 08:18:42 sefftinge Exp $
  */
 package org.eclipse.xtext.example.ecoredsl;
 

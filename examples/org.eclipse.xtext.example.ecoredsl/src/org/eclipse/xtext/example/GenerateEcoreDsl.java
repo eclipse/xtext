@@ -8,10 +8,10 @@ import org.eclipse.emf.mwe.core.WorkflowFacade;
 /**
  * Run this class in order to generate the domain model grammar.
  */
-public class  GenerateGrammar {
+public class  GenerateEcoreDsl {
 
 	public static void main(String... args) throws IOException {
-		new WorkflowFacade("org/eclipse/xtext/example/runGenerator.mwe", Collections.singletonMap("runtimeProject",
+		new WorkflowFacade("org/eclipse/xtext/example/generateEcoreDsl.mwe", Collections.singletonMap("runtimeProject",
 				getProject(args))).run();
 	}
 
