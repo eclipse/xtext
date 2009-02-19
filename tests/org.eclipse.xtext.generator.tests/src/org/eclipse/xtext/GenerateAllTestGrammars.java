@@ -13,10 +13,10 @@
  *******************************************************************************/
 package org.eclipse.xtext;
 
+import org.eclipse.emf.mwe.core.WorkflowFacade;
 import org.eclipse.xtext.crossrefs.ImportUriTestLanguage;
 import org.eclipse.xtext.crossrefs.LangATestLanguage;
 import org.eclipse.xtext.dummy.DummyTestLanguage;
-import org.eclipse.xtext.generator.LowerCaseNamedTestLanguage;
 import org.eclipse.xtext.grammarinheritance.AbstractTestLanguage;
 import org.eclipse.xtext.grammarinheritance.BaseInheritanceTestLanguage;
 import org.eclipse.xtext.grammarinheritance.ConcreteTestLanguage;
@@ -47,28 +47,24 @@ import org.eclipse.xtext.testlanguages.TestLanguage;
 import org.eclipse.xtext.testlanguages.TreeTestLanguage;
 import org.eclipse.xtext.valueconverter.Bug250313;
 
-
-
-
 /**
  * @author Sven Efftinge - Initial contribution and API
- *
+ * 
  */
-public class GenerateAllTestGrammars extends AbstractTestGrammarGenerator {
-	
-	public GenerateAllTestGrammars(String[] args) {
-		super(args);
-	}
+public class GenerateAllTestGrammars {
 
 	public static void main(String... args) {
-		new GenerateAllTestGrammars(args).generateAll();
+		try {
+			new WorkflowFacade("org/eclipse/xtext/GenerateAllTestLanguages.mwe").run();
+		} catch (Throwable t) {
+			t.printStackTrace();
+		}
 	}
 	
-	public Class<?>[] getTestGrammarClasses() { return new Class[] {
+	public static Class<?>[] getTestGrammarClasses() { return new Class[] {
 			LangATestLanguage.class,
 			AbstractTestLanguage.class,
-			ConcreteTestLanguage.class
-			,
+			ConcreteTestLanguage.class,
 			XtextGrammarTestLanguage.class,
 			MetamodelRefTestLanguage.class,
 			MultiGenMMTestLanguage.class,
@@ -97,14 +93,17 @@ public class GenerateAllTestGrammars extends AbstractTestGrammarGenerator {
 			HiddenTerminalsTestLanguage.class,
 			EpatchTestLanguage.class,
 			KeywordsTestLanguage.class,
-			LowerCaseNamedTestLanguage.class,
 			BaseInheritanceTestLanguage.class,
 			InheritanceTestLanguage.class
 		};
 	}
-	
-	protected String getWorkflow() {
-		return "org/eclipse/xtext/standardTestLanguage.mwe";
+
+	/**
+	 * @param param
+	 * @return
+	 */
+	public static String getGrammarFileName(Class<?> param) {
+		return param.getName().replace('.', '/')+".xtext";
 	}
 
 }

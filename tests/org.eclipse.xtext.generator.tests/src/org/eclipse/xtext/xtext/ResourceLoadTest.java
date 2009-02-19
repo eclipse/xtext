@@ -11,21 +11,12 @@ import java.io.IOException;
 
 import junit.framework.TestResult;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
-import org.eclipse.xtext.AbstractTestGrammarGenerator;
 import org.eclipse.xtext.GenerateAllTestGrammars;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
-import org.eclipse.xtext.util.CollectionUtils;
-import org.eclipse.xtext.util.Function;
-import org.eclipse.xtext.util.Pair;
-import org.eclipse.xtext.util.Tuples;
 
 /**
  * Really long running smoke tests for the xtext grammar.
@@ -46,7 +37,7 @@ public class ResourceLoadTest extends AbstractGeneratorTest {
 	}
 
 	private Class<?>[] getTestClasses() {
-		return new GenerateAllTestGrammars(null).getTestGrammarClasses();
+		return GenerateAllTestGrammars.getTestGrammarClasses();
 	}
 
 	@Override
