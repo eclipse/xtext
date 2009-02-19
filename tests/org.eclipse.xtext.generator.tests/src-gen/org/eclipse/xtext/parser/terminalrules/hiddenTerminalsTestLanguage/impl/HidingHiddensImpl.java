@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: HidingHiddensImpl.java,v 1.4 2009/02/19 16:27:02 sefftinge Exp $
+ * $Id: HidingHiddensImpl.java,v 1.5 2009/02/19 21:09:55 sefftinge Exp $
  */
 package org.eclipse.xtext.parser.terminalrules.hiddenTerminalsTestLanguage.impl;
 

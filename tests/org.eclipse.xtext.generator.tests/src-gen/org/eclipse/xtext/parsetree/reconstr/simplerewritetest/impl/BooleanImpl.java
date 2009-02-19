@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BooleanImpl.java,v 1.4 2009/02/19 16:26:52 sefftinge Exp $
+ * $Id: BooleanImpl.java,v 1.5 2009/02/19 21:09:46 sefftinge Exp $
  */
 package org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl;
 
@@ -150,7 +150,7 @@ public class BooleanImpl extends ExpressionImpl implements org.eclipse.xtext.par
     switch (featureID)
     {
       case SimplerewritetestPackage.BOOLEAN__BOOL:
-        return isBool() ? Boolean.TRUE : Boolean.FALSE;
+        return isBool();
       case SimplerewritetestPackage.BOOLEAN__VALUE:
         return getValue();
     }
@@ -168,7 +168,7 @@ public class BooleanImpl extends ExpressionImpl implements org.eclipse.xtext.par
     switch (featureID)
     {
       case SimplerewritetestPackage.BOOLEAN__BOOL:
-        setBool(((Boolean)newValue).booleanValue());
+        setBool((Boolean)newValue);
         return;
       case SimplerewritetestPackage.BOOLEAN__VALUE:
         setValue((String)newValue);

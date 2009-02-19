@@ -59,30 +59,30 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
         
         @Override
         protected String getFirstRuleName() {
-        	return "Container";	
+        	return "SomeContainer";	
        	} 
 
 
 
-    // $ANTLR start entryRuleContainer
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalPartialParserTestLanguage.g:70:1: entryRuleContainer returns [EObject current=null] : iv_ruleContainer= ruleContainer EOF ;
-    public final EObject entryRuleContainer() throws RecognitionException {
+    // $ANTLR start entryRuleSomeContainer
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalPartialParserTestLanguage.g:70:1: entryRuleSomeContainer returns [EObject current=null] : iv_ruleSomeContainer= ruleSomeContainer EOF ;
+    public final EObject entryRuleSomeContainer() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleContainer = null;
+        EObject iv_ruleSomeContainer = null;
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalPartialParserTestLanguage.g:70:51: (iv_ruleContainer= ruleContainer EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalPartialParserTestLanguage.g:71:2: iv_ruleContainer= ruleContainer EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalPartialParserTestLanguage.g:70:55: (iv_ruleSomeContainer= ruleSomeContainer EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalPartialParserTestLanguage.g:71:2: iv_ruleSomeContainer= ruleSomeContainer EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prContainer().getRule(), currentNode); 
-            pushFollow(FOLLOW_ruleContainer_in_entryRuleContainer72);
-            iv_ruleContainer=ruleContainer();
+             currentNode = createCompositeNode(grammarAccess.prSomeContainer().getRule(), currentNode); 
+            pushFollow(FOLLOW_ruleSomeContainer_in_entryRuleSomeContainer72);
+            iv_ruleSomeContainer=ruleSomeContainer();
             _fsp--;
 
-             current =iv_ruleContainer; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleContainer82); 
+             current =iv_ruleSomeContainer; 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleSomeContainer82); 
 
             }
 
@@ -96,12 +96,12 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
         }
         return current;
     }
-    // $ANTLR end entryRuleContainer
+    // $ANTLR end entryRuleSomeContainer
 
 
-    // $ANTLR start ruleContainer
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalPartialParserTestLanguage.g:78:1: ruleContainer returns [EObject current=null] : ( ( ( ( 'container' (lv_name_1= RULE_ID ) ) '{' ) ( (lv_nested_3= ruleNested ) | (lv_content_4= ruleContent ) )* ) '}' ) ;
-    public final EObject ruleContainer() throws RecognitionException {
+    // $ANTLR start ruleSomeContainer
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalPartialParserTestLanguage.g:78:1: ruleSomeContainer returns [EObject current=null] : ( ( ( ( 'container' (lv_name_1= RULE_ID ) ) '{' ) ( (lv_nested_3= ruleNested ) | (lv_content_4= ruleContent ) )* ) '}' ) ;
+    public final EObject ruleSomeContainer() throws RecognitionException {
         EObject current = null;
 
         Token lv_name_1=null;
@@ -128,21 +128,21 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalPartialParserTestLanguage.g:84:4: ( 'container' (lv_name_1= RULE_ID ) )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalPartialParserTestLanguage.g:84:5: 'container' (lv_name_1= RULE_ID )
             {
-            match(input,11,FOLLOW_11_in_ruleContainer119); 
+            match(input,11,FOLLOW_11_in_ruleSomeContainer119); 
 
-                    createLeafNode(grammarAccess.prContainer().ele0000KeywordContainer(), null); 
+                    createLeafNode(grammarAccess.prSomeContainer().ele0000KeywordContainer(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalPartialParserTestLanguage.g:88:1: (lv_name_1= RULE_ID )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalPartialParserTestLanguage.g:90:6: lv_name_1= RULE_ID
             {
             lv_name_1=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleContainer141); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSomeContainer141); 
 
-            		createLeafNode(grammarAccess.prContainer().ele00010LexerRuleCallID(), "name"); 
+            		createLeafNode(grammarAccess.prSomeContainer().ele00010LexerRuleCallID(), "name"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prContainer().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prSomeContainer().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -158,9 +158,9 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
 
             }
 
-            match(input,12,FOLLOW_12_in_ruleContainer159); 
+            match(input,12,FOLLOW_12_in_ruleSomeContainer159); 
 
-                    createLeafNode(grammarAccess.prContainer().ele001KeywordLeftCurlyBracket(), null); 
+                    createLeafNode(grammarAccess.prSomeContainer().ele001KeywordLeftCurlyBracket(), null); 
                 
 
             }
@@ -187,15 +187,15 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
             	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalPartialParserTestLanguage.g:115:6: lv_nested_3= ruleNested
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.prContainer().ele0100ParserRuleCallNested(), currentNode); 
+            	    	        currentNode=createCompositeNode(grammarAccess.prSomeContainer().ele0100ParserRuleCallNested(), currentNode); 
             	    	    
-            	    pushFollow(FOLLOW_ruleNested_in_ruleContainer195);
+            	    pushFollow(FOLLOW_ruleNested_in_ruleSomeContainer195);
             	    lv_nested_3=ruleNested();
             	    _fsp--;
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prContainer().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prSomeContainer().getRule().getType().getType());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -219,15 +219,15 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
             	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalPartialParserTestLanguage.g:137:6: lv_content_4= ruleContent
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.prContainer().ele0110ParserRuleCallContent(), currentNode); 
+            	    	        currentNode=createCompositeNode(grammarAccess.prSomeContainer().ele0110ParserRuleCallContent(), currentNode); 
             	    	    
-            	    pushFollow(FOLLOW_ruleContent_in_ruleContainer239);
+            	    pushFollow(FOLLOW_ruleContent_in_ruleSomeContainer239);
             	    lv_content_4=ruleContent();
             	    _fsp--;
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prContainer().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prSomeContainer().getRule().getType().getType());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -253,9 +253,9 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
 
             }
 
-            match(input,13,FOLLOW_13_in_ruleContainer255); 
+            match(input,13,FOLLOW_13_in_ruleSomeContainer255); 
 
-                    createLeafNode(grammarAccess.prContainer().ele1KeywordRightCurlyBracket(), null); 
+                    createLeafNode(grammarAccess.prSomeContainer().ele1KeywordRightCurlyBracket(), null); 
                 
 
             }
@@ -276,7 +276,7 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
         }
         return current;
     }
-    // $ANTLR end ruleContainer
+    // $ANTLR end ruleSomeContainer
 
 
     // $ANTLR start entryRuleNested
@@ -315,7 +315,7 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start ruleNested
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalPartialParserTestLanguage.g:176:1: ruleNested returns [EObject current=null] : ( ( ( 'nested' '{' ) (lv_nested_2= ruleContainer )+ ) '}' ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalPartialParserTestLanguage.g:176:1: ruleNested returns [EObject current=null] : ( ( ( 'nested' '{' ) (lv_nested_2= ruleSomeContainer )+ ) '}' ) ;
     public final EObject ruleNested() throws RecognitionException {
         EObject current = null;
 
@@ -325,14 +325,14 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalPartialParserTestLanguage.g:181:6: ( ( ( ( 'nested' '{' ) (lv_nested_2= ruleContainer )+ ) '}' ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalPartialParserTestLanguage.g:182:1: ( ( ( 'nested' '{' ) (lv_nested_2= ruleContainer )+ ) '}' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalPartialParserTestLanguage.g:181:6: ( ( ( ( 'nested' '{' ) (lv_nested_2= ruleSomeContainer )+ ) '}' ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalPartialParserTestLanguage.g:182:1: ( ( ( 'nested' '{' ) (lv_nested_2= ruleSomeContainer )+ ) '}' )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalPartialParserTestLanguage.g:182:1: ( ( ( 'nested' '{' ) (lv_nested_2= ruleContainer )+ ) '}' )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalPartialParserTestLanguage.g:182:2: ( ( 'nested' '{' ) (lv_nested_2= ruleContainer )+ ) '}'
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalPartialParserTestLanguage.g:182:1: ( ( ( 'nested' '{' ) (lv_nested_2= ruleSomeContainer )+ ) '}' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalPartialParserTestLanguage.g:182:2: ( ( 'nested' '{' ) (lv_nested_2= ruleSomeContainer )+ ) '}'
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalPartialParserTestLanguage.g:182:2: ( ( 'nested' '{' ) (lv_nested_2= ruleContainer )+ )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalPartialParserTestLanguage.g:182:3: ( 'nested' '{' ) (lv_nested_2= ruleContainer )+
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalPartialParserTestLanguage.g:182:2: ( ( 'nested' '{' ) (lv_nested_2= ruleSomeContainer )+ )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalPartialParserTestLanguage.g:182:3: ( 'nested' '{' ) (lv_nested_2= ruleSomeContainer )+
             {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalPartialParserTestLanguage.g:182:3: ( 'nested' '{' )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalPartialParserTestLanguage.g:182:4: 'nested' '{'
@@ -348,7 +348,7 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
 
             }
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalPartialParserTestLanguage.g:190:2: (lv_nested_2= ruleContainer )+
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalPartialParserTestLanguage.g:190:2: (lv_nested_2= ruleSomeContainer )+
             int cnt2=0;
             loop2:
             do {
@@ -362,13 +362,13 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
 
                 switch (alt2) {
             	case 1 :
-            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalPartialParserTestLanguage.g:193:6: lv_nested_2= ruleContainer
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalPartialParserTestLanguage.g:193:6: lv_nested_2= ruleSomeContainer
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.prNested().ele010ParserRuleCallContainer(), currentNode); 
+            	    	        currentNode=createCompositeNode(grammarAccess.prNested().ele010ParserRuleCallSomeContainer(), currentNode); 
             	    	    
-            	    pushFollow(FOLLOW_ruleContainer_in_ruleNested380);
-            	    lv_nested_2=ruleContainer();
+            	    pushFollow(FOLLOW_ruleSomeContainer_in_ruleNested380);
+            	    lv_nested_2=ruleSomeContainer();
             	    _fsp--;
 
 
@@ -378,7 +378,7 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
             	    	        }
             	    	        
             	    	        try {
-            	    	       		add(current, "nested", lv_nested_2, "Container", currentNode);
+            	    	       		add(current, "nested", lv_nested_2, "SomeContainer", currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }
@@ -1291,7 +1291,7 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
                             
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFirstConcrete1276); 
 
-                    		createLeafNode(grammarAccess.prFirstConcrete().ele010CrossReferenceEStringContainer(), "referencedContainer"); 
+                    		createLeafNode(grammarAccess.prFirstConcrete().ele010CrossReferenceEStringSomeContainer(), "referencedContainer"); 
                     	
 
                     }
@@ -1597,19 +1597,19 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
 
  
 
-    public static final BitSet FOLLOW_ruleContainer_in_entryRuleContainer72 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleContainer82 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_11_in_ruleContainer119 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleContainer141 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_ruleContainer159 = new BitSet(new long[]{0x000000000020E000L});
-    public static final BitSet FOLLOW_ruleNested_in_ruleContainer195 = new BitSet(new long[]{0x000000000020E000L});
-    public static final BitSet FOLLOW_ruleContent_in_ruleContainer239 = new BitSet(new long[]{0x000000000020E000L});
-    public static final BitSet FOLLOW_13_in_ruleContainer255 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSomeContainer_in_entryRuleSomeContainer72 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleSomeContainer82 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_11_in_ruleSomeContainer119 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleSomeContainer141 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_12_in_ruleSomeContainer159 = new BitSet(new long[]{0x000000000020E000L});
+    public static final BitSet FOLLOW_ruleNested_in_ruleSomeContainer195 = new BitSet(new long[]{0x000000000020E000L});
+    public static final BitSet FOLLOW_ruleContent_in_ruleSomeContainer239 = new BitSet(new long[]{0x000000000020E000L});
+    public static final BitSet FOLLOW_13_in_ruleSomeContainer255 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleNested_in_entryRuleNested290 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleNested300 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_14_in_ruleNested336 = new BitSet(new long[]{0x0000000000001000L});
     public static final BitSet FOLLOW_12_in_ruleNested345 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_ruleContainer_in_ruleNested380 = new BitSet(new long[]{0x0000000000002800L});
+    public static final BitSet FOLLOW_ruleSomeContainer_in_ruleNested380 = new BitSet(new long[]{0x0000000000002800L});
     public static final BitSet FOLLOW_13_in_ruleNested395 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleContent_in_entryRuleContent430 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleContent440 = new BitSet(new long[]{0x0000000000000002L});

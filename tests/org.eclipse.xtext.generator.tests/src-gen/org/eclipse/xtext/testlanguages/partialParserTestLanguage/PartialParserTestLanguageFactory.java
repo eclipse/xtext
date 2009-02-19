@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PartialParserTestLanguageFactory.java,v 1.4 2009/02/19 16:26:56 sefftinge Exp $
+ * $Id: PartialParserTestLanguageFactory.java,v 1.5 2009/02/19 21:09:49 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.partialParserTestLanguage;
 
@@ -27,13 +27,13 @@ public interface PartialParserTestLanguageFactory extends EFactory
   PartialParserTestLanguageFactory eINSTANCE = org.eclipse.xtext.testlanguages.partialParserTestLanguage.impl.PartialParserTestLanguageFactoryImpl.init();
 
   /**
-   * Returns a new object of class '<em>Container</em>'.
+   * Returns a new object of class '<em>Some Container</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Container</em>'.
+   * @return a new object of class '<em>Some Container</em>'.
    * @generated
    */
-  Container createContainer();
+  SomeContainer createSomeContainer();
 
   /**
    * Returns a new object of class '<em>Nested</em>'.

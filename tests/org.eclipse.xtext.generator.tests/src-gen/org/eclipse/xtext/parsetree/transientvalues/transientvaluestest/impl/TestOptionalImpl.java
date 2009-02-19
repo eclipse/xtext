@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TestOptionalImpl.java,v 1.4 2009/02/19 16:27:04 sefftinge Exp $
+ * $Id: TestOptionalImpl.java,v 1.5 2009/02/19 21:09:56 sefftinge Exp $
  */
 package org.eclipse.xtext.parsetree.transientvalues.transientvaluestest.impl;
 
@@ -149,9 +149,9 @@ public class TestOptionalImpl extends RootImpl implements TestOptional
     switch (featureID)
     {
       case TransientvaluestestPackage.TEST_OPTIONAL__OPT1:
-        return new Integer(getOpt1());
+        return getOpt1();
       case TransientvaluestestPackage.TEST_OPTIONAL__OPT2:
-        return new Integer(getOpt2());
+        return getOpt2();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -167,10 +167,10 @@ public class TestOptionalImpl extends RootImpl implements TestOptional
     switch (featureID)
     {
       case TransientvaluestestPackage.TEST_OPTIONAL__OPT1:
-        setOpt1(((Integer)newValue).intValue());
+        setOpt1((Integer)newValue);
         return;
       case TransientvaluestestPackage.TEST_OPTIONAL__OPT2:
-        setOpt2(((Integer)newValue).intValue());
+        setOpt2((Integer)newValue);
         return;
     }
     super.eSet(featureID, newValue);

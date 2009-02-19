@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FileImpl.java,v 1.4 2009/02/19 16:25:14 sefftinge Exp $
+ * $Id: FileImpl.java,v 1.5 2009/02/19 21:06:47 sefftinge Exp $
  */
 package org.eclipse.xtext.example.domainmodel.impl;
 

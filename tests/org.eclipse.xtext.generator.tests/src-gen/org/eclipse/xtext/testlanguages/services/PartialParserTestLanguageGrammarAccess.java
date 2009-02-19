@@ -17,8 +17,8 @@ import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
 public class PartialParserTestLanguageGrammarAccess implements IGrammarAccess {
 	
 	
-	public class ContainerElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Container");
+	public class SomeContainerElements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SomeContainer");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
@@ -88,7 +88,7 @@ public class PartialParserTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Keyword c000KeywordNested = (Keyword)c00Group.eContents().get(0);
 		private final Keyword c001KeywordLeftCurlyBracket = (Keyword)c00Group.eContents().get(1);
 		private final Assignment c01AssignmentNested = (Assignment)c0Group.eContents().get(1);
-		private final RuleCall c010ParserRuleCallContainer = (RuleCall)c01AssignmentNested.eContents().get(0);
+		private final RuleCall c010ParserRuleCallSomeContainer = (RuleCall)c01AssignmentNested.eContents().get(0);
 		private final Keyword c1KeywordRightCurlyBracket = (Keyword)cGroup.eContents().get(1);
 		
 		// not supported
@@ -113,7 +113,7 @@ public class PartialParserTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele01AssignmentNested() { return c01AssignmentNested; }
 
 		// not supported
-		public RuleCall ele010ParserRuleCallContainer() { return c010ParserRuleCallContainer; }
+		public RuleCall ele010ParserRuleCallSomeContainer() { return c010ParserRuleCallSomeContainer; }
 
 		// not supported
 		public Keyword ele1KeywordRightCurlyBracket() { return c1KeywordRightCurlyBracket; }
@@ -315,7 +315,7 @@ public class PartialParserTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Assignment c001AssignmentValue = (Assignment)c00Group.eContents().get(1);
 		private final RuleCall c0010ParserRuleCallNamed = (RuleCall)c001AssignmentValue.eContents().get(0);
 		private final Assignment c01AssignmentReferencedContainer = (Assignment)c0Group.eContents().get(1);
-		private final CrossReference c010CrossReferenceEStringContainer = (CrossReference)c01AssignmentReferencedContainer.eContents().get(0);
+		private final CrossReference c010CrossReferenceEStringSomeContainer = (CrossReference)c01AssignmentReferencedContainer.eContents().get(0);
 		private final Keyword c1KeywordRightParenthesis = (Keyword)cGroup.eContents().get(1);
 		
 		// not supported
@@ -355,7 +355,7 @@ public class PartialParserTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele01AssignmentReferencedContainer() { return c01AssignmentReferencedContainer; }
 
 		// not supported
-		public CrossReference ele010CrossReferenceEStringContainer() { return c010CrossReferenceEStringContainer; }
+		public CrossReference ele010CrossReferenceEStringSomeContainer() { return c010CrossReferenceEStringSomeContainer; }
 
 		// not supported
 		public Keyword ele1KeywordRightParenthesis() { return c1KeywordRightParenthesis; }
@@ -443,7 +443,7 @@ public class PartialParserTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall ele0LexerRuleCallID() { return c0LexerRuleCallID; }
 	}
 	
-	private ContainerElements pContainer;
+	private SomeContainerElements pSomeContainer;
 	private NestedElements pNested;
 	private ContentElements pContent;
 	private ChildrenElements pChildren;
@@ -475,8 +475,8 @@ public class PartialParserTestLanguageGrammarAccess implements IGrammarAccess {
 
 	
 	// not supported
-	public ContainerElements prContainer() {
-		return (pContainer != null) ? pContainer : (pContainer = new ContainerElements());
+	public SomeContainerElements prSomeContainer() {
+		return (pSomeContainer != null) ? pSomeContainer : (pSomeContainer = new SomeContainerElements());
 	} 
 
 	// not supported

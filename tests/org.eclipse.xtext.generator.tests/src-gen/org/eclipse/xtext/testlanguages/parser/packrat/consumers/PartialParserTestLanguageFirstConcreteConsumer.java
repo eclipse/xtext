@@ -156,7 +156,7 @@ public final class PartialParserTestLanguageFirstConcreteConsumer extends NonTer
 	}
 
 	protected int consumeCrossReference$12(int entryPoint) throws Exception {
-		return consumeTerminal(idConsumer, "referencedContainer", false, false, getRule().ele010CrossReferenceEStringContainer(), getCrossReference$12$Delimiter());
+		return consumeTerminal(idConsumer, "referencedContainer", false, false, getRule().ele010CrossReferenceEStringSomeContainer(), getCrossReference$12$Delimiter());
 	}
 
 	protected int consumeKeyword$14(int entryPoint) throws Exception {

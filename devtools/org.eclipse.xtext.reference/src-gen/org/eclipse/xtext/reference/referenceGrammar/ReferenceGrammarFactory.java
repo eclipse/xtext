@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ReferenceGrammarFactory.java,v 1.4 2009/02/19 16:25:45 sefftinge Exp $
+ * $Id: ReferenceGrammarFactory.java,v 1.5 2009/02/19 21:08:17 sefftinge Exp $
  */
 package org.eclipse.xtext.reference.referenceGrammar;
 

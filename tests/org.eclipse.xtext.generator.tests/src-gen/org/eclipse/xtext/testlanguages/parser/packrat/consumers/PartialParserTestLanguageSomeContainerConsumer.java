@@ -17,16 +17,16 @@ import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
-import org.eclipse.xtext.testlanguages.services.PartialParserTestLanguageGrammarAccess.ContainerElements;
+import org.eclipse.xtext.testlanguages.services.PartialParserTestLanguageGrammarAccess.SomeContainerElements;
 
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.PartialParserTestLanguageContentConsumer;
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.PartialParserTestLanguageNestedConsumer;
 
 @SuppressWarnings("unused")
-public final class PartialParserTestLanguageContainerConsumer extends NonTerminalConsumer {
+public final class PartialParserTestLanguageSomeContainerConsumer extends NonTerminalConsumer {
 
-	private ContainerElements rule;
+	private SomeContainerElements rule;
 	
 	private INonTerminalConsumer contentConsumer;
 	private ITerminalConsumer idConsumer;
@@ -40,7 +40,7 @@ public final class PartialParserTestLanguageContainerConsumer extends NonTermina
 	
 	private ISequenceMatcher ruleCall$7$Delimiter;
 	
-	public PartialParserTestLanguageContainerConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
+	public PartialParserTestLanguageSomeContainerConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$14$Delimiter = ICharacterClass.Factory.nullClass();
@@ -175,11 +175,11 @@ public final class PartialParserTestLanguageContainerConsumer extends NonTermina
 		return consumeKeyword(getRule().ele1KeywordRightCurlyBracket(), null, false, false, getKeyword$14$Delimiter());
 	}
 
-	public ContainerElements getRule() {
+	public SomeContainerElements getRule() {
 		return rule;
 	}
 	
-	public void setRule(ContainerElements rule) {
+	public void setRule(SomeContainerElements rule) {
 		this.rule = rule;
 	}
 	

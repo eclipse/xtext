@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KeywordsTestLanguageFactory.java,v 1.4 2009/02/19 16:26:59 sefftinge Exp $
+ * $Id: KeywordsTestLanguageFactory.java,v 1.5 2009/02/19 21:09:52 sefftinge Exp $
  */
 package org.eclipse.xtext.parser.keywords.keywordsTestLanguage;
 

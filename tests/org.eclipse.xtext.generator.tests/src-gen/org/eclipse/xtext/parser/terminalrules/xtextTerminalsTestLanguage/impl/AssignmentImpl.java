@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AssignmentImpl.java,v 1.4 2009/02/19 16:26:46 sefftinge Exp $
+ * $Id: AssignmentImpl.java,v 1.5 2009/02/19 21:09:40 sefftinge Exp $
  */
 package org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.impl;
 

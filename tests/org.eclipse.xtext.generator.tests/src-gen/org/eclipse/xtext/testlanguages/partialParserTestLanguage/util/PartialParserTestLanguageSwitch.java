@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PartialParserTestLanguageSwitch.java,v 1.4 2009/02/19 16:27:10 sefftinge Exp $
+ * $Id: PartialParserTestLanguageSwitch.java,v 1.5 2009/02/19 21:10:02 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.partialParserTestLanguage.util;
 
@@ -96,10 +96,10 @@ public class PartialParserTestLanguageSwitch<T>
   {
     switch (classifierID)
     {
-      case PartialParserTestLanguagePackage.CONTAINER:
+      case PartialParserTestLanguagePackage.SOME_CONTAINER:
       {
-        Container container = (Container)theEObject;
-        T result = caseContainer(container);
+        SomeContainer someContainer = (SomeContainer)theEObject;
+        T result = caseSomeContainer(someContainer);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -175,17 +175,17 @@ public class PartialParserTestLanguageSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Container</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Some Container</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Container</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Some Container</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseContainer(Container object)
+  public T caseSomeContainer(SomeContainer object)
   {
     return null;
   }

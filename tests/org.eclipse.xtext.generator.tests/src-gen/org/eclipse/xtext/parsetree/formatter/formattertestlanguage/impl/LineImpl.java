@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LineImpl.java,v 1.4 2009/02/19 16:26:52 sefftinge Exp $
+ * $Id: LineImpl.java,v 1.5 2009/02/19 21:09:46 sefftinge Exp $
  */
 package org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl;
 

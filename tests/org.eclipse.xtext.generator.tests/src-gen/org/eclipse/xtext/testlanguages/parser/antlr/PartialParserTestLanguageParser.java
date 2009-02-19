@@ -43,7 +43,7 @@ public class PartialParserTestLanguageParser extends org.eclipse.xtext.parser.an
 	
 	@Override 
 	protected String getDefaultRuleName() {
-		return "Container";
+		return "SomeContainer";
 	}
 	
 	public PartialParserTestLanguageGrammarAccess getGrammarAccess() {

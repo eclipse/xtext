@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Subrule3Impl.java,v 1.4 2009/02/19 16:26:54 sefftinge Exp $
+ * $Id: Subrule3Impl.java,v 1.5 2009/02/19 21:09:46 sefftinge Exp $
  */
 package org.eclipse.xtext.grammarinheritance.foo.impl;
 
@@ -107,7 +107,7 @@ public class Subrule3Impl extends ATypeImpl implements Subrule3
     switch (featureID)
     {
       case FooPackage.SUBRULE3__SUB1:
-        return new Integer(getSub1());
+        return getSub1();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -123,7 +123,7 @@ public class Subrule3Impl extends ATypeImpl implements Subrule3
     switch (featureID)
     {
       case FooPackage.SUBRULE3__SUB1:
-        setSub1(((Integer)newValue).intValue());
+        setSub1((Integer)newValue);
         return;
     }
     super.eSet(featureID, newValue);

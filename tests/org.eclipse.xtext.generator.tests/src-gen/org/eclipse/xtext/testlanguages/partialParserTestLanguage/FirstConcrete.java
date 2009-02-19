@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FirstConcrete.java,v 1.4 2009/02/19 16:26:56 sefftinge Exp $
+ * $Id: FirstConcrete.java,v 1.5 2009/02/19 21:09:49 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.partialParserTestLanguage;
 
@@ -34,12 +34,12 @@ public interface FirstConcrete extends AbstractChild
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Referenced Container</em>' reference.
-   * @see #setReferencedContainer(Container)
+   * @see #setReferencedContainer(SomeContainer)
    * @see org.eclipse.xtext.testlanguages.partialParserTestLanguage.PartialParserTestLanguagePackage#getFirstConcrete_ReferencedContainer()
    * @model
    * @generated
    */
-  Container getReferencedContainer();
+  SomeContainer getReferencedContainer();
 
   /**
    * Sets the value of the '{@link org.eclipse.xtext.testlanguages.partialParserTestLanguage.FirstConcrete#getReferencedContainer <em>Referenced Container</em>}' reference.
@@ -49,6 +49,6 @@ public interface FirstConcrete extends AbstractChild
    * @see #getReferencedContainer()
    * @generated
    */
-  void setReferencedContainer(Container value);
+  void setReferencedContainer(SomeContainer value);
 
 } // FirstConcrete

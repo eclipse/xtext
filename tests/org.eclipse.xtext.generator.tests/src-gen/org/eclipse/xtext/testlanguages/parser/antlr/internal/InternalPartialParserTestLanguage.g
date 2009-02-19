@@ -51,7 +51,7 @@ import org.eclipse.xtext.testlanguages.services.PartialParserTestLanguageGrammar
     
     @Override
     protected String getFirstRuleName() {
-    	return "Container";	
+    	return "SomeContainer";	
    	} 
 }
 
@@ -66,16 +66,16 @@ import org.eclipse.xtext.testlanguages.services.PartialParserTestLanguageGrammar
 
 
 
-// Entry rule entryRuleContainer
-entryRuleContainer returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.prContainer().getRule(), currentNode); }
-	 iv_ruleContainer=ruleContainer 
-	 { $current=$iv_ruleContainer.current; } 
+// Entry rule entryRuleSomeContainer
+entryRuleSomeContainer returns [EObject current=null] :
+	{ currentNode = createCompositeNode(grammarAccess.prSomeContainer().getRule(), currentNode); }
+	 iv_ruleSomeContainer=ruleSomeContainer 
+	 { $current=$iv_ruleSomeContainer.current; } 
 	 EOF 
 ;
 
-// Rule Container
-ruleContainer returns [EObject current=null] 
+// Rule SomeContainer
+ruleSomeContainer returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
@@ -83,18 +83,18 @@ ruleContainer returns [EObject current=null]
     }:
 (((('container' 
     {
-        createLeafNode(grammarAccess.prContainer().ele0000KeywordContainer(), null); 
+        createLeafNode(grammarAccess.prSomeContainer().ele0000KeywordContainer(), null); 
     }
 (	
 	
 	    lv_name_1=	RULE_ID
 	{
-		createLeafNode(grammarAccess.prContainer().ele00010LexerRuleCallID(), "name"); 
+		createLeafNode(grammarAccess.prSomeContainer().ele00010LexerRuleCallID(), "name"); 
 	}
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prContainer().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prSomeContainer().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -107,18 +107,18 @@ ruleContainer returns [EObject current=null]
 	
 ))'{' 
     {
-        createLeafNode(grammarAccess.prContainer().ele001KeywordLeftCurlyBracket(), null); 
+        createLeafNode(grammarAccess.prSomeContainer().ele001KeywordLeftCurlyBracket(), null); 
     }
 )((	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prContainer().ele0100ParserRuleCallNested(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prSomeContainer().ele0100ParserRuleCallNested(), currentNode); 
 	    }
 	    lv_nested_3=ruleNested 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prContainer().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prSomeContainer().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -135,12 +135,12 @@ ruleContainer returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prContainer().ele0110ParserRuleCallContent(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prSomeContainer().ele0110ParserRuleCallContent(), currentNode); 
 	    }
 	    lv_content_4=ruleContent 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prContainer().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prSomeContainer().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -154,7 +154,7 @@ ruleContainer returns [EObject current=null]
 	
 ))*)'}' 
     {
-        createLeafNode(grammarAccess.prContainer().ele1KeywordRightCurlyBracket(), null); 
+        createLeafNode(grammarAccess.prSomeContainer().ele1KeywordRightCurlyBracket(), null); 
     }
 );
 
@@ -191,9 +191,9 @@ ruleNested returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prNested().ele010ParserRuleCallContainer(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prNested().ele010ParserRuleCallSomeContainer(), currentNode); 
 	    }
-	    lv_nested_2=ruleContainer 
+	    lv_nested_2=ruleSomeContainer 
 	    {
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.prNested().getRule().getType().getType());
@@ -201,7 +201,7 @@ ruleNested returns [EObject current=null]
 	        }
 	        
 	        try {
-	       		add($current, "nested", lv_nested_2, "Container", currentNode);
+	       		add($current, "nested", lv_nested_2, "SomeContainer", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -560,7 +560,7 @@ ruleFirstConcrete returns [EObject current=null]
         }
 	RULE_ID
 	{
-		createLeafNode(grammarAccess.prFirstConcrete().ele010CrossReferenceEStringContainer(), "referencedContainer"); 
+		createLeafNode(grammarAccess.prFirstConcrete().ele010CrossReferenceEStringSomeContainer(), "referencedContainer"); 
 	}
 
 		// TODO assign feature to currentNode

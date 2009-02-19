@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PersonImpl.java,v 1.4 2009/02/19 16:25:46 sefftinge Exp $
+ * $Id: PersonImpl.java,v 1.5 2009/02/19 21:08:18 sefftinge Exp $
  */
 package org.eclipse.xtext.reference.referenceGrammar.impl;
 
@@ -152,7 +152,7 @@ public class PersonImpl extends EObjectImpl implements Person
       case ReferenceGrammarPackage.PERSON__NAME:
         return getName();
       case ReferenceGrammarPackage.PERSON__AGE:
-        return new Integer(getAge());
+        return getAge();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -171,7 +171,7 @@ public class PersonImpl extends EObjectImpl implements Person
         setName((String)newValue);
         return;
       case ReferenceGrammarPackage.PERSON__AGE:
-        setAge(((Integer)newValue).intValue());
+        setAge((Integer)newValue);
         return;
     }
     super.eSet(featureID, newValue);

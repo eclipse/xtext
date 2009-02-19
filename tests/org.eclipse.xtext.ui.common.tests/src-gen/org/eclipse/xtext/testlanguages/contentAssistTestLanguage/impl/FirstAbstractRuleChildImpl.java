@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FirstAbstractRuleChildImpl.java,v 1.4 2009/02/19 16:26:02 sefftinge Exp $
+ * $Id: FirstAbstractRuleChildImpl.java,v 1.5 2009/02/19 21:08:39 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.contentAssistTestLanguage.impl;
 

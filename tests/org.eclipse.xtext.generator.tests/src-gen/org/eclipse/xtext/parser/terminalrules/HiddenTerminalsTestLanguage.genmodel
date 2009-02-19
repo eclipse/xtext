@@ -1,62 +1,62 @@
 <?xml version="1.0" encoding="ASCII"?>
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="../org.eclipse.xtext.generator.tests/src-gen" forceOverwrite="true" bundleManifest="false" complianceLevel="5.0" copyrightFields="false">
   <genPackages prefix="HiddenTerminalsTestLanguage" basePackage="org.eclipse.xtext.parser.terminalrules" disposableProviderFactory="true">
-    <ecorePackage href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#/"/>
+    <ecorePackage href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.generator.tests/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#/"/>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#//Model"/>
+      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.generator.tests/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#//Model"/>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#//Model/valid"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.generator.tests/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#//Model/valid"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#//WithoutHiddens"/>
+      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.generator.tests/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#//WithoutHiddens"/>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#//WithoutHiddens/spaces"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.generator.tests/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#//WithoutHiddens/spaces"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#//WithHiddens"/>
+      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.generator.tests/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#//WithHiddens"/>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#//OverridingHiddens"/>
+      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.generator.tests/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#//OverridingHiddens"/>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#//OverridingHiddens/called"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.generator.tests/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#//OverridingHiddens/called"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#//OverridingHiddensCall"/>
+      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.generator.tests/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#//OverridingHiddensCall"/>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#//OverridingHiddensCall/spaces"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.generator.tests/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#//OverridingHiddensCall/spaces"/>
       </genFeatures>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#//OverridingHiddensCall/valid"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.generator.tests/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#//OverridingHiddensCall/valid"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#//InheritingHiddens"/>
+      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.generator.tests/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#//InheritingHiddens"/>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#//InheritingHiddens/called"/>
-      </genFeatures>
-      <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#//InheritingHiddens/hidingCalled"/>
-      </genFeatures>
-    </genClasses>
-    <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#//DatatypeHiddens"/>
-    </genClasses>
-    <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#//HidingHiddens"/>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#//HidingHiddens/space"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.generator.tests/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#//InheritingHiddens/called"/>
       </genFeatures>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#//HidingHiddens/called"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.generator.tests/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#//InheritingHiddens/hidingCalled"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#//InheritingHiddensCall"/>
+      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.generator.tests/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#//DatatypeHiddens"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.generator.tests/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#//HidingHiddens"/>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#//InheritingHiddensCall/valid"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.generator.tests/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#//HidingHiddens/space"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.generator.tests/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#//HidingHiddens/called"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.generator.tests/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#//InheritingHiddensCall"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oAW5/org.eclipse.xtext.generator.tests/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.ecore#//InheritingHiddensCall/valid"/>
       </genFeatures>
     </genClasses>
   </genPackages>

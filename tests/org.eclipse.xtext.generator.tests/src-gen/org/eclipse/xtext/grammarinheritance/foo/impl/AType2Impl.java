@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AType2Impl.java,v 1.4 2009/02/19 16:26:52 sefftinge Exp $
+ * $Id: AType2Impl.java,v 1.5 2009/02/19 21:09:46 sefftinge Exp $
  */
 package org.eclipse.xtext.grammarinheritance.foo.impl;
 
@@ -154,7 +154,7 @@ public class AType2Impl extends RootRuleImpl implements AType2
       case FooPackage.ATYPE2__NAME:
         return getName();
       case FooPackage.ATYPE2__AGE:
-        return new Integer(getAge());
+        return getAge();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -173,7 +173,7 @@ public class AType2Impl extends RootRuleImpl implements AType2
         setName((String)newValue);
         return;
       case FooPackage.ATYPE2__AGE:
-        setAge(((Integer)newValue).intValue());
+        setAge((Integer)newValue);
         return;
     }
     super.eSet(featureID, newValue);

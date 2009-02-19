@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Nested.java,v 1.4 2009/02/19 16:26:56 sefftinge Exp $
+ * $Id: Nested.java,v 1.5 2009/02/19 21:09:49 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.partialParserTestLanguage;
 
@@ -30,7 +30,7 @@ public interface Nested extends EObject
 {
   /**
    * Returns the value of the '<em><b>Nested</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipse.xtext.testlanguages.partialParserTestLanguage.Container}.
+   * The list contents are of type {@link org.eclipse.xtext.testlanguages.partialParserTestLanguage.SomeContainer}.
    * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Nested</em>' containment reference list isn't clear,
@@ -42,6 +42,6 @@ public interface Nested extends EObject
    * @model containment="true"
    * @generated
    */
-  EList<Container> getNested();
+  EList<SomeContainer> getNested();
 
 } // Nested

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ImportStatementDecl.java,v 1.5 2009/02/19 16:25:52 sefftinge Exp $
+ * $Id: ImportStatementDecl.java,v 1.6 2009/02/19 21:08:23 sefftinge Exp $
  */
 package org.eclipse.xtext.example.ecoredsl;
 

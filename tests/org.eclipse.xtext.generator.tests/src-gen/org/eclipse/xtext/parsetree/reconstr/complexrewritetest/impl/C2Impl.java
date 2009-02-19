@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: C2Impl.java,v 1.4 2009/02/19 16:26:51 sefftinge Exp $
+ * $Id: C2Impl.java,v 1.5 2009/02/19 21:09:44 sefftinge Exp $
  */
 package org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl;
 

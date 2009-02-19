@@ -11,7 +11,7 @@ import org.eclipse.xtext.testlanguages.services.PartialParserTestLanguageGrammar
 
 import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
 
-import org.eclipse.xtext.testlanguages.parser.packrat.consumers.PartialParserTestLanguageContainerConsumer;
+import org.eclipse.xtext.testlanguages.parser.packrat.consumers.PartialParserTestLanguageSomeContainerConsumer;
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.PartialParserTestLanguageNestedConsumer;
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.PartialParserTestLanguageContentConsumer;
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.PartialParserTestLanguageChildrenConsumer;
@@ -34,7 +34,7 @@ public class PartialParserTestLanguageParserConfiguration extends AbstractParser
 
 	private XtextBuiltinParserConfiguration xtextBuiltinConfiguration; 
 
-    private PartialParserTestLanguageContainerConsumer containerConsumer;
+    private PartialParserTestLanguageSomeContainerConsumer someContainerConsumer;
     private PartialParserTestLanguageNestedConsumer nestedConsumer;
     private PartialParserTestLanguageContentConsumer contentConsumer;
     private PartialParserTestLanguageChildrenConsumer childrenConsumer;
@@ -53,13 +53,13 @@ public class PartialParserTestLanguageParserConfiguration extends AbstractParser
 		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration, null);
 	}
 
-	public PartialParserTestLanguageContainerConsumer getRootConsumer() {
-		return containerConsumer;
+	public PartialParserTestLanguageSomeContainerConsumer getRootConsumer() {
+		return someContainerConsumer;
 	} 
 
 	public void createNonTerminalConsumers() {
 		getXtextBuiltinConfiguration().createNonTerminalConsumers();
-		containerConsumer = new PartialParserTestLanguageContainerConsumer(
+		someContainerConsumer = new PartialParserTestLanguageSomeContainerConsumer(
     		this, null
     	);
 		nestedConsumer = new PartialParserTestLanguageNestedConsumer(
@@ -98,7 +98,7 @@ public class PartialParserTestLanguageParserConfiguration extends AbstractParser
 	public void configureConsumers() {
 		if (grammarAccess == null)
 			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
-		getContainerConsumer().setRule(grammarAccess.prContainer());
+		getSomeContainerConsumer().setRule(grammarAccess.prSomeContainer());
 		getNestedConsumer().setRule(grammarAccess.prNested());
 		getContentConsumer().setRule(grammarAccess.prContent());
 		getChildrenConsumer().setRule(grammarAccess.prChildren());
@@ -117,11 +117,11 @@ public class PartialParserTestLanguageParserConfiguration extends AbstractParser
 		getAnyOtherConsumer().setRule(grammarAccess.lrANY_OTHER());
 
 
-		getContainerConsumer().setContentConsumer(getContentConsumer());
-		getContainerConsumer().setIdConsumer(getIdConsumer());
-		getContainerConsumer().setNestedConsumer(getNestedConsumer());
+		getSomeContainerConsumer().setContentConsumer(getContentConsumer());
+		getSomeContainerConsumer().setIdConsumer(getIdConsumer());
+		getSomeContainerConsumer().setNestedConsumer(getNestedConsumer());
 
-		getNestedConsumer().setContainerConsumer(getContainerConsumer());
+		getNestedConsumer().setSomeContainerConsumer(getSomeContainerConsumer());
 
 		getContentConsumer().setAbstractChildrenConsumer(getAbstractChildrenConsumer());
 		getContentConsumer().setChildrenConsumer(getChildrenConsumer());
@@ -143,10 +143,10 @@ public class PartialParserTestLanguageParserConfiguration extends AbstractParser
 
 		getNamedConsumer().setIdConsumer(getIdConsumer());
 
-		getContainerConsumer().setKeyword$8$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.PartialParserTestLanguageDelimiters.keyword$10$Delimiter);
-		getContainerConsumer().setKeyword$14$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.PartialParserTestLanguageDelimiters.keyword$10$Delimiter);
-		getContainerConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.PartialParserTestLanguageDelimiters.keyword$7$Delimiter);
-		getContainerConsumer().setRuleCall$7$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.PartialParserTestLanguageDelimiters.ruleCall$9$Delimiter);
+		getSomeContainerConsumer().setKeyword$8$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.PartialParserTestLanguageDelimiters.keyword$10$Delimiter);
+		getSomeContainerConsumer().setKeyword$14$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.PartialParserTestLanguageDelimiters.keyword$10$Delimiter);
+		getSomeContainerConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.PartialParserTestLanguageDelimiters.keyword$7$Delimiter);
+		getSomeContainerConsumer().setRuleCall$7$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.PartialParserTestLanguageDelimiters.ruleCall$9$Delimiter);
 		getNestedConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.PartialParserTestLanguageDelimiters.keyword$7$Delimiter);
 		getNestedConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.PartialParserTestLanguageDelimiters.keyword$10$Delimiter);
 		getNestedConsumer().setKeyword$8$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.PartialParserTestLanguageDelimiters.keyword$10$Delimiter);
@@ -180,8 +180,8 @@ public class PartialParserTestLanguageParserConfiguration extends AbstractParser
 		return xtextBuiltinConfiguration;
 	} 
 	
-    public PartialParserTestLanguageContainerConsumer getContainerConsumer() {
-    	return containerConsumer;
+    public PartialParserTestLanguageSomeContainerConsumer getSomeContainerConsumer() {
+    	return someContainerConsumer;
     }
 
     public PartialParserTestLanguageNestedConsumer getNestedConsumer() {

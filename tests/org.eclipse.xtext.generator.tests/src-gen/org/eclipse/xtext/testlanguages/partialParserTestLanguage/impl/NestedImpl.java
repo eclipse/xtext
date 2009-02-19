@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: NestedImpl.java,v 1.4 2009/02/19 16:26:56 sefftinge Exp $
+ * $Id: NestedImpl.java,v 1.5 2009/02/19 21:09:50 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.partialParserTestLanguage.impl;
 
@@ -20,9 +20,9 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.eclipse.xtext.testlanguages.partialParserTestLanguage.Container;
 import org.eclipse.xtext.testlanguages.partialParserTestLanguage.Nested;
 import org.eclipse.xtext.testlanguages.partialParserTestLanguage.PartialParserTestLanguagePackage;
+import org.eclipse.xtext.testlanguages.partialParserTestLanguage.SomeContainer;
 
 /**
  * <!-- begin-user-doc -->
@@ -47,7 +47,7 @@ public class NestedImpl extends EObjectImpl implements Nested
    * @generated
    * @ordered
    */
-  protected EList<Container> nested;
+  protected EList<SomeContainer> nested;
 
   /**
    * <!-- begin-user-doc -->
@@ -75,11 +75,11 @@ public class NestedImpl extends EObjectImpl implements Nested
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Container> getNested()
+  public EList<SomeContainer> getNested()
   {
     if (nested == null)
     {
-      nested = new EObjectContainmentEList<Container>(Container.class, this, PartialParserTestLanguagePackage.NESTED__NESTED);
+      nested = new EObjectContainmentEList<SomeContainer>(SomeContainer.class, this, PartialParserTestLanguagePackage.NESTED__NESTED);
     }
     return nested;
   }
@@ -129,7 +129,7 @@ public class NestedImpl extends EObjectImpl implements Nested
     {
       case PartialParserTestLanguagePackage.NESTED__NESTED:
         getNested().clear();
-        getNested().addAll((Collection<? extends Container>)newValue);
+        getNested().addAll((Collection<? extends SomeContainer>)newValue);
         return;
     }
     super.eSet(featureID, newValue);

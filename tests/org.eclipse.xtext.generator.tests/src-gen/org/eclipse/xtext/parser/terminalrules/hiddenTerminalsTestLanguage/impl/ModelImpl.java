@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelImpl.java,v 1.4 2009/02/19 16:27:02 sefftinge Exp $
+ * $Id: ModelImpl.java,v 1.5 2009/02/19 21:09:55 sefftinge Exp $
  */
 package org.eclipse.xtext.parser.terminalrules.hiddenTerminalsTestLanguage.impl;
 
@@ -106,7 +106,7 @@ public class ModelImpl extends EObjectImpl implements Model
     switch (featureID)
     {
       case HiddenTerminalsTestLanguagePackage.MODEL__VALID:
-        return isValid() ? Boolean.TRUE : Boolean.FALSE;
+        return isValid();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -122,7 +122,7 @@ public class ModelImpl extends EObjectImpl implements Model
     switch (featureID)
     {
       case HiddenTerminalsTestLanguagePackage.MODEL__VALID:
-        setValid(((Boolean)newValue).booleanValue());
+        setValid((Boolean)newValue);
         return;
     }
     super.eSet(featureID, newValue);

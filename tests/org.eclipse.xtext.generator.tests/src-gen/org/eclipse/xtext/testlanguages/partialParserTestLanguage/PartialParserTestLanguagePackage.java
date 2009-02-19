@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PartialParserTestLanguagePackage.java,v 1.4 2009/02/19 16:26:56 sefftinge Exp $
+ * $Id: PartialParserTestLanguagePackage.java,v 1.5 2009/02/19 21:09:49 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.partialParserTestLanguage;
 
@@ -61,14 +61,14 @@ public interface PartialParserTestLanguagePackage extends EPackage
   PartialParserTestLanguagePackage eINSTANCE = org.eclipse.xtext.testlanguages.partialParserTestLanguage.impl.PartialParserTestLanguagePackageImpl.init();
 
   /**
-   * The meta object id for the '{@link org.eclipse.xtext.testlanguages.partialParserTestLanguage.impl.ContainerImpl <em>Container</em>}' class.
+   * The meta object id for the '{@link org.eclipse.xtext.testlanguages.partialParserTestLanguage.impl.SomeContainerImpl <em>Some Container</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.testlanguages.partialParserTestLanguage.impl.ContainerImpl
-   * @see org.eclipse.xtext.testlanguages.partialParserTestLanguage.impl.PartialParserTestLanguagePackageImpl#getContainer()
+   * @see org.eclipse.xtext.testlanguages.partialParserTestLanguage.impl.SomeContainerImpl
+   * @see org.eclipse.xtext.testlanguages.partialParserTestLanguage.impl.PartialParserTestLanguagePackageImpl#getSomeContainer()
    * @generated
    */
-  int CONTAINER = 0;
+  int SOME_CONTAINER = 0;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -77,7 +77,7 @@ public interface PartialParserTestLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int CONTAINER__NAME = 0;
+  int SOME_CONTAINER__NAME = 0;
 
   /**
    * The feature id for the '<em><b>Nested</b></em>' containment reference list.
@@ -86,7 +86,7 @@ public interface PartialParserTestLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int CONTAINER__NESTED = 1;
+  int SOME_CONTAINER__NESTED = 1;
 
   /**
    * The feature id for the '<em><b>Content</b></em>' containment reference list.
@@ -95,16 +95,16 @@ public interface PartialParserTestLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int CONTAINER__CONTENT = 2;
+  int SOME_CONTAINER__CONTENT = 2;
 
   /**
-   * The number of structural features of the '<em>Container</em>' class.
+   * The number of structural features of the '<em>Some Container</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int CONTAINER_FEATURE_COUNT = 3;
+  int SOME_CONTAINER_FEATURE_COUNT = 3;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.testlanguages.partialParserTestLanguage.impl.NestedImpl <em>Nested</em>}' class.
@@ -369,47 +369,47 @@ public interface PartialParserTestLanguagePackage extends EPackage
 
 
   /**
-   * Returns the meta object for class '{@link org.eclipse.xtext.testlanguages.partialParserTestLanguage.Container <em>Container</em>}'.
+   * Returns the meta object for class '{@link org.eclipse.xtext.testlanguages.partialParserTestLanguage.SomeContainer <em>Some Container</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Container</em>'.
-   * @see org.eclipse.xtext.testlanguages.partialParserTestLanguage.Container
+   * @return the meta object for class '<em>Some Container</em>'.
+   * @see org.eclipse.xtext.testlanguages.partialParserTestLanguage.SomeContainer
    * @generated
    */
-  EClass getContainer();
+  EClass getSomeContainer();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.testlanguages.partialParserTestLanguage.Container#getName <em>Name</em>}'.
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.testlanguages.partialParserTestLanguage.SomeContainer#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.eclipse.xtext.testlanguages.partialParserTestLanguage.Container#getName()
-   * @see #getContainer()
+   * @see org.eclipse.xtext.testlanguages.partialParserTestLanguage.SomeContainer#getName()
+   * @see #getSomeContainer()
    * @generated
    */
-  EAttribute getContainer_Name();
+  EAttribute getSomeContainer_Name();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.testlanguages.partialParserTestLanguage.Container#getNested <em>Nested</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.testlanguages.partialParserTestLanguage.SomeContainer#getNested <em>Nested</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference list '<em>Nested</em>'.
-   * @see org.eclipse.xtext.testlanguages.partialParserTestLanguage.Container#getNested()
-   * @see #getContainer()
+   * @see org.eclipse.xtext.testlanguages.partialParserTestLanguage.SomeContainer#getNested()
+   * @see #getSomeContainer()
    * @generated
    */
-  EReference getContainer_Nested();
+  EReference getSomeContainer_Nested();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.testlanguages.partialParserTestLanguage.Container#getContent <em>Content</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.testlanguages.partialParserTestLanguage.SomeContainer#getContent <em>Content</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference list '<em>Content</em>'.
-   * @see org.eclipse.xtext.testlanguages.partialParserTestLanguage.Container#getContent()
-   * @see #getContainer()
+   * @see org.eclipse.xtext.testlanguages.partialParserTestLanguage.SomeContainer#getContent()
+   * @see #getSomeContainer()
    * @generated
    */
-  EReference getContainer_Content();
+  EReference getSomeContainer_Content();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.testlanguages.partialParserTestLanguage.Nested <em>Nested</em>}'.
@@ -613,14 +613,14 @@ public interface PartialParserTestLanguagePackage extends EPackage
   interface Literals
   {
     /**
-     * The meta object literal for the '{@link org.eclipse.xtext.testlanguages.partialParserTestLanguage.impl.ContainerImpl <em>Container</em>}' class.
+     * The meta object literal for the '{@link org.eclipse.xtext.testlanguages.partialParserTestLanguage.impl.SomeContainerImpl <em>Some Container</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.testlanguages.partialParserTestLanguage.impl.ContainerImpl
-     * @see org.eclipse.xtext.testlanguages.partialParserTestLanguage.impl.PartialParserTestLanguagePackageImpl#getContainer()
+     * @see org.eclipse.xtext.testlanguages.partialParserTestLanguage.impl.SomeContainerImpl
+     * @see org.eclipse.xtext.testlanguages.partialParserTestLanguage.impl.PartialParserTestLanguagePackageImpl#getSomeContainer()
      * @generated
      */
-    EClass CONTAINER = eINSTANCE.getContainer();
+    EClass SOME_CONTAINER = eINSTANCE.getSomeContainer();
 
     /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -628,7 +628,7 @@ public interface PartialParserTestLanguagePackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute CONTAINER__NAME = eINSTANCE.getContainer_Name();
+    EAttribute SOME_CONTAINER__NAME = eINSTANCE.getSomeContainer_Name();
 
     /**
      * The meta object literal for the '<em><b>Nested</b></em>' containment reference list feature.
@@ -636,7 +636,7 @@ public interface PartialParserTestLanguagePackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference CONTAINER__NESTED = eINSTANCE.getContainer_Nested();
+    EReference SOME_CONTAINER__NESTED = eINSTANCE.getSomeContainer_Nested();
 
     /**
      * The meta object literal for the '<em><b>Content</b></em>' containment reference list feature.
@@ -644,7 +644,7 @@ public interface PartialParserTestLanguagePackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference CONTAINER__CONTENT = eINSTANCE.getContainer_Content();
+    EReference SOME_CONTAINER__CONTENT = eINSTANCE.getSomeContainer_Content();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.testlanguages.partialParserTestLanguage.impl.NestedImpl <em>Nested</em>}' class.

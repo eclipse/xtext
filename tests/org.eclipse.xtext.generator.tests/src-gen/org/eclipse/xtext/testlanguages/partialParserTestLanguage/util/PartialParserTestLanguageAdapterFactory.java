@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PartialParserTestLanguageAdapterFactory.java,v 1.4 2009/02/19 16:27:10 sefftinge Exp $
+ * $Id: PartialParserTestLanguageAdapterFactory.java,v 1.5 2009/02/19 21:10:02 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.partialParserTestLanguage.util;
 
@@ -79,9 +79,9 @@ public class PartialParserTestLanguageAdapterFactory extends AdapterFactoryImpl
     new PartialParserTestLanguageSwitch<Adapter>()
     {
       @Override
-      public Adapter caseContainer(Container object)
+      public Adapter caseSomeContainer(SomeContainer object)
       {
-        return createContainerAdapter();
+        return createSomeContainerAdapter();
       }
       @Override
       public Adapter caseNested(Nested object)
@@ -151,16 +151,16 @@ public class PartialParserTestLanguageAdapterFactory extends AdapterFactoryImpl
 
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.testlanguages.partialParserTestLanguage.Container <em>Container</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.testlanguages.partialParserTestLanguage.SomeContainer <em>Some Container</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipse.xtext.testlanguages.partialParserTestLanguage.Container
+   * @see org.eclipse.xtext.testlanguages.partialParserTestLanguage.SomeContainer
    * @generated
    */
-  public Adapter createContainerAdapter()
+  public Adapter createSomeContainerAdapter()
   {
     return null;
   }
