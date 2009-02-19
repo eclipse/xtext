@@ -46,12 +46,6 @@ public class GrammarUtil {
 		return getLanguageId(grammar).replace('.', '/') + ".xmi";
 	}
 
-	public static ParserRule getDefaultEntryRule(Grammar g) {
-		if (g.isAbstract())
-			return null;
-		return allParserRules(g).get(0);
-	}
-
 	public static String getLanguageId(Grammar g) {
 		return g.getName();
 	}

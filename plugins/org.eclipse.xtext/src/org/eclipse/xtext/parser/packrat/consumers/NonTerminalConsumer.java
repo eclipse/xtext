@@ -11,6 +11,8 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.parser.packrat.IHiddenTokenHandler;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory;
@@ -18,9 +20,12 @@ import org.eclipse.xtext.parser.packrat.IHiddenTokenHandler.IHiddenTokenState;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
+import org.eclipse.xtext.parser.packrat.tokens.AlternativesToken;
 import org.eclipse.xtext.parser.packrat.tokens.ErrorToken;
+import org.eclipse.xtext.parser.packrat.tokens.GroupToken;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedNonTerminal;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedNonTerminalEnd;
+import org.eclipse.xtext.parser.packrat.tokens.PlaceholderToken;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -57,6 +62,7 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 		public int getResult() {
 			bestMarker.commit();
 			announceLevelFinished();
+			acceptor.accept(new AlternativesToken.End(getOffset()));
 			return bestResult;
 		}
 
@@ -69,6 +75,36 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 			}
 			currentMarker = null;
 			return result == ConsumeResult.SUCCESS;
+		}
+	}
+
+	protected class GroupResult {
+		private int result;
+		private final IMarker marker;
+
+		protected GroupResult() {
+			result = ConsumeResult.SUCCESS;
+			marker = mark();
+		}
+
+		public void nextStep() {
+			announceNextStep();
+		}
+
+		public void reset() {
+			result = ConsumeResult.EMPTY_MATCH;
+		}
+
+		public int getResult() {
+			marker.commit();
+			announceLevelFinished();
+			acceptor.accept(new GroupToken.End(getOffset()));
+			return result;
+		}
+
+		public boolean didGroupFail(int result) {
+			this.result = result;
+			return result != ConsumeResult.SUCCESS;
 		}
 	}
 
@@ -98,6 +134,22 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 	public AlternativesResult createAlternativesResult() {
 		announceNextLevel();
 		return new AlternativesResult();
+	}
+
+	public AlternativesResult createAlternativesResult(Alternatives alternatives) {
+		announceNextLevel();
+		acceptor.accept(new AlternativesToken(getOffset(), alternatives));
+		return new AlternativesResult();
+	}
+
+	public GroupResult createGroupResult(Group group) {
+		announceNextLevel();
+		acceptor.accept(new GroupToken(getOffset(), group));
+		return new GroupResult();
+	}
+
+	public void skipped(EObject grammarElement) {
+		acceptor.accept(new PlaceholderToken(getOffset(), grammarElement));
 	}
 
 	public boolean isDefiningHiddens() {
