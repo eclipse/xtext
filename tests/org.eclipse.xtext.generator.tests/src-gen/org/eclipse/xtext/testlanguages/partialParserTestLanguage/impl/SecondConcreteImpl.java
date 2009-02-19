@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SecondConcreteImpl.java,v 1.5 2009/02/19 21:09:50 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.partialParserTestLanguage.impl;
 

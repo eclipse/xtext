@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AssignmentImpl.java,v 1.5 2009/02/19 21:07:27 sefftinge Exp $
  */
 package org.eclipse.xtext.xtextTest.impl;
 

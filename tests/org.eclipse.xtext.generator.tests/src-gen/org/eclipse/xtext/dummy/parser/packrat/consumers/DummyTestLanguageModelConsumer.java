@@ -43,6 +43,7 @@ public final class DummyTestLanguageModelConsumer extends NonTerminalConsumer {
 			marker.flush();
 		}
 		marker.rollback();
+		skipped(getRule().eleAssignmentElements());
 		return ConsumeResult.SUCCESS;
 	}
 

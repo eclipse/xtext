@@ -57,47 +57,37 @@ public final class EpatchTestLanguageCreatedObjectConsumer extends NonTerminalCo
 	}
 
 	protected int consumeGroup$1(int entryPoint) throws Exception {
-		announceNextLevel();
-		final IMarker marker = mark();
-		int result = ConsumeResult.SUCCESS;
+		GroupResult result = createGroupResult(getRule().eleGroup());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
-				result = ConsumeResult.EMPTY_MATCH;
+				result.reset();
 			case 0:
-				announceNextStep();
-				result = consumeAlternatives$3(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(consumeAlternatives$3(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().ele00Alternatives());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 			case 1:
-				announceNextStep();
-				result = consumeAssignment$6(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(consumeAssignment$6(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().ele01AssignmentName());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 			case 2:
-				announceNextStep();
-				result = consumeGroup$8(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(consumeGroup$8(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().ele1Group());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 		}
-		marker.commit();
-		announceLevelFinished();
-		return result;
+		return result.getResult();
 	}
 
 	protected int consumeAlternatives$3(int entryPoint) throws Exception {
-		AlternativesResult result = createAlternativesResult();
+		AlternativesResult result = createAlternativesResult(getRule().ele00Alternatives());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -126,9 +116,10 @@ public final class EpatchTestLanguageCreatedObjectConsumer extends NonTerminalCo
 	protected int consumeAssignment$6(int entryPoint) throws Exception {
 		IMarker marker = mark();
 		int result = doConsumeAssignment$6(entryPoint);
-		if (result != ConsumeResult.SUCCESS)
+		if (result != ConsumeResult.SUCCESS) {
 			marker.rollback();
-		else
+			skipped(getRule().ele01AssignmentName());
+		} else
 			marker.commit();
 		return ConsumeResult.SUCCESS;
 	}
@@ -144,60 +135,49 @@ public final class EpatchTestLanguageCreatedObjectConsumer extends NonTerminalCo
 	protected int consumeGroup$8(int entryPoint) throws Exception {
 		IMarker marker = mark();
 		int result = doConsumeGroup$8(entryPoint);
-		if (result != ConsumeResult.SUCCESS)
+		if (result != ConsumeResult.SUCCESS) {
 			marker.rollback();
-		else
+			skipped(getRule().ele1Group());
+		} else
 			marker.commit();
 		return ConsumeResult.SUCCESS;
 	}
 
 	protected int doConsumeGroup$8(int entryPoint) throws Exception {
-		announceNextLevel();
-		final IMarker marker = mark();
-		int result = ConsumeResult.SUCCESS;
+		GroupResult result = createGroupResult(getRule().ele1Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
-				result = ConsumeResult.EMPTY_MATCH;
+				result.reset();
 			case 0:
-				announceNextStep();
-				result = consumeKeyword$11(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(consumeKeyword$11(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().ele1000KeywordLeftCurlyBracket());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 			case 1:
-				announceNextStep();
-				result = consumeAlternatives$12(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(consumeAlternatives$12(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().ele1001Alternatives());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 			case 2:
-				announceNextStep();
-				result = consumeAssignment$17(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(consumeAssignment$17(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().ele101AssignmentLeftMig());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 			case 3:
-				announceNextStep();
-				result = consumeKeyword$19(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(consumeKeyword$19(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().ele11KeywordRightCurlyBracket());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 		}
-		marker.commit();
-		announceLevelFinished();
-		return result;
+		return result.getResult();
 	}
 
 	protected int consumeKeyword$11(int entryPoint) throws Exception {
@@ -215,13 +195,14 @@ public final class EpatchTestLanguageCreatedObjectConsumer extends NonTerminalCo
 				announceNextStep();
 				result = doConsumeAlternatives$12(nextEntryPoint());
 			case 1:
-				announceNextStep();
 				if (result == ConsumeResult.SUCCESS) {
 					marker.flush();
+					announceNextStep();
 					while(doConsumeAlternatives$12(nextEntryPoint())==ConsumeResult.SUCCESS) {
 						marker.flush();
 					}
 					marker.rollback();
+					skipped(getRule().ele1001Alternatives());
 					announceLevelFinished();
 					return ConsumeResult.SUCCESS;
 				}
@@ -233,7 +214,7 @@ public final class EpatchTestLanguageCreatedObjectConsumer extends NonTerminalCo
 	}
 
 	protected int doConsumeAlternatives$12(int entryPoint) throws Exception {
-		AlternativesResult result = createAlternativesResult();
+		AlternativesResult result = createAlternativesResult(getRule().ele1001Alternatives());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -270,9 +251,10 @@ public final class EpatchTestLanguageCreatedObjectConsumer extends NonTerminalCo
 	protected int consumeAssignment$17(int entryPoint) throws Exception {
 		IMarker marker = mark();
 		int result = doConsumeAssignment$17(entryPoint);
-		if (result != ConsumeResult.SUCCESS)
+		if (result != ConsumeResult.SUCCESS) {
 			marker.rollback();
-		else
+			skipped(getRule().ele101AssignmentLeftMig());
+		} else
 			marker.commit();
 		return ConsumeResult.SUCCESS;
 	}

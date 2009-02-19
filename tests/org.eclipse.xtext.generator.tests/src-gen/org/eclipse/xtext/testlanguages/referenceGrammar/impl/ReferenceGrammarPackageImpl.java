@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ReferenceGrammarPackageImpl.java,v 1.5 2009/02/19 21:09:52 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.referenceGrammar.impl;
 

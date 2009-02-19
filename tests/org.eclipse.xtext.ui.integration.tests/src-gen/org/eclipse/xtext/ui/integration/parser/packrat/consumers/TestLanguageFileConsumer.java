@@ -43,6 +43,7 @@ public final class TestLanguageFileConsumer extends NonTerminalConsumer {
 			marker.flush();
 		}
 		marker.rollback();
+		skipped(getRule().eleAssignmentStuff());
 		return ConsumeResult.SUCCESS;
 	}
 

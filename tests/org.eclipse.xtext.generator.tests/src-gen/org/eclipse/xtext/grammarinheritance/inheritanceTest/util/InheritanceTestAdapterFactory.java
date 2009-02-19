@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: InheritanceTestAdapterFactory.java,v 1.5 2009/02/19 21:10:08 sefftinge Exp $
  */
 package org.eclipse.xtext.grammarinheritance.inheritanceTest.util;
 
@@ -89,9 +88,9 @@ public class InheritanceTestAdapterFactory extends AdapterFactoryImpl
         return createElementAdapter();
       }
       @Override
-      public Adapter caseBaseInheritanceTest_Model(org.eclipse.xtext.grammarinheritance.baseInheritanceTest.Model object)
+      public Adapter caseModel_1(org.eclipse.xtext.grammarinheritance.baseInheritanceTest.Model object)
       {
-        return createBaseInheritanceTest_ModelAdapter();
+        return createModel_1Adapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -155,7 +154,7 @@ public class InheritanceTestAdapterFactory extends AdapterFactoryImpl
    * @see org.eclipse.xtext.grammarinheritance.baseInheritanceTest.Model
    * @generated
    */
-  public Adapter createBaseInheritanceTest_ModelAdapter()
+  public Adapter createModel_1Adapter()
   {
     return null;
   }

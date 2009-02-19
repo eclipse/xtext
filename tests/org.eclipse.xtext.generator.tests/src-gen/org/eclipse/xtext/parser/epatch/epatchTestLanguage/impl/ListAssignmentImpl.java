@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ListAssignmentImpl.java,v 1.5 2009/02/19 21:09:43 sefftinge Exp $
  */
 package org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl;
 

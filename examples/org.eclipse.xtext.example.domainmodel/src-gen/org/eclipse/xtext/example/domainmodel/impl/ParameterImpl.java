@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParameterImpl.java,v 1.5 2009/02/19 21:06:49 sefftinge Exp $
  */
 package org.eclipse.xtext.example.domainmodel.impl;
 

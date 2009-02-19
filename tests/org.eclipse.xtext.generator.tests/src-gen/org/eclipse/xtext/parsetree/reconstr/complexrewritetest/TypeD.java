@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeD.java,v 1.5 2009/02/19 21:09:49 sefftinge Exp $
  */
 package org.eclipse.xtext.parsetree.reconstr.complexrewritetest;
 

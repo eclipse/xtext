@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ImportedURISwitch.java,v 1.5 2009/02/19 21:10:09 sefftinge Exp $
  */
 package org.eclipse.xtext.crossrefs.importedURI.util;
 

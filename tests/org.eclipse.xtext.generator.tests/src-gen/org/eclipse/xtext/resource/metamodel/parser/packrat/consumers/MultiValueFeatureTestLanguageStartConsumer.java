@@ -51,13 +51,14 @@ public final class MultiValueFeatureTestLanguageStartConsumer extends NonTermina
 				announceNextStep();
 				result = doConsumeAssignment$1(nextEntryPoint());
 			case 1:
-				announceNextStep();
 				if (result == ConsumeResult.SUCCESS) {
 					marker.flush();
+					announceNextStep();
 					while(doConsumeAssignment$1(nextEntryPoint())==ConsumeResult.SUCCESS) {
 						marker.flush();
 					}
 					marker.rollback();
+					skipped(getRule().eleAssignmentFeatureA());
 					announceLevelFinished();
 					return ConsumeResult.SUCCESS;
 				}

@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SpielplatzImpl.java,v 1.5 2009/02/19 21:09:52 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.referenceGrammar.impl;
 
@@ -285,7 +284,7 @@ public class SpielplatzImpl extends EObjectImpl implements Spielplatz
     switch (featureID)
     {
       case ReferenceGrammarPackage.SPIELPLATZ__GROESSE:
-        return getGroesse();
+        return new Integer(getGroesse());
       case ReferenceGrammarPackage.SPIELPLATZ__BESCHREIBUNG:
         return getBeschreibung();
       case ReferenceGrammarPackage.SPIELPLATZ__KINDER:
@@ -312,7 +311,7 @@ public class SpielplatzImpl extends EObjectImpl implements Spielplatz
     switch (featureID)
     {
       case ReferenceGrammarPackage.SPIELPLATZ__GROESSE:
-        setGroesse((Integer)newValue);
+        setGroesse(((Integer)newValue).intValue());
         return;
       case ReferenceGrammarPackage.SPIELPLATZ__BESCHREIBUNG:
         setBeschreibung((String)newValue);

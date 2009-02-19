@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SimpleExpressionsFactoryImpl.java,v 1.5 2009/02/19 21:09:57 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.simpleExpressions.impl;
 

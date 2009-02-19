@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: RuleCallImpl.java,v 1.5 2009/02/19 21:07:32 sefftinge Exp $
  */
 package org.eclipse.xtext.xtextTest.impl;
 

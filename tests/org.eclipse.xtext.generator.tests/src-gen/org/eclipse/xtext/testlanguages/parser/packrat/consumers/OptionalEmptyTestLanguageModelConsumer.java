@@ -40,9 +40,10 @@ public final class OptionalEmptyTestLanguageModelConsumer extends NonTerminalCon
 	protected int consumeAssignment$1(int entryPoint) throws Exception {
 		IMarker marker = mark();
 		int result = doConsumeAssignment$1(entryPoint);
-		if (result != ConsumeResult.SUCCESS)
+		if (result != ConsumeResult.SUCCESS) {
 			marker.rollback();
-		else
+			skipped(getRule().eleAssignmentChild());
+		} else
 			marker.commit();
 		return ConsumeResult.SUCCESS;
 	}

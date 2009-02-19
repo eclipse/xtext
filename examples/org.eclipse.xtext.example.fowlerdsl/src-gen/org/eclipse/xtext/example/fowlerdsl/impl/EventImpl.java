@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EventImpl.java,v 1.5 2009/02/19 21:11:07 sefftinge Exp $
  */
 package org.eclipse.xtext.example.fowlerdsl.impl;
 
@@ -194,7 +193,7 @@ public class EventImpl extends EObjectImpl implements Event
     switch (featureID)
     {
       case FowlerdslPackage.EVENT__RESETTING:
-        return isResetting();
+        return isResetting() ? Boolean.TRUE : Boolean.FALSE;
       case FowlerdslPackage.EVENT__NAME:
         return getName();
       case FowlerdslPackage.EVENT__CODE:
@@ -214,7 +213,7 @@ public class EventImpl extends EObjectImpl implements Event
     switch (featureID)
     {
       case FowlerdslPackage.EVENT__RESETTING:
-        setResetting((Boolean)newValue);
+        setResetting(((Boolean)newValue).booleanValue());
         return;
       case FowlerdslPackage.EVENT__NAME:
         setName((String)newValue);

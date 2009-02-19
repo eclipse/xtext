@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Subrule2.java,v 1.5 2009/02/19 21:09:41 sefftinge Exp $
  */
 package org.eclipse.xtext.grammarinheritance.foo;
 

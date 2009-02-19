@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ElementImpl.java,v 1.5 2009/02/19 21:10:04 sefftinge Exp $
  */
 package org.eclipse.xtext.dummy.dummyLang.impl;
 
@@ -181,7 +180,7 @@ public class ElementImpl extends EObjectImpl implements Element
     switch (featureID)
     {
       case DummyLangPackage.ELEMENT__OPTIONAL:
-        return isOptional();
+        return isOptional() ? Boolean.TRUE : Boolean.FALSE;
       case DummyLangPackage.ELEMENT__NAME:
         return getName();
       case DummyLangPackage.ELEMENT__DESCRIPTIONS:
@@ -202,7 +201,7 @@ public class ElementImpl extends EObjectImpl implements Element
     switch (featureID)
     {
       case DummyLangPackage.ELEMENT__OPTIONAL:
-        setOptional((Boolean)newValue);
+        setOptional(((Boolean)newValue).booleanValue());
         return;
       case DummyLangPackage.ELEMENT__NAME:
         setName((String)newValue);

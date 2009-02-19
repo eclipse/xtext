@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Bug250313Switch.java,v 1.5 2009/02/19 21:10:10 sefftinge Exp $
  */
 package org.eclipse.xtext.valueconverter.bug250313.util;
 

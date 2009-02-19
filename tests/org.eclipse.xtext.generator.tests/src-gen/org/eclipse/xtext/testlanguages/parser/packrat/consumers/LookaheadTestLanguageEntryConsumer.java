@@ -43,6 +43,7 @@ public final class LookaheadTestLanguageEntryConsumer extends NonTerminalConsume
 			marker.flush();
 		}
 		marker.rollback();
+		skipped(getRule().eleAssignmentContents());
 		return ConsumeResult.SUCCESS;
 	}
 

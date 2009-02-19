@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TrickyG2Impl.java,v 1.5 2009/02/19 21:09:44 sefftinge Exp $
  */
 package org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl;
 
@@ -106,7 +105,7 @@ public class TrickyG2Impl extends EObjectImpl implements TrickyG2
     switch (featureID)
     {
       case ComplexrewritetestPackage.TRICKY_G2__VAL:
-        return getVal();
+        return new Integer(getVal());
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -122,7 +121,7 @@ public class TrickyG2Impl extends EObjectImpl implements TrickyG2
     switch (featureID)
     {
       case ComplexrewritetestPackage.TRICKY_G2__VAL:
-        setVal((Integer)newValue);
+        setVal(((Integer)newValue).intValue());
         return;
     }
     super.eSet(featureID, newValue);

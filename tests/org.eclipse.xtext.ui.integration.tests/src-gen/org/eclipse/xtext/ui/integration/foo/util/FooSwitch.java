@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FooSwitch.java,v 1.5 2009/02/19 21:08:30 sefftinge Exp $
  */
 package org.eclipse.xtext.ui.integration.foo.util;
 
