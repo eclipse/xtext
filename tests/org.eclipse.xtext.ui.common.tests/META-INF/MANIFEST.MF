@@ -24,7 +24,7 @@ Require-Bundle: org.eclipse.ui,
  de.itemis.xtext.antlr;bundle-version="1.0.0";resolution:=optional,
  org.eclipse.xtend;bundle-version="0.7.0",
  org.eclipse.xtext.junit;bundle-version="0.7.0",
- org.eclipse.xtext.ui.generator;bundle-version="1.0.0"
+ org.eclipse.xtext.ui.generator
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.xtext.ui.common,
