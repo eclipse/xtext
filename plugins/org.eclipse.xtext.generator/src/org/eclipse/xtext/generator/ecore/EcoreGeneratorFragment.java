@@ -1,8 +1,17 @@
+/*******************************************************************************
+ * Copyright (c) 2008, 2009 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
 package org.eclipse.xtext.generator.ecore;
 
-import static org.eclipse.xtext.EcoreUtil2.*;
-import static org.eclipse.xtext.GrammarUtil.*;
-import static org.eclipse.xtext.XtextPackage.*;
+import static org.eclipse.xtext.EcoreUtil2.collect;
+import static org.eclipse.xtext.EcoreUtil2.typeSelect;
+import static org.eclipse.xtext.GrammarUtil.getNamespace;
+import static org.eclipse.xtext.XtextPackage.GENERATED_METAMODEL__EPACKAGE;
 
 import java.io.File;
 import java.io.IOException;
@@ -40,7 +49,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.util.EmfFormater;
+import org.eclipse.xtext.util.LineFilterOutputStream;
 import org.eclipse.xtext.util.Strings;
 
 public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
@@ -114,7 +123,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 			final Grammar grammar) throws ConfigurationException {
 
 		Collection<? extends EPackage> packs2 = EcoreUtil.copyAll(ps);
-		
+
 		ResourceSet rs = new ResourceSetImpl();
 		Resource res2 = rs.createResource(URI.createFileURI(new File(uri + "/" + grammar.getName().replace('.', '/')
 				+ ".ecore").getAbsolutePath()));
@@ -154,7 +163,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 //					+ ". Missing genmodels for " + buff + ". Was configured with '" + urisString + "'.");
 //		}
 //
-		
+
 		// write genmodel
 		res.getContents().add(genModel);
 		res2.getContents().addAll(packs2);
@@ -164,22 +173,20 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		} catch (IOException e) {
 			log.error(e.getMessage(), e);
 		}
-		
+
 		genModel.reconcile();
-		
+
 		Generator generator = new Generator();
 		generator.getAdapterFactoryDescriptorRegistry().addDescriptor(GenModelPackage.eNS_URI,
 				new GeneratorAdapterFactory.Descriptor() {
 					public GeneratorAdapterFactory createAdapterFactory() {
 						return new GenModelGeneratorAdapterFactory() {
-
 							@Override
 							public Adapter createGenClassAdapter() {
 								return new GenClassGeneratorAdapter(this) {
 									@Override
 									protected OutputStream createOutputStream(URI workspacePath) throws Exception {
-
-										return getURIConverter().createOutputStream(workspacePath);
+										return new LineFilterOutputStream(getURIConverter().createOutputStream(workspacePath), " * $Id: EcoreGeneratorFragment.java,v 1.4 2009/02/19 23:34:29 szarnekow Exp $");
 									}
 
 									@Override
@@ -199,7 +206,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 
 									@Override
 									protected OutputStream createOutputStream(URI workspacePath) throws Exception {
-										return getURIConverter().createOutputStream(workspacePath);
+										return new LineFilterOutputStream(getURIConverter().createOutputStream(workspacePath), " * $Id: EcoreGeneratorFragment.java,v 1.4 2009/02/19 23:34:29 szarnekow Exp $");
 									}
 
 								};
@@ -211,10 +218,8 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		Diagnostic diagnostic = generator.generate(genModel, GenBaseGeneratorAdapter.MODEL_PROJECT_TYPE,
 				new BasicMonitor());
 
-		
-
-		if (log.isInfoEnabled())
-			log.info(EmfFormater.objToStr(diagnostic));
+		if (diagnostic.getSeverity() != Diagnostic.OK)
+			log.info(diagnostic);
 	}
 
 	public static String getGeneratedEPackageName(Grammar g, EPackage pack) {

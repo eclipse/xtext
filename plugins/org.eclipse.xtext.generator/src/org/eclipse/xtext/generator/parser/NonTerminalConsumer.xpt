@@ -261,9 +261,10 @@ public final class «this.consumerClassName().toSimpleName()» extends NonTerminal
 «IF isQuestionMark()-»
 		IMarker marker = mark();
 		int result = do«consumeMethodName().toFirstUpper()»(entryPoint);
-		if (result != ConsumeResult.SUCCESS)
+		if (result != ConsumeResult.SUCCESS) {
 			marker.rollback();
-		else
+			skipped(getRule().«gaElementAccessor()»);
+		} else
 			marker.commit();
 		return ConsumeResult.SUCCESS;
 «ELSEIF isStar()-»
@@ -272,6 +273,7 @@ public final class «this.consumerClassName().toSimpleName()» extends NonTerminal
 			marker.flush();
 		}
 		marker.rollback();
+		skipped(getRule().«gaElementAccessor()»);
 		return ConsumeResult.SUCCESS;
 «ELSEIF isPlus()-»
 		IMarker marker = mark();
@@ -284,13 +286,14 @@ public final class «this.consumerClassName().toSimpleName()» extends NonTerminal
 				announceNextStep();
 				result = do«consumeMethodName().toFirstUpper()»(nextEntryPoint());
 			case 1:
-				announceNextStep();
 				if (result == ConsumeResult.SUCCESS) {
 					marker.flush();
+					announceNextStep();
 					while(do«consumeMethodName().toFirstUpper()»(nextEntryPoint())==ConsumeResult.SUCCESS) {
 						marker.flush();
 					}
 					marker.rollback();
+					skipped(getRule().«gaElementAccessor()»);
 					announceLevelFinished();
 					return ConsumeResult.SUCCESS;
 				}
@@ -330,7 +333,7 @@ public final class «this.consumerClassName().toSimpleName()» extends NonTerminal
 «ENDDEFINE»
 
 «DEFINE defineConsumeBody FOR Alternatives-»
-		AlternativesResult result = createAlternativesResult();
+		AlternativesResult result = createAlternativesResult(getRule().«gaElementAccessor()»);
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -354,17 +357,13 @@ public final class «this.consumerClassName().toSimpleName()» extends NonTerminal
 «ENDDEFINE»
 
 «DEFINE defineConsumeBody FOR Group-»
-		announceNextLevel();
-		final IMarker marker = mark();
-		int result = ConsumeResult.SUCCESS;
+		GroupResult result = createGroupResult(getRule().«gaElementAccessor()»);
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
-				result = ConsumeResult.EMPTY_MATCH;
+				result.reset();
 «EXPAND defineConsumeBodyInternal(this) FOR this-»
 		}
-		marker.commit();
-		announceLevelFinished();
-		return result;
+		return result.getResult();
 «ENDDEFINE»
 
 «DEFINE defineConsumeBodyInternal(Group start) FOR Group-»
@@ -373,13 +372,11 @@ public final class «this.consumerClassName().toSimpleName()» extends NonTerminal
 «EXPAND defineConsumeBodyInternal(start) FOR (Group)token-»
 «ELSE-»
 			case «token.indexInGroup(start)»:
-				announceNextStep();
-				result = «token.consumeMethodName()»(nextEntryPoint());
-				if (result!=ConsumeResult.SUCCESS) {
+				result.nextStep();
+				if (result.didGroupFail(«token.consumeMethodName()»(nextEntryPoint()))) {
+					// TODO improve error message
 					error("Another token expected.", getRule().«token.gaElementAccessMethodeName()»());
-					marker.commit();
-					announceLevelFinished();
-					return result;
+					return result.getResult();
 				}
 «ENDIF-»
 «ENDFOREACH-»

@@ -1,3 +1,11 @@
+/*******************************************************************************
+ * Copyright (c) 2008, 2009 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
 package org.eclipse.xtext.generator.grammarAccess;
 
 import java.io.IOException;
@@ -18,14 +26,14 @@ import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.Generator;
 
 public class GrammarAccessFragment extends AbstractGeneratorFragment {
-	
+
 	private final Logger log = Logger.getLogger(GrammarAccessFragment.class);
-	
+
 	@Override
 	public Map<String, String> getGuiceBindingsRt(Grammar grammar) {
 		return Collections.singletonMap(IGrammarAccess.class.getName(), GrammarAccessUtil.getGrammarAccessFQName(grammar));
 	}
-	
+
 	@Override
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
 		super.generate(grammar, ctx);
@@ -34,14 +42,15 @@ public class GrammarAccessFragment extends AbstractGeneratorFragment {
 		String xmiPath = GrammarUtil.getClasspathRelativePathToXmi(grammar);
 		Resource resource = setImpl.createResource(URI.createURI(ctx.getOutput().getOutlet(Generator.SRC_GEN).getPath() + "/"
 				+ xmiPath));
-		while(grammar != null) {
-			resource.getContents().add(grammar);
-			for(AbstractMetamodelDeclaration metamodelDecl: grammar.getMetamodelDeclarations()) {
+		Grammar grammarToUse = grammar;
+		while(grammarToUse != null) {
+			resource.getContents().add(grammarToUse);
+			for(AbstractMetamodelDeclaration metamodelDecl: grammarToUse.getMetamodelDeclarations()) {
 				EPackage generatedPackage = metamodelDecl.getEPackage();
 				Resource packResource = generatedPackage.eResource();
 				packResource.setURI(URI.createURI(generatedPackage.getNsURI()));
 			}
-			grammar = grammar.getSuperGrammar();
+			grammarToUse = grammarToUse.getSuperGrammar();
 		}
 		try {
 			resource.save(null);
