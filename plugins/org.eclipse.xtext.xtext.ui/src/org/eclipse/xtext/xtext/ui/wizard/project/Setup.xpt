@@ -17,7 +17,7 @@
 «EXTENSION org::eclipse::xtext::ui::UIProperties»
 
 «DEFINE root FOR XtextProjectInfo»
-	«EXPAND setup-»
+	«EXPAND setup»
 	«EXPAND uiSetup»
 «ENDDEFINE»
 
@@ -30,7 +30,7 @@ import com.google.inject.Injector;
 public class «this.languageNameAbbreviation»StandaloneSetup {
 
 	public Injector createInjectorAndDoEMFRegistration() {
-		throw new UnsupportedOperationException("You never executed «this.languageNameAbbreviation»Generator.main()");
+		throw new UnsupportedOperationException("You never executed «this.basePackage».GenerateGrammar.main(String...)");
 	}
 	
 }
@@ -42,10 +42,12 @@ public class «this.languageNameAbbreviation»StandaloneSetup {
 «FILE this.languageNameAbbreviation + "UiSetup.java" SETUP_UI_OUTLET-»
 package «this.basePackage»;
 
+import org.eclipse.xtext.ui.core.wizard.IProjectCreator;
+
 public class «this.languageNameAbbreviation»UiSetup {
 
-	public synchronized static void doSetup() {
-		throw new UnsupportedOperationException("You never executed «this.languageNameAbbreviation»Generator.main()");
+	public Class<? extends IProjectCreator> bindIProjectCreator() {
+		return «this.basePackage».wizard.«this.languageNameAbbreviation»ProjectCreator.class;
 	}
 	
 }
