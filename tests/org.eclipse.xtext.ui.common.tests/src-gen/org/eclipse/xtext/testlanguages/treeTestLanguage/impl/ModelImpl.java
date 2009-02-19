@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelImpl.java,v 1.3 2009/02/19 14:37:46 sefftinge Exp $
+ * $Id: ModelImpl.java,v 1.4 2009/02/19 16:26:01 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.treeTestLanguage.impl;
 

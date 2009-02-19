@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FirstConcrete.java,v 1.3 2009/02/19 14:39:52 sefftinge Exp $
+ * $Id: FirstConcrete.java,v 1.4 2009/02/19 16:26:56 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.partialParserTestLanguage;
 

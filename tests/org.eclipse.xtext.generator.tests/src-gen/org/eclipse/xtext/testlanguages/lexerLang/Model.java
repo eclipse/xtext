@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Model.java,v 1.3 2009/02/19 14:39:50 sefftinge Exp $
+ * $Id: Model.java,v 1.4 2009/02/19 16:27:09 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.lexerLang;
 

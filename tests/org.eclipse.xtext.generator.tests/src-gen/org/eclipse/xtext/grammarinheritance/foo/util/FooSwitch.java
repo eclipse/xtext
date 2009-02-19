@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FooSwitch.java,v 1.3 2009/02/19 14:39:58 sefftinge Exp $
+ * $Id: FooSwitch.java,v 1.4 2009/02/19 16:27:09 sefftinge Exp $
  */
 package org.eclipse.xtext.grammarinheritance.foo.util;
 

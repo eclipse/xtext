@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: NamedElement.java,v 1.3 2009/02/19 14:36:38 sefftinge Exp $
+ * $Id: NamedElement.java,v 1.4 2009/02/19 16:25:14 sefftinge Exp $
  */
 package org.eclipse.xtext.example.domainmodel;
 

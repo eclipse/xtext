@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FooFactoryImpl.java,v 1.3 2009/02/19 14:39:59 sefftinge Exp $
+ * $Id: FooFactoryImpl.java,v 1.4 2009/02/19 16:26:54 sefftinge Exp $
  */
 package org.eclipse.xtext.grammarinheritance.foo.impl;
 

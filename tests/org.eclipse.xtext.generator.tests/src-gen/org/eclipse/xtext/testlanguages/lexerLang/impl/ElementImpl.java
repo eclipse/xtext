@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ElementImpl.java,v 1.3 2009/02/19 14:39:57 sefftinge Exp $
+ * $Id: ElementImpl.java,v 1.4 2009/02/19 16:27:10 sefftinge Exp $
  */
 package org.eclipse.xtext.testlanguages.lexerLang.impl;
 
