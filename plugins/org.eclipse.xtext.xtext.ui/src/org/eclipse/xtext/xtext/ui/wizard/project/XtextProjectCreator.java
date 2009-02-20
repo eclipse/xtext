@@ -65,7 +65,8 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 						"org.apache.commons.logging",
 						"de.itemis.xtext.antlr;resolution:=optional",
 						"org.eclipse.emf.codegen.ecore;resolution:=optional",
-						"org.eclipse.xtend.util.stdlib")), exportedPackages,
+						"org.eclipse.xtend.util.stdlib",
+						"org.eclipse.emf.mwe.utils")), exportedPackages,
 						null, null, monitor,
 				null);
 
