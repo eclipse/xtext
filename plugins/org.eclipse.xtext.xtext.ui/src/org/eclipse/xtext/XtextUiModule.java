@@ -3,8 +3,10 @@ Generated with Xtext
 */
 package org.eclipse.xtext;
 
+import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.ui.common.editor.outline.ISemanticModelTransformer;
 import org.eclipse.xtext.ui.core.wizard.IProjectCreator;
+import org.eclipse.xtext.xtext.ui.editor.outline.FilteringXtextOutlinePage;
 import org.eclipse.xtext.xtext.ui.editor.outline.XtextSemanticModelTransformer;
 import org.eclipse.xtext.xtext.ui.wizard.project.XtextProjectCreator;
 
@@ -16,6 +18,11 @@ public class XtextUiModule extends AbstractXtextUiModule {
 	@Override
 	public Class<? extends ISemanticModelTransformer> bindISemanticModelTransformer() {
 		return XtextSemanticModelTransformer.class;
+	}
+	
+	@Override
+	public Class<? extends IContentOutlinePage> bindIContentOutlinePage() {
+		return FilteringXtextOutlinePage.class;
 	}
 	
 	public Class<? extends IProjectCreator> bindIProjectCreator() {

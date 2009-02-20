@@ -48,8 +48,9 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 				@Override
 				public Boolean caseTypeRef(org.eclipse.xtext.TypeRef object) {
 					return false;
-				}	
-				
+				}
+
+				@Override
 				public Boolean caseGroup(org.eclipse.xtext.Group object) {
 					return false;
 				}
@@ -59,7 +60,8 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 					return true;
 				}
 			}.doSwitch(semanticNode);
-		} else {
+		}
+		else {
 			return false;
 		}
 	}
@@ -75,6 +77,9 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 
 				@Override
 				public Boolean caseParserRule(org.eclipse.xtext.ParserRule object) {
+					if (isFilterActive(ParserRulesOutlineFilter.class)) {
+						return false;
+					}
 					return true;
 				}
 				
@@ -86,17 +91,18 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 				public Boolean caseAlternatives(org.eclipse.xtext.Alternatives object) {
 					return true;
 				}
-				
+
 				@Override
 				public Boolean defaultCase(EObject object) {
 					return true;
 				}
 			}.doSwitch(semanticNode);
-		} else {
+		}
+		else {
 			return true;
 		}
 	}
-	
+
 	@Override
 	protected ContentOutlineNode createOutlineNode(EObject semanticNode, ContentOutlineNode outlineParentNode) {
 		final ContentOutlineNode outlineNode = super.createOutlineNode(semanticNode, outlineParentNode);
@@ -112,7 +118,8 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 
 				@Override
 				public ContentOutlineNode caseGeneratedMetamodel(org.eclipse.xtext.GeneratedMetamodel object) {
-					outlineNode.setLabel("generate " + object.getName() + (!Strings.isEmpty(object.getAlias())? " as " + object.getAlias() :""));
+					outlineNode.setLabel("generate " + object.getName()
+							+ (!Strings.isEmpty(object.getAlias()) ? " as " + object.getAlias() : ""));
 					outlineNode.setImageDescriptor(Activator.getImageDescriptor("icons/export.gif"));
 					return outlineNode;
 				}
@@ -123,12 +130,12 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 					outlineNode.setImageDescriptor(Activator.getImageDescriptor("icons/import.gif"));
 					return outlineNode;
 				}
-				
+
 				@Override
 				public ContentOutlineNode caseAssignment(org.eclipse.xtext.Assignment object) {
 					StringBuffer label = new StringBuffer();
 					label.append(object.getFeature()).append(" ").append(object.getOperator()).append(" ");
-					
+
 					AbstractElement terminal = object.getTerminal();
 					if (terminal instanceof RuleCall) {
 						RuleCall ruleCall = (RuleCall) terminal;
@@ -149,7 +156,7 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 						}
 						label.append("[").append(typeName).append("]");
 					}
-					
+
 					String cardinality = object.getCardinality();
 					label.append(cardinality != null ? cardinality : "");
 					outlineNode.setLabel(label.toString());
@@ -162,7 +169,7 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 					outlineNode.setImageDescriptor(Activator.getImageDescriptor("icons/rule.gif"));
 					return outlineNode;
 				}
-				
+
 				@Override
 				public ContentOutlineNode caseRuleCall(RuleCall ruleCall) {
 					if (ruleCall.getRule() != null) {
@@ -173,7 +180,7 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 						String ruleName = "???";
 						if (nodeAdapter != null) {
 							List<LeafNode> leafs = nodeAdapter.getParserNode().getLeafNodes();
-							for (LeafNode leaf: leafs) {
+							for (LeafNode leaf : leafs) {
 								if (!leaf.isHidden()) {
 									ruleName = leaf.getText();
 									break;
@@ -183,7 +190,7 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 						outlineNode.setLabel("unresolved call " + ruleName);
 					}
 					// TODO show another icon, if unresolved
-					// TODO how to show text in another color? 
+					// TODO how to show text in another color?
 					outlineNode.setImageDescriptor(Activator.getImageDescriptor("icons/rule.gif"));
 					return outlineNode;
 				}
@@ -193,7 +200,7 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 					outlineNode.setLabel("|");
 					return outlineNode;
 				}
-				
+
 				public ContentOutlineNode caseKeyword(Keyword object) {
 					outlineNode.setLabel("'" + object.getValue() + "'");
 					outlineNode.setImageDescriptor(Activator.getImageDescriptor("icons/keyword.gif"));
@@ -207,9 +214,10 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 				}
 
 			}.doSwitch(semanticNode);
-		} else {
+		}
+		else {
 			return outlineNode;
 		}
 	}
-	
+
 }

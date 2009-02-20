@@ -7,41 +7,27 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.outline.impl;
 
-import org.eclipse.jface.action.Action;
 import org.eclipse.xtext.ui.common.editor.outline.XtextContentOutlinePage;
-import org.eclipse.xtext.ui.common.internal.Activator;
 import org.eclipse.xtext.ui.core.internal.XtextPluginImages;
 
-public class LexicalSortingAction extends Action {
-
-	private final XtextContentOutlinePage outlinePage;
+public class LexicalSortingAction extends OutlineAction {
 
 	public LexicalSortingAction(XtextContentOutlinePage outlinePage) {
-		super("Sort");
-		setText("Sort");
+		super("Sort", outlinePage);
 		setToolTipText("Sort");
 		setDescription("Sort");
 		setImageDescriptor(XtextPluginImages.DESC_ALPHAB_SORT_CO);
 		setDisabledImageDescriptor(XtextPluginImages.DESC_ALPHAB_SORT_CO_DISABLED);
-
-		this.outlinePage = outlinePage;
-
-		boolean checked = Activator.getDefault().getPreferenceStore().getBoolean("LexicalSortingAction.isChecked"); //$NON-NLS-1$
-		valueChanged(checked, false);
 	}
 
 	@Override
-	public void run() {
-		valueChanged(isChecked(), true);
+	protected String getToggleId() {
+		return "LexicalSortingAction.isChecked";
 	}
-
-	private void valueChanged(final boolean on, boolean store) {
-		setChecked(on);
-
-		outlinePage.setSorted(on);
-
-		if (store) {
-			Activator.getDefault().getPreferenceStore().setValue("LexicalSortingAction.isChecked", on); //$NON-NLS-1$
-		}
+	
+	@Override
+	protected void performAction(boolean checkedState) {
+		getOutlinePage().setSorted(checkedState);
 	}
+	
 }
