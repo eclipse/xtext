@@ -27,12 +27,12 @@ public class LineFilterOutputStreamTest extends TestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 		result = new ByteArrayOutputStream(500);
-		filterStream = new LineFilterOutputStream(result, " * $Id$");
+		filterStream = new LineFilterOutputStream(result, " * $Id" + "$");
 		input = "/**\n" +
 				" * <copyright>\n" +
 				" * </copyright>\n" +
 				" *\n" +
-				" * $Id$\n" +
+				" * $Id" + "$\n" +
 				" */\n" +
 				"package foo";
 	}
@@ -45,14 +45,14 @@ public class LineFilterOutputStreamTest extends TestCase {
 		" * <copyright>\n" +
 		" * </copyright>\n" +
 		" *\n" +
-//		" * $Id$\n" +
+//		" * $Id" + "$\n" +
 		" */\n" +
 		"package foo";
 		assertEquals(expected, res);
 	}
 
 	public void testWrite_02() throws IOException {
-		filterStream.write(" * $Id$".getBytes());
+		filterStream.write((" * $Id" + "$").getBytes());
 		filterStream.flush();
 		String res = new String(result.toByteArray());
 		String expected = "";
@@ -60,7 +60,7 @@ public class LineFilterOutputStreamTest extends TestCase {
 	}
 
 	public void testWrite_03() throws IOException {
-		filterStream.write("\n * $Id$".getBytes());
+		filterStream.write(("\n * $Id" + "$").getBytes());
 		filterStream.flush();
 		String res = new String(result.toByteArray());
 		String expected = "\n";
@@ -68,7 +68,7 @@ public class LineFilterOutputStreamTest extends TestCase {
 	}
 
 	public void testWrite_04() throws IOException {
-		filterStream.write(" * $Id$\n".getBytes());
+		filterStream.write((" * $Id" + "$\n").getBytes());
 		filterStream.flush();
 		String res = new String(result.toByteArray());
 		String expected = "";
@@ -76,7 +76,7 @@ public class LineFilterOutputStreamTest extends TestCase {
 	}
 
 	public void testWrite_05() throws IOException {
-		filterStream.write("*\n * $Id$".getBytes());
+		filterStream.write(("*\n * $Id" + "$").getBytes());
 		filterStream.flush();
 		String res = new String(result.toByteArray());
 		String expected = "*\n";
@@ -84,7 +84,7 @@ public class LineFilterOutputStreamTest extends TestCase {
 	}
 
 	public void testWrite_06() throws IOException {
-		filterStream.write(" * $Id$\n *".getBytes());
+		filterStream.write((" * $Id" + "$\n *").getBytes());
 		filterStream.flush();
 		String res = new String(result.toByteArray());
 		String expected = " *";
@@ -92,7 +92,7 @@ public class LineFilterOutputStreamTest extends TestCase {
 	}
 
 	public void testWrite_07() throws IOException {
-		filterStream.write(" * $Id$\n *\n".getBytes());
+		filterStream.write((" * $Id" + "$\n *\n").getBytes());
 		filterStream.flush();
 		String res = new String(result.toByteArray());
 		String expected = " *\n";
@@ -100,7 +100,7 @@ public class LineFilterOutputStreamTest extends TestCase {
 	}
 
 	public void testWrite_08() throws IOException {
-		filterStream.write(" * $Id$\n */".getBytes());
+		filterStream.write((" * $Id" + "$\n */").getBytes());
 		filterStream.flush();
 		String res = new String(result.toByteArray());
 		String expected = " */";
