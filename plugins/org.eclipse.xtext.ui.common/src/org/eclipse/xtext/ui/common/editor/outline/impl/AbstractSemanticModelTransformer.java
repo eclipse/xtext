@@ -10,11 +10,13 @@ package org.eclipse.xtext.ui.common.editor.outline.impl;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashMap;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
+import org.eclipse.xtext.ui.common.editor.outline.IOutlineFilter;
 import org.eclipse.xtext.ui.common.editor.outline.ISemanticModelTransformer;
 
 import com.google.inject.Inject;
@@ -25,6 +27,7 @@ import com.google.inject.Inject;
 public abstract class AbstractSemanticModelTransformer implements ISemanticModelTransformer {
 
 	private boolean sorted = false;
+	private HashMap<Class, IOutlineFilter> filters;
 
 	public ContentOutlineNode transformSemanticModel(EObject semanticModel) {
 		ContentOutlineNode outlineModel = new ContentOutlineNode();
@@ -73,6 +76,37 @@ public abstract class AbstractSemanticModelTransformer implements ISemanticModel
 		this.sorted = on;
 	}
 
+	public void enableFilter(IOutlineFilter filterSpec) {
+		if (filters == null) {
+			filters = new HashMap<Class, IOutlineFilter>();
+		}
+		filters.put(filterSpec.getClass(), filterSpec);
+	}
+
+	public void disableFilter(IOutlineFilter filterSpec) {
+		if (filters != null) {
+			filters.remove(filterSpec.getClass());
+		}
+	}
+	
+	public boolean isFilterActive(IOutlineFilter filterSpec) {
+		if (filters != null) {
+			return filters.containsKey(filterSpec.getClass());
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public boolean isFilterActive(Class clazz) {
+		if (filters != null) {
+			return filters.containsKey(clazz);
+		}
+		else {
+			return false;
+		}
+	}
+	
 	protected abstract boolean doSortChildren(EObject semanticNode);
 
 	protected abstract ContentOutlineNode createOutlineNode(EObject semanticNode, ContentOutlineNode outlineParentNode);
@@ -80,9 +114,9 @@ public abstract class AbstractSemanticModelTransformer implements ISemanticModel
 	protected abstract boolean consumeSemanticChildNodes(EObject semanticNode);
 
 	protected abstract boolean consumeSemanticNode(EObject semanticNode);
-	
+
 	protected ILabelProvider labelProvider;
-	
+
 	@Inject
 	public AbstractSemanticModelTransformer(ILabelProvider labelProvider) {
 		this.labelProvider = labelProvider;

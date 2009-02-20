@@ -102,4 +102,5 @@ public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransf
 
 		return outlineNode;
 	}
+
 }

@@ -46,16 +46,16 @@ import com.google.inject.Inject;
 
 /**
  * An outline page for Xtext resources.
- *
+ * 
  * This class is not intended to be subclassed. It is designed to be configured
  * with a domain specific combined label and content provider (which is
  * automatically injected to the {@link #provider} field).
- *
+ * 
  * The outline page can synchronize itself with the associated editor.
  * Selections made in the outline will be propagated to the editor at any time,
  * whereas the synchronization from the editor to the outline can be controlled
  * by the user using the "Link with Editor" button.
- *
+ * 
  * @author Peter Friese - Initial contribution and API
  */
 public class XtextContentOutlinePage extends LazyVirtualContentOutlinePage implements ISourceViewerAware {
@@ -125,7 +125,7 @@ public class XtextContentOutlinePage extends LazyVirtualContentOutlinePage imple
 		registerToolbarActions(getSite().getActionBars());
 	}
 
-	private void registerToolbarActions(IActionBars actionBars) {
+	protected void registerToolbarActions(IActionBars actionBars) {
 		IToolBarManager toolBarManager = actionBars.getToolBarManager();
 		if (toolBarManager != null) {
 			toolBarManager.add(new ToggleLinkWithEditorAction(this));
@@ -268,16 +268,37 @@ public class XtextContentOutlinePage extends LazyVirtualContentOutlinePage imple
 		if (provider instanceof ISortableContentProvider) {
 			ISortableContentProvider sortableContentProvider = (ISortableContentProvider) provider;
 			sortableContentProvider.setSorted(sorted);
-			runInSWTThread(new Runnable() {
-				public void run() {
-					TreeViewer tv = getTreeViewer();
-					if (tv != null) {
-						IDocument document = sourceViewer.getDocument();
-						internalSetInput(XtextDocumentUtil.get(document));
-						tv.refresh();
-					}
-				}
-			});
+			refresh();
 		}
 	}
+
+	public void enableFilter(IOutlineFilter filterSpec) {
+		if (provider instanceof IFilterableContentProvider) {
+			IFilterableContentProvider filterableContentProvider = (IFilterableContentProvider) provider;
+			filterableContentProvider.enableFilter(filterSpec);
+			refresh();
+		}
+	}
+
+	public void disableFilter(IOutlineFilter filterSpec) {
+		if (provider instanceof IFilterableContentProvider) {
+			IFilterableContentProvider filterableContentProvider = (IFilterableContentProvider) provider;
+			filterableContentProvider.disableFilter(filterSpec);
+			refresh();
+		}
+	}
+
+	private void refresh() {
+		runInSWTThread(new Runnable() {
+			public void run() {
+				TreeViewer tv = getTreeViewer();
+				if (tv != null) {
+					IDocument document = sourceViewer.getDocument();
+					internalSetInput(XtextDocumentUtil.get(document));
+					tv.refresh();
+				}
+			}
+		});
+	}
+	
 }

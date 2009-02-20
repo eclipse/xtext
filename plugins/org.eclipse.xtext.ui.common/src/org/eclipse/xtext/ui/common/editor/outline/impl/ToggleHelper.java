@@ -8,19 +8,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.outline.impl;
 
+import org.eclipse.xtext.ui.common.internal.Activator;
+
 /**
  * @author Peter Friese - Initial contribution and API
  */
-public final class LinkingHelper extends ToggleHelper {
+public class ToggleHelper {
 
-	public static final String TOGGLE_LINK_WITH_EDITOR_ACTION_IS_CHECKED = "ToggleLinkWithEditorAction.isChecked"; //$NON-NLS-1$
-
-	public static boolean isLinkingEnabled() {
-		return isToggleEnabled(TOGGLE_LINK_WITH_EDITOR_ACTION_IS_CHECKED);
-	}
-
-	public static void setLinkingEnabled(boolean enabled) {
-		setToggleEnabled(TOGGLE_LINK_WITH_EDITOR_ACTION_IS_CHECKED, enabled);
+	public static boolean isToggleEnabled(String toggleId) {
+		boolean isToggleEnabled = Activator.getDefault().getPreferenceStore().getBoolean(toggleId);
+		return isToggleEnabled;
 	}
 	
+	public static void setToggleEnabled(String toggleId, boolean enabled) {
+		Activator.getDefault().getPreferenceStore().setValue(toggleId, enabled);		
+	}
+
 }
