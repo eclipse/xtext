@@ -181,12 +181,14 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 				new GeneratorAdapterFactory.Descriptor() {
 					public GeneratorAdapterFactory createAdapterFactory() {
 						return new GenModelGeneratorAdapterFactory() {
+
 							@Override
 							public Adapter createGenClassAdapter() {
 								return new GenClassGeneratorAdapter(this) {
 									@Override
 									protected OutputStream createOutputStream(URI workspacePath) throws Exception {
-										return new LineFilterOutputStream(getURIConverter().createOutputStream(workspacePath), " * $Id: EcoreGeneratorFragment.java,v 1.4 2009/02/19 23:34:29 szarnekow Exp $");
+										return new LineFilterOutputStream(getURIConverter().createOutputStream(workspacePath),
+												" * $Id" + "$");
 									}
 
 									@Override
@@ -206,7 +208,8 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 
 									@Override
 									protected OutputStream createOutputStream(URI workspacePath) throws Exception {
-										return new LineFilterOutputStream(getURIConverter().createOutputStream(workspacePath), " * $Id: EcoreGeneratorFragment.java,v 1.4 2009/02/19 23:34:29 szarnekow Exp $");
+										return new LineFilterOutputStream(getURIConverter().createOutputStream(workspacePath),
+												" * $Id" + "$");
 									}
 
 								};
