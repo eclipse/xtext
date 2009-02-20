@@ -1,0 +1,21 @@
+DAOs
+- Pattern matching instead of/ as an alternative to equals
+
+Performance Tests
+
+Persistence
+
+Queries
+- make them reusable
+- use iterables for results
+- nesting 
+
+
+IndexFeeder
+- better pattern for element/factory matching
+
+Locking
+
+DONE
+EPackageDescriptor
+- equals und hashCode
