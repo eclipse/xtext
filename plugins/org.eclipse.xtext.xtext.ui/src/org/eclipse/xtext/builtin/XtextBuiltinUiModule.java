@@ -3,9 +3,16 @@
  */
 package org.eclipse.xtext.builtin;
 
+import com.google.inject.AbstractModule;
+
 /**
  * Use this class to register components to be used within the IDE.
  */
-public class XtextBuiltinUiModule extends org.eclipse.xtext.builtin.AbstractXtextBuiltinUiModule {
+public class XtextBuiltinUiModule extends AbstractModule {
+
+	@Override
+	protected void configure() {
+		
+	}
 
 }
