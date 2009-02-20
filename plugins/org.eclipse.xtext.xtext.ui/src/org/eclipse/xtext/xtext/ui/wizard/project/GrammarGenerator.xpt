@@ -46,18 +46,29 @@ public class GenerateGrammar {
 «FILE "runGenerator.mwe" GRAMMAR_GENERATOR_OUTLET -»
 <workflow>
 	<property name="grammarURI" value="classpath:/«this.basePackagePath»/«this.languageNameAbbreviation».xtext"/>
-	<property name="runtimeProject" value="."/>
-	<property name="uiProject" value="../«this.uiProjectName»"/>
 	<property name="file.extensions" value="«this.firstFileExtension»"/>
+	<property name="projectName" value="«this.projectName»"/>
+	
+	<property name="runtimeProject" value="../${projectName}"/>
+	
+	<bean class="org.eclipse.emf.mwe.utils.StandaloneSetup" platformUri="${runtimeProject}/.."/>
+	
+	<component class="org.eclipse.emf.mwe.utils.DirectoryCleaner" directory="${runtimeProject}/src-gen"/>
+	<component class="org.eclipse.emf.mwe.utils.DirectoryCleaner" directory="${runtimeProject}.ui/src-gen"/>
 	
 	<component class="org.eclipse.xtext.generator.Generator">
-		<grammarURI value="${grammarURI}"/>
 		<pathRtProject value="${runtimeProject}"/>
-		<pathUiProject value="${uiProject}"/>
-		<fragments file="org/eclipse/xtext/ui/generator/standardUiAndRuntime.mwe">
-			<file.extensions value="${file.extensions}"/>
-		</fragments>
+		<pathUiProject value="${runtimeProject}.ui"/>
+		<projectNameRt value="${projectName}"/>
+		<projectNameUi value="${projectName}.ui"/>
+		
+		<language uri="${grammarURI}">
+			<fragments file="org/eclipse/xtext/ui/generator/standardUiAndRuntime.mwe">
+				<file.extensions value="${file.extensions}"/>
+			</fragments>
+		</language>
 	</component>
+	
 </workflow>
 «ENDFILE»
 «ENDDEFINE»
