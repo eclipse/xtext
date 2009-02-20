@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: EMF Index Plug-in
+Bundle-SymbolicName: org.eclipse.emf.index
+Bundle-Version: 1.0.0
+Bundle-Vendor: itemis AG
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.4.0";visibility:=reexport
+Export-Package: org.eclipse.emf.index,
+ org.eclipse.emf.index.ecore,
+ org.eclipse.emf.index.impl,
+ org.eclipse.emf.index.impl.memory
