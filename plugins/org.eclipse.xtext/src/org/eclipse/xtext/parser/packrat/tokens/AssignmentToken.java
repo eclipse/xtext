@@ -7,39 +7,37 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.packrat.tokens;
 
-import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.parser.packrat.IParsedTokenVisitor;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class GroupToken extends CompoundParsedToken {
+public class AssignmentToken extends CompoundParsedToken {
 
-	public GroupToken(int offset, Group group) {
-		super(offset, group);
+	public AssignmentToken(int offset, Assignment grammarElement) {
+		super(offset, grammarElement);
 	}
 
 	@Override
 	public void accept(IParsedTokenVisitor visitor) {
-		visitor.visitGroupToken(this);
+		visitor.visitAssignmentToken(this);
 	}
 
 	@Override
-	public Group getGrammarElement() {
-		return (Group) super.getGrammarElement();
+	public Assignment getGrammarElement() {
+		return (Assignment) super.getGrammarElement();
 	}
 
 	public static class End extends CompoundParsedToken.End {
-
 		public End(int offset) {
 			super(offset);
 		}
 
 		@Override
 		public void accept(IParsedTokenVisitor visitor) {
-			visitor.visitGroupTokenEnd(this);
+			visitor.visitAssignmentTokenEnd(this);
 		}
-
 	}
 
 }

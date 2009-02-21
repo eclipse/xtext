@@ -13,20 +13,30 @@ import org.eclipse.xtext.parser.packrat.IParsedTokenVisitor;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class AlternativesToken extends ParsedToken {
+public class AlternativesToken extends CompoundParsedToken {
 
 	public AlternativesToken(int offset, Alternatives alternatives) {
-		super(offset, 0, alternatives);
+		super(offset, alternatives);
 	}
 
 	@Override
 	public void accept(IParsedTokenVisitor visitor) {
-		// nothing to do so far
+		visitor.visitAlternativesToken(this);
 	}
 
-	public static class End extends AbstractParsedToken.End {
+	@Override
+	public Alternatives getGrammarElement() {
+		return (Alternatives) super.getGrammarElement();
+	}
+
+	public static class End extends CompoundParsedToken.End {
 		public End(int offset) {
 			super(offset);
+		}
+
+		@Override
+		public void accept(IParsedTokenVisitor visitor) {
+			visitor.visitAlternativesTokenEnd(this);
 		}
 	}
 

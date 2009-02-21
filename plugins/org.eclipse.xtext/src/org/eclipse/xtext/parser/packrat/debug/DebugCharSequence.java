@@ -14,8 +14,8 @@ import org.apache.log4j.Logger;
  */
 public class DebugCharSequence implements CharSequence {
 
-	static final Logger log = Logger.getLogger(DebugCharSequence.class); 
-	
+	private static final Logger log = Logger.getLogger(DebugCharSequence.class);
+
 	private final CharSequence delegate;
 
 	public DebugCharSequence(CharSequence delegate) {

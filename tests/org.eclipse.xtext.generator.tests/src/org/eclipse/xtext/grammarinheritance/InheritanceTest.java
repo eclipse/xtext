@@ -19,7 +19,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.AbstractRule;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage;

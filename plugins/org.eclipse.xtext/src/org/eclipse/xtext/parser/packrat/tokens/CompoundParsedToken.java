@@ -7,29 +7,29 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.packrat.tokens;
 
-import org.eclipse.xtext.Group;
+import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.parser.packrat.IParsedTokenVisitor;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class GroupToken extends CompoundParsedToken {
+public class CompoundParsedToken extends ParsedToken {
 
-	public GroupToken(int offset, Group group) {
-		super(offset, group);
+	public CompoundParsedToken(int offset, AbstractElement grammarElement) {
+		super(offset, 0, grammarElement);
 	}
 
 	@Override
 	public void accept(IParsedTokenVisitor visitor) {
-		visitor.visitGroupToken(this);
+		visitor.visitCompoundParsedToken(this);
 	}
 
 	@Override
-	public Group getGrammarElement() {
-		return (Group) super.getGrammarElement();
+	public AbstractElement getGrammarElement() {
+		return (AbstractElement) super.getGrammarElement();
 	}
 
-	public static class End extends CompoundParsedToken.End {
+	public static class End extends AbstractParsedToken.End {
 
 		public End(int offset) {
 			super(offset);
@@ -37,9 +37,9 @@ public class GroupToken extends CompoundParsedToken {
 
 		@Override
 		public void accept(IParsedTokenVisitor visitor) {
-			visitor.visitGroupTokenEnd(this);
+			visitor.visitCompoundParsedTokenEnd(this);
 		}
-
 	}
+
 
 }
