@@ -71,7 +71,15 @@ public final class TerminalRulesTestLanguageModelConsumer extends NonTerminalCon
 	}
 
 	protected int consumeAlternatives$1(int entryPoint) throws Exception {
-		AlternativesResult result = createAlternativesResult(getRule().eleAlternatives());
+		int result = doConsumeAlternatives$1(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAlternatives$1(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAlternatives$1(int entryPoint) throws Exception {
+		final AlternativesResult result = createAlternativesResult(getRule().eleAlternatives());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -115,7 +123,16 @@ public final class TerminalRulesTestLanguageModelConsumer extends NonTerminalCon
 	}
 
 	protected int consumeAssignment$7(int entryPoint) throws Exception {
-		return consumeRuleCall$8(entryPoint);
+		int result = doConsumeAssignment$7(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$7(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$7(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele000000AssignmentIdValue());
+		return result.getResult(consumeRuleCall$8(entryPoint));
 	}
 
 	protected int consumeRuleCall$8(int entryPoint) throws Exception {
@@ -123,7 +140,16 @@ public final class TerminalRulesTestLanguageModelConsumer extends NonTerminalCon
 	}
 
 	protected int consumeAssignment$9(int entryPoint) throws Exception {
-		return consumeRuleCall$10(entryPoint);
+		int result = doConsumeAssignment$9(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$9(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$9(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele000001AssignmentIntValue());
+		return result.getResult(consumeRuleCall$10(entryPoint));
 	}
 
 	protected int consumeRuleCall$10(int entryPoint) throws Exception {
@@ -131,7 +157,16 @@ public final class TerminalRulesTestLanguageModelConsumer extends NonTerminalCon
 	}
 
 	protected int consumeAssignment$11(int entryPoint) throws Exception {
-		return consumeRuleCall$12(entryPoint);
+		int result = doConsumeAssignment$11(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$11(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$11(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele00001AssignmentStringValue());
+		return result.getResult(consumeRuleCall$12(entryPoint));
 	}
 
 	protected int consumeRuleCall$12(int entryPoint) throws Exception {
@@ -139,7 +174,16 @@ public final class TerminalRulesTestLanguageModelConsumer extends NonTerminalCon
 	}
 
 	protected int consumeAssignment$13(int entryPoint) throws Exception {
-		return consumeRuleCall$14(entryPoint);
+		int result = doConsumeAssignment$13(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$13(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$13(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele0001AssignmentMlCommentValue());
+		return result.getResult(consumeRuleCall$14(entryPoint));
 	}
 
 	protected int consumeRuleCall$14(int entryPoint) throws Exception {
@@ -147,7 +191,16 @@ public final class TerminalRulesTestLanguageModelConsumer extends NonTerminalCon
 	}
 
 	protected int consumeAssignment$15(int entryPoint) throws Exception {
-		return consumeRuleCall$16(entryPoint);
+		int result = doConsumeAssignment$15(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$15(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$15(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele001AssignmentSlCommentValue());
+		return result.getResult(consumeRuleCall$16(entryPoint));
 	}
 
 	protected int consumeRuleCall$16(int entryPoint) throws Exception {
@@ -155,7 +208,16 @@ public final class TerminalRulesTestLanguageModelConsumer extends NonTerminalCon
 	}
 
 	protected int consumeAssignment$17(int entryPoint) throws Exception {
-		return consumeRuleCall$18(entryPoint);
+		int result = doConsumeAssignment$17(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$17(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$17(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele01AssignmentWsValue());
+		return result.getResult(consumeRuleCall$18(entryPoint));
 	}
 
 	protected int consumeRuleCall$18(int entryPoint) throws Exception {
@@ -163,7 +225,16 @@ public final class TerminalRulesTestLanguageModelConsumer extends NonTerminalCon
 	}
 
 	protected int consumeAssignment$19(int entryPoint) throws Exception {
-		return consumeRuleCall$20(entryPoint);
+		int result = doConsumeAssignment$19(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$19(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$19(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele1AssignmentAnyValue());
+		return result.getResult(consumeRuleCall$20(entryPoint));
 	}
 
 	protected int consumeRuleCall$20(int entryPoint) throws Exception {

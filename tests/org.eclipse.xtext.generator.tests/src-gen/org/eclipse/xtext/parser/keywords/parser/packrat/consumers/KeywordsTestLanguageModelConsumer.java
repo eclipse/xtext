@@ -48,7 +48,15 @@ public final class KeywordsTestLanguageModelConsumer extends NonTerminalConsumer
 	}
 
 	protected int consumeAlternatives$1(int entryPoint) throws Exception {
-		AlternativesResult result = createAlternativesResult(getRule().eleAlternatives());
+		int result = doConsumeAlternatives$1(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAlternatives$1(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAlternatives$1(int entryPoint) throws Exception {
+		final AlternativesResult result = createAlternativesResult(getRule().eleAlternatives());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -77,7 +85,16 @@ public final class KeywordsTestLanguageModelConsumer extends NonTerminalConsumer
 	}
 
 	protected int consumeAssignment$4(int entryPoint) throws Exception {
-		return consumeKeyword$5(entryPoint);
+		int result = doConsumeAssignment$4(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$4(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$4(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele000AssignmentFirst());
+		return result.getResult(consumeKeyword$5(entryPoint));
 	}
 
 	protected int consumeKeyword$5(int entryPoint) throws Exception {
@@ -85,7 +102,16 @@ public final class KeywordsTestLanguageModelConsumer extends NonTerminalConsumer
 	}
 
 	protected int consumeAssignment$6(int entryPoint) throws Exception {
-		return consumeKeyword$7(entryPoint);
+		int result = doConsumeAssignment$6(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$6(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$6(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele001AssignmentSecond());
+		return result.getResult(consumeKeyword$7(entryPoint));
 	}
 
 	protected int consumeKeyword$7(int entryPoint) throws Exception {
@@ -93,7 +119,16 @@ public final class KeywordsTestLanguageModelConsumer extends NonTerminalConsumer
 	}
 
 	protected int consumeAssignment$8(int entryPoint) throws Exception {
-		return consumeKeyword$9(entryPoint);
+		int result = doConsumeAssignment$8(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$8(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$8(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele01AssignmentThird());
+		return result.getResult(consumeKeyword$9(entryPoint));
 	}
 
 	protected int consumeKeyword$9(int entryPoint) throws Exception {
@@ -101,7 +136,16 @@ public final class KeywordsTestLanguageModelConsumer extends NonTerminalConsumer
 	}
 
 	protected int consumeAssignment$10(int entryPoint) throws Exception {
-		return consumeKeyword$11(entryPoint);
+		int result = doConsumeAssignment$10(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$10(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$10(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele1AssignmentForth());
+		return result.getResult(consumeKeyword$11(entryPoint));
 	}
 
 	protected int consumeKeyword$11(int entryPoint) throws Exception {

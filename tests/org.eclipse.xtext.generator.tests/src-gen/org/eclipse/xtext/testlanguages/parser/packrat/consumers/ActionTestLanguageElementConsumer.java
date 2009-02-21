@@ -38,7 +38,15 @@ public final class ActionTestLanguageElementConsumer extends NonTerminalConsumer
 	}
 
 	protected int consumeGroup$1(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().eleGroup());
+		int result = doConsumeGroup$1(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeGroup$1(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeGroup$1(int entryPoint) throws Exception {
+		final GroupResult result = createGroupResult(getRule().eleGroup());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -68,6 +76,14 @@ public final class ActionTestLanguageElementConsumer extends NonTerminalConsumer
 	}
 
 	protected int consumeRuleCall$2(int entryPoint) throws Exception {
+		int result = doConsumeRuleCall$2(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeRuleCall$2(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeRuleCall$2(int entryPoint) throws Exception {
 		return consumeNonTerminal(itemConsumer, null, false, false, false, getRule().ele0ParserRuleCallItem());
 	}
 	protected int consumeAction$4(int entryPoint) {
@@ -76,7 +92,16 @@ public final class ActionTestLanguageElementConsumer extends NonTerminalConsumer
 	}
 
 	protected int consumeAssignment$6(int entryPoint) throws Exception {
-		return consumeRuleCall$7(entryPoint);
+		int result = doConsumeAssignment$6(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$6(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$6(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele11AssignmentItems());
+		return result.getResult(consumeRuleCall$7(entryPoint));
 	}
 
 	protected int consumeRuleCall$7(int entryPoint) throws Exception {

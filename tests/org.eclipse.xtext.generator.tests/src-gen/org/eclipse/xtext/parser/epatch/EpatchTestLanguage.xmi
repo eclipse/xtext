@@ -582,47 +582,47 @@
               </groups>
             </groups>
             <groups xsi:type="xtext:Group">
-              <abstractTokens xsi:type="xtext:Assignment" feature="refObject" operator="=">
+              <abstractTokens xsi:type="xtext:Assignment" feature="import" operator="=">
                 <terminal xsi:type="xtext:CrossReference" rule="/1/@rules.0">
                   <type metamodel="/0/@metamodelDeclarations.0">
-                    <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/tmf/xtext/EpatchTestLanguage#//NamedObject"/>
+                    <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/tmf/xtext/EpatchTestLanguage#//Import"/>
                   </type>
                 </terminal>
               </abstractTokens>
-              <abstractTokens xsi:type="xtext:Group" cardinality="?">
-                <abstractTokens xsi:type="xtext:Group">
-                  <abstractTokens xsi:type="xtext:Keyword" value="."/>
-                  <abstractTokens xsi:type="xtext:Assignment" feature="refFeature" operator="=">
-                    <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-                  </abstractTokens>
-                </abstractTokens>
-                <abstractTokens xsi:type="xtext:Group" cardinality="?">
-                  <abstractTokens xsi:type="xtext:Group">
-                    <abstractTokens xsi:type="xtext:Keyword" value="["/>
-                    <abstractTokens xsi:type="xtext:Assignment" feature="refIndex" operator="=">
-                      <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
-                    </abstractTokens>
-                  </abstractTokens>
-                  <abstractTokens xsi:type="xtext:Keyword" value="]"/>
-                </abstractTokens>
+              <abstractTokens xsi:type="xtext:Assignment" feature="impFrag" operator="=">
+                <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.21"/>
               </abstractTokens>
             </groups>
           </groups>
-          <groups xsi:type="xtext:Assignment" feature="newObject" operator="=">
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.18"/>
+          <groups xsi:type="xtext:Group">
+            <abstractTokens xsi:type="xtext:Assignment" feature="refObject" operator="=">
+              <terminal xsi:type="xtext:CrossReference" rule="/1/@rules.0">
+                <type metamodel="/0/@metamodelDeclarations.0">
+                  <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/tmf/xtext/EpatchTestLanguage#//NamedObject"/>
+                </type>
+              </terminal>
+            </abstractTokens>
+            <abstractTokens xsi:type="xtext:Group" cardinality="?">
+              <abstractTokens xsi:type="xtext:Group">
+                <abstractTokens xsi:type="xtext:Keyword" value="."/>
+                <abstractTokens xsi:type="xtext:Assignment" feature="refFeature" operator="=">
+                  <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+                </abstractTokens>
+              </abstractTokens>
+              <abstractTokens xsi:type="xtext:Group" cardinality="?">
+                <abstractTokens xsi:type="xtext:Group">
+                  <abstractTokens xsi:type="xtext:Keyword" value="["/>
+                  <abstractTokens xsi:type="xtext:Assignment" feature="refIndex" operator="=">
+                    <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
+                  </abstractTokens>
+                </abstractTokens>
+                <abstractTokens xsi:type="xtext:Keyword" value="]"/>
+              </abstractTokens>
+            </abstractTokens>
           </groups>
         </groups>
-        <groups xsi:type="xtext:Group">
-          <abstractTokens xsi:type="xtext:Assignment" feature="import" operator="=">
-            <terminal xsi:type="xtext:CrossReference" rule="/1/@rules.0">
-              <type metamodel="/0/@metamodelDeclarations.0">
-                <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/tmf/xtext/EpatchTestLanguage#//Import"/>
-              </type>
-            </terminal>
-          </abstractTokens>
-          <abstractTokens xsi:type="xtext:Assignment" feature="impFrag" operator="=">
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.21"/>
-          </abstractTokens>
+        <groups xsi:type="xtext:Assignment" feature="newObject" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.18"/>
         </groups>
       </alternatives>
     </rules>

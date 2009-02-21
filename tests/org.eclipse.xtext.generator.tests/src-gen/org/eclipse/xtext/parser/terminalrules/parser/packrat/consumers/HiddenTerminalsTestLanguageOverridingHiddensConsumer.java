@@ -53,7 +53,15 @@ public final class HiddenTerminalsTestLanguageOverridingHiddensConsumer extends 
 	}
 
 	protected int consumeGroup$1(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().eleGroup());
+		int result = doConsumeGroup$1(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeGroup$1(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeGroup$1(int entryPoint) throws Exception {
+		final GroupResult result = createGroupResult(getRule().eleGroup());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -104,19 +112,52 @@ public final class HiddenTerminalsTestLanguageOverridingHiddensConsumer extends 
 	}
 
 	protected int consumeKeyword$6(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$6(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$6(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$6(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele00000KeywordOverriding(), null, false, false, getKeyword$6$Delimiter());
 	}
 
 	protected int consumeKeyword$7(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$7(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$7(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$7(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele00001KeywordHiddens(), null, false, false, getKeyword$7$Delimiter());
 	}
 
 	protected int consumeKeyword$8(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$8(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$8(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$8(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele0001KeywordLeftParenthesis(), null, false, false, getKeyword$8$Delimiter());
 	}
 
 	protected int consumeAssignment$9(int entryPoint) throws Exception {
-		return consumeRuleCall$10(entryPoint);
+		int result = doConsumeAssignment$9(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$9(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$9(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele001AssignmentCalled());
+		return result.getResult(consumeRuleCall$10(entryPoint));
 	}
 
 	protected int consumeRuleCall$10(int entryPoint) throws Exception {
@@ -124,11 +165,28 @@ public final class HiddenTerminalsTestLanguageOverridingHiddensConsumer extends 
 	}
 
 	protected int consumeKeyword$11(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$11(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$11(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$11(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele01KeywordRightParenthesis(), null, false, false, getKeyword$11$Delimiter());
 	}
 
 	protected int consumeAssignment$12(int entryPoint) throws Exception {
-		return consumeKeyword$13(entryPoint);
+		int result = doConsumeAssignment$12(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$12(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$12(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele1AssignmentValid());
+		return result.getResult(consumeKeyword$13(entryPoint));
 	}
 
 	protected int consumeKeyword$13(int entryPoint) throws Exception {

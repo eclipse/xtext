@@ -63,7 +63,15 @@ public final class ComplexReconstrTestLanguageTrickyDConsumer extends NonTermina
 	}
 
 	protected int consumeGroup$1(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().eleGroup());
+		int result = doConsumeGroup$1(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeGroup$1(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeGroup$1(int entryPoint) throws Exception {
+		final GroupResult result = createGroupResult(getRule().eleGroup());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -100,6 +108,14 @@ public final class ComplexReconstrTestLanguageTrickyDConsumer extends NonTermina
 	}
 
 	protected int consumeKeyword$4(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$4(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$4(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$4(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele000KeywordTD(), null, false, false, getKeyword$4$Delimiter());
 	}
 
@@ -115,7 +131,7 @@ public final class ComplexReconstrTestLanguageTrickyDConsumer extends NonTermina
 	}
 
 	protected int doConsumeGroup$5(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().ele001Group());
+		final GroupResult result = createGroupResult(getRule().ele001Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -145,7 +161,16 @@ public final class ComplexReconstrTestLanguageTrickyDConsumer extends NonTermina
 	}
 
 	protected int consumeAssignment$7(int entryPoint) throws Exception {
-		return consumeRuleCall$8(entryPoint);
+		int result = doConsumeAssignment$7(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$7(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$7(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele00100AssignmentName());
+		return result.getResult(consumeRuleCall$8(entryPoint));
 	}
 
 	protected int consumeRuleCall$8(int entryPoint) throws Exception {
@@ -153,7 +178,16 @@ public final class ComplexReconstrTestLanguageTrickyDConsumer extends NonTermina
 	}
 
 	protected int consumeAssignment$9(int entryPoint) throws Exception {
-		return consumeRuleCall$10(entryPoint);
+		int result = doConsumeAssignment$9(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$9(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$9(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele00101AssignmentFoo());
+		return result.getResult(consumeRuleCall$10(entryPoint));
 	}
 
 	protected int consumeRuleCall$10(int entryPoint) throws Exception {
@@ -161,7 +195,16 @@ public final class ComplexReconstrTestLanguageTrickyDConsumer extends NonTermina
 	}
 
 	protected int consumeAssignment$11(int entryPoint) throws Exception {
-		return consumeRuleCall$12(entryPoint);
+		int result = doConsumeAssignment$11(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$11(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$11(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele0011AssignmentType());
+		return result.getResult(consumeRuleCall$12(entryPoint));
 	}
 
 	protected int consumeRuleCall$12(int entryPoint) throws Exception {
@@ -180,7 +223,7 @@ public final class ComplexReconstrTestLanguageTrickyDConsumer extends NonTermina
 	}
 
 	protected int doConsumeGroup$13(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().ele01Group());
+		final GroupResult result = createGroupResult(getRule().ele01Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -203,7 +246,16 @@ public final class ComplexReconstrTestLanguageTrickyDConsumer extends NonTermina
 	}
 
 	protected int consumeAssignment$14(int entryPoint) throws Exception {
-		return consumeRuleCall$15(entryPoint);
+		int result = doConsumeAssignment$14(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$14(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$14(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele010AssignmentName());
+		return result.getResult(consumeRuleCall$15(entryPoint));
 	}
 
 	protected int consumeRuleCall$15(int entryPoint) throws Exception {
@@ -211,7 +263,16 @@ public final class ComplexReconstrTestLanguageTrickyDConsumer extends NonTermina
 	}
 
 	protected int consumeAssignment$16(int entryPoint) throws Exception {
-		return consumeRuleCall$17(entryPoint);
+		int result = doConsumeAssignment$16(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$16(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$16(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele011AssignmentType());
+		return result.getResult(consumeRuleCall$17(entryPoint));
 	}
 
 	protected int consumeRuleCall$17(int entryPoint) throws Exception {
@@ -229,7 +290,8 @@ public final class ComplexReconstrTestLanguageTrickyDConsumer extends NonTermina
 	}
 
 	protected int doConsumeAssignment$18(int entryPoint) throws Exception {
-		return consumeRuleCall$19(entryPoint);
+		final AssignmentResult result = createAssignmentResult(getRule().ele1AssignmentType());
+		return result.getResult(consumeRuleCall$19(entryPoint));
 	}
 
 	protected int consumeRuleCall$19(int entryPoint) throws Exception {

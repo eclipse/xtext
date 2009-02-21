@@ -48,7 +48,15 @@ public final class ReferenceGrammarTestLanguageFarbeConsumer extends NonTerminal
 	}
 
 	protected int consumeAlternatives$1(int entryPoint) throws Exception {
-		AlternativesResult result = createAlternativesResult(getRule().eleAlternatives());
+		int result = doConsumeAlternatives$1(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAlternatives$1(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAlternatives$1(int entryPoint) throws Exception {
+		final AlternativesResult result = createAlternativesResult(getRule().eleAlternatives());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -77,18 +85,50 @@ public final class ReferenceGrammarTestLanguageFarbeConsumer extends NonTerminal
 	}
 
 	protected int consumeKeyword$4(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$4(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$4(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$4(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele000KeywordROT(), null, false, false, getKeyword$4$Delimiter());
 	}
 
 	protected int consumeKeyword$5(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$5(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$5(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$5(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele001KeywordBLAU(), null, false, false, getKeyword$5$Delimiter());
 	}
 
 	protected int consumeKeyword$6(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$6(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$6(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$6(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele01KeywordGELB(), null, false, false, getKeyword$6$Delimiter());
 	}
 
 	protected int consumeKeyword$7(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$7(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$7(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$7(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele1KeywordGRÜN(), null, false, false, getKeyword$7$Delimiter());
 	}
 

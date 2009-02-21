@@ -38,6 +38,14 @@ public final class EcoreDslMapEntrySuperConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeRuleCall$1(int entryPoint) throws Exception {
+		int result = doConsumeRuleCall$1(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeRuleCall$1(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeRuleCall$1(int entryPoint) throws Exception {
 		return consumeNonTerminal(mapEntryConsumer, null, false, false, false, getRule().eleParserRuleCallMapEntry());
 	}
 

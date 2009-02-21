@@ -41,7 +41,16 @@ public final class PartialParserTestLanguageNamedConsumer extends NonTerminalCon
 	}
 
 	protected int consumeAssignment$1(int entryPoint) throws Exception {
-		return consumeRuleCall$2(entryPoint);
+		int result = doConsumeAssignment$1(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$1(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$1(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().eleAssignmentName());
+		return result.getResult(consumeRuleCall$2(entryPoint));
 	}
 
 	protected int consumeRuleCall$2(int entryPoint) throws Exception {

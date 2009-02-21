@@ -50,7 +50,15 @@ public final class DatatypeRulesTestLanguageVectorConsumer extends NonTerminalCo
 	}
 
 	protected int consumeGroup$1(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().eleGroup());
+		int result = doConsumeGroup$1(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeGroup$1(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeGroup$1(int entryPoint) throws Exception {
+		final GroupResult result = createGroupResult(getRule().eleGroup());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -87,18 +95,50 @@ public final class DatatypeRulesTestLanguageVectorConsumer extends NonTerminalCo
 	}
 
 	protected int consumeKeyword$4(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$4(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$4(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$4(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele000KeywordLeftParenthesis(), null, false, false, getKeyword$4$Delimiter());
 	}
 
 	protected int consumeRuleCall$5(int entryPoint) throws Exception {
+		int result = doConsumeRuleCall$5(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeRuleCall$5(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeRuleCall$5(int entryPoint) throws Exception {
 		return consumeTerminal(intConsumer, null, false, false, getRule().ele001LexerRuleCallINT(), getRuleCall$5$Delimiter());
 	}
 
 	protected int consumeRuleCall$6(int entryPoint) throws Exception {
+		int result = doConsumeRuleCall$6(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeRuleCall$6(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeRuleCall$6(int entryPoint) throws Exception {
 		return consumeTerminal(intConsumer, null, false, false, getRule().ele01LexerRuleCallINT(), getRuleCall$6$Delimiter());
 	}
 
 	protected int consumeKeyword$7(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$7(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$7(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$7(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele1KeywordRightParenthesis(), null, false, false, getKeyword$7$Delimiter());
 	}
 

@@ -41,7 +41,16 @@ public final class ContentAssistTestLanguageAbstractRuleCallConsumer extends Non
 	}
 
 	protected int consumeAssignment$1(int entryPoint) throws Exception {
-		return consumeCrossReference$2(entryPoint);
+		int result = doConsumeAssignment$1(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$1(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$1(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().eleAssignmentRule());
+		return result.getResult(consumeCrossReference$2(entryPoint));
 	}
 
 	protected int consumeCrossReference$2(int entryPoint) throws Exception {

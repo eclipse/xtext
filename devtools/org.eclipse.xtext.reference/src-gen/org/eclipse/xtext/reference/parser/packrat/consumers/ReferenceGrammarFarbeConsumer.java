@@ -48,7 +48,16 @@ public final class ReferenceGrammarFarbeConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$1(int entryPoint) throws Exception {
-		return consumeAlternatives$2(entryPoint);
+		int result = doConsumeAssignment$1(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$1(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$1(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().eleAssignmentWert());
+		return result.getResult(consumeAlternatives$2(entryPoint));
 	}
 	protected int consumeAlternatives$2(int entryPoint) throws Exception {
 		AlternativesResult result = createAlternativesResult();

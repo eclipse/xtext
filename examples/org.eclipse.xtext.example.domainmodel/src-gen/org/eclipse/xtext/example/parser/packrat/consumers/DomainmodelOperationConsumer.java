@@ -60,7 +60,15 @@ public final class DomainmodelOperationConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeGroup$1(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().eleGroup());
+		int result = doConsumeGroup$1(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeGroup$1(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeGroup$1(int entryPoint) throws Exception {
+		final GroupResult result = createGroupResult(getRule().eleGroup());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -118,11 +126,28 @@ public final class DomainmodelOperationConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeKeyword$7(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$7(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$7(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$7(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele000000KeywordOp(), null, false, false, getKeyword$7$Delimiter());
 	}
 
 	protected int consumeAssignment$8(int entryPoint) throws Exception {
-		return consumeRuleCall$9(entryPoint);
+		int result = doConsumeAssignment$8(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$8(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$8(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele000001AssignmentName());
+		return result.getResult(consumeRuleCall$9(entryPoint));
 	}
 
 	protected int consumeRuleCall$9(int entryPoint) throws Exception {
@@ -130,6 +155,14 @@ public final class DomainmodelOperationConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeKeyword$10(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$10(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$10(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$10(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele00001KeywordLeftParenthesis(), null, false, false, getKeyword$10$Delimiter());
 	}
 
@@ -145,7 +178,7 @@ public final class DomainmodelOperationConsumer extends NonTerminalConsumer {
 	}
 
 	protected int doConsumeGroup$11(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().ele0001Group());
+		final GroupResult result = createGroupResult(getRule().ele0001Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -168,7 +201,16 @@ public final class DomainmodelOperationConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$12(int entryPoint) throws Exception {
-		return consumeRuleCall$13(entryPoint);
+		int result = doConsumeAssignment$12(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$12(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$12(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele00010AssignmentParams());
+		return result.getResult(consumeRuleCall$13(entryPoint));
 	}
 
 	protected int consumeRuleCall$13(int entryPoint) throws Exception {
@@ -186,7 +228,7 @@ public final class DomainmodelOperationConsumer extends NonTerminalConsumer {
 	}
 
 	protected int doConsumeGroup$14(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().ele00011Group());
+		final GroupResult result = createGroupResult(getRule().ele00011Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -209,11 +251,28 @@ public final class DomainmodelOperationConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeKeyword$15(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$15(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$15(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$15(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele000110KeywordComma(), null, false, false, getKeyword$15$Delimiter());
 	}
 
 	protected int consumeAssignment$16(int entryPoint) throws Exception {
-		return consumeRuleCall$17(entryPoint);
+		int result = doConsumeAssignment$16(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$16(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$16(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele000111AssignmentParams());
+		return result.getResult(consumeRuleCall$17(entryPoint));
 	}
 
 	protected int consumeRuleCall$17(int entryPoint) throws Exception {
@@ -221,15 +280,40 @@ public final class DomainmodelOperationConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeKeyword$18(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$18(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$18(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$18(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele001KeywordRightParenthesis(), null, false, false, getKeyword$18$Delimiter());
 	}
 
 	protected int consumeKeyword$19(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$19(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$19(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$19(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele01KeywordColon(), null, false, false, getKeyword$19$Delimiter());
 	}
 
 	protected int consumeAssignment$20(int entryPoint) throws Exception {
-		return consumeRuleCall$21(entryPoint);
+		int result = doConsumeAssignment$20(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$20(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$20(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele1AssignmentType());
+		return result.getResult(consumeRuleCall$21(entryPoint));
 	}
 
 	protected int consumeRuleCall$21(int entryPoint) throws Exception {

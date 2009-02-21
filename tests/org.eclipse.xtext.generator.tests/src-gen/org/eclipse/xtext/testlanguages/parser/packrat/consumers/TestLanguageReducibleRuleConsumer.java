@@ -41,7 +41,15 @@ public final class TestLanguageReducibleRuleConsumer extends NonTerminalConsumer
 	}
 
 	protected int consumeGroup$1(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().eleGroup());
+		int result = doConsumeGroup$1(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeGroup$1(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeGroup$1(int entryPoint) throws Exception {
+		final GroupResult result = createGroupResult(getRule().eleGroup());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -71,10 +79,26 @@ public final class TestLanguageReducibleRuleConsumer extends NonTerminalConsumer
 	}
 
 	protected int consumeKeyword$3(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$3(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$3(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$3(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele00KeywordReducible(), null, false, false, getKeyword$3$Delimiter());
 	}
 
 	protected int consumeRuleCall$4(int entryPoint) throws Exception {
+		int result = doConsumeRuleCall$4(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeRuleCall$4(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeRuleCall$4(int entryPoint) throws Exception {
 		return consumeNonTerminal(terminalRuleConsumer, null, false, false, false, getRule().ele01ParserRuleCallTerminalRule());
 	}
 
@@ -90,7 +114,7 @@ public final class TestLanguageReducibleRuleConsumer extends NonTerminalConsumer
 	}
 
 	protected int doConsumeGroup$5(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().ele1Group());
+		final GroupResult result = createGroupResult(getRule().ele1Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -117,7 +141,16 @@ public final class TestLanguageReducibleRuleConsumer extends NonTerminalConsumer
 	}
 
 	protected int consumeAssignment$8(int entryPoint) throws Exception {
-		return consumeRuleCall$9(entryPoint);
+		int result = doConsumeAssignment$8(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$8(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$8(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele11AssignmentActionFeature());
+		return result.getResult(consumeRuleCall$9(entryPoint));
 	}
 
 	protected int consumeRuleCall$9(int entryPoint) throws Exception {

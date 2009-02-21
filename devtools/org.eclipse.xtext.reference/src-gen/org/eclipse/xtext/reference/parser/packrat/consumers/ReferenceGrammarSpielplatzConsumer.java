@@ -76,7 +76,7 @@ public final class ReferenceGrammarSpielplatzConsumer extends NonTerminalConsume
 	}
 
 	protected int doConsumeGroup$1(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().eleGroup());
+		final GroupResult result = createGroupResult(getRule().eleGroup());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -127,11 +127,28 @@ public final class ReferenceGrammarSpielplatzConsumer extends NonTerminalConsume
 	}
 
 	protected int consumeKeyword$6(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$6(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$6(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$6(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele00000KeywordSpielplatz(), null, false, false, getKeyword$6$Delimiter());
 	}
 
 	protected int consumeAssignment$7(int entryPoint) throws Exception {
-		return consumeRuleCall$8(entryPoint);
+		int result = doConsumeAssignment$7(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$7(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$7(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele00001AssignmentGroesse());
+		return result.getResult(consumeRuleCall$8(entryPoint));
 	}
 
 	protected int consumeRuleCall$8(int entryPoint) throws Exception {
@@ -150,7 +167,8 @@ public final class ReferenceGrammarSpielplatzConsumer extends NonTerminalConsume
 	}
 
 	protected int doConsumeAssignment$9(int entryPoint) throws Exception {
-		return consumeRuleCall$10(entryPoint);
+		final AssignmentResult result = createAssignmentResult(getRule().ele0001AssignmentBeschreibung());
+		return result.getResult(consumeRuleCall$10(entryPoint));
 	}
 
 	protected int consumeRuleCall$10(int entryPoint) throws Exception {
@@ -158,6 +176,14 @@ public final class ReferenceGrammarSpielplatzConsumer extends NonTerminalConsume
 	}
 
 	protected int consumeKeyword$11(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$11(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$11(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$11(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele001KeywordLeftCurlyBracket(), null, false, false, getKeyword$11$Delimiter());
 	}
 
@@ -172,7 +198,7 @@ public final class ReferenceGrammarSpielplatzConsumer extends NonTerminalConsume
 	}
 
 	protected int doConsumeAlternatives$12(int entryPoint) throws Exception {
-		AlternativesResult result = createAlternativesResult(getRule().ele01Alternatives());
+		final AlternativesResult result = createAlternativesResult(getRule().ele01Alternatives());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -206,7 +232,16 @@ public final class ReferenceGrammarSpielplatzConsumer extends NonTerminalConsume
 	}
 
 	protected int consumeAssignment$16(int entryPoint) throws Exception {
-		return consumeRuleCall$17(entryPoint);
+		int result = doConsumeAssignment$16(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$16(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$16(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele010000AssignmentKinder());
+		return result.getResult(consumeRuleCall$17(entryPoint));
 	}
 
 	protected int consumeRuleCall$17(int entryPoint) throws Exception {
@@ -214,7 +249,16 @@ public final class ReferenceGrammarSpielplatzConsumer extends NonTerminalConsume
 	}
 
 	protected int consumeAssignment$18(int entryPoint) throws Exception {
-		return consumeRuleCall$19(entryPoint);
+		int result = doConsumeAssignment$18(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$18(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$18(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele010001AssignmentErzieher());
+		return result.getResult(consumeRuleCall$19(entryPoint));
 	}
 
 	protected int consumeRuleCall$19(int entryPoint) throws Exception {
@@ -222,7 +266,16 @@ public final class ReferenceGrammarSpielplatzConsumer extends NonTerminalConsume
 	}
 
 	protected int consumeAssignment$20(int entryPoint) throws Exception {
-		return consumeRuleCall$21(entryPoint);
+		int result = doConsumeAssignment$20(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$20(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$20(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele01001AssignmentSpielzeuge());
+		return result.getResult(consumeRuleCall$21(entryPoint));
 	}
 
 	protected int consumeRuleCall$21(int entryPoint) throws Exception {
@@ -230,7 +283,16 @@ public final class ReferenceGrammarSpielplatzConsumer extends NonTerminalConsume
 	}
 
 	protected int consumeAssignment$22(int entryPoint) throws Exception {
-		return consumeRuleCall$23(entryPoint);
+		int result = doConsumeAssignment$22(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$22(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$22(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele0101AssignmentFamilie());
+		return result.getResult(consumeRuleCall$23(entryPoint));
 	}
 
 	protected int consumeRuleCall$23(int entryPoint) throws Exception {
@@ -238,7 +300,16 @@ public final class ReferenceGrammarSpielplatzConsumer extends NonTerminalConsume
 	}
 
 	protected int consumeAssignment$24(int entryPoint) throws Exception {
-		return consumeRuleCall$25(entryPoint);
+		int result = doConsumeAssignment$24(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$24(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$24(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele011AssignmentTypes());
+		return result.getResult(consumeRuleCall$25(entryPoint));
 	}
 
 	protected int consumeRuleCall$25(int entryPoint) throws Exception {
@@ -246,6 +317,14 @@ public final class ReferenceGrammarSpielplatzConsumer extends NonTerminalConsume
 	}
 
 	protected int consumeKeyword$26(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$26(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$26(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$26(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele1KeywordRightCurlyBracket(), null, false, false, getKeyword$26$Delimiter());
 	}
 

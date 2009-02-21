@@ -88,7 +88,15 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeGroup$1(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().eleGroup());
+		int result = doConsumeGroup$1(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeGroup$1(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeGroup$1(int entryPoint) throws Exception {
+		final GroupResult result = createGroupResult(getRule().eleGroup());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -184,7 +192,8 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int doConsumeAssignment$11(int entryPoint) throws Exception {
-		return consumeRuleCall$12(entryPoint);
+		final AssignmentResult result = createAssignmentResult(getRule().ele0000000000AssignmentEAnnotations());
+		return result.getResult(consumeRuleCall$12(entryPoint));
 	}
 
 	protected int consumeRuleCall$12(int entryPoint) throws Exception {
@@ -202,7 +211,7 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int doConsumeAlternatives$13(int entryPoint) throws Exception {
-		AlternativesResult result = createAlternativesResult(getRule().ele0000000001Alternatives());
+		final AlternativesResult result = createAlternativesResult(getRule().ele0000000001Alternatives());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -221,7 +230,16 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$14(int entryPoint) throws Exception {
-		return consumeKeyword$15(entryPoint);
+		int result = doConsumeAssignment$14(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$14(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$14(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele00000000010AssignmentUnique());
+		return result.getResult(consumeKeyword$15(entryPoint));
 	}
 
 	protected int consumeKeyword$15(int entryPoint) throws Exception {
@@ -229,7 +247,16 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$16(int entryPoint) throws Exception {
-		return consumeKeyword$17(entryPoint);
+		int result = doConsumeAssignment$16(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$16(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$16(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele00000000011AssignmentOrdered());
+		return result.getResult(consumeKeyword$17(entryPoint));
 	}
 
 	protected int consumeKeyword$17(int entryPoint) throws Exception {
@@ -237,11 +264,27 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeKeyword$18(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$18(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$18(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$18(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele000000001KeywordOp(), null, false, false, getKeyword$18$Delimiter());
 	}
 
 	protected int consumeAlternatives$19(int entryPoint) throws Exception {
-		AlternativesResult result = createAlternativesResult(getRule().ele00000001Alternatives());
+		int result = doConsumeAlternatives$19(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAlternatives$19(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAlternatives$19(int entryPoint) throws Exception {
+		final AlternativesResult result = createAlternativesResult(getRule().ele00000001Alternatives());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -260,7 +303,16 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$20(int entryPoint) throws Exception {
-		return consumeRuleCall$21(entryPoint);
+		int result = doConsumeAssignment$20(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$20(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$20(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele000000010AssignmentEGenericType());
+		return result.getResult(consumeRuleCall$21(entryPoint));
 	}
 
 	protected int consumeRuleCall$21(int entryPoint) throws Exception {
@@ -268,11 +320,28 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeKeyword$22(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$22(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$22(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$22(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele000000011KeywordVoid(), null, false, false, getKeyword$22$Delimiter());
 	}
 
 	protected int consumeAssignment$23(int entryPoint) throws Exception {
-		return consumeRuleCall$24(entryPoint);
+		int result = doConsumeAssignment$23(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$23(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$23(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele0000001AssignmentName());
+		return result.getResult(consumeRuleCall$24(entryPoint));
 	}
 
 	protected int consumeRuleCall$24(int entryPoint) throws Exception {
@@ -291,7 +360,7 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int doConsumeGroup$25(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().ele000001Group());
+		final GroupResult result = createGroupResult(getRule().ele000001Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -328,11 +397,28 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeKeyword$28(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$28(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$28(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$28(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele000001000KeywordLessThanSign(), null, false, false, getKeyword$28$Delimiter());
 	}
 
 	protected int consumeAssignment$29(int entryPoint) throws Exception {
-		return consumeRuleCall$30(entryPoint);
+		int result = doConsumeAssignment$29(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$29(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$29(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele000001001AssignmentETypeParameters());
+		return result.getResult(consumeRuleCall$30(entryPoint));
 	}
 
 	protected int consumeRuleCall$30(int entryPoint) throws Exception {
@@ -350,7 +436,7 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int doConsumeGroup$31(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().ele00000101Group());
+		final GroupResult result = createGroupResult(getRule().ele00000101Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -373,11 +459,28 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeKeyword$32(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$32(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$32(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$32(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele000001010KeywordComma(), null, false, false, getKeyword$32$Delimiter());
 	}
 
 	protected int consumeAssignment$33(int entryPoint) throws Exception {
-		return consumeRuleCall$34(entryPoint);
+		int result = doConsumeAssignment$33(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$33(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$33(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele000001011AssignmentETypeParameters());
+		return result.getResult(consumeRuleCall$34(entryPoint));
 	}
 
 	protected int consumeRuleCall$34(int entryPoint) throws Exception {
@@ -385,10 +488,26 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeKeyword$35(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$35(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$35(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$35(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele0000011KeywordGreaterThanSign(), null, false, false, getKeyword$35$Delimiter());
 	}
 
 	protected int consumeKeyword$36(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$36(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$36(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$36(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele00001KeywordLeftParenthesis(), null, false, false, getKeyword$36$Delimiter());
 	}
 
@@ -404,7 +523,7 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int doConsumeGroup$37(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().ele0001Group());
+		final GroupResult result = createGroupResult(getRule().ele0001Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -427,7 +546,16 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$38(int entryPoint) throws Exception {
-		return consumeRuleCall$39(entryPoint);
+		int result = doConsumeAssignment$38(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$38(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$38(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele00010AssignmentEParameters());
+		return result.getResult(consumeRuleCall$39(entryPoint));
 	}
 
 	protected int consumeRuleCall$39(int entryPoint) throws Exception {
@@ -445,7 +573,7 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int doConsumeGroup$40(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().ele00011Group());
+		final GroupResult result = createGroupResult(getRule().ele00011Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -468,11 +596,28 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeKeyword$41(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$41(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$41(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$41(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele000110KeywordComma(), null, false, false, getKeyword$41$Delimiter());
 	}
 
 	protected int consumeAssignment$42(int entryPoint) throws Exception {
-		return consumeRuleCall$43(entryPoint);
+		int result = doConsumeAssignment$42(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$42(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$42(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele000111AssignmentEParameters());
+		return result.getResult(consumeRuleCall$43(entryPoint));
 	}
 
 	protected int consumeRuleCall$43(int entryPoint) throws Exception {
@@ -480,6 +625,14 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeKeyword$44(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$44(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$44(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$44(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele001KeywordRightParenthesis(), null, false, false, getKeyword$44$Delimiter());
 	}
 
@@ -495,7 +648,7 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int doConsumeGroup$45(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().ele01Group());
+		final GroupResult result = createGroupResult(getRule().ele01Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -525,11 +678,28 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeKeyword$47(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$47(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$47(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$47(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele0100KeywordThrows(), null, false, false, getKeyword$47$Delimiter());
 	}
 
 	protected int consumeAssignment$48(int entryPoint) throws Exception {
-		return consumeRuleCall$49(entryPoint);
+		int result = doConsumeAssignment$48(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$48(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$48(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele0101AssignmentEGenericExceptions());
+		return result.getResult(consumeRuleCall$49(entryPoint));
 	}
 
 	protected int consumeRuleCall$49(int entryPoint) throws Exception {
@@ -547,7 +717,7 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int doConsumeGroup$50(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().ele011Group());
+		final GroupResult result = createGroupResult(getRule().ele011Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -570,11 +740,28 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeKeyword$51(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$51(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$51(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$51(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele0110KeywordComma(), null, false, false, getKeyword$51$Delimiter());
 	}
 
 	protected int consumeAssignment$52(int entryPoint) throws Exception {
-		return consumeRuleCall$53(entryPoint);
+		int result = doConsumeAssignment$52(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$52(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$52(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele0111AssignmentEGenericExceptions());
+		return result.getResult(consumeRuleCall$53(entryPoint));
 	}
 
 	protected int consumeRuleCall$53(int entryPoint) throws Exception {
@@ -582,6 +769,14 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeKeyword$54(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$54(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$54(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$54(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele1KeywordSemicolon(), null, false, false, getKeyword$54$Delimiter());
 	}
 

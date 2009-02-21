@@ -60,8 +60,6 @@ public abstract class AbstractParserComparingTest extends AbstractGeneratorTest 
 				XtextResource secondResult = secondHelper.getResourceFromStream(new StringInputStream(model));
 				checkResource(pair.getFirst() + " - " + getFirstParserName(), firstResult);
 				checkResource(pair.getFirst() + " - " + getSecondParserName(), secondResult);
-				comparator.assertSameStructure(firstResult.getParseResult().getRootASTElement(), secondResult.getParseResult().getRootASTElement());
-				comparator.assertSameStructure(firstResult.getParseResult().getRootNode(), secondResult.getParseResult().getRootNode());
 
 				String firstNodeResultAsString = EmfFormater.objToStr(firstResult.getParseResult().getRootNode(), getIgnoredFeatures());
 				String secondNodeResultAsString = EmfFormater.objToStr(secondResult.getParseResult().getRootNode(), getIgnoredFeatures());
@@ -70,6 +68,9 @@ public abstract class AbstractParserComparingTest extends AbstractGeneratorTest 
 				String firstResultAsString = EmfFormater.objToStr(firstResult.getParseResult().getRootASTElement());
 				String secondResultAsString = EmfFormater.objToStr(secondResult.getParseResult().getRootASTElement());
 				assertEquals(modelName.get(), firstResultAsString, secondResultAsString);
+
+				comparator.assertSameStructure(firstResult.getParseResult().getRootASTElement(), secondResult.getParseResult().getRootASTElement());
+				comparator.assertSameStructure(firstResult.getParseResult().getRootNode(), secondResult.getParseResult().getRootNode());
 			} catch (Exception e) {
 				throw new RuntimeException(modelName.get(), e);
 			}

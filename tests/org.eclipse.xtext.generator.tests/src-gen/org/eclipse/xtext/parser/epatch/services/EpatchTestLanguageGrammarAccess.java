@@ -1291,26 +1291,26 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Assignment c0001AssignmentValue = (Assignment)c000Alternatives.eContents().get(1);
 		private final RuleCall c00010LexerRuleCallSTRING = (RuleCall)c0001AssignmentValue.eContents().get(0);
 		private final Group c001Group = (Group)c00Alternatives.eContents().get(1);
-		private final Assignment c0010AssignmentRefObject = (Assignment)c001Group.eContents().get(0);
-		private final CrossReference c00100CrossReferenceEStringNamedObject = (CrossReference)c0010AssignmentRefObject.eContents().get(0);
-		private final Group c0011Group = (Group)c001Group.eContents().get(1);
-		private final Group c00110Group = (Group)c0011Group.eContents().get(0);
-		private final Keyword c001100KeywordFullStop = (Keyword)c00110Group.eContents().get(0);
-		private final Assignment c001101AssignmentRefFeature = (Assignment)c00110Group.eContents().get(1);
-		private final RuleCall c0011010LexerRuleCallID = (RuleCall)c001101AssignmentRefFeature.eContents().get(0);
-		private final Group c00111Group = (Group)c0011Group.eContents().get(1);
-		private final Group c001110Group = (Group)c00111Group.eContents().get(0);
-		private final Keyword c0011100KeywordLeftSquareBracket = (Keyword)c001110Group.eContents().get(0);
-		private final Assignment c0011101AssignmentRefIndex = (Assignment)c001110Group.eContents().get(1);
-		private final RuleCall c00111010LexerRuleCallINT = (RuleCall)c0011101AssignmentRefIndex.eContents().get(0);
-		private final Keyword c001111KeywordRightSquareBracket = (Keyword)c00111Group.eContents().get(1);
-		private final Assignment c01AssignmentNewObject = (Assignment)c0Alternatives.eContents().get(1);
-		private final RuleCall c010ParserRuleCallCreatedObject = (RuleCall)c01AssignmentNewObject.eContents().get(0);
-		private final Group c1Group = (Group)cAlternatives.eContents().get(1);
-		private final Assignment c10AssignmentImport = (Assignment)c1Group.eContents().get(0);
-		private final CrossReference c100CrossReferenceEStringImport = (CrossReference)c10AssignmentImport.eContents().get(0);
-		private final Assignment c11AssignmentImpFrag = (Assignment)c1Group.eContents().get(1);
-		private final RuleCall c110LexerRuleCallFRAGMENT = (RuleCall)c11AssignmentImpFrag.eContents().get(0);
+		private final Assignment c0010AssignmentImport = (Assignment)c001Group.eContents().get(0);
+		private final CrossReference c00100CrossReferenceEStringImport = (CrossReference)c0010AssignmentImport.eContents().get(0);
+		private final Assignment c0011AssignmentImpFrag = (Assignment)c001Group.eContents().get(1);
+		private final RuleCall c00110LexerRuleCallFRAGMENT = (RuleCall)c0011AssignmentImpFrag.eContents().get(0);
+		private final Group c01Group = (Group)c0Alternatives.eContents().get(1);
+		private final Assignment c010AssignmentRefObject = (Assignment)c01Group.eContents().get(0);
+		private final CrossReference c0100CrossReferenceEStringNamedObject = (CrossReference)c010AssignmentRefObject.eContents().get(0);
+		private final Group c011Group = (Group)c01Group.eContents().get(1);
+		private final Group c0110Group = (Group)c011Group.eContents().get(0);
+		private final Keyword c01100KeywordFullStop = (Keyword)c0110Group.eContents().get(0);
+		private final Assignment c01101AssignmentRefFeature = (Assignment)c0110Group.eContents().get(1);
+		private final RuleCall c011010LexerRuleCallID = (RuleCall)c01101AssignmentRefFeature.eContents().get(0);
+		private final Group c0111Group = (Group)c011Group.eContents().get(1);
+		private final Group c01110Group = (Group)c0111Group.eContents().get(0);
+		private final Keyword c011100KeywordLeftSquareBracket = (Keyword)c01110Group.eContents().get(0);
+		private final Assignment c011101AssignmentRefIndex = (Assignment)c01110Group.eContents().get(1);
+		private final RuleCall c0111010LexerRuleCallINT = (RuleCall)c011101AssignmentRefIndex.eContents().get(0);
+		private final Keyword c01111KeywordRightSquareBracket = (Keyword)c0111Group.eContents().get(1);
+		private final Assignment c1AssignmentNewObject = (Assignment)cAlternatives.eContents().get(1);
+		private final RuleCall c10ParserRuleCallCreatedObject = (RuleCall)c1AssignmentNewObject.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -1343,64 +1343,64 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Group ele001Group() { return c001Group; }
 
 		// not supported
-		public Assignment ele0010AssignmentRefObject() { return c0010AssignmentRefObject; }
+		public Assignment ele0010AssignmentImport() { return c0010AssignmentImport; }
 
 		// not supported
-		public CrossReference ele00100CrossReferenceEStringNamedObject() { return c00100CrossReferenceEStringNamedObject; }
+		public CrossReference ele00100CrossReferenceEStringImport() { return c00100CrossReferenceEStringImport; }
 
 		// not supported
-		public Group ele0011Group() { return c0011Group; }
+		public Assignment ele0011AssignmentImpFrag() { return c0011AssignmentImpFrag; }
 
 		// not supported
-		public Group ele00110Group() { return c00110Group; }
+		public RuleCall ele00110LexerRuleCallFRAGMENT() { return c00110LexerRuleCallFRAGMENT; }
 
 		// not supported
-		public Keyword ele001100KeywordFullStop() { return c001100KeywordFullStop; }
+		public Group ele01Group() { return c01Group; }
 
 		// not supported
-		public Assignment ele001101AssignmentRefFeature() { return c001101AssignmentRefFeature; }
+		public Assignment ele010AssignmentRefObject() { return c010AssignmentRefObject; }
 
 		// not supported
-		public RuleCall ele0011010LexerRuleCallID() { return c0011010LexerRuleCallID; }
+		public CrossReference ele0100CrossReferenceEStringNamedObject() { return c0100CrossReferenceEStringNamedObject; }
 
 		// not supported
-		public Group ele00111Group() { return c00111Group; }
+		public Group ele011Group() { return c011Group; }
 
 		// not supported
-		public Group ele001110Group() { return c001110Group; }
+		public Group ele0110Group() { return c0110Group; }
 
 		// not supported
-		public Keyword ele0011100KeywordLeftSquareBracket() { return c0011100KeywordLeftSquareBracket; }
+		public Keyword ele01100KeywordFullStop() { return c01100KeywordFullStop; }
 
 		// not supported
-		public Assignment ele0011101AssignmentRefIndex() { return c0011101AssignmentRefIndex; }
+		public Assignment ele01101AssignmentRefFeature() { return c01101AssignmentRefFeature; }
 
 		// not supported
-		public RuleCall ele00111010LexerRuleCallINT() { return c00111010LexerRuleCallINT; }
+		public RuleCall ele011010LexerRuleCallID() { return c011010LexerRuleCallID; }
 
 		// not supported
-		public Keyword ele001111KeywordRightSquareBracket() { return c001111KeywordRightSquareBracket; }
+		public Group ele0111Group() { return c0111Group; }
 
 		// not supported
-		public Assignment ele01AssignmentNewObject() { return c01AssignmentNewObject; }
+		public Group ele01110Group() { return c01110Group; }
 
 		// not supported
-		public RuleCall ele010ParserRuleCallCreatedObject() { return c010ParserRuleCallCreatedObject; }
+		public Keyword ele011100KeywordLeftSquareBracket() { return c011100KeywordLeftSquareBracket; }
 
 		// not supported
-		public Group ele1Group() { return c1Group; }
+		public Assignment ele011101AssignmentRefIndex() { return c011101AssignmentRefIndex; }
 
 		// not supported
-		public Assignment ele10AssignmentImport() { return c10AssignmentImport; }
+		public RuleCall ele0111010LexerRuleCallINT() { return c0111010LexerRuleCallINT; }
 
 		// not supported
-		public CrossReference ele100CrossReferenceEStringImport() { return c100CrossReferenceEStringImport; }
+		public Keyword ele01111KeywordRightSquareBracket() { return c01111KeywordRightSquareBracket; }
 
 		// not supported
-		public Assignment ele11AssignmentImpFrag() { return c11AssignmentImpFrag; }
+		public Assignment ele1AssignmentNewObject() { return c1AssignmentNewObject; }
 
 		// not supported
-		public RuleCall ele110LexerRuleCallFRAGMENT() { return c110LexerRuleCallFRAGMENT; }
+		public RuleCall ele10ParserRuleCallCreatedObject() { return c10ParserRuleCallCreatedObject; }
 	}
 
 	public class CreatedObjectElements implements IParserRuleAccess {

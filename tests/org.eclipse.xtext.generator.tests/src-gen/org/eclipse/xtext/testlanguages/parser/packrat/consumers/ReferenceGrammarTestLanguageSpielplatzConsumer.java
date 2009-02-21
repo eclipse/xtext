@@ -74,7 +74,7 @@ public final class ReferenceGrammarTestLanguageSpielplatzConsumer extends NonTer
 	}
 
 	protected int doConsumeGroup$1(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().eleGroup());
+		final GroupResult result = createGroupResult(getRule().eleGroup());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -125,11 +125,28 @@ public final class ReferenceGrammarTestLanguageSpielplatzConsumer extends NonTer
 	}
 
 	protected int consumeKeyword$6(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$6(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$6(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$6(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele00000KeywordSpielplatz(), null, false, false, getKeyword$6$Delimiter());
 	}
 
 	protected int consumeAssignment$7(int entryPoint) throws Exception {
-		return consumeRuleCall$8(entryPoint);
+		int result = doConsumeAssignment$7(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$7(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$7(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele00001AssignmentGroesse());
+		return result.getResult(consumeRuleCall$8(entryPoint));
 	}
 
 	protected int consumeRuleCall$8(int entryPoint) throws Exception {
@@ -148,7 +165,8 @@ public final class ReferenceGrammarTestLanguageSpielplatzConsumer extends NonTer
 	}
 
 	protected int doConsumeAssignment$9(int entryPoint) throws Exception {
-		return consumeRuleCall$10(entryPoint);
+		final AssignmentResult result = createAssignmentResult(getRule().ele0001AssignmentBeschreibung());
+		return result.getResult(consumeRuleCall$10(entryPoint));
 	}
 
 	protected int consumeRuleCall$10(int entryPoint) throws Exception {
@@ -156,6 +174,14 @@ public final class ReferenceGrammarTestLanguageSpielplatzConsumer extends NonTer
 	}
 
 	protected int consumeKeyword$11(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$11(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$11(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$11(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele001KeywordLeftCurlyBracket(), null, false, false, getKeyword$11$Delimiter());
 	}
 
@@ -170,7 +196,7 @@ public final class ReferenceGrammarTestLanguageSpielplatzConsumer extends NonTer
 	}
 
 	protected int doConsumeAlternatives$12(int entryPoint) throws Exception {
-		AlternativesResult result = createAlternativesResult(getRule().ele01Alternatives());
+		final AlternativesResult result = createAlternativesResult(getRule().ele01Alternatives());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -199,7 +225,16 @@ public final class ReferenceGrammarTestLanguageSpielplatzConsumer extends NonTer
 	}
 
 	protected int consumeAssignment$15(int entryPoint) throws Exception {
-		return consumeRuleCall$16(entryPoint);
+		int result = doConsumeAssignment$15(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$15(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$15(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele01000AssignmentKinder());
+		return result.getResult(consumeRuleCall$16(entryPoint));
 	}
 
 	protected int consumeRuleCall$16(int entryPoint) throws Exception {
@@ -207,7 +242,16 @@ public final class ReferenceGrammarTestLanguageSpielplatzConsumer extends NonTer
 	}
 
 	protected int consumeAssignment$17(int entryPoint) throws Exception {
-		return consumeRuleCall$18(entryPoint);
+		int result = doConsumeAssignment$17(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$17(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$17(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele01001AssignmentErzieher());
+		return result.getResult(consumeRuleCall$18(entryPoint));
 	}
 
 	protected int consumeRuleCall$18(int entryPoint) throws Exception {
@@ -215,7 +259,16 @@ public final class ReferenceGrammarTestLanguageSpielplatzConsumer extends NonTer
 	}
 
 	protected int consumeAssignment$19(int entryPoint) throws Exception {
-		return consumeRuleCall$20(entryPoint);
+		int result = doConsumeAssignment$19(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$19(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$19(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele0101AssignmentSpielzeuge());
+		return result.getResult(consumeRuleCall$20(entryPoint));
 	}
 
 	protected int consumeRuleCall$20(int entryPoint) throws Exception {
@@ -223,7 +276,16 @@ public final class ReferenceGrammarTestLanguageSpielplatzConsumer extends NonTer
 	}
 
 	protected int consumeAssignment$21(int entryPoint) throws Exception {
-		return consumeRuleCall$22(entryPoint);
+		int result = doConsumeAssignment$21(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$21(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$21(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele011AssignmentFamilie());
+		return result.getResult(consumeRuleCall$22(entryPoint));
 	}
 
 	protected int consumeRuleCall$22(int entryPoint) throws Exception {
@@ -231,6 +293,14 @@ public final class ReferenceGrammarTestLanguageSpielplatzConsumer extends NonTer
 	}
 
 	protected int consumeKeyword$23(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$23(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$23(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$23(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele1KeywordRightCurlyBracket(), null, false, false, getKeyword$23$Delimiter());
 	}
 

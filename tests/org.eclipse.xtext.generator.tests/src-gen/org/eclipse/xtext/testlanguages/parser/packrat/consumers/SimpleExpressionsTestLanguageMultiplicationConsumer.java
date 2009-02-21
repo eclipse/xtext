@@ -44,7 +44,15 @@ public final class SimpleExpressionsTestLanguageMultiplicationConsumer extends N
 	}
 
 	protected int consumeGroup$1(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().eleGroup());
+		int result = doConsumeGroup$1(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeGroup$1(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeGroup$1(int entryPoint) throws Exception {
+		final GroupResult result = createGroupResult(getRule().eleGroup());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -67,6 +75,14 @@ public final class SimpleExpressionsTestLanguageMultiplicationConsumer extends N
 	}
 
 	protected int consumeRuleCall$2(int entryPoint) throws Exception {
+		int result = doConsumeRuleCall$2(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeRuleCall$2(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeRuleCall$2(int entryPoint) throws Exception {
 		return consumeNonTerminal(termConsumer, null, false, false, false, getRule().ele0ParserRuleCallTerm());
 	}
 
@@ -81,7 +97,7 @@ public final class SimpleExpressionsTestLanguageMultiplicationConsumer extends N
 	}
 
 	protected int doConsumeGroup$3(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().ele1Group());
+		final GroupResult result = createGroupResult(getRule().ele1Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -115,7 +131,16 @@ public final class SimpleExpressionsTestLanguageMultiplicationConsumer extends N
 	}
 
 	protected int consumeAssignment$7(int entryPoint) throws Exception {
-		return consumeAlternatives$8(entryPoint);
+		int result = doConsumeAssignment$7(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$7(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$7(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele101AssignmentOperator());
+		return result.getResult(consumeAlternatives$8(entryPoint));
 	}
 	protected int consumeAlternatives$8(int entryPoint) throws Exception {
 		AlternativesResult result = createAlternativesResult();
@@ -146,7 +171,16 @@ public final class SimpleExpressionsTestLanguageMultiplicationConsumer extends N
 	}
 
 	protected int consumeAssignment$11(int entryPoint) throws Exception {
-		return consumeRuleCall$12(entryPoint);
+		int result = doConsumeAssignment$11(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$11(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$11(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele11AssignmentValues());
+		return result.getResult(consumeRuleCall$12(entryPoint));
 	}
 
 	protected int consumeRuleCall$12(int entryPoint) throws Exception {

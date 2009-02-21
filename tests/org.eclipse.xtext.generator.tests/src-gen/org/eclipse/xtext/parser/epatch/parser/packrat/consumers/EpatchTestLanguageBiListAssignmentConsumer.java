@@ -64,7 +64,15 @@ public final class EpatchTestLanguageBiListAssignmentConsumer extends NonTermina
 	}
 
 	protected int consumeGroup$1(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().eleGroup());
+		int result = doConsumeGroup$1(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeGroup$1(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeGroup$1(int entryPoint) throws Exception {
+		final GroupResult result = createGroupResult(getRule().eleGroup());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -129,7 +137,16 @@ public final class EpatchTestLanguageBiListAssignmentConsumer extends NonTermina
 	}
 
 	protected int consumeAssignment$8(int entryPoint) throws Exception {
-		return consumeRuleCall$9(entryPoint);
+		int result = doConsumeAssignment$8(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$8(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$8(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele0000000AssignmentFeature());
+		return result.getResult(consumeRuleCall$9(entryPoint));
 	}
 
 	protected int consumeRuleCall$9(int entryPoint) throws Exception {
@@ -137,10 +154,26 @@ public final class EpatchTestLanguageBiListAssignmentConsumer extends NonTermina
 	}
 
 	protected int consumeKeyword$10(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$10(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$10(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$10(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele0000001KeywordEqualsSign(), null, false, false, getKeyword$10$Delimiter());
 	}
 
 	protected int consumeKeyword$11(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$11(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$11(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$11(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele000001KeywordLeftSquareBracket(), null, false, false, getKeyword$11$Delimiter());
 	}
 
@@ -156,7 +189,7 @@ public final class EpatchTestLanguageBiListAssignmentConsumer extends NonTermina
 	}
 
 	protected int doConsumeGroup$12(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().ele00001Group());
+		final GroupResult result = createGroupResult(getRule().ele00001Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -179,7 +212,16 @@ public final class EpatchTestLanguageBiListAssignmentConsumer extends NonTermina
 	}
 
 	protected int consumeAssignment$13(int entryPoint) throws Exception {
-		return consumeRuleCall$14(entryPoint);
+		int result = doConsumeAssignment$13(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$13(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$13(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele000010AssignmentLeftValues());
+		return result.getResult(consumeRuleCall$14(entryPoint));
 	}
 
 	protected int consumeRuleCall$14(int entryPoint) throws Exception {
@@ -197,7 +239,7 @@ public final class EpatchTestLanguageBiListAssignmentConsumer extends NonTermina
 	}
 
 	protected int doConsumeGroup$15(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().ele000011Group());
+		final GroupResult result = createGroupResult(getRule().ele000011Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -220,11 +262,28 @@ public final class EpatchTestLanguageBiListAssignmentConsumer extends NonTermina
 	}
 
 	protected int consumeKeyword$16(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$16(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$16(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$16(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele0000110KeywordComma(), null, false, false, getKeyword$16$Delimiter());
 	}
 
 	protected int consumeAssignment$17(int entryPoint) throws Exception {
-		return consumeRuleCall$18(entryPoint);
+		int result = doConsumeAssignment$17(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$17(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$17(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele0000111AssignmentLeftValues());
+		return result.getResult(consumeRuleCall$18(entryPoint));
 	}
 
 	protected int consumeRuleCall$18(int entryPoint) throws Exception {
@@ -232,6 +291,14 @@ public final class EpatchTestLanguageBiListAssignmentConsumer extends NonTermina
 	}
 
 	protected int consumeKeyword$19(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$19(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$19(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$19(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele0001KeywordVerticalLine(), null, false, false, getKeyword$19$Delimiter());
 	}
 
@@ -247,7 +314,7 @@ public final class EpatchTestLanguageBiListAssignmentConsumer extends NonTermina
 	}
 
 	protected int doConsumeGroup$20(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().ele001Group());
+		final GroupResult result = createGroupResult(getRule().ele001Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -270,7 +337,16 @@ public final class EpatchTestLanguageBiListAssignmentConsumer extends NonTermina
 	}
 
 	protected int consumeAssignment$21(int entryPoint) throws Exception {
-		return consumeRuleCall$22(entryPoint);
+		int result = doConsumeAssignment$21(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$21(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$21(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele0010AssignmentRightValues());
+		return result.getResult(consumeRuleCall$22(entryPoint));
 	}
 
 	protected int consumeRuleCall$22(int entryPoint) throws Exception {
@@ -288,7 +364,7 @@ public final class EpatchTestLanguageBiListAssignmentConsumer extends NonTermina
 	}
 
 	protected int doConsumeGroup$23(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().ele0011Group());
+		final GroupResult result = createGroupResult(getRule().ele0011Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -311,11 +387,28 @@ public final class EpatchTestLanguageBiListAssignmentConsumer extends NonTermina
 	}
 
 	protected int consumeKeyword$24(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$24(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$24(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$24(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele00110KeywordComma(), null, false, false, getKeyword$24$Delimiter());
 	}
 
 	protected int consumeAssignment$25(int entryPoint) throws Exception {
-		return consumeRuleCall$26(entryPoint);
+		int result = doConsumeAssignment$25(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$25(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$25(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele00111AssignmentRightValues());
+		return result.getResult(consumeRuleCall$26(entryPoint));
 	}
 
 	protected int consumeRuleCall$26(int entryPoint) throws Exception {
@@ -323,10 +416,26 @@ public final class EpatchTestLanguageBiListAssignmentConsumer extends NonTermina
 	}
 
 	protected int consumeKeyword$27(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$27(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$27(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$27(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele01KeywordRightSquareBracket(), null, false, false, getKeyword$27$Delimiter());
 	}
 
 	protected int consumeKeyword$28(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$28(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$28(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$28(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele1KeywordSemicolon(), null, false, false, getKeyword$28$Delimiter());
 	}
 

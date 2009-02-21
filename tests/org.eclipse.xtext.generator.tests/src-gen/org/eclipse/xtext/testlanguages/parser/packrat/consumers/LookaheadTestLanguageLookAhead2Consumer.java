@@ -45,7 +45,15 @@ public final class LookaheadTestLanguageLookAhead2Consumer extends NonTerminalCo
 	}
 
 	protected int consumeGroup$1(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().eleGroup());
+		int result = doConsumeGroup$1(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeGroup$1(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeGroup$1(int entryPoint) throws Exception {
+		final GroupResult result = createGroupResult(getRule().eleGroup());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -68,7 +76,15 @@ public final class LookaheadTestLanguageLookAhead2Consumer extends NonTerminalCo
 	}
 
 	protected int consumeAlternatives$2(int entryPoint) throws Exception {
-		AlternativesResult result = createAlternativesResult(getRule().ele0Alternatives());
+		int result = doConsumeAlternatives$2(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAlternatives$2(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAlternatives$2(int entryPoint) throws Exception {
+		final AlternativesResult result = createAlternativesResult(getRule().ele0Alternatives());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -87,7 +103,16 @@ public final class LookaheadTestLanguageLookAhead2Consumer extends NonTerminalCo
 	}
 
 	protected int consumeAssignment$3(int entryPoint) throws Exception {
-		return consumeKeyword$4(entryPoint);
+		int result = doConsumeAssignment$3(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$3(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$3(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele00AssignmentZ());
+		return result.getResult(consumeKeyword$4(entryPoint));
 	}
 
 	protected int consumeKeyword$4(int entryPoint) throws Exception {
@@ -95,7 +120,16 @@ public final class LookaheadTestLanguageLookAhead2Consumer extends NonTerminalCo
 	}
 
 	protected int consumeAssignment$5(int entryPoint) throws Exception {
-		return consumeKeyword$6(entryPoint);
+		int result = doConsumeAssignment$5(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$5(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$5(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele01AssignmentZ());
+		return result.getResult(consumeKeyword$6(entryPoint));
 	}
 
 	protected int consumeKeyword$6(int entryPoint) throws Exception {
@@ -103,6 +137,14 @@ public final class LookaheadTestLanguageLookAhead2Consumer extends NonTerminalCo
 	}
 
 	protected int consumeKeyword$7(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$7(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$7(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$7(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele1KeywordC(), null, false, false, getKeyword$7$Delimiter());
 	}
 

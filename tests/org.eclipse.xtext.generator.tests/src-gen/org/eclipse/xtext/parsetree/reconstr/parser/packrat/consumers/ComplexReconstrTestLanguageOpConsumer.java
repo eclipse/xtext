@@ -44,7 +44,15 @@ public final class ComplexReconstrTestLanguageOpConsumer extends NonTerminalCons
 	}
 
 	protected int consumeGroup$1(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().eleGroup());
+		int result = doConsumeGroup$1(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeGroup$1(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeGroup$1(int entryPoint) throws Exception {
+		final GroupResult result = createGroupResult(getRule().eleGroup());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -67,6 +75,14 @@ public final class ComplexReconstrTestLanguageOpConsumer extends NonTerminalCons
 	}
 
 	protected int consumeRuleCall$2(int entryPoint) throws Exception {
+		int result = doConsumeRuleCall$2(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeRuleCall$2(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeRuleCall$2(int entryPoint) throws Exception {
 		return consumeNonTerminal(termConsumer, null, false, false, false, getRule().ele0ParserRuleCallTerm());
 	}
 
@@ -81,7 +97,7 @@ public final class ComplexReconstrTestLanguageOpConsumer extends NonTerminalCons
 	}
 
 	protected int doConsumeAlternatives$3(int entryPoint) throws Exception {
-		AlternativesResult result = createAlternativesResult(getRule().ele1Alternatives());
+		final AlternativesResult result = createAlternativesResult(getRule().ele1Alternatives());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -100,7 +116,15 @@ public final class ComplexReconstrTestLanguageOpConsumer extends NonTerminalCons
 	}
 
 	protected int consumeGroup$4(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().ele10Group());
+		int result = doConsumeGroup$4(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeGroup$4(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeGroup$4(int entryPoint) throws Exception {
+		final GroupResult result = createGroupResult(getRule().ele10Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -134,11 +158,28 @@ public final class ComplexReconstrTestLanguageOpConsumer extends NonTerminalCons
 	}
 
 	protected int consumeKeyword$8(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$8(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$8(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$8(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele1001KeywordPlusSign(), null, false, false, getKeyword$8$Delimiter());
 	}
 
 	protected int consumeAssignment$9(int entryPoint) throws Exception {
-		return consumeRuleCall$10(entryPoint);
+		int result = doConsumeAssignment$9(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$9(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$9(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele101AssignmentAddOperands());
+		return result.getResult(consumeRuleCall$10(entryPoint));
 	}
 
 	protected int consumeRuleCall$10(int entryPoint) throws Exception {
@@ -146,7 +187,15 @@ public final class ComplexReconstrTestLanguageOpConsumer extends NonTerminalCons
 	}
 
 	protected int consumeGroup$11(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().ele11Group());
+		int result = doConsumeGroup$11(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeGroup$11(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeGroup$11(int entryPoint) throws Exception {
+		final GroupResult result = createGroupResult(getRule().ele11Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -180,11 +229,28 @@ public final class ComplexReconstrTestLanguageOpConsumer extends NonTerminalCons
 	}
 
 	protected int consumeKeyword$15(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$15(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$15(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$15(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele1101KeywordHyphenMinus(), null, false, false, getKeyword$15$Delimiter());
 	}
 
 	protected int consumeAssignment$16(int entryPoint) throws Exception {
-		return consumeRuleCall$17(entryPoint);
+		int result = doConsumeAssignment$16(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$16(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$16(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele111AssignmentMinusOperands());
+		return result.getResult(consumeRuleCall$17(entryPoint));
 	}
 
 	protected int consumeRuleCall$17(int entryPoint) throws Exception {

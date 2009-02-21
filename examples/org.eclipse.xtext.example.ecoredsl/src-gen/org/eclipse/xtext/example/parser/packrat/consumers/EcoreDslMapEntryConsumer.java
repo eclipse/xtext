@@ -49,7 +49,15 @@ public final class EcoreDslMapEntryConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeGroup$1(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().eleGroup());
+		int result = doConsumeGroup$1(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeGroup$1(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeGroup$1(int entryPoint) throws Exception {
+		final GroupResult result = createGroupResult(getRule().eleGroup());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -79,7 +87,16 @@ public final class EcoreDslMapEntryConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$3(int entryPoint) throws Exception {
-		return consumeRuleCall$4(entryPoint);
+		int result = doConsumeAssignment$3(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$3(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$3(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele00AssignmentDetailKey());
+		return result.getResult(consumeRuleCall$4(entryPoint));
 	}
 
 	protected int consumeRuleCall$4(int entryPoint) throws Exception {
@@ -87,11 +104,28 @@ public final class EcoreDslMapEntryConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeKeyword$5(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$5(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$5(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$5(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele01KeywordEqualsSign(), null, false, false, getKeyword$5$Delimiter());
 	}
 
 	protected int consumeAssignment$6(int entryPoint) throws Exception {
-		return consumeRuleCall$7(entryPoint);
+		int result = doConsumeAssignment$6(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$6(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$6(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele1AssignmentDetailValue());
+		return result.getResult(consumeRuleCall$7(entryPoint));
 	}
 
 	protected int consumeRuleCall$7(int entryPoint) throws Exception {

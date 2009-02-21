@@ -38,7 +38,15 @@ public final class SimpleExpressionsTestLanguageSequenceConsumer extends NonTerm
 	}
 
 	protected int consumeGroup$1(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().eleGroup());
+		int result = doConsumeGroup$1(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeGroup$1(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeGroup$1(int entryPoint) throws Exception {
+		final GroupResult result = createGroupResult(getRule().eleGroup());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -61,6 +69,14 @@ public final class SimpleExpressionsTestLanguageSequenceConsumer extends NonTerm
 	}
 
 	protected int consumeRuleCall$2(int entryPoint) throws Exception {
+		int result = doConsumeRuleCall$2(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeRuleCall$2(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeRuleCall$2(int entryPoint) throws Exception {
 		return consumeNonTerminal(additionConsumer, null, false, false, false, getRule().ele0ParserRuleCallAddition());
 	}
 
@@ -75,7 +91,7 @@ public final class SimpleExpressionsTestLanguageSequenceConsumer extends NonTerm
 	}
 
 	protected int doConsumeGroup$3(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().ele1Group());
+		final GroupResult result = createGroupResult(getRule().ele1Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -102,7 +118,16 @@ public final class SimpleExpressionsTestLanguageSequenceConsumer extends NonTerm
 	}
 
 	protected int consumeAssignment$6(int entryPoint) throws Exception {
-		return consumeRuleCall$7(entryPoint);
+		int result = doConsumeAssignment$6(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$6(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$6(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele11AssignmentExpressions());
+		return result.getResult(consumeRuleCall$7(entryPoint));
 	}
 
 	protected int consumeRuleCall$7(int entryPoint) throws Exception {

@@ -45,7 +45,15 @@ public final class EcoreDslMultiplicityExprConsumer extends NonTerminalConsumer 
 	}
 
 	protected int consumeAlternatives$1(int entryPoint) throws Exception {
-		AlternativesResult result = createAlternativesResult(getRule().eleAlternatives());
+		int result = doConsumeAlternatives$1(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAlternatives$1(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAlternatives$1(int entryPoint) throws Exception {
+		final AlternativesResult result = createAlternativesResult(getRule().eleAlternatives());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -69,14 +77,38 @@ public final class EcoreDslMultiplicityExprConsumer extends NonTerminalConsumer 
 	}
 
 	protected int consumeKeyword$3(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$3(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$3(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$3(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele00KeywordPlusSign(), null, false, false, getKeyword$3$Delimiter());
 	}
 
 	protected int consumeKeyword$4(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$4(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$4(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$4(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele01KeywordQuestionMark(), null, false, false, getKeyword$4$Delimiter());
 	}
 
 	protected int consumeKeyword$5(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$5(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$5(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$5(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele1KeywordAsterisk(), null, false, false, getKeyword$5$Delimiter());
 	}
 

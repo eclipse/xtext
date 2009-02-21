@@ -48,7 +48,8 @@ public final class DummyTestLanguageModelConsumer extends NonTerminalConsumer {
 	}
 
 	protected int doConsumeAssignment$1(int entryPoint) throws Exception {
-		return consumeRuleCall$2(entryPoint);
+		final AssignmentResult result = createAssignmentResult(getRule().eleAssignmentElements());
+		return result.getResult(consumeRuleCall$2(entryPoint));
 	}
 
 	protected int consumeRuleCall$2(int entryPoint) throws Exception {

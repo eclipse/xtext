@@ -73,7 +73,15 @@ public final class ReferenceGrammarFamilieConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeGroup$1(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().eleGroup());
+		int result = doConsumeGroup$1(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeGroup$1(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeGroup$1(int entryPoint) throws Exception {
+		final GroupResult result = createGroupResult(getRule().eleGroup());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -138,15 +146,40 @@ public final class ReferenceGrammarFamilieConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeKeyword$8(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$8(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$8(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$8(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele0000000KeywordFamilie(), null, false, false, getKeyword$8$Delimiter());
 	}
 
 	protected int consumeKeyword$9(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$9(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$9(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$9(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele0000001KeywordLeftParenthesis(), null, false, false, getKeyword$9$Delimiter());
 	}
 
 	protected int consumeAssignment$10(int entryPoint) throws Exception {
-		return consumeAlternatives$11(entryPoint);
+		int result = doConsumeAssignment$10(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$10(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$10(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele000001AssignmentName());
+		return result.getResult(consumeAlternatives$11(entryPoint));
 	}
 	protected int consumeAlternatives$11(int entryPoint) throws Exception {
 		AlternativesResult result = createAlternativesResult();
@@ -186,7 +219,16 @@ public final class ReferenceGrammarFamilieConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$16(int entryPoint) throws Exception {
-		return consumeCrossReference$17(entryPoint);
+		int result = doConsumeAssignment$16(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$16(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$16(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele00001AssignmentMutter());
+		return result.getResult(consumeCrossReference$17(entryPoint));
 	}
 
 	protected int consumeCrossReference$17(int entryPoint) throws Exception {
@@ -194,7 +236,16 @@ public final class ReferenceGrammarFamilieConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$19(int entryPoint) throws Exception {
-		return consumeCrossReference$20(entryPoint);
+		int result = doConsumeAssignment$19(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$19(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$19(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele0001AssignmentVater());
+		return result.getResult(consumeCrossReference$20(entryPoint));
 	}
 
 	protected int consumeCrossReference$20(int entryPoint) throws Exception {
@@ -202,7 +253,16 @@ public final class ReferenceGrammarFamilieConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$22(int entryPoint) throws Exception {
-		return consumeCrossReference$23(entryPoint);
+		int result = doConsumeAssignment$22(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$22(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$22(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele001AssignmentKinder());
+		return result.getResult(consumeCrossReference$23(entryPoint));
 	}
 
 	protected int consumeCrossReference$23(int entryPoint) throws Exception {
@@ -220,7 +280,7 @@ public final class ReferenceGrammarFamilieConsumer extends NonTerminalConsumer {
 	}
 
 	protected int doConsumeGroup$25(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().ele01Group());
+		final GroupResult result = createGroupResult(getRule().ele01Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -243,11 +303,28 @@ public final class ReferenceGrammarFamilieConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeKeyword$26(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$26(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$26(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$26(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele010KeywordComma(), null, false, false, getKeyword$26$Delimiter());
 	}
 
 	protected int consumeAssignment$27(int entryPoint) throws Exception {
-		return consumeCrossReference$28(entryPoint);
+		int result = doConsumeAssignment$27(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$27(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$27(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele011AssignmentKinder());
+		return result.getResult(consumeCrossReference$28(entryPoint));
 	}
 
 	protected int consumeCrossReference$28(int entryPoint) throws Exception {
@@ -255,6 +332,14 @@ public final class ReferenceGrammarFamilieConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeKeyword$30(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$30(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$30(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$30(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele1KeywordRightParenthesis(), null, false, false, getKeyword$30$Delimiter());
 	}
 

@@ -41,7 +41,15 @@ public final class XtextTerminalsTestLanguageUpToTokenConsumer extends NonTermin
 	}
 
 	protected int consumeGroup$1(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().eleGroup());
+		int result = doConsumeGroup$1(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeGroup$1(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeGroup$1(int entryPoint) throws Exception {
+		final GroupResult result = createGroupResult(getRule().eleGroup());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -64,11 +72,28 @@ public final class XtextTerminalsTestLanguageUpToTokenConsumer extends NonTermin
 	}
 
 	protected int consumeKeyword$2(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$2(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$2(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$2(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele0KeywordHyphenMinusGreaterThanSign(), null, false, false, getKeyword$2$Delimiter());
 	}
 
 	protected int consumeAssignment$3(int entryPoint) throws Exception {
-		return consumeRuleCall$4(entryPoint);
+		int result = doConsumeAssignment$3(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$3(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$3(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele1AssignmentTerminal());
+		return result.getResult(consumeRuleCall$4(entryPoint));
 	}
 
 	protected int consumeRuleCall$4(int entryPoint) throws Exception {

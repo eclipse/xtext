@@ -5888,7 +5888,7 @@ protected class SingleAssignmentValue_Alternatives extends AlternativesToken {
 
 	@Override	
 	protected Solution createSolution() {
-		AbstractToken t = (first) ? new SingleAssignmentValue_1_Group(current, this) : new SingleAssignmentValue_0_Alternatives(current, this);
+		AbstractToken t = (first) ? new SingleAssignmentValue_1_Assignment_newObject(current, this) : new SingleAssignmentValue_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
 		if(s == null && activateNextSolution()) s = createSolution();
 		if(s == null) return null;
@@ -5911,7 +5911,7 @@ protected class SingleAssignmentValue_0_Alternatives extends AlternativesToken {
 
 	@Override	
 	protected Solution createSolution() {
-		AbstractToken t = (first) ? new SingleAssignmentValue_0_1_Assignment_newObject(current, this) : new SingleAssignmentValue_0_0_Alternatives(current, this);
+		AbstractToken t = (first) ? new SingleAssignmentValue_0_1_Group(current, this) : new SingleAssignmentValue_0_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
 		if(s == null && activateNextSolution()) s = createSolution();
 		if(s == null) return null;
@@ -6033,9 +6033,9 @@ protected class SingleAssignmentValue_0_0_1_Group extends GroupToken {
 		
 	@Override
 	protected Solution createSolution() {	
-		Solution s1 = new SingleAssignmentValue_0_0_1_1_Group(current, this).firstSolution();
+		Solution s1 = new SingleAssignmentValue_0_0_1_1_Assignment_impFrag(current, this).firstSolution();
 		while(s1 != null) {
-			Solution s2 = new SingleAssignmentValue_0_0_1_0_Assignment_refObject(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			Solution s2 = new SingleAssignmentValue_0_0_1_0_Assignment_import(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
 				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
@@ -6050,26 +6050,26 @@ protected class SingleAssignmentValue_0_0_1_Group extends GroupToken {
 }
 
 // not supported
-protected class SingleAssignmentValue_0_0_1_0_Assignment_refObject extends AssignmentToken  {
+protected class SingleAssignmentValue_0_0_1_0_Assignment_import extends AssignmentToken  {
 	
-	public SingleAssignmentValue_0_0_1_0_Assignment_refObject(IInstanceDescription curr, AbstractToken pred) {
+	public SingleAssignmentValue_0_0_1_0_Assignment_import(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prSingleAssignmentValue().ele0010AssignmentRefObject();
+		return grammarAccess.prSingleAssignmentValue().ele0010AssignmentImport();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if((value = current.getConsumable("refObject",IS_REQUIRED)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("refObject");
+		if((value = current.getConsumable("import",IS_REQUIRED)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("import");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prSingleAssignmentValue().ele00100CrossReferenceEStringNamedObject().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prSingleAssignmentValue().ele00100CrossReferenceEStringImport().getType().getType())) {
 				type = AssignmentType.CR;
-				element = grammarAccess.prSingleAssignmentValue().ele00100CrossReferenceEStringNamedObject(); 
+				element = grammarAccess.prSingleAssignmentValue().ele00100CrossReferenceEStringImport(); 
 				return new Solution(obj);
 			}
 		}
@@ -6078,87 +6078,172 @@ protected class SingleAssignmentValue_0_0_1_0_Assignment_refObject extends Assig
 }
 
 // not supported
-protected class SingleAssignmentValue_0_0_1_1_Group extends GroupToken {
+protected class SingleAssignmentValue_0_0_1_1_Assignment_impFrag extends AssignmentToken  {
 	
-	public SingleAssignmentValue_0_0_1_1_Group(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, !IS_REQUIRED);
-	}
-	
-	@Override
-	public Group getGrammarElement() {
-		return grammarAccess.prSingleAssignmentValue().ele0011Group();
-	}
-		
-	@Override
-	protected Solution createSolution() {	
-		Solution s1 = new SingleAssignmentValue_0_0_1_1_1_Group(current, this).firstSolution();
-		while(s1 != null) {
-			Solution s2 = new SingleAssignmentValue_0_0_1_1_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
-				last = s2.getPredecessor();
-				return s2;
-			}
-		}
-		return null;
-		
-	}
-}
-
-// not supported
-protected class SingleAssignmentValue_0_0_1_1_0_Group extends GroupToken {
-	
-	public SingleAssignmentValue_0_0_1_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
-	}
-	
-	@Override
-	public Group getGrammarElement() {
-		return grammarAccess.prSingleAssignmentValue().ele00110Group();
-	}
-		
-	@Override
-	protected Solution createSolution() {	
-		Solution s1 = new SingleAssignmentValue_0_0_1_1_0_1_Assignment_refFeature(current, this).firstSolution();
-		while(s1 != null) {
-			Solution s2 = new SingleAssignmentValue_0_0_1_1_0_0_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
-				last = s2.getPredecessor();
-				return s2;
-			}
-		}
-		return null;
-		
-	}
-}
-
-// not supported
-protected class SingleAssignmentValue_0_0_1_1_0_0_Keyword extends KeywordToken  {
-	
-	public SingleAssignmentValue_0_0_1_1_0_0_Keyword(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
-	}
-	
-	public Keyword getGrammarElement() {
-		return grammarAccess.prSingleAssignmentValue().ele001100KeywordFullStop();
-	}	
-}
-
-// not supported
-protected class SingleAssignmentValue_0_0_1_1_0_1_Assignment_refFeature extends AssignmentToken  {
-	
-	public SingleAssignmentValue_0_0_1_1_0_1_Assignment_refFeature(IInstanceDescription curr, AbstractToken pred) {
+	public SingleAssignmentValue_0_0_1_1_Assignment_impFrag(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prSingleAssignmentValue().ele001101AssignmentRefFeature();
+		return grammarAccess.prSingleAssignmentValue().ele0011AssignmentImpFrag();
+	}
+	
+	@Override
+	protected Solution createSolution() {
+		if((value = current.getConsumable("impFrag",IS_REQUIRED)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("impFrag");
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.prSingleAssignmentValue().ele00110LexerRuleCallFRAGMENT();
+			return new Solution(obj);
+		}
+		return null;
+	}
+}
+
+
+
+// not supported
+protected class SingleAssignmentValue_0_1_Group extends GroupToken {
+	
+	public SingleAssignmentValue_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.prSingleAssignmentValue().ele01Group();
+	}
+		
+	@Override
+	protected Solution createSolution() {	
+		Solution s1 = new SingleAssignmentValue_0_1_1_Group(current, this).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new SingleAssignmentValue_0_1_0_Assignment_refObject(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 == null) {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
+				if(s1 == null) return null;
+			} else {
+				last = s2.getPredecessor();
+				return s2;
+			}
+		}
+		return null;
+		
+	}
+}
+
+// not supported
+protected class SingleAssignmentValue_0_1_0_Assignment_refObject extends AssignmentToken  {
+	
+	public SingleAssignmentValue_0_1_0_Assignment_refObject(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.prSingleAssignmentValue().ele010AssignmentRefObject();
+	}
+	
+	@Override
+	protected Solution createSolution() {
+		if((value = current.getConsumable("refObject",IS_REQUIRED)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("refObject");
+		if(value instanceof EObject) { // xtext::CrossReference
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.prSingleAssignmentValue().ele0100CrossReferenceEStringNamedObject().getType().getType())) {
+				type = AssignmentType.CR;
+				element = grammarAccess.prSingleAssignmentValue().ele0100CrossReferenceEStringNamedObject(); 
+				return new Solution(obj);
+			}
+		}
+		return null;
+	}
+}
+
+// not supported
+protected class SingleAssignmentValue_0_1_1_Group extends GroupToken {
+	
+	public SingleAssignmentValue_0_1_1_Group(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, !IS_REQUIRED);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.prSingleAssignmentValue().ele011Group();
+	}
+		
+	@Override
+	protected Solution createSolution() {	
+		Solution s1 = new SingleAssignmentValue_0_1_1_1_Group(current, this).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new SingleAssignmentValue_0_1_1_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 == null) {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
+				if(s1 == null) return null;
+			} else {
+				last = s2.getPredecessor();
+				return s2;
+			}
+		}
+		return null;
+		
+	}
+}
+
+// not supported
+protected class SingleAssignmentValue_0_1_1_0_Group extends GroupToken {
+	
+	public SingleAssignmentValue_0_1_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.prSingleAssignmentValue().ele0110Group();
+	}
+		
+	@Override
+	protected Solution createSolution() {	
+		Solution s1 = new SingleAssignmentValue_0_1_1_0_1_Assignment_refFeature(current, this).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new SingleAssignmentValue_0_1_1_0_0_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 == null) {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
+				if(s1 == null) return null;
+			} else {
+				last = s2.getPredecessor();
+				return s2;
+			}
+		}
+		return null;
+		
+	}
+}
+
+// not supported
+protected class SingleAssignmentValue_0_1_1_0_0_Keyword extends KeywordToken  {
+	
+	public SingleAssignmentValue_0_1_1_0_0_Keyword(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Keyword getGrammarElement() {
+		return grammarAccess.prSingleAssignmentValue().ele01100KeywordFullStop();
+	}	
+}
+
+// not supported
+protected class SingleAssignmentValue_0_1_1_0_1_Assignment_refFeature extends AssignmentToken  {
+	
+	public SingleAssignmentValue_0_1_1_0_1_Assignment_refFeature(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.prSingleAssignmentValue().ele01101AssignmentRefFeature();
 	}
 	
 	@Override
@@ -6167,7 +6252,7 @@ protected class SingleAssignmentValue_0_0_1_1_0_1_Assignment_refFeature extends 
 		IInstanceDescription obj = current.cloneAndConsume("refFeature");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prSingleAssignmentValue().ele0011010LexerRuleCallID();
+			element = grammarAccess.prSingleAssignmentValue().ele011010LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -6176,22 +6261,22 @@ protected class SingleAssignmentValue_0_0_1_1_0_1_Assignment_refFeature extends 
 
 
 // not supported
-protected class SingleAssignmentValue_0_0_1_1_1_Group extends GroupToken {
+protected class SingleAssignmentValue_0_1_1_1_Group extends GroupToken {
 	
-	public SingleAssignmentValue_0_0_1_1_1_Group(IInstanceDescription curr, AbstractToken pred) {
+	public SingleAssignmentValue_0_1_1_1_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, !IS_REQUIRED);
 	}
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prSingleAssignmentValue().ele00111Group();
+		return grammarAccess.prSingleAssignmentValue().ele0111Group();
 	}
 		
 	@Override
 	protected Solution createSolution() {	
-		Solution s1 = new SingleAssignmentValue_0_0_1_1_1_1_Keyword(current, this).firstSolution();
+		Solution s1 = new SingleAssignmentValue_0_1_1_1_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
-			Solution s2 = new SingleAssignmentValue_0_0_1_1_1_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			Solution s2 = new SingleAssignmentValue_0_1_1_1_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
 				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
@@ -6206,22 +6291,22 @@ protected class SingleAssignmentValue_0_0_1_1_1_Group extends GroupToken {
 }
 
 // not supported
-protected class SingleAssignmentValue_0_0_1_1_1_0_Group extends GroupToken {
+protected class SingleAssignmentValue_0_1_1_1_0_Group extends GroupToken {
 	
-	public SingleAssignmentValue_0_0_1_1_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
+	public SingleAssignmentValue_0_1_1_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prSingleAssignmentValue().ele001110Group();
+		return grammarAccess.prSingleAssignmentValue().ele01110Group();
 	}
 		
 	@Override
 	protected Solution createSolution() {	
-		Solution s1 = new SingleAssignmentValue_0_0_1_1_1_0_1_Assignment_refIndex(current, this).firstSolution();
+		Solution s1 = new SingleAssignmentValue_0_1_1_1_0_1_Assignment_refIndex(current, this).firstSolution();
 		while(s1 != null) {
-			Solution s2 = new SingleAssignmentValue_0_0_1_1_1_0_0_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			Solution s2 = new SingleAssignmentValue_0_1_1_1_0_0_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
 				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
@@ -6236,27 +6321,27 @@ protected class SingleAssignmentValue_0_0_1_1_1_0_Group extends GroupToken {
 }
 
 // not supported
-protected class SingleAssignmentValue_0_0_1_1_1_0_0_Keyword extends KeywordToken  {
+protected class SingleAssignmentValue_0_1_1_1_0_0_Keyword extends KeywordToken  {
 	
-	public SingleAssignmentValue_0_0_1_1_1_0_0_Keyword(IInstanceDescription curr, AbstractToken pred) {
+	public SingleAssignmentValue_0_1_1_1_0_0_Keyword(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prSingleAssignmentValue().ele0011100KeywordLeftSquareBracket();
+		return grammarAccess.prSingleAssignmentValue().ele011100KeywordLeftSquareBracket();
 	}	
 }
 
 // not supported
-protected class SingleAssignmentValue_0_0_1_1_1_0_1_Assignment_refIndex extends AssignmentToken  {
+protected class SingleAssignmentValue_0_1_1_1_0_1_Assignment_refIndex extends AssignmentToken  {
 	
-	public SingleAssignmentValue_0_0_1_1_1_0_1_Assignment_refIndex(IInstanceDescription curr, AbstractToken pred) {
+	public SingleAssignmentValue_0_1_1_1_0_1_Assignment_refIndex(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prSingleAssignmentValue().ele0011101AssignmentRefIndex();
+		return grammarAccess.prSingleAssignmentValue().ele011101AssignmentRefIndex();
 	}
 	
 	@Override
@@ -6265,7 +6350,7 @@ protected class SingleAssignmentValue_0_0_1_1_1_0_1_Assignment_refIndex extends 
 		IInstanceDescription obj = current.cloneAndConsume("refIndex");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prSingleAssignmentValue().ele00111010LexerRuleCallINT();
+			element = grammarAccess.prSingleAssignmentValue().ele0111010LexerRuleCallINT();
 			return new Solution(obj);
 		}
 		return null;
@@ -6274,14 +6359,14 @@ protected class SingleAssignmentValue_0_0_1_1_1_0_1_Assignment_refIndex extends 
 
 
 // not supported
-protected class SingleAssignmentValue_0_0_1_1_1_1_Keyword extends KeywordToken  {
+protected class SingleAssignmentValue_0_1_1_1_1_Keyword extends KeywordToken  {
 	
-	public SingleAssignmentValue_0_0_1_1_1_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
+	public SingleAssignmentValue_0_1_1_1_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prSingleAssignmentValue().ele001111KeywordRightSquareBracket();
+		return grammarAccess.prSingleAssignmentValue().ele01111KeywordRightSquareBracket();
 	}	
 }
 
@@ -6290,15 +6375,15 @@ protected class SingleAssignmentValue_0_0_1_1_1_1_Keyword extends KeywordToken  
 
 
 // not supported
-protected class SingleAssignmentValue_0_1_Assignment_newObject extends AssignmentToken  {
+protected class SingleAssignmentValue_1_Assignment_newObject extends AssignmentToken  {
 	
-	public SingleAssignmentValue_0_1_Assignment_newObject(IInstanceDescription curr, AbstractToken pred) {
+	public SingleAssignmentValue_1_Assignment_newObject(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prSingleAssignmentValue().ele01AssignmentNewObject();
+		return grammarAccess.prSingleAssignmentValue().ele1AssignmentNewObject();
 	}
 	
 	@Override
@@ -6321,91 +6406,6 @@ protected class SingleAssignmentValue_0_1_Assignment_newObject extends Assignmen
 		return null;
 	}
 }
-
-
-// not supported
-protected class SingleAssignmentValue_1_Group extends GroupToken {
-	
-	public SingleAssignmentValue_1_Group(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
-	}
-	
-	@Override
-	public Group getGrammarElement() {
-		return grammarAccess.prSingleAssignmentValue().ele1Group();
-	}
-		
-	@Override
-	protected Solution createSolution() {	
-		Solution s1 = new SingleAssignmentValue_1_1_Assignment_impFrag(current, this).firstSolution();
-		while(s1 != null) {
-			Solution s2 = new SingleAssignmentValue_1_0_Assignment_import(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
-				last = s2.getPredecessor();
-				return s2;
-			}
-		}
-		return null;
-		
-	}
-}
-
-// not supported
-protected class SingleAssignmentValue_1_0_Assignment_import extends AssignmentToken  {
-	
-	public SingleAssignmentValue_1_0_Assignment_import(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
-	}
-	
-	@Override
-	public Assignment getGrammarElement() {
-		return grammarAccess.prSingleAssignmentValue().ele10AssignmentImport();
-	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("import",IS_REQUIRED)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("import");
-		if(value instanceof EObject) { // xtext::CrossReference
-			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prSingleAssignmentValue().ele100CrossReferenceEStringImport().getType().getType())) {
-				type = AssignmentType.CR;
-				element = grammarAccess.prSingleAssignmentValue().ele100CrossReferenceEStringImport(); 
-				return new Solution(obj);
-			}
-		}
-		return null;
-	}
-}
-
-// not supported
-protected class SingleAssignmentValue_1_1_Assignment_impFrag extends AssignmentToken  {
-	
-	public SingleAssignmentValue_1_1_Assignment_impFrag(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
-	}
-	
-	@Override
-	public Assignment getGrammarElement() {
-		return grammarAccess.prSingleAssignmentValue().ele11AssignmentImpFrag();
-	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("impFrag",IS_REQUIRED)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("impFrag");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
-			type = AssignmentType.LRC;
-			element = grammarAccess.prSingleAssignmentValue().ele110LexerRuleCallFRAGMENT();
-			return new Solution(obj);
-		}
-		return null;
-	}
-}
-
 
 
 /************ end Rule SingleAssignmentValue ****************/
