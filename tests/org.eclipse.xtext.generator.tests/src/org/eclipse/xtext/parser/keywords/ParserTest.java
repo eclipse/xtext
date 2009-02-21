@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.ParserTestHelper;
 import org.eclipse.xtext.parser.antlr.IAntlrParser;
-import org.eclipse.xtext.parser.datatyperules.datatypeRulesTestLanguage.DatatypeRulesTestLanguagePackage;
 import org.eclipse.xtext.parser.keywords.keywordsTestLanguage.KeywordsTestLanguagePackage;
 import org.eclipse.xtext.parser.packrat.IPackratParser;
 import org.eclipse.xtext.resource.XtextResource;
@@ -37,10 +36,10 @@ public abstract class ParserTest extends AbstractGeneratorTest {
 		helper = new ParserTestHelper(getResourceFactory(), getParserUnderTest(), get(Keys.RESOURCE_SET_KEY));
 		EPackage pack = KeywordsTestLanguagePackage.eINSTANCE;
 		EClass clazz = (EClass) pack.getEClassifier("Model");
-		first = clazz.getEStructuralFeature("first"); 
-		second = clazz.getEStructuralFeature("second"); 
-		third = clazz.getEStructuralFeature("third"); 
-		forth = clazz.getEStructuralFeature("forth"); 
+		first = clazz.getEStructuralFeature("first");
+		second = clazz.getEStructuralFeature("second");
+		third = clazz.getEStructuralFeature("third");
+		forth = clazz.getEStructuralFeature("forth");
 	}
 
 	protected abstract IParser getParserUnderTest();
@@ -51,46 +50,46 @@ public abstract class ParserTest extends AbstractGeneratorTest {
 		boolean value = (Boolean) model.eGet(feature);
 		assertTrue(value);
 	}
-	
+
 	public void testFooBar() throws Exception {
 		XtextResource resource = helper.getResourceFromString("foo\\bar");
 		assertTrue(resource.getErrors().isEmpty());
 		checkModel(resource, first);
 	}
-	
+
 	public void testFoo() throws Exception {
 		XtextResource resource = helper.getResourceFromString("foo\\");
 		assertTrue(resource.getErrors().isEmpty());
 		checkModel(resource, second);
 	}
-	
+
 	public void testBar() throws Exception {
 		XtextResource resource = helper.getResourceFromString("\\bar");
 		assertTrue(resource.getErrors().isEmpty());
 		checkModel(resource, third);
 	}
-	
+
 	public void testBackslash() throws Exception {
 		XtextResource resource = helper.getResourceFromString("\\");
 		assertTrue(resource.getErrors().isEmpty());
 		checkModel(resource, forth);
 	}
-	
+
 	public static class Antlr extends ParserTest {
 
 		@Override
 		protected IAntlrParser getParserUnderTest() {
 			return getAntlrParser();
 		}
-		
+
 	}
-	
+
 	public static class Packrat extends ParserTest {
 
 		@Override
 		protected IPackratParser getParserUnderTest() {
 			return getPackratParser();
 		}
-		
+
 	}
 }
