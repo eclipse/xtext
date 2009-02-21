@@ -40,13 +40,11 @@ public class PerformanceTestXtextGrammar extends AbstractGeneratorTest {
 		IParseResult packratResult = packratParser.parse(model);
 		assertNotNull(packratResult);
 		assertNotNull(packratResult.getRootASTElement());
-		System.out.println(packratResult.getRootNode().allSyntaxErrors());
 		assertNotNull(packratResult.getRootNode());
 		IParseResult antlrResult = getParser().parse(modelAsStream);
 		assertNotNull(antlrResult);
 		assertNotNull(antlrResult.getRootASTElement());
 		assertNotNull(antlrResult.getRootNode());
-		System.out.println(antlrResult.getRootNode().allSyntaxErrors());
 		EcoreModelComparator comparator = new EcoreModelComparator();
 		assertFalse(comparator.modelsDiffer(antlrResult.getRootASTElement(), packratResult.getRootASTElement()));
 	}

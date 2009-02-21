@@ -285,6 +285,9 @@ public final class «this.consumerClassName().toSimpleName()» extends NonTerminal
 			case 0:
 				announceNextStep();
 				result = do«consumeMethodName().toFirstUpper()»(nextEntryPoint());
+				while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+					result = do«consumeMethodName().toFirstUpper()»(nextEntryPoint());
+				}
 			case 1:
 				if (result == ConsumeResult.SUCCESS) {
 					marker.flush();
@@ -303,15 +306,17 @@ public final class «this.consumerClassName().toSimpleName()» extends NonTerminal
 		marker.commit();
 		return result;
 «ELSE-»
-«EXPAND defineConsumeBody FOR this-»
+		int result = do«consumeMethodName().toFirstUpper()»(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = do«consumeMethodName().toFirstUpper()»(nextEntryPoint());
+		}
+		return result;
 «ENDIF-»
 	}
-«IF isQuestionMark() || isStar() || isPlus()-»
 
 	protected int do«consumeMethodName().toFirstUpper()»(int entryPoint) throws Exception {
 «EXPAND defineConsumeBody FOR this-»
 	}
-«ENDIF-»
 «ENDDEFINE»
 
 «DEFINE defineConsumeDeclaration FOR Action-»
@@ -333,7 +338,7 @@ public final class «this.consumerClassName().toSimpleName()» extends NonTerminal
 «ENDDEFINE»
 
 «DEFINE defineConsumeBody FOR Alternatives-»
-		AlternativesResult result = createAlternativesResult(getRule().«gaElementAccessor()»);
+		final AlternativesResult result = createAlternativesResult(getRule().«gaElementAccessor()»);
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -357,7 +362,7 @@ public final class «this.consumerClassName().toSimpleName()» extends NonTerminal
 «ENDDEFINE»
 
 «DEFINE defineConsumeBody FOR Group-»
-		GroupResult result = createGroupResult(getRule().«gaElementAccessor()»);
+		final GroupResult result = createGroupResult(getRule().«gaElementAccessor()»);
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -407,7 +412,8 @@ public final class «this.consumerClassName().toSimpleName()» extends NonTerminal
 «ENDDEFINE»
 
 «DEFINE defineConsumeBody FOR Assignment-»
-		return «terminal.consumeMethodName()»(entryPoint);
+		final AssignmentResult result = createAssignmentResult(getRule().«gaElementAccessor()»);
+		return result.getResult(«terminal.consumeMethodName()»(entryPoint));
 «ENDDEFINE»
 
 «DEFINE defineConsumeBody(Assignment assignment) FOR AbstractElement-»
