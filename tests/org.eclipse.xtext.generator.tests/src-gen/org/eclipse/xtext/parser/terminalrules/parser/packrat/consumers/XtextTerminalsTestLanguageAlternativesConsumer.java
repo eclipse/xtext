@@ -41,7 +41,15 @@ public final class XtextTerminalsTestLanguageAlternativesConsumer extends NonTer
 	}
 
 	protected int consumeGroup$1(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().eleGroup());
+		int result = doConsumeGroup$1(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeGroup$1(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeGroup$1(int entryPoint) throws Exception {
+		final GroupResult result = createGroupResult(getRule().eleGroup());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -64,6 +72,14 @@ public final class XtextTerminalsTestLanguageAlternativesConsumer extends NonTer
 	}
 
 	protected int consumeRuleCall$2(int entryPoint) throws Exception {
+		int result = doConsumeRuleCall$2(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeRuleCall$2(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeRuleCall$2(int entryPoint) throws Exception {
 		return consumeNonTerminal(groupConsumer, null, false, false, false, getRule().ele0ParserRuleCallGroup());
 	}
 
@@ -78,7 +94,7 @@ public final class XtextTerminalsTestLanguageAlternativesConsumer extends NonTer
 	}
 
 	protected int doConsumeGroup$3(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().ele1Group());
+		final GroupResult result = createGroupResult(getRule().ele1Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -112,11 +128,28 @@ public final class XtextTerminalsTestLanguageAlternativesConsumer extends NonTer
 	}
 
 	protected int consumeKeyword$7(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$7(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$7(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$7(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele101KeywordVerticalLine(), null, false, false, getKeyword$7$Delimiter());
 	}
 
 	protected int consumeAssignment$8(int entryPoint) throws Exception {
-		return consumeRuleCall$9(entryPoint);
+		int result = doConsumeAssignment$8(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$8(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$8(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele11AssignmentGroups());
+		return result.getResult(consumeRuleCall$9(entryPoint));
 	}
 
 	protected int consumeRuleCall$9(int entryPoint) throws Exception {

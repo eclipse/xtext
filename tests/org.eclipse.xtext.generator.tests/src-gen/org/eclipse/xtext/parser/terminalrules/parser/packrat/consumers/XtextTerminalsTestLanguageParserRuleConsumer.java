@@ -72,7 +72,15 @@ public final class XtextTerminalsTestLanguageParserRuleConsumer extends NonTermi
 	}
 
 	protected int consumeGroup$1(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().eleGroup());
+		int result = doConsumeGroup$1(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeGroup$1(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeGroup$1(int entryPoint) throws Exception {
+		final GroupResult result = createGroupResult(getRule().eleGroup());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -123,7 +131,16 @@ public final class XtextTerminalsTestLanguageParserRuleConsumer extends NonTermi
 	}
 
 	protected int consumeAssignment$6(int entryPoint) throws Exception {
-		return consumeRuleCall$7(entryPoint);
+		int result = doConsumeAssignment$6(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$6(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$6(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele00000AssignmentName());
+		return result.getResult(consumeRuleCall$7(entryPoint));
 	}
 
 	protected int consumeRuleCall$7(int entryPoint) throws Exception {
@@ -142,7 +159,7 @@ public final class XtextTerminalsTestLanguageParserRuleConsumer extends NonTermi
 	}
 
 	protected int doConsumeGroup$8(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().ele00001Group());
+		final GroupResult result = createGroupResult(getRule().ele00001Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -165,11 +182,28 @@ public final class XtextTerminalsTestLanguageParserRuleConsumer extends NonTermi
 	}
 
 	protected int consumeKeyword$9(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$9(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$9(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$9(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele000010KeywordReturns(), null, false, false, getKeyword$9$Delimiter());
 	}
 
 	protected int consumeAssignment$10(int entryPoint) throws Exception {
-		return consumeRuleCall$11(entryPoint);
+		int result = doConsumeAssignment$10(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$10(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$10(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele000011AssignmentType());
+		return result.getResult(consumeRuleCall$11(entryPoint));
 	}
 
 	protected int consumeRuleCall$11(int entryPoint) throws Exception {
@@ -188,7 +222,7 @@ public final class XtextTerminalsTestLanguageParserRuleConsumer extends NonTermi
 	}
 
 	protected int doConsumeGroup$12(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().ele0001Group());
+		final GroupResult result = createGroupResult(getRule().ele0001Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -225,7 +259,16 @@ public final class XtextTerminalsTestLanguageParserRuleConsumer extends NonTermi
 	}
 
 	protected int consumeAssignment$15(int entryPoint) throws Exception {
-		return consumeKeyword$16(entryPoint);
+		int result = doConsumeAssignment$15(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$15(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$15(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele0001000AssignmentDefinesHiddenTokens());
+		return result.getResult(consumeKeyword$16(entryPoint));
 	}
 
 	protected int consumeKeyword$16(int entryPoint) throws Exception {
@@ -233,6 +276,14 @@ public final class XtextTerminalsTestLanguageParserRuleConsumer extends NonTermi
 	}
 
 	protected int consumeKeyword$17(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$17(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$17(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$17(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele0001001KeywordLeftParenthesis(), null, false, false, getKeyword$17$Delimiter());
 	}
 
@@ -248,7 +299,7 @@ public final class XtextTerminalsTestLanguageParserRuleConsumer extends NonTermi
 	}
 
 	protected int doConsumeGroup$18(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().ele000101Group());
+		final GroupResult result = createGroupResult(getRule().ele000101Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -271,7 +322,16 @@ public final class XtextTerminalsTestLanguageParserRuleConsumer extends NonTermi
 	}
 
 	protected int consumeAssignment$19(int entryPoint) throws Exception {
-		return consumeCrossReference$20(entryPoint);
+		int result = doConsumeAssignment$19(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$19(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$19(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele0001010AssignmentHiddenTokens());
+		return result.getResult(consumeCrossReference$20(entryPoint));
 	}
 
 	protected int consumeCrossReference$20(int entryPoint) throws Exception {
@@ -289,7 +349,7 @@ public final class XtextTerminalsTestLanguageParserRuleConsumer extends NonTermi
 	}
 
 	protected int doConsumeGroup$22(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().ele0001011Group());
+		final GroupResult result = createGroupResult(getRule().ele0001011Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -312,11 +372,28 @@ public final class XtextTerminalsTestLanguageParserRuleConsumer extends NonTermi
 	}
 
 	protected int consumeKeyword$23(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$23(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$23(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$23(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele00010110KeywordComma(), null, false, false, getKeyword$23$Delimiter());
 	}
 
 	protected int consumeAssignment$24(int entryPoint) throws Exception {
-		return consumeCrossReference$25(entryPoint);
+		int result = doConsumeAssignment$24(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$24(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$24(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele00010111AssignmentHiddenTokens());
+		return result.getResult(consumeCrossReference$25(entryPoint));
 	}
 
 	protected int consumeCrossReference$25(int entryPoint) throws Exception {
@@ -324,15 +401,40 @@ public final class XtextTerminalsTestLanguageParserRuleConsumer extends NonTermi
 	}
 
 	protected int consumeKeyword$27(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$27(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$27(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$27(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele00011KeywordRightParenthesis(), null, false, false, getKeyword$27$Delimiter());
 	}
 
 	protected int consumeKeyword$28(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$28(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$28(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$28(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele001KeywordColon(), null, false, false, getKeyword$28$Delimiter());
 	}
 
 	protected int consumeAssignment$29(int entryPoint) throws Exception {
-		return consumeRuleCall$30(entryPoint);
+		int result = doConsumeAssignment$29(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$29(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$29(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele01AssignmentAlternatives());
+		return result.getResult(consumeRuleCall$30(entryPoint));
 	}
 
 	protected int consumeRuleCall$30(int entryPoint) throws Exception {
@@ -340,6 +442,14 @@ public final class XtextTerminalsTestLanguageParserRuleConsumer extends NonTermi
 	}
 
 	protected int consumeKeyword$31(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$31(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$31(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$31(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele1KeywordSemicolon(), null, false, false, getKeyword$31$Delimiter());
 	}
 

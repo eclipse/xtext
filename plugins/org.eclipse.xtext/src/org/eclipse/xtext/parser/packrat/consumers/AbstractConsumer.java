@@ -15,9 +15,9 @@ import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
  */
 public abstract class AbstractConsumer {
 
-	protected final IParsedTokenAcceptor acceptor;
-	protected final ICharSequenceWithOffset input;
-	protected final RecoveryStateHolder recoveryStateHolder;
+	private final IParsedTokenAcceptor acceptor;
+	private final ICharSequenceWithOffset input;
+	private final RecoveryStateHolder recoveryStateHolder;
 
 	protected AbstractConsumer(ICharSequenceWithOffset input, IParsedTokenAcceptor tokenAcceptor,
 			RecoveryStateHolder recoveryStateHolder) {
@@ -45,19 +45,19 @@ public abstract class AbstractConsumer {
 	public void announceNextStep() {
 		recoveryStateHolder.announceNextStep();
 	}
-	
+
 	public int nextEntryPoint() {
 		return -1;
 	}
-	
+
 	public IParsedTokenAcceptor getTokenAcceptor() {
 		return acceptor;
 	}
-	
+
 	public ICharSequenceWithOffset getInput() {
 		return input;
 	}
-	
+
 	public RecoveryStateHolder getRecoveryStateHolder() {
 		return recoveryStateHolder;
 	}

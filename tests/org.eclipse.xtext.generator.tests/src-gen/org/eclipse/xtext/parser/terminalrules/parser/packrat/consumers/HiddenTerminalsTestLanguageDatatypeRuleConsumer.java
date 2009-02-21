@@ -42,7 +42,15 @@ public final class HiddenTerminalsTestLanguageDatatypeRuleConsumer extends NonTe
 	}
 
 	protected int consumeGroup$1(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().eleGroup());
+		int result = doConsumeGroup$1(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeGroup$1(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeGroup$1(int entryPoint) throws Exception {
+		final GroupResult result = createGroupResult(getRule().eleGroup());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -65,10 +73,26 @@ public final class HiddenTerminalsTestLanguageDatatypeRuleConsumer extends NonTe
 	}
 
 	protected int consumeKeyword$2(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$2(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$2(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$2(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele0KeywordRule(), null, false, false, getKeyword$2$Delimiter());
 	}
 
 	protected int consumeKeyword$3(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$3(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$3(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$3(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele1KeywordSemicolon(), null, false, false, getKeyword$3$Delimiter());
 	}
 

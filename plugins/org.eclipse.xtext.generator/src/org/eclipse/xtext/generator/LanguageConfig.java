@@ -15,14 +15,13 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- * 
+ *
  */
 public class LanguageConfig extends CompositeGeneratorFragment {
 

@@ -60,7 +60,15 @@ public final class TreeTestLanguageNodeConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeGroup$1(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().eleGroup());
+		int result = doConsumeGroup$1(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeGroup$1(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeGroup$1(int entryPoint) throws Exception {
+		final GroupResult result = createGroupResult(getRule().eleGroup());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -118,7 +126,16 @@ public final class TreeTestLanguageNodeConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$7(int entryPoint) throws Exception {
-		return consumeRuleCall$8(entryPoint);
+		int result = doConsumeAssignment$7(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$7(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$7(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele000000AssignmentName());
+		return result.getResult(consumeRuleCall$8(entryPoint));
 	}
 
 	protected int consumeRuleCall$8(int entryPoint) throws Exception {
@@ -126,11 +143,28 @@ public final class TreeTestLanguageNodeConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeKeyword$9(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$9(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$9(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$9(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele000001KeywordLeftParenthesis(), null, false, false, getKeyword$9$Delimiter());
 	}
 
 	protected int consumeAssignment$10(int entryPoint) throws Exception {
-		return consumeRuleCall$11(entryPoint);
+		int result = doConsumeAssignment$10(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$10(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$10(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele00001AssignmentAttrib());
+		return result.getResult(consumeRuleCall$11(entryPoint));
 	}
 
 	protected int consumeRuleCall$11(int entryPoint) throws Exception {
@@ -138,10 +172,26 @@ public final class TreeTestLanguageNodeConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeKeyword$12(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$12(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$12(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$12(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele0001KeywordRightParenthesis(), null, false, false, getKeyword$12$Delimiter());
 	}
 
 	protected int consumeKeyword$13(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$13(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$13(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$13(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele001KeywordLeftCurlyBracket(), null, false, false, getKeyword$13$Delimiter());
 	}
 
@@ -156,7 +206,8 @@ public final class TreeTestLanguageNodeConsumer extends NonTerminalConsumer {
 	}
 
 	protected int doConsumeAssignment$14(int entryPoint) throws Exception {
-		return consumeRuleCall$15(entryPoint);
+		final AssignmentResult result = createAssignmentResult(getRule().ele01AssignmentChildren());
+		return result.getResult(consumeRuleCall$15(entryPoint));
 	}
 
 	protected int consumeRuleCall$15(int entryPoint) throws Exception {
@@ -164,6 +215,14 @@ public final class TreeTestLanguageNodeConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeKeyword$16(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$16(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$16(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$16(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele1KeywordRightCurlyBracketSemicolon(), null, false, false, getKeyword$16$Delimiter());
 	}
 

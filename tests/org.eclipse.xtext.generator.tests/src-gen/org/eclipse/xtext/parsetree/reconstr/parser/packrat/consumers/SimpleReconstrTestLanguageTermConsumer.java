@@ -52,7 +52,15 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 	}
 
 	protected int consumeAlternatives$1(int entryPoint) throws Exception {
-		AlternativesResult result = createAlternativesResult(getRule().eleAlternatives());
+		int result = doConsumeAlternatives$1(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAlternatives$1(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAlternatives$1(int entryPoint) throws Exception {
+		final AlternativesResult result = createAlternativesResult(getRule().eleAlternatives());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -101,34 +109,98 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 	}
 
 	protected int consumeRuleCall$8(int entryPoint) throws Exception {
+		int result = doConsumeRuleCall$8(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeRuleCall$8(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeRuleCall$8(int entryPoint) throws Exception {
 		return consumeNonTerminal(atomConsumer, null, false, false, false, getRule().ele0000000ParserRuleCallAtom());
 	}
 
 	protected int consumeRuleCall$9(int entryPoint) throws Exception {
+		int result = doConsumeRuleCall$9(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeRuleCall$9(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeRuleCall$9(int entryPoint) throws Exception {
 		return consumeNonTerminal(twoNumbersConsumer, null, false, false, false, getRule().ele0000001ParserRuleCallTwoNumbers());
 	}
 
 	protected int consumeRuleCall$10(int entryPoint) throws Exception {
+		int result = doConsumeRuleCall$10(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeRuleCall$10(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeRuleCall$10(int entryPoint) throws Exception {
 		return consumeNonTerminal(manyStringsConsumer, null, false, false, false, getRule().ele000001ParserRuleCallManyStrings());
 	}
 
 	protected int consumeRuleCall$11(int entryPoint) throws Exception {
+		int result = doConsumeRuleCall$11(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeRuleCall$11(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeRuleCall$11(int entryPoint) throws Exception {
 		return consumeNonTerminal(parensConsumer, null, false, false, false, getRule().ele00001ParserRuleCallParens());
 	}
 
 	protected int consumeRuleCall$12(int entryPoint) throws Exception {
+		int result = doConsumeRuleCall$12(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeRuleCall$12(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeRuleCall$12(int entryPoint) throws Exception {
 		return consumeNonTerminal(typeConsumer, null, false, false, false, getRule().ele0001ParserRuleCallType());
 	}
 
 	protected int consumeRuleCall$13(int entryPoint) throws Exception {
+		int result = doConsumeRuleCall$13(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeRuleCall$13(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeRuleCall$13(int entryPoint) throws Exception {
 		return consumeNonTerminal(ref2Consumer, null, false, false, false, getRule().ele001ParserRuleCallRef2());
 	}
 
 	protected int consumeRuleCall$14(int entryPoint) throws Exception {
+		int result = doConsumeRuleCall$14(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeRuleCall$14(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeRuleCall$14(int entryPoint) throws Exception {
 		return consumeNonTerminal(spareConsumer, null, false, false, false, getRule().ele01ParserRuleCallSpare());
 	}
 
 	protected int consumeRuleCall$15(int entryPoint) throws Exception {
+		int result = doConsumeRuleCall$15(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeRuleCall$15(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeRuleCall$15(int entryPoint) throws Exception {
 		return consumeNonTerminal(booleanConsumer, null, false, false, false, getRule().ele1ParserRuleCallBoolean());
 	}
 

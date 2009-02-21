@@ -14,11 +14,11 @@ import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class DebugCharSequenceWithOffset extends DebugCharSequence implements ICharSequenceWithOffset {
-	
-	static final Logger log = Logger.getLogger(DebugCharSequenceWithOffset.class); 
-	
+
+	private static final Logger log = Logger.getLogger(DebugCharSequenceWithOffset.class);
+
 	private final ICharSequenceWithOffset delegate;
-	
+
 	public DebugCharSequenceWithOffset(ICharSequenceWithOffset delegate) {
 		super(delegate);
 		this.delegate = delegate;
@@ -52,5 +52,5 @@ public class DebugCharSequenceWithOffset extends DebugCharSequence implements IC
 		}
 		delegate.setOffset(offset);
 	}
-	
+
 }

@@ -106,7 +106,15 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAlternatives$1(int entryPoint) throws Exception {
-		AlternativesResult result = createAlternativesResult(getRule().eleAlternatives());
+		int result = doConsumeAlternatives$1(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAlternatives$1(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAlternatives$1(int entryPoint) throws Exception {
+		final AlternativesResult result = createAlternativesResult(getRule().eleAlternatives());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -160,7 +168,15 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeGroup$9(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().ele00000000Group());
+		int result = doConsumeGroup$9(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeGroup$9(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeGroup$9(int entryPoint) throws Exception {
+		final GroupResult result = createGroupResult(getRule().ele00000000Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -198,7 +214,16 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAssignment$11(int entryPoint) throws Exception {
-		return consumeAlternatives$12(entryPoint);
+		int result = doConsumeAssignment$11(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$11(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$11(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele000000001AssignmentValue());
+		return result.getResult(consumeAlternatives$12(entryPoint));
 	}
 	protected int consumeAlternatives$12(int entryPoint) throws Exception {
 		AlternativesResult result = createAlternativesResult();
@@ -256,7 +281,15 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeGroup$21(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().ele00000001Group());
+		int result = doConsumeGroup$21(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeGroup$21(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeGroup$21(int entryPoint) throws Exception {
+		final GroupResult result = createGroupResult(getRule().ele00000001Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -279,11 +312,28 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeKeyword$22(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$22(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$22(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$22(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele000000010KeywordDigitOnePlusSign(), null, false, false, getKeyword$22$Delimiter());
 	}
 
 	protected int consumeAssignment$23(int entryPoint) throws Exception {
-		return consumeAlternatives$24(entryPoint);
+		int result = doConsumeAssignment$23(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$23(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$23(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele000000011AssignmentMultiValue());
+		return result.getResult(consumeAlternatives$24(entryPoint));
 	}
 	protected int consumeAlternatives$24(int entryPoint) throws Exception {
 		AlternativesResult result = createAlternativesResult();
@@ -341,7 +391,15 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeGroup$33(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().ele0000001Group());
+		int result = doConsumeGroup$33(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeGroup$33(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeGroup$33(int entryPoint) throws Exception {
+		final GroupResult result = createGroupResult(getRule().ele0000001Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -364,11 +422,28 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeKeyword$34(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$34(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$34(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$34(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele00000010KeywordDigitTwo(), null, false, false, getKeyword$34$Delimiter());
 	}
 
 	protected int consumeAssignment$35(int entryPoint) throws Exception {
-		return consumeRuleCall$36(entryPoint);
+		int result = doConsumeAssignment$35(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$35(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$35(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele00000011AssignmentValue());
+		return result.getResult(consumeRuleCall$36(entryPoint));
 	}
 
 	protected int consumeRuleCall$36(int entryPoint) throws Exception {
@@ -376,7 +451,15 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeGroup$37(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().ele000001Group());
+		int result = doConsumeGroup$37(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeGroup$37(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeGroup$37(int entryPoint) throws Exception {
+		final GroupResult result = createGroupResult(getRule().ele000001Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -399,11 +482,28 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeKeyword$38(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$38(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$38(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$38(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele0000010KeywordDigitTwoPlusSign(), null, false, false, getKeyword$38$Delimiter());
 	}
 
 	protected int consumeAssignment$39(int entryPoint) throws Exception {
-		return consumeRuleCall$40(entryPoint);
+		int result = doConsumeAssignment$39(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$39(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$39(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele0000011AssignmentMultiValue());
+		return result.getResult(consumeRuleCall$40(entryPoint));
 	}
 
 	protected int consumeRuleCall$40(int entryPoint) throws Exception {
@@ -411,7 +511,15 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeGroup$41(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().ele00001Group());
+		int result = doConsumeGroup$41(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeGroup$41(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeGroup$41(int entryPoint) throws Exception {
+		final GroupResult result = createGroupResult(getRule().ele00001Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -434,11 +542,28 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeKeyword$42(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$42(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$42(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$42(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele000010KeywordDigitThree(), null, false, false, getKeyword$42$Delimiter());
 	}
 
 	protected int consumeAssignment$43(int entryPoint) throws Exception {
-		return consumeRuleCall$44(entryPoint);
+		int result = doConsumeAssignment$43(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$43(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$43(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele000011AssignmentValue());
+		return result.getResult(consumeRuleCall$44(entryPoint));
 	}
 
 	protected int consumeRuleCall$44(int entryPoint) throws Exception {
@@ -446,7 +571,15 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeGroup$45(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().ele0001Group());
+		int result = doConsumeGroup$45(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeGroup$45(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeGroup$45(int entryPoint) throws Exception {
+		final GroupResult result = createGroupResult(getRule().ele0001Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -469,11 +602,28 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeKeyword$46(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$46(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$46(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$46(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele00010KeywordDigitThreePlusSign(), null, false, false, getKeyword$46$Delimiter());
 	}
 
 	protected int consumeAssignment$47(int entryPoint) throws Exception {
-		return consumeRuleCall$48(entryPoint);
+		int result = doConsumeAssignment$47(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$47(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$47(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele00011AssignmentMultiValue());
+		return result.getResult(consumeRuleCall$48(entryPoint));
 	}
 
 	protected int consumeRuleCall$48(int entryPoint) throws Exception {
@@ -481,7 +631,15 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeGroup$49(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().ele001Group());
+		int result = doConsumeGroup$49(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeGroup$49(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeGroup$49(int entryPoint) throws Exception {
+		final GroupResult result = createGroupResult(getRule().ele001Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -504,11 +662,28 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeKeyword$50(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$50(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$50(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$50(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele0010KeywordDigitFour(), null, false, false, getKeyword$50$Delimiter());
 	}
 
 	protected int consumeAssignment$51(int entryPoint) throws Exception {
-		return consumeRuleCall$52(entryPoint);
+		int result = doConsumeAssignment$51(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$51(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$51(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele0011AssignmentValue());
+		return result.getResult(consumeRuleCall$52(entryPoint));
 	}
 
 	protected int consumeRuleCall$52(int entryPoint) throws Exception {
@@ -516,7 +691,15 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeGroup$53(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().ele01Group());
+		int result = doConsumeGroup$53(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeGroup$53(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeGroup$53(int entryPoint) throws Exception {
+		final GroupResult result = createGroupResult(getRule().ele01Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -539,11 +722,28 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeKeyword$54(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$54(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$54(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$54(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele010KeywordDigitFourPlusSign(), null, false, false, getKeyword$54$Delimiter());
 	}
 
 	protected int consumeAssignment$55(int entryPoint) throws Exception {
-		return consumeRuleCall$56(entryPoint);
+		int result = doConsumeAssignment$55(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$55(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$55(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele011AssignmentMultiValue());
+		return result.getResult(consumeRuleCall$56(entryPoint));
 	}
 
 	protected int consumeRuleCall$56(int entryPoint) throws Exception {
@@ -551,7 +751,15 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeGroup$57(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().ele1Group());
+		int result = doConsumeGroup$57(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeGroup$57(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeGroup$57(int entryPoint) throws Exception {
+		final GroupResult result = createGroupResult(getRule().ele1Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -581,11 +789,28 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeKeyword$59(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$59(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$59(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$59(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele100KeywordContent(), null, false, false, getKeyword$59$Delimiter());
 	}
 
 	protected int consumeAssignment$60(int entryPoint) throws Exception {
-		return consumeRuleCall$61(entryPoint);
+		int result = doConsumeAssignment$60(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$60(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$60(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele101AssignmentChildren());
+		return result.getResult(consumeRuleCall$61(entryPoint));
 	}
 
 	protected int consumeRuleCall$61(int entryPoint) throws Exception {
@@ -604,7 +829,7 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 	}
 
 	protected int doConsumeGroup$62(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().ele11Group());
+		final GroupResult result = createGroupResult(getRule().ele11Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -627,11 +852,28 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeKeyword$63(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$63(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$63(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$63(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele110KeywordRef(), null, false, false, getKeyword$63$Delimiter());
 	}
 
 	protected int consumeAssignment$64(int entryPoint) throws Exception {
-		return consumeAlternatives$65(entryPoint);
+		int result = doConsumeAssignment$64(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$64(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$64(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele111AssignmentRef());
+		return result.getResult(consumeAlternatives$65(entryPoint));
 	}
 	protected int consumeAlternatives$65(int entryPoint) throws Exception {
 		AlternativesResult result = createAlternativesResult();

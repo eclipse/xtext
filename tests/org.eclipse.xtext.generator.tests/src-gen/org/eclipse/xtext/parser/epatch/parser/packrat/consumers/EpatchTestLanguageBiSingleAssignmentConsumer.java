@@ -52,7 +52,15 @@ public final class EpatchTestLanguageBiSingleAssignmentConsumer extends NonTermi
 	}
 
 	protected int consumeGroup$1(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().eleGroup());
+		int result = doConsumeGroup$1(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeGroup$1(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeGroup$1(int entryPoint) throws Exception {
+		final GroupResult result = createGroupResult(getRule().eleGroup());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -103,7 +111,16 @@ public final class EpatchTestLanguageBiSingleAssignmentConsumer extends NonTermi
 	}
 
 	protected int consumeAssignment$6(int entryPoint) throws Exception {
-		return consumeRuleCall$7(entryPoint);
+		int result = doConsumeAssignment$6(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$6(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$6(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele00000AssignmentFeature());
+		return result.getResult(consumeRuleCall$7(entryPoint));
 	}
 
 	protected int consumeRuleCall$7(int entryPoint) throws Exception {
@@ -111,11 +128,28 @@ public final class EpatchTestLanguageBiSingleAssignmentConsumer extends NonTermi
 	}
 
 	protected int consumeKeyword$8(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$8(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$8(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$8(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele00001KeywordEqualsSign(), null, false, false, getKeyword$8$Delimiter());
 	}
 
 	protected int consumeAssignment$9(int entryPoint) throws Exception {
-		return consumeRuleCall$10(entryPoint);
+		int result = doConsumeAssignment$9(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$9(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$9(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele0001AssignmentLeftValue());
+		return result.getResult(consumeRuleCall$10(entryPoint));
 	}
 
 	protected int consumeRuleCall$10(int entryPoint) throws Exception {
@@ -123,11 +157,28 @@ public final class EpatchTestLanguageBiSingleAssignmentConsumer extends NonTermi
 	}
 
 	protected int consumeKeyword$11(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$11(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$11(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$11(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele001KeywordVerticalLine(), null, false, false, getKeyword$11$Delimiter());
 	}
 
 	protected int consumeAssignment$12(int entryPoint) throws Exception {
-		return consumeRuleCall$13(entryPoint);
+		int result = doConsumeAssignment$12(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$12(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$12(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele01AssignmentRightValue());
+		return result.getResult(consumeRuleCall$13(entryPoint));
 	}
 
 	protected int consumeRuleCall$13(int entryPoint) throws Exception {
@@ -135,6 +186,14 @@ public final class EpatchTestLanguageBiSingleAssignmentConsumer extends NonTermi
 	}
 
 	protected int consumeKeyword$14(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$14(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$14(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$14(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele1KeywordSemicolon(), null, false, false, getKeyword$14$Delimiter());
 	}
 

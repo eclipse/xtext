@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.packrat.consumers;
 
+import org.eclipse.xtext.parser.packrat.IBacktracker;
 import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
 import org.eclipse.xtext.parser.packrat.IHiddenTokenHandler;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory;
@@ -28,5 +29,7 @@ public interface INonTerminalConsumerConfiguration {
 	IConsumerUtility getConsumerUtil();
 
 	RecoveryStateHolder getRecoveryStateHolder();
+
+	IBacktracker getBacktracker();
 
 }

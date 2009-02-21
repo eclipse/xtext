@@ -8,6 +8,7 @@
 package org.eclipse.xtext.parser.packrat.tokens;
 
 import org.eclipse.xtext.parser.packrat.IParsedTokenVisitor;
+import org.eclipse.xtext.parser.packrat.tokens.CompoundParsedToken.End;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -16,6 +17,42 @@ public abstract class AbstractParsedTokenVisitor implements IParsedTokenVisitor 
 
 	public void visitAbstractParsedToken(AbstractParsedToken token) {
 		throw new UnsupportedOperationException("visitAbstractParsedToken is not implemented.");
+	}
+
+	public void visitAbstractParsedTokenEnd(AbstractParsedToken.End token) {
+		visitAbstractParsedToken(token);
+	}
+
+	public void visitCompoundParsedToken(CompoundParsedToken token) {
+		visitParsedToken(token);
+	}
+
+	public void visitCompoundParsedTokenEnd(End token) {
+		visitAbstractParsedTokenEnd(token);
+	}
+
+	public void visitAssignmentToken(AssignmentToken token) {
+		visitCompoundParsedToken(token);
+	}
+
+	public void visitAssignmentTokenEnd(AssignmentToken.End token) {
+		visitCompoundParsedTokenEnd(token);
+	}
+
+	public void visitAlternativesToken(AlternativesToken token) {
+		visitCompoundParsedToken(token);
+	}
+
+	public void visitAlternativesTokenEnd(AlternativesToken.End token) {
+		visitCompoundParsedTokenEnd(token);
+	}
+
+	public void visitGroupToken(GroupToken token) {
+		visitCompoundParsedToken(token);
+	}
+
+	public void visitGroupTokenEnd(GroupToken.End token) {
+		visitCompoundParsedTokenEnd(token);
 	}
 
 	public void visitErrorToken(ErrorToken token) {
@@ -37,11 +74,11 @@ public abstract class AbstractParsedTokenVisitor implements IParsedTokenVisitor 
 	public void visitParsedTerminal(ParsedTerminal token) {
 		visitParsedToken(token);
 	}
-	
+
 	public void visitParsedTerminalWithFeatureInfo(ParsedTerminalWithFeatureInfo token) {
 		visitParsedTerminal(token);
 	}
-	
+
 	public void visitParsedTerminalWithFeature(ParsedTerminalWithFeature token) {
 		visitParsedTerminalWithFeatureInfo(token);
 	}
@@ -53,9 +90,9 @@ public abstract class AbstractParsedTokenVisitor implements IParsedTokenVisitor 
 	public void visitParsedAction(ParsedAction token) {
 		visitParsedToken(token);
 	}
-	
+
 	public void exec(AbstractParsedToken param) {
-		param.accept(this);		
+		param.accept(this);
 	}
 
 }

@@ -46,7 +46,15 @@ public final class HiddenTerminalsTestLanguageModelConsumer extends NonTerminalC
 	}
 
 	protected int consumeAlternatives$1(int entryPoint) throws Exception {
-		AlternativesResult result = createAlternativesResult(getRule().eleAlternatives());
+		int result = doConsumeAlternatives$1(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAlternatives$1(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAlternatives$1(int entryPoint) throws Exception {
+		final AlternativesResult result = createAlternativesResult(getRule().eleAlternatives());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -80,22 +88,62 @@ public final class HiddenTerminalsTestLanguageModelConsumer extends NonTerminalC
 	}
 
 	protected int consumeRuleCall$5(int entryPoint) throws Exception {
+		int result = doConsumeRuleCall$5(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeRuleCall$5(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeRuleCall$5(int entryPoint) throws Exception {
 		return consumeNonTerminal(withoutHiddensConsumer, null, false, false, false, getRule().ele0000ParserRuleCallWithoutHiddens());
 	}
 
 	protected int consumeRuleCall$6(int entryPoint) throws Exception {
+		int result = doConsumeRuleCall$6(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeRuleCall$6(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeRuleCall$6(int entryPoint) throws Exception {
 		return consumeNonTerminal(withHiddensConsumer, null, false, false, false, getRule().ele0001ParserRuleCallWithHiddens());
 	}
 
 	protected int consumeRuleCall$7(int entryPoint) throws Exception {
+		int result = doConsumeRuleCall$7(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeRuleCall$7(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeRuleCall$7(int entryPoint) throws Exception {
 		return consumeNonTerminal(overridingHiddensConsumer, null, false, false, false, getRule().ele001ParserRuleCallOverridingHiddens());
 	}
 
 	protected int consumeRuleCall$8(int entryPoint) throws Exception {
+		int result = doConsumeRuleCall$8(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeRuleCall$8(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeRuleCall$8(int entryPoint) throws Exception {
 		return consumeNonTerminal(inheritingHiddensConsumer, null, false, false, false, getRule().ele01ParserRuleCallInheritingHiddens());
 	}
 
 	protected int consumeRuleCall$9(int entryPoint) throws Exception {
+		int result = doConsumeRuleCall$9(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeRuleCall$9(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeRuleCall$9(int entryPoint) throws Exception {
 		return consumeNonTerminal(datatypeHiddensConsumer, null, false, false, false, getRule().ele1ParserRuleCallDatatypeHiddens());
 	}
 

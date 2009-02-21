@@ -18,13 +18,13 @@ import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractParserConfiguration implements 
+public abstract class AbstractParserConfiguration implements
 	IParserConfiguration,
-	ITerminalConsumerConfiguration, 
+	ITerminalConsumerConfiguration,
 	INonTerminalConsumerConfiguration {
 
 	protected static ITerminalConsumer[] EMPTY_HIDDENS = IHiddenTokenHandler.EMPTY_HIDDENS;
-	
+
 	public interface IInternalParserConfiguration {
 
 		ICharSequenceWithOffset getInput();
@@ -37,16 +37,19 @@ public abstract class AbstractParserConfiguration implements
 
 		IConsumerUtility getConsumerUtil();
 
+		IBacktracker getBacktracker();
+
 		RecoveryStateHolder getRecoveryStateHolder();
 
 	}
-	
+
 	private final ICharSequenceWithOffset input;
 	private final IMarkerFactory markerFactory;
 	private final IParsedTokenAcceptor tokenAcceptor;
 	private final IHiddenTokenHandler hiddenTokenHandler;
 	private final IConsumerUtility consumerUtil;
 	private final RecoveryStateHolder recoveryStateHolder;
+	private final IBacktracker backtracker;
 
 	protected AbstractParserConfiguration(IInternalParserConfiguration configuration) {
 		this.input = configuration.getInput();
@@ -55,8 +58,9 @@ public abstract class AbstractParserConfiguration implements
 		this.hiddenTokenHandler = configuration.getHiddenTokenHandler();
 		this.consumerUtil = configuration.getConsumerUtil();
 		this.recoveryStateHolder = configuration.getRecoveryStateHolder();
+		this.backtracker = configuration.getBacktracker();
 	}
-	
+
 	public ICharSequenceWithOffset getInput() {
 		return input;
 	}
@@ -81,14 +85,18 @@ public abstract class AbstractParserConfiguration implements
 		return recoveryStateHolder;
 	}
 
+	public IBacktracker getBacktracker() {
+		return backtracker;
+	}
+
 	public KeywordConsumer createKeywordConsumer() {
 		return new KeywordConsumer(this);
 	}
-	
+
 	public ITerminalConsumer[] getInitialHiddenTerminals() {
 		return EMPTY_HIDDENS;
 	}
-	
+
 	protected ITerminalConsumer[] toArray(ITerminalConsumer... consumers) {
 		return consumers;
 	}

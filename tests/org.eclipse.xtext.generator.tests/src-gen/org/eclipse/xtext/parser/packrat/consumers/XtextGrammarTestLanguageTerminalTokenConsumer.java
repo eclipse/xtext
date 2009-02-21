@@ -47,7 +47,15 @@ public final class XtextGrammarTestLanguageTerminalTokenConsumer extends NonTerm
 	}
 
 	protected int consumeGroup$1(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().eleGroup());
+		int result = doConsumeGroup$1(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeGroup$1(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeGroup$1(int entryPoint) throws Exception {
+		final GroupResult result = createGroupResult(getRule().eleGroup());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -70,6 +78,14 @@ public final class XtextGrammarTestLanguageTerminalTokenConsumer extends NonTerm
 	}
 
 	protected int consumeRuleCall$2(int entryPoint) throws Exception {
+		int result = doConsumeRuleCall$2(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeRuleCall$2(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeRuleCall$2(int entryPoint) throws Exception {
 		return consumeNonTerminal(terminalTokenElementConsumer, null, false, false, false, getRule().ele0ParserRuleCallTerminalTokenElement());
 	}
 
@@ -85,7 +101,8 @@ public final class XtextGrammarTestLanguageTerminalTokenConsumer extends NonTerm
 	}
 
 	protected int doConsumeAssignment$3(int entryPoint) throws Exception {
-		return consumeAlternatives$4(entryPoint);
+		final AssignmentResult result = createAssignmentResult(getRule().ele1AssignmentCardinality());
+		return result.getResult(consumeAlternatives$4(entryPoint));
 	}
 	protected int consumeAlternatives$4(int entryPoint) throws Exception {
 		AlternativesResult result = createAlternativesResult();

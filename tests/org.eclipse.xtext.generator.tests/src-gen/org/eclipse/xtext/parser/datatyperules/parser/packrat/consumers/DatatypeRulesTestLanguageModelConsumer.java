@@ -56,7 +56,15 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 	}
 
 	protected int consumeGroup$1(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().eleGroup());
+		int result = doConsumeGroup$1(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeGroup$1(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeGroup$1(int entryPoint) throws Exception {
+		final GroupResult result = createGroupResult(getRule().eleGroup());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -100,7 +108,16 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 	}
 
 	protected int consumeAssignment$5(int entryPoint) throws Exception {
-		return consumeRuleCall$6(entryPoint);
+		int result = doConsumeAssignment$5(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$5(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$5(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele0000AssignmentId());
+		return result.getResult(consumeRuleCall$6(entryPoint));
 	}
 
 	protected int consumeRuleCall$6(int entryPoint) throws Exception {
@@ -119,7 +136,7 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 	}
 
 	protected int doConsumeGroup$7(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().ele0001Group());
+		final GroupResult result = createGroupResult(getRule().ele0001Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -142,11 +159,28 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 	}
 
 	protected int consumeKeyword$8(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$8(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$8(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$8(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele00010KeywordColon(), null, false, false, getKeyword$8$Delimiter());
 	}
 
 	protected int consumeAssignment$9(int entryPoint) throws Exception {
-		return consumeRuleCall$10(entryPoint);
+		int result = doConsumeAssignment$9(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$9(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$9(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele00011AssignmentValue());
+		return result.getResult(consumeRuleCall$10(entryPoint));
 	}
 
 	protected int consumeRuleCall$10(int entryPoint) throws Exception {
@@ -165,7 +199,7 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 	}
 
 	protected int doConsumeGroup$11(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().ele001Group());
+		final GroupResult result = createGroupResult(getRule().ele001Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -188,11 +222,28 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 	}
 
 	protected int consumeKeyword$12(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$12(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$12(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$12(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele0010KeywordNumberSign(), null, false, false, getKeyword$12$Delimiter());
 	}
 
 	protected int consumeAssignment$13(int entryPoint) throws Exception {
-		return consumeRuleCall$14(entryPoint);
+		int result = doConsumeAssignment$13(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$13(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$13(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele0011AssignmentVector());
+		return result.getResult(consumeRuleCall$14(entryPoint));
 	}
 
 	protected int consumeRuleCall$14(int entryPoint) throws Exception {
@@ -211,7 +262,7 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 	}
 
 	protected int doConsumeGroup$15(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().ele01Group());
+		final GroupResult result = createGroupResult(getRule().ele01Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -234,11 +285,28 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 	}
 
 	protected int consumeKeyword$16(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$16(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$16(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$16(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele010KeywordPlusSign(), null, false, false, getKeyword$16$Delimiter());
 	}
 
 	protected int consumeAssignment$17(int entryPoint) throws Exception {
-		return consumeRuleCall$18(entryPoint);
+		int result = doConsumeAssignment$17(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$17(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$17(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele011AssignmentDots());
+		return result.getResult(consumeRuleCall$18(entryPoint));
 	}
 
 	protected int consumeRuleCall$18(int entryPoint) throws Exception {
@@ -246,6 +314,14 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 	}
 
 	protected int consumeKeyword$19(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$19(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$19(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$19(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele1KeywordSemicolon(), null, false, false, getKeyword$19$Delimiter());
 	}
 

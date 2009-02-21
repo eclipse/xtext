@@ -44,7 +44,15 @@ public final class EcoreDslSINTConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeGroup$1(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().eleGroup());
+		int result = doConsumeGroup$1(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeGroup$1(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeGroup$1(int entryPoint) throws Exception {
+		final GroupResult result = createGroupResult(getRule().eleGroup());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -82,6 +90,14 @@ public final class EcoreDslSINTConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeRuleCall$3(int entryPoint) throws Exception {
+		int result = doConsumeRuleCall$3(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeRuleCall$3(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeRuleCall$3(int entryPoint) throws Exception {
 		return consumeTerminal(intConsumer, null, false, false, getRule().ele1LexerRuleCallINT(), getRuleCall$3$Delimiter());
 	}
 

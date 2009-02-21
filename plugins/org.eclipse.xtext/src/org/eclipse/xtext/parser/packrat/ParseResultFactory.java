@@ -41,6 +41,8 @@ import org.eclipse.xtext.parsetree.NodeAdapterFactory;
 import org.eclipse.xtext.parsetree.ParsetreeFactory;
 import org.eclipse.xtext.parsetree.SyntaxError;
 
+import com.google.inject.Inject;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -50,7 +52,7 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 
 	private final LinkedList<EObject> currentStack;
 
-	@com.google.inject.Inject
+	@Inject
 	private IAstFactory factory;
 
 	private final LinkedList<ParsedNonTerminal> nonterminalStack;
@@ -87,7 +89,7 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 
 	private void enhanceNode(AbstractParsedToken parsedToken, AbstractNode node) {
 		node.setTotalOffset(parsedToken.getOffset());
-		node.setTotalLength(parsedToken.getLength());
+//		node.setTotalLength(parsedToken.getLength());
 	}
 
 	protected CompositeNode createCompositeNode(AbstractParsedToken parsedToken) {
@@ -114,6 +116,8 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 
 	@Override
 	public void visitErrorToken(ErrorToken token) {
+		if (token.isSkipped())
+			return;
 		LeafNode errorNode = createLeafNode(token);
 		errorNode.setGrammarElement(token.getGrammarElement());
 		SyntaxError syntaxError = ParsetreeFactory.eINSTANCE.createSyntaxError();
@@ -123,12 +127,16 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 
 	@Override
 	public void visitFakedToken(FakedToken token) {
+		if (token.isSkipped())
+			return;
 		// TODO Auto-generated method stub
 		super.visitFakedToken(token);
 	}
 
 	@Override
 	public void visitParsedNonTerminal(ParsedNonTerminal token) {
+		if (token.isSkipped())
+			return;
 		nonterminalStack.add(token);
 		currentStack.add(null);
 
@@ -141,6 +149,8 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 
 	@Override
 	public void visitParsedNonTerminalEnd(ParsedNonTerminalEnd token) {
+		if (token.isSkipped())
+			return;
 		currentNode.setTotalLength(token.getOffset() - currentNode.getTotalOffset());
 		final ParsedNonTerminal nonTerminal = nonterminalStack.removeLast();
 		EObject created = currentStack.removeLast();
@@ -254,6 +264,8 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 
 	@Override
 	public void visitParsedTerminal(ParsedTerminal token) {
+		if (token.isSkipped())
+			return;
 		LeafNode node = createLeafNode(token);
 		node.setGrammarElement(token.getGrammarElement());
 		node.setHidden(token.isHidden());
@@ -261,6 +273,8 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 
 	@Override
 	public void visitParsedTerminalWithFeatureInfo(ParsedTerminalWithFeatureInfo token) {
+		if (token.isSkipped())
+			return;
 		LeafNode node = createLeafNode(token);
 		node.setGrammarElement(token.getGrammarElement());
 		node.setHidden(token.isHidden());
@@ -269,6 +283,8 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 
 	@Override
 	public void visitParsedTerminalWithFeature(ParsedTerminalWithFeature token) {
+		if (token.isSkipped())
+			return;
 		LeafNode node = createLeafNode(token);
 		node.setGrammarElement(token.getGrammarElement());
 		node.setFeature(token.getFeature());
@@ -301,6 +317,8 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 
 	@Override
 	public void visitParsedAction(ParsedAction token) {
+		if (token.isSkipped())
+			return;
 		EObject newCurrent = factory.create(token.getType());
 		EObject prevCurrent = currentStack.removeLast();
 		currentStack.add(newCurrent);
@@ -328,6 +346,8 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 
 	@Override
 	public void visitParsedToken(ParsedToken token) {
+		if (token.isSkipped())
+			return;
 		super.visitParsedToken(token);
 	}
 

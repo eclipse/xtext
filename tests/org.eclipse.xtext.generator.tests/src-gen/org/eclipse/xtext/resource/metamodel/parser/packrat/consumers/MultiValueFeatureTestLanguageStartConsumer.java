@@ -50,6 +50,9 @@ public final class MultiValueFeatureTestLanguageStartConsumer extends NonTermina
 			case 0:
 				announceNextStep();
 				result = doConsumeAssignment$1(nextEntryPoint());
+				while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+					result = doConsumeAssignment$1(nextEntryPoint());
+				}
 			case 1:
 				if (result == ConsumeResult.SUCCESS) {
 					marker.flush();
@@ -70,7 +73,8 @@ public final class MultiValueFeatureTestLanguageStartConsumer extends NonTermina
 	}
 
 	protected int doConsumeAssignment$1(int entryPoint) throws Exception {
-		return consumeRuleCall$2(entryPoint);
+		final AssignmentResult result = createAssignmentResult(getRule().eleAssignmentFeatureA());
+		return result.getResult(consumeRuleCall$2(entryPoint));
 	}
 
 	protected int consumeRuleCall$2(int entryPoint) throws Exception {

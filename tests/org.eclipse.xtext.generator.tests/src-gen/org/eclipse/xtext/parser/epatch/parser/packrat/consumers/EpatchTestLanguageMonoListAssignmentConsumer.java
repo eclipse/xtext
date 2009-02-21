@@ -58,7 +58,15 @@ public final class EpatchTestLanguageMonoListAssignmentConsumer extends NonTermi
 	}
 
 	protected int consumeGroup$1(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().eleGroup());
+		int result = doConsumeGroup$1(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeGroup$1(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeGroup$1(int entryPoint) throws Exception {
+		final GroupResult result = createGroupResult(getRule().eleGroup());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -109,7 +117,16 @@ public final class EpatchTestLanguageMonoListAssignmentConsumer extends NonTermi
 	}
 
 	protected int consumeAssignment$6(int entryPoint) throws Exception {
-		return consumeRuleCall$7(entryPoint);
+		int result = doConsumeAssignment$6(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$6(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$6(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele00000AssignmentFeature());
+		return result.getResult(consumeRuleCall$7(entryPoint));
 	}
 
 	protected int consumeRuleCall$7(int entryPoint) throws Exception {
@@ -117,10 +134,26 @@ public final class EpatchTestLanguageMonoListAssignmentConsumer extends NonTermi
 	}
 
 	protected int consumeKeyword$8(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$8(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$8(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$8(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele00001KeywordEqualsSign(), null, false, false, getKeyword$8$Delimiter());
 	}
 
 	protected int consumeKeyword$9(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$9(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$9(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$9(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele0001KeywordLeftSquareBracket(), null, false, false, getKeyword$9$Delimiter());
 	}
 
@@ -136,7 +169,7 @@ public final class EpatchTestLanguageMonoListAssignmentConsumer extends NonTermi
 	}
 
 	protected int doConsumeGroup$10(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().ele001Group());
+		final GroupResult result = createGroupResult(getRule().ele001Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -159,7 +192,16 @@ public final class EpatchTestLanguageMonoListAssignmentConsumer extends NonTermi
 	}
 
 	protected int consumeAssignment$11(int entryPoint) throws Exception {
-		return consumeRuleCall$12(entryPoint);
+		int result = doConsumeAssignment$11(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$11(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$11(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele0010AssignmentLeftValues());
+		return result.getResult(consumeRuleCall$12(entryPoint));
 	}
 
 	protected int consumeRuleCall$12(int entryPoint) throws Exception {
@@ -177,7 +219,7 @@ public final class EpatchTestLanguageMonoListAssignmentConsumer extends NonTermi
 	}
 
 	protected int doConsumeGroup$13(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().ele0011Group());
+		final GroupResult result = createGroupResult(getRule().ele0011Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -200,11 +242,28 @@ public final class EpatchTestLanguageMonoListAssignmentConsumer extends NonTermi
 	}
 
 	protected int consumeKeyword$14(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$14(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$14(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$14(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele00110KeywordComma(), null, false, false, getKeyword$14$Delimiter());
 	}
 
 	protected int consumeAssignment$15(int entryPoint) throws Exception {
-		return consumeRuleCall$16(entryPoint);
+		int result = doConsumeAssignment$15(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$15(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$15(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele00111AssignmentLeftValues());
+		return result.getResult(consumeRuleCall$16(entryPoint));
 	}
 
 	protected int consumeRuleCall$16(int entryPoint) throws Exception {
@@ -212,10 +271,26 @@ public final class EpatchTestLanguageMonoListAssignmentConsumer extends NonTermi
 	}
 
 	protected int consumeKeyword$17(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$17(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$17(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$17(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele01KeywordRightSquareBracket(), null, false, false, getKeyword$17$Delimiter());
 	}
 
 	protected int consumeKeyword$18(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$18(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$18(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$18(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele1KeywordSemicolon(), null, false, false, getKeyword$18$Delimiter());
 	}
 

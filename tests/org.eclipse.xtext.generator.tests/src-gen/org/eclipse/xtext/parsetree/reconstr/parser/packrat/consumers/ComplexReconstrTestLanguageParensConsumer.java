@@ -47,7 +47,15 @@ public final class ComplexReconstrTestLanguageParensConsumer extends NonTerminal
 	}
 
 	protected int consumeGroup$1(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().eleGroup());
+		int result = doConsumeGroup$1(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeGroup$1(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeGroup$1(int entryPoint) throws Exception {
+		final GroupResult result = createGroupResult(getRule().eleGroup());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -84,14 +92,38 @@ public final class ComplexReconstrTestLanguageParensConsumer extends NonTerminal
 	}
 
 	protected int consumeKeyword$4(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$4(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$4(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$4(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele000KeywordLeftParenthesis(), null, false, false, getKeyword$4$Delimiter());
 	}
 
 	protected int consumeRuleCall$5(int entryPoint) throws Exception {
+		int result = doConsumeRuleCall$5(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeRuleCall$5(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeRuleCall$5(int entryPoint) throws Exception {
 		return consumeNonTerminal(opConsumer, null, false, false, false, getRule().ele001ParserRuleCallOp());
 	}
 
 	protected int consumeKeyword$6(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$6(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$6(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$6(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele01KeywordRightParenthesis(), null, false, false, getKeyword$6$Delimiter());
 	}
 
@@ -107,7 +139,8 @@ public final class ComplexReconstrTestLanguageParensConsumer extends NonTerminal
 	}
 
 	protected int doConsumeAssignment$7(int entryPoint) throws Exception {
-		return consumeKeyword$8(entryPoint);
+		final AssignmentResult result = createAssignmentResult(getRule().ele1AssignmentEm());
+		return result.getResult(consumeKeyword$8(entryPoint));
 	}
 
 	protected int consumeKeyword$8(int entryPoint) throws Exception {

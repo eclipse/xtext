@@ -75,7 +75,7 @@ public abstract class AbstractParsedToken {
 
 		@Override
 		public void accept(IParsedTokenVisitor visitor) {
-			// nothing to do so far
+			visitor.visitAbstractParsedTokenEnd(this);
 		}
 	}
 }

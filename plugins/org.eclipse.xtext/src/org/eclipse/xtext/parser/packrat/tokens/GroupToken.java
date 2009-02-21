@@ -13,21 +13,31 @@ import org.eclipse.xtext.parser.packrat.IParsedTokenVisitor;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class GroupToken extends ParsedToken {
+public class GroupToken extends CompoundParsedToken {
 
 	public GroupToken(int offset, Group group) {
-		super(offset, 0, group);
+		super(offset, group);
 	}
 
 	@Override
 	public void accept(IParsedTokenVisitor visitor) {
-		// nothing to do so far
+		visitor.visitGroupToken(this);
 	}
 
-	public static class End extends AbstractParsedToken.End {
+	@Override
+	public Group getGrammarElement() {
+		return (Group) super.getGrammarElement();
+	}
+
+	public static class End extends CompoundParsedToken.End {
 
 		public End(int offset) {
 			super(offset);
+		}
+
+		@Override
+		public void accept(IParsedTokenVisitor visitor) {
+			visitor.visitGroupTokenEnd(this);
 		}
 
 	}

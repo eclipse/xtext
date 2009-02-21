@@ -42,7 +42,15 @@ public final class LookaheadTestLanguageLookAhead4Consumer extends NonTerminalCo
 	}
 
 	protected int consumeAlternatives$1(int entryPoint) throws Exception {
-		AlternativesResult result = createAlternativesResult(getRule().eleAlternatives());
+		int result = doConsumeAlternatives$1(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAlternatives$1(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAlternatives$1(int entryPoint) throws Exception {
+		final AlternativesResult result = createAlternativesResult(getRule().eleAlternatives());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -61,7 +69,16 @@ public final class LookaheadTestLanguageLookAhead4Consumer extends NonTerminalCo
 	}
 
 	protected int consumeAssignment$2(int entryPoint) throws Exception {
-		return consumeKeyword$3(entryPoint);
+		int result = doConsumeAssignment$2(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$2(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$2(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele0AssignmentX());
+		return result.getResult(consumeKeyword$3(entryPoint));
 	}
 
 	protected int consumeKeyword$3(int entryPoint) throws Exception {
@@ -69,7 +86,16 @@ public final class LookaheadTestLanguageLookAhead4Consumer extends NonTerminalCo
 	}
 
 	protected int consumeAssignment$4(int entryPoint) throws Exception {
-		return consumeKeyword$5(entryPoint);
+		int result = doConsumeAssignment$4(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$4(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$4(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele1AssignmentX());
+		return result.getResult(consumeKeyword$5(entryPoint));
 	}
 
 	protected int consumeKeyword$5(int entryPoint) throws Exception {

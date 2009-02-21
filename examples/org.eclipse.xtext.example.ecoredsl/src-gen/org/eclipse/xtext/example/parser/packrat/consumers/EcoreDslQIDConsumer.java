@@ -50,7 +50,15 @@ public final class EcoreDslQIDConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeGroup$1(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().eleGroup());
+		int result = doConsumeGroup$1(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeGroup$1(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeGroup$1(int entryPoint) throws Exception {
+		final GroupResult result = createGroupResult(getRule().eleGroup());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -73,6 +81,14 @@ public final class EcoreDslQIDConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeRuleCall$2(int entryPoint) throws Exception {
+		int result = doConsumeRuleCall$2(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeRuleCall$2(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeRuleCall$2(int entryPoint) throws Exception {
 		return consumeTerminal(idConsumer, null, false, false, getRule().ele0LexerRuleCallID(), getRuleCall$2$Delimiter());
 	}
 
@@ -87,7 +103,7 @@ public final class EcoreDslQIDConsumer extends NonTerminalConsumer {
 	}
 
 	protected int doConsumeGroup$3(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().ele1Group());
+		final GroupResult result = createGroupResult(getRule().ele1Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -110,7 +126,15 @@ public final class EcoreDslQIDConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeAlternatives$4(int entryPoint) throws Exception {
-		AlternativesResult result = createAlternativesResult(getRule().ele10Alternatives());
+		int result = doConsumeAlternatives$4(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAlternatives$4(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAlternatives$4(int entryPoint) throws Exception {
+		final AlternativesResult result = createAlternativesResult(getRule().ele10Alternatives());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -129,14 +153,38 @@ public final class EcoreDslQIDConsumer extends NonTerminalConsumer {
 	}
 
 	protected int consumeKeyword$5(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$5(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$5(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$5(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele100KeywordFullStop(), null, false, false, getKeyword$5$Delimiter());
 	}
 
 	protected int consumeKeyword$6(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$6(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$6(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$6(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele101Keyword$(), null, false, false, getKeyword$6$Delimiter());
 	}
 
 	protected int consumeRuleCall$7(int entryPoint) throws Exception {
+		int result = doConsumeRuleCall$7(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeRuleCall$7(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeRuleCall$7(int entryPoint) throws Exception {
 		return consumeTerminal(idConsumer, null, false, false, getRule().ele11LexerRuleCallID(), getRuleCall$7$Delimiter());
 	}
 

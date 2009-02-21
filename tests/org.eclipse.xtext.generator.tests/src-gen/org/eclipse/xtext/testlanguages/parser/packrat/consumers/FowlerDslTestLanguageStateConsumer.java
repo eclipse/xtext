@@ -61,7 +61,15 @@ public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsume
 	}
 
 	protected int consumeGroup$1(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().eleGroup());
+		int result = doConsumeGroup$1(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeGroup$1(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeGroup$1(int entryPoint) throws Exception {
+		final GroupResult result = createGroupResult(getRule().eleGroup());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -105,11 +113,28 @@ public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsume
 	}
 
 	protected int consumeKeyword$5(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$5(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$5(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$5(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele0000KeywordState(), null, false, false, getKeyword$5$Delimiter());
 	}
 
 	protected int consumeAssignment$6(int entryPoint) throws Exception {
-		return consumeRuleCall$7(entryPoint);
+		int result = doConsumeAssignment$6(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeAssignment$6(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeAssignment$6(int entryPoint) throws Exception {
+		final AssignmentResult result = createAssignmentResult(getRule().ele0001AssignmentName());
+		return result.getResult(consumeRuleCall$7(entryPoint));
 	}
 
 	protected int consumeRuleCall$7(int entryPoint) throws Exception {
@@ -128,7 +153,7 @@ public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsume
 	}
 
 	protected int doConsumeGroup$8(int entryPoint) throws Exception {
-		GroupResult result = createGroupResult(getRule().ele001Group());
+		final GroupResult result = createGroupResult(getRule().ele001Group());
 		switch(entryPoint) {
 			case -1: // use fall through semantics of switch case
 				result.reset();
@@ -165,10 +190,26 @@ public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsume
 	}
 
 	protected int consumeKeyword$11(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$11(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$11(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$11(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele001000KeywordActions(), null, false, false, getKeyword$11$Delimiter());
 	}
 
 	protected int consumeKeyword$12(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$12(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$12(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$12(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele001001KeywordLeftCurlyBracket(), null, false, false, getKeyword$12$Delimiter());
 	}
 
@@ -182,6 +223,9 @@ public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsume
 			case 0:
 				announceNextStep();
 				result = doConsumeAssignment$13(nextEntryPoint());
+				while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+					result = doConsumeAssignment$13(nextEntryPoint());
+				}
 			case 1:
 				if (result == ConsumeResult.SUCCESS) {
 					marker.flush();
@@ -202,7 +246,8 @@ public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsume
 	}
 
 	protected int doConsumeAssignment$13(int entryPoint) throws Exception {
-		return consumeCrossReference$14(entryPoint);
+		final AssignmentResult result = createAssignmentResult(getRule().ele00101AssignmentActions());
+		return result.getResult(consumeCrossReference$14(entryPoint));
 	}
 
 	protected int consumeCrossReference$14(int entryPoint) throws Exception {
@@ -210,6 +255,14 @@ public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsume
 	}
 
 	protected int consumeKeyword$16(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$16(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$16(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$16(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele0011KeywordRightCurlyBracket(), null, false, false, getKeyword$16$Delimiter());
 	}
 
@@ -224,7 +277,8 @@ public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsume
 	}
 
 	protected int doConsumeAssignment$17(int entryPoint) throws Exception {
-		return consumeRuleCall$18(entryPoint);
+		final AssignmentResult result = createAssignmentResult(getRule().ele01AssignmentTransitions());
+		return result.getResult(consumeRuleCall$18(entryPoint));
 	}
 
 	protected int consumeRuleCall$18(int entryPoint) throws Exception {
@@ -232,6 +286,14 @@ public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsume
 	}
 
 	protected int consumeKeyword$19(int entryPoint) throws Exception {
+		int result = doConsumeKeyword$19(nextEntryPoint());
+		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+			result = doConsumeKeyword$19(nextEntryPoint());
+		}
+		return result;
+	}
+
+	protected int doConsumeKeyword$19(int entryPoint) throws Exception {
 		return consumeKeyword(getRule().ele1KeywordEnd(), null, false, false, getKeyword$19$Delimiter());
 	}
 

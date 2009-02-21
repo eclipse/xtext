@@ -54,8 +54,9 @@ public abstract class AbstractGenericModule implements Module {
 								WildcardType wct = (WildcardType) arguments[0];
 								Class<?> key = (Class<Object>) wct.getUpperBounds()[0];
 								Class<?> invoke = (Class<?>) method.invoke(this, (Object[]) null);
-								if (LOG.isDebugEnabled())
-									LOG.debug("Adding binding from " + key.getName() + " to " + invoke.getName() + ". Declaring Method was '"+method.toGenericString()+"' in Module "+this.getClass().getName());
+								if (LOG.isTraceEnabled())
+									LOG.trace("Adding binding from " + key.getName() + " to " + invoke.getName() +
+											". Declaring Method was '"+method.toGenericString()+"' in Module "+this.getClass().getName());
 								result.add(new Binding(key, invoke));
 							}
 						}
@@ -99,6 +100,11 @@ public abstract class AbstractGenericModule implements Module {
 		@Override
 		public int hashCode() {
 			return from.hashCode();
+		}
+
+		@Override
+		public String toString() {
+			return getClass().getSimpleName() + " from " + from.getSimpleName() + " to " + (toInstance != null ? toInstance : toType.getSimpleName());
 		}
 	}
 }

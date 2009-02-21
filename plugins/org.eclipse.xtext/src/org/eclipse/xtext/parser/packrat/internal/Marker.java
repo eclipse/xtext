@@ -5,10 +5,16 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.parser.packrat;
+package org.eclipse.xtext.parser.packrat.internal;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
+import org.eclipse.xtext.parser.packrat.IBacktracker;
+import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
+import org.eclipse.xtext.parser.packrat.IMarkerFactory;
+import org.eclipse.xtext.parser.packrat.IParsedTokenVisitor;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
 import org.eclipse.xtext.parser.packrat.tokens.AbstractParsedToken;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
@@ -16,30 +22,39 @@ import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class Marker extends AbstractParsedToken implements IMarkerFactory.IMarker, IParsedTokenAcceptor {
-	
+public class Marker extends AbstractParsedToken implements IMarkerFactory.IMarker, IParsedTokenAcceptor, IBacktracker {
+
+	private static final int INITIAL_CONTENT_SIZE = 100;
+	private static final int CONTENT_SIZE_TRESHOLD = INITIAL_CONTENT_SIZE * 2 / 3;
+
 	public interface IMarkerClient {
 		void setActiveMarker(Marker marker);
 		Marker getActiveMarker();
 		Marker getNextMarker(Marker parent, int offset);
 		void releaseMarker(Marker marker);
 	}
-	
+
+	public interface IMarkerVisitor extends IParsedTokenVisitor {
+		void visitMarker(Marker marker);
+	}
+
 	private IMarkerClient client;
-	
+
 	private Marker parent;
-	
+
 	private int danglingChildCount;
-	
+
 	private int lastOffset;
 
-	private ArrayList<AbstractParsedToken> content;
+	private final List<AbstractParsedToken> content;
 
 	private ICharSequenceWithOffset input;
-	
+
+	private IBacktracker backtracker;
+
 	public Marker(Marker parent, int offset, ICharSequenceWithOffset input, IMarkerClient client) {
 		super(offset, 0);
-		this.content = new ArrayList<AbstractParsedToken>(100);
+		this.content = new ArrayList<AbstractParsedToken>(INITIAL_CONTENT_SIZE);
 		init(parent, input, client);
 	}
 
@@ -52,13 +67,13 @@ public class Marker extends AbstractParsedToken implements IMarkerFactory.IMarke
 		this.client = client;
 		this.client.setActiveMarker(this);
 	}
-	
+
 	public Marker reInit(int offset, Marker parent, ICharSequenceWithOffset input, IMarkerClient client) {
 		setOffset(offset);
 		init(parent, input, client);
 		return this;
 	}
-	
+
 	public void rollback() {
 		if (danglingChildCount > 0)
 			throw new IllegalStateException("childCount has to be zero before rollback.");
@@ -66,7 +81,7 @@ public class Marker extends AbstractParsedToken implements IMarkerFactory.IMarke
 		client.setActiveMarker(parent);
 		forget();
 	}
-	
+
 	public void flush() {
 		if (danglingChildCount > 0)
 			throw new IllegalStateException("childCount has to be zero before flush.");
@@ -81,14 +96,14 @@ public class Marker extends AbstractParsedToken implements IMarkerFactory.IMarke
 		setOffset(input.getOffset());
 		lastOffset = input.getOffset();
 	}
-	
+
 	public void commit() {
 		if (danglingChildCount > 0)
 			throw new IllegalStateException("childCount has to be zero before commit.");
 		if (parent != null) {
 			if (parent.danglingChildCount != 1)
 				throw new IllegalStateException("cannot commit if there exist any other forked children.");
-			if (content.size() > 66)
+			if (content.size() > CONTENT_SIZE_TRESHOLD)
 				parent.content.add(this);
 			else {
 				if (!content.isEmpty())
@@ -99,7 +114,7 @@ public class Marker extends AbstractParsedToken implements IMarkerFactory.IMarke
 			parent.danglingChildCount--;
 		}
 		client.setActiveMarker(parent);
-		this.parent = null; // prevent accidental change 
+		this.parent = null; // prevent accidental change
 	}
 
 	public Marker fork() {
@@ -130,9 +145,18 @@ public class Marker extends AbstractParsedToken implements IMarkerFactory.IMarke
 				throw new IllegalStateException("childCount may not be smaller than zero.");
 		}
 		client.releaseMarker(this);
+		backtracker = null;
 		this.parent = null;
 		// TODO forget content
 		content.clear();
+	}
+
+	public List<AbstractParsedToken> getContent() {
+		return Collections.unmodifiableList(content);
+	}
+
+	public Marker getParent() {
+		return parent;
 	}
 
 	@Override
@@ -144,8 +168,12 @@ public class Marker extends AbstractParsedToken implements IMarkerFactory.IMarke
 	public void accept(IParsedTokenVisitor visitor) {
 		if (danglingChildCount != 0)
 			throw new IllegalStateException("cannot accept visitor if there exist any dangling children.");
-		for(int i = 0; i < content.size(); i++) {
-			content.get(i).accept(visitor);
+		if (visitor instanceof IMarkerVisitor)
+			((IMarkerVisitor) visitor).visitMarker(this);
+		else {
+			for(int i = 0; i < content.size(); i++) {
+				content.get(i).accept(visitor);
+			}
 		}
 	}
 
@@ -170,4 +198,13 @@ public class Marker extends AbstractParsedToken implements IMarkerFactory.IMarke
 	public ICharSequenceWithOffset getInput() {
 		return input;
 	}
+
+	public boolean skipPreviousToken() {
+		if (danglingChildCount > 0)
+			throw new IllegalStateException("childCount has to be zero before backtracking.");
+		if (backtracker == null)
+			backtracker = new MarkerAwareBacktracker(this);
+		return backtracker.skipPreviousToken();
+	}
+
 }

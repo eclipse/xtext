@@ -21,7 +21,6 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.parser.AbstractParser;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration.IInternalParserConfiguration;
-import org.eclipse.xtext.parser.packrat.Marker.IMarkerClient;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
@@ -32,12 +31,16 @@ import org.eclipse.xtext.parser.packrat.consumers.KeywordConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.RecoveryState;
 import org.eclipse.xtext.parser.packrat.consumers.RecoveryStateHolder;
+import org.eclipse.xtext.parser.packrat.debug.DebugBacktracker;
 import org.eclipse.xtext.parser.packrat.debug.DebugCharSequenceWithOffset;
 import org.eclipse.xtext.parser.packrat.debug.DebugConsumerUtility;
 import org.eclipse.xtext.parser.packrat.debug.DebugHiddenTokenHandler;
 import org.eclipse.xtext.parser.packrat.debug.DebugMarkerFactory;
 import org.eclipse.xtext.parser.packrat.debug.DebugParsedTokenAcceptor;
 import org.eclipse.xtext.parser.packrat.debug.DebugUtil;
+import org.eclipse.xtext.parser.packrat.internal.Backtracker;
+import org.eclipse.xtext.parser.packrat.internal.Marker;
+import org.eclipse.xtext.parser.packrat.internal.Marker.IMarkerClient;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.AbstractParsedToken;
@@ -93,6 +96,8 @@ public abstract class AbstractPackratParser extends AbstractParser<CharSequence>
 
 	private final IParserConfiguration parserConfiguration;
 
+	private final IBacktracker backtracker;
+
 	private static final int MARKER_BUFFER_SIZE = 100;
 
 	private final Marker[] markerBuffer;
@@ -107,6 +112,7 @@ public abstract class AbstractPackratParser extends AbstractParser<CharSequence>
 		this.grammarAccess = grammarAccess;
 		this.parseResultFactory = parseResultFactory;
 		recoveryStateHolder = new RecoveryStateHolder();
+		backtracker = new Backtracker(this);
 		parserConfiguration = createParserConfiguration();
 		keywordConsumer = createKeywordConsumer();
 		markerBuffer = new Marker[MARKER_BUFFER_SIZE];
@@ -121,6 +127,7 @@ public abstract class AbstractPackratParser extends AbstractParser<CharSequence>
 		final IParsedTokenAcceptor localTokenAcceptor = DebugUtil.TOKEN_ACCEPTOR_DEBUG ? new DebugParsedTokenAcceptor(this) : this;
 		final IHiddenTokenHandler localHiddenTokenHandler = DebugUtil.HIDDEN_TOKEN_HANDLER_DEBUG ? new DebugHiddenTokenHandler(this) : this;
 		final IConsumerUtility localConsumerUtil = DebugUtil.CONSUMER_UTIL_DEBUG ? new DebugConsumerUtility(this) : this;
+		final IBacktracker localBacktracker = DebugUtil.BACKTRACKER_DEBUG ? new DebugBacktracker(backtracker) : backtracker;
 
 		IParserConfiguration result = createParserConfiguration(new IInternalParserConfiguration() {
 			public IConsumerUtility getConsumerUtil() {
@@ -140,6 +147,9 @@ public abstract class AbstractPackratParser extends AbstractParser<CharSequence>
 			}
 			public IParsedTokenAcceptor getTokenAcceptor() {
 				return localTokenAcceptor;
+			}
+			public IBacktracker getBacktracker() {
+				return localBacktracker;
 			}
 		});
 		result.createTerminalConsumers();
