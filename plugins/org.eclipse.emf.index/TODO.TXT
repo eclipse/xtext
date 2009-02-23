@@ -1,21 +1,15 @@
-DAOs
-- Pattern matching instead of/ as an alternative to equals
+Feeder / Builder
+- (recursively) remove elements
 
 Performance Tests
 
 Persistence
 
 Queries
-- make them reusable
-- use iterables for results
-- nesting 
-
+- use iterables for results 
 
 IndexFeeder
 - better pattern for element/factory matching
 
-Locking
+Locking ?
 
-DONE
-EPackageDescriptor
-- equals und hashCode

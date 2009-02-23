@@ -28,7 +28,6 @@ public class EPackageDAOImpl extends BasicMemoryDAOImpl<EPackageDescriptor> impl
 	public IGenericQuery<EPackageDescriptor> createQueryEPackage(EPackage ePackage) {
 		return DefaultQueryTool.createQueryEPackage(this, ePackage);
 	}
-	
 
 	private class EPackageQuery extends BasicMemoryDAOImpl<EPackageDescriptor>.Query implements
 			EPackageDescriptor.Query {
@@ -60,9 +59,9 @@ public class EPackageDAOImpl extends BasicMemoryDAOImpl<EPackageDescriptor> impl
 
 		@Override
 		protected boolean matches(EPackageDescriptor ePackageDescriptor) {
-			return ((indexingDate == UNSET_DATE || indexingDate == ePackageDescriptor.getIndexingDate()) 
-					&& (namePattern == null || namePattern.equals(ePackageDescriptor.getName()))
-					&& (nsURIPattern == null || nsURIPattern.equals(ePackageDescriptor.getNsURI())));
+			return ((indexingDate == UNSET_DATE || indexingDate == ePackageDescriptor.getIndexingDate())
+					&& matchesGlobbing(ePackageDescriptor.getName(), namePattern) && matchesGlobbing(ePackageDescriptor
+					.getNsURI(), nsURIPattern));
 		}
 
 	}

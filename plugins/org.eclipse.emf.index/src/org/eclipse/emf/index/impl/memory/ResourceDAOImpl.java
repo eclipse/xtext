@@ -54,10 +54,9 @@ public class ResourceDAOImpl extends BasicMemoryDAOImpl<ResourceDescriptor> impl
 		}
 
 		protected boolean matches(ResourceDescriptor resourceDescriptor) {
-			return ((uriPattern == null || uriPattern.equals(resourceDescriptor.getURI())) && (indexingDate == UNSET_DATE || indexingDate == resourceDescriptor
-					.getIndexingDate()));
+			return matchesGlobbing(resourceDescriptor.getURI(), uriPattern)
+					&& (indexingDate == UNSET_DATE || indexingDate == resourceDescriptor.getIndexingDate());
 		}
-
 	}
 
 }

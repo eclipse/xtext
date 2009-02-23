@@ -85,7 +85,7 @@ public abstract class InverseReferenceCache<TargetDesc, SourceDesc> {
 		}
 		
 		public Collection<SourceDesc> executeListResult() {
-			return lookup(target);
+			return CollectionUtils.copyOrNull(lookup(target));
 		}
 
 		public SourceDesc executeSingleResult() {

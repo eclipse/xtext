@@ -1,9 +1,15 @@
 package org.eclipse.emf.index.util;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class CollectionUtils {
 
+	public static <T> Collection<T> copyOrNull(Collection<T> source) {
+		if(source == null) return null;
+		return new ArrayList<T>(source); 
+	}
+	
 	public static <T> Collection<T> addIfNotNull(Collection<T> c, T element) {
 		if (element != null)
 			c.add(element);

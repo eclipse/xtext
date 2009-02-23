@@ -25,7 +25,7 @@ import org.eclipse.emf.index.impl.DefaultQueryTool;
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
-public class EObjectDAOImpl extends BasicCachingMemoryDAO<EObjectDescriptor> implements EObjectDescriptor.DAO {
+public class EObjectDAOImpl extends BasicMemoryDAOImpl<EObjectDescriptor> implements EObjectDescriptor.DAO {
 
 	protected InverseReferenceCache<ResourceDescriptor, EObjectDescriptor> resourceScope;
 	protected InverseReferenceCache<EClassDescriptor, EObjectDescriptor> eClassScope;
@@ -84,7 +84,7 @@ public class EObjectDAOImpl extends BasicCachingMemoryDAO<EObjectDescriptor> imp
 		return resourceScope.createQuery(resourceDescriptor);
 	}
 
-	private class ElementQuery extends BasicCachingMemoryDAO<EObjectDescriptor>.Query implements EObjectDescriptor.Query {
+	private class ElementQuery extends BasicMemoryDAOImpl<EObjectDescriptor>.Query implements EObjectDescriptor.Query {
 
 		private ResourceDescriptor resourceDescriptor;
 		private ResourceDescriptor.Query resourceQuery;
@@ -139,12 +139,12 @@ public class EObjectDAOImpl extends BasicCachingMemoryDAO<EObjectDescriptor> imp
 		}
 
 		public boolean matches(EObjectDescriptor elementDescriptor) {
-			if ((fragmentPattern == null || fragmentPattern.equals(elementDescriptor.getFragment()))
-					&& (namePattern == null || namePattern.equals(elementDescriptor.getName()))
+			if (matchesGlobbing(elementDescriptor.getFragment(), fragmentPattern)
+					&& matchesGlobbing(elementDescriptor.getName(), namePattern)
 					&& (typeDescriptor == null || typeDescriptor.equals(elementDescriptor.getEClassDescriptor()))) {
 				if (userDataPatterns != null) {
 					for (Entry<String, String> userDataEntry : userDataPatterns.entrySet()) {
-						if (!userDataEntry.getValue().equals(elementDescriptor.getUserData(userDataEntry.getKey()))) {
+						if (!matchesGlobbing(elementDescriptor.getUserData(userDataEntry.getKey()), userDataEntry.getValue())) {
 							return false;
 						}
 					}

@@ -19,7 +19,7 @@ import org.eclipse.emf.index.impl.DefaultQueryTool;
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
-public class EClassDAOImpl extends BasicCachingMemoryDAO<EClassDescriptor> implements EClassDescriptor.DAO {
+public class EClassDAOImpl extends BasicMemoryDAOImpl<EClassDescriptor> implements EClassDescriptor.DAO {
 
 	protected InverseReferenceCache<EPackageDescriptor, EClassDescriptor> ePackageScope;
 	
@@ -57,7 +57,7 @@ public class EClassDAOImpl extends BasicCachingMemoryDAO<EClassDescriptor> imple
 		return ePackageScope.createQuery(ePackageDescriptor);
 	}
 	
-	protected class EClassQuery extends BasicCachingMemoryDAO<EClassDescriptor>.Query implements EClassDescriptor.Query {
+	protected class EClassQuery extends BasicMemoryDAOImpl<EClassDescriptor>.Query implements EClassDescriptor.Query {
 
 		private String namePattern;
 		private EPackageDescriptor ePackageDescriptor;
@@ -86,7 +86,7 @@ public class EClassDAOImpl extends BasicCachingMemoryDAO<EClassDescriptor> imple
 
 		@Override
 		protected boolean matches(EClassDescriptor typeDescriptor) {
-			return (namePattern == null || namePattern.equals(typeDescriptor.getName()));
+			return matchesGlobbing(typeDescriptor.getName(), namePattern);
 		}
 
 		@Override

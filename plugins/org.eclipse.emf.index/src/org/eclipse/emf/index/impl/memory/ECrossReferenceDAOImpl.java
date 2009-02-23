@@ -20,7 +20,7 @@ import org.eclipse.emf.index.impl.DefaultQueryTool;
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
-public class ECrossReferenceDAOImpl extends BasicCachingMemoryDAO<ECrossReferenceDescriptor> implements
+public class ECrossReferenceDAOImpl extends BasicMemoryDAOImpl<ECrossReferenceDescriptor> implements
 		ECrossReferenceDescriptor.DAO {
 
 	protected InverseReferenceCache<EObjectDescriptor, ECrossReferenceDescriptor> sourceScope;
@@ -77,7 +77,7 @@ public class ECrossReferenceDAOImpl extends BasicCachingMemoryDAO<ECrossReferenc
 		return targetScope.createQuery(targetDescriptor);
 	}
 
-	protected class CrossRefQuery extends BasicCachingMemoryDAO<ECrossReferenceDescriptor>.Query implements
+	protected class CrossRefQuery extends BasicMemoryDAOImpl<ECrossReferenceDescriptor>.Query implements
 			ECrossReferenceDescriptor.Query {
 
 		private EObjectDescriptor.Query sourceQuery;
@@ -124,7 +124,7 @@ public class ECrossReferenceDAOImpl extends BasicCachingMemoryDAO<ECrossReferenc
 		}
 
 		protected boolean matches(ECrossReferenceDescriptor crossRefDescriptor) {
-			return referenceNamePattern == null || referenceNamePattern.equals(crossRefDescriptor.getReferenceName());
+			return matchesGlobbing(crossRefDescriptor.getReferenceName(), referenceNamePattern);
 		}
 
 		@Override

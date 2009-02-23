@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.emf.index.impl.memory;
 
+import static org.eclipse.emf.index.util.CollectionUtils.isNotEmpty;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -21,30 +23,50 @@ import org.eclipse.emf.index.IIndexStore;
  */
 public abstract class BasicMemoryDAOImpl<T> {
 
-    protected Set<T> store;
-    
-    protected IIndexStore indexStore;
-	
+	protected Set<T> store;
+
+	protected IIndexStore indexStore;
+
 	protected BasicMemoryDAOImpl(IIndexStore indexStore) {
-		this.indexStore = indexStore; 
+		this.indexStore = indexStore;
 		this.store = new HashSet<T>();
 	}
-	
+
 	public void store(T element) {
 		store.add(element);
 	}
-	
+
 	public void delete(T element) {
 		store.remove(element);
 	}
-	
+
 	protected abstract class Query implements IGenericQuery<T> {
+
+		private static final char ASTERISK = '*';
+
+		protected boolean matchesGlobbing(String testString, String pattern) {
+			if (pattern == null)
+				return true;
+			if (testString == null || "".equals(pattern))
+				return false;
+			int patternLength = pattern.length();
+			if (pattern.charAt(0) == ASTERISK) {
+				if (patternLength > 1 && pattern.charAt(patternLength - 1) == ASTERISK) {
+					return testString.contains(pattern.substring(1, patternLength - 2));
+				}
+				return testString.endsWith(pattern.substring(1));
+			}
+			if (pattern.charAt(patternLength - 1) == ASTERISK) {
+				return testString.startsWith(pattern.substring(0, patternLength - 1));
+			}
+			return testString.equals(pattern);
+		}
 
 		protected abstract boolean matches(T object);
 
 		/**
-		 * @return an empty list if the scope is specified but empty
-		 *   null it the scope is unspecified
+		 * @return an empty list if the scope is specified but empty null it the
+		 *         scope is unspecified
 		 */
 		protected Collection<T> scope() {
 			return store;
@@ -77,5 +99,22 @@ public abstract class BasicMemoryDAOImpl<T> {
 			return result;
 		}
 
+		protected Collection<T> mergeScopes(Collection<T> scope0, Collection<T> scope1) {
+			if (scope0 == null) {
+				return scope1;
+			}
+			if (scope1 == null) {
+				return scope0;
+			}
+			if (isNotEmpty(scope0)) {
+				if (isNotEmpty(scope1)) {
+					List<T> mergedScope = new ArrayList<T>(scope0);
+					mergedScope.removeAll(scope1);
+					return mergedScope;
+				}
+				return scope0;
+			}
+			return scope1;
+		}
 	}
 }

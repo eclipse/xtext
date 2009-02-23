@@ -76,7 +76,9 @@ public class IndexFeederImpl implements IIndexFeeder {
 		List<EClassDescriptor> typeDescriptors = internalIndexEPackageContents(ePackage, ePackageDescriptor);
 		if (isRecurseSubpackages) {
 			for (EPackage subPackage : ePackage.getESubpackages())
-				typeDescriptors.addAll(index(subPackage, isRecurseSubpackages));
+				// don't follow cross-resource references
+				if (ePackage.eResource() == null || subPackage.eResource() == ePackage.eResource())
+					typeDescriptors.addAll(index(subPackage, isRecurseSubpackages));
 		}
 		// TODO Handle removed sub packages?
 		return typeDescriptors;
