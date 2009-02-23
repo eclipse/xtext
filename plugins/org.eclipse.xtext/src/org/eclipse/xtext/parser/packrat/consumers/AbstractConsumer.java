@@ -17,37 +17,14 @@ public abstract class AbstractConsumer {
 
 	private final IParsedTokenAcceptor acceptor;
 	private final ICharSequenceWithOffset input;
-	private final RecoveryStateHolder recoveryStateHolder;
 
-	protected AbstractConsumer(ICharSequenceWithOffset input, IParsedTokenAcceptor tokenAcceptor,
-			RecoveryStateHolder recoveryStateHolder) {
+	protected AbstractConsumer(ICharSequenceWithOffset input, IParsedTokenAcceptor tokenAcceptor) {
 		this.input = input;
 		this.acceptor = tokenAcceptor;
-		this.recoveryStateHolder = recoveryStateHolder;
 	}
 
 	protected final int getOffset() {
 		return input.getOffset();
-	}
-
-	public void announceLevelFinished() {
-		recoveryStateHolder.announceLevelFinished();
-	}
-
-	public void announceNextLevel() {
-		recoveryStateHolder.announceNextLevel();
-	}
-
-	public void announceNextPath() {
-		recoveryStateHolder.announceNextPath();
-	}
-
-	public void announceNextStep() {
-		recoveryStateHolder.announceNextStep();
-	}
-
-	public int nextEntryPoint() {
-		return -1;
 	}
 
 	public IParsedTokenAcceptor getTokenAcceptor() {
@@ -56,10 +33,6 @@ public abstract class AbstractConsumer {
 
 	public ICharSequenceWithOffset getInput() {
 		return input;
-	}
-
-	public RecoveryStateHolder getRecoveryStateHolder() {
-		return recoveryStateHolder;
 	}
 
 }

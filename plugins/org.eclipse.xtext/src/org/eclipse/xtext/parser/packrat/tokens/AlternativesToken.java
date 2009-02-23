@@ -30,8 +30,15 @@ public class AlternativesToken extends CompoundParsedToken {
 	}
 
 	public static class End extends CompoundParsedToken.End {
-		public End(int offset) {
+		private final int alternative;
+
+		public End(int offset, int alternative) {
 			super(offset);
+			this.alternative = alternative;
+		}
+
+		public int getAlternative() {
+			return alternative;
 		}
 
 		@Override

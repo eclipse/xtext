@@ -12,7 +12,6 @@ import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfigurat
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.KeywordConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.RecoveryStateHolder;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 /**
@@ -39,8 +38,6 @@ public abstract class AbstractParserConfiguration implements
 
 		IBacktracker getBacktracker();
 
-		RecoveryStateHolder getRecoveryStateHolder();
-
 	}
 
 	private final ICharSequenceWithOffset input;
@@ -48,7 +45,6 @@ public abstract class AbstractParserConfiguration implements
 	private final IParsedTokenAcceptor tokenAcceptor;
 	private final IHiddenTokenHandler hiddenTokenHandler;
 	private final IConsumerUtility consumerUtil;
-	private final RecoveryStateHolder recoveryStateHolder;
 	private final IBacktracker backtracker;
 
 	protected AbstractParserConfiguration(IInternalParserConfiguration configuration) {
@@ -57,7 +53,6 @@ public abstract class AbstractParserConfiguration implements
 		this.tokenAcceptor = configuration.getTokenAcceptor();
 		this.hiddenTokenHandler = configuration.getHiddenTokenHandler();
 		this.consumerUtil = configuration.getConsumerUtil();
-		this.recoveryStateHolder = configuration.getRecoveryStateHolder();
 		this.backtracker = configuration.getBacktracker();
 	}
 
@@ -79,10 +74,6 @@ public abstract class AbstractParserConfiguration implements
 
 	public IConsumerUtility getConsumerUtil() {
 		return consumerUtil;
-	}
-
-	public RecoveryStateHolder getRecoveryStateHolder() {
-		return recoveryStateHolder;
 	}
 
 	public IBacktracker getBacktracker() {

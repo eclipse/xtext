@@ -19,6 +19,4 @@ public interface ITerminalConsumerConfiguration {
 
 	IParsedTokenAcceptor getTokenAcceptor();
 
-	RecoveryStateHolder getRecoveryStateHolder();
-
 }

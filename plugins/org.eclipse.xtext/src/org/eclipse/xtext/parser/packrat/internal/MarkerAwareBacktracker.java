@@ -18,6 +18,7 @@ import org.eclipse.xtext.parser.packrat.internal.Marker.IMarkerVisitor;
 import org.eclipse.xtext.parser.packrat.tokens.AbstractParsedToken;
 import org.eclipse.xtext.parser.packrat.tokens.AbstractParsedTokenVisitor;
 import org.eclipse.xtext.parser.packrat.tokens.CompoundParsedToken;
+import org.eclipse.xtext.parser.packrat.tokens.ErrorToken;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedNonTerminal;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedNonTerminalEnd;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedTerminal;
@@ -48,7 +49,7 @@ public class MarkerAwareBacktracker extends AbstractParsedTokenVisitor implement
 		@Override
 		public void visitCompoundParsedToken(CompoundParsedToken token) {
 			if (!token.isSkipped()) {
-				token.setSkipped(true);
+				token.setSkipped(continueSkip);
 				stackSize++;
 			}
 		}
@@ -56,7 +57,7 @@ public class MarkerAwareBacktracker extends AbstractParsedTokenVisitor implement
 		@Override
 		public void visitCompoundParsedTokenEnd(CompoundParsedToken.End token) {
 			if (!token.isSkipped()) {
-				token.setSkipped(true);
+				token.setSkipped(continueSkip);
 				stackSize--;
 				continueSkip = stackSize != 0;
 			}
@@ -65,7 +66,7 @@ public class MarkerAwareBacktracker extends AbstractParsedTokenVisitor implement
 		@Override
 		public void visitParsedTerminal(ParsedTerminal token) {
 			if (!token.isSkipped()) {
-				token.setSkipped(true);
+				token.setSkipped(continueSkip);
 				skippedOffset += token.getLength();
 				continueSkip = stackSize != 0;
 			}
@@ -74,7 +75,7 @@ public class MarkerAwareBacktracker extends AbstractParsedTokenVisitor implement
 		@Override
 		public void visitParsedNonTerminal(ParsedNonTerminal token) {
 			if (!token.isSkipped()) {
-				token.setSkipped(true);
+				token.setSkipped(continueSkip);
 				stackSize++;
 			}
 		}
@@ -82,12 +83,18 @@ public class MarkerAwareBacktracker extends AbstractParsedTokenVisitor implement
 		@Override
 		public void visitParsedNonTerminalEnd(ParsedNonTerminalEnd token) {
 			if (!token.isSkipped()) {
-				token.setSkipped(true);
+				token.setSkipped(continueSkip);
 				stackSize--;
 				continueSkip = stackSize != 0;
 			}
 		}
 
+		@Override
+		public void visitErrorToken(ErrorToken token) {
+			if (!token.isSkipped()) {
+				token.setSkipped(true);
+			}
+		}
 
 	}
 
@@ -189,13 +196,12 @@ public class MarkerAwareBacktracker extends AbstractParsedTokenVisitor implement
 		}
 		if (result) {
 			Skipper skipper = new Skipper();
-			while(!handledMarkers.isEmpty() && skipper.continueSkip) {
+			while(!handledMarkers.isEmpty()) {
 				Marker m = handledMarkers.remove(handledMarkers.size()-1);
 				content = m.getContent();
-				for (int i = idx; i < content.size() && skipper.continueSkip; i++)
+				for (int i = idx; i < content.size(); i++)
 					content.get(i).accept(skipper);
-				if (skipper.continueSkip)
-					idx = 0;
+				idx = 0;
 			}
 			this.marker.getInput().setOffset(this.marker.getInput().getOffset() - skipper.skippedOffset);
 		}

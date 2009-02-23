@@ -7,9 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.packrat.consumers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
@@ -35,6 +39,8 @@ import org.eclipse.xtext.parser.packrat.tokens.PlaceholderToken;
  */
 public abstract class NonTerminalConsumer extends AbstractConsumer implements INonTerminalConsumer, INonTerminalConsumerConfiguration {
 
+	protected static final int SUCCESS = ConsumeResult.SUCCESS;
+
 	private final IHiddenTokenHandler hiddenTokenHandler;
 
 	private final IMarkerFactory markerFactory;
@@ -45,18 +51,427 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 
 	private final IConsumerUtility consumerUtil;
 
-	protected class AlternativesResult {
+	private int doConsumeGroup(ElementConsumer<Group> groupConsumer, IElementConsumer[] groupElements) throws Exception {
+		final GroupResult result = createGroupResult(groupConsumer);
+		result.reset();
+		for(IElementConsumer consumer: groupElements) {
+			if (result.didGroupFail(consumer.consume())) {
+				result.error(groupConsumer.getErrorMessage());
+				return result.getResult();
+			}
+		}
+		return result.getResult();
+	}
+
+	private int doConsumeAlternatives(ElementConsumer<Alternatives> alternativesConsumer, IElementConsumer[] alternativesElements) throws Exception {
+		final AlternativesResult result = createAlternativesResult(alternativesConsumer);
+		result.reset();
+		for(IElementConsumer consumer: alternativesElements) {
+			result.nextAlternative();
+			if (result.isAlternativeDone(consumer.consume()))
+				return result.getResult();
+		}
+		result.error(alternativesConsumer.getErrorMessage());
+		return result.getResult();
+	}
+
+	private int doConsumeAssignment(ElementConsumer<Assignment> assignmentConsumer, IElementConsumer element) throws Exception {
+		final AssignmentResult result = createAssignmentResult(assignmentConsumer);
+		return result.getResult(element.consume());
+	}
+
+	protected static class ConsumerAcceptor {
+		private final List<IElementConsumer> result = new ArrayList<IElementConsumer>(4);
+
+		public void accept(IElementConsumer consumer) {
+			result.add(consumer);
+		}
+
+		private IElementConsumer[] getResult() {
+			return result.toArray(new IElementConsumer[result.size()]);
+		}
+	}
+
+	protected abstract class ElementConsumer<Element extends AbstractElement> implements IElementConsumer {
+
+		private final Element element;
+
+		protected ElementConsumer(Element element) {
+			this.element = element;
+		}
+
+		public int consume() throws Exception {
+			int result = doConsume();
+			while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+				result = doConsume();
+			}
+			return result;
+		}
+
+		protected abstract int doConsume() throws Exception;
+
+		protected final Element getElement() {
+			return element;
+		}
+
+		protected String getErrorMessage() {
+			return "Another token expected.";
+		}
+	}
+
+	protected abstract class GroupConsumer extends ElementConsumer<Group> {
+
+		private IElementConsumer[] consumers;
+
+		public GroupConsumer(Group element) {
+			super(element);
+		}
+
+		@Override
+		protected final int doConsume() throws Exception {
+			return doConsumeGroup(this, getConsumers());
+		}
+
+		protected final IElementConsumer[] getConsumers() {
+			if (consumers == null) {
+				ConsumerAcceptor acceptor = new ConsumerAcceptor();
+				doGetConsumers(acceptor);
+				consumers = acceptor.getResult();
+			}
+			return consumers;
+		}
+
+		protected abstract void doGetConsumers(ConsumerAcceptor acceptor);
+	}
+
+	protected abstract class AlternativesConsumer extends ElementConsumer<Alternatives> {
+
+		private IElementConsumer[] consumers;
+
+		protected AlternativesConsumer(Alternatives element) {
+			super(element);
+		}
+
+		@Override
+		protected final int doConsume() throws Exception {
+			return doConsumeAlternatives(this, getConsumers());
+		}
+
+		protected final IElementConsumer[] getConsumers() {
+			if (consumers == null) {
+				ConsumerAcceptor acceptor = new ConsumerAcceptor();
+				doGetConsumers(acceptor);
+				consumers = acceptor.getResult();
+			}
+			return consumers;
+		}
+
+		protected abstract void doGetConsumers(ConsumerAcceptor acceptor);
+	}
+
+	protected abstract class AssignmentConsumer extends ElementConsumer<Assignment> {
+
+		public AssignmentConsumer(Assignment element) {
+			super(element);
+		}
+
+		@Override
+		protected final int doConsume() throws Exception {
+			return doConsumeAssignment(this, getConsumer());
+		}
+
+		protected abstract IElementConsumer getConsumer();
+	}
+
+	protected abstract class OptionalElementConsumer<Element extends AbstractElement> extends ElementConsumer<Element> {
+
+		protected OptionalElementConsumer(Element element) {
+			super(element);
+		}
+
+		@Override
+		public final int consume() throws Exception {
+			IMarker marker = mark();
+			int result = doConsume();
+			if (result != ConsumeResult.SUCCESS) {
+				marker.rollback();
+				skipped(getElement());
+			} else
+				marker.commit();
+			return ConsumeResult.SUCCESS;
+		}
+	}
+
+	protected abstract class OptionalGroupConsumer extends OptionalElementConsumer<Group> {
+
+		private IElementConsumer[] consumers;
+
+		protected OptionalGroupConsumer(Group element) {
+			super(element);
+		}
+
+		@Override
+		protected final int doConsume() throws Exception {
+			return doConsumeGroup(this, getConsumers());
+		}
+
+		protected final IElementConsumer[] getConsumers() {
+			if (consumers == null) {
+				ConsumerAcceptor acceptor = new ConsumerAcceptor();
+				doGetConsumers(acceptor);
+				consumers = acceptor.getResult();
+			}
+			return consumers;
+		}
+
+		protected abstract void doGetConsumers(ConsumerAcceptor acceptor);
+	}
+
+	protected abstract class OptionalAlternativesConsumer extends OptionalElementConsumer<Alternatives> {
+
+		private IElementConsumer[] consumers;
+
+		protected OptionalAlternativesConsumer(Alternatives element) {
+			super(element);
+		}
+
+		@Override
+		protected final int doConsume() throws Exception {
+			return doConsumeAlternatives(this, getConsumers());
+		}
+
+		protected final IElementConsumer[] getConsumers() {
+			if (consumers == null) {
+				ConsumerAcceptor acceptor = new ConsumerAcceptor();
+				doGetConsumers(acceptor);
+				consumers = acceptor.getResult();
+			}
+			return consumers;
+		}
+
+		protected abstract void doGetConsumers(ConsumerAcceptor acceptor);
+	}
+
+	protected abstract class OptionalAssignmentConsumer extends OptionalElementConsumer<Assignment> {
+
+		protected OptionalAssignmentConsumer(Assignment element) {
+			super(element);
+		}
+
+		@Override
+		protected final int doConsume() throws Exception {
+			return doConsumeAssignment(this, getConsumer());
+		}
+
+		protected abstract IElementConsumer getConsumer();
+	}
+
+	protected abstract class LoopElementConsumer<Element extends AbstractElement> extends ElementConsumer<Element> {
+
+		protected LoopElementConsumer(Element element) {
+			super(element);
+		}
+
+		@Override
+		public final int consume() throws Exception {
+			IMarker marker = mark();
+			while(doConsume() == ConsumeResult.SUCCESS) {
+				marker.flush();
+			}
+			marker.rollback();
+			skipped(getElement());
+			return ConsumeResult.SUCCESS;
+		}
+	}
+
+	protected abstract class LoopGroupConsumer extends LoopElementConsumer<Group> {
+
+		private IElementConsumer[] consumers;
+
+		protected LoopGroupConsumer(Group element) {
+			super(element);
+		}
+
+		@Override
+		protected final int doConsume() throws Exception {
+			return doConsumeGroup(this, getConsumers());
+		}
+
+		protected final IElementConsumer[] getConsumers() {
+			if (consumers == null) {
+				ConsumerAcceptor acceptor = new ConsumerAcceptor();
+				doGetConsumers(acceptor);
+				consumers = acceptor.getResult();
+			}
+			return consumers;
+		}
+
+		protected abstract void doGetConsumers(ConsumerAcceptor acceptor);
+	}
+
+	protected abstract class LoopAlternativesConsumer extends LoopElementConsumer<Alternatives> {
+
+		private IElementConsumer[] consumers;
+
+		protected LoopAlternativesConsumer(Alternatives element) {
+			super(element);
+		}
+
+		@Override
+		protected final int doConsume() throws Exception {
+			return doConsumeAlternatives(this, getConsumers());
+		}
+
+		protected final IElementConsumer[] getConsumers() {
+			if (consumers == null) {
+				ConsumerAcceptor acceptor = new ConsumerAcceptor();
+				doGetConsumers(acceptor);
+				consumers = acceptor.getResult();
+			}
+			return consumers;
+		}
+
+		protected abstract void doGetConsumers(ConsumerAcceptor acceptor);
+	}
+
+	protected abstract class LoopAssignmentConsumer extends LoopElementConsumer<Assignment> {
+
+		public LoopAssignmentConsumer(Assignment element) {
+			super(element);
+		}
+
+		@Override
+		protected final int doConsume() throws Exception {
+			return doConsumeAssignment(this, getConsumer());
+		}
+
+		protected abstract IElementConsumer getConsumer();
+	}
+
+	protected abstract class MandatoryLoopElementConsumer<Element extends AbstractElement> extends ElementConsumer<Element> {
+
+		protected MandatoryLoopElementConsumer(Element element) {
+			super(element);
+		}
+
+		@Override
+		public final int consume() throws Exception {
+			IMarker marker = mark();
+			int result = ConsumeResult.EMPTY_MATCH;
+			result = doConsume();
+			while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
+				result = doConsume();
+			}
+			if (result == ConsumeResult.SUCCESS) {
+				marker.flush();
+				while(doConsume()==ConsumeResult.SUCCESS) {
+					marker.flush();
+				}
+				marker.rollback();
+				skipped(getElement());
+				return ConsumeResult.SUCCESS;
+			}
+			error("Could not find token.", getElement());
+			marker.commit();
+			return result;
+		}
+
+	}
+
+	protected abstract class MandatoryLoopGroupConsumer extends MandatoryLoopElementConsumer<Group> {
+
+		private IElementConsumer[] consumers;
+
+		protected MandatoryLoopGroupConsumer(Group element) {
+			super(element);
+		}
+
+		@Override
+		protected final int doConsume() throws Exception {
+			return doConsumeGroup(this, getConsumers());
+		}
+
+		protected final IElementConsumer[] getConsumers() {
+			if (consumers == null) {
+				ConsumerAcceptor acceptor = new ConsumerAcceptor();
+				doGetConsumers(acceptor);
+				consumers = acceptor.getResult();
+			}
+			return consumers;
+		}
+
+		protected abstract void doGetConsumers(ConsumerAcceptor acceptor);
+	}
+
+	protected abstract class MandatoryLoopAlternativesConsumer extends MandatoryLoopElementConsumer<Alternatives> {
+
+		private IElementConsumer[] consumers;
+
+		protected MandatoryLoopAlternativesConsumer(Alternatives element) {
+			super(element);
+		}
+
+		@Override
+		protected final int doConsume() throws Exception {
+			return doConsumeAlternatives(this, getConsumers());
+		}
+
+		protected final IElementConsumer[] getConsumers() {
+			if (consumers == null) {
+				ConsumerAcceptor acceptor = new ConsumerAcceptor();
+				doGetConsumers(acceptor);
+				consumers = acceptor.getResult();
+			}
+			return consumers;
+		}
+
+		protected abstract void doGetConsumers(ConsumerAcceptor acceptor);
+	}
+
+	protected abstract class MandatoryLoopAssignmentConsumer extends MandatoryLoopElementConsumer<Assignment> {
+
+		protected MandatoryLoopAssignmentConsumer(Assignment element) {
+			super(element);
+		}
+
+		@Override
+		protected final int doConsume() throws Exception {
+			return doConsumeAssignment(this, getConsumer());
+		}
+
+		protected abstract IElementConsumer getConsumer();
+
+	}
+
+	protected class AbstractElementResult<Element extends AbstractElement> {
+
+		private final ElementConsumer<Element> elementConsumer;
+
+		protected AbstractElementResult(ElementConsumer<Element> elementConsumer) {
+			this.elementConsumer = elementConsumer;
+		}
+
+		protected void error(String errorMessage) {
+			NonTerminalConsumer.this.error(errorMessage, elementConsumer.getElement());
+		}
+
+	}
+
+	protected class AlternativesResult extends AbstractElementResult<Alternatives> {
 		private int bestResult;
+		private int alternative;
 		private IMarker bestMarker;
 		private IMarker currentMarker;
 
-		protected AlternativesResult() {
+		protected AlternativesResult(ElementConsumer<Alternatives> elementConsumer) {
+			super(elementConsumer);
+			alternative = -1;
 			bestResult = ConsumeResult.SUCCESS;
 			bestMarker = mark();
 		}
 
 		public void nextAlternative() {
-			announceNextPath();
+			alternative++;
 			currentMarker = bestMarker.fork();
 		}
 
@@ -66,8 +481,7 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 
 		public int getResult() {
 			bestMarker.commit();
-			announceLevelFinished();
-			getTokenAcceptor().accept(new AlternativesToken.End(getOffset()));
+			getTokenAcceptor().accept(new AlternativesToken.End(getOffset(), alternative));
 			return bestResult;
 		}
 
@@ -83,17 +497,14 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 		}
 	}
 
-	protected class GroupResult {
+	protected class GroupResult extends AbstractElementResult<Group> {
 		private int result;
 		private final IMarker marker;
 
-		protected GroupResult() {
+		protected GroupResult(ElementConsumer<Group> elementConsumer) {
+			super(elementConsumer);
 			result = ConsumeResult.SUCCESS;
 			marker = mark();
-		}
-
-		public void nextStep() {
-			announceNextStep();
 		}
 
 		public void reset() {
@@ -102,7 +513,6 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 
 		public int getResult() {
 			marker.commit();
-			announceLevelFinished();
 			getTokenAcceptor().accept(new GroupToken.End(getOffset()));
 			return result;
 		}
@@ -113,15 +523,21 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 		}
 	}
 
-	protected class AssignmentResult {
+	protected class AssignmentResult extends AbstractElementResult<Assignment> {
+
+		protected AssignmentResult(ElementConsumer<Assignment> elementConsumer) {
+			super(elementConsumer);
+		}
+
 		public int getResult(int result) {
 			getTokenAcceptor().accept(new AssignmentToken.End(getOffset()));
 			return result;
 		}
+
 	}
 
 	protected NonTerminalConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
-		super(configuration.getInput(), configuration.getTokenAcceptor(), configuration.getRecoveryStateHolder());
+		super(configuration.getInput(), configuration.getTokenAcceptor());
 		this.markerFactory = configuration.getMarkerFactory();
 		this.hiddenTokenHandler = configuration.getHiddenTokenHandler();
 		this.consumerUtil = configuration.getConsumerUtil();
@@ -129,41 +545,19 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 		this.backtracker = configuration.getBacktracker();
 	}
 
-	public int consume(String feature, boolean isMany, boolean isDatatype, boolean isBoolean, AbstractElement grammarElement) throws Exception {
-		IHiddenTokenState prevState = hiddenTokenHandler.replaceHiddenTokens(hiddenTokens);
-		IMarker marker = mark();
-		int prevOffset = getOffset();
-		getTokenAcceptor().accept(new ParsedNonTerminal(getInput().getOffset(), grammarElement != null ? grammarElement : getGrammarElement(), getDefaultType()));
-		int result = doConsume(-1);
-		if (result != ConsumeResult.SUCCESS) {
-			getTokenAcceptor().accept(new ErrorToken(prevOffset, 0, null, "Expected " + getDefaultType() + ", but could not find."));
-		}
-		getTokenAcceptor().accept(new ParsedNonTerminalEnd(getInput().getOffset(), feature, isMany, isDatatype, isBoolean));
-		marker.commit();
-		prevState.restore();
-		return result;
+	protected AlternativesResult createAlternativesResult(ElementConsumer<Alternatives> alternativesConsumer) {
+		getTokenAcceptor().accept(new AlternativesToken(getOffset(), alternativesConsumer.getElement()));
+		return new AlternativesResult(alternativesConsumer);
 	}
 
-	public AlternativesResult createAlternativesResult() {
-		announceNextLevel();
-		return new AlternativesResult();
+	protected GroupResult createGroupResult(ElementConsumer<Group> groupConsumer) {
+		getTokenAcceptor().accept(new GroupToken(getOffset(), groupConsumer.getElement()));
+		return new GroupResult(groupConsumer);
 	}
 
-	public AlternativesResult createAlternativesResult(Alternatives alternatives) {
-		announceNextLevel();
-		getTokenAcceptor().accept(new AlternativesToken(getOffset(), alternatives));
-		return new AlternativesResult();
-	}
-
-	public GroupResult createGroupResult(Group group) {
-		announceNextLevel();
-		getTokenAcceptor().accept(new GroupToken(getOffset(), group));
-		return new GroupResult();
-	}
-
-	public AssignmentResult createAssignmentResult(Assignment assignment) {
-		getTokenAcceptor().accept(new AssignmentToken(getOffset(), assignment));
-		return new AssignmentResult();
+	protected AssignmentResult createAssignmentResult(ElementConsumer<Assignment> assignmentConsumer) {
+		getTokenAcceptor().accept(new AssignmentToken(getOffset(), assignmentConsumer.getElement()));
+		return new AssignmentResult(assignmentConsumer);
 	}
 
 	public boolean skipPreviousToken() {
@@ -178,6 +572,21 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 		return hiddenTokens != null;
 	}
 
+	public int consume(String feature, boolean isMany, boolean isDatatype, boolean isBoolean, AbstractElement grammarElement) throws Exception {
+		IHiddenTokenState prevState = hiddenTokenHandler.replaceHiddenTokens(hiddenTokens);
+		IMarker marker = mark();
+		int prevOffset = getOffset();
+		getTokenAcceptor().accept(new ParsedNonTerminal(getInput().getOffset(), grammarElement != null ? grammarElement : getGrammarElement(), getDefaultType()));
+		int result = doConsume();
+		if (result != ConsumeResult.SUCCESS) {
+			getTokenAcceptor().accept(new ErrorToken(prevOffset, 0, null, "Expected " + getDefaultType() + ", but could not find."));
+		}
+		getTokenAcceptor().accept(new ParsedNonTerminalEnd(getInput().getOffset(), feature, isMany, isDatatype, isBoolean));
+		marker.commit();
+		prevState.restore();
+		return result;
+	}
+
 	public void consumeAsRoot(IRootConsumerListener listener) {
 		IHiddenTokenState prevState = hiddenTokenHandler.replaceHiddenTokens(hiddenTokens);
 		IMarker marker = mark();
@@ -185,9 +594,8 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 		listener.afterNonTerminalBegin(this, this);
 		int result;
 		try {
-			result = doConsume(-1);
+			result = doConsume();
 		} catch(Exception e) {
-			e.printStackTrace();
 			result = ConsumeResult.EXCEPTION;
 			listener.handleException(this, e, this);
 		}
@@ -221,12 +629,11 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 		consumerUtil.consumeAction(action, isMany);
 	}
 
-	protected abstract int doConsume(int entryPoint) throws Exception;
+	protected abstract int doConsume() throws Exception;
 
-	// TODO: replace by getDefaultType: EClassifier
 	protected abstract EClassifier getDefaultType();
 
-	protected abstract EObject getGrammarElement();
+	protected abstract AbstractRule getGrammarElement();
 
 	public IConsumerUtility getConsumerUtil() {
 		return consumerUtil;

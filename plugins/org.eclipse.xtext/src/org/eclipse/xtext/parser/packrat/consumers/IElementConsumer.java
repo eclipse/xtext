@@ -7,27 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.packrat.consumers;
 
-import org.eclipse.xtext.parser.packrat.IBacktracker;
-import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
-import org.eclipse.xtext.parser.packrat.IHiddenTokenHandler;
-import org.eclipse.xtext.parser.packrat.IMarkerFactory;
-import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface INonTerminalConsumerConfiguration {
+public interface IElementConsumer {
 
-	ICharSequenceWithOffset getInput();
-
-	IMarkerFactory getMarkerFactory();
-
-	IParsedTokenAcceptor getTokenAcceptor();
-
-	IHiddenTokenHandler getHiddenTokenHandler();
-
-	IConsumerUtility getConsumerUtil();
-
-	IBacktracker getBacktracker();
+	/**
+	 * Scan the configured input source for a consumable element at the current offset.
+	 */
+	int consume() throws Exception;
 
 }
