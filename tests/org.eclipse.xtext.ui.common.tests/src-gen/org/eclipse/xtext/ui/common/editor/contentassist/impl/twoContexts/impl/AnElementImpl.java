@@ -3,33 +3,34 @@
  * </copyright>
  *
  */
-package org.eclipse.xtext.testlanguages.referenceGrammar.impl;
+package org.eclipse.xtext.ui.common.editor.contentassist.impl.twoContexts.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
-import org.eclipse.xtext.testlanguages.referenceGrammar.Person;
-import org.eclipse.xtext.testlanguages.referenceGrammar.ReferenceGrammarPackage;
+import org.eclipse.xtext.ui.common.editor.contentassist.impl.twoContexts.AnElement;
+import org.eclipse.xtext.ui.common.editor.contentassist.impl.twoContexts.TwoContextsPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Person</b></em>'.
+ * An implementation of the model object '<em><b>An Element</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.testlanguages.referenceGrammar.impl.PersonImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.xtext.testlanguages.referenceGrammar.impl.PersonImpl#getAge <em>Age</em>}</li>
+ *   <li>{@link org.eclipse.xtext.ui.common.editor.contentassist.impl.twoContexts.impl.AnElementImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.ui.common.editor.contentassist.impl.twoContexts.impl.AnElementImpl#getReferred <em>Referred</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class PersonImpl extends EObjectImpl implements Person
+public class AnElementImpl extends EObjectImpl implements AnElement
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -52,31 +53,21 @@ public class PersonImpl extends EObjectImpl implements Person
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The default value of the '{@link #getAge() <em>Age</em>}' attribute.
+   * The cached value of the '{@link #getReferred() <em>Referred</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getAge()
+   * @see #getReferred()
    * @generated
    * @ordered
    */
-  protected static final int AGE_EDEFAULT = 0;
-
-  /**
-   * The cached value of the '{@link #getAge() <em>Age</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getAge()
-   * @generated
-   * @ordered
-   */
-  protected int age = AGE_EDEFAULT;
+  protected AnElement referred;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected PersonImpl()
+  protected AnElementImpl()
   {
     super();
   }
@@ -89,7 +80,7 @@ public class PersonImpl extends EObjectImpl implements Person
   @Override
   protected EClass eStaticClass()
   {
-    return ReferenceGrammarPackage.Literals.PERSON;
+    return TwoContextsPackage.Literals.AN_ELEMENT;
   }
 
   /**
@@ -112,7 +103,7 @@ public class PersonImpl extends EObjectImpl implements Person
     String oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ReferenceGrammarPackage.PERSON__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, TwoContextsPackage.AN_ELEMENT__NAME, oldName, name));
   }
 
   /**
@@ -120,9 +111,19 @@ public class PersonImpl extends EObjectImpl implements Person
    * <!-- end-user-doc -->
    * @generated
    */
-  public int getAge()
+  public AnElement getReferred()
   {
-    return age;
+    if (referred != null && referred.eIsProxy())
+    {
+      InternalEObject oldReferred = (InternalEObject)referred;
+      referred = (AnElement)eResolveProxy(oldReferred);
+      if (referred != oldReferred)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, TwoContextsPackage.AN_ELEMENT__REFERRED, oldReferred, referred));
+      }
+    }
+    return referred;
   }
 
   /**
@@ -130,12 +131,22 @@ public class PersonImpl extends EObjectImpl implements Person
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setAge(int newAge)
+  public AnElement basicGetReferred()
   {
-    int oldAge = age;
-    age = newAge;
+    return referred;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setReferred(AnElement newReferred)
+  {
+    AnElement oldReferred = referred;
+    referred = newReferred;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ReferenceGrammarPackage.PERSON__AGE, oldAge, age));
+      eNotify(new ENotificationImpl(this, Notification.SET, TwoContextsPackage.AN_ELEMENT__REFERRED, oldReferred, referred));
   }
 
   /**
@@ -148,10 +159,11 @@ public class PersonImpl extends EObjectImpl implements Person
   {
     switch (featureID)
     {
-      case ReferenceGrammarPackage.PERSON__NAME:
+      case TwoContextsPackage.AN_ELEMENT__NAME:
         return getName();
-      case ReferenceGrammarPackage.PERSON__AGE:
-        return getAge();
+      case TwoContextsPackage.AN_ELEMENT__REFERRED:
+        if (resolve) return getReferred();
+        return basicGetReferred();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -166,11 +178,11 @@ public class PersonImpl extends EObjectImpl implements Person
   {
     switch (featureID)
     {
-      case ReferenceGrammarPackage.PERSON__NAME:
+      case TwoContextsPackage.AN_ELEMENT__NAME:
         setName((String)newValue);
         return;
-      case ReferenceGrammarPackage.PERSON__AGE:
-        setAge((Integer)newValue);
+      case TwoContextsPackage.AN_ELEMENT__REFERRED:
+        setReferred((AnElement)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -186,11 +198,11 @@ public class PersonImpl extends EObjectImpl implements Person
   {
     switch (featureID)
     {
-      case ReferenceGrammarPackage.PERSON__NAME:
+      case TwoContextsPackage.AN_ELEMENT__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case ReferenceGrammarPackage.PERSON__AGE:
-        setAge(AGE_EDEFAULT);
+      case TwoContextsPackage.AN_ELEMENT__REFERRED:
+        setReferred((AnElement)null);
         return;
     }
     super.eUnset(featureID);
@@ -206,10 +218,10 @@ public class PersonImpl extends EObjectImpl implements Person
   {
     switch (featureID)
     {
-      case ReferenceGrammarPackage.PERSON__NAME:
+      case TwoContextsPackage.AN_ELEMENT__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case ReferenceGrammarPackage.PERSON__AGE:
-        return age != AGE_EDEFAULT;
+      case TwoContextsPackage.AN_ELEMENT__REFERRED:
+        return referred != null;
     }
     return super.eIsSet(featureID);
   }
@@ -227,10 +239,8 @@ public class PersonImpl extends EObjectImpl implements Person
     StringBuffer result = new StringBuffer(super.toString());
     result.append(" (name: ");
     result.append(name);
-    result.append(", age: ");
-    result.append(age);
     result.append(')');
     return result.toString();
   }
 
-} //PersonImpl
+} //AnElementImpl
