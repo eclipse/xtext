@@ -238,16 +238,12 @@ public abstract class AbstractDeclarativeValidator implements EValidator {
 		}
 	}
 	
-	protected void guard(boolean guardExpression) throws GuardException {
+	protected void guard(boolean guardExpression) {
 		if(!guardExpression) {
 			throw new GuardException();
 		}
 	}
 	
-	static class GuardException extends RuntimeException {
-		private static final long serialVersionUID = 4534156048507490673L;
-	}
-
 	static class DiagnosticImpl implements Diagnostic {
 
 		private DiagnosticImpl(int severity, String message, EObject source, int feature) {
