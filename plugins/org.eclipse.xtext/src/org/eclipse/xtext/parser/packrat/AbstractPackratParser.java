@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Action;
@@ -57,6 +58,8 @@ public abstract class AbstractPackratParser extends AbstractParser<CharSequence>
 	IParsedTokenAcceptor,
 	IHiddenTokenHandler,
 	IConsumerUtility {
+
+	private static Logger log = Logger.getLogger(AbstractPackratParser.class);
 
 	private class HiddenTokenState implements IHiddenTokenHandler.IHiddenTokenState {
 		private final ITerminalConsumer[] hiddens;
@@ -173,6 +176,7 @@ public abstract class AbstractPackratParser extends AbstractParser<CharSequence>
 	}
 
 	private class RootConsumerListener implements IRootConsumerListener {
+
 		public void beforeNonTerminalEnd(INonTerminalConsumer nonTerminalConsumer, int result, INonTerminalConsumerConfiguration configuration) {
 			if (result == ConsumeResult.SUCCESS && offset != length())
 				consumeHiddens();
@@ -187,6 +191,7 @@ public abstract class AbstractPackratParser extends AbstractParser<CharSequence>
 		}
 
 		public void handleException(NonTerminalConsumer nonTerminalConsumer, Exception e, INonTerminalConsumerConfiguration configuration) {
+			log.error("handle Exception: " + e.getMessage(), e);
 			configuration.getTokenAcceptor().accept(new ErrorToken(offset, length() - offset, null, e.getMessage()));
 			offset = length();
 		}

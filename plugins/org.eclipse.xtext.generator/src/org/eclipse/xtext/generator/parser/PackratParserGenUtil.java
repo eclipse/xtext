@@ -29,7 +29,6 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer
 import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumerConfiguration;
-import org.eclipse.xtext.parser.packrat.consumers.RecoveryStateHolder;
 import org.eclipse.xtext.parser.packrat.matching.StringWithOffset;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 import org.eclipse.xtext.util.CollectionUtils;
@@ -55,10 +54,6 @@ public final class PackratParserGenUtil {
 
 		public ICharSequenceWithOffset getInput() {
 			return input;
-		}
-
-		public RecoveryStateHolder getRecoveryStateHolder() {
-			return null;
 		}
 
 		public IParsedTokenAcceptor getTokenAcceptor() {
