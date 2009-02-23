@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+	<extension
+		point="org.eclipse.ui.commands">
+		<command
+			id="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration"
+			name="Open Declaration"
+			description="Opens the declaration for the currently selected CrossReference">
+		</command>
+	</extension>
+	<extension
+		point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?after=group.open">
+			<command commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension
+		point="org.eclipse.ui.bindings">
+		<key
+			contextId="org.eclipse.ui.textEditorScope"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+			sequence="F3"
+			commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
+		</key>
+	</extension>
+</plugin>

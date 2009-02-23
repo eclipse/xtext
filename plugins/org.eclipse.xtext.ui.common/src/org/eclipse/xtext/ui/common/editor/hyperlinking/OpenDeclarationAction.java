@@ -1,4 +1,4 @@
-package org.eclipse.xtext.ui.core.editor;
+package org.eclipse.xtext.ui.common.editor.hyperlinking;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
@@ -16,6 +16,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.core.ILocationInFileProvider;
+import org.eclipse.xtext.ui.core.editor.XtextEditor;
 import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
 
 /**

@@ -18,7 +18,7 @@
 «DEFINE addToPluginXmlRt(List[String] modelFileExtensions) FOR Grammar»«ENDDEFINE»
 
 «DEFINE addToPluginXmlUi(List[String] modelFileExtensions) FOR Grammar»
-    <extension
+	<extension
 			point="org.eclipse.ui.editors">
 		<editor
 			class="«executableExtensionFactory()»:org.eclipse.xtext.ui.core.editor.XtextEditor"
@@ -29,7 +29,7 @@
 			name="«name.toSimpleName()» Editor">
 		</editor>
 	</extension>
-	 <extension
+	<extension
 			point="org.eclipse.ui.preferencePages">
 		<page
 			class="«executableExtensionFactory()»:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
@@ -59,6 +59,18 @@
 			id="«name».tasktags"
 			label="Task Tags">
 		</keyword>
+	</extension>
+	<extension
+		point="org.eclipse.ui.handlers">
+		<handler
+			class="«executableExtensionFactory()»:org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclarationHandler"
+			commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
+			<activeWhen>
+				<reference
+					definitionId="isActiveEditorAnInstanceOfXtextEditor">
+				</reference>
+			</activeWhen>
+		</handler>
 	</extension>
 «ENDDEFINE»
 
