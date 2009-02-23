@@ -25,6 +25,9 @@ cached String consumeMethodName(AbstractElement this):
 cached String delimiterFieldName(AbstractElement this):
 	JAVA org.eclipse.xtext.generator.parser.PackratParserGenUtil.getDelimiterFieldName(org.eclipse.xtext.AbstractElement);
 
+cached String consumerFieldName(AbstractElement this):
+	JAVA org.eclipse.xtext.generator.parser.PackratParserGenUtil.getConsumerFieldName(org.eclipse.xtext.AbstractElement);
+	
 cached String globalDelimiterFieldName(AbstractElement this):
 	JAVA org.eclipse.xtext.generator.parser.PackratParserGenUtil.getGlobalDelimiterFieldName(org.eclipse.xtext.AbstractElement);
 			

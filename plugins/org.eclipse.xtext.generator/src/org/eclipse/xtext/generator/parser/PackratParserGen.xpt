@@ -69,8 +69,12 @@ public class «getParserClassName().toSimpleName()» extends AbstractPackratParser
 package «getParserConfigurationClassName().toJavaPackage()»;
 
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
+«IF definesHiddenTokens || superGrammar != null || rules.typeSelect(ParserRule).exists(e|!e.terminal && e.definesHiddenTokens)-»
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+«ENDIF-»
+«IF allParserRules().isEmpty-»
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
+«ENDIF-»
 
 import «gaFQName()»;
 
@@ -84,12 +88,11 @@ import «superGrammar.getNamespace()».parser.packrat.«superGrammar.getName().toFi
 import «rule.containingGrammar().getNamespace()».parser.packrat.consumers.«rule.consumerClassName()»;
 «ENDFOREACH-»
 
-@SuppressWarnings("unused")
 public class «getParserConfigurationClassName().toSimpleName()» extends AbstractParserConfiguration {
 
 «LET getSuperGrammar() AS superGrammar-»
 «IF superGrammar != null-»
-	private «superGrammar.getName().replaceAll("\\s","_").toFirstUpper()»ParserConfiguration «superGrammar.getName().replaceAll("\\s","_").toFirstLower()»Configuration; 
+	private final «superGrammar.getName().replaceAll("\\s","_").toFirstUpper()»ParserConfiguration «superGrammar.getName().replaceAll("\\s","_").toFirstLower()»Configuration; 
 
 «ENDIF-»
 «ENDLET-»
@@ -251,11 +254,16 @@ public class «getParserConfigurationClassName().toSimpleName()» extends Abstract
 */
 package «getDelimiterClassName().toJavaPackage()»;
 
+«IF allParserRules().select(e|!e.terminal).allDelimited().exists(e|e.metaType==Keyword)-»
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+«ENDIF-»
+«IF allParserRules().select(e|!e.terminal).allDelimited().exists(e|e.metaType==RuleCall || e.metaType == CrossReference)-»
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
+«IF !allParserRules().select(e|!e.terminal).allDelimited().select(e|e.metaType==RuleCall || e.metaType == CrossReference).conflictingKeywords(this).isEmpty-»
 import org.eclipse.xtext.parser.packrat.matching.SetBasedKeywordMatcher;
+«ENDIF-»
+«ENDIF-»
 
-@SuppressWarnings("unused")
 public final class «getDelimiterClassName().toSimpleName()» {
 
 	private «getDelimiterClassName().toSimpleName()»() {
@@ -276,10 +284,10 @@ public final class «getDelimiterClassName().toSimpleName()» {
 «IF first == this-»
 «LET conflictingKeywords(grammar) AS conflicting-»
 «IF !conflicting.isEmpty-»
-	public static ISequenceMatcher «globalDelimiterFieldName()» = new SetBasedKeywordMatcher(
+	public static final ISequenceMatcher «globalDelimiterFieldName()» = new SetBasedKeywordMatcher(
 		«FOREACH conflicting AS c SEPARATOR ", "»"«c»"«ENDFOREACH»);
 «ELSE-»
-	public static ISequenceMatcher «globalDelimiterFieldName()» = ISequenceMatcher.Factory.nullMatcher();
+	public static final ISequenceMatcher «globalDelimiterFieldName()» = ISequenceMatcher.Factory.nullMatcher();
 «ENDIF-»
 
 «ENDLET-»
@@ -301,14 +309,14 @@ public final class «getDelimiterClassName().toSimpleName()» {
 «LET conflictingLexerRules(grammar) AS conflicting-»
 «IF !conflicting.isEmpty-»
     // TODO: remove hardcoded character class from template
-	public static ICharacterClass «globalDelimiterFieldName()» = ICharacterClass.Factory.join(
+	public static final ICharacterClass «globalDelimiterFieldName()» = ICharacterClass.Factory.join(
 			ICharacterClass.Factory.createRange('a', 'z'),
 			ICharacterClass.Factory.createRange('A', 'Z'),
 			ICharacterClass.Factory.create('_'),
 			ICharacterClass.Factory.createRange('0', '9')
 	);
 «ELSE-»
-	public static ICharacterClass «globalDelimiterFieldName()» = ICharacterClass.Factory.nullClass();
+	public static final ICharacterClass «globalDelimiterFieldName()» = ICharacterClass.Factory.nullClass();
 «ENDIF-»
 
 «ENDLET-»

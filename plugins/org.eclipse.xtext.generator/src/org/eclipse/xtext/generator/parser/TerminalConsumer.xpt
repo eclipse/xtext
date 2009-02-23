@@ -30,10 +30,7 @@ package «this.consumerPackageName()»;
 
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
-import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
-@SuppressWarnings("unused")
 public final class «this.consumerClassName().toSimpleName()» extends AbstractRuleAwareTerminalConsumer {
 
 	public «this.consumerClassName().toSimpleName()»(ITerminalConsumerConfiguration configuration) {
@@ -60,18 +57,18 @@ package «this.consumerPackageName()»;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
-import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
+«IF alternatives.eAllContents.typeSelect(RuleCall).exists(e|e.rule.metaType != LexerRule && !((ParserRule)e.rule).terminal)-»
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
+«ENDIF-»
+«IF alternatives.eAllContents.typeSelect(RuleCall).exists(e|e.rule.metaType == LexerRule || ((ParserRule)e.rule).terminal)-»
+import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+«ENDIF-»
 
-«FOREACH allCalledRules() AS calledRule-»
-import «calledRule.containingGrammar().getNamespace()».parser.packrat.consumers.«calledRule.consumerClassName()»;
-«ENDFOREACH-»
-
-@SuppressWarnings("unused")
 public final class «this.consumerClassName()» extends AbstractRuleAwareTerminalConsumer {
-
 «FOREACH allCalledRules() AS calledRule-»
-	private «calledRule.consumerClassName()» «calledRule.consumerFieldName()»;
+
+	private «calledRule.consumerInterfaceName()» «calledRule.consumerFieldName()»;
 «ENDFOREACH-»
 
 	public «this.consumerClassName()»(ITerminalConsumerConfiguration configuration) {
@@ -85,7 +82,7 @@ public final class «this.consumerClassName()» extends AbstractRuleAwareTerminalC
 «EXPAND defineConsume FOR alternatives-»
 	
 «FOREACH allCalledRules() AS calledRule-»
-	public void «calledRule.consumerSetterName()»(«calledRule.consumerClassName()» «calledRule.consumerFieldName()») {
+	public void «calledRule.consumerSetterName()»(«calledRule.consumerInterfaceName()» «calledRule.consumerFieldName()») {
 		this.«calledRule.consumerFieldName()» = «calledRule.consumerFieldName()»;
 	}
 	
